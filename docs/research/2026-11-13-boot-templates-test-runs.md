@@ -16,6 +16,7 @@ pointers:
   - "`output/engine-sheet/2026-11-13-boot-three-way.md` — Run 1 raw outputs, every version in full"
   - "`output/engine-sheet/2026-11-13-boot-three-way-run2.md` — Run 2 raw outputs (council seats, second reporter), every version in full"
   - "`output/engine-sheet/2026-11-13-ask-dry-run.md` — Run 3 raw outputs: a council member's question to the police chief and his answers"
+  - "`output/engine-sheet/2026-11-13-seat-asks-worker-dry-run.md` — Run 4 raw outputs: a council seat's weekday wake with the ask step inside it"
 ---
 
 # Boot templates: test runs and findings
@@ -54,6 +55,8 @@ pointers:
 | Reporter write | The assignment and its quotes decide the story; the written background decides how it is told | Run 1: Kai Marston, four versions, the same story and quotes; the written part shows at the edge (opens on a room). Run 2: Tanya Cruz ×3 each: today's files and the sheet line alone both give long atmospheric prose (305–607 words: "landed like a quiet glove drop"); the written part gives her dispatch 3 of 3 (265–327 words, one-line paragraphs, last names) | The written part under the full harness; a civic reporter |
 | Reporter write | The thin folder a reporter wakes with today adds nothing over the sheet line | Run 2: Tanya A-light ×3 against B ×3, the same register | — |
 | Reporter write | The background written for a reporter never reaches them today | Code read above | — |
+
+**The worker shape that held (Runs 3–4):** a citizen off the sheet, with its page memory, handed the whole of its own records, woken by a question from a named seat. The police chief run this way answers from his sheet and says what it does not show. The directors today have none of the last two: four status lines, and no question.
 
 **The one mechanism under all of it:** a written line about how a person does a thing is acted out. For a reporter that is the voice (Tanya's short lines). For a worker it becomes the task (Webb's memos). Where the wake hands a full task (city hall), the written file is drowned by it.
 
@@ -118,6 +121,23 @@ pointers:
 - **His answers, 3 of 3:** every figure he states is in what he was handed (`ungroundedNumbers` empty). He says he does not hold beat-level counts or response times and will not make them up; he confirms her reading of the two neighborhoods; he says "balanced" is a default nobody tested; he commits to a records pull.
 - **What the sim holds against that:** `Crime_Metrics` carries `ResponseTimeAvg` and `ClearanceRate` for every neighborhood (C115: San Antonio 11.7 and 0.25, Fruitvale 10.7 and 0.18). The chief's pack holds neither field (0 mentions), so half of her question had an answer on the sheet that he was never handed. The beat-level half has no record anywhere (`Judicial_Ledger` 0 rows). His promised records pull has nothing to be filled from.
 - **Read:** asked a question, both wake as themselves and neither invents. The ask shows exactly which columns the worker is missing. Her question names "the East 14th corridor", a street that is in no city record (color, and a real-world name).
+
+### Run 4 — 2026-11-13, C115, engine-sheet: the ask inside a seat's wake
+
+- **Builder:** "lets see how a council wake call the worker agent and gets an answer, ultimately these seem to be workflows right ?"
+- **How:** Delgado's real weekday prompt (`buildPack` + `datawakeUserPrompt`, her page memory, her sheet line as the system turn) with one paragraph added in the shape of the existing evidence-read offer: who she can ask (the police chief; the four project directors and the Baylight director), what records each holds, `{"ask":{"to","question"}}`, asking is her choice. On an ask the harness wakes the worker (sheet line off the ledger and dials, page memory, the whole of its own records: for the chief his pack + every `Crime_Metrics` row; for a director the full tracker row), hands back "ANSWER FROM …" and asks for her final JSON. Three runs, write guard on, 0 refused. A full exchange cost $0.002.
+- **Results:**
+
+| Run | Asked | The chief's answer | What she then did |
+|---|---|---|---|
+| 1 | The chief: response time, clearance, any pattern in San Antonio | 11.7 minutes, clearance 0.25 with a warning that six incidents make it a small-number figure, pressure 1.12 tied with East Oakland, no hotspot flag, "I cannot see the pattern from here, only the load". One slip: calls 11.7 "the slowest in the city" (Rockridge is 11.8) | Proposes a **safety** package for San Antonio built on the response load; carries the "slowest" slip into her statement |
+| 2 | The chief: spike or trend, response and clearance against the rest of D3 and the city | Plateau, not a spike; 11.7 "second-slowest, behind Rockridge at 11.8"; Fruitvale 10.7; average about 11.1 (all correct against the sheet) | No proposal; holds the chief to the gap between her two neighborhoods |
+| 3 | Nobody | — | Proposes an **economic** corridor package for San Antonio |
+
+- **Figures:** every figure in every answer and every final statement is in what that person was handed or told (`ungroundedNumbers` empty, 5 of 5 texts). Checked by hand against `Crime_Metrics`: average 11.14, best clearance San Antonio 0.25 then KONO 0.24, pressure East Oakland and San Antonio 1.12, incidents 4–8: correct; the one wrong line is run 1's "slowest".
+- **The answer changed the act:** asked, she files under safety on the response load; not asked, she files under economic on the same neighborhood.
+- **A defect in the test's shape:** in both asking runs she spent an `answer` move replying to the chief, under a directive id her pack does not hold (`CONF-115-civic-office-council-d3`; no Mara question is in her C115 pack). The live wake discards such a move. The exchange needs its own end, or the seat spends its turn on a reply nobody receives.
+- **Read:** a seat's wake with an ask in it is a short chain: the seat wakes, may ask, the worker wakes and answers, the seat decides. The weekday wake already runs one side-step of this shape (the evidence-read round), and the Sunday chain is a chain already (Mayor opens, seats speak, Mayor rules, clerk closes).
 
 ### Dry-run safety — what Run 1 left, checked 2026-11-13
 

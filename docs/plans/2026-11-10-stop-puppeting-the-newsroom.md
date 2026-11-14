@@ -184,3 +184,20 @@ Nothing changed. What a seat is sent is the builder's call; this is the read the
 | F | the sheet line and temperament, a short written background cut from his voice file's §Essence (who he is; none of its Opening Pattern, Signature Moves or DO NOT lines), his page memory ([[../reference/AGENT_BOOT_TEMPLATES]] §4) | nothing assigned: no assignment, approach or hook; the goal and the plan form name no assignment and no "what does not line up"; he is shown the city's week and who is on his beat; he picks or passes; his pick is the story the midday and evening stages carry |
 
 Arm F is a shell-only branch (taken only with the test folder set, the same rule as the `light` prompt). Read against his C115 piece (27 record-words): what he picks, whom he asks and what he asks them, whether the piece is about people or about the record. Waits on: the whole-day runner (codex-rb, brief `docs/for-claude-review/2026-11-14-rb-brief-codex-reporter-day-shell.md`) and the guard in the repo (engine-sheet).
+
+## 2026-11-14 — whole-day runner in the tree (codex-rb built it, research-build applied it)
+
+codex-rb delivered `scripts/testReporterDay.sh`, an unapplied patch and a containment report: [[../for-claude-review/2026-11-14-codex-reporter-day-shell]] (brief and patch beside it). Each claim was checked against the code before use.
+
+| Codex | Checked | Disposition |
+|---|---|---|
+| Runner: the newest saved fanout that carries the seat, through `gateAssignments`, handed to each stage as `--test-assignment` under `--evaluate-package` + `--evaluation-tag` + `--no-gate` | the same gate and the same `runAngle(a)` / `runReport(a)` / `runWrite(a)` calls as `runFanoutStage`; stems match `wakeStageStem` + `evaluationStem` | applied as written |
+| `refreshCitizenPages` rewrites the live page index, pulse and trends | true; with an assignment it is not reached (called on a direct `--persona` run and once per fanout) | early return under the test shell |
+| `ensureLedgerSnapshot` (three calls) can run `dumpLedger.js` | true when the snapshot's cycle is older than the working cycle | skipped under the test shell |
+| `ensureReporterWall` (two calls) can create a page pointer | true; both sit behind `!PACKET_ACTIVE`, unreached by a v2 seat | skipped under the test shell |
+| The wire entry writes the live production log | true, reached only when a piece stages, never under `--no-gate` | the append is redirected; `readWire` keeps reading the live wire so the seat sees what the room has filed (the patch moved the reads too) |
+| Slice loaders rewrite the live slice files when the cache is absent, of another version or empty (`beatSliceKit.js` `load`) | true; the rewrite is the same rebuild the next live stage does | **not applied.** The patch re-routed ten loader calls in the live angle path through a new untested wrapper, missed `loadSimonSlice` and the weekly Nia slice write, and returned an empty slice where `load` returns null (a sit-out seat would not sit out). Left to the write guard: a rebuild attempt is refused and the run fails loud |
+| Interviews: `--no-gate` gives `record: false`; the morning call passes no `--record` | read in `citizenVoice.js` (`RECORD`, `record: !!entry.record && !DRY`) | no change |
+| The writer's `memory_note` | `BYLINE_POPID` is null under the shell (`cron-desk-writer.js:274`) | no change; the guard log is the proof |
+
+Tests: the eleven test files that load `cron-desk-run.js` pass; the script loads; `--test-assignment` outside the shell exits on its refusal. Not run end to end: no model call from this terminal until the guard is in the repo. A re-run at the week's end is not Monday: the wire and the seat's own page already hold its C115 filing.

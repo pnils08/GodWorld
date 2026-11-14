@@ -153,6 +153,9 @@ const OUT_TAG = (PERSONA ? PERSONA + '_' : '');
 // (angle -> report -> write) instead of the full chain. Stages hand off via
 // output/cron-compare/<stem>.angle.json / .packet.json artifacts.
 const STAGE = arg('--stage', null);   // 'angle' | 'report' | 'write'
+// Test shell only (scripts/testReporterDay.sh): one saved fanout assignment handed to a single stage,
+// so angle -> report -> write run for one seat with the seat context the fanout gives it.
+const TEST_ASSIGNMENT_FILE = arg('--test-assignment', null);
 // pipeline.54 / ADR-0017. An explicit flag remains a samples-only evaluation
 // override. Live scheduled fanout gets its Packet contract and models from the
 // journalist's active wake package instead; no package means no scheduled wake.
@@ -1548,6 +1551,8 @@ function appendRewardLoopRead(cycle, row) {
 // sourcing pools are built: the pool is fixed at W1 and W2 requires byte-identical evidence, so the
 // index must not move between the two stages — the report stage never refreshes it.
 async function refreshCitizenPages(cycle) {
+  // Test shell: the live index and the pulse / trends slices must not move under the day's real seats.
+  if (TEST_SHELL) { log('[pages] refresh skipped in test shell; using the index and slices on disk'); return; }
   if (cycle == null) return;
   // Two minutes for the whole refresh (2026-11-11: the store hung and this awaited it before any reporter woke).
   try { await require('./scanCitizenPages').dumpIndex({ quiet: true, budgetMs: 120000 }); }
@@ -1588,7 +1593,7 @@ async function runAngle(assign) {
   if (seatSitsOut(personaSlug, cycle, 'angle')) return;
   // R2 — ledger snapshot freshness before any profile resolution this wake
   // (S252/S329 pattern; desk doctrine: refresh + degrade-not-drop, never halt)
-  require('./canon-name-check').ensureLedgerSnapshot(cycle);
+  if (!TEST_SHELL) require('./canon-name-check').ensureLedgerSnapshot(cycle);
   // pipeline.73: a direct --persona angle (Ines's Sat/Sun runs) refreshes the page index too — the
   // fanout does it once before its loop; without this a weekend seat reads Friday's pages.
   if (!assign && PERSONA) await refreshCitizenPages(cycle);
@@ -1602,7 +1607,7 @@ async function runAngle(assign) {
     try {
       const { loadReporterWall, formatWallBlock, wallAskSnippet, ensureReporterWall } =
         require(path.join(__dirname, 'reporterWall'));
-      await ensureReporterWall(asker.popid);
+      if (!TEST_SHELL) await ensureReporterWall(asker.popid);
       const wall = await loadReporterWall(asker.popid, 6);
       wallMeta = { tag: wall.tag, postCount: wall.posts.length, error: wall.error || null };
       wallBlock = formatWallBlock(wall, { name: asker.name });
@@ -2623,7 +2628,8 @@ const WIRE_HEADER = '## Newsroom wire (AUTO — cron-desk-run.js)';
 function wirePath(cycle) { return path.join(ROOT, 'output', 'production_log_c' + cycle + '.md'); }
 function appendWireEntry(cycle, line) {
   try {
-    const p = wirePath(cycle);
+    // Test shell: the entry lands in the shell's own log; readWire still reads the live wire.
+    const p = TEST_SHELL ? path.join(TEST_SHELL, 'production_log_c' + cycle + '.md') : wirePath(cycle);
     let txt = fs.existsSync(p) ? fs.readFileSync(p, 'utf8') : '# Production log — C' + cycle + '\n';
     if (!txt.includes(WIRE_HEADER)) txt = txt.trimEnd() + '\n\n' + WIRE_HEADER + '\n';
     const lines = txt.split('\n');
@@ -2960,7 +2966,7 @@ async function runWrite(assign) {
   if (!lane) { console.log('[write] no "' + desk + '" lane in desk_signal — skipping (not an error).'); return; }
   if (budgetReached(cycle)) return;   // S339 submission budget — exit before writer spend
   // R2 — ledger snapshot freshness (S252/S329 pattern; degrade-not-drop)
-  require('./canon-name-check').ensureLedgerSnapshot(cycle);
+  if (!TEST_SHELL) require('./canon-name-check').ensureLedgerSnapshot(cycle);
   const angle = readJson(anglePath);
   const packet = readJson(packetPath);
   for (const record of packet && packet.officeRecords || []) {
@@ -3043,7 +3049,7 @@ async function runWrite(assign) {
     try {
       const { loadReporterWall, formatWallBlock, ensureReporterWall } =
         require(path.join(__dirname, 'reporterWall'));
-      await ensureReporterWall(byline.popid);
+      if (!TEST_SHELL) await ensureReporterWall(byline.popid);
       const wall = await loadReporterWall(byline.popid, 6);
       wallBlock = formatWallBlock(wall, { name: byline.name });
       log('reporter wall: ' + (wall.tag || byline.popid) + ' posts=' + wall.posts.length);
@@ -3469,7 +3475,7 @@ async function runWake() {
   }
   if (budgetReached(cycle)) return;   // S339 submission budget — exit before writer spend
   // R2 — ledger snapshot freshness (S252/S329 pattern; degrade-not-drop)
-  require('./canon-name-check').ensureLedgerSnapshot(cycle);
+  if (!TEST_SHELL) require('./canon-name-check').ensureLedgerSnapshot(cycle);
   const route = deskRoute(DESK);
   const draftName = DESK + '_c' + cycle + '_' + OUT_TAG + slug(route.model) + '.md';
   const draftPath = path.join(COMPARE, draftName);
@@ -3814,13 +3820,34 @@ try {
   console.error('[run] ' + e.message);
   process.exit(1);
 }
+// Test shell only: the saved fanout assignment scripts/testReporterDay.sh hands to one stage. Refused
+// outside the shell, with the gate on, under --fanout, or without an evaluation package and tag, so a
+// scheduled run can never take it.
+function loadTestAssignment() {
+  if (!TEST_ASSIGNMENT_FILE) return undefined;
+  if (!TEST_SHELL || !NO_GATE || !STAGE || FANOUT || !EVALUATE_PACKAGE || !EVALUATION_TAG) {
+    throw new Error('--test-assignment requires the test-shell env, --no-gate, one --stage, --evaluate-package and --evaluation-tag; --fanout is forbidden');
+  }
+  const file = path.resolve(TEST_ASSIGNMENT_FILE);
+  if (!file.startsWith(path.resolve(TEST_SHELL) + path.sep)) throw new Error('--test-assignment must sit inside GODWORLD_TEST_COMPARE_DIR');
+  const assignment = readJson(file);
+  if (!assignment || assignment.desk !== DESK || assignment.persona !== PERSONA ||
+      !assignment.name || !assignment.popid || !assignment.beatDomain) {
+    throw new Error('--test-assignment must match --desk/--persona and carry name, popid, beatDomain');
+  }
+  return assignment;
+}
+
 if (require.main === module) {
   Promise.resolve()
-    .then(() => (STAGE && FANOUT ? runFanoutStage()
-      : STAGE === 'angle' ? runAngle()
-      : STAGE === 'report' ? runReport()
-      : STAGE === 'write' ? runWrite()
-      : (WAKE ? runWake() : main())))
+    .then(() => {
+      const testAssignment = loadTestAssignment();
+      return STAGE && FANOUT ? runFanoutStage()
+        : STAGE === 'angle' ? runAngle(testAssignment)
+        : STAGE === 'report' ? runReport(testAssignment)
+        : STAGE === 'write' ? runWrite(testAssignment)
+        : (WAKE ? runWake() : main());
+    })
     .catch(err => { console.error('[run] Fatal:', err.message); process.exit(1); });
 }
 

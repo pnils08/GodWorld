@@ -158,3 +158,29 @@ The Fri 11-13 daily show was made with nothing said to NotebookLM and still ran 
 The working agreement with engine-sheet (file ownership both ways, the one code seam, tests, pushes) is recorded once, in [[2026-11-10-role-citizens-wake-as-themselves]] Changelog 2026-11-14; nothing is repeated here. This row carries the reporters (morning pick, interviews, write), the article gate (Rhea) and the shows. The boot evidence is engine-sheet's log, [[../research/2026-11-13-boot-templates-test-runs]] (reporter findings: Run 1 Kai Marston, Run 2 Tanya Cruz; template [[../reference/AGENT_BOOT_TEMPLATES]] §4); no second review of the reporter boot is opened here. Reporter and gate runs made under this row are logged in this plan, one pointer line a run sent to engine-sheet for its log. No reporter test runs from this terminal until the write guard and the in-memory file swap are in the repo (engine-sheet lands them). Worker-ask step (civic.47 W1): engine-sheet builds it as its own row (as engine-sheet reports the builder, 2026-11-14: "whatever suits the project best"); the civic autonomy plan's W1 section is cut to a pointer once that row and plan exist.
 
 **What both records leave untested on the reporter side:** the short written background under the full harness; a civic reporter; a morning stage with nothing assigned run through to a written piece (§The build that is owed, steps 1–3); the gate. None started; each on the builder's go.
+
+## 2026-11-14 — what the morning stage sends every seat (code read before the Trevor test)
+
+The table under §Why (2026-11-10) lists the writer, the gate and the legacy free-text asks. The morning packet itself was not in it. Read 2026-11-14, checked against the 26 C115 angle artifacts on disk:
+
+| Where | What it does |
+|---|---|
+| `livedExperiencePacket.js:430` | `task.goal` = "Plan one Article chase without choosing a new assignment" — 25 of 26 packets; the 26th (a civic investigation) reads "Plan one evidence-bounded records brief without inventing a reporting trail" (`livedExperiencePacketV2.js:120`) |
+| `livedExperiencePacket.js:450` | the plan the seat must return is defined as "where they stand, who they chase, **what does not line up**" — 26 of 26 |
+| `:358` | no story → the packet throws: a seat cannot wake unassigned |
+| `:516–549`, `:582` | a plan that shares no long word with the assignment, its people or its facts is rejected as "chase replaces the assignment"; two draws (`cron-desk-run.js:2144`), then the seat's day fails |
+| `:445` | "Preserve angle autonomy inside the assigned signal" |
+| `cron-desk-run.js:2109–2115` | under packet v2 (every seat) the typed packet replaces the free-text asks at `:1851–2107`. The civic ask reworded and reverted on 2026-11-10 (`:2051`) is not what a v2 seat is sent |
+| Trevor Shimizu, C115 | assignment = the top row of his slice; a 900-character approach on how to read the rows; 28 facts, every one a row; 12 people. His first question to a rider: "did you notice the platform at 12th Street was fuller than the ledger would predict" |
+| Interviews | free prose today (`output.rule`: "Write the actual quote"). The stance / question table (`livedExperiencePacketV2.js:18–37`: "does not line up with what I expected", "What explains the gap in the record?") is stripped before a citizen sees it (`newsroomInterviewContract.js:99`) and its lines are rejected as legacy (`:186`) |
+
+Nothing changed. What a seat is sent is the builder's call; this is the read the test below is built on.
+
+**Trevor test — shape (builder 2026-11-14: "Go"; not run).** His whole day (morning pick, interviews, write) in the test shell under the write guard, C115, his own models.
+
+| Arm | Wakes as | Morning |
+|---|---|---|
+| A | today's files | today's packet |
+| F | the sheet line and temperament, a short written background cut from his voice file's §Essence (who he is; none of its Opening Pattern, Signature Moves or DO NOT lines), his page memory ([[../reference/AGENT_BOOT_TEMPLATES]] §4) | nothing assigned: no assignment, approach or hook; the goal and the plan form name no assignment and no "what does not line up"; he is shown the city's week and who is on his beat; he picks or passes; his pick is the story the midday and evening stages carry |
+
+Arm F is a shell-only branch (taken only with the test folder set, the same rule as the `light` prompt). Read against his C115 piece (27 record-words): what he picks, whom he asks and what he asks them, whether the piece is about people or about the record. Waits on: the whole-day runner (codex-rb, brief `docs/for-claude-review/2026-11-14-rb-brief-codex-reporter-day-shell.md`) and the guard in the repo (engine-sheet).

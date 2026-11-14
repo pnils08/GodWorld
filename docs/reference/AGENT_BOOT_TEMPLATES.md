@@ -152,7 +152,7 @@ pointers:
 | Reporters | the civic-domain, transit and accountability slices read the week's events | `buildCivicDomainSlice.js`, `buildTransitSlice.js`, `buildJaxSlice.js` |
 | Workers | none: the work wake has no event node | `cron-work-wake.js` `NODE_BUILDERS` |
 
-**C113–C115, off the world summaries:** 30 events fired. A chaos fact reached six council packs, all by place. The two cop cars reached the police chief as nothing of his; the two OARI vans did not reach the OARI director, nor the two ambulances the EMS director. The 13 events on a business and the 4 on a citizen name no hood and reached no office.
+**C113–C115, off the world summaries:** 30 events fired. A chaos fact reached six council packs, all by place. The two cop cars reached the police chief as nothing of his; the two OARI vans did not reach the OARI director, nor the two ambulances the EMS director. The 12 events on a business and the 4 on a citizen name no hood and reached no office.
 
 **Proposed: route by kind to the worker whose job it is, beside the seat whose turf it is** (which worker answers for which kind is the builder's call):
 

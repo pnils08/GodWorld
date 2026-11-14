@@ -69,7 +69,7 @@ pointers:
 - **Written file:** none needed on the evidence. Mayor: 20,959 characters of files, a 175-character sheet line and a 701-character sheet line + written part all filed the same move. Tran weekday ×9 and Rivers Sunday ×9 (the Mayor once per version): the same act and the same voice on all three; Rivers's own lines return word for word from her page.
 - **State:** tested: 21 runs (Mayor 3, Tran 9, Rivers 9), three people, both wakes, each a single call without the live retry and evidence-read loop. No project director's Sunday step has been run.
 - **Differs today:** IDENTITY + LENS + RULES load whole as the system turn (`readPersonaDir`); the shared council-seat LENS and RULES ride with every seat.
-- **Sheet line caveat:** six holders' `RoleType` disagrees with their office (§3.1): on the sheet line alone Vega wakes as "City Council President - D1" and Osei as "City Council Member".
+- **Sheet line caveat:** the six role mismatches were corrected 2026-11-14 (§3.1). The wake's line prints the office title bare: "You are Ramon Vega, 64, a City Council District 4 living in Lake Merritt".
 - **Open, and not a boot matter:** what they are handed. "D3 East Oakland" (G-EC48) and the hand-closed tracker rows come back in every statement because they are in the pack.
 - **Legacy on switch:** `civic-office-mayor/`, `civic-office-council-d1…d9/`, `civic-office-council-seat/`, and the faction folders the seats fall back to (`civicSeat.personaDirFor`).
 
@@ -100,15 +100,7 @@ pointers:
 
 **A thin worker is a finding about the system, not about the template** (builder: "if ultimately a worker is thin it tells us the system needs teeth"). Where a position's records are few or absent, the tables below say so; the template is not bent to cover it.
 
-**Role on the citizen ledger against the office sheet** (the sheet line a wake builds reads `RoleType`; not edited; builder 2026-11-14: "send opus sub-agents out to answer this so we can correct it" — three read-only traces running: history of each value, what the record supports, readers and writers of the field):
-
-| Position | Office sheet | Citizen ledger `RoleType` |
-|---|---|---|
-| Marcus Osei (POP-00036) | Deputy Mayor (Econ Dev) | City Council Member |
-| Ramon Vega (POP-00042) | City Council District 4 | City Council President - D1 |
-| Denise Carter, Janae Rivers, Elliott Crane | Districts 1, 5, 6 | City Council Member (no district) |
-| Rose Delgado (POP-00503) | City Council District 3 | City Council District - D3 |
-| Brenda Okoro (POP-00037) | Deputy Mayor (Community) | Deputy Mayor (Community Affairs) (wording only) |
+**Role on the citizen ledger against the office sheet: six corrected 2026-11-14** (builder: "Repair to its state from January, use the wording the engine uses"). Osei, Vega, Carter, Rivers, Crane and Delgado now carry their office Title word for word, the string the engine writes at a seat turnover; history, readers, writers and the before-and-after are in the evidence log §Office holders' role. Still two wordings on the council: Tran, Ashford, Chen and Mobley read "City Council Member - D<n>". The sheet line a wake builds prints `RoleType` as it stands: "a City Council District 4 living in Lake Merritt".
 
 **Fits now** (an agent or pack exists and a tab holds their records):
 
@@ -261,6 +253,7 @@ Mara Vance (asker; her own memory and tools; civic.47 M1), Elias Varek's journal
 
 ## Changelog
 
+- 2026-11-14 (engine-sheet) — Six office holders' ledger roles corrected to their office Title on the builder's word; §2 caveat and §3.1 updated.
 - 2026-11-14 (engine-sheet) — agy review HOLD folded: 13 findings, all verified. City-hall runs are 21, not 27; reporter evidence was not clean (stance line and bag in every version; word counts and style claims corrected); the worker memory loader named was wrong; the chief also wakes Thursdays; chaos table rebuilt on the config; gate and retirement sections corrected.
 - 2026-11-14 (engine-sheet) — The ask step has its own row and plan: civic.49, [[../plans/2026-11-14-city-workers-answer-the-seats]]; pointers moved off civic.47 W1.
 - 2026-11-14 (engine-sheet) — Builder: every worker gets an agent on the worker template; the six ledger-role mismatches are being traced (read-only) so they can be corrected on his go.

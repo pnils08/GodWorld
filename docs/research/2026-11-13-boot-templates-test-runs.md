@@ -155,6 +155,20 @@ Sources: `scripts/civic-office-map.json`, `scripts/work-wake-packages.json`, `ou
 
 **The builder's calls before any write:** (1) whether "Council President" stays in Vega's string; (2) Osei's standing: Deputy Mayor, or Former; (3) the wording: "City Council Member - D<n>" (then the turnover writer is changed to write the same) or the office Title as the engine writes it today.
 
+**Corrected 2026-11-14.** Builder, verbatim: "Repair to its state from January, use the wording the engine uses." Read as: each holder back in the office the January record gives them, in the string the engine itself writes at a seat turnover, the office Title on `Civic_Office_Ledger` word for word. Twelve cells, each found by POPID at write time, the old value checked first, each read back (`output/engine-sheet/2026-11-14-office-roles-before-after.json`); ledger snapshot refreshed.
+
+| Holder | Was | Now (`Simulation_Ledger` and `Employment_Roster`) |
+|---|---|---|
+| Marcus Osei | City Council Member | Deputy Mayor (Econ Dev) |
+| Ramon Vega | City Council President - D1 | City Council District 4 |
+| Denise Carter | City Council Member | City Council District 1 |
+| Janae Rivers | City Council Member | City Council District 5 |
+| Elliott Crane | City Council Member | City Council District 6 |
+| Rose Delgado | City Council District - D3 | City Council District 3 |
+
+- **Left for the builder:** January carried titles the engine's wording has no place for: Vega "Council President", Rivers "Progressive Caucus Leader", Crane "Business Caucus Leader". They remain on the office sheet's Notes and, for Vega, in his ledger bio; they are not in the role string. Tran, Ashford, Chen and Mobley still read "City Council Member - D2 / D7 / D8 / D9" (the August hand wording), so the council now carries two wordings.
+- **Daily wake after the write** (guarded dry run): "You are Ramon Vega, 64, a City Council District 4 living in Lake Merritt, Oakland. People in this city know your name and what you do…"; "You are Marcus Osei, 59, a Deputy Mayor (Econ Dev) living in Chinatown, Oakland. …".
+
 **Side findings (gap log G-EC59, G-EC60):** eight Tier 3–4 office holders match no word in the wake's station line and are told "You are an ordinary person" (Public Defender, Deputy Public Defender, Internal Affairs Lead, Court Liaison, Police Review Chair, Ombudsman, Medical Examiner, Transit Hub Planning Lead; `lib/wakePerception.js:162`). The career mover can move an office holder's employer (`runCareerEngine.js:1647-1663, 1851` excludes only the GAME clock).
 
 ## Templates — where each type stands (2026-11-13)

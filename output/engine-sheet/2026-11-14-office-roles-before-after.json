@@ -1,0 +1,138 @@
+{
+ "at": "2026-11-14T07:42:11.371Z",
+ "builder": "Repair to its state from January, use the wording the engine uses.",
+ "cells": [
+  {
+   "tab": "Simulation_Ledger",
+   "row": 34,
+   "pop": "POP-00036",
+   "before": "City Council Member",
+   "after": "Deputy Mayor (Econ Dev)",
+   "expectOk": true,
+   "range": "Simulation_Ledger!K34",
+   "readBack": "Deputy Mayor (Econ Dev)",
+   "readBackPop": "POP-00036"
+  },
+  {
+   "tab": "Simulation_Ledger",
+   "row": 40,
+   "pop": "POP-00042",
+   "before": "City Council President - D1",
+   "after": "City Council District 4",
+   "expectOk": true,
+   "range": "Simulation_Ledger!K40",
+   "readBack": "City Council District 4",
+   "readBackPop": "POP-00042"
+  },
+  {
+   "tab": "Simulation_Ledger",
+   "row": 41,
+   "pop": "POP-00043",
+   "before": "City Council Member",
+   "after": "City Council District 5",
+   "expectOk": true,
+   "range": "Simulation_Ledger!K41",
+   "readBack": "City Council District 5",
+   "readBackPop": "POP-00043"
+  },
+  {
+   "tab": "Simulation_Ledger",
+   "row": 42,
+   "pop": "POP-00044",
+   "before": "City Council Member",
+   "after": "City Council District 6",
+   "expectOk": true,
+   "range": "Simulation_Ledger!K42",
+   "readBack": "City Council District 6",
+   "readBackPop": "POP-00044"
+  },
+  {
+   "tab": "Simulation_Ledger",
+   "row": 391,
+   "pop": "POP-00501",
+   "before": "City Council Member",
+   "after": "City Council District 1",
+   "expectOk": true,
+   "range": "Simulation_Ledger!K391",
+   "readBack": "City Council District 1",
+   "readBackPop": "POP-00501"
+  },
+  {
+   "tab": "Simulation_Ledger",
+   "row": 393,
+   "pop": "POP-00503",
+   "before": "City Council District - D3",
+   "after": "City Council District 3",
+   "expectOk": true,
+   "range": "Simulation_Ledger!K393",
+   "readBack": "City Council District 3",
+   "readBackPop": "POP-00503"
+  },
+  {
+   "tab": "Employment_Roster",
+   "row": 34,
+   "pop": "POP-00036",
+   "before": "City Council Member",
+   "after": "Deputy Mayor (Econ Dev)",
+   "expectOk": true,
+   "range": "Employment_Roster!D34",
+   "readBack": "Deputy Mayor (Econ Dev)",
+   "readBackPop": "POP-00036"
+  },
+  {
+   "tab": "Employment_Roster",
+   "row": 40,
+   "pop": "POP-00042",
+   "before": "City Council President - D1",
+   "after": "City Council District 4",
+   "expectOk": true,
+   "range": "Employment_Roster!D40",
+   "readBack": "City Council District 4",
+   "readBackPop": "POP-00042"
+  },
+  {
+   "tab": "Employment_Roster",
+   "row": 41,
+   "pop": "POP-00043",
+   "before": "City Council Member",
+   "after": "City Council District 5",
+   "expectOk": true,
+   "range": "Employment_Roster!D41",
+   "readBack": "City Council District 5",
+   "readBackPop": "POP-00043"
+  },
+  {
+   "tab": "Employment_Roster",
+   "row": 42,
+   "pop": "POP-00044",
+   "before": "City Council Member",
+   "after": "City Council District 6",
+   "expectOk": true,
+   "range": "Employment_Roster!D42",
+   "readBack": "City Council District 6",
+   "readBackPop": "POP-00044"
+  },
+  {
+   "tab": "Employment_Roster",
+   "row": 385,
+   "pop": "POP-00501",
+   "before": "City Council Member",
+   "after": "City Council District 1",
+   "expectOk": true,
+   "range": "Employment_Roster!D385",
+   "readBack": "City Council District 1",
+   "readBackPop": "POP-00501"
+  },
+  {
+   "tab": "Employment_Roster",
+   "row": 387,
+   "pop": "POP-00503",
+   "before": "City Council District - D3",
+   "after": "City Council District 3",
+   "expectOk": true,
+   "range": "Employment_Roster!D387",
+   "readBack": "City Council District 3",
+   "readBackPop": "POP-00503"
+  }
+ ]
+}

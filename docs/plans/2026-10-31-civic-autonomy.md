@@ -1,7 +1,7 @@
 ---
 title: Civic autonomy — decisions, city events, consequences and accountability
 created: 2026-10-31
-updated: 2026-11-01
+updated: 2026-11-13
 type: plan
 tags: [civic, citizens, media, active]
 sources:
@@ -17,6 +17,7 @@ pointers:
   - "[[2026-09-24-initiatives-in-the-world]] — existing project delivery, budgets and hiring"
   - "[[2026-09-22-agent-model-fit-test]] — reusable model comparison apparatus"
   - "[[EDITION_PIPELINE_DEEP_DISPATCH]] — existing publication boundaries"
+  - "[[../research/2026-11-13-boot-templates-test-runs]] — W1 research basis: the worker and ask dry runs"
   - "[[index]] — plan registration"
 ---
 
@@ -85,6 +86,7 @@ Task status lives only in this table. Task detail specifies scope and acceptance
 | A5 | Evaluate actual seat models, context/output limits and fallback behavior on frozen scenarios | research-build | synthetic offline rubric `fe5746d41`; approved model runs open |
 | AB6 | Run composed sandbox proof, pilot mayor/D2, then extend to all districts | research-build | blocked on engine, policy, schema and model gates |
 | M1 | Mara as planning director: promise record, full inputs, tools, in-world memory, Sol | research-build | built; code reviewed twice; last 3 findings fixed in place, memory on her citizen page, health check deadline-aware — builder go 2026-11-03; live from the C115 Sunday run |
+| W1 | City workers answer the seats: a seat's weekday wake may put one question to the police chief or a project director, who wakes on its own records and answers inside the same wake | unassigned (design drafted by engine-sheet; the builder names who builds) | design drafted 2026-11-13 from four no-write runs; not started; no review yet |
 
 ### Implementation map
 
@@ -284,6 +286,35 @@ Use the existing Groundhog sandbox procedure and preserve production locks/admis
 
 **Acceptance:** a directive run (a) writes a valid AUTO + manifest with zero or more blocks and a Not directing section, (b) cites only promises that validate against their source, (c) addresses only roster seats including project directors when warranted, (d) contains none of the removed crisis/compulsion language, (e) leaves open only the latest directive's blocks, (f) records the actual writer model, tool calls and billed cost in the manifest, (g) gives an addressed project director a Sunday turn the following week whose `maraAnswer` is the only reply Mara counts, (h) writes nothing when the run fails before validation, and after a failure during the commit a re-run completes it with no duplicate row or note, (i) closes a promise only on evidence tied to it, (j) director RULES and prep text no longer require movement outside a due step.
 
+### W1 — City workers answer the seats
+
+**Builder's words.** 2026-11-01: "the civic also has workers who are supposed to be tracking the city data like the police chief , and these should be also communicating with the district offices to solve Their issues , so it’s like a real city in that these agents run the administration of the city , albeit I don’t have the solution to this yet". 2026-11-13: "the workers are meant to be the agents that are called upon for the data on its job … a worker cron is meant to be a tool call in a sense, if the mayor has to speak on the baylight district this agent can annswer the ask so the mayor isnt chasing tool calls, police chief same with crime data, crime events so if a council member needs that its a tool call to the police chief … the mayor and council memebers use these workers to do their jobs" · "Yes these should work together rather than in a silo imo".
+
+**Research basis:** [[../research/2026-11-13-boot-templates-test-runs]] §Workers, §Run 3, §Run 4 (engine-sheet, pipeline.110 Task 9). Nothing below is built.
+
+**What runs today (code read 2026-11-13).** A worker wakes alone on a clock (`scripts/cron-work-wake.js`, Tue / Thu 20:18), is handed its project's status lines and writes a reflection; each seat's pack then carries the first 110 characters of four directors' newest reflections, a Cycle old (`buildCivicOfficeSlice.js` `loadWorkingCity`). The one ask-and-answer is Mara's weekly question (`maraProjectAsk`, the `answer` move). A seat can request stored records mid-wake (`readRequests` → `civicBrief.js` `readBriefEvidence`), which returns its own snapshot. The police chief's weekday pack holds no response time or clearance rate though `Crime_Metrics` carries both (gap log C115 G-EC56).
+
+**What the runs showed.** Woken on one sheet line, page memory and the whole of his crime sheet, the chief answered a District 3 question with figures that are all in his records, and said what the sheet does not show (5 of 5 answers; one wrong comparison in one). The seat asked in 2 of 3 wakes; asked, it filed a safety proposal on the response load, not asked an economic one. In both asking wakes the seat then spent an `answer` move replying to the chief under a directive id it does not hold, which `validateDatawakeMoves` rejects (`answer-not-bound-to-seat-directive`). A full exchange cost $0.002 on the seats' current models.
+
+**Design.**
+
+1. **Who can be asked.** The police chief and the five project directors Mara already addresses (`LAYER3_DIRS`). Each answers from records that are its own: the chief, every `Crime_Metrics` row of the Cycle with every column, and the patrol setting; a director, its full `Initiative_Tracker` row and its office row. The DA, medical examiner and EMS director (work-wake registry, data nodes already built) join after the first live read.
+2. **Who can ask.** The Mayor and the nine council seats, in the weekday wake. One question a wake; asking is the seat's choice. The Sunday chain is not changed here.
+3. **The step.** Beside the evidence-read round in `runDatawake`: a candidate reply that is only `{"ask":{"to","question"}}` resolves the worker by holder name against the roster, wakes it, hands the answer back under "ANSWER FROM <holder>, <title>" and asks for the final reply. It is its own round, not one of the two evidence rounds. An unknown name, a provider failure, a timeout or an empty answer returns "no answer this wake" and the seat proceeds; a worker call never costs the seat its wake. The offer sits in `datawakeUserPrompt` beside the evidence-read offer, in both the current and the `--civic47-pilot` contract: who can be asked and what records each holds.
+4. **The worker's wake.** System turn: the sheet line the citizen wake builds (name, age, role, hood, temperament off the dials) and its page readback (`lib/wakePerception.js` `loadOwnPageReadback`); no written persona file. User turn: its records, then the asker's name, seat and hoods, then the question. No output form, no instruction on content. The worker's own model from the office map.
+5. **The end of the exchange.** The final prompt says the answer is on the record and that no reply move exists. This states how the step works, not what to say.
+6. **What is recorded.** The seat's datawake record gains `asked` (to, question, answer, model). The worker's page takes one `work` doc holding the question and its answer, and one `Reflection_Intake` row as a work wake files today: being asked is that worker's work that day, and the exchange is an event in both lives. `loadWorkingCity` hands seats the Cycle's exchanges (who asked whom, the answer's opening) ahead of diary lines, so the Mayor sees what the chief told a council member.
+7. **The chief's own pack** carries response time and clearance rate (closes G-EC56).
+8. **A no-write mode that calls the model** for the weekday wake (`--stage=datawake --office <seat> --no-write`): builds the real prompt, runs the ask round, prints the result, writes no pack, record, wall, move or page. The four runs used a scratch harness under a write guard; the script has only a dry run that calls no model.
+
+**Proof before live:** unit tests for ask parsing, roster resolution, the failure path and the record shape; no-write runs on live C116 data for the Mayor, D2 and D3, three each; then the first live weekday, read the next morning.
+
+**Acceptance.** (a) A seat that asks receives the answer inside the same wake and its final reply validates. (b) A seat that does not ask produces a valid reply from the same wake. (c) A failed worker call leaves the seat's wake complete. (d) The exchange is on the worker's page and in the seat's record; the worker call writes nothing else. (e) Across the first live week no seat ends a wake on a rejected reply-to-worker move. (f) Each answer's figures are logged against the worker's records (`ungroundedNumbers`, logged, not gated: speech is not gated, SIM_DOCTRINE §13).
+
+**Known weak points.** A worker's wrong comparison travels into the seat's statement (Run 4: "the slowest in the city", Rockridge is slower); the number check reads presence, not comparison, and nothing in this design catches it. A worker promises a thing the sim has no record to make ("a records pull"; `Judicial_Ledger` holds 0 rows); answers do not enter Mara's promise record in this cut. The Sunday project step still loads a director's 37–46k written files while the ask wakes it on a sheet line: two different boots for one person until the boot templates settle (pipeline.110 Task 9).
+
+**Files:** `scripts/cron-civic-run.js` (`runDatawake`, `datawakeUserPrompt`, `datawakeRecord`), `scripts/buildCivicOfficeSlice.js` (`loadWorkingCity`, the chief's crime block), `scripts/cron-work-wake.js` / `scripts/work-wake-packages.json` (the worker roster and its record builders), `lib/wakePerception.js` (read only), the civic test suites.
+
 ## Acceptance
 
 | Proof | Required observable result | Evidence layer |
@@ -352,7 +383,7 @@ No single unit test, applied=true file, stage transition, quoted reaction or agg
 ## Open questions
 
 - **Builder's call, remaining forced frame (Codex inventory, review file above):** removed 2026-11-02 on his pick (1, 3, 4 — Changelog): "No decision is not an option", the weekday must-answer lever, the required `problem`. Still open: the directive's Silence consequence and "the crisis and the success" — proposed in M1; no category or budget under $1M fits a small event. Project-director movement answered 2026-11-03 (on deadlines, not every week — M1 item 12).
-- **Builder 2026-11-01, no design yet:** city workers (the police chief is his example) track city data and work with the district offices on their issues, so the agents run the administration of the city. He does not have the solution yet; do not build from this line. Verbatim in Changelog.
+- **City workers (builder 2026-11-01, 2026-11-13):** design drafted in W1 above; nothing built. Builder's calls still open: (1) who builds it — this row is research-build's, the design came from engine-sheet's pipeline.110 runs; (2) once seats can ask, do the directors' Tue / Thu clock diaries stay or stop.
 - Claude/builder acceptance should ratify or adjust the proposed opportunity/action/retrieval defaults, event-duty exception and delegated budget authority once. This blocks production policy activation, not offline implementation/specification. **Builder 2026-11-01 (verbatim, see Changelog):** token budgets — "No cap is the rule"; turn counts — "codex plan not mine"; event-duty exception — not answered. The numeric targets in A2/A3/A5 are not builder rulings.
 - **Builder 2026-11-01 selected "Use proposed defaults behind pilot flag (Recommended)."** This supersedes the earlier unanswered offline-policy choice: `scripts/civic47PilotPolicy.js` v1 encodes two regular opportunities, up to two extra event opportunities, and a Fri/Sat event-duty exception under explicit `--civic47-pilot` only. No crontab or live schedule changed. The plan specifies no numeric delegated spend or event-duration bands, so those fields are null and delegation remains unavailable until amounts are supplied; this selection does not authorize invented budgets or production activation.
 - Engine-sheet must map event/program execution capabilities and choose concrete effect rates against existing sim scales; no new housing premise or guaranteed approval gain. This blocks B2 receiver activation.
@@ -362,6 +393,7 @@ No single unit test, applied=true file, stage transition, quoted reaction or agg
 
 ## Changelog
 
+- 2026-11-13 (engine-sheet) — W1 drafted: seats ask the police chief or a project director inside the weekday wake; basis [[../research/2026-11-13-boot-templates-test-runs]] Runs 3–4; builder "Yes these should work together rather than in a silo". Not started; builder names the builder.
 - 2026-11-05 (research-build) — Reviews reconciled: 12 house-guest reviews (packet pressure, forced answer, readings, sign-off, Mara directive/M1 design/code, B2 F7 re-review) listed with dispositions; the civic.47 build review stays open (activation HOLD in force).
 - 2026-11-03 (research-build) — **Builder go on the code re-review findings, memory home, health check, push — verbatim:** "go on your 4 purposed fixes, agree on mara memory, mara should be using her wiki container as the mara container has alot about me an ideas, you can fold that into this job, you can push when finished". Fixed in place, no third review round (TERMINAL.md §Review 4): (1) `kept` from the tracker needs a work-stage move, never `Status`; a close on an office's words quotes them and is marked `office-word` (item 4); (2) a Mara-only director reply is only a reply (item 11); (3) a due step moves only the director's own initiative (item 11); (4) the weekly health check is deadline-aware (item 13a). Memory: her citizen page, not a new container; the three approved entries copied with readback (item 7). Code review files: `docs/for-claude-review/2026-11-03-codex-mara-m1-code-review.md`, `…-code-rereview.md`. Pushed on the builder's word without a Codex pass on the final fold.
 

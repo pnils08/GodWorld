@@ -105,6 +105,42 @@ Sources: `scripts/civic-office-map.json`, `scripts/work-wake-packages.json`, `ou
 - **Tools:** no worker has one. A weekday seat can request stored records from its own snapshot (`readRequests`).
 - **Not workers yet:** 21 offices in the map have no agent (fire chief, city manager, chief of staff, public defender and 17 more); the EMS director and medical examiner among them run on inline registry packs.
 
+## Office holders' role on the citizen ledger (two read-only traces, 2026-11-14)
+
+**Builder (2026-11-14):** "send opus sub-agents out to answer this so we can correct it". Three read-only sub-agents under the write guard; the record trace and the reader/writer trace are in, the history trace is still running. Key citations spot-checked by engine-sheet (edition lines, the turnover writer, the intake door, two snapshot commits). Nothing has been written to a sheet.
+
+**What the record supports**
+
+| Holder | Office sheet | Published record and canon | Ledger `RoleType` now |
+|---|---|---|---|
+| Ramon Vega (POP-00042) | COUNCIL-D4; Notes "Council President" | "Council President Ramon Vega (IND, D4)" (`editions/cycle_pulse_edition_100.txt:87`, and about 30 lines C75–C100); `docs/canon/INSTITUTIONS.md:382` D4; `lib/districtMap.js:59` | City Council President - D1 |
+| Marcus Osei (POP-00036) | STAFF-DM-ECON, Deputy Mayor (Econ Dev), active | Deputy Mayor in every published line; never a council member. Standing split: C72 hospitalized; C91 "permanently reassigned the entire Economic Development portfolio … He's gone" (`cycle_pulse_edition_91.txt:263`); C92 index "Former Deputy Mayor"; C95 "Deputy Mayor recovering"; C107 "recent recovery" (`cycle_pulse_c107.txt:224`) | City Council Member |
+| Denise Carter (POP-00501) | COUNCIL-D1 | D1 throughout | City Council Member |
+| Janae Rivers (POP-00043) | COUNCIL-D5; Notes "Progressive Caucus Leader" | D5 throughout | City Council Member |
+| Elliott Crane (POP-00044) | COUNCIL-D6; Notes "Business Caucus Leader" | D6 throughout | City Council Member |
+| Rose Delgado (POP-00503) | COUNCIL-D3 | D3 throughout | City Council District - D3 |
+
+- **How the strings got this way:** in the ledger snapshot of 2026-08-16 (04b11e223) every seat read plain "City Council Member", Vega "City Council President", Delgado "City Council District 3". By 2026-08-19 (2f4947251) four seats had gained "- D<n>", Delgado had become "City Council District - D3" and Vega "City Council President - D1". No script in the repo writes these suffixes. Osei reads "City Council Member" in every snapshot back to 2026-08-12.
+- **Two wordings are in play.** The hand pattern on four seats: "City Council Member - D<n>". The engine's own: at a seat turnover `turnoverLedger_` writes the office Title word for word as the new holder's role and "Former <Title>" on a demotion (`phase05-citizens/updateCivicApprovalRatings.js:1371, 1376`; pinned by `scripts/civicApprovalCeiling.test.js:704-706`). 29 of the 39 holders' strings differ from their office Title; the six above are the ones that disagree in meaning.
+
+**What a correction would change**
+
+- **Engine logic:** nothing on live data. The one parser that reads council roles off the ledger is a fallback that runs only when the office sheet cannot be read (`civicInitiativeEngine.js:978-1104`). Pay and career field hold as long as the wording keeps a civic keyword (`generationalWealthEngine.js:861`).
+- **Text:** every place the role is passed through: the daily wake's identity line (Vega can be told today he is "a City Council President - D1"), neighbour lists, interviews, the Discord voice brief, the desk and civic slices, Rhea's fact sheet (which today corroborates the wrong district), the daily news headings, the dashboard.
+- **A second copy:** `Employment_Roster.RoleType` carries the same six strings; desk slices read it. A ledger-only fix leaves them.
+
+**What could undo a correction**
+
+1. The seat-turnover writer, the next time that seat changes hands: it writes the Title word for word. Staff offices (Osei's) never enter it.
+2. The two intake doors: an intake row carrying a role for that name overwrites it (`godWorldEngine2.js:1638-1640`; `processAdvancementIntake.js:912-922`). Neither exempts an office holder.
+3. A weekly fire in flight: the engine writes the whole ledger back from the copy it read at the start (`commitSimulationLedger.js:25-38`).
+
+**How a correction is made** (precedents 31c5cc4d6, 9b74fa7ce): one targeted cell per row through `lib/sheets.js` `updateCell`, the row found by POPID at write time, outside a fire, each cell read back, the snapshot refreshed, and the six `Employment_Roster` cells given the same write. Six rows, on the builder's go; no sweep.
+
+**The builder's calls before any write:** (1) whether "Council President" stays in Vega's string; (2) Osei's standing: Deputy Mayor, or Former; (3) the wording: "City Council Member - D<n>" (then the turnover writer is changed to write the same) or the office Title as the engine writes it today.
+
+**Side findings (gap log G-EC59, G-EC60):** eight Tier 3–4 office holders match no word in the wake's station line and are told "You are an ordinary person" (Public Defender, Deputy Public Defender, Internal Affairs Lead, Court Liaison, Police Review Chair, Ombudsman, Medical Examiner, Transit Hub Planning Lead; `lib/wakePerception.js:162`). The career mover can move an office holder's employer (`runCareerEngine.js:1647-1663, 1851` excludes only the GAME clock).
+
 ## Templates — where each type stands (2026-11-13)
 
 **Builder (2026-11-13):** "before we move to fine tune the workflows should we make sure our agent templates are set? … we may 'worker' , 'council/mayor', 'citizens' 'gates/rhea'?"

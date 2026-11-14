@@ -315,3 +315,9 @@ Live read 2026-11-13: `Civic_Office_Ledger` STAFF-DM-ECON Marcus Osei (POP-00036
 
 ### G-EC58 — Chaos-car events reach an office by place only; no worker receives the events of its own trade [judgment] [civic] [MED] (engine-sheet, 2026-11-13)
 `buildCivicOfficeSlice.js` `loadCycleEvents` admits a chaos row only when its text names a hood on the seat's turf; the work wake has no event node. C113–C115 world summaries: 30 events; six council packs carried one, all by place; 2 cop cars, 2 OARI vans and 2 ambulances reached neither the police chief, the OARI director nor the EMS director as theirs; 12 business-targeted and 4 citizen-targeted events name no hood and reached no office. Routing by kind proposed in `docs/reference/AGENT_BOOT_TEMPLATES.md` §3.2; nothing changed.
+
+### G-EC59 — Eight office holders are told "You are an ordinary person" by the daily wake [judgment] [wakes] [LOW] (engine-sheet, 2026-11-14)
+`lib/wakePerception.js:162` `stationLine` knows a citizen of station by Tier 1–2, a feed name, or a role matching Mayor / Council / Chief / Director / Deputy Mayor / District Attorney / Founder / Owner / Manager / Coach. Tier 3–4 holders whose role has none of those words fall through: Public Defender, Deputy Public Defender, Internal Affairs Division Lead, Superior Court Liaison, Civilian Police Review Board Chair, City Ombudsman, Medical Examiner, Transit Hub Planning Lead. The office sheet is not consulted. Found by the read-only reader/writer trace of `RoleType`; nothing changed.
+
+### G-EC60 — The career mover can move an office holder's employer [judgment] [engine] [LOW] (engine-sheet, 2026-11-14)
+`phase05-citizens/runCareerEngine.js:1647-1663` builds the mover pool excluding only the GAME clock; a CIVIC-clock office holder with a climbing posture can have `EmployerBizId` moved (`:1851`). Role is not rewritten while the role's field matches. Found by the same trace; not verified on live rows; nothing changed.

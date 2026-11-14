@@ -102,6 +102,83 @@ var PLACES = {};
     if (alongX) g.rotateY(Math.PI / 2);
     return add(k, g, mat, x, y, z, true);
   }
+  // ---------- painted fronts: doors and windows as pictures, lit from inside. No words, no emblems ----------
+  // a pair of doors. 'hall': timber with small panes; 'glass': a theater's glass doors on a bright lobby;
+  // 'bronze': tall panelled doors under a fanlight; 'swing': one plank door with a pane in it
+  function doorsTex(T, style) {
+    var tall = style === 'bronze', W = 256, H = tall ? 768 : 384;
+    return canvasTex(T, 'doors-' + style, W, H, function (g) {
+      var gr, i, j, lw = W / 2 - 16;
+      function lit(x, y, w, h, a, b) { gr = g.createLinearGradient(0, y, 0, y + h); gr.addColorStop(0, a); gr.addColorStop(1, b); g.fillStyle = gr; g.fillRect(x, y, w, h); }
+      if (style === 'glass') {
+        // the lobby seen through the glass: ceiling lights, a warm wall, carpet
+        lit(0, 0, W, H, '#fff0c4', '#e9b260'); g.fillStyle = 'rgba(120,24,24,.55)'; g.fillRect(0, H * 0.82, W, H * 0.18);
+        for (i = 0; i < 5; i++) { gr = g.createRadialGradient(26 + i * 51, 44, 1, 26 + i * 51, 44, 34); gr.addColorStop(0, 'rgba(255,255,240,1)'); gr.addColorStop(1, 'rgba(255,255,240,0)'); g.fillStyle = gr; g.fillRect(0, 0, W, 100); }
+        g.fillStyle = '#2a2018'; g.fillRect(0, 0, W, 12); g.fillRect(0, 0, 8, H); g.fillRect(W - 8, 0, 8, H); g.fillRect(W / 2 - 5, 0, 10, H); g.fillRect(0, 70, W, 8); g.fillRect(0, H - 12, W, 12);
+        g.fillStyle = '#c9a25a'; g.fillRect(22, H * 0.52, lw - 22, 7); g.fillRect(W / 2 + 16, H * 0.52, lw - 22, 7);
+        g.fillStyle = 'rgba(255,255,255,.14)'; g.beginPath(); g.moveTo(30, H - 12); g.lineTo(90, 78); g.lineTo(112, 78); g.lineTo(52, H - 12); g.fill();
+        return;
+      }
+      var wood = style === 'bronze' ? '#4a3620' : style === 'swing' ? '#3c2616' : '#4b2f1c', edge = style === 'bronze' ? '#8a6a34' : '#22140b', top = tall ? 200 : 78;
+      g.fillStyle = '#1b120b'; g.fillRect(0, 0, W, H);
+      // the light over the doors
+      lit(10, 10, W - 20, top - 22, '#ffe9b8', '#e9a850'); g.fillStyle = '#1b120b';
+      if (tall) { g.fillRect(W / 2 - 3, 10, 6, top - 22); for (i = 1; i < 4; i++) { g.save(); g.translate(W / 2, top - 12); g.rotate(-Math.PI / 2 + (i - 2) * 0.55); g.fillRect(-2, -top, 4, top); g.restore(); } }
+      else for (i = 1; i < 4; i++) g.fillRect(10 + i * (W - 20) / 4 - 2, 10, 4, top - 22);
+      [8, W / 2 + 4].forEach(function (x0) {
+        var w = W / 2 - 12; g.fillStyle = wood; g.fillRect(x0, top, w, H - top - 6);
+        g.strokeStyle = edge; g.lineWidth = 3; g.strokeRect(x0 + 1.5, top + 1.5, w - 3, H - top - 9);
+        if (style === 'bronze') { for (j = 0; j < 4; j++) { g.strokeRect(x0 + 16, top + 22 + j * (H - top - 40) / 4, w - 32, (H - top - 40) / 4 - 16); g.fillStyle = 'rgba(255,220,150,.07)'; g.fillRect(x0 + 18, top + 24 + j * (H - top - 40) / 4, w - 36, 6); } }
+        else {
+          // panes in the upper half, a panel below
+          var ph = (H - top) * 0.42; lit(x0 + 16, top + 18, w - 32, ph, '#ffe2a6', '#e39a44'); g.fillStyle = wood; g.fillRect(x0 + w / 2 - 2.5, top + 18, 5, ph); g.fillRect(x0 + 16, top + 18 + ph / 2 - 2.5, w - 32, 5);
+          g.strokeRect(x0 + 16, top + 34 + ph, w - 32, H - top - ph - 58);
+        }
+      });
+      g.fillStyle = '#d9b566'; g.fillRect(W / 2 - 22, top + (H - top) * 0.52, 7, tall ? 70 : 34); g.fillRect(W / 2 + 15, top + (H - top) * 0.52, 7, tall ? 70 : 34);
+    });
+  }
+  // a tall round-headed window of leaded glass, lit from inside: plain panes in a few tints, no picture in it
+  function archTex(T, scheme) {
+    return canvasTex(T, 'arch-' + scheme, 128, 384, function (g) {
+      var r = rng(seedOf('arch' + scheme)), TINTS = { amber: ['#ffd98a', '#ffc46a', '#ffe9b8', '#f5b25a'], jewel: ['#e9b24a', '#3f7fb8', '#b8443a', '#4f9a6a', '#f2d48a', '#7a5aa8'], pale: ['#d8ecd2', '#cfe4ee', '#f4ecd0', '#bfd8c8'] }[scheme];
+      g.clearRect(0, 0, 128, 384);
+      function arch(inset) { g.beginPath(); g.moveTo(inset, 384); g.lineTo(inset, 64); g.arc(64, 64, 64 - inset, Math.PI, 0); g.lineTo(128 - inset, 384); g.closePath(); }
+      arch(0); g.fillStyle = '#b9b2a6'; g.fill();          // the stone round it
+      g.save(); arch(9); g.clip();
+      for (var y = 0; y < 384; y += 24) for (var x = (y / 24 % 2) * -11; x < 128; x += 22) { g.fillStyle = TINTS[Math.floor(r() * TINTS.length)]; g.globalAlpha = 0.72 + r() * 0.28; g.fillRect(x, y, 21, 23); }
+      g.globalAlpha = 1; var gr = g.createRadialGradient(64, 170, 10, 64, 190, 210); gr.addColorStop(0, 'rgba(255,250,225,.35)'); gr.addColorStop(1, 'rgba(30,18,8,.4)'); g.fillStyle = gr; g.fillRect(0, 0, 128, 384);
+      g.fillStyle = '#1a1410'; for (y = 0; y < 384; y += 24) g.fillRect(0, y, 128, 1.6); for (y = 0; y < 384; y += 24) for (x = (y / 24 % 2) * -11; x < 128; x += 22) g.fillRect(x, y, 1.6, 24);
+      g.fillRect(62, 0, 4, 384); g.fillRect(0, 128, 128, 4); g.fillRect(0, 250, 128, 4);
+      g.restore(); arch(9); g.strokeStyle = '#2a211a'; g.lineWidth = 4; g.stroke();
+      g.fillStyle = '#cfc8bc'; g.fillRect(0, 372, 128, 12);
+    });
+  }
+  // a poster in its lit case: big plain shapes, nothing written
+  function posterTex(T, n) {
+    return canvasTex(T, 'poster' + n, 96, 128, function (g) {
+      var r = rng(1900 + n * 77), h1 = Math.floor(r() * 360), h2 = (h1 + 140 + Math.floor(r() * 80)) % 360;
+      g.fillStyle = '#1a140e'; g.fillRect(0, 0, 96, 128); g.fillStyle = '#d9b566'; g.fillRect(3, 3, 90, 122); g.fillStyle = 'hsl(' + h1 + ',55%,42%)'; g.fillRect(7, 7, 82, 114);
+      g.fillStyle = 'hsl(' + h2 + ',70%,62%)'; g.beginPath(); g.arc(30 + r() * 36, 44 + r() * 20, 20 + r() * 10, 0, 7); g.fill();
+      g.fillStyle = 'hsla(' + h2 + ',40%,85%,.9)'; g.beginPath(); g.moveTo(7, 121); g.lineTo(7, 86 + r() * 14); g.lineTo(89, 70 + r() * 20); g.lineTo(89, 121); g.fill();
+      g.fillStyle = 'rgba(0,0,0,.35)'; g.fillRect(7, 104, 82, 17);
+    });
+  }
+  // what a hall is built of: dressed stone in courses, or brick
+  function masonTex(T, brick) {
+    return canvasTex(T, brick ? 'mason-brick' : 'mason-stone', 128, 128, function (g) {
+      var r = rng(brick ? 31 : 57), y, x, ch = brick ? 8 : 16, cw = brick ? 16 : 32;
+      g.fillStyle = '#d2cbc0'; g.fillRect(0, 0, 128, 128);
+      for (y = 0; y < 128; y += ch) for (x = -cw / 2 + (y / ch % 2) * cw / 2; x < 128; x += cw) { g.fillStyle = r() < 0.5 ? 'rgba(60,40,26,' + (0.03 + r() * 0.1).toFixed(3) + ')' : 'rgba(255,244,228,' + (0.03 + r() * 0.1).toFixed(3) + ')'; g.fillRect(x, y, cw - 1, ch - 1); }
+      g.fillStyle = 'rgba(30,22,16,.3)'; for (y = ch - 1; y < 128; y += ch) g.fillRect(0, y, 128, 1); for (y = 0; y < 128; y += ch) for (x = (y / ch % 2) * cw / 2 + cw / 2 - 1; x < 128; x += cw) g.fillRect(x, y, 1, ch);
+    });
+  }
+  // a painted panel stood on a wall facing the street (or turned by ry); rep repeats the picture across it
+  function panel(k, tex, w, h, x, y, z, ry, rep, cut) {
+    var T = k.THREE, t = tex; if (rep && rep > 1) { t = tex.clone(); t.needsUpdate = true; t.repeat.set(rep, 1); }
+    var m = new T.MeshBasicMaterial({ map: t, side: T.DoubleSide }); if (cut) m.alphaTest = 0.5; if (t !== tex) m.userData.own = true;
+    var pl = add(k, new T.PlaneGeometry(w, h), m, x, y, z); pl.rotation.y = ry || 0; return pl;
+  }
   function heldSpans(k) { return ((k.H && k.H.lay && k.H.lay.places) || []).filter(function (q) { return q.half > 0; }); }
 
   // ---------- the A's new ballpark: beyond the gate, on the water, still going up ----------
@@ -283,7 +360,7 @@ var PLACES = {};
     k.box(3.2, 0.8, 15.6, s * (W + 4.6), 1.0, z, [44, 0.08, 0.62]);
     k.box(3.6, 1.6, 15.6, s * (W + 4.6), 10, z, stone);
     gable(k, 15.6, 3, 3.6, lam(k, stone), s * (W + 4.6), 10.8, z, true);
-    k.box(0.2, 7, 6, s * (W + 4.95), 4.9, z, [40, 0.7, 0.42], true);
+    panel(k, doorsTex(T, 'bronze'), 6, 7, s * (W + 4.84), 4.9, z, -s * Math.PI / 2, 3);
     // the frieze carries the name; uplights wash the columns
     if (b) plate(k, b.n, 45, 4, s * (W + 2.76), 10, z, -s * Math.PI / 2);
     for (i = 0; i < 6; i++) k.glow(s * (W + 3.6), 1.4, z - 6.5 + i * 2.6, 0xffd9a0, 2.2);
@@ -291,7 +368,7 @@ var PLACES = {};
     if (b) k.blade(b.n, 45, s, 6, z + p.half - 0.6, 5);
   };
 
-  // ---------- a theater: marquee with running bulbs, the name up an upright ----------
+  // ---------- a theater: marquee with running bulbs, the name up an upright, glass doors on a lit lobby ----------
   PLACES.theater = function (k, p, b) {
     var T = k.THREE, s = p.s, z = p.z, W = k.WALK, i, hue = b ? [350, 30, 280, 12, 200][seedOf(b.n) % 5] : 350;
     k.walled(18, 15, 14, s * (W + 7), z, 'brick', 0.25, [hue === 200 ? 30 : 18, 0.3, 0.4], 1);
@@ -299,8 +376,9 @@ var PLACES = {};
     // a lit line under the cornice
     k.box(0.12, 0.18, 18, s * (W - 0.08), 14.3, z, [hue, 0.9, 0.7], true);
     // the entrance: lit doors and two blank poster cases
-    k.box(0.1, 3, 8, s * (W - 0.05), 1.6, z + 2, [40, 0.8, 0.56], true);
-    k.box(0.1, 2, 1.5, s * (W - 0.06), 1.5, z - 4.2, [hue, 0.4, 0.5], true); k.box(0.1, 2, 1.5, s * (W - 0.06), 1.5, z + 8.1, [hue, 0.4, 0.5], true);
+    panel(k, doorsTex(T, 'glass'), 8, 3.2, s * (W - 0.06), 1.6, z + 2, -s * Math.PI / 2, 4);
+    var pn = b ? seedOf(b.n) % 5 : 0;
+    panel(k, posterTex(T, pn), 1.5, 2, s * (W - 0.07), 1.6, z - 4.2, -s * Math.PI / 2); panel(k, posterTex(T, pn + 5), 1.5, 2, s * (W - 0.07), 1.6, z + 8.1, -s * Math.PI / 2);
     // marquee: a box out over the pavement, a board each way, bulbs top and bottom
     var mx = s * (W - 1.75), mz = z + 2, mL = 11, mY = 4.9;
     k.box(3.4, 2.6, mL, mx, mY, mz, [hue, 0.25, 0.14]);
@@ -358,36 +436,51 @@ var PLACES = {};
     var win = [], bars = [];
     [-2.6, 2.6].forEach(function (o) { win.push([s * (W - 0.03), 1.9, z + o, 0.05, 1.5, 2]); bars.push([s * (W - 0.06), 1.9, z + o, 0.05, 1.55, 0.08], [s * (W - 0.06), 1.9, z + o, 0.05, 0.08, 2.05]); });
     boxes(k, bas(k, [32, 0.85, 0.55]), win); boxes(k, lam(k, [22, 0.3, 0.1]), bars);
-    k.box(0.05, 2.4, 1.3, s * (W - 0.03), 1.4, z, [30, 0.8, 0.45], true);
+    panel(k, doorsTex(T, 'hall'), 1.5, 2.5, s * (W - 0.04), 1.45, z, -s * Math.PI / 2);
     var barrel = new T.CylinderGeometry(0.42, 0.42, 1, 10);
     inst(k, barrel, lam(k, [24, 0.45, 0.24]), [[s * (W - 0.6), 0.86, z + 5.3, 1, 1.1, 1], [s * (W - 1.5), 0.86, z + 5.0, 1, 1.1, 1]], true);
     k.glow(s * (W - 0.3), 2.8, z - 1.2, 0xffb36a, 2.2); k.glow(s * (W - 0.3), 2.8, z + 1.2, 0xffb36a, 2.2); k.glow(s * (W - 0.4), 2.2, z, 0xff8a55, 4);
     if (b) { plate(k, b.n, 32, 5.4, s * (W - 0.02), 4.7, z, -s * Math.PI / 2); k.blade(b.n, 2, s, 5.4, z + p.half - 0.6, 5.4); }
   };
 
-  // ---------- a house of worship: a gabled hall. No symbol on it: the name says whose it is ----------
+  // ---------- a house of worship: a gabled hall, its gable end to the street. No symbol on it: the name says
+  // whose it is. Dressed stone or brick, tall round-headed windows of plain leaded glass lit from inside,
+  // buttresses between them, timber doors under a porch. Which stone, which glass and how wide comes off the name.
   PLACES.faith = function (k, p, b) {
-    var T = k.THREE, s = p.s, z = p.z, W = k.WALK, y0 = k.yAt(z), R = rng(seedOf(b && b.n));
-    var palettes = [[38, 0.18, 0.72], [14, 0.35, 0.4], [210, 0.05, 0.62], [44, 0.22, 0.82], [26, 0.25, 0.55]], tone = palettes[Math.floor(R() * palettes.length)];
+    var T = k.THREE, s = p.s, z = p.z, W = k.WALK, y0 = k.yAt(z), R = rng(seedOf(b && b.n)), i, q;
+    var palettes = [[38, 0.18, 0.72], [14, 0.35, 0.4], [210, 0.05, 0.62], [44, 0.22, 0.82], [26, 0.25, 0.55]], pi = Math.floor(R() * palettes.length), tone = palettes[pi];
     var hw = 11 + Math.floor(R() * 2), hd = 13, hx = s * (W + 3 + hd / 2), hh = 6.8;
-    var wall = lam(k, tone);
-    var hall = add(k, new T.BoxGeometry(hd, hh + 1, hw), wall, hx, (hh - 1) / 2 + y0, z, true); hall.receiveShadow = true;
-    gable(k, hw + 0.8, 4.4, hd + 1, lam(k, [tone[0], 0.2, 0.14]), hx, hh + y0, z, true);
-    // front gable faces the street: a porch, a lit door, a tall window over it, steps
-    k.box(2.4, 4.2, 4.2, s * (W + 1.8), 2.1 + y0, z, tone);
-    gable(k, 4.6, 1.3, 2.6, lam(k, [tone[0], 0.2, 0.14]), s * (W + 1.8), 4.2 + y0, z, true);
-    k.box(0.05, 2.6, 1.8, s * (W + 0.58), 1.3 + y0, z, [36, 0.8, 0.5], true);
-    k.box(0.05, 3.4, 1.0, s * (W + 2.97), 7.8 + y0, z, [38, 0.75, 0.55], true);
-    for (var st = 0; st < 3; st++) k.box(0.5, 0.18, 3.6 - st * 0.3, s * (W + 0.3 - st * 0.45), 0.09 + st * 0.18 + y0, z, [30, 0.08, 0.5]);
-    // tall windows down both long sides, warm inside
-    var wins = [];
-    for (var i = 0; i < 4; i++) { var wx = hx - s * (hd / 2) + s * (2.2 + i * 2.9); wins.push([wx, 3.6 + y0, z + hw / 2 + 0.03, 1, 3.6, 0.05], [wx, 3.6 + y0, z - hw / 2 - 0.03, 1, 3.6, 0.05]); }
-    boxes(k, bas(k, [38, 0.8, 0.52]), wins);
+    var mt = masonTex(T, pi === 1), wallTone = [tone[0], tone[1], Math.min(0.92, tone[2] * 1.12)], wall = lam(k, wallTone, { map: mt }), roofM = lam(k, [tone[0], 0.2, 0.14]);
+    var hg = new T.BoxGeometry(hd, hh + 1, hw), huv = hg.attributes.uv; for (q = 0; q < huv.count; q++) huv.setXY(q, huv.getX(q) * 3.2, huv.getY(q) * 2);
+    var hall = add(k, hg, wall, hx, (hh - 1) / 2 + y0, z, true); hall.receiveShadow = true;
+    gable(k, hw + 0.8, 4.4, hd + 1, roofM, hx, hh + y0, z, true);
+    // the end to the street is one wall from the ground to the ridge, the roof showing as an edge behind it
+    var fx = s * (W + 2.46), sh = new T.Shape(); sh.moveTo(-hw / 2, -1); sh.lineTo(hw / 2, -1); sh.lineTo(hw / 2, hh); sh.lineTo(0, hh + 4.05); sh.lineTo(-hw / 2, hh); sh.lineTo(-hw / 2, -1);
+    var fg = new T.ShapeGeometry(sh), fuv = fg.attributes.uv, fp = fg.attributes.position; for (q = 0; q < fuv.count; q++) fuv.setXY(q, fp.getX(q) / 3.6, fp.getY(q) / 3.6);
+    var front = add(k, fg, lam(k, wallTone, { map: mt, side: T.DoubleSide }), fx, y0, z, true); front.rotation.y = -s * Math.PI / 2;
+    k.box(0.5, 0.3, hw + 0.2, s * (W + 2.5), hh * 0.5 + y0, z, [tone[0], tone[1] * 0.7, Math.min(0.95, tone[2] * 1.2)]);
+    // a porch with its own little roof, timber doors lit from inside, steps down to the pavement
+    k.box(2.4, 4.2, 4.2, s * (W + 1.3), 2.1 + y0, z, wallTone);
+    gable(k, 4.6, 1.3, 2.6, roofM, s * (W + 1.3), 4.2 + y0, z, true);
+    panel(k, doorsTex(T, 'hall'), 2.3, 3.1, s * (W + 0.08), 1.55 + y0, z, -s * Math.PI / 2);
+    for (var st = 0; st < 3; st++) k.box(0.5, 0.18, 3.6 - st * 0.3, s * (W - 0.2 - st * 0.45), 0.09 + st * 0.18 + y0, z, [30, 0.08, 0.5]);
+    // leaded glass: one tall window in the gable over the porch, one each side of it, four down each long wall
+    var at = archTex(T, ['amber', 'jewel', 'pale', 'amber'][Math.floor(R() * 4)]), ry = -s * Math.PI / 2;
+    panel(k, at, 1.6, 4.3, s * (W + 2.42), 7.5 + y0, z, ry, 0, true);
+    panel(k, at, 1.05, 3.1, s * (W + 2.42), 2.9 + y0, z - hw / 2 + 1.9, ry, 0, true); panel(k, at, 1.05, 3.1, s * (W + 2.42), 2.9 + y0, z + hw / 2 - 1.9, ry, 0, true);
+    var wins = [], piers = [];
+    for (i = 0; i < 4; i++) {
+      var wx = hx - s * (hd / 2) + s * (2.3 + i * 2.9);
+      wins.push([wx, 3.7 + y0, z + hw / 2 + 0.04, 1.25, 4.1, 1], [wx, 3.7 + y0, z - hw / 2 - 0.04, 1.25, 4.1, 1]);
+      piers.push([wx - s * 1.45, (hh - 1) / 2 + y0, z + hw / 2 + 0.22, 0.55, hh + 1, 0.5], [wx - s * 1.45, (hh - 1) / 2 + y0, z - hw / 2 - 0.22, 0.55, hh + 1, 0.5]);
+    }
+    inst(k, new T.PlaneGeometry(1, 1), new T.MeshBasicMaterial({ map: at, alphaTest: 0.5, side: T.DoubleSide }), wins);
+    boxes(k, lam(k, [tone[0], tone[1] * 0.8, tone[2] * 0.94]), piers, true);
     // a low wall along the pavement with a gap at the steps, a lamp at the gap
     k.box(0.4, 0.8, (hw - 4.4) / 2, s * (W + 0.2), 0.4 + y0, z + hw / 2 - (hw - 4.4) / 4, [tone[0], tone[1], tone[2] * 0.8]);
     k.box(0.4, 0.8, (hw - 4.4) / 2, s * (W + 0.2), 0.4 + y0, z - hw / 2 + (hw - 4.4) / 4, [tone[0], tone[1], tone[2] * 0.8]);
     k.box(0.12, 3, 0.12, s * (W - 0.2), 1.5 + y0, z + 2.6, [240, 0.08, 0.16]); k.glow(s * (W - 0.2), 3.1 + y0, z + 2.6, 0xffe2b0, 2.4);
-    k.glow(s * (W + 0.6), 2.8 + y0, z, 0xffd9a0, 4);
+    k.glow(s * (W + 0.3), 2.8 + y0, z, 0xffd9a0, 4);
     if (b) k.blade(b.n, 265, s, 4.8, z + p.half - 0.6, 4.4);
   };
 

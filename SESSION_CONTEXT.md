@@ -2,6 +2,6 @@
 
 **PIN:** S650 | Day 227 | Canon C115 | PROD @180 (stage 45; history: DEPLOY_HISTORY §PROD) | next live fire C116 Sun 2026-11-15
 
-**NEXT[engine-sheet]:** pipeline.110 → read the plan whole first; answer "where are we" from it in one line. WE ARE IN Task 9, mid WORKER template (set on the police chief). Left: a loader for a worker's memory and past decisions, then his approval. No other type until he says. Task 8 waits on tracker repair. civic.49 not approved. Push held.
+**NEXT[engine-sheet]:** pipeline.110 → Task 9, the worker template (set on the police chief): a loader for a worker's memory and past decisions, then his approval. Hold: no other template type until he says. Task 8 waits on tracker repair. civic.49 not approved. Push held.
 
 **NEXT[research-build]:** No push from here (es pushes). pipeline.111 → on es's order: newsroom inventory done (plan 2026-11-14); builder names the working reporter example; then the template into es's page §4 by request, each seat's fit, one test of the template. No test run before that. civic.47 → W1 to a pointer (es's civic.49 exists).

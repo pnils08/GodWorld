@@ -12,7 +12,7 @@ sources:
 pointers:
   - "[[../research/2026-11-13-boot-templates-test-runs]] — evidence, run by run; new runs are logged there, not here"
   - "[[../plans/2026-11-10-role-citizens-wake-as-themselves]] — pipeline.110 Task 9, the job that owns this page"
-  - "[[../plans/2026-10-31-civic-autonomy]] — civic.47 W1, built against §3 Worker"
+  - "[[../plans/2026-11-14-city-workers-answer-the-seats]] — civic.49, the ask step, built against §3 Worker"
   - "[[../plans/2026-11-10-stop-puppeting-the-newsroom]] — pipeline.111, owns the reporter harness (§4)"
   - "[[../index]] — registered here, same commit"
 ---
@@ -64,7 +64,7 @@ pointers:
 | 2 | Their page memory (their own past positions) | `officeWall.loadPositionWall` |
 | 3 | Their district and the city's nine | `civicSeat.districtBlock` |
 | 4 | The week's pack and the wake's contract | `buildCivicOfficeSlice.js` `buildPack`, `datawakeUserPrompt`; the Sunday packet |
-| 5 | (civic.47 W1, not built) who they can ask | the worker roster, §3 |
+| 5 | (civic.49, not built) who they can ask | the worker roster, §3 |
 
 - **Written file:** none needed on the evidence. Mayor: 20,959 characters of files, a 175-character sheet line and a 701-character sheet line + written part all filed the same move. Tran weekday ×9 and Rivers Sunday ×9: the same act and the same voice on all three; Rivers's own lines return word for word from her page.
 - **State:** tested (27 runs, three people, both wakes).
@@ -84,7 +84,7 @@ pointers:
 | 3 | The whole of the records that are theirs, every column | the worker's tab or row, §3.1 |
 | 4 | Their past decisions | their rows in `output/cron-civic/moves/` |
 | 5 | Anything they are on record as promising | `output/mara-directives/promises.jsonl` (none held for any worker today) |
-| 6 | The task: a question from a named seat, with the asker's seat and hoods | the ask step, civic.47 W1 |
+| 6 | The task: a question from a named seat, with the asker's seat and hoods | the ask step, civic.49 |
 
 - **Written file:** none. A written part, if the builder wants one, holds who they are and how they decide; nothing on how they talk on paper or what they produce.
 - **Evidence:** Run 3 — the chief on his weekday data, 3 of 3 answers with no figure outside what he was handed, and "I'm not going to invent a corridor split". Run 4 — handed the whole crime sheet he answers with the response times and clearance rates; 5 of 5 answers grounded; one wrong comparison. Run 1 — the fund director with no question answers one anyway in 5 of 9 runs.
@@ -216,7 +216,7 @@ Mara Vance (asker; her own memory and tools; civic.47 M1), Elias Varek's journal
 | Decisions | `output/cron-civic/moves/moves_c<N>.jsonl` |
 | Promises and whether they were kept | `output/mara-directives/promises.jsonl` (8 rows: the Mayor's and council's) |
 | A worker's diary | the worker's page (`work` docs); `Reflection_Intake` |
-| A question put to a worker and its answer | nowhere yet; civic.47 W1 records it on the worker's page and in the seat's record |
+| A question put to a worker and its answer | nowhere yet; civic.49 records it on the worker's page and in the seat's record |
 
 **Builder (2026-11-13):** "if we run into issues on how to track things said we can consider a workbook for the crons if useful". Not needed for the templates. It becomes worth weighing when the ask step is live: questions, answers and promises would then sit in four places with no single readable view. Raised here so it is not lost; no design.
 
@@ -228,12 +228,13 @@ Mara Vance (asker; her own memory and tools; civic.47 M1), Elias Varek's journal
 | Evidence and every test run | [[../research/2026-11-13-boot-templates-test-runs]] |
 | Raw outputs of the runs | `output/engine-sheet/2026-11-13-boot-three-way.md`, `…-run2.md`, `…-ask-dry-run.md`, `…-seat-asks-worker-dry-run.md` |
 | The job | [[../plans/2026-11-10-role-citizens-wake-as-themselves]] Task 9 (pipeline.110) |
-| The ask step | [[../plans/2026-10-31-civic-autonomy]] W1 (civic.47) |
+| The ask step | [[../plans/2026-11-14-city-workers-answer-the-seats]] (civic.49) |
 | Observations made on the way | `output/production_log_run_cycle_c115_gaps.md` G-EC52–G-EC56 |
 | On approval of a template | an ADR beside ADR-0014 (boot from the sheet, not a written persona) before the first wake switches |
 
 ## Changelog
 
+- 2026-11-14 (engine-sheet) — The ask step has its own row and plan: civic.49, [[../plans/2026-11-14-city-workers-answer-the-seats]]; pointers moved off civic.47 W1.
 - 2026-11-14 (engine-sheet) — Builder: every worker gets an agent on the worker template; the six ledger-role mismatches are being traced (read-only) so they can be corrected on his go.
 - 2026-11-13 (engine-sheet) — Roster re-based on `Civic_Office_Ledger` (39 positions, all on the citizen ledger; four role mismatches listed); §3.2 chaos-car routing added (today by place only; by kind proposed); thin worker = system finding (builder's words). Sent to agy for review.
 - 2026-11-13 (engine-sheet) — Created as a draft from Runs 1–4 on the builder's go ("yes go on 1"). Citizen and Council / Mayor tested; Worker tested on the police chief; Reporter on two; Gate untested.

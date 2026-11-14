@@ -10,7 +10,7 @@ Precedence: the builder's current request → this file → nested `AGENTS.md` �
 
 | Lane | Does | Writes to |
 |---|---|---|
-| codex | free model; advisory review of engine code and changes across several files; bounded coding when handed the job | review → `docs/for-claude-review/YYYY-MM-DD-codex-<topic>.md`; code → `scripts/**`, `output/**`, `docs/**` |
+| codex | free model; adversarial review of engine code and changes across several files; bounded coding when handed the job | review → `docs/for-claude-review/YYYY-MM-DD-codex-<topic>.md`; code → `scripts/**`, `output/**`, `docs/**` |
 | agy (Antigravity) | adversarial review of smaller changes — one file, docs, plans, rollout checks | review → `output/antigravity/YYYY-MM-DD-review-<topic>.md`, committed alone. No code changes. |
 | kimi, grok | when run, follow codex's row | same as codex |
 

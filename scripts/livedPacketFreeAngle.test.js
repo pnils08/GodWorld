@@ -65,6 +65,9 @@ assert.strictEqual(rows.known[0].src, 'TEST beat record');
 assert.ok(!rows.known.some(c => c.text === story.label || c.text === story.hookLine));   // the story line and hook are not handed over
 assert.deepStrictEqual(rows.exposure.candidates.map(c => c.pop), ['TEST-00001', 'TEST-00002']);   // the ledger fill-in stays out
 assert.ok(rows.output.schema.pass);
+assert.strictEqual(rows.actor.background, undefined);                // no background given, none carried
+const withBackground = v1.buildAnglePacket(Object.assign({}, base, { free: { rows: true, background: '  Who you are: a TEST engineer.  ' } }));
+assert.strictEqual(withBackground.actor.background, 'Who you are: a TEST engineer.');
 
 // free on the city's week: only the lines given, long ones whole
 const long = 'TEST week line ' + 'x'.repeat(900);

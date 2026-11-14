@@ -15,7 +15,8 @@
 #   free-week  nothing assigned: the seat sees the city's week and who it can call, picks or passes;
 #              the light writer prompt
 # The free variants exist only here: cron-desk-run.js reads GODWORLD_TEST_ANGLE only with the test
-# folder set. A boot-file swap, when wanted, comes from the caller's own preload (BOOT_SWAP).
+# folder set. A boot-file swap, when wanted, comes from the caller's own preload (BOOT_SWAP); the seat's
+# short written background for a free morning comes from the text file named in GODWORLD_TEST_BACKGROUND.
 set -euo pipefail
 
 ROOT=/root/GodWorld

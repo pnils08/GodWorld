@@ -1573,6 +1573,13 @@ async function refreshCitizenPages(cycle) {
   } catch (e) { log('[pages] pulse skipped: ' + e.message); }
 }
 
+// Test shell only: the seat's short written background for a nothing-assigned morning, from the text file the
+// caller names in GODWORLD_TEST_BACKGROUND. No file named, no background.
+function testBackground() {
+  const file = TEST_ANGLE && process.env.GODWORLD_TEST_BACKGROUND;
+  return file ? (fs.readFileSync(file, 'utf8').trim() || null) : null;
+}
+
 // Test shell only (free-week): the city's week as the daily show carries it — the world summary's sections with
 // the audit, approval and initiative blocks already stripped (notebooklmDailyNews.js) — one line a claim, a
 // table row spelled out against its header.
@@ -2156,7 +2163,8 @@ async function runAngle(assign) {
         cycle, desk, reporter: asker, story, approach,
         slice: typedSlice, lane,
         candidates: sourcingPool ? sourcingPool.candidates : [],
-        ...(TEST_ANGLE ? { free: TEST_ANGLE === 'free-week' ? { week: cityWeekLines(cycle) } : { rows: true } } : {}),
+        ...(TEST_ANGLE ? { free: Object.assign(TEST_ANGLE === 'free-week' ? { week: cityWeekLines(cycle) } : { rows: true },
+          { background: testBackground() }) } : {}),
       });
       ask = livedPacket.prompt(inputPacket);
       // pipeline.77 — the reward-loop group reads its own last grade before planning. A test-shell seat with

@@ -361,6 +361,7 @@ const AMBIENT_FACT = /^(?:Calendar|Current cycle):/i;
 // set (GODWORLD_TEST_ANGLE), so no scheduled wake can receive it.
 //   free.rows — the seat's own beat record, the same lines an assigned wake carries, with no line made the story
 //   free.week — [{ text, src }] lines of the city's week
+//   free.background — the seat's short written background (who they are, how they work, how they talk), when one is given
 function buildFreeAnglePacket({ cycle, desk, reporter, story, slice, candidates: modeCandidates, free }) {
   const known = [];
   const push = (text, src, max) => {
@@ -390,7 +391,8 @@ function buildFreeAnglePacket({ cycle, desk, reporter, story, slice, candidates:
     v: VERSION,
     wake: 'W1',
     actor: { id: reporter && reporter.popid || null, name: reporter && reporter.name || null,
-      role: 'desk reporter', desk },
+      role: 'desk reporter', desk,
+      ...(clean(free.background, 1500) ? { background: clean(free.background, 1500) } : {}) },
     task: { goal: 'Decide what, if anything, you want to write this cycle' },
     signal: { kind: 'own-pick', hood: null, score: null, src: 'the record of C' + clean(cycle) },
     exposure: { basis: ['own-pick'],

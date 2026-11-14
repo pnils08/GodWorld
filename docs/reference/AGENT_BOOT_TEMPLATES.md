@@ -96,9 +96,11 @@ pointers:
 
 **Who holds a position comes from `Civic_Office_Ledger`** (builder 2026-11-13). Read live 2026-11-13, C115: 39 positions, none vacant. Every holder is on `Simulation_Ledger` under the same POPID and name, Status Active, CIV flag yes, clock CIVIC; the four project-director rows added in October (STAFF-OARI, STAFF-HEALTHCTR, STAFF-STABFUND, STAFF-TRANSITHUB) are among them. `scripts/civic-office-map.json` holds the same 39.
 
+**Every worker gets an agent on this template** (builder 2026-11-14: "all the workers will get an agent template"). The roster is the 39 positions below less the Mayor and the nine council seats (§2); the 21 positions with no agent today are in scope.
+
 **A thin worker is a finding about the system, not about the template** (builder: "if ultimately a worker is thin it tells us the system needs teeth"). Where a position's records are few or absent, the tables below say so; the template is not bent to cover it.
 
-**Role on the citizen ledger against the office sheet** (the sheet line a wake builds reads `RoleType`; not edited, the builder's call):
+**Role on the citizen ledger against the office sheet** (the sheet line a wake builds reads `RoleType`; not edited; builder 2026-11-14: "send opus sub-agents out to answer this so we can correct it" — three read-only traces running: history of each value, what the record supports, readers and writers of the field):
 
 | Position | Office sheet | Citizen ledger `RoleType` |
 |---|---|---|
@@ -232,5 +234,6 @@ Mara Vance (asker; her own memory and tools; civic.47 M1), Elias Varek's journal
 
 ## Changelog
 
+- 2026-11-14 (engine-sheet) — Builder: every worker gets an agent on the worker template; the six ledger-role mismatches are being traced (read-only) so they can be corrected on his go.
 - 2026-11-13 (engine-sheet) — Roster re-based on `Civic_Office_Ledger` (39 positions, all on the citizen ledger; four role mismatches listed); §3.2 chaos-car routing added (today by place only; by kind proposed); thin worker = system finding (builder's words). Sent to agy for review.
 - 2026-11-13 (engine-sheet) — Created as a draft from Runs 1–4 on the builder's go ("yes go on 1"). Citizen and Council / Mayor tested; Worker tested on the police chief; Reporter on two; Gate untested.

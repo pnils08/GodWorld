@@ -101,6 +101,19 @@ Codex re-review of the fold and the later commits: [[../for-claude-review/2026-1
 
 **2026-11-13, the day's sources alone (builder: "just getting the daily sources added and the run generated off that, no instructions no canon search. We can keep those off for now but don't delete anything"; same message: "add world summary to the sources we currently provide"):** three switches under `dailyNews` in `config/notebooklm.json`, on unless `false`, all set `false`: `canonSearch`, `writtenBrief`, `audioFocus`; `worldSummary: true` sends the world summary's sections every day (this replaces the first-morning-only reading of 2026-11-12 02:30). No function removed. Detail: `docs/reference/NotebookLM.md` Change log, same date. Built 03:27 and left uncommitted until 2026-11-13 night; the Fri 11-13 08:00 run already used it (`3344f14c700d`: 27 sources — 7 article, 12 reflections, 8 world; 14,191 words; audio delivered, ops report delivered). Codex was briefed on this diff and reviewed only the memory half of the brief; no review of it exists.
 
+**Task 10 read of the Fri 11-13 sources-only show against its 27 sources (research-build, 2026-11-13).** Transcript `output/notebooklm/daily/c115/3344f14c700d/transcript.txt`, 15:57, 3,073 words. Nothing was said to NotebookLM before the audio.
+
+| Asked | Found |
+|---|---|
+| Seven articles, each by reporter | Four reporters named: Graye (St. Esperanza, 05:01–07:52), Richmond (Keane, 08:18–09:05), Leary (Hayward, 11:09–12:03), Rook (P Slayer's night, 14:12–14:40). Sorensen's Voices heard unnamed (Nguyen, Lanning). Pruitt's Lives named as "the lives page", one of its people heard (Varek). Finch's Oaks piece not heard |
+| Reflections by name | 35 citizens wrote in 12 neighborhood sources; 9 heard: Tran, Chen, Ashford, Okoro (their own lines quoted whole, 02:17–04:50), Montez, Varek, Hayward, Lanning, P Slayer. Not heard: the Mayor, Vega, Rivers, Corliss, Reaves, Stanley and 20 others |
+| World summary (8 sources, 5,100 of 14,191 words) | Used for the open (sentiment +0.13, housing pressure 10/10) and for sports the articles did not carry: Taveras's $32.1M and 1,170 credits, the pickleball event, Hayward's $4.5M against Reaves's $30M |
+| Said on air, in no source | A Cycle is "an administrative, quarterly tracking period"; Oakland "implemented this massive municipal data infrastructure"; decay momentum is "a predictive algorithm" fed by late rent, missed trash pickups and broken streetlights; the city database "thinks this massive community pillar doesn't exist" (the article: the parish is not in this week's rows; its registry row is quoted); Polito "can't partner with the center she can't see on her dashboard"; UNDOCKED credits "have real world financial weight" |
+| Said wrong | Taveras "at the top of the leaderboard" (fifth on points, first in credits; nothing paid out, "the pledge is real but the amount isn't"); Fruitvale's sentiment given as the city's +0.13 (Fruitvale +0.29); Varek's system called "Eric's" |
+| The one theme | The same as Tue 11-10 with nothing asked: "the official ledger of a city violently clashes with the lived reality", open to close; 52 transcript lines carry ledger / dashboard / metric / data / logged / measure. `row` / `ledger` / `record` appear 82 times in 14 of the 27 sources: the articles (Graye, Pruitt, Richmond, Rook), the officials' own pages (sentiment and decay figures quoted by Chen, Ashford, Tran), and the world summary's raw field names |
+
+Not checked: pronunciation; every figure in the sports minutes beyond those listed.
+
 ## Tasks
 
 | # | Task | Status |
@@ -116,7 +129,7 @@ Codex re-review of the fold and the later commits: [[../for-claude-review/2026-1
 | 7 | Read the Tue 2026-11-10 08:00 show: the five C115 articles of 11-09 evening each heard by reporter; reflections by name | done 2026-11-11 — point 12: five of five named, four told, Lives 2 of 15 people; reflections by name but 15 of 19 lines cut at 180 |
 | 8 | Citizens' words whole in the daily show | **rejected, not in the tree** (builder 2026-11-12 01:18: "Delete the code for daily, that's rejected"). The daily script is byte-for-byte what it was before 2026-11-11. The finding stands in point 12: the tab cell held 180 characters for interview answers and conversation lines; from 2026-11-12 the two writers store the whole text, so new rows reach the show whole without it |
 | 9 | Sources alone: canon search, written brief and audio focus switched off; world summary every day | done 2026-11-13 — live from the Fri 11-13 08:00 run |
-| 10 | Read the Fri 2026-11-13 08:00 show against its 27 sources | in progress |
+| 10 | Read the Fri 2026-11-13 08:00 show against its 27 sources | done 2026-11-13 — table above: 4 of 7 reporters named, 9 of 35 citizens heard, the ledger-against-life theme unprompted |
 
 ## Not in this job
 

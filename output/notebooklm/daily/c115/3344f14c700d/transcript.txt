@@ -1,0 +1,277 @@
+[00:00] Have you ever looked down at your fitness tracker, seen that you hit your 10,000 steps, got eight
+[00:04] hours of sleep, but you still feel just completely, totally exhausted?
+[00:08] Oh yeah, like every Tuesday.
+[00:10] Right. And there is this huge gap between what the data says on your little screen
+[00:17] and how life actually feels in your bones. And that friction, that weird gap is exactly what we
+[00:23] are exploring today.
+[00:24] It's kind of the defining tension of modern life, honestly. Like, we have these incredible
+[00:29] engines of measurement now, but we're starting to realize we understand very little of what
+[00:34] we're actually measuring.
+[00:35] Exactly. And to figure this out, we are doing a deep dive into a really fascinating stack
+[00:39] of source material today. It's a massive collection of civic records, local journalism,
+[00:45] some personal diary pages, all from Oakland.
+[00:48] Right, from their Cycle 115.
+[00:50] Yeah, Cycle 115, which just for context for you listening, it's an administrative,
+[00:55] quarterly tracking period. Oakland recently implemented this massive municipal data
+[01:01] infrastructure to try and quantify the literal heartbeat of the city.
+[01:05] It's ambitious.
+[01:06] It is. And since you are basically the third person in this conversation with us today,
+[01:11] I want to be clear about our mission here. We aren't just recapping local news. We're trying
+[01:16] to figure out what happens when the official ledger of a city violently clashes with the
+[01:21] lived reality of the people in it.
+[01:23] Because when you look at these sources, Oakland during Cycle 115 is a city that is just profoundly
+[01:29] obsessed with its own dashboard.
+[01:31] Oh, completely obsessed.
+[01:32] They're tracking variables that, you know, a decade ago would have been thought of as
+[01:36] totally unquantifiable.
+[01:38] It's almost overwhelming to read. Like, I was looking through the civic state reports,
+[01:42] and they track housing pressure in neighborhoods like Downtown and Uptown and Jack London.
+[01:47] And that pressure is high right now, right?
+[01:49] Oh, it's at a boiling 10 out of 10. They track migration patterns
+[01:53] households move around for a better fit. They even have a metric for city sentiment.
+[01:58] Which is wild.
+[01:59] An aggregated mood score.
+[02:01] Yeah, an aggregated mood score.
+[02:03] And it's currently sitting at a positive 0.13. So if you just look at the spreadsheet,
+[02:08] Oakland is humming along. The city council's getting things done. They just passed a massive
+[02:13] $2.5 million stabilization vote for the Grand Lake area.
+[02:17] Right. But when you actually read the quotes from the officials on the ground,
+[02:20] they're incredibly restless.
+[02:21] Yeah, they are.
+[02:22] Because they're hitting the limits of their own tools.
+[02:25] Like, consider council member Leonard Tran over in the Downtown District. He's looking
+[02:30] at a project called Bay Light.
+[02:31] Okay.
+[02:32] On his dashboard, the project file is technically marked closed.
+[02:36] It met its KPIs, the budget was spent, all the boxes were checked.
+[02:40] But Tran won't celebrate. He bluntly says, past and complete are not the same as working.
+[02:46] Oh, well. Past and complete? They're not the same as working. That's good.
+[02:51] Yeah.
+[02:51] He sees that the administrative reality has completely decoupled from what's actually
+[02:56] happening on the street.
+[02:57] And Nina Chen, the council member for Lake Merritt, she's dealing with the exact same headache
+[03:02] with that $2.5 million Grand Lake fund we mentioned.
+[03:04] Right, because she warned the council about it.
+[03:07] Exactly. She says relief without accountability is just an expenditure.
+[03:10] And she points to the East Lake neighborhood as her example. East Lake is struggling with
+[03:15] this metric the city calls decay momentum, which is sitting at a one.
+[03:20] And we should probably pause and explain decay momentum because it's, well, it's a slightly
+[03:25] dystopian piece of tech.
+[03:26] It really is.
+[03:27] It's a predictive algorithm. It pulls in all these variables like late commercial rent payments,
+[03:31] missed trash pickups, broken streetlights. And it calculates if a neighborhood is sliding
+[03:36] backward into blight.
+[03:38] Right.
+[03:38] So if the momentum is at one, the algorithm is saying, hey, this is a downward spiral.
+[03:43] And unsurprisingly, East Lake sentiment score is a negative 0.06.
+[03:49] Which is the exact same sentiment score sitting over in Rockridge.
+[03:53] But this is the paradox, right? According to council member Warren Ashford,
+[03:57] Rockridge's other metrics look amazing.
+[03:59] Oh yeah. The retail vitality is strong.
+[04:02] Yeah. Foot traffic is high. Dollars are flowing.
+[04:05] But the people are just as miserable as they are in East Lake.
+[04:09] And Ashford realizes, you know, I can audit the dollars, but I can't audit a mood.
+[04:14] I can't audit a mood.
+[04:15] It's so true.
+[04:16] It's so true.
+[04:17] It's like running a company where the quarterly profits look amazing on the spreadsheet,
+[04:20] but every single employee in the break room is just totally miserable.
+[04:24] You cannot budget your way out of a bad vibe.
+[04:27] You really can't.
+[04:28] And that's the heavy burden of leadership in this hyper data-driven world.
+[04:32] If you only manage the metrics, you lose the city.
+[04:35] Deputy Mayor Brenda O'Coro really embodies this.
+[04:38] She has a lot on her plate, too.
+[04:40] She does. She manages three separate portfolios, but she actively rejects these like paper-based
+[04:45] wins. She specifically said she won't pretend a press line fixes a broken sidewalk.
+[04:50] Right. But at the same time, a massive institution like a city government has to rely on data to
+[04:56] allocate resources. Like they don't have a choice. So what happens to the things that just don't get
+[05:01] logged? Well, that's where the source material makes this really natural pivot, because Elliot
+[05:06] Gray, a reporter for the Tribune, wrote this fantastic piece about the city's faith ledger.
+[05:11] The faith ledger?
+[05:12] Yeah, it's basically Oakland's attempt to quantify the social safety net that religious institutions
+[05:17] provide. And I mean, plenty of groups are playing the game.
+[05:21] Oh, totally. Like Mazjid Anur logged a senior's lunch they hosted for 50 people.
+[05:26] The Cathedral of the Living Word logged an after-school tutoring program for 250 kids.
+[05:31] The Bay Pure Land Buddhist Temple in Chinatown logged 40 people for job training.
+[05:35] Right. So they're feeding the machine. They do a good deed. They have the city a receipt.
+[05:40] But Gray focuses on St. Esperanza Parish of Fruitvale.
+[05:43] Which is huge. It's 119 years old.
+[05:45] Exactly. It's got a congregation of 800 people led by Father Ramon Solano. And historically,
+[05:52] they have run all these exact same programs. Holiday gatherings, tutoring, lunches.
+[05:57] But for cycle 115, they have zero rows logged.
+[06:01] Nothing.
+[06:01] The city database literally thinks this massive community pillar doesn't exist.
+[06:05] They are completely invisible on the official ledger.
+[06:08] But I have to say, I kind of want to push back on that. Like if you were Father Solano and you're
+[06:13] doing incredible work for Fruitvale, why wouldn't you just log it?
+[06:16] You mean strategically.
+[06:18] Yeah. And a city that runs on data where you've got people like Nina Chen and Warren Ashford
+[06:22] handing out millions based on dashboards. Being invisible seems like a huge mistake.
+[06:27] And the sources actually back this up.
+[06:29] Right. The Postpartum Oakland Network.
+[06:31] Yeah. Lucia Polito runs that group. And she's desperately looking for safe spaces to
+[06:35] host new mothers. She notes this beautiful potential for collaboration with say,
+[06:40] Esperanza. But they haven't connected because they aren't on the official record.
+[06:44] Lucia can't partner with the center. She can't see on her dashboard.
+[06:47] It's a real logistical cost for sure. And her frustration is totally valid.
+[06:51] But we really have to look at the psychological mechanics here.
+[06:55] What happens when you turn a community pillar into just another data point?
+[06:59] It changes things, you think?
+[07:00] It does. There's a Chinatown pastor, Kenji Tanaka, who gives a great counter perspective
+[07:05] in the sources. He calls with these places provide a network of care.
+[07:09] A network of care. I like that.
+[07:12] Right. Because when you start logging every bowl of soup, every single tutoring session,
+[07:16] just for a dashboard, it changes the act. It becomes a transaction to justify funding.
+[07:22] Oh, I see. Instead of a relationship.
+[07:24] Exactly. It stops being about mutual trust.
+[07:28] Father Solano has 119 years of institutional trust in Fruitvale. That kind of resilience,
+[07:35] it operates in the unmeasured margins. To the database, a Tuesday lunch is just a
+[07:41] row on a spreadsheet for a grant. But to the neighborhood,
+[07:44] it's what keeps people from falling apart. Precisely.
+[07:48] Doing the work for over a century doesn't require a daily receipt.
+[07:52] But okay, what happens when your entire existence, your literal livelihood,
+[07:57] is defined by a daily box score? Because if a church has a century to build unmeasured trust,
+[08:03] how does an athlete build off ledger value?
+[08:06] And sports is the most metric obsessed industry in the world.
+[08:10] But the sports journalism in our stack actually answers this perfectly.
+[08:13] Oakland's athletes are proving that structural impact outpaces statistical output.
+[08:18] Okay, let's talk about Vinnie Keene, because he is officially retiring from the A's.
+[08:23] This cycle. And his stats are just staggering.
+[08:26] Oh, unreal.
+[08:28] 17 seasons.
+[08:29] 17 seasons.
+[08:30] 436 home runs, a 287 average, 7 World Series titles.
+[08:36] And in his final 37 games, his slugging percentage was .701.
+[08:40] He's the ultimate logged asset.
+[08:43] Literally. But reporter Hal Richmond writes that the stats aren't the man.
+[08:48] Keene is staying right there in the Grand Lake neighborhood.
+[08:50] He took a modest $250,000 a year appearance deal.
+[08:54] Which is nothing in sports terms.
+[08:56] Right. And he's running the Firehouse 29 Baseball Academy in West Oakland.
+[09:01] His stats have stopped accumulating, but his structural impact is actually expanding.
+[09:05] And we see that expanding impact through this other player, Eric Tavares.
+[09:09] He just signed a $32.1 million deal, but he's supporting Keene's Academy
+[09:14] through a totally different ecosystem.
+[09:16] Undocked.
+[09:16] Yeah, undocked, which we should explain for people.
+[09:19] Yeah, Undocked is wild.
+[09:20] It's not just a video game. It's this decentralized virtual economy.
+[09:25] You mine resources, fight space battles, and you earn digital credits
+[09:29] that have real world financial weight.
+[09:31] Exactly. And Tavares has 1,170 credits on Undocked.
+[09:36] He's at the top of the leaderboard.
+[09:37] And he pledged all of those digital winnings directly to Keene's physical baseball academy.
+[09:42] That's so cool.
+[09:43] Right. Digital success converting into tangible funding for a neighborhood.
+[09:47] Keene built so much unmeasured goodwill that it's pulling resources from a virtual economy.
+[09:54] It's the perfect example of off-field weight, which naturally brings up Darian Davis.
+[09:59] He's a designated hitter for the A's, and he teamed up with Oakland Police Chief Rafael Montes.
+[10:04] The Pickleball Tournament.
+[10:05] Yes, they launched the Badging Paddle Pickleball Classic in East Oakland.
+[10:09] But the brilliant part isn't the sport. It's the psychology of how they set it up.
+[10:14] The random teams.
+[10:15] Exactly. They randomly mix kids, residents, and beat cops on the exact same side of the court.
+[10:21] You show up, and your partner might be the Chief of Police or a teenager from deep East Oakland.
+[10:26] It's such a smart inversion of normal community policing. Because think about how a city usually
+[10:32] measures law enforcement. It's all reactive data.
+[10:35] Right. Arrests, citations.
+[10:37] A 911 call is placed. An arrest happens. The system only logs a row when something
+[10:42] has already gone wrong. But Davis and Montes are engineering proactive interactions.
+[10:47] When nothing is wrong.
+[10:48] Yes. By randomizing the teams, they strip away the uniform, the badge, the power dynamic.
+[10:53] Everyone is just struggling to play this goofy sport together.
+[10:57] It builds trust that will never show up on a crime index dashboard.
+[11:00] But it totally alters how that cop or that resident interact the next time they cross paths.
+[11:05] They're optimizing for connection, not a metric.
+[11:08] Absolutely.
+[11:09] And speaking of optimizing for the situation instead of the stats sheet,
+[11:12] we have to talk about Harry Hayward. He's a power forward for the Okla Dokes.
+[11:16] The rookie.
+[11:17] Yeah. Second round pick making 4.5 million dollars, which sounds like a lot. But
+[11:21] on his team, Austin Reeves is making 30 million.
+[11:24] Right. Huge gap.
+[11:25] But the Oaks are 8 and 1. And Hayward just dropped a career high 19 points in a massive
+[11:31] 120 to 106 comeback against Philly.
+[11:33] And that was right after they beat Orlando, too.
+[11:36] Exactly.
+[11:36] But after the game, when they ask him about his role, his philosophy is just incredible.
+[11:41] He says, let the structure hold.
+[11:43] Let the structure hold. Simon Leary, a sportswriter in the sources,
+[11:46] calls it readiness without certainty. Hayward doesn't demand a fixed role.
+[11:51] He doesn't need a certain number of touches to feel secure. He just adapts.
+[11:55] Which mirrors Vinnie Keene perfectly. You just adapt to the load,
+[11:59] provide support and let your presence hold the structure of the community together.
+[12:03] Whether anyone is logging the assist or not.
+[12:05] I love that. So we've spent a lot of time on the macro level today,
+[12:10] the city dashboards, the community pillars, the civic heroes.
+[12:13] I want to bring this all the way down to the atomic level.
+[12:17] The individual Tuesday night.
+[12:18] Yes. How does this friction between data and reality actually feel for a regular person?
+[12:24] Well, the lives page from the Tribune really highlights this.
+[12:27] And ironically, it starts with Elias Verick. He's the founder of Civis Systems,
+[12:32] the guy who actually built the city's data instrument.
+[12:34] He built the dashboard.
+[12:35] He built it. And he admits to a reporter that it stopped telling him anything new.
+[12:40] He has all this data, but he's haunted by a signal in West Oakland that hasn't answered downstream.
+[12:46] He realizes his tool is completely failing to capture the texture of the city.
+[12:50] Because the texture of the city isn't a number.
+[12:52] The texture of the city is Brooklyn Nguyen. She's a community coordinator in Fruitvale.
+[12:58] And we get this look at her diary entry from 1 a.m.
+[13:02] And she's just exhausted.
+[13:04] Worn down by her job. Her neighborhood is shifting rapidly.
+[13:08] Her relationship with this guy, Martin, is getting really distant.
+[13:11] But at 1 a.m., she isn't writing about any of those huge issues.
+[13:14] She spends the whole entry fixating on the community center's dripping coffee machine.
+[13:19] And watering a desk plant.
+[13:21] Yes. It's so relatable. We all have that one tiny annoyance we focus on,
+[13:26] so we don't have to face the existential dread of our lives changing.
+[13:29] And the city's algorithm sitting there calculating Fruitvale's positive 0.13
+[13:34] sentiment score has absolutely no way to measure a woman at 1 a.m.
+[13:38] channeling all her anxiety into a desk plant.
+[13:41] None at all. And he can't measure a hazel landing either.
+[13:44] She's a student in the Laurel neighborhood.
+[13:46] She notes in the sources that her block is, quote, weird quiet.
+[13:50] Weird quiet.
+[13:51] Yeah. Foot traffic is down. People are whispering.
+[13:54] She's getting anxious.
+[13:56] Hoping it doesn't mean another store is closing.
+[13:58] Now, the dashboard just shows Laurel's retail vitality cooling off by a few points.
+[14:03] A minor fluctuation.
+[14:04] Right. But to Hazel, it's a visceral threat.
+[14:08] The physical environment is warning her before the ledger even updates.
+[14:12] Which brings us to Peace Layer, the gamer playing undocked.
+[14:15] Reporter Nia Rook wrote about their Wednesday night session.
+[14:17] Oh, this was fascinating.
+[14:18] Right. It was totally spontaneous.
+[14:20] Peace Layer logged on, mined exactly one iron ore,
+[14:24] got into two fights and made zero credits.
+[14:27] A complete net zero on the economic ledger.
+[14:29] But Rook points out that a net zero doesn't mean the night was a failure.
+[14:34] It was busy. It was a break from reality.
+[14:37] Life can be busy without giving us a neat verdict.
+[14:40] And that is the ultimate blind spot of Eric's whole system.
+[14:43] It can't value a net zero.
+[14:45] It can't quantify Brooklyn's dripping coffee machine or
+[14:48] Hazel's quiet sidewalk or Peace Layer's unproductive evening.
+[14:52] The ledger is just a map.
+[14:53] These unlocked people are the actual territory.
+[14:56] That is so true.
+[14:58] Which brings us back to you, the learner listening to this right now.
+[15:02] Whether you are running a business, managing a team,
+[15:05] or just trying to understand your own neighborhood, keep Oakland Cycle 115 in mind.
+[15:10] You do need the data.
+[15:12] You do. You need the audits, the decay momentum algorithms, the box scores.
+[15:17] But if you only look at the paper, you'll completely miss the actual city standing in front of you.
+[15:22] It really leaves you with a heavy question to mull over.
+[15:25] Like as our tech gets better at tracking every purchase, every movement,
+[15:30] what happens if we actually succeed?
+[15:32] What if we build a ledger that captures everything?
+[15:35] Right.
+[15:36] Do we finally achieve a perfect society?
+[15:38] Or do we accidentally erase the very unlockable grace that makes us human?
+[15:44] Wow. A very heavy thought to leave you with, but an important one.
+[15:48] Next time your fitness tracker tells you you had a great day,
+[15:51] maybe just listen to your tired bones instead.
+[15:54] Thank you so much for joining us on this deep dive into the source material.
+[15:57] We will catch you next time.

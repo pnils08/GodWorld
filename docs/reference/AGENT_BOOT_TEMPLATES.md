@@ -19,7 +19,7 @@ pointers:
 
 # Agent Boot Templates
 
-**Status: draft, proposed for the builder's approval.** Nothing in the crons has changed. Each template says what the runs support; the builder approves a template before any wake is switched to it.
+**Status: draft, HELD by review.** Nothing in the crons has changed. agy's adversarial review (2026-11-14, `output/antigravity/2026-11-13-review-agent-boot-templates.md`) returned HOLD with 13 findings; each was checked against the code and the run files and all 13 stand. They are folded below as corrections; §Review says what each changed and what still has to be run. No template here is ready for the builder's approval except where its State line says so.
 
 **Builder's words (2026-11-13):** "we want them to wake in their persona/identity, with access to their memory store … without being told what to say, having a template we know works is probably better than 40 different write ups" · "there can be different templates depending on the cron type" · "before we move too fast we have a set template for workers based on the police chief?" · "before we move to fine tune the workflows should we make sure our agent templates are set? … 'worker' , 'council/mayor', 'citizens' 'gates/rhea'" · "make sure proper documentation is occurring, if we need to retire current write up as legacy for the rewrites we can do that also". · "use the civic office ledger for the citizens who fit all these positions, we may need to check to make sure any new civic offices made it to the simualtion_ledger … make sure chaos cars are routed to the right desk when helpful, if ultimately a worker is thin it tells us the system needs teeth".
 
@@ -49,8 +49,8 @@ pointers:
 | 4 | One question | `selectProvocation` |
 
 - **Written file:** none.
-- **Evidence:** Run 1 — Vinnie Keane with and without the 300 characters lifted from his written file, 2 runs each, the same man.
-- **State:** tested; matches what runs today.
+- **Evidence:** Run 1 — Vinnie Keane with and without the 300 characters lifted from his written file, 2 runs each, the same man. One citizen, a Tier-1 player with a deep page; Kai Marston's daily wake seen once, uncompared.
+- **State:** supported on one high-record citizen; a low-record citizen and the other three authored voices are not run. Nothing written is what runs today.
 - **Differs today:** the line "You are an ordinary person, not a writer" / "You are not a writer" (G-EC53); one question that drops the whole temperament list into a sentence (G-EC54); a dry run that appends to the offered-neighbours log (G-EC55).
 - **Legacy on switch:** the four `citizen-voice-*` folders stay for the Discord conversations that load them (`lib/personaProvider.js`); the daily wake needs none of them.
 
@@ -66,10 +66,10 @@ pointers:
 | 4 | The week's pack and the wake's contract | `buildCivicOfficeSlice.js` `buildPack`, `datawakeUserPrompt`; the Sunday packet |
 | 5 | (civic.49, not built) who they can ask | the worker roster, §3 |
 
-- **Written file:** none needed on the evidence. Mayor: 20,959 characters of files, a 175-character sheet line and a 701-character sheet line + written part all filed the same move. Tran weekday ×9 and Rivers Sunday ×9: the same act and the same voice on all three; Rivers's own lines return word for word from her page.
-- **State:** tested (27 runs, three people, both wakes).
+- **Written file:** none needed on the evidence. Mayor: 20,959 characters of files, a 175-character sheet line and a 701-character sheet line + written part all filed the same move. Tran weekday ×9 and Rivers Sunday ×9 (the Mayor once per version): the same act and the same voice on all three; Rivers's own lines return word for word from her page.
+- **State:** tested: 21 runs (Mayor 3, Tran 9, Rivers 9), three people, both wakes, each a single call without the live retry and evidence-read loop. No project director's Sunday step has been run.
 - **Differs today:** IDENTITY + LENS + RULES load whole as the system turn (`readPersonaDir`); the shared council-seat LENS and RULES ride with every seat.
-- **Sheet line caveat:** two holders' `RoleType` disagrees with their office (§3.1): on the sheet line alone Vega wakes as "City Council President - D1" and Osei as "City Council Member".
+- **Sheet line caveat:** six holders' `RoleType` disagrees with their office (§3.1): on the sheet line alone Vega wakes as "City Council President - D1" and Osei as "City Council Member".
 - **Open, and not a boot matter:** what they are handed. "D3 East Oakland" (G-EC48) and the hand-closed tracker rows come back in every statement because they are in the pack.
 - **Legacy on switch:** `civic-office-mayor/`, `civic-office-council-d1…d9/`, `civic-office-council-seat/`, and the faction folders the seats fall back to (`civicSeat.personaDirFor`).
 
@@ -80,21 +80,21 @@ pointers:
 | Order | Part | Source |
 |---|---|---|
 | 1 | The sheet line + temperament | ledger + dials |
-| 2 | Their page memory: statements, past answers, work docs | page readback (`loadOwnPageReadback`), not only the six statements `loadPositionWall` returns |
+| 2 | Their page memory: statements, past answers, work docs | no one loader supplies this today: `loadOwnPageReadback` returns at most 3 private reflections of 320 characters and drops office statements (`lib/wakePerception.js:399-410`); statements come from `officeWall.loadPositionWall` (6, CIVIC docs) or the work wake's `loadOfficeWeek` |
 | 3 | The whole of the records that are theirs, every column | the worker's tab or row, §3.1 |
-| 4 | Their past decisions | their rows in `output/cron-civic/moves/` |
+| 4 | Their past decisions | their rows in `output/cron-civic/moves/`, looked up by POPID: the same person's moves are keyed three ways (`proj-*` registry key on weekdays, `civic-project-*` / `civic-office-*` on Sunday, `STAFF-*` on the office sheet) |
 | 5 | Anything they are on record as promising | `output/mara-directives/promises.jsonl` (none held for any worker today) |
 | 6 | The task: a question from a named seat, with the asker's seat and hoods | the ask step, civic.49 |
 
-- **Written file:** none. A written part, if the builder wants one, holds who they are and how they decide; nothing on how they talk on paper or what they produce.
-- **Evidence:** Run 3 — the chief on his weekday data, 3 of 3 answers with no figure outside what he was handed, and "I'm not going to invent a corridor split". Run 4 — handed the whole crime sheet he answers with the response times and clearance rates; 5 of 5 answers grounded; one wrong comparison. Run 1 — the fund director with no question answers one anyway in 5 of 9 runs.
-- **State:** tested on one worker; proposed.
-- **Differs today:** a worker wakes on a clock with four status lines and no question; the chief's pack lacks `ResponseTimeAvg` and `ClearanceRate` (G-EC56); no worker is handed its move history; no worker has a tool.
+- **Written file:** none. The review's point stands: every "how they decide" line tried was a behaviour instruction in the second person ("when you are blocked you escalate rather than wait"; "You write memos"), so a written part is not proposed for workers.
+- **Evidence:** Run 3 — the chief on his weekday data, 3 of 3 answers with no figure outside what he was handed, and "I'm not going to invent a corridor split". Run 4 — handed the whole crime sheet he answers with the response times and clearance rates; 5 of 5 answers grounded; one wrong comparison. Run 1 — the fund director with no question answers one anyway in 5 of 9 runs. One worker, one sheet, one asker: no director, and none of the thin workers, has been run.
+- **State:** shape seen on one worker (5 answers); not ready to approve until a director is run and parts 2 and 4 have a loader.
+- **Differs today:** a registry worker wakes on a clock (Tue / Thu) with four status lines and no question; every agented office outside the registry — the police chief, the Mayor, the council seats, Okoro — also wakes on Thursday as an auto office pack on a 700-character cut of its IDENTITY file (`cron-work-wake.js` `autoPackages`), so the chief has three boots today (weekday files, Sunday files, Thursday cut); the chief's weekday pack lacks `ResponseTimeAvg` and `ClearanceRate` (G-EC56) while the DA's crime node carries clearance and no response time; no worker is handed its move history; no worker has a tool; the EMS director's registry entry carries no first name.
 - **Legacy on switch:** the registry's inline `roleLine` / `voiceNotes` (`scripts/work-wake-packages.json`); the five `civic-project-*` / `civic-office-baylight-authority` folders once the Sunday project step stops loading them (37–46k each).
 
 ### 3.1 Roster: who holds which records
 
-**Who holds a position comes from `Civic_Office_Ledger`** (builder 2026-11-13). Read live 2026-11-13, C115: 39 positions, none vacant. Every holder is on `Simulation_Ledger` under the same POPID and name, Status Active, CIV flag yes, clock CIVIC; the four project-director rows added in October (STAFF-OARI, STAFF-HEALTHCTR, STAFF-STABFUND, STAFF-TRANSITHUB) are among them. `scripts/civic-office-map.json` holds the same 39.
+**Who holds a position comes from `Civic_Office_Ledger`** (builder 2026-11-13). Read live 2026-11-13, C115: 39 positions, none vacant. Every holder is on `Simulation_Ledger` under the same POPID and name, Status Active, CIV flag yes, clock CIVIC; the four project-director rows added in October (STAFF-OARI, STAFF-HEALTHCTR, STAFF-STABFUND, STAFF-TRANSITHUB) are among them. `scripts/civic-office-map.json` holds the same 39 people, but the four project directors sit there under `PROJ-*` ids and on the office sheet under `STAFF-*`: a join on id drops them; join on POPID.
 
 **Every worker gets an agent on this template** (builder 2026-11-14: "all the workers will get an agent template"). The roster is the 39 positions below less the Mayor and the nine council seats (§2); the 21 positions with no agent today are in scope.
 
@@ -108,6 +108,7 @@ pointers:
 | Ramon Vega (POP-00042) | City Council District 4 | City Council President - D1 |
 | Denise Carter, Janae Rivers, Elliott Crane | Districts 1, 5, 6 | City Council Member (no district) |
 | Rose Delgado (POP-00503) | City Council District 3 | City Council District - D3 |
+| Brenda Okoro (POP-00037) | Deputy Mayor (Community) | Deputy Mayor (Community Affairs) (wording only) |
 
 **Fits now** (an agent or pack exists and a tab holds their records):
 
@@ -125,9 +126,9 @@ pointers:
 
 | Worker | Records | Rows on disk |
 |---|---|---|
-| Clarissa Dane, district attorney | `Judicial_Ledger` | 0 |
-| Priya Narang, EMS director | `Hospital_Ledger` admissions, `Health_Cause_Queue` | 3, 3 |
-| Jonas Patel, medical examiner | `Hospital_Ledger` deaths; deaths in `LifeHistory_Log` | 3 |
+| Clarissa Dane, district attorney | `Judicial_Ledger`; the judicial side of `Care_Justice_Census` | 0; 288 census rows |
+| Priya Narang, EMS director | `Hospital_Ledger` admissions, `Health_Cause_Queue`; the hospital side of `Care_Justice_Census` | 3, 3; 1,008 census rows |
+| Jonas Patel, medical examiner | deaths: `Hospital_Ledger` holds 3 rows, all recovered, 0 deaths; `LifeHistory_Log` holds 1 death (C114), which his node never reads | 0 that reach him |
 
 **Named on the office map with a data domain, no agent** (candidates; who answers for which tab is the builder's call):
 
@@ -136,7 +137,7 @@ pointers:
 | City Manager (Aaron Whitfield) | city-operations-budget | `City_Treasury` (19) |
 | Deputy Mayor, Econ Dev (Marcus Osei) | economy-business | `Business_Ledger` (283), `Employment_Roster` (971) |
 | Fire Chief (Marcus Hollowell) | fire-incidents | none |
-| Public Defender, Deputy Public Defender, Court Liaison, Reentry Director, two ADAs | justice | `Judicial_Ledger` (0), `Care_Justice_Census` (1,296) |
+| Public Defender, Deputy Public Defender, Court Liaison, Reentry Director, two ADAs | justice | `Judicial_Ledger` (0); the 288 judicial rows of `Care_Justice_Census` |
 | Emergency Management Director (Shawna Delgado) | emergency-crisis | none |
 | Chief of Staff, Communications, Legal Counsel, Ombudsman, Police Review Chair, Internal Affairs, two Deputy Chiefs | staff and oversight | none of their own |
 
@@ -150,26 +151,28 @@ pointers:
 
 | Reader | Rule | Code |
 |---|---|---|
-| A council seat or the Mayor | by place only: the row's text has to name a hood on the seat's turf | `buildCivicOfficeSlice.js` `loadCycleEvents` / `eventHitsTurf` |
-| Reporters | the civic-domain, transit and accountability slices read the week's events | `buildCivicDomainSlice.js`, `buildTransitSlice.js`, `buildJaxSlice.js` |
+| A council seat | by place only: the row's text has to name a hood on the seat's turf; at most ten facts a pack | `buildCivicOfficeSlice.js` `loadCycleEvents` / `eventHitsTurf`, `pickTurn` |
+| The Mayor, the DA, the police chief (citywide roles) | none, unless the week's pulse picks one hood, then that hood's only | `buildCivicOfficeSlice.js:1410, 1423-1429` |
+| Reporters | the civic-domain, health, transit and accountability slices read the `## Chaos Events` section that `buildWorldSummary.js` `emitChaosCars` writes; the civic-domain and health readers keep only rows whose metric is Hospitalized | `buildWorldSummary.js`, `buildCivicDomainSlice.js`, `buildHealthSlice.js`, `buildTransitSlice.js`, `buildJaxSlice.js` |
 | Workers | none: the work wake has no event node | `cron-work-wake.js` `NODE_BUILDERS` |
 
 **C113–C115, off the world summaries:** 30 events fired. A chaos fact reached six council packs, all by place. The two cop cars reached the police chief as nothing of his; the two OARI vans did not reach the OARI director, nor the two ambulances the EMS director. The 12 events on a business and the 4 on a citizen name no hood and reached no office.
 
-**Proposed: route by kind to the worker whose job it is, beside the seat whose turf it is** (which worker answers for which kind is the builder's call):
+**Routing by kind needs the target as well.** The first table here sent each kind to one worker; checked against `utilities/chaosCarsConfig.js` it was wrong on seven of twelve, because a kind lands on more than one sort of target. What the config says each kind can hit (which worker answers for which is the builder's call):
 
-| Kind | Worker | Exists as an agent |
+| Kind | Lands on (config `scopes`) | Who that touches |
 |---|---|---|
-| Cop car | Police chief | yes |
-| OARI van | OARI director | yes |
-| Ambulance | EMS director | pack only |
-| Fire engine | Fire chief | no |
-| Building inspector | City Planning Director or City Manager | Mara runs as her own cron; the Manager has no agent |
-| Garbage truck, street sweeper, Power & Gas truck | City Manager | no |
-| Mail truck: a lawsuit or a contract landing on a business | Deputy Mayor (Econ Dev) | no |
-| BART train | no office holds transit; `Transit_Metrics` has no owner | — |
-| Container ship | Baylight director (the harbor) | yes |
-| Ice cream truck | the district seat, by place, as today | yes |
+| Cop car | citizen, neighborhood | police chief; the district seat |
+| OARI van | citizen, neighborhood | OARI director; the district seat |
+| Ambulance | citizen, neighborhood | EMS director; the district seat |
+| Fire engine | business, neighborhood | fire chief (no agent); the district seat |
+| Building inspector | business only | Deputy Mayor (Econ Dev) (no agent) |
+| Garbage truck, Power & Gas truck | neighborhood, business | City Manager (no agent); the district seat; Econ Dev for the business hits |
+| Street sweeper | neighborhood, citizen | City Manager; the district seat; its parking tickets write `City_Treasury` |
+| Mail truck | citizen, business | Econ Dev for a business letter (contract, lawsuit, audit, premium); a citizen's letter is that citizen's own |
+| BART train | neighborhood (transit-served), citizen | the district seat; its delays feed `Transit_Metrics`, which no office holds |
+| Container ship | the port: a citywide shock to business growth across sectors | Econ Dev and the City Manager first; the Baylight director for the harbor |
+| Ice cream truck | neighborhood | the district seat, by place, as today |
 
 ## 4. Reporter
 
@@ -182,19 +185,20 @@ pointers:
 | 3 | Their page memory | the writer's `memory_recall` tool |
 | 4 | The assignment and its quotes | the packet |
 
-- **Written file:** yes, short. This is the one type where a run shows the written part doing wanted work.
-- **Evidence:** Run 2 — Tanya Cruz ×3 each: today's folder and the sheet line alone both give long scene prose (305–607 words); with the written part, her dispatch 3 of 3 (265–327 words, one-line paragraphs, last names). Run 1 — Kai Marston: the written part shows at the edge (opens on a room). The assignment decides the story in every version.
-- **State:** tested on two reporters under the lightest harness; proposed. Not tested under the full harness.
+- **Written file:** undecided. The run meant to show it was not clean (next line).
+- **Evidence, corrected:** every version in Runs 1–2, the "lightest harness" included, still carried the reporter's hard-coded stance line and their bag file (`cron-desk-writer.js:1258-1282`; Tanya's reads "sideline dispatch … Short.", her bag "Short paragraphs"), the cascade rule, and the output contract. So the written part was never the only thing describing her voice. Prose word counts, intake footer left out — today's files, full harness: 470, 470, 375; today's files, lightest: 438, 290, 173; sheet line: 310, 235, 272; sheet line + written part: 189, 192, 156. The written-part runs are the shortest on average, but one lightest-harness run with no written part is shorter than two of them; "one-line paragraphs, last names, 3 of 3" was wrong (two of the three use full names and multi-sentence paragraphs). Kai Marston, one run a version: his written part says present tense and the piece is in past tense.
+- **State:** not established. Needs a rerun with the stance line and the bag out, so the written part stands alone; that harness is research-build's (pipeline.111). The voice files themselves prescribe openings, closings and paragraph rhythm, so a written part cut from them carries direction unless those lines are left behind.
 - **Differs today:** about 20 reporter folders hold a name, a beat and pointers to a voice file and a bag file; no wake loads any of the 30 voice files and the writer has no tool that opens a path. The harness and the package contract say how to open and close; the grade scores that (pipeline.111).
 - **Legacy on switch:** each reporter's IDENTITY / LENS / RULES; `docs/media/voices/` becomes the source the written parts are cut from, then legacy.
 
 ## 5. Gate
 
-**Who:** Rhea (the article gate), the city clerk (the Sunday close), the final arbiter.
+**Who:** Rhea (the article gate), the city clerk (the Sunday close), the civic write-set gate. The final arbiter is not an agent: `scripts/finalArbiter.js` computes its verdict in code and loads no folder.
 
 - **State:** not tested. No template proposed.
-- **What loads today:** Rhea's IDENTITY + RULES, about 30k (`cron-rhea-gate.js`); the clerk's folder whole (`readPersonaDir('city-clerk')`, 15.6k).
-- **The question a test has to answer:** a gate checks a draft against rules. Whether the verdict rides the rules, the persona or the packet it is handed is unmeasured. Test shape: the same held and passed drafts through today's files and through the rules alone; compare verdicts.
+- **What loads today:** Rhea's IDENTITY + RULES, about 30k (`cron-rhea-gate.js`), beside a contract judge that loads none of her files and a set of checks in code that can override the model; the clerk's folder whole (`readPersonaDir('city-clerk')`, 15.6k) while the same rules are already in its user turn; the civic write-set gate (`cron-civic-gate.js`) already runs on rules alone with a one-line neutral auditor and no folder.
+- **The question a test has to answer:** whether the verdict rides the rules, the persona or the packet. Comparing verdicts alone will not show it: for Rhea the code checks can decide the outcome whatever the model says, so the test has to read the model's own flags before the override; the clerk's input is the week's office filings, not drafts, and needs its own test set.
+
 
 ## 6. Outside the four
 
@@ -206,7 +210,7 @@ Mara Vance (asker; her own memory and tools; civic.47 M1), Elias Varek's journal
 
 - A folder retires when the last wake that loads it has switched, never before: the crons read these files live.
 - Retire = move to a dated archive folder outside `.claude/agents/` (a folder left inside it can still be read as an agent), repoint inbound links, one commit per type. Nothing is deleted.
-- Loaders to check before a move: `readPersonaDir` and `civicSeat.personaDirFor` (city hall), `agentIdentityNotes` (work wake), `loadVoiceTexture` (daily wake), `cron-desk-writer.js` AGENT_DIR (reporters), `civisJournal.js` `promptFor`, `lib/personaProvider.js` (Discord), `cron-rhea-gate.js`, and the Agent-tool definitions that share the folders.
+- Loaders to check before a move: `readPersonaDir` and `civicSeat.personaDirFor` (city hall), `agentIdentityNotes` (work wake), `loadVoiceTexture` (daily wake), `cron-desk-writer.js` AGENT_DIR / VOICE_DIR / SKILL_PATH (reporters and desks), `civisJournal.js` `promptFor`, `lib/personaProvider.js` (Discord), `cron-rhea-gate.js`, `refreshVoiceDispositionCache.js` (run in the weekly cycle chain; fails on an empty folder), `cron-civic-eval.js`, `modelFitRun.js`, `freezeModelFitInputs.js`, `runEngineAgent.js`, `djDirect.js`, `mdStalenessDetector.js`, `auditCanonDrift.js`, `buildPSlayerSlice.js` (pointer string), the skills that read the folders (`make-citizen-voice`, `interview`, `post-publish`, `write-edition`, `desk-slice`, `doc-audit`, `context-budget`), and the Agent-tool definitions that share the folders.
 
 ## 8. Where what was said is kept
 
@@ -232,8 +236,32 @@ Mara Vance (asker; her own memory and tools; civic.47 M1), Elias Varek's journal
 | Observations made on the way | `output/production_log_run_cycle_c115_gaps.md` G-EC52–G-EC56 |
 | On approval of a template | an ADR beside ADR-0014 (boot from the sheet, not a written persona) before the first wake switches |
 
+## Review
+
+| Review | Lane | Pointer | Result |
+|---|---|---|---|
+| The template concept | agy | `output/antigravity/2026-11-13-review-agent-boot-templates.md` (brief: `docs/for-claude-review/2026-11-13-es-brief-agy-agent-boot-templates.md`) | HOLD — 13 findings, all 13 verified against code and run files |
+
+| # | Finding | What changed here | Still owed |
+|---|---|---|---|
+| 1 | Reporter runs were not clean: stance line and bag rode in every version; word counts included the intake footer; two "3 of 3" style claims false | §4 evidence and state rewritten | a rerun with stance and bag out (rb) |
+| 2 | "Tested" said more than the runs: one citizen, 21 city-hall runs counted as 27, one worker | §1–§3 state lines | a low-record citizen; a director |
+| 3 | "How they decide" and voice-file lines are direction | §3 written part dropped; §4 notes the voice files prescribe form | the builder's call on any written part |
+| 4 | Ask harness dropped the chief's age in Run 4; "answers from the department's own data" steers; a real-world street name came back | recorded | the ask wording, in civic.49 |
+| 5 | The named memory loader drops office statements and caps at 3 × 320 characters | §3 part 2 | a loader for a worker's whole page, in civic.49 |
+| 6 | Three boots for the chief (Thursday auto pack); moves keyed three ways; no worker promise | §3 parts 4 and Differs today | reconcile the Thursday auto packs, in civic.49 |
+| 7 | A wrong comparison passes the number check and reaches a proposal; the seat spends an `answer` move | already in civic.49's weak points | a comparison check, or none: the builder's call |
+| 8 | The medical examiner has 0 deaths on his tab; his node never reads the one death on the life log | §3.1 | an engine finding (thin worker) |
+| 9 | Office ids differ between sheet and map; six role mismatches written as two; the census is three-quarters hospital | §3.1 | — |
+| 10 | Today's chaos routing: the emitter and the health slice missing; citywide roles get none by place | §3.2 today table | — |
+| 11 | The kind-to-worker table wrong on 7 of 12 against the config | §3.2 table rebuilt on the config's scopes | the builder's call on who answers |
+| 12 | Retirement list missed eight scripts and the skills | §7 | — |
+| 13 | The final arbiter is code, not an agent; the civic write-set gate was missing; the gate test shape too thin | §5 rewritten | the gate tests |
+
+
 ## Changelog
 
+- 2026-11-14 (engine-sheet) — agy review HOLD folded: 13 findings, all verified. City-hall runs are 21, not 27; reporter evidence was not clean (stance line and bag in every version; word counts and style claims corrected); the worker memory loader named was wrong; the chief also wakes Thursdays; chaos table rebuilt on the config; gate and retirement sections corrected.
 - 2026-11-14 (engine-sheet) — The ask step has its own row and plan: civic.49, [[../plans/2026-11-14-city-workers-answer-the-seats]]; pointers moved off civic.47 W1.
 - 2026-11-14 (engine-sheet) — Builder: every worker gets an agent on the worker template; the six ledger-role mismatches are being traced (read-only) so they can be corrected on his go.
 - 2026-11-13 (engine-sheet) — Roster re-based on `Civic_Office_Ledger` (39 positions, all on the citizen ledger; four role mismatches listed); §3.2 chaos-car routing added (today by place only; by kind proposed); thin worker = system finding (builder's words). Sent to agy for review.

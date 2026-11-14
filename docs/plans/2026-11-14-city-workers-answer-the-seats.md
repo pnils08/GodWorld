@@ -93,7 +93,7 @@ pointers:
 
 | Review | Lane | Pointer | Result |
 |---|---|---|---|
-| Template page (bears on Task 1 and design item 4) | agy | `output/antigravity/2026-11-13-review-agent-boot-templates.md` | pending |
+| Template page (bears on Task 1 and design items 4, 6, 7) | agy | `output/antigravity/2026-11-13-review-agent-boot-templates.md` | HOLD — findings 4–8, 10, 11 bear on this plan; all verified |
 
 ### Agreed
 
@@ -106,11 +106,18 @@ pointers:
 | # | Claim | Held by | Proof that settles it | Sources |
 |---|---|---|---|---|
 | P1 | The six first-cut workers answer from their records without invention | es | no-write runs on a director (only the chief has been run) | research note Runs 3–4 |
+| P2 | A worker's whole page (statements, past answers, work docs) can be loaded | agy F5 | `loadOwnPageReadback` drops office statements and caps at 3 × 320 characters (`lib/wakePerception.js:399-410`); a loader has to be written and shown on a director's page | review finding 5 |
+| P3 | The ask wording does not steer | agy F4 | rerun the ask without "He answers from the department's own data" and with the age on the sheet line | review finding 4 |
 
 ### New concepts
 
 | # | Concept | Origin | What it adds | Status |
 |---|---|---|---|---|
+| N1 | A check on comparisons (slowest, highest) in a worker's answer, not only on figures | agy F7 | catches the Run 4 "slowest in the city" slip before it reaches a proposal | held for builder |
+| N2 | Look up a worker's past decisions by POPID: moves are keyed `proj-*`, `civic-project-*` and `STAFF-*` for the same person | agy F6 | Task 4 would miss weekday moves on an id join | adopted into Task 4 |
+| N3 | Reconcile the Thursday auto office pack with the ask: the chief has three boots today | agy F6 | one person, one boot | adopted into Task 6 |
+| N4 | Route the life log's deaths and the care-and-justice census (1,008 hospital rows, 288 judicial) to the health and justice workers | agy F8, F9 | records for the thin workers | held for builder |
+| N5 | Chaos routing by kind and target scope, off the config | agy F11 | Task 10's table | adopted into Task 10 |
 
 ## Open questions
 
@@ -120,4 +127,5 @@ pointers:
 
 ## Changelog
 
+- 2026-11-14 (engine-sheet) — agy's review of the template page reconciled: HOLD; P2, P3 and N1–N5 added.
 - 2026-11-14 (engine-sheet) — Created. The design written 2026-11-13 as civic.47 §W1 moved here on the builder's "whatever suits the project best"; row civic.49 claimed. Not approved to build.

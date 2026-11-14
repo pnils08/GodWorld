@@ -508,8 +508,9 @@ var PLACES = {};
   };
 
   // ---------- the transit hub: a guideway over the street, a lit platform on it, a train that stops ----------
-  PLACES.station = function (k, p, b) {
-    var T = k.THREE, z = p.z, W = k.WALK, i, dy = 8.6;
+  // the line itself: a deck across the street on piers, lit underneath where it crosses. Trains are life-rail.js's.
+  function guideway(k, z, dy) {
+    var W = k.WALK;
     // the guideway deck and its piers
     k.box(360, 1.4, 6, 0, dy - 0.7, z, [220, 0.05, 0.36]);
     k.box(360, 0.6, 0.25, 0, dy + 0.3, z + 2.9, [220, 0.05, 0.46]); k.box(360, 0.6, 0.25, 0, dy + 0.3, z - 2.9, [220, 0.05, 0.46]);
@@ -518,6 +519,13 @@ var PLACES = {};
     boxes(k, lam(k, [220, 0.05, 0.42]), piers, true);
     // strip lights under the deck where it crosses the street
     k.box(14, 0.06, 0.4, 0, dy - 1.43, z + 2, [200, 0.3, 0.92], true); k.box(14, 0.06, 0.4, 0, dy - 1.43, z - 2, [200, 0.3, 0.92], true);
+  }
+  // a crossing with no station on the ledger: the line and nothing else (the engine's station list put it here)
+  PLACES.rail = function (k, p) { guideway(k, p.z, 8.6); k.railLine = { z: p.z, y: 8.6, calls: false }; };
+
+  PLACES.station = function (k, p, b) {
+    var T = k.THREE, z = p.z, W = k.WALK, i, dy = 8.6;
+    guideway(k, z, dy); k.railLine = { z: z, y: dy, calls: true };
     // the station: platforms either side of the track, glass screens, an arched canopy with light under it
     var px0 = 0; // the platform sits right over the street, so a waiting train is framed by it
     k.box(44, 0.5, 2.4, px0, dy + 0.25, z + 4.1, [220, 0.06, 0.55]); k.box(44, 0.5, 2.4, px0, dy + 0.25, z - 4.1, [220, 0.06, 0.55]);
@@ -535,6 +543,7 @@ var PLACES = {};
     [-1, 1].forEach(function (s) { k.walled(3.4, dy + 2, 3.4, s * (W + 2), z + 4.4, 'glass', 0.9, [200, 0.2, 0.6], 0); k.glow(s * (W + 0.2), 2.2, z + 4.4, 0xdff1ff, 2.4); });
     // the name on the deck's face, seen as you come up the street
     if (b) { plate(k, b.n, 190, 6.4, 0, dy - 0.9, z + 3.06, 0); plate(k, b.n, 190, 6.4, 0, dy - 0.9, z - 3.06, Math.PI); }
+    if (typeof LIFE !== 'undefined' && typeof LIFE.rail === 'function') return; // the rail file runs the trains
     // the train: four cars, lit windows, a headlight each end
     var train = new T.Group(), body = lam(k, [210, 0.08, 0.66]), winM = bas(k, [45, 0.7, 0.82]), headM = bas(k, [55, 0.3, 0.97]);
     for (i = 0; i < 4; i++) {

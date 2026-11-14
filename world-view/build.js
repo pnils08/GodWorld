@@ -189,6 +189,14 @@ function placeType(b) {
   if (b.n === 'Port of Oakland') return ['port', 0];
   return null;
 }
+// ---------- the rail line: which streets have a station, by the engine's own list ----------
+// utilities/ensureTransitMetrics.js OAKLAND_BART_STATIONS gives each station's neighborhood (the list the chaos
+// train's 'transit-served' filter reads). A street on it gets the line across it. Where the ledger has the station
+// as a business (a Transit Hub), that place is the line and trains call there; elsewhere layout() holds ground for
+// a bare crossing and trains run through. A waterside street gets none: the line would have to bridge the water.
+const RAIL = {};
+try { new Function(fs.readFileSync(path.join(__dirname, '..', 'utilities', 'ensureTransitMetrics.js'), 'utf8') + '\nreturn OAKLAND_BART_STATIONS;')().forEach(s => { (RAIL[s.neighborhood] = RAIL[s.neighborhood] || []).push(s.station); }); }
+catch (e) { console.warn('world-view: station list not loaded (' + e.message + '); no rail lines drawn'); }
 const r2 = x => Math.round(x * 100) / 100;
 function layout(H) {
   const ST = Object.assign({}, DEF, STYLE[H.name]);
@@ -197,13 +205,14 @@ function layout(H) {
   const sideStyle = s => (s < 0 && ST.left ? Object.assign({}, ST, ST.left) : ST);
   const places = [], ordinary = [];
   H.biz.forEach((b, i) => { const t = placeType(b); if (t) places.push({ i, type: t[0], half: t[1], end: !!t[2] }); else ordinary.push(i); });
+  if (RAIL[H.name] && !water && !places.some(p => p.type === 'station')) places.push({ type: 'rail', half: 7, end: false }); // a crossing with no business of its own
   const onStreet = places.filter(p => p.half > 0);
   const need = onStreet.reduce((a, p) => a + p.half * 2 + 6, 0);
   const L = Math.max(110, H.people.length * 2.2 + 30, (ordinary.length * 15 + need) / sides.length + 40);
   // places take their ground first, spread down the street, alternating sides
   onStreet.forEach((p, k) => {
     p.z = r2(-L * (k + 1) / (onStreet.length + 1));
-    p.s = p.type === 'station' ? 0 : p.type === 'coliseum' && !water ? -1 : sides[k % sides.length];
+    p.s = p.type === 'station' || p.type === 'rail' ? 0 : p.type === 'coliseum' && !water ? -1 : sides[k % sides.length];
   });
   const held = (s, a, b) => onStreet.some(p => (p.s === 0 || p.s === s) && a < p.z + p.half && b > p.z - p.half);
   const parcels = [];
@@ -230,7 +239,7 @@ function layout(H) {
   });
   return { L: r2(L), water, slope: water ? 0 : ST.slope, parcels: out, places: places.map(p => ({ b: p.i, type: p.type, half: p.half, s: p.s, z: p.z, end: p.end })) };
 }
-hoods.forEach(h => { h.lay = layout(h); });
+hoods.forEach(h => { h.lay = layout(h); if (RAIL[h.name]) h.rail = RAIL[h.name]; });
 hoods.forEach(h => h.people.forEach(p => { if (p.runs) { const i = h.biz.findIndex(x => p.runs.some(rn => rn.id === x.id)); if (i >= 0) p.at = i; p.runs = p.runs.map(rn => ({ n: rn.n, hood: rn.hood })); } }));
 
 // ---------- chaos cars: the week's Chaos_Cars rows, as the world summary printed them ----------
@@ -264,7 +273,14 @@ hoods.forEach(h => { h.chaos = []; });
   if (r.scope === 'neighborhood') { ev.to = r.id; h = hoods.find(x => x.name === r.id); }
   else if (r.scope === 'business') { const row = bizById.get(r.id); if (row) { ev.to = row.Name; h = hoods.find(x => x.name === row.Neighborhood); const bi = h ? h.biz.findIndex(x => x.id === r.id) : -1; if (bi >= 0) ev.b = bi; } }
   else if (r.scope === 'citizen') { ev.to = nameOf(r.id) || r.id; h = hoods.find(x => x.people.some(p => p.id === r.id)); if (h) ev.p = r.id; else { const L = ledger.get(r.id); h = L && hoods.find(x => x.name === String(L.Neighborhood || '').trim()); } }
+  else if (r.scope === 'port') { ev.to = r.id; h = hoods.find(x => x.biz.some(b => b.n === r.id)); const pi = h ? h.biz.findIndex(b => b.n === r.id) : -1; if (pi >= 0) ev.b = pi; }
   else ev.to = r.id;
+  if (r.v === 'bart_train') {
+    // a train is on a line: the citizen's home street if the line crosses it (the engine draws them from the served hoods), else nowhere
+    const lined = x => x && x.lay.places.some(p => p.type === 'station' || p.type === 'rail');
+    if (r.scope === 'citizen') { const L = ledger.get(r.id), home = L && hoods.find(x => x.name === String(L.Neighborhood || '').trim()); if (lined(home)) { h = home; if (!home.people.some(p => p.id === r.id)) delete ev.p; else ev.p = r.id; } }
+    if (!lined(h)) h = null;
+  }
   if (h) h.chaos.push(ev); else chaosElsewhere.push(ev);
 });
 // CHAOS_TEST=<street> puts one of every road vehicle on that street to look at the shapes. Never for a published build.
@@ -289,12 +305,12 @@ const data = {
 hoods.forEach(h => { data.style[h.name] = STYLE[h.name]; });
 
 // Required as a module (a check script, a test): the data and the pieces that made it, nothing written.
-module.exports = { data, hoods, canonProblems: missing, layout, placeType, kindOf, band, SIM_YEAR, CYCLE, STYLE };
+module.exports = { data, hoods, canonProblems: missing, layout, placeType, kindOf, band, SIM_YEAR, CYCLE, STYLE, chaosRows, RAIL };
 if (require.main === module) {
 const tpl = fs.readFileSync(path.join(__dirname, 'template.html'), 'utf8');
 const places = fs.readFileSync(path.join(__dirname, 'places.js'), 'utf8');
 if (!tpl.includes('/*__PLACES__*/')) { console.error('template has no places marker'); process.exit(1); }
-const LIFE_FILES = ['life-traffic.js', 'life-nature.js', 'life-water.js', 'life-street.js', 'life-people.js', 'sound.js'];
+const LIFE_FILES = ['life-traffic.js', 'life-rail.js', 'life-nature.js', 'life-water.js', 'life-street.js', 'life-people.js', 'sound.js'];
 // NOLIFE=1 builds without the ambient modules; LIFE=life-water.js,sound.js builds with only those (to publish while another is mid-edit)
 // COMMITTED=life-water.js takes those files as last committed, not as they sit on disk (one may be mid-edit by a helper).
 const committed = (process.env.COMMITTED || '').split(',').filter(Boolean);
@@ -310,5 +326,6 @@ const everyone = hoods.reduce((a, h) => a.concat(h.people), []);
 console.log('sex known', everyone.filter(p => p.g).length, 'bands', JSON.stringify(everyone.reduce((a, p) => { a[p.ab] = (a[p.ab] || 0) + 1; return a; }, {})), 'with something said', everyone.filter(p => p.said).length, 'sim year', SIM_YEAR);
 console.log('recorded but not shown:', notShown.length, '| businesses with no street:', unplacedBiz.length, unplacedBiz.map(x => x.n + ' (' + x.hood + ')').join('; '));
 console.log(hoods.map(h => h.name + ': ' + h.lay.places.map(p => p.type).join(',')).filter(s => !/: $/.test(s)).join('\n'));
+console.log('rail line on:', hoods.filter(h => h.lay.places.some(p => p.type === 'station' || p.type === 'rail')).map(h => h.name).join(', '), '| stations by the engine with no line drawn:', Object.keys(RAIL).filter(n => { const h = hoods.find(x => x.name === n); return !h || !h.lay.places.some(p => p.type === 'station' || p.type === 'rail'); }).join(', ') || 'none');
 console.log('chaos cars:', chaosRead == null ? 'no world summary for C' + CYCLE + ' (none drawn)' : chaosRead.length + ' this week — ' + hoods.filter(h => h.chaos.length).map(h => h.name + ': ' + h.chaos.map(c => c.n + ' (' + c.o + (c.to && c.to !== h.name ? ' → ' + c.to : '') + ')').join(', ')).join('; ') + (chaosElsewhere.length ? '; not on a street: ' + chaosElsewhere.map(c => c.n + ' → ' + c.to).join(', ') : ''));
 }

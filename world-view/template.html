@@ -775,7 +775,7 @@ function build(idx) {
   if (has('pergola') && water) PLACES.pergola(kit, { s: water, z: -L * 0.5 }, { n: (DATA.landmarks || {}).pergola });
 
   // parked cars
-  for (var cz = 4; cz > -L; cz -= 6.2 + r() * 2.5) [-1, 1].forEach(function (s) { if (r() < 0.34 && !LAY.places.some(function (p) { return p.type === 'station' && Math.abs(p.z - cz) < 5; })) carSpots.push([s, cz]); });
+  for (var cz = 4; cz > -L; cz -= 6.2 + r() * 2.5) [-1, 1].forEach(function (s) { if (r() < 0.34 && !LAY.places.some(function (p) { return (p.type === 'station' || p.type === 'rail') && Math.abs(p.z - cz) < 5; })) carSpots.push([s, cz]); });
   if (carSpots.length && !(typeof LIFE.traffic === 'function' && LIFE.traffic.parks)) {
     var carB = new THREE.InstancedMesh(new THREE.BoxGeometry(1.75, 0.62, 4.1).translate(0, 0.6, 0), new THREE.MeshLambertMaterial({ color: 0xffffff }), carSpots.length);
     var carT = new THREE.InstancedMesh(new THREE.BoxGeometry(1.5, 0.52, 2.1).translate(0, 1.15, -0.1), flat([220, 0.2, 0.1]), carSpots.length);
@@ -800,7 +800,7 @@ function build(idx) {
   }
   root.add(lamps); ground.add(pools);
   // ambient life: traffic, birds and weather-borne things, boats, street detail
-  ['traffic', 'street'].forEach(function (k) { if (typeof LIFE[k] === 'function') LIFE[k](kit); });
+  ['traffic', 'rail', 'street'].forEach(function (k) { if (typeof LIFE[k] === 'function') LIFE[k](kit); });
   if (LIFE.nature && LIFE.nature.ambient) LIFE.nature.ambient(kit);
   if (LIFE.water && LIFE.water.life) LIFE.water.life(kit);
   // every small light in the place, grouped by size
@@ -990,7 +990,9 @@ function step(dt) {
       // beside a chaos car, a little ahead of it, looking back at it as it comes
       var rc = bv.ride, rs = rc.side || 1, rwide = window.innerWidth > 720;
       if (rc.on) { bv.z = rc.z; bv.rx = rc.x; bv.ry = rc.y; }
-      if (bv.rx != null) { W.x = bv.rx - rs * 3.6; W.z = bv.z - rs * (5.5 + bv.ry * 1.3); camera.position.set(W.x + Math.sin(t * 0.3) * 0.15, 1.9 + bv.ry * 0.25, W.z); camera.lookAt(bv.rx - (rwide ? rs * 2.2 : 0), bv.ry * 0.45, bv.z); }
+      if (rc.cam) { // a train overhead or a ship out on the water: stand where the one drawing it says, and look at it
+        W.x = rc.cam[0]; W.z = rc.cam[2]; camera.position.set(W.x + Math.sin(t * 0.3) * 0.15, rc.cam[1], W.z); camera.lookAt(bv.rx != null ? bv.rx : 0, (rc.cy != null ? rc.cy : bv.ry) + (rwide ? 0 : -2), bv.z);
+      } else if (bv.rx != null) { W.x = bv.rx - rs * 3.6; W.z = bv.z - rs * (5.5 + bv.ry * 1.3); camera.position.set(W.x + Math.sin(t * 0.3) * 0.15, 1.9 + bv.ry * 0.25, W.z); camera.lookAt(bv.rx - (rwide ? rs * 2.2 : 0), bv.ry * 0.45, bv.z); }
     } else {
     W.x = bv.cx + Math.sin(t * 0.2) * 0.4; W.z = bv.cz + Math.cos(t * 0.17) * 0.5;
     camera.position.set(W.x, bv.cy + by, W.z); camera.lookAt(bv.lx, bv.ly + by, bv.lz);
@@ -1133,7 +1135,7 @@ function pick(px, py) {
     if (sc < bestScore) { bestScore = sc; best = obj; }
   }
   W.people.forEach(function (p) { test(p.x, 1.0 * p.sc + W.yAt(p.z), p.z, 1.0, 60, 26, 0.8, { p: p }); });
-  (W.H.chaos || []).forEach(function (ev) { if (ev.on) test(ev.x, ev.y * 0.5, ev.z, 2.6, 90, 34, 0.85, { c: ev }); });
+  (W.H.chaos || []).forEach(function (ev) { if (ev.on) test(ev.x, ev.cy != null ? ev.cy : ev.y * 0.5, ev.z, ev.rad || 2.6, (ev.far || 80) + 10, 34, 0.85, { c: ev }); });
   W.H.lay.parcels.forEach(function (q) { if (q.b == null) return; var y = W.yAt(q.z); test(q.s * WALK, 1.6 + y, q.z, q.w * 0.45, 80, 30, 1, { b: q.b }); test(q.s * (WALK - 1.7), 4.5 + y, q.z + q.w / 2 - 0.4, 1.9, 80, 26, 1, { b: q.b }); });
   W.H.lay.places.forEach(function (q) {
     if (q.b == null) return;
@@ -1184,7 +1186,7 @@ function startBiz(bi) {
 var CTAGS = [], CV = new THREE.Vector3();
 function chaosWords(ev) { return String(ev.o || '').replace(/_/g, ' '); }
 function placeChaos() {
-  var list = (world && world.H.chaos) || [], w = window.innerWidth, h = window.innerHeight, floor = $('top').getBoundingClientRect().bottom - 20, i;
+  var list = (world && world.H.chaos) || [], w = window.innerWidth, h = window.innerHeight, floor = $('top').getBoundingClientRect().bottom - 20, i, put = [];
   for (i = 0; i < Math.max(list.length, CTAGS.length); i++) {
     var ev = list[i], el = CTAGS[i];
     if (!ev) { if (el) el.style.opacity = 0; continue; }
@@ -1194,7 +1196,8 @@ function placeChaos() {
     if (show) {
       CV.set(ev.x, ev.y + 0.7, ev.z).project(camera);
       var dx = ev.x - camera.position.x, dz = ev.z - camera.position.z, dist = Math.sqrt(dx * dx + dz * dz), x = (CV.x * 0.5 + 0.5) * w, y = (-CV.y * 0.5 + 0.5) * h, bw = el.offsetWidth, bh = el.offsetHeight;
-      if (CV.z < 1 && dist < 80 && x > -40 && x < w + 40) { o = Math.min(1, (80 - dist) / 14); el.style.transform = 'translate(' + Math.max(8, Math.min(w - bw - 8, x - bw / 2)).toFixed(1) + 'px,' + Math.max(floor, y - bh - 6).toFixed(1) + 'px)'; }
+      var far = ev.far || 80;
+      if (CV.z < 1 && dist < far && x > -40 && x < w + 40) { o = Math.min(1, (far - dist) / 14); var lx = Math.max(8, Math.min(w - bw - 8, x - bw / 2)), ly = Math.max(floor, y - bh - 6); put.forEach(function (q) { if (lx < q[0] + q[2] + 4 && lx + bw + 4 > q[0] && ly < q[1] + q[3] + 4 && ly + bh + 4 > q[1]) ly = q[1] - bh - 5; }); put.push([lx, ly, bw, bh]); el.style.transform = 'translate(' + lx.toFixed(1) + 'px,' + ly.toFixed(1) + 'px)'; }
     }
     el.style.opacity = o.toFixed(2);
   }

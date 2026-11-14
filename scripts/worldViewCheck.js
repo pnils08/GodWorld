@@ -38,6 +38,8 @@ function readSources(root) {
     ledger: readRows(path.join(root, 'output/simulation_ledger_snapshot.jsonl')),
     canon: fs.readFileSync(path.join(root, 'docs/canon/INSTITUTIONS.md'), 'utf8'),
     style: require(path.join(root, 'world-view/hoods.js')),
+    // the engine's own list of stations by neighborhood (the page draws a rail line where it names one)
+    stations: (() => { const out = {}; try { new Function(fs.readFileSync(path.join(root, 'utilities/ensureTransitMetrics.js'), 'utf8') + '\nreturn OAKLAND_BART_STATIONS;')().forEach(s => { (out[s.neighborhood] = out[s.neighborhood] || []).push(s.station); }); } catch (e) { return null; } return out; })(),
     // the cycle's world summary, where the Chaos_Cars rows are printed (absent before the summary is built)
     worldSummary: (() => { try { return fs.readFileSync(path.join(root, 'output', `world_summary_c${readJson(path.join(beats, 'meta.json')).cycle}.md`), 'utf8'); } catch (e) { return null; } })(),
   };
@@ -141,6 +143,10 @@ function checkWorldView(build, sources, engine, secondBuild, reports = []) {
         else parcelIds.add(p.id);
       }
       if (p.b == null && parcel) continue; // unoccupied scenery is legitimate
+      if (!parcel && p.type === 'rail' && p.b == null) { // a bare rail crossing: no business of its own, there because the engine lists a station for this neighborhood
+        if (sources.stations && !sources.stations[h.name]) fail('rail', h.name, 'rail crossing on a street the engine lists no station for');
+        continue;
+      }
       if (!Number.isInteger(p.b) || p.b < 0 || !biz[p.b]?.id) { fail('placement', h.name, 'invalid business index'); continue; }
       const id = biz[p.b].id;
       if (assigned.has(id)) fail('duplicate', id, 'business assigned to more than one parcel/place');
@@ -260,6 +266,8 @@ function checkWorldView(build, sources, engine, secondBuild, reports = []) {
   for (const b of businesses.values()) {
     if (!assigned.has(b.BIZ_ID) && !knownUnplaced.has(b.BIZ_ID)) fail('unplaced', b.BIZ_ID, `${b.Name} (${b.Neighborhood}) has no parcel or place and is not listed as known-unplaced`);
   }
+  // the rail line: a street says it has stations exactly when the engine's list does
+  if (sources.stations) for (const h of hoods) if (!equal(h.rail || [], sources.stations[h.name] || [])) fail('rail', h.name, 'stations differ from the engine list (OAKLAND_BART_STATIONS)');
   // chaos cars: every one on a street is a row of the world summary's Chaos Events table, on the street that row
   // points to, with the summary's own seed line; every row of the table is on a street or listed as elsewhere
   if (sources.worldSummary !== undefined) {
@@ -275,6 +283,8 @@ function checkWorldView(build, sources, engine, secondBuild, reports = []) {
       if (ev.seed && !sources.worldSummary.includes(ev.seed)) fail('chaos', h.name, `seed line is not the summary's: ${JSON.stringify(ev.seed)}`);
       if (ev.scope === 'neighborhood' && ev.id !== h.name) fail('chaos', h.name, `neighborhood row for ${ev.id} drawn here`);
       if (ev.scope === 'business' && businesses.get(ev.id)?.Neighborhood !== h.name) fail('chaos', h.name, `business ${ev.id} is not on this street`);
+      if (ev.scope === 'port' && !arr(h.biz, `${h.name}.biz`).some(b => b.n === ev.id)) fail('chaos', h.name, `${ev.id} is not on this street`);
+      if (ev.v === 'bart_train' && !arr(h.lay?.places || [], `${h.name}.places`).some(p => p.type === 'station' || p.type === 'rail')) fail('chaos', h.name, 'a train on a street with no line');
       if (ev.scope === 'citizen' && !arr(h.people, `${h.name}.people`).some(p => p.id === ev.id) && String(ledger.get(ev.id)?.Neighborhood || '').trim() !== h.name) fail('chaos', h.name, `citizen ${ev.id} is neither shown nor living on this street`);
     }
     for (const ev of arr(build.data?.chaos?.elsewhere || [], 'data.chaos.elsewhere')) { const key = `${ev?.v}|${ev?.o}|${ev?.scope} ${ev?.id}`, at = pool.indexOf(key); if (at < 0) fail('chaos', 'elsewhere', `no Chaos Events row for ${key}`); else pool.splice(at, 1); }

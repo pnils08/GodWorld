@@ -626,6 +626,46 @@ LIFE.water = (function () {
     if (lake) S.lightsStatic.push([sd * (X0 + 1), 2, -k.L * 0.3, 0xffc070, 1.5], [sd * (X0 + 1), 2, -k.L * 0.7, 0xffc070, 1.5]);
   }
 
+  // ---------- the week's chaos ship: a cargo_ship row for the port on this street (k.H.chaos, from build.js) ----------
+  // One container ship out in the channel beyond the wharf, doing what the row says: steaming in loaded for a
+  // cargo surge, riding at anchor for a berth delay, steaming out light when the shipping thins or a carrier
+  // leaves. Its place is written back on the row for the page's label and ride view. Nothing is lettered.
+  // Built of plain boxes whose fog thins slowly, so the ship reads from the street. Draw calls: 3 a ship.
+  function chaosShips(k) {
+    var evs = ((k.H && k.H.chaos) || []).filter(function (ev) { return ev.v === 'cargo_ship'; }); if (!evs.length) return;
+    var T = k.THREE, sd = k.water, L = k.L, O = new T.Object3D(), C = new T.Color();
+    function thin(m) { m.onBeforeCompile = function (sh) { sh.fragmentShader = sh.fragmentShader.replace('#include <fog_fragment>', T.ShaderChunk.fog_fragment.replace('fogDensity * fogDensity', '(fogDensity * 0.3) * (fogDensity * 0.3)')); }; m.customProgramCacheKey = function () { return 'chaosShipThin'; }; return m; }
+    function many(g, geo, mat, items) { var m = new T.InstancedMesh(geo, mat, items.length); items.forEach(function (it, j) { O.position.set(it[0], it[1], it[2]); O.scale.set(it[3], it[4], it[5]); O.updateMatrix(); m.setMatrixAt(j, O.matrix); if (it[6]) m.setColorAt(j, C.setHSL(it[6][0] / 360, it[6][1], it[6][2])); }); m.frustumCulled = false; g.add(m); return m; }
+    evs.forEach(function (ev, n) {
+      var R = (typeof rng === 'function' && typeof hash === 'function') ? rng(hash('ship' + n + ev.o)) : Math.random;
+      var out = /slowdown|reroute/.test(ev.o), wait = /berth_delay/.test(ev.o), LEN = 96, BEAM = 15, g = new T.Group(), parts = [], lit = [], j, bay, col2;
+      // hull, the red of her bottom, the house and funnel aft
+      parts.push([0, 3.2, 0, BEAM, 7.6, LEN, [215, 0.3, 0.13]], [0, -0.4, 0, BEAM + 0.2, 1.4, LEN + 0.2, [2, 0.55, 0.26]], [0, 7.2, -LEN / 2 + 6, BEAM * 0.8, 1.6, 10, [215, 0.25, 0.16]]);
+      parts.push([0, 13.5, LEN / 2 - 9, BEAM - 2, 13, 9, [0, 0, 0.84]], [0, 21.5, LEN / 2 - 7, 4, 4, 4, [212, 0.4, 0.22]], [0, 20.6, LEN / 2 - 12.6, BEAM + 3, 1.1, 2.6, [0, 0, 0.8]]);
+      // boxes on deck: stacked high coming in, a few going out
+      var cc = [[6, 0.55, 0.32], [212, 0.45, 0.3], [170, 0.35, 0.28], [28, 0.6, 0.38], [0, 0, 0.55], [140, 0.25, 0.28], [350, 0.45, 0.28]];
+      for (bay = 0; bay < 5; bay++) for (col2 = 0; col2 < 5; col2++) { var hh = out ? (R() < 0.45 ? 1 : 0) : 2 + Math.floor(R() * 3); for (j = 0; j < hh; j++) parts.push([(col2 - 2) * 2.6, 7 + 1.3 + j * 2.6, -LEN / 2 + 14 + bay * 13, 2.44, 2.55, 12.2, cc[Math.floor(R() * cc.length)]]); }
+      many(g, new T.BoxGeometry(1, 1, 1), thin(new T.MeshLambertMaterial({ color: 0xffffff })), parts);
+      // lit: the bridge windows, the deck lamps down her length, her running lights
+      lit.push([0, 17.6, LEN / 2 - 13.6, BEAM - 3, 1.1, 0.2, [45, 0.7, 0.8]], [0, 12.6, LEN / 2 - 13.6, BEAM - 4, 0.7, 0.2, [45, 0.7, 0.7]]);
+      for (j = 0; j < 6; j++) lit.push([(j % 2 ? 1 : -1) * (BEAM / 2 - 0.4), 8.4, -LEN / 2 + 8 + j * 13, 0.35, 0.35, 0.35, [48, 0.6, 0.9]]);
+      lit.push([BEAM / 2, 9, -LEN / 2 + 3, 0.4, 0.4, 0.4, [120, 0.9, 0.55]], [-BEAM / 2, 9, -LEN / 2 + 3, 0.4, 0.4, 0.4, [0, 0.9, 0.55]], [0, 24.2, LEN / 2 - 7, 0.5, 0.5, 0.5, [0, 0, 1]]);
+      var lm = thin(new T.MeshBasicMaterial({ color: 0xffffff })); many(g, new T.BoxGeometry(1, 1, 1), lm, lit);
+      var X = sd * (k.WALK + 150 + n * 26), z0 = 70, z1 = -L - 60, span = z0 - z1, speed = wait ? 0 : out ? 2.2 : 2.6, start = R() * 0.5;
+      g.position.set(X, Y0 - 0.4, -L * 0.4); k.root.add(g);
+      // the bow is at -z as built: turn her round to steam out the way the flight came
+      if (out) g.rotation.y = Math.PI;
+      k.ticks.push(function (t) {
+        var zz;
+        if (wait) { zz = -L * (0.3 + n * 0.25); g.rotation.y = Math.sin(t * 0.045 + n) * 0.14; g.position.y = Y0 - 0.4 + Math.sin(t * 0.5) * 0.06; }
+        else { var u = ((t * speed / span) + start) % 1; zz = out ? z1 + u * span : z0 - u * span; g.position.y = Y0 - 0.4 + Math.sin(t * 0.6) * 0.08; }
+        g.position.z = zz;
+        ev.x = X; ev.y = 27; ev.z = zz; ev.cy = 9; ev.rad = 34; ev.far = 320; ev.side = 1; ev.stopped = wait;
+        ev.on = zz < 50 && zz > -L - 40; ev.cam = [X - sd * 78, 22, zz + (out ? -62 : 62)]; // from out over the water, off her bow
+      });
+    });
+  }
+
   function life(k) {
     if (!k.water) return;
     var S = k._water; if (!S) return; // the page drew the water itself
@@ -636,6 +676,7 @@ LIFE.water = (function () {
     else brooklynLife(k, S, F);
     if (k.ST.set && k.ST.set.indexOf('pergola') >= 0) S.lightsStatic.push([k.water * (k.WALK + 6), 4.2, -k.L * 0.5, 0xffd9a0, 2.5]);
     farShore(k, S);
+    chaosShips(k);
     inst(k, new T.BoxGeometry(1, 1, 1), new T.MeshLambertMaterial({ color: 0xffffff }), S.stat, true);
     inst(k, new T.BoxGeometry(1, 1, 1), new T.MeshBasicMaterial({ color: 0xffffff }), S.statLit);
     F.build();

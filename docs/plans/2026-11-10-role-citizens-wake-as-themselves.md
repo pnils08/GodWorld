@@ -1,7 +1,7 @@
 ---
 title: Role Citizens Wake As Themselves Plan
 created: 2026-11-10
-updated: 2026-11-13
+updated: 2026-11-14
 type: plan
 tags: [pipeline, citizens, wakes, active]
 sources:
@@ -26,6 +26,8 @@ pointers:
 **Goal:** the Mayor, the council, the agented offices, Varek and every player the feed names wake on their own week, as themselves, and that wake lands on their page.
 
 **Rows:** pipeline.110 · **Owner:** engine-sheet
+
+**Where this plan is (2026-11-14):** Task 9, in the middle of the worker template (the one set on the police chief). Tasks 1–7 done; Task 8 waits on the tracker repair. Rewrite this line whenever the position moves.
 
 ## What was read (C115, 2026-11-10)
 
@@ -58,7 +60,18 @@ pointers:
 | 6 | Tests (`cron-work-wake.test.js` 50, `wakePerception.test.js` 201); dry runs through the real scripts for Varek, the Mayor, Vinnie Keane, and the daily wake on the Mayor | es | done |
 | 7 | Read the first live runs: Tue 2026-11-10 20:18 (club citizens, Varek), Thu 2026-11-12 20:18 (offices) — log `logs/cron-work-wake.log`, pages, Reflection_Intake rows | es | done — Tue read 11-10, Thu read 11-13 (changelog); fixes owed, Task 8 |
 | 8 | Fix what the Thu read found inside this row's acceptance: a position written as an outcome (D8, D5, Okoro); a closed project woken as open (INIT-003, INIT-006) | es | reverted 11-13 — the tracker rows it read were hand-edited; waits on the tracker repair |
-| 9 | Boot review (builder 2026-11-13: "review the written agents, voices … ensure they boot the agent into its character … having a template we know works is probably better than 40 different write ups. is less more?" / "there can be different templates depending on the cron type"): what each wake loads, a three-way dry run per wake type (today / sheet line only / sheet line + short written who-decide-talk), then the template or templates | es | test run 1 done 11-13; findings and every later run logged in [[../research/2026-11-13-boot-templates-test-runs]] (raw outputs `output/engine-sheet/2026-11-13-boot-three-way.md`); templates written down as a draft in [[../reference/AGENT_BOOT_TEMPLATES]] (builder "yes go on 1"); approval per type is the builder's; gate test not started |
+| 9 | Boot review (builder 2026-11-13: "review the written agents, voices … ensure they boot the agent into its character … having a template we know works is probably better than 40 different write ups. is less more?" / "there can be different templates depending on the cron type"): what each wake loads, a three-way dry run per wake type (today / sheet line only / sheet line + short written who-decide-talk), then the template or templates | es | in progress — on the worker template; by type in the table below. Runs: [[../research/2026-11-13-boot-templates-test-runs]]; templates (draft): [[../reference/AGENT_BOOT_TEMPLATES]]; approval per type is the builder's |
+
+**Task 9 by wake type (2026-11-14).** A type closes on the builder's approval; no type is started, offered or tested out of turn.
+
+| Type | Set on | Run so far | Left before the builder's approval | Status |
+|---|---|---|---|---|
+| What each wake loads | — | code read 11-13 | — | done |
+| Citizen | Vinnie Keane | Run 1 (one high-record citizen) | a low-record citizen | drafted, not approved |
+| Council / Mayor | Santana, Tran, Rivers | Runs 1–2 (21 runs) | the part that the office can be lost on approval (builder 11-14); one run of the finished template | drafted, not approved |
+| **Worker** | **the police chief** | **Runs 3–4 (the chief), Run 5 (one director, 11-14)** | **a loader for the worker's whole memory and for past decisions; a thin worker not run** | **in progress — here** |
+| Reporter | not named | Runs 1–2, not clean | everything; the working example is the builder's to name | not established |
+| Gate | — | none | everything | not started |
 
 ## Acceptance
 
@@ -87,6 +100,7 @@ pointers:
 
 ## Changelog
 
+- 2026-11-14 (engine-sheet) — The plan states its own position (builder: "the plan should be telling you where we are"): a "Where this plan is" line under the owner, and Task 9 broken out by wake type with what is left on each.
 - 2026-11-14 (engine-sheet) — Task 9 Run 5 (builder: "Go on 1"): the fund director run as the chief ran; 3 of 3 answers off his own row, no memo; build notes on the row come back as the world (G-EC62). [[../research/2026-11-13-boot-templates-test-runs]] §Run 5.
 - 2026-11-14 (engine-sheet) — The daily wake takes an office holder's title from the office sheet (builder: "Yes this approved, either add yourself or have. Opus sub agent on xtra effort fix the code and check the blast radius"). `lib/wakePerception.js`: `officeHoldersFrom`, `loadOfficeHolders` (one `Civic_Office_Ledger` read a wake, fails open), `identityLine` ("You hold the office of <Title>" + a council seat's neighborhoods), `stationLine` knows an office holder; `scripts/citizen-wake.js` sets the office on the woken citizen only. A citizen with no office: the same lines byte for byte (2,056 comparisons over the ledger); the eight office holders once told "ordinary" (G-EC59) are now known. `citizenVoice.js` untouched: an interviewed citizen is handed what he was. Tests 238 / 54 / 60 / 37 / 20 / 10 green; guarded dry runs on Vega, Osei, Reyes, Patel, Santana, Morr, Marston, Keane. Built by a sub-agent, diff and tests re-run by engine-sheet. Outside review not yet run.
 - 2026-11-14 (engine-sheet) — The other four council seats' `RoleType` brought to the office Title (builder: "Make the 4 all engine safe and accurate"): 8 cells, read back; all nine seats now read "City Council District <n>". One dormant engine fallback does not match that wording (G-EC61).

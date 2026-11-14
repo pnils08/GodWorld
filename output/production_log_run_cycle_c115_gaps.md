@@ -294,3 +294,12 @@ Health_Cause_Queue C115: POP-00044 Elliott Crane (the D6 seat, Uptown, 79) `reco
 
 ### G-EC51 — A director's old page lines outweigh the closed record; the wake re-writes its own earlier reflection [judgment] [wakes] [MED] (engine-sheet, 2026-11-13)
 After pipeline.110 Task 8 (the pack now hands INIT-003/006 as "complete … nothing left on the books"; stale role lines cut), three dry runs 2026-11-13: Soria Dominguez 2 of 2 still write "one comment period away from a real vote" — one run word for word her own earlier reflection, which already sits twice in her page readback (written by earlier wakes; dry runs write nothing). Ramos writes soil reports and remediation. Source: `lib/wakePerception` `loadOwnPageReadback` hands back her own reflections; the cheap model copies them over the record's line. Shared readback lib, every wake — outside this row. Engine output stands; recorded for the builder.
+
+### G-EC52 — A written office file contradicts the ledger on the holder's own age and home [judgment] [wakes] [LOW] (engine-sheet, 2026-11-13)
+`.claude/agents/civic-project-stabilization-fund/IDENTITY.md` gives Marcus Webb as 52, living in the Laurel district; the ledger line the citizen wake prints for POP-00790 is 42, Downtown (dry run 2026-11-13). The file also pins moving state as identity (Osei "serious condition, unavailable", a first named applicant, who holds the checkbook). The Sunday chain loads the file whole (`cron-civic-run.js` `readPersonaDir`). Not edited; recorded for pipeline.110 Task 9.
+
+### G-EC53 — The daily wake tells a journalist "You are an ordinary person, not a writer" [judgment] [wakes] [LOW] (engine-sheet, 2026-11-13)
+Kai Marston (POP-00158, Journalist, Arts & Entertainment), evening dry run 2026-11-13: the system line reads "You are an ordinary person, not a writer." Citizens of station get "You are not a writer." (`citizen-wake.js` `stationLine`). A fixed line about what the person is not. Recorded for pipeline.110 Task 9.
+
+### G-EC54 — A wake question drops the whole temperament list into one sentence [judgment] [wakes] [LOW] (engine-sheet, 2026-11-13)
+Vinnie Keane evening dry run 2026-11-13, provocation `self_disposition`: "You've been carrying a can't switch off, working themselves thin; magnetic, center of every room; … a real fan, plans around games mood lately." Nine temperament phrases where the sentence expects one mood (`selectProvocation`, question bank). The wake still answered in voice. Recorded; not fixed.

@@ -40,6 +40,8 @@ function readSources(root) {
     style: require(path.join(root, 'world-view/hoods.js')),
     // the engine's own list of stations by neighborhood (the page draws a rail line where it names one)
     stations: (() => { const out = {}; try { new Function(fs.readFileSync(path.join(root, 'utilities/ensureTransitMetrics.js'), 'utf8') + '\nreturn OAKLAND_BART_STATIONS;')().forEach(s => { (out[s.neighborhood] = out[s.neighborhood] || []).push(s.station); }); } catch (e) { return null; } return out; })(),
+    // each street's state this cycle, the engine's own row (absent from a dump made before the tab was added to it)
+    nmap: (() => { try { return readRows(path.join(beats, 'Neighborhood_Map.jsonl')); } catch (e) { return null; } })(),
     // the cycle's world summary, where the Chaos_Cars rows are printed (absent before the summary is built)
     worldSummary: (() => { try { return fs.readFileSync(path.join(root, 'output', `world_summary_c${readJson(path.join(beats, 'meta.json')).cycle}.md`), 'utf8'); } catch (e) { return null; } })(),
   };
@@ -290,6 +292,24 @@ function checkWorldView(build, sources, engine, secondBuild, reports = []) {
     for (const ev of arr(build.data?.chaos?.elsewhere || [], 'data.chaos.elsewhere')) { const key = `${ev?.v}|${ev?.o}|${ev?.scope} ${ev?.id}`, at = pool.indexOf(key); if (at < 0) fail('chaos', 'elsewhere', `no Chaos Events row for ${key}`); else pool.splice(at, 1); }
     for (const key of pool) fail('chaos', 'missing', `Chaos Events row neither on a street nor listed elsewhere: ${key}`);
     if (drawn.length) reports.push(`CHAOS ${drawn.length} on streets: ${drawn.join('; ')}`);
+  }
+  // direction scale: where a street stands is the engine's own Neighborhood_Map row for it this cycle, never the
+  // page's. The word is NeighborhoodTrajectory; the scale is TrajectoryMomentum - 5 (a blank cell is 5, as the engine
+  // reads it); since is TrajectoryStartCycle.
+  {
+    const rows = new Map(arr(sources.nmap || [], 'Neighborhood_Map').filter(r => String(r.Cycle) === String(build.CYCLE)).map(r => [r.Neighborhood, r]));
+    let matched = 0;
+    for (const h of hoods) {
+      const st = h?.state, row = rows.get(h?.name);
+      if (st?.test) { fail('state', h.name, 'look-test scale in a build'); continue; }
+      if (!row) { if (st) fail('state', h.name, 'a state with no Neighborhood_Map row for this cycle'); continue; }
+      const m = row.TrajectoryMomentum === '' || row.TrajectoryMomentum == null ? 5 : Number(row.TrajectoryMomentum);
+      const want = Number.isFinite(m) ? { dir: String(row.NeighborhoodTrajectory || '').trim().toLowerCase(), scale: Math.max(-5, Math.min(5, Math.round(m) - 5)) } : null;
+      if (want && /^\d+$/.test(String(row.TrajectoryStartCycle))) want.since = Number(row.TrajectoryStartCycle);
+      if (!equal(st || null, want)) fail('state', h.name, `does not match its Neighborhood_Map row: page ${JSON.stringify(st || null)}, row ${JSON.stringify(want)}`);
+      else matched++;
+    }
+    if (matched) reports.push(`STATE ${matched} streets on the direction scale, each matched to its Neighborhood_Map row`);
   }
   if (!secondBuild?.data?.hoods || !equal(
     hoods.map(h => ({ name: h.name, lay: h.lay })),

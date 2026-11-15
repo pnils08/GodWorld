@@ -4,7 +4,7 @@ A hands-off 3D flight through the 22 neighborhoods, drawn from one week of engin
 
 ## What it is
 
-- `build.js` — reads `output/beats/` (read-only), writes one self-contained page `oakland-week.html` (gitignored; regenerate, don't commit).
+- `build.js` — reads `output/beats/` (read-only), writes one self-contained page `oakland-week.html` (gitignored; regenerate, don't commit). Look-test switches: `WX=`, `CHAOS_TEST=`, `SCALE=`.
 - `template.html` — the page: three.js r128 from cdnjs plus its bloom add-on from jsdelivr, everything else inline. No art files; all geometry and textures are drawn in the browser.
 - `places.js` — the shapes of landmark businesses, inlined into the page.
 - `hoods.js` — how each neighborhood is drawn, tied to canon phrases.
@@ -18,7 +18,7 @@ Builder 2026-11-14, on the sheet review: "lets record these as items to add and 
 
 | # | Item | Source | C115 | In `output/beats/` | State |
 |---|---|---|---|---|---|
-| 1 | Neighborhood state on the street: how lit, loud and busy; growing or steady; holiday and First Friday | `Neighborhood_Map` (NightlifeProfile, NoiseIndex, RetailVitality, Sentiment, NeighborhoodTrajectory, HousingPressure, MigrationFlow, Holiday, FirstFriday) | 22 rows, one a street | no: add the tab to `scripts/dumpBeatTabs.js` | NEXT |
+| 1 | Neighborhood state on the street: how lit, loud and busy; growing or steady; holiday and First Friday | `Neighborhood_Map` (NightlifeProfile, NoiseIndex, RetailVitality, Sentiment, NeighborhoodTrajectory, TrajectoryMomentum, HousingPressure, MigrationFlow, Holiday, FirstFriday) | 22 rows, one a street | yes, from 2026-11-14 (`scripts/dumpBeatTabs.js` `BEAT_TABS`) | direction built (§The direction scale); nightlife, retail, noise, mood and the holiday flags open |
 | 2 | Staff at their own business, not only the owner | `Employment_Roster` (BIZ_ID, POP_ID, RoleType, Status) | 971 rows, 921 with a BIZ_ID | yes | open |
 | 3 | The week's faith events at the house of worship | `Faith_Ledger` (Organization, EventDescription, Neighborhood, Attendance) | 5 | yes | open |
 | 4 | Deaths, retirements, promotions marked on the person or their shop | `Lived_Events` (kind, subject, neighborhood, recipients) | 3, and one death at C114 with its mourners | yes | open |
@@ -84,6 +84,23 @@ Builder 2026-11-14: "a cool thing we can add is showing the chaos cars that hit 
 - On screen: a label rides with each (the engine's own display name, and its seed line or its outcome); the top line counts them; tapping the car or its label (the label is a button) rides beside it and opens a panel with the name, what it came for, the seed line, the outcome, the metric and magnitude, and a link to the business or citizen. Every word is the engine's.
 - `CHAOS_TEST=<street> node world-view/build.js <dest>` puts one of every vehicle on a street to look at shapes (the build warns, the panel says so, and `worldViewCheck.js` fails such a build). `WV_DEBUG.ride = <n>` opens on the nth chaos car.
 - Check: `scripts/worldViewCheck.js` matches every chaos car on a street to a row of the summary's table and its seed line to the summary's text, and fails if a row is neither on a street nor listed elsewhere.
+
+## The direction scale (2026-11-14)
+
+Builder 2026-11-14: "Declining on a scale . Whatever the next week builds on shifts the scale . A decline on a decline is a Notch a scale may be the easiest way . The scale slides 5 to -5 . This could work for all things your building , but if the code itself can alter that could be a good way." and "You can add a tab if needed".
+
+- The scale is the engine's and the engine moves it. `Neighborhood_Map.TrajectoryMomentum` runs 0–10 with 5 neutral: a growth cycle is a notch up, a decay cycle a notch down, a steady cycle a notch back toward 5 (`phase05-citizens/neighborhoodTrajectoryEngine.js`, which also reads a blank cell as 5). The page shows it as −5..+5: `build.js` puts `h.state = { dir, scale, since }` on each street (`NeighborhoodTrajectory`, `TrajectoryMomentum − 5`, `TrajectoryStartCycle`) from the row stamped with the dumped cycle. No tab was added and nothing on the page moves the scale.
+- The dump: `Neighborhood_Map` is in `scripts/dumpBeatTabs.js` `BEAT_TABS` from 2026-11-14, so every cycle run writes it. The C115 file was written once, on its own, from the live tab (22 rows, all Cycle 115), in the dump's own row format; no other dump file or `meta.json` was touched. No dump file, no state: the build says so and draws the streets as before.
+- C115: +5 Downtown, Fruitvale, Jack London, Uptown; +4 West Oakland; +3 Grand Lake; +1 Rockridge, KONO; 0 Temescal, Piedmont Ave, Chinatown, Lake Merritt, East Oakland; −1 Laurel; −3 Dimond; −4 Eastlake; −5 Adams Point, Brooklyn, Glenview, Ivy Hill, San Antonio, Baylight District. Ten of 22 sit at an end (gap log G-EC67).
+- What it draws (drawing choices; the builder's call):
+  - Lit windows: 14% of the street's own share a notch (`layout()`; 0.3 of it at −5, 1.7 at +5), in steps of 0.05 so streets share wall tiles.
+  - Buildings no ledger business stands in (`plainFront()` in `template.html`): below zero, 9% of them a notch have an empty ground floor, a shutter down over each window with a notice on it (no words); from −3 some of those are boarded instead. Above zero, 10% a notch carry window boxes. From +3, up to three (5% a notch, none over 20 m) stand under scaffolding: poles, boarded decks, sheeting.
+  - A ledger business is never drawn shut, and no person is added or removed.
+  - Top line: the scale, the engine's own word (`decay | steady | growth`) and the cycle it began.
+- Look-test: `SCALE=<-5..5> node world-view/build.js <dest>` puts every street at that notch (the build warns, the top line says so, `worldViewCheck.js` fails such a build).
+- Check: `worldViewCheck.js` matches every street's `state` to its `Neighborhood_Map` row for the cycle (`STATE` line) and fails a state with no row, a row with no state, last cycle's row, and a look-test scale.
+- Not on a scale yet: nightlife, retail, noise, mood. The engine holds this cycle's number for each on the same row, not a notch counter. Either the page places each street against the city's middle that cycle, or the engine keeps a counter for each (engine work, its own row): the builder's.
+- Checked: Temescal at −5, −2, 0, +3, +5 on look-test builds; Adams Point, Glenview, San Antonio (−5) and Uptown, Fruitvale (+5) as the cycle has them; a shuttered and a boarded front, a scaffolded building; all 22 streets open without error; page check and 24 tests pass. Not checked: a real phone.
 
 ## Boats (2026-11-14)
 
@@ -171,6 +188,7 @@ Not verified for any module: motion at a real frame rate, a real phone, the qual
 | A person's line and light colour | their highest-ranked `EventTag` that week (`kindOf` in `build.js`) |
 | Shop names, building height | `Business_Ledger.jsonl` Name, Employee_Count; sign colour from Sector |
 | Temperature, sky word | `Cycle_Weather.jsonl` |
+| Where a street stands: its scale, word and since-when; how many windows are lit; shut units, window boxes, scaffolding | `Neighborhood_Map.jsonl` NeighborhoodTrajectory, TrajectoryMomentum, TrajectoryStartCycle (§The direction scale). Which building is dressed is seeded by the neighborhood name — not sim data |
 | Sex, age band, role on a card; figure size, grey hair | `output/simulation_ledger_snapshot.jsonl` Gender, BirthYear, RoleType. Bands and the sim year mirror the engine (`deriveLifeState_`, `simYearFromCycle_`); the card folds them to youth (22 and under) / adult / senior |
 | "Their words" on a card | `Reflection_Intake.jsonl`: the person's most recent row, trimmed to 300 characters, with its week, where it was said (Daypart) and Affect |
 | Street shape, colours, lit windows, unnamed buildings, where a person stands | drawn by code, seeded by the neighborhood name — not sim data |

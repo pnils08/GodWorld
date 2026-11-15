@@ -59,6 +59,19 @@ function rejects(code, mutate) {
 test('valid synthetic provenance including special place, blank parcel and legacy timestamp passes', () => {
   assert.deepEqual(check(fixture()), []);
 });
+test('a street stands where its Neighborhood_Map row for the cycle puts it, and a look-test scale fails', () => {
+  const row = (f, m) => [{ Neighborhood: f.hood.name, Cycle: '115', NeighborhoodTrajectory: 'Decay ', TrajectoryMomentum: m, TrajectoryStartCycle: '112' }];
+  const f = fixture(); f.sources.nmap = row(f, '2'); f.hood.state = { dir: 'decay', scale: -3, since: 112 };
+  assert.deepEqual(check(f), []);
+  const g = fixture(); g.sources.nmap = row(g, ''); g.hood.state = { dir: 'decay', scale: 0, since: 112 }; // a blank cell is 5, as the engine reads it
+  assert.deepEqual(check(g), []);
+  rejects('state', f => { f.sources.nmap = row(f, '2'); f.hood.state = { dir: 'decay', scale: -4, since: 112 }; });
+  rejects('state', f => { f.sources.nmap = row(f, '2'); f.hood.state = { dir: 'growth', scale: -3, since: 112 }; });
+  rejects('state', f => { f.sources.nmap = row(f, '2'); });                                   // a row, and the page says nothing
+  rejects('state', f => { f.hood.state = { dir: 'growth', scale: 5 }; });                     // the page says something, and no row
+  rejects('state', f => { f.sources.nmap = [Object.assign(row(f, '2')[0], { Cycle: '114' })]; f.hood.state = { dir: 'decay', scale: -3, since: 112 }; }); // last cycle's row
+  rejects('state', f => { f.sources.nmap = row(f, '2'); f.hood.state = { dir: 'decay', scale: -3, since: 112, test: 1 }; });
+});
 test('event checks are exact and person/cycle bound, including every secondary line', () => {
   rejects('event', f => { f.person.x += ' invented'; });
   rejects('event', f => { f.person.all.push(['h', 'SYNTHETIC invented secondary line\nwith newline']); });

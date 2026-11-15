@@ -84,7 +84,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | pipeline.108 | Daily news on the day's sources alone (builder 11-13). Fri 11-13 show read, plan Task 10. Next: his call on the read; Sat 11-14 weekly | in-progress | research-build | [[../plans/2026-11-09-daily-news-articles-as-sources]] |
 | pipeline.101 | Daily news: evening write wake date fixed (builder 11-04), NotebookLM page written. Next: confirm the 11-04 18:15 wake writes and gates | in-progress | research-build | [[../reference/NotebookLM]] §Change log |
 | pipeline.89 | Every journalist picks (builder 10-25: "All journalists should pick, they are AI"): every wake package gets the live tools the 3 tool seats have, the slice is a tip sheet not the assignment, Rhea is off every path; Ines first, same cut on all 28. First run 2026-10-28 | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 |
-| infrastructure.19 | Oakland week flight made lifelike (builder 11-14). Boats done; add-list in README. Next: neighborhood state on the street (adds Neighborhood_Map to the dump) | in-progress | research-build | [[../../world-view/README]] |
+| infrastructure.19 | Oakland week flight made lifelike (builder 11-14). Boats and the direction scale done (Neighborhood_Map now in the dump); add-list in README. Next: his pick | in-progress | research-build | [[../../world-view/README]] |
 
 ## 4. Queue — ruled, not started (ready)
 

@@ -1,5 +1,6 @@
 // Read-only: turns last week's beat dump into one self-contained page. Writes nothing to the project.
 // node world-view/build.js [dest]      WX=rain|fog|overcast overrides the week's weather for a look-test.
+//                                      SCALE=-5..5 puts every street at that notch of the direction scale for a look-test.
 const fs = require('fs');
 const path = require('path');
 const BEATS = path.join(__dirname, '..', 'output', 'beats') + path.sep;
@@ -153,6 +154,26 @@ const hoods = Object.keys(byHood).map(name => {
   };
 }).sort((a, b) => (b.name === 'Grand Lake') - (a.name === 'Grand Lake') || b.lines - a.lines);
 
+// ---------- neighborhood state: the engine's own row for each street this cycle (Neighborhood_Map) ----------
+// The direction scale is the engine's. TrajectoryMomentum runs 0..10 with 5 neutral: up a notch on a growth cycle,
+// down a notch on a decay cycle, a notch back toward 5 on a steady one (phase05-citizens/neighborhoodTrajectoryEngine.js;
+// a blank cell is 5 there too). The page shows it as -5..+5 (builder 2026-11-14: "The scale slides 5 to -5", "A decline
+// on a decline is a Notch"). Nothing here moves the scale: the cycle does.
+let nmap = [];
+try { nmap = rd('Neighborhood_Map').filter(r => String(r.Cycle) === CYCLE); } catch (e) { console.warn('world-view: no Neighborhood_Map in the dump; streets are drawn without their state'); }
+const scaleTest = process.env.SCALE != null && process.env.SCALE !== '' ? Math.max(-5, Math.min(5, Math.round(Number(process.env.SCALE)) || 0)) : null;
+if (scaleTest != null) console.warn('world-view: SCALE — every street is drawn at ' + scaleTest + ' on the direction scale. Do not publish this build.');
+hoods.forEach(h => {
+  const row = nmap.find(x => x.Neighborhood === h.name);
+  if (row) {
+    const m = row.TrajectoryMomentum === '' || row.TrajectoryMomentum == null ? 5 : Number(row.TrajectoryMomentum);
+    if (isFinite(m)) h.state = { dir: String(row.NeighborhoodTrajectory || '').trim().toLowerCase(), scale: Math.max(-5, Math.min(5, Math.round(m) - 5)) };
+    if (h.state && /^\d+$/.test(String(row.TrajectoryStartCycle))) h.state.since = Number(row.TrajectoryStartCycle);
+  }
+  if (scaleTest != null) h.state = { dir: scaleTest > 0 ? 'growth' : scaleTest < 0 ? 'decay' : 'steady', scale: scaleTest, test: 1 };
+});
+if (nmap.length) console.log('direction scale: ' + [5, 4, 3, 2, 1, 0, -1, -2, -3, -4, -5].map(n => { const at = hoods.filter(h => h.state && h.state.scale === n).map(h => h.name); return at.length ? (n > 0 ? '+' : '') + n + ' ' + at.join(', ') : ''; }).filter(Boolean).join(' | '));
+
 // ---------- neighborhood character: every drawing choice hangs off a phrase in the canon file ----------
 const STYLE = require('./hoods.js');
 const canon = fs.readFileSync(path.join(__dirname, '..', 'docs', 'canon', 'INSTITUTIONS.md'), 'utf8');
@@ -227,13 +248,15 @@ function layout(H) {
   chosen.sort((a, b) => b.w - a.w);
   ordinary.slice().sort((a, b) => H.biz[b].e - H.biz[a].e || (H.biz[a].id < H.biz[b].id ? -1 : 1)).slice(0, K).forEach((bi, k) => { chosen[k].b = bi; });
   const station = onStreet.find(p => p.type === 'station');
+  // lit windows follow the direction scale: 14% of the street's own share for each notch (0.3 of it at -5, 1.7 at +5), kept to steps of 0.05 so streets share wall tiles
+  const sc = H.state ? H.state.scale : 0, lit = v => sc ? Math.round(Math.max(0.05, Math.min(0.95, v * (1 + 0.14 * sc))) * 20) / 20 : v;
   const out = parcels.map(p => {
     const st = p.st, b = p.b != null ? H.biz[p.b] : null, near = station && Math.abs(p.z - station.z) < 38;
     const o = { id: p.id, s: p.s, z: r2(p.z), w: r2(p.w) };
-    if (st.fill === 'house' && !b) { o.k = 'h'; o.h = r2(rr(st.h)); o.d = r2(7 + r() * 2); o.tone = st.tone; o.lit = st.lit; o.tr = st.trees; return o; }
+    if (st.fill === 'house' && !b) { o.k = 'h'; o.h = r2(rr(st.h)); o.d = r2(7 + r() * 2); o.tone = st.tone; o.lit = lit(st.lit); o.tr = st.trees; return o; }
     o.k = 'b'; o.d = r2(8 + r() * 5); o.wall = near ? 'glass' : st.wall; o.tone = near ? [200, 0.2, 0.6] : st.tone;
     o.h = r2(near ? 15 + r() * 8 : b ? (st.fill === 'house' ? 4.6 + r() * 1.4 : st.h[0] + Math.min(st.h[1] - st.h[0], Math.sqrt(b.e) * 1.3)) : rr(st.h));
-    o.lit = near ? 0.45 : b ? Math.max(st.lit, 0.45) : st.lit; o.tr = st.trees; o.neon = st.neon;
+    o.lit = lit(near ? 0.45 : b ? Math.max(st.lit, 0.45) : st.lit); o.tr = st.trees; o.neon = st.neon;
     if (b) o.b = p.b;
     return o;
   });

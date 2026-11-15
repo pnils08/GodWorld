@@ -58,9 +58,9 @@ async function whoTheyAre(popid) {
 async function gatherMemory(popid, key) {
   const tidy = (s) => String(s || '').replace(/\s+/g, ' ').trim();
   const hits = ((await page.searchPage_(popid, key, 6)).results || []).filter((r) => String((r.metadata || {}).type || '') !== 'tension')
-    .map((r) => ({ when: (r.createdAt || '').slice(0, 10), type: (r.metadata || {}).type || '', text: tidy(r.content).replace(/^(datawake|stated):\s*/i, 'Your public statement: ') }));
+    .map((r) => ({ when: (r.metadata || {}).cycle != null ? 'Cycle ' + (r.metadata || {}).cycle : 'earlier', type: (r.metadata || {}).type || '', text: tidy(r.content).replace(/^(datawake|stated):\s*/i, 'Your public statement: ') }));
   const recent = ((await page.recentPage_(popid, 12)).results || []).filter((r) => !['office-position', 'tension', 'show'].includes(String((r.metadata || {}).type || '')))
-    .slice(0, 2).map((r) => ({ when: (r.createdAt || '').slice(0, 10), type: (r.metadata || {}).type || '', text: tidy(r.content) }));
+    .slice(0, 2).map((r) => ({ when: (r.metadata || {}).cycle != null ? 'Cycle ' + (r.metadata || {}).cycle : 'earlier', type: (r.metadata || {}).type || '', text: tidy(r.content) }));
   const seen = new Set(); const all = [];
   for (const m of recent.concat(hits)) { const k = m.text.slice(0, 80); if (m.text && !seen.has(k)) { seen.add(k); all.push(m); } }
   return { key, entries: all, fromSearch: hits.length, newest: recent.length };

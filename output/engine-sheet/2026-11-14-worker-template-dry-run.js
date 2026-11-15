@@ -45,9 +45,9 @@ async function memoryRecall(popid, input) {   // newest by date, and the page se
   const tidy = (s) => String(s || '').replace(/\s+/g, ' ').trim().slice(0, 500);
   const parts = [];
   const rec = await page.recentPage_(popid, 5); if (rec.error) return 'Your memory is unavailable right now.';
-  if ((rec.results || []).length) parts.push('Your newest entries:\n' + rec.results.map((d) => '- (' + String(d.createdAt || '').slice(0, 10) + ') ' + tidy(d.content)).join('\n'));
+  if ((rec.results || []).length) parts.push('Your newest entries:\n' + rec.results.map((d) => '- (' + ((d.metadata || {}).cycle != null ? 'Cycle ' + d.metadata.cycle : 'earlier') + ') ' + tidy(d.content)).join('\n'));
   const q = String(input.query || '').trim();
-  if (q) { const hit = await page.searchPage_(popid, q, 5); parts.push((hit.results || []).length ? 'On "' + q + '":\n' + hit.results.map((d) => '- (' + String(d.createdAt || '').slice(0, 10) + ') ' + tidy(d.content)).join('\n') : 'Nothing on "' + q + '".'); }
+  if (q) { const hit = await page.searchPage_(popid, q, 5); parts.push((hit.results || []).length ? 'On "' + q + '":\n' + hit.results.map((d) => '- (' + ((d.metadata || {}).cycle != null ? 'Cycle ' + d.metadata.cycle : 'earlier') + ') ' + tidy(d.content)).join('\n') : 'Nothing on "' + q + '".'); }
   return parts.join('\n\n') || 'Your memory holds nothing yet.';
 }
 

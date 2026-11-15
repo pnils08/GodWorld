@@ -109,7 +109,7 @@ test('buildWake: who and memory as the system turn; Mara\'s question then a call
     'Carmen Delaine, Civic Ledger, Bay Tribune asks you:\n\nWhat do you tell Laurel about the trash?'));
   assert.ok(!w.user.includes('Acceptance') && !w.user.includes('P-1') && !w.user.includes('.claude/'));
   await assert.rejects(sw.buildWake({ office: OFFICE, cycle: 115, pack: pack(), question: 'x', deps: deps(root) }), /missing askerLine/);
-  await assert.rejects(sw.buildWake({ office: { officeId: 'CHIEF-POLICE' }, cycle: 115, pack: pack(), deps: deps(root) }), /not a council seat/);
+  await assert.rejects(sw.buildWake({ office: { officeId: 'CHIEF-POLICE' }, cycle: 115, pack: pack(), deps: deps(root) }), /not a seat on the council template/);
 }));
 
 test('nothing put to them: nothing is added after their own record; no Mara question, no answer tool', () => workspace(async (root) => {
@@ -123,11 +123,14 @@ test('nothing put to them: nothing is added after their own record; no Mara ques
   for (const t of sw.toolsFor(OFFICE, pack())) assert.ok(!/\byou should\b|\bmust\b|\bwhen to\b/i.test(t.function.description), t.function.name + ' says when or what');
 }));
 
-test('the Mayor\'s tools reach the city; a district seat\'s reach stays in its district', () => {
-  const reach = (o) => sw.toolsFor(o, pack()).find((t) => t.function.name === 'initiative_propose').function.parameters.properties.reach.enum;
-  assert.deepEqual(reach(OFFICE), ['hood', 'district']);
-  assert.deepEqual(reach(MAYOR), ['hood', 'district', 'all']);
-});
+test('the template is built on one seat: Mobley (District 9); the Mayor is her own template', () => workspace(async (root) => {
+  assert.deepEqual([...sw.BUILT], ['COUNCIL-D9']);
+  assert.equal(sw.isSeat('COUNCIL-D9'), true);
+  for (const id of ['MAYOR-01', 'COUNCIL-D3', 'CHIEF-POLICE']) assert.equal(sw.isSeat(id), false, id);
+  await assert.rejects(sw.buildWake({ office: MAYOR, cycle: 115, pack: pack(), deps: deps(root) }), /not a seat on the council template/);
+  const reach = sw.toolsFor(OFFICE, pack()).find((t) => t.function.name === 'initiative_propose').function.parameters.properties.reach.enum;
+  assert.deepEqual(reach, ['hood', 'district']);
+}));
 
 test('their decisions carry what came of each; a rejected move is not a decision; an answer carries the question', () => workspace((root) => {
   const base = 'MV-114-civic-office-council-d9-2026-11-05';
@@ -190,21 +193,6 @@ test('a move is staged through the gate: filed, refused with the gate\'s reason,
   const noQ = sw.toolExecutor({ office: OFFICE, cycle: 115, date: 'd', stage: { moves: [], calls: [] }, validate, inDistrict: () => true, deps: deps(root) });
   assert.match(await noQ('directive_answer', { text: 'x' }), /no question from the City Planning Director is open/);
 }));
-
-test('the gate holds each move to its own rule for the seat template only; the ledger gives every move its own id', () => {
-  const civicRun = require('./cron-civic-run');
-  const office = { officeId: 'COUNCIL-D1', agentDir: 'civic-office-council-d1', district: 'D1', popid: 'POP-00501' };
-  const ctx = { office, boardIds: new Set(['INIT-001', 'INIT-002']) };
-  const two = [{ type: 'work', initiativeId: 'INIT-001' }, { type: 'work', initiativeId: 'INIT-002' }];
-  assert.equal(civicRun.validateDatawakeMoves(two, ctx).accepted.length, 1, 'the JSON wake keeps one decision a wake');
-  const mv = civicRun.validateDatawakeMoves(two, Object.assign({ perRuleMoves: true }, ctx));
-  assert.equal(mv.accepted.length, 2);
-  mv.accepted.push({ type: 'answer', payload: { confrontationId: 'CONF-115-x' } });
-  mv.rejected.push({ move: { type: 'work', initiativeId: 'INIT-9' }, reason: 'initiative-not-on-board(INIT-9)' });
-  const lines = sw.moveLedgerLines(office, 115, '2026-11-16', mv);
-  const base = 'MV-115-civic-office-council-d1-2026-11-16';
-  assert.deepEqual(lines.map((l) => l.moveId), [base, base + ':2', base + ':answer:CONF-115-x', base + ':rej0']);
-});
 
 test('the door pick is a hash, not a draw', () => {
   const list = ['a', 'b', 'c', 'd'];

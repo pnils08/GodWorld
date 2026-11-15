@@ -1,12 +1,17 @@
 'use strict';
 /**
- * scripts/seatWake.js — the council / Mayor template (pipeline.110 Task 9; docs/reference/AGENT_BOOT_TEMPLATES.md §2).
+ * scripts/seatWake.js — the council seat template (pipeline.110 Task 9; docs/reference/AGENT_BOOT_TEMPLATES.md §2).
  *
  * A seat is a data agent for its district, built as the police chief is (builder 2026-11-14: "An iniative isn't the job
  * … Like a police chief this is a different form of a data agent … In their wakes they get to "walk" their districts ,
  * call on citizens in their districts … One of their abilities is to create an Iniative to serve their districts").
  *
- * What a seat wakes with, the same for the Mayor and the nine seats:
+ * Built on one seat until it works, as the worker template was on the chief (builder 2026-11-15: "you need to focus on
+ * building one that works rather than doing them all at once , like the plan state build the templates then the work
+ * flows , and agree the mayor is likely its own template"). The spec is Terrence Mobley, District 9: BUILT holds the seats
+ * on the template; another seat is added once his works. The Mayor is her own template, not this one.
+ *
+ * What a seat wakes with:
  *   1 who they are        the sheet line off the ledger, the office sheet and the dials (workerWake.whoTheyAre)
  *   2 their approval      now, last Cycle, and what puts them out of office — written here each wake, no explanation
  *                         (builder 2026-11-14: "a script edits each week so it show what their approval ratings is ,
@@ -17,10 +22,11 @@
  *   5 their memory        gathered from their page (workerWake.gatherMemory)
  *   6 their decisions     their own moves, each with what came of it
  *   7 what is put to them last, in the asker's words, with who asks. With nothing put to them nothing is added
- * The reply is the statement, whole. A move is a tool, staged here and filed by the caller through the move gate.
- * Weekday wake only; the Sunday hearing keeps its own path.
+ * The reply is the statement, whole. A move is a tool, staged here through the gate the caller hands in.
  *
- * Callers: cron-civic-run.js runSeatDatawake (with --seat-template). Every read is injected through `deps` for tests.
+ * This is the template only (plan Task 9). Wiring it into the weekday run, filing its moves and recording the wake is
+ * the workflow, after the builder approves the template (plan Task 11), as the chief's was (Task 10).
+ * Callers: the print harness output/engine-sheet/2026-11-15-seat-wake-print.js. Every read is injected through `deps` for tests.
  */
 const fs = require('fs');
 const path = require('path');
@@ -35,7 +41,8 @@ const SEAT_LOST_BELOW = 30;
 // Reads, resident calls and moves together, one wake: the chief's budget. A resident call is a model call.
 const MAX_TOOL_CALLS = 6;
 
-const isSeat = (officeId) => /^(MAYOR-|COUNCIL-D\d)/.test(String(officeId || ''));
+const BUILT = new Set(['COUNCIL-D9']);
+const isSeat = (officeId) => BUILT.has(String(officeId || ''));
 
 function defaults(deps) {
   const d = deps || {};
@@ -84,7 +91,6 @@ function dataBlocks(pack, office, cycle) {
   const out = [];
   const g = pack.game || {};
   const s = ((pack.brief || {}).sections) || {};
-  const where = /^D\d$/.test(String(office.district || '')) ? 'your district' : 'the city';   // the Mayor holds no district
   const fmt = (v) => (v == null ? '' : typeof v === 'number' ? Number(v.toFixed(3)) : String(v));
   // A record that could not be read says so — it is not an empty record (workerWake.memoryRecall's rule).
   const UNAVAILABLE = 'unavailable this wake — not an empty record';
@@ -104,14 +110,14 @@ function dataBlocks(pack, office, cycle) {
   // An event is its fact, when and where: its id, source path and retrieval key are build notes (codex 2026-11-15 F1).
   const evRows = events.map((e) => ({ Cycle: e.occurredCycle == null ? '' : e.occurredCycle, Where: (e.hoods || []).join(', ') || (e.citywideRelevance ? 'citywide' : ''),
     What: clip(e.fact || e.text || e.summary || '', 400), Size: e.significance || '' })).filter((r) => r.What);
-  out.push({ title: 'Events in ' + where, text: !avail(s.events) ? UNAVAILABLE : evRows.length ? table(evRows, ['Cycle', 'Where', 'What', 'Size']) : 'none' });
+  out.push({ title: 'Events in your district', text: !avail(s.events) ? UNAVAILABLE : evRows.length ? table(evRows, ['Cycle', 'Where', 'What', 'Size']) : 'none' });
   const known = (pack.known || []).filter((k) => k && k.text && !/^F-office-/.test(String(k.id || '')));   // their approval is part 2
   if (known.length) out.push({ title: 'On the record, Cycle ' + cycle, text: known.map((k) => '- ' + k.text).join('\n') });
   const ex = pack.exposure || {};
-  if ((ex.subjects || []).length) out.push({ title: 'People in ' + where, text: table(ex.subjects.map((p) => ({ Name: p.name, Neighborhood: p.neighborhood, Role: p.role })), ['Name', 'Neighborhood', 'Role']) });
+  if ((ex.subjects || []).length) out.push({ title: 'People in your district', text: table(ex.subjects.map((p) => ({ Name: p.name, Neighborhood: p.neighborhood, Role: p.role })), ['Name', 'Neighborhood', 'Role']) });
   const named = (list, label) => { if ((list || []).length) out.push({ title: label, text: list.map((b) => '- ' + [b.name, b.neighborhood || b.hood, b.type || b.kind].filter(Boolean).join(', ')).join('\n') }); };
-  named(ex.businesses, 'Businesses in ' + where);
-  named(ex.churches, 'Congregations in ' + where);
+  named(ex.businesses, 'Businesses in your district');
+  named(ex.churches, 'Congregations in your district');
   if ((g.board || []).length) {
     out.push({ title: 'Your board', text: table(g.board.map((b) => ({ Initiative: b.id, Name: b.name, Category: b.domain, Stage: b.stage || '', Status: b.status || '', Neighborhoods: (b.hoods || []).join(', '),
       Budget: String(b.budget || '').replace(/^budget:\s*/, ''), 'Vote Cycle': b.voteCycle == null ? '' : b.voteCycle, 'Next step due': b.nextActionCycle == null ? '' : 'C' + b.nextActionCycle,
@@ -120,11 +126,11 @@ function dataBlocks(pack, office, cycle) {
   if (g.categories && !g.categories.available) out.push({ title: 'Categories and budget bands', text: UNAVAILABLE });
   if (g.categories && g.categories.available) out.push({ title: 'Categories and budget bands', text: table(g.categories.list.map((c) => ({ Category: c.key, Covers: c.label, Band: c.band })), ['Category', 'Covers', 'Band']) });
   const pool = g.petitionPool || {};
-  if (g.petitionPool && !pool.available) out.push({ title: 'Complaints from ' + where, text: UNAVAILABLE });
-  if (pool.available) out.push({ title: 'Complaints from ' + where, text: (pool.complaints || []).length ? table(pool.complaints.map((c) => ({ Cycle: c.cycle, Neighborhood: c.hood, Said: c.snippet, Mood: c.affect })), ['Cycle', 'Neighborhood', 'Said', 'Mood']) : 'none' });
+  if (g.petitionPool && !pool.available) out.push({ title: 'Complaints from your district', text: UNAVAILABLE });
+  if (pool.available) out.push({ title: 'Complaints from your district', text: (pool.complaints || []).length ? table(pool.complaints.map((c) => ({ Cycle: c.cycle, Neighborhood: c.hood, Said: c.snippet, Mood: c.affect })), ['Cycle', 'Neighborhood', 'Said', 'Mood']) : 'none' });
   const probs = ((g.problemContinuity || {}).problems) || [];
-  if (g.problemContinuity && !g.problemContinuity.available) out.push({ title: 'Conditions counted in ' + where + ', Cycle ' + cycle, text: UNAVAILABLE });
-  if (probs.length) out.push({ title: 'Conditions counted in ' + where + ', Cycle ' + cycle, text: table(probs.map((p) => ({ Neighborhood: p.hood, Condition: p.label, Count: p.count })), ['Neighborhood', 'Condition', 'Count']) });
+  if (g.problemContinuity && !g.problemContinuity.available) out.push({ title: 'Conditions counted in your district, Cycle ' + cycle, text: UNAVAILABLE });
+  if (probs.length) out.push({ title: 'Conditions counted in your district, Cycle ' + cycle, text: table(probs.map((p) => ({ Neighborhood: p.hood, Condition: p.label, Count: p.count })), ['Neighborhood', 'Condition', 'Count']) });
   if (g.workingCity && !g.workingCity.available) out.push({ title: 'What the city\'s workers last said', text: UNAVAILABLE });
   if (g.workingCity && g.workingCity.available) out.push({ title: 'What the city\'s workers last said', text: String(g.workingCity.text || '').replace(/^The working city:\n?/, '') });
   if (g.patrol && !g.patrol.available) out.push({ title: 'The patrol setting', text: UNAVAILABLE });
@@ -183,7 +189,7 @@ function maraQuestion(pack) {
 async function buildWake(opts) {
   const o = opts || {};
   const office = o.office;
-  if (!office || !isSeat(office.officeId)) throw new Error('not a council seat or the Mayor: ' + (office && office.officeId));
+  if (!office || !isSeat(office.officeId)) throw new Error('not a seat on the council template: ' + (office && office.officeId));
   const question = String(o.question || '').trim(), askerLine = String(o.askerLine || '').trim();
   if (question && !askerLine) throw new Error('missing askerLine: a question is handed over with who asks it');
   const { buildPack, root } = defaults(o.deps);
@@ -211,16 +217,15 @@ async function buildWake(opts) {
 // then the council's business; an initiative is one ability among them. ----
 const fn = (name, description, properties, required) => ({ type: 'function', function: { name, description, parameters: { type: 'object', properties, required } } });
 function toolsFor(office, pack) {
-  const citywide = !/^D\d$/.test(String(office.district || ''));
   const t = ww.TOOLS.concat([
-    fn('resident_call', 'Call on a resident of ' + (citywide ? 'the city' : 'your district') + ' and put a question to them: name them, or name a neighborhood and call on someone who lives there. They answer in their own words.',
+    fn('resident_call', 'Call on a resident of your district and put a question to them: name them, or name a neighborhood and call on someone who lives there. They answer in their own words.',
       { name: { type: 'string', description: 'a full name' }, neighborhood: { type: 'string' }, question: { type: 'string' } }, ['question']),
-    fn('initiative_propose', 'Put an initiative before the council to serve ' + (citywide ? 'the city' : 'your district') + ': its name, what it is for, the category of city life it touches, its reach and a budget inside the category\'s band (a figure like $12.5M). ' +
+    fn('initiative_propose', 'Put an initiative before the council to serve your district: its name, what it is for, the category of city life it touches, its reach and a budget inside the category\'s band (a figure like $12.5M). ' +
       'It is entered as Proposed at the week\'s close; the council votes on it at the city hall run once a vote is called.',
     { title: { type: 'string' }, purpose: { type: 'string' }, category: { type: 'string' },
-      reach: { type: 'string', enum: citywide ? ['hood', 'district', 'all'] : ['hood', 'district'], description: citywide ? 'named neighborhoods, a district, or the whole city' : 'named neighborhoods of your district, or the whole district' },
+      reach: { type: 'string', enum: ['hood', 'district'], description: 'named neighborhoods of your district, or the whole district' },
       hoods: { type: 'array', items: { type: 'string' } }, budget: { type: 'string' } }, ['title', 'purpose', 'category', 'reach', 'budget']),
-    fn('vote_call', 'Send a proposed initiative with no vote scheduled to the next city hall vote. ' + (citywide ? 'The Mayor may call any.' : 'A district seat may call one with a neighborhood in its district.') + ' One call per initiative a week.',
+    fn('vote_call', 'Send a proposed initiative with no vote scheduled to the next city hall vote, one with a neighborhood in your district. One call per initiative a week.',
       { initiativeId: { type: 'string' } }, ['initiativeId']),
     fn('program_renew', 'Ask the council to re-fund a running program on your board that is running low or has run dry, with an amount inside its category\'s band. The council votes the next week; the money lands the week after. One renewal pending per program.',
       { initiativeId: { type: 'string' }, amount: { type: 'string' } }, ['initiativeId', 'amount']),
@@ -324,26 +329,5 @@ function toolExecutor(ctx) {
   };
 }
 
-// Move ledger lines for a seat's wake: one id per move. The weekday wake's single id (MV-<cycle>-<seat>-<date>) is kept
-// for the first decision; a second or later one gets ':2', ':3' — the ledger folds by id, and two moves under one id
-// would merge into one.
-function moveLedgerLines(office, cycle, date, mv) {
-  const base = 'MV-' + cycle + '-' + office.agentDir + '-' + date;
-  const at = new Date().toISOString();
-  let n = 0;
-  const lines = mv.accepted.map((m) => ({
-    moveId: m.type === 'answer' ? base + ':answer:' + m.payload.confrontationId : (++n === 1 ? base : base + ':' + n),
-    cycle: Number(cycle), date, agentDir: office.agentDir, popid: office.popid || null,
-    type: m.type, payload: m.payload, status: 'pending', at,
-  }));
-  mv.rejected.forEach((r, i) => lines.push({
-    moveId: base + ':rej' + i, cycle: Number(cycle), date, agentDir: office.agentDir,
-    popid: office.popid || null, type: (r.move && r.move.type) || null,
-    payload: (r.move && typeof r.move === 'object') ? r.move : { raw: String(r.move) },
-    status: 'rejected', detail: r.reason, at,
-  }));
-  return lines;
-}
-
-module.exports = { isSeat, buildWake, toolsFor, toolExecutor, moveLedgerLines, approvalBlock, lastCycleApproval, dataBlocks, pastDecisions,
+module.exports = { BUILT, isSeat, buildWake, toolsFor, toolExecutor, approvalBlock, lastCycleApproval, dataBlocks, pastDecisions,
   maraQuestion, hashPick, parseVoiceOutput, MAX_TOOL_CALLS, CHALLENGER_NAMED_BELOW, SEAT_LOST_BELOW };

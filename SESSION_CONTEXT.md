@@ -1,6 +1,6 @@
 # SESSION_CONTEXT — one PIN (world state outside the repo) + one NEXT line per Claude terminal: the job, its next step, any standing hold from Mike. Never what was done — that is git and the plan's changelog.
 
-**PIN:** S653 | Day 228 | Canon C115 | PROD @180 (stage 45; history: DEPLOY_HISTORY §PROD) | next live fire C116 Sun 2026-11-15
+**PIN:** S654 | Day 228 | Canon C115 | PROD @180 (stage 45; history: DEPLOY_HISTORY §PROD) | next live fire C116 Sun 2026-11-15
 
 **NEXT[engine-sheet]:** pipeline.110 → council template on Mobley (D9): his whole district records in place of the old pack's pick, and the build's own lines out (plan Task 9 table).
 

@@ -177,6 +177,7 @@ var EVENT_TRIGGER_VALUES = [
   'camp-opens',
   'award',
   'community-outreach',
+  'news',
   'question'
 ];
 

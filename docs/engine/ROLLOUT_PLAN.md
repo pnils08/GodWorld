@@ -74,6 +74,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
 | pipeline.100 | Mags memory one home (builder 11-03): her page, not the old `mags` store; every Mags seat loads her persona as the CLI did. Task 1 started 11-08 | in-progress | engine-sheet | [[../plans/2026-11-03-mags-memory-one-home]] |
+| engine.346 | Feed word `news` (builder 11-15): a rumor or offseason row seeds a desk story and changes nobody. Built, tests pass; sandbox proof then live | in-progress | research-build | [[../plans/2026-11-05-sports-feed-triggers]] §Changelog |
 | engine.339 | How kids are minted (builder 11-08, high): parents too young, a child's surname moving, a child counted where none was born. Read done; his calls at 1b | in-progress | research-build | [[../plans/2026-11-08-how-kids-are-minted]] |
 | pipeline.110 | Role citizens wake as themselves (builder 11-10). Chief on the worker model; council template on Mobley (D9) run once, waits on the builder's read | in-progress | engine-sheet | [[../plans/2026-11-10-role-citizens-wake-as-themselves]] |
 | pipeline.111 | Stop puppeting the newsroom (builder 11-10): the reporter half of the wake work (split with es 11-14). Next: one reporter's whole day in the test shell, his go | in-progress | research-build | [[../plans/2026-11-10-stop-puppeting-the-newsroom]] |

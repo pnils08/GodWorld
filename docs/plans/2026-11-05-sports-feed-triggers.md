@@ -102,6 +102,7 @@ Additions, each with its sign and pitch (pitch style follows `TRIGGER_HOOKS`; `<
 | camp-opens | good | `<team>` open camp. First look at the roster, battles to watch, fresh-start energy. |
 | award | good | `<team>` player wins an award. Recognition story, the season behind it, hometown pride. |
 | community-outreach | good | `<team>` in the community. Who showed up, who it helped, the club off the field. |
+| news | neither | `<team>` news. What is being said, who is saying it, what the club has and has not confirmed. (engine.346: club news that is not a game, a moment or a milestone — a rumor, front-office talk, an offseason read. Route `hook`: the named citizens keep the row's EventType line and get no second line; no clock, role or pay change.) |
 
 **In-season, good:**
 
@@ -272,6 +273,7 @@ All sport-neutral (the Oaks ride these pools too), they/them only.
 
 ## Changelog
 
+- 2026-11-15 (research-build) — engine.346: `news` added (builder: no word for offseason news; a C116 rumor row entered as `retirement` retired three). Hook yes, no second citizen line, changes nobody. Word table row above.
 - 2026-11-09 (engine-sheet) — C115 live read: Acceptance 14 PASS (3 SPORTS pitches = retirement, community-outreach, big-win; Oaks W4 under the bar, no hot pitch); P1 PASS (3 vs 2/2/2). P3 FAILS: 142 signed fan lines vs 37–74 — builder's call (G-EC45).
 - 2026-11-07 (engine-sheet) — Q5 shipped as engine.335, PROD @177 (stage 41); this row's C115 read unchanged (Acceptance 14, P1, P3).
 - 2026-11-07 (engine-sheet) — Bench 3 PASS on `f82f19c72`; PROD @174 = stage 38. Dashboard restarted; its sports page is down on a live roster header (G-ES6). Waiting: builder's validation re-run, C115 read.

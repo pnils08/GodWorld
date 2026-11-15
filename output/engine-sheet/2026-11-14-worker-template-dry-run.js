@@ -12,7 +12,7 @@ const dw = require(ROOT + '/scripts/cron-desk-writer');
 const civic = require(ROOT + '/scripts/cron-civic-run.js');
 const sheets = require(ROOT + '/lib/sheets');
 const page = require(ROOT + '/lib/citizenPage');
-const [officeId, cycleArg, runsArg] = process.argv.slice(2);
+const [officeId, cycleArg, runsArg, modelArg] = process.argv.slice(2);   // modelArg: run him on another model than his own
 const cycle = Number(cycleArg), RUNS = Number(runsArg || 3);
 
 // the reporters' twelve sheets plus the three no reporter reads: the chaos-car sheet, the city's money, the case ledger
@@ -59,7 +59,7 @@ async function memoryRecall(popid, input) {   // newest by date, and the page se
   let cost = 0, calls = 0;
   for (const mode of ['own', 'asked']) {
     const w = await buildWake(officeId, cycle, mode === 'asked' ? question : undefined, mode === 'asked' ? askerLine : undefined);
-    const model = w.office.model;
+    const model = modelArg || w.office.model;
     const exec = async (name, input) => {
       input = input || {};
       if (name === 'sheet_read') return sheetRead(input);
@@ -83,7 +83,7 @@ async function memoryRecall(popid, input) {   // newest by date, and the page se
     }
   }
   out.splice(2, 0, RUNS + ' runs each way. Tool calls in all: ' + calls + '. Cost $' + cost.toFixed(4) + '. Write guard on.', '');
-  const f = path.join(__dirname, '2026-11-14-worker-template-dry-run.' + officeId + '.md');
+  const f = path.join(__dirname, '2026-11-14-worker-template-dry-run.' + officeId + (modelArg ? '.' + modelArg.replace(/[^a-z0-9]+/gi, '-') : '.run2') + '.md');
   fs.writeFileSync(f, out.join('\n'));
   console.log(f + '\ntool calls ' + calls + '; cost $' + cost.toFixed(4));
 })().catch((e) => { console.log('FAILED ' + e.stack); process.exit(1); });

@@ -22,6 +22,14 @@ const FILLS = {
     const ccols = Object.keys(crime[0]).filter((c) => crime.some((r) => String(r[c] || '').trim()));   // a column blank in every row is left out and named
     const blank = Object.keys(crime[0]).filter((c) => !ccols.includes(c));
     out.push({ title: 'Crime by neighborhood, Cycle ' + cycle + ' (the department\'s sheet; it keeps this Cycle only, no earlier Cycles)' + (blank.length ? '. No reading this Cycle: ' + blank.join(', ') : ''), text: table(crime, ccols) });
+    // builder 2026-11-14 ("Agree on the idea for #1"): the high and low of each column, worked out here, so no one has to rank 22 rows by eye
+    const numeric = ccols.filter((c) => c !== 'LastUpdated' && crime.every((r) => String(r[c]).trim() !== '' && !isNaN(Number(r[c]))));
+    const ends = numeric.map((c) => {
+      const v = crime.map((r) => Number(r[c])), hi = Math.max(...v), lo = Math.min(...v);
+      const at = (x) => crime.filter((r) => Number(r[c]) === x).map((r) => r.Neighborhood).join(', ');
+      return { Column: c, Highest: hi + ' — ' + at(hi), Lowest: lo + ' — ' + at(lo) };
+    });
+    out.push({ title: 'The high and low of each column on that sheet, Cycle ' + cycle, text: table(ends, ['Column', 'Highest', 'Lowest']) });
     const census = (await sheets.getSheetAsObjects('Care_Justice_Census')).filter((r) => r.System === 'judicial' && r.IntakeType === 'arrest');
     const cyc = [...new Set(census.map((r) => Number(r.Cycle)))].sort((a, b) => a - b);
     const city = census.filter((r) => r.GeographicScope === 'city').map((r) => ({ Cycle: r.Cycle, Arrests: r.TotalIntakes, 'In custody, start': r.OpeningOccupancy, 'In custody, end': r.ClosingOccupancy, Released: r.Exits, 'Residents covered': r.CoveredPopulation }));

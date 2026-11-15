@@ -1,6 +1,6 @@
 # What Rafael Montez (Police Chief) would wake with — worker template, Cycle 115
 
-No model was called. Sizes: system 3982 characters, user 7972. Memory: 4 from a search on "crime East Oakland San Antonio Glenview clearance response time arrests custody patrol", 2 newest of his own; 6 after duplicates. Decisions on record: 4.
+No model was called. Sizes: system 3982 characters, user 8645. Memory: 4 from a search on "crime East Oakland San Antonio Glenview clearance response time arrests custody patrol", 2 newest of his own; 6 after duplicates. Decisions on record: 4.
 
 ## System turn (who he is, his memory)
 
@@ -43,6 +43,18 @@ Eastlake | 43 | 28 | 11.1 | 0.19 | 5 | 115 | 40.56 | 26.9 | 45 | steady | 1.09
 Ivy Hill | 39 | 27 | 11.2 | 0.19 | 6 | 115 | 40.66 | 27.3 | 45 | steady | 1.02
 San Antonio | 43 | 30 | 11.7 | 0.25 | 6 | 115 | 42.44 | 29.8 | 45.14 | steady | 1.12
 Baylight District | 31 | 26 | 11.1 | 0.18 | 5 | 115 | 33.02 | 26.19 | 40.59 | falling | 0.88
+
+The high and low of each column on that sheet, Cycle 115:
+Column | Highest | Lowest
+PropertyCrimeIndex | 45 — Temescal | 31 — Baylight District
+ViolentCrimeIndex | 33 — East Oakland | 19 — Jack London
+ResponseTimeAvg | 11.8 — Rockridge | 10.6 — Grand Lake
+ClearanceRate | 0.25 — San Antonio | 0.18 — Fruitvale, Jack London, Chinatown, Glenview, Baylight District
+IncidentCount | 8 — Grand Lake | 4 — Adams Point
+PropertyLevel | 47.12 — Temescal | 33.02 — Baylight District
+ViolentLevel | 33.28 — East Oakland | 19.6 — Jack London
+QolLevel | 47.62 — Temescal | 40.59 — Baylight District
+PressureRatio | 1.12 — East Oakland, San Antonio | 0.88 — Downtown, Baylight District
 
 Arrests and custody, citywide, Cycles 110–115:
 Cycle | Arrests | In custody, start | In custody, end | Released | Residents covered

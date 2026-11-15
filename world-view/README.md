@@ -31,7 +31,7 @@ Builder 2026-11-14, on the sheet review: "lets record these as items to add and 
 | 11 | Busy shop fronts and quiet ones | `Business_Ledger` Growth_Rate, Annual_Revenue | 283 | yes | open |
 | 12 | Homes by rent or own | `Household_Ledger` HousingType, MonthlyRent, HouseholdIncome | 677 active households | yes | open |
 | 13 | World events on the street (roadworks, incidents) | `WorldEvents_V3_Ledger` (EventDescription, Severity, Neighborhood) | 10 | no | open |
-| 14 | People who know each other stop to talk | `Relationship_Bonds` (CitizenA, CitizenB, BondType, Intensity) | 697 rows | no | open |
+| 14 | People who know each other stop to talk | `Relationship_Bonds` (CitizenA, CitizenB, BondType, Intensity) | 697 rows | no | NEXT (builder 2026-11-15: "People who know each other ..."); nothing read or built yet |
 | 15 | A street under strain | `Event_Arc_Ledger` (Type, Phase, Tension, Neighborhood) | 0 stamped C115; newest C114 `CRISIS-114-DOWNTOWN` at onset | no | open |
 | 16 | Shop rush and street life | `Texture_Trigger_Log` (TextureKey, Neighborhood, Intensity) | 13 | no | open |
 

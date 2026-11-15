@@ -358,6 +358,7 @@ function noticed(f) {
   f.sources.sports = [{ Cycle: '115', TeamsUsed: 'SYNTHETIC Team', EventType: 'game-result', StoryAngle: 'SYNTHETIC headline', Notes: 'SYNTHETIC note.', HomeNeighborhood: f.hood.name, Streak: '-', WeekRecord: 'H:W', 'Team Record': '1-0' }];
   f.hood.notes = [{ k: 'f', n: 'SYNTHETIC Venue', x: 'SYNTHETIC supper served', type: 'community_program', trad: 'SYNTHETIC', att: 40, leader: 'SYNTHETIC Leader', lid: 'POP-90002', cong: 300, ch: 'synthetic', b: 1 },
     { k: 's', n: 'SYNTHETIC Team', x: 'SYNTHETIC headline', type: 'game-result', notes: 'SYNTHETIC note.', rec: '1-0', week: 'H:W' }];
+  f.hood.gameNight = 1; // the row is a home game filed to this neighborhood
   f.second = structuredClone(f.build);
   return f;
 }
@@ -367,6 +368,8 @@ test('a notice is a row of this cycle on its own street, word for word', () => {
   rejects('notice', f => { noticed(f); f.hood.notes[0].att = 4000; });                        // not the ledger's count
   rejects('notice', f => { noticed(f); f.hood.notes[0].b = 0; });                             // at a building that is not its own
   rejects('notice', f => { noticed(f); f.hood.notes.pop(); });                                // a sports row of this cycle left off
+  rejects('notice', f => { noticed(f); delete f.hood.gameNight; f.second = structuredClone(f.build); }); // a home game with no game night on its street
+  rejects('notice', f => { noticed(f); f.hood.notes[1].b = 0; f.second = structuredClone(f.build); });   // a team's news put at a building that is not the team's
   rejects('notice', f => { noticed(f); f.hood.notes[1].x = 'SYNTHETIC invented headline'; }); // not the feed's headline
   rejects('notice', f => { noticed(f); f.hood.notes.push({ k: 'f', n: 'SYNTHETIC Venue', x: 'SYNTHETIC last week', type: '' }); }); // last cycle's event
 });

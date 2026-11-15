@@ -488,6 +488,8 @@ talks.forEach(tk => { if (!tk.used && tk.ids.some(id => shownAt.has(id))) tieSki
 hoods.forEach(h => { h.notes = []; });
 const notesElsewhere = [], ws = v => String(v == null ? '' : v).replace(/\s+/g, ' ').trim(), dash = v => { v = ws(v); return v === '-' ? '' : v; };
 const faithOrg = new Map(); try { rd('Faith_Organizations').forEach(o => faithOrg.set(o.Organization, o)); } catch (e) { console.warn('world-view: no Faith_Organizations in the dump; faith events are shown without their organization\'s details'); }
+// the feed's team names and their franchise businesses: phase05-citizens/applyGameNightMoments.js SPORTS_FRANCHISE_EMPLOYER_
+const TEAM_BIZ = { "A's": 'BIZ-00005', Oaks: 'BIZ-00074' };
 let faithRows = [], sportRows = [];
 try { faithRows = rd('Faith_Ledger').filter(r => String(r.Cycle) === CYCLE); } catch (e) { console.warn('world-view: no Faith_Ledger in the dump; no faith events shown'); }
 try { sportRows = rd('Oakland_Sports_Feed').filter(r => String(r.Cycle) === CYCLE); } catch (e) { console.warn('world-view: no Oakland_Sports_Feed in the dump; no sports rows shown'); }
@@ -504,7 +506,14 @@ sportRows.forEach(r => {
   const notes = ws(r.Notes), angle = ws(r.StoryAngle), nt = { k: 's', n: dash(r.TeamsUsed), x: angle || trimSaid(notes), type: dash(r.EventType) };
   if (angle && notes) nt.notes = notes;
   [['SeasonType', 'season'], ['Team Record', 'rec'], ['Streak', 'streak'], ['FanSentiment', 'fan'], ['WeekRecord', 'week'], ['NamesUsed', 'names']].forEach(f => { const v = dash(r[f[0]]); if (v) nt[f[1]] = v; });
-  noteTo(nt, dash(r.HomeNeighborhood));
+  // Where it stands (builder 2026-11-15: "Isn't the As it's own location ?"): at the team's own place, the franchise's
+  // business on the ledger, on whichever street that is. The row's own neighborhood (HomeNeighborhood, where the
+  // engine lands its effects) rides along as `lands`, and a home game still hangs that neighborhood's pennants.
+  // A team with no business on a street stays a notice of the row's neighborhood.
+  const lands = dash(r.HomeNeighborhood), tb = TEAM_BIZ[nt.n]; let th = null, tbi = -1;
+  if (tb) hoods.forEach(h => { const bi = h.biz.findIndex(b => b.id === tb); if (bi >= 0 && (h.lay.places.some(p => p.b === bi && p.half > 0) || h.lay.parcels.some(p => p.b === bi))) { th = h; tbi = bi; } });
+  if (th) { nt.b = tbi; if (lands) nt.lands = lands; noteTo(nt, th.name); } else noteTo(nt, lands);
+  if (/^H:/.test(nt.week || '')) { const gh = hoods.find(x => x.name === lands); if (gh) gh.gameNight = 1; }
 });
 // Lived_Events (derived by the dump from LifeHistory_Log, the hospital and the archive: deaths, retirements,
 // promotions in the last two cycles, each with the people it reached). The label is put together from the row's

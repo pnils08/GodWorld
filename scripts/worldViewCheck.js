@@ -440,7 +440,7 @@ function checkWorldView(build, sources, engine, secondBuild, reports = []) {
   {
     const ws = v => String(v == null ? '' : v).replace(/\s+/g, ' ').trim(), dash = v => (ws(v) === '-' ? '' : ws(v)), thisCycle = r => String(r?.Cycle) === String(build.CYCLE);
     const orgs = new Map(arr(sources.faithOrgs || [], 'Faith_Organizations').map(o => [o.Organization, o]));
-    const want = [];
+    const want = [], homeGame = new Set();
     for (const r of arr(sources.faith || [], 'Faith_Ledger').filter(thisCycle)) {
       const nt = { k: 'f', n: ws(r.Organization), x: ws(r.EventDescription), type: ws(r.EventType) }, o = orgs.get(r.Organization);
       if (ws(r.FaithTradition)) nt.trad = ws(r.FaithTradition); if (Number(r.Attendance) > 0) nt.att = Number(r.Attendance);
@@ -451,7 +451,10 @@ function checkWorldView(build, sources, engine, secondBuild, reports = []) {
       const notes = ws(r.Notes), angle = ws(r.StoryAngle), nt = { k: 's', n: dash(r.TeamsUsed), x: angle, type: dash(r.EventType) };
       if (angle && notes) nt.notes = notes;
       for (const [col, key] of [['SeasonType', 'season'], ['Team Record', 'rec'], ['Streak', 'streak'], ['FanSentiment', 'fan'], ['WeekRecord', 'week'], ['NamesUsed', 'names']]) if (dash(r[col])) nt[key] = dash(r[col]);
-      want.push({ hood: dash(r.HomeNeighborhood), nt, used: false, notes });
+      // a team's news stands at the team's own business where the ledger has it on a street (the engine's own pairing,
+      // applyGameNightMoments.js SPORTS_FRANCHISE_EMPLOYER_), carrying the row's neighborhood as `lands`
+      want.push({ hood: dash(r.HomeNeighborhood), nt, used: false, notes, team: { "A's": 'BIZ-00005', Oaks: 'BIZ-00074' }[nt.n] });
+      if (/^H:/.test(dash(r.WeekRecord))) homeGame.add(dash(r.HomeNeighborhood));
     }
     const WORD = { death: 'Died', retirement: 'Retired', promotion: 'Promoted' };
     for (const r of arr(sources.lived || [], 'Lived_Events')) {
@@ -486,16 +489,18 @@ function checkWorldView(build, sources, engine, secondBuild, reports = []) {
     for (const r of arr(sources.world || [], 'WorldEvents_V3_Ledger').filter(thisCycle)) { if (ws(r.Domain).toUpperCase() === 'FAITH' || !ws(r.EventDescription)) continue; const nt = { k: 'w', n: capw(r.Domain) || 'This week', x: ws(r.EventDescription) }; if (ws(r.EventType)) nt.type = ws(r.EventType); if (ws(r.Severity)) nt.sev = ws(r.Severity); want.push({ hood: ws(r.Neighborhood), nt, used: false, future: !hoodNames.has(ws(r.Neighborhood)) }); }
     for (const r of arr(sources.textures || [], 'Texture_Trigger_Log').filter(thisCycle)) { if (!ws(r.Neighborhood) || !ws(r.Reason)) continue; const nt = { k: 'x', n: capw(r.Domain) || 'This week', x: ws(r.Reason) }; if (ws(r.TextureKey)) nt.key = ws(r.TextureKey); if (ws(r.Intensity)) nt.sev = ws(r.Intensity); want.push({ hood: ws(r.Neighborhood), nt, used: false, future: !hoodNames.has(ws(r.Neighborhood)) }); }
     // a sports row with no headline is shown by the start of its note
-    const same = (got, w) => { const g = Object.assign({}, got); delete g.b; delete g.hood; delete g.hh; delete g.line; if (w.nt.k === 's' && !w.nt.x) { const cut = String(g.x || '').replace(/…$/, ''); if (!cut || !w.notes.startsWith(cut)) return false; g.x = ''; } return equal(g, w.nt); };
+    const same = (got, w) => { const g = Object.assign({}, got); delete g.b; delete g.hood; delete g.hh; delete g.line; delete g.lands; if (w.nt.k === 's' && !w.nt.x) { const cut = String(g.x || '').replace(/…$/, ''); if (!cut || !w.notes.startsWith(cut)) return false; g.x = ''; } return equal(g, w.nt); };
     let matched = 0;
     for (const h of hoods) for (const nt of arr(h?.notes || [], `${h?.name}.notes`)) {
-      const w = want.find(x => !x.used && x.hood === h.name && same(nt, x));
+      const atTeam = x => !!x.team && nt.k === 's' && nt.b !== undefined && arr(h.biz, `${h.name}.biz`)[nt.b]?.id === x.team && (nt.lands || '') === x.hood;
+      const w = want.find(x => !x.used && (nt.k === 's' && nt.b !== undefined ? atTeam(x) : x.hood === h.name) && same(nt, x));
       if (!w) { fail('notice', h.name, `no row of this cycle for ${JSON.stringify(nt).slice(0, 220)}`); continue; }
       w.used = true; matched++;
       const at = nt.b !== undefined ? arr(h.biz, `${h.name}.biz`)[nt.b] : null;
-      if (nt.b !== undefined && !(nt.k === 'f' ? at?.n === nt.n : nt.k === 'i' ? at?.id === w.bizId : nt.k === 'l' ? businesses.get(at?.id)?.Key_Personnel?.includes(nt.sub) : false)) fail('notice', h.name, `${nt.n} is placed at a building that is not its own`);
+      if (nt.b !== undefined && !(nt.k === 'f' ? at?.n === nt.n : nt.k === 's' ? at?.id === w.team : nt.k === 'i' ? at?.id === w.bizId : nt.k === 'l' ? businesses.get(at?.id)?.Key_Personnel?.includes(nt.sub) : false)) fail('notice', h.name, `${nt.n} is placed at a building that is not its own`);
       if (nt.hh !== undefined && !(nt.k === 'l' && ledger.get(nt.sub)?.HouseholdId === nt.hh && arr(h.homes || [], `${h.name}.homes`).some(x => x.hh === nt.hh))) fail('notice', h.name, `${nt.n} is placed at a home that is not theirs`);
     }
+    for (const h of hoods) if (!!h?.gameNight !== homeGame.has(h?.name)) fail('notice', h?.name, 'game night does not match this cycle\'s home games in the sports feed');
     for (const nt of arr(build.data?.notesElsewhere || [], 'data.notesElsewhere')) { const w = want.find(x => !x.used && x.hood === (nt?.hood || '') && same(nt, x)); if (!w) fail('notice', 'elsewhere', `no row of this cycle for ${JSON.stringify(nt).slice(0, 200)}`); else { w.used = true; if (hoodNames.has(w.hood) && !w.future && w.nt.n && (w.nt.x || w.notes)) fail('notice', 'elsewhere', `${w.nt.n} belongs on ${w.hood}`); } }
     for (const w of want) if (!w.used) fail('notice', w.hood || 'no neighborhood', `a row of this cycle is neither on a street nor listed elsewhere: ${w.nt.n} ${w.nt.x.slice(0, 80)}`);
     if (matched) reports.push(`NOTICES ${matched} matched to their rows: this cycle's Faith_Ledger and sports feed, Lived_Events, Initiative_Tracker, Community_Programs, Cultural_Ledger, Transit_Metrics, WorldEvents_V3_Ledger, Texture_Trigger_Log`);

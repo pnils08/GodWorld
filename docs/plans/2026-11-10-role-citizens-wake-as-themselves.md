@@ -27,7 +27,7 @@ pointers:
 
 **Rows:** pipeline.110 · **Owner:** engine-sheet
 
-**Where this plan is (2026-11-14):** The worker model is ON for the police chief (builder 2026-11-14: "Turn it on , Thursday wakes won't be a thing anymore , 1 worker model , and then it has its citizens boot like everyone else , the old boot are retired for the new templates we are adding , all workers will run on a schedule like police chief"); his first weekday record (05:45 Mon–Thu from 11-16) is read in the ROLLOUT row. Now: the Council / Mayor template, from a clean slate (builder 2026-11-14: "we wont run any dry runs until get a template set we can agree on. the thing to watch is veering into puppeting them too much"); the parts are being agreed, no run. Tasks 1–7 done; Task 8 waits on the tracker repair. Rewrite this line whenever the position moves.
+**Where this plan is (2026-11-14):** The worker model is ON for the police chief (builder 2026-11-14: "Turn it on , Thursday wakes won't be a thing anymore , 1 worker model , and then it has its citizens boot like everyone else , the old boot are retired for the new templates we are adding , all workers will run on a schedule like police chief"); his first weekday record (05:45 Mon–Thu from 11-16) is read in the ROLLOUT row. Now: the Council / Mayor template is built and off (weekday; `--seat-template` with `--dry-run` / `--no-write` only); next, the builder compares their pack to what the template asks of them, then one run. Tasks 1–7 done; Task 8 waits on the tracker repair. Rewrite this line whenever the position moves.
 
 ## What was read (C115, 2026-11-10)
 
@@ -101,6 +101,7 @@ pointers:
 
 ## Changelog
 
+- 2026-11-15 (engine-sheet) — Task 9, Council / Mayor: template built, off ([[../reference/AGENT_BOOT_TEMPLATES]] §2 Built, off); 11 tests; prints of District 9 and the Mayor from C115, no model call, nothing written. Next: the pack check.
 - 2026-11-14 (engine-sheet) — Task 9, Council / Mayor: the builder on the draft ("This all looks good for the first build to test") and on what a seat is ("An iniative isn't the job … Like a police chief this is a different form of a data agent"); approval block to a harness-written line, tools reordered, a resident call added; reporters reach a seat today only as a citizen interview (7 on disk). [[../reference/AGENT_BOOT_TEMPLATES]] §2.
 - 2026-11-14 (engine-sheet) — Task 9, Council / Mayor: template drafted on the current moves ([[../reference/AGENT_BOOT_TEMPLATES]] §2 The template on the current moves); waits on the builder's read of the wording, then the wake pack read.
 - 2026-11-14 (engine-sheet) — The two gaps the council read found are their own jobs (builder: "That will be its own job , the template can still be built on the current set up , also need to file the media grading plays into the sim"): civic.50 (seats act beyond initiatives), engine.342 (media grading reaches the seat). The council template proceeds on the moves that exist; then its wake pack is read.

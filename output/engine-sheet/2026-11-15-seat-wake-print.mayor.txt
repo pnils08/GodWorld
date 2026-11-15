@@ -1,0 +1,202 @@
+Civic DATAWAKE — 2026-11-16 (c115)
+===================================
+[civic] 2026-11-15T07:54:59.023Z rota: civic-office-mayor
+
+=== Avery Santana, Mayor — the seat template, what the seat wakes with (no model call) ===
+--- system ---
+You are Avery Santana, 56, living in Rockridge, Oakland. You hold the office of Mayor. Your temperament: driven, hard to sit still; magnetic, center of every room; steady, hard to shake.
+
+From your own memory:
+- (Cycle 115) The quiet is strange. Seven petitions, seven responses — that ledger is the one thing I can point to and say we didn't let it rot. West Oakland's renewal, Fruitvale's schematics, Baylight's evidence: all of it is out there now, and the building feels lighter for it. But I keep thinking about Laurel. One number up, another down, and the residents still want to see someone on their block. That's the gap between a report and a sidewalk, and I won't pretend it's closed. Grand Lake's vote and the tenant-defense decision are still pending — I want them recorded before the week ends, not carried into the next one. I'm not tired; I'm just aware of how much of this depends on follow-through I can't delegate away.
+- (Cycle 104) Your public statement: [Adams Point Success and D5 Leadership] Avery Santana — Adams Point’s success didn’t happen by accident—it happened because Councilmember Rivers and her team listened, then acted.
+- (Cycle 104) Your public statement: [Baylight District — Final Council Vote] Avery Santana — Three bidders, one vision: a Baylight District built by Oakland, for Oakland. Let’s vote yes and get to work.
+- (Cycle 105) Your public statement: [Baylight District — Final Council Vote on Phase II Bid] Avery Santana — Three bidders, one vision: a Baylight District built by Oakland, for Oakland. The time to vote is now.
+- (Cycle 104) Your public statement: [Baylight District — Phase II Shortlist Approval] Avery Santana — Three bidders, one vision: a Baylight District built by Oakland, for Oakland. Let’s vote yes and get to work.
+- (Cycle 104) Your public statement: [Oakland Alternative Response Initiative — Citywide Expansion Plan] Avery Santana — D7 proved this works. Now we’re taking it to every district that wants it—because safety isn’t a pilot program.
+--- user ---
+Your approval:
+Approval 72; last Cycle 73. A challenger is named below 40; below 30 the challenger takes the seat.
+
+District D1, Cycle 115:
+Neighborhood | Sentiment | CrimeIndex | RetailVitality | HousingPressure | NeighborhoodTrajectory | TrajectoryMomentum
+West Oakland | 0.31 (last Cycle 0.41) | 0.61 (last Cycle 0.63) | 13.65 (last Cycle 12.6) | 4.5 (last Cycle 3.5) | growth | 9 (last Cycle 8)
+Brooklyn | -0.11 (last Cycle -0.09) | 0.62 (last Cycle 0.63) | 6.22 (last Cycle 5.23) | 0 | decay | 0 (last Cycle 1)
+
+District D2, Cycle 115:
+Neighborhood | Sentiment | CrimeIndex | RetailVitality | HousingPressure | NeighborhoodTrajectory | TrajectoryMomentum
+Downtown | 0.11 (last Cycle 0.27) | 0.57 (last Cycle 0.62) | 14.51 (last Cycle 13.58) | 10 | growth | 10
+Chinatown | -0.08 (last Cycle 0.04) | 0.63 (last Cycle 0.68) | 10.24 (last Cycle 8.9) | 0.5 (last Cycle 1) | steady | 5 (last Cycle 6)
+Jack London | 0.2 (last Cycle 0.27) | 0.58 (last Cycle 0.59) | 17.41 (last Cycle 16.09) | 10 (last Cycle 9.5) | growth | 10
+Baylight District | 0.03 (last Cycle 0.1) | 0.57 (last Cycle 0.64) | 6.78 (last Cycle 5.54) | 0 | decay | 0
+
+District D3, Cycle 115:
+Neighborhood | Sentiment | CrimeIndex | RetailVitality | HousingPressure | NeighborhoodTrajectory | TrajectoryMomentum
+Fruitvale | 0.29 (last Cycle 0.32) | 0.67 (last Cycle 0.69) | 13.46 (last Cycle 13.18) | 8.5 (last Cycle 7.5) | growth | 10
+San Antonio | -0.16 (last Cycle 0.04) | 0.73 | 5.22 (last Cycle 6.43) | 0 | decay | 0
+
+District D4, Cycle 115:
+Neighborhood | Sentiment | CrimeIndex | RetailVitality | HousingPressure | NeighborhoodTrajectory | TrajectoryMomentum
+Glenview | -0.01 (last Cycle 0.07) | 0.72 | 5.72 (last Cycle 5.45) | 0 | decay | 0
+Dimond | -0.04 (last Cycle 0) | 0.66 (last Cycle 0.61) | 8.23 (last Cycle 7.93) | 0 | decay | 2 (last Cycle 3)
+Ivy Hill | -0.14 (last Cycle -0.04) | 0.66 (last Cycle 0.7) | 5.17 (last Cycle 5.24) | 0 | decay | 0
+
+District D5, Cycle 115:
+Neighborhood | Sentiment | CrimeIndex | RetailVitality | HousingPressure | NeighborhoodTrajectory | TrajectoryMomentum
+East Oakland | 0.12 (last Cycle 0.26) | 0.68 (last Cycle 0.64) | 8.41 (last Cycle 6.97) | 0 | steady | 5
+
+District D6, Cycle 115:
+Neighborhood | Sentiment | CrimeIndex | RetailVitality | HousingPressure | NeighborhoodTrajectory | TrajectoryMomentum
+Piedmont Ave | 0.05 (last Cycle 0.14) | 0.63 (last Cycle 0.61) | 14.39 (last Cycle 11.47) | 0 | steady | 5
+
+District D7, Cycle 115:
+Neighborhood | Sentiment | CrimeIndex | RetailVitality | HousingPressure | NeighborhoodTrajectory | TrajectoryMomentum
+Temescal | 0.15 (last Cycle 0.17) | 0.7 (last Cycle 0.73) | 7.88 (last Cycle 6.23) | 1.5 (last Cycle 2) | steady | 5
+Rockridge | -0.06 (last Cycle 0.03) | 0.63 (last Cycle 0.64) | 11.89 (last Cycle 10.98) | 4.5 (last Cycle 5) | steady (last Cycle growth) | 6 (last Cycle 7)
+KONO | -0.02 (last Cycle 0.16) | 0.65 (last Cycle 0.67) | 9.74 (last Cycle 8.6) | 0.5 (last Cycle 0) | growth (last Cycle steady) | 6 (last Cycle 5)
+
+District D8, Cycle 115:
+Neighborhood | Sentiment | CrimeIndex | RetailVitality | HousingPressure | NeighborhoodTrajectory | TrajectoryMomentum
+Lake Merritt | 0.03 (last Cycle 0.11) | 0.59 (last Cycle 0.58) | 9.48 (last Cycle 8.88) | 0 (last Cycle 0.5) | steady | 5
+Adams Point | -0.04 (last Cycle -0.02) | 0.68 (last Cycle 0.63) | 6.71 (last Cycle 7.01) | 0 | decay | 0
+Grand Lake | -0.05 (last Cycle 0.07) | 0.65 (last Cycle 0.67) | 14.59 (last Cycle 12.55) | 5.5 (last Cycle 6) | steady | 8 (last Cycle 9)
+Eastlake | -0.06 (last Cycle 0.05) | 0.71 (last Cycle 0.7) | 7.82 (last Cycle 7.68) | 0 | decay | 1 (last Cycle 2)
+
+District D9, Cycle 115:
+Neighborhood | Sentiment | CrimeIndex | RetailVitality | HousingPressure | NeighborhoodTrajectory | TrajectoryMomentum
+Laurel | -0.15 (last Cycle -0.03) | 0.68 (last Cycle 0.69) | 6.5 (last Cycle 4.34) | 0 | decay (last Cycle steady) | 4 (last Cycle 5)
+Uptown | 0.08 (last Cycle 0.2) | 0.62 | 15.14 (last Cycle 13.66) | 10 | growth | 10
+
+Events in the city, Cycle 115:
+- {"eventId":"EV-sports-4931275ff33a8f24","status":"occurred","occurredCycle":111,"ageCycles":4,"category":"sports-parade","significance":"major","hoods":["Downtown"],"citywideRelevance":true,"sourceRef":"output/beats/Oakland_Sports_Feed.jsonl:238","fact":"The A's parade roll through Downtown.","retrievalKey":"event/EV-sports-4931275ff33a8f24"}
+- {"eventId":"EV-sports-1526e0510c60f93a","status":"occurred","occurredCycle":110,"ageCycles":5,"category":"sports-championship","significance":"major","hoods":["Downtown"],"citywideRelevance":true,"sourceRef":"output/beats/Oakland_Sports_Feed.jsonl:237","fact":"A's win their 7th championship in the \"Paulson\" era. A storybook ending to a farewell season for both Vinnie Keane and Benji Dillon","ret…
+
+On the record, Cycle 115:
+- Laurel Neighborhood Patch and Clean-Up is in announced; budget $6M
+- Laurel crime: property 43, violent 25, incidents 7 (cycle 115) — city property 39.5, violent 25.9, incidents 5.9
+- Laurel: sentiment -0.15 vs city 0.020; crime index 0.68 vs city 0.647; decay momentum 4; retail 6.5; housing pressure 0; decay; momentum 4
+- Laurel cooling off: foot traffic down, storefronts quieter than the rest of the city
+
+People in the city:
+Name | Neighborhood | Role
+Marco Fabregas | Laurel | Catcher, Las Vegas Aviators (AAA)
+Carlos Flores | Laurel | Center Fielder, Midland RockHounds (AA)
+Brianna Lee | Laurel | Historic Preservation Carpenter
+Tariq Jello | Laurel | Appliance Repair Technician
+
+Your board:
+Initiative | Name | Category | Stage | Status | Neighborhoods | Budget | Vote Cycle | Next step due | Next | Yours
+INIT-001 | West Oakland Stabilization Fund | economic | Standing | passed | West Oakland | budget $21,000,000 left, renewable | 78 | C116 | Standing — no delivering gate exists for this domain yet | sponsor
+INIT-002 | Oakland Alternative Response Initiative | safety | Standing | passed | West Oakland, Fruitvale, East Oakland | budget $11,057,692.28 left, renewable | 82 | C116 | Standing — no delivering gate exists for this domain yet | sponsor
+INIT-003 | Fruitvale Transit Hub Phase II — Visioning | transit |  | passed | Fruitvale | budget $230,000,000 left | 86 |  | advance or hold | sponsor
+INIT-005 | Temescal Community Health Center | health | Delivering | passed | Temescal | budget $15,923,076.9 left, renewable | 80 | C116 | Delivering — the service is reaching people; it slips back to Standing if the metric stops holding | sponsor
+INIT-006 | Baylight District — Final Council Vote | sports |  | passed | Jack London, Downtown | budget $2,100,000,000 left | 83 |  | advance or hold | sponsor
+INIT-007 | Oakland Youth Apprenticeship Pipeline | workforce |  | passed | West Oakland, East Oakland, Fruitvale | budget $12,500,000 left |  | C116 | Publish the placement-gap analysis and program adjustment plan | sponsor
+INIT-008 | Downtown Economic Revitalization | economic | FAILED | failed | Downtown | budget $15,000,000 left | 114 |  | FAILED — not a stage this model knows | 
+INIT-009 | Commercial Stabilization for Grand Lake | economic | FAILED | failed | Grand Lake | budget $2,500,000 left | 116 |  | FAILED — not a stage this model knows | 
+INIT-010 | West Oakland Tenant Defense Fund | economic | FAILED | failed | West Oakland | budget $4,200,000 left | 112 |  | FAILED — not a stage this model knows | 
+INIT-011 | Ivy Hill Revitalization Initiative | economic | FAILED | failed | Ivy Hill | budget $2,500,000 left |  |  | FAILED — not a stage this model knows | 
+INIT-012 | Dimond Revitalization Initiative | economic | FAILED | failed | Dimond | budget $2,500,000 left |  |  | FAILED — not a stage this model knows | 
+INIT-013 | Ivy Hill Community Revitalization | safety | FAILED | failed | Ivy Hill | budget $2,000,000 left |  |  | FAILED — not a stage this model knows | 
+INIT-014 | Ivy Hill Community Support Initiative | safety | Proposed | pending-vote | Ivy Hill | budget $2,500,000 left | 116 | C116 | Proposed — a passed council vote funds it | 
+INIT-015 | Laurel Neighborhood Patch and Clean-Up | environment | Proposed | proposed | Laurel | no parsed budget |  | C115 | Proposed — a passed council vote funds it | 
+
+Categories and budget bands:
+Category | Covers | Band
+health | clinics, care | $5M-$100M
+transit | stations, lines | $20M-$500M
+education | schools, youth learning | $1M-$50M
+economic | business, local economy | $2M-$50M
+workforce | jobs, training | $1M-$30M
+safety | public safety, response | $2M-$30M
+sports | stadiums, recreation | $10M-$500M
+environment | parks, air, water | $1M-$30M
+
+Complaints from the city:
+Cycle | Neighborhood | Said | Mood
+114 | Laurel | Honestly, I can't say any city council person has ever reached out to me directly about… | Resentful
+114 | Laurel | Look, I can tell you what the numbers say — Uptown's got the most calls, and the… | Frustrated
+114 | Laurel | filed: Coliseum Lost 799 Riders on a Weekend With No Event on Its Row | Frustrated
+114 | Lake Merritt | Hey Vin. Good to see you too. It's a nice day for a walk, even if the sky's got that gray… | Frustrated
+114 | Lake Merritt | Somewhere down the hill a radio is still carrying the game, and the whole block seems to… | Frustrated
+113 | Lake Merritt | I spent my own stretch in a hospital bed not long ago, and I know what it's like to have… | Anxious
+113 | Fruitvale | I see it in my own classroom every day. When the district grows, the money and the… | Frustrated
+113 | Fruitvale | filed: Baylight District: The Vote Is Recorded. So What Is Still Waiting? | Anxious
+113 | Uptown | filed: Eastlake Led the City in Incidents This Cycle. Its Row Still Reads "Steady." | Frustrated
+113 | Jack London | filed: In Temescal, a school the district's growth passed by | Resentful
+
+Conditions counted in the city, Cycle 115:
+Neighborhood | Condition | Count
+Adams Point | sick residents | 82
+Baylight District | sick residents | 13
+Brooklyn | sick residents | 67
+Brooklyn | hoods above city violent-level median | 1
+Chinatown | sick residents | 135
+Chinatown | hoods above city violent-level median | 1
+Dimond | sick residents | 90
+Dimond | hoods above city violent-level median | 1
+Downtown | sick residents | 74
+East Oakland | sick residents | 117
+East Oakland | hoods above city violent-level median | 1
+Eastlake | sick residents | 86
+Eastlake | hoods above city violent-level median | 1
+Fruitvale | sick residents | 109
+Fruitvale | hoods above city violent-level median | 1
+Glenview | sick residents | 87
+Glenview | hoods above city violent-level median | 1
+Grand Lake | sick residents | 99
+Ivy Hill | sick residents | 115
+Ivy Hill | hoods above city violent-level median | 1
+Jack London | sick residents | 68
+KONO | sick residents | 16
+Lake Merritt | sick residents | 17
+Laurel | sick residents | 107
+Laurel | hoods above city violent-level median | 1
+Piedmont Ave | sick residents | 95
+Rockridge | sick residents | 98
+San Antonio | sick residents | 107
+San Antonio | hoods above city violent-level median | 1
+Temescal | sick residents | 83
+Uptown | sick residents | 21
+West Oakland | sick residents | 85
+West Oakland | hoods above city violent-level median | 1
+
+What the city's workers last said:
+- Elena Soria Dominguez: The schematics are done, and they're good. But they're just paper until the community review is documented… (C114)
+- Bobby Chen-Ramirez: The quarterly numbers posted today, and they hold. Sixty-two percent of the visits are from the two zip codes… (C114)
+- Vanessa Tran-Muñoz: Dispatch closed out quiet tonight. East Oakland got the numbers they were owed, and the crews got home before… (C114)
+- Marcus Webb: The queue is clean tonight. One hundred fifteen households paid out, every file flagged for audit compliance… (C114)
+
+The patrol setting:
+City patrol strategy: balanced (patrols spread evenly — the default posture). The Police Chief has not set one.
+
+What you have decided and said on the record:
+- Cycle 110, answer — asked by Mara Vance, City Planning Director (Cycle 105): Transmit the interagency administrative order directing OEWD and partner agencies to clear the Youth Apprenticeship Pipeline (INIT-007) backlog before the C106 town hall deadline. Following C104 corrective plan filings and the executive approval shift to 69 in C105, executive authority must enforce partner intake processing to meet the C106 pilot clearance deadline.
+  You answered: The Youth Apprenticeship Pipeline backlog is unacceptable — 150 apprentices by spring was the commitment, and we're not waiting for a town hall to act. I'm directing OEWD to clear all pending cohort placements by C112 and report weekly to my office until we're caught up. The pipeline works when it moves fast. We're making it move.
+  What came of it: waiting on the week's close
+- Cycle 111, answer — asked by Mara Vance, City Planning Director (Cycle 106): Convene the Youth Apprenticeship Pipeline (INIT-007) public town hall and certify zero remaining backlog cases across municipal partner agencies. Administrative orders issued in C105 established C106 as the deadline for clearing the intake backlog and conducting the public town hall, amid a 5-point drop in executive approval (64 in C106).
+  You answered: The Youth Apprenticeship Pipeline town hall is scheduled for Cycle 112 — I'm directing Brenda Okoro's team to coordinate with OUSD, Peralta, and Building Trades Council to certify zero backlog cases by that date. 150 apprentices by spring means every partner agency clears their queue now, not eventually.
+  What came of it: waiting on the week's close
+- Cycle 113, answer — asked by Mara Vance, City Planning Director (Cycle 107): Convene the public town hall enrollment event for the Oakland Youth Apprenticeship Pipeline (INIT-007) and certify operational rollout. Following backlog clearance verified in C106, tracker sequencing sets the public enrollment launch in C107 as the gating operational milestone.
+  You answered: The Oakland Youth Apprenticeship Pipeline enrollment event is scheduled. My team is finalizing venue and partner coordination with the Building Trades Council. Certification of operational rollout follows the enrollment event — we're sequencing this properly, not rushing the foundation.
+  What came of it: waiting on the week's close
+- Cycle 114, call-vote: initiativeId: INIT-014; requiresEvidence: project/INIT-014
+  What came of it: went through
+- Cycle 114, answer — asked by Mara Vance, City Planning Director (Cycle 103): Direct the Office of Economic and Workforce Development (OEWD) to clear the recruitment and intake bottlenecks flagged in the C102 executive review of the Oakland Youth Apprenticeship Pipeline (INIT-007). The program remains stalled with recruitment failures leading into the C104 findings report, requiring immediate executive intervention to unblock intake.
+  You answered: I am directing the Office of Economic and Workforce Development to clear the recruitment and intake bottlenecks identified in the C102 executive review of INIT-007. The corrective steps belong in the program’s placement-gap analysis and adjustment plan, with any remaining obstacles stated plainly. This response records my direction; it does not claim that the bottlenecks have already been cleared.
+  What came of it: waiting on the week's close
+- Cycle 115, work: initiativeId: INIT-015
+  What came of it: waiting on the week's close
+- Cycle 115, answer — asked by Mara Vance, City Planning Director (Cycle 115): Provide the docket references for the seven petition responses and the claimed INIT-014 filing, reconciling those statements with the current complaint ledger and initiative tracker. Your Cycle 115 opening statement committed to seven petition-specific filings, while the Cycle 115 office record now lists ten complaints; your closing statement says INIT-014 was filed, but the live tracker still shows it announced with its legislation-filing step past due from Cycle 114.
+  You answered: The packet supplies no docket references for seven petition responses, so I cannot truthfully provide them or claim those responses were completed. Its current response display covers C113–C115 and lists 10 complaints plus 14 constructive-participation entries; that is not a receipt for seven executive replies. On INIT-014, the tracker—not my prior wording—controls: Ivy Hill Community Support Initiative is vote-scheduled for C116 and pending-vote. The only supplied action reference is MV-114-civic-office-mayor-2026-11-02, an applied C114 call-vote, not a filing docket. My earlier statements described those commitments more conclusively than the supplied evidence supports. The Clerk still needs to supply response dockets if they exist; until then, the seven responses remain unverified and the claimed INIT-014 filing is not established.
+  What came of it: waiting on the week's close
+--- tools ---
+sheet_read — Read one of the city's sheets: Initiative_Tracker, Neighborhood_Map, Oakland_Sports_Feed, Civic_Office_Ledger, Faith_Organizations, Faith_Ledger, Business_Ledger, Transit_Metrics, Neighborhood_Demographics, Care_Justice_Census, Community_Programs, Crime_Metrics, Chaos_Cars, City_Treasury, Judicial_Ledger.
+citizen_lookup — Look up one person on the city's ledger by full name: role, neighborhood, birth year.
+canon_recall — What the Bay Tribune has published on a person, place or topic, each piece labelled with its Cycle.
+memory_recall — Read your own memory: your newest entries and, with a query, what you have said or noted on that topic.
+resident_call — Call on a resident of the city and put a question to them: name them, or name a neighborhood and call on someone who lives there. They answer in their own words.
+initiative_propose — Put an initiative before the council to serve the city: its name, what it is for, the category of city life it touches, its reach and a budget inside the category's band (a figure like $12.5M). It is entered as Proposed at the week's close; the council votes on it at the city hall run once a vote is called.
+vote_call — Send a proposed initiative with no vote scheduled to the next city hall vote. The Mayor may call any. One call per initiative a week.
+program_renew — Ask the council to re-fund a running program on your board that is running low or has run dry, with an amount inside its category's band. The council votes the next week; the money lands the week after. One renewal pending per program.
+initiative_work — Put your office's work into an initiative on your board. A funded one stands up once work lands on it; a running one weakens when left untended.
+=== datawake dry-run: 1 seats, no model call ===

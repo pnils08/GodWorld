@@ -264,6 +264,21 @@ node scripts/runCycle.js step 6.1 {XX}
 
 Plan: `docs/archive/plans/2026-05-03-run-cycle-gap-log-surface.md` (Phase 2 done S199; Phase 3 validation runs at next /run-cycle invocation).
 
+### After Close: the Oakland week page (builder 2026-11-14)
+
+Not a gated step and not in `runCycle.js`: nothing here can hold the chain. Run it once Step 6.1 has passed.
+
+```bash
+node world-view/build.js          # rebuilds world-view/oakland-week.html from output/beats and world_summary_c{XX}.md (Steps 5, 5.56)
+node scripts/worldViewCheck.js    # must end: PASS world-view C{XX}
+```
+
+Then publish `world-view/oakland-week.html` to the link in `world-view/README.md` (Artifact tool, `url` = that link; the tool wants the artifact read once in the session before it will publish to it).
+
+- The build log's `chaos cars:` line names the week's chaos vehicles and their streets. `no world summary for C{XX}` on that line means Step 5 did not land.
+- Check fails or publish refused: leave last week's page up, say so in the close message, one line in the gap log. No retry loop.
+- The page only reads. It shows the week as the engine left it; what citizens say on the days after is not on it until the next fire.
+
 ## What Happens After — the crons (S456; no sift, no manual edition chain)
 
 The civic.47 `Civic_Action_Ledger` beat export is conditional on an approved, installed sheet schema and an explicit pilot flag. The ordinary beat dump and current civic crons do not enable that flag. Before switching a schedule, verify the journal readback, the binding ballot reader, resource reservation recovery, the approved authority policy and the composed sandbox receipt; a local intent or dry run cannot stand in for those checks.

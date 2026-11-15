@@ -10,6 +10,7 @@ A hands-off 3D flight through the 22 neighborhoods, drawn from one week of engin
 - `hoods.js` — how each neighborhood is drawn, tied to canon phrases.
 - Run: `node world-view/build.js [dest]`.
 - Published copy: https://claude.ai/artifact/RyjhthcNoP7JXGmmVYv8WK (private to the builder). Update it by publishing with that `url`.
+- When it is rebuilt: at the end of every cycle run (`/run-cycle`, the section after Close; builder 2026-11-14: "the cleanest is to attach it to the end of the cycle run in that skill"), by the session that ran the cycle, which rebuilds, checks and republishes. Nothing rebuilds it between fires: a cron cannot publish to the link (publishing is a session tool, not an API call), and nearly everything on the page is written once a week. The reflections citizens add on the days between are therefore up to a week behind (228 were written between the C115 dump and 2026-11-14).
 
 ## Builder rulings (2026-11-10)
 

@@ -72,6 +72,9 @@ body.walk .tag .said, body.words .tag .said { -webkit-line-clamp: 9; }
 .ctag b { display: flex; align-items: center; gap: 6px; font-weight: 800; font-size: 13px; }
 .ctag b i { width: 8px; height: 8px; border-radius: 2px; background: #ff9a2e; transform: rotate(45deg); flex-shrink: 0; }
 .ctag span { display: block; font: italic 400 14px/1.25 var(--story); margin-top: 1px; }
+.ctag.nf { border-color: rgba(255,210,138,.6); } .ctag.nf b i { background: #ffd28a; border-radius: 50%; transform: none; }
+.ctag.ns { border-color: rgba(123,224,138,.6); } .ctag.ns b i { background: #7be08a; border-radius: 50%; transform: none; }
+.ctag.nf span, .ctag.ns span { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
 body.words .tag { max-width: min(340px, 62vw); }
 body.words .tag .said { font-size: 16px; border-top: 0; padding-top: 0; margin-top: 4px; }
 body.words .tag .line { font: 500 12px/1.3 var(--display); color: var(--dim); margin-top: 6px; }
@@ -224,7 +227,7 @@ function withLine(p) {
 }
 var DBG = window.WV_DEBUG || null; // look-test hook: { cam: [x,y,z], look: [x,y,z], t0: seconds, hide: true, manual: true (the clock only moves on __wv.step(dt)), follow: { who: name or index, off: [x,y,z], aim: height } }
 if (DBG && DBG.hide) document.body.classList.add('bare');
-if (DBG) window.__wv = { get world() { return world; }, get camera() { return camera; }, get data() { return DATA; }, WALK: WALK, home: function (hh) { openHome(hh); }, withLine: function (p) { return withLine(p); }, visit: function (id) { if (BYID[id]) startVisit(BYID[id].d); }, step: function (dt) { if (!world || busy) return false; step(dt); if (frame++ % 6 === 0) pickNames(); placeNames(); placeChaos(); draw(); return true; } };
+if (DBG) window.__wv = { get world() { return world; }, get camera() { return camera; }, get data() { return DATA; }, get state() { return { labels: labels, visiting: !!visiting, bizView: !!bizView, busy: busy, walking: walking }; }, WALK: WALK, home: function (hh) { openHome(hh); }, note: function (i) { if (world && world.notes[i]) startNote(world.notes[i]); }, withLine: function (p) { return withLine(p); }, visit: function (id) { if (BYID[id]) startVisit(BYID[id].d); }, step: function (dt) { if (!world || busy) return false; step(dt); if (frame++ % 6 === 0) pickNames(); placeNames(); placeChaos(); placeNotes(); draw(); return true; } };
 var DEF = { wall: 'stucco', tone: [30, 0.15, 0.5], h: [4, 9], w: [6, 11], gap: [0.6, 2.1], lit: 0.45, fill: 'box', trees: 0, slope: 0, neon: 0, set: [] };
 
 // ---------- seeded random ----------
@@ -880,6 +883,32 @@ function build(idx) {
   ['traffic', 'rail', 'street'].forEach(function (k) { if (typeof LIFE[k] === 'function') LIFE[k](kit); });
   if (LIFE.nature && LIFE.nature.ambient) LIFE.nature.ambient(kit);
   if (LIFE.water && LIFE.water.life) LIFE.water.life(kit);
+  // The week's notices on this street (H.notes: this cycle's Faith_Ledger rows and sports feed rows). Each stands
+  // somewhere: at the organization's own building where the ledger has one on this street, else at a lantern on
+  // the pavement. A house of worship with something on this week has light on its steps. A home game hangs
+  // strings of pennants over the main street (plain colours, no team mark).
+  var notes = [], NCOL = { f: 0xffd28a, s: 0x7be08a }, Lmain = LAY.Lm || L;
+  (H.notes || []).forEach(function (nt, ni) {
+    var a = { nt: nt, far: 70 }, lot = nt.b != null ? LAY.parcels.filter(function (q) { return q.b === nt.b; })[0] : null, plc = nt.b != null ? LAY.places.filter(function (q) { return q.b === nt.b && q.half > 0; })[0] : null;
+    if (plc) { a.s = plc.s || 1; a.x = a.s * (WALK + 1.2); a.z = plc.z; a.y = 6.2 + yAt(a.z); a.far = 110; a.at = 1; }
+    else if (lot) { a.s = lot.s; a.x = lot.s * (WALK - 0.4); a.z = lot.z; a.y = 5 + yAt(a.z); a.at = 1; }
+    else { a.s = water ? -water : (ni % 2 ? -1 : 1); a.z = -Lmain * (ni + 1) / (H.notes.length + 1); a.x = a.s * (WALK - 0.9); a.y = 3.3 + yAt(a.z); box(0.08, 3, 0.08, a.x, 1.5 + yAt(a.z), a.z, [30, 0.1, 0.2]); glow(a.x, 3.1 + yAt(a.z), a.z, NCOL[nt.k] || NCOL.f, 2.6); }
+    if (nt.k === 'f' && a.at) { glow(a.s * (WALK + 0.6), 1.6 + yAt(a.z), a.z, 0xffd28a, 6); for (var li = -3; li <= 3; li++) if (li) glow(a.s * (WALK - 0.5), 0.35 + yAt(a.z + li * 1.1), a.z + li * 1.1, 0xffc070, 0.9); }
+    notes.push(a);
+  });
+  if ((H.notes || []).some(function (nt) { return nt.k === 's' && /^H:/.test(nt.week || ''); })) {
+    var pn = [], pz, pi;
+    for (pz = 2; pz > -Lmain + 8; pz -= 15) {
+      if (LAY.places.some(function (q) { return (q.type === 'station' || q.type === 'rail') && Math.abs(q.z - pz) < 12; })) continue;
+      box(WALK * 2, 0.03, 0.03, 0, 6.45 + yAt(pz), pz, [0, 0, 0.7], true);
+      for (pi = -9; pi <= 9; pi++) pn.push([pi * (WALK / 9.4), 6.17 + yAt(pz), pz, pi]);
+    }
+    if (pn.length) {
+      var pm = new THREE.InstancedMesh(new THREE.PlaneGeometry(0.42, 0.5), new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide }), pn.length), pcol = new THREE.Color();
+      pn.forEach(function (q, n) { M.makeTranslation(q[0], q[1], q[2]); pm.setMatrixAt(n, M); pm.setColorAt(n, pcol.set(q[3] & 1 ? 0x5fae6c : 0xcfc4ae)); });
+      root.add(pm);
+    }
+  }
   // every small light in the place, grouped by size
   var bySize = {}; glowPts.forEach(function (g) { (bySize[g[4]] = bySize[g[4]] || []).push(g); });
   Object.keys(bySize).forEach(function (sz) {
@@ -967,7 +996,7 @@ function build(idx) {
   var label = new THREE.Sprite(nm); label.scale.set(12, 1.875, 1); label.position.set(0, 14.5 + gy, gz); root.add(label);
 
   scene.add(root);
-  return { H: H, ST: ST, root: root, L: L, gz: gz, yAt: yAt, people: people, diskMat: diskMat, glints: glints, ticks: ticks, beaconPts: beaconPts, gateName: label, places: LAY.places, sights: kit.sights || [], water: water, z: 10, x: 0, t: 0 };
+  return { H: H, ST: ST, root: root, L: L, gz: gz, yAt: yAt, people: people, notes: notes, diskMat: diskMat, glints: glints, ticks: ticks, beaconPts: beaconPts, gateName: label, places: LAY.places, sights: kit.sights || [], water: water, z: 10, x: 0, t: 0 };
 }
 
 // ---------- names and cards ----------
@@ -1180,7 +1209,7 @@ function loop(now) {
   if (!world || busy || (DBG && DBG.manual)) return;
   step(dt);
   if (frame++ % 6 === 0) pickNames();
-  placeNames(); placeChaos();
+  placeNames(); placeChaos(); placeNotes();
   draw();
   // step quality down after two seconds of struggling
   if (now - clock0 > 4000 && quality > 0 && !document.hidden && raw < 3) { slow = raw > 0.045 ? slow + Math.min(raw, 0.3) : Math.max(0, slow - raw); if (slow > 2) { quality--; slow = 0; sun.castShadow = quality > 1; if (!quality) resize(); } }
@@ -1254,6 +1283,7 @@ $('places').addEventListener('click', function (e) { if (e.target.id === 'places
 var ALLP = [];
 DATA.hoods.forEach(function (H, hi) { H.people.forEach(function (d) { ALLP.push({ h: hi, d: d, hood: H.name, key: (d.n + ' ' + (d.role || '') + ' ' + H.name).toLowerCase() }); }); });
 var BYID = {}; ALLP.forEach(function (e) { if (e.d.id) BYID[e.d.id] = e; });
+var BYNAME = {}; ALLP.forEach(function (e) { if (!BYNAME[e.d.n]) BYNAME[e.d.n] = e; });
 ALLP.sort(function (a, b) { return (a.d.tier || 9) - (b.d.tier || 9) || (b.d.fame || 0) - (a.d.fame || 0) || b.d.all.length - a.d.all.length || (a.d.n < b.d.n ? -1 : 1); });
 function listPeople() {
   var q = $('q').value.trim().toLowerCase(), ul = $('peopleList'), hits = q ? ALLP.filter(function (e) { return e.key.indexOf(q) >= 0; }) : ALLP;
@@ -1282,6 +1312,7 @@ function pick(px, py) {
   W.people.forEach(function (p) { test(p.x, 1.0 * p.sc + W.yAt(p.z), p.z, 1.0, 60, 26, 0.8, { p: p }); });
   (W.H.chaos || []).forEach(function (ev) { if (ev.on) test(ev.x, ev.cy != null ? ev.cy : ev.y * 0.5, ev.z, ev.rad || 2.6, (ev.far || 80) + 10, 34, 0.85, { c: ev }); });
   W.H.lay.parcels.forEach(function (q) { if (q.b == null) return; var y = W.yAt(q.z); test(q.s * WALK, 1.6 + y, q.z, q.w * 0.45, 80, 30, 1, { b: q.b }); test(q.s * (WALK - 1.7), 4.5 + y, q.z + q.w / 2 - 0.4, 1.9, 80, 26, 1, { b: q.b }); });
+  (W.notes || []).forEach(function (a) { test(a.x, a.y - 0.5, a.z, 1.4, a.far + 10, 30, 0.9, { n: a }); });
   W.H.lay.parcels.forEach(function (q, qi) { if (!q.hm || q.b != null) return; var y = W.yAt(q.z); if (q.k === 'h') test(q.s * (WALK + 2.5), 2 + y, q.z, q.w * 0.42, 70, 28, 1.05, { h: qi }); else test(q.s * WALK, 2.2 + y, q.z, q.w * 0.42, 70, 28, 1.1, { h: qi }); });
   W.H.lay.places.forEach(function (q) {
     if (q.b == null) return;
@@ -1290,7 +1321,7 @@ function pick(px, py) {
     else if (q.type === 'market') test(WALK - 2.3, 5.6, -W.L * 0.3 + 3, 2.4, 80, 28, 1, { b: q.b });
   });
   if (!best) return;
-  if (best.p) startVisit(best.p.d); else if (best.c) startChaos(best.c); else if (best.h != null) startHome(best.h); else startBiz(best.b);
+  if (best.p) startVisit(best.p.d); else if (best.c) startChaos(best.c); else if (best.n) startNote(best.n); else if (best.h != null) startHome(best.h); else startBiz(best.b);
 }
 function money(v) { return '$' + Math.round(v).toLocaleString('en-US'); }
 function startBiz(bi) {
@@ -1324,7 +1355,68 @@ function startBiz(bi) {
     body.appendChild(ul);
     if (staff.some(function (m) { return !BYID[m.id]; })) body.appendChild(mk('p', 'Greyed names had nothing on record this week, so they are not on a street.', 'pmeta'));
   }
+  var hereN = (W.H.notes || []).filter(function (nt) { return nt.b === bi; });
+  if (hereN.length) { section(body, 'This week (' + DATA.cycle + ')'); var nl = mk('ul'); hereN.forEach(function (nt) { var li = mk('li'), dot = mk('i'); dot.style.background = '#ffd28a'; li.appendChild(dot); li.appendChild(mk('span', nt.x + (nt.att ? ' (' + nt.att.toLocaleString('en-US') + ' came)' : ''))); nl.appendChild(li); }); body.appendChild(nl); }
   if (lot && lot.hm) homeList(body, W.H, lot, 'Households on record living here (' + lot.hm.length + ')');
+  $('person').hidden = false; $('person').scrollTop = 0;
+}
+// ---------- the week's notices: a label at each, and a panel behind it ----------
+// A faith event reads: the organization, what happened (the ledger's line), how many came, who leads it. A sports
+// row reads: the team, the feed's own headline and note, the record, the streak, how the fans feel. All the row's.
+var NTAGS = [], NV = new THREE.Vector3();
+function placeNotes() {
+  var list = (world && world.notes) || [], w = window.innerWidth, h = window.innerHeight, floor = $('top').getBoundingClientRect().bottom - 20, i;
+  for (i = 0; i < Math.max(list.length, NTAGS.length); i++) {
+    var a = list[i], el = NTAGS[i];
+    if (!a) { if (el) el.style.opacity = 0; continue; }
+    if (!el) { el = NTAGS[i] = document.createElement('div'); el.innerHTML = '<b><i></i><em style="font-style:normal"></em></b><span></span>'; tagsEl.appendChild(el);
+      (function (tag) { tag.addEventListener('click', function () { if (tag._a && +tag.style.opacity > 0.3) startNote(tag._a); }); })(el); }
+    if (el._a !== a) { el._a = a; el.className = 'ctag ' + (a.nt.k === 's' ? 'ns' : 'nf'); el.querySelector('em').textContent = a.nt.n; el.querySelector('span').textContent = a.nt.x; }
+    var show = labels > 0 && !visiting && !bizView && !busy, o = 0;
+    if (show) {
+      NV.set(a.x, a.y + 0.6, a.z).project(camera);
+      var dx = a.x - camera.position.x, dz = a.z - camera.position.z, dist = Math.sqrt(dx * dx + dz * dz), x = (NV.x * 0.5 + 0.5) * w, y = (-NV.y * 0.5 + 0.5) * h, bw = el.offsetWidth, bh = el.offsetHeight;
+      if (NV.z < 1 && dist < a.far && x > -40 && x < w + 40) { o = Math.min(1, (a.far - dist) / 14); el.style.transform = 'translate(' + Math.max(8, Math.min(w - bw - 8, x - bw / 2)).toFixed(1) + 'px,' + Math.max(floor, y - bh - 6).toFixed(1) + 'px)'; }
+    }
+    el.style.opacity = o.toFixed(2); el.style.pointerEvents = o > 0.3 ? 'auto' : 'none';
+  }
+}
+function words_(v) { return String(v || '').replace(/[_-]/g, ' '); }
+function startNote(a) {
+  var W = world, nt = a.nt; if (!W) return;
+  endVisit(true); if (walking) setWalk(false);
+  bizView = { s: a.s, z: a.z, cx: -a.s * (ROAD + 1.4), cy: 2.4, cz: a.z + 8, lx: a.x, ly: Math.min(a.y, 5), lz: a.z };
+  document.body.classList.add('visit'); CARDS.forEach(function (s) { setCard(s, null); });
+  var body = $('pBody'), lines = [], ul, li, dot, add = function (text, colr) { li = mk('li'); dot = mk('i'); dot.style.background = colr; li.appendChild(dot); li.appendChild(mk('span', text)); ul.appendChild(li); };
+  body.textContent = ''; $('pName').textContent = nt.n;
+  if (nt.k === 'f') {
+    lines.push((nt.trad ? nt.trad + ' \u00B7 ' : '') + W.H.name);
+    if (!a.at) lines.push('The ledger has no building for it on this street, so its notice stands on the pavement.');
+    $('pBio').hidden = true;
+    section(body, 'This week (' + DATA.cycle + ')'); ul = mk('ul'); add(nt.x, '#ffd28a'); if (nt.type) add(words_(nt.type), '#ffd28a'); if (nt.att) add(nt.att.toLocaleString('en-US') + ' came, by the ledger\u2019s count', '#ffd28a'); body.appendChild(ul);
+    if (nt.leader || nt.cong || nt.ch) {
+      section(body, 'The organization'); ul = mk('ul', null, 'ties');
+      if (nt.leader) { li = mk('li'); if (nt.lid && BYID[nt.lid]) { var le = BYID[nt.lid], lb = mk('button', nt.leader, 'link'); lb.type = 'button'; lb.addEventListener('click', function () { go(le.h, 0, le.d); }); li.appendChild(lb); } else li.appendChild(mk('span', nt.leader)); li.appendChild(mk('span', ' leads it', 'quiet')); ul.appendChild(li); }
+      if (nt.cong) { li = mk('li'); li.appendChild(mk('span', 'A congregation of ' + nt.cong.toLocaleString('en-US'))); ul.appendChild(li); }
+      if (nt.ch) { li = mk('li'); li.appendChild(mk('span', nt.ch.charAt(0).toUpperCase() + nt.ch.slice(1))); ul.appendChild(li); }
+      body.appendChild(ul);
+    }
+    if (nt.b != null) { var ob = mk('p', null, 'pmeta'), obb = mk('button', 'Open ' + nt.n, 'link'); obb.type = 'button'; obb.addEventListener('click', function () { startBiz(nt.b); }); ob.appendChild(obb); body.appendChild(ob); }
+  } else {
+    lines.push([words_(nt.type), nt.season ? words_(nt.season) : '', W.H.name].filter(Boolean).join(' \u00B7 '));
+    var wk = { 'H:W': 'won at home', 'H:L': 'lost at home', 'A:W': 'won away', 'A:L': 'lost away' }[nt.week] || '', st = [];
+    if (wk) st.push(wk.charAt(0).toUpperCase() + wk.slice(1)); if (nt.rec) st.push('record ' + nt.rec); if (nt.streak) st.push('streak ' + nt.streak); if (nt.fan) st.push('fans ' + nt.fan);
+    if (st.length) { var stl = st.join(' \u00B7 ') + '.'; lines.push(stl.charAt(0).toUpperCase() + stl.slice(1)); }
+    $('pBio').textContent = nt.x; $('pBio').hidden = false;
+    if (nt.notes) { section(body, 'On the feed this week'); body.appendChild(mk('p', nt.notes, 'pmeta')); }
+    if (nt.names) {
+      section(body, 'Named'); ul = mk('ul', null, 'ties');
+      nt.names.split(/,\s*/).forEach(function (raw) { var nm = raw.replace(/\s*\([^)]*\)\s*$/, ''), ent = BYNAME[nm]; li = mk('li'); if (ent) { var nb = mk('button', raw, 'link'); nb.type = 'button'; nb.addEventListener('click', function () { go(ent.h, 0, ent.d); }); li.appendChild(nb); } else li.appendChild(mk('span', raw, 'quiet')); ul.appendChild(li); });
+      body.appendChild(ul);
+    }
+  }
+  $('pMeta').textContent = ''; lines.forEach(function (l, i) { if (i) $('pMeta').appendChild(document.createElement('br')); $('pMeta').appendChild(document.createTextNode(l)); });
+  $('bBack').textContent = 'Back to the street';
   $('person').hidden = false; $('person').scrollTop = 0;
 }
 // ---------- homes: who lives on a lot ----------

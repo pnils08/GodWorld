@@ -46,6 +46,10 @@ function readSources(root) {
     bonds: (() => { try { return readRows(path.join(beats, 'Relationship_Bonds.jsonl')); } catch (e) { return null; } })(),
     // the saved conversations between bonded pairs (scripts/citizen-exchange.js), by file name
     exchanges: (() => { const out = {}, dir = path.join(root, 'output/exchanges'); try { for (const f of fs.readdirSync(dir).sort()) if (/_conversation\.md$/.test(f)) out[f] = fs.readFileSync(path.join(dir, f), 'utf8'); } catch (e) { return null; } return out; })(),
+    // the week's faith events, the organizations behind them, and the sports feed (absent from an older dump)
+    faith: (() => { try { return readRows(path.join(beats, 'Faith_Ledger.jsonl')); } catch (e) { return null; } })(),
+    faithOrgs: (() => { try { return readRows(path.join(beats, 'Faith_Organizations.jsonl')); } catch (e) { return null; } })(),
+    sports: (() => { try { return readRows(path.join(beats, 'Oakland_Sports_Feed.jsonl')); } catch (e) { return null; } })(),
     // the cycle's world summary, where the Chaos_Cars rows are printed (absent before the summary is built)
     worldSummary: (() => { try { return fs.readFileSync(path.join(root, 'output', `world_summary_c${readJson(path.join(beats, 'meta.json')).cycle}.md`), 'utf8'); } catch (e) { return null; } })(),
   };
@@ -403,6 +407,38 @@ function checkWorldView(build, sources, engine, secondBuild, reports = []) {
       if (hoodNames.has(row.Neighborhood) ? !seen.has(row.HouseholdId) : !elsewhere.has(row.HouseholdId)) fail('home', row.HouseholdId, hoodNames.has(row.Neighborhood) ? `active household of ${row.Neighborhood} has no home on the page` : 'active household of a neighborhood with no street is not listed');
     }
     if (matched) reports.push(`HOMES ${matched} households matched to active Household_Ledger rows, each on one lot of its street`);
+  }
+  // notices: every notice on a street is a row of this cycle (a Faith_Ledger row of that neighborhood, or a sports
+  // feed row whose HomeNeighborhood it is), word for word; a faith notice at a building is at the business of the
+  // organization's own name; and every row of this cycle is on a street or listed as elsewhere.
+  {
+    const ws = v => String(v == null ? '' : v).replace(/\s+/g, ' ').trim(), dash = v => (ws(v) === '-' ? '' : ws(v)), thisCycle = r => String(r?.Cycle) === String(build.CYCLE);
+    const orgs = new Map(arr(sources.faithOrgs || [], 'Faith_Organizations').map(o => [o.Organization, o]));
+    const want = [];
+    for (const r of arr(sources.faith || [], 'Faith_Ledger').filter(thisCycle)) {
+      const nt = { k: 'f', n: ws(r.Organization), x: ws(r.EventDescription), type: ws(r.EventType) }, o = orgs.get(r.Organization);
+      if (ws(r.FaithTradition)) nt.trad = ws(r.FaithTradition); if (Number(r.Attendance) > 0) nt.att = Number(r.Attendance);
+      if (o) { if (ws(o.Leader)) nt.leader = ws(o.Leader); if (/^POP-\d+$/.test(ws(o.LeaderPOPID))) nt.lid = ws(o.LeaderPOPID); if (Number(o.Congregation) > 0) nt.cong = Number(o.Congregation); if (ws(o.Character)) nt.ch = ws(o.Character); }
+      want.push({ hood: ws(r.Neighborhood), nt, used: false });
+    }
+    for (const r of arr(sources.sports || [], 'Oakland_Sports_Feed').filter(thisCycle)) {
+      const notes = ws(r.Notes), angle = ws(r.StoryAngle), nt = { k: 's', n: dash(r.TeamsUsed), x: angle, type: dash(r.EventType) };
+      if (angle && notes) nt.notes = notes;
+      for (const [col, key] of [['SeasonType', 'season'], ['Team Record', 'rec'], ['Streak', 'streak'], ['FanSentiment', 'fan'], ['WeekRecord', 'week'], ['NamesUsed', 'names']]) if (dash(r[col])) nt[key] = dash(r[col]);
+      want.push({ hood: dash(r.HomeNeighborhood), nt, used: false, notes });
+    }
+    // a sports row with no headline is shown by the start of its note
+    const same = (got, w) => { const g = Object.assign({}, got); delete g.b; delete g.hood; if (w.nt.k === 's' && !w.nt.x) { const cut = String(g.x || '').replace(/…$/, ''); if (!cut || !w.notes.startsWith(cut)) return false; g.x = ''; } return equal(g, w.nt); };
+    let matched = 0;
+    for (const h of hoods) for (const nt of arr(h?.notes || [], `${h?.name}.notes`)) {
+      const w = want.find(x => !x.used && x.hood === h.name && same(nt, x));
+      if (!w) { fail('notice', h.name, `no row of this cycle for ${JSON.stringify(nt).slice(0, 220)}`); continue; }
+      w.used = true; matched++;
+      if (nt.b !== undefined && (nt.k !== 'f' || arr(h.biz, `${h.name}.biz`)[nt.b]?.n !== nt.n)) fail('notice', h.name, `${nt.n} is placed at a building that is not its own`);
+    }
+    for (const nt of arr(build.data?.notesElsewhere || [], 'data.notesElsewhere')) { const w = want.find(x => !x.used && x.hood === (nt?.hood || '') && same(nt, x)); if (!w) fail('notice', 'elsewhere', `no row of this cycle for ${JSON.stringify(nt).slice(0, 200)}`); else { w.used = true; if (hoodNames.has(w.hood) && w.nt.n && (w.nt.x || w.notes)) fail('notice', 'elsewhere', `${w.nt.n} belongs on ${w.hood}`); } }
+    for (const w of want) if (!w.used) fail('notice', w.hood || 'no neighborhood', `a row of this cycle is neither on a street nor listed elsewhere: ${w.nt.n} ${w.nt.x.slice(0, 80)}`);
+    if (matched) reports.push(`NOTICES ${matched} matched to this cycle's Faith_Ledger and sports feed rows`);
   }
   if (!secondBuild?.data?.hoods || !equal(
     hoods.map(h => ({ name: h.name, lay: h.lay })),

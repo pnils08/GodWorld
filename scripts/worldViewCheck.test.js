@@ -333,3 +333,23 @@ test('a home is an active household row on one lot of its own street', () => {
   rejects('home', f => { housed(f, { Neighborhood: 'SYNTHETIC Elsewhere' }); });                   // a household of another neighborhood
   rejects('home', f => { housed(f); delete f.hood.homes[0].unit; });                               // a building home with no unit
 });
+
+// the week's notices: faith events and sports feed rows
+function noticed(f) {
+  f.sources.faith = [{ Cycle: '115', Organization: 'SYNTHETIC Venue', FaithTradition: 'SYNTHETIC', EventType: 'community_program', EventDescription: 'SYNTHETIC  supper served', Neighborhood: f.hood.name, Attendance: '40', Status: 'occurred' }, { Cycle: '114', Organization: 'SYNTHETIC Venue', EventDescription: 'SYNTHETIC last week', Neighborhood: f.hood.name }];
+  f.sources.faithOrgs = [{ Organization: 'SYNTHETIC Venue', Leader: 'SYNTHETIC Leader', LeaderPOPID: 'POP-90002', Congregation: '300', Character: 'synthetic' }];
+  f.sources.sports = [{ Cycle: '115', TeamsUsed: 'SYNTHETIC Team', EventType: 'game-result', StoryAngle: 'SYNTHETIC headline', Notes: 'SYNTHETIC note.', HomeNeighborhood: f.hood.name, Streak: '-', WeekRecord: 'H:W', 'Team Record': '1-0' }];
+  f.hood.notes = [{ k: 'f', n: 'SYNTHETIC Venue', x: 'SYNTHETIC supper served', type: 'community_program', trad: 'SYNTHETIC', att: 40, leader: 'SYNTHETIC Leader', lid: 'POP-90002', cong: 300, ch: 'synthetic', b: 1 },
+    { k: 's', n: 'SYNTHETIC Team', x: 'SYNTHETIC headline', type: 'game-result', notes: 'SYNTHETIC note.', rec: '1-0', week: 'H:W' }];
+  f.second = structuredClone(f.build);
+  return f;
+}
+test('a notice is a row of this cycle on its own street, word for word', () => {
+  assert.deepEqual(check(noticed(fixture())), []);
+  rejects('notice', f => { noticed(f); f.hood.notes[0].x = 'SYNTHETIC other words'; });      // not the ledger's line
+  rejects('notice', f => { noticed(f); f.hood.notes[0].att = 4000; });                        // not the ledger's count
+  rejects('notice', f => { noticed(f); f.hood.notes[0].b = 0; });                             // at a building that is not its own
+  rejects('notice', f => { noticed(f); f.hood.notes.pop(); });                                // a sports row of this cycle left off
+  rejects('notice', f => { noticed(f); f.hood.notes[1].x = 'SYNTHETIC invented headline'; }); // not the feed's headline
+  rejects('notice', f => { noticed(f); f.hood.notes.push({ k: 'f', n: 'SYNTHETIC Venue', x: 'SYNTHETIC last week', type: '' }); }); // last cycle's event
+});

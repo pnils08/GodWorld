@@ -423,6 +423,34 @@ const ties = [], offStreet = {}, tieSkips = { notCitizen: 0, noName: 0, talksNoT
 });
 talks.forEach(tk => { if (!tk.used && tk.ids.some(id => shownAt.has(id))) tieSkips.talksNoTie++; });
 
+// ---------- the week's notices: faith events and the sports feed ----------
+// Faith_Ledger holds each faith event of the cycle (organization, what happened, where, how many came);
+// Oakland_Sports_Feed holds the week's sports rows, each with the neighborhood it lands on (HomeNeighborhood).
+// A row of this cycle goes on its neighborhood's street as a notice: at the organization's own building when the
+// ledger has it as a business there, else on the pavement. Every word shown is the row's. A row whose neighborhood
+// is not one of the streets is listed in data.notesElsewhere, not drawn.
+hoods.forEach(h => { h.notes = []; });
+const notesElsewhere = [], ws = v => String(v == null ? '' : v).replace(/\s+/g, ' ').trim(), dash = v => { v = ws(v); return v === '-' ? '' : v; };
+const faithOrg = new Map(); try { rd('Faith_Organizations').forEach(o => faithOrg.set(o.Organization, o)); } catch (e) { console.warn('world-view: no Faith_Organizations in the dump; faith events are shown without their organization\'s details'); }
+let faithRows = [], sportRows = [];
+try { faithRows = rd('Faith_Ledger').filter(r => String(r.Cycle) === CYCLE); } catch (e) { console.warn('world-view: no Faith_Ledger in the dump; no faith events shown'); }
+try { sportRows = rd('Oakland_Sports_Feed').filter(r => String(r.Cycle) === CYCLE); } catch (e) { console.warn('world-view: no Oakland_Sports_Feed in the dump; no sports rows shown'); }
+const noteTo = (nt, hood) => { const h = hoods.find(x => x.name === hood); if (!h || !nt.n || !nt.x) { notesElsewhere.push(Object.assign({ hood: hood || '' }, nt)); return null; } h.notes.push(nt); return h; };
+faithRows.forEach(r => {
+  const nt = { k: 'f', n: ws(r.Organization), x: ws(r.EventDescription), type: ws(r.EventType) };
+  if (ws(r.FaithTradition)) nt.trad = ws(r.FaithTradition); if (Number(r.Attendance) > 0) nt.att = Number(r.Attendance);
+  const o = faithOrg.get(r.Organization);
+  if (o) { if (ws(o.Leader)) nt.leader = ws(o.Leader); if (isPop(ws(o.LeaderPOPID))) nt.lid = ws(o.LeaderPOPID); if (Number(o.Congregation) > 0) nt.cong = Number(o.Congregation); if (ws(o.Character)) nt.ch = ws(o.Character); }
+  const h = noteTo(nt, ws(r.Neighborhood));
+  if (h) { const bi = h.biz.findIndex(b => b.n === nt.n); if (bi >= 0 && (h.lay.places.some(p => p.b === bi && p.half > 0) || h.lay.parcels.some(p => p.b === bi))) nt.b = bi; }
+});
+sportRows.forEach(r => {
+  const notes = ws(r.Notes), angle = ws(r.StoryAngle), nt = { k: 's', n: dash(r.TeamsUsed), x: angle || trimSaid(notes), type: dash(r.EventType) };
+  if (angle && notes) nt.notes = notes;
+  [['SeasonType', 'season'], ['Team Record', 'rec'], ['Streak', 'streak'], ['FanSentiment', 'fan'], ['WeekRecord', 'week'], ['NamesUsed', 'names']].forEach(f => { const v = dash(r[f[0]]); if (v) nt[f[1]] = v; });
+  noteTo(nt, dash(r.HomeNeighborhood));
+});
+
 const onStreets = new Set(hoods.map(h => h.name));
 const unplacedBiz = biz.filter(x => !onStreets.has(x.Neighborhood)).map(x => ({ n: x.Name, hood: x.Neighborhood }));
 const wx = process.env.WX || '';
@@ -437,7 +465,8 @@ const data = {
   chaos: { read: chaosRead != null, total: (chaosRead || []).length, elsewhere: chaosElsewhere },
   ties,
   offStreet,
-  homesElsewhere
+  homesElsewhere,
+  notesElsewhere
 };
 hoods.forEach(h => { data.style[h.name] = STYLE[h.name]; });
 
@@ -475,5 +504,6 @@ console.log('rail line on:', hoods.filter(h => h.lay.places.some(p => p.type ===
 console.log('homes: ' + hoods.reduce((a, h) => a + h.homes.length, 0) + ' active households on parcels (' + hoods.reduce((a, h) => a + h.homes.filter(x => x.own).length, 0) + ' owned); '
   + hoods.filter(h => h.homes.length).map(h => { const res = new Set(h.lay.parcels.filter(p => p.res).map(p => p.id)), onRes = h.homes.filter(x => res.has(x.lot)).length; return h.name + ' ' + h.homes.length + (h.lay.L > h.lay.Lm ? ' (' + onRes + ' on a ' + Math.round(h.lay.L - h.lay.Lm) + ' m stretch)' : ''); }).join(', ')
   + (homesElsewhere.length ? '; ' + homesElsewhere.length + ' household(s) in a neighborhood with no street this week, not shown' : ''));
+console.log('notices: ' + faithRows.length + ' faith event(s) and ' + sportRows.length + ' sports row(s) this cycle — ' + hoods.filter(h => h.notes.length).map(h => h.name + ': ' + h.notes.map(nt => nt.n + (nt.k === 'f' ? (nt.b != null ? ' (at its building)' : ' (no building here)') : ' ' + nt.type + (nt.week ? ' ' + nt.week : ''))).join(', ')).join('; ') + (notesElsewhere.length ? '; not on a street: ' + notesElsewhere.map(nt => nt.n + ' → ' + (nt.hood || 'no neighborhood')).join(', ') : ''));
 console.log('chaos cars:', chaosRead == null ? 'no world summary for C' + CYCLE + ' (none drawn)' : chaosRead.length + ' this week — ' + hoods.filter(h => h.chaos.length).map(h => h.name + ': ' + h.chaos.map(c => c.n + ' (' + c.o + (c.to && c.to !== h.name ? ' → ' + c.to : '') + ')').join(', ')).join('; ') + (chaosElsewhere.length ? '; not on a street: ' + chaosElsewhere.map(c => c.n + ' → ' + c.to).join(', ') : ''));
 }

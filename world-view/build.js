@@ -491,6 +491,39 @@ initRows.forEach(r => {
   if (!on.length) { notesElsewhere.push(Object.assign({ hood: where.join(', ') }, base)); return; }
   on.forEach(n => { const nt = Object.assign({}, base), h = noteTo(nt, n); if (h && ws(r.BizID)) { const bi = h.biz.findIndex(b => b.id === ws(r.BizID)); if (bi >= 0 && (h.lay.places.some(p => p.b === bi && p.half > 0) || h.lay.parcels.some(p => p.b === bi))) nt.b = bi; } });
 });
+// Community_Programs and Cultural_Ledger: what runs on a street and who of note belongs to it. There can be nine
+// of them on one street, so each street gets one notice for its programs and one for its cultural figures, with
+// the rows listed behind it. Active rows only; a row with no street (a City-wide program) is listed elsewhere.
+const listNote = (k, title, rows, hoodOf, item) => {
+  const by = {}; rows.forEach(r => { const n = ws(hoodOf(r)); (by[n] = by[n] || []).push(item(r)); });
+  Object.keys(by).forEach(n => { const names = by[n].map(x => x.n); noteTo({ k, n: title, x: names.slice(0, 2).join(', ') + (names.length > 2 ? ' and ' + (names.length - 2) + ' more' : ''), list: by[n] }, n); });
+};
+let progRows = [], cultRows = [];
+try { progRows = rd('Community_Programs').filter(r => ws(r.Status).toLowerCase() === 'active' && ws(r.Name)); } catch (e) { console.warn('world-view: no Community_Programs in the dump; no programs shown'); }
+try { cultRows = rd('Cultural_Ledger').filter(r => ws(r.Status).toLowerCase() === 'active' && ws(r.Name)); } catch (e) { console.warn('world-view: no Cultural_Ledger in the dump; no cultural figures shown'); }
+listNote('p', 'Community programs', progRows, r => r.Neighborhood, r => { const o = { n: ws(r.Name) }; if (ws(r.Type)) o.type = ws(r.Type); if (isPop(ws(r.Founder_POPID))) { o.f = ws(r.Founder_POPID); if (nameOf(o.f)) o.fn = nameOf(o.f); } if (/^\d+$/.test(ws(r.Founded_Cycle))) o.since = Number(ws(r.Founded_Cycle)); return o; });
+listNote('c', 'Cultural figures', cultRows, r => r.Neighborhood, r => { const o = { n: ws(r.Name) }; [['RoleType', 'role'], ['FameCategory', 'cat'], ['CulturalDomain', 'dom'], ['CityTier', 'tier'], ['TrendTrajectory', 'trend']].forEach(f => { if (ws(r[f[0]])) o[f[1]] = ws(r[f[0]]); }); if (isPop(ws(r.UniverseLinks))) o.pop = ws(r.UniverseLinks); return o; });
+// Transit_Metrics: this cycle's row for each station the engine's own list puts in a neighborhood (RAIL). It
+// stands at the line where the street has one. The engine's usual ridership for the station (baseRidership)
+// rides along, and life-rail.js runs trains closer together on a busier week than usual.
+let transitRows = []; try { transitRows = rd('Transit_Metrics').filter(r => String(r.Cycle) === CYCLE && ws(r.Station)); } catch (e) { console.warn('world-view: no Transit_Metrics in the dump; no station ridership shown'); }
+const stationBase = {}; try { new Function(fs.readFileSync(path.join(__dirname, '..', 'utilities', 'ensureTransitMetrics.js'), 'utf8') + '\nreturn OAKLAND_BART_STATIONS;')().forEach(s => { stationBase[s.station] = { hood: s.neighborhood, base: Number(s.baseRidership) || 0 }; }); } catch (e) { /* the station list is already warned about above */ }
+transitRows.forEach(r => {
+  const sb = stationBase[ws(r.Station)]; if (!sb) return; // a corridor row, or a station the engine's list does not have
+  const riders = Number(r.RidershipVolume), ot = Number(r.OnTimePerformance);
+  const nt = { k: 't', n: ws(r.Station) + ' station', x: [riders > 0 ? riders.toLocaleString('en-US') + ' riders' : '', ot > 0 ? Math.round(ot * 100) + '% on time' : '', ws(r.Notes)].filter(Boolean).join(' \u00B7 '), st: ws(r.Station) };
+  if (riders > 0) nt.riders = riders; if (ot > 0) nt.ot = ot; if (sb.base > 0) nt.base = sb.base; if (ws(r.Notes)) nt.notes = ws(r.Notes); if (ws(r.Factors)) nt.why = ws(r.Factors);
+  const h = noteTo(nt, sb.hood); if (h && h.lay.places.some(p => p.type === 'station' || p.type === 'rail')) nt.line = 1;
+});
+// WorldEvents_V3_Ledger and Texture_Trigger_Log: what the engine put on a street this cycle (an incident, a
+// grievance, a busy pavement). A FAITH world event is the same event Faith_Ledger holds, already on the street, so
+// it is left out here. A texture trigger with no neighborhood is citywide and is not put on any street.
+const cap = v => { v = ws(v).toLowerCase().replace(/[_-]/g, ' '); return v.charAt(0).toUpperCase() + v.slice(1); };
+let worldRows = [], textureRows = [];
+try { worldRows = rd('WorldEvents_V3_Ledger').filter(r => String(r.Cycle) === CYCLE && ws(r.Domain).toUpperCase() !== 'FAITH' && ws(r.EventDescription)); } catch (e) { console.warn('world-view: no WorldEvents_V3_Ledger in the dump; no world events shown'); }
+try { textureRows = rd('Texture_Trigger_Log').filter(r => String(r.Cycle) === CYCLE && ws(r.Neighborhood) && ws(r.Reason)); } catch (e) { console.warn('world-view: no Texture_Trigger_Log in the dump; no street textures shown'); }
+worldRows.forEach(r => { const nt = { k: 'w', n: cap(r.Domain) || 'This week', x: ws(r.EventDescription) }; if (ws(r.EventType)) nt.type = ws(r.EventType); if (ws(r.Severity)) nt.sev = ws(r.Severity); noteTo(nt, ws(r.Neighborhood)); });
+textureRows.forEach(r => { const nt = { k: 'x', n: cap(r.Domain) || 'This week', x: ws(r.Reason) }; if (ws(r.TextureKey)) nt.key = ws(r.TextureKey); if (ws(r.Intensity)) nt.sev = ws(r.Intensity); noteTo(nt, ws(r.Neighborhood)); });
 
 const onStreets = new Set(hoods.map(h => h.name));
 const unplacedBiz = biz.filter(x => !onStreets.has(x.Neighborhood)).map(x => ({ n: x.Name, hood: x.Neighborhood }));
@@ -546,6 +579,6 @@ console.log('homes: ' + hoods.reduce((a, h) => a + h.homes.length, 0) + ' active
   + hoods.filter(h => h.homes.length).map(h => { const res = new Set(h.lay.parcels.filter(p => p.res).map(p => p.id)), onRes = h.homes.filter(x => res.has(x.lot)).length; return h.name + ' ' + h.homes.length + (h.lay.L > h.lay.Lm ? ' (' + onRes + ' on a ' + Math.round(h.lay.L - h.lay.Lm) + ' m stretch)' : ''); }).join(', ')
   + (homesElsewhere.length ? '; ' + homesElsewhere.length + ' household(s) in a neighborhood with no street this week, not shown' : ''));
 console.log('staff: ' + hoods.reduce((a, h) => a + h.people.filter(p => p.wk != null).length, 0) + ' people are shown on the street of the business the roster has them working at');
-console.log('notices: ' + faithRows.length + ' faith event(s), ' + sportRows.length + ' sports row(s), ' + livedRows.length + ' lived event(s), ' + initRows.filter(r => ws(r.Status).toLowerCase() !== 'failed').length + ' initiative(s) not failed — ' + hoods.filter(h => h.notes.length).map(h => h.name + ': ' + h.notes.map(nt => nt.n + (nt.k === 's' ? ' ' + nt.type + (nt.week ? ' ' + nt.week : '') : nt.hh ? ' (at their home)' : nt.b != null ? ' (at its building)' : ' (on the pavement)')).join(', ')).join('; ') + (notesElsewhere.length ? '; not on a street: ' + notesElsewhere.map(nt => nt.n + ' → ' + (nt.hood || 'no neighborhood')).join(', ') : ''));
+console.log('notices: ' + faithRows.length + ' faith event(s), ' + sportRows.length + ' sports row(s), ' + livedRows.length + ' lived event(s), ' + initRows.filter(r => ws(r.Status).toLowerCase() !== 'failed').length + ' initiative(s) not failed, ' + progRows.length + ' program(s), ' + cultRows.length + ' cultural figure(s), ' + transitRows.filter(r => stationBase[ws(r.Station)]).length + ' station row(s), ' + worldRows.length + ' world event(s), ' + textureRows.length + ' street texture(s) — ' + hoods.filter(h => h.notes.length).map(h => h.name + ': ' + h.notes.map(nt => nt.n + (nt.k === 's' ? ' ' + nt.type + (nt.week ? ' ' + nt.week : '') : nt.list ? ' (' + nt.list.length + ')' : nt.k === 't' ? (nt.line ? ' (at the line)' : ' (no line drawn)') : nt.hh ? ' (at their home)' : nt.b != null ? ' (at its building)' : ' (on the pavement)')).join(', ')).join('; ') + (notesElsewhere.length ? '; not on a street: ' + notesElsewhere.map(nt => nt.n + ' → ' + (nt.hood || 'no neighborhood')).join(', ') : ''));
 console.log('chaos cars:', chaosRead == null ? 'no world summary for C' + CYCLE + ' (none drawn)' : chaosRead.length + ' this week — ' + hoods.filter(h => h.chaos.length).map(h => h.name + ': ' + h.chaos.map(c => c.n + ' (' + c.o + (c.to && c.to !== h.name ? ' → ' + c.to : '') + ')').join(', ')).join('; ') + (chaosElsewhere.length ? '; not on a street: ' + chaosElsewhere.map(c => c.n + ' → ' + c.to).join(', ') : ''));
 }

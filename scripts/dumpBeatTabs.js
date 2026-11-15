@@ -83,6 +83,9 @@ const OPTIONAL_TABS = [
   'City_Treasury',            // Carmen / business — Cycle · Entry · Amount · Counterparty · BalanceAfter · Note
   'Judicial_Ledger',          // Rachel / Carmen — every case: charge, status, outcome, cycles held
   'Care_Justice_Census',      // Rachel / Lila / Maria — per-hood trail: intakes, occupancy, beds (tracked vs other residents)
+  // the Oakland week page (infrastructure.19) — what the engine put on a street this cycle
+  'WorldEvents_V3_Ledger',    // each world event: EventDescription, EventType, Domain, Severity, Neighborhood
+  'Texture_Trigger_Log',      // each texture trigger: TextureKey, Reason, Intensity, Neighborhood (blank = citywide)
 ];
 // civic.47 pilot: the applied-action journal is a proposed new tab. Do not
 // query it on ordinary dumps until Claude has installed the exact schema.

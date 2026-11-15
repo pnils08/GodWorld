@@ -50,6 +50,14 @@ function readSources(root) {
     faith: (() => { try { return readRows(path.join(beats, 'Faith_Ledger.jsonl')); } catch (e) { return null; } })(),
     faithOrgs: (() => { try { return readRows(path.join(beats, 'Faith_Organizations.jsonl')); } catch (e) { return null; } })(),
     sports: (() => { try { return readRows(path.join(beats, 'Oakland_Sports_Feed.jsonl')); } catch (e) { return null; } })(),
+    // community programs, cultural figures, and the cycle's station rows (with the engine's usual ridership)
+    programs: (() => { try { return readRows(path.join(beats, 'Community_Programs.jsonl')); } catch (e) { return null; } })(),
+    cultural: (() => { try { return readRows(path.join(beats, 'Cultural_Ledger.jsonl')); } catch (e) { return null; } })(),
+    transit: (() => { try { return readRows(path.join(beats, 'Transit_Metrics.jsonl')); } catch (e) { return null; } })(),
+    stationBase: (() => { const out = {}; try { new Function(fs.readFileSync(path.join(root, 'utilities/ensureTransitMetrics.js'), 'utf8') + '\nreturn OAKLAND_BART_STATIONS;')().forEach(s => { out[s.station] = { hood: s.neighborhood, base: Number(s.baseRidership) || 0 }; }); } catch (e) { return null; } return out; })(),
+    // what the engine put on a street this cycle (absent from a dump made before the tabs were added to it)
+    world: (() => { try { return readRows(path.join(beats, 'WorldEvents_V3_Ledger.jsonl')); } catch (e) { return null; } })(),
+    textures: (() => { try { return readRows(path.join(beats, 'Texture_Trigger_Log.jsonl')); } catch (e) { return null; } })(),
     // deaths, retirements and promotions of the last two cycles (derived by the dump), and the initiatives
     lived: (() => { try { return readRows(path.join(beats, 'Lived_Events.jsonl')); } catch (e) { return null; } })(),
     initiatives: (() => { try { return readRows(path.join(beats, 'Initiative_Tracker.jsonl')); } catch (e) { return null; } })(),
@@ -462,8 +470,22 @@ function checkWorldView(build, sources, engine, secondBuild, reports = []) {
       if (!on.length) want.push({ hood: where.join(', '), nt, used: false, future: true });
       for (const n of on) want.push({ hood: n, nt, used: false, bizId: ws(r.BizID) });
     }
+    const listed = (k, title, rows, hoodOf, item) => { const by = {}; for (const r of rows) (by[ws(hoodOf(r))] = by[ws(hoodOf(r))] || []).push(item(r)); for (const [n, list] of Object.entries(by)) { const names = list.map(x => x.n); want.push({ hood: n, nt: { k, n: title, x: names.slice(0, 2).join(', ') + (names.length > 2 ? ` and ${names.length - 2} more` : ''), list }, used: false, future: !hoodNames.has(n) }); } };
+    const activeNamed = r => ws(r?.Status).toLowerCase() === 'active' && ws(r?.Name), pop = v => /^POP-\d+$/.test(ws(v));
+    listed('p', 'Community programs', arr(sources.programs || [], 'Community_Programs').filter(activeNamed), r => r.Neighborhood, r => { const o = { n: ws(r.Name) }; if (ws(r.Type)) o.type = ws(r.Type); if (pop(r.Founder_POPID)) { o.f = ws(r.Founder_POPID); const L = ledger.get(o.f); if (L && nameOf(L)) o.fn = nameOf(L); } if (/^\d+$/.test(ws(r.Founded_Cycle))) o.since = Number(ws(r.Founded_Cycle)); return o; });
+    listed('c', 'Cultural figures', arr(sources.cultural || [], 'Cultural_Ledger').filter(activeNamed), r => r.Neighborhood, r => { const o = { n: ws(r.Name) }; for (const [col, key] of [['RoleType', 'role'], ['FameCategory', 'cat'], ['CulturalDomain', 'dom'], ['CityTier', 'tier'], ['TrendTrajectory', 'trend']]) if (ws(r[col])) o[key] = ws(r[col]); if (pop(r.UniverseLinks)) o.pop = ws(r.UniverseLinks); return o; });
+    for (const r of arr(sources.transit || [], 'Transit_Metrics').filter(thisCycle)) {
+      const sb = (sources.stationBase || {})[ws(r.Station)]; if (!sb) continue;
+      const riders = Number(r.RidershipVolume), ot = Number(r.OnTimePerformance);
+      const nt = { k: 't', n: `${ws(r.Station)} station`, x: [riders > 0 ? `${riders.toLocaleString('en-US')} riders` : '', ot > 0 ? `${Math.round(ot * 100)}% on time` : '', ws(r.Notes)].filter(Boolean).join(' \u00B7 '), st: ws(r.Station) };
+      if (riders > 0) nt.riders = riders; if (ot > 0) nt.ot = ot; if (sb.base > 0) nt.base = sb.base; if (ws(r.Notes)) nt.notes = ws(r.Notes); if (ws(r.Factors)) nt.why = ws(r.Factors);
+      want.push({ hood: sb.hood, nt, used: false, future: !hoodNames.has(sb.hood) });
+    }
+    const capw = v => { v = ws(v).toLowerCase().replace(/[_-]/g, ' '); return v.charAt(0).toUpperCase() + v.slice(1); };
+    for (const r of arr(sources.world || [], 'WorldEvents_V3_Ledger').filter(thisCycle)) { if (ws(r.Domain).toUpperCase() === 'FAITH' || !ws(r.EventDescription)) continue; const nt = { k: 'w', n: capw(r.Domain) || 'This week', x: ws(r.EventDescription) }; if (ws(r.EventType)) nt.type = ws(r.EventType); if (ws(r.Severity)) nt.sev = ws(r.Severity); want.push({ hood: ws(r.Neighborhood), nt, used: false, future: !hoodNames.has(ws(r.Neighborhood)) }); }
+    for (const r of arr(sources.textures || [], 'Texture_Trigger_Log').filter(thisCycle)) { if (!ws(r.Neighborhood) || !ws(r.Reason)) continue; const nt = { k: 'x', n: capw(r.Domain) || 'This week', x: ws(r.Reason) }; if (ws(r.TextureKey)) nt.key = ws(r.TextureKey); if (ws(r.Intensity)) nt.sev = ws(r.Intensity); want.push({ hood: ws(r.Neighborhood), nt, used: false, future: !hoodNames.has(ws(r.Neighborhood)) }); }
     // a sports row with no headline is shown by the start of its note
-    const same = (got, w) => { const g = Object.assign({}, got); delete g.b; delete g.hood; delete g.hh; if (w.nt.k === 's' && !w.nt.x) { const cut = String(g.x || '').replace(/…$/, ''); if (!cut || !w.notes.startsWith(cut)) return false; g.x = ''; } return equal(g, w.nt); };
+    const same = (got, w) => { const g = Object.assign({}, got); delete g.b; delete g.hood; delete g.hh; delete g.line; if (w.nt.k === 's' && !w.nt.x) { const cut = String(g.x || '').replace(/…$/, ''); if (!cut || !w.notes.startsWith(cut)) return false; g.x = ''; } return equal(g, w.nt); };
     let matched = 0;
     for (const h of hoods) for (const nt of arr(h?.notes || [], `${h?.name}.notes`)) {
       const w = want.find(x => !x.used && x.hood === h.name && same(nt, x));
@@ -475,7 +497,7 @@ function checkWorldView(build, sources, engine, secondBuild, reports = []) {
     }
     for (const nt of arr(build.data?.notesElsewhere || [], 'data.notesElsewhere')) { const w = want.find(x => !x.used && x.hood === (nt?.hood || '') && same(nt, x)); if (!w) fail('notice', 'elsewhere', `no row of this cycle for ${JSON.stringify(nt).slice(0, 200)}`); else { w.used = true; if (hoodNames.has(w.hood) && !w.future && w.nt.n && (w.nt.x || w.notes)) fail('notice', 'elsewhere', `${w.nt.n} belongs on ${w.hood}`); } }
     for (const w of want) if (!w.used) fail('notice', w.hood || 'no neighborhood', `a row of this cycle is neither on a street nor listed elsewhere: ${w.nt.n} ${w.nt.x.slice(0, 80)}`);
-    if (matched) reports.push(`NOTICES ${matched} matched to their rows: this cycle's Faith_Ledger and sports feed, Lived_Events, Initiative_Tracker`);
+    if (matched) reports.push(`NOTICES ${matched} matched to their rows: this cycle's Faith_Ledger and sports feed, Lived_Events, Initiative_Tracker, Community_Programs, Cultural_Ledger, Transit_Metrics, WorldEvents_V3_Ledger, Texture_Trigger_Log`);
   }
   if (!secondBuild?.data?.hoods || !equal(
     hoods.map(h => ({ name: h.name, lay: h.lay })),

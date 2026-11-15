@@ -76,7 +76,12 @@ body.walk .tag .said, body.words .tag .said { -webkit-line-clamp: 9; }
 .ctag.ns { border-color: rgba(123,224,138,.6); } .ctag.ns b i { background: #7be08a; border-radius: 50%; transform: none; }
 .ctag.nl { border-color: rgba(255,201,77,.6); } .ctag.nl b i { background: #ffc94d; border-radius: 50%; transform: none; }
 .ctag.ni { border-color: rgba(111,211,255,.6); } .ctag.ni b i { background: #6fd3ff; border-radius: 50%; transform: none; }
-.ctag.nf span, .ctag.ns span, .ctag.nl span, .ctag.ni span { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
+.ctag.np { border-color: rgba(243,230,207,.5); } .ctag.np b i { background: #f3e6cf; border-radius: 50%; transform: none; }
+.ctag.nc { border-color: rgba(255,158,203,.55); } .ctag.nc b i { background: #ff9ecb; border-radius: 50%; transform: none; }
+.ctag.nw { border-color: rgba(255,107,94,.55); } .ctag.nw b i { background: #ff6b5e; border-radius: 50%; transform: none; }
+.ctag.nx { border-color: rgba(243,230,207,.4); } .ctag.nx b i { background: #cfc4ae; border-radius: 50%; transform: none; }
+.ctag.nt { border-color: rgba(170,176,186,.6); } .ctag.nt b i { background: #aab0ba; border-radius: 50%; transform: none; }
+.ctag.nf span, .ctag.ns span, .ctag.nl span, .ctag.ni span, .ctag.np span, .ctag.nc span, .ctag.nt span, .ctag.nw span, .ctag.nx span { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
 body.words .tag { max-width: min(340px, 62vw); }
 body.words .tag .said { font-size: 16px; border-top: 0; padding-top: 0; margin-top: 4px; }
 body.words .tag .line { font: 500 12px/1.3 var(--display); color: var(--dim); margin-top: 6px; }
@@ -805,7 +810,7 @@ function build(idx) {
       var bh = sectorHue(b.s), y0 = yAt(p.z);
       blade(b.n, bh, s, 4.5, p.z + p.w / 2 - 0.4, 3.4);
       shopFront(p, bh, wm.material.color, b.s || '');
-      glow(s * (WALK - 0.6), 1.7 + y0, p.z, 0xffd9a0, 2.4);
+      glow(s * (WALK - 0.6), 1.7 + y0, p.z, 0xffd9a0, b.gr == null ? 2.4 : Math.round((1.7 + Math.max(0, Math.min(1.9, b.gr / 12))) * 5) / 5); // more light at the door of a business that is growing (the ledger's Growth_Rate)
     } else {
       plainFront(p, wm.material.color);
       if (p.neon && r() < p.neon * 0.6) {
@@ -889,11 +894,12 @@ function build(idx) {
   // somewhere: at the organization's own building where the ledger has one on this street, else at a lantern on
   // the pavement. A house of worship with something on this week has light on its steps. A home game hangs
   // strings of pennants over the main street (plain colours, no team mark).
-  var notes = [], NCOL = { f: 0xffd28a, s: 0x7be08a, l: 0xffc94d, i: 0x6fd3ff }, Lmain = LAY.Lm || L, nLan = (H.notes || []).filter(function (nt) { return nt.b == null && !nt.hh; }).length, lanI = 0;
+  var notes = [], NCOL = { f: 0xffd28a, s: 0x7be08a, l: 0xffc94d, i: 0x6fd3ff, p: 0xf3e6cf, c: 0xff9ecb, t: 0xaab0ba, w: 0xff6b5e, x: 0xcfc4ae }, Lmain = LAY.Lm || L, railP = LAY.places.filter(function (q) { return q.type === 'station' || q.type === 'rail'; })[0], nLan = (H.notes || []).filter(function (nt) { return nt.b == null && !nt.hh && !(nt.k === 't' && railP); }).length, lanI = 0, railI = 0;
   (H.notes || []).forEach(function (nt, ni) {
     var a = { nt: nt, far: 70 }, lot = nt.b != null ? LAY.parcels.filter(function (q) { return q.b === nt.b; })[0] : null, plc = nt.b != null ? LAY.places.filter(function (q) { return q.b === nt.b && q.half > 0; })[0] : null;
     var hrec = nt.hh ? (H.homes || []).filter(function (x) { return x.hh === nt.hh; })[0] : null, hlot = hrec ? LAY.parcels.filter(function (q) { return q.id === hrec.lot; })[0] : null;
-    if (hlot) { a.s = hlot.s; a.x = hlot.s * (WALK + (hlot.k === 'h' ? 1.4 : -0.4)); a.z = hlot.z + (hlot.k === 'h' ? (hlot.w - 2.5) * 0.25 : 0); a.y = (hlot.k === 'h' ? 3.4 : 5) + yAt(a.z); a.at = 1; a.home = 1; }
+    if (nt.k === 't' && railP) { a.s = railI % 2 ? -1 : 1; a.x = a.s * (WALK - 1.5); a.z = railP.z; a.y = 6.6 + yAt(a.z); a.far = 100; a.at = 1; railI++; }
+    else if (hlot) { a.s = hlot.s; a.x = hlot.s * (WALK + (hlot.k === 'h' ? 1.4 : -0.4)); a.z = hlot.z + (hlot.k === 'h' ? (hlot.w - 2.5) * 0.25 : 0); a.y = (hlot.k === 'h' ? 3.4 : 5) + yAt(a.z); a.at = 1; a.home = 1; }
     else if (plc) { a.s = plc.s || 1; a.x = a.s * (WALK + 1.2); a.z = plc.z; a.y = 6.2 + yAt(a.z); a.far = 110; a.at = 1; }
     else if (lot) { a.s = lot.s; a.x = lot.s * (WALK - 0.4); a.z = lot.z; a.y = 5 + yAt(a.z); a.at = 1; }
     else { a.s = water ? -water : (lanI % 2 ? -1 : 1); a.z = -Lmain * (lanI + 1) / (nLan + 1); lanI++; a.x = a.s * (WALK - 0.9); a.y = 3.3 + yAt(a.z); box(0.08, 3, 0.08, a.x, 1.5 + yAt(a.z), a.z, [30, 0.1, 0.2]); glow(a.x, 3.1 + yAt(a.z), a.z, NCOL[nt.k] || NCOL.f, 2.6); }
@@ -992,7 +998,7 @@ function build(idx) {
   var lotById = {}; LAY.parcels.forEach(function (q) { lotById[q.id] = q; });
   people.forEach(function (o) {
     var d = o.d, sp = []; if (o.lead || o.post) return;
-    if (d.hh && HOMES[d.hh] && DATA.hoods[HOMES[d.hh].h] === H) { var hl = lotById[H.homes[HOMES[d.hh].k].lot]; if (hl) sp.push({ kind: 'home', s: hl.s, z: hl.z + (hl.k === 'h' ? (hl.w - 2.5) * 0.25 : 0) }); }
+    if (d.hh && HOMES[d.hh] && DATA.hoods[HOMES[d.hh].h] === H) { var hl = lotById[H.homes[HOMES[d.hh].k].lot]; if (hl) sp.push({ kind: 'home', s: hl.s, z: hl.z + (hl.k === 'h' ? (hl.w - 2.5) * 0.25 : 0), far: hl.res ? 1 : 0 }); }
     if (d.wk != null) { var wl = LAY.parcels.filter(function (q) { return q.b === d.wk; })[0], wp = LAY.places.filter(function (q) { return q.b === d.wk && q.half > 0; })[0]; if (wl) sp.push({ kind: 'work', s: wl.s, z: wl.z + 1.6, n: H.biz[d.wk].n }); else if (wp && wp.s) sp.push({ kind: 'work', s: wp.s, z: wp.z + wp.half - 3, n: H.biz[d.wk].n }); }
     if (sp.length) o.want = sp;
   });
@@ -1396,7 +1402,7 @@ function placeNotes() {
     if (!a) { if (el) el.style.opacity = 0; continue; }
     if (!el) { el = NTAGS[i] = document.createElement('div'); el.innerHTML = '<b><i></i><em style="font-style:normal"></em></b><span></span>'; tagsEl.appendChild(el);
       (function (tag) { tag.addEventListener('click', function () { if (tag._a && +tag.style.opacity > 0.3) startNote(tag._a); }); })(el); }
-    if (el._a !== a) { el._a = a; el.className = 'ctag n' + ({ s: 's', l: 'l', i: 'i' }[a.nt.k] || 'f'); el.querySelector('em').textContent = a.nt.n; el.querySelector('span').textContent = a.nt.x; }
+    if (el._a !== a) { el._a = a; el.className = 'ctag n' + ({ s: 's', l: 'l', i: 'i', p: 'p', c: 'c', t: 't', w: 'w', x: 'x' }[a.nt.k] || 'f'); el.querySelector('em').textContent = a.nt.n; el.querySelector('span').textContent = a.nt.x; }
     var show = labels > 0 && !visiting && !bizView && !busy, o = 0;
     if (show) {
       NV.set(a.x, a.y + 0.6, a.z).project(camera);
@@ -1404,8 +1410,10 @@ function placeNotes() {
       if (NV.z < 1 && dist < a.far && x > -40 && x < w + 40) {
         o = Math.min(1, (a.far - dist) / 14); var lx = Math.max(8, Math.min(w - bw - 8, x - bw / 2)), ly = Math.max(floor, y - bh - 6);
         // a label keeps off the cards and off the labels placed before it: it drops below whatever it would cover
-        rects.forEach(function (q) { if (lx < q[0] + q[2] + 6 && lx + bw + 6 > q[0] && ly < q[1] + q[3] + 6 && ly + bh + 6 > q[1]) ly = q[1] + q[3] + 8; });
-        rects.push([lx, ly, bw, bh]); el.style.transform = 'translate(' + lx.toFixed(1) + 'px,' + ly.toFixed(1) + 'px)';
+        for (var pass = 0, hit = true; hit && pass < 4; pass++) { hit = false; rects.forEach(function (q) { if (lx < q[0] + q[2] + 6 && lx + bw + 6 > q[0] && ly < q[1] + q[3] + 6 && ly + bh + 6 > q[1]) { ly = q[1] + q[3] + 8; hit = true; } }); }
+        if (ly + bh > h - $('bottom').offsetHeight - 8) o = 0; // no room left above the bottom bar: it waits rather than cover it
+        else rects.push([lx, ly, bw, bh]);
+        el.style.transform = 'translate(' + lx.toFixed(1) + 'px,' + ly.toFixed(1) + 'px)';
       }
     }
     el.style.opacity = o.toFixed(2); el.style.pointerEvents = o > 0.3 ? 'auto' : 'none';
@@ -1441,6 +1449,32 @@ function startNote(a) {
       nt.rec.forEach(function (m) { li = mk('li'); var ent = BYID[m[0]]; if (ent) { var rb = mk('button', m[1], 'link'); rb.type = 'button'; rb.addEventListener('click', function () { go(ent.h, 0, ent.d); }); li.appendChild(rb); } else li.appendChild(mk('span', m[1], 'quiet')); if (m[2]) li.appendChild(mk('span', ' \u00B7 ' + (m[2] === 'bond' ? 'had a bond with them' : m[2]), 'quiet')); ul.appendChild(li); });
       body.appendChild(ul);
     }
+  } else if (nt.k === 'p' || nt.k === 'c') {
+    lines.push((nt.k === 'p' ? nt.list.length + (nt.list.length === 1 ? ' runs' : ' run') + ' here' : nt.list.length + ' of this neighborhood') + ' \u00B7 ' + W.H.name);
+    $('pBio').hidden = true; ul = mk('ul', null, 'ties');
+    nt.list.forEach(function (it) {
+      li = mk('li'); var top = mk('div'), sub = [], pid = it.pop || null, ent = pid && BYID[pid];
+      if (ent) { var cb = mk('button', it.n, 'link'); cb.type = 'button'; cb.addEventListener('click', function () { go(ent.h, 0, ent.d); }); top.appendChild(cb); } else top.appendChild(mk('span', it.n));
+      li.appendChild(top);
+      if (nt.k === 'p') { if (it.type) sub.push(words_(it.type)); if (it.since) sub.push('since week ' + it.since); }
+      else { if (it.role) sub.push(it.role); if (it.cat) sub.push(it.cat); if (it.dom) sub.push(it.dom.toLowerCase()); if (it.tier) sub.push(it.tier.toLowerCase()); if (it.trend) sub.push(it.trend); }
+      var sd = mk('div', sub.join(' \u00B7 '), 'pmeta');
+      if (nt.k === 'p' && it.fn) { sd.appendChild(document.createTextNode((sub.length ? ' \u00B7 ' : '') + 'founded by ')); var fe = BYID[it.f]; if (fe) { var fb = mk('button', it.fn, 'link'); fb.type = 'button'; fb.addEventListener('click', function () { go(fe.h, 0, fe.d); }); sd.appendChild(fb); } else sd.appendChild(mk('span', it.fn)); }
+      li.appendChild(sd); ul.appendChild(li);
+    });
+    body.appendChild(ul);
+  } else if (nt.k === 't') {
+    lines.push('Week ' + DATA.cycle + ' \u00B7 ' + W.H.name); if (!nt.line) lines.push('No line is drawn on this street, so its notice stands on the pavement.');
+    $('pBio').hidden = true; section(body, 'This week'); ul = mk('ul');
+    if (nt.riders) add(nt.riders.toLocaleString('en-US') + ' riders' + (nt.base ? ' (the engine\u2019s usual for this station: ' + nt.base.toLocaleString('en-US') + ')' : ''), '#aab0ba');
+    if (nt.ot) add(Math.round(nt.ot * 100) + '% on time', '#aab0ba'); if (nt.notes) add(nt.notes, '#aab0ba');
+    body.appendChild(ul);
+    if (nt.why) { section(body, 'What the engine counted in'); body.appendChild(mk('p', nt.why, 'pmeta')); }
+  } else if (nt.k === 'w' || nt.k === 'x') {
+    lines.push((nt.k === 'w' ? 'World event' : 'Street texture') + ' \u00B7 week ' + DATA.cycle + ' \u00B7 ' + W.H.name);
+    $('pBio').textContent = nt.x; $('pBio').hidden = false; ul = mk('ul');
+    if (nt.type) add(words_(nt.type), '#ff6b5e'); if (nt.key) add(words_(nt.key), '#cfc4ae'); if (nt.sev) add((nt.k === 'w' ? 'Severity: ' : 'Intensity: ') + nt.sev, nt.k === 'w' ? '#ff6b5e' : '#cfc4ae');
+    if (ul.children.length) { section(body, 'As the engine logged it'); body.appendChild(ul); }
   } else if (nt.k === 'i') {
     lines.push('Initiative \u00B7 ' + W.H.name); if (!a.at) lines.push('It has no office on this street, so its notice stands on the pavement.');
     $('pBio').hidden = true;

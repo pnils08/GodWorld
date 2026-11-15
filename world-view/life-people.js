@@ -147,7 +147,8 @@ LIFE.people = function (k, list) {
   list.forEach(function (p) { if (p.size) { p.lane = clamp(p.lane, LO + (p.size > 2 ? 1.25 : 0.65), HI); p.x = p.s * p.lane; } });
   // shop fronts on each side: somewhere to walk to and stop at
   var fronts = { '-1': [], '1': [] };
-  ((k.LAY || {}).parcels || []).forEach(function (q) { if (q.b != null && q.k !== 'h') fronts[q.s < 0 ? -1 : 1].push(q.z); });
+  // (a business that is growing by the ledger's Growth_Rate draws more of them: it is in the list more than once)
+  ((k.LAY || {}).parcels || []).forEach(function (q) { if (q.b == null || q.k === 'h') return; var gr = ((k.H.biz || [])[q.b] || {}).gr, times = gr == null ? 1 : gr > 12 ? 3 : gr > 4.5 ? 2 : 1; while (times--) fronts[q.s < 0 ? -1 : 1].push(q.z); });
   function frontAt(p) { return fronts[p.s].some(function (z) { return Math.abs(z - p.z) < 3.5; }); }
 
   // ---------- what they do ----------
@@ -291,7 +292,7 @@ LIFE.people = function (k, list) {
     var fr = fronts[p.s].filter(function (z) { return z > lo && z < hi && Math.abs(z - p.z) > 3; });
     p.shop = fr.length > 0 && !p.size && R2() < 0.55;
     // somewhere of their own to go: their door, or the business they work at (not with the household in tow)
-    if (p.spots && !p.hold && R2() < 0.14) {
+    if (p.spots && !p.hold && R2() < (p.spots[0].far ? 0.3 : 0.14)) {
       var sp = p.spots[Math.floor(R2() * p.spots.length)];
       if (Math.abs(sp.z - p.z) > 3 && !(sp.kind === 'work' && p.size)) {
         p.errand = sp; p.shop = false; p.tz = clamp(sp.z, zMin, zMax); p.laneT = HI - 0.1; p.dir = p.tz > p.z ? 1 : -1; p.yawT = heading(p); p.st = 1;
@@ -321,7 +322,7 @@ LIFE.people = function (k, list) {
   });
   // and some are at their own door, or outside their work
   list.forEach(function (p) {
-    if (p.lead || !p.spots || p.post || !p.amp || R2() > 0.2) return;
+    if (p.lead || !p.spots || p.post || !p.amp || R2() > (p.spots[0].far ? 0.5 : 0.2)) return; // (a home on the residential stretch is a long walk: more of those start at it)
     var sp = p.spots[0]; if (sp.kind === 'work' && p.size) return; if (!free(p, sp.z, HI - 0.1)) return;
     p.z = sp.z; p.x = p.s * (HI - 0.1); p.st = 0; p.v = 0; p.at = sp; p.yaw = p.yawT = -p.s * Math.PI / 2; p.until = 2 + R2() * 14;
   });

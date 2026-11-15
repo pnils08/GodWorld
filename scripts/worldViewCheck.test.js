@@ -377,3 +377,35 @@ test('a lived event and an initiative stand on their street as their own rows', 
   rejects('notice', f => { mk(f); f.hood.notes.push({ k: 'i', id: 'INIT-SYN2', n: 'SYNTHETIC Failed', st: 'failed', x: 'failed' }); }); // a failed initiative shown
   rejects('notice', f => { mk(f); f.hood.notes.shift(); });                                  // a lived event left off
 });
+
+test('programs, cultural figures and a station row stand on their street as listed', () => {
+  const mk = f => {
+    f.sources.programs = [{ Name: 'SYNTHETIC Program', Type: 'arts', Founder_POPID: 'POP-90001', Neighborhood: f.hood.name, Founded_Cycle: '101', Status: 'active' }, { Name: 'SYNTHETIC Closed', Neighborhood: f.hood.name, Status: 'closed' }];
+    f.sources.cultural = [{ Name: 'SYNTHETIC Figure', RoleType: 'Artist', Status: 'Active', UniverseLinks: 'POP-90002', Neighborhood: f.hood.name }];
+    f.sources.transit = [{ Cycle: '115', Station: 'SYNTHETIC Station', RidershipVolume: '1200', OnTimePerformance: '0.9', Notes: '' }, { Cycle: '115', Station: '', Corridor: 'SYNTHETIC Corridor' }];
+    f.sources.stationBase = { 'SYNTHETIC Station': { hood: f.hood.name, base: 1000 } };
+    f.hood.notes = [{ k: 'p', n: 'Community programs', x: 'SYNTHETIC Program', list: [{ n: 'SYNTHETIC Program', type: 'arts', f: 'POP-90001', fn: 'SYNTHETIC Citizen One', since: 101 }] },
+      { k: 'c', n: 'Cultural figures', x: 'SYNTHETIC Figure', list: [{ n: 'SYNTHETIC Figure', role: 'Artist', pop: 'POP-90002' }] },
+      { k: 't', n: 'SYNTHETIC Station station', x: '1,200 riders \u00B7 90% on time', st: 'SYNTHETIC Station', riders: 1200, ot: 0.9, base: 1000 }];
+    f.second = structuredClone(f.build); return f;
+  };
+  assert.deepEqual(check(mk(fixture())), []);
+  rejects('notice', f => { mk(f); f.hood.notes[0].list.push({ n: 'SYNTHETIC Closed' }); });   // a program that is not active
+  rejects('notice', f => { mk(f); f.hood.notes[1].list[0].role = 'Mayor'; });                 // not the ledger's role
+  rejects('notice', f => { mk(f); f.hood.notes[2].riders = 99999; });                         // not the row's ridership
+  rejects('notice', f => { mk(f); f.hood.notes.pop(); });                                     // a station row left off
+});
+
+test('a world event and a street texture stand on their street in the engine\'s words', () => {
+  const mk = f => {
+    f.sources.world = [{ Cycle: '115', EventDescription: 'SYNTHETIC minor pursuit', EventType: 'safety-incident', Domain: 'SAFETY', Severity: 'low', Neighborhood: f.hood.name }, { Cycle: '115', EventDescription: 'SYNTHETIC supper', Domain: 'FAITH', Neighborhood: f.hood.name }];
+    f.sources.textures = [{ Cycle: '115', Domain: 'COMMUNITY', Neighborhood: f.hood.name, TextureKey: 'street_noise', Reason: 'SYNTHETIC noise', Intensity: 'low' }, { Cycle: '115', Domain: 'GENERAL', Neighborhood: '', TextureKey: 'busy_cycle', Reason: 'SYNTHETIC citywide' }];
+    f.hood.notes = [{ k: 'w', n: 'Safety', x: 'SYNTHETIC minor pursuit', type: 'safety-incident', sev: 'low' }, { k: 'x', n: 'Community', x: 'SYNTHETIC noise', key: 'street_noise', sev: 'low' }];
+    f.second = structuredClone(f.build); return f;
+  };
+  assert.deepEqual(check(mk(fixture())), []);
+  rejects('notice', f => { mk(f); f.hood.notes[0].x = 'SYNTHETIC major pursuit'; });                       // not the engine's line
+  rejects('notice', f => { mk(f); f.hood.notes.push({ k: 'w', n: 'Faith', x: 'SYNTHETIC supper' }); });   // a faith world event shown twice
+  rejects('notice', f => { mk(f); f.hood.notes.push({ k: 'x', n: 'General', x: 'SYNTHETIC citywide', key: 'busy_cycle' }); }); // a citywide texture put on a street
+  rejects('notice', f => { mk(f); f.hood.notes.shift(); });                                                // a world event left off
+});

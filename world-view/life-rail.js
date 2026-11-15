@@ -20,6 +20,9 @@ LIFE.rail = function (k) {
   var T = k.THREE, z = line.z, cy = line.y + 2;
   var R = (typeof rng === 'function' && typeof hash === 'function') ? rng(hash(k.H.name + '|rail')) : Math.random;
   var chaos = ((k.H && k.H.chaos) || []).filter(function (ev) { return ev.v === 'bart_train'; });
+  // how busy the line is this week: the stations' riders (Transit_Metrics, on the street's notices) against the
+  // engine's usual for them. Trains come closer together on a busier week, further apart on a quieter one.
+  var busy = 1, rs = 0, bs = 0; ((k.H && k.H.notes) || []).forEach(function (nt) { if (nt.k === 't' && nt.riders && nt.base) { rs += nt.riders; bs += nt.base; } }); if (bs > 0) busy = Math.max(0.6, Math.min(1.8, rs / bs));
   var NC = 4, CL = 10.2, half = NC * CL / 2, i;
 
   // the side of a car: brushed metal, a coloured band, doors, and a row of windows with the light on inside
@@ -62,7 +65,7 @@ LIFE.rail = function (k) {
     var ev = chaos.length && n % 2 === 0 ? chaos[(n / 2) % chaos.length] : null, dir = n % 2 ? -1 : 1, hold; n++;
     if (ev) hold = ev.o === 'clean_run' ? 0 : ev.o === 'stalled_train' ? 30 : Math.max(8, Math.min(24, (parseFloat(ev.mag) || 0.06) * 200));
     else hold = line.calls ? 6 : 0;
-    run = { ev: ev, dir: dir, hold: hold, t: first ? (hold ? 7 : 6) : 0, gap: ev ? 4 : 6 + R() * 10 };
+    run = { ev: ev, dir: dir, hold: hold, t: first ? (hold ? 7 : 6) : 0, gap: ev ? 4 : (6 + R() * 10) / busy };
     sideM.emissiveIntensity = ev && ev.o === 'stalled_train' ? 0.16 : 1;
     endA.color.set(dir > 0 ? 0xfff6dc : 0xff2a18); endB.color.set(dir > 0 ? 0xff2a18 : 0xfff6dc);
     amber.position.x = dir * (half - 2.2); amber.visible = !!(ev && hold);

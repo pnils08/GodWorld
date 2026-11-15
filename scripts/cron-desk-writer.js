@@ -280,6 +280,13 @@ const BYLINE_POPID = (PACKET_ONLY || process.env.GODWORLD_TEST_COMPARE_DIR) ? nu
   try { return (JSON.parse(fs.readFileSync(path.join(__dirname, 'persona-map.json'), 'utf8'))[PERSONA] || {}).popid || null; }
   catch (_) { return null; }
 })());
+// The seat's own POPID for its sheet line (reporterIdentity): the byline the runner resolved, else the persona map's.
+// Read apart from BYLINE_POPID, which is null under packet-only and the test shell to keep the memory tools out.
+const PERSONA_POPID = arg('--byline-popid', null) || (() => {
+  if (!PERSONA) return null;
+  try { return (JSON.parse(fs.readFileSync(path.join(__dirname, 'persona-map.json'), 'utf8'))[PERSONA] || {}).popid || null; }
+  catch (_) { return null; }
+})();
 // A second desk slot for the same reporter (nia-rook-weekly) shares her voice
 // files via persona-map voiceDir instead of a copied agent folder.
 const VOICE_DIR = (() => {
@@ -1322,7 +1329,18 @@ async function main() {
     'appear only attributed to the layer that supports them (ledger counts, hospital census, neighborhood ' +
     'demographics). Migration flows may run with the label "city model estimate".\n';
 
-  const system = (TEST_LIGHT
+  // Template §4 parts 1–2 (builder 2026-11-15: "give the journalists their identity not just theri sheet"): the seat's
+  // sheet line and temperament, read live, then the Essence of its own voice file — who they are, ahead of everything
+  // else. Fails open: a seat with neither wakes as before. Not under the bare test prompt, which swaps its own boot in.
+  let whoBlock = '';
+  if (PERSONA && !TEST_BARE) {
+    const who = await require('./reporterIdentity').reporterIdentity({ popid: PERSONA_POPID, agentDir: AGENT_DIR });
+    whoBlock = who.block ? who.block + '\n\n' : '';
+    console.log('identity: sheetChars=' + who.sheet.length + ' essenceChars=' + who.essence.length +
+      (who.voiceFile ? ' voice=' + path.basename(who.voiceFile) : '') + (who.notes.length ? ' (' + who.notes.join('; ') + ')' : ''));
+  }
+
+  const system = whoBlock + (TEST_LIGHT
     ? 'You are this journalist, alive in this city this cycle. ' +
       (isNiaSeat(PERSONA) ? 'Your beat is the UNDOCKED show and its standing in the city. Named people come from the ledger; in-world places are yours. ' : 'Named people, businesses and figures come from the Packet and the ledger; you invent none. ')
     :

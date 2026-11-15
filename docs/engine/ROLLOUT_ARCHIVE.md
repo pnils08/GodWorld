@@ -973,15 +973,6 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) — not `done-pending-archive` sweep rows, moved by hand per rollout-rules §6 wontfix/unresolvable-stale convention.
 
-## S655 Archive Pass (2026-11-15, research-build) — post-S654 closures sweep
-
-2 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 2 pipeline.*.
-
-- **pipeline.83** [research-build] — Failure review: Nia on Luna 6 with tools, read done: digest 10-31 printed 4/4 (5 calls), recap 11-02 filed (3 calls); method stands in the Saturday readback **State at archive:** done-pending-archive. Pointer: [[../plans/2026-10-11-media-extension]] §pipeline.83
-- **pipeline.80** [research-build] — INTAKE names floor: read done C113–C115, all 57 floor names on 16 printed filings reached the usage tab; tier bars 3/6/9 stay **State at archive:** done-pending-archive. Pointer: [[../plans/2026-10-11-media-extension]] §pipeline.80
-
-This pass: 2 rows — pipeline.83 + pipeline.80. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
-
 ## S650 Archive Pass (2026-11-14, engine-sheet) — post-S649 closures sweep
 
 1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 governance.*.

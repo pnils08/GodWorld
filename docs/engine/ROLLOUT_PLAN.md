@@ -84,7 +84,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | pipeline.108 | Daily news on the day's sources alone (builder 11-13). Fri 11-13 show read, plan Task 10. Next: his call on the read; Sat 11-14 weekly | in-progress | research-build | [[../plans/2026-11-09-daily-news-articles-as-sources]] |
 | pipeline.101 | Daily news: evening write wake date fixed (builder 11-04), NotebookLM page written. Next: confirm the 11-04 18:15 wake writes and gates | in-progress | research-build | [[../reference/NotebookLM]] §Change log |
 | pipeline.89 | Every journalist picks (builder 10-25: "All journalists should pick, they are AI"): every wake package gets the live tools the 3 tool seats have, the slice is a tip sheet not the assignment, Rhea is off every path; Ines first, same cut on all 28. First run 2026-10-28 | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 |
-| infrastructure.19 | Oakland week flight made lifelike (builder 11-14). Boats and direction scale done; add-list in README. Next: people who know each other stop to talk (bonds) | in-progress | research-build | [[../../world-view/README]] |
+| infrastructure.19 | Oakland week flight made lifelike (builder 11-14). Boats, direction scale, people who know each other done. Next: homes on a residential block (README §Homes) | in-progress | research-build | [[../../world-view/README]] |
 
 ## 4. Queue — ruled, not started (ready)
 
@@ -94,6 +94,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | engine.342 | Media grading plays into the sim (builder 11-14): approval reads one press number for all seats, not how the paper covered each seat. Plan at pickup | ready | engine-sheet | [[../reference/AGENT_BOOT_TEMPLATES]] §2 What moves approval |
 | engine.343 | Street direction scale (builder 11-15): decay is scored against the city average, not a street's own weeks; a notch only when it got worse. Plan at pickup | ready | research-build | `output/production_log_run_cycle_c115_gaps.md` G-EC67, G-EC68 |
 | engine.344 | Bond tab loose ends (builder 11-15): a bond written with a bare name when two citizens share it; two carry a status the engine lacks. Plan at pickup | ready | research-build | `output/production_log_run_cycle_c115_gaps.md` G-EC69, G-EC70 |
+| engine.345 | Home parcels on the ledger (builder 11-15): a parcel id and address per household, like a business; parcels carry value in home buying. Plan at pickup | ready | research-build | [[../../world-view/README]] §Builder rulings (Homes) |
 | pipeline.107 | C115 texture + drafter invented facts (codex handoff 11-09): ground both in the cycle's seeds; world-state fold leaked a footer. Plan at pickup | ready | engine-sheet | output/production_log_run_cycle_c115_gaps.md G-EC37–41 |
 | engine.340 | Seed class per kind (builder 11-08): one major bar read every kind of number; each multi-hood initiative its own seed; SeedID kept as text. After pipeline.100 | ready | engine-sheet | [[../plans/2026-11-08-seed-builder-class-per-kind]] |
 | engine.341 | Seed deck dead paths (builder 11-08): maps miss the deck's writer; two old-deck writers and the handoff menu tool retired. After engine.340 | ready | engine-sheet | [[../plans/2026-11-08-seed-deck-dead-readers-writers]] |

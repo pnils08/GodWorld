@@ -644,13 +644,14 @@ if (WX === 'rain') {
 // ---------- a place ----------
 var world = null, cur = 0, blk = false; // blk: the scene is this neighborhood's residential block, not its main street
 // A neighborhood's residential block is a scene of its own (builder 2026-11-15: "a new block not on the Main Street"):
-// the same neighborhood, its house lots (build.js `block`), the households on them, and whoever of this week's
-// people lives there, at their own door. Nothing of the main street is on it: no business, no landmark, no chaos car.
+// the same neighborhood, its house lots (build.js `block`) and the households on them. Nobody is drawn on it: a
+// person is in one place, and this week's people are on the main street (builder 2026-11-15: "How can a citizen
+// exists twice in the same time ?"). Tap a house for who lives there. Nothing of the main street is on it either.
 function blockHood(H0) {
   if (!H0.block) return null;
   if (!H0._blk) {
     var on = {}; (H0.homes || []).forEach(function (hm) { if (HOMES[hm.hh].blk) on[hm.hh] = 1; });
-    H0._blk = { name: H0.name, isBlock: true, people: H0.people.filter(function (p) { return p.hh && on[p.hh]; }), biz: [], homes: H0.homes, lay: H0.block, chaos: [], notes: H0.notes || [], state: H0.state, nHomes: Object.keys(on).length };
+    H0._blk = { name: H0.name, isBlock: true, people: [], biz: [], homes: H0.homes, lay: H0.block, chaos: [], notes: H0.notes || [], state: H0.state, nHomes: Object.keys(on).length };
   }
   return H0._blk;
 }
@@ -947,22 +948,12 @@ function build(idx, onBlk) {
     else if (hlot) { a.s = hlot.s; a.x = hlot.s * (WALK + (hlot.k === 'h' ? 1.4 : -0.4)); a.z = hlot.z + (hlot.k === 'h' ? (hlot.w - 2.5) * 0.25 : 0); a.y = (hlot.k === 'h' ? 3.4 : 5) + yAt(a.z); a.at = 1; a.home = 1; }
     else if (plc) { a.s = plc.s || 1; a.x = a.s * (WALK + 1.2); a.z = plc.z; a.y = 6.2 + yAt(a.z); a.far = 110; a.at = 1; }
     else if (lot) { a.s = lot.s; a.x = lot.s * (WALK - 0.4); a.z = lot.z; a.y = 5 + yAt(a.z); a.at = 1; }
-    else { a.s = water ? -water : (lanI % 2 ? -1 : 1); a.z = -Lmain * (lanI + 1) / (nLan + 1); lanI++; a.x = a.s * (WALK - 0.9); a.y = 3.3 + yAt(a.z); box(0.08, 3, 0.08, a.x, 1.5 + yAt(a.z), a.z, [30, 0.1, 0.2]); glow(a.x, 3.1 + yAt(a.z), a.z, NCOL[nt.k] || NCOL.f, 2.6); }
+    else { a.loose = true; a.s = 1; a.x = 0; a.y = 3; a.z = 0; } // no place of its own here: no post, no label on the street; it is listed under "This week here" on the top line
     if (nt.k === 'f' && a.at) { glow(a.s * (WALK + 0.6), 1.6 + yAt(a.z), a.z, 0xffd28a, 6); for (var li = -3; li <= 3; li++) if (li) glow(a.s * (WALK - 0.5), 0.35 + yAt(a.z + li * 1.1), a.z + li * 1.1, 0xffc070, 0.9); }
     // someone who died: candles at the door
-    if (nt.k === 'l' && nt.kind === 'death') for (var ci = 0; ci < 6; ci++) glow(a.s * (WALK - 0.35 - (ci % 2) * 0.3), 0.25 + yAt(a.z), a.z - 0.9 + ci * 0.36, 0xffb45e, 0.7);
+    if (nt.k === 'l' && nt.kind === 'death' && !a.loose) for (var ci = 0; ci < 6; ci++) glow(a.s * (WALK - 0.35 - (ci % 2) * 0.3), 0.25 + yAt(a.z), a.z - 0.9 + ci * 0.36, 0xffb45e, 0.7);
     notes[ni] = a; // kept at the row's own index (links to a notice go by it), so a street that skips one has a gap
   });
-  if (H0.block) {
-    // the way to this neighborhood's other street: a sign on a post near the far end. Tap it, or its label.
-    var tn = { nt: { k: 'h', n: H.isBlock ? 'Main street' : 'Homes', x: H.isBlock ? 'Back to the main street of ' + H.name : 'The residential block of ' + H.name }, far: 70, turn: true, s: water ? -water : 1 };
-    tn.z = -Lmain + 8; tn.x = tn.s * (WALK - 0.9); tn.y = 3.3 + yAt(tn.z);
-    box(0.1, 3.3, 0.1, tn.x, 1.65 + yAt(tn.z), tn.z, [30, 0.1, 0.2]);
-    var tnm = new THREE.MeshBasicMaterial({ map: signTex(tn.nt.n, 48) }); tnm.userData.own = true;
-    var tns = new THREE.Mesh(new THREE.PlaneGeometry(2.6, 0.98), tnm); tns.position.set(tn.x, 2.85 + yAt(tn.z), tn.z + 0.06); root.add(tns);
-    glow(tn.x, 3.4 + yAt(tn.z), tn.z, 0xffd9a0, 2.2);
-    notes[(H.notes || []).length] = tn;
-  }
   if (!H.isBlock && (H.notes || []).some(function (nt) { return nt.k === 's' && /^H:/.test(nt.week || ''); })) {
     var pn = [], pz, pi;
     for (pz = 2; pz > -Lmain + 8; pz -= 15) {
@@ -1007,8 +998,8 @@ function build(idx, onBlk) {
       if (lot) { o.s = lot.s; o.x = lot.s * (WALK - 1.3); o.z0 = lot.z + 1.2; o.amp = 0; o.post = true; }
       else if (plc) { o.s = plc.s || 1; o.x = o.s * (WALK - 1.3); o.z0 = plc.z + plc.half - 2; o.amp = 0; o.post = true; }
     }
-    if ((H.isBlock || (d.noPlace && d.at == null)) && d.hh && HOMES[d.hh] && DATA.hoods[HOMES[d.hh].h] === H0) {
-      // nothing in their week names a place: they stand at their own door. On the residential block everyone shown is at theirs.
+    if (d.noPlace && d.at == null && d.hh && HOMES[d.hh] && DATA.hoods[HOMES[d.hh].h] === H0) {
+      // nothing in their week names a place: they stand at their own door
       var hrec = H.homes[HOMES[d.hh].k], hlot = LAY.parcels.filter(function (q) { return q.id === hrec.lot; })[0];
       if (hlot) { o.s = hlot.s; o.x = hlot.s * (WALK - 1.3); o.z0 = hlot.z + (hlot.k === 'h' ? (hlot.w - 2.5) * 0.25 : 0); o.amp = 0; o.post = true; o.door = true; }
     }
@@ -1213,6 +1204,28 @@ function facts() {
   bits.forEach(function (bit, bi) { if (bi) fx.appendChild(document.createTextNode(' \u00B7 ')); bit.forEach(function (part, pi) { if (pi % 2 === 0 && part !== '') { var bEl = document.createElement('b'); bEl.textContent = String(part); fx.appendChild(bEl); } else if (part !== '') fx.appendChild(document.createTextNode(String(part))); }); });
   fx.appendChild(document.createTextNode('.'));
   if (H.nums) { var nb = document.createElement('button'); nb.type = 'button'; nb.className = 'nums'; nb.textContent = 'The street\u2019s numbers'; nb.addEventListener('click', startNums); fx.appendChild(document.createTextNode(' ')); fx.appendChild(nb); }
+  var loose = looseNotes();
+  if (loose.length) { var wb = document.createElement('button'); wb.type = 'button'; wb.className = 'nums'; wb.textContent = 'This week here (' + loose.length + ')'; wb.addEventListener('click', startWeek); fx.appendChild(document.createTextNode(' \u00B7 ')); fx.appendChild(wb); }
+}
+// This week here: the week's notices for this neighborhood that have no place of their own on its street (a team's
+// news filed to the neighborhood, a program list, an initiative with no office here). They are listed, not stood
+// on the pavement in front of somebody else's building (builder 2026-11-15: "why does As event load on a building ?").
+function looseNotes() { var out = []; ((world && world.notes) || []).forEach(function (a) { if (a.loose) out.push(a); }); return out; }
+function startWeek() {
+  var W = world, list = looseNotes(); if (!W || !list.length) return;
+  endVisit(true); if (walking) setWalk(false);
+  bizView = { s: 1, z: W.z - 5, cx: 0, cy: 3.4, cz: W.z, lx: 0, ly: 2.6, lz: W.z - 30 };
+  document.body.classList.add('visit'); CARDS.forEach(function (s) { setCard(s, null); });
+  var body = $('pBody'); body.textContent = ''; $('pName').textContent = 'This week in ' + W.H.name; $('pBio').hidden = true;
+  $('pMeta').textContent = 'Week ' + DATA.cycle + '. On record for this neighborhood, with no building, home or station of its own on this street.';
+  var ul = mk('ul', null, 'ties');
+  list.forEach(function (a) {
+    var li = mk('li'), top = mk('div'), bt = mk('button', noteName(a.nt), 'link'); bt.type = 'button'; bt.addEventListener('click', function () { startNote(a); });
+    top.appendChild(bt); li.appendChild(top); if (a.nt.x) li.appendChild(mk('p', a.nt.x.length > 150 ? a.nt.x.slice(0, 147) + '\u2026' : a.nt.x, 'pmeta')); ul.appendChild(li);
+  });
+  body.appendChild(ul);
+  $('bBack').textContent = 'Back to the street';
+  $('person').hidden = false; $('person').scrollTop = 0;
 }
 // The street's numbers: its own Neighborhood_Map row for the week and its Crime_Metrics row, as the engine holds
 // them, each beside the span the 22 streets run across. Nothing on the street is drawn from these except the
@@ -1496,7 +1509,7 @@ function pick(px, py) {
   W.people.forEach(function (p) { test(p.x, 1.0 * p.sc + W.yAt(p.z), p.z, 1.0, 60, 26, 0.8, { p: p }); });
   (W.H.chaos || []).forEach(function (ev) { if (ev.on) test(ev.x, ev.cy != null ? ev.cy : ev.y * 0.5, ev.z, ev.rad || 2.6, (ev.far || 80) + 10, 34, 0.85, { c: ev }); });
   W.H.lay.parcels.forEach(function (q) { if (q.b == null) return; var y = W.yAt(q.z); test(q.s * WALK, 1.6 + y, q.z, q.w * 0.45, 80, 30, 1, { b: q.b }); test(q.s * (WALK - 1.7), 4.5 + y, q.z + q.w / 2 - 0.4, 1.9, 80, 26, 1, { b: q.b }); });
-  (W.notes || []).forEach(function (a) { test(a.x, a.y - 0.5, a.z, 1.4, a.far + 10, 30, 0.9, { n: a }); });
+  (W.notes || []).forEach(function (a) { if (!a.loose) test(a.x, a.y - 0.5, a.z, 1.4, a.far + 10, 30, 0.9, { n: a }); });
   W.H.lay.parcels.forEach(function (q, qi) { if (!q.hm || q.b != null) return; var y = W.yAt(q.z); if (q.k === 'h') test(q.s * (WALK + 2.5), 2 + y, q.z, q.w * 0.42, 70, 28, 1.05, { h: qi }); else test(q.s * WALK, 2.2 + y, q.z, q.w * 0.42, 70, 28, 1.1, { h: qi }); });
   W.H.lay.places.forEach(function (q) {
     if (q.b == null) return;
@@ -1507,7 +1520,7 @@ function pick(px, py) {
   if (!best) return;
   // cards off: a first tap on a person, a chaos car or a notice opens its card; a tap on the card (or a second tap) opens the rest
   var tg = best.c ? CTAGS.filter(function (e) { return e && e._ev === best.c && +e.style.opacity > 0.3; })[0] : best.n ? NTAGS.filter(function (e) { return e && e._a === best.n && +e.style.opacity > 0.3; })[0] : null;
-  if (best.p) openCard(best.p); else if (best.c) { if (tg) openLabel(tg, function () { startChaos(best.c); }); else startChaos(best.c); } else if (best.n) { if (tg && !best.n.turn) openLabel(tg, function () { startNote(best.n); }); else startNote(best.n); } else if (best.h != null) startHome(best.h); else startBiz(best.b);
+  if (best.p) openCard(best.p); else if (best.c) { if (tg) openLabel(tg, function () { startChaos(best.c); }); else startChaos(best.c); } else if (best.n) { if (tg) openLabel(tg, function () { startNote(best.n); }); else startNote(best.n); } else if (best.h != null) startHome(best.h); else startBiz(best.b);
 }
 function money(v) { return '$' + Math.round(v).toLocaleString('en-US'); }
 function startBiz(bi) {
@@ -1563,9 +1576,9 @@ function placeNotes() {
   var rects = TAKEN, show = labels > 0 && !visiting && !bizView && !busy, cand = [];
   for (i = 0; i < Math.max(list.length, NTAGS.length); i++) {
     var a = list[i], el = NTAGS[i];
-    if (!a) { if (el) el._o = 0; continue; }
+    if (!a || a.loose) { if (el) el._o = 0; continue; }
     if (!el) { el = NTAGS[i] = document.createElement('div'); el.innerHTML = '<b><i></i><em style="font-style:normal"></em></b><span></span>'; tagsEl.appendChild(el);
-      (function (tag) { tag.addEventListener('click', function () { if (tag._a && +tag.style.opacity > 0.3) { if (tag._a.turn) startNote(tag._a); else openLabel(tag, function () { startNote(tag._a); }); } }); })(el); }
+      (function (tag) { tag.addEventListener('click', function () { if (tag._a && +tag.style.opacity > 0.3) openLabel(tag, function () { startNote(tag._a); }); }); })(el); }
     var mini = labels < 2 && openTag !== el; // cards off: its name only, until it is tapped
     if (el._a !== a || el._m !== mini) { el._a = a; el._m = mini; el.className = 'ctag n' + ({ s: 's', l: 'l', i: 'i', p: 'p', c: 'c', t: 't', w: 'w', x: 'x' }[a.nt.k] || 'f'); el.querySelector('em').textContent = mini ? noteName(a.nt) : a.nt.n; el.querySelector('span').textContent = a.nt.x; }
     el.classList.toggle('mini', mini);
@@ -1593,15 +1606,15 @@ function placeNotes() {
 function words_(v) { return String(v || '').replace(/[_-]/g, ' '); }
 function startNote(a) {
   var W = world, nt = a.nt; if (!W) return;
-  if (a.turn) { go(cur, 0, null, !blk); return; } // the sign to the neighborhood's other street
   endVisit(true); if (walking) setWalk(false);
-  bizView = { s: a.s, z: a.z, cx: -a.s * (ROAD + 1.4), cy: 2.4, cz: a.z + 8, lx: a.x, ly: Math.min(a.y, 5), lz: a.z };
+  bizView = a.loose ? { s: 1, z: W.z - 5, cx: 0, cy: 3.4, cz: W.z, lx: 0, ly: 2.6, lz: W.z - 30 } // nowhere to stand: the view stays where it is
+    : { s: a.s, z: a.z, cx: -a.s * (ROAD + 1.4), cy: 2.4, cz: a.z + 8, lx: a.x, ly: Math.min(a.y, 5), lz: a.z };
   document.body.classList.add('visit'); CARDS.forEach(function (s) { setCard(s, null); });
   var body = $('pBody'), lines = [], ul, li, dot, add = function (text, colr) { li = mk('li'); dot = mk('i'); dot.style.background = colr; li.appendChild(dot); li.appendChild(mk('span', text)); ul.appendChild(li); };
   body.textContent = ''; $('pName').textContent = nt.n;
   if (nt.k === 'f') {
     lines.push((nt.trad ? nt.trad + ' \u00B7 ' : '') + W.H.name);
-    if (!a.at) lines.push('The ledger has no building for it on this street, so its notice stands on the pavement.');
+    if (!a.at) lines.push('The ledger has no building for it on this street.');
     $('pBio').hidden = true;
     section(body, 'This week (' + DATA.cycle + ')'); ul = mk('ul'); add(nt.x, '#ffd28a'); if (nt.type) add(words_(nt.type), '#ffd28a'); if (nt.att) add(nt.att.toLocaleString('en-US') + ' came, by the ledger\u2019s count', '#ffd28a'); body.appendChild(ul);
     if (nt.leader || nt.cong || nt.ch) {
@@ -1636,7 +1649,7 @@ function startNote(a) {
     });
     body.appendChild(ul);
   } else if (nt.k === 't') {
-    lines.push('Week ' + DATA.cycle + ' \u00B7 ' + W.H.name); if (!nt.line) lines.push('No line is drawn on this street, so its notice stands on the pavement.');
+    lines.push('Week ' + DATA.cycle + ' \u00B7 ' + W.H.name); if (!nt.line) lines.push('No line is drawn on this street.');
     $('pBio').hidden = true; section(body, 'This week'); ul = mk('ul');
     if (nt.riders) add(nt.riders.toLocaleString('en-US') + ' riders' + (nt.base ? ' (the engine\u2019s usual for this station: ' + nt.base.toLocaleString('en-US') + ')' : ''), '#aab0ba');
     if (nt.ot) add(Math.round(nt.ot * 100) + '% on time', '#aab0ba'); if (nt.notes) add(nt.notes, '#aab0ba');
@@ -1648,7 +1661,7 @@ function startNote(a) {
     if (nt.type) add(words_(nt.type), '#ff6b5e'); if (nt.key) add(words_(nt.key), '#cfc4ae'); if (nt.sev) add((nt.k === 'w' ? 'Severity: ' : 'Intensity: ') + nt.sev, nt.k === 'w' ? '#ff6b5e' : '#cfc4ae');
     if (ul.children.length) { section(body, 'As the engine logged it'); body.appendChild(ul); }
   } else if (nt.k === 'i') {
-    lines.push('Initiative \u00B7 ' + W.H.name); if (!a.at) lines.push('It has no office on this street, so its notice stands on the pavement.');
+    lines.push('Initiative \u00B7 ' + W.H.name); if (!a.at) lines.push('It has no office on this street.');
     $('pBio').hidden = true;
     section(body, 'Where it stands'); ul = mk('ul');
     add(nt.st.charAt(0).toUpperCase() + nt.st.slice(1) + (nt.vote ? ' (vote in week ' + nt.vote + ')' : ''), '#6fd3ff');
@@ -1682,7 +1695,7 @@ function homeList(body, H, lot, title) {
     hm.mem.forEach(function (m, i) {
       if (i) top.appendChild(document.createTextNode(', '));
       var ent = BYID[m[0]];
-      if (ent) { var bt = mk('button', m[1], 'link'); bt.type = 'button'; bt.addEventListener('click', function () { if (blk && world.people.some(function (o) { return o.d === ent.d; })) startVisit(ent.d); else go(ent.h, 0, ent.d); }); top.appendChild(bt); }
+      if (ent) { var bt = mk('button', m[1], 'link'); bt.type = 'button'; bt.addEventListener('click', function () { go(ent.h, 0, ent.d); }); top.appendChild(bt); }
       else top.appendChild(mk('span', m[1], 'quiet'));
     });
     if (!hm.mem.length) top.appendChild(mk('span', 'Nobody named on the household\u2019s row', 'quiet'));

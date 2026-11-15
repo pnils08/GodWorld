@@ -345,6 +345,7 @@ Mara Vance (asker; her own memory and tools; civic.47 M1), Elias Varek's journal
 
 ## Changelog
 
+- 2026-11-15 (engine-sheet) — §1: the 17:00 citizen exchange opens a participant as the daily wake does (`identityLine` + `stationLine`, office title from `Civic_Office_Ledger`, read once a run); before, a council member in a debate was told "a City Council District 4" and "an ordinary person" above the stance line naming his seat. Builder: "go on the exchange fix, no puppeting" — no new wording; an ordinary citizen's opening is byte-identical. Guarded dry run on Vega and Mobley.
 - 2026-11-15 (engine-sheet) — §2: the pack check on Mobley (D9) done: his district's rows whole off the sheets in place of the pack's six columns and worded facts; the faction table on the live approvals; the reporters' filing records out of the complaints; an old wake's form fields off his remembered statements; one run (evidence log Run 8). The stale faction approvals and the filing records still reach every live seat's pack — not touched.
 - 2026-11-15 (engine-sheet) — §2: the council template on Mobley (D9) alone, template only; the runner wiring taken out (plan Task 11, after approval); the Mayor her own template, not started.
 - 2026-11-15 (engine-sheet) — §2 seat template: codex review folded (events print fact, Cycle, where, size; the resident ledger unreadable is unavailable; one proposal of a title a wake).

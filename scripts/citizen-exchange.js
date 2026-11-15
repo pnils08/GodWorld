@@ -38,7 +38,8 @@ const getCurrentCycle = require('/root/GodWorld/lib/getCurrentCycle');
 const { _hash53 } = require('/root/GodWorld/lib/provocationBank');
 const { matchBondTargets_ } = require('./bondTargetMatch'); // engine.130 — name-match fallback when the format has no structural counterpart
 const { buildPool, coResidents, loadLifeArc, loadSportsSlice, loadNeighborhoodTexture,
-  loadBonds, loadFamily, loadHealthState, loadOwnPageReadback, dialTrajectory, renderStanding } = require('/root/GodWorld/lib/wakePerception'); // loadHealthState engine.101 health slice; renderStanding engine.147
+  loadBonds, loadFamily, loadHealthState, loadOwnPageReadback, dialTrajectory, renderStanding,
+  loadOfficeHolders, identityLine, stationLine } = require('/root/GodWorld/lib/wakePerception'); // loadHealthState engine.101 health slice; renderStanding engine.147; the last three are the daily wake's opening (pipeline.110)
 const { matchCitizenToJournalist_ } = require('/root/GodWorld/utilities/rosterLookup');
 
 const ARGV = process.argv.slice(2);
@@ -94,11 +95,24 @@ async function generate(system, messages, maxTokens) {
   return String(j.choices?.[0]?.message?.content || '').trim();
 }
 
+// The office sheet is read once a run: an office holder opens as the daily wake opens them (title from the sheet, not
+// RoleType); an unreadable sheet is the opening as it was, said once.
+let officesRead = null;
+async function officeFor(popId) {
+  if (!officesRead) {
+    officesRead = loadOfficeHolders();
+    officesRead.then((o) => { if (o.error) logLine('office sheet read failed (non-fatal, no office title this run): ' + o.error); });
+  }
+  return (await officesRead).byPop[popId] || null;
+}
+
 /* Wake-parity perception for one citizen — same block structure and ingredient order as the
  * wake/citizenVoice prompts (continuity -> people -> world -> surroundings -> memory). */
 async function assembleParticipant(pool, popId, cycle, contextHint) {
   const c = pool.find((p) => p.popId === popId);
   if (!c) return null;
+  const office = await officeFor(c.popId);
+  if (office) c.office = office;
   const [neighbors, sportsLine, lifeArc, bondsLine, familyLine, healthLine] = await Promise.all([
     coResidents(c.nh, c.popId), loadSportsSlice(), loadLifeArc(c.popId), loadBonds(c.popId), loadFamily(c.popId),
     loadHealthState(c.popId),
@@ -121,7 +135,7 @@ async function assembleParticipant(pool, popId, cycle, contextHint) {
   const sports = sportsLine ? `\n\nAround Oakland: ${sportsLine}` : '';
   const texture = textureLine ? `\n\nAround your neighborhood: ${textureLine}` : '';
   const memory = pageRead.block ? `\n\n---\n\nWhat's been on your mind lately, from your own private reflections:\n${pageRead.block}` : '';
-  const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. You are an ordinary person, not a writer. Your temperament: ${disp}.${trajLine}${arcLine}${health}\n\nReal things from your life recently:\n${c.life}${family}${standing}${who}${bonds}${sports}${texture}${memory}`;
+  const system = `${identityLine(c)} ${stationLine(c, false)} Your temperament: ${disp}.${trajLine}${arcLine}${health}\n\nReal things from your life recently:\n${c.life}${family}${standing}${who}${bonds}${sports}${texture}${memory}`;
   return { c, system, bondsLine, disp };
 }
 

@@ -78,10 +78,19 @@ pointers:
 
 **The template on the current moves — draft wording (builder 2026-11-14: "the template can still be built on the current set up"; "Once those are with a rollout line we can proceed on the template , then we will check their wake pack").** Not agreed; no run; no code. Built as the chief's (`scripts/workerWake.js`): the sheet line and gathered memory as the system turn; data blocks titled by their data, then their decisions, then what is put to them; the reply is the statement, whole; a move is a tool, staged and filed through the same move gate (`validateDatawakeMoves`), as the chief's patrol is. No JSON form on the weekday wake.
 
+**What a council seat is (builder 2026-11-14), on the draft: "This all looks good for the first build to test".** "An iniative isn't the job and the way you write this it makes it seem like that's what they do. Like a police chief this is a different form of a data agent . So the reason media affects them is Because the media gets to interview them or call on them . So of Carmen wants to know something they need to be Able to answer for it . In their voice with tools to provide the answer. In their wakes they get to \"walk\" their districts , call on citizens in their districts and ask them the concerns or excitement for their hood. One of their abilities is to create an Iniative to serve their districts, which they vote on in the city hall run , when big events happen in there districts they respond to media and check in on the citizens." On approval: "the explanation of the approval rating doesn't serve them , it probably would be better as somethings that a script edits each week so it show what their approval ratings is , what is was last cycle and what puts them out of office . Explanation isn't needed".
+
+| What he named | In the code today |
+|---|---|
+| The media interviews them or calls on them; they answer in their voice, with tools | A reporter reaches a seat only as a citizen interview (`citizenVoice.js` from `cron-desk-run.js` `collectQuoteAsks`): Vega 5, Santana 1, Rivers 1 across every `*_asks.json` on disk; none with the seat's records or tools |
+| They walk their district and call on its citizens | No seat tool. `citizenVoice.js` voices one citizen on an ask, read-only by default |
+| They create an initiative for their district, voted on in the city hall run | `propose` → Proposed at the week's close → a seat's call-vote → the vote; live |
+| Big events in their district: they respond to media and check in on citizens | The event duty (`planDutyRota`, a fresh major event owed to an elected seat) runs only under `--civic47-pilot`, off by default |
+
 | Part | What the seat reads (draft) | Source |
 |---|---|---|
 | 1 | the live line, e.g. "You are Ramon Vega, 64, living in Lake Merritt, Oakland. You hold the office of City Council District 4 (Glenview, Dimond, Ivy Hill)." + temperament | live (`wakePerception.identityLine`) |
-| 2 | Block "Your office": approval now; challenger named or none. Then: "The seat is held on approval. Under 40 a challenger is named. Under 30 the named challenger takes the seat that Cycle. Approval moves each Cycle with the initiatives touching the district — one that advances a phase or finishes raises it once; one overdue or never scheduled lowers it each Cycle — with the district's mood and readings against the city's, and with the week's press." (Mayor: every initiative; the city's mood) | `Civic_Office_Ledger`; `updateCivicApprovalRatings.js` |
+| 2 | Block "Your approval", written by the harness each wake: now, last Cycle, and what puts them out of office ("Approval 61; last Cycle 63. A challenger is named below 40; below 30 the challenger takes the seat."). No explanation | `Civic_Office_Ledger` now and its last-Cycle snapshot (`output/beats/prev/Civic_Office_Ledger.jsonl`); thresholds from `updateCivicApprovalRatings.js` v1.8 |
 | 3 | Their district, the city, their board, petitions waiting, categories with budget bands — every column; titles name the data | the fill: checked at the pack read, next |
 | 4 | The worker's four tools, same wording (`workerWake.TOOLS`) | live for the chief |
 | 5 | "From your own memory:" entries gathered by search, each with its Cycle | `workerWake.gatherMemory` |
@@ -89,13 +98,15 @@ pointers:
 | 7 | The moves, as tools (below) | `cron-civic-run.js` closed set + eligibility rules |
 | 8 | A question last, in the asker's words, with who asks; Mara's question here. Sunday: the agenda here | — |
 
-**The moves as tools (draft descriptions — what each is and what follows; nothing on when):**
-- `initiative_propose` — "Put a new initiative on the city's tracker: its name, what it is for, the category of city life it touches, its reach and a budget. Reach is named neighborhoods or the whole district, inside your district; a citywide seat may reach the city. The budget is a figure like $12.5M inside the category's band. It is entered as Proposed at the week's close and goes to a council vote when a seat calls one; a passed vote funds it." (`foldMovesIntoDecisions` candidates; `callVoteEligibility`; every non-health domain reaches a vote by call-vote, `PETITION_SUPPORT_BANDS` empty)
-- `initiative_work` — "Put your office's work into an initiative on your board. A funded initiative stands up once work lands on it after its funding; a standing or delivering one keeps its full effect while it is worked and weakens when left untended." (`LastWorkCycle`; `civicInitiativeEngine.js` Funded clear; `applyInitiativeImplementationEffects.js` tend factor)
-- `vote_call` — "Send a proposed initiative with no vote scheduled to the next Cycle's council vote. The Mayor may call any; a district seat one with a neighborhood in its district. One call per initiative a week." (`callVoteEligibility`)
-- `program_renew` — "Ask the council to re-fund a running program on your board that is running low or has run dry, with an amount inside its category's band. The council votes the next week; the money lands the week after. The same seat rule as a vote call; one renewal pending per program." (`renewEligibility`)
-- `canvass` — "Walk a neighborhood of your district; the visit and your note go on the record." (nothing reads it, civic.50)
-- `directive_answer` — present only when Mara has asked: "Reply on the record to the question the City Planning Director put to your office." (`validateDatawakeMoves` answer binding)
+**Their tools (draft descriptions — what each is and what follows; nothing on when). Records first, then people, then council business; an initiative is one ability among them:**
+- The worker's four, same wording: a city sheet, a citizen's record, what the paper has printed, their own memory.
+- `resident_call` — "Call on a resident of your district and put a question to them; they answer in their own words." Built on `citizenVoice.js` (read-only); not wired to a seat. The walk is this call; `canvass`, which sets nothing (civic.50), is not carried.
+- `initiative_propose` — "Put an initiative before the council to serve your district: its name, what it is for, the category of city life it touches, its reach and a budget inside the category's band. It is entered as Proposed at the week's close; the council votes on it at the city hall run once a vote is called."
+- `vote_call` — "Send a proposed initiative with no vote scheduled to the next city hall vote. The Mayor may call any; a district seat one with a neighborhood in its district. One call per initiative a week."
+- `program_renew` — "Ask the council to re-fund a running program on your board that is running low or has run dry, with an amount inside its category's band. The council votes the next week; the money lands the week after."
+- `initiative_work` — "Put your office's work into an initiative on your board. A funded one stands up once work lands on it; a running one weakens when left untended."
+- `directive_answer` — present only when Mara has asked: "Reply on the record to the question the City Planning Director put to your office."
+- What is put to them (part 8): a reporter's question with who asks (Carmen Delaine, Civic Ledger), Mara's, a worker's answer; a big event in the district. Routing a reporter's question to the seat's own wake is not built; the event duty is pilot-only (table above).
 - Asking a worker: civic.49, not built.
 
 **Left to the builder:** how many moves a wake (draft: no count; each tool's own rule stands); the tool-call budget a wake (the chief's is 6 reads and moves together); a figure not handed — as the chief, logged on the record, not stated to the seat. The Sunday hearing's form (`outputContract`) is the wake's, read with the pack.
@@ -332,6 +343,7 @@ Mara Vance (asker; her own memory and tools; civic.47 M1), Elias Varek's journal
 
 ## Changelog
 
+- 2026-11-14 (engine-sheet) — §2: the builder's word on what a council seat is (a data agent for the district, answerable to the media; walks the district and calls on its citizens; an initiative one ability; responds to big events) recorded with the code beside each; approval block cut to now / last Cycle / what puts them out; tools reordered records → people → council business, `resident_call` added on `citizenVoice.js`, `canvass` not carried.
 - 2026-11-14 (engine-sheet) — §2: the council template drafted on the current moves, built as the chief's: the reply is the statement, each move a tool with what it is and what follows (wording from the eligibility code), the office-can-be-lost block in words; move count, tool budget left to the builder. Not agreed, no run.
 - 2026-11-14 (engine-sheet) — §2 Council / Mayor from a clean slate: eight parts proposed, each sorted into how the city works (kept) and what to do (out); builder: "I like this" (not approved, no run). His word on the one-move limit, on what moves approval, and the gap (every council move works through an initiative; canvass changes nothing in the engine), with the code read beside each; the press term is one number for every seat.
 - 2026-11-14 (engine-sheet) — Worker model ON for the police chief on the builder's word; an office with a fill is dropped from the Thursday wake (`cron-work-wake.js` `autoPackages`).

@@ -74,7 +74,9 @@ body.walk .tag .said, body.words .tag .said { -webkit-line-clamp: 9; }
 .ctag span { display: block; font: italic 400 14px/1.25 var(--story); margin-top: 1px; }
 .ctag.nf { border-color: rgba(255,210,138,.6); } .ctag.nf b i { background: #ffd28a; border-radius: 50%; transform: none; }
 .ctag.ns { border-color: rgba(123,224,138,.6); } .ctag.ns b i { background: #7be08a; border-radius: 50%; transform: none; }
-.ctag.nf span, .ctag.ns span { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
+.ctag.nl { border-color: rgba(255,201,77,.6); } .ctag.nl b i { background: #ffc94d; border-radius: 50%; transform: none; }
+.ctag.ni { border-color: rgba(111,211,255,.6); } .ctag.ni b i { background: #6fd3ff; border-radius: 50%; transform: none; }
+.ctag.nf span, .ctag.ns span, .ctag.nl span, .ctag.ni span { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
 body.words .tag { max-width: min(340px, 62vw); }
 body.words .tag .said { font-size: 16px; border-top: 0; padding-top: 0; margin-top: 4px; }
 body.words .tag .line { font: 500 12px/1.3 var(--display); color: var(--dim); margin-top: 6px; }
@@ -222,7 +224,7 @@ var HOMES = {}; DATA.hoods.forEach(function (H, hi) { (H.homes || []).forEach(fu
 function tieName(id) { return BYID[id] ? BYID[id].d.n : (DATA.offStreet || {})[id] || id; }
 // what a card says while two people who know each other are stopped together, or passing each other on bad terms
 function withLine(p) {
-  var m = p.meet; if (!m) return '';
+  var m = p.meet; if (!m) return !p.at ? '' : p.at.kind === 'home' ? 'At their own door.' : 'Outside ' + p.at.n + ', where they work.';
   return (m.bad ? 'Passing ' : 'With ') + m.q.d.n + ', ' + tieWords(m.t) + '.' + (!m.bad && m.t.talk ? ' They talked in week ' + m.t.talk.c + '.' : '');
 }
 var DBG = window.WV_DEBUG || null; // look-test hook: { cam: [x,y,z], look: [x,y,z], t0: seconds, hide: true, manual: true (the clock only moves on __wv.step(dt)), follow: { who: name or index, off: [x,y,z], aim: height } }
@@ -887,13 +889,17 @@ function build(idx) {
   // somewhere: at the organization's own building where the ledger has one on this street, else at a lantern on
   // the pavement. A house of worship with something on this week has light on its steps. A home game hangs
   // strings of pennants over the main street (plain colours, no team mark).
-  var notes = [], NCOL = { f: 0xffd28a, s: 0x7be08a }, Lmain = LAY.Lm || L;
+  var notes = [], NCOL = { f: 0xffd28a, s: 0x7be08a, l: 0xffc94d, i: 0x6fd3ff }, Lmain = LAY.Lm || L, nLan = (H.notes || []).filter(function (nt) { return nt.b == null && !nt.hh; }).length, lanI = 0;
   (H.notes || []).forEach(function (nt, ni) {
     var a = { nt: nt, far: 70 }, lot = nt.b != null ? LAY.parcels.filter(function (q) { return q.b === nt.b; })[0] : null, plc = nt.b != null ? LAY.places.filter(function (q) { return q.b === nt.b && q.half > 0; })[0] : null;
-    if (plc) { a.s = plc.s || 1; a.x = a.s * (WALK + 1.2); a.z = plc.z; a.y = 6.2 + yAt(a.z); a.far = 110; a.at = 1; }
+    var hrec = nt.hh ? (H.homes || []).filter(function (x) { return x.hh === nt.hh; })[0] : null, hlot = hrec ? LAY.parcels.filter(function (q) { return q.id === hrec.lot; })[0] : null;
+    if (hlot) { a.s = hlot.s; a.x = hlot.s * (WALK + (hlot.k === 'h' ? 1.4 : -0.4)); a.z = hlot.z + (hlot.k === 'h' ? (hlot.w - 2.5) * 0.25 : 0); a.y = (hlot.k === 'h' ? 3.4 : 5) + yAt(a.z); a.at = 1; a.home = 1; }
+    else if (plc) { a.s = plc.s || 1; a.x = a.s * (WALK + 1.2); a.z = plc.z; a.y = 6.2 + yAt(a.z); a.far = 110; a.at = 1; }
     else if (lot) { a.s = lot.s; a.x = lot.s * (WALK - 0.4); a.z = lot.z; a.y = 5 + yAt(a.z); a.at = 1; }
-    else { a.s = water ? -water : (ni % 2 ? -1 : 1); a.z = -Lmain * (ni + 1) / (H.notes.length + 1); a.x = a.s * (WALK - 0.9); a.y = 3.3 + yAt(a.z); box(0.08, 3, 0.08, a.x, 1.5 + yAt(a.z), a.z, [30, 0.1, 0.2]); glow(a.x, 3.1 + yAt(a.z), a.z, NCOL[nt.k] || NCOL.f, 2.6); }
+    else { a.s = water ? -water : (lanI % 2 ? -1 : 1); a.z = -Lmain * (lanI + 1) / (nLan + 1); lanI++; a.x = a.s * (WALK - 0.9); a.y = 3.3 + yAt(a.z); box(0.08, 3, 0.08, a.x, 1.5 + yAt(a.z), a.z, [30, 0.1, 0.2]); glow(a.x, 3.1 + yAt(a.z), a.z, NCOL[nt.k] || NCOL.f, 2.6); }
     if (nt.k === 'f' && a.at) { glow(a.s * (WALK + 0.6), 1.6 + yAt(a.z), a.z, 0xffd28a, 6); for (var li = -3; li <= 3; li++) if (li) glow(a.s * (WALK - 0.5), 0.35 + yAt(a.z + li * 1.1), a.z + li * 1.1, 0xffc070, 0.9); }
+    // someone who died: candles at the door
+    if (nt.k === 'l' && nt.kind === 'death') for (var ci = 0; ci < 6; ci++) glow(a.s * (WALK - 0.35 - (ci % 2) * 0.3), 0.25 + yAt(a.z), a.z - 0.9 + ci * 0.36, 0xffb45e, 0.7);
     notes.push(a);
   });
   if ((H.notes || []).some(function (nt) { return nt.k === 's' && /^H:/.test(nt.week || ''); })) {
@@ -979,6 +985,24 @@ function build(idx) {
       // nobody left to change places with: they stay where they are, across the road from the others
     });
   });
+  // Somewhere to go: their own door, when their home is on this street, and the business the roster has them
+  // working at, when it is. Someone tied to nobody here is put on the side their door (else their work) is on,
+  // changing places with someone who has no such pull; whoever ends up across the road from a spot does not go to
+  // it (nobody here crosses the road). life-people.js walks them there now and then.
+  var lotById = {}; LAY.parcels.forEach(function (q) { lotById[q.id] = q; });
+  people.forEach(function (o) {
+    var d = o.d, sp = []; if (o.lead || o.post) return;
+    if (d.hh && HOMES[d.hh] && DATA.hoods[HOMES[d.hh].h] === H) { var hl = lotById[H.homes[HOMES[d.hh].k].lot]; if (hl) sp.push({ kind: 'home', s: hl.s, z: hl.z + (hl.k === 'h' ? (hl.w - 2.5) * 0.25 : 0) }); }
+    if (d.wk != null) { var wl = LAY.parcels.filter(function (q) { return q.b === d.wk; })[0], wp = LAY.places.filter(function (q) { return q.b === d.wk && q.half > 0; })[0]; if (wl) sp.push({ kind: 'work', s: wl.s, z: wl.z + 1.6, n: H.biz[d.wk].n }); else if (wp && wp.s) sp.push({ kind: 'work', s: wp.s, z: wp.z + wp.half - 3, n: H.biz[d.wk].n }); }
+    if (sp.length) o.want = sp;
+  });
+  singles.forEach(function (o) {
+    if (!o.want || o.want[0].s === o.s) return;
+    var tgt = o.want[0].s, sw = null, sdist = 1e9;
+    singles.forEach(function (u) { if (u === o || u.s !== tgt || u.moved || (u.want && u.want[0].s === tgt)) return; var dd = Math.abs(u.z0 - o.z0); if (dd < sdist) { sdist = dd; sw = u; } });
+    if (sw) { var ts = o.s, tx = o.x, tz = o.z0; o.s = sw.s; o.x = sw.x; o.z0 = o.z = sw.z0; sw.s = ts; sw.x = tx; sw.z0 = sw.z = tz; o.moved = sw.moved = true; }
+  });
+  people.forEach(function (o) { if (!o.want) return; var ok = o.want.filter(function (sp) { return sp.s === o.s; }); if (ok.length) o.spots = ok; });
   kit.ties = tiesHere;
   kit.people = people; // (the traffic file finds a citizen here when a chaos car has come for them)
   if (typeof LIFE.people === 'function') LIFE.people(kit, people);
@@ -1044,7 +1068,7 @@ function pickNames() {
   if (free.length) {
     var c = walking
       ? world.people.filter(function (p) { return p.f > 1 && p.dist < 10 && taken.indexOf(p) < 0; }).sort(function (a, b) { return a.dist - b.dist; })
-      : world.people.filter(function (p) { return p.f > 7 && p.f < 24 && taken.indexOf(p) < 0 && !p.seen; }).sort(function (a, b) { return (b.meet ? 1 : 0) - (a.meet ? 1 : 0) || (words ? (b.d.said ? 1 : 0) - (a.d.said ? 1 : 0) : 0) || a.d.pr - b.d.pr || a.f - b.f; });
+      : world.people.filter(function (p) { return p.f > 7 && p.f < 24 && taken.indexOf(p) < 0 && !p.seen; }).sort(function (a, b) { return (b.meet || b.at ? 1 : 0) - (a.meet || a.at ? 1 : 0) || (words ? (b.d.said ? 1 : 0) - (a.d.said ? 1 : 0) : 0) || a.d.pr - b.d.pr || a.f - b.f; });
     for (var i = 0; i < c.length && free.length; i++) {
       var p = c[i]; if (!walking && taken.some(function (q) { return Math.abs(q.z - p.z) < (q.s === p.s ? 11 : 5); })) continue;
       p.seen = true; taken.push(p); setCard(free.shift(), p);
@@ -1356,7 +1380,7 @@ function startBiz(bi) {
     if (staff.some(function (m) { return !BYID[m.id]; })) body.appendChild(mk('p', 'Greyed names had nothing on record this week, so they are not on a street.', 'pmeta'));
   }
   var hereN = (W.H.notes || []).filter(function (nt) { return nt.b === bi; });
-  if (hereN.length) { section(body, 'This week (' + DATA.cycle + ')'); var nl = mk('ul'); hereN.forEach(function (nt) { var li = mk('li'), dot = mk('i'); dot.style.background = '#ffd28a'; li.appendChild(dot); li.appendChild(mk('span', nt.x + (nt.att ? ' (' + nt.att.toLocaleString('en-US') + ' came)' : ''))); nl.appendChild(li); }); body.appendChild(nl); }
+  if (hereN.length) { section(body, 'This week (' + DATA.cycle + ')'); var nl = mk('ul'); hereN.forEach(function (nt) { var li = mk('li'), dot = mk('i'); dot.style.background = '#ffd28a'; li.appendChild(dot); li.appendChild(mk('span', (nt.k === 'f' ? '' : nt.n + ': ') + nt.x + (nt.att ? ' (' + nt.att.toLocaleString('en-US') + ' came)' : ''))); nl.appendChild(li); }); body.appendChild(nl); }
   if (lot && lot.hm) homeList(body, W.H, lot, 'Households on record living here (' + lot.hm.length + ')');
   $('person').hidden = false; $('person').scrollTop = 0;
 }
@@ -1366,17 +1390,23 @@ function startBiz(bi) {
 var NTAGS = [], NV = new THREE.Vector3();
 function placeNotes() {
   var list = (world && world.notes) || [], w = window.innerWidth, h = window.innerHeight, floor = $('top').getBoundingClientRect().bottom - 20, i;
+  var rects = !list.length ? [] : CARDS.filter(function (s) { return s.p && +s.el.style.opacity > 0.2; }).map(function (s) { var q = s.el.getBoundingClientRect(); return [q.left, q.top, q.width, q.height]; });
   for (i = 0; i < Math.max(list.length, NTAGS.length); i++) {
     var a = list[i], el = NTAGS[i];
     if (!a) { if (el) el.style.opacity = 0; continue; }
     if (!el) { el = NTAGS[i] = document.createElement('div'); el.innerHTML = '<b><i></i><em style="font-style:normal"></em></b><span></span>'; tagsEl.appendChild(el);
       (function (tag) { tag.addEventListener('click', function () { if (tag._a && +tag.style.opacity > 0.3) startNote(tag._a); }); })(el); }
-    if (el._a !== a) { el._a = a; el.className = 'ctag ' + (a.nt.k === 's' ? 'ns' : 'nf'); el.querySelector('em').textContent = a.nt.n; el.querySelector('span').textContent = a.nt.x; }
+    if (el._a !== a) { el._a = a; el.className = 'ctag n' + ({ s: 's', l: 'l', i: 'i' }[a.nt.k] || 'f'); el.querySelector('em').textContent = a.nt.n; el.querySelector('span').textContent = a.nt.x; }
     var show = labels > 0 && !visiting && !bizView && !busy, o = 0;
     if (show) {
       NV.set(a.x, a.y + 0.6, a.z).project(camera);
       var dx = a.x - camera.position.x, dz = a.z - camera.position.z, dist = Math.sqrt(dx * dx + dz * dz), x = (NV.x * 0.5 + 0.5) * w, y = (-NV.y * 0.5 + 0.5) * h, bw = el.offsetWidth, bh = el.offsetHeight;
-      if (NV.z < 1 && dist < a.far && x > -40 && x < w + 40) { o = Math.min(1, (a.far - dist) / 14); el.style.transform = 'translate(' + Math.max(8, Math.min(w - bw - 8, x - bw / 2)).toFixed(1) + 'px,' + Math.max(floor, y - bh - 6).toFixed(1) + 'px)'; }
+      if (NV.z < 1 && dist < a.far && x > -40 && x < w + 40) {
+        o = Math.min(1, (a.far - dist) / 14); var lx = Math.max(8, Math.min(w - bw - 8, x - bw / 2)), ly = Math.max(floor, y - bh - 6);
+        // a label keeps off the cards and off the labels placed before it: it drops below whatever it would cover
+        rects.forEach(function (q) { if (lx < q[0] + q[2] + 6 && lx + bw + 6 > q[0] && ly < q[1] + q[3] + 6 && ly + bh + 6 > q[1]) ly = q[1] + q[3] + 8; });
+        rects.push([lx, ly, bw, bh]); el.style.transform = 'translate(' + lx.toFixed(1) + 'px,' + ly.toFixed(1) + 'px)';
+      }
     }
     el.style.opacity = o.toFixed(2); el.style.pointerEvents = o > 0.3 ? 'auto' : 'none';
   }
@@ -1402,6 +1432,23 @@ function startNote(a) {
       body.appendChild(ul);
     }
     if (nt.b != null) { var ob = mk('p', null, 'pmeta'), obb = mk('button', 'Open ' + nt.n, 'link'); obb.type = 'button'; obb.addEventListener('click', function () { startBiz(nt.b); }); ob.appendChild(obb); body.appendChild(ob); }
+  } else if (nt.k === 'l') {
+    lines.push(nt.x); lines.push(W.H.name + (a.home ? ' \u00B7 at their home' : nt.b != null ? ' \u00B7 at ' + W.H.biz[nt.b].n : ''));
+    $('pBio').hidden = true;
+    if (nt.sub && BYID[nt.sub]) { var sp0 = mk('p', null, 'pmeta'), sb0 = mk('button', 'Open ' + nt.n, 'link'), se0 = BYID[nt.sub]; sb0.type = 'button'; sb0.addEventListener('click', function () { go(se0.h, 0, se0.d); }); sp0.appendChild(sb0); body.appendChild(sp0); }
+    if (nt.rec) {
+      section(body, 'People it reached'); ul = mk('ul', null, 'ties');
+      nt.rec.forEach(function (m) { li = mk('li'); var ent = BYID[m[0]]; if (ent) { var rb = mk('button', m[1], 'link'); rb.type = 'button'; rb.addEventListener('click', function () { go(ent.h, 0, ent.d); }); li.appendChild(rb); } else li.appendChild(mk('span', m[1], 'quiet')); if (m[2]) li.appendChild(mk('span', ' \u00B7 ' + (m[2] === 'bond' ? 'had a bond with them' : m[2]), 'quiet')); ul.appendChild(li); });
+      body.appendChild(ul);
+    }
+  } else if (nt.k === 'i') {
+    lines.push('Initiative \u00B7 ' + W.H.name); if (!a.at) lines.push('It has no office on this street, so its notice stands on the pavement.');
+    $('pBio').hidden = true;
+    section(body, 'Where it stands'); ul = mk('ul');
+    add(nt.st.charAt(0).toUpperCase() + nt.st.slice(1) + (nt.vote ? ' (vote in week ' + nt.vote + ')' : ''), '#6fd3ff');
+    if (nt.ph) add('Phase: ' + words_(nt.ph), '#6fd3ff'); if (nt.stage) add('Stage: ' + nt.stage.toLowerCase(), '#6fd3ff'); if (nt.dom) add('Domain: ' + nt.dom.toLowerCase(), '#6fd3ff'); if (nt.bud) add('Budget ' + money(nt.bud), '#6fd3ff'); if (nt.hoods) add('Affects ' + nt.hoods, '#6fd3ff');
+    body.appendChild(ul);
+    if (nt.b != null) { var ip = mk('p', null, 'pmeta'), ib = mk('button', 'Open ' + W.H.biz[nt.b].n, 'link'); ib.type = 'button'; ib.addEventListener('click', function () { startBiz(nt.b); }); ip.appendChild(ib); body.appendChild(ip); }
   } else {
     lines.push([words_(nt.type), nt.season ? words_(nt.season) : '', W.H.name].filter(Boolean).join(' \u00B7 '));
     var wk = { 'H:W': 'won at home', 'H:L': 'lost at home', 'A:W': 'won away', 'A:L': 'lost away' }[nt.week] || '', st = [];

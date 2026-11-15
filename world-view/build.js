@@ -327,6 +327,14 @@ hoods.forEach(h => { const lay = layout(h); h.homes = lay.homes; delete lay.home
 const homesElsewhere = []; Object.keys(hhByHood).forEach(n => { if (!hoods.some(h => h.name === n)) hhByHood[n].forEach(h => homesElsewhere.push({ hh: h.HouseholdId, hood: n })); });
 hoods.forEach(h => h.people.forEach(p => { if (p.runs) { const i = h.biz.findIndex(x => p.runs.some(rn => rn.id === x.id)); if (i >= 0) p.at = i; p.runs = p.runs.map(rn => ({ n: rn.n, hood: rn.hood })); } }));
 
+// ---------- staff: who the roster has working at a business on the street they are shown on ----------
+// Employment_Roster Active rows (BIZ_ID, POP_ID). A person shown on the same street as the business they work at
+// carries wk (its index in the street's businesses) and now and then goes and stands outside it (life-people.js).
+// Someone who runs the place (Key_Personnel) already stands outside it and carries at, not wk.
+const rosterBy = new Map();
+try { rd('Employment_Roster').forEach(r => { if (String(r.Status || '').trim().toLowerCase() !== 'active' || !r.POP_ID || !r.BIZ_ID) return; if (!rosterBy.has(r.POP_ID)) rosterBy.set(r.POP_ID, []); rosterBy.get(r.POP_ID).push(r.BIZ_ID); }); } catch (e) { console.warn('world-view: no Employment_Roster in the dump; nobody is shown going to work'); }
+hoods.forEach(h => h.people.forEach(p => { const ids = rosterBy.get(p.id) || [], i = h.biz.findIndex(b => ids.includes(b.id)); if (i >= 0 && p.at !== i) p.wk = i; }));
+
 // ---------- chaos cars: the week's Chaos_Cars rows, as the world summary printed them ----------
 // Chaos_Cars is not a beats tab. buildWorldSummary.js prints the cycle's rows as a table under "## Chaos Events",
 // with the narrative seeds below it; that file is read here, never the sheet. Each row goes on the street it
@@ -450,6 +458,39 @@ sportRows.forEach(r => {
   [['SeasonType', 'season'], ['Team Record', 'rec'], ['Streak', 'streak'], ['FanSentiment', 'fan'], ['WeekRecord', 'week'], ['NamesUsed', 'names']].forEach(f => { const v = dash(r[f[0]]); if (v) nt[f[1]] = v; });
   noteTo(nt, dash(r.HomeNeighborhood));
 });
+// Lived_Events (derived by the dump from LifeHistory_Log, the hospital and the archive: deaths, retirements,
+// promotions in the last two cycles, each with the people it reached). The label is put together from the row's
+// own fields (kind, cycle, roleType), not written. It stands at the person's home when their household has one on
+// the street, else at a business they are key personnel of there, else on the pavement.
+let livedRows = []; try { livedRows = rd('Lived_Events'); } catch (e) { console.warn('world-view: no Lived_Events in the dump; no deaths, retirements or promotions marked'); }
+const LIVED_WORD = { death: 'Died', retirement: 'Retired', promotion: 'Promoted' };
+livedRows.forEach(r => {
+  const c = Number(r.cycle), kind = ws(r.kind), when = c === Number(CYCLE) ? 'this week' : c === Number(CYCLE) - 1 ? 'last week' : 'in week ' + c;
+  const nt = { k: 'l', id: ws(r.id), n: ws(r.subjectName), kind, c, x: (LIVED_WORD[kind] || kind.charAt(0).toUpperCase() + kind.slice(1)) + ' ' + when + (ws(r.roleType) ? ' \u00B7 ' + ws(r.roleType) : '') };
+  if (ws(r.roleType)) nt.role = ws(r.roleType); if (isPop(r.subject)) nt.sub = r.subject;
+  const rec = (Array.isArray(r.recipients) ? r.recipients : []).filter(x => x && x.rel !== 'self' && isPop(x.pop) && ws(x.name)).map(x => [x.pop, ws(x.name), ws(x.rel)]); if (rec.length) nt.rec = rec;
+  const h = !(c > 0) || c > Number(CYCLE) ? (notesElsewhere.push(Object.assign({ hood: ws(r.neighborhood) }, nt)), null) : noteTo(nt, ws(r.neighborhood));
+  if (h) {
+    const L = nt.sub && ledger.get(nt.sub), hh = L && L.HouseholdId;
+    if (hh && h.homes.some(x => x.hh === hh)) nt.hh = hh;
+    else { const bi = h.biz.findIndex(b => (runs.get(nt.sub) || []).some(x => x.BIZ_ID === b.id)); if (bi >= 0 && (h.lay.places.some(p => p.b === bi && p.half > 0) || h.lay.parcels.some(p => p.b === bi))) nt.b = bi; }
+  }
+});
+// Initiative_Tracker: an initiative that passed, or is proposed or waiting on its vote, stands on each street its
+// AffectedNeighborhoods names: at its own office when the row's BizID is a business there, else on the pavement.
+// Only the row's status fields are shown (Status, ImplementationPhase, Stage, PolicyDomain, Budget, VoteCycle);
+// its free-text notes are not, since they carry build notes (gap log G-EC62). A failed one stands nowhere.
+let initRows = []; try { initRows = rd('Initiative_Tracker'); } catch (e) { console.warn('world-view: no Initiative_Tracker in the dump; no initiatives shown'); }
+initRows.forEach(r => {
+  const st = ws(r.Status).toLowerCase(); if (!ws(r.Name) || !st || st === 'failed') return;
+  const base = { k: 'i', id: ws(r.InitiativeID), n: ws(r.Name), st, x: [st, ws(r.ImplementationPhase), ws(r.Stage) && ws(r.Stage) !== 'FAILED' ? 'stage: ' + ws(r.Stage).toLowerCase() : ''].filter(Boolean).join(' \u00B7 ') };
+  if (ws(r.ImplementationPhase)) base.ph = ws(r.ImplementationPhase); if (ws(r.Stage)) base.stage = ws(r.Stage); if (ws(r.PolicyDomain)) base.dom = ws(r.PolicyDomain);
+  if (Number(r.Budget) > 0) base.bud = Number(r.Budget); if (/^\d+$/.test(ws(r.VoteCycle))) base.vote = Number(ws(r.VoteCycle));
+  const where = ws(r.AffectedNeighborhoods).split(/\s*[,;]\s*/).filter(Boolean); if (where.length) base.hoods = where.join(', ');
+  const on = where.filter(n => hoods.some(h => h.name === n));
+  if (!on.length) { notesElsewhere.push(Object.assign({ hood: where.join(', ') }, base)); return; }
+  on.forEach(n => { const nt = Object.assign({}, base), h = noteTo(nt, n); if (h && ws(r.BizID)) { const bi = h.biz.findIndex(b => b.id === ws(r.BizID)); if (bi >= 0 && (h.lay.places.some(p => p.b === bi && p.half > 0) || h.lay.parcels.some(p => p.b === bi))) nt.b = bi; } });
+});
 
 const onStreets = new Set(hoods.map(h => h.name));
 const unplacedBiz = biz.filter(x => !onStreets.has(x.Neighborhood)).map(x => ({ n: x.Name, hood: x.Neighborhood }));
@@ -504,6 +545,7 @@ console.log('rail line on:', hoods.filter(h => h.lay.places.some(p => p.type ===
 console.log('homes: ' + hoods.reduce((a, h) => a + h.homes.length, 0) + ' active households on parcels (' + hoods.reduce((a, h) => a + h.homes.filter(x => x.own).length, 0) + ' owned); '
   + hoods.filter(h => h.homes.length).map(h => { const res = new Set(h.lay.parcels.filter(p => p.res).map(p => p.id)), onRes = h.homes.filter(x => res.has(x.lot)).length; return h.name + ' ' + h.homes.length + (h.lay.L > h.lay.Lm ? ' (' + onRes + ' on a ' + Math.round(h.lay.L - h.lay.Lm) + ' m stretch)' : ''); }).join(', ')
   + (homesElsewhere.length ? '; ' + homesElsewhere.length + ' household(s) in a neighborhood with no street this week, not shown' : ''));
-console.log('notices: ' + faithRows.length + ' faith event(s) and ' + sportRows.length + ' sports row(s) this cycle — ' + hoods.filter(h => h.notes.length).map(h => h.name + ': ' + h.notes.map(nt => nt.n + (nt.k === 'f' ? (nt.b != null ? ' (at its building)' : ' (no building here)') : ' ' + nt.type + (nt.week ? ' ' + nt.week : ''))).join(', ')).join('; ') + (notesElsewhere.length ? '; not on a street: ' + notesElsewhere.map(nt => nt.n + ' → ' + (nt.hood || 'no neighborhood')).join(', ') : ''));
+console.log('staff: ' + hoods.reduce((a, h) => a + h.people.filter(p => p.wk != null).length, 0) + ' people are shown on the street of the business the roster has them working at');
+console.log('notices: ' + faithRows.length + ' faith event(s), ' + sportRows.length + ' sports row(s), ' + livedRows.length + ' lived event(s), ' + initRows.filter(r => ws(r.Status).toLowerCase() !== 'failed').length + ' initiative(s) not failed — ' + hoods.filter(h => h.notes.length).map(h => h.name + ': ' + h.notes.map(nt => nt.n + (nt.k === 's' ? ' ' + nt.type + (nt.week ? ' ' + nt.week : '') : nt.hh ? ' (at their home)' : nt.b != null ? ' (at its building)' : ' (on the pavement)')).join(', ')).join('; ') + (notesElsewhere.length ? '; not on a street: ' + notesElsewhere.map(nt => nt.n + ' → ' + (nt.hood || 'no neighborhood')).join(', ') : ''));
 console.log('chaos cars:', chaosRead == null ? 'no world summary for C' + CYCLE + ' (none drawn)' : chaosRead.length + ' this week — ' + hoods.filter(h => h.chaos.length).map(h => h.name + ': ' + h.chaos.map(c => c.n + ' (' + c.o + (c.to && c.to !== h.name ? ' → ' + c.to : '') + ')').join(', ')).join('; ') + (chaosElsewhere.length ? '; not on a street: ' + chaosElsewhere.map(c => c.n + ' → ' + c.to).join(', ') : ''));
 }

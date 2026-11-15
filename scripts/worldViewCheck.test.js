@@ -353,3 +353,27 @@ test('a notice is a row of this cycle on its own street, word for word', () => {
   rejects('notice', f => { noticed(f); f.hood.notes[1].x = 'SYNTHETIC invented headline'; }); // not the feed's headline
   rejects('notice', f => { noticed(f); f.hood.notes.push({ k: 'f', n: 'SYNTHETIC Venue', x: 'SYNTHETIC last week', type: '' }); }); // last cycle's event
 });
+
+test('someone marked as working on their street has an Active roster row there', () => {
+  const ok = fixture(); ok.sources.roster = [{ BIZ_ID: 'BIZ-SYNTHETIC-2', POP_ID: 'POP-90001', Status: 'Active' }]; ok.person.wk = 1; ok.second = structuredClone(ok.build);
+  assert.deepEqual(check(ok), []);
+  rejects('staff', f => { f.person.wk = 1; });                                                                          // no roster row at all
+  rejects('staff', f => { f.sources.roster = [{ BIZ_ID: 'BIZ-SYNTHETIC-2', POP_ID: 'POP-90001', Status: 'PENDING' }]; f.person.wk = 1; }); // not an active row
+  rejects('staff', f => { f.sources.roster = [{ BIZ_ID: 'BIZ-SYNTHETIC-2', POP_ID: 'POP-90001', Status: 'Active' }]; }); // a roster row the page left off
+});
+
+test('a lived event and an initiative stand on their street as their own rows', () => {
+  const mk = f => {
+    f.sources.lived = [{ id: 'retirement:POP-90001:115', kind: 'retirement', cycle: 115, subject: 'POP-90001', subjectName: 'SYNTHETIC Citizen One', neighborhood: f.hood.name, roleType: 'SYNTHETIC role', recipients: [{ pop: 'POP-90001', rel: 'self', name: 'SYNTHETIC Citizen One' }] }];
+    f.sources.initiatives = [{ InitiativeID: 'INIT-SYN', Name: 'SYNTHETIC Initiative', Status: 'passed', ImplementationPhase: 'underway', Stage: 'Standing', Budget: '1000', AffectedNeighborhoods: f.hood.name + ', SYNTHETIC Elsewhere', BizID: 'BIZ-SYNTHETIC-2' }, { InitiativeID: 'INIT-SYN2', Name: 'SYNTHETIC Failed', Status: 'failed', AffectedNeighborhoods: f.hood.name }];
+    f.hood.notes = [{ k: 'l', id: 'retirement:POP-90001:115', n: 'SYNTHETIC Citizen One', kind: 'retirement', c: 115, x: 'Retired this week \u00B7 SYNTHETIC role', role: 'SYNTHETIC role', sub: 'POP-90001', b: 0 },
+      { k: 'i', id: 'INIT-SYN', n: 'SYNTHETIC Initiative', st: 'passed', x: 'passed \u00B7 underway \u00B7 stage: standing', ph: 'underway', stage: 'Standing', bud: 1000, hoods: f.hood.name + ', SYNTHETIC Elsewhere', b: 1 }];
+    f.second = structuredClone(f.build); return f;
+  };
+  assert.deepEqual(check(mk(fixture())), []);
+  rejects('notice', f => { mk(f); f.hood.notes[0].x = 'Died this week'; });                 // not what the row says happened
+  rejects('notice', f => { mk(f); f.hood.notes[1].st = 'failed'; });                         // not the row's status
+  rejects('notice', f => { mk(f); f.hood.notes[1].b = 0; });                                 // at a building that is not its office
+  rejects('notice', f => { mk(f); f.hood.notes.push({ k: 'i', id: 'INIT-SYN2', n: 'SYNTHETIC Failed', st: 'failed', x: 'failed' }); }); // a failed initiative shown
+  rejects('notice', f => { mk(f); f.hood.notes.shift(); });                                  // a lived event left off
+});

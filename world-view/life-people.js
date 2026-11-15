@@ -168,7 +168,7 @@ LIFE.people = function (k, list) {
   function theirs(ln, p) { return ln.A === p ? ln.b : ln.a; } // the one of the other household the tie is with
   // where p stands to talk to q: a pace off along the street, further when a household is standing on that side
   function standoff(p, q) { var side = p.z >= q.z ? 1 : -1; return side * (0.95 + (side > 0 ? (q.size ? 1.9 : 0) : (p.size ? 1.9 : 0))); }
-  function hush(p, ln) { p.link = ln; if (p.st === 1) p.tz = p.z + p.dir * 0.35; else p.until = simT + 60; } // come to a stop and wait
+  function hush(p, ln) { p.link = ln; p.errand = null; p.at = null; if (p.st === 1) p.tz = p.z + p.dir * 0.35; else p.until = simT + 60; } // come to a stop and wait
   function gather(ln) { ln.st = 2; ln.t0 = simT; hush(ln.A, ln); hush(ln.B, ln); }
   function begin(ln) {
     ln.st = 3; ln.t0 = simT; ln.until = simT + 6 + 14 * ln.w + R2() * 6; ln.speak = R2() < 0.5 ? 0 : 1; ln.turnAt = 0;
@@ -255,6 +255,10 @@ LIFE.people = function (k, list) {
   function arrive(p, why) {
     p.st = 0; if (dbg && !p.link && !free(p, p.z, Math.abs(p.x))) dbg.push((why || 'arrived') + ' onto someone at t=' + simT.toFixed(1) + ' #' + p.i + ' z' + p.z.toFixed(2) + ' x' + Math.abs(p.x).toFixed(2) + ' tz' + p.tz.toFixed(2) + ' v' + p.v.toFixed(2));
     if (p.link) { p.until = simT + 60; if (p.link.st === 1 && p.link.seeker === p) p.link.st = 2; return; } // come to see someone, or stopped for them
+    if (p.errand) { // at their door, or outside their work: stand a while, facing it
+      var er = p.errand; p.errand = null;
+      if (Math.abs(p.z - er.z) < 2.5) { p.at = er; p.yawT = -p.s * Math.PI / 2 + (R2() - 0.5) * 0.3; p.until = simT + 8 + R2() * 14; return; }
+    }
     if (p.shop || R2() < 0.5) settle(p, p.shop); else p.until = simT + 0.3 + R2() * 1.2;
   }
   // is there room to stand at z, this far from the road, on this side? (nobody standing there, nobody on their way there)
@@ -269,6 +273,7 @@ LIFE.people = function (k, list) {
   }
   function depart(p) {
     var lo = Math.max(zMin, p.z0 - p.amp), hi = Math.min(zMax, p.z0 + p.amp), tz, lane, tries = 0;
+    p.at = null; p.errand = null;
     // someone they know is on the street: now and then, go over (the nearer and the closer the tie, the likelier)
     if (p.links && !p.link && !p.hold && simT >= (p.meetCool || 0) && R2() < 0.45) {
       var best = null, bs = 0;
@@ -285,6 +290,14 @@ LIFE.people = function (k, list) {
     }
     var fr = fronts[p.s].filter(function (z) { return z > lo && z < hi && Math.abs(z - p.z) > 3; });
     p.shop = fr.length > 0 && !p.size && R2() < 0.55;
+    // somewhere of their own to go: their door, or the business they work at (not with the household in tow)
+    if (p.spots && !p.hold && R2() < 0.14) {
+      var sp = p.spots[Math.floor(R2() * p.spots.length)];
+      if (Math.abs(sp.z - p.z) > 3 && !(sp.kind === 'work' && p.size)) {
+        p.errand = sp; p.shop = false; p.tz = clamp(sp.z, zMin, zMax); p.laneT = HI - 0.1; p.dir = p.tz > p.z ? 1 : -1; p.yawT = heading(p); p.st = 1;
+        return;
+      }
+    }
     do {
       if (p.shop) { tz = fr[Math.floor(R2() * fr.length)] + (R2() - 0.5) * 3; lane = HI - R2() * 0.5; }
       else { tz = lo + R2() * (hi - lo); lane = p.lane; }
@@ -305,6 +318,12 @@ LIFE.people = function (k, list) {
     // the street is already going when you arrive: most of those who roam are mid-walk
     if (p.amp) { p.st = 0; p.until = R2() * 9; p.yaw = p.yawT = heading(p); if (R2() < 0.7) { depart(p); p.yaw = p.yawT; p.v = p.cruise; } }
     else { settle(p, true); p.yaw = p.yawT; p.until = 4 + R2() * 16; }
+  });
+  // and some are at their own door, or outside their work
+  list.forEach(function (p) {
+    if (p.lead || !p.spots || p.post || !p.amp || R2() > 0.2) return;
+    var sp = p.spots[0]; if (sp.kind === 'work' && p.size) return; if (!free(p, sp.z, HI - 0.1)) return;
+    p.z = sp.z; p.x = p.s * (HI - 0.1); p.st = 0; p.v = 0; p.at = sp; p.yaw = p.yawT = -p.s * Math.PI / 2; p.until = 2 + R2() * 14;
   });
   // the street is already going: some of those who know each other are mid-conversation when you arrive
   links.forEach(function (ln) {

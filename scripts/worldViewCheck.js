@@ -50,6 +50,11 @@ function readSources(root) {
     faith: (() => { try { return readRows(path.join(beats, 'Faith_Ledger.jsonl')); } catch (e) { return null; } })(),
     faithOrgs: (() => { try { return readRows(path.join(beats, 'Faith_Organizations.jsonl')); } catch (e) { return null; } })(),
     sports: (() => { try { return readRows(path.join(beats, 'Oakland_Sports_Feed.jsonl')); } catch (e) { return null; } })(),
+    // deaths, retirements and promotions of the last two cycles (derived by the dump), and the initiatives
+    lived: (() => { try { return readRows(path.join(beats, 'Lived_Events.jsonl')); } catch (e) { return null; } })(),
+    initiatives: (() => { try { return readRows(path.join(beats, 'Initiative_Tracker.jsonl')); } catch (e) { return null; } })(),
+    // who works where (absent from an older dump)
+    roster: (() => { try { return readRows(path.join(beats, 'Employment_Roster.jsonl')); } catch (e) { return null; } })(),
     // the cycle's world summary, where the Chaos_Cars rows are printed (absent before the summary is built)
     worldSummary: (() => { try { return fs.readFileSync(path.join(root, 'output', `world_summary_c${readJson(path.join(beats, 'meta.json')).cycle}.md`), 'utf8'); } catch (e) { return null; } })(),
   };
@@ -408,6 +413,18 @@ function checkWorldView(build, sources, engine, secondBuild, reports = []) {
     }
     if (matched) reports.push(`HOMES ${matched} households matched to active Household_Ledger rows, each on one lot of its street`);
   }
+  // staff: someone marked as working at a business on their street has an Active Employment_Roster row there, and
+  // anyone with such a row at a business on the street they are shown on is marked (unless they run the place)
+  {
+    const works = new Map(); for (const r of arr(sources.roster || [], 'Employment_Roster')) if (String(r?.Status || '').trim().toLowerCase() === 'active' && r.POP_ID && r.BIZ_ID) { if (!works.has(r.POP_ID)) works.set(r.POP_ID, new Set()); works.get(r.POP_ID).add(r.BIZ_ID); }
+    let n = 0;
+    for (const h of hoods) for (const p of arr(h?.people || [], `${h?.name}.people`)) {
+      const biz = arr(h.biz || [], `${h.name}.biz`), mine = works.get(p?.id) || new Set(), first = biz.findIndex(b => mine.has(b?.id));
+      if (p?.wk !== undefined) { if (!mine.has(biz[p.wk]?.id)) fail('staff', `${h.name}/${p.id}`, 'no Active Employment_Roster row at that business'); else n++; }
+      else if (first >= 0 && p?.at !== first) fail('staff', `${h.name}/${p?.id}`, `the roster has them at ${biz[first].id} on this street and the page does not say so`);
+    }
+    if (n) reports.push(`STAFF ${n} people matched to an Active Employment_Roster row at a business on their street`);
+  }
   // notices: every notice on a street is a row of this cycle (a Faith_Ledger row of that neighborhood, or a sports
   // feed row whose HomeNeighborhood it is), word for word; a faith notice at a building is at the business of the
   // organization's own name; and every row of this cycle is on a street or listed as elsewhere.
@@ -427,18 +444,38 @@ function checkWorldView(build, sources, engine, secondBuild, reports = []) {
       for (const [col, key] of [['SeasonType', 'season'], ['Team Record', 'rec'], ['Streak', 'streak'], ['FanSentiment', 'fan'], ['WeekRecord', 'week'], ['NamesUsed', 'names']]) if (dash(r[col])) nt[key] = dash(r[col]);
       want.push({ hood: dash(r.HomeNeighborhood), nt, used: false, notes });
     }
+    const WORD = { death: 'Died', retirement: 'Retired', promotion: 'Promoted' };
+    for (const r of arr(sources.lived || [], 'Lived_Events')) {
+      const c = Number(r.cycle), kind = ws(r.kind), when = c === cycle ? 'this week' : c === cycle - 1 ? 'last week' : `in week ${c}`;
+      const nt = { k: 'l', id: ws(r.id), n: ws(r.subjectName), kind, c, x: `${WORD[kind] || kind.charAt(0).toUpperCase() + kind.slice(1)} ${when}${ws(r.roleType) ? ' \u00B7 ' + ws(r.roleType) : ''}` };
+      if (ws(r.roleType)) nt.role = ws(r.roleType); if (/^POP-\d+$/.test(String(r.subject || ''))) nt.sub = r.subject;
+      const rec = (Array.isArray(r.recipients) ? r.recipients : []).filter(x => x && x.rel !== 'self' && /^POP-\d+$/.test(String(x.pop || '')) && ws(x.name)).map(x => [x.pop, ws(x.name), ws(x.rel)]); if (rec.length) nt.rec = rec;
+      want.push({ hood: ws(r.neighborhood), nt, used: false, future: !(c > 0) || c > cycle });
+    }
+    for (const r of arr(sources.initiatives || [], 'Initiative_Tracker')) {
+      const st = ws(r.Status).toLowerCase(); if (!ws(r.Name) || !st || st === 'failed') continue;
+      const nt = { k: 'i', id: ws(r.InitiativeID), n: ws(r.Name), st, x: [st, ws(r.ImplementationPhase), ws(r.Stage) && ws(r.Stage) !== 'FAILED' ? 'stage: ' + ws(r.Stage).toLowerCase() : ''].filter(Boolean).join(' \u00B7 ') };
+      if (ws(r.ImplementationPhase)) nt.ph = ws(r.ImplementationPhase); if (ws(r.Stage)) nt.stage = ws(r.Stage); if (ws(r.PolicyDomain)) nt.dom = ws(r.PolicyDomain);
+      if (Number(r.Budget) > 0) nt.bud = Number(r.Budget); if (/^\d+$/.test(ws(r.VoteCycle))) nt.vote = Number(ws(r.VoteCycle));
+      const where = ws(r.AffectedNeighborhoods).split(/\s*[,;]\s*/).filter(Boolean); if (where.length) nt.hoods = where.join(', ');
+      const on = where.filter(n => hoodNames.has(n));
+      if (!on.length) want.push({ hood: where.join(', '), nt, used: false, future: true });
+      for (const n of on) want.push({ hood: n, nt, used: false, bizId: ws(r.BizID) });
+    }
     // a sports row with no headline is shown by the start of its note
-    const same = (got, w) => { const g = Object.assign({}, got); delete g.b; delete g.hood; if (w.nt.k === 's' && !w.nt.x) { const cut = String(g.x || '').replace(/…$/, ''); if (!cut || !w.notes.startsWith(cut)) return false; g.x = ''; } return equal(g, w.nt); };
+    const same = (got, w) => { const g = Object.assign({}, got); delete g.b; delete g.hood; delete g.hh; if (w.nt.k === 's' && !w.nt.x) { const cut = String(g.x || '').replace(/…$/, ''); if (!cut || !w.notes.startsWith(cut)) return false; g.x = ''; } return equal(g, w.nt); };
     let matched = 0;
     for (const h of hoods) for (const nt of arr(h?.notes || [], `${h?.name}.notes`)) {
       const w = want.find(x => !x.used && x.hood === h.name && same(nt, x));
       if (!w) { fail('notice', h.name, `no row of this cycle for ${JSON.stringify(nt).slice(0, 220)}`); continue; }
       w.used = true; matched++;
-      if (nt.b !== undefined && (nt.k !== 'f' || arr(h.biz, `${h.name}.biz`)[nt.b]?.n !== nt.n)) fail('notice', h.name, `${nt.n} is placed at a building that is not its own`);
+      const at = nt.b !== undefined ? arr(h.biz, `${h.name}.biz`)[nt.b] : null;
+      if (nt.b !== undefined && !(nt.k === 'f' ? at?.n === nt.n : nt.k === 'i' ? at?.id === w.bizId : nt.k === 'l' ? businesses.get(at?.id)?.Key_Personnel?.includes(nt.sub) : false)) fail('notice', h.name, `${nt.n} is placed at a building that is not its own`);
+      if (nt.hh !== undefined && !(nt.k === 'l' && ledger.get(nt.sub)?.HouseholdId === nt.hh && arr(h.homes || [], `${h.name}.homes`).some(x => x.hh === nt.hh))) fail('notice', h.name, `${nt.n} is placed at a home that is not theirs`);
     }
-    for (const nt of arr(build.data?.notesElsewhere || [], 'data.notesElsewhere')) { const w = want.find(x => !x.used && x.hood === (nt?.hood || '') && same(nt, x)); if (!w) fail('notice', 'elsewhere', `no row of this cycle for ${JSON.stringify(nt).slice(0, 200)}`); else { w.used = true; if (hoodNames.has(w.hood) && w.nt.n && (w.nt.x || w.notes)) fail('notice', 'elsewhere', `${w.nt.n} belongs on ${w.hood}`); } }
+    for (const nt of arr(build.data?.notesElsewhere || [], 'data.notesElsewhere')) { const w = want.find(x => !x.used && x.hood === (nt?.hood || '') && same(nt, x)); if (!w) fail('notice', 'elsewhere', `no row of this cycle for ${JSON.stringify(nt).slice(0, 200)}`); else { w.used = true; if (hoodNames.has(w.hood) && !w.future && w.nt.n && (w.nt.x || w.notes)) fail('notice', 'elsewhere', `${w.nt.n} belongs on ${w.hood}`); } }
     for (const w of want) if (!w.used) fail('notice', w.hood || 'no neighborhood', `a row of this cycle is neither on a street nor listed elsewhere: ${w.nt.n} ${w.nt.x.slice(0, 80)}`);
-    if (matched) reports.push(`NOTICES ${matched} matched to this cycle's Faith_Ledger and sports feed rows`);
+    if (matched) reports.push(`NOTICES ${matched} matched to their rows: this cycle's Faith_Ledger and sports feed, Lived_Events, Initiative_Tracker`);
   }
   if (!secondBuild?.data?.hoods || !equal(
     hoods.map(h => ({ name: h.name, lay: h.lay })),

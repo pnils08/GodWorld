@@ -61,7 +61,9 @@ async function sheetLine(popid, deps) {
     const c = pool.find((x) => x.popId === id);
     if (!c) return { line: '', error: id + ' is not on the citizen ledger' };
     let disp = ''; try { disp = dials.disposition(c.cur) || ''; } catch (e) { /* no dials: the line stands alone */ }
-    return { line: wp.identityLine(c) + (disp ? ' Your temperament: ' + disp + '.' : ''), error: '' };
+    // family as the sheet holds it (spouse, children), the same line the morning wake reads — so no written file repeats it
+    let family = ''; try { family = (wp.loadFamily ? await wp.loadFamily(id) : '') || ''; } catch (e) { family = ''; }
+    return { line: wp.identityLine(c) + (disp ? ' Your temperament: ' + disp + '.' : '') + (family ? '\n\n' + family : ''), error: '' };
   } catch (e) { return { line: '', error: (e && e.message) || String(e) }; }
 }
 

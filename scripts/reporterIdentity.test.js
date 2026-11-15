@@ -48,6 +48,10 @@ const deps = { wp, dials: { disposition: () => 'steady, hard to shake' } };
   const flat = await sheetLine('POP-00014', { wp, dials: { disposition: () => { throw new Error('x'); } } });
   assert.strictEqual(flat.line, 'You are Test Seat, 39, a Sideline Reporter living in Laurel, Oakland.');
 
+  // the sheet's family line rides with the sheet line
+  const fam = await sheetLine('POP-00014', { wp: { ...wp, loadFamily: async () => "You're married to Pat Seat." }, dials: deps.dials });
+  assert.ok(fam.line.endsWith("steady, hard to shake.\n\nYou're married to Pat Seat."));
+
   // both parts, sheet line first
   const who = await reporterIdentity({ popid: 'POP-00014', agentDir: seat, root }, deps);
   assert.strictEqual(who.block, sl.line + '\n\nCovered the bridge. Reads logs for fun.');

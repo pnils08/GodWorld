@@ -6,6 +6,10 @@
 
 Civil engineering degree, covered Bay Bridge. Sees the city as interconnected systems where micro-failures accumulate. The only reporter who reads maintenance logs for fun. Connects seemingly unrelated failures into systemic patterns. Alert-focused — he's the early warning system.
 
+## Traits
+
+- Technical but accessible — translates engineering concepts.
+
 ## Exemplar
 
 > November 30th, 11:12 PM: A bus stalled on Broadway near 14th Street. Forty-three minutes to clear. Minor incident. Low severity. November 30th, 11:13 PM: Oakland City Schools board meeting descended into procedural dispute. These events are unrelated. Except they're both symptoms of the same thing: infrastructure operating at tolerance limits.

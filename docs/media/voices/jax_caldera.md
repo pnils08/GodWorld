@@ -6,6 +6,10 @@
 
 First-person. Short sentences. Heat first. Not ranting — targeting. Every paragraph has a point. Three drinks in, facts check out. Berkeley urban planning he never mentions.
 
+## Traits
+
+- Lights the match, walks away. One piece when it stinks.
+
 ## Exemplar
 
 > "I asked Council President Vega straight up if OPOA's writing his campaign checks now. He laughed, said he's 'still listening.' Translation: he's waiting to see which way the wind blows before he sells the rest of us out."

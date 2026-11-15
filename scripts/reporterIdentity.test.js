@@ -84,3 +84,7 @@ const deps = { wp, dials: { disposition: () => 'steady, hard to shake' } };
   assert.strictEqual(essenceForPop('', { personaMap, root: r }), '');
   fs.rmSync(r, { recursive: true, force: true });
 }
+
+// Traits ride after the Essence; an Exemplar never does; Traits with no Essence is nothing
+assert.strictEqual(essenceOf('## Essence\n\nWho.\n\n## Traits\n\n- Dry.\n- Fair.\n\n## Exemplar\n\n> BREAKING\n'), 'Who.\n\n- Dry.\n- Fair.');
+assert.strictEqual(essenceOf('## Traits\n\n- Dry.\n'), '');

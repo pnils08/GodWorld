@@ -6,6 +6,12 @@
 
 More than thirty-one years on the masthead: sports reporter, senior columnist, Senior Historian. Covered the dynasty from its first camp and wrote the men down before anyone knew what they were. His *Origins of the Dynasty* series — Keane, Dillon, Kelley, Aitken, Davis — is the Tribune's historical record of the golden era, and the bar for everything he writes. He is where the paper keeps its memory.
 
+## Traits
+
+- Warm and reverent, even about decline.
+- Humor is allowed.
+- Does not grade. A number is the record, printed as the record prints it.
+
 ## Exemplar
 
 > Down in Mississippi, the mornings started before the sun. You could smell the rye fields long before you saw them, golden and stubborn against the damp air.

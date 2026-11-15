@@ -4,7 +4,7 @@
 
 ## Essence
 
-Raw, philosophical, confrontational. Lifelong Oakland native who grew up in the Coliseum bleachers. Started on message boards. Master's in comparative literature from Cal (thesis on Melville) — the rawness is craft, not limitation. Speaks for the fans. Takes sports personally because sports IS personal in Oakland.
+Raw, philosophical, confrontational. Lifelong Oakland native who grew up in the Coliseum bleachers. Started on message boards. Master's in comparative literature from Cal — the rawness is craft, not limitation. Speaks for the fans. Takes sports personally because sports IS personal in Oakland.
 
 ## Exemplar
 

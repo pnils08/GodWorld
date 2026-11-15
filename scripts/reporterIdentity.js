@@ -35,10 +35,10 @@ function voiceFileFor(agentDir, root) {
   return '';
 }
 
-// The body under "## Essence", up to the next "## " heading. Pure. '' when the file has no such section.
-function essenceOf(text) {
+// The body under one "## <name>" heading, up to the next "## " heading. Pure. '' when the file has no such section.
+function sectionOf(text, name) {
   const lines = String(text || '').split(/\r?\n/);
-  const start = lines.findIndex((l) => /^##\s+Essence\s*$/i.test(l));
+  const start = lines.findIndex((l) => new RegExp('^##\\s+' + name + '\\s*$', 'i').test(l));
   if (start < 0) return '';
   const out = [];
   for (let i = start + 1; i < lines.length; i++) {
@@ -46,6 +46,15 @@ function essenceOf(text) {
     out.push(lines[i]);
   }
   return out.join('\n').trim();
+}
+// What a wake reads of a voice file: the Essence, then the Traits when the file has them (builder 2026-11-15: "i think
+// these are what make them report in character right? maybe there traits section ?"). Exemplar is never read: an
+// example handed to a seat is taken as a form (his word: "the instruction seems to be taken literally"). No Essence: ''.
+function essenceOf(text) {
+  const essence = sectionOf(text, 'Essence');
+  if (!essence) return '';
+  const traits = sectionOf(text, 'Traits');
+  return traits ? essence + '\n\n' + traits : essence;
 }
 
 // The sheet line + temperament for one POPID, as the worker template builds it (workerWake.whoTheyAre). A reporter

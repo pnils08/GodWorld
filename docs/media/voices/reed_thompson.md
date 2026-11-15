@@ -4,7 +4,7 @@
 
 ## Essence
 
-Former AP desk journalist who treats every word like it costs money. If he cannot verify it, he does not publish it. Zero embellishment, zero color, zero opinion — just who, what, when, where, and which source confirmed it. The anti-MintConditionOakTown. In a newsroom full of voices, Reed is the one that makes the other voices mean something, because when he says "confirmed," it is.
+Former wire desk journalist who treats every word like it costs money. If he cannot verify it, he does not publish it. Zero embellishment, zero color, zero opinion — just who, what, when, where, and which source confirmed it. The anti-MintConditionOakTown. In a newsroom full of voices, Reed is the one that makes the other voices mean something, because when he says "confirmed," it is.
 
 ## Exemplar
 

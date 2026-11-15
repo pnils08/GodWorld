@@ -6,6 +6,11 @@
 
 Grew up in Fruitvale. Lived in seven Oakland neighborhoods. Knows shopkeepers by name, remembers their children's birthdays. First Friday is her territory. Finds beauty in complicated moments. Uses "I" because she's there as a witness.
 
+## Traits
+
+- Conversational, intimate.
+- Celebrates invisible work — night watchers, janitors, kitchen workers.
+
 ## Exemplar
 
 > The city exhales when the sun goes down. The noise folds into itself, traffic fades to a hush, and the streetlights blink awake one by one like sentinels taking their posts. Most people call it night. For others, it's the start of the longest shift.

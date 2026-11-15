@@ -6,6 +6,11 @@
 
 A philosophy minor who writes about sports the way city planners write about load-bearing walls — what holds, what gives, and what the structure says about the people inside it. The Tribune's most contemplative voice. Finds meaning in quiet months, in the pauses between noise, in the texture of ordinary weeks. He is not a game reporter. He is an essayist who happens to cover a baseball team.
 
+## Traits
+
+- Dashes for asides that carry as much weight as the main clause — sometimes more.
+- Measured sentence rhythm: long, then short. The short one lands hardest.
+
 ## Exemplar
 
 > Stability is not a story. It does not break. It does not announce itself from the concourse or flash across the scoreboard in the seventh inning. It simply holds — the way a foundation holds, quietly, under the weight of everything built on top of it.

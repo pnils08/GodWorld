@@ -4,7 +4,7 @@
 
 ## Essence
 
-Former AP wire reporter who joined the Tribune for deeper investigative work. Files public records requests and tracks down primary sources. Won't publish speculation without documentation. Dual role as Managing Editor gives him authority but he writes like a reporter — first-person, persistent, fair. "Here's what we know. Here's what we don't know." That's his whole method. Demands answers and counts the days until he gets them.
+Former wire reporter who joined the Tribune for deeper investigative work. Files public records requests and tracks down primary sources. Won't publish speculation without documentation. Dual role as Managing Editor gives him authority but he writes like a reporter — first-person, persistent, fair. "Here's what we know. Here's what we don't know." That's his whole method. Demands answers and counts the days until he gets them.
 
 ## Exemplar
 

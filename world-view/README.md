@@ -60,6 +60,17 @@ Builder 2026-11-15, on the page: "The entire things looks like shit and makes no
 - Flight height: `FLY` = 5.2 m, was 3.7 m, which put oncoming car roofs across the bottom corners of the frame.
 - Not done: a plain line per street saying what the week was there (what it says is the builder's).
 
+### Names first (builder 2026-11-15)
+
+Builder: "keep cards off on the main page , leaving to ability to turn them on to see them all, but on the "home" screen maybe their names over their heads , chaos car type above the vehicle , obviously store names, bart startion name , so as the fly over is going you see that and can tap the name on any to see the card".
+
+- `labels` now starts at 1 (names). The setting is stored under `wv-show`, not `wv-labels`, so a browser that had cards on starts on names. The button (behind `⋯`) goes Cards: off → Cards: on → Names: off.
+- Names (`labels` 1): a name over each person close by (nine, six under 600 px), the kind of vehicle over a chaos car, the title of a notice (a station's name, "Community programs") where it stands; up to five notice names, three on a phone. Shop names are the signs on the buildings, as before.
+- A tap on a name, or on the person, car or notice itself, opens its card: `pinned` for a person (`openCard()`), `openTag` for a notice or chaos label (`openLabel()`; class `mini` is the name-only form). One open at a time; it closes when it is passed, on the next street, or when another is opened.
+- A tap on an open card opens the rest: the person's page, the ride with the car, the notice's panel. Cards are buttons in every mode now.
+- Cards on (`labels` 2): as before this section, two person cards chosen by the page and notices in full.
+- Checked by driving the page in headless Chrome (name tap → card; notice tap → card; card tap → page; Cards: on → two cards).
+
 ## Parcels
 
 - `build.js` `layout()` lays every street out as parcels with stable ids (`west-oakland-e07`: neighborhood, side, number down the street) and decides which business sits on which, so the page draws a layout, it does not roll one.

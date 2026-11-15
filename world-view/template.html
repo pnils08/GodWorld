@@ -91,7 +91,12 @@ body.words .tag .said { font-size: 16px; border-top: 0; padding-top: 0; margin-t
 body.words .tag .line { font: 500 12px/1.3 var(--display); color: var(--dim); margin-top: 6px; }
 body.words .tag .card { display: flex; flex-direction: column; }
 body.words .tag .line, body.words .tag .more { order: 5; }
-.chip { font-weight: 500; font-size: 11px; background: rgba(11,13,26,.5); border-radius: 999px; padding: 2px 8px 2px 6px; display: flex; align-items: center; gap: 5px; white-space: nowrap; }
+.chip { font-weight: 500; font-size: 12px; background: rgba(11,13,26,.62); border-radius: 999px; padding: 3px 9px 3px 7px; display: flex; align-items: center; gap: 5px; white-space: nowrap; cursor: pointer; }
+.chip::before { content: ""; position: absolute; inset: -9px -4px; } /* a finger-sized target round a small name */
+.tag { cursor: pointer; }
+/* names only: a notice or a chaos car shows its name; a tap opens the rest */
+.ctag.mini { padding: 3px 10px 3px 8px; border-radius: 999px; } .ctag.mini b { font-weight: 500; font-size: 12px; } .ctag.mini span { display: none !important; }
+.ctag.mini::before { content: ""; position: absolute; inset: -9px -4px; }
 .chip i { width: 6px; height: 6px; }
 
 #places { z-index: 2; position: fixed; inset: 0; background: var(--veil); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); overflow-y: auto;
@@ -165,7 +170,7 @@ body.visit #bottom, body.visit #keys { display: none; }
     <button id="bNext" type="button">Next place</button>
     <button id="bMore" type="button" aria-expanded="false" aria-label="Settings">&#8943;</button>
     <button id="bPace" class="x" type="button">Pace: normal</button>
-    <button id="bLabels" class="x" type="button">Cards: on</button>
+    <button id="bLabels" class="x" type="button">Cards: off</button>
     <button id="bWords" class="x" type="button" aria-pressed="false">Their words</button>
     <button id="bSound" class="x" type="button" aria-pressed="false" hidden>Sound</button>
   </div>
@@ -178,7 +183,7 @@ body.visit #bottom, body.visit #keys { display: none; }
     <button id="pR" type="button" aria-label="Turn right">&#8631;</button>
   </div>
   <p id="hint"></p>
-  <p id="tip">Tap a person, a shop sign or a home to open it.</p>
+  <p id="tip">Tap a name to read about them. Tap a shop sign or a home to open it.</p>
   <div id="legend">
     <span><i style="background:var(--gold)"></i>a turning point</span>
     <span><i style="background:var(--move)"></i>moved</span>
@@ -995,10 +1000,10 @@ function build(idx) {
   Object.keys(knots).forEach(function (g) { if (knots[g].length > 1) multi.push(knots[g]); else if (!knots[g][0].post) singles.push(knots[g][0]); });
   multi.sort(function (a, b) { return b.length - a.length || a[0].ti - b[0].ti; });
   multi.forEach(function (m) {
-    var pin = m.filter(function (o) { return o.post; })[0], sd = 0, free = m.filter(function (o) { return !o.post && !o.lead; });
-    if (pin) sd = pin.s; else { m.forEach(function (o) { sd += o.s; }); sd = sd >= 0 ? 1 : -1; } // the side most of them are on already
+    var pinned = m.filter(function (o) { return o.post; })[0], sd = 0, free = m.filter(function (o) { return !o.post && !o.lead; });
+    if (pinned) sd = pinned.s; else { m.forEach(function (o) { sd += o.s; }); sd = sd >= 0 ? 1 : -1; } // the side most of them are on already
     // where the knot gathers: outside the business one of them runs, else where the middle one of them stands
-    var zs = free.map(function (o) { return o.z0; }).sort(function (a, b) { return a - b; }), mid = pin ? pin.z0 : zs.length ? zs[Math.floor(zs.length / 2)] : 0;
+    var zs = free.map(function (o) { return o.z0; }).sort(function (a, b) { return a - b; }), mid = pinned ? pinned.z0 : zs.length ? zs[Math.floor(zs.length / 2)] : 0;
     free.forEach(function (o) {
       // change places with whoever, tied to nobody here, stands nearest that stretch on that side: the street
       // keeps its spacing, and people who know each other are within a walk of each other
@@ -1052,11 +1057,25 @@ for (var i = 0; i < 4; i++) {
   var el = document.createElement('div'); el.className = 'tag';
   el.innerHTML = '<div class="card"><div class="who"><i></i><span></span></div><div class="meta"></div><div class="with"></div><div class="line"></div><div class="more"></div><div class="said"></div><div class="cap"></div></div>';
   tagsEl.appendChild(el); CARDS.push({ el: el, p: null });
+  // a card is a button: tapping it stands with the person and opens their page
+  (function (slot) { slot.el.addEventListener('click', function () { if (slot.p && +slot.el.style.opacity > 0.3) startVisit(slot.p.d); }); })(CARDS[CARDS.length - 1]);
 }
-for (i = 0; i < 9; i++) { var ce = document.createElement('div'); ce.className = 'chip'; ce.innerHTML = '<i></i><span></span>'; tagsEl.appendChild(ce); CHIPS.push({ el: ce, p: null }); }
+for (i = 0; i < 9; i++) { var ce = document.createElement('div'); ce.className = 'chip'; ce.innerHTML = '<i></i><span></span>'; tagsEl.appendChild(ce); CHIPS.push({ el: ce, p: null });
+  // a name is a button: tapping it opens that person's card (with cards already on, their page)
+  (function (slot) { slot.el.addEventListener('click', function () { if (slot.p && +slot.el.style.opacity > 0.3) openCard(slot.p); }); })(CHIPS[CHIPS.length - 1]); }
+// The one thing opened by a tap while cards are off: a person (pinned) or a notice / chaos label (openTag). One at a time.
+var pinned = null, openTag = null;
+function openCard(p) {
+  ahead(p);
+  if (labels !== 1 || pinned === p || visiting || bizView || p.f < 0.8 || p.dist > 34) { startVisit(p.d); return; }
+  pinned = p; openTag = null; CARDS.forEach(function (s) { setCard(s, null); }); pickNames();
+}
+function openLabel(tag, start) {
+  if (labels === 1 && openTag !== tag) { openTag = tag; pinned = null; CARDS.forEach(function (s) { setCard(s, null); }); pickNames(); } else start();
+}
 var V = new THREE.Vector3(), FWD = new THREE.Vector3();
 function setCard(slot, p) {
-  slot.p = p; if (!p) { slot.el.style.opacity = 0; return; }
+  slot.p = p; if (!p) { slot.el.style.opacity = 0; slot.el.style.pointerEvents = 'none'; return; }
   slot.el.querySelector('i').style.background = KIND[p.d.k] || KIND.p;
   slot.el.querySelector('span').textContent = p.d.n;
   slot.el.querySelector('.line').textContent = p.d.x;
@@ -1076,19 +1095,23 @@ function setWith(slot) {
   if (el.textContent !== tx) { el.textContent = tx; el.style.color = slot.p && slot.p.meet && slot.p.meet.bad ? KIND.h : KIND.t; }
 }
 function setChip(slot, p) {
-  if (slot.p === p) return; slot.p = p; if (!p) { slot.el.style.opacity = 0; return; }
+  if (slot.p === p) return; slot.p = p; if (!p) { slot.el.style.opacity = 0; slot.el.style.pointerEvents = 'none'; return; }
   slot.el.querySelector('i').style.background = KIND[p.d.k] || KIND.p; slot.el.querySelector('span').textContent = p.d.n;
 }
 // how far ahead of the camera someone is (negative = behind), and how far away
 function ahead(p) { var dx = p.x - camera.position.x, dz = p.z - camera.position.z; p.f = dx * FWD.x + dz * FWD.z; p.dist = Math.sqrt(dx * dx + dz * dz); }
 function pickNames() {
-  var narrow = window.innerWidth < 600, max = (visiting || bizView || labels < 2) ? 0 : narrow ? 1 : 2; // two at a time: more than that and nobody is read
+  var narrow = window.innerWidth < 600, cardsOn = labels > 1;
+  if (pinned && (visiting || bizView || labels !== 1)) pinned = null;
+  // cards on: two at a time (more than that and nobody is read). Cards off: only the one whose name was tapped.
+  var max = (visiting || bizView) ? 0 : cardsOn ? (narrow ? 1 : 2) : pinned ? 1 : 0;
   camera.getWorldDirection(FWD); FWD.y = 0; FWD.normalize();
   world.people.forEach(ahead);
-  CARDS.forEach(function (s, i) { if (s.p && (i >= max || s.p.f < 0.8 || s.p.dist > (walking ? 13 : 34))) setCard(s, null); else if (s.p) setWith(s); });
+  CARDS.forEach(function (s, i) { if (s.p && (i >= max || s.p.f < 0.8 || s.p.dist > (walking && s.p !== pinned ? 13 : 34))) { if (s.p === pinned) pinned = null; setCard(s, null); } else if (s.p) setWith(s); });
   var taken = CARDS.filter(function (s) { return s.p; }).map(function (s) { return s.p; });
   var free = CARDS.filter(function (s, i) { return i < max && !s.p; });
-  if (free.length) {
+  if (free.length && !cardsOn) { if (pinned && taken.indexOf(pinned) < 0) { taken.push(pinned); setCard(free.shift(), pinned); } }
+  else if (free.length) {
     var c = walking
       ? world.people.filter(function (p) { return p.f > 1 && p.dist < 10 && taken.indexOf(p) < 0; }).sort(function (a, b) { return a.dist - b.dist; })
       : world.people.filter(function (p) { return p.f > 7 && p.f < 24 && taken.indexOf(p) < 0 && !p.seen; }).sort(function (a, b) { return (b.meet || b.at ? 1 : 0) - (a.meet || a.at ? 1 : 0) || (words ? (b.d.said ? 1 : 0) - (a.d.said ? 1 : 0) : 0) || a.d.pr - b.d.pr || a.f - b.f; });
@@ -1098,7 +1121,7 @@ function pickNames() {
     }
   }
   // everyone else close by still gets their name
-  var near = labels < 1 ? [] : world.people.filter(function (p) { return p.f > 1.5 && p.dist < 22 && taken.indexOf(p) < 0 && p !== visiting; }).sort(function (a, b) { return a.dist - b.dist; }).slice(0, narrow ? 4 : CHIPS.length);
+  var near = labels < 1 ? [] : world.people.filter(function (p) { return p.f > 1.5 && p.dist < 22 && taken.indexOf(p) < 0 && p !== visiting; }).sort(function (a, b) { return a.dist - b.dist; }).slice(0, narrow ? (cardsOn ? 4 : 6) : CHIPS.length);
   CHIPS.forEach(function (s) { if (s.p && near.indexOf(s.p) < 0) setChip(s, null); });
   near.forEach(function (p) { if (!CHIPS.some(function (s) { return s.p === p; })) { var f = CHIPS.filter(function (s) { return !s.p; })[0]; if (f) setChip(f, p); } });
 }
@@ -1117,7 +1140,7 @@ function placeNames() {
     if (top + bh > ceil) o = 0;
     if (o > 0) placed.push([left, top, bw, bh]);
     s.el.style.transform = 'translate(' + left.toFixed(1) + 'px,' + top.toFixed(1) + 'px)';
-    s.el.style.opacity = Math.max(0, o).toFixed(2);
+    s.el.style.opacity = Math.max(0, o).toFixed(2); s.el.style.pointerEvents = o > 0.3 ? 'auto' : 'none';
   });
   CHIPS.forEach(function (s) {
     if (!s.p) return;
@@ -1127,14 +1150,15 @@ function placeNames() {
     if (ok) placed.forEach(function (q) { if (left < q[0] + q[2] && left + bw > q[0] && top < q[1] + q[3] && top + 20 > q[1]) ok = false; });
     if (ok) placed.push([left, top, bw, 20]);
     s.el.style.transform = 'translate(' + left.toFixed(1) + 'px,' + top.toFixed(1) + 'px)';
-    s.el.style.opacity = ok ? Math.max(0, Math.min(0.95, (22 - s.p.dist) / 6)).toFixed(2) : 0;
+    var co = ok ? Math.max(0, Math.min(0.95, (22 - s.p.dist) / 3)) : 0;
+    s.el.style.opacity = co.toFixed(2); s.el.style.pointerEvents = co > 0.3 ? 'auto' : 'none';
   });
 }
 
 // ---------- moving through it ----------
 var STILL = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); // asked for less motion: no sway, lean or step in the camera
 var playing = !STILL, busy = false, frame = 0, last = performance.now();
-var PACES = [['slow', 0.5], ['normal', 1], ['quick', 2], ['fast', 4]], paceI = 1, pace = 1, labels = 2; // labels: 2 cards + names, 1 names, 0 nothing
+var PACES = [['slow', 0.5], ['normal', 1], ['quick', 2], ['fast', 4]], paceI = 1, pace = 1, labels = 1; // labels: 1 names (a tap opens a card), 2 names + cards, 0 nothing
 var bizView = null, visiting = null, words = false, walking = false, yaw = 0, pitch = 0, held = {}, clock0 = 0;
 var CAM = { x: 0, y: 0, z: 0, walking: false };
 function facts() {
@@ -1185,7 +1209,7 @@ function go(idx, startAt, who) {
   if (busy) { queued = [idx, startAt, who]; return; } busy = true; endVisit(true); $('fade').classList.add('on');
   setTimeout(function () {
     if (world) { scene.remove(world.root); dispose(world.root); }
-    CARDS.forEach(function (s) { setCard(s, null); }); CHIPS.forEach(function (s) { setChip(s, null); });
+    CARDS.forEach(function (s) { setCard(s, null); }); CHIPS.forEach(function (s) { setChip(s, null); }); pinned = null; openTag = null;
     cur = (idx + DATA.hoods.length) % DATA.hoods.length; world = build(cur); facts();
     if (DBG && DBG.t0) world.t = DBG.t0;
     if (SOUND && SOUND.enter) SOUND.enter({ name: world.H.name, style: world.ST, water: world.H.lay.water, weather: WX, people: world.H.people.length, places: world.H.lay.places.map(function (p) { return { type: p.type, s: p.s, z: p.z }; }) });
@@ -1306,11 +1330,11 @@ $('bWalk').addEventListener('click', function () { setWalk(!walking); });
 function store(k, v) { try { localStorage.setItem('wv-' + k, String(v)); } catch (e) {} }
 function recall(k) { try { return localStorage.getItem('wv-' + k); } catch (e) { return null; } }
 function setPace(i) { paceI = (i + PACES.length) % PACES.length; pace = PACES[paceI][1]; $('bPace').textContent = 'Pace: ' + PACES[paceI][0]; store('pace', paceI); }
-function setLabels(v) { labels = v; $('bLabels').textContent = 'Cards: ' + ['off', 'names only', 'on'][v]; store('labels', v); if (v < 2) CARDS.forEach(function (s) { setCard(s, null); }); if (v < 1) CHIPS.forEach(function (s) { setChip(s, null); }); if (world) world.people.forEach(function (p) { p.seen = false; }); }
+function setLabels(v) { labels = v; pinned = null; openTag = null; $('bLabels').textContent = ['Names: off', 'Cards: off', 'Cards: on'][v]; store('show', v); if (v < 2) CARDS.forEach(function (s) { setCard(s, null); }); if (v < 1) CHIPS.forEach(function (s) { setChip(s, null); }); if (world) world.people.forEach(function (p) { p.seen = false; }); }
 $('bPace').addEventListener('click', function () { setPace(paceI + 1); });
 $('bMore').addEventListener('click', function () { var on = !$('keys').classList.contains('open'); $('keys').classList.toggle('open', on); $('bMore').setAttribute('aria-expanded', on ? 'true' : 'false'); });
-$('bLabels').addEventListener('click', function () { setLabels((labels + 2) % 3); });
-(function () { var a = recall('pace'), b = recall('labels'); if (a != null && PACES[+a]) setPace(+a); if (b != null && +b >= 0 && +b <= 2) setLabels(+b); })();
+$('bLabels').addEventListener('click', function () { setLabels(labels === 1 ? 2 : labels === 2 ? 0 : 1); });
+(function () { var a = recall('pace'), b = recall('show'); if (a != null && PACES[+a]) setPace(+a); if (b != null && +b >= 0 && +b <= 2) setLabels(+b); })();
 $('bWords').addEventListener('click', function () { words = !words; document.body.classList.toggle('words', words); $('bWords').setAttribute('aria-pressed', words ? 'true' : 'false'); CARDS.forEach(function (s) { setCard(s, null); }); if (world) world.people.forEach(function (p) { p.seen = false; }); });
 $('bPlay').addEventListener('click', function () { setPlay(!playing); });
 $('bNext').addEventListener('click', function () { go(cur + 1); });
@@ -1438,7 +1462,9 @@ function pick(px, py) {
     else if (q.type === 'market') test(WALK - 2.3, 5.6, -W.L * 0.3 + 3, 2.4, 80, 28, 1, { b: q.b });
   });
   if (!best) return;
-  if (best.p) startVisit(best.p.d); else if (best.c) startChaos(best.c); else if (best.n) startNote(best.n); else if (best.h != null) startHome(best.h); else startBiz(best.b);
+  // cards off: a first tap on a person, a chaos car or a notice opens its card; a tap on the card (or a second tap) opens the rest
+  var tg = best.c ? CTAGS.filter(function (e) { return e && e._ev === best.c && +e.style.opacity > 0.3; })[0] : best.n ? NTAGS.filter(function (e) { return e && e._a === best.n && +e.style.opacity > 0.3; })[0] : null;
+  if (best.p) openCard(best.p); else if (best.c) { if (tg) openLabel(tg, function () { startChaos(best.c); }); else startChaos(best.c); } else if (best.n) { if (tg) openLabel(tg, function () { startNote(best.n); }); else startNote(best.n); } else if (best.h != null) startHome(best.h); else startBiz(best.b);
 }
 function money(v) { return '$' + Math.round(v).toLocaleString('en-US'); }
 function startBiz(bi) {
@@ -1488,19 +1514,21 @@ function placeNotes() {
     var a = list[i], el = NTAGS[i];
     if (!a) { if (el) el._o = 0; continue; }
     if (!el) { el = NTAGS[i] = document.createElement('div'); el.innerHTML = '<b><i></i><em style="font-style:normal"></em></b><span></span>'; tagsEl.appendChild(el);
-      (function (tag) { tag.addEventListener('click', function () { if (tag._a && +tag.style.opacity > 0.3) startNote(tag._a); }); })(el); }
+      (function (tag) { tag.addEventListener('click', function () { if (tag._a && +tag.style.opacity > 0.3) openLabel(tag, function () { startNote(tag._a); }); }); })(el); }
     if (el._a !== a) { el._a = a; el.className = 'ctag n' + ({ s: 's', l: 'l', i: 'i', p: 'p', c: 'c', t: 't', w: 'w', x: 'x' }[a.nt.k] || 'f'); el.querySelector('em').textContent = a.nt.n; el.querySelector('span').textContent = a.nt.x; }
+    el.classList.toggle('mini', labels < 2 && openTag !== el); // cards off: its name only, until it is tapped
     el._o = 0;
     if (show) {
       NV.set(a.x, a.y + 0.6, a.z).project(camera);
       var dx = a.x - camera.position.x, dz = a.z - camera.position.z, dist = Math.sqrt(dx * dx + dz * dz), x = (NV.x * 0.5 + 0.5) * w, y = (-NV.y * 0.5 + 0.5) * h;
       // one already showing holds its place against a newcomer a little nearer, so two do not trade places every frame
-      if (NV.z < 1 && dist < Math.min(a.far, NOTE_FAR) && x > -40 && x < w + 40) cand.push({ el: el, d: dist - (+el.style.opacity > 0.3 ? 6 : 0), x: x, y: y });
+      if (NV.z < 1 && dist < Math.min(a.far, NOTE_FAR) && x > -40 && x < w + 40) cand.push({ el: el, d: openTag === el ? -1 : dist - (+el.style.opacity > 0.3 ? 6 : 0), x: x, y: y });
     }
   }
   cand.sort(function (p, q) { return p.d - q.d; });
-  // the nearest two (one on a narrow screen): a street's notices come up one after another as it is flown, not all at once
-  cand.slice(0, w < 600 ? 1 : 2).forEach(function (c) {
+  // the nearest two (one on a narrow screen): a street's notices come up one after another as it is flown, not all at once.
+  // As names they are small, so more fit: five, or three on a narrow screen.
+  cand.slice(0, labels < 2 ? (w < 600 ? 3 : 5) : (w < 600 ? 1 : 2)).forEach(function (c) {
     var el = c.el, bw = el.offsetWidth, bh = el.offsetHeight, lx = Math.max(8, Math.min(w - bw - 8, c.x - bw / 2)), ly = Math.max(floor, c.y - bh - 6);
     // a label keeps off the cards and off the labels placed before it: it drops below whatever it would cover
     for (var pass = 0, hit = true; hit && pass < 4; pass++) { hit = false; rects.forEach(function (q) { if (lx < q[0] + q[2] + 6 && lx + bw + 6 > q[0] && ly < q[1] + q[3] + 6 && ly + bh + 6 > q[1]) { ly = q[1] + q[3] + 8; hit = true; } }); }
@@ -1508,7 +1536,7 @@ function placeNotes() {
     rects.push([lx, ly, bw, bh]); el._o = 1;
     el.style.transform = 'translate(' + lx.toFixed(1) + 'px,' + ly.toFixed(1) + 'px)';
   });
-  for (i = 0; i < NTAGS.length; i++) if (NTAGS[i]) { NTAGS[i].style.opacity = NTAGS[i]._o ? 1 : 0; NTAGS[i].style.pointerEvents = NTAGS[i]._o ? 'auto' : 'none'; }
+  for (i = 0; i < NTAGS.length; i++) if (NTAGS[i]) { NTAGS[i].style.opacity = NTAGS[i]._o ? 1 : 0; NTAGS[i].style.pointerEvents = NTAGS[i]._o ? 'auto' : 'none'; if (!NTAGS[i]._o && openTag === NTAGS[i]) openTag = null; }
 }
 function words_(v) { return String(v || '').replace(/[_-]/g, ' '); }
 function startNote(a) {
@@ -1644,8 +1672,9 @@ function placeChaos() {
     if (!ev) { if (el) el.style.opacity = 0; continue; }
     if (!el) { el = CTAGS[i] = document.createElement('div'); el.className = 'ctag'; el.innerHTML = '<b><i></i><em style="font-style:normal"></em></b><span></span>'; tagsEl.appendChild(el);
       // the label is a button too: tapping it rides with its car, the same as tapping the car
-      (function (tag) { tag.addEventListener('click', function () { if (tag._ev && +tag.style.opacity > 0.3) startChaos(tag._ev); }); })(el); }
+      (function (tag) { tag.addEventListener('click', function () { if (tag._ev && +tag.style.opacity > 0.3) openLabel(tag, function () { startChaos(tag._ev); }); }); })(el); }
     if (el._ev !== ev) { el._ev = ev; el.querySelector('em').textContent = ev.n; el.querySelector('span').textContent = ev.seed || (chaosWords(ev) + (ev.to && ev.scope !== 'neighborhood' ? ' — ' + ev.to : '')); }
+    el.classList.toggle('mini', labels < 2 && openTag !== el); // cards off: the kind of vehicle only, until it is tapped
     var show = ev.on && labels > 0 && !visiting && !bizView && !busy, o = 0;
     if (show) {
       CV.set(ev.x, ev.y + 0.7, ev.z).project(camera);
@@ -1656,7 +1685,7 @@ function placeChaos() {
         if (ly + bh > h - $('bottom').offsetHeight - 8) o = 0; else put.push([lx, ly, bw, bh]);
         el.style.transform = 'translate(' + lx.toFixed(1) + 'px,' + ly.toFixed(1) + 'px)'; }
     }
-    el.style.opacity = o.toFixed(2); el.style.pointerEvents = o > 0.3 ? 'auto' : 'none';
+    el.style.opacity = o.toFixed(2); el.style.pointerEvents = o > 0.3 ? 'auto' : 'none'; if (!o && openTag === el) openTag = null;
   }
 }
 function startChaos(ev) {

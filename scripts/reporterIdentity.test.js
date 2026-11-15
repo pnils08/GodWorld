@@ -64,3 +64,19 @@ const deps = { wp, dials: { disposition: () => 'steady, hard to shake' } };
   fs.rmSync(root, { recursive: true, force: true });
   console.log('reporterIdentity.test.js: all assertions passed');
 })().catch((e) => { console.error(e); process.exit(1); });
+
+// essenceForPop: a seat holder's Essence by POPID; nobody else gets one
+{
+  const { essenceForPop } = require('./reporterIdentity');
+  const r = fs.mkdtempSync(path.join(os.tmpdir(), 'reporter-identity-pop-'));
+  fs.mkdirSync(path.join(r, 'docs', 'media', 'voices'), { recursive: true });
+  fs.mkdirSync(path.join(r, '.claude', 'agents', 'seat-a'), { recursive: true });
+  fs.writeFileSync(path.join(r, 'docs', 'media', 'voices', 'seat_a.md'), '# V\n\n## Essence\n\nReads logs for fun.\n\n## Exemplar\n\n> x\n');
+  fs.writeFileSync(path.join(r, '.claude', 'agents', 'seat-a', 'LENS.md'), '- docs/media/voices/seat_a.md');
+  const personaMap = { _comment: 'x', 'seat-a': { popid: 'POP-00014' }, 'seat-a-weekly': { popid: 'POP-00014', voiceDir: 'seat-a' }, 'seat-b': { popid: 'POP-00015' } };
+  assert.strictEqual(essenceForPop('pop-00014', { personaMap, root: r }), 'Reads logs for fun.');
+  assert.strictEqual(essenceForPop('POP-00015', { personaMap, root: r }), '', 'a seat whose folder names no voice file');
+  assert.strictEqual(essenceForPop('POP-00001', { personaMap, root: r }), '', 'not a seat holder');
+  assert.strictEqual(essenceForPop('', { personaMap, root: r }), '');
+  fs.rmSync(r, { recursive: true, force: true });
+}

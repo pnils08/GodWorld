@@ -82,4 +82,23 @@ async function reporterIdentity(opts, deps) {
   return { block, sheet: sl.line, essence, voiceFile, notes };
 }
 
-module.exports = { voiceFileFor, essenceOf, sheetLine, reporterIdentity };
+// The written background for a POPID that holds a newsroom seat (scripts/persona-map.json), '' for everyone else.
+// For the wakes that run a reporter down the citizen path (the morning pick): the same Essence the write wake opens on.
+function essenceForPop(popid, opts) {
+  const o = opts || {};
+  const id = String(popid || '').toUpperCase();
+  if (!id) return '';
+  let map = o.personaMap;
+  if (!map) { try { map = JSON.parse(fs.readFileSync(path.join(__dirname, 'persona-map.json'), 'utf8')); } catch (e) { return ''; } }
+  const root = o.root || ROOT;
+  for (const slug of Object.keys(map)) {
+    const m = map[slug];
+    if (!m || typeof m !== 'object' || String(m.popid || '').toUpperCase() !== id) continue;
+    const vf = voiceFileFor(path.join(root, '.claude', 'agents', m.voiceDir || slug), root);
+    if (!vf) continue;
+    try { const e = essenceOf(fs.readFileSync(vf, 'utf8')); if (e) return e; } catch (e) { /* next seat of the same person */ }
+  }
+  return '';
+}
+
+module.exports = { voiceFileFor, essenceOf, sheetLine, reporterIdentity, essenceForPop };

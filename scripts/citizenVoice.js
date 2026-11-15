@@ -182,10 +182,16 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
     }
   } catch (e) { ownOffice = ''; }
   const ownRecord = [ownFeed, ownOffice].filter(Boolean).map((b) => '\n\n' + b).join('');
-  const identity = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. ${stationLine(c, !!ownFeed)} Your temperament: ${disp}.`;
+  // A newsroom seat's morning wake runs through here (builder 2026-11-15: "all journalist crons should have one in its
+  // media wake work"): a reporter is not told "you are not a writer", and reads the Essence of their own voice file,
+  // the same lines the write wake opens on. '' for everyone who holds no seat; their opening is unchanged.
+  let written = '';
+  try { written = require('./reporterIdentity').essenceForPop(c.popId); } catch (e) { written = ''; }
+  const station = written ? '' : stationLine(c, !!ownFeed) + ' ';
+  const identity = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. ${station}Your temperament: ${disp}.` + (written ? '\n\n' + written : '');
   const system = interviewMode && !livedContextAllowed
     ? identity + ownRecord + '\n\nThis interview has no story-linked personal exposure. Stay in your own voice, but do not project unrelated life history onto the story.'
-    : identity + `${trajLine}${arcLine}${health}${show}${ownRecord}\n\nReal things from your life recently:\n${c.life}${family}${standing}${who}${bonds}${sports}${texture}${memory}`;
+    : identity + `${written && trajLine ? '\n\n' + trajLine.trim() : trajLine}${arcLine}${health}${show}${ownRecord}\n\nReal things from your life recently:\n${c.life}${family}${standing}${who}${bonds}${sports}${texture}${memory}`;
 
   // The ask arrives from the caller (letters desk, interview brief). Fence it — desk-authored
   // context is instructions TO the citizen, but anything quoted inside it must not be able to

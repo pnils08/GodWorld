@@ -11,14 +11,12 @@ const page = require(ROOT + '/lib/citizenPage');
 const dials = require(ROOT + '/lib/citizenDials');
 const wp = require(ROOT + '/lib/wakePerception');
 const maraDirective = require(ROOT + '/scripts/maraDirective');
-const [officeId, cycleArg, question, askerLine] = process.argv.slice(2);
-const cycle = Number(cycleArg);
 const officeMap = JSON.parse(fs.readFileSync(ROOT + '/scripts/civic-office-map.json', 'utf8'));
 const table = (rows, cols) => [cols.join(' | ')].concat(rows.map((r) => cols.map((c) => String(r[c] == null ? '' : r[c])).join(' | '))).join('\n');
 
 // ---- part 2, THE FILL: one entry per worker. Each block = { title, text, key } (key: words the memory gatherer uses on an own wake)
 const FILLS = {
-  'CHIEF-POLICE': async () => {
+  'CHIEF-POLICE': async (cycle, nameOf) => {
     const out = [];
     const crime = await sheets.getSheetAsObjects('Crime_Metrics');
     const ccols = Object.keys(crime[0]).filter((c) => crime.some((r) => String(r[c] || '').trim()));   // a column blank in every row is left out and named
@@ -33,7 +31,7 @@ const FILLS = {
     out.push({ title: 'Arrests by neighborhood, each Cycle', text: table(hoods.map((h) => Object.assign({ Neighborhood: h }, ...cyc.map((c) => ({ ['C' + c]: cell(h, c, 'TotalIntakes') })))), ['Neighborhood'].concat(cyc.map((c) => 'C' + c))) });
     out.push({ title: 'In custody at the end of each Cycle, by neighborhood', text: table(hoods.map((h) => Object.assign({ Neighborhood: h }, ...cyc.map((c) => ({ ['C' + c]: cell(h, c, 'ClosingOccupancy') })))), ['Neighborhood'].concat(cyc.map((c) => 'C' + c))) });
     const cars = (await sheets.getSheetAsObjects('Chaos_Cars')).filter((r) => r.VehicleType === 'cop_car' && Number(r.CycleId) >= cyc[0] && Number(r.CycleId) <= cycle)
-      .map((r) => ({ Cycle: r.CycleId, Where: r.TargetScope + ' ' + r.TargetId, Outcome: r.DiceOutcome, Moved: r.PrimaryMetric + ' ' + r.MetricMagnitude }));
+      .map((r) => ({ Cycle: r.CycleId, Where: r.TargetScope === 'citizen' ? 'citizen ' + (nameOf(r.TargetId) || r.TargetId) : r.TargetScope + ' ' + r.TargetId, Outcome: r.DiceOutcome, Moved: r.PrimaryMetric + ' ' + r.MetricMagnitude }));
     out.push({ title: 'Patrol car events, Cycles ' + cyc[0] + '–' + cycle + (cars.some((c) => Number(c.Cycle) === cycle) ? '' : ' (none this Cycle)'), text: cars.length ? table(cars, Object.keys(cars[0])) : 'none' });
     const wc = await sheets.getSheetAsObjects('World_Config'); const ps = wc.find((r) => r.Key === 'patrolStrategy');
     out.push({ title: 'Patrol strategy in force', text: ps && String(ps.Value).trim() ? String(ps.Value) : 'balanced (the default; no setting is recorded on the city\'s sheet)' });
@@ -47,6 +45,7 @@ const FILLS = {
 // ---- part 1: who they are — the live daily wake's own functions (ledger row, office sheet, dials)
 async function whoTheyAre(popid) {
   const pool = await wp.buildPool({ shapedMin: 0, lifeMinChars: 0 });
+  whoTheyAre.nameOf = (id) => { const x = pool.find((y) => y.popId === String(id).toUpperCase()); return x ? [x.first, x.last].filter(Boolean).join(' ') || x.name || '' : ''; };
   const offices = await wp.loadOfficeHolders();
   const c = pool.find((x) => x.popId === String(popid).toUpperCase());
   if (!c) return null;
@@ -86,11 +85,12 @@ function pastDecisions(popid, agentDir) {
   return out;
 }
 
-(async () => {
+// The whole wake for one worker: { office, system, user, mem, dec }. question / askerLine are for an asked wake.
+async function buildWake(officeId, cycle, question, askerLine) {
   const office = officeMap.offices.find((o) => o.officeId === officeId);
   if (!office || !FILLS[officeId]) throw new Error('no fill for ' + officeId);
   const who = await whoTheyAre(office.popid);
-  const fill = await FILLS[officeId]();
+  const fill = await FILLS[officeId](cycle, whoTheyAre.nameOf);
   const mem = await gatherMemory(office.popid, question || fill.key);
   const dec = pastDecisions(office.popid, office.agentDir);
   const system = [who, '', 'From your own memory:', ...mem.entries.map((m) => '- (' + m.when + ') ' + m.text)].join('\n');
@@ -100,6 +100,14 @@ function pastDecisions(popid, agentDir) {
     ...(dec.length ? dec.map((d) => '- Cycle ' + d.cycle + ', ' + d.type + (d.askedBy ? ' — asked by ' + d.askedBy + ': ' + d.question + '\n  You answered: ' + d.said : ': ' + d.said)) : ['- nothing on record']), '',
     question ? (askerLine || 'A council member') + ' asks you:\n\n' + question : 'It is the close of Cycle ' + cycle + '. You are speaking on the record as ' + office.title + '.',
   ].join('\n\n').replace(/\n\n\n+/g, '\n\n');
+  return { office, system, user, mem, dec };
+}
+module.exports = { buildWake, FILLS };
+
+if (require.main === module) (async () => {
+  const [officeId, cycleArg, question, askerLine] = process.argv.slice(2);
+  const cycle = Number(cycleArg);
+  const { office, system, user, mem, dec } = await buildWake(officeId, cycle, question, askerLine);
   const md = ['# What ' + office.holder + ' (' + office.title + ') would wake with — worker template, Cycle ' + cycle, '',
     'No model was called. Sizes: system ' + system.length + ' characters, user ' + user.length + '. Memory: ' + mem.fromSearch + ' from a search on "' + mem.key + '", ' + mem.newest + ' newest of his own; ' + mem.entries.length + ' after duplicates. Decisions on record: ' + dec.length + '.', '',
     '## System turn (who he is, his memory)', '', '```', system, '```', '', '## User turn (his data, his decisions, the task)', '', '```', user, '```', ''].join('\n');

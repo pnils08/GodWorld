@@ -61,6 +61,7 @@ function readSources(root) {
     // deaths, retirements and promotions of the last two cycles (derived by the dump), and the initiatives
     lived: (() => { try { return readRows(path.join(beats, 'Lived_Events.jsonl')); } catch (e) { return null; } })(),
     initiatives: (() => { try { return readRows(path.join(beats, 'Initiative_Tracker.jsonl')); } catch (e) { return null; } })(),
+    crime: (() => { try { return readRows(path.join(beats, 'Crime_Metrics.jsonl')); } catch (e) { return null; } })(),
     // who works where (absent from an older dump)
     roster: (() => { try { return readRows(path.join(beats, 'Employment_Roster.jsonl')); } catch (e) { return null; } })(),
     // the cycle's world summary, where the Chaos_Cars rows are printed (absent before the summary is built)
@@ -498,6 +499,17 @@ function checkWorldView(build, sources, engine, secondBuild, reports = []) {
     for (const nt of arr(build.data?.notesElsewhere || [], 'data.notesElsewhere')) { const w = want.find(x => !x.used && x.hood === (nt?.hood || '') && same(nt, x)); if (!w) fail('notice', 'elsewhere', `no row of this cycle for ${JSON.stringify(nt).slice(0, 200)}`); else { w.used = true; if (hoodNames.has(w.hood) && !w.future && w.nt.n && (w.nt.x || w.notes)) fail('notice', 'elsewhere', `${w.nt.n} belongs on ${w.hood}`); } }
     for (const w of want) if (!w.used) fail('notice', w.hood || 'no neighborhood', `a row of this cycle is neither on a street nor listed elsewhere: ${w.nt.n} ${w.nt.x.slice(0, 80)}`);
     if (matched) reports.push(`NOTICES ${matched} matched to their rows: this cycle's Faith_Ledger and sports feed, Lived_Events, Initiative_Tracker, Community_Programs, Cultural_Ledger, Transit_Metrics, WorldEvents_V3_Ledger, Texture_Trigger_Log`);
+  }
+  // the street's numbers: every value shown is the cell of the street's own Neighborhood_Map row for the cycle, or
+  // of its Crime_Metrics row, under the column's own name
+  {
+    const nm = new Map(arr(sources.nmap || [], 'Neighborhood_Map').filter(r => String(r.Cycle) === String(build.CYCLE)).map(r => [r.Neighborhood, r])), cm = new Map(arr(sources.crime || [], 'Crime_Metrics').map(r => [r.Neighborhood, r]));
+    let n = 0;
+    for (const h of hoods) for (const [part, rows] of [['map', nm], ['crime', cm]]) for (const [k, v] of Object.entries(h?.nums?.[part] || {})) {
+      const cell = String(rows.get(h.name)?.[k] ?? '').trim();
+      if (!cell || cell !== v) fail('numbers', `${h.name}.${k}`, `shown ${JSON.stringify(v)}, the row holds ${JSON.stringify(cell)}`); else n++;
+    }
+    if (n) reports.push(`NUMBERS ${n} values matched to the streets' Neighborhood_Map and Crime_Metrics rows`);
   }
   // the overview map: its joins are exactly the Neighborhood_Map.Adjacent pairs between shown neighborhoods, each
   // neighborhood has a place on it and the row's own district

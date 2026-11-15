@@ -18,7 +18,7 @@ Builder 2026-11-14, on the sheet review: "lets record these as items to add and 
 
 | # | Item | Source | C115 | In `output/beats/` | State |
 |---|---|---|---|---|---|
-| 1 | Neighborhood state on the street: how lit, loud and busy; growing or steady; holiday and First Friday | `Neighborhood_Map` (NightlifeProfile, NoiseIndex, RetailVitality, Sentiment, NeighborhoodTrajectory, TrajectoryMomentum, HousingPressure, MigrationFlow, Holiday, FirstFriday) | 22 rows, one a street | yes, from 2026-11-14 (`scripts/dumpBeatTabs.js` `BEAT_TABS`) | direction built (§The direction scale); nightlife, retail, noise, mood and the holiday flags open |
+| 1 | Neighborhood state on the street: how lit, loud and busy; growing or steady; holiday and First Friday | `Neighborhood_Map` (NightlifeProfile, NoiseIndex, RetailVitality, Sentiment, NeighborhoodTrajectory, TrajectoryMomentum, HousingPressure, MigrationFlow, Holiday, FirstFriday) | 22 rows, one a street | yes, from 2026-11-14 (`scripts/dumpBeatTabs.js` `BEAT_TABS`) | direction built (§The direction scale); the row's other numbers are shown behind the top line (§The street's numbers); how nightlife, retail, noise and mood should look, and the holiday flags, open |
 | 2 | Staff at their own business, not only the owner | `Employment_Roster` (BIZ_ID, POP_ID, RoleType, Status) | 971 rows, 921 with a BIZ_ID | yes | built (§Somewhere to go) |
 | 3 | The week's faith events at the house of worship | `Faith_Ledger` (Organization, EventDescription, Neighborhood, Attendance) | 5 | yes | built (§The week's notices) |
 | 4 | Deaths, retirements, promotions marked on the person or their shop | `Lived_Events` (kind, subject, neighborhood, recipients) | 3, and one death at C114 with its mourners | yes | built (§The week's notices, lived events) |
@@ -27,12 +27,12 @@ Builder 2026-11-14, on the sheet review: "lets record these as items to add and 
 | 7 | Game night on the home street | `Oakland_Sports_Feed` (HomeNeighborhood, EventType, Streak, WeekRecord) | 7 | yes | built (§The week's notices); game night is pennants over the main street |
 | 8 | Community programs where they run | `Community_Programs` (Name, Neighborhood, Founder_POPID, Status) | 33 | yes | built (§The week's notices, lists) |
 | 9 | Cultural figures on their street | `Cultural_Ledger` (Name, Neighborhood, FameScore, TrendTrajectory) | 51 | yes | built (§The week's notices, lists) |
-| 10 | Crime numbers | `Crime_Metrics` | 22 | yes | open: what it shows, if anything, is the builder's |
+| 10 | Crime numbers | `Crime_Metrics` | 22 | yes | shown behind the top line (§The street's numbers); what the street draws from them, if anything, is the builder's |
 | 11 | Busy shop fronts and quiet ones | `Business_Ledger` Growth_Rate, Annual_Revenue | 283 | yes | built: more light at the door and more people stopping at a business that is growing (§The week's notices, shop fronts) |
 | 12 | Homes by rent or own | `Household_Ledger` HousingType, MonthlyRent, HouseholdIncome | 677 active households | yes | built (§Homes, §Somewhere to go) |
 | 13 | World events on the street (roadworks, incidents) | `WorldEvents_V3_Ledger` (EventDescription, Severity, Neighborhood) | 10 | yes, from 2026-11-15 | built (§The week's notices, world events) |
 | 14 | People who know each other stop to talk | `Relationship_Bonds` (CitizenA, CitizenB, BondType, Intensity) | 697 rows | yes, from 2026-11-15 | built (§People who know each other) |
-| 15 | A street under strain | `Event_Arc_Ledger` (Type, Phase, Tension, Neighborhood) | 0 stamped C115; newest C114 `CRISIS-114-DOWNTOWN` at onset | no | open |
+| 15 | A street under strain | `Event_Arc_Ledger` (Type, Phase, Tension, Neighborhood) | 0 stamped C115; newest C114 `CRISIS-114-DOWNTOWN` at `early` | no | open, and not buildable from the tab as it stands: 37 arcs' latest row is unresolved, most of them stamped C101 at `peak`, so the tab does not say which streets are under strain now (read live 2026-11-15). What an open arc means is the builder's |
 | 16 | Shop rush and street life | `Texture_Trigger_Log` (TextureKey, Neighborhood, Intensity) | 13 | yes, from 2026-11-15 | built (§The week's notices, world events): a notice, and a busy pavement has fewer people standing still |
 
 Left out: `Youth_Events` (no row since C102; `dumpBeatTabs.js` already leaves it out as dead by ruling) and the `Transit_Metrics` Corridor rows (no Neighborhood column, so a corridor on a street would be a guess).
@@ -170,6 +170,13 @@ Builder 2026-11-15, overnight, on the flight standing idle after the first four 
 - What they do (`life-people.js`): now and then, on setting off, a person walks to one of their spots, stands facing it a while (8 to 22 seconds), then goes on; some are already there when the flight arrives. Not to work with the household in tow. The card says "At their own door." or "Outside <business>, where they work." (the business's ledger name).
 - Check: `worldViewCheck.js` (`STAFF` line) matches every `wk` to an Active roster row at that business and fails a roster row the page left off.
 - Checked (headless): West Oakland on a 60 s flight: eight people seen at their door, the card line as written; closest two strangers 0.37 m (0.49 to 0.55 m on the page before bonds, same measure); all 22 streets open without error. Not seen in two minutes stepped: anyone reaching a door on the residential stretch (the walk is long).
+
+## The street's numbers (2026-11-15)
+
+- "The street's numbers" at the end of the top line opens the street's own `Neighborhood_Map` row for the cycle (mood, nightlife, noise, retail, draw for events, crime index, housing pressure, people moving in or out, median income and rent, marker, income tier, employers, council district) and its `Crime_Metrics` row (incidents, property and violent crime index, response time, clearance rate, trend, hotspot, pressure ratio), each value as the cell holds it, a number beside the span the 22 streets run across (`build.js` `h.nums`, `startNums()` in `template.html`). No unit is added that the tab does not give.
+- It shows; it does not draw. Add-list 1 (nightlife, retail, noise, mood) and 10 (crime) stay the builder's for what a street should look like.
+- Check: `worldViewCheck.js` (`NUMBERS` line) matches every value to its cell. C115: 462 values.
+- Checked (headless): Downtown's panel read back; all 22 streets open without error; page check and 33 page tests pass.
 
 ## The overview map (2026-11-15)
 

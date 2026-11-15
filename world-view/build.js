@@ -174,6 +174,18 @@ hoods.forEach(h => {
 });
 if (nmap.length) console.log('direction scale: ' + [5, 4, 3, 2, 1, 0, -1, -2, -3, -4, -5].map(n => { const at = hoods.filter(h => h.state && h.state.scale === n).map(h => h.name); return at.length ? (n > 0 ? '+' : '') + n + ' ' + at.join(', ') : ''; }).filter(Boolean).join(' | '));
 
+// ---------- the street's numbers: its own Neighborhood_Map row for the cycle, and its Crime_Metrics row ----------
+// Shown as the engine holds them, behind the top line (add-list 1 and 10). Nothing is drawn from them except the
+// direction scale above: how a street should look for its nightlife, retail, noise, mood or crime is the builder's.
+const NUM_MAP = ['Sentiment', 'NightlifeProfile', 'NoiseIndex', 'RetailVitality', 'EventAttractiveness', 'CrimeIndex', 'HousingPressure', 'MigrationFlow', 'MedianIncome', 'MedianRent', 'DemographicMarker', 'IncomeTier', 'EmployerCharacter', 'District'];
+const NUM_CRIME = ['IncidentCount', 'PropertyCrimeIndex', 'ViolentCrimeIndex', 'ResponseTimeAvg', 'ClearanceRate', 'Trend', 'Hotspot', 'PressureRatio'];
+let crimeRows = []; try { crimeRows = rd('Crime_Metrics'); } catch (e) { console.warn('world-view: no Crime_Metrics in the dump; the street\'s numbers are shown without it'); }
+hoods.forEach(h => {
+  const pick = (row, cols) => { const o = {}; if (row) cols.forEach(c => { const v = String(row[c] == null ? '' : row[c]).trim(); if (v) o[c] = v; }); return o; };
+  const m = pick(nmap.find(x => x.Neighborhood === h.name), NUM_MAP), c = pick(crimeRows.find(x => x.Neighborhood === h.name), NUM_CRIME);
+  if (Object.keys(m).length || Object.keys(c).length) h.nums = { map: m, crime: c };
+});
+
 // ---------- the city's shape: which neighborhoods border which (Neighborhood_Map.Adjacent, District) ----------
 // The sim holds no coordinates, only adjacency (the engine reads the same column into S.neighborhoodAdjacency). The
 // overview map is a picture of that graph: neighborhoods that border each other are drawn near each other, by a
@@ -579,7 +591,7 @@ const data = {
 hoods.forEach(h => { data.style[h.name] = STYLE[h.name]; });
 
 // Required as a module (a check script, a test): the data and the pieces that made it, nothing written.
-module.exports = { data, hoods, canonProblems: missing, layout, placeType, kindOf, band, SIM_YEAR, CYCLE, STYLE, chaosRows, RAIL, talksRead };
+module.exports = { NUM_MAP, NUM_CRIME, data, hoods, canonProblems: missing, layout, placeType, kindOf, band, SIM_YEAR, CYCLE, STYLE, chaosRows, RAIL, talksRead };
 if (require.main === module) {
 const tpl = fs.readFileSync(path.join(__dirname, 'template.html'), 'utf8');
 const places = fs.readFileSync(path.join(__dirname, 'places.js'), 'utf8');

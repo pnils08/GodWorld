@@ -102,6 +102,7 @@ body.words .tag .line, body.words .tag .more { order: 5; }
 #cityMap text.sub { font: 500 15px var(--display); fill: var(--dim); }
 #cityMap.tall text { font-size: 30px; } #cityMap.tall text.sub { font-size: 22px; }
 #mapNote { max-width: 720px; margin: 0 auto 18px; font-size: 12px; color: var(--dim); line-height: 1.4; text-align: center; }
+#facts button.nums { pointer-events: auto; background: none; border: 0; border-radius: 4px; padding: 0; font: inherit; color: var(--ink); text-decoration: underline; text-decoration-color: var(--edge); text-underline-offset: 3px; backdrop-filter: none; -webkit-backdrop-filter: none; cursor: pointer; }
 #places ul { list-style: none; margin: 0 auto; padding: 0; max-width: 720px; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
 #places li button { width: 100%; text-align: left; border-radius: 10px; padding: 12px 14px; font-size: 17px; font-weight: 800; }
 #places li small { display: block; font-weight: 500; font-size: 12px; color: var(--dim); margin-top: 3px; }
@@ -243,7 +244,7 @@ function withLine(p) {
 }
 var DBG = window.WV_DEBUG || null; // look-test hook: { cam: [x,y,z], look: [x,y,z], t0: seconds, hide: true, manual: true (the clock only moves on __wv.step(dt)), follow: { who: name or index, off: [x,y,z], aim: height } }
 if (DBG && DBG.hide) document.body.classList.add('bare');
-if (DBG) window.__wv = { get world() { return world; }, get camera() { return camera; }, get data() { return DATA; }, get state() { return { labels: labels, visiting: !!visiting, bizView: !!bizView, busy: busy, walking: walking }; }, WALK: WALK, home: function (hh) { openHome(hh); }, map: function () { $('bPlaces').click(); }, note: function (i) { if (world && world.notes[i]) startNote(world.notes[i]); }, withLine: function (p) { return withLine(p); }, visit: function (id) { if (BYID[id]) startVisit(BYID[id].d); }, step: function (dt) { if (!world || busy) return false; step(dt); if (frame++ % 6 === 0) pickNames(); placeNames(); placeChaos(); placeNotes(); draw(); return true; } };
+if (DBG) window.__wv = { get world() { return world; }, get camera() { return camera; }, get data() { return DATA; }, get state() { return { labels: labels, visiting: !!visiting, bizView: !!bizView, busy: busy, walking: walking }; }, WALK: WALK, home: function (hh) { openHome(hh); }, map: function () { $('bPlaces').click(); }, nums: function () { startNums(); }, note: function (i) { if (world && world.notes[i]) startNote(world.notes[i]); }, withLine: function (p) { return withLine(p); }, visit: function (id) { if (BYID[id]) startVisit(BYID[id].d); }, step: function (dt) { if (!world || busy) return false; step(dt); if (frame++ % 6 === 0) pickNames(); placeNames(); placeChaos(); placeNotes(); draw(); return true; } };
 var DEF = { wall: 'stucco', tone: [30, 0.15, 0.5], h: [4, 9], w: [6, 11], gap: [0.6, 2.1], lit: 0.45, fill: 'box', trees: 0, slope: 0, neon: 0, set: [] };
 
 // ---------- seeded random ----------
@@ -1143,6 +1144,34 @@ function facts() {
   var fx = $('facts'); fx.textContent = 'Week ' + DATA.cycle + '. ';
   bits.forEach(function (bit, bi) { if (bi) fx.appendChild(document.createTextNode(' \u00B7 ')); bit.forEach(function (part, pi) { if (pi % 2 === 0 && part !== '') { var bEl = document.createElement('b'); bEl.textContent = String(part); fx.appendChild(bEl); } else if (part !== '') fx.appendChild(document.createTextNode(String(part))); }); });
   fx.appendChild(document.createTextNode('.'));
+  if (H.nums) { var nb = document.createElement('button'); nb.type = 'button'; nb.className = 'nums'; nb.textContent = 'The street\u2019s numbers'; nb.addEventListener('click', startNums); fx.appendChild(document.createTextNode(' ')); fx.appendChild(nb); }
+}
+// The street's numbers: its own Neighborhood_Map row for the week and its Crime_Metrics row, as the engine holds
+// them, each beside the span the 22 streets run across. Nothing on the street is drawn from these except the
+// direction scale.
+var NUM_WORDS = { Sentiment: 'Mood', NightlifeProfile: 'Nightlife', NoiseIndex: 'Noise', RetailVitality: 'Retail', EventAttractiveness: 'Draw for events', CrimeIndex: 'Crime index', HousingPressure: 'Housing pressure', MigrationFlow: 'People moving in or out', MedianIncome: 'Median income', MedianRent: 'Median rent', DemographicMarker: 'Marker', IncomeTier: 'Income tier', EmployerCharacter: 'Employers', District: 'Council district',
+  IncidentCount: 'Incidents', PropertyCrimeIndex: 'Property crime index', ViolentCrimeIndex: 'Violent crime index', ResponseTimeAvg: 'Response time', ClearanceRate: 'Clearance rate', Trend: 'Trend', Hotspot: 'Hotspot', PressureRatio: 'Pressure ratio' };
+function startNums() {
+  var W = world, H = W && W.H; if (!H || !H.nums) return;
+  endVisit(true); if (walking) setWalk(false);
+  bizView = { s: 1, z: W.z, cx: 0, cy: 3.2, cz: W.z, lx: 0, ly: 3, lz: W.z - 40 };
+  document.body.classList.add('visit'); CARDS.forEach(function (s) { setCard(s, null); });
+  var body = $('pBody'); body.textContent = ''; $('pName').textContent = H.name; $('pBio').hidden = true;
+  $('pMeta').textContent = 'Week ' + DATA.cycle + ', as the engine holds it. Nothing on the street is drawn from these numbers except where it stands on the direction scale.';
+  function block(title, part) {
+    var keys = Object.keys(H.nums[part] || {}); if (!keys.length) return;
+    section(body, title); var ul = mk('ul', null, 'ties');
+    keys.forEach(function (k) {
+      var v = H.nums[part][k], li = mk('li'), top = mk('div'), num = v !== '' && !isNaN(Number(v));
+      top.appendChild(mk('span', (NUM_WORDS[k] || k) + ': ')); top.appendChild(mk('b', /^Median/.test(k) && num ? money(Number(v)) : v)); li.appendChild(top);
+      if (num) { var all = DATA.hoods.map(function (x) { return x.nums && x.nums[part] ? Number(x.nums[part][k]) : NaN; }).filter(function (x) { return !isNaN(x); }); if (all.length > 1) { var lo = Math.min.apply(null, all), hi = Math.max.apply(null, all), f = function (x) { return /^Median/.test(k) ? money(x) : String(x); }; li.appendChild(mk('div', 'The streets run ' + f(lo) + ' to ' + f(hi) + '.', 'pmeta')); } }
+      ul.appendChild(li);
+    });
+    body.appendChild(ul);
+  }
+  block('The neighborhood this week', 'map'); block('Crime', 'crime');
+  $('bBack').textContent = 'Back to the street';
+  $('person').hidden = false; $('person').scrollTop = 0;
 }
 var queued = null;
 function go(idx, startAt, who) {

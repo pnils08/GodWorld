@@ -424,3 +424,10 @@ test('the overview map joins exactly the neighborhoods the sim says border each 
   rejects('map', f => { mk(f); f.build.data.map.d[1] = 'D9'; });               // not the row's district
   rejects('map', f => { mk(f); f.build.data.map.xy.pop(); });                  // a neighborhood with no place on it
 });
+
+test('the street\'s numbers are the cells of its own rows', () => {
+  const mk = f => { f.sources.nmap = [{ Cycle: '115', Neighborhood: f.hood.name, Sentiment: '0.11', TrajectoryMomentum: '5', NeighborhoodTrajectory: 'steady' }]; f.sources.crime = [{ Neighborhood: f.hood.name, IncidentCount: '5' }]; f.hood.state = { dir: 'steady', scale: 0 }; f.hood.nums = { map: { Sentiment: '0.11' }, crime: { IncidentCount: '5' } }; f.second = structuredClone(f.build); return f; };
+  assert.deepEqual(check(mk(fixture())), []);
+  rejects('numbers', f => { mk(f); f.hood.nums.map.Sentiment = '0.9'; });       // not the row's cell
+  rejects('numbers', f => { mk(f); f.hood.nums.crime.Hotspot = 'yes'; });       // a cell the row does not have
+});

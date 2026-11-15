@@ -212,3 +212,17 @@ test('the door pick is a hash, not a draw', () => {
   assert.equal(sw.hashPick([], 'k'), null);
   assert.ok(!/Math\.random/.test(fs.readFileSync(path.join(__dirname, 'seatWake.js'), 'utf8')));
 });
+
+test('the resident\'s words are read from the JSON printed last, past the env banner and log lines', () => {
+  const out = '◇ injected env (33) from ../.config/godworld/.env\nsome log line\n' + JSON.stringify({ popId: 'POP-00900', name: 'Ada Lane', text: 'The trash sat {a week}.' }, null, 2) + '\n';
+  assert.equal(sw.parseVoiceOutput(out).text, 'The trash sat {a week}.');
+  assert.throws(() => sw.parseVoiceOutput('◇ injected env\n'), /no JSON object/);
+});
+
+test('a record that could not be read says so instead of printing none or vanishing', () => {
+  const p = pack();
+  p.brief.sections.events = { available: false, items: [] };
+  p.game = Object.assign({}, p.game, { petitionPool: { available: false }, patrol: { available: false }, board: [], boardAvailable: false });
+  const blocks = Object.fromEntries(sw.dataBlocks(p, OFFICE, 115).map((b) => [b.title, b.text]));
+  for (const t of ['Events in your district, Cycle 115', 'Complaints from your district', 'The patrol setting', 'Your board']) assert.equal(blocks[t], 'unavailable this wake — not an empty record', t);
+});

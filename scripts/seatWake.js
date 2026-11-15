@@ -86,22 +86,26 @@ function dataBlocks(pack, office, cycle) {
   const s = ((pack.brief || {}).sections) || {};
   const where = /^D\d$/.test(String(office.district || '')) ? 'your district' : 'the city';   // the Mayor holds no district
   const fmt = (v) => (v == null ? '' : typeof v === 'number' ? Number(v.toFixed(3)) : String(v));
+  // A record that could not be read says so — it is not an empty record (workerWake.memoryRecall's rule).
+  const UNAVAILABLE = 'unavailable this wake — not an empty record';
+  const avail = (x) => !(x && x.available === false);
   for (const d of ((s.measuredState || {}).districts) || []) {
+    const title = (d.district === office.district ? 'Your district' : 'District ' + d.district) + ', Cycle ' + cycle;
     const hoods = (d.neighborhoods || []).filter((h) => h.available !== false && h.measured);
-    if (!hoods.length) continue;
+    if (!avail(d) || !hoods.length) { out.push({ title, text: UNAVAILABLE }); continue; }
     const cols = [...new Set(hoods.flatMap((h) => Object.keys(h.measured)))];
     const rows = hoods.map((h) => Object.assign({ Neighborhood: h.hood }, ...cols.map((c) => {
       const m = h.measured[c] || {};
       return { [c]: fmt(m.value) + (m.previous != null && String(m.previous) !== String(m.value) ? ' (last Cycle ' + fmt(m.previous) + ')' : '') };
     })));
-    out.push({ title: (d.district === office.district ? 'Your district' : 'District ' + d.district) + ', Cycle ' + cycle, text: table(rows, ['Neighborhood'].concat(cols)) });
+    out.push({ title, text: table(rows, ['Neighborhood'].concat(cols)) });
   }
   const events = ((s.events || {}).items) || [];
-  out.push({ title: 'Events in ' + where + ', Cycle ' + cycle, text: events.length ? events.map((e) => '- ' + clip(e.text || e.summary || e.label || JSON.stringify(e), 400)).join('\n') : 'none' });
+  out.push({ title: 'Events in ' + where + ', Cycle ' + cycle, text: !avail(s.events) ? UNAVAILABLE : events.length ? events.map((e) => '- ' + clip(e.text || e.summary || e.label || JSON.stringify(e), 400)).join('\n') : 'none' });
   const known = (pack.known || []).filter((k) => k && k.text && !/^F-office-/.test(String(k.id || '')));   // their approval is part 2
   if (known.length) out.push({ title: 'On the record, Cycle ' + cycle, text: known.map((k) => '- ' + k.text).join('\n') });
   const ex = pack.exposure || {};
-  if ((ex.subjects || []).length) out.push({ title: 'People in ' + where + '', text: table(ex.subjects.map((p) => ({ Name: p.name, Neighborhood: p.neighborhood, Role: p.role })), ['Name', 'Neighborhood', 'Role']) });
+  if ((ex.subjects || []).length) out.push({ title: 'People in ' + where, text: table(ex.subjects.map((p) => ({ Name: p.name, Neighborhood: p.neighborhood, Role: p.role })), ['Name', 'Neighborhood', 'Role']) });
   const named = (list, label) => { if ((list || []).length) out.push({ title: label, text: list.map((b) => '- ' + [b.name, b.neighborhood || b.hood, b.type || b.kind].filter(Boolean).join(', ')).join('\n') }); };
   named(ex.businesses, 'Businesses in ' + where);
   named(ex.churches, 'Congregations in ' + where);
@@ -109,13 +113,18 @@ function dataBlocks(pack, office, cycle) {
     out.push({ title: 'Your board', text: table(g.board.map((b) => ({ Initiative: b.id, Name: b.name, Category: b.domain, Stage: b.stage || '', Status: b.status || '', Neighborhoods: (b.hoods || []).join(', '),
       Budget: String(b.budget || '').replace(/^budget:\s*/, ''), 'Vote Cycle': b.voteCycle == null ? '' : b.voteCycle, 'Next step due': b.nextActionCycle == null ? '' : 'C' + b.nextActionCycle,
       Next: b.needsNext || '', Yours: b.sponsored ? 'sponsor' : '' })), ['Initiative', 'Name', 'Category', 'Stage', 'Status', 'Neighborhoods', 'Budget', 'Vote Cycle', 'Next step due', 'Next', 'Yours']) });
-  } else out.push({ title: 'Your board', text: 'none' });
+  } else out.push({ title: 'Your board', text: g.boardAvailable === false ? UNAVAILABLE : 'none' });
+  if (g.categories && !g.categories.available) out.push({ title: 'Categories and budget bands', text: UNAVAILABLE });
   if (g.categories && g.categories.available) out.push({ title: 'Categories and budget bands', text: table(g.categories.list.map((c) => ({ Category: c.key, Covers: c.label, Band: c.band })), ['Category', 'Covers', 'Band']) });
   const pool = g.petitionPool || {};
-  if (pool.available) out.push({ title: 'Complaints from ' + where + '', text: (pool.complaints || []).length ? table(pool.complaints.map((c) => ({ Cycle: c.cycle, Neighborhood: c.hood, Said: c.snippet, Mood: c.affect })), ['Cycle', 'Neighborhood', 'Said', 'Mood']) : 'none' });
+  if (g.petitionPool && !pool.available) out.push({ title: 'Complaints from ' + where, text: UNAVAILABLE });
+  if (pool.available) out.push({ title: 'Complaints from ' + where, text: (pool.complaints || []).length ? table(pool.complaints.map((c) => ({ Cycle: c.cycle, Neighborhood: c.hood, Said: c.snippet, Mood: c.affect })), ['Cycle', 'Neighborhood', 'Said', 'Mood']) : 'none' });
   const probs = ((g.problemContinuity || {}).problems) || [];
+  if (g.problemContinuity && !g.problemContinuity.available) out.push({ title: 'Conditions counted in ' + where + ', Cycle ' + cycle, text: UNAVAILABLE });
   if (probs.length) out.push({ title: 'Conditions counted in ' + where + ', Cycle ' + cycle, text: table(probs.map((p) => ({ Neighborhood: p.hood, Condition: p.label, Count: p.count })), ['Neighborhood', 'Condition', 'Count']) });
+  if (g.workingCity && !g.workingCity.available) out.push({ title: 'What the city\'s workers last said', text: UNAVAILABLE });
   if (g.workingCity && g.workingCity.available) out.push({ title: 'What the city\'s workers last said', text: String(g.workingCity.text || '').replace(/^The working city:\n?/, '') });
+  if (g.patrol && !g.patrol.available) out.push({ title: 'The patrol setting', text: UNAVAILABLE });
   if (g.patrol && g.patrol.available) out.push({ title: 'The patrol setting', text: String(g.patrol.text || '') });
   const peers = ((pack.role || {}).civicPeers) || [];
   if (peers.length) out.push({ title: 'Seats in your faction', text: table(peers.map((p) => ({ Seat: p.OfficeId, Holder: p.Holder, District: p.District, Approval: p.Approval })), ['Seat', 'Holder', 'District', 'Approval']) });
@@ -219,11 +228,21 @@ function toolsFor(office, pack) {
   return t;
 }
 
-// The resident's own voice: citizenVoice.js, read-only (no --record), as the reporters' interviews call it.
+// The resident's own voice: citizenVoice.js, read-only (no --record), as the reporters' interviews call it. Its --json
+// object is printed last; lib/env's banner and any log line reach stdout before it (cron-desk-run.js parseBatchResults
+// reads the batch form the same way, from the last bracket pair).
+function parseVoiceOutput(out) {
+  const lines = String(out || '').split('\n');
+  let end = -1, start = -1;
+  for (let i = lines.length - 1; i >= 0; i--) { if (lines[i].trim() === '}') { end = i; break; } }
+  for (let i = end; i >= 0; i--) { if (lines[i] === '{') { start = i; break; } }
+  if (start < 0 || end <= start) throw new Error('no JSON object in the citizen voice output');
+  return JSON.parse(lines.slice(start, end + 1).join('\n'));
+}
 function voiceResident(popId, ask, cycle) {
   const out = execFileSync('node', [path.join(ROOT, 'scripts', 'citizenVoice.js'), '--pop=' + popId, '--ask=' + ask, '--json', '--cycle=' + cycle],
     { cwd: ROOT, encoding: 'utf8', timeout: 180000, stdio: ['ignore', 'pipe', 'ignore'] });
-  return JSON.parse(out);
+  return parseVoiceOutput(out);
 }
 // A door knocked on in a neighborhood: the pick is a hash of the day, the seat, the neighborhood and the call's place
 // in the wake — the same call again reaches the same door.
@@ -317,4 +336,4 @@ function moveLedgerLines(office, cycle, date, mv) {
 }
 
 module.exports = { isSeat, buildWake, toolsFor, toolExecutor, moveLedgerLines, approvalBlock, lastCycleApproval, dataBlocks, pastDecisions,
-  maraQuestion, hashPick, MAX_TOOL_CALLS, CHALLENGER_NAMED_BELOW, SEAT_LOST_BELOW };
+  maraQuestion, hashPick, parseVoiceOutput, MAX_TOOL_CALLS, CHALLENGER_NAMED_BELOW, SEAT_LOST_BELOW };

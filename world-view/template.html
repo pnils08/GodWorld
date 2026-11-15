@@ -944,10 +944,12 @@ function build(idx) {
   // people: one record for each tracked citizen with a week on record here. The page decides where each stands;
   // life-people.js draws them and moves them, and keeps x and z on the record current.
   var SIZE = { child: 0.6, teen: 0.84, youth: 0.95, senior: 0.94 }, people = [];
+  // the engine logged a busy pavement here this cycle (a sidewalk_activity or foot_traffic texture): fewer of them stand still
+  var afoot = (H.notes || []).some(function (nt) { return nt.k === 'x' && /^(sidewalk_activity|foot_traffic)$/.test(nt.key || ''); });
   var seq = H.people.map(function (_, k) { return k; }); for (i = seq.length - 1; i > 0; i--) { var j = Math.floor(r() * (i + 1)), tmp = seq[i]; seq[i] = seq[j]; seq[j] = tmp; }
   var span = (LAY.Lm || L) - 26; // people keep to the main street; the residential stretch beyond it is homes
   seq.forEach(function (pi, slot) {
-    var p = H.people[pi], s = slot % 2 ? 1 : -1, still = r() < 0.22;
+    var p = H.people[pi], s = slot % 2 ? 1 : -1, still = r() < (afoot ? 0.1 : 0.22);
     people.push({ d: p, s: s, x: s * (ROAD + 1.0 + r() * 2.4), z0: -6 - (slot + r() * 0.6) / Math.max(1, n) * span, amp: still ? 0 : 7 + r() * 16, sc: (SIZE[p.ab] || 1) * (0.95 + r() * 0.12) * (p.g === 'f' ? 0.96 : 1), z: 0, long: p.g === 'f' && r() < 0.75, kc: KIND[p.k] || KIND.p });
   });
   // someone who runs a business on this street stands outside it; a household on the same street keeps together
@@ -1154,9 +1156,9 @@ function go(idx, startAt, who) {
     if (startAt) world.z = 10 - (10 - world.gz) * startAt;
     yaw = 0; pitch = 0; step(0); draw();
     last = performance.now(); clock0 = last; slow = 0;
-    try { history.replaceState(null, '', '#' + (who && !who.home ? 'who-' + slug(who.n) + '-' + String(who.id || '').replace(/\D/g, '') : slug(world.H.name))); } catch (e) {}
+    try { history.replaceState(null, '', '#' + (who && !who.home && who.note == null ? 'who-' + slug(who.n) + '-' + String(who.id || '').replace(/\D/g, '') : slug(world.H.name))); } catch (e) {}
     $('fade').classList.remove('on'); busy = false;
-    if (who && who.home) openHome(who.home); else if (who) startVisit(who);
+    if (who && who.home) openHome(who.home); else if (who && who.note != null) { if (world.notes[who.note]) startNote(world.notes[who.note]); } else if (who) startVisit(who);
     if (DBG && DBG.ride != null && world.H.chaos && world.H.chaos[DBG.ride]) startChaos(world.H.chaos[DBG.ride]);
     if (queued) { var q = queued; queued = null; go(q[0], q[1], q[2]); }
   }, world ? 400 : 0);
@@ -1347,7 +1349,21 @@ $('places').addEventListener('click', function (e) { if (e.target.id === 'places
 var ALLP = [];
 DATA.hoods.forEach(function (H, hi) { H.people.forEach(function (d) { ALLP.push({ h: hi, d: d, hood: H.name, key: (d.n + ' ' + (d.role || '') + ' ' + H.name).toLowerCase() }); }); });
 var BYID = {}; ALLP.forEach(function (e) { if (e.d.id) BYID[e.d.id] = e; });
-var BYNAME = {}; ALLP.forEach(function (e) { if (!BYNAME[e.d.n]) BYNAME[e.d.n] = e; });
+// by name, for rows that name a person without an id (the sports feed): only a name one person on the page has
+var BYNAME = {}, NAMEN = {}; ALLP.forEach(function (e) { NAMEN[e.d.n] = (NAMEN[e.d.n] || 0) + 1; }); ALLP.forEach(function (e) { if (NAMEN[e.d.n] === 1) BYNAME[e.d.n] = e; });
+// what else the week's notices hold about a person: a program they founded, their cultural-ledger entry, an
+// organization they lead, a retirement, promotion or death (theirs, or one that reached them), a sports row that
+// names them. Each line opens its notice, on whichever street it stands.
+var ALSO = {};
+function goNote(hi, ni) { if (world && DATA.hoods[hi] === world.H) { endVisit(true); if (world.notes[ni]) startNote(world.notes[ni]); } else go(hi, 0, { note: ni }); }
+DATA.hoods.forEach(function (H, hi) { (H.notes || []).forEach(function (nt, ni) {
+  var put = function (id, text) { if (id) (ALSO[id] = ALSO[id] || []).push({ t: text, h: hi, n: ni }); };
+  if (nt.k === 'p') nt.list.forEach(function (it) { put(it.f, 'Founded ' + it.n + (it.since ? ', week ' + it.since : '')); });
+  else if (nt.k === 'c') nt.list.forEach(function (it) { put(it.pop, 'On the cultural ledger: ' + [it.role, it.tier ? it.tier.toLowerCase() : '', it.trend].filter(Boolean).join(' \u00B7 ')); });
+  else if (nt.k === 'f') put(nt.lid, 'Leads ' + nt.n);
+  else if (nt.k === 'l') { put(nt.sub, nt.x); (nt.rec || []).forEach(function (m) { put(m[0], nt.n + ': ' + nt.x); }); }
+  else if (nt.k === 's' && nt.names) nt.names.split(/,\s*/).forEach(function (raw) { var e = BYNAME[raw.replace(/\s*\([^)]*\)\s*$/, '')]; if (e) put(e.d.id, 'Named on the sports feed: ' + nt.x); });
+}); });
 ALLP.sort(function (a, b) { return (a.d.tier || 9) - (b.d.tier || 9) || (b.d.fame || 0) - (a.d.fame || 0) || b.d.all.length - a.d.all.length || (a.d.n < b.d.n ? -1 : 1); });
 function listPeople() {
   var q = $('q').value.trim().toLowerCase(), ul = $('peopleList'), hits = q ? ALLP.filter(function (e) { return e.key.indexOf(q) >= 0; }) : ALLP;
@@ -1676,6 +1692,11 @@ function startVisit(d) {
     });
     body.appendChild(kl);
     if (kn.some(function (t) { return !BYID[t.a === d.id ? t.b : t.a]; })) body.appendChild(mk('p', 'Greyed names had nothing on record this week, so they are not on a street.', 'pmeta'));
+  }
+  if (ALSO[d.id]) {
+    section(body, 'Also on record'); var al = mk('ul', null, 'ties');
+    ALSO[d.id].forEach(function (a) { var li = mk('li'), ab = mk('button', a.t, 'link'); ab.type = 'button'; ab.addEventListener('click', function () { goNote(a.h, a.n); }); li.appendChild(ab); if (DATA.hoods[a.h] !== world.H) li.appendChild(mk('span', ' \u00B7 ' + DATA.hoods[a.h].name, 'quiet')); al.appendChild(li); });
+    body.appendChild(al);
   }
   if (d.hist) { section(body, 'Before this week'); var hl = mk('ul'); d.hist.forEach(function (hx) { var li = mk('li'); li.appendChild(mk('span', hx[0], 'when')); li.appendChild(mk('span', hx[1])); hl.appendChild(li); }); body.appendChild(hl); }
   $('person').hidden = false; $('person').scrollTop = 0;

@@ -239,6 +239,23 @@ Two Sonnet agents, read-only: one over the tab dumps (`output/beats/*.jsonl`), `
 
 **Computed and not kept (engine agent's list):** `S.crimeLag`; enforcement load, policing capacity and patrol name except as packet prose; transit alerts (`S.transitMetrics.alerts`), and the packet's TRANSIT block never prints (G-EC63); `S.chaosFriction`; the death count; `S.shockReasons`; per-hood sick / OARI-eligible / OARI-diversion counts (not census columns); a chaos row's second metric; the cargo ship after its first week (carried in state, one tab row).
 
+## Council / Mayor: does any wake today use tools and decide untold (read 2026-11-14, no run)
+
+**Builder (2026-11-14):** "we will look at which sounds most like its build without being told, which is using tools and making decisions. if none fit this then we are working from a clean slate, this will be like the police chief in that we dont want to tell them what to do , however these will likely need some level of instruction on how to do things … we wont run any dry runs until get a template set we can agree on. the thing to watch is veering into puppeting them too much".
+
+**Live weekday records** (`output/cron-civic/datawake/`, the Mayor and the nine seats, 2026-08-17 → 2026-11-12): 111 wakes. The one tool (the evidence read) used in 4 (D2 ×2, D4, Mayor). Moves: 62 `answer` (replies to Mara's questions), 23 the seat's own (D1 4, D2 3, D3 0, D4 4, D5 2, D6 0, D7 5, D8 2, D9 1, Mayor 2: propose, work, call-vote, canvass); the rest no move.
+
+**What tells them what:** the whole pack is shown as JSON (`civicBrief.promptBrief` strips only `_briefEvidence`), and it carries `task.goal`, `pulse.lever` and `prewrite.claim` naming one initiative and the act — D2 C115: INIT-006, "advance or hold this initiative". The wake prints the lever again ("This week's pulse from your pack (yours to take up or leave)", `cron-civic-run.js` `datawakeUserPrompt`). D2's 2026-11-12 record: one read, of INIT-006, and a hold on INIT-006.
+
+| Wake | Tools | Decides | Told what |
+|---|---|---|---|
+| Weekday, live | one (evidence read), 4 of 111 | 23 own moves of 111 | the pack's one initiative + "advance or hold" |
+| Sunday hearing | none | yes or no on the agenda in front of them | the agenda is the task |
+| Runs 1–2 (written file / sheet line / sheet + written) | as live | the same act in every version | the pack, not the boot, sets the act |
+| Run 4 (Delgado, live weekday + an offer to ask a worker) | asked the chief untold 2 of 3 | what she learned changed the act: safety proposal after asking, economic proposal unasked, no proposal in the other | the same pack and lever; and she spent an `answer` move replying to the chief |
+
+**Read:** none fits. Run 4's shape — a tool offered, using it her choice, the decision following from what came back — is the one part to keep; it ran on the pack that names her item. By the builder's rule above, none fitting means the council template starts from a clean slate.
+
 ## Templates — where each type stands (2026-11-13)
 
 **Builder (2026-11-13):** "before we move to fine tune the workflows should we make sure our agent templates are set? … we may 'worker' , 'council/mayor', 'citizens' 'gates/rhea'?"

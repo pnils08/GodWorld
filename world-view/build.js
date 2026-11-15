@@ -312,6 +312,55 @@ if (process.env.CHAOS_TEST) {
   if (th) { th.chaos = Object.keys(CHAOS_NAMES).map(v => ({ v, n: CHAOS_NAMES[v], o: 'look_test', scope: 'neighborhood', id: th.name, to: th.name, test: 1 })); console.warn('world-view: CHAOS_TEST — ' + th.name + ' carries made-up chaos cars. Do not publish this build.'); }
 }
 
+// ---------- who knows whom: Relationship_Bonds, the bond engine's master state ----------
+// One row a pair: BondType, Intensity 0..10, Status. The page carries every active bond between two citizen ids
+// where at least one of them is on a street this week (the wake tells a citizen about active bonds only:
+// lib/wakePerception.js loadBonds). A row whose second party is not a citizen id (a bare name, an off-camera
+// partner) cannot be shown and is counted in the log. The engine records the tie, not a meeting: two people
+// stopping to talk on a street is drawn from the tie (life-people.js), never stated as something that happened.
+// What did happen is a saved conversation (scripts/citizen-exchange.js writes output/exchanges/, one bonded pair a
+// day): the pair's latest one, at or before the dumped cycle, rides on their tie with its week, word for word.
+let bondRows = null;
+try { bondRows = rd('Relationship_Bonds'); } catch (e) { console.warn('world-view: no Relationship_Bonds in the dump; nobody is shown knowing anybody'); }
+const shownAt = new Map(); hoods.forEach(h => h.people.forEach(p => shownAt.set(p.id, h.name)));
+const isPop = v => /^POP-\d+$/.test(String(v || ''));
+const pairKey = (a, b) => (a < b ? a + '|' + b : b + '|' + a);
+const EXCHANGES = path.join(__dirname, '..', 'output', 'exchanges');
+function talksRead(cycle) {
+  const latest = new Map();
+  let files = []; try { files = fs.readdirSync(EXCHANGES).sort(); } catch (e) { return latest; }
+  files.forEach(f => {
+    const m = /^exchange_c(\d+)_(\d{4}-\d{2}-\d{2})_conversation\.md$/.exec(f); if (!m || !(Number(m[1]) <= Number(cycle))) return;
+    const text = fs.readFileSync(path.join(EXCHANGES, f), 'utf8'), pm = /^- participants: (.+)$/m.exec(text);
+    const ps = pm ? pm[1].split(' | ').map(x => /^(POP-\d+) (.+)$/.exec(x.trim())) : [];
+    if (ps.length !== 2 || ps.some(x => !x)) { console.warn('world-view: ' + f + ' does not name two citizens; left off the page'); return; }
+    const lines = []; let stray = 0;
+    text.split('\n').forEach(l => { const lm = /^\*\*(.+?):\*\* (.*)$/.exec(l); if (!lm) return; const i = lm[1] === ps[0][2] ? 0 : lm[1] === ps[1][2] ? 1 : -1; if (i < 0) stray++; else lines.push([i, lm[2].trim()]); });
+    if (stray || !lines.length) { console.warn('world-view: ' + f + ' has lines from someone other than its two citizens, or none; left off the page'); return; }
+    const key = pairKey(ps[0][1], ps[1][1]), prev = latest.get(key), at = [Number(m[1]), m[2]];
+    if (!prev || prev.at[0] < at[0] || (prev.at[0] === at[0] && prev.at[1] < at[1])) latest.set(key, { at, ids: [ps[0][1], ps[1][1]], lines, f });
+  });
+  return latest;
+}
+const talks = bondRows ? talksRead(CYCLE) : new Map();
+const ties = [], offStreet = {}, tieSkips = { notCitizen: 0, noName: 0, talksNoTie: 0 };
+(bondRows || []).forEach(r => {
+  if (String(r.Status || '').trim().toLowerCase() !== 'active') return;
+  if (!isPop(r.CitizenA) || !isPop(r.CitizenB)) { tieSkips.notCitizen++; return; }
+  const a = r.CitizenA, b = r.CitizenB;
+  if (a === b || (!shownAt.has(a) && !shownAt.has(b))) return;
+  const other = shownAt.has(a) ? (shownAt.has(b) ? null : b) : a;
+  if (other) { const nm = nameOf(other); if (!nm) { tieSkips.noName++; return; } offStreet[other] = nm; }
+  const t = { a, b, t: String(r.BondType || '').trim().toLowerCase(), i: Number(r.Intensity) || 0 };
+  const note = String(r.Notes || '').replace(/^seeded\s*/, '').trim(); if (note) t.note = note;
+  if (/^\d+$/.test(String(r.CycleCreated))) t.since = Number(r.CycleCreated);
+  if (/^\d+$/.test(String(r.LastUpdate))) t.up = Number(r.LastUpdate);
+  const tk = talks.get(pairKey(a, b));
+  if (tk) { t.talk = { c: tk.at[0], lines: tk.lines.map(l => [tk.ids[l[0]] === a ? 0 : 1, l[1]]) }; tk.used = true; }
+  ties.push(t);
+});
+talks.forEach(tk => { if (!tk.used && tk.ids.some(id => shownAt.has(id))) tieSkips.talksNoTie++; });
+
 const onStreets = new Set(hoods.map(h => h.name));
 const unplacedBiz = biz.filter(x => !onStreets.has(x.Neighborhood)).map(x => ({ n: x.Name, hood: x.Neighborhood }));
 const wx = process.env.WX || '';
@@ -323,12 +372,14 @@ const data = {
   landmarks: STYLE.LANDMARKS,
   notShown,
   unplacedBiz,
-  chaos: { read: chaosRead != null, total: (chaosRead || []).length, elsewhere: chaosElsewhere }
+  chaos: { read: chaosRead != null, total: (chaosRead || []).length, elsewhere: chaosElsewhere },
+  ties,
+  offStreet
 };
 hoods.forEach(h => { data.style[h.name] = STYLE[h.name]; });
 
 // Required as a module (a check script, a test): the data and the pieces that made it, nothing written.
-module.exports = { data, hoods, canonProblems: missing, layout, placeType, kindOf, band, SIM_YEAR, CYCLE, STYLE, chaosRows, RAIL };
+module.exports = { data, hoods, canonProblems: missing, layout, placeType, kindOf, band, SIM_YEAR, CYCLE, STYLE, chaosRows, RAIL, talksRead };
 if (require.main === module) {
 const tpl = fs.readFileSync(path.join(__dirname, 'template.html'), 'utf8');
 const places = fs.readFileSync(path.join(__dirname, 'places.js'), 'utf8');
@@ -350,5 +401,13 @@ console.log('sex known', everyone.filter(p => p.g).length, 'bands', JSON.stringi
 console.log('recorded but not shown:', notShown.length, '| businesses with no street:', unplacedBiz.length, unplacedBiz.map(x => x.n + ' (' + x.hood + ')').join('; '));
 console.log(hoods.map(h => h.name + ': ' + h.lay.places.map(p => p.type).join(',')).filter(s => !/: $/.test(s)).join('\n'));
 console.log('rail line on:', hoods.filter(h => h.lay.places.some(p => p.type === 'station' || p.type === 'rail')).map(h => h.name).join(', '), '| stations by the engine with no line drawn:', Object.keys(RAIL).filter(n => { const h = hoods.find(x => x.name === n); return !h || !h.lay.places.some(p => p.type === 'station' || p.type === 'rail'); }).join(', ') || 'none');
+{
+  const onOne = ties.filter(t => shownAt.get(t.a) && shownAt.get(t.a) === shownAt.get(t.b)), byType = {};
+  onOne.forEach(t => { byType[t.t] = (byType[t.t] || 0) + 1; });
+  console.log('ties:', bondRows == null ? 'no Relationship_Bonds in the dump (none shown)' : ties.length + ' active bonds with someone on a street; ' + onOne.length + ' with both on one street (' + Object.keys(byType).sort((x, y) => byType[y] - byType[x]).map(k => byType[k] + ' ' + k).join(', ') + '); '
+    + ties.filter(t => t.talk).length + ' carry a saved conversation (' + onOne.filter(t => t.talk).length + ' of them on one street)'
+    + (tieSkips.notCitizen ? '; ' + tieSkips.notCitizen + ' active row(s) name someone who is not a citizen id, not shown' : '') + (tieSkips.noName ? '; ' + tieSkips.noName + ' with no name on the ledger, not shown' : '')
+    + (tieSkips.talksNoTie ? '; ' + tieSkips.talksNoTie + ' saved conversation(s) between people whose bond is no longer active, not shown' : ''));
+}
 console.log('chaos cars:', chaosRead == null ? 'no world summary for C' + CYCLE + ' (none drawn)' : chaosRead.length + ' this week — ' + hoods.filter(h => h.chaos.length).map(h => h.name + ': ' + h.chaos.map(c => c.n + ' (' + c.o + (c.to && c.to !== h.name ? ' → ' + c.to : '') + ')').join(', ')).join('; ') + (chaosElsewhere.length ? '; not on a street: ' + chaosElsewhere.map(c => c.n + ' → ' + c.to).join(', ') : ''));
 }

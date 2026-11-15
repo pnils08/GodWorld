@@ -289,3 +289,26 @@ test('disk runner reports known-unplaced separately and still fails genuine miss
   assert.equal(run(d.dir, d.io), 1);
   assert.ok(d.messages.err.some(s => s.startsWith('FAIL unplaced ')));
 });
+
+// who knows whom: ties and the saved conversations that ride on them
+function tied(f, over) {
+  const row = Object.assign({ BondId: 'BOND-SYN', CitizenA: 'POP-90001', CitizenB: 'POP-90002', BondType: 'friendship', Intensity: '6.5', Status: 'active', CycleCreated: '102', LastUpdate: '115', Notes: 'seeded [Deepened into friendship C115]' }, over || {});
+  f.sources.bonds = [row];
+  f.sources.exchanges = { 'exchange_c114_2042-01-01_conversation.md': '# Exchange\n\n- participants: POP-90002 SYNTHETIC Citizen Two | POP-90001 SYNTHETIC Citizen One\n\n---\n\n**SYNTHETIC Citizen Two:** SYNTHETIC hello.\n\n**SYNTHETIC Citizen One:** SYNTHETIC reply.\n' };
+  f.build.data.ties = [{ a: 'POP-90001', b: 'POP-90002', t: 'friendship', i: 6.5, note: '[Deepened into friendship C115]', since: 102, up: 115, talk: { c: 114, lines: [[1, 'SYNTHETIC hello.'], [0, 'SYNTHETIC reply.']] } }];
+  f.build.data.offStreet = { 'POP-90002': 'SYNTHETIC Citizen Two' };
+  return f;
+}
+test('a tie is an active bond row, in the row\'s order, with the pair\'s latest saved conversation', () => {
+  assert.deepEqual(check(tied(fixture())), []);
+  rejects('tie', f => { tied(f); f.build.data.ties[0].t = 'rivalry'; });                          // not the row's type
+  rejects('tie', f => { tied(f); f.build.data.ties[0].i = 9; });                                  // not the row's intensity
+  rejects('tie', f => { tied(f, { Status: 'dormant' }); });                                       // a faded bond shown
+  rejects('tie', f => { tied(f, { CitizenB: 'SYNTHETIC Citizen Two' }); });                       // a bare name is not a citizen id
+  rejects('tie', f => { tied(f); f.build.data.ties = []; f.build.data.offStreet = {}; });         // an active bond left off the page
+  rejects('tie', f => { tied(f); delete f.build.data.ties[0].talk; });                            // a saved conversation left off
+  rejects('tie', f => { tied(f); f.build.data.ties[0].talk.lines[0][1] = 'SYNTHETIC other words.'; }); // not the words on file
+  rejects('tie', f => { tied(f); f.sources.exchanges = { 'exchange_c116_2042-01-09_conversation.md': Object.values(f.sources.exchanges)[0] }; }); // a later cycle's conversation is not this page's
+  rejects('tie', f => { tied(f); f.build.data.offStreet['POP-90002'] = 'SYNTHETIC Wrong Name'; }); // an off-street name that is not the ledger's
+  rejects('tie', f => { tied(f); f.build.data.ties[0].a = 'POP-90002'; f.build.data.ties[0].b = 'POP-90001'; }); // not in the row's order
+});

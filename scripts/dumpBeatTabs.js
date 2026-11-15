@@ -62,6 +62,7 @@ const BEAT_TABS = [
   'Story_Seed_Deck',          // the engine's per-desk seeds: Citizens + Businesses attached
   'Story_Hook_Deck',          // the engine's hooks: SuggestedJournalist + SuggestedAngle
   'Neighborhood_Map',         // the Oakland week page (infrastructure.19) — each hood's state this cycle: trajectory and its momentum, nightlife, retail, sentiment, flow
+  'Relationship_Bonds',       // the Oakland week page (infrastructure.19) — who knows whom: the bond engine's master state (type, intensity, status), one row a pair
 ];
 
 // Lazy-created tabs (engine.119: the cycle never creates a tab; the closure

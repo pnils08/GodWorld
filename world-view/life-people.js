@@ -19,6 +19,16 @@
 // rise and fall on the standing leg, and stride follows speed, so nothing slides. Phase advances with
 // distance covered, not with the clock.
 //
+// People who know each other: k.ties is the page's list for this street, [a, b, tie], two of these records and the
+// bond row the sim holds for them (t type, i intensity 0..10). The sim holds the tie, not a meeting, so what is drawn
+// is how two people who know each other behave when they share a street; nothing on the page says it happened.
+//   - a good tie: now and then one goes over to the other, or the two stop as they pass. They stand facing each
+//     other and talk, taking turns (the one talking moves a hand), then go on. A stronger tie: more often, longer.
+//   - a bad tie (rivalry, tension, sports_rival): no stopping. Each looks at the other, then away; whoever is
+//     walking gives them the width of the pavement and picks up the pace; whoever is standing turns their back.
+// A household walks as one body, so its tie is carried by whoever leads it. While it lasts each of the two carries
+// meet = { q: the other, t: the tie, bad }, which the page's card reads.
+//
 // Draw calls: torsos, hips, coats, heads, hair, long hair, thighs, shins, shoes, upper arms, forearms, hands,
 // ground shadows, week lights. Everything sits under k.root.
 LIFE.people = function (k, list) {
@@ -144,6 +154,95 @@ LIFE.people = function (k, list) {
   var simT = 0, warm = false, tick = 0, camX = 0, camZ = 0;
   var dbg = window.WV_DEBUG && window.WV_DEBUG.people ? (window.__wvPeople = []) : null; // look-test: who came to a stop on top of someone, and how
   function heading(p) { return p.dir < 0 ? 0 : Math.PI; }
+  // ---------- people who know each other ----------
+  var BAD = { rivalry: 1, tension: 1, sports_rival: 1 }, links = [];
+  function boss(p) { return p.lead || p; }
+  function face(p, q) { return Math.atan2(q.x - p.x, q.z - p.z) + Math.PI; } // the way p turns to look at q
+  (k.ties || []).forEach(function (tp) {
+    var a = tp[0], b = tp[1], A = boss(a), B = boss(b); if (A === B || a.i == null || b.i == null) return;
+    var ln = { a: a, b: b, A: A, B: B, t: tp[2], bad: !!BAD[tp[2].t], w: clamp((tp[2].i || 0) / 10, 0.15, 1), st: 0, cool: R2() * 8, until: 0, t0: 0, seeker: null, turnAt: 0, speak: 0, near: false };
+    links.push(ln); (A.links = A.links || []).push(ln); (B.links = B.links || []).push(ln);
+  });
+  if (window.WV_DEBUG) window.__wvLinks = links;
+  function other(ln, p) { return ln.A === p ? ln.B : ln.A; }
+  function theirs(ln, p) { return ln.A === p ? ln.b : ln.a; } // the one of the other household the tie is with
+  // where p stands to talk to q: a pace off along the street, further when a household is standing on that side
+  function standoff(p, q) { var side = p.z >= q.z ? 1 : -1; return side * (0.95 + (side > 0 ? (q.size ? 1.9 : 0) : (p.size ? 1.9 : 0))); }
+  function hush(p, ln) { p.link = ln; if (p.st === 1) p.tz = p.z + p.dir * 0.35; else p.until = simT + 60; } // come to a stop and wait
+  function gather(ln) { ln.st = 2; ln.t0 = simT; hush(ln.A, ln); hush(ln.B, ln); }
+  function begin(ln) {
+    ln.st = 3; ln.t0 = simT; ln.until = simT + 6 + 14 * ln.w + R2() * 6; ln.speak = R2() < 0.5 ? 0 : 1; ln.turnAt = 0;
+    ln.a.meet = { q: ln.b, t: ln.t, bad: false }; ln.b.meet = { q: ln.a, t: ln.t, bad: false };
+    ln.A.eye = ln.a.eye = ln.b; ln.B.eye = ln.b.eye = ln.a; ln.A.eyeAway = ln.B.eyeAway = ln.a.eyeAway = ln.b.eyeAway = false;
+  }
+  function clearPair(ln) {
+    [ln.A, ln.B, ln.a, ln.b].forEach(function (p) { p.eye = null; p.eyeAway = false; p.gest = 0; if (p.meet && p.meet.t === ln.t) p.meet = null; });
+  }
+  function endTalk(ln, cool) {
+    [ln.A, ln.B].forEach(function (p) {
+      if (p.link !== ln) return; p.link = null; p.meetCool = simT + 15 + R2() * 25;
+      if (p.st === 0 && !p.hold) { if (p.amp) p.until = simT + 0.3 + R2() * 1.2; else settle(p, true); }
+    });
+    clearPair(ln); ln.st = 0; ln.seeker = null; ln.near = true; ln.cool = simT + cool;
+  }
+  function endShun(ln, cool) {
+    [ln.A, ln.B].forEach(function (p) { p.shun = null; p.brisk = 1; if (p.st === 0 && !p.link && !p.hold) settle(p, false); });
+    clearPair(ln); ln.st = 0; ln.cool = simT + cool;
+  }
+  function shunTick(ln, A, B, d) {
+    var busy = A.hold || B.hold || (A.link && A.link.st >= 2) || (B.link && B.link.st >= 2);
+    if (ln.st === 0) {
+      if (busy || simT < ln.cool || d > 9 || (A.st !== 1 && B.st !== 1)) return;
+      ln.st = 5; ln.t0 = simT; A.shun = B; B.shun = A; A.brisk = B.brisk = 1.25;
+      ln.a.meet = { q: ln.b, t: ln.t, bad: true }; ln.b.meet = { q: ln.a, t: ln.t, bad: true };
+    }
+    var el = simT - ln.t0;
+    if (busy || d > 11 || el > 14) { endShun(ln, 30 + R2() * 30); return; }
+    ln.A.eye = ln.a.eye = ln.b; ln.B.eye = ln.b.eye = ln.a; ln.A.eyeAway = ln.B.eyeAway = ln.a.eyeAway = ln.b.eyeAway = el > 1.0;
+    [A, B].forEach(function (p) {
+      if (p.st !== 0 || p.link || el < 0.8) return;
+      // standing: turn to the wall, and a little further, so their back is to the other
+      var q = other(ln, p), wall = -p.s * Math.PI / 2, away = q.z > p.z ? 0 : Math.PI;
+      p.yawT = wall + 0.5 * (wrap(away - wall) > 0 ? 1 : -1); p.until = Math.max(p.until, simT + 1.5);
+    });
+  }
+  function meetTick() {
+    for (var i = 0; i < links.length; i++) {
+      var ln = links[i], A = ln.A, B = ln.B; if (A.s !== B.s) continue; // nobody crosses the road
+      var d = Math.abs(A.z - B.z);
+      if (ln.bad) { shunTick(ln, A, B, d); continue; }
+      if (ln.st === 0) {
+        // passing each other: the stronger the tie, the likelier they stop
+        if (d > 4) ln.near = false;
+        else if (d < 2.4 && !ln.near && Math.abs(Math.abs(A.x) - Math.abs(B.x)) < 2.2) {
+          ln.near = true;
+          if (simT >= ln.cool && !A.hold && !B.hold && !A.link && !B.link && (A.st === 1 || B.st === 1) && R2() < 0.35 + 0.5 * ln.w) gather(ln);
+        }
+        continue;
+      }
+      if (A.hold || B.hold || simT - ln.t0 > 80) { endTalk(ln, 20); continue; }
+      if (ln.st === 1) {
+        // one is on the way over; the other waits once they are in sight of each other
+        var S = ln.seeker, Q = other(ln, S);
+        if ((Q.link && Q.link !== ln) || S.link !== ln) { endTalk(ln, 15); continue; }
+        if (S.st === 1) {
+          S.tz = clamp(Q.z + standoff(S, Q), zMin, zMax); S.laneT = clamp(Math.abs(Q.x), LO, HI);
+          var nd = S.tz > S.z ? 1 : -1; if (nd !== S.dir && Math.abs(S.tz - S.z) > 0.6) S.dir = nd;
+        }
+        if (d < 12 && !Q.link) hush(Q, ln);
+      } else if (ln.st === 2) {
+        if ((A.link && A.link !== ln) || (B.link && B.link !== ln)) { endTalk(ln, 15); continue; }
+        if (!A.link) hush(A, ln); if (!B.link) hush(B, ln);
+        if (A.st === 0 && B.st === 0 && A.v < 0.12 && B.v < 0.12) { if (d <= 3.3 + (A.size || B.size ? 2 : 0)) begin(ln); else { endTalk(ln, 20); continue; } }
+      }
+      if (ln.st === 3) {
+        if (simT >= ln.until) { endTalk(ln, 90 + R2() * 120); continue; }
+        if (simT >= ln.turnAt) { ln.speak = 1 - ln.speak; ln.turnAt = simT + 1.6 + R2() * 3.4; ln.a.gest = ln.speak === 0 ? 1 : 0; ln.b.gest = ln.speak === 1 ? 1 : 0; }
+      }
+      if (A.st === 0 && A.v < 0.3 && A.link === ln) A.yawT = face(A, ln.b);
+      if (B.st === 0 && B.v < 0.3 && B.link === ln) B.yawT = face(B, ln.a);
+    }
+  }
   function settle(p, long) {
     // standing: at a window, facing the street, or looking along it
     var x = R2();
@@ -154,13 +253,15 @@ LIFE.people = function (k, list) {
     p.until = simT + (long ? 6 + R2() * 12 : 3 + R2() * 7);
   }
   function arrive(p, why) {
-    p.st = 0; if (dbg && !free(p, p.z, Math.abs(p.x))) dbg.push((why || 'arrived') + ' onto someone at t=' + simT.toFixed(1) + ' #' + p.i + ' z' + p.z.toFixed(2) + ' x' + Math.abs(p.x).toFixed(2) + ' tz' + p.tz.toFixed(2) + ' v' + p.v.toFixed(2));
+    p.st = 0; if (dbg && !p.link && !free(p, p.z, Math.abs(p.x))) dbg.push((why || 'arrived') + ' onto someone at t=' + simT.toFixed(1) + ' #' + p.i + ' z' + p.z.toFixed(2) + ' x' + Math.abs(p.x).toFixed(2) + ' tz' + p.tz.toFixed(2) + ' v' + p.v.toFixed(2));
+    if (p.link) { p.until = simT + 60; if (p.link.st === 1 && p.link.seeker === p) p.link.st = 2; return; } // come to see someone, or stopped for them
     if (p.shop || R2() < 0.5) settle(p, p.shop); else p.until = simT + 0.3 + R2() * 1.2;
   }
   // is there room to stand at z, this far from the road, on this side? (nobody standing there, nobody on their way there)
   function free(p, z, lane) {
     for (var j = 0; j < n; j++) {
       var o = list[j]; if (o === p || o.s !== p.s || (p.group && o.group === p.group)) continue;
+      if (p.link && (boss(o) === p.link.A || boss(o) === p.link.B)) continue; // the one they have come to stand with
       if (Math.abs(o.z - z) < 1.1 && Math.abs(Math.abs(o.x) - lane) < 0.75 && (o.st !== 1 || o.v < 0.2)) return false;
       if (!o.lead && o.st === 1 && Math.abs(o.tz - z) < 1.1 && Math.abs(o.laneT - lane) < 0.75) return false;
     }
@@ -168,6 +269,20 @@ LIFE.people = function (k, list) {
   }
   function depart(p) {
     var lo = Math.max(zMin, p.z0 - p.amp), hi = Math.min(zMax, p.z0 + p.amp), tz, lane, tries = 0;
+    // someone they know is on the street: now and then, go over (the nearer and the closer the tie, the likelier)
+    if (p.links && !p.link && !p.hold && simT >= (p.meetCool || 0) && R2() < 0.45) {
+      var best = null, bs = 0;
+      p.links.forEach(function (ln) {
+        if (ln.bad || ln.st !== 0 || simT < ln.cool) return;
+        var q = other(ln, p), dd = Math.abs(q.z - p.z); if (q.s !== p.s || q.hold || q.link || dd > 60 || dd < 2.5) return;
+        var sc = ln.w / (1 + dd / 20) * (0.5 + R2()); if (sc > bs) { bs = sc; best = ln; }
+      });
+      if (best) {
+        var bq = other(best, p); best.st = 1; best.seeker = p; best.t0 = simT; p.link = best; p.shop = false;
+        p.tz = clamp(bq.z + standoff(p, bq), zMin, zMax); p.laneT = clamp(Math.abs(bq.x), LO, HI); p.dir = p.tz > p.z ? 1 : -1; p.yawT = heading(p); p.st = 1;
+        return;
+      }
+    }
     var fr = fronts[p.s].filter(function (z) { return z > lo && z < hi && Math.abs(z - p.z) > 3; });
     p.shop = fr.length > 0 && !p.size && R2() < 0.55;
     do {
@@ -191,6 +306,16 @@ LIFE.people = function (k, list) {
     if (p.amp) { p.st = 0; p.until = R2() * 9; p.yaw = p.yawT = heading(p); if (R2() < 0.7) { depart(p); p.yaw = p.yawT; p.v = p.cruise; } }
     else { settle(p, true); p.yaw = p.yawT; p.until = 4 + R2() * 16; }
   });
+  // the street is already going: some of those who know each other are mid-conversation when you arrive
+  links.forEach(function (ln) {
+    if (ln.bad || ln.A.s !== ln.B.s || ln.A.link || ln.B.link || R2() > 0.08 + 0.14 * ln.w) return;
+    var M = ln.A, N = ln.B; if (!M.amp || M.post || M.size) { M = ln.B; N = ln.A; } if (!M.amp || M.post || M.size) return; // one of them has to be free to go over, alone
+    var z = clamp(N.z + standoff(M, N), zMin, zMax), lane = clamp(Math.abs(N.x), LO, HI);
+    M.link = N.link = ln; if (!free(M, z, lane)) { M.link = N.link = null; return; }
+    M.z = z; M.x = M.s * lane; M.st = N.st = 0; M.v = N.v = 0; M.until = N.until = 60;
+    begin(ln); ln.until = 3 + R2() * (6 + 14 * ln.w);
+    M.yaw = M.yawT = face(M, theirs(ln, M)); N.yaw = N.yawT = face(N, theirs(ln, N));
+  });
   list.forEach(function (p) { if (p.lead) { p.x = p.lead.x + p.ox; p.z = p.lead.z + p.oz; p.yaw = p.yawT = p.lead.yaw; p.dir = p.lead.dir; p.st = p.lead.st; } });
 
   // Making way. Each walker (or household, taken as one body as wide as it stands) looks at everyone in the
@@ -208,18 +333,22 @@ LIFE.people = function (k, list) {
       if (p.st !== 1) { p.av = 0; p.vcap = 9; continue; }
       var cur = Math.abs(p.x), wR = HALF, wW = HALF; if (p.group) { g = GR[p.group]; wR = cur - g.lo; wW = g.hi - cur; }
       var floor = XLO + wR - HALF, ceil = XHI - wW + HALF, lb = floor, ub = ceil, mine = cur + (wW - wR) / 2, vcap = 9, nIv = 0;
+      var pal = p.link ? other(p.link, p) : null;
       for (j = 0; j < n; j++) {
         o = list[j]; if (o === p || o.s !== p.s || (p.group && o.group === p.group)) continue;
-        var dz = (o.z - p.z) * p.dir; if (dz < -0.9 || dz > 6.5) continue;
+        var dz = (o.z - p.z) * p.dir; if (dz < -0.9 || dz > (p.shun ? 10.5 : 6.5)) continue;
+        // the one they are walking up to: no stepping round them, only come no closer than a pace
+        if (pal && boss(o) === pal) { if (dz > 0) vcap = Math.min(vcap, (o.st === 1 ? o.v * (o.dir === p.dir ? 1 : -1) : 0) + (dz - 0.8) / 0.8); continue; }
+        var ex = p.shun && boss(o) === p.shun ? 1 : 0; // someone they are on bad terms with gets a wide berth, from further off
         var oLo, oHi; if (o.group) { g = GR[o.group]; oLo = g.lo; oHi = g.hi; } else { oLo = Math.abs(o.x) - HALF; oHi = Math.abs(o.x) + HALF; }
         var theirs = (oLo + oHi) / 2;
         if (dz < 0.75) { // level with them: stay on this side of them
           if (theirs < mine) { if (oHi + 0.1 + wR > lb) lb = oHi + 0.1 + wR; } else if (oLo - 0.1 - wW < ub) ub = oLo - 0.1 - wW;
           if (dz < 0.15) continue;
         }
-        var onc = o.st === 1 && o.dir !== p.dir && o.v > 0.3; if (dz > (onc ? 6.5 : 3.4)) continue;
+        var onc = o.st === 1 && o.dir !== p.dir && o.v > 0.3; if (dz > (onc ? 6.5 : 3.4) + ex * 4) continue;
         // where my own line must not be, to clear them
-        var a = oLo - GAP - wW, b = oHi + GAP + wR;
+        var a = oLo - GAP - wW - ex, b = oHi + GAP + wR + ex;
         // bodily in my way: come no faster than leaves a pace between us (they may be walking on ahead, or toward me)
         if (oLo - wW - 0.03 < cur && oHi + wR + 0.03 > cur) vcap = Math.min(vcap, (o.st === 1 ? o.v * (o.dir === p.dir ? 1 : -1) : 0) + (dz - 0.85) / 0.8);
         if (onc) {
@@ -255,12 +384,12 @@ LIFE.people = function (k, list) {
   }
   function sim(h) {
     var i, p;
-    if (tick++ % 6 === 0) avoid();
+    if (tick++ % 6 === 0) { avoid(); if (links.length) meetTick(); }
     for (i = 0; i < n; i++) {
       p = list[i]; if (p.lead) continue;
       var hold = !!p.hold, z0 = p.z, x0 = p.x;
       if (p.st === 1) {
-        var rem = (p.tz - p.z) * p.dir, want = hold ? 0 : Math.max(0, Math.min(p.cruise, p.vcap == null ? 9 : p.vcap));
+        var rem = (p.tz - p.z) * p.dir, want = hold ? 0 : Math.max(0, Math.min(p.cruise * (p.brisk || 1), p.vcap == null ? 9 : p.vcap));
         if (Math.abs(wrap(heading(p) - p.yaw)) > 0.8) want = 0; // turn first, then go
         want = Math.min(want, Math.sqrt(Math.max(0, 3.2 * (rem - 0.02))));
         p.v += clamp(want - p.v, -2.4 * h, 1.3 * h);
@@ -275,7 +404,7 @@ LIFE.people = function (k, list) {
         else p.stuck = 0;
       } else {
         p.v = Math.max(0, p.v - 2.4 * h); p.z += p.dir * p.v * h; p.vx = 0;
-        if (!hold && simT >= p.until) { if (p.amp) depart(p); else settle(p, true); }
+        if (!hold && !p.link && simT >= p.until) { if (p.amp) depart(p); else settle(p, true); }
       }
       if (hold) { p.yawT = Math.atan2(camX - p.x, camZ - p.z) + Math.PI; p.held = true; }
       else if (p.held) { p.held = false; if (p.st === 1) p.yawT = heading(p); else settle(p, false); }
@@ -286,9 +415,10 @@ LIFE.people = function (k, list) {
       var L = p.lead, px = p.x, pz = p.z, sway = Math.sin(simT * 0.31 + p.seed) * 0.1;
       p.x = L.x + p.ox; p.z = L.z + p.oz + sway; p.v = L.v; p.dir = L.dir; p.st = L.st;
       if (p.hold) p.yawT = Math.atan2(camX - p.x, camZ - p.z) + Math.PI;
+      else if (L.link && L.link.st >= 2 && L.st === 0) p.yawT = face(p, theirs(L.link, L)); // the household turns to whoever has stopped with them
       else if (L.st === 1 || L.v > 0.15 || L.shop) p.yawT = L.yawT;
       else p.yawT = Math.atan2(L.x - p.x, L.z - p.z) + Math.PI; // standing together: turn to each other
-      if (!L.hold && L.st === 0 && L.v < 0.15 && !L.shop && p.rank === 1) L.yawT = Math.atan2(p.x - L.x, p.z - L.z) + Math.PI;
+      if (!L.hold && !L.link && L.st === 0 && L.v < 0.15 && !L.shop && p.rank === 1) L.yawT = Math.atan2(p.x - L.x, p.z - L.z) + Math.PI;
       turnAndStep(p, h, Math.sqrt((p.x - px) * (p.x - px) + (p.z - pz) * (p.z - pz)));
     }
   }
@@ -299,8 +429,14 @@ LIFE.people = function (k, list) {
     var vu = (h > 0 ? moved / h : 0) / p.sc; p.vu = p.vu == null ? vu : p.vu + (vu - p.vu) * Math.min(1, h * 10);
     p.ph += moved / p.sc / stride(p.vu) + Math.abs(rate) * h * 0.5;
     p.ph -= Math.floor(p.ph);
-    // where the eyes go: mostly ahead, now and then to one side
-    if (simT >= p.lookAt) {
+    // where the eyes go: at whoever they have stopped with (or, on bad terms, at them and then pointedly away);
+    // otherwise mostly ahead, now and then to one side
+    p.gw = (p.gw || 0) + ((p.gest || 0) - (p.gw || 0)) * Math.min(1, h * 5);
+    if (p.eye && !p.hold) {
+      var rel = wrap(face(p, p.eye) - p.yaw);
+      p.hyT = p.eyeAway ? (rel < 0 ? 0.8 : -0.8) : clamp(rel, -1.15, 1.15);
+      p.hpT = p.eyeAway ? 0.14 : p.meet && !p.meet.bad && !p.gest ? 0.06 + 0.06 * Math.sin(simT * 2.3 + p.seed) : 0;
+    } else if (simT >= p.lookAt) {
       p.lookAt = simT + 1.2 + R2() * 4;
       var walking = p.vu > 0.3, x = R2();
       p.hyT = x < (walking ? 0.6 : 0.3) ? 0 : (R2() - 0.5) * (walking ? 1.1 : 1.7);
@@ -407,6 +543,11 @@ LIFE.people = function (k, list) {
         if (p.rest === 1) { ra = -0.1 + idle; rf = 0.55; rb = sg * 0.1; rb2 = -sg * 0.32; }
         else if (p.rest === 2) { ra = -0.45 + idle; rf = 0.35; rb = sg * 0.06; rb2 = -sg * 0.6; }
         a1 = a1 * w + ra * still; flex = flex * w + rf * still; ab = ab * w + rb * still; ab2 = ab2 * w + rb2 * still;
+      }
+      // talking: one hand comes up and moves with the words
+      if (p.gw > 0.01 && lg === (Math.floor(p.seed) & 1)) {
+        var gq = p.gw, g1 = Math.sin(t * 2.7 + p.seed), g2 = Math.sin(t * 1.6 + p.seed * 2.3);
+        a1 += (0.4 + 0.14 * g2 - a1) * gq; flex += (1.2 + 0.4 * g1 - flex) * gq; ab += (sg * 0.12 - ab) * gq; ab2 += (-sg * 0.2 - ab2) * gq;
       }
       var cyc = Math.cos(yc), syc = Math.sin(yc), shx = sg * SW * gs, shy = SH * cl, shz = SH * sl;
       var sxj = px * 0.7 + shx * cyc + shz * syc, syj = cy0 + shy, szj = -shx * syc + shz * cyc;

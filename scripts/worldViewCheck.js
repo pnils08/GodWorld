@@ -42,6 +42,10 @@ function readSources(root) {
     stations: (() => { const out = {}; try { new Function(fs.readFileSync(path.join(root, 'utilities/ensureTransitMetrics.js'), 'utf8') + '\nreturn OAKLAND_BART_STATIONS;')().forEach(s => { (out[s.neighborhood] = out[s.neighborhood] || []).push(s.station); }); } catch (e) { return null; } return out; })(),
     // each street's state this cycle, the engine's own row (absent from a dump made before the tab was added to it)
     nmap: (() => { try { return readRows(path.join(beats, 'Neighborhood_Map.jsonl')); } catch (e) { return null; } })(),
+    // who knows whom: the bond engine's master state (absent from a dump made before the tab was added to it)
+    bonds: (() => { try { return readRows(path.join(beats, 'Relationship_Bonds.jsonl')); } catch (e) { return null; } })(),
+    // the saved conversations between bonded pairs (scripts/citizen-exchange.js), by file name
+    exchanges: (() => { const out = {}, dir = path.join(root, 'output/exchanges'); try { for (const f of fs.readdirSync(dir).sort()) if (/_conversation\.md$/.test(f)) out[f] = fs.readFileSync(path.join(dir, f), 'utf8'); } catch (e) { return null; } return out; })(),
     // the cycle's world summary, where the Chaos_Cars rows are printed (absent before the summary is built)
     worldSummary: (() => { try { return fs.readFileSync(path.join(root, 'output', `world_summary_c${readJson(path.join(beats, 'meta.json')).cycle}.md`), 'utf8'); } catch (e) { return null; } })(),
   };
@@ -310,6 +314,55 @@ function checkWorldView(build, sources, engine, secondBuild, reports = []) {
       else matched++;
     }
     if (matched) reports.push(`STATE ${matched} streets on the direction scale, each matched to its Neighborhood_Map row`);
+  }
+  // ties: every tie on the page is an active Relationship_Bonds row between two citizen ids, in the row's own
+  // order, with the row's type, intensity, note (less the seeding mark) and cycles; every such row with someone on
+  // a street is on the page; a name given for someone off the streets is the ledger's; and a conversation shown on
+  // a tie is that pair's latest saved one at or before the page's cycle, line for line.
+  {
+    const ties = arr(build.data?.ties || [], 'data.ties'), off = build.data?.offStreet || {};
+    const isPop = v => /^POP-\d+$/.test(String(v || '')), key = (a, b) => (a < b ? `${a}|${b}` : `${b}|${a}`);
+    const rows = new Map();
+    for (const r of arr(sources.bonds || [], 'Relationship_Bonds')) {
+      if (String(r?.Status || '').trim().toLowerCase() !== 'active' || !isPop(r.CitizenA) || !isPop(r.CitizenB) || r.CitizenA === r.CitizenB) continue;
+      if (rows.has(key(r.CitizenA, r.CitizenB))) fail('tie', key(r.CitizenA, r.CitizenB), 'two active Relationship_Bonds rows for one pair');
+      rows.set(key(r.CitizenA, r.CitizenB), r);
+    }
+    const latest = new Map();
+    for (const [f, text] of Object.entries(sources.exchanges || {})) {
+      const m = /^exchange_c(\d+)_(\d{4}-\d{2}-\d{2})_conversation\.md$/.exec(f); if (!m || Number(m[1]) > cycle) continue;
+      const pm = /^- participants: (.+)$/m.exec(text), ps = pm ? pm[1].split(' | ').map(x => /^(POP-\d+) (.+)$/.exec(x.trim())) : [];
+      if (ps.length !== 2 || ps.some(x => !x)) continue;
+      const lines = []; let stray = 0;
+      for (const l of text.split('\n')) { const lm = /^\*\*(.+?):\*\* (.*)$/.exec(l); if (!lm) continue; const i = lm[1] === ps[0][2] ? 0 : lm[1] === ps[1][2] ? 1 : -1; if (i < 0) stray++; else lines.push([ps[i][1], lm[2].trim()]); }
+      if (stray || !lines.length) continue;
+      const k = key(ps[0][1], ps[1][1]), prev = latest.get(k);
+      if (!prev || prev.c < Number(m[1]) || (prev.c === Number(m[1]) && prev.date < m[2])) latest.set(k, { c: Number(m[1]), date: m[2], lines });
+    }
+    const seen = new Set(); let talks = 0;
+    for (const t of ties) {
+      const where = `${t?.a}~${t?.b}`, row = rows.get(key(t?.a, t?.b));
+      if (!row) { fail('tie', where, 'no active Relationship_Bonds row between these two citizen ids'); continue; }
+      if (seen.has(key(t.a, t.b))) { fail('tie', where, 'tie listed twice'); continue; }
+      seen.add(key(t.a, t.b));
+      if (t.a !== row.CitizenA || t.b !== row.CitizenB) fail('tie', where, 'not in the row\'s own order (CitizenA, CitizenB)');
+      if (!shownPeople.has(t.a) && !shownPeople.has(t.b)) fail('tie', where, 'neither person is on a street');
+      const want = { a: row.CitizenA, b: row.CitizenB, t: String(row.BondType || '').trim().toLowerCase(), i: Number(row.Intensity) || 0 };
+      const note = String(row.Notes || '').replace(/^seeded\s*/, '').trim(); if (note) want.note = note;
+      if (/^\d+$/.test(String(row.CycleCreated))) want.since = Number(row.CycleCreated);
+      if (/^\d+$/.test(String(row.LastUpdate))) want.up = Number(row.LastUpdate);
+      const tk = latest.get(key(t.a, t.b));
+      if (tk) { want.talk = { c: tk.c, lines: tk.lines.map(l => [l[0] === row.CitizenA ? 0 : 1, l[1]]) }; talks++; }
+      if (!equal(t, want)) fail('tie', where, `does not match its Relationship_Bonds row${tk || t.talk ? ' and saved conversation' : ''}: page ${JSON.stringify(t).slice(0, 300)}, source ${JSON.stringify(want).slice(0, 300)}`);
+      for (const id of [t.a, t.b]) if (!shownPeople.has(id) && (!ledger.get(id) || off[id] !== nameOf(ledger.get(id)))) fail('tie', where, `${id} is off the streets and its name is not the ledger's`);
+    }
+    for (const [k, row] of rows) {
+      if (seen.has(k) || (!shownPeople.has(row.CitizenA) && !shownPeople.has(row.CitizenB))) continue;
+      const away = shownPeople.has(row.CitizenA) ? row.CitizenB : row.CitizenA;
+      if (shownPeople.has(away) || (ledger.get(away) && nameOf(ledger.get(away)))) fail('tie', k, 'an active bond with someone on a street is missing from the page');
+    }
+    for (const id of Object.keys(off)) if (!ties.some(t => t?.a === id || t?.b === id)) fail('tie', id, 'named as off the streets but on no tie');
+    if (ties.length) reports.push(`TIES ${ties.length} matched to active Relationship_Bonds rows; ${talks} carry the pair's latest saved conversation`);
   }
   if (!secondBuild?.data?.hoods || !equal(
     hoods.map(h => ({ name: h.name, lay: h.lay })),

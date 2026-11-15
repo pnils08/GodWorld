@@ -64,6 +64,8 @@ button[aria-pressed="true"] { background: var(--ink); color: var(--night); }
 .tag .line { font: italic 400 16px/1.28 var(--story); margin-top: 2px; }
 .tag .meta { font-size: 11px; color: var(--dim); margin-top: 1px; }
 .tag .more, .tag .cap { font-size: 11px; color: var(--dim); margin-top: 3px; }
+.tag .with { font-size: 12px; line-height: 1.3; margin-top: 3px; }
+.tag .with:empty { display: none; }
 .tag .said { margin-top: 7px; padding-top: 6px; border-top: 1px solid var(--edge); font: italic 400 14px/1.32 var(--story); display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
 body.walk .tag .said, body.words .tag .said { -webkit-line-clamp: 9; }
 .ctag { position: fixed; left: 0; top: 0; max-width: min(260px, 60vw); pointer-events: auto; cursor: pointer; opacity: 0; transition: opacity .45s ease; will-change: transform; background: var(--veil); border: 1px solid rgba(255,160,60,.55); border-radius: 10px; padding: 5px 10px 6px; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
@@ -109,6 +111,12 @@ body.words .tag .line, body.words .tag .more { order: 5; }
 #person li span.when { color: var(--dim); font-size: 12px; flex-shrink: 0; min-width: 3.4em; font-variant-numeric: tabular-nums; }
 #person button.link { background: none; border: 0; border-radius: 4px; padding: 0; font: inherit; color: var(--ink); text-align: left; text-decoration: underline; text-decoration-color: var(--edge); text-underline-offset: 3px; backdrop-filter: none; -webkit-backdrop-filter: none; }
 #person span.quiet { color: var(--dim); }
+#person ul.ties li { display: block; }
+#person ul.ties .pmeta { margin: 2px 0 0; font-size: 12px; }
+#person details { margin: 4px 0 0; }
+#person details summary { cursor: pointer; font-size: 12px; color: var(--dim); }
+#person details p { margin: 8px 0 0; font: italic 400 15px/1.4 var(--story); }
+#person details p b { display: block; font: 500 11px/1.3 var(--display); font-style: normal; color: var(--dim); }
 #person blockquote { margin: 0 0 14px; font: italic 400 17px/1.4 var(--story); }
 #person blockquote footer { font: 500 11px/1.3 var(--display); color: var(--dim); margin-top: 4px; font-style: normal; }
 @media (max-width: 720px) { #person { top: auto; left: 0; width: auto; max-height: 56%; border-left: 0; border-top: 1px solid var(--edge); border-radius: 16px 16px 0 0; padding-left: max(18px, env(safe-area-inset-left, 0px)); } }
@@ -187,9 +195,34 @@ if (!window.THREE || !DATA) { $('note').hidden = false; return; }
 
 var KIND = { m: '#ffc94d', v: '#6fd3ff', t: '#ff9ecb', h: '#ff6b5e', s: '#7be08a', p: '#f3e6cf' };
 var ROAD = 6.4, WALK = 10.2, SPEED = 3.2, LANE = 2.4;
+// who knows whom: DATA.ties is the sim's active bond rows (a, b, t type, i intensity 0..10), indexed here by person.
+// The words for a tie are the ones a citizen's own wake uses for it (lib/wakePerception.js BOND_PHRASE, close from
+// intensity 5), put in the third person; a type the wake has no phrase for is shown as the tab's own word.
+var TIES = {}; (DATA.ties || []).forEach(function (t) { (TIES[t.a] = TIES[t.a] || []).push(t); (TIES[t.b] = TIES[t.b] || []).push(t); });
+function tieWords(t) {
+  var close = t.i >= 5;
+  switch (t.t) {
+    case 'family': return close ? 'close family' : 'family';
+    case 'friendship': return close ? 'a close friend' : 'a friend';
+    case 'professional': return 'someone they know through work';
+    case 'alliance': return close ? 'someone they count on' : 'an ally';
+    case 'rivalry': return 'someone they butt heads with';
+    case 'romantic': return close ? 'their partner in life' : 'someone they love';
+    case 'marriage': return 'their partner in life';
+    case 'neighbor': return 'a neighbor';
+    case 'sports_rival': return 'a sports rival';
+    default: return String(t.t || 'someone they know').replace(/_/g, ' ');
+  }
+}
+function tieName(id) { return BYID[id] ? BYID[id].d.n : (DATA.offStreet || {})[id] || id; }
+// what a card says while two people who know each other are stopped together, or passing each other on bad terms
+function withLine(p) {
+  var m = p.meet; if (!m) return '';
+  return (m.bad ? 'Passing ' : 'With ') + m.q.d.n + ', ' + tieWords(m.t) + '.' + (!m.bad && m.t.talk ? ' They talked in week ' + m.t.talk.c + '.' : '');
+}
 var DBG = window.WV_DEBUG || null; // look-test hook: { cam: [x,y,z], look: [x,y,z], t0: seconds, hide: true, manual: true (the clock only moves on __wv.step(dt)), follow: { who: name or index, off: [x,y,z], aim: height } }
 if (DBG && DBG.hide) document.body.classList.add('bare');
-if (DBG) window.__wv = { get world() { return world; }, get camera() { return camera; }, WALK: WALK, step: function (dt) { if (!world || busy) return false; step(dt); if (frame++ % 6 === 0) pickNames(); placeNames(); placeChaos(); draw(); return true; } };
+if (DBG) window.__wv = { get world() { return world; }, get camera() { return camera; }, get data() { return DATA; }, WALK: WALK, withLine: function (p) { return withLine(p); }, visit: function (id) { if (BYID[id]) startVisit(BYID[id].d); }, step: function (dt) { if (!world || busy) return false; step(dt); if (frame++ % 6 === 0) pickNames(); placeNames(); placeChaos(); draw(); return true; } };
 var DEF = { wall: 'stucco', tone: [30, 0.15, 0.5], h: [4, 9], w: [6, 11], gap: [0.6, 2.1], lit: 0.45, fill: 'box', trees: 0, slope: 0, neon: 0, set: [] };
 
 // ---------- seeded random ----------
@@ -877,6 +910,40 @@ function build(idx) {
     if (d.hh) { var lead = byHome[d.hh]; if (!lead) byHome[d.hh] = o; else { lead.kin = (lead.kin || 0) + 1; o.lead = lead; o.rank = lead.kin; o.post = false; } }
     o.z = o.z0;
   });
+  // People who know each other (DATA.ties) share a side of the street, since nobody here crosses the road: each
+  // knot of people tied to one another, households included, gathers on one side along one stretch of it, each
+  // of them changing places with someone tied to nobody here. Someone posted outside their business stays there. life-people.js is handed the
+  // ties between two people who are both here and not of one household (those already walk together).
+  var tieBy = {}, tiePar = people.map(function (_, k) { return k; }), tiesHere = [];
+  function tieRoot(a) { while (tiePar[a] !== a) { tiePar[a] = tiePar[tiePar[a]]; a = tiePar[a]; } return a; }
+  people.forEach(function (o, k) { o.ti = k; tieBy[o.d.id] = o; });
+  people.forEach(function (o) {
+    if (o.lead) tiePar[tieRoot(o.ti)] = tieRoot(o.lead.ti);
+    (TIES[o.d.id] || []).forEach(function (t) {
+      var q = t.a === o.d.id ? tieBy[t.b] : null; if (!q) return;
+      tiePar[tieRoot(o.ti)] = tieRoot(q.ti);
+      if (!(o.d.hh && o.d.hh === q.d.hh)) tiesHere.push([o, q, t]);
+    });
+  });
+  var knots = {}, multi = [], singles = [];
+  people.forEach(function (o) { var g = tieRoot(o.ti); (knots[g] = knots[g] || []).push(o); });
+  Object.keys(knots).forEach(function (g) { if (knots[g].length > 1) multi.push(knots[g]); else if (!knots[g][0].post) singles.push(knots[g][0]); });
+  multi.sort(function (a, b) { return b.length - a.length || a[0].ti - b[0].ti; });
+  multi.forEach(function (m) {
+    var pin = m.filter(function (o) { return o.post; })[0], sd = 0, free = m.filter(function (o) { return !o.post && !o.lead; });
+    if (pin) sd = pin.s; else { m.forEach(function (o) { sd += o.s; }); sd = sd >= 0 ? 1 : -1; } // the side most of them are on already
+    // where the knot gathers: outside the business one of them runs, else where the middle one of them stands
+    var zs = free.map(function (o) { return o.z0; }).sort(function (a, b) { return a - b; }), mid = pin ? pin.z0 : zs.length ? zs[Math.floor(zs.length / 2)] : 0;
+    free.forEach(function (o) {
+      // change places with whoever, tied to nobody here, stands nearest that stretch on that side: the street
+      // keeps its spacing, and people who know each other are within a walk of each other
+      var sw = null, sdist = o.s === sd ? Math.abs(o.z0 - mid) : 1e9;
+      singles.forEach(function (u) { if (u.s !== sd || u.swapped) return; var dd = Math.abs(u.z0 - mid); if (dd < sdist) { sdist = dd; sw = u; } });
+      if (sw) { var ts = o.s, tx = o.x, tz = o.z0; o.s = sw.s; o.x = sw.x; o.z0 = o.z = sw.z0; sw.s = ts; sw.x = tx; sw.z0 = sw.z = tz; sw.swapped = true; }
+      // nobody left to change places with: they stay where they are, across the road from the others
+    });
+  });
+  kit.ties = tiesHere;
   kit.people = people; // (the traffic file finds a citizen here when a chaos car has come for them)
   if (typeof LIFE.people === 'function') LIFE.people(kit, people);
 
@@ -900,7 +967,7 @@ function build(idx) {
 var CARDS = [], CHIPS = [], tagsEl = $('tags');
 for (var i = 0; i < 4; i++) {
   var el = document.createElement('div'); el.className = 'tag';
-  el.innerHTML = '<div class="card"><div class="who"><i></i><span></span></div><div class="meta"></div><div class="line"></div><div class="more"></div><div class="said"></div><div class="cap"></div></div>';
+  el.innerHTML = '<div class="card"><div class="who"><i></i><span></span></div><div class="meta"></div><div class="with"></div><div class="line"></div><div class="more"></div><div class="said"></div><div class="cap"></div></div>';
   tagsEl.appendChild(el); CARDS.push({ el: el, p: null });
 }
 for (i = 0; i < 9; i++) { var ce = document.createElement('div'); ce.className = 'chip'; ce.innerHTML = '<i></i><span></span>'; tagsEl.appendChild(ce); CHIPS.push({ el: ce, p: null }); }
@@ -916,9 +983,14 @@ function setCard(slot, p) {
   if (d.ab) bits.push(d.ab === 'senior' ? 'senior' : (minor || d.ab === 'youth') ? 'youth' : 'adult');
   if (d.role) bits.push(d.role);
   slot.el.querySelector('.meta').textContent = bits.join(' \u00B7 ');
+  setWith(slot);
   var sd = slot.el.querySelector('.said'), cp = slot.el.querySelector('.cap');
   sd.hidden = cp.hidden = !d.said;
   if (d.said) { sd.textContent = '\u201C' + d.said.x + '\u201D'; cp.textContent = 'Said in week ' + d.said.c + (d.said.how ? ', ' + d.said.how : '') + (d.said.mood ? '. ' + d.said.mood + '.' : '.'); }
+}
+function setWith(slot) {
+  var el = slot.el.querySelector('.with'), tx = slot.p ? withLine(slot.p) : '';
+  if (el.textContent !== tx) { el.textContent = tx; el.style.color = slot.p && slot.p.meet && slot.p.meet.bad ? KIND.h : KIND.t; }
 }
 function setChip(slot, p) {
   if (slot.p === p) return; slot.p = p; if (!p) { slot.el.style.opacity = 0; return; }
@@ -930,13 +1002,13 @@ function pickNames() {
   var narrow = window.innerWidth < 600, max = (visiting || bizView || labels < 2) ? 0 : narrow ? 2 : walking ? 3 : 4;
   camera.getWorldDirection(FWD); FWD.y = 0; FWD.normalize();
   world.people.forEach(ahead);
-  CARDS.forEach(function (s, i) { if (s.p && (i >= max || s.p.f < 0.8 || s.p.dist > (walking ? 13 : 34))) setCard(s, null); });
+  CARDS.forEach(function (s, i) { if (s.p && (i >= max || s.p.f < 0.8 || s.p.dist > (walking ? 13 : 34))) setCard(s, null); else if (s.p) setWith(s); });
   var taken = CARDS.filter(function (s) { return s.p; }).map(function (s) { return s.p; });
   var free = CARDS.filter(function (s, i) { return i < max && !s.p; });
   if (free.length) {
     var c = walking
       ? world.people.filter(function (p) { return p.f > 1 && p.dist < 10 && taken.indexOf(p) < 0; }).sort(function (a, b) { return a.dist - b.dist; })
-      : world.people.filter(function (p) { return p.f > 7 && p.f < 24 && taken.indexOf(p) < 0 && !p.seen; }).sort(function (a, b) { return (words ? (b.d.said ? 1 : 0) - (a.d.said ? 1 : 0) : 0) || a.d.pr - b.d.pr || a.f - b.f; });
+      : world.people.filter(function (p) { return p.f > 7 && p.f < 24 && taken.indexOf(p) < 0 && !p.seen; }).sort(function (a, b) { return (b.meet ? 1 : 0) - (a.meet ? 1 : 0) || (words ? (b.d.said ? 1 : 0) - (a.d.said ? 1 : 0) : 0) || a.d.pr - b.d.pr || a.f - b.f; });
     for (var i = 0; i < c.length && free.length; i++) {
       var p = c[i]; if (!walking && taken.some(function (q) { return Math.abs(q.z - p.z) < (q.s === p.s ? 11 : 5); })) continue;
       p.seen = true; taken.push(p); setCard(free.shift(), p);
@@ -1319,6 +1391,29 @@ function startVisit(d) {
   section(body, 'This week (' + DATA.cycle + ')'); var ul = mk('ul');
   d.all.forEach(function (a) { var li = mk('li'), dot = mk('i'); dot.style.background = KIND[a[0]] || KIND.p; li.appendChild(dot); li.appendChild(mk('span', a[1])); ul.appendChild(li); }); body.appendChild(ul);
   if (d.said) { section(body, 'In their words'); saidBlock(body, d.said); (d.saidMore || []).forEach(function (sd) { saidBlock(body, sd); }); }
+  // the people the sim holds a tie to: strongest first, each with the tie in the wake's own words, where they are
+  // this week, the engine's note on the bond when it carries one, and the pair's latest saved conversation
+  var kn = (TIES[d.id] || []).slice().sort(function (a, b) { return b.i - a.i; });
+  if (kn.length) {
+    section(body, 'People they know'); var kl = mk('ul', null, 'ties');
+    kn.forEach(function (t) {
+      var oid = t.a === d.id ? t.b : t.a, ent = BYID[oid], li = mk('li'), top = mk('div'), sub = [];
+      if (ent) { var kb = mk('button', ent.d.n, 'link'); kb.type = 'button'; kb.addEventListener('click', function () { go(ent.h, 0, ent.d); }); top.appendChild(kb); }
+      else top.appendChild(mk('span', tieName(oid), 'quiet'));
+      top.appendChild(mk('span', ' \u00B7 ' + tieWords(t) + (ent ? (ent.hood === world.H.name ? ', on this street' : ', in ' + ent.hood + ' this week') : '')));
+      li.appendChild(top);
+      if (t.since) sub.push('On record since week ' + t.since + '.'); if (t.note) sub.push(t.note);
+      if (sub.length) li.appendChild(mk('div', sub.join(' '), 'pmeta'));
+      if (t.talk) {
+        var dt = document.createElement('details'); dt.appendChild(mk('summary', 'They talked in week ' + t.talk.c));
+        t.talk.lines.forEach(function (l) { var ln = mk('p'); ln.appendChild(mk('b', tieName(l[0] === 0 ? t.a : t.b))); ln.appendChild(document.createTextNode(l[1])); dt.appendChild(ln); });
+        li.appendChild(dt);
+      }
+      kl.appendChild(li);
+    });
+    body.appendChild(kl);
+    if (kn.some(function (t) { return !BYID[t.a === d.id ? t.b : t.a]; })) body.appendChild(mk('p', 'Greyed names had nothing on record this week, so they are not on a street.', 'pmeta'));
+  }
   if (d.hist) { section(body, 'Before this week'); var hl = mk('ul'); d.hist.forEach(function (hx) { var li = mk('li'); li.appendChild(mk('span', hx[0], 'when')); li.appendChild(mk('span', hx[1])); hl.appendChild(li); }); body.appendChild(hl); }
   $('person').hidden = false; $('person').scrollTop = 0;
 }

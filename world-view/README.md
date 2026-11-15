@@ -47,6 +47,19 @@ Left out: `Youth_Events` (no row since C102; `dumpBeatTabs.js` already leaves it
 - Homes (direction given 2026-11-15, NOT built, needs its own ROLLOUT row: parcel ids on households are ledger work): "if I want to be able to have their homes eventually mapped out we would need more street or to be able to turn into a residential area", "the streets wouldn't need to connect you just need to hit next or places to move about", "like the business , we would start to give the parcels and ID/address attached to the household , maybe renters are on the Main Street or a seperate block ? This way we can eventually move towards parcels carrying value in the home buying system on the sheets". The portal: "we can decide later". Order agreed: this build on the streets as they are, then residential streets inside each neighborhood, the portal last.
 - Parcels: "The building parcels would eventually be coded with addresses so the businesses occupy a parcel more deliberately than just the names on buildings randomly."
 
+## What is on screen (2026-11-15)
+
+Builder 2026-11-15, on the page: "The entire things looks like shit and makes no sense". Read from stills of Downtown, Baylight, West Oakland, Temescal at desktop and phone width; fixed in `template.html`. Still dusk: what the art looks like stays the builder's.
+
+- Cards: two at a time (one under 600 px wide), was four. Card and notice backing is `--card` (86% opaque), was the 62% veil.
+- Labels are solid or absent. A notice or chaos label no longer fades in over 14 m (it read as a ghost over the street); CSS does the half-second fade.
+- One layout a frame: `TAKEN` holds the screen rectangles already used; cards, then chaos labels, then notices each drop below what is there, or wait. Chaos labels used to ignore the cards and the notices.
+- Notices: the nearest two (one on a phone), from `NOTE_FAR` = 46 m, was every notice within 70 m. One already showing holds its place against a newcomer up to 6 m nearer.
+- Controls: People, Places, Walk it yourself, Pause, Next place stay out; Pace, Cards, Their words, Sound sit behind `⋯` (`#bMore`, first in the row on a phone, where the open row wraps). The tap tip fades after 14 s.
+- Light: hemisphere fill 0.95 → 1.3 with less of the sky's hue in it and a lighter ground bounce, sun 0.75 → 0.95, haze 20% thinner and the horizon's colour, not near-black.
+- Flight height: `FLY` = 5.2 m, was 3.7 m, which put oncoming car roofs across the bottom corners of the frame.
+- Not done: a plain line per street saying what the week was there (what it says is the builder's).
+
 ## Parcels
 
 - `build.js` `layout()` lays every street out as parcels with stable ids (`west-oakland-e07`: neighborhood, side, number down the street) and decides which business sits on which, so the page draws a layout, it does not roll one.

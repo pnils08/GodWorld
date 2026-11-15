@@ -9,6 +9,7 @@
   --ink: #f6ecd9;
   --dim: #b9b1c4;
   --veil: rgba(11, 13, 26, .62);
+  --card: rgba(11, 13, 26, .86);
   --edge: rgba(246, 236, 217, .22);
   --gold: #ffc94d;
   --move: #6fd3ff;
@@ -39,7 +40,9 @@ body { background: var(--night); color: var(--ink); font-family: var(--display);
 #canon { margin: 8px 0 0; font: italic 400 clamp(16px, 2.4vw, 21px)/1.25 var(--story); max-width: 34ch; text-wrap: balance; }
 #facts { margin: 6px 0 0; font-size: 13px; color: var(--dim); max-width: 46ch; line-height: 1.4; }
 #facts b { color: var(--ink); font-weight: 500; }
-#keys { display: flex; flex-wrap: wrap; gap: 8px; }
+#keys { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+#keys:not(.open) .x { display: none; }
+#bMore { padding-inline: 13px; letter-spacing: .08em; }
 button { font: 500 13px var(--display); color: var(--ink); background: var(--veil); border: 1px solid var(--edge); border-radius: 999px;
   padding: 9px 14px; cursor: pointer; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); user-select: none; -webkit-user-select: none; touch-action: manipulation; }
 button:hover { border-color: var(--ink); }
@@ -50,7 +53,8 @@ button[aria-pressed="true"] { background: var(--ink); color: var(--night); }
 #pad { display: flex; gap: 10px; justify-content: center; }
 #pad button { width: 64px; height: 52px; font-size: 20px; padding: 0; }
 #hint { font-size: 12px; color: var(--dim); text-shadow: 0 1px 8px rgba(0,0,0,.8); margin: 0; }
-#tip { font-size: 12px; color: var(--dim); text-shadow: 0 1px 8px rgba(0,0,0,.8); margin: 0; }
+#tip { font-size: 12px; color: var(--dim); text-shadow: 0 1px 8px rgba(0,0,0,.8); margin: 0; animation: tipgo 1.2s ease 14s forwards; }
+@keyframes tipgo { to { opacity: 0; visibility: hidden; } }
 #legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12px; color: var(--dim); text-shadow: 0 1px 8px rgba(0,0,0,.8); }
 #legend i { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
 #bar { height: 2px; background: var(--edge); }
@@ -58,7 +62,7 @@ button[aria-pressed="true"] { background: var(--ink); color: var(--night); }
 
 .tag, .chip { position: fixed; left: 0; top: 0; width: max-content; pointer-events: none; opacity: 0; transition: opacity .45s ease; will-change: transform; }
 .tag { max-width: min(300px, 44vw); }
-.tag .card { background: var(--veil); border: 1px solid var(--edge); border-radius: 10px; padding: 8px 11px; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
+.tag .card { background: var(--card); border: 1px solid var(--edge); border-radius: 10px; padding: 8px 11px; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
 .tag .who { font-weight: 800; font-size: 14px; letter-spacing: .01em; display: flex; align-items: center; gap: 7px; }
 .tag .who i, .chip i { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
 .tag .line { font: italic 400 16px/1.28 var(--story); margin-top: 2px; }
@@ -68,7 +72,7 @@ button[aria-pressed="true"] { background: var(--ink); color: var(--night); }
 .tag .with:empty { display: none; }
 .tag .said { margin-top: 7px; padding-top: 6px; border-top: 1px solid var(--edge); font: italic 400 14px/1.32 var(--story); display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
 body.walk .tag .said, body.words .tag .said { -webkit-line-clamp: 9; }
-.ctag { position: fixed; left: 0; top: 0; max-width: min(260px, 60vw); pointer-events: auto; cursor: pointer; opacity: 0; transition: opacity .45s ease; will-change: transform; background: var(--veil); border: 1px solid rgba(255,160,60,.55); border-radius: 10px; padding: 5px 10px 6px; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
+.ctag { position: fixed; left: 0; top: 0; max-width: min(260px, 60vw); pointer-events: auto; cursor: pointer; opacity: 0; transition: opacity .45s ease; will-change: transform; background: var(--card); border: 1px solid rgba(255,160,60,.55); border-radius: 10px; padding: 5px 10px 6px; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
 .ctag b { display: flex; align-items: center; gap: 6px; font-weight: 800; font-size: 13px; }
 .ctag b i { width: 8px; height: 8px; border-radius: 2px; background: #ff9a2e; transform: rotate(45deg); flex-shrink: 0; }
 .ctag span { display: block; font: italic 400 14px/1.25 var(--story); margin-top: 1px; }
@@ -142,7 +146,7 @@ body.words .tag .line, body.words .tag .more { order: 5; }
 @media (max-width: 720px) { #person { top: auto; left: 0; width: auto; max-height: 56%; border-left: 0; border-top: 1px solid var(--edge); border-radius: 16px 16px 0 0; padding-left: max(18px, env(safe-area-inset-left, 0px)); } }
 body.visit #bottom, body.visit #keys { display: none; }
 #note { position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); max-width: 34ch; text-align: center; font: italic 400 18px/1.4 var(--story); }
-@media (max-width: 720px) { #top { flex-wrap: nowrap; flex-direction: column; } #keys { flex-wrap: nowrap; overflow-x: auto; max-width: 100%; padding-bottom: 6px; padding-right: 36px; box-sizing: border-box; scrollbar-width: none; pointer-events: auto; -webkit-overflow-scrolling: touch; -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 44px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 44px), transparent); } #keys::-webkit-scrollbar { display: none; } #keys button { flex-shrink: 0; } }
+@media (max-width: 720px) { #top { flex-wrap: nowrap; flex-direction: column; } #keys { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; max-width: 100%; padding-bottom: 6px; padding-right: 36px; box-sizing: border-box; scrollbar-width: none; pointer-events: auto; -webkit-overflow-scrolling: touch; -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 44px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 44px), transparent); } #keys::-webkit-scrollbar { display: none; } #keys button { flex-shrink: 0; } #bMore { order: -1; } #keys.open { flex-wrap: wrap; overflow: visible; -webkit-mask-image: none; mask-image: none; padding-right: 0; } }
 @media (max-width: 560px) { #keys button { padding: 8px 11px; font-size: 12px; } .tag .line { font-size: 14px; } #facts { font-size: 12px; } #legend { display: none; } }
 @media (max-height: 480px) { #hood { font-size: 26px; } #canon { font-size: 14px; margin-top: 4px; } #facts { display: none; } #top { padding-bottom: 10px; } }
 @media (hover: none) { button:hover { border-color: var(--edge); } }
@@ -159,10 +163,11 @@ body.visit #bottom, body.visit #keys { display: none; }
     <button id="bWalk" type="button" aria-pressed="false">Walk it yourself</button>
     <button id="bPlay" type="button">Pause</button>
     <button id="bNext" type="button">Next place</button>
-    <button id="bPace" type="button">Pace: normal</button>
-    <button id="bLabels" type="button">Cards: on</button>
-    <button id="bWords" type="button" aria-pressed="false">Their words</button>
-    <button id="bSound" type="button" aria-pressed="false" hidden>Sound</button>
+    <button id="bMore" type="button" aria-expanded="false" aria-label="Settings">&#8943;</button>
+    <button id="bPace" class="x" type="button">Pace: normal</button>
+    <button id="bLabels" class="x" type="button">Cards: on</button>
+    <button id="bWords" class="x" type="button" aria-pressed="false">Their words</button>
+    <button id="bSound" class="x" type="button" aria-pressed="false" hidden>Sound</button>
   </div>
 </div>
 <div class="hud" id="bottom">
@@ -173,7 +178,7 @@ body.visit #bottom, body.visit #keys { display: none; }
     <button id="pR" type="button" aria-label="Turn right">&#8631;</button>
   </div>
   <p id="hint"></p>
-  <p id="tip">Tap a person, a shop sign or a home to open it. Swipe the buttons sideways for more.</p>
+  <p id="tip">Tap a person, a shop sign or a home to open it.</p>
   <div id="legend">
     <span><i style="background:var(--gold)"></i>a turning point</span>
     <span><i style="background:var(--move)"></i>moved</span>
@@ -214,7 +219,7 @@ var $ = function (id) { return document.getElementById(id); };
 if (!window.THREE || !DATA) { $('note').hidden = false; return; }
 
 var KIND = { m: '#ffc94d', v: '#6fd3ff', t: '#ff9ecb', h: '#ff6b5e', s: '#7be08a', p: '#f3e6cf' };
-var ROAD = 6.4, WALK = 10.2, SPEED = 3.2, LANE = 2.4;
+var ROAD = 6.4, WALK = 10.2, SPEED = 3.2, LANE = 2.4, FLY = 5.2; // FLY: how high the flight rides, clear of the roofs of the vans below it
 // who knows whom: DATA.ties is the sim's active bond rows (a, b, t type, i intensity 0..10), indexed here by person.
 // The words for a tie are the ones a citizen's own wake uses for it (lib/wakePerception.js BOND_PHRASE, close from
 // intensity 5), put in the third person; a type the wake has no phrase for is shown as the tab's own word.
@@ -616,8 +621,8 @@ var sky = new THREE.Mesh(new THREE.SphereGeometry(600, 48, 24), skyPaint); scene
   var stars = new THREE.Points(g, new THREE.PointsMaterial({ color: 0xfff3da, size: 1.6, sizeAttenuation: false, transparent: true, opacity: 0.8, fog: false, depthWrite: false }));
   stars.visible = WX === 'clear'; sky.add(stars);
 })();
-var hemi = new THREE.HemisphereLight(0x8899ff, 0x221a14, WX === 'clear' ? 0.95 : 0.8); scene.add(hemi);
-var sun = new THREE.DirectionalLight(0xffb27a, WX === 'clear' ? 0.75 : 0.25); scene.add(sun); scene.add(sun.target);
+var hemi = new THREE.HemisphereLight(0x8899ff, 0x4d4238, WX === 'clear' ? 1.3 : 1.1); scene.add(hemi);
+var sun = new THREE.DirectionalLight(0xffb27a, WX === 'clear' ? 0.95 : 0.3); scene.add(sun); scene.add(sun.target);
 sun.castShadow = quality > 1; sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -0.0006; sun.shadow.normalBias = 0.6;
 var sc = sun.shadow.camera; sc.left = -60; sc.right = 60; sc.top = 60; sc.bottom = -60; sc.near = 1; sc.far = 320; sc.updateProjectionMatrix();
 var SUN_DIR = new THREE.Vector3(-0.12, 0.4, -1).normalize();
@@ -653,9 +658,9 @@ function build(idx) {
   skyMat.uniforms.low.value.setHSL(warm / 360, 0.5 * dull, 0.2);
   skyMat.uniforms.glow.value.setHSL(warm / 360, (warm > 180 ? 0.6 : 0.95) * dull, (warm > 180 ? 0.42 : 0.56) * (WX === 'clear' ? 1 : 0.5));
   skyPaint.map = paintSky(warm, cool, WX); skyPaint.needsUpdate = true;
-  scene.fog.color.setHSL(warm / 360, 0.42 * dull, WX === 'fog' ? 0.2 : 0.13);
-  scene.fog.density = (ST.fog || 0.0115) * (WX === 'fog' ? 2.4 : WX === 'rain' ? 1.5 : WX === 'overcast' ? 1.2 : 1);
-  hemi.color.setHSL(cool, 0.5, 0.55); sun.color.setHSL(warm / 360, 0.9, 0.7);
+  scene.fog.color.setHSL(warm / 360, 0.38 * dull, WX === 'fog' ? 0.22 : 0.17);
+  scene.fog.density = (ST.fog || 0.0115) * 0.8 * (WX === 'fog' ? 2.4 : WX === 'rain' ? 1.5 : WX === 'overcast' ? 1.2 : 1);
+  hemi.color.setHSL(cool, 0.26, 0.68); sun.color.setHSL(warm / 360, 0.9, 0.7);
 
   var water = LAY.water, slope = LAY.slope, L = LAY.L, sides = water ? [-water] : [-1, 1], n = H.people.length;
   function yAt(z) { return slope * (10 - z); }
@@ -1077,7 +1082,7 @@ function setChip(slot, p) {
 // how far ahead of the camera someone is (negative = behind), and how far away
 function ahead(p) { var dx = p.x - camera.position.x, dz = p.z - camera.position.z; p.f = dx * FWD.x + dz * FWD.z; p.dist = Math.sqrt(dx * dx + dz * dz); }
 function pickNames() {
-  var narrow = window.innerWidth < 600, max = (visiting || bizView || labels < 2) ? 0 : narrow ? 2 : walking ? 3 : 4;
+  var narrow = window.innerWidth < 600, max = (visiting || bizView || labels < 2) ? 0 : narrow ? 1 : 2; // two at a time: more than that and nobody is read
   camera.getWorldDirection(FWD); FWD.y = 0; FWD.normalize();
   world.people.forEach(ahead);
   CARDS.forEach(function (s, i) { if (s.p && (i >= max || s.p.f < 0.8 || s.p.dist > (walking ? 13 : 34))) setCard(s, null); else if (s.p) setWith(s); });
@@ -1097,8 +1102,10 @@ function pickNames() {
   CHIPS.forEach(function (s) { if (s.p && near.indexOf(s.p) < 0) setChip(s, null); });
   near.forEach(function (p) { if (!CHIPS.some(function (s) { return s.p === p; })) { var f = CHIPS.filter(function (s) { return !s.p; })[0]; if (f) setChip(f, p); } });
 }
+// What is already on screen this frame: cards first, then the chaos labels, then the notices. Each keeps off the ones before it.
+var TAKEN = [];
 function placeNames() {
-  var w = window.innerWidth, h = window.innerHeight, placed = [], floor = $('top').getBoundingClientRect().bottom - 32, ceil = h - $('bottom').offsetHeight - 8;
+  var w = window.innerWidth, h = window.innerHeight, placed = TAKEN = [], floor = $('top').getBoundingClientRect().bottom - 32, ceil = h - $('bottom').offsetHeight - 8;
   CARDS.forEach(function (s) {
     if (!s.p) return;
     V.set(s.p.x, 2.05 * s.p.sc + world.yAt(s.p.z), s.p.z).project(camera);
@@ -1108,7 +1115,7 @@ function placeNames() {
     var left = Math.max(12, Math.min(w - bw - 12, x < w / 2 ? x - bw + 6 : x - 6)), top = Math.max(floor, Math.min(ceil - bh, y - bh - 8));
     placed.forEach(function (q) { if (left < q[0] + q[2] + 6 && left + bw + 6 > q[0] && top < q[1] + q[3] + 6 && top + bh + 6 > q[1]) top = q[1] + q[3] + 8; });
     if (top + bh > ceil) o = 0;
-    placed.push([left, top, bw, bh]);
+    if (o > 0) placed.push([left, top, bw, bh]);
     s.el.style.transform = 'translate(' + left.toFixed(1) + 'px,' + top.toFixed(1) + 'px)';
     s.el.style.opacity = Math.max(0, o).toFixed(2);
   });
@@ -1251,7 +1258,7 @@ function step(dt) {
     var px = W.x; W.x += ((Math.sin(t * 0.21) * 0.45 + W.gaze * 0.1) * near - W.x) * Math.min(1, dt * 1.6 + (dt ? 0 : 1));
     W.bank = (W.bank || 0) + ((dt > 0 ? -(W.x - px) / dt * 0.05 : 0) + W.gaze * -0.0035 - (W.bank || 0)) * Math.min(1, dt * 2);
     var hx = STILL ? 0 : Math.sin(t * 1.3) * 0.018 + Math.sin(t * 2.9 + 1) * 0.008, hy = STILL ? 0 : Math.sin(t * 1.7 + 2) * 0.014 + Math.sin(t * 3.7) * 0.006;
-    camera.position.set(W.x + hx, 3.7 + Math.sin(t * 0.37) * 0.15 + (1 - near) * 2.2 + W.yAt(z) + hy, z);
+    camera.position.set(W.x + hx, FLY + Math.sin(t * 0.37) * 0.15 + (1 - near) * 2.2 + W.yAt(z) + hy, z);
     var pull = 0; for (i = 0; i < W.places.length; i++) { var pl = W.places[i]; if (pl.half >= 20 && pl.s) { var f = Math.max(0, 1 - Math.abs(z - pl.z - 26) / 34); pull += pl.s * f * f * (3 - 2 * f); } }
     // on a waterside street the flight leans toward the water, more on a tall narrow screen where it would otherwise be a sliver
     var lean = W.water ? W.water * (window.innerWidth < window.innerHeight ? 9 : 5) * near * (0.75 + 0.25 * Math.sin(t * 0.09)) : 0;
@@ -1301,6 +1308,7 @@ function recall(k) { try { return localStorage.getItem('wv-' + k); } catch (e) {
 function setPace(i) { paceI = (i + PACES.length) % PACES.length; pace = PACES[paceI][1]; $('bPace').textContent = 'Pace: ' + PACES[paceI][0]; store('pace', paceI); }
 function setLabels(v) { labels = v; $('bLabels').textContent = 'Cards: ' + ['off', 'names only', 'on'][v]; store('labels', v); if (v < 2) CARDS.forEach(function (s) { setCard(s, null); }); if (v < 1) CHIPS.forEach(function (s) { setChip(s, null); }); if (world) world.people.forEach(function (p) { p.seen = false; }); }
 $('bPace').addEventListener('click', function () { setPace(paceI + 1); });
+$('bMore').addEventListener('click', function () { var on = !$('keys').classList.contains('open'); $('keys').classList.toggle('open', on); $('bMore').setAttribute('aria-expanded', on ? 'true' : 'false'); });
 $('bLabels').addEventListener('click', function () { setLabels((labels + 2) % 3); });
 (function () { var a = recall('pace'), b = recall('labels'); if (a != null && PACES[+a]) setPace(+a); if (b != null && +b >= 0 && +b <= 2) setLabels(+b); })();
 $('bWords').addEventListener('click', function () { words = !words; document.body.classList.toggle('words', words); $('bWords').setAttribute('aria-pressed', words ? 'true' : 'false'); CARDS.forEach(function (s) { setCard(s, null); }); if (world) world.people.forEach(function (p) { p.seen = false; }); });
@@ -1472,31 +1480,35 @@ function startBiz(bi) {
 // ---------- the week's notices: a label at each, and a panel behind it ----------
 // A faith event reads: the organization, what happened (the ledger's line), how many came, who leads it. A sports
 // row reads: the team, the feed's own headline and note, the record, the streak, how the fans feel. All the row's.
-var NTAGS = [], NV = new THREE.Vector3();
+var NTAGS = [], NV = new THREE.Vector3(), NOTE_FAR = 46; // a notice shows once it is close enough to tell what it is on
 function placeNotes() {
   var list = (world && world.notes) || [], w = window.innerWidth, h = window.innerHeight, floor = $('top').getBoundingClientRect().bottom - 20, i;
-  var rects = !list.length ? [] : CARDS.filter(function (s) { return s.p && +s.el.style.opacity > 0.2; }).map(function (s) { var q = s.el.getBoundingClientRect(); return [q.left, q.top, q.width, q.height]; });
+  var rects = TAKEN, show = labels > 0 && !visiting && !bizView && !busy, cand = [];
   for (i = 0; i < Math.max(list.length, NTAGS.length); i++) {
     var a = list[i], el = NTAGS[i];
-    if (!a) { if (el) el.style.opacity = 0; continue; }
+    if (!a) { if (el) el._o = 0; continue; }
     if (!el) { el = NTAGS[i] = document.createElement('div'); el.innerHTML = '<b><i></i><em style="font-style:normal"></em></b><span></span>'; tagsEl.appendChild(el);
       (function (tag) { tag.addEventListener('click', function () { if (tag._a && +tag.style.opacity > 0.3) startNote(tag._a); }); })(el); }
     if (el._a !== a) { el._a = a; el.className = 'ctag n' + ({ s: 's', l: 'l', i: 'i', p: 'p', c: 'c', t: 't', w: 'w', x: 'x' }[a.nt.k] || 'f'); el.querySelector('em').textContent = a.nt.n; el.querySelector('span').textContent = a.nt.x; }
-    var show = labels > 0 && !visiting && !bizView && !busy, o = 0;
+    el._o = 0;
     if (show) {
       NV.set(a.x, a.y + 0.6, a.z).project(camera);
-      var dx = a.x - camera.position.x, dz = a.z - camera.position.z, dist = Math.sqrt(dx * dx + dz * dz), x = (NV.x * 0.5 + 0.5) * w, y = (-NV.y * 0.5 + 0.5) * h, bw = el.offsetWidth, bh = el.offsetHeight;
-      if (NV.z < 1 && dist < a.far && x > -40 && x < w + 40) {
-        o = Math.min(1, (a.far - dist) / 14); var lx = Math.max(8, Math.min(w - bw - 8, x - bw / 2)), ly = Math.max(floor, y - bh - 6);
-        // a label keeps off the cards and off the labels placed before it: it drops below whatever it would cover
-        for (var pass = 0, hit = true; hit && pass < 4; pass++) { hit = false; rects.forEach(function (q) { if (lx < q[0] + q[2] + 6 && lx + bw + 6 > q[0] && ly < q[1] + q[3] + 6 && ly + bh + 6 > q[1]) { ly = q[1] + q[3] + 8; hit = true; } }); }
-        if (ly + bh > h - $('bottom').offsetHeight - 8) o = 0; // no room left above the bottom bar: it waits rather than cover it
-        else rects.push([lx, ly, bw, bh]);
-        el.style.transform = 'translate(' + lx.toFixed(1) + 'px,' + ly.toFixed(1) + 'px)';
-      }
+      var dx = a.x - camera.position.x, dz = a.z - camera.position.z, dist = Math.sqrt(dx * dx + dz * dz), x = (NV.x * 0.5 + 0.5) * w, y = (-NV.y * 0.5 + 0.5) * h;
+      // one already showing holds its place against a newcomer a little nearer, so two do not trade places every frame
+      if (NV.z < 1 && dist < Math.min(a.far, NOTE_FAR) && x > -40 && x < w + 40) cand.push({ el: el, d: dist - (+el.style.opacity > 0.3 ? 6 : 0), x: x, y: y });
     }
-    el.style.opacity = o.toFixed(2); el.style.pointerEvents = o > 0.3 ? 'auto' : 'none';
   }
+  cand.sort(function (p, q) { return p.d - q.d; });
+  // the nearest two (one on a narrow screen): a street's notices come up one after another as it is flown, not all at once
+  cand.slice(0, w < 600 ? 1 : 2).forEach(function (c) {
+    var el = c.el, bw = el.offsetWidth, bh = el.offsetHeight, lx = Math.max(8, Math.min(w - bw - 8, c.x - bw / 2)), ly = Math.max(floor, c.y - bh - 6);
+    // a label keeps off the cards and off the labels placed before it: it drops below whatever it would cover
+    for (var pass = 0, hit = true; hit && pass < 4; pass++) { hit = false; rects.forEach(function (q) { if (lx < q[0] + q[2] + 6 && lx + bw + 6 > q[0] && ly < q[1] + q[3] + 6 && ly + bh + 6 > q[1]) { ly = q[1] + q[3] + 8; hit = true; } }); }
+    if (ly + bh > h - $('bottom').offsetHeight - 8) return; // no room left above the bottom bar: it waits rather than cover it
+    rects.push([lx, ly, bw, bh]); el._o = 1;
+    el.style.transform = 'translate(' + lx.toFixed(1) + 'px,' + ly.toFixed(1) + 'px)';
+  });
+  for (i = 0; i < NTAGS.length; i++) if (NTAGS[i]) { NTAGS[i].style.opacity = NTAGS[i]._o ? 1 : 0; NTAGS[i].style.pointerEvents = NTAGS[i]._o ? 'auto' : 'none'; }
 }
 function words_(v) { return String(v || '').replace(/[_-]/g, ' '); }
 function startNote(a) {
@@ -1626,7 +1638,7 @@ function startHome(qi) {
 var CTAGS = [], CV = new THREE.Vector3();
 function chaosWords(ev) { return String(ev.o || '').replace(/_/g, ' '); }
 function placeChaos() {
-  var list = (world && world.H.chaos) || [], w = window.innerWidth, h = window.innerHeight, floor = $('top').getBoundingClientRect().bottom - 20, i, put = [];
+  var list = (world && world.H.chaos) || [], w = window.innerWidth, h = window.innerHeight, floor = $('top').getBoundingClientRect().bottom - 20, i, put = TAKEN;
   for (i = 0; i < Math.max(list.length, CTAGS.length); i++) {
     var ev = list[i], el = CTAGS[i];
     if (!ev) { if (el) el.style.opacity = 0; continue; }
@@ -1639,7 +1651,10 @@ function placeChaos() {
       CV.set(ev.x, ev.y + 0.7, ev.z).project(camera);
       var dx = ev.x - camera.position.x, dz = ev.z - camera.position.z, dist = Math.sqrt(dx * dx + dz * dz), x = (CV.x * 0.5 + 0.5) * w, y = (-CV.y * 0.5 + 0.5) * h, bw = el.offsetWidth, bh = el.offsetHeight;
       var far = ev.far || 80;
-      if (CV.z < 1 && dist < far && x > -40 && x < w + 40) { o = Math.min(1, (far - dist) / 14); var lx = Math.max(8, Math.min(w - bw - 8, x - bw / 2)), ly = Math.max(floor, y - bh - 6); put.forEach(function (q) { if (lx < q[0] + q[2] + 4 && lx + bw + 4 > q[0] && ly < q[1] + q[3] + 4 && ly + bh + 4 > q[1]) ly = q[1] - bh - 5; }); put.push([lx, ly, bw, bh]); el.style.transform = 'translate(' + lx.toFixed(1) + 'px,' + ly.toFixed(1) + 'px)'; }
+      if (CV.z < 1 && dist < far && x > -40 && x < w + 40) { o = 1; var lx = Math.max(8, Math.min(w - bw - 8, x - bw / 2)), ly = Math.max(floor, y - bh - 6);
+        for (var pass = 0, hit = true; hit && pass < 4; pass++) { hit = false; put.forEach(function (q) { if (lx < q[0] + q[2] + 6 && lx + bw + 6 > q[0] && ly < q[1] + q[3] + 6 && ly + bh + 6 > q[1]) { ly = q[1] + q[3] + 8; hit = true; } }); }
+        if (ly + bh > h - $('bottom').offsetHeight - 8) o = 0; else put.push([lx, ly, bw, bh]);
+        el.style.transform = 'translate(' + lx.toFixed(1) + 'px,' + ly.toFixed(1) + 'px)'; }
     }
     el.style.opacity = o.toFixed(2); el.style.pointerEvents = o > 0.3 ? 'auto' : 'none';
   }

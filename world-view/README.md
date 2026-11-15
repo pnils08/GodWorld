@@ -20,16 +20,16 @@ Builder 2026-11-14, on the sheet review: "lets record these as items to add and 
 |---|---|---|---|---|---|
 | 1 | Neighborhood state on the street: how lit, loud and busy; growing or steady; holiday and First Friday | `Neighborhood_Map` (NightlifeProfile, NoiseIndex, RetailVitality, Sentiment, NeighborhoodTrajectory, TrajectoryMomentum, HousingPressure, MigrationFlow, Holiday, FirstFriday) | 22 rows, one a street | yes, from 2026-11-14 (`scripts/dumpBeatTabs.js` `BEAT_TABS`) | direction built (§The direction scale); nightlife, retail, noise, mood and the holiday flags open |
 | 2 | Staff at their own business, not only the owner | `Employment_Roster` (BIZ_ID, POP_ID, RoleType, Status) | 971 rows, 921 with a BIZ_ID | yes | open |
-| 3 | The week's faith events at the house of worship | `Faith_Ledger` (Organization, EventDescription, Neighborhood, Attendance) | 5 | yes | open |
+| 3 | The week's faith events at the house of worship | `Faith_Ledger` (Organization, EventDescription, Neighborhood, Attendance) | 5 | yes | second in line after homes (builder 2026-11-15: "And the faith add and the sports week After") |
 | 4 | Deaths, retirements, promotions marked on the person or their shop | `Lived_Events` (kind, subject, neighborhood, recipients) | 3, and one death at C114 with its mourners | yes | open |
 | 5 | Initiatives on the streets they affect | `Initiative_Tracker` (AffectedNeighborhoods, ImplementationPhase, Stage, BizID) | 14 | yes | open |
 | 6 | Station ridership: how often trains run, how full | `Transit_Metrics` Station rows (RidershipVolume, OnTimePerformance, Notes) | 8 stations | yes | open |
-| 7 | Game night on the home street | `Oakland_Sports_Feed` (HomeNeighborhood, EventType, Streak, WeekRecord) | 7 | yes | open |
+| 7 | Game night on the home street | `Oakland_Sports_Feed` (HomeNeighborhood, EventType, Streak, WeekRecord) | 7 | yes | third in line, after faith (builder 2026-11-15) |
 | 8 | Community programs where they run | `Community_Programs` (Name, Neighborhood, Founder_POPID, Status) | 33 | yes | open |
 | 9 | Cultural figures on their street | `Cultural_Ledger` (Name, Neighborhood, FameScore, TrendTrajectory) | 51 | yes | open |
 | 10 | Crime numbers | `Crime_Metrics` | 22 | yes | open: what it shows, if anything, is the builder's |
 | 11 | Busy shop fronts and quiet ones | `Business_Ledger` Growth_Rate, Annual_Revenue | 283 | yes | open |
-| 12 | Homes by rent or own | `Household_Ledger` HousingType, MonthlyRent, HouseholdIncome | 677 active households | yes | open |
+| 12 | Homes by rent or own | `Household_Ledger` HousingType, MonthlyRent, HouseholdIncome | 677 active households | yes | NEXT, building (§Homes) |
 | 13 | World events on the street (roadworks, incidents) | `WorldEvents_V3_Ledger` (EventDescription, Severity, Neighborhood) | 10 | no | open |
 | 14 | People who know each other stop to talk | `Relationship_Bonds` (CitizenA, CitizenB, BondType, Intensity) | 697 rows | yes, from 2026-11-15 | built (§People who know each other) |
 | 15 | A street under strain | `Event_Arc_Ledger` (Type, Phase, Tension, Neighborhood) | 0 stamped C115; newest C114 `CRISIS-114-DOWNTOWN` at onset | no | open |
@@ -120,6 +120,22 @@ Builder 2026-11-15: "People who know each other ...", then on the plan: "this is
 - Check: `worldViewCheck.js` (`TIES` line) matches every tie to its active row (order, type, intensity, note, cycles), every such row to the page, an off-street name to the ledger, and a conversation to the pair's latest saved file, line for line; it fails a faded bond, a bare name, a missing tie, and a conversation from a later cycle.
 - Checked (headless, the clock stepped): West Oakland for 80 s: 4 pairs talking on arrival, 2 to 6 at a time after, 12 people walked over to someone in 40 s; the closest two strangers came 0.36 m (someone walking past someone standing) and 0.49 m, against 0.49 to 0.55 m on the page as last committed, measured the same way on three streets. Stills: a pair talking with a hand up, a household stopped with a friend, the card line on a flight card, the panel with a conversation open, and a rival pass on Rockridge (forced for the still: one of the two was moved up the street; none happened unprompted in the minutes stepped). All 22 streets open without error on the final build, 33 pairs talking on arrival across them; 287 of the 298 ties stand on one side of their street (the other 11 had nobody to change places with and stay across the road, undrawn). Page check, 25 page tests and 18 dump tests pass. Not checked: a real phone, motion at a real frame rate, a pass between two walking rivals.
 - Look-test: `WV_DEBUG` leaves `window.__wvLinks` (each tie on the street and its state: 1 one is on the way over, 2 stopping, 3 talking, 5 a bad-tie pass) and `__wv.withLine(person)`, `__wv.visit(id)`, `__wv.data`.
+
+## Homes (plan, 2026-11-15)
+
+Builder 2026-11-15 (§Builder rulings, Homes), then: "File the row and go on the build … I can always change things after". This is the page's side: households on parcels drawn by `layout()`, the way businesses are. Parcel ids on the ledger and parcels carrying value are ROLLOUT engine.345, not this.
+
+- Source: `Household_Ledger` (in the dump): `Status` active, `Neighborhood`, `HousingType` (rented 484 / owned 193 of the 677 active), `HouseholdType`, `Members`, `HeadOfHousehold`, `MonthlyRent`, `FormedCycle`. Every active household's neighborhood is one of the 22 streets, and no citizen's ledger neighborhood differs from their household's. C115: West Oakland 80 rented / 14 owned, Lake Merritt 56 / 18, Fruitvale 57 / 8, Rockridge 43 / 20, Downtown 39 / 19; eleven streets have under ten households.
+- A home is a parcel, or a unit of one, with an id, and one household on it: `data.hoods[].homes = [{ hh, lot (parcel id), unit, own, head, names, type, rent, since }]`, and the parcel carries `hm` (indexes into it). Ids are not shown on screen: they are not addresses until engine.345 puts them on the ledger. When the ledger carries a parcel per household, read it in `layout()` and drop the choosing.
+- Who goes where (drawing choices; the builder's to change):
+  - Renters: units over the shops and in the plain buildings of the main street (upper floors by the building's height, units by its width; a building with no business also has its ground floor), spread evenly down the street, dearer rent higher up.
+  - Owners: houses. Where the street already has houses between its businesses (`fill: 'house'`), owners take those first, spread evenly. Everywhere else, and for whoever is left over, the street runs on past the last business into a residential stretch: house lots, one household each, with a few untracked houses among them (the ledger is the tracked share of the city, never all of it).
+  - Renters a street has no unit for take a house on the residential stretch (the builder's "or a seperate block").
+- The street: `lay.L` grows by the residential stretch; `lay.Lm` is where the main street ends. Landmarks, businesses and the people keep to the main street as before; the stretch has its own seeded numbers, so the main street is laid out exactly as it was.
+- People: unchanged in this cut, except that someone whose week names no place (`noPlace`) and whose home is on this street stands at their own door. People coming out of their door and walking to the main street is not in this cut.
+- On screen: tap a house, or a building with tracked homes in it, for who lives there (head, members with links, couple / family / single / solo, rents or owns, the rent for a renter, the week the household formed); a business panel lists the tracked households upstairs; the person panel links to their home; the top line counts the households on the street. A tracked house has its porch light on.
+- Check: `worldViewCheck.js` matches every home to its active `Household_Ledger` row (neighborhood, housing type, head, members, rent, cycle), every active household of a shown street to exactly one home, and every home to a lot that exists with room for it.
+- Order after this (builder 2026-11-15: "And the faith add and the sports week After"): add-list 3, the week's faith events at the house of worship; then add-list 7, game night on the home street.
 
 ## Boats (2026-11-14)
 

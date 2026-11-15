@@ -282,6 +282,7 @@ function homeRec(h) {
   return o;
 }
 const r2 = x => Math.round(x * 100) / 100;
+const BLOCK_MIN = 60; // a residential block is at least this long, however few tracked households stand on it
 function layout(H) {
   const ST = Object.assign({}, DEF, STYLE[H.name]);
   const r = rng(hash(H.name + '|parcels')), rr = a => a[0] + r() * (a[1] - a[0]);
@@ -348,27 +349,29 @@ function layout(H) {
   const own1 = Math.min(owners.length, houses.length); even(houses, own1).forEach((o, k) => put(owners[k], o));
   const spare = houses.filter(o => !o.hm), rent1 = Math.min(left.length, spare.length); even(spare, rent1).forEach((o, k) => put(left[k], o));
   left = owners.slice(own1).concat(left.slice(rent1));
-  // the residential stretch: the street runs on past its last business into house lots, one household each, and a
-  // few houses nobody on record lives in; then the gate, and houses beyond it
-  let LT = L;
+  // The residential block (builder 2026-11-15: "I thought it was a new block not on the Main Street"): a street of
+  // its own beside the main one, reached from it, never part of it. House lots, one household each (the owners the
+  // main street had no house for, and any renter it had no unit for), with houses nobody on record lives in among
+  // them: the ledger is the tracked share of the city. The main street is left exactly as it was before homes.
+  let block = null;
   if (left.length) {
-    // lots are kept narrow so the stretch stays walkable: terraced where the street is dense, brick, glass or along
-    // water (one side only), a house street's own lots a little narrower, detached houses elsewhere
-    const hs = sideStyle(sides[0]), row = hs.fill !== 'house' && (!!water || hs.gap[1] <= 1 || hs.wall === 'glass' || hs.wall === 'brick');
+    // lots are kept narrow so the block stays walkable: terraced where the main street is dense, brick or glass,
+    // a house street's own lots a little narrower, detached houses elsewhere. No water: the block is inland of it.
+    const hs = sideStyle(sides[0]), row = hs.fill !== 'house' && (hs.gap[1] <= 1 || hs.wall === 'glass' || hs.wall === 'brick');
     const dim = hs.fill === 'house' ? { w: [hs.w[0] * 0.8, hs.w[1] * 0.8], g: hs.gap, h: hs.h } : row ? { w: [6, 7.5], g: [0.1, 0.4], h: [6, 8.5] } : { w: [8, 10], g: [0.5, 1.2], h: [4, 5.6] };
-    const n = left.length + Math.max(2, Math.round(left.length * 0.15)), cur = {}, kk = Object.assign({}, counts), lots = [];
-    // (the main street's last buildings used to run on 30 m behind the gate as a backdrop; the houses start there instead)
-    for (let i = out.length - 1; i >= 0; i--) if (out[i].z - out[i].w / 2 < -L - 3) out.splice(i, 1);
-    const z0 = Math.min.apply(null, sides.map(s => Math.min.apply(null, out.filter(o => o.s === s).map(o => o.z - o.w / 2).concat([ends[s] + 60])))) - 1; sides.forEach(s => { cur[s] = z0; });
-    const lot = s => { const w = rrH(dim.w), g = rrH(dim.g), o = { id: slug(H.name) + '-' + (s < 0 ? 'w' : 'e') + String(++kk[s]).padStart(2, '0'), s, z: r2(cur[s] - w / 2), w: r2(w), k: 'h', h: r2(rrH(dim.h)), d: r2(7 + rH() * 2), tone: hs.tone, lit: lit(Math.max(hs.lit, 0.45)), tr: Math.max(hs.trees || 0, 0.35), res: 1 }; cur[s] -= w + g; out.push(o); return o; };
-    for (let i = 0; i < n; i++) lots.push(lot(sides[i % sides.length]));
+    const bs = [-1, 1], cur = { '-1': 42, 1: 42 }, kk = { '-1': 0, 1: 0 }, bout = [], lots = [];
+    const lot = s => { const w = rrH(dim.w), g = rrH(dim.g), o = { id: slug(H.name) + '-r' + (s < 0 ? 'w' : 'e') + String(++kk[s]).padStart(2, '0'), s, z: r2(cur[s] - w / 2), w: r2(w), k: 'h', h: r2(rrH(dim.h)), d: r2(7 + rH() * 2), tone: hs.tone, lit: lit(Math.max(hs.lit, 0.45)), tr: Math.max(hs.trees || 0, 0.35), res: 1 }; cur[s] -= w + g; bout.push(o); return o; };
+    bs.forEach(s => { while (cur[s] > 4) lot(s); });                       // houses behind where the block is entered
+    const n = left.length + Math.max(2, Math.round(left.length * 0.15));   // a sixth more lots than households, at least two
+    for (let i = 0; lots.length < n || Math.max(cur[-1], cur[1]) > -BLOCK_MIN + 6; i++) lots.push(lot(bs[i % 2])); // and never a block shorter than BLOCK_MIN
     even(lots, left.length).forEach((o, k) => put(left[k], o));
-    LT = -Math.min.apply(null, sides.map(s => cur[s])) + 2;
-    sides.forEach(s => { while (cur[s] > -LT - 30) lot(s); });
+    const LB = -Math.min(cur[-1], cur[1]) + 2;
+    bs.forEach(s => { while (cur[s] > -LB - 30) lot(s); });                // houses beyond its far end
+    block = { L: r2(LB), Lm: r2(LB), water: 0, slope: ST.slope || 0, parcels: bout, places: [] };
   }
-  return { L: r2(LT), Lm: r2(L), water, slope: water ? 0 : ST.slope, parcels: out, places: places.map(p => ({ b: p.i, type: p.type, half: p.half, s: p.s, z: p.z, end: p.end })), homes };
+  return { L: r2(L), Lm: r2(L), water, slope: water ? 0 : ST.slope, parcels: out, places: places.map(p => ({ b: p.i, type: p.type, half: p.half, s: p.s, z: p.z, end: p.end })), homes, block };
 }
-hoods.forEach(h => { const lay = layout(h); h.homes = lay.homes; delete lay.homes; h.lay = lay; if (RAIL[h.name]) h.rail = RAIL[h.name]; });
+hoods.forEach(h => { const lay = layout(h); h.homes = lay.homes; delete lay.homes; if (lay.block) h.block = lay.block; delete lay.block; h.lay = lay; if (RAIL[h.name]) h.rail = RAIL[h.name]; });
 const homesElsewhere = []; Object.keys(hhByHood).forEach(n => { if (!hoods.some(h => h.name === n)) hhByHood[n].forEach(h => homesElsewhere.push({ hh: h.HouseholdId, hood: n })); });
 hoods.forEach(h => h.people.forEach(p => { if (p.runs) { const i = h.biz.findIndex(x => p.runs.some(rn => rn.id === x.id)); if (i >= 0) p.at = i; p.runs = p.runs.map(rn => ({ n: rn.n, hood: rn.hood })); } }));
 
@@ -622,7 +625,7 @@ console.log('rail line on:', hoods.filter(h => h.lay.places.some(p => p.type ===
     + (tieSkips.talksNoTie ? '; ' + tieSkips.talksNoTie + ' saved conversation(s) between people whose bond is no longer active, not shown' : ''));
 }
 console.log('homes: ' + hoods.reduce((a, h) => a + h.homes.length, 0) + ' active households on parcels (' + hoods.reduce((a, h) => a + h.homes.filter(x => x.own).length, 0) + ' owned); '
-  + hoods.filter(h => h.homes.length).map(h => { const res = new Set(h.lay.parcels.filter(p => p.res).map(p => p.id)), onRes = h.homes.filter(x => res.has(x.lot)).length; return h.name + ' ' + h.homes.length + (h.lay.L > h.lay.Lm ? ' (' + onRes + ' on a ' + Math.round(h.lay.L - h.lay.Lm) + ' m stretch)' : ''); }).join(', ')
+  + hoods.filter(h => h.homes.length).map(h => { const res = new Set(((h.block || {}).parcels || []).map(p => p.id)), onRes = h.homes.filter(x => res.has(x.lot)).length; return h.name + ' ' + h.homes.length + (h.block ? ' (' + onRes + ' on its ' + Math.round(h.block.L) + ' m residential block)' : ''); }).join(', ')
   + (homesElsewhere.length ? '; ' + homesElsewhere.length + ' household(s) in a neighborhood with no street this week, not shown' : ''));
 console.log('staff: ' + hoods.reduce((a, h) => a + h.people.filter(p => p.wk != null).length, 0) + ' people are shown on the street of the business the roster has them working at');
 console.log('notices: ' + faithRows.length + ' faith event(s), ' + sportRows.length + ' sports row(s), ' + livedRows.length + ' lived event(s), ' + initRows.filter(r => ws(r.Status).toLowerCase() !== 'failed').length + ' initiative(s) not failed, ' + progRows.length + ' program(s), ' + cultRows.length + ' cultural figure(s), ' + transitRows.filter(r => stationBase[ws(r.Station)]).length + ' station row(s), ' + worldRows.length + ' world event(s), ' + textureRows.length + ' street texture(s) — ' + hoods.filter(h => h.notes.length).map(h => h.name + ': ' + h.notes.map(nt => nt.n + (nt.k === 's' ? ' ' + nt.type + (nt.week ? ' ' + nt.week : '') : nt.list ? ' (' + nt.list.length + ')' : nt.k === 't' ? (nt.line ? ' (at the line)' : ' (no line drawn)') : nt.hh ? ' (at their home)' : nt.b != null ? ' (at its building)' : ' (on the pavement)')).join(', ')).join('; ') + (notesElsewhere.length ? '; not on a street: ' + notesElsewhere.map(nt => nt.n + ' → ' + (nt.hood || 'no neighborhood')).join(', ') : ''));

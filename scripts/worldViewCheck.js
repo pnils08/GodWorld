@@ -389,7 +389,7 @@ function checkWorldView(build, sources, engine, secondBuild, reports = []) {
   {
     const seen = new Set(); let matched = 0;
     for (const h of hoods) {
-      const lots = new Map(arr(h?.lay?.parcels || [], `${h?.name}.parcels`).map(p => [p?.id, p])), taken = new Set(), homes = arr(h?.homes || [], `${h?.name}.homes`);
+      const lots = new Map(arr(h?.lay?.parcels || [], `${h?.name}.parcels`).concat(arr(h?.block?.parcels || [], `${h?.name}.block.parcels`)).map(p => [p?.id, p])), taken = new Set(), homes = arr(h?.homes || [], `${h?.name}.homes`);
       homes.forEach((hm, k) => {
         const where = `${h.name}/${hm?.hh}`, row = households.get(hm?.hh);
         if (!row || String(row.Status || '').trim().toLowerCase() !== 'active') { fail('home', where, 'no active Household_Ledger row'); return; }
@@ -527,8 +527,8 @@ function checkWorldView(build, sources, engine, secondBuild, reports = []) {
     }
   }
   if (!secondBuild?.data?.hoods || !equal(
-    hoods.map(h => ({ name: h.name, lay: h.lay })),
-    secondBuild.data.hoods.map(h => ({ name: h.name, lay: h.lay })))) {
+    hoods.map(h => ({ name: h.name, lay: h.lay, block: h.block })),
+    secondBuild.data.hoods.map(h => ({ name: h.name, lay: h.lay, block: h.block })))) {
     fail('layout', 'two builds', 'layouts differ or second build is missing');
   }
   return failures;

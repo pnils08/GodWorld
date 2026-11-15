@@ -330,7 +330,24 @@ test('a home is an active household row on one lot of its own street', () => {
   rejects('home', f => { housed(f); f.hood.homes[0].lot = 'synthetic-e99'; });                     // a lot the street does not have
   rejects('home', f => { housed(f); delete f.hood.lay.parcels[1].hm; });                           // the lot does not point back
   rejects('home', f => { housed(f, { Status: 'dissolved' }); });                                   // a dissolved household shown
-  rejects('home', f => { housed(f, { Neighborhood: 'SYNTHETIC Elsewhere' }); });                   // a household of another neighborhood
+  rejects('home', f => { housed(f, { Neighborhood: 'SYNTHETIC Elsewhere' });
+
+// the residential block: a street of its own beside the main one; a home may stand on a lot of either
+function onBlock(f) {
+  housed(f);
+  delete f.hood.lay.parcels[1].hm; delete f.hood.homes[0].unit;
+  f.hood.block = { L: 60, Lm: 60, water: 0, slope: 0, places: [], parcels: [{ id: 'synthetic-re01', s: 1, z: -10, w: 8, k: 'h', h: 5, d: 8, res: 1, hm: [0] }] };
+  f.hood.homes[0].lot = 'synthetic-re01';
+  f.second = structuredClone(f.build);
+  return f;
+}
+test('a home may stand on a lot of the neighborhood\'s residential block', () => {
+  assert.deepEqual(check(onBlock(fixture())), []);
+  rejects('home', f => { onBlock(f); f.hood.homes[0].lot = 'synthetic-re09'; f.second = structuredClone(f.build); });   // a lot neither street has
+  rejects('home', f => { onBlock(f); delete f.hood.block.parcels[0].hm; f.second = structuredClone(f.build); });       // the block's lot does not point back
+  rejects('layout', f => { onBlock(f); f.second.data.hoods[0].block.parcels[0].z = -11; });                            // the block is laid out the same on every build
+});
+ });                   // a household of another neighborhood
   rejects('home', f => { housed(f); delete f.hood.homes[0].unit; });                               // a building home with no unit
 });
 

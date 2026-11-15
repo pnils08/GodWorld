@@ -35,6 +35,7 @@ LIFE.traffic = function (k) {
   var dens = 0.15 + Math.min(hTop, 30) / 40 + (ST.neon || 0) * 0.45 + ((ST.lit != null ? ST.lit : 0.45) - 0.45) * 0.5 - (house ? 0.3 : 0);
   if (/residential|quiet|invisib/i.test(q)) dens *= 0.45;
   if (/thinner after dark/i.test(q)) dens *= 0.8;
+  if (ST.block) dens *= 0.5; // a residential block off the main street: the odd car
   if (/entertainment|venues|spine/i.test(q)) dens += 0.15;
   if ((ST.lit != null ? ST.lit : 0.45) <= 0.2 && hTop < 20) dens *= 0.5; // a dim low street: few people about
   if (house && !/quiet|invisib/i.test(q)) dens = Math.max(dens, 0.12); // ordinary house streets still see a car

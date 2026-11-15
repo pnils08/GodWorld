@@ -167,6 +167,7 @@ body.visit #bottom, body.visit #keys { display: none; }
     <button id="bPlaces" type="button">Places</button>
     <button id="bWalk" type="button" aria-pressed="false">Walk it yourself</button>
     <button id="bPlay" type="button">Pause</button>
+    <button id="bHomes" type="button" hidden>Homes</button>
     <button id="bNext" type="button">Next place</button>
     <button id="bMore" type="button" aria-expanded="false" aria-label="Settings">&#8943;</button>
     <button id="bPace" class="x" type="button">Pace: normal</button>
@@ -245,7 +246,7 @@ function tieWords(t) {
   }
 }
 // where each household lives: DATA.hoods[].homes (a parcel of the street, or a unit of one, chosen by the page's layout)
-var HOMES = {}; DATA.hoods.forEach(function (H, hi) { (H.homes || []).forEach(function (hm, k) { HOMES[hm.hh] = { h: hi, k: k }; }); });
+var HOMES = {}; DATA.hoods.forEach(function (H, hi) { var bl = {}; ((H.block || {}).parcels || []).forEach(function (q) { bl[q.id] = 1; }); (H.homes || []).forEach(function (hm, k) { HOMES[hm.hh] = { h: hi, k: k, blk: !!bl[hm.lot] }; }); });
 function tieName(id) { return BYID[id] ? BYID[id].d.n : (DATA.offStreet || {})[id] || id; }
 // what a card says while two people who know each other are stopped together, or passing each other on bad terms
 function withLine(p) {
@@ -641,7 +642,19 @@ if (WX === 'rain') {
 }
 
 // ---------- a place ----------
-var world = null, cur = 0;
+var world = null, cur = 0, blk = false; // blk: the scene is this neighborhood's residential block, not its main street
+// A neighborhood's residential block is a scene of its own (builder 2026-11-15: "a new block not on the Main Street"):
+// the same neighborhood, its house lots (build.js `block`), the households on them, and whoever of this week's
+// people lives there, at their own door. Nothing of the main street is on it: no business, no landmark, no chaos car.
+function blockHood(H0) {
+  if (!H0.block) return null;
+  if (!H0._blk) {
+    var on = {}; (H0.homes || []).forEach(function (hm) { if (HOMES[hm.hh].blk) on[hm.hh] = 1; });
+    H0._blk = { name: H0.name, isBlock: true, people: H0.people.filter(function (p) { return p.hh && on[p.hh]; }), biz: [], homes: H0.homes, lay: H0.block, chaos: [], notes: H0.notes || [], state: H0.state, nHomes: Object.keys(on).length };
+  }
+  return H0._blk;
+}
+function noteBlk(hi, ni) { var nt = (DATA.hoods[hi].notes || [])[ni]; return !!(nt && nt.hh && HOMES[nt.hh] && HOMES[nt.hh].blk); }
 function dispose(obj) {
   obj.traverse(function (o) {
     if (o.geometry) o.geometry.dispose();
@@ -652,9 +665,11 @@ function dispose(obj) {
 // Ambient life, one file each, inlined by build.js: LIFE.traffic, LIFE.nature, LIFE.water, LIFE.street; SOUND.
 var LIFE = {}, SOUND = null;
 /*__LIFE__*/
-function build(idx) {
-  var H = DATA.hoods[idx], next = DATA.hoods[(idx + 1) % DATA.hoods.length], LAY = H.lay;
+function build(idx, onBlk) {
+  var H0 = DATA.hoods[idx], H = (onBlk && blockHood(H0)) || H0, next = DATA.hoods[(idx + 1) % DATA.hoods.length], LAY = H.lay;
   var ST = Object.assign({}, DEF, (DATA.style || {})[H.name] || {});
+  // the block keeps the neighborhood's walls, sky and hill; it has none of the main street's scenery, water, neon or traffic
+  if (H.isBlock) Object.assign(ST, { set: [], water: null, fill: 'house', neon: 0, q: '', block: true });
   var r = rng(hash(H.name)), root = new THREE.Group(), M = new THREE.Matrix4(), col = new THREE.Color(), i;
   var has = function (k) { return ST.set.indexOf(k) >= 0; };
 
@@ -926,6 +941,8 @@ function build(idx) {
   (H.notes || []).forEach(function (nt, ni) {
     var a = { nt: nt, far: 70 }, lot = nt.b != null ? LAY.parcels.filter(function (q) { return q.b === nt.b; })[0] : null, plc = nt.b != null ? LAY.places.filter(function (q) { return q.b === nt.b && q.half > 0; })[0] : null;
     var hrec = nt.hh ? (H.homes || []).filter(function (x) { return x.hh === nt.hh; })[0] : null, hlot = hrec ? LAY.parcels.filter(function (q) { return q.id === hrec.lot; })[0] : null;
+    // a notice at someone's home stands where the home is: on the block if that is where they live, never on both
+    if (H.isBlock ? !hlot : (hrec && !hlot)) return;
     if (nt.k === 't' && railP) { a.s = railI % 2 ? -1 : 1; a.x = a.s * (WALK - 1.5); a.z = railP.z; a.y = 6.6 + yAt(a.z); a.far = 100; a.at = 1; railI++; }
     else if (hlot) { a.s = hlot.s; a.x = hlot.s * (WALK + (hlot.k === 'h' ? 1.4 : -0.4)); a.z = hlot.z + (hlot.k === 'h' ? (hlot.w - 2.5) * 0.25 : 0); a.y = (hlot.k === 'h' ? 3.4 : 5) + yAt(a.z); a.at = 1; a.home = 1; }
     else if (plc) { a.s = plc.s || 1; a.x = a.s * (WALK + 1.2); a.z = plc.z; a.y = 6.2 + yAt(a.z); a.far = 110; a.at = 1; }
@@ -934,9 +951,19 @@ function build(idx) {
     if (nt.k === 'f' && a.at) { glow(a.s * (WALK + 0.6), 1.6 + yAt(a.z), a.z, 0xffd28a, 6); for (var li = -3; li <= 3; li++) if (li) glow(a.s * (WALK - 0.5), 0.35 + yAt(a.z + li * 1.1), a.z + li * 1.1, 0xffc070, 0.9); }
     // someone who died: candles at the door
     if (nt.k === 'l' && nt.kind === 'death') for (var ci = 0; ci < 6; ci++) glow(a.s * (WALK - 0.35 - (ci % 2) * 0.3), 0.25 + yAt(a.z), a.z - 0.9 + ci * 0.36, 0xffb45e, 0.7);
-    notes.push(a);
+    notes[ni] = a; // kept at the row's own index (links to a notice go by it), so a street that skips one has a gap
   });
-  if ((H.notes || []).some(function (nt) { return nt.k === 's' && /^H:/.test(nt.week || ''); })) {
+  if (H0.block) {
+    // the way to this neighborhood's other street: a sign on a post near the far end. Tap it, or its label.
+    var tn = { nt: { k: 'h', n: H.isBlock ? 'Main street' : 'Homes', x: H.isBlock ? 'Back to the main street of ' + H.name : 'The residential block of ' + H.name }, far: 70, turn: true, s: water ? -water : 1 };
+    tn.z = -Lmain + 8; tn.x = tn.s * (WALK - 0.9); tn.y = 3.3 + yAt(tn.z);
+    box(0.1, 3.3, 0.1, tn.x, 1.65 + yAt(tn.z), tn.z, [30, 0.1, 0.2]);
+    var tnm = new THREE.MeshBasicMaterial({ map: signTex(tn.nt.n, 48) }); tnm.userData.own = true;
+    var tns = new THREE.Mesh(new THREE.PlaneGeometry(2.6, 0.98), tnm); tns.position.set(tn.x, 2.85 + yAt(tn.z), tn.z + 0.06); root.add(tns);
+    glow(tn.x, 3.4 + yAt(tn.z), tn.z, 0xffd9a0, 2.2);
+    notes[(H.notes || []).length] = tn;
+  }
+  if (!H.isBlock && (H.notes || []).some(function (nt) { return nt.k === 's' && /^H:/.test(nt.week || ''); })) {
     var pn = [], pz, pi;
     for (pz = 2; pz > -Lmain + 8; pz -= 15) {
       if (LAY.places.some(function (q) { return (q.type === 'station' || q.type === 'rail') && Math.abs(q.z - pz) < 12; })) continue;
@@ -980,8 +1007,8 @@ function build(idx) {
       if (lot) { o.s = lot.s; o.x = lot.s * (WALK - 1.3); o.z0 = lot.z + 1.2; o.amp = 0; o.post = true; }
       else if (plc) { o.s = plc.s || 1; o.x = o.s * (WALK - 1.3); o.z0 = plc.z + plc.half - 2; o.amp = 0; o.post = true; }
     }
-    if (d.noPlace && d.at == null && d.hh && HOMES[d.hh] && DATA.hoods[HOMES[d.hh].h] === H) {
-      // nothing in their week names a place: they stand at their own door
+    if ((H.isBlock || (d.noPlace && d.at == null)) && d.hh && HOMES[d.hh] && DATA.hoods[HOMES[d.hh].h] === H0) {
+      // nothing in their week names a place: they stand at their own door. On the residential block everyone shown is at theirs.
       var hrec = H.homes[HOMES[d.hh].k], hlot = LAY.parcels.filter(function (q) { return q.id === hrec.lot; })[0];
       if (hlot) { o.s = hlot.s; o.x = hlot.s * (WALK - 1.3); o.z0 = hlot.z + (hlot.k === 'h' ? (hlot.w - 2.5) * 0.25 : 0); o.amp = 0; o.post = true; o.door = true; }
     }
@@ -1028,7 +1055,7 @@ function build(idx) {
   var lotById = {}; LAY.parcels.forEach(function (q) { lotById[q.id] = q; });
   people.forEach(function (o) {
     var d = o.d, sp = []; if (o.lead || o.post) return;
-    if (d.hh && HOMES[d.hh] && DATA.hoods[HOMES[d.hh].h] === H) { var hl = lotById[H.homes[HOMES[d.hh].k].lot]; if (hl) sp.push({ kind: 'home', s: hl.s, z: hl.z + (hl.k === 'h' ? (hl.w - 2.5) * 0.25 : 0), far: hl.res ? 1 : 0 }); }
+    if (d.hh && HOMES[d.hh] && DATA.hoods[HOMES[d.hh].h] === H0) { var hl = lotById[H.homes[HOMES[d.hh].k].lot]; if (hl) sp.push({ kind: 'home', s: hl.s, z: hl.z + (hl.k === 'h' ? (hl.w - 2.5) * 0.25 : 0), far: hl.res ? 1 : 0 }); }
     if (d.wk != null) { var wl = LAY.parcels.filter(function (q) { return q.b === d.wk; })[0], wp = LAY.places.filter(function (q) { return q.b === d.wk && q.half > 0; })[0]; if (wl) sp.push({ kind: 'work', s: wl.s, z: wl.z + 1.6, n: H.biz[d.wk].n }); else if (wp && wp.s) sp.push({ kind: 'work', s: wp.s, z: wp.z + wp.half - 3, n: H.biz[d.wk].n }); }
     if (sp.length) o.want = sp;
   });
@@ -1171,15 +1198,17 @@ var bizView = null, visiting = null, words = false, walking = false, yaw = 0, pi
 var CAM = { x: 0, y: 0, z: 0, walking: false };
 function facts() {
   var H = world.H, w = DATA.weather, bits = [];
-  bits.push([H.total, ' tracked ' + (H.total === 1 ? 'person' : 'people') + ' and ', H.lines, ' things that happened to them']);
-  if ((H.homes || []).length) bits.push([H.homes.length, H.homes.length === 1 ? ' household' : ' households']);
+  $('bHomes').hidden = !DATA.hoods[cur].block; $('bHomes').textContent = blk ? 'Main street' : 'Homes';
+  if (H.isBlock) bits.push([H.nHomes, (H.nHomes === 1 ? ' household' : ' households') + ' on record on this block, among houses nobody on record lives in']);
+  else bits.push([H.total, ' tracked ' + (H.total === 1 ? 'person' : 'people') + ' and ', H.lines, ' things that happened to them']);
+  if (!H.isBlock && (H.homes || []).length) bits.push([H.homes.length, H.homes.length === 1 ? ' household' : ' households']);
   if (H.biz.length) bits.push([H.biz.length, ' businesses']);
   if (w.temp) bits.push(['', String(w.temp) + '\u00B0, ' + String(w.streakType || w.type)]);
   if ((H.chaos || []).length) bits.push([H.chaos.length, H.chaos.length === 1 ? ' chaos car' : ' chaos cars']);
   // where the street stands on the direction scale, in the engine's own word (decay | steady | growth)
-  if (H.state) bits.push([(H.state.scale > 0 ? '+' : H.state.scale < 0 ? '\u2212' : '') + Math.abs(H.state.scale), ' ' + H.state.dir + (H.state.since ? ' since week ' + H.state.since : '') + (H.state.test ? ' (look-test)' : '')]);
+  if (H.state && !H.isBlock) bits.push([(H.state.scale > 0 ? '+' : H.state.scale < 0 ? '\u2212' : '') + Math.abs(H.state.scale), ' ' + H.state.dir + (H.state.since ? ' since week ' + H.state.since : '') + (H.state.test ? ' (look-test)' : '')]);
   $('hood').textContent = H.name;
-  $('canon').textContent = world.ST.q ? '“' + world.ST.q + '”' : '';
+  $('canon').textContent = H.isBlock ? 'The residential block, off the main street' : world.ST.q ? '“' + world.ST.q + '”' : '';
   var fx = $('facts'); fx.textContent = 'Week ' + DATA.cycle + '. ';
   bits.forEach(function (bit, bi) { if (bi) fx.appendChild(document.createTextNode(' \u00B7 ')); bit.forEach(function (part, pi) { if (pi % 2 === 0 && part !== '') { var bEl = document.createElement('b'); bEl.textContent = String(part); fx.appendChild(bEl); } else if (part !== '') fx.appendChild(document.createTextNode(String(part))); }); });
   fx.appendChild(document.createTextNode('.'));
@@ -1213,22 +1242,27 @@ function startNums() {
   $('person').hidden = false; $('person').scrollTop = 0;
 }
 var queued = null;
-function go(idx, startAt, who) {
-  if (busy) { queued = [idx, startAt, who]; return; } busy = true; endVisit(true); $('fade').classList.add('on');
+function go(idx, startAt, who, toBlk) {
+  if (busy) { queued = [idx, startAt, who, toBlk]; return; } busy = true; endVisit(true); $('fade').classList.add('on');
   setTimeout(function () {
     if (world) { scene.remove(world.root); dispose(world.root); }
     CARDS.forEach(function (s) { setCard(s, null); }); CHIPS.forEach(function (s) { setChip(s, null); }); pinned = null; openTag = null;
-    cur = (idx + DATA.hoods.length) % DATA.hoods.length; world = build(cur); facts();
+    cur = (idx + DATA.hoods.length) % DATA.hoods.length;
+    // which of the neighborhood's two streets: the one asked for, else the one the home or the notice being opened is on
+    // (`who` is a person's record, or { home: household id }, or { note: index }. A person's record carries a `home` of its own, an object: only a string is a household to open.)
+    var homeId = who && typeof who.home === 'string' ? who.home : null;
+    var wantBlk = toBlk != null ? !!toBlk : !!(homeId && HOMES[homeId] && HOMES[homeId].blk) || !!(who && who.note != null && noteBlk(cur, who.note));
+    blk = wantBlk && !!DATA.hoods[cur].block; world = build(cur, blk); facts();
     if (DBG && DBG.t0) world.t = DBG.t0;
     if (SOUND && SOUND.enter) SOUND.enter({ name: world.H.name, style: world.ST, water: world.H.lay.water, weather: WX, people: world.H.people.length, places: world.H.lay.places.map(function (p) { return { type: p.type, s: p.s, z: p.z }; }) });
     if (startAt) world.z = 10 - (10 - world.gz) * startAt;
     yaw = 0; pitch = 0; step(0); draw();
     last = performance.now(); clock0 = last; slow = 0;
-    try { history.replaceState(null, '', '#' + (who && !who.home && who.note == null ? 'who-' + slug(who.n) + '-' + String(who.id || '').replace(/\D/g, '') : slug(world.H.name))); } catch (e) {}
+    try { history.replaceState(null, '', '#' + (who && !homeId && who.note == null ? 'who-' + slug(who.n) + '-' + String(who.id || '').replace(/\D/g, '') : slug(world.H.name) + (blk ? '-homes' : ''))); } catch (e) {}
     $('fade').classList.remove('on'); busy = false;
-    if (who && who.home) openHome(who.home); else if (who && who.note != null) { if (world.notes[who.note]) startNote(world.notes[who.note]); } else if (who) startVisit(who);
+    if (homeId) openHome(homeId); else if (who && who.note != null) { if (world.notes[who.note]) startNote(world.notes[who.note]); } else if (who) startVisit(who);
     if (DBG && DBG.ride != null && world.H.chaos && world.H.chaos[DBG.ride]) startChaos(world.H.chaos[DBG.ride]);
-    if (queued) { var q = queued; queued = null; go(q[0], q[1], q[2]); }
+    if (queued) { var q = queued; queued = null; go(q[0], q[1], q[2], q[3]); }
   }, world ? 400 : 0);
 }
 function step(dt) {
@@ -1346,6 +1380,7 @@ $('bLabels').addEventListener('click', function () { setLabels(labels === 1 ? 2 
 $('bWords').addEventListener('click', function () { words = !words; document.body.classList.toggle('words', words); $('bWords').setAttribute('aria-pressed', words ? 'true' : 'false'); CARDS.forEach(function (s) { setCard(s, null); }); if (world) world.people.forEach(function (p) { p.seen = false; }); });
 $('bPlay').addEventListener('click', function () { setPlay(!playing); });
 $('bNext').addEventListener('click', function () { go(cur + 1); });
+$('bHomes').addEventListener('click', function () { go(cur, 0, null, !blk); });
 if (SOUND && SOUND.supported && SOUND.supported()) { $('bSound').hidden = false; $('bSound').addEventListener('click', function () { var on = $('bSound').getAttribute('aria-pressed') !== 'true'; $('bSound').setAttribute('aria-pressed', on ? 'true' : 'false'); if (on) { SOUND.start(); setTimeout(function () { if ($('bSound').getAttribute('aria-pressed') === 'true' && SOUND.state && SOUND.state() !== 'running') $('hint').textContent = 'Sound is on but the browser is holding it. Check the volume and the ring/silent switch, then press Sound twice.'; }, 1800); } else { SOUND.stop(); if (!walking) $('hint').textContent = ''; } }); }
 $('bPlaces').addEventListener('click', function () { closePeople(); var p = $('places'); p.hidden = !p.hidden; $('bPlaces').textContent = p.hidden ? 'Places' : 'Close'; if (!p.hidden) drawMap(); });
 // The overview map: the sim holds which neighborhoods border which (Neighborhood_Map.Adjacent), not where they
@@ -1362,7 +1397,7 @@ function drawMap() {
   svg.setAttribute('viewBox', '0 0 ' + VW + ' ' + VH); svg.textContent = '';
   m.edges.forEach(function (e) { var a = at(e[0]), b = at(e[1]); svg.appendChild(el('line', { x1: a[0], y1: a[1], x2: b[0], y2: b[1] })); });
   DATA.hoods.forEach(function (H, i) {
-    var p = at(i), sc = H.state ? H.state.scale : 0, r = (tall ? 14 : 9) + (tall ? 2.6 : 1.8) * Math.sqrt(H.total || 0), g = el('g', { 'class': world && world.H === H ? 'here' : '', tabindex: 0, role: 'button', 'aria-label': H.name });
+    var p = at(i), sc = H.state ? H.state.scale : 0, r = (tall ? 14 : 9) + (tall ? 2.6 : 1.8) * Math.sqrt(H.total || 0), g = el('g', { 'class': world && DATA.hoods[cur] === H ? 'here' : '', tabindex: 0, role: 'button', 'aria-label': H.name });
     var fill = sc > 0 ? 'hsl(128,' + (20 + sc * 9) + '%,' + (62 - sc * 3) + '%)' : sc < 0 ? 'hsl(6,' + (20 - sc * 12) + '%,' + (62 + sc * 2) + '%)' : 'hsl(38,35%,78%)';
     g.appendChild(el('circle', { cx: p[0], cy: p[1], r: r, fill: fill }));
     g.appendChild(el('text', { x: p[0], y: p[1] + r + (tall ? 32 : 23) }, H.name));
@@ -1424,7 +1459,7 @@ var BYNAME = {}, NAMEN = {}; ALLP.forEach(function (e) { NAMEN[e.d.n] = (NAMEN[e
 // organization they lead, a retirement, promotion or death (theirs, or one that reached them), a sports row that
 // names them. Each line opens its notice, on whichever street it stands.
 var ALSO = {};
-function goNote(hi, ni) { if (world && DATA.hoods[hi] === world.H) { endVisit(true); if (world.notes[ni]) startNote(world.notes[ni]); } else go(hi, 0, { note: ni }); }
+function goNote(hi, ni) { if (world && hi === cur && noteBlk(hi, ni) === blk) { endVisit(true); if (world.notes[ni]) startNote(world.notes[ni]); } else go(hi, 0, { note: ni }); }
 DATA.hoods.forEach(function (H, hi) { (H.notes || []).forEach(function (nt, ni) {
   var put = function (id, text) { if (id) (ALSO[id] = ALSO[id] || []).push({ t: text, h: hi, n: ni }); };
   if (nt.k === 'p') nt.list.forEach(function (it) { put(it.f, 'Founded ' + it.n + (it.since ? ', week ' + it.since : '')); });
@@ -1472,7 +1507,7 @@ function pick(px, py) {
   if (!best) return;
   // cards off: a first tap on a person, a chaos car or a notice opens its card; a tap on the card (or a second tap) opens the rest
   var tg = best.c ? CTAGS.filter(function (e) { return e && e._ev === best.c && +e.style.opacity > 0.3; })[0] : best.n ? NTAGS.filter(function (e) { return e && e._a === best.n && +e.style.opacity > 0.3; })[0] : null;
-  if (best.p) openCard(best.p); else if (best.c) { if (tg) openLabel(tg, function () { startChaos(best.c); }); else startChaos(best.c); } else if (best.n) { if (tg) openLabel(tg, function () { startNote(best.n); }); else startNote(best.n); } else if (best.h != null) startHome(best.h); else startBiz(best.b);
+  if (best.p) openCard(best.p); else if (best.c) { if (tg) openLabel(tg, function () { startChaos(best.c); }); else startChaos(best.c); } else if (best.n) { if (tg && !best.n.turn) openLabel(tg, function () { startNote(best.n); }); else startNote(best.n); } else if (best.h != null) startHome(best.h); else startBiz(best.b);
 }
 function money(v) { return '$' + Math.round(v).toLocaleString('en-US'); }
 function startBiz(bi) {
@@ -1530,7 +1565,7 @@ function placeNotes() {
     var a = list[i], el = NTAGS[i];
     if (!a) { if (el) el._o = 0; continue; }
     if (!el) { el = NTAGS[i] = document.createElement('div'); el.innerHTML = '<b><i></i><em style="font-style:normal"></em></b><span></span>'; tagsEl.appendChild(el);
-      (function (tag) { tag.addEventListener('click', function () { if (tag._a && +tag.style.opacity > 0.3) openLabel(tag, function () { startNote(tag._a); }); }); })(el); }
+      (function (tag) { tag.addEventListener('click', function () { if (tag._a && +tag.style.opacity > 0.3) { if (tag._a.turn) startNote(tag._a); else openLabel(tag, function () { startNote(tag._a); }); } }); })(el); }
     var mini = labels < 2 && openTag !== el; // cards off: its name only, until it is tapped
     if (el._a !== a || el._m !== mini) { el._a = a; el._m = mini; el.className = 'ctag n' + ({ s: 's', l: 'l', i: 'i', p: 'p', c: 'c', t: 't', w: 'w', x: 'x' }[a.nt.k] || 'f'); el.querySelector('em').textContent = mini ? noteName(a.nt) : a.nt.n; el.querySelector('span').textContent = a.nt.x; }
     el.classList.toggle('mini', mini);
@@ -1558,6 +1593,7 @@ function placeNotes() {
 function words_(v) { return String(v || '').replace(/[_-]/g, ' '); }
 function startNote(a) {
   var W = world, nt = a.nt; if (!W) return;
+  if (a.turn) { go(cur, 0, null, !blk); return; } // the sign to the neighborhood's other street
   endVisit(true); if (walking) setWalk(false);
   bizView = { s: a.s, z: a.z, cx: -a.s * (ROAD + 1.4), cy: 2.4, cz: a.z + 8, lx: a.x, ly: Math.min(a.y, 5), lz: a.z };
   document.body.classList.add('visit'); CARDS.forEach(function (s) { setCard(s, null); });
@@ -1646,7 +1682,7 @@ function homeList(body, H, lot, title) {
     hm.mem.forEach(function (m, i) {
       if (i) top.appendChild(document.createTextNode(', '));
       var ent = BYID[m[0]];
-      if (ent) { var bt = mk('button', m[1], 'link'); bt.type = 'button'; bt.addEventListener('click', function () { go(ent.h, 0, ent.d); }); top.appendChild(bt); }
+      if (ent) { var bt = mk('button', m[1], 'link'); bt.type = 'button'; bt.addEventListener('click', function () { if (blk && world.people.some(function (o) { return o.d === ent.d; })) startVisit(ent.d); else go(ent.h, 0, ent.d); }); top.appendChild(bt); }
       else top.appendChild(mk('span', m[1], 'quiet'));
     });
     if (!hm.mem.length) top.appendChild(mk('span', 'Nobody named on the household\u2019s row', 'quiet'));
@@ -1754,7 +1790,7 @@ function startVisit(d) {
   body.textContent = '';
   if (d.hh && HOMES[d.hh]) {
     var hh0 = HOMES[d.hh], hp = mk('p', null, 'pmeta'), hb = mk('button', 'See their home', 'link'); hb.type = 'button';
-    hb.addEventListener('click', function () { if (DATA.hoods[hh0.h] === world.H) { endVisit(true); openHome(d.hh); } else go(hh0.h, 0, { home: d.hh }); });
+    hb.addEventListener('click', function () { if (hh0.h === cur && !!hh0.blk === blk) { endVisit(true); openHome(d.hh); } else go(hh0.h, 0, { home: d.hh }); });
     hp.appendChild(hb); body.appendChild(hp);
   }
   section(body, 'This week (' + DATA.cycle + ')'); var ul = mk('ul');
@@ -1785,14 +1821,14 @@ function startVisit(d) {
   }
   if (ALSO[d.id]) {
     section(body, 'Also on record'); var al = mk('ul', null, 'ties');
-    ALSO[d.id].forEach(function (a) { var li = mk('li'), ab = mk('button', a.t, 'link'); ab.type = 'button'; ab.addEventListener('click', function () { goNote(a.h, a.n); }); li.appendChild(ab); if (DATA.hoods[a.h] !== world.H) li.appendChild(mk('span', ' \u00B7 ' + DATA.hoods[a.h].name, 'quiet')); al.appendChild(li); });
+    ALSO[d.id].forEach(function (a) { var li = mk('li'), ab = mk('button', a.t, 'link'); ab.type = 'button'; ab.addEventListener('click', function () { goNote(a.h, a.n); }); li.appendChild(ab); if (a.h !== cur) li.appendChild(mk('span', ' \u00B7 ' + DATA.hoods[a.h].name, 'quiet')); al.appendChild(li); });
     body.appendChild(al);
   }
   if (d.hist) { section(body, 'Before this week'); var hl = mk('ul'); d.hist.forEach(function (hx) { var li = mk('li'); li.appendChild(mk('span', hx[0], 'when')); li.appendChild(mk('span', hx[1])); hl.appendChild(li); }); body.appendChild(hl); }
   $('person').hidden = false; $('person').scrollTop = 0;
 }
 function openHome(hh) {
-  var at = HOMES[hh]; if (!at || DATA.hoods[at.h] !== world.H) return;
+  var at = HOMES[hh]; if (!at || at.h !== cur || !!at.blk !== blk) return;
   var id = world.H.homes[at.k].lot, qi = -1; world.H.lay.parcels.forEach(function (q, i) { if (q.id === id) qi = i; });
   if (qi >= 0) { world.z = Math.min(10, world.H.lay.parcels[qi].z + 12); startHome(qi); }
 }
@@ -1800,7 +1836,7 @@ function endVisit(quiet) {
   if (!visiting && !bizView) return; var p = visiting || bizView; visiting = null; bizView = null;
   if (world) { world.people.forEach(function (o) { o.hold = false; }); if (!quiet) { world.z = Math.min(10, p.z + 5); world.x = 0; } }
   document.body.classList.remove('visit'); $('person').hidden = true;
-  if (!quiet && world) { try { history.replaceState(null, '', '#' + slug(world.H.name)); } catch (e) {} }
+  if (!quiet && world) { try { history.replaceState(null, '', '#' + slug(world.H.name) + (blk ? '-homes' : '')); } catch (e) {} }
 }
 $('bBack').addEventListener('click', function () { endVisit(false); });
 setPlay(playing);
@@ -1810,10 +1846,12 @@ function fromHash() {
   if (w) { for (var e = 0; e < ALLP.length; e++) if (slug(ALLP[e].d.n) + '-' + String(ALLP[e].d.id || '').replace(/\D/g, '') === w[1]) return [ALLP[e].h, 0, ALLP[e].d]; for (e = 0; e < ALLP.length; e++) if (slug(ALLP[e].d.n) === w[1]) return [ALLP[e].h, 0, ALLP[e].d]; }
   var m = h.match(/^(.*)-at-(\d+)$/), at = 0; if (m) { h = m[1]; at = Math.min(99, +m[2]) / 100; }
   for (var k = 0; k < DATA.hoods.length; k++) if (slug(DATA.hoods[k].name) === h) return [k, at];
+  // #grand-lake-homes: that neighborhood's residential block
+  var hb = h.match(/^(.*)-homes$/); if (hb) for (k = 0; k < DATA.hoods.length; k++) if (slug(DATA.hoods[k].name) === hb[1] && DATA.hoods[k].block) return [k, at, null, true];
   return [0, 0];
 }
-function start() { var f = fromHash(); clock0 = performance.now(); go(f[0], f[1], f[2]); requestAnimationFrame(loop); }
-window.addEventListener('hashchange', function () { var f = fromHash(); if (f[2]) { if (!visiting || visiting.d !== f[2]) go(f[0], 0, f[2]); } else if (f[0] !== cur || f[1]) go(f[0], f[1]); else if (visiting || bizView) endVisit(false); });
+function start() { var f = fromHash(); clock0 = performance.now(); go(f[0], f[1], f[2], f[3]); requestAnimationFrame(loop); }
+window.addEventListener('hashchange', function () { var f = fromHash(); if (f[2]) { if (!visiting || visiting.d !== f[2]) go(f[0], 0, f[2]); } else if (f[0] !== cur || f[1] || !!f[3] !== blk) go(f[0], f[1], null, !!f[3]); else if (visiting || bizView) endVisit(false); });
 if (document.fonts && document.fonts.ready) { var done = false, kick = function () { if (!done) { done = true; start(); } }; document.fonts.ready.then(kick); setTimeout(kick, 1500); } else start();
 })();
 </script>

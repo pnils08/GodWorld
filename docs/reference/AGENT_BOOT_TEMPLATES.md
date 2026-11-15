@@ -58,6 +58,26 @@ pointers:
 
 **Who:** the Mayor and the nine council seats, weekday wake and Sunday chain.
 
+**Clean slate (2026-11-14).** No wake today uses tools and decides untold (evidence log §Council / Mayor: does any wake today use tools and decide untold). Builder: "this will be like the police chief in that we dont want to tell them what to do , however these will likely need some level of instruction on how to do things … the thing to watch is veering into puppeting them too much". Parts proposed, builder on them: "I like this". Not approved; no run.
+
+| # | Part | How the city works (kept) | What to do (out) |
+|---|---|---|---|
+| 1 | Who they are: sheet line, office, temperament | — | — |
+| 2 | The office can be lost: their approval and what moves it | under 40 a challenger is named; under 30 the challenger takes the seat; what moves the number (below) | — |
+| 3 | Their data: their district's readings whole, the city's, their board, petitions waiting, each category's budget band | — | one initiative picked for them, "advance or hold", the pre-written claim |
+| 4 | Their tools: the worker's four; asking a worker (agreed in principle; civic.49) | what each tool returns; who can be asked and what each holds | when to use one |
+| 5 | Their memory: searched from their page, Cycle-labelled | — | the newest few handed in |
+| 6 | Their past decisions and what came of each (passed, funded, landed) | — | — |
+| 7 | The moves the office holds | what each move is and what follows it | which to make; a line saying what their statement is about |
+| 8 | What is put to them, last, in the asker's words; on Sunday the agenda sits here | — | nothing added when nothing is put to them |
+
+- **The guard on every "how" line:** it describes the city; none addresses the seat with a verb of what to do (§0: a written line about how a person does a thing is acted out).
+- **The move limit (builder 2026-11-14): "the old wakes set it as you get one move but it doesn't have to be so restrictive in that way".** Today's wake: at most one work or decision move a week, plus answers (`cron-civic-run.js` `datawakeUserPrompt`). Still the builder's call: the two-read limit; no figure unless handed.
+- **What moves approval (builder 2026-11-14): "The initiates in their districts hit them and how the media covers what they do hits them. So doing nothing is a good way to get removed".** The engine (`phase05-citizens/updateCivicApprovalRatings.js`): initiatives touching the district (the Mayor: all; a sponsor: its own) — advancing a phase +2 owned / +1, finishing +3 owned / +1 once, choosing fail −2 owned, silence (overdue or never scheduled) −3 / −2 / −1 a week owned; a target the number closes toward each Cycle from the district's mood and readings against the city and the week's press; a scandal roll at sustained high approval. **The press term is the paper's rating of the week — the civic desk and the whole paper, half and half — one number for every seat, not coverage of the seat** (`mediaScore_`, `mediaDelta_`).
+- **The gap (builder 2026-11-14): "they have some initiative creation the can do but don't have alot of ability to do much else . So that's a gap in this I see".** Every council move works through an initiative: propose (a candidate the council votes on), work (stands a funded row up, keeps a running one tended), call-vote, renew, answer (Mara's question), canvass. Canvass is validated and recorded and changes nothing in the engine (no reader outside the move record). Outside initiatives, the one move in the wake's closed set is the chief's patrol. Not designed; the builder's.
+
+**The draft from Runs 1–2 (superseded by the clean slate above):**
+
 | Order | Part | Source |
 |---|---|---|
 | 1 | The sheet line + temperament | ledger + dials |
@@ -288,6 +308,7 @@ Mara Vance (asker; her own memory and tools; civic.47 M1), Elias Varek's journal
 
 ## Changelog
 
+- 2026-11-14 (engine-sheet) — §2 Council / Mayor from a clean slate: eight parts proposed, each sorted into how the city works (kept) and what to do (out); builder: "I like this" (not approved, no run). His word on the one-move limit, on what moves approval, and the gap (every council move works through an initiative; canvass changes nothing in the engine), with the code read beside each; the press term is one number for every seat.
 - 2026-11-14 (engine-sheet) — Worker model ON for the police chief on the builder's word; an office with a fill is dropped from the Thursday wake (`cron-work-wake.js` `autoPackages`).
 - 2026-11-14 (engine-sheet) — **Nothing is approved** (builder 2026-11-14: "I've literally approved nothing"). Every line below or above that reads "approved" or "live" for the worker template is withdrawn; the worker wake is switched off in the runner (`--worker-template` only). See the plan's changelog.
 - 2026-11-14 (engine-sheet) — The work and every sentence of the build's own are out of what a worker reads (builder 2026-11-14: "the template doesn't give the work , it's the harness for the cron"; "You have to be careful you aren't puppeting these"). Removed from the live wake: the closing line "It is the close of Cycle N. You are speaking on the record as <office>."; the title notes "the department's sheet; it keeps this Cycle only", "No reading this Cycle: …", "the patrol strategy in force and what was recorded under it (…)", "(none this Cycle)"; the three neighborhoods the memory search named by pressure ratio. The crime sheet is printed as it stands, the blank column included. What he reads that is not data or his own words is now the sheet line, "From your own memory:", seven plain titles and "What you have decided and said on the record:".

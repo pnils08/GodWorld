@@ -1,6 +1,6 @@
 # world-view
 
-A hands-off 3D flight through the 22 neighborhoods, drawn from one week of engine output. Started 2026-11-10 (builder: "this has promise"). No ROLLOUT row yet — claim one on the builder's word before more build.
+A hands-off 3D flight through the 22 neighborhoods, drawn from one week of engine output. Started 2026-11-10 (builder: "this has promise"). ROLLOUT row: infrastructure.19. What to add next: §To add.
 
 ## What it is
 
@@ -11,6 +11,31 @@ A hands-off 3D flight through the 22 neighborhoods, drawn from one week of engin
 - Run: `node world-view/build.js [dest]`.
 - Published copy: https://claude.ai/artifact/RyjhthcNoP7JXGmmVYv8WK (private to the builder). Update it by publishing with that `url`.
 - When it is rebuilt: at the end of every cycle run (`/run-cycle`, the section after Close; builder 2026-11-14: "the cleanest is to attach it to the end of the cycle run in that skill"), by the session that ran the cycle, which rebuilds, checks and republishes. Nothing rebuilds it between fires: a cron cannot publish to the link (publishing is a session tool, not an API call), and nearly everything on the page is written once a week. The reflections citizens add on the days between are therefore up to a week behind (228 were written between the C115 dump and 2026-11-14).
+
+## To add (builder 2026-11-14)
+
+Builder 2026-11-14, on the sheet review: "lets record these as items to add and we can do neighborhoods next". The review: 85 tabs on the live sheet, 27 in `output/beats/`, 6 of those read by `build.js` (plus the ledger snapshot and the world summary). Counts are C115. What each item looks like on the street is the builder's call; the source column is where it would come from.
+
+| # | Item | Source | C115 | In `output/beats/` | State |
+|---|---|---|---|---|---|
+| 1 | Neighborhood state on the street: how lit, loud and busy; growing or steady; holiday and First Friday | `Neighborhood_Map` (NightlifeProfile, NoiseIndex, RetailVitality, Sentiment, NeighborhoodTrajectory, HousingPressure, MigrationFlow, Holiday, FirstFriday) | 22 rows, one a street | no: add the tab to `scripts/dumpBeatTabs.js` | NEXT |
+| 2 | Staff at their own business, not only the owner | `Employment_Roster` (BIZ_ID, POP_ID, RoleType, Status) | 971 rows, 921 with a BIZ_ID | yes | open |
+| 3 | The week's faith events at the house of worship | `Faith_Ledger` (Organization, EventDescription, Neighborhood, Attendance) | 5 | yes | open |
+| 4 | Deaths, retirements, promotions marked on the person or their shop | `Lived_Events` (kind, subject, neighborhood, recipients) | 3, and one death at C114 with its mourners | yes | open |
+| 5 | Initiatives on the streets they affect | `Initiative_Tracker` (AffectedNeighborhoods, ImplementationPhase, Stage, BizID) | 14 | yes | open |
+| 6 | Station ridership: how often trains run, how full | `Transit_Metrics` Station rows (RidershipVolume, OnTimePerformance, Notes) | 8 stations | yes | open |
+| 7 | Game night on the home street | `Oakland_Sports_Feed` (HomeNeighborhood, EventType, Streak, WeekRecord) | 7 | yes | open |
+| 8 | Community programs where they run | `Community_Programs` (Name, Neighborhood, Founder_POPID, Status) | 33 | yes | open |
+| 9 | Cultural figures on their street | `Cultural_Ledger` (Name, Neighborhood, FameScore, TrendTrajectory) | 51 | yes | open |
+| 10 | Crime numbers | `Crime_Metrics` | 22 | yes | open: what it shows, if anything, is the builder's |
+| 11 | Busy shop fronts and quiet ones | `Business_Ledger` Growth_Rate, Annual_Revenue | 283 | yes | open |
+| 12 | Homes by rent or own | `Household_Ledger` HousingType, MonthlyRent, HouseholdIncome | 677 active households | yes | open |
+| 13 | World events on the street (roadworks, incidents) | `WorldEvents_V3_Ledger` (EventDescription, Severity, Neighborhood) | 10 | no | open |
+| 14 | People who know each other stop to talk | `Relationship_Bonds` (CitizenA, CitizenB, BondType, Intensity) | 697 rows | no | open |
+| 15 | A street under strain | `Event_Arc_Ledger` (Type, Phase, Tension, Neighborhood) | 0 stamped C115; newest C114 `CRISIS-114-DOWNTOWN` at onset | no | open |
+| 16 | Shop rush and street life | `Texture_Trigger_Log` (TextureKey, Neighborhood, Intensity) | 13 | no | open |
+
+Left out: `Youth_Events` (no row since C102; `dumpBeatTabs.js` already leaves it out as dead by ruling) and the `Transit_Metrics` Corridor rows (no Neighborhood column, so a corridor on a street would be a guess).
 
 ## Builder rulings (2026-11-10)
 

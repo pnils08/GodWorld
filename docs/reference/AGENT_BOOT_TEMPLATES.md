@@ -82,7 +82,7 @@ pointers:
 
 **Who:** every position in §3.1. One agent type. The template is how each of them operates; one worker differs from another only in its fill (data, tools). The police chief is the spec: the template is built and proven on him, then every other worker is built out the same way. Only the police chief is worked until then, and nothing is run until the template is decided (builder 2026-11-14: "we are literally only working on the police chief"; "no runs … until templates are set").
 
-**The template — the same for every worker:**
+**The template — the harness, the same for every worker:**
 
 | # | Part | What the worker wakes with | Per worker | Built |
 |---|---|---|---|---|
@@ -91,7 +91,7 @@ pointers:
 | 3 | Their tools | (live: `workerWake.toolsFor` / `toolExecutor`) Read a city sheet; look up a citizen; what the paper has printed; read their own memory. Described to them, nothing on when to use one. Asking another worker: agreed in principle, not built | same for all (the fill may add) | in the dry-run harness only (Run 6); the loop and three of the four are the reporters' (`cron-desk-writer.js`) |
 | 4 | Their memory | Entries from their whole page, gathered for them by what is in front of them (the question, or the Cycle's data); not the newest few handed in | same for all | no — `citizenPage.searchPage_` exists, no wake calls it, and it lags the newest Cycles |
 | 5 | Their past decisions | Their own moves, each with the question it answered, looked up by POPID (moves are keyed `proj-*`, `civic-project-*` / `civic-office-*`, `STAFF-*` for one person) | same for all | no |
-| 6 | The task | Asked: a question from a named seat or a reporter. On their own wake: make sense of their data and speak on the record, including what does not make sense | same for all | asked = civic.49, not approved to build; own wake = today a council seat's pack (below) |
+| — | The work | **Not part of the template** (builder 2026-11-14: "the template doesn't give the work , it's the harness for the cron"; "You have to be careful you aren't puppeting these"). The harness carries no task, no line on what the worker is doing, and no note on what the data means, shows or lacks; a title names its data and nothing else. A question someone puts to the worker is placed last in the asker's own words with who asks. With no question nothing is added | — | weekday wake: live, nothing added; asked = civic.49, not approved to build |
 
 - **Part 3, the builder's word (2026-11-14):** "Yeah I think that's a good start for the tools , even though the memory isn't called much it should be available"; on a worker asking another worker: "It's a good idea I wouldn't be opposed to it, that's how a city works so it makes sense".
 - **What a worker said before stands until it is changed (builder 2026-11-14):** "the fact he cited something he said in 102 is pretty cool, and that may be a current fact albeit said in a older cycle , if it wasn't changed since then it's current". Memory lines carry the Cycle they were said in, never a calendar date.
@@ -288,6 +288,7 @@ Mara Vance (asker; her own memory and tools; civic.47 M1), Elias Varek's journal
 
 ## Changelog
 
+- 2026-11-14 (engine-sheet) — The work and every sentence of the build's own are out of what a worker reads (builder 2026-11-14: "the template doesn't give the work , it's the harness for the cron"; "You have to be careful you aren't puppeting these"). Removed from the live wake: the closing line "It is the close of Cycle N. You are speaking on the record as <office>."; the title notes "the department's sheet; it keeps this Cycle only", "No reading this Cycle: …", "the patrol strategy in force and what was recorded under it (…)", "(none this Cycle)"; the three neighborhoods the memory search named by pressure ratio. The crime sheet is printed as it stands, the blank column included. What he reads that is not data or his own words is now the sheet line, "From your own memory:", seven plain titles and "What you have decided and said on the record:".
 - 2026-11-14 (engine-sheet) — The worker template is repo code and the police chief's weekday wake runs on it (pipeline.110 Task 10): `scripts/workerWake.js` (shared parts, `FILLS`, tools), `runWorkerDatawake`, ADR-0019 ([[../adr/0019-worker-wakes-on-the-worker-template]]). To build another worker out: add its `FILLS` entry. Patrol is a tool; the fill sets the strategy in force beside each Cycle's figures. His Thursday auto pack and Sunday statement still load the old files.
 - 2026-11-14 (engine-sheet) — **Worker template approved on the police chief** (builder: "I think the voice matters as the slight slips on data isn't as much an issue as not having the proper voice . The data we have , his voice is what we are after , Looks like this one is ready to move live"). Live move: pipeline.110 Task 10.
 - 2026-11-14 (engine-sheet) — Run 7: the high and low of each column handed (his word), Cycle labels on memory, the chief rerun on his own model and on a second; his ruling that an earlier statement stands until changed.

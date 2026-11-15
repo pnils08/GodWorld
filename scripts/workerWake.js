@@ -11,9 +11,12 @@
  *   3 their tools         a city sheet, a citizen, what the paper printed, their own memory (+ a fill's levers)
  *   4 their memory        gathered for them from their whole page by what is in front of them, plus their newest own words
  *   5 their decisions     their own moves by POPID, each answer with the question it answered
- *   6 the task            a question from a named seat or reporter; on their own wake, one line: they are on the record
- * Nothing here says what to say, how to open or close, or when to use a tool. To build another worker out, add its
- * FILLS entry; the other five parts are shared.
+ * The template is the harness, not the work (builder 2026-11-14: "the template doesn't give the work , it's the harness
+ * for the cron"; "You have to be careful you aren't puppeting these"). It carries NO task, no line on what the worker is
+ * doing, and no note on what the data means, shows or lacks: a title names its data and nothing else. When someone has
+ * put a question to the worker, the caller hands it over and it is placed last in the asker's own words, with who asks.
+ * With no question, nothing is added.
+ * To build another worker out, add its FILLS entry; the other four parts are shared.
  *
  * Callers: cron-civic-run.js runDatawake (an office that has a fill). Every read is injected through `deps` for tests.
  */
@@ -128,7 +131,8 @@ async function gatherMemory(popid, key, deps) {
 }
 
 // ---- part 2, THE FILL: one entry per worker. build(cycle, ctx) -> { blocks: [{title, text}], key }.
-//   key = the words the memory gatherer searches on when nobody has asked a question.
+//   key = the words the memory gatherer searches on when nobody has asked a question: the trade's own nouns. It
+//         names nothing picked out of the data — which neighborhood or figure matters is not chosen here.
 //   levers = what this worker alone can set (a tool is offered for each).
 const FILLS = {
   'CHIEF-POLICE': {
@@ -138,17 +142,15 @@ const FILLS = {
       const out = [];
       const crime = await sheets.getSheetAsObjects('Crime_Metrics');
       if (!crime.length) throw new Error('Crime_Metrics returned no rows');
-      const all = Object.keys(crime[0]);
-      const cols = all.filter((c) => crime.some((r) => String(r[c] == null ? '' : r[c]).trim()));   // a column blank in every row is named, not printed
-      const blank = all.filter((c) => !cols.includes(c));
-      out.push({ title: 'Crime by neighborhood, Cycle ' + cycle + ' (the department\'s sheet; it keeps this Cycle only)' + (blank.length ? '. No reading this Cycle: ' + blank.join(', ') : ''), text: table(crime, cols) });
-      out.push({ title: 'The high and low of each column on that sheet, Cycle ' + cycle, text: table(highLow(crime, cols.filter((c) => c !== 'LastUpdated' && c !== 'Neighborhood'), 'Neighborhood'), ['Column', 'Highest', 'Lowest']) });
+      const cols = Object.keys(crime[0]);   // the sheet as it stands, a blank column included: what is missing is his to notice
+      out.push({ title: 'Crime by neighborhood, Cycle ' + cycle, text: table(crime, cols) });
+      out.push({ title: 'The high and low of each column, Cycle ' + cycle, text: table(highLow(crime, cols.filter((c) => c !== 'LastUpdated' && c !== 'Neighborhood'), 'Neighborhood'), ['Column', 'Highest', 'Lowest']) });
 
       const moves = loadMoves(root);
       const census = (await sheets.getSheetAsObjects('Care_Justice_Census')).filter((r) => r.System === 'judicial' && r.IntakeType === 'arrest');
       const cyc = [...new Set(census.map((r) => Number(r.Cycle)))].filter(isFinite).sort((a, b) => a - b);
       const first = cyc.length ? cyc[0] : Number(cycle);
-      // The setting he made and the numbers that followed it, side by side (builder 2026-11-14: "what he sets these at effect the sim").
+      // The setting in force and each Cycle's figures in one table (builder 2026-11-14: "what he sets these at effect the sim"). The table states no link between them.
       const totals = (rows) => ({ incidents: rows.reduce((a, r) => a + (num(r.IncidentCount) || 0), 0),
         response: round(rows.reduce((a, r) => a + (num(r.ResponseTimeAvg) || 0), 0) / rows.length, 2), clearance: round(rows.reduce((a, r) => a + (num(r.ClearanceRate) || 0), 0) / rows.length, 3) });
       const sheetOf = {}; sheetOf[Number(cycle)] = totals(crime);
@@ -161,7 +163,7 @@ const FILLS = {
         return { Cycle: c, 'Patrol strategy in force': patrolInForce(moves, c), Arrests: r.TotalIntakes, 'In custody, start': r.OpeningOccupancy, 'In custody, end': r.ClosingOccupancy, Released: r.Exits,
           'Incidents, all neighborhoods': t.incidents == null ? '' : t.incidents, 'Average response time': t.response == null ? '' : t.response, 'Average clearance rate': t.clearance == null ? '' : t.clearance };
       });
-      if (city.length) out.push({ title: 'Citywide by Cycle: the patrol strategy in force and what was recorded under it (the crime sheet\'s own figures exist only for the Cycles shown)', text: table(city, Object.keys(city[0])) });
+      if (city.length) out.push({ title: 'Citywide by Cycle', text: table(city, Object.keys(city[0])) });
       const hoods = [...new Set(census.filter((r) => r.GeographicScope === 'neighborhood').map((r) => r.Neighborhood))];
       const cell = (h, c, f) => { const r = census.find((x) => x.Neighborhood === h && Number(x.Cycle) === c && x.GeographicScope === 'neighborhood'); return r ? r[f] : ''; };
       const grid = (f) => table(hoods.map((h) => Object.assign({ Neighborhood: h }, ...cyc.map((c) => ({ ['C' + c]: cell(h, c, f) })))), ['Neighborhood'].concat(cyc.map((c) => 'C' + c)));
@@ -171,26 +173,29 @@ const FILLS = {
       }
       const cars = (await sheets.getSheetAsObjects('Chaos_Cars')).filter((r) => r.VehicleType === 'cop_car' && Number(r.CycleId) >= first && Number(r.CycleId) <= Number(cycle))
         .map((r) => ({ Cycle: r.CycleId, Where: r.TargetScope === 'citizen' ? 'citizen ' + (ctx.nameOf(r.TargetId) || r.TargetId) : r.TargetScope + ' ' + r.TargetId, Outcome: r.DiceOutcome, Moved: r.PrimaryMetric + ' ' + r.MetricMagnitude }));
-      out.push({ title: 'Patrol car events, Cycles ' + first + '–' + cycle + (cars.some((c) => Number(c.Cycle) === Number(cycle)) ? '' : ' (none this Cycle)'), text: cars.length ? table(cars, Object.keys(cars[0])) : 'none' });
+      out.push({ title: 'Patrol car events, Cycles ' + first + '–' + cycle, text: cars.length ? table(cars, Object.keys(cars[0])) : 'none' });
       const money = (await sheets.getSheetAsObjects('City_Treasury')).filter((r) => /^(COURT|TICKETS)/.test(r.Counterparty || '') && Number(r.Cycle) >= first)
         .map((r) => ({ Cycle: r.Cycle, Source: r.Counterparty, Amount: r.Amount, Note: r.Note }));
       if (money.length) out.push({ title: 'Fines and tickets paid to the city', text: table(money, ['Cycle', 'Source', 'Amount', 'Note']) });
-      const top = crime.slice().sort((a, b) => num(b.PressureRatio) - num(a.PressureRatio)).slice(0, 3).map((r) => r.Neighborhood);
-      return { blocks: out, key: 'crime ' + top.join(' ') + ' clearance response time arrests custody patrol' };
+      return { blocks: out, key: 'crime clearance response time arrests custody patrol' };
     },
   },
 };
 const hasFill = (officeId) => Object.prototype.hasOwnProperty.call(FILLS, String(officeId || ''));
 
-// The whole wake for one worker. opts: { officeId, cycle, officeMap, question?, askerLine?, deps? }
+// The harness for one worker's wake. opts: { officeId, cycle, officeMap, question?, askerLine?, deps? }
+//   question + askerLine: someone's question to this worker, in their words, with who they are. Both or neither.
+//   With no question nothing is added after the worker's own records: the harness gives no work.
 // -> { office, system, user, memory, decisions }
 async function buildWake(opts) {
   const o = opts || {};
   const office = ((o.officeMap || {}).offices || []).find((x) => x.officeId === o.officeId);
   if (!office || !hasFill(o.officeId)) throw new Error('no worker fill for ' + o.officeId);
+  const question = String(o.question || '').trim(), askerLine = String(o.askerLine || '').trim();
+  if (question && !askerLine) throw new Error('missing askerLine: a question is handed over with who asks it');
   const who = await whoTheyAre(office.popid, o.deps);
   const fill = await FILLS[o.officeId].build(Number(o.cycle), { deps: o.deps, nameOf: who.nameOf });
-  const memory = await gatherMemory(office.popid, o.question || fill.key, o.deps);
+  const memory = await gatherMemory(office.popid, question || fill.key, o.deps);
   const decisions = pastDecisions(office.popid, office.agentDir, o.deps);
   const system = [who.line].concat(memory.entries.length ? ['', 'From your own memory:', ...memory.entries.map((m) => '- (' + m.when + ') ' + m.text)] : []).join('\n');
   const user = [
@@ -198,7 +203,7 @@ async function buildWake(opts) {
     'What you have decided and said on the record:\n' + (decisions.length
       ? decisions.map((d) => '- Cycle ' + d.cycle + ', ' + d.type + (d.askedBy ? ' — asked by ' + d.askedBy + ': ' + d.question + '\n  You answered: ' + d.said : ': ' + d.said)).join('\n')
       : '- nothing on record'),
-    o.question ? (o.askerLine || 'A council member') + ' asks you:\n\n' + o.question : 'It is the close of Cycle ' + o.cycle + '. You are speaking on the record as ' + office.title + '.',
+    ...(question ? [askerLine + ' asks you:\n\n' + question] : []),
   ].join('\n\n');
   return { office, system, user, memory, decisions };
 }

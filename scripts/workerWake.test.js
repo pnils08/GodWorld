@@ -108,14 +108,16 @@ test('gatherMemory: a failed read is no memory this wake, not an error', async (
   assert.deepEqual(m.entries, []);
 });
 
-test('buildWake, the chief on his own wake: who he is and his memory, then his data, his decisions and one task line', async () => workspace(async (root) => {
+test('buildWake, the chief on his own wake: who he is and his memory, then his data and his decisions — and no line telling him what to do', async () => workspace(async (root) => {
   writeMoves(root, 114, [{ moveId: 'MV-114-a', cycle: 114, popid: 'POP-00136', type: 'patrol', status: 'pending', at: '2026-11-05T00:00:00Z', payload: { strategy: 'suppress_hotspots', note: 'x' } }]);
   const w = await ww.buildWake({ officeId: 'CHIEF-POLICE', cycle: 115, officeMap: OFFICE_MAP, deps: deps(root) });
   assert.match(w.system, /^You are Rafael Montez\. You hold the office of Police Chief\. Your temperament: steady\.\n\nFrom your own memory:\n- \(Cycle 115\)/);
   assert.ok(!/\d{4}-\d{2}-\d{2}/.test(w.system), 'no calendar date in the system turn');
   assert.ok(!w.user.includes('.claude/agents'), 'no folder path in the user turn');
-  assert.match(w.user, /No reading this Cycle: Hotspot/);
-  assert.ok(!/\| Hotspot/.test(w.user.split('\n')[1]), 'the blank column is not printed');
+  assert.ok(w.user.startsWith('Crime by neighborhood, Cycle 115:\nNeighborhood | ResponseTimeAvg | ClearanceRate | IncidentCount | LastUpdated | Trend | Hotspot | PressureRatio\n'), 'the sheet as it stands, the blank column included');
+  // a title names its data and nothing else: no note on what the data lacks, means or shows
+  assert.ok(!/keeps this Cycle only|No reading|recorded under it|none this Cycle/.test(w.user));
+  assert.match(w.user, /\n\nCitywide by Cycle:\nCycle \| Patrol strategy in force \|/);
   assert.match(w.user, /ResponseTimeAvg \| 11\.8 — Beta \| 10\.7 — Gamma/);
   // the loop: the setting in force beside what was recorded under it; last Cycle's sheet joins when the previous dump is that Cycle
   assert.match(w.user, /114 \| balanced \(default\) \| 43 \| 56 \| 72 \| 27 \| 15 \| 11\.4 \| 0\.203/);
@@ -123,7 +125,13 @@ test('buildWake, the chief on his own wake: who he is and his memory, then his d
   assert.match(w.user, /114 \| citizen Chase West \| helped_by_police/);
   assert.ok(!w.user.includes('mail_truck') && !w.user.includes('WEEKLY-ALLOCATION'), 'only his trade');
   assert.match(w.user, /- Cycle 114, patrol: strategy: suppress_hotspots; note: x/);
-  assert.ok(w.user.endsWith('It is the close of Cycle 115. You are speaking on the record as Police Chief.'));
+  // the harness gives no work: with no question, his own record is the last thing he reads
+  assert.ok(w.user.endsWith('- Cycle 114, patrol: strategy: suppress_hotspots; note: x'));
+  assert.ok(!/speaking on the record|asks you|It is (the close of )?Cycle/.test(w.user));
+  // the memory search names nothing picked out of his data
+  assert.equal(w.memory.key, 'crime clearance response time arrests custody patrol');
+  // a question never arrives without who asks it
+  await assert.rejects(() => ww.buildWake({ officeId: 'CHIEF-POLICE', cycle: 115, officeMap: OFFICE_MAP, deps: deps(root), question: 'Why?' }), /missing askerLine/);
 }));
 
 test('buildWake, asked: the question is the task and the memory search runs on it', async () => workspace(async (root) => {

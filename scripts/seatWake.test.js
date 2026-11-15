@@ -41,6 +41,14 @@ function pack(over) {
     } },
   }, over || {});
 }
+const UNAVAILABLE = 'unavailable this wake — not an empty record';
+const LEDGER = [{ OfficeId: 'COUNCIL-D9', Approval: '63' }, { OfficeId: 'COUNCIL-D8', Approval: '59' }, { OfficeId: 'MAYOR-01', Approval: '72' }];
+const TABS = {
+  Civic_Office_Ledger: LEDGER,
+  Neighborhood_Map: [{ Neighborhood: 'Laurel', Cycle: '115', Sentiment: '-0.15', CrimeIndex: '0.69', Spare: '' }, { Neighborhood: 'Uptown', Cycle: '115', Sentiment: '0.08', CrimeIndex: '0.62', Spare: '' },
+    { Neighborhood: 'Piedmont', Cycle: '115', Sentiment: '0.31', CrimeIndex: '0.2', Spare: '' }],
+  Crime_Metrics: [{ Neighborhood: 'Laurel', LastUpdated: '115', Incidents: '7' }, { Neighborhood: 'Uptown', LastUpdated: '115', Incidents: '3' }, { Neighborhood: 'Piedmont', LastUpdated: '115', Incidents: '1' }],
+};
 const doc = (cycle, type, content) => ({ content, createdAt: '2026-11-13T00:00:00Z', metadata: { cycle, type } });
 
 function workspace(fn) {
@@ -65,7 +73,7 @@ function dumps(root, nowCycle, prevCycle) {
 function deps(root, over) {
   return Object.assign({
     root,
-    sheets: { getSheetAsObjects: async (tab) => (tab === 'Civic_Office_Ledger' ? [{ OfficeId: 'COUNCIL-D9', Approval: '63' }, { OfficeId: 'MAYOR-01', Approval: '72' }] : []) },
+    sheets: { getSheetAsObjects: async (tab) => TABS[tab] || [] },
     page: { searchPage_: async () => ({ results: [doc(114, 'reflection', 'Laurel is why I am on this dais.')] }), recentPage_: async () => ({ results: [] }) },
     wp: { buildPool: async () => [{ popId: 'POP-00506', first: 'Terrence', last: 'Mobley', cur: {} }, { popId: 'POP-00034', first: 'Avery', last: 'Santana', cur: {} }],
       loadOfficeHolders: async () => ({ byPop: { 'POP-00506': { title: 'City Council District 9' }, 'POP-00034': { title: 'Mayor' } } }),
@@ -90,13 +98,53 @@ test('approval: now, last Cycle from the dump one Cycle back, and what puts them
   assert.equal((await sw.approvalBlock(OFFICE, 115, deps(root))).text, 'Approval 63. A challenger is named below 40; below 30 the challenger takes the seat.');
 }));
 
-test('the data keeps the pack\'s records and drops what tells them what to do, its rules and form, and every build note', () => {
-  const text = sw.dataBlocks(pack(), OFFICE, 115).map((b) => b.title + ':\n' + b.text).join('\n\n');
+test('the data keeps what only the pack holds and drops what tells them what to do, its rules and form, every build note, and what it picked or worded for them', () => {
+  const text = sw.dataBlocks(pack(), OFFICE, 115, LEDGER).map((b) => b.title + ':\n' + b.text).join('\n\n');
   for (const gone of ['advance or hold', 'district-week', 'only named subjects', 'no new citizens', 'statement + moves', 'office wiki', 'src', '.js', '.jsonl', 'lives in Laurel', 'retrievalKey', 'district/D9',
-    'Move validation', 'holds COUNCIL-D9 at approval']) assert.ok(!text.includes(gone), 'still in the wake: ' + gone);
-  for (const kept of ['Your district, Cycle 115', '-0.15 (last Cycle -0.03)', 'Laurel crime: property 43, violent 30', 'Ada Lane', 'INIT-015', '$6M', '$5M-$100M', 'Nobody picked up the trash.',
-    'sick residents', 'Marcus Webb: The queue is clean tonight.', 'balanced', 'Nina Chen', 'Events in your district:\nnone']) assert.ok(text.includes(kept), 'missing: ' + kept);
-  assert.ok(!text.includes('0.68 (last Cycle'), 'an unchanged reading carries no last-Cycle note');
+    'Move validation', 'holds COUNCIL-D9 at approval', 'Laurel crime: property 43', 'On the record', 'Ada Lane', 'People in your district', 'Your district, Cycle 115']) assert.ok(!text.includes(gone), 'still in the wake: ' + gone);
+  for (const kept of ['INIT-015', '$6M', '$5M-$100M', 'Nobody picked up the trash.', 'sick residents', 'Marcus Webb: The queue is clean tonight.', 'balanced', 'Nina Chen', 'Events in your district:\nnone']) assert.ok(text.includes(kept), 'missing: ' + kept);
+});
+
+test('their district whole: his neighborhoods\' rows off the city\'s sheets, every column, a blank one included; last Cycle on a value that moved; the city\'s high and low beneath', () => workspace(async (root) => {
+  dumps(root, 115, 114);
+  const d = deps(root, { sheets: { getSheetAsObjects: async (tab) => TABS[tab] || [] },
+    readPrev: (tab) => (tab === 'Neighborhood_Map' ? [{ Neighborhood: 'Laurel', Cycle: '114', Sentiment: '-0.03', CrimeIndex: '0.69', Spare: '' }] : []) });
+  const blocks = Object.fromEntries((await sw.districtRecords(['Laurel', 'Uptown'], 115, d)).map((b) => [b.title, b.text]));
+  assert.equal(blocks['Neighborhood readings, your district, Cycle 115'],
+    'Neighborhood | Cycle | Sentiment | CrimeIndex | Spare\nLaurel | 115 | -0.15 (last Cycle -0.03) | 0.69 | \nUptown | 115 | 0.08 | 0.62 | ');
+  assert.ok(!blocks['Neighborhood readings, your district, Cycle 115'].includes('Piedmont'), 'only his neighborhoods');
+  assert.equal(blocks['Neighborhood readings, the high and low of each column across the city, Cycle 115'],
+    'Column | Highest | Lowest\nSentiment | 0.31 — Piedmont | -0.15 — Laurel\nCrimeIndex | 0.69 — Laurel | 0.2 — Piedmont');
+  assert.equal(blocks['Crime, your district, Cycle 115'], 'Neighborhood | LastUpdated | Incidents\nLaurel | 115 | 7\nUptown | 115 | 3');
+  assert.equal(blocks['Demographics, your district, Cycle 115'], UNAVAILABLE, 'a sheet with no rows for him is unreadable, not a quiet district');
+  dumps(root, 115, 113);   // no dump one Cycle back: nothing is noted against another week
+  const b2 = await sw.districtRecords(['Laurel'], 115, d);
+  assert.ok(!b2[0].text.includes('last Cycle'));
+  const down = await sw.districtRecords(['Laurel'], 115, deps(root, { sheets: { getSheetAsObjects: async () => { throw new Error('quota'); } } }));
+  for (const b of down.filter((x) => !/high and low/.test(x.title))) assert.equal(b.text, UNAVAILABLE);
+}));
+
+test('the faction table reads the live approvals, not the office map\'s stale copy', () => {
+  const text = sw.dataBlocks(pack(), OFFICE, 115, LEDGER).find((b) => b.title === 'Seats in your faction').text;
+  assert.equal(text, 'Seat | Holder | District | Approval\nCOUNCIL-D8 | Nina Chen | D8 | 59');
+  assert.ok(!text.includes('62'), 'the map\'s copy');
+  assert.equal(sw.dataBlocks(pack(), OFFICE, 115).find((b) => b.title === 'Seats in your faction').text.split('\n')[1], 'COUNCIL-D8 | Nina Chen | D8 | ', 'no live row: blank, never the map\'s number');
+});
+
+test('a reporter\'s filing record is not a resident\'s complaint', () => {
+  const p = pack();
+  p.game.petitionPool.complaints = [{ cycle: '114', hood: 'Laurel', snippet: 'filed: Coliseum Lost 799 Riders on a Weekend With No Event on Its Row', affect: 'Frustrated' }, { cycle: '114', hood: 'Laurel', snippet: 'Nobody picked up the trash.', affect: 'Frustrated' }];
+  const t = sw.dataBlocks(p, OFFICE, 115, LEDGER).find((b) => b.title === 'Complaints from your district').text;
+  assert.equal(t, 'Cycle | Neighborhood | Said | Mood\n114 | Laurel | Nobody picked up the trash. | Frustrated');
+  p.game.petitionPool.complaints = [p.game.petitionPool.complaints[0]];
+  assert.equal(sw.dataBlocks(p, OFFICE, 115, LEDGER).find((b) => b.title === 'Complaints from your district').text, 'none');
+});
+
+test('an old wake\'s form fields come off the tail of a remembered statement; the statement stays', () => {
+  const said = 'Laurel is not a district in crisis. I\'ll defend our momentum.';
+  assert.equal(sw.withoutOldForm(said + ' | action: defend the district | signal: crime index (0.45), sentiment (0.49)'), said);
+  assert.equal(sw.withoutOldForm(said), said);
+  assert.equal(sw.withoutOldForm('A | B pipes stay | in the middle'), 'A | B pipes stay | in the middle');
 });
 
 test('buildWake: who and memory as the system turn; Mara\'s question then a caller\'s question last, each with who asks', () => workspace(async (root) => {

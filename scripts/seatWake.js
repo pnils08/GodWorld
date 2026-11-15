@@ -16,7 +16,9 @@
  *   2 their approval      now, last Cycle, and what puts them out of office — written here each wake, no explanation
  *                         (builder 2026-11-14: "a script edits each week so it show what their approval ratings is ,
  *                         what is was last cycle and what puts them out of office . Explanation isn't needed")
- *   3 their data          the seat's own pack (buildCivicOfficeSlice.buildPack) with what tells them what to do taken out
+ *   3 their data          their neighborhoods' rows whole off the city's sheets, as the chief's are (districtRecords); the seat's
+ *                         pack for what only it holds — board, bands, complaints, counts, events, workers, patrol (buildCivicOfficeSlice.
+ *                         buildPack) — with what tells them what to do, and what the pack picked or worded for them, taken out
  *   4 their tools         the worker's four; calling on a resident; the council's business (propose, call a vote,
  *                         renew, work); answering Mara only when she has asked. Nothing says when to use one
  *   5 their memory        gathered from their page (workerWake.gatherMemory)
@@ -52,6 +54,7 @@ function defaults(deps) {
     buildPack: d.buildPack || ((a) => require('./buildCivicOfficeSlice').buildPack(a)),
     maraDirective: d.maraDirective || { blocksFor: (...a) => require('./maraDirective').blocksFor(...a) },
     voice: d.voice || voiceResident,
+    readPrev: d.readPrev || ((tab) => readJsonl(path.join(d.root || ROOT, 'output', 'beats', 'prev', tab + '.jsonl'))),
   };
 }
 function readJsonl(file) {
@@ -74,9 +77,10 @@ function lastCycleApproval(officeId, cycle, root) {
   }
   return null;
 }
-async function approvalBlock(office, cycle, deps) {
+// `ledger`: the Civic_Office_Ledger rows when the caller has them (buildWake reads the sheet once for the approval and the faction table).
+async function approvalBlock(office, cycle, deps, ledger) {
   const { sheets, root } = defaults(deps);
-  const row = (await sheets.getSheetAsObjects('Civic_Office_Ledger')).find((r) => r.OfficeId === office.officeId);
+  const row = (ledger || await sheets.getSheetAsObjects('Civic_Office_Ledger')).find((r) => r.OfficeId === office.officeId);
   const now = row ? Number(row.Approval) : NaN;
   if (!isFinite(now)) throw new Error('no approval on Civic_Office_Ledger for ' + office.officeId);
   const last = lastCycleApproval(office.officeId, cycle, root);
@@ -84,40 +88,60 @@ async function approvalBlock(office, cycle, deps) {
     CHALLENGER_NAMED_BELOW + '; below ' + SEAT_LOST_BELOW + ' the challenger takes the seat.' };
 }
 
-// ---- part 3: their data — the pack as built, less what tells them what to do (task, pulse, prewrite), its rules and
-// form (limits, output), and every build note (file paths, why-lines, retrieval keys). Titles name the data. ----
+// ---- part 3a: their district's readings, whole. His neighborhoods' rows off the city's sheets, every column, a blank one
+// included, as the chief's are handed (workerWake FILLS): the pack's pick of six columns and its worded facts are out.
+// Last Cycle rides on a value that moved, from the beats dump one Cycle back; the city's high and low of each numeric
+// column sits beneath (the chief's, builder 2026-11-14 "Agree on the idea for #1"). ----
 const table = ww.table;
-function dataBlocks(pack, office, cycle) {
+// A record that could not be read says so — it is not an empty record (workerWake.memoryRecall's rule).
+const UNAVAILABLE = 'unavailable this wake — not an empty record';
+const DISTRICT_SHEETS = [
+  { tab: 'Neighborhood_Map', title: 'Neighborhood readings' },
+  { tab: 'Crime_Metrics', title: 'Crime' },
+  { tab: 'Neighborhood_Demographics', title: 'Demographics' },
+];
+const STAMP_COLS = new Set(['Timestamp', 'Cycle', 'LastUpdated']);   // they move every Cycle; a last-Cycle note on them says nothing
+const isNum = (v) => String(v == null ? '' : v).trim() !== '' && isFinite(Number(v));
+const sameHood = (a, b) => String(a || '').trim().toLowerCase() === String(b || '').trim().toLowerCase();
+async function districtRecords(hoods, cycle, deps) {
+  const { sheets, root, readPrev } = defaults(deps);
+  const prevMeta = readJson(path.join(root, 'output', 'beats', 'prev', 'meta.json'));
+  const havePrev = !!prevMeta && Number(prevMeta.cycle) === Number(cycle) - 1;
+  const out = [];
+  for (const { tab, title } of DISTRICT_SHEETS) {
+    let rows = null;
+    try { rows = await sheets.getSheetAsObjects(tab); } catch (e) { rows = null; }
+    const mine = (rows || []).filter((r) => hoods.some((h) => sameHood(r.Neighborhood, h)));
+    if (!rows || !rows.length || !mine.length) { out.push({ title: title + ', your district, Cycle ' + cycle, text: UNAVAILABLE }); continue; }
+    const cols = Object.keys(rows[0]);
+    const before = havePrev ? readPrev(tab) : [];
+    const shown = mine.map((r) => {
+      const was = before.find((p) => sameHood(p.Neighborhood, r.Neighborhood));
+      return Object.assign({}, r, ...cols.filter((c) => was && !STAMP_COLS.has(c) && c !== 'Neighborhood' && String(was[c] == null ? '' : was[c]) !== String(r[c] == null ? '' : r[c]))
+        .map((c) => ({ [c]: String(r[c] == null ? '' : r[c]) + ' (last Cycle ' + (was[c] == null ? '' : was[c]) + ')' })));
+    });
+    out.push({ title: title + ', your district, Cycle ' + cycle, text: table(shown, cols) });
+    const numeric = cols.filter((c) => c !== 'Neighborhood' && !STAMP_COLS.has(c));
+    const hl = ww.highLow(rows, numeric, 'Neighborhood');
+    if (hl.length) out.push({ title: title + ', the high and low of each column across the city, Cycle ' + cycle, text: table(hl, ['Column', 'Highest', 'Lowest']) });
+  }
+  return out;
+}
+
+// ---- part 3b: what only the seat's pack holds — the pack as built, less what tells them what to do (task, pulse,
+// prewrite), its rules and form (limits, output), every build note (file paths, why-lines, retrieval keys), and what the
+// pack picked or worded for them (`known`: its ranked-hood why-lines, its turf lines; `exposure`: four named subjects).
+// Titles name the data. `ledger`: the live Civic_Office_Ledger rows — the faction's approvals are read off them. ----
+function dataBlocks(pack, office, cycle, ledger) {
   const out = [];
   const g = pack.game || {};
   const s = ((pack.brief || {}).sections) || {};
-  const fmt = (v) => (v == null ? '' : typeof v === 'number' ? Number(v.toFixed(3)) : String(v));
-  // A record that could not be read says so — it is not an empty record (workerWake.memoryRecall's rule).
-  const UNAVAILABLE = 'unavailable this wake — not an empty record';
   const avail = (x) => !(x && x.available === false);
-  for (const d of ((s.measuredState || {}).districts) || []) {
-    const title = (d.district === office.district ? 'Your district' : 'District ' + d.district) + ', Cycle ' + cycle;
-    const hoods = (d.neighborhoods || []).filter((h) => h.available !== false && h.measured);
-    if (!avail(d) || !hoods.length) { out.push({ title, text: UNAVAILABLE }); continue; }
-    const cols = [...new Set(hoods.flatMap((h) => Object.keys(h.measured)))];
-    const rows = hoods.map((h) => Object.assign({ Neighborhood: h.hood }, ...cols.map((c) => {
-      const m = h.measured[c] || {};
-      return { [c]: fmt(m.value) + (m.previous != null && String(m.previous) !== String(m.value) ? ' (last Cycle ' + fmt(m.previous) + ')' : '') };
-    })));
-    out.push({ title, text: table(rows, ['Neighborhood'].concat(cols)) });
-  }
   const events = ((s.events || {}).items) || [];
   // An event is its fact, when and where: its id, source path and retrieval key are build notes (codex 2026-11-15 F1).
   const evRows = events.map((e) => ({ Cycle: e.occurredCycle == null ? '' : e.occurredCycle, Where: (e.hoods || []).join(', ') || (e.citywideRelevance ? 'citywide' : ''),
     What: clip(e.fact || e.text || e.summary || '', 400), Size: e.significance || '' })).filter((r) => r.What);
   out.push({ title: 'Events in your district', text: !avail(s.events) ? UNAVAILABLE : evRows.length ? table(evRows, ['Cycle', 'Where', 'What', 'Size']) : 'none' });
-  const known = (pack.known || []).filter((k) => k && k.text && !/^F-office-/.test(String(k.id || '')));   // their approval is part 2
-  if (known.length) out.push({ title: 'On the record, Cycle ' + cycle, text: known.map((k) => '- ' + k.text).join('\n') });
-  const ex = pack.exposure || {};
-  if ((ex.subjects || []).length) out.push({ title: 'People in your district', text: table(ex.subjects.map((p) => ({ Name: p.name, Neighborhood: p.neighborhood, Role: p.role })), ['Name', 'Neighborhood', 'Role']) });
-  const named = (list, label) => { if ((list || []).length) out.push({ title: label, text: list.map((b) => '- ' + [b.name, b.neighborhood || b.hood, b.type || b.kind].filter(Boolean).join(', ')).join('\n') }); };
-  named(ex.businesses, 'Businesses in your district');
-  named(ex.churches, 'Congregations in your district');
   if ((g.board || []).length) {
     out.push({ title: 'Your board', text: table(g.board.map((b) => ({ Initiative: b.id, Name: b.name, Category: b.domain, Stage: b.stage || '', Status: b.status || '', Neighborhoods: (b.hoods || []).join(', '),
       Budget: String(b.budget || '').replace(/^budget:\s*/, ''), 'Vote Cycle': b.voteCycle == null ? '' : b.voteCycle, 'Next step due': b.nextActionCycle == null ? '' : 'C' + b.nextActionCycle,
@@ -127,7 +151,10 @@ function dataBlocks(pack, office, cycle) {
   if (g.categories && g.categories.available) out.push({ title: 'Categories and budget bands', text: table(g.categories.list.map((c) => ({ Category: c.key, Covers: c.label, Band: c.band })), ['Category', 'Covers', 'Band']) });
   const pool = g.petitionPool || {};
   if (g.petitionPool && !pool.available) out.push({ title: 'Complaints from your district', text: UNAVAILABLE });
-  if (pool.available) out.push({ title: 'Complaints from your district', text: (pool.complaints || []).length ? table(pool.complaints.map((c) => ({ Cycle: c.cycle, Neighborhood: c.hood, Said: c.snippet, Mood: c.affect })), ['Cycle', 'Neighborhood', 'Said', 'Mood']) : 'none' });
+  // A reporter's own filing record ("filed: <headline>", written by cron-desk-run after a gate PASS) rides the same intake tab
+  // under the reporter's neighborhood; it is the newsroom's record, not a resident's complaint (buildLivesSlice keeps the same rule).
+  const said = ((pool.complaints || []).filter((c) => !/^filed:/i.test(String(c.snippet || '').trim())));
+  if (pool.available) out.push({ title: 'Complaints from your district', text: said.length ? table(said.map((c) => ({ Cycle: c.cycle, Neighborhood: c.hood, Said: c.snippet, Mood: c.affect })), ['Cycle', 'Neighborhood', 'Said', 'Mood']) : 'none' });
   const probs = ((g.problemContinuity || {}).problems) || [];
   if (g.problemContinuity && !g.problemContinuity.available) out.push({ title: 'Conditions counted in your district, Cycle ' + cycle, text: UNAVAILABLE });
   if (probs.length) out.push({ title: 'Conditions counted in your district, Cycle ' + cycle, text: table(probs.map((p) => ({ Neighborhood: p.hood, Condition: p.label, Count: p.count })), ['Neighborhood', 'Condition', 'Count']) });
@@ -135,8 +162,10 @@ function dataBlocks(pack, office, cycle) {
   if (g.workingCity && g.workingCity.available) out.push({ title: 'What the city\'s workers last said', text: String(g.workingCity.text || '').replace(/^The working city:\n?/, '') });
   if (g.patrol && !g.patrol.available) out.push({ title: 'The patrol setting', text: UNAVAILABLE });
   if (g.patrol && g.patrol.available) out.push({ title: 'The patrol setting', text: String(g.patrol.text || '') });
+  // The office map says who shares the faction; the approval is the live sheet's — the map's own number is a stale copy (95 / 85 / 85 against 63 / 59 / 60).
   const peers = ((pack.role || {}).civicPeers) || [];
-  if (peers.length) out.push({ title: 'Seats in your faction', text: table(peers.map((p) => ({ Seat: p.OfficeId, Holder: p.Holder, District: p.District, Approval: p.Approval })), ['Seat', 'Holder', 'District', 'Approval']) });
+  const live = new Map((ledger || []).map((r) => [r.OfficeId, r.Approval]));
+  if (peers.length) out.push({ title: 'Seats in your faction', text: table(peers.map((p) => ({ Seat: p.OfficeId, Holder: p.Holder, District: p.District, Approval: live.has(p.OfficeId) ? live.get(p.OfficeId) : '' })), ['Seat', 'Holder', 'District', 'Approval']) });
   return out;
 }
 
@@ -174,6 +203,11 @@ function pastDecisions(popid, agentDir, deps) {
   return out;
 }
 
+// An old wake filed its statement with a pack's form fields on the tail: " | action: defend the district | signal: crime index …".
+// Those are the old pack's own labels, the build's words about how a seat decides; the statement before them is theirs and stays.
+// The page is not touched (a page is the person's record) — only what is handed to the wake.
+const withoutOldForm = (text) => String(text == null ? '' : text).replace(/\s*\|\s*action:[^|\n]*(?:\|\s*signal:[^\n]*)?$/, '');
+
 // The seat's open question from Mara, in her words: her ask and her reason, no form fields (workerWake.askAndWhy).
 function maraQuestion(pack) {
   const open = ((((pack || {}).game || {}).confrontations || {}).open) || [];
@@ -192,15 +226,17 @@ async function buildWake(opts) {
   if (!office || !isSeat(office.officeId)) throw new Error('not a seat on the council template: ' + (office && office.officeId));
   const question = String(o.question || '').trim(), askerLine = String(o.askerLine || '').trim();
   if (question && !askerLine) throw new Error('missing askerLine: a question is handed over with who asks it');
-  const { buildPack, root } = defaults(o.deps);
+  const { buildPack, root, sheets } = defaults(o.deps);
   const pack = o.pack || buildPack({ cycle: Number(o.cycle), agentDir: office.agentDir, root });
   const who = await ww.whoTheyAre(office.popid, o.deps);
   const mara = maraQuestion(pack);
   const hoods = ((pack.signal || {}).hoods) || [];
   const memory = await ww.gatherMemory(office.popid, question || (mara && mara.text) || ['council district', ...hoods].join(' '), o.deps);
   const decisions = pastDecisions(office.popid, office.agentDir, o.deps);
-  const system = [who.line].concat(memory.entries.length ? ['', 'From your own memory:', ...memory.entries.map((m) => '- (' + m.when + ') ' + m.text)] : []).join('\n');
-  const blocks = [await approvalBlock(office, o.cycle, o.deps)].concat(dataBlocks(pack, office, Number(o.cycle)));
+  const system = [who.line].concat(memory.entries.length ? ['', 'From your own memory:', ...memory.entries.map((m) => '- (' + m.when + ') ' + withoutOldForm(m.text))] : []).join('\n');
+  const ledger = await sheets.getSheetAsObjects('Civic_Office_Ledger');
+  const blocks = [await approvalBlock(office, o.cycle, o.deps, ledger)]
+    .concat(await districtRecords(((pack.signal || {}).hoods) || [], Number(o.cycle), o.deps), dataBlocks(pack, office, Number(o.cycle), ledger));
   const user = [
     ...blocks.map((b) => b.title + ':\n' + b.text),
     'What you have decided and said on the record:\n' + (decisions.length
@@ -329,5 +365,5 @@ function toolExecutor(ctx) {
   };
 }
 
-module.exports = { BUILT, isSeat, buildWake, toolsFor, toolExecutor, approvalBlock, lastCycleApproval, dataBlocks, pastDecisions,
+module.exports = { BUILT, isSeat, buildWake, toolsFor, toolExecutor, approvalBlock, lastCycleApproval, districtRecords, dataBlocks, withoutOldForm, pastDecisions,
   maraQuestion, hashPick, parseVoiceOutput, MAX_TOOL_CALLS, CHALLENGER_NAMED_BELOW, SEAT_LOST_BELOW };

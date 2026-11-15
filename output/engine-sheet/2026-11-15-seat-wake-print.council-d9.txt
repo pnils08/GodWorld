@@ -6,32 +6,76 @@ From your own memory:
 - (Cycle 115) The Grand Lake yes is on the record, and that's done. I said the conditions are real and the public record backs it up—that's the honest part. The quiet after a vote is when I actually feel the weight of it, not during the debate. Laurel's stability, Uptown's pace—I keep telling people I won't blink, but privately I have to check my own pulse too. And that bit about reports not being finish lines—I wrote that because I've seen too many good intentions die in a PDF nobody reads. The agenda comes next week, and I'll be the one asking for the receipts again. That's the job, and I don't need the noise to know I've done it.
 - (Cycle 104) Your public statement: [District Priorities] Terrence Mobley — Laurel’s progress isn’t an accident—it’s the result of focused investment. We’re not slowing down now just because the Mayor’s spotlight moved on. --- stated: [Baylight District Final Council Vote] Terrence Mobley — Uptown's success isn't just numbers—it's proof that when we invest in our people, Oakland thrives. Let's keep building, not just here, but across the district.
 - (Cycle 106) Your public statement: Laurel's stability is hard-won-crime still below city averages with property at 28 and violent at 24 this cycle. Sentiment's holding at 0.36 while we keep housing pressure flat zero. This isn't luck—it's the result of staying focused on what works. I'm pushing back against any distraction from our momentum.
-- (Cycle 104) Your public statement: "Laurel’s crime rates remain below city averages, with property crimes at 27 and violent crimes at 24 this cycle—well under the city’s 40.6 and 33.5. Sentiment stands steady at 0.49, and our housing pressure is flat zero. This isn’t a district in crisis—it’s one worth protecting. I’ll defend our momentum." By leveraging D9’s lower crime index (0.45 vs city 0.709) and stable metrics, Mobley opts to defend the district’s safety narrative, citing known Laurel residents’ lived context without introducing new stakeholders or fabricated stats. | action: defend the district | signal: crime index (0.45), sentiment (0.49), housing pressure (0)
+- (Cycle 104) Your public statement: "Laurel’s crime rates remain below city averages, with property crimes at 27 and violent crimes at 24 this cycle—well under the city’s 40.6 and 33.5. Sentiment stands steady at 0.49, and our housing pressure is flat zero. This isn’t a district in crisis—it’s one worth protecting. I’ll defend our momentum." By leveraging D9’s lower crime index (0.45 vs city 0.709) and stable metrics, Mobley opts to defend the district’s safety narrative, citing known Laurel residents’ lived context without introducing new stakeholders or fabricated stats.
 - (Cycle 105) Your public statement: [Baylight District Final Council Vote] Terrence Mobley — Uptown’s success isn’t just numbers—it’s the people who showed up to build it. Let’s honor that by ensuring Baylight’s next phase stays rooted in community ownership, not corporate handshakes.
 --- user ---
 Your approval:
 Approval 63; last Cycle 64. A challenger is named below 40; below 30 the challenger takes the seat.
 
-Your district, Cycle 115:
-Neighborhood | Sentiment | CrimeIndex | RetailVitality | HousingPressure | NeighborhoodTrajectory | TrajectoryMomentum
-Laurel | -0.15 (last Cycle -0.03) | 0.68 (last Cycle 0.69) | 6.5 (last Cycle 4.34) | 0 | decay (last Cycle steady) | 4 (last Cycle 5)
-Uptown | 0.08 (last Cycle 0.2) | 0.62 | 15.14 (last Cycle 13.66) | 10 | growth | 10
+Neighborhood readings, your district, Cycle 115:
+Timestamp | Cycle | Neighborhood | NightlifeProfile | NoiseIndex | CrimeIndex | RetailVitality | EventAttractiveness | Sentiment | DemographicMarker | Holiday | HolidayPriority | FirstFriday | CreationDay | SportsSeason | MigrationFlow | NeighborhoodTrajectory | HousingPressure | TrajectoryStartCycle | MedianIncome | MedianRent | TrajectoryMomentum | District | CoreSimRank | IncomeTier | BoomExposure | BoomIndex | EmployerCharacter | WealthMin | WealthMax | ChildAreas | WeatherZone | Adjacent | AttentionWeight | Scenes | RentShare
+Y3C11 | 115 | Laurel | 0.75 | 3.88 | 0.68 | 6.5 | 6.38 | -0.15 | Outflow pressure | none | none | FALSE | FALSE | early-season | -3 | decay | 0 | 115 | 85742 | 2144 | 4 | D9 | 6 | 3 | reachable | -0.1 | schools-retail | 3 | 6 | Maxwell Park | valley | Fruitvale, Dimond, East Oakland | 0 |  | 0.3
+Y3C11 | 115 | Uptown | 1.37 | 6.25 | 0.62 | 15.14 | 10.47 | 0.08 | Inflow surge | none | none | FALSE | FALSE | early-season | 5 | growth | 10 | 105 | 98133 | 2453 | 10 | D9 | 9 | 3 | nightlife | 0.6 | nightlife | 4 | 7 |  | urban-corridor | Downtown, KONO, Temescal, Lake Merritt, West Oakland, Adams Point | 1.5 | arts, FirstFriday:4, OaklandPride:3, NewYearsEve:2 | 0.3
+
+Neighborhood readings, the high and low of each column across the city, Cycle 115:
+Column | Highest | Lowest
+NightlifeProfile | 1.4 — Jack London | 0.52 — Baylight District
+NoiseIndex | 6.54 — Baylight District | 2.63 — Adams Point
+CrimeIndex | 0.73 — San Antonio | 0.57 — Downtown, Baylight District
+RetailVitality | 17.41 — Jack London | 5.17 — Ivy Hill
+EventAttractiveness | 11.31 — Jack London | 4 — Brooklyn, Ivy Hill
+Sentiment | 0.31 — West Oakland | -0.16 — San Antonio
+MigrationFlow | 5 — Downtown, West Oakland, Jack London, Uptown | -4 — Ivy Hill, Baylight District
+HousingPressure | 10 — Downtown, Jack London, Uptown | 0 — Laurel, Adams Point, Piedmont Ave, Brooklyn, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, Lake Merritt, Baylight District, East Oakland
+TrajectoryStartCycle | 115 — Laurel, Rockridge, KONO | 105 — Downtown, Piedmont Ave, Uptown
+MedianIncome | 185741 — Lake Merritt | 68409 — Temescal
+MedianRent | 4644 — Lake Merritt | 1551 — Ivy Hill
+TrajectoryMomentum | 10 — Downtown, Fruitvale, Jack London, Uptown | 0 — Adams Point, Brooklyn, Glenview, Ivy Hill, San Antonio, Baylight District
+CoreSimRank | 22 — San Antonio | 1 — Temescal
+IncomeTier | 6 — Lake Merritt | 1 — Temescal
+BoomIndex | 1 — Baylight District | -0.7 — Temescal
+WealthMin | 8 — Lake Merritt | 2 — Temescal, San Antonio, East Oakland
+WealthMax | 12 — West Oakland, Lake Merritt, Baylight District | 5 — Temescal, San Antonio
+AttentionWeight | 2 — Downtown | 0 — Laurel, Piedmont Ave, Glenview, Ivy Hill
+RentShare | 0.3 — Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Brooklyn, KONO, Lake Merritt, Uptown, Baylight District | 0.24 — Glenview, Dimond, Ivy Hill
+
+Crime, your district, Cycle 115:
+Neighborhood | PropertyCrimeIndex | ViolentCrimeIndex | ResponseTimeAvg | ClearanceRate | IncidentCount | LastUpdated | PropertyLevel | ViolentLevel | QolLevel | Trend | Hotspot | PressureRatio
+Laurel | 43 (last Cycle 42) | 25 (last Cycle 28) | 11.3 (last Cycle 9.7) | 0.2 (last Cycle 0.22) | 7 (last Cycle 8) | 115 | 40.5 | 26.9 | 45 | steady (last Cycle rising) |  | 1.05 (last Cycle 1.04)
+Uptown | 40 (last Cycle 39) | 23 | 10.7 (last Cycle 10.8) | 0.2 (last Cycle 0.26) | 7 (last Cycle 11) | 115 | 37.47 (last Cycle 37.43) | 22.61 (last Cycle 22.62) | 43.23 (last Cycle 43.21) | steady |  | 0.97 (last Cycle 0.92)
+
+Crime, the high and low of each column across the city, Cycle 115:
+Column | Highest | Lowest
+PropertyCrimeIndex | 45 — Temescal | 31 — Baylight District
+ViolentCrimeIndex | 33 — East Oakland | 19 — Jack London
+ResponseTimeAvg | 11.8 — Rockridge | 10.6 — Grand Lake
+ClearanceRate | 0.25 — San Antonio | 0.18 — Fruitvale, Jack London, Chinatown, Glenview, Baylight District
+IncidentCount | 8 — Grand Lake | 4 — Adams Point
+PropertyLevel | 47.12 — Temescal | 33.02 — Baylight District
+ViolentLevel | 33.28 — East Oakland | 19.6 — Jack London
+QolLevel | 47.62 — Temescal | 40.59 — Baylight District
+PressureRatio | 1.12 — East Oakland, San Antonio | 0.88 — Downtown, Baylight District
+
+Demographics, your district, Cycle 115:
+Neighborhood | Students | Adults | Seniors | Unemployed | Sick | LastUpdated | SchoolQualityIndex | GraduationRate | CollegeReadinessRate | TeacherQuality | Funding
+Laurel | 339 (last Cycle 338) | 1512 (last Cycle 1507) | 368 (last Cycle 367) | 86 (last Cycle 87) | 107 (last Cycle 106) | 115 | 7.93 (last Cycle 7.94) | 89.43 (last Cycle 89.41) | 62.4 (last Cycle 62.32) | 7.92 (last Cycle 7.93) | 13000
+Uptown | 63 | 506 (last Cycle 505) | 65 | 17 | 21 (last Cycle 22) | 115 | 7.21 (last Cycle 7.31) | 88.17 (last Cycle 88.4) | 59.39 (last Cycle 59.89) | 7.92 (last Cycle 7.93) | 13000
+
+Demographics, the high and low of each column across the city, Cycle 115:
+Column | Highest | Lowest
+Students | 482 — East Oakland | 60 — Lake Merritt
+Adults | 2299 — Downtown | 419 — Baylight District
+Seniors | 455 — Rockridge | 34 — Baylight District
+Unemployed | 167 — Temescal | 9 — Baylight District
+Sick | 135 — Chinatown | 13 — Baylight District
+SchoolQualityIndex | 8.46 — Rockridge | 6.3 — Temescal
+GraduationRate | 94.01 — Rockridge | 84.08 — Temescal
+CollegeReadinessRate | 74.53 — Rockridge | 50.43 — East Oakland
+TeacherQuality | 9.11 — Rockridge | 6.74 — Ivy Hill, San Antonio, East Oakland
+Funding | 15000 — Rockridge | 11000 — Ivy Hill, San Antonio, East Oakland
 
 Events in your district:
 none
-
-On the record, Cycle 115:
-- Laurel: sentiment -0.15 vs city 0.020; crime index 0.68 vs city 0.647; decay momentum 4; decay momentum 4
-- Laurel crime: property 43, violent 25, incidents 7 (cycle 115) — city property 39.5, violent 25.9, incidents 5.9
-- Laurel: sentiment -0.15 vs city 0.020; crime index 0.68 vs city 0.647; decay momentum 4; retail 6.5; housing pressure 0; decay; momentum 4
-- Laurel cooling off: foot traffic down, storefronts quieter than the rest of the city
-
-People in your district:
-Name | Neighborhood | Role
-Marco Fabregas | Laurel | Catcher, Las Vegas Aviators (AAA)
-Carlos Flores | Laurel | Center Fielder, Midland RockHounds (AA)
-Brianna Lee | Laurel | Historic Preservation Carpenter
-Tariq Jello | Laurel | Appliance Repair Technician
 
 Your board:
 Initiative | Name | Category | Stage | Status | Neighborhoods | Budget | Vote Cycle | Next step due | Next | Yours
@@ -52,8 +96,6 @@ Complaints from your district:
 Cycle | Neighborhood | Said | Mood
 114 | Laurel | Honestly, I can't say any city council person has ever reached out to me directly about… | Resentful
 114 | Laurel | Look, I can tell you what the numbers say — Uptown's got the most calls, and the… | Frustrated
-114 | Laurel | filed: Coliseum Lost 799 Riders on a Weekend With No Event on Its Row | Frustrated
-113 | Uptown | filed: Eastlake Led the City in Incidents This Cycle. Its Row Still Reads "Steady." | Frustrated
 
 Conditions counted in your district, Cycle 115:
 Neighborhood | Condition | Count
@@ -72,9 +114,9 @@ City patrol strategy: balanced (patrols spread evenly — the default posture). 
 
 Seats in your faction:
 Seat | Holder | District | Approval
-COUNCIL-D1 | Denise Carter | D1 | 95
-COUNCIL-D3 | Rose Delgado | D3 | 85
-COUNCIL-D5 | Janae Rivers | D5 | 85
+COUNCIL-D1 | Denise Carter | D1 | 63
+COUNCIL-D3 | Rose Delgado | D3 | 59
+COUNCIL-D5 | Janae Rivers | D5 | 60
 
 What you have decided and said on the record:
 - Cycle 114, propose: title: Laurel Neighborhood Patch and Clean-Up; category: environment; reach: hood; hoods: Laurel; budget: $6M; purpose: Targeted street-level repair and cleanup work in Laurel — fixing the visible conditions that erode confidence and sending the message that this district is not being left behind. Covers patching, missed-pickup recovery, and the small physical stuff that residents read as care.

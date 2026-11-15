@@ -3639,9 +3639,8 @@ function civicDutyDay(day, policy) {
 // move gate and ledger the seats use, so the close reads it as before.
 // o: { cycle, date, officeMap, noWrite }
 // ---------------------------------------------------------------------------
-// OFF unless asked for by flag (builder 2026-11-14: "I've literally approved nothing"). Without --worker-template every office, the
-// police chief included, wakes exactly as it did before this code existed. Nothing schedules the flag.
-const workerTemplateOn = (officeId) => process.argv.includes('--worker-template') && workerWake.hasFill(officeId);
+// ON (builder 2026-11-14: "Turn it on"). An office that has a worker fill wakes on the worker model.
+const workerTemplateOn = (officeId) => workerWake.hasFill(officeId);
 
 async function runWorkerDatawake(duty, o) {
   const office = duty.office;
@@ -3812,7 +3811,7 @@ async function runDatawake() {
   // file. Built for the worker template; a seat's wake has no such mode yet (civic.49 Task 9).
   if (process.argv.includes('--no-write')) {
     for (const duty of rotaEntries) {
-      if (!workerTemplateOn(duty.office.officeId)) throw new Error('--no-write is unavailable here: it needs --worker-template and an office that has a worker fill (' + duty.office.agentDir + ')');
+      if (!workerTemplateOn(duty.office.officeId)) throw new Error('--no-write is unavailable for an office with no worker fill (' + duty.office.agentDir + ')');
       await runWorkerDatawake(duty, { cycle, date, officeMap, noWrite: true });
     }
     console.log('=== datawake no-write: ' + rotaEntries.length + ' worker wake(s), nothing saved ===');

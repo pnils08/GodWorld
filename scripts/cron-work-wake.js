@@ -312,6 +312,9 @@ function autoPackages(cycle, packages, opts) {
     if (!of.agentDir || !/^POP-\d{5}$/.test(popid)) return;
     officePops.add(popid);
     if (taken.has(popid)) return;
+    // builder 2026-11-14: "Thursday wakes won't be a thing anymore , 1 worker model" — an office on the worker model
+    // (scripts/workerWake.js FILLS) wakes on its weekday schedule only; its old Thursday pack is retired.
+    if (require('./workerWake').hasFill(of.officeId)) return;
     const row = byPop[popid] || null;
     // civic.48 — the seat's neighborhoods with its district, not "D5" alone
     const hoods = (DISTRICT_NEIGHBORHOODS[String(of.district || '').toUpperCase()] || []).join(', ');

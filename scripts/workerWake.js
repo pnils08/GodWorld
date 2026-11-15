@@ -211,7 +211,186 @@ const FILLS = {
     },
   },
 };
-const hasFill = (officeId) => Object.prototype.hasOwnProperty.call(FILLS, String(officeId || ''));
+// ---- the shared readers the other workers' fills are made of. Each returns blocks of the tab's own rows; a tab that
+// cannot be read is a block that says so. Nothing is picked, ranked or worded: which row matters is the worker's.
+// Source of which tab is whose: docs/research/2026-11-15-worker-records-all-tabs.md (all 85 tabs, read live).
+function recordKit(cycle, ctx) {
+  const { sheets } = defaults(ctx.deps);
+  const cache = {};
+  const rows = (tab) => (cache[tab] = cache[tab] || sheets.getSheetAsObjects(tab));
+  const fold = (v) => String(v || '').trim().toLowerCase();
+  const inSet = (v, list) => list.map(fold).includes(fold(v));
+  const out = [];
+  const add = async (title, read) => { try { const t = await read(); if (t) out.push({ title, text: t }); } catch (e) { out.push({ title, text: 'unavailable (' + ((e && e.message) || e) + ')' }); } };
+  const kit = {
+    blocks: out,
+    // one initiative's row on the tracker, every column as the sheet holds it
+    initiative: (id) => add('Your initiative on the city\'s tracker (' + id + ')', async () => {
+      const r = (await rows('Initiative_Tracker')).find((x) => x.InitiativeID === id);
+      return r ? Object.keys(r).filter((k) => k).map((k) => k + ': ' + r[k]).join('\n') : 'no row for ' + id;
+    }),
+    tracker: () => add('Every initiative on the city\'s tracker', async () => {
+      const t = await rows('Initiative_Tracker');
+      const cols = ['InitiativeID', 'Name', 'Status', 'Stage', 'ImplementationPhase', 'Budget', 'BudgetRemaining', 'AffectedNeighborhoods', 'PolicyDomain', 'VoteCycle', 'NextScheduledAction', 'NextActionCycle', 'LastWorkCycle'];
+      return t.length ? table(t, cols.filter((c) => c in t[0])) : 'none';
+    }),
+    treasury: (title, pick) => add(title, async () => {
+      const t = (await rows('City_Treasury')).filter((r) => !pick || pick(r));
+      return t.length ? table(t, ['Cycle', 'Entry', 'Amount', 'Counterparty', 'BalanceAfter', 'Note']) : 'none';
+    }),
+    chaos: (title, vehicles) => add(title, async () => {
+      const c = (await rows('Chaos_Cars')).filter((r) => inSet(r.VehicleType, vehicles))
+        .map((r) => ({ Cycle: r.CycleId, Vehicle: r.VehicleType, Where: r.TargetScope === 'citizen' ? 'citizen ' + (ctx.nameOf(r.TargetId) || r.TargetId) : r.TargetScope + ' ' + r.TargetId, Outcome: r.DiceOutcome, Moved: r.PrimaryMetric + ' ' + r.MetricMagnitude }));
+      return c.length ? table(c, ['Cycle', 'Vehicle', 'Where', 'Outcome', 'Moved']) : 'none';
+    }),
+    events: (title, domains) => add(title, async () => {
+      const w = (await rows('WorldEvents_V3_Ledger')).filter((r) => inSet(r.Domain, domains))
+        .map((r) => ({ Cycle: r.Cycle, Domain: String(r.Domain).toUpperCase(), Neighborhood: r.Neighborhood, Severity: r.Severity, Event: r.EventDescription }));
+      return w.length ? table(w, ['Cycle', 'Domain', 'Neighborhood', 'Severity', 'Event']) : 'none';
+    }),
+    arcs: (title, pick) => add(title, async () => {
+      const a = (await rows('Event_Arc_Ledger')).filter(pick)
+        .map((r) => ({ Cycle: r.Cycle, Arc: r.ArcId, Neighborhood: r.Neighborhood, Type: r.Type, Phase: r.Phase, Tension: r.Tension, Summary: r.Summary }));
+      return a.length ? table(a, ['Cycle', 'Arc', 'Neighborhood', 'Type', 'Phase', 'Tension', 'Summary']) : 'none';
+    }),
+    texture: (title, domains) => add(title, async () => {
+      const t = (await rows('Texture_Trigger_Log')).filter((r) => inSet(r.Domain, domains))
+        .map((r) => ({ Cycle: r.Cycle, Domain: r.Domain, Neighborhood: r.Neighborhood, Note: r.Reason, Intensity: r.Intensity }));
+      return t.length ? table(t, ['Cycle', 'Domain', 'Neighborhood', 'Note', 'Intensity']) : 'none';
+    }),
+    ripples: (title, causes) => add(title, async () => {
+      const r = (await rows('Ripple_Ledger')).filter((x) => inSet(x.CauseType, causes))
+        .map((x) => ({ Cycle: x.Cycle, Cause: x.CauseType, Detail: x.CauseDetail, Effect: x.EffectType, Neighborhood: x.Neighborhood, Size: x.Magnitude, Lasts: x.Duration, Left: x.RemainingStrength }));
+      return r.length ? table(r, ['Cycle', 'Cause', 'Detail', 'Effect', 'Neighborhood', 'Size', 'Lasts', 'Left']) : 'none';
+    }),
+    domains: (title, cols) => add(title, async () => {
+      const d = await rows('Domain_Tracker');
+      return d.length ? table(d, ['Cycle'].concat(cols, ['TotalEvents'])) : '';
+    }),
+    hoodMap: (title, cols) => add(title + ', Cycle ' + cycle, async () => {
+      const m = await rows('Neighborhood_Map');
+      return m.length ? table(m, ['Neighborhood'].concat(cols)) : '';
+    }),
+    demographics: (title, cols) => add(title, async () => {
+      const m = await rows('Neighborhood_Demographics');
+      return m.length ? table(m, ['Neighborhood'].concat(cols)) : '';
+    }),
+    whole: (title, tab, cols, pick) => add(title, async () => {
+      const t = (await rows(tab)).filter((r) => !pick || pick(r));
+      return t.length ? table(t, (cols || Object.keys(t[0])).filter((c) => c in t[0])) : 'none';
+    }),
+    // the care-and-justice census: the city's line for each intake type by Cycle, then each neighborhood's intakes by Cycle
+    census: async (label, system, types) => {
+      let c = []; try { c = (await rows('Care_Justice_Census')).filter((r) => r.System === system); } catch (e) { out.push({ title: label + ', by Cycle', text: 'unavailable (' + e.message + ')' }); return; }
+      const cyc = [...new Set(c.map((r) => Number(r.Cycle)))].filter(isFinite).sort((x, y) => x - y);
+      const city = c.filter((r) => r.GeographicScope === 'city' && (!types || types.includes(r.IntakeType)))
+        .map((r) => ({ Cycle: r.Cycle, Kind: r.IntakeType, Intakes: r.TotalIntakes, 'Start of Cycle': r.OpeningOccupancy, 'End of Cycle': r.ClosingOccupancy, Beds: r.BedsOccupied, 'Transfers in': r.TransfersIn, 'Transfers out': r.TransfersOut, Exits: r.Exits }));
+      out.push({ title: label + ', citywide by Cycle', text: city.length ? table(city, Object.keys(city[0])) : 'none' });
+      for (const k of [...new Set(c.filter((r) => r.GeographicScope === 'neighborhood' && (!types || types.includes(r.IntakeType))).map((r) => r.IntakeType))]) {
+        const hoods = [...new Set(c.filter((r) => r.GeographicScope === 'neighborhood').map((r) => r.Neighborhood))];
+        const cell = (h, cy) => { const r = c.find((x) => x.Neighborhood === h && Number(x.Cycle) === cy && x.GeographicScope === 'neighborhood' && x.IntakeType === k); return r ? r.TotalIntakes : ''; };
+        out.push({ title: label + ' — ' + k + ' intakes by neighborhood, each Cycle', text: table(hoods.map((h) => Object.assign({ Neighborhood: h }, ...cyc.map((cy) => ({ ['C' + cy]: cell(h, cy) })))), ['Neighborhood'].concat(cyc.map((cy) => 'C' + cy))) });
+      }
+    },
+  };
+  return kit;
+}
+const made = (key, build, levers) => ({ levers: levers || [], build: async (cycle, ctx) => { const k = recordKit(cycle, ctx); await build(k, cycle, ctx); return { blocks: k.blocks, key }; } });
+const projectFill = (id, key, more) => made(key, async (k, cycle, ctx) => {
+  await k.initiative(id);
+  await k.treasury('The city\'s payments on ' + id, (r) => String(r.Counterparty || '').trim() === id);
+  if (more) await more(k, cycle, ctx);
+});
+
+Object.assign(FILLS, {
+  'PROJ-STABFUND': projectFill('INIT-001', 'stabilization fund households rent grants', async (k) => {
+    await k.whole('Households the fund has paid a grant to', 'Household_Ledger', ['HouseholdId', 'Neighborhood', 'HousingType', 'MonthlyRent', 'HouseholdIncome', 'HouseholdSavings', 'LastGrantCycle', 'LastGrantInitiativeID', 'LastGrantAmount', 'Status'], (r) => String(r.LastGrantInitiativeID || '').trim() !== '');
+    await k.hoodMap('Housing pressure, rent and income on the neighborhood map', ['HousingPressure', 'MedianRent', 'MedianIncome', 'MigrationFlow', 'NeighborhoodTrajectory']);
+    await k.ripples('What initiatives set moving in the neighborhoods', ['initiative-implementation', 'initiative']);
+  }),
+  'PROJ-OARI': projectFill('INIT-002', 'crisis response mental health dispatch', async (k) => {
+    await k.chaos('OARI van events, every Cycle on the sheet', ['oari_van']);
+    await k.census('Hospital intakes', 'hospital', ['mental-health-crisis', 'substance-treatment']);
+  }),
+  'PROJ-HEALTHCTR': projectFill('INIT-005', 'health center clinic patients', async (k) => {
+    await k.census('Hospital intakes', 'hospital', ['all']);
+    await k.demographics('Residents sick, by neighborhood', ['Sick', 'Adults', 'Seniors']);
+    await k.whole('Health programs in the community', 'Community_Programs', null, (r) => /health/i.test(r.Type));
+  }),
+  'PROJ-TRANSITHUB': projectFill('INIT-003', 'transit hub ridership stations', async (k, cycle) => {
+    await k.whole('Transit by station and corridor, Cycle ' + cycle, 'Transit_Metrics', ['Station', 'Corridor', 'RidershipVolume', 'OnTimePerformance', 'TrafficIndex', 'Notes', 'Factors'], (r) => Number(r.Cycle) === Number(cycle));
+    await k.whole('Transit by station and corridor, the Cycle before', 'Transit_Metrics', ['Station', 'Corridor', 'RidershipVolume', 'OnTimePerformance', 'TrafficIndex', 'Notes'], (r) => Number(r.Cycle) === Number(cycle) - 1);
+    await k.chaos('BART train events, every Cycle on the sheet', ['bart_train']);
+    await k.ripples('What transit events set moving', ['transit-event']);
+    await k.events('Traffic events on the city\'s event ledger', ['TRAFFIC']);
+  }),
+  'STAFF-BAYLIGHT': projectFill('INIT-006', 'baylight harbor construction', async (k) => {
+    await k.hoodMap('Boom exposure and income on the neighborhood map', ['BoomExposure', 'BoomIndex', 'MedianIncome', 'RetailVitality', 'NeighborhoodTrajectory']);
+    await k.chaos('Container ship events, every Cycle on the sheet', ['cargo_ship']);
+    await k.whole('Construction and architecture firms on the business ledger', 'Business_Ledger', null, (r) => /construction|architecture/i.test(r.Sector));
+  }),
+  'DA-01': made('charges custody arrests court', async (k) => {
+    await k.census('Arrests and custody', 'judicial', null);
+    await k.treasury('Fines the court paid to the city', (r) => /^COURT/.test(r.Counterparty || ''));
+    await k.whole('Cases on the case ledger', 'Judicial_Ledger');
+    await k.whole('Clearance and incidents by neighborhood', 'Crime_Metrics', ['Neighborhood', 'IncidentCount', 'ClearanceRate', 'PropertyLevel', 'ViolentLevel', 'Trend']);
+  }),
+  'EMS-DIR': made('hospital intakes ambulance illness injury', async (k) => {
+    await k.census('Hospital intakes', 'hospital', null);
+    await k.whole('Tracked residents in the hospital ledger', 'Hospital_Ledger');
+    await k.whole('Residents waiting on a cause', 'Health_Cause_Queue');
+    await k.chaos('Ambulance events, every Cycle on the sheet', ['ambulance']);
+    await k.demographics('Residents sick, by neighborhood', ['Sick', 'Adults', 'Seniors']);
+    await k.arcs('Health arcs on the arc ledger', (r) => /^health$/i.test(r.DomainTag) || /health/i.test(r.Type));
+    await k.events('Health events on the city\'s event ledger', ['HEALTH']);
+    await k.domains('Health event counts on the domain tracker, by Cycle', ['HEALTH']);
+  }),
+  'MED-EXAM': made('deaths cause of death', async (k) => {
+    await k.whole('Residents on the archive as deceased', 'Citizen_Archive', ['POPID', 'First', 'Last', 'BirthYear', 'Neighborhood', 'RoleType', 'HealthCause', 'ExitCycle', 'ArchiveNote'], (r) => /deceased/i.test(String(r.Status) + ' ' + String(r.ArchiveReason)));
+    await k.whole('Tracked residents in the hospital ledger', 'Hospital_Ledger');
+    await k.whole('Residents waiting on a cause', 'Health_Cause_Queue');
+  }),
+  'STAFF-DM-COMM': made('community programs housing neighborhoods', async (k) => {
+    await k.initiative('INIT-001');
+    await k.whole('Community programs', 'Community_Programs');
+    await k.hoodMap('Housing, migration and direction on the neighborhood map', ['HousingPressure', 'MedianRent', 'MedianIncome', 'MigrationFlow', 'NeighborhoodTrajectory', 'TrajectoryMomentum', 'Sentiment']);
+    await k.ripples('What migration and neighborhood direction set moving', ['migration', 'trajectory', 'neighborhood-fold']);
+    await k.whole('Faith organizations', 'Faith_Organizations', ['Organization', 'FaithTradition', 'Neighborhood', 'Congregation', 'Leader', 'ActiveStatus']);
+  }),
+  'STAFF-MANAGER': made('city budget treasury services', async (k) => {
+    await k.treasury('The city\'s treasury, every entry', null);
+    await k.tracker();
+    await k.chaos('Garbage truck, street sweeper and power-and-gas truck events, every Cycle on the sheet', ['garbage_truck', 'street_sweeper', 'pge_truck']);
+    await k.events('Infrastructure events on the city\'s event ledger', ['INFRASTRUCTURE']);
+    await k.whole('The city\'s loads this Cycle', 'World_Population', ['cycle', 'totalPopulation', 'employmentRate', 'illnessRate', 'civicLoad', 'trafficLoad', 'retailLoad', 'tourismLoad', 'nightlifeLoad', 'publicSpacesLoad', 'sentiment', 'shockFlag', 'patternFlag']);
+    await k.domains('Event counts on the domain tracker, by Cycle', ['CIVIC', 'INFRASTRUCTURE', 'TRANSIT', 'ECONOMIC', 'HEALTH', 'SAFETY']);
+  }),
+  'STAFF-DM-ECON': made('business jobs employment retail', async (k) => {
+    await k.whole('Every business on the ledger', 'Business_Ledger', ['BIZ_ID', 'Name', 'Sector', 'Neighborhood', 'Employee_Count', 'Avg_Salary', 'Annual_Revenue', 'Growth_Rate']);
+    await k.whole('Businesses that closed', 'Business_Archive');
+    await k.hoodMap('Retail, income and employers on the neighborhood map', ['RetailVitality', 'MedianIncome', 'IncomeTier', 'EmployerCharacter', 'BoomIndex']);
+    await k.demographics('Residents out of work, by neighborhood', ['Unemployed', 'Adults']);
+    await k.chaos('Building inspector, mail truck and container ship events, every Cycle on the sheet', ['building_inspector', 'mail_truck', 'cargo_ship']);
+    await k.ripples('What economic events set moving', ['economic-event']);
+    await k.events('Business and economic events on the city\'s event ledger', ['BUSINESS', 'ECONOMIC']);
+  }),
+  'EMERG-DIR': made('crisis emergency weather alerts', async (k) => {
+    await k.arcs('Crisis arcs on the arc ledger', (r) => /crisis/i.test(r.Type));
+    await k.whole('Weather by Cycle', 'Cycle_Weather', ['CycleID', 'Type', 'Temp', 'Impact', 'Advisory', 'Alerts', 'Streak', 'StreakType']);
+    await k.ripples('What crisis events set moving', ['crisis-event']);
+    await k.events('Weather and environment events on the city\'s event ledger', ['WEATHER', 'ENVIRONMENT']);
+    await k.whole('The city\'s shock and pattern flags this Cycle', 'World_Population', ['cycle', 'shockFlag', 'patternFlag', 'civicLoad', 'weatherType', 'weatherImpact']);
+  }),
+  'CHIEF-FIRE': made('fire engine calls', async (k) => {
+    await k.chaos('Fire engine events, every Cycle on the sheet', ['fire_engine']);
+  }),
+});
+
+// A fill that is built is not yet a wake that runs on it. LIVE names the workers whose scheduled wakes use the template
+// (builder 2026-11-14, on the chief: "Turn it on"). Adding an office here is the switch; it is his word per worker.
+const LIVE = new Set(['CHIEF-POLICE']);
+const isBuilt = (officeId) => Object.prototype.hasOwnProperty.call(FILLS, String(officeId || ''));
+const hasFill = (officeId) => LIVE.has(String(officeId || '')) && isBuilt(officeId);
 
 // The harness for one worker's wake. opts: { officeId, cycle, officeMap, question?, askerLine?, deps? }
 //   question + askerLine: someone's question to this worker, in their words, with who they are. Both or neither.
@@ -219,8 +398,11 @@ const hasFill = (officeId) => Object.prototype.hasOwnProperty.call(FILLS, String
 // -> { office, system, user, memory, decisions }
 async function buildWake(opts) {
   const o = opts || {};
-  const office = ((o.officeMap || {}).offices || []).find((x) => x.officeId === o.officeId);
-  if (!office || !hasFill(o.officeId)) throw new Error('no worker fill for ' + o.officeId);
+  // a project director sits under `projects` with a projectId; everyone else under `offices`
+  const om = o.officeMap || {};
+  const found = (om.offices || []).concat(om.projects || []).find((x) => (x.officeId || x.projectId) === o.officeId);
+  const office = found ? Object.assign({}, found, { officeId: found.officeId || found.projectId }) : null;
+  if (!office || !isBuilt(o.officeId)) throw new Error('no worker fill for ' + o.officeId);
   const question = String(o.question || '').trim(), askerLine = String(o.askerLine || '').trim();
   if (question && !askerLine) throw new Error('missing askerLine: a question is handed over with who asks it');
   const who = await whoTheyAre(office.popid, o.deps);
@@ -312,5 +494,5 @@ function toolExecutor(ctx) {
   };
 }
 
-module.exports = { FILLS, hasFill, buildWake, toolsFor, toolExecutor, TOOLS, SHEETS,
+module.exports = { FILLS, hasFill, isBuilt, LIVE, buildWake, toolsFor, toolExecutor, TOOLS, SHEETS,
   highLow, patrolInForce, askAndWhy, loadMoves, pastDecisions, gatherMemory, whoTheyAre, sheetRead, memoryRecall, table };

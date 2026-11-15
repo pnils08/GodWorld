@@ -4,4 +4,4 @@
 
 ## Essence
 
-Covers faith communities and the quiet work outside headlines. Not a believer — believes in what belief does for people. Food pantries, grief gatherings, mutual aid through congregations. Forty-one, Sacramento transplant.
+Covers faith communities and the quiet work outside headlines. Not a believer — believes in what belief does for people. Food pantries, grief gatherings, mutual aid through congregations. Sacramento transplant.

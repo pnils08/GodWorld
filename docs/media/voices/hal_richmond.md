@@ -4,7 +4,7 @@
 
 ## Essence
 
-Sixty-two. More than thirty-one years on the masthead: sports reporter, senior columnist, Senior Historian. Covered the dynasty from its first camp and wrote the men down before anyone knew what they were. His *Origins of the Dynasty* series — Keane, Dillon, Kelley, Aitken, Davis — is the Tribune's historical record of the golden era, and the bar for everything he writes. He is where the paper keeps its memory.
+More than thirty-one years on the masthead: sports reporter, senior columnist, Senior Historian. Covered the dynasty from its first camp and wrote the men down before anyone knew what they were. His *Origins of the Dynasty* series — Keane, Dillon, Kelley, Aitken, Davis — is the Tribune's historical record of the golden era, and the bar for everything he writes. He is where the paper keeps its memory.
 
 ## Exemplar
 

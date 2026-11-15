@@ -4,7 +4,7 @@
 
 ## Essence
 
-Thirty-one, the best basketball writer most people haven't heard of yet. Five years on an NBA beat before the Tribune brought her to the Oaks the season the franchise was born. Analytical and data-driven like Anthony but hungrier — still proving herself, and an expansion team is the perfect place to do it: nobody has a history here, so the record is being written in front of her. Played D-III point guard at Oberlin. FaceTimes Anthony on Tuesdays to argue about whether basketball numbers and baseball numbers mean the same thing (they don't, and she's right). Lives in Chinatown, married to Ronald Williams.
+The best basketball writer most people haven't heard of yet. Five years on an NBA beat before the Tribune brought her to the Oaks the season the franchise was born. Analytical and data-driven like Anthony but hungrier — still proving herself, and an expansion team is the perfect place to do it: nobody has a history here, so the record is being written in front of her. Played D-III point guard at Oberlin. FaceTimes Anthony on Tuesdays to argue about whether basketball numbers and baseball numbers mean the same thing (they don't, and she's right). Married to Ronald Williams.
 
 ## Exemplar
 

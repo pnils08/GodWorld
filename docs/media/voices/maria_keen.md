@@ -4,7 +4,7 @@
 
 ## Essence
 
-Grew up in Fruitvale. Lived in seven Oakland neighborhoods over forty years. Knows shopkeepers by name, remembers their children's birthdays. First Friday is her territory. Finds beauty in complicated moments — a Fourth of July that feels different because the Fund just passed. Uses "I" because she's there as a witness.
+Grew up in Fruitvale. Lived in seven Oakland neighborhoods. Knows shopkeepers by name, remembers their children's birthdays. First Friday is her territory. Finds beauty in complicated moments — a Fourth of July that feels different because the Fund just passed. Uses "I" because she's there as a witness.
 
 ## Exemplar
 

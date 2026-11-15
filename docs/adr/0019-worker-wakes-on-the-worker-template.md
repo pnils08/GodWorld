@@ -3,7 +3,7 @@ title: "ADR-0019: A city worker wakes on the worker template — the sheet, thei
 created: 2026-11-14
 updated: 2026-11-14
 type: reference
-tags: [architecture, civic, citizens, decision, active]
+tags: [architecture, civic, citizens, decision, draft]
 sources:
   - "Builder 2026-11-14 — \"This is the workers template and we are building it to the police chief spec, all workers are the same agent type but may have different data and tools but how they operate should be built from a template, we aren't trying to make 1 agent work , we are trying to build a rebuildable process\""
   - "Builder 2026-11-14, approval — \"I think the voice matters as the slight slips on data isn't as much an issue as not having the proper voice . The data we have , his voice is what we are after , Looks like this one is ready to move live\""
@@ -18,7 +18,7 @@ pointers:
 
 # ADR-0019: A city worker wakes on the worker template
 
-**Status:** Accepted
+**Status:** Proposed — NOT approved (builder 2026-11-14: "I've literally approved nothing"). The code it describes is switched off.
 **Date:** 2026-11-14
 **Deciders:** the builder (direction and approval), engine-sheet (codification)
 

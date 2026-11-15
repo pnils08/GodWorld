@@ -3639,6 +3639,10 @@ function civicDutyDay(day, policy) {
 // move gate and ledger the seats use, so the close reads it as before.
 // o: { cycle, date, officeMap, noWrite }
 // ---------------------------------------------------------------------------
+// OFF unless asked for by flag (builder 2026-11-14: "I've literally approved nothing"). Without --worker-template every office, the
+// police chief included, wakes exactly as it did before this code existed. Nothing schedules the flag.
+const workerTemplateOn = (officeId) => process.argv.includes('--worker-template') && workerWake.hasFill(officeId);
+
 async function runWorkerDatawake(duty, o) {
   const office = duty.office;
   const dw = require('./cron-desk-writer');
@@ -3780,7 +3784,7 @@ async function runDatawake() {
 
   if (process.argv.includes('--dry-run')) {
     for (const { office } of rotaEntries) {
-      if (workerWake.hasFill(office.officeId)) {
+      if (workerTemplateOn(office.officeId)) {
         const w = await workerWake.buildWake({ officeId: office.officeId, cycle: Number(cycle), officeMap });
         log('DRY ' + office.agentDir + ' holder=' + office.holder + ' template=worker/1 systemChars=' + w.system.length + ' userChars=' + w.user.length +
           ' memory=' + w.memory.entries.length + ' decisions=' + w.decisions.length + ' tools=' + workerWake.toolsFor(office.officeId).length);
@@ -3808,7 +3812,7 @@ async function runDatawake() {
   // file. Built for the worker template; a seat's wake has no such mode yet (civic.49 Task 9).
   if (process.argv.includes('--no-write')) {
     for (const duty of rotaEntries) {
-      if (!workerWake.hasFill(duty.office.officeId)) throw new Error('--no-write is unavailable for a seat (worker-template offices only): ' + duty.office.agentDir + ' — name one with --office');
+      if (!workerTemplateOn(duty.office.officeId)) throw new Error('--no-write is unavailable here: it needs --worker-template and an office that has a worker fill (' + duty.office.agentDir + ')');
       await runWorkerDatawake(duty, { cycle, date, officeMap, noWrite: true });
     }
     console.log('=== datawake no-write: ' + rotaEntries.length + ' worker wake(s), nothing saved ===');
@@ -3820,7 +3824,7 @@ async function runDatawake() {
   for (const duty of rotaEntries) {
     const office = duty.office;
     try {
-      if (workerWake.hasFill(office.officeId)) {
+      if (workerTemplateOn(office.officeId)) {
         results.push(await runWorkerDatawake(duty, { cycle, date, officeMap, noWrite: false }));
         continue;
       }

@@ -61,7 +61,7 @@ pointers:
 
 | # | Task | Owner | Status |
 |---|------|-------|--------|
-| 1 | The worker template ([[../reference/AGENT_BOOT_TEMPLATES]] §3) approved by the builder; agy's review of the template page folded | es | done 2026-11-14 — approved on the police chief after Runs 6–7 (pipeline.110 plan changelog); his own weekday wake moves onto it under pipeline.110 Task 10. P2 met by the memory gatherer in the Run 6 harness |
+| 1 | The worker template ([[../reference/AGENT_BOOT_TEMPLATES]] §3) approved by the builder; agy's review of the template page folded | es | **not approved** (builder 2026-11-14: "I've literally approved nothing"). Written and built on the police chief, switched off (pipeline.110 Task 10) |
 | 2 | The two test preloads (write guard, in-memory file swap) into the repo once, with a usage note; both terminals test through them | es | done 2026-11-14 — `scripts/guard/nowrite.js`, `bootswap.js`, `nowrite.selftest.js` (13 checks pass); builder "Put in the repo"; outside review not yet run |
 | 3 | Review of this plan: advisor, then one outside review; findings folded here | es | not started |
 | 4 | Records builders for the first six workers: every `Crime_Metrics` column and the patrol setting for the chief; the full tracker row and office row for a director; each worker's own rows of `output/cron-civic/moves/` | es | not started |

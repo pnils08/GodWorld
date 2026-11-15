@@ -851,7 +851,7 @@ function build(idx) {
   var label = new THREE.Sprite(nm); label.scale.set(12, 1.875, 1); label.position.set(0, 14.5 + gy, gz); root.add(label);
 
   scene.add(root);
-  return { H: H, ST: ST, root: root, L: L, gz: gz, yAt: yAt, people: people, diskMat: diskMat, glints: glints, ticks: ticks, beaconPts: beaconPts, gateName: label, places: LAY.places, water: water, z: 10, x: 0, t: 0 };
+  return { H: H, ST: ST, root: root, L: L, gz: gz, yAt: yAt, people: people, diskMat: diskMat, glints: glints, ticks: ticks, beaconPts: beaconPts, gateName: label, places: LAY.places, sights: kit.sights || [], water: water, z: 10, x: 0, t: 0 };
 }
 
 // ---------- names and cards ----------
@@ -1011,13 +1011,15 @@ function step(dt) {
     camera.lookAt(W.x - Math.sin(yaw) * 10, ey + Math.tan(pitch) * 10 + (W.yAt(W.z - Math.cos(yaw) * 10) - W.yAt(W.z)), W.z - Math.cos(yaw) * 10);
   } else {
     // ---- the flight. It is filmed, not slid: it eases away from a standstill at the top of a street and after
-    // Pause; it turns to look at whoever the cards are about, at a chaos car close by and at a landmark as it
-    // passes, and slows a little for the car and the landmark; it leans into its own drift, and is never quite still in the hand. ----
+    // Pause; it turns to look at whoever the cards are about, at a chaos car close by, at a landmark and at boats as it
+    // passes, and slows a little for the car, the landmark and the boats; it leans into its own drift, and is never quite still in the hand. ----
     var z = W.z, near = Math.max(0, Math.min(1, (z - W.gz) / 30)), gx = 0, gw = 0, slow = 0, gi, ah, wg;
     for (gi = 0; gi < CARDS.length; gi++) { var cp = CARDS[gi].p; if (!cp) continue; ah = z - cp.z; wg = ah > 2 && ah < 26 ? 1 - Math.abs(ah - 11) / 15 : 0; if (wg > 0) { gx += cp.x * wg; gw += wg; } }
     var chs = W.H.chaos || []; for (gi = 0; gi < chs.length; gi++) { var ce = chs[gi]; if (!ce.on || ce.far) continue; ah = z - ce.z; wg = ah > 2 && ah < 30 ? 1.4 * (1 - Math.abs(ah - 12) / 18) : 0; if (wg > 0) { gx += ce.x * wg; gw += wg; slow = Math.max(slow, wg / 1.4); } }
     // a landmark on one side (a theater, a hall, city hall) is worth a look and a slower pass too
     for (gi = 0; gi < W.places.length; gi++) { var lp = W.places[gi]; if (!(lp.half > 0 && lp.half < 20 && lp.s)) continue; ah = z - lp.z; wg = ah > -6 && ah < lp.half + 20 ? 0.8 * (1 - Math.abs(ah - (lp.half * 0.5 + 6)) / (lp.half + 14)) : 0; if (wg > 0) { gx += lp.s * (WALK + 3) * wg; gw += wg; slow = Math.max(slow, wg * 0.75); } }
+    // boats are worth a look as well: the marina, the ferry's berth, a tug at the wharf, sculls on the lake (life-water.js leaves them on the kit)
+    for (gi = 0; gi < W.sights.length; gi++) { var sg = W.sights[gi]; if (sg.v && sg.v.hide) continue; ah = z - (sg.v ? sg.v.z : sg.z); wg = ah > -6 && ah < sg.half + 20 ? 0.9 * (1 - Math.abs(ah - (sg.half * 0.5 + 6)) / (sg.half + 14)) : 0; if (wg > 0) { gx += W.water * (WALK + 9) * wg; gw += wg; slow = Math.max(slow, wg * 0.6); } }
     var interest = Math.min(1, gw) * near, gazeT = gw > 0.05 ? gx / gw * 0.62 * Math.min(1, gw * 1.5) * near : 0;
     W.gaze = (W.gaze || 0) + (gazeT - (W.gaze || 0)) * Math.min(1, dt * 0.9);
     var vT = playing ? SPEED * pace * (1 - 0.24 * Math.min(1, slow) * near) : 0; if (W.v == null) W.v = 0;

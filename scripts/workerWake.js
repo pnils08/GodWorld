@@ -114,16 +114,18 @@ async function whoTheyAre(popid, deps) {
 // ---- part 4: memory, gathered — a search of the whole page on what is in front of them, plus their two newest own
 // entries (the search lags fresh ones). Open-question lines are not memories; an office statement is labelled as one.
 // Each line carries the Cycle it was said in, never a calendar date. A failed read is no memory this wake, not an error.
-async function gatherMemory(popid, key, deps) {
+// opts.newest: how many of their own newest entries ride beside the search (default 2, the chief's; the council template hands none in).
+async function gatherMemory(popid, key, deps, opts) {
+  const newest = opts && opts.newest != null ? Number(opts.newest) : 2;
   const { page } = defaults(deps);
   const tidy = (s) => String(s || '').replace(/\s+/g, ' ').trim();
   const entry = (r) => ({ when: (r.metadata || {}).cycle != null ? 'Cycle ' + r.metadata.cycle : 'earlier', type: String((r.metadata || {}).type || ''),
     text: tidy(r.content).replace(/^(datawake|stated):\s*/i, 'Your public statement: ') });
   let hits = [], recent = [];
   try { hits = ((await page.searchPage_(popid, key, 6)).results || []).filter((r) => String((r.metadata || {}).type || '') !== 'tension').map(entry); } catch (e) { hits = []; }
-  try {
+  if (newest > 0) try {
     recent = ((await page.recentPage_(popid, 12)).results || []).filter((r) => !['office-position', 'tension', 'show'].includes(String((r.metadata || {}).type || '')))
-      .slice(0, 2).map(entry);
+      .slice(0, newest).map(entry);
   } catch (e) { recent = []; }
   const seen = new Set(), entries = [];
   for (const m of recent.concat(hits)) { const k = m.text.slice(0, 80); if (m.text && !seen.has(k)) { seen.add(k); entries.push(m); } }
@@ -177,6 +179,34 @@ const FILLS = {
       const money = (await sheets.getSheetAsObjects('City_Treasury')).filter((r) => /^(COURT|TICKETS)/.test(r.Counterparty || '') && Number(r.Cycle) >= first)
         .map((r) => ({ Cycle: r.Cycle, Source: r.Counterparty, Amount: r.Amount, Note: r.Note }));
       if (money.length) out.push({ title: 'Fines and tickets paid to the city', text: table(money, ['Cycle', 'Source', 'Amount', 'Note']) });
+      // The rest of what the sheet holds for his trade (docs/research/2026-11-15-worker-records-all-tabs.md; builder
+      // 2026-11-15: "you showed me 5 things when 1000s of data points are tracked"). Each block is the tab's own rows;
+      // a tab that cannot be read says so. Domain is written in two cases on the event ledger, so the match folds case.
+      const isSafety = (v) => /^safety$/i.test(String(v || '').trim());
+      const more = async (title, read) => { try { const t = await read(); if (t) out.push({ title, text: t }); } catch (e) { out.push({ title, text: 'unavailable (' + ((e && e.message) || e) + ')' }); } };
+      await more('Crime index and noise index on the neighborhood map, Cycle ' + cycle, async () => {
+        const m = await sheets.getSheetAsObjects('Neighborhood_Map');
+        return m.length ? table(m.map((r) => ({ Neighborhood: r.Neighborhood, CrimeIndex: r.CrimeIndex, NoiseIndex: r.NoiseIndex })), ['Neighborhood', 'CrimeIndex', 'NoiseIndex']) : '';
+      });
+      await more('Safety events on the city\'s event ledger, every Cycle on it', async () => {
+        const w = (await sheets.getSheetAsObjects('WorldEvents_V3_Ledger')).filter((r) => isSafety(r.Domain))
+          .map((r) => ({ Cycle: r.Cycle, Neighborhood: r.Neighborhood, Severity: r.Severity, Event: r.EventDescription }));
+        return w.length ? table(w, ['Cycle', 'Neighborhood', 'Severity', 'Event']) : 'none';
+      });
+      await more('Safety arcs on the arc ledger', async () => {
+        const arcs = (await sheets.getSheetAsObjects('Event_Arc_Ledger')).filter((r) => isSafety(r.DomainTag))
+          .map((r) => ({ Cycle: r.Cycle, Neighborhood: r.Neighborhood, Type: r.Type, Phase: r.Phase, Tension: r.Tension, Summary: r.Summary }));
+        return arcs.length ? table(arcs, ['Cycle', 'Neighborhood', 'Type', 'Phase', 'Tension', 'Summary']) : 'none';
+      });
+      await more('Safety notes on the street-texture log, every Cycle on it', async () => {
+        const tx = (await sheets.getSheetAsObjects('Texture_Trigger_Log')).filter((r) => isSafety(r.Domain))
+          .map((r) => ({ Cycle: r.Cycle, Neighborhood: r.Neighborhood, Note: r.Reason, Intensity: r.Intensity }));
+        return tx.length ? table(tx, ['Cycle', 'Neighborhood', 'Note', 'Intensity']) : 'none';
+      });
+      await more('Crime and safety event counts on the domain tracker, by Cycle', async () => {
+        const d = (await sheets.getSheetAsObjects('Domain_Tracker')).map((r) => ({ Cycle: r.Cycle, CRIME: r.CRIME, SAFETY: r.SAFETY, 'All events': r.TotalEvents }));
+        return d.length ? table(d, ['Cycle', 'CRIME', 'SAFETY', 'All events']) : '';
+      });
       return { blocks: out, key: 'crime clearance response time arrests custody patrol' };
     },
   },
@@ -211,7 +241,9 @@ async function buildWake(opts) {
 // ---- part 3: the tools. Described to the worker; nothing says when to use one. ----
 // The reporters' twelve sheets plus the three no reporter reads: the chaos-car sheet, the city's money, the case ledger.
 const SHEETS = ['Initiative_Tracker', 'Neighborhood_Map', 'Oakland_Sports_Feed', 'Civic_Office_Ledger', 'Faith_Organizations', 'Faith_Ledger', 'Business_Ledger',
-  'Transit_Metrics', 'Neighborhood_Demographics', 'Care_Justice_Census', 'Community_Programs', 'Crime_Metrics', 'Chaos_Cars', 'City_Treasury', 'Judicial_Ledger'];
+  'Transit_Metrics', 'Neighborhood_Demographics', 'Care_Justice_Census', 'Community_Programs', 'Crime_Metrics', 'Chaos_Cars', 'City_Treasury', 'Judicial_Ledger',
+  // the city's record tabs a worker could not reach before the full read (2026-11-15)
+  'WorldEvents_V3_Ledger', 'Event_Arc_Ledger', 'Texture_Trigger_Log', 'Domain_Tracker', 'Cycle_Weather', 'Household_Ledger', 'Employment_Roster', 'Hospital_Ledger', 'Ripple_Ledger'];
 const fn = (name, description, properties, required) => ({ type: 'function', function: { name, description, parameters: { type: 'object', properties, required } } });
 const TOOLS = [
   fn('sheet_read', 'Read one of the city\'s sheets: ' + SHEETS.join(', ') + '.', { tab: { type: 'string' }, match: { type: 'string', description: 'optional: only the rows naming this word (a neighborhood, a name, an id)' } }, ['tab']),

@@ -345,6 +345,7 @@ Mara Vance (asker; her own memory and tools; civic.47 M1), Elias Varek's journal
 
 ## Changelog
 
+- 2026-11-15 (engine-sheet) — §2 seat template: codex review folded (events print fact, Cycle, where, size; the resident ledger unreadable is unavailable; one proposal of a title a wake).
 - 2026-11-15 (engine-sheet) — §2: the seat template built, off (`scripts/seatWake.js`, `--seat-template` with `--dry-run` / `--no-write` only); prints for District 9 and the Mayor; three pack defects seen in them carried to the pack check.
 - 2026-11-14 (engine-sheet) — §2: the builder's word on what a council seat is (a data agent for the district, answerable to the media; walks the district and calls on its citizens; an initiative one ability; responds to big events) recorded with the code beside each; approval block cut to now / last Cycle / what puts them out; tools reordered records → people → council business, `resident_call` added on `citizenVoice.js`, `canvass` not carried.
 - 2026-11-14 (engine-sheet) — §2: the council template drafted on the current moves, built as the chief's: the reply is the statement, each move a tool with what it is and what follows (wording from the eligibility code), the office-can-be-lost block in words; move count, tool budget left to the builder. Not agreed, no run.

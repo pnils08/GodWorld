@@ -101,7 +101,10 @@ function dataBlocks(pack, office, cycle) {
     out.push({ title, text: table(rows, ['Neighborhood'].concat(cols)) });
   }
   const events = ((s.events || {}).items) || [];
-  out.push({ title: 'Events in ' + where + ', Cycle ' + cycle, text: !avail(s.events) ? UNAVAILABLE : events.length ? events.map((e) => '- ' + clip(e.text || e.summary || e.label || JSON.stringify(e), 400)).join('\n') : 'none' });
+  // An event is its fact, when and where: its id, source path and retrieval key are build notes (codex 2026-11-15 F1).
+  const evRows = events.map((e) => ({ Cycle: e.occurredCycle == null ? '' : e.occurredCycle, Where: (e.hoods || []).join(', ') || (e.citywideRelevance ? 'citywide' : ''),
+    What: clip(e.fact || e.text || e.summary || '', 400), Size: e.significance || '' })).filter((r) => r.What);
+  out.push({ title: 'Events in ' + where, text: !avail(s.events) ? UNAVAILABLE : evRows.length ? table(evRows, ['Cycle', 'Where', 'What', 'Size']) : 'none' });
   const known = (pack.known || []).filter((k) => k && k.text && !/^F-office-/.test(String(k.id || '')));   // their approval is part 2
   if (known.length) out.push({ title: 'On the record, Cycle ' + cycle, text: known.map((k) => '- ' + k.text).join('\n') });
   const ex = pack.exposure || {};
@@ -251,8 +254,12 @@ function hashPick(list, key) {
   for (const ch of String(key)) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619) >>> 0; }
   return list.length ? list[h % list.length] : null;
 }
+// null when the snapshot cannot be read: that is an unavailable ledger, not a city with nobody in it (codex 2026-11-15 F2).
 function ledgerResidents(root) {
-  return readJsonl(path.join(root, 'output', 'simulation_ledger_snapshot.jsonl')).filter((r) => r.Status === 'Active' && r.POPID && r.Neighborhood);
+  const file = path.join(root, 'output', 'simulation_ledger_snapshot.jsonl');
+  try { fs.accessSync(file, fs.constants.R_OK); } catch (e) { return null; }
+  const rows = readJsonl(file);
+  return rows.length ? rows.filter((r) => r.Status === 'Active' && r.POPID && r.Neighborhood) : null;
 }
 
 // ctx: { office, cycle, date, stage: { moves: [], calls: [] }, validate(moves) -> {accepted, rejected}, inDistrict(hood) -> bool,
@@ -263,7 +270,9 @@ function toolExecutor(ctx) {
   const base = ww.toolExecutor({ popid: ctx.office.popid, cycle: ctx.cycle, stage: { patrol: [] }, deps: ctx.deps, dw: ctx.dw });
   let residents = null;
   const stageMove = (raw, said) => {
-    const dup = ctx.stage.moves.find((m) => m.type === raw.type && raw.initiativeId && m.initiativeId === raw.initiativeId);
+    const title = (m) => String(m.title || '').trim().toLowerCase();
+    const dup = ctx.stage.moves.find((m) => m.type === raw.type &&
+      (raw.initiativeId ? m.initiativeId === raw.initiativeId : raw.type === 'propose' && title(m) === title(raw)));   // a propose has no id: its title (codex 2026-11-15 F3)
     if (dup) return 'not filed: already filed this wake';
     const mv = ctx.validate(ctx.stage.moves.concat([raw]));
     const refused = mv.rejected.find((r) => r.move === raw);
@@ -278,6 +287,7 @@ function toolExecutor(ctx) {
       const question = String(input.question || '').trim();
       if (!question) return 'no call: a question is needed';
       residents = residents || ledgerResidents(root);
+      if (!residents) return 'the city\'s ledger is unavailable right now — this is not an empty record';
       let c = null;
       const nm = String(input.name || '').trim().toLowerCase();
       if (nm) {

@@ -95,7 +95,7 @@ test('the data keeps the pack\'s records and drops what tells them what to do, i
   for (const gone of ['advance or hold', 'district-week', 'only named subjects', 'no new citizens', 'statement + moves', 'office wiki', 'src', '.js', '.jsonl', 'lives in Laurel', 'retrievalKey', 'district/D9',
     'Move validation', 'holds COUNCIL-D9 at approval']) assert.ok(!text.includes(gone), 'still in the wake: ' + gone);
   for (const kept of ['Your district, Cycle 115', '-0.15 (last Cycle -0.03)', 'Laurel crime: property 43, violent 30', 'Ada Lane', 'INIT-015', '$6M', '$5M-$100M', 'Nobody picked up the trash.',
-    'sick residents', 'Marcus Webb: The queue is clean tonight.', 'balanced', 'Nina Chen', 'Events in your district, Cycle 115:\nnone']) assert.ok(text.includes(kept), 'missing: ' + kept);
+    'sick residents', 'Marcus Webb: The queue is clean tonight.', 'balanced', 'Nina Chen', 'Events in your district:\nnone']) assert.ok(text.includes(kept), 'missing: ' + kept);
   assert.ok(!text.includes('0.68 (last Cycle'), 'an unchanged reading carries no last-Cycle note');
 });
 
@@ -224,5 +224,24 @@ test('a record that could not be read says so instead of printing none or vanish
   p.brief.sections.events = { available: false, items: [] };
   p.game = Object.assign({}, p.game, { petitionPool: { available: false }, patrol: { available: false }, board: [], boardAvailable: false });
   const blocks = Object.fromEntries(sw.dataBlocks(p, OFFICE, 115).map((b) => [b.title, b.text]));
-  for (const t of ['Events in your district, Cycle 115', 'Complaints from your district', 'The patrol setting', 'Your board']) assert.equal(blocks[t], 'unavailable this wake — not an empty record', t);
+  for (const t of ['Events in your district', 'Complaints from your district', 'The patrol setting', 'Your board']) assert.equal(blocks[t], 'unavailable this wake — not an empty record', t);
 });
+
+test('an event prints its fact, when and where — never its id, source path or retrieval key (codex F1)', () => {
+  const p = pack();
+  p.brief.sections.events = { available: true, items: [{ eventId: 'EV-sports-1', occurredCycle: 111, category: 'sports-parade', significance: 'major', hoods: ['Downtown'], citywideRelevance: true,
+    sourceRef: 'output/beats/Oakland_Sports_Feed.jsonl:238', fact: 'The parade rolls through Downtown.', retrievalKey: 'event/EV-sports-1' }, { eventId: 'EV-2', sourceRef: 'x.jsonl:1' }] };
+  const text = sw.dataBlocks(p, OFFICE, 115).find((b) => b.title === 'Events in your district').text;
+  assert.equal(text, 'Cycle | Where | What | Size\n111 | Downtown | The parade rolls through Downtown. | major');
+});
+
+test('an unreadable resident ledger is unavailable, not an empty city (codex F2); one proposal of a title a wake (codex F3)', () => workspace(async (root) => {
+  const stage = { moves: [], calls: [] };
+  const exec = sw.toolExecutor({ office: OFFICE, cycle: 115, date: 'd', stage, validate: (moves) => ({ accepted: moves, rejected: [] }), inDistrict: () => true, deps: deps(root, { voice: () => ({ text: 'x' }) }) });
+  assert.equal(await exec('resident_call', { name: 'Ada Lane', question: 'How is the block?' }), 'the city\'s ledger is unavailable right now — this is not an empty record');
+  const prop = { title: 'Laurel Tool Library', purpose: 'tools', category: 'environment', reach: 'hood', hoods: ['Laurel'], budget: '$2M' };
+  assert.match(await exec('initiative_propose', prop), /^filed/);
+  assert.equal(await exec('initiative_propose', Object.assign({}, prop, { title: ' laurel tool library ' })), 'not filed: already filed this wake');
+  assert.match(await exec('initiative_propose', Object.assign({}, prop, { title: 'Uptown Bench Fund' })), /^filed/);
+  assert.equal(stage.moves.length, 2);
+}));

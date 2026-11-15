@@ -1,6 +1,6 @@
 Civic DATAWAKE — 2026-11-16 (c115)
 ===================================
-[civic] 2026-11-15T07:54:59.023Z rota: civic-office-mayor
+[civic] 2026-11-15T08:00:10.698Z rota: civic-office-mayor
 
 === Avery Santana, Mayor — the seat template, what the seat wakes with (no model call) ===
 --- system ---
@@ -66,9 +66,10 @@ Neighborhood | Sentiment | CrimeIndex | RetailVitality | HousingPressure | Neigh
 Laurel | -0.15 (last Cycle -0.03) | 0.68 (last Cycle 0.69) | 6.5 (last Cycle 4.34) | 0 | decay (last Cycle steady) | 4 (last Cycle 5)
 Uptown | 0.08 (last Cycle 0.2) | 0.62 | 15.14 (last Cycle 13.66) | 10 | growth | 10
 
-Events in the city, Cycle 115:
-- {"eventId":"EV-sports-4931275ff33a8f24","status":"occurred","occurredCycle":111,"ageCycles":4,"category":"sports-parade","significance":"major","hoods":["Downtown"],"citywideRelevance":true,"sourceRef":"output/beats/Oakland_Sports_Feed.jsonl:238","fact":"The A's parade roll through Downtown.","retrievalKey":"event/EV-sports-4931275ff33a8f24"}
-- {"eventId":"EV-sports-1526e0510c60f93a","status":"occurred","occurredCycle":110,"ageCycles":5,"category":"sports-championship","significance":"major","hoods":["Downtown"],"citywideRelevance":true,"sourceRef":"output/beats/Oakland_Sports_Feed.jsonl:237","fact":"A's win their 7th championship in the \"Paulson\" era. A storybook ending to a farewell season for both Vinnie Keane and Benji Dillon","ret…
+Events in the city:
+Cycle | Where | What | Size
+111 | Downtown | The A's parade roll through Downtown. | major
+110 | Downtown | A's win their 7th championship in the "Paulson" era. A storybook ending to a farewell season for both Vinnie Keane and Benji Dillon | major
 
 On the record, Cycle 115:
 - Laurel Neighborhood Patch and Clean-Up is in announced; budget $6M

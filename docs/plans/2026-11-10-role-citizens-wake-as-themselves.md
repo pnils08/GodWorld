@@ -101,6 +101,7 @@ pointers:
 
 ## Changelog
 
+- 2026-11-15 (engine-sheet) — Task 9, Council / Mayor: codex review of the build (HOLD, 3 findings: an event printed with its source path and retrieval key; an unreadable resident ledger read as an empty city; a proposal filed twice in one wake), all verified and folded; 15 tests; prints rerun. [[../for-claude-review/2026-11-15-codex-seat-template-review]].
 - 2026-11-15 (engine-sheet) — Task 9, Council / Mayor: template built, off ([[../reference/AGENT_BOOT_TEMPLATES]] §2 Built, off); 11 tests; prints of District 9 and the Mayor from C115, no model call, nothing written. Next: the pack check.
 - 2026-11-14 (engine-sheet) — Task 9, Council / Mayor: the builder on the draft ("This all looks good for the first build to test") and on what a seat is ("An iniative isn't the job … Like a police chief this is a different form of a data agent"); approval block to a harness-written line, tools reordered, a resident call added; reporters reach a seat today only as a citizen interview (7 on disk). [[../reference/AGENT_BOOT_TEMPLATES]] §2.
 - 2026-11-14 (engine-sheet) — Task 9, Council / Mayor: template drafted on the current moves ([[../reference/AGENT_BOOT_TEMPLATES]] §2 The template on the current moves); waits on the builder's read of the wording, then the wake pack read.

@@ -1,6 +1,6 @@
 Civic DATAWAKE — 2026-11-16 (c115)
 ===================================
-[civic] 2026-11-15T07:58:41.237Z rota: civic-office-council-d9
+[civic] 2026-11-15T08:00:01.553Z rota: civic-office-council-d9
 
 === Terrence Mobley, City Council District 9 — the seat template, what the seat wakes with (no model call) ===
 --- system ---
@@ -21,7 +21,7 @@ Neighborhood | Sentiment | CrimeIndex | RetailVitality | HousingPressure | Neigh
 Laurel | -0.15 (last Cycle -0.03) | 0.68 (last Cycle 0.69) | 6.5 (last Cycle 4.34) | 0 | decay (last Cycle steady) | 4 (last Cycle 5)
 Uptown | 0.08 (last Cycle 0.2) | 0.62 | 15.14 (last Cycle 13.66) | 10 | growth | 10
 
-Events in your district, Cycle 115:
+Events in your district:
 none
 
 On the record, Cycle 115:

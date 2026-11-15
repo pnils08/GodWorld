@@ -1,6 +1,6 @@
 # Voice File: Nia Rook — UNDOCKED
 
-**Desk:** UNDOCKED (solo) | **Beat:** The show — who's up, who's down, who the city is watching
+**Desk:** UNDOCKED | **Beat:** The show — who's up, who's down, who the city is watching
 
 ## Essence
 

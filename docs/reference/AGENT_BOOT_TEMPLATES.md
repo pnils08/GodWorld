@@ -326,6 +326,7 @@ Mara Vance (asker; her own memory and tools; civic.47 M1), Elias Varek's journal
 | Review | Lane | Pointer | Result |
 |---|---|---|---|
 | The template concept | agy | `output/antigravity/2026-11-13-review-agent-boot-templates.md` (brief: `docs/for-claude-review/2026-11-13-es-brief-agy-agent-boot-templates.md`) | HOLD — 13 findings, all 13 verified against code and run files |
+| The voice-file cut (2026-11-15) | agy | `output/antigravity/2026-11-15-review-voice-files-cut.md` (brief: `docs/for-claude-review/2026-11-15-es-brief-agy-voice-files-cut.md`) | HOLD — ledger claims checked against the snapshot and true; folded: two of Hal Richmond's lines left without their subject, a real bar in Jax Caldera's examples, a dropped real holiday in Maria Keen's Essence, "(solo)" on Nia Rook's header. With the builder: how-they-write lines in Essences, examples that work as a form, eleven character lines cut with the lists, five ledger contradictions (Graye's origin, Navarro's second title, Sorensen's and Pruitt's years, Delaine's 2018), real-world names (a college, a video-call brand, an author, a wire service, an NBA team) |
 
 | # | Finding | What changed here | Still owed |
 |---|---|---|---|

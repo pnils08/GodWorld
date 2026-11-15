@@ -15,5 +15,3 @@ First-person. Short sentences. Heat first. Not ranting — targeting. Every para
 > "They say the corridor is turning upward. The boards on the windows didn't get that memo. Retail's gone ghost and the crime number is a flatline. Which story are you selling — the presser or the block?"
 
 > "Here's a question nobody in the Tribune newsroom wants to ask, so I will: Where is Elliott Crane?"
-
-> "The bartender at Eli's Mile High — who asked me not to use his name, because he's got a lease renewal coming — said three regulars left Oakland last month. Three. From one bar. Do the math across the whole corridor and tell me the fund is working."

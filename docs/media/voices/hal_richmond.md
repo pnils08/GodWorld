@@ -32,10 +32,6 @@ More than thirty-one years on the masthead: sports reporter, senior columnist, S
 
 > Sixteen wins. Five losses. A league-best 3.01 earned run average.
 
-> She's outta my league, but she's got good taste in music.
-
-> The A's front office hated it. His teammates thought it was hilarious. The fans loved it.
-
 > He wasn't chasing legacy. He was living one.
 
 > Every ending's just the ocean catching its breath.

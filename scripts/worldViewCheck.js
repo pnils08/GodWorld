@@ -499,6 +499,21 @@ function checkWorldView(build, sources, engine, secondBuild, reports = []) {
     for (const w of want) if (!w.used) fail('notice', w.hood || 'no neighborhood', `a row of this cycle is neither on a street nor listed elsewhere: ${w.nt.n} ${w.nt.x.slice(0, 80)}`);
     if (matched) reports.push(`NOTICES ${matched} matched to their rows: this cycle's Faith_Ledger and sports feed, Lived_Events, Initiative_Tracker, Community_Programs, Cultural_Ledger, Transit_Metrics, WorldEvents_V3_Ledger, Texture_Trigger_Log`);
   }
+  // the overview map: its joins are exactly the Neighborhood_Map.Adjacent pairs between shown neighborhoods, each
+  // neighborhood has a place on it and the row's own district
+  {
+    const m = build.data?.map, rows = new Map(arr(sources.nmap || [], 'Neighborhood_Map').filter(r => String(r.Cycle) === String(build.CYCLE)).map(r => [r.Neighborhood, r]));
+    const names = hoods.map(h => h?.name), want = new Set();
+    names.forEach((n, i) => String(rows.get(n)?.Adjacent || '').split(/\s*[,;|]\s*/).filter(Boolean).forEach(a => { const j = names.indexOf(a); if (j >= 0 && j !== i) want.add(i < j ? `${i}|${j}` : `${j}|${i}`); }));
+    if (m || want.size) {
+      const got = new Set(arr(m?.edges || [], 'data.map.edges').map(e => `${e?.[0]}|${e?.[1]}`));
+      for (const k of want) if (!got.has(k)) fail('map', k, `${names[k.split('|')[0]]} and ${names[k.split('|')[1]]} border each other by Neighborhood_Map and the map does not join them`);
+      for (const k of got) if (!want.has(k)) fail('map', k, 'the map joins two neighborhoods Neighborhood_Map does not');
+      if (arr(m?.xy || [], 'data.map.xy').length !== hoods.length || (m?.xy || []).some(p => !Array.isArray(p) || !(p[0] >= 0 && p[0] <= 1 && p[1] >= 0 && p[1] <= 1))) fail('map', 'places', 'every neighborhood needs one place on the map');
+      names.forEach((n, i) => { if (((m?.d || [])[i] || '') !== String(rows.get(n)?.District || '').trim()) fail('map', n, 'district is not the Neighborhood_Map row\'s'); });
+      if (want.size) reports.push(`MAP ${want.size} joins matched to Neighborhood_Map.Adjacent`);
+    }
+  }
   if (!secondBuild?.data?.hoods || !equal(
     hoods.map(h => ({ name: h.name, lay: h.lay })),
     secondBuild.data.hoods.map(h => ({ name: h.name, lay: h.lay })))) {

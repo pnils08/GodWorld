@@ -93,6 +93,15 @@ body.words .tag .line, body.words .tag .more { order: 5; }
 #places { z-index: 2; position: fixed; inset: 0; background: var(--veil); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); overflow-y: auto;
   padding-block: calc(70px + env(safe-area-inset-top, 0px)) 40px;
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+#cityMap { display: block; width: 100%; max-width: 900px; margin: 0 auto 6px; touch-action: manipulation; }
+#cityMap line { stroke: rgba(243,230,207,.22); stroke-width: 2; }
+#cityMap g { cursor: pointer; }
+#cityMap circle { stroke: rgba(11,13,26,.9); stroke-width: 3; }
+#cityMap g.here circle { stroke: #fff; stroke-width: 5; }
+#cityMap text { font: 800 21px var(--display); fill: var(--ink); text-anchor: middle; paint-order: stroke; stroke: rgba(11,13,26,.85); stroke-width: 6px; stroke-linejoin: round; }
+#cityMap text.sub { font: 500 15px var(--display); fill: var(--dim); }
+#cityMap.tall text { font-size: 30px; } #cityMap.tall text.sub { font-size: 22px; }
+#mapNote { max-width: 720px; margin: 0 auto 18px; font-size: 12px; color: var(--dim); line-height: 1.4; text-align: center; }
 #places ul { list-style: none; margin: 0 auto; padding: 0; max-width: 720px; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
 #places li button { width: 100%; text-align: left; border-radius: 10px; padding: 12px 14px; font-size: 17px; font-weight: 800; }
 #places li small { display: block; font-weight: 500; font-size: 12px; color: var(--dim); margin-top: 3px; }
@@ -174,7 +183,7 @@ body.visit #bottom, body.visit #keys { display: none; }
   </div>
   <div id="bar"><span></span></div>
 </div>
-<div id="places" hidden><ul id="placeList"></ul></div>
+<div id="places" hidden><svg id="cityMap" role="img" aria-label="The neighborhoods, drawn by which border which"></svg><p id="mapNote"></p><ul id="placeList"></ul></div>
 <div id="people" hidden><div class="in">
   <label for="q">Find someone by name, job or neighborhood</label>
   <input id="q" type="search" autocomplete="off" spellcheck="false">
@@ -234,7 +243,7 @@ function withLine(p) {
 }
 var DBG = window.WV_DEBUG || null; // look-test hook: { cam: [x,y,z], look: [x,y,z], t0: seconds, hide: true, manual: true (the clock only moves on __wv.step(dt)), follow: { who: name or index, off: [x,y,z], aim: height } }
 if (DBG && DBG.hide) document.body.classList.add('bare');
-if (DBG) window.__wv = { get world() { return world; }, get camera() { return camera; }, get data() { return DATA; }, get state() { return { labels: labels, visiting: !!visiting, bizView: !!bizView, busy: busy, walking: walking }; }, WALK: WALK, home: function (hh) { openHome(hh); }, note: function (i) { if (world && world.notes[i]) startNote(world.notes[i]); }, withLine: function (p) { return withLine(p); }, visit: function (id) { if (BYID[id]) startVisit(BYID[id].d); }, step: function (dt) { if (!world || busy) return false; step(dt); if (frame++ % 6 === 0) pickNames(); placeNames(); placeChaos(); placeNotes(); draw(); return true; } };
+if (DBG) window.__wv = { get world() { return world; }, get camera() { return camera; }, get data() { return DATA; }, get state() { return { labels: labels, visiting: !!visiting, bizView: !!bizView, busy: busy, walking: walking }; }, WALK: WALK, home: function (hh) { openHome(hh); }, map: function () { $('bPlaces').click(); }, note: function (i) { if (world && world.notes[i]) startNote(world.notes[i]); }, withLine: function (p) { return withLine(p); }, visit: function (id) { if (BYID[id]) startVisit(BYID[id].d); }, step: function (dt) { if (!world || busy) return false; step(dt); if (frame++ % 6 === 0) pickNames(); placeNames(); placeChaos(); placeNotes(); draw(); return true; } };
 var DEF = { wall: 'stucco', tone: [30, 0.15, 0.5], h: [4, 9], w: [6, 11], gap: [0.6, 2.1], lit: 0.45, fill: 'box', trees: 0, slope: 0, neon: 0, set: [] };
 
 // ---------- seeded random ----------
@@ -1267,7 +1276,32 @@ $('bWords').addEventListener('click', function () { words = !words; document.bod
 $('bPlay').addEventListener('click', function () { setPlay(!playing); });
 $('bNext').addEventListener('click', function () { go(cur + 1); });
 if (SOUND && SOUND.supported && SOUND.supported()) { $('bSound').hidden = false; $('bSound').addEventListener('click', function () { var on = $('bSound').getAttribute('aria-pressed') !== 'true'; $('bSound').setAttribute('aria-pressed', on ? 'true' : 'false'); if (on) { SOUND.start(); setTimeout(function () { if ($('bSound').getAttribute('aria-pressed') === 'true' && SOUND.state && SOUND.state() !== 'running') $('hint').textContent = 'Sound is on but the browser is holding it. Check the volume and the ring/silent switch, then press Sound twice.'; }, 1800); } else { SOUND.stop(); if (!walking) $('hint').textContent = ''; } }); }
-$('bPlaces').addEventListener('click', function () { closePeople(); var p = $('places'); p.hidden = !p.hidden; $('bPlaces').textContent = p.hidden ? 'Places' : 'Close'; });
+$('bPlaces').addEventListener('click', function () { closePeople(); var p = $('places'); p.hidden = !p.hidden; $('bPlaces').textContent = p.hidden ? 'Places' : 'Close'; if (!p.hidden) drawMap(); });
+// The overview map: the sim holds which neighborhoods border which (Neighborhood_Map.Adjacent), not where they
+// are, so this is a picture of that graph (DATA.map, laid out in build.js), not a street map. A circle is a
+// neighborhood: its size is how many tracked people had a week on record there, its colour where it stands on the
+// direction scale, the ring is where you are. Tap one to go there.
+function drawMap() {
+  var svg = $('cityMap'), m = DATA.map, NS = 'http://www.w3.org/2000/svg'; if (!m || !m.xy || !m.xy.length) { svg.style.display = 'none'; $('mapNote').textContent = ''; return; }
+  var tall = window.innerWidth < 700, VW = 1000, VH = tall ? 1700 : 700, padX = tall ? 150 : 110, padT = 46, padB = 80;
+  $('places').style.paddingTop = ($('top').getBoundingClientRect().bottom + 10) + 'px'; svg.setAttribute('class', tall ? 'tall' : '');
+  function el(tag, attrs, text) { var n = document.createElementNS(NS, tag), k; for (k in attrs) n.setAttribute(k, attrs[k]); if (text != null) n.textContent = text; return n; }
+  // on a tall screen the picture is turned on its side so the long way of the graph runs down the page
+  function at(i) { var p = m.xy[i], u = tall ? p[1] : p[0], v = tall ? p[0] : p[1]; return [padX + u * (VW - 2 * padX), padT + v * (VH - padT - padB)]; }
+  svg.setAttribute('viewBox', '0 0 ' + VW + ' ' + VH); svg.textContent = '';
+  m.edges.forEach(function (e) { var a = at(e[0]), b = at(e[1]); svg.appendChild(el('line', { x1: a[0], y1: a[1], x2: b[0], y2: b[1] })); });
+  DATA.hoods.forEach(function (H, i) {
+    var p = at(i), sc = H.state ? H.state.scale : 0, r = (tall ? 14 : 9) + (tall ? 2.6 : 1.8) * Math.sqrt(H.total || 0), g = el('g', { 'class': world && world.H === H ? 'here' : '', tabindex: 0, role: 'button', 'aria-label': H.name });
+    var fill = sc > 0 ? 'hsl(128,' + (20 + sc * 9) + '%,' + (62 - sc * 3) + '%)' : sc < 0 ? 'hsl(6,' + (20 - sc * 12) + '%,' + (62 + sc * 2) + '%)' : 'hsl(38,35%,78%)';
+    g.appendChild(el('circle', { cx: p[0], cy: p[1], r: r, fill: fill }));
+    g.appendChild(el('text', { x: p[0], y: p[1] + r + (tall ? 32 : 23) }, H.name));
+    g.appendChild(el('text', { x: p[0], y: p[1] + r + (tall ? 58 : 41), 'class': 'sub' }, [(m.d && m.d[i]) || '', H.total + (H.total === 1 ? ' person' : ' people'), H.state ? (sc > 0 ? '+' : '') + sc : ''].filter(Boolean).join(' \u00B7 ')));
+    var open = function () { $('places').hidden = true; $('bPlaces').textContent = 'Places'; go(i); };
+    g.addEventListener('click', open); g.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+    svg.appendChild(g);
+  });
+  $('mapNote').textContent = 'Neighborhoods that border each other are joined. The sim holds which border which, not where they are: this is that, not a street map. Size is people on record this week; green is growing, red is declining on the direction scale; the district is the council\u2019s.';
+}
 DATA.hoods.forEach(function (H, i) {
   var li = document.createElement('li'), b = document.createElement('button'); b.type = 'button';
   b.textContent = H.name; var s = document.createElement('small'); s.textContent = H.total + ' people · ' + H.lines + ' things happened'; b.appendChild(s);

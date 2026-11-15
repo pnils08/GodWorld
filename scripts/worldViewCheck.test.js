@@ -409,3 +409,18 @@ test('a world event and a street texture stand on their street in the engine\'s 
   rejects('notice', f => { mk(f); f.hood.notes.push({ k: 'x', n: 'General', x: 'SYNTHETIC citywide', key: 'busy_cycle' }); }); // a citywide texture put on a street
   rejects('notice', f => { mk(f); f.hood.notes.shift(); });                                                // a world event left off
 });
+
+test('the overview map joins exactly the neighborhoods the sim says border each other', () => {
+  const mk = f => {
+    const two = structuredClone(f.hood); two.name = 'SYNTHETIC Second'; two.people = []; two.biz = []; two.lay = { L: 110, water: 0, slope: 0, parcels: [], places: [] };
+    f.build.hoods.push(two); f.sources.style[two.name] = f.sources.style[f.hood.name]; f.build.data.style[two.name] = f.sources.style[f.hood.name];
+    f.sources.nmap = [{ Cycle: '115', Neighborhood: f.hood.name, Adjacent: 'SYNTHETIC Second, SYNTHETIC Off The Page', District: 'D1', TrajectoryMomentum: '5', NeighborhoodTrajectory: 'steady' }, { Cycle: '115', Neighborhood: two.name, Adjacent: f.hood.name, District: 'D2', TrajectoryMomentum: '5', NeighborhoodTrajectory: 'steady' }];
+    f.build.hoods.forEach(h => { h.state = { dir: 'steady', scale: 0 }; });
+    f.build.data.map = { xy: [[0, 0], [1, 1]], edges: [[0, 1]], d: ['D1', 'D2'] };
+    f.second = structuredClone(f.build); return f;
+  };
+  assert.deepEqual(check(mk(fixture())), []);
+  rejects('map', f => { mk(f); f.build.data.map.edges = []; });                 // a border the map leaves out
+  rejects('map', f => { mk(f); f.build.data.map.d[1] = 'D9'; });               // not the row's district
+  rejects('map', f => { mk(f); f.build.data.map.xy.pop(); });                  // a neighborhood with no place on it
+});

@@ -174,6 +174,39 @@ hoods.forEach(h => {
 });
 if (nmap.length) console.log('direction scale: ' + [5, 4, 3, 2, 1, 0, -1, -2, -3, -4, -5].map(n => { const at = hoods.filter(h => h.state && h.state.scale === n).map(h => h.name); return at.length ? (n > 0 ? '+' : '') + n + ' ' + at.join(', ') : ''; }).filter(Boolean).join(' | '));
 
+// ---------- the city's shape: which neighborhoods border which (Neighborhood_Map.Adjacent, District) ----------
+// The sim holds no coordinates, only adjacency (the engine reads the same column into S.neighborhoodAdjacency). The
+// overview map is a picture of that graph: neighborhoods that border each other are drawn near each other, by a
+// spring layout with fixed starting places, so it is the same every build. It is not a street map of anywhere.
+const cityMap = { xy: [], edges: [], d: [] };
+{
+  const idx = new Map(hoods.map((h, i) => [h.name, i])), seen = new Set(), n = hoods.length;
+  hoods.forEach((h, i) => {
+    const row = nmap.find(x => x.Neighborhood === h.name) || {};
+    cityMap.d.push(String(row.District || '').trim());
+    String(row.Adjacent || '').split(/\s*[,;|]\s*/).filter(Boolean).forEach(a => { const j = idx.get(a); if (j == null || j === i) return; const k = i < j ? i + '|' + j : j + '|' + i; if (!seen.has(k)) { seen.add(k); cityMap.edges.push(i < j ? [i, j] : [j, i]); } });
+  });
+  cityMap.edges.sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+  const order = hoods.map((h, i) => i).sort((a, b) => (hoods[a].name < hoods[b].name ? -1 : 1)), P = [];
+  order.forEach((i, k) => { const a = 2 * Math.PI * k / n; P[i] = [Math.cos(a), Math.sin(a)]; });
+  const K = 0.55;
+  for (let it = 0; it < 900; it++) {
+    const F = P.map(() => [0, 0]), t = 0.12 * (1 - it / 900);
+    for (let a = 0; a < n; a++) for (let b = a + 1; b < n; b++) { let dx = P[a][0] - P[b][0], dy = P[a][1] - P[b][1], d = Math.max(0.02, Math.hypot(dx, dy)), f = K * K / d; F[a][0] += dx / d * f; F[a][1] += dy / d * f; F[b][0] -= dx / d * f; F[b][1] -= dy / d * f; }
+    cityMap.edges.forEach(e => { const dx = P[e[0]][0] - P[e[1]][0], dy = P[e[0]][1] - P[e[1]][1], d = Math.max(0.02, Math.hypot(dx, dy)), f = d * d / K; F[e[0]][0] -= dx / d * f; F[e[0]][1] -= dy / d * f; F[e[1]][0] += dx / d * f; F[e[1]][1] += dy / d * f; });
+    for (let a = 0; a < n; a++) { const m = Math.hypot(F[a][0], F[a][1]); if (m > 0) { P[a][0] += F[a][0] / m * Math.min(m, t); P[a][1] += F[a][1] / m * Math.min(m, t); } }
+  }
+  const xs = P.map(p => p[0]), ys = P.map(p => p[1]), x0 = Math.min.apply(null, xs), x1 = Math.max.apply(null, xs), y0 = Math.min.apply(null, ys), y1 = Math.max.apply(null, ys);
+  let Q = P.map(p => [(p[0] - x0) / (x1 - x0 || 1), (p[1] - y0) / (y1 - y0 || 1)]);
+  // room for the names: nudge apart any two that sit closer than a label needs (more across than down), then fit again
+  for (let it = 0; it < 300; it++) for (let a = 0; a < n; a++) for (let b = a + 1; b < n; b++) {
+    const dx = Q[a][0] - Q[b][0], dy = Q[a][1] - Q[b][1], ox = 0.2 - Math.abs(dx), oy = 0.12 - Math.abs(dy);
+    if (ox > 0 && oy > 0) { if (ox / 0.2 < oy / 0.12) { const s = (dx < 0 ? -1 : 1) * ox / 2 * 0.5; Q[a][0] += s; Q[b][0] -= s; } else { const s = (dy < 0 ? -1 : 1) * oy / 2 * 0.5; Q[a][1] += s; Q[b][1] -= s; } }
+  }
+  const qx = Q.map(p => p[0]), qy = Q.map(p => p[1]), a0 = Math.min.apply(null, qx), a1 = Math.max.apply(null, qx), b0 = Math.min.apply(null, qy), b1 = Math.max.apply(null, qy);
+  cityMap.xy = Q.map(p => [Math.round((p[0] - a0) / (a1 - a0 || 1) * 1000) / 1000, Math.round((p[1] - b0) / (b1 - b0 || 1) * 1000) / 1000]);
+}
+
 // ---------- neighborhood character: every drawing choice hangs off a phrase in the canon file ----------
 const STYLE = require('./hoods.js');
 const canon = fs.readFileSync(path.join(__dirname, '..', 'docs', 'canon', 'INSTITUTIONS.md'), 'utf8');
@@ -540,7 +573,8 @@ const data = {
   ties,
   offStreet,
   homesElsewhere,
-  notesElsewhere
+  notesElsewhere,
+  map: cityMap
 };
 hoods.forEach(h => { data.style[h.name] = STYLE[h.name]; });
 

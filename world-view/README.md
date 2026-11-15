@@ -171,6 +171,14 @@ Builder 2026-11-15, overnight, on the flight standing idle after the first four 
 - Check: `worldViewCheck.js` (`STAFF` line) matches every `wk` to an Active roster row at that business and fails a roster row the page left off.
 - Checked (headless): West Oakland on a 60 s flight: eight people seen at their door, the card line as written; closest two strangers 0.37 m (0.49 to 0.55 m on the page before bonds, same measure); all 22 streets open without error. Not seen in two minutes stepped: anyone reaching a door on the residential stretch (the walk is long).
 
+## The overview map (2026-11-15)
+
+- The sim holds no coordinates for a neighborhood, only which border which: `Neighborhood_Map.Adjacent` (the engine reads the same column into `S.neighborhoodAdjacency`) and its council `District`. `build.js` lays that graph out (`data.map = { xy, edges, d }`): a spring layout from fixed starting places, then a pass that nudges apart any two too close for their names, so it is the same on every build. It is a picture of the adjacency, not a street map of anywhere, and the page says so under it.
+- On screen (`drawMap()` in `template.html`): the map heads the Places panel, above the list. A circle is a neighborhood: its size is the tracked people with a week on record there, its colour where it stands on the direction scale (green growing, red declining), the white ring is where you are; under the name, the district, the people and the scale. Tap one to go there. On a narrow screen the picture is turned so its long way runs down the page.
+- Check: `worldViewCheck.js` (`MAP` line) fails a border the map leaves out, a join the sim does not have, a neighborhood with no place on the map, and a district that is not the row's. C115: 46 joins.
+- Checked (headless): the map at 900 px and at 400 px wide, a tap on Temescal going there; page check and 32 page tests pass. Not checked: a real phone, where the second line under each name is about 7 px.
+- Look-test: `__wv.map()` opens and closes the Places panel.
+
 ## Boats (2026-11-14)
 
 Builder 2026-11-14, after watching the flight on his phone: "the boats are still not very defined and hard to tell they are boats".
@@ -288,7 +296,7 @@ Cap: 140 people per neighborhood (`CAP`; the busiest street has 124, so nobody i
 - In: walk-it-yourself steering (keys, drag, on-screen pad), names for everyone nearby, glow, shadows, weather from `Cycle_Weather` (`WX=rain node build.js` to look-test a kind the week did not have), quality that steps down on slow devices.
 - In: sex, age band and role on every card; reflections on cards, and a "Their words" switch that leads with them.
 - In: People finder and the stand-with-someone view (`#who-<name>`), households on one street walking together, an owner standing outside their own business, five ambient modules.
-- Not yet: overview map; a citizen's own Supermemory page (`SMPageId`) in the person view.
+- Not yet: a citizen's own Supermemory page (`SMPageId`) in the person view. (The overview map is built, 2026-11-15: §The overview map.)
 - The sim holds no street address: a citizen has `Neighborhood` + `HouseholdId`; a household has `HousingType`, `MonthlyRent`.
 - Reflections: only rows with Cycle at or before the dumped cycle are used (the tab holds 12 rows stamped C119 — left out, not repaired), and a reporter's `filed:` / `graded:` receipts are not treated as something said. Newest usable rows are week 114; a card says which week the words are from.
 - 36 shown people have no sex on the ledger; their card leaves it out.

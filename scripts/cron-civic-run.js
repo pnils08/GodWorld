@@ -61,6 +61,7 @@ const PACKETS = path.join(CIVIC, 'packets');
 const { getDistrictForNeighborhood } = require('../lib/districtMap');
 const getCurrentCycle = require('../lib/getCurrentCycle');
 const officeWall = require('./officeWall');
+const workerWake = require('./workerWake');   // pipeline.110 Task 10 — the worker template
 const trackerSnapshot = require('./initiativeTrackerSnapshot');
 const { buildPack, writePack, childToParentFromAudit, foldHood, gamePromptView } = require('./buildCivicOfficeSlice');
 const { readBriefEvidence, promptBrief, filterEvidenceDependentMoves } = require('./civicBrief');
@@ -3628,6 +3629,101 @@ function civicDutyDay(day, policy) {
     !!(policy && policy.duty.eventExceptionDaysUtc.includes(day));
 }
 
+// ---------------------------------------------------------------------------
+// pipeline.110 Task 10 — an office with a worker fill wakes on the worker
+// template (scripts/workerWake.js) in place of the seat pack and the persona
+// files: who they are and their gathered memory as the system turn; their
+// data, their decisions and one task line as the user turn; their tools. The
+// statement is theirs whole — there is no form to fill. A lever (the chief's
+// patrol strategy, engine.238) is a tool; what it stages goes through the same
+// move gate and ledger the seats use, so the close reads it as before.
+// o: { cycle, date, officeMap, noWrite }
+// ---------------------------------------------------------------------------
+async function runWorkerDatawake(duty, o) {
+  const office = duty.office;
+  const dw = require('./cron-desk-writer');
+  const cycle = Number(o.cycle);
+  const w = await workerWake.buildWake({ officeId: office.officeId, cycle, officeMap: o.officeMap });
+  const toolset = workerWake.toolsFor(office.officeId, { patrolStrategies: PATROL_STRATEGIES });
+  log('worker wake ' + office.agentDir + ': system ' + w.system.length + ' / user ' + w.user.length + ' chars; memory ' +
+    w.memory.entries.length + ' (' + w.memory.fromSearch + ' searched, ' + w.memory.newest + ' newest); decisions ' + w.decisions.length + '; tools ' + toolset.length);
+  // A call failure (429, timeout, outage) moves down the model chain as the
+  // seats' wakes do. An empty or cut-off reply retries once on the same model
+  // and then fails the wake: another family is another voice.
+  const chain = modelChainFor(office.model || 'deepseek/deepseek-v4.1-flash-1017');
+  let r = null, answeredModel = null, stage = { patrol: [] };
+  chainLoop:
+  for (let mi = 0; mi < chain.length; mi++) {
+    const active = chain[mi];
+    if (mi > 0) log(office.agentDir + ' falling back to ' + active + ' (after ' + chain[mi - 1] + ')');
+    for (let attempt = 1; attempt <= 2; attempt++) {
+      stage = { patrol: [] };   // a lever staged by a failed attempt never carries over
+      let got;
+      try {
+        got = await dw.openRouterToolLoop({ model: active, system: w.system, user: w.user, toolset,
+          exec: workerWake.toolExecutor({ popid: office.popid, cycle, stage, normalizePatrol: normalizePatrolStrategy, dw }),
+          maxToolCalls: 6, maxTokens: 2400, timeoutMs: 180000, keepResults: true,
+          body: /^deepseek\/deepseek-v4/.test(active) ? { reasoning: { enabled: false } } : {} });
+      } catch (e) {
+        log(office.agentDir + ' ' + active + ' attempt ' + attempt + ' call failed: ' + e.message);
+        if (attempt < 2) { await sleep(2000 * attempt); continue; }
+        break;   // this model's attempts are exhausted — try the next in chain
+      }
+      if (String(got.text || '').trim() && got.finishReason !== 'length') { r = got; answeredModel = active; break chainLoop; }
+      log(office.agentDir + ' ' + active + ' attempt ' + attempt + ': ' + (got.finishReason === 'length' ? 'reply cut off' : 'empty reply'));
+      if (attempt === 2) throw new Error('model reply unavailable after retry (' + (got.finishReason || 'empty') + ')');
+    }
+  }
+  if (!r) throw new Error('model reply unavailable after trying ' + chain.length + ' model(s): ' + chain.join(', '));
+  const statement = String(r.text).trim();
+  // Speech is not gated (SIM_DOCTRINE §13): figures outside what was handed or read are logged on the record.
+  let loose = [];
+  try { loose = [...ungroundedNumbers(w.system + '\n' + w.user + '\n' + r.trace.map(t => t.result || '').join('\n'), [statement], { cycle })]; } catch (_) { loose = []; }
+  if (loose.length) log(office.agentDir + ' figures not in what was handed or read (logged, not gated): ' + loose.join(', '));
+  // The latest setting of the wake is the one filed (the week's close takes the latest of the week).
+  const staged = stage.patrol.length ? [stage.patrol[stage.patrol.length - 1]] : [];
+  const mv = validateDatawakeMoves(staged.map(p => ({ type: 'patrol', strategy: p.strategy, note: p.note })), {
+    office, boardIds: new Set(), childToParent: {}, cycle, confrontations: [], answeredConfrontationIds: new Set(),
+    answerEvidenceAvailable: false, trackerRows: [], moveLedger: null, loadPetitionData: () => ({}),
+  });
+  for (const rj of mv.rejected) log('[datawake] MOVE REJECTED ' + office.agentDir + ' — ' + rj.reason + ' :: ' + JSON.stringify(rj.move).slice(0, 160));
+  for (const accepted of mv.accepted) log('[datawake] MOVE ' + office.agentDir + ' — ' + accepted.type + ' ' + JSON.stringify(accepted.payload).slice(0, 120));
+  const rec = datawakeRecord({ office, cycle, date: o.date, answeredModel, j: { statement, numberMoved: null }, mv,
+    usage: { prompt_tokens: r.usageIn, completion_tokens: r.usageOut, cost: r.billedUsd } });
+  rec.template = 'worker/1';
+  rec.toolTrace = r.trace.map(t => ({ tool: t.tool, input: t.input, resultChars: t.resultChars }));
+  rec.memory = { searchedOn: w.memory.key, entries: w.memory.entries.length, fromSearch: w.memory.fromSearch, newest: w.memory.newest };
+  rec.figuresNotHanded = loose;
+  rec.finishReason = r.finishReason || null;
+  rec.dutyKind = duty.dutyKind;
+  rec.eventKeys = duty.eventKeys;
+  rec.decisionSchema = 'legacy';
+  if (o.noWrite) {
+    console.log('\n--- ' + office.holder + ', ' + office.title + ' (' + answeredModel + ') — NO-WRITE: nothing saved ---');
+    console.log('tools: ' + (rec.toolTrace.length ? rec.toolTrace.map(t => t.tool + '(' + JSON.stringify(t.input) + ')').join('; ') : 'none'));
+    console.log('moves: ' + (mv.accepted.length ? JSON.stringify(mv.accepted) : 'none') + (mv.rejected.length ? ' / rejected ' + JSON.stringify(mv.rejected) : ''));
+    console.log('figures not handed or read: ' + (loose.length ? loose.join(', ') : 'none'));
+    console.log('\n' + statement + '\n');
+    return { office: office.agentDir, ok: true, noWrite: true, record: rec, wake: w };
+  }
+  const outPath = path.join(DATAWAKE_DIR, office.agentDir + '_' + o.date + '.json');
+  const ledgerFile = appendMoveLedger(ROOT, cycle, moveLedgerLines(office, cycle, o.date, mv));
+  fs.writeFileSync(outPath, JSON.stringify(rec, null, 2));
+  if (ledgerFile && (mv.accepted.length || mv.rejected.length)) {
+    log('move ledger ← ' + mv.accepted.length + ' accepted / ' + mv.rejected.length + ' rejected (' + path.relative(ROOT, ledgerFile) + ')');
+  }
+  // His statement goes to his page whole: the seats' 600-character line would cut a worker's words mid-sentence.
+  try {
+    rec.positionWall = await officeWall.recordPosition(rec.popid, 'datawake: ' + statement, {
+      cycle: rec.cycle, key: 'datawake-' + o.date, kind: 'datawake', office: rec.agentDir, holder: rec.holder, maxChars: 12000 });
+    if (rec.positionWall.recorded) log('position-wall datawake ' + rec.holder + ' → ' + rec.popid);
+    else if (rec.positionWall.error) log('position-wall datawake skip: ' + rec.positionWall.error);
+  } catch (e) { rec.positionWall = { recorded: false, error: e.message }; log('position-wall datawake failed: ' + e.message); }
+  fs.writeFileSync(outPath, JSON.stringify(rec, null, 2));
+  console.log('  [✓] ' + office.agentDir + ' — "' + statement.replace(/\s+/g, ' ').slice(0, 80) + '"');
+  return { office: office.agentDir, ok: true, dutyKind: duty.dutyKind, eventKeys: duty.eventKeys, out: path.relative(ROOT, outPath) };
+}
+
 async function runDatawake() {
   const cycle = arg('--cycle', null) || detectCycle();
   const date = arg('--date', new Date().toISOString().slice(0, 10));
@@ -3684,6 +3780,12 @@ async function runDatawake() {
 
   if (process.argv.includes('--dry-run')) {
     for (const { office } of rotaEntries) {
+      if (workerWake.hasFill(office.officeId)) {
+        const w = await workerWake.buildWake({ officeId: office.officeId, cycle: Number(cycle), officeMap });
+        log('DRY ' + office.agentDir + ' holder=' + office.holder + ' template=worker/1 systemChars=' + w.system.length + ' userChars=' + w.user.length +
+          ' memory=' + w.memory.entries.length + ' decisions=' + w.decisions.length + ' tools=' + workerWake.toolsFor(office.officeId).length);
+        continue;
+      }
       const pack = buildPack({ cycle, agentDir: office.agentDir, root: ROOT });
       const persona = readPersonaDir(civicSeat.personaDirFor(office, ROOT) || office.agentDir);
       const game = pack.game || {};
@@ -3702,11 +3804,26 @@ async function runDatawake() {
     return;
   }
 
+  // --no-write: the real wake with the model called and nothing saved — no record, ledger line, page doc or results
+  // file. Built for the worker template; a seat's wake has no such mode yet (civic.49 Task 9).
+  if (process.argv.includes('--no-write')) {
+    for (const duty of rotaEntries) {
+      if (!workerWake.hasFill(duty.office.officeId)) throw new Error('--no-write is unavailable for a seat (worker-template offices only): ' + duty.office.agentDir + ' — name one with --office');
+      await runWorkerDatawake(duty, { cycle, date, officeMap, noWrite: true });
+    }
+    console.log('=== datawake no-write: ' + rotaEntries.length + ' worker wake(s), nothing saved ===');
+    return;
+  }
+
   fs.mkdirSync(DATAWAKE_DIR, { recursive: true });
   const results = [];
   for (const duty of rotaEntries) {
     const office = duty.office;
     try {
+      if (workerWake.hasFill(office.officeId)) {
+        results.push(await runWorkerDatawake(duty, { cycle, date, officeMap, noWrite: false }));
+        continue;
+      }
       const outPath = path.join(DATAWAKE_DIR, office.agentDir + '_' + date + '.json');
       if (CIVIC47_PILOT && fs.existsSync(outPath)) {
         const prior = readJson(outPath);
@@ -4545,7 +4662,7 @@ if (require.main === module) {
 module.exports = { modelChainFor, FALLBACK_MODELS, sentimentWord, crimeWord, retailWord, ailmentPerception, isOneWeekDecay, constituentTopic, cleanLines, parseApprovalTable, parseHoodTable, outputContract, datawakeUserPrompt, datawakeStatementText, districtPackRef, weekCarryBlock, spliceWeekCarry, loadWeekCarry, hearingHasPhase, noPhaseCheck, prepTargetDirForHood, validateVoiceJson, ungroundedNumbers, statementNumberCheck, composeChecks,
   civicDutyDay,
   // civic.38 Task 1 — closed move set (exported for scripts/cron-civic-game.test.js)
-  MOVE_TYPES, validateDatawakeMoves, runTickAndRefresh, hoodAuthorityReason, appendMoveLedger, moveLedgerLines, datawakeRecord,
+  MOVE_TYPES, validateDatawakeMoves, runWorkerDatawake, runTickAndRefresh, hoodAuthorityReason, appendMoveLedger, moveLedgerLines, datawakeRecord,
   // civic.38 Task 2 — move ledger fold (Sunday close)
   loadMoveLedgerFolded, moveWeekForClose, foldMovesIntoDecisions, patrolSweep, normalizePatrolStrategy, PATROL_STRATEGIES, slugForInitiative,
   // civic.38 Task 6.3 — petition sweep

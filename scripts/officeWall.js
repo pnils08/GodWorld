@@ -145,7 +145,8 @@ async function recordPosition(popId, text, opts) {
     const page = require(path.join(ROOT, 'lib', 'citizenPage'));
     const ptr = await page.ensurePagePointer_(popId);
     if (ptr.error) return { recorded: false, error: ptr.error };
-    const appended = await page.appendReflection_(popId, body.slice(0, 1200), {
+    // maxChars: a worker's statement lands whole (pipeline.110 Task 10); every other caller keeps the 1,200 cut
+    const appended = await page.appendReflection_(popId, body.slice(0, o.maxChars || 1200), {
       cycle: o.cycle,
       daypart: 'CIVIC',
       key: o.key || 'position',

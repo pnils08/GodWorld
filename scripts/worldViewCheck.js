@@ -364,6 +364,46 @@ function checkWorldView(build, sources, engine, secondBuild, reports = []) {
     for (const id of Object.keys(off)) if (!ties.some(t => t?.a === id || t?.b === id)) fail('tie', id, 'named as off the streets but on no tie');
     if (ties.length) reports.push(`TIES ${ties.length} matched to active Relationship_Bonds rows; ${talks} carry the pair's latest saved conversation`);
   }
+  // homes: every home on the page is an active Household_Ledger row of that street's neighborhood, with the row's
+  // own housing type, kind, head, members (named from the ledger), rent (a renter's) and cycle; it stands on a lot
+  // of that street that points back at it, alone in a house or in a unit nobody else has; and every active
+  // household of a shown neighborhood has exactly one home (one in a neighborhood with no street is listed).
+  {
+    const seen = new Set(); let matched = 0;
+    for (const h of hoods) {
+      const lots = new Map(arr(h?.lay?.parcels || [], `${h?.name}.parcels`).map(p => [p?.id, p])), taken = new Set(), homes = arr(h?.homes || [], `${h?.name}.homes`);
+      homes.forEach((hm, k) => {
+        const where = `${h.name}/${hm?.hh}`, row = households.get(hm?.hh);
+        if (!row || String(row.Status || '').trim().toLowerCase() !== 'active') { fail('home', where, 'no active Household_Ledger row'); return; }
+        if (seen.has(hm.hh)) { fail('home', where, 'household has more than one home'); return; }
+        seen.add(hm.hh);
+        if (row.Neighborhood !== h.name) fail('home', where, `the household's neighborhood is ${row.Neighborhood}`);
+        let mem = []; try { mem = JSON.parse(row.Members || '[]'); } catch (e) { mem = []; }
+        const own = /^own/i.test(String(row.HousingType || '')) ? 1 : 0;
+        const want = { hh: row.HouseholdId, own, type: String(row.HouseholdType || ''), mem: (Array.isArray(mem) ? mem : []).map(id => [id, ledger.get(id) ? nameOf(ledger.get(id)) : '']).filter(m => m[1]) };
+        if (row.HeadOfHousehold) want.head = String(row.HeadOfHousehold);
+        if (!own && Number(row.MonthlyRent) > 0) want.rent = Number(row.MonthlyRent);
+        if (/^\d+$/.test(String(row.FormedCycle))) want.since = Number(row.FormedCycle);
+        const got = Object.assign({}, hm); delete got.lot; delete got.unit;
+        if (!equal(got, want)) fail('home', where, `does not match its Household_Ledger row: page ${JSON.stringify(got).slice(0, 260)}, row ${JSON.stringify(want).slice(0, 260)}`);
+        else matched++;
+        const lot = lots.get(hm.lot);
+        if (!lot) { fail('home', where, `lot ${hm.lot} is not a parcel of this street`); return; }
+        if (!Array.isArray(lot.hm) || !lot.hm.includes(k)) fail('home', where, `lot ${hm.lot} does not point back at this home`);
+        const spot = lot.k === 'h' ? lot.id : `${lot.id}/${hm.unit}`;
+        if (lot.k === 'h' ? hm.unit !== undefined : !hm.unit) fail('home', where, lot.k === 'h' ? 'a unit in a house' : 'no unit in a building');
+        if (taken.has(spot)) fail('home', where, `${spot} already has a household`);
+        taken.add(spot);
+      });
+      for (const p of lots.values()) for (const k of arr(p?.hm || [], `${h.name}.${p?.id}.hm`)) if (homes[k]?.lot !== p.id) fail('home', `${h.name}/${p.id}`, 'lot points at a home that is not on it');
+    }
+    const elsewhere = new Set(arr(build.data?.homesElsewhere || [], 'data.homesElsewhere').map(e => e?.hh));
+    for (const row of households.values()) {
+      if (String(row.Status || '').trim().toLowerCase() !== 'active' || !row.Neighborhood) continue;
+      if (hoodNames.has(row.Neighborhood) ? !seen.has(row.HouseholdId) : !elsewhere.has(row.HouseholdId)) fail('home', row.HouseholdId, hoodNames.has(row.Neighborhood) ? `active household of ${row.Neighborhood} has no home on the page` : 'active household of a neighborhood with no street is not listed');
+    }
+    if (matched) reports.push(`HOMES ${matched} households matched to active Household_Ledger rows, each on one lot of its street`);
+  }
   if (!secondBuild?.data?.hoods || !equal(
     hoods.map(h => ({ name: h.name, lay: h.lay })),
     secondBuild.data.hoods.map(h => ({ name: h.name, lay: h.lay })))) {

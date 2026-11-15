@@ -312,3 +312,24 @@ test('a tie is an active bond row, in the row\'s order, with the pair\'s latest 
   rejects('tie', f => { tied(f); f.build.data.offStreet['POP-90002'] = 'SYNTHETIC Wrong Name'; }); // an off-street name that is not the ledger's
   rejects('tie', f => { tied(f); f.build.data.ties[0].a = 'POP-90002'; f.build.data.ties[0].b = 'POP-90001'; }); // not in the row's order
 });
+
+// homes: a household on a lot of its street
+function housed(f, over) {
+  Object.assign(f.sources.households[0], { Status: 'active', Neighborhood: f.hood.name, HeadOfHousehold: 'POP-90001', MonthlyRent: '2400', FormedCycle: '84' }, over || {});
+  f.hood.homes = [{ hh: 'HH-SYNTHETIC', own: 0, type: 'couple', mem: [['POP-90001', 'SYNTHETIC Citizen One'], ['POP-90002', 'SYNTHETIC Citizen Two']], head: 'POP-90001', rent: 2400, since: 84, lot: 'synthetic-e02', unit: '2a' }];
+  f.hood.lay.parcels[1].hm = [0];
+  f.second = structuredClone(f.build);
+  return f;
+}
+test('a home is an active household row on one lot of its own street', () => {
+  assert.deepEqual(check(housed(fixture())), []);
+  rejects('home', f => { housed(f); f.hood.homes[0].own = 1; });                                   // the row says rented
+  rejects('home', f => { housed(f); f.hood.homes[0].rent = 9999; });                               // not the row's rent
+  rejects('home', f => { housed(f); f.hood.homes[0].mem[1][1] = 'SYNTHETIC Wrong Name'; });        // a member named off the ledger
+  rejects('home', f => { housed(f); f.hood.homes = []; delete f.hood.lay.parcels[1].hm; });        // an active household with no home
+  rejects('home', f => { housed(f); f.hood.homes[0].lot = 'synthetic-e99'; });                     // a lot the street does not have
+  rejects('home', f => { housed(f); delete f.hood.lay.parcels[1].hm; });                           // the lot does not point back
+  rejects('home', f => { housed(f, { Status: 'dissolved' }); });                                   // a dissolved household shown
+  rejects('home', f => { housed(f, { Neighborhood: 'SYNTHETIC Elsewhere' }); });                   // a household of another neighborhood
+  rejects('home', f => { housed(f); delete f.hood.homes[0].unit; });                               // a building home with no unit
+});

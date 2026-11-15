@@ -218,6 +218,24 @@ function placeType(b) {
 const RAIL = {};
 try { new Function(fs.readFileSync(path.join(__dirname, '..', 'utilities', 'ensureTransitMetrics.js'), 'utf8') + '\nreturn OAKLAND_BART_STATIONS;')().forEach(s => { (RAIL[s.neighborhood] = RAIL[s.neighborhood] || []).push(s.station); }); }
 catch (e) { console.warn('world-view: station list not loaded (' + e.message + '); no rail lines drawn'); }
+// ---------- homes: the active households of each neighborhood (Household_Ledger) ----------
+// A home is a parcel of the street, or a unit of one, with one household on it, chosen in layout() the way a
+// business's parcel is. Renters take units over the shops and in the plain buildings of the main street, dearer
+// rent higher up; owners take houses: the ones a house street already has between its businesses, and otherwise
+// the lots of a residential stretch the street runs on into past its last business, where a few houses are
+// nobody's on record (the ledger is the tracked share of the city). Whoever a street has no unit or house for
+// goes on the stretch too. Ids are not addresses and are not shown; ROLLOUT engine.345 is the ledger's side.
+// When the ledger carries a parcel per household, read it in layout() and drop the choosing.
+const hhByHood = {}, isOwned = h => /^own/i.test(String(h.HousingType || ''));
+households.forEach(h => { if (String(h.Status || '').trim().toLowerCase() === 'active' && h.Neighborhood) (hhByHood[h.Neighborhood] = hhByHood[h.Neighborhood] || []).push(h); });
+function homeRec(h) {
+  let mem = []; try { mem = JSON.parse(h.Members || '[]'); } catch (e) { console.warn('household ' + h.HouseholdId + ': Members is not a list; the home is shown with nobody named'); }
+  const o = { hh: h.HouseholdId, own: isOwned(h) ? 1 : 0, type: String(h.HouseholdType || ''), mem: (Array.isArray(mem) ? mem : []).map(id => [id, nameOf(id)]).filter(m => m[1]) };
+  if (h.HeadOfHousehold) o.head = String(h.HeadOfHousehold);
+  if (!o.own && Number(h.MonthlyRent) > 0) o.rent = Number(h.MonthlyRent);
+  if (/^\d+$/.test(String(h.FormedCycle))) o.since = Number(h.FormedCycle);
+  return o;
+}
 const r2 = x => Math.round(x * 100) / 100;
 function layout(H) {
   const ST = Object.assign({}, DEF, STYLE[H.name]);
@@ -236,10 +254,11 @@ function layout(H) {
     p.s = p.type === 'station' || p.type === 'rail' ? 0 : p.type === 'coliseum' && !water ? -1 : sides[k % sides.length];
   });
   const held = (s, a, b) => onStreet.some(p => (p.s === 0 || p.s === s) && a < p.z + p.half && b > p.z - p.half);
-  const parcels = [];
+  const parcels = [], ends = {}, counts = {};
   sides.forEach(s => {
     const st = sideStyle(s); let z = 42, k = 0;
     while (z > -L - 30) { const w = rr(st.w), g = rr(st.gap); if (!held(s, z - w, z)) parcels.push({ id: slug(H.name) + '-' + (s < 0 ? 'w' : 'e') + String(++k).padStart(2, '0'), s, z: z - w / 2, w, st }); z -= w + g; }
+    ends[s] = z; counts[s] = k;
   });
   const cand = parcels.filter(p => p.z < 4 && p.z > -L + 6);
   const K = Math.min(ordinary.length, cand.length);
@@ -260,9 +279,52 @@ function layout(H) {
     if (b) o.b = p.b;
     return o;
   });
-  return { L: r2(L), water, slope: water ? 0 : ST.slope, parcels: out, places: places.map(p => ({ b: p.i, type: p.type, half: p.half, s: p.s, z: p.z, end: p.end })) };
+  // ---------- homes ----------
+  // Its own seeded numbers, so the main street's parcels, businesses and landmark places are laid out exactly as
+  // they were before homes. (Scenery that stands at a share of the street's length moves with a longer street.)
+  const rH = rng(hash(H.name + '|homes')), rrH = a => a[0] + rH() * (a[1] - a[0]);
+  const byId = (a, b) => (a.HouseholdId < b.HouseholdId ? -1 : 1), rentOf = h => Number(h.MonthlyRent) || 0;
+  const hhs = (hhByHood[H.name] || []).slice().sort(byId), homes = [];
+  const put = (h, lot, unit) => { const rec = homeRec(h); rec.lot = lot.id; if (unit) rec.unit = unit; homes.push(rec); (lot.hm = lot.hm || []).push(homes.length - 1); };
+  const even = (list, n) => { const pick = []; for (let k = 0; k < n; k++) pick.push(list[Math.floor((k + 0.5) * list.length / n)]); return pick; };
+  const inMain = p => p.z < 4 && p.z > -L + 6;
+  const renters = hhs.filter(h => !isOwned(h)).sort((a, b) => rentOf(b) - rentOf(a) || byId(a, b)), owners = hhs.filter(isOwned);
+  // units: floors by the building's height (the ground floor too where no business has it), units a floor by its width
+  const blds = out.filter(o => o.k === 'b' && inMain(o)).sort((a, b) => b.z - a.z || a.s - b.s).map(o => { const fl = Math.max(1, Math.round(o.h / 3.3)), per = Math.max(1, Math.round(o.w / 6.5)), g = o.b != null ? 1 : 0; return { o, per, g, cap: (fl - g) * per }; });
+  const slots = [], maxCap = blds.reduce((m, x) => Math.max(m, x.cap), 0);
+  for (let round = 0; slots.length < renters.length && round < maxCap; round++) {
+    const avail = blds.filter(x => x.cap > round), need = renters.length - slots.length;
+    (need >= avail.length ? avail : even(avail, need)).forEach(x => slots.push({ o: x.o, fl: x.g + 1 + Math.floor(round / x.per), unit: (x.g + 1 + Math.floor(round / x.per)) + String.fromCharCode(97 + round % x.per) }));
+  }
+  slots.map((x, k) => [x, k]).sort((a, b) => b[0].fl - a[0].fl || a[1] - b[1]).forEach((x, k) => put(renters[k], x[0].o, x[0].unit));
+  let left = renters.slice(slots.length);
+  // houses the street already has: owners first, then any renter with no unit
+  const houses = out.filter(o => o.k === 'h' && inMain(o)).sort((a, b) => b.z - a.z || a.s - b.s);
+  const own1 = Math.min(owners.length, houses.length); even(houses, own1).forEach((o, k) => put(owners[k], o));
+  const spare = houses.filter(o => !o.hm), rent1 = Math.min(left.length, spare.length); even(spare, rent1).forEach((o, k) => put(left[k], o));
+  left = owners.slice(own1).concat(left.slice(rent1));
+  // the residential stretch: the street runs on past its last business into house lots, one household each, and a
+  // few houses nobody on record lives in; then the gate, and houses beyond it
+  let LT = L;
+  if (left.length) {
+    // lots are kept narrow so the stretch stays walkable: terraced where the street is dense, brick, glass or along
+    // water (one side only), a house street's own lots a little narrower, detached houses elsewhere
+    const hs = sideStyle(sides[0]), row = hs.fill !== 'house' && (!!water || hs.gap[1] <= 1 || hs.wall === 'glass' || hs.wall === 'brick');
+    const dim = hs.fill === 'house' ? { w: [hs.w[0] * 0.8, hs.w[1] * 0.8], g: hs.gap, h: hs.h } : row ? { w: [6, 7.5], g: [0.1, 0.4], h: [6, 8.5] } : { w: [8, 10], g: [0.5, 1.2], h: [4, 5.6] };
+    const n = left.length + Math.max(2, Math.round(left.length * 0.15)), cur = {}, kk = Object.assign({}, counts), lots = [];
+    // (the main street's last buildings used to run on 30 m behind the gate as a backdrop; the houses start there instead)
+    for (let i = out.length - 1; i >= 0; i--) if (out[i].z - out[i].w / 2 < -L - 3) out.splice(i, 1);
+    const z0 = Math.min.apply(null, sides.map(s => Math.min.apply(null, out.filter(o => o.s === s).map(o => o.z - o.w / 2).concat([ends[s] + 60])))) - 1; sides.forEach(s => { cur[s] = z0; });
+    const lot = s => { const w = rrH(dim.w), g = rrH(dim.g), o = { id: slug(H.name) + '-' + (s < 0 ? 'w' : 'e') + String(++kk[s]).padStart(2, '0'), s, z: r2(cur[s] - w / 2), w: r2(w), k: 'h', h: r2(rrH(dim.h)), d: r2(7 + rH() * 2), tone: hs.tone, lit: lit(Math.max(hs.lit, 0.45)), tr: Math.max(hs.trees || 0, 0.35), res: 1 }; cur[s] -= w + g; out.push(o); return o; };
+    for (let i = 0; i < n; i++) lots.push(lot(sides[i % sides.length]));
+    even(lots, left.length).forEach((o, k) => put(left[k], o));
+    LT = -Math.min.apply(null, sides.map(s => cur[s])) + 2;
+    sides.forEach(s => { while (cur[s] > -LT - 30) lot(s); });
+  }
+  return { L: r2(LT), Lm: r2(L), water, slope: water ? 0 : ST.slope, parcels: out, places: places.map(p => ({ b: p.i, type: p.type, half: p.half, s: p.s, z: p.z, end: p.end })), homes };
 }
-hoods.forEach(h => { h.lay = layout(h); if (RAIL[h.name]) h.rail = RAIL[h.name]; });
+hoods.forEach(h => { const lay = layout(h); h.homes = lay.homes; delete lay.homes; h.lay = lay; if (RAIL[h.name]) h.rail = RAIL[h.name]; });
+const homesElsewhere = []; Object.keys(hhByHood).forEach(n => { if (!hoods.some(h => h.name === n)) hhByHood[n].forEach(h => homesElsewhere.push({ hh: h.HouseholdId, hood: n })); });
 hoods.forEach(h => h.people.forEach(p => { if (p.runs) { const i = h.biz.findIndex(x => p.runs.some(rn => rn.id === x.id)); if (i >= 0) p.at = i; p.runs = p.runs.map(rn => ({ n: rn.n, hood: rn.hood })); } }));
 
 // ---------- chaos cars: the week's Chaos_Cars rows, as the world summary printed them ----------
@@ -374,7 +436,8 @@ const data = {
   unplacedBiz,
   chaos: { read: chaosRead != null, total: (chaosRead || []).length, elsewhere: chaosElsewhere },
   ties,
-  offStreet
+  offStreet,
+  homesElsewhere
 };
 hoods.forEach(h => { data.style[h.name] = STYLE[h.name]; });
 
@@ -409,5 +472,8 @@ console.log('rail line on:', hoods.filter(h => h.lay.places.some(p => p.type ===
     + (tieSkips.notCitizen ? '; ' + tieSkips.notCitizen + ' active row(s) name someone who is not a citizen id, not shown' : '') + (tieSkips.noName ? '; ' + tieSkips.noName + ' with no name on the ledger, not shown' : '')
     + (tieSkips.talksNoTie ? '; ' + tieSkips.talksNoTie + ' saved conversation(s) between people whose bond is no longer active, not shown' : ''));
 }
+console.log('homes: ' + hoods.reduce((a, h) => a + h.homes.length, 0) + ' active households on parcels (' + hoods.reduce((a, h) => a + h.homes.filter(x => x.own).length, 0) + ' owned); '
+  + hoods.filter(h => h.homes.length).map(h => { const res = new Set(h.lay.parcels.filter(p => p.res).map(p => p.id)), onRes = h.homes.filter(x => res.has(x.lot)).length; return h.name + ' ' + h.homes.length + (h.lay.L > h.lay.Lm ? ' (' + onRes + ' on a ' + Math.round(h.lay.L - h.lay.Lm) + ' m stretch)' : ''); }).join(', ')
+  + (homesElsewhere.length ? '; ' + homesElsewhere.length + ' household(s) in a neighborhood with no street this week, not shown' : ''));
 console.log('chaos cars:', chaosRead == null ? 'no world summary for C' + CYCLE + ' (none drawn)' : chaosRead.length + ' this week — ' + hoods.filter(h => h.chaos.length).map(h => h.name + ': ' + h.chaos.map(c => c.n + ' (' + c.o + (c.to && c.to !== h.name ? ' → ' + c.to : '') + ')').join(', ')).join('; ') + (chaosElsewhere.length ? '; not on a street: ' + chaosElsewhere.map(c => c.n + ' → ' + c.to).join(', ') : ''));
 }

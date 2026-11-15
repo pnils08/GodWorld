@@ -375,10 +375,15 @@ var PLACES = {};
     k.box(14.6, 0.9, 18.6, s * (W + 7.2), 15.3, z, [20, 0.2, 0.28]);
     // a lit line under the cornice
     k.box(0.12, 0.18, 18, s * (W - 0.08), 14.3, z, [hue, 0.9, 0.7], true);
-    // the entrance: lit doors and two blank poster cases
-    panel(k, doorsTex(T, 'glass'), 8, 3.2, s * (W - 0.06), 1.6, z + 2, -s * Math.PI / 2, 4);
+    // the entrance: a plain dark base course the width of the front (the brick's ground-floor windows would otherwise
+    // show round and behind the posters), then lit doors and two poster cases, each in a frame
+    k.box(0.08, 3.5, 18, s * (W - 0.02), 1.75, z, [hue === 200 ? 30 : 18, 0.16, 0.2]);
+    panel(k, doorsTex(T, 'glass'), 8, 3.2, s * (W - 0.1), 1.6, z + 2, -s * Math.PI / 2, 4);
     var pn = b ? seedOf(b.n) % 5 : 0;
-    panel(k, posterTex(T, pn), 1.5, 2, s * (W - 0.07), 1.6, z - 4.2, -s * Math.PI / 2); panel(k, posterTex(T, pn + 5), 1.5, 2, s * (W - 0.07), 1.6, z + 8.1, -s * Math.PI / 2);
+    [z - 4.2, z + 8.1].forEach(function (pz, pi) {
+      k.box(0.06, 2.24, 1.74, s * (W - 0.08), 1.6, pz, [40, 0.3, 0.12]);
+      panel(k, posterTex(T, pn + pi * 5), 1.5, 2, s * (W - 0.12), 1.6, pz, -s * Math.PI / 2);
+    });
     // marquee: a box out over the pavement, a board each way, bulbs top and bottom
     var mx = s * (W - 1.75), mz = z + 2, mL = 11, mY = 4.9;
     k.box(3.4, 2.6, mL, mx, mY, mz, [hue, 0.25, 0.14]);
@@ -498,7 +503,7 @@ var PLACES = {};
       tables.push([x, 0.8, z, 2.0, 0.08, 2.4, 0, 0, 0, [30, 0.1, 0.7]]);
       tables.push([x - s * 0.95, 0.5, z, 0.04, 0.6, 2.4, 0, 0, 0, [hue, 0.5, 0.4]]);
       for (var c = 0; c < 3; c++) crates.push([x + (R() - 0.5) * 0.9, 0.98, z - 0.8 + c * 0.8, 0.6, 0.26, 0.6, 0, R() * 0.4, 0, [[100, 0.6, 0.35], [8, 0.75, 0.45], [40, 0.85, 0.5], [28, 0.8, 0.48], [280, 0.4, 0.3]][Math.floor(R() * 5)]]);
-      tents.push([x, 2.75, z, 3.1, 0.9, 3.3, 0, 0, 0, [hue, 0.6, 0.55]]);
+      tents.push([x, 2.75, z, 3.1, 0.9, 3.3, 0, 0, 0, [hue, 0.6, 0.55]]); if (k.pave) k.pave.push([s, z - 1.7, z + 1.7]);
       for (var l = 0; l < 4; l++) k.glow(x - s * 1.3, 2.15, z - 1.5 + l * 0.85, 0xffe0a0, 1.2);
       k.glow(x, 1.6, z, 0xffd9a0, 2.4);
     }

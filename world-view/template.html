@@ -693,7 +693,7 @@ function build(idx) {
     var sign = new THREE.Mesh(new THREE.PlaneGeometry(wd, wd * 0.375), sm); sign.position.set(s * (WALK - wd / 2 - 0.05), y + yAt(z), z); root.add(sign);
     box(wd + 0.1, 0.07, 0.07, s * (WALK - wd / 2 - 0.05), y + wd * 0.19 + 0.04 + yAt(z), z - 0.02, [240, 0.05, 0.18]);
   }
-  var glowPts = [], beacons = [], ticks = [], signs = [];
+  var glowPts = [], beacons = [], ticks = [], signs = [], pave = []; // pave: [side, z from, z to] of what a place stands on the pavement (market stalls), so nothing else is built through it
   function bySign(s, z, d) { return signs.some(function (q) { return q[0] === s && z - q[1] > -d && z - q[1] < 2.5; }); }
   function glow(x, y, z, c, size) { glowPts.push([x, y, z, c, size || 3.2]); }
   function crane(x, z, hgt) {
@@ -717,7 +717,7 @@ function build(idx) {
   for (i = 0; i < dashN; i++) { M.makeTranslation(0, 0.02, 14 - i * 6); dash.setMatrixAt(i, M); } ground.add(dash);
 
   var carSpots = [], lampSpots = [];
-  var kit = { THREE: THREE, root: root, ground: ground, H: H, ST: ST, LAY: LAY, L: L, gz: gz, water: water, slope: slope, WALK: WALK, ROAD: ROAD, LANE: LANE, WX: WX, temp: parseFloat(DATA.weather.temp), warm: warm, r: r, yAt: yAt, held: held, box: box, walled: walled, blade: blade, glow: glow, crane: crane, flat: flat, beacons: beacons, ticks: ticks, signs: signs, trees: trees, carSpots: carSpots, lampSpots: lampSpots, nameTex: nameTex, signTex: signTex, canvasTex: canvasTex, glowTex: TEX_GLOW, sectorHue: sectorHue, roofGeo: roofGeo, camera: camera, quality: function () { return quality; } };
+  var kit = { pave: pave, THREE: THREE, root: root, ground: ground, H: H, ST: ST, LAY: LAY, L: L, gz: gz, water: water, slope: slope, WALK: WALK, ROAD: ROAD, LANE: LANE, WX: WX, temp: parseFloat(DATA.weather.temp), warm: warm, r: r, yAt: yAt, held: held, box: box, walled: walled, blade: blade, glow: glow, crane: crane, flat: flat, beacons: beacons, ticks: ticks, signs: signs, trees: trees, carSpots: carSpots, lampSpots: lampSpots, nameTex: nameTex, signTex: signTex, canvasTex: canvasTex, glowTex: TEX_GLOW, sectorHue: sectorHue, roofGeo: roofGeo, camera: camera, quality: function () { return quality; } };
 
   // water side (the water module may draw the surface itself)
   var glints = null;
@@ -747,7 +747,7 @@ function build(idx) {
   // The direction scale (H.state.scale, -5..+5: build.js reads it off the engine's own row). It dresses only the
   // buildings no ledger business stands in. Below zero some of their ground floors are empty units, a shutter down
   // over each window and, from -3, some boarded; above zero some carry window boxes; from +3 a few stand under scaffolding.
-  var SC = H.state ? H.state.scale : 0, DOWN = SC < 0 ? -SC : 0, UP = SC > 0 ? SC : 0, dress = [], rdr = rng(hash(H.name + '|dress')), scaf = 0;
+  var SC = H.state ? H.state.scale : 0, DOWN = SC < 0 ? -SC : 0, UP = SC > 0 ? SC : 0, dress = [], rdr = rng(hash(H.name + '|dress')), scaf = 0, scafWant = [];
   var POLE = [215, 0.06, 0.5], DECKB = [32, 0.35, 0.34], SHEET = [200, 0.3, 0.72], SHEET2 = [200, 0.24, 0.62];
   function windowBox(p, mid, mw) { // a trough under the sill, something green in it, something in flower
     var y = yAt(p.z) + Math.min(p.h / p.F, 2.9) * 0.277, z = p.z + p.s * mid, x = p.s * (WALK - 0.17), hue = [340, 48, 12, 300, 0][Math.floor(rdr() * 5)];
@@ -763,7 +763,7 @@ function build(idx) {
   function plainFront(p, wall) {
     var gh = p.h / p.F, Hm = Math.min(gh, 2.9), cw = p.w / p.B, doorBay = Math.floor(rf() * p.B), bay;
     var empty = DOWN && rf() < DOWN * 0.09 ? (DOWN >= 3 && rf() < (DOWN - 2) * 0.25 ? 'gwinBoard' : 'gwinShut') : null, boxes = UP && rf() < UP * 0.1;
-    if (UP >= 3 && scaf < 3 && p.h < 20 && rdr() < (UP - 2) * 0.05) { scaffold(p); scaf++; }
+    if (UP >= 3 && p.h < 20 && rdr() < (UP - 2) * 0.05) scafWant.push(p); // put up once the signs and stalls are known (below)
     for (bay = 0; bay < p.B; bay++) {
       var t0 = -p.w / 2 + bay * cw, t1 = t0 + cw, mid = (t0 + t1) / 2, door = bay === doorBay;
       if (p.wall === 'glass') {
@@ -841,11 +841,6 @@ function build(idx) {
   });
   if (FA.n) root.add(frontMesh(FA, true));
   if (FB.n) root.add(frontMesh(FB, false));
-  if (dress.length) { // window boxes and scaffolding: every box of them in one draw
-    var dm = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshLambertMaterial({ color: 0xffffff }), dress.length), dc = new THREE.Color();
-    dress.forEach(function (q, n) { M.makeScale(q[3], q[4], q[5]); M.setPosition(q[0], q[1], q[2]); dm.setMatrixAt(n, M); dm.setColorAt(n, dc.setHSL(q[6][0] / 360, q[6][1], q[6][2])); });
-    dm.castShadow = true; root.add(dm);
-  }
   if (homes.length) {
     // a pitched roof on every house: gable to the street on most, eaves to it on the rest; a chimney on some; a step at each door
     var pv = [], pc = [], tri = function (a, b2, c, l) { pv.push(a[0], a[1], a[2], b2[0], b2[1], b2[2], c[0], c[1], c[2]); for (var e = 0; e < 3; e++) pc.push(l, l, l); };
@@ -877,6 +872,19 @@ function build(idx) {
 
   // places that are businesses in their own right, each on the ground the layout held for it
   LAY.places.forEach(function (p) { var fn = PLACES[p.type]; if (fn) fn(kit, p, H.biz[p.b]); });
+  // Scaffolding goes up last, on at most three of the buildings that drew one, and never through a hanging sign or a
+  // market stall: it stands a metre out over the pavement, so a sign at its face or just beyond it down the street
+  // would be cut in half by the sheeting, and a stall would stand inside the poles.
+  scafWant.forEach(function (p) {
+    var za = p.z - p.w / 2, zb = p.z + p.w / 2;
+    if (scaf >= 3 || signs.some(function (q) { return q[0] === p.s && q[1] > za - 6 && q[1] < zb + 0.8; }) || pave.some(function (q) { return q[0] === p.s && q[1] < zb + 0.5 && q[2] > za - 0.5; })) return;
+    scaffold(p); scaf++;
+  });
+  if (dress.length) { // window boxes and scaffolding: every box of them in one draw
+    var dm = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshLambertMaterial({ color: 0xffffff }), dress.length), dc = new THREE.Color();
+    dress.forEach(function (q, n) { M.makeScale(q[3], q[4], q[5]); M.setPosition(q[0], q[1], q[2]); dm.setMatrixAt(n, M); dm.setColorAt(n, dc.setHSL(q[6][0] / 360, q[6][1], q[6][2])); });
+    dm.castShadow = true; root.add(dm);
+  }
   // scenery that is not a business
   if (has('cranes')) for (i = 0; i < 7; i++) { var cs = water ? -water : (i % 2 ? 1 : -1), cz0 = -8 - (i + r()) / 7 * (L - 10), ch = 36 + r() * 22, cx0 = cs * (WALK + 17 + r() * 16); if (!LAY.places.some(function (p) { return p.half >= 20 && (p.s === cs) && Math.abs(p.z - cz0) < p.half + 30; })) crane(cx0, cz0, ch); }
   if (has('pergola') && water) PLACES.pergola(kit, { s: water, z: -L * 0.5 }, { n: (DATA.landmarks || {}).pergola });

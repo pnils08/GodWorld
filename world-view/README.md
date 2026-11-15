@@ -71,6 +71,13 @@ Builder: "keep cards off on the main page , leaving to ability to turn them on t
 - Cards on (`labels` 2): as before this section, two person cards chosen by the page and notices in full.
 - Checked by driving the page in headless Chrome (name tap → card; notice tap → card; card tap → page; Cards: on → two cards).
 
+### Signs and the theater front (builder 2026-11-15)
+
+Builder, on Grand Lake: "I see some signs stuck half in the buildings on grand lake, movie poster effect on a window on the theater".
+
+- Signs: the cause was scaffolding (direction scale +3 and up), which stands a metre out over the pavement. Its sheeting cut the Saturday Market's hanging sign in half and hid the inner end of a neighbour's. Scaffolding is now put up after every sign and stall is known (`scafWant`, resolved after `PLACES`): not on a building with a hanging sign on its face or within 6 m down the street on the same side, and not where a market stall stands (`kit.pave`, filled by `PLACES.market`). Still at most three a street. Applies to every street at +3 or more (C115: Grand Lake, West Oakland, Fruitvale, Uptown, Downtown, Jack London).
+- Theater (`PLACES.theater`): the brick wall's own ground-floor windows showed round and behind the two posters. The front now has a dark base course its full width under the marquee, and each poster sits in a frame. Same for every theater (C115: Grand Lake, Uptown x2, KONO).
+
 ## Parcels
 
 - `build.js` `layout()` lays every street out as parcels with stable ids (`west-oakland-e07`: neighborhood, side, number down the street) and decides which business sits on which, so the page draws a layout, it does not roll one.

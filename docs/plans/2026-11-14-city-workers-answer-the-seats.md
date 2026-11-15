@@ -61,7 +61,7 @@ pointers:
 
 | # | Task | Owner | Status |
 |---|------|-------|--------|
-| 1 | The worker template ([[../reference/AGENT_BOOT_TEMPLATES]] §3) approved by the builder; agy's review of the template page folded | es | in progress — agy review landed and folded 2026-11-14 (HOLD, 13 findings); the chief and one director run (Run 5, 2026-11-14); left: P2 below, then the builder's approval |
+| 1 | The worker template ([[../reference/AGENT_BOOT_TEMPLATES]] §3) approved by the builder; agy's review of the template page folded | es | done 2026-11-14 — approved on the police chief after Runs 6–7 (pipeline.110 plan changelog); his own weekday wake moves onto it under pipeline.110 Task 10. P2 met by the memory gatherer in the Run 6 harness |
 | 2 | The two test preloads (write guard, in-memory file swap) into the repo once, with a usage note; both terminals test through them | es | done 2026-11-14 — `scripts/guard/nowrite.js`, `bootswap.js`, `nowrite.selftest.js` (13 checks pass); builder "Put in the repo"; outside review not yet run |
 | 3 | Review of this plan: advisor, then one outside review; findings folded here | es | not started |
 | 4 | Records builders for the first six workers: every `Crime_Metrics` column and the patrol setting for the chief; the full tracker row and office row for a director; each worker's own rows of `output/cron-civic/moves/` | es | not started |
@@ -127,6 +127,7 @@ pointers:
 
 ## Changelog
 
+- 2026-11-14 (engine-sheet) — Task 1 done: the builder approved the worker template on the police chief. This plan stays not approved to build; the worker wake it needs (Task 6) is built first for the chief's own weekday wake under pipeline.110 Task 10. A worker asking another worker: builder 2026-11-14 "that's how a city works so it makes sense" — agreed in principle, not designed here.
 - 2026-11-14 (engine-sheet) — Task 1 status brought current: review folded, one director run (Run 5); P1 and P3 carry the run's result; P2 (the memory loader) is what is left before the builder's approval.
 - 2026-11-14 (engine-sheet) — Task 2 done: the test guard is in `scripts/guard/`.
 - 2026-11-14 (engine-sheet) — agy's review of the template page reconciled: HOLD; P2, P3 and N1–N5 added.

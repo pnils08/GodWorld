@@ -1515,6 +1515,14 @@ function startBiz(bi) {
 // A faith event reads: the organization, what happened (the ledger's line), how many came, who leads it. A sports
 // row reads: the team, the feed's own headline and note, the record, the streak, how the fans feel. All the row's.
 var NTAGS = [], NV = new THREE.Vector3(), NOTE_FAR = 46; // a notice shows once it is close enough to tell what it is on
+// What a notice is called when only its name shows. A team row's title is the team and a lived event's is the person,
+// so alone they read as somebody's name tag: the team's gets the feed's own kind of news after it ("A's roster move"),
+// the person's gets the kind of event ("Vinnie Keane · retirement"). Both words are the row's.
+function noteName(nt) {
+  if (nt.k === 's' && nt.type) return nt.n + ' ' + String(nt.type).replace(/-/g, ' ').replace(/\s+[HA]:[WL]$/, '');
+  if (nt.k === 'l' && nt.kind) return nt.n + ' \u00B7 ' + nt.kind;
+  return nt.n;
+}
 function placeNotes() {
   var list = (world && world.notes) || [], w = window.innerWidth, h = window.innerHeight, floor = $('top').getBoundingClientRect().bottom - 20, i;
   var rects = TAKEN, show = labels > 0 && !visiting && !bizView && !busy, cand = [];
@@ -1523,8 +1531,9 @@ function placeNotes() {
     if (!a) { if (el) el._o = 0; continue; }
     if (!el) { el = NTAGS[i] = document.createElement('div'); el.innerHTML = '<b><i></i><em style="font-style:normal"></em></b><span></span>'; tagsEl.appendChild(el);
       (function (tag) { tag.addEventListener('click', function () { if (tag._a && +tag.style.opacity > 0.3) openLabel(tag, function () { startNote(tag._a); }); }); })(el); }
-    if (el._a !== a) { el._a = a; el.className = 'ctag n' + ({ s: 's', l: 'l', i: 'i', p: 'p', c: 'c', t: 't', w: 'w', x: 'x' }[a.nt.k] || 'f'); el.querySelector('em').textContent = a.nt.n; el.querySelector('span').textContent = a.nt.x; }
-    el.classList.toggle('mini', labels < 2 && openTag !== el); // cards off: its name only, until it is tapped
+    var mini = labels < 2 && openTag !== el; // cards off: its name only, until it is tapped
+    if (el._a !== a || el._m !== mini) { el._a = a; el._m = mini; el.className = 'ctag n' + ({ s: 's', l: 'l', i: 'i', p: 'p', c: 'c', t: 't', w: 'w', x: 'x' }[a.nt.k] || 'f'); el.querySelector('em').textContent = mini ? noteName(a.nt) : a.nt.n; el.querySelector('span').textContent = a.nt.x; }
+    el.classList.toggle('mini', mini);
     el._o = 0;
     if (show) {
       NV.set(a.x, a.y + 0.6, a.z).project(camera);

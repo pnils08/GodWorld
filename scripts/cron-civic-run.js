@@ -2720,7 +2720,28 @@ const BLOC_SPOKESPERSON_DISTRICT = {
 // (9 council + mayor) plus the police chief (standing builder ruling,
 // civic.37). Project directors, DA, Okoro and Baylight move off this rota;
 // the directors' operational read is a work-wake pack (Task 9 step 2).
-const DATAWAKE_SEAT = /^(MAYOR-01|COUNCIL-D\d|CHIEF-POLICE)$/;
+const DATAWAKE_SEAT = /^(MAYOR-01|COUNCIL-D\d)$/;   // the elected seats; a worker wakes on the workers' rota below
+// The workers' own rota (builder 2026-11-14: "all workers will run on a schedule like police chief"): every office with
+// a live fill, longest since its last wake first, WORKER_WAKES_A_DAY of them each duty day beside the seats' three —
+// so a worker wakes about as often as the chief did on the seats' rota and no seat loses a turn to one.
+const WORKER_WAKES_A_DAY = 4;
+function workerRota(officeMap, limit) {
+  const rows = [...officeMap.offices, ...(officeMap.projects || [])]
+    .map(o => Object.assign({}, o, { officeId: o.officeId || o.projectId }))
+    .filter(o => workerWake.hasFill(o.officeId) && o.popid)
+    .map(o => Object.assign(o, { agentDir: workerWake.slugFor(o) }));
+  const lastWake = {};
+  if (fs.existsSync(CIVIC)) {
+    for (const f of fs.readdirSync(CIVIC)) {
+      const m = f.match(/^datawake_(\d{4}-\d{2}-\d{2})\.results\.json$/);
+      if (!m) continue;
+      const rec = readJson(path.join(CIVIC, f));
+      for (const r of (rec && rec.results) || []) if (r && r.office && (lastWake[r.office] || '') < m[1]) lastWake[r.office] = m[1];
+    }
+  }
+  rows.sort((a, b) => (lastWake[a.agentDir] || '').localeCompare(lastWake[b.agentDir] || '') || a.agentDir.localeCompare(b.agentDir));
+  return rows.slice(0, limit);
+}
 function datawakeRota(officeMap, limit) {
   const seats = [];
   const byDir = {};
@@ -3766,7 +3787,8 @@ async function runDatawake() {
       date, LIMIT, policy.duty);
     rotaEntries = dutyPlan.selected;
   } else {
-    rotaEntries = datawakeRota(officeMap, LIMIT).map(office => ({ office, dutyKind: 'regular', eventKeys: [] }));
+    rotaEntries = datawakeRota(officeMap, LIMIT).concat(workerRota(officeMap, parseInt(arg('--worker-limit', String(WORKER_WAKES_A_DAY)), 10)))
+      .map(office => ({ office, dutyKind: 'regular', eventKeys: [] }));
   }
   if (!rotaEntries.length) {
     if (CIVIC47_PILOT) {

@@ -415,7 +415,9 @@ function selectDue(packages, cycle, state, opts) {
   // shares one cycle number across both days, so a bare-popid key would wrongly
   // suppress the second day's wake (found in adversarial review, 2026-09-22).
   const due = registry.duePackages(packages, day, (state && state.recent) || [])
-    .filter(({ value }) => Number(woken[value.popid + ':' + day]) !== Number(cycle));
+    .filter(({ value }) => Number(woken[value.popid + ':' + day]) !== Number(cycle))
+    // a worker on the worker model wakes on its weekday rota only (builder 2026-11-14: "Thursday wakes won't be a thing anymore , 1 worker model")
+    .filter(({ value }) => !require('./workerWake').hasFill(value.office));
   const cap = Number.isFinite(opts.limit) && opts.limit > 0 ? opts.limit : due.length; // no limit → every due pack
   return { picks: due.slice(0, cap), note: due.length ? 'rota' : 'nothing due', day };
 }

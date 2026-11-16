@@ -388,7 +388,11 @@ Object.assign(FILLS, {
 
 // A fill that is built is not yet a wake that runs on it. LIVE names the workers whose scheduled wakes use the template
 // (builder 2026-11-14, on the chief: "Turn it on"). Adding an office here is the switch; it is his word per worker.
-const LIVE = new Set(['CHIEF-POLICE']);
+// 2026-11-15: every built worker is on (builder 2026-11-14: "all workers will run on a schedule like police chief";
+// 2026-11-15, on the thirteen built and held off: "why are tye swiched off"). To hold one off, take it out of this list.
+const LIVE = new Set(Object.keys(FILLS));
+// The name a worker's records are filed under: its folder name where it has one, else one made from its office id.
+const slugFor = (office) => office.agentDir || ('worker-' + String(office.officeId || office.projectId || '').toLowerCase());
 const isBuilt = (officeId) => Object.prototype.hasOwnProperty.call(FILLS, String(officeId || ''));
 const hasFill = (officeId) => LIVE.has(String(officeId || '')) && isBuilt(officeId);
 
@@ -401,7 +405,7 @@ async function buildWake(opts) {
   // a project director sits under `projects` with a projectId; everyone else under `offices`
   const om = o.officeMap || {};
   const found = (om.offices || []).concat(om.projects || []).find((x) => (x.officeId || x.projectId) === o.officeId);
-  const office = found ? Object.assign({}, found, { officeId: found.officeId || found.projectId }) : null;
+  const office = found ? Object.assign({}, found, { officeId: found.officeId || found.projectId, agentDir: slugFor(found) }) : null;
   if (!office || !isBuilt(o.officeId)) throw new Error('no worker fill for ' + o.officeId);
   const question = String(o.question || '').trim(), askerLine = String(o.askerLine || '').trim();
   if (question && !askerLine) throw new Error('missing askerLine: a question is handed over with who asks it');
@@ -494,5 +498,5 @@ function toolExecutor(ctx) {
   };
 }
 
-module.exports = { FILLS, hasFill, isBuilt, LIVE, buildWake, toolsFor, toolExecutor, TOOLS, SHEETS,
+module.exports = { FILLS, hasFill, isBuilt, LIVE, slugFor, buildWake, toolsFor, toolExecutor, TOOLS, SHEETS,
   highLow, patrolInForce, askAndWhy, loadMoves, pastDecisions, gatherMemory, whoTheyAre, sheetRead, memoryRecall, table };

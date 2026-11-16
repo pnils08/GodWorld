@@ -21,7 +21,6 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | engine.311 | Business entry by opportunity (builder 2026-10-22): line tier decides which business types open; every business class gets entry gates (none today); line contents in combination raise an opportunity to buy/open; the citizen's wake decides, not a roll. Covers 309's door | needs-info | research-build | [[../plans/2026-10-10-engine-214-mood-per-hood]] step 8, builder 2026-10-22 under engine.308 |
 | engine.328 | Ledger OriginGame column: remove it, free the column (builder 10-31). Own session first: blast radius (22 files, 11 engine refs), naming, then his go | needs-info | research-build | `docs/SIMULATION_LEDGER.md` |
 | pipeline.73 | Tamsin + Ines unattended writes: read done (Ines 10-31 Sonnet 2/4, not printed). Left: plan tasks 2–3, his: citizens' slices, minted journalists | needs-info | research-build | docs/plans/2026-10-11-media-extension.md |
-| engine.289 | Absolute CULTURE gates (>=3 / >=6): C115–C117 one hood reached 3 once (Uptown), none 6. His call: keep, re-tier or go relative | needs-info | engine-sheet | [[../plans/2026-10-10-engine-214-mood-per-hood]] §Tasks 17/18/19 — mechanism → Bench results; `output/engine_review_c113.md` §C113 re-reads · `output/production_log_run_cycle_c116_gaps.md` §C114–C116 watch re-reads |
 
 ## 2. Waiting on a fire — dated or organic (live-observing, blocked)
 
@@ -77,6 +76,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | pipeline.101 | Daily news: evening write wake date fixed (builder 11-04), NotebookLM page written. Next: confirm the 11-04 18:15 wake writes and gates | in-progress | research-build | [[../reference/NotebookLM]] §Change log |
 | pipeline.89 | Every journalist picks (builder 10-25: "All journalists should pick, they are AI"): every wake package gets the live tools the 3 tool seats have, the slice is a tip sheet not the assignment, Rhea is off every path; Ines first, same cut on all 28. First run 2026-10-28 | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 |
 | infrastructure.19 | Oakland week flight made lifelike (builder 11-14). v41: names first, homes on a block, team news at team buildings. Next: his look; joined street unbuilt | in-progress | research-build | [[../../world-view/README]] |
+| engine.289 | Evening culture and nightlife land on their hood (builder 11-16). Built, 11/11; sandbox fire waits on clearing the bench's version cap (his click) | in-progress | research-build | [[../plans/2026-11-16-evening-reaches-the-hoods]] |
 
 ## 4. Queue — ruled, not started (ready)
 

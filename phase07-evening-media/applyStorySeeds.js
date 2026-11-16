@@ -1418,19 +1418,54 @@ function applyStorySeeds_(ctx) {
   // block expecting deck coverage. Original Wire 3b rationale: faithful
   // restatement of real named events/trends only — no fabricated angle.
   // Plan: docs/plans/2026-06-24-engine-output-canon-coverage.md
+  // engine.289 (builder 2026-11-16: "Fix the culture bar", "fix the night life", "Of course restaurants
+  // matter"): each evening seed carries the neighborhood the evening layer already placed it in, so next
+  // Cycle's Phase-2 CULTURE / NIGHTLIFE gates (applyCityDynamics.js, via the Phase-9 seed carry) credit
+  // that hood. These were all '' and counted citywide, so no hood ever reached a domain bar from them.
   var cityEvents = S.cityEvents || [];
+  var cityEventHood = {};
+  (S.cityEventDetails || []).forEach(function(d) { if (d && d.name) cityEventHood[d.name] = d.neighborhood || ''; });
   for (var cei = 0; cei < cityEvents.length && cei < 6; cei++) {
     if (!cityEvents[cei]) continue;
-    seeds.push(makeSeed('[CITY EVENT] ' + cityEvents[cei], 'CULTURE', '', 2, 'city-event'));
+    seeds.push(makeSeed('[CITY EVENT] ' + cityEvents[cei], 'CULTURE', cityEventHood[cityEvents[cei]] || '', 2, 'city-event'));
   }
   var streamingTrend = (S.eveningMedia && S.eveningMedia.streaming) || '';
   if (streamingTrend) {
     seeds.push(makeSeed('[TREND] City is streaming: ' + streamingTrend, 'CULTURE', '', 2, 'culture-trend'));
   }
-  var famousPeople = S.famousPeople || [];
-  if (famousPeople.length > 0) {
-    seeds.push(makeSeed('Famous around town this cycle: ' + famousPeople.slice(0, 6).join(', '),
-      'CULTURE', '', 2, 'famous-sighting', famousPeople.slice(0, 3)));
+  // famous sightings: one seed per hood they were seen in; a sighting with no hood stays on the citywide line
+  var sightings = S.famousSightings || [];
+  var seenByHood = {}, seenHoods = [], seenNowhere = [];
+  for (var fsi = 0; fsi < sightings.length; fsi++) {
+    var fs = sightings[fsi];
+    if (!fs || !fs.name) continue;
+    var fsHood = fs.neighborhood || '';
+    if (!fsHood) { seenNowhere.push(fs.name); continue; }
+    if (!seenByHood[fsHood]) { seenByHood[fsHood] = []; seenHoods.push(fsHood); }
+    seenByHood[fsHood].push(fs.name);
+  }
+  if (!sightings.length) seenNowhere = (S.famousPeople || []).slice();
+  for (var shi = 0; shi < seenHoods.length; shi++) {
+    var shNames = seenByHood[seenHoods[shi]];
+    seeds.push(makeSeed('Seen in ' + seenHoods[shi] + ' this cycle: ' + shNames.slice(0, 6).join(', '),
+      'CULTURE', seenHoods[shi], 2, 'famous-sighting', shNames.slice(0, 3)));
+  }
+  if (seenNowhere.length > 0) {
+    seeds.push(makeSeed('Famous around town this cycle: ' + seenNowhere.slice(0, 6).join(', '),
+      'CULTURE', '', 2, 'famous-sighting', seenNowhere.slice(0, 3)));
+  }
+  // the night's spots and the dinner crowd, each at its own hood (buildNightLife_ / buildEveningFood_ placed them)
+  var nightSpots = (S.nightlife && S.nightlife.spotDetails) || [];
+  for (var nsi = 0; nsi < nightSpots.length; nsi++) {
+    var ns = nightSpots[nsi];
+    if (!ns || !ns.name || !ns.neighborhood) continue;
+    seeds.push(makeSeed('Out late at ' + ns.name + ' in ' + ns.neighborhood, 'NIGHTLIFE', ns.neighborhood, 2, 'nightlife-spot'));
+  }
+  var dinnerSpots = (S.eveningFood && S.eveningFood.restaurantDetails) || [];
+  for (var dsi = 0; dsi < dinnerSpots.length; dsi++) {
+    var dn = dinnerSpots[dsi];
+    if (!dn || !dn.name || !dn.neighborhood) continue;
+    seeds.push(makeSeed('Dinner crowd at ' + dn.name + ' in ' + dn.neighborhood, 'NIGHTLIFE', dn.neighborhood, 2, 'dining-spot'));
   }
 
   // ═══════════════════════════════════════════════════════════════════════════

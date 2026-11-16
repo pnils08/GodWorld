@@ -325,6 +325,9 @@ function eventAttractBase_(S) {
   for (var si = 0; si < storySeeds.length; si++) {
     var s = storySeeds[si];
     if (s.seedType === 'city-event') continue;
+    // engine.289: places and people on the evening layer, not story text — a spot or a famous name with
+    // "art" in it is not an event; kept out so the per-hood evening seeds leave EventAttractiveness as it was
+    if (s.seedType === 'famous-sighting' || s.seedType === 'nightlife-spot' || s.seedType === 'dining-spot') continue;
     if (EVENT_ATTRACT_STORY_WORDS.test((s.seed || s.text || '').toString().toLowerCase())) hits.seed++;
   }
 

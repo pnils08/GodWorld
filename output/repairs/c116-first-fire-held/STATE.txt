@@ -1,49 +1,25 @@
-C116 — state at session close, Sun 2026-11-15 ~18:30 CST (research-build)
+C116 — state at close, Sun 2026-11-15 ~19:35 CST (research-build). SUPERSEDES the 18:30 note.
 
-WHAT HAPPENED
-- C116 fired live 15:00 CST. Oakland_Sports_Feed row 278 (rumor; Dillon / Paulson / Seymour) carried EventTrigger `retirement` by entry error;
-  the engine retired the three. POP-00598 Income 23,800,000 was also an entry error.
-- Sheet repaired by script (output/repairs/2026-11-15-c116-retirement-entry-repair.js), chain rebuilt clean.
-- ~17:35 the builder rewound the live sheet to its pre-fire state by version history. The re-fire at 17:39 was REFUSED by the fire guard
-  (script property FIRE_ADMISSION_JSON still says "Cycle 116 done"; a sheet rewind does not rewind script properties).
-- A second fire was not run. The live sheet reads Cycle 115. C116 has NOT run. The Sunday cycle is owed.
+C116 RAN. Second fire 18:52 CST, 200.7 s, 0 errors; chain steps 1 → 6.1 all passed (output/run-cycle/c116.json); city hall held its
+hearing 19:17–19:28; the week page is published (v43). Crons read 116. Full account: output/production_log_run_cycle_c116_gaps.md
+G-EC34–44.
 
-LIVE SHEET NOW (read 18:25 CST)
-- cycleCount 115, Neighborhood_Map 115, no retirement anywhere, 1 Engine_Errors row from the guard refusal (stamped 116).
-- POP-00598 Income set back to 2,700,000 by this session (one cell, read back).
-- Feed row 278 EventTrigger reads `off-season` (the builder's word). Not a dropdown word on live: the engine reads it as no trigger.
+WHAT THIS FOLDER IS
+Everything the FIRST fire (15:00 CST, rewound by the builder) produced, held and not deleted: its week files, its city-hall run,
+its chain record, its gap log, the beat dump as dumped, the wrong execution log Step 3.5 first matched. Pre-fire restore point of the
+live sheet at C115: backups/sheets/2026-11-16/ (85 tabs).
 
-TO FIRE C116 (builder)
-1. Apps Script > Project Settings > Script Properties: delete FIRE_ADMISSION_JSON (only that one; the other values stamped 116 are
-   skipped by the loader, which re-seeds from Carry_Forward_Store — that tab holds 113/114/115 for all ten keys).
-2. Fire from the sheet menu. Export the execution log.
-Then (terminal): runCycle steps 3 → 6.1. Steps 1, 2, 2.5 re-passed at 18:18 CST (record output/run-cycle/c116.json is fresh).
+LIVE CODE
+PROD @183 = stage 48 = stage 45 + feed word `off-season` (ccf50997b) + clearFireRecordAfterRollback (c4c929b40).
+Stages 47 and 48 have NO sandbox fire (SANDBOX 1004 script project is at Google's 200-version cap; it serves @200 = stage 46 `news`).
+Owed: clear versions on the bench project (builder's click), bench stage 48. Sheet dropdown lists `off-season` only after
+Setup Sports Feed Validation is run from the menu.
 
-BEFORE CITY HALL RERUNS ON THE NEW C116
-- 65 office-position entries + Varek's journal entry from the first hearing are still on the holders' pages (keys cp-POP-…-c116-…;
-  list: output/repairs/2026-11-15-c116-office-positions.json). Same keys on a rerun MERGE old and new text. Deleting them is a memory
-  delete — needs the builder's word ("delete"). Not done.
-- output/cron-civic/moves/moves_c115.jsonl (held copy here; live file if recreated): 7 moves marked applied / 1 failed with closeCycle 116 —
-  the rewind undid them on the sheet. Reset those statuses to pending before the close, or they will not re-apply.
-- World-data summary document for C116 (id M5KEix7JeAJeWdoRiAGVaJ) holds the first fire's (clean) week; replace in place after the rerun.
-- World-view page is published as v42 = the first fire's C116 week. Rebuild + republish after the rerun.
-
-THIS MACHINE
-- Every week file reads 115 (getCurrentCycle, world_state, base_context, beats, ledger snapshot) — matches the sheet.
-- Everything the first fire produced is in this folder (224 files; nothing deleted): the C116 week files, city hall's c116 run,
-  the beat dump as dumped, the first run's chain record, the C116 gap log (with judgment entries G-EC33–41).
-
-THE TRIGGER (engine.346)
-- Committed f50b367c9 as `news`: on the dropdown, desk hook, route `hook` (no second citizen line, nobody changes). Tests pass.
-- Sandbox proof PASS 39/39 on SANDBOX 1004 @200 (stage 46 = stage 45 + three files), C116 fired from a live sync in 155 s:
-  output/engine-sheet/2026-11-15-e346-bench-run3.log, …-e346-reads.jsonl. Final sync from live done: bench data = live C115.
-- NOT on PROD. The builder's word for it is `off-season`, not `news` — rename (three files + tests + hook text), re-bench, then PROD
-  (push script written, not run: output/engine-sheet/2026-11-15-push-e346-prod.sh).
-- SANDBOX 1004 script project is at Google's 200-version cap: the next bench push needs old versions deleted from the project's
-  history page (builder's click) or a new bench project. The parked engine.339 bench code was replaced by stage 46.
-
-OPEN, UNFILED (builder's call)
-- Pre-flight reads names and columns only; nothing previews who an acting trigger changes (a `retirement` row naming more than one person).
-- engine.208 stock lines: every named citizen gets a pool sentence ("saw their name in the sports pages again"); role-blind
-  (the GM got a traded player's lines).
-- Step 2.5 does not read Simulation_Ledger incomes.
+OPEN
+- 65 office-position entries + Varek's journal entry from the first hearing were not deleted (no word given); the rerun wrote under
+  the same keys, so those pages may hold both runs' statements (list: output/repairs/2026-11-15-c116-office-positions.json).
+- Dillon (POP-00018) and the GM (POP-00527) are owed a question wake; a MOVE answer would file an Advancement_Intake1 row that
+  re-roles and re-prices an active A's row at C117. Read Advancement_Intake1 before the C117 fire.
+- City hall excluded INIT-006 / INIT-014 / INIT-003 at the close and two project moves failed (G-EC43).
+- Unfiled defects, builder's call: pre-flight does not preview acting triggers; Step 2.5 does not read ledger incomes;
+  Step 3.5 accepts any log that completes; engine.208 stock lines are role-blind.

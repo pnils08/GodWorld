@@ -973,6 +973,22 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) — not `done-pending-archive` sweep rows, moved by hand per rollout-rules §6 wontfix/unresolvable-stale convention.
 
+## S663 Archive Pass (2026-11-15, research-build) — post-S662 closures sweep
+
+1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 civic.*.
+
+- **civic.48** [engine-sheet] — Offices told which hoods sit in which district (builder 11-13). C116 read: 36 hood labels in the office files, none under the wrong district **State at archive:** done-pending-archive. Pointer: [[../../output/production_log_run_cycle_c115_gaps]] §G-EC48
+
+This pass: 1 rows — civic.48. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
+## S663 Archive Pass (2026-11-15, engine-sheet) — post-S662 closures sweep
+
+1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 engine.*.
+
+- **engine.333** [research-build] — Feed triggers to life history: C115 read done; Vinnie's owed wake spent 11-09 inside the window (wake log). Acceptance 3 proven **State at archive:** done-pending-archive. Pointer: [[../plans/2026-11-05-feed-triggers-to-life-history]]
+
+This pass: 1 rows — engine.333. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S655 Archive Pass (2026-11-15, research-build) — post-S654 closures sweep
 
 2 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 2 pipeline.*.

@@ -67,7 +67,9 @@ Cloud Shell sometimes clears installed packages. If clasp fails, run `npm instal
 **Previous bench:** `SANDBOX 0908` (`1FFpUs98L0wrEcfAaQy6-Ir2xYiCq9baCc0SzqzAMrtM`) — RETIRED 2026-10-04: its script project hit Apps Script's 200-version cap (push lands, no new deployment; web app frozen @200 = `d7ac5fff`, C119). Full trail: [[DEPLOY_HISTORY]] §Retired sandboxes.
 
 
-**Live (2026-11-08, 12:42 CST):** PROD = **stage 45** = stage 44 + `phase07-evening-media/buildContractSeeds.js` at `e15eb443f` (engine.334: story seeds add magnitudes only within one unit), web app **@180** — DEPLOY_HISTORY §PROD stage 45. SANDBOX 1004 @197 = stage 45 = PROD, data = live C114.
+**Live (2026-11-15, 18:47 CST):** PROD = **stage 48** = stage 45 + the feed word `off-season` (three files, `ccf50997b`) + `clearFireRecordAfterRollback` (`c4c929b40`), web app **@183** — stages 47 and 48 had no sandbox fire (bench at the 200-version cap); DEPLOY_HISTORY §PROD stages 46 → 48. Bench: SANDBOX 1004 @200 = stage 46 (`news`), behind PROD.
+
+**Previous live (2026-11-08, 12:42 CST):** PROD = **stage 45** = stage 44 + `phase07-evening-media/buildContractSeeds.js` at `e15eb443f` (engine.334: story seeds add magnitudes only within one unit), web app **@180** — DEPLOY_HISTORY §PROD stage 45. SANDBOX 1004 @197 = stage 45 = PROD, data = live C114.
 
 **Previous live (2026-11-08, 02:41 CST):** PROD = **stage 44** = stage 42 + the six engine.338b files at `e078c8b33` (the `question` trigger — the builder asks one citizen, privately; the intake door moves an existing citizen's employer / clock / key; the six post-sports jobs in the catalog; the wake files his answer), web app **@179** — DEPLOY_HISTORY §PROD stage 44. SANDBOX 1004 @196 = stage 44, data = live C114. Live Economic_Parameters 315 rows. Dashboard restarted. Builder re-runs Setup Sports Feed Validation for the dropdown word.
 

@@ -41,7 +41,7 @@ Steps with no script: 3 confirms the builder's fire on the live sheet; 4.1 check
 | 2 | Live checks: steps 1, 2.5, 3 for C116 against the live sheet; 4.1 and 6.1 against the C115 files (scratch record) | es | done |
 | 3 | Wire the Claude hook; confirm it blocks in-session | es | done |
 | 4 | Wire the codex hook; builder trusts it in codex; confirm a blocked call | es + builder | wired, trust pending |
-| 5 | First real chain: C116 runs start to finish through the runner | es | not started |
+| 5 | First real chain: C116 runs start to finish through the runner | es | done 2026-11-15 (research-build ran it) |
 
 ## Acceptance
 
@@ -78,5 +78,6 @@ Steps with no script: 3 confirms the builder's fire on the live sheet; 4.1 check
 
 ## Changelog
 
+- 2026-11-15 (research-build) — Task 5: C116 closed through the runner, every step recorded. Step 3.5 passed a wrong Drive file once (C116 gap log G-EC38). Row re-dated to C117 for the codex hook trust.
 - 2026-11-10 (engine-sheet) — The six pipeline.100 files this row's `17e5405fb` carried by accident (a staged undo) were put back to the builder-approved version under pipeline.100 (`5caa1cb0e`). No change to the step gate.
 - 2026-11-09 — Plan written and built on the builder's order the night codex ran C115 out of order. Runner, guard, tests, Claude hook live; codex hook wired, awaiting trust.

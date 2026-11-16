@@ -26,7 +26,6 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| civic.48 | Offices told which hoods sit in which district (builder 11-13). Read C116 Sun 2026-11-15: no office files a hood under the wrong district | live-observing | engine-sheet | [[../../output/production_log_run_cycle_c115_gaps]] §G-EC48 |
 | governance.59 | Run-cycle step gate (builder 11-09): C116 closed through the runner, every step recorded. Codex hook still needs his trust. Read C117 Sun 2026-11-22 | live-observing | engine-sheet | [[../plans/2026-11-09-run-cycle-step-gate]] |
 | pipeline.106 | Lore writer: Gemini 3.8 thinking high, calendar, subject dossier (card, household, page), every canon source; Ellis passed. Read Fri 2026-11-13: Osei run | live-observing | engine-sheet | [[../plans/2026-08-15-lore-writer]] |
 | pipeline.104 | Saturday Drive drops (builder 11-08): edition to Y-003, audio to Weekly_News; built, C114 uploaded. Read Sat 2026-11-14: C115 edition + audio in their folders | live-observing | engine-sheet | [[../reference/NotebookLM]] §Change log |
@@ -73,7 +72,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
 | pipeline.100 | Mags memory one home (builder 11-03): her page, not the old `mags` store; every Mags seat loads her persona as the CLI did. Task 1 started 11-08 | in-progress | engine-sheet | [[../plans/2026-11-03-mags-memory-one-home]] |
-| engine.346 | Feed word for offseason talk (builder 11-15): built as `news`, sandbox PASS. His word is `off-season`: rename, re-bench (bench at version cap), then live | in-progress | research-build | [[../plans/2026-11-05-sports-feed-triggers]] §Changelog |
+| engine.346 | Feed word `off-season` (builder 11-15): live @182, hook raised at C116. Owed: a bench fire of stage 48 once the bench version cap is cleared; sheet dropdown | in-progress | research-build | [[../plans/2026-11-05-sports-feed-triggers]] §Changelog |
 | engine.339 | How kids are minted (builder 11-08, high): parents too young, a child's surname moving, a child counted where none was born. Read done; his calls at 1b | in-progress | research-build | [[../plans/2026-11-08-how-kids-are-minted]] |
 | pipeline.110 | Role citizens wake as themselves (builder 11-10). 14 workers on the template, old folders retired; council template waits on his word | in-progress | engine-sheet | [[../plans/2026-11-10-role-citizens-wake-as-themselves]] |
 | pipeline.111 | Stop puppeting the newsroom (builder 11-10): the reporter half of the wake work (split with es 11-14). Next: one reporter's whole day in the test shell, his go | in-progress | research-build | [[../plans/2026-11-10-stop-puppeting-the-newsroom]] |

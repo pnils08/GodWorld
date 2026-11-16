@@ -102,7 +102,7 @@ Additions, each with its sign and pitch (pitch style follows `TRIGGER_HOOKS`; `<
 | camp-opens | good | `<team>` open camp. First look at the roster, battles to watch, fresh-start energy. |
 | award | good | `<team>` player wins an award. Recognition story, the season behind it, hometown pride. |
 | community-outreach | good | `<team>` in the community. Who showed up, who it helped, the club off the field. |
-| news | neither | `<team>` news. What is being said, who is saying it, what the club has and has not confirmed. (engine.346: club news that is not a game, a moment or a milestone — a rumor, front-office talk, an offseason read. Route `hook`: the named citizens keep the row's EventType line and get no second line; no clock, role or pay change.) |
+| off-season | neither | `<team>` off-season. What is being said, who is saying it, what the club has and has not confirmed. (engine.346: club news that is not a game, a moment or a milestone — a rumor, front-office talk, an offseason read. Route `hook`: the named citizens keep the row's EventType line and get no second line; no clock, role or pay change.) |
 
 **In-season, good:**
 
@@ -273,6 +273,7 @@ All sport-neutral (the Oaks ride these pools too), they/them only.
 
 ## Changelog
 
+- 2026-11-15 (research-build) — engine.346 renamed `off-season` (his word) and LIVE PROD @182; C116 read: hook raised, no citizen line, the three named rows unchanged. No sandbox fire of the rename (bench at version cap) — owed. DEPLOY_HISTORY §PROD.
 - 2026-11-15 (research-build) — engine.346 sandbox PASS 39/39 (SANDBOX 1004 @200, stage 46). Not on PROD: the builder's word is `off-season`, not `news` — rename, re-bench, then PROD. Trail: DEPLOY_HISTORY §Current sandbox.
 - 2026-11-15 (research-build) — engine.346: `news` added (builder: no word for offseason news; a C116 rumor row entered as `retirement` retired three). Hook yes, no second citizen line, changes nobody. Word table row above.
 - 2026-11-09 (engine-sheet) — C115 live read: Acceptance 14 PASS (3 SPORTS pitches = retirement, community-outreach, big-win; Oaks W4 under the bar, no hot pitch); P1 PASS (3 vs 2/2/2). P3 FAILS: 142 signed fan lines vs 37–74 — builder's call (G-EC45).

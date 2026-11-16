@@ -80,8 +80,8 @@ Correction given to the builder the same session: the questions said a rating is
 
 | Review | Lane | Pointer | Result |
 |---|---|---|---|
-| plan + diff review of `2048ad406` | codex | [[../for-claude-review/2026-11-07-codex-engine332-review]] | HOLD → F1-F3 folded `c47769766` |
-| re-review of the fold `c47769766` (last round) | codex | [[../for-claude-review/2026-11-07-codex-engine332-rereview]] | SHIP |
+| plan + diff review of `2048ad406` | codex | [[../archive/for-claude-review/2026-11-07-codex-engine332-review]] | HOLD → F1-F3 folded `c47769766` |
+| re-review of the fold `c47769766` (last round) | codex | [[../archive/for-claude-review/2026-11-07-codex-engine332-rereview]] | SHIP |
 
 ### Agreed
 

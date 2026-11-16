@@ -68,8 +68,8 @@ What every other citizen voice does (`lib/personaProvider.js` `citizenVoiceProvi
 
 | Review | Lane | Pointer | Result |
 |---|---|---|---|
-| Diff review (`abb82f458`) | codex | [[../for-claude-review/2026-11-08-codex-pipeline100-diff-review]] | SHIP, no finding; stale test comment fixed (`5aabf0535`) |
-| Plan review (`fa644a0c5`) | codex | [[../for-claude-review/2026-11-08-codex-pipeline100-plan-review]] | HOLD, 6 findings. The builder's 11-08 correction rescoped the plan: F1 (exchange-once on the page), F2 (scored recall as the store's replacement) and F6 (shared loader modes) fall away — citizens keep no chat on the page and no store search. F3 taken (narrator preview path to scratch). F4: builder-side skills are the CLI agent's, out of scope; nothing they write reaches her once the seats stop reading. F5: Moltbook already matches the citizen load |
+| Diff review (`abb82f458`) | codex | [[../archive/for-claude-review/2026-11-08-codex-pipeline100-diff-review]] | SHIP, no finding; stale test comment fixed (`5aabf0535`) |
+| Plan review (`fa644a0c5`) | codex | [[../archive/for-claude-review/2026-11-08-codex-pipeline100-plan-review]] | HOLD, 6 findings. The builder's 11-08 correction rescoped the plan: F1 (exchange-once on the page), F2 (scored recall as the store's replacement) and F6 (shared loader modes) fall away — citizens keep no chat on the page and no store search. F3 taken (narrator preview path to scratch). F4: builder-side skills are the CLI agent's, out of scope; nothing they write reaches her once the seats stop reading. F5: Moltbook already matches the citizen load |
 
 ### Agreed
 

@@ -85,9 +85,9 @@ Modelled on the C110–C114 ripples (scratch replay, not the engine; no closure 
 |---|---|---|---|
 | Wiring card `buildContractSeeds_` | es (engine-wiring) | in-session 2026-11-08 | read-only |
 | Wiring card `Story_Seed_Deck` | es (engine-wiring) | in-session 2026-11-08 | read-only |
-| Codex plan review of `f6cd6c064` | codex | [[../for-claude-review/2026-11-08-codex-engine334-plan-review]] | HOLD → folded |
-| Codex re-review of the fold `c257efffa` | codex | [[../for-claude-review/2026-11-08-codex-engine334-plan-rereview]] | HOLD (replay `--old` unpinned; transit probe ≠ the slice's filter; one stale clause) → fixed in place, no third round |
-| Codex diff review of the deploy candidate `e15eb443f` | codex | [[../for-claude-review/2026-11-08-codex-engine334-diff-review]] | SHIP — no finding |
+| Codex plan review of `f6cd6c064` | codex | [[../archive/for-claude-review/2026-11-08-codex-engine334-plan-review]] | HOLD → folded |
+| Codex re-review of the fold `c257efffa` | codex | [[../archive/for-claude-review/2026-11-08-codex-engine334-plan-rereview]] | HOLD (replay `--old` unpinned; transit probe ≠ the slice's filter; one stale clause) → fixed in place, no third round |
+| Codex diff review of the deploy candidate `e15eb443f` | codex | [[../archive/for-claude-review/2026-11-08-codex-engine334-diff-review]] | SHIP — no finding |
 
 ### Agreed
 

@@ -67,7 +67,7 @@ pointers:
 
 | Review | Lane | Pointer | Result |
 |---|---|---|---|
-| Codex plan + diff review of `3184f9f50` | codex | [[../for-claude-review/2026-11-07-codex-engine335-review]] | SHIP-WITH-FIXES (plan fixes only) |
+| Codex plan + diff review of `3184f9f50` | codex | [[../archive/for-claude-review/2026-11-07-codex-engine335-review]] | SHIP-WITH-FIXES (plan fixes only) |
 
 ### Agreed
 

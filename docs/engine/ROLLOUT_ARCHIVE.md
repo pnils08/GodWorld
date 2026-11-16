@@ -973,6 +973,17 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) — not `done-pending-archive` sweep rows, moved by hand per rollout-rules §6 wontfix/unresolvable-stale convention.
 
+## S664 Archive Pass (2026-11-16, research-build) — post-S663 closures sweep
+
+4 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 2 pipeline.* + 2 engine.*.
+
+- **pipeline.106** [engine-sheet] — Lore writer: Fri 11-13 Osei run ok, file in quarantine and on Drive; ingest is by hand (pipeline.105). Watch closed **State at archive:** done-pending-archive. Pointer: [[../plans/2026-08-15-lore-writer]] · `output/production_log_run_cycle_c116_gaps.md` §C114–C116 watch re-reads
+- **pipeline.104** [engine-sheet] — Saturday Drive drops: 11-14 edition and C115 audio landed in their folders. Watch closed **State at archive:** done-pending-archive. Pointer: [[../reference/NotebookLM]] §Change log · `output/production_log_run_cycle_c116_gaps.md` §C114–C116 watch re-reads
+- **engine.288** [engine-sheet] — Mood gates read both seed lists: input every week since C114 (72/92/75 seeds carried). Watch closed **State at archive:** done-pending-archive. Pointer: [[../plans/2026-10-10-engine-214-mood-per-hood]] §engine.288 bench results; `output/engine_review_c113.md` §C113 re-reads · `output/production_log_run_cycle_c116_gaps.md` §C114–C116 watch re-reads
+- **engine.310** [engine-sheet] — EventAttractiveness base: EA sum 114 (C113) → 154 (C115) → 156 (C116), inside the watch band. Watch closed **State at archive:** done-pending-archive. Pointer: [[../reference/DEPLOY_HISTORY]] §PROD stage 19; `docs/research/2026-10-21-engine310-diff-gate-TASK.md`; plan `docs/research/2026-10-21-engine310-plan-TASK.md`; `output/engine-sheet/2026-10-21-e310-check.json`; `output/engine_review_c113.md` §C113 re-reads · `output/production_log_run_cycle_c116_gaps.md` §C114–C116 watch re-reads
+
+This pass: 4 rows — pipeline.106 + pipeline.104 + engine.288 + engine.310. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S663 Archive Pass (2026-11-15, research-build) — post-S662 closures sweep
 
 1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 civic.*.

@@ -1731,9 +1731,18 @@ function modelChainFor(model) {
 //     the rejection reason appended. Switching providers there would just lose
 //     the seat's voice over a fixable JSON slip.
 // Returns the model that actually answered so the record shows who spoke.
-async function callVoice(dir, model, userPrompt, maxTokens, officeMap, extraCheck) {
+// Who speaks, for the Sunday chain: a worker on the worker model opens as the weekday wake opens them — the sheet line
+// and their own memory (workerWake.identity) — and no written file is read for them. Everyone else: the folder files.
+// A failed sheet read for a worker is a failed wake, said aloud; it never falls back to the old file.
+async function voiceIdentity(dir, officeMap) {
+  const rows = officeMap ? [...(officeMap.offices || []), ...(officeMap.projects || [])] : [];
+  const w = rows.find(o => o.agentDir === dir && workerWake.hasFill(o.officeId || o.projectId));
+  if (w) return workerWake.identity(w.officeId || w.projectId, officeMap);
   const row = officeMap ? civicSeat.resolveOfficeRow(officeMap, dir) : null;
-  const persona = readPersonaDir((row && civicSeat.personaDirFor(row, ROOT)) || dir);
+  return readPersonaDir((row && civicSeat.personaDirFor(row, ROOT)) || dir);
+}
+async function callVoice(dir, model, userPrompt, maxTokens, officeMap, extraCheck) {
+  const persona = await voiceIdentity(dir, officeMap);
   const chain = modelChainFor(model);
   let prompt = userPrompt;
   let lastErr = 'no result';
@@ -2100,7 +2109,7 @@ async function batchSubmitHearing(cycle, opts) {
     if (prev && prev.status === 'submitted') { skipped.push(slug + ' (batch in flight ' + prev.batchId + ')'); continue; }
     const attempt = ((prev && prev.attempt) || 0) + 1;
     const hp = await hearingSeatPrompt(dir, cycle, officeMap, initiatives, opts);
-    const persona = (opts.personaFor || readPersonaDir)(dir);
+    const persona = opts.personaFor ? opts.personaFor(dir) : await voiceIdentity(dir, officeMap);
     const profile = BATCH_PROFILES[model];
     const body = {
       messages: [{ role: 'system', content: persona }, { role: 'user', content: hp.user }],

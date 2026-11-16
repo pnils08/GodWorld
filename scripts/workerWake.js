@@ -138,6 +138,7 @@ async function gatherMemory(popid, key, deps, opts) {
 //   levers = what this worker alone can set (a tool is offered for each).
 const FILLS = {
   'CHIEF-POLICE': {
+    key: 'crime clearance response time arrests custody patrol',
     levers: ['patrol'],
     build: async (cycle, ctx) => {
       const { sheets, readPrev, root } = defaults(ctx.deps);
@@ -295,7 +296,7 @@ function recordKit(cycle, ctx) {
   };
   return kit;
 }
-const made = (key, build, levers) => ({ levers: levers || [], build: async (cycle, ctx) => { const k = recordKit(cycle, ctx); await build(k, cycle, ctx); return { blocks: k.blocks, key }; } });
+const made = (key, build, levers) => ({ key, levers: levers || [], build: async (cycle, ctx) => { const k = recordKit(cycle, ctx); await build(k, cycle, ctx); return { blocks: k.blocks, key }; } });
 const projectFill = (id, key, more) => made(key, async (k, cycle, ctx) => {
   await k.initiative(id);
   await k.treasury('The city\'s payments on ' + id, (r) => String(r.Counterparty || '').trim() === id);
@@ -424,6 +425,19 @@ async function buildWake(opts) {
   return { office, system, user, memory, decisions };
 }
 
+// Who a worker is, alone: the sheet line and their gathered memory — the same system turn buildWake gives them, with
+// no records. For a wake that hands the worker its own work (the Sunday hearing's packet): the worker opens as the
+// same person on Sunday as on a weekday, off the sheet, never off a written file (builder 2026-11-15: "why are you
+// loading old files whe we just rewrote them").
+async function identity(officeId, officeMap, deps) {
+  const om = officeMap || {};
+  const found = (om.offices || []).concat(om.projects || []).find((x) => (x.officeId || x.projectId) === officeId);
+  if (!found || !isBuilt(officeId)) throw new Error('no worker fill for ' + officeId);
+  const who = await whoTheyAre(found.popid, deps);
+  const memory = await gatherMemory(found.popid, FILLS[officeId].key || '', deps);
+  return [who.line].concat(memory.entries.length ? ['', 'From your own memory:', ...memory.entries.map((m) => '- (' + m.when + ') ' + m.text)] : []).join('\n');
+}
+
 // ---- part 3: the tools. Described to the worker; nothing says when to use one. ----
 // The reporters' twelve sheets plus the three no reporter reads: the chaos-car sheet, the city's money, the case ledger.
 const SHEETS = ['Initiative_Tracker', 'Neighborhood_Map', 'Oakland_Sports_Feed', 'Civic_Office_Ledger', 'Faith_Organizations', 'Faith_Ledger', 'Business_Ledger',
@@ -498,5 +512,5 @@ function toolExecutor(ctx) {
   };
 }
 
-module.exports = { FILLS, hasFill, isBuilt, LIVE, slugFor, buildWake, toolsFor, toolExecutor, TOOLS, SHEETS,
+module.exports = { FILLS, hasFill, isBuilt, LIVE, slugFor, identity, buildWake, toolsFor, toolExecutor, TOOLS, SHEETS,
   highLow, patrolInForce, askAndWhy, loadMoves, pastDecisions, gatherMemory, whoTheyAre, sheetRead, memoryRecall, table };

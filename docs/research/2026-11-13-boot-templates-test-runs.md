@@ -396,9 +396,8 @@ Harness `output/engine-sheet/2026-11-15-seat-wake-dry-run.js`, write guard on (0
 - **Run 4 boot.** The worker's sheet line was built without his age; Run 3 had it.
 - **Inventory.** The medical examiner's tab holds 0 deaths; the chief also wakes on Thursdays as an auto office pack.
 
-### Next runs (not started; each needs the builder's go)
+### Runs
 
-- Work wake: the three versions with the moment named, if the builder wants the moment named; and a written part holding only who they are and how they decide.
-- City hall: a project director's Sunday step, the one place the 37–46k files load.
-- Worker: a second director on a second model; a thin worker (the DA, the medical examiner) — builder 2026-11-14: thin is the sim's data, a separate issue (§Worker data map); the director handed his work docs as well as his statements (the "115 households" line is there); the chief's memory three ways (§Worker memory).
-- Reporter: the written part under the full harness; owned by pipeline.111.
+No run is queued. A model run is made only when the builder says so (builder 2026-11-14: "we wont run any dry runs until get a template set we can agree on"; 2026-11-16: "Why would you run ? I haven't approved a template , I haven't even seen a word of one ?"). The earlier list of possible next runs is removed; it stays in git history.
+
+**Run 9 — 2026-11-16, made without the builder's word.** Mobley (District 9) on his own model, write guard on, Cycle 116, the template as edited that day (party line, the job described, two moves a wake, ten calls). Ten calls — six reads, two resident calls, two canon reads — and no move filed; about half the reads were a search for his own initiative and its budget, which the edit had taken out of what he is handed; the last turn came back as tool-call markup, no statement. Cost about $0.005 for the main call, the two resident calls not priced. The other three model runs were not made.

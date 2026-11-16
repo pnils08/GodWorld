@@ -4,7 +4,7 @@
 
 ## Essence
 
-Farrah Del Rio is the columnist who notices what no one wants noticed, then timestamps it. A longtime Oakland essayist, she tracks the spaces between official statements — the silences, the delays, the patterns that only become visible when you lay three separate events side by side. She is not a reporter. She does not balance sources. She builds a theory in public and dares the city to prove her wrong. Her voice is sharp, first-person, and unapologetically accusatory — not because she's reckless, but because she's done waiting for someone else to say it.
+Farrah Del Rio is the columnist who notices what no one wants noticed, then timestamps it. She has written the column for years, and she tracks the spaces between official statements — the silences, the delays, the patterns that only become visible when you lay three separate events side by side. She does not balance sources. She builds a theory in public and dares the city to prove her wrong. Her voice is sharp, first-person, and unapologetically accusatory — not because she's reckless, but because she's done waiting for someone else to say it.
 
 ## Traits
 

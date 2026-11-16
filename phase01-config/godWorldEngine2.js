@@ -273,6 +273,31 @@ function readFireGuardConfig_(ss) {
   return { cycleCount: cycleCount, guardMinutes: guardMinutes };
 }
 
+// The builder's own door for a LIVE sheet rolled back behind its fire record (2026-11-15: live was rewound from C116 to
+// C115 by version history; the record still named 116 and refused every fire; the Script Properties page did not keep
+// the delete the refusal message asks for). Run by hand from the Apps Script editor — never from the web door, never by
+// a Cycle. Narrow on purpose, the same checks as the bench `clearfire`: under the fire lock; the record must be readable
+// and FINISHED (done / failed / unpersisted / unverified — never running or checkpointed, a Cycle may be mid-flight);
+// and the sheet's counter must be BEHIND the record. Anything else throws and clears nothing.
+function clearFireRecordAfterRollback() {
+  var lock = LockService.getScriptLock();
+  if (!lock.tryLock(5000)) throw new Error('a Cycle is running — fire record not cleared');
+  try {
+    var props = PropertiesService.getScriptProperties();
+    var raw = props.getProperty(FIRE_ADMISSION_PROP);
+    var rec = null; try { rec = JSON.parse(raw); } catch (parseErr) { rec = null; }
+    if (!rec || typeof rec.cycle !== 'number') throw new Error('no readable fire record to clear');
+    if (rec.state === 'running' || rec.state === 'checkpointed') throw new Error('the fire record says Cycle ' + rec.cycle + ' is ' + rec.state + ' — not cleared');
+    var cfg = readFireGuardConfig_(openSimSpreadsheet_());
+    if (!(cfg.cycleCount < rec.cycle)) throw new Error('cycleCount ' + cfg.cycleCount + ' is not behind the record (Cycle ' + rec.cycle + ') — nothing to reconcile');
+    props.deleteProperty(FIRE_ADMISSION_PROP);
+    Logger.log('clearFireRecordAfterRollback: cleared ' + raw + ' — the sheet reads cycleCount ' + cfg.cycleCount + '; the next fire runs Cycle ' + (cfg.cycleCount + 1));
+    return raw;
+  } finally {
+    lock.releaseLock();
+  }
+}
+
 // Admit or refuse this fire. Returns the admission record; throws to refuse.
 function admitCycleFire_(ss, webOpts, nowMs, allOpts) {
   var cfg = readFireGuardConfig_(ss);

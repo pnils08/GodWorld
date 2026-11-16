@@ -256,6 +256,7 @@ pointers:
 
 ## Changelog
 
+- 2026-11-16 (research-build) — Tasks 10/11 (engine.319/320) read C114–C116: no citizen minted through Advancement_Intake1 in the three fires (POPIDs 1225–1249 are births, migration arrivals, two owner-door promotions and three A's rows added outside the intake), so neither the clock placement nor the off-map refusal has run live; both wait on the first case. The three A's rows (POP-01238–01240, OriginGame `MLB The Show`) carry no employer or neighborhood — gap log C116 G-EC45, not this path.
 - 2026-10-01 (research-build S519) — Task 9 added: the mint's four-bucket employer pick misplaces jobs (engine.278, engine-sheet); 65 misplaced citizens judged by hand, 60 restored, 5 Tier 1–2 held — `output/employer-alignment-audit.md`.
 - 2026-07-27 — Initial draft (S335). Split by model fit per Mike: Opus 5 takes volume+judgment, Fable 5 takes the engine internals.
 - 2026-07-27 (S336, engine-sheet) — Tasks 4 + 5 BUILT + bench-proven (34 assertions green); both open questions resolved. **Live deploy of the Task 4 reconciliation is gated on Tasks 2–3** — detail in the task statuses.

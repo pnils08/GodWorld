@@ -605,6 +605,7 @@ engine.210 LIVE on PROD @97; engine.202 LIVE on PROD @98 with the `WeekRecord` c
 
 ## Changelog
 
+- 2026-11-16 (research-build) — Task 6 / engine.206 read C114–C116 from the execution logs' `sportsStreak` lines: Oaks W2 (C114), W4 (C115), L1 (C116), each `bar 5 → no headline`; A's off-season, no streak. The bar is armed and has not been reached; the row waits on the first run of 5.
 - 2026-10-28 (engine-sheet) — engine.202 status marked folded into engine.204 (ROLLOUT stale check, `output/engine-sheet/2026-10-28-rollout-stale-check.json`); one line added under "### engine.202 — status".
 
 - 2026-10-11 overnight (engine-sheet) — engine.194 codex cut landed `ae9278aa`; stage 3 (stage 2 + 194) benched 1004 @22 C111–C112 clean; PROD = builder's pick of stage 2 / stage 3.

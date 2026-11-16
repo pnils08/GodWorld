@@ -249,3 +249,6 @@ Close 19:26 CST: sanity-read FAIL-SCOPED INIT-006 (complete → construction-act
 
 ### G-EC44 — civic.48 read, C116 hearing: no office files a hood under the wrong district [judgment] [civic] [LOW] (research-build, 2026-11-15)
 Scan of the C116 office / hearing / decision files: 36 hood-district labels, 35 match `lib/districtMap.js`; the one flag is two sentences read as one ("…and Fruitvale data. The D5 audit…"). The Mayor's statement now says "the D3 Fruitvale briefing" (C115 said "D3 East Oakland"). Row closed.
+
+### G-EC45 — Three A's rows on the live ledger with no employer and no neighborhood [judgment] [sports] [LOW] (research-build, 2026-11-16)
+Live Simulation_Ledger read 2026-11-16: POP-01238 Robert Mooney (Farm Director, Oakland A's), POP-01239 Giancarlo Hernandez (Third Baseman, Oakland A's), POP-01240 Henry Calzado (Catcher, Oakland A's) — ClockMode GAME, OriginGame `MLB The Show`, EmployerBizId blank, Neighborhood blank, BirthYear blank; first LifeHistory lines Y3C12. None is on Advancement_Intake1 or Intake, so the engine.319 mint (GAME title → BIZ-00005) never saw them; the sports layer that keys on OriginGame is the roster script. Whether a player row should carry the team and a home, and which path added these three, is not read here. The C113 Oaks rookies (POP-01223/01224, intake-minted) do carry BIZ-00074 and a hood.

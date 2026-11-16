@@ -1,8 +1,8 @@
 {
-  "generated": "2026-11-08",
+  "generated": "2026-11-16",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 181,
-  "functionsMapped": 1785,
+  "functionsMapped": 1784,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -1039,6 +1039,7 @@
         "phase01-config/godWorldEngine2.js::runCyclePhases_",
         "phase01-config/godWorldEngine2.js::runWorldCycleLocked_",
         "phase01-config/godWorldEngine2.js::writeDigest_",
+        "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
         "phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_",
         "phase09-digest/finalizeCycleState.js::snapshotEveningForCarryForward_",
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_"
@@ -1523,6 +1524,7 @@
       ],
       "readers": [
         "phase01-config/godWorldEngine2.js::writeDigest_",
+        "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
         "phase09-digest/finalizeCycleState.js::snapshotEveningForCarryForward_",
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_"
       ]
@@ -2901,6 +2903,7 @@
       ],
       "readers": [
         "phase04-events/buildCityEvents.js::buildCityEvents_",
+        "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
         "phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_",
         "phase08-v3-chicago/v3preLoader.js::v3PreloadContext_",
         "phase09-digest/finalizeCycleState.js::snapshotEveningForCarryForward_",
@@ -4146,6 +4149,17 @@
       ],
       "readers": []
     },
+    "famousSightings": {
+      "writers": [
+        "phase07-evening-media/buildEveningFamous.js::buildEveningFamous_",
+        "phase08-v3-chicago/v3preLoader.js::v3PreloadContext_"
+      ],
+      "readers": [
+        "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
+        "phase08-v3-chicago/v3preLoader.js::v3PreloadContext_",
+        "phase09-digest/finalizeCycleState.js::snapshotEveningForCarryForward_"
+      ]
+    },
     "manualStoryInputs": {
       "writers": [],
       "readers": [
@@ -4167,16 +4181,6 @@
         "phase07-evening-media/applyStorySeeds.js::renderStorySeedsForUI_"
       ],
       "readers": []
-    },
-    "famousSightings": {
-      "writers": [
-        "phase07-evening-media/buildEveningFamous.js::buildEveningFamous_",
-        "phase08-v3-chicago/v3preLoader.js::v3PreloadContext_"
-      ],
-      "readers": [
-        "phase08-v3-chicago/v3preLoader.js::v3PreloadContext_",
-        "phase09-digest/finalizeCycleState.js::snapshotEveningForCarryForward_"
-      ]
     },
     "famousSightingsContext": {
       "writers": [

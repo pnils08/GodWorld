@@ -1224,6 +1224,16 @@ function applyCityDynamics_(ctx) {
   }
 
   var seedSignals = buildSeedSignals_(storySeeds, profiles);
+  // engine.289: the CULTURE / NIGHTLIFE bars write nothing of their own, so their reach is logged — each hood
+  // at or past 3 with its weight (the builder's bar call reads these lines). Read only, no behavior.
+  var barHits = [];
+  for (var bk in seedSignals.byDomainHood) {
+    if (!seedSignals.byDomainHood.hasOwnProperty(bk)) continue;
+    var bd = seedSignals.byDomainHood[bk] || {};
+    if (safeNum_(bd.CULTURE, 0) >= 3) barHits.push(bk + ' CULTURE ' + safeNum_(bd.CULTURE, 0).toFixed(2));
+    if (safeNum_(bd.NIGHTLIFE, 0) >= 3) barHits.push(bk + ' NIGHTLIFE ' + safeNum_(bd.NIGHTLIFE, 0).toFixed(2));
+  }
+  Logger.log('applyCityDynamics_ engine.289: evening bars (3 / 6) reached — ' + (barHits.length ? barHits.join(', ') : 'none'));
   // engine.214 Task 18b (builder 2026-10-10: "a city wide seed should move all the hoods, how much
   // would depend on the weight of the event"). citywideWeighted is the hood-less seeds' summed
   // seedWeight_ (priority × type × calendar). Its comparator is the term's OWN six-Cycle middle, not

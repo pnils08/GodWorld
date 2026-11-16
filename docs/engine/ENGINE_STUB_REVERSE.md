@@ -1,6 +1,6 @@
 # Engine Stub Reverse Index
 
-**Generated:** 2026-11-08 by `scripts/stubEngine.js` (mechanical — no LLM).
+**Generated:** 2026-11-16 by `scripts/stubEngine.js` (mechanical — no LLM).
 
 **Purpose:** Cheap lookup — given an `S.*` field or sheet name, find every function that reads or writes it. Companion to `ENGINE_STUB_MAP.md` (forward: function → fields).
 
@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 181 · **Functions mapped:** 1785 · **S.* fields:** 381 · **Sheets:** 61
+**Files scanned:** 181 · **Functions mapped:** 1784 · **S.* fields:** 381 · **Sheets:** 61
 
 ## S.* / ctx.summary reverse index
 
@@ -76,7 +76,7 @@
 | `S.cityDynamics` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase05-citizens/civicInitiativeEngine.js::applyActiveInitiativeRipples_`, `phase05-citizens/civicInitiativeEngine.js::applyInitiativeConsequences_`, `phase05-citizens/civicInitiativeEngine.js::applyNeighborhoodRipple_` | `phase01-config/godWorldEngine2.js::updateWorldPopulation_`, `phase01-config/godWorldEngine2.js::writeDigest_`, `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/applyCityDynamics.js::getNeighborhoodDynamics_`, `phase02-world-state/calendarStorySeeds.js::applySeasonalStorySeeds_`, `phase03-population/applyDemographicDrift.js::applyDemographicDrift_`, …(+54 more) | 4 | 60 |
 | `S.cityDynamicsCapacity` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_` | `phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_` | 1 | 1 |
 | `S.cityDynamicsLag` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_` | 1 | 1 |
-| `S.cityEventDetails` | `phase04-events/buildCityEvents.js::buildCityEvents_`, `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_` | `phase04-events/buildCityEvents.js::buildCityEvents_`, `phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_`, `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_`, `phase09-digest/finalizeCycleState.js::snapshotEveningForCarryForward_`, `phase10-persistence/buildCyclePacket.js::buildCyclePacket_` | 2 | 5 |
+| `S.cityEventDetails` | `phase04-events/buildCityEvents.js::buildCityEvents_`, `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_` | `phase04-events/buildCityEvents.js::buildCityEvents_`, `phase07-evening-media/applyStorySeeds.js::applyStorySeeds_`, `phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_`, `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_`, `phase09-digest/finalizeCycleState.js::snapshotEveningForCarryForward_`, `phase10-persistence/buildCyclePacket.js::buildCyclePacket_` | 2 | 6 |
 | `S.cityEvents` | `phase04-events/buildCityEvents.js::buildCityEvents_` | `phase01-config/godWorldEngine2.js::runCyclePhases_`, `phase01-config/godWorldEngine2.js::runWorldCycleLocked_`, `phase01-config/godWorldEngine2.js::writeDigest_`, `phase04-events/buildCityEvents.js::buildCityEvents_`, `phase07-evening-media/applyStorySeeds.js::applyStorySeeds_`, `phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_`, …(+1 more) | 1 | 7 |
 | `S.cityEventsCalendarContext` | `phase04-events/buildCityEvents.js::buildCityEvents_` | _(none)_ | 1 | 0 |
 | `S.civicCampaigns` | `phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_` | `phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_` | 1 | 1 |
@@ -163,7 +163,7 @@
 | `S.engine299` | `phase04-events/generateGameModeMicroEvents.js::generateGameModeMicroEvents_`, `phase04-events/generateGenericCitizenMicroEvent.js::generateGenericCitizenMicroEvents_`, `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_`, `phase05-citizens/generateCivicModeEvents.js::generateCivicModeEvents_`, `phase05-citizens/generateMediaModeEvents.js::generateMediaModeEvents_`, `phase05-citizens/runNeighborhoodEngine.js::runNeighborhoodEngine_` | `phase04-events/generateGameModeMicroEvents.js::generateGameModeMicroEvents_`, `phase04-events/generateGenericCitizenMicroEvent.js::generateGenericCitizenMicroEvents_`, `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_`, `phase05-citizens/generateCivicModeEvents.js::generateCivicModeEvents_`, `phase05-citizens/generateMediaModeEvents.js::generateMediaModeEvents_`, `phase05-citizens/runNeighborhoodEngine.js::runNeighborhoodEngine_` | 6 | 6 |
 | `S.engineErrorCount` | `phase01-config/godWorldEngine2.js::logEngineError_` | `phase01-config/godWorldEngine2.js::logEngineError_`, `phase01-config/godWorldEngine2.js::runWorldCycleLocked_`, `phase10-persistence/cycleCheckpoint.js::resumeCore_` | 1 | 3 |
 | `S.engineEvents` | `phase06-analysis/filterNoiseEvents.js::filterNoiseEvents_` | `phase05-citizens/applyNamedCitizenSpotlight.js::applyNamedCitizenSpotlights_`, `phase06-analysis/filterNoiseEvents.js::filterNoiseEvents_`, `phase06-analysis/prioritizeEvents.js::prioritizeEvents_` | 1 | 3 |
-| `S.eveningFood` | `phase07-evening-media/buildEveningFood.js::buildEveningFood_` | `phase01-config/godWorldEngine2.js::writeDigest_`, `phase09-digest/finalizeCycleState.js::snapshotEveningForCarryForward_`, `phase10-persistence/buildCyclePacket.js::buildCyclePacket_` | 1 | 3 |
+| `S.eveningFood` | `phase07-evening-media/buildEveningFood.js::buildEveningFood_` | `phase01-config/godWorldEngine2.js::writeDigest_`, `phase07-evening-media/applyStorySeeds.js::applyStorySeeds_`, `phase09-digest/finalizeCycleState.js::snapshotEveningForCarryForward_`, `phase10-persistence/buildCyclePacket.js::buildCyclePacket_` | 1 | 4 |
 | `S.eveningMedia` | `phase07-evening-media/buildEveningMedia.js::buildEveningMedia_` | `phase01-config/godWorldEngine2.js::writeDigest_`, `phase07-evening-media/applyStorySeeds.js::applyStorySeeds_`, `phase07-evening-media/mediaFeedbackEngine.js::analyzeEntertainmentSignals_` | 1 | 3 |
 | `S.eveningSafety` | `phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_` | `phase09-digest/finalizeCycleState.js::snapshotEveningForCarryForward_`, `phase10-persistence/buildCyclePacket.js::buildCyclePacket_` | 1 | 2 |
 | `S.eveningSnapshot` | `phase09-digest/finalizeCycleState.js::snapshotEveningForCarryForward_` | `phase09-digest/finalizeCycleState.js::saveEveningSnapshot_` | 1 | 1 |
@@ -181,7 +181,7 @@
 | `S.faithExposures` | `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_` | `phase05-citizens/bondEngine.js::processFaithJoins_`, `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_` | 1 | 2 |
 | `S.faithJoins` | `phase05-citizens/bondEngine.js::processFaithJoins_` | _(none)_ | 1 | 0 |
 | `S.famousPeople` | `phase07-evening-media/buildEveningFamous.js::buildEveningFamous_` | `phase01-config/godWorldEngine2.js::writeDigest_`, `phase07-evening-media/applyStorySeeds.js::applyStorySeeds_`, `phase07-evening-media/buildEveningFamous.js::buildEveningFamous_`, `phase07-evening-media/mediaFeedbackEngine.js::analyzeCelebrityCoverage_` | 1 | 4 |
-| `S.famousSightings` | `phase07-evening-media/buildEveningFamous.js::buildEveningFamous_`, `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_` | `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_`, `phase09-digest/finalizeCycleState.js::snapshotEveningForCarryForward_` | 2 | 2 |
+| `S.famousSightings` | `phase07-evening-media/buildEveningFamous.js::buildEveningFamous_`, `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_` | `phase07-evening-media/applyStorySeeds.js::applyStorySeeds_`, `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_`, `phase09-digest/finalizeCycleState.js::snapshotEveningForCarryForward_` | 2 | 3 |
 | `S.famousSightingsContext` | `phase07-evening-media/buildEveningFamous.js::buildEveningFamous_` | _(none)_ | 1 | 0 |
 | `S.folkMemory` | `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_` | _(none)_ | 1 | 0 |
 | `S.franchiseWeight` | `phase01-config/loadPreviousEvening.js::seedCarriedFranchiseWeight_` | `phase01-config/loadPreviousEvening.js::seedCarriedFranchiseWeight_`, `phase02-world-state/applySportsSeason.js::applySportsFeedTriggers_`, `phase02-world-state/applySportsSeason.js::applySportsSeason_`, `phase09-digest/finalizeCycleState.js::savePreviousCycleState_` | 1 | 4 |
@@ -280,7 +280,7 @@
 | `S.newBonds` | `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_` | `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_`, `phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_` | 1 | 2 |
 | `S.newCitizens` | `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_` | `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_` | 1 | 1 |
 | `S.newGenericCitizens` | `phase05-citizens/generateGenericCitizens.js::generateGenericCitizens_` | _(none)_ | 1 | 0 |
-| `S.nightlife` | `phase07-evening-media/buildNightLife.js::buildNightlife_` | `phase01-config/godWorldEngine2.js::runCyclePhases_`, `phase01-config/godWorldEngine2.js::runWorldCycleLocked_`, `phase01-config/godWorldEngine2.js::writeDigest_`, `phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_`, `phase09-digest/finalizeCycleState.js::snapshotEveningForCarryForward_`, `phase10-persistence/buildCyclePacket.js::buildCyclePacket_` | 1 | 6 |
+| `S.nightlife` | `phase07-evening-media/buildNightLife.js::buildNightlife_` | `phase01-config/godWorldEngine2.js::runCyclePhases_`, `phase01-config/godWorldEngine2.js::runWorldCycleLocked_`, `phase01-config/godWorldEngine2.js::writeDigest_`, `phase07-evening-media/applyStorySeeds.js::applyStorySeeds_`, `phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_`, `phase09-digest/finalizeCycleState.js::snapshotEveningForCarryForward_`, …(+1 more) | 1 | 7 |
 | `S.nightlifeVolume` | `phase07-evening-media/buildNightLife.js::buildNightlife_`, `phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_` | `phase01-config/godWorldEngine2.js::runCyclePhases_`, `phase01-config/godWorldEngine2.js::runWorldCycleLocked_`, `phase03-population/deriveDemographicDrift.js::deriveDemographicDrift_`, `phase04-events/worldEventsEngine.js::worldEventsEngine_`, `phase07-evening-media/buildEveningFood.js::buildEveningFood_`, `phase07-evening-media/sportsStreaming.js::buildEveningSportsAndStreaming_`, …(+3 more) | 2 | 9 |
 | `S.nightShiftLoad` | `phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_` | _(none)_ | 1 | 0 |
 | `S.noiseFilterStats` | `phase06-analysis/filterNoiseEvents.js::filterNoiseEvents_` | _(none)_ | 1 | 0 |

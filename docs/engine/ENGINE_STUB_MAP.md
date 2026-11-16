@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-11-08 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-11-16 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -197,6 +197,8 @@
 
 - **readFireGuardConfig_(ss)**
   Sheets: World_Config
+
+- **clearFireRecordAfterRollback()**
 
 - **admitCycleFire_(ss, webOpts, nowMs, allOpts)**
 
@@ -3060,7 +3062,7 @@
 
 ### applyStorySeeds.js
 - **applyStorySeeds_(ctx)**
-  Reads: S.canonHoods, S.chaosCarsEvents, S.cityDynamics, S.cityEvents, S.civicLoad, S.crimeMetrics, S.cycleId, S.cycleWeight, S.cycleWeightReason, S.demographicDrift, S.domainPresence, S.editionCoverageTriggers, S.eveningMedia, S.eventArcs, S.famousPeople, S.generationalEvents, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.manualStoryInputs, S.migrationDrift, S.namedSpotlights, S.neighborhoodDemographics, S.neighborhoodDynamics, S.neighborhoodEconomies, S.neighborhoodMigration, S.neighborhoodPulse, S.patternFlag, S.season, S.seasonalStorySeeds, S.shockFlag, S.sportsSeason, S.sportsZones, S.storySeeds, S.textureTriggers, S.tier1ChaosEvents, S.weather, S.worldEvents, S.worldPopulation
+  Reads: S.canonHoods, S.chaosCarsEvents, S.cityDynamics, S.cityEventDetails, S.cityEvents, S.civicLoad, S.crimeMetrics, S.cycleId, S.cycleWeight, S.cycleWeightReason, S.demographicDrift, S.domainPresence, S.editionCoverageTriggers, S.eveningFood, S.eveningMedia, S.eventArcs, S.famousPeople, S.famousSightings, S.generationalEvents, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.manualStoryInputs, S.migrationDrift, S.namedSpotlights, S.neighborhoodDemographics, S.neighborhoodDynamics, S.neighborhoodEconomies, S.neighborhoodMigration, S.neighborhoodPulse, S.nightlife, S.patternFlag, S.season, S.seasonalStorySeeds, S.shockFlag, S.sportsSeason, S.sportsZones, S.storySeeds, S.textureTriggers, S.tier1ChaosEvents, S.weather, S.worldEvents, S.worldPopulation
   Writes: S.storySeeds
   Config: ctx.config.cycleCount, ctx.config.manualStoryInputs
   Sheets: Edition_Coverage_Ratings
@@ -4114,10 +4116,6 @@
 
 - **deriveNetWorth_(seed, age, income, careerStage)**
 
-- **deriveMaritalStatus_(seed, age)**
-
-- **deriveNumChildren_(seed, age, maritalStatus)**
-
 - **lookupNeighborhood_(provided, seed, ledgerFreq)**
 
 - **deriveCitizenProfile_(seed, age, neighborhood, ledgerFreq, options)**
@@ -4915,4 +4913,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 181
-**Functions mapped:** 1785
+**Functions mapped:** 1784

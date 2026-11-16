@@ -25,6 +25,7 @@ pointers:
 - The gates: `applyCityDynamics.js:1198-1220` sums carried seed weight per hood per domain; CULTURE ≥ 3 → culturalActivity ×1.03, ≥ 6 → ×1.05 and publicSpaces ×1.03; NIGHTLIFE ≥ 3 → nightlife ×1.03, ≥ 6 → ×1.05 and traffic ×1.03. A seed with no hood goes to the citywide term, never a hood.
 - Input C115–C117 (carried blobs, live `Carry_Forward_Store`): every CULTURE seed had `n: ''`; one hood reached 3 once (Uptown, at C115), none 6. NIGHTLIFE: one seed a week, no hood.
 - Cause: `applyStorySeeds.js` wrote city-event and famous-sighting seeds with the literal `''`, though `S.cityEventDetails` and `S.famousSightings` (both Phase 7, earlier) carry the hood. The night's spots (`S.nightlife.spotDetails`) and the dinner crowd (`S.eveningFood.restaurantDetails`), each placed at a hood, made no seed at all; the one NIGHTLIFE seed fires only when the city's nightlife is ≥ 1.3 (it ran 0.99–1.03).
+- The gate credits a hood only when its name is a key of `profiles` — the 22 canon hoods (`getCanonNeighborhoods_`, `applyCityDynamics.js:856-862`). Business_Ledger: 269 of 283 rows carry a canon hood; the other 14 (10 `City-wide`, Brooklyn Basin, Old Oakland, Coliseum, Telegraph corridor) fall to the citywide term, as before.
 - Not changed: the bars (3 / 6). They are read again once hooded input has run (Acceptance 2).
 
 ## Tasks
@@ -34,13 +35,14 @@ pointers:
 | 1 | `applyStorySeeds.js`: city-event seeds take their hood from `S.cityEventDetails`; famous sightings one CULTURE seed per hood (a hoodless sighting stays on the citywide line); one NIGHTLIFE seed per night spot (`nightlife-spot`) and per restaurant (`dining-spot`) at its hood; all priority 2 | rb | done (this commit) |
 | 2 | `v3NeighborhoodWriter.js` `eventAttractBase_`: skip `famous-sighting`, `nightlife-spot`, `dining-spot` so EventAttractiveness is unchanged (a name with "art" in it would otherwise count) | rb | done (this commit) |
 | 3 | `scripts/eveningSeedHoods.test.js`: seeds on their hood, EA unchanged (fails on the old writer: 0 vs 1), carry keeps hood and domain | rb | done (this commit), 11/11 |
+| 6 | `applyCityDynamics.js`: one log line per fire naming each hood at or past 3 on CULTURE or NIGHTLIFE with its weight; the gates had no record of their own (read only, no behavior) | rb | done (fix-up commit); cityDynamicsCarry 9, hoodBlindTables 22, hoodEconomyCarry 20, hoodEconomyRelative 29, perHoodDynamics 92 |
 | 4 | Sandbox fire on the exact candidate: read the C+1 carry blob for hooded CULTURE / NIGHTLIFE seeds and the C+2 gate effect; EA sum unchanged by these seeds | rb | blocked: SANDBOX 1004 at the 200-version cap (builder's click to clear versions) |
 | 5 | PROD push, DEPLOY_HISTORY stage | rb | not started |
 
 ## Acceptance
 
 1. At the first live fire after PROD, the carried story-seed blob holds CULTURE seeds with a hood for each staged city event and each hooded sighting, and NIGHTLIFE seeds for each night spot and restaurant — proven by a `Carry_Forward_Store` read.
-2. Over the next three fires, record per week how many hoods reach CULTURE 3 / 6 and NIGHTLIFE 3 / 6 (the measurement the builder's bar call reads) — proven by the carried blobs.
+2. Over the next three fires, record per week which hoods reach CULTURE and NIGHTLIFE 3 / 6 at the gate's own weight (priority × type × calendar) — proven by the `applyCityDynamics_ engine.289: evening bars (3 / 6) reached` line in each execution log (Task 6). That count is what the builder's bar call reads.
 
 ## Side effects read (wiring card 2026-11-16, engine-wiring agent)
 
@@ -71,3 +73,4 @@ pointers:
 ## Changelog
 
 - 2026-11-16 (research-build) — Plan written; Tasks 1–3 built and unit-proven (11/11; illnessEnvelope 34, activityObservationsCarry 61, perHoodDynamics 92 unchanged). Sandbox blocked on the version cap.
+- 2026-11-16 (research-build) — Task 6: the bars' reach is logged per fire (Acceptance 2 reads it). STUB_MAP regenerated. Bench order once the versions are cleared: stage 48 first (live, unbenched), this job on top.

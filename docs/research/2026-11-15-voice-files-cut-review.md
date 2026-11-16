@@ -4,7 +4,7 @@ created: 2026-11-15
 type: research
 tags: [newsroom, reporters, voice-files, review]
 sources:
-  - output/antigravity/2026-11-15-review-voice-files-cut.md — agy's review (HOLD; brief docs/for-claude-review/2026-11-15-es-brief-agy-voice-files-cut.md)
+  - output/antigravity/2026-11-15-review-voice-files-cut.md — agy's review (HOLD; brief docs/archive/for-claude-review/2026-11-15-es-brief-agy-voice-files-cut.md)
   - docs/media/voices/*.md (30 files), scripts/reporterIdentity.js, output/simulation_ledger_snapshot.jsonl
 pointers:
   - "[[../reference/AGENT_BOOT_TEMPLATES]] §4 and Changelog 2026-11-15 — the template page and the dated changes"

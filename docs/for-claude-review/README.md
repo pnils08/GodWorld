@@ -47,3 +47,5 @@ mechanism — a file here is a message to Claude; a file anywhere else is not.
    inbox = no guest work is waiting on Claude.**
 
 `README.md` is the only permanent file here. The boot check ignores it.
+
+- 2026-11-16 (engine-sheet) — builder: every review still in the inbox had been reviewed ("I can tell you all of them have been reviewed"). The 13 a plan reconciles moved by `archiveFoldedReviews.js`; the other 29 moved on his word, which stands in for the plan table the script requires. All are in `docs/archive/for-claude-review/`; links repointed.

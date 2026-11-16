@@ -7,7 +7,7 @@ tags: [media, infrastructure, review]
 sources:
   - docs/plans/2026-11-09-daily-news-articles-as-sources.md
   - docs/plans/2026-11-10-cron-feedback-to-builder.md
-  - docs/for-claude-review/2026-11-09-codex-pipeline108-diff-review.md
+  - docs/archive/for-claude-review/2026-11-09-codex-pipeline108-diff-review.md
   - scripts/notebooklmDailyNews.js
   - scripts/notebooklmCanonSearch.js
   - scripts/civisJournal.js

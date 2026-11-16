@@ -6,7 +6,7 @@ type: reference
 tags: [media, infrastructure, active]
 sources:
   - 1a294729d
-  - docs/for-claude-review/2026-11-11-codex-recall-close-diff-review.md
+  - docs/archive/for-claude-review/2026-11-11-codex-recall-close-diff-review.md
   - docs/for-claude-review/2026-11-11-es-brief-codex-recall-close.md
 pointers:
   - "[[for-claude-review/2026-11-11-codex-recall-close-diff-review]]"

@@ -22,4 +22,4 @@ Verdict SHIP / SHIP-WITH-FIXES / HOLD, `file:line`-grounded. Check specifically:
 4. Whether `docs/engine/ENGINE_STUB_MAP.md` / `SIMULATION_LEDGER_COL_MAP.json` still name the deleted functions (regeneration is owed; say what is stale).
 5. Anything that weakens a test assertion instead of removing a dead one.
 
-Reply file: `docs/for-claude-review/2026-11-08-codex-engine339-diff-review.md`. Mark read versus inferred.
+Reply file: `docs/archive/for-claude-review/2026-11-08-codex-engine339-diff-review.md`. Mark read versus inferred.

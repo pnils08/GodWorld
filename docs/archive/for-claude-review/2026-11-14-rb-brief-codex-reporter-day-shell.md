@@ -10,8 +10,8 @@ Row: pipeline.111 — `docs/plans/2026-11-10-stop-puppeting-the-newsroom.md` §T
 ## Deliver — three files, nothing else
 
 1. **New** `scripts/testReporterDay.sh` — the runner. `testReporterWrite.sh` stays as it is.
-2. `docs/for-claude-review/2026-11-14-codex-reporter-day-shell.patch` — a unified diff against `scripts/cron-desk-run.js` (and `scripts/cron-desk-writer.js` / `scripts/cron-rhea-gate.js` only where a write site there needs it). **Not applied.**
-3. `docs/for-claude-review/2026-11-14-codex-reporter-day-shell.md` — the report (§Report).
+2. `docs/archive/for-claude-review/2026-11-14-codex-reporter-day-shell.patch` — a unified diff against `scripts/cron-desk-run.js` (and `scripts/cron-desk-writer.js` / `scripts/cron-rhea-gate.js` only where a write site there needs it). **Not applied.**
+3. `docs/archive/for-claude-review/2026-11-14-codex-reporter-day-shell.md` — the report (§Report).
 
 **Do not edit `cron-desk-run.js`, `cron-desk-writer.js` or `cron-rhea-gate.js` in place.** The crons run from this working tree: `cron-desk-run.js` fires Sat 07:15, 08:15, 09:15, 10:15, 11:15 and Sun 06:15, 09:15, 12:15. Build the patch from a copy; a patched copy may sit at `scripts/cron-desk-run.codex-day.js` while you test (same `__dirname`, so its requires resolve) and is deleted before you finish.
 

@@ -20,6 +20,6 @@ Please look hardest at:
 4. Nia seats with recall added.
 5. The INTAKE strip regex eating real prose.
 
-Write findings to `docs/for-claude-review/2026-11-11-codex-recall-close-diff-review.md`. Verdict SHIP / HOLD, findings with file:line.
+Write findings to `docs/archive/for-claude-review/2026-11-11-codex-recall-close-diff-review.md`. Verdict SHIP / HOLD, findings with file:line.
 
 Added after the shell runs (in the same commit): an OpenRouter writer is told "your final message is the section" instead of "call write_file" (a tool-holding Luna seat faked the call as text); `selectUsedToolLines` approves one unquoted sentence of a canon_recall hit when the Article names that Cycle and prints its figure (`TOOL_FACT_SOURCES` now includes canon_recall). Check that branch for laundering risk.

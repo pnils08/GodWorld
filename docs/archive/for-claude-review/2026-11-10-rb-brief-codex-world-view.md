@@ -14,7 +14,7 @@ Two jobs. Do Job 1 first.
 
 ## Job 1 — adversarial review (read-only on `world-view/`)
 
-File: `docs/for-claude-review/2026-11-10-codex-world-view-review.md`. Verdict SHIP / SHIP-WITH-FIXES / HOLD, every finding `file:line` + input → wrong output.
+File: `docs/archive/for-claude-review/2026-11-10-codex-world-view-review.md`. Verdict SHIP / SHIP-WITH-FIXES / HOLD, every finding `file:line` + input → wrong output.
 
 The page's one promise is that nothing about a citizen, a business or a place is invented: a label is the engine's own line, a painted name is a ledger name, a neighborhood's look hangs off a phrase in `docs/canon/INSTITUTIONS.md`. Hunt where that promise is broken or only looks kept:
 

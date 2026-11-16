@@ -138,6 +138,15 @@ Why it matters: a wake reads the citizen's own newest pages back before they spe
 
 The shape of the fix, if the builder wants one: a guard in the wake writers that refuses a page when the sheet's Cycle is ahead of the live world. Code only. Not built. The 29 pages are not to be edited or deleted by hand (CLAUDE.md rule 4); what happens to them is his call.
 
+## Reviews reconciled
+
+| Review | Verdict | Finding | Outcome |
+|--------|---------|---------|---------|
+| `docs/archive/for-claude-review/2026-11-08-codex-engine339-diff-review.md` | — | — | reviewed (builder 2026-11-16: every review in the inbox had been reviewed); no per-finding record kept |
+| `docs/archive/for-claude-review/2026-11-08-rb-brief-codex-engine339-diff-review.md` | — | — | reviewed (builder 2026-11-16: every review in the inbox had been reviewed); no per-finding record kept |
+| `docs/archive/for-claude-review/2026-11-08-codex-602-structural-options.md` | — | — | reviewed (builder 2026-11-16: every review in the inbox had been reviewed); no per-finding record kept |
+| `docs/archive/for-claude-review/2026-11-08-rb-brief-codex-602-structural-options.md` | — | — | reviewed (builder 2026-11-16: every review in the inbox had been reviewed); no per-finding record kept |
+
 ## Changelog
 
 - 2026-11-08 (research-build, S643) — builder's words on Varek's daughter recorded; every repair that removes or ignores the child count withdrawn (§Builder's words, late 2026-11-08). No row or page touched.

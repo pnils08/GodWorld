@@ -101,6 +101,13 @@ Nothing moves out of quarantine without Rhea passing and me reading it. v1 does 
 - **Volume amplifies error.** One wrong article is one cycle; wrong lore is foundational and everything written later inherits it. This is why v1 promotion stays manual.
 - **Quarantine becomes a dumping ground.** 300-iteration runs produce a lot of files. Unreviewed lore sitting in the repo starts looking authoritative. Sweep or promote; don't accumulate.
 
+## Reviews reconciled
+
+| Review | Verdict | Finding | Outcome |
+|--------|---------|---------|---------|
+| `docs/archive/for-claude-review/2026-11-08-codex-pipeline106-diff-review.md` | — | — | reviewed (builder 2026-11-16: every review in the inbox had been reviewed); no per-finding record kept |
+| `docs/archive/for-claude-review/2026-11-08-codex-pipeline106-diff-rereview.md` | — | — | reviewed (builder 2026-11-16: every review in the inbox had been reviewed); no per-finding record kept |
+
 ## Changelog
 
 - 2026-08-15 — Initial spec (research-build). Supersedes antigravity's `autonomous_newsroom_plan.md`: routing corrected to research-build, framing corrected from pipeline-replacement to lore layer, invention seam added as the core contract.

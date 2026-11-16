@@ -71,6 +71,13 @@ Nothing else. Rules, identity, terminal files must not state the same thing mult
 - No two boot files state the same rule.
 - Memory file count materially reduced, with a builder-reviewed delete list — never an unreviewed sweep.
 
+## Reviews reconciled
+
+| Review | Verdict | Finding | Outcome |
+|--------|---------|---------|---------|
+| `docs/archive/for-claude-review/2026-11-02-codex-governance56-boot-review.md` | — | — | reviewed (builder 2026-11-16: every review in the inbox had been reviewed); no per-finding record kept |
+| `docs/archive/for-claude-review/2026-11-02-codex-governance56-boot-rereview.md` | — | — | reviewed (builder 2026-11-16: every review in the inbox had been reviewed); no per-finding record kept |
+
 ## Changelog
 
 - 2026-11-08 (engine-sheet, governance.56) — Closed on the builder's word ("we can close the boot cleanup"); row to done-pending-archive.

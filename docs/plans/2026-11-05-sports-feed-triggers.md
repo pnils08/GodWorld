@@ -260,6 +260,7 @@ All sport-neutral (the Oaks ride these pools too), they/them only.
 | N2 | `S.eveningSportsDetails` holds the last entry and has no reader | codex · trace:28 | dead summary field | parked (not this row) |
 | N3 | A stable source field on hook rows so a moment pitch and a phase hook can be told apart without matching texts | codex · review:37 | provenance proof that survives a pitch-text edit | held — not adopted: it adds a deck column; the fixed-text exclusion is checkable today |
 | N4 | Pitches that name the player, the deal or the milestone number | codex · review:57 | richer pitches | held for builder — needs row fields added to the trigger object; not in this row |
+| `docs/archive/for-claude-review/2026-11-07-codex-pipeline102-diff-review.md` | — | — | reviewed (builder 2026-11-16: every review in the inbox had been reviewed); no per-finding record kept |
 
 ## Open questions
 

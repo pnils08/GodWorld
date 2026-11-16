@@ -40,6 +40,9 @@ pointers:
 | Review | Verdict | Finding | Outcome |
 |--------|---------|---------|---------|
 | `docs/for-claude-review/2026-11-13-codex-recall-patch-brainsearch-review.md` | recall patch HOLD · brainSearch SHIP-WITH-FIXES | floor bypass on missing similarity; silent column loss | both folded (Tasks 3, 4). No re-review: reviews are advice, not a gate (builder 2026-11-13) |
+| `docs/archive/for-claude-review/2026-11-13-rb-brief-codex-recall-patch-brainsearch.md` | — | — | reviewed (builder 2026-11-16: every review in the inbox had been reviewed); no per-finding record kept |
+| `docs/archive/for-claude-review/2026-11-11-codex-recall-close-rereview.md` | — | — | reviewed (builder 2026-11-16: every review in the inbox had been reviewed); no per-finding record kept |
+| `docs/archive/for-claude-review/2026-11-11-es-brief-codex-recall-close.md` | — | — | reviewed (builder 2026-11-16: every review in the inbox had been reviewed); no per-finding record kept |
 
 ## Changelog
 

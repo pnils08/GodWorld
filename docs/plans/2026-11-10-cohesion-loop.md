@@ -38,3 +38,10 @@ Not there: an auditor that runs by itself and drafts a fix; a standing wake for 
 | 3 | Wake script + crontab, proven on an idle and a busy pane | open |
 | 4 | Gate text in the overnight doc and `.claude/TERMINAL.md` (control-plane commit) | open |
 | 5 | First defect carried end to end: flagged by the agent → fix drafted and built by a terminal → sandbox → live | open |
+
+## Reviews reconciled
+
+| Review | Verdict | Finding | Outcome |
+|--------|---------|---------|---------|
+| `docs/archive/for-claude-review/2026-11-10-codex-governance60-plan-review.md` | — | — | reviewed (builder 2026-11-16: every review in the inbox had been reviewed); no per-finding record kept |
+

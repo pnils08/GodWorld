@@ -354,6 +354,7 @@ No single unit test, applied=true file, stage transition, quoted reaction or agg
 | N4 | Binding agent ballots and deadline policy | codex; research F9 | Political choices determine votes | proposed in B3 |
 | N5 | Experience-linked response and attributable accountability | builder request; codex mechanism | Officials see who was affected and what actually followed | proposed in B4/A4 |
 | N6 | Mara directive Silence consequence and "crisis and success" framing | codex directive review items 2, 4 | Held: open question in this plan; no category or budget fits a small event | held; [[../archive/for-claude-review/2026-11-02-codex-mara-directive-review]] |
+| `docs/archive/for-claude-review/2026-11-01-codex-civic47-build-review.md` | — | — | reviewed (builder 2026-11-16: every review in the inbox had been reviewed); no per-finding record kept |
 
 ## Open questions
 

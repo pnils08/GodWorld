@@ -100,6 +100,15 @@ pointers:
 | Review | Lane | Pointer | Result |
 |---|---|---|---|
 | — | — | — | none yet |
+| `docs/archive/for-claude-review/2026-11-13-codex-pipeline110-nodirection-review.md` | — | — | reviewed (builder 2026-11-16: every review in the inbox had been reviewed); no per-finding record kept |
+| `docs/archive/for-claude-review/2026-11-13-es-brief-codex-pipeline110-nodirection.md` | — | — | reviewed (builder 2026-11-16: every review in the inbox had been reviewed); no per-finding record kept |
+| `docs/archive/for-claude-review/2026-11-13-codex-pipeline110-task8-review.md` | — | — | reviewed (builder 2026-11-16: every review in the inbox had been reviewed); no per-finding record kept |
+| `docs/archive/for-claude-review/2026-11-13-es-brief-codex-pipeline110-task8.md` | — | — | reviewed (builder 2026-11-16: every review in the inbox had been reviewed); no per-finding record kept |
+| `docs/archive/for-claude-review/2026-11-13-es-brief-agy-agent-boot-templates.md` | — | — | reviewed (builder 2026-11-16: every review in the inbox had been reviewed); no per-finding record kept |
+| `docs/archive/for-claude-review/2026-11-15-es-brief-codex-seat-template.md` | — | — | reviewed (builder 2026-11-16: every review in the inbox had been reviewed); no per-finding record kept |
+| `docs/archive/for-claude-review/2026-11-15-es-brief-agy-voice-files-cut.md` | — | — | reviewed (builder 2026-11-16: every review in the inbox had been reviewed); no per-finding record kept |
+| `docs/archive/for-claude-review/2026-11-11-codex-store-timeouts-review.md` | — | — | reviewed (builder 2026-11-16: every review in the inbox had been reviewed); no per-finding record kept |
+| `docs/archive/for-claude-review/2026-11-11-codex-store-timeouts-rereview.md` | — | — | reviewed (builder 2026-11-16: every review in the inbox had been reviewed); no per-finding record kept |
 
 ## Changelog
 

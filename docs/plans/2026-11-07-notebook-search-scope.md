@@ -98,6 +98,12 @@ Shapes considered:
 3. A query that cites C114 answers instead of failing closed — proven by one live query on the exact candidate. Precedent for the id count: the retrieval log holds verified calls on 196 ids (2026-10-19, 33–41 s) and `ff437d6fb` on 165; the live query on the candidate is still the gate.
 4. Every listing failure — spawn error, non-zero exit, non-JSON, shape breach (missing / duplicate id, missing title, non-integer status, empty array), a non-ready source in default scope, a non-ready or deleted requested id — fails with `auth_failure` or `no_result` in the retrieval log, zero query calls, and no file read in its place — proven by tests through an injected `main`. The headless eval's explicit-id path fails on a deleted id rather than substituting.
 
+## Reviews reconciled
+
+| Review | Verdict | Finding | Outcome |
+|--------|---------|---------|---------|
+| `docs/archive/for-claude-review/2026-11-08-codex-pipeline103-plan-rereview.md` | — | — | reviewed (builder 2026-11-16: every review in the inbox had been reviewed); no per-finding record kept |
+
 ## Changelog
 
 - 2026-11-08 — Horn lore restored on the builder's word (policy `3824b8b0` → `583182ab`); its add met Acceptance 1 live; all four met, row done-pending-archive.

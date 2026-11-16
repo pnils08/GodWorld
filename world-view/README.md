@@ -356,3 +356,10 @@ Cap: 140 people per neighborhood (`CAP`; the busiest street has 124, so nobody i
 - The sim holds no street address: a citizen has `Neighborhood` + `HouseholdId`; a household has `HousingType`, `MonthlyRent`.
 - Reflections: only rows with Cycle at or before the dumped cycle are used (the tab holds 12 rows stamped C119 — left out, not repaired), and a reporter's `filed:` / `graded:` receipts are not treated as something said. Newest usable rows are week 114; a card says which week the words are from.
 - 36 shown people have no sex on the ledger; their card leaves it out.
+
+## Reviews reconciled
+
+| Review | Verdict | Finding | Outcome |
+|--------|---------|---------|---------|
+| `docs/archive/for-claude-review/2026-11-10-rb-brief-codex-world-view.md` | — | — | reviewed (builder 2026-11-16: every review in the inbox had been reviewed); no per-finding record kept |
+

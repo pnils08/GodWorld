@@ -136,3 +136,10 @@ Not checked: pronunciation; every figure in the sports minutes beyond those list
 - The ops report never arrived (log: `DAILY OPS REPORT SKIPPED`): fixed under pipeline.109.
 - Daily router (format/length) untouched.
 - pipeline.109 (cron feedback to the builder, the ops report, Varek's journal): [[2026-11-10-cron-feedback-to-builder]].
+
+## Reviews reconciled
+
+| Review | Verdict | Finding | Outcome |
+|--------|---------|---------|---------|
+| `docs/archive/for-claude-review/2026-11-13-rb-brief-codex-daily-sources-only.md` | — | — | reviewed (builder 2026-11-16: every review in the inbox had been reviewed); no per-finding record kept |
+

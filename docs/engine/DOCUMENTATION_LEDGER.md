@@ -127,11 +127,11 @@
 
 | File | Purpose | Tier | Updated By | Workflows |
 |------|---------|------|------------|-----------|
-| `.claude/agents/civic-project-stabilization-fund/SKILL.md` | Marcus Webb — OEWD $28M Stabilization Fund agent | On-Demand | Manual (when agent changes) | D, M |
-| `.claude/agents/civic-project-oari/SKILL.md` | Dr. Vanessa Tran-Muñoz — $12.5M OARI program agent | On-Demand | Manual (when agent changes) | D, M |
-| `.claude/agents/civic-project-transit-hub/SKILL.md` | Elena Soria Dominguez — $230M Fruitvale Transit Hub agent | On-Demand | Manual (when agent changes) | D, M |
-| `.claude/agents/civic-project-health-center/SKILL.md` | Bobby Chen-Ramirez — $45M Temescal Health Center agent | On-Demand | Manual (when agent changes) | D, M |
-| `.claude/agents/civic-office-baylight-authority/SKILL.md` | Keisha Ramos — $2.1B Baylight District (upgraded Phase 18) | On-Demand | Manual (when agent changes) | D, M |
+| `docs/archive/legacy-agent-folders/2026-11-15-worker-write-ups/civic-project-stabilization-fund/SKILL.md` (retired 2026-11-15) | Marcus Webb — OEWD $28M Stabilization Fund agent | On-Demand | Manual (when agent changes) | D, M |
+| `docs/archive/legacy-agent-folders/2026-11-15-worker-write-ups/civic-project-oari/SKILL.md` (retired 2026-11-15) | Dr. Vanessa Tran-Muñoz — $12.5M OARI program agent | On-Demand | Manual (when agent changes) | D, M |
+| `docs/archive/legacy-agent-folders/2026-11-15-worker-write-ups/civic-project-transit-hub/SKILL.md` (retired 2026-11-15) | Elena Soria Dominguez — $230M Fruitvale Transit Hub agent | On-Demand | Manual (when agent changes) | D, M |
+| `docs/archive/legacy-agent-folders/2026-11-15-worker-write-ups/civic-project-health-center/SKILL.md` (retired 2026-11-15) | Bobby Chen-Ramirez — $45M Temescal Health Center agent | On-Demand | Manual (when agent changes) | D, M |
+| `docs/archive/legacy-agent-folders/2026-11-15-worker-write-ups/civic-office-baylight-authority/SKILL.md` (retired 2026-11-15) | Keisha Ramos — $2.1B Baylight District (upgraded Phase 18) | On-Demand | Manual (when agent changes) | D, M |
 | `.claude/agent-memory/{initiative}/MEMORY.md` | Persistent memory for 5 initiative agents (stabilization-fund, oari, transit-hub, health-center, baylight-authority) | On-Demand | Initiative agents (every cycle) | M |
 | `scripts/buildInitiativePackets.js` | Per-initiative JSON packets from Sheets + Mara directive | On-Demand | Auto (code) | D, M |
 | `output/initiative-packets/` | Generated initiative packets + manifest | On-Demand | `buildInitiativePackets.js` | M |

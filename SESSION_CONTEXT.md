@@ -1,6 +1,6 @@
 # SESSION_CONTEXT — one PIN (world state outside the repo) + one NEXT line per Claude terminal: the job, its next step, any standing hold from Mike. Never what was done — that is git and the plan's changelog.
 
-**PIN:** S663 | Day 228 | Canon C115 | PROD @180 (stage 45; history: DEPLOY_HISTORY §PROD) | next live fire C116 Sun 2026-11-15
+**PIN:** S664 | Day 228 | Canon C115 | PROD @180 (stage 45; history: DEPLOY_HISTORY §PROD) | next live fire C116 Sun 2026-11-15
 
 **NEXT[engine-sheet]:** pipeline.110 → all 14 workers ON, own rota 4 a duty day (first: Mon 11-16 05:45); the Sunday chain opens them from the sheet too, no old file. Read their first records. Engine build-note strings fixed in repo, not on PROD. Uncommitted seatWake.js half-edit: his word.
 

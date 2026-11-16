@@ -1,0 +1,63 @@
+AIM = BENCH (script read the bench marker)
+== sync from live
+  verify Story_Hook_Deck: bench 2176 rows vs live 2176 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+{"fireGuardMinutes":"0","cycleCountFormatted":"115","cycleCountIsNumber":true}
+door: {"target":"bench","http":200,"ok":true,"record":{"cycle":116,"startedMs":1794786705968,"state":"running"},"raw":"{\"cycle\":116,\"startedMs\":1794786705968,\"state\":\"running\"}","valid":true,"expectOk":null}
+clearfire 116: {"ok":true,"cleared":{"cycle":116,"state":"running"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+== pause 75 s (read quota)
+== plant
+planted: bench feed row 278 EventTrigger "clubhouse-tension" -> "news"; pre-fire cells saved
+== fire 1
+Edition_Coverage_Ratings C115: 2 rows (window 115,114,113,112,111,110,109,108), sandbox already has CIVIC,COMMUNITY,CULTURE,INFRASTRUCTURE,SPORTS
+Citizen_Media_Usage C115: 0 rows (sandbox already has a published or seeded week at C115)
+Oakland_Sports_Feed C116: 0 rows
+appended 2 to Edition_Coverage_Ratings; marked rows on the tab now 2
+bench cycleCount 115
+fire C116 rc=0 "verdict": "PASS" "wallS": 155
+  ok   cycleCount — bench reads 116
+  ok   POP-00018 ClockMode unchanged
+  ok   POP-00018 RoleType unchanged
+  ok   POP-00018 Income unchanged
+  ok   POP-00018 EconomicProfileKey unchanged
+  ok   POP-00018 CitizenBio unchanged
+  ok   POP-00018 Status unchanged
+  ok   POP-00018 Tier unchanged
+  ok   POP-00527 ClockMode unchanged
+  ok   POP-00527 RoleType unchanged
+  ok   POP-00527 Income unchanged
+  ok   POP-00527 EconomicProfileKey unchanged
+  ok   POP-00527 CitizenBio unchanged
+  ok   POP-00527 Status unchanged
+  ok   POP-00527 Tier unchanged
+  ok   POP-00528 ClockMode unchanged
+  ok   POP-00528 RoleType unchanged
+  ok   POP-00528 Income unchanged
+  ok   POP-00528 EconomicProfileKey unchanged
+  ok   POP-00528 CitizenBio unchanged
+  ok   POP-00528 Status unchanged
+  ok   POP-00528 Tier unchanged
+  ok   POP-00018 no Retirement in memory
+  ok   POP-00527 no Retirement in memory
+  ok   POP-00528 no Retirement in memory
+  ok   POP-00018 named on the rumor row (EventType line) — Sports-Sociability-Up-S, Question, Neighborhood-Outabout-Up-S, Advancement, Business-Gain
+  ok   POP-00018 no trigger:news line
+  ok   POP-00018 no Retirement / Maneuver / Former
+  ok   POP-00527 named on the rumor row (EventType line) — Sports-Moved, Sports-Moved, Reputation, Sports-Composure-Down-M, Sports-Sociability-Up-S, Sports-Composure-Down-M, Sports-Sociability-Up-S, Sports-Sociability-Up-S, Sports-Composure-Up-M, Sports-Sociability-Up-S, Sports-Composure-Down-M, Question, Sports-Sociability-Up-S, Sports-Composure-Up-M, Civic Perception-Sociability-Up-S, Civic Perception-Openness-Up-S, Civic Perception-Outabout-Up-S, Advancement
+  ok   POP-00527 no trigger:news line
+  ok   POP-00527 no Retirement / Maneuver / Former
+  ok   POP-00528 named on the rumor row (EventType line) — Reputation, Sports-Composure-Down-M, Sports-Sociability-Up-S, Personal-Warmth-Up-S, Neighborhood-Sociability-Up-S, Lifestyle-Openness-Up-S
+  ok   POP-00528 no trigger:news line
+  ok   POP-00528 no Retirement / Maneuver / Former
+  ok   news hook raised — A's make a trade. Who went, who ca | A's clubhouse tension. What is beh | A's news. What is being said, who  | Oaks player reaches a career miles | Oaks big win. The game that matter | Oaks drop a close one. The play th
+  ok   no "player retires" hook
+  ok   no retirement in ripples
+  ok   A's [news] in the sports ripple
+  ok   0 new Engine_Errors rows since the plant
+READ PASS 39/39
+== final sync from live
+  verify Story_Hook_Deck: bench 2176 rows vs live 2176 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+engine.346 bench done
+run3 exit 0

@@ -1,0 +1,49 @@
+C116 — state at session close, Sun 2026-11-15 ~18:30 CST (research-build)
+
+WHAT HAPPENED
+- C116 fired live 15:00 CST. Oakland_Sports_Feed row 278 (rumor; Dillon / Paulson / Seymour) carried EventTrigger `retirement` by entry error;
+  the engine retired the three. POP-00598 Income 23,800,000 was also an entry error.
+- Sheet repaired by script (output/repairs/2026-11-15-c116-retirement-entry-repair.js), chain rebuilt clean.
+- ~17:35 the builder rewound the live sheet to its pre-fire state by version history. The re-fire at 17:39 was REFUSED by the fire guard
+  (script property FIRE_ADMISSION_JSON still says "Cycle 116 done"; a sheet rewind does not rewind script properties).
+- A second fire was not run. The live sheet reads Cycle 115. C116 has NOT run. The Sunday cycle is owed.
+
+LIVE SHEET NOW (read 18:25 CST)
+- cycleCount 115, Neighborhood_Map 115, no retirement anywhere, 1 Engine_Errors row from the guard refusal (stamped 116).
+- POP-00598 Income set back to 2,700,000 by this session (one cell, read back).
+- Feed row 278 EventTrigger reads `off-season` (the builder's word). Not a dropdown word on live: the engine reads it as no trigger.
+
+TO FIRE C116 (builder)
+1. Apps Script > Project Settings > Script Properties: delete FIRE_ADMISSION_JSON (only that one; the other values stamped 116 are
+   skipped by the loader, which re-seeds from Carry_Forward_Store — that tab holds 113/114/115 for all ten keys).
+2. Fire from the sheet menu. Export the execution log.
+Then (terminal): runCycle steps 3 → 6.1. Steps 1, 2, 2.5 re-passed at 18:18 CST (record output/run-cycle/c116.json is fresh).
+
+BEFORE CITY HALL RERUNS ON THE NEW C116
+- 65 office-position entries + Varek's journal entry from the first hearing are still on the holders' pages (keys cp-POP-…-c116-…;
+  list: output/repairs/2026-11-15-c116-office-positions.json). Same keys on a rerun MERGE old and new text. Deleting them is a memory
+  delete — needs the builder's word ("delete"). Not done.
+- output/cron-civic/moves/moves_c115.jsonl (held copy here; live file if recreated): 7 moves marked applied / 1 failed with closeCycle 116 —
+  the rewind undid them on the sheet. Reset those statuses to pending before the close, or they will not re-apply.
+- World-data summary document for C116 (id M5KEix7JeAJeWdoRiAGVaJ) holds the first fire's (clean) week; replace in place after the rerun.
+- World-view page is published as v42 = the first fire's C116 week. Rebuild + republish after the rerun.
+
+THIS MACHINE
+- Every week file reads 115 (getCurrentCycle, world_state, base_context, beats, ledger snapshot) — matches the sheet.
+- Everything the first fire produced is in this folder (224 files; nothing deleted): the C116 week files, city hall's c116 run,
+  the beat dump as dumped, the first run's chain record, the C116 gap log (with judgment entries G-EC33–41).
+
+THE TRIGGER (engine.346)
+- Committed f50b367c9 as `news`: on the dropdown, desk hook, route `hook` (no second citizen line, nobody changes). Tests pass.
+- Sandbox proof PASS 39/39 on SANDBOX 1004 @200 (stage 46 = stage 45 + three files), C116 fired from a live sync in 155 s:
+  output/engine-sheet/2026-11-15-e346-bench-run3.log, …-e346-reads.jsonl. Final sync from live done: bench data = live C115.
+- NOT on PROD. The builder's word for it is `off-season`, not `news` — rename (three files + tests + hook text), re-bench, then PROD
+  (push script written, not run: output/engine-sheet/2026-11-15-push-e346-prod.sh).
+- SANDBOX 1004 script project is at Google's 200-version cap: the next bench push needs old versions deleted from the project's
+  history page (builder's click) or a new bench project. The parked engine.339 bench code was replaced by stage 46.
+
+OPEN, UNFILED (builder's call)
+- Pre-flight reads names and columns only; nothing previews who an acting trigger changes (a `retirement` row naming more than one person).
+- engine.208 stock lines: every named citizen gets a pool sentence ("saw their name in the sports pages again"); role-blind
+  (the GM got a traded player's lines).
+- Step 2.5 does not read Simulation_Ledger incomes.

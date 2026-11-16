@@ -1,0 +1,456 @@
+{
+ "at": "2026-11-15T23:09:20.597Z",
+ "cellUpdates": [
+  {
+   "sheet": "Simulation_Ledger",
+   "row": 18,
+   "col": 8,
+   "colName": "ClockMode",
+   "id": "POP-00018",
+   "before": "ENGINE",
+   "after": "GAME"
+  },
+  {
+   "sheet": "Simulation_Ledger",
+   "row": 18,
+   "col": 10,
+   "colName": "RoleType",
+   "id": "POP-00018",
+   "before": "Former Pitcher, Oakland A's Legend",
+   "after": "Pitcher, Oakland A's Legend"
+  },
+  {
+   "sheet": "Simulation_Ledger",
+   "row": 18,
+   "col": 26,
+   "colName": "Income",
+   "id": "POP-00018",
+   "before": "250000",
+   "after": 13000000
+  },
+  {
+   "sheet": "Simulation_Ledger",
+   "row": 18,
+   "col": 33,
+   "colName": "CareerStage",
+   "id": "POP-00018",
+   "before": "mid-career",
+   "after": "senior"
+  },
+  {
+   "sheet": "Simulation_Ledger",
+   "row": 18,
+   "col": 43,
+   "colName": "EconomicProfileKey",
+   "id": "POP-00018",
+   "before": "",
+   "after": "SPORTS_OVERRIDE"
+  },
+  {
+   "sheet": "Simulation_Ledger",
+   "row": 18,
+   "col": 45,
+   "colName": "CitizenBio",
+   "id": "POP-00018",
+   "before": "Now: Former Pitcher, Oakland A's Legend; retired C116. Born 2005, Oakland native. Starting pitcher (left-handed), Oakland Athletics. 5x Cy Young Award winner. Farewell season in 2041 — age 38, velocity in honest conversation with the calendar. Part of the Dynasty Five farewell alongside Kelley and Keane. Married. Hal Richmond: \"Dillon is intelligence.\" Sat courtside at Chase Center with Aitken, Keane, and Mike Paulson for a Warriors game — standing ovation. Accompanied Aitken to the DEIR civic session. Lives in Rockridge. The kind of pitcher whose declining velocity is a story every reporter wants to write but nobody wants to be right about.",
+   "after": "Born 2005, Oakland native. Starting pitcher (left-handed), Oakland Athletics. 5x Cy Young Award winner. Farewell season in 2041 — age 38, velocity in honest conversation with the calendar. Part of the Dynasty Five farewell alongside Kelley and Keane. Married. Hal Richmond: \"Dillon is intelligence.\" Sat courtside at Chase Center with Aitken, Keane, and Mike Paulson for a Warriors game — standing ovation. Accompanied Aitken to the DEIR civic session. Lives in Rockridge. The kind of pitcher whose declining velocity is a story every reporter wants to write but nobody wants to be right about."
+  },
+  {
+   "sheet": "Simulation_Ledger",
+   "row": 18,
+   "col": 49,
+   "colName": "MemoryRegisters",
+   "id": "POP-00018",
+   "before": "{\"biases\":[],\"unlived\":[{\"tag\":\"Retirement\",\"txt\":\"retired from the A's, announced C116 — the playing salary ends; appearances and the name pay $250,000 a year\",\"cy\":116}]}",
+   "after": ""
+  },
+  {
+   "sheet": "Simulation_Ledger",
+   "row": 18,
+   "col": 14,
+   "colName": "LifeHistory",
+   "id": "POP-00018",
+   "before": "[Compressed: 20 entries | ? → ? | Dominant:Neighborhood,Civic Perception,Sports | Archetype:Anchor | Mods:relentless,outgoing,warm,curious,unshakable,principled,family-minded,a real fan | AsOf:c114]\nY3C5 — [Heritage] opened Dillon Clinic in Rockridge — the family has a storefront now\nY3C6 — [Sports] drove home with the radio off, letting the win settle\nY3C6 — [Neighborhood] navigated the stroller traffic on College Avenue and silently judged the parking jobs\nY3C6 — [Sports] watched the ninth from a packed bar and walked home in a crowd that didn't want to disperse\nY3C7 — [Daily] felt a quiet tradeoff settle into place\nY3C7 — [Lifestyle] walked a different street home just to see it\nY3C7 — [Neighborhood] a flyer for a seniors lunch program flutters on a community bulletin board\nY3C8 — [Reputation] had a neighbor tape the article to the building's front door\nY3C8 — [Lifestyle-Openness-Up-S] walked a different street home just to see it\nY3C8 — [Neighborhood-Sociability-Up-S] talked with a stranger long enough to learn a name\nY3C9 — [Daily-Composure-Up-S] felt a quiet tradeoff settle into place\nY3C9 — [Civic Perception-Composure-Up-S] the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.\nY3C9 — [Undocked-Audience] knew exactly what a week on UNDOCKED does to a barista and watched Iris Pham find out\nY3C9 — [Media] Named in a hard light — the coverage was not kind, and a name this big does not shrink; the shine dims (sports_c112_p-slayer)\nY3C10 — [Reputation] got recognized twice at the grocery store after the story ran\nY3C10 — [Undocked-Audience] the kids could say Father Miguel before they could say the mayor's name\nY3C10 — [Personal-Composure-Up-S] felt quietly proud of how they handled something small\nY3C10 — [Daily-Sociability-Up-S] drove the church van for the senior trip and listened to three hours of unfiltered neighborhood gossip near a cafe on the avenue\nY3C10 — [Daily-Warmth-Up-S] found a forgotten photograph tucked in a book and sat with it a while\nY3C10 — [LifeEvent-Home-Down-S] A friend in Rockridge who bought last year said the first year is the hardest, and did not smile.\nY3C11 — [Daily-Integrity-Up-S] put on their good suit for the Sunday service because some traditions still matter\nY3C12 — [Sports-Sociability-Up-S] saw their name in the sports pages again\nY3C12 — [Retirement] retired from the A's, announced C116 — the playing salary ends; appearances and the name pay $250,000 a year\nY3C12 — [Question] After a farewell season that brought back Benji Dillon in on 1 year deal and now Benji Dillon is leaving the door open. Does he come back for one more year, and as a starter or out of the bullpen?, and is Oakland even an option? With the youth movement in motion does a Dillon deal make sense? Does the club want him back at his $13.0M salary? What would make him decide, and does he wait to see what Mark Aitken does first?\nY3C12 — [Maneuver-Climb] playing to climb — the name to keep\nY3C12 — [Neighborhood-Composure-Down-S] noticed a familiar face missing from the morning routine\nY3C12 — [Personal-Composure-Up-S] found a quiet minute at College Avenue and felt the season starting to turn",
+   "after": "[Compressed: 20 entries | ? → ? | Dominant:Neighborhood,Civic Perception,Sports | Archetype:Anchor | Mods:relentless,outgoing,warm,curious,unshakable,principled,family-minded,a real fan | AsOf:c114]\nY3C5 — [Heritage] opened Dillon Clinic in Rockridge — the family has a storefront now\nY3C6 — [Sports] drove home with the radio off, letting the win settle\nY3C6 — [Neighborhood] navigated the stroller traffic on College Avenue and silently judged the parking jobs\nY3C6 — [Sports] watched the ninth from a packed bar and walked home in a crowd that didn't want to disperse\nY3C7 — [Daily] felt a quiet tradeoff settle into place\nY3C7 — [Lifestyle] walked a different street home just to see it\nY3C7 — [Neighborhood] a flyer for a seniors lunch program flutters on a community bulletin board\nY3C8 — [Reputation] had a neighbor tape the article to the building's front door\nY3C8 — [Lifestyle-Openness-Up-S] walked a different street home just to see it\nY3C8 — [Neighborhood-Sociability-Up-S] talked with a stranger long enough to learn a name\nY3C9 — [Daily-Composure-Up-S] felt a quiet tradeoff settle into place\nY3C9 — [Civic Perception-Composure-Up-S] the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.\nY3C9 — [Undocked-Audience] knew exactly what a week on UNDOCKED does to a barista and watched Iris Pham find out\nY3C9 — [Media] Named in a hard light — the coverage was not kind, and a name this big does not shrink; the shine dims (sports_c112_p-slayer)\nY3C10 — [Reputation] got recognized twice at the grocery store after the story ran\nY3C10 — [Undocked-Audience] the kids could say Father Miguel before they could say the mayor's name\nY3C10 — [Personal-Composure-Up-S] felt quietly proud of how they handled something small\nY3C10 — [Daily-Sociability-Up-S] drove the church van for the senior trip and listened to three hours of unfiltered neighborhood gossip near a cafe on the avenue\nY3C10 — [Daily-Warmth-Up-S] found a forgotten photograph tucked in a book and sat with it a while\nY3C10 — [LifeEvent-Home-Down-S] A friend in Rockridge who bought last year said the first year is the hardest, and did not smile.\nY3C11 — [Daily-Integrity-Up-S] put on their good suit for the Sunday service because some traditions still matter\nY3C12 — [Sports-Sociability-Up-S] saw their name in the sports pages again\nY3C12 — [Question] After a farewell season that brought back Benji Dillon in on 1 year deal and now Benji Dillon is leaving the door open. Does he come back for one more year, and as a starter or out of the bullpen?, and is Oakland even an option? With the youth movement in motion does a Dillon deal make sense? Does the club want him back at his $13.0M salary? What would make him decide, and does he wait to see what Mark Aitken does first?\nY3C12 — [Neighborhood-Composure-Down-S] noticed a familiar face missing from the morning routine\nY3C12 — [Personal-Composure-Up-S] found a quiet minute at College Avenue and felt the season starting to turn"
+  },
+  {
+   "sheet": "Simulation_Ledger",
+   "row": 18,
+   "col": 47,
+   "colName": "DialState",
+   "id": "POP-00018",
+   "before": "{\"base\":{\"drive\":85.39043443865684,\"sociability\":80.868659703326,\"warmth\":67.11283977039011,\"openness\":67.4256368765817,\"composure\":87.71335568378274,\"integrity\":65.52329029198253,\"family\":79.51464261658239,\"outabout\":53.374999999999986,\"fandom\":65},\"streak\":{\"drive\":-1,\"sociability\":0,\"warmth\":1,\"openness\":1,\"composure\":1,\"integrity\":0,\"family\":1,\"outabout\":0,\"fandom\":2},\"mood\":{\"drive\":-2,\"sociability\":1.461981213478665,\"warmth\":0,\"openness\":0.6514872624683659,\"composure\":0,\"integrity\":1.6215776144387537,\"family\":1.6388285906734086,\"outabout\":0,\"fandom\":1.0670940000000002},\"folded\":116,\"maneuver\":{\"p\":\"climb\",\"g\":\"tenure\",\"a\":80,\"c\":116},\"fan\":\"as\"}",
+   "after": "{\"base\":{\"drive\":85.39043443865684,\"sociability\":80.868659703326,\"warmth\":67.11283977039011,\"openness\":67.4256368765817,\"composure\":87.71335568378274,\"integrity\":65.52329029198253,\"family\":79.51464261658239,\"outabout\":53.374999999999986,\"fandom\":65},\"streak\":{\"drive\":-1,\"sociability\":0,\"warmth\":1,\"openness\":1,\"composure\":1,\"integrity\":0,\"family\":1,\"outabout\":0,\"fandom\":2},\"mood\":{\"drive\":-2,\"sociability\":1.461981213478665,\"warmth\":0,\"openness\":0.6514872624683659,\"composure\":0,\"integrity\":1.6215776144387537,\"family\":1.6388285906734086,\"outabout\":0,\"fandom\":1.0670940000000002},\"folded\":116,\"fan\":\"as\"}"
+  },
+  {
+   "sheet": "Simulation_Ledger",
+   "row": 416,
+   "col": 8,
+   "colName": "ClockMode",
+   "id": "POP-00527",
+   "before": "ENGINE",
+   "after": "GAME"
+  },
+  {
+   "sheet": "Simulation_Ledger",
+   "row": 416,
+   "col": 10,
+   "colName": "RoleType",
+   "id": "POP-00527",
+   "before": "Former General Manager, Oakland A's & The Oaks",
+   "after": "General Manager, Oakland A's & The Oaks"
+  },
+  {
+   "sheet": "Simulation_Ledger",
+   "row": 416,
+   "col": 26,
+   "colName": "Income",
+   "id": "POP-00527",
+   "before": "250000",
+   "after": 30000000
+  },
+  {
+   "sheet": "Simulation_Ledger",
+   "row": 416,
+   "col": 33,
+   "colName": "CareerStage",
+   "id": "POP-00527",
+   "before": "senior",
+   "after": "mid-career"
+  },
+  {
+   "sheet": "Simulation_Ledger",
+   "row": 416,
+   "col": 43,
+   "colName": "EconomicProfileKey",
+   "id": "POP-00527",
+   "before": "",
+   "after": "SPORTS_OVERRIDE"
+  },
+  {
+   "sheet": "Simulation_Ledger",
+   "row": 416,
+   "col": 45,
+   "colName": "CitizenBio",
+   "id": "POP-00527",
+   "before": "Now: Former General Manager, Oakland A's & The Oaks; retired C116.",
+   "after": ""
+  },
+  {
+   "sheet": "Simulation_Ledger",
+   "row": 416,
+   "col": 49,
+   "colName": "MemoryRegisters",
+   "id": "POP-00527",
+   "before": "{\"biases\":[],\"unlived\":[{\"tag\":\"Relocation\",\"txt\":\"moved from Jack London to West Oakland — moving up from Jack London — sold up and bought in West Oakland\",\"cy\":112},{\"tag\":\"Retirement\",\"txt\":\"retired from the A's, announced C116 — the playing salary ends; appearances and the name pay $250,000 a year\",\"cy\":116}]}",
+   "after": "{\"biases\":[],\"unlived\":[{\"tag\":\"Relocation\",\"txt\":\"moved from Jack London to West Oakland — moving up from Jack London — sold up and bought in West Oakland\",\"cy\":112}]}"
+  },
+  {
+   "sheet": "Simulation_Ledger",
+   "row": 416,
+   "col": 14,
+   "colName": "LifeHistory",
+   "id": "POP-00527",
+   "before": "[Compressed: 25 entries | ? → ? | Dominant:Sports,PrevEvening,Personal | Archetype:Striver | Mods:relentless,outgoing,steady,a real fan | AsOf:c114]\nY3C7 — [Reputation] got recognized at the corner store from a Tribune story and pretended to mind\nY3C7 — [Neighborhood] heard the freight trains clanking near the Port and timed their breathing to the rhythm\nY3C8 — [Sports-Win] stayed late in the clubhouse while the music was still on\nY3C8 — [Civic Perception-Openness-Up-S] stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence\nY3C8 — [Home] sold the place in Jack London and bought in West Oakland — $191770 down on $958848\nY3C8 — [Relocation-Drive-Up-M] moved from Jack London to West Oakland — moving up from Jack London — sold up and bought in West Oakland\nY3C9 — [Sports-Sociability-Up-S] heard their name come up on the radio on the drive in\nY3C9 — [Sports-Win] stayed late in the clubhouse while the music was still on\nY3C9 — [Daily-Composure-Up-S] felt a quiet tradeoff settle into place\nY3C9 — [Neighborhood-Composure-Up-S] dodged the running groups circling the lake and found a quiet bench near the pergola\nY3C9 — [Bond] Deacon Seymour became a real friend, not just a colleague\nY3C9 — [Bond] Vinnie Keane became a real friend, not just a colleague\nY3C9 — [TrustGuarded] had it out with Elias Varek, and it did not settle\nY3C9 — [Money] the last debt cleared — the ledger finally reads clean\nY3C10 — [Sports-Sociability-Up-S] got asked about the club at a family dinner\nY3C10 — [Sports-Win] stayed late in the clubhouse while the music was still on\nY3C10 — [Civic Perception-Openness-Up-S] stopped by the stabilization fund office to check on the latest disbursement notices\nY3C10 — [Lifestyle-Openness-Up-S] started a small project with no deadline and no reason near a campus quad\nY3C10 — [Daily-Family-Up-S] heard a shopkeeper say the family name like it still meant something\nY3C10 — [Bond] Mags Corliss became a real friend, not just a colleague\nY3C11 — [Sports-Sociability-Up-S] heard their name come up on the radio on the drive in\nY3C11 — [Sports-Win] stayed late in the clubhouse while the music was still on\nY3C11 — [Civic Perception-Outabout-Up-S] the West Oakland Stabilization Fund is bringing new life to the neighborhood, with bustling storefronts and hopeful conversations.\nY3C11 — [Reputation] overheard their own name in a conversation outside the cafe near a new-construction corner\nY3C11 — [Undocked-Audience] checked the board on the walk to work and Luis Taz was still the name at the top near a local pop-up\nY3C11 — [Bond] Lou Hollis became a real friend, not just a colleague\nY3C12 — [Sports-Moved] packed a bag with the news still settling\nY3C12 — [Sports-Moved] sat at the kitchen table with the family working out what the news means for the house\nY3C12 — [Reputation] had a neighbor tape the article to the building's front door\nY3C12 — [Sports-Composure-Down-M] came home and went straight to the garage to hit off the tee in the dark\nY3C12 — [Sports-Sociability-Up-S] got asked about the club at a family dinner\nY3C12 — [Sports-Composure-Down-M] read one headline, put the phone in a drawer, and left it there\nY3C12 — [Sports-Sociability-Up-S] saw their name in the sports pages again\nY3C12 — [Retirement] retired from the A's, announced C116 — the playing salary ends; appearances and the name pay $250,000 a year\nY3C12 — [Sports-Sociability-Up-S] heard their name come up on the radio on the drive in\nY3C12 — [Sports-Composure-Up-M] sat on the back step a long while, letting the night be as big as it was\nY3C12 — [Sports-Sociability-Up-S] heard their name come up on the radio on the drive in\nY3C12 — [Sports-Composure-Down-M] walked the block twice before going in\nY3C12 — [Question] After a farewell season that brought back Benji Dillon in on 1 year deal and now Benji Dillon is leaving the door open. Does he come back for one more year, and as a starter or out of the bullpen?, and is Oakland even an option? With the youth movement in motion does a Dillon deal make sense? Does the club want him back at his $13.0M salary? What would make him decide, and does he wait to see what Mark Aitken does first?\nY3C12 — [Sports-Sociability-Up-S] heard their name come up on the radio on the drive in\nY3C12 — [Sports-Composure-Up-M] kept the phone buzzing on the counter all night and let it\nY3C12 — [Maneuver-Climb] playing to climb — the name to keep\nY3C12 — [Daily-Family-Up-S] found a family name carved somewhere and stood there a while",
+   "after": "[Compressed: 25 entries | ? → ? | Dominant:Sports,PrevEvening,Personal | Archetype:Striver | Mods:relentless,outgoing,steady,a real fan | AsOf:c114]\nY3C7 — [Reputation] got recognized at the corner store from a Tribune story and pretended to mind\nY3C7 — [Neighborhood] heard the freight trains clanking near the Port and timed their breathing to the rhythm\nY3C8 — [Sports-Win] stayed late in the clubhouse while the music was still on\nY3C8 — [Civic Perception-Openness-Up-S] stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence\nY3C8 — [Home] sold the place in Jack London and bought in West Oakland — $191770 down on $958848\nY3C8 — [Relocation-Drive-Up-M] moved from Jack London to West Oakland — moving up from Jack London — sold up and bought in West Oakland\nY3C9 — [Sports-Sociability-Up-S] heard their name come up on the radio on the drive in\nY3C9 — [Sports-Win] stayed late in the clubhouse while the music was still on\nY3C9 — [Daily-Composure-Up-S] felt a quiet tradeoff settle into place\nY3C9 — [Neighborhood-Composure-Up-S] dodged the running groups circling the lake and found a quiet bench near the pergola\nY3C9 — [Bond] Deacon Seymour became a real friend, not just a colleague\nY3C9 — [Bond] Vinnie Keane became a real friend, not just a colleague\nY3C9 — [TrustGuarded] had it out with Elias Varek, and it did not settle\nY3C9 — [Money] the last debt cleared — the ledger finally reads clean\nY3C10 — [Sports-Sociability-Up-S] got asked about the club at a family dinner\nY3C10 — [Sports-Win] stayed late in the clubhouse while the music was still on\nY3C10 — [Civic Perception-Openness-Up-S] stopped by the stabilization fund office to check on the latest disbursement notices\nY3C10 — [Lifestyle-Openness-Up-S] started a small project with no deadline and no reason near a campus quad\nY3C10 — [Daily-Family-Up-S] heard a shopkeeper say the family name like it still meant something\nY3C10 — [Bond] Mags Corliss became a real friend, not just a colleague\nY3C11 — [Sports-Sociability-Up-S] heard their name come up on the radio on the drive in\nY3C11 — [Sports-Win] stayed late in the clubhouse while the music was still on\nY3C11 — [Civic Perception-Outabout-Up-S] the West Oakland Stabilization Fund is bringing new life to the neighborhood, with bustling storefronts and hopeful conversations.\nY3C11 — [Reputation] overheard their own name in a conversation outside the cafe near a new-construction corner\nY3C11 — [Undocked-Audience] checked the board on the walk to work and Luis Taz was still the name at the top near a local pop-up\nY3C11 — [Bond] Lou Hollis became a real friend, not just a colleague\nY3C12 — [Sports-Moved] packed a bag with the news still settling\nY3C12 — [Sports-Moved] sat at the kitchen table with the family working out what the news means for the house\nY3C12 — [Reputation] had a neighbor tape the article to the building's front door\nY3C12 — [Sports-Composure-Down-M] came home and went straight to the garage to hit off the tee in the dark\nY3C12 — [Sports-Sociability-Up-S] got asked about the club at a family dinner\nY3C12 — [Sports-Composure-Down-M] read one headline, put the phone in a drawer, and left it there\nY3C12 — [Sports-Sociability-Up-S] saw their name in the sports pages again\nY3C12 — [Sports-Sociability-Up-S] heard their name come up on the radio on the drive in\nY3C12 — [Sports-Composure-Up-M] sat on the back step a long while, letting the night be as big as it was\nY3C12 — [Sports-Sociability-Up-S] heard their name come up on the radio on the drive in\nY3C12 — [Sports-Composure-Down-M] walked the block twice before going in\nY3C12 — [Question] After a farewell season that brought back Benji Dillon in on 1 year deal and now Benji Dillon is leaving the door open. Does he come back for one more year, and as a starter or out of the bullpen?, and is Oakland even an option? With the youth movement in motion does a Dillon deal make sense? Does the club want him back at his $13.0M salary? What would make him decide, and does he wait to see what Mark Aitken does first?\nY3C12 — [Sports-Sociability-Up-S] heard their name come up on the radio on the drive in\nY3C12 — [Sports-Composure-Up-M] kept the phone buzzing on the counter all night and let it\nY3C12 — [Daily-Family-Up-S] found a family name carved somewhere and stood there a while"
+  },
+  {
+   "sheet": "Simulation_Ledger",
+   "row": 416,
+   "col": 47,
+   "colName": "DialState",
+   "id": "POP-00527",
+   "before": "{\"base\":{\"drive\":84.31509108004114,\"sociability\":72.88227385066241,\"warmth\":50.0836966416,\"openness\":53.189528185600004,\"composure\":65.00681959229381,\"integrity\":56.47483547975474,\"family\":50.8856,\"outabout\":50,\"fandom\":66.023314432},\"streak\":{\"drive\":-1,\"sociability\":2,\"warmth\":0,\"openness\":0,\"composure\":-1,\"integrity\":1,\"family\":2,\"outabout\":1,\"fandom\":1},\"mood\":{\"drive\":-2,\"sociability\":5.420465581472557,\"warmth\":1.1658997099200004,\"openness\":3.9035366400000004,\"composure\":-0.9509862879816449,\"integrity\":4.480086700953242,\"family\":3.548464,\"outabout\":0.8,\"fandom\":3.504351610368},\"folded\":116,\"maneuver\":{\"p\":\"climb\",\"g\":\"tenure\",\"a\":73,\"c\":116},\"fan\":\"both\"}",
+   "after": "{\"base\":{\"drive\":84.31509108004114,\"sociability\":72.88227385066241,\"warmth\":50.0836966416,\"openness\":53.189528185600004,\"composure\":65.00681959229381,\"integrity\":56.47483547975474,\"family\":50.8856,\"outabout\":50,\"fandom\":66.023314432},\"streak\":{\"drive\":-1,\"sociability\":2,\"warmth\":0,\"openness\":0,\"composure\":-1,\"integrity\":1,\"family\":2,\"outabout\":1,\"fandom\":1},\"mood\":{\"drive\":-2,\"sociability\":5.420465581472557,\"warmth\":1.1658997099200004,\"openness\":3.9035366400000004,\"composure\":-0.9509862879816449,\"integrity\":4.480086700953242,\"family\":3.548464,\"outabout\":0.8,\"fandom\":3.504351610368},\"folded\":116,\"fan\":\"both\"}"
+  },
+  {
+   "sheet": "Simulation_Ledger",
+   "row": 417,
+   "col": 8,
+   "colName": "ClockMode",
+   "id": "POP-00528",
+   "before": "ENGINE",
+   "after": "GAME"
+  },
+  {
+   "sheet": "Simulation_Ledger",
+   "row": 417,
+   "col": 10,
+   "colName": "RoleType",
+   "id": "POP-00528",
+   "before": "Former Manager, Oakland A's",
+   "after": "Manager, Oakland A's"
+  },
+  {
+   "sheet": "Simulation_Ledger",
+   "row": 417,
+   "col": 26,
+   "colName": "Income",
+   "id": "POP-00528",
+   "before": "120000",
+   "after": 7600000
+  },
+  {
+   "sheet": "Simulation_Ledger",
+   "row": 417,
+   "col": 33,
+   "colName": "CareerStage",
+   "id": "POP-00528",
+   "before": "senior",
+   "after": "early-career"
+  },
+  {
+   "sheet": "Simulation_Ledger",
+   "row": 417,
+   "col": 43,
+   "colName": "EconomicProfileKey",
+   "id": "POP-00528",
+   "before": "",
+   "after": "SPORTS_OVERRIDE"
+  },
+  {
+   "sheet": "Simulation_Ledger",
+   "row": 417,
+   "col": 45,
+   "colName": "CitizenBio",
+   "id": "POP-00528",
+   "before": "Now: Former Manager, Oakland A's; retired C116.",
+   "after": ""
+  },
+  {
+   "sheet": "Simulation_Ledger",
+   "row": 417,
+   "col": 49,
+   "colName": "MemoryRegisters",
+   "id": "POP-00528",
+   "before": "{\"biases\":[],\"unlived\":[{\"tag\":\"Retirement\",\"txt\":\"retired from the A's, announced C116 — the playing salary ends; appearances and the name pay $120,000 a year\",\"cy\":116}]}",
+   "after": ""
+  },
+  {
+   "sheet": "Simulation_Ledger",
+   "row": 417,
+   "col": 14,
+   "colName": "LifeHistory",
+   "id": "POP-00528",
+   "before": "[Compressed: 9 entries | ? → ? | Dominant:Sports,Neighborhood,Compressed | Archetype:Striver | Mods:relentless,outgoing,warm,curious,steady,principled,a real fan | AsOf:c114]\nY2C52 — [Neighborhood] waited thirty minutes for a table at a brunch spot because the out-of-town friends insisted on it\nY3C1 — [Hospitalized] Ambulance: workplace accident.\nC105 — [Recovering] Deacon Seymour is now recovering and expected to be released soon\nY3C1 — [Personal] realized they're becoming more like an older relative — and didn't mind\nY3C1 — [Reputation] got recognized by a stranger who'd read about them in the Tribune\nY3C2 — [Personal] caught a stranger humming their song and felt briefly, wrongly, known\nC107 — [Recovery] Deacon Seymour has made a full recovery and returned to their duties\nY3C3 — [Daily] crossed paths with someone familiar at a quiet side street\nY3C3 — [Neighborhood] dodged the running groups circling the lake and found a quiet bench near the pergola near a quiet side street\nY3C3 — [Neighborhood] overheard something at a quiet side street that didn't feel accidental\nY3C3 — [Daily] swapped stories with a neighbor about the cathedral of the living word observes epiphany\nY3C4 — [Neighborhood] heard the freight trains clanking near the Port and timed their breathing to the rhythm\nY3C7 — [Micro-Event] realized the same seven meals had rotated for a month, and shrugged\nY3C7 — [Daily] heard the block was turning over faster than it used to\nY3C8 — [Neighborhood-Sociability-Up-S] the lantern parade winds its way around the lake, casting a warm glow\nY3C9 — [Neighborhood-Openness-Up-S] walked the perimeter of the Coliseum District Development and tried to picture what it would look like in five years\nY3C9 — [Neighborhood-Sociability-Up-S] waited thirty minutes for a table at a brunch spot because the out-of-town friends insisted on it\nY3C9 — [Bond] Mike Paulson became a real friend, not just a colleague\nY3C10 — [Daily-Family-Up-S] everyone's week landed on the table over one long dinner\nY3C10 — [Civic Perception-Openness-Up-S] stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence\nY3C11 — [Civic Perception-Composure-Up-S] the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever. near the lakeside path\nY3C12 — [Reputation] got recognized twice at the grocery store after the story ran\nY3C12 — [Sports-Composure-Down-M] came home and went straight to the garage to hit off the tee in the dark\nY3C12 — [Sports-Sociability-Up-S] got asked about the club at a family dinner\nY3C12 — [Retirement] retired from the A's, announced C116 — the playing salary ends; appearances and the name pay $120,000 a year\nY3C12 — [Maneuver-Climb] playing to climb — the house first\nY3C12 — [Personal-Warmth-Up-S] saw someone running for the bus make it, and felt weirdly invested near the lakeside path",
+   "after": "[Compressed: 9 entries | ? → ? | Dominant:Sports,Neighborhood,Compressed | Archetype:Striver | Mods:relentless,outgoing,warm,curious,steady,principled,a real fan | AsOf:c114]\nY2C52 — [Neighborhood] waited thirty minutes for a table at a brunch spot because the out-of-town friends insisted on it\nY3C1 — [Hospitalized] Ambulance: workplace accident.\nC105 — [Recovering] Deacon Seymour is now recovering and expected to be released soon\nY3C1 — [Personal] realized they're becoming more like an older relative — and didn't mind\nY3C1 — [Reputation] got recognized by a stranger who'd read about them in the Tribune\nY3C2 — [Personal] caught a stranger humming their song and felt briefly, wrongly, known\nC107 — [Recovery] Deacon Seymour has made a full recovery and returned to their duties\nY3C3 — [Daily] crossed paths with someone familiar at a quiet side street\nY3C3 — [Neighborhood] dodged the running groups circling the lake and found a quiet bench near the pergola near a quiet side street\nY3C3 — [Neighborhood] overheard something at a quiet side street that didn't feel accidental\nY3C3 — [Daily] swapped stories with a neighbor about the cathedral of the living word observes epiphany\nY3C4 — [Neighborhood] heard the freight trains clanking near the Port and timed their breathing to the rhythm\nY3C7 — [Micro-Event] realized the same seven meals had rotated for a month, and shrugged\nY3C7 — [Daily] heard the block was turning over faster than it used to\nY3C8 — [Neighborhood-Sociability-Up-S] the lantern parade winds its way around the lake, casting a warm glow\nY3C9 — [Neighborhood-Openness-Up-S] walked the perimeter of the Coliseum District Development and tried to picture what it would look like in five years\nY3C9 — [Neighborhood-Sociability-Up-S] waited thirty minutes for a table at a brunch spot because the out-of-town friends insisted on it\nY3C9 — [Bond] Mike Paulson became a real friend, not just a colleague\nY3C10 — [Daily-Family-Up-S] everyone's week landed on the table over one long dinner\nY3C10 — [Civic Perception-Openness-Up-S] stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence\nY3C11 — [Civic Perception-Composure-Up-S] the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever. near the lakeside path\nY3C12 — [Reputation] got recognized twice at the grocery store after the story ran\nY3C12 — [Sports-Composure-Down-M] came home and went straight to the garage to hit off the tee in the dark\nY3C12 — [Sports-Sociability-Up-S] got asked about the club at a family dinner\nY3C12 — [Personal-Warmth-Up-S] saw someone running for the bus make it, and felt weirdly invested near the lakeside path"
+  },
+  {
+   "sheet": "Simulation_Ledger",
+   "row": 417,
+   "col": 47,
+   "colName": "DialState",
+   "id": "POP-00528",
+   "before": "{\"base\":{\"drive\":81.47947358836936,\"sociability\":70.42845712805214,\"warmth\":60.67589711714399,\"openness\":68.54383889165177,\"composure\":67.3901810381426,\"integrity\":64.56563062257955,\"family\":51.66604965694114,\"outabout\":50.675,\"fandom\":65},\"streak\":{\"drive\":-1,\"sociability\":1,\"warmth\":1,\"openness\":0,\"composure\":-1,\"integrity\":1,\"family\":2,\"outabout\":-1,\"fandom\":0},\"mood\":{\"drive\":-2,\"sociability\":1.7742925723168712,\"warmth\":0.7864820576571202,\"openness\":0.8085557097672577,\"composure\":-1.4890428966102816,\"integrity\":2.126062162645227,\"family\":4.43589662668457,\"outabout\":0,\"fandom\":0},\"folded\":116,\"maneuver\":{\"p\":\"climb\",\"g\":\"home\",\"a\":77,\"c\":116},\"fan\":\"as\"}",
+   "after": "{\"base\":{\"drive\":81.47947358836936,\"sociability\":70.42845712805214,\"warmth\":60.67589711714399,\"openness\":68.54383889165177,\"composure\":67.3901810381426,\"integrity\":64.56563062257955,\"family\":51.66604965694114,\"outabout\":50.675,\"fandom\":65},\"streak\":{\"drive\":-1,\"sociability\":1,\"warmth\":1,\"openness\":0,\"composure\":-1,\"integrity\":1,\"family\":2,\"outabout\":-1,\"fandom\":0},\"mood\":{\"drive\":-2,\"sociability\":1.7742925723168712,\"warmth\":0.7864820576571202,\"openness\":0.8085557097672577,\"composure\":-1.4890428966102816,\"integrity\":2.126062162645227,\"family\":4.43589662668457,\"outabout\":0,\"fandom\":0},\"folded\":116,\"fan\":\"as\"}"
+  },
+  {
+   "sheet": "Simulation_Ledger",
+   "row": 452,
+   "col": 26,
+   "colName": "Income",
+   "id": "POP-00598",
+   "before": "23800000",
+   "after": 2700000
+  },
+  {
+   "sheet": "Household_Ledger",
+   "row": 5,
+   "col": 8,
+   "colName": "HouseholdIncome",
+   "id": "HH-0084-004",
+   "before": "343027",
+   "after": 13093027
+  },
+  {
+   "sheet": "Household_Ledger",
+   "row": 372,
+   "col": 8,
+   "colName": "HouseholdIncome",
+   "id": "HH-0084-371",
+   "before": "298000",
+   "after": 30048000
+  },
+  {
+   "sheet": "Household_Ledger",
+   "row": 373,
+   "col": 8,
+   "colName": "HouseholdIncome",
+   "id": "HH-0084-372",
+   "before": "184565",
+   "after": 7664565
+  },
+  {
+   "sheet": "Household_Ledger",
+   "row": 643,
+   "col": 8,
+   "colName": "HouseholdIncome",
+   "id": "HH-0104-F007",
+   "before": "23848000",
+   "after": 2748000
+  },
+  {
+   "sheet": "LifeHistory_Log",
+   "row": 25746,
+   "col": 3,
+   "colName": "EventTag",
+   "id": "POP-00018",
+   "before": "Neighborhood-Composure-Down-S|source:communityLife|dial:composure:down|source:base|holiday:SpringEquinox|holidayPriority:minor|sportsSeason:early-season|occupation:Former Pitcher, Oakland A's Legend|ageGroup:adult|neighborhood:Rockridge|tier:1|archetype:Anchor",
+   "after": "Neighborhood-Composure-Down-S|source:communityLife|dial:composure:down|source:base|holiday:SpringEquinox|holidayPriority:minor|sportsSeason:early-season|occupation:Pitcher, Oakland A's Legend|ageGroup:adult|neighborhood:Rockridge|tier:1|archetype:Anchor"
+  },
+  {
+   "sheet": "LifeHistory_Log",
+   "row": 25747,
+   "col": 3,
+   "colName": "EventTag",
+   "id": "POP-00018",
+   "before": "Personal-Composure-Up-S|source:reflection|dial:composure:up|holiday:SpringEquinox|holidayPriority:minor|sportsSeason:early-season|venue:local|occupation:Former Pitcher, Oakland A's Legend|ageGroup:adult|neighborhood:Rockridge|tier:1|archetype:Anchor",
+   "after": "Personal-Composure-Up-S|source:reflection|dial:composure:up|holiday:SpringEquinox|holidayPriority:minor|sportsSeason:early-season|venue:local|occupation:Pitcher, Oakland A's Legend|ageGroup:adult|neighborhood:Rockridge|tier:1|archetype:Anchor"
+  },
+  {
+   "sheet": "LifeHistory_Log",
+   "row": 26459,
+   "col": 3,
+   "colName": "EventTag",
+   "id": "POP-00527",
+   "before": "Daily-Family-Up-S|source:familyLife|auth:library-s325|dial:family:up|holiday:SpringEquinox|holidayPriority:minor|sportsSeason:early-season|occupation:Former General Manager, Oakland A's & The Oaks|ageGroup:adult|neighborhood:West Oakland|tier:1|qol:high|archetype:Striver",
+   "after": "Daily-Family-Up-S|source:familyLife|auth:library-s325|dial:family:up|holiday:SpringEquinox|holidayPriority:minor|sportsSeason:early-season|occupation:General Manager, Oakland A's & The Oaks|ageGroup:adult|neighborhood:West Oakland|tier:1|qol:high|archetype:Striver"
+  },
+  {
+   "sheet": "LifeHistory_Log",
+   "row": 26460,
+   "col": 3,
+   "colName": "EventTag",
+   "id": "POP-00528",
+   "before": "Personal-Warmth-Up-S|source:listening|dial:warmth:up|source:base|holiday:SpringEquinox|holidayPriority:minor|sportsSeason:early-season|venue:local|occupation:Former Manager, Oakland A's|ageGroup:adult|neighborhood:Lake Merritt|tier:2|qol:high|archetype:Striver",
+   "after": "Personal-Warmth-Up-S|source:listening|dial:warmth:up|source:base|holiday:SpringEquinox|holidayPriority:minor|sportsSeason:early-season|venue:local|occupation:Manager, Oakland A's|ageGroup:adult|neighborhood:Lake Merritt|tier:2|qol:high|archetype:Striver"
+  },
+  {
+   "sheet": "Story_Seed_Deck",
+   "row": 603,
+   "col": 7,
+   "colName": "Why",
+   "id": "Story_Seed_Deck#603",
+   "before": "A's [traded]; A's [clubhouse-tension]; A's [clubhouse-tension]; A's [retirement]; A's [milestone]; Oaks L1 [big-win]; Oaks L1 [tough-loss]; Oaks L1 [milestone]; A's [traded]; A's [clubhouse-tension]; Oaks L1 [milestone] | aftermath: A's title week 6 after C110 | The sports week reached 16 citizen(s) — 45 named, 0 staff week lines, 0 fan week lines, 42 trigger line(s); retirement: Benji Dillon; retirement: Mike Paulson; retirement: Deacon Seymour | Game night reached 1 household(s) — streak W5 | The town watched — game night shaped 24 citizen day(s) (streak W5)",
+   "after": "A's [traded]; A's [clubhouse-tension]; A's [clubhouse-tension]; A's [milestone]; Oaks L1 [big-win]; Oaks L1 [tough-loss]; Oaks L1 [milestone]; A's [traded]; A's [clubhouse-tension]; Oaks L1 [milestone] | aftermath: A's title week 6 after C110 | The sports week reached 16 citizen(s) — 45 named, 0 staff week lines, 0 fan week lines, 42 trigger line(s)| Game night reached 1 household(s) — streak W5 | The town watched — game night shaped 24 citizen day(s) (streak W5)"
+  },
+  {
+   "sheet": "Ripple_Ledger",
+   "row": 909,
+   "col": 3,
+   "colName": "CauseDetail",
+   "id": "Ripple_Ledger#909",
+   "before": "A's [traded]; A's [clubhouse-tension]; A's [clubhouse-tension]; A's [retirement]; A's [milestone]; Oaks L1 [big-win]; Oaks L1 [tough-loss]; Oaks L1 [milestone]; A's [traded]; A's [clubhouse-tension]; Oaks L1 [milestone]",
+   "after": "A's [traded]; A's [clubhouse-tension]; A's [clubhouse-tension]; A's [milestone]; Oaks L1 [big-win]; Oaks L1 [tough-loss]; Oaks L1 [milestone]; A's [traded]; A's [clubhouse-tension]; Oaks L1 [milestone]"
+  },
+  {
+   "sheet": "Ripple_Ledger",
+   "row": 930,
+   "col": 3,
+   "colName": "CauseDetail",
+   "id": "Ripple_Ledger#930",
+   "before": "The sports week reached 16 citizen(s) — 45 named, 0 staff week lines, 0 fan week lines, 42 trigger line(s); retirement: Benji Dillon; retirement: Mike Paulson; retirement: Deacon Seymour",
+   "after": "The sports week reached 16 citizen(s) — 45 named, 0 staff week lines, 0 fan week lines, 42 trigger line(s)"
+  }
+ ],
+ "deletions": [
+  {
+   "sheet": "LifeHistory_Log",
+   "row": 25642,
+   "content": [
+    "Y3C12",
+    "POP-00018",
+    "Benji Dillon",
+    "Retirement",
+    "retired from the A's, announced C116 — the playing salary ends; appearances and the name pay $250,000 a year",
+    "Rockridge",
+    "116"
+   ]
+  },
+  {
+   "sheet": "LifeHistory_Log",
+   "row": 25644,
+   "content": [
+    "Y3C12",
+    "POP-00527",
+    "Mike Paulson",
+    "Retirement",
+    "retired from the A's, announced C116 — the playing salary ends; appearances and the name pay $250,000 a year",
+    "West Oakland",
+    "116"
+   ]
+  },
+  {
+   "sheet": "LifeHistory_Log",
+   "row": 25646,
+   "content": [
+    "Y3C12",
+    "POP-00528",
+    "Deacon Seymour",
+    "Retirement",
+    "retired from the A's, announced C116 — the playing salary ends; appearances and the name pay $120,000 a year",
+    "Lake Merritt",
+    "116"
+   ]
+  },
+  {
+   "sheet": "LifeHistory_Log",
+   "row": 27724,
+   "content": [
+    "Y3C12",
+    "POP-00018",
+    "",
+    "Maneuver-Climb",
+    "playing to climb — the name to keep",
+    "",
+    "116"
+   ]
+  },
+  {
+   "sheet": "LifeHistory_Log",
+   "row": 27731,
+   "content": [
+    "Y3C12",
+    "POP-00527",
+    "",
+    "Maneuver-Climb",
+    "playing to climb — the name to keep",
+    "",
+    "116"
+   ]
+  },
+  {
+   "sheet": "LifeHistory_Log",
+   "row": 27732,
+   "content": [
+    "Y3C12",
+    "POP-00528",
+    "",
+    "Maneuver-Climb",
+    "playing to climb — the house first",
+    "",
+    "116"
+   ]
+  },
+  {
+   "sheet": "Story_Hook_Deck",
+   "row": 2178,
+   "content": [
+    "Y3C12",
+    "116",
+    "6d96d272",
+    "sports",
+    "SPORTS",
+    "",
+    "3",
+    "A's player retires. Career look-back, the farewell, what the city remembers.",
+    "",
+    "Sports Desk",
+    "Anthony",
+    "conflict/tension coverage",
+    "Voice: Data-centric, analytical, insider access\nOpening: Atmospheric setting descriptions - fog, lights, quiet mornings before games\nThemes: Rhythm, Blueprint, Precision, Controlled burn, Professional craft\nSample: \"There's a kind of patience to this team you can hear before you see it\"\nMode: Allow more narrative depth.",
+    "medium"
+   ]
+  }
+ ]
+}

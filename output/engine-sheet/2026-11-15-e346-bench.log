@@ -1,0 +1,54 @@
+AIM = BENCH (script read the bench marker)
+== push stage 46 (news)
+bench pulled = a stage over stage 45; the five files back at stage 45 = stage 45
+stage 46 = stage 45 + engine.346 (3 files) at f50b367c9; manifest output/engine-sheet/stage46-e346.sha256
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @200
+pull-back 167 js + manifest byte-identical to stage46-e346.sha256
+== sync from live
+  verify Story_Hook_Deck: bench 2176 rows vs live 2176 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+{"fireGuardMinutes":"0","cycleCountFormatted":"115","cycleCountIsNumber":true}
+door: {"target":"bench","http":200,"ok":true,"record":{"cycle":116,"startedMs":1794200642838,"state":"done","finishedMs":1794200825295},"raw":"{\"cycle\":116,\"startedMs\":1794200642838,\"state\":\"done\",\"finishedMs\":1794200825295}","valid":true,"expectOk":null}
+clearfire 116: {"ok":true,"cleared":{"cycle":116,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+== plant
+planted: bench feed row 278 EventTrigger "clubhouse-tension" -> "news"; pre-fire cells saved
+== fire 1
+HALT seed
+bench script exit 6
+== resume: pause 75 s for the read quota
+== fire 1
+Edition_Coverage_Ratings C115: 2 rows (window 115,114,113,112,111,110,109,108), sandbox already has CIVIC,COMMUNITY,CULTURE,INFRASTRUCTURE,SPORTS
+Citizen_Media_Usage C115: 0 rows (sandbox already has a published or seeded week at C115)
+Oakland_Sports_Feed C116: 0 rows
+appended 2 to Edition_Coverage_Ratings; marked rows on the tab now 2
+bench cycleCount 115
+fire C116 rc=2 "verdict": "HALT" "wallS": 362
+HALT fire
+{
+ "label": "e346-f1",
+ "expect": 115,
+ "at": "2026-11-15T23:51:42.103Z",
+ "pre": {
+  "bench": 115,
+  "live": 115,
+  "ee": 6,
+  "rileyLast": 115,
+  "checkpoint": null
+ },
+ "wallS": 362,
+ "http": 200,
+ "nonJson": "<!DOCTYPE html><html><head><script nonce=\"c5b7W8_h4Dx6xU6gcHtwRA\">window['ppConfig'] = {productName: '26981ed0d57bbad37e",
+ "post": {
+  "bench": 115,
+  "live": 115,
+  "ee": 6,
+  "rileyLast": 115,
+  "checkpoint": null
+ },
+ "newEE": [],
+ "verdict": "HALT",
+ "why": "quota text in response"
+}
+resume exit 2

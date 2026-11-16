@@ -273,6 +273,7 @@ All sport-neutral (the Oaks ride these pools too), they/them only.
 
 ## Changelog
 
+- 2026-11-15 (research-build) — engine.346 sandbox PASS 39/39 (SANDBOX 1004 @200, stage 46). Not on PROD: the builder's word is `off-season`, not `news` — rename, re-bench, then PROD. Trail: DEPLOY_HISTORY §Current sandbox.
 - 2026-11-15 (research-build) — engine.346: `news` added (builder: no word for offseason news; a C116 rumor row entered as `retirement` retired three). Hook yes, no second citizen line, changes nobody. Word table row above.
 - 2026-11-09 (engine-sheet) — C115 live read: Acceptance 14 PASS (3 SPORTS pitches = retirement, community-outreach, big-win; Oaks W4 under the bar, no hot pitch); P1 PASS (3 vs 2/2/2). P3 FAILS: 142 signed fan lines vs 37–74 — builder's call (G-EC45).
 - 2026-11-07 (engine-sheet) — Q5 shipped as engine.335, PROD @177 (stage 41); this row's C115 read unchanged (Acceptance 14, P1, P3).

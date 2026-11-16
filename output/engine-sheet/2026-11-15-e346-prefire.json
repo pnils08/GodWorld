@@ -1,0 +1,41 @@
+{
+ "at": "2026-11-16T00:08:48.528Z",
+ "feedRow": 278,
+ "triggerWas": "clubhouse-tension",
+ "errRows": 6,
+ "cells": {
+  "POP-00018": {
+   "ClockMode": "GAME",
+   "RoleType": "Pitcher, Oakland A's Legend",
+   "Income": "13000000",
+   "EconomicProfileKey": "SPORTS_OVERRIDE",
+   "CitizenBio": "Born 2005, Oakland native. Starting pitcher (left-handed), Oakland Athletics. 5x Cy Young Award winner. Farewell season in 2041 — age 38, velocity in honest conversation with the calendar. Part of the Dynasty Five farewell alongside Kelley and Keane. Married. Hal Richmond: \"Dillon is intelligence.\" Sat courtside at Chase Center with Aitken, Keane, and Mike Paulson for a Warriors game — standing ovation. Accompanied Aitken to the DEIR civic session. Lives in Rockridge. The kind of pitcher whose declining velocity is a story every reporter wants to write but nobody wants to be right about.",
+   "Status": "Active",
+   "Tier": "1",
+   "CareerStage": "senior",
+   "MemoryRegisters": ""
+  },
+  "POP-00527": {
+   "ClockMode": "GAME",
+   "RoleType": "General Manager, Oakland A's & The Oaks",
+   "Income": "30000000",
+   "EconomicProfileKey": "SPORTS_OVERRIDE",
+   "CitizenBio": "",
+   "Status": "Active",
+   "Tier": "1",
+   "CareerStage": "mid-career",
+   "MemoryRegisters": "{\"biases\":[],\"unlived\":[{\"tag\":\"Relocation\",\"txt\":\"moved from Jack London to West Oakland — moving up from Jack London — sold up and bought in West Oakland\",\"cy\":112}]}"
+  },
+  "POP-00528": {
+   "ClockMode": "GAME",
+   "RoleType": "Manager, Oakland A's",
+   "Income": "7600000",
+   "EconomicProfileKey": "SPORTS_OVERRIDE",
+   "CitizenBio": "",
+   "Status": "Active",
+   "Tier": "2",
+   "CareerStage": "early-career",
+   "MemoryRegisters": ""
+  }
+ }
+}

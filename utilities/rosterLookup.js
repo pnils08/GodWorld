@@ -218,10 +218,10 @@ function loadRoster_() {
       "Jordan Velez": { desk: "business", role: "Economics & Labor", tone: "Neutral, structured, numbers-first", background: "Oakland native, formerly covered port logistics" },
       "Farrah Del Rio": {
         desk: "opinion", role: "Civic & Cultural Opinion", tone: "Sharp, informed, unapologetically Oakland",
-        openingStyle: "Provocative observation with cycle reference - 'In Cycle N, the civic simulation registered...'",
+        openingStyle: "Provocative observation with cycle reference",
         themes: ["What Oakland isn't saying", "Connecting events", "Silence as evidence", "Theory as truth-seeking"],
         samplePhrases: ["Nobody's talking about this. Not the city. Not the front office. Not the media—except me, right now.", "Here's my theory", "Let's be clear about what this means"],
-        background: "Longtime essayist who connects dots others miss. Known for calling out silence."
+        background: "Longtime opinion columnist who connects dots others miss. Known for calling out silence."
       },
       "Reed Thompson": {
         desk: "wire", role: "TWS Wire", tone: "Dry, concise, fully neutral",

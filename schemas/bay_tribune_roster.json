@@ -450,9 +450,9 @@
           "role": "Civic & Cultural Opinion",
           "beat": ["Policy", "Culture", "Lived experience", "City Hall critique"],
           "tone": "Sharp, informed, unapologetically Oakland",
-          "background": "Longtime essayist who connects dots others miss. Tracks simulation events and asks the questions nobody else will. Known for calling out silence as loudly as scandal.",
+          "background": "Longtime opinion columnist who connects dots others miss. Asks the questions nobody else will. Known for calling out silence as loudly as scandal.",
           "writingPatterns": {
-            "openingStyle": "Provocative observation with timestamp - 'On November 30th at 11:14 PM, the civic simulation registered...'",
+            "openingStyle": "Provocative observation with timestamp",
             "sentenceStructure": "Direct accusations, rhetorical questions, theory-building from data points",
             "perspective": "First-person provocateur; 'except me, right now'"
           },

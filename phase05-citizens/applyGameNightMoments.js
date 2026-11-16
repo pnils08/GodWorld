@@ -236,10 +236,10 @@ var SPORTS_TRIGGER_ROUTES_ = {
   'injury': 'injury', 'injury-return': 'injury-return', 'retirement': 'retirement',
   // engine.338 — the builder's question to the named citizen(s): the Notes cell, verbatim, as the row's ONLY line
   'question': 'question',
-  // news — club news that is not a game, a moment or a milestone (a rumor, front-office talk, an offseason read). Seeds a
+  // off-season — club talk that is not a game, a moment or a milestone (a rumor, front-office talk, an offseason read). Seeds a
   // desk story (storyHook TRIGGER_HOOKS). The named citizens keep the row's own EventType line and get no second line:
   // no texture pool, no milestone, no clock / role / pay change.
-  'news': 'hook'
+  'off-season': 'hook'
 };
 // the graded tag each texture route writes (engine.299: a line with no signed fact is not written)
 var SPORTS_TRIGGER_TAGS_ = {
@@ -568,7 +568,7 @@ function applyGameNightMoments_(ctx) {
           counts.returned++; milestoneDetail.push('injury-return (' + ret + '): ' + who);
         }
       } else if (routeKey === 'hook') {
-        // a story-seeding word with no second citizen line (news): the row's EventType line is already written above
+        // a story-seeding word with no second citizen line (off-season): the row's EventType line is already written above
       } else {
         write(ri, SPORTS_TRIGGER_TAGS_[routeKey], pick(SPORTS_TRIGGER_POOLS_[routeKey]), SPORTS_TRIGGER_TAGS_[routeKey] + tagTail);
         counts.trigger++;

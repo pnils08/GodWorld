@@ -52,9 +52,9 @@ test('every row says its own moment, un-deduped (storyHook dedupes per team per 
     row({ Cycle: 120, TeamsUsed: 'Oaks', EventTrigger: 'trade-rumor' })], 120);
   assert.deepStrictEqual(words(S), ["A's:award", "A's:award", 'Oaks:signed', 'Oaks:trade-rumor']);
 });
-test('news: the word rides the entry to the newsroom as a moment and seeds a story', () => {
-  const S = fire([row({ Cycle: 120, EventType: 'rumor', EventTrigger: 'news' }), row({ Cycle: 120, TeamsUsed: 'Oaks', EventTrigger: 'News' })], 120);
-  assert.deepStrictEqual(words(S), ["A's:news", 'Oaks:news']);
+test('off-season: the word rides the entry to the newsroom as a moment and seeds a story', () => {
+  const S = fire([row({ Cycle: 120, EventType: 'rumor', EventTrigger: 'off-season' }), row({ Cycle: 120, TeamsUsed: 'Oaks', EventTrigger: 'Off Season' })], 120);
+  assert.deepStrictEqual(words(S), ["A's:off-season", 'Oaks:off-season']);
 });
 test('blank, dash and none are no moment and no log', () => {
   const S = fire([row({ Cycle: 120, EventTrigger: '' }), row({ Cycle: 120, EventTrigger: ' - ' }),

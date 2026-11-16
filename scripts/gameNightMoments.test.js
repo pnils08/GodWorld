@@ -226,23 +226,23 @@ for (const k of Object.keys(routeTags)) {
 }
 assert.ok(Object.keys(dialMap.nudgesForEvent_('Retirement', 1, '')).length > 0);
 
-// 7a2. `news` seeds a desk story and changes nobody (the C116 shape: ONE rumor row naming a pitcher, a GM and a player).
+// 7a2. `off-season` seeds a desk story and changes nobody (the C116 shape: ONE rumor row naming a pitcher, a GM and a player).
 // Each named citizen keeps the row's own EventType line; no second line, no milestone, and the clock / role / pay / key /
 // bio stay put. The word is on the dropdown (pinned above: dropdown == routes) and has a hook (sportsFeedContract.test.js).
 {
   const before = rows7().map((r) => JSON.stringify(r));
-  const rN = run7([{ eventType: 'rumor', teamsUsed: "A's", namesUsed: 'Vinnie Keane (DH), Arturo Ramos (SP), Mike Paulson (GM)', eventTrigger: 'news' }], rows7());
+  const rN = run7([{ eventType: 'rumor', teamsUsed: "A's", namesUsed: 'Vinnie Keane (DH), Arturo Ramos (SP), Mike Paulson (GM)', eventTrigger: 'off-season' }], rows7());
   ['POP-00001', 'POP-00025', 'POP-00527'].forEach((id) => {
     const after = rowOf(rN, id), was = JSON.parse(before[rN.rows.indexOf(after)]);
     ['ClockMode', 'RoleType', 'Income', 'EconomicProfileKey', 'CitizenBio', 'Status', 'StatusStartCycle', 'Tier'].forEach((col) => {
-      assert.strictEqual(after[c7(col)], was[c7(col)], id + ' ' + col + ' unchanged by a news row');
+      assert.strictEqual(after[c7(col)], was[c7(col)], id + ' ' + col + ' unchanged by an off-season row');
     });
     const t = rN.rawTags[id] || [];
     assert.strictEqual(t.length, 1, id + ' gets exactly the row\'s EventType line: ' + JSON.stringify(t));
-    assert.ok(!/trigger:news|^Retirement|Sports-Moved|Sports-Injured/.test(t[0]), id + ' no trigger line, no milestone: ' + t[0]);
+    assert.ok(!/trigger:off-season|^Retirement|Sports-Moved|Sports-Injured/.test(t[0]), id + ' no trigger line, no milestone: ' + t[0]);
   });
   assert.ok(!rN.ripples.length || rN.ripples[0].causeDetail.indexOf('retirement:') === -1, 'no retirement in the ripple');
-  assert.ok(!rN.logs.some((l) => /no citizen route/.test(l)), 'news is a ruled word, not an unknown one: ' + rN.logs.join(' / '));
+  assert.ok(!rN.logs.some((l) => /no citizen route/.test(l)), 'off-season is a ruled word, not an unknown one: ' + rN.logs.join(' / '));
 }
 
 // 7b. retirement leaves the sports layer: clock, key, role, line, bare log tag, bio — Status stays Active

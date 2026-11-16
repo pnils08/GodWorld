@@ -611,8 +611,8 @@ function storyHookEngine_(ctx) {
       'camp-opens':     { priority: 2, text: function(t) { return t.team + ' open camp. First look at the roster, battles to watch, fresh-start energy.'; } },
       'award':          { priority: 2, text: function(t) { return t.team + ' player wins an award. Recognition story, the season behind it, hometown pride.'; } },
       'community-outreach': { priority: 2, text: function(t) { return t.team + ' in the community. Who showed up, who it helped, the club off the field' + (t.neighborhood ? ' in ' + t.neighborhood : '') + '.'; } },
-      // news: club news that is not a game, a moment or a milestone — a rumor, front-office talk, an offseason read.
-      'news':           { priority: 2, text: function(t) { return t.team + ' news. What is being said, who is saying it, what the club has and has not confirmed.'; } }
+      // off-season: club talk that is not a game, a moment or a milestone — a rumor, front-office talk, an offseason read.
+      'off-season':     { priority: 2, text: function(t) { return t.team + ' off-season. What is being said, who is saying it, what the club has and has not confirmed.'; } }
     };
 
     for (var sti = 0; sti < sportsTriggers.length; sti++) {

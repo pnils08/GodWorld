@@ -1060,8 +1060,8 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
         if (famStill && famAtNow.dead) famDeadAnchor = famAtNow.row;
         if (!famStill) {
           Logger.log('processAdvancementRows_: ' + first + ' ' + last + ' — ' + (famHits !== 1
-            ? famHits + ' Family rows of ' + matchPop + ' by this name; not minted (engine.304)'
-            : 'the ' + matchType + ' spot of ' + matchPop + ' closed in this batch; not minted (engine.304)'));
+            ? famHits + ' Family rows of ' + matchPop + ' by this name; not minted'
+            : 'the ' + matchType + ' spot of ' + matchPop + ' closed in this batch; not minted'));
           rowsToClear.push(i + 1);
           continue;
         }
@@ -2134,8 +2134,8 @@ function checkEmergencePromotions_(ss, cycle, maxQueue, simYear, ctx) {
     if (aT >= 0) out[aT] = 4; // lottery entry is Tier 4 — climbs via UsageCount like everyone
     if (aC >= 0) out[aC] = 'ENGINE';
     if (aNo >= 0) out[aNo] = famOf
-      ? 'GC family emergence — ' + famRole + ' of ' + (famAt && famAt.dead ? 'the late ' : '') + famOf + ', EmergenceCount ' + count + ', C' + cycle + ' (engine.304)'
-      : 'GC emergence promotion — EmergenceCount ' + count + ', C' + cycle + ' (engine.58 lottery)';
+      ? 'GC family emergence — ' + famRole + ' of ' + (famAt && famAt.dead ? 'the late ' : '') + famOf + ', EmergenceCount ' + count + ', C' + cycle
+      : 'GC emergence promotion — EmergenceCount ' + count + ', C' + cycle;
     if (aBY >= 0 && birthYear) out[aBY] = birthYear;
     if (aNB >= 0) out[aNB] = famHood || (gN >= 0 ? String(data[r][gN] || '').trim() : '');
     if (famOf) { // engine.304 D6: wireFamilyMatch_ wires them at the mint
@@ -2640,8 +2640,7 @@ function checkBusinessOwnerPromotions_(ctx, cycle, slots) {
     if (aR >= 0) out[aR] = 'Owner, ' + biz.name;
     if (aT >= 0) out[aT] = 4;
     if (aC >= 0) out[aC] = 'ENGINE';
-    if (aNo >= 0) out[aNo] = 'Owner door — ' + biz.name + ' (' + biz.id + '), C' + cycle +
-      ' (engine.96 Task 12: the business is the reason; authored, not a pool draw)';
+    if (aNo >= 0) out[aNo] = 'Owner door — ' + biz.name + ' (' + biz.id + '), C' + cycle;
     if (aBY >= 0) out[aBY] = simYear - age;
     if (aNB >= 0) out[aNB] = biz.hood;
     if (aEmp >= 0) out[aEmp] = biz.id;
@@ -2691,8 +2690,8 @@ function wireBusinessOwners_(ctx, mints, cycle, now, logSheet) {
     queueCellIntent_(ctx, 'Business_Ledger', b1 + 1, bKP + 1, mt.pop + ' ' + name + ' (' + tag + ')',
       'engine.96 Task 12 owner door — Key_Personnel', 'economy', 90);
     data[b1][bKP] = mt.pop; // a second mint this pass sees the seat taken
-    if (iLife >= 0) row[iLife] = (row[iLife] ? row[iLife] + '\n' : '') + stamp + ' — [Business] ' + (tag === 'owner' ? 'Took over ' : (tag.charAt(0).toUpperCase() + tag.slice(1)) + ' of ') + bizName + ' in ' + hood + ' — the business is the reason';
-    if (logSheet) logSheet.appendRow([now, mt.pop, name, 'Business-Owner', 'Became the owner of ' + bizName + ' — ' + hood + ' (engine.96 Task 12)', hood, cycle]);
+    if (iLife >= 0) row[iLife] = (row[iLife] ? row[iLife] + '\n' : '') + stamp + ' — [Business] ' + (tag === 'owner' ? 'Took over ' : (tag.charAt(0).toUpperCase() + tag.slice(1)) + ' of ') + bizName + ' in ' + hood;
+    if (logSheet) logSheet.appendRow([now, mt.pop, name, 'Business-Owner', 'Became the owner of ' + bizName + ' — ' + hood, hood, cycle]);
     if (ctx.summary) {
       ctx.summary.storyHooks = ctx.summary.storyHooks || [];
       ctx.summary.storyHooks.push({
@@ -2858,7 +2857,7 @@ function queueHouseholdIntake_(ctx, intakeSheet, intakeVals, intakeHeader, nameI
       var role = mm.role || (age < 18 ? 'student' : '');
       var vals = {
         First: mm.first, Middle: '', Last: mm.last, RoleType: role, Tier: 4, ClockMode: 'ENGINE',
-        Notes: 'Household intake C' + cycle + ' — "' + grp.label + '"' + (mm.notes ? ': ' + mm.notes : '') + ' (engine.109: the family is the reason)',
+        Notes: 'Household intake C' + cycle + ' — "' + grp.label + '"' + (mm.notes ? ': ' + mm.notes : ''),
         BirthYear: simYearOf_(ctx, cycle) - age, Neighborhood: hood, // engine.164
         MatchType: mm.rel === 'head' ? '' : mm.rel,
         MatchName: mm.rel === 'head' ? '' : headName,
@@ -2870,7 +2869,7 @@ function queueHouseholdIntake_(ctx, intakeSheet, intakeVals, intakeHeader, nameI
       adv.sheet.appendRow(qrow); // Phase-5 direct write to the promotion queue — same class as the drip writers (§9)
       out.rows[mm.row1] = true;
       out.statusWrites.push([mm.row1, 'queued household "' + grp.label + '" (' + members.length + ' members, ' + mm.rel +
-        ') → Simulation_Ledger via the promotion populator (engine.109)']);
+        ') → Simulation_Ledger via the promotion populator']);
       out.members++;
     }
     out.households++;
@@ -2962,7 +2961,7 @@ function formIntakeHouseholds_(ctx, mints, cycle, now, logSheet) {
     }
     if (logSheet) {
       logSheet.appendRow([now, hh.head.pop, nameOf(hh.head.idx), 'Household',
-        pops.length + '-member household arrived through intake — ' + hood + ' (engine.109)', hood, cycle]);
+        pops.length + '-member household arrived through intake — ' + hood, hood, cycle]);
     }
     if (ctx.summary) {
       ctx.summary.storyHooks = ctx.summary.storyHooks || [];
@@ -3089,8 +3088,8 @@ function wireFamilyMatch_(ctx, newIdx, newPopId, targetPopId, matchType, now, cy
 
   if (logSheet) {
     logSheet.appendRow([now, newPopId, newName, 'Family',
-      (src === 'drip lottery' ? 'Won the family lottery — ' + desc + ' (engine.66)'
-        : 'Arrived with the household — ' + desc + ' (engine.109)'), '', cycle]);
+      (src === 'drip lottery' ? 'Won the family lottery — ' + desc
+        : 'Arrived with the household — ' + desc), '', cycle]);
   }
   if (ctx.summary) {
     ctx.summary.storyHooks = ctx.summary.storyHooks || [];
@@ -3162,7 +3161,7 @@ function wireFamilyToDeceased_(ctx, newIdx, newPopId, deadPop, deadRow, matchTyp
     newRow[iLife] = (String(newRow[iLife] || '') ? String(newRow[iLife]) + '\n' : '') + line;
   }
   ctx.ledger.dirty = true;
-  if (logSheet) logSheet.appendRow([now, newPopId, newName, 'Family', 'Arrived as family — ' + desc + ' (engine.304)', '', cycle]);
+  if (logSheet) logSheet.appendRow([now, newPopId, newName, 'Family', 'Arrived as family — ' + desc, '', cycle]);
   if (ctx.summary) {
     ctx.summary.storyHooks = ctx.summary.storyHooks || [];
     ctx.summary.storyHooks.push({
@@ -3225,7 +3224,7 @@ function seedEmergenceBonds_(ctx, cycle) {
       seen[namer.popId] = true;
       ctx.summary.relationshipBonds.push(makeBond_(promoted.popId, namer.popId,
         BOND_TYPES.FRIENDSHIP, 'emergence', 'COMMUNITY', namer.hood || promoted.hood,
-        3, cycle, 'Knew them before the record did (engine.59 C' + cycle + ')', ctx));
+        3, cycle, 'Knew them before the record did', ctx));
       seededHere++;
       results.seeded++;
     }

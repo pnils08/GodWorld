@@ -2846,7 +2846,7 @@ function processGCMarriageLottery_(ctx) {
       income: spInc, hood: P.hood, tier: 4, edu: '', debt: 0, savings: 0
     };
     var lotteryBond = makeBond_(pid, spId, BOND_TYPES.ROMANTIC, 'gc-lottery', 'COMMUNITY',
-      P.hood, MARRIAGE_THRESHOLD, cycle, 'Met outside the record (engine.59 lottery C' + cycle + ')', ctx);
+      P.hood, MARRIAGE_THRESHOLD, cycle, 'Met outside the record', ctx);
     bonds.push(lotteryBond);
     ctx.summary.relationshipBonds = bonds;
     marryCitizens_(ctx, lotteryBond, P, B, cycle);

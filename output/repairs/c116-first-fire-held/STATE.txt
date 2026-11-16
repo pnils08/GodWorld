@@ -23,3 +23,10 @@ OPEN
 - City hall excluded INIT-006 / INIT-014 / INIT-003 at the close and two project moves failed (G-EC43).
 - Unfiled defects, builder's call: pre-flight does not preview acting triggers; Step 2.5 does not read ledger incomes;
   Step 3.5 accepts any log that completes; engine.208 stock lines are role-blind.
+
+OFFICE PAGES, MEASURED 19:40 CST (not changed)
+70 C116 entries on 15 office holders' pages + Varek's: 59 hold both hearings' statements joined by "---", 7 hold the first hearing
+only, 4 the second only. Clean-up written and dry-run only: output/repairs/2026-11-15-c116-office-pages-trim.js (keeps the second
+hearing's statement in place, deletes the 7 first-only entries, saves every old entry first). It edits 16 people's memory pages by
+hand — the builder's decision; not applied.
+HAND WRITES ON THE LIVE SHEET SINCE THE REWIND: one cell, POP-00598 Income -> 2,700,000 (18:14 CST).

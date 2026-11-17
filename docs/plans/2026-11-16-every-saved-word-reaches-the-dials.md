@@ -134,12 +134,29 @@ Six calls put to him; his answer verbatim: "1 yes 2 yes 3 yes 4 middle 5 yes or 
 | new: a ledger of dial moves | "so it can be managed" | Task 6 |
 | Does World_Config have dials for this | — | Live read 2026-11-16 (253 keys): yes for the two dice (`civicRole*`, `lifeEvent*`), the pressure bars (`dialFrictionRentBurden`, `dialSetbackLossPct`, `dialHoodPressureBar`, `dialHoodCrimeBar`), integrity wear and grief. No for the speed itself: line size (1 / 2 / 4), fade (0.8), the three-Cycle rule, the share that sticks (0.4), the reflection weight (0.45 × 0.5) and the band edges are constants in `citizenMemory.js` / `citizenDialMap.js` / `compressLifeHistory.js`. Task 6 moves them. |
 
+## Build review reconciled
+
+agy re-review of the diff, `output/antigravity/2026-11-17-review-dials-diff.md` (HOLD). Checked before taken; fixes in `5da47216d`, benched again after.
+
+| Finding | Check | Disposition |
+|---|---|---|
+| My reading of the third fire (re-signed lines move the hood pulse, the draws follow) is wrong | sync logs: live read 82,713 rows before the second fire, 82,720 before the third; the feed seed appended 2 sports rows, then 0 (the real C117 feed had landed on live); `pulseKindForLine_` re-signs Neighborhood lines only | taken — retracted. The second-vs-third comparison is confounded by input; the fold-only replay on the third fire's own data stands (176 citizens differ, 17 permanently: the 13 + 4 streaks that now complete) |
+| Catch-up settle stops at the last held line | read `foldNewEntries_` | taken — the swing also fades for the Cycles since |
+| `[Business] Took over …` still goes to the word-match | `processAdvancementIntake.js:2693` | taken — exact map key at the same value |
+| Mint sentences fixed at the parser, not the writers; bare "hospital" still in the word-match | diff | kept as built; Task 2(a) reworded to say so; the residual class is Task 7's |
+| A corrupt open cell writes nine moves from 50; a non-number dial writes NaN | read `buildDialMoves_` | taken — counted and logged, never written |
+| Three `typeof` guards can hide a missing helper | read | taken — each logs to Engine_Errors; the summary carries `queued` |
+| Tests feed strings, not the writers; `dialReflectionShare` untested; no bad-fade case | test files | taken — source assertions on the four writers, a reflection run at three key values, a refused fade |
+| `scripts/drainReflectionBacklog.js` uses the code constants, not the key | `:35-36` | recorded — a manual lever; it drains at the seed value until it reads World_Config |
+| Live repair: exact POPIDs, exact 133 | — | taken — `output/research-build/2026-11-17-e349-live-marks.js` |
+| Run time +26 / +30 s on the bench with no per-phase split | fire responses carry `ranMs` only | recorded — the tail is read at C117 (engine.95) |
+
 ## Tasks
 
 | # | Task | Row | Status |
 |---|------|-----|--------|
 | 1 | Deep-dive read; agy review folded | engine.347 | done 2026-11-16 |
-| 2 | Wrong reads. (a) A job title or employer name moves nothing: the health word-match stops firing on the bare word "hospital"; the three mint sentences (`processAdvancementIntake.js:1122`, `checkForPromotions.js:479-481`, `generateGenericCitizens.js:729`) are written under a mapped kind. (b) The PrevEvening "avoided the crowds" and "still buzzing" lines, Media "in a hard light" and "the spotlight moved on", and the `[Business]` draw line (raised / cut) take the sign of what they say, at the writer. (c) The streak lock: the settle floor scales with the room the swing has (`citizenMemory.js:209`), and the pending-mood test in the fold matches it (`compressLifeHistory.js:569`). (d) A catch-up fold settles between Cycles (`foldNewEntries_`). (e) After (d) is live: the 13 watermarks set to 107, backup first, read back | engine.349 | a–d built `6eb7bdb51`, tests green, on the bench; (e) after the deploy |
+| 2 | Wrong reads. (a) A job title or employer name moves nothing. As built: the parser (`parseHistoryLine_`) reads the mint sentences as their own kinds — "Promoted to Tier N in Cycle C. …" and "The record catches up: …" → `Intake` (no dial), any "Arrived in <place> …" → `Arrival` — so the three writers and the stored text are untouched; the owner door's bare `[Business]` line has its own map key. The health word-match still carries the bare word "hospital" for other unmapped lines; that class goes with Task 7 (writers sign their lines). (b) The PrevEvening "avoided the crowds" and "still buzzing" lines, Media "in a hard light" and "the spotlight moved on", and the `[Business]` draw line (raised / cut) take the sign of what they say, at the writer. (c) The streak lock: the settle floor scales with the room the swing has (`citizenMemory.js:209`), and the pending-mood test in the fold matches it (`compressLifeHistory.js:569`). (d) A catch-up fold settles between Cycles (`foldNewEntries_`). (e) After (d) is live: the 13 watermarks set to 107, backup first, read back | engine.349 | a–d built `6eb7bdb51`, tests green, on the bench; (e) after the deploy |
 | 3 | Grade strings stop writing reflection rows — the page write the next wake reads back stays (`citizenVoice.js:241-253`), only the ledger append is skipped; a printed reporter gets one row, "my article was selected to run in the Cycle Pulse", from the Saturday print set | engine.347 | not started |
 | 4 | Classifier (before the new writers): ordinary-bad event tags the dial map already carries (a fight, a snub, a letdown, a bond gone cold) and a flat affect; the prompt stops calling every input "a reflection on their day"; `reflectionClassifier.test.js` Tests 3 and 6, `AFFECT_VALENCE` and the signal detector's pole table move with it | engine.347 | not started |
 | 5 | Office, seat, worker, Mara and Varek words write a Reflection_Intake row beside the page write (insertion points: `…-dials-cron-writers.md` Part 4) | engine.347 | not started |
@@ -192,3 +209,4 @@ agy, `output/antigravity/2026-11-16-review-dials-plan.md` (HOLD on the first cut
 - 2026-11-16 (research-build) — Builder's rulings on the six calls recorded verbatim; tasks 2–11 set across engine.347 / 349 / 350 / 351.
 - 2026-11-16 (research-build) — agy plan review folded (16 findings: 15 taken, 1 kept as is); Task 2 and 6 respecified, order and acceptance rewritten.
 - 2026-11-16 (research-build) — Task 6 (`4e2e075b0`) and Task 2 a–d (`6eb7bdb51`) built; three-leg bench run started (`output/research-build/2026-11-16-e349-bench.sh`).
+- 2026-11-17 (research-build) — Bench: Task 6 identical on 1,077 of 1,077 citizens, Dial_Moves 437 = 437; agy re-review folded (`5da47216d`); candidate re-benched.

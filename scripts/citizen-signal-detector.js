@@ -50,10 +50,14 @@ const I_POPID = 1;
 const I_CYCLE = 2;
 const I_AFFECT = 7;
 
-// Affect vocab = 9 tags (lib/reflectionClassifier.js AFFECT_TAGS), with sentiment pole.
+// Affect vocab (lib/reflectionClassifier.js AFFECT_TAGS): 9 moods with a sentiment pole, plus Flat.
+// engine.347: a Flat row is a citizen who spoke without feeling — counted in the window and baseline
+// totals (so the moods' shares stay comparable with the Cycles before Flat existed, when those rows
+// were stored Calm / Content), never a wave of its own.
 const AFFECT_POLE = {
   frustrated: 'neg', irritable: 'neg', anxious: 'neg', angry: 'neg', resentful: 'neg',
   excited: 'pos', energized: 'pos', content: 'pos', calm: 'pos',
+  flat: 'flat',
 };
 const AFFECT_TAGS = Object.keys(AFFECT_POLE);
 
@@ -127,7 +131,7 @@ function compute(reflRows, detectionCycle) {
     const observed = winTotal ? dW / winTotal : 0;
     const baseline = baseTotal ? dB / baseTotal : 0;
     const lift = observed - baseline;
-    const fires = dW >= MIN_DISTINCT && lift >= LIFT_THRESHOLD;
+    const fires = AFFECT_POLE[tag] !== 'flat' && dW >= MIN_DISTINCT && lift >= LIFT_THRESHOLD;
     return { tag, pole: AFFECT_POLE[tag], dW, dB, observed, baseline, lift, fires };
   });
 

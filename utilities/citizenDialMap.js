@@ -173,6 +173,10 @@ var DIAL_MAP = {
   'Energized':          { composure: 2, drive: 2 },
   'Content':            { composure: 2 },
   'Calm':               { composure: 2 },
+  // engine.347 Task 4 (builder 2026-11-16): the classifier's no-mood answer — a matter-of-fact text
+  // (a formal statement, a list of facts) that shows no feeling. Moves nothing. Listed so the affect
+  // cell's word resolves here and the text router below never reads the row's snippet for it.
+  'Flat':               {},
 
   // --- Ordinary-bad (OBJECTIVE negative pole, engine.38 B3) ---
   //     The bad side of life was bimodal: catastrophe (Setback -5 / Critical -8) or

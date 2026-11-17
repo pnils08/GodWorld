@@ -143,9 +143,10 @@ var RI_COL_BOND_TARGET = 9, RI_COL_TENSION = 10, RI_COL_RESOLVES = 11;
 var BOND_NUDGE = 0.25;             // per named-reflection nudge, signed by valence
 var BOND_NUDGE_CYCLE_CAP = 0.5;    // max |total| per bond pair per cycle (both directions)
 var BOND_INTENSITY_MIN = 0, BOND_INTENSITY_MAX = 10;
-var AFFECT_VALENCE = {             // the closed 9-tag affect vocab (reflectionClassifier)
+var AFFECT_VALENCE = {             // the closed affect vocab (reflectionClassifier): 9 moods + flat
   frustrated: -1, irritable: -1, anxious: -1, angry: -1, resentful: -1,
-  excited: 1, energized: 1, content: 1, calm: 1
+  excited: 1, energized: 1, content: 1, calm: 1,
+  flat: 0                          // engine.347: no feeling shown — the named bond is not nudged
 };
 
 // Default decay basis

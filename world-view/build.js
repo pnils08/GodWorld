@@ -67,7 +67,7 @@ rd('Reflection_Intake').forEach(r => {
   said.get(r.POPID).push({ key, r });
 });
 said.forEach(list => list.sort((a, b) => b.key[0] - a.key[0] || (a.key[1] < b.key[1] ? 1 : a.key[1] > b.key[1] ? -1 : 0)));
-const saidOne = s => ({ x: trimSaid(s.r.ReflectionExcerpt), c: Number(s.r.Cycle) || 0, how: SAID_HOW[s.r.Daypart] || '', mood: s.r.Affect || '' });
+const saidOne = s => ({ x: trimSaid(s.r.ReflectionExcerpt), c: Number(s.r.Cycle) || 0, how: SAID_HOW[s.r.Daypart] || '', mood: /^flat$/i.test(s.r.Affect || '') ? '' : (s.r.Affect || '') });
 const households = new Map(rd('Household_Ledger').map(h => [h.HouseholdId, h]));
 const nameOf = id => { const L = ledger.get(id); return L ? (L.Name || ((L.First || '') + ' ' + (L.Last || '')).trim()) : ''; };
 const bizById = new Map(biz.map(x => [x.BIZ_ID, x]));

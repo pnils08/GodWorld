@@ -224,7 +224,7 @@ async function buildDigest(options) {
   const ranked = [...byCitizen.entries()].map(([popid, rfs]) => {
     let score = 0;
     if (rfs.some((r) => r.kind === 'CONVO' || r.kind === 'DISCORD' || r.kind === 'INTERVIEW' || r.kind === 'DEBATE')) score += 3;
-    if (rfs.some((r) => r.affect)) score += 2;
+    if (rfs.some((r) => r.affect && String(r.affect).toLowerCase() !== 'flat')) score += 2; // engine.347: Flat = no feeling shown
     if (lifeEvents.some((e) => e.popid === popid)) score += 4;
     if (texture.has(popid)) score += 1;
     score += Math.max(0, 5 - person(popid).tier); // tier 1-2 favored

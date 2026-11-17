@@ -458,7 +458,9 @@ async function fileNextChapter(c, cycle, question, parsed, dry) {
   const rippleKeysHit = [];
   for (const [k, e] of Object.entries(rippleState)) {
     if (!e || String(e.to || '').toUpperCase() !== c.popId) continue;
-    rippleLine = `You crossed paths with ${e.fromName || 'someone you know'} recently; they seemed ${String(e.affect || '').toLowerCase() || 'preoccupied'}.`;
+    const seemed = String(e.affect || '').toLowerCase();
+    // engine.347: a Flat exchange showed no feeling — the line says they met and stops there
+    rippleLine = `You crossed paths with ${e.fromName || 'someone you know'} recently` + (seemed === 'flat' ? '.' : `; they seemed ${seemed || 'preoccupied'}.`);
     rippleKeysHit.push(k);
     break; // one line max — texture, not a feed
   }

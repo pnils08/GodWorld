@@ -1,0 +1,611 @@
+{
+ "at": "2026-11-17T07:14:55.554Z",
+ "entries": [
+  {
+   "record": "/root/GodWorld/output/cron-civic/datawake/worker-chief-fire_2026-11-16.json",
+   "popid": "POP-00140",
+   "holder": "Marcus Hollowell",
+   "id": "3ue4eX2v5FRhgPqficH7cU",
+   "customId": "cp-POP-00140-c116-CIVIC-datawake-2026-11-16",
+   "containerTag": "cp-POP-00140",
+   "ok": true,
+   "doc": {
+    "connectionId": null,
+    "content": "datawake: Here's what I can say on the record, Chief Hollowell, and here's what I can't yet. **What the sheet shows, plain:** Twelve engine events across Cycles 100–116. Only four were real fires — Grand Lake (104), BIZ-00055 (107), Laurel (111), Brooklyn (111) were minors, and two contained major blazes: Adams Point (109) and KONO (116). That's six false alarms out of twelve — **50%**. That's the number I'd want to stand behind an engine for, and right now it doesn't. **The two I'm going to be asked about first:** - **Cycle 106, BIZ-00059, false alarm — $21.55 of annual revenue.** That's Foothill Builders out of Fruitvale, a 110-employee construction outfit. A truck rolled on nothing. Small dollar figure in the ledger, but it's a real employer in a neighborhood that's already under inflow pressure. That's the kind of call that gets remembered. - **Cycle 107, BIZ-00055, minor fire — Estuary Architects, Lake Merritt, 45 employees.** Note the revenue field is blank on that business record. Before I talk about dollar impact there, somebody needs to tell me whether that's a data gap or a real zero. I'm not going to cite a loss number I can't see. **Pattern I care about beyond the false alarms:** The false alarms cluster where the fog and overcast sit. Cycle 108 had *two* in one cycle — Dimond and Uptown, both under fog. Cycle 110, Chinatown, fog. Cycle 102, Piedmont Ave, cold/overcast. Cycle 100, KONO, mild. And the two major blazes — Adams Point at Cycle 109 and KONO at 116 — both landed on overcast-to-fog stretches too. That's a correlation I want the data shop to run down before I decide whether this is sensor/verification trouble or just coincidence. **The thing that's actually on my mind:** **KONO got hit twice** — a false alarm at Cycle 100 and a contained major blaze at 116. Adams Point took a contained major at 109. Chinatown — my own neighborhood — took a false alarm at 110. Sentiment is bleeding a few hundredths off every one of these, and the neighborhoods catching the false alarms are the same ones catching the real ones. People stop trusting the siren when it cries wolf half the time. **My decision, stated plainly:** I'm not putting anything further on the record as a finding until the verification/dispatch question is answered. What I will say now is that a 50% false-alarm rate is not a rate I'll defend as normal operations — it's a problem I'm going to own. **What I need from the data shop before my next statement:** 1. The BIZ-00055 revenue blank — data gap or actual zero. 2. Whether false alarms are coming from *verified* call sources (alarms, automated detection) or third-party reports, broken out by neighborhood. 3. The fog/overcast correlation run properly, not eyeballed like I just did. I've got nothing on the record yet, and I'd like to keep it that way until those three come back — because the first thing I say about this becomes the story, and I want the story to be right. My family's in Chinatown; I'm not going to stand up and shrug about a siren that's wrong half the time on my own street.",
+    "createdAt": "2026-11-16T11:46:36.603Z",
+    "customId": "cp-POP-00140-c116-CIVIC-datawake-2026-11-16",
+    "id": "3ue4eX2v5FRhgPqficH7cU",
+    "metadata": {
+     "type": "office-position",
+     "popId": "POP-00140",
+     "cycle": 116,
+     "daypart": "CIVIC",
+     "terminal": "engine/sheet",
+     "kind": "datawake",
+     "office": "worker-chief-fire",
+     "holder": "Marcus Hollowell"
+    },
+    "ogImage": null,
+    "raw": null,
+    "source": "api",
+    "taskType": "memory",
+    "latestRevision": 1,
+    "activeContentUpdateId": "3EjU4duigA1JdFtmqzEiPG",
+    "tombstonedAt": null,
+    "status": "done",
+    "dreamingStatus": "done",
+    "summary": "Across cycles 100‑116, twelve engine events were logged; four were real fires and eight were false alarms, yielding a 50% false‑alarm rate. Notably, the false alarms occurred in Fog or overcast conditions, with two incidents in a single cycle (Cycle 108) and a spike during foggy periods. Key incidents include BIZ‑00059 (a false alarm with $21.55 revenue) and BIZ‑00055 (a minor fire at Estuary Architects with unknown revenue). The data show a pattern that suggests a possible correlation between weather conditions and alarm reliability, but verification is needed. The fire‑engineer requests clarification on revenue gaps, call source verification, and a rigorous fog‑overcast correlation analysis before issuing a formal statement.",
+    "title": "datawake: Here's what I can say on the record, Chi...",
+    "type": "text",
+    "updatedAt": "2026-11-16T12:02:32.541Z",
+    "url": null,
+    "filepath": null,
+    "containerTags": [
+     "citizen-pages",
+     "cp-POP-00140"
+    ],
+    "memories": [
+     {
+      "id": "itjuuc93vWNwV2pxuoMe8Z",
+      "memory": "The agency will not record any findings until the verification and dispatch questions are answered.",
+      "createdAt": "2026-11-16T12:02:32.541Z",
+      "updatedAt": "2026-11-16T12:02:32.541Z",
+      "isLatest": true,
+      "isForgotten": false,
+      "isStatic": false,
+      "isInference": false,
+      "version": 1,
+      "sourceCount": 1,
+      "metadata": {
+       "type": "office-position",
+       "popId": "POP-00140",
+       "cycle": 116,
+       "daypart": "CIVIC",
+       "terminal": "engine/sheet",
+       "kind": "datawake",
+       "office": "worker-chief-fire",
+       "holder": "Marcus Hollowell",
+       "temporalContext": {
+        "documentDate": "2026-11-16",
+        "eventDate": null
+       },
+       "temporalEventStartMs": 1794787200000,
+       "temporalEventEndMs": 1794873600000
+      },
+      "parentMemoryId": null,
+      "rootMemoryId": "itjuuc93vWNwV2pxuoMe8Z"
+     },
+     {
+      "id": "xbd8E3XrwAkMWz6JATfRZY",
+      "memory": "False alarm rate is 50%.",
+      "createdAt": "2026-11-16T12:02:32.541Z",
+      "updatedAt": "2026-11-16T12:02:32.541Z",
+      "isLatest": true,
+      "isForgotten": false,
+      "isStatic": false,
+      "isInference": false,
+      "version": 1,
+      "sourceCount": 1,
+      "metadata": {
+       "type": "office-position",
+       "popId": "POP-00140",
+       "cycle": 116,
+       "daypart": "CIVIC",
+       "terminal": "engine/sheet",
+       "kind": "datawake",
+       "office": "worker-chief-fire",
+       "holder": "Marcus Hollowell",
+       "temporalContext": {
+        "documentDate": "2026-11-16",
+        "eventDate": null
+       },
+       "temporalEventStartMs": 1794787200000,
+       "temporalEventEndMs": 1794873600000
+      },
+      "parentMemoryId": null,
+      "rootMemoryId": "xbd8E3XrwAkMWz6JATfRZY"
+     },
+     {
+      "id": "StVwXixLyp9F7GoU8E8iUW",
+      "memory": "KONO had two incidents: a false alarm at cycle 100 and a major blaze at cycle 116.",
+      "createdAt": "2026-11-16T12:02:32.541Z",
+      "updatedAt": "2026-11-16T12:02:32.541Z",
+      "isLatest": true,
+      "isForgotten": false,
+      "isStatic": false,
+      "isInference": false,
+      "version": 1,
+      "sourceCount": 1,
+      "metadata": {
+       "type": "office-position",
+       "popId": "POP-00140",
+       "cycle": 116,
+       "daypart": "CIVIC",
+       "terminal": "engine/sheet",
+       "kind": "datawake",
+       "office": "worker-chief-fire",
+       "holder": "Marcus Hollowell",
+       "temporalContext": {
+        "documentDate": "2026-11-16",
+        "eventDate": null
+       },
+       "temporalEventStartMs": 1794787200000,
+       "temporalEventEndMs": 1794873600000
+      },
+      "parentMemoryId": null,
+      "rootMemoryId": "StVwXixLyp9F7GoU8E8iUW"
+     }
+    ]
+   }
+  },
+  {
+   "record": "/root/GodWorld/output/cron-civic/datawake/worker-emerg-dir_2026-11-16.json",
+   "popid": "POP-00152",
+   "holder": "Shawna Delgado",
+   "id": "nLvyecURVtk8pHYQGmzLiv",
+   "customId": "cp-POP-00152-c116-CIVIC-datawake-2026-11-16",
+   "containerTag": "cp-POP-00152",
+   "ok": true,
+   "doc": {
+    "connectionId": null,
+    "content": "datawake: Let me check transit metrics and the current cycle's ledger for the snarl itself.",
+    "createdAt": "2026-11-16T11:46:49.132Z",
+    "customId": "cp-POP-00152-c116-CIVIC-datawake-2026-11-16",
+    "id": "nLvyecURVtk8pHYQGmzLiv",
+    "metadata": {
+     "type": "office-position",
+     "popId": "POP-00152",
+     "cycle": 116,
+     "daypart": "CIVIC",
+     "terminal": "engine/sheet",
+     "kind": "datawake",
+     "office": "worker-emerg-dir",
+     "holder": "Shawna Delgado"
+    },
+    "ogImage": null,
+    "raw": null,
+    "source": "api",
+    "taskType": "memory",
+    "latestRevision": 1,
+    "activeContentUpdateId": "gFotYJwU7dHNcUf1vj4QtZ",
+    "tombstonedAt": null,
+    "status": "done",
+    "dreamingStatus": "done",
+    "summary": "The inquiry is to examine transit metrics alongside the ledger for the present cycle, specifically targeting a congestion issue referred to as a ‘snarl’ within the system. No detailed data are provided, but the intent is to investigate and report on transit performance for the ongoing cycle.",
+    "title": "datawake: Let me check transit metrics and the cur...",
+    "type": "text",
+    "updatedAt": "2026-11-16T12:02:32.541Z",
+    "url": null,
+    "filepath": null,
+    "containerTags": [
+     "citizen-pages",
+     "cp-POP-00152"
+    ]
+   }
+  },
+  {
+   "record": "/root/GodWorld/output/cron-civic/datawake/worker-ems-dir_2026-11-16.json",
+   "popid": "POP-00141",
+   "holder": "Priya Narang",
+   "id": "Rdx1JnPBineDgTZTvNm6y9",
+   "customId": "cp-POP-00141-c116-CIVIC-datawake-2026-11-16",
+   "containerTag": "cp-POP-00141",
+   "ok": true,
+   "doc": {
+    "connectionId": null,
+    "content": "datawake: Here's what the sheets actually say, Priya — and I want to flag three things before anyone builds a story on these totals. **The illness line is softer than it looks.** Citywide illness intakes fall in a straight line: 38 → 37 → 36 → 35 → 35 → 34 → 34 (Cycles 110–116). Bed census falls with it, 77 → 68. But read the neighborhood rows underneath and almost nothing moves — 2 per neighborhood, cycle after cycle. The whole decline lives in four places: - **Chinatown**: 3 → 3 → 3 → 3 → 3 → 3 → 3 — the highest illness intake in the city every single cycle, and it never decreases. - **Downtown**: 2 → 2 → 2 → 2 → 2 → 1 → 1 - **Jack London**: 2 → 2 → 2 → 1 → 1 → 1 → 1 - **Brooklyn**: 2 → 2 → 1 → 1 → 1 → 1 → 1 (dropped between C111 and C112) - **East Oakland**: 3 → 2 → 2 … (one-time drop after C110) So \"citywide illness is improving\" is the wrong read. What we have is flat burden everywhere plus improvement in three or four neighborhoods. Chinatown is a standing outlier and nobody upstream has touched it. That's the finding I'd want on the record, not the aggregate. **The injury column is empty because the injury column is empty.** Zero injury intakes, citywide, all 22 neighborhoods, all seven cycles. Not \"low\" — zero. Meanwhile the ambulance sheet logs a workplace accident in Ivy Hill (C110), an Uptown workplace accident (C114), and two workplace accidents in C105 that actually produced hospital admissions (Yu Zen, Deacon Seymour). Those events exist; they just aren't landing as injury intakes in the ledger. That's a data-integrity problem, not a public-health improvement. Before I cite injury numbers to anyone I'd want to know whether EMS events are reaching Hospital_Ledger at all — the intake type and source fields are blank on every admission row, which tells me the feed isn't wired up. **Heat is zero, and I don't trust it.** Zero heat intakes across all cycles, all neighborhoods, in the middle of summer arcs. Same story — my instinct is a gap in intake coding rather than an absence of heat illness. I'd hold this loosely. **Two other things worth flagging:** - **Uptown, KONO, Lake Merritt, Baylight District** show **0** intakes and **0** sick residents. Our small-population neighborhoods are being skipped. Uptown is mine, and with the A's season packing the bars and galleries, the call volume on my side is up — the ledger doesn't reflect that at all. - **Piedmont Ave** has the current live thread: a **medium-severity health spike in C116** on the event ledger, and that's where **Ariana Lee** (42, serious-condition, cancer) is tracked. Chinatown's C113 low-severity spike lines up with its flat-high intake pattern. - **Temescal's health-crisis arc** sat at peak tension 10 from C95 through at least C101 on the arc sheet, while Temescal's intake rows never move off 2. Either the arc resolved off-ledger or the two systems are measuring different things. I can't tell you which from here. **On the record:** the illness trend is real but narrow, the injury and heat zeros are almost certainly missing data, and Chinatown's persistent three-per-cycle is the one number I'd put in front of the board. I'd rather say that precisely than let a clean-looking 38-to-34 line get read as a win.",
+    "createdAt": "2026-11-16T11:47:04.242Z",
+    "customId": "cp-POP-00141-c116-CIVIC-datawake-2026-11-16",
+    "id": "Rdx1JnPBineDgTZTvNm6y9",
+    "metadata": {
+     "type": "office-position",
+     "popId": "POP-00141",
+     "cycle": 116,
+     "daypart": "CIVIC",
+     "terminal": "engine/sheet",
+     "kind": "datawake",
+     "office": "worker-ems-dir",
+     "holder": "Priya Narang"
+    },
+    "ogImage": null,
+    "raw": null,
+    "source": "api",
+    "taskType": "memory",
+    "latestRevision": 1,
+    "activeContentUpdateId": "9m2Xw456ht9u4NAKWzo5S9",
+    "tombstonedAt": null,
+    "status": "done",
+    "dreamingStatus": "done",
+    "summary": "Citywide illness intakes fell linearly from 38 to 34 across cycles 110‑116, yet neighborhood counts remained largely static with the exception of slight improvements in several areas. Chinatown’s intake stayed at 3 per cycle consistently, making it a persistent outlier. All injury intakes across the city are recorded as zero, underscoring a gap in the injury reporting pipeline that fails to link EMS events to hospital admissions. Heat illness intakes also show zero across all cycles, raising concerns about coding gaps. The summary highlights that raw numbers show improvement at the aggregate level, but localized data and missing identifiers paint a more nuanced picture, and calls for a more accurate data connection between local incidents and hospital logs.",
+    "title": "datawake: Here's what the sheets actually say, Pri...",
+    "type": "text",
+    "updatedAt": "2026-11-16T12:02:32.541Z",
+    "url": null,
+    "filepath": null,
+    "containerTags": [
+     "citizen-pages",
+     "cp-POP-00141"
+    ],
+    "memories": [
+     {
+      "id": "hJBDqodxEAgKEQTuf5jQn5",
+      "memory": "Citywide illness intake declined from 38 to 34 over cycles 110-116.",
+      "createdAt": "2026-11-16T12:02:32.541Z",
+      "updatedAt": "2026-11-16T12:02:32.541Z",
+      "isLatest": true,
+      "isForgotten": false,
+      "isStatic": false,
+      "isInference": false,
+      "version": 1,
+      "sourceCount": 1,
+      "metadata": {
+       "type": "office-position",
+       "popId": "POP-00141",
+       "cycle": 116,
+       "daypart": "CIVIC",
+       "terminal": "engine/sheet",
+       "kind": "datawake",
+       "office": "worker-ems-dir",
+       "holder": "Priya Narang",
+       "temporalContext": {
+        "documentDate": "2026-11-16",
+        "eventDate": null
+       },
+       "temporalEventStartMs": 1794787200000,
+       "temporalEventEndMs": 1794873600000
+      },
+      "parentMemoryId": null,
+      "rootMemoryId": "hJBDqodxEAgKEQTuf5jQn5"
+     },
+     {
+      "id": "MaaZvPdUdY7HN5PpZuAvg6",
+      "memory": "Citywide bed census declined from 77 to 68 over cycles 110-116.",
+      "createdAt": "2026-11-16T12:02:32.541Z",
+      "updatedAt": "2026-11-16T12:02:32.541Z",
+      "isLatest": true,
+      "isForgotten": false,
+      "isStatic": false,
+      "isInference": false,
+      "version": 1,
+      "sourceCount": 1,
+      "metadata": {
+       "type": "office-position",
+       "popId": "POP-00141",
+       "cycle": 116,
+       "daypart": "CIVIC",
+       "terminal": "engine/sheet",
+       "kind": "datawake",
+       "office": "worker-ems-dir",
+       "holder": "Priya Narang",
+       "temporalContext": {
+        "documentDate": "2026-11-16",
+        "eventDate": null
+       },
+       "temporalEventStartMs": 1794787200000,
+       "temporalEventEndMs": 1794873600000
+      },
+      "parentMemoryId": null,
+      "rootMemoryId": "MaaZvPdUdY7HN5PpZuAvg6"
+     },
+     {
+      "id": "CJim3eLb3tB14bH146XmmP",
+      "memory": "Chinatown illness intake is 3 per cycle (cycles 110-116) and is the highest in city.",
+      "createdAt": "2026-11-16T12:02:32.541Z",
+      "updatedAt": "2026-11-16T12:02:32.541Z",
+      "isLatest": true,
+      "isForgotten": false,
+      "isStatic": false,
+      "isInference": false,
+      "version": 1,
+      "sourceCount": 1,
+      "metadata": {
+       "type": "office-position",
+       "popId": "POP-00141",
+       "cycle": 116,
+       "daypart": "CIVIC",
+       "terminal": "engine/sheet",
+       "kind": "datawake",
+       "office": "worker-ems-dir",
+       "holder": "Priya Narang",
+       "temporalContext": {
+        "documentDate": "2026-11-16",
+        "eventDate": null
+       },
+       "temporalEventStartMs": 1794787200000,
+       "temporalEventEndMs": 1794873600000
+      },
+      "parentMemoryId": null,
+      "rootMemoryId": "CJim3eLb3tB14bH146XmmP"
+     },
+     {
+      "id": "P5nEDJyvDGZvhXmvr5NiNY",
+      "memory": "Injury intakes are zero across all 22 neighborhoods.",
+      "createdAt": "2026-11-16T12:02:32.541Z",
+      "updatedAt": "2026-11-16T12:02:32.541Z",
+      "isLatest": true,
+      "isForgotten": false,
+      "isStatic": false,
+      "isInference": false,
+      "version": 1,
+      "sourceCount": 1,
+      "metadata": {
+       "type": "office-position",
+       "popId": "POP-00141",
+       "cycle": 116,
+       "daypart": "CIVIC",
+       "terminal": "engine/sheet",
+       "kind": "datawake",
+       "office": "worker-ems-dir",
+       "holder": "Priya Narang",
+       "temporalContext": {
+        "documentDate": "2026-11-16",
+        "eventDate": null
+       },
+       "temporalEventStartMs": 1794787200000,
+       "temporalEventEndMs": 1794873600000
+      },
+      "parentMemoryId": null,
+      "rootMemoryId": "P5nEDJyvDGZvhXmvr5NiNY"
+     },
+     {
+      "id": "8eJcHA3J95FwNop5gkjXHN",
+      "memory": "Heat intakes are zero across all cycles and neighborhoods.",
+      "createdAt": "2026-11-16T12:02:32.541Z",
+      "updatedAt": "2026-11-16T12:02:32.541Z",
+      "isLatest": true,
+      "isForgotten": false,
+      "isStatic": false,
+      "isInference": false,
+      "version": 1,
+      "sourceCount": 1,
+      "metadata": {
+       "type": "office-position",
+       "popId": "POP-00141",
+       "cycle": 116,
+       "daypart": "CIVIC",
+       "terminal": "engine/sheet",
+       "kind": "datawake",
+       "office": "worker-ems-dir",
+       "holder": "Priya Narang",
+       "temporalContext": {
+        "documentDate": "2026-11-16",
+        "eventDate": null
+       },
+       "temporalEventStartMs": 1794787200000,
+       "temporalEventEndMs": 1794873600000
+      },
+      "parentMemoryId": null,
+      "rootMemoryId": "8eJcHA3J95FwNop5gkjXHN"
+     },
+     {
+      "id": "G8JaEzLSBKqRmDkm1S11Py",
+      "memory": "Uptown, KONO, Lake Merritt, and Baylight have zero illness intakes and zero sick residents.",
+      "createdAt": "2026-11-16T12:02:32.541Z",
+      "updatedAt": "2026-11-16T12:02:32.541Z",
+      "isLatest": true,
+      "isForgotten": false,
+      "isStatic": false,
+      "isInference": false,
+      "version": 1,
+      "sourceCount": 1,
+      "metadata": {
+       "type": "office-position",
+       "popId": "POP-00141",
+       "cycle": 116,
+       "daypart": "CIVIC",
+       "terminal": "engine/sheet",
+       "kind": "datawake",
+       "office": "worker-ems-dir",
+       "holder": "Priya Narang",
+       "temporalContext": {
+        "documentDate": "2026-11-16",
+        "eventDate": null
+       },
+       "temporalEventStartMs": 1794787200000,
+       "temporalEventEndMs": 1794873600000
+      },
+      "parentMemoryId": null,
+      "rootMemoryId": "G8JaEzLSBKqRmDkm1S11Py"
+     },
+     {
+      "id": "4g3mnRuwF5p7ye1eQ7c1YB",
+      "memory": "Piedmont Ave had a medium severity health spike in cycle 116.",
+      "createdAt": "2026-11-16T12:02:32.541Z",
+      "updatedAt": "2026-11-16T12:02:32.541Z",
+      "isLatest": true,
+      "isForgotten": false,
+      "isStatic": false,
+      "isInference": false,
+      "version": 1,
+      "sourceCount": 1,
+      "metadata": {
+       "type": "office-position",
+       "popId": "POP-00141",
+       "cycle": 116,
+       "daypart": "CIVIC",
+       "terminal": "engine/sheet",
+       "kind": "datawake",
+       "office": "worker-ems-dir",
+       "holder": "Priya Narang",
+       "temporalContext": {
+        "documentDate": "2026-11-16",
+        "eventDate": null
+       },
+       "temporalEventStartMs": 1794787200000,
+       "temporalEventEndMs": 1794873600000
+      },
+      "parentMemoryId": null,
+      "rootMemoryId": "4g3mnRuwF5p7ye1eQ7c1YB"
+     }
+    ]
+   }
+  },
+  {
+   "record": "/root/GodWorld/output/cron-civic/datawake/worker-med-exam_2026-11-16.json",
+   "popid": "POP-00142",
+   "holder": "Jonas Patel",
+   "id": "ANohzzBzLzx9FwTJNg5Hr5",
+   "customId": "cp-POP-00142-c116-CIVIC-datawake-2026-11-16",
+   "containerTag": "cp-POP-00142",
+   "ok": true,
+   "doc": {
+    "connectionId": null,
+    "content": "datawake: I need to push back on the framing here, and I want to be precise about why. **What the archive list actually is.** Those nine names — Isabelle Louis, Dune Topez, Marcello Ramas, Lilo Belton, Margarita Tanaka, Sumiko Mensah, Marisela Rios, Antwan Warren, Florencia Shah — are flagged `defects-at-exit`, and the only defect noted is `schoolQualityUnusable`. That's a data-quality rejection, not a death certificate. A record kicked out of the education model because the school-quality field choked on it says nothing about whether the person is alive. Two of them, Mensah and Rios, carry additional parse errors — a misspelled career stage, a blank employer with a role attached, a migration flag set. These are malformed rows, not obituaries. I would not sign my name to a death register built on the same class of error as a spelling glitch. **What the hospital ledger actually says.** I pulled it directly. Three admissions, and every one of them reads `recovered`. Yu Zen, Deacon Seymour, Maurice Franklin — all discharged, all with an outcome. Yu Zen's row even shows a discharge cycle *before* the transition cycle it's listed with, which is its own inconsistency. But status \"active\" with \"recovered\" beside it is a workflow artifact, not a patient on a slab. Nobody on that sheet is dead. **What I know firsthand.** Marcus Osei is recovering. Elliott Crane will walk again. Ariana Lee has stage-four cancer and no family listed — she's the one who keeps me up. And Yu Zen's lacerations still don't match the official fall story, no matter how many times the city tells me the camera was blind. Those are real open questions. The archive dump doesn't touch any of them. So: I'm not going to confirm nine residents as deceased on the strength of a defect flag. If someone wants to feed this list to the Tribune or to a funeral home, I'll stop it. What I *can* do is pull the raw population record for the Cycle-106 and Cycle-107 exits and cross-reference each POPID — but my expectation is that we find bad field parsing, not bodies. And separately, my gut still says Yu Zen's file deserves the attention this list is asking for were it real.",
+    "createdAt": "2026-11-16T11:47:18.182Z",
+    "customId": "cp-POP-00142-c116-CIVIC-datawake-2026-11-16",
+    "id": "ANohzzBzLzx9FwTJNg5Hr5",
+    "metadata": {
+     "type": "office-position",
+     "popId": "POP-00142",
+     "cycle": 116,
+     "daypart": "CIVIC",
+     "terminal": "engine/sheet",
+     "kind": "datawake",
+     "office": "worker-med-exam",
+     "holder": "Jonas Patel"
+    },
+    "ogImage": null,
+    "raw": null,
+    "source": "api",
+    "taskType": "memory",
+    "latestRevision": 1,
+    "activeContentUpdateId": "kHPPeFkxmWt88YwAUcaBHM",
+    "tombstonedAt": null,
+    "status": "done",
+    "dreamingStatus": "done",
+    "summary": "A set of nine population records flagged with the defect `schoolQualityUnusable` are misconstrued as deaths; however, they represent data‑quality errors from the education model rather than obituary information. Hospital ledger data confirm all admissions (Yu Zen, Deacon Seymour, Maurice Franklin) are marked as recovered. No recorded deaths exist, and several status anomalies—such as discharge cycles preceding transition cycles—highlight inconsistencies. The author clarifies that the nine names should not be treated as deceased, and urges a cross‑reference of population IDs for cycle exits to resolve parsing errors. The focus is on identifying data integrity issues rather than reporting fatalities.",
+    "title": "datawake: I need to push back on the framing here,...",
+    "type": "text",
+    "updatedAt": "2026-11-16T12:02:32.541Z",
+    "url": null,
+    "filepath": null,
+    "containerTags": [
+     "citizen-pages",
+     "cp-POP-00142"
+    ],
+    "memories": [
+     {
+      "id": "3N9YjA5sK83s4AMq16N7ah",
+      "memory": "The nine persons flagged as defects-at-exit are data errors, not deaths.",
+      "createdAt": "2026-11-16T12:02:32.541Z",
+      "updatedAt": "2026-11-16T12:02:32.541Z",
+      "isLatest": true,
+      "isForgotten": false,
+      "isStatic": false,
+      "isInference": false,
+      "version": 1,
+      "sourceCount": 1,
+      "metadata": {
+       "type": "office-position",
+       "popId": "POP-00142",
+       "cycle": 116,
+       "daypart": "CIVIC",
+       "terminal": "engine/sheet",
+       "kind": "datawake",
+       "office": "worker-med-exam",
+       "holder": "Jonas Patel",
+       "temporalContext": {
+        "documentDate": "2026-11-16",
+        "eventDate": null
+       },
+       "temporalEventStartMs": 1794787200000,
+       "temporalEventEndMs": 1794873600000
+      },
+      "parentMemoryId": null,
+      "rootMemoryId": "3N9YjA5sK83s4AMq16N7ah"
+     },
+     {
+      "id": "ZqgbNqVZsygiDzW2FPvVmA",
+      "memory": "Three admissions (Yu Zen, Deacon Seymour, Maurice Franklin) recovered.",
+      "createdAt": "2026-11-16T12:02:32.541Z",
+      "updatedAt": "2026-11-16T12:02:32.541Z",
+      "isLatest": true,
+      "isForgotten": false,
+      "isStatic": false,
+      "isInference": false,
+      "version": 1,
+      "sourceCount": 1,
+      "metadata": {
+       "type": "office-position",
+       "popId": "POP-00142",
+       "cycle": 116,
+       "daypart": "CIVIC",
+       "terminal": "engine/sheet",
+       "kind": "datawake",
+       "office": "worker-med-exam",
+       "holder": "Jonas Patel",
+       "temporalContext": {
+        "documentDate": "2026-11-16",
+        "eventDate": null
+       },
+       "temporalEventStartMs": 1794787200000,
+       "temporalEventEndMs": 1794873600000
+      },
+      "parentMemoryId": null,
+      "rootMemoryId": "ZqgbNqVZsygiDzW2FPvVmA"
+     },
+     {
+      "id": "DctaGpd1xeDZNnzmpShATJ",
+      "memory": "Ariana Lee has stage-four cancer.",
+      "createdAt": "2026-11-16T12:02:32.541Z",
+      "updatedAt": "2026-11-16T12:02:32.541Z",
+      "isLatest": true,
+      "isForgotten": false,
+      "isStatic": false,
+      "isInference": false,
+      "version": 1,
+      "sourceCount": 1,
+      "metadata": {
+       "type": "office-position",
+       "popId": "POP-00142",
+       "cycle": 116,
+       "daypart": "CIVIC",
+       "terminal": "engine/sheet",
+       "kind": "datawake",
+       "office": "worker-med-exam",
+       "holder": "Jonas Patel",
+       "temporalContext": {
+        "documentDate": "2026-11-16",
+        "eventDate": null
+       },
+       "temporalEventStartMs": 1794787200000,
+       "temporalEventEndMs": 1794873600000
+      },
+      "parentMemoryId": null,
+      "rootMemoryId": "DctaGpd1xeDZNnzmpShATJ"
+     },
+     {
+      "id": "S5hLgzMbAaxsY15AutqE8W",
+      "memory": "Yu Zen lacerations inconsistent with official fall story.",
+      "createdAt": "2026-11-16T12:02:32.541Z",
+      "updatedAt": "2026-11-16T12:02:32.541Z",
+      "isLatest": true,
+      "isForgotten": false,
+      "isStatic": false,
+      "isInference": false,
+      "version": 1,
+      "sourceCount": 1,
+      "metadata": {
+       "type": "office-position",
+       "popId": "POP-00142",
+       "cycle": 116,
+       "daypart": "CIVIC",
+       "terminal": "engine/sheet",
+       "kind": "datawake",
+       "office": "worker-med-exam",
+       "holder": "Jonas Patel",
+       "temporalContext": {
+        "documentDate": "2026-11-16",
+        "eventDate": null
+       },
+       "temporalEventStartMs": 1794787200000,
+       "temporalEventEndMs": 1794873600000
+      },
+      "parentMemoryId": null,
+      "rootMemoryId": "S5hLgzMbAaxsY15AutqE8W"
+     }
+    ]
+   }
+  }
+ ]
+}

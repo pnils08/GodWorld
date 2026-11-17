@@ -1,32 +1,33 @@
 # Marcus Hollowell — weekly report against the last one (as of 2026-11-23)
 
 - last report handed: 2026-11-16, Cycle 116, 3068 chars
-- handed: system 381 + user 3547; verdict **statement**; $0.0005
-- reads: record_read({"record":"Fire engine events, every Cycle on the sheet"}); memory_recall({"query":"false alarm verification dispatch data shop"}); sheet_read({"tab":"Business_Ledger","match":"BIZ-00055"}); neighborhood_read({"neighborhood":"KONO"}); sheet_read({"tab":"Cycle_Weather","from_cycle":100}); canon_recall({"query":"fire engine false alarm Oakland"})
+- handed: system 381 + user 3617; verdict **statement**; $0.0004
+- reads: record_read({"record":"Fire engine events, every Cycle on the sheet"}); memory_recall({"query":"false alarm verification dispatch data shop"}); sheet_read({"tab":"Cycle_Weather","from_cycle":100}); sheet_read({"tab":"Business_Ledger","match":"BIZ-00055"}); sheet_read({"tab":"Business_Ledger","match":"BIZ-00059"}); neighborhood_read({"neighborhood":"KONO"})
 
 ## Task as handed
 
-Cycle 116, your weekly report: speak on the record on what has changed in your records since your last report.
+Cycle 116, your weekly report: speak on the record on what has changed in your records since your last report. Your reply goes on the record as your report, exactly as you give it.
 
 ## Reply
 
-Weather table in hand — and it changes my "fog correlation" story. Let me put the report on the record.
+**On the record — Chief Marcus Hollowell, Cycle 116 weekly report.**
 
-## Record entry — Fire Chief Marcus Hollowell, Weekly Report, Cycle 116
+**What's changed since last report: one new entry, and it's the one I'd hoped not to have.**
 
-**What changed since my last report.** One event, and it's the one that matters: **Cycle 116, KONO, major blaze, contained.** My crews got it out. That's the second major fire we've contained this stretch, after Adams Point at 109. I'm not going to bury the lede — the fire service did its job on the thing that could have killed people. KONO sentiment sits at **0.05** on the neighborhood ledger and the block is on a growth trajectory. Less damage than I feared when I walked that street last cycle.
+**Cycle 116, KONO, contained major blaze. Sentiment −0.06.** Smoke over the rooftops. Contained — that's the word the sheet uses, and I'll take the win where it's earned: nobody's on a list of the dead this week. But KONO has now had an engine go out twice in seventeen cycles, and the neighborhood's sentiment is sitting at 0.05. That's not a cushion. That's a block that's been asked to trust a siren six times, been lied to by it three of those times, and still smelled smoke on the last one.
 
-**Three corrections to my own last statement — on the record, because I said the first thing I say becomes the story, and I want it to be right.**
+**What has *not* changed — and I said it would not until my three questions came back:**
 
-1. **BIZ-00055 revenue is not blank.** I told you I wouldn't cite a loss I couldn't see. I can see it now: **-15.22 annual revenue** to Estuary Architects, 45 employees, Lake Merritt. The business ledger's revenue *field* is empty — that's a real data gap — but the event sheet carries the loss. Answer to my own question #1: **data gap in the ledger, not a zero in the world.** Someone should fix the field, but I'm not going to hide behind it.
-2. **My fog story was wrong, and I need to say so plainly.** I eyeballed a fog/overcast pattern last cycle. I just pulled the weather table properly. Here's what it actually says:
-   - **False alarms by weather:** KONO 100 = mild/clear. Piedmont Ave 102 = cool. Dimond 108 = fog. Uptown 108 = fog. Chinatown 110 = fog. BIZ-00059 106 = overcast. That's **three of six in fog, three of six in clear or cool.** Half.
-   - **Real fires by weather:** Grand Lake 104 = rain. Laurel 111 = mild. Brooklyn 111 = mild. **Estuary 107 = fog. Adams Point 109 = overcast. KONO 116 = mild.** Also three in "bad" weather, three in clear.
-   - **Conclusion: weather does not separate false alarms from real fires on this sheet.** Fog appears on both sides in equal measure. My correlation was an artifact of looking at it by eye. I'm withdrawing it. That's question #3 answered — and the answer is *no correlation established.*
-3. **The 50% false-alarm rate stands.** Six of twelve. That part was right and I'll keep owning it.
+1. **BIZ-00055, Estuary Architects — still blank on annual revenue.** I asked for data gap or real zero. The sheet still reads empty. I have nothing further to say on dollar impact there, because I still can't see the number. That's the same answer I gave last cycle and I'm giving it again, on the record, so nobody mistakes silence for an oversight.
 
-**What I still do not have, and will not pretend to.** Question #2 �� whether false alarms come from verified sources (alarms, automated detection) versus third-party reports, broken out by neighborhood. That data isn't in front of me. I'm not going to characterize the cause of those six calls until I have it. I'll say this much: with weather ruled out, the cause is on *our* side of the equation — verification or dispatch — not the sky's.
+2. **False-alarm call source — no breakout.** I asked whether these are verified call sources or third-party reports, by neighborhood. Nothing has come back. So the 50% figure stands as a count, and I will not characterize it as a verification failure or a citizen-overreporting problem, because I don't know which it is.
 
-**Where that leaves the record.** I have two contained major blazes and no lives lost to report. I have a corrected ledger on Estuary Architects. I have a withdrawn correlation I was wrong about. And I have an open question on alarm verification that I'm going to chase until the data shop answers it, not let it sit.
+3. **The weather correlation — still eyeballed, and now I'll show my work openly rather than hide it.** Of the six false alarms: KONO at 100 came under mild/clear; Piedmont Ave at 102 under cool/overcast; BIZ-00059 at 106 under overcast; Dimond and Uptown at 108 under fog; Chinatown at 110 under fog. Four of six fall in fog or overcast cycles. But Cycle 116 — the new one — is **mild, clear, sixth straight clear-to-mild cycle**, and it's a major blaze. So the fog story I floated last week does not explain the fire that actually happened this cycle. I'm not going to keep telling a tidy weather story that the newest data point doesn't fit.
 
-My family's on the Chinatown block that took a false alarm at Cycle 110. I said I wouldn't shrug about a wrong siren on my own street, and I'm not — but I'm also not going to invent a weather theory to explain it. Next week I report on verification sources, or I report why I still don't have them.
+**What I'll say plainly to the council, the press, and anybody on Stockton Street who asks:**
+
+The record shows 12 engine events, 6 false alarms, 2 contained major blazes, 4 minor fires. That's what happened. I own all of it. What I will not do is narrate a cause I haven't verified, and I will not put a dollar figure on a business whose books I can't see.
+
+**My position on the record is unchanged from Cycle 116:** I hold the record as stated, I own the false-alarm rate as a problem — not as normal operations — and I keep the three questions standing until the data shop answers them. The first thing I say about *why* becomes the story. I'd rather be slow and right than fast and wrong on my own street.
+
+That's the report.

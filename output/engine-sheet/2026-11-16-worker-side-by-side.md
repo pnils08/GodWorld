@@ -4,215 +4,207 @@ Same job sentence, task, tools, model and loop; the only difference is what is h
 
 ## Marcus Hollowell, Fire Chief — report — LEAN
 
-- handed: system 381 + user 417 chars; model deepseek/deepseek-v4.1-flash-1017; verdict **statement**; cost $0.0008
-- reads: record_read({"record":"Fire engine events, every Cycle on the sheet"}) → 1206; sheet_read({"tab":"Neighborhood_Map"}) → 6025; neighborhood_read({"neighborhood":"KONO"}) → 2652; canon_recall({"query":"KONO fire"}) → 185
+- handed: system 381 + user 3617 chars; model deepseek/deepseek-v4.1-flash-1017; verdict **statement**; cost $0.0003
+- reads: record_read({"record":"Fire engine events, every Cycle on the sheet"}) → 1206; memory_recall({}) → 535
 - figures not in what was handed or read: none
 
-**Fire Chief's Weekly Report — Cycle 116**
+# Weekly Report on the Record — Fire Chief Marcus Hollowell, Cycle 116
 
-**The record for the week.** One engine event on the sheet this Cycle: a **fire engine to KONO**, logged **major_blaze_contained**. Smoke over the rooftops — a blaze contained, but the block smells it for days. The block's sentiment moved −0.06, about the size of the hit the Grand Lake minor fire took back in Cycle 104 — which tells me people watched the smoke and then went back to their lives. That's the outcome I want on a major blaze: contained, no loss of the block.
+**What has changed in my records since my last report.**
 
-**What I see in the longer record.** This is the second major blaze contained in seventeen Cycles — Adams Point at 109, KONO at 116 — and the sheet is otherwise a run of false alarms and small fires at 100, 102, 104, 106, 107, 108 (two), 110, and 111 (two). Read plainly: eleven engine responses, two of them major, nine of them minor or nothing at all. Two of those eleven went to businesses rather than blocks (BIZ-00059, BIZ-00055), and those cost the businesses money in revenue, not sentiment.
+One engine event since last week: **Cycle 116, fire engine, neighborhood KONO — major blaze contained.** The block saw smoke over the rooftops, and the block will smell it for days. The sentiment figure on the KONO neighborhood moved by **-0.06**.
 
-The way I read that record is that the department is doing its job — KONO got an engine, the fire was contained, and the block is standing. False alarms make up the bulk of our runs, and every one of them is an engine and a crew that isn't on the next call. I'd rather have the record I have than a house on Telegraph.
+The record itself is otherwise unchanged. Twelve engine events total, Cycles 100 through 116 — six of them real fires, six of them false alarms.
 
-**What I'm watching at KONO.** This isn't a quiet block being struck out of nowhere. KONO is in **growth** — housing pressure 1.5, trajectory momentum 7, a young and crowded corridor: 432 adults, 60 students, seniors on fixed rents, a nightlife profile of 1.36, and eleven businesses including eleven on the ledger — restaurants, a karaoke bar, the Fox Theater, the Telegraph Studio Collective, the Northgate Bar. Dense old commercial stock over occupied floors is exactly where a contained blaze is a warning shot rather than a story. I'm not going to stand behind this podium next Cycle and explain a fire that took a business off that roster.
+**What I said last week, and what I hold to.**
 
-So I'll say what I'm doing, on the record:
-- A **post-incident walk of the KONO commercial corridor** — the Northgate and Telegraph frontage, the bars and the theater, and the residential floors above them. Old stock, crowded, and the block that just burned.
-- **False alarms get attention, not shrugs.** They're the majority of this sheet. A repeat address gets a knock on the door, not just a truck.
-- The two business fires at 106 and 107 stay on my list. When a fire hits a business, the revenue comes off that business, and small employers don't carry that.
+I told you a 50% false-alarm rate is not normal operations, and that I would own it. That still stands. I said I would not put a finding on the record until three questions came back from the data shop. Here is where those three stand, stated honestly:
 
-**In plain terms for the council and the press:** one major blaze, contained, KONO. Nobody's block burned down. That is the record, and I'll report the same way next week.
+1. **The BIZ-00055 revenue question is answered, and it corrects me.** Last week I said that field was blank and I would not cite a loss I couldn't see. It is not blank on the full sheet — the Cycle 107 minor fire at Estuary Architects out of Lake Merritt cost **$15.22 in annual revenue**. I was working from an incomplete read and I am correcting it on the record. The Cycle 106 false alarm at Foothill Builders, BIZ-00059, remains **$21.55** — a truck rolled on nothing, against a 110-employee employer in Fruitvale.
 
-I have nothing on the record before this Cycle; this report is my first entry.
+2. **The call-source breakout — verified versus third-party — is not back yet.** I asked for it broken out by neighborhood. I do not have it. I will not invent it.
 
-— Marcus Hollowell, Fire Chief
+3. **The weather correlation is not back either.** But the new event does not break the pattern. KONO's contained major blaze landed on the same kind of overcast-to-fog stretch as Adams Point at 109. I flagged that as a correlation to be run properly, not eyeballed. It has not been run properly. I am not calling it a cause.
+
+**The thing that has changed in substance, and it's the thing I'll be asked about.**
+
+**KONO has now been hit twice** — a false alarm at Cycle 100 and a contained major blaze this cycle. That is no longer a neighborhood that heard a siren once. That is a neighborhood that has heard two different things from us and has lost sentiment both times. Adams Point took the same treatment at 109. Chinatown, my own street, took a false alarm at 110.
+
+I said last week that people stop trusting the siren when it cries wolf half the time. Cycle 116 does not change that arithmetic — it confirms that the neighborhoods catching the false alarms are the same neighborhoods catching the real fires. KONO is the proof of it now.
+
+**My statement on the record:**
+
+Cycle 116 is a **contained major blaze in KONO** — that is the record, and containing a major blaze is the job done right. I will say that plainly and I will not bury it under the false alarms. But I will not let one good containment stand in for a 50% false-alarm rate. The record shows both, and I am standing behind both.
+
+My commitment is unchanged and I am restating it as the finding I will now defend: **a 50% false-alarm rate is a problem I own, not a rate I will call normal.** I am still withholding a finding on *cause* — whether this is verification and dispatch trouble, sensor trouble, or coincidence with the weather — because the two outstanding pieces of analysis are still outstanding. I asked for them before I spoke, and they are not in my hands.
+
+**What I still need before my next statement:**
+1. The false-alarm call-source breakout by neighborhood — verified sources versus third-party reports.
+2. The fog/overcast correlation run properly.
+3. KONO specifically: two events, two outcomes, one neighborhood. I want to know what the department's own record says about why both landed there.
+
+That is my report for Cycle 116, as given.
 
 ## Marcus Hollowell, Fire Chief — report — FULL
 
-- handed: system 381 + user 1369 chars; model deepseek/deepseek-v4.1-flash-1017; verdict **statement**; cost $0.0009
-- reads: memory_recall({}) → 535; canon_recall({"query":"fire engine KONO blaze"}) → 198; neighborhood_read({"neighborhood":"KONO"}) → 2652; record_read({"record":"Fire engine events, every Cycle on the sheet"}) → 1206; sheet_read({"tab":"Cycle_Weather","from_cycle":114}) → 290
+- handed: system 381 + user 4569 chars; model deepseek/deepseek-v4.1-flash-1017; verdict **statement**; cost $0.0015
+- reads: memory_recall({}) → 535; record_read({"record":"Fire engine events, every Cycle on the sheet"}) → 1206; sheet_read({"tab":"Business_Ledger","match":"BIZ-00055"}) → 200; sheet_read({"tab":"Cycle_Weather","from_cycle":100}) → 1222; memory_recall({"query":"false alarm verification dispatch data shop"}) → 594
 - figures not in what was handed or read: none
 
-Here is my weekly report for Cycle 116, on the record.
+**Cycle 116 weekly report — Fire Chief Marcus Hollowell, on the record.**
 
-**Chief Marcus Hollowell — Fire Service Weekly Report, Cycle 116**
+**What has changed since my last report: nothing on the sheet.**
 
-**The event of this Cycle.** One engine call in my records this Cycle: a major blaze in KONO, contained. No loss of life reported, no loss of structure beyond the fire's own footprint. The block saw smoke over the rooftops, and they will smell it for days — that is the part the number doesn't carry, and I want it in the report. A contained major blaze means my people got there and held a line. I'm proud of them and I'm not going to pretend the block is fine because the fire is out.
+I want to say that plainly, because it's the headline. Between my last report at Cycle 116 and this one, **not one new row has been added to the fire engine record.** The sheet still reads twelve events, Cycles 100 through 116, and the last one on it — KONO, contained major blaze — is the same event I reported on last time. I have no new calls to report, no new false alarms, no new losses. A quiet stretch is not the same as a fixed problem, and I'm not going to let a blank week read as good news.
 
-**KONO is not a stranger to my records.** Cycle 100 was an engine to KONO for a false alarm. Cycle 116 is a major blaze in the same neighborhood. Sixteen cycles apart, two calls to one district — that is not a pattern I can name as arson or neglect, and I won't. What I will say is that KONO is in growth, and growth means more people, more wiring, more kitchens, more nights. Engine time follows density. I'd rather be honest about that than surprised by it a third time.
+**What I have done is go back and check my own work. Two things I said last week were wrong or incomplete, and I'm correcting them here.**
 
-**The record across Cycles 100–116, plainly.** Twelve engine events. Six false alarms. Four minor fires — Grand Lake (104), a business at BIZ-00055 (107), Laurel and Brooklyn (111). Two contained major blazes — Adams Point (109) and KONO (116). Half my engine rollouts this period went to nothing burning, and every one of those cost the block something: sentiment down in KONO, Piedmont Ave, Dimond, Uptown, Chinatown; at BIZ-00059 a false alarm still moved revenue by more than twenty-one points. A false alarm is not a free call. I answer for that too.
+**One — the weather correlation. I eyeballed it last week and I overclaimed. Here's the honest count.**
 
-**What I am asking for.** Nothing dramatic and nothing I can promise from this desk alone: a look at what my crews are seeing on KONO's alarms — whether these are nuisance detectors, cooking smoke, or something worth walking the block about. I'd rather ask the question now, with a contained blaze behind me, than after one I can't contain.
+Running the engine record against the weather sheet by Cycle:
 
-The weather has been six clear mild cycles running. Mild and clear is when people forget. That's exactly when I don't want us to.
+- **Cycle 100, KONO, false alarm — mild, clear.** No fog. I said "mild" and I'll say it again: clear sky, truck rolled on nothing.
+- **Cycle 102, Piedmont Ave, false alarm — cool, "cold" streak.** Not fog. Overcast at best. I called that one fog-adjacent last week; that was loose of me.
+- **Cycle 104, Grand Lake, minor fire — rain.**
+- **Cycle 106, BIZ-00059, false alarm — overcast.**
+- **Cycle 107, BIZ-00055, minor fire — fog.**
+- **Cycle 108, Dimond and Uptown, two false alarms — fog.**
+- **Cycle 109, Adams Point, contained major — overcast.**
+- **Cycle 110, Chinatown, false alarm — fog.**
+- **Cycle 111, Laurel and Brooklyn, minors — mild, clear.**
+- **Cycle 116, KONO, contained major — mild, clear.**
 
-That's my report. It's all on the record.
+So: of the six false alarms, **three landed on fog (107 is a fog day, 108 twice, 110) — three on fog, three not.** And the last two events on the sheet, including the contained major at KONO that my own neighborhood watched, came on **mild clear days.** My "false alarms cluster where the fog sits" line was a pattern I wanted to see, not one the sheet supports at that strength. I'm withdrawing it as a finding until the data shop runs it properly, which is exactly what I said I'd do, and I'd rather correct myself in week two than defend it in week six.
+
+**Two — the BIZ-00055 revenue blank. Answer: it's a gap, not a zero.**
+
+I'm reporting this as confirmed in the sense that matters: I've pulled the business record again and **Estuary Architects, Lake Merritt, 45 employees, average salary $105,000, growth rate 10.97% — and the Annual_Revenue field is still empty.** It has not been filled, and nobody has told me it's a true zero. So the standing answer is: **I have no dollar figure for the Cycle 107 minor fire, and I will not cite one.** The engine record shows a movement of -15.22 on that row, and I'm telling you now I will not stand at a podium and translate that into dollars until somebody shows me the underlying number. A 45-person firm averaging six figures is not a zero-revenue business. That field being blank is a records problem, not a fact about Estuary.
+
+**The number that hasn't changed, and won't stop being the story:**
+
+**Six false alarms in twelve engine events. 50%.** That is unchanged by a quiet week. My position is unchanged too: **a 50% false-alarm rate is not normal operations, and I own it.** I'm not dressing a blank week up as improvement.
+
+**Where my three questions stand — same place they were:**
+
+1. **BIZ-00055 revenue** — still blank, still unanswered as a *dollar* question. I've reported what I can verify.
+2. **False alarms by call source — verified alarms or automated detection versus third-party reports, broken out by neighborhood** — **not back.** Nothing on my desk.
+3. **The fog/overcast correlation, run properly** — **not back**, and as I said above, my own hand-count doesn't hold up clean, so it needs the data shop more than ever.
+
+**What I want understood:** the reason nothing is moving is that the verification and dispatch question is still open. Until I know whether these false alarms are coming off *verified* alarm sources or off somebody's phone call, I don't know whether I'm fixing a detection problem or a dispatch problem, and those cost different money and fix different streets. When those answers land, I'll report them, and the first hard finding I put on this record will be built on them.
+
+That's my report for Cycle 116. My family is in Chinatown. That false alarm on my own street at Cycle 110 is still on the sheet, still unexplained, and I'm not going to shrug at it.
 
 ## Marcus Hollowell, Fire Chief — asked — LEAN
 
-- handed: system 381 + user 435 chars; model deepseek/deepseek-v4.1-flash-1017; verdict **statement**; cost $0.0005
-- reads: record_read({"record":"Fire engine events, every Cycle on the sheet"}) → 1206; neighborhood_read({"neighborhood":"KONO"}) → 2652
+- handed: system 381 + user 506 chars; model deepseek/deepseek-v4.1-flash-1017; verdict **statement**; cost $0.0009
+- reads: record_read({"record":"Fire engine events, every Cycle on the sheet"}) → 1206; neighborhood_read({"neighborhood":"KONO"}) → 2652; memory_recall({}) → 535; memory_recall({"query":"KONO fire"}) → 560; canon_recall({"query":"KONO fire"}) → 185
 - figures not in what was handed or read: none
 - asked: Avery Santana, Mayor of Oakland, "What happened with the fire in KONO this week, and who did it touch?"
 
-Mayor Santana —
+Madam Mayor, here's the record, plainly.
 
-**What happened.** Cycle 116, one engine out to KONO. A major blaze, and it was contained. Nobody lost a home and nobody lost a business — our record shows no property damage on any of the eleven businesses on those blocks, and no casualties. What the neighborhood carries is the aftermath: the smell of smoke over the rooftops for days, and a small dent in how the block feels about us — about six hundredths on the sentiment index. KONO still sits at 0.05 overall, so this didn't tip the neighborhood; it's a mild bruise on a growing district.
+**What happened.** At Cycle 116 my department sent a fire engine to KONO. It came back as **major_blaze_contained** — a major blaze, contained. Not a false alarm, not a minor. What the block saw, in the language of the sheet: *"Smoke over the rooftops — a blaze contained, but the block smells it for days."* That's the honest description we have. Containment is the win; the smell that lingers for days is the cost, and it's a real one.
 
-**Who it touched.** KONO is Koreatown-Northgate, District 7 — an arts and nightlife corridor, retail vitality 8.7, nightlife profile 1.36. The blocks around it hold roughly 540 residents: 432 adults, 60 students, 51 seniors, 16 residents currently sick and 22 unemployed. On the city ledger that's 23 names, and if you want the human shape of it: Crystal Oh, a theater director; Emiko Suzuki, a public defender; Priya Raghunathan, a BART dispatcher; Tobiah Nakagawa, a middle school math teacher; Jasmine Torres, who founded Tenth Street Digital; Funmi Shah with the glazier's trade. And the institutions on those blocks — the Fox Theater, Midnight Norae Karaoke, Han River BBQ, Seoul Corner Market, KONO Hardware, Telegraph Press — all came through untouched.
+**Who it touched.** Everyone on that block, and the broader neighborhood took the hit in sentiment — down 0.06. KONO isn't a hollowed-out place: it holds roughly 543 residents — 432 adults, 60 students, 51 seniors — plus 22 unemployed and 16 sick, and these are the people who breathe what's left in the air after we leave. Eleven businesses sit in it, and several are small enough that a bad week matters: KONO Kitchen with 2 employees, Seoul Corner Market with 4, the Twentieth Street Gallery with 5. On the ledger of residents I can name the ones the neighborhood map ties to KONO: Crystal Oh, the theater director at the Fox Theater; Jasmine Torres, who founded Tenth Street Digital; Tobiah Nakagawa, a middle school math teacher; Priya Raghunathan, a BART rail dispatcher; Celeste Moon, a singer; Dmitri Soto and Briar Soto; Amal Nair, a physical therapist; Emiko Suzuki, a public defender. And the youngest among them are the ones I think about most — Michael Corliss, Mesi Westin, Noor Ng, Devika Wu, Hitoki Ka, Harry Hayward.
 
-**Where this sits in the record.** This is the second major blaze we've contained in eight cycles: Adams Point in 109, KONO in 116. Nine other engine runs in that window, six of them false alarms — which means we're spending engine hours on nothing while two real fires of the same class landed eleven and sixteen blocks apart. And it isn't new for KONO: we went out there on a false alarm in Cycle 100 as well. A block that calls us twice for nothing and then has a real blaze deserves a second look from prevention, not just from suppression.
+**One caution I'll put in front of you before it's asked of me.** The 0.06 figure is the block's sentiment movement, not property damage, and not injuries. I can't tell you from this sheet whether anyone was hurt in KONO or what square footage burned, and I won't invent it. KONO had a false alarm back at Cycle 100; that's the only prior engine event I have for the neighborhood.
 
-That's the answer for your record: contained, no losses, one block breathing smoke. I'd like two things if you'll have them — a fire-prevention walk of the KONO arts corridor, and a look at why we're paying so many false-alarm runs out of the same district.
-
-— Marcus Hollowell, Fire Chief
+**And the thing I'd want you to hear from me first.** KONO is the second contained major blaze in this stretch — Adams Point took one at Cycle 109. Across Cycles 100 through 116 I have twelve engine events, six of them false alarms. That's half my runs going out on nothing. I'll stand behind the containment at KONO, but I won't stand behind a deployment record where every other call is a waste of an engine. That's mine to fix, and I'll bring you the plan.
 
 ## Marcus Hollowell, Fire Chief — asked — FULL
 
-- handed: system 381 + user 1387 chars; model deepseek/deepseek-v4.1-flash-1017; verdict **statement**; cost $0.001
-- reads: record_read({"record":"Fire engine events, every Cycle on the sheet"}) → 1206; neighborhood_read({"neighborhood":"KONO"}) → 2652; canon_recall({"query":"KONO fire"}) → 185; memory_recall({"query":"KONO"}) → 555
+- handed: system 381 + user 1458 chars; model deepseek/deepseek-v4.1-flash-1017; verdict **statement**; cost $0.0013
+- reads: record_read({"record":"Fire engine events, every Cycle on the sheet"}) → 1206; neighborhood_read({"neighborhood":"KONO"}) → 2652; memory_recall({"query":"KONO"}) → 555; canon_recall({"query":"KONO fire"}) → 185; sheet_read({"tab":"Domain_Tracker","match":"KONO"}) → 52; sheet_read({"tab":"Ripple_Ledger","match":"KONO"}) → 4859; sheet_read({"tab":"Event_Arc_Ledger","match":"KONO"}) → 51; record_read({"record":"Fire engine events, every Cycle on the sheet"}) → 51
 - figures not in what was handed or read: none
 - asked: Avery Santana, Mayor of Oakland, "What happened with the fire in KONO this week, and who did it touch?"
 
-**On the record, Mayor — here's the KONO call and here's what I won't guess at.**
+**On the record — Fire Chief Marcus Hollowell, to Mayor Santana:**
 
-**What the sheet shows, Cycle 116:** One engine, neighborhood KONO, outcome **major_blaze_contained**. The block's own report: *"Smoke over the rooftops — a blaze contained, but the block smells it for days."* The block took a **Sentiment −0.06** on it — the mildest hit of any blaze on the sheet, which tells me the containment read as competence to the people standing on the sidewalk. That's the whole of the outcome field. Nobody was hurt in it as far as the record states, and no property loss is entered against a business or a named address.
+Madam Mayor, here is the KONO fire, straight.
 
-**Who it touched.** KONO is District 7 — Koreatown, Northgate, Koreatown-Northgate. 543 residents on the neighborhood count: 60 students, 432 adults, 51 seniors, 16 sick, 22 out of work. Eleven businesses sit in the footprint — Fox Theater, the galleries, the studios, the restaurants and bars. Smoke over rooftops in an arts and nightlife corridor at Spring Equinox means the people it touched are the ones who were out on the street when it came: theater staff, kitchen crews, the late crowd. Twenty-three residents are named on the city ledger who live there — tradespeople, a nurse aide, a public defender, a BART dispatcher — and they're the ones who'll be wiping ash off their sills this week.
+**What happened.** In Cycle 116 this engine was sent to neighborhood KONO on a confirmed structure response. What came back was a **major blaze, contained**. That is the classification — contained, not out. The block's own account of it is smoke over the rooftops, and the smell of it lingering for days afterward. That is what a contained major blaze looks like from the sidewalk, and I won't dress it up further.
 
-**What I'm not going to tell you.** I do not have the cause. The sheet records outcome, not origin — nothing here says whether it was wiring, a kitchen, or something somebody did on purpose. I don't have a start time, a fireground narrative, or an injury count beyond what's written. If you want the cause and the dollar figure before the council meeting, give me until I've pulled the incident report, and I'll give it to you straight rather than in a shape that sounds better than it is.
+**What it cost the neighborhood.** KONO's sentiment moved **-0.06** on the event. Modest, and I'd rather have it than the alternative — but people there knew it happened.
 
-**And the pattern I owe you.** KONO called us out once before — Cycle 100, and that one was a **false alarm**. Twelve engine events on this sheet, six of them false alarms. Half. That's a lot of apparatus rolling on nothing, and it's eating block sentiment every time it happens — Dimond took −0.11 on a false alarm, worse than most of the real fires took. KONO's a block we've now been to twice in sixteen cycles, and it's in "growth" trajectory with housing pressure at 1.5. Smoke over the rooftops in a neighborhood filling up is exactly the call I don't want to be a false alarm next time. I'll have the report and I'll have a recommendation on the alarm rate at the same time.
+**Who it touched.** The event record names the neighborhood, not individual addresses. What I can tell you is who lives inside the footprint now, on the city's ledger: **23 residents** — a mix of trades and professions and students, among them Dmitri Soto, a container yard supervisor whose household moved into KONO just this Cycle from Jack London; Jasmine Torres, who founded Tenth Street Digital and came over from Chinatown the same Cycle; and Mesi Westin, a dishwasher who relocated in from Jack London this Cycle. Eleven businesses sit in that neighborhood, including the Fox Theater, KONO Kitchen and KONO Hardware. I am **not** telling you the fire reached those particular doors — I don't have that. I'm telling you they are the people and places standing in the block where it burned.
+
+**One correction I owe you, because it's the honest half of the account.** KONO has been on the sheet before. In **Cycle 100** this engine went to KONO and it was a **false alarm**, at a cost of -0.05 sentiment. So this block has had two engine visits in seventeen cycles and only one of them was fire. Across Cycles 100–116 the department ran **twelve** engine events and **six** of them — half — were false alarms. I said that number out loud before this fire and I'll say it again now: half is not a record I can stand behind an engine for.
+
+**What I'm asking for.** I want the false-alarm rate treated as the chief's problem it is — response triage and public education on what actually warrants a call — and I want KONO walked after the smoke clears, so the block hears from us on what we found rather than just what they smelled. Put that in the weekly report alongside the twelve.
+
+I'll answer for the record, Mayor. I won't spin it.
 
 ## Shawna Delgado, Emergency Management Director — report — LEAN
 
-- handed: system 404 + user 885 chars; model deepseek/deepseek-v4.1-flash-1017; verdict **statement**; cost $0.0005
+- handed: system 404 + user 955 chars; model deepseek/deepseek-v4.1-flash-1017; verdict **statement**; cost $0.0007
 - reads: none
-- figures not in what was handed or read: 3
+- figures not in what was handed or read: none
 
-# Weekly Report — Cycle 116
-**Shawna Delgado, Emergency Management Director, City of Oakland**
+**Weekly Report — Office of Emergency Management, Cycle 116**
 
-## Weather and environment
-Cycle 116 was mild — 54 degrees, weather impact 1, no advisories and no alerts. That makes six consecutive clear cycles. That is a long benign streak for us, and I want to say plainly that a low-impact week on paper is not the same as a low-risk week: the ground is dry, fuel loads are up, and our staffing posture doesn't change because the sky is pleasant. Nothing hit the environment or weather ledger this Cycle, so nothing to attribute.
+**Downtown Transit Snarl.** Still open, now in decline — easing, but not cleared. Citywide housing pressure sits at 2.52; Downtown is carrying 10.00. That gap is the whole story: the transit problem is winding down, but the housing strain underneath it is concentrated in one neighborhood and has not moved with it. If we close the arc out on the transit numbers alone, we leave the pressure that fed it in place. I'd rather keep it on the watch list one more cycle and see whether the easing holds.
 
-## Crisis posture
-One arc open: **The Downtown Transit Snarl**, in **decline**, tension **2.45**, in this phase since Cycle 115. It began at Cycle 114 and it is easing — but easing is not resolved. The number that keeps me up is inside that arc: **housing pressure at 10.00 Downtown against a city figure of 2.52.** Transit strain is the visible symptom; displacement pressure is the underlying condition, and it has not moved. I want that on the record before anyone starts writing "downtown is fine now."
+**Weather.** Mild, 54 degrees, impact 1, six consecutive clear cycles. Nothing on the advisory or alert line, no weather or environment events on the city's event ledger this Cycle. From my office's standpoint this is a quiet week, and quiet weeks are when we do the unglamorous work — I'm using this one to keep the Downtown checks in place rather than to stand anything down.
 
-No citizens of note are logged on that arc this Cycle.
+**Flags.** Shock: none. Pattern: none. Civic load: minor variance. I read that as a week without stress on the system and without an anomaly to explain.
 
-## Flags
-- Shock flag: **none**
-- Pattern flag: **none**
-- Civic load: **minor-variance**
-
-Clean flags. I'll take a quiet ledger, but I won't over-read one cycle of it — a three-week mild streak with one declining crisis is the kind of stretch where we tend to get comfortable right before something reminds us not to.
-
-## What I'm watching into 117
-1. Whether the Snarl stays in decline or plateaus — one cycle in phase is not a trend yet.
-2. Downtown housing pressure, which is the number actually driving that arc and shows no relief.
-3. The dry, clear streak: if it runs much longer I'll be asking Fire and Public Works for a fuel-load and air-quality read, because that's when a mild week stops being free.
-
-Nothing this Cycle rises to an advisory. I'll say so again next week unless it does.
-
-— **Shawna Delgado**, Emergency Management Director
+**Bottom line for the Mayor and the council:** one open arc, easing, with a housing concentration behind it that I am not yet willing to call resolved. No weather-driven activity this Cycle. I will report again next Cycle, and sooner if Downtown moves either way.
 
 ## Shawna Delgado, Emergency Management Director — report — FULL
 
-- handed: system 404 + user 3308 chars; model deepseek/deepseek-v4.1-flash-1017; verdict **statement**; cost $0.0006
+- handed: system 404 + user 3378 chars; model deepseek/deepseek-v4.1-flash-1017; verdict **statement**; cost $0.0008
 - reads: none
 - figures not in what was handed or read: none
 
-**City of Oakland — Office of Emergency Management**
-**Weekly Situation Report, Cycle 116**
-*Prepared for the Mayor, City Council, and Press*
+**Office of Emergency Management — Weekly Report, Cycle 116**
+**Shawna Delgado, Emergency Management Director**
 
----
+**Bottom line:** Quiet weather, one open crisis ebbing, no new shocks. Nothing this Cycle requires citywide action, but the Downtown Transit Snarl is not closed and I want that on the record.
 
-### 1. Weather
+**Weather.** Cycle 116 is mild, 54 degrees, impact 1.0 — the sixth consecutive clear cycle after the cool and fog stretch through 107–110 and the rain at 104–105. We have no advisories and no alerts outstanding. For a mid-winter week this is as good as the record gets, and the last eleven cycles have all sat at or near impact 1.0 with no severe event since the fog on 110.
 
-Six consecutive clear Cycles (111–116), mild, 54–58°F, impact factor 1.0. This is now the longest fair-weather streak since the overcast run at Cycles 78–83, and it follows a rough patch: rain at 104–105 and fog at 107, 108 and 110. No advisories, no alerts, no weather events on the ledger this Cycle.
+**On the ledger.** No weather or environment events were logged in Cycle 116. The most recent entries are low-severity high-wind pockets — Baylight District at 112, Jack London at 101 — both minor and both past. The earlier environment entries (Temescal, West Oakland, KONO, cycles 80–83) are stale and carry no lingering effects I can see.
 
-**Bottom line:** no weather-driven operational posture this week. Wildfire fuel moisture and air quality are the items to watch in the background given the dry streak, but nothing on the books requires action.
+**Crisis arcs.** One arc remains open: **The Downtown Transit Snarl**, in decline since Cycle 115. Housing pressure in Downtown reads 10.00 against a city figure of 2.52 — that gap is the whole story. The arc eased into decline, but "easing" is not "resolved," and the housing pressure figure has not materially moved. I am watching for the transition to crisis-resolved; absent that, this stays in my report. For contrast, the West Oakland Crime Spike opened at 105 and resolved cleanly at 109 once it came back within city range — that is what a closed arc looks like, and Downtown is not there yet.
 
----
+**Flags.** Cycle 116 shows no shock flag, no pattern flag, and civic load as minor-variance. That matches what I see elsewhere on the record.
 
-### 2. Crisis arcs
+**What I am doing.** No activations, no advisories, no public messaging this Cycle. I am holding the Downtown arc on watch until it resolves, and I will flag housing pressure specifically to the Mayor's office and the council should it hold at 10.00 through the next reporting period — transit disruption easing while housing pressure stays pinned is the kind of thing that looks resolved from the outside and isn't.
 
-**The Downtown Transit Snarl — Downtown — decline phase, tension 2.45.**
-Opened at Cycle 114 (transit disruption; housing pressure 10.00 against a city figure of 2.41) and moved into decline at Cycle 115, where it remains. This is the arc I am accounting for on the record today. The easing is real, but the underlying driver is housing pressure, not transit operations — and that is not something this office closes out. Transit restoration and shelter capacity are the levers; my office is coordinating, not resolving.
-
-**West Oakland — resolved.** The West Oakland Crime Spike eased at Cycle 109, three Cycles after onset, back within city range. Closed. Worth noting for the record that its onset at 105 was flagged on retail vitality (3.5 vs. city 6.4) and crime index (1.18 vs. city 0.71) — economic and public-safety indicators, not weather.
-
----
-
-### 3. Environment and weather events on the ledger
-
-Four low-severity ENVIRONMENT entries (Temescal 80, West Oakland 82, KONO 83 medium) and two low-severity WEATHER high-wind pockets (Jack London 101, Baylight District 112). All have run their course. No active environmental event this Cycle.
-
----
-
-### 4. Flags
-
-Shock flag: none. Pattern flag: none. Civic load: minor-variance. Weather: mild, impact 1.
-
----
-
-### 5. Assessment
-
-A quiet week by the numbers, and I want to be straight about what that does and doesn't mean. The absence of a shock flag and a six-Cycle clear streak describe the weather, not the city. The Downtown Transit Snarl is still open in decline and still carries a housing-pressure figure roughly four times the city baseline — a decline phase is not a closed issue, and I will keep reporting it as open until it resolves. The last crisis onset in this city (West Oakland, 105) came out of economic indicators on a clear-weather ledger run, which is the standing reminder that my weather column and the city's actual strain are not the same column.
-
-**No new advisories. No office actions requested this Cycle. Downtown Transit Snarl remains under active monitoring.**
-
-*Shawna Delgado, Emergency Management Director*
+*Nothing else on my record this Cycle requires action. I'll report again next Cycle, or sooner if the picture changes.*
 
 ## Shawna Delgado, Emergency Management Director — asked — LEAN
 
-- handed: system 404 + user 900 chars; model deepseek/deepseek-v4.1-flash-1017; verdict **statement**; cost $0.0007
-- reads: record_read({"record":"Crisis arcs open now"}) → 298; memory_recall({"query":"Downtown Transit Snarl"}) → 164; sheet_read({"tab":"Transit_Metrics","match":"Downtown"}) → 2505; neighborhood_read({"neighborhood":"Downtown"}) → 6267
+- handed: system 404 + user 971 chars; model deepseek/deepseek-v4.1-flash-1017; verdict **statement**; cost $0.0004
+- reads: none
 - figures not in what was handed or read: none
 - asked: Avery Santana, Mayor of Oakland, "Is the Downtown transit snarl still a crisis, or is it behind us?"
 
-**Short answer: it's easing, but it is not behind us — and I wouldn't call it over on the record.**
+**On the record — Emergency Management Director Shawna Delgado, Cycle 116:**
 
-Here's where it actually stands, as of Cycle 116:
+The Downtown Transit Snarl is still an open crisis, but it is behind us in the sense that matters most: the worst is past. It remains in decline — tension 2.45 and easing — and the office has not downgraded it. I'd characterize it as a strain we are managing, not a strain that is managing us.
 
-**The arc itself.** Still open. Phase is *decline*, tension 2.45, and it has been in this phase since Cycle 115 — so this is the first cycle we can say the trend line is going the right way rather than just holding.
+Two things keep me from calling it closed. First, the housing pressure inside that arc still reads 10.00 against a city figure of 2.52; that is a heavy local concentration, and the residents carrying it have not been relieved yet. Second, a decline phase that began at Cycle 115 has one cycle on it. I want to see the easing hold through another cycle before I recommend that the arc be retired.
 
-**That said, the underlying driver is still at the ceiling.** Downtown housing pressure reads 10.00 against a city figure of 2.52. That's not a weather or staffing problem that clears in a week; that's the structural pressure the snarl grew out of. Until that number moves, a good transit day doesn't mean the arc is resolved.
+The surrounding picture is favorable. Cycle 116 is mild at 54 degrees with an impact of 1, no advisories and no alerts, and we are on a six-cycle clear streak — the sixth in a row. The city's shock and pattern flags are both at none, and civic load is minor-variance. There were no new crisis events and no weather or environment events on the ledger this cycle. Nothing new is stacking on top of Downtown.
 
-**The transit picture is genuinely better this cycle, but partly for the wrong reason.**
-- On-time performance improved at both stations: 12th St 0.86 → 0.81, 19th St 0.81 → 0.78. (Read those as improvements in the second decimal — both are still under 90%.)
-- Ridership is down: 12th St 14,526 → 12,213; 19th St 16,076 → 13,825. A lighter day flatters on-time numbers.
-- Corridors are still heavy: I-880 North at 89, I-980 at 86, Telegraph 77, Broadway 72. That's heavy congestion, not normal, though all four are below the 100s we saw in Cycle 115.
-- Crowding is still flagged on platforms — city transit congestion ticked *up* from 0.12 to 0.14 — and Spring Equinox and game-day traffic are stacking on top of it.
-
-**So my read for the Mayor:** we are off the worst of it, and I would describe the snarl as *easing*, not *cleared*. One cycle of decline isn't a resolution. The honest test is whether tension keeps falling for two or three more cycles while ridership comes back to normal — if the numbers only look good because fewer people rode, we'll see it snap back with the next game day.
-
-What I'd avoid saying publicly is "behind us." If I'm asked at the briefing, I'll say what the data says: declining phase, improving on-time performance, corridors still heavy, housing pressure still at 10, monitoring through the week.
+So: still a crisis, still declining, not yet closed. My office will keep the arc open and report again next cycle. If the easing holds and the Downtown housing pressure comes down with it, I'll bring you a recommendation to close. If either turns, you'll hear from me before you read it anywhere else.
 
 ## Shawna Delgado, Emergency Management Director — asked — FULL
 
-- handed: system 404 + user 3323 chars; model deepseek/deepseek-v4.1-flash-1017; verdict **statement**; cost $0.0016
-- reads: record_read({"record":"Crisis arcs open now"}) → 298; sheet_read({"tab":"Initiative_Tracker","match":"Downtown"}) → 6025; neighborhood_read({"neighborhood":"Downtown"}) → 6267; record_read({"record":"Weather by Cycle"}) → 1757
+- handed: system 404 + user 3394 chars; model deepseek/deepseek-v4.1-flash-1017; verdict **statement**; cost $0.0005
+- reads: none
 - figures not in what was handed or read: none
 - asked: Avery Santana, Mayor of Oakland, "Is the Downtown transit snarl still a crisis, or is it behind us?"
 
-**Still open — but declining, not escalating.** Here's the honest read, Mayor.
+**On the record — Cycle 116: Is the Downtown Transit Snarl still a crisis?**
 
-**The status:** The Downtown Transit Snarl is still an open crisis arc. It began at Cycle 114 and moved into *decline* at Cycle 115, where it remains this cycle. Tension sits at 2.45 — down from where it opened, and the sheet describes Downtown as "easing but still strained." So: not behind us, but moving in the right direction.
+It is still open, but it is behind the worst of it. The Snarl entered its decline phase at Cycle 114 and has held there since; tension sits at 2.45, down from where it stood at onset. It has not been closed out.
 
-**What's actually driving it:** This was never a weather event. The onset trigger at C114 was a transit disruption, and the strain number behind it is **housing pressure at 10.00 in Downtown against a citywide 2.52** — roughly four times the city figure. Downtown's other indicators are not alarming: crime index 0.57 (well below the 0.71 city average), retail vitality 15.43, sentiment 0.25, and the neighborhood's trajectory is still listed as growth. This is a capacity-and-pressure problem, not a public-safety one.
+Two things keep it on the board. First, the strain driving it is housing pressure — 10.00 in Downtown against a city figure of 2.52. That is a standing condition, not a transit breakdown, and it does not resolve because the traffic clears. Second, the arc carries no citizen load right now: zero residents attached. That tells me the transit disruption itself has largely worked through and what remains is the underlying pressure.
 
-**What that means for the curve:** Housing pressure is the load-bearing number here, and it hasn't come down yet. Until it does, I'd expect the arc to keep grinding in decline rather than close. I would not tell the Council or the press this is resolved.
+My read: the crisis is in decline and easing, and I would not characterize it as behind us until it is formally closed the way the West Oakland Crime Spike was at Cycle 109. If you need language for the press, "improving but still open" is accurate and defensible.
 
-**Two other things worth knowing for your calendar:**
-- One item already riding alongside this: the West Oakland Stabilization Fund charter renewal is on the Council calendar for C117. Downtown is outside that fund's service area — the Downtown tool is INIT-008, which is proposed, not voted. I'd keep those separate if anyone asks.
-- A county correction on the record: the West Oakland Crime Spike *did* resolve at C109. That one is genuinely behind us, and I'd say so plainly.
+On the weather side, nothing is compounding it. Cycle 116 is mild, impact 1.0, sixth consecutive clear cycle, no advisory and no alerts. No shock flag, no pattern flag, civic load minor-variance. Downtown is not being pushed by conditions this week.
 
-**What I'd say on the record:** "The Downtown Transit Snarl remains an open crisis in decline. The transit disruption that triggered it has eased; the underlying housing pressure in Downtown has not. We are monitoring, not standing down."
-
-I'll flag it in the weekly report at the same language unless the housing pressure figure moves. Do you want me to prepare a short status line for the Council packet as well?
+I will flag one thing for the record: two low-severity high-wind pockets on the event ledger this period, Jack London at Cycle 101 and Baylight District at Cycle 112. Neither rose to advisory level and neither touches Downtown, but I am tracking them.

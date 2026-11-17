@@ -447,9 +447,12 @@ const JOBS = {
 const isLean = (officeId) => Object.prototype.hasOwnProperty.call(JOBS, String(officeId || ''));
 // The weekly report is made against the last one (builder 2026-11-16, on a quiet week: "2" — report against the last
 // report). With no last report on file, it is made on this Cycle alone.
-const reportTask = (cycle, last) => last
+// What they reply is what is saved, word for word (builder 2026-11-16: "3" — the task says so; nothing is cut after they
+// speak). Seen before it: "Weather table in hand … Let me put the report on the record."; "Do you want me to prepare …?".
+const ON_RECORD = (what) => 'Your reply goes on the record as your ' + what + ', exactly as you give it.';
+const reportTask = (cycle, last) => (last
   ? 'Cycle ' + cycle + ', your weekly report: speak on the record on what has changed in your records since your last report.'
-  : 'Cycle ' + cycle + ', your weekly report: speak on the record on what you see in your records this Cycle.';
+  : 'Cycle ' + cycle + ', your weekly report: speak on the record on what you see in your records this Cycle.') + ' ' + ON_RECORD('report');
 // Their last weekly report: the newest weekday record of theirs before this wake's date that the worker template made and
 // that finished (cron-civic-run.js runWorkerDatawake writes output/cron-civic/datawake/<agentDir>_<date>.json). A record
 // that ended mid-lookup is not a report (2026-11-16: the emergency director's "Let me check transit metrics…").
@@ -513,7 +516,7 @@ async function buildWake(opts) {
       ? decisions.map((d) => '- Cycle ' + d.cycle + ', ' + d.type + (d.askedBy ? ' — asked by ' + d.askedBy + ': ' + d.question + '\n  You answered: ' + d.said : ': ' + d.said)).join('\n')
       : '- nothing on record'),
     ...(last ? ['Your last report on the record (Cycle ' + last.cycle + '):\n' + last.statement] : []),
-    ...(question ? [askerLine + ' asks you:\n\n' + question] : lean ? [reportTask(o.cycle, last)] : []),
+    ...(question ? [askerLine + ' asks you:\n\n' + question].concat(lean ? [ON_RECORD('answer')] : []) : lean ? [reportTask(o.cycle, last)] : []),
   ].join('\n\n');
   return { office, system, user, memory, decisions, records, lean, last };
 }

@@ -105,6 +105,8 @@ pointers:
 
 **Report against the last report, 2026-11-16 (builder, on a quiet week: "2 and have a tool for their memory store should be available as well").** A lean worker's weekly report is handed its last finished report (`workerWake.lastReport`: newest weekday record before the wake's date made on the template that ended on a finished stop) and asked what has changed since; with none on file, this Cycle alone. Asked, no last report is handed. The memory tool was already one of the four (`memory_recall`). One run, no write ([[../../output/engine-sheet/2026-11-16-worker-last-report-run.CHIEF-FIRE]]): the fire chief, handed Monday's report, corrects himself on the record — reads the weather sheet and withdraws his fog correlation, answers his own revenue question, keeps the 50% false-alarm rate, names the verification data he still lacks. The emergency director has no finished report yet (Monday's ended mid-lookup), so her first comes on this Cycle alone. Seen: the statement opens on a working line ("Weather table in hand … Let me put the report on the record."). The workers' missing records: engine.348.
 
+**What goes on the record, 2026-11-16 (builder: "3").** The task now ends "Your reply goes on the record as your report (answer), exactly as you give it." (`workerWake` `ON_RECORD`); nothing is cut after they speak. Rerun, no write, 0 refused: the fire chief's report against his last, and the side by side again (9 runs, [[../../output/engine-sheet/2026-11-16-worker-side-by-side]] now holds this rerun; the first is in git at `6496b06c2`). No run opens on a working line or closes on an offer. Slips that stand: the fire chief, "a block that's been asked to trust a siren six times, been lied to by it three of those times" of KONO (two calls there, C100 and C116); the director, full and asked, "entered its decline phase at Cycle 114" (C115).
+
 ## Open
 
 - **A feed line the engine routed by kind, not by what happened.** C115: the feed's `roster-move` row is Vinnie Keane's retirement ("Keane is not leaving Oakland"); the engine's Sports-Moved line on him reads "spent the night on the phone working out where the family would land" — the trade pool. Engine output stands; recorded for the builder.
@@ -131,6 +133,7 @@ pointers:
 
 ## Changelog
 
+- 2026-11-16 (engine-sheet, S665) — the task says the reply goes on the record word for word; rerun, no working lines in 9.
 - 2026-11-16 (engine-sheet, S665) — weekly report made against the last report; one run; the workers' missing records filed as engine.348.
 - 2026-11-16 (engine-sheet, S665) — side by side, lean vs full, fire chief and emergency director, report and asked: 8 of 8 statements, no write; results under Acceptance.
 - 2026-11-16 (engine-sheet, S665) — the lean worker on the builder's ruling (a task is not puppeting): job sentence, this Cycle, the weekly report, record_read and neighborhood_read; fire chief and emergency director, printed.

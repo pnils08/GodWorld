@@ -293,7 +293,7 @@ test('a lean worker (the fire chief): sheet line then job; this Cycle of his rec
   assert.match(w.system, /^You are Marcus Hollowell\. You hold the office of Fire Chief\. Your temperament: steady\.\n\nYou run the city's fire service\. Your job is to answer for its record/);
   assert.match(w.user, /^Fire engine events, Cycle 116:\nCycle \| Vehicle \| Where \| Outcome \| Moved \| What the block saw\n116 \| fire_engine \| neighborhood KONO \| major_blaze_contained \| Sentiment -0\.06 \| Smoke over the rooftops\./);
   assert.ok(!w.user.includes('| old'), 'the lean pack is this Cycle');
-  assert.ok(w.user.endsWith('Cycle 116, your weekly report: speak on the record on what you see in your records this Cycle.'));
+  assert.ok(w.user.endsWith('Cycle 116, your weekly report: speak on the record on what you see in your records this Cycle. Your reply goes on the record as your report, exactly as you give it.'));
   assert.equal(reads, 1, 'the lean pack and the whole record share one read of the tab');
   assert.deepEqual(Object.keys(w.records), ['Fire engine events, every Cycle on the sheet']);
   const tools = ww.toolsFor('CHIEF-FIRE', { records: w.records });
@@ -309,7 +309,7 @@ test('a lean worker (the fire chief): sheet line then job; this Cycle of his rec
   assert.match(await exec('neighborhood_read', { neighborhood: 'Atlantis' }), /^no neighborhood "Atlantis" on the map\. The neighborhoods: KONO, Uptown/);
   // asked: the question replaces the weekly report
   const asked = await ww.buildWake({ officeId: 'CHIEF-FIRE', cycle: 116, officeMap: om, deps: d, question: 'What happened in KONO?', askerLine: 'Avery Santana, Mayor,' });
-  assert.ok(asked.user.endsWith('Avery Santana, Mayor, asks you:\n\nWhat happened in KONO?') && !asked.user.includes('weekly report'));
+  assert.ok(asked.user.endsWith('Avery Santana, Mayor, asks you:\n\nWhat happened in KONO?\n\nYour reply goes on the record as your answer, exactly as you give it.') && !asked.user.includes('weekly report'));
   // a worker with no job written wakes as before: no job line, no task, no lean reads
   assert.equal(ww.isLean('EMS-DIR'), false);
   assert.deepEqual(ww.toolsFor('EMS-DIR', { records: { a: 'b' } }).map((t) => t.function.name), ['sheet_read', 'citizen_lookup', 'canon_recall', 'memory_recall']);
@@ -331,9 +331,9 @@ test('a lean worker reports against its last finished report; a record that ende
   const d = deps(root); d.sheets = { getSheetAsObjects: async () => [] };
   d.wp = { ...d.wp, buildPool: async () => [{ popId: 'POP-00140', first: 'Marcus', last: 'Hollowell', cur: {} }], loadOfficeHolders: async () => ({ byPop: { 'POP-00140': { title: 'Fire Chief' } } }) };
   const w = await ww.buildWake({ officeId: 'CHIEF-FIRE', cycle: 117, officeMap: om, deps: d, date: '2026-11-23' });
-  assert.ok(w.user.endsWith('Your last report on the record (Cycle 114):\nTwo weeks ago.\n\nCycle 117, your weekly report: speak on the record on what has changed in your records since your last report.'));
+  assert.ok(w.user.endsWith('Your last report on the record (Cycle 114):\nTwo weeks ago.\n\nCycle 117, your weekly report: speak on the record on what has changed in your records since your last report. Your reply goes on the record as your report, exactly as you give it.'));
   const first = await ww.buildWake({ officeId: 'CHIEF-FIRE', cycle: 117, officeMap: om, deps: d, date: '2026-11-01' });
-  assert.ok(first.user.endsWith('Cycle 117, your weekly report: speak on the record on what you see in your records this Cycle.') && !first.user.includes('last report'));
+  assert.ok(first.user.endsWith('Cycle 117, your weekly report: speak on the record on what you see in your records this Cycle. Your reply goes on the record as your report, exactly as you give it.') && !first.user.includes('last report'));
   // asked, the question is the task: no last report is handed
   const asked = await ww.buildWake({ officeId: 'CHIEF-FIRE', cycle: 117, officeMap: om, deps: d, date: '2026-11-23', question: 'Q?', askerLine: 'A,' });
   assert.ok(!asked.user.includes('last report'));

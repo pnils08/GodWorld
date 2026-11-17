@@ -402,7 +402,7 @@ Object.assign(FILLS, {
     await k.whole('Transit by station and corridor, the Cycle before', 'Transit_Metrics', ['Station', 'Corridor', 'RidershipVolume', 'OnTimePerformance', 'TrafficIndex', 'Notes'], (r) => Number(r.Cycle) === Number(cycle) - 1, { allCycles: true });
     await k.chaos('BART train events, every Cycle on the sheet', ['bart_train']);
     await k.ripples('What transit events set moving', ['transit-event']);
-    await k.events('Traffic events on the city\'s event ledger', ['TRAFFIC']);
+    await k.events('Traffic and infrastructure events on the city\'s event ledger', ['TRAFFIC', 'INFRASTRUCTURE']);   // builder 2026-11-16: "Traffic + infrastructure" (transit disruption is filed as infrastructure)
   }),
   'STAFF-BAYLIGHT': projectFill('INIT-006', 'baylight harbor construction', async (k) => {
     await k.hoodMap('Boom exposure and income on the neighborhood map', ['BoomExposure', 'BoomIndex', 'MedianIncome', 'RetailVitality', 'NeighborhoodTrajectory']);
@@ -484,6 +484,7 @@ Object.assign(FILLS, {
 const JOBS = {
   'CHIEF-FIRE': 'You run the city\'s fire service. Your job is to answer for its record — each fire engine call, where it went and what came of it — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'EMERG-DIR': 'You run the city\'s emergency management office. Your job is to answer for the city\'s crises and its weather — what is open, how it is moving, what it set off — when the Mayor, the council or the press ask, and in your weekly report on the record.',
+  'PROJ-TRANSITHUB': 'You lead planning for the Fruitvale Transit Hub. Your job is to answer for its record — the hub\'s money and progress, ridership and on-time running at each station and corridor, the BART trains and the traffic — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'PROJ-STABFUND': 'You run the West Oakland Stabilization Fund. Your job is to answer for its record — the households it has paid and how much, the fund\'s money and progress, and the rent and housing pressure in the neighborhoods — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'DA-01': 'You are the city\'s district attorney. Your job is to answer for the city\'s arrests and the people in custody, the cases before the court, and the fines the court collects — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'PROJ-HEALTHCTR': 'You run the Temescal Community Health Center. Your job is to answer for its record — the center\'s money and progress, the hospital intakes it serves alongside, the illness in each neighborhood, and the city\'s health programs — when the Mayor, the council or the press ask, and in your weekly report on the record.',

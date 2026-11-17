@@ -79,7 +79,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | pipeline.89 | Every journalist picks (builder 10-25: "All journalists should pick, they are AI"): every wake package gets the live tools the 3 tool seats have, the slice is a tip sheet not the assignment, Rhea is off every path; Ines first, same cut on all 28. First run 2026-10-28 | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 |
 | infrastructure.19 | Oakland week flight made lifelike (builder 11-14). v41: names first, homes on a block, team news at team buildings. Next: his look; joined street unbuilt | in-progress | research-build | [[../../world-view/README]] |
 | pipeline.112 | Code labels off citizens' memory pages (builder 11-16): readers to keys/metadata first, then writers, then ~2,300 stored entries. In codex review | in-progress | research-build | [[../plans/2026-11-16-page-labels-off-citizens-memory]] |
-| engine.347 | Every saved word reaches the dials (builder 11-16). Classifier live 11-17 (bad events, Flat; stage 52 @187); next: grade strings off, printed row, new writers | in-progress | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
+| engine.347 | Every saved word reaches the dials (builder 11-16). Classifier, reporter piece, job statements live 11-17. Read Wed 11-18 05:45 rows, Sat print, Sun chain | in-progress | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
 
 ## 4. Queue — ruled, not started (ready)
 

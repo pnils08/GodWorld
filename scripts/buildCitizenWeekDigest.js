@@ -23,6 +23,7 @@ const path = require('path');
 const fs = require('fs');
 require('dotenv').config({ path: path.join(require('os').homedir(), '.config/godworld/.env') });
 const sheets = require('../lib/sheets.js');
+const { isJobDaypart } = require('../lib/jobStatementRows');
 
 const REPO = path.join(__dirname, '..');
 
@@ -142,6 +143,7 @@ async function buildDigest(options) {
     const popid = String(r[ri.popid] || '').trim();
     const text = clip(r[ri.text], 420);
     if (!popid || !text) continue;
+    if (isJobDaypart(r[ri.kind])) continue;   // engine.347 Task 5: statements made in a job are dial rows, not the citizen's week
     reflections.push({
       ts, popid,
       kind: String(r[ri.kind] || '').toUpperCase(),

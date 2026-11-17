@@ -22,6 +22,7 @@ const path = require('node:path');
 const { CANONICAL_HOODS } = require('../lib/canonNeighborhoods');
 const { POLICY_DOMAINS } = require('./createInitiative');
 const { DIAL_MAP } = require('../utilities/citizenDialMap');
+const { isJobDaypart } = require('../lib/jobStatementRows');
 
 const ROOT = path.resolve(__dirname, '..');
 // Mirrors the hospital writer's open-state contract (buildCyclePacket.js:836).
@@ -120,6 +121,7 @@ function visibility(data, resolver, target, sinceCycle) {
   const seen = new Set(), citizens = new Set();
   for (const row of data.Reflection_Intake) {
     if (key(row.Tag) !== 'civic') continue;
+    if (isJobDaypart(row.Daypart)) continue;   // engine.347 Task 5: a statement made in office is not a resident's civic voice
     const cycle = numeric(row.Cycle);
     if (!Number.isInteger(cycle) || cycle < 1) { out.invalidCycleRows++; continue; }
     if (cycle < sinceCycle || cycle > data.cycle) continue;

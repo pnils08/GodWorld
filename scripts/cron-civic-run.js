@@ -76,6 +76,30 @@ const cityHallLedger = require('./cityHallLedger');
 const chaosCascade = require('./dumpChaosCascade');
 const orBatch = require('./orBatch');
 const maraDirective = require('./maraDirective');   // civic.39 Task 3 — batch transport (importable since the require.main guard; key read is lazy)
+const jobRows = require('../lib/jobStatementRows');   // engine.347 Task 5 — what is said in the job reaches Reflection_Intake
+
+// engine.347 Task 5 (builder 2026-11-16: "what the councils and workers are saying should move thier dials";
+// 2026-11-17: "Proceed on option 1" — only what shows). A holder's own words are queued once their page write
+// is recorded; a flush at the end of a stage lands one Reflection_Intake row a speaker a sitting. Neither can
+// fail the stage: a refused queue or a failed flush is a log line, and what is queued waits for the next flush.
+function queueJobStatement(pop, cycle, daypart, text, src, dir) {
+  const r = jobRows.queue({ pop, cycle, daypart, text, src }, dir ? { dir } : undefined);
+  if (!r.queued && r.why !== 'already queued') log('job statement not queued (' + (src || daypart) + ' ' + pop + '): ' + r.why);
+  return r;
+}
+async function flushJobStatements() {
+  try {
+    return await jobRows.flush({
+      readRows: () => require('../lib/sheets').getRawSheetData('Reflection_Intake'),
+      appendRows: (rows) => require('../lib/sheets').appendRows('Reflection_Intake', rows),
+      classify: (text, open) => require('../lib/reflectionClassifier').classifyTripleReflection_(text, open),
+      log,
+    });
+  } catch (e) {
+    log('job statements: flush failed, queue kept: ' + e.message);
+    return { ran: false, error: e.message };
+  }
+}
 
 /** Non-fatal: prior CIVIC positions for holder of agentDir. */
 async function positionWallInject(officeMap, agentDir) {
@@ -96,6 +120,7 @@ async function positionWallRecordCascade(officeMap, agentDir, voiceJson, cycle) 
     const r = await officeWall.recordCascadeForDir(officeMap, agentDir, voiceJson, cycle);
     if (r.recorded) log('position-wall cascade ' + agentDir + ' → ' + (r.holder && r.holder.popid));
     else if (r.error) log('position-wall cascade skip ' + agentDir + ': ' + r.error);
+    if (r.recorded === true && r.holder) for (const said of r.said || []) queueJobStatement(r.holder.popid, cycle, 'CIVIC', said, 'cascade ' + agentDir);
     return r;
   } catch (e) {
     log('position-wall cascade failed (' + agentDir + '): ' + e.message);
@@ -118,6 +143,8 @@ async function positionWallRecordDatawake(rec) {
     });
     if (r.recorded) log('position-wall datawake ' + rec.holder + ' → ' + rec.popid);
     else if (r.error) log('position-wall datawake skip: ' + r.error);
+    // the statement itself, whole — not the datawake: … | action: … | signal: … line the page holds
+    if (r.recorded === true) queueJobStatement(rec.popid, rec.cycle, 'CIVIC', officeWall.statementOf(rec), 'datawake ' + (rec.agentDir || rec.office));
     return r;
   } catch (e) {
     log('position-wall datawake failed: ' + e.message);
@@ -1256,6 +1283,13 @@ async function commitDirectiveWrites(cycle, staged, opts) {
     const back = await page.pageHasDoc_(MARA_POP, r.customId);
     receipt.writes[id] = back === true ? { ok: true, customId: r.customId } : { ok: false, customId: r.customId, why: back === false ? 'readback: not found' : 'readback: unknown' };
   }
+  // engine.347 Task 5: her own words of the week — the directive as she wrote it and her notes — queued once her
+  // entry is on her page. Not the run entry (code composes it around her words). One row a Cycle; the resume and
+  // the tick's resume queue the same words, which queue once.
+  if (done(entryId)) {
+    const said = [staged.said].concat(staged.notes || []).map(x => String(x || '').trim()).filter(Boolean).join('\n\n');
+    if (said) queueJobStatement(MARA_POP, Number(cycle), 'directive', said, 'directive', path.join(opts.root, 'output', 'cron-civic', 'job-statements'));
+  }
   const rows = staged.promises.concat(staged.statuses);
   if (rows.length && !done('promises')) {
     try {
@@ -1498,6 +1532,8 @@ async function runDirective() {
   const openAfter = record.open.filter(p => !staged.statuses.some(s => s.promiseId === p.promiseId)).concat(staged.promises);
   const closedNow = staged.statuses.map(st => ({ status: st, promise: record.promises.get(st.promiseId) })).filter(c => c.promise);
   staged.runEntry = runEntryText(cycle, winner.result.blocks, winner.result.notDirecting, openAfter, closedNow);
+  // her directive as she wrote it, for the Reflection_Intake queue at the commit (engine.347 Task 5)
+  staged.said = winner.result.blocks.concat(winner.result.notDirecting ? [winner.result.notDirecting] : []).join('\n\n');
   const { manifest, outPath } = writeOutputs(winner.result, winner.model, winner.usage, attempts, staged,
     winner.model !== MODEL ? 'fallback writer (no tools)' : null);
 
@@ -3778,6 +3814,7 @@ async function runWorkerDatawake(duty, o) {
       cycle: rec.cycle, key: 'datawake-' + o.date, kind: 'datawake', office: rec.agentDir, holder: rec.holder, maxChars: 12000 });
     if (rec.positionWall.recorded) log('position-wall datawake ' + rec.holder + ' → ' + rec.popid);
     else if (rec.positionWall.error) log('position-wall datawake skip: ' + rec.positionWall.error);
+    if (rec.positionWall.recorded === true) queueJobStatement(rec.popid, rec.cycle, 'CIVIC', statement, 'worker ' + rec.agentDir);
   } catch (e) { rec.positionWall = { recorded: false, error: e.message }; log('position-wall datawake failed: ' + e.message); }
   fs.writeFileSync(outPath, JSON.stringify(rec, null, 2));
   console.log('  [✓] ' + office.agentDir + ' — "' + statement.replace(/\s+/g, ' ').slice(0, 80) + '"');
@@ -4065,6 +4102,7 @@ async function runDatawake() {
     owed: dutyPlan ? dutyPlan.owed : null, ranAt: new Date().toISOString() }, null, 2));
   const failed = results.filter(x => !x.ok);
   console.log('\n=== datawake: ' + (results.length - failed.length) + '/' + results.length + ' ok ===');
+  await flushJobStatements();   // before the exit code: the offices that spoke land whether or not another failed
   if (failed.length) process.exit(1);
 }
 
@@ -4139,6 +4177,7 @@ async function runChain() {
     fs.mkdirSync(CIVIC, { recursive: true });
     fs.writeFileSync(path.join(CIVIC, 'chain_halt_c' + cycle + '.json'), JSON.stringify(Object.assign({ cycle: Number(cycle), at: new Date().toISOString() }, halted), null, 2) + '\n');
   }
+  await flushJobStatements();   // the Sunday statements, before the close: it can exit
   await runClose();      // exits 1 only on a real block
   await runDirective();
 }
@@ -4722,7 +4761,10 @@ if (require.main === module) {
     console.error('[civic] unknown or missing --stage (built so far: ' + Object.keys(STAGES).join(', ') + ')');
     process.exit(1);
   }
+  // engine.347 Task 5: any stage that ends normally lands what is queued — its own words and anything a stage
+  // that does not flush left behind. The tick makes no model call and status writes nothing, so neither flushes.
   Promise.resolve().then(() => STAGES[STAGE]())
+    .then(() => (STAGE === 'tick' || STAGE === 'status' ? null : flushJobStatements()))
     .catch(err => { console.error('[civic] Fatal:', err.message); process.exit(1); });
 }
 

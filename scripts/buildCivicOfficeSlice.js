@@ -14,6 +14,7 @@ const { getNeighborhoodsForDistricts } = require('../lib/districtMap');
 const trackerSnapshot = require('./initiativeTrackerSnapshot');
 const { categoryIssue, renewRowIssue } = require('./civicInterventionValidation');
 const { makeBrief } = require('./civicBrief');
+const { isJobDaypart } = require('../lib/jobStatementRows');
 
 const ROOT = path.join(__dirname, '..');
 const CONSTITUENT_CAP = 8;
@@ -1047,6 +1048,7 @@ function loadPetitionPool(root, office, hoods, officeMap, childToParent, cycle) 
   for (const r of rows) {
     const tag = String(reflectionField(r, ['Event', 'Tag', 'event'])).trim();
     if (tag !== 'Civic') continue;
+    if (isJobDaypart(reflectionField(r, ['Daypart', 'daypart']))) continue;   // engine.347 Task 5: a statement made in office is not a resident's civic voice
     const rowCycle = Number(reflectionField(r, ['Cycle', 'cycle']));
     if (!Number.isInteger(rowCycle) || rowCycle < 1) { invalidCycleRows++; continue; }
     if (rowCycle < sinceCycle || rowCycle > Number(cycle)) continue;

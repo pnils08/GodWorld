@@ -179,18 +179,25 @@ function linesFromCascadeStatements(statements, speaker) {
     const line = 'stated: ' + (topic ? '[' + topic.slice(0, 80) + '] ' : '') +
       (speaker ? speaker + ' — ' : '') +
       (quote || full).slice(0, 500);
-    out.push({ key: 'cascade-' + String(id).replace(/[^a-zA-Z0-9_-]/g, '').slice(0, 40), text: line });
+    // said: the holder's own words as the page holds them, without the stated: / topic / speaker frame (engine.347 Task 5)
+    out.push({ key: 'cascade-' + String(id).replace(/[^a-zA-Z0-9_-]/g, '').slice(0, 40), text: line, said: (quote || full).slice(0, 500) });
   });
   return out;
 }
 
+// a model can hand back an object where a sentence belongs; String() of it is "[object Object]" (two holders' pages,
+// C103 and C105). Take its text, or leave the part off.
+const asText = (v) => (v == null ? '' : typeof v === 'object'
+  ? String(v.text || v.summary || v.description || v.what || v.statement || '') : String(v)).trim();
+
+/** The holder's own statement from a datawake rec, whole — the words, not the page line built around them. */
+function statementOf(rec) {
+  return asText(rec && rec.statement);
+}
+
 /** Build datawake line from rec { statement, action, numberMoved }. */
 function lineFromDatawake(rec) {
-  // a model can hand back an object where a sentence belongs; String() of it is "[object Object]" (two holders' pages,
-  // C103 and C105). Take its text, or leave the part off.
-  const asText = (v) => (v == null ? '' : typeof v === 'object'
-    ? String(v.text || v.summary || v.description || v.what || v.statement || '') : String(v)).trim();
-  const statement = asText(rec && rec.statement);
+  const statement = statementOf(rec);
   if (!statement) return null;
   const bits = ['datawake: ' + statement.slice(0, 600)];
   const action = asText(rec.action), moved = asText(rec.numberMoved);
@@ -238,7 +245,9 @@ async function recordCascadeForDir(officeMap, agentDir, voiceJson, cycle) {
     });
     results.push(r);
   }
-  return { holder, results, recorded: results.some((r) => r.recorded) };
+  // said: the words of the lines that reached the page, for the caller's Reflection_Intake queue (engine.347 Task 5)
+  const said = lines.filter((L, i) => results[i] && results[i].recorded === true && L.said).map((L) => L.said);
+  return { holder, results, recorded: results.some((r) => r.recorded), said };
 }
 
 /**
@@ -383,6 +392,7 @@ module.exports = {
   recordPosition,
   linesFromCascadeStatements,
   lineFromDatawake,
+  statementOf,
   injectBlockForHolder,
   recordCascadeForDir,
   loadOfficeMap,

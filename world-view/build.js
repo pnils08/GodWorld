@@ -3,6 +3,7 @@
 //                                      SCALE=-5..5 puts every street at that notch of the direction scale for a look-test.
 const fs = require('fs');
 const path = require('path');
+const { isJobDaypart } = require('../lib/jobStatementRows');
 const BEATS = path.join(__dirname, '..', 'output', 'beats') + path.sep;
 const rd = f => fs.readFileSync(BEATS + f + '.jsonl', 'utf8').trim().split('\n').filter(Boolean).map(l => JSON.parse(l));
 
@@ -61,7 +62,7 @@ function trimSaid(s) {
 }
 const said = new Map();
 rd('Reflection_Intake').forEach(r => {
-  if (!r.ReflectionExcerpt || !(Number(r.Cycle) <= Number(CYCLE)) || /^(filed|graded):/i.test(r.ReflectionExcerpt) || r.Daypart === 'PRINT') return;   // PRINT: the printed-reporter row, a record not a thing said
+  if (!r.ReflectionExcerpt || !(Number(r.Cycle) <= Number(CYCLE)) || /^(filed|graded):/i.test(r.ReflectionExcerpt) || r.Daypart === 'PRINT' || isJobDaypart(r.Daypart)) return;   // PRINT: the printed-reporter row, a record not a thing said; job statements (engine.347 Task 5) are dial rows
   const key = [Number(r.Cycle) || 0, /^20/.test(r.Timestamp) ? r.Timestamp : ''];
   if (!said.has(r.POPID)) said.set(r.POPID, []);
   said.get(r.POPID).push({ key, r });

@@ -513,7 +513,15 @@ async function run(cycle, opts = {}) {
     prose: answer.prose.trim() };
   fs.writeFileSync(jsonPath, JSON.stringify(record, null, 2) + '\n');
   fs.writeFileSync(mdPath, '# Civis Systems Journal — C' + cycle + '\n\n' + answer.prose.trim() + '\n');
-  return { path: mdPath, record: jsonPath };
+  // engine.347 Task 5: the journal he saved reaches Reflection_Intake — one row a Cycle, by what shows
+  // (lib/jobStatementRows.js). opts.jobRows is the live wiring the command line passes; it never throws.
+  let intake = null;
+  if (opts.jobRows) {
+    const queued = opts.jobRows.queue({ pop: POPID, cycle, daypart: WAKE, text: answer.prose.trim(), src: 'civis journal' });
+    if (!queued.queued && queued.why !== 'already queued') console.error('Civis Journal: Reflection_Intake row not queued: ' + queued.why);
+    intake = await opts.jobRows.flush();
+  }
+  return { path: mdPath, record: jsonPath, ...(intake ? { intake } : {}) };
 }
 
 if (require.main === module) {
@@ -524,7 +532,18 @@ if (require.main === module) {
   const dry = process.argv.includes('--dry-run');
   // This option is for worktree dry-runs against the shared read-only dump.
   const root = dry ? path.resolve(arg('--input-root', ROOT)) : ROOT;
-  run(cycle, { dry, root }).then(r => console.log(JSON.stringify(r)))
+  // The live Reflection_Intake wiring (engine.347 Task 5); a dry run saves nothing, so it queues nothing.
+  const jobLib = require('../lib/jobStatementRows');
+  const jobRows = dry ? null : {
+    queue: (e) => jobLib.queue(e),
+    flush: () => jobLib.flush({
+      readRows: () => require('../lib/sheets').getRawSheetData('Reflection_Intake'),
+      appendRows: (rows) => require('../lib/sheets').appendRows('Reflection_Intake', rows),
+      classify: (text, open) => require('../lib/reflectionClassifier').classifyTripleReflection_(text, open),
+      log: (m) => console.error('Civis Journal: ' + m),
+    }),
+  };
+  run(cycle, { dry, root, jobRows }).then(r => console.log(JSON.stringify(r)))
     .catch(e => { console.error('civisJournal failed: ' + e.message); process.exitCode = 1; });
 }
 

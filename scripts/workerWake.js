@@ -146,82 +146,7 @@ async function gatherMemory(popid, key, deps, opts) {
 //   key = the words the memory gatherer searches on when nobody has asked a question: the trade's own nouns. It
 //         names nothing picked out of the data — which neighborhood or figure matters is not chosen here.
 //   levers = what this worker alone can set (a tool is offered for each).
-const FILLS = {
-  'CHIEF-POLICE': {
-    key: 'crime clearance response time arrests custody patrol',
-    levers: ['patrol'],
-    build: async (cycle, ctx) => {
-      const { sheets, readPrev, root } = defaults(ctx.deps);
-      const out = [];
-      const crime = await sheets.getSheetAsObjects('Crime_Metrics');
-      if (!crime.length) throw new Error('Crime_Metrics returned no rows');
-      const cols = Object.keys(crime[0]);   // the sheet as it stands, a blank column included: what is missing is his to notice
-      out.push({ title: 'Crime by neighborhood, Cycle ' + cycle, text: table(crime, cols) });
-      out.push({ title: 'The high and low of each column, Cycle ' + cycle, text: table(highLow(crime, cols.filter((c) => c !== 'LastUpdated' && c !== 'Neighborhood'), 'Neighborhood'), ['Column', 'Highest', 'Lowest']) });
-
-      const moves = loadMoves(root);
-      const census = (await sheets.getSheetAsObjects('Care_Justice_Census')).filter((r) => r.System === 'judicial' && r.IntakeType === 'arrest');
-      const cyc = [...new Set(census.map((r) => Number(r.Cycle)))].filter(isFinite).sort((a, b) => a - b);
-      const first = cyc.length ? cyc[0] : Number(cycle);
-      // The setting in force and each Cycle's figures in one table (builder 2026-11-14: "what he sets these at effect the sim"). The table states no link between them.
-      const totals = (rows) => ({ incidents: rows.reduce((a, r) => a + (num(r.IncidentCount) || 0), 0),
-        response: round(rows.reduce((a, r) => a + (num(r.ResponseTimeAvg) || 0), 0) / rows.length, 2), clearance: round(rows.reduce((a, r) => a + (num(r.ClearanceRate) || 0), 0) / rows.length, 3) });
-      const sheetOf = {}; sheetOf[Number(cycle)] = totals(crime);
-      const prev = readPrev('Crime_Metrics');
-      const prevCycle = prev.length ? Number(prev[0].LastUpdated) : NaN;
-      if (prev.length && prevCycle === Number(cycle) - 1) sheetOf[prevCycle] = totals(prev);
-      const city = cyc.map((c) => {
-        const r = census.find((x) => x.GeographicScope === 'city' && Number(x.Cycle) === c) || {};
-        const t = sheetOf[c] || {};
-        return { Cycle: c, 'Patrol strategy in force': patrolInForce(moves, c), Arrests: r.TotalIntakes, 'In custody, start': r.OpeningOccupancy, 'In custody, end': r.ClosingOccupancy, Released: r.Exits,
-          'Incidents, all neighborhoods': t.incidents == null ? '' : t.incidents, 'Average response time': t.response == null ? '' : t.response, 'Average clearance rate': t.clearance == null ? '' : t.clearance };
-      });
-      if (city.length) out.push({ title: 'Citywide by Cycle', text: table(city, Object.keys(city[0])) });
-      const hoods = [...new Set(census.filter((r) => r.GeographicScope === 'neighborhood').map((r) => r.Neighborhood))];
-      const cell = (h, c, f) => { const r = census.find((x) => x.Neighborhood === h && Number(x.Cycle) === c && x.GeographicScope === 'neighborhood'); return r ? r[f] : ''; };
-      const grid = (f) => table(hoods.map((h) => Object.assign({ Neighborhood: h }, ...cyc.map((c) => ({ ['C' + c]: cell(h, c, f) })))), ['Neighborhood'].concat(cyc.map((c) => 'C' + c)));
-      if (hoods.length) {
-        out.push({ title: 'Arrests by neighborhood, each Cycle', text: grid('TotalIntakes') });
-        out.push({ title: 'In custody at the end of each Cycle, by neighborhood', text: grid('ClosingOccupancy') });
-      }
-      const cars = (await sheets.getSheetAsObjects('Chaos_Cars')).filter((r) => r.VehicleType === 'cop_car' && Number(r.CycleId) >= first && Number(r.CycleId) <= Number(cycle))
-        .map((r) => ({ Cycle: r.CycleId, Where: r.TargetScope === 'citizen' ? 'citizen ' + (ctx.nameOf(r.TargetId) || r.TargetId) : r.TargetScope + ' ' + r.TargetId, Outcome: r.DiceOutcome, Moved: r.PrimaryMetric + ' ' + r.MetricMagnitude }));
-      out.push({ title: 'Patrol car events, Cycles ' + first + '–' + cycle, text: cars.length ? table(cars, Object.keys(cars[0])) : 'none' });
-      const money = (await sheets.getSheetAsObjects('City_Treasury')).filter((r) => /^(COURT|TICKETS)/.test(r.Counterparty || '') && Number(r.Cycle) >= first)
-        .map((r) => ({ Cycle: r.Cycle, Source: r.Counterparty, Amount: r.Amount, Note: r.Note }));
-      if (money.length) out.push({ title: 'Fines and tickets paid to the city', text: table(money, ['Cycle', 'Source', 'Amount', 'Note']) });
-      // The rest of what the sheet holds for his trade (docs/research/2026-11-15-worker-records-all-tabs.md; builder
-      // 2026-11-15: "you showed me 5 things when 1000s of data points are tracked"). Each block is the tab's own rows;
-      // a tab that cannot be read says so. Domain is written in two cases on the event ledger, so the match folds case.
-      const isSafety = (v) => /^safety$/i.test(String(v || '').trim());
-      const more = async (title, read) => { try { const t = await read(); if (t) out.push({ title, text: t }); } catch (e) { out.push({ title, text: 'unavailable (' + ((e && e.message) || e) + ')' }); } };
-      await more('Crime index and noise index on the neighborhood map, Cycle ' + cycle, async () => {
-        const m = await sheets.getSheetAsObjects('Neighborhood_Map');
-        return m.length ? table(m.map((r) => ({ Neighborhood: r.Neighborhood, CrimeIndex: r.CrimeIndex, NoiseIndex: r.NoiseIndex })), ['Neighborhood', 'CrimeIndex', 'NoiseIndex']) : '';
-      });
-      await more('Safety events on the city\'s event ledger, every Cycle on it', async () => {
-        const w = (await sheets.getSheetAsObjects('WorldEvents_V3_Ledger')).filter((r) => isSafety(r.Domain))
-          .map((r) => ({ Cycle: r.Cycle, Neighborhood: r.Neighborhood, Severity: r.Severity, Event: r.EventDescription }));
-        return w.length ? table(w, ['Cycle', 'Neighborhood', 'Severity', 'Event']) : 'none';
-      });
-      await more('Safety arcs on the arc ledger', async () => {
-        const arcs = (await sheets.getSheetAsObjects('Event_Arc_Ledger')).filter((r) => isSafety(r.DomainTag))
-          .map((r) => ({ Cycle: r.Cycle, Neighborhood: r.Neighborhood, Type: r.Type, Phase: r.Phase, Tension: r.Tension, Summary: r.Summary }));
-        return arcs.length ? table(arcs, ['Cycle', 'Neighborhood', 'Type', 'Phase', 'Tension', 'Summary']) : 'none';
-      });
-      await more('Safety notes on the street-texture log, every Cycle on it', async () => {
-        const tx = (await sheets.getSheetAsObjects('Texture_Trigger_Log')).filter((r) => isSafety(r.Domain))
-          .map((r) => ({ Cycle: r.Cycle, Neighborhood: r.Neighborhood, Note: r.Reason, Intensity: r.Intensity }));
-        return tx.length ? table(tx, ['Cycle', 'Neighborhood', 'Note', 'Intensity']) : 'none';
-      });
-      await more('Crime and safety event counts on the domain tracker, by Cycle', async () => {
-        const d = (await sheets.getSheetAsObjects('Domain_Tracker')).map((r) => ({ Cycle: r.Cycle, CRIME: r.CRIME, SAFETY: r.SAFETY, 'All events': r.TotalEvents }));
-        return d.length ? table(d, ['Cycle', 'CRIME', 'SAFETY', 'All events']) : '';
-      });
-      return { blocks: out, key: 'crime clearance response time arrests custody patrol' };
-    },
-  },
-};
+const FILLS = {};   // the police chief's, first, and the others below recordKit, which they are built on
 // ---- the shared readers the other workers' fills are made of. Each returns blocks of the tab's own rows; a tab that
 // cannot be read is a block that says so. Nothing is picked, ranked or worded: which row matters is the worker's.
 // Source of which tab is whose: docs/research/2026-11-15-worker-records-all-tabs.md (all 85 tabs, read live).
@@ -404,6 +329,51 @@ const projectFill = (id, key, more) => made(key, async (k, cycle, ctx) => {
 });
 
 Object.assign(FILLS, {
+  // The police chief, the template's spec (2026-11-14), on the shared readers since 2026-11-17 (agy 2026-11-16 #14: his
+  // hand-built fill ignored the window). Two blocks are his alone and stay as built: the high and low of each crime column
+  // (builder 2026-11-14: "Agree on the idea for #1") and the setting in force beside each Cycle's figures, handed whole
+  // in the lean pack (builder 2026-11-17: "Whole in his pack" — cut to one Cycle it cannot show what a setting did).
+  'CHIEF-POLICE': made('crime clearance response time arrests custody patrol', async (k, cycle, ctx) => {
+    const { sheets, readPrev, root } = defaults(ctx.deps);
+    const cache = ctx.cache || {};
+    const all = (tab) => (cache[tab] = cache[tab] || sheets.getSheetAsObjects(tab));
+    const crime = await all('Crime_Metrics');
+    if (!crime.length) throw new Error('Crime_Metrics returned no rows');
+    const cols = Object.keys(crime[0]);   // the sheet as it stands, a blank column included: what is missing is his to notice
+    k.blocks.push({ title: 'Crime by neighborhood, Cycle ' + cycle, text: table(crime, cols) });
+    k.blocks.push({ title: 'The high and low of each column, Cycle ' + cycle, text: table(highLow(crime, cols.filter((c) => c !== 'LastUpdated' && c !== 'Neighborhood'), 'Neighborhood'), ['Column', 'Highest', 'Lowest']) });
+
+    const moves = loadMoves(root);
+    const census = (await all('Care_Justice_Census')).filter((r) => r.System === 'judicial' && r.IntakeType === 'arrest');
+    const cyc = [...new Set(census.map((r) => Number(r.Cycle)))].filter(isFinite).sort((a, b) => a - b);
+    // The setting in force and each Cycle's figures in one table (builder 2026-11-14: "what he sets these at effect the sim"). The table states no link between them.
+    const totals = (rows) => ({ incidents: rows.reduce((a, r) => a + (num(r.IncidentCount) || 0), 0),
+      response: round(rows.reduce((a, r) => a + (num(r.ResponseTimeAvg) || 0), 0) / rows.length, 2), clearance: round(rows.reduce((a, r) => a + (num(r.ClearanceRate) || 0), 0) / rows.length, 3) });
+    const sheetOf = {}; sheetOf[Number(cycle)] = totals(crime);
+    const prev = readPrev('Crime_Metrics');
+    const prevCycle = prev.length ? Number(prev[0].LastUpdated) : NaN;
+    if (prev.length && prevCycle === Number(cycle) - 1) sheetOf[prevCycle] = totals(prev);
+    const city = cyc.map((c) => {
+      const r = census.find((x) => x.GeographicScope === 'city' && Number(x.Cycle) === c) || {};
+      const t = sheetOf[c] || {};
+      return { Cycle: c, 'Patrol strategy in force': patrolInForce(moves, c), Arrests: r.TotalIntakes, 'In custody, start': r.OpeningOccupancy, 'In custody, end': r.ClosingOccupancy, Released: r.Exits,
+        'Incidents, all neighborhoods': t.incidents == null ? '' : t.incidents, 'Average response time': t.response == null ? '' : t.response, 'Average clearance rate': t.clearance == null ? '' : t.clearance };
+    });
+    if (city.length) k.blocks.push({ title: 'Citywide by Cycle', text: table(city, Object.keys(city[0])) });
+
+    await k.census('Arrests and custody', 'judicial', ['arrest'], { care: true });
+    await k.chaos('Patrol car events, every Cycle on the sheet', ['cop_car']);
+    await k.treasury('Fines and tickets paid to the city', (r) => /^(COURT|TICKETS)/.test(r.Counterparty || ''));
+    await k.hoodMap('Crime index and noise index on the neighborhood map', ['CrimeIndex', 'NoiseIndex']);
+    await k.events('Safety events on the city\'s event ledger', ['SAFETY']);
+    // the arcs the engine carries now, not the arc ledger's audit rows (the emergency director's fix, agy 2026-11-16 #1)
+    await k.arcs('Safety arcs open now', (r) => /^safety$/i.test(r.DomainTag));
+    await k.texture('Safety notes on the street-texture log, every Cycle on it', ['SAFETY']);
+    await k.domains('Crime and safety event counts on the domain tracker, by Cycle', ['CRIME', 'SAFETY']);
+  }, ['patrol']),
+});
+
+Object.assign(FILLS, {
   'PROJ-STABFUND': projectFill('INIT-001', 'stabilization fund households rent grants', async (k) => {
     await k.whole('Households the fund has paid a grant to', 'Household_Ledger', ['HouseholdId', 'Neighborhood', 'HousingType', 'MonthlyRent', 'HouseholdIncome', 'HouseholdSavings', 'LastGrantCycle', 'LastGrantInitiativeID', 'LastGrantAmount', 'Status'], (r) => String(r.LastGrantInitiativeID || '').trim() !== '');
     await k.hoodMap('Housing pressure, rent and income on the neighborhood map', ['HousingPressure', 'MedianRent', 'MedianIncome', 'MigrationFlow', 'NeighborhoodTrajectory']);
@@ -528,6 +498,7 @@ const JOBS = {
   'PROJ-HEALTHCTR': 'You run the Temescal Community Health Center. Your job is to answer for its record — the center\'s money and progress, the hospital intakes it serves alongside, the illness in each neighborhood, and the city\'s health programs — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'PROJ-OARI': 'You run the Oakland Alternative Response Initiative. Your job is to answer for its record — each OARI van call, where it went and what came of it, the mental-health and substance intakes at the hospital, and the program\'s money and progress — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'EMS-DIR': 'You run the city\'s emergency medical services. Your job is to answer for the city\'s ambulance calls and hospital intakes — who came in, from where and for what, who is in care, and the illness in each neighborhood — when the Mayor, the council or the press ask, and in your weekly report on the record.',
+  'CHIEF-POLICE': 'You run the city\'s police department. Your job is to answer for the city\'s crime and policing — incidents, clearance and response time in each neighborhood, arrests and the people in custody, each patrol car call, and the patrol strategy you set — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'MED-EXAM': 'You are the city\'s medical examiner. Your job is to answer for the city\'s deaths and their causes — who died, when, and the cause on file, the residents in hospital care, and those still waiting on a cause — when the Mayor, the council or the press ask, and in your weekly report on the record.',
 };
 const isLean = (officeId) => Object.prototype.hasOwnProperty.call(JOBS, String(officeId || ''));

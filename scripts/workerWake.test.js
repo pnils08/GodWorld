@@ -108,10 +108,11 @@ test('gatherMemory: a failed read is no memory this wake, not an error', async (
   assert.deepEqual(m.entries, []);
 });
 
-test('buildWake, the chief on his own wake: who he is and his memory, then his data and his decisions — and no line telling him what to do', async () => workspace(async (root) => {
+test('buildWake, the chief on his own wake, lean: who he is, his job, his memory; this Cycle of his records, the patrol table whole; his decisions; the weekly report last', async () => workspace(async (root) => {
   writeMoves(root, 114, [{ moveId: 'MV-114-a', cycle: 114, popid: 'POP-00136', type: 'patrol', status: 'pending', at: '2026-11-05T00:00:00Z', payload: { strategy: 'suppress_hotspots', note: 'x' } }]);
   const w = await ww.buildWake({ officeId: 'CHIEF-POLICE', cycle: 115, officeMap: OFFICE_MAP, deps: deps(root) });
-  assert.match(w.system, /^You are Rafael Montez\. You hold the office of Police Chief\. Your temperament: steady\.\n\nFrom your own memory:\n- \(Cycle 115\)/);
+  assert.match(w.system, /^You are Rafael Montez\. You hold the office of Police Chief\. Your temperament: steady\.\n\nYou run the city's police department\. Your job is to answer for the city's crime and policing — [^\n]*the patrol strategy you set — when the Mayor, the council or the press ask, and in your weekly report on the record\.\n\nFrom your own memory:\n- \(Cycle 115\)/);
+  assert.equal(w.lean, true);
   assert.ok(!/\d{4}-\d{2}-\d{2}/.test(w.system), 'no calendar date in the system turn');
   assert.ok(!w.user.includes('.claude/agents'), 'no folder path in the user turn');
   assert.ok(w.user.startsWith('Crime by neighborhood, Cycle 115:\nNeighborhood | ResponseTimeAvg | ClearanceRate | IncidentCount | LastUpdated | Trend | Hotspot | PressureRatio\n'), 'the sheet as it stands, the blank column included');
@@ -122,12 +123,17 @@ test('buildWake, the chief on his own wake: who he is and his memory, then his d
   // the loop: the setting in force beside what was recorded under it; last Cycle's sheet joins when the previous dump is that Cycle
   assert.match(w.user, /114 \| balanced \(default\) \| 43 \| 56 \| 72 \| 27 \| 15 \| 11\.4 \| 0\.203/);
   assert.match(w.user, /115 \| suppress_hotspots \| 24 \| 72 \| 67 \| 29 \| 20 \| 11\.4 \| 0\.203/);
-  assert.match(w.user, /114 \| citizen Chase West \| helped_by_police/);
+  // this Cycle of a by-Cycle record in the pack; every Cycle behind record_read, the patrol table whole in both
+  assert.match(w.user, /\n\nPatrol car events, Cycle 115:\nnone/);
+  assert.match(w.records['Patrol car events, every Cycle on the sheet'], /114 \| cop_car \| citizen Chase West \| helped_by_police/);
+  // (every treasury row in the fixture is Cycle 115: a tab of one Cycle is not cut, so its title stays as written)
+  assert.match(w.user, /\n\nFines and tickets paid to the city:\nCycle \| Entry \| Amount \| Counterparty \| BalanceAfter \| Note\n115 \| REVENUE \| 107362 \| COURT/);
+  assert.match(w.user, /\n\nArrests and custody, citywide, Cycle 115:\nCycle \| Kind \| Intakes/);
+  assert.ok(!/\n114 \| arrest \| 43/.test(w.user) && /\n114 \| arrest \| 43/.test(w.records['Arrests and custody, citywide by Cycle']));
+  assert.equal(w.records['Citywide by Cycle'], w.user.split('Citywide by Cycle:\n')[1].split('\n\n')[0]);
   assert.ok(!w.user.includes('mail_truck') && !w.user.includes('WEEKLY-ALLOCATION'), 'only his trade');
-  assert.match(w.user, /- Cycle 114, patrol: strategy: suppress_hotspots; note: x/);
-  // the harness gives no work: with no question, his own record is the last thing he reads
-  assert.ok(w.user.endsWith('- Cycle 114, patrol: strategy: suppress_hotspots; note: x'));
-  assert.ok(!/speaking on the record|asks you|It is (the close of )?Cycle/.test(w.user));
+  assert.match(w.user, /- Cycle 114, patrol: strategy: suppress_hotspots; note: x\n\nCycle 115, your weekly report: speak on the record on what you see in your records this Cycle\. Your reply goes on the record as your report, exactly as you give it\.$/);
+  assert.ok(!/asks you|It is (the close of )?Cycle/.test(w.user));
   // the memory search names nothing picked out of his data
   assert.equal(w.memory.key, 'crime clearance response time arrests custody patrol');
   // a question never arrives without who asks it
@@ -139,7 +145,7 @@ test('buildWake, asked: the question is the task and the memory search runs on i
   const d = deps(root); const real = d.page.searchPage_; d.page.searchPage_ = async (pop, key) => { searched = key; return real(); };
   const w = await ww.buildWake({ officeId: 'CHIEF-POLICE', cycle: 115, officeMap: OFFICE_MAP, deps: d, question: 'What is the response time in Alpha?', askerLine: 'A Seat, City Council District 1 (Alpha),' });
   assert.equal(searched, 'What is the response time in Alpha?');
-  assert.ok(w.user.endsWith('A Seat, City Council District 1 (Alpha), asks you:\n\nWhat is the response time in Alpha?'));
+  assert.ok(w.user.endsWith('A Seat, City Council District 1 (Alpha), asks you:\n\nWhat is the response time in Alpha?\n\nYour reply goes on the record as your answer, exactly as you give it.'));
   assert.match(w.user, /What you have decided and said on the record:\n- nothing on record/);
 }));
 
@@ -324,9 +330,9 @@ test('a lean worker (the fire chief): sheet line then job; this Cycle of his rec
   // asked: the question replaces the weekly report
   const asked = await ww.buildWake({ officeId: 'CHIEF-FIRE', cycle: 116, officeMap: om, deps: d, question: 'What happened in KONO?', askerLine: 'Avery Santana, Mayor,' });
   assert.ok(asked.user.endsWith('Avery Santana, Mayor, asks you:\n\nWhat happened in KONO?\n\nYour reply goes on the record as your answer, exactly as you give it.') && !asked.user.includes('weekly report'));
-  // a worker with no job written wakes as before: no job line, no task, no lean reads
-  assert.equal(ww.isLean('CHIEF-POLICE'), false);
-  assert.deepEqual(ww.toolsFor('CHIEF-POLICE', { records: { a: 'b' } }).map((t) => t.function.name), ['sheet_read', 'citizen_lookup', 'canon_recall', 'memory_recall', 'patrol_set']);
+  // every built worker is lean (the police chief last, 2026-11-17); a lever rides beside the two reads
+  assert.equal(ww.isLean('CHIEF-POLICE'), true);
+  assert.deepEqual(ww.toolsFor('CHIEF-POLICE', { records: { a: 'b' } }).map((t) => t.function.name), ['sheet_read', 'citizen_lookup', 'canon_recall', 'memory_recall', 'record_read', 'neighborhood_read', 'patrol_set']);
 }));
 
 // builder 2026-11-16 on the medical examiner: the death facts and the death line; the archive's exit note left out; the

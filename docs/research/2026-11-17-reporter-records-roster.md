@@ -26,16 +26,16 @@ Days: M T W Th F, Sa Su. "Today" = records the seat's pack reads now. "Proposed 
 | Reporter | Beat | Days | Today | Tools | Proposed lead | Proposed shared | Worker reports |
 |---|---|---|---|---|---|---|---|
 | Carmen Delaine | civic ledger | M | Initiative_Tracker, Civic_Office_Ledger, Election_Log, City_Treasury, Judicial_Ledger, Story_Hook_Deck; worker reports (240 chars) | yes | Initiative_Tracker, Civic_Office_Ledger, Election_Log | City_Treasury | City Manager, Stabilization Fund, Baylight, both Deputy Mayors (whole) |
-| Luis Navarro | investigations | T | same civic slice as Carmen | yes | — none of his own | Initiative_Tracker, Judicial_Ledger, Civic_Office_Ledger | every worker (a filed report or its absence is his record) |
+| Luis Navarro | investigations | T | same civic slice as Carmen | yes | what is owed and what was answered — Initiative_Tracker scheduled actions against their due Cycle, the offices' answers to demands (confrontation answers), the workers' reports or their absence (his role: "accountability pressure, records, silence clocks", `.claude/agents/luis-navarro/IDENTITY.md`) | Judicial_Ledger, Civic_Office_Ledger | every worker, whole |
 | Jordan Velez (business-desk seat) | business | M | Business_Ledger, Employment_Roster, Business_Archive, Casino_Ledger, City_Treasury, seed/hook decks | yes | Business_Ledger, Employment_Roster, Business_Archive, Casino_Ledger | City_Treasury | Deputy Mayor (Econ), Baylight |
 | Dr. Lila Mezran | health | M | Neighborhood_Demographics, Hospital_Ledger, Health_Cause_Queue, Care_Justice_Census, hook deck | yes | Hospital_Ledger, Health_Cause_Queue, Care_Justice_Census (hospital side) | Neighborhood_Demographics | Health Center, EMS, OARI, Medical Examiner |
 | Trevor Shimizu | transit | M | Transit_Metrics, Cycle_Weather, Employment_Roster, Business_Ledger, Sports_Feed, LifeHistory_Log, decks | yes | Transit_Metrics | Cycle_Weather, Oakland_Sports_Feed | Transit Hub |
 | Anthony Raines | A's analytics | M | Sports_Feed (this + 2 prior Cycles), world summary sports, player mirror | yes | Oakland_Sports_Feed (A's) | As_Roster (not read today) | — |
 | Tamsin Pruitt | Lives | M–F | Lived_Events, LifeHistory_Log, Hospital_Ledger, Household_Ledger, Casino_Ledger, decks, page index | yes | Lived_Events, LifeHistory_Log | Hospital_Ledger, Household_Ledger, Health_Cause_Queue | Medical Examiner |
 | Sgt. Rachel Torres | public safety | T | Crime_Metrics, Judicial_Ledger, Care_Justice_Census (judicial), City_Treasury, Employment_Roster, Business_Ledger | yes | Crime_Metrics, Judicial_Ledger, Care_Justice_Census (judicial side) | City_Treasury (fines) | Police Chief, District Attorney, Fire Chief |
-| Angela Reyes | schools, youth | T | Neighborhood_Demographics (+prev), hook deck, one Business_Ledger row | yes | — none of her own (Youth_Events exists, not read: `buildSchoolsSlice.js:20`) | Neighborhood_Demographics, Initiative_Tracker (apprenticeship) | — |
+| Angela Reyes | schools, youth | T | Neighborhood_Demographics (+prev), hook deck, one Business_Ledger row | yes | the youth lines (ages 5–22) of LifeHistory_Log — Youth_Events is retired by ruling (`phase05-citizens/runYouthEngine.js:104`, S411 2026-09-02); builder 2026-11-17 "yes" | Neighborhood_Demographics (school figures), Initiative_Tracker (apprenticeship), LifeHistory_Log (Tamsin leads adults) | — |
 | Selena Grant | Oaks analysis | T | Sports_Feed, seed/hook decks | no | Oaks_Roster (not read today), Oakland_Sports_Feed (Oaks) | NBA_Game_Intake | — |
-| Jax Caldera | accountability | W | Civic_Office_Ledger, hook deck, snapshot, desk signal, past coverage | yes | — none of his own | Civic_Office_Ledger, Neighborhood_Map, Relationship_Bonds | every worker (where a report and the records disagree) |
+| Jax Caldera | accountability | W | Civic_Office_Ledger, hook deck, snapshot, desk signal, past coverage | yes | the official story against the record — the workers' and offices' statements, whole, beside the raw tabs they speak for, and the engine's audit (his role: "when the ledger, the audit, and the official story refuse to line up", `.claude/agents/freelance-firebrand/IDENTITY.md`) | any tab a statement speaks for; Neighborhood_Map, Relationship_Bonds | every worker, whole |
 | Noah Tan | weather, environment | W | Cycle_Weather, hook deck, world summary | no | Cycle_Weather | Neighborhood_Map | Emergency Management |
 | Elliot Marbury | data desk | W | Sports_Feed (this Cycle), player mirror | yes | — | any tab (his beat is checking figures) | — |
 | P Slayer | fan heat | W | world summary sports, desk signal, his own past pieces | no | — | Oakland_Sports_Feed | — |
@@ -54,11 +54,13 @@ Days: M T W Th F, Sa Su. "Today" = records the seat's pack reads now. "Proposed 
 
 ## What the map shows
 
+**The same record, read by role (builder 2026-11-17):** "everty journlist would report differently on that same data given ther role and beat descriptions i set". Lead and shared say whose pack carries a record; they do not split what a reporter may read or say about it.
+
 1. **Twelve reporters can't open a record at all.** The worker split needs a tool; they have none today.
 2. **The no-name read is the old shape** (first 40 rows, no Cycle bound); the named read stops at 12 rows — for the hospital census in one neighborhood that is about one Cycle. The workers' reader (newest first, whole rows, match + Cycles) is the fix the rulings call for.
 3. **Worker reports reach two reporters, cut to 240 characters.** Twelve reporters have a worker whose report fits.
-4. **Four reporters have no records of their own:** Luis and Jax (their beat is other people's records), Angela (Youth_Events is never read), Marbury (his beat is checking). Like a thin worker, a reporter with no records is a finding about the sim, not the template.
-5. **Records nobody reads that fit a beat:** As_Roster, Oaks_Roster, Youth_Events, Reflection_Intake, Relationship_Bonds, Neighborhood_Map (tool only), NBA_Game_Intake, WorldEvents_V3_Ledger, Storyline_Ledger, Undocked_Standings (Nia reads a local copy).
+4. **Reporters with no records of their own today:** Luis and Jax — ruled from their roles 2026-11-17 (rows above); Angela — the youth lines of LifeHistory_Log (Youth_Events retired by ruling); Marbury (his beat is checking). Like a thin worker, a reporter with no records is a finding about the sim, not the template.
+5. **Records nobody reads that fit a beat:** As_Roster, Oaks_Roster, Reflection_Intake, Relationship_Bonds, Neighborhood_Map (tool only), NBA_Game_Intake, WorldEvents_V3_Ledger, Storyline_Ledger, Undocked_Standings (Nia reads a local copy).
 6. Carmen's and Luis's slice reads a `Civic_Ledger` tab that is not in the dump (`buildCivicDomainSlice.js:262`); the read comes back empty without error.
 
 ## For the builder

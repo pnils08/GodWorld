@@ -3746,7 +3746,9 @@ async function runWorkerDatawake(duty, o) {
   for (const accepted of mv.accepted) log('[datawake] MOVE ' + office.agentDir + ' — ' + accepted.type + ' ' + JSON.stringify(accepted.payload).slice(0, 120));
   const rec = datawakeRecord({ office, cycle, date: o.date, answeredModel, j: { statement, numberMoved: null }, mv,
     usage: { prompt_tokens: r.usageIn, completion_tokens: r.usageOut, cost: r.billedUsd } });
-  rec.template = 'worker/1';
+  // worker/2: the lean shape (a job, this Cycle, a task); worker/1: the build before it. Only a worker/2 report is handed
+  // back as the last one (builder 2026-11-17: Monday's four worker/1 records are broken entries from a bad build).
+  rec.template = w.lean ? 'worker/2' : 'worker/1';
   rec.toolTrace = r.trace.map(t => ({ tool: t.tool, input: t.input, resultChars: t.resultChars }));
   rec.memory = { searchedOn: w.memory.key, entries: w.memory.entries.length, fromSearch: w.memory.fromSearch, newest: w.memory.newest };
   rec.figuresNotHanded = loose;

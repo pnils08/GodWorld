@@ -536,7 +536,8 @@ const reportTask = (cycle, last) => (last
   : 'Cycle ' + cycle + ', your weekly report: speak on the record on what you see in your records this Cycle.') + ' ' + ON_RECORD('report');
 // Their last weekly report: the newest weekday record of theirs before this wake's date that the worker template made and
 // that finished (cron-civic-run.js runWorkerDatawake writes output/cron-civic/datawake/<agentDir>_<date>.json). A record
-// that ended mid-lookup is not a report (2026-11-16: the emergency director's "Let me check transit metrics…").
+// that ended mid-lookup is not a report (2026-11-16: the emergency director's "Let me check transit metrics…"); nor is one
+// made before the lean shape (template worker/1 — builder 2026-11-17: "broken entries from a bad agent build").
 function lastReport(agentDir, beforeDate, deps) {
   const root = (deps && deps.root) || ROOT;
   const dir = path.join(root, 'output', 'cron-civic', 'datawake');
@@ -546,7 +547,7 @@ function lastReport(agentDir, beforeDate, deps) {
     .map((f) => f.slice(pre.length, pre.length + 10)).filter((d) => !beforeDate || d < beforeDate).sort().reverse();
   for (const d of dated) {
     let rec; try { rec = JSON.parse(fs.readFileSync(path.join(dir, pre + d + '.json'), 'utf8')); } catch (e) { continue; }
-    if (rec && /^worker\//.test(String(rec.template || '')) && rec.finishReason === 'stop' && String(rec.statement || '').trim())
+    if (rec && rec.template === 'worker/2' && rec.finishReason === 'stop' && String(rec.statement || '').trim())
       return { date: d, cycle: Number(rec.cycle), statement: String(rec.statement).trim() };
   }
   return null;

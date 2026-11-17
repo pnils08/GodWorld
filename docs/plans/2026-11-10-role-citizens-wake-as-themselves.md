@@ -27,7 +27,7 @@ pointers:
 
 **Rows:** pipeline.110 · **Owner:** engine-sheet
 
-**Where this plan is (2026-11-16, S667):** Workers onto the lean shape one at a time (builder: "one at a time"): fire chief and emergency director built, medical examiner and EMS director approved; the other ten next, police chief last (patrol lever). **Before that (2026-11-14):** The worker model is ON for the police chief (builder 2026-11-14: "Turn it on , Thursday wakes won't be a thing anymore , 1 worker model , and then it has its citizens boot like everyone else , the old boot are retired for the new templates we are adding , all workers will run on a schedule like police chief"); his first weekday record (05:45 Mon–Thu from 11-16) is read in the ROLLOUT row. Now: no council template exists — the first build (Mobley, D9) was removed 11-16 on the builder's word because it did not follow his plan; the council starts again from his plan, and no model run is made without his word; the Mayor is her own template, not started. Tasks 1–7 done; Task 8 waits on the tracker repair. Rewrite this line whenever the position moves.
+**Where this plan is (2026-11-16, S667):** Workers onto the lean shape one at a time (builder: "one at a time"): fire chief and emergency director built, medical examiner, EMS director and OARI director approved; the other nine next, police chief last (patrol lever). **Before that (2026-11-14):** The worker model is ON for the police chief (builder 2026-11-14: "Turn it on , Thursday wakes won't be a thing anymore , 1 worker model , and then it has its citizens boot like everyone else , the old boot are retired for the new templates we are adding , all workers will run on a schedule like police chief"); his first weekday record (05:45 Mon–Thu from 11-16) is read in the ROLLOUT row. Now: no council template exists — the first build (Mobley, D9) was removed 11-16 on the builder's word because it did not follow his plan; the council starts again from his plan, and no model run is made without his word; the Mayor is her own template, not started. Tasks 1–7 done; Task 8 waits on the tracker repair. Rewrite this line whenever the position moves.
 
 ## What was read (C115, 2026-11-10)
 
@@ -137,6 +137,7 @@ pointers:
 
 ## Changelog
 
+- 2026-11-16 (engine-sheet, S667) — the OARI director on the lean worker, approved: job sentence, safety + health events, in care and beds per neighborhood; one guarded run, one slip recorded; G-EC48.
 - 2026-11-16 (engine-sheet, S667) — the EMS director on the lean worker, approved: job sentence, in care and beds per neighborhood, students in her sick table; one guarded run, slips recorded; G-EC47.
 - 2026-11-16 (engine-sheet, S667) — chaos cars and events in a worker's scope are its records (builder); per worker as each goes lean; the medical examiner gets ambulance calls and health events.
 - 2026-11-16 (engine-sheet, S667) — fault 2 worked: the medical examiner on the lean worker, approved; the shared citizen lookup marks the archived and keeps C-stamped life lines; the missing cause of death to engine.348.

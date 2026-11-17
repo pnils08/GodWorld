@@ -474,7 +474,7 @@ Object.assign(FILLS, {
     await k.treasury('The city\'s treasury, every entry', null);
     await k.tracker();
     await k.chaos('Garbage truck, street sweeper and power-and-gas truck events, every Cycle on the sheet', ['garbage_truck', 'street_sweeper', 'pge_truck']);
-    await k.events('Infrastructure events on the city\'s event ledger', ['INFRASTRUCTURE']);
+    await k.events('Infrastructure and civic events on the city\'s event ledger', ['INFRASTRUCTURE', 'CIVIC']);   // builder 2026-11-16: "Infrastructure + civic"
     await k.whole('The city\'s loads this Cycle', 'World_Population', ['cycle', 'totalPopulation', 'employmentRate', 'illnessRate', 'civicLoad', 'trafficLoad', 'retailLoad', 'tourismLoad', 'nightlifeLoad', 'publicSpacesLoad', 'sentiment', 'shockFlag', 'patternFlag']);
     await k.domains('Event counts on the domain tracker, by Cycle', ['CIVIC', 'INFRASTRUCTURE', 'TRANSIT', 'ECONOMIC', 'HEALTH', 'SAFETY']);
   }),
@@ -513,6 +513,7 @@ Object.assign(FILLS, {
 const JOBS = {
   'CHIEF-FIRE': 'You run the city\'s fire service. Your job is to answer for its record — each fire engine call, where it went and what came of it — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'EMERG-DIR': 'You run the city\'s emergency management office. Your job is to answer for the city\'s crises and its weather — what is open, how it is moving, what it set off — when the Mayor, the council or the press ask, and in your weekly report on the record.',
+  'STAFF-MANAGER': 'You are the City Manager. Your job is to answer for the city\'s money and its operations — the treasury, every initiative\'s budget and progress, the city\'s services on the street, and the load on the city — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'STAFF-DM-ECON': 'You are the Deputy Mayor for economic development. Your job is to answer for the city\'s businesses and jobs — who is hiring and who is shrinking, pay, the retail in each neighborhood, who is out of work — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'STAFF-DM-COMM': 'You are the Deputy Mayor for community development. Your job is to answer for the city\'s community programs and its neighborhoods — housing, who is moving in and out, which way each neighborhood is heading, its faith communities — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'STAFF-BAYLIGHT': 'You run the Baylight Authority. Your job is to answer for the Baylight District\'s record — its money and progress, the boom in the neighborhoods around it, the port and the builders — when the Mayor, the council or the press ask, and in your weekly report on the record.',

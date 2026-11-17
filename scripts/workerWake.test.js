@@ -311,8 +311,8 @@ test('a lean worker (the fire chief): sheet line then job; this Cycle of his rec
   const asked = await ww.buildWake({ officeId: 'CHIEF-FIRE', cycle: 116, officeMap: om, deps: d, question: 'What happened in KONO?', askerLine: 'Avery Santana, Mayor,' });
   assert.ok(asked.user.endsWith('Avery Santana, Mayor, asks you:\n\nWhat happened in KONO?\n\nYour reply goes on the record as your answer, exactly as you give it.') && !asked.user.includes('weekly report'));
   // a worker with no job written wakes as before: no job line, no task, no lean reads
-  assert.equal(ww.isLean('EMS-DIR'), false);
-  assert.deepEqual(ww.toolsFor('EMS-DIR', { records: { a: 'b' } }).map((t) => t.function.name), ['sheet_read', 'citizen_lookup', 'canon_recall', 'memory_recall']);
+  assert.equal(ww.isLean('DA-01'), false);
+  assert.deepEqual(ww.toolsFor('DA-01', { records: { a: 'b' } }).map((t) => t.function.name), ['sheet_read', 'citizen_lookup', 'canon_recall', 'memory_recall']);
 }));
 
 // builder 2026-11-16 on the medical examiner: the death facts and the death line; the archive's exit note left out; the

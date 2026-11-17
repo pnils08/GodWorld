@@ -262,6 +262,15 @@ Live `Event_Arc_Ledger` read 2026-11-16: 656 rows; Phase early 362, peak 252, ri
 ### G-EC48 — OARI's van answers citywide; its money moves without a payment [judgment] [LOW] (engine-sheet, 2026-11-16)
 `Chaos_Cars` `oari_van` C101–C116: 18 calls, 2 in the program's three neighborhoods (East Oakland C113, West Oakland C114); the rest Rockridge, Laurel, Ivy Hill, Uptown, Lake Merritt, Glenview, Eastlake and named citizens. `Initiative_Tracker` INIT-002 `AffectedNeighborhoods` West Oakland, Fruitvale, East Oakland. Its `BudgetRemaining` is 10,817,307.66 of $12.5M while `City_Treasury` holds one INIT-002 row (C110 `PREFUNDED`, 0). Seen on the OARI director's guarded lean run; she did not remark on either. Not read why.
 
+### G-EC49 — A retiree's every mention of retirement is tagged Retirement again [judgment] [LOW] (research-build, 2026-11-17)
+Live `Reflection_Intake` C115–C116: POP-00001 carries six rows tagged `Retirement` (two wakes, one work wake, three press answers), each applied (family +4, drive −4 × `dialReflectionShare` 0.225 a row). The engine.347 Task 4 replay with the new prompt still tags four of them: the speaker is living the retirement and says so. The classifier reads one text at a time and cannot tell the event from its echo. Not built on; whether a lived state should keep pushing the dials is unruled.
+
+### G-EC50 — The affect list has no sadness; grief reads as Anxious [judgment] [LOW] (research-build, 2026-11-17)
+`lib/reflectionClassifier.js` `AFFECT_TAGS`: five negative moods (Frustrated, Irritable, Anxious, Angry, Resentful), none for sorrow, and `AFFECT_FALLBACK` carries no sad / grieving word. The gate's grief text ("Still can't believe Marcus is gone…") reads `Community | Anxious` (composure −3; sociability +4 and warmth +2 from the event tag). Direction holds; the mood named is not the one felt. A new mood is a dial-map key and its value: unruled.
+
+### G-EC51 — The manual reflection drain never marks a zero-move row applied [judgment] [LOW] (research-build, 2026-11-17)
+`scripts/drainReflectionBacklog.js:72` flips `applied='yes'` only when `accreteReflectionsIntoBase_` moved a dial (`m > 0`), so a citizen whose pending rows all compose to nothing (`Civic | Flat`, `Background | ''`) stays pending in that script. The Cycle's own fold marks every drained row (`compressLifeHistory.js:823`). A manual lever, not on the Cycle path (agy, `output/antigravity/2026-11-17-review-classifier-cut.md` §1).
+
 ## C114–C116 watch re-reads (research-build, 2026-11-16)
 
 The C113 review carried a re-reads section; C114, C115 and C116 did not, so the ROLLOUT §2 rows dated to those fires went unread. Read 2026-11-16 (builder: "whichever of these are of the greatest priority", then yes to all). Sources: **log** = `output/execution_log_c11{4,5,6}.txt` (C116 = the second fire's log); **ring** = live `Carry_Forward_Store` rows stamped 114/115/116; **dump** = `output/beats/` and `prev/`; **live** = live sheet read 2026-11-16. Each result is a measurement; good or bad is the builder's.

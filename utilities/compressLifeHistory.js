@@ -355,6 +355,9 @@ function buildDialMoves_(ctx, rows, idxs, cycle, tallies, kinds, counts) {
     var openDs = hadOpen ? parseDialState_(ctx.dialOpen[pop]) : null;
     var from = copyDialBase_(openDs && openDs.base), to = copyDialBase_(nowDs.base);
     var any = false, anyCross = false, mid = true, low = false, high = false;
+    // the ledger's Name cell is blank on most rows; First + Last is the name everyone else reads
+    var moveName = idxs.iName >= 0 ? String(rows[r][idxs.iName] || '').trim() : '';
+    if (!moveName) moveName = ((idxs.iFirst >= 0 ? String(rows[r][idxs.iFirst] || '') : '') + ' ' + (idxs.iLast >= 0 ? String(rows[r][idxs.iLast] || '') : '')).trim();
     for (var i = 0; i < DIALS.length; i++) {
       var d = DIALS[i], bTo = bandIndex_(to[d]) - 2;
       if (bTo < 0) low = true;
@@ -381,7 +384,7 @@ function buildDialMoves_(ctx, rows, idxs, cycle, tallies, kinds, counts) {
       if (!hadOpen) parts.push('new this Cycle');
       else if (Math.abs(change - seen) >= DIAL_MOVE_MIN) parts.push('earlier in the Cycle ' + signed2_(change - seen));
       var mood = (nowDs.mood && nowDs.mood[d] != null) ? Number(nowDs.mood[d]) : 0;
-      moveRows.push([cycle, pop, idxs.iName >= 0 ? String(rows[r][idxs.iName] || '') : '', d,
+      moveRows.push([cycle, pop, moveName, d,
         round1_(from[d]), round1_(to[d]), Math.round(change * 100) / 100, bFrom, bTo,
         round1_(clamp100_(to[d] + mood)), parts.join('; ')]);
     }
@@ -872,7 +875,7 @@ function compressLifeHistory_(ctx, options) {
   var dialMoves = null;
   if (movesOn) {
     try {
-      dialMoves = buildDialMoves_(ctx, rows, { iPopID: iPopID, iDialState: iDialState, iName: idx('Name') }, cycle,
+      dialMoves = buildDialMoves_(ctx, rows, { iPopID: iPopID, iDialState: iDialState, iName: idx('Name'), iFirst: idx('First'), iLast: idx('Last') }, cycle,
         moveTallies, moveKinds, { linesFolded: foldedEntries, reflections: reflectionsMoved, worn: wearSteps, regained: regainSteps });
       if (typeof queueEnsureTabIntent_ === 'function' && typeof queueReplaceIntent_ === 'function' && typeof queueAppendIntent_ === 'function') {
         queueEnsureTabIntent_(ctx, DIAL_MOVES_TAB, DIAL_MOVES_HEADERS, 'engine.349 dial moves tab', 'citizens');

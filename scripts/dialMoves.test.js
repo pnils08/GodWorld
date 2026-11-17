@@ -114,6 +114,19 @@ console.log('═══ Section B — the record equals the difference across the
   assert('B4 the hardened drive row names lines and the kind that pushed', !!a && /lines \+/.test(a[10]) && /Promotion/.test(a[10]), a && a[10]);
   assert('B5 a swing that did not stick writes no row (POP-B)', !moves.some(m => m[1] === 'POP-B'));
   assert('B6 Felt = the dial with this Cycle\'s swing on it', !!a && a[9] >= a[5]);
+  assert('B6b the row carries the citizen\'s name', !!a && a[2] === 'Ada Reyes');
+  {
+    // most live rows have a blank Name cell: First + Last stands in
+    const fl = makeCtx({ config: Object.assign({}, SEEDS) });
+    fl.ledger.headers = ['POPID', 'Name', 'LifeHistory', 'TraitProfile', 'DialState', 'First', 'Last'];
+    fl.ledger.rows.forEach(r => { r[1] = ''; r.push('Ada', 'Reyes'); });
+    queued.length = 0;
+    C.compressLifeHistory_(fl, {});
+    const row = queued.find(q => q.kind === 'replace').rows.slice(1).find(m => m[1] === 'POP-A');
+    assert('B6c a blank Name cell falls back to First + Last', !!row && row[2] === 'Ada Reyes', row && row[2]);
+    queued.length = 0;
+    C.compressLifeHistory_(makeCtx({ config: Object.assign({}, SEEDS) }), {});
+  }
   const pulse = queued.find(q => q.kind === 'append').row;
   const H = C.dialPulseHeaders_();
   const at = name => pulse[H.indexOf(name)];

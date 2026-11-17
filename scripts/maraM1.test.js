@@ -162,7 +162,7 @@ test('a partial commit resumes from the receipt and writes nothing twice', () =>
     pageHasDoc_: async () => true,
   };
   const row = { kind: 'promise', eventId: 'P-aaaaaaaaaaaaaaaa', promiseId: 'P-aaaaaaaaaaaaaaaa', office: 'civic-office-mayor', cycle: 999, said: 'x' };
-  const staged = { runEntry: 'C999 entry', notes: ['watch the parade permit'], promises: [row], statuses: [] };
+  const staged = { runEntry: 'C999 entry', said: '## Avery Santana — Mayor\n**Address:** Provide the docket.', notes: ['watch the parade permit'], promises: [row], statuses: [] };
   fs.mkdirSync(path.join(root, 'output', 'mara-directives'), { recursive: true });
   const r1 = await run.commitDirectiveWrites(999, staged, { root, memory, page });
   assert.equal(r1.complete, false);
@@ -173,6 +173,13 @@ test('a partial commit resumes from the receipt and writes nothing twice', () =>
   assert.equal(r2.complete, true);
   assert.equal(calls.memory, 1, 'the memory entry is not rewritten');
   assert.equal(promises.loadRecord(root).rows.length, 1, 'the promise row is not appended twice');
+  // engine.347 Task 5: her own words are queued for Reflection_Intake once, under the run's own root — not the run entry
+  const spool = fs.readFileSync(path.join(root, 'output', 'cron-civic', 'job-statements', 'spool_c999.jsonl'), 'utf8').trim().split('\n').map(l => JSON.parse(l));
+  assert.equal(spool.length, 1, 'the commit and its resume queue her words once');
+  assert.equal(spool[0].pop, 'POP-00507');
+  assert.equal(spool[0].daypart, 'directive');
+  assert.equal(spool[0].text, '## Avery Santana — Mayor\n**Address:** Provide the docket.\n\nwatch the parade permit');
+  assert.ok(!spool[0].text.includes('C999 entry'), 'the code-composed run entry is not her words');
 }));
 
 test('a director Mara addressed gets her question and must answer in maraAnswer', () => {

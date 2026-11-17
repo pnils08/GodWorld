@@ -203,7 +203,7 @@ What the five writers saved to pages from Mon 2026-11-09 through Tue 11-17 (two 
 
 Builder, on the three ways a job statement could land (only what shows / doing the job counts as work / the result decides): "Proceed on option 1". As put to him: the statement moves a dial when the speaker shows a feeling or something bad happened to them; plain city business moves nothing; the result deciding goes with the harder hits (Task 8). The count he was given for last week (13 of 57 sittings move someone) included 3 `Career | Flat` sittings that this rule lands at nothing, and was a joined read; as built the same nine days give 16 of 52 rows (below).
 
-1. **One file holds the rule and the write**, `lib/jobStatementRows.js` (beside `lib/reporterDialEvents.js`); tests `lib/jobStatementRows.test.js` (80).
+1. **One file holds the rule and the write**, `lib/jobStatementRows.js` (beside `lib/reporterDialEvents.js`); tests `lib/jobStatementRows.test.js` (84).
    - **Landing.** Each saved line is read on its own by the live triple classifier. The sitting's mood is the one shown in the most lines (a tie: the larger move, then the earlier line); no feeling in any line is `Flat`. The event is kept only when a line reads a bad thing that happened to the speaker — `Stumble`, `Spat`, `TrustGuarded`, `ConnectionWithdrawn` — and is otherwise stored `Civic` (an exact `DIAL_MAP` key that moves nothing): `Career`, `Media`, `Community` and every other tag for what the speaker was doing or talking about never reach the fold from a job statement. A test places every `EVENT_VOCAB` tag in one list or the other, so a new tag fails until it is placed. No read on any line writes no row (as the six writers today).
    - **Sitting.** One row per speaker per sitting, not per saved line (the fold has no cap on rows a Cycle). `CIVIC`: the speaker's lines of one Central day not yet on the sheet — a later run the same day is its own sitting, nothing is dropped. `directive` and `journal`: one a Cycle, the first to land (a rerun rewrites the same page entry). Column D carries the page's own daypart: `CIVIC`, `directive`, `journal`.
    - **Spool, then flush.** Each writer queues the speaker's words to an append-only file for the Cycle (`output/cron-civic/job-statements/spool_c<N>.jsonl`) only after its page write is recorded; the same words from the same speaker queue once a Cycle. A flush, under one file lock, opens the three newest spools, groups the unsettled lines into sittings, reads `Reflection_Intake` once (only when a sitting is owed), skips a sitting already on the sheet, classifies, appends, and marks the sitting in `landed_c<N>.jsonl`. Column A is the time the sitting's first line was queued and is the row's identity on the sheet. A classifier error on any line keeps the whole sitting for the next flush (dropped and logged after 6); an off-vocabulary read on every line is dropped and logged. Nothing in the queue or the flush can fail a page write or a civic stage.
@@ -240,6 +240,17 @@ agy, `output/antigravity/2026-11-17-review-job-statements.md` (HOLD on the desig
 | No 429 retry in `lib/sheets.js`; one refused read aborts a flush | read | recorded — the queue waits for the next flush |
 | Run-away: one `Angry` row is composure −0.90; five a Cycle for ten Cycles ends near 20 from 50 | agy's arithmetic | recorded — a speaker angry in office five days a week for ten weeks; the rate is `dialReflectionShare` |
 | 4 of 10 moods read wrong; the same text read twice differs | replay file | recorded — §Task 5 as built item 6; hand-read in the first live week |
+
+agy re-review of the build, `output/antigravity/2026-11-17-review-job-statements-diff.md` (SHIP-WITH-FIXES; every taken finding confirmed in the code, column A confirmed stored verbatim — `lib/sheets.js` writes `RAW`). Folded, review closed:
+
+| Finding | Check | Disposition |
+|---|---|---|
+| The dispatcher flush fires on `--dry-run`, `--no-write`, `--dry-commit` | read | taken — the flush itself returns on those flags |
+| A failed flush in the weekday stage is retried milliseconds later by the dispatcher (a second sheet read, a retry spent) | read | taken — the dispatcher skips the weekday stage; the chain's second flush stands (Mara's words are queued after the first) |
+| An empty classifier reply drops a one-line sitting at once | `reflectionClassifier.js:384-388` | taken — an empty reply is an error, the sitting waits |
+| A torn spool line with no line end fuses the next line | read | taken — a queue starts on a fresh line |
+| Two processes queueing the same words at once both append | read | recorded — the chain runs under its own lock; the line would count twice in one sitting's tally |
+| Test 7's source checks pass with the wiring broken | read | taken — anchored; behavioral tests added on the directive commit (`maraM1.test.js`) and the journal run (`civisJournal.test.js`); tests 84 |
 
 ## Tasks
 
@@ -312,3 +323,4 @@ agy, `output/antigravity/2026-11-16-review-dials-plan.md` (HOLD on the first cut
 - 2026-11-17 (research-build) — G-EC52 closed: the four missing worker statements were a deliberate page clean (`5fdc52e1d`), the save path is working.
 - 2026-11-17 (research-build) — Builder on where a job statement lands: "Proceed on option 1" (only what shows). Task 5 designed; agy's adversarial review asked before any code.
 - 2026-11-17 (research-build) — Task 5 built: agy's review folded (14 findings: 8 taken, 6 recorded or kept), each line read on its own, a later run its own sitting, the other readers leave the rows out. Real path with the append captured: 142 lines → 52 rows, 16 move a dial, nothing written. Live at the next runs.
+- 2026-11-17 (research-build) — agy's re-review of the build folded (SHIP-WITH-FIXES, 6 findings: 5 taken, 1 recorded). Review closed.

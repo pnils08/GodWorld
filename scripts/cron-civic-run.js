@@ -87,7 +87,9 @@ function queueJobStatement(pop, cycle, daypart, text, src, dir) {
   if (!r.queued && r.why !== 'already queued') log('job statement not queued (' + (src || daypart) + ' ' + pop + '): ' + r.why);
   return r;
 }
+const JOB_FLUSH_OFF = ['--dry-run', '--no-write', '--dry-commit'];   // a run that saves nothing lands nothing, its own or anyone's
 async function flushJobStatements() {
+  if (JOB_FLUSH_OFF.some(f => process.argv.includes(f))) return { ran: false, dry: true };
   try {
     return await jobRows.flush({
       readRows: () => require('../lib/sheets').getRawSheetData('Reflection_Intake'),
@@ -4762,9 +4764,10 @@ if (require.main === module) {
     process.exit(1);
   }
   // engine.347 Task 5: any stage that ends normally lands what is queued — its own words and anything a stage
-  // that does not flush left behind. The tick makes no model call and status writes nothing, so neither flushes.
+  // that does not flush left behind. The tick makes no model call and status writes nothing, so neither flushes;
+  // the weekday stage has flushed already (a second pass would spend a retry on the same failure).
   Promise.resolve().then(() => STAGES[STAGE]())
-    .then(() => (STAGE === 'tick' || STAGE === 'status' ? null : flushJobStatements()))
+    .then(() => (['tick', 'status', 'datawake'].includes(STAGE) ? null : flushJobStatements()))
     .catch(err => { console.error('[civic] Fatal:', err.message); process.exit(1); });
 }
 

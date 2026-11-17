@@ -182,10 +182,20 @@ console.log = () => {};
     assert.equal(both.skipped, 'model-failure');
     assert.equal(calls, 0);
     assert.equal(fs.existsSync(journalFile), false);
+    // engine.347 Task 5: the journal is queued for Reflection_Intake after the page write and flushed in the run
+    const jobLib = require('../lib/jobStatementRows');
+    const jobDir = path.join(root, 'job-statements');
+    const intakeSheet = [['Timestamp', 'POPID', 'Cycle', 'Daypart', 'Tag', 'ReflectionExcerpt', 'Applied', 'Affect']];
+    const jobRows = { queue: (e) => jobLib.queue(e, { dir: jobDir }),
+      flush: () => jobLib.flush({ dir: jobDir, lock: async (p, fn) => fn(), readRows: async () => intakeSheet,
+        appendRows: async (rows) => { intakeSheet.push(...rows); }, classify: async () => ({ event: 'Career', affect: 'Anxious' }) }) };
     const first = await journal.run(999, { root, prior: [],
-      sonnet: async () => answer, page });
+      sonnet: async () => answer, page, jobRows });
     assert.ok(first.path.endsWith('civis_journal_c999.md'));
     assert.equal(calls, 1);
+    assert.equal(first.intake.landed, 1);
+    assert.deepEqual(intakeSheet[1].slice(1, 5).concat(intakeSheet[1][7]), ['POP-00789', 999, 'journal', 'Civic', 'Anxious'], 'one journal row: the job tag lands at nothing, the mood is kept');
+    assert.equal((await journal.run(999, { root, prior: [], sonnet: async () => { throw new Error('model must not be called'); }, page })).intake, undefined, 'no live wiring passed: nothing queued or flushed');
     const second = await journal.run(999, { root, prior: [],
       sonnet: async () => { throw new Error('model must not be called'); }, page });
     assert.equal(second.skipped, 'already-recorded');

@@ -215,14 +215,52 @@ const FILLS = {
 // ---- the shared readers the other workers' fills are made of. Each returns blocks of the tab's own rows; a tab that
 // cannot be read is a block that says so. Nothing is picked, ranked or worded: which row matters is the worker's.
 // Source of which tab is whose: docs/research/2026-11-15-worker-records-all-tabs.md (all 85 tabs, read live).
+// ctx.window: how many Cycles of a by-Cycle tab are handed (1 = this Cycle, 2 = this and the last); unset = every Cycle on
+// the tab. Older Cycles are the worker's to read with sheet_read (builder 2026-11-16: "having a tool to search for history,
+// AI wont read that much and will assume if the packet leaves room to assume"). A tab whose rows all carry one Cycle is the
+// current state (the neighborhood map) and is never cut.
+const CYCLE_COLS = ['Cycle', 'CycleId', 'CycleID', 'cycle'];
+const cycleColOf = (cols) => CYCLE_COLS.find((c) => cols.includes(c));
+function windowRows(rowsIn, cycle, window) {
+  if (!window || !rowsIn.length) return { rows: rowsIn, cut: false };
+  const col = cycleColOf(Object.keys(rowsIn[0]));
+  if (!col) return { rows: rowsIn, cut: false };
+  if (new Set(rowsIn.map((r) => String(r[col]).trim())).size <= 1) return { rows: rowsIn, cut: false };
+  const lo = Number(cycle) - Number(window);
+  return { rows: rowsIn.filter((r) => { const c = num(r[col]); return isFinite(c) && c <= Number(cycle) && c > lo; }), cut: true };
+}
+// The crisis arcs the engine is carrying now (generateCrisisBuckets_ -> previousCycleState.crisisArcs, the newest
+// PREV_CYCLE_STATE_JSON row on Carry_Forward_Store at or before the Cycle; the same read as buildWorldSummary.liveCrisisArcs).
+// Event_Arc_Ledger is an audit log written at onset, peak and resolve, with fossil rows from an older engine: it is not the
+// arcs' state (2026-11-16: it held the Downtown Transit Snarl "early, tension 5" while the engine carried it in decline at 2.45).
+async function liveArcsAt(sheets, cycle) {
+  const hits = (await sheets.getSheetAsObjects('Carry_Forward_Store'))
+    .filter((r) => r.Key === 'PREV_CYCLE_STATE_JSON' && Number(r.Cycle) <= Number(cycle)).sort((a, b) => Number(b.Cycle) - Number(a.Cycle));
+  if (!hits.length) throw new Error('no carried city state at or before Cycle ' + cycle);
+  let st; try { st = JSON.parse(hits[0].JSON); } catch (e) { throw new Error('the carried city state for Cycle ' + hits[0].Cycle + ' does not parse'); }
+  return { asOf: Number(hits[0].Cycle), arcs: Array.isArray(st.crisisArcs) ? st.crisisArcs : [] };
+}
 function recordKit(cycle, ctx) {
   const { sheets } = defaults(ctx.deps);
   const cache = {};
-  const rows = (tab) => (cache[tab] = cache[tab] || sheets.getSheetAsObjects(tab));
+  const all = (tab) => (cache[tab] = cache[tab] || sheets.getSheetAsObjects(tab));
+  let cutHere = false;   // set when the block being read was cut to the window; its title then says which Cycles it holds
+  const rows = async (tab, opts) => {
+    if (opts && opts.allCycles) return all(tab);
+    const w = windowRows(await all(tab), cycle, ctx.window);
+    if (w.cut) cutHere = true;
+    return w.rows;
+  };
   const fold = (v) => String(v || '').trim().toLowerCase();
   const inSet = (v, list) => list.map(fold).includes(fold(v));
   const out = [];
-  const add = async (title, read) => { try { const t = await read(); if (t) out.push({ title, text: t }); } catch (e) { out.push({ title, text: 'unavailable (' + ((e && e.message) || e) + ')' }); } };
+  const span = ctx.window ? (Number(ctx.window) === 1 ? 'Cycle ' + cycle : 'Cycles ' + (Number(cycle) - Number(ctx.window) + 1) + '–' + cycle) : '';
+  const retitle = (t) => t.replace(/, every Cycle on (the sheet|it)$|, every entry$|, each Cycle$/, '').replace(/ by Cycle$/, '') + ', ' + span;
+  const add = async (title, read) => {
+    cutHere = false;
+    try { const t = await read(); if (t) out.push({ title: cutHere ? retitle(title) : title, text: t }); }
+    catch (e) { out.push({ title, text: 'unavailable (' + ((e && e.message) || e) + ')' }); }
+  };
   const kit = {
     blocks: out,
     // one initiative's row on the tracker, every column as the sheet holds it
@@ -249,10 +287,13 @@ function recordKit(cycle, ctx) {
         .map((r) => ({ Cycle: r.Cycle, Domain: String(r.Domain).toUpperCase(), Neighborhood: r.Neighborhood, Severity: r.Severity, Event: r.EventDescription }));
       return w.length ? table(w, ['Cycle', 'Domain', 'Neighborhood', 'Severity', 'Event']) : 'none';
     }),
+    // the arcs the engine carries now, whatever the window: an open arc is current however long ago it began
     arcs: (title, pick) => add(title, async () => {
-      const a = (await rows('Event_Arc_Ledger')).filter(pick)
-        .map((r) => ({ Cycle: r.Cycle, Arc: r.ArcId, Neighborhood: r.Neighborhood, Type: r.Type, Phase: r.Phase, Tension: r.Tension, Summary: r.Summary }));
-      return a.length ? table(a, ['Cycle', 'Arc', 'Neighborhood', 'Type', 'Phase', 'Tension', 'Summary']) : 'none';
+      const live = await liveArcsAt(sheets, cycle);
+      const a = live.arcs.map((x) => ({ Arc: x.name || x.arcId, Neighborhood: x.neighborhood, Type: x.type, DomainTag: x.domainTag || x.domain || '', Phase: x.phase,
+        Tension: x.tension, Began: x.cycleCreated, 'In this phase since': x.phaseStartCycle, Citizens: (x.citizens || []).length, Summary: x.summary })).filter(pick);
+      return (a.length ? table(a, ['Arc', 'Neighborhood', 'Type', 'Phase', 'Tension', 'Began', 'In this phase since', 'Citizens', 'Summary']) : 'none') +
+        (live.asOf !== Number(cycle) ? '\n(as the engine carried them after Cycle ' + live.asOf + ')' : '');
     }),
     texture: (title, domains) => add(title, async () => {
       const t = (await rows('Texture_Trigger_Log')).filter((r) => inSet(r.Domain, domains))
@@ -276,21 +317,24 @@ function recordKit(cycle, ctx) {
       const m = await rows('Neighborhood_Demographics');
       return m.length ? table(m, ['Neighborhood'].concat(cols)) : '';
     }),
-    whole: (title, tab, cols, pick) => add(title, async () => {
-      const t = (await rows(tab)).filter((r) => !pick || pick(r));
+    // opts.allCycles: the pick names its own Cycles (this one and the one before), so the window does not apply
+    whole: (title, tab, cols, pick, opts) => add(title, async () => {
+      const t = (await rows(tab, opts)).filter((r) => !pick || pick(r));
       return t.length ? table(t, (cols || Object.keys(t[0])).filter((c) => c in t[0])) : 'none';
     }),
     // the care-and-justice census: the city's line for each intake type by Cycle, then each neighborhood's intakes by Cycle
     census: async (label, system, types) => {
+      cutHere = false;
       let c = []; try { c = (await rows('Care_Justice_Census')).filter((r) => r.System === system); } catch (e) { out.push({ title: label + ', by Cycle', text: 'unavailable (' + e.message + ')' }); return; }
+      const t = (x) => (cutHere ? retitle(x) : x);
       const cyc = [...new Set(c.map((r) => Number(r.Cycle)))].filter(isFinite).sort((x, y) => x - y);
       const city = c.filter((r) => r.GeographicScope === 'city' && (!types || types.includes(r.IntakeType)))
         .map((r) => ({ Cycle: r.Cycle, Kind: r.IntakeType, Intakes: r.TotalIntakes, 'Start of Cycle': r.OpeningOccupancy, 'End of Cycle': r.ClosingOccupancy, Beds: r.BedsOccupied, 'Transfers in': r.TransfersIn, 'Transfers out': r.TransfersOut, Exits: r.Exits }));
-      out.push({ title: label + ', citywide by Cycle', text: city.length ? table(city, Object.keys(city[0])) : 'none' });
+      out.push({ title: t(label + ', citywide by Cycle'), text: city.length ? table(city, Object.keys(city[0])) : 'none' });
       for (const k of [...new Set(c.filter((r) => r.GeographicScope === 'neighborhood' && (!types || types.includes(r.IntakeType))).map((r) => r.IntakeType))]) {
         const hoods = [...new Set(c.filter((r) => r.GeographicScope === 'neighborhood').map((r) => r.Neighborhood))];
         const cell = (h, cy) => { const r = c.find((x) => x.Neighborhood === h && Number(x.Cycle) === cy && x.GeographicScope === 'neighborhood' && x.IntakeType === k); return r ? r.TotalIntakes : ''; };
-        out.push({ title: label + ' — ' + k + ' intakes by neighborhood, each Cycle', text: table(hoods.map((h) => Object.assign({ Neighborhood: h }, ...cyc.map((cy) => ({ ['C' + cy]: cell(h, cy) })))), ['Neighborhood'].concat(cyc.map((cy) => 'C' + cy))) });
+        out.push({ title: t(label + ' — ' + k + ' intakes by neighborhood, each Cycle'), text: table(hoods.map((h) => Object.assign({ Neighborhood: h }, ...cyc.map((cy) => ({ ['C' + cy]: cell(h, cy) })))), ['Neighborhood'].concat(cyc.map((cy) => 'C' + cy))) });
       }
     },
   };
@@ -319,8 +363,8 @@ Object.assign(FILLS, {
     await k.whole('Health programs in the community', 'Community_Programs', null, (r) => /health/i.test(r.Type));
   }),
   'PROJ-TRANSITHUB': projectFill('INIT-003', 'transit hub ridership stations', async (k, cycle) => {
-    await k.whole('Transit by station and corridor, Cycle ' + cycle, 'Transit_Metrics', ['Station', 'Corridor', 'RidershipVolume', 'OnTimePerformance', 'TrafficIndex', 'Notes', 'Factors'], (r) => Number(r.Cycle) === Number(cycle));
-    await k.whole('Transit by station and corridor, the Cycle before', 'Transit_Metrics', ['Station', 'Corridor', 'RidershipVolume', 'OnTimePerformance', 'TrafficIndex', 'Notes'], (r) => Number(r.Cycle) === Number(cycle) - 1);
+    await k.whole('Transit by station and corridor, Cycle ' + cycle, 'Transit_Metrics', ['Station', 'Corridor', 'RidershipVolume', 'OnTimePerformance', 'TrafficIndex', 'Notes', 'Factors'], (r) => Number(r.Cycle) === Number(cycle), { allCycles: true });
+    await k.whole('Transit by station and corridor, the Cycle before', 'Transit_Metrics', ['Station', 'Corridor', 'RidershipVolume', 'OnTimePerformance', 'TrafficIndex', 'Notes'], (r) => Number(r.Cycle) === Number(cycle) - 1, { allCycles: true });
     await k.chaos('BART train events, every Cycle on the sheet', ['bart_train']);
     await k.ripples('What transit events set moving', ['transit-event']);
     await k.events('Traffic events on the city\'s event ledger', ['TRAFFIC']);
@@ -342,7 +386,7 @@ Object.assign(FILLS, {
     await k.whole('Residents waiting on a cause', 'Health_Cause_Queue');
     await k.chaos('Ambulance events, every Cycle on the sheet', ['ambulance']);
     await k.demographics('Residents sick, by neighborhood', ['Sick', 'Adults', 'Seniors']);
-    await k.arcs('Health arcs on the arc ledger', (r) => /^health$/i.test(r.DomainTag) || /health/i.test(r.Type));
+    await k.arcs('Health arcs open now', (r) => /^health$/i.test(r.DomainTag) || /health/i.test(r.Type));
     await k.events('Health events on the city\'s event ledger', ['HEALTH']);
     await k.domains('Health event counts on the domain tracker, by Cycle', ['HEALTH']);
   }),
@@ -376,7 +420,7 @@ Object.assign(FILLS, {
     await k.events('Business and economic events on the city\'s event ledger', ['BUSINESS', 'ECONOMIC']);
   }),
   'EMERG-DIR': made('crisis emergency weather alerts', async (k) => {
-    await k.arcs('Crisis arcs on the arc ledger', (r) => /crisis/i.test(r.Type));
+    await k.arcs('Crisis arcs open now', (r) => /crisis/i.test(r.Type));
     await k.whole('Weather by Cycle', 'Cycle_Weather', ['CycleID', 'Type', 'Temp', 'Impact', 'Advisory', 'Alerts', 'Streak', 'StreakType']);
     await k.ripples('What crisis events set moving', ['crisis-event']);
     await k.events('Weather and environment events on the city\'s event ledger', ['WEATHER', 'ENVIRONMENT']);
@@ -397,7 +441,8 @@ const slugFor = (office) => office.agentDir || ('worker-' + String(office.office
 const isBuilt = (officeId) => Object.prototype.hasOwnProperty.call(FILLS, String(officeId || ''));
 const hasFill = (officeId) => LIVE.has(String(officeId || '')) && isBuilt(officeId);
 
-// The harness for one worker's wake. opts: { officeId, cycle, officeMap, question?, askerLine?, deps? }
+// The harness for one worker's wake. opts: { officeId, cycle, officeMap, question?, askerLine?, window?, deps? }
+//   window: Cycles of each by-Cycle record handed (recordKit); unset = every Cycle on the tab.
 //   question + askerLine: someone's question to this worker, in their words, with who they are. Both or neither.
 //   With no question nothing is added after the worker's own records: the harness gives no work.
 // -> { office, system, user, memory, decisions }
@@ -411,7 +456,7 @@ async function buildWake(opts) {
   const question = String(o.question || '').trim(), askerLine = String(o.askerLine || '').trim();
   if (question && !askerLine) throw new Error('missing askerLine: a question is handed over with who asks it');
   const who = await whoTheyAre(office.popid, o.deps);
-  const fill = await FILLS[o.officeId].build(Number(o.cycle), { deps: o.deps, nameOf: who.nameOf });
+  const fill = await FILLS[o.officeId].build(Number(o.cycle), { deps: o.deps, nameOf: who.nameOf, window: o.window });
   const memory = await gatherMemory(office.popid, question || fill.key, o.deps);
   const decisions = pastDecisions(office.popid, office.agentDir, o.deps);
   const system = [who.line].concat(memory.entries.length ? ['', 'From your own memory:', ...memory.entries.map((m) => '- (' + m.when + ') ' + m.text)] : []).join('\n');
@@ -446,7 +491,9 @@ const SHEETS = ['Initiative_Tracker', 'Neighborhood_Map', 'Oakland_Sports_Feed',
   'WorldEvents_V3_Ledger', 'Event_Arc_Ledger', 'Texture_Trigger_Log', 'Domain_Tracker', 'Cycle_Weather', 'Household_Ledger', 'Employment_Roster', 'Hospital_Ledger', 'Ripple_Ledger'];
 const fn = (name, description, properties, required) => ({ type: 'function', function: { name, description, parameters: { type: 'object', properties, required } } });
 const TOOLS = [
-  fn('sheet_read', 'Read one of the city\'s sheets: ' + SHEETS.join(', ') + '.', { tab: { type: 'string' }, match: { type: 'string', description: 'optional: only the rows naming this word (a neighborhood, a name, an id)' } }, ['tab']),
+  fn('sheet_read', 'Read one of the city\'s sheets: ' + SHEETS.join(', ') + '. A sheet kept by Cycle reads newest first; earlier Cycles are read by naming them.',
+    { tab: { type: 'string' }, match: { type: 'string', description: 'optional: only the rows naming this word (a neighborhood, a name, an id)' },
+      from_cycle: { type: 'integer', description: 'optional: only rows from this Cycle on' }, to_cycle: { type: 'integer', description: 'optional: only rows up to this Cycle' } }, ['tab']),
   fn('citizen_lookup', 'Look up one person on the city\'s ledger by full name: role, neighborhood, birth year.', { name: { type: 'string' }, thread: { type: 'boolean', description: 'optional: also their recent life history' } }, ['name']),
   fn('canon_recall', 'What the Bay Tribune has published on a person, place or topic, each piece labelled with its Cycle.', { query: { type: 'string' } }, ['query']),
   fn('memory_recall', 'Read your own memory: your newest entries and, with a query, what you have said or noted on that topic.', { query: { type: 'string', description: 'optional topic' } }, []),
@@ -468,14 +515,26 @@ async function sheetRead(input, deps) {   // the reporters' reader (cron-desk-wr
   if (!SHEETS.includes(tab)) return 'no such sheet. The sheets: ' + SHEETS.join(', ');
   try {
     const data = await sheets.getRawSheetData(tab); const match = String(input.match || '').trim().toLowerCase();
-    if (match) {
-      const rows = data.slice(1).filter((r) => r.join(' ').toLowerCase().includes(match));
-      if (!rows.length) return 'no row in ' + tab + ' names "' + input.match + '" (' + Math.max(0, data.length - 1) + ' rows read)';
-      const shown = rows.slice(-12);
-      return capTo([data[0]].concat(shown).map((r) => r.join(' | ')).join('\n'), 6000) + (rows.length > shown.length ? '\n(' + shown.length + ' newest of ' + rows.length + ' rows naming "' + input.match + '")' : '');
-    }
-    const shown = data.slice(0, 40);
-    return capTo(shown.map((r) => r.join(' | ')).join('\n'), 6000) + (data.length > shown.length ? '\n(first ' + shown.length + ' of ' + data.length + ' rows — pass match to pull rows by a word)' : '');
+    const head = data[0] || [];
+    const ci = head.indexOf(cycleColOf(head));
+    // a Cycle bound that is not a number is no bound (a blank or "latest" never empties the read)
+    const from = num(input.from_cycle), to = num(input.to_cycle);
+    const wantsRange = isFinite(from) || isFinite(to);
+    const ranged = ci >= 0 && wantsRange;
+    let rows = data.slice(1).filter((r) => r.some((v) => String(v == null ? '' : v).trim() !== ''));   // a sheet's blank tail is not rows
+    if (ranged) rows = rows.filter((r) => { const c = num(r[ci]); return isFinite(c) && (!isFinite(from) || c >= from) && (!isFinite(to) || c <= to); });
+    if (match) rows = rows.filter((r) => r.join(' ').toLowerCase().includes(match));
+    // a sheet kept by Cycle: newest Cycle first (a stable sort keeps the sheet's order inside one Cycle)
+    if (ci >= 0) rows = rows.map((r, i) => [r, i]).sort((a, b) => (num(b[0][ci]) || 0) - (num(a[0][ci]) || 0) || a[1] - b[1]).map((x) => x[0]);
+    const range = ranged ? 'in Cycles ' + (isFinite(from) ? from : 'first') + '–' + (isFinite(to) ? to : 'latest') : '';
+    const noCycle = wantsRange && ci < 0 ? '\n(' + tab + ' is not kept by Cycle: every row is shown, the Cycles asked for do not apply)' : '';
+    if (!rows.length) return 'no row in ' + tab + (match ? ' names "' + input.match + '"' : '') + (range ? ' ' + range : '') + ' (' + Math.max(0, data.length - 1) + ' rows read)' + noCycle;
+    const limit = match ? 12 : 40;
+    const shown = rows.slice(0, limit);
+    const asked = [match ? 'naming "' + input.match + '"' : '', range].filter(Boolean).join(' ');
+    const more = rows.length > shown.length ? '\n(' + shown.length + (ci >= 0 ? ' newest' : ' first') + ' of ' + rows.length + ' rows' + (asked ? ' ' + asked : '') +
+      (ci >= 0 ? ' — name earlier Cycles to read them' : ' — pass match to pull rows by a word') + ')' : '';
+    return capTo([head].concat(shown).map((r) => r.join(' | ')).join('\n'), 6000) + more + noCycle;
   } catch (e) { return '(sheet read failed: ' + e.message + ')'; }
 }
 async function memoryRecall(popid, input, deps) {   // newest by date, and the page search on a query; unavailable is said as unavailable, never as empty

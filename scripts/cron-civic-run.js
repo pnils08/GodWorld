@@ -3672,6 +3672,19 @@ function civicDutyDay(day, policy) {
 // ON (builder 2026-11-14: "Turn it on"). An office that has a worker fill wakes on the worker model.
 const workerTemplateOn = (officeId) => workerWake.hasFill(officeId);
 
+// What a worker's reply is: 'statement', or why it is not one. A reply that ends on a tool call is the worker mid-lookup
+// (2026-11-16: the emergency director's page took "Let me check transit metrics…" when her lookups ran out); it is
+// treated as a cut-off reply — retried, then the wake fails and nothing is saved.
+function workerReplyVerdict(got) {
+  const g = got || {};
+  if (g.finishReason === 'length') return 'reply cut off';
+  if (g.finishReason === 'tool_calls' || g.finishReason === 'tool-turns-exhausted') return 'reply ended mid-lookup';
+  // only a finished reply is a statement: any other ending (a filter, a provider error) is named, not saved
+  if (g.finishReason != null && !['stop', 'end_turn'].includes(g.finishReason)) return 'reply ended: ' + g.finishReason;
+  if (!String(g.text || '').trim()) return 'empty reply';
+  return 'statement';
+}
+
 async function runWorkerDatawake(duty, o) {
   const office = duty.office;
   const dw = require('./cron-desk-writer');
@@ -3695,15 +3708,18 @@ async function runWorkerDatawake(duty, o) {
       try {
         got = await dw.openRouterToolLoop({ model: active, system: w.system, user: w.user, toolset,
           exec: workerWake.toolExecutor({ popid: office.popid, cycle, stage, normalizePatrol: normalizePatrolStrategy, dw }),
-          maxToolCalls: 6, maxTokens: 2400, timeoutMs: 180000, keepResults: true,
+          maxToolCalls: 6, maxTokens: 2400, timeoutMs: 180000, keepResults: true, answerLateToolCalls: 'No more reads this wake.',
           body: /^deepseek\/deepseek-v4/.test(active) ? { reasoning: { enabled: false } } : {} });
       } catch (e) {
         log(office.agentDir + ' ' + active + ' attempt ' + attempt + ' call failed: ' + e.message);
         if (attempt < 2) { await sleep(2000 * attempt); continue; }
         break;   // this model's attempts are exhausted — try the next in chain
       }
-      if (String(got.text || '').trim() && got.finishReason !== 'length') { r = got; answeredModel = active; break chainLoop; }
-      log(office.agentDir + ' ' + active + ' attempt ' + attempt + ': ' + (got.finishReason === 'length' ? 'reply cut off' : 'empty reply'));
+      // A reply that ends on a tool call is the worker mid-lookup, not a statement (2026-11-16: the emergency director's
+      // page took "Let me check transit metrics…" when her lookups ran out). It is a cut-off reply: retried, then the wake fails.
+      const verdict = workerReplyVerdict(got);
+      if (verdict === 'statement') { r = got; answeredModel = active; break chainLoop; }
+      log(office.agentDir + ' ' + active + ' attempt ' + attempt + ': ' + verdict);
       if (attempt === 2) throw new Error('model reply unavailable after retry (' + (got.finishReason || 'empty') + ')');
     }
   }
@@ -4693,7 +4709,7 @@ if (require.main === module) {
     .catch(err => { console.error('[civic] Fatal:', err.message); process.exit(1); });
 }
 
-module.exports = { modelChainFor, FALLBACK_MODELS, sentimentWord, crimeWord, retailWord, ailmentPerception, isOneWeekDecay, constituentTopic, cleanLines, parseApprovalTable, parseHoodTable, outputContract, datawakeUserPrompt, datawakeStatementText, districtPackRef, weekCarryBlock, spliceWeekCarry, loadWeekCarry, hearingHasPhase, noPhaseCheck, prepTargetDirForHood, validateVoiceJson, ungroundedNumbers, statementNumberCheck, composeChecks,
+module.exports = { workerReplyVerdict, modelChainFor, FALLBACK_MODELS, sentimentWord, crimeWord, retailWord, ailmentPerception, isOneWeekDecay, constituentTopic, cleanLines, parseApprovalTable, parseHoodTable, outputContract, datawakeUserPrompt, datawakeStatementText, districtPackRef, weekCarryBlock, spliceWeekCarry, loadWeekCarry, hearingHasPhase, noPhaseCheck, prepTargetDirForHood, validateVoiceJson, ungroundedNumbers, statementNumberCheck, composeChecks,
   civicDutyDay,
   // civic.38 Task 1 — closed move set (exported for scripts/cron-civic-game.test.js)
   MOVE_TYPES, validateDatawakeMoves, runWorkerDatawake, runTickAndRefresh, hoodAuthorityReason, appendMoveLedger, moveLedgerLines, datawakeRecord,

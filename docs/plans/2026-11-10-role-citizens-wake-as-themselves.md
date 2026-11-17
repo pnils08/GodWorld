@@ -92,6 +92,13 @@ pointers:
 3. **Two workers wrote as someone briefing them.** Fire chief: "Here's what I can say on the record, Chief Hollowell", ending in his own first person. EMS director: "Here's what the sheets actually say, Priya". Fire chief's system turn is his sheet line alone (162 chars, 0 memory); emergency director's 156.
 4. Fire chief read the $21.55 / $15.22 revenue moves as the businesses' annual revenue.
 
+**Fault 1 worked, 2026-11-16 (builder: "thats way too much dropped on it, having a tool to search for history, AI wont read that much and will assume if the packet leaves room to assume"; agy review [[../../output/antigravity/2026-11-16-review-worker-window]], 22 findings, disposition in §Reviews reconciled).** In the repo, not yet on a live wake's model run:
+- **Her crisis arcs were an old log.** `Event_Arc_Ledger` is an audit log written at onset, peak and resolve with fossil rows from C69–C101 (`generateCrisisBuckets_` `ledgerRow_`); the arcs' state is the carried city state on `Carry_Forward_Store`. At C116 the log said the Downtown Transit Snarl was early at tension 5; the engine carries it in decline at 2.45. `k.arcs` now reads the carried arcs ("Crisis arcs open now", "Health arcs open now"). Her handed records: 30,939 → 3,221 characters with no window. Gap log C116 G-EC46.
+- **A window on by-Cycle records**, built and off: `recordKit` `ctx.window` (1 = this Cycle, 2 = this and the last) cuts each by-Cycle tab and says the Cycles in the block's title; a tab with one Cycle on it (the current state) is never cut; the transit director's two explicit Cycles ignore it. Her print: all 3,221 / two Cycles 851 / one 798 (`output/engine-sheet/2026-11-16-worker-window-print.*`). Which window, if any, is the builder's.
+- **History by tool:** `sheet_read` reads a by-Cycle sheet newest first and takes `from_cycle` / `to_cycle`; a sheet's blank tail is not rows; a bound that is not a number is no bound; a sheet not kept by Cycle says so.
+- **A reply that ends mid-lookup is not saved.** When her reads are spent and she asks for another, the loop answers "No more reads this wake." and asks again (`openRouterToolLoop` `answerLateToolCalls`, the worker wake only); a reply that still ends on a tool call, or on anything but a finished stop, fails the wake and nothing is saved (`workerReplyVerdict`).
+- Tests: `workerWake.test.js` 16 (the loop test fails on the old code); 17 other suites that load the three files green.
+
 ## Open
 
 - **A feed line the engine routed by kind, not by what happened.** C115: the feed's `roster-move` row is Vinnie Keane's retirement ("Keane is not leaving Oakland"); the engine's Sports-Moved line on him reads "spent the night on the phone working out where the family would land" — the trade pool. Engine output stands; recorded for the builder.
@@ -105,7 +112,7 @@ pointers:
 
 | Review | Lane | Pointer | Result |
 |---|---|---|---|
-| — | — | — | none yet |
+| `output/antigravity/2026-11-16-review-worker-window.md` (brief `docs/for-claude-review/2026-11-16-es-brief-agy-worker-window.md`) | agy | fault 1 above | 22 findings, each checked against the code. **Taken:** 1, 9 (arcs: the carried state, not the log); 2, 4 (titles under a window); 3 (transit director's two Cycles); 15, 16 (blank Cycle cells; a one-Cycle tab not cut); 17–20 (`sheet_read`: blank tail, bounds, no Cycle column, limit 40); 21 (late read answered); 22 (only a finished stop is a statement). **Held for the fault they belong to:** 5, 6 (the hospital ledger's and cause queue's old rows: fault 2/3); 7, 8, 10–13 (columns the kit drops — the medical examiner's fault is the same failure: fault 2). **Left to the builder:** 14 (the police chief ignores the window; he is the approved spec). Its "drops standing funding" (finding 2 under Q1) is the window doing what it is for: the payments are history, the tracker row holds the balance |
 | `docs/archive/for-claude-review/2026-11-13-codex-pipeline110-nodirection-review.md` | — | — | reviewed (builder 2026-11-16: every review in the inbox had been reviewed); no per-finding record kept |
 | `docs/archive/for-claude-review/2026-11-13-es-brief-codex-pipeline110-nodirection.md` | — | — | reviewed (builder 2026-11-16: every review in the inbox had been reviewed); no per-finding record kept |
 | `docs/archive/for-claude-review/2026-11-13-codex-pipeline110-task8-review.md` | — | — | reviewed (builder 2026-11-16: every review in the inbox had been reviewed); no per-finding record kept |
@@ -118,6 +125,7 @@ pointers:
 
 ## Changelog
 
+- 2026-11-16 (engine-sheet, S665) — fault 1 worked: crisis arcs from the carried state, a window built and off, history by `sheet_read`, no mid-lookup statement saved; agy review folded.
 - 2026-11-16 (engine-sheet, S665) — first live worker records read (Mon datawake, four workers): four faults recorded under Acceptance; nothing changed.
 - 2026-11-16 (engine-sheet) — A model run was made on Mobley without the builder's word; run directives removed. The council seat template and all made for it deleted on his word (13 files; nothing live used them). The earlier committed copies stay in git history. No run without his word.
 - 2026-11-15 (engine-sheet, S663) — the eight workers' old write-up folders retired (moved, nothing deleted) to `docs/archive/legacy-agent-folders/2026-11-15-worker-write-ups/`: no scheduled wake loads them since the workers went onto the template (builder 2026-11-14: "the old boot are retired for the new templates we are adding"). The reporter voice-file review is filed: [[../research/2026-11-15-voice-files-cut-review]].

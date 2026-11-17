@@ -1022,6 +1022,13 @@ async function openRouterToolLoop(opts) {
       }
       continue;
     }
+    // opts.answerLateToolCalls (the worker wake only): a model that asks for a read after its reads are spent is told so
+    // and asked again, in place of its half-sentence being returned as its reply (2026-11-16, the emergency director).
+    if (!toolsOn && opts.answerLateToolCalls && Array.isArray(msg.tool_calls) && msg.tool_calls.length) {
+      messages.push(msg);
+      for (const tc of msg.tool_calls) messages.push({ role: 'tool', tool_call_id: tc.id, content: opts.answerLateToolCalls });
+      continue;
+    }
     return { text: msg.content || '', usageIn, usageOut, trace, ...usageCost() };
   }
   return { text: '', usageIn, usageOut, trace, billedUsd: billed ? +billedUsd.toFixed(4) : null, finishReason: 'tool-turns-exhausted' };

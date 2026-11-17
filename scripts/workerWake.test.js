@@ -179,3 +179,96 @@ test('memory_recall says unavailable, never empty, when the page cannot be read'
   const out = await ww.memoryRecall('POP-00136', {}, deps('/nowhere', { page: { recentPage_: async () => ({ error: 'timeout' }), searchPage_: async () => ({ results: [] }) } }));
   assert.match(out, /unavailable right now — this is not an empty record/);
 });
+
+test('sheet_read: a sheet kept by Cycle reads newest first; from_cycle / to_cycle read earlier Cycles', async () => {
+  const arcs = []; for (let c = 60; c <= 116; c++) arcs.push({ Cycle: String(c), ArcId: 'a' + c, Neighborhood: 'Downtown' });
+  const d = deps('/nowhere', { sheets: { getSheetAsObjects: async () => arcs, getRawSheetData: async () => [Object.keys(arcs[0])].concat(arcs.map((x) => Object.values(x))) } });
+  const newest = await ww.sheetRead({ tab: 'Event_Arc_Ledger' }, d);
+  assert.match(newest, /^Cycle \| ArcId \| Neighborhood\n116 \| a116/);
+  assert.match(newest, /\(40 newest of 57 rows — name earlier Cycles to read them\)$/);
+  const old = await ww.sheetRead({ tab: 'Event_Arc_Ledger', from_cycle: 69, to_cycle: 71 }, d);
+  assert.deepEqual(old.split('\n').slice(1).map((l) => l.split(' | ')[0]), ['71', '70', '69']);
+  assert.match(await ww.sheetRead({ tab: 'Event_Arc_Ledger', from_cycle: 200 }, d), /^no row in Event_Arc_Ledger in Cycles 200–latest \(57 rows read\)/);
+});
+
+test('window: a by-Cycle record is handed for the Cycles named and its title says which; a one-Cycle tab is never cut; unset hands every Cycle', async () => workspace(async (root) => {
+  const ev = (c, id) => ({ Cycle: String(c), Domain: 'WEATHER', Neighborhood: 'Downtown', Severity: 'low', EventDescription: id });
+  const tabs = {
+    WorldEvents_V3_Ledger: [ev(69, 'old'), ev(115, 'last'), ev(116, 'now')],
+    World_Population: [{ cycle: '116', shockFlag: 'none', patternFlag: 'none', civicLoad: 'x', weatherType: 'mild', weatherImpact: '1' }],
+    Chaos_Cars: [{ CycleId: '100', VehicleType: 'fire_engine', TargetScope: 'neighborhood', TargetId: 'KONO', DiceOutcome: 'false_alarm', PrimaryMetric: 'Sentiment', MetricMagnitude: '-0.05' },
+      { CycleId: '108', VehicleType: 'fire_engine', TargetScope: 'neighborhood', TargetId: 'Uptown', DiceOutcome: 'false_alarm', PrimaryMetric: 'Sentiment', MetricMagnitude: '-0.07' }],
+    Carry_Forward_Store: [{ Key: 'PREV_CYCLE_STATE_JSON', Cycle: '116', JSON: JSON.stringify({ crisisArcs: [{ arcId: 'CRISIS-114-DOWNTOWN', name: 'The Downtown Transit Snarl', type: 'crisis', phase: 'decline', tension: 2.45, neighborhood: 'Downtown', domainTag: 'INFRASTRUCTURE', cycleCreated: 114, phaseStartCycle: 115, citizens: [], summary: 'easing' }] }) },
+      { Key: 'PREV_CYCLE_STATE_JSON', Cycle: '115', JSON: '{"crisisArcs":[]}' }],
+    // the audit log says otherwise: it is not read for the arcs
+    Event_Arc_Ledger: [{ Cycle: '114', ArcId: 'CRISIS-114-DOWNTOWN', Type: 'crisis', Phase: 'early', Tension: '5', Neighborhood: 'Downtown', Summary: 'fossil' }],
+  };
+  const d = deps(root); d.sheets = { getSheetAsObjects: async (tab) => tabs[tab] || [] };
+  const fill = (w) => ww.FILLS['EMERG-DIR'].build(116, { deps: d, nameOf: () => '', window: w });
+  const block = (b, re) => b.blocks.find((x) => re.test(x.title));
+  const one = await fill(1), two = await fill(2), every = await fill();
+  assert.equal(block(one, /^Weather and environment events/).title, 'Weather and environment events on the city\'s event ledger, Cycle 116');
+  assert.ok(block(one, /^Weather and environment/).text.includes('| now') && !block(one, /^Weather and environment/).text.includes('| last'));
+  assert.equal(block(two, /^Weather and environment events/).title, 'Weather and environment events on the city\'s event ledger, Cycles 115–116');
+  assert.ok(block(every, /^Weather and environment/).text.includes('| old'));
+  assert.equal(block(one, /^The city's shock/).title, 'The city\'s shock and pattern flags this Cycle', 'one Cycle on the tab: current state, not cut, title untouched');
+  // the arcs are the engine's carried state at every window: the C114 arc is open, in decline
+  for (const b of [one, two, every]) {
+    const arcs = block(b, /^Crisis arcs/).text;
+    assert.match(arcs, /The Downtown Transit Snarl \| Downtown \| crisis \| decline \| 2\.45 \| 114 \| 115/);
+    assert.ok(!arcs.includes('fossil'));
+  }
+  const fire = await ww.FILLS['CHIEF-FIRE'].build(116, { deps: d, nameOf: () => '', window: 1 });
+  assert.deepEqual(fire.blocks.map((b) => [b.title, b.text]), [['Fire engine events, Cycle 116', 'none']]);
+}));
+
+test('sheet_read: a blank tail is not rows; a Cycle bound that is not a number is no bound; a sheet not kept by Cycle says so', async () => {
+  const raw = [['Office', 'Holder'], ['Mayor', 'Avery Santana'], ['', ''], ['', '']];
+  const d = deps('/nowhere', { sheets: { getRawSheetData: async () => raw, getSheetAsObjects: async () => [] } });
+  const out = await ww.sheetRead({ tab: 'Civic_Office_Ledger', from_cycle: 110 }, d);
+  assert.match(out, /^Office \| Holder\nMayor \| Avery Santana\n\(Civic_Office_Ledger is not kept by Cycle/);
+  const arcs = []; for (let c = 100; c <= 116; c++) arcs.push([String(c), 'a' + c]);
+  const d2 = deps('/nowhere', { sheets: { getRawSheetData: async () => [['Cycle', 'ArcId']].concat(arcs), getSheetAsObjects: async () => [] } });
+  assert.match(await ww.sheetRead({ tab: 'Event_Arc_Ledger', from_cycle: '', to_cycle: 'latest' }, d2), /^Cycle \| ArcId\n116 \| a116/);
+});
+
+test('a worker reply that ends mid-lookup is not a statement', () => {
+  const { workerReplyVerdict } = require('./cron-civic-run');
+  assert.equal(workerReplyVerdict({ text: 'Let me check transit metrics and the current cycle\'s ledger for the snarl itself.', finishReason: 'tool_calls' }), 'reply ended mid-lookup');
+  assert.equal(workerReplyVerdict({ text: '', finishReason: 'tool-turns-exhausted' }), 'reply ended mid-lookup');
+  assert.equal(workerReplyVerdict({ text: 'half', finishReason: 'length' }), 'reply cut off');
+  assert.equal(workerReplyVerdict({ text: '  ', finishReason: 'stop' }), 'empty reply');
+  assert.equal(workerReplyVerdict({ text: 'The snarl cleared by Thursday.', finishReason: 'stop' }), 'statement');
+});
+
+test('the tool loop, for a worker: a read asked for after the reads are spent is answered, and the reply after it comes back', async () => {
+  const https = require('https');
+  const real = https.request;
+  const { EventEmitter } = require('events');
+  const sent = [];
+  let n = 0;
+  const reply = (body) => JSON.stringify({ choices: [{ message: body.message, finish_reason: body.finish }], usage: { prompt_tokens: 1, completion_tokens: 1 } });
+  const call = (i) => ({ message: { role: 'assistant', content: 'Let me check.', tool_calls: [{ id: 't' + i, type: 'function', function: { name: 'sheet_read', arguments: '{"tab":"Cycle_Weather"}' } }] }, finish: 'tool_calls' });
+  https.request = (opts, cb) => {
+    const req = new EventEmitter();
+    req.setTimeout = () => {}; req.destroy = () => {};
+    req.write = (p) => sent.push(JSON.parse(p));
+    req.end = () => {
+      const i = n++;
+      const body = i < 7 ? call(i) : { message: { role: 'assistant', content: 'The snarl is easing.' }, finish: 'stop' };
+      const res = new EventEmitter(); res.statusCode = 200; res.setEncoding = () => {};
+      cb(res); res.emit('data', reply(body)); res.emit('end');
+    };
+    return req;
+  };
+  try {
+    delete require.cache[require.resolve('./cron-desk-writer')];
+    const dw = require('./cron-desk-writer');
+    const r = await dw.openRouterToolLoop({ model: 'm', system: 's', user: 'u', toolset: [], exec: async () => 'rows', maxToolCalls: 6, answerLateToolCalls: 'No more reads this wake.' });
+    assert.equal(r.text, 'The snarl is easing.');
+    assert.equal(r.finishReason, 'stop');
+    assert.equal(r.trace.length, 6);
+    assert.ok(!('tools' in sent[6]) && !('tools' in sent[7]), 'no tools offered once the reads are spent');
+    assert.equal(sent[7].messages[sent[7].messages.length - 1].content, 'No more reads this wake.');
+  } finally { https.request = real; delete require.cache[require.resolve('./cron-desk-writer')]; }
+});

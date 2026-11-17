@@ -78,13 +78,13 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | pipeline.89 | Every journalist picks (builder 10-25: "All journalists should pick, they are AI"): every wake package gets the live tools the 3 tool seats have, the slice is a tip sheet not the assignment, Rhea is off every path; Ines first, same cut on all 28. First run 2026-10-28 | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 |
 | infrastructure.19 | Oakland week flight made lifelike (builder 11-14). v41: names first, homes on a block, team news at team buildings. Next: his look; joined street unbuilt | in-progress | research-build | [[../../world-view/README]] |
 | pipeline.112 | Code labels off citizens' memory pages (builder 11-16): readers to keys/metadata first, then writers, then ~2,300 stored entries. In codex review | in-progress | research-build | [[../plans/2026-11-16-page-labels-off-citizens-memory]] |
+| engine.347 | Every saved word reaches the dials (builder 11-16). Deep-dive read done 11-16, agy folded; next: his calls on speed and direction | in-progress | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
 
 ## 4. Queue — ruled, not started (ready)
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
 | engine.348 | Workers' records the engine does not yet produce (builder 11-16), e.g. the fire chief's one record. Own session after the worker template | ready | engine-sheet | [[../research/2026-11-15-worker-records-all-tabs]] |
-| engine.347 | Every saved word reaches the dials (builder 11-16): office, seat, worker lines on the ledger; reporters' event = printed. Dials deep dive next session | ready | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
 | civic.50 | Council seats act beyond initiatives (builder 11-14): every move they hold works through one, canvass sets nothing. Design is the builder's; plan at pickup | ready | engine-sheet | [[../reference/AGENT_BOOT_TEMPLATES]] §2 The gap |
 | engine.342 | Media grading plays into the sim (builder 11-14): approval reads one press number for all seats, not how the paper covered each seat. Plan at pickup | ready | engine-sheet | [[../reference/AGENT_BOOT_TEMPLATES]] §2 What moves approval |
 | engine.343 | Street direction scale (builder 11-15): decay is scored against the city average, not a street's own weeks; a notch only when it got worse. Plan at pickup | ready | research-build | `output/production_log_run_cycle_c115_gaps.md` G-EC67, G-EC68 |

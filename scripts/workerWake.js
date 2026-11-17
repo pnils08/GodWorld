@@ -315,6 +315,17 @@ function recordKit(cycle, ctx) {
       const m = await rows('Neighborhood_Map');
       return m.length ? table(m, ['Neighborhood'].concat(cols)) : '';
     }),
+    // the residents the archive holds as deceased: who they were, the archive's death fields, and the death line from their
+    // own life history — the one place the sheet words how they died (HealthCause is blank on all nine C106–C114 deaths).
+    // ArchiveNote is not handed: the engine's note on the row's bad data at exit, read as a fact about the person (2026-11-16:
+    // the medical examiner refused all nine on "defects-at-exit: schoolQualityUnusable"; builder: "Leave it out").
+    deaths: (title) => add(title, async () => {
+      const line = (h) => { const m = String(h || '').match(/[^\n]*\[Death\][^\n]*/); return m ? m[0].replace(/\[Death\]\s*/, '').trim() : ''; };
+      const d = (await rows('Citizen_Archive')).filter((r) => /deceased/i.test(String(r.Status) + ' ' + String(r.ArchiveReason)))
+        .map((r) => ({ POPID: r.POPID, Name: [r.First, r.Last].filter(Boolean).join(' '), Born: r.BirthYear, Neighborhood: r.Neighborhood, Role: r.RoleType,
+          Status: r.Status, Reason: r.ArchiveReason, 'Left the ledger': r.ExitCycle, 'Cause on file': r.HealthCause, 'Their record': line(r.LifeHistory) }));
+      return d.length ? table(d, Object.keys(d[0])) : 'none';
+    }),
     demographics: (title, cols) => add(title, async () => {
       const m = await rows('Neighborhood_Demographics');
       return m.length ? table(m, ['Neighborhood'].concat(cols)) : '';
@@ -393,7 +404,8 @@ Object.assign(FILLS, {
     await k.domains('Health event counts on the domain tracker, by Cycle', ['HEALTH']);
   }),
   'MED-EXAM': made('deaths cause of death', async (k) => {
-    await k.whole('Residents on the archive as deceased', 'Citizen_Archive', ['POPID', 'First', 'Last', 'BirthYear', 'Neighborhood', 'RoleType', 'HealthCause', 'ExitCycle', 'ArchiveNote'], (r) => /deceased/i.test(String(r.Status) + ' ' + String(r.ArchiveReason)));
+    await k.deaths('Residents on the archive as deceased');
+    // the two below as the sheet holds them, old rows included (builder 2026-11-16: "As the sheet holds them")
     await k.whole('Tracked residents in the hospital ledger', 'Hospital_Ledger');
     await k.whole('Residents waiting on a cause', 'Health_Cause_Queue');
   }),
@@ -443,6 +455,7 @@ Object.assign(FILLS, {
 const JOBS = {
   'CHIEF-FIRE': 'You run the city\'s fire service. Your job is to answer for its record — each fire engine call, where it went and what came of it — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'EMERG-DIR': 'You run the city\'s emergency management office. Your job is to answer for the city\'s crises and its weather — what is open, how it is moving, what it set off — when the Mayor, the council or the press ask, and in your weekly report on the record.',
+  'MED-EXAM': 'You are the city\'s medical examiner. Your job is to answer for the city\'s deaths and their causes — who died, when, and the cause on file, the residents in hospital care, and those still waiting on a cause — when the Mayor, the council or the press ask, and in your weekly report on the record.',
 };
 const isLean = (officeId) => Object.prototype.hasOwnProperty.call(JOBS, String(officeId || ''));
 // The weekly report is made against the last one (builder 2026-11-16, on a quiet week: "2" — report against the last

@@ -315,6 +315,31 @@ test('a lean worker (the fire chief): sheet line then job; this Cycle of his rec
   assert.deepEqual(ww.toolsFor('EMS-DIR', { records: { a: 'b' } }).map((t) => t.function.name), ['sheet_read', 'citizen_lookup', 'canon_recall', 'memory_recall']);
 }));
 
+// builder 2026-11-16 on the medical examiner: the death facts and the death line; the archive's exit note left out; the
+// hospital ledger and the cause queue as the sheet holds them
+test('the medical examiner: each death with its own death line and no exit note; his other two records as the sheet holds them; lean', async () => workspace(async (root) => {
+  const tabs = {
+    Citizen_Archive: [
+      { POPID: 'POP-00622', First: 'Marisela', Last: 'Rios', BirthYear: '1998', Neighborhood: 'Fruitvale', RoleType: 'Home Health Aide', Status: 'deceased', ArchiveReason: 'deceased', ExitCycle: '107', HealthCause: '',
+        LifeHistory: 'Y2C49 — [Neighborhood] enjoyed the Fruitvale community vibe\nC107 — [Death] died after a sudden illness', ArchiveNote: 'defects-at-exit: schoolQualityUnusable,migrationIntentSet' },
+      { POPID: 'POP-00331', First: 'Isabelle', Last: 'Louis', BirthYear: '1976', Neighborhood: 'Uptown', RoleType: 'Spoken Word Poet', Status: 'deceased', ArchiveReason: 'deceased', ExitCycle: '106', HealthCause: '', LifeHistory: 'Y2C48 — [Lifestyle] checked out a new shop', ArchiveNote: 'defects-at-exit: schoolQualityUnusable' },
+      { POPID: 'POP-00900', First: 'Traded', Last: 'Away', Status: 'Traded', ArchiveReason: 'traded-away', ExitCycle: '110', LifeHistory: '' }],
+    Hospital_Ledger: [{ AdmissionId: 'H-C105-POP-00194', POPID: 'POP-00194', Name: 'Yu Zen', StatusNow: 'active', DischargeCycle: '109', Outcome: 'recovered' }],
+    Health_Cause_Queue: [{ POPID: 'POP-00036', Name: 'Marcus Osei', Status: 'recovering', StatusStartCycle: '0', AssignedCause: 'car accident' }],
+  };
+  const d = deps(root); d.sheets = { getSheetAsObjects: async (tab) => tabs[tab] || [] };
+  const b = await ww.FILLS['MED-EXAM'].build(116, { deps: d, nameOf: () => '', window: 1 });
+  const deaths = b.blocks.find((x) => x.title === 'Residents on the archive as deceased').text;
+  assert.equal(deaths, 'POPID | Name | Born | Neighborhood | Role | Status | Reason | Left the ledger | Cause on file | Their record\n' +
+    'POP-00622 | Marisela Rios | 1998 | Fruitvale | Home Health Aide | deceased | deceased | 107 |  | C107 — died after a sudden illness\n' +
+    'POP-00331 | Isabelle Louis | 1976 | Uptown | Spoken Word Poet | deceased | deceased | 106 |  | ');
+  assert.ok(!deaths.includes('defects-at-exit') && !deaths.includes('Traded'));
+  assert.match(b.blocks.find((x) => /hospital ledger/.test(x.title)).text, /H-C105-POP-00194 \| POP-00194 \| Yu Zen \| active \| 109 \| recovered/);
+  assert.match(b.blocks.find((x) => /waiting on a cause/.test(x.title)).text, /POP-00036 \| Marcus Osei \| recovering \| 0 \| car accident/);
+  assert.equal(ww.isLean('MED-EXAM'), true);
+  assert.match(ww.JOBS['MED-EXAM'], /^You are the city's medical examiner\. Your job is to answer for the city's deaths and their causes/);
+}));
+
 // builder 2026-11-16, on a quiet week: report against the last report
 test('a lean worker reports against its last finished report; a record that ended mid-lookup or predates the template is not one', async () => workspace(async (root) => {
   const dir = path.join(root, 'output', 'cron-civic', 'datawake');

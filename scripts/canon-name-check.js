@@ -151,6 +151,13 @@ function loadCanonNames() {
 // S361 — same profile line, keyed by POPID instead of name. Lane entries carry
 // ids, not names, and a name round-trip is exactly where a typo'd feed row loses
 // the person. Shares loadRows() and the format with profilesFor.
+// An archived citizen's profile says so, last on the line (after popid: the callers key on `popid: POP-…` and the
+// name head). 2026-11-16: the medical examiner read the nine archived dead as live off a profile that never said they left.
+function leftLedger(row) {
+  if (!row._archived) return '';
+  return 'status: ' + (String(row.Status || '').trim() || 'archived') + (row.ExitCycle ? ', left the ledger Cycle ' + row.ExitCycle : '');
+}
+
 function profilesForPopids(popids) {
   const want = new Set((popids || []).map(p => String(p).trim().toUpperCase()).filter(Boolean));
   if (!want.size) return [];
@@ -168,7 +175,8 @@ function profilesForPopids(popids) {
       row.CareerStage && 'careerStage: ' + row.CareerStage,
       row.EmployerBizId && 'employerBiz: ' + row.EmployerBizId,
       row.SkillTags && ('skills: ' + String(row.SkillTags).slice(0, 80)),
-      'popid: ' + pop
+      'popid: ' + pop,
+      leftLedger(row)
     ].filter(Boolean).join('; '));
   }
   return out;
@@ -189,7 +197,8 @@ function profilesFor(names) {
       row.CareerStage && 'careerStage: ' + row.CareerStage,
       row.EmployerBizId && 'employerBiz: ' + row.EmployerBizId,
       row.SkillTags && ('skills: ' + String(row.SkillTags).slice(0, 80)),
-      row.POPID && ('popid: ' + row.POPID)
+      row.POPID && ('popid: ' + row.POPID),
+      leftLedger(row)
     ].filter(Boolean).join('; '));
   }
   return out;
@@ -206,9 +215,11 @@ function threadFor(name, limit) {
     const full = String(row.Name || '').replace(/\s+/g, ' ').trim();
     const fl = [row.First, row.Last].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
     if (full.toLowerCase() !== want && fl.toLowerCase() !== want) continue;
-    const lines = String(row.LifeHistory || '').split('\n').map(l => l.trim()).filter(l => /^Y\d+C\d+ — /.test(l));
+    // both stamps the engine writes: Y3C9 and the bare C107 its birth, death, health, retirement and graduation lines carry
+    // (2026-11-16: 40 such lines across the two snapshots, every one dropped before — the dead read without their death)
+    const lines = String(row.LifeHistory || '').split('\n').map(l => l.trim()).filter(l => /^(?:Y\d+)?C\d+ — /.test(l));
     const pop = String(row.POPID || '').trim();
-    const seen = new Set(lines.map(l => l.replace(/^Y\d+C\d+ — \[[^\]]*\]\s*/, '')));
+    const seen = new Set(lines.map(l => l.replace(/^(?:Y\d+)?C\d+ — \[[^\]]*\]\s*/, '')));
     const recent = [];
     try {
       const f = path.join(ROOT, 'output', 'beats', 'LifeHistory_Log.jsonl');

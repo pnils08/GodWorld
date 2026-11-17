@@ -208,6 +208,15 @@ console.log('cron-desk-writer pipeline.77 rubric tests: PASS');
   assert.match(toolCitizenLookup({ name: 'TEST-ONLY Nobody Atall', thread: true }), /No ledger citizen named/);
   const { threadFor } = require('./canon-name-check');
   assert.deepStrictEqual(threadFor('TEST-ONLY Nobody Atall'), []);
+  // an archived citizen's profile says they left, and their thread keeps the bare-C stamped death line (2026-11-16)
+  const archived = (() => { try { return require('fs').readFileSync(require('path').join(__dirname, '..', 'output', 'citizen_archive_snapshot.jsonl'), 'utf8').split('\n').filter(Boolean).map(l => JSON.parse(l)); } catch (_) { return []; } })()
+    .find(r => /^C\d+ — \[Death\]/m.test(String(r.LifeHistory || '')) && r.First && r.Last);
+  if (archived) {
+    const nm = archived.First + ' ' + archived.Last;
+    const out = toolCitizenLookup({ name: nm, thread: true });
+    assert.match(out, new RegExp('popid: ' + archived.POPID + '; status: ' + archived.Status + ', left the ledger Cycle ' + archived.ExitCycle));
+    assert.match(out, /\nC\d+ — \[Death\] /);
+  }
 }
 console.log('cron-desk-writer pipeline.89 seat-frame tests: PASS');
 

@@ -83,6 +83,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| engine.348 | Workers' records the engine does not yet produce (builder 11-16), e.g. the fire chief's one record. Own session after the worker template | ready | engine-sheet | [[../research/2026-11-15-worker-records-all-tabs]] |
 | engine.347 | Every saved word reaches the dials (builder 11-16): office, seat, worker lines on the ledger; reporters' event = printed. Dials deep dive next session | ready | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
 | civic.50 | Council seats act beyond initiatives (builder 11-14): every move they hold works through one, canvass sets nothing. Design is the builder's; plan at pickup | ready | engine-sheet | [[../reference/AGENT_BOOT_TEMPLATES]] §2 The gap |
 | engine.342 | Media grading plays into the sim (builder 11-14): approval reads one press number for all seats, not how the paper covered each seat. Plan at pickup | ready | engine-sheet | [[../reference/AGENT_BOOT_TEMPLATES]] §2 What moves approval |

@@ -314,3 +314,27 @@ test('a lean worker (the fire chief): sheet line then job; this Cycle of his rec
   assert.equal(ww.isLean('EMS-DIR'), false);
   assert.deepEqual(ww.toolsFor('EMS-DIR', { records: { a: 'b' } }).map((t) => t.function.name), ['sheet_read', 'citizen_lookup', 'canon_recall', 'memory_recall']);
 }));
+
+// builder 2026-11-16, on a quiet week: report against the last report
+test('a lean worker reports against its last finished report; a record that ended mid-lookup or predates the template is not one', async () => workspace(async (root) => {
+  const dir = path.join(root, 'output', 'cron-civic', 'datawake');
+  fs.mkdirSync(dir, { recursive: true });
+  const put = (date, rec) => fs.writeFileSync(path.join(dir, 'worker-chief-fire_' + date + '.json'), JSON.stringify(rec));
+  put('2026-11-02', { template: 'worker/1', cycle: 114, finishReason: 'stop', statement: 'Two weeks ago.' });
+  put('2026-11-09', { cycle: 115, statement: 'Before the template.' });
+  put('2026-11-16', { template: 'worker/1', cycle: 116, finishReason: 'tool_calls', statement: 'Let me check.' });
+  put('2026-11-23', { template: 'worker/1', cycle: 117, finishReason: 'stop', statement: 'Next week, not yet.' });
+  assert.deepEqual(ww.lastReport('worker-chief-fire', '2026-11-23', { root }), { date: '2026-11-02', cycle: 114, statement: 'Two weeks ago.' });
+  assert.equal(ww.lastReport('worker-chief-fire', '2026-11-01', { root }), null);
+  assert.equal(ww.lastReport('worker-emerg-dir', '2026-11-23', { root }), null);
+  const om = { offices: [{ officeId: 'CHIEF-FIRE', popid: 'POP-00140', holder: 'Marcus Hollowell', title: 'Fire Chief', agentDir: 'worker-chief-fire' }] };
+  const d = deps(root); d.sheets = { getSheetAsObjects: async () => [] };
+  d.wp = { ...d.wp, buildPool: async () => [{ popId: 'POP-00140', first: 'Marcus', last: 'Hollowell', cur: {} }], loadOfficeHolders: async () => ({ byPop: { 'POP-00140': { title: 'Fire Chief' } } }) };
+  const w = await ww.buildWake({ officeId: 'CHIEF-FIRE', cycle: 117, officeMap: om, deps: d, date: '2026-11-23' });
+  assert.ok(w.user.endsWith('Your last report on the record (Cycle 114):\nTwo weeks ago.\n\nCycle 117, your weekly report: speak on the record on what has changed in your records since your last report.'));
+  const first = await ww.buildWake({ officeId: 'CHIEF-FIRE', cycle: 117, officeMap: om, deps: d, date: '2026-11-01' });
+  assert.ok(first.user.endsWith('Cycle 117, your weekly report: speak on the record on what you see in your records this Cycle.') && !first.user.includes('last report'));
+  // asked, the question is the task: no last report is handed
+  const asked = await ww.buildWake({ officeId: 'CHIEF-FIRE', cycle: 117, officeMap: om, deps: d, date: '2026-11-23', question: 'Q?', askerLine: 'A,' });
+  assert.ok(!asked.user.includes('last report'));
+}));

@@ -445,7 +445,28 @@ const JOBS = {
   'EMERG-DIR': 'You run the city\'s emergency management office. Your job is to answer for the city\'s crises and its weather — what is open, how it is moving, what it set off — when the Mayor, the council or the press ask, and in your weekly report on the record.',
 };
 const isLean = (officeId) => Object.prototype.hasOwnProperty.call(JOBS, String(officeId || ''));
-const reportTask = (cycle) => 'Cycle ' + cycle + ', your weekly report: speak on the record on what you see in your records this Cycle.';
+// The weekly report is made against the last one (builder 2026-11-16, on a quiet week: "2" — report against the last
+// report). With no last report on file, it is made on this Cycle alone.
+const reportTask = (cycle, last) => last
+  ? 'Cycle ' + cycle + ', your weekly report: speak on the record on what has changed in your records since your last report.'
+  : 'Cycle ' + cycle + ', your weekly report: speak on the record on what you see in your records this Cycle.';
+// Their last weekly report: the newest weekday record of theirs before this wake's date that the worker template made and
+// that finished (cron-civic-run.js runWorkerDatawake writes output/cron-civic/datawake/<agentDir>_<date>.json). A record
+// that ended mid-lookup is not a report (2026-11-16: the emergency director's "Let me check transit metrics…").
+function lastReport(agentDir, beforeDate, deps) {
+  const root = (deps && deps.root) || ROOT;
+  const dir = path.join(root, 'output', 'cron-civic', 'datawake');
+  let files = []; try { files = fs.readdirSync(dir); } catch (e) { return null; }
+  const pre = agentDir + '_';
+  const dated = files.filter((f) => f.startsWith(pre) && /^\d{4}-\d{2}-\d{2}\.json$/.test(f.slice(pre.length)))
+    .map((f) => f.slice(pre.length, pre.length + 10)).filter((d) => !beforeDate || d < beforeDate).sort().reverse();
+  for (const d of dated) {
+    let rec; try { rec = JSON.parse(fs.readFileSync(path.join(dir, pre + d + '.json'), 'utf8')); } catch (e) { continue; }
+    if (rec && /^worker\//.test(String(rec.template || '')) && rec.finishReason === 'stop' && String(rec.statement || '').trim())
+      return { date: d, cycle: Number(rec.cycle), statement: String(rec.statement).trim() };
+  }
+  return null;
+}
 
 // A fill that is built is not yet a wake that runs on it. LIVE names the workers whose scheduled wakes use the template
 // (builder 2026-11-14, on the chief: "Turn it on"). Adding an office here is the switch; it is his word per worker.
@@ -457,7 +478,8 @@ const slugFor = (office) => office.agentDir || ('worker-' + String(office.office
 const isBuilt = (officeId) => Object.prototype.hasOwnProperty.call(FILLS, String(officeId || ''));
 const hasFill = (officeId) => LIVE.has(String(officeId || '')) && isBuilt(officeId);
 
-// The harness for one worker's wake. opts: { officeId, cycle, officeMap, question?, askerLine?, window?, deps? }
+// The harness for one worker's wake. opts: { officeId, cycle, officeMap, question?, askerLine?, window?, date?, deps? }
+//   date: the wake's date (YYYY-MM-DD); a lean worker's last report is its newest before this date.
 //   window: Cycles of each by-Cycle record handed (recordKit); unset = every Cycle on the tab.
 //   question + askerLine: someone's question to this worker, in their words, with who they are. Both or neither.
 //   With no question: a lean worker (JOBS) is given its weekly report as the task; any other, nothing is added.
@@ -483,15 +505,17 @@ async function buildWake(opts) {
   }
   const memory = await gatherMemory(office.popid, question || fill.key, o.deps);
   const decisions = pastDecisions(office.popid, office.agentDir, o.deps);
+  const last = lean && !question ? lastReport(office.agentDir, o.date || new Date().toISOString().slice(0, 10), o.deps) : null;
   const system = [who.line].concat(lean ? ['', JOBS[o.officeId]] : [], memory.entries.length ? ['', 'From your own memory:', ...memory.entries.map((m) => '- (' + m.when + ') ' + m.text)] : []).join('\n');
   const user = [
     ...fill.blocks.map((b) => b.title + ':\n' + b.text),
     'What you have decided and said on the record:\n' + (decisions.length
       ? decisions.map((d) => '- Cycle ' + d.cycle + ', ' + d.type + (d.askedBy ? ' — asked by ' + d.askedBy + ': ' + d.question + '\n  You answered: ' + d.said : ': ' + d.said)).join('\n')
       : '- nothing on record'),
-    ...(question ? [askerLine + ' asks you:\n\n' + question] : lean ? [reportTask(o.cycle)] : []),
+    ...(last ? ['Your last report on the record (Cycle ' + last.cycle + '):\n' + last.statement] : []),
+    ...(question ? [askerLine + ' asks you:\n\n' + question] : lean ? [reportTask(o.cycle, last)] : []),
   ].join('\n\n');
-  return { office, system, user, memory, decisions, records, lean };
+  return { office, system, user, memory, decisions, records, lean, last };
 }
 
 // Who a worker is, alone: the sheet line and their gathered memory — the same system turn buildWake gives them, with
@@ -637,5 +661,5 @@ function toolExecutor(ctx) {
   };
 }
 
-module.exports = { JOBS, isLean, reportTask, neighborhoodRead, FILLS, hasFill, isBuilt, LIVE, slugFor, identity, buildWake, toolsFor, toolExecutor, TOOLS, SHEETS,
+module.exports = { JOBS, isLean, reportTask, lastReport, neighborhoodRead, FILLS, hasFill, isBuilt, LIVE, slugFor, identity, buildWake, toolsFor, toolExecutor, TOOLS, SHEETS,
   highLow, patrolInForce, askAndWhy, loadMoves, pastDecisions, gatherMemory, whoTheyAre, sheetRead, memoryRecall, table };

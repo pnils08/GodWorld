@@ -3689,7 +3689,7 @@ async function runWorkerDatawake(duty, o) {
   const office = duty.office;
   const dw = require('./cron-desk-writer');
   const cycle = Number(o.cycle);
-  const w = await workerWake.buildWake({ officeId: office.officeId, cycle, officeMap: o.officeMap });
+  const w = await workerWake.buildWake({ officeId: office.officeId, cycle, officeMap: o.officeMap, date: o.date });
   const toolset = workerWake.toolsFor(office.officeId, { patrolStrategies: PATROL_STRATEGIES, records: w.records });
   log('worker wake ' + office.agentDir + ': system ' + w.system.length + ' / user ' + w.user.length + ' chars; memory ' +
     w.memory.entries.length + ' (' + w.memory.fromSearch + ' searched, ' + w.memory.newest + ' newest); decisions ' + w.decisions.length + '; tools ' + toolset.length);

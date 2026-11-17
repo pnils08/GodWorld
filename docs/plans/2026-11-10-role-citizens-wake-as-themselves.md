@@ -73,7 +73,7 @@ pointers:
 | Council seat | — | the first build (Mobley, D9) removed 11-16 on the builder's word; nothing is built. Before it: Runs 1–2 (21 runs, old boot); read 11-14: no wake today uses tools and decides untold, so a clean slate; parts agreed 11-14 | everything: start again from his plan | **on hold** — builder 2026-11-17: "council I need more time to figure out how they will work" |
 | Mayor | Avery Santana — her own template (builder 2026-11-15) | — | everything | not started |
 | Worker | the police chief, as the spec for every worker | Runs 3–7; the lean shape 11-16/17, one or two guarded runs per worker | the first live lean records, to read | **live, all 14 lean** — each approved 2026-11-16/17 |
-| Reporter | none — every reporter is an old build (builder 2026-11-17: "i dont believe there is one as these are the old builds") | Runs 1–2, not clean | the roster first (who leads and shares which records, their days), then the template | **in progress** — roster being built (rulings 2026-11-17, Changelog) |
+| Reporter | none — every reporter is an old build (builder 2026-11-17: "i dont believe there is one as these are the old builds") | Runs 1–2, not clean | the template, cut from the approved roster | **in progress** — roster approved row by row 2026-11-17 ([[../research/2026-11-17-reporter-records-roster]]) |
 | Gate | — | none | everything | not started |
 
 **Reporter rulings (builder 2026-11-17, asked one at a time).**
@@ -156,6 +156,7 @@ pointers:
 ## Changelog
 
 - 2026-11-17 (engine-sheet, S670) — Reporter rulings recorded (§Tasks, Reporter rulings): no working example, roster first, shared records with one lead, worker split, reporter picks the story; roster being built.
+- 2026-11-17 (engine-sheet, S670) — Reporter roster approved row by row (Mason gets the evening phase; Nia the show's rules; Hal pre-2026 real-world sports history; truesource cards for Anthony, Hal, Selena).
 - 2026-11-17 (engine-sheet, S670) — Reporter roster drafted: [[../research/2026-11-17-reporter-records-roster]]; proposed lead and shared records are the builder's to rule.
 - 2026-11-17 (engine-sheet, S668) — agy's re-review (SHIP-WITH-FIXES) folded and closed: four edge cases fixed in place; tests 29, 76 across the city-hall suites. The builder on media, the next session group: the same pack and tool gaps the workers had ("media covering elements of the data and not getting all that applies").
 - 2026-11-17 (engine-sheet, S668) — position line rewritten on the builder's word: workers done and live (14 of 14 lean); the next session group is media (the reporters' template); council on hold ("council I need more time to figure out how they will work").

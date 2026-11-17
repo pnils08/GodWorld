@@ -409,6 +409,26 @@ test('the district attorney: arrests and in custody per neighborhood, no beds; p
   assert.equal(ww.isLean('DA-01'), true);
 }));
 
+// builder 2026-11-16 on the economic deputy: totals by neighborhood in the pack, the whole ledger by read; duplicate removals are not closures
+test('the economic deputy: businesses by neighborhood in the lean pack, every business behind record_read; a duplicate removal is not a closure', async () => workspace(async (root) => {
+  const tabs = {
+    Business_Ledger: [{ BIZ_ID: 'BIZ-1', Name: 'A', Sector: 'Retail', Neighborhood: 'Downtown', Employee_Count: '10', Avg_Salary: '50000' },
+      { BIZ_ID: 'BIZ-2', Name: 'B', Sector: 'Tech', Neighborhood: 'Downtown', Employee_Count: '30', Avg_Salary: '100000' },
+      { BIZ_ID: 'BIZ-3', Name: 'Marine Systems', Sector: 'Science', Neighborhood: 'Baylight District', Employee_Count: '0', Avg_Salary: '180000' }],
+    Business_Archive: [{ BIZ_ID: 'BIZ-9', Name: 'Dup', ArchiveReason: 'canon-duplicate-of:BIZ-1', ExitCycle: '108' }, { BIZ_ID: 'BIZ-8', Name: 'Gone Shop', ArchiveReason: 'closed', ExitCycle: '115' }],
+  };
+  const d = deps(root); d.sheets = { getSheetAsObjects: async (tab) => tabs[tab] || [] };
+  const one = await ww.FILLS['STAFF-DM-ECON'].build(116, { deps: d, nameOf: () => '', window: 1 });
+  assert.equal(one.blocks[0].title, 'Businesses by neighborhood, Cycle 116 (every business: the record "Every business on the ledger")');
+  assert.equal(one.blocks[0].text, 'Neighborhood | Businesses | Staff | Median business pay\nDowntown | 2 | 40 | 75000\nBaylight District | 1 | 0 | 180000');
+  const closed = one.blocks.find((x) => x.title === 'Businesses that closed').text;
+  assert.ok(closed.includes('Gone Shop') && !closed.includes('Dup'));
+  const every = await ww.FILLS['STAFF-DM-ECON'].build(116, { deps: d, nameOf: () => '' });
+  assert.equal(every.blocks[0].title, 'Every business on the ledger');
+  assert.match(every.blocks[0].text, /BIZ-3 \| Marine Systems/);
+  assert.equal(ww.isLean('STAFF-DM-ECON'), true);
+}));
+
 // builder 2026-11-16, on a quiet week: report against the last report
 test('a lean worker reports against its last finished report; a record that ended mid-lookup or predates the template is not one', async () => workspace(async (root) => {
   const dir = path.join(root, 'output', 'cron-civic', 'datawake');

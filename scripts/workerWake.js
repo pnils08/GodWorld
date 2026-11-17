@@ -340,6 +340,21 @@ function recordKit(cycle, ctx) {
       const t = (await rows(tab, opts)).filter((r) => !pick || pick(r));
       return t.length ? table(t, (cols || Object.keys(t[0])).filter((c) => c in t[0])) : 'none';
     }),
+    // each neighborhood's businesses, staff, and the median of its businesses' average pay: a staff-weighted mean let the two
+    // ball clubs' payrolls stand for a neighborhood's pay (2026-11-16: Baylight "$2,106,982", the Oaks at $15.6M x 250)
+    bizTotals: (title) => add(title, async () => {
+      const by = {};
+      for (const r of await rows('Business_Ledger')) {
+        const h = String(r.Neighborhood || '').trim() || '(none)', n = num(r.Employee_Count), pay = num(r.Avg_Salary);
+        const t = by[h] = by[h] || { Neighborhood: h, Businesses: 0, Staff: 0, pays: [] };
+        t.Businesses++;
+        if (isFinite(n)) t.Staff += n;
+        if (isFinite(pay)) t.pays.push(pay);
+      }
+      const median = (a) => { if (!a.length) return ''; const x = a.slice().sort((p, q) => p - q), m = Math.floor(x.length / 2); return Math.round(x.length % 2 ? x[m] : (x[m - 1] + x[m]) / 2); };
+      const out2 = Object.values(by).sort((x, y) => y.Staff - x.Staff).map((t) => ({ Neighborhood: t.Neighborhood, Businesses: t.Businesses, Staff: t.Staff, 'Median business pay': median(t.pays) }));
+      return out2.length ? table(out2, ['Neighborhood', 'Businesses', 'Staff', 'Median business pay']) : 'none';
+    }),
     // the care-and-justice census: the city's line for each intake type by Cycle, then each neighborhood's intakes by Cycle
     // opts.care: each neighborhood's in care and beds at the end of the Cycle beside its intakes (builder 2026-11-16, on
     // the EMS director: "Add both"); one Cycle is a table of the three, several a grid of "intakes / in care / beds"
@@ -457,9 +472,13 @@ Object.assign(FILLS, {
     await k.whole('The city\'s loads this Cycle', 'World_Population', ['cycle', 'totalPopulation', 'employmentRate', 'illnessRate', 'civicLoad', 'trafficLoad', 'retailLoad', 'tourismLoad', 'nightlifeLoad', 'publicSpacesLoad', 'sentiment', 'shockFlag', 'patternFlag']);
     await k.domains('Event counts on the domain tracker, by Cycle', ['CIVIC', 'INFRASTRUCTURE', 'TRANSIT', 'ECONOMIC', 'HEALTH', 'SAFETY']);
   }),
-  'STAFF-DM-ECON': made('business jobs employment retail', async (k) => {
-    await k.whole('Every business on the ledger', 'Business_Ledger', ['BIZ_ID', 'Name', 'Sector', 'Neighborhood', 'Employee_Count', 'Avg_Salary', 'Annual_Revenue', 'Growth_Rate']);
-    await k.whole('Businesses that closed', 'Business_Archive');
+  'STAFF-DM-ECON': made('business jobs employment retail', async (k, cycle, ctx) => {
+    // the whole ledger is 283 rows (~25,000 characters) and not kept by Cycle, so the window cannot cut it: a lean wake is
+    // handed each neighborhood's totals and reads the ledger whole (builder 2026-11-16: "Totals by neighborhood")
+    if (ctx.window) await k.bizTotals('Businesses by neighborhood, Cycle ' + cycle + ' (every business: the record "Every business on the ledger")');
+    else await k.whole('Every business on the ledger', 'Business_Ledger', ['BIZ_ID', 'Name', 'Sector', 'Neighborhood', 'Employee_Count', 'Avg_Salary', 'Annual_Revenue', 'Growth_Rate']);
+    // a row archived as a duplicate entry is the ledger's cleanup, not a business closing (builder 2026-11-16: "Leave them out")
+    await k.whole('Businesses that closed', 'Business_Archive', null, (r) => !/^canon-duplicate/i.test(String(r.ArchiveReason || '')));
     await k.hoodMap('Retail, income and employers on the neighborhood map', ['RetailVitality', 'MedianIncome', 'IncomeTier', 'EmployerCharacter', 'BoomIndex']);
     await k.demographics('Residents out of work, by neighborhood', ['Unemployed', 'Adults']);
     await k.chaos('Building inspector, mail truck and container ship events, every Cycle on the sheet', ['building_inspector', 'mail_truck', 'cargo_ship']);
@@ -488,6 +507,7 @@ Object.assign(FILLS, {
 const JOBS = {
   'CHIEF-FIRE': 'You run the city\'s fire service. Your job is to answer for its record — each fire engine call, where it went and what came of it — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'EMERG-DIR': 'You run the city\'s emergency management office. Your job is to answer for the city\'s crises and its weather — what is open, how it is moving, what it set off — when the Mayor, the council or the press ask, and in your weekly report on the record.',
+  'STAFF-DM-ECON': 'You are the Deputy Mayor for economic development. Your job is to answer for the city\'s businesses and jobs — who is hiring and who is shrinking, pay, the retail in each neighborhood, who is out of work — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'STAFF-DM-COMM': 'You are the Deputy Mayor for community development. Your job is to answer for the city\'s community programs and its neighborhoods — housing, who is moving in and out, which way each neighborhood is heading, its faith communities — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'STAFF-BAYLIGHT': 'You run the Baylight Authority. Your job is to answer for the Baylight District\'s record — its money and progress, the boom in the neighborhoods around it, the port and the builders — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'PROJ-TRANSITHUB': 'You lead planning for the Fruitvale Transit Hub. Your job is to answer for its record — the hub\'s money and progress, ridership and on-time running at each station and corridor, the BART trains and the traffic — when the Mayor, the council or the press ask, and in your weekly report on the record.',

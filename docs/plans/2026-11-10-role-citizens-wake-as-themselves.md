@@ -73,8 +73,21 @@ pointers:
 | Council seat | — | the first build (Mobley, D9) removed 11-16 on the builder's word; nothing is built. Before it: Runs 1–2 (21 runs, old boot); read 11-14: no wake today uses tools and decides untold, so a clean slate; parts agreed 11-14 | everything: start again from his plan | **on hold** — builder 2026-11-17: "council I need more time to figure out how they will work" |
 | Mayor | Avery Santana — her own template (builder 2026-11-15) | — | everything | not started |
 | Worker | the police chief, as the spec for every worker | Runs 3–7; the lean shape 11-16/17, one or two guarded runs per worker | the first live lean records, to read | **live, all 14 lean** — each approved 2026-11-16/17 |
-| Reporter | not named | Runs 1–2, not clean | everything; the working example is the builder's to name | **next** — the next session group (builder 2026-11-17: "the next session group will be media") |
+| Reporter | none — every reporter is an old build (builder 2026-11-17: "i dont believe there is one as these are the old builds") | Runs 1–2, not clean | the roster first (who leads and shares which records, their days), then the template | **in progress** — roster being built (rulings 2026-11-17, Changelog) |
 | Gate | — | none | everything | not started |
+
+**Reporter rulings (builder 2026-11-17, asked one at a time).**
+
+- No working example: "i dont believe there is one as these are the old builds". Old-build output is not the measure of the new build ("its an old build so why would it work properly? there is already a reader that identifies what wasnt avaiable").
+- Roster first, as the workers began: each named reporter matched to the records their beat covers and the days they write, then the template. The group desks (civic, sports, culture, business, letters, podcast) stay off it as old builds.
+- A record may sit on several beats: one lead reporter covers it whole; the others pull the part their angle needs.
+- A worker's weekly report is a record a reporter covers, beside the raw tabs.
+- The workers' split: pack = this Cycle's rows of the records they lead + the task; tool = the full record, newest first, any Cycles (the reader the workers were fixed onto).
+- The reporter picks the story from their own records; the angle is no longer handed down. The report and write steps stay.
+- Interviews carry no neighbourhood restriction ("the citizens voices matter so I dont see why the restriction matters").
+- What carries into the template is [[../reference/AGENT_BOOT_TEMPLATES]] §4 ("read the plan"): sheet line + temperament, written part, page memory, records + task; IDENTITY / LENS / RULES legacy on switch; stance line and bag out; the grade is pipeline.111's.
+- Each reporter writes on their beat's days, recorded on the roster.
+- Read the same day: Monday 11-16's write, the first since identities went on — 7 pieces, all loaded identity, all 3/3, all gate-passed. The 11-17 lean worker records clean on figures; Osei calls himself "the council member" (his role turned over C115→C116).
 
 ## Acceptance
 
@@ -139,6 +152,7 @@ pointers:
 
 ## Changelog
 
+- 2026-11-17 (engine-sheet, S670) — Reporter rulings recorded (§Tasks, Reporter rulings): no working example, roster first, shared records with one lead, worker split, reporter picks the story; roster being built.
 - 2026-11-17 (engine-sheet, S668) — agy's re-review (SHIP-WITH-FIXES) folded and closed: four edge cases fixed in place; tests 29, 76 across the city-hall suites. The builder on media, the next session group: the same pack and tool gaps the workers had ("media covering elements of the data and not getting all that applies").
 - 2026-11-17 (engine-sheet, S668) — position line rewritten on the builder's word: workers done and live (14 of 14 lean); the next session group is media (the reporters' template); council on hold ("council I need more time to figure out how they will work").
 - 2026-11-17 (engine-sheet, S668) — the police chief on the lean worker, approved (builder: "Approve") after two guarded runs: figures right in both; run 1's three slips (Baylight's quality-of-life crime level read backwards, the council addressed on a scheduled report, an act on no record) not repeated in run 2; run 2: Grand Lake at 0.25 "above a quarter". 14 of 14 lean. Replies `output/engine-sheet/2026-11-16-worker-last-report-run.CHIEF-POLICE{.run1,}.md`.

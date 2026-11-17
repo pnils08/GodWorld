@@ -53,7 +53,7 @@ No reader parses `TENSION[`, `TENSION-RESOLVED[`, `TALK[` or `filed:` out of a p
 |---|------|-------|--------|
 | 1 | Readers first: officeWall position wall keys on daypart / customId only; the last-grade reader reads the score from metadata (written by Task 2) and falls back to the old `graded:` text for entries written before | rb | not started |
 | 2 | Writers: tension / talk / stated / datawake / filed / graded writes carry the plain text; what the label said moves to metadata (`kind`, `cycle`, `topic`, `score`) — `appendReflection_` already takes `extra` | rb | not started |
-| 3 | The grade's classifier input: decide whether a reporter's grade line is classified as text at all (it feeds their dials through Reflection_Intake Tag/Affect) — the builder's call, asked with the read in hand | builder | not started |
+| 3 | The grade's classifier input — ruled 2026-11-16: the grade is not the dial event ("all media is 3/3"); being printed is. Carried by engine.347 Task 3 | builder | done (ruled) |
 | 4 | Stored entries: rewrite the ~2,300 labelled entries to their plain text with the label in metadata, old content saved first; only after Tasks 1–2 are live | rb | not started |
 | 5 | Tests on each reader and writer; one live run of each cron after Tasks 1–2 | rb | not started |
 
@@ -90,3 +90,4 @@ City hall's wakes (the officials' morning wake, the seat wakes, the 14 workers f
 ## Changelog
 
 - 2026-11-16 (research-build) — Plan written from the full page scan and the reader/writer trace; sent to codex-rb for one review before any build.
+- 2026-11-16 (research-build) — Task 3 ruled by the builder (grade is not the dial event); the office wakes' dial question ruled yes and filed as engine.347.

@@ -83,6 +83,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| engine.347 | Every saved word reaches the dials (builder 11-16): office, seat, worker lines on the ledger; reporters' event = printed. Dials deep dive next session | ready | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
 | civic.50 | Council seats act beyond initiatives (builder 11-14): every move they hold works through one, canvass sets nothing. Design is the builder's; plan at pickup | ready | engine-sheet | [[../reference/AGENT_BOOT_TEMPLATES]] §2 The gap |
 | engine.342 | Media grading plays into the sim (builder 11-14): approval reads one press number for all seats, not how the paper covered each seat. Plan at pickup | ready | engine-sheet | [[../reference/AGENT_BOOT_TEMPLATES]] §2 What moves approval |
 | engine.343 | Street direction scale (builder 11-15): decay is scored against the city average, not a street's own weeks; a notch only when it got worse. Plan at pickup | ready | research-build | `output/production_log_run_cycle_c115_gaps.md` G-EC67, G-EC68 |

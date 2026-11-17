@@ -61,7 +61,9 @@ function trace(popId, cycles, perCycle) {
   const reach = [];
   for (let cy = 1; cy <= cycles; cy++) {
     const tags = perCycle(cy) || [];
-    const lines = tags.map(t => ev(cy, t));
+    // engine.349: a line is stamped with the Cycle it folds at (the engine's own stamps are); stamped 100+
+    // Cycles behind the fold, the catch-up settle would rightly fade it out before it could count
+    const lines = tags.map(t => ev(100 + cy * 5, t));
     lh = lh ? (lh + '\n' + lines.join('\n')) : lines.join('\n');
     const ctx = makeCtx(popId, lh, tp, ds, 100 + cy * 5);  // +5/cycle = real Phase-9 cadence
     C.compressLifeHistory_(ctx, { forceAll: true });

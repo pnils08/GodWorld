@@ -4237,6 +4237,8 @@
 
 - **copyDialBase_(base)**
 
+- **dialBaseReadable_(base)**
+
 - **noteDialStep_(tally, label, before, base)**
 
 - **signed2_(n)**
@@ -4323,7 +4325,7 @@
 
 - **foldAgedOutEntries_(c, entries, keepCount, regs, unstampedOnly)**
 
-- **foldNewEntries_(c, newEntries, regs, tune, kindsOut)**
+- **foldNewEntries_(c, newEntries, regs, tune, kindsOut, nowCycle)**
 
 - **foldOneEntry_(c, e, regs)**
 
@@ -4931,4 +4933,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 181
-**Functions mapped:** 1792
+**Functions mapped:** 1793

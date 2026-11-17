@@ -174,6 +174,36 @@ console.log('═══ Section D — the keys turn the speed');
   assert('D4 dialHardenShare reaches the harden (0.8 bakes more than 0.4)', JSON.parse(harden.ledger.rows[0][4]).base.drive > aSeed.base.drive);
 }
 
+console.log('═══ Section D2 — dialReflectionShare reaches a reflection');
+{
+  // one unapplied reflection on POP-Q (Community | Content): Community sociability +4, warmth +2; Content composure +2
+  const intake = [['ts', 'popId', 'cycle', 'wake', 'event', 'snippet', 'applied', 'affect', 'bondTarget', 'tension', 'resolves'],
+    ['t', 'POP-Q', CYCLE, 'morning', 'Community', 'helped at the pantry', '', 'Content', '', '', '']];
+  const ss = { getSheetByName: n => (n === 'Reflection_Intake' ? { getDataRange: () => ({ getValues: () => intake.map(r => r.slice()) }) } : null) };
+  const run = share => { const c = makeCtx({ config: Object.assign({}, SEEDS, { dialReflectionShare: share }) }); c.ss = ss; C.compressLifeHistory_(c, {}); return JSON.parse(c.ledger.rows[2][4]).base; };
+  const seed = run(0.225), twice = run(0.45), off = run(0);
+  assert('D5 at the seed a reflection moves sociability by 4 x 0.225', Math.abs(seed.sociability - 50.9) < 1e-9, String(seed.sociability));
+  assert('D6 doubling the key doubles the move', Math.abs((twice.sociability - 50) - 2 * (seed.sociability - 50)) < 1e-9 && Math.abs((twice.composure - 50) - 2 * (seed.composure - 50)) < 1e-9);
+  assert('D7 at 0 a reflection moves nothing', off.sociability === 50 && off.composure === 50);
+}
+
+console.log('═══ Section D3 — a cell that cannot be read is counted, not written');
+{
+  errors.length = 0; queued.length = 0;
+  const bad = makeCtx({ config: Object.assign({}, SEEDS), openOverride: { 'POP-Q': '{not json' } });
+  C.compressLifeHistory_(bad, {});
+  const rows = queued.find(q => q.kind === 'replace').rows.slice(1);
+  assert('D8 a corrupt open cell writes no row for that citizen (was: nine moves from 50)', !rows.some(m => m[1] === 'POP-Q'));
+  assert('D9 ...and is counted and logged', bad.summary.lifeHistoryCompression.dialMoves.unreadable === 1 && errors.some(e => e.phase === 'Phase9-DialMoves' && /unreadable/.test(e.message)), JSON.stringify(errors));
+  errors.length = 0; queued.length = 0;
+  const nan = makeCtx({ config: Object.assign({}, SEEDS) });
+  nan.dialOpen['POP-Q'] = dial({ warmth: 'high' });
+  C.compressLifeHistory_(nan, {});
+  const all = queued.find(q => q.kind === 'replace').rows.slice(1), pulse = queued.find(q => q.kind === 'append').row;
+  assert('D10 a dial that is not a number: no NaN in Dial_Moves or Dial_Pulse', !all.some(m => m.some(v => typeof v === 'number' && isNaN(v))) && !pulse.some(v => typeof v === 'number' && isNaN(v)));
+  assert('D11 the record says it was queued', nan.summary.lifeHistoryCompression.dialMoves.queued === true);
+}
+
 console.log('═══ Section E — a bad key is logged, never thrown');
 {
   errors.length = 0;
@@ -185,6 +215,9 @@ console.log('═══ Section E — a bad key is logged, never thrown');
   assert('E1 the fold does not throw', !threw);
   assert('E2 two Engine_Errors rows, both under Phase9-DialTuning', errors.length === 2 && errors.every(e => e.phase === 'Phase9-DialTuning'), JSON.stringify(errors));
   assert('E3 the Cycle folds at the seed values', dialCells(bad) === dialCells(good));
+  errors.length = 0;
+  const fade = C.readDialTuning_({ config: { dialMoodFade: 0.995 } });
+  assert('E3b a fade over 0.99 is refused and logged', fade.moodFade === 0.8 && errors.length === 1);
   const t = C.readDialTuning_({});
   assert('E4 no config at all = the seed values, no error', t.lineScale === 1 && t.directShare === 0 && t.moodFade === 0.8 && t.hardenShare === 0.4 && t.reflectionShare === 0.225);
 }

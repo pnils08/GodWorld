@@ -330,6 +330,14 @@ function copyDialBase_(base) {
   for (var i = 0; i < DIALS.length; i++) o[DIALS[i]] = (base && base[DIALS[i]] != null) ? Number(base[DIALS[i]]) : MIDPOINT;
   return o;
 }
+// every dial present on a base is a finite number (an absent dial reads 50, as everywhere else)
+function dialBaseReadable_(base) {
+  for (var i = 0; i < DIALS.length; i++) {
+    var v = base[DIALS[i]];
+    if (v != null && !isFinite(Number(v))) return false;
+  }
+  return true;
+}
 // what one step of the fold did to base, added under `label` in this citizen's tally
 function noteDialStep_(tally, label, before, base) {
   for (var i = 0; i < DIALS.length; i++) {
@@ -343,7 +351,7 @@ function noteDialStep_(tally, label, before, base) {
 function signed2_(n) { var v = Math.round(n * 100) / 100; return (v > 0 ? '+' : '') + v; }
 // rows = ledger rows after the fold; tallies = {POPID: {dial: {label: delta}}}; kinds = {POPID: {dial: {kind: 1}}}
 function buildDialMoves_(ctx, rows, idxs, cycle, tallies, kinds, counts) {
-  var moveRows = [], moved = 0, crossed = 0, allMiddle = 0, anyLow = 0, anyHigh = 0, citizens = 0;
+  var moveRows = [], moved = 0, crossed = 0, allMiddle = 0, anyLow = 0, anyHigh = 0, citizens = 0, unreadable = 0;
   var up = {}, down = {};
   for (var r = 0; r < rows.length; r++) {
     var pop = String(rows[r][idxs.iPopID] || '').trim().toUpperCase();
@@ -353,6 +361,9 @@ function buildDialMoves_(ctx, rows, idxs, cycle, tallies, kinds, counts) {
     citizens++;
     var hadOpen = ctx.dialOpen.hasOwnProperty(pop) && ctx.dialOpen[pop];
     var openDs = hadOpen ? parseDialState_(ctx.dialOpen[pop]) : null;
+    // a cell that opened unreadable, or a dial that is not a number on either side, cannot be measured:
+    // counted, never written as a move from 50 or as NaN
+    if ((hadOpen && (!openDs || !openDs.base)) || !dialBaseReadable_(nowDs.base) || (openDs && openDs.base && !dialBaseReadable_(openDs.base))) { unreadable++; continue; }
     var from = copyDialBase_(openDs && openDs.base), to = copyDialBase_(nowDs.base);
     var any = false, anyCross = false, mid = true, low = false, high = false;
     // the ledger's Name cell is blank on most rows; First + Last is the name everyone else reads
@@ -397,7 +408,7 @@ function buildDialMoves_(ctx, rows, idxs, cycle, tallies, kinds, counts) {
   var pulse = [cycle, citizens, moved, crossed, allMiddle, anyLow, anyHigh];
   for (var p = 0; p < DIALS.length; p++) { pulse.push(up[DIALS[p]] || 0); pulse.push(down[DIALS[p]] || 0); }
   pulse.push(counts.linesFolded || 0); pulse.push(counts.reflections || 0); pulse.push(counts.worn || 0); pulse.push(counts.regained || 0);
-  return { moveRows: moveRows, pulse: pulse, citizens: citizens, moved: moved, crossed: crossed, allMiddle: allMiddle, anyLow: anyLow, anyHigh: anyHigh };
+  return { moveRows: moveRows, pulse: pulse, citizens: citizens, moved: moved, crossed: crossed, allMiddle: allMiddle, anyLow: anyLow, anyHigh: anyHigh, unreadable: unreadable };
 }
 
 // Read unprocessed (applied != 'yes') Reflection_Intake rows, grouped by popId.
@@ -531,6 +542,12 @@ function compressLifeHistory_(ctx, options) {
   // pre-349 arithmetic.
   var dialTune = readDialTuning_(ctx);
   if (typeof setDialTuning_ === 'function') setDialTuning_({ moodFade: dialTune.moodFade, hardenShare: dialTune.hardenShare });
+  else {
+    // on Apps Script citizenMemory.js is always loaded; reaching here means the fade and harden keys are not in force
+    var tuneMissing = new Error('engine.349: setDialTuning_ not loaded — dialMoodFade / dialHardenShare not applied this Cycle');
+    if (typeof logEngineError_ === 'function') logEngineError_(ctx, 'Phase9-DialTuning', tuneMissing);
+    Logger.log(tuneMissing.message);
+  }
   var reflectionMult = dialTune.reflectionShare / REFLECTION_ACCRETION_FRAC;
   // engine.349: Dial_Moves bookkeeping — off without the open-of-Cycle copy (a harness that never
   // ran initSimulationLedger_), so the fold itself is unchanged there.
@@ -763,7 +780,7 @@ function compressLifeHistory_(ctx, options) {
     // engine.177: fold the new stamped entries (oldest first) and move the watermark.
     // engine.38 B3 unlived capture rides THIS walk now (arrival), not the trim.
     if (newEntries.length) {
-      var wmCaptured = foldNewEntries_(c, newEntries, regs, dialTune, movesOn ? (moveKinds[movePop] || (moveKinds[movePop] = {})) : null);
+      var wmCaptured = foldNewEntries_(c, newEntries, regs, dialTune, movesOn ? (moveKinds[movePop] || (moveKinds[movePop] = {})) : null, cycle);
       if (wmCaptured > 0) { unlivedApplied += wmCaptured; regsDirty = true; }
       foldedEntries += newEntries.length;
     }
@@ -872,7 +889,7 @@ function compressLifeHistory_(ctx, options) {
 
   // engine.349: Dial_Moves (replaced) + Dial_Pulse (one row). Queued here, in Phase 9, so the
   // Phase-10 executor writes them; both tabs are ensured first. Never fatal to the fold.
-  var dialMoves = null;
+  var dialMoves = null, dialMovesQueued = false;
   if (movesOn) {
     try {
       dialMoves = buildDialMoves_(ctx, rows, { iPopID: iPopID, iDialState: iDialState, iName: idx('Name'), iFirst: idx('First'), iLast: idx('Last') }, cycle,
@@ -882,6 +899,16 @@ function compressLifeHistory_(ctx, options) {
         queueEnsureTabIntent_(ctx, DIAL_PULSE_TAB, dialPulseHeaders_(), 'engine.349 dial pulse tab', 'citizens');
         queueReplaceIntent_(ctx, DIAL_MOVES_TAB, [DIAL_MOVES_HEADERS].concat(dialMoves.moveRows), 'engine.349 this Cycle\'s dial moves', 'citizens');
         queueAppendIntent_(ctx, DIAL_PULSE_TAB, dialMoves.pulse, 'engine.349 the Cycle\'s dial pulse', 'citizens');
+        dialMovesQueued = true;
+      } else {
+        var queueMissing = new Error('engine.349: intent helpers not loaded — Dial_Moves / Dial_Pulse built but not written this Cycle');
+        if (typeof logEngineError_ === 'function') logEngineError_(ctx, 'Phase9-DialMoves', queueMissing);
+        Logger.log(queueMissing.message);
+      }
+      if (dialMoves.unreadable) {
+        var unreadableErr = new Error('engine.349: ' + dialMoves.unreadable + ' DialState cell(s) unreadable — left out of Dial_Moves');
+        if (typeof logEngineError_ === 'function') logEngineError_(ctx, 'Phase9-DialMoves', unreadableErr);
+        Logger.log(unreadableErr.message);
       }
     } catch (moveErr) {
       dialMoves = null;
@@ -911,7 +938,7 @@ function compressLifeHistory_(ctx, options) {
     integrityWear: { rate: wearRate, floor: wearFloor, worn: wearSteps, regained: regainSteps }, // engine.272
     fandomSeeded: { rows: fandomSeeded, fans: fandomInheritedFans }, // engine.208 C8
     dialTuning: dialTune, // engine.349 the speed this Cycle folded at
-    dialMoves: dialMoves ? { rows: dialMoves.moveRows.length, moved: dialMoves.moved, crossed: dialMoves.crossed, allMiddle: dialMoves.allMiddle, anyLow: dialMoves.anyLow } : null, // engine.349
+    dialMoves: dialMoves ? { rows: dialMoves.moveRows.length, moved: dialMoves.moved, crossed: dialMoves.crossed, allMiddle: dialMoves.allMiddle, anyLow: dialMoves.anyLow, unreadable: dialMoves.unreadable, queued: dialMovesQueued } : null, // engine.349
     version: COMPRESS_VERSION
   };
 
@@ -927,7 +954,7 @@ function compressLifeHistory_(ctx, options) {
     ', pushes ' + pushesQueued + // engine.180
     ', integrity wear ' + wearSteps + '/' + regainSteps + ' at rate ' + wearRate + // engine.272 worn/regained
     ', unlived ' + unlivedApplied +
-    (dialMoves ? ', dial moves ' + dialMoves.moved + ' citizens / ' + dialMoves.moveRows.length + ' rows, ' + dialMoves.crossed + ' crossed a band, ' + dialMoves.allMiddle + ' all-middle' : ', dial moves off') + // engine.349
+    (dialMoves ? ', dial moves ' + (dialMovesQueued ? '' : 'NOT QUEUED ') + dialMoves.moved + ' citizens / ' + dialMoves.moveRows.length + ' rows, ' + dialMoves.crossed + ' crossed a band, ' + dialMoves.allMiddle + ' all-middle' : ', dial moves off') + // engine.349
     ', speed x' + dialTune.lineScale + ' direct ' + dialTune.directShare + // engine.349
     ', bonds nudged ' + bondsNudged + (bondTargetsMissed ? ' (missed ' + bondTargetsMissed + ')' : ''));
 }
@@ -1801,7 +1828,7 @@ function foldAgedOutEntries_(c, entries, keepCount, regs, unstampedOnly) {
 // and applied once (applyCycleEffects_), so reinforcement counts experienced cycles, not
 // log volume; a streak survives only while the last swing is still felt. Cycles apply in
 // ascending order whatever order the lines sit in the cell.
-function foldNewEntries_(c, newEntries, regs, tune, kindsOut) {
+function foldNewEntries_(c, newEntries, regs, tune, kindsOut, nowCycle) {
   var captured = 0, lastCycle = c.folded || 0;
   // engine.349: lineScale multiplies the Cycle's net push; directShare of it goes straight to base
   // (room-scaled, like a reflection) and the rest swings and fades as before. 1 and 0 = the old path.
@@ -1843,6 +1870,13 @@ function foldNewEntries_(c, newEntries, regs, tune, kindsOut) {
     }
     applyCycleEffects_(c, netFx);
     if (cy > lastCycle) lastCycle = cy;
+  }
+  // engine.349: the last line folded is older than this Cycle (a catch-up whose citizen has no line
+  // this week): the swing fades for the Cycles since, so it enters next week as old as it is. A fold
+  // whose newest line is this Cycle's — every ordinary fold — settles nothing here.
+  if (nowCycle > 0 && cycles.length && cycles[cycles.length - 1] < nowCycle) {
+    var trail = nowCycle - cycles[cycles.length - 1];
+    for (var ts = 0; ts < trail && ts < 30; ts++) settleCycle_(c);
   }
   c.folded = lastCycle;
   return captured;

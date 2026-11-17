@@ -225,6 +225,12 @@ var DIAL_MAP = {
   // engine.349: the ledger admitting a name (the mint sentence, "The record catches up") — bookkeeping,
   // no dial. Listed so the text router never reads the role or the employer's name as an event.
   'Intake':             {},
+  // engine.349: a bare [Business] line is "Took over <business> in <hood>" (the owner door,
+  // processAdvancementIntake.js) — a venture begun. The exact key carries the value the prose word-match
+  // gave it ("business" -> drive +6, openness +3), so the business's own name can no longer pick another
+  // rule first ("… Recovery Center", "… Hospital Supply"). The owner's draw lines sign themselves
+  // (Business-Drive-Up-L / Business-Composure-Down-L, generationalWealthEngine.js).
+  'Business':           { drive: 6, openness: 3 },
 
   // --- engine.201 Wave 2 (builder rulings 2+3, 2026-09-13): the world acting ON a citizen, ordinary
   //     scale +-1, each emitted at a real domain seam (never by a narrator, never by wake attention) ---

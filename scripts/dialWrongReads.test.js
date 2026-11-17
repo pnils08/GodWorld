@@ -60,6 +60,23 @@ console.log('═══ Section B — a line moves the dial it says, the way it s
   const raised = parse('C116 — [Business-Drive-Up-L] Ridgeline Ventures paid its owner $946769 this year — the books raised the draw')[0];
   assert('B6 a raised draw: drive +4', fxOf(raised).drive === 4 && Object.keys(fxOf(raised)).length === 1);
   assert('B7 kind readers still see Business', M.baseTag_(cut.tag) === 'Business' && M.baseTag_(raised.tag) === 'Business');
+  // the owner door's bare [Business] line: its own key, whatever the business is called
+  const took = name => fxOf(parse('Y3C13 — [Business] Took over ' + name + ' in Adams Point')[0]);
+  const same = fx => fx.drive === 6 && fx.openness === 3 && Object.keys(fx).length === 2;
+  assert('B8 taking over a business: drive +6, openness +3', same(took('Point Climbing Gym')));
+  assert('B9 ...the same for a business named Hospital Supply, Recovery Center, Award Realty or Reward Bakery (the word-match read those as illness, healing, recognition, a raise)',
+    same(took('Oakland Hospital Supply')) && same(took('Lakeside Recovery Center')) && same(took('Award Realty')) && same(took('Reward Bakery')),
+    JSON.stringify([took('Oakland Hospital Supply'), took('Lakeside Recovery Center'), took('Award Realty'), took('Reward Bakery')]));
+  // the writers themselves carry the signed tags (source read: these lines are built inside large engines)
+  const fs = require('fs'), path = require('path');
+  const src = f => fs.readFileSync(path.resolve(__dirname, '..', f), 'utf8');
+  const pai = src('phase05-citizens/processAdvancementIntake.js'), gce = src('phase05-citizens/generateCitizensEvents.js'), gwe = src('phase05-citizens/generationalWealthEngine.js');
+  assert('B10 the hard-light writer writes [Media-Composure-Down-M] on both its lines and no bare [Media] hard light', (pai.match(/\[Media-Composure-Down-M\] Named in a hard light/g) || []).length === 2 && !/\[Media\] Named in a hard light/.test(pai));
+  assert('B11 the demotion writer writes [Media-Sociability-Down-M]', /\[Media-Sociability-Down-M\] The spotlight moved on/.test(pai) && !/\[Media\] The spotlight moved on/.test(pai));
+  assert('B12 "avoided … crowds" carries dial:outabout:down; "still buzzing … celebrations" carries dial:composure:up',
+    /"avoided " \+ hotspots\[1\] \+ " after hearing about last night's crowds",\s*\["source:prevEvening", "evening:crowd", "dial:outabout:down"\]/.test(gce) &&
+    /"still buzzing from last night's celebrations",\s*\["source:prevEvening", "evening:safety", "dial:composure:up"\]/.test(gce));
+  assert('B13 the draw writer picks the tag by draw > was', /var tagO = draw > was \? 'Business-Drive-Up-L' : 'Business-Composure-Down-L';/.test(gwe));
 }
 
 console.log('═══ Section C — a routine push can stick near the top, and nobody pins');
@@ -118,6 +135,13 @@ console.log('═══ Section D — a catch-up fold lets the swing fade between
   C.foldNewEntries_(single, [mk(116, 'Work'), mk(116, 'Neighborhood-Sociability-Up-S')], null);
   // Work +4 lands room-scaled on a dial already at 52: 2 + 4 x 0.96, with no fade applied to the 2
   assert('D4 a single Cycle folds with no settle inside it', Math.abs(single.mood.drive - 5.84) < 1e-9 && single.mood.sociability === 1, JSON.stringify(single.mood));
+  // a held citizen with no line this week: the swing from the last held Cycle fades for the Cycles since
+  const trailA = E.newCitizen_(); C.foldNewEntries_(trailA, [mk(116, 'Neighborhood-Sociability-Up-S')], null, null, null, 117);
+  assert('D5 last line a Cycle old: one settle after it (1 -> 0.8)', Math.abs(trailA.mood.sociability - 0.8) < 1e-9 && trailA.folded === 116, JSON.stringify([trailA.mood.sociability, trailA.folded]));
+  const trailB = E.newCitizen_(); C.foldNewEntries_(trailB, [mk(117, 'Neighborhood-Sociability-Up-S')], null, null, null, 117);
+  assert('D6 a line from this Cycle: nothing settles after it', trailB.mood.sociability === 1 && trailB.folded === 117);
+  const trailC = E.newCitizen_(); C.foldNewEntries_(trailC, [mk(110, 'Neighborhood-Sociability-Up-S')], null, null, null, 117);
+  assert('D7 last line seven Cycles old: the swing is gone', trailC.mood.sociability === 0);
 }
 
 E.setDialTuning_(null);

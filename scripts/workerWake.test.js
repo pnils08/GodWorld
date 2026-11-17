@@ -349,6 +349,29 @@ test('the medical examiner: each death with its own death line and no exit note;
   assert.match(ww.JOBS['MED-EXAM'], /^You are the city's medical examiner\. Your job is to answer for the city's deaths and their causes/);
 }));
 
+// builder 2026-11-16 on the EMS director: "Add both" — each neighborhood's in care and beds beside its intakes; students in the sick table
+test('the EMS director: neighborhood intakes with in care and beds; students in the sick table; lean', async () => workspace(async (root) => {
+  const row = (cy, scope, hood, n, care, beds) => ({ Cycle: String(cy), System: 'hospital', GeographicScope: scope, Neighborhood: hood, IntakeType: 'illness', TotalIntakes: String(n), OpeningOccupancy: '0', ClosingOccupancy: String(care), BedsOccupied: String(beds), TransfersIn: '0', TransfersOut: '0', Exits: '0' });
+  const tabs = {
+    Care_Justice_Census: [row(115, 'city', '', 30, 70, 70), row(115, 'neighborhood', 'Chinatown', 3, 6, 6), row(116, 'city', '', 34, 68, 68), row(116, 'neighborhood', 'Chinatown', 2, 5, 4)],
+    Neighborhood_Demographics: [{ Neighborhood: 'Chinatown', Students: '410', Adults: '1502', Seniors: '396', Sick: '132' }],
+    Carry_Forward_Store: [{ Key: 'PREV_CYCLE_STATE_JSON', Cycle: '116', JSON: '{"crisisArcs":[]}' }],
+  };
+  const d = deps(root); d.sheets = { getSheetAsObjects: async (tab) => tabs[tab] || [] };
+  const one = await ww.FILLS['EMS-DIR'].build(116, { deps: d, nameOf: () => '', window: 1 });
+  const hood = one.blocks.find((x) => /— illness by neighborhood/.test(x.title));
+  assert.equal(hood.title, 'Hospital intakes — illness by neighborhood, Cycle 116');
+  assert.equal(hood.text, 'Neighborhood | Intakes | In care at end of Cycle | Beds\nChinatown | 2 | 5 | 4');
+  const every = await ww.FILLS['EMS-DIR'].build(116, { deps: d, nameOf: () => '' });
+  assert.equal(every.blocks.find((x) => /— illness by neighborhood/.test(x.title)).text, 'Neighborhood | C115 | C116\nChinatown | 3 / 6 / 6 | 2 / 5 / 4');
+  assert.equal(one.blocks.find((x) => x.title === 'Residents sick, by neighborhood').text, 'Neighborhood | Sick | Students | Adults | Seniors\nChinatown | 132 | 410 | 1502 | 396');
+  assert.equal(ww.isLean('EMS-DIR'), true);
+  // the shared reader without the option is unchanged (the health center's census, every intake)
+  tabs.Care_Justice_Census.push(Object.assign(row(116, 'neighborhood', 'Chinatown', 2, 5, 4), { IntakeType: 'all' }));
+  const hc = await ww.FILLS['PROJ-HEALTHCTR'].build(116, { deps: d, nameOf: () => '', window: 1 });
+  assert.equal(hc.blocks.find((x) => /— all intakes by neighborhood, Cycle 116$/.test(x.title)).text, 'Neighborhood | C116\nChinatown | 2');
+}));
+
 // builder 2026-11-16, on a quiet week: report against the last report
 test('a lean worker reports against its last finished report; a record that ended mid-lookup or predates the template is not one', async () => workspace(async (root) => {
   const dir = path.join(root, 'output', 'cron-civic', 'datawake');

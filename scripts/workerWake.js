@@ -257,7 +257,7 @@ function recordKit(cycle, ctx) {
   const inSet = (v, list) => list.map(fold).includes(fold(v));
   const out = [];
   const span = ctx.window ? (Number(ctx.window) === 1 ? 'Cycle ' + cycle : 'Cycles ' + (Number(cycle) - Number(ctx.window) + 1) + '–' + cycle) : '';
-  const retitle = (t) => t.replace(/, every Cycle on (the sheet|it)$|, every entry$|, each Cycle$/, '').replace(/ by Cycle$/, '') + ', ' + span;
+  const retitle = (t) => t.replace(/, every Cycle on (the sheet|it)$|, every entry$|, each Cycle$/, '').replace(/,? by Cycle$/, '') + ', ' + span;
   const add = async (title, read) => {
     cutHere = false;
     try { const t = await read(); if (t) out.push({ title: cutHere ? retitle(title) : title, text: t }); }
@@ -336,7 +336,9 @@ function recordKit(cycle, ctx) {
       return t.length ? table(t, (cols || Object.keys(t[0])).filter((c) => c in t[0])) : 'none';
     }),
     // the care-and-justice census: the city's line for each intake type by Cycle, then each neighborhood's intakes by Cycle
-    census: async (label, system, types) => {
+    // opts.care: each neighborhood's in care and beds at the end of the Cycle beside its intakes (builder 2026-11-16, on
+    // the EMS director: "Add both"); one Cycle is a table of the three, several a grid of "intakes / in care / beds"
+    census: async (label, system, types, opts) => {
       cutHere = false;
       let c = []; try { c = (await rows('Care_Justice_Census')).filter((r) => r.System === system); } catch (e) { out.push({ title: label + ', by Cycle', text: 'unavailable (' + e.message + ')' }); return; }
       const t = (x) => (cutHere ? retitle(x) : x);
@@ -346,7 +348,15 @@ function recordKit(cycle, ctx) {
       out.push({ title: t(label + ', citywide by Cycle'), text: city.length ? table(city, Object.keys(city[0])) : 'none' });
       for (const k of [...new Set(c.filter((r) => r.GeographicScope === 'neighborhood' && (!types || types.includes(r.IntakeType))).map((r) => r.IntakeType))]) {
         const hoods = [...new Set(c.filter((r) => r.GeographicScope === 'neighborhood').map((r) => r.Neighborhood))];
-        const cell = (h, cy) => { const r = c.find((x) => x.Neighborhood === h && Number(x.Cycle) === cy && x.GeographicScope === 'neighborhood' && x.IntakeType === k); return r ? r.TotalIntakes : ''; };
+        const at = (h, cy) => c.find((x) => x.Neighborhood === h && Number(x.Cycle) === cy && x.GeographicScope === 'neighborhood' && x.IntakeType === k);
+        const cell = (h, cy) => { const r = at(h, cy); return r ? r.TotalIntakes : ''; };
+        if (opts && opts.care && cyc.length === 1) {
+          const rowsK = hoods.map((h) => { const r = at(h, cyc[0]) || {}; return { Neighborhood: h, Intakes: r.TotalIntakes, 'In care at end of Cycle': r.ClosingOccupancy, Beds: r.BedsOccupied }; });
+          out.push({ title: t(label + ' — ' + k + ' by neighborhood, each Cycle'), text: table(rowsK, ['Neighborhood', 'Intakes', 'In care at end of Cycle', 'Beds']) });
+        } else if (opts && opts.care) {
+          const three = (h, cy) => { const r = at(h, cy); return r ? r.TotalIntakes + ' / ' + r.ClosingOccupancy + ' / ' + r.BedsOccupied : ''; };
+          out.push({ title: t(label + ' — ' + k + ' by neighborhood, each Cycle (intakes / in care at end of Cycle / beds)'), text: table(hoods.map((h) => Object.assign({ Neighborhood: h }, ...cyc.map((cy) => ({ ['C' + cy]: three(h, cy) })))), ['Neighborhood'].concat(cyc.map((cy) => 'C' + cy))) });
+        } else
         out.push({ title: t(label + ' — ' + k + ' intakes by neighborhood, each Cycle'), text: table(hoods.map((h) => Object.assign({ Neighborhood: h }, ...cyc.map((cy) => ({ ['C' + cy]: cell(h, cy) })))), ['Neighborhood'].concat(cyc.map((cy) => 'C' + cy))) });
       }
     },
@@ -394,11 +404,11 @@ Object.assign(FILLS, {
     await k.whole('Clearance and incidents by neighborhood', 'Crime_Metrics', ['Neighborhood', 'IncidentCount', 'ClearanceRate', 'PropertyLevel', 'ViolentLevel', 'Trend']);
   }),
   'EMS-DIR': made('hospital intakes ambulance illness injury', async (k) => {
-    await k.census('Hospital intakes', 'hospital', null);
+    await k.census('Hospital intakes', 'hospital', null, { care: true });
     await k.whole('Tracked residents in the hospital ledger', 'Hospital_Ledger');
     await k.whole('Residents waiting on a cause', 'Health_Cause_Queue');
     await k.chaos('Ambulance events, every Cycle on the sheet', ['ambulance']);
-    await k.demographics('Residents sick, by neighborhood', ['Sick', 'Adults', 'Seniors']);
+    await k.demographics('Residents sick, by neighborhood', ['Sick', 'Students', 'Adults', 'Seniors']);
     await k.arcs('Health arcs open now', (r) => /^health$/i.test(r.DomainTag) || /health/i.test(r.Type));
     await k.events('Health events on the city\'s event ledger', ['HEALTH']);
     await k.domains('Health event counts on the domain tracker, by Cycle', ['HEALTH']);

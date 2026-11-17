@@ -1,0 +1,3285 @@
+/**
+ * ============================================================================
+ * processAdvancementIntake v1.5
+ * ============================================================================
+ *
+ * v1.5 CHANGES (engine.66, S324):
+ * - Family-match drip door: checkFamilyMatchPromotions_ — GC citizens can win
+ *   the lottery INTO an open family slot on the ledger (off-camera spouse,
+ *   missing parent, uncounted kid). GC is the only door into the ledger;
+ *   a family gets realized only when the generator happened to mint someone
+ *   who fits (SIM_DOCTRINE rules 2, 5, 6).
+ * - Shared drip cap: ALL GC→SL promotions (emergence + family match) share
+ *   DRIP_CAP_PER_CYCLE = 2 (Mike-pinned S324, S322 drip rule). Emergence is
+ *   earned (deterministic, fills first); family matches roll for the rest.
+ * - processAdvancementRows_ wires family links post-mint (SpouseId/ParentIds/
+ *   ChildrenIds both ways, surname + MaidenName, household join).
+ *
+ * v1.4 CHANGES:
+ * - REMOVED logToDigest_ - main engine writeDigest_() handles Riley_Digest
+ * - Prevents partial/misformatted rows when cycle crashes mid-execution
+ *
+ * v1.3 CHANGES:
+ * - Renamed findCol_ to findColByName_ to avoid collision
+ *
+ * ============================================================================
+ */
+
+var EMERGENCE_USAGE_TYPES = [
+  'quoted', 'observed', 'profile', 'scene', 'reaction', 'witness',
+  'mentioned', 'interviewed', 'featured', 'community',
+  // engine.88 (S339): journalist progression — the author's OWN landed work
+  // counts toward their SL UsageCount. 'byline-landed' = article cleared the
+  // Rhea gate (staged, written by cron-desk-run.js); 'byline-published' =
+  // article selected into the Saturday edition (written by
+  // ingestPublishedEntities.js) — so a published article is worth 2 total.
+  // Legacy 'byline' (a citizen merely credited as author in a media paste)
+  // stays excluded below.
+  'byline-landed', 'byline-published'
+];
+
+var NON_EMERGENCE_USAGE_TYPES = [
+  'byline', 'stats', 'official', 'roster', 'routine', 'coverage', 'announcement'
+];
+
+// engine.304 (builder 2026-10-19, R18; plan engine.286 §engine.304 D10): a tracked citizen naming a linked
+// family member in their own words (lib/citizenPage.js writes the row). It is usage of that background
+// citizen — EmergenceCount ticks — and never media coverage: no ledger UsageCount, no earned citation, no
+// recent-attention mark, no Intake route, no media appearance.
+var FAMILY_USAGE_TYPES = ['family-own-words'];
+function isFamilyUsage_(usageType) {
+  var t = String(usageType || '').trim().toLowerCase();
+  return FAMILY_USAGE_TYPES.indexOf(t) >= 0;
+}
+
+// S184 Row 17 fix — demographic-voice fallback pool (Path B).
+// Used only when an intake row's RoleType is empty AND the citizen is NEW.
+// Preferred path: upstream intake writers compute RoleType. This pool is the
+// safety-net so the literal "Citizen" sentinel never lands on the live ledger.
+// Source: live Simulation_Ledger top demographic voices (S94 cohort) + LEDGER_AUDIT §7
+// 15-category distribution. Neighborhood-blind by design — fallback is a safety net,
+// not a replacement for real upstream role assignment.
+var DEMOGRAPHIC_VOICE_ROLES = [
+  // Port & Labor
+  'Longshoreman', 'Crane Operator', 'Trade Union Representative', 'Harbor Tugboat Captain', 'Container Yard Supervisor',
+  // Construction
+  'Site Foreman', 'Ironworker', 'Construction Engineer', 'Construction Safety Inspector', 'Construction Laborer',
+  // Transit & Infrastructure
+  'BART Station Manager', 'Bus Driver', 'Smart Grid Technician', 'Sea Level Monitoring Technician',
+  // Healthcare
+  'ER Nurse', 'Trauma Surgeon', 'Mental Health Counselor', 'Nurse Aide', 'Home Health Aide',
+  // Education
+  'Public School Teacher', 'ESL Instructor', 'Youth Literacy Coordinator',
+  // Tech & Innovation
+  'Autonomous Systems Engineer', 'Biotech Lab Director', 'AI Safety Researcher',
+  // Small Business
+  'Taqueria Owner', 'Independent Bookstore Owner', 'Craft Brewery Owner', 'Tea House Owner', 'Sourdough Baker', 'Vintage Clothing Store Owner', 'Food Truck Operator',
+  // Creative & Arts
+  'Muralist', 'Theater Director', 'Fashion Designer', 'Hip-Hop Producer',
+  // Professional
+  'Immigrant Legal Aid Worker', 'Public Defender', 'Corporate Accountant',
+  // Government & Civic
+  'City Building Inspector', 'Social Worker', 'Firefighter', 'Emergency Management Coordinator',
+  // Faith & Community
+  'Community Organizer', 'Mutual Aid Network Organizer', 'Refugee Resettlement Case Worker', 'Tenant Advocate',
+  // 2041-specific
+  'Climate Adaptation Engineer', 'Vertical Farm Technician', 'Drone Fleet Coordinator',
+  // Trades
+  'Electrician', 'Plumber', 'Solar Installer', 'Mechanic', 'Carpenter', 'Welder',
+  // Service & Hospitality
+  'Barista', 'Line Cook', 'Server', 'Bartender', 'Hair Stylist', 'Taxi Driver',
+  // The Vulnerable
+  'Homeless Outreach Worker', 'Ex-Offender Reentry Counselor', 'Domestic Violence Shelter Coordinator'
+];
+
+// Deterministic per-citizen draw — same first+last always maps to same role.
+// djb2 string hash; Apps Script-safe (no crypto / Buffer / Math.random).
+// hashSeed_ def deleted S199 (Phase B.4 collision dedup) — identical impl
+// lives in utilities/citizenDerivation.js (the right home for a generic
+// hash helper), resolved via flat namespace. Internal callers below use
+// the global def.
+
+function pickDemographicVoiceRole_(seed) {
+  return DEMOGRAPHIC_VOICE_ROLES[hashSeed_(seed) % DEMOGRAPHIC_VOICE_ROLES.length];
+}
+
+// Phase 42 §B7 (Row 8, S269) — processed-flag write, cycle/operator ctx-branch.
+// Cycle path: queue through writeIntents so the 'Y' flag commits at Phase 10
+// ATOMICALLY with the same-cycle UsageCount bump (which lands in ctx.ledger,
+// also committed at Phase 10). A crash between Phase 5 and Phase 10 then loses
+// neither — else the row would be flag='Y' but bump-less, skipped forever on
+// the next cycle (the L300-ish `alreadyProcessed → continue` guard).
+// Operator path (runAdvancementIntakeManual) sets ctx.manualRun and never runs
+// Phase 10, so it writes direct — same behavior it always had.
+// NOTE: the 'Processed' header-create (processMediaUsage_ L~206) intentionally
+// stays a DIRECT write — the column must physically exist before Phase 10
+// commits these cell intents.
+function markUsageProcessed_(ctx, usageSheet, row1, col1, value) {
+  if (ctx && ctx.manualRun) {
+    usageSheet.getRange(row1, col1).setValue(value);
+  } else {
+    queueCellIntent_(ctx, 'Citizen_Media_Usage', row1, col1, value,
+      'advancement: mark media-usage row processed', 'citizens');
+  }
+}
+
+function processAdvancementIntake_(ctx) {
+  var ss = ctx ? ctx.ss : openSimSpreadsheet_(); // v2.14: Use configured spreadsheet ID
+  var cycle = ctx ? (ctx.summary.cycleId || ctx.config.cycleCount || 0) : getCurrentCycleFromConfig_(ss);
+  var now = 'C' + cycle; // S290 in-world, not wall-clock (engine.44)
+  
+  var results = {
+    usageProcessed: 0,
+    usageSkipped: 0,
+    advancementsProcessed: 0,
+    promotionsTriggered: 0,
+    errors: []
+  };
+  
+  Logger.log('processAdvancementIntake_ v1.4 starting - Cycle ' + cycle);
+
+  // Phase 42 §5.6: SL read/mutate via shared ctx.ledger; commit at Phase 10.
+  // Sub-functions take ctx so they can access ctx.ledger.headers/rows.
+  if (!ctx || !ctx.ledger) {
+    throw new Error('processAdvancementIntake_: ctx.ledger not initialized (manual path must seed via runAdvancementIntakeManual)');
+  }
+
+  var usageResults = processMediaUsage_(ctx, now, cycle);
+  results.usageProcessed = usageResults.processed;
+  results.usageSkipped = usageResults.skipped;
+  results.paperFame = usageResults.paperFame || 0;                    // engine.312: rows credited to a fame row
+  results.paperFameNoRow = usageResults.paperFameNoRow || 0;          // a citizen with no Cultural_Ledger row
+  results.paperFameUnresolved = usageResults.paperFameUnresolved || 0; // a coverage row with no unique ledger citizen
+
+  // engine.150 (S412, builder-direct): the ladder is a STATE — every cycle a
+  // citizen's Tier follows the bar their EARNED count clears. Runs before decay
+  // so a rung climbed this cycle is on the row when decay reads it next time.
+  var ladderResults = applyTierLadderState_(ctx, cycle);
+  results.promotionsTriggered = ladderResults.promoted;
+  results.ladderSeededHeld = ladderResults.seededHeld;
+
+  // engine.69 (S325, Mike-approved): attention fades, earned tiers follow.
+  decayMediaAttention_(ctx, cycle);
+
+  // engine.58 (S320): emergence-promotion checkpoint — GC citizens whose
+  // EmergenceCount reached the threshold win the lottery: queued as
+  // Advancement_Intake1 rows here, promoted to full SL rows by
+  // processAdvancementRows_ immediately below (same cycle). Single checkpoint
+  // catches every count source: media usage (above), intake re-mentions
+  // (Phase 1), event surfacing (generateCitizensEvents).
+  var emergenceResults = checkEmergencePromotions_(ss, cycle, DRIP_CAP_PER_CYCLE, simYearOf_(ctx, cycle), ctx);
+  results.emergencePromotionsQueued = emergenceResults.queued;
+  results.familyEmergencesQueued = emergenceResults.family;
+
+  // engine.304 (builder 2026-10-19, R16–R17): the family lottery links a background
+  // citizen to a family and mints nobody — it spends no cap slot. The link reaches
+  // the ledger through the emergence door above, under the same cap, when used.
+  var familyResults = checkFamilyMatchPromotions_(ctx, cycle);
+  results.familyLinks = familyResults.linked;
+  results.familyLinksReleased = familyResults.released;
+
+  // engine.96 Task 12 (S440): the owner door — "the business is the reason."
+  // Takes only the cap slots emergence left this cycle (engine.304: the family door spends none).
+  var ownerResults = checkBusinessOwnerPromotions_(ctx, cycle,
+    DRIP_CAP_PER_CYCLE - emergenceResults.queued);
+  results.ownerMintsQueued = ownerResults.queued;
+
+  var advResults = processAdvancementRows_(ctx, now, cycle);
+  results.advancementsProcessed = advResults.processed;
+  results.ownersWired = advResults.ownersWired;
+
+  // engine.59 (S320): namers → bonds. A promoted GC enters the world knowing
+  // the citizens who kept naming them — friendship bonds seeded from the
+  // EmergenceContext roster. Bonds land in ctx.summary.relationshipBonds
+  // (loaded Phase5-LoadBonds, saved Phase10-Bonds — order verified).
+  var bondSeedResults = seedEmergenceBonds_(ctx, cycle);
+  results.emergenceBondsSeeded = bondSeedResults.seeded;
+
+  
+  Logger.log('processAdvancementIntake_ v1.4 complete: ' + JSON.stringify(results));
+  return results;
+}
+
+function runAdvancementIntakeManual() {
+  // Phase 42 §5.6: manual path seeds ctx.ledger and commits inline
+  // (cycle path's Phase 10 commitSimulationLedger_ is not in this scope).
+  var ss = openSimSpreadsheet_();
+  var ledgerSheet = ss.getSheetByName('Simulation_Ledger');
+  if (!ledgerSheet) {
+    SpreadsheetApp.getActive().toast('Simulation_Ledger missing', '⚠️ Advancement Aborted', 10);
+    return;
+  }
+  var values = ledgerSheet.getDataRange().getValues();
+  var ctx = {
+    ss: ss,
+    now: new Date(),
+    summary: { cycleId: getCurrentCycleFromConfig_(ss) },
+    config: {},
+    manualRun: true,  // Phase 42 §B7 (S269): no Phase 10 here — processed-flag
+                      // writes go direct (queued intents would never commit).
+    ledger: {
+      sheet: 'Simulation_Ledger',
+      headers: values[0],
+      rows: values.slice(1),
+      dirty: false
+    }
+  };
+
+  var results = processAdvancementIntake_(ctx);
+  // engine.312: the paper credits ride the fame accumulator; with no Phase 7 /
+  // Phase 10 here the flush writes them direct, as the Processed marks went.
+  flushCulturalFame_(ctx);
+
+  if (ctx.ledger.dirty && ctx.ledger.rows.length) {
+    ledgerSheet.getRange(2, 1, ctx.ledger.rows.length, ctx.ledger.headers.length)
+               .setValues(ctx.ledger.rows);
+  }
+
+  SpreadsheetApp.getActive().toast(
+    'Usage: ' + results.usageProcessed + ' (skipped: ' + results.usageSkipped + ')' +
+    ', Advancements: ' + results.advancementsProcessed +
+    ', Promotions: ' + results.promotionsTriggered,
+    '✅ Advancement Complete', 10
+  );
+}
+
+function getCurrentCycleFromConfig_(ss) {
+  var configSheet = ss.getSheetByName('World_Config');
+  if (!configSheet) return 0;
+  var data = configSheet.getDataRange().getValues();
+  for (var i = 0; i < data.length; i++) {
+    if (String(data[i][0]).trim() === 'cycleCount') {
+      return Number(data[i][1]) || 0;
+    }
+  }
+  return 0;
+}
+
+function findColByName_(headers, name) {
+  for (var i = 0; i < headers.length; i++) {
+    if (String(headers[i]).trim() === name) return i;
+  }
+  for (var j = 0; j < headers.length; j++) {
+    if (String(headers[j]).trim().toLowerCase().startsWith(name.toLowerCase())) return j;
+  }
+  return -1;
+}
+
+function isEmergenceUsage_(usageType) {
+  if (!usageType) return true;
+  var type = String(usageType).trim().toLowerCase();
+  for (var i = 0; i < EMERGENCE_USAGE_TYPES.length; i++) {
+    if (type === EMERGENCE_USAGE_TYPES[i].toLowerCase()) return true;
+  }
+  for (var j = 0; j < NON_EMERGENCE_USAGE_TYPES.length; j++) {
+    if (type === NON_EMERGENCE_USAGE_TYPES[j].toLowerCase()) return false;
+  }
+  return true;
+}
+
+/**
+ * S302 UsageCount feeder fix — name normalization + honorific handling.
+ * Ported from scripts/ingestPublishedEntities.js (normalizeFullName +
+ * HONORIFIC_RE, G-P-C97-1 / ENGINE_REPAIR Row 30 semantics). The old exact
+ * case-insensitive First+Last match silently dropped "Dr. Vinnie Keane",
+ * "O'Neil"/"ONeil", accent variants — starving tier promotion.
+ */
+// engine.162 (builder 2026-09-04, Direction pt 25): the base a sports player
+// arrives on. It is not an arbitrary floor — $100k is what a minor-league
+// player makes at the bottom of the professional ladder, so a citizen an
+// article introduces as a player starts there when the ingest offers no
+// salary. Advancement_Intake1 carries no salary column at all (17 cols,
+// ClockMode and EmployerBizId among them, no Income), so for a GAME row this
+// base is the only number available at the door.
+var SPORTS_BASE_SALARY = 100000;
+
+var USAGE_HONORIFIC_RE = /^(?:dr|rev|revd|fr|prof|professor|mr|mrs|ms|mx|bishop|rabbi|imam|pastor|deacon|sister|father|mother|elder|hon|sen|rep|gov|mayor|councilmember|councilman|councilwoman|capt|lt|sgt|ofc|det|chief)\.?$/i;
+
+function normalizeCitizenName_(name) {
+  return String(name || '')
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/**
+ * Split a raw usage-row name into {first, last}. Strips ONE leading honorific
+ * when a real first+last remain ("Dr. Vinnie Keane" -> Vinnie/Keane).
+ * Returns null when the name is not safely identifiable:
+ * honorific+surname only ("Dr. Keane" — Row 30 mint-vector class) or a
+ * single bare token. Null = skip, never guess.
+ */
+function splitUsageName_(rawName) {
+  var parts = String(rawName || '').trim().split(/\s+/);
+  if (parts.length >= 3 && USAGE_HONORIFIC_RE.test(parts[0])) parts = parts.slice(1);
+  if (parts.length < 2) return null;
+  if (USAGE_HONORIFIC_RE.test(parts[0])) return null; // honorific+surname — ambiguous
+  return { first: parts[0], last: parts.slice(1).join(' ') };
+}
+
+/**
+ * engine.51 T5: find an income for a role by scanning all category salary
+ * pools (built by buildIntakeSalaryPools_ in godWorldEngine2.js). Exact
+ * role match then contains-match; null when unknown — caller leaves income
+ * untouched rather than inventing.
+ */
+function rederiveIncomeForRole_(pools, role, rng) {
+  var g = String(role || '').toLowerCase();
+  if (!g) return null;
+  var pick = null;
+  for (var cat in pools) {
+    var pool = pools[cat];
+    for (var i = 0; i < pool.length; i++) {
+      if (pool[i].role.toLowerCase() === g) { pick = pool[i]; break; }
+    }
+    if (pick) break;
+  }
+  if (!pick) {
+    for (var cat2 in pools) {
+      var pool2 = pools[cat2];
+      for (var j = 0; j < pool2.length; j++) {
+        if (pool2[j].role.toLowerCase().indexOf(g) !== -1 || g.indexOf(pool2[j].role.toLowerCase()) !== -1) { pick = pool2[j]; break; }
+      }
+      if (pick) break;
+    }
+  }
+  if (!pick) return null;
+  return Math.round((pick.min + rng() * Math.max(0, pick.max - pick.min)) / 100) * 100;
+}
+
+/**
+ * Build normalized-fullname -> [row indices] map. Keys with >1 row are
+ * normalization collisions; callers treat them as ambiguous and skip.
+ */
+function buildNameIndex_(rows, firstCol, lastCol, filterFn, startRow) {
+  var index = {};
+  for (var r = startRow || 0; r < rows.length; r++) {
+    if (filterFn && !filterFn(rows[r])) continue;
+    var key = normalizeCitizenName_(rows[r][firstCol]) + ' ' + normalizeCitizenName_(rows[r][lastCol]);
+    if (key === ' ') continue;
+    if (!index[key]) index[key] = [];
+    index[key].push(r);
+  }
+  return index;
+}
+
+function processMediaUsage_(ctx, now, cycle) {
+  var ss = ctx.ss;
+  var results = { processed: 0, skipped: 0, promotionsTriggered: 0 };
+  if (ctx.summary) ctx.summary.paperFameByPop = {};   // engine.312: set below from the whole tab
+
+  var usageSheet = ss.getSheetByName('Citizen_Media_Usage');
+  if (!usageSheet) return results;
+  
+  var usageData = usageSheet.getDataRange().getValues();
+  if (usageData.length < 2) return results;
+  
+  var usageHeaders = usageData[0];
+  var nameCol = findColByName_(usageHeaders, 'CitizenName');
+  if (nameCol < 0) nameCol = findColByName_(usageHeaders, 'Name');
+  var usageTypeCol = findColByName_(usageHeaders, 'UsageType');
+  var processedCol = findColByName_(usageHeaders, 'Processed');
+  var contextCol = findColByName_(usageHeaders, 'Context');
+  var sentimentCol = findColByName_(usageHeaders, 'Sentiment'); // engine.152: positive | neutral | negative | blank(=neutral)
+  
+  if (nameCol < 0) return results;
+  
+  if (processedCol < 0) {
+    processedCol = usageHeaders.length;
+    usageSheet.getRange(1, processedCol + 1).setValue('Processed');
+  }
+  if (sentimentCol < 0) {
+    // engine.152 (S412): coverage runs both ways — the column self-arms like Processed.
+    sentimentCol = Math.max(usageHeaders.length, processedCol + 1);
+    usageSheet.getRange(1, sentimentCol + 1).setValue('Sentiment');
+  }
+  // engine.312 R2.1(a): where a row came from, when its writer says — the
+  // Phase-11 media-room copy writes 'media-room' (no print source, fame 0).
+  // Self-arms like Sentiment; read by exact header (findColByName_'s prefix
+  // fallback would let 'Source' match some other column).
+  var sourceCol = -1;
+  for (var sc = 0; sc < usageHeaders.length; sc++) if (String(usageHeaders[sc]).trim() === 'Source') sourceCol = sc;
+  if (sourceCol < 0) {
+    sourceCol = Math.max(usageHeaders.length, processedCol + 1, sentimentCol + 1);
+    usageSheet.getRange(1, sourceCol + 1).setValue('Source');
+  }
+  // engine.312 R1: one row's paper delta by the one record rule
+  // (paperFameDelta_, culturalLedger.js) — Phase-5 credits and S.paperFameByPop
+  // read it, so the two cannot disagree.
+  var paperFameRowDelta_ = function(r) {
+    return paperFameDelta_(usageTypeCol >= 0 ? r[usageTypeCol] : '', sentimentCol >= 0 ? r[sentimentCol] : '', r[sourceCol]);
+  };
+  
+  var genericSheet = ss.getSheetByName('Generic_Citizens');
+  var genericData = genericSheet ? genericSheet.getDataRange().getValues() : [];
+  var genericHeaders = genericData.length > 0 ? genericData[0] : [];
+  var gFirstCol = findColByName_(genericHeaders, 'First');
+  var gLastCol = findColByName_(genericHeaders, 'Last');
+  var gEmergenceCol = findColByName_(genericHeaders, 'EmergenceCount');
+  var gStatusCol = findColByName_(genericHeaders, 'Status');
+  
+  // Phase 42 §5.6: read SL from shared ctx.ledger; mutations land in place.
+  var ledgerHeaders = ctx.ledger.headers;
+  var ledgerRows = ctx.ledger.rows;
+  var lFirstCol = findColByName_(ledgerHeaders, 'First');
+  var lLastCol = findColByName_(ledgerHeaders, 'Last');
+  var lTierCol = findColByName_(ledgerHeaders, 'Tier');
+  var lUsageCol = findColByName_(ledgerHeaders, 'UsageCount');
+  var lPopIdCol = findColByName_(ledgerHeaders, 'POPID');
+  var lFamousCol = findColByName_(ledgerHeaders, 'Famous'); // engine.118
+  
+  var genericUpdates = {};
+  var ledgerUpdates = {};
+  var logSheet = ss.getSheetByName('LifeHistory_Log');
+
+  // S302: normalized-name indexes built once (O(rows)), replacing the exact
+  // case-insensitive linear scans that dropped honorific/punctuation/accent
+  // variants. Keys with >1 row are ambiguous — skipped, never guessed.
+  var ledgerIndex = (lFirstCol >= 0 && lLastCol >= 0)
+    ? buildNameIndex_(ledgerRows, lFirstCol, lLastCol, null, 0)   // ctx.ledger.rows is body-only
+    : {};
+  var genericIndex = (genericData.length > 1 && gFirstCol >= 0 && gLastCol >= 0)
+    ? buildNameIndex_(genericData, gFirstCol, gLastCol, function(r) {
+        if (gStatusCol >= 0 && String(r[gStatusCol] || '') !== 'Active' && String(r[gStatusCol] || '') !== 'Family') return false; // engine.304: naming a linked family member is usage
+        return true;
+      }, 1)                                                       // genericData[0] is the header row
+    : {};
+
+  // engine.304 D10 (codex cut-3 review B4): one family-own-words row per member per page, enforced where the count
+  // happens — two wakes racing on one page id can both append; only the first row (processed or not) ever ticks.
+  var familyKeyOf = function (r) {
+    if (usageTypeCol < 0 || !isFamilyUsage_(r[usageTypeCol])) return '';
+    return String(r[nameCol] || '').trim().toLowerCase() + '|' + (contextCol >= 0 ? String(r[contextCol] || '').trim() : '');
+  };
+  var familyFirstRow = {};
+  for (var fpre = 1; fpre < usageData.length; fpre++) {
+    var fkey = familyKeyOf(usageData[fpre]);
+    if (!fkey) continue;
+    var fdone = processedCol >= 0 && usageData[fpre][processedCol] === 'Y';
+    if (fdone) familyFirstRow[fkey] = -1;                         // already counted in an earlier pass
+    else if (!(fkey in familyFirstRow)) familyFirstRow[fkey] = fpre; // the first unprocessed row is the one that ticks
+  }
+
+  // engine.312 (codex diff gate 1 §2): the fame accumulator opens before the first Processed mark — an
+  // unreadable or malformed Cultural_Ledger throws here and the phase stops with no row marked, so no
+  // credit is ever converted into "no row" while its mark persists.
+  culturalFameAccum_(ctx);
+
+  for (var i = 1; i < usageData.length; i++) {
+    var row = usageData[i];
+    var citizenName = row[nameCol] ? String(row[nameCol]).trim() : '';
+    var usageType = usageTypeCol >= 0 ? String(row[usageTypeCol] || '').trim() : '';
+    var context = contextCol >= 0 ? String(row[contextCol] || '').trim() : '';
+    var hardLight = sentimentCol >= 0 && String(row[sentimentCol] || '').trim().toLowerCase() === 'negative'; // engine.152
+    var alreadyProcessed = processedCol >= 0 && row[processedCol] === 'Y';
+
+    if (!citizenName || alreadyProcessed) continue;
+
+    var countsForEmergence = isEmergenceUsage_(usageType);
+    var famKey = familyKeyOf(row);
+    if (famKey && familyFirstRow[famKey] !== i) { // a duplicate of a row that already ticked, or will this pass
+      markUsageProcessed_(ctx, usageSheet, i + 1, processedCol + 1, 'Y');
+      results.skipped++;
+      continue;
+    }
+
+    if (!countsForEmergence) {
+      markUsageProcessed_(ctx, usageSheet, i + 1, processedCol + 1, 'Y');
+      results.skipped++;
+      continue;
+    }
+
+    var split = splitUsageName_(citizenName);
+    var found = false;
+    var ledgerHit = false;
+
+    if (split) {
+      var usageKey = normalizeCitizenName_(split.first) + ' ' + normalizeCitizenName_(split.last);
+      var ledgerHits = isFamilyUsage_(usageType) ? [] : (ledgerIndex[usageKey] || []); // engine.304 D10: a family row ticks the background citizen only
+
+      if (ledgerHits.length === 1) {
+        var lr = ledgerHits[0];
+        {
+          found = true;
+          ledgerHit = true;
+
+          var currentUsage = ledgerUpdates[lr] ? ledgerUpdates[lr].usageCount :
+                            (lUsageCol >= 0 ? (Number(ledgerRows[lr][lUsageCol]) || 0) : 0);
+          // engine.152 (S412, builder: "exposure can become negative as well"):
+          // a citation in a hard light counts AGAINST the name — one down, floor 0.
+          // The state pass then holds or lowers nothing itself (upward only);
+          // decay's bar does the demoting when the earned count falls under it.
+          var isFamous = lFamousCol >= 0 && String(ledgerRows[lr][lFamousCol] || '').trim() !== '';
+          // engine.118: a famous name cannot shrink — the hard light moves FameScore instead (engine.312: −2 by the paper credit below)
+          var newUsage = hardLight ? (isFamous ? currentUsage : Math.max(0, currentUsage - 1)) : currentUsage + 1;
+          if (hardLight) results.hardLight = (results.hardLight || 0) + 1;
+
+          var currentTier = ledgerUpdates[lr] ? ledgerUpdates[lr].tier :
+                           (lTierCol >= 0 ? (Number(ledgerRows[lr][lTierCol]) || 4) : 4);
+          // engine.150 (S412): the Tier decision no longer lives on the citation
+          // event. applyTierLadderState_ (same cycle, right after this pass)
+          // promotes on the EARNED count — citations on record — so a seeded
+          // cell never carries a citizen up on its own. Only the count moves here.
+          var newTier = currentTier;
+          var popId = lPopIdCol >= 0 ? ledgerRows[lr][lPopIdCol] : '';
+
+          // engine.329 (codex 10-31): `hard` ORs across this citizen's rows, so the
+          // context the hard-light line names must be the hard row's own. The first
+          // hard row of the pass sticks; a later neutral row (or a later hard one)
+          // never overwrites the piece that was not kind.
+          var priorUpdate = ledgerUpdates[lr];
+          var priorHard = !!(priorUpdate && priorUpdate.hard);
+          ledgerUpdates[lr] = {
+            usageCount: newUsage, tier: newTier,
+            name: String(ledgerRows[lr][lFirstCol] || '').trim() + ' ' + String(ledgerRows[lr][lLastCol] || '').trim(),
+            popId: popId, oldTier: currentTier,
+            usageType: priorHard ? priorUpdate.usageType : usageType,
+            context: priorHard ? priorUpdate.context : context,
+            hard: hardLight || priorHard,
+            famous: isFamous
+          };
+
+          // engine.312 R2: the paper moves fame — this accepted row's delta onto
+          // the citizen's target Cultural_Ledger row, in the same step that
+          // queues its Processed mark (a credit is never marked without being
+          // accumulated). Every pending Cycle counts, not only this one.
+          var fameDelta = paperFameRowDelta_(row);
+          if (fameDelta && popId) {
+            if (culturalFameAddPaper_(ctx, popId, fameDelta)) results.paperFame = (results.paperFame || 0) + 1;
+            else results.paperFameNoRow = (results.paperFameNoRow || 0) + 1;
+          }
+        }
+      } else if (ledgerHits.length > 1) {
+        // Normalization collision — two+ ledger citizens share this name.
+        // Ambiguous: skip, never guess (Row 30 discipline).
+        Logger.log('processMediaUsage_: ambiguous name "' + citizenName + '" matches ' + ledgerHits.length + ' ledger rows — skipped');
+      }
+
+      if (!found) {
+        var genericHits = genericIndex[usageKey] || [];
+        if (genericHits.length === 1) {
+          var gr = genericHits[0];
+          found = true;
+          var currentEmergence = genericUpdates[gr] !== undefined ? genericUpdates[gr] :
+                                (gEmergenceCol >= 0 ? (Number(genericData[gr][gEmergenceCol]) || 0) : 0);
+          if (!hardLight) genericUpdates[gr] = currentEmergence + 1; // engine.152: a hard mention is no lottery ticket
+        } else if (genericHits.length > 1) {
+          Logger.log('processMediaUsage_: ambiguous name "' + citizenName + '" matches ' + genericHits.length + ' Generic_Citizens rows — skipped');
+        }
+      }
+    }
+
+    // engine.312: a coverage row with no unique ledger citizen moves no fame (counted, never guessed)
+    if (!ledgerHit && paperFameRowDelta_(row)) results.paperFameUnresolved = (results.paperFameUnresolved || 0) + 1;
+    markUsageProcessed_(ctx, usageSheet, i + 1, processedCol + 1, 'Y');
+    if (found) {
+      results.processed++;
+    } else {
+      results.skipped++;
+    }
+  }
+  
+  // engine.312 R3: every citizen's whole paper record — every row of the tab,
+  // Processed or not, by the same rule and the same name resolution as the
+  // credits above (family rows and ambiguous names add nothing). The start of a
+  // Cultural_Ledger row created for the citizen this Cycle (registrar CREATE).
+  // Not the re-base manifest: an old own-byline row typed 'mentioned' counts +1
+  // here and 0 in the re-base (plan §engine.312 R5 limit).
+  var paperByPop = {};
+  if (lPopIdCol >= 0) {
+    for (var pf = 1; pf < usageData.length; pf++) {
+      var pRow = usageData[pf];
+      var pDelta = paperFameRowDelta_(pRow);
+      if (!pDelta || (usageTypeCol >= 0 && isFamilyUsage_(pRow[usageTypeCol]))) continue;
+      var pSplit = splitUsageName_(String(pRow[nameCol] || '').trim());
+      if (!pSplit) continue;
+      var pHits = ledgerIndex[normalizeCitizenName_(pSplit.first) + ' ' + normalizeCitizenName_(pSplit.last)] || [];
+      if (pHits.length !== 1) continue;
+      var pPop = String(ledgerRows[pHits[0]][lPopIdCol] || '').trim().toUpperCase();
+      if (pPop) paperByPop[pPop] = (paperByPop[pPop] || 0) + pDelta;
+    }
+  }
+  if (ctx.summary) ctx.summary.paperFameByPop = paperByPop;
+
+  if (genericSheet && gEmergenceCol >= 0 && genericData.length > 1) {
+    // engine.230: ONE column write instead of a setValue per touched GC row — each was its own
+    // Sheets call, and this phase's wall doubles with per-call latency (bench 79 s at night →
+    // 140–152 s in the afternoon; a killed run at the 6-minute cap). The column is rebuilt from
+    // the values read at the top of this function plus this Cycle's increments; nothing else
+    // writes EmergenceCount inside the phase.
+    var gTouched = 0;
+    var emergenceCol = [];
+    for (var gi = 1; gi < genericData.length; gi++) {
+      if (genericUpdates[gi] !== undefined) { emergenceCol.push([genericUpdates[gi]]); gTouched++; }
+      else emergenceCol.push([genericData[gi][gEmergenceCol] === undefined ? '' : genericData[gi][gEmergenceCol]]);
+    }
+    if (gTouched > 0) genericSheet.getRange(2, gEmergenceCol + 1, emergenceCol.length, 1).setValues(emergenceCol);
+  }
+  
+  // Phase 42 §5.6: per-row mutations on ctx.ledger.rows; flip dirty.
+  var ledgerDirtied = false;
+  for (var lRow in ledgerUpdates) {
+    var update = ledgerUpdates[lRow];
+    var rowIdx = Number(lRow);
+    if (lUsageCol >= 0) {
+      ledgerRows[rowIdx][lUsageCol] = update.usageCount;
+      ledgerDirtied = true;
+    }
+    if (update.hard) {
+      // engine.152: the hard light is a moment in the life, and a log row
+      var lLife152 = findColByName_(ledgerHeaders, 'LifeHistory');
+      var stamp152 = (typeof inWorldStamp_ === 'function') ? inWorldStamp_(ctx) : ('C' + cycle);
+      // pipeline.99: Context is an ops key; engine.163's seam turns it into words before it reaches a life
+      var said152 = (typeof describeUsageContext_ === 'function') ? describeUsageContext_(update.context) : update.context;
+      // engine.118: a famous name does not shrink; engine.312: the hard light's −2 rides the paper credit
+      var line152 = stamp152 + (update.famous
+        ? ' — [Media-Composure-Down-M] Named in a hard light — the coverage was not kind, and a name this big does not shrink; the shine dims (' + (said152 || 'the paper') + ')'
+        : ' — [Media-Composure-Down-M] Named in a hard light — the coverage was not kind (' + (said152 || 'the paper') + ')');   // engine.349: the bare [Media] key is +4 sociability — unkind coverage read as recognition
+      if (lLife152 >= 0) ledgerRows[rowIdx][lLife152] = (ledgerRows[rowIdx][lLife152] ? ledgerRows[rowIdx][lLife152] + '\n' : '') + line152;
+      if (typeof queueAppendIntent_ === 'function') {
+        queueAppendIntent_(ctx, 'LifeHistory_Log', ['C' + cycle, update.popId, update.name || '', 'Media|hard-light',
+          'Named in a hard light — UsageCount now ' + update.usageCount + ' (' + (said152 || '') + ')', '', cycle], 'engine.152 hard light', 'citizens', 100);
+      }
+      ledgerDirtied = true;
+    }
+    if (lTierCol >= 0 && update.tier !== update.oldTier) {
+      ledgerRows[rowIdx][lTierCol] = update.tier;
+      ledgerDirtied = true;
+      if (logSheet) {
+        logSheet.appendRow([now, update.popId, update.name || '', 'Promotion',
+          'Advanced from Tier ' + update.oldTier + ' to Tier ' + update.tier,
+          '', cycle]);
+      }
+    }
+  }
+  if (ledgerDirtied) ctx.ledger.dirty = true;
+  
+  return results;
+}
+
+// engine.279: the pass's LifeHistory_Log lines are buffered and written once.
+// Each was its own appendRow against a 20,000-row tab — one Sheets call per
+// logged row, 112 of them on the C110 queue (Phase5-Advancement 64.6 s on the
+// bench, 13 s on an ordinary week). The buffer stands in for the sheet: the
+// body and its helpers only ever call appendRow on it. One write, the
+// executor's batch-append shape: tail computed once, setValues under retry
+// (a re-attempt rewrites the same cells). A flush is attempted once, never twice.
+function advancementLogBuffer_(sheet, label) {   // engine.285: Phase-11 media routing buffers Advancement_Intake1 / Intake the same way
+  var buffer = { rows: [], attempted: false, sheet: null };
+  if (!sheet) { buffer.flush = function() { return 0; }; return buffer; }
+  buffer.sheet = { appendRow: function(row) { buffer.rows.push(row); } };
+  buffer.flush = function() {
+    if (buffer.attempted || !buffer.rows.length) return 0;
+    buffer.attempted = true;
+    var width = 0;
+    for (var w = 0; w < buffer.rows.length; w++) width = Math.max(width, buffer.rows[w].length);
+    var padded = [];
+    for (var p = 0; p < buffer.rows.length; p++) {
+      var line = buffer.rows[p].slice();
+      while (line.length < width) line.push('');
+      padded.push(line);
+    }
+    var target = sheet.getLastRow() + 1;
+    var write = function() { sheet.getRange(target, 1, padded.length, width).setValues(padded); };
+    if (typeof persistWithRetry_ === 'function') persistWithRetry_(write, label || 'LifeHistory_Log advancement lines');
+    else write();
+    return padded.length;
+  };
+  return buffer;
+}
+
+function processAdvancementRows_(ctx, now, cycle) {
+  var log = advancementLogBuffer_(ctx.ss.getSheetByName('LifeHistory_Log'));
+  try {
+    return processAdvancementRowsBody_(ctx, now, cycle, log);
+  } catch (bodyErr) {
+    // The lines for ledger rows already changed still land (the per-row appends
+    // did). The body's error is the one thrown; a second failure never replaces it.
+    try { log.flush(); } catch (flushErr) {
+      Logger.log('processAdvancementRows_: the log write also failed — ' + flushErr.message);
+    }
+    throw bodyErr;
+  }
+}
+
+function processAdvancementRowsBody_(ctx, now, cycle, log) {
+  var ss = ctx.ss;
+  var results = { processed: 0 };
+
+  var intakeSheet = ss.getSheetByName('Advancement_Intake1');
+  if (!intakeSheet) return results;
+
+  // Phase 42 §5.6: read SL from shared ctx.ledger; mutations land in place;
+  // new citizens push to ctx.ledger.rows (impl shape #18).
+  var logSheet = log.sheet;
+  var genericSheet = ss.getSheetByName('Generic_Citizens');
+  var genericHeld = {}; // engine.279: Generic_Citizens is read once for the pass
+
+  var intakeData = intakeSheet.getDataRange().getValues();
+  if (intakeData.length < 2) {
+    Logger.log('processAdvancementRows_: No data rows in intake');
+    return results;
+  }
+
+  var intakeHeaders = intakeData[0];
+  var ledgerHeaders = ctx.ledger.headers;
+  var ledgerRows = ctx.ledger.rows;
+  
+  var iFirst = findColByName_(intakeHeaders, 'First');
+  var iMiddle = findColByName_(intakeHeaders, 'Middle');
+  var iLast = findColByName_(intakeHeaders, 'Last');
+  var iRoleType = findColByName_(intakeHeaders, 'RoleType');
+  var iTier = findColByName_(intakeHeaders, 'Tier');
+  var iClockMode = findColByName_(intakeHeaders, 'ClockMode');
+  var iNotes = findColByName_(intakeHeaders, 'Notes');
+  // S184 (Phase 4.1.b) — optional columns; not in default Advancement_Intake1
+  // schema but present if upstream writer adds them.
+  var iBirthYear = findColByName_(intakeHeaders, 'BirthYear');
+  var iNeighborhood = findColByName_(intakeHeaders, 'Neighborhood');
+  var iEmployerBiz = findColByName_(intakeHeaders, 'EmployerBizId'); // S336 Task 5
+  // engine.66 (S324) — family-match drip columns (present only after the
+  // family door first ensures them; -1 on older intake sheets is fine).
+  var iMatchPop = findColByName_(intakeHeaders, 'MatchPopId');
+  var iMatchType = findColByName_(intakeHeaders, 'MatchType');
+  var iMaiden = findColByName_(intakeHeaders, 'MaidenName');
+  // engine.109 — household-door payload (blank on every other row)
+  var iMatchName = findColByName_(intakeHeaders, 'MatchName');
+  var iHouseholdKey = findColByName_(intakeHeaders, 'HouseholdKey');
+  var iGenderQ = findColByName_(intakeHeaders, 'Gender');
+  var iOwnerBiz = findColByName_(intakeHeaders, 'OwnerOfBizId'); // engine.96 Task 12 — owner-door payload (blank on every other row)
+  var iBioQ = findColByName_(intakeHeaders, 'CitizenBio'); // engine.96 Task 12 (builder-direct): an authored row's bio lands on the ledger row, not in the notes
+  // pipeline.73 (builder 2026-10-14, "a means to properly intake citizens with flags and clock modes"):
+  // the CIV / MED / UNI intake columns (G/H/I) reach the new ledger row beside ClockMode.
+  var FLAG_COLS_ = [['CIV', 'CIV (y/n)'], ['MED', 'MED (y/n)'], ['UNI', 'UNI (y/n)']];
+  var flagCols = FLAG_COLS_.map(function(f) { return { name: f[0], i: findColByName_(intakeHeaders, f[0]), l: findColByName_(ledgerHeaders, f[1]) }; });
+
+  var lPopId = findColByName_(ledgerHeaders, 'POPID');
+  var lFirst = findColByName_(ledgerHeaders, 'First');
+  var lMiddle = findColByName_(ledgerHeaders, 'Middle');
+  var lLast = findColByName_(ledgerHeaders, 'Last');
+  var lTier = findColByName_(ledgerHeaders, 'Tier');
+  var lRoleType = findColByName_(ledgerHeaders, 'RoleType');
+  var lClockMode = findColByName_(ledgerHeaders, 'ClockMode');
+  var lStatus = findColByName_(ledgerHeaders, 'Status');
+  var lLifeHistory = findColByName_(ledgerHeaders, 'LifeHistory');
+  var lCreatedAt = findColByName_(ledgerHeaders, 'CreatedAt');
+  var lLastUpdated = findColByName_(ledgerHeaders, 'Last Updated');
+  var lUsageCol = findColByName_(ledgerHeaders, 'UsageCount');
+  // S184 (Phase 4.1.b) — 7 lifecycle/demographic ledger columns for derivation
+  var lEducationLevel = findColByName_(ledgerHeaders, 'EducationLevel');
+  var lGender = findColByName_(ledgerHeaders, 'Gender');
+  var lYearsInCareer = findColByName_(ledgerHeaders, 'YearsInCareer');
+  var lDebtLevel = findColByName_(ledgerHeaders, 'DebtLevel');
+  var lNetWorth = findColByName_(ledgerHeaders, 'NetWorth');
+  var lMaritalStatus = findColByName_(ledgerHeaders, 'MaritalStatus');
+  var lNumChildren = findColByName_(ledgerHeaders, 'NumChildren');
+  var lBirthYear = findColByName_(ledgerHeaders, 'BirthYear');
+  var lNeighborhood = findColByName_(ledgerHeaders, 'Neighborhood');
+  var lEmployerBiz = findColByName_(ledgerHeaders, 'EmployerBizId'); // S336 Task 5
+  var lStatusCol = findColByName_(ledgerHeaders, 'Status');
+  var mintBizPool; // S336 Task 5: lazy — Business_Ledger read only on batches that mint someone
+  var mintTrackedByBiz = {};
+  // engine.338: the existing-row door's view of Business_Ledger (BIZ_ID -> sheet row, stated Employee_Count, name) —
+  // lazy, read once, only when a queue row re-homes an existing citizen onto a tracked business
+  var advBizBook;
+  function bizBook_() { if (advBizBook === undefined) advBizBook = readAdvBusinessBook_(ss); return advBizBook; }
+
+  // S184 (Phase 4.1.b) — build ledger frequency snapshot ONCE per intake batch.
+  // Used by deriveCitizenProfile_ for neighborhood-aware RoleType + EducationLevel draws.
+  // citizenDerivation library auto-loaded from utilities/citizenDerivation.js.
+  var ledgerFreq = buildLedgerFreqSnapshot_(ledgerHeaders, ledgerRows, { includesHeader: false, simYear: simYearOf_(ctx, cycle) });
+
+  var rowsToClear = [];
+
+  // engine.51 T4/T5 (S302): normalized-name index replaces the exact
+  // lowercase scan (honorific/accent/apostrophe variants were minting
+  // duplicates); salary pools loaded once for role-change income re-derive.
+  var advNameIndex = buildNameIndex_(ledgerRows, lFirst, lLast, null, 0);
+  var advSalaryPools = (typeof buildIntakeSalaryPools_ === 'function') ? buildIntakeSalaryPools_(ctx) : null;
+  var householdMints = {}; // engine.109: HouseholdKey -> { head, members[] } minted this pass
+  var ownerMints = []; // engine.96 Task 12: rows queued with OwnerOfBizId minted this pass
+
+  // engine.319: the clock routes a new citizen to their event kind and their employer. Any queue row whose name finds
+  // no ledger citizen — a row that could mint, whether this pass mints it, makes it a same-batch repeat's update, or
+  // the family door refuses it — and carries a clock outside the four is refused for the whole queue, naming the row,
+  // before any queue row is touched. Every refusal is then all or nothing (codex diff gate §1, final look §1: a
+  // queue-order exemption cannot be atomic once the family door refuses an earlier same-name row). A name with a
+  // ledger citizen (or an ambiguous one, skipped) never reads the cell and is never refused for it.
+  // engine.320: the off-map hood refusal is the same check on the same rows — it threw at the mint, mid-pass, so the
+  // mints ahead of it stayed in the ledger with every queue row uncleared and re-ran next Cycle as existing bumps.
+  // engine.338 (agy F4.1): the clock check covers EXISTING names too — the existing-row door now writes ClockMode, so a bad
+  // clock on a re-home row is refused here, before any row is processed, not mid-pass. An existing row's EmployerBizId
+  // is checked the same way: a `BIZ-` id must be on Business_Ledger (the mint's own rule — the business must exist), or
+  // the cell is SELF_EMPLOYED / UNTRACKED. A mint row's employer is not checked here: a carried id the pool cannot place
+  // falls through to the mint's own pick, as before.
+  for (var pv = 1; pv < intakeData.length; pv++) {
+    var pvFirst = iFirst >= 0 ? String(intakeData[pv][iFirst] || '').trim() : '';
+    var pvLast = iLast >= 0 ? String(intakeData[pv][iLast] || '').trim() : '';
+    if (!pvFirst && !pvLast) continue;
+    var pvExisting = (advNameIndex[normalizeCitizenName_(pvFirst) + ' ' + normalizeCitizenName_(pvLast)] || []).length > 0;
+    // codex F9: a family / household / owner-door row that collides with an existing name is SKIPPED by the body (never
+    // applied), so its cells are not checked here — a bad cell on a row nothing would apply must not refuse the queue.
+    var pvCarried = (iMatchPop >= 0 && String(intakeData[pv][iMatchPop] || '').trim()) || (iMatchName >= 0 && String(intakeData[pv][iMatchName] || '').trim()) ||
+      (iHouseholdKey >= 0 && String(intakeData[pv][iHouseholdKey] || '').trim()) || (iOwnerBiz >= 0 && String(intakeData[pv][iOwnerBiz] || '').trim());
+    if (pvExisting && pvCarried) continue;
+    var pvRaw = iClockMode >= 0 ? String(intakeData[pv][iClockMode] || '').trim() : '';
+    if (pvRaw && !MINT_CLOCK_MODES_[pvRaw.toUpperCase()]) throw new Error('processAdvancementIntake_: Advancement_Intake row for "' + pvFirst + ' ' + pvLast + '" carries ClockMode "' + pvRaw + '", which is not ENGINE, GAME, CIVIC or MEDIA — fix the cell (no row in the queue was processed).');
+    if (pvExisting) {
+      var pvEmp = iEmployerBiz >= 0 ? String(intakeData[pv][iEmployerBiz] || '').trim() : '';
+      if (pvEmp && !ADV_EMPLOYER_SENTINELS_[pvEmp.toUpperCase()]) {
+        var pvBook = pvEmp.indexOf('BIZ-') === 0 ? bizBook_() : null;
+        if (!pvBook) throw new Error('processAdvancementIntake_: Advancement_Intake row for "' + pvFirst + ' ' + pvLast + '" names EmployerBizId "' + pvEmp + '" — ' + (pvEmp.indexOf('BIZ-') === 0 ? 'Business_Ledger could not be read' : 'not a BIZ- id, SELF_EMPLOYED or UNTRACKED') + ' (no row in the queue was processed).');
+        if (!pvBook.byId[pvEmp]) throw new Error('processAdvancementIntake_: Advancement_Intake row for "' + pvFirst + ' ' + pvLast + '" names EmployerBizId "' + pvEmp + '", which is not on Business_Ledger — fix the cell (no row in the queue was processed).');
+      }
+      continue;
+    }
+    var pvHood = iNeighborhood >= 0 ? String(intakeData[pv][iNeighborhood] || '').trim() : '';
+    if (pvHood && !resolveHoodOrChild_(ctx, pvHood)) throw new Error('processAdvancementIntake_: Advancement_Intake row for "' + pvFirst + ' ' + pvLast + '" names neighborhood "' + pvHood + '", which is not on Neighborhood_Map (ADR-0016) — fix the cell (no row in the queue was processed).');
+  }
+
+  for (var i = 1; i < intakeData.length; i++) {
+    var row = intakeData[i];
+    var first = iFirst >= 0 ? String(row[iFirst] || '').trim() : '';
+    var middle = iMiddle >= 0 ? String(row[iMiddle] || '').trim() : '';
+    var last = iLast >= 0 ? String(row[iLast] || '').trim() : '';
+    
+    if (!first && !last) continue;
+    
+    // S184 Row 17 — split: rawRole is what the intake row carries (may be empty).
+    // For EXISTING citizens: empty rawRole → preserve current ledger value (no overwrite — see line ~334 truthy guard).
+    // For NEW citizens: empty rawRole → demographic-voice fallback (literal "Citizen" sentinel never lands).
+    var rawRole = iRoleType >= 0 ? String(row[iRoleType] || '').trim() : '';
+    var roleType = rawRole; // existing-row branch uses rawRole directly via truthy guard
+    var tier = iTier >= 0 ? (row[iTier] || 3) : 3;
+    tier = Math.min(Number(tier) || 3, 4); // Cap at Tier 4 (max valid tier)
+    // engine.319: the cell is folded to the ledger's enum — C113 minted two Oaks rookies as 'Game', verbatim.
+    // Blank is ENGINE (every engine-written queue row); a value outside the four was refused for the whole queue above.
+    var rawClockMode = iClockMode >= 0 ? String(row[iClockMode] || '').trim() : '';
+    var clockMode = rawClockMode ? rawClockMode.toUpperCase() : 'ENGINE';
+    var notes = iNotes >= 0 ? (row[iNotes] || '') : '';
+    
+    // engine.66 — family-match payload (blank on non-drip rows)
+    var matchPop = iMatchPop >= 0 ? String(row[iMatchPop] || '').trim() : '';
+    var matchType = iMatchType >= 0 ? String(row[iMatchType] || '').trim() : '';
+    var maiden = iMaiden >= 0 ? String(row[iMaiden] || '').trim() : '';
+    var matchName = iMatchName >= 0 ? String(row[iMatchName] || '').trim() : '';
+    var householdKey = iHouseholdKey >= 0 ? String(row[iHouseholdKey] || '').trim() : '';
+    var queuedGender = iGenderQ >= 0 ? String(row[iGenderQ] || '').trim().toLowerCase() : '';
+    var ownerBiz = iOwnerBiz >= 0 ? String(row[iOwnerBiz] || '').trim() : '';
+    var queuedBio = iBioQ >= 0 ? String(row[iBioQ] || '').trim() : '';
+
+    var advKey = normalizeCitizenName_(first) + ' ' + normalizeCitizenName_(last);
+    var advHits = advNameIndex[advKey] || [];
+    // engine.109 — a household member names its head, not a POPID (the head
+    // has none until this pass mints it). The head is queued first, lands in
+    // advNameIndex on push, and resolves here for every member behind it.
+    if (!matchPop && matchName && matchType) {
+      var mnParts = matchName.split(/\s+/);
+      var mnKey = normalizeCitizenName_(mnParts[0]) + ' ' + normalizeCitizenName_(mnParts.slice(1).join(' '));
+      var mnHits = advNameIndex[mnKey] || [];
+      if (mnHits.length === 1) matchPop = String(ledgerRows[mnHits[0]][lPopId] || '').trim();
+      else Logger.log('processAdvancementRows_: household link "' + matchName + '" resolves to ' +
+        mnHits.length + ' ledger rows — ' + first + ' ' + last + ' mints unlinked');
+    }
+    if (advHits.length > 1) {
+      Logger.log('processAdvancementRows_: ambiguous name "' + first + ' ' + last + '" matches ' + advHits.length + ' ledger rows — row skipped, resolve manually');
+      rowsToClear.push(i + 1);
+      continue;
+    }
+    var existingRow = advHits.length === 1 ? advHits[0] : -1;
+
+    // engine.66 — a family-drip row must mint a NEW citizen; a name collision
+    // with an existing ledger row means the wiring would land on the wrong
+    // person. Skip and release the slot (GC row stays Active, re-drawable).
+    if ((matchPop || matchName || householdKey || ownerBiz) && existingRow >= 0) {
+      Logger.log('processAdvancementRows_: ' + (householdKey ? 'household' : ownerBiz ? 'owner-door' : 'family-drip') + ' row "' + first + ' ' + last +
+        '" collides with existing ledger citizen — row skipped' + (householdKey ? '' : ', slot released'));
+      rowsToClear.push(i + 1);
+      continue;
+    }
+
+    if (existingRow >= 0) {
+      // engine.150 (S412): an intake row never LOWERS an existing citizen's Tier.
+      // A blank intake Tier defaulted to 3 and was stamped over the row — on the
+      // bench that took Vinnie Keane (Tier 1) to Tier 3 at C106 on a packet
+      // mention. Tier is earned on the ladder; intake can only confirm or lift.
+      var tierBefore = lTier >= 0 ? (Number(ledgerRows[existingRow][lTier]) || 4) : 4;
+      tier = intakeTierForExisting_(tierBefore, iTier >= 0 ? row[iTier] : '');
+      if (lTier >= 0) ledgerRows[existingRow][lTier] = tier;
+      var roleChanged = false;
+      if (lRoleType >= 0 && roleType && String(ledgerRows[existingRow][lRoleType]).trim() !== roleType) {
+        ledgerRows[existingRow][lRoleType] = roleType;
+        roleChanged = true;
+        // engine.146 (S411): two truths — the new role's field leads SkillTags, the trained field follows.
+        var lTags146 = findColByName_(ledgerHeaders, 'SkillTags');
+        if (lTags146 >= 0 && typeof setCurrentField_ === 'function' && typeof roleFieldOf_ === 'function') {
+          ledgerRows[existingRow][lTags146] = setCurrentField_(ledgerRows[existingRow][lTags146], roleFieldOf_(roleType));
+        }
+      } else if (lRoleType >= 0 && roleType) {
+        ledgerRows[existingRow][lRoleType] = roleType;
+      }
+      // T5: role change re-derives Income from the salary pools (retirement /
+      // career-change case). Scans all categories for the role; no match →
+      // income untouched (never invent — sports salaries stay roster-owned).
+      var lIncome = findColByName_(ledgerHeaders, 'Income');
+      // S320: minors earn nothing — role-change income re-derive was the one
+      // ungated assigner left (a minor advanced through intake got adult pay)
+      var advBYCol = findColByName_(ledgerHeaders, 'BirthYear');
+      var advBY = advBYCol >= 0 ? (Number(ledgerRows[existingRow][advBYCol]) || 0) : 0;
+      var advIsMinor = advBY > 0 && (simYearOf_(ctx, cycle) - advBY) < 18;
+      var incomeBefore = lIncome >= 0 ? ledgerRows[existingRow][lIncome] : null; // engine.338: the line names a moved Income
+      if (roleChanged && !advIsMinor && lIncome >= 0 && advSalaryPools && typeof ctx.rng === 'function') {
+        var newIncome = rederiveIncomeForRole_(advSalaryPools, roleType, ctx.rng);
+        // engine.135 D2 (S399), re-based 2026-09-07: the job's catalog band prices the new role when it can.
+        var lStageA = findColByName_(ledgerHeaders, 'CareerStage'), lTagsA = findColByName_(ledgerHeaders, 'SkillTags');
+        var hoodIncome = (typeof jobReferencePay_ === 'function') ? jobReferencePay_(
+          roleType, lTagsA >= 0 ? ledgerRows[existingRow][lTagsA] : '',
+          lStageA >= 0 ? ledgerRows[existingRow][lStageA] : '', ledgerRows[existingRow][lPopId],
+          (typeof payProfileFromRow_ === 'function') ? payProfileFromRow_(ledgerHeaders, ledgerRows[existingRow], null) : null) : null; // engine.172
+        if (hoodIncome !== null) ledgerRows[existingRow][lIncome] = hoodIncome;
+        else if (newIncome !== null) ledgerRows[existingRow][lIncome] = newIncome;
+      }
+      // engine.338 (builder 2026-11-07: the intake door is half a door): the existing-row branch learns the three cells it
+      // never wrote. Only a row that names a cell changes it; blank keeps it (the RoleType contract). The clock is the row's
+      // OWN cell (rawClockMode), never the mint's ENGINE default (agy F4.2); a bad clock or an unknown business was refused
+      // for the whole queue in the pre-pass above. OwnerOfBizId on an existing row stays refused (the collision skip above —
+      // ownership is the owner doors', engine.295/309/311). A move onto a tracked `BIZ-` grows that business's
+      // Employee_Count by one in this pass (else reconcileBusinessHeadcounts_ lays off its lowest worker next Cycle) and
+      // signals the Phase-6 ripple like the mint does — not for a GAME row (a player or club staffer is never a hire).
+      var moved = []; // the Advancement line names every cell that moved
+      var popId = lPopId >= 0 ? ledgerRows[existingRow][lPopId] : '';
+      var clockBefore = lClockMode >= 0 ? String(ledgerRows[existingRow][lClockMode] || '').trim().toUpperCase() : '';
+      var clockNow = clockBefore, clockChanged = false;
+      if (lClockMode >= 0 && rawClockMode && rawClockMode.toUpperCase() !== clockBefore) {
+        clockNow = rawClockMode.toUpperCase();
+        clockChanged = true;
+        ledgerRows[existingRow][lClockMode] = clockNow;
+        moved.push('ClockMode ' + (clockBefore || '(blank)') + ' -> ' + clockNow);
+      }
+      var empCell = iEmployerBiz >= 0 ? String(row[iEmployerBiz] || '').trim() : '';
+      var employerChanged = false;
+      if (lEmployerBiz >= 0 && empCell) {
+        var empNew = empCell.indexOf('BIZ-') === 0 ? empCell : empCell.toUpperCase();
+        var empBefore = String(ledgerRows[existingRow][lEmployerBiz] || '').trim();
+        if (empBefore !== empNew) {
+          ledgerRows[existingRow][lEmployerBiz] = empNew;
+          employerChanged = true;
+          moved.push('EmployerBizId ' + (empBefore || '(blank)') + ' -> ' + empNew);
+          if (empNew.indexOf('BIZ-') === 0) {
+            var book = bizBook_();
+            var bizRec = book && book.byId[empNew];
+            if (bizRec && bizRec.stated !== null) {
+              // codex F3: Career (Phase5-Career, before this phase) may already hold a pending intent on this very cell
+              // (its headcount write-back, old + net); two intents on one cell land last-wins at Phase 10, so the hire is
+              // ADDED to the pending value when one exists — never a second intent that would erase Career's movement.
+              bizRec.stated = bumpPendingCellIntent_(ctx, 'Business_Ledger', bizRec.sheetRow, book.countCol + 1, bizRec.stated + 1,
+                'engine.338 intake re-home: ' + popId + ' joins ' + bizRec.name);
+            }
+            var acs = ctx.summary && ctx.summary.careerSignals;
+            if (acs && acs.businessDeltas && clockNow !== 'GAME') {
+              if (!acs.businessDeltas[empNew]) acs.businessDeltas[empNew] = { gained: 0, lost: 0 };
+              acs.businessDeltas[empNew].gained += 1;
+            }
+          }
+        }
+      }
+      // EconomicProfileKey follows the role: the catalog key the new title carries, else blank — a stale key would price
+      // him as the job he left. A GAME row takes none (the roster's word — SPORTS_OVERRIDE or blank — is the sports layer's).
+      // codex F5: a row LEAVING the GAME clock with its role unchanged re-keys too — SPORTS_OVERRIDE left behind would keep
+      // him on the sports layer (isSportsLayerRow_) with an ENGINE clock, outside the money and career paths.
+      var lEconKey = findColByName_(ledgerHeaders, 'EconomicProfileKey');
+      var keyChanged = false;
+      var leftGame = clockChanged && clockBefore === 'GAME';
+      if ((roleChanged || leftGame) && lEconKey >= 0 && clockNow !== 'GAME') {
+        var keyBefore = String(ledgerRows[existingRow][lEconKey] || '').trim();
+        var keyRole = roleChanged ? roleType : (lRoleType >= 0 ? String(ledgerRows[existingRow][lRoleType] || '').trim() : '');
+        var keyNow = (typeof catalogRoleKey_ === 'function') ? catalogRoleKey_(keyRole) : '';
+        if (keyBefore !== keyNow) {
+          ledgerRows[existingRow][lEconKey] = keyNow;
+          keyChanged = true;
+          moved.push('EconomicProfileKey ' + (keyBefore || '(blank)') + ' -> ' + (keyNow || '(blank)'));
+        }
+      }
+      // engine.338 (agy F5): a new employer or key re-prices the job too, not the role alone — priced on the row's role
+      // when the intake row names none. The role-change price above already ran when the role moved.
+      if (!roleChanged && (employerChanged || keyChanged) && !advIsMinor && lIncome >= 0 && typeof ctx.rng === 'function') {
+        var priceRole = lRoleType >= 0 ? String(ledgerRows[existingRow][lRoleType] || '').trim() : '';
+        var lStageB = findColByName_(ledgerHeaders, 'CareerStage'), lTagsB = findColByName_(ledgerHeaders, 'SkillTags');
+        var rePrice = (priceRole && typeof jobReferencePay_ === 'function') ? jobReferencePay_(
+          priceRole, lTagsB >= 0 ? ledgerRows[existingRow][lTagsB] : '',
+          lStageB >= 0 ? ledgerRows[existingRow][lStageB] : '', popId,
+          (typeof payProfileFromRow_ === 'function') ? payProfileFromRow_(ledgerHeaders, ledgerRows[existingRow], null) : null) : null;
+        if (rePrice === null && priceRole && advSalaryPools) rePrice = rederiveIncomeForRole_(advSalaryPools, priceRole, ctx.rng);
+        if (rePrice !== null) ledgerRows[existingRow][lIncome] = rePrice;
+      }
+      if (lIncome >= 0 && Number(incomeBefore) !== Number(ledgerRows[existingRow][lIncome])) {
+        moved.push('Income ' + (incomeBefore || 0) + ' -> ' + ledgerRows[existingRow][lIncome]);
+      }
+      if (lLastUpdated >= 0) ledgerRows[existingRow][lLastUpdated] = now;
+      ctx.ledger.dirty = true;
+      if (logSheet) {
+        logSheet.appendRow([now, popId, (first + ' ' + last).trim(), 'Advancement',
+          (tier !== tierBefore ? 'Updated to Tier ' + tier : 'Intake at Tier ' + tier) + (roleChanged ? '; RoleType -> ' + roleType : '') +
+          (moved.length ? '; ' + moved.join('; ') : '') + '. ' + notes, '', cycle]); // engine.150: the earned-rung marker only when the Tier actually moved
+      }
+    } else {
+      // engine.304 D6b: a family arrival is re-checked against the ledger as it stands NOW — an earlier wire in
+      // this batch (a parent's co-parent stroke) may have filled the spot. Closed → nothing minted; the GC row
+      // stays Family and the next family pass releases it.
+      var famDeadAnchor = null; // engine.304 D11: set when the family's citizen is dead — the arrival is wired one-sided
+      if (matchPop && matchType && !householdKey && genericSheet) {
+        if (!genericHeld.data) genericHeld.data = genericSheet.getDataRange().getValues();
+        var famNow = gcFamilyLinks_(genericHeld.data);
+        var FLm = familyLedgerCols_(ledgerHeaders);
+        var famSelf = -1;
+        var famList = (famNow.byAnchor[matchPop] || {})[matchType] || [];
+        for (var fs2 = 0; fs2 < famList.length; fs2++) {
+          var gRowF = genericHeld.data[famList[fs2]];
+          if (String(gRowF[findColByName_(genericHeld.data[0], 'First')] || '').trim().toLowerCase() === first.toLowerCase() &&
+              String(gRowF[findColByName_(genericHeld.data[0], 'Last')] || '').trim().toLowerCase() === last.toLowerCase()) famSelf = famList[fs2];
+        }
+        var famAnchorNow = null;
+        for (var fa = 0; fa < ledgerRows.length; fa++) {
+          if (ledgerRows[fa] && String(ledgerRows[fa][lPopId] || '').trim() === matchPop) { famAnchorNow = ledgerRows[fa]; break; }
+        }
+        var famHits = 0;
+        for (var fs3 = 0; fs3 < famList.length; fs3++) {
+          var gRowH = genericHeld.data[famList[fs3]];
+          if (String(gRowH[findColByName_(genericHeld.data[0], 'First')] || '').trim().toLowerCase() === first.toLowerCase() &&
+              String(gRowH[findColByName_(genericHeld.data[0], 'Last')] || '').trim().toLowerCase() === last.toLowerCase()) famHits++;
+        }
+        var famByPopNow = {}; if (famAnchorNow) famByPopNow[matchPop] = famAnchorNow;
+        var famAtNow = familyAnchorOf_(ctx, FLm, famByPopNow, matchPop); // D11: ledger first, then an archived death
+        var famStill = famHits === 1 && !!famAtNow && // codex cut-2 review §4: exactly one row, before a POPID
+          familySpotsOpen_(FLm, famAtNow.row, simYearOf_(ctx, cycle), famNow.byAnchor[matchPop], famSelf, false)[matchType] >= 1;
+        // codex cut-4 review §2: a minor is no one's widow — refused here, before a POPID or the GC flip
+        if (famStill && matchType === 'spouse' && iBirthYear >= 0 && (Number(row[iBirthYear]) || 0) > 0 &&
+            (simYearOf_(ctx, cycle) - Number(row[iBirthYear])) < 18) famStill = false;
+        if (famStill && famAtNow.dead) famDeadAnchor = famAtNow.row;
+        if (!famStill) {
+          Logger.log('processAdvancementRows_: ' + first + ' ' + last + ' — ' + (famHits !== 1
+            ? famHits + ' Family rows of ' + matchPop + ' by this name; not minted'
+            : 'the ' + matchType + ' spot of ' + matchPop + ' closed in this batch; not minted'));
+          rowsToClear.push(i + 1);
+          continue;
+        }
+      }
+      var newPopId = nextPopIdLocked_(ctx); // engine.90 shared allocator
+
+      // S184 (Phase 4.1.b) — derive 8 demographic + lifecycle fields for the new
+      // citizen via the shared citizenDerivation library. Intake row may not
+      // carry BirthYear or Neighborhood (Advancement_Intake1 default schema is
+      // 10 cols without them); helper falls back to age 38 + frequency-weighted
+      // neighborhood draw. RoleType derivation runs through the same library;
+      // pickDemographicVoiceRole_ is no longer the primary path — it remains as
+      // a final-tier fallback inside deriveRoleType_.
+      var seed = first + '|' + last + '|' + newPopId;
+      var rawBirthYear = (iBirthYear >= 0) ? Number(row[iBirthYear]) : NaN;
+      var birthYear = (!isNaN(rawBirthYear) && rawBirthYear > 1900) ? rawBirthYear : 2003;
+      // S322: live sim-year — was hardcoded; engine.148: the calendar's year via simYearOf_
+      // 2041, understating age by 1/year as the sim advances.
+      var age = simYearOf_(ctx, cycle) - birthYear;
+      var rawNbhd = (iNeighborhood >= 0) ? String(row[iNeighborhood] || '').trim() : '';
+      // engine.148 P3: the door folds an authored hood to the map (child area →
+      // parent) — every Phase-5 texture engine throws on an off-map ledger hood.
+      // engine.320: a name not on the map was refused for the whole queue above;
+      // a null here means that check was bypassed, never a drawn hood.
+      if (rawNbhd) {
+        var foldedNbhd = resolveHoodOrChild_(ctx, rawNbhd);
+        if (!foldedNbhd) throw new Error('processAdvancementIntake_: "' + first + ' ' + last + '" reached the mint with neighborhood "' + rawNbhd + '" off Neighborhood_Map — the queue check above was bypassed (engine.320).');
+        rawNbhd = foldedNbhd;
+      }
+      var profile = deriveCitizenProfile_(seed, age, rawNbhd, ledgerFreq, {
+        roleTypeOverride: rawRole || null,  // honor explicit intake RoleType if set
+        genderOverride: (queuedGender === 'male' || queuedGender === 'female') ? queuedGender : null // engine.109: the household knows
+      });
+      var newRoleType = profile.RoleType;
+
+      var newRow = new Array(ledgerHeaders.length).fill('');
+      if (lPopId >= 0) newRow[lPopId] = newPopId;
+      if (lFirst >= 0) newRow[lFirst] = first;
+      if (lMiddle >= 0) newRow[lMiddle] = middle;
+      if (lLast >= 0) newRow[lLast] = last;
+      if (lTier >= 0) newRow[lTier] = tier;
+      if (lRoleType >= 0) newRow[lRoleType] = newRoleType;
+      if (lClockMode >= 0) newRow[lClockMode] = clockMode;
+      // pipeline.73: a flag the intake row carries lands as the ledger's own yes/no; a blank stays blank
+      // (every queued row before this carried blanks). Anything else is left blank and logged, never
+      // thrown: flagCitizenForTierReview_ (mediaRoomIntake.js) queues 'pending' in G, and one such row
+      // must not stop the whole pass (codex impl review 2026-10-14, hunt 6).
+      for (var fc = 0; fc < flagCols.length; fc++) {
+        var fSpec = flagCols[fc];
+        if (fSpec.i < 0 || fSpec.l < 0) continue;
+        var fRaw = String(row[fSpec.i] || '').trim().toLowerCase();
+        if (!fRaw) continue;
+        if (fRaw === 'y' || fRaw === 'yes') newRow[fSpec.l] = 'yes';
+        else if (fRaw === 'n' || fRaw === 'no') newRow[fSpec.l] = 'no';
+        else Logger.log('processAdvancementIntake_: "' + first + ' ' + last + '" carries ' + fSpec.name + ' "' + row[fSpec.i] + '" — not y/n, left blank');
+      }
+      if (lStatus >= 0) newRow[lStatus] = 'Active';
+      if (lLifeHistory >= 0) newRow[lLifeHistory] = 'Promoted to Tier ' + tier + ' in Cycle ' + cycle + '. ' + notes;
+      if (lCreatedAt >= 0) newRow[lCreatedAt] = now;
+      if (lLastUpdated >= 0) newRow[lLastUpdated] = now;
+      if (lUsageCol >= 0) newRow[lUsageCol] = 0;
+      // S184 (Phase 4.1.b) — 7 derived fields + BirthYear + Neighborhood
+      if (lBirthYear >= 0 && !newRow[lBirthYear]) newRow[lBirthYear] = birthYear;
+      if (lNeighborhood >= 0 && !newRow[lNeighborhood]) newRow[lNeighborhood] = profile._neighborhood;
+      if (lEducationLevel >= 0) newRow[lEducationLevel] = profile.EducationLevel;
+      if (lGender >= 0) newRow[lGender] = profile.Gender;
+      if (lYearsInCareer >= 0) newRow[lYearsInCareer] = profile.YearsInCareer;
+      if (lDebtLevel >= 0) newRow[lDebtLevel] = profile.DebtLevel;
+      if (lNetWorth >= 0) newRow[lNetWorth] = profile.NetWorth;
+      // engine.135 D2 (S399): a promoted citizen arrives priced by their own
+      // neighborhood (Income was blank until the next cycle's fallback filled
+      // it from the real-world table); Debt/NetWorth re-derive from that number.
+      // engine.162 (builder 2026-09-04, Direction pt 27): nobody who comes
+      // through ingest lands on $0 — the only citizens meant to earn nothing
+      // are a child and a retiree. A GAME row takes the minor-league base
+      // because the sports layer owns its salaries and the D3 employer floor
+      // never reaches it; everyone else is priced by their own neighborhood
+      // first, then by their role's salary pool rather than left blank.
+      // CIVIC and MEDIA need no base of their own: engine.162 reconnected
+      // them to the D3 Business_Ledger floor, so City of Oakland ($88,000
+      // avg) and the Bay Tribune ($73,758) price their staff from the books.
+      var lIncomeN = findColByName_(ledgerHeaders, 'Income');
+      if (lIncomeN >= 0) {
+        var intakePay = null;
+        if (String(clockMode || '').trim().toUpperCase() === 'GAME') {
+          intakePay = SPORTS_BASE_SALARY;
+        } else if (typeof jobReferencePay_ === 'function') {
+          intakePay = jobReferencePay_(newRoleType, '', profile._careerStage, seed);
+        }
+        var earnsAtIntake = age >= 18 &&
+          String(profile._careerStage || '').toLowerCase() !== 'retired';
+        if (intakePay === null && earnsAtIntake && advSalaryPools && typeof ctx.rng === 'function') {
+          intakePay = rederiveIncomeForRole_(advSalaryPools, newRoleType, ctx.rng);
+        }
+        if (intakePay !== null) {
+          newRow[lIncomeN] = intakePay;
+          if (lDebtLevel >= 0) newRow[lDebtLevel] = deriveDebtLevel_(seed, age, intakePay);
+          if (lNetWorth >= 0) newRow[lNetWorth] = deriveNetWorth_(seed, age, intakePay, profile._careerStage);
+        }
+      }
+      // engine.304 (codex cut-1 review §5): a minor minted here earns and owns nothing — the S320 convention the
+      // wave mint keeps (checkForPromotions.js); the profile's debt and net worth are adult derivations. A GAME row
+      // is the sports layer's.
+      if (age < 18 && String(clockMode || '').trim().toUpperCase() !== 'GAME') {
+        if (lIncomeN >= 0) newRow[lIncomeN] = 0;
+        if (lDebtLevel >= 0) newRow[lDebtLevel] = 0;
+        if (lNetWorth >= 0) newRow[lNetWorth] = 0;
+      }
+      if (lMaritalStatus >= 0) newRow[lMaritalStatus] = profile.MaritalStatus;
+      if (lNumChildren >= 0) newRow[lNumChildren] = profile.NumChildren;
+      if (householdKey) {
+        // engine.109: a household row's marriage and children are the rows
+        // queued beside it — never the profile's dice. Blank here; the spouse
+        // and child wiring below and formIntakeHouseholds_ fill them from truth.
+        // (A random NumChildren would open phantom kid slots for the family drip.)
+        // engine.302: a queued child arrives youth, an adult single until the spouse wiring below
+        if (lMaritalStatus >= 0) newRow[lMaritalStatus] = age < 18 ? 'youth' : 'single';
+        if (lNumChildren >= 0) newRow[lNumChildren] = 0;
+        var lChildrenH = findColByName_(ledgerHeaders, 'ChildrenIds');
+        if (lChildrenH >= 0) newRow[lChildrenH] = '[]';
+      }
+      // engine.62b (S322): CareerStage — the derivation lib predates the SL
+      // column (added S321) and only computes it inline; map its enum to the
+      // engine's (C106: POP-01062 landed stage-blank via this path).
+      var lCareerStage = findColByName_(ledgerHeaders, 'CareerStage');
+      if (lCareerStage >= 0) {
+        var stMap = { early: 'entry-level', mid: 'mid-career', senior: 'senior', retired: 'retired' };
+        newRow[lCareerStage] = age < 22 ? 'student' : (stMap[profile._careerStage] || 'entry-level');
+      }
+      // engine.96 Task 12 — an authored bio rides the queue row onto the ledger
+      var lBioNew = findColByName_(ledgerHeaders, 'CitizenBio');
+      if (lBioNew >= 0 && queuedBio) newRow[lBioNew] = queuedBio;
+      // engine.66 — the name they carried before taking the family surname
+      var lMaiden = findColByName_(ledgerHeaders, 'MaidenName');
+      if (lMaiden >= 0 && maiden) newRow[lMaiden] = maiden;
+      // S336 (employment-living-system Task 5): a promoted citizen arrives with
+      // a workplace — never a job title with no employer. Intake's
+      // EmployerBizId (carried from Generic_Citizens) wins; else the pick below.
+      // engine.278 (Task 9): the pick matches the role's field to a business of
+      // the same field (pickMintEmployer_) — the four-bucket draw put a Plumber
+      // at the police department and a student on a corner store's payroll.
+      // engine.109 (S419): a minor is a student, not a hire — the bench put a
+      // 9-year-old on a payroll. Minors earn nothing (S320) and hold no
+      // employer; the 18th-birthday settlement places them.
+      if (lEmployerBiz >= 0 && age >= 18) {
+        if (mintBizPool === undefined) {
+          mintBizPool = buildMintBizPool_(ss);
+          mintTrackedByBiz = {};
+          if (mintBizPool && lStatusCol >= 0) {
+            for (var mtb = 0; mtb < ledgerRows.length; mtb++) {
+              var mRow = ledgerRows[mtb];
+              if (!mRow || String(mRow[lStatusCol] || 'active').toLowerCase() !== 'active') continue;
+              var mEmp = String(mRow[lEmployerBiz] || '').trim();
+              if (mEmp.indexOf('BIZ-') === 0) mintTrackedByBiz[mEmp] = (mintTrackedByBiz[mEmp] || 0) + 1;
+            }
+          }
+        }
+        var carried = (iEmployerBiz >= 0) ? String(row[iEmployerBiz] || '').trim() : '';
+        var mintedBiz = '', mintSentinel = '', mintSeeking = false;
+        var mintRoom = function (bid) {
+          if (!mintBizPool) return false;
+          var st = mintBizPool.statedById[bid];
+          return st !== null && st !== undefined && st > (mintTrackedByBiz[bid] || 0);
+        };
+        if (carried.indexOf('BIZ-') === 0 && mintRoom(carried)) {
+          mintedBiz = carried; // born into the tracked job the pool assigned — and it has room
+        } else if (carried === 'SELF_EMPLOYED' || carried === 'UNTRACKED') {
+          mintSentinel = carried; // an authored row that says so keeps it
+        } else {
+          // Carried-but-full falls through here: rule 1 binds BOTH paths — the
+          // business has room or the citizen goes elsewhere (plan Task 5 step 4).
+          var mPick = pickMintEmployer_(newRoleType, lNeighborhood >= 0 ? newRow[lNeighborhood] : '',
+            clockMode, seed, mintBizPool, mintRoom);
+          mintedBiz = mPick.bizId; mintSentinel = mPick.sentinel; mintSeeking = mPick.seeking;
+        }
+        if (mintedBiz) {
+          newRow[lEmployerBiz] = mintedBiz;
+          mintTrackedByBiz[mintedBiz] = (mintTrackedByBiz[mintedBiz] || 0) + 1; // reserve within the batch
+          var mcs = ctx.summary && ctx.summary.careerSignals;
+          // engine.319: a player is never a hire (engine.307) — a GAME mint sends no headcount signal, so a
+          // draft class is not a Phase-6 BUSINESS_EXPANSION. Carried and title placement alike.
+          if (mcs && mcs.businessDeltas && clockMode !== 'GAME') {
+            if (!mcs.businessDeltas[mintedBiz]) mcs.businessDeltas[mintedBiz] = { gained: 0, lost: 0 };
+            mcs.businessDeltas[mintedBiz].gained += 1;
+          }
+        } else if (mintSentinel) {
+          newRow[lEmployerBiz] = mintSentinel; // self-employed, or employed off the tracked ledger — no slot, no headcount signal
+        } else if (mintSeeking && lLifeHistory >= 0) {
+          newRow[lLifeHistory] += ' Seeking work (no tracked opening for ' + newRoleType + ').';
+        }
+      }
+      // S336 Task 7: stamp the field tag so the rehire matcher can route this
+      // citizen from birth. engine.278: the tag is the role's own catalog field
+      // (roleFieldOf_, the resolver the matcher and the pay engine read) — the
+      // four-bucket map tagged every trade and kitchen job 'Small Business'. A
+      // title the catalog does not know (Detective, Pediatrician, Battalion Chief)
+      // takes the field of the tracked business it was minted into; with neither,
+      // the row stays untagged (blank is honest; the matcher skips it).
+      var lSkillTags = findColByName_(ledgerHeaders, 'SkillTags');
+      if (lSkillTags >= 0 && !newRow[lSkillTags]) {
+        var mintField = (typeof roleFieldOf_ === 'function') ? roleFieldOf_(newRoleType) : null;
+        if (!mintField && lEmployerBiz >= 0 && mintBizPool && mintBizPool.fieldById) {
+          mintField = mintBizPool.fieldById[String(newRow[lEmployerBiz] || '').trim()] || null;
+        }
+        if (mintField) newRow[lSkillTags] = mintField;
+      }
+      // Phase 42 §5.6 (impl #18): push new row to ctx.ledger.rows; Phase 10
+      // consolidated commit auto-extends the sheet — no separate append intent.
+      ledgerRows.push(newRow);
+      advNameIndex[advKey] = [ledgerRows.length - 1]; // same-batch repeats route to bump/edit
+      ctx.ledger.dirty = true;
+      // A citizen minted this Cycle lives where the mint put them for at least the week:
+      // processRelocations_ (Phase5-MigrationTracking, later this Phase) skips any unit
+      // holding one (bench C110: a household arrived in Fruitvale and "moved up" to West
+      // Oakland the same week, overwriting the neighborhood its intake row chose).
+      if (!ctx.mintedThisCycle || Number(ctx.mintedThisCycle.cycle) !== Number(cycle)) ctx.mintedThisCycle = { cycle: Number(cycle), pops: {} };
+      ctx.mintedThisCycle.pops[newPopId] = true;
+      if (logSheet) {
+        logSheet.appendRow([now, newPopId, (first + ' ' + last).trim(), 'Promotion',
+          'Added to Simulation_Ledger as Tier ' + tier + '. ' + notes, '', cycle]);
+      }
+      // engine.66 — family-drip rows queued under the FAMILY surname; the GC
+      // row still carries the birth name, so mark it Emerged by that.
+      // engine.304 D6c: a family arrival flips exactly its own Family row (Status + FamilyOf + name), or none
+      if (matchPop && matchType && !householdKey) markAsEmergedInGeneric_(ss, genericSheet, first, last, cycle, genericHeld, matchPop);
+      else markAsEmergedInGeneric_(ss, genericSheet, first, maiden || last, cycle, genericHeld);
+      var familyWired = false;
+      if (matchPop && matchType) {
+        familyWired = (famDeadAnchor // engine.304 D11: the dead's row and the archive are never written
+          ? wireFamilyToDeceased_(ctx, ledgerRows.length - 1, newPopId, matchPop, famDeadAnchor, matchType, now, cycle, logSheet)
+          : wireFamilyMatch_(ctx, ledgerRows.length - 1, newPopId, matchPop, matchType, now, cycle, logSheet,
+            householdKey ? 'household intake' : 'drip lottery')) === true;
+      }
+      if (ownerBiz) ownerMints.push({ pop: newPopId, idx: ledgerRows.length - 1, biz: ownerBiz }); // engine.96 Task 12
+      if (householdKey) {
+        if (!householdMints[householdKey]) householdMints[householdKey] = { head: null, members: [] };
+        // engine.302 (codex recheck H2): linked = the wiring happened — a refused link (a minor spouse) or a missing
+        // target forms no spouse household and writes no married register row
+        var hhMint = { pop: newPopId, idx: ledgerRows.length - 1, type: matchType || 'head', linked: familyWired };
+        householdMints[householdKey].members.push(hhMint);
+        if (!matchType) householdMints[householdKey].head = hhMint;
+      }
+    }
+    
+    rowsToClear.push(i + 1);
+    results.processed++;
+  }
+  
+  var hhFormed = formIntakeHouseholds_(ctx, householdMints, cycle, now, logSheet);
+  results.householdsFormed = hhFormed.formed;
+  var owned = wireBusinessOwners_(ctx, ownerMints, cycle, now, logSheet); // engine.96 Task 12
+  results.ownersWired = owned.wired;
+
+  // engine.279: the pass's log lines land here — after the last helper that
+  // logs, before any queue row is cleared (a failed log write still leaves the
+  // queue as it was), and inside the pass, so later phases read the tab as before.
+  log.flush();
+
+  if (rowsToClear.length > 0) {
+    // engine.230: processed rows are cleared in contiguous RUNS, one call each, instead of one
+    // call per row — 143 rows on live C107, each a Sheets round-trip inside Phase5-Advancement.
+    rowsToClear.sort(function(a, b) { return a - b; });
+    var clearCols = intakeSheet.getLastColumn();
+    var runStart = rowsToClear[0], runPrev = rowsToClear[0];
+    for (var c = 1; c <= rowsToClear.length; c++) {
+      var nextRow = rowsToClear[c];
+      if (c < rowsToClear.length && (nextRow === runPrev || nextRow === runPrev + 1)) { runPrev = nextRow; continue; }
+      intakeSheet.getRange(runStart, 1, runPrev - runStart + 1, clearCols).clearContent();
+      if (c < rowsToClear.length) { runStart = nextRow; runPrev = nextRow; }
+    }
+  }
+  
+  return results;
+}
+
+// engine.109 Task 6 (S419): processIntakeRows_ deleted — it only counted the
+// Intake tab's rows; Advancement_Intake1 is solely the promotion/usage door.
+
+// engine.58 (S320): the lottery threshold — a GC citizen whose name has come
+// back this many times (media usage, intake, event surfacing) earns a full
+// Simulation_Ledger row. Mike-ruled S320: 3. One well-seeded engine event can
+// print 3 articles in a cycle (media agents chase a story), so single-cycle
+// promotion is by design.
+// ═══════════════════════════════════════════════════════════════════════════
+// engine.69 (S325, Mike-approved rules 1-3): TIER DECAY — the fame ladder
+// runs both ways, but ONLY for rungs that were climbed.
+//   1. UsageCount decays like cultural FameScore: quiet (no naming in
+//      Citizen_Media_Usage for ATTENTION_QUIET_CYCLES) -> -1/cycle, floor 0.
+//   2. Tier demotes ONE step only when the CURRENT tier was ladder-earned —
+//      the bump left an "Updated to Tier N" Advancement row in
+//      LifeHistory_Log — and UsageCount has fallen below that tier's bar
+//      (T1:9 / T2:6 / T3:3). Stepwise: next cycle re-checks the next rung;
+//      it stops naturally at the seeded tier (no marker = authored = held).
+//   3. Exempt: Tier 1 (protected class) and non-ENGINE modes (GAME/CIVIC/
+//      MEDIA tiers are the role, not the coverage).
+// Nothing Mike authored ever erodes; only attention-earned rungs give way.
+// ═══════════════════════════════════════════════════════════════════════════
+var ATTENTION_QUIET_CYCLES = 10;
+var TIER_BAR = { 1: 9, 2: 6, 3: 3 };
+
+// ═══════════════════════════════════════════════════════════════════════════
+// engine.151 (S413, builder's chain cut 5) — TIER PAYS
+// "Raising your Tier should increase a citizen's life." A rung is a pace
+// multiplier at the doors the dials already steer — hire-slot order, promotion
+// order, the courtship step, the home-purchase roll. It buys position and pace,
+// never cash: no gate opens, nothing fires that would not have fired.
+// Blank / 0 / ≥ 5 read as Tier 4 (the floor); the table is the whole spec.
+// ═══════════════════════════════════════════════════════════════════════════
+var TIER_PAY = { 1: 1.50, 2: 1.30, 3: 1.15, 4: 1.00 };
+function tierPayFactor_(tier) {
+  var t = Math.round(Number(tier)) || 4;
+  return TIER_PAY[t] || 1.0;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// engine.150 (S412, builder-direct 2026-09-02) — THE LADDER AS A STATE
+// ═══════════════════════════════════════════════════════════════════════════
+// Before this, the UsageCount bars (3 / 6 / 9 → Tier 3 / 2 / 1) were applied
+// only inside the citation-processing pass, on the cell + 1. Two consequences
+// the measure found (docs/plans/2026-09-02-bloodline-ascent.md §The measure):
+//   - 58 ENGINE rows carry a UsageCount cell ABOVE their citations on record
+//     (the Feb–Mar 2026 mint seeded them — "the gifted era"); 12 of them are
+//     Tier 4 at 3–15 and never climbed, because no event ever touched them —
+//     and one new citation would have carried a seeded 9 straight to Tier 1.
+//   - the climb logged "Advanced from Tier" while decay (engine.69) reads
+//     "Updated to Tier N" as the earned-rung marker, so a media-earned rung
+//     was never eligible to give way.
+// Now: every cycle, for every active citizen, the EARNED count = min(cell,
+// what is on record for the name) — and what counts is the clock's own door
+// (builder, 2026-09-02 16:15): ENGINE, GAME and CIVIC earn on emergence
+// citations (being named in print); MEDIA earns only on their OWN work
+// selected into the Saturday edition ('byline-published', worth 2 per the
+// engine.88 rule — a published piece was landed first). Tier follows the bar
+// that count clears, upward only (decay owns the way down). The seeded cell
+// itself is HELD — the builder's ruling is that the gifted era keeps what it
+// has; it just cannot climb on it. Promotions write the marker decay reads.
+// Ambiguous names (two ledger rows, one key) are skipped, never guessed.
+// (A CIVIC ladder on approval rating was floated and left for its own cut.)
+
+// ═══════════════════════════════════════════════════════════════════════════
+// engine.118 (S412, builder-direct 2026-09-02) — FAME IS PERMANENT
+// ═══════════════════════════════════════════════════════════════════════════
+// "Once a citizen hits 25 media usage they assume fame and only their fame
+// fluctuates once at that stage. Vinnie Keane is still famous when he is 80
+// but not as famous as he is at 37." The bar reads the UsageCount CELL — the
+// canon on record, gifted era included. Crossing it writes `Famous` = the
+// cycle, floors Tier at 1 forever, and takes the row out of decay entirely.
+// From then on a hard light dims Cultural_Ledger FameScore, never the count.
+var FAME_USAGE_BAR = 25;
+
+// engine.118 cut 3b (S412, builder 2026-09-02: "their likeness copies to the
+// culture ledger where fame citizens are tracked and the fame engine uses these
+// citizens for its events"): the Cultural_Ledger is the famous sub-roster. A
+// famous citizen with no personal row linked to their POPID gets one registered
+// (the evening-media registrar, queued for Phase 10); a linked row below the
+// fame bar is brightened to the bar so the antenna lights. Never re-registers a
+// linked name. engine.312: the registration is a `roster` cause (no fame, no
+// sighting marks), and every famous citizen checked here keeps the 25 floor in
+// the Cycle's fame flush — the target row is touched even with nothing else to
+// add, and a row created for them tonight starts at 25 or more (R2.1 b).
+function ensureFamousOnCulturalLedger_(ctx, popId, name, roleType, neighborhood) {
+  ctx._famousRegistered118 = ctx._famousRegistered118 || {};
+  if (ctx._famousRegistered118[popId]) return 'done';
+  // codex diff gate 1 §1(b): "has a row" means a personal row — the engine.313 target (linked, not a
+  // dynasty / institution). With none, the roster registration resolves an unlinked row of the same name
+  // or creates one, and the floor rides it (registrar, floorPops); a row linked to another citizen is never
+  // theirs.
+  var floored = culturalFameMarkFloor_(ctx, popId);
+  ctx._famousRegistered118[popId] = true;
+  if (floored === null) {
+    registerCulturalEntity_(ctx, name, roleType || 'citizen', 'engine.118', neighborhood || '', 'roster');
+    return 'registered';
+  }
+  return floored < FAME_USAGE_BAR ? 'brightened' : 'linked';
+}
+
+// Intake vs an existing row: blank keeps the row's Tier; a stated Tier can only
+// lift (lower number), never drop. Pure.
+function intakeTierForExisting_(existingTier, intakeRaw) {
+  var cur = Math.min(Math.max(Number(existingTier) || 4, 1), 4);
+  var raw = String(intakeRaw == null ? '' : intakeRaw).trim();
+  if (!raw) return cur;
+  var want = Number(raw);
+  if (!(want >= 1 && want <= 4)) return cur;
+  return Math.min(cur, want);
+}
+
+function tierForEarnedUsage_(earned) {
+  var n = Number(earned) || 0;
+  if (n >= TIER_BAR[1]) return 1;
+  if (n >= TIER_BAR[2]) return 2;
+  if (n >= TIER_BAR[3]) return 3;
+  return 4;
+}
+
+// Per normalized "first last" key (the key processMediaUsage_ matches on):
+// { cited: emergence citations on record, published: 'byline-published' rows }.
+// Cached on ctx for the cycle.
+var MEDIA_PUBLISHED_WORTH = 2; // engine.88: landed (1) + published (1)
+function earnedCitationsByKey_(ctx) {
+  if (ctx && ctx._earnedCitations150) return ctx._earnedCitations150;
+  var out = {};
+  try {
+    var us = ctx.ss.getSheetByName('Citizen_Media_Usage');
+    if (us && us.getLastRow() > 1) {
+      var uv = us.getDataRange().getValues();
+      var uh = uv[0];
+      var iName = findColByName_(uh, 'CitizenName');
+      if (iName < 0) iName = findColByName_(uh, 'Name');
+      var iType = findColByName_(uh, 'UsageType');
+      var iSent = findColByName_(uh, 'Sentiment');
+      if (iName >= 0) {
+        for (var r = 1; r < uv.length; r++) {
+          var ut = iType >= 0 ? String(uv[r][iType] || '').trim().toLowerCase() : '';
+          if (isFamilyUsage_(ut)) continue; // engine.304 D10: own words about family are not a citation
+          var sp = splitUsageName_(String(uv[r][iName] || '').trim());
+          if (!sp) continue;
+          var key = normalizeCitizenName_(sp.first) + ' ' + normalizeCitizenName_(sp.last);
+          var slot = out[key] || (out[key] = { cited: 0, published: 0, hard: 0 });
+          var hard = iSent >= 0 && String(uv[r][iSent] || '').trim().toLowerCase() === 'negative'; // engine.152
+          if (isEmergenceUsage_(ut)) { if (hard && ut.indexOf('byline') !== 0) slot.hard++; else slot.cited++; } // a byline is the author's own work, never coverage of them
+          if (ut === 'byline-published') slot.published++;
+        }
+      }
+    }
+  } catch (e) { Logger.log('earnedCitationsByKey_: usage read failed — ' + e.message); }
+  if (ctx) ctx._earnedCitations150 = out;
+  return out;
+}
+
+function applyTierLadderState_(ctx, cycle) {
+  var results = { promoted: 0, seededHeld: 0, ambiguous: 0, famed: 0, fameFloored: 0, lines: [] };
+  if (!ctx || !ctx.ledger || !ctx.ledger.rows || !cycle) return results;
+  var h = ctx.ledger.headers, rows = ctx.ledger.rows;
+  var iPop = h.indexOf('POPID'), iTier = h.indexOf('Tier'), iClock = h.indexOf('ClockMode'),
+      iUse = h.indexOf('UsageCount'), iStat = h.indexOf('Status'),
+      iFirst = h.indexOf('First'), iLast = h.indexOf('Last'), iLife = h.indexOf('LifeHistory'),
+      iLastU = h.indexOf('LastUpdated'), iNb = h.indexOf('Neighborhood'), iFamous = h.indexOf('Famous');
+  if (iPop < 0 || iTier < 0 || iUse < 0 || iFirst < 0 || iLast < 0) return results;
+  if (iFamous < 0) { Logger.log('applyTierLadderState_: Simulation_Ledger has no Famous column — engine.118 fame skipped this cycle (add the header)'); results.fameColumnMissing = true; }
+
+  // ── engine.118: fame first — the cell at the bar mints permanence ──
+  if (iFamous >= 0) {
+    for (var f = 0; f < rows.length; f++) {
+      var frow = rows[f];
+      if (!frow || !frow[iPop]) continue;
+      var fst = iStat >= 0 ? String(frow[iStat] || '').trim().toLowerCase() : 'active';
+      if (fst !== 'active') continue;
+      var famous = String(frow[iFamous] || '').trim();
+      var fcell = Number(frow[iUse]) || 0;
+      var fname = (String(frow[iFirst] || '').trim() + ' ' + String(frow[iLast] || '').trim()).trim();
+      var fpop = String(frow[iPop]).trim();
+      if (!famous && fcell >= FAME_USAGE_BAR) {
+        frow[iFamous] = 'C' + cycle;
+        var fstamp = (typeof inWorldStamp_ === 'function') ? inWorldStamp_(ctx) : ('C' + cycle);
+        var fline = fstamp + ' — [Fame] Assumed fame — the city knows the name for good (' + fcell + ' on record); from here only the shine moves';
+        if (iLife >= 0) frow[iLife] = (frow[iLife] ? frow[iLife] + '\n' : '') + fline;
+        if (typeof queueAppendIntent_ === 'function') queueAppendIntent_(ctx, 'LifeHistory_Log', ['C' + cycle, fpop, fname, 'Media|fame', 'Assumed fame at ' + fcell + ' media usage — permanent; Tier 1 floor', '', cycle], 'engine.118 fame', 'citizens', 100);
+        if (typeof recordRipple_ === 'function') recordRipple_(ctx, { causeType: 'fame-event', causeId: fpop, causeDetail: fname + ' — assumed fame (' + fcell + ' on record)', effectType: 'fame-permanent', targetScope: 'citizen', targetIds: [fpop], neighborhood: iNb >= 0 ? String(frow[iNb] || '') : '', magnitude: 0.1, duration: 1, sourceEngine: 'processAdvancementIntake' });
+        famous = frow[iFamous];
+        results.famed++;
+        results.lines.push(fpop + ':famed:' + fcell);
+      }
+      if (famous && (Number(frow[iTier]) || 4) > 1) {
+        frow[iTier] = 1; // the floor, forever
+        if (iLastU >= 0) frow[iLastU] = 'C' + cycle;
+        results.fameFloored++;
+      }
+      if (famous) {
+        if (iLastU >= 0 && results.lines.length && results.lines[results.lines.length - 1] === fpop + ':famed:' + fcell) frow[iLastU] = 'C' + cycle;
+        rows[f] = frow; ctx.ledger.dirty = true;
+        // cut 3b: the famous sub-roster follows the marker
+        var iRole118 = h.indexOf('RoleType');
+        var cul = ensureFamousOnCulturalLedger_(ctx, fpop, fname, iRole118 >= 0 ? frow[iRole118] : '', iNb >= 0 ? frow[iNb] : '');
+        if (cul === 'registered' || cul === 'brightened') results.cultural = (results.cultural || 0) + 1;
+      }
+    }
+  }
+
+  var citations = earnedCitationsByKey_(ctx);
+  var keyOf = function(row) { return normalizeCitizenName_(row[iFirst]) + ' ' + normalizeCitizenName_(row[iLast]); };
+  var keyCount = {};
+  for (var k = 0; k < rows.length; k++) { var kk = keyOf(rows[k]); if (kk !== ' ') keyCount[kk] = (keyCount[kk] || 0) + 1; }
+
+  for (var r = 0; r < rows.length; r++) {
+    var row = rows[r];
+    if (!row || !row[iPop]) continue;
+    var cell = Number(row[iUse]) || 0;
+    if (cell < TIER_BAR[3]) continue;
+    var st = iStat >= 0 ? String(row[iStat] || '').trim().toLowerCase() : 'active';
+    if (st !== 'active') continue;
+    var mode = iClock >= 0 ? String(row[iClock] || 'ENGINE').trim().toUpperCase() : 'ENGINE';
+    if (mode !== 'ENGINE' && mode !== 'GAME' && mode !== 'CIVIC' && mode !== 'MEDIA') continue;
+    var key = keyOf(row);
+    if (keyCount[key] > 1) { results.ambiguous++; continue; }
+    var rec = citations[key] || { cited: 0, published: 0, hard: 0 };
+    var onRecord = (mode === 'MEDIA') ? rec.published * MEDIA_PUBLISHED_WORTH : Math.max(0, rec.cited - (rec.hard || 0)); // engine.152: hard light counts against
+    var earned = Math.min(cell, onRecord);
+    if (earned < cell && tierForEarnedUsage_(cell) < tierForEarnedUsage_(earned)) results.seededHeld++;
+    var target = tierForEarnedUsage_(earned);
+    var current = Number(row[iTier]) || 4;
+    if (target >= current) continue;
+
+    row[iTier] = target;
+    var name = (String(row[iFirst] || '').trim() + ' ' + String(row[iLast] || '').trim()).trim();
+    var stamp = (typeof inWorldStamp_ === 'function') ? inWorldStamp_(ctx) : ('C' + cycle);
+    var line = stamp + ' — [Media] Updated to Tier ' + target + (mode === 'MEDIA' ?
+      ' — the work keeps making the Saturday paper (' + rec.published + ' published)' :
+      ' — the city keeps saying the name (' + earned + ' citations on record)');
+    if (iLife >= 0) row[iLife] = (row[iLife] ? row[iLife] + '\n' : '') + line;
+    if (iLastU >= 0) row[iLastU] = 'C' + cycle;
+    rows[r] = row;
+    ctx.ledger.dirty = true;
+    results.promoted++;
+    results.lines.push(String(row[iPop]).trim() + ':' + current + '->' + target + ':' + earned);
+    if (typeof queueAppendIntent_ === 'function') {
+      queueAppendIntent_(ctx, 'LifeHistory_Log',
+        ['C' + cycle, row[iPop], name, 'Media|tier-climb',
+         'Updated to Tier ' + target + ' — earned on ' + earned + ' citations (was Tier ' + current + ')', '', cycle],
+        'engine.150 tier ladder state', 'citizens', 100);
+    }
+    if (typeof recordRipple_ === 'function') {
+      recordRipple_(ctx, {
+        causeType: 'fame-event', causeId: String(row[iPop]).trim(),
+        causeDetail: name + ' — the city keeps saying the name: Tier ' + current + ' -> ' + target,
+        effectType: 'tier-climb', targetScope: 'citizen', targetIds: [String(row[iPop]).trim()],
+        neighborhood: iNb >= 0 ? String(row[iNb] || '') : '', magnitude: 0.05, duration: 1,
+        sourceEngine: 'processAdvancementIntake'
+      });
+    }
+  }
+  if (results.promoted || results.seededHeld || results.ambiguous) {
+    Logger.log('applyTierLadderState_: ' + results.promoted + ' promoted, ' + results.seededHeld + ' seeded cell(s) held, ' + results.ambiguous + ' ambiguous name(s) skipped');
+  }
+  if (results.famed || results.fameFloored || results.cultural) Logger.log('applyTierLadderState_: ' + results.famed + ' assumed fame, ' + results.fameFloored + ' fame-floored to Tier 1, ' + (results.cultural || 0) + ' cultural row(s) registered/brightened');
+  if (ctx.summary) ctx.summary.tierLadder = { promoted: results.promoted, seededHeld: results.seededHeld, ambiguous: results.ambiguous, famed: results.famed, fameFloored: results.fameFloored };
+  return results;
+}
+
+function decayMediaAttention_(ctx, cycle) {
+  if (!ctx || !ctx.ledger || !cycle) return;
+  var h = ctx.ledger.headers;
+  var iPop = h.indexOf('POPID'), iTier = h.indexOf('Tier'), iClock = h.indexOf('ClockMode'),
+      iUse = h.indexOf('UsageCount'), iStat = h.indexOf('Status'),
+      iFirst = h.indexOf('First'), iLast = h.indexOf('Last'), iLife = h.indexOf('LifeHistory'),
+      iLastU = h.indexOf('LastUpdated');
+  if (iPop < 0 || iUse < 0) return;
+
+  // last-named cycle per citizen name (Citizen_Media_Usage carries Cycle + name)
+  var lastNamedByName = {};
+  try {
+    var us = ctx.ss.getSheetByName('Citizen_Media_Usage');
+    if (us && us.getLastRow() > 1) {
+      var uv = us.getDataRange().getValues();
+      var uh = uv[0], iUCyc = uh.indexOf('Cycle'), iUName = uh.indexOf('CitizenName'), iUType = uh.indexOf('UsageType');
+      if (iUCyc >= 0 && iUName >= 0) {
+        for (var ur = 1; ur < uv.length; ur++) {
+          if (iUType >= 0 && isFamilyUsage_(uv[ur][iUType])) continue; // engine.304 D10: not media attention
+          var un = String(uv[ur][iUName] || '').trim().toLowerCase();
+          var uc = Number(String(uv[ur][iUCyc] || '').replace(/[^0-9]/g, '')) || 0;
+          if (un && uc && (!(un in lastNamedByName) || uc > lastNamedByName[un])) lastNamedByName[un] = uc;
+        }
+      }
+    }
+  } catch (eU) { Logger.log('decayMediaAttention_: usage read failed — ' + eU.message); }
+
+  // earned-tier markers per POPID from LifeHistory_Log Advancement rows
+  var earnedTiersByPop = {};
+  try {
+    var ll = ctx.ss.getSheetByName('LifeHistory_Log');
+    if (ll && ll.getLastRow() > 1) {
+      var lv = ll.getDataRange().getValues();
+      var lhh = lv[0], iLPop9 = lhh.indexOf('POPID');
+      if (iLPop9 >= 0) {
+        for (var lr = 1; lr < lv.length; lr++) {
+          var lTxt = String(lv[lr][4] || '');
+          // engine.150 (S412, builder 2026-09-02): an EARNED rung is one climbed on
+          // usage — the old citation climb's 'Promotion' line ("Advanced from Tier
+          // X to Tier Y") or the state pass's 'Media|tier-climb' line. Advancement
+          // intake stamps ("Updated to Tier N" on an 'Advancement' row, written on
+          // every intake whether or not the Tier moved) are authored, not earned —
+          // they were the ONLY marker read since S325, so decay had it backwards.
+          var lType9 = String(lv[lr][3] || '');
+          if (!/^Promotion$|tier-climb/.test(lType9)) continue;
+          var m9 = lTxt.match(/Updated to Tier (\d)/) || lTxt.match(/Advanced from Tier \d to Tier (\d)/);
+          if (!m9) continue;
+          var lp9 = String(lv[lr][iLPop9] || '').trim().toUpperCase();
+          if (!lp9) continue;
+          (earnedTiersByPop[lp9] = earnedTiersByPop[lp9] || {})[Number(m9[1])] = true;
+        }
+      }
+    }
+  } catch (eL) { Logger.log('decayMediaAttention_: log read failed — ' + eL.message); }
+
+  var iFamous9 = h.indexOf('Famous');
+  var decays = 0, demotions = 0;
+  for (var r = 0; r < ctx.ledger.rows.length; r++) {
+    var row = ctx.ledger.rows[r];
+    var use = Number(row[iUse]) || 0;
+    if (use <= 0) continue;
+    if (iFamous9 >= 0 && String(row[iFamous9] || '').trim()) continue; // engine.118: fame is permanent — the count and the Tier are frozen; only FameScore moves
+    var st9 = iStat >= 0 ? String(row[iStat] || '').trim().toLowerCase() : '';
+    if (st9 === 'deceased' || st9 === 'traded' || st9 === 'pending' || st9 === 'inactive') continue;
+    var nm9 = ((iFirst >= 0 ? row[iFirst] : '') + ' ' + (iLast >= 0 ? row[iLast] : '')).toString().trim().toLowerCase();
+    var lastNamed = lastNamedByName[nm9] || 0;
+    if (lastNamed && (cycle - lastNamed) <= ATTENTION_QUIET_CYCLES) continue;
+    if (!lastNamed) continue; // never named on record — UsageCount predates the usage tab; leave history alone
+
+    // rule 1: attention fades
+    row[iUse] = use - 1;
+    ctx.ledger.rows[r] = row;
+    ctx.ledger.dirty = true;
+    decays++;
+
+    // rules 2+3: earned rungs give way
+    var tier9 = Number(row[iTier]) || 4;
+    var mode9 = iClock >= 0 ? String(row[iClock] || 'ENGINE').trim().toUpperCase() : 'ENGINE';
+    if (tier9 <= 1 || tier9 >= 4 || (mode9 !== 'ENGINE' && mode9 !== 'GAME')) continue; // engine.150: ENGINE + GAME fall as they climb; MEDIA held from decay while the Saturday selection is unproven (bench C114 would have dropped three desk voices whose Tier has no published work behind it); CIVIC held
+    var pop9 = String(row[iPop] || '').trim().toUpperCase();
+    var earned = earnedTiersByPop[pop9] || {};
+    var bar = TIER_BAR[tier9] || 99;
+    if (earned[tier9] && (use - 1) < bar) {
+      row[iTier] = tier9 + 1;
+      if (iLife >= 0) {
+        var demLine = 'C' + cycle + " — [Media-Sociability-Down-M] The spotlight moved on — back to Tier " + (tier9 + 1) + ' life, quieter and no less lived';
+        row[iLife] = (row[iLife] ? row[iLife] + '\n' : '') + demLine;
+      }
+      if (iLastU >= 0) row[iLastU] = 'C' + cycle;
+      ctx.ledger.rows[r] = row;
+      demotions++;
+      if (typeof queueAppendIntent_ === 'function') {
+        queueAppendIntent_(ctx, 'LifeHistory_Log',
+          ['C' + cycle, row[iPop], ((iFirst >= 0 ? row[iFirst] : '') + ' ' + (iLast >= 0 ? row[iLast] : '')).toString().trim(),
+           'Media|tier-decay', 'The spotlight moved on — Tier ' + tier9 + ' -> ' + (tier9 + 1) + ' (attention faded)',
+           '', cycle], 'engine.69 tier decay', 'citizens', 100);
+      }
+      // V2-5 (S326): the fall from the ladder enters the story surface —
+      // "where are they now" is a story the same way the rise was (0.05).
+      if (typeof recordRipple_ === 'function') {
+        var iNb9 = h.indexOf('Neighborhood');
+        recordRipple_(ctx, {
+          causeType: 'fame-event',
+          causeId: pop9,
+          causeDetail: ((iFirst >= 0 ? row[iFirst] : '') + ' ' + (iLast >= 0 ? row[iLast] : '')).toString().trim() +
+            ' — the spotlight moved on: Tier ' + tier9 + ' -> ' + (tier9 + 1),
+          effectType: 'tier-decay',
+          targetScope: 'citizen',
+          targetIds: [pop9],
+          neighborhood: iNb9 >= 0 ? String(row[iNb9] || '') : '',
+          magnitude: 0.05,
+          duration: 1,
+          sourceEngine: 'processAdvancementIntake'
+        });
+      }
+    }
+  }
+  if (decays || demotions) Logger.log('decayMediaAttention_: ' + decays + ' attention decays, ' + demotions + ' tier demotions');
+  if (ctx.summary) ctx.summary.tierDecay = { decays: decays, demotions: demotions };
+}
+
+var GC_EMERGENCE_PROMOTION_THRESHOLD = 3;
+
+// engine.66 (S324): ONE drip system, 2 per cycle, period (Mike-pinned S324;
+// S322 drip rule — all GC→SL doors share it). Emergence promotions are
+// earned (real media only, engine.66b) and fill first; family-match draws
+// take whatever slots remain.
+// engine.66b (S324, Mike-direct — NOTHING IS FREE): no probability dial.
+// Each remaining slot draws ONE random Active GC citizen; they land only on
+// a STRICT fit — same neighborhood REQUIRED, right sex, right age. If the
+// world didn't produce a fitting person, nothing lands. Zero is normal.
+var DRIP_CAP_PER_CYCLE = 2;
+var DRIP_SPOUSE_AGE_BAND = 10;  // |candidate BY − partner BY| ≤ band
+var DRIP_PARENT_AGE_MIN = 18;   // parent is 18-45 years older than the kid
+var DRIP_PARENT_AGE_MAX = 45;
+
+/**
+ * engine.58 (S320): scan Generic_Citizens for Active rows at/over the
+ * emergence threshold and queue them as Advancement_Intake1 rows.
+ * processAdvancementRows_ (runs right after) promotes them to full SL rows
+ * with derived demographics and marks the GC row 'Emerged'. GC facts
+ * (BirthYear, Neighborhood, Occupation) ride along so promotion preserves
+ * them instead of re-deriving; the two optional columns are ensured on the
+ * intake sheet (S184 processor already reads them when present —
+ * schema-setup carve-out, fires once per sheet lifetime).
+ * Self-healing: if a queued row fails to process, the GC row stays Active
+ * at threshold and re-queues next cycle; an already-promoted citizen routes
+ * to the update path, never a duplicate mint.
+ */
+// S336 (employment-living-system Task 5): capacity-aware Business_Ledger pool
+// for the mint's employer pick. engine.278 (Task 9): each business is filed
+// under its field (sectorCategory_, strict — the same map the rehire matcher
+// reads) with its hood, replacing the four keyword buckets. A business whose
+// Sector reads as no field ('Corporate', 'Science', 'Talent Management') or
+// is a sports org takes no mint. Returns null on any read failure; the mint then
+// records seeking-work instead of throwing.
+function buildMintBizPool_(ss) {
+  try {
+    var bizSheet = ss ? ss.getSheetByName('Business_Ledger') : null;
+    if (!bizSheet) return null;
+    var bizData = bizSheet.getDataRange().getValues();
+    if (bizData.length < 2) return null;
+    var bh = bizData[0], bId = -1, bSector = -1, bCount = -1, bHood = -1;
+    for (var c = 0; c < bh.length; c++) {
+      var h = String(bh[c]).trim();
+      if (h === 'BIZ_ID') bId = c;
+      if (h === 'Sector') bSector = c;
+      if (h === 'Employee_Count') bCount = c;
+      if (h === 'Neighborhood') bHood = c;
+    }
+    if (bId < 0 || bSector < 0) return null;
+    var catFn = (typeof sectorCategory_ === 'function') ? sectorCategory_ : null;
+    var byField = {}, fieldById = {};
+    var statedById = {};
+    var newsOutlets = []; // engine.319: an unnamed MEDIA title draws from these
+    for (var r = 1; r < bizData.length; r++) {
+      var id = String(bizData[r][bId] || '').trim();
+      if (!id) continue;
+      var sector = String(bizData[r][bSector] || '');
+      var hood = bHood >= 0 ? String(bizData[r][bHood] || '').trim() : '';
+      var field = catFn ? catFn(sector, true) : null;
+      // engine.307 fields a sports org for HIRING (runCareerEngine.js); the mint keeps it out of the pool
+      // exactly as before (codex diff gates 1–6): staff reach a team by the rehire matcher and the
+      // settlement, never by a title the mint reads — a carried employer is authored placement, unchanged.
+      // engine.319: "as before" = only what sectorCategory_'s sports branch alone fields. Sports Analytics
+      // (Tech) and a sports bar (Food) read as their field ahead of that branch and stay in the pool.
+      if (field && MINT_SPORTS_SECTOR_RE_.test(sector) && !(catFn && catFn(sector.replace(new RegExp(MINT_SPORTS_SECTOR_RE_.source, 'ig'), ' '), true))) field = null;
+      if (field) {
+        if (!byField[field]) byField[field] = [];
+        byField[field].push({ id: id, hood: hood });
+        fieldById[id] = field;
+      }
+      if (MINT_NEWS_SECTOR_RE_.test(sector)) newsOutlets.push({ id: id, hood: hood });
+      var rawCount = bCount >= 0 ? bizData[r][bCount] : '';
+      statedById[id] = (rawCount === '' || rawCount === null || rawCount === undefined || isNaN(Number(rawCount)))
+        ? null : Number(rawCount);
+    }
+    return { byField: byField, fieldById: fieldById, statedById: statedById, newsOutlets: newsOutlets };
+  } catch (e) {
+    Logger.log('buildMintBizPool_: Business_Ledger read failed (' + e.message + ') — mint employer skipped');
+    return null;
+  }
+}
+
+// engine.278 — which organisation a job title names, who is self-employed and
+// who holds no job: the roster's own rules, ported so the mint and
+// scripts/linkCitizensToEmployers.js place the same citizen the same way
+// (data/employer_mapping.json: parentheticalLookup, keywordRules in their
+// order, selfEmployedPatterns; the script's NO_EMPLOYMENT_ROLE). Matching is
+// the script's: a parenthetical read whole, keywords as case-sensitive
+// substrings with the first match deciding, patterns as unflagged regex.
+// scripts/mintEmployerPick.test.js fails when any list drifts from its source —
+// a mapping edit means a matching edit here.
+var MINT_PARENTHETICAL = {
+  'Port of Oakland': 'BIZ-00012', 'Anthropic': 'BIZ-00001', 'Gridiron Analytics': 'BIZ-00008', 'Oakmesh Systems': 'BIZ-00009', 'Portside Bio': 'BIZ-00010', 'Highland Hospital': 'BIZ-00015', 'AC Transit': 'BIZ-00013', 'Ridgeline Ventures': 'BIZ-00007', 'Community Affairs': 'BIZ-00017', 'UCSD': 'BIZ-00035', 'Private': 'SELF_EMPLOYED', 'Bayline 6': 'BIZ-00183', 'Oakland 12': 'BIZ-00184', 'OakTown Echo': 'BIZ-00099'
+};
+var MINT_KEYWORD_RULES = [
+  ['Bayline 6', 'BIZ-00183'], ['Oakland 12', 'BIZ-00184'], ['OakTown Echo', 'BIZ-00099'], // research.27 §3.2 (2026-10-11), mapping order
+  ['AC Transit', 'BIZ-00013'], ['BART', 'BIZ-00014'],
+  // engine.290: the BART crew titles, ahead of 'Transit Hub' (first substring wins)
+  // ('Transit Dispatcher' stays out: a generic catalog role, buses dispatch too — codex 2026-10-15 §4)
+  ['Train Conductor', 'BIZ-00014'], ['Train Operator', 'BIZ-00014'], ['Rail Dispatcher', 'BIZ-00014'],
+  ['Track Maintenance', 'BIZ-00014'],
+  ['Longshoreman', 'BIZ-00012'], ['Crane Operator', 'BIZ-00012'],
+  ['Dockworker', 'BIZ-00012'], ['Harbor', 'BIZ-00012'], ['Ship Pilot', 'BIZ-00012'], ['Maritime', 'BIZ-00012'],
+  ['Container Yard', 'BIZ-00012'], ['Port Logistics', 'BIZ-00012'], ['Tugboat', 'BIZ-00012'],
+  ['Trade Union', 'BIZ-00012'], ['Mayor', 'BIZ-00017'], ['Council', 'BIZ-00017'], ['Deputy Mayor', 'BIZ-00017'],
+  ['Deputy Director', 'BIZ-00017'], ['Chief of Staff', 'BIZ-00017'], ['City Planning', 'BIZ-00017'],
+  ['City Permit', 'BIZ-00017'], ['City Ombudsman', 'BIZ-00017'], ['Public Safety Executive', 'BIZ-00017'],
+  ['Oversight Executive', 'BIZ-00017'], ['Communications Director', 'BIZ-00017'], ['Ethics Commission', 'BIZ-00017'],
+  ['Elections Office', 'BIZ-00017'], ['Audit Commission', 'BIZ-00017'], ['Building Inspector', 'BIZ-00017'],
+  ['Code Enforcement', 'BIZ-00017'], ['Emergency Room', 'BIZ-00015'], ['Paramedic', 'BIZ-00015'],
+  ['Nurse', 'BIZ-00015'], ['Surgeon', 'BIZ-00015'], ['Trauma', 'BIZ-00015'], ['Mobile Clinic', 'BIZ-00026'],
+  ['Community Health', 'BIZ-00026'], ['Dental', 'BIZ-00025'], ['ESL Teacher', 'BIZ-00016'],
+  ['GED Program', 'BIZ-00016'], ['School', 'BIZ-00016'], ['Teacher', 'BIZ-00016'], ['Early Childhood', 'BIZ-00016'],
+  ['Education Director', 'BIZ-00016'], ['Librarian', 'BIZ-00021'], ['Public Library', 'BIZ-00021'],
+  ['Public Defender', 'BIZ-00022'], ['Court Reporter', 'BIZ-00022'], ['Probation', 'BIZ-00022'],
+  ['Legal Aid', 'BIZ-00022'], ['Fire', 'BIZ-00023'], ['Police', 'BIZ-00024'], ['Detective', 'BIZ-00024'],
+  ['Housing Authority', 'BIZ-00034'], ['Homeless Outreach', 'BIZ-00034'], ['Shelter Director', 'BIZ-00034'],
+  ['Reentry', 'BIZ-00034'], ['Editor-in-Chief', 'BIZ-00018'], ['Journalist', 'BIZ-00018'], ['Reporter', 'BIZ-00018'],
+  ['Desk Reporter', 'BIZ-00018'], ['Columnist', 'BIZ-00018'], ['Photographer', 'BIZ-00018'],
+  ['Sideline Reporter', 'BIZ-00018'], ['PG&E', 'BIZ-00032'], ['Estuary Power', 'BIZ-00032'], ['Baylight', 'BIZ-00020'],
+  ['Parks and Recreation', 'BIZ-00027'], ['Park Ranger', 'BIZ-00031'], ['Welding Instructor', 'BIZ-00035'],
+  ['Community College', 'BIZ-00035'], ['Pastry Chef', 'BIZ-00043'], ['Line Cook', 'BIZ-00044'],
+  ['Bartender', 'BIZ-00036'], ['Sommelier', 'BIZ-00043'], ['DJ$', 'BIZ-00039'], ['OEWD', 'BIZ-00094'],
+  ['Stabilization Fund', 'BIZ-00094'], ['OARI', 'BIZ-00095'], ['Alternative Response', 'BIZ-00095'],
+  ['Transit Hub', 'BIZ-00096'], ['Health Center', 'BIZ-00097'], ['Apprenticeship', 'BIZ-00098'],
+  ['Digital Twin', 'BIZ-00052'], ['Drone Fleet', 'BIZ-00052'], ['Autonomous Vehicle', 'BIZ-00052'],
+  ['Gene Therapy', 'BIZ-00015'], ['Climate Adaptation', 'BIZ-00017'], ['Smart Building', 'BIZ-00006'],
+  ['Vertical Farm', 'BIZ-00031'], ['Marine Biolog', 'BIZ-00031'], ['Architect', 'BIZ-00089'],
+  ['Affordable Housing', 'BIZ-00034'], ['Urban Planner', 'BIZ-00017'], ['Coach, Oakland A', 'BIZ-00005'],
+  ['Scout, Oakland A', 'BIZ-00005'], ['Manager, Oakland A', 'BIZ-00005'], ["A's Marketing", 'BIZ-00005'],
+  ['City Manager', 'BIZ-00017'], ['Public Safety', 'BIZ-00017'], ['DIRECTOR OF EMERGENCY MANAGEMENT', 'BIZ-00017'],
+  ['POLICE REVIEW BOARD', 'BIZ-00017'], ['Director of Sustainability', 'BIZ-00017'], ['Port Worker', 'BIZ-00012'],
+  ['DEPUTY CHIEF', 'BIZ-00024'], ['INTERNAL AFFAIRS', 'BIZ-00024'], ['OPOA', 'BIZ-00024'],
+  ['FIRE CHIEF', 'BIZ-00023'], ['EMS DIRECTOR', 'BIZ-00023'], ['MEDICAL EXAMINER', 'BIZ-00015'],
+  ['DISTRICT ATTORNEY', 'BIZ-00022'], ['PUBLIC DEFENDER', 'BIZ-00022'], ['SUPERIOR COURT', 'BIZ-00022'],
+  ['PROBATION & REENTRY DIRECTOR', 'BIZ-00022'], ['Oakland Oaks', 'BIZ-00074'], ['Copy Chief', 'BIZ-00018'],
+  ['Club Manager', 'BIZ-00040'], ['West Oakland Community Center', 'BIZ-00028'], ['DigitalOcean', 'BIZ-00002'],
+  ['Civis Systems', 'BIZ-00052'], ['Library Worker', 'BIZ-00021'], ['Software engineer', 'BIZ-00030'],
+  ['Bart Transit', 'BIZ-00014'], ['Bus driver', 'BIZ-00013'], ['Bus Driver', 'BIZ-00013'],
+  ['Taxi driver', 'SELF_EMPLOYED'], ['Taxi Driver', 'SELF_EMPLOYED'], ['Pianist', 'SELF_EMPLOYED'],
+  ['Aura Wellness', 'SELF_EMPLOYED'], ['Speculative Internet', 'SELF_EMPLOYED'], ['Gallery Owner', 'SELF_EMPLOYED'],
+  ['small business owner', 'SELF_EMPLOYED'], ['Actress', 'SELF_EMPLOYED'], ['Actor', 'SELF_EMPLOYED'],
+  ['Rapper', 'SELF_EMPLOYED'], ['Musician', 'SELF_EMPLOYED'], ['Painter', 'SELF_EMPLOYED'],
+  ['Artist', 'SELF_EMPLOYED'], ['Model', 'SELF_EMPLOYED'], ['Writer', 'SELF_EMPLOYED'],
+  ['Health Officer', 'BIZ-00015']
+];
+var MINT_SELF_EMPLOYED_PATTERNS = ['Owner$', '^Freelance', '^Independent', 'Artisan', 'Pitmaster$', 'Food Truck',
+  'Tattoo Artist', 'Muralist', '^Booky$', 'Drug Dealer', 'Organized Crime'];
+var MINT_NO_EMPLOYMENT_ROLE = /^student$|retired|hall of famer|\bresident$/i;
+
+// The roster's layers 2-4 for one role: a BIZ id, 'SELF_EMPLOYED', or '' when no rule names anything.
+function mintNamedEmployer_(role) {
+  var paren = role.match(/\(([^)]+)\)/);
+  if (paren && MINT_PARENTHETICAL[paren[1].trim()]) return MINT_PARENTHETICAL[paren[1].trim()];
+  for (var k = 0; k < MINT_KEYWORD_RULES.length; k++) {
+    if (role.indexOf(MINT_KEYWORD_RULES[k][0]) !== -1) return MINT_KEYWORD_RULES[k][1];
+  }
+  for (var i = 0; i < MINT_SELF_EMPLOYED_PATTERNS.length; i++) if (new RegExp(MINT_SELF_EMPLOYED_PATTERNS[i]).test(role)) return 'SELF_EMPLOYED';
+  return '';
+}
+
+// engine.319 — the ledger's four clocks; the intake door folds its cell to one of them or refuses the row.
+var MINT_CLOCK_MODES_ = { ENGINE: true, GAME: true, CIVIC: true, MEDIA: true };
+// engine.338: the two EmployerBizId words that are not a tracked business (the mint's own sentinels)
+var ADV_EMPLOYER_SENTINELS_ = { SELF_EMPLOYED: true, UNTRACKED: true };
+
+// engine.338 (codex F3): one cell, one pending intent. If this run already queued a cell intent on (tab, row, col) — the
+// career engine's headcount write-back, an earlier re-home in this batch — its value is raised to `value` only when
+// `value` is one more than the pending value's own baseline is unknowable, so the rule is: ADD the hire to the pending
+// value (pending + 1) rather than overwrite it with a count read from the tab before Career moved it. No pending intent
+// → queue `value` (the tab's count + 1). Returns the value now pending. Phase 10 writes the one intent.
+function bumpPendingCellIntent_(ctx, tab, row, col, value, reason) {
+  var pend = ctx && ctx.persist && Array.isArray(ctx.persist.updates) ? ctx.persist.updates : null;
+  if (pend) {
+    for (var i = pend.length - 1; i >= 0; i--) {
+      var it = pend[i];
+      if (it && it.kind === 'cell' && it.tab === tab && it.address && it.address.row === row && it.address.col === col) {
+        var cur = Number(it.values && it.values[0] && it.values[0][0]);
+        var next = (isNaN(cur) ? value : cur + 1);
+        it.values = [[next]];
+        it.reason = String(it.reason || '') + ' | ' + reason;
+        return next;
+      }
+    }
+  }
+  queueCellIntent_(ctx, tab, row, col, value, reason, 'citizens');
+  return value;
+}
+
+// engine.338: Business_Ledger as the existing-row door reads it — every BIZ_ID with its 1-based sheet row, its stated
+// Employee_Count (null when blank / non-numeric: a count the door never invents) and its name; countCol is the 0-based
+// Employee_Count column. Returns null when the tab or either column is missing (the caller refuses the queue row that
+// needed it, naming the row). Read once per pass; the batch's own hires are counted into `stated` as they land.
+function readAdvBusinessBook_(ss) {
+  var sheet = ss ? ss.getSheetByName('Business_Ledger') : null;
+  if (!sheet) return null;
+  var data = sheet.getDataRange().getValues();
+  if (data.length < 2) return null;
+  var h = data[0], cId = -1, cName = -1, cCount = -1;
+  for (var c = 0; c < h.length; c++) {
+    var hd = String(h[c]).trim();
+    if (hd === 'BIZ_ID') cId = c; else if (hd === 'Name') cName = c; else if (hd === 'Employee_Count') cCount = c;
+  }
+  if (cId < 0 || cCount < 0) return null;
+  var byId = {};
+  for (var r = 1; r < data.length; r++) {
+    var id = String(data[r][cId] || '').trim();
+    if (!id) continue;
+    var raw = data[r][cCount];
+    byId[id] = {
+      sheetRow: r + 1,
+      name: String(cName >= 0 ? (data[r][cName] || id) : id),
+      stated: (raw === '' || raw === null || raw === undefined || isNaN(Number(raw))) ? null : Number(raw)
+    };
+  }
+  return { byId: byId, countCol: cCount };
+}
+// engine.319 — a GAME title's team: the roster script's two sports-layer ids
+// (scripts/linkCitizensToEmployers.js layer 1 — keyed there on OriginGame, which
+// an intake mint never carries, so the mint reads the title). The farm clubs are
+// live's own titles, every one at the A's. The first team the title names decides.
+var MINT_GAME_TEAMS_ = [
+  [/\bOaks\b/, 'BIZ-00074'],
+  [/\bOakland (?:A['’]s|As|Athletics)\b|\b(?:Las Vegas Aviators|Midland RockHounds|Stockton Ports)\b/, 'BIZ-00005']
+];
+// engine.319 — an unnamed CIVIC title: the mapping's categoryDefaults['Government & Civic'] (City of Oakland).
+var MINT_CIVIC_EMPLOYER_ = 'BIZ-00017';
+// engine.319 — the Sector words of sectorCategory_'s sports branch; a news outlet's Sector.
+var MINT_SPORTS_SECTOR_RE_ = /sports|stadium|franchise|athletic/i;
+var MINT_NEWS_SECTOR_RE_ = /journalism|news|broadcast/i;
+
+function mintGameTeam_(role) {
+  var best = '', at = -1;
+  for (var t = 0; t < MINT_GAME_TEAMS_.length; t++) {
+    var m = MINT_GAME_TEAMS_[t][0].exec(role);
+    if (m && (at < 0 || m.index < at)) { at = m.index; best = MINT_GAME_TEAMS_[t][1]; }
+  }
+  return best;
+}
+
+// Deterministic slot: seed-hash over the citizen identity, no rng
+// (this path predates ctx.rng plumbing; replayable either way).
+function mintSeedSlot_(seed, list) {
+  var s = String(seed || ''), mHash = 0;
+  for (var mc = 0; mc < s.length; mc++) mHash = ((mHash << 5) - mHash + s.charCodeAt(mc)) | 0;
+  return list[Math.abs(mHash) % list.length].id;
+}
+
+// The citizen's own hood first ('City-wide' counts as every hood), then the whole list.
+function mintHoodFirst_(list, hood) {
+  var h = String(hood || '').trim();
+  var near = h ? list.filter(function (b) { return b.hood === h || b.hood === 'City-wide'; }) : [];
+  return near.length ? near : list;
+}
+
+// engine.278 / engine.319 — the mint's employer pick, in order:
+//   a no-job role (student, retired, Hall of Famer) → no employer, no line;
+//   a GAME-clock citizen → the first team the title names (MINT_GAME_TEAMS_),
+//     on the ledger with room; a title naming no Oakland team → UNTRACKED
+//     (another league: employed off the tracked ledger). Never a field draw;
+//   a title the mapping names an organisation for (Police → the police
+//     department, Teacher → the school district) → that business, when it is a
+//     fielded business with room; a title the mapping calls self-employed →
+//     SELF_EMPLOYED;
+//   a MEDIA-clock title nothing names → a news outlet with room, hood first,
+//     seed-hash slot; none with room → UNTRACKED;
+//   a CIVIC-clock title nothing names, with a job field → City of Oakland when
+//     it has room (not a draw across police, fire and housing, nor a private
+//     firm); a civic title with no field (a union rep) stays UNTRACKED below;
+//   else the role's field (roleFieldOf_, 'Trades' read as its field by
+//     skillTagField_) against businesses of that field with room — the citizen's
+//     own hood first, then the whole field; seed-hash slot;
+//   a field with no room, or a role with no field → UNTRACKED (a mint arrives
+//     with a job and its pay: employed off the tracked ledger, not seeking);
+//   an unreadable Business_Ledger → seeking: true (the caller writes the line).
+// Outside a GAME row's team, a business whose Sector reads as no field (the
+// sports orgs among them) is never picked, named or not.
+// Pure: no rng, no sheet. Returns { bizId, sentinel, seeking }.
+function pickMintEmployer_(roleType, hood, clockMode, seed, pool, hasRoom) {
+  var out = { bizId: '', sentinel: '', seeking: false };
+  var role = String(roleType || '').trim();
+  var clock = String(clockMode || '').trim().toUpperCase();
+  if (!role || MINT_NO_EMPLOYMENT_ROLE.test(role)) return out;
+  if (clock === 'GAME') {
+    var team = mintGameTeam_(role);
+    if (!team) { out.sentinel = 'UNTRACKED'; return out; }
+    if (!pool) { out.seeking = true; return out; }
+    if (hasRoom(team)) out.bizId = team; else out.sentinel = 'UNTRACKED';
+    return out;
+  }
+  var named = mintNamedEmployer_(role);
+  if (named === 'SELF_EMPLOYED') { out.sentinel = 'SELF_EMPLOYED'; return out; }
+  if (named && pool && pool.fieldById && pool.fieldById[named] && hasRoom(named)) { out.bizId = named; return out; }
+  if (clock === 'MEDIA') {
+    if (!pool || !pool.newsOutlets) { out.seeking = true; return out; }
+    var outlets = pool.newsOutlets.filter(function (b) { return hasRoom(b.id); });
+    if (!outlets.length) { out.sentinel = 'UNTRACKED'; return out; }
+    out.bizId = mintSeedSlot_(seed, mintHoodFirst_(outlets, hood));
+    return out;
+  }
+  var cat = (typeof roleFieldOf_ === 'function') ? roleFieldOf_(role) : null;
+  var field = (cat && typeof skillTagField_ === 'function') ? skillTagField_(cat) : null;
+  if (!field) { out.sentinel = 'UNTRACKED'; return out; }
+  if (!pool || !pool.byField) { out.seeking = true; return out; }
+  if (clock === 'CIVIC' && pool.fieldById && pool.fieldById[MINT_CIVIC_EMPLOYER_] && hasRoom(MINT_CIVIC_EMPLOYER_)) {
+    out.bizId = MINT_CIVIC_EMPLOYER_;
+    return out;
+  }
+  var open = (pool.byField[field] || []).filter(function (b) { return hasRoom(b.id); });
+  if (!open.length) { out.sentinel = 'UNTRACKED'; return out; }
+  out.bizId = mintSeedSlot_(seed, mintHoodFirst_(open, hood));
+  return out;
+}
+
+function checkEmergencePromotions_(ss, cycle, maxQueue, simYear, ctx) {
+  if (!(Number(simYear) > 0)) throw new Error('checkEmergencePromotions_: simYear required (engine.164)');
+  var results = { queued: 0, family: 0, released: 0 };
+  // engine.66: shared drip cap — deferred citizens stay Active at threshold
+  // and re-queue next cycle (the self-healing property below already covers
+  // exactly this). Undefined maxQueue (legacy caller) = uncapped.
+  var cap = (typeof maxQueue === 'number') ? maxQueue : Infinity;
+  if (cap <= 0) return results;
+  var genericSheet = ss.getSheetByName('Generic_Citizens');
+  if (!genericSheet) return results;
+  var data = genericSheet.getDataRange().getValues();
+  if (data.length < 2) return results;
+  var h = data[0];
+  var gF = findColByName_(h, 'First'), gL = findColByName_(h, 'Last'),
+      gE = findColByName_(h, 'EmergenceCount'), gS = findColByName_(h, 'Status'),
+      gB = findColByName_(h, 'BirthYear'), gN = findColByName_(h, 'Neighborhood'),
+      gO = findColByName_(h, 'Occupation'), gA = findColByName_(h, 'Age'),
+      gEmp = findColByName_(h, 'EmployerBizId'); // S336 Task 5 — the pool's tracked workplace, when assigned
+  if (gF < 0 || gL < 0 || gE < 0) return results;
+  // engine.304 D6: a Family row arrives as family — its link is re-checked against the ledger before it queues
+  var fam = (ctx && ctx.ledger) ? gcFamilyLinks_(data) : null;
+  var FL = fam ? familyLedgerCols_(ctx.ledger.headers) : null;
+  var famRowByPop = {}, famNames = {};
+  if (fam) {
+    for (var fp = 0; fp < ctx.ledger.rows.length; fp++) {
+      var frow = ctx.ledger.rows[fp];
+      if (!frow) continue;
+      if (frow[FL.pop]) famRowByPop[String(frow[FL.pop]).trim()] = frow;
+      if (FL.first >= 0) famNames[normalizeCitizenName_(frow[FL.first]) + ' ' + normalizeCitizenName_(frow[FL.last])] = true;
+    }
+  }
+
+  var advSheet = requireTab_(ss, 'Advancement_Intake1'); // engine.119: no runtime create
+  var advHeaders = advSheet.getRange(1, 1, 1, advSheet.getLastColumn()).getValues()[0];
+  // EmployerBizId: S336 Task 5; the Match* trio carries a Family row's link to the mint (engine.304 D6, moved from the family door)
+  var ensureCols = ['BirthYear', 'Neighborhood', 'EmployerBizId', 'MatchPopId', 'MatchType', 'MaidenName'];
+  for (var e = 0; e < ensureCols.length; e++) {
+    if (findColByName_(advHeaders, ensureCols[e]) < 0) {
+      advSheet.getRange(1, advHeaders.length + 1).setValue(ensureCols[e]);
+      advHeaders.push(ensureCols[e]);
+    }
+  }
+  var aF = findColByName_(advHeaders, 'First'), aM = findColByName_(advHeaders, 'Middle'),
+      aL = findColByName_(advHeaders, 'Last'), aR = findColByName_(advHeaders, 'RoleType'),
+      aT = findColByName_(advHeaders, 'Tier'), aC = findColByName_(advHeaders, 'ClockMode'),
+      aNo = findColByName_(advHeaders, 'Notes'), aBY = findColByName_(advHeaders, 'BirthYear'),
+      aNB = findColByName_(advHeaders, 'Neighborhood'),
+      aEmp = findColByName_(advHeaders, 'EmployerBizId'), // S336 Task 5
+      aMP = findColByName_(advHeaders, 'MatchPopId'), aMT = findColByName_(advHeaders, 'MatchType'),
+      aMN = findColByName_(advHeaders, 'MaidenName');
+
+  for (var r = 1; r < data.length; r++) {
+    if (results.queued >= cap) break; // engine.66 shared drip cap
+    var gst = gS >= 0 ? String(data[r][gS] || '').toLowerCase() : 'active';
+    if (gst !== 'active' && !(fam && gst === 'family')) continue;
+    var count = Number(data[r][gE]) || 0;
+    if (count < GC_EMERGENCE_PROMOTION_THRESHOLD) continue;
+    var first = String(data[r][gF] || '').trim();
+    var last = String(data[r][gL] || '').trim();
+    if (!first || !last) continue;
+    var famOf = '', famRole = '', famHood = '';
+    // engine.304 (agy review §8): a stranger whose name already belongs to a ledger citizen would mint as a bump of THAT
+    // citizen and stay Active at the threshold, re-queued every Cycle — holding a shared cap slot for good. It waits.
+    if (gst === 'active' && fam && famNames[normalizeCitizenName_(first) + ' ' + normalizeCitizenName_(last)]) {
+      results.nameTaken = (results.nameTaken || 0) + 1;
+      Logger.log('checkEmergencePromotions_: ' + first + ' ' + last + ' — the name is already a ledger citizen; not queued (C' + cycle + ')');
+      continue;
+    }
+    if (gst === 'family') {
+      famOf = String(data[r][fam.cols.of] || '').trim();
+      famRole = String(data[r][fam.cols.role] || '').trim().toLowerCase();
+      var famAt = familyAnchorOf_(ctx, FL, famRowByPop, famOf); // D11: a dead citizen's family still arrives as family
+      var famAnchor = famAt ? famAt.row : null;
+      var famOpen = !!famAt &&
+        familySpotsOpen_(FL, famAnchor, simYear, fam.byAnchor[famOf], r, false)[famRole] >= 1 &&
+        !famNames[normalizeCitizenName_(first) + ' ' + normalizeCitizenName_(last)];
+      if (!famOpen) { // D6a: the spot closed or the name is taken — released here, not queued
+        releaseFamilyLink_(genericSheet, data, r, fam.cols, gL, cycle);
+        results.released++;
+        Logger.log('checkEmergencePromotions_: ' + first + ' ' + last + ' — the ' + famRole + ' spot of ' + famOf + ' closed; back in the pool (C' + cycle + ')');
+        continue;
+      }
+      famHood = FL.hood >= 0 ? String(famAnchor[FL.hood] || '').trim() : '';
+    }
+    var birthYear = gB >= 0 ? (Number(data[r][gB]) || 0) : 0;
+    if (!birthYear && gA >= 0 && Number(data[r][gA]) > 0) birthYear = simYear - Number(data[r][gA]); // engine.164
+
+    var out = new Array(advHeaders.length).fill('');
+    if (aF >= 0) out[aF] = first;
+    if (aM >= 0) out[aM] = '';
+    if (aL >= 0) out[aL] = last;
+    if (aR >= 0) out[aR] = gO >= 0 ? String(data[r][gO] || '').trim() : '';
+    if (aT >= 0) out[aT] = 4; // lottery entry is Tier 4 — climbs via UsageCount like everyone
+    if (aC >= 0) out[aC] = 'ENGINE';
+    if (aNo >= 0) out[aNo] = famOf
+      ? 'GC family emergence — ' + famRole + ' of ' + (famAt && famAt.dead ? 'the late ' : '') + famOf + ', EmergenceCount ' + count + ', C' + cycle
+      : 'GC emergence promotion — EmergenceCount ' + count + ', C' + cycle;
+    if (aBY >= 0 && birthYear) out[aBY] = birthYear;
+    if (aNB >= 0) out[aNB] = famHood || (gN >= 0 ? String(data[r][gN] || '').trim() : '');
+    if (famOf) { // engine.304 D6: wireFamilyMatch_ wires them at the mint
+      if (aMP >= 0) out[aMP] = famOf;
+      if (aMT >= 0) out[aMT] = famRole;
+      if (aMN >= 0) out[aMN] = String(data[r][fam.cols.maiden] || '').trim();
+    }
+    // S336 Task 5: a pool citizen with an assigned tracked workplace carries it
+    // through promotion — "born into a tracked job". Blank rides blank; the
+    // mint resolves a capacity-aware employer from the final RoleType instead.
+    if (aEmp >= 0 && gEmp >= 0) {
+      var gcBiz = String(data[r][gEmp] || '').trim();
+      if (gcBiz.indexOf('BIZ-') === 0) out[aEmp] = gcBiz;
+    }
+    advSheet.appendRow(out);
+    results.queued++;
+    if (famOf) results.family++;
+  }
+  if (results.queued) Logger.log('checkEmergencePromotions_: queued ' + results.queued + ' GC lottery promotions (' + results.family + ' as family)');
+  return results;
+}
+
+/**
+ * engine.304 (builder 2026-10-19, R16–R17; plan engine.286 §engine.304 design pass D1–D5) — the family lottery.
+ * Replaces engine.66's 20% roll + blind two-reel match. A link, never a mint: the
+ * matched Generic_Citizens row takes Status `Family`, the family surname (its own
+ * kept as MaidenName), FamilyOf = the tracked citizen, FamilyRole = spouse | child |
+ * parent, and the family's hood — and stays in the pool until usage brings it to
+ * the ledger through checkEmergencePromotions_, wired as family there. The door
+ * spends no drip cap.
+ *
+ *   Release (D5): every Family row is first re-checked against its citizen — gone,
+ *   no longer Active, or the spot closed (a divorce, a remarriage, the kids now on
+ *   camera) — and goes back to the pool under its own name.
+ *   Draw (D2): every Active citizen with an open spot (married with no SpouseId;
+ *   NumChildren above the kids on camera and linked; a minor with fewer than two
+ *   parents on camera and linked) is drawn independently, p = min(1, D·w/Σw),
+ *   D = 1% of them, w = tier weight × heritage weight. "What should be hard to
+ *   predict is who, not whether."
+ *   One opportunity (D3): one of the drawn citizen's open spot kinds, then one
+ *   background citizen from those who fit it — same or bordering hood, right sex,
+ *   the age band, an adult for a spouse or a parent; never a row the emergence door
+ *   or the civic mint takes this fire, never a name that would duplicate another.
+ *   No fit → nothing for that family this Cycle.
+ */
+var FAMILY_LOTTERY_SHARE = 0.01;                                 // builder 2026-10-19: "1% is good"
+var FAMILY_LOTTERY_TIER_WEIGHT = { 1: 10, 2: 5, 3: 2, 4: 1 };    // builder 2026-10-19 (statement 8): "This look good" — a perk of ascension
+var GC_FAMILY_COLS = ['FamilyOf', 'FamilyRole', 'MaidenName'];   // engine.304 D1 — Generic_Citizens columns M–O
+
+function familyPopCount_(v) { return (String(v || '').match(/POP-\d+/g) || []).length; }
+
+// engine.304: Family rows of a Generic_Citizens read, by tracked citizen and role. Throws on a missing column —
+// the header lands before the code (plan D1); a silent skip would leave every family untouched and unnoticed.
+function gcFamilyLinks_(gData) {
+  var gh = gData[0];
+  var c = { status: findColByName_(gh, 'Status'), of: findColByName_(gh, 'FamilyOf'),
+            role: findColByName_(gh, 'FamilyRole'), maiden: findColByName_(gh, 'MaidenName') };
+  if (c.status < 0 || c.of < 0 || c.role < 0 || c.maiden < 0) {
+    throw new Error('engine.304: Generic_Citizens needs Status + ' + GC_FAMILY_COLS.join('/') + ' (write the header before this code runs)');
+  }
+  var byAnchor = {};
+  for (var r = 1; r < gData.length; r++) {
+    if (String(gData[r][c.status] || '').trim().toLowerCase() !== 'family') continue;
+    var of = String(gData[r][c.of] || '').trim(), role = String(gData[r][c.role] || '').trim().toLowerCase();
+    if (!of || !role) continue;
+    if (!byAnchor[of]) byAnchor[of] = { spouse: [], child: [], parent: [] };
+    if (byAnchor[of][role]) byAnchor[of][role].push(r);
+  }
+  return { cols: c, byAnchor: byAnchor };
+}
+
+// engine.304: a tracked citizen's open family spots — spouse 0|1, child and parent counts — net of the kin on
+// camera and of the Family rows already linked (selfRow, a Family row's own index, is not counted against itself).
+// forDraw: a parent spot opens only for a minor; a link already made keeps its spot when the child turns 18.
+function familySpotsOpen_(L, row, simYear, linked, selfRow, forDraw) {
+  var others = function (role) {
+    var a = (linked && linked[role]) || [], n = 0;
+    for (var k = 0; k < a.length; k++) if (a[k] !== selfRow) n++;
+    return n;
+  };
+  var out = { spouse: 0, child: 0, parent: 0 };
+  if (L.marital >= 0 && L.spouse >= 0 &&
+      String(row[L.marital] || '').trim().toLowerCase() === 'married' && !String(row[L.spouse] || '').trim()) {
+    out.spouse = Math.max(0, 1 - others('spouse'));
+  }
+  if (L.numKids >= 0 && L.children >= 0) {
+    out.child = Math.max(0, (Number(row[L.numKids]) || 0) - familyPopCount_(row[L.children]) - others('child'));
+  }
+  var by = Number(row[L.by]) || 0;
+  if (L.parents >= 0 && by > 0 && (!forDraw || (simYear - by) < 18)) {
+    out.parent = Math.max(0, 2 - familyPopCount_(row[L.parents]) - others('parent'));
+  }
+  return out;
+}
+
+function familyLedgerCols_(h) {
+  var idx = function (n) { return h.indexOf(n); };
+  return { pop: idx('POPID'), first: idx('First'), last: idx('Last'), status: idx('Status'), gender: idx('Gender'),
+           by: idx('BirthYear'), marital: idx('MaritalStatus'), spouse: idx('SpouseId'), parents: idx('ParentIds'),
+           children: idx('ChildrenIds'), numKids: idx('NumChildren'), hood: idx('Neighborhood'), tier: idx('Tier') };
+}
+
+// engine.304 (codex cut-2 review §2): a link or a release is ONE row write — the row is set in memory, then
+// written whole, so a failed call leaves the row as it was, never half-linked. gData is this pass's own fresh
+// read and the only GC writer between the read and the write, so the rest of the row is current.
+function writeGcRow_(sheet, gData, r) {
+  sheet.getRange(r + 1, 1, 1, gData[r].length).setValues([gData[r]]);
+}
+function noteGcContext_(gData, r, gC, note) {
+  if (gC < 0) return;
+  var cur = String(gData[r][gC] || '').trim();
+  gData[r][gC] = cur ? cur + ' | ' + note : note; // appended — seedEmergenceBonds_ reads only its "Named in …'s week" entries
+}
+
+// engine.304 D11 (builder 2026-10-19, statement 13: "Even in death the popid doesnt change or delete"): a family's
+// tracked citizen is found on the ledger first — Active, or Status deceased in the Cycle of the death — then in
+// Citizen_Archive, where only a DEATH counts. A trade, or no record at all, is not death: that link releases (D5).
+//   → { row, dead } | null   (row is ledger-shaped either way)
+function familyAnchorOf_(ctx, L, rowByPop, pop) {
+  var row = rowByPop[pop];
+  if (row) {
+    var st = String(row[L.status] || '').trim().toLowerCase();
+    if (st === 'active') return { row: row, dead: false };
+    return st === 'deceased' ? { row: row, dead: true } : null;
+  }
+  if (typeof citizenArchiveLatestByPop_ !== 'function') return null;
+  var arch = citizenArchiveLatestByPop_(ctx, ctx.ledger.headers)[String(pop).trim().toUpperCase()];
+  return (arch && arch.reason === 'deceased') ? { row: arch.row, dead: true } : null;
+}
+
+// engine.304 D5: a released row returns to the pool under its own name.
+function releaseFamilyLink_(sheet, gData, r, cols, gL, cycle) {
+  var before = gData[r].slice();
+  var maiden = String(gData[r][cols.maiden] || '').trim();
+  gData[r][cols.status] = 'Active';
+  if (maiden && gL >= 0) gData[r][gL] = maiden;
+  gData[r][cols.maiden] = ''; gData[r][cols.of] = ''; gData[r][cols.role] = '';
+  noteGcContext_(gData, r, findColByName_(gData[0], 'EmergenceContext'), 'Family link released, C' + cycle);
+  try { writeGcRow_(sheet, gData, r); } catch (e) { gData[r] = before; throw e; }
+}
+
+function checkFamilyMatchPromotions_(ctx, cycle) {
+  var results = { linked: 0, released: 0, drawn: 0, noFit: 0 };
+  if (!ctx || !ctx.ledger || typeof safeRand_ !== 'function') return results;
+  // The lottery is a cycle event — manual admin runs (runAdvancementIntakeManual)
+  // carry no ctx.rng/rngSeed and must not fire it (safeRand_ would throw).
+  if (typeof ctx.rng !== 'function' &&
+      !(ctx.config && typeof ctx.config.rngSeed === 'number')) return results;
+  var rng = safeRand_(ctx);
+  var ss = ctx.ss;
+
+  var genericSheet = ss.getSheetByName('Generic_Citizens');
+  if (!genericSheet) return results;
+  var gData = genericSheet.getDataRange().getValues();
+  if (gData.length < 2) return results;
+  var gh = gData[0];
+  var gF = findColByName_(gh, 'First'), gL = findColByName_(gh, 'Last'),
+      gB = findColByName_(gh, 'BirthYear'), gA = findColByName_(gh, 'Age'),
+      gN = findColByName_(gh, 'Neighborhood'), gE = findColByName_(gh, 'EmergenceCount'),
+      gX = findColByName_(gh, 'Sex');
+  if (gF < 0 || gL < 0) return results;
+  var links = gcFamilyLinks_(gData);
+  var fc = links.cols;
+
+  var h = ctx.ledger.headers, rows = ctx.ledger.rows;
+  var L = familyLedgerCols_(h);
+  if (L.pop < 0 || L.last < 0 || L.status < 0 || L.by < 0) return results;
+  var simYear = simYearOf_(ctx, cycle);
+  var rowByPop = {};
+  for (var p = 0; p < rows.length; p++) {
+    if (rows[p] && rows[p][L.pop]) rowByPop[String(rows[p][L.pop]).trim()] = rows[p];
+  }
+  var active = function (row) { return row && String(row[L.status] || '').trim().toLowerCase() === 'active'; };
+
+  // ── D5: release links whose spot closed ──
+  for (var anchorPop in links.byAnchor) {
+    if (!links.byAnchor.hasOwnProperty(anchorPop)) continue;
+    var anchorAt = familyAnchorOf_(ctx, L, rowByPop, anchorPop); // D11: the dead keep their family
+    ['spouse', 'child', 'parent'].forEach(function (role) {
+      var list = links.byAnchor[anchorPop][role];
+      for (var k = list.length - 1; k >= 0; k--) {
+        var gr = list[k];
+        var open = !!anchorAt && familySpotsOpen_(L, anchorAt.row, simYear, links.byAnchor[anchorPop], gr, false)[role] >= 1;
+        if (open) continue;
+        releaseFamilyLink_(genericSheet, gData, gr, fc, gL, cycle);
+        list.splice(k, 1);
+        results.released++;
+        Logger.log('checkFamilyMatchPromotions_: released ' + String(gData[gr][gF]) + ' ' + String(gData[gr][gL]) +
+          ' — the ' + role + ' spot of ' + anchorPop + ' closed (C' + cycle + ')');
+      }
+    });
+  }
+
+  // ── D2: who is drawn ──
+  var heritageByPop = (typeof heritageTierByPop_ === 'function') ? heritageTierByPop_(ss) : {};
+  var eligible = [], sumW = 0;
+  for (var r = 0; r < rows.length; r++) {
+    var row = rows[r];
+    if (!active(row)) continue;
+    var popId = String(row[L.pop] || '').trim(), surname = String(row[L.last] || '').trim();
+    var by = Number(row[L.by]) || 0;
+    if (!popId || !surname || !by) continue;
+    var spots = familySpotsOpen_(L, row, simYear, links.byAnchor[popId], -1, true);
+    var types = ['spouse', 'child', 'parent'].filter(function (t) { return spots[t] > 0; });
+    if (!types.length) continue;
+    var tier = L.tier >= 0 ? (Number(row[L.tier]) || 4) : 4;
+    var hTier = heritageByPop[popId] || null;
+    var w = (FAMILY_LOTTERY_TIER_WEIGHT[tier] || 1) *
+      (1 + ((hTier && typeof heritageRank_ === 'function') ? heritageRank_(hTier) + 1 : 0));
+    eligible.push({ row: row, pop: popId, surname: surname, by: by, types: types, w: w });
+    sumW += w;
+  }
+  if (!eligible.length) return results;
+  var D = FAMILY_LOTTERY_SHARE * eligible.length;
+  var drawn = [];
+  for (var e = 0; e < eligible.length; e++) {
+    if (rng() < Math.min(1, D * eligible[e].w / sumW)) drawn.push(eligible[e]);
+  }
+  for (var s = drawn.length - 1; s > 0; s--) { // their turns in a shuffled order — no POPID has first pick of the pool
+    var j = Math.floor(rng() * (s + 1)), tmp = drawn[s]; drawn[s] = drawn[j]; drawn[j] = tmp;
+  }
+  results.drawn = drawn.length;
+  if (!drawn.length) return results;
+
+  // ── D3: the pool and the names already taken ──
+  var gcAge = function (gr) { // codex cut-2 review §1: a credible BirthYear, else a finite Age, else not in the fit
+    var gby = gB >= 0 ? Number(gData[gr][gB]) : NaN;
+    if (isFinite(gby) && gby > 1900 && gby <= simYear) return { by: gby, age: simYear - gby };
+    var ac = gA >= 0 ? String(gData[gr][gA]).trim() : '';
+    var an = ac === '' ? NaN : Number(ac);
+    return (isFinite(an) && an >= 0 && an <= 110) ? { by: simYear - an, age: an } : null;
+  };
+  var pool = [];
+  for (var g = 1; g < gData.length; g++) {
+    if (String(gData[g][fc.status] || '').trim().toLowerCase() !== 'active') continue;
+    if (!String(gData[g][gF] || '').trim() || !String(gData[g][gL] || '').trim()) continue;
+    // the emergence door queued this row this fire; it stays Active until the mint flips it (plan D3)
+    if (gE >= 0 && (Number(gData[g][gE]) || 0) >= GC_EMERGENCE_PROMOTION_THRESHOLD) continue;
+    if (ctx.civicGcTaken && ctx.civicGcTaken[g]) continue; // engine.94 F2: the civic mint's Emerged lands at Phase 10
+    pool.push(g);
+  }
+  var taken = {};
+  var takeName = function (f, l) { var k = normalizeCitizenName_(f) + ' ' + normalizeCitizenName_(l); if (k !== ' ') taken[k] = true; };
+  for (var lr = 0; lr < rows.length; lr++) if (rows[lr] && L.first >= 0) takeName(rows[lr][L.first], rows[lr][L.last]);
+  for (var gr2 = 1; gr2 < gData.length; gr2++) {
+    takeName(gData[gr2][gF], gData[gr2][gL]);
+    if (String(gData[gr2][fc.maiden] || '').trim()) takeName(gData[gr2][gF], gData[gr2][fc.maiden]);
+  }
+  var advSheet = ss.getSheetByName('Advancement_Intake1');
+  if (advSheet && advSheet.getLastRow() > 1) {
+    var adv = advSheet.getDataRange().getValues();
+    var aF = findColByName_(adv[0], 'First'), aL = findColByName_(adv[0], 'Last');
+    if (aF >= 0 && aL >= 0) for (var ar = 1; ar < adv.length; ar++) takeName(adv[ar][aF], adv[ar][aL]);
+  }
+  var prox = (typeof bondProximity_ === 'function') ? bondProximity_(ctx) : null;
+  var claimed = {};
+
+  // ── D3: one opportunity each ──
+  for (var d = 0; d < drawn.length; d++) {
+    var c = drawn[d];
+    var type = c.types[Math.floor(rng() * c.types.length)];
+    var aRow = c.row;
+    var aHood = L.hood >= 0 ? String(aRow[L.hood] || '').trim() : '';
+    var aSex = L.gender >= 0 ? String(aRow[L.gender] || '').trim().toLowerCase() : '';
+    var wantSex = '';
+    if (type === 'spouse') {
+      wantSex = aSex === 'female' ? 'male' : (aSex === 'male' ? 'female' : '');
+      if (!wantSex) { // codex cut-2 review §1: no recorded sex → no spouse drawn, rather than either
+        results.noFit++;
+        Logger.log('checkFamilyMatchPromotions_: ' + c.pop + ' drawn for a spouse — no Gender on the row (C' + cycle + ')');
+        continue;
+      }
+    }
+    if (type === 'parent') {
+      var pids = String(aRow[L.parents] || '').match(/POP-\d+/g) || [];
+      var pRow = pids.length === 1 ? rowByPop[pids[0]] : null;
+      var pg = (pRow && L.gender >= 0) ? String(pRow[L.gender] || '').trim().toLowerCase() : '';
+      wantSex = pg === 'female' ? 'male' : (pg === 'male' ? 'female' : '');
+    }
+    var byMin, byMax;
+    if (type === 'spouse') { byMin = c.by - DRIP_SPOUSE_AGE_BAND; byMax = c.by + DRIP_SPOUSE_AGE_BAND; }
+    else if (type === 'parent') { byMin = c.by - DRIP_PARENT_AGE_MAX; byMax = c.by - DRIP_PARENT_AGE_MIN; }
+    else { byMin = c.by + DRIP_PARENT_AGE_MIN; byMax = c.by + DRIP_PARENT_AGE_MAX; }
+    var fit = [];
+    for (var q = 0; q < pool.length; q++) {
+      var gi = pool[q];
+      if (claimed[gi]) continue;
+      var ga = gcAge(gi);
+      if (!ga || ga.by < byMin || ga.by > byMax) continue;
+      if (type !== 'child' && ga.age < 18) continue;           // a spouse or a parent is an adult
+      if (wantSex && (gX < 0 || String(gData[gi][gX] || '').trim().toLowerCase() !== wantSex)) continue;
+      var gHood = gN >= 0 ? String(gData[gi][gN] || '').trim() : '';
+      if (!aHood || !gHood || !(gHood === aHood || (prox && prox.near(gHood, aHood)))) continue;
+      if (taken[normalizeCitizenName_(gData[gi][gF]) + ' ' + normalizeCitizenName_(c.surname)]) continue;
+      fit.push(gi);
+    }
+    if (!fit.length) {
+      results.noFit++;
+      Logger.log('checkFamilyMatchPromotions_: ' + c.pop + ' drawn for a ' + type + ' — nobody fits this Cycle (C' + cycle + ')');
+      continue;
+    }
+    var won = fit[Math.floor(rng() * fit.length)];
+    var ownLast = String(gData[won][gL]).trim();
+    var wasRow = gData[won].slice();
+    gData[won][fc.status] = 'Family';
+    gData[won][gL] = c.surname;
+    gData[won][fc.maiden] = ownLast;
+    gData[won][fc.of] = c.pop;
+    gData[won][fc.role] = type;
+    if (gN >= 0 && aHood) gData[won][gN] = aHood; // they share the family's home
+    noteGcContext_(gData, won, findColByName_(gh, 'EmergenceContext'),
+      'Family: ' + type + ' of ' + String(aRow[L.first] || '').trim() + ' ' + c.surname + ' (' + c.pop + '), C' + cycle);
+    try { writeGcRow_(genericSheet, gData, won); } catch (eW) { gData[won] = wasRow; throw eW; }
+    claimed[won] = true;
+    takeName(gData[won][gF], c.surname);
+    if (!links.byAnchor[c.pop]) links.byAnchor[c.pop] = { spouse: [], child: [], parent: [] };
+    links.byAnchor[c.pop][type].push(won);
+    results.linked++;
+    Logger.log('checkFamilyMatchPromotions_: ' + String(gData[won][gF]) + ' ' + ownLast + ' is the ' + type + ' of ' +
+      c.pop + ' — now ' + String(gData[won][gF]) + ' ' + c.surname + ', in the background (C' + cycle + ')');
+  }
+  return results;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// engine.96 Task 12 (S440, builder go 2026-09-08; reel-2 corrected S440b) —
+// THE OWNER DOOR. "The business is the reason." A third drip mechanism beside
+// emergence (engine.58, earned) and family-match (engine.66, chance), sharing
+// their cap, but never a promotion OUT of Generic_Citizens — it authors a
+// brand-new person, same as a household-door member or the six/eight
+// hand-authored founders, never an existing resident's identity repurposed.
+// Reel 1 draws an ownerless private business weighted by PROFIT — the number
+// applyOwnerDraw_ pays from (engine.96 Task 10) — so the wealthy tier gets its
+// owners first and the shop tail trickles. Reel 2 authors a fresh citizen in
+// the business's own hood, old enough to own it (name pools shared with
+// generateGenericCitizens_ via GC_FEMALE_FIRST_NAMES/GC_MALE_FIRST_NAMES/
+// GC_LAST_NAMES — same naming convention, never a repurposed row). S440
+// correction, heated: the first cut drew a live Generic_Citizens row and
+// reassigned their RoleType — a pool "delivery driver" ended up owning a
+// $166M contractor. Top-tier seats are authored (memory
+// feedback_top-tier-entities-are-authored-not-pool-drawn); this door now
+// authors every seat it fills, tail included — the "dice roll" is which
+// business and whether the slot fires, never whose life gets redirected.
+// The business writes the RoleType at mint the way the family door writes
+// the surname. Shares DRIP_CAP_PER_CYCLE (Mike-pinned S324): takes only the
+// slots the two earlier doors left. Key_Personnel lands by cell intent at
+// Phase 10, so the books pay the owner from the cycle after the mint.
+// Tunables: World_Config bizOwnerMintP / bizOwnerMaxStaff / bizOwnerMinAge /
+// bizOwnerMinProfit (ENGINE96_CONFIG_SEEDS, self-armed at open).
+// ═══════════════════════════════════════════════════════════════════════════
+var OWNER_DOOR_REQUIRED_KEYS = ['bizOwnerMintP', 'bizOwnerMaxStaff', 'bizOwnerMinAge', 'bizOwnerMinProfit'];
+// Institutions, public bodies, faith, and the real-world vendors on the ledger
+// never draw an owner — an explicit denylist on Sector and Name, not an income
+// cut (a hospital out-earns every contractor). File-scoped on purpose.
+// engine.306: a Tier-1 real-name landmark (INSTITUTIONS) carries "Historic Landmark"
+// in its Sector — Heinold's, the Paramount and the Fox are a Bar / a Theater to every
+// other reader, and the door must never author an owner for them.
+var OWNER_DOOR_INST_SECTOR_RE = /public|municipal|government|transit|utilit|education|school|legal|judicial|safety|police|fire|port|logistic|faith|church|synagogue|mosque|temple|community|housing|social|workforce|stadium|franchise|sports|media|journalism|platform|cloud|research|agent|science|development|authority|corporate|civic|landmark/i;
+var OWNER_DOOR_INST_NAME_RE = /authority|department|county|city of|unified|public|district$/i;
+var OWNER_QUEUE_COLS_ = ['BirthYear', 'Neighborhood', 'EmployerBizId', 'OwnerOfBizId', 'Gender'];
+
+function ownerDoorConfig_(ctx) {
+  var cfg = (ctx && ctx.config) || {};
+  var out = {}, missing = [];
+  for (var i = 0; i < OWNER_DOOR_REQUIRED_KEYS.length; i++) {
+    var k = OWNER_DOOR_REQUIRED_KEYS[i], v = cfg[k];
+    if (v === undefined || v === null || v === '' || isNaN(Number(v))) missing.push(k);
+    else out[k] = Number(v);
+  }
+  if (missing.length) throw new Error('checkBusinessOwnerPromotions_: World_Config missing ' + missing.join(', ') + ' (engine.96 Task 12 keys — ensureEngine96Config_ self-arms them at open)');
+  return out;
+}
+
+// The businesses the door can draw: no Key_Personnel, not an institution, not
+// over the staff cap, the books in profit, and room on the stated headcount
+// for one more tracked worker (the populator's own mintRoom rule — without it
+// a carried-but-full citizen is re-homed at another employer while
+// Key_Personnel points here). Returns [{ id, name, hood, profit }].
+function buildOwnerDoorPool_(ctx, cfg) {
+  var ss = ctx.ss;
+  var sheet = ss ? ss.getSheetByName('Business_Ledger') : null;
+  if (!sheet) return [];
+  var data = sheet.getDataRange().getValues();
+  if (!data || data.length < 2) return [];
+  var bh = data[0];
+  var bId = bh.indexOf('BIZ_ID'), bNm = bh.indexOf('Name'), bSec = bh.indexOf('Sector'), bHood = bh.indexOf('Neighborhood'),
+      bRev = bh.indexOf('Annual_Revenue'), bCnt = bh.indexOf('Employee_Count'), bSal = bh.indexOf('Avg_Salary'), bKP = bh.indexOf('Key_Personnel');
+  if (bId < 0 || bNm < 0 || bSec < 0 || bHood < 0 || bRev < 0 || bCnt < 0 || bSal < 0 || bKP < 0) {
+    throw new Error('buildOwnerDoorPool_: Business_Ledger missing one of BIZ_ID/Name/Sector/Neighborhood/Annual_Revenue/Employee_Count/Avg_Salary/Key_Personnel');
+  }
+  var h = ctx.ledger.headers, rows = ctx.ledger.rows;
+  var lEmp = h.indexOf('EmployerBizId'), lStatus = h.indexOf('Status');
+  var tracked = {};
+  if (lEmp >= 0) {
+    for (var r = 0; r < rows.length; r++) {
+      var row = rows[r];
+      if (!row) continue;
+      if (lStatus >= 0 && String(row[lStatus] || 'active').toLowerCase() !== 'active') continue;
+      var e = String(row[lEmp] || '').trim();
+      if (e.indexOf('BIZ-') === 0) tracked[e] = (tracked[e] || 0) + 1;
+    }
+  }
+  var pool = [];
+  for (var b = 1; b < data.length; b++) {
+    var id = String(data[b][bId] || '').trim();
+    if (!id) continue;
+    if (String(data[b][bKP] || '').trim()) continue; // already names its people
+    var name = String(data[b][bNm] || '').trim();
+    if (OWNER_DOOR_INST_SECTOR_RE.test(String(data[b][bSec] || '')) || OWNER_DOOR_INST_NAME_RE.test(name)) continue;
+    var rawEmp = data[b][bCnt];
+    var emp = Number(rawEmp);
+    if (rawEmp === '' || rawEmp === null || isNaN(emp) || emp > cfg.bizOwnerMaxStaff) continue;
+    if (!(emp > (tracked[id] || 0))) continue; // no room on the stated headcount
+    var profit = businessProfit_(data[b][bRev], emp, data[b][bSal]);
+    if (profit === null || profit <= 0 || profit < cfg.bizOwnerMinProfit) continue;
+    pool.push({ id: id, name: name, hood: String(data[b][bHood] || '').trim(), profit: profit });
+  }
+  return pool;
+}
+
+function checkBusinessOwnerPromotions_(ctx, cycle, slots) {
+  var results = { queued: 0, eligible: 0 };
+  if (!slots || slots <= 0) return results;
+  if (!ctx || !ctx.ledger || !ctx.ss || typeof safeRand_ !== 'function') return results;
+  // A cycle event — manual admin runs (runAdvancementIntakeManual) carry no
+  // ctx.rng/rngSeed and must not fire it (safeRand_ would throw).
+  if (typeof ctx.rng !== 'function' &&
+      !(ctx.config && typeof ctx.config.rngSeed === 'number')) return results;
+  var cfg = ownerDoorConfig_(ctx);
+  var rng = safeRand_(ctx);
+  var ss = ctx.ss;
+
+  var pool = buildOwnerDoorPool_(ctx, cfg);
+  results.eligible = pool.length;
+  if (!pool.length) return results;
+
+  var simYear = simYearOf_(ctx, cycle);
+
+  var advSheet = requireTab_(ss, 'Advancement_Intake1'); // engine.119: no runtime create
+  var advHeaders = advSheet.getRange(1, 1, 1, advSheet.getLastColumn()).getValues()[0];
+  for (var e = 0; e < OWNER_QUEUE_COLS_.length; e++) {
+    if (findColByName_(advHeaders, OWNER_QUEUE_COLS_[e]) < 0) {
+      ensureGridColumns_(advSheet, advHeaders.length + 1);
+      advSheet.getRange(1, advHeaders.length + 1).setValue(OWNER_QUEUE_COLS_[e]); // schema-setup carve-out, the drip queue's class
+      advHeaders.push(OWNER_QUEUE_COLS_[e]);
+    }
+  }
+  var aF = findColByName_(advHeaders, 'First'), aL = findColByName_(advHeaders, 'Last'),
+      aR = findColByName_(advHeaders, 'RoleType'), aT = findColByName_(advHeaders, 'Tier'),
+      aC = findColByName_(advHeaders, 'ClockMode'), aNo = findColByName_(advHeaders, 'Notes'),
+      aBY = findColByName_(advHeaders, 'BirthYear'), aNB = findColByName_(advHeaders, 'Neighborhood'),
+      aEmp = findColByName_(advHeaders, 'EmployerBizId'), aOwn = findColByName_(advHeaders, 'OwnerOfBizId'),
+      aG = findColByName_(advHeaders, 'Gender');
+
+  // A business whose owner is already waiting on the queue is spoken for —
+  // Key_Personnel is still blank until that row mints and Phase 10 writes it,
+  // and the door runs before the populator in the same phase.
+  var advData = advSheet.getDataRange().getValues();
+  if (aOwn >= 0 && advData.length > 1) {
+    var pending = {};
+    for (var pr = 1; pr < advData.length; pr++) {
+      var pv = String(advData[pr][aOwn] || '').trim();
+      if (pv) pending[pv] = true;
+    }
+    pool = pool.filter(function(p) { return !pending[p.id]; });
+    results.eligible = pool.length;
+    if (!pool.length) return results;
+  }
+
+  // engine.96 Task 12 (S440b): the name pools are file-scoped in
+  // generateGenericCitizens.js, but that file's randItem() is nested INSIDE
+  // generateGenericCitizens_ and is not global — this door draws with its own
+  // ctx rng so the cycle stays deterministic (Phase 40.3: the seeded rng only).
+  if (!GC_LAST_NAMES) gcInitNamePools_();
+  var pickName_ = function(arr) { return arr[Math.floor(rng() * arr.length)]; };
+
+  for (var s = 0; s < slots; s++) {
+    if (!pool.length) break;
+    if (rng() >= cfg.bizOwnerMintP) continue; // the event did not fire this slot
+    // Reel 1: the business, by profit
+    var tot = 0;
+    for (var p = 0; p < pool.length; p++) tot += pool[p].profit;
+    var roll = rng() * tot, pick = pool.length - 1;
+    for (var q = 0; q < pool.length; q++) { roll -= pool[q].profit; if (roll <= 0) { pick = q; break; } }
+    var biz = pool[pick];
+    pool.splice(pick, 1); // one draw per business per cycle
+    // Reel 2 (S440b correction): author a brand-new person for the seat — never
+    // an existing resident's identity repurposed. The first build drew a live
+    // Generic_Citizens row and reassigned their RoleType, which handed a pool
+    // "delivery driver" ownership of a $166M contractor (Mike: "this is trash").
+    // A seat this size needs a person built for it, same as the six founders
+    // and the eight principals, not someone else's life redirected. Names draw
+    // from the same file-scoped pools generateGenericCitizens_ uses, so this
+    // door never invents new naming conventions.
+    var sex = rng() < 0.5 ? 'male' : 'female';
+    var first = pickName_(sex === 'female' ? GC_FEMALE_FIRST_NAMES : GC_MALE_FIRST_NAMES);
+    var last = pickName_(GC_LAST_NAMES);
+    var age = cfg.bizOwnerMinAge + Math.floor(rng() * 30); // e.g. 35-64 at the default floor
+    var out = new Array(advHeaders.length).fill('');
+    if (aF >= 0) out[aF] = first;
+    if (aL >= 0) out[aL] = last;
+    if (aR >= 0) out[aR] = 'Owner, ' + biz.name;
+    if (aT >= 0) out[aT] = 4;
+    if (aC >= 0) out[aC] = 'ENGINE';
+    if (aNo >= 0) out[aNo] = 'Owner door — ' + biz.name + ' (' + biz.id + '), C' + cycle;
+    if (aBY >= 0) out[aBY] = simYear - age;
+    if (aNB >= 0) out[aNB] = biz.hood;
+    if (aEmp >= 0) out[aEmp] = biz.id;
+    if (aOwn >= 0) out[aOwn] = biz.id;
+    if (aG >= 0) out[aG] = sex;
+    advSheet.appendRow(out); // Phase-5 direct write to the promotion queue — the drip writers' class (§9)
+    results.queued++;
+    Logger.log('checkBusinessOwnerPromotions_: ' + first + ' ' + last + ' takes over ' + biz.name + ' in ' + biz.hood +
+      ' (C' + cycle + ', profit $' + biz.profit + ')');
+  }
+  return results;
+}
+
+/**
+ * After a processAdvancementRows_ pass: every row queued with OwnerOfBizId
+ * becomes that business's owner on the Business_Ledger — Key_Personnel by
+ * Phase-10 cell intent (never a direct write), a [Business] life line, the
+ * log row, a story hook. applyOwnerDraw_ reads the sheet, so the books pay
+ * from the next cycle. A seat that filled in the meantime is left alone and
+ * logged — the citizen is minted either way.
+ */
+function wireBusinessOwners_(ctx, mints, cycle, now, logSheet) {
+  var out = { wired: 0, skipped: 0 };
+  if (!ctx || !ctx.ledger || !ctx.ss || !mints || !mints.length) return out;
+  var sheet = ctx.ss.getSheetByName('Business_Ledger');
+  if (!sheet) return out;
+  var data = sheet.getDataRange().getValues();
+  var bh = data[0] || [];
+  var bId = bh.indexOf('BIZ_ID'), bNm = bh.indexOf('Name'), bHood = bh.indexOf('Neighborhood'), bKP = bh.indexOf('Key_Personnel');
+  if (bId < 0 || bKP < 0) return out;
+  var rowOf = {};
+  for (var b = 1; b < data.length; b++) { var id = String(data[b][bId] || '').trim(); if (id && !rowOf[id]) rowOf[id] = b; }
+  var h = ctx.ledger.headers, rows = ctx.ledger.rows;
+  var iFirst = h.indexOf('First'), iLast = h.indexOf('Last'), iLife = h.indexOf('LifeHistory'), iHood = h.indexOf('Neighborhood'), iRoleT = h.indexOf('RoleType');
+  var stamp = 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1);
+  for (var m = 0; m < mints.length; m++) {
+    var mt = mints[m], b1 = rowOf[mt.biz];
+    var row = rows[mt.idx];
+    var name = (String(row[iFirst] || '') + ' ' + String(row[iLast] || '')).trim();
+    if (!b1) { out.skipped++; Logger.log('wireBusinessOwners_: ' + mt.biz + ' is not on the Business_Ledger — ' + name + ' (' + mt.pop + ') minted unlinked'); continue; }
+    if (String(data[b1][bKP] || '').trim()) { out.skipped++; Logger.log('wireBusinessOwners_: ' + mt.biz + ' already names its people — ' + name + ' (' + mt.pop + ') minted unlinked'); continue; }
+    var bizName = bNm >= 0 ? String(data[b1][bNm] || mt.biz) : mt.biz;
+    var hood = bHood >= 0 ? String(data[b1][bHood] || '') : (iHood >= 0 ? String(row[iHood] || '') : '');
+    // the tag is the seat the row named — "Founder, X" → (founder), "Principal, X" → (principal), "Managing Partner, X" → (managing partner); anything else → (owner)
+    var seat = String(row[iRoleT] || '').split(',')[0].trim().toLowerCase();
+    var tag = /^(founder|owner|proprietor|principal|managing partner)$/.test(seat) ? seat : 'owner';
+    queueCellIntent_(ctx, 'Business_Ledger', b1 + 1, bKP + 1, mt.pop + ' ' + name + ' (' + tag + ')',
+      'engine.96 Task 12 owner door — Key_Personnel', 'economy', 90);
+    data[b1][bKP] = mt.pop; // a second mint this pass sees the seat taken
+    if (iLife >= 0) row[iLife] = (row[iLife] ? row[iLife] + '\n' : '') + stamp + ' — [Business] ' + (tag === 'owner' ? 'Took over ' : (tag.charAt(0).toUpperCase() + tag.slice(1)) + ' of ') + bizName + ' in ' + hood;
+    if (logSheet) logSheet.appendRow([now, mt.pop, name, 'Business-Owner', 'Became the owner of ' + bizName + ' — ' + hood, hood, cycle]);
+    if (ctx.summary) {
+      ctx.summary.storyHooks = ctx.summary.storyHooks || [];
+      ctx.summary.storyHooks.push({
+        hookType: 'BUSINESS_OWNER_ARRIVED', severity: 3, priority: 2,
+        description: name + ' takes over ' + bizName + ' in ' + hood,
+        cycleGenerated: cycle, neighborhood: hood, domain: 'BUSINESS',
+        text: name + ' is the new owner of ' + bizName + ' in ' + hood + ' (C' + cycle + ')'
+      });
+    }
+    ctx.ledger.dirty = true;
+    out.wired++;
+  }
+  if (out.wired || out.skipped) Logger.log('wireBusinessOwners_ engine.96 T12: ' + out.wired + ' wired, ' + out.skipped + ' skipped');
+  return out;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// engine.109 (S419): THE HOUSEHOLD DOOR — the one bounded exception to S320.
+//
+// S320 ("there should be a reason we are tracking you") governs ATOMIZED
+// individuals: an unknown name on the Intake tab goes to Generic_Citizens and
+// earns its Simulation_Ledger row at EmergenceCount 3. A COMPLETE HOUSEHOLD —
+// a head plus spouse / children / parents sharing one Family key, every one
+// of them new to the ledger — arrives having already answered the question the
+// waiting room asks. The family is the reason. It mints directly.
+//
+// It mints THROUGH the promotion populator, never around it: the rows are
+// queued to Advancement_Intake1 (head first, MatchName = the head) and
+// processAdvancementRows_ fills every column exactly as it does for a Tier-5
+// ascent, then wireFamilyMatch_ wires the links and formIntakeHouseholds_
+// forms the household. There is no third class of citizen.
+//
+// Boundaries, in code: a group of one is not a household (S320 stands); any
+// member already on the ledger routes the whole group to review (the join
+// door is not this door); a hood the ledger does not price cannot house them.
+// ═══════════════════════════════════════════════════════════════════════════
+var HOUSEHOLD_RELATIONS_ = { head: true, spouse: true, child: true, parent: true };
+
+/**
+ * engine.109: a header self-arm must not throw on a trimmed grid — getRange
+ * past getMaxColumns() is an error in Apps Script, and an operator tab like
+ * Intake can be exactly as wide as its headers. Grow the grid first.
+ */
+function ensureGridColumns_(sheet, needed) {
+  if (!sheet || typeof sheet.getMaxColumns !== 'function') return;
+  var have = sheet.getMaxColumns();
+  if (have < needed && typeof sheet.insertColumnsAfter === 'function') sheet.insertColumnsAfter(have, needed - have);
+}
+var HOUSEHOLD_QUEUE_COLS_ = ['BirthYear', 'Neighborhood', 'MatchPopId', 'MatchType', 'MaidenName', 'MatchName', 'HouseholdKey', 'Gender'];
+
+function ensureHouseholdQueueSheet_(ss) {
+  var advSheet = requireTab_(ss, 'Advancement_Intake1'); // engine.119: no runtime create
+  var advHeaders = advSheet.getRange(1, 1, 1, advSheet.getLastColumn()).getValues()[0];
+  for (var e = 0; e < HOUSEHOLD_QUEUE_COLS_.length; e++) {
+    if (findColByName_(advHeaders, HOUSEHOLD_QUEUE_COLS_[e]) < 0) {
+      ensureGridColumns_(advSheet, advHeaders.length + 1);
+      advSheet.getRange(1, advHeaders.length + 1).setValue(HOUSEHOLD_QUEUE_COLS_[e]); // schema-setup carve-out, same as the drip queue
+      advHeaders.push(HOUSEHOLD_QUEUE_COLS_[e]);
+    }
+  }
+  return { sheet: advSheet, headers: advHeaders };
+}
+
+/**
+ * Called from processIntake_ (Phase5-Intake) before its row loop. Returns
+ * { rows: {sheetRow1: true}, statusWrites: [[row1, text]], households, members }.
+ * Rows it claims are skipped by the caller; the caller writes the statuses.
+ */
+function queueHouseholdIntake_(ctx, intakeSheet, intakeVals, intakeHeader, nameIndex, cycle) {
+  var out = { rows: {}, statusWrites: [], households: 0, members: 0 };
+  if (!ctx || !ctx.ss || !intakeVals || intakeVals.length < 2) return out;
+  var idxI = function(n) { return intakeHeader.indexOf(n); };
+  var iF = idxI('First'), iLa = idxI('Last'), iAge = idxI('Age'), iNbhd = idxI('Neighborhood'),
+      iRole = idxI('RoleType'), iFam = idxI('Family'), iNotes = idxI('Notes'), iStat = idxI('IntakeStatus'),
+      iRel = idxI('Relation'), iSex = idxI('Sex'); // Sex: optional operator column — read when present, never armed
+  if (iF < 0 || iLa < 0 || iFam < 0 || iStat < 0) return out;
+  if (iRel < 0) {
+    // the door's one new operator column self-arms (schema-setup carve-out)
+    if (intakeSheet && intakeSheet.getRange) {
+      ensureGridColumns_(intakeSheet, intakeHeader.length + 1);
+      intakeSheet.getRange(1, intakeHeader.length + 1).setValue('Relation');
+    }
+    intakeHeader.push('Relation');
+    iRel = intakeHeader.length - 1;
+  }
+  var groups = {}, order = [];
+  for (var r = 1; r < intakeVals.length; r++) {
+    var row = intakeVals[r];
+    if ((row[iStat] || '').toString().trim()) continue; // already handled
+    var fam = (row[iFam] || '').toString().trim();
+    if (!fam) continue;
+    var key = normalizeCitizenName_(fam);
+    if (!key) continue;
+    if (!groups[key]) { groups[key] = { label: fam, rows: [] }; order.push(key); }
+    groups[key].rows.push(r);
+  }
+  var hoodState = (ctx.summary && ctx.summary.neighborhoodState) || {};
+  var rng = ctx.rng;
+  if (order.length && typeof rng !== 'function') throw new Error('queueHouseholdIntake_: ctx.rng required');
+  var rank = { head: 0, spouse: 1, child: 2, parent: 3 };
+  for (var g = 0; g < order.length; g++) {
+    var grp = groups[order[g]];
+    if (grp.rows.length < 2) continue; // a lone name with a Family note is S320's — not a household
+    var members = [], head = null, reason = '', seen = {};
+    for (var m = 0; m < grp.rows.length; m++) {
+      var rr = grp.rows[m], mrow = intakeVals[rr];
+      var first = (mrow[iF] || '').toString().trim(), last = (mrow[iLa] || '').toString().trim();
+      var rel = (mrow[iRel] || '').toString().trim().toLowerCase();
+      if (!first || !last) { reason = 'every member needs First and Last'; break; }
+      if (USAGE_HONORIFIC_RE.test(first)) { reason = '"' + first + '" is an honorific, not a first name'; break; }
+      if (!rel) { reason = first + ' ' + last + ' has no Relation (head / spouse / child / parent)'; break; }
+      if (!HOUSEHOLD_RELATIONS_[rel]) { reason = 'unknown Relation "' + rel + '" for ' + first + ' ' + last; break; }
+      var nk = normalizeCitizenName_(first) + ' ' + normalizeCitizenName_(last);
+      if ((nameIndex[nk] || []).length) { reason = first + ' ' + last + ' is already on the ledger — the household door mints new lives only'; break; }
+      if (seen[nk]) { reason = 'the same name twice (' + first + ' ' + last + ')'; break; }
+      seen[nk] = true;
+      var mem = { row1: rr + 1, first: first, last: last, rel: rel,
+        age: Number(mrow[iAge]) || 0,
+        role: iRole >= 0 ? (mrow[iRole] || '').toString().trim() : '',
+        hood: iNbhd >= 0 ? (mrow[iNbhd] || '').toString().trim() : '',
+        notes: iNotes >= 0 ? (mrow[iNotes] || '').toString().trim() : '',
+        sex: iSex >= 0 ? (mrow[iSex] || '').toString().trim().toLowerCase() : '' };
+      if (rel === 'head') { if (head) { reason = 'two members are marked head'; break; } head = mem; }
+      members.push(mem);
+    }
+    if (!reason && !head) reason = 'no member is marked head';
+    var hood = '';
+    if (!reason) {
+      hood = head.hood;
+      if (!hood) { var pool = getCoreSimNeighborhoods_(ctx); hood = pool[Math.floor(rng() * pool.length)]; }
+      var st = hoodState[hood];
+      if (!st || !(Number(st.medianRent) > 0)) reason = 'no canon rent for hood "' + hood + '" — a household cannot live where the ledger does not price';
+    }
+    if (reason) {
+      for (var x = 0; x < grp.rows.length; x++) {
+        out.rows[grp.rows[x] + 1] = true;
+        out.statusWrites.push([grp.rows[x] + 1, 'review — household "' + grp.label + '": ' + reason]);
+      }
+      continue;
+    }
+    members.sort(function(a, b) { return (rank[a.rel] - rank[b.rel]) || (a.row1 - b.row1); });
+    var adv = ensureHouseholdQueueSheet_(ctx.ss);
+    var headName = head.first + ' ' + head.last;
+    // Resolve each member's sex once: the operator's Sex cell, else the name pool. A head
+    // and spouse where only one resolves give the other the opposite — never the dice
+    // (live C109: Tomás/Renata Villanueva minted female/male, Husband and Wife swapped).
+    var spouseMem = null;
+    for (var sx = 0; sx < members.length; sx++) {
+      var sm = members[sx];
+      if (sm.sex !== 'male' && sm.sex !== 'female') {
+        sm.sex = (typeof inferSexFromFirstName_ === 'function') ? (inferSexFromFirstName_(sm.first) || '') : '';
+      }
+      if (sm.rel === 'spouse' && !spouseMem) spouseMem = sm;
+    }
+    if (spouseMem) {
+      if (head.sex && !spouseMem.sex) spouseMem.sex = head.sex === 'male' ? 'female' : 'male';
+      else if (spouseMem.sex && !head.sex) head.sex = spouseMem.sex === 'male' ? 'female' : 'male';
+    }
+    for (var q = 0; q < members.length; q++) {
+      var mm = members[q];
+      var age = mm.age;
+      if (!(age > 0)) age = mm.rel === 'child' ? (1 + Math.floor(rng() * 17)) : (22 + Math.floor(rng() * 44));
+      var role = mm.role || (age < 18 ? 'student' : '');
+      var vals = {
+        First: mm.first, Middle: '', Last: mm.last, RoleType: role, Tier: 4, ClockMode: 'ENGINE',
+        Notes: 'Household intake C' + cycle + ' — "' + grp.label + '"' + (mm.notes ? ': ' + mm.notes : ''),
+        BirthYear: simYearOf_(ctx, cycle) - age, Neighborhood: hood, // engine.164
+        MatchType: mm.rel === 'head' ? '' : mm.rel,
+        MatchName: mm.rel === 'head' ? '' : headName,
+        HouseholdKey: order[g],
+        Gender: (mm.sex === 'male' || mm.sex === 'female') ? mm.sex : ''
+      };
+      var qrow = new Array(adv.headers.length).fill('');
+      for (var h = 0; h < adv.headers.length; h++) if (vals.hasOwnProperty(adv.headers[h])) qrow[h] = vals[adv.headers[h]];
+      adv.sheet.appendRow(qrow); // Phase-5 direct write to the promotion queue — same class as the drip writers (§9)
+      out.rows[mm.row1] = true;
+      out.statusWrites.push([mm.row1, 'queued household "' + grp.label + '" (' + members.length + ' members, ' + mm.rel +
+        ') → Simulation_Ledger via the promotion populator']);
+      out.members++;
+    }
+    out.households++;
+  }
+  if (out.households) Logger.log('queueHouseholdIntake_ engine.109: ' + out.households + ' household(s), ' + out.members + ' members queued');
+  return out;
+}
+
+/**
+ * After a processAdvancementRows_ pass: every HouseholdKey with a head and at
+ * least one more member becomes one household — shared HouseholdId on every
+ * SL row, marriage and child counts from the rows themselves, a
+ * Household_Ledger row (header-resolved append, the wedding writer's class)
+ * and a Family_Relationships row, one [Household] life line on the head.
+ */
+function formIntakeHouseholds_(ctx, mints, cycle, now, logSheet) {
+  var out = { formed: 0 };
+  if (!ctx || !ctx.ledger || !mints) return out;
+  var h = ctx.ledger.headers, rows = ctx.ledger.rows;
+  var idx = function(n) { return h.indexOf(n); };
+  var iPop = idx('POPID'), iFirst = idx('First'), iLast = idx('Last'), iHH = idx('HouseholdId'),
+      iMar = idx('MaritalStatus'), iKids = idx('NumChildren'), iCh = idx('ChildrenIds'), iInc = idx('Income'),
+      iGen = idx('Gender'), iHood = idx('Neighborhood'), iLife = idx('LifeHistory');
+  if (iPop < 0 || iHH < 0) return out;
+  var used = {};
+  for (var r = 0; r < rows.length; r++) { var v = rows[r] ? String(rows[r][iHH] || '').trim() : ''; if (v) used[v] = true; }
+  var nameOf = function(i) { return (String(rows[i][iFirst] || '') + ' ' + String(rows[i][iLast] || '')).trim(); };
+  var stamp = 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1);
+  var seq = 0;
+  for (var key in mints) {
+    if (!mints.hasOwnProperty(key)) continue;
+    var hh = mints[key];
+    // engine.302 (codex cut-3 review A1): a spouse whose link was refused (a minor) or never wired joins no
+    // household as a spouse — they stay unhoused, logged; the household forms from the rest
+    hh.members = hh.members.filter(function (mm) {
+      if (mm.type !== 'spouse' || mm.linked) return true;
+      Logger.log('formIntakeHouseholds_: ' + mm.pop + ' queued as spouse but not wired — left out of household ' + key + ' (engine.302)');
+      return false;
+    });
+    if (!hh.head || hh.members.length < 2) continue;
+    var hhId;
+    do { seq++; hhId = 'HH-' + String(cycle).padStart(4, '0') + '-I' + String(seq).padStart(3, '0'); } while (used[hhId]);
+    used[hhId] = true;
+    var headRow = rows[hh.head.idx], spouse = null, kids = [], pops = [], income = 0;
+    for (var m = 0; m < hh.members.length; m++) {
+      var mem = hh.members[m], mr = rows[mem.idx];
+      mr[iHH] = hhId;
+      pops.push(mem.pop);
+      if (iInc >= 0) income += Number(String(mr[iInc]).replace(/[$,\s]/g, '')) || 0;
+      if (mem.type === 'spouse' && !spouse && mem.linked) spouse = mem;
+      if (mem.type === 'child' && mem.linked) kids.push(mem);
+    }
+    // engine.302: a minor marries no one — the household's spouse is married only when both are adults
+    var iBYh = idx('BirthYear'), simYh = simYearOf_(ctx, cycle);
+    var adultH = function(r) { var by = iBYh >= 0 ? Number(r[iBYh]) || 0 : 0; return !(by > 0 && (simYh - by) < 18); };
+    if (spouse && iMar >= 0 && adultH(headRow) && adultH(rows[spouse.idx])) { headRow[iMar] = 'married'; rows[spouse.idx][iMar] = 'married'; }
+    var kidIds = JSON.stringify(kids.map(function(k) { return k.pop; }));
+    if (iKids >= 0) { headRow[iKids] = kids.length; if (spouse) rows[spouse.idx][iKids] = kids.length; }
+    if (iCh >= 0) { headRow[iCh] = kidIds; if (spouse) rows[spouse.idx][iCh] = kidIds; }
+    var hood = iHood >= 0 ? String(headRow[iHood] || '') : '';
+    var type = kids.length ? 'family' : (spouse ? 'couple' : 'family');
+    var sheet = ctx.ss ? ctx.ss.getSheetByName('Household_Ledger') : null;
+    if (sheet && sheet.getRange) {
+      var hHead = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+      var vals = {
+        HouseholdId: hhId, HeadOfHousehold: hh.head.pop, HouseholdType: type,
+        Members: JSON.stringify(pops), Neighborhood: hood, HousingType: 'rented',
+        MonthlyRent: estimateRent_(hood, ctx), HousingCost: 0, HouseholdIncome: income,
+        FormedCycle: cycle, DissolvedCycle: '', Status: 'active', HouseholdSavings: 0
+      };
+      var nr = [];
+      for (var c = 0; c < hHead.length; c++) nr.push(vals.hasOwnProperty(hHead[c]) ? vals[hHead[c]] : '');
+      sheet.appendRow(nr);
+    }
+    var reg = ctx.ss ? ctx.ss.getSheetByName('Family_Relationships') : null;
+    if (reg && reg.appendRow) {
+      var headLabel = hh.head.pop + ' ' + nameOf(hh.head.idx);
+      var spLabel = spouse ? spouse.pop + ' ' + nameOf(spouse.idx) : '';
+      var headMale = iGen >= 0 && String(headRow[iGen] || '').toLowerCase() === 'male';
+      var husband = spouse ? (headMale ? headLabel : spLabel) : headLabel;
+      var wife = spouse ? (headMale ? spLabel : headLabel) : '';
+      var cells = ['', '', '', '', ''];
+      for (var k = 0; k < kids.length && k < 5; k++) cells[k] = kids[k].pop + ' ' + nameOf(kids[k].idx);
+      reg.appendRow([hhId, husband, wife, spouse ? 'married' : 'single-parent', cycle, 'active', cells[0], cells[1], cells[2], cells[3], cells[4]]);
+    }
+    if (iLife >= 0) {
+      headRow[iLife] = (String(headRow[iLife] || '') ? String(headRow[iLife]) + '\n' : '') +
+        stamp + ' — [Household] A ' + pops.length + '-person household begins in ' + hood + ' (' + hhId + ')';
+    }
+    if (logSheet) {
+      logSheet.appendRow([now, hh.head.pop, nameOf(hh.head.idx), 'Household',
+        pops.length + '-member household arrived through intake — ' + hood, hood, cycle]);
+    }
+    if (ctx.summary) {
+      ctx.summary.storyHooks = ctx.summary.storyHooks || [];
+      ctx.summary.storyHooks.push({
+        hookType: 'HOUSEHOLD_ARRIVED', severity: 3, priority: 2,
+        description: 'The ' + String(headRow[iLast] || '') + ' household (' + pops.length + ') arrives in ' + hood,
+        cycleGenerated: cycle, neighborhood: hood, domain: 'COMMUNITY',
+        text: nameOf(hh.head.idx) + "'s household of " + pops.length + ' settles in ' + hood + ' (C' + cycle + ')'
+      });
+    }
+    ctx.ledger.dirty = true;
+    out.formed++;
+  }
+  if (out.formed) Logger.log('formIntakeHouseholds_ engine.109: ' + out.formed + ' household(s) formed');
+  return out;
+}
+
+/**
+ * engine.66 (S324): wire the family links after a family-drip mint. The new
+ * citizen already carries the family surname (queued that way); this connects
+ * the rows — SpouseId/ParentIds/ChildrenIds both ways, household +
+ * neighborhood join, a LifeHistory line on BOTH lives, and a story hook.
+ * LineageId is deliberately NOT set here — heritage membership grows through
+ * updateHeritage_'s own join rules (spouse joins the line whose surname they
+ * took), keeping one owner for line membership (SIM_DOCTRINE rule 7).
+ */
+function wireFamilyMatch_(ctx, newIdx, newPopId, targetPopId, matchType, now, cycle, logSheet, source) {
+  var src = source || 'drip lottery'; // engine.109: the household door wires through here too — its lines must not claim a lottery
+  var h = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  var idx = function(n) { return h.indexOf(n); };
+  var iPop = idx('POPID'), iFirst = idx('First'), iLast = idx('Last'),
+      iSpouse = idx('SpouseId'), iMarital = idx('MaritalStatus'),
+      iParents = idx('ParentIds'), iChildren = idx('ChildrenIds'),
+      iNumKids = idx('NumChildren'), iHH = idx('HouseholdId'),
+      iHood = idx('Neighborhood'), iLife = idx('LifeHistory');
+  var newRow = rows[newIdx];
+  var target = null;
+  for (var r = 0; r < rows.length; r++) {
+    if (rows[r] && String(rows[r][iPop] || '').trim() === targetPopId) { target = rows[r]; break; }
+  }
+  if (!target || !newRow) {
+    Logger.log('wireFamilyMatch_: target ' + targetPopId + ' not found — links skipped');
+    return;
+  }
+  var stamp = 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1);
+  var newName = (String(newRow[iFirst] || '') + ' ' + String(newRow[iLast] || '')).trim();
+  var targetName = (String(target[iFirst] || '') + ' ' + String(target[iLast] || '')).trim();
+  var appendPop = function(v, pop) {
+    var arr = String(v || '').match(/POP-\d+/g) || [];
+    if (arr.indexOf(pop) < 0) arr.push(pop);
+    return JSON.stringify(arr);
+  };
+  var desc = '';
+
+  // engine.302 (codex diff review H2): a minor marries no one — an authored spouse link on a row under 18
+  // (either side) is refused whole, logged, the rest of the mint stands
+  var iBYw = h.indexOf('BirthYear'), simYw = simYearOf_(ctx, cycle);
+  var minorW = function (r) { var by = iBYw >= 0 ? Number(r[iBYw]) || 0 : 0; return by > 0 && (simYw - by) < 18; };
+  if (matchType === 'spouse' && (minorW(newRow) || minorW(target))) {
+    Logger.log('wireFamilyMatch_: spouse link ' + newPopId + ' <-> ' + targetPopId + ' refused — a minor marries no one (engine.302)');
+    return;
+  }
+  if (matchType === 'spouse') {
+    if (iSpouse >= 0) { target[iSpouse] = newPopId; newRow[iSpouse] = targetPopId; }
+    // engine.302: a spouse match is a marriage — both rows read married (the drip slot opens only on a
+    // married target; an authored queue row can name a target of any status, which then marries)
+    if (iMarital >= 0) { newRow[iMarital] = 'married'; target[iMarital] = 'married'; }
+    // Kids are shared: mirror the family's kid state instead of the mint
+    // profile's random NumChildren (which would open phantom child slots).
+    if (iNumKids >= 0) newRow[iNumKids] = Number(target[iNumKids]) || 0;
+    if (iChildren >= 0) newRow[iChildren] = String(target[iChildren] || '');
+    desc = 'married to ' + targetName;
+  } else if (matchType === 'parent') {
+    var priorParents = iParents >= 0 ? (String(target[iParents] || '').match(/POP-\d+/g) || []) : [];
+    if (iParents >= 0) target[iParents] = appendPop(target[iParents], newPopId);
+    if (iChildren >= 0) newRow[iChildren] = appendPop('', targetPopId);
+    if (iNumKids >= 0 && !(Number(newRow[iNumKids]) >= 1)) newRow[iNumKids] = 1;
+    desc = 'parent of ' + targetName;
+    // If the kid's single on-camera parent is married with their spouse
+    // off-camera, the arriving parent IS that spouse — one off-camera human
+    // held both roles. Realize the marriage in the same stroke.
+    if (priorParents.length === 1 && iSpouse >= 0 && iMarital >= 0) {
+      var coParent = null;
+      for (var c = 0; c < rows.length; c++) {
+        if (rows[c] && String(rows[c][iPop] || '').trim() === priorParents[0]) { coParent = rows[c]; break; }
+      }
+      if (coParent && String(coParent[iMarital] || '').trim().toLowerCase() === 'married' &&
+          !String(coParent[iSpouse] || '').trim()) {
+        coParent[iSpouse] = newPopId;
+        newRow[iSpouse] = String(coParent[iPop]);
+        newRow[iMarital] = 'married';
+        desc = 'parent of ' + targetName + ', married to ' +
+          (String(coParent[iFirst] || '') + ' ' + String(coParent[iLast] || '')).trim();
+      }
+    }
+  } else if (matchType === 'child') {
+    if (iChildren >= 0) target[iChildren] = appendPop(target[iChildren], newPopId);
+    if (iParents >= 0) {
+      var parents = [targetPopId];
+      var sp = iSpouse >= 0 ? String(target[iSpouse] || '').match(/POP-\d+/) : null;
+      if (sp) parents.push(sp[0]);
+      newRow[iParents] = JSON.stringify(parents);
+    }
+    desc = 'child of ' + targetName;
+  } else {
+    Logger.log('wireFamilyMatch_: unknown matchType "' + matchType + '" — links skipped');
+    return;
+  }
+
+  // They join the family's household and neighborhood
+  if (iHH >= 0 && target[iHH]) newRow[iHH] = target[iHH];
+  if (iHood >= 0 && target[iHood]) newRow[iHood] = target[iHood];
+
+  // Both lives record it
+  if (iLife >= 0) {
+    var line = stamp + ' — [Family] Came on-camera — ' + desc + ' (' + src + ')';
+    newRow[iLife] = (String(newRow[iLife] || '') ? String(newRow[iLife]) + '\n' : '') + line;
+    var roleWord = matchType === 'spouse' ? 'Spouse' : (matchType === 'parent' ? 'Parent' : 'Child');
+    var tLine = stamp + ' — [Family] ' + roleWord + ' realized on-camera: ' + newName + ' (' + newPopId + ')';
+    target[iLife] = (String(target[iLife] || '') ? String(target[iLife]) + '\n' : '') + tLine;
+  }
+  ctx.ledger.dirty = true;
+
+  if (logSheet) {
+    logSheet.appendRow([now, newPopId, newName, 'Family',
+      (src === 'drip lottery' ? 'Won the family lottery — ' + desc
+        : 'Arrived with the household — ' + desc), '', cycle]);
+  }
+  if (ctx.summary) {
+    ctx.summary.storyHooks = ctx.summary.storyHooks || [];
+    ctx.summary.storyHooks.push({
+      hookType: 'FAMILY_REALIZED', severity: 3, priority: 3,
+      description: newName + ' came on-camera — ' + desc,
+      cycleGenerated: cycle, neighborhood: iHood >= 0 ? String(newRow[iHood] || '') : '',
+      domain: 'COMMUNITY',
+      text: targetName + "'s " + matchType + ' ' + newName + ' enters the record (' + src + ' C' + cycle + ')'
+    });
+  }
+  Logger.log('wireFamilyMatch_: ' + newPopId + ' ' + desc + ' — links wired');
+  return true; // engine.302: the household door counts a member as linked only when the wiring happened
+}
+
+/**
+ * engine.304 D11 (builder 2026-10-19, statement 13): a family member of a DEAD citizen arrives. Only the arriving
+ * row is written — the dead's row (ledger, Status deceased) and the archive snapshot are never touched; no event
+ * fires on the dead. spouse → widowed, SpouseId = the dead (engine.302's widow convention), the dead's children
+ * as theirs; child → ParentIds = the dead (+ the dead's spouse when recorded); parent → ChildrenIds = the dead,
+ * NumChildren at least 1. Household: the dead's, while another Active ledger citizen still holds it — otherwise
+ * none (an arriving adult with no one at home is housed the way any single adult is). Hood: the dead's.
+ */
+function wireFamilyToDeceased_(ctx, newIdx, newPopId, deadPop, deadRow, matchType, now, cycle, logSheet) {
+  var h = ctx.ledger.headers, rows = ctx.ledger.rows;
+  var idx = function(n) { return h.indexOf(n); };
+  var iPop = idx('POPID'), iFirst = idx('First'), iLast = idx('Last'), iSpouse = idx('SpouseId'), iMarital = idx('MaritalStatus'),
+      iParents = idx('ParentIds'), iChildren = idx('ChildrenIds'), iNumKids = idx('NumChildren'), iHH = idx('HouseholdId'),
+      iHood = idx('Neighborhood'), iLife = idx('LifeHistory'), iBY = idx('BirthYear'), iStatus = idx('Status');
+  var newRow = rows[newIdx];
+  if (!newRow || !deadRow) return;
+  var stamp = 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1);
+  var newName = (String(newRow[iFirst] || '') + ' ' + String(newRow[iLast] || '')).trim();
+  var deadName = (String(deadRow[iFirst] || '') + ' ' + String(deadRow[iLast] || '')).trim();
+  var simYw = simYearOf_(ctx, cycle);
+  var newBY = iBY >= 0 ? (Number(newRow[iBY]) || 0) : 0;
+  var desc;
+  if (matchType === 'spouse') {
+    if (newBY > 0 && (simYw - newBY) < 18) { Logger.log('wireFamilyToDeceased_: ' + newPopId + ' is a minor — no spouse link (engine.302)'); return; }
+    if (iMarital >= 0) newRow[iMarital] = 'widowed';
+    if (iSpouse >= 0) newRow[iSpouse] = deadPop;
+    if (iNumKids >= 0) newRow[iNumKids] = Number(deadRow[iNumKids]) || 0;
+    if (iChildren >= 0) newRow[iChildren] = String(deadRow[iChildren] || '[]');
+    desc = 'widow of the late ' + deadName;
+  } else if (matchType === 'child') {
+    var pars = [deadPop];
+    var dSp = iSpouse >= 0 ? ((String(deadRow[iSpouse] || '').match(/POP-\d+/) || [])[0] || '') : '';
+    if (dSp && pars.indexOf(dSp) < 0) pars.push(dSp);
+    if (iParents >= 0) newRow[iParents] = JSON.stringify(pars);
+    desc = 'child of the late ' + deadName;
+  } else if (matchType === 'parent') {
+    if (iChildren >= 0) newRow[iChildren] = JSON.stringify([deadPop]);
+    if (iNumKids >= 0) newRow[iNumKids] = Math.max(Number(newRow[iNumKids]) || 0, 1);
+    desc = 'parent of the late ' + deadName;
+  } else {
+    Logger.log('wireFamilyToDeceased_: unknown matchType "' + matchType + '" — links skipped');
+    return;
+  }
+  var deadHH = iHH >= 0 ? String(deadRow[iHH] || '').trim() : '';
+  if (deadHH && iStatus >= 0) {
+    for (var r = 0; r < rows.length; r++) {
+      if (r === newIdx || !rows[r]) continue;
+      if (String(rows[r][iHH] || '').trim() === deadHH && String(rows[r][iStatus] || '').trim().toLowerCase() === 'active') { newRow[iHH] = deadHH; break; }
+    }
+  }
+  if (iHood >= 0 && deadRow[iHood]) newRow[iHood] = deadRow[iHood];
+  if (iLife >= 0) {
+    var line = stamp + ' — [Family] Came on-camera — ' + desc + ' (family lottery)';
+    newRow[iLife] = (String(newRow[iLife] || '') ? String(newRow[iLife]) + '\n' : '') + line;
+  }
+  ctx.ledger.dirty = true;
+  if (logSheet) logSheet.appendRow([now, newPopId, newName, 'Family', 'Arrived as family — ' + desc, '', cycle]);
+  if (ctx.summary) {
+    ctx.summary.storyHooks = ctx.summary.storyHooks || [];
+    ctx.summary.storyHooks.push({
+      hookType: 'FAMILY_REALIZED', severity: 3, priority: 3,
+      description: newName + ' came on-camera — ' + desc,
+      cycleGenerated: cycle, neighborhood: iHood >= 0 ? String(newRow[iHood] || '') : '',
+      domain: 'COMMUNITY',
+      text: 'The late ' + deadName + "'s " + matchType + ' ' + newName + ' enters the record (family lottery C' + cycle + ')'
+    });
+  }
+  Logger.log('wireFamilyToDeceased_: ' + newPopId + ' ' + desc + ' — one-sided, the dead untouched');
+  return true;
+}
+
+/**
+ * engine.59 (S320): seed friendship bonds between freshly-promoted GC
+ * citizens and their namer roster. Idempotent: seeded rows get a
+ * '[bonds-seeded]' marker appended to EmergenceContext. Runs every cycle;
+ * only Emerged rows with an unseeded 'Named in' roster do work.
+ */
+function seedEmergenceBonds_(ctx, cycle) {
+  var results = { seeded: 0 };
+  if (!ctx || !ctx.ledger || typeof makeBond_ !== 'function') return results;
+  if (!ctx.summary || !Array.isArray(ctx.summary.relationshipBonds)) return results;
+  var genericSheet = ctx.ss.getSheetByName('Generic_Citizens');
+  if (!genericSheet) return results;
+  var data = genericSheet.getDataRange().getValues();
+  if (data.length < 2) return results;
+  var h = data[0];
+  var gF = findColByName_(h, 'First'), gL = findColByName_(h, 'Last'),
+      gS = findColByName_(h, 'Status'), gC = findColByName_(h, 'EmergenceContext');
+  if (gF < 0 || gL < 0 || gS < 0 || gC < 0) return results;
+
+  // name -> {popId, idx, hood} from the shared ledger
+  var header = ctx.ledger.headers;
+  var iPop = header.indexOf('POPID'), iFirst = header.indexOf('First'),
+      iLast = header.indexOf('Last'), iHood = header.indexOf('Neighborhood'),
+      iStatus = header.indexOf('Status');
+  var byName = {};
+  for (var r = 0; r < ctx.ledger.rows.length; r++) {
+    var row = ctx.ledger.rows[r];
+    if (String(row[iStatus] || '').toLowerCase() !== 'active') continue;
+    var nm = (String(row[iFirst] || '').trim() + ' ' + String(row[iLast] || '').trim()).trim().toLowerCase();
+    if (nm) byName[nm] = { popId: row[iPop], idx: r, hood: iHood >= 0 ? (row[iHood] || '') : '' };
+  }
+
+  for (var g = 1; g < data.length; g++) {
+    if (String(data[g][gS] || '') !== 'Emerged') continue;
+    var context = String(data[g][gC] || '');
+    if (context.indexOf('Named in ') < 0 || context.indexOf('[bonds-seeded]') >= 0) continue;
+    var promoted = byName[(String(data[g][gF] || '').trim() + ' ' + String(data[g][gL] || '').trim()).toLowerCase()];
+    if (!promoted) continue; // SL row not landed yet — retries next cycle
+
+    var seen = {};
+    var m, re = /Named in (.+?)'s week/g;
+    var seededHere = 0;
+    while ((m = re.exec(context)) !== null) {
+      var namer = byName[String(m[1]).trim().toLowerCase()];
+      if (!namer || namer.popId === promoted.popId || seen[namer.popId]) continue;
+      seen[namer.popId] = true;
+      ctx.summary.relationshipBonds.push(makeBond_(promoted.popId, namer.popId,
+        BOND_TYPES.FRIENDSHIP, 'emergence', 'COMMUNITY', namer.hood || promoted.hood,
+        3, cycle, 'Knew them before the record did', ctx));
+      seededHere++;
+      results.seeded++;
+    }
+    if (seededHere > 0) {
+      genericSheet.getRange(g + 1, gC + 1).setValue((context + ' [bonds-seeded]').slice(0, 450));
+      Logger.log('seedEmergenceBonds_: ' + promoted.popId + ' enters with ' + seededHere + ' friendship bond(s)');
+    }
+  }
+  return results;
+}
+
+// `held` (optional, engine.279): a holder the caller keeps for the pass — the
+// tab is read into it once instead of once per mint. The match is unchanged:
+// by name, first hit, status not consulted.
+function markAsEmergedInGeneric_(ss, genericSheet, first, last, cycle, held, familyOf) {
+  if (!genericSheet) genericSheet = ss.getSheetByName('Generic_Citizens');
+  if (!genericSheet) return;
+  var data = held && held.data ? held.data : genericSheet.getDataRange().getValues();
+  if (held) held.data = data;
+  var headers = data[0];
+  var gFirst = findColByName_(headers, 'First');
+  var gLast = findColByName_(headers, 'Last');
+  var gStatus = findColByName_(headers, 'Status');
+  if (gFirst < 0 || gLast < 0) return;
+  if (familyOf) { // engine.304 D6c: exactly one Family row of this citizen by this name, or fail closed
+    var gOf = findColByName_(headers, 'FamilyOf'), hits = [];
+    for (var fr = 1; fr < data.length; fr++) {
+      if (gStatus < 0 || gOf < 0) break;
+      if (String(data[fr][gStatus] || '').trim().toLowerCase() !== 'family') continue;
+      if (String(data[fr][gOf] || '').trim() !== familyOf) continue;
+      if (String(data[fr][gFirst] || '').trim().toLowerCase() !== first.toLowerCase()) continue;
+      if (String(data[fr][gLast] || '').trim().toLowerCase() !== last.toLowerCase()) continue;
+      hits.push(fr);
+    }
+    if (hits.length !== 1) {
+      Logger.log('markAsEmergedInGeneric_: ' + hits.length + ' Family rows of ' + familyOf + ' named ' + first + ' ' + last + ' — none flipped (engine.304)');
+      return;
+    }
+    genericSheet.getRange(hits[0] + 1, gStatus + 1).setValue('Emerged');
+    data[hits[0]][gStatus] = 'Emerged';
+    return;
+  }
+  // engine.304 (agy review §8): two pool rows can share a name — the one still waiting is the one that emerged, not
+  // an earlier row already flipped
+  var firstHit = -1, liveHit = -1;
+  for (var r = 1; r < data.length; r++) {
+    var f = String(data[r][gFirst] || '').trim();
+    var l = String(data[r][gLast] || '').trim();
+    if (f.toLowerCase() === first.toLowerCase() && l.toLowerCase() === last.toLowerCase()) {
+      if (firstHit < 0) firstHit = r;
+      var hst = gStatus >= 0 ? String(data[r][gStatus] || '').trim().toLowerCase() : '';
+      if (hst !== 'emerged' && hst !== 'promoted') { liveHit = r; break; }
+    }
+  }
+  var hitRow = liveHit >= 0 ? liveHit : firstHit;
+  if (hitRow >= 0 && gStatus >= 0) {
+    genericSheet.getRange(hitRow + 1, gStatus + 1).setValue('Emerged');
+    data[hitRow][gStatus] = 'Emerged';
+  }
+}

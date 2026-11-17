@@ -79,12 +79,12 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | infrastructure.19 | Oakland week flight made lifelike (builder 11-14). v41: names first, homes on a block, team news at team buildings. Next: his look; joined street unbuilt | in-progress | research-build | [[../../world-view/README]] |
 | pipeline.112 | Code labels off citizens' memory pages (builder 11-16): readers to keys/metadata first, then writers, then ~2,300 stored entries. In codex review | in-progress | research-build | [[../plans/2026-11-16-page-labels-off-citizens-memory]] |
 | engine.347 | Every saved word reaches the dials (builder 11-16). Deep-dive read done 11-16, agy folded; next: his calls on speed and direction | in-progress | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
+| engine.349 | Dials move (builder 11-16): wrong reads, speed keys, dial-moves tab built 11-16; on the bench, then PROD; speed to the middle row after 350 | in-progress | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
 
 ## 4. Queue — ruled, not started (ready)
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| engine.349 | Dials move (builder 11-16): wrong reads fixed, speed knobs in World_Config, a dial-moves tab; speed to the middle row after 350 | ready | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
 | engine.350 | Lines move a dial by what they say, down as often as up; harder hits both ways: bets, UNDOCKED runs (builder 11-16) | ready | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
 | engine.351 | Intake complete or it waits (builder 11-16): a row missing what the ledger needs is not minted; arrivals' dials start from their data | ready | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
 | engine.348 | Workers' records the engine does not yet produce (builder 11-16), e.g. the fire chief's one record. Own session after the worker template | ready | engine-sheet | [[../research/2026-11-15-worker-records-all-tabs]] |

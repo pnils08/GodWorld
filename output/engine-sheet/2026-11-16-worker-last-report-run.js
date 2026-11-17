@@ -15,8 +15,7 @@ const [id, date] = process.argv.slice(2);
   const w = await ww.buildWake({ officeId: id, cycle: 116, officeMap: om, date });
   const r = await dw.openRouterToolLoop({ model, system: w.system, user: w.user, toolset: ww.toolsFor(id, { records: w.records }),
     exec: ww.toolExecutor({ popid: office.popid, cycle: 116, stage: { patrol: [] }, records: w.records, dw }),
-    maxToolCalls: 6, maxTokens: 2400, timeoutMs: 180000, keepResults: true, answerLateToolCalls: 'No more reads this wake.',
-    body: /^deepseek\/deepseek-v4/.test(model) ? { reasoning: { enabled: false } } : {} });
+    maxToolCalls: 6, timeoutMs: 180000, keepResults: true, answerLateToolCalls: 'No more reads this wake.', ...civic.workerCallSettings(model) });
   const out = ['# ' + office.holder + ' — weekly report against the last one (as of ' + date + ')', '',
     '- last report handed: ' + (w.last ? w.last.date + ', Cycle ' + w.last.cycle + ', ' + w.last.statement.length + ' chars' : 'none'),
     '- handed: system ' + w.system.length + ' + user ' + w.user.length + '; verdict **' + civic.workerReplyVerdict(r) + '**; $' + r.billedUsd,

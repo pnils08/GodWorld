@@ -3685,6 +3685,14 @@ function workerReplyVerdict(got) {
   return 'statement';
 }
 
+// The worker's reply allowance. DeepSeek v4 runs with its reasoning off and answers in 2,400 tokens; a model that
+// reasons spends that allowance before it writes (2026-11-16: the district attorney's report on kimi-k3.1-pro cut off
+// mid-sentence at 2,400, about 1,700 of them reasoning), so it gets room for both.
+function workerCallSettings(model) {
+  const off = /^deepseek\/deepseek-v4/.test(String(model || ''));
+  return { maxTokens: off ? 2400 : 6000, body: off ? { reasoning: { enabled: false } } : {} };
+}
+
 async function runWorkerDatawake(duty, o) {
   const office = duty.office;
   const dw = require('./cron-desk-writer');
@@ -3708,8 +3716,7 @@ async function runWorkerDatawake(duty, o) {
       try {
         got = await dw.openRouterToolLoop({ model: active, system: w.system, user: w.user, toolset,
           exec: workerWake.toolExecutor({ popid: office.popid, cycle, stage, normalizePatrol: normalizePatrolStrategy, records: w.records, dw }),
-          maxToolCalls: 6, maxTokens: 2400, timeoutMs: 180000, keepResults: true, answerLateToolCalls: 'No more reads this wake.',
-          body: /^deepseek\/deepseek-v4/.test(active) ? { reasoning: { enabled: false } } : {} });
+          maxToolCalls: 6, timeoutMs: 180000, keepResults: true, answerLateToolCalls: 'No more reads this wake.', ...workerCallSettings(active) });
       } catch (e) {
         log(office.agentDir + ' ' + active + ' attempt ' + attempt + ' call failed: ' + e.message);
         if (attempt < 2) { await sleep(2000 * attempt); continue; }
@@ -4709,7 +4716,7 @@ if (require.main === module) {
     .catch(err => { console.error('[civic] Fatal:', err.message); process.exit(1); });
 }
 
-module.exports = { workerReplyVerdict, modelChainFor, FALLBACK_MODELS, sentimentWord, crimeWord, retailWord, ailmentPerception, isOneWeekDecay, constituentTopic, cleanLines, parseApprovalTable, parseHoodTable, outputContract, datawakeUserPrompt, datawakeStatementText, districtPackRef, weekCarryBlock, spliceWeekCarry, loadWeekCarry, hearingHasPhase, noPhaseCheck, prepTargetDirForHood, validateVoiceJson, ungroundedNumbers, statementNumberCheck, composeChecks,
+module.exports = { workerReplyVerdict, workerCallSettings, modelChainFor, FALLBACK_MODELS, sentimentWord, crimeWord, retailWord, ailmentPerception, isOneWeekDecay, constituentTopic, cleanLines, parseApprovalTable, parseHoodTable, outputContract, datawakeUserPrompt, datawakeStatementText, districtPackRef, weekCarryBlock, spliceWeekCarry, loadWeekCarry, hearingHasPhase, noPhaseCheck, prepTargetDirForHood, validateVoiceJson, ungroundedNumbers, statementNumberCheck, composeChecks,
   civicDutyDay,
   // civic.38 Task 1 — closed move set (exported for scripts/cron-civic-game.test.js)
   MOVE_TYPES, validateDatawakeMoves, runWorkerDatawake, runTickAndRefresh, hoodAuthorityReason, appendMoveLedger, moveLedgerLines, datawakeRecord,

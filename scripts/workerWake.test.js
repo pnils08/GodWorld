@@ -232,6 +232,12 @@ test('sheet_read: a blank tail is not rows; a Cycle bound that is not a number i
   assert.match(await ww.sheetRead({ tab: 'Event_Arc_Ledger', from_cycle: '', to_cycle: 'latest' }, d2), /^Cycle \| ArcId\n116 \| a116/);
 });
 
+test('a worker model that reasons gets room to reason and write; DeepSeek v4 answers with its reasoning off', () => {
+  const { workerCallSettings } = require('./cron-civic-run');
+  assert.deepEqual(workerCallSettings('deepseek/deepseek-v4.1-flash-1017'), { maxTokens: 2400, body: { reasoning: { enabled: false } } });
+  assert.deepEqual(workerCallSettings('moonshotai/kimi-k3.1-pro'), { maxTokens: 6000, body: {} });
+});
+
 test('a worker reply that ends mid-lookup is not a statement', () => {
   const { workerReplyVerdict } = require('./cron-civic-run');
   assert.equal(workerReplyVerdict({ text: 'Let me check transit metrics and the current cycle\'s ledger for the snarl itself.', finishReason: 'tool_calls' }), 'reply ended mid-lookup');

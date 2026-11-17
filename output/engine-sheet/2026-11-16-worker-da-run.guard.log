@@ -1,0 +1,27 @@
+2026-11-17T06:16:49.641Z	2322014	guard	loaded	/root/GodWorld/output/engine-sheet/2026-11-16-worker-last-report-run.js DA-01 2026-11-23 | allow=/root/GodWorld/output/engine-sheet
+2026-11-17T06:16:51.687Z	2322014	net	allowed	POST https://oauth2.googleapis.com/token
+2026-11-17T06:16:51.811Z	2322014	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/Simulation_Ledger
+2026-11-17T06:16:52.859Z	2322014	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/Heritage_Ledger
+2026-11-17T06:16:53.080Z	2322014	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/Household_Ledger
+2026-11-17T06:16:53.649Z	2322014	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/Civic_Office_Ledger
+2026-11-17T06:16:53.837Z	2322014	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/Care_Justice_Census
+2026-11-17T06:16:54.136Z	2322014	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/City_Treasury
+2026-11-17T06:16:54.326Z	2322014	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/Judicial_Ledger
+2026-11-17T06:16:54.501Z	2322014	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/Crime_Metrics
+2026-11-17T06:16:54.722Z	2322014	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/Chaos_Cars
+2026-11-17T06:16:54.928Z	2322014	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/WorldEvents_V3_Ledger
+2026-11-17T06:16:55.135Z	2322014	net	allowed	POST https://api.supermemory.ai/v3/search
+2026-11-17T06:16:55.610Z	2322014	net	allowed	POST https://api.supermemory.ai/v3/documents/list
+2026-11-17T06:16:55.811Z	2322014	net	allowed	GET https://api.supermemory.ai/v3/documents/EbwhCVoZvdYMn2Vw1WeoXP
+2026-11-17T06:16:55.951Z	2322014	net	allowed	GET https://api.supermemory.ai/v3/documents/E87QZnfnkest9TaZtjirZ1
+2026-11-17T06:16:56.074Z	2322014	net	allowed	GET https://api.supermemory.ai/v3/documents/9WWvHtDEojJ9YwMhCRSmG3
+2026-11-17T06:16:56.232Z	2322014	net	allowed	GET https://api.supermemory.ai/v3/documents/8ZjLbqFqZF99fp9tj2VVEF
+2026-11-17T06:16:56.335Z	2322014	net	allowed	GET https://api.supermemory.ai/v3/documents/RFux2GWof6URYUZrTpowra
+2026-11-17T06:16:56.435Z	2322014	net	allowed	GET https://api.supermemory.ai/v3/documents/MrAhjkvYXtzqQGk1B1AzcR
+2026-11-17T06:16:56.550Z	2322014	net	allowed	GET https://api.supermemory.ai/v3/documents/frNF2BXDV8pR6nCeBVdMiW
+2026-11-17T06:16:56.719Z	2322014	net	allowed	GET https://api.supermemory.ai/v3/documents/9GASV2RDFDqDPfWWV4p7UL
+2026-11-17T06:16:56.880Z	2322014	net	allowed	GET https://api.supermemory.ai/v3/documents/YdThJQy6DC4dsen9uibE3H
+2026-11-17T06:16:57.005Z	2322014	net	allowed	GET https://api.supermemory.ai/v3/documents/BXoFEXVozvikgGbxW9sSsn
+2026-11-17T06:16:57.119Z	2322014	net	allowed	GET https://api.supermemory.ai/v3/documents/C55SGPPD2WXCyPbgwdcMar
+2026-11-17T06:16:57.447Z	2322014	net	allowed	GET https://api.supermemory.ai/v3/documents/f9K5T8n5USnpo7uuT9Gf5D
+2026-11-17T06:16:57.711Z	2322014	net	allowed	POST https://openrouter.ai/api/v1/chat/completions

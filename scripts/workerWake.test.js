@@ -311,8 +311,8 @@ test('a lean worker (the fire chief): sheet line then job; this Cycle of his rec
   const asked = await ww.buildWake({ officeId: 'CHIEF-FIRE', cycle: 116, officeMap: om, deps: d, question: 'What happened in KONO?', askerLine: 'Avery Santana, Mayor,' });
   assert.ok(asked.user.endsWith('Avery Santana, Mayor, asks you:\n\nWhat happened in KONO?\n\nYour reply goes on the record as your answer, exactly as you give it.') && !asked.user.includes('weekly report'));
   // a worker with no job written wakes as before: no job line, no task, no lean reads
-  assert.equal(ww.isLean('DA-01'), false);
-  assert.deepEqual(ww.toolsFor('DA-01', { records: { a: 'b' } }).map((t) => t.function.name), ['sheet_read', 'citizen_lookup', 'canon_recall', 'memory_recall']);
+  assert.equal(ww.isLean('STAFF-MANAGER'), false);
+  assert.deepEqual(ww.toolsFor('STAFF-MANAGER', { records: { a: 'b' } }).map((t) => t.function.name), ['sheet_read', 'citizen_lookup', 'canon_recall', 'memory_recall']);
 }));
 
 // builder 2026-11-16 on the medical examiner: the death facts and the death line; the archive's exit note left out; the
@@ -371,6 +371,28 @@ test('the EMS director: neighborhood intakes with in care and beds; students in 
   const hc = await ww.FILLS['PROJ-HEALTHCTR'].build(116, { deps: d, nameOf: () => '', window: 1 });
   assert.equal(hc.blocks.find((x) => /— all by neighborhood, Cycle 116$/.test(x.title)).text, 'Neighborhood | Intakes | In care at end of Cycle | Beds\nChinatown | 2 | 5 | 4');
   assert.equal(ww.isLean('PROJ-HEALTHCTR'), true);
+}));
+
+// builder 2026-11-16 on the district attorney: in custody per neighborhood; patrol car calls and safety events
+test('the district attorney: arrests and in custody per neighborhood, no beds; patrol car calls and safety events; lean', async () => workspace(async (root) => {
+  const row = (cy, scope, hood, n, held) => ({ Cycle: String(cy), System: 'judicial', GeographicScope: scope, Neighborhood: hood, IntakeType: 'arrest', TotalIntakes: String(n), OpeningOccupancy: '0', ClosingOccupancy: String(held), BedsOccupied: '', OccupancyMeasure: 'in-custody', Exits: '0' });
+  const tabs = {
+    Care_Justice_Census: [row(115, 'neighborhood', 'Downtown', 1, 2), row(116, 'city', '', 24, 48), row(116, 'neighborhood', 'Downtown', 2, 3)],
+    Chaos_Cars: [{ CycleId: '115', VehicleType: 'cop_car', TargetScope: 'neighborhood', TargetId: 'Laurel', DiceOutcome: 'stop', PrimaryMetric: 'CrimeIndex', MetricMagnitude: '0.1' },
+      { CycleId: '116', VehicleType: 'cop_car', TargetScope: 'neighborhood', TargetId: 'Downtown', DiceOutcome: 'arrest', PrimaryMetric: 'CrimeIndex', MetricMagnitude: '0.1' }],
+    WorldEvents_V3_Ledger: [{ Cycle: '115', Domain: 'SAFETY', Neighborhood: 'Laurel', Severity: 'low', EventDescription: 'last week' },
+      { Cycle: '116', Domain: 'SAFETY', Neighborhood: 'Downtown', Severity: 'low', EventDescription: 'a break-in' }],
+  };
+  const d = deps(root); d.sheets = { getSheetAsObjects: async (tab) => tabs[tab] || [] };
+  const one = await ww.FILLS['DA-01'].build(116, { deps: d, nameOf: () => '', window: 1 });
+  assert.equal(one.blocks.find((x) => /— arrest by neighborhood/.test(x.title)).text, 'Neighborhood | Intakes | In custody at end of Cycle\nDowntown | 2 | 3');
+  const every = await ww.FILLS['DA-01'].build(116, { deps: d, nameOf: () => '' });
+  const grid = every.blocks.find((x) => /— arrest by neighborhood/.test(x.title));
+  assert.equal(grid.title, 'Arrests and custody — arrest by neighborhood, each Cycle (intakes / in custody at end of cycle)');
+  assert.equal(grid.text, 'Neighborhood | C115 | C116\nDowntown | 1 / 2 | 2 / 3');
+  assert.match(one.blocks.find((x) => x.title === 'Patrol car events, Cycle 116').text, /116 \| cop_car \| neighborhood Downtown \| arrest/);
+  assert.match(one.blocks.find((x) => x.title === 'Safety events on the city\'s event ledger, Cycle 116').text, /a break-in/);
+  assert.equal(ww.isLean('DA-01'), true);
 }));
 
 // builder 2026-11-16, on a quiet week: report against the last report

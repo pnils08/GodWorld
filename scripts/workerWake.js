@@ -350,12 +350,16 @@ function recordKit(cycle, ctx) {
         const hoods = [...new Set(c.filter((r) => r.GeographicScope === 'neighborhood').map((r) => r.Neighborhood))];
         const at = (h, cy) => c.find((x) => x.Neighborhood === h && Number(x.Cycle) === cy && x.GeographicScope === 'neighborhood' && x.IntakeType === k);
         const cell = (h, cy) => { const r = at(h, cy); return r ? r.TotalIntakes : ''; };
+        // custody is held, not bedded: the judicial rows carry no beds (BedsOccupied blank, OccupancyMeasure in-custody)
+        const held = system === 'judicial' ? 'in custody' : 'in care', beds = system !== 'judicial';
+        const cols = ['Intakes', held.charAt(0).toUpperCase() + held.slice(1) + ' at end of Cycle'].concat(beds ? ['Beds'] : []);
+        const vals = (r) => [r.TotalIntakes, r.ClosingOccupancy].concat(beds ? [r.BedsOccupied] : []);
         if (opts && opts.care && cyc.length === 1) {
-          const rowsK = hoods.map((h) => { const r = at(h, cyc[0]) || {}; return { Neighborhood: h, Intakes: r.TotalIntakes, 'In care at end of Cycle': r.ClosingOccupancy, Beds: r.BedsOccupied }; });
-          out.push({ title: t(label + ' — ' + k + ' by neighborhood, each Cycle'), text: table(rowsK, ['Neighborhood', 'Intakes', 'In care at end of Cycle', 'Beds']) });
+          const rowsK = hoods.map((h) => { const v = vals(at(h, cyc[0]) || {}); return Object.assign({ Neighborhood: h }, ...cols.map((col, i) => ({ [col]: v[i] }))); });
+          out.push({ title: t(label + ' — ' + k + ' by neighborhood, each Cycle'), text: table(rowsK, ['Neighborhood'].concat(cols)) });
         } else if (opts && opts.care) {
-          const three = (h, cy) => { const r = at(h, cy); return r ? r.TotalIntakes + ' / ' + r.ClosingOccupancy + ' / ' + r.BedsOccupied : ''; };
-          out.push({ title: t(label + ' — ' + k + ' by neighborhood, each Cycle (intakes / in care at end of Cycle / beds)'), text: table(hoods.map((h) => Object.assign({ Neighborhood: h }, ...cyc.map((cy) => ({ ['C' + cy]: three(h, cy) })))), ['Neighborhood'].concat(cyc.map((cy) => 'C' + cy))) });
+          const three = (h, cy) => { const r = at(h, cy); return r ? vals(r).join(' / ') : ''; };
+          out.push({ title: t(label + ' — ' + k + ' by neighborhood, each Cycle (' + cols.map((col) => col.toLowerCase()).join(' / ') + ')'), text: table(hoods.map((h) => Object.assign({ Neighborhood: h }, ...cyc.map((cy) => ({ ['C' + cy]: three(h, cy) })))), ['Neighborhood'].concat(cyc.map((cy) => 'C' + cy))) });
         } else
         out.push({ title: t(label + ' — ' + k + ' intakes by neighborhood, each Cycle'), text: table(hoods.map((h) => Object.assign({ Neighborhood: h }, ...cyc.map((cy) => ({ ['C' + cy]: cell(h, cy) })))), ['Neighborhood'].concat(cyc.map((cy) => 'C' + cy))) });
       }
@@ -401,10 +405,13 @@ Object.assign(FILLS, {
     await k.whole('Construction and architecture firms on the business ledger', 'Business_Ledger', null, (r) => /construction|architecture/i.test(r.Sector));
   }),
   'DA-01': made('charges custody arrests court', async (k) => {
-    await k.census('Arrests and custody', 'judicial', null);
+    await k.census('Arrests and custody', 'judicial', null, { care: true });   // builder 2026-11-16: in custody per neighborhood, "Yes"
     await k.treasury('Fines the court paid to the city', (r) => /^COURT/.test(r.Counterparty || ''));
     await k.whole('Cases on the case ledger', 'Judicial_Ledger');
     await k.whole('Clearance and incidents by neighborhood', 'Crime_Metrics', ['Neighborhood', 'IncidentCount', 'ClearanceRate', 'PropertyLevel', 'ViolentLevel', 'Trend']);
+    // the stop is the police chief's, the case hers (builder 2026-11-16: "Patrol car calls + safety events")
+    await k.chaos('Patrol car events, every Cycle on the sheet', ['cop_car']);
+    await k.events('Safety events on the city\'s event ledger', ['SAFETY']);
   }),
   'EMS-DIR': made('hospital intakes ambulance illness injury', async (k) => {
     await k.census('Hospital intakes', 'hospital', null, { care: true });
@@ -472,6 +479,7 @@ Object.assign(FILLS, {
 const JOBS = {
   'CHIEF-FIRE': 'You run the city\'s fire service. Your job is to answer for its record — each fire engine call, where it went and what came of it — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'EMERG-DIR': 'You run the city\'s emergency management office. Your job is to answer for the city\'s crises and its weather — what is open, how it is moving, what it set off — when the Mayor, the council or the press ask, and in your weekly report on the record.',
+  'DA-01': 'You are the city\'s district attorney. Your job is to answer for the city\'s arrests and the people in custody, the cases before the court, and the fines the court collects — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'PROJ-HEALTHCTR': 'You run the Temescal Community Health Center. Your job is to answer for its record — the center\'s money and progress, the hospital intakes it serves alongside, the illness in each neighborhood, and the city\'s health programs — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'PROJ-OARI': 'You run the Oakland Alternative Response Initiative. Your job is to answer for its record — each OARI van call, where it went and what came of it, the mental-health and substance intakes at the hospital, and the program\'s money and progress — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'EMS-DIR': 'You run the city\'s emergency medical services. Your job is to answer for the city\'s ambulance calls and hospital intakes — who came in, from where and for what, who is in care, and the illness in each neighborhood — when the Mayor, the council or the press ask, and in your weekly report on the record.',

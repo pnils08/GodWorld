@@ -8,7 +8,7 @@ From your own memory:
 - (Cycle 116) What's rattling me is seeing how many folks in Chinatown are struggling, and it's not just us. Downtown Oakland's got its own issues. If 13 people there are making headlines, that's 13 too many. We need to make sure our economic development plans are actually helping people on the ground, not just the ones with the loudest voices.
 - (Cycle 106) Look, I got banged up in that accident, sure, but walking these streets now—seeing how many folks are struggling worse than me—that's what rattles me. Chinatown's got more sick people than any other neighborhood right now. Five names on the hospital records just this cycle, and I'm one of 'em. Makes you wonder what's slipping through the cracks when even the council member can't dodge it.
 
-## USER (3975 chars)
+## USER (4082 chars)
 
 Businesses by neighborhood, Cycle 116 (every business: the record "Every business on the ledger"):
 Neighborhood | Businesses | Staff | Median business pay
@@ -39,6 +39,8 @@ Brooklyn Basin | 1 | 25 | 115000
 Telegraph corridor | 1 | 10 | 35000
 Old Oakland | 1 | 5 | 85000
 Ivy Hill | 6 | 1 | 43000
+The whole city | 283 | 31399 | 52000
+(City-wide: the businesses the ledger places in no one neighborhood.)
 
 Businesses that closed:
 none

@@ -420,7 +420,7 @@ test('the economic deputy: businesses by neighborhood in the lean pack, every bu
   const d = deps(root); d.sheets = { getSheetAsObjects: async (tab) => tabs[tab] || [] };
   const one = await ww.FILLS['STAFF-DM-ECON'].build(116, { deps: d, nameOf: () => '', window: 1 });
   assert.equal(one.blocks[0].title, 'Businesses by neighborhood, Cycle 116 (every business: the record "Every business on the ledger")');
-  assert.equal(one.blocks[0].text, 'Neighborhood | Businesses | Staff | Median business pay\nDowntown | 2 | 40 | 75000\nBaylight District | 1 | 0 | 180000');
+  assert.equal(one.blocks[0].text, 'Neighborhood | Businesses | Staff | Median business pay\nDowntown | 2 | 40 | 75000\nBaylight District | 1 | 0 | 180000\nThe whole city | 3 | 40 | 100000');
   const closed = one.blocks.find((x) => x.title === 'Businesses that closed').text;
   assert.ok(closed.includes('Gone Shop') && !closed.includes('Dup'));
   const every = await ww.FILLS['STAFF-DM-ECON'].build(116, { deps: d, nameOf: () => '' });

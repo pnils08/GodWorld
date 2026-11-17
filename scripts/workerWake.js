@@ -352,8 +352,14 @@ function recordKit(cycle, ctx) {
         if (isFinite(pay)) t.pays.push(pay);
       }
       const median = (a) => { if (!a.length) return ''; const x = a.slice().sort((p, q) => p - q), m = Math.floor(x.length / 2); return Math.round(x.length % 2 ? x[m] : (x[m - 1] + x[m]) / 2); };
-      const out2 = Object.values(by).sort((x, y) => y.Staff - x.Staff).map((t) => ({ Neighborhood: t.Neighborhood, Businesses: t.Businesses, Staff: t.Staff, 'Median business pay': median(t.pays) }));
-      return out2.length ? table(out2, ['Neighborhood', 'Businesses', 'Staff', 'Median business pay']) : 'none';
+      const all = Object.values(by);
+      const out2 = all.sort((x, y) => y.Staff - x.Staff).map((t) => ({ Neighborhood: t.Neighborhood, Businesses: t.Businesses, Staff: t.Staff, 'Median business pay': median(t.pays) }));
+      if (!out2.length) return 'none';
+      // the whole city on its own row, and what the ledger's "City-wide" is: read without them, the City-wide row was taken
+      // as the city (2026-11-16: "we have 10 businesses city-wide carrying 13,675 jobs. That's it. Ten.")
+      out2.push({ Neighborhood: 'The whole city', Businesses: all.reduce((a, t) => a + t.Businesses, 0), Staff: all.reduce((a, t) => a + t.Staff, 0), 'Median business pay': median([].concat(...all.map((t) => t.pays))) });
+      return table(out2, ['Neighborhood', 'Businesses', 'Staff', 'Median business pay']) +
+        (by['City-wide'] ? '\n(City-wide: the businesses the ledger places in no one neighborhood.)' : '');
     }),
     // the care-and-justice census: the city's line for each intake type by Cycle, then each neighborhood's intakes by Cycle
     // opts.care: each neighborhood's in care and beds at the end of the Cycle beside its intakes (builder 2026-11-16, on

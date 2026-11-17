@@ -408,6 +408,7 @@ Object.assign(FILLS, {
     await k.hoodMap('Boom exposure and income on the neighborhood map', ['BoomExposure', 'BoomIndex', 'MedianIncome', 'RetailVitality', 'NeighborhoodTrajectory']);
     await k.chaos('Container ship events, every Cycle on the sheet', ['cargo_ship']);
     await k.whole('Construction and architecture firms on the business ledger', 'Business_Ledger', null, (r) => /construction|architecture/i.test(r.Sector));
+    await k.events('Business, economic and infrastructure events on the city\'s event ledger', ['BUSINESS', 'ECONOMIC', 'INFRASTRUCTURE']);   // builder 2026-11-16: "Business + economic + infrastructure"
   }),
   'DA-01': made('charges custody arrests court', async (k) => {
     await k.census('Arrests and custody', 'judicial', null, { care: true });   // builder 2026-11-16: in custody per neighborhood, "Yes"
@@ -484,6 +485,7 @@ Object.assign(FILLS, {
 const JOBS = {
   'CHIEF-FIRE': 'You run the city\'s fire service. Your job is to answer for its record — each fire engine call, where it went and what came of it — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'EMERG-DIR': 'You run the city\'s emergency management office. Your job is to answer for the city\'s crises and its weather — what is open, how it is moving, what it set off — when the Mayor, the council or the press ask, and in your weekly report on the record.',
+  'STAFF-BAYLIGHT': 'You run the Baylight Authority. Your job is to answer for the Baylight District\'s record — its money and progress, the boom in the neighborhoods around it, the port and the builders — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'PROJ-TRANSITHUB': 'You lead planning for the Fruitvale Transit Hub. Your job is to answer for its record — the hub\'s money and progress, ridership and on-time running at each station and corridor, the BART trains and the traffic — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'PROJ-STABFUND': 'You run the West Oakland Stabilization Fund. Your job is to answer for its record — the households it has paid and how much, the fund\'s money and progress, and the rent and housing pressure in the neighborhoods — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'DA-01': 'You are the city\'s district attorney. Your job is to answer for the city\'s arrests and the people in custody, the cases before the court, and the fines the court collects — when the Mayor, the council or the press ask, and in your weekly report on the record.',

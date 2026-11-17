@@ -1,0 +1,16 @@
+2026-11-17T06:57:26.281Z	2352164	guard	loaded	/root/GodWorld/output/engine-sheet/2026-11-16-worker-last-report-run.js STAFF-MANAGER 2026-11-23 | allow=/root/GodWorld/output/engine-sheet
+2026-11-17T06:57:27.926Z	2352164	net	allowed	POST https://oauth2.googleapis.com/token
+2026-11-17T06:57:28.033Z	2352164	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/Simulation_Ledger
+2026-11-17T06:57:28.831Z	2352164	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/Heritage_Ledger
+2026-11-17T06:57:29.036Z	2352164	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/Household_Ledger
+2026-11-17T06:57:29.634Z	2352164	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/Civic_Office_Ledger
+2026-11-17T06:57:29.878Z	2352164	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/City_Treasury
+2026-11-17T06:57:30.091Z	2352164	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/Initiative_Tracker
+2026-11-17T06:57:30.299Z	2352164	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/Chaos_Cars
+2026-11-17T06:57:30.521Z	2352164	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/WorldEvents_V3_Ledger
+2026-11-17T06:57:30.738Z	2352164	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/World_Population
+2026-11-17T06:57:30.962Z	2352164	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/Domain_Tracker
+2026-11-17T06:57:31.126Z	2352164	net	allowed	POST https://api.supermemory.ai/v3/search
+2026-11-17T06:57:31.468Z	2352164	net	allowed	POST https://api.supermemory.ai/v3/documents/list
+2026-11-17T06:57:31.599Z	2352164	net	allowed	GET https://api.supermemory.ai/v3/documents/Y1SQTyQwANyJZviupmwnoD
+2026-11-17T06:57:31.704Z	2352164	net	allowed	POST https://openrouter.ai/api/v1/chat/completions

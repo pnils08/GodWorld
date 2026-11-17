@@ -86,6 +86,12 @@ pointers:
 
 **Thu run, 2026-11-12 20:18 (log 02:18–02:21 UTC):** 21 due (9 registered, 12 auto) → 18 woke and wrote. Aitken and Coles skipped (the feed names neither at C115). The DA woke; her model reply was empty, the store refused the empty write, no doc, no retry (gap log G-EC49). 18 Reflection_Intake rows, all `applied=no`. Method: the 12 office packs rebuilt read-only from the store, each page doc fetched by id. Upstream of this row: G-EC48 ("D3 East Oakland"), G-EC50 (D6 Crane's leg, the ME's Yu Zen thread).
 
+**First live worker records, Mon 2026-11-16 05:45 datawake (7/7 ok; workers: fire chief, emergency director, EMS director, medical examiner; `output/cron-civic/datawake/worker-*_2026-11-16.json`, each on its page).** Nothing changed; the worker template is live and changes on the builder's word.
+1. **Emergency director: her page holds a mid-thought as her statement** — "Let me check transit metrics and the current cycle's ledger for the snarl itself." She spent all 6 tool calls; the loop ended on `finishReason: tool_calls`; `runWorkerDatawake` keeps any non-empty text unless the finish is `length`. Her user turn is 30,939 chars (crisis arcs from C69).
+2. **Medical examiner denied nine deaths the sheet holds.** His fill filters `Citizen_Archive` on Status/ArchiveReason `deceased` and leaves both columns out of what he sees; he saw `defects-at-exit: schoolQualityUnusable` and said "I'm not going to confirm nine residents as deceased … I'll stop it." Live read 11-16: all nine Status `deceased`, ArchiveReason `deceased`, HealthCause blank.
+3. **Two workers wrote as someone briefing them.** Fire chief: "Here's what I can say on the record, Chief Hollowell", ending in his own first person. EMS director: "Here's what the sheets actually say, Priya". Fire chief's system turn is his sheet line alone (162 chars, 0 memory); emergency director's 156.
+4. Fire chief read the $21.55 / $15.22 revenue moves as the businesses' annual revenue.
+
 ## Open
 
 - **A feed line the engine routed by kind, not by what happened.** C115: the feed's `roster-move` row is Vinnie Keane's retirement ("Keane is not leaving Oakland"); the engine's Sports-Moved line on him reads "spent the night on the phone working out where the family would land" — the trade pool. Engine output stands; recorded for the builder.
@@ -112,6 +118,7 @@ pointers:
 
 ## Changelog
 
+- 2026-11-16 (engine-sheet, S665) — first live worker records read (Mon datawake, four workers): four faults recorded under Acceptance; nothing changed.
 - 2026-11-16 (engine-sheet) — A model run was made on Mobley without the builder's word; run directives removed. The council seat template and all made for it deleted on his word (13 files; nothing live used them). The earlier committed copies stay in git history. No run without his word.
 - 2026-11-15 (engine-sheet, S663) — the eight workers' old write-up folders retired (moved, nothing deleted) to `docs/archive/legacy-agent-folders/2026-11-15-worker-write-ups/`: no scheduled wake loads them since the workers went onto the template (builder 2026-11-14: "the old boot are retired for the new templates we are adding"). The reporter voice-file review is filed: [[../research/2026-11-15-voice-files-cut-review]].
 - 2026-11-15 (engine-sheet, S663) — all fourteen built workers ON, on a rota of their own (four a duty day beside the seats' three); the Sunday chain opens a worker from the sheet and their memory, no written file. Detail: [[../reference/AGENT_BOOT_TEMPLATES]] Changelog 2026-11-15. Next: read their first records (first wakes Mon 2026-11-16).

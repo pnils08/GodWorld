@@ -1,0 +1,33 @@
+AIM = BENCH (script read the bench marker)
+== sync from live (final leg)
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+{"fireGuardMinutes":"0","cycleCountFormatted":"116","cycleCountIsNumber":true}
+clearfire 117: {"ok":true,"cleared":{"cycle":117,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @205
+pull-back byte-identical to stage51-e349.sha256
+mark107: 13 rows past cycleCount 116: POP-01029 POP-01030 POP-01031 POP-01032 POP-01033 POP-01034 POP-01035 POP-01036 POP-01037 POP-01038 POP-01039 POP-01040 POP-01041
+read back: 13 at 107
+pre: Engine_Errors rows 9
+open final: 1075 citizens
+appended 7 to Edition_Coverage_Ratings; marked rows on the tab now 7
+appended 30 to Citizen_Media_Usage; marked rows on the tab now 30
+bench cycleCount 116
+fire C117 rc=0 "verdict": "PASS" "wallS": 149
+read final: cycleCount 117, 1078 citizens, keys dialLineScale=1 dialDirectShare=0 dialMoodFade=0.8 dialHardenShare=0.4 dialReflectionShare=0.225
+  Dial_Moves 480 rows · Dial_Pulse 3 rows · new Engine_Errors 0
+  pulse: Cycle 117 · Citizens 1078 · Moved 371 · CrossedBand 7 · AllMiddle 690 · AnyLow 5 · AnyHigh 461
+moves final: citizen-dial moves in the DialState difference 480 · matching Dial_Moves rows 480 · missing or wrong 0 · rows with no difference behind them 0
+  why: lines 363 · voice 61 · wear 57 · earlier in the Cycle 2
+moves rc=0
+rows with a name: 480 of 480
+    117 | POP-00002 | Amara Keane | outabout | 52 | 52.8 | 0.79 | 0 | 0 | 54 | lines +0.79 (Civic Perception)
+    117 | POP-00003 | Mark Aitken | sociability | 74.5 | 74.9 | 0.43 | 1 | 1 | 76.2 | lines +0.43 (Neighborhood)
+    117 | POP-00003 | Mark Aitken | outabout | 52.7 | 53.8 | 1.08 | 0 | 0 | 55.5 | lines +1.08 (Neighborhood)
+rows for the 13: 19
+of the 13, marks now at this Cycle: 12
+== final sync from live
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+final leg done
+exit 0

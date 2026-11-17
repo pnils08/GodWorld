@@ -62,6 +62,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | engine.285 | Organic: Phase-11 + executor kill hazards — all LIVE @140/@141; item 4 waits on engine.95 receipts | live-observing | engine-sheet | `docs/research/2026-10-08-codex-engine95-design.md` §7; [[../research/2026-10-16-codex-engine285-hazards2-6-review]] |
 | engine.280 | Fandom follow-ups: four lines (Sports-Soured / Lifted / Gutted / Attended) wait on upstream signals: a per-piece tone at post-publish, a roster negative flag, an ECL attendance tag. §2.9 core shipped 2026-10-08; C10 upset sign shipped (38f19986), read live C113 | blocked | engine-sheet | [[../research/2026-10-02-engine-208-fandom-dial-read-before]] §2.9 |
 | engine.289 | Evening culture and nightlife land on their hood: LIVE stage 49 @184 (bench C117/C118 PASS). Read C117 Sun 2026-11-22: seed carry + the bars log line | live-observing | research-build | [[../plans/2026-11-16-evening-reaches-the-hoods]] |
+| engine.349 | Dials move (builder 11-16): keys, dial-moves tab, wrong reads LIVE stage 51 @186. Read C117 Sun 2026-11-22: `node scripts/dialPulse.js`, the 13, the tail | live-observing | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
 
 ## 3. Now — being worked, one per terminal (in-progress)
 
@@ -79,7 +80,6 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | infrastructure.19 | Oakland week flight made lifelike (builder 11-14). v41: names first, homes on a block, team news at team buildings. Next: his look; joined street unbuilt | in-progress | research-build | [[../../world-view/README]] |
 | pipeline.112 | Code labels off citizens' memory pages (builder 11-16): readers to keys/metadata first, then writers, then ~2,300 stored entries. In codex review | in-progress | research-build | [[../plans/2026-11-16-page-labels-off-citizens-memory]] |
 | engine.347 | Every saved word reaches the dials (builder 11-16). Deep-dive read done 11-16, agy folded; next: his calls on speed and direction | in-progress | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
-| engine.349 | Dials move (builder 11-16): wrong reads, speed keys, dial-moves tab built 11-16; on the bench, then PROD; speed to the middle row after 350 | in-progress | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
 
 ## 4. Queue — ruled, not started (ready)
 

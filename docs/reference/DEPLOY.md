@@ -67,7 +67,9 @@ Cloud Shell sometimes clears installed packages. If clasp fails, run `npm instal
 **Previous bench:** `SANDBOX 0908` (`1FFpUs98L0wrEcfAaQy6-Ir2xYiCq9baCc0SzqzAMrtM`) — RETIRED 2026-10-04: its script project hit Apps Script's 200-version cap (push lands, no new deployment; web app frozen @200 = `d7ac5fff`, C119). Full trail: [[DEPLOY_HISTORY]] §Retired sandboxes.
 
 
-**Live (2026-11-16):** PROD = **stage 50** = stage 49 + the build-note writer fix (`bondEngine.js` at `9c3996a58`, `processAdvancementIntake.js` = `86174e9db` + the `9c3996a58` hunks only), web app **@185** — DEPLOY_HISTORY §PROD stage 50. Bench: SANDBOX 1004 **@202 = stage 50**, data synced back to live C116.
+**Live (2026-11-17):** PROD = **stage 51** = stage 50 + engine.349 (dial speed keys, Dial_Moves / Dial_Pulse, wrong reads; nine files, `5da47216d`), web app **@186** — DEPLOY_HISTORY §PROD stage 51. Bench: SANDBOX 1004 **@206 = stage 51**, data synced back to live C116.
+
+**Previous live (2026-11-16):** PROD = **stage 50** = stage 49 + the build-note writer fix (`bondEngine.js` at `9c3996a58`, `processAdvancementIntake.js` = `86174e9db` + the `9c3996a58` hunks only), web app **@185** — DEPLOY_HISTORY §PROD stage 50. Bench: SANDBOX 1004 **@202 = stage 50**, data synced back to live C116.
 
 **Previous live (2026-11-16, 20:30 CST):** PROD = **stage 49** = stage 48 + engine.289 (`applyStorySeeds.js`, `v3NeighborhoodWriter.js`, `applyCityDynamics.js` at `9740bb3ef`), web app **@184** — DEPLOY_HISTORY §PROD stage 49. Bench: SANDBOX 1004 **@201 = stage 49** (versions cleared by the builder 2026-11-16), data synced back to live C116 after two proving fires.
 

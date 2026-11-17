@@ -1,0 +1,67 @@
+[
+ {
+  "row": 858,
+  "pop": "POP-01029",
+  "was": "{\"base\":{\"drive\":50,\"sociability\":50.675,\"warmth\":50,\"openness\":50,\"composure\":50.45,\"integrity\":50,\"family\":50,\"outabout\":50,\"fandom\":50},\"streak\":{\"drive\":1,\"sociability\":2,\"warmth\":1,\"openness\":0,\"composure\":-1,\"integrity\":0,\"family\":1,\"outabout\":0,\"fandom\":0},\"mood\":{\"drive\":0,\"sociability\":1.0168764570009605,\"warmth\":0,\"openness\":0,\"composure\":-0.8053063680000007,\"integrity\":0,\"family\":0,\"outabout\":0,\"fandom\":0},\"folded\":133}"
+ },
+ {
+  "row": 859,
+  "pop": "POP-01030",
+  "was": "{\"base\":{\"drive\":50,\"sociability\":50.863136,\"warmth\":50.436176,\"openness\":50,\"composure\":49.366472,\"integrity\":50,\"family\":50,\"outabout\":50,\"fandom\":50},\"streak\":{\"drive\":1,\"sociability\":1,\"warmth\":1,\"openness\":0,\"composure\":-1,\"integrity\":0,\"family\":1,\"outabout\":0,\"fandom\":0},\"mood\":{\"drive\":0.8053063680000007,\"sociability\":0.5368709120000003,\"warmth\":0,\"openness\":0,\"composure\":-0.8053063680000007,\"integrity\":0,\"family\":0,\"outabout\":0,\"fandom\":0},\"folded\":133}"
+ },
+ {
+  "row": 860,
+  "pop": "POP-01031",
+  "was": "{\"base\":{\"drive\":50,\"sociability\":50,\"warmth\":50,\"openness\":50,\"composure\":50,\"integrity\":50,\"family\":50,\"outabout\":50,\"fandom\":65},\"streak\":{\"drive\":1,\"sociability\":1,\"warmth\":1,\"openness\":0,\"composure\":-1,\"integrity\":0,\"family\":2,\"outabout\":-1,\"fandom\":0},\"mood\":{\"drive\":0,\"sociability\":0.5368709120000003,\"warmth\":0,\"openness\":0,\"composure\":-0.7838315315200004,\"integrity\":0,\"family\":0,\"outabout\":0,\"fandom\":0},\"folded\":133,\"maneuver\":{\"p\":\"hold\",\"g\":\"home\",\"a\":50,\"c\":113},\"pressure\":{\"debt\":{\"n\":5,\"l\":111}},\"debtDefault\":{\"l\":112,\"n\":1},\"fan\":\"as\"}"
+ },
+ {
+  "row": 861,
+  "pop": "POP-01032",
+  "was": "{\"base\":{\"drive\":50,\"sociability\":50,\"warmth\":50,\"openness\":50,\"composure\":50,\"integrity\":50,\"family\":50,\"outabout\":50,\"fandom\":65},\"streak\":{\"drive\":2,\"sociability\":2,\"warmth\":1,\"openness\":0,\"composure\":-1,\"integrity\":0,\"family\":1,\"outabout\":0,\"fandom\":0},\"mood\":{\"drive\":1.2777527705600007,\"sociability\":1.0307921510400007,\"warmth\":0,\"openness\":0,\"composure\":-0.8053063680000007,\"integrity\":0,\"family\":0,\"outabout\":0,\"fandom\":0},\"folded\":133,\"fan\":\"as\"}"
+ },
+ {
+  "row": 862,
+  "pop": "POP-01033",
+  "was": "{\"base\":{\"drive\":50.45,\"sociability\":50.9,\"warmth\":50.45,\"openness\":50,\"composure\":51.125,\"integrity\":50,\"family\":50,\"outabout\":50,\"fandom\":50},\"streak\":{\"drive\":1,\"sociability\":1,\"warmth\":1,\"openness\":0,\"composure\":-1,\"integrity\":0,\"family\":1,\"outabout\":0,\"fandom\":0},\"mood\":{\"drive\":0,\"sociability\":0.5272072355840004,\"warmth\":0,\"openness\":0,\"composure\":-0.8053063680000007,\"integrity\":0,\"family\":0,\"outabout\":0,\"fandom\":0},\"folded\":133,\"pressure\":{\"hood\":{\"n\":1,\"l\":115}}}"
+ },
+ {
+  "row": 863,
+  "pop": "POP-01034",
+  "was": "{\"base\":{\"drive\":50,\"sociability\":50,\"warmth\":50,\"openness\":50,\"composure\":50,\"integrity\":50,\"family\":50,\"outabout\":50,\"fandom\":50},\"streak\":{\"drive\":1,\"sociability\":1,\"warmth\":1,\"openness\":0,\"composure\":-1,\"integrity\":0,\"family\":1,\"outabout\":0,\"fandom\":0},\"mood\":{\"drive\":0,\"sociability\":0.5368709120000003,\"warmth\":0,\"openness\":0,\"composure\":-0.8053063680000007,\"integrity\":0,\"family\":0,\"outabout\":0,\"fandom\":0},\"folded\":133}"
+ },
+ {
+  "row": 864,
+  "pop": "POP-01035",
+  "was": "{\"base\":{\"drive\":50,\"sociability\":50,\"warmth\":50,\"openness\":50,\"composure\":50,\"integrity\":50,\"family\":50,\"outabout\":50,\"fandom\":50},\"streak\":{\"drive\":1,\"sociability\":2,\"warmth\":1,\"openness\":0,\"composure\":-1,\"integrity\":0,\"family\":1,\"outabout\":0,\"fandom\":0},\"mood\":{\"drive\":0,\"sociability\":1.0307921510400007,\"warmth\":0,\"openness\":0,\"composure\":-0.8053063680000007,\"integrity\":0,\"family\":0,\"outabout\":0,\"fandom\":0},\"folded\":133}"
+ },
+ {
+  "row": 865,
+  "pop": "POP-01036",
+  "was": "{\"base\":{\"drive\":50,\"sociability\":54.144340028443324,\"warmth\":52.13428539119571,\"openness\":50,\"composure\":52.24285969664001,\"integrity\":50,\"family\":50,\"outabout\":50,\"fandom\":50},\"streak\":{\"drive\":1,\"sociability\":1,\"warmth\":1,\"openness\":0,\"composure\":-1,\"integrity\":0,\"family\":1,\"outabout\":0,\"fandom\":0},\"mood\":{\"drive\":0,\"sociability\":0.5368709120000003,\"warmth\":0,\"openness\":0,\"composure\":-0.8053063680000007,\"integrity\":0,\"family\":0,\"outabout\":0,\"fandom\":0},\"folded\":133}"
+ },
+ {
+  "row": 866,
+  "pop": "POP-01037",
+  "was": "{\"base\":{\"drive\":50,\"sociability\":50,\"warmth\":50,\"openness\":50,\"composure\":50,\"integrity\":50,\"family\":50,\"outabout\":50,\"fandom\":50},\"streak\":{\"drive\":1,\"sociability\":1,\"warmth\":1,\"openness\":0,\"composure\":-1,\"integrity\":0,\"family\":1,\"outabout\":0,\"fandom\":0},\"mood\":{\"drive\":0,\"sociability\":0.5368709120000003,\"warmth\":0,\"openness\":0,\"composure\":-0.8053063680000007,\"integrity\":0,\"family\":0,\"outabout\":0,\"fandom\":0},\"folded\":133}"
+ },
+ {
+  "row": 867,
+  "pop": "POP-01038",
+  "was": "{\"base\":{\"drive\":50,\"sociability\":50,\"warmth\":50,\"openness\":50,\"composure\":50,\"integrity\":50,\"family\":50,\"outabout\":50,\"fandom\":50},\"streak\":{\"drive\":1,\"sociability\":1,\"warmth\":1,\"openness\":0,\"composure\":-1,\"integrity\":0,\"family\":1,\"outabout\":0,\"fandom\":0},\"mood\":{\"drive\":0,\"sociability\":0.5368709120000003,\"warmth\":0,\"openness\":0,\"composure\":-0.8053063680000007,\"integrity\":0,\"family\":0,\"outabout\":0,\"fandom\":0},\"folded\":133}"
+ },
+ {
+  "row": 868,
+  "pop": "POP-01039",
+  "was": "{\"base\":{\"drive\":53.07395601300979,\"sociability\":50.8115264,\"warmth\":50.43272,\"openness\":50.45,\"composure\":53.33326233640055,\"integrity\":50,\"family\":50,\"outabout\":50,\"fandom\":65},\"streak\":{\"drive\":1,\"sociability\":2,\"warmth\":1,\"openness\":0,\"composure\":-1,\"integrity\":0,\"family\":1,\"outabout\":0,\"fandom\":0},\"mood\":{\"drive\":0,\"sociability\":1.0307921510400007,\"warmth\":0,\"openness\":0,\"composure\":-0.8053063680000007,\"integrity\":0,\"family\":0,\"outabout\":0,\"fandom\":0},\"folded\":133,\"fan\":\"as\"}"
+ },
+ {
+  "row": 869,
+  "pop": "POP-01040",
+  "was": "{\"base\":{\"drive\":50,\"sociability\":50,\"warmth\":50,\"openness\":50,\"composure\":50,\"integrity\":50,\"family\":50,\"outabout\":50,\"fandom\":50},\"streak\":{\"drive\":1,\"sociability\":1,\"warmth\":1,\"openness\":0,\"composure\":-1,\"integrity\":0,\"family\":1,\"outabout\":0,\"fandom\":0},\"mood\":{\"drive\":0,\"sociability\":0.5368709120000003,\"warmth\":0,\"openness\":0,\"composure\":-0.8053063680000007,\"integrity\":0,\"family\":0,\"outabout\":0,\"fandom\":0},\"folded\":133,\"pressure\":{\"hood\":{\"n\":1,\"l\":113}}}"
+ },
+ {
+  "row": 870,
+  "pop": "POP-01041",
+  "was": "{\"base\":{\"drive\":50.881568,\"sociability\":50,\"warmth\":50,\"openness\":50,\"composure\":51.35000000000001,\"integrity\":50,\"family\":50,\"outabout\":50,\"fandom\":50},\"streak\":{\"drive\":1,\"sociability\":2,\"warmth\":1,\"openness\":0,\"composure\":-1,\"integrity\":1,\"family\":1,\"outabout\":0,\"fandom\":0},\"mood\":{\"drive\":0,\"sociability\":0.7838315315200004,\"warmth\":0,\"openness\":0,\"composure\":-0.8053063680000007,\"integrity\":0,\"family\":0,\"outabout\":0,\"fandom\":0},\"folded\":133}"
+ }
+]

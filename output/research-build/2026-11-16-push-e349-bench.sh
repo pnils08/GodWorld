@@ -1,7 +1,7 @@
 #!/bin/bash
 # engine.349 bench push: SANDBOX 1004 script project = stage 50 (PROD @185, manifest stage50-buildnotes.sha256) + engine.349 files.
 #   keys : stage 51a = stage 50 + the five Task 6 files at 4e2e075b0 (speed keys, Dial_Moves / Dial_Pulse) — no change in the fold
-#   all  : stage 51  = stage 50 + the eight Task 6 + Task 2 files at d8b7a951a + processAdvancementIntake.js staged from the
+#   all  : stage 51  = stage 50 + the eight Task 6 + Task 2 files at 5da47216d + processAdvancementIntake.js staged from the
 #          stage-50 copy with the two Media lines only (HEAD carries engine.339, which is not live)
 #   s50  : back to stage 50
 # The tree is built from a pull of PROD, which must be exactly stage 50. Copied from 2026-11-16-push-e289-bench.sh.
@@ -21,7 +21,7 @@ PAI=phase05-citizens/processAdvancementIntake.js
 MODE=${1:?keys|all|s50}; DRY=${2:-}
 case "$MODE" in
   keys) FILES="$KEYFILES"; SRC=4e2e075b0; MAN=$OUT/stage51a-e349-keys.sha256; DESC="stage 51a: stage 50 + engine.349 speed keys and dial moves at $SRC" ;;
-  all)  FILES="$ALLFILES"; SRC=d8b7a951a; MAN=$OUT/stage51-e349.sha256; DESC="stage 51: stage 50 + engine.349 Tasks 6 and 2 at $SRC" ;;
+  all)  FILES="$ALLFILES"; SRC=5da47216d; MAN=$OUT/stage51-e349.sha256; DESC="stage 51: stage 50 + engine.349 Tasks 6 and 2 at $SRC" ;;
   s50)  FILES=""; SRC=""; MAN=$S50_MAN; DESC="stage 50 (= PROD @185)" ;;
   *) echo "mode?"; exit 1 ;;
 esac

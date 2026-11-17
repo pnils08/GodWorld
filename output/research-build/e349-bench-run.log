@@ -1,0 +1,89 @@
+AIM = BENCH (script read the bench marker)
+=== leg ctl: stage 50
+bench code = stage 50 (pull-back)
+== sync from live (ctl)
+  verify Story_Hook_Deck: bench 2221 rows vs live 2221 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+{"fireGuardMinutes":"0","cycleCountFormatted":"116","cycleCountIsNumber":true}
+door: {"target":"bench","http":200,"ok":true,"record":{"cycle":117,"startedMs":1794883449956,"state":"done","finishedMs":1794883609103},"raw":"{\"cycle\":117,\"startedMs\":1794883449956,\"state\":\"done\",\
+clearfire 117: {"ok":true,"cleared":{"cycle":117,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+-- pause 75 s (read quota)
+pre: Engine_Errors rows 9
+open ctl: 1075 citizens
+Edition_Coverage_Ratings C116: 7 rows (window 115,114,113,112,111,110,109,108)
+Citizen_Media_Usage C116: 30 rows from live C115
+Oakland_Sports_Feed C117: 2 rows
+appended 7 to Edition_Coverage_Ratings; marked rows on the tab now 7
+appended 30 to Citizen_Media_Usage; marked rows on the tab now 30
+appended 2 to Oakland_Sports_Feed; marked rows on the tab now 2
+bench cycleCount 116
+fire C117 rc=0 "verdict": "PASS" "wallS": 166
+read ctl: cycleCount 117, 1077 citizens, keys dialLineScale=null dialDirectShare=null dialMoodFade=null dialHardenShare=null dialReflectionShare=null
+  Dial_Moves no tab · Dial_Pulse no tab · new Engine_Errors 0
+=== leg keys: stage 51a (Task 6)
+== sync from live (keys)
+  verify Story_Hook_Deck: bench 2221 rows vs live 2221 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+{"fireGuardMinutes":"0","cycleCountFormatted":"116","cycleCountIsNumber":true}
+door: {"target":"bench","http":200,"ok":true,"record":{"cycle":117,"startedMs":1794894780773,"state":"done","finishedMs":1794894942928},"raw":"{\"cycle\":117,\"startedMs\":1794894780773,\"state\":\"done\",\
+clearfire 117: {"ok":true,"cleared":{"cycle":117,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+-- pause 75 s (read quota)
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @203
+pull-back byte-identical to stage51a-e349-keys.sha256
+-- pause 90 s (deployment)
+pre: Engine_Errors rows 9
+open keys: 1075 citizens
+Edition_Coverage_Ratings C116: 7 rows (window 115,114,113,112,111,110,109,108)
+Citizen_Media_Usage C116: 30 rows from live C115
+Oakland_Sports_Feed C117: 2 rows
+appended 7 to Edition_Coverage_Ratings; marked rows on the tab now 7
+appended 30 to Citizen_Media_Usage; marked rows on the tab now 30
+appended 2 to Oakland_Sports_Feed; marked rows on the tab now 2
+bench cycleCount 116
+fire C117 rc=0 "verdict": "PASS" "wallS": 192
+read keys: cycleCount 117, 1077 citizens, keys dialLineScale=1 dialDirectShare=0 dialMoodFade=0.8 dialHardenShare=0.4 dialReflectionShare=0.225
+  Dial_Moves 437 rows · Dial_Pulse 1 rows · new Engine_Errors 0
+  pulse: Cycle 117 · Citizens 1077 · Moved 340 · CrossedBand 7 · AllMiddle 688 · AnyLow 5 · AnyHigh 462
+cmp ctl vs keys: 1077 citizens · identical DialState 1077 · different 0 · only in ctl 0 · only in keys 0
+cmp rc=0
+moves keys: citizen-dial moves in the DialState difference 437 · matching Dial_Moves rows 437 · missing or wrong 0 · rows with no difference behind them 0
+  why: lines 318 · voice 61 · wear 57 · earlier in the Cycle 2
+moves rc=0
+=== leg all: stage 51 (Tasks 6 and 2), 13 watermarks at 107
+== sync from live (all)
+  verify Story_Hook_Deck: bench 2221 rows vs live 2221 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+{"fireGuardMinutes":"0","cycleCountFormatted":"116","cycleCountIsNumber":true}
+door: {"target":"bench","http":200,"ok":true,"record":{"cycle":117,"startedMs":1794895409102,"state":"done","finishedMs":1794895595913},"raw":"{\"cycle\":117,\"startedMs\":1794895409102,\"state\":\"done\",\
+clearfire 117: {"ok":true,"cleared":{"cycle":117,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+-- pause 75 s (read quota)
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @204
+pull-back byte-identical to stage51-e349.sha256
+-- pause 90 s (deployment)
+mark107: 13 rows past cycleCount 116: POP-01029 POP-01030 POP-01031 POP-01032 POP-01033 POP-01034 POP-01035 POP-01036 POP-01037 POP-01038 POP-01039 POP-01040 POP-01041
+read back: 13 at 107
+pre: Engine_Errors rows 9
+open all: 1075 citizens
+Edition_Coverage_Ratings C116: 7 rows (window 115,114,113,112,111,110,109,108)
+Citizen_Media_Usage C116: 30 rows from live C115
+Oakland_Sports_Feed C117: 0 rows
+appended 7 to Edition_Coverage_Ratings; marked rows on the tab now 7
+appended 30 to Citizen_Media_Usage; marked rows on the tab now 30
+bench cycleCount 116
+fire C117 rc=0 "verdict": "PASS" "wallS": 196
+read all: cycleCount 117, 1078 citizens, keys dialLineScale=1 dialDirectShare=0 dialMoodFade=0.8 dialHardenShare=0.4 dialReflectionShare=0.225
+  Dial_Moves 475 rows · Dial_Pulse 2 rows · new Engine_Errors 0
+  pulse: Cycle 117 · Citizens 1078 · Moved 358 · CrossedBand 7 · AllMiddle 689 · AnyLow 5 · AnyHigh 462
+moves all: citizen-dial moves in the DialState difference 475 · matching Dial_Moves rows 475 · missing or wrong 0 · rows with no difference behind them 0
+  why: lines 356 · voice 61 · wear 57 · earlier in the Cycle 2
+moves rc=0
+cmp keys vs all: 1077 citizens · identical DialState 84 · different 993 · only in keys 0 · only in all 1
+    POP-00001 
+      A {"base":{"drive":94.64557599999996,"sociability":76.64473565712159,"warmth":81.33531431092484,"openness":63.739975170093395,"composure":87.89744431441785,"integrity":65.63287676353184,"family":70.7647060799722,"outabout":72.8674482245594,"fandom":65},"streak": 
+e349 bench done — bench left at stage 51, data = this fire; read, then sync from live
+exit 0

@@ -378,7 +378,9 @@ Object.assign(FILLS, {
   }),
   'PROJ-OARI': projectFill('INIT-002', 'crisis response mental health dispatch', async (k) => {
     await k.chaos('OARI van events, every Cycle on the sheet', ['oari_van']);
-    await k.census('Hospital intakes', 'hospital', ['mental-health-crisis', 'substance-treatment']);
+    await k.census('Hospital intakes', 'hospital', ['mental-health-crisis', 'substance-treatment'], { care: true });   // builder 2026-11-16: "Yes, same as EMS"
+    // her events: the calls OARI answers sit between the two (builder 2026-11-16: "Safety + health events")
+    await k.events('Safety and health events on the city\'s event ledger', ['SAFETY', 'HEALTH']);
   }),
   'PROJ-HEALTHCTR': projectFill('INIT-005', 'health center clinic patients', async (k) => {
     await k.census('Hospital intakes', 'hospital', ['all']);
@@ -469,6 +471,7 @@ Object.assign(FILLS, {
 const JOBS = {
   'CHIEF-FIRE': 'You run the city\'s fire service. Your job is to answer for its record — each fire engine call, where it went and what came of it — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'EMERG-DIR': 'You run the city\'s emergency management office. Your job is to answer for the city\'s crises and its weather — what is open, how it is moving, what it set off — when the Mayor, the council or the press ask, and in your weekly report on the record.',
+  'PROJ-OARI': 'You run the Oakland Alternative Response Initiative. Your job is to answer for its record — each OARI van call, where it went and what came of it, the mental-health and substance intakes at the hospital, and the program\'s money and progress — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'EMS-DIR': 'You run the city\'s emergency medical services. Your job is to answer for the city\'s ambulance calls and hospital intakes — who came in, from where and for what, who is in care, and the illness in each neighborhood — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'MED-EXAM': 'You are the city\'s medical examiner. Your job is to answer for the city\'s deaths and their causes — who died, when, and the cause on file, the residents in hospital care, and those still waiting on a cause — when the Mayor, the council or the press ask, and in your weekly report on the record.',
 };

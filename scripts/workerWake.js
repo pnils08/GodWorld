@@ -11,11 +11,13 @@
  *   3 their tools         a city sheet, a citizen, what the paper printed, their own memory (+ a fill's levers)
  *   4 their memory        gathered for them from their whole page by what is in front of them, plus their newest own words
  *   5 their decisions     their own moves by POPID, each answer with the question it answered
- * The template is the harness, not the work (builder 2026-11-14: "the template doesn't give the work , it's the harness
- * for the cron"; "You have to be careful you aren't puppeting these"). It carries NO task, no line on what the worker is
- * doing, and no note on what the data means, shows or lacks: a title names its data and nothing else. When someone has
- * put a question to the worker, the caller hands it over and it is placed last in the asker's own words, with who asks.
- * With no question, nothing is added.
+ * Puppeting is putting words in their mouth, not telling them what to do (builder 2026-11-16: "puppeting means putting
+ * words in their mouth and telling them what to say, it doesnt mean telling them what to do, theyre AI agents, they by
+ * definition need a task"; this replaces the 11-14 reading that the harness carries no task). A worker is a data agent in
+ * a workflow that also wakes on a cron: called on by the Mayor, the council or the press, it answers on its records; on
+ * its scheduled wake it reports on what it sees. A worker with a job in JOBS wakes lean — its job, this Cycle of each
+ * record, each record whole and the neighborhood a read away, the task last. No line hands it words or a conclusion, and
+ * a title names its data and nothing else. A question is placed last in the asker's own words, with who asks.
  * To build another worker out, add its FILLS entry; the other four parts are shared.
  *
  * Callers: cron-civic-run.js runDatawake (an office that has a fill). Every read is injected through `deps` for tests.
@@ -242,7 +244,7 @@ async function liveArcsAt(sheets, cycle) {
 }
 function recordKit(cycle, ctx) {
   const { sheets } = defaults(ctx.deps);
-  const cache = {};
+  const cache = ctx.cache || {};   // shared when one wake builds its records twice (lean and in full): one read per tab
   const all = (tab) => (cache[tab] = cache[tab] || sheets.getSheetAsObjects(tab));
   let cutHere = false;   // set when the block being read was cut to the window; its title then says which Cycles it holds
   const rows = async (tab, opts) => {
@@ -279,8 +281,8 @@ function recordKit(cycle, ctx) {
     }),
     chaos: (title, vehicles) => add(title, async () => {
       const c = (await rows('Chaos_Cars')).filter((r) => inSet(r.VehicleType, vehicles))
-        .map((r) => ({ Cycle: r.CycleId, Vehicle: r.VehicleType, Where: r.TargetScope === 'citizen' ? 'citizen ' + (ctx.nameOf(r.TargetId) || r.TargetId) : r.TargetScope + ' ' + r.TargetId, Outcome: r.DiceOutcome, Moved: r.PrimaryMetric + ' ' + r.MetricMagnitude }));
-      return c.length ? table(c, ['Cycle', 'Vehicle', 'Where', 'Outcome', 'Moved']) : 'none';
+        .map((r) => ({ Cycle: r.CycleId, Vehicle: r.VehicleType, Where: r.TargetScope === 'citizen' ? 'citizen ' + (ctx.nameOf(r.TargetId) || r.TargetId) : r.TargetScope + ' ' + r.TargetId, Outcome: r.DiceOutcome, Moved: r.PrimaryMetric + ' ' + r.MetricMagnitude, 'What the block saw': r.ChaosNarrativeSeed || '' }));
+      return c.length ? table(c, ['Cycle', 'Vehicle', 'Where', 'Outcome', 'Moved', 'What the block saw']) : 'none';
     }),
     events: (title, domains) => add(title, async () => {
       const w = (await rows('WorldEvents_V3_Ledger')).filter((r) => inSet(r.Domain, domains))
@@ -431,6 +433,20 @@ Object.assign(FILLS, {
   }),
 });
 
+// What each worker's job is, in city words (builder 2026-11-16: "puppeting means putting words in their mouth and telling
+// them what to say, it doesnt mean telling them what to do, theyre AI agents, they by definition need a task … these are
+// data agents. if a council or media call on them they can answer the questions on the data as they have it … in their
+// wakes is a scheduled wake on the same data to speak on what they see … think of these templates as agents in a workflow
+// that also wake as a cron to report as the worker"). A worker with a job here wakes lean: this Cycle of each record,
+// each record whole a read away (record_read), the neighborhood a read away (neighborhood_read), and the task last.
+// A worker without one wakes as before until its job is written and read.
+const JOBS = {
+  'CHIEF-FIRE': 'You run the city\'s fire service. Your job is to answer for its record — each fire engine call, where it went and what came of it — when the Mayor, the council or the press ask, and in your weekly report on the record.',
+  'EMERG-DIR': 'You run the city\'s emergency management office. Your job is to answer for the city\'s crises and its weather — what is open, how it is moving, what it set off — when the Mayor, the council or the press ask, and in your weekly report on the record.',
+};
+const isLean = (officeId) => Object.prototype.hasOwnProperty.call(JOBS, String(officeId || ''));
+const reportTask = (cycle) => 'Cycle ' + cycle + ', your weekly report: speak on the record on what you see in your records this Cycle.';
+
 // A fill that is built is not yet a wake that runs on it. LIVE names the workers whose scheduled wakes use the template
 // (builder 2026-11-14, on the chief: "Turn it on"). Adding an office here is the switch; it is his word per worker.
 // 2026-11-15: every built worker is on (builder 2026-11-14: "all workers will run on a schedule like police chief";
@@ -444,8 +460,8 @@ const hasFill = (officeId) => LIVE.has(String(officeId || '')) && isBuilt(office
 // The harness for one worker's wake. opts: { officeId, cycle, officeMap, question?, askerLine?, window?, deps? }
 //   window: Cycles of each by-Cycle record handed (recordKit); unset = every Cycle on the tab.
 //   question + askerLine: someone's question to this worker, in their words, with who they are. Both or neither.
-//   With no question nothing is added after the worker's own records: the harness gives no work.
-// -> { office, system, user, memory, decisions }
+//   With no question: a lean worker (JOBS) is given its weekly report as the task; any other, nothing is added.
+// -> { office, system, user, memory, decisions, records, lean }
 async function buildWake(opts) {
   const o = opts || {};
   // a project director sits under `projects` with a projectId; everyone else under `offices`
@@ -456,18 +472,26 @@ async function buildWake(opts) {
   const question = String(o.question || '').trim(), askerLine = String(o.askerLine || '').trim();
   if (question && !askerLine) throw new Error('missing askerLine: a question is handed over with who asks it');
   const who = await whoTheyAre(office.popid, o.deps);
-  const fill = await FILLS[o.officeId].build(Number(o.cycle), { deps: o.deps, nameOf: who.nameOf, window: o.window });
+  const lean = isLean(o.officeId);
+  const cache = {};
+  const fill = await FILLS[o.officeId].build(Number(o.cycle), { deps: o.deps, nameOf: who.nameOf, window: lean ? 1 : o.window, cache });
+  // lean: each record whole, every Cycle on it, read from the same tabs — what record_read hands back, untouched
+  const records = {};
+  if (lean) {
+    const whole = await FILLS[o.officeId].build(Number(o.cycle), { deps: o.deps, nameOf: who.nameOf, cache });
+    whole.blocks.forEach((b) => { records[b.title] = b.text; });
+  }
   const memory = await gatherMemory(office.popid, question || fill.key, o.deps);
   const decisions = pastDecisions(office.popid, office.agentDir, o.deps);
-  const system = [who.line].concat(memory.entries.length ? ['', 'From your own memory:', ...memory.entries.map((m) => '- (' + m.when + ') ' + m.text)] : []).join('\n');
+  const system = [who.line].concat(lean ? ['', JOBS[o.officeId]] : [], memory.entries.length ? ['', 'From your own memory:', ...memory.entries.map((m) => '- (' + m.when + ') ' + m.text)] : []).join('\n');
   const user = [
     ...fill.blocks.map((b) => b.title + ':\n' + b.text),
     'What you have decided and said on the record:\n' + (decisions.length
       ? decisions.map((d) => '- Cycle ' + d.cycle + ', ' + d.type + (d.askedBy ? ' — asked by ' + d.askedBy + ': ' + d.question + '\n  You answered: ' + d.said : ': ' + d.said)).join('\n')
       : '- nothing on record'),
-    ...(question ? [askerLine + ' asks you:\n\n' + question] : []),
+    ...(question ? [askerLine + ' asks you:\n\n' + question] : lean ? [reportTask(o.cycle)] : []),
   ].join('\n\n');
-  return { office, system, user, memory, decisions };
+  return { office, system, user, memory, decisions, records, lean };
 }
 
 // Who a worker is, alone: the sheet line and their gathered memory — the same system turn buildWake gives them, with
@@ -504,9 +528,45 @@ const LEVER_TOOLS = {
     'community_presence displaces far less and lifts quality of life, clearing fewer cases; balanced sits between. Your latest setting of the week is the one that stands.',
   { strategy: { type: 'string', enum: strategies }, note: { type: 'string', description: 'your reason, in your own words' } }, ['strategy']),
 };
+// A lean worker's two reads: a record in full, and a neighborhood — where something happened and who lives and works there.
+const LEAN_TOOLS = (names) => [
+  fn('record_read', 'Open one of your records in full, every Cycle on it: ' + names.join('; ') + '.', { record: { type: 'string', enum: names } }, ['record']),
+  fn('neighborhood_read', 'Read one neighborhood: its row on the neighborhood map, its people by age, the businesses in it, and the residents on the city\'s ledger who live there.', { neighborhood: { type: 'string' } }, ['neighborhood']),
+];
 function toolsFor(officeId, opts) {
   const levers = (FILLS[officeId] || {}).levers || [];
-  return TOOLS.concat(levers.map((l) => LEVER_TOOLS[l]((opts && opts.patrolStrategies) || ['balanced', 'suppress_hotspots', 'community_presence'])));
+  const records = Object.keys((opts && opts.records) || {});
+  return TOOLS.concat(isLean(officeId) && records.length ? LEAN_TOOLS(records) : [],
+    levers.map((l) => LEVER_TOOLS[l]((opts && opts.patrolStrategies) || ['balanced', 'suppress_hotspots', 'community_presence'])));
+}
+// The ledger snapshot the engine's dump writes each Cycle (output/simulation_ledger_snapshot.jsonl): who lives where.
+function ledgerSnapshot(deps) {
+  const d = deps || {};
+  if (d.ledgerRows) return d.ledgerRows;
+  return readJsonl(path.join(d.root || ROOT, 'output', 'simulation_ledger_snapshot.jsonl')).filter((r) => r && r.POPID);
+}
+async function neighborhoodRead(input, deps) {
+  const { sheets } = defaults(deps);
+  const want = String((input || {}).neighborhood || '').trim().toLowerCase();
+  let map = [];
+  try { map = await sheets.getSheetAsObjects('Neighborhood_Map'); } catch (e) { return '(the neighborhood map could not be read: ' + e.message + ')'; }
+  const row = map.find((r) => String(r.Neighborhood || '').trim().toLowerCase() === want);
+  if (!row) return 'no neighborhood "' + (input || {}).neighborhood + '" on the map. The neighborhoods: ' + map.map((r) => r.Neighborhood).filter(Boolean).join(', ');
+  const hood = String(row.Neighborhood).trim();
+  const same = (v) => String(v || '').trim().toLowerCase() === hood.toLowerCase();
+  const parts = ['On the neighborhood map:\n' + Object.keys(row).filter((k) => k).map((k) => k + ': ' + row[k]).join('\n')];
+  try {
+    const demo = (await sheets.getSheetAsObjects('Neighborhood_Demographics')).find((r) => same(r.Neighborhood));
+    if (demo) parts.push('Its people:\n' + Object.keys(demo).filter((k) => k && k !== 'Neighborhood').map((k) => k + ': ' + demo[k]).join('\n'));
+  } catch (e) { parts.push('Its people: unavailable (' + e.message + ')'); }
+  try {
+    const biz = (await sheets.getSheetAsObjects('Business_Ledger')).filter((r) => same(r.Neighborhood));
+    parts.push('Businesses in it (' + biz.length + '):\n' + (biz.length ? table(biz, ['BIZ_ID', 'Name', 'Sector', 'Employee_Count'].filter((c) => c in biz[0])) : 'none'));
+  } catch (e) { parts.push('Businesses in it: unavailable (' + e.message + ')'); }
+  const people = ledgerSnapshot(deps).filter((r) => same(r.Neighborhood) && !/deceased|archived/i.test(String(r.Status || '')));
+  parts.push('Residents on the city\'s ledger who live there (' + people.length + '):\n' + (people.length
+    ? table(people.map((r) => ({ Name: r.Name || [r.First, r.Last].filter(Boolean).join(' '), Role: r.RoleType, Born: r.BirthYear })), ['Name', 'Role', 'Born']) : 'none'));
+  return capTo(parts.join('\n\n'), 8000);
 }
 const capTo = (s, n) => (s.length > n ? s.slice(0, n) + '\n(cut at ' + n + ' characters)' : s);
 async function sheetRead(input, deps) {   // the reporters' reader (cron-desk-writer.js toolSheetRead), same shape, on the worker's list
@@ -552,13 +612,19 @@ async function memoryRecall(popid, input, deps) {   // newest by date, and the p
   }
   return parts.join('\n\n') || 'Your memory holds nothing yet.';
 }
-// ctx: { popid, cycle, stage: { patrol: [] }, normalizePatrol(v) -> strategy|null, deps?, dw? }
+// ctx: { popid, cycle, stage: { patrol: [] }, normalizePatrol(v) -> strategy|null, records?, deps?, dw? }
 // A lever is STAGED, never executed here: the caller files it through the move gate once the wake has a statement.
 function toolExecutor(ctx) {
   return async function (name, input) {
     input = input || {};
     if (name === 'sheet_read') return sheetRead(input, ctx.deps);
     if (name === 'memory_recall') return memoryRecall(ctx.popid, input, ctx.deps);
+    if (name === 'record_read') {
+      const recs = ctx.records || {};
+      const key = Object.keys(recs).find((k) => k === String(input.record || '').trim());
+      return key ? capTo(key + ':\n' + recs[key], 8000) : 'no record "' + input.record + '". Your records: ' + Object.keys(recs).join('; ');
+    }
+    if (name === 'neighborhood_read') return neighborhoodRead(input, ctx.deps);
     if (name === 'citizen_lookup') return (ctx.dw || require('./cron-desk-writer')).toolCitizenLookup(input);
     if (name === 'canon_recall') return (ctx.dw || require('./cron-desk-writer')).toolCanonRecall(input, Number(ctx.cycle) + 1);
     if (name === 'patrol_set') {
@@ -571,5 +637,5 @@ function toolExecutor(ctx) {
   };
 }
 
-module.exports = { FILLS, hasFill, isBuilt, LIVE, slugFor, identity, buildWake, toolsFor, toolExecutor, TOOLS, SHEETS,
+module.exports = { JOBS, isLean, reportTask, neighborhoodRead, FILLS, hasFill, isBuilt, LIVE, slugFor, identity, buildWake, toolsFor, toolExecutor, TOOLS, SHEETS,
   highLow, patrolInForce, askAndWhy, loadMoves, pastDecisions, gatherMemory, whoTheyAre, sheetRead, memoryRecall, table };

@@ -3690,7 +3690,7 @@ async function runWorkerDatawake(duty, o) {
   const dw = require('./cron-desk-writer');
   const cycle = Number(o.cycle);
   const w = await workerWake.buildWake({ officeId: office.officeId, cycle, officeMap: o.officeMap });
-  const toolset = workerWake.toolsFor(office.officeId, { patrolStrategies: PATROL_STRATEGIES });
+  const toolset = workerWake.toolsFor(office.officeId, { patrolStrategies: PATROL_STRATEGIES, records: w.records });
   log('worker wake ' + office.agentDir + ': system ' + w.system.length + ' / user ' + w.user.length + ' chars; memory ' +
     w.memory.entries.length + ' (' + w.memory.fromSearch + ' searched, ' + w.memory.newest + ' newest); decisions ' + w.decisions.length + '; tools ' + toolset.length);
   // A call failure (429, timeout, outage) moves down the model chain as the
@@ -3707,7 +3707,7 @@ async function runWorkerDatawake(duty, o) {
       let got;
       try {
         got = await dw.openRouterToolLoop({ model: active, system: w.system, user: w.user, toolset,
-          exec: workerWake.toolExecutor({ popid: office.popid, cycle, stage, normalizePatrol: normalizePatrolStrategy, dw }),
+          exec: workerWake.toolExecutor({ popid: office.popid, cycle, stage, normalizePatrol: normalizePatrolStrategy, records: w.records, dw }),
           maxToolCalls: 6, maxTokens: 2400, timeoutMs: 180000, keepResults: true, answerLateToolCalls: 'No more reads this wake.',
           body: /^deepseek\/deepseek-v4/.test(active) ? { reasoning: { enabled: false } } : {} });
       } catch (e) {

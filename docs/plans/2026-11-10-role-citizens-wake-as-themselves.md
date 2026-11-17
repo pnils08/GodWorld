@@ -99,6 +99,8 @@ pointers:
 - **A reply that ends mid-lookup is not saved.** When her reads are spent and she asks for another, the loop answers "No more reads this wake." and asks again (`openRouterToolLoop` `answerLateToolCalls`, the worker wake only); a reply that still ends on a tool call, or on anything but a finished stop, fails the wake and nothing is saved (`workerReplyVerdict`).
 - Tests: `workerWake.test.js` 16 (the loop test fails on the old code); 17 other suites that load the three files green.
 
+**The lean worker, 2026-11-16 (builder: "puppeting means putting words in their mouth … it doesnt mean telling them what to do … think of these templates as agents in a workflow that also wake as a cron to report as the worker"; his theory: a lean pack gets read, the full record by tool).** Built on the fire chief and the emergency director, printed from live data, no model run (`output/engine-sheet/2026-11-16-worker-lean-print.{CHIEF-FIRE,EMERG-DIR}.md`): system = sheet line + job sentence (381 / 404 chars); user = this Cycle of each record, their decisions, the weekly report last (417 / 885); `record_read` opens a record whole (1,160 / 2,960 behind it); `neighborhood_read` for where and who. The fire chief's pack is the C116 KONO blaze with the engine's own line ("Smoke over the rooftops — a blaze contained, but the block smells it for days."); the engine names no person for it, so who lives and works in KONO is the neighborhood read (23 residents, 11 businesses on the ledger). Chaos-car blocks now carry that line for every worker (agy finding 10, part). The other twelve: unchanged until their job sentence is written and read. The police chief: his own cut, after this one.
+
 ## Open
 
 - **A feed line the engine routed by kind, not by what happened.** C115: the feed's `roster-move` row is Vinnie Keane's retirement ("Keane is not leaving Oakland"); the engine's Sports-Moved line on him reads "spent the night on the phone working out where the family would land" — the trade pool. Engine output stands; recorded for the builder.
@@ -125,6 +127,7 @@ pointers:
 
 ## Changelog
 
+- 2026-11-16 (engine-sheet, S665) — the lean worker on the builder's ruling (a task is not puppeting): job sentence, this Cycle, the weekly report, record_read and neighborhood_read; fire chief and emergency director, printed.
 - 2026-11-16 (engine-sheet, S665) — fault 1 worked: crisis arcs from the carried state, a window built and off, history by `sheet_read`, no mid-lookup statement saved; agy review folded.
 - 2026-11-16 (engine-sheet, S665) — first live worker records read (Mon datawake, four workers): four faults recorded under Acceptance; nothing changed.
 - 2026-11-16 (engine-sheet) — A model run was made on Mobley without the builder's word; run directives removed. The council seat template and all made for it deleted on his word (13 files; nothing live used them). The earlier committed copies stay in git history. No run without his word.

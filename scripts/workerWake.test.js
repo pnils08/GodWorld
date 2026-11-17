@@ -272,3 +272,45 @@ test('the tool loop, for a worker: a read asked for after the reads are spent is
     assert.equal(sent[7].messages[sent[7].messages.length - 1].content, 'No more reads this wake.');
   } finally { https.request = real; delete require.cache[require.resolve('./cron-desk-writer')]; }
 });
+
+// builder 2026-11-16: "puppeting means putting words in their mouth and telling them what to say, it doesnt mean telling them
+// what to do … they by definition need a task" — a lean worker is told its job and its task; it is never handed words.
+test('a lean worker (the fire chief): sheet line then job; this Cycle of his record; the weekly report last; the whole record and the neighborhood a read away', async () => workspace(async (root) => {
+  const om = { offices: [{ officeId: 'CHIEF-FIRE', popid: 'POP-00140', holder: 'Marcus Hollowell', title: 'Fire Chief', agentDir: 'worker-chief-fire' }] };
+  const tabs = {
+    Chaos_Cars: [{ CycleId: '100', VehicleType: 'fire_engine', TargetScope: 'neighborhood', TargetId: 'KONO', DiceOutcome: 'false_alarm', PrimaryMetric: 'Sentiment', MetricMagnitude: '-0.05', ChaosNarrativeSeed: 'old' },
+      { CycleId: '116', VehicleType: 'fire_engine', TargetScope: 'neighborhood', TargetId: 'KONO', DiceOutcome: 'major_blaze_contained', PrimaryMetric: 'Sentiment', MetricMagnitude: '-0.06', ChaosNarrativeSeed: 'Smoke over the rooftops.' }],
+    Neighborhood_Map: [{ Neighborhood: 'KONO', Cycle: '116', Sentiment: '0.4' }, { Neighborhood: 'Uptown', Cycle: '116', Sentiment: '0.5' }],
+    Neighborhood_Demographics: [{ Neighborhood: 'KONO', Adults: '20', Seniors: '3' }],
+    Business_Ledger: [{ BIZ_ID: 'BIZ-1', Name: 'Kono Press', Sector: 'Print', Neighborhood: 'KONO', Employee_Count: '9' }, { BIZ_ID: 'BIZ-2', Name: 'Elsewhere', Neighborhood: 'Uptown' }],
+  };
+  let reads = 0;
+  const d = deps(root, { ledgerRows: [{ POPID: 'POP-1', Name: 'Ada Kono', RoleType: 'Baker', BirthYear: '1990', Neighborhood: 'KONO', Status: 'Active' }, { POPID: 'POP-2', Name: 'Gone', Neighborhood: 'KONO', Status: 'Deceased' }] });
+  d.sheets = { getSheetAsObjects: async (tab) => { reads++; return tabs[tab] || []; } };
+  d.wp = { ...d.wp, buildPool: async () => [{ popId: 'POP-00140', first: 'Marcus', last: 'Hollowell', cur: {} }], loadOfficeHolders: async () => ({ byPop: { 'POP-00140': { title: 'Fire Chief' } } }) };
+  const w = await ww.buildWake({ officeId: 'CHIEF-FIRE', cycle: 116, officeMap: om, deps: d });
+  assert.equal(w.lean, true);
+  assert.match(w.system, /^You are Marcus Hollowell\. You hold the office of Fire Chief\. Your temperament: steady\.\n\nYou run the city's fire service\. Your job is to answer for its record/);
+  assert.match(w.user, /^Fire engine events, Cycle 116:\nCycle \| Vehicle \| Where \| Outcome \| Moved \| What the block saw\n116 \| fire_engine \| neighborhood KONO \| major_blaze_contained \| Sentiment -0\.06 \| Smoke over the rooftops\./);
+  assert.ok(!w.user.includes('| old'), 'the lean pack is this Cycle');
+  assert.ok(w.user.endsWith('Cycle 116, your weekly report: speak on the record on what you see in your records this Cycle.'));
+  assert.equal(reads, 1, 'the lean pack and the whole record share one read of the tab');
+  assert.deepEqual(Object.keys(w.records), ['Fire engine events, every Cycle on the sheet']);
+  const tools = ww.toolsFor('CHIEF-FIRE', { records: w.records });
+  assert.deepEqual(tools.map((t) => t.function.name), ['sheet_read', 'citizen_lookup', 'canon_recall', 'memory_recall', 'record_read', 'neighborhood_read']);
+  const exec = ww.toolExecutor({ popid: 'POP-00140', cycle: 116, stage: { patrol: [] }, records: w.records, deps: d });
+  const whole = await exec('record_read', { record: 'Fire engine events, every Cycle on the sheet' });
+  assert.ok(whole.includes('| old') && whole.includes('Smoke over the rooftops.'), 'the whole record, untouched');
+  assert.match(await exec('record_read', { record: 'nope' }), /^no record "nope"\. Your records: Fire engine events/);
+  const kono = await exec('neighborhood_read', { neighborhood: 'kono' });
+  assert.match(kono, /On the neighborhood map:\nNeighborhood: KONO/);
+  assert.match(kono, /Businesses in it \(1\):\nBIZ_ID \| Name \| Sector \| Employee_Count\nBIZ-1 \| Kono Press/);
+  assert.match(kono, /Residents on the city's ledger who live there \(1\):\nName \| Role \| Born\nAda Kono \| Baker \| 1990/);
+  assert.match(await exec('neighborhood_read', { neighborhood: 'Atlantis' }), /^no neighborhood "Atlantis" on the map\. The neighborhoods: KONO, Uptown/);
+  // asked: the question replaces the weekly report
+  const asked = await ww.buildWake({ officeId: 'CHIEF-FIRE', cycle: 116, officeMap: om, deps: d, question: 'What happened in KONO?', askerLine: 'Avery Santana, Mayor,' });
+  assert.ok(asked.user.endsWith('Avery Santana, Mayor, asks you:\n\nWhat happened in KONO?') && !asked.user.includes('weekly report'));
+  // a worker with no job written wakes as before: no job line, no task, no lean reads
+  assert.equal(ww.isLean('EMS-DIR'), false);
+  assert.deepEqual(ww.toolsFor('EMS-DIR', { records: { a: 'b' } }).map((t) => t.function.name), ['sheet_read', 'citizen_lookup', 'canon_recall', 'memory_recall']);
+}));

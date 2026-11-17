@@ -19,7 +19,7 @@ pointers:
 
 **Goal:** every cron's words saved to a citizen's memory page also land on Reflection_Intake and move that citizen's dials up or down; a reporter's dial event is being printed in the Cycle Pulse, not the desk grade.
 
-**Rows:** engine.347 · **Owner:** research-build · **Next session:** the deep dive on dials (his words above); the plan is finished there, not here.
+**Rows:** engine.347 (saved words), engine.349 (wrong reads, knobs, moves ledger, speed), engine.350 (direction, harder hits), engine.351 (intake) · **Owner:** research-build · **Next session:** the deep dive on dials (his words above); the plan is finished there, not here.
 
 ## Read (2026-11-16)
 
@@ -118,21 +118,52 @@ agy, `output/antigravity/2026-11-16-review-dials-read.md` (SHIP-WITH-FIXES). Eac
 | Projection biases (three) | script read: flip is on the week's net (`…-dials-project.js:67`) | taken as a stated lean; table not re-run |
 | Ranking: permanence, direction, size, readers, downs, reflections, new citizens, loop | agy's judgment | recorded; the order of work is the builder's |
 
+## Rulings after the read (builder, 2026-11-16)
+
+Six calls put to him; his answer verbatim: "1 yes 2 yes 3 yes 4 middle 5 yes or the dial just need to move more and need to create ways they can be hit harder, winning or losing a bet is a good one that can drive up and down, not performing well on undocked vs doing well and being ranked other good ones, yes intake needs to provide the data the sin ledger needs or thier intake fails and sits on intake until complete row down. also a ledger that tracks dial moves is needed so it can be managed? does world_config have dials for this?"
+
+| Call as put | His word | Reading |
+|---|---|---|
+| 1 Fix the wrong reads on the bench | yes | Task 2 |
+| 2 Build the 11-16 saved-word ruling | yes | Tasks 3–5 |
+| 3 Lines move a dial by what they say, down as often as up; before speed | yes | Task 7 |
+| 4 Speed: lines doubled, a quarter of each week sticks | middle | Task 9, after Task 7 |
+| 5 Should 55 read differently from 50 | "yes or the dial just need to move more and need to create ways they can be hit harder" | not built first: movement and harder hits land, the middle is re-measured, then his call (Task 10) |
+| new: harder hits, both ways | a bet won or lost; an UNDOCKED run that went badly against one that went well and was ranked | Task 8 |
+| 6 Arrivals start from their life | "intake needs to provide the data the sim ledger needs or their intake fails and sits on intake until complete" | Task 11: an incomplete intake row is not minted and stays on the intake tab |
+| new: a ledger of dial moves | "so it can be managed" | Task 6 |
+| Does World_Config have dials for this | — | Live read 2026-11-16 (253 keys): yes for the two dice (`civicRole*`, `lifeEvent*`), the pressure bars (`dialFrictionRentBurden`, `dialSetbackLossPct`, `dialHoodPressureBar`, `dialHoodCrimeBar`), integrity wear and grief. No for the speed itself: line size (1 / 2 / 4), fade (0.8), the three-Cycle rule, the share that sticks (0.4), the reflection weight (0.45 × 0.5) and the band edges are constants in `citizenMemory.js` / `citizenDialMap.js` / `compressLifeHistory.js`. Task 6 moves them. |
+
 ## Tasks
 
-| # | Task | Owner | Status |
-|---|------|-------|--------|
-| 1 | Deep dive on dials with the builder (next session): how a saved line is flagged up or down; the dial map; why dials move little | rb + builder | not started |
-| 2 | Each non-writer above writes its Reflection_Intake row beside its page write | rb | not started |
-| 3 | Reporter dial event: "my article was selected to run in the Cycle Pulse" from the Saturday print set; the desk grade stops feeding dials (his words) | rb | not started |
+| # | Task | Row | Status |
+|---|------|-----|--------|
+| 1 | Deep-dive read; agy review folded | engine.347 | done 2026-11-16 |
+| 2 | Wrong reads: `[Business]`, `[Money]` and the mint sentence get their own map entries (no word-match on a job title or an employer name); `family:divorced`, the PrevEvening crowd / safety lines and Media "in a hard light" take the sign of what they say; a 1-point push can stick above 68.75; the 13 stuck watermarks set back to the Cycle they jumped at (data repair, backup first) | engine.349 | not started |
+| 3 | Grade strings stop writing reflection rows; a printed reporter gets one row, "my article was selected to run in the Cycle Pulse", from the Saturday print set | engine.347 | not started |
+| 4 | Office, seat, worker, Mara and Varek words write a Reflection_Intake row beside the page write (insertion points: `…-dials-cron-writers.md` Part 4) | engine.347 | not started |
+| 5 | Classifier: ordinary-bad event tags the dial map already carries (a fight, a snub, a letdown, a bond gone cold) and a flat affect; the prompt stops calling every input "a reflection on their day" | engine.347 | not started |
+| 6 | The speed constants become World_Config keys seeded at today's values (no change in behaviour at deploy); a Dial_Moves tab, one row per citizen per Cycle that moved (dial, from, to, what moved it); the Cycle report prints the week's movement | engine.349 | not started |
+| 7 | Direction: unsigned lines get the sign of their fact and are written; fixed-positive kinds (Work, Career, Education, Lifestyle, Media) read their line; the pools are counted up against down per dial before and after | engine.350 | not started |
+| 8 | Harder hits both ways: a bet by its size against what the citizen holds; an UNDOCKED run by its result and rank | engine.350 | not started |
+| 9 | Speed set to the middle row (lines doubled, a quarter of each week sticks) by World_Config, after Task 7 is live and measured | engine.349 | not started |
+| 10 | Re-measure the middle after 7–9; put "does 55 read differently from 50" back to him with the numbers | engine.349 | not started |
+| 11 | Intake: the fields the ledger and the first dial seed need are named; a row missing one is not minted and stays on the intake tab with what is missing; an arrival's dials start from that data | engine.351 | not started |
+
+Order: 2 and 6 (one bench run, one deploy) → 3–5 (cron scripts, no engine deploy) → 7–8 → 9 → 10; 11 on its own.
 
 ## Acceptance
 
-1. Every page write by a cron has a matching Reflection_Intake row the same day — proven by a page/ledger count per writer over one live week.
+1. Every page write by a cron has a matching Reflection_Intake row the same day — a page / ledger count per writer over one live week.
 2. An official's, a worker's and a printed reporter's dials move at the next fire after their rows land.
+3. Task 2: on the bench, a hospital hire's first fold carries no composure loss from the job title; a `[Money]` default and a `[Business]` $0 draw each move a dial down; the 13 fold their held lines at the next fire.
+4. Task 6: bench fire with the keys seeded = the same DialState, cell for cell, as the same fire without them; Dial_Moves rows sum to the measured movement.
+5. Tasks 7–9, on the bench over 10 Cycles from a live sync: pushes per dial within 60 / 40 either way on every dial but fandom; about 1 citizen in 3 crosses a band; some citizens sit in a low band on every dial; nobody pinned at 0 or 100.
+6. Task 11: an intake row with a missing field stays on the intake tab after a fire; a complete one mints with dials that are not all 50.
 
 ## Changelog
 
 - 2026-11-16 (research-build) — Row filed on the builder's word; the read above is what the deep dive starts from.
 - 2026-11-16 (research-build) — Deep-dive read added (state, movement, eight causes, 52-week projection, upkeep); agy adversarial review requested.
 - 2026-11-16 (research-build) — agy review folded: 13 findings checked, 12 taken, 1 recorded as its claim; row in-progress.
+- 2026-11-16 (research-build) — Builder's rulings on the six calls recorded verbatim; tasks 2–11 set across engine.347 / 349 / 350 / 351.

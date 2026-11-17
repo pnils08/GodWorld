@@ -27,7 +27,7 @@ pointers:
 
 **Rows:** pipeline.110 · **Owner:** engine-sheet
 
-**Where this plan is (2026-11-16, S667):** Workers onto the lean shape one at a time (builder: "one at a time"): fire chief and emergency director built, medical examiner, EMS, OARI and health center directors the district attorney, the stabilization fund director, the transit hub lead and the Baylight director approved; the other four next, police chief last (patrol lever). **Before that (2026-11-14):** The worker model is ON for the police chief (builder 2026-11-14: "Turn it on , Thursday wakes won't be a thing anymore , 1 worker model , and then it has its citizens boot like everyone else , the old boot are retired for the new templates we are adding , all workers will run on a schedule like police chief"); his first weekday record (05:45 Mon–Thu from 11-16) is read in the ROLLOUT row. Now: no council template exists — the first build (Mobley, D9) was removed 11-16 on the builder's word because it did not follow his plan; the council starts again from his plan, and no model run is made without his word; the Mayor is her own template, not started. Tasks 1–7 done; Task 8 waits on the tracker repair. Rewrite this line whenever the position moves.
+**Where this plan is (2026-11-16, S667):** Workers onto the lean shape one at a time (builder: "one at a time"): fire chief and emergency director built, medical examiner, EMS, OARI and health center directors the district attorney, the stabilization fund director, the transit hub lead, the Baylight director and the community deputy mayor approved; the other three next, police chief last (patrol lever). **Before that (2026-11-14):** The worker model is ON for the police chief (builder 2026-11-14: "Turn it on , Thursday wakes won't be a thing anymore , 1 worker model , and then it has its citizens boot like everyone else , the old boot are retired for the new templates we are adding , all workers will run on a schedule like police chief"); his first weekday record (05:45 Mon–Thu from 11-16) is read in the ROLLOUT row. Now: no council template exists — the first build (Mobley, D9) was removed 11-16 on the builder's word because it did not follow his plan; the council starts again from his plan, and no model run is made without his word; the Mayor is her own template, not started. Tasks 1–7 done; Task 8 waits on the tracker repair. Rewrite this line whenever the position moves.
 
 ## What was read (C115, 2026-11-10)
 
@@ -137,6 +137,7 @@ pointers:
 
 ## Changelog
 
+- 2026-11-16 (engine-sheet, S667) — the community deputy mayor on the lean worker, approved: job sentence, ice cream truck + community/faith/culture/festival events; one guarded run, no slip.
 - 2026-11-16 (engine-sheet, S667) — the Baylight director on the lean worker, approved: job sentence, business + economic + infrastructure events; one guarded run, one slip recorded.
 - 2026-11-16 (engine-sheet, S667) — the transit hub lead on the lean worker, approved: job sentence, traffic + infrastructure events; one guarded run, two slips recorded.
 - 2026-11-16 (engine-sheet, S667) — the stabilization fund director on the lean worker, approved: job sentence, no event; past work moves shown without the filing tag; one guarded run, three slips recorded.

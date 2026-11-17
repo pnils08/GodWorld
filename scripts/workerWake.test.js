@@ -509,3 +509,12 @@ test('record_read: a record not kept by Cycle keeps its order and points to matc
   assert.ok(cut.length <= 8000);
   assert.match(cut, /\n\(\d+ more lines not shown\)$/);
 });
+
+test('record_read edge cases (agy re-review): a break inside a cell stays in its row; a word picks lines of a plain record; a header-looking first line is not a table', () => {
+  const t = ww.table([{ Cycle: 116, Event: 'line one\nline two' }, { Cycle: 115, Event: 'x' }], ['Cycle', 'Event']);
+  assert.equal(t, 'Cycle | Event\n116 | line one / line two\n115 | x');
+  const plain = 'InitiativeID: INIT-001\nMilestoneNotes: first grant\nStatus: active';
+  assert.equal(ww.readRecord('Your initiative', plain, { match: 'milestone' }), 'Your initiative:\nMilestoneNotes: first grant');
+  assert.match(ww.readRecord('Your initiative', plain, { match: 'nothing' }), /^Your initiative:\nno line naming "nothing" \(3 lines on the record\)$/);
+  assert.equal(ww.readRecord('Odd', 'cycle: 116 | a note\nmore text\nand more', {}), 'Odd:\ncycle: 116 | a note\nmore text\nand more');
+});

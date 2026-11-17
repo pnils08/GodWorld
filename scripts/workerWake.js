@@ -44,7 +44,9 @@ function readJsonl(file) {
   for (const l of text.split('\n')) { if (!l.trim()) continue; try { out.push(JSON.parse(l)); } catch (e) { /* a torn line is skipped */ } }
   return out;
 }
-const table = (rows, cols) => [cols.join(' | ')].concat(rows.map((r) => cols.map((c) => String(r[c] == null ? '' : r[c])).join(' | '))).join('\n');
+// a cell's own line breaks are folded, so one row is one line (agy 2026-11-17 re-review 2.1: a break split a row in record_read)
+const cell = (v) => String(v == null ? '' : v).replace(/\s*\n\s*/g, ' / ');
+const table = (rows, cols) => [cols.join(' | ')].concat(rows.map((r) => cols.map((c) => cell(r[c])).join(' | '))).join('\n');
 const num = (v) => (String(v == null ? '' : v).trim() === '' ? NaN : Number(v));
 const round = (x, p) => (isFinite(x) ? Number(x.toFixed(p)) : '');
 
@@ -673,13 +675,21 @@ const RECORD_CAP = 7900;
 function readRecord(title, text, input) {
   const lines = String(text || '').split('\n');
   const isRow = (l) => l.includes(' | ');
-  if (!lines.length || !isRow(lines[0])) return capLines(title + ':\n' + text, RECORD_CAP);
+  const m0 = String((input || {}).match || '').trim().toLowerCase();
+  // text that is not a table (an initiative's row, field by field): a word picks its lines, Cycles do not apply (re-review 2.2)
+  const plain = () => {
+    const picked = m0 ? lines.filter((l) => l.toLowerCase().includes(m0)) : lines;
+    if (m0 && !picked.length) return title + ':\nno line naming "' + input.match + '" (' + lines.length + ' lines on the record)';
+    return capLines(title + ':\n' + picked.join('\n'), RECORD_CAP);
+  };
+  if (!lines.length || !isRow(lines[0])) return plain();
   const head = lines[0], notes = lines.slice(1).filter((l) => !isRow(l));
   let rows = lines.slice(1).filter(isRow);
+  if (!rows.length && notes.length) return plain();   // a first line that only looks like a header (re-review 2.3)
   const total = rows.length;
   const byCycle = /^(Cycle|CycleId|CycleID|cycle)$/.test(head.split(' | ')[0].trim());
   const cyc = (r) => num(r.split(' | ')[0]);
-  const match = String((input || {}).match || '').trim().toLowerCase();
+  const match = m0;
   const from = num((input || {}).from_cycle), to = num((input || {}).to_cycle);
   const ranged = byCycle && (isFinite(from) || isFinite(to));
   if (ranged) rows = rows.filter((r) => { const c = cyc(r); return isFinite(c) && (!isFinite(from) || c >= from) && (!isFinite(to) || c <= to); });

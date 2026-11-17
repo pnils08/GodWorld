@@ -3811,7 +3811,9 @@ async function runDatawake() {
   let rotaEntries;
   let dutyPlan = null;
   if (ONLY) {
-    let row = civicSeat.resolveOfficeRow(officeMap, ONLY);
+    // a worker with no folder is named by the slug its records are filed under (worker-chief-fire): re-review 1.1
+    let row = civicSeat.resolveOfficeRow(officeMap, ONLY) ||
+      [...officeMap.offices, ...(officeMap.projects || [])].find(o => workerWake.hasFill(o.officeId || o.projectId) && workerWake.slugFor(o) === ONLY) || null;
     // a worker named by hand is the row workerRota makes: its id (a project director has only a projectId) and the name its
     // records are filed under (six offices have no folder) — agy 2026-11-17 #2: --office=PROJ-OARI fell to the seat path
     if (row && workerWake.hasFill(row.officeId || row.projectId)) row = Object.assign({}, row, { officeId: row.officeId || row.projectId, agentDir: workerWake.slugFor(row) });

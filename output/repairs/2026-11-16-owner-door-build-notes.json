@@ -1,0 +1,53 @@
+{
+ "at": "2026-11-17T02:36:19.741Z",
+ "cells": [
+  {
+   "tab": "Simulation_Ledger",
+   "row": 1075,
+   "col": 14,
+   "key": "POP-01248",
+   "old": "Promoted to Tier 4 in Cycle 116. Owner door — Seventh Street Rail Supply (BIZ-00190), C116 (engine.96 Task 12: the business is the reason; authored, not a pool draw)\nY3C12 — [Business] Took over Seventh Street Rail Supply in West Oakland — the business is the reason",
+   "next": "Promoted to Tier 4 in Cycle 116. Owner door — Seventh Street Rail Supply (BIZ-00190), C116\nY3C12 — [Business] Took over Seventh Street Rail Supply in West Oakland"
+  },
+  {
+   "tab": "Simulation_Ledger",
+   "row": 1076,
+   "col": 14,
+   "key": "POP-01249",
+   "old": "Promoted to Tier 4 in Cycle 116. Owner door — Marquee Grocer (BIZ-00145), C116 (engine.96 Task 12: the business is the reason; authored, not a pool draw)\nY3C12 — [Business] Took over Marquee Grocer in Grand Lake — the business is the reason",
+   "next": "Promoted to Tier 4 in Cycle 116. Owner door — Marquee Grocer (BIZ-00145), C116\nY3C12 — [Business] Took over Marquee Grocer in Grand Lake"
+  },
+  {
+   "tab": "LifeHistory_Log",
+   "row": 27782,
+   "col": 4,
+   "key": "POP-01248",
+   "old": "Added to Simulation_Ledger as Tier 4. Owner door — Seventh Street Rail Supply (BIZ-00190), C116 (engine.96 Task 12: the business is the reason; authored, not a pool draw)",
+   "next": "Added to Simulation_Ledger as Tier 4. Owner door — Seventh Street Rail Supply (BIZ-00190), C116"
+  },
+  {
+   "tab": "LifeHistory_Log",
+   "row": 27783,
+   "col": 4,
+   "key": "POP-01249",
+   "old": "Added to Simulation_Ledger as Tier 4. Owner door — Marquee Grocer (BIZ-00145), C116 (engine.96 Task 12: the business is the reason; authored, not a pool draw)",
+   "next": "Added to Simulation_Ledger as Tier 4. Owner door — Marquee Grocer (BIZ-00145), C116"
+  },
+  {
+   "tab": "LifeHistory_Log",
+   "row": 27784,
+   "col": 4,
+   "key": "POP-01248",
+   "old": "Became the owner of Seventh Street Rail Supply — West Oakland (engine.96 Task 12)",
+   "next": "Became the owner of Seventh Street Rail Supply — West Oakland"
+  },
+  {
+   "tab": "LifeHistory_Log",
+   "row": 27785,
+   "col": 4,
+   "key": "POP-01249",
+   "old": "Became the owner of Marquee Grocer — Grand Lake (engine.96 Task 12)",
+   "next": "Became the owner of Marquee Grocer — Grand Lake"
+  }
+ ]
+}

@@ -1,0 +1,41 @@
+{
+ "at": "2026-11-17T02:49:45.376Z",
+ "rows": [
+  {
+   "row": 6241,
+   "pop": "POP-01106",
+   "old": "Added to Simulation_Ledger as Tier 3. Founder, Ridgeline Ventures (BIZ-00007) — builder-authored, closes the Owner's Draw / engine.178 resolution gap (Key_Personnel had a name with no POPID).",
+   "next": "Added to Simulation_Ledger as Tier 3. Founder, Ridgeline Ventures (BIZ-00007)"
+  },
+  {
+   "row": 6242,
+   "pop": "POP-01107",
+   "old": "Added to Simulation_Ledger as Tier 3. Co-Founder, Gridiron Analytics (BIZ-00008) — builder-authored, closes the Owner's Draw / engine.178 resolution gap (Key_Personnel had a name with no POPID).",
+   "next": "Added to Simulation_Ledger as Tier 3. Co-Founder, Gridiron Analytics (BIZ-00008)"
+  },
+  {
+   "row": 6243,
+   "pop": "POP-01108",
+   "old": "Added to Simulation_Ledger as Tier 3. Co-Founder, Gridiron Analytics (BIZ-00008) — builder-authored, closes the Owner's Draw / engine.178 resolution gap (Key_Personnel had a name with no POPID).",
+   "next": "Added to Simulation_Ledger as Tier 3. Co-Founder, Gridiron Analytics (BIZ-00008)"
+  },
+  {
+   "row": 6244,
+   "pop": "POP-01109",
+   "old": "Added to Simulation_Ledger as Tier 3. Founder, Oakmesh Systems (BIZ-00009) — builder-authored, closes the Owner's Draw / engine.178 resolution gap (Key_Personnel had a name with no POPID).",
+   "next": "Added to Simulation_Ledger as Tier 3. Founder, Oakmesh Systems (BIZ-00009)"
+  },
+  {
+   "row": 6245,
+   "pop": "POP-01110",
+   "old": "Added to Simulation_Ledger as Tier 3. Founder, Portside Bio (BIZ-00010) — builder-authored, closes the Owner's Draw / engine.178 resolution gap (Key_Personnel had a name with no POPID). Business_Ledger cell carries the honorific \"Dr.\" — ledger First/Last omit it per naming convention.",
+   "next": "Added to Simulation_Ledger as Tier 3. Founder, Portside Bio (BIZ-00010)"
+  },
+  {
+   "row": 6246,
+   "pop": "POP-01111",
+   "old": "Added to Simulation_Ledger as Tier 3. Founder, Tenth Street Digital (BIZ-00011) — builder-authored, closes the Owner's Draw / engine.178 resolution gap (Key_Personnel had a name with no POPID).",
+   "next": "Added to Simulation_Ledger as Tier 3. Founder, Tenth Street Digital (BIZ-00011)"
+  }
+ ]
+}

@@ -2,7 +2,7 @@
   "generated": "2026-11-16",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 181,
-  "functionsMapped": 1784,
+  "functionsMapped": 1792,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -4694,6 +4694,7 @@
         "phase01-config/engine94SheetContract.js::ensureEngine286Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine290Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine338Config_",
+        "phase01-config/engine94SheetContract.js::ensureEngine349Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine94SheetContract_",
         "phase01-config/engine94SheetContract.js::ensureEngine95Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine96Config_",
@@ -4797,7 +4798,8 @@
         "phase01-config/godWorldEngine2.js::processIntake_",
         "phase07-evening-media/mediaRoomIntake.js::processCategoryEntries_",
         "phase07-evening-media/mediaRoomIntake.js::processQuotedCitizens_",
-        "phase07-evening-media/mediaRoomIntake.js::routeCitizenUsageToIntake_"
+        "phase07-evening-media/mediaRoomIntake.js::routeCitizenUsageToIntake_",
+        "utilities/compressLifeHistory.js::parseHistoryLine_"
       ]
     },
     "LifeHistory_Log": {
@@ -5389,6 +5391,14 @@
         "utilities/compressLifeHistory.js::compressLifeHistory_",
         "utilities/compressLifeHistory.js::getGriefConfig_",
         "utilities/compressLifeHistory.js::readPendingReflections_"
+      ]
+    },
+    "Dial_Pulse": {
+      "writers": [
+        "utilities/compressLifeHistory.js::compressLifeHistory_"
+      ],
+      "readers": [
+        "utilities/compressLifeHistory.js::compressLifeHistory_"
       ]
     },
     "Cycle_Seeds": {

@@ -1195,8 +1195,11 @@ function applyOwnerDraw_(ctx, cycle) {
       ctx.ledger.dirty = true;
       if (iLife >= 0 && (was <= 0 || Math.abs(draw - was) / was >= 0.10)) {
         var lifeO = String(orw[iLife] || '');
-        var lineO = stamp + ' — [Business] ' + bizName + (draw > was ? ' paid its owner $' + draw + ' this year — the books raised the draw' : ' paid its owner $' + draw + ' this year — the books cut the draw');
-        if (lifeO.indexOf(stamp + ' — [Business] ' + bizName) < 0) orw[iLife] = (lifeO ? lifeO + '\n' : '') + lineO;
+        // engine.349: the line carries its own sign. As a bare [Business] line both outcomes went to the
+        // prose word-match ("business" -> a venture started: drive +6, openness +3), a cut to $0 included.
+        var tagO = draw > was ? 'Business-Drive-Up-L' : 'Business-Composure-Down-L';
+        var lineO = stamp + ' — [' + tagO + '] ' + bizName + (draw > was ? ' paid its owner $' + draw + ' this year — the books raised the draw' : ' paid its owner $' + draw + ' this year — the books cut the draw');
+        if (lifeO.indexOf(stamp + ' — [' + tagO + '] ' + bizName) < 0 && lifeO.indexOf(stamp + ' — [Business] ' + bizName) < 0) orw[iLife] = (lifeO ? lifeO + '\n' : '') + lineO;
       }
     }
   }

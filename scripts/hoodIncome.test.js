@@ -253,7 +253,7 @@ const P = (o) => Object.assign({ years: NaN, eduRank: null, drive: null, tier: 4
   const out = sandbox.applyOwnerDraw_(ctxO, 106);
   const g = p => ctxO.ledger.rows.find(r => r[HO.indexOf('POPID')] === p);
   const inc = p => Number(g(p)[HO.indexOf('Income')]), nw = p => Number(g(p)[HO.indexOf('NetWorth')]);
-  assert('T10 off-heritage Tier 4 owner: Income := half the profit — Presti $350K → $180K, the books cut the draw, and the line says so', inc('POP-00048') === 180000 && /\[Business\] Presti Accounting paid its owner \$180000 this year — the books cut the draw/.test(g('POP-00048')[HO.indexOf('LifeHistory')]), g('POP-00048')[HO.indexOf('LifeHistory')]);
+  assert('T10 off-heritage Tier 4 owner: Income := half the profit — Presti $350K → $180K, the books cut the draw, and the line says so', inc('POP-00048') === 180000 && /\[Business-Composure-Down-L\] Presti Accounting paid its owner \$180000 this year — the books cut the draw/.test(g('POP-00048')[HO.indexOf('LifeHistory')]), g('POP-00048')[HO.indexOf('LifeHistory')]);
   assert('T10 heritage owner: Income untouched, NetWorth += profit × 0.5 ÷ 52 — Varek + $486,250 from Civis, one Business-Gain log row', inc('POP-00789') === 100000000 && nw('POP-00789') === 10000000000 + 486250 && global.__intents.some(i => i.tab === 'LifeHistory_Log' && i.row[1] === 'POP-00789' && /Civis Systems returned \$486250/.test(i.row[4])), JSON.stringify(global.__intents));
   assert('T10 blank revenue (Firehouse 29) = no signal: Keane untouched', inc('POP-00001') === 1500000 && nw('POP-00001') === 450000000);
   assert('T10 Tier 2 off-heritage owner is outside the re-pay rule (engine.135): Bubic untouched', inc('POP-00128') === 243121);

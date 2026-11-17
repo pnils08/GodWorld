@@ -125,6 +125,9 @@
 - **ensureEngine272Config_(ss)**
   Sheets: World_Config
 
+- **ensureEngine349Config_(ss)**
+  Sheets: World_Config
+
 - **ensureEngine276Config_(ss)**
   Sheets: World_Config
 
@@ -4158,6 +4161,8 @@
 - **pressureText_(cause, seed)**
 
 ### citizenMemory.js
+- **setDialTuning_(t)**
+
 - **clamp100_(n)**
 
 - **round1_(n)**
@@ -4226,6 +4231,18 @@
   Reads: S.relationshipBonds
   Sheets: Reflection_Intake
 
+- **readDialTuning_(ctx)**
+
+- **dialPulseHeaders_()**
+
+- **copyDialBase_(base)**
+
+- **noteDialStep_(tally, label, before, base)**
+
+- **signed2_(n)**
+
+- **buildDialMoves_(ctx, rows, idxs, cycle, tallies, kinds, counts)**
+
 - **readPendingReflections_(ctx)**
   Sheets: Reflection_Intake
 
@@ -4235,11 +4252,12 @@
   Reads: S.absoluteCycle, S.biasIntents, S.contests, S.cycleId, S.pendingCascades, S.pressureCounts, S.relationshipBonds
   Writes: S.lifeHistoryCompression
   Config: ctx.config.integrityWearFloor, ctx.config.integrityWearRate
-  Sheets: Reflection_Intake
+  Sheets: Dial_Pulse, Reflection_Intake
 
 - **parseLifeHistoryEntries_(historyStr)**
 
 - **parseHistoryLine_(line)**
+  Sheets: Intake
 
 - **extractCycleNumber_(text)**
 
@@ -4305,7 +4323,7 @@
 
 - **foldAgedOutEntries_(c, entries, keepCount, regs, unstampedOnly)**
 
-- **foldNewEntries_(c, newEntries, regs)**
+- **foldNewEntries_(c, newEntries, regs, tune, kindsOut)**
 
 - **foldOneEntry_(c, e, regs)**
 
@@ -4913,4 +4931,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 181
-**Functions mapped:** 1784
+**Functions mapped:** 1792

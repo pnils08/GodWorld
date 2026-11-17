@@ -222,6 +222,9 @@ var DIAL_MAP = {
   'Undocked-Audience':  { fandom: 1 },
   'Weather':            {},                             // a plain day with weather in it (ruling 1)
   'Arrival':            { openness: 3 },                // arrived in Oakland -> new start
+  // engine.349: the ledger admitting a name (the mint sentence, "The record catches up") — bookkeeping,
+  // no dial. Listed so the text router never reads the role or the employer's name as an event.
+  'Intake':             {},
 
   // --- engine.201 Wave 2 (builder rulings 2+3, 2026-09-13): the world acting ON a citizen, ordinary
   //     scale +-1, each emitted at a real domain seam (never by a narrator, never by wake attention) ---

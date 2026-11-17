@@ -692,7 +692,9 @@ function compressLifeHistory_(ctx, options) {
     }
     var moodPending = false;
     if (parsedDial && parsedDial.mood) {
-      for (var md in parsedDial.mood) { if (parsedDial.mood.hasOwnProperty(md) && Math.abs(parsedDial.mood[md] || 0) >= 0.5) { moodPending = true; break; } }
+      // engine.349: any live swing is pending — the settle floor now scales with the room the swing has
+      // (citizenMemory.js settleCycle_), so a swing under 0.5 near an edge is still felt and must fade.
+      for (var md in parsedDial.mood) { if (parsedDial.mood.hasOwnProperty(md) && (Number(parsedDial.mood[md]) || 0) !== 0) { moodPending = true; break; } }
     }
 
     // engine.272: a quiet citizen under a standing hardship (or regaining after one) is
@@ -1028,9 +1030,19 @@ function parseHistoryLine_(line) {
     return { timestamp: null, cycle: extractCycleNumber_(line), tag: 'Birth', text: line, raw: line };
   }
 
-  // Arrival format
-  if (/^Arrived\s+in\s+Oakland/i.test(line)) {
+  // Arrival format. engine.349: any "Arrived in <place> …" opening (the migration-wave mint writes the
+  // hood, not "Oakland" — checkForPromotions.js) is an arrival, not an untagged line for the word-match.
+  if (/^Arrived\s+in\s+\S/i.test(line)) {
     return { timestamp: null, cycle: extractCycleNumber_(line), tag: 'Arrival', text: line, raw: line };
+  }
+
+  // engine.349 (builder 2026-11-16, wrong reads): the ledger admitting a name is bookkeeping, not an
+  // event in the life — "Promoted to Tier N in Cycle C. <role, employer>" (processAdvancementIntake.js)
+  // and "The record catches up: …" (checkForPromotions.js). As untagged lines they went to the prose
+  // word-match, where the employer's name decided the dial: "Oakland Hospital" read as an illness
+  // (composure -6, 11 hires), "Promoted" as a job promotion. Intake maps to {} in citizenDialMap.js.
+  if (/^(Promoted\s+to\s+Tier\s+\d+\s+in\s+Cycle|The\s+record\s+catches\s+up:)/i.test(line)) {
+    return { timestamp: null, cycle: extractCycleNumber_(line), tag: 'Intake', text: line, raw: line };
   }
 
   // Fallback: untagged
@@ -1808,6 +1820,13 @@ function foldNewEntries_(c, newEntries, regs, tune, kindsOut) {
   cycles.sort(function(a, b) { return a - b; });
   for (var k = 0; k < cycles.length; k++) {
     var cy = cycles[k];
+    // engine.349: a catch-up fold (lines from more than one Cycle folding at once — a watermark set
+    // back, a line that arrived late) lets the swing fade between those Cycles, as it would have
+    // had each folded on time. One Cycle's lines (every ordinary fold) never enter this loop.
+    if (k > 0) {
+      var gap = cy - cycles[k - 1];
+      for (var gs = 0; gs < gap && gs < 30; gs++) settleCycle_(c);
+    }
     var netFx = byCycle[cy];
     if (lineScale !== 1 || directShare > 0) {
       var rest = {};

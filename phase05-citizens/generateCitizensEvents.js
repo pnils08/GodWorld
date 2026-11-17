@@ -1675,7 +1675,7 @@ function generateCitizensEvents_(ctx) {
         ["source:prevEvening", "evening:crowd"], 1.1, false));
       if (hotspots.length > 1) {
         pool.push(makeEntry("avoided " + hotspots[1] + " after hearing about last night's crowds",
-          ["source:prevEvening", "evening:crowd"], 1.05, false));
+          ["source:prevEvening", "evening:crowd", "dial:outabout:down"], 1.05, false));   // engine.349: staying away is not a sociable night
       }
     }
     // Citizen's own neighborhood was a hotspot
@@ -1715,7 +1715,7 @@ function generateCitizensEvents_(ctx) {
         ["source:prevEvening", "evening:safety"], 1.1, false));
     } else if (safety === "celebratory" || safety === "festive-crowded") {
       pool.push(makeEntry("still buzzing from last night's celebrations",
-        ["source:prevEvening", "evening:safety"], 1.1, false));
+        ["source:prevEvening", "evening:safety", "dial:composure:up"], 1.1, false));   // engine.349: a celebration is not an uneasy night
     }
 
     // Evening traffic

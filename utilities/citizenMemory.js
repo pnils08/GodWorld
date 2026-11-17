@@ -218,7 +218,17 @@ function settleCycle_(c) {
   for (var i = 0; i < DIALS.length; i++) {
     var d = DIALS[i];
     c.mood[d] = c.mood[d] * (MOOD_DECAY_BY_DIAL[d] != null ? MOOD_DECAY_BY_DIAL[d] : DIAL_TUNING.moodFade);
-    if (Math.abs(c.mood[d]) < 0.5) c.mood[d] = 0;
+    // engine.349: the floor a swing must stay above to still be felt scales with the room the swing
+    // has, the same room roomScaled_ gave the push that made it. Before, the floor was a flat 0.5:
+    // above a felt value of 68.75 a 1-point push landed under 0.625, one settle took it under 0.5 and
+    // zeroed it, and a zero swing resets the streak (applyCycleEffects_) — so a routine push could
+    // never harden there. A full-size push still fades out in four quiet Cycles everywhere.
+    if (c.mood[d] !== 0) {
+      var cur = clamp100_(c.base[d] + c.mood[d]);
+      var room = (c.mood[d] > 0 ? (100 - cur) : cur) / 50;
+      if (room > 1) room = 1;
+      if (Math.abs(c.mood[d]) < 0.5 * room) c.mood[d] = 0;
+    }
   }
 }
 

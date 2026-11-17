@@ -635,8 +635,8 @@ function processMediaUsage_(ctx, now, cycle) {
       var said152 = (typeof describeUsageContext_ === 'function') ? describeUsageContext_(update.context) : update.context;
       // engine.118: a famous name does not shrink; engine.312: the hard light's −2 rides the paper credit
       var line152 = stamp152 + (update.famous
-        ? ' — [Media] Named in a hard light — the coverage was not kind, and a name this big does not shrink; the shine dims (' + (said152 || 'the paper') + ')'
-        : ' — [Media] Named in a hard light — the coverage was not kind (' + (said152 || 'the paper') + ')');
+        ? ' — [Media-Composure-Down-M] Named in a hard light — the coverage was not kind, and a name this big does not shrink; the shine dims (' + (said152 || 'the paper') + ')'
+        : ' — [Media-Composure-Down-M] Named in a hard light — the coverage was not kind (' + (said152 || 'the paper') + ')');   // engine.349: the bare [Media] key is +4 sociability — unkind coverage read as recognition
       if (lLife152 >= 0) ledgerRows[rowIdx][lLife152] = (ledgerRows[rowIdx][lLife152] ? ledgerRows[rowIdx][lLife152] + '\n' : '') + line152;
       if (typeof queueAppendIntent_ === 'function') {
         queueAppendIntent_(ctx, 'LifeHistory_Log', ['C' + cycle, update.popId, update.name || '', 'Media|hard-light',
@@ -1688,7 +1688,7 @@ function decayMediaAttention_(ctx, cycle) {
     if (earned[tier9] && (use - 1) < bar) {
       row[iTier] = tier9 + 1;
       if (iLife >= 0) {
-        var demLine = 'C' + cycle + " — [Media] The spotlight moved on — back to Tier " + (tier9 + 1) + ' life, quieter and no less lived';
+        var demLine = 'C' + cycle + " — [Media-Sociability-Down-M] The spotlight moved on — back to Tier " + (tier9 + 1) + ' life, quieter and no less lived';
         row[iLife] = (row[iLife] ? row[iLife] + '\n' : '') + demLine;
       }
       if (iLastU >= 0) row[iLastU] = 'C' + cycle;

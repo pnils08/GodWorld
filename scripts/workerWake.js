@@ -87,7 +87,12 @@ function pastDecisions(popid, agentDir, deps) {
         d.question = askAndWhy(maraDirective.blocksFor(text, p.confrontationSeat || agentDir).join('\n'));
         if (d.question) d.askedBy = 'Mara Vance, City Planning Director (Cycle ' + p.directiveCycle + ')';
       } catch (e) { /* the question file is gone: the answer stands alone */ }
-    } else d.said = Object.entries(p).filter(([, v]) => v != null && String(v).trim() !== '').map(([k, v]) => k + ': ' + v).join('; ');
+    } else {
+      // `source` is which wake filed the move (cron-work-wake.js: "work-wake"), bookkeeping, not what they decided; one
+      // field left is shown as its value (2026-11-16: "Cycle 112, work: initiativeId: INIT-001; source: work-wake")
+      const f = Object.entries(p).filter(([k, v]) => k !== 'source' && v != null && String(v).trim() !== '');
+      d.said = f.length === 1 ? String(f[0][1]) : f.map(([k, v]) => k + ': ' + v).join('; ');
+    }
     out.push(d);
   }
   return out;
@@ -479,6 +484,7 @@ Object.assign(FILLS, {
 const JOBS = {
   'CHIEF-FIRE': 'You run the city\'s fire service. Your job is to answer for its record — each fire engine call, where it went and what came of it — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'EMERG-DIR': 'You run the city\'s emergency management office. Your job is to answer for the city\'s crises and its weather — what is open, how it is moving, what it set off — when the Mayor, the council or the press ask, and in your weekly report on the record.',
+  'PROJ-STABFUND': 'You run the West Oakland Stabilization Fund. Your job is to answer for its record — the households it has paid and how much, the fund\'s money and progress, and the rent and housing pressure in the neighborhoods — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'DA-01': 'You are the city\'s district attorney. Your job is to answer for the city\'s arrests and the people in custody, the cases before the court, and the fines the court collects — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'PROJ-HEALTHCTR': 'You run the Temescal Community Health Center. Your job is to answer for its record — the center\'s money and progress, the hospital intakes it serves alongside, the illness in each neighborhood, and the city\'s health programs — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'PROJ-OARI': 'You run the Oakland Alternative Response Initiative. Your job is to answer for its record — each OARI van call, where it went and what came of it, the mental-health and substance intakes at the hospital, and the program\'s money and progress — when the Mayor, the council or the press ask, and in your weekly report on the record.',

@@ -232,6 +232,14 @@ test('sheet_read: a blank tail is not rows; a Cycle bound that is not a number i
   assert.match(await ww.sheetRead({ tab: 'Event_Arc_Ledger', from_cycle: '', to_cycle: 'latest' }, d2), /^Cycle \| ArcId\n116 \| a116/);
 });
 
+test('a past work move is shown as what was decided, not which wake filed it', () => workspace(async (root) => {
+  const dir = path.join(root, 'output', 'cron-civic', 'moves'); fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(path.join(dir, 'moves_c112.jsonl'), [
+    { moveId: 'm1', popid: 'POP-00700', cycle: 112, type: 'work', payload: { initiativeId: 'INIT-001', source: 'work-wake' }, status: 'pending' },
+    { moveId: 'm2', popid: 'POP-00700', cycle: 112, type: 'patrol', payload: { strategy: 'balanced', note: 'steady week' }, status: 'pending' }].map((x) => JSON.stringify(x)).join('\n') + '\n');
+  assert.deepEqual(ww.pastDecisions('POP-00700', 'x', deps(root)).map((x) => x.said), ['INIT-001', 'strategy: balanced; note: steady week']);
+}));
+
 test('a worker model that reasons gets room to reason and write; DeepSeek v4 answers with its reasoning off', () => {
   const { workerCallSettings } = require('./cron-civic-run');
   assert.deepEqual(workerCallSettings('deepseek/deepseek-v4.1-flash-1017'), { maxTokens: 2400, body: { reasoning: { enabled: false } } });

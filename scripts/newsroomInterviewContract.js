@@ -81,7 +81,13 @@ function extractSpoken(value) {
   const raw = String(value == null ? '' : value);
   let obj = null;
   try { obj = parseJsonObject(raw); } catch (e) { obj = null; }
-  if (!obj || typeof obj.answer === 'undefined') return { spoken: raw, abstain: false };
+  // 2026-11-16: an envelope can arrive without its `answer` key — C116, cp-POP-00643-c116-PRESS-mon stored the whole
+  // object (quote, fact_ids, basis, unverifiedLead, abstain_reason) as the citizen's words. The envelope's own keys
+  // mark it: a `quote` is the answer; an envelope with no quote is an abstention. Plain JSON-free prose still passes.
+  const envelope = obj && (typeof obj.answer !== 'undefined' || typeof obj.quote !== 'undefined'
+    || 'fact_ids' in obj || 'abstain_reason' in obj || 'basis' in obj);
+  if (!envelope) return { spoken: raw, abstain: false };
+  if (typeof obj.answer === 'undefined') obj.answer = (typeof obj.quote === 'string' && obj.quote.trim()) ? 'quote' : 'abstain';
   if (String(obj.answer).toLowerCase() === 'abstain') {
     return { spoken: '', abstain: true, reason: String(obj.abstain_reason || 'unspecified') };
   }

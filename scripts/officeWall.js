@@ -186,11 +186,16 @@ function linesFromCascadeStatements(statements, speaker) {
 
 /** Build datawake line from rec { statement, action, numberMoved }. */
 function lineFromDatawake(rec) {
-  const statement = String((rec && rec.statement) || '').trim();
+  // a model can hand back an object where a sentence belongs; String() of it is "[object Object]" (two holders' pages,
+  // C103 and C105). Take its text, or leave the part off.
+  const asText = (v) => (v == null ? '' : typeof v === 'object'
+    ? String(v.text || v.summary || v.description || v.what || v.statement || '') : String(v)).trim();
+  const statement = asText(rec && rec.statement);
   if (!statement) return null;
   const bits = ['datawake: ' + statement.slice(0, 600)];
-  if (rec.action) bits.push('action: ' + String(rec.action).slice(0, 200));
-  if (rec.numberMoved) bits.push('signal: ' + String(rec.numberMoved).slice(0, 160));
+  const action = asText(rec.action), moved = asText(rec.numberMoved);
+  if (action) bits.push('action: ' + action.slice(0, 200));
+  if (moved) bits.push('signal: ' + moved.slice(0, 160));
   const date = (rec && rec.date) || new Date().toISOString().slice(0, 10);
   return { key: 'datawake-' + date, text: bits.join(' | ') };
 }

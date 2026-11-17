@@ -98,6 +98,17 @@ const { extractSpoken } = require('./newsroomInterviewContract');
   assert.strictEqual(extractSpoken(filed).spoken, filed);
 }
 
+// --- an envelope without its `answer` key (C116, cp-POP-00643-c116-PRESS-mon) ---
+{
+  const c116 = '{"quote":"The tavern\'s doing fine, sure — we\'re busy.","fact_ids":["F-dcf3c551e335"],"basis":"lived-context","unverifiedLead":["Tre Mingo might be looking further out."],"abstain_reason":null}';
+  const got = extractSpoken(c116);
+  assert.strictEqual(got.spoken, 'The tavern\'s doing fine, sure — we\'re busy.', 'the quote, not the envelope');
+  assert.strictEqual(got.abstain, false);
+  const none = extractSpoken('{"fact_ids":[],"basis":"none","abstain_reason":"no_lived_context"}');
+  assert.strictEqual(none.abstain, true, 'an envelope with no quote is an abstention, never stored');
+  assert.strictEqual(none.reason, 'no_lived_context');
+}
+
 // --- degenerate input ------------------------------------------------------
 
 assert.strictEqual(extractSpoken('').spoken, '');

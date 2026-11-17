@@ -261,6 +261,65 @@ pointers:
 
 ## 4. Reporter
 
+**DRAFT 2026-11-17 (engine-sheet, S670) — for agy's adversarial review, then the builder. Nothing is built from it and no model is run on it until he approves.**
+
+**Builder (2026-11-17):** "Media will have a similar feel to it as the workers mine the data, media reports on it. So the same pack and tool gaps the workers had will be similar in media, media covering elements of the data and not getting all that applies." / "the media has been writing decent so this is a very cautious build in that we dont make them worse" / "everty journlist would report differently on that same data given ther role and beat descriptions i set".
+
+**Who:** every named reporter on the roster ([[../research/2026-11-17-reporter-records-roster]], 26 rows, each approved 2026-11-17). The group desks (civic, sports, culture, business, letters, podcast) are not on this template (builder 2026-11-17: they stay off it as old builds). One agent type; a reporter differs from another in the fill (the roster row: records, worker reports, days) and in who they are (sheet line, the beat description, the written part). No reporter is the working example (builder: "i dont believe there is one as these are the old builds"); who switches first is the builder's word.
+
+**The template — the harness, the same for every reporter:**
+
+| # | Part | What the reporter wakes with | Per reporter | Built |
+|---|---|---|---|---|
+| 1 | Who they are | The sheet line + temperament, read live | values only | live on the write wake since 2026-11-15 (`scripts/reporterIdentity.js`) |
+| 2 | The written part | The `## Essence` of their own voice file, as it runs today. It stays: the output is decent and the cautious ruling does not remove a live part. Still true (§4 evidence below): it has never been tested standing alone | per reporter | live 2026-11-15; four Essences still state what the sheet moves (below) |
+| 3 | Their memory | Entries from their whole page, gathered by search from what is in front of them (this Cycle's records at the angle wake; the pick at report and write), as the workers' (§3 part 4; builder 2026-11-11 on reporters: "writer should never wait on a search: a gatherer agent gathers, the writer writes"). Their grades come back in that search by design (builder ruling 2026-10-14: a reporter's grade is on their page and part of their inner record). `memory_recall` stays as a tool | same for all | the search is the workers' (`workerWake.js`); no reporter wake uses it |
+| 4 | Their own printed pieces | What they have printed on the records in front of them, by byline, newest first, each with its Cycle (the reporter's counterpart of §3 part 5). Stops repeat coverage once the fanout's stale-slice check no longer applies; P Slayer and Hal read their own past pieces today | same for all | P Slayer and Hal only (`buildPSlayerSlice.js`, `buildHalSlice.js`) |
+| 5 | Their records — the fill | **Lead** records: this Cycle's rows, whole. **Shared** records: this Cycle's rows cut to the part the roster row names (e.g. the hospital side of the census, the food rows of the business ledger, the bars and venues of the cultural ledger); where a row names no cut, the shared record this Cycle whole — the angle is not known when the pack is built, so the cut is the roster's, never the reporter's guess. **Worker reports:** the roster's workers' weekly reports of the Cycle, whole (today two reporters get a 240-character cut, `buildCivicDomainSlice.js:537-551`). Fill notes per reporter below | **the fill:** the roster row | no — today each seat has its own slice builder |
+| 6 | Their tools | Described to them, nothing on when to use one. `record_read`: any record on the sheet, newest first, whole rows, match + Cycles (the workers' reader; builder 2026-11-17: "Every record, all of them"); `neighborhood_read`; citizen lookup; canon recall; what the paper has printed; their own memory; **`call_worker`**: put a question to any of the 14 workers in the reporter's own words, the worker answers off their records (builder 2026-11-17: "her tools should include calls to the workers", then "Every reporter"; the worker template's question path, `workerWake.js:545-549`, question + who asks) | same for all | the reader and `neighborhood_read` are the workers' (live); the writer tool loop is the reporters' (`cron-desk-writer.js`); `call_worker` not built; 12 reporters have no tools today |
+| — | The work | **Their beat and the wake's task, never their words.** The beat is the builder's description (each folder's `SKILL.md` description today, e.g. "Angela Reyes solo — schools and youth stability"), cut to the beat: a line like "solo", "not multi-voice" is build talk and is not read. The task per wake is below | per reporter: the beat line | no |
+
+**The three wakes.** Days are the roster's (today's `WEEK_GRID`, Ines's Sat/Sun crons, Nia's own). The story is the reporter's pick (builder 2026-11-17: "Reporter picks"); the report and write wakes stay.
+
+| Wake | Parts | Task | Output |
+|---|---|---|---|
+| Angle (06:15) | 1–6 | what in these records is this week's story | the pick: what it is, whose rows, who to ask (citizens, workers) |
+| Report (13:15) | 1–4, the pick, 6 | ask the people the pick names | the interview record: citizens' words (no neighbourhood restriction — builder 2026-11-17: "the citizens voices matter so I dont see why the restriction matters") and workers' answers |
+| Write (18:15) | 1–6, the pick, the interview record | write the piece | the piece; the Rhea gate and the grade (pipeline.111) as today |
+
+**Fill notes from the roster rulings (2026-11-17):**
+
+- Anthony, Hal: the A's truesource cards (builder: "he also gets truesource cards that Im working on"); today a local copy, `output/player_truesource_mirror.json`, 29 players, 2026-09-26, by `scripts/ingestPlayerTrueSource.js` — the new cards reach a reporter only after a refresh. Selena: the Oaks cards when they exist ("im working on them today so they will be there just not yet").
+- Hal: may make real-world sports comparisons before 2026 (builder: "he is able to speak on historic real world sports comparisons pre 2026 in his articles"). The gate already carries a historian clause for pre-sim baseball history (`cron-rhea-gate.js:125`); his slice forbids it (`buildHalSlice.js:478-479`). CLAUDE.md names only real NBA names as the real-world exception.
+- Mason: the evening phase whole — Riley_Digest's food, nightlife, famous sightings, crowds (builder: "making sure it gets all the color we provide, there is an entire nightlife phase that runs"); today he gets none of it (`cron-desk-run.js:994-1001`). Kai, Sharon, Maria keep it.
+- Nia: the show's rules and scoring as a record (builder: "she also needs to know the shows rules and what the gameshow is to properly feed this into canon"), from `docs/plans/2026-08-07-spacemolt-game-show.md` §3.2 and §Progress scoring review; today five lines in her bag.
+- Luis: what is owed and what was answered (scheduled actions against their due Cycle, the offices' answers to demands, the workers' reports or their absence). Jax: the official story against the record. Both: every worker's report, whole. Angela: the youth lines of `LifeHistory_Log` (Youth_Events is retired by ruling, `runYouthEngine.js:104`).
+
+**Building a reporter out — one at a time** (builder: "a very cautious build in that we dont make them worse"):
+
+1. The roster row is the fill (done, 26 of 26).
+2. Read the reporter's bag and folder for **facts** the pack must carry (Nia's show rules; Anthony's bag names `As_Roster`); voice direction in them is not carried.
+3. Build the fill. Parts 1–4, 6 and the three wakes are shared code, built once.
+4. **Print** what the reporter would wake with at each wake, no model call; the builder reads the packs (Luis's and Jax's are the largest: every worker's report whole, 14 × ~3.5k characters).
+5. **Guarded run** on the builder's word: the same Cycle and the same model as the reporter's last live piece, under the write guard (file, page, sheet, network), through the gate, read **beside the live piece**. A `call_worker` is a full worker wake: it runs under the same guard and writes nothing.
+6. The builder approves; that reporter's wakes switch; their folder and bag retire (§7). The next reporter starts at step 2.
+
+**What the draft does not solve (named for the review):**
+
+- **Worker answers and the gate.** The gate checks a named citizen's quoted words against the interview record (`cron-rhea-gate.js:109, 131` — `manifest.approvedQuotes`). A worker's answer from `call_worker` must land in that record, or the first switched reporter who quotes a worker fails the gate.
+- **Approved numbers.** The write path flags a figure the packet does not hold (`livedExperiencePacketV2.js:798`, UNAPPROVED_NUMBER, deferred to Rhea). When the pack becomes roster records, the gate's number source has to follow it, or clean pieces start flagging. The likeliest way this build makes a piece worse.
+- **Hal's exception** reaches the gate's clause and his slice; whether CLAUDE.md and the newsroom rules carry it is the builder's.
+- **Stance line, bag, cascade rule.** Today every persona seat also carries a hard-coded stance line and a bag (`cron-desk-writer.js:1250-1290`, e.g. "MEZRAN STANCE (hard): … Third-person. Clinical calm + human cost …") and a cascade rate rule (`:1332-1334`, "never lead with a bare citywide illness/employment/crisis …"). **Proposed** out on switch (the stance line and bag are voice direction §0 rules out; the cascade rule is a scoped ban "until cascade support lands"); the side-by-side read in step 5 is the proof for each reporter. The run with them out was owed to pipeline.111 and has not happened.
+- **Lanes.** The build touches `cron-desk-writer.js`, `cron-desk-run.js`, `newsroom-fanout.js`, which research-build's pipeline.111 and pipeline.112 also touch; the 2026-11-14 working agreement holds (request-only, coordinated pushes; plan Changelog 2026-11-14).
+
+- **Evidence (the baseline "don't make worse" is read against):** Monday 2026-11-16's write, the first since identities went on — 7 pieces (Carmen, Jordan, Lila, Trevor, Anthony, Tamsin, Nia), identity loaded on all 7, all graded 3/3, gate passed all 7 with 0 flags. The week before: 34 graded, purpose failed 6, opening 5 (`output/cron-feedback.md`).
+- **State:** draft. Roster approved; template not reviewed, not approved.
+- **Differs today:** each seat's pack is a slice builder's cut of this Cycle; the angle is handed down by the fanout rota; 15 seats have tools, `sheet_read` without a name returns the first 40 rows with no Cycle bound and with a name the newest 12 (`cron-desk-writer.js:845-866`); two seats see worker reports, cut to 240 characters.
+- **Owed (§0, the sheet owns these):** Essences that state what the sheet moves — Selena Grant "Thirty-one … Lives in Chinatown" (sheet 36, West Oakland), Elliot Graye "Forty-one" (49), Maria Keen "over forty years" (35), Jordan Velez "sold in 2017" (a calendar year). The wording of a voice file is the builder's call.
+- **Legacy on switch:** each reporter's IDENTITY / LENS / RULES / SKILL folder; their bag; their slice builder; the stance line and cascade rule (proposed, above). `docs/media/voices/` stays the source of the written part.
+
+### 4.1 Earlier record (Runs 1–2 and the 2026-11-15 addition)
+
 **Who:** the newsroom, write wake. The angle and report wakes already run on the citizen path (`citizenVoice.js`).
 
 | Order | Part | Source |
@@ -349,6 +408,7 @@ Mara Vance (asker; her own memory and tools; civic.47 M1), Elias Varek's journal
 
 ## Changelog
 
+- 2026-11-17 (engine-sheet, S670) — §4 rewritten as a draft reporter template from the approved roster; the earlier record kept as §4.1. For agy's review, then the builder.
 - 2026-11-15 (engine-sheet) — §3 legacy on switch done for the workers: `civic-office-police-chief`, `-district-attorney`, `-okoro`, `-baylight-authority`, `civic-project-stabilization-fund`, `-oari`, `-health-center`, `-transit-hub` moved out of `.claude/agents/` to `docs/archive/legacy-agent-folders/2026-11-15-worker-write-ups/` (§7: moved, nothing deleted). Their names stay as ids (page walls, move ledger, Mara's directive blocks); no scheduled wake reads a file in them. Manual tools that read the old files by name (`cron-civic-eval.js`, `buildVoiceWorkspaces.js`, `runEngineAgent.js`, `modelFitRun.js`) no longer find these eight. The seats and the Mayor keep their folders until their template is on.
 - 2026-11-15 (engine-sheet) — §3: the Sunday chain no longer reads a written file for a worker (builder: "why are you loading old files whe we just rewrote them"). `cron-civic-run.js` `voiceIdentity`: a worker on the worker model opens with the sheet line and their gathered memory (`workerWake.identity`), on the live call and the batch call; the Sunday packet and its form are unchanged. A failed sheet read fails that worker's wake aloud; it never falls back to the old file. Seats and the Mayor still read their folders until their own template is on. The workers' old folders are now loaded by no scheduled wake.
 - 2026-11-15 (engine-sheet) — §3: all fourteen built workers switched ON (builder 2026-11-14: "all workers will run on a schedule like police chief"; 2026-11-15, on their being held off: "why are tye swiched off"). `workerWake.LIVE` = every fill. Workers have their own weekday rota (`cron-civic-run.js` `workerRota`): four a duty day, longest since its last wake first, beside the seats' three, so no seat loses a turn; the chief moved onto it. A worker with no folder files its records under `worker-<office id>`. Their old Tue / Thu registry packs no longer wake (`cron-work-wake.js`). Dry run for Mon 2026-11-16: three seats + fire chief, emergency management, EMS, medical examiner. Still on the old files: the Sunday project step.

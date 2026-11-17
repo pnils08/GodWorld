@@ -46,7 +46,7 @@ Basis: ledger copy after C116 (1,075 rows, `output/simulation_ledger_snapshot.js
 | Archetype Drifter (TraitProfile face, from base) | 677 |
 | Dials outside the middle (felt value), mean by Tier | T1 3.52 · T2 1.51 · T3 1.17 · T4 1.16 |
 | Newest 150 (POP-01100+) within 5 of 50 on all 8 | base 145; felt value 96 |
-| Watermark stuck past the current Cycle | 13 citizens (POP-01029–01041, `folded` 133): no line of theirs has folded since C101, none will before C134 (open on engine.323) |
+| Watermark stuck past the current Cycle | 13 citizens (POP-01029–01041, `folded` 133): the mark jumped at the first watermark fold (C107; unset in the 09-13 copy, 133 in the 09-20 copy); their C108+ lines have not folded and none will before C134 (open on engine.323) |
 
 ### Movement
 
@@ -139,27 +139,50 @@ Six calls put to him; his answer verbatim: "1 yes 2 yes 3 yes 4 middle 5 yes or 
 | # | Task | Row | Status |
 |---|------|-----|--------|
 | 1 | Deep-dive read; agy review folded | engine.347 | done 2026-11-16 |
-| 2 | Wrong reads: `[Business]`, `[Money]` and the mint sentence get their own map entries (no word-match on a job title or an employer name); `family:divorced`, the PrevEvening crowd / safety lines and Media "in a hard light" take the sign of what they say; a 1-point push can stick above 68.75; the 13 stuck watermarks set back to the Cycle they jumped at (data repair, backup first) | engine.349 | not started |
-| 3 | Grade strings stop writing reflection rows; a printed reporter gets one row, "my article was selected to run in the Cycle Pulse", from the Saturday print set | engine.347 | not started |
-| 4 | Office, seat, worker, Mara and Varek words write a Reflection_Intake row beside the page write (insertion points: `…-dials-cron-writers.md` Part 4) | engine.347 | not started |
-| 5 | Classifier: ordinary-bad event tags the dial map already carries (a fight, a snub, a letdown, a bond gone cold) and a flat affect; the prompt stops calling every input "a reflection on their day" | engine.347 | not started |
-| 6 | The speed constants become World_Config keys seeded at today's values (no change in behaviour at deploy); a Dial_Moves tab, one row per citizen per Cycle that moved (dial, from, to, what moved it); the Cycle report prints the week's movement | engine.349 | not started |
-| 7 | Direction: unsigned lines get the sign of their fact and are written; fixed-positive kinds (Work, Career, Education, Lifestyle, Media) read their line; the pools are counted up against down per dial before and after | engine.350 | not started |
+| 2 | Wrong reads. (a) A job title or employer name moves nothing: the health word-match stops firing on the bare word "hospital"; the three mint sentences (`processAdvancementIntake.js:1122`, `checkForPromotions.js:479-481`, `generateGenericCitizens.js:729`) are written under a mapped kind. (b) `family:divorced`, the PrevEvening crowd / safety lines, Media "in a hard light" and the `[Business]` draw line (raised / cut) take the sign of what they say, at the writer. (c) The streak lock: the settle floor scales with the room the swing has (`citizenMemory.js:209`), and the pending-mood test in the fold matches it (`compressLifeHistory.js:569`). (d) A catch-up fold settles between Cycles (`foldNewEntries_`). (e) After (d) is live: the 13 watermarks set to 107, backup first, read back | engine.349 | not started |
+| 3 | Grade strings stop writing reflection rows — the page write the next wake reads back stays (`citizenVoice.js:241-253`), only the ledger append is skipped; a printed reporter gets one row, "my article was selected to run in the Cycle Pulse", from the Saturday print set | engine.347 | not started |
+| 4 | Classifier (before the new writers): ordinary-bad event tags the dial map already carries (a fight, a snub, a letdown, a bond gone cold) and a flat affect; the prompt stops calling every input "a reflection on their day"; `reflectionClassifier.test.js` Tests 3 and 6, `AFFECT_VALENCE` and the signal detector's pole table move with it | engine.347 | not started |
+| 5 | Office, seat, worker, Mara and Varek words write a Reflection_Intake row beside the page write (insertion points: `…-dials-cron-writers.md` Part 4) | engine.347 | not started |
+| 6 | Speed keys in World_Config, seeded at today's values, validated before the Cycle and never thrown inside Phase 9 (the `integrityWearRate` pattern): `dialLineScale` 1, `dialDirectShare` 0, `dialMoodFade` 0.8, `dialHardenShare` 0.4, `dialReflectionShare` 0.225. Band edges stay code (five copies; not a speed). `Dial_Moves`: this Cycle's movers, one row per citizen and dial (from, to, band, what moved it), the tab replaced each Cycle from a copy of DialState taken when the ledger opens, so chaos breaks, wear, reflections, lines and mints are all in the difference. `Dial_Pulse`: one row a Cycle, city totals per dial (up, down, bands crossed), kept. Both queued in Phase 9; both tabs ensured | engine.349 | not started |
+| 7 | Direction: unsigned lines get the sign of their fact and are written; fixed-positive kinds (Work, Career, Education, Lifestyle, Media) read their line; `[Money]` lines are signed at their writers (the judicial hold and ticket lines stay unmoved, pinned in `judicialLifecycle.test.js:671-673`); the pools are counted up against down per dial before and after | engine.350 | not started |
 | 8 | Harder hits both ways: a bet by its size against what the citizen holds; an UNDOCKED run by its result and rank | engine.350 | not started |
 | 9 | Speed set to the middle row (lines doubled, a quarter of each week sticks) by World_Config, after Task 7 is live and measured | engine.349 | not started |
 | 10 | Re-measure the middle after 7–9; put "does 55 read differently from 50" back to him with the numbers | engine.349 | not started |
-| 11 | Intake: the fields the ledger and the first dial seed need are named; a row missing one is not minted and stays on the intake tab with what is missing; an arrival's dials start from that data | engine.351 | not started |
+| 11 | Intake, both doors (`Intake` → `processIntake_`; `Advancement_Intake1` → `processAdvancementIntake_`): the fields the ledger and the first dial seed need are named; a row missing one is held on its tab with what is missing while the other rows go through (today a blank birth year, hood or role is filled by a draw or a default); an arrival's dials start from that data | engine.351 | not started |
 
-Order: 2 and 6 (one bench run, one deploy) → 3–5 (cron scripts, no engine deploy) → 7–8 → 9 → 10; 11 on its own.
+Order: 6 (bench pair on one Cycle: without and with the keys) → 2 (bench) → one deploy → 2(e) → 3–5 (cron scripts, no engine deploy) → 7–8 → 9 → 10; 11 on its own.
 
 ## Acceptance
 
-1. Every page write by a cron has a matching Reflection_Intake row the same day — a page / ledger count per writer over one live week.
+1. Every citizen, office, seat and worker page write that carries the speaker's own words has a matching Reflection_Intake row the same day — a page / ledger count per writer over one live week. A reporter's grade page and a journalist's side of an exchange are not counted.
 2. An official's, a worker's and a printed reporter's dials move at the next fire after their rows land.
-3. Task 2: on the bench, a hospital hire's first fold carries no composure loss from the job title; a `[Money]` default and a `[Business]` $0 draw each move a dial down; the 13 fold their held lines at the next fire.
-4. Task 6: bench fire with the keys seeded = the same DialState, cell for cell, as the same fire without them; Dial_Moves rows sum to the measured movement.
-5. Tasks 7–9, on the bench over 10 Cycles from a live sync: pushes per dial within 60 / 40 either way on every dial but fandom; about 1 citizen in 3 crosses a band; some citizens sit in a low band on every dial; nobody pinned at 0 or 100.
+3. Task 2: unit tests pin each fix (a hospital job title moves nothing; a cut draw moves a dial down; a 1-point push at 75 survives a settle and a third same-way Cycle hardens; a two-Cycle catch-up settles between). On the bench: 0 Engine_Errors, and the 13 fold their held lines with their marks set to 107.
+4. Task 6: two bench fires of the same Cycle from the same live sync, PROD code then the candidate, give the same DialState cell for cell; each citizen's Dial_Moves rows equal that citizen's DialState difference across the fire.
+5. Tasks 7–9, on the bench over 10 Cycles from a live sync: pushes per dial within 60 / 40 either way on every dial but fandom; about 1 citizen in 3 crosses a band; every dial has citizens in a low band (count reported per dial); nobody pinned at 0 or 100.
 6. Task 11: an intake row with a missing field stays on the intake tab after a fire; a complete one mints with dials that are not all 50.
+
+## Plan review reconciled
+
+agy, `output/antigravity/2026-11-16-review-dials-plan.md` (HOLD on the first cut as written). Checked before taken.
+
+| Finding | Check | Disposition |
+|---|---|---|
+| The 13 marks jumped at C107, not C101; 101 double-folds 94 lines | git copies: `folded` unset 09-13, 133 on 09-20 with every other row at 103–108; agy's mood arithmetic puts the jump one settle before that copy | taken — 107; State row corrected |
+| A catch-up fold applies Cycles back to back with no settle | read `foldNewEntries_` `:1644-1648` | taken — Task 2(d), ahead of the repair |
+| `[Money]` has pinned zero-move lines (judicial hold, ticket) | `judicialLifecycle.test.js:671-673` | taken — `[Money]` leaves Task 2 for Task 7, signed at the writers |
+| `[Business]` carries raised and cut under one key | `generationalWealthEngine.js:1198` | taken — signed at the writer, Task 2(b) |
+| Two more mint sentences | `checkForPromotions.js:479-481`, `generateGenericCitizens.js:729` | taken — Task 2(a) |
+| `citizenDials.test.js:238` pins Advancement → drive 6 by word-match | test read | kept as is: the Advancement line is log-only; Task 2 does not touch that rule |
+| Media "hard light" shares the Media key | `citizenDialMap.js:86` | taken — a graded tag at that one writer |
+| Streak lock: floor to 0 breaks one-off expiry; `:569` must move with `:209` | read both | taken — floor scaled by the swing's own room; pending test = any live swing |
+| No pin at 100 once the lock lifts | agy's run; unit test to pin it | taken as a test in Task 2 |
+| Band edges duplicated in five places; list keys truncate in `loadConfig_` | not opened | band edges stay code; every key is one number |
+| A throw in Phase 9 is swallowed and the fold skipped | `compressLifeHistory.js:465-484` pattern read | taken — validate before the Cycle, log and fall back inside it |
+| The run's tail is already over its reserve (62 s, 74 s) | engine.95 row | taken — Dial_Moves is one replace, Dial_Pulse one row; no trimmer needed; tail read at the bench |
+| A Phase-9-only recorder misses chaos breaks and mints | `chaosCarsEngine.js:503` | taken — difference against a copy taken at ledger open |
+| Task 5 before Task 4; grade page write must stay | `cron-desk-run.js:1529-1541`, `citizenVoice.js:241-253` (agy's lines, opened at the build) | taken — reordered |
+| Acceptance 1, 4, 5 unmeasurable as written | — | rewritten |
+| Task 11 names no tab and no refusal scope | two doors confirmed by name only | taken into the task; the field list is set at that build |
 
 ## Changelog
 
@@ -167,3 +190,4 @@ Order: 2 and 6 (one bench run, one deploy) → 3–5 (cron scripts, no engine de
 - 2026-11-16 (research-build) — Deep-dive read added (state, movement, eight causes, 52-week projection, upkeep); agy adversarial review requested.
 - 2026-11-16 (research-build) — agy review folded: 13 findings checked, 12 taken, 1 recorded as its claim; row in-progress.
 - 2026-11-16 (research-build) — Builder's rulings on the six calls recorded verbatim; tasks 2–11 set across engine.347 / 349 / 350 / 351.
+- 2026-11-16 (research-build) — agy plan review folded (16 findings: 15 taken, 1 kept as is); Task 2 and 6 respecified, order and acceptance rewritten.

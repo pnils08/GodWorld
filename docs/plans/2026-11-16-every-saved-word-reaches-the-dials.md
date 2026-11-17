@@ -197,7 +197,7 @@ What the five writers saved to pages from Mon 2026-11-09 through Tue 11-17 (two 
 
 - The fold has no cap on rows a citizen a Cycle (`citizenMemory.js:197-214`): each row adds its tags × `dialReflectionShare`, scaled by room. One row a line is 21 rows on the mayor every Sunday.
 - A row tagged `Civic` is counted as a citizen's civic voice by `civicPetitions.js:121` and `buildCivicOfficeSlice.js:1047`, and as a complaint when its mood is a bad one: an office holder's own statement would enter the petition count for their neighborhood unless those two readers leave the new dayparts out.
-- Four workers' statements of 11-16 are not on their pages (gap log G-EC52); the page / ledger count of acceptance 1 reads the page, not the run record.
+- Four workers' statements of 11-16 are not on their pages: engine-sheet removed them on the builder's word (`5fdc52e1d`, gap log G-EC52, closed). The page / ledger count of acceptance 1 reads the page, not the run record.
 
 ## Tasks
 
@@ -267,3 +267,4 @@ agy, `output/antigravity/2026-11-16-review-dials-plan.md` (HOLD on the first cut
 - 2026-11-17 (research-build) — Builder: "keep it on drive small, build the reporter piece". Task 3 built: grade rows off the ledger, the filed row on drive small by a fixed tag, the printed-reporter row from the Saturday print set. On the C115 print set with the append captured: 9 printed filings, 8 reporters, 8 rows; a rerun 0.
 - 2026-11-17 (research-build) — Builder on the printed row landing on drive, middle step: "drive is fine, keep it".
 - 2026-11-17 (research-build) — Task 5 read: nine days of saved job statements counted off the pages and replayed through the live classifier, per line and per sitting. Where a job statement lands is put to the builder with these numbers before any row is written. Gap log G-EC52 (four workers' Monday statements missing from their pages).
+- 2026-11-17 (research-build) — G-EC52 closed: the four missing worker statements were a deliberate page clean (`5fdc52e1d`), the save path is working.

@@ -383,9 +383,10 @@ Object.assign(FILLS, {
     await k.events('Safety and health events on the city\'s event ledger', ['SAFETY', 'HEALTH']);
   }),
   'PROJ-HEALTHCTR': projectFill('INIT-005', 'health center clinic patients', async (k) => {
-    await k.census('Hospital intakes', 'hospital', ['all']);
-    await k.demographics('Residents sick, by neighborhood', ['Sick', 'Adults', 'Seniors']);
+    await k.census('Hospital intakes', 'hospital', ['all'], { care: true });   // builder 2026-11-16: in care and beds, "Yes"
+    await k.demographics('Residents sick, by neighborhood', ['Sick', 'Students', 'Adults', 'Seniors']);
     await k.whole('Health programs in the community', 'Community_Programs', null, (r) => /health/i.test(r.Type));
+    await k.events('Health events on the city\'s event ledger', ['HEALTH']);   // builder 2026-11-16: "Health events only"
   }),
   'PROJ-TRANSITHUB': projectFill('INIT-003', 'transit hub ridership stations', async (k, cycle) => {
     await k.whole('Transit by station and corridor, Cycle ' + cycle, 'Transit_Metrics', ['Station', 'Corridor', 'RidershipVolume', 'OnTimePerformance', 'TrafficIndex', 'Notes', 'Factors'], (r) => Number(r.Cycle) === Number(cycle), { allCycles: true });
@@ -471,6 +472,7 @@ Object.assign(FILLS, {
 const JOBS = {
   'CHIEF-FIRE': 'You run the city\'s fire service. Your job is to answer for its record — each fire engine call, where it went and what came of it — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'EMERG-DIR': 'You run the city\'s emergency management office. Your job is to answer for the city\'s crises and its weather — what is open, how it is moving, what it set off — when the Mayor, the council or the press ask, and in your weekly report on the record.',
+  'PROJ-HEALTHCTR': 'You run the Temescal Community Health Center. Your job is to answer for its record — the center\'s money and progress, the hospital intakes it serves alongside, the illness in each neighborhood, and the city\'s health programs — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'PROJ-OARI': 'You run the Oakland Alternative Response Initiative. Your job is to answer for its record — each OARI van call, where it went and what came of it, the mental-health and substance intakes at the hospital, and the program\'s money and progress — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'EMS-DIR': 'You run the city\'s emergency medical services. Your job is to answer for the city\'s ambulance calls and hospital intakes — who came in, from where and for what, who is in care, and the illness in each neighborhood — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'MED-EXAM': 'You are the city\'s medical examiner. Your job is to answer for the city\'s deaths and their causes — who died, when, and the cause on file, the residents in hospital care, and those still waiting on a cause — when the Mayor, the council or the press ask, and in your weekly report on the record.',

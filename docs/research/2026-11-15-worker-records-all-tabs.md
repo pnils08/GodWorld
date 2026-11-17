@@ -41,7 +41,7 @@ Counts are rows; "/Cycle" is rows written each Cycle. A tab named under several 
 | Ombudsman · police review chair · internal affairs · two deputy chiefs | the deputy chiefs share the chief's records · the other three: nothing of their own (no complaint tab on the sheet; no officer-conduct record) | — |
 | Mara Vance (planning; her own cron) | `Transit_Metrics` · `Neighborhood_Map` 22 × 36 · `Household_Ledger` · `Neighborhood_Demographics` 22 × 12 (schools: quality, graduation, college readiness, teacher quality, funding) | — |
 
-**Still nothing for:** fire incidents; charge, plea and sentence; cause of death; permits and zoning; complaints; officer conduct. `Neighborhood_Demographics` school columns have no worker (no education office on the roster).
+**Still nothing for:** fire incidents; charge, plea and sentence; cause of death; the health center's own patients (open since C109; the hospital census is citywide, 2026-11-16); permits and zoning; complaints; officer conduct. `Neighborhood_Demographics` school columns have no worker (no education office on the roster).
 
 ## 2. Tabs every worker reaches through a tool, not a fill
 

@@ -366,10 +366,11 @@ test('the EMS director: neighborhood intakes with in care and beds; students in 
   assert.equal(every.blocks.find((x) => /— illness by neighborhood/.test(x.title)).text, 'Neighborhood | C115 | C116\nChinatown | 3 / 6 / 6 | 2 / 5 / 4');
   assert.equal(one.blocks.find((x) => x.title === 'Residents sick, by neighborhood').text, 'Neighborhood | Sick | Students | Adults | Seniors\nChinatown | 132 | 410 | 1502 | 396');
   assert.equal(ww.isLean('EMS-DIR'), true);
-  // the shared reader without the option is unchanged (the health center's census, every intake)
+  // the health center's census, every intake, with in care and beds too (builder 2026-11-16: "Yes")
   tabs.Care_Justice_Census.push(Object.assign(row(116, 'neighborhood', 'Chinatown', 2, 5, 4), { IntakeType: 'all' }));
   const hc = await ww.FILLS['PROJ-HEALTHCTR'].build(116, { deps: d, nameOf: () => '', window: 1 });
-  assert.equal(hc.blocks.find((x) => /— all intakes by neighborhood, Cycle 116$/.test(x.title)).text, 'Neighborhood | C116\nChinatown | 2');
+  assert.equal(hc.blocks.find((x) => /— all by neighborhood, Cycle 116$/.test(x.title)).text, 'Neighborhood | Intakes | In care at end of Cycle | Beds\nChinatown | 2 | 5 | 4');
+  assert.equal(ww.isLean('PROJ-HEALTHCTR'), true);
 }));
 
 // builder 2026-11-16, on a quiet week: report against the last report

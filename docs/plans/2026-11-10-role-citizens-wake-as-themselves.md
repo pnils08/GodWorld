@@ -88,6 +88,7 @@ pointers:
 - Interviews carry no neighbourhood restriction ("the citizens voices matter so I dont see why the restriction matters").
 - What carries into the template is [[../reference/AGENT_BOOT_TEMPLATES]] §4 ("read the plan"): sheet line + temperament, written part, page memory, records + task; IDENTITY / LENS / RULES legacy on switch; stance line and bag out; the grade is pipeline.111's.
 - Each reporter writes on their beat's days, recorded on the roster.
+- Every reporter can call any of the 14 workers (builder 2026-11-17 on Lila: "her tools should include calls to the workers"; then "Every reporter"): the worker answers on the template's question path (`workerWake.js:545-549`, question + who asks; no caller today).
 - Every reporter gets the lookup tool (12 have none today), added as each switches. The tool opens every record to every reporter; the roster says only what each one's pack carries. The same data is read by role ("everty journlist would report differently on that same data given ther role and beat descriptions i set").
 - Read the same day: Monday 11-16's write, the first since identities went on — 7 pieces, all loaded identity, all 3/3, all gate-passed. The 11-17 lean worker records clean on figures; Osei calls himself "the council member" (his role turned over C115→C116).
 

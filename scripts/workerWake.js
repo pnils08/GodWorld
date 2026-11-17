@@ -445,6 +445,9 @@ Object.assign(FILLS, {
     await k.hoodMap('Housing, migration and direction on the neighborhood map', ['HousingPressure', 'MedianRent', 'MedianIncome', 'MigrationFlow', 'NeighborhoodTrajectory', 'TrajectoryMomentum', 'Sentiment']);
     await k.ripples('What migration and neighborhood direction set moving', ['migration', 'trajectory', 'neighborhood-fold']);
     await k.whole('Faith organizations', 'Faith_Organizations', ['Organization', 'FaithTradition', 'Neighborhood', 'Congregation', 'Leader', 'ActiveStatus']);
+    // builder 2026-11-16: "Ice cream truck + community, faith, culture, festival events"
+    await k.chaos('Ice cream truck events, every Cycle on the sheet', ['ice_cream_truck']);
+    await k.events('Community, faith, culture and festival events on the city\'s event ledger', ['COMMUNITY', 'FAITH', 'CULTURE', 'FESTIVAL']);
   }),
   'STAFF-MANAGER': made('city budget treasury services', async (k) => {
     await k.treasury('The city\'s treasury, every entry', null);
@@ -485,6 +488,7 @@ Object.assign(FILLS, {
 const JOBS = {
   'CHIEF-FIRE': 'You run the city\'s fire service. Your job is to answer for its record — each fire engine call, where it went and what came of it — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'EMERG-DIR': 'You run the city\'s emergency management office. Your job is to answer for the city\'s crises and its weather — what is open, how it is moving, what it set off — when the Mayor, the council or the press ask, and in your weekly report on the record.',
+  'STAFF-DM-COMM': 'You are the Deputy Mayor for community development. Your job is to answer for the city\'s community programs and its neighborhoods — housing, who is moving in and out, which way each neighborhood is heading, its faith communities — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'STAFF-BAYLIGHT': 'You run the Baylight Authority. Your job is to answer for the Baylight District\'s record — its money and progress, the boom in the neighborhoods around it, the port and the builders — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'PROJ-TRANSITHUB': 'You lead planning for the Fruitvale Transit Hub. Your job is to answer for its record — the hub\'s money and progress, ridership and on-time running at each station and corridor, the BART trains and the traffic — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'PROJ-STABFUND': 'You run the West Oakland Stabilization Fund. Your job is to answer for its record — the households it has paid and how much, the fund\'s money and progress, and the rent and housing pressure in the neighborhoods — when the Mayor, the council or the press ask, and in your weekly report on the record.',

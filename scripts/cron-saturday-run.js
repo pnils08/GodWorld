@@ -557,6 +557,8 @@ async function stepSheets(cycle) {
   if (!wanted.length) { console.log('no INTAKE usage rows for c' + cycle); return { written: 0 }; }
   if (!APPLY) {
     for (const w of wanted) console.log('(dry-run) would append: ' + w.name + ' | ' + w.usageType + ' | ' + w.context + (w.snippet ? ' | light: (classified on --apply)' : ' | light: no snippet'));
+    const bylined = new Set(wanted.filter(w => w.byline).map(w => w.name));
+    if (bylined.size) console.log('(dry-run) would append a printed-reporter row to Reflection_Intake for: ' + [...bylined].join(', ') + ' (one per reporter, POPID resolved on --apply)');
     console.log(wanted.length + ' row(s) in dry-run scope');
     return { written: 0 };
   }
@@ -570,6 +572,7 @@ async function stepSheets(cycle) {
       if (!wanted[i].byline) continue;
       const r = bylineResolves(wanted[i], ledger);
       if (!r.ok) { console.error('[byline-published] SKIPPED ' + wanted[i].name + ' (' + wanted[i].context + '): ' + r.why); wanted.splice(i, 1); }
+      else wanted[i].ledgerPopid = r.popid;   // engine.347: the printed-reporter row lands on this POPID
     }
   }
   // engine.152: classify the light each citation casts (cheap model, one call per row).
@@ -603,7 +606,32 @@ async function stepSheets(cycle) {
   }
   if (rows.length) await sheets.appendRows('Citizen_Media_Usage', rows);
   console.log(rows.length + ' row(s) appended (' + (wanted.length - rows.length) + ' dup-skipped)');
-  return { written: rows.length };
+  const printedRows = await writePrintedReporterRows(cycle, set, wanted, sheets);
+  return { written: rows.length, printedRows };
+}
+
+// engine.347 Task 3 (builder 2026-11-16: "the better event would be 'my article was selected to run in the
+// cycle pulse'"): a reporter the Cycle Pulse printed gets one Reflection_Intake row for the Cycle — the same
+// print set and the same resolved POPID as the byline-published credit above. The fold moves the dial at the
+// next fire. A rerun finds the Cycle's PRINT row and writes nothing. A failure here is loud and does not
+// undo the usage rows already appended.
+async function writePrintedReporterRows(cycle, set, wanted, sheets) {
+  const reporterDial = require(path.join(ROOT, 'lib', 'reporterDialEvents'));
+  const textOf = new Map(set.map(e => [e.stem, e.text]));
+  const printed = wanted.filter(w => w.byline && w.ledgerPopid)
+    .map(w => ({ popid: w.ledgerPopid, headline: reporterDial.headlineOf(textOf.get(w.context)) }));
+  if (!printed.length) { console.log('[printed-row] none: no printed byline resolved to a ledger POPID'); return 0; }
+  try {
+    const existing = await sheets.getRawSheetData('Reflection_Intake');
+    const out = reporterDial.printedReporterRows(printed, cycle, existing, new Date().toISOString());
+    if (out.rows.length) await sheets.appendRows('Reflection_Intake', out.rows);
+    for (const r of out.rows) console.log('[printed-row] ' + r[1] + ' <- ' + r[5]);
+    console.log('[printed-row] ' + out.rows.length + ' row(s) appended to Reflection_Intake (' + out.skipped.length + ' reporter(s) already have c' + cycle + "'s row)");
+    return out.rows.length;
+  } catch (e) {
+    console.error('[printed-row] FAILED — no printed-reporter row written for c' + cycle + ': ' + e.message + ' (recover: --step sheets --apply)');
+    return 0;
+  }
 }
 function entryByline(stem) {
   try {
@@ -1849,7 +1877,7 @@ if (require.main === module) {
   main().catch(err => { console.error('[saturday] Fatal: ' + err.message); process.exit(1); });
 }
 
-module.exports = { magsPulseMemoryDoc, stepRemember, loadStagedSet, loadArcSeeds, excludeCanonViolations, stepSweep, stepDaily, dailyPending, retractionIds, articleCustomId, articleDoc, usageRowsFor, printedStems, printedOnly, citationSnippet, ROLE_TO_USAGE,
+module.exports = { writePrintedReporterRows, bylinePublishedRows, bylineResolves, magsPulseMemoryDoc, stepRemember, loadStagedSet, loadArcSeeds, excludeCanonViolations, stepSweep, stepDaily, dailyPending, retractionIds, articleCustomId, articleDoc, usageRowsFor, printedStems, printedOnly, citationSnippet, ROLE_TO_USAGE,
   aggregateStorylineSignals, mergeStorylineLedger, STORYLINE_LEDGER_HEADERS, verifyStagedProof,
   attachStorylines, storylineAttachNames, stepAttach, commitAttaches, loadStorylineRegistryStrict, checkStorylineRegistry, primarySlug,
   isCodeRenderedBrief, stagedGrade, bylinePublishedRows, bylineResolves,

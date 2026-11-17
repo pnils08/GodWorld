@@ -43,6 +43,7 @@ const dials = require('/root/GodWorld/lib/citizenDials');
 const page = require('/root/GodWorld/lib/citizenPage');
 const memoryFence = require('/root/GodWorld/lib/memoryFence');
 const classifier = require('/root/GodWorld/lib/reflectionClassifier');
+const reporterDial = require('/root/GodWorld/lib/reporterDialEvents'); // engine.347 Task 3: where a reporter's filed / graded line lands
 const getCurrentCycle = require('/root/GodWorld/lib/getCurrentCycle');
 const interviewContract = require('./newsroomInterviewContract');
 const { matchBondTargets_ } = require('./bondTargetMatch'); // engine.130 — PRESS rows carry BondTarget (col I) like the wake
@@ -232,13 +233,17 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
 
     // 1) classify first so affect rides the page doc metadata (guarded — a classifier
     //    failure must never block the page append).
+    //    engine.347 Task 3 (builder 2026-11-17: "keep it on drive small"): a reporter's "filed: <headline>"
+    //    line is work done, landed by its fixed tag — the classifier does not guess from a headline.
+    const selfKind = reporterDial.recordKind(preText);   // 'filed' | 'graded' | null
     let cls = {};
-    try { cls = await classifier.classifyTripleReflection_(said.spoken, openTensions.map((t) => t.q)); } catch (e) { cls = { raw: 'classify threw: ' + e.message }; }
+    if (selfKind === 'filed') cls = { event: reporterDial.FILED_TAG, affect: reporterDial.NO_MOOD, raw: 'filed (fixed tag)' };
+    else try { cls = await classifier.classifyTripleReflection_(said.spoken, openTensions.map((t) => t.q)); } catch (e) { cls = { raw: 'classify threw: ' + e.message }; }
 
     // 2) narrative store: page pointer + reflection doc.
     const ptr = await page.ensurePagePointer_(c.popId);
     if (ptr.error) throw new Error('ensurePagePointer_: ' + ptr.error);
-    const graded = preText != null && /^graded: /.test(String(preText));
+    const graded = selfKind === 'graded';
     // pipeline.96: the same ask rerun the same day is that interview again (one doc); a grade keeps its own key below.
     const slot = PAGE_EVENT_KEY && !graded ? { day: page.pageDayOf(new Date()), ref: page.pageRefOf(ask) } : {};
     const appended = await page.appendReflection_(c.popId, said.spoken, {
@@ -280,7 +285,11 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
     //    so the drain's bond-intensity nudge never saw a PRESS mention of a bonded citizen).
     const bondHits = matchBondTargets_(said.spoken, bondPairs);
     const bondTarget = bondHits.length ? bondHits[0].pop : '';
-    if (cls.event || cls.affect) {
+    if (selfKind === 'graded') {
+      // engine.347 Task 3 (builder 2026-11-16: "all media is 3/3 so its not the best method to grade them on"):
+      // the desk grade moves no dial. The page line above stays — the next wake reads it back.
+      console.error('[record] grade line: page only, no Reflection_Intake row');
+    } else if (cls.event || cls.affect) {
       await sheets.appendRows('Reflection_Intake', [[
         new Date().toISOString(), c.popId, cycle, 'PRESS', cls.event || '', said.spoken.replace(/\n/g, ' '), 'no', cls.affect || '',
         bondTarget, cls.tension || '', resolvedText,

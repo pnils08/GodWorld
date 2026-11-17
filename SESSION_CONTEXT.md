@@ -4,4 +4,4 @@
 
 **NEXT[engine-sheet]:** pipeline.110 → workers done, 14 of 14 lean and live; read their first live lean records (the chief's Thu 11-19). Next session group: media, the reporter template — he names the working example. Council on hold. No model run without his word.
 
-**NEXT[research-build]:** No push from here (es pushes). engine.347 → Task 3 (grade strings off the ledger, the printed-reporter row), then Task 5 (office, seat, worker, Mara, Varek rows). Then engine.350 (direction, harder hits), speed keys to the middle row, engine.351 intake. pipeline.112 → fold codex-rb's page-labels review.
+**NEXT[research-build]:** No push from here (es pushes). engine.347 → read Task 3 live (tonight's filed rows; Sat 11-21 PRINT rows), then Task 5 (office, seat, worker, Mara, Varek rows). Then engine.350 (direction, harder hits), speed keys to the middle row, engine.351 intake. pipeline.112 → fold codex-rb's page-labels review.

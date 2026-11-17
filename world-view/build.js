@@ -61,7 +61,7 @@ function trimSaid(s) {
 }
 const said = new Map();
 rd('Reflection_Intake').forEach(r => {
-  if (!r.ReflectionExcerpt || !(Number(r.Cycle) <= Number(CYCLE)) || /^(filed|graded):/i.test(r.ReflectionExcerpt)) return;
+  if (!r.ReflectionExcerpt || !(Number(r.Cycle) <= Number(CYCLE)) || /^(filed|graded):/i.test(r.ReflectionExcerpt) || r.Daypart === 'PRINT') return;   // PRINT: the printed-reporter row, a record not a thing said
   const key = [Number(r.Cycle) || 0, /^20/.test(r.Timestamp) ? r.Timestamp : ''];
   if (!said.has(r.POPID)) said.set(r.POPID, []);
   said.get(r.POPID).push({ key, r });

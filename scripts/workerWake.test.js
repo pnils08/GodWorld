@@ -326,6 +326,11 @@ test('the medical examiner: each death with its own death line and no exit note;
       { POPID: 'POP-00900', First: 'Traded', Last: 'Away', Status: 'Traded', ArchiveReason: 'traded-away', ExitCycle: '110', LifeHistory: '' }],
     Hospital_Ledger: [{ AdmissionId: 'H-C105-POP-00194', POPID: 'POP-00194', Name: 'Yu Zen', StatusNow: 'active', DischargeCycle: '109', Outcome: 'recovered' }],
     Health_Cause_Queue: [{ POPID: 'POP-00036', Name: 'Marcus Osei', Status: 'recovering', StatusStartCycle: '0', AssignedCause: 'car accident' }],
+    Chaos_Cars: [{ CycleId: '115', VehicleType: 'ambulance', TargetScope: 'neighborhood', TargetId: 'Uptown', DiceOutcome: 'minor_injury', PrimaryMetric: 'Sentiment', MetricMagnitude: '-0.04' },
+      { CycleId: '116', VehicleType: 'ambulance', TargetScope: 'neighborhood', TargetId: 'KONO', DiceOutcome: 'medical_emergency', PrimaryMetric: 'Sentiment', MetricMagnitude: '-0.05' },
+      { CycleId: '116', VehicleType: 'cop_car', TargetScope: 'neighborhood', TargetId: 'KONO', DiceOutcome: 'arrest', PrimaryMetric: 'CrimeIndex', MetricMagnitude: '0.1' }],
+    WorldEvents_V3_Ledger: [{ Cycle: '115', Domain: 'Health', Neighborhood: 'Laurel', Severity: 'low', EventDescription: 'last week' },
+      { Cycle: '116', Domain: 'HEALTH', Neighborhood: 'Piedmont Ave', Severity: 'medium', EventDescription: 'Medium-severity health spike in Piedmont Ave' }],
   };
   const d = deps(root); d.sheets = { getSheetAsObjects: async (tab) => tabs[tab] || [] };
   const b = await ww.FILLS['MED-EXAM'].build(116, { deps: d, nameOf: () => '', window: 1 });
@@ -336,6 +341,10 @@ test('the medical examiner: each death with its own death line and no exit note;
   assert.ok(!deaths.includes('defects-at-exit') && !deaths.includes('Traded'));
   assert.match(b.blocks.find((x) => /hospital ledger/.test(x.title)).text, /H-C105-POP-00194 \| POP-00194 \| Yu Zen \| active \| 109 \| recovered/);
   assert.match(b.blocks.find((x) => /waiting on a cause/.test(x.title)).text, /POP-00036 \| Marcus Osei \| recovering \| 0 \| car accident/);
+  // his chaos cars and events (builder 2026-11-16: "Ambulance calls + health events")
+  assert.deepEqual(b.blocks.map((x) => x.title).slice(3), ['Ambulance events, Cycle 116', 'Health events on the city\'s event ledger, Cycle 116']);
+  assert.match(b.blocks[3].text, /\n116 \| ambulance \| neighborhood KONO \| medical_emergency/);
+  assert.ok(!b.blocks[3].text.includes('cop_car') && !b.blocks[3].text.includes('Uptown') && !b.blocks[4].text.includes('last week'));
   assert.equal(ww.isLean('MED-EXAM'), true);
   assert.match(ww.JOBS['MED-EXAM'], /^You are the city's medical examiner\. Your job is to answer for the city's deaths and their causes/);
 }));

@@ -408,6 +408,10 @@ Object.assign(FILLS, {
     // the two below as the sheet holds them, old rows included (builder 2026-11-16: "As the sheet holds them")
     await k.whole('Tracked residents in the hospital ledger', 'Hospital_Ledger');
     await k.whole('Residents waiting on a cause', 'Health_Cause_Queue');
+    // the chaos cars and events in his scope are his records too (builder 2026-11-16: "as the data is the job the events
+    // are also in their scope"; on him: "Ambulance calls + health events")
+    await k.chaos('Ambulance events, every Cycle on the sheet', ['ambulance']);
+    await k.events('Health events on the city\'s event ledger', ['HEALTH']);
   }),
   'STAFF-DM-COMM': made('community programs housing neighborhoods', async (k) => {
     await k.initiative('INIT-001');

@@ -8,7 +8,7 @@ From your own memory:
 - (Cycle 115) The ledger’s quiet tonight. No new names means no new questions, which should be a relief, but it just gives the old ones room to breathe. Yu Zen’s file is still open—those lacerations don’t match the fall, and I keep turning the photos over like they’ll confess if I look hard enough. Meanwhile, Ariana Lee’s chart sits heavy; stage four, no family listed, just a name and a disease that doesn’t care about her address. I’ll call the hospital in the morning, but tonight I’m just sitting with the fact that the city moves on either way.
 - (Cycle 115) The ledger’s quiet tonight. No new names, no new questions—just the same three files waiting on my desk. Marcus is healing, Elliott will walk again, and Ariana Lee is still slipping away. Cancer doesn’t wait for anyone’s convenience. I keep coming back to Yu Zen’s photos, though; the angles won’t leave me alone. The city can call it an accident, but my gut says the record’s a lie. I’ll request the footage tomorrow, even if I already know the camera was blind.
 
-## USER (4826 chars)
+## USER (5048 chars)
 
 Residents on the archive as deceased:
 POPID | Name | Born | Neighborhood | Role | Status | Reason | Left the ledger | Cause on file | Their record
@@ -33,6 +33,13 @@ POPID | Name | Status | StatusStartCycle | CyclesSick | Neighborhood | Tier | Ag
 POP-00036 | Marcus Osei | recovering | 0 | 0 | Chinatown | 2 | 67 | car accident |  | 
 POP-00044 | Elliott Crane | recovering | 0 | 0 | Uptown | 2 | 79 | broken leg |  | 
 POP-00168 | Ariana Lee | serious-condition | 0 | 0 | Piedmont Ave | 4 | 42 | Cancer |  | 
+
+Ambulance events, Cycle 116:
+none
+
+Health events on the city's event ledger, Cycle 116:
+Cycle | Domain | Neighborhood | Severity | Event
+116 | HEALTH | Piedmont Ave | medium | Medium-severity health spike in Piedmont Ave
 
 What you have decided and said on the record:
 - nothing on record
@@ -59,3 +66,5 @@ sheet_read, citizen_lookup, canon_recall, memory_recall, record_read, neighborho
 - Residents on the archive as deceased: 1256 chars
 - Tracked residents in the hospital ledger: 626 chars
 - Residents waiting on a cause: 383 chars
+- Ambulance events, every Cycle on the sheet: 1472 chars
+- Health events on the city's event ledger: 944 chars

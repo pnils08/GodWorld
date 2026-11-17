@@ -455,3 +455,51 @@ test('a lean worker reports against its last finished report; a record that ende
   const asked = await ww.buildWake({ officeId: 'CHIEF-FIRE', cycle: 117, officeMap: om, deps: d, date: '2026-11-23', question: 'Q?', askerLine: 'A,' });
   assert.ok(!asked.user.includes('last report'));
 }));
+
+test('a reply with no finish reason, or a filter, is not a statement; the two finished endings are', () => {
+  const { workerReplyVerdict } = require('./cron-civic-run');
+  assert.equal(workerReplyVerdict({ text: 'Half a report', finishReason: null }), 'reply ended: no finish reason');
+  assert.equal(workerReplyVerdict({ text: 'Half a report' }), 'reply ended: no finish reason');
+  assert.equal(workerReplyVerdict({ text: 'x', finishReason: 'content_filter' }), 'reply ended: content_filter');
+  assert.equal(workerReplyVerdict({ text: 'The report.', finishReason: 'end_turn' }), 'statement');
+});
+
+test('a finished report that ended end_turn is handed back as the last report', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'ww-endturn-'));
+  const dir = path.join(root, 'output', 'cron-civic', 'datawake');
+  fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(path.join(dir, 'worker-x_2026-11-17.json'), JSON.stringify({ template: 'worker/2', finishReason: 'end_turn', cycle: 116, statement: 'Done.' }));
+  fs.writeFileSync(path.join(dir, 'worker-x_2026-11-18.json'), JSON.stringify({ template: 'worker/2', finishReason: null, cycle: 116, statement: 'Cut.' }));
+  assert.deepEqual(ww.lastReport('worker-x', '2026-11-19', { root }), { date: '2026-11-17', cycle: 116, statement: 'Done.' });
+});
+
+test('record_read: a record kept by Cycle reads newest first, whole rows, the note inside the tool loop\'s cut, and earlier Cycles by name', () => {
+  const rows = []; for (let c = 75; c <= 116; c++) for (let i = 0; i < 8; i++) rows.push({ Cycle: c, Domain: 'FAITH', Neighborhood: i % 2 ? 'Grand Lake' : 'Fruitvale', Event: 'a congregation meeting, the ' + i + 'th of its kind this week' });
+  const text = ww.table(rows, ['Cycle', 'Domain', 'Neighborhood', 'Event']);
+  assert.ok(text.length > 20000);
+  const got = ww.readRecord('Faith events', text, {});
+  assert.ok(got.length <= 8000, 'inside the loop cap: ' + got.length);
+  const body = got.split('\n');
+  assert.equal(body[1], 'Cycle | Domain | Neighborhood | Event');
+  assert.match(body[2], /^116 \| /);
+  assert.match(got, /\n\(\d+ newest of 336 rows — name earlier Cycles with to_cycle to read them\)$/);
+  body.slice(2, -1).forEach((l) => assert.equal(l.split(' | ').length, 4, 'a whole row: ' + l));
+  const early = ww.readRecord('Faith events', text, { to_cycle: 80, match: 'grand lake' });
+  assert.match(early.split('\n')[2], /^80 \| FAITH \| Grand Lake/);
+  assert.ok(!/\n(8[1-9]|9\d|1\d\d) \| /.test(early));
+  assert.match(ww.readRecord('Faith events', text, { from_cycle: 200 }), /^Faith events:\nno row in Cycles 200–latest \(336 rows on the record\)$/);
+});
+
+test('record_read: a record not kept by Cycle keeps its order and points to match; text that is not a table is cut on a line', () => {
+  const biz = []; for (let i = 1; i <= 300; i++) biz.push({ BIZ_ID: 'BIZ-' + String(i).padStart(5, '0'), Name: 'Business number ' + i, Neighborhood: i === 289 ? 'Dimond' : 'Uptown' });
+  const text = ww.table(biz, ['BIZ_ID', 'Name', 'Neighborhood']);
+  const got = ww.readRecord('Every business on the ledger', text, {});
+  assert.match(got.split('\n')[2], /^BIZ-00001 /);
+  assert.match(got, /\n\(\d+ first of 300 rows — pass match to pull rows by a word\)$/);
+  assert.match(ww.readRecord('Every business on the ledger', text, { match: 'dimond' }), /BIZ-00289 \| Business number 289 \| Dimond$/);
+  assert.match(ww.readRecord('Every business on the ledger', text, { from_cycle: 110 }), /not kept by Cycle/);
+  const plain = Array.from({ length: 900 }, (_, i) => 'Field' + i + ': value ' + i).join('\n');
+  const cut = ww.readRecord('Your initiative', plain, {});
+  assert.ok(cut.length <= 8000);
+  assert.match(cut, /\n\(\d+ more lines not shown\)$/);
+});

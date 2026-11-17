@@ -128,15 +128,18 @@ async function gatherMemory(popid, key, deps, opts) {
   const tidy = (s) => String(s || '').replace(/\s+/g, ' ').trim();
   const entry = (r) => ({ when: (r.metadata || {}).cycle != null ? 'Cycle ' + r.metadata.cycle : 'earlier', type: String((r.metadata || {}).type || ''),
     text: tidy(r.content).replace(/^(datawake|stated):\s*/i, 'Your public statement: ') });
+  // a read that fails is named in `failed` (the weekday record carries it), so no memory this wake is never read as an empty page
   let hits = [], recent = [];
-  try { hits = ((await page.searchPage_(popid, key, 6)).results || []).filter((r) => String((r.metadata || {}).type || '') !== 'tension').map(entry); } catch (e) { hits = []; }
+  const failed = [];
+  const ok = (res, what) => { if (!res || res.error) { failed.push(what + (res && res.error ? ': ' + res.error : '')); return []; } return res.results || []; };
+  try { hits = ok(await page.searchPage_(popid, key, 6), 'search').filter((r) => String((r.metadata || {}).type || '') !== 'tension').map(entry); } catch (e) { failed.push('search: ' + e.message); hits = []; }
   if (newest > 0) try {
-    recent = ((await page.recentPage_(popid, 12)).results || []).filter((r) => !['office-position', 'tension', 'show'].includes(String((r.metadata || {}).type || '')))
+    recent = ok(await page.recentPage_(popid, 12), 'newest').filter((r) => !['office-position', 'tension', 'show'].includes(String((r.metadata || {}).type || '')))
       .slice(0, newest).map(entry);
-  } catch (e) { recent = []; }
+  } catch (e) { failed.push('newest: ' + e.message); recent = []; }
   const seen = new Set(), entries = [];
   for (const m of recent.concat(hits)) { const k = m.text.slice(0, 80); if (m.text && !seen.has(k)) { seen.add(k); entries.push(m); } }
-  return { key, entries, fromSearch: hits.length, newest: recent.length };
+  return { key, entries, fromSearch: hits.length, newest: recent.length, failed };
 }
 
 // ---- part 2, THE FILL: one entry per worker. build(cycle, ctx) -> { blocks: [{title, text}], key }.
@@ -432,7 +435,9 @@ Object.assign(FILLS, {
     await k.events('Business, economic and infrastructure events on the city\'s event ledger', ['BUSINESS', 'ECONOMIC', 'INFRASTRUCTURE']);   // builder 2026-11-16: "Business + economic + infrastructure"
   }),
   'DA-01': made('charges custody arrests court', async (k) => {
-    await k.census('Arrests and custody', 'judicial', null, { care: true });   // builder 2026-11-16: in custody per neighborhood, "Yes"
+    // builder 2026-11-16: in custody per neighborhood, "Yes". Arrest is the judicial system's one intake type, and the sheet
+    // also writes it again as "all" with the same figures: ['arrest'] hands it once (agy 2026-11-17 #2.4: two identical tables)
+    await k.census('Arrests and custody', 'judicial', ['arrest'], { care: true });
     await k.treasury('Fines the court paid to the city', (r) => /^COURT/.test(r.Counterparty || ''));
     await k.whole('Cases on the case ledger', 'Judicial_Ledger');
     await k.whole('Clearance and incidents by neighborhood', 'Crime_Metrics', ['Neighborhood', 'IncidentCount', 'ClearanceRate', 'PropertyLevel', 'ViolentLevel', 'Trend']);
@@ -547,7 +552,8 @@ function lastReport(agentDir, beforeDate, deps) {
     .map((f) => f.slice(pre.length, pre.length + 10)).filter((d) => !beforeDate || d < beforeDate).sort().reverse();
   for (const d of dated) {
     let rec; try { rec = JSON.parse(fs.readFileSync(path.join(dir, pre + d + '.json'), 'utf8')); } catch (e) { continue; }
-    if (rec && rec.template === 'worker/2' && rec.finishReason === 'stop' && String(rec.statement || '').trim())
+    // the finished endings are cron-civic-run.js workerReplyVerdict's own: what it saves as a statement is a report here
+    if (rec && rec.template === 'worker/2' && ['stop', 'end_turn'].includes(rec.finishReason) && String(rec.statement || '').trim())
       return { date: d, cycle: Number(rec.cycle), statement: String(rec.statement).trim() };
   }
   return null;
@@ -639,7 +645,9 @@ const LEVER_TOOLS = {
 };
 // A lean worker's two reads: a record in full, and a neighborhood — where something happened and who lives and works there.
 const LEAN_TOOLS = (names) => [
-  fn('record_read', 'Open one of your records in full, every Cycle on it: ' + names.join('; ') + '.', { record: { type: 'string', enum: names } }, ['record']),
+  fn('record_read', 'Open one of your records in full, every Cycle on it: ' + names.join('; ') + '. A record kept by Cycle reads newest first; earlier Cycles are read by naming them.',
+    { record: { type: 'string', enum: names }, match: { type: 'string', description: 'optional: only the rows naming this word (a neighborhood, a name, an id)' },
+      from_cycle: { type: 'integer', description: 'optional: only rows from this Cycle on' }, to_cycle: { type: 'integer', description: 'optional: only rows up to this Cycle' } }, ['record']),
   fn('neighborhood_read', 'Read one neighborhood: its row on the neighborhood map, its people by age, the businesses in it, and the residents on the city\'s ledger who live there.', { neighborhood: { type: 'string' } }, ['neighborhood']),
 ];
 function toolsFor(officeId, opts) {
@@ -675,9 +683,47 @@ async function neighborhoodRead(input, deps) {
   const people = ledgerSnapshot(deps).filter((r) => same(r.Neighborhood) && !/deceased|archived/i.test(String(r.Status || '')));
   parts.push('Residents on the city\'s ledger who live there (' + people.length + '):\n' + (people.length
     ? table(people.map((r) => ({ Name: r.Name || [r.First, r.Last].filter(Boolean).join(' '), Role: r.RoleType, Born: r.BirthYear })), ['Name', 'Role', 'Born']) : 'none'));
-  return capTo(parts.join('\n\n'), 8000);
+  return capLines(parts.join('\n\n'), RECORD_CAP);
 }
 const capTo = (s, n) => (s.length > n ? s.slice(0, n) + '\n(cut at ' + n + ' characters)' : s);
+// A read handed back whole lines only, its note inside n: the tool loop cuts every result at 8,000 characters
+// (cron-desk-writer.js openRouterToolLoop resultCap), and a note past that is cut off with it (agy 2026-11-17 #1).
+function capLines(s, n) {
+  if (s.length <= n) return s;
+  const lines = s.split('\n'), kept = [];
+  let len = 0;
+  for (const l of lines) { if (len + l.length + 1 > n - 80) break; kept.push(l); len += l.length + 1; }
+  return kept.join('\n') + '\n(' + (lines.length - kept.length) + ' more lines not shown)';
+}
+const RECORD_CAP = 7900;
+// One record, read whole or by Cycle and word. A table whose first column is the Cycle reads newest first (agy
+// 2026-11-17 #1: the oldest rows were kept and the newest cut — the community deputy's events stopped at Cycle 83);
+// any other keeps the sheet's order. Rows are handed whole; the note says how many of how many, and how to reach the rest.
+function readRecord(title, text, input) {
+  const lines = String(text || '').split('\n');
+  const isRow = (l) => l.includes(' | ');
+  if (!lines.length || !isRow(lines[0])) return capLines(title + ':\n' + text, RECORD_CAP);
+  const head = lines[0], notes = lines.slice(1).filter((l) => !isRow(l));
+  let rows = lines.slice(1).filter(isRow);
+  const total = rows.length;
+  const byCycle = /^(Cycle|CycleId|CycleID|cycle)$/.test(head.split(' | ')[0].trim());
+  const cyc = (r) => num(r.split(' | ')[0]);
+  const match = String((input || {}).match || '').trim().toLowerCase();
+  const from = num((input || {}).from_cycle), to = num((input || {}).to_cycle);
+  const ranged = byCycle && (isFinite(from) || isFinite(to));
+  if (ranged) rows = rows.filter((r) => { const c = cyc(r); return isFinite(c) && (!isFinite(from) || c >= from) && (!isFinite(to) || c <= to); });
+  if (match) rows = rows.filter((r) => r.toLowerCase().includes(match));
+  if (byCycle) rows = rows.map((r, i) => [r, i]).sort((a, b) => (cyc(b[0]) || 0) - (cyc(a[0]) || 0) || a[1] - b[1]).map((x) => x[0]);
+  const asked = [match ? 'naming "' + input.match + '"' : '', ranged ? 'in Cycles ' + (isFinite(from) ? from : 'first') + '–' + (isFinite(to) ? to : 'latest') : ''].filter(Boolean).join(' ');
+  const noCycle = !byCycle && (isFinite(from) || isFinite(to)) ? '\n(this record is not kept by Cycle: the Cycles asked for do not apply)' : '';
+  if (!rows.length) return title + ':\nno row' + (asked ? ' ' + asked : '') + ' (' + total + ' rows on the record)' + noCycle;
+  const top = title + ':\n' + head, tail = notes.length ? '\n' + notes.join('\n') : '';
+  let shown = 0, len = top.length + tail.length + noCycle.length + 160;
+  while (shown < rows.length && len + rows[shown].length + 1 <= RECORD_CAP) { len += rows[shown].length + 1; shown++; }
+  const more = shown < rows.length ? '\n(' + shown + (byCycle ? ' newest' : ' first') + ' of ' + rows.length + ' rows' + (asked ? ' ' + asked : '') +
+    (byCycle ? ' — name earlier Cycles with to_cycle to read them' : ' — pass match to pull rows by a word') + ')' : '';
+  return top + '\n' + rows.slice(0, shown).join('\n') + tail + more + noCycle;
+}
 async function sheetRead(input, deps) {   // the reporters' reader (cron-desk-writer.js toolSheetRead), same shape, on the worker's list
   const { sheets } = defaults(deps);
   const tab = String((input || {}).tab || '').trim();
@@ -731,7 +777,7 @@ function toolExecutor(ctx) {
     if (name === 'record_read') {
       const recs = ctx.records || {};
       const key = Object.keys(recs).find((k) => k === String(input.record || '').trim());
-      return key ? capTo(key + ':\n' + recs[key], 8000) : 'no record "' + input.record + '". Your records: ' + Object.keys(recs).join('; ');
+      return key ? readRecord(key, recs[key], input) : 'no record "' + input.record + '". Your records: ' + Object.keys(recs).join('; ');
     }
     if (name === 'neighborhood_read') return neighborhoodRead(input, ctx.deps);
     if (name === 'citizen_lookup') return (ctx.dw || require('./cron-desk-writer')).toolCitizenLookup(input);
@@ -746,5 +792,5 @@ function toolExecutor(ctx) {
   };
 }
 
-module.exports = { JOBS, isLean, reportTask, lastReport, neighborhoodRead, FILLS, hasFill, isBuilt, LIVE, slugFor, identity, buildWake, toolsFor, toolExecutor, TOOLS, SHEETS,
+module.exports = { JOBS, isLean, readRecord, capLines, reportTask, lastReport, neighborhoodRead, FILLS, hasFill, isBuilt, LIVE, slugFor, identity, buildWake, toolsFor, toolExecutor, TOOLS, SHEETS,
   highLow, patrolInForce, askAndWhy, loadMoves, pastDecisions, gatherMemory, whoTheyAre, sheetRead, memoryRecall, table };

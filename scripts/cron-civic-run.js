@@ -3679,8 +3679,9 @@ function workerReplyVerdict(got) {
   const g = got || {};
   if (g.finishReason === 'length') return 'reply cut off';
   if (g.finishReason === 'tool_calls' || g.finishReason === 'tool-turns-exhausted') return 'reply ended mid-lookup';
-  // only a finished reply is a statement: any other ending (a filter, a provider error) is named, not saved
-  if (g.finishReason != null && !['stop', 'end_turn'].includes(g.finishReason)) return 'reply ended: ' + g.finishReason;
+  // only a finished reply is a statement: any other ending (a filter, a provider error, none given) is named, not saved
+  // (agy 2026-11-17 #3: a reply with no finish reason was saved); workerWake.lastReport hands back the same two endings
+  if (!['stop', 'end_turn'].includes(g.finishReason)) return 'reply ended: ' + (g.finishReason == null ? 'no finish reason' : g.finishReason);
   if (!String(g.text || '').trim()) return 'empty reply';
   return 'statement';
 }
@@ -3750,7 +3751,8 @@ async function runWorkerDatawake(duty, o) {
   // back as the last one (builder 2026-11-17: Monday's four worker/1 records are broken entries from a bad build).
   rec.template = w.lean ? 'worker/2' : 'worker/1';
   rec.toolTrace = r.trace.map(t => ({ tool: t.tool, input: t.input, resultChars: t.resultChars }));
-  rec.memory = { searchedOn: w.memory.key, entries: w.memory.entries.length, fromSearch: w.memory.fromSearch, newest: w.memory.newest };
+  rec.memory = { searchedOn: w.memory.key, entries: w.memory.entries.length, fromSearch: w.memory.fromSearch, newest: w.memory.newest, failed: w.memory.failed || [] };
+  if ((w.memory.failed || []).length) log(office.agentDir + ' memory not read this wake: ' + w.memory.failed.join('; '));
   rec.figuresNotHanded = loose;
   rec.finishReason = r.finishReason || null;
   rec.dutyKind = duty.dutyKind;
@@ -3809,7 +3811,10 @@ async function runDatawake() {
   let rotaEntries;
   let dutyPlan = null;
   if (ONLY) {
-    const row = civicSeat.resolveOfficeRow(officeMap, ONLY);
+    let row = civicSeat.resolveOfficeRow(officeMap, ONLY);
+    // a worker named by hand is the row workerRota makes: its id (a project director has only a projectId) and the name its
+    // records are filed under (six offices have no folder) — agy 2026-11-17 #2: --office=PROJ-OARI fell to the seat path
+    if (row && workerWake.hasFill(row.officeId || row.projectId)) row = Object.assign({}, row, { officeId: row.officeId || row.projectId, agentDir: workerWake.slugFor(row) });
     if (row && policy && policy.duty.eventExceptionDaysUtc.includes(day)) {
       dutyPlan = planDutyRota([row], loadDutyResults(ROOT), loadEventView(ROOT, cycle),
         date, 1, policy.duty);
@@ -3840,9 +3845,10 @@ async function runDatawake() {
   if (process.argv.includes('--dry-run')) {
     for (const { office } of rotaEntries) {
       if (workerTemplateOn(office.officeId)) {
-        const w = await workerWake.buildWake({ officeId: office.officeId, cycle: Number(cycle), officeMap });
-        log('DRY ' + office.agentDir + ' holder=' + office.holder + ' template=worker/1 systemChars=' + w.system.length + ' userChars=' + w.user.length +
-          ' memory=' + w.memory.entries.length + ' decisions=' + w.decisions.length + ' tools=' + workerWake.toolsFor(office.officeId).length);
+        const w = await workerWake.buildWake({ officeId: office.officeId, cycle: Number(cycle), officeMap, date });
+        log('DRY ' + office.agentDir + ' holder=' + office.holder + ' template=' + (w.lean ? 'worker/2' : 'worker/1') + ' systemChars=' + w.system.length + ' userChars=' + w.user.length +
+          ' memory=' + w.memory.entries.length + ' decisions=' + w.decisions.length + ' tools=' + workerWake.toolsFor(office.officeId, { patrolStrategies: PATROL_STRATEGIES, records: w.records }).length +
+          ' last=' + (w.last ? w.last.date : 'none'));
         continue;
       }
       const pack = buildPack({ cycle, agentDir: office.agentDir, root: ROOT });

@@ -281,6 +281,122 @@ var TRAIT_MODIFIERS = {
 // MAIN FUNCTION
 // ============================================================================
 
+// engine.349 — the dial speed keys, read once a Cycle. ensureEngine349Config_ seeds and validates
+// them before the Cycle; a value that is still unusable here is logged to Engine_Errors and the
+// seed value is used — never a throw, which safePhaseCall_ would swallow while the Cycle commits
+// with the whole dial fold skipped (the integrityWearRate pattern below). Absent keys (a harness
+// with no config) = the seed values, quietly, so every pre-349 test folds as it did.
+var DIAL_TUNING_KEYS = [
+  // [World_Config key, field, seed, min, max]
+  ['dialLineScale', 'lineScale', 1, 0, 10],
+  ['dialDirectShare', 'directShare', 0, 0, 1],
+  ['dialMoodFade', 'moodFade', 0.8, 0, 0.99],
+  ['dialHardenShare', 'hardenShare', 0.4, 0, 1],
+  ['dialReflectionShare', 'reflectionShare', REFLECTION_MULT * REFLECTION_ACCRETION_FRAC, 0, 2]
+];
+function readDialTuning_(ctx) {
+  var out = {};
+  for (var i = 0; i < DIAL_TUNING_KEYS.length; i++) {
+    var spec = DIAL_TUNING_KEYS[i];
+    var raw = ctx && ctx.config ? ctx.config[spec[0]] : undefined;
+    out[spec[1]] = spec[2];
+    if (raw === undefined) continue;
+    var n = (raw === '' || raw === null || typeof raw === 'boolean') ? NaN : Number(raw);
+    if (isFinite(n) && n >= spec[3] && n <= spec[4]) { out[spec[1]] = n; continue; }
+    var tuneErr = new Error('engine.349: World_Config ' + spec[0] + ' not usable (' + String(raw) + ') — using ' + spec[2] + ' this Cycle');
+    if (typeof logEngineError_ === 'function') logEngineError_(ctx, 'Phase9-DialTuning', tuneErr);
+    Logger.log(tuneErr.message);
+  }
+  return out;
+}
+
+// engine.349 — Dial_Moves (this Cycle's movers, the tab replaced each Cycle) and Dial_Pulse (one kept
+// row a Cycle). A move is measured on the permanent dial (base), against the copy of DialState taken
+// when the ledger opened (ctx.dialOpen, initSimulationLedger_), so whatever moved a citizen anywhere
+// in the Cycle is in the row. "Why" splits it by what the fold itself did (lines, voice = reflections,
+// wear, the first-fold fandom start); what is left over happened before Phase 9 (a chaos break).
+var DIAL_MOVES_TAB = 'Dial_Moves';
+var DIAL_PULSE_TAB = 'Dial_Pulse';
+var DIAL_MOVE_MIN = 0.05;
+var DIAL_MOVES_HEADERS = ['Cycle', 'POPID', 'Name', 'Dial', 'From', 'To', 'Change', 'BandFrom', 'BandTo', 'Felt', 'Why'];
+function dialPulseHeaders_() {
+  var h = ['Cycle', 'Citizens', 'Moved', 'CrossedBand', 'AllMiddle', 'AnyLow', 'AnyHigh'];
+  for (var i = 0; i < DIALS.length; i++) { h.push(DIALS[i] + 'Up'); h.push(DIALS[i] + 'Down'); }
+  h.push('LinesFolded'); h.push('Reflections'); h.push('Worn'); h.push('Regained');
+  return h;
+}
+function copyDialBase_(base) {
+  var o = {};
+  for (var i = 0; i < DIALS.length; i++) o[DIALS[i]] = (base && base[DIALS[i]] != null) ? Number(base[DIALS[i]]) : MIDPOINT;
+  return o;
+}
+// what one step of the fold did to base, added under `label` in this citizen's tally
+function noteDialStep_(tally, label, before, base) {
+  for (var i = 0; i < DIALS.length; i++) {
+    var d = DIALS[i], delta = base[d] - before[d];
+    if (!delta) continue;
+    if (!tally[d]) tally[d] = {};
+    tally[d][label] = (tally[d][label] || 0) + delta;
+    before[d] = base[d];
+  }
+}
+function signed2_(n) { var v = Math.round(n * 100) / 100; return (v > 0 ? '+' : '') + v; }
+// rows = ledger rows after the fold; tallies = {POPID: {dial: {label: delta}}}; kinds = {POPID: {dial: {kind: 1}}}
+function buildDialMoves_(ctx, rows, idxs, cycle, tallies, kinds, counts) {
+  var moveRows = [], moved = 0, crossed = 0, allMiddle = 0, anyLow = 0, anyHigh = 0, citizens = 0;
+  var up = {}, down = {};
+  for (var r = 0; r < rows.length; r++) {
+    var pop = String(rows[r][idxs.iPopID] || '').trim().toUpperCase();
+    if (!pop || !rows[r][idxs.iDialState]) continue;
+    var nowDs = parseDialState_(String(rows[r][idxs.iDialState]));
+    if (!nowDs || !nowDs.base) continue;
+    citizens++;
+    var hadOpen = ctx.dialOpen.hasOwnProperty(pop) && ctx.dialOpen[pop];
+    var openDs = hadOpen ? parseDialState_(ctx.dialOpen[pop]) : null;
+    var from = copyDialBase_(openDs && openDs.base), to = copyDialBase_(nowDs.base);
+    var any = false, anyCross = false, mid = true, low = false, high = false;
+    for (var i = 0; i < DIALS.length; i++) {
+      var d = DIALS[i], bTo = bandIndex_(to[d]) - 2;
+      if (bTo < 0) low = true;
+      if (bTo > 0) high = true;
+      if (d !== 'fandom' && bTo !== 0) mid = false;
+      var change = to[d] - from[d];
+      if (Math.abs(change) < DIAL_MOVE_MIN) continue;
+      any = true;
+      if (change > 0) up[d] = (up[d] || 0) + 1; else down[d] = (down[d] || 0) + 1;
+      var bFrom = bandIndex_(from[d]) - 2;
+      if (bFrom !== bTo) anyCross = true;
+      var parts = [], seen = 0, t = (tallies[pop] && tallies[pop][d]) || {};
+      for (var label in t) {
+        if (!t.hasOwnProperty(label) || Math.abs(t[label]) < 0.005) continue;
+        seen += t[label];
+        var part = label + ' ' + signed2_(t[label]);
+        if (label === 'lines' && kinds[pop] && kinds[pop][d]) {
+          var ks = [];
+          for (var kn in kinds[pop][d]) { if (kinds[pop][d].hasOwnProperty(kn) && ks.length < 3) ks.push(kn); }
+          if (ks.length) part += ' (' + ks.join(', ') + ')';
+        }
+        parts.push(part);
+      }
+      if (!hadOpen) parts.push('new this Cycle');
+      else if (Math.abs(change - seen) >= DIAL_MOVE_MIN) parts.push('earlier in the Cycle ' + signed2_(change - seen));
+      var mood = (nowDs.mood && nowDs.mood[d] != null) ? Number(nowDs.mood[d]) : 0;
+      moveRows.push([cycle, pop, idxs.iName >= 0 ? String(rows[r][idxs.iName] || '') : '', d,
+        round1_(from[d]), round1_(to[d]), Math.round(change * 100) / 100, bFrom, bTo,
+        round1_(clamp100_(to[d] + mood)), parts.join('; ')]);
+    }
+    if (any) moved++;
+    if (anyCross) crossed++;
+    if (mid) allMiddle++;
+    if (low) anyLow++;
+    if (high) anyHigh++;
+  }
+  var pulse = [cycle, citizens, moved, crossed, allMiddle, anyLow, anyHigh];
+  for (var p = 0; p < DIALS.length; p++) { pulse.push(up[DIALS[p]] || 0); pulse.push(down[DIALS[p]] || 0); }
+  pulse.push(counts.linesFolded || 0); pulse.push(counts.reflections || 0); pulse.push(counts.worn || 0); pulse.push(counts.regained || 0);
+  return { moveRows: moveRows, pulse: pulse, citizens: citizens, moved: moved, crossed: crossed, allMiddle: allMiddle, anyLow: anyLow, anyHigh: anyHigh };
+}
+
 // Read unprocessed (applied != 'yes') Reflection_Intake rows, grouped by popId.
 // Apps-Script-only sheet read (ctx.ss). Returns {} when ss/tab is absent (Node tests,
 // fresh spreadsheet) so the objective compress path is byte-identical without reflections.
@@ -407,6 +523,16 @@ function compressLifeHistory_(ctx, options) {
   // harness where the reflection surface isn't loaded (drain simply stays dormant).
   var reflectionDialMap = (typeof nudgesForReflection_ !== 'undefined') ? { nudgesForReflection_: nudgesForReflection_ } : null;
   var reflectionsMoved = 0, reflectionCitizens = 0;
+  // engine.349: the speed keys, once. The two the dial logic owns go to citizenMemory.js; the fold
+  // keeps lineScale / directShare / reflectionShare. At the seed values every path below is the
+  // pre-349 arithmetic.
+  var dialTune = readDialTuning_(ctx);
+  if (typeof setDialTuning_ === 'function') setDialTuning_({ moodFade: dialTune.moodFade, hardenShare: dialTune.hardenShare });
+  var reflectionMult = dialTune.reflectionShare / REFLECTION_ACCRETION_FRAC;
+  // engine.349: Dial_Moves bookkeeping — off without the open-of-Cycle copy (a harness that never
+  // ran initSimulationLedger_), so the fold itself is unchanged there.
+  var movesOn = !!(ctx.dialOpen && typeof ctx.dialOpen === 'object');
+  var moveTallies = {}, moveKinds = {};
   // engine.101: per-cycle per-pair nudge totals (cap) + outcome stats.
   var bondNudgeTotals = {};
   var bondsNudged = 0, bondTargetsMissed = 0;
@@ -582,6 +708,9 @@ function compressLifeHistory_(ctx, options) {
     // insert/expiry by itself is strictly a MemoryRegisters change.
     var dialRmwNeeded = compressEligible || newEntries.length || moodPending || pending.length || biasPending.length || !!wearMode || fandomSeedDue;
     var c = dialRmwNeeded ? deserialize_(parsedDial) : null;
+    var movePop = String(popId).trim().toUpperCase();
+    var stepBase = (movesOn && c) ? copyDialBase_(c.base) : null;
+    var stepTally = stepBase ? (moveTallies[movePop] || (moveTallies[movePop] = {})) : null;
     if (c && fandomSeedDue) {
       var inherited = inheritFandom_(row, String(popId).trim().toUpperCase(), fandomIdx, fandomDonors);
       // athletes start as fans (builder 2026-10-03): a GAME-clock player or staff member of a
@@ -597,6 +726,7 @@ function compressLifeHistory_(ctx, options) {
       c.base.fandom = inherited.v;
       if (inherited.t) { c.fan = inherited.t; fandomInheritedFans++; }
       fandomSeeded++;
+      if (stepBase) noteDialStep_(stepTally, 'fandom start', stepBase, c.base);
     }
     if (c && foldedMark) c.folded = foldedMark;
 
@@ -615,6 +745,7 @@ function compressLifeHistory_(ctx, options) {
     // Cycle's events land on top.
     if (wearMode && applyIntegrityWear_(c, wearMode === 'wear', cycle, wearRate, wearFloor)) {
       if (wearMode === 'wear') wearSteps++; else regainSteps++;
+      if (stepBase) noteDialStep_(stepTally, 'wear', stepBase, c.base);
     }
 
     // engine.38 B1+B3 (S283): ONE parse of the register cell serves both the
@@ -627,7 +758,7 @@ function compressLifeHistory_(ctx, options) {
     // engine.177: fold the new stamped entries (oldest first) and move the watermark.
     // engine.38 B3 unlived capture rides THIS walk now (arrival), not the trim.
     if (newEntries.length) {
-      var wmCaptured = foldNewEntries_(c, newEntries, regs);
+      var wmCaptured = foldNewEntries_(c, newEntries, regs, dialTune, movesOn ? (moveKinds[movePop] || (moveKinds[movePop] = {})) : null);
       if (wmCaptured > 0) { unlivedApplied += wmCaptured; regsDirty = true; }
       foldedEntries += newEntries.length;
     }
@@ -654,6 +785,7 @@ function compressLifeHistory_(ctx, options) {
       var unlivedCaptured = foldAgedOutEntries_(c, entries, KEEP_RAW_ENTRIES, regs, true);
       if (unlivedCaptured > 0) { unlivedApplied += unlivedCaptured; regsDirty = true; }
     }
+    if (stepBase) noteDialStep_(stepTally, 'lines', stepBase, c.base);
 
     // Accrete pending reflections into base BEFORE deriving the face, so the readable
     // face and DialState agree in-cycle. Mark each drained row applied='yes' via a
@@ -662,8 +794,9 @@ function compressLifeHistory_(ctx, options) {
     // executeSheetIntents_ passes, so a mid-Phase-10 crash leaves a bounded sub-point
     // single-dial double-/under-count window — accepted (see header note + plan).
     if (pending.length) {
-      reflectionsMoved += accreteReflectionsIntoBase_(c, pending, reflectionDialMap, REFLECTION_MULT, REFLECTION_ACCRETION_FRAC);
+      reflectionsMoved += accreteReflectionsIntoBase_(c, pending, reflectionDialMap, reflectionMult, REFLECTION_ACCRETION_FRAC);
       reflectionCitizens++;
+      if (stepBase) noteDialStep_(stepTally, 'voice', stepBase, c.base);
       for (var p = 0; p < pending.length; p++) {
         queueCellIntent_(ctx, REFLECTION_INTAKE_TAB, pending[p].rowNum, RI_COL_APPLIED, 'yes',
           'reflection-drain accreted (citizen-loop)', 'citizens', 100);
@@ -732,6 +865,26 @@ function compressLifeHistory_(ctx, options) {
     ctx.ledger.dirty = true;
   }
 
+  // engine.349: Dial_Moves (replaced) + Dial_Pulse (one row). Queued here, in Phase 9, so the
+  // Phase-10 executor writes them; both tabs are ensured first. Never fatal to the fold.
+  var dialMoves = null;
+  if (movesOn) {
+    try {
+      dialMoves = buildDialMoves_(ctx, rows, { iPopID: iPopID, iDialState: iDialState, iName: idx('Name') }, cycle,
+        moveTallies, moveKinds, { linesFolded: foldedEntries, reflections: reflectionsMoved, worn: wearSteps, regained: regainSteps });
+      if (typeof queueEnsureTabIntent_ === 'function' && typeof queueReplaceIntent_ === 'function' && typeof queueAppendIntent_ === 'function') {
+        queueEnsureTabIntent_(ctx, DIAL_MOVES_TAB, DIAL_MOVES_HEADERS, 'engine.349 dial moves tab', 'citizens');
+        queueEnsureTabIntent_(ctx, DIAL_PULSE_TAB, dialPulseHeaders_(), 'engine.349 dial pulse tab', 'citizens');
+        queueReplaceIntent_(ctx, DIAL_MOVES_TAB, [DIAL_MOVES_HEADERS].concat(dialMoves.moveRows), 'engine.349 this Cycle\'s dial moves', 'citizens');
+        queueAppendIntent_(ctx, DIAL_PULSE_TAB, dialMoves.pulse, 'engine.349 the Cycle\'s dial pulse', 'citizens');
+      }
+    } catch (moveErr) {
+      dialMoves = null;
+      if (typeof logEngineError_ === 'function') logEngineError_(ctx, 'Phase9-DialMoves', moveErr);
+      Logger.log('engine.349 dial moves not written: ' + moveErr.message);
+    }
+  }
+
   S.lifeHistoryCompression = {
     cycle: cycle,
     updated: updated,
@@ -752,6 +905,8 @@ function compressLifeHistory_(ctx, options) {
     griefExpired: griefExpired,
     integrityWear: { rate: wearRate, floor: wearFloor, worn: wearSteps, regained: regainSteps }, // engine.272
     fandomSeeded: { rows: fandomSeeded, fans: fandomInheritedFans }, // engine.208 C8
+    dialTuning: dialTune, // engine.349 the speed this Cycle folded at
+    dialMoves: dialMoves ? { rows: dialMoves.moveRows.length, moved: dialMoves.moved, crossed: dialMoves.crossed, allMiddle: dialMoves.allMiddle, anyLow: dialMoves.anyLow } : null, // engine.349
     version: COMPRESS_VERSION
   };
 
@@ -767,6 +922,8 @@ function compressLifeHistory_(ctx, options) {
     ', pushes ' + pushesQueued + // engine.180
     ', integrity wear ' + wearSteps + '/' + regainSteps + ' at rate ' + wearRate + // engine.272 worn/regained
     ', unlived ' + unlivedApplied +
+    (dialMoves ? ', dial moves ' + dialMoves.moved + ' citizens / ' + dialMoves.moveRows.length + ' rows, ' + dialMoves.crossed + ' crossed a band, ' + dialMoves.allMiddle + ' all-middle' : ', dial moves off') + // engine.349
+    ', speed x' + dialTune.lineScale + ' direct ' + dialTune.directShare + // engine.349
     ', bonds nudged ' + bondsNudged + (bondTargetsMissed ? ' (missed ' + bondTargetsMissed + ')' : ''));
 }
 
@@ -1629,8 +1786,12 @@ function foldAgedOutEntries_(c, entries, keepCount, regs, unstampedOnly) {
 // and applied once (applyCycleEffects_), so reinforcement counts experienced cycles, not
 // log volume; a streak survives only while the last swing is still felt. Cycles apply in
 // ascending order whatever order the lines sit in the cell.
-function foldNewEntries_(c, newEntries, regs) {
+function foldNewEntries_(c, newEntries, regs, tune, kindsOut) {
   var captured = 0, lastCycle = c.folded || 0;
+  // engine.349: lineScale multiplies the Cycle's net push; directShare of it goes straight to base
+  // (room-scaled, like a reflection) and the rest swings and fades as before. 1 and 0 = the old path.
+  var lineScale = (tune && typeof tune.lineScale === 'number') ? tune.lineScale : 1;
+  var directShare = (tune && typeof tune.directShare === 'number') ? tune.directShare : 0;
   var byCycle = {}, cycles = [];
   for (var i = 0; i < newEntries.length; i++) {
     var e = newEntries[i];
@@ -1638,13 +1799,27 @@ function foldNewEntries_(c, newEntries, regs) {
     if (!byCycle[e.cycle]) { byCycle[e.cycle] = {}; cycles.push(e.cycle); }
     var fx = nudgesForEvent_(e.tag, 1, e.text);
     for (var d in fx) {
-      if (fx.hasOwnProperty(d) && fx[d]) byCycle[e.cycle][d] = (byCycle[e.cycle][d] || 0) + fx[d];
+      if (fx.hasOwnProperty(d) && fx[d]) {
+        byCycle[e.cycle][d] = (byCycle[e.cycle][d] || 0) + fx[d];
+        if (kindsOut) { if (!kindsOut[d]) kindsOut[d] = {}; kindsOut[d][typeof baseTag_ === 'function' ? baseTag_(e.tag) : e.tag] = 1; }
+      }
     }
   }
   cycles.sort(function(a, b) { return a - b; });
   for (var k = 0; k < cycles.length; k++) {
     var cy = cycles[k];
-    applyCycleEffects_(c, byCycle[cy]);
+    var netFx = byCycle[cy];
+    if (lineScale !== 1 || directShare > 0) {
+      var rest = {};
+      for (var nd in netFx) {
+        if (!netFx.hasOwnProperty(nd)) continue;
+        var scaled = netFx[nd] * lineScale;
+        if (directShare > 0 && c.base[nd] != null) c.base[nd] = clamp100_(c.base[nd] + roomScaled_(current_(c, nd), scaled * directShare));
+        rest[nd] = scaled * (1 - directShare);
+      }
+      netFx = rest;
+    }
+    applyCycleEffects_(c, netFx);
     if (cy > lastCycle) lastCycle = cy;
   }
   c.folded = lastCycle;
@@ -1759,6 +1934,8 @@ if (typeof module !== 'undefined' && module.exports) {
     inheritFandom_: inheritFandom_,
     parseProfileString_: parseProfileString_,
     getCitizenDialBands_: getCitizenDialBands_,
+    readDialTuning_: readDialTuning_, buildDialMoves_: buildDialMoves_, foldNewEntries_: foldNewEntries_,
+    DIAL_MOVES_TAB: DIAL_MOVES_TAB, DIAL_PULSE_TAB: DIAL_PULSE_TAB, DIAL_MOVES_HEADERS: DIAL_MOVES_HEADERS, dialPulseHeaders_: dialPulseHeaders_,
     conductCohortRow_: conductCohortRow_,
     readPendingReflections_: readPendingReflections_,
     nudgeBondIntensity_: nudgeBondIntensity_,

@@ -51,4 +51,18 @@ function initSimulationLedger_(ctx) {
     rows: values.slice(1),
     dirty: false
   };
+
+  // engine.349: each citizen's DialState as the Cycle opens. The Phase-9 fold compares against it to
+  // write Dial_Moves, so a move made anywhere in the Cycle (a chaos break in Phase 4, wear, a
+  // reflection, a line) is in the difference. A copy of strings; nothing reads it but that recorder.
+  var iOpenPop = values[0].indexOf('POPID');
+  var iOpenDial = values[0].indexOf('DialState');
+  ctx.dialOpen = null;
+  if (iOpenPop >= 0 && iOpenDial >= 0) {
+    ctx.dialOpen = {};
+    for (var r = 1; r < values.length; r++) {
+      var openPop = String(values[r][iOpenPop] || '').trim().toUpperCase();
+      if (openPop) ctx.dialOpen[openPop] = values[r][iOpenDial] ? String(values[r][iOpenDial]) : '';
+    }
+  }
 }

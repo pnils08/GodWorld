@@ -41,6 +41,18 @@ var MOOD_DECAY_BY_DIAL = { fandom: 0.9 };
 var HARDEN_STREAK = 3;      // same-direction push sustained N times -> permanent baseline shift
 var HARDEN_FRACTION = 0.4;  // fraction of a sustained swing that bakes in permanently
 
+// engine.349 (builder 2026-11-16: "a ledger that tracks dial moves is needed so it can be managed? does
+// world_config have dials for this?"): the two speed numbers this file owns are read from here, not from
+// the constants above. The Phase-9 fold sets them once a Cycle from World_Config (dialMoodFade,
+// dialHardenShare — compressLifeHistory.js readDialTuning_); with no call they are today's values, so a
+// harness or a script that never sets them behaves as before. Fandom's slower fade stays its own number.
+var DIAL_TUNING = { moodFade: MOOD_DECAY, hardenShare: HARDEN_FRACTION };
+function setDialTuning_(t) {
+  DIAL_TUNING.moodFade = (t && typeof t.moodFade === 'number' && isFinite(t.moodFade) && t.moodFade >= 0 && t.moodFade < 1) ? t.moodFade : MOOD_DECAY;
+  DIAL_TUNING.hardenShare = (t && typeof t.hardenShare === 'number' && isFinite(t.hardenShare) && t.hardenShare >= 0 && t.hardenShare <= 1) ? t.hardenShare : HARDEN_FRACTION;
+  return { moodFade: DIAL_TUNING.moodFade, hardenShare: DIAL_TUNING.hardenShare };
+}
+
 // engine.42 chaos-trauma accumulator (S275). A SECOND, faster-threshold accumulator
 // running parallel to harden: repeated chaos-cars hits on one citizen escalate to a
 // labeled break (wary -> traumatized) that hardens base ONCE per escalation, on TOP of
@@ -127,8 +139,8 @@ function applyEvent_(c, event) {
       if (c.mood[d] !== 0 && (c.mood[d] > 0) === (c.streak[d] > 0)) {
         var towardEdge = (c.mood[d] > 0) === (c.base[d] >= MIDPOINT);
         var room = towardEdge ? (1 - Math.abs(c.base[d] - MIDPOINT) / 50) : 1;
-        c.base[d] = clamp100_(c.base[d] + c.mood[d] * HARDEN_FRACTION * room);
-        c.mood[d] = c.mood[d] * (1 - HARDEN_FRACTION);
+        c.base[d] = clamp100_(c.base[d] + c.mood[d] * DIAL_TUNING.hardenShare * room);
+        c.mood[d] = c.mood[d] * (1 - DIAL_TUNING.hardenShare);
       }
       c.streak[d] = 0;
     }
@@ -205,7 +217,7 @@ function accreteReflectionsIntoBase_(c, reflections, dialMap, mult, frac) {
 function settleCycle_(c) {
   for (var i = 0; i < DIALS.length; i++) {
     var d = DIALS[i];
-    c.mood[d] = c.mood[d] * (MOOD_DECAY_BY_DIAL[d] != null ? MOOD_DECAY_BY_DIAL[d] : MOOD_DECAY);
+    c.mood[d] = c.mood[d] * (MOOD_DECAY_BY_DIAL[d] != null ? MOOD_DECAY_BY_DIAL[d] : DIAL_TUNING.moodFade);
     if (Math.abs(c.mood[d]) < 0.5) c.mood[d] = 0;
   }
 }
@@ -505,7 +517,8 @@ if (typeof module !== 'undefined' && module.exports) {
     HARDEN_STREAK: HARDEN_STREAK,
     newCitizen_: newCitizen_, current_: current_,
     applyEvent_: applyEvent_, applyTaggedEvent_: applyTaggedEvent_,
-    roomScaled_: roomScaled_, applyCycleEffects_: applyCycleEffects_,
+    roomScaled_: roomScaled_, applyCycleEffects_: applyCycleEffects_, clamp100_: clamp100_, round1_: round1_,
+    setDialTuning_: setDialTuning_, DIAL_TUNING: DIAL_TUNING, MOOD_DECAY: MOOD_DECAY, HARDEN_FRACTION: HARDEN_FRACTION,
     applyReflectionDualTag_: applyReflectionDualTag_,
     accreteReflectionsIntoBase_: accreteReflectionsIntoBase_, settleCycle_: settleCycle_,
     bandIndex_: bandIndex_, band_: band_, bandMultiplier_: bandMultiplier_,

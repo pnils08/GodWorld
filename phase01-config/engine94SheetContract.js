@@ -417,6 +417,32 @@ function ensureEngine272Config_(ss) {
   return { configSeeded: plan.additions.length };
 }
 
+// engine.349 — the speed of the dials (builder 2026-11-16: "does world_config have dials for this?").
+// Each is seeded at the value the code carried, so the Cycle after this deploy moves exactly as the
+// Cycle before it; the builder turns them. Read once a Cycle by the Phase-9 fold
+// (compressLifeHistory.js readDialTuning_), which logs an unusable value and uses the seed.
+var ENGINE349_CONFIG_SEEDS = [
+  ['dialLineScale', 1, 'engine.349 every life line\'s push on a dial is multiplied by this at the weekly fold (1 = a routine line is 1 point; 2 = doubled). Reflections and wear are not scaled by it', 0, 10, false],
+  ['dialDirectShare', 0, 'engine.349 the share of a week\'s net push that goes straight into who the citizen is, with no wait for a third same-way week (0 = none, the rest still swings and fades; 0.25 = a quarter sticks)', 0, 1, false],
+  ['dialMoodFade', 0.8, 'engine.349 how much of a swing is left a week later (0.8 = a fifth fades each Cycle). Fandom keeps its own slower fade', 0, 0.99, false],
+  ['dialHardenShare', 0.4, 'engine.349 the share of a swing that becomes permanent when the same push has come three weeks running', 0, 1, false],
+  ['dialReflectionShare', 0.225, 'engine.349 the share of a reflection\'s dial value that goes straight into who the citizen is (a wake, an interview answer, a work reflection, a conversation)', 0, 2, false]
+];
+
+function ensureEngine349Config_(ss) {
+  if (!ss) throw new Error('engine.349 config: spreadsheet required');
+  var configSheet = ss.getSheetByName('World_Config');
+  if (!configSheet) throw new Error('engine.349 config: World_Config not found');
+  var plan = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE349_CONFIG_SEEDS);
+  if (plan.additions.length > 0) {
+    configSheet.getRange(configSheet.getLastRow() + 1, 1, plan.additions.length, 3).setValues(plan.additions);
+    var verified = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE349_CONFIG_SEEDS);
+    if (verified.additions.length > 0) throw new Error('engine.349 config: post-write verification failed');
+  }
+  Logger.log('engine.349 config ready: seeded ' + plan.additions.length + ' row(s)');
+  return { configSeeded: plan.additions.length };
+}
+
 // engine.276 — debt follows net worth. The yardstick, both rates, the drag cap and
 // the ending are the builder's dials; the starting values were measured on live C109
 // rows (care-and-justice plan §engine.276 cut).

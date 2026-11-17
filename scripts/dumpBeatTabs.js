@@ -86,6 +86,9 @@ const OPTIONAL_TABS = [
   // the Oakland week page (infrastructure.19) — what the engine put on a street this cycle
   'WorldEvents_V3_Ledger',    // each world event: EventDescription, EventType, Domain, Severity, Neighborhood
   'Texture_Trigger_Log',      // each texture trigger: TextureKey, Reason, Intensity, Neighborhood (blank = citywide)
+  // engine.349 — the dials' own record, for managing their speed (not a desk's beat)
+  'Dial_Moves',               // this Cycle's movers: POPID · Dial · From · To · Change · bands · Felt · Why (the tab is replaced each Cycle; the dump keeps each week)
+  'Dial_Pulse',               // one row a Cycle: citizens moved, bands crossed, all-middle, up / down per dial
 ];
 // civic.47 pilot: the applied-action journal is a proposed new tab. Do not
 // query it on ordinary dumps until Claude has installed the exact schema.

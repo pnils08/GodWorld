@@ -36,8 +36,8 @@ pointers:
 | 2 | `v3NeighborhoodWriter.js` `eventAttractBase_`: skip `famous-sighting`, `nightlife-spot`, `dining-spot` so EventAttractiveness is unchanged (a name with "art" in it would otherwise count) | rb | done (this commit) |
 | 3 | `scripts/eveningSeedHoods.test.js`: seeds on their hood, EA unchanged (fails on the old writer: 0 vs 1), carry keeps hood and domain | rb | done (this commit), 11/11 |
 | 6 | `applyCityDynamics.js`: one log line per fire naming each hood at or past 3 on CULTURE or NIGHTLIFE with its weight; the gates had no record of their own (read only, no behavior) | rb | done (fix-up commit); cityDynamicsCarry 9, hoodBlindTables 22, hoodEconomyCarry 20, hoodEconomyRelative 29, perHoodDynamics 92 |
-| 4 | Sandbox fire on the exact candidate: read the C+1 carry blob for hooded CULTURE / NIGHTLIFE seeds and the C+2 gate effect; EA sum unchanged by these seeds | rb | blocked: SANDBOX 1004 at the 200-version cap (builder's click to clear versions) |
-| 5 | PROD push, DEPLOY_HISTORY stage | rb | not started |
+| 4 | Sandbox fire on the exact candidate: read the C+1 carry blob for hooded CULTURE / NIGHTLIFE seeds and the C+2 gate effect; EA sum unchanged by these seeds | rb | done: @201, C117 + C118 PASS, `output/research-build/2026-11-16-e289-reads.jsonl` |
+| 5 | PROD push, DEPLOY_HISTORY stage | rb | done: stage 49 @184, 2026-11-16 20:30 CST |
 
 ## Acceptance
 
@@ -74,3 +74,4 @@ pointers:
 
 - 2026-11-16 (research-build) — Plan written; Tasks 1–3 built and unit-proven (11/11; illnessEnvelope 34, activityObservationsCarry 61, perHoodDynamics 92 unchanged). Sandbox blocked on the version cap.
 - 2026-11-16 (research-build) — Task 6: the bars' reach is logged per fire (Acceptance 2 reads it). STUB_MAP regenerated. Bench order once the versions are cleared: stage 48 first (live, unbenched), this job on top.
+- 2026-11-16 (research-build) — Versions cleared by the builder. Bench @201 stage 49: C117 192 s, C118 174 s, PASS, 0 errors; hooded seeds as designed; to C119 Uptown CULTURE 8, KONO 4, Lake Merritt 4. PROD stage 49 @184. First live read C117 Sun 2026-11-22.

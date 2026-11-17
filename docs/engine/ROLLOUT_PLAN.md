@@ -61,13 +61,14 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | engine.287 | Citywide crime gate (floor 3, half share). C114 carried 12 spikes, most on record; the gate logs nothing, effect unread. Next read C120 | live-observing | engine-sheet | [[../plans/2026-10-10-engine-214-mood-per-hood]] §Tasks 17/18/19 — mechanism; `output/engine_review_c113.md` §C113 re-reads · `output/production_log_run_cycle_c116_gaps.md` §C114–C116 watch re-reads |
 | engine.285 | Organic: Phase-11 + executor kill hazards — all LIVE @140/@141; item 4 waits on engine.95 receipts | live-observing | engine-sheet | `docs/research/2026-10-08-codex-engine95-design.md` §7; [[../research/2026-10-16-codex-engine285-hazards2-6-review]] |
 | engine.280 | Fandom follow-ups: four lines (Sports-Soured / Lifted / Gutted / Attended) wait on upstream signals: a per-piece tone at post-publish, a roster negative flag, an ECL attendance tag. §2.9 core shipped 2026-10-08; C10 upset sign shipped (38f19986), read live C113 | blocked | engine-sheet | [[../research/2026-10-02-engine-208-fandom-dial-read-before]] §2.9 |
+| engine.289 | Evening culture and nightlife land on their hood: LIVE stage 49 @184 (bench C117/C118 PASS). Read C117 Sun 2026-11-22: seed carry + the bars log line | live-observing | research-build | [[../plans/2026-11-16-evening-reaches-the-hoods]] |
 
 ## 3. Now — being worked, one per terminal (in-progress)
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
 | pipeline.100 | Mags memory one home (builder 11-03): her page, not the old `mags` store; every Mags seat loads her persona as the CLI did. Task 1 started 11-08 | in-progress | engine-sheet | [[../plans/2026-11-03-mags-memory-one-home]] |
-| engine.346 | Feed word `off-season` (builder 11-15): live @182, hook raised at C116. Owed: a bench fire of stage 48 once the bench version cap is cleared; sheet dropdown | in-progress | research-build | [[../plans/2026-11-05-sports-feed-triggers]] §Changelog |
+| engine.346 | Feed word `off-season` (builder 11-15): live @182; benched 11-16 inside stage 49 (C117/C118 PASS). Owed: the sheet dropdown (his menu run) | in-progress | research-build | [[../plans/2026-11-05-sports-feed-triggers]] §Changelog |
 | engine.339 | How kids are minted (builder 11-08, high): parents too young, a child's surname moving, a child counted where none was born. Read done; his calls at 1b | in-progress | research-build | [[../plans/2026-11-08-how-kids-are-minted]] |
 | pipeline.110 | Role citizens wake as themselves (builder 11-10). 14 workers on the template, old folders retired; council template waits on his word | in-progress | engine-sheet | [[../plans/2026-11-10-role-citizens-wake-as-themselves]] |
 | pipeline.111 | Stop puppeting the newsroom (builder 11-10): the reporter half of the wake work (split with es 11-14). Next: one reporter's whole day in the test shell, his go | in-progress | research-build | [[../plans/2026-11-10-stop-puppeting-the-newsroom]] |
@@ -76,7 +77,6 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | pipeline.101 | Daily news: evening write wake date fixed (builder 11-04), NotebookLM page written. Next: confirm the 11-04 18:15 wake writes and gates | in-progress | research-build | [[../reference/NotebookLM]] §Change log |
 | pipeline.89 | Every journalist picks (builder 10-25: "All journalists should pick, they are AI"): every wake package gets the live tools the 3 tool seats have, the slice is a tip sheet not the assignment, Rhea is off every path; Ines first, same cut on all 28. First run 2026-10-28 | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 |
 | infrastructure.19 | Oakland week flight made lifelike (builder 11-14). v41: names first, homes on a block, team news at team buildings. Next: his look; joined street unbuilt | in-progress | research-build | [[../../world-view/README]] |
-| engine.289 | Evening culture and nightlife land on their hood (builder 11-16). Built, 11/11; sandbox fire waits on clearing the bench's version cap (his click) | in-progress | research-build | [[../plans/2026-11-16-evening-reaches-the-hoods]] |
 
 ## 4. Queue — ruled, not started (ready)
 

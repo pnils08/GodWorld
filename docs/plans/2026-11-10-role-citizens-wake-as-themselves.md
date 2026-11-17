@@ -154,6 +154,7 @@ pointers:
 ## Changelog
 
 - 2026-11-17 (engine-sheet, S670) — Reporter rulings recorded (§Tasks, Reporter rulings): no working example, roster first, shared records with one lead, worker split, reporter picks the story; roster being built.
+- 2026-11-17 (engine-sheet, S670) — Reporter roster drafted: [[../research/2026-11-17-reporter-records-roster]]; proposed lead and shared records are the builder's to rule.
 - 2026-11-17 (engine-sheet, S668) — agy's re-review (SHIP-WITH-FIXES) folded and closed: four edge cases fixed in place; tests 29, 76 across the city-hall suites. The builder on media, the next session group: the same pack and tool gaps the workers had ("media covering elements of the data and not getting all that applies").
 - 2026-11-17 (engine-sheet, S668) — position line rewritten on the builder's word: workers done and live (14 of 14 lean); the next session group is media (the reporters' template); council on hold ("council I need more time to figure out how they will work").
 - 2026-11-17 (engine-sheet, S668) — the police chief on the lean worker, approved (builder: "Approve") after two guarded runs: figures right in both; run 1's three slips (Baylight's quality-of-life crime level read backwards, the council addressed on a scheduled report, an act on no record) not repeated in run 2; run 2: Grand Lake at 0.25 "above a quarter". 14 of 14 lean. Replies `output/engine-sheet/2026-11-16-worker-last-report-run.CHIEF-POLICE{.run1,}.md`.

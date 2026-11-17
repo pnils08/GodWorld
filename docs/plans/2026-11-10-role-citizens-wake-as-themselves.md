@@ -78,6 +78,7 @@ pointers:
 
 **Reporter rulings (builder 2026-11-17, asked one at a time).**
 
+- A cautious build: "the media has been writing decent so this is a very cautious build in that we dont make them worse". The roster is a map and changes no wake; a reporter switches only one at a time, after their new-build piece is read beside their current one and the builder approves.
 - No working example: "i dont believe there is one as these are the old builds". Old-build output is not the measure of the new build ("its an old build so why would it work properly? there is already a reader that identifies what wasnt avaiable").
 - Roster first, as the workers began: each named reporter matched to the records their beat covers and the days they write, then the template. The group desks (civic, sports, culture, business, letters, podcast) stay off it as old builds.
 - A record may sit on several beats: one lead reporter covers it whole; the others pull the part their angle needs.

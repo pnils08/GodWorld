@@ -1,7 +1,7 @@
 ---
 title: Every Saved Word Reaches the Dials Plan
 created: 2026-11-16
-updated: 2026-11-16
+updated: 2026-11-17
 type: plan
 tags: [engine, draft]
 sources:
@@ -181,6 +181,24 @@ Replay (`output/research-build/2026-11-17-classifier-replay.js`, the 284 live C1
 
 What the replay shows for the next tasks: (Task 3) a `filed:` string now reads `Media | Flat` on 29 of 45 — sociability +4 × 0.225 a filing, the only thing it moves; a `graded:` string still reads `Education` (drive +5, openness +3) on 35 of 45. (Task 5) an office or worker statement reads `Career | Flat` or `Civic | Flat`: `Career` is drive +4 a statement, four a week, whatever it says; `Civic` moves nothing. (Task 7) sociability, drive and openness by reflection still lean up — the event tags that carry them (`Media`, `Career`, `Education`, `Community`) are fixed-positive.
 
+## Task 5 read (2026-11-17)
+
+What the five writers saved to pages from Mon 2026-11-09 through Tue 11-17 (two Sunday chains, C115's run on 11-09 and C116's on 11-15), read off the pages (`output/research-build/2026-11-17-job-statements-read.js`, 40 speakers), then put through the live classifier, nothing written (`…-job-statements-replay.js`, `…-replay-out.json`).
+
+| Measure | Value |
+|---|---|
+| Saved lines | 144: Sunday `stated:` lines 119 (57 and 58 a chain, 4 on 11-16), weekday `datawake:` 21, Varek's journal 2, Mara's directive entry 2 (`directive-run`, daypart blank; 0 `directive-note` entries in the window) |
+| Lines a speaker a Sunday | mayor about 21; a council seat 3–7; a project director 3–6. Median line 225 characters |
+| Sittings (one speaker's lines from one day) | 57 |
+| Read per line | `Civic` 129, `Career` 12, `Media` 3; `Flat` 124 of 144. 111 `Civic \| Flat` move nothing. Drive 16 up / 0 down; composure 6 up / 14 down; mayor's week +5.0 drive before room scaling |
+| Read per sitting | `Civic` 52, `Career` 5; `Flat` 47 of 57. 44 `Civic \| Flat`. 13 of 57 move a dial: drive 7 up / 0 down, composure 4 up / 6 down, warmth 0 / 1 |
+| Varek's journal | both weeks move composure down (a mood); Mara's two directive entries read `Civic \| Flat` |
+| Already on the ledger for the same speakers | one `work` reflection a week each (two for Varek and two workers), press answers, a debate side |
+
+- The fold has no cap on rows a citizen a Cycle (`citizenMemory.js:197-214`): each row adds its tags × `dialReflectionShare`, scaled by room. One row a line is 21 rows on the mayor every Sunday.
+- A row tagged `Civic` is counted as a citizen's civic voice by `civicPetitions.js:121` and `buildCivicOfficeSlice.js:1047`, and as a complaint when its mood is a bad one: an office holder's own statement would enter the petition count for their neighborhood unless those two readers leave the new dayparts out.
+- Four workers' statements of 11-16 are not on their pages (gap log G-EC52); the page / ledger count of acceptance 1 reads the page, not the run record.
+
 ## Tasks
 
 | # | Task | Row | Status |
@@ -248,3 +266,4 @@ agy, `output/antigravity/2026-11-16-review-dials-plan.md` (HOLD on the first cut
 - 2026-11-17 (research-build) — Builder: "ok we will add what didnt get fixed and whats logged for me into the plan , on the \"filed headline\" it would maybe not be socialability though so that would need a better place to land if kept". Carried into Tasks 3, 5 and 7; Tasks 12 and 13 added as his calls; acceptance 7 (the first live week's bad-event rows read by hand).
 - 2026-11-17 (research-build) — Builder: "keep it on drive small, build the reporter piece". Task 3 built: grade rows off the ledger, the filed row on drive small by a fixed tag, the printed-reporter row from the Saturday print set. On the C115 print set with the append captured: 9 printed filings, 8 reporters, 8 rows; a rerun 0.
 - 2026-11-17 (research-build) — Builder on the printed row landing on drive, middle step: "drive is fine, keep it".
+- 2026-11-17 (research-build) — Task 5 read: nine days of saved job statements counted off the pages and replayed through the live classifier, per line and per sitting. Where a job statement lands is put to the builder with these numbers before any row is written. Gap log G-EC52 (four workers' Monday statements missing from their pages).

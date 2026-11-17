@@ -1,0 +1,20 @@
+2026-11-17T06:51:58.965Z	2350105	guard	loaded	/root/GodWorld/output/engine-sheet/2026-11-16-worker-last-report-run.js STAFF-DM-ECON 2026-11-23 | allow=/root/GodWorld/output/engine-sheet
+2026-11-17T06:52:01.042Z	2350105	net	allowed	POST https://oauth2.googleapis.com/token
+2026-11-17T06:52:01.150Z	2350105	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/Simulation_Ledger
+2026-11-17T06:52:02.668Z	2350105	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/Heritage_Ledger
+2026-11-17T06:52:02.888Z	2350105	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/Household_Ledger
+2026-11-17T06:52:03.392Z	2350105	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/Civic_Office_Ledger
+2026-11-17T06:52:03.693Z	2350105	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/Business_Ledger
+2026-11-17T06:52:03.948Z	2350105	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/Business_Archive
+2026-11-17T06:52:04.264Z	2350105	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/Neighborhood_Map
+2026-11-17T06:52:04.478Z	2350105	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/Neighborhood_Demographics
+2026-11-17T06:52:04.698Z	2350105	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/Chaos_Cars
+2026-11-17T06:52:04.932Z	2350105	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/Ripple_Ledger
+2026-11-17T06:52:05.173Z	2350105	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/WorldEvents_V3_Ledger
+2026-11-17T06:52:05.396Z	2350105	net	allowed	POST https://api.supermemory.ai/v3/search
+2026-11-17T06:52:05.747Z	2350105	net	allowed	POST https://api.supermemory.ai/v3/documents/list
+2026-11-17T06:52:05.910Z	2350105	net	allowed	GET https://api.supermemory.ai/v3/documents/YZf85fna2bxbDzRqZ12agd
+2026-11-17T06:52:06.046Z	2350105	net	allowed	GET https://api.supermemory.ai/v3/documents/vTPmALurBkBtYznXX4HUzy
+2026-11-17T06:52:06.171Z	2350105	net	allowed	GET https://api.supermemory.ai/v3/documents/ybGyYaPGyH7P25j4twwxMj
+2026-11-17T06:52:06.286Z	2350105	net	allowed	GET https://api.supermemory.ai/v3/documents/WGWDutDcYLe53GpUVuSZFd
+2026-11-17T06:52:06.393Z	2350105	net	allowed	POST https://openrouter.ai/api/v1/chat/completions

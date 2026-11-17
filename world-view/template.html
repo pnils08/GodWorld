@@ -1357,13 +1357,15 @@ function step(dt) {
     var px = W.x; W.x += ((Math.sin(t * 0.21) * 0.45 + W.gaze * 0.1) * near - W.x) * Math.min(1, dt * 1.6 + (dt ? 0 : 1));
     W.bank = (W.bank || 0) + ((dt > 0 ? -(W.x - px) / dt * 0.05 : 0) + W.gaze * -0.0035 - (W.bank || 0)) * Math.min(1, dt * 2);
     var hx = STILL ? 0 : Math.sin(t * 1.3) * 0.018 + Math.sin(t * 2.9 + 1) * 0.008, hy = STILL ? 0 : Math.sin(t * 1.7 + 2) * 0.014 + Math.sin(t * 3.7) * 0.006;
-    camera.position.set(W.x + hx, FLY + Math.sin(t * 0.37) * 0.15 + (1 - near) * 2.2 + W.yAt(z) + hy, z);
+    // the track runs on a deck above the flight's height, so from underneath it is only a slab: the flight lifts over a crossing, easing up and back down, to see the rails and the train on it
+    var lift = 0; for (i = 0; i < W.places.length; i++) { var rp = W.places[i]; if (rp.type === 'station' || rp.type === 'rail') { var rf = Math.max(0, 1 - Math.abs(z - rp.z) / 55); lift = Math.max(lift, rf * rf * (3 - 2 * rf)); } }
+    camera.position.set(W.x + hx, FLY + Math.sin(t * 0.37) * 0.15 + (1 - near) * 2.2 + W.yAt(z) + hy + lift * 8.2, z);
     var pull = 0; for (i = 0; i < W.places.length; i++) { var pl = W.places[i]; if (pl.half >= 20 && pl.s) { var f = Math.max(0, 1 - Math.abs(z - pl.z - 26) / 34); pull += pl.s * f * f * (3 - 2 * f); } }
     // on a waterside street the flight leans toward the water, more on a tall narrow screen where it would otherwise be a sliver
     var lean = W.water ? W.water * (window.innerWidth < window.innerHeight ? 9 : 5) * near * (0.75 + 0.25 * Math.sin(t * 0.09)) : 0;
     W.look = (W.look || 0) + (pull * 17 + lean - (W.look || 0)) * Math.min(1, dt * 1.5 + (dt ? 0 : 1));
     var fwd = 20 - 5 * Math.min(1, Math.abs(W.gaze) / 5);
-    camera.lookAt(Math.sin(t * 0.13 + 1) * 2.2 * near * (1 - 0.6 * interest) + W.look + W.gaze, 2.1 + (1 - near) * 3.8 + Math.abs(W.look) * 0.25 - 0.3 * interest + W.yAt(z - fwd), z - fwd);
+    camera.lookAt(Math.sin(t * 0.13 + 1) * 2.2 * near * (1 - 0.6 * interest) + W.look + W.gaze, 2.1 + (1 - near) * 3.8 + Math.abs(W.look) * 0.25 - 0.3 * interest + W.yAt(z - fwd) + lift * 5.5, z - fwd);
     if (!STILL) camera.rotateZ(W.bank + Math.sin(t * 0.5) * 0.004);
   }
   if (DBG && DBG.cam) { camera.position.set(DBG.cam[0], DBG.cam[1], DBG.cam[2]); camera.lookAt(DBG.look[0], DBG.look[1], DBG.look[2]); }

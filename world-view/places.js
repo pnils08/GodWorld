@@ -522,6 +522,11 @@ var PLACES = {};
     var piers = [];
     [-150, -110, -75, -45, -(W + 1.6), W + 1.6, 45, 75, 110, 150].forEach(function (px) { piers.push([px, (dy - 1.4) / 2, z, 1.6, dy - 1.4, 1.6]); piers.push([px, dy - 1.8, z, 2.2, 0.9, 6]); });
     boxes(k, lam(k, [220, 0.05, 0.42]), piers, true);
+    // the track on the deck, so it reads as a railway from the air: a dark gravel bed, pale ties across it, two bright rails
+    k.box(360, 0.14, 3.4, 0, dy + 0.07, z, [28, 0.1, 0.16]);
+    var ties = []; for (var tx = -178; tx <= 178; tx += 1.1) ties.push([tx, dy + 0.19, z, 0.32, 0.1, 2.9]);
+    boxes(k, lam(k, [32, 0.3, 0.5]), ties);
+    boxes(k, lam(k, [210, 0.08, 0.78]), [[0, dy + 0.34, z + 0.8, 360, 0.16, 0.16], [0, dy + 0.34, z - 0.8, 360, 0.16, 0.16]]);
     // strip lights under the deck where it crosses the street
     k.box(14, 0.06, 0.4, 0, dy - 1.43, z + 2, [200, 0.3, 0.92], true); k.box(14, 0.06, 0.4, 0, dy - 1.43, z - 2, [200, 0.3, 0.92], true);
   }

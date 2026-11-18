@@ -4,4 +4,4 @@
 
 **NEXT[engine-sheet]:** pipeline.110 → reporters follow pipeline.111's order: he names the working example from its inventory, then the template. engine.347 Tasks 12/13 committed, not on PROD: read the stage 53 bench result, then push; Sad still owed in the classifier vocab. Council on hold. No model run without his word.
 
-**NEXT[research-build]:** No push from here (es pushes). engine.347 is all built and live (PROD stage 53 @188, classifier carries Sad); its reads are in ROLLOUT §2. Next job: engine.350 (direction, harder hits), then speed keys, engine.351. pipeline.112 → fold codex-rb's review.
+**NEXT[research-build]:** No push from here (es pushes). Reads owed are in ROLLOUT §2. Next job: engine.350 (direction, harder hits), then speed keys to the middle row, engine.351 intake. pipeline.112 → fold codex-rb's page-labels review.

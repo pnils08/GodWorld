@@ -280,6 +280,9 @@ Live C116, seen in agy's reporter-template review and re-read: `Hospital_Ledger`
 ### G-EC54 — Reporters' lookups approve no figures: 10 of 12 tool-using pieces this week [observation] [MED] (engine-sheet, 2026-11-17)
 `logs/newsroom-fanout.log` "tool facts → manifest": Mon 11-16 5 of 7 "none used", Tue 11-17 5 of 5. The promotion takes five tools only and a quote-free line with a two-word name and two figures (`scripts/livedExperiencePacketV2.js:622, 702, 724-731`). Pieces pass because Rhea checks figures against the world summary. Carried into the reporter template as a build requirement (pipeline.110, AGENT_BOOT_TEMPLATES §4).
 
+### G-EC53 — `cronDeskFilings.test.js` fails in the evening [judgment] [LOW] (research-build, 2026-11-17)
+Full suite 2026-11-17 18:30 CST: 3 of 335 files fail — `civicPetitions.test.js` and `personaProviderBrief.test.js` as before, and `scripts/cronDeskFilings.test.js` (5 assertions: "exactly 1 filing (today + other-desk excluded): got 0", then a TypeError). The test builds its "today" and "yesterday" from `new Date().toISOString()` (`:29-30`, UTC); at the run the UTC date was 2026-11-18 and the Central date 2026-11-17. Not run at another hour to confirm it passes in the day; `cron-desk-run.js` not opened. Not touched by engine.347.
+
 ## C114–C116 watch re-reads (research-build, 2026-11-16)
 
 The C113 review carried a re-reads section; C114, C115 and C116 did not, so the ROLLOUT §2 rows dated to those fires went unread. Read 2026-11-16 (builder: "whichever of these are of the greatest priority", then yes to all). Sources: **log** = `output/execution_log_c11{4,5,6}.txt` (C116 = the second fire's log); **ring** = live `Carry_Forward_Store` rows stamped 114/115/116; **dump** = `output/beats/` and `prev/`; **live** = live sheet read 2026-11-16. Each result is a measurement; good or bad is the builder's.

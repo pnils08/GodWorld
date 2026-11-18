@@ -467,6 +467,7 @@ function generateCitizensEvents_(ctx) {
   // citizens (the occupation pool is already ENGINE-only-gated downstream).
   var iOccupation = idx("Occupation");
   if (iOccupation < 0) iOccupation = idx("RoleType");
+  var iEmployerBizCond = idx("EmployerBizId");   // engine.350: the content tab's `employer` condition
   var iTierRole = idx("TierRole");
   var iType = idx("Type");
   var iUsage = idx("UsageCount"); // engine.32 T3 — fame seam (SL appearance counter)
@@ -1377,9 +1378,11 @@ function generateCitizensEvents_(ctx) {
         else if (t.op === "!=") { if (av === t.v) return false; }
         else return false;
       } else {
-        var as = String(actual).toLowerCase(), vs = String(t.v).toLowerCase();
-        if (t.op === "=") { if (as !== vs) return false; }
-        else if (t.op === "!=") { if (as === vs) return false; }
+        // engine.350: a value may list alternatives with | — "=" matches any one, "!=" none of them
+        var as = String(actual).toLowerCase(), alts = String(t.v).toLowerCase().split("|"), hit = false;
+        for (var ai = 0; ai < alts.length; ai++) { if (alts[ai].trim() === as) { hit = true; break; } }
+        if (t.op === "=") { if (!hit) return false; }
+        else if (t.op === "!=") { if (hit) return false; }
         else return false;
       }
     }
@@ -3317,6 +3320,7 @@ function generateCitizensEvents_(ctx) {
         lifestate: lifeState ? lifeState.working : "none",
         band: lifeState ? lifeState.band : ageGroup,
         occupation: occupation,
+        employer: (iEmployerBizCond >= 0 ? String(row[iEmployerBizCond] || "").trim() : ""),   // engine.350: blank fails an employer term
         tier: tier,
         heritage: (ctx._heritageTierByPop && ctx._heritageTierByPop[String(popId).trim().toUpperCase()]) || "none",
         // engine.68: fame joins the authoring surface (0 below the 25 bar)

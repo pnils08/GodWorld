@@ -984,8 +984,33 @@ function graduationCredential_(current, schoolQuality, skillTags) {
   return null; // unknown token: record the event, never overwrite what we cannot read
 }
 
+// engine.350 (builder 2026-11-18, on the citizens a youth line had blocked: "Which ever it logical to how life
+// works"): a citizen graduates once — but a first paycheck is not a commencement. Until engine.350 the youth
+// engine stamped its coming-of-age texture lines [Graduation] (for that tag's dials), so a teen who drew one
+// could never graduate (gap log C116 G-EC59: 12 citizens, two already in the window). Those seven sentences are
+// the whole set — the youth engine writes them as Personal now — and they do not count here.
+// scripts/educationTextureSign.test.js holds this list to the youth pool's coming-of-age lines.
+var COMING_OF_AGE_NOT_GRADUATION_ = [
+  "picked up the first paycheck and stood in the bank line like an adult",
+  "sat for the senior portrait and did not recognize the adult in it",
+  "stayed up past everyone talking about what comes after this",
+  "got the acceptance email at lunch and let the table read it first",
+  "drove alone for the first time and took the long way home on purpose",
+  "signed the first lease with a co-signer and a deep breath",
+  "came home for the weekend and noticed the house felt smaller"
+];
+function hasGraduated_(lifeHistory) {
+  var lines = String(lifeHistory || "").split("\n");
+  for (var i = 0; i < lines.length; i++) {
+    var at = lines[i].indexOf("[Graduation]");
+    if (at < 0) continue;
+    if (COMING_OF_AGE_NOT_GRADUATION_.indexOf(lines[i].slice(at + 12).trim()) < 0) return true;
+  }
+  return false;
+}
+
 function checkGraduation_(ctx, popId, age, lifeHistory, tier, cal) {
-  if (lifeHistory.indexOf("[Graduation]") >= 0) return null;
+  if (hasGraduated_(lifeHistory)) return null;
   if (age < AGE_RANGES.GRADUATION.min || age > AGE_RANGES.GRADUATION.max) return null;
 
   var c = 0.005;

@@ -83,6 +83,11 @@ var CONTENT_LEDGER_DSL_FIELDS = {
   lifestate:    { kind: 'enum', values: { student: 1, working: 1, retired: 1, none: 1 } },
   band:         { kind: 'enum', values: { child: 1, teen: 1, youth: 1, youngAdult: 1, adult: 1, senior: 1 } },
   occupation:   { kind: 'str' },     // citizen row Occupation (exact match, case-insensitive at eval)
+  // engine.350 (builder 2026-11-18, on who draws a line about a named workplace: "Which ever it logical to
+  // how life works"): the citizen's employer, by Business_Ledger id (the ledger's EmployerBizId). A line about
+  // badging into an office goes to the people who work there, whatever their title or their money. A str
+  // term's value may list alternatives with | (employer=BIZ-00001|BIZ-00002): any one matches.
+  employer:     { kind: 'str' },
   tier:         { kind: 'num' },     // citizen row Tier
   heritage:     { kind: 'enum', values: { none: 1, founding: 1, established: 1, prominent: 1, dynasty: 1 } },
   // engine.68 (S325): fame joins the authoring surface — the library can aim

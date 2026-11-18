@@ -1089,6 +1089,8 @@
 
 - **graduationCredential_(current, schoolQuality, skillTags)**
 
+- **hasGraduated_(lifeHistory)**
+
 - **checkGraduation_(ctx, popId, age, lifeHistory, tier, cal)**
 
 - **checkWedding_(ctx, popId, age, lifeHistory, cal, hasHousehold)**
@@ -4939,4 +4941,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 181
-**Functions mapped:** 1796
+**Functions mapped:** 1797

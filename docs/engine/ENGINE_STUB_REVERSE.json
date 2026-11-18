@@ -2,7 +2,7 @@
   "generated": "2026-11-18",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 181,
-  "functionsMapped": 1796,
+  "functionsMapped": 1797,
   "sFields": {
     "absoluteCycle": {
       "writers": [

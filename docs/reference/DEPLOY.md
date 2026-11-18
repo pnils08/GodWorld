@@ -67,7 +67,9 @@ Cloud Shell sometimes clears installed packages. If clasp fails, run `npm instal
 **Previous bench:** `SANDBOX 0908` (`1FFpUs98L0wrEcfAaQy6-Ir2xYiCq9baCc0SzqzAMrtM`) — RETIRED 2026-10-04: its script project hit Apps Script's 200-version cap (push lands, no new deployment; web app frozen @200 = `d7ac5fff`, C119). Full trail: [[DEPLOY_HISTORY]] §Retired sandboxes.
 
 
-**Live (2026-11-18, 03:48 CST):** PROD = **stage 54** = stage 53 + engine.350 (lines move a dial by what they say — Career, Education, youth, Work, Media, Money; bets by size; eleven files, `0c85bcd03`), web app **@189** — DEPLOY_HISTORY §PROD stage 54. Bench: SANDBOX 1004 **@209 = stage 54**, data synced back to live C116.
+**Live (2026-11-18, 15:37 CST):** PROD = **stage 55** = stage 54 + a coming-of-age line is not a graduation, the `employer` content condition (three files, `8252c6f57`, engine.350), web app **@190** — DEPLOY_HISTORY §PROD stage 55. Bench: SANDBOX 1004 **@210 = stage 55**, data synced back to live C116.
+
+**Previous live (2026-11-18, 03:48 CST):** PROD = **stage 54** = stage 53 + engine.350 (lines move a dial by what they say — Career, Education, youth, Work, Media, Money; bets by size; eleven files, `0c85bcd03`), web app **@189** — DEPLOY_HISTORY §PROD stage 54. Bench: SANDBOX 1004 **@209 = stage 54**, data synced back to live C116.
 
 **Previous live (2026-11-17, 18:52 CST):** PROD = **stage 53** = stage 52 + the Sad mood and the retirement echo (`utilities/citizenDialMap.js`, `utilities/compressLifeHistory.js` at `623bc326a`, engine.347 Tasks 12 and 13), web app **@188** — DEPLOY_HISTORY §PROD stage 53. Bench: SANDBOX 1004 **@208 = stage 53**, data synced back to live C116.
 

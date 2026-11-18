@@ -28,3 +28,19 @@ built tree = benched stage 54 (0c85bcd03), 11 files over stage 53
 └─ utilities/writeIntents.js
 Deployed AKfycbwUvd4TylktdE7AA8axRv-Hru55h78v1PlsOsIejWyAoQrUeYnKGq2ue-FJxPawCW-bgQ @189
 PULL-BACK: PROD = stage 54 byte for byte
+== 2026-11-18T15:37:29-06:00 PROD stage 55
+built tree = benched stage 55 (8252c6f57), 3 files over stage 54
+└─ utilities/writeIntents.js
+Deployed AKfycbwUvd4TylktdE7AA8axRv-Hru55h78v1PlsOsIejWyAoQrUeYnKGq2ue-FJxPawCW-bgQ @190
+PULL-BACK: PROD = stage 55 byte for byte
+== 2026-11-18T15:37:55-06:00 the two Baylight rows' Conditions, live tab (builder 2026-11-18: 'Which ever it logical to how life works')
+  BIZ-00001 Anthropic — AI Research, Baylight District
+  BIZ-00002 DigitalOcean — Cloud Infrastructure, Baylight District
+  BIZ-00003 Discord — Community Platform, Baylight District
+  BIZ-00004 Moltbook — Agent Communication, Baylight District
+Conditions: 2 to write (R227 R228), 0 already set -> lifestate=working; employer=BIZ-00001|BIZ-00002|BIZ-00003|BIZ-00004
+wrote 2 Conditions cells; read back OK
+== after, through the stage-55 loader
+{"rows":1149,"lines":1113,"skipped":1,"pools":158,"occupationRows":101,"occupationWithDial":94,"downRows":148,"hash":"91cdc141"}
+Conditions: 0 to write (), 2 already set -> lifestate=working; employer=BIZ-00001|BIZ-00002|BIZ-00003|BIZ-00004
+plan — nothing written

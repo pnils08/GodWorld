@@ -5,9 +5,11 @@
 # Acceptance 5: pushes per dial within 60 / 40 on every dial but fandom; band crossings; low bands; nobody pinned.
 # Copied from output/research-build/2026-11-17-e350-tab-bench.sh.
 #   bash output/research-build/2026-11-18-e350-bench.sh [fires]
+#   STAGE=55 MAN=stage55-e350b.sha256 BAYLIGHT=1 bash …-e350-bench.sh 2   # the stage-55 leg: the two Baylight rows retargeted on the BENCH tab, then who drew them
 set -uo pipefail
 cd /root/GodWorld
 N=${1:-10}
+STAGE=${STAGE:-54}; MAN=${MAN:-stage54-e350.sha256}; BAYLIGHT=${BAYLIGHT:-0}
 O=output/engine-sheet; R=output/research-build; B=1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA
 SP=$R/e350-bench-logs; mkdir -p $SP
 T=$R/2026-11-18-e350-bench.js
@@ -38,11 +40,12 @@ AIM=$(node $O/2026-10-19-aimcheck.js 2>&1 | q); echo "$AIM" | tail -1
 echo "$AIM" | grep -q "^AIM = BENCH" || { echo "HALT aim not proven"; exit 5; }
 
 PB=$(mktemp -d); ( cd $PB && printf '{"scriptId":"%s","rootDir":""}' "1gbJmGeDilxIhe25TC8SrSei89uJTEgVYgN2aOClEHHKJiykADzPVAIC2" > .clasp.json && /root/GodWorld/node_modules/.bin/clasp pull >/dev/null )
-if ( cd $PB && find . -type f ! -name .clasp.json | sort | xargs sha256sum ) | diff -q - $R/stage54-e350.sha256 >/dev/null; then echo "bench code = stage 54 (pull-back)"; else echo "HALT bench code is not stage 54"; exit 4; fi
+if ( cd $PB && find . -type f ! -name .clasp.json | sort | xargs sha256sum ) | diff -q - $R/$MAN >/dev/null; then echo "bench code = stage $STAGE (pull-back)"; else echo "HALT bench code is not stage $STAGE"; exit 4; fi
 
 prep e350
 echo "== the four paper-reader tags, bench tab only"
 node scripts/occupationDialTags.js --sheet $B --apply 2>&1 | q | grep -v "^  R" | tail -3; [ ${PIPESTATUS[0]} -eq 0 ] || { echo "HALT tags"; exit 7; }
+if [ "$BAYLIGHT" = "1" ]; then echo "== the two Baylight rows, bench tab only"; node $R/2026-11-18-e350b-baylight.js apply --sheet $B 2>&1 | q; [ ${PIPESTATUS[0]} -eq 0 ] || { echo "HALT baylight"; exit 9; }; fi
 sleep 30; node $T snap before 2>&1 | q; [ ${PIPESTATUS[0]} -eq 0 ] || { echo "HALT snap"; exit 8; }
 C0=$(cc)
 for i in $(seq 1 $N); do
@@ -54,6 +57,7 @@ sleep 30; node $T count all $(seq $(( C0 + 1 )) $C1) 2>&1 | q
 node $T bands before after 2>&1 | q
 sleep 30; node $T cells $(seq $(( C0 + 1 )) $C1) 2>&1 | q
 sleep 30; node $T cross $(seq $(( C0 + 1 )) $C1) 2>&1 | q
+if [ "$BAYLIGHT" = "1" ]; then sleep 30; node $R/2026-11-18-e350b-baylight.js who $(seq $(( C0 + 1 )) $C1) --sheet $B 2>&1 | q; fi
 sleep 30; node $T pulse 2>&1 | q
 
 echo "== final sync from live"; sleep 70; node scripts/syncSandboxFromLive.js $B --apply > $SP/final.sync.out 2>&1 || echo "HOLD final sync failed"

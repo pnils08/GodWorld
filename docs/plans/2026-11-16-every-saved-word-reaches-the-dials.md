@@ -308,6 +308,23 @@ Where the lean sits:
 | Mishaps on the board | 0 pilots; combat 4 pilots |
 | So | no night is bad on its own number; "went badly" has to be read against the other pilots of the week or against the board |
 
+### Rulings on the read (builder, 2026-11-17)
+
+Three calls put to him; his answer verbatim: "1. You ,and if possible , have grok on openrouter help In some way. That LLM has a darker side 2 . Agree and what makes them choose is up to you 3. So for context this is the most popular reality show in their world , a lot of events fire to citizens regarding their run. So a bad run would get talked about , so if each pilot gets 2 runs in a week and score 0 , that's breaking even. So 0 and below probably not good ."
+
+| Call as put | His word | Reading |
+|---|---|---|
+| 1 Who writes the missing down lines | "You", with Grok on OpenRouter helping | research-build writes them; Grok drafts, research-build cuts and signs. Bench tab first; the live tab write is many rows and waits on his go with the list |
+| 2 A bet is sized against a week of pay, three steps | "Agree"; "what makes them choose is up to you" | size = amount won or lost over one week of pay (under 10%, 10–20%, over 20%); how a citizen picks a stake is research-build's to set |
+| 3 What a bad run is | a pilot's week that scores 0 or below is not good; the city talks about a bad run | the week is the unit (a pilot's nights in one Cycle, summed). Which number is the score is not settled by his words: see the table below |
+
+A pilot's week scored both ways, all 42 pilot-weeks on disk (C103–C116; 26 of two nights, 10 of three, 6 of one):
+
+| Score read as | 0 or below | Above 0 | Since the points board (C114, 9 pilot-weeks) |
+|---|---|---|---|
+| Credits (the wager market's `credits_sign`; 0 is the push) | 20 (2 below, 18 at 0) | 22 | 7 at 0, 2 above — the board's top three all at 0 |
+| Points (what the board ranks on since C114) | 7 | 35 | 0 scored nights at 0; one week reads 0 because its points were not yet read that night |
+
 ## Tasks
 
 | # | Task | Row | Status |
@@ -383,3 +400,4 @@ agy, `output/antigravity/2026-11-16-review-dials-plan.md` (HOLD on the first cut
 - 2026-11-17 (research-build) — Builder on the two calls carried from Task 4: "1. Once 2. Yes". Tasks 12 and 13 built (`623bc326a`), benched @208 (C117 PASS, 4 of 4 planted rows moved what their tags say), LIVE PROD stage 53 @188; the classifier offers `Sad` after the deploy, gate GREEN.
 - 2026-11-17 (research-build) — Task 3 read live at the 18:15 write wake: filed rows land by the fixed tag, no graded row, grade lines stay on the pages. Acceptance 7 so far: 1 bad-event row on the live tab (`Stumble | Frustrated`, a citizen who lost a 372 stake on the UNDOCKED book) — a right read.
 - 2026-11-17 (research-build) — Builder: "Go" on engine.350. Tasks 7 and 8 read: pushes up against down per dial in the cells C113–C116, the live content tab's signed lines, every settled bet against net worth and a week of pay, UNDOCKED nights since C109. Calls put to the builder before any code: who writes the missing down lines, what a bet is sized against, what a bad run is.
+- 2026-11-17 (research-build) — Builder's rulings on the three calls recorded verbatim. Open with him: whether a pilot's week is scored on credits or on points.

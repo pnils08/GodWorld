@@ -13,8 +13,10 @@
  *   opts.limit   — at most this many (default all).
  *   opts.rows    — index rows (tests); default the index on disk.
  *
- * Only published canon pieces count. A piece with no Cycle (pre-cycle archive) sorts after
- * every Cycle-stamped piece.
+ * Every canon piece counts: printed in an edition, or passed the gate and not printed (a staged
+ * piece is canon once it passes Rhea), and lore. A piece with no Cycle (pre-cycle archive)
+ * sorts after every Cycle-stamped piece. The index is as fresh as its last build
+ * (scripts/buildArticleIndex.js --write).
  *
  * CLI: node scripts/reporterOwnPieces.js POP-00007 [--names "Keane,Dillon"] [--limit 10]
  */
@@ -54,7 +56,7 @@ function ownPieces(popid, opts) {
   const out = [];
   for (const r of rows) {
     if (r.bylinePopid !== popid) continue;
-    if (r.published !== true || r.canon !== true) continue;
+    if (r.canon !== true) continue;
     if (names.length && !matchesNames(r, names)) continue;
     const copy = (r.copies || [])[0] || {};
     out.push({
@@ -62,6 +64,7 @@ function ownPieces(popid, opts) {
       era: r.era || null,
       title: r.title || '',
       type: r.type || null,
+      printed: r.published === true,
       words: r.words || null,
       path: copy.path || null,
       citizens: (r.citizens || []).map(c => c && c.name).filter(n => n && n !== r.bylineName)

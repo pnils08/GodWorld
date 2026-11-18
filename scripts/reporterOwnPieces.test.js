@@ -21,14 +21,15 @@ const rows = [
 ];
 
 const all = ownPieces('POP-1', { rows });
-assert('only this byline, published canon', all.length === 4, all.map(p => p.title).join(','));
-assert('newest Cycle first, pre-cycle last', all.map(p => p.title).join(',') === 'Newest,Middle,Keane farewell,Old essay', all.map(p => p.title).join(','));
-assert('string Cycle read as a number', all[1].cycle === 92);
-assert('the reporter is not listed among the named', all[2].citizens.join() === 'Vinnie Keane');
+assert('only this byline, canon (printed or gate-passed)', all.length === 5, all.map(p => p.title).join(','));
+assert('newest Cycle first, pre-cycle last', all.map(p => p.title).join(',') === 'Draft,Newest,Middle,Keane farewell,Old essay', all.map(p => p.title).join(','));
+assert('string Cycle read as a number', all[2].cycle === 92);
+assert('a gate-passed piece not printed is marked unprinted', all[0].printed === false && all[1].printed === true);
+assert('the reporter is not listed among the named', all[3].citizens.join() === 'Vinnie Keane');
 const named = ownPieces('POP-1', { rows, names: ['keane'] });
 assert('names keep pieces naming them (case-blind)', named.length === 1 && named[0].title === 'Keane farewell');
 assert('limit', ownPieces('POP-1', { rows, limit: 2 }).length === 2);
-assert('format line carries the Cycle or era', /^C101 — Newest/.test(formatPieces(all)) && /pre-cycle — Old essay/.test(formatPieces(all)));
+assert('format line carries the Cycle or era', /^C110 — Draft\nC101 — Newest/.test(formatPieces(all)) && /pre-cycle — Old essay/.test(formatPieces(all)));
 
 const hal = ownPieces('POP-00007');
 assert('live index: Hal has printed pieces', hal.length > 0, String(hal.length));

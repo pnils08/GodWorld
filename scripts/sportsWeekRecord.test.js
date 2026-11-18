@@ -215,7 +215,7 @@ test('weekly win reaches issued-odds payout, CycleSettled, NetWorth and LifeHist
   assert.strictEqual(written('CycleSettled'), 404);
   assert.strictEqual(written('Payout'), 73);
   assert.strictEqual(ctx.ledger.rows[0][4], 1033); // engine.262: net win (73 payout − 40 stake), the ticket records the gross
-  assert.match(ctx.ledger.rows[0][6], /\[Casino\]/);
+  assert.match(ctx.ledger.rows[0][6], /\[Casino-Win-[SML]\] the window paid/);   // engine.350: the settled line carries its size
 });
 test('weekly loss deducts the stake and records the citizen consequence', () => {
   const { ctx, result, written } = settleWeek('H:L A:W A:W', 'W2');
@@ -224,7 +224,7 @@ test('weekly loss deducts the stake and records the citizen consequence', () => 
   assert.strictEqual(written('CycleSettled'), 404);
   assert.strictEqual(written('Payout'), 0);
   assert.strictEqual(ctx.ledger.rows[0][4], 960);
-  assert.match(ctx.ledger.rows[0][6], /\[Casino\]/);
+  assert.match(ctx.ledger.rows[0][6], /\[Casino-Loss-[SML]\] the slip came back empty/);
 });
 
 test('Node and Apps Script share weekly outcomes without mutating feed entries', () => {

@@ -437,9 +437,27 @@ function casinoStamp_(cycle) {
   return 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1);
 }
 
-function casinoLine_(status) {
-  if (status === CASINO_ST.WIN) return '[Casino] the window paid — the week changed color';
-  if (status === CASINO_ST.LOSS) return '[Casino] the slip came back empty';
+// engine.350 Task 8 (builder 2026-11-16: "winning or losing a bet is a good one that can drive up and down";
+// 2026-11-17: sized against a week of pay — "Agree"). The size of a settled bet is what it moved — the net
+// winnings, or the stake lost — as a share of one week of the bettor's pay: small under dialBetMediumPct,
+// large over dialBetLargePct, medium between (World_Config, seeded 10 and 20). No pay to measure against
+// reads large. Settled bets C107–C116 fell wins 21 / 30 / 6, losses 14 / 35 / 12.
+function casinoBetSize_(amount, weekly, mediumPct, largePct) {
+  var a = Number(amount) || 0, w = Number(weekly) || 0;
+  if (w <= 0) return 'L';
+  var share = a / w * 100;
+  if (share > largePct) return 'L';
+  if (share >= mediumPct) return 'M';
+  return 'S';
+}
+
+// The settled line carries its size as its own tag (Casino-Win-S|M|L, Casino-Loss-S|M|L — exact keys in
+// utilities/citizenDialMap.js DIAL_MAP). Before engine.350 every win and every loss was a bare [Casino]
+// read by word-match on the sentence, the same at any size. The sentence is unchanged.
+function casinoLine_(status, size) {
+  var sz = (size === 'M' || size === 'L') ? size : 'S';
+  if (status === CASINO_ST.WIN) return '[Casino-Win-' + sz + '] the window paid — the week changed color';
+  if (status === CASINO_ST.LOSS) return '[Casino-Loss-' + sz + '] the slip came back empty';
   if (status === CASINO_ST.VOID_HOUSE) return '[Casino] the window closed before the slip paid';
   return null;
 }
@@ -823,7 +841,11 @@ function processCasinoLedger_(ctx, cycle) {
         w.stake, pay, won);
       citizen.row[iNW] = money.netWorth;
       if (iDebt >= 0) citizen.row[iDebt] = money.debtLevel;
-      var lineTag = casinoLine_(won ? CASINO_ST.WIN : CASINO_ST.LOSS);
+      var betSize = casinoBetSize_(won ? casinoNetWin_(w.stake, pay) : w.stake, weekly,
+        pressureBar_(ctx, 'dialBetMediumPct'), pressureBar_(ctx, 'dialBetLargePct'));
+      var lineTag = casinoLine_(won ? CASINO_ST.WIN : CASINO_ST.LOSS, betSize);
+      results.bySize = results.bySize || { win: { S: 0, M: 0, L: 0 }, loss: { S: 0, M: 0, L: 0 } };
+      results.bySize[won ? 'win' : 'loss'][betSize]++;
       // engine.176 (S438): a loss at/over dialSetbackLossPct of what the citizen had is a Setback, not a bad night
       if (!won && nwBefore > 0 && (Number(w.stake) || 0) >= nwBefore * pressureBar_(ctx, 'dialSetbackLossPct') / 100) {
         lineTag = '[Setback] the slip came back empty — and it was most of what there was';
@@ -1033,6 +1055,8 @@ if (typeof module !== 'undefined' && module.exports) {
     casinoApplyMoney_: casinoApplyMoney_,
     casinoEligible_: casinoEligible_,
     casinoStake_: casinoStake_,
+    casinoBetSize_: casinoBetSize_,
+    casinoLine_: casinoLine_,
     casinoWagerId_: casinoWagerId_,
     casinoResolveUndocked_: casinoResolveUndocked_,
     undockedDrawCast_: undockedDrawCast_,

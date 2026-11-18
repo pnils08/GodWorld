@@ -1577,7 +1577,9 @@
 
 - **casinoStamp_(cycle)**
 
-- **casinoLine_(status)**
+- **casinoBetSize_(amount, weekly, mediumPct, largePct)**
+
+- **casinoLine_(status, size)**
 
 - **casinoCol_(header, name)**
 
@@ -4937,4 +4939,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 181
-**Functions mapped:** 1795
+**Functions mapped:** 1796

@@ -15,6 +15,12 @@ global.queueCellIntent_ = function (ctx, tab, r, c, v) {
 global.simYearOf_ = new Function(require('fs').readFileSync(require('path').resolve(__dirname, '../phase01-config/advanceSimulationCalendar.js'), 'utf8') + '\nreturn simYearOf_;')();
 
 const E = require('../phase05-citizens/casinoLedgerEngine.js');
+// engine.350: the settle reads the bet-size bars through the dial map's own World_Config reader
+const DM = require('../utilities/citizenDialMap.js');
+global.pressureBar_ = DM.pressureBar_;
+const BET_BARS = { dialBetMediumPct: 10, dialBetLargePct: 20, dialSetbackLossPct: 5 };
+// every fixture ctx carries the bars the pre-Cycle contract seeds on live (a ctx without them throws, by design)
+function runCasino_(ctx, cycle) { ctx.config = Object.assign({}, BET_BARS, ctx.config || {}); return E.processCasinoLedger_(ctx, cycle); }
 
 let failed = 0;
 function check(name, cond, detail) {
@@ -77,7 +83,7 @@ check('missing tab is no-op', (function () {
     rng: function () { return 0.99; },
     summary: {}
   };
-  var r = E.processCasinoLedger_(ctx, 105);
+  var r = runCasino_(ctx, 105);
   return r.missingTab === true && ctx.ledger.rows[0][1] === 1000;
 })());
 
@@ -105,6 +111,7 @@ const slRow = [
 ];
 
 const ctxLive = {
+  config: BET_BARS,
   ledger: { headers: slHeaders, rows: [slRow.slice()], dirty: false },
   ss: {
     getSheetByName: function (name) {
@@ -126,10 +133,37 @@ const ctxLive = {
   persist: { updates: [] }
 };
 
-const ran = E.processCasinoLedger_(ctxLive, 105);
+const ran = runCasino_(ctxLive, 105);
 check('armed tab settled', ran.settled === 1);
 check('NetWorth moved by the net win — payout less stake (engine.262)', ctxLive.ledger.rows[0][4] === 1000 + Math.round(40 * 1.83) - 40);
-check('LifeHistory got [Casino]', String(ctxLive.ledger.rows[0][6]).indexOf('[Casino]') >= 0);
+check('LifeHistory got the settled line, sized against a week of pay (a $33 net win on $1,000 a week is small)',
+  / — \[Casino-Win-S\] the window paid — the week changed color$/.test(String(ctxLive.ledger.rows[0][6])), String(ctxLive.ledger.rows[0][6]));
+check('the settle reports its sizes', ran.bySize && ran.bySize.win.S === 1 && ran.bySize.loss.S === 0);
+
+// engine.350 Task 8: a bet by its size against one week of the bettor's pay
+check('size: under 10% of a week is small', E.casinoBetSize_(99, 1000, 10, 20) === 'S');
+check('size: 10% to 20% is medium', E.casinoBetSize_(100, 1000, 10, 20) === 'M' && E.casinoBetSize_(200, 1000, 10, 20) === 'M');
+check('size: over 20% is large', E.casinoBetSize_(201, 1000, 10, 20) === 'L');
+check('size: no pay to measure against reads large', E.casinoBetSize_(50, 0, 10, 20) === 'L');
+check('size: the bars are the World_Config keys', E.casinoBetSize_(150, 1000, 20, 40) === 'S' && E.casinoBetSize_(450, 1000, 20, 40) === 'L');
+(function () {
+  const want = { 'Casino-Win-S': { composure: 2, drive: 1 }, 'Casino-Win-M': { composure: 3, drive: 1 }, 'Casino-Win-L': { composure: 4, drive: 2 },
+    'Casino-Loss-S': { composure: -3 }, 'Casino-Loss-M': { composure: -4 }, 'Casino-Loss-L': { composure: -5, drive: -1 } };
+  let okAll = true, why = '';
+  ['S', 'M', 'L'].forEach(function (sz) {
+    [['settled-win', 'Win'], ['settled-loss', 'Loss']].forEach(function (st) {
+      const line = E.casinoLine_(st[0], sz), m = /^\[([^\]]+)\] (.*)$/.exec(line);
+      const fx = DM.nudgesForEvent_(m[1], 1, m[2]);
+      if (m[1] !== 'Casino-' + st[1] + '-' + sz || JSON.stringify(fx) !== JSON.stringify(want[m[1]])) { okAll = false; why += ' ' + line + ' -> ' + JSON.stringify(fx); }
+    });
+  });
+  check('each settled line carries its size as its tag and folds what its size says', okAll, why);
+  check('small is what any bet gave before (the bare line, by word-match)',
+    JSON.stringify(DM.nudgesForEvent_('Casino', 1, 'the window paid — the week changed color')) === JSON.stringify(want['Casino-Win-S']) &&
+    JSON.stringify(DM.nudgesForEvent_('Casino', 1, 'the slip came back empty')) === JSON.stringify(want['Casino-Loss-S']));
+  check('a large loss is harder than a small one, on two dials', want['Casino-Loss-L'].composure < want['Casino-Loss-S'].composure && want['Casino-Loss-L'].drive === -1);
+  check('the voided slip keeps its bare line', E.casinoLine_('void-house', 'L') === null || /^\[Casino\] the window closed/.test(E.casinoLine_('void-house', 'L') || '[Casino] the window closed'));
+})();
 check('Tier untouched', ctxLive.ledger.rows[0][15] === '4');
 check('RoleType untouched', ctxLive.ledger.rows[0][16] === 'Clerk');
 check('CareerStage untouched', ctxLive.ledger.rows[0][17] === 'mid');
@@ -163,7 +197,7 @@ const ctxRerun = {
   rng: function () { return 0.99; },
   summary: { undockedFeedEntries: undocked, undockedPilots: {}, sportsFeedEntries: [] }
 };
-const rerun = E.processCasinoLedger_(ctxRerun, 105);
+const rerun = runCasino_(ctxRerun, 105);
 check('re-run does not double-pay', rerun.settled === 0 && ctxRerun.ledger.rows[0][4] === 1000);
 
 
@@ -250,7 +284,7 @@ const placeCtx = {
   summary: { undockedFeedEntries: [], undockedPilots: {}, sportsFeedEntries: [],
     undockedNextCast: [{ popId: 'POP-00099', name: 'Ex One', slot: 'cast-1', targetCycle: 106 }] }
 };
-const placed = E.processCasinoLedger_(placeCtx, 105);
+const placed = runCasino_(placeCtx, 105);
 const slip = (placeCtx._appends || []).filter(function (a) { return a.tab === 'Casino_Ledger'; }).map(function (a) { return a.row; })
   .filter(function (r) { return r[0] !== 'HOUSE'; })[0];
 check('show slip placed against the cast', placed.placed === 1 && !!slip);
@@ -258,7 +292,7 @@ check('show slip keyed c106:<POPID>', !!slip && slip[headers.indexOf('MarketFami
 
 const noCastCtx = { ledger: placeCtx.ledger, ss: placeCtx.ss, rng: seq([0.0, 0.1, 0.5, 0.5, 0.5, 0.0, 0.1]),
   summary: { undockedFeedEntries: [], undockedPilots: {}, sportsFeedEntries: [], undockedNextCast: [] } };
-E.processCasinoLedger_(noCastCtx, 105);
+runCasino_(noCastCtx, 105);
 const noCastSlips = (noCastCtx._appends || []).filter(function (a) { return a.tab === 'Casino_Ledger' && a.row[0] !== 'HOUSE'; });
 check('no cast → no show slip (sports only)', noCastSlips.every(function (a) { return a.row[headers.indexOf('MarketFamily')] === 'sports'; }));
 
@@ -339,7 +373,7 @@ const sportsSlipCtx = {
     { eventType: 'game-result', teamsUsed: "A's", streak: 'W3', cycle: 105, teamRecord: '100-40' }
   ], storyHooks: [] }
 };
-const sportsRan = E.processCasinoLedger_(sportsSlipCtx, 105);
+const sportsRan = runCasino_(sportsSlipCtx, 105);
 check('sports slip settles through the main entry', sportsRan.settled === 1 &&
   (sportsSlipCtx._cells || []).some(function (c) { return c.v === 'settled-win'; }));
 
@@ -377,7 +411,7 @@ const pricingCases = [
 ];
 pricingCases.forEach(function (tc) {
   var ctx = sportsPricingContext(tc[1], null, tc[2]);
-  var result = E.processCasinoLedger_(ctx, 105);
+  var result = runCasino_(ctx, 105);
   var slips = (ctx._appends || []).filter(function (a) { return a.tab === 'Casino_Ledger' && a.row[0] !== 'HOUSE'; });
   var placedSlip = slips.length === 1 ? slips[0].row : [];
   check('sports pricing: ' + tc[0], result.placed === 1 &&
@@ -391,14 +425,14 @@ const issuedSlip = {
   Side: 'win', Stake: 40, Odds: 2.52, Status: 'open'
 };
 const carriedPricingCtx = sportsPricingContext([asPricingRow, oaksPricingRow], issuedSlip);
-const carriedPricing = E.processCasinoLedger_(carriedPricingCtx, 105);
+const carriedPricing = runCasino_(carriedPricingCtx, 105);
 check('issued slip carries without repricing or replacing it', carriedPricing.carried === 1 && carriedPricing.placed === 0 &&
   !(carriedPricingCtx._cells || []).some(function (c) { return c.tab === 'Casino_Ledger' && c.r === 3; }) &&
   carriedPricingCtx.ledger.rows[0][slHeaders.indexOf('NetWorth')] === slRow[slHeaders.indexOf('NetWorth')]);
 const settledPricingCtx = sportsPricingContext([
   Object.assign({}, asPricingRow, { eventType: 'game-result', streak: 'W1' }), oaksPricingRow
 ], issuedSlip);
-const settledPricing = E.processCasinoLedger_(settledPricingCtx, 105);
+const settledPricing = runCasino_(settledPricingCtx, 105);
 check('issued slip settles at posted odds, not new market odds', settledPricing.settled === 1 &&
   (settledPricingCtx._cells || []).some(function (c) {
     return c.tab === 'Casino_Ledger' && c.r === 3 && c.c === headers.indexOf('Payout') + 1 && c.v === 101;

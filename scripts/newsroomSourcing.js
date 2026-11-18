@@ -10,7 +10,8 @@ const ROOT = path.resolve(__dirname, '..');
 // engine.299: a graded tag <Kind>-<Dial>-<Up|Down>-<S|M|L> is still its kind here; only the
 // grade is stripped, so an ungraded tag classifies exactly as before.
 const { gradedParts_ } = require('../utilities/citizenDialMap.js');
-function streetKind_(tag) { const g = gradedParts_(String(tag || '')); return g ? g.kind : tag; }
+// engine.350: a settled bet carries its size (Casino-Win-M, Casino-Loss-L) — still a Casino line.
+function streetKind_(tag) { const t = String(tag || ''); if (/^Casino-(Win|Loss)-[SML]$/.test(t)) return 'Casino'; const g = gradedParts_(t); return g ? g.kind : tag; }
 const STREET_TAGS = new Set(['Sports', 'PrevEvening', 'Media', 'Lifestyle', 'Cultural',
   'Casino', 'Holiday', 'Neighborhood', 'Weather']);
 // City employers by Business_Ledger id, with the names a story uses for them.

@@ -127,6 +127,15 @@ var DIAL_MAP = {
   'Critical':           { composure: -8, outabout: -1 },  // engine.201 ruling 2: health limits getting out
   'Hospitalized':       { composure: -6, outabout: -1 },
   'Setback':            { composure: -5 },
+  // engine.350 Task 8: a settled bet by its size against a week of the bettor's pay (casinoLedgerEngine
+  // casinoBetSize_). Small is what any bet gave before (the CONTENT_RULES word-match on a bare [Casino],
+  // kept for lines already written); medium and large hit harder, both ways.
+  'Casino-Win-S':       { composure: 2, drive: 1 },
+  'Casino-Win-M':       { composure: 3, drive: 1 },
+  'Casino-Win-L':       { composure: 4, drive: 2 },
+  'Casino-Loss-S':      { composure: -3 },
+  'Casino-Loss-M':      { composure: -4 },
+  'Casino-Loss-L':      { composure: -5, drive: -1 },
   'Recovering':         { composure: 2 },
   'Recovery':           { composure: 6 },
   'Stabilized':         { composure: 5 },

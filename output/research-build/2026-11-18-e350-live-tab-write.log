@@ -15,3 +15,16 @@ live rows=1149 authored=148 missing=0
 DRY RUN — Event_Content_Ledger not written
 tab rows 1149: to tag 0, already tagged 94, plain 7, on the tab but not listed 0, listed but not on the tab 0, conflicts 0
 dry-run — nothing written
+== 2026-11-18T03:46:35-06:00 the four paper-reader tags (source:media rows), live tab, ahead of the stage 54 deploy
+occupationDialTags: 101 occupation rows — 81 up, 13 down, 7 plain; by dial {"drive":[23,2],"composure":[12,9],"integrity":[20,0],"warmth":[14,0],"openness":[3,0],"sociability":[8,2],"outabout":[1,0]}
+                    4 paper-reader rows — 3 up, 1 down, 0 plain
+tab rows 1149: to tag 4, already tagged 94, plain 7, on the tab but not listed 0, listed but not on the tab 0, conflicts 0
+wrote 4 Tags cells; read back: tagged 98, plain 7
+== after
+{"rows":1149,"lines":1113,"skipped":1,"pools":158,"occupationRows":101,"occupationWithDial":94,"downRows":148,"hash":"91cdc141"}
+tab rows 1149: to tag 0, already tagged 98, plain 7, on the tab but not listed 0, listed but not on the tab 0, conflicts 0
+PROD pull = stage 53
+built tree = benched stage 54 (0c85bcd03), 11 files over stage 53
+└─ utilities/writeIntents.js
+Deployed AKfycbwUvd4TylktdE7AA8axRv-Hru55h78v1PlsOsIejWyAoQrUeYnKGq2ue-FJxPawCW-bgQ @189
+PULL-BACK: PROD = stage 54 byte for byte

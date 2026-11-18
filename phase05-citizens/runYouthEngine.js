@@ -529,16 +529,15 @@ function runYouthEngine_(ctx) {
     var tPrograms = programsByHood[tHood];
     if (tPrograms && tPrograms.length && rng() < 0.2) {
       var tProg = tPrograms[Math.floor(rng() * tPrograms.length)];
-      // engine.350 Task 7: a sports or civic program line carries its own sign (its text is not fixed, so the
-      // table cannot hold it; unsigned, these two kinds were never written). Arts and community_support
-      // ride kinds that carry their own dials.
+      // engine.350 Task 7: a program line carries its own sign (its text is not fixed, so the table cannot
+      // hold it; unsigned, the sports and civic ones were never written).
       var tTemplates = youthStage_(ty.age) === 'child'
         ? [{ text: 'ran the whole way to ' + tProg + ' and was still early', type: 'sports', sign: 'drive:up' },
-           { text: 'made something at ' + tProg + ' and carried it home like glass', type: 'arts' },
-           { text: 'got their name on the wall at ' + tProg, type: 'community_support' }]
+           { text: 'made something at ' + tProg + ' and carried it home like glass', type: 'arts', sign: 'openness:up' },
+           { text: 'got their name on the wall at ' + tProg, type: 'community_support', sign: 'composure:up' }]
         : [{ text: 'trained weekends at ' + tProg + ' and felt it on Monday', type: 'sports', sign: 'drive:up' },
            { text: 'volunteered a shift at ' + tProg + ' and stayed past it', type: 'civic_participation', sign: 'warmth:up' },
-           { text: 'got pulled aside at ' + tProg + ' and told to keep going', type: 'community_support' }];
+           { text: 'got pulled aside at ' + tProg + ' and told to keep going', type: 'community_support', sign: 'drive:up' }];
       var tt = tTemplates[Math.floor(rng() * tTemplates.length)];
       tType = tt.type; tText = tt.text; tSign = tt.sign || '';
     }
@@ -1026,13 +1025,17 @@ var YOUTH_DIAL_TAG = {
   academic: 'Education',
   achievement: 'Education',   // "was recognized at <program>" (the event layer's program template)
   graduation: 'Graduation',
-  coming_of_age: 'Graduation',
+  // engine.350: a coming-of-age or hard-week texture line is not a graduation or a recovery. Stamped
+  // [Graduation] it blocked the real one for good (checkGraduation_ graduates a citizen once, by that
+  // bracket) and read as a milestone to every milestone reader; [Stabilized] is the recovery after a
+  // crisis. Both are the youth's own day: Personal, signed by the line.
+  coming_of_age: 'Personal',
   sports: 'Team',
   arts: 'Cultural',
   clubs: 'Community',
   community_support: 'Community',
   civic_participation: 'Civic',
-  resilience: 'Stabilized',
+  resilience: 'Personal',
   safety_awareness: 'Neighborhood'
 };
 
@@ -1043,7 +1046,12 @@ var YOUTH_DIAL_TAG = {
 // joins them — a school line was a bare Education (drive +5, openness +3) whatever it said ("read the syllabus
 // twice and the assigned reading once" pushed drive up). A line that names a program has no fixed text: its
 // template carries its own sign (the `sign` field at the two template sites), passed as the third argument.
-var YOUTH_BARE_KINDS = { Team: true, Civic: true, Neighborhood: true, Education: true };
+// Then the rest: arts rode Cultural (openness +4, outabout +3), clubs and neighbor help rode Community
+// (sociability +4, warmth +2), coming of age rode Graduation (drive +8, openness +2), a hard week rode
+// Stabilized (composure +5) — a child's ordinary line at four to eight times an adult's, whatever it said
+// ("rewrote a text three times before sending it" was sociability +4). Every youth line is now one step on
+// the dial it names; the only kind that passes through unsigned is a real Graduation (not drawn here).
+var YOUTH_BARE_KINDS = { Team: true, Civic: true, Neighborhood: true, Education: true, Cultural: true, Community: true, Personal: true };
 var YOUTH_SIGN_BY_TEXT = {
   // child school
   'turned the walk home from school into an expedition': 'openness:up',
@@ -1064,6 +1072,65 @@ var YOUTH_SIGN_BY_TEXT = {
   'switched majors on a Tuesday and told the family on Sunday': 'openness:up',
   'got the lab slot and started showing up before the professor': 'drive:up',
   'read the syllabus twice and the assigned reading once': 'drive:down',
+  // child arts
+  'drew the whole block from memory and got most of the doors right': 'openness:up',
+  'sang the school-concert song in the shower until the house knew it too': 'openness:up',
+  'painted a mural on butcher paper across the kitchen floor': 'openness:up',
+  'made up a dance to the song from the corner store speaker and taught it at recess': 'sociability:up',
+  "took the library's craft hour seriously enough to bring their own scissors": 'drive:up',
+  'found the hidden chords on a borrowed ukulele and would not put it down': 'drive:up',
+  // child clubs
+  'built something out of nothing on the living-room floor and defended it fiercely': 'drive:up',
+  'started a club at recess with two members and a constitution': 'sociability:up',
+  'traded the good sticker for the rare one and called it a fair deal': 'sociability:up',
+  'joined the chess table at lunch and lost to the same kid four times, gladly': 'sociability:up',
+  "organized the block's kids into a parade nobody had scheduled": 'sociability:up',
+  'kept a secret code with a best friend that lasted three whole days': 'warmth:up',
+  // child, helped by a neighbor
+  'got walked to school by a neighbor when the morning went sideways': 'warmth:up',
+  'ate dinner at the family upstairs and came home with a second dessert': 'warmth:up',
+  'found the after-school room open late and a grown-up who remembered their name': 'warmth:up',
+  'got a hand with homework from the retired teacher three doors down': 'warmth:up',
+  // child, a hard week
+  'had a rough week and still showed up to the spelling bee': 'composure:up',
+  'kept the good-luck rock in a pocket through the whole hard stretch': 'composure:down',
+  'learned that a bad day ends, mostly by waiting it out on the stoop': 'composure:up',
+  // teen arts
+  'got a solo in the spring concert and told exactly one person': 'composure:up',
+  'stayed late in the art room until the janitor turned the lights off': 'drive:up',
+  'wrote a song about the block and would not play it for anyone yet': 'openness:up',
+  'shot a short film on a phone with three friends and one very patient dog': 'sociability:up',
+  'sold the first print at a street market and framed the five-dollar bill': 'drive:up',
+  'joined the drama club for the wrong reasons and stayed for the right ones': 'openness:up',
+  // teen clubs
+  'rewrote a text three times before sending it': 'composure:down',
+  'stayed out until the exact minute of curfew, not one minute past': 'outabout:up',
+  'ran the robotics meeting because the senior was out and nobody else would': 'drive:up',
+  'learned to drive in the empty lot on Sunday with a parent gripping the door': 'family:up',
+  'took the first shift at the corner store and came home with sore feet and cash': 'drive:up',
+  'spent the whole weekend on a group project that was mostly group': 'sociability:up',
+  // teen coming of age
+  'picked up the first paycheck and stood in the bank line like an adult': 'drive:up',
+  'sat for the senior portrait and did not recognize the adult in it': 'composure:down',
+  'stayed up past everyone talking about what comes after this': 'openness:up',
+  'got the acceptance email at lunch and let the table read it first': 'composure:up',
+  'drove alone for the first time and took the long way home on purpose': 'outabout:up',
+  // teen, helped
+  'got a ride to practice from a neighbor when the week fell apart': 'warmth:up',
+  'found the youth center open late and someone who asked how it was really going': 'warmth:up',
+  'had a mentor show up to the game when nobody else could': 'warmth:up',
+  "ate at a friend's table for a week and nobody made it a thing": 'warmth:up',
+  // teen, a hard week
+  'kept going to class through the worst week of the year': 'drive:up',
+  'lost the season and showed up to the banquet anyway': 'composure:up',
+  'sat with the bad news on the roof and came down with a plan': 'composure:up',
+  // college arts, clubs, coming of age
+  'put a first show up in a campus hallway and stood near it all afternoon': 'openness:up',
+  'played an open mic to eleven people and one of them clapped early': 'composure:down',
+  'joined three clubs at the fair and kept one': 'sociability:up',
+  'worked the campus job and studied on the clock when it was slow': 'drive:up',
+  'signed the first lease with a co-signer and a deep breath': 'drive:up',
+  'came home for the weekend and noticed the house felt smaller': 'family:down',
   // child sports
   'ran the bases at the park until the streetlights came on': 'drive:up',
   'learned to ride without training wheels on the flat stretch by the lake': 'drive:up',

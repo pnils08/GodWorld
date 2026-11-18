@@ -111,15 +111,26 @@ ok(school === 16 && yDown >= 3, 'school lines signed: ' + school + ', down ' + y
 ok(Y.youthWrittenTag_('Education', 'read the syllabus twice and the assigned reading once') === 'Education-Drive-Down-S', 'the minimum reads down');
 ok(Y.youthWrittenTag_('Education', 'pulled an all-nighter for the midterm and swore it was the last one') === 'Education-Composure-Down-S', 'an all-nighter reads down');
 ok(Y.youthWrittenTag_('Education', 'youth activity') === '', 'a line with no sign is not written');
-ok(Y.youthWrittenTag_('Cultural', 'anything') === 'Cultural', 'a kind with its own dials passes through');
+ok(Y.youthWrittenTag_('Graduation', 'anything') === 'Graduation', 'a real graduation passes through with its own dials');
+// every kind the texture draws is bare: a coming-of-age or hard-week line is the youth's own day, never a milestone tag
+ok(Y.YOUTH_DIAL_TAG.coming_of_age === 'Personal' && Y.YOUTH_DIAL_TAG.resilience === 'Personal', 'coming of age and a hard week are Personal');
+Object.keys(Y.YOUTH_TEXTURE_POOLS).forEach(stage => Object.keys(Y.YOUTH_TEXTURE_POOLS[stage]).forEach(type => ok(Y.YOUTH_BARE_KINDS[Y.YOUTH_DIAL_TAG[type]] === true, 'a drawn type on a fixed kind: ' + type)));
+ok(Y.youthWrittenTag_('Community', 'rewrote a text three times before sending it') === 'Community-Composure-Down-S', 'a nervous text is not sociability +4');
+ok(Y.youthWrittenTag_('Personal', 'came home for the weekend and noticed the house felt smaller') === 'Personal-Family-Down-S', 'the house felt smaller reads down on family');
+ok(Y.youthWrittenTag_('Personal', 'sat for the senior portrait and did not recognize the adult in it') === 'Personal-Composure-Down-S', 'the senior portrait is not a graduation');
+let allYouth = 0, allDown = 0;
+Object.keys(Y.YOUTH_TEXTURE_POOLS).forEach(stage => Object.keys(Y.YOUTH_TEXTURE_POOLS[stage]).forEach(type => Y.YOUTH_TEXTURE_POOLS[stage][type].forEach(t => { allYouth++; if (/-Down-S$/.test(Y.youthWrittenTag_(Y.YOUTH_DIAL_TAG[type], t))) allDown++; })));
+// and nothing in the sign table that no pool holds
+const yPooled = new Set([].concat(...Object.values(Y.YOUTH_TEXTURE_POOLS).map(st => [].concat(...Object.values(st)))));
+Object.keys(Y.YOUTH_SIGN_BY_TEXT).forEach(t => ok(yPooled.has(t), 'signed but in no youth pool: ' + t));
 
 // 7. program lines: the template's sign is the line's sign (the text is not fixed)
 ok(Y.youthWrittenTag_('Education', 'was recognized at Some Program', 'composure:up') === 'Education-Composure-Up-S', 'recognized at a program');
 ok(Y.youthWrittenTag_('Team', 'joined the Some Program season', 'sociability:up') === 'Team-Sociability-Up-S', 'joined a season');
 ok(Y.youthWrittenTag_('Team', 'joined the Some Program season', 'nonsense') === '', 'a malformed sign writes nothing');
 // every template of a bare kind in the source carries a sign field
-const templates = ysrc.match(/\{ text: '[^}]*type: '(sports|civic_participation|achievement)'[^}]*\}/g) || [];
-ok(templates.length === 7, 'bare-kind program templates found: ' + templates.length);
+const templates = ysrc.match(/\{ text: '[^}]*type: '(sports|civic_participation|achievement|arts|community_support)'[^}]*\}/g) || [];
+ok(templates.length === 10, 'program templates found: ' + templates.length);
 templates.forEach(t => ok(/sign: '[a-z]+:(up|down)'/.test(t), 'program template without a sign: ' + t));
 // the event layer: a drawn program template reaches the written line
 {
@@ -153,4 +164,4 @@ const yc = E.settleYouthCounts_([
 ok(yc.Education === 3 && yc.Team === 1 && yc.Civic === 1 && yc.Community === 1 && yc.Cultural === 1, 'graded and bare youth lines both count: ' + JSON.stringify(yc));
 ok(Object.keys(yc).length === 5, 'nothing else counted: ' + JSON.stringify(yc));
 
-console.log('educationTextureSign.test.js: ' + n + ' assertions passed — adults ' + Object.keys(SIGN).length + ' lines: ' + up + ' up, ' + down + ' down, ' + plain + ' plain; by dial ' + JSON.stringify(byDial) + '; school lines ' + school + ': ' + yUp + ' up, ' + yDown + ' down');
+console.log('educationTextureSign.test.js: ' + n + ' assertions passed — adults ' + Object.keys(SIGN).length + ' lines: ' + up + ' up, ' + down + ' down, ' + plain + ' plain; by dial ' + JSON.stringify(byDial) + '; school lines ' + school + ': ' + yUp + ' up, ' + yDown + ' down; all youth lines ' + allYouth + ', down ' + allDown);

@@ -341,17 +341,18 @@ console.log('\n9. engine.144 loop 4 — youth texture, the minors\' whole textur
     const L = (r) => String(ctx.ledger.rows[r][YH.indexOf('LifeHistory')] || '');
     if (L(0)) under5++; if (L(3)) adult++;
     for (const r of [1, 2]) { trials++; if (L(r)) { hit5to17++; if (/\(participated\)|\(recognized\)|\(completed\)/.test(L(r))) suffix++; } }
-    if (/\[Education\]/.test(L(1) + L(2))) bareEdu++;
+    if (/\[(Education|Cultural|Community|Graduation|Stabilized|Personal|Team|Civic|Neighborhood)\]/.test(L(1) + L(2))) bareEdu++;
     if (!lineChild && L(1)) lineChild = L(1).split('\n')[0]; if (!lineTeen && L(2)) lineTeen = L(2).split('\n')[0];
   }
   const rate = hit5to17 / trials;
   check('minors 5–17 draw texture at the adults\' rate (0.5–0.85 in January)', rate > 0.5 && rate < 0.85, rate.toFixed(3));
   check('under-five draws nothing; a 30-year-old draws nothing here', under5 === 0 && adult === 0, under5 + '/' + adult);
   check('no "(participated)" suffix on any line', suffix === 0, String(suffix));
-  check('no bare [Education] line on a minor in 300 runs (engine.350)', bareEdu === 0, String(bareEdu));
+  check('no bare-kind line on a minor in 300 runs — and no texture line stamped [Graduation] or [Stabilized] (engine.350)', bareEdu === 0, String(bareEdu));
   // engine.299: Team / Civic / Neighborhood alone map to {}, so the youth line carries its graded form (Team-Fandom-Up-S …).
-  // engine.350: Education too — a school line is written under the dial it moves, never a bare [Education].
-  check('lines are stamped with a routable dial tag', /^Y3C4 — \[(Cultural|Community|Graduation|Stabilized|(Education|Team|Civic|Neighborhood)-[A-Z][a-z]+-(Up|Down)-S)\] /.test(lineChild) && /^Y3C4 — \[/.test(lineTeen), lineChild + ' | ' + lineTeen);
+  // engine.350: every youth kind — a line is written under the dial it moves, never a bare kind; coming-of-age
+  // and hard-week lines are Personal, not [Graduation] / [Stabilized].
+  check('lines are stamped with a routable dial tag', /^Y3C4 — \[(Education|Team|Civic|Neighborhood|Cultural|Community|Personal)-[A-Z][a-z]+-(Up|Down)-S\] /.test(lineChild) && /^Y3C4 — \[/.test(lineTeen), lineChild + ' | ' + lineTeen);
   const tex = intents.filter(x => x.tab === 'LifeHistory_Log' && /\|texture$/.test(x.row[3]));
   const ev = intents.filter(x => x.tab === 'LifeHistory_Log' && !/\|texture$/.test(x.row[3]));
   check('log rows: texture layer carries the |texture token; event layer does not', tex.length > 0 && ev.length > 0 && tex.every(x => /^\w[\w -]*\|youth-[a-z_]+\|texture$/.test(x.row[3])), tex.length + '/' + ev.length);

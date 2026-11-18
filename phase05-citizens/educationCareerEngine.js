@@ -1008,9 +1008,13 @@ function tagsMatchCategory_(tagsStr, cat) {
 
 // Youth-history counts off a LifeHistory string: {dialTag: n} for the five
 // youth dial tags only. [Sports]/[Daily]/… are adult-deck lines, not school years.
+// A youth line of a kind that moves nothing on its own is written in the graded form
+// ([Team-Drive-Up-S] since engine.299, [Education-Drive-Up-S] since engine.350): the
+// kind is counted either way. (The bare-bracket match had stopped counting a child's
+// Team and Civic years at engine.299.)
 function settleYouthCounts_(lifeHistory) {
   var counts = {};
-  var re = /\[(Education|Team|Cultural|Civic|Community)\]/g, m;
+  var re = /\[(Education|Team|Cultural|Civic|Community)(?:-[A-Za-z]+-(?:Up|Down)-[SML])?\]/g, m;
   var s = String(lifeHistory || '');
   while ((m = re.exec(s)) !== null) counts[m[1]] = (counts[m[1]] || 0) + 1;
   return counts;

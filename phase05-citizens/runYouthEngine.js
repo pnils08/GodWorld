@@ -525,23 +525,27 @@ function runYouthEngine_(ctx) {
     if (tQoL <= 0.35 && rng() < 0.2) tType = rng() < 0.5 ? 'resilience' : 'community_support';
     else if (tHot && rng() < 0.1) tType = 'safety_awareness';
     var tText = pickYouthEvent_(tType, rng, ty.age);
+    var tSign = '';
     var tPrograms = programsByHood[tHood];
     if (tPrograms && tPrograms.length && rng() < 0.2) {
       var tProg = tPrograms[Math.floor(rng() * tPrograms.length)];
+      // engine.350 Task 7: a sports or civic program line carries its own sign (its text is not fixed, so the
+      // table cannot hold it; unsigned, these two kinds were never written). Arts and community_support
+      // ride kinds that carry their own dials.
       var tTemplates = youthStage_(ty.age) === 'child'
-        ? [{ text: 'ran the whole way to ' + tProg + ' and was still early', type: 'sports' },
+        ? [{ text: 'ran the whole way to ' + tProg + ' and was still early', type: 'sports', sign: 'drive:up' },
            { text: 'made something at ' + tProg + ' and carried it home like glass', type: 'arts' },
            { text: 'got their name on the wall at ' + tProg, type: 'community_support' }]
-        : [{ text: 'trained weekends at ' + tProg + ' and felt it on Monday', type: 'sports' },
-           { text: 'volunteered a shift at ' + tProg + ' and stayed past it', type: 'civic_participation' },
+        : [{ text: 'trained weekends at ' + tProg + ' and felt it on Monday', type: 'sports', sign: 'drive:up' },
+           { text: 'volunteered a shift at ' + tProg + ' and stayed past it', type: 'civic_participation', sign: 'warmth:up' },
            { text: 'got pulled aside at ' + tProg + ' and told to keep going', type: 'community_support' }];
       var tt = tTemplates[Math.floor(rng() * tTemplates.length)];
-      tType = tt.type; tText = tt.text;
+      tType = tt.type; tText = tt.text; tSign = tt.sign || '';
     }
     textureLines.push({
       youthName: ty.name, youthId: ty.id, age: ty.age, eventType: tType,
       description: tText, neighborhood: tHood, outcome: '', status: 'texture',
-      source: ty.source, program: '', layer: 'texture'
+      source: ty.source, program: '', layer: 'texture', sign: tSign
     });
   }
   if (textureLines.length > 0) recordYouthLifeHistory_(ctx, textureLines);
@@ -792,18 +796,22 @@ function generateYouthEventForCitizen_(youth, month, rng, qolContext, programsBy
   // together so the event stays coherent (dial tags derive from eventType).
   // Runs AFTER the QoL override so program events compose with, not under, it.
   var programName = '';
+  var programSign = '';
   var hoodPrograms = programsByHood[youth.neighborhood];
   if (hoodPrograms && hoodPrograms.length && rng() < 0.25) {
     programName = hoodPrograms[Math.floor(rng() * hoodPrograms.length)];
+    // engine.350 Task 7: each template carries its own sign (see YOUTH_BARE_KINDS) — unsigned, the
+    // sports and civic ones were never written.
     var programTemplates = [
-      { text: 'joined the ' + programName + ' season', type: 'sports' },
-      { text: 'trained weekends at ' + programName, type: 'sports' },
-      { text: 'volunteered at ' + programName, type: 'civic_participation' },
-      { text: 'was recognized at ' + programName, type: 'achievement' }
+      { text: 'joined the ' + programName + ' season', type: 'sports', sign: 'sociability:up' },
+      { text: 'trained weekends at ' + programName, type: 'sports', sign: 'drive:up' },
+      { text: 'volunteered at ' + programName, type: 'civic_participation', sign: 'warmth:up' },
+      { text: 'was recognized at ' + programName, type: 'achievement', sign: 'composure:up' }
     ];
     var pt = programTemplates[Math.floor(rng() * programTemplates.length)];
     eventType = pt.type;
     description = pt.text;
+    programSign = pt.sign;
   }
 
   // Generate outcome
@@ -823,7 +831,8 @@ function generateYouthEventForCitizen_(youth, month, rng, qolContext, programsBy
     outcome: outcome,
     status: 'occurred',
     source: youth.source,
-    program: programName
+    program: programName,
+    sign: programSign
   };
 }
 
@@ -1015,6 +1024,7 @@ function countYouthEventsByLevel_(events) {
 // describe becomes the adult the dials remember.
 var YOUTH_DIAL_TAG = {
   academic: 'Education',
+  achievement: 'Education',   // "was recognized at <program>" (the event layer's program template)
   graduation: 'Graduation',
   coming_of_age: 'Graduation',
   sports: 'Team',
@@ -1029,8 +1039,31 @@ var YOUTH_DIAL_TAG = {
 // engine.299 (builder 2026-10-18): Team / Civic / Neighborhood alone map to {} — a youth line of those kinds
 // carries the dial it moves and which way, by what the LINE says (a lost pickup game is not a win). The
 // written tag is <Kind>-<Dial>-<Up|Down>-S; a line with no sign is not written and is counted.
-var YOUTH_BARE_KINDS = { Team: true, Civic: true, Neighborhood: true };
+// engine.350 Task 7 (builder 2026-11-16: a line moves a dial by what it says, down as often as up): Education
+// joins them — a school line was a bare Education (drive +5, openness +3) whatever it said ("read the syllabus
+// twice and the assigned reading once" pushed drive up). A line that names a program has no fixed text: its
+// template carries its own sign (the `sign` field at the two template sites), passed as the third argument.
+var YOUTH_BARE_KINDS = { Team: true, Civic: true, Neighborhood: true, Education: true };
 var YOUTH_SIGN_BY_TEXT = {
+  // child school
+  'turned the walk home from school into an expedition': 'openness:up',
+  'read ahead in the chapter book and had to sit on the ending all week': 'drive:up',
+  'got the long-division thing, finally, and explained it to the cat': 'composure:up',
+  'brought home a spelling list and taped it to the fridge like a treaty': 'drive:up',
+  'asked the teacher a question nobody in the room could answer and liked that': 'openness:up',
+  'built a volcano for the science fair that erupted twice — once on purpose': 'drive:up',
+  // teen school
+  'rewrote the essay at midnight and knew the second draft was the real one': 'drive:up',
+  'stayed after class to argue a grade and left with a better question instead': 'openness:up',
+  'studied for the chemistry test on the bus and again at the kitchen table': 'drive:up',
+  'got the letter about the honors section and read it twice in the hallway': 'composure:up',
+  'crammed for finals with the whole group at the library until closing': 'sociability:up',
+  'started the college list and crossed off half of it by dinner': 'openness:down',
+  // college
+  'pulled an all-nighter for the midterm and swore it was the last one': 'composure:down',
+  'switched majors on a Tuesday and told the family on Sunday': 'openness:up',
+  'got the lab slot and started showing up before the professor': 'drive:up',
+  'read the syllabus twice and the assigned reading once': 'drive:down',
   // child sports
   'ran the bases at the park until the streetlights came on': 'drive:up',
   'learned to ride without training wheels on the flat stretch by the lake': 'drive:up',
@@ -1067,10 +1100,10 @@ var YOUTH_SIGN_BY_TEXT = {
   'walked the long, lit way home without being asked': 'composure:up',
   'texted the group when they got in, the way they had all agreed to': 'warmth:up'
 };
-function youthWrittenTag_(kind, description) {
+function youthWrittenTag_(kind, description, sign) {
   if (!YOUTH_BARE_KINDS[kind]) return kind;
-  var sg = YOUTH_SIGN_BY_TEXT[String(description || '').trim()];
-  if (!sg) return '';
+  var sg = sign || YOUTH_SIGN_BY_TEXT[String(description || '').trim()];
+  if (!/^[a-z]+:(up|down)$/.test(sg || '')) return '';
   var parts = sg.split(':');
   return kind + '-' + parts[0].charAt(0).toUpperCase() + parts[0].slice(1) + '-' + (parts[1] === 'up' ? 'Up' : 'Down') + '-S';
 }
@@ -1095,7 +1128,7 @@ function recordYouthLifeHistory_(ctx, events) {
 
   for (var i = 0; i < events.length; i++) {
     var e = events[i];
-    var dialTag = youthWrittenTag_(YOUTH_DIAL_TAG[e.eventType] || 'Education', e.description);
+    var dialTag = youthWrittenTag_(YOUTH_DIAL_TAG[e.eventType] || 'Education', e.description, e.sign);
     if (!dialTag) {                                   // engine.299: no sign in the line → not written, counted
       var S299 = ctx.summary || (ctx.summary = {});
       S299.engine299 = S299.engine299 || { noDial: 0, noDialBySource: {} };

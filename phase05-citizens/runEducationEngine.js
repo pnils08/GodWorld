@@ -111,6 +111,139 @@ var EDUCATION_TEXTURE_BESPOKE_ = {
   ]
 };
 
+// ═══════════════════════════════════════════════════════════════════════════
+// engine.350 Task 7 (builder 2026-11-16: a line moves a dial by what it says, down as often as up).
+// Every texture line this engine can draw is listed here with the one dial it moves and which way —
+// by what the line SAYS — at the everyday size (band S, 1). Before it every line was a bare
+// `Education` (drive +5, openness +3) or `Education-Cultural` (openness +5, drive +2) whatever it
+// said: "reflected inward due to tense atmosphere" pushed drive and openness up. null = a bare
+// mention with no act or reaction in it: not written, counted in S.engine299.noDialBySource (the
+// engine.299 rule: a line that moves nothing is not a line). A text missing from this table is not
+// written either and is counted as unlisted — scripts/educationTextureSign.test.js holds every pool
+// text to an entry. Same shape as CAREER_SIGN_BY_TEXT_ (runCareerEngine.js).
+// ═══════════════════════════════════════════════════════════════════════════
+var EDUCATION_SIGN_BY_TEXT_ = {
+  // base
+  "spent time learning new skills informally": "dial:drive:up",
+  "engaged lightly with educational or informational content": null,
+  "reflected on personal growth and understanding": "dial:openness:up",
+  "took small steps toward self-development": "dial:drive:up",
+  "paid closer attention to news and information this cycle": null,
+  // season
+  "read or studied indoors during winter pace": "dial:openness:up",
+  "felt renewed motivation to learn as the season shifted": "dial:drive:up",
+  "explored interests during warm-season downtime": "dial:openness:up",
+  "re-engaged in learning habits as routines returned": "dial:drive:up",
+  // weather
+  "spent time learning indoors due to rain": "dial:openness:up",
+  "focused on indoor reading during fog": "dial:openness:up",
+  "looked for shaded or quiet places to think": null,
+  "studied indoors during the cold": "dial:drive:up",
+  "stayed inside and browsed educational media": "dial:outabout:down",
+  "felt inspired to explore creative learning": "dial:openness:up",
+  "used the reflective mood for deeper reading": "dial:openness:up",
+  // a troubled week
+  "sought more information due to recent city events": "dial:composure:down",
+  "reviewed news to understand developing situations": null,
+  "felt encouraged to focus on self-improvement": "dial:drive:up",
+  "reflected inward due to tense atmosphere": "dial:composure:down",
+  "researched skills to stay competitive in uncertain times": "dial:composure:down",
+  "looked into professional development opportunities": "dial:drive:up",
+  "explored learning opportunities with optimism": "dial:openness:up",
+  // sports season
+  "took interest in learning new routines during pre-season rhythm": "dial:drive:up",
+  "engaged with sports-related media and commentary": "dial:fandom:up",
+  // calendar
+  "prepared learning materials for the new school year": "dial:drive:up",
+  "engaged with educational planning": null,
+  "explored art and cultural learning at First Friday": "dial:openness:up",
+  "engaged with local artists and their work": "dial:sociability:up",
+  "learned about Oakland's creative community": "dial:openness:up",
+  "attended an artist talk at a gallery": "dial:outabout:up",
+  "reflected on the origins of the community": null,
+  "learned about foundational history": "dial:openness:up",
+  "felt connected to deeper knowledge": "dial:composure:up",
+  "explored the meaning of beginnings": "dial:openness:up",
+  // city dynamics
+  "engaged with cultural programming and events": "dial:outabout:up",
+  "explored arts and creative learning opportunities": "dial:openness:up",
+  "participated in community learning initiatives": "dial:sociability:up",
+  "engaged with neighborhood education programs": null,
+  // by hood character
+  "visited a public reading room near the civic offices": "dial:outabout:up",
+  "attended a public information session": "dial:outabout:up",
+  "read up on health topics at a community clinic": null,
+  "attended a wellness workshop nearby": "dial:outabout:up",
+  "visited the neighborhood school library": "dial:outabout:up",
+  "attended a parent-and-community learning night": "dial:sociability:up",
+  "sat in on an open campus lecture": "dial:openness:up",
+  "browsed the campus bookstore": "dial:outabout:up",
+  "read during the commute": null,
+  "picked up a course flyer near the station": null,
+  "attended an evening talk at a local venue": "dial:outabout:up",
+  "learned something from a late-night conversation": "dial:sociability:up",
+  "attended a professional development session nearby": "dial:drive:up",
+  "browsed a bookstore along the avenue": "dial:outabout:up",
+  "studied quietly at home": "dial:drive:up",
+  "visited the nearest library branch": "dial:outabout:up",
+  "browsed a bookstore between the shops": "dial:outabout:up",
+  "attended a workshop hosted by a local store": "dial:outabout:up",
+  "attended a public health talk at the hospital": "dial:outabout:up",
+  "read up on a medical topic nearby": null,
+  "learned from an elder in the neighborhood": "dial:warmth:up",
+  "attended a cultural learning event on the market street": "dial:outabout:up",
+  "studied at the corner cafe": "dial:drive:up",
+  "attended a community class on the block": "dial:sociability:up",
+  "visited the village library branch": "dial:outabout:up",
+  "attended a small-group class nearby": "dial:sociability:up",
+  "took a night class after a shift": "dial:drive:up",
+  "learned a new skill on the job": "dial:drive:up",
+  "attended an arts workshop on the corridor": "dial:outabout:up",
+  "learned about murals and printmaking informally": "dial:openness:up",
+  "attended a youth program hosted at the arena": "dial:outabout:up",
+  "learned about the district's development plan": null,
+  "attended a trades training session nearby": "dial:drive:up",
+  "learned about the neighborhood's build-out": null,
+  // bespoke hoods
+  "browsed the Temescal library branch": "dial:outabout:up",
+  "attended a community workshop in Temescal": "dial:sociability:up",
+  "visited the main Oakland library Downtown": "dial:outabout:up",
+  "attended a public lecture in the city center": "dial:outabout:up",
+  "participated in community education programs": "dial:sociability:up",
+  "engaged with cultural learning opportunities": null,
+  "read by Lake Merritt during a break": "dial:outabout:up",
+  "attended a lakeside community event": "dial:sociability:up",
+  "explored local history and development topics": "dial:openness:up",
+  "learned about neighborhood changes": null,
+  "visited the Laurel library branch": "dial:outabout:up",
+  "engaged in quiet study at home": "dial:drive:up",
+  "browsed bookstores in Rockridge": "dial:outabout:up",
+  "attended an educational event nearby": "dial:outabout:up",
+  "explored arts education in Jack London": "dial:openness:up",
+  "attended a creative workshop": "dial:openness:up",
+  "attended an arts lecture in Uptown": "dial:outabout:up",
+  "explored gallery exhibitions for learning": "dial:outabout:up",
+  "engaged with urban arts education": null,
+  "learned about street art and muralism": "dial:openness:up",
+  "attended a DIY workshop in KONO": "dial:drive:up",
+  "explored creative skills informally": "dial:openness:up",
+  "learned about Chinese culture and history": "dial:openness:up",
+  "engaged with multilingual community resources": null,
+  "explored cultural heritage topics": "dial:openness:up",
+  "browsed independent bookstores on Piedmont Ave": "dial:outabout:up",
+  "attended a neighborhood lecture": "dial:outabout:up",
+  "engaged in quiet reading at a local cafe": "dial:outabout:up"
+};
+
+// The tag a texture line is written under: Education-<Dial>-<Up|Down>-S, or '' (not written).
+// why: 'plain' (listed null) | 'unlisted' (no entry) — the counter key.
+function educationTextureTag_(text) {
+  if (!EDUCATION_SIGN_BY_TEXT_.hasOwnProperty(text)) return { tag: '', why: 'unlisted' };
+  var m = /^dial:([a-z]+):(up|down)$/.exec(EDUCATION_SIGN_BY_TEXT_[text] || '');
+  if (!m) return { tag: '', why: 'plain' };
+  return { tag: 'Education-' + m[1].charAt(0).toUpperCase() + m[1].slice(1) + '-' + (m[2] === 'up' ? 'Up' : 'Down') + '-S', why: '' };
+}
+
 function runEducationEngine_(ctx) {
 
   var rng = safeRand_(ctx);
@@ -163,7 +296,8 @@ function runEducationEngine_(ctx) {
   // Use simYear or calculate from cycle (52 cycles = 1 year)
   var simYear = simYearOf_(ctx, cycle);
 
-  var count = 0;
+  var count = 0;   // draws, against LIMIT
+  var written = 0; // lines written (engine.350: a plain or unlisted draw writes nothing)
   var LIMIT = 10;
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -420,16 +554,20 @@ function runEducationEngine_(ctx) {
     var pick = pool[Math.floor(rng() * pool.length)];
     var stamp = inWorldStamp_(ctx);
 
-    // Determine event tag (v2.2)
-    var eventTag = "Education";
-    if (firstFridayEdu.indexOf(pick) >= 0) {
-      eventTag = "Education-FirstFriday";
-    } else if (creationDayEdu.indexOf(pick) >= 0) {
-      eventTag = "Education-CreationDay";
-    } else if (holidayEdu.indexOf(pick) >= 0) {
-      eventTag = "Education-Holiday";
-    } else if (culturalEdu.indexOf(pick) >= 0) {
-      eventTag = "Education-Cultural";
+    // engine.350 Task 7: the drawn line is written under the dial it moves and which way, by what it
+    // says (EDUCATION_SIGN_BY_TEXT_, file scope), at the everyday size — or it is not written. The
+    // draw is never rerolled, so the dice run as before; a line not written still counts against LIMIT.
+    // (Was: bare Education / -FirstFriday / -CreationDay / -Holiday = drive +5, openness +3;
+    // Education-Cultural = openness +5, drive +2.)
+    var signed = educationTextureTag_(pick);
+    var eventTag = signed.tag;
+    if (!eventTag) {
+      S.engine299 = S.engine299 || { noDial: 0, noDialBySource: {} };
+      S.engine299.noDial++;
+      var eKey = 'runEducationEngine:Education:' + signed.why;
+      S.engine299.noDialBySource[eKey] = (S.engine299.noDialBySource[eKey] || 0) + 1;
+      count++;
+      continue;
     }
 
     var existing = row[iLife] ? row[iLife].toString() : "";
@@ -437,6 +575,7 @@ function runEducationEngine_(ctx) {
 
     row[iLife] = existing ? existing + "\n" + line : line;
     row[iLastUpd] = ctx.now;
+    written++;
 
     if (logSheet) {
       logSheet.appendRow([
@@ -456,12 +595,12 @@ function runEducationEngine_(ctx) {
   }
 
   // Phase 42 §5.6: flip ctx.ledger.dirty; consolidated commit at Phase 10.
-  if (count > 0) {
+  if (written > 0) {
     ctx.ledger.dirty = true;
   }
 
-  // Summary
-  S.educationEvents = count;
+  // Summary (lines written; a plain draw is counted in S.engine299.noDialBySource)
+  S.educationEvents = written;
   ctx.summary = S;
 }
 
@@ -471,13 +610,12 @@ function runEducationEngine_(ctx) {
  * EDUCATION EVENT REFERENCE
  * ============================================================================
  * 
- * Event Tags:
- * - Education: Base learning events
- * - Education-FirstFriday: Art and cultural learning
- * - Education-CreationDay: Foundational reflection
- * - Education-Holiday: Holiday-specific learning
- * - Education-Cultural: Cultural programming
- * 
+ * Event Tags (engine.350 Task 7):
+ * - Education-<Dial>-<Up|Down>-S: one dial, one step, by what the line says
+ *   (EDUCATION_SIGN_BY_TEXT_); a plain line is not written.
+ * - The bare Education / Education-Cultural keys stay in the dial map for the
+ *   authored essence rows; this engine no longer writes them.
+ *
  * Holiday Education Focus:
  * - BackToSchool: Educational preparation
  * 

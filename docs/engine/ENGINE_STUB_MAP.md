@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-11-17 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-11-18 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -2699,9 +2699,11 @@
   RNG: ctx.rng / safeRand_(ctx)
 
 ### runEducationEngine.js
+- **educationTextureTag_(text)**
+
 - **runEducationEngine_(ctx)**
-  Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsAtmosphereEnabled, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
-  Writes: S.educationEvents, S.eventsGenerated
+  Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.economicMood, S.engine299, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsAtmosphereEnabled, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
+  Writes: S.educationEvents, S.engine299, S.eventsGenerated
   Config: ctx.config.cycleCount
   Sheets: LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
@@ -2784,7 +2786,7 @@
 
 - **countYouthEventsByLevel_(events)**
 
-- **youthWrittenTag_(kind, description)**
+- **youthWrittenTag_(kind, description, sign)**
 
 - **recordYouthLifeHistory_(ctx, events)**
   Reads: S.absoluteCycle
@@ -4935,4 +4937,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 181
-**Functions mapped:** 1794
+**Functions mapped:** 1795

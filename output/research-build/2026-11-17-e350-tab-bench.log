@@ -1,0 +1,88 @@
+AIM = BENCH (script read the bench marker)
+bench code = stage 53 (pull-back)
+=== leg ctl: the tab as on live
+== sync from live (ctl)
+  verify Story_Hook_Deck: bench 2221 rows vs live 2221 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+{"fireGuardMinutes":"0","cycleCountFormatted":"116","cycleCountIsNumber":true}
+door: {"target":"bench","http":200,"ok":true,"record":{"cycle":117,"startedMs":1794962643889,"state":"done","finishedMs":1794962832605},"raw":"{\"cycle\":117,\"startedMs\":1794962643889,\"state\":\"done\",\
+clearfire 117: {"ok":true,"cleared":{"cycle":117,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+-- pause 75 s (read quota)
+Edition_Coverage_Ratings C116: 7 rows (window 115,114,113,112,111,110,109,108)
+Citizen_Media_Usage C116: 27 rows from live C115
+Oakland_Sports_Feed C117: 0 rows
+appended 7 to Edition_Coverage_Ratings; marked rows on the tab now 7
+appended 27 to Citizen_Media_Usage; marked rows on the tab now 27
+bench cycleCount 116
+fire C117 rc=0 "verdict": "PASS" "wallS": 206
+Edition_Coverage_Ratings C117: 7 rows (window 115,114,113,112,111,110,109,108)
+Citizen_Media_Usage C117: 36 rows from live C115
+Oakland_Sports_Feed C118: 2 rows
+appended 7 to Edition_Coverage_Ratings; marked rows on the tab now 14
+appended 36 to Citizen_Media_Usage; marked rows on the tab now 63
+appended 2 to Oakland_Sports_Feed; marked rows on the tab now 2
+bench cycleCount 117
+fire C118 rc=0 "verdict": "PASS" "wallS": 243
+count ctl C117,118: 4464 lines on 1059 citizens, 1820 from the tab, 4418 move a dial; Engine_Errors rows 9
+  drive        365 / 42 (90% up) | tab 65/1 code 300/41
+  sociability  708 / 0 (100% up) | tab 355/0 code 353/0
+  warmth       323 / 0 (100% up) | tab 81/0 code 242/0
+  openness     543 / 129 (81% up) | tab 185/129 code 358/0
+  composure    589 / 488 (55% up) | tab 246/98 code 343/390
+  integrity    111 / 2 (98% up) | tab 61/0 code 50/2
+  family       183 / 58 (76% up) | tab 46/12 code 137/46
+  outabout     549 / 178 (76% up) | tab 239/17 code 310/161
+  fandom       397 / 46 (90% up) | tab 292/0 code 105/46
+  down-pool lines by dial: {}
+=== leg rows: the tab + the 148 down lines
+== sync from live (rows)
+  verify Story_Hook_Deck: bench 2221 rows vs live 2221 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+{"fireGuardMinutes":"0","cycleCountFormatted":"116","cycleCountIsNumber":true}
+door: {"target":"bench","http":200,"ok":true,"record":{"cycle":118,"startedMs":1794978405562,"state":"done","finishedMs":1794978641390},"raw":"{\"cycle\":118,\"startedMs\":1794978405562,\"state\":\"done\",\
+clearfire 118: {"ok":true,"cleared":{"cycle":118,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+-- pause 75 s (read quota)
+apply: bench rows 1001 -> 1149 (appended 148); down.* rows read back 148; live rows 1001 -> 1001
+Edition_Coverage_Ratings C116: 7 rows (window 115,114,113,112,111,110,109,108)
+Citizen_Media_Usage C116: 27 rows from live C115
+Oakland_Sports_Feed C117: 0 rows
+appended 7 to Edition_Coverage_Ratings; marked rows on the tab now 7
+appended 27 to Citizen_Media_Usage; marked rows on the tab now 27
+bench cycleCount 116
+fire C117 rc=0 "verdict": "PASS" "wallS": 222
+Edition_Coverage_Ratings C117: 7 rows (window 115,114,113,112,111,110,109,108)
+Citizen_Media_Usage C117: 36 rows from live C115
+Oakland_Sports_Feed C118: 2 rows
+appended 7 to Edition_Coverage_Ratings; marked rows on the tab now 14
+appended 36 to Citizen_Media_Usage; marked rows on the tab now 63
+appended 2 to Oakland_Sports_Feed; marked rows on the tab now 2
+bench cycleCount 117
+fire C118 rc=0 "verdict": "PASS" "wallS": 191
+count rows C117,118: 4535 lines on 1061 citizens, 2235 from the tab, 4486 move a dial; Engine_Errors rows 9
+  drive        359 / 115 (76% up) | tab 77/84 code 282/31
+  sociability  618 / 86 (88% up) | tab 327/86 code 291/0
+  warmth       280 / 79 (78% up) | tab 75/79 code 205/0
+  openness     458 / 198 (70% up) | tab 163/198 code 295/0
+  composure    530 / 452 (54% up) | tab 255/75 code 275/377
+  integrity    88 / 77 (53% up) | tab 55/76 code 33/1
+  family       152 / 134 (53% up) | tab 42/86 code 110/48
+  outabout     541 / 225 (71% up) | tab 243/86 code 298/139
+  fandom       342 / 29 (92% up) | tab 237/0 code 105/29
+  down-pool lines by dial: {"openness":79,"outabout":79,"drive":80,"warmth":79,"family":80,"sociability":86,"integrity":76}
+cmp ctl -> rows: lines 4464 -> 4535; from the tab 1820 -> 2235; Engine_Errors 9 -> 9
+  drive        365/42 (90% up) -> 359/115 (76% up)
+  sociability  708/0 (100% up) -> 618/86 (88% up)
+  warmth       323/0 (100% up) -> 280/79 (78% up)
+  openness     543/129 (81% up) -> 458/198 (70% up)
+  composure    589/488 (55% up) -> 530/452 (54% up)
+  integrity    111/2 (98% up) -> 88/77 (53% up)
+  family       183/58 (76% up) -> 152/134 (53% up)
+  outabout     549/178 (76% up) -> 541/225 (71% up)
+  fandom       397/46 (90% up) -> 342/29 (92% up)
+  down-pool lines: {"openness":79,"outabout":79,"drive":80,"warmth":79,"family":80,"sociability":86,"integrity":76}
+== final sync from live
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+e350 tab bench done
+exit 0

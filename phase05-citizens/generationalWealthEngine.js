@@ -475,11 +475,15 @@ function processMoneyLoop_(ctx, cycle) {
       results.expense++;
       if (nwNew >= hit) {
         nwNew -= hit;
-        shockLine = '[Money] an unplanned $' + hit + ' week — savings took the hit';
+        // engine.350 Task 7: each money line below is written under the dial it moves and which way, sized by
+        // the fact (S a week absorbed, M a debt taken or cleared, L a default). Unmapped, [Money] fell to the
+        // word-match and six of these shapes moved nothing (debt cleared, borrowed, defaulted ...). The windfall
+        // and the two mobility lines keep their bare [Money] and their own rules in the dial map.
+        shockLine = '[Money-Composure-Down-S] an unplanned $' + hit + ' week — savings took the hit';
       } else {
         nwNew = 0;
         if (iDebt >= 0 && debt < DEBT_TOP) debt++;
-        shockLine = '[Money] the bad week cost more than the savings could hold — borrowed to cover it';
+        shockLine = '[Money-Composure-Down-M] the bad week cost more than the savings could hold — borrowed to cover it';
         shockHook = 'MONEY_SHOCK';
       }
     } else if (shockRoll < SHOCK_EXPENSE_P + SHOCK_WINDFALL_P) {
@@ -492,11 +496,11 @@ function processMoneyLoop_(ctx, cycle) {
     // The week's line, read off where the level ended: a rise is the start of the
     // chain (and its peak at 5), a level cleared to zero is one of its ends.
     if (debt > debtBefore) {
-      if (debt >= 5) { line = '[Money] the debts crossed a line this week — sleep comes harder now'; hook = 'DEBT_CRISIS'; }
+      if (debt >= 5) { line = '[Money-Composure-Down-M] the debts crossed a line this week — sleep comes harder now'; hook = 'DEBT_CRISIS'; }
       else if (shockHook) { line = shockLine; hook = shockHook; }
-      else line = '[Money] borrowed against tomorrow to keep the household afloat';
+      else line = '[Money-Composure-Down-S] borrowed against tomorrow to keep the household afloat';
     } else if (debt === 0 && debtBefore > 0) {
-      line = '[Money] the last debt cleared — the ledger finally reads clean';
+      line = '[Money-Composure-Up-M] the last debt cleared — the ledger finally reads clean';
     }
     if (!line && shockLine) { line = shockLine; hook = shockHook; }
 
@@ -520,14 +524,14 @@ function processMoneyLoop_(ctx, cycle) {
       if (iWealthD >= 0) {
         row[iWealthD] = deriveWealthLevel_(income, iInherD >= 0 ? (Number(row[iInherD]) || 0) : 0, 0, debt);
       }
-      line = '[Money] defaulted on the debts — the savings are gone and the record carries it';
+      line = '[Money-Composure-Down-L] defaulted on the debts — the savings are gone and the record carries it';
       hook = 'DEBT_DEFAULT';
     }
 
     // milestone: first crossing of 100k lived wealth
     if (!line && nw < NETWORTH_MILESTONE && nwNew >= NETWORTH_MILESTONE &&
         String(row[iLife] || '').indexOf('crossed six figures') < 0) {
-      line = '[Money] savings crossed six figures — years of steady weeks did that';
+      line = '[Money-Drive-Up-M] savings crossed six figures — years of steady weeks did that';
       hook = 'MONEY_MILESTONE';
     }
 
@@ -549,9 +553,9 @@ function processMoneyLoop_(ctx, cycle) {
         ctx.summary.storyHooks.push({
           hookType: hook,
           severity: 3, priority: 3,
-          description: ((row[idx('First')] || '') + ' ' + (row[idx('Last')] || '')).trim() + ' — ' + line.replace('[Money] ', ''),
+          description: ((row[idx('First')] || '') + ' ' + (row[idx('Last')] || '')).trim() + ' — ' + line.replace(/^\[Money[^\]]*\] /, ''),
           cycleGenerated: cycle, neighborhood: row[idx('Neighborhood')] || '',
-          domain: 'COMMUNITY', text: line.replace('[Money] ', '')
+          domain: 'COMMUNITY', text: line.replace(/^\[Money[^\]]*\] /, '')
         });
       }
     }
@@ -1718,7 +1722,7 @@ function trackWealthMobility_(ctx, cycle, prevLevels) {
     if (delta > 0) results.up++; else results.down++;
     var life = String(row[iLife] || '');
     // engine.60 display bound holds: one [Money] line per citizen per cycle.
-    if (life.indexOf(stamp + ' — [Money]') >= 0) continue;
+    if (life.indexOf(stamp + ' — [Money') >= 0) continue;   // engine.350: a graded money line ([Money-Composure-Down-S] ...) counts
     var line = delta > 0 ?
       '[Money] moved up in the world — the ledger says so' :
       '[Money] the ground gave a little — ' + Math.abs(delta) + ' rungs down in one season';
@@ -1728,9 +1732,9 @@ function trackWealthMobility_(ctx, cycle, prevLevels) {
       hookType: 'WEALTH_MOBILITY',
       severity: 4, priority: 3,
       description: ((row[idx('First')] || '') + ' ' + (row[idx('Last')] || '')).trim() +
-        ' — ' + line.replace('[Money] ', '') + ' (' + prev + '→' + now + ')',
+        ' — ' + line.replace(/^\[Money[^\]]*\] /, '') + ' (' + prev + '→' + now + ')',
       cycleGenerated: cycle, neighborhood: row[idx('Neighborhood')] || '',
-      domain: 'COMMUNITY', text: line.replace('[Money] ', '')
+      domain: 'COMMUNITY', text: line.replace(/^\[Money[^\]]*\] /, '')
     });
   }
 

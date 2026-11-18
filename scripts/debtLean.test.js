@@ -148,6 +148,7 @@ console.log('═══ 4 — the loop: lean');
   var res = E.processMoneyLoop_(ctx, CY);
   assert('4.1 under the line a low roll adds a level', debtOf(r[0]) === 3 && res.leanUp === 1 && res.debtUp === 1);
   assert('4.2 the rise writes the borrowed line, no hook', lifeOf(r[0]).indexOf('borrowed against tomorrow') >= 0 && !(ctx.summary.storyHooks || []).length);
+  assert('4.2b engine.350: the borrowed line is written under its dial, one step down on composure', / — \[Money-Composure-Down-S\] borrowed against tomorrow to keep the household afloat$/.test(lifeOf(r[0])), lifeOf(r[0]));
 
   r = [row('POP-A', { nw: 0, debt: 2, sav: 0 })];
   ctx = makeCtx(r, [0.021]); E.processMoneyLoop_(ctx, CY);
@@ -157,6 +158,10 @@ console.log('═══ 4 — the loop: lean');
   ctx = makeCtx(r, [0]); E.processMoneyLoop_(ctx, CY);
   assert('4.4 a rise landing at 5 writes the peak line and its hook',
     debtOf(r[0]) === 5 && lifeOf(r[0]).indexOf('crossed a line') >= 0 && ctx.summary.storyHooks[0].hookType === 'DEBT_CRISIS');
+  assert('4.4b engine.350: the peak line is graded M; the hook carries the sentence without the bracket',
+    lifeOf(r[0]).indexOf(' — [Money-Composure-Down-M] the debts crossed a line this week') >= 0 &&
+    ctx.summary.storyHooks[0].text === 'the debts crossed a line this week — sleep comes harder now' && ctx.summary.storyHooks[0].description.indexOf('[') < 0,
+    ctx.summary.storyHooks[0].text);
 
   // over the line
   r = [row('POP-A', { nw: 500000, debt: 3, sav: 0 })];
@@ -168,6 +173,7 @@ console.log('═══ 4 — the loop: lean');
   ctx = makeCtx(r, [0]); E.processMoneyLoop_(ctx, CY);
   assert('4.6 the last level off writes the cleared line (it never fired before: needed 3 levels in one week)',
     debtOf(r[0]) === 0 && lifeOf(r[0]).indexOf('last debt cleared') >= 0);
+  assert('4.6b engine.350: the cleared line is composure up, M', lifeOf(r[0]).indexOf(' — [Money-Composure-Up-M] the last debt cleared') >= 0, lifeOf(r[0]));
 
   // the lean never runs against the line
   r = [row('POP-A', { nw: 500000, debt: 3, sav: 0 }), row('POP-B', { nw: 0, debt: 3, sav: 0 })];

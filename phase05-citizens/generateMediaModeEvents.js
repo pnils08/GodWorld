@@ -116,28 +116,28 @@ function generateMediaModeEvents_(ctx) {
     var pool = [];
 
     pool.push(
-      ev("reviewed the morning budget meeting and reassigned two stories", ["media:editor", "type:editorial"], "Media"),
-      ev("held the front page for a developing story", ["media:editor", "type:editorial"], "Media"),
-      ev("pushed back on a draft that didn't meet standards", ["media:editor", "type:editorial"], "Media"),
-      ev("spent twenty minutes on the phone with a source who wouldn't go on record", ["media:editor", "type:sourcing"], "Media"),
-      ev("wrote a note to the newsroom about maintaining accuracy under deadline", ["media:editor", "type:leadership"], "Media"),
+      ev("reviewed the morning budget meeting and reassigned two stories", ["dial:drive:up", "media:editor", "type:editorial"], "Media"),
+      ev("held the front page for a developing story", ["dial:composure:up", "media:editor", "type:editorial"], "Media"),
+      ev("pushed back on a draft that didn't meet standards", ["dial:integrity:up", "media:editor", "type:editorial"], "Media"),
+      ev("spent twenty minutes on the phone with a source who wouldn't go on record", ["dial:composure:down", "media:editor", "type:sourcing"], "Media"),
+      ev("wrote a note to the newsroom about maintaining accuracy under deadline", ["dial:integrity:up", "media:editor", "type:leadership"], "Media"),
       ev("reviewed subscription numbers with the business side", ["media:editor", "type:business"], "Media")
     );
 
     // Civic activity = editorial pressure
     if (votesThisCycle.length > 0) {
       var vote = votesThisCycle[0];
-      pool.push(ev("assigned additional coverage to the " + vote.name + " outcome", ["media:editor", "type:assignment", "initiative:" + vote.name], "Media"));
+      pool.push(ev("assigned additional coverage to the " + vote.name + " outcome", ["dial:drive:up", "media:editor", "type:assignment", "initiative:" + vote.name], "Media"));
     }
 
     if (civicLoad === "load-strain") {
-      pool.push(ev("felt the weight of covering too many stories with too few reporters", ["media:editor", "type:strain"], "Media"));
+      pool.push(ev("felt the weight of covering too many stories with too few reporters", ["dial:composure:down", "media:editor", "type:strain"], "Media"));
     }
 
     if (sentiment < -0.3) {
-      pool.push(ev("considered how the Tribune should frame the city's frustration", ["media:editor", "type:editorial"], "Media"));
+      pool.push(ev("considered how the Tribune should frame the city's frustration", ["dial:openness:up", "media:editor", "type:editorial"], "Media"));
     } else if (sentiment > 0.3) {
-      pool.push(ev("looked for the story beneath the good news", ["media:editor", "type:editorial"], "Media"));
+      pool.push(ev("looked for the story beneath the good news", ["dial:openness:up", "media:editor", "type:editorial"], "Media"));
     }
 
     return pool;
@@ -147,22 +147,22 @@ function generateMediaModeEvents_(ctx) {
     var pool = [];
 
     pool.push(
-      ev("stared at a blank page for twenty minutes before the column came", ["media:columnist", "type:writing"], "Media"),
-      ev("filed a column that landed harder than expected", ["media:columnist", "type:writing"], "Media"),
-      ev("argued with an editor about word count", ["media:columnist", "type:internal"], "Media"),
+      ev("stared at a blank page for twenty minutes before the column came", ["dial:composure:down", "media:columnist", "type:writing"], "Media"),
+      ev("filed a column that landed harder than expected", ["dial:drive:up", "media:columnist", "type:writing"], "Media"),
+      ev("argued with an editor about word count", ["dial:warmth:down", "media:columnist", "type:internal"], "Media"),
       ev("reread old columns looking for a thread to pull", ["dial:openness:up", "media:columnist", "type:reflection"], "Personal"),
-      ev("took notes at the game, listening to the crowd more than the commentary", ["media:columnist", "type:observation"], "Media")
+      ev("took notes at the game, listening to the crowd more than the commentary", ["dial:openness:up", "media:columnist", "type:observation"], "Media")
     );
 
     if (sportsSeason !== "off-season") {
       pool.push(
-        ev("worked on a piece connecting the team's season to something larger", ["media:columnist", "type:sports"], "Media"),
-        ev("watched film of the last series, looking for the detail everyone missed", ["media:columnist", "type:sports"], "Media")
+        ev("worked on a piece connecting the team's season to something larger", ["dial:openness:up", "media:columnist", "type:sports"], "Media"),
+        ev("watched film of the last series, looking for the detail everyone missed", ["dial:drive:up", "media:columnist", "type:sports"], "Media")
       );
     }
 
     if (sentiment < -0.3) {
-      pool.push(ev("wrote about what the city doesn't want to hear", ["media:columnist", "type:editorial"], "Media"));
+      pool.push(ev("wrote about what the city doesn't want to hear", ["dial:integrity:up", "media:columnist", "type:editorial"], "Media"));
     }
 
     return pool;
@@ -172,11 +172,11 @@ function generateMediaModeEvents_(ctx) {
     var pool = [];
 
     pool.push(
-      ev("chased a lead that turned into two more leads", ["media:reporter", "type:sourcing"], "Media"),
-      ev("spent the afternoon at City Hall waiting for a comment", ["media:reporter", "type:reporting"], "Media"),
-      ev("filed a story under deadline with three minutes to spare", ["media:reporter", "type:deadline"], "Media"),
-      ev("cultivated a new source over coffee", ["media:reporter", "type:sourcing"], "Media"),
-      ev("fact-checked a tip that turned out to be half-true", ["media:reporter", "type:verification"], "Media")
+      ev("chased a lead that turned into two more leads", ["dial:drive:up", "media:reporter", "type:sourcing"], "Media"),
+      ev("spent the afternoon at City Hall waiting for a comment", ["dial:composure:down", "media:reporter", "type:reporting"], "Media"),
+      ev("filed a story under deadline with three minutes to spare", ["dial:composure:up", "media:reporter", "type:deadline"], "Media"),
+      ev("cultivated a new source over coffee", ["dial:sociability:up", "media:reporter", "type:sourcing"], "Media"),
+      ev("fact-checked a tip that turned out to be half-true", ["dial:integrity:up", "media:reporter", "type:verification"], "Media")
     );
 
     // Neighborhood-specific
@@ -184,7 +184,7 @@ function generateMediaModeEvents_(ctx) {
       for (var a = 0; a < eventArcs.length; a++) {
         var arc = eventArcs[a];
         if (arc.neighborhood === neighborhood && (arc.phase === "rising" || arc.phase === "peak")) {
-          pool.push(ev("tracked a developing story in " + neighborhood, ["media:reporter", "type:beat", "neighborhood:" + neighborhood], "Media"));
+          pool.push(ev("tracked a developing story in " + neighborhood, ["dial:outabout:up", "media:reporter", "type:beat", "neighborhood:" + neighborhood], "Media"));
         }
       }
     }
@@ -194,13 +194,13 @@ function generateMediaModeEvents_(ctx) {
       var vote = votesThisCycle[v];
       // civic.43 Task 3: an education initiative is the school board's vote, not the council's
       var voteRoom = vote.body === 'school board' ? ' vote from the school board meeting' : ' vote from the council chambers';
-      pool.push(ev("covered the " + vote.name + voteRoom, ["media:reporter", "type:civic", "initiative:" + vote.name], "Media"));
+      pool.push(ev("covered the " + vote.name + voteRoom, ["dial:outabout:up", "media:reporter", "type:civic", "initiative:" + vote.name], "Media"));
     }
 
     // Crime beat
     var qol = crimeCity.qualityOfLifeIndex || 0.5;
     if (qol < 0.4) {
-      pool.push(ev("worked the public safety beat, talking to residents about what changed", ["media:reporter", "type:crime"], "Media"));
+      pool.push(ev("worked the public safety beat, talking to residents about what changed", ["dial:sociability:up", "media:reporter", "type:crime"], "Media"));
     }
 
     return pool;
@@ -210,14 +210,14 @@ function generateMediaModeEvents_(ctx) {
     var pool = [];
 
     pool.push(
-      ev("recorded a segment that went long because the guest wouldn't stop talking", ["media:podcast", "type:production"], "Media"),
-      ev("edited audio for two hours trying to find the right cut", ["media:podcast", "type:production"], "Media"),
-      ev("booked a guest who's been avoiding the press", ["media:podcast", "type:sourcing"], "Media"),
-      ev("reviewed listener feedback and adjusted the format", ["media:podcast", "type:audience"], "Media")
+      ev("recorded a segment that went long because the guest wouldn't stop talking", ["dial:sociability:up", "media:podcast", "type:production"], "Media"),
+      ev("edited audio for two hours trying to find the right cut", ["dial:drive:up", "media:podcast", "type:production"], "Media"),
+      ev("booked a guest who's been avoiding the press", ["dial:drive:up", "media:podcast", "type:sourcing"], "Media"),
+      ev("reviewed listener feedback and adjusted the format", ["dial:openness:up", "media:podcast", "type:audience"], "Media")
     );
 
     if (sportsSeason !== "off-season") {
-      pool.push(ev("planned an episode around the latest series", ["media:podcast", "type:sports"], "Media"));
+      pool.push(ev("planned an episode around the latest series", ["dial:drive:up", "media:podcast", "type:sports"], "Media"));
     }
 
     return pool;
@@ -227,14 +227,14 @@ function generateMediaModeEvents_(ctx) {
     var pool = [];
 
     pool.push(
-      ev("shot three assignments in four hours across two neighborhoods", ["media:photo", "type:assignment"], "Media"),
-      ev("waited forty minutes for the right light on a portrait", ["media:photo", "type:craft"], "Media"),
+      ev("shot three assignments in four hours across two neighborhoods", ["dial:outabout:up", "media:photo", "type:assignment"], "Media"),
+      ev("waited forty minutes for the right light on a portrait", ["dial:composure:up", "media:photo", "type:craft"], "Media"),
       ev("archived the week's selects and updated the photo desk", ["media:photo", "type:operations"], "Media"),
       ev("carried forty pounds of gear up three flights of stairs", ["dial:drive:up", "media:photo", "type:craft"], "Personal")
     );
 
     if (weather.type === "rain" || weather.type === "storm") {
-      pool.push(ev("shot in the rain and ruined a lens cap but got the frame", ["media:photo", "type:weather"], "Media"));
+      pool.push(ev("shot in the rain and ruined a lens cap but got the frame", ["dial:drive:up", "media:photo", "type:weather"], "Media"));
     }
 
     return pool;
@@ -244,10 +244,10 @@ function generateMediaModeEvents_(ctx) {
     var pool = [];
 
     pool.push(
-      ev("built a visualization that told the story better than the prose", ["media:analyst", "type:data"], "Media"),
-      ev("cross-referenced public records for an investigative piece", ["media:analyst", "type:research"], "Media"),
-      ev("cleaned a dataset that had been sitting in the queue for weeks", ["media:analyst", "type:data"], "Media"),
-      ev("flagged a statistical anomaly in city budget filings", ["media:analyst", "type:civic"], "Media")
+      ev("built a visualization that told the story better than the prose", ["dial:drive:up", "media:analyst", "type:data"], "Media"),
+      ev("cross-referenced public records for an investigative piece", ["dial:integrity:up", "media:analyst", "type:research"], "Media"),
+      ev("cleaned a dataset that had been sitting in the queue for weeks", ["dial:drive:up", "media:analyst", "type:data"], "Media"),
+      ev("flagged a statistical anomaly in city budget filings", ["dial:integrity:up", "media:analyst", "type:civic"], "Media")
     );
 
     return pool;
@@ -259,7 +259,7 @@ function generateMediaModeEvents_(ctx) {
     pool.push(
       ev("managed the newsroom workflow between sections", ["media:staff", "type:operations"], "Media"),
       ev("coordinated deadline logistics across three desks", ["media:staff", "type:operations"], "Media"),
-      ev("handled reader corrections and letters", ["media:staff", "type:audience"], "Media"),
+      ev("handled reader corrections and letters", ["dial:integrity:up", "media:staff", "type:audience"], "Media"),
       ev("updated the archives with the latest edition", ["media:staff", "type:operations"], "Media")
     );
 
@@ -279,16 +279,16 @@ function generateMediaModeEvents_(ctx) {
   var holidayPool = [];
   if (holiday !== "none") {
     holidayPool.push(
-      ev("covered the " + (S.holidayLabel || holiday) + " celebrations across the city", ["type:holiday", "holiday:" + holiday], "Media"),
-      ev("filed a " + (S.holidayLabel || holiday) + " feature with more feeling than usual", ["type:holiday", "holiday:" + holiday], "Media")
+      ev("covered the " + (S.holidayLabel || holiday) + " celebrations across the city", ["dial:outabout:up", "type:holiday", "holiday:" + holiday], "Media"),
+      ev("filed a " + (S.holidayLabel || holiday) + " feature with more feeling than usual", ["dial:warmth:up", "type:holiday", "holiday:" + holiday], "Media")
     );
   }
 
   var sportsPool = [];
   if (sportsSeason !== "off-season") {
     sportsPool.push(
-      ev("followed the A's series from the press box", ["type:sports"], "Media"),
-      ev("caught a detail in the dugout that nobody else saw", ["type:sports"], "Media")
+      ev("followed the A's series from the press box", ["dial:fandom:up", "type:sports"], "Media"),
+      ev("caught a detail in the dugout that nobody else saw", ["dial:drive:up", "type:sports"], "Media")
     );
   }
 
@@ -431,7 +431,10 @@ function generateMediaModeEvents_(ctx) {
     var writtenTag = '';
     if (typeof nudgesForEvent_ === 'function') {
       var ownFx = nudgesForEvent_(primaryTag, 1, picked.text);
-      if (Object.keys(ownFx).length) writtenTag = primaryTag;
+      // engine.350 Task 7: a Media line here is the staffer's own working day. It is written under the dial
+      // the line names (the entry's first tag), one step, never a bare Media (sociability +4 whatever it said:
+      // "felt the weight of covering too many stories with too few reporters"). No sign = not written.
+      if (primaryTag !== 'Media' && Object.keys(ownFx).length) writtenTag = primaryTag;
       else if (typeof gradedTag_ === 'function') {
         var dialTags = (picked.tags || []).filter(function(t) { return /^dial:/.test(t); });
         var signed = dialTags.length === 1 && /^dial:(composure|outabout|sociability|family|warmth|openness|fandom|drive|integrity):(up|down)(?::([SML]))?$/.exec(dialTags[0]);

@@ -37,17 +37,23 @@ ok(!t.change && !t.conflict && t.tags === 'source:occupation,auth:auto', 'a plai
 
 // 3. plan against a tab: every listed row found, an unlisted occupation row reported, an inactive one and other sources ignored
 const tab = [HDR].concat(P.SIGNS.map(function (s) { return ['line', s[0], '', s[1], '1', '', 'source:occupation,auth:x', '', 'yes']; }));
+const mediaTab = [HDR].concat(P.MEDIA_SIGNS.map(function (s) { return ['line', s[0], '', s[1], '1', '', 'source:media,auth:x', '', 'yes']; }));
+mediaTab.push(['fragment', '', 'VENUE', 'a dimly lit bar with game highlights on mute', '1', '', 'source:media,auth:auto', '', 'yes']);
 tab.push(['line', 'work.new', '', 'a row nobody signed', '1', '', 'source:occupation', '', 'yes']);
 tab.push(['line', 'work.off', '', 'an inactive row', '1', '', 'source:occupation', '', 'no']);
 tab.push(['line', 'down.drive', '', 'another source', '1', '', 'source:reflection,dial:drive:down', '', 'yes']);
 let pl = P.plan(tab);
 ok(pl.todo.length === c.up + c.down && pl.plain === c.plain && pl.tagged === 0, 'todo ' + pl.todo.length + ' plain ' + pl.plain);
-ok(pl.unlisted.length === 1 && pl.unlisted[0].text === 'a row nobody signed' && pl.notOnTab.length === 0 && pl.conflicts.length === 0, 'unlisted / missing / conflicts');
+ok(pl.unlisted.length === 1 && pl.unlisted[0].text === 'a row nobody signed' && pl.notOnTab.length === P.MEDIA_SIGNS.length && pl.conflicts.length === 0, 'unlisted / missing / conflicts');
+// the paper-reader rows: every one found and tagged; a source:media fragment is not a line and is left alone
+const mpl = P.plan(mediaTab);
+ok(P.MEDIA_SIGNS.length === 4 && mpl.todo.length === 4 && mpl.unlisted.length === 0, 'paper-reader rows to tag ' + mpl.todo.length + ', unlisted ' + mpl.unlisted.length);
+ok(mpl.todo.every(function (x) { return /^source:media,auth:x,dial:[a-z]+:(up|down)$/.test(x.to); }), 'the source stays first on a paper-reader row');
 ok(pl.todo[0].row === 2 && pl.tagsCol === 6, 'sheet row and Tags column');
 const tagged = tab.map(function (r, i) { const o = r.slice(); const td = pl.todo.filter(function (x) { return x.row === i + 1; })[0]; if (td) o[6] = td.to; return o; });
 pl = P.plan(tagged);
 ok(pl.todo.length === 0 && pl.tagged === c.up + c.down, 'after the write nothing is left to tag');
-ok(P.plan([HDR, ['line', 'work.x', '', P.SIGNS[0][1], '1', '', 'source:occupation', '', 'yes']]).notOnTab.length === 100, 'a listed row missing from the tab is reported');
+ok(P.plan([HDR, ['line', 'work.x', '', P.SIGNS[0][1], '1', '', 'source:occupation', '', 'yes']]).notOnTab.length === 100 + P.MEDIA_SIGNS.length, 'a listed row missing from the tab is reported');
 
 // 4. the tab loader takes every tagged row
 global.Logger = { log() {} };
@@ -65,7 +71,26 @@ const a = gce.indexOf('  var DIAL_BY_FACT_TAG = {'), b = gce.indexOf('  function
 ok(a > 0 && b > a, 'sign block found in generateCitizensEvents.js');
 const gradedTag_ = M.gradedTag_, nudgesForEvent_ = M.nudgesForEvent_; // read by the block below
 const G = eval('(function(){' + gce.slice(a, b) + '; return { gradedTagFor_: gradedTagFor_, GRADED_ONLY_KIND_: GRADED_ONLY_KIND_ }; })()');
-ok(G.GRADED_ONLY_KIND_.Work === true, 'Work is graded-only');
+ok(G.GRADED_ONLY_KIND_.Work === true && G.GRADED_ONLY_KIND_.Media === true, 'Work and Media are graded-only');
+ok(gce.indexOf('if (has("source:media")) return "Media";') > 0, 'a source:media row is still a Media line');
+P.MEDIA_SIGNS.forEach(function (s) {
+  const m = /^([a-z]+):(up|down)$/.exec(s[2]);
+  const tag = G.gradedTagFor_('Media', P.tagsFor('source:media,auth:library-s357', s[2]).tags.split(','));
+  ok(tag === 'Media-' + cap(m[1]) + '-' + (m[2] === 'up' ? 'Up' : 'Down') + '-S', s[1] + ' -> ' + tag);
+  const fx = M.nudgesForEvent_(tag, 1, s[1]);
+  ok(Object.keys(fx).length === 1 && fx[m[1]] === (m[2] === 'up' ? 1 : -1) && M.baseTag_(tag) === 'Media', s[1] + ' folds ' + JSON.stringify(fx));
+});
+ok(G.gradedTagFor_('Media', ['source:media', 'auth:library-s357']) === '', 'a paper-reader line with no sign is not written');
+ok(M.nudgesForEvent_('Media', 1, '').sociability === 4, 'the bare Media key stays for lines already on the ledger and the real events that carry it');
+// the coded news-climate lines take the sign of the pool they came from
+const ms = gce.indexOf('  var MEDIA_POOL_SIGN_ = {'), me = gce.indexOf('  var GRADED_DIALS_ = [');
+const POOLSIGN = eval('(function(){' + gce.slice(ms, me) + '; return MEDIA_POOL_SIGN_; })()');
+const mfe = R('phase07-evening-media/mediaFeedbackEngine.js');
+(mfe.slice(mfe.indexOf('function getMediaInfluencedEvent_(ctx) {'), mfe.indexOf('function getMediaEventModifier_(')).match(/tag: '([^']+)'/g) || []).forEach(function (t) {
+  const name = t.slice(6, -1), tg = G.gradedTagFor_('Media', ['source:media', POOLSIGN[name] || '']);
+  ok(/^Media-[A-Z][a-z]+-(Up|Down)-S$/.test(tg), 'news-climate pool with no sign: ' + name);
+});
+ok(gce.indexOf('var mediaSign = MEDIA_POOL_SIGN_[mediaEvent.tag];') > 0, 'the drawn line carries its pool\'s sign');
 ok(gce.indexOf('if (GRADED_ONLY_KIND_[primaryTag] === true || kindMovesNothing_(primaryTag, pick)) {') > 0, 'the admission grades or drops a Work line');
 ok(gce.indexOf('if (has("source:occupation")) return "Work";') > 0, 'an occupation row is still a Work line');
 P.SIGNS.forEach(function (s) {
@@ -122,4 +147,18 @@ ok(pools.join(',') === 'mediaWork,editorPool,reporterPool,columnistPool,photogra
 ok(!/\]\.map\(function\(t\) \{ return entry\(t, \[[^\]]*\], "Work"\); \}\);/.test(gm), 'no unsigned Work pool left in the game-mode writer');
 ok(gm.indexOf("if (primaryTag !== 'Work' && Object.keys(ownFx).length) writtenTag = primaryTag;") > 0, 'the game-mode admission never writes a bare Work');
 
-console.log('occupationDialTags.test.js: ' + n + ' assertions passed — tab rows ' + c.up + ' up / ' + c.down + ' down / ' + c.plain + ' plain; coded flavours ' + fUp + ' / ' + fDown + ' / ' + fPlain + '; media work ' + mUp + ' / ' + mDown + ' / ' + mPlain);
+// 8. the newsroom staff's own lines (media mode): every Media line carries one sign first or none; never bare
+const mmd = R('phase05-citizens/generateMediaModeEvents.js');
+const mmLines = mmd.split('\n').filter(function (l) { return /ev\("/.test(l) && /"Media"\)\)?[,;]?\s*$/.test(l); });
+let nUp = 0, nDown = 0, nPlain = 0;
+mmLines.forEach(function (l) {
+  const dials = l.match(/"dial:[a-z]+:(?:up|down)"/g) || [];
+  ok(dials.length <= 1, 'more than one sign: ' + l.trim());
+  if (!dials.length) { nPlain++; return; }
+  ok(/, \["dial:(drive|sociability|warmth|openness|composure|integrity|family|outabout|fandom):(up|down)", /.test(l), 'the sign is the entry\'s first tag: ' + l.trim());
+  if (/:up"/.test(dials[0])) nUp++; else nDown++;
+});
+ok(mmLines.length === 46 && nDown >= 5 && nPlain === 5, 'newsroom lines ' + mmLines.length + ': ' + nUp + ' / ' + nDown + ' / ' + nPlain);
+ok(mmd.indexOf("if (primaryTag !== 'Media' && Object.keys(ownFx).length) writtenTag = primaryTag;") > 0, 'the media-mode admission never writes a bare Media');
+
+console.log('occupationDialTags.test.js: ' + n + ' assertions passed — tab rows ' + c.up + ' up / ' + c.down + ' down / ' + c.plain + ' plain; coded flavours ' + fUp + ' / ' + fDown + ' / ' + fPlain + '; media work ' + mUp + ' / ' + mDown + ' / ' + mPlain + '; paper-reader rows 4; newsroom lines ' + nUp + ' / ' + nDown + ' / ' + nPlain);

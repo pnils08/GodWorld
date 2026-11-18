@@ -1220,7 +1220,16 @@ function generateCitizensEvents_(ctx) {
   // neighborhood outside" pushed drive up. A Work line with no sign is not written and is counted
   // (S.engine299.noDialBySource["source:occupation"]). The bare Work key stays in the dial map for the
   // lines already on the ledger.
-  var GRADED_ONLY_KIND_ = { "Work": true };
+  // Media the same (a citizen's line about the paper or the news — a tab row's Tags cell, or the news climate
+  // the coded line came from, MEDIA_POOL_SIGN_): was a bare Media (sociability +4) whatever it said —
+  // "disagreed with a Tribune column out loud to an empty kitchen". Builder 2026-10-02 on these lines: "reads
+  // the tribune no". Reading the paper is one small step on what the line says, never a hiring's worth.
+  var GRADED_ONLY_KIND_ = { "Work": true, "Media": true };
+  var MEDIA_POOL_SIGN_ = {
+    "Media-Anxious": "dial:composure:down", "Media-Crisis": "dial:composure:down", "Media-Hopeful": "dial:composure:up",
+    "Media-Holiday": "dial:warmth:up", "Media-OaklandPride": "dial:warmth:up", "Media-Arts": "dial:openness:up",
+    "Media-Festival": "dial:outabout:up", "Media-Sports": "dial:fandom:up", "Media-Celebrity": "dial:sociability:up"
+  };
   var GRADED_DIALS_ = ["drive", "sociability", "warmth", "openness", "composure", "integrity", "family", "outabout", "fandom"];
   function gradedTagFor_(kind, tags) {
     var dial = null, up = null, band = 'S', t, i, m;
@@ -3264,7 +3273,9 @@ function generateCitizensEvents_(ctx) {
     if (typeof getMediaInfluencedEvent_ === "function" && chanceHit(0.2)) {
       var mediaEvent = getMediaInfluencedEvent_(ctx);
       if (mediaEvent && mediaEvent.text) {
-        pool.push(makeEntry(mediaEvent.text, mergeTags(["source:media"], calendarTags), 1.1, false));
+        // engine.350: the line takes the sign of the news climate it was drawn from (mediaFeedbackEngine's own tag)
+        var mediaSign = MEDIA_POOL_SIGN_[mediaEvent.tag];
+        pool.push(makeEntry(mediaEvent.text, mergeTags(mediaSign ? ["source:media", mediaSign] : ["source:media"], calendarTags), 1.1, false));
       }
     }
 

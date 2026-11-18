@@ -11,6 +11,11 @@
  * text, and the generator writes it Work-<Dial>-<Up|Down>-S (generateCitizensEvents.js
  * GRADED_ONLY_KIND_). null = a bare mention; the row gets no tag and its line is not written.
  *
+ * The same for a `source:media` row — a citizen's line about the paper, written as a Media line: until
+ * engine.350 a bare Media (sociability +4) whatever it said; four rows, three of them the most-drawn
+ * lines on the tab (423 of the 639 Media lines after C116). Builder 2026-10-02: "reads the tribune no" —
+ * reading the paper is one small step on what the line says (MEDIA_SIGNS below).
+ *
  * The tag goes on the row's own Tags cell (appended; the first tag stays the source). On the engine
  * before engine.350 a `dial:` tag on a Work row changes nothing (the kind has its own key), so the
  * tab can be tagged ahead of the deploy; the deploy without the tags writes no tab Work line.
@@ -127,6 +132,15 @@ const SIGNS = [
   ['civic.rockridge', 'the bartender wiping down counters while discussing the stalled train delays with a regular', null]
 ];
 
+// [PoolKey, Text, sign | null] — the paper-reader lines (source:media, kind Media)
+const MEDIA_SIGNS = [
+  ['tribune.newsroom', 'read the Tribune\'s front page twice — once for the news, once to see who was in it', 'sociability:up'],
+  ['tribune.newsroom', 'disagreed with a Tribune column out loud to an empty kitchen', 'composure:down'],
+  ['tribune.newsroom', 'saved the Tribune clipping with their neighborhood in it — the good one', 'warmth:up'],
+  ['sports.citywide', 'caught the recap of last night\'s game at the counter and stayed for the second retelling', 'sociability:up']
+];
+const ALL_SIGNS = SIGNS.concat(MEDIA_SIGNS);
+
 const DIALS = ['drive', 'sociability', 'warmth', 'openness', 'composure', 'integrity', 'family', 'outabout', 'fandom'];
 const SIGN_RE = /^([a-z]+):(up|down)$/;
 
@@ -134,7 +148,7 @@ function norm(t) { return String(t || '').replace(/\s+/g, ' ').trim().toLowerCas
 
 function validate() {
   const errors = [], seen = {};
-  SIGNS.forEach(function (s) {
+  ALL_SIGNS.forEach(function (s) {
     if (s.length !== 3 || !s[0] || !s[1]) errors.push('malformed entry: ' + JSON.stringify(s));
     if (seen[norm(s[1])]) errors.push('listed twice: ' + s[1]);
     seen[norm(s[1])] = true;
@@ -146,9 +160,9 @@ function validate() {
   return { valid: errors.length === 0, errors: errors };
 }
 
-function counts() {
+function counts(list) {
   const c = { up: 0, down: 0, plain: 0, byDial: {} };
-  SIGNS.forEach(function (s) {
+  (list || SIGNS).forEach(function (s) {
     if (s[2] === null) { c.plain++; return; }
     const m = SIGN_RE.exec(s[2]);
     c[m[2]]++;
@@ -178,15 +192,16 @@ function tagsFor(current, sign) {
  */
 function plan(data) {
   const hdr = data[0] || [];
-  const iText = hdr.indexOf('Text'), iTags = hdr.indexOf('Tags'), iKey = hdr.indexOf('PoolKey'), iActive = hdr.indexOf('Active');
+  const iText = hdr.indexOf('Text'), iTags = hdr.indexOf('Tags'), iKey = hdr.indexOf('PoolKey'), iActive = hdr.indexOf('Active'), iKind = hdr.indexOf('Kind');
   if (iText < 0 || iTags < 0 || iKey < 0) throw new Error('Event_Content_Ledger missing Text / Tags / PoolKey');
   const byText = {};
-  SIGNS.forEach(function (s) { byText[norm(s[1])] = s; });
+  ALL_SIGNS.forEach(function (s) { byText[norm(s[1])] = s; });
   const out = { todo: [], unlisted: [], notOnTab: [], conflicts: [], tagged: 0, plain: 0, tagsCol: iTags };
   const met = {};
   data.slice(1).forEach(function (r, i) {
     const tags = String(r[iTags] || '');
-    if (!/(^|,)\s*source:occupation\s*(,|$)/.test(tags)) return;
+    if (!/(^|,)\s*source:(occupation|media)\s*(,|$)/.test(tags)) return;
+    if (iKind >= 0 && String(r[iKind] || '').trim().toLowerCase() !== 'line') return;   // a fragment is not a line of its own
     if (iActive >= 0 && String(r[iActive] || '').trim().toLowerCase() === 'no') return;
     const s = byText[norm(r[iText])];
     if (!s) { out.unlisted.push({ row: i + 2, poolKey: r[iKey], text: r[iText] }); return; }
@@ -197,7 +212,7 @@ function plan(data) {
     else if (s[2] === null) out.plain++;
     else out.tagged++;
   });
-  SIGNS.forEach(function (s) { if (!met[norm(s[1])]) out.notOnTab.push(s[1]); });
+  ALL_SIGNS.forEach(function (s) { if (!met[norm(s[1])]) out.notOnTab.push(s[1]); });
   return out;
 }
 
@@ -205,7 +220,9 @@ async function main() {
   const v = validate();
   if (!v.valid) throw new Error(v.errors.join('; '));
   const c = counts();
-  console.log('occupationDialTags: ' + SIGNS.length + ' rows — ' + c.up + ' up, ' + c.down + ' down, ' + c.plain + ' plain; by dial ' + JSON.stringify(c.byDial));
+  console.log('occupationDialTags: ' + SIGNS.length + ' occupation rows — ' + c.up + ' up, ' + c.down + ' down, ' + c.plain + ' plain; by dial ' + JSON.stringify(c.byDial));
+  const cm = counts(MEDIA_SIGNS);
+  console.log('                    ' + MEDIA_SIGNS.length + ' paper-reader rows — ' + cm.up + ' up, ' + cm.down + ' down, ' + cm.plain + ' plain');
 
   require('../lib/env');
   const iSheet = process.argv.indexOf('--sheet');
@@ -238,4 +255,4 @@ if (require.main === module) {
   main().catch(function (err) { console.error('occupationDialTags: ' + err.message); process.exit(1); });
 }
 
-module.exports = { SIGNS: SIGNS, validate: validate, counts: counts, tagsFor: tagsFor, plan: plan, norm: norm };
+module.exports = { SIGNS: SIGNS, MEDIA_SIGNS: MEDIA_SIGNS, ALL_SIGNS: ALL_SIGNS, validate: validate, counts: counts, tagsFor: tagsFor, plan: plan, norm: norm };

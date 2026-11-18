@@ -169,6 +169,9 @@ var DIAL_MAP = {
   'Anxious':            { composure: -3 },
   'Angry':              { composure: -4, warmth: -2 },
   'Resentful':          { composure: -3, warmth: -2 },
+  // engine.347 Task 13 (builder 2026-11-17: "Yes" to a sad mood — composure down like the other bad
+  // moods, plus a small pull down on going out: grief keeps people home). Before it, sorrow read Anxious.
+  'Sad':                { composure: -3, outabout: -1 },
   'Excited':            { composure: 3, drive: 2 },
   'Energized':          { composure: 2, drive: 2 },
   'Content':            { composure: 2 },
@@ -422,9 +425,14 @@ function nudgesForEvent_(tag, severityMult, text) {
 //   double-counting the objective event's composure: the same Divorce both folds (objective, -5)
 //   and is reflected on (subjective, affect-only) — only the affect mood reaches composure.
 //   A null/absent affect tag yields ZERO composure from this reflection (no event fallback).
+//   engine.347 Task 12 (builder 2026-11-17: retiring hits the dials "Once"): a REFLECTION_ECHO event
+//   gives nothing here. The retirement itself is the engine's own `[Retirement]` life line, folded once
+//   on the objective path (family +4, drive -4); a retiree who speaks of it afterwards is living it,
+//   not retiring again (POP-00001: six `Retirement` rows in C115-C116, each applied). The mood still counts.
+var REFLECTION_ECHO = { 'Retirement': true };
 function nudgesForReflection_(eventTag, affectTag, severityMult, text) {
   var out = {};
-  var ev = nudgesForEvent_(eventTag, severityMult, text);
+  var ev = REFLECTION_ECHO[baseTag_(eventTag)] === true ? {} : nudgesForEvent_(eventTag, severityMult, text);
   for (var d in ev) {
     if (ev.hasOwnProperty(d) && d !== 'composure') out[d] = (out[d] || 0) + ev[d];
   }
@@ -598,6 +606,6 @@ if (typeof module !== 'undefined' && module.exports) {
     EDITION_RE: EDITION_RE, CALENDAR_SUFFIXES: CALENDAR_SUFFIXES, DEFAULT_AMBIENT: DEFAULT_AMBIENT,
     baseTag_: baseTag_, gradedNudges_: gradedNudges_, gradedParts_: gradedParts_, gradedTag_: gradedTag_,
     GRADED_RE: GRADED_RE, GRADED_DIALS: GRADED_DIALS, BAND_DELTA: BAND_DELTA, nudgesForEvent_: nudgesForEvent_,
-    nudgesForReflection_: nudgesForReflection_, hasTag_: hasTag_
+    nudgesForReflection_: nudgesForReflection_, REFLECTION_ECHO: REFLECTION_ECHO, hasTag_: hasTag_
   };
 }

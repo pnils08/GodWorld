@@ -104,5 +104,26 @@ console.log('\nTest 9: engine.38 B3 ordinary-bad vocab (objective negative pole,
   assert('Setback (catastrophe) unchanged', eq(dm.nudgesForEvent_('Setback', 1, ''), { composure: -5 }));
 }
 
+console.log('\nTest 10: engine.347 Task 12 — retiring hits the dials once: the engine\'s line, never the echo');
+{
+  assert('a reflection tagged Retirement moves nothing by its event', eq(dm.nudgesForReflection_('Retirement', 'Flat', 1, 'I retired on Friday'), {}));
+  assert('the mood of that reflection still counts', eq(dm.nudgesForReflection_('Retirement', 'Content', 1, ''), { composure: 2 }) && eq(dm.nudgesForReflection_('Retirement', 'Anxious', 1, ''), { composure: -3 }));
+  assert('the engine\'s own Retirement line is unchanged: family +4, drive -4', eq(dm.nudgesForEvent_('Retirement', 1, ''), { family: 4, drive: -4 }));
+  const fresh = () => mem.newCitizen_();
+  const six = (event) => { const c = fresh(); mem.accreteReflectionsIntoBase_(c, Array.from({ length: 6 }, () => ({ event, affect: 'Flat', text: 'since I retired' })), dm, 0.45, 0.5); return c.base; };
+  assert('six echoes bake nothing into a retiree', JSON.stringify(six('Retirement')) === JSON.stringify(fresh().base));
+  assert('the same six rows under another event do bake in (the path is live)', six('Wedding').family > 50);
+  assert('only Retirement is an echo: other one-time events are as they were', Object.keys(dm.REFLECTION_ECHO).join() === 'Retirement' && eq(dm.nudgesForReflection_('Wedding', 'Flat', 1, ''), (() => { const o = Object.assign({}, dm.nudgesForEvent_('Wedding', 1, '')); delete o.composure; return o; })()));
+}
+
+console.log('\nTest 11: engine.347 Task 13 — a sad mood');
+{
+  const cmp = require('../utilities/compressLifeHistory');
+  assert('Sad is a dial-map key: composure -3, out and about -1', eq(dm.DIAL_MAP.Sad, { composure: -3, outabout: -1 }));
+  assert('a sad reflection lands by the key, not by the words in its text', eq(dm.nudgesForReflection_('Civic', 'Sad', 1, 'the hospital promoted the community award'), { composure: -3, outabout: -1 }));
+  assert('grief beside a community event: both count', eq(dm.nudgesForReflection_('Community', 'Sad', 1, ''), { sociability: 4, warmth: 2, composure: -3, outabout: -1 }));
+  assert('sorrow that names someone does not cool the bond', cmp.AFFECT_VALENCE.sad === 0 && cmp.AFFECT_VALENCE.angry === -1);
+}
+
 console.log(`\n${failed === 0 ? 'PASS' : 'FAIL'} — ${passed} passed, ${failed} failed`);
 process.exit(failed === 0 ? 0 : 1);

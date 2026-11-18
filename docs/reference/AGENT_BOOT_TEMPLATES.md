@@ -303,11 +303,16 @@ pointers:
 1. The roster row is the fill (done, 26 of 26).
 2. Read the reporter's bag and folder for **facts** the pack must carry (Nia's show rules; Anthony's bag names `As_Roster`); voice direction in them is not carried.
 3. Build the fill. Parts 1–4, 6 and the three wakes are shared code, built once.
-4. **Print** what the reporter would wake with at each wake, no model call; the builder reads the packs. Largest at C116 as the roster stands (agy §3): Tamsin and Sharon (`LifeHistory_Log` this Cycle, ~800k characters), Jax (the engine audit alone 411k), Anthony and Hal (the truesource copy 155k), Celeste (`Relationship_Bonds` 124k), Jordan (`Employment_Roster` 79k).
+4. **Print** what the reporter would wake with at each wake, no model call; the builder reads the packs. Largest at C116 before the rulings below (agy §3): Tamsin and Sharon (`LifeHistory_Log` this Cycle whole, ~800k characters — now cut to their kinds), Jax (the engine audit, 411k — now out), Anthony and Hal (the truesource copy 155k), Celeste (`Relationship_Bonds` 124k), Jordan (`Employment_Roster` 79k).
 5. **Guarded run** on the builder's word: the same Cycle and the same model as the reporter's last live piece, under the write guard (file, page, sheet, network), through the gate, read **beside the live piece**. A `call_worker` is a full worker wake: it runs under the same guard and writes nothing.
 6. The builder approves; that reporter's wakes switch; their folder and bag retire (§7). The next reporter starts at step 2.
 
-**Open for the builder (sim judgments the review surfaced):** the cut of `LifeHistory_Log` for Tamsin, Sharon and Angela (2,480 lines a Cycle); what of the engine's audit is Jax's (411k characters); Marbury's pack; where a worker's answer to a reporter is kept; whether CLAUDE.md carries Hal's exception.
+**Ruled by the builder 2026-11-17 (the review's sim questions):**
+- `LifeHistory_Log`: each pack carries its kinds this Cycle — Tamsin the life events (births, deaths, retirements, promotions, hospital stays, moves), Angela the youth lines, Sharon the daily-life lines; the whole log by tool.
+- Jax: no audit in his pack — "I don't need an audit made into media , his job is you search for the stink , handing him and audit it literally you puppeting him". His pack is the workers' and offices' statements; the rest he finds by tool.
+- Marbury: today's pack (this Cycle's sports feed, the truesource cards); the rest by tool.
+- A worker's answer to a reporter is kept on the worker's page, labelled as an answer to that reporter with the question; not their weekly report; it moves no dial and no setting.
+- Hal: "Hal has always been set up this way" — the gate's historian clause (`cron-rhea-gate.js:125`) is the rule; no change to CLAUDE.md. What changes at his switch is only his slice's ban (`buildHalSlice.js:478-479`).
 
 **What the draft does not solve (named for the review):**
 

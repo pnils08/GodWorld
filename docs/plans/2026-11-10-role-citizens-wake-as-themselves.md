@@ -134,7 +134,7 @@ pointers:
 
 ## Reviews reconciled
 
-- **agy, reporter template draft (2026-11-17, HOLD; `output/antigravity/2026-11-17-review-reporter-template.md`).** Checked against the code and the live sheet; all taken and folded into AGENT_BOOT_TEMPLATES §4 and the roster: the three-wake contract (handed story, handoff check, report wake runs no reporter turn, records seats ask nobody), worker answers into the interview record on a no-write path, approved numbers and Rhea's evidence, the reader's Cycle columns and id-less rows, pack sizes, the seat tools kept, Traits and family on the identity, the stale-slice guard kept, Talia / evening / Lived_Events corrections, the Owed list redone. Open for the builder: the `LifeHistory_Log` cut, Jax's audit, Marbury's pack, where a worker's answer is kept, Hal and CLAUDE.md. Data to the gap log: G-EC53, G-EC54.
+- **agy, reporter template draft (2026-11-17, HOLD; `output/antigravity/2026-11-17-review-reporter-template.md`).** Checked against the code and the live sheet; all taken and folded into AGENT_BOOT_TEMPLATES §4 and the roster: the three-wake contract (handed story, handoff check, report wake runs no reporter turn, records seats ask nobody), worker answers into the interview record on a no-write path, approved numbers and Rhea's evidence, the reader's Cycle columns and id-less rows, pack sizes, the seat tools kept, Traits and family on the identity, the stale-slice guard kept, Talia / evening / Lived_Events corrections, the Owed list redone. The builder ruled the five sim questions the same day (AGENT_BOOT_TEMPLATES §4, Ruled by the builder). Data to the gap log: G-EC53, G-EC54.
 
 | Review | Lane | Pointer | Result |
 |---|---|---|---|
@@ -157,7 +157,7 @@ pointers:
 
 ## Changelog
 
-- 2026-11-17 (engine-sheet, S670) — agy's review of the reporter draft (HOLD) verified and folded; five sim questions open for the builder.
+- 2026-11-17 (engine-sheet, S670) — agy's review of the reporter draft (HOLD) verified and folded; the builder ruled its five sim questions (life-log cut, no audit for Jax, Marbury as is, worker answers on the worker's page, Hal unchanged).
 - 2026-11-17 (engine-sheet, S670) — Reporter rulings recorded (§Tasks, Reporter rulings): no working example, roster first, shared records with one lead, worker split, reporter picks the story; roster being built.
 - 2026-11-17 (engine-sheet, S670) — Reporter roster approved row by row (Mason gets the evening phase; Nia the show's rules; Hal pre-2026 real-world sports history; truesource cards for Anthony, Hal, Selena).
 - 2026-11-17 (engine-sheet, S670) — Reporter roster drafted: [[../research/2026-11-17-reporter-records-roster]]; proposed lead and shared records are the builder's to rule.

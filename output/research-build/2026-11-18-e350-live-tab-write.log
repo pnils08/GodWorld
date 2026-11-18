@@ -1,0 +1,17 @@
+== 2026-11-18T01:59:40-06:00 engine.350 live Event_Content_Ledger write (builder 2026-11-18: 'Go on tag cells and down rows')
+== before
+{"rows":1001,"lines":965,"skipped":1,"pools":151,"occupationRows":101,"occupationWithDial":0,"downRows":0,"hash":"118b2d3c"}
+== tags --apply
+occupationDialTags: 101 rows — 81 up, 13 down, 7 plain; by dial {"drive":[23,2],"composure":[12,9],"integrity":[20,0],"warmth":[14,0],"openness":[3,0],"sociability":[8,2],"outabout":[1,0]}
+tab rows 1001: to tag 94, already tagged 0, plain 7, on the tab but not listed 0, listed but not on the tab 0, conflicts 0
+wrote 94 Tags cells; read back: tagged 94, plain 7
+== down rows --apply
+live rows=1001 authored=148 missing=148
+WROTE + verified 148 rows
+== after
+{"rows":1149,"lines":1113,"skipped":1,"pools":158,"occupationRows":101,"occupationWithDial":94,"downRows":148,"hash":"91cdc141"}
+== re-run both dry (expect nothing to do)
+live rows=1149 authored=148 missing=0
+DRY RUN — Event_Content_Ledger not written
+tab rows 1149: to tag 0, already tagged 94, plain 7, on the tab but not listed 0, listed but not on the tab 0, conflicts 0
+dry-run — nothing written

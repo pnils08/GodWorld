@@ -63,7 +63,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | engine.280 | Fandom follow-ups: four lines (Sports-Soured / Lifted / Gutted / Attended) wait on upstream signals: a per-piece tone at post-publish, a roster negative flag, an ECL attendance tag. §2.9 core shipped 2026-10-08; C10 upset sign shipped (38f19986), read live C113 | blocked | engine-sheet | [[../research/2026-10-02-engine-208-fandom-dial-read-before]] §2.9 |
 | engine.289 | Evening culture and nightlife land on their hood: LIVE stage 49 @184 (bench C117/C118 PASS). Read C117 Sun 2026-11-22: seed carry + the bars log line | live-observing | research-build | [[../plans/2026-11-16-evening-reaches-the-hoods]] |
 | engine.349 | Dials move (builder 11-16): keys, dial-moves tab, wrong reads LIVE stage 51 @186. Read C117 Sun 2026-11-22: `node scripts/dialPulse.js`, the 13, the tail | live-observing | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
-| engine.347 | Saved words reach the dials (builder 11-16): all live 11-17, stage 53 @188. Read Wed 11-18 job rows, Sat print rows; they fold at C117 Sun 2026-11-22 | live-observing | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
+| engine.347 | Saved words reach the dials (builder 11-16): live stage 53. Wed 11-18 job rows read: 7 of 7. Read Sat 11-21 print rows; all fold at C117 Sun 2026-11-22 | live-observing | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
 
 ## 3. Now — being worked, one per terminal (in-progress)
 

@@ -134,6 +134,8 @@ pointers:
 
 ## Reviews reconciled
 
+- **agy, reporter template draft (2026-11-17, HOLD; `output/antigravity/2026-11-17-review-reporter-template.md`).** Checked against the code and the live sheet; all taken and folded into AGENT_BOOT_TEMPLATES §4 and the roster: the three-wake contract (handed story, handoff check, report wake runs no reporter turn, records seats ask nobody), worker answers into the interview record on a no-write path, approved numbers and Rhea's evidence, the reader's Cycle columns and id-less rows, pack sizes, the seat tools kept, Traits and family on the identity, the stale-slice guard kept, Talia / evening / Lived_Events corrections, the Owed list redone. Open for the builder: the `LifeHistory_Log` cut, Jax's audit, Marbury's pack, where a worker's answer is kept, Hal and CLAUDE.md. Data to the gap log: G-EC53, G-EC54.
+
 | Review | Lane | Pointer | Result |
 |---|---|---|---|
 | `output/antigravity/2026-11-16-review-worker-window.md` (brief `docs/archive/for-claude-review/2026-11-16-es-brief-agy-worker-window.md`) | agy | fault 1 above | 22 findings, each checked against the code. **Taken:** 1, 9 (arcs: the carried state, not the log); 2, 4 (titles under a window); 3 (transit director's two Cycles); 15, 16 (blank Cycle cells; a one-Cycle tab not cut); 17–20 (`sheet_read`: blank tail, bounds, no Cycle column, limit 40); 21 (late read answered); 22 (only a finished stop is a statement). **Held for the fault they belong to:** 5, 6 (the hospital ledger's and cause queue's old rows: fault 2/3); 7, 8, 10–13 (columns the kit drops — the medical examiner's fault is the same failure: fault 2). **Left to the builder:** 14 (the police chief ignores the window; he is the approved spec). Its "drops standing funding" (finding 2 under Q1) is the window doing what it is for: the payments are history, the tracker row holds the balance |
@@ -155,6 +157,7 @@ pointers:
 
 ## Changelog
 
+- 2026-11-17 (engine-sheet, S670) — agy's review of the reporter draft (HOLD) verified and folded; five sim questions open for the builder.
 - 2026-11-17 (engine-sheet, S670) — Reporter rulings recorded (§Tasks, Reporter rulings): no working example, roster first, shared records with one lead, worker split, reporter picks the story; roster being built.
 - 2026-11-17 (engine-sheet, S670) — Reporter roster approved row by row (Mason gets the evening phase; Nia the show's rules; Hal pre-2026 real-world sports history; truesource cards for Anthony, Hal, Selena).
 - 2026-11-17 (engine-sheet, S670) — Reporter roster drafted: [[../research/2026-11-17-reporter-records-roster]]; proposed lead and shared records are the builder's to rule.

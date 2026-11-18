@@ -1,7 +1,7 @@
 ---
 title: Deploy History — full sandbox + PROD deployment ledger
 created: 2026-09-04
-updated: 2026-11-07
+updated: 2026-11-17
 type: reference
 tags: [engine, deploy, history, active]
 sources:
@@ -197,6 +197,12 @@ pointers:
 ---
 
 ## PROD deploy log — full trail
+
+### PROD stage 53 — the Sad mood; a retirement spoken of again (2026-11-17, research-build, engine.347 Tasks 12 and 13)
+- **Why:** builder 2026-11-17, on a retiree tagged `Retirement` at every mention (gap log G-EC49): "Once"; on a sad mood (G-EC50): "Yes". Plan `docs/plans/2026-11-16-every-saved-word-reaches-the-dials.md` Tasks 12 and 13.
+- **Tree:** stage 52 + two files at `623bc326a`: `utilities/citizenDialMap.js` (`'Sad': { composure: -3, outabout: -1 }`; `REFLECTION_ECHO` — a `Retirement` event gives nothing on the reflection path, the engine's own `[Retirement]` life line still folds family +4, drive −4), `utilities/compressLifeHistory.js` (`AFFECT_VALENCE` `sad: 0`). Manifest `output/research-build/stage53-e347b.sha256`; scripts `output/research-build/2026-11-17-push-e347b-bench.sh`, `2026-11-17-push-e347b-prod.sh`, `2026-11-17-e347b-bench.sh`, tool `2026-11-17-e347b-bench.js`.
+- **Bench, one fire from a fresh live sync** (@208, `output/research-build/2026-11-17-e347b-bench.log`): four reflection rows planted on four citizens with no reflection row, each snippet carrying words the text router acts on. C117 PASS 193 s, 0 Engine_Errors, 4 of 4 rows applied. `Retirement | Flat` → no voice move (the citizen's only row is integrity wear); `Retirement | Content` → composure +0.44 only; `Civic | Sad` → composure −0.66, outabout −0.23; `Community | Sad` → sociability +0.65, warmth +0.44, composure −0.67, outabout −0.23; nothing else moved by voice. Final sync from live.
+- **Stage 53 @188:** live pulled = stage 52, push + deploy, pull-back = stage 53 byte for byte. The classifier offers `Sad` from the commit after this deploy (gate GREEN on six sets, three grief texts read `Sad`, three not-sad texts keep their mood).
 
 ### PROD stage 52 — the Flat affect key (2026-11-17, research-build, engine.347 Task 4)
 - **Why:** builder 2026-11-16: "anything a cron says that is saved to a memory story should show on reflection ledger and have positive or negative effects on the dials". The classifier (cron side, `lib/reflectionClassifier.js`) now answers `Flat` for a text that shows no feeling; the fold must know the word, or it word-matches the row's snippet for it. Plan `docs/plans/2026-11-16-every-saved-word-reaches-the-dials.md` Task 4.

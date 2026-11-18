@@ -110,8 +110,17 @@ const SPEAKER = [
   [['Background', 'Daily', 'Weather', 'Neighborhood'], "I retired on Friday. Thirty-one years at the yard. They gave me a clock and I cried in the truck."],
 ];
 // GRIEF: someone else's death is the speaker's own feeling — the mood must read down, never Flat or up.
+// engine.347 Task 13: and the mood named is Sad (it read Anxious before the tag existed).
 const GRIEF = [
   "Still can't believe Marcus is gone. I sat on the porch with his sister for two hours tonight trying to figure out who's going to keep the corner shop open.",
+  "We buried my father on Tuesday. I keep reaching for the phone to call him about the game.",
+  "My daughter moved out this morning. The house is so quiet. I walked past her room three times and just stood there.",
+];
+// NOT SAD: worry, anger and friction keep their own mood now that Sad is offered.
+const NOT_SAD = [
+  ['Anxious', "Rent is due Friday and the check still hasn't cleared. I keep refreshing the bank page and my stomach is in knots."],
+  ['Angry', "He lied to my face about the schedule and then blamed me in front of the whole crew. I'm still furious."],
+  ['Frustrated', "The bus was late, the printer jammed twice, and the form got rejected again. Nothing worked today."],
 ];
 
 // The writers call the triple prompt (classifyTripleReflection_); the gate certifies that one.
@@ -245,13 +254,20 @@ async function runSpeaker_(set) {
   for (const text of GRIEF) {
     const pred = await classify_(text);
     const comp = compose_(pred.event, pred.affect).composure || 0;
-    const bad = !(comp < 0);
+    const bad = !(comp < 0) || pred.affect !== 'Sad';
     if (bad) wrong++;
-    console.log(`  ${bad ? 'BAD ' : 'ok  '} grief: composure ${comp} (want <0)`.padEnd(52) + ` pred=${(pred.event || '-') + '|' + (pred.affect || '-')}`);
+    console.log(`  ${bad ? 'BAD ' : 'ok  '} grief: composure ${comp} (want <0), mood ${pred.affect || '-'} (want Sad)`.padEnd(64) + ` pred=${(pred.event || '-') + '|' + (pred.affect || '-')}`);
     if (bad) fails.push({ grief: true, pred: `${pred.event}|${pred.affect}`, raw: pred.raw });
   }
+  for (const [want, text] of NOT_SAD) {
+    const pred = await classify_(text);
+    const bad = pred.affect === 'Sad' || !((compose_(pred.event, pred.affect).composure || 0) < 0);
+    if (bad) wrong++;
+    console.log(`  ${bad ? 'BAD ' : 'ok  '} not sad (${want}): mood ${pred.affect || '-'}`.padEnd(64) + ` pred=${(pred.event || '-') + '|' + (pred.affect || '-')}`);
+    if (bad) fails.push({ notSad: want, pred: `${pred.event}|${pred.affect}`, raw: pred.raw });
+  }
   console.log(`\n  wrongOwner ${wrong}  hardOff ${hardOff}`);
-  return { wrong, hardOff, n: set.length + GRIEF.length, fails };
+  return { wrong, hardOff, n: set.length + GRIEF.length + NOT_SAD.length, fails };
 }
 
 (async () => {

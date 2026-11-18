@@ -55,7 +55,7 @@ const I_AFFECT = 7;
 // totals (so the moods' shares stay comparable with the Cycles before Flat existed, when those rows
 // were stored Calm / Content), never a wave of its own.
 const AFFECT_POLE = {
-  frustrated: 'neg', irritable: 'neg', anxious: 'neg', angry: 'neg', resentful: 'neg',
+  frustrated: 'neg', irritable: 'neg', anxious: 'neg', angry: 'neg', resentful: 'neg', sad: 'neg',
   excited: 'pos', energized: 'pos', content: 'pos', calm: 'pos',
   flat: 'flat',
 };

@@ -63,6 +63,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | engine.280 | Fandom follow-ups: four lines (Sports-Soured / Lifted / Gutted / Attended) wait on upstream signals: a per-piece tone at post-publish, a roster negative flag, an ECL attendance tag. §2.9 core shipped 2026-10-08; C10 upset sign shipped (38f19986), read live C113 | blocked | engine-sheet | [[../research/2026-10-02-engine-208-fandom-dial-read-before]] §2.9 |
 | engine.289 | Evening culture and nightlife land on their hood: LIVE stage 49 @184 (bench C117/C118 PASS). Read C117 Sun 2026-11-22: seed carry + the bars log line | live-observing | research-build | [[../plans/2026-11-16-evening-reaches-the-hoods]] |
 | engine.349 | Dials move (builder 11-16): keys, dial-moves tab, wrong reads LIVE stage 51 @186. Read C117 Sun 2026-11-22: `node scripts/dialPulse.js`, the 13, the tail | live-observing | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
+| engine.347 | Saved words reach the dials (builder 11-16): all live 11-17, stage 53 @188. Read Wed 11-18 job rows, Sat print rows; they fold at C117 Sun 2026-11-22 | live-observing | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
 
 ## 3. Now — being worked, one per terminal (in-progress)
 
@@ -79,7 +80,6 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | pipeline.89 | Every journalist picks (builder 10-25: "All journalists should pick, they are AI"): every wake package gets the live tools the 3 tool seats have, the slice is a tip sheet not the assignment, Rhea is off every path; Ines first, same cut on all 28. First run 2026-10-28 | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 |
 | infrastructure.19 | Oakland week flight made lifelike (builder 11-14). v41: names first, homes on a block, team news at team buildings. Next: his look; joined street unbuilt | in-progress | research-build | [[../../world-view/README]] |
 | pipeline.112 | Code labels off citizens' memory pages (builder 11-16): readers to keys/metadata first, then writers, then ~2,300 stored entries. In codex review | in-progress | research-build | [[../plans/2026-11-16-page-labels-off-citizens-memory]] |
-| engine.347 | Every saved word reaches the dials (builder 11-16). Classifier, reporter piece, job statements live 11-17. Read Wed 11-18 05:45 rows, Sat print, Sun chain | in-progress | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
 
 ## 4. Queue — ruled, not started (ready)
 

@@ -24,7 +24,7 @@ const BLOCK_CAP = Infinity;   // builder 2026-11-01: "no character caps" — a b
 
 // civic.38: a complaint = Tag Civic + negative Affect (plan §Reconciliation,
 // measured 2026-09-20). Same closed affect vocab as compressLifeHistory.js.
-const NEGATIVE_AFFECTS = new Set(['frustrated', 'irritable', 'anxious', 'angry', 'resentful']);
+const NEGATIVE_AFFECTS = new Set(['frustrated', 'irritable', 'anxious', 'angry', 'resentful', 'sad']);
 
 function clip(s, n) {
   const t = String(s || '');

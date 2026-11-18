@@ -146,7 +146,7 @@ function citizenText(text) {
 // words. Entity = one of the pulse's standing themes or a shared capitalised name. Deterministic,
 // no LLM. Agreement is silent backing; a conflict is a visible flag, never a fail.
 const POSITIVE_AFFECT = new Set(['Content', 'Calm', 'Excited', 'Energized']);
-const NEGATIVE_AFFECT = new Set(['Frustrated', 'Irritable', 'Anxious', 'Angry', 'Resentful']);
+const NEGATIVE_AFFECT = new Set(['Frustrated', 'Irritable', 'Anxious', 'Angry', 'Resentful', 'Sad']);
 const POS_WORDS = /\b(?:love|loving|proud|excit\w*|thrilled|glad|happy|grateful|hopeful|finally|great|good news|better|relieved|can['’]t wait|looking forward|believe in|support)\b/i;
 const NEG_WORDS = /\b(?:hate|sick of|tired of|fed up|worried|anxious|angry|furious|frustrat\w*|disappoint\w*|worse|broken|dragging|failing|betray\w*|ignored|let (?:us|me) down|a joke|disgrace|resent\w*|bitter)\b/i;
 function polarityOfText(text) {

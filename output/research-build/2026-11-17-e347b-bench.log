@@ -1,0 +1,25 @@
+AIM = BENCH (script read the bench marker)
+== sync from live
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+{"fireGuardMinutes":"0","cycleCountFormatted":"116","cycleCountIsNumber":true}
+clearfire 117: {"ok":true,"cleared":{"cycle":117,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @208
+pull-back byte-identical to stage53-e347b.sha256
+plant: 4 rows appended at bench cycleCount 116; read back 4: POP-00029 Retirement|Flat applied=no · POP-00039 Retirement|Content applied=no · POP-00045 Civic|Sad applied=no · POP-00047 Community|Sad applied=no
+appended 7 to Edition_Coverage_Ratings; marked rows on the tab now 7
+appended 27 to Citizen_Media_Usage; marked rows on the tab now 27
+bench cycleCount 116
+fire C117 rc=0 "verdict": "PASS" "wallS": 193
+planted rows 4, applied=yes 4
+  ok  POP-00029 Retirement|Flat: voice moved {} — expected {} (signs); all rows: integrity -1 [wear -1]
+  ok  POP-00039 Retirement|Content: voice moved {"composure":0.44} — expected {"composure":1} (signs); all rows: composure 0.44 [voice +0.44]
+  ok  POP-00045 Civic|Sad: voice moved {"composure":-0.66,"outabout":-0.23} — expected {"composure":-1,"outabout":-1} (signs); all rows: composure -0.66 [voice -0.66] · outabout -0.23 [voice -0.23]
+  ok  POP-00047 Community|Sad: voice moved {"sociability":0.65,"warmth":0.44,"composure":-0.67,"outabout":-0.23} — expected {"sociability":1,"warmth":1,"composure":-1,"outabout":-1} (signs); all rows: sociability 0.65 [voice +0.65] · warmth 0.44 [voice +0.44] · composure -0.67 [voice -0.67] · outabout -0.23 [voice -0.23]
+Engine_Errors rows at Cycle 117: 0
+CHECK PASSED
+check rc=0
+== final sync from live
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+e347b bench done (check rc=0)

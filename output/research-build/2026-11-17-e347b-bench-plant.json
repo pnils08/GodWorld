@@ -1,0 +1,83 @@
+{
+ "cycleCount": 116,
+ "picks": [
+  {
+   "pop": "POP-00029",
+   "open": {
+    "drive": 53.096776704,
+    "sociability": 51.2680448,
+    "warmth": 50,
+    "openness": 50,
+    "composure": 55.65143941954392,
+    "integrity": 43,
+    "family": 50,
+    "outabout": 49.0405376,
+    "fandom": 50
+   },
+   "event": "Retirement",
+   "affect": "Flat",
+   "expect": {}
+  },
+  {
+   "pop": "POP-00039",
+   "open": {
+    "drive": 50,
+    "sociability": 59.483377474361234,
+    "warmth": 50.9594624,
+    "openness": 53.32840382511313,
+    "composure": 50,
+    "integrity": 50,
+    "family": 50,
+    "outabout": 50,
+    "fandom": 50
+   },
+   "event": "Retirement",
+   "affect": "Content",
+   "expect": {
+    "composure": 1
+   }
+  },
+  {
+   "pop": "POP-00045",
+   "open": {
+    "drive": 50,
+    "sociability": 50,
+    "warmth": 50.84756992,
+    "openness": 53.32840382511313,
+    "composure": 48.89156333283574,
+    "integrity": 50,
+    "family": 50,
+    "outabout": 50,
+    "fandom": 50
+   },
+   "event": "Civic",
+   "affect": "Sad",
+   "expect": {
+    "composure": -1,
+    "outabout": -1
+   }
+  },
+  {
+   "pop": "POP-00047",
+   "open": {
+    "drive": 57.38000208541054,
+    "sociability": 63.48949896047516,
+    "warmth": 50,
+    "openness": 50,
+    "composure": 50,
+    "integrity": 50,
+    "family": 50,
+    "outabout": 50,
+    "fandom": 50
+   },
+   "event": "Community",
+   "affect": "Sad",
+   "expect": {
+    "sociability": 1,
+    "warmth": 1,
+    "composure": -1,
+    "outabout": -1
+   }
+  }
+ ]
+}

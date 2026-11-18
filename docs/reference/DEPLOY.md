@@ -67,7 +67,9 @@ Cloud Shell sometimes clears installed packages. If clasp fails, run `npm instal
 **Previous bench:** `SANDBOX 0908` (`1FFpUs98L0wrEcfAaQy6-Ir2xYiCq9baCc0SzqzAMrtM`) — RETIRED 2026-10-04: its script project hit Apps Script's 200-version cap (push lands, no new deployment; web app frozen @200 = `d7ac5fff`, C119). Full trail: [[DEPLOY_HISTORY]] §Retired sandboxes.
 
 
-**Live (2026-11-17, 03:20 CST):** PROD = **stage 52** = stage 51 + the Flat affect key (`utilities/citizenDialMap.js`, `utilities/compressLifeHistory.js` at `b426c40c8`, engine.347 Task 4), web app **@187** — DEPLOY_HISTORY §PROD stage 52. Bench: SANDBOX 1004 **@207 = stage 52**, data synced back to live C116.
+**Live (2026-11-17, 18:52 CST):** PROD = **stage 53** = stage 52 + the Sad mood and the retirement echo (`utilities/citizenDialMap.js`, `utilities/compressLifeHistory.js` at `623bc326a`, engine.347 Tasks 12 and 13), web app **@188** — DEPLOY_HISTORY §PROD stage 53. Bench: SANDBOX 1004 **@208 = stage 53**, data synced back to live C116.
+
+**Previous live (2026-11-17, 03:20 CST):** PROD = **stage 52** = stage 51 + the Flat affect key (`utilities/citizenDialMap.js`, `utilities/compressLifeHistory.js` at `b426c40c8`, engine.347 Task 4), web app **@187** — DEPLOY_HISTORY §PROD stage 52. Bench: SANDBOX 1004 **@207 = stage 52**, data synced back to live C116.
 
 **Previous live (2026-11-17):** PROD = **stage 51** = stage 50 + engine.349 (dial speed keys, Dial_Moves / Dial_Pulse, wrong reads; nine files, `5da47216d`), web app **@186** — DEPLOY_HISTORY §PROD stage 51. Bench: SANDBOX 1004 **@206 = stage 51**, data synced back to live C116.
 

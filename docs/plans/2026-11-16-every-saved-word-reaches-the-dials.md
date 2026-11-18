@@ -252,6 +252,62 @@ agy re-review of the build, `output/antigravity/2026-11-17-review-job-statements
 | Two processes queueing the same words at once both append | read | recorded — the chain runs under its own lock; the line would count twice in one sitting's tally |
 | Test 7's source checks pass with the wiring broken | read | taken — anchored; behavioral tests added on the directive commit (`maraM1.test.js`) and the journal run (`civisJournal.test.js`); tests 84 |
 
+## Tasks 7 and 8 read (2026-11-17)
+
+Read-only. Basis: the ledger copy after C116 (each citizen's stamped lines C113–C116, the cells the fold reads), the live `Event_Content_Ledger` tab signed by the generator's own rule (`gradedTagFor_`, cut out of `generateCitizensEvents.js` by text), the local `Casino_Ledger` copy, `output/spacemolt-show/`. Scripts: `output/research-build/2026-11-17-e350-read.js`, `…-e350-pools.js`, `…-e350-cells.js`. Nothing written to a sheet.
+
+### Direction (Task 7) — before
+
+9,960 lines in the cells C113–C116; 9,856 move a dial.
+
+| Dial | Line pushes up / down | Share up | Up comes from (lines) | Down comes from |
+|---|---|---|---|---|
+| drive | 631 / 84 | 88% | Work 168, Education 81, promotion die up-S 50, Career 37 | Personal 66, CivicRole down 11 |
+| sociability | 1,602 / 45 | 97% | Neighborhood 446, Media 379, Civic Perception 179, Daily 118 | ConnectionWithdrawn 40, CivicRole down-L 5 |
+| warmth | 836 / 53 | 94% | Daily 221, Personal 168, Bond 143 | TrustGuarded 53 |
+| openness | 1,130 / 273 | 81% | Civic Perception 358, Lifestyle 285, Personal 117 | Civic Perception 273 |
+| composure | 1,378 / 1,083 | 56% | Civic Perception 389, Personal 293, Daily 201 | Neighborhood 267, Personal 157, Strain 94 |
+| integrity | 231 / 3 | 99% | Daily 113, Personal 60, Reputation 44 | BoundaryCompromised 3 |
+| family | 362 / 133 | 73% | Daily 285 | Strain (overwork) 81, Daily 31 |
+| outabout | 1,350 / 288 | 82% | Neighborhood 917, PrevEvening 212 | Neighborhood 134, Friction 67 |
+| fandom | 1,018 / 0 | 100% | Sports 564, Undocked-Audience 251, Sports-Win 190 | none in a winning month |
+
+Acceptance 5 asks 60 / 40 on every dial but fandom. Composure passes; the other seven do not.
+
+Where the lean sits:
+
+| Place | Count | What it means for the build |
+|---|---|---|
+| Kinds that push up whatever the line says | Media 379 lines (+4 sociability; the three commonest texts are a reader's line about the Tribune — 148, 146, 129 — one of them "disagreed with a Tribune column out loud to an empty kitchen"), Lifestyle 326 (10 texts, all up), Work 168 (+4 drive on 88 texts of ordinary shifts), Education 81, Career 37 (+4 drive on "had a routine period", "felt subtle workplace tension due to city happenings") | Reading the line turns most of these into plain days that move nothing, a few up, a few down. It lowers the up count; it adds few downs |
+| The authored pool on the live content tab, signed lines up / down | sociability 29 / 0, warmth 14 / 0, openness 33 / 2, drive 18 / 1, family 38 / 5, outabout 38 / 8, integrity 4 / 2, composure 18 / 27, fandom 32 / 0; every signed line is band S (269 of 269) | No line on the tab says the down side of sociability or warmth. Signing cannot balance what is not written |
+| Tab lines with no sign of their own | 696 of 965: 466 are the two dice (signed by the roll), 157 ride a fixed kind (occupation 101, undocked 56), 16 ride a fixed key (retirement, media, fame, faith), about 57 are never written (economy 20, civicNews 11, prevEvening 9, communityLife 7, nbhdState 4, sports 4, neighborhood 1, homeLife 1) | The 57 take the sign of their fact or stay unwritten |
+| `[Money]` lines that move nothing, all cells | debt cleared 69, an unplanned week on savings 37, defaulted 13, borrowed 12, debts crossed a line 7, bad week borrowed 4, ticket 4 (pinned unmoved), savings crossed six figures 1 | Six shapes to sign at their writers |
+| Count of lines dropped each Cycle for having no sign | not kept: `S.engine299.noDial` has no reader outside tests | read it at the bench |
+
+### Bets (Task 8)
+
+| Measure | Value |
+|---|---|
+| Wagers on the tab copy | 228: 61 lost, 57 won, 65 voided at the gate, 45 open; sports 127, UNDOCKED 101; 215 bettors, 3 the most by one |
+| Settled a Cycle, C107–C116 | 9 to 26 |
+| What a bet moves today | a win composure +2, drive +1; a loss composure −3 — the same at any size (`CONTENT_RULES` on the line's words) |
+| The big-loss line (`[Setback]`, composure −5) | 0 of 94 settled bet lines in all cells. It needs a stake of 5% of net worth (`dialSetbackLossPct` 5, live); a stake is capped at 4% of net worth at placement (`casinoStake_`), so it fires only if net worth falls a fifth between the bet and the result. The second one (lost the last of it, borrowed) 0 |
+| Stake | $23 to $2,000, median $302 |
+| Amount won or lost against net worth today | median 0.07%, 90th 0.27%, largest 2.8% |
+| Amount won or lost against one week of pay | 10th 8%, median 14%, 90th 24%, largest 33% |
+| Settled bets by share of a week of pay (under 10 / 10–20 / over 20) | wins 21 / 30 / 6; losses 14 / 35 / 12 |
+
+### UNDOCKED runs (Task 8)
+
+| Measure | Value |
+|---|---|
+| What a pilot's run moves today | one drawn line from 8 fixed texts, kind `Reputation`: integrity +3, sociability +2, the same after any night. 32 such lines in all cells, on 19 of the board's 32 pilots |
+| What the engine holds at the fire | each aired night's points, credits, combat, mishaps, magnitude (`S.undockedFeedEntries`); the board's totals and leader (`S.undockedBoard`) |
+| Nights a Cycle | 3 to 8, on 2 or 3 pilots; a pilot flies 2 or 3 nights in one Cycle (median 2 episodes a pilot) |
+| Points a night since the points board (C114) | 6 to 32, median 25; none at zero. Credits a night, all 88: 61 at zero, 25 up, 2 down |
+| Mishaps on the board | 0 pilots; combat 4 pilots |
+| So | no night is bad on its own number; "went badly" has to be read against the other pilots of the week or against the board |
+
 ## Tasks
 
 | # | Task | Row | Status |
@@ -326,3 +382,4 @@ agy, `output/antigravity/2026-11-16-review-dials-plan.md` (HOLD on the first cut
 - 2026-11-17 (research-build) — agy's re-review of the build folded (SHIP-WITH-FIXES, 6 findings: 5 taken, 1 recorded). Review closed.
 - 2026-11-17 (research-build) — Builder on the two calls carried from Task 4: "1. Once 2. Yes". Tasks 12 and 13 built (`623bc326a`), benched @208 (C117 PASS, 4 of 4 planted rows moved what their tags say), LIVE PROD stage 53 @188; the classifier offers `Sad` after the deploy, gate GREEN.
 - 2026-11-17 (research-build) — Task 3 read live at the 18:15 write wake: filed rows land by the fixed tag, no graded row, grade lines stay on the pages. Acceptance 7 so far: 1 bad-event row on the live tab (`Stumble | Frustrated`, a citizen who lost a 372 stake on the UNDOCKED book) — a right read.
+- 2026-11-17 (research-build) — Builder: "Go" on engine.350. Tasks 7 and 8 read: pushes up against down per dial in the cells C113–C116, the live content tab's signed lines, every settled bet against net worth and a week of pay, UNDOCKED nights since C109. Calls put to the builder before any code: who writes the missing down lines, what a bet is sized against, what a bad run is.

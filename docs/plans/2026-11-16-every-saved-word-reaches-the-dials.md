@@ -348,6 +348,25 @@ Two legs, each from a fresh live sync, each firing C117 and C118: the tab as on 
 
 Lines 4,464 → 4,535; from the tab 1,820 → 2,235 (41% → 49%). Every down key drew about 80 lines whatever its dial's up volume (one share a key), so integrity and family reach 60 / 40 and the heavy-up dials do not: sociability still has 353 coded and 265 tab lines up, drive 300 coded. What is left on those is the fixed kinds (Media, Work, Career, Education) and the coded pools; the tab weight is re-read after they are cut. Both legs were synced before engine-sheet set POP-00007's dials on live (23:20); the final sync carries the new row.
 
+### The fixed kinds: what is being cut and in what order (2026-11-17)
+
+Standing word on these lines, read before the cut (`docs/plans/2026-09-21-care-and-justice-system.md:619`): builder 2026-10-02 "reads the tribune no, job and faith yes", corrected 2026-10-03 — job and faith lines MOVE dials; the Tribune wiring is left as it is. So Work and Career keep moving dials; what changes is the size (the everyday step, not a hiring's +4) and the direction (what the line says). Builder 2026-11-17 on the career loop: "It's just a color adding events engine". **Media reader lines (front page, clipping, column — 423 of the 639 Media lines in all cells, sociability +4 each) are not touched until he says which way his 10-02 "no" cuts.**
+
+**Career texture, built (not benched):** `phase05-citizens/runCareerEngine.js` `CAREER_SIGN_BY_TEXT_` + `careerTextureTag_` — all 146 texture texts listed: 91 up, 18 down, 37 plain (composure 14 / 14, drive 19 / 4, outabout 36 / 0, openness 12 / 0, sociability 9 / 0, warmth 1 / 0). A signed line is written `Career-<Dial>-<Up|Down>-S`; a plain or unlisted one is drawn, counted against the cap and in `S.engine299.noDialBySource` (`runCareerEngine:Career:plain` / `:unlisted`), and not written. The bare `Career` key (drive +4) stays for the authored essence rows; `Career-Training` / `-FirstFriday` / `-CreationDay` / `-Holiday` are no longer written (their only other reader is the retired v1 trait map). Tests: `scripts/careerTextureSign.test.js` (every pool text listed, every listed text in a pool, each tag folds one step), `scripts/careerEngineReach.test.js` section 0 added and its fixed draw signed in the sandbox only.
+
+Reads put to the builder with the bench count (his to overrule):
+
+| Lines | Read as |
+|---|---|
+| 36 lunch, coffee and errand lines near work ("grabbed dim sum during lunch break") | outabout up one step (the alternative is plain, and the hood's work colour stops being written) |
+| a slow stretch (winter, the holiday slowdown, lighter summer workflow, a weather slowdown) | drive down |
+| "covered for vacationing colleagues" | drive up |
+| "noticed how competence attracts new expectations"; "encountered early autumn workload restructuring"; "navigated the busy Downtown commute"; "felt the holiday rush in service industries"; "caught the bus home after a long day" | composure down |
+| "felt slightly more confident in their role" | composure up |
+| "prepared for the holiday break"; "navigated year-end administrative tasks"; "grabbed a quick meal before an early shift"; every "noticed the … rhythm" line | plain, not written |
+
+Order from here: Education texture, then Work (the coded flavours and the tab's 101 occupation rows — the rows need a `dial:` tag each on the sheet, bench first), `[Money]`, bets; one bench for the lot.
+
 ### Bets as designed (2026-11-17, research-build's under his "Agree")
 
 | Piece | Design |
@@ -436,3 +455,4 @@ agy, `output/antigravity/2026-11-16-review-dials-plan.md` (HOLD on the first cut
 - 2026-11-17 (research-build) — Down lines, first cut: Grok drafted 422 over two rounds, 148 kept or written (`output/research-build/2026-11-17-e350-downlines-cut1.json`), none on a sheet. Bets designed: three sizes against a week of pay, the small hit unchanged, medium and large harder; the stake choice stays as built.
 - 2026-11-17 (research-build) — Builder asked what the board ranks on: points, then credits. The night is told in credits and credits have sat at 0 since pilots were pointed at achievements (gap log G-EC55); Task 8's UNDOCKED half waits on his call. Down lines placed as a tab pool with a test against the loader and the sign rule; dry-run on the live tab 148 missing, nothing written.
 - 2026-11-17 (research-build) — Bench, tab only: the 148 rows take integrity to 53% up and family to 53%, drive to 76, warmth 78, openness 70, outabout 71, sociability 88; four fires PASS, no new Engine_Errors. pipeline.113 and engine.352 filed on the builder's word (gap log G-EC55, G-EC56); the career engine's texture half logged (G-EC57), no row (builder: "It's just a color adding events engine").
+- 2026-11-17 (research-build) — Career texture built: 146 lines read by what they say (91 up, 18 down, 37 plain), written at the everyday step or not written; tests green (15 files that load the career engine). Not benched. Media reader lines held for the builder's word against his 10-02 ruling.

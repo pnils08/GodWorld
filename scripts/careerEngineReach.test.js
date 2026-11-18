@@ -113,7 +113,12 @@ function mulberry32(a) {
     return ((t ^ t >>> 14) >>> 0) / 4294967296;
   };
 }
-const TEXTURE = /^Career(-Training|-Holiday|-FirstFriday|-CreationDay)?$/;
+// engine.350 Task 7: a texture line is written under the dial it moves (Career-<Dial>-<Up|Down>-S) or not written.
+const TEXTURE = /^Career-(Drive|Sociability|Warmth|Openness|Composure|Integrity|Family|Outabout|Fandom)-(Up|Down)-S$/;
+// This test is about reach and the cap. Its fixed draw (0.0001) always lands on pool line 0, which is a plain
+// day since engine.350 and writes nothing — proven first, on the engine's own table; then that one line is
+// signed IN THIS SANDBOX ONLY so every draw below writes its line and the reach assertions read as before.
+const PLAIN0 = 'had a routine period at work with no major changes';
 function run(rows, cycle, rngFn) {
   writes.length = 0; errors.length = 0;
   const ctx = makeCtx(rows, cycle, rngFn);
@@ -125,6 +130,18 @@ const life = (rows, i) => String(rows[i][I('LifeHistory')]);
 const lines = (rows, i, re) => life(rows, i).split('\n').filter(l => re.test(l));
 
 // ---------------------------------------------------------------------------
+console.log('═══ 0 — a plain line is drawn, counted against the cap, and not written');
+(function() {
+  const r0 = fixture(); const before0 = r0.map(r => r[I('LifeHistory')]);
+  const Z = run(r0, 200);
+  const nd = (Z.ctx.summary.engine299 || { noDialBySource: {} }).noDialBySource['runCareerEngine:Career:plain'];
+  assert('0.1 the engine lists the fixed draw\'s line as plain', w.CAREER_SIGN_BY_TEXT_.hasOwnProperty(PLAIN0) && w.CAREER_SIGN_BY_TEXT_[PLAIN0] === null);
+  assert('0.2 ten draws, no texture line written, ten counted as plain', Z.texture.length === 0 && nd === 10 && Z.ctx.summary.careerEvents === 10, Z.texture.length + ' / ' + nd + ' / ' + Z.ctx.summary.careerEvents);
+  assert('0.3 no row gains a texture line', r0.every(r => !/\[Career-[A-Z][a-z]+-(Up|Down)-S\]/.test(String(r[I('LifeHistory')]))) && before0.every(l => !/\[Career-[A-Z][a-z]+-(Up|Down)-S\]/.test(String(l))));
+  assert('0.4 no engine error', Z.errors.length === 0, Z.errors.join(' | '));
+})();
+w.CAREER_SIGN_BY_TEXT_[PLAIN0] = 'dial:drive:up';   // sandbox only, see above
+
 console.log('═══ 1 — C200 (walk starts at row 0): reach, cap, hospital, overwork');
 const rowsA = fixture();
 const beforeIds = rowsA.map(r => r[I('POPID')]);
@@ -138,7 +155,7 @@ assert('1.4 rows 10 and 11 (past the cap) draw no event', lines(rowsA, 10, /\[Ca
 
 // overwork + event on one citizen, inside the cap
 assert('1.5 row 3 keeps BOTH lines in the cell (the Strain line is not overwritten)',
-  lines(rowsA, 3, /^C200 — \[Strain\]/).length === 1 && lines(rowsA, 3, /^C200 — \[Career\]/).length === 1, life(rowsA, 3));
+  lines(rowsA, 3, /^C200 — \[Strain\]/).length === 1 && lines(rowsA, 3, /^C200 — \[Career-Drive-Up-S\]/).length === 1, life(rowsA, 3));
 const ds3 = JSON.parse(rowsA[3][I('DialState')]);
 assert('1.6 row 3 pressure record written', ds3.pressure && ds3.pressure.overwork && ds3.pressure.overwork.l === 200 && ds3.pressure.overwork.n === 1);
 assert('1.7 row 3 has both log rows', A.log.some(r => r[1] === 'SYN-03' && r[3] === 'Strain') && A.texture.some(r => r[1] === 'SYN-03'));

@@ -778,6 +778,185 @@ var CAREER_TEXTURE_BESPOKE_ = {
   ]
 };
 
+// ═══════════════════════════════════════════════════════════════════════════
+// engine.350 Task 7 (builder 2026-11-16: a line moves a dial by what it says, down as often as up;
+// 2026-11-17 on this loop: "It's just a color adding events engine"). Every texture line this engine
+// can draw is listed here with the one dial it moves and which way — by what the line SAYS — at the
+// everyday size (band S, 1). Before it every texture line was a bare `Career` (drive +4, the size of
+// a hiring) whatever it said: "felt uneasy workplace atmosphere" pushed drive up. null = a plain day
+// or a bare observation with no reaction in it: not written, counted in S.engine299.noDialBySource
+// (the engine.299 rule: a line that moves nothing is not a line). A text missing from this table is
+// not written either and is counted as unlisted — scripts/careerTextureSign.test.js holds every pool
+// text to an entry. The promotion, layoff and hire lines are not texture and keep their own tags.
+// ═══════════════════════════════════════════════════════════════════════════
+var CAREER_SIGN_BY_TEXT_ = {
+  // base
+  "had a routine period at work with no major changes": null,
+  "felt slightly more confident in their role": "dial:composure:up",
+  "experienced a quieter workload than usual": null,
+  "saw minor shifts in workplace expectations": null,
+  "received small positive feedback on daily tasks": "dial:drive:up",
+  "handled ordinary work responsibilities without incident": null,
+  // training
+  "picked up a small skill that made the day easier": "dial:drive:up",
+  "learned a trick from someone who didn't explain it twice": "dial:drive:up",
+  "improved a routine process and kept it quiet": "dial:drive:up",
+  "spent time sharpening a skill that might matter later": "dial:drive:up",
+  "noticed how competence attracts new expectations": "dial:composure:down",
+  // season
+  "noticed slower workplace activity during winter months": "dial:drive:down",
+  "navigated year-end deadlines and planning": "dial:drive:up",
+  "experienced renewed workplace momentum": "dial:drive:up",
+  "felt the energy of new fiscal year initiatives": "dial:drive:up",
+  "felt lighter workflow during warm-season routines": "dial:drive:down",
+  "covered for vacationing colleagues": "dial:drive:up",
+  "encountered early autumn workload restructuring": "dial:composure:down",
+  "prepared for the busy Q4 push": "dial:drive:up",
+  // weather
+  "was affected by weather-related workplace slowdowns": "dial:drive:down",
+  "had a longer commute due to weather": "dial:composure:down",
+  "felt summer heat influence workplace mood": "dial:composure:down",
+  "noticed cold weather affecting commute and mood": "dial:composure:down",
+  "noticed workplace tension from weather stress": "dial:composure:down",
+  "enjoyed the pleasant commute to work": "dial:composure:up",
+  "felt energized by the beautiful weather": "dial:drive:up",
+  // the city at work
+  "noticed workplace discussion reacting to recent city events": null,
+  "felt subtle workplace tension due to city happenings": "dial:composure:down",
+  "felt improved workplace morale": "dial:composure:up",
+  "felt uneasy workplace atmosphere": "dial:composure:down",
+  "felt economic uncertainty affecting workplace mood": "dial:composure:down",
+  "noticed colleagues discussing job market concerns": "dial:composure:down",
+  "sensed optimism about career opportunities": "dial:drive:up",
+  "noticed positive workplace energy from economic news": "dial:composure:up",
+  // holidays
+  "prepared for the holiday break": null,
+  "wrapped up projects before the long weekend": "dial:drive:up",
+  "participated in workplace holiday potluck": "dial:sociability:up",
+  "felt the holiday slowdown at work": "dial:drive:down",
+  "exchanged holiday greetings with colleagues": "dial:sociability:up",
+  "navigated year-end administrative tasks": null,
+  "set workplace goals for the new year": "dial:drive:up",
+  "participated in workplace new year discussions": "dial:sociability:up",
+  "felt the fresh-start energy at work": "dial:drive:up",
+  "noticed increased retail activity": null,
+  "felt the holiday rush in service industries": "dial:composure:down",
+  "adjusted to new school year schedules": null,
+  "noticed the end-of-summer workplace shift": null,
+  // First Friday, Creation Day
+  "made plans to attend First Friday after work": "dial:outabout:up",
+  "felt the end-of-week creative energy": "dial:openness:up",
+  "left work early for First Friday art walk": "dial:outabout:up",
+  "discussed gallery plans with coworkers": "dial:sociability:up",
+  "reflected on their career journey": "dial:openness:up",
+  "felt connected to the reasons they started this work": "dial:drive:up",
+  "appreciated their place in the community": "dial:warmth:up",
+  "sensed something meaningful about today's work": "dial:drive:up",
+  // culture, community
+  "felt inspired by the city's creative energy": "dial:openness:up",
+  "noticed colleagues discussing cultural events": null,
+  "participated in workplace community initiative": "dial:sociability:up",
+  "felt connected to colleagues and neighborhood": "dial:sociability:up",
+  // by the hood's employer character
+  "grabbed lunch near the civic offices": "dial:outabout:up",
+  "noticed the public-sector rhythm around work": null,
+  "walked past the government buildings on a break": "dial:outabout:up",
+  "grabbed a quick bite near the clinics": "dial:outabout:up",
+  "noticed the caretaking pace of the workday": null,
+  "felt the strain of a neighborhood that works in health": "dial:composure:down",
+  "grabbed lunch on the main street near work": "dial:outabout:up",
+  "noticed the school-day rhythm around the workplace": null,
+  "stopped by the corner shops after a shift": "dial:outabout:up",
+  "grabbed lunch with the campus crowd": "dial:sociability:up",
+  "noticed the young energy around the workplace": null,
+  "walked past new construction on the way to work": null,
+  "grabbed something near the station on a break": "dial:outabout:up",
+  "noticed the commuter flow around the workplace": null,
+  "picked up a coffee from a vendor by the stop": "dial:outabout:up",
+  "grabbed a late lunch before the evening crowd": "dial:outabout:up",
+  "noticed the district shifting toward its night shift": null,
+  "walked past bars setting up for the night": null,
+  "grabbed lunch along the main avenue": "dial:outabout:up",
+  "noticed the professional rhythm of the workday": null,
+  "stopped by the shops after work": "dial:outabout:up",
+  "appreciated the quiet blocks around the workplace": "dial:composure:up",
+  "noticed the calm of a residential workday": null,
+  "walked home through familiar streets after a shift": "dial:composure:up",
+  "grabbed lunch between the storefronts": "dial:outabout:up",
+  "noticed the retail bustle around work": null,
+  "stopped by a shop window on the walk back": "dial:outabout:up",
+  "grabbed coffee with the hospital crowd": "dial:sociability:up",
+  "noticed the shift-change rhythm around work": null,
+  "felt the steady pace of a medical neighborhood": "dial:composure:up",
+  "grabbed lunch at a family-run counter near work": "dial:outabout:up",
+  "noticed the market-street bustle around the workplace": null,
+  "picked something up from a longtime shop after a shift": "dial:outabout:up",
+  "grabbed lunch at the corner store near work": "dial:outabout:up",
+  "noticed the mixed rhythm of the workday block": null,
+  "walked past apartments and storefronts on a break": "dial:outabout:up",
+  "grabbed lunch on the village main street": "dial:outabout:up",
+  "noticed the small-town pace of the workday": null,
+  "stopped by the bakery after a shift": "dial:outabout:up",
+  "grabbed a quick meal before an early shift": null,
+  "noticed the working rhythm of the neighborhood": null,
+  "caught the bus home after a long day": "dial:composure:down",
+  "grabbed lunch near the studios": "dial:outabout:up",
+  "noticed new murals on the way to work": "dial:openness:up",
+  "felt inspired by the creative district's energy": "dial:openness:up",
+  "grabbed lunch near the arena concourse": "dial:outabout:up",
+  "noticed the district gearing up for game day": null,
+  "walked past event crews setting up near work": null,
+  "grabbed lunch near the build sites": "dial:outabout:up",
+  "noticed cranes over the workplace blocks": null,
+  "felt the boom-time pace of the workday": "dial:drive:up",
+  // the twelve bespoke hoods
+  "navigated the busy Downtown commute": "dial:composure:down",
+  "felt the energy of the business district": "dial:drive:up",
+  "grabbed coffee near City Hall": "dial:outabout:up",
+  "appreciated working near the waterfront": "dial:composure:up",
+  "enjoyed the Jack London district atmosphere": "dial:outabout:up",
+  "took a lunchtime walk by the estuary": "dial:outabout:up",
+  "grabbed lunch at a Temescal spot near work": "dial:outabout:up",
+  "appreciated the creative workplace environment": "dial:openness:up",
+  "enjoyed the neighborhood's eclectic vibe": "dial:openness:up",
+  "enjoyed the pleasant Rockridge work commute": "dial:composure:up",
+  "noticed the professional atmosphere": null,
+  "stopped by College Ave shops after work": "dial:outabout:up",
+  "felt the industrial workplace rhythm": null,
+  "noticed development activity near work": null,
+  "observed the neighborhood's evolution": null,
+  "connected with community near the workplace": "dial:sociability:up",
+  "appreciated the neighborhood's energy": "dial:outabout:up",
+  "grabbed lunch from a local taqueria": "dial:outabout:up",
+  "took a lunchtime walk by the lake": "dial:outabout:up",
+  "enjoyed the lakeside work location": "dial:composure:up",
+  "felt refreshed by the natural surroundings": "dial:composure:up",
+  "appreciated the quiet commute through Laurel": "dial:composure:up",
+  "enjoyed the residential-adjacent workplace": "dial:composure:up",
+  "noticed the neighborhood's calm energy": null,
+  "felt the urban arts district workplace energy": "dial:openness:up",
+  "enjoyed working near galleries and theaters": "dial:openness:up",
+  "grabbed lunch at an Uptown spot": "dial:outabout:up",
+  "appreciated the creative district atmosphere": "dial:openness:up",
+  "noticed new murals on the commute": "dial:openness:up",
+  "felt inspired by the neighborhood's DIY spirit": "dial:openness:up",
+  "grabbed dim sum during lunch break": "dial:outabout:up",
+  "appreciated the bustling neighborhood energy": "dial:outabout:up",
+  "noticed the morning market activity": null,
+  "enjoyed the leafy commute through Piedmont Ave": "dial:composure:up",
+  "appreciated the boutique district atmosphere": "dial:outabout:up",
+  "stopped by local shops after work": "dial:outabout:up"
+};
+
+// The tag a texture line is written under: Career-<Dial>-<Up|Down>-S, or '' (not written).
+// why: 'plain' (listed null) | 'unlisted' (no entry) — the counter key.
+function careerTextureTag_(text) {
+  if (!CAREER_SIGN_BY_TEXT_.hasOwnProperty(text)) return { tag: '', why: 'unlisted' };
+  var m = /^dial:([a-z]+):(up|down)$/.exec(CAREER_SIGN_BY_TEXT_[text] || '');
+  if (!m) return { tag: '', why: 'plain' };
+  return { tag: 'Career-' + m[1].charAt(0).toUpperCase() + m[1].slice(1) + '-' + (m[2] === 'up' ? 'Up' : 'Down') + '-S', why: '' };
+}
+
 function runCareerEngine_(ctx) {
 
   // Phase 42 §5.6: SL read/mutate via shared ctx.ledger; commit at Phase 10.
@@ -1440,18 +1619,19 @@ function runCareerEngine_(ctx) {
     var pick = null;
     var stamp = inWorldStamp_(ctx);
 
-    // Determine event tag (v2.2)
-    var eventTag = "Career";
-
-    {
-      pick = pool[Math.floor(roll() * pool.length)];
-      if (firstFridayCareer.indexOf(pick) >= 0) eventTag = "Career-FirstFriday";
-      else if (creationDayCareer.indexOf(pick) >= 0) eventTag = "Career-CreationDay";
-      else if (holidayCareer.indexOf(pick) >= 0) eventTag = "Career-Holiday";
-      else if (trainingPool.indexOf(pick) >= 0) {
-        eventTag = "Career-Training";
-        S.careerSignals.training += 1;
-      }
+    // engine.350 Task 7: the drawn line is written under the dial it moves and which way, by what it
+    // says (CAREER_SIGN_BY_TEXT_, file scope), at the everyday size — or it is not written. The draw
+    // is never rerolled, so the dice run as before; a line not written still counts against LIMIT.
+    // (Was: bare Career / Career-FirstFriday / -CreationDay / -Holiday = drive +4, Career-Training +3.)
+    pick = pool[Math.floor(roll() * pool.length)];
+    if (trainingPool.indexOf(pick) >= 0) S.careerSignals.training += 1;
+    var signed = careerTextureTag_(pick);
+    var eventTag = signed.tag;
+    if (!eventTag) {
+      S.engine299 = S.engine299 || { noDial: 0, noDialBySource: {} };
+      S.engine299.noDial++;
+      var cKey = 'runCareerEngine:Career:' + signed.why;
+      S.engine299.noDialBySource[cKey] = (S.engine299.noDialBySource[cKey] || 0) + 1;
     }
 
     // v2.3: derived income + aggregates
@@ -1459,8 +1639,8 @@ function runCareerEngine_(ctx) {
     st.careerMod = deriveCareerMod_(st.level, st.tenure);
     S.careerSignals.industries[st.industry] = (S.careerSignals.industries[st.industry] || 0) + 1;
 
-    var line = stamp + " — [" + eventTag + "] " + pick;
-    var lifeOut = existing ? (existing + "\n" + line) : line;
+    var line = eventTag ? (stamp + " — [" + eventTag + "] " + pick) : "";
+    var lifeOut = line ? (existing ? (existing + "\n" + line) : line) : existing;
 
     // v2.3: persist CareerState occasionally or always on transition
     var shouldPersistState = !!tEv || chanceHit(0.20);
@@ -1476,22 +1656,26 @@ function runCareerEngine_(ctx) {
         "|skill=" + encodeSkill_(st.skill) +
         "|bizId=" + (iEmployerBizId >= 0 ? safeStr(row[iEmployerBizId]) : "") +
         "|Updated:c" + cycle;
-      lifeOut = lifeOut + "\n" + stateLine;
+      lifeOut = lifeOut ? (lifeOut + "\n" + stateLine) : stateLine;
     }
 
-    row[iLife] = lifeOut;
-    row[iLastUpd] = ctx.now;
+    if (line || shouldPersistState) {
+      row[iLife] = lifeOut;
+      row[iLastUpd] = ctx.now;
+    }
 
     // v2.3: batch logs (no appendRow inside loop)
-    logRows.push([
-      ctx.now,
-      row[iPopID],
-      '',
-      eventTag,
-      pick,
-      '',
-      cycle
-    ]);
+    if (line) {
+      logRows.push([
+        ctx.now,
+        row[iPopID],
+        '',
+        eventTag,
+        pick,
+        '',
+        cycle
+      ]);
+    }
     if (shouldPersistState) {
       logRows.push([
         ctx.now,
@@ -1505,7 +1689,7 @@ function runCareerEngine_(ctx) {
     }
 
     rows[r] = row;
-    S.eventsGenerated = (S.eventsGenerated || 0) + 1;
+    if (line) S.eventsGenerated = (S.eventsGenerated || 0) + 1;
     count++;
 
     sumTenure += st.tenure;

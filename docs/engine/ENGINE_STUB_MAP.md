@@ -2640,11 +2640,13 @@
   Writes: S.eventsGenerated, S.lifeEventDice, S.lifeEventLift, S.lifeEventTouched
 
 - **applyEmployerSuccess_(ctx, cycle, roll, logRows, S, gapFactor)**
-  Reads: S.careerSignals, S.lifeEventTouched
+  Reads: S.careerSignals, S.engine299, S.lifeEventTouched
+
+- **careerTextureTag_(text)**
 
 - **runCareerEngine_(ctx)**
-  Reads: S.absoluteCycle, S.businessDeclines, S.careerSignals, S.cityDynamics, S.civicOpenSlots, S.cycleId, S.demographicDrift, S.economicMood, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.weather, S.weatherMood, S.worldEvents
-  Writes: S.careerEvents, S.careerSignals, S.eventsGenerated
+  Reads: S.absoluteCycle, S.businessDeclines, S.careerSignals, S.cityDynamics, S.civicOpenSlots, S.cycleId, S.demographicDrift, S.economicMood, S.engine299, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.weather, S.weatherMood, S.worldEvents
+  Writes: S.careerEvents, S.careerSignals, S.engine299, S.eventsGenerated
   Config: ctx.config.cycleCount, ctx.config.rngSeed
   Sheets: Business_Ledger, Initiative_Tracker, LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
@@ -4933,4 +4935,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 181
-**Functions mapped:** 1793
+**Functions mapped:** 1794

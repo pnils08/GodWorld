@@ -29,9 +29,17 @@ const CREW = 'occupation.bartCrew';
 const KEYS = [COMMUTE, CREW];
 const CREW_TITLES = ['BART Train Conductor', 'BART Train Operator', 'BART Rail Dispatcher', 'BART Track Maintenance Technician'];
 
+// engine.350 Task 7: an occupation row is written only under the dial its line moves and which way
+// (generateCitizensEvents.js GRADED_ONLY_KIND_). The sign of each commute line is read in one place,
+// scripts/occupationDialTags.js, the list the live tab's Tags cells are written from. The crew rows
+// below are on no sheet (the builder's title ruling) and carry no sign yet: unsigned they would not be written.
+const SIGN_BY_TEXT = {};
+require('./occupationDialTags').SIGNS.forEach(function (s) { SIGN_BY_TEXT[s[1]] = s[2]; });
+
 function commute(texts) {
   return texts.map(function (t) {
-    return { Kind: 'line', PoolKey: COMMUTE, Slot: '', Text: t, Weight: '1.15', Conditions: 'transitdisrupted', Tags: 'source:occupation,transit:disruption', Grain: 'citizen', Active: 'yes' };
+    const sign = SIGN_BY_TEXT[t] ? ',dial:' + SIGN_BY_TEXT[t] : '';
+    return { Kind: 'line', PoolKey: COMMUTE, Slot: '', Text: t, Weight: '1.15', Conditions: 'transitdisrupted', Tags: 'source:occupation,transit:disruption' + sign, Grain: 'citizen', Active: 'yes' };
   });
 }
 function crew(title, texts) {

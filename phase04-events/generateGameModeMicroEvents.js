@@ -148,14 +148,17 @@ function generateGameModeMicroEvents_(ctx) {
     ["shared a laugh with teammates", "dial:warmth:up"]
   ].map(function(t) { return entry(t[0], ["role:mlb"].concat(t[1] ? [t[1]] : []), "Team"); });
 
+  // engine.350 Task 7: a Work line carries the dial it moves and which way, by what it says (band S), and
+  // is written graded (Work-<Dial>-<Up|Down>-S) — was a bare Work (drive +4) whatever it said. No sign =
+  // a bare mention, not written (the admission below).
   var mediaWork = [
-    "worked on developing a story lead",
-    "conducted background interviews",
-    "reviewed notes from recent events",
-    "collaborated with editorial on coverage",
-    "filed copy under deadline pressure",
-    "fact-checked a developing story"
-  ].map(function(t) { return entry(t, ["role:media"], "Work"); });
+    ["worked on developing a story lead", "dial:drive:up"],
+    ["conducted background interviews", "dial:sociability:up"],
+    ["reviewed notes from recent events", ""],
+    ["collaborated with editorial on coverage", "dial:sociability:up"],
+    ["filed copy under deadline pressure", "dial:composure:down"],
+    ["fact-checked a developing story", "dial:integrity:up"]
+  ].map(function(t) { return entry(t[0], ["role:media"].concat(t[1] ? [t[1]] : []), "Work"); });
 
   var mediaPublic = [
     "attended a press conference",
@@ -172,32 +175,32 @@ function generateGameModeMicroEvents_(ctx) {
   ].map(function(t) { return entry(t[0], ["role:media"].concat(t[1] ? [t[1]] : []), "Personal"); });
 
   var editorPool = [
-    "reviewed the day's editorial priorities",
-    "made tough decisions on story placement",
-    "mentored a younger staff member",
-    "navigated internal editorial discussions"
-  ].map(function(t) { return entry(t, ["role:media", "media:editor"], "Work"); });
+    ["reviewed the day's editorial priorities", ""],
+    ["made tough decisions on story placement", "dial:composure:down"],
+    ["mentored a younger staff member", "dial:warmth:up"],
+    ["navigated internal editorial discussions", ""]
+  ].map(function(t) { return entry(t[0], ["role:media", "media:editor"].concat(t[1] ? [t[1]] : []), "Work"); });
 
   var reporterPool = [
-    "followed up on a tip",
-    "built rapport with a new source",
-    "spent time in the field gathering details",
-    "attended a community meeting for coverage"
-  ].map(function(t) { return entry(t, ["role:media", "media:reporter"], "Work"); });
+    ["followed up on a tip", "dial:drive:up"],
+    ["built rapport with a new source", "dial:sociability:up"],
+    ["spent time in the field gathering details", "dial:outabout:up"],
+    ["attended a community meeting for coverage", "dial:outabout:up"]
+  ].map(function(t) { return entry(t[0], ["role:media", "media:reporter"].concat(t[1] ? [t[1]] : []), "Work"); });
 
   var columnistPool = [
-    "drafted thoughts for an upcoming column",
-    "engaged with reader feedback",
-    "considered a provocative angle",
-    "reflected on the week's events"
-  ].map(function(t) { return entry(t, ["role:media", "media:columnist"], "Work"); });
+    ["drafted thoughts for an upcoming column", "dial:drive:up"],
+    ["engaged with reader feedback", "dial:openness:up"],
+    ["considered a provocative angle", "dial:openness:up"],
+    ["reflected on the week's events", ""]
+  ].map(function(t) { return entry(t[0], ["role:media", "media:columnist"].concat(t[1] ? [t[1]] : []), "Work"); });
 
   var photographerPool = [
-    "scouted locations for upcoming shoots",
-    "edited images from recent assignments",
-    "captured candid moments around town",
-    "maintained equipment between assignments"
-  ].map(function(t) { return entry(t, ["role:media", "media:photographer"], "Work"); });
+    ["scouted locations for upcoming shoots", "dial:outabout:up"],
+    ["edited images from recent assignments", "dial:drive:up"],
+    ["captured candid moments around town", "dial:outabout:up"],
+    ["maintained equipment between assignments", "dial:integrity:up"]
+  ].map(function(t) { return entry(t[0], ["role:media", "media:photographer"].concat(t[1] ? [t[1]] : []), "Work"); });
 
   var civicWork = [
     ["reviewed briefing materials", "dial:drive:up"],
@@ -523,7 +526,7 @@ function generateGameModeMicroEvents_(ctx) {
     var writtenTag = '';
     if (typeof nudgesForEvent_ === 'function') {
       var ownFx = nudgesForEvent_(primaryTag, 1, picked.text);
-      if (Object.keys(ownFx).length) writtenTag = primaryTag;
+      if (primaryTag !== 'Work' && Object.keys(ownFx).length) writtenTag = primaryTag;   // engine.350: Work is never written bare
       else if (typeof gradedTag_ === 'function') {
         var dialTags = (picked.tags || []).filter(function(t) { return /^dial:/.test(t); });
         var signed = dialTags.length === 1 && /^dial:(composure|outabout|sociability|family|warmth|openness|fandom|drive|integrity):(up|down)(?::([SML]))?$/.exec(dialTags[0]);

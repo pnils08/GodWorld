@@ -1213,6 +1213,14 @@ function generateCitizensEvents_(ctx) {
     for (var k in fx) { if (fx.hasOwnProperty(k)) return false; }
     return true;
   }
+  // engine.350 Task 7 (builder 2026-11-16: a line moves a dial by what it says, down as often as up): a Work
+  // line is written only in the graded form, from the entry's own "dial:" tag — a tab row's Tags cell
+  // (scripts/occupationDialTags.js) or the coded flavour's sign (OCC_FLAVOR_SIGN_). It was a bare Work
+  // (drive +4, the size of a hiring) whatever the line said: "felt completely disconnected from the
+  // neighborhood outside" pushed drive up. A Work line with no sign is not written and is counted
+  // (S.engine299.noDialBySource["source:occupation"]). The bare Work key stays in the dial map for the
+  // lines already on the ledger.
+  var GRADED_ONLY_KIND_ = { "Work": true };
   var GRADED_DIALS_ = ["drive", "sociability", "warmth", "openness", "composure", "integrity", "family", "outabout", "fandom"];
   function gradedTagFor_(kind, tags) {
     var dial = null, up = null, band = 'S', t, i, m;
@@ -1485,6 +1493,48 @@ function generateCitizensEvents_(ctx) {
   // engine.148 P3: S.localEntities had no writer — the occupation flavor is the
   // literal; hood venues/institutions come from the character pools below.
   var entities = defaultEntities;
+
+  // engine.350 Task 7: what each flavour above says, as the one dial it moves and which way (band S).
+  // null = a bare mention: the work moment is not written. scripts/occupationDialTags.test.js holds
+  // every flavour to an entry.
+  var OCC_FLAVOR_SIGN_ = {
+    "a rush-hour counter": null,
+    "a coffee order gone sideways": "dial:composure:down",
+    "a regular with a strange request": "dial:openness:up",
+    "a table with unusual energy": null,
+    "a late reservation that changed the shift": "dial:composure:down",
+    "a customer who tipped in a story": "dial:sociability:up",
+    "a new prep routine": "dial:drive:up",
+    "a recipe tweak that actually worked": "dial:drive:up",
+    "a supply hiccup that forced improvisation": "dial:openness:up",
+    "a quiet confession at the bar": "dial:warmth:up",
+    "a sudden crowd change": null,
+    "a regular starting trouble—softly": "dial:composure:down",
+    "a return that turned into a conversation": "dial:sociability:up",
+    "a shoplifter scare that wasn't": "dial:composure:down",
+    "a display that drew attention": "dial:drive:up",
+    "a reroute that revealed something odd": "dial:openness:up",
+    "a passenger who overshared": "dial:sociability:up",
+    "a near-miss that reset the night": "dial:composure:down",
+    "a shift rumor that felt too accurate": "dial:composure:down",
+    "a mislabeled pallet mystery": null,
+    "a safety drill that got real": "dial:composure:down",
+    "a car problem that hinted at a bigger issue": null,
+    "a customer who didn't tell the whole story": "dial:warmth:down",
+    "a fix that bought someone time": "dial:warmth:up",
+    "a student comment that lingered": "dial:openness:up",
+    "a meeting that shifted priorities": null,
+    "a classroom moment that felt important": "dial:drive:up",
+    "a hectic hour that tested patience": "dial:composure:down",
+    "a small kindness that mattered": "dial:warmth:up",
+    "a tense wait that ended quietly": "dial:composure:up",
+    "a suspicious loop that went nowhere": null,
+    "a calm de-escalation": "dial:composure:up",
+    "a pattern they can't unsee": "dial:composure:down",
+    "an overheard conversation": null,
+    "a found object with a story": "dial:openness:up",
+    "a hallway that felt different tonight": null
+  };
 
   // engine.291: a RoleType as it reads mid-clause. The part before the first comma
   // ("Second Baseman, Oakland A's" -> second baseman); words lowercased except a
@@ -2336,9 +2386,13 @@ function generateCitizensEvents_(ctx) {
   function occupationPoolFor_(occupation) {
     var flavor = pickOccFlavor_(occupation);
     if (!flavor) return [];
+    // engine.350: the flavour's sign rides the entry; an unsigned one stays in the pool (the draw is as it
+    // was) and is dropped at admission like any Work line with no sign.
+    var occTags = ["source:occupation", "occupation:" + occupation];
+    if (OCC_FLAVOR_SIGN_[flavor]) occTags.push(OCC_FLAVOR_SIGN_[flavor]);
     return [
-      makeEntry("had a work moment: " + flavor, ["source:occupation", "occupation:" + occupation], 1.15, false),
-      makeEntry("left work thinking about " + flavor, ["source:occupation", "occupation:" + occupation], 1.05, false)
+      makeEntry("had a work moment: " + flavor, occTags, 1.15, false),
+      makeEntry("left work thinking about " + flavor, occTags.slice(), 1.05, false)
     ];
   }
 
@@ -3700,7 +3754,7 @@ function generateCitizensEvents_(ctx) {
     // stays the record's vocabulary (pulse, dedupe memory); the written tag is the graded form when the
     // kind alone moves nothing; a line that moves nothing is not written.
     var lineKind = primaryTag;
-    if (kindMovesNothing_(primaryTag, pick)) {
+    if (GRADED_ONLY_KIND_[primaryTag] === true || kindMovesNothing_(primaryTag, pick)) {   // engine.350: Work is never written bare
       var gradedTag = gradedTagFor_(primaryTag, tags);
       if (!gradedTag) {
         S.engine299 = S.engine299 || { noDial: 0, noDialBySource: {} };

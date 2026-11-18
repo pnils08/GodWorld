@@ -1,0 +1,402 @@
+{
+ "leg": "rows",
+ "cycles": [
+  117,
+  118
+ ],
+ "lines": 4535,
+ "moving": 4486,
+ "citizens": 1061,
+ "perDial": {
+  "drive": {
+   "up": 359,
+   "down": 115,
+   "tabUp": 77,
+   "tabDown": 84,
+   "codeUp": 282,
+   "codeDown": 31
+  },
+  "sociability": {
+   "up": 618,
+   "down": 86,
+   "tabUp": 327,
+   "tabDown": 86,
+   "codeUp": 291,
+   "codeDown": 0
+  },
+  "warmth": {
+   "up": 280,
+   "down": 79,
+   "tabUp": 75,
+   "tabDown": 79,
+   "codeUp": 205,
+   "codeDown": 0
+  },
+  "openness": {
+   "up": 458,
+   "down": 198,
+   "tabUp": 163,
+   "tabDown": 198,
+   "codeUp": 295,
+   "codeDown": 0
+  },
+  "composure": {
+   "up": 530,
+   "down": 452,
+   "tabUp": 255,
+   "tabDown": 75,
+   "codeUp": 275,
+   "codeDown": 377
+  },
+  "integrity": {
+   "up": 88,
+   "down": 77,
+   "tabUp": 55,
+   "tabDown": 76,
+   "codeUp": 33,
+   "codeDown": 1
+  },
+  "family": {
+   "up": 152,
+   "down": 134,
+   "tabUp": 42,
+   "tabDown": 86,
+   "codeUp": 110,
+   "codeDown": 48
+  },
+  "outabout": {
+   "up": 541,
+   "down": 225,
+   "tabUp": 243,
+   "tabDown": 86,
+   "codeUp": 298,
+   "codeDown": 139
+  },
+  "fandom": {
+   "up": 342,
+   "down": 29,
+   "tabUp": 237,
+   "tabDown": 0,
+   "codeUp": 105,
+   "codeDown": 29
+  }
+ },
+ "kinds": {
+  "Sports-Moved": {
+   "n": 6,
+   "up": 6,
+   "down": 6
+  },
+  "Reputation": {
+   "n": 8,
+   "up": 16,
+   "down": 0
+  },
+  "Sports": {
+   "n": 270,
+   "up": 242,
+   "down": 28
+  },
+  "Sports-PlayedWin": {
+   "n": 5,
+   "up": 5,
+   "down": 0
+  },
+  "Question": {
+   "n": 2,
+   "up": 0,
+   "down": 0
+  },
+  "Sports-Win": {
+   "n": 49,
+   "up": 49,
+   "down": 0
+  },
+  "Education": {
+   "n": 43,
+   "up": 86,
+   "down": 0
+  },
+  "Neighborhood": {
+   "n": 851,
+   "up": 590,
+   "down": 261
+  },
+  "Civic Perception": {
+   "n": 647,
+   "up": 470,
+   "down": 177
+  },
+  "Daily": {
+   "n": 528,
+   "up": 421,
+   "down": 107
+  },
+  "Lifestyle": {
+   "n": 205,
+   "up": 126,
+   "down": 79
+  },
+  "Background": {
+   "n": 242,
+   "up": 154,
+   "down": 88
+  },
+  "Personal": {
+   "n": 628,
+   "up": 283,
+   "down": 345
+  },
+  "PrevEvening": {
+   "n": 196,
+   "up": 124,
+   "down": 72
+  },
+  "Undocked-Audience": {
+   "n": 52,
+   "up": 52,
+   "down": 0
+  },
+  "Micro-Event": {
+   "n": 60,
+   "up": 23,
+   "down": 37
+  },
+  "QoL": {
+   "n": 8,
+   "up": 9,
+   "down": 3
+  },
+  "Media": {
+   "n": 122,
+   "up": 122,
+   "down": 0
+  },
+  "PostCareer": {
+   "n": 4,
+   "up": 8,
+   "down": 0
+  },
+  "Faith": {
+   "n": 9,
+   "up": 18,
+   "down": 0
+  },
+  "Work": {
+   "n": 58,
+   "up": 58,
+   "down": 0
+  },
+  "Promotion": {
+   "n": 3,
+   "up": 6,
+   "down": 0
+  },
+  "Advancement": {
+   "n": 124,
+   "up": 83,
+   "down": 0
+  },
+  "Relocation": {
+   "n": 12,
+   "up": 11,
+   "down": 1
+  },
+  "Maneuver-Climb": {
+   "n": 9,
+   "up": 18,
+   "down": 0
+  },
+  "Maneuver-Hold": {
+   "n": 3,
+   "up": 3,
+   "down": 0
+  },
+  "Friction": {
+   "n": 39,
+   "up": 0,
+   "down": 77
+  },
+  "Relationship": {
+   "n": 15,
+   "up": 30,
+   "down": 0
+  },
+  "Strain": {
+   "n": 44,
+   "up": 0,
+   "down": 88
+  },
+  "CivicRole-Down-S": {
+   "n": 7,
+   "up": 0,
+   "down": 7
+  },
+  "CivicRole-Down-M": {
+   "n": 2,
+   "up": 0,
+   "down": 4
+  },
+  "CivicRole-Up-S": {
+   "n": 17,
+   "up": 34,
+   "down": 0
+  },
+  "CivicRole-Up-M": {
+   "n": 3,
+   "up": 9,
+   "down": 0
+  },
+  "Recovering": {
+   "n": 3,
+   "up": 3,
+   "down": 0
+  },
+  "Household": {
+   "n": 8,
+   "up": 8,
+   "down": 0
+  },
+  "BoundaryKept": {
+   "n": 5,
+   "up": 5,
+   "down": 0
+  },
+  "BoundaryCompromised": {
+   "n": 1,
+   "up": 0,
+   "down": 1
+  },
+  "Retirement": {
+   "n": 2,
+   "up": 2,
+   "down": 2
+  },
+  "Cultural": {
+   "n": 23,
+   "up": 46,
+   "down": 0
+  },
+  "Community": {
+   "n": 20,
+   "up": 40,
+   "down": 0
+  },
+  "Team": {
+   "n": 13,
+   "up": 11,
+   "down": 2
+  },
+  "Civic": {
+   "n": 19,
+   "up": 19,
+   "down": 0
+  },
+  "Stabilized": {
+   "n": 1,
+   "up": 1,
+   "down": 0
+  },
+  "Graduation": {
+   "n": 1,
+   "up": 2,
+   "down": 0
+  },
+  "Business-Gain": {
+   "n": 10,
+   "up": 20,
+   "down": 0
+  },
+  "Life": {
+   "n": 2,
+   "up": 1,
+   "down": 1
+  },
+  "Career": {
+   "n": 17,
+   "up": 17,
+   "down": 0
+  },
+  "Career-Training": {
+   "n": 3,
+   "up": 3,
+   "down": 0
+  },
+  "CareerState": {
+   "n": 4,
+   "up": 0,
+   "down": 0
+  },
+  "LifeEvent-Promotion-Up-M": {
+   "n": 3,
+   "up": 6,
+   "down": 0
+  },
+  "LifeEvent-Promotion-Up-S": {
+   "n": 25,
+   "up": 25,
+   "down": 0
+  },
+  "LifeEvent-Promotion-Down-S": {
+   "n": 6,
+   "up": 0,
+   "down": 6
+  },
+  "Career-Hired": {
+   "n": 4,
+   "up": 8,
+   "down": 0
+  },
+  "Career-FieldChange": {
+   "n": 1,
+   "up": 2,
+   "down": 0
+  },
+  "Sports-Played": {
+   "n": 1,
+   "up": 1,
+   "down": 0
+  },
+  "FirstFriday": {
+   "n": 85,
+   "up": 85,
+   "down": 0
+  },
+  "Business-Owner": {
+   "n": 1,
+   "up": 2,
+   "down": 0
+  },
+  "Maneuver-Retreat": {
+   "n": 1,
+   "up": 2,
+   "down": 0
+  },
+  "Setback": {
+   "n": 2,
+   "up": 0,
+   "down": 2
+  },
+  "Household-GameNight-Loss": {
+   "n": 1,
+   "up": 1,
+   "down": 1
+  },
+  "Public": {
+   "n": 2,
+   "up": 2,
+   "down": 0
+  }
+ },
+ "downPool": {
+  "openness": 79,
+  "outabout": 79,
+  "drive": 80,
+  "warmth": 79,
+  "family": 80,
+  "sociability": 86,
+  "integrity": 76
+ },
+ "tabLines": 2235,
+ "engineErrors": 9
+}

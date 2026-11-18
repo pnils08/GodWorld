@@ -331,6 +331,23 @@ Grok (`x-ai/grok-4.3`, OpenRouter) drafted two rounds, one call a dial: 254 line
 
 Where they go is the build's: the tab draws by pool key, each eligible key the same share (`generateCitizensEvents.js:51-55`), and the tab is 2,257 of the 4,997 lines logged C115–C116; the code pools are the rest (sociability 330 up / 2 down, warmth 238 / 0, openness 367 / 0 from code alone), so the code pools take down lines too and that part is an engine deploy.
 
+### Down lines on the bench tab (2026-11-17, SANDBOX 1004 @208 = stage 53, no code change)
+
+Two legs, each from a fresh live sync, each firing C117 and C118: the tab as on live, then the tab + the 148 rows at Weight 0.5 (`output/research-build/2026-11-17-e350-tab-bench.sh`, tool `…-tab-bench.js`, log `…-tab-bench.log`, counts `…-tab-bench-ctl.json` / `-rows.json`). Four fires PASS (206 / 243 / 222 / 191 s); Engine_Errors rows 9 before and after; the apply read back 148 rows on the bench and the live tab at 1,001 before and after. Counted on the bench's LifeHistory_Log, line pushes up / down:
+
+| Dial | Tab as on live | With the 148 rows | Down-pool lines |
+|---|---|---|---|
+| drive | 365 / 42 (90% up) | 359 / 115 (76%) | 80 |
+| sociability | 708 / 0 (100%) | 618 / 86 (88%) | 86 |
+| warmth | 323 / 0 (100%) | 280 / 79 (78%) | 79 |
+| openness | 543 / 129 (81%) | 458 / 198 (70%) | 79 |
+| composure | 589 / 488 (55%) | 530 / 452 (54%) | — |
+| integrity | 111 / 2 (98%) | 88 / 77 (53%) | 76 |
+| family | 183 / 58 (76%) | 152 / 134 (53%) | 80 |
+| outabout | 549 / 178 (76%) | 541 / 225 (71%) | 79 |
+
+Lines 4,464 → 4,535; from the tab 1,820 → 2,235 (41% → 49%). Every down key drew about 80 lines whatever its dial's up volume (one share a key), so integrity and family reach 60 / 40 and the heavy-up dials do not: sociability still has 353 coded and 265 tab lines up, drive 300 coded. What is left on those is the fixed kinds (Media, Work, Career, Education) and the coded pools; the tab weight is re-read after they are cut. Both legs were synced before engine-sheet set POP-00007's dials on live (23:20); the final sync carries the new row.
+
 ### Bets as designed (2026-11-17, research-build's under his "Agree")
 
 | Piece | Design |
@@ -418,3 +435,4 @@ agy, `output/antigravity/2026-11-16-review-dials-plan.md` (HOLD on the first cut
 - 2026-11-17 (research-build) — Builder's rulings on the three calls recorded verbatim. Open with him: whether a pilot's week is scored on credits or on points.
 - 2026-11-17 (research-build) — Down lines, first cut: Grok drafted 422 over two rounds, 148 kept or written (`output/research-build/2026-11-17-e350-downlines-cut1.json`), none on a sheet. Bets designed: three sizes against a week of pay, the small hit unchanged, medium and large harder; the stake choice stays as built.
 - 2026-11-17 (research-build) — Builder asked what the board ranks on: points, then credits. The night is told in credits and credits have sat at 0 since pilots were pointed at achievements (gap log G-EC55); Task 8's UNDOCKED half waits on his call. Down lines placed as a tab pool with a test against the loader and the sign rule; dry-run on the live tab 148 missing, nothing written.
+- 2026-11-17 (research-build) — Bench, tab only: the 148 rows take integrity to 53% up and family to 53%, drive to 76, warmth 78, openness 70, outabout 71, sociability 88; four fires PASS, no new Engine_Errors. pipeline.113 and engine.352 filed on the builder's word (gap log G-EC55, G-EC56); the career engine's texture half logged (G-EC57), no row (builder: "It's just a color adding events engine").

@@ -1,0 +1,1038 @@
+{
+ "model": "x-ai/grok-4.3",
+ "draftedAt": "2026-11-18T04:15:53.656Z",
+ "perDial": 36,
+ "brief": "You are writing for a line library. Each line is one small moment from one ordinary week in one person's life, in a city called Oakland during a long prosperous stretch. The city is invented and stands alone: no real people, no real companies or brands, no real events, no politics, no named streets or businesses. Generic places only: the corner store, the bus, the lake, the porch, the stairwell, the group chat, the break room.\n\nThe library has plenty of lines where people are at their best. It has almost none of the other side. Write that side: the moments people do not tell anyone about. Unsentimental. No lesson, no apology, no turn toward better inside the line. Petty, lonely, proud, tired, envious, cowardly, cold: ordinary human dark, at the size of a weekday.\n\nNot allowed: crime, violence, death, illness, addiction, sex, slurs, money ruin, anything a newspaper would report. These are small.\n\nThis batch: 36 lines where a person's <DIAL> takes a small hit. What that means: undefined\n\nForm, exactly:\n- starts with a past-tense verb, lowercase, no subject, no name, no closing period\n- 8 to 20 words, one moment, one concrete object or gesture in it\n- \"they / their / themselves\" if a pronoun is needed\n- no two lines built on the same skeleton; no line that restates another\n\nThe library's voice, for form and scale (these are not all the dark kind):\n- had the argument about the dishes that was not actually about the dishes\n- walked past the bedroom that stays clean now and closed the door without going in\n- got a job application rejected and framed it as a joke to everyone but themselves\n- hid a report card in a backpack pocket for one more day\n- cooked the full Sunday dinner out of habit and packed half of it straight into the freezer\n- caught themselves lowering their voice when talking about the block's future\n- checked the front door lock three times after everyone else was asleep\n- haggled for a flat of bruised peaches at the Saturday market just to have a reason to talk to someone\n- walked a friend home the long way just to keep talking\n- stayed thirty minutes after the service just catching up in the parking lot\n\nFor each line say who it could happen to, one of: anyone, parent, married, teen, child, retired, working.\nUse anyone for at least half. Child and teen lines must be a child's or a teenager's own size of trouble.\n\nAnswer with JSON only, no prose around it: [{\"text\": \"...\", \"who\": \"...\"}, ...] with exactly 36 items.",
+ "dials": {
+  "sociability": [
+   {
+    "text": "skipped the monthly book club and left the unread copy on the shelf",
+    "who": "anyone"
+   },
+   {
+    "text": "muted every notification from the group chat without reading a single line",
+    "who": "anyone"
+   },
+   {
+    "text": "sat at the empty bus bench instead of joining the cluster at the stop",
+    "who": "anyone"
+   },
+   {
+    "text": "turned down the neighbor’s offer and closed the door before they finished asking",
+    "who": "anyone"
+   },
+   {
+    "text": "left the meeting the second the agenda ended and took the stairs alone",
+    "who": "working"
+   },
+   {
+    "text": "ate dinner standing at the counter with the lights half off",
+    "who": "married"
+   },
+   {
+    "text": "ignored the text thread until the plans had already been made without them",
+    "who": "anyone"
+   },
+   {
+    "text": "slipped out the side door while the others were still stacking chairs",
+    "who": "anyone"
+   },
+   {
+    "text": "chose the corner seat in the cafeteria farthest from the usual table",
+    "who": "teen"
+   },
+   {
+    "text": "declined the extra cup of coffee and stood up to leave anyway",
+    "who": "anyone"
+   },
+   {
+    "text": "pretended to check something on their phone until the wave passed by",
+    "who": "anyone"
+   },
+   {
+    "text": "deleted the chain of unread messages without opening any of them",
+    "who": "anyone"
+   },
+   {
+    "text": "avoided the seat beside the coworker and took the one at the back",
+    "who": "working"
+   },
+   {
+    "text": "returned home early and shut the porch light off before anyone noticed",
+    "who": "anyone"
+   },
+   {
+    "text": "let the sibling’s call ring out and set the phone face down again",
+    "who": "anyone"
+   },
+   {
+    "text": "stayed in the car until the lobby had emptied of familiar voices",
+    "who": "anyone"
+   },
+   {
+    "text": "passed the porch gathering without slowing down or lifting their head",
+    "who": "anyone"
+   },
+   {
+    "text": "canceled the standing coffee date and sent nothing in its place",
+    "who": "anyone"
+   },
+   {
+    "text": "ate the sandwich on the stairwell landing between floors",
+    "who": "working"
+   },
+   {
+    "text": "closed the laptop lid before the meeting request could load",
+    "who": "anyone"
+   },
+   {
+    "text": "took the longer route home to avoid the bench where they usually stopped",
+    "who": "retired"
+   },
+   {
+    "text": "put the phone face down when the family thread started lighting up",
+    "who": "parent"
+   },
+   {
+    "text": "stepped off the elevator early to dodge the small talk in the lobby",
+    "who": "anyone"
+   },
+   {
+    "text": "kept the headphones on after the song ended and the voices began",
+    "who": "teen"
+   },
+   {
+    "text": "missed the weekly call and made no move to reschedule it later",
+    "who": "anyone"
+   },
+   {
+    "text": "chose the self-checkout to skip the usual brief talk with the cashier",
+    "who": "anyone"
+   },
+   {
+    "text": "left the shared workspace while the others were still packing their bags",
+    "who": "working"
+   },
+   {
+    "text": "read the group message and closed the app without typing a word",
+    "who": "anyone"
+   },
+   {
+    "text": "sat at the far end of the bench with their bag between them and the rest",
+    "who": "anyone"
+   },
+   {
+    "text": "turned the porch light off early so no one would knock",
+    "who": "anyone"
+   },
+   {
+    "text": "looked down at their keys until the familiar face had passed the window",
+    "who": "anyone"
+   },
+   {
+    "text": "sent no reply to the message asking if they were free this weekend",
+    "who": "anyone"
+   },
+   {
+    "text": "finished their plate and carried it to the sink before anyone else stood up",
+    "who": "child"
+   },
+   {
+    "text": "let the office door swing shut behind them instead of holding it open",
+    "who": "working"
+   },
+   {
+    "text": "waited in the break room until the hallway voices had moved on",
+    "who": "working"
+   },
+   {
+    "text": "watched the friends arrive from the upstairs window and did not come down",
+    "who": "teen"
+   }
+  ],
+  "warmth": [
+   {
+    "text": "withheld the spare key after the neighbor hinted at needing it",
+    "who": "anyone"
+   },
+   {
+    "text": "laughed at the wrong moment when they told the story",
+    "who": "anyone"
+   },
+   {
+    "text": "kept the extra blanket folded on their own lap",
+    "who": "married"
+   },
+   {
+    "text": "said the shorter version that left their name out",
+    "who": "anyone"
+   },
+   {
+    "text": "moved the coffee pot to their desk without offering",
+    "who": "working"
+   },
+   {
+    "text": "nodded once and looked past them to the next person",
+    "who": "anyone"
+   },
+   {
+    "text": "left the porch light off when they saw the figure approach",
+    "who": "anyone"
+   },
+   {
+    "text": "kept the seat facing the window for themselves",
+    "who": "anyone"
+   },
+   {
+    "text": "answered the question with a fact and no follow up",
+    "who": "anyone"
+   },
+   {
+    "text": "passed the bowl without scooping any for the person waiting",
+    "who": "anyone"
+   },
+   {
+    "text": "closed the group chat after seeing the request for help",
+    "who": "anyone"
+   },
+   {
+    "text": "ignored the dropped glove on the stairwell step",
+    "who": "anyone"
+   },
+   {
+    "text": "turned the page before they finished reading over their shoulder",
+    "who": "anyone"
+   },
+   {
+    "text": "kept the small victory to themselves during the break",
+    "who": "working"
+   },
+   {
+    "text": "did not ask about the outcome they had mentioned earlier",
+    "who": "parent"
+   },
+   {
+    "text": "looked away when the familiar face entered the room",
+    "who": "anyone"
+   },
+   {
+    "text": "put their own coat on the only empty hook",
+    "who": "anyone"
+   },
+   {
+    "text": "skipped the usual greeting at the corner store counter",
+    "who": "anyone"
+   },
+   {
+    "text": "let the silence stand after the small mistake was noticed",
+    "who": "anyone"
+   },
+   {
+    "text": "kept the window closed despite the heat in the shared space",
+    "who": "anyone"
+   },
+   {
+    "text": "answered the knock without opening the door fully",
+    "who": "anyone"
+   },
+   {
+    "text": "enjoyed the brief confusion when directions were given wrong",
+    "who": "anyone"
+   },
+   {
+    "text": "sat one chair farther down the table than usual",
+    "who": "anyone"
+   },
+   {
+    "text": "deleted the draft reply instead of sending the date",
+    "who": "anyone"
+   },
+   {
+    "text": "held the elevator door only long enough for themselves",
+    "who": "working"
+   },
+   {
+    "text": "walked past the open office without stopping to chat",
+    "who": "anyone"
+   },
+   {
+    "text": "kept the last clean mug for the end of their own shift",
+    "who": "anyone"
+   },
+   {
+    "text": "said nothing when the plan changed without notice",
+    "who": "married"
+   },
+   {
+    "text": "left the magazine open to the page they wanted to keep",
+    "who": "retired"
+   },
+   {
+    "text": "avoided the usual bench and chose the one farther back",
+    "who": "retired"
+   },
+   {
+    "text": "did not offer the extra ticket after the cancellation",
+    "who": "anyone"
+   },
+   {
+    "text": "kept the better headphones for the longer part of the ride",
+    "who": "teen"
+   },
+   {
+    "text": "ignored the raised hand during the group game",
+    "who": "child"
+   },
+   {
+    "text": "sat at the opposite end of the table from the usual group",
+    "who": "teen"
+   },
+   {
+    "text": "withheld the toy until the other child stopped asking",
+    "who": "child"
+   },
+   {
+    "text": "moved their chair away after the story began to repeat",
+    "who": "parent"
+   }
+  ],
+  "drive": [
+   {
+    "text": "left the unread magazine on the coffee table for another week",
+    "who": "anyone"
+   },
+   {
+    "text": "skipped their usual stop at the corner store on the way home",
+    "who": "anyone"
+   },
+   {
+    "text": "closed the laptop without sending the message they had written",
+    "who": "anyone"
+   },
+   {
+    "text": "put off sorting the mail until the pile grew larger",
+    "who": "anyone"
+   },
+   {
+    "text": "watched the opportunity to speak up pass without saying anything",
+    "who": "anyone"
+   },
+   {
+    "text": "turned back from the path around the lake after a few steps",
+    "who": "anyone"
+   },
+   {
+    "text": "set the empty mug in the sink without rinsing it out",
+    "who": "anyone"
+   },
+   {
+    "text": "let the laundry basket stay in the hallway overnight",
+    "who": "anyone"
+   },
+   {
+    "text": "avoided the break room conversation by walking straight to their desk",
+    "who": "working"
+   },
+   {
+    "text": "moved the houseplant into the corner where it got less light",
+    "who": "anyone"
+   },
+   {
+    "text": "canceled the plan to fix the squeaky stairwell step",
+    "who": "parent"
+   },
+   {
+    "text": "scrolled through the group chat without adding a single reply",
+    "who": "anyone"
+   },
+   {
+    "text": "left the curtains closed instead of opening them to the morning",
+    "who": "anyone"
+   },
+   {
+    "text": "put the new shoes back in the box without trying them on",
+    "who": "anyone"
+   },
+   {
+    "text": "ignored the reminder to water the garden until the soil dried",
+    "who": "anyone"
+   },
+   {
+    "text": "stayed seated on the porch when the neighbor walked by",
+    "who": "anyone"
+   },
+   {
+    "text": "turned off the alarm clock after hitting snooze twice",
+    "who": "anyone"
+   },
+   {
+    "text": "let the conversation in the car fade into silence",
+    "who": "married"
+   },
+   {
+    "text": "closed the drawer full of half-started projects without looking inside",
+    "who": "anyone"
+   },
+   {
+    "text": "passed the public notice board without reading any of the postings",
+    "who": "anyone"
+   },
+   {
+    "text": "set their bag down by the door and never unpacked it",
+    "who": "anyone"
+   },
+   {
+    "text": "skipped the evening stretch they had planned after dinner",
+    "who": "anyone"
+   },
+   {
+    "text": "watched the phone ring without reaching for it",
+    "who": "anyone"
+   },
+   {
+    "text": "put the book they meant to finish back on the shelf",
+    "who": "anyone"
+   },
+   {
+    "text": "let the small repair on their jacket wait until tomorrow",
+    "who": "anyone"
+   },
+   {
+    "text": "avoided the hallway mirror by keeping their eyes on the floor",
+    "who": "anyone"
+   },
+   {
+    "text": "turned down the volume on the radio halfway through the song",
+    "who": "anyone"
+   },
+   {
+    "text": "left the window open but never went to close it",
+    "who": "anyone"
+   },
+   {
+    "text": "sat through the lecture without taking a single note",
+    "who": "teen"
+   },
+   {
+    "text": "pushed the vegetables around on their plate without eating them",
+    "who": "child"
+   },
+   {
+    "text": "closed the folder of ideas without adding anything new to it",
+    "who": "working"
+   },
+   {
+    "text": "let the bus ticket stay in their pocket unused that day",
+    "who": "anyone"
+   },
+   {
+    "text": "ignored the stack of papers needing signatures on the desk",
+    "who": "working"
+   },
+   {
+    "text": "stayed in bed ten minutes longer than they had intended",
+    "who": "anyone"
+   },
+   {
+    "text": "let the chance to ask a question slip by during the meeting",
+    "who": "working"
+   },
+   {
+    "text": "put the paintbrush back in the jar without finishing the canvas",
+    "who": "anyone"
+   }
+  ],
+  "openness": [
+   {
+    "text": "declined the neighbor's invitation to the new walking group and kept their evening route",
+    "who": "anyone"
+   },
+   {
+    "text": "stuck with the corner store brand instead of trying the one the cashier suggested",
+    "who": "anyone"
+   },
+   {
+    "text": "ignored the flyer about the upcoming lake cleanup and tossed it in the stairwell bin",
+    "who": "anyone"
+   },
+   {
+    "text": "waved off the idea of joining the group chat thread about local changes",
+    "who": "anyone"
+   },
+   {
+    "text": "kept the same bus seat even when someone pointed out an emptier row ahead",
+    "who": "anyone"
+   },
+   {
+    "text": "skipped the free sample at the market and bought only the usual items",
+    "who": "anyone"
+   },
+   {
+    "text": "closed the porch door before the new neighbor finished describing their plan",
+    "who": "anyone"
+   },
+   {
+    "text": "put the unfamiliar spice packet back on the shelf and reached for the old jar",
+    "who": "anyone"
+   },
+   {
+    "text": "dismissed the suggestion to rearrange the break room chairs and sat in the same spot",
+    "who": "working"
+   },
+   {
+    "text": "avoided the side street that had been repaved and took the longer way around",
+    "who": "anyone"
+   },
+   {
+    "text": "refused the offer to look at the new library display and headed straight to the usual shelf",
+    "who": "anyone"
+   },
+   {
+    "text": "turned down the weekend errand to a different store and stayed with their regular list",
+    "who": "parent"
+   },
+   {
+    "text": "left the new podcast episode unplayed and started the one they had heard before",
+    "who": "anyone"
+   },
+   {
+    "text": "kept the old coffee mug on the counter and did not reach for the one brought from home",
+    "who": "retired"
+   },
+   {
+    "text": "ignored the text about the block meeting and deleted the thread without reading it",
+    "who": "anyone"
+   },
+   {
+    "text": "chose the familiar bench by the lake and did not try the shaded one farther along",
+    "who": "anyone"
+   },
+   {
+    "text": "shut the recipe book after seeing the first unfamiliar step and opened the drawer for takeout menus",
+    "who": "married"
+   },
+   {
+    "text": "passed the community bulletin board without stopping to read the new notices",
+    "who": "anyone"
+   },
+   {
+    "text": "kept their headphones on when the person next to them on the bus began to speak",
+    "who": "anyone"
+   },
+   {
+    "text": "declined to sample the neighbor's new plant cuttings and continued tending their own",
+    "who": "anyone"
+   },
+   {
+    "text": "stayed in the usual checkout line even though another one opened with fewer people",
+    "who": "anyone"
+   },
+   {
+    "text": "waved away the idea of attending the afternoon lecture at the center and went home early",
+    "who": "retired"
+   },
+   {
+    "text": "put the new bus schedule in the recycling bin without unfolding it",
+    "who": "anyone"
+   },
+   {
+    "text": "avoided the side entrance to the building where the door had been repainted",
+    "who": "working"
+   },
+   {
+    "text": "decided the corner store's rearranged shelves would be too confusing and left without looking",
+    "who": "anyone"
+   },
+   {
+    "text": "kept the living room lamp in its old position after their child asked to move it",
+    "who": "parent"
+   },
+   {
+    "text": "skipped the new route their coworker described and drove the same streets home",
+    "who": "working"
+   },
+   {
+    "text": "refused the offer to borrow the unfamiliar book and returned to the one on their nightstand",
+    "who": "teen"
+   },
+   {
+    "text": "closed the group chat after the first message about trying a different meeting spot",
+    "who": "anyone"
+   },
+   {
+    "text": "ignored the suggestion to try the new flavor at the ice cream stand and ordered the usual",
+    "who": "child"
+   },
+   {
+    "text": "stayed with their regular seat at the table and did not move when a different chair was offered",
+    "who": "married"
+   },
+   {
+    "text": "turned off the radio when a station they had never heard came on instead of scanning",
+    "who": "anyone"
+   },
+   {
+    "text": "kept the porch light off after someone mentioned a new timer they could install",
+    "who": "anyone"
+   },
+   {
+    "text": "walked past the open door of the new shop without glancing inside",
+    "who": "anyone"
+   },
+   {
+    "text": "declined the ride offered by a coworker and waited for the bus they always took",
+    "who": "working"
+   },
+   {
+    "text": "put the unopened letter about neighborhood changes into the drawer with the others",
+    "who": "anyone"
+   }
+  ],
+  "integrity": [
+   {
+    "text": "told the group their suggestion had come from a book they never opened",
+    "who": "anyone"
+   },
+   {
+    "text": "kept the extra change from the corner store without saying a word",
+    "who": "anyone"
+   },
+   {
+    "text": "skipped the final item on the checklist since no one would check",
+    "who": "working"
+   },
+   {
+    "text": "said they had called when the thought alone had been enough",
+    "who": "anyone"
+   },
+   {
+    "text": "used the charger from the desk drawer and replaced it without asking",
+    "who": "anyone"
+   },
+   {
+    "text": "claimed the parking space they watched someone else looking for earlier",
+    "who": "anyone"
+   },
+   {
+    "text": "left the borrowed book on the seat instead of returning it properly",
+    "who": "anyone"
+   },
+   {
+    "text": "agreed to join the project and then stopped answering the messages",
+    "who": "working"
+   },
+   {
+    "text": "told their child the box was empty when one piece was left",
+    "who": "parent"
+   },
+   {
+    "text": "forwarded the long email thread without reading anything beyond the subject",
+    "who": "working"
+   },
+   {
+    "text": "promised to cook for the gathering and bought the dish already made",
+    "who": "anyone"
+   },
+   {
+    "text": "nodded through the entire meeting without understanding the new procedure",
+    "who": "working"
+   },
+   {
+    "text": "saved the long article to read and left the tab unopened for weeks",
+    "who": "anyone"
+   },
+   {
+    "text": "let the other person believe the error had been theirs from the start",
+    "who": "anyone"
+   },
+   {
+    "text": "checked the box on the application without confirming the date was right",
+    "who": "anyone"
+   },
+   {
+    "text": "said they were running late when they had forgotten the time completely",
+    "who": "anyone"
+   },
+   {
+    "text": "took the padded chair at the table without offering it to anyone else",
+    "who": "anyone"
+   },
+   {
+    "text": "deleted the reminder message so the task could be ignored without guilt",
+    "who": "working"
+   },
+   {
+    "text": "told the story as if they had been there when they only heard it",
+    "who": "anyone"
+   },
+   {
+    "text": "left the common area with more clutter than when they entered it",
+    "who": "anyone"
+   },
+   {
+    "text": "agreed to keep the secret and mentioned it before the day ended",
+    "who": "anyone"
+   },
+   {
+    "text": "signed up for the shift and later sent a message they could not come",
+    "who": "retired"
+   },
+   {
+    "text": "moved the unfinished work to the bottom of the stack to hide it",
+    "who": "anyone"
+   },
+   {
+    "text": "claimed they followed the recipe when they had only heated something up",
+    "who": "anyone"
+   },
+   {
+    "text": "put the cracked mug back on the shelf without pointing it out",
+    "who": "anyone"
+   },
+   {
+    "text": "said the previous meeting ran late to cover arriving after it started",
+    "who": "working"
+   },
+   {
+    "text": "avoided looking at the person whose call they had meant to return",
+    "who": "anyone"
+   },
+   {
+    "text": "used the same notes for the talk without changing any of the content",
+    "who": "working"
+   },
+   {
+    "text": "told their sibling the present was perfect and stored it out of sight",
+    "who": "anyone"
+   },
+   {
+    "text": "skipped the rinse step and stacked the dirty plates straight into the sink",
+    "who": "anyone"
+   },
+   {
+    "text": "let the driver think the fare went through when the card had not",
+    "who": "anyone"
+   },
+   {
+    "text": "copied the directions from memory instead of looking them up as instructed",
+    "who": "anyone"
+   },
+   {
+    "text": "answered the question without admitting they were only guessing the answer",
+    "who": "teen"
+   },
+   {
+    "text": "placed the plant by the window knowing the watering would be forgotten",
+    "who": "anyone"
+   },
+   {
+    "text": "told the version of events that left out their own small mistake",
+    "who": "anyone"
+   },
+   {
+    "text": "closed the file without making the edit they had agreed to complete",
+    "who": "working"
+   },
+   {
+    "text": "said they finished the worksheet when they had only filled the first line",
+    "who": "child"
+   },
+   {
+    "text": "moved their coat onto the empty seat so no one else would sit there",
+    "who": "married"
+   }
+  ],
+  "family": [
+   {
+    "text": "skipped the usual evening check-in with their sibling",
+    "who": "anyone"
+   },
+   {
+    "text": "let the birthday card for their cousin sit unsigned on the counter",
+    "who": "anyone"
+   },
+   {
+    "text": "went to bed without mentioning the small thing that bothered them",
+    "who": "anyone"
+   },
+   {
+    "text": "ignored the voicemail from their aunt about the weekend visit",
+    "who": "anyone"
+   },
+   {
+    "text": "argued over whose turn it was to choose the movie",
+    "who": "teen"
+   },
+   {
+    "text": "put their phone face down during the family video call",
+    "who": "anyone"
+   },
+   {
+    "text": "forgot the grocery item their child had asked for specifically",
+    "who": "parent"
+   },
+   {
+    "text": "stayed in the car a few minutes longer than needed after arriving home",
+    "who": "anyone"
+   },
+   {
+    "text": "left the shared laundry unfolded in the basket overnight",
+    "who": "anyone"
+   },
+   {
+    "text": "didn't reply to their partner's message until the next morning",
+    "who": "married"
+   },
+   {
+    "text": "avoided eye contact at breakfast after the quiet disagreement",
+    "who": "anyone"
+   },
+   {
+    "text": "packed their lunch without making extra for the others in the house",
+    "who": "anyone"
+   },
+   {
+    "text": "checked their messages under the table during dinner conversation",
+    "who": "anyone"
+   },
+   {
+    "text": "declined the offer to help with the weekend errands",
+    "who": "anyone"
+   },
+   {
+    "text": "turned off the light in the living room before everyone was ready",
+    "who": "anyone"
+   },
+   {
+    "text": "sat in the other room instead of joining the conversation on the couch",
+    "who": "anyone"
+   },
+   {
+    "text": "sent a short reply to their parent's long update",
+    "who": "teen"
+   },
+   {
+    "text": "walked past the open bedroom door without stopping to talk",
+    "who": "anyone"
+   },
+   {
+    "text": "set the table for one less person than usual",
+    "who": "anyone"
+   },
+   {
+    "text": "listened to the story their sibling told without asking any follow-up questions",
+    "who": "anyone"
+   },
+   {
+    "text": "left the front light off even though someone was still out",
+    "who": "anyone"
+   },
+   {
+    "text": "canceled the planned call with their relative at the last minute",
+    "who": "anyone"
+   },
+   {
+    "text": "ate dinner standing up in the kitchen instead of at the table",
+    "who": "anyone"
+   },
+   {
+    "text": "didn't mention the good thing that happened to them that day",
+    "who": "anyone"
+   },
+   {
+    "text": "let the house stay quiet instead of playing the usual music",
+    "who": "anyone"
+   },
+   {
+    "text": "returned home later than expected without sending a message",
+    "who": "anyone"
+   },
+   {
+    "text": "put away the dishes without drying the ones their partner usually handled",
+    "who": "married"
+   },
+   {
+    "text": "changed the subject when their child brought up the school event",
+    "who": "parent"
+   },
+   {
+    "text": "stayed up later scrolling instead of turning in together",
+    "who": "married"
+   },
+   {
+    "text": "missed the small detail their family member had pointed out earlier",
+    "who": "anyone"
+   },
+   {
+    "text": "spoke only when spoken to during the evening meal",
+    "who": "anyone"
+   },
+   {
+    "text": "left the shared space without saying where they were going",
+    "who": "anyone"
+   },
+   {
+    "text": "put their headphones on right after the meal ended",
+    "who": "teen"
+   },
+   {
+    "text": "deleted the draft message to their sibling without sending it",
+    "who": "anyone"
+   },
+   {
+    "text": "made coffee for themselves only in the morning routine",
+    "who": "anyone"
+   },
+   {
+    "text": "stepped over the toy their child left out without picking it up",
+    "who": "parent"
+   }
+  ],
+  "outabout": [
+   {
+    "text": "skipped the saturday market and stayed in to sort old mail instead",
+    "who": "anyone"
+   },
+   {
+    "text": "turned back halfway to the bus and unlocked the apartment door again",
+    "who": "anyone"
+   },
+   {
+    "text": "let the porch light stay off when the usual knock came",
+    "who": "anyone"
+   },
+   {
+    "text": "took the short block home to avoid passing the open windows",
+    "who": "anyone"
+   },
+   {
+    "text": "cancelled the coffee meetup by not replying to the last message",
+    "who": "anyone"
+   },
+   {
+    "text": "closed the blinds before the afternoon light reached the living room",
+    "who": "anyone"
+   },
+   {
+    "text": "stayed inside when the group left for the evening gathering",
+    "who": "anyone"
+   },
+   {
+    "text": "avoided the front steps and entered through the side entrance instead",
+    "who": "anyone"
+   },
+   {
+    "text": "ignored the text about the weekend plans until it was too late",
+    "who": "anyone"
+   },
+   {
+    "text": "pulled the door shut without stepping onto the sidewalk",
+    "who": "anyone"
+   },
+   {
+    "text": "chose the back stairwell to skip running into the neighbor below",
+    "who": "anyone"
+   },
+   {
+    "text": "let the weekend pass without answering the buzzer at the gate",
+    "who": "anyone"
+   },
+   {
+    "text": "kept the coat on the hook and ate dinner from the same chair",
+    "who": "anyone"
+   },
+   {
+    "text": "deleted the draft about joining the walk around the lake",
+    "who": "anyone"
+   },
+   {
+    "text": "walked the long indoor hallway to dodge the courtyard voices",
+    "who": "anyone"
+   },
+   {
+    "text": "missed the break room chat by eating lunch at their desk again",
+    "who": "working"
+   },
+   {
+    "text": "stayed on the couch when the porch swing creaked with someone else",
+    "who": "married"
+   },
+   {
+    "text": "turned down the movie invite by saying the bus ran too late",
+    "who": "teen"
+   },
+   {
+    "text": "hid the library card in a drawer instead of walking there after school",
+    "who": "child"
+   },
+   {
+    "text": "skipped the evening call and watched the phone screen go dark",
+    "who": "retired"
+   },
+   {
+    "text": "chose the corner store on the opposite block to avoid familiar faces",
+    "who": "anyone"
+   },
+   {
+    "text": "let the laundry basket sit by the door through the whole weekend",
+    "who": "parent"
+   },
+   {
+    "text": "cancelled the plan to visit the lake by turning the key in the lock twice",
+    "who": "anyone"
+   },
+   {
+    "text": "kept the headphones in to not hear anyone on the stairwell",
+    "who": "anyone"
+   },
+   {
+    "text": "ignored the group chat ping about meeting at the corner store",
+    "who": "anyone"
+   },
+   {
+    "text": "took the elevator instead of the stairs where neighbors usually wave",
+    "who": "anyone"
+   },
+   {
+    "text": "stayed home when the carpool text came through in the morning",
+    "who": "working"
+   },
+   {
+    "text": "pulled the blanket higher instead of answering the front door",
+    "who": "anyone"
+   },
+   {
+    "text": "avoided the porch swing after seeing the neighbor's light come on",
+    "who": "married"
+   },
+   {
+    "text": "let the weekend invitation expire without opening the message",
+    "who": "teen"
+   },
+   {
+    "text": "chose the shorter route through the alley to reach home faster",
+    "who": "anyone"
+   },
+   {
+    "text": "kept the living room dark when footsteps passed on the sidewalk",
+    "who": "anyone"
+   },
+   {
+    "text": "skipped the break room coffee to eat alone at their desk",
+    "who": "working"
+   },
+   {
+    "text": "turned the key without stepping out when the evening cooled",
+    "who": "retired"
+   },
+   {
+    "text": "let the book club reminder sit unread in their pocket all day",
+    "who": "anyone"
+   },
+   {
+    "text": "stayed in the stairwell until the lobby cleared of voices",
+    "who": "anyone"
+   }
+  ]
+ }
+}

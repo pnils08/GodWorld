@@ -325,6 +325,21 @@ A pilot's week scored both ways, all 42 pilot-weeks on disk (C103–C116; 26 of 
 | Credits (the wager market's `credits_sign`; 0 is the push) | 20 (2 below, 18 at 0) | 22 | 7 at 0, 2 above — the board's top three all at 0 |
 | Points (what the board ranks on since C114) | 7 | 35 | 0 scored nights at 0; one week reads 0 because its points were not yet read that night |
 
+### Down lines, first cut (2026-11-17)
+
+Grok (`x-ai/grok-4.3`, OpenRouter) drafted two rounds, one call a dial: 254 lines, then 168 on a sharper brief after the first came back as people looking at their phones (`output/research-build/2026-11-17-e350-grok-downlines.js`, drafts `…-grok-downlines.json`, `…-r2.json`; reported cost $0.08). The brief is a line-library writing job: the city, the form, the dial's down side, what is out (crime, violence, death, illness, anything a paper would report). research-build cut and wrote: **148 lines** in `…-e350-downlines-cut1.json` — sociability 21, warmth 21, drive 21, openness 21, integrity 22, family 22, outabout 20; 111 from the drafts (as drafted or trimmed), 37 written here; 0 already on the tab. Each carries who it can happen to (anyone 99, parent 10, working 11, teen 12, child 7, married 5, retired 4). On no sheet.
+
+Where they go is the build's: the tab draws by pool key, each eligible key the same share (`generateCitizensEvents.js:51-55`), and the tab is 2,257 of the 4,997 lines logged C115–C116; the code pools are the rest (sociability 330 up / 2 down, warmth 238 / 0, openness 367 / 0 from code alone), so the code pools take down lines too and that part is an engine deploy.
+
+### Bets as designed (2026-11-17, research-build's under his "Agree")
+
+| Piece | Design |
+|---|---|
+| Size | the amount won (payout less stake) or lost (stake) over one week of pay: small under 10%, medium 10–20%, large over 20%. Settled bets to date fall wins 21 / 30 / 6, losses 14 / 35 / 12 |
+| Hit | small = what any bet gives today (win composure +2, drive +1; loss composure −3). Medium: win composure +3, drive +1; loss composure −4. Large: win composure +4, drive +2; loss composure −5, drive −1 (the size of the `Setback` line that cannot fire). Written as its own key at the writer; the word-match on the line's text goes |
+| What makes them choose | stays as built: the week's posture (a climber stakes 12–30% of a week, anyone else 8–20%, a retreat half), wealth level's cap, a roll, and the low-composure tilt. It already spreads bets over the three sizes. Not rebuilt |
+| Kind readers | every reader of the `Casino` kind and of the three loss sentences is listed on the wiring card before the cut |
+
 ## Tasks
 
 | # | Task | Row | Status |
@@ -401,3 +416,4 @@ agy, `output/antigravity/2026-11-16-review-dials-plan.md` (HOLD on the first cut
 - 2026-11-17 (research-build) — Task 3 read live at the 18:15 write wake: filed rows land by the fixed tag, no graded row, grade lines stay on the pages. Acceptance 7 so far: 1 bad-event row on the live tab (`Stumble | Frustrated`, a citizen who lost a 372 stake on the UNDOCKED book) — a right read.
 - 2026-11-17 (research-build) — Builder: "Go" on engine.350. Tasks 7 and 8 read: pushes up against down per dial in the cells C113–C116, the live content tab's signed lines, every settled bet against net worth and a week of pay, UNDOCKED nights since C109. Calls put to the builder before any code: who writes the missing down lines, what a bet is sized against, what a bad run is.
 - 2026-11-17 (research-build) — Builder's rulings on the three calls recorded verbatim. Open with him: whether a pilot's week is scored on credits or on points.
+- 2026-11-17 (research-build) — Down lines, first cut: Grok drafted 422 over two rounds, 148 kept or written (`output/research-build/2026-11-17-e350-downlines-cut1.json`), none on a sheet. Bets designed: three sizes against a week of pay, the small hit unchanged, medium and large harder; the stake choice stays as built.

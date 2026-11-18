@@ -10,6 +10,8 @@ verdict: adopt — the map the reporter template is built from (pipeline.110)
 **Ignited plans:** [[../plans/2026-11-10-role-citizens-wake-as-themselves]] (Task 9, Reporter rulings 2026-11-17).
 **Source:** code read 2026-11-17 (slice builders, `newsroom-fanout.js`, `newsroomSourcing.js`, `newsroomWakePackages.js`, `cron-desk-run.js`, `cron-desk-writer.js`, crontab); tab list [[2026-11-15-worker-records-all-tabs]]; workers `scripts/workerWake.js` JOBS.
 
+**Not the plan (builder 2026-11-17: "There is already a plan so idk whats going on"; "Everyone has roles and jobs I already set").** The reporters' order is pipeline.111's ([[../plans/2026-11-10-stop-puppeting-the-newsroom]]); its inventory is the record. This page is notes for it.
+
 A map. It changes no wake (builder 2026-11-17: "the media has been writing decent so this is a very cautious build in that we dont make them worse"). The **Proposed** columns are for the builder to rule on; everything else is what the code does today.
 
 ## How a reporter is fed today

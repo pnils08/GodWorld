@@ -1282,7 +1282,36 @@ pointers:
 
 ## Relationship_Bond_Ledger
 
-- **Rows:** 6874
+- **Rows:** 4021
+- **Columns:** 19
+
+| Col | Header |
+|-----|--------|
+| A | Timestamp |
+| B | Cycle |
+| C | BondId |
+| D | CitizenA |
+| E | CitizenB |
+| F | BondType |
+| G | Intensity |
+| H | Status |
+| I | Origin |
+| J | DomainTag |
+| K | Neighborhood |
+| L | CycleCreated |
+| M | LastUpdate |
+| N | Notes |
+| O | Holiday |
+| P | HolidayPriority |
+| Q | FirstFriday |
+| R | CreationDay |
+| S | SportsSeason |
+
+---
+
+## Relationship_Bond_Archive
+
+- **Rows:** 3211
 - **Columns:** 19
 
 | Col | Header |

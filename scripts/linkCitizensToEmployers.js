@@ -9,9 +9,15 @@
  *   4. Self-employed detection ("Taqueria Owner" → SELF_EMPLOYED)
  *   5. Category default (economic profile category → default BIZ-ID)
  *
+ * READ-ONLY (builder 2026-11-18): this script writes nothing. Its write paths — the
+ * EmployerBizId cells on Simulation_Ledger, new rows on Business_Ledger, and the
+ * delete-and-rebuild of Employment_Roster — were removed. A citizen's employer changes
+ * only by the career engine (hire / layoff) or the Advancement_Intake door.
+ * The resolver and its preview stay: the mint's mapping lists are held equal to this file
+ * by scripts/mintEmployerPick.test.js.
+ *
  * Usage:
- *   node scripts/linkCitizensToEmployers.js --dry-run    # Preview
- *   node scripts/linkCitizensToEmployers.js               # Apply
+ *   node scripts/linkCitizensToEmployers.js [--list-unmatched]    # Preview only
  *
  * Phase 14.4 of the Economic Parameter Wiring plan.
  */
@@ -22,7 +28,6 @@ require('/root/GodWorld/lib/env');
 const sheets = require('../lib/sheets');
 const fs = require('fs');
 
-const DRY_RUN = process.argv.includes('--dry-run');
 // S313: --fill-blanks-only — write ONLY citizens whose EmployerBizId is
 // currently blank. Protects career-engine-maintained employer state
 // (hires/layoffs since Phase 14.4) from being clobbered by re-resolution.
@@ -46,7 +51,7 @@ const UNTRACKED_ONLY = process.argv.includes('--untracked-only');
 const LIST_UNMATCHED = process.argv.includes('--list-unmatched');
 
 async function main() {
-  console.log(DRY_RUN ? '=== DRY RUN ===' : '=== LIVE RUN ===');
+  console.log('=== PREVIEW (read-only) ===');
   console.log('');
 
   // Load mapping data
@@ -365,9 +370,9 @@ async function main() {
     console.log('');
   }
 
-  if (DRY_RUN) {
-    // pipeline.68 (rb 2026-10-16): a blank-cell dry run previews exactly the cells the live
-    // run would write — the live path below filters on the live cell, so the preview must too.
+  {
+    // pipeline.68 (rb 2026-10-16): the blank-cell preview — which cells a blank-fill run would have
+    // written (the write path is removed; the preview stays as a read of the resolver's opinion).
     if (FILL_BLANKS_ONLY || UNTRACKED_ONLY) {
       var plan = results.filter(function(r) {
         var existing = employerColExists ? String(rows[r.rowIndex][iEmployerBizId] || '').trim() : '';
@@ -375,113 +380,14 @@ async function main() {
         if (UNTRACKED_ONLY && /^BIZ-/.test(r.bizId)) return false;
         return true;
       });
-      console.log('--- BLANK-CELL PLAN (' + plan.length + ' cells the live run would write) ---');
+      console.log('--- BLANK-CELL PLAN (' + plan.length + ' cells the removed blank-fill run would have written) ---');
       plan.forEach(function(r) {
         console.log('  ' + r.popId + ' ' + r.name + ' | ' + r.roleType + ' → ' + r.bizId + ' ' + (bizNames[r.bizId] || '') + ' [' + r.layer + ']');
       });
       console.log('');
     }
-    console.log('=== DRY RUN COMPLETE — no changes written ===');
-    return;
-  }
-
-  // === LIVE WRITES ===
-
-  // 1. Add new businesses to Business_Ledger
-  if (newBizToAdd.length > 0) {
-    console.log('Adding ' + newBizToAdd.length + ' new businesses to Business_Ledger...');
-    var newBizRows = newBizToAdd.map(function(nb) {
-      return [nb.bizId, nb.name, nb.sector, nb.neighborhood, '', '', '', '', ''];
-    });
-    await sheets.appendRows('Business_Ledger', newBizRows);
-    console.log('  Done');
-  }
-
-  // 2. Write EmployerBizId column to Simulation_Ledger
-  console.log('Writing EmployerBizId to Simulation_Ledger...');
-
-  // Add header if column doesn't exist
-  if (!employerColExists) {
-    function colLetter(idx) {
-      if (idx < 26) return String.fromCharCode(65 + idx);
-      return String.fromCharCode(64 + Math.floor(idx / 26)) + String.fromCharCode(65 + (idx % 26));
-    }
-    var headerCell = 'Simulation_Ledger!' + colLetter(iEmployerBizId) + '1';
-    await sheets.updateRange(headerCell, [['EmployerBizId']]);
-    console.log('  Created EmployerBizId header at column ' + colLetter(iEmployerBizId));
-  }
-
-  // Batch write employer values
-  function colLetter2(idx) {
-    if (idx < 26) return String.fromCharCode(65 + idx);
-    return String.fromCharCode(64 + Math.floor(idx / 26)) + String.fromCharCode(65 + (idx % 26));
-  }
-  var empCol = colLetter2(iEmployerBizId);
-
-  var batchUpdates = [];
-  var writtenByPop = {}; // popId -> value this run writes (roster mirrors the ledger)
-  var skippedExisting = 0, skippedPendingCanonTie = 0;
-  for (var w = 0; w < results.length; w++) {
-    var res = results[w];
-    if (FILL_BLANKS_ONLY || UNTRACKED_ONLY) {
-      var existing = employerColExists ? String(rows[res.rowIndex][iEmployerBizId] || '').trim() : '';
-      if (existing) { skippedExisting++; continue; }
-    }
-    // S357: --untracked-only — never bulk-write a tracked BIZ-ID (no mass
-    // hiring event, Mike-direct). Tracked resolutions for blank cells stay
-    // unwritten and surface as PENDING roster rows for case-by-case approval.
-    // Sentinels (UNTRACKED, SELF_EMPLOYED) are not hiring events — they write.
-    if (UNTRACKED_ONLY && /^BIZ-/.test(res.bizId)) { skippedPendingCanonTie++; continue; }
-    var rowNum = res.rowIndex + 2; // +1 header, +1 for 1-based
-    writtenByPop[res.popId] = res.bizId;
-    batchUpdates.push({
-      range: 'Simulation_Ledger!' + empCol + rowNum,
-      values: [[res.bizId]]
-    });
-  }
-  if (FILL_BLANKS_ONLY || UNTRACKED_ONLY) {
-    console.log('  blank-cell mode: writing ' + batchUpdates.length + ' cells; kept ' +
-      skippedExisting + ' existing values' +
-      (UNTRACKED_ONLY ? '; ' + skippedPendingCanonTie + ' tracked-biz resolutions left PENDING (case-by-case)' : ''));
-  }
-
-  // Write in chunks of 500
-  var CHUNK = 500;
-  for (var c = 0; c < batchUpdates.length; c += CHUNK) {
-    var chunk = batchUpdates.slice(c, c + CHUNK);
-    await sheets.batchUpdate(chunk);
-    console.log('  Wrote cells ' + (c + 1) + '-' + Math.min(c + CHUNK, batchUpdates.length) + ' of ' + batchUpdates.length);
-  }
-
-  // 3. Create Employment_Roster
-  console.log('Creating Employment_Roster...');
-  try { await sheets.deleteSheet('Employment_Roster'); } catch (e) { /* doesn't exist yet */ }
-
-  var rosterHeaders = ['BIZ_ID', 'POP_ID', 'CitizenName', 'RoleType', 'Status', 'MappingLayer'];
-  await sheets.createSheet('Employment_Roster', rosterHeaders);
-
-  // S357 engine.83: the roster mirrors the LEDGER, never the resolver's
-  // unwritten opinion — a roster/SL disagreement is the acceptance-criterion-6
-  // failure. Effective value = what this run wrote, else the existing SL
-  // value (layer 'existing'), else blank → a PENDING row: a resolution the
-  // run deliberately did not bulk-write (case-by-case queue for Mike).
-  var rosterRows = results.map(function(r) {
-    var liveVal = employerColExists ? String(rows[r.rowIndex][iEmployerBizId] || '').trim() : '';
-    var effective = writtenByPop[r.popId] || liveVal || '';
-    var layerOut = writtenByPop[r.popId] ? r.layer : (liveVal ? 'existing' : r.layer);
-    var rosterStatus = 'Active';
-    if (effective === 'SELF_EMPLOYED') rosterStatus = 'SELF_EMPLOYED';
-    else if (effective === 'UNTRACKED') rosterStatus = 'UNTRACKED';
-    else if (!effective) rosterStatus = 'PENDING';
-    else if (layerOut === 'sports') rosterStatus = 'SPORTS_OVERRIDE';
-    return [effective, r.popId, r.name, r.roleType, rosterStatus, layerOut];
-  });
-
-  // Write in chunks
-  for (var rc = 0; rc < rosterRows.length; rc += CHUNK) {
-    var rosterChunk = rosterRows.slice(rc, rc + CHUNK);
-    await sheets.appendRows('Employment_Roster', rosterChunk);
-    console.log('  Roster rows ' + (rc + 1) + '-' + Math.min(rc + CHUNK, rosterRows.length) + ' of ' + rosterRows.length);
+    console.log('=== PREVIEW COMPLETE — this script writes nothing ===');
+    console.log('');
   }
 
   // 4. Headcount sanity check against Business_Ledger (read-only — S349)

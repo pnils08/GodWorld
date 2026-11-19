@@ -1,0 +1,79 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ suppress logs { quiet: true }
+docs in citizen-pages: 4251 | a part opens with a label (list read): 1510
+to rewrite: 1510 docs | labels taken off, by kind: {"TENSION":908,"datawake":119,"graded":47,"filed":212,"TENSION-RESOLVED":111,"stated":513}
+multi-part docs: 164 | filing + grade in one doc (no kind set): 3
+left alone — a label on a doc of another type: 0
+still label-led after the split: 0
+empty after the split: 0
+
+TENSION  cp-POP-00273-c112-PRESS-tension
+  was: TENSION[c112]: Are the Oaks really turning it around, or is this just a hot streak?
+  now: Are the Oaks really turning it around, or is this just a hot streak?
+  metadata added: {"kind":"open"}
+
+TENSION  cp-POP-01027-c112-PRESS-tension
+  was: TENSION[c112]: Who are we out there, and what role will I end up with? That conversation is still going. --- TENSION[c112]: Will the fans stay patient while we're still finding our footing?
+  now: Who are we out there, and what role will I end up with? That conversation is still going. --- Will the fans stay patient while we're still finding our footing?
+  metadata added: {"kind":"open"}
+
+TENSION-RESOLVED  cp-POP-00488-c112-PRESS-tension-resolved
+  was: TENSION-RESOLVED[c112]: Why did it take a new title for people to start asking what I think?
+  now: Why did it take a new title for people to start asking what I think?
+  metadata added: {"kind":"resolved"}
+
+TENSION-RESOLVED  cp-POP-00789-c111-morning-tension-resolved
+  was: TENSION-RESOLVED[c111]: Am I fighting for the block itself, or just the version of it that still fits inside those chalk lines?
+  now: Am I fighting for the block itself, or just the version of it that still fits inside those chalk lines?
+  metadata added: {"kind":"resolved"}
+
+stated  cp-POP-00041-c112-CIVIC-cascade-STMT-112-baylight_authority-002
+  was: stated: [Baylight District Community Impact Mitigation] Keisha Ramos — The construction fence has our number — and starting this cycle, it answers within 48 hours.
+  now: The construction fence has our number — and starting this cycle, it answers within 48 hours.
+  metadata added: {"topic":"Baylight District Community Impact Mitigation","speaker":"Keisha Ramos"}
+
+stated  cp-POP-00041-c112-CIVIC-cascade-STMT-112-baylight_authority-001
+  was: stated: [Baylight District Construction Milestone Review] Keisha Ramos — The soil is clean, the oversight is independent, and the Cycle 115 review holds. But a build only succeeds if the neighborhoods
+  now: The soil is clean, the oversight is independent, and the Cycle 115 review holds. But a build only succeeds if the neighborhoods beside it hold too.
+  metadata added: {"topic":"Baylight District Construction Milestone Review","speaker":"Keisha Ramos"}
+
+datawake  cp-POP-00502-c112-CIVIC-datawake-2026-10-22
+  was: datawake: I support the progress made on the Baylight District remediation, particularly the completion of soil test verification and the commencement of Phase II remediation with independent oversigh
+  now: I support the progress made on the Baylight District remediation, particularly the completion of soil test verification and the commencement of Phase II remediation with independent oversight. However
+  metadata added: {"signal":"2"}
+
+datawake  cp-POP-00136-c112-CIVIC-datawake-2026-10-22
+  was: datawake: The Oakland Police Department has filed the East Oakland co-response protocol alignment memo requested this cycle. The memo establishes clear transfer thresholds between OPD sector patrol an
+  now: The Oakland Police Department has filed the East Oakland co-response protocol alignment memo requested this cycle. The memo establishes clear transfer thresholds between OPD sector patrol and OARI dis
+  metadata added: {"signal":"1"}
+
+filed  cp-POP-01076-c112-PRESS
+  was: filed: In a Rockridge break room where the night shift traded stories between calls, the talk turned to Raf --- filed: In the Baylight District, the sidewalk outside the late-shift coffee window staye
+  now: In a Rockridge break room where the night shift traded stories between calls, the talk turned to Raf --- In the Baylight District, the sidewalk outside the late-shift coffee window stayed busy long af
+  metadata added: {"kind":"filed"}
+
+filed  cp-POP-01211-c112-PRESS
+  was: filed: The little thing was the coffee grinder downstairs again, that loud, grinding whir at 6 a.m. I wante --- filed: Honest? It's the quiet that gets me. I can't switch off because I keep thinking a
+  now: The little thing was the coffee grinder downstairs again, that loud, grinding whir at 6 a.m. I wante --- Honest? It's the quiet that gets me. I can't switch off because I keep thinking about the folks
+  metadata added: {"kind":"filed"}
+
+graded  cp-POP-01076-c112-PRESS-graded-nia-rook
+  was: graded: 2/4 — The piece falls below the 350-word minimum and ends on a vague meta-reference rather than a specific sentence for hallways to argue about. --- graded: 3/4 — The piece is under the 350-wo
+  now: 2/4 — The piece falls below the 350-word minimum and ends on a vague meta-reference rather than a specific sentence for hallways to argue about. --- 3/4 — The piece is under the 350-word minimum targe
+  metadata added: {"kind":"graded"}
+
+graded  cp-POP-01211-c112-PRESS-graded-ines-sorensen
+  was: graded: 3/4 — The piece falls short of the 300-word minimum target. --- graded: 4/4 — nothing fell short --- graded: 2/4 — The piece fell short of the 300-word minimum and ended on an attribution line
+  now: 3/4 — The piece falls short of the 300-word minimum target. --- 4/4 — nothing fell short --- 2/4 — The piece fell short of the 300-word minimum and ended on an attribution line rather than leaving the
+  metadata added: {"kind":"graded"}
+
+stated: entries with a dash near the front and no speaker taken: 0
+speakers taken (17): Avery Santana 137 · Rose Delgado 33 · Janae Rivers 33 · Elliott Crane 33 · Warren Ashford 29 · Ramon Vega 29 · Brenda Okoro 28 · Leonard Tran 27 · Denise Carter 27 · Nina Chen 25 · Marcus Webb 16 · Terrence Mobley 15 · Bobby Chen-Ramirez 14 · Vanessa Tran-Muñoz 14 · Keisha Ramos 13 · Elena Soria Dominguez 13 · Rafael Montez 7
+  … 200 of 1510
+  … 400 of 1510
+  … 600 of 1510
+  … 800 of 1510
+  … 1000 of 1510
+  … 1200 of 1510
+  … 1400 of 1510
+written 1510 | failed 0 | already plain at the read 0 | old entries saved: /root/GodWorld/output/repairs/2026-11-19-page-labels-off-BEFORE-2026-11-19T20-21-53.json
+read-back: differs 0 | still being processed by the store 0 of 1510

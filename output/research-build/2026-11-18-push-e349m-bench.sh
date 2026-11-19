@@ -16,7 +16,10 @@ S53=$OUT/stage57-e350d.sha256; MAN=$OUT/stage58-e349m.sha256
 BASE=5c0c090bd
 FILES="phase02-world-state/loadEventContentLedger.js phase04-events/generationalEventsEngine.js phase05-citizens/applyBusinessDynamics.js phase05-citizens/bondEngine.js phase05-citizens/casinoLedgerEngine.js phase05-citizens/generateCitizensEvents.js phase05-citizens/generationalWealthEngine.js phase05-citizens/migrationTrackingEngine.js phase05-citizens/runCareerEngine.js phase05-citizens/runConductEngine.js phase05-citizens/updateCivicApprovalRatings.js utilities/citizenMemory.js utilities/compressLifeHistory.js"
 SRC=${1:?commit}; DRY=${2:-}
-[ "$(git diff --name-only "$BASE" "$SRC" -- 'phase*' utilities appsscript.json | sort | tr '\n' ' ')" = "$(echo $FILES | tr ' ' '\n' | sort | tr '\n' ' ')" ] \
+# OTHERS: engine files another lane has committed since stage 57 and not yet shipped. They are NOT in this stage
+# (the tree is PROD's pull plus the thirteen); named here so a fourteenth file of this job cannot slip by unseen.
+OTHERS="phase05-citizens/civicInitiativeEngine.js"   # engine-sheet, civic.49 (f99ad848a), waiting on this bench
+[ "$(git diff --name-only "$BASE" "$SRC" -- 'phase*' utilities appsscript.json | grep -vxF "$OTHERS" | sort | tr '\n' ' ')" = "$(echo $FILES | tr ' ' '\n' | sort | tr '\n' ' ')" ] \
   || { echo "$SRC changes a different set of engine files than the thirteen — stop"; git diff --name-only "$BASE" "$SRC" -- 'phase*' utilities appsscript.json; exit 1; }
 W=$(mktemp -d); mkdir -p "$W/stage" "$W/pullback"
 tree() { ( cd "$1" && find . -type f ! -name .clasp.json | sort | xargs sha256sum ); }

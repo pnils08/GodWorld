@@ -1,7 +1,7 @@
 ---
 title: Every Saved Word Reaches the Dials Plan
 created: 2026-11-16
-updated: 2026-11-18
+updated: 2026-11-19
 type: plan
 tags: [engine, draft]
 sources:
@@ -614,6 +614,79 @@ At today's speed the balanced lines brought the down side into being but few mov
 
 The three writes, in order, each dry-run by default and read back: `node scripts/undockedEclPoolApply.js --pool downLines --apply` (the nine placed rows); `node scripts/contentTabReads.js --apply` (72 rows off incl. the flyer, 38 Tags cells); the speed keys — two rows `dialLineScale` = 2 and `dialDirectShare` = 0.25 on live `World_Config` (absent until the first fire seeds them at 1 and 0; the seeding adds only what is missing).
 
+## Task 14 as built — the middle counts (2026-11-18 / 19)
+
+Ruling 5 (builder 2026-11-18): "make the middle count". Read first (wiring card for `getCitizenDialBands_` / `bandIndex_`, every pointer opened): 23 call sites of the seam in phase 4 and 5, each reading a band — `mult` (0.5 / 0.75 / 1 / 1.25 / 1.5 by band), `bands` (−2..+2), `crimeReachable`; plus the bond face fallback, the casino's `drive >= 60`, the content tab's dial terms and the wake prompt's `disposition()`. At 45 / 50 / 55 every one of them returned the same thing.
+
+**One rule** (`utilities/citizenMemory.js`). An old per-band table is the value at each band's middle (10 / 30 / 50 / 70 / 90); the reader draws a straight line between them, flat past 10 and 90 (`dialLadder_`). `dialPos_` is the number on the old signed scale, unrounded. An old yes / no door is a share 0..1 (`dialHigh_(v, k)`, `dialLow_(v, k)`): 0 at the middle of the band below, 0.5 at the old edge, 1 at the middle of the band. Nothing changes for a citizen sitting on a band's middle; a citizen just past an old edge gets less than the band gave (61: ×1.25 → ×1.14; 80: ×1.5 → ×1.375). `getCitizenDialBands_` returns `current`, `pos`, `mult`, `crimeReach`; `bands` and `crimeReachable` are gone. `bandIndex_` stays as a measure (Dial_Moves, Dial_Pulse) and a label (the archetype name, the face words).
+
+| Reader | 45 | 50 | 55 | before, all of 40–60 |
+|---|---|---|---|---|
+| Event odds — participation, pool weights, the micro, education, relationship, neighborhood, youth, household, career, birth (`mult`) | ×0.94 | ×1.00 | ×1.06 | ×1.00 (59: 1.00, 61: 1.25 → 1.11, 1.14) |
+| An ordinary temptation given in to (`CONDUCT_SLIP_P_`) | 0.275 | 0.25 | 0.225 | 0.25 |
+| A contest term — job slot, heritage stake, rival suitor (`pos`) | −0.25 | 0 | +0.25 | 0 (odds against a 50: 48 / 50 / 52%) |
+| A bond's pair factor, two alike (`bondDialPos_`) | ×0.97 | ×1.00 | ×1.03 | ×1.00 |
+| A scandal on an officeholder (`holderIntegrityPos_`; live keys ×1.5 low, ×0.5 high) | ×1.06 | ×1 | ×0.94 | ×1 |
+| The owner's closure room (`dialOwnerStreakRoom` 1 on live; a seeded draw for a part of a cycle) | −1 cycle a quarter of the time | 0 | +1 a quarter of the time | 0 |
+| Stress invites temptation (composure) | ×1.06 | ×1 | ×1 | ×1 |
+| The archetype's pool weights (`archetypeWeightsFromDials_`; drive shown, work lines) | ×1 | ×1 | ×1.075 | ×1 (60: ×1.3 → ×1.15) |
+| A content row `warmth>=60` (share of its Weight) | 0 | 0 | 0.25 | 0 |
+| A content row `warmth<=39` | 0.2 | 0 | 0 | 0 |
+| The wake prompt's temperament line (4 or more off 50) | "slightly guarded" | — | "somewhat warm" | "even-keeled, unremarkable" |
+
+The far-end doors read nothing different at 45 / 50 / 55 and now open by a share instead of at 20 or 80: the crime door (`crimeReach`: 0 at integrity 30, 0.5 at 20, 1 at 10; or integrity under 50 with composure at the bottom), the casino (the odds of sitting down thin from integrity 70 to 90; a placed bet is on tilt from composure 30 to 10; the drive factor ×1.0 at 50 to ×1.4 at 70 where no posture stands in for it), the burnout health multiplier (composure 30 to 10), the overwork Strain (odds = drive 70..90 × composure 50..70), the misfit move (the income ratio eases from openness 70 to 90; the odds thin from 30 to 10), a driven owner's expansion (drive 70 to 90).
+
+**The conduct roll** (`runConductEngine.js`): one roll cut in four, draw count unchanged — commit below `reach × L` (`L` 0.55 at integrity 30, 0.75 at 10; ×0.6 under a crime spike), `Resisted` (+5) below `reach`, `BoundaryCompromised` (−1) below `reach + (1 − reach) × slipP`, `BoundaryKept` (+1) above. Expected integrity move per test, calm: +0.30 at 30, −0.15 at 25, −0.96 at 20, −2.13 at 15, −3.70 at 10 (old: +0.30 down to 20, −3.70 under it).
+
+**The content tab** (`loadEventContentLedger.js` `soft`, `generateCitizensEvents.js` `contentDialShare_`, `drawMass_`, `balanceContentLedgerPoolWeights_`): a dial term with `<` `<=` `>` `>=` is a share of the row's Weight, 0 ten points short of the number, whole ten points past. The share rides on the pool entry and is read at the draw; a PoolKey's bucket is scaled by its most-open row's share and split by what each row is offered at. On the live tab that is 13 rows, all show lines (`warmth>=60` ×5, `warmth<=39` ×5, `drive>=60` ×3). From the snapshot (agy §5a): the `warmth>=60` rows are offered to 755 citizens instead of 102 at 1.73× the summed weight (the city sits a little over 50 on warmth); `drive>=60` 871 instead of 300 at 1.24×; `warmth<=39` to 5 instead of 0.
+
+**The temperament line** (`lib/citizenDials.js` `LEANS`, `leanings`, `phraseFor`): inside 40–60 a dial 4 or more off 50 reads as a lean, an adjective phrase with a degree word ("somewhat ambitious", "slightly on edge", "fairly principled"), at most three, the furthest from 50 first, after the pole phrases. `lib/wakePerception.js` `dialTrajectory` and the card's `Essence:` line (`scripts/buildCitizenCards.js`) use the same words. Snapshot of 2026-11-18: 562 of 1,075 read "even-keeled, unremarkable"; 349 of them carry a lean now. The voice-disposition cache and the citizen cards pick the words up on their own next runs.
+
+**Fixed bars kept, on the builder's word (2026-11-18):** a fan at fandom 60 — "agree and as the fandom raises it should have effect as well" (it does: the sports-line weight reads the number, ×0.5 to ×1.5); a citizen climbs at ambition 60 (`maneuverClimbBar`, a World_Config key) — "climbing at 60 sounds good"; standing for office needs drive 60, integrity 40, composure 40 — "office this look fine as well" (the score's drive term reads the number). Labels read as labels by the newsroom: `applyStorySeeds.js`, `storyHook.js`, `rosterLookup.js`.
+
+### Review reconciled (agy; one review, one re-review — closed)
+
+`output/antigravity/2026-11-18-review-e349-the-middle-counts.md` (HOLD) on `e39a38052`, folded in `a701ded16`; `output/antigravity/2026-11-19-rereview-e349-the-middle-counts.md` (SHIP-WITH-FIXES), folded in `a8f4ebe23`.
+
+| Finding | Checked against the code | Done |
+|---|---|---|
+| §2a the conduct resolve gave every non-commit a `Resisted` (+5) from `reach` 0.5 up — a bounce at integrity 20, and +5 for a burnt-out citizen at integrity 40 | true | the four-way cut above |
+| §1a.3 the archetype label still switched pool weights on at 60 | true (`getArchetypeWeights_`, live) | `archetypeWeightsFromDials_`; re-review §2: the first fold flipped the table when a second dial passed the leader — the six tables are blended by the square of their shares |
+| §5b the PoolKey balancing handed a part-offered PoolKey its whole bucket back | true with two or more PoolKeys | the share is read at the draw; re-review §3: balancing on full weights let a part-offered row crowd its plain neighbours — the bucket is scaled by how far the PoolKey is open and split by what is offered |
+| §3 the casino tilt draw was spent on rows that cannot bet | true | decided for a citizen placing a bet, where the stake is drawn (re-review §4: after the market pick) |
+| §2b `dialLadder_(null)` read as the bottom | true | null, '', false, undefined throw |
+| §6 leans that broke "Lately you've been …" and "carrying a … mood"; three as strong as a pole | true | adjective phrases; re-review §5: "a only loosely …" — "loosely interested in the teams" |
+| §1a.1 the office score adds a band step for drive; the bars to stand | true | the score term reads the number; the bars are the builder's (kept) |
+| §1a.2 the maneuver posture climbs at ambition 60 and stands in for the casino's drive ladder on live | true | the builder's bar (kept) |
+| §1a.4 newsroom readers of `Archetype:` | true, label readers | left |
+| §7 tests proving less than their label | true | restated: conduct cuts computed from the rule, `crimeReach` printed as a number, tempted-cohort and magnitude asserts, the owner room and the casino doors through the real functions, the balancing pinned on bare entries |
+| re-review §1: under a crime spike the expected move at integrity 20–25 (+0.49) is above 30's (+0.30); composure under 30 with integrity 40–49 can draw a `Resisted` | true | left: the first is the spike's ×0.6 as built; the second has 0 of 1,075 citizens (lowest composure 33.9) |
+
+### The benches (SANDBOX 1004, ten fires C117–C126 each from a fresh live sync, the middle speed row)
+
+Leg m is the first cut (`e39a38052`, @213); leg n is the candidate that shipped (`a8f4ebe23`, @214). Leg d is stage 57 from §The two benches, the same sync recipe and speed.
+
+| Dial, share of pushes up off the cells | Leg d (stage 57) | Leg m (first cut) | Leg n (the candidate) |
+|---|---|---|---|
+| sociability | 53% (1,935 / 1,736) | 54% (1,969 / 1,694) | 54% (1,968 / 1,702) |
+| warmth | 51% | 50% (1,506 / 1,513) | 51% (1,517 / 1,455) |
+| openness | 46% | 47% (1,648 / 1,884) | 46% (1,619 / 1,909) |
+| drive | 52% (951 / 877) | 55% (1,004 / 832) | 54% (982 / 833) |
+| composure | 51% | 51% | 50% |
+| integrity | 44% | 45% | 45% |
+| family | 48% | 47% | 45% |
+| out-and-about | 62% | 62% | 61% |
+| life lines on the cells | 26,061 | 25,845 | 25,655 |
+| crossed a band, permanent / felt | 13% / 26% | 11% / 24% | 13% / 25% |
+| under 40 on base: composure / integrity / family | 8 / 17 / 1 | 7 / 13 / 1 | 4 / 13 / 1 |
+| citizens moved a Cycle (`Dial_Pulse`) | 814–1,020 | 865–1,031 | 826–1,013 |
+| Engine_Errors | 9 → 9 | 9 → 9 | 9 → 9 |
+
+All thirty fires PASS (leg m 162–238 s, leg n 185–259 s). Down sits beside up on every dial on all three legs, seven of eight inside 60 / 40 by pushes and out-and-about at 61–62 as before; nobody at 0, one citizen at sociability 100 at the end of legs m and n (leg d: none), nobody under 20 on a base dial, so the crime door, the casino refusal and the tilt did nothing in ten Cycles. Drive reads 54–55% up against leg d's 52: the participation and work-line weights now rise inside the middle, where most of the city sits a little over 50. Live state: legs d and m synced the same live sheet for bonds (Relationship_Bond_Ledger 7,233 rows); before leg n's sync engine-sheet moved 3,211 rows of bond history to `Relationship_Bond_Archive` (4,022 left), so leg n is the candidate's proof and leg m is the like-for-like comparison with leg d. Logs `output/research-build/2026-11-18-e349m-bench.log`, `2026-11-19-e349n-bench.log`; cells `2026-11-18-e350m-cells.json`, `2026-11-18-e350n-cells.json`.
+
+**LIVE 2026-11-19 02:01 CST:** PROD stage 58 @193 = stage 57 + thirteen files at `a8f4ebe23`, pull-back byte for byte — DEPLOY_HISTORY §PROD. No sheet write goes with it. First live fire: C117, Sun 2026-11-22; the read is `node scripts/dialPulse.js` against leg n.
+
+
 ## Tasks
 
 | # | Task | Row | Status |
@@ -627,11 +700,11 @@ The three writes, in order, each dry-run by default and read back: `node scripts
 | 7 | Direction: unsigned lines get the sign of their fact and are written; fixed-positive kinds (Work, Career, Education, Lifestyle, Media) read their line; `[Money]` lines are signed at their writers (the judicial hold and ticket lines stay unmoved, pinned in `judicialLifecycle.test.js:671-673`); the pools are counted up against down per dial before and after. Carried from Task 4: the same on the reflection path — after the classifier cut, sociability, drive and openness by reflection still lean up (replay: 56 / 3, 76 / 13, 38 / 0) because the event tags that carry them (`Media`, `Career`, `Education`, `Community`) are fixed-positive | engine.350 | LIVE 2026-11-18: PROD stage 54 @189 (the fixed kinds), stage 56 @191 (the coded pools' down side), stage 57 @192 (the relationship, household, retired-player, generic and neighborhood engines; QoL, Continuity and a retiree's line graded-only). Bench legs c and d: seven of eight dials inside 60 / 40 by pushes off the cells, sociability 53–56, warmth 51–52, openness 46–47, drive 52–55; out-and-about 62–63. The live tab written by the builder 2026-11-18 (nine placed rows, 72 scene rows off, 38 Tags cells), read back through the loader |
 | 8 | Harder hits both ways: a bet by its size against what the citizen holds; an UNDOCKED run by its result and rank | engine.350 | bets LIVE 2026-11-18, PROD stage 54 @189 (§Bets as built). The UNDOCKED half waits on what the show scores (pipeline.113; gap log C116 G-EC55: the board ranks points, the night is told in credits) |
 | 9 | Speed set to the middle row (lines doubled, a quarter of each week sticks) by World_Config, after Task 7 is live and measured | engine.349 | LIVE 2026-11-18: `dialLineScale` 2, `dialDirectShare` 0.25 on live World_Config (the builder's hand; this session cannot write a live sheet), read back through the pre-Cycle contract and `readDialTuning_`. Bench leg d (stage 57 @212, ten fires PASS): the down count of permanent moves beside the up count on every dial; 814–1,020 of about 1,080 citizens move a Cycle; 13% cross a band on a permanent dial in ten Cycles, 26% on the felt value. First live fire C117 |
-| 10 | Re-measure the middle after 7–9; put "does 55 read differently from 50" back to him with the numbers | engine.349 | measured on leg d (§The two benches); the question goes back to him with the first live read |
+| 10 | Re-measure the middle after 7–9; put "does 55 read differently from 50" back to him with the numbers | engine.349 | done: measured on leg d; his answer 2026-11-18 "make the middle count" (Task 14) |
 | 11 | Intake, both doors (`Intake` → `processIntake_`; `Advancement_Intake1` → `processAdvancementIntake_`): the fields the ledger and the first dial seed need are named; a row missing one is held on its tab with what is missing while the other rows go through (today a blank birth year, hood or role is filled by a draw or a default); an arrival's dials start from that data | engine.351 | not started |
 | 12 | A lived state said again (builder 2026-11-17, should retiring hit the dials once or at every mention: "Once"). As built: on the reflection path a `Retirement` event gives nothing (`REFLECTION_ECHO`, `citizenDialMap.js` `nudgesForReflection_`); the retirement is the engine's own `[Retirement]` life line, folded once (family +4, drive −4, unchanged); the mood of a later mention still counts. Live C113–C116: 15 `Retirement` reflection rows on 8 citizens, POP-00001 five. Only `Retirement`: in the same window the other one-time events repeat on 3 citizens (`Promotion`, `Hospitalized`, `Career-Transition`, 2–3 rows each) and are as they were. Rows already applied are not undone | engine.347 | LIVE 2026-11-17, PROD stage 53 @188 |
 | 13 | A sad mood (builder 2026-11-17: "Yes" — as put to him: composure down like the other bad moods, plus a small pull down on going out). As built: `'Sad': { composure: -3, outabout: -1 }` in `DIAL_MAP`; `AFFECT_VALENCE` `sad: 0` (sorrow that names someone does not cool the bond); the classifier offers `Sad` ("sorrow, grief, missing someone, heavy-hearted over a loss or a goodbye"), no fallback words added; the office slice's complaint set, the page scan's negative set and the signal detector's poles carry it. Gate GREEN on six sets: three grief texts read `Sad`, a worried, an angry and a frustrated text keep their mood | engine.347 | LIVE 2026-11-17: engine PROD stage 53 @188, then the classifier |
-| 14 | The middle counts (builder 2026-11-18). Every reader of a dial band reads the number: the event-odds multiplier (`citizenMemory.js` `BAND_MULT`, `bandMultiplier_`; `getCitizenDialBands_` and its seven Phase-5 callers), the content tab's dial conditions, the wake prompt's temperament line (`lib/citizenDials.js`), and whatever else the wiring card for `getCitizenDialBands_` and `bandIndex_` lists. Read first: each reader, what it returns at 45 / 50 / 55 today, and the loop the deep-dive named (a higher dial draws more lines, most of them were up — cause 6; lines are balanced now). Bench against leg d (same sync, same speed): shares, the pulse, who crosses a band | engine.349 | not started — next session |
+| 14 | The middle counts (builder 2026-11-18). Every reader of a dial band reads the number: the event-odds multiplier (`citizenMemory.js` `BAND_MULT`, `bandMultiplier_`; `getCitizenDialBands_` and its seven Phase-5 callers), the content tab's dial conditions, the wake prompt's temperament line (`lib/citizenDials.js`), and whatever else the wiring card for `getCitizenDialBands_` and `bandIndex_` lists. Read first: each reader, what it returns at 45 / 50 / 55 today, and the loop the deep-dive named (a higher dial draws more lines, most of them were up — cause 6; lines are balanced now). Bench against leg d (same sync, same speed): shares, the pulse, who crosses a band | engine.349 | LIVE 2026-11-19: PROD stage 58 @193 (`a8f4ebe23`). §Task 14 as built. agy's review and re-review folded. Bench legs m and n beside leg d: shares, moves and crossings hold |
 | 15 | The recorded items (builder 2026-11-18: "this and the logged items would be good for the next session"): gap log C116 G-EC62 (tab rows that name a place or give the citizen a relative the Conditions cell does not guarantee), G-EC63 / G-EC65 (bond kinds, `Public`, `Reputation`, `Faith`, two post-career kinds and the Creation Day pool still at a fixed size; down lines that lift the hood pulse; the relationship engine's cap of eight in ledger order; two readers that split or miss graded tags), out-and-about at 62–63% of pushes up, integrity at 44% | engine.350 | not started — next session |
 
 Order: 6 (bench pair on one Cycle: without and with the keys) → 2 (bench) → one deploy → 2(e) → 3–5 (cron scripts, no engine deploy) → 7–8 → 9 → 10; 11 on its own.
@@ -713,3 +786,4 @@ agy, `output/antigravity/2026-11-16-review-dials-plan.md` (HOLD on the first cut
 - 2026-11-18 (research-build) — The builder ran the two tab writes himself (this session cannot write a live sheet): nine placed rows, then 72 Active and 38 Tags cells; read back through the loader, 1,050 lines taken, 1 skipped as before. The speed keys remain.
 - 2026-11-18 (research-build) — The builder set the two speed keys on live (middle row). Task 9 live; first fire at this speed C117.
 - 2026-11-18 (research-build) — Builder on the middle: "make the middle count, i think you can code this better than the model that built it did 12 months ago, i think this and the logged items would be good for the next session?" Tasks 14 and 15 written; not started.
+- 2026-11-19 (research-build) — Task 14 built, reviewed twice by agy, benched (legs m and n) and LIVE: PROD stage 58 @193. The builder's word on the three fixed bars recorded (a fan at 60, climbing at 60, the office bars). §Task 14 as built.

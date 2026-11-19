@@ -1,7 +1,7 @@
 ---
 title: Deploy History — full sandbox + PROD deployment ledger
 created: 2026-09-04
-updated: 2026-11-17
+updated: 2026-11-19
 type: reference
 tags: [engine, deploy, history, active]
 sources:
@@ -197,6 +197,13 @@ pointers:
 ---
 
 ## PROD deploy log — full trail
+
+### PROD stage 58 — the middle counts: every reader of a dial band reads the number (2026-11-19, research-build, engine.349 Task 14)
+- **Why:** builder 2026-11-18, "make the middle count" — as put to him: the engines read only the band, so 40–60 was one person (58% of the city on the felt value); he chose that the engines read the number itself.
+- **Tree:** stage 57 + thirteen files at `a8f4ebe23`: `utilities/citizenMemory.js` (`dialLadder_`, `dialPos_`, `dialHigh_`, `dialLow_`, `dialMultiplier_`: an old per-band table is the value at each band's middle, a straight line between), `utilities/compressLifeHistory.js` (`getCitizenDialBands_` returns `current` / `pos` / `mult` / `crimeReach`), `phase05-citizens/runConductEngine.js` (one roll cut in four), `generateCitizensEvents.js` (content dial terms as a share read at the draw, the PoolKey balancing by how open a PoolKey is, the archetype's pool weights off the numbers), `phase02-world-state/loadEventContentLedger.js` (`soft` terms), `bondEngine.js`, `updateCivicApprovalRatings.js`, `applyBusinessDynamics.js`, `casinoLedgerEngine.js`, `migrationTrackingEngine.js`, `runCareerEngine.js`, `generationalWealthEngine.js`, `phase04-events/generationalEventsEngine.js`. Node side, no deploy: `lib/citizenDials.js` (the middle's lean words), `lib/wakePerception.js`, `scripts/buildCitizenCards.js`. agy's review (HOLD) and re-review (SHIP-WITH-FIXES) folded before the candidate's bench (`output/antigravity/2026-11-18-review-e349-the-middle-counts.md`, `2026-11-19-rereview-e349-the-middle-counts.md`). Manifest `output/research-build/stage58-e349m.sha256`; scripts `2026-11-18-push-e349m-bench.sh`, `2026-11-19-push-e349m-prod.sh`, the bench `2026-11-18-e350d-bench.sh` with `LEG=m|n STAGE=58 MAN=stage58-e349m.sha256 SPEED="2 0.25"`.
+- **Bench, SANDBOX 1004, each leg ten fires C117–C126 from a fresh live sync, the middle speed row.** Leg m, the first cut `e39a38052` @213 (`2026-11-18-e349m-bench.log`): ten PASS (162–238 s), Engine_Errors rows 9 → 9. Leg n, the candidate @214 (`2026-11-19-e349n-bench.log`): ten PASS (185–259 s), Engine_Errors rows 9 → 9. Off the cells on leg n (25,655 life lines; leg d on stage 57: 26,061): sociability 54% of pushes up (leg d 53), warmth 51 (51), openness 46 (46), drive 54 (52), composure 50 (51), integrity 45 (44), family 45 (48), out-and-about 61 (62). 826–1,013 of about 1,085 citizens move a Cycle; 13% crossed a band on a permanent dial in ten Cycles, 25% on the felt value (leg d 13 / 26); under 40 on base: composure 4, integrity 13, family 1; nobody at 0, one at sociability 100; nobody under 20, so the crime door, the casino refusal and the tilt did nothing. Live changed between leg m's sync and leg n's: engine-sheet moved 3,211 bond-history rows to `Relationship_Bond_Archive` (ledger 7,233 → 4,022). Final sync from live.
+- **Stage 58 @193 (02:01 CST):** live pulled = stage 57, push + deploy, pull-back = stage 58 byte for byte. No sheet write. Not in the tree: engine-sheet's committed `civicInitiativeEngine.js` (civic.49), which goes on top by its own push.
+- **Back out:** push the stage 57 tree (`stage57-e350d.sha256`, `5c0c090bd`) and cut a version. Nothing on the sheet depends on stage 58; a `dialShare`, a lean word or a number-read multiplier leaves no stored state.
 
 ### PROD stage 57 — the other engines write a line by what it says (2026-11-18, research-build, engine.350 Task 7)
 - **Why:** builder 2026-11-18 on gap log G-EC63 (engines still writing a home, social or retired-player line at a fixed size whatever it said): "Yeah we fixing all this", "Fix it all".

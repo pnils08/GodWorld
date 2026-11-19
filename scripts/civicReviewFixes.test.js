@@ -106,9 +106,14 @@ test('F5 new records drop legacy action before wall rendering and preserve speec
   assert.equal(Object.hasOwn(rec, 'action'), false);
   assert.deepEqual(rec.moves, mv.accepted);
   const wall = require('./officeWall');
-  assert.doesNotMatch(wall.lineFromDatawake(rec).text, /fabricated action/);
-  assert.match(wall.lineFromDatawake(rec).text, /SYNTHETIC speech/);
-  assert.match(wall.lineFromDatawake({statement:'historical synthetic',action:'legacy synthetic'}).text, /legacy synthetic/);
+  // pipeline.112: the page entry is the statement alone; action and signal ride the metadata and the wall shows them
+  const shown = (line) => wall.wallLine(line.text, Object.assign({ type: 'office-position', kind: 'datawake' }, line.extra));
+  assert.doesNotMatch(shown(wall.lineFromDatawake(rec)), /fabricated action/);
+  assert.equal(wall.lineFromDatawake(rec).text, 'SYNTHETIC speech');
+  assert.equal(shown(wall.lineFromDatawake(rec)), 'datawake: SYNTHETIC speech | signal: SYNTHETIC signal');
+  const legacy = wall.lineFromDatawake({statement:'historical synthetic',action:'legacy synthetic'});
+  assert.equal(legacy.text, 'historical synthetic');
+  assert.equal(shown(legacy), 'datawake: historical synthetic | action: legacy synthetic');
 });
 test('F6 prior terminal outcomes survive the Cycle boundary alongside current pending moves', () => workspace((root, write) => {
   const move = {moveId:'MV-SYNTHETIC',cycle:998,agentDir:office.agentDir,type:'work',payload:{initiativeId:'INIT-SYNTHETIC'},status:'pending',date:'SYNTHETIC'};

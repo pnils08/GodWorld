@@ -71,6 +71,12 @@ async function ensurePositionWall(popId) {
   }
 }
 
+// pipeline.112: the page holds the holder's own words; the topic, the speaker, the action and the signal ride the
+// doc's metadata. A reader is shown the line as it always read ("stated: [topic] Name — words",
+// "datawake: words | action: … | signal: …"), built by lib/pageLabels.js wallLine. An entry stored before, label and
+// all, is shown as it is.
+const { wallLine, OFFICE_LABEL_RE: WALL_LABEL_RE } = require(path.join(ROOT, 'lib', 'pageLabels'));
+
 async function loadPositionWall(popId, limit) {
   const n = limit == null ? 6 : limit;
   if (!popId) return { tag: null, posts: [], error: 'no-popid' };
@@ -80,7 +86,7 @@ async function loadPositionWall(popId, limit) {
     const r = await recentPage_(popId, Math.max(n * 2, 12)); // oversample; filter CIVIC
     if (r.error) return { tag, posts: [], error: r.error };
     const all = (r.results || []).map((d) => ({
-      content: String(d.content || '').replace(/\s+/g, ' ').trim(),
+      content: wallLine(d.content, d.metadata),
       createdAt: d.createdAt || null,
       customId: d.customId || null,
       metadata: d.metadata || {},
@@ -88,7 +94,7 @@ async function loadPositionWall(popId, limit) {
     // Prefer CIVIC daypart posts; fall back to any recent if none yet tagged
     const civic = all.filter((p) => {
       const dp = String((p.metadata && p.metadata.daypart) || '');
-      return dp === 'CIVIC' || /^stated:|^datawake:/i.test(p.content);
+      return dp === 'CIVIC' || WALL_LABEL_RE.test(p.content);
     });
     const posts = (civic.length ? civic : all).slice(0, n);
     return { tag, posts };
@@ -131,10 +137,10 @@ function formatPositionWall(wall, opts) {
 }
 
 /**
- * Append one official position line to the holder's page.
+ * Append one official position to the holder's page.
  * @param {string} popId
- * @param {string} text - already prefixed (stated: / datawake:)
- * @param {{ cycle, key, kind, office, holder, extra }} opts
+ * @param {string} text - the holder's own words, no label in front (pipeline.112)
+ * @param {{ cycle, key, kind, office, holder, extra }} opts - extra: topic / speaker / action / signal
  */
 async function recordPosition(popId, text, opts) {
   const o = opts || {};
@@ -165,7 +171,7 @@ async function recordPosition(popId, text, opts) {
   }
 }
 
-/** Build cascade stated: lines from voice JSON statements array. */
+/** Build the cascade page entries from the voice JSON statements array: text = the words, extra = topic + speaker. */
 function linesFromCascadeStatements(statements, speaker) {
   const out = [];
   const list = Array.isArray(statements) ? statements : [];
@@ -176,11 +182,11 @@ function linesFromCascadeStatements(statements, speaker) {
     const core = quote || full || topic;
     if (!core) return;
     const id = st.statementId || String(i);
-    const line = 'stated: ' + (topic ? '[' + topic.slice(0, 80) + '] ' : '') +
-      (speaker ? speaker + ' — ' : '') +
-      (quote || full).slice(0, 500);
-    // said: the holder's own words as the page holds them, without the stated: / topic / speaker frame (engine.347 Task 5)
-    out.push({ key: 'cascade-' + String(id).replace(/[^a-zA-Z0-9_-]/g, '').slice(0, 40), text: line, said: (quote || full).slice(0, 500) });
+    const said = (quote || full).slice(0, 500);
+    // text: what the page holds — the holder's own words (a statement that is only a topic holds the topic).
+    // said: the same words for the caller's Reflection_Intake queue (engine.347 Task 5); '' when there are none.
+    out.push({ key: 'cascade-' + String(id).replace(/[^a-zA-Z0-9_-]/g, '').slice(0, 40), text: said || topic.slice(0, 80), said,
+      extra: { topic: said && topic ? topic.slice(0, 80) : null, speaker: speaker ? String(speaker).slice(0, 80) : null } });
   });
   return out;
 }
@@ -195,16 +201,14 @@ function statementOf(rec) {
   return asText(rec && rec.statement);
 }
 
-/** Build datawake line from rec { statement, action, numberMoved }. */
+/** Build the datawake page entry from rec { statement, action, numberMoved }: text = the statement, extra = action + signal. */
 function lineFromDatawake(rec) {
   const statement = statementOf(rec);
   if (!statement) return null;
-  const bits = ['datawake: ' + statement.slice(0, 600)];
   const action = asText(rec.action), moved = asText(rec.numberMoved);
-  if (action) bits.push('action: ' + action.slice(0, 200));
-  if (moved) bits.push('signal: ' + moved.slice(0, 160));
   const date = (rec && rec.date) || new Date().toISOString().slice(0, 10);
-  return { key: 'datawake-' + date, text: bits.join(' | ') };
+  return { key: 'datawake-' + date, text: statement.slice(0, 600),
+    extra: { action: action ? action.slice(0, 200) : null, signal: moved ? moved.slice(0, 160) : null } };
 }
 
 /**
@@ -242,6 +246,7 @@ async function recordCascadeForDir(officeMap, agentDir, voiceJson, cycle) {
       kind: 'cascade',
       office: agentDir,
       holder: holder.holder,
+      extra: L.extra,
     });
     results.push(r);
   }
@@ -289,6 +294,7 @@ async function backfillFromDisk(opts) {
           kind: 'datawake',
           office: rec.agentDir || rec.office,
           holder: rec.holder,
+          extra: line.extra,
         });
       })();
       if (r.recorded) summary.datawake++;
@@ -392,6 +398,7 @@ module.exports = {
   recordPosition,
   linesFromCascadeStatements,
   lineFromDatawake,
+  wallLine,
   statementOf,
   injectBlockForHolder,
   recordCascadeForDir,

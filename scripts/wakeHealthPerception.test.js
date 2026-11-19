@@ -57,6 +57,7 @@ const stubs = {
   '/root/GodWorld/utilities/citizenDialMap': {},
   '/root/GodWorld/lib/citizenPage': {},
   '/root/GodWorld/lib/memoryFence': {},
+  '/root/GodWorld/lib/pageLabels': require('/root/GodWorld/lib/pageLabels'), // pipeline.112 — a reporter's filing as shown (pure, no I/O)
   '/root/GodWorld/lib/resonanceRecall': {},
   '/root/GodWorld/lib/neighborhoodSlice': { createSlicer: () => ({ slice: () => null }) },
   '/root/GodWorld/lib/provocationBank': require('/root/GodWorld/lib/provocationBank'), // engine.197 wake draw hash (pure, no I/O)

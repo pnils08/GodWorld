@@ -1524,7 +1524,13 @@ let SEAT_CHECKS = null; // the current seat's checks; the fan-out loop collects 
 
 // pipeline.77 — reward-loop group helpers. The page line and the W1 read are one format.
 function gradedLine(cs) {
-  return 'graded: ' + cs.score + '/' + (cs.max || 4) + ' — ' + (cs.short || 'nothing fell short');
+  return 'graded: ' + gradeText(cs);
+}
+// pipeline.112: what the reporter's page holds for a grade — the score and what fell short, no label in front.
+// The doc is a grade by its key (…-graded[-persona]) and its metadata (kind graded); gradedLine is the same
+// words with the kind in front, for the log and the next wake's ask.
+function gradeText(cs) {
+  return cs.score + '/' + (cs.max || 4) + ' — ' + (cs.short || 'nothing fell short');
 }
 function lastGradedLine(posts, persona) {
   // pipeline.80: a rerun in the same Cycle upserts the same page key and Supermemory appends
@@ -1534,8 +1540,11 @@ function lastGradedLine(posts, persona) {
   for (const p of posts || []) {
     const id = String(p && p.customId || '');
     if (persona && id && !(id.endsWith('-graded-' + persona) || id.endsWith('-graded'))) continue;
-    const hits = String(p && p.content || '').match(/^graded: \d\/[34]\b.*$/gm);   // out of 3 from 2026-11-11, 4 before
-    if (hits) return hits[hits.length - 1].trim().slice(0, 300);
+    // pipeline.112: a grade doc's line is "3/3 — …"; one written before carries "graded: " in front. Both read,
+    // in one doc too (a rerun appends into the Cycle's doc). An unkeyed doc is a grade only by the old label.
+    const keyed = /-PRESS-graded(?:-|$)/.test(id);
+    const hits = String(p && p.content || '').match(keyed ? /^(?:graded: )?\d\/[34]\b.*$/gm : /^graded: \d\/[34]\b.*$/gm);   // out of 3 from 2026-11-11, 4 before
+    if (hits) return ('graded: ' + hits[hits.length - 1].trim().replace(/^graded: /, '')).slice(0, 300);
   }
   return null;
 }
@@ -3451,7 +3460,7 @@ async function runWrite(assign) {
     log('reporter self-record: ' + byline.name + ' <- "' + headline + '"');
     try {
       const out = execFileSync('node', [path.join(ROOT, 'scripts', 'citizenVoice.js'),
-        '--pop=' + byline.popid, '--record-text=filed: ' + headline, '--cycle=' + cycle],
+        '--pop=' + byline.popid, '--record-text=' + headline, '--record-kind=filed', '--cycle=' + cycle],
         { cwd: ROOT, encoding: 'utf8', timeout: 300000 });
       selfRecord = { recorded: true, out: out.trim().slice(-200) };
     } catch (e) { selfRecord = { recorded: false, reason: e.status === 2 ? 'no-dials (fallback)' : e.message }; log('self-record fallback: ' + (selfRecord.reason)); }
@@ -3465,7 +3474,7 @@ async function runWrite(assign) {
     const gradeLine = gradedLine(contractScore);
     try {
       execFileSync('node', [path.join(ROOT, 'scripts', 'citizenVoice.js'),
-        '--pop=' + byline.popid, '--record-text=' + gradeLine, '--cycle=' + cycle,
+        '--pop=' + byline.popid, '--record-text=' + gradeText(contractScore), '--record-kind=graded', '--cycle=' + cycle,
         ...(personaSlug ? ['--page-key=graded-' + personaSlug] : [])],
         { cwd: ROOT, encoding: 'utf8', timeout: 300000 });
       gradeRecord = { recorded: true, line: gradeLine };
@@ -3660,7 +3669,7 @@ async function runWake() {
     log('reporter self-record: ' + byline.name + ' <- "' + headline + '"');
     try {
       const out = execFileSync('node', [path.join(ROOT, 'scripts', 'citizenVoice.js'),
-        '--pop=' + byline.popid, '--record-text=filed: ' + headline, '--cycle=' + cycle],
+        '--pop=' + byline.popid, '--record-text=' + headline, '--record-kind=filed', '--cycle=' + cycle],
         { cwd: ROOT, encoding: 'utf8', timeout: 300000 });
       selfRecord = { recorded: true, out: out.trim().slice(-200) };
     } catch (e) { selfRecord = { recorded: false, reason: e.status === 2 ? 'no-dials (fallback)' : e.message }; log('self-record fallback: ' + (selfRecord.reason)); }
@@ -3964,6 +3973,6 @@ module.exports = {
   // pipeline.75 checks
   checkBody, draftWordCount, thinCheck, verbatimSliceRuns, angleCapHit,
   fanoutCheckTotals, formatCheckTotals, THIN_WORDS,
-  gradedLine, lastGradedLine, // pipeline.77
+  gradedLine, gradeText, lastGradedLine, // pipeline.77
   absenceLines, thinToolCalls, formatGapsEntry, appendGapsEntry, GAPS_HEADER, // pipeline.89 gaps
 };

@@ -349,6 +349,12 @@ assert.throws(() => validateWakeHandoff(handoffAngle,
   // 2026-11-11: the close left the grade — a score carries max 3 and the page line says so; old /4 lines still read.
   assert.equal(cdr.gradedLine({ score: 2, max: 3, short: 'The opening read as a recap.' }), 'graded: 2/3 — The opening read as a recap.');
   assert.equal(cdr.lastGradedLine([{ content: 'graded: 3/3 — nothing fell short.' }, { content: 'graded: 1/4 — older' }]), 'graded: 3/3 — nothing fell short.');
+  // pipeline.112: the page holds the score without its label; a grade doc is a grade by its key, and both shapes read
+  assert.equal(cdr.gradeText({ score: 2, max: 3, short: 'The opening read as a recap.' }), '2/3 — The opening read as a recap.');
+  assert.equal(cdr.lastGradedLine([{ customId: 'cp-POP-00011-c116-PRESS-graded-luis-navarro', content: '3/3 — nothing fell short' }], 'luis-navarro'), 'graded: 3/3 — nothing fell short');
+  assert.equal(cdr.lastGradedLine([{ customId: 'cp-POP-00011-c116-PRESS-graded-luis-navarro', content: 'graded: 2/3 — recap.\n\n---\n\n3/3 — nothing fell short' }], 'luis-navarro'), 'graded: 3/3 — nothing fell short', 'one Cycle doc written before and after the change: the newest line wins');
+  assert.equal(cdr.lastGradedLine([{ customId: 'cp-POP-00011-c116-PRESS-graded', content: '1/3 — older' }]), 'graded: 1/3 — older');
+  assert.equal(cdr.lastGradedLine([{ customId: 'cp-POP-00011-c116-PRESS-thu-abcdef', content: '3/3 — a line in a doc that is not a grade' }]), null, 'an unkeyed doc is a grade only by the old label');
   const g3 = cdr.fanoutCheckTotals([{ contractScore: 3, contractMax: 3 }, { contractScore: 2, contractMax: 3 }]);
   assert.match(cdr.formatCheckTotals(g3, 'write'), /graded 2 avg 2\.5\/3$/);
   // live read-backs when the C111 artifacts are on disk

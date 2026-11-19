@@ -142,10 +142,11 @@ async function positionWallRecordDatawake(rec) {
       kind: 'datawake',
       office: rec.agentDir || rec.office,
       holder: rec.holder,
+      extra: line.extra,
     });
     if (r.recorded) log('position-wall datawake ' + rec.holder + ' → ' + rec.popid);
     else if (r.error) log('position-wall datawake skip: ' + r.error);
-    // the statement itself, whole — not the datawake: … | action: … | signal: … line the page holds
+    // the statement itself, whole — the page holds its first 600 characters (pipeline.112: no label, action and signal in metadata)
     if (r.recorded === true) queueJobStatement(rec.popid, rec.cycle, 'CIVIC', officeWall.statementOf(rec), 'datawake ' + (rec.agentDir || rec.office));
     return r;
   } catch (e) {
@@ -3812,7 +3813,7 @@ async function runWorkerDatawake(duty, o) {
   }
   // His statement goes to his page whole: the seats' 600-character line would cut a worker's words mid-sentence.
   try {
-    rec.positionWall = await officeWall.recordPosition(rec.popid, 'datawake: ' + statement, {
+    rec.positionWall = await officeWall.recordPosition(rec.popid, statement, {
       cycle: rec.cycle, key: 'datawake-' + o.date, kind: 'datawake', office: rec.agentDir, holder: rec.holder, maxChars: 12000 });
     if (rec.positionWall.recorded) log('position-wall datawake ' + rec.holder + ' → ' + rec.popid);
     else if (rec.positionWall.error) log('position-wall datawake skip: ' + rec.positionWall.error);

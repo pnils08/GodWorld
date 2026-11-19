@@ -289,7 +289,7 @@ Per-citizen accreting first-person memory — the subjective layer alongside obj
 **What goes in:**
 - Citizen-loop wake reflections / tensions (life)
 - Interview PRESS dayparts when they are quoted (`citizenVoice --record`)
-- **Journalist filings:** after Rhea PASS, `filed: <headline>` on the byline POPID (author self-record)
+- **Journalist filings:** after Rhea PASS, the headline on the byline POPID (author self-record), metadata `kind: filed`; the desk grade the same way, `kind: graded`, key `…-PRESS-graded[-persona]`. No label in the stored text (pipeline.112, 2026-11-19): what a label used to say rides the key and metadata — `lib/pageLabels.js` holds the table and shows each reader the line as it always read
 - **Working notes:** `memory_note` tool → short deskwork notes (optional dig)
 
 **What does NOT:** engine metrics as authority, other people's walls, bay-tribune canon prose mixed in as fact.

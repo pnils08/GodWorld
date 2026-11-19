@@ -95,6 +95,15 @@ test('pastDecisions finds one person by POPID under any key, joins an answer to 
   assert.deepEqual([d[1].cycle, d[1].type, d[1].said], [115, 'patrol', 'strategy: balanced; note: flat']);
 }));
 
+test('gatherMemory: a statement stored as the words alone (pipeline.112) is labelled by its type, action and signal from metadata', async () => {
+  const plain = { content: 'Six additional patrol units redeployed.', metadata: { cycle: 116, type: 'office-position', kind: 'datawake', signal: 'response 9 min' } };
+  const sunday = { content: 'I will not sign it.', metadata: { cycle: 115, type: 'office-position', kind: 'cascade', topic: 'Budget', speaker: 'Rafael Montez' } };
+  const m = await ww.gatherMemory('POP-00136', 'crime', deps('/nowhere', { page: {
+    searchPage_: async () => ({ results: [plain, sunday, { content: 'why?', metadata: { cycle: 116, type: 'tension', kind: 'open' } }] }),
+    recentPage_: async () => ({ results: [] }) } }));
+  assert.deepEqual(m.entries.map((e) => e.text), ['Your public statement: Six additional patrol units redeployed. | signal: response 9 min', 'Your public statement: [Budget] Rafael Montez — I will not sign it.']);
+});
+
 test('gatherMemory: his newest own words first, searched entries after, statements labelled, open-question lines out, the Cycle and never a date', async () => {
   const m = await ww.gatherMemory('POP-00136', 'crime', deps('/nowhere'));
   assert.deepEqual(m.entries.map((e) => e.text), ['That clearance rate still sticks with me.', 'Look, I do not hide from the numbers.', 'Your public statement: Six additional patrol units redeployed.']);

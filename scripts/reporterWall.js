@@ -46,10 +46,13 @@ async function loadReporterWall(popId, limit) {
     const tag = pageTagFor(popId);
     const r = await recentPage_(popId, n);
     if (r.error) return { tag, posts: [], error: r.error };
+    // pipeline.112: a filing or a grade is stored without its label (kind in metadata); the wall shows it as
+    // "filed: <headline>" / "graded: 3/3 — …", the way it always read.
+    const { recordLine } = require(path.join(ROOT, 'lib', 'pageLabels'));
     return {
       tag,
       posts: (r.results || []).map(d => ({
-        content: String(d.content || '').replace(/\s+/g, ' ').trim(),
+        content: String(recordLine(d.content || '', d.metadata)).replace(/\s+/g, ' ').trim(),
         createdAt: d.createdAt || null,
         customId: d.customId || null,
         metadata: d.metadata || null

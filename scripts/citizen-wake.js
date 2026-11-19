@@ -584,7 +584,7 @@ async function fileNextChapter(c, cycle, question, parsed, dry) {
     const t = openTensions[cls.resolves]; // reference into tensionState — status flip persists on save
     t.status = 'resolved'; t.resolvedCy = cycle;
     resolvedText = t.q;
-    await page.appendReflection_(c.popId, `TENSION-RESOLVED[c${cycle}]: ${t.q}`, { cycle, daypart: WAKE, day: pageDay, key: 'tension-resolved', extra: { type: 'tension' } });
+    await page.appendReflection_(c.popId, t.q, { cycle, daypart: WAKE, day: pageDay, key: 'tension-resolved', extra: { type: 'tension', kind: 'resolved' } });
     logLine(`tension RESOLVED <- "${t.q.slice(0, 80)}"`);
   }
   if (cls.tension && !tlist.some((t) => t.status === 'open' && t.q.toLowerCase() === cls.tension.toLowerCase())) {
@@ -594,7 +594,7 @@ async function fileNextChapter(c, cycle, question, parsed, dry) {
       tlist.splice(tlist.indexOf(oldest), 1);
     }
     tlist.push({ q: cls.tension, cy: cycle, status: 'open' });
-    await page.appendReflection_(c.popId, `TENSION[c${cycle}]: ${cls.tension}`, { cycle, daypart: WAKE, day: pageDay, key: 'tension', extra: { type: 'tension' } });
+    await page.appendReflection_(c.popId, cls.tension, { cycle, daypart: WAKE, day: pageDay, key: 'tension', extra: { type: 'tension', kind: 'open' } });
     logLine(`tension OPENED <- "${cls.tension.slice(0, 80)}"`);
   }
   saveTensionState(tensionState); // also persists this wake's silent expiry pass

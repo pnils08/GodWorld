@@ -1312,13 +1312,17 @@ test('F5: New datawake records omit legacy action field while officeWall preserv
   assert.strictEqual(Object.hasOwn(rec, 'action'), false, 'New datawake records must omit action property');
   assert.deepStrictEqual(rec.moves, mv.accepted);
 
+  // pipeline.112: the page entry is the statement alone; action and signal ride the metadata and the wall shows them
+  const shown = (line) => officeWall.wallLine(line.text, Object.assign({ type: 'office-position', kind: 'datawake' }, line.extra));
   const wallLine = officeWall.lineFromDatawake(rec);
-  assert.doesNotMatch(wallLine.text, /Fabricated rogue action/);
-  assert.match(wallLine.text, /Synthetic speech/);
+  assert.strictEqual(wallLine.text, 'Synthetic speech');
+  assert.doesNotMatch(shown(wallLine), /Fabricated rogue action/);
+  assert.match(shown(wallLine), /^datawake: Synthetic speech \| signal: Signal$/);
 
   // Historical record compatibility
   const legacyLine = officeWall.lineFromDatawake({ statement: 'Historical speech', action: 'Legacy action' });
-  assert.match(legacyLine.text, /Legacy action/);
+  assert.strictEqual(legacyLine.text, 'Historical speech');
+  assert.match(shown(legacyLine), /Legacy action/);
 });
 
 test('F6: Move memory retains prior terminal outcomes across cycle boundaries alongside pending moves', () => {

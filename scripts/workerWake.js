@@ -25,6 +25,7 @@
 const fs = require('fs');
 const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
+const pageLabels = require('../lib/pageLabels');   // pipeline.112: an office position as its holder is shown it
 const { rosterGridFromLedger } = require('../lib/employmentRoster');   // Employment_Roster is built off the ledger, not read from its March tab
 
 function defaults(deps) {
@@ -130,7 +131,8 @@ async function gatherMemory(popid, key, deps, opts) {
   const { page } = defaults(deps);
   const tidy = (s) => String(s || '').replace(/\s+/g, ' ').trim();
   const entry = (r) => ({ when: (r.metadata || {}).cycle != null ? 'Cycle ' + r.metadata.cycle : 'earlier', type: String((r.metadata || {}).type || ''),
-    text: tidy(r.content).replace(/^(datawake|stated):\s*/i, 'Your public statement: ') });
+    // pipeline.112: an office position is stored as the words alone; wallLine gives the line as it always read
+    text: tidy(pageLabels.wallLine(r.content, r.metadata)).replace(/^(datawake|stated):\s*/i, 'Your public statement: ') });
   // a read that fails is named in `failed` (the weekday record carries it), so no memory this wake is never read as an empty page
   let hits = [], recent = [];
   const failed = [];

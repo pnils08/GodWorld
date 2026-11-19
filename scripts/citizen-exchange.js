@@ -196,7 +196,7 @@ async function recordParticipant(c, ownText, daypart, cycle, tensionState, bondT
     const t = openTensions[cls.resolves];
     t.status = 'resolved'; t.resolvedCy = cycle;
     resolvedText = t.q;
-    await page.appendReflection_(c.popId, `TENSION-RESOLVED[c${cycle}]: ${t.q}`, { cycle, daypart, day, key: 'tension-resolved', extra: { type: 'tension' } });
+    await page.appendReflection_(c.popId, t.q, { cycle, daypart, day, key: 'tension-resolved', extra: { type: 'tension', kind: 'resolved' } });
   }
   if (cls.tension && !tlist.some((t) => t.status === 'open' && t.q.toLowerCase() === cls.tension.toLowerCase())) {
     const openNow = tlist.filter((t) => t.status === 'open');
@@ -205,7 +205,7 @@ async function recordParticipant(c, ownText, daypart, cycle, tensionState, bondT
       tlist.splice(tlist.indexOf(oldest), 1);
     }
     tlist.push({ q: cls.tension, cy: cycle, status: 'open' });
-    await page.appendReflection_(c.popId, `TENSION[c${cycle}]: ${cls.tension}`, { cycle, daypart, day, key: 'tension', extra: { type: 'tension' } });
+    await page.appendReflection_(c.popId, cls.tension, { cycle, daypart, day, key: 'tension', extra: { type: 'tension', kind: 'open' } });
   }
   if (cls.event || cls.affect) {
     await sheets.appendRows('Reflection_Intake', [[

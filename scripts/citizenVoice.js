@@ -129,7 +129,7 @@ function showFor(popId, cycle) {
   } catch (e) { showNights = []; console.error('[show] record unreadable, no show block this run: ' + e.message); return ''; }
 }
 
-async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preText, pageKey, evidenceBound,
+async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preText, preKind, pageKey, evidenceBound,
   interviewMode, livedContextAllowed, model }) {
   const c = pool.find((p) => p.popId === popId);
   if (!c) { const e = new Error(`${popId} not voiceable (no DialState / not in ledger / no name+hood)`); e.code = 2; throw e; }
@@ -235,7 +235,8 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
     //    failure must never block the page append).
     //    engine.347 Task 3 (builder 2026-11-17: "keep it on drive small"): a reporter's "filed: <headline>"
     //    line is work done, landed by its fixed tag — the classifier does not guess from a headline.
-    const selfKind = reporterDial.recordKind(preText);   // 'filed' | 'graded' | null
+    //    pipeline.112: the caller names the kind (--record-kind); the line itself carries no label.
+    const selfKind = reporterDial.recordKind(preText, preKind);   // 'filed' | 'graded' | null
     let cls = {};
     if (selfKind === 'filed') cls = { event: reporterDial.FILED_TAG, affect: reporterDial.NO_MOOD, raw: 'filed (fixed tag)' };
     else try { cls = await classifier.classifyTripleReflection_(said.spoken, openTensions.map((t) => t.q)); } catch (e) { cls = { raw: 'classify threw: ' + e.message }; }
@@ -253,7 +254,7 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
       // pipeline.79 (codex #4): keyed per package (graded-<persona>) so two seats on one POPID
       // (Nia daily + weekly) never share a grade doc.
       ...(graded ? { key: pageKey || 'graded' } : {}),
-      extra: { affect: cls.affect || null, event: cls.event || null, ask: String(ask).slice(0, 120) },
+      extra: { affect: cls.affect || null, event: cls.event || null, ask: String(ask).slice(0, 120), kind: selfKind || null },
     });
     if (appended.error) throw new Error('appendReflection_: ' + appended.error);
     console.error(`[record] page ${ptr.tag} <- PRESS doc ${appended.id || '?'}`);
@@ -265,7 +266,7 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
       const t = openTensions[cls.resolves];
       t.status = 'resolved'; t.resolvedCy = cycle;
       resolvedText = t.q;
-      await page.appendReflection_(c.popId, `TENSION-RESOLVED[c${cycle}]: ${t.q}`, { cycle, daypart: 'PRESS', ...slot, key: 'tension-resolved', extra: { type: 'tension' } });
+      await page.appendReflection_(c.popId, t.q, { cycle, daypart: 'PRESS', ...slot, key: 'tension-resolved', extra: { type: 'tension', kind: 'resolved' } });
       console.error(`[record] tension RESOLVED <- "${t.q.slice(0, 80)}"`);
     }
     if (cls.tension && !tlist.some((t) => t.status === 'open' && t.q.toLowerCase() === cls.tension.toLowerCase())) {
@@ -275,7 +276,7 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
         tlist.splice(tlist.indexOf(oldest), 1);
       }
       tlist.push({ q: cls.tension, cy: cycle, status: 'open' });
-      await page.appendReflection_(c.popId, `TENSION[c${cycle}]: ${cls.tension}`, { cycle, daypart: 'PRESS', ...slot, key: 'tension', extra: { type: 'tension' } });
+      await page.appendReflection_(c.popId, cls.tension, { cycle, daypart: 'PRESS', ...slot, key: 'tension', extra: { type: 'tension', kind: 'open' } });
       console.error(`[record] tension OPENED <- "${cls.tension.slice(0, 80)}"`);
     }
     saveTensionState(tensionState);
@@ -354,7 +355,7 @@ async function runBatch(batchPath, cycle) {
     let r;
     try {
       r = await voiceOne(pool, rtPop, 'You filed a story for the Tribune: ' + recordText, {
-        cycle, maxTokens: 60, record: !DRY, dry: DRY, preText: recordText, pageKey: arg('page-key', null),
+        cycle, maxTokens: 60, record: !DRY, dry: DRY, preText: recordText, preKind: arg('record-kind', null), pageKey: arg('page-key', null),
         model: MODEL,
       });
     } catch (e) { console.error('citizenVoice record-text: ' + e.message); process.exit(e.code || 1); }

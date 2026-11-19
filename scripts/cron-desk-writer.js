@@ -873,7 +873,8 @@ async function toolMemoryRecall(popId, input) {
     const recent = await recentPage_(popId, 5);
     if (recent.results && recent.results.length) {
       parts.push('YOUR RECENT MEMORY (newest first):');
-      for (const d of recent.results) parts.push('- ' + String(d.content || '').replace(/\s+/g, ' ').slice(0, 400));
+      // pipeline.112: a filing or a grade is stored without its label; shown with its kind in front, as it always read
+      for (const d of recent.results) parts.push('- ' + String(require('../lib/pageLabels').recordLine(d.content || '', d.metadata)).replace(/\s+/g, ' ').slice(0, 400));
     }
     if (input.query) {
       const hits = await readPage_(popId, input.query, 5);

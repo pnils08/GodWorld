@@ -24,6 +24,8 @@ const fs = require('fs');
 require('dotenv').config({ path: path.join(require('os').homedir(), '.config/godworld/.env') });
 const sheets = require('../lib/sheets.js');
 const { isJobDaypart } = require('../lib/jobStatementRows');
+const { FILED_TAG } = require('../lib/reporterDialEvents');
+const isFilingRow = (rf) => (rf.kind === 'PRESS' && rf.event === FILED_TAG) || /^(filed|graded):/i.test(rf.full);
 
 const REPO = path.join(__dirname, '..');
 
@@ -299,8 +301,10 @@ async function buildDigest(options) {
     reflections: reflections.length,
     // pipeline.108: every citizen who wrote in the window with every reflection,
     // uncapped — the daily news uploads these as sources, not the 5×2 vignettes.
-    // A reporter's `filed:` / `graded:` rows are the newsroom's filing record on
-    // their page, not something a citizen wrote; they stay out.
+    // A reporter's filing rows are the newsroom's filing record, not something a
+    // citizen wrote; they stay out. pipeline.112: the row is a filing by its own
+    // cells (daypart PRESS + the filed tag); rows written before carry `filed:` /
+    // `graded:` in front of the text.
     citizens: ranked.map(({ popid, rfs }) => {
       const p = person(popid);
       return {
@@ -308,7 +312,7 @@ async function buildDigest(options) {
         name: p.name,
         occ: p.occ || '',
         hood: p.hood || '',
-        reflections: rfs.filter((rf) => !/^(filed|graded):/i.test(rf.full))
+        reflections: rfs.filter((rf) => !isFilingRow(rf))
           .sort((a, b) => a.ts - b.ts).map((rf) => {
             const convoWith = rf.kind === 'CONVO' ? convoPartner.get(rf) : null;
             return { text: rf.full, with: convoWith ? person(convoWith).name : '' };
@@ -328,4 +332,4 @@ if (require.main === module) {
   main().catch((e) => { console.error(e); process.exit(1); });
 }
 
-module.exports = { buildDigest, parseArgs };
+module.exports = { buildDigest, parseArgs, isFilingRow };

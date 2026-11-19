@@ -129,7 +129,7 @@ function showFor(popId, cycle) {
   } catch (e) { showNights = []; console.error('[show] record unreadable, no show block this run: ' + e.message); return ''; }
 }
 
-async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preText, preKind, pageKey, evidenceBound,
+async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preText, preKind, preScore, preMax, pageKey, evidenceBound,
   interviewMode, livedContextAllowed, model }) {
   const c = pool.find((p) => p.popId === popId);
   if (!c) { const e = new Error(`${popId} not voiceable (no DialState / not in ledger / no name+hood)`); e.code = 2; throw e; }
@@ -254,7 +254,10 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
       // pipeline.79 (codex #4): keyed per package (graded-<persona>) so two seats on one POPID
       // (Nia daily + weekly) never share a grade doc.
       ...(graded ? { key: pageKey || 'graded' } : {}),
-      extra: { affect: cls.affect || null, event: cls.event || null, ask: String(ask).slice(0, 120), kind: selfKind || null },
+      // plan Task 2: a grade carries its score and its max in metadata
+      extra: { affect: cls.affect || null, event: cls.event || null, ask: String(ask).slice(0, 120), kind: selfKind || null,
+        score: graded && Number.isInteger(Number(preScore)) && preScore != null ? Number(preScore) : null,
+        scoreMax: graded && Number.isInteger(Number(preMax)) && preMax != null ? Number(preMax) : null },
     });
     if (appended.error) throw new Error('appendReflection_: ' + appended.error);
     console.error(`[record] page ${ptr.tag} <- PRESS doc ${appended.id || '?'}`);
@@ -355,7 +358,7 @@ async function runBatch(batchPath, cycle) {
     let r;
     try {
       r = await voiceOne(pool, rtPop, 'You filed a story for the Tribune: ' + recordText, {
-        cycle, maxTokens: 60, record: !DRY, dry: DRY, preText: recordText, preKind: arg('record-kind', null), pageKey: arg('page-key', null),
+        cycle, maxTokens: 60, record: !DRY, dry: DRY, preText: recordText, preKind: arg('record-kind', null), preScore: arg('record-score', null), preMax: arg('record-max', null), pageKey: arg('page-key', null),
         model: MODEL,
       });
     } catch (e) { console.error('citizenVoice record-text: ' + e.message); process.exit(e.code || 1); }

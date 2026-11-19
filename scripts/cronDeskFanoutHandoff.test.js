@@ -355,6 +355,9 @@ assert.throws(() => validateWakeHandoff(handoffAngle,
   assert.equal(cdr.lastGradedLine([{ customId: 'cp-POP-00011-c116-PRESS-graded-luis-navarro', content: 'graded: 2/3 — recap.\n\n---\n\n3/3 — nothing fell short' }], 'luis-navarro'), 'graded: 3/3 — nothing fell short', 'one Cycle doc written before and after the change: the newest line wins');
   assert.equal(cdr.lastGradedLine([{ customId: 'cp-POP-00011-c116-PRESS-graded', content: '1/3 — older' }]), 'graded: 1/3 — older');
   assert.equal(cdr.lastGradedLine([{ customId: 'cp-POP-00011-c116-PRESS-thu-abcdef', content: '3/3 — a line in a doc that is not a grade' }]), null, 'an unkeyed doc is a grade only by the old label');
+  // plan Task 1 (b): the score is read from the doc's metadata; the text's score is the fallback
+  assert.equal(cdr.lastGradedLine([{ customId: 'cp-POP-00011-c116-PRESS-graded-luis-navarro', content: '2/3 — recap', metadata: { kind: 'graded', score: 3, scoreMax: 3 } }], 'luis-navarro'), 'graded: 3/3 — recap', 'metadata score stands over the text score');
+  assert.equal(cdr.lastGradedLine([{ customId: 'cp-POP-00011-c116-PRESS-graded-luis-navarro', content: '2/3 — recap', metadata: { kind: 'graded' } }], 'luis-navarro'), 'graded: 2/3 — recap', 'no score in metadata: the text');
   const g3 = cdr.fanoutCheckTotals([{ contractScore: 3, contractMax: 3 }, { contractScore: 2, contractMax: 3 }]);
   assert.match(cdr.formatCheckTotals(g3, 'write'), /graded 2 avg 2\.5\/3$/);
   // live read-backs when the C111 artifacts are on disk

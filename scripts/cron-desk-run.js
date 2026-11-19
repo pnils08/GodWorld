@@ -1544,7 +1544,15 @@ function lastGradedLine(posts, persona) {
     // in one doc too (a rerun appends into the Cycle's doc). An unkeyed doc is a grade only by the old label.
     const keyed = /-PRESS-graded(?:-|$)/.test(id);
     const hits = String(p && p.content || '').match(keyed ? /^(?:graded: )?\d\/[34]\b.*$/gm : /^graded: \d\/[34]\b.*$/gm);   // out of 3 from 2026-11-11, 4 before
-    if (hits) return ('graded: ' + hits[hits.length - 1].trim().replace(/^graded: /, '')).slice(0, 300);
+    if (!hits) continue;
+    let last = hits[hits.length - 1].trim().replace(/^graded: /, '');
+    // plan Task 1 (b): the score from the doc's metadata (the newest write's — the store merges it); the text's own
+    // score is the fallback for a doc written before the score rode metadata.
+    const m = p && p.metadata;
+    if (keyed && m && Number.isInteger(Number(m.score)) && m.score !== '' && m.score != null) {
+      last = last.replace(/^\d\/[34]\b/, Number(m.score) + '/' + (Number(m.scoreMax) || 4));
+    }
+    return ('graded: ' + last).slice(0, 300);
   }
   return null;
 }
@@ -2182,7 +2190,7 @@ async function runAngle(assign) {
         try {
           const { recentPage_ } = require(path.join(ROOT, 'lib', 'citizenPage'));
           const page = await recentPage_(asker.popid, 12);
-          const last = lastGradedLine((page && page.results || []).map(d => ({ content: d.content, customId: d.customId })),
+          const last = lastGradedLine((page && page.results || []).map(d => ({ content: d.content, customId: d.customId, metadata: d.metadata })),
             ACTIVE_WAKE_PACKAGE.persona);
           if (last) {
             ask += '\n\nYour last piece came back from the desk ' + last.replace(/^graded:/, 'graded') +
@@ -3474,7 +3482,8 @@ async function runWrite(assign) {
     const gradeLine = gradedLine(contractScore);
     try {
       execFileSync('node', [path.join(ROOT, 'scripts', 'citizenVoice.js'),
-        '--pop=' + byline.popid, '--record-text=' + gradeText(contractScore), '--record-kind=graded', '--cycle=' + cycle,
+        '--pop=' + byline.popid, '--record-text=' + gradeText(contractScore), '--record-kind=graded',
+        '--record-score=' + contractScore.score, '--record-max=' + (contractScore.max || 4), '--cycle=' + cycle,
         ...(personaSlug ? ['--page-key=graded-' + personaSlug] : [])],
         { cwd: ROOT, encoding: 'utf8', timeout: 300000 });
       gradeRecord = { recorded: true, line: gradeLine };

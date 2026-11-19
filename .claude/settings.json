@@ -229,13 +229,24 @@
           {
             "type": "command",
             "command": "node /root/GodWorld/.claude/hooks/assumption-guard.js",
-            "timeout": 180
+            "timeout": 30
           },
           {
             "type": "command",
             "command": "bash /root/GodWorld/scripts/session-end-audit.sh",
             "timeout": 10,
             "async": true
+          }
+        ]
+      }
+    ],
+    "MessageDisplay": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node /root/GodWorld/.claude/hooks/reply-hide.js",
+            "timeout": 5
           }
         ]
       }

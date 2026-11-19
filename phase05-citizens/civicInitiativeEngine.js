@@ -2825,14 +2825,14 @@ function processOverrideVote_(ctx, row, header, councilState, rng) {
   var idx = function(n) { return header.indexOf(n); };
 
   var name = row[idx('Name')] || 'Unknown Initiative';
-  var leadFaction = (row[idx('LeadFaction')] || '').toString().trim().toUpperCase();
-  var opposition = (row[idx('OppositionFaction')] || '').toString().trim().toUpperCase();
+  // civic.49 N1: blank lead / opposition read as the original vote read them (resolveCouncilVote_: OPP / CRC).
+  var leadFaction = (row[idx('LeadFaction')] || '').toString().trim().toUpperCase() || 'OPP';
+  var opposition = (row[idx('OppositionFaction')] || '').toString().trim().toUpperCase() || 'CRC';
 
   // Override needs 6+ votes (supermajority)
   var factions = councilState.factions;
   var leadAvailable = factions[leadFaction] ? factions[leadFaction].available : 0;
   var oppAvailable = factions[opposition] ? factions[opposition].available : 0;
-  var indAvailable = factions['IND'] ? factions['IND'].available : 0;
 
   // Base calculation: lead faction holds firm, needs IND support
   var yesVotes = leadAvailable;
@@ -2840,13 +2840,33 @@ function processOverrideVote_(ctx, row, header, councilState, rng) {
 
   // IND members vote probabilistically (slightly higher chance to override than original vote)
   // Rationale: council tends to defend its decision against veto
-  var indMembers = councilState.indMembers || [];
+  // civic.49 N1 (the Task 1 shape): a member votes once. When IND leads or opposes, its seats are
+  // counted above and not rolled again.
+  var prob = 0.55;  // Slight override bias
+  var indMembers = (leadFaction === 'IND' || opposition === 'IND') ? [] : (councilState.indMembers || []);
   for (var i = 0; i < indMembers.length; i++) {
-    var prob = 0.55;  // Slight override bias
     if (rng() < prob) {
       yesVotes++;
     } else {
       noVotes++;
+    }
+  }
+
+  // civic.49 N1: a faction that is neither lead nor opposition (OPP when IND leads against CRC) votes at
+  // the unnamed-IND probability instead of sitting out; rolled after the IND loop, so a row with no such
+  // faction rolls the dice it rolled before.
+  var thirdFactions = ['OPP', 'CRC'];
+  for (var tf = 0; tf < thirdFactions.length; tf++) {
+    var tfKey = thirdFactions[tf];
+    if (tfKey === leadFaction || tfKey === opposition || !factions[tfKey]) continue;
+    var tfMembers = factions[tfKey].members || [];
+    for (var tm = 0; tm < tfMembers.length; tm++) {
+      var tmUnavail = false;
+      for (var tu = 0; tu < (councilState.unavailable || []).length; tu++) {
+        if (councilState.unavailable[tu].name === tfMembers[tm]) { tmUnavail = true; break; }
+      }
+      if (tmUnavail) continue;
+      if (rng() < prob) { yesVotes++; } else { noVotes++; }
     }
   }
 

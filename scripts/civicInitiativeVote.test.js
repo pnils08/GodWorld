@@ -7,7 +7,7 @@
 const fs = require('fs'), path = require('path');
 const src = (p) => fs.readFileSync(path.resolve(__dirname, p), 'utf8');
 global.Logger = { log() {} };
-const { resolveCouncilVote_ } = new Function(src('../phase01-config/advanceSimulationCalendar.js') + '\n' + src('../phase05-citizens/civicInitiativeEngine.js') + '\nreturn { resolveCouncilVote_ };')();
+const { resolveCouncilVote_, processOverrideVote_ } = new Function(src('../phase01-config/advanceSimulationCalendar.js') + '\n' + src('../phase05-citizens/civicInitiativeEngine.js') + '\nreturn { resolveCouncilVote_, processOverrideVote_ };')();
 let pass = 0, fail = 0;
 const ok = (n, c, d) => { if (c) { pass++; } else { fail++; console.log('FAIL', n, d || ''); } };
 
@@ -52,6 +52,20 @@ const board = { totalSeats: 7, filledSeats: 7, availableVotes: 7, vacantSeats: 0
   indMembers: ['a', 'b', 'c', 'd', 'e', 'f', 'g'].map((name) => ({ name })) };
 const b = resolveCouncilVote_({}, row('IND', ''), H, board, 0, none, { demographics: [], affectedNeighborhoods: [], policyDomain: '' }, (() => { const q = [0.1, 0.1, 0.1, 0.1, 0.9, 0.9, 0.9]; return () => q.shift(); })(), { body: 'school board', label: 'Board', votesNeeded: 4 });
 ok('D1 the school board still counts seven seats once: 4-3', b.voteCount === '4-3' && b.swingVoters.length === 7, b.voteCount);
+
+// N1: the override vote (6 needed) counts each seat once; the third faction votes at the override's 0.55.
+const ov = (st, lead, opp, rolls) => { const q = rolls.slice(); return processOverrideVote_({ summary: {} }, ['Test', lead, opp], ['Name', 'LeadFaction', 'OppositionFaction'], st, () => (q.length ? q.shift() : 0.9)); };
+const oInd = ov(council(), 'IND', '', [0.1, 0.1, 0.1, 0.1]);
+ok('E1 an IND-led override with all 4 OPP seats yes is 6-3 and passes', oInd.overridePassed && oInd.voteCount === '6-3', oInd.voteCount);
+ok('E2 the IND-led override counts nine seats', oInd.yesVotes + oInd.noVotes === 9, String(oInd.yesVotes + oInd.noVotes));
+const oInd3 = ov(council(), 'IND', '', [0.1, 0.1, 0.1, 0.9]);
+ok('E3 three of four OPP seats is 5 yes — the override fails', !oInd3.overridePassed && oInd3.voteCount === '5-4', oInd3.voteCount);
+const oIndOut = ov(council([{ name: 'Mobley', reason: 'hospitalized', faction: 'OPP' }]), 'IND', '', [0.1, 0.1, 0.1]);
+ok('E4 a hospitalized third-faction seat casts no override vote', oIndOut.yesVotes + oIndOut.noVotes === 8, oIndOut.voteCount);
+const oOpp = ov(council(), 'OPP', 'CRC', [0.1, 0.1]);
+ok('E5 an OPP-led override, CRC opposition, both IND yes: 6-3', oOpp.overridePassed && oOpp.voteCount === '6-3', oOpp.voteCount);
+const oOppBlank = ov(council(), 'OPP', '', [0.1, 0.9]);
+ok('E6 a blank opposition reads CRC: 5-4, nine seats', !oOppBlank.overridePassed && oOppBlank.voteCount === '5-4', oOppBlank.voteCount);
 
 console.log(`civicInitiativeVote: ${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

@@ -59,7 +59,7 @@ pointers:
 
 | # | Concept | Origin | What it adds | Status |
 |---|---|---|---|---|
-| N1 | `processOverrideVote_` has the same shape (lead + IND rolled again; a vetoed IND-led initiative cannot reach the 6 an override needs) | es · code read | a passed IND-led initiative that the mayor vetoes cannot be overridden | held for builder — the bench showed INIT-009 pass 5-4 and the mayor veto it; no override vote ran on the bench, so "cannot reach 6" is from the code read, not a bench result |
+| N1 | `processOverrideVote_` has the same shape (lead + IND rolled again; a vetoed IND-led initiative cannot reach the 6 an override needs) | es · code read | a passed IND-led initiative that the mayor vetoes cannot be overridden | es builds it (builder 2026-11-19: "i have no clue how politics work ad have no intertest in it to learb" — not his call; fix it the way Task 1 fixed the council vote: each seat once). Bench note: the bench showed INIT-009 pass 5-4 and the mayor veto it; no override vote ran on the bench, so "cannot reach 6" is from the code read, not a bench result |
 | N2 | `OppositionFaction` blank defaults to CRC even when the lead is CRC (a faction counted yes and no) | es · code read | no CRC-led row exists on the tracker today | held for builder |
 
 ## Open questions
@@ -68,6 +68,7 @@ pointers:
 
 ## Changelog
 
+- 2026-11-19 (es) — N1 is code, not a builder ruling: the override vote gets the Task 1 shape (each seat once), benched and deployed like stage 59.
 - 2026-11-19 (es) — N1 wording corrected: the bench recorded INIT-009's pass and veto only; the override outcome is a code read, not a bench result.
 - 2026-11-19 (es) — INIT-007 ruled: part of Baylight, never a stand-alone initiative (builder). Open question closed; the override vote (N1) is the only ruling left.
 - 2026-11-19 (es) — tracker restored: INIT-003, 006, 008–014 on the C114 natural path, no vote dates; the first IND-led vote waits on the override ruling (N1). Storyline_Ledger read after the C117 fire.

@@ -29,6 +29,17 @@ ok(placed.length === 9 && placed.every(function (r) { return r.Weight === '1' &&
 ok(!P.validateRows([Object.assign({}, placed[0], { Text: 'walked past the sign-up sheet again and again and again' })]).valid, 'a placed row not in PLACED is refused');
 ok(!P.validateRows([Object.assign({}, placed[0], { Conditions: '' })]).valid, 'a placed row with another Conditions cell is refused');
 ok(!P.validateRows([Object.assign({}, placed[0], { PoolKey: 'down.sociability' })]).valid, 'a placed row in a down.* pool is refused');
+ok(!P.validateRows([Object.assign({}, placed[0], { dial: 'warmth', Tags: placed[0].Tags.replace('sociability', 'warmth') })]).valid, 'a placed row on another dial is refused');
+ok(!P.validateRows([Object.assign({}, placed[0], { Weight: '3' })]).valid, 'a placed row at another Weight is refused');
+// what the sheet gets is what the row says: the tags alone give its source, its one sign, and (through the generator's own routing) its kind
+placed.forEach(function (r) {
+  const tags = r.Tags.split(',');
+  ok(tags[0] === r.source && tags.filter(function (t) { return /^dial:/.test(t); }).join() === 'dial:' + r.dial + ':down', 'tags of ' + r.Text);
+});
+const O = require('./occupationDialTags');
+placed.filter(function (r) { return r.source === 'source:media'; }).forEach(function (r) {
+  ok(O.MEDIA_SIGNS.some(function (s) { return s[0] === r.PoolKey && s[1] === r.Text && s[2] === r.dial + ':down'; }), 'paper-reader row listed in MEDIA_SIGNS under the same sign: ' + r.Text);
+});
 
 // 2. the tab loader takes every row
 global.Logger = { log() {} };
@@ -63,6 +74,13 @@ Object.keys(P.ROUTE).forEach(function (d) {
   if (route.source !== 'source:familyLife') ok(gce.indexOf('has("' + route.source + '")) return "' + route.kind + '"') > 0, route.source + ' -> ' + route.kind);
   ok(Object.keys(M.nudgesForEvent_(route.kind, 1, '')).length === 0, 'bare ' + route.kind + ' moves nothing');
 });
+// the placed rows' sources route to the kinds they claim, in the generator's own primaryFromTags
+ok(gce.indexOf('if (has("source:civicNews")) return "Civic Perception";') > 0, 'source:civicNews -> Civic Perception');
+ok(gce.indexOf('if (has("source:media")) return "Media";') > 0, 'source:media -> Media');
+placed.forEach(function (r) {
+  ok({ 'source:civicNews': 'Civic Perception', 'source:media': 'Media', 'source:familyLife': 'Daily' }[r.source] === r.kind, 'kind of ' + r.Text);
+});
+ok(/var GRADED_ONLY_KIND_ = \{[^}]*"Media": true/.test(gce) && Object.keys(M.nudgesForEvent_('Civic Perception', 1, '')).length === 0, 'Media is written graded only; bare Civic Perception moves nothing');
 // familyLife has no branch of its own: it falls through to Daily (the S280 comment in primaryFromTags)
 ok(!/has\("source:familyLife"\)\) return/.test(gce), 'source:familyLife still falls through to Daily');
 

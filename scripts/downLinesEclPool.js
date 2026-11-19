@@ -229,9 +229,11 @@ function row(dial, line) {
 // of the tab's draws, so a PoolKey with one signed row hands that row its whole share: on the live log
 // C115–C116 "painted over graffiti … alongside five neighbors" was drawn 40 times a Cycle (the per-row cap),
 // the two faith pools and the Tribune pool 30 to 60, each all up on sociability or warmth, against one share
-// for the 21 rows of down.sociability. A row placed IN such a pool splits that pool's share with the up row
-// it answers: same PoolKey, same source (so the same kind), the Conditions cell of the row it answers,
-// Weight 1 as its neighbours. One small moment on the same ground, the other way.
+// for the 21 rows of down.sociability. A row placed IN such a pool takes one row's share of that pool beside
+// the up row it answers (half in a pool with one signed row, a fifth or a sixth in the Tribune and faith
+// pools): same PoolKey, same source (so the same kind), the Conditions cell of the row it answers, Weight 1 as
+// its neighbours. One small moment on the same ground, the other way. It reaches exactly who the up row
+// reaches — the faith rows any adult, the health-center row any hood: gap log C116 G-EC62.
 // [PoolKey, dial, source, kind, Conditions, text, the live row it answers]
 const PLACED_AUTH = 'auth:rb-1118';
 const PLACED = [
@@ -286,7 +288,7 @@ function validateRows(rows) {
     const m = placed ? [r.PoolKey, r.dial] : /^down\.([a-z]+)$/.exec(r.PoolKey);
     if (r.Kind !== 'line') errors.push(i + ': Kind');
     if (!m || !ROUTE[m[1]]) { errors.push(i + ': PoolKey'); return; }
-    if (placed && (/^down\./.test(r.PoolKey) || !PLACED.some(function (p) { return p[0] === r.PoolKey && p[5] === r.Text && p[4] === r.Conditions && p[2] === r.source; }))) errors.push(i + ': a placed row is one of PLACED, as written');
+    if (placed && (/^down\./.test(r.PoolKey) || r.Weight !== '1' || !PLACED.some(function (p) { return p[0] === r.PoolKey && p[1] === r.dial && p[5] === r.Text && p[4] === r.Conditions && p[2] === r.source && p[3] === r.kind && p[6] === r.answers; }))) errors.push(i + ': a placed row is one of PLACED, as written');
     if (!r.Text) errors.push(i + ': empty Text');
     if (/^[A-Z]/.test(r.Text) || /[.!?]$/.test(r.Text)) errors.push(i + ': a clause — lowercase start, no closing mark');
     if (/\d/.test(r.Text)) errors.push(i + ': no numbers in a line');

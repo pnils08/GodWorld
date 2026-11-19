@@ -2497,8 +2497,10 @@ function generateCitizensEvents_(ctx) {
 
   // engine.350: each First Friday line carries its own sign, by what it says. All six were sociability up
   // (236 lines in the stage-54 bench's ten Cycles, none down): a gallery looked at is a night out, an artist
-  // found is something new, and only the crowd is company. The night's other side is written too. The pool
-  // keeps the mass its six lines had at 1.2.
+  // found is something new, and only the crowd is company. The night's other side is written too: both are
+  // nights someone went (the pool reaches every adult in the city and its draw rides out-and-about, so a
+  // line about staying in, or about living near the galleries, does not belong here). The pool keeps the
+  // mass its six lines had at 1.2.
   var firstFridayLines = [
     ["checked out First Friday galleries", "dial:outabout:up"],
     ["enjoyed the art walk atmosphere", "dial:outabout:up"],
@@ -2508,8 +2510,7 @@ function generateCitizensEvents_(ctx) {
     ["soaked in the community arts scene", "dial:sociability:up"],
     ["ran into half the block at the art walk and came home hoarse", "dial:sociability:up"],
     ["went to the art walk alone, spoke to no one, and left before the music started", "dial:sociability:down"],
-    ["stood at the back of a crowded gallery, decided none of it was for them, and went home", "dial:openness:down"],
-    ["heard the art walk from three blocks off and shut the window", "dial:outabout:down"]
+    ["stood at the back of a crowded gallery, decided none of it was for them, and went home", "dial:openness:down"]
   ];
   var firstFridayPool = [];
   for (var ffi = 0; ffi < firstFridayLines.length; ffi++) {

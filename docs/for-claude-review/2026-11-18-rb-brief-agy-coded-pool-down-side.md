@@ -1,0 +1,28 @@
+# Brief to agy — the down side of the coded pools, adversarial review (engine.350 Task 7)
+
+Read-only review. Write your findings to `output/antigravity/2026-11-18-review-e350-coded-pool-down-side.md`. Do not edit code or sheets, do not fire the bench or the engine, do not run any model. Reading live sheets through `lib/sheets` (`require('/root/GodWorld/lib/env')` first) and running unit tests (`node scripts/<name>.test.js`) is fine. The candidate is not benched and not deployed; your findings are folded before the bench.
+
+## What was built
+
+Commit `8f4d6dd4d` (`git show 8f4d6dd4d`). Plan: `docs/plans/2026-11-16-every-saved-word-reaches-the-dials.md` §The bench and the line "Next step of Task 7". Ruling behind it (builder, 2026-11-16): a line moves a dial by what it says, "down as often as up". Stage-54 bench, ten Cycles: sociability 85% of line pushes up, warmth 80%, openness 67%, drive 65%; from code alone sociability 1,505 up to 4 down.
+
+- `phase05-citizens/generateCitizensEvents.js`
+  - `DOMAIN_MOMENTS`: 30 down lines added across seven sources; `DOMAIN_MOMENT_MASS_LINES_` holds each source's draw mass at eight lines × 0.9.
+  - `firstFridayLines`: the six lines re-signed one by one (were all `dial:sociability:up`), four lines added, pool mass held at 6 × 1.2.
+  - `GRADED_ONLY_KIND_` gains `QoL`.
+- `scripts/downLinesEclPool.js` `PLACED`: nine down rows for the content tab, each placed in the PoolKey of the up row it answers. **On no sheet yet.** Also listed in `scripts/occupationDialTags.js` `MEDIA_SIGNS` (the three `source:media` rows).
+- Tests: `scripts/codedPoolDownSide.test.js` (new), `scripts/downLinesEclPool.test.js`, `scripts/occupationDialTags.test.js`.
+- Not in this commit, planned for the bench tab only: live row 357 of `Event_Content_Ledger` (`culture.citywide`, "a flyer for a seniors lunch program flutters on a community bulletin board", `dial:sociability:up`, no Conditions, drawn 40 times a Cycle) set `Active = no` — the line says nothing the citizen did.
+
+## Questions
+
+1. **Each line, by what it says.** All 34 new coded lines, the six re-signed First Friday lines, the nine `PLACED` rows: any whose dial or direction is not what the sentence says; any that asserts something the engine cannot guarantee of whoever draws it (a spouse, a child, a job, a home with stairs, a congregation). For the faith rows: who can draw a `faith.attending` / `faith.volunteering` row — check the generator and the loader, not the pool's name.
+2. **The mass rule.** `0.9 * Math.min(n, 8) / n` per line. With the new counts, what happens to the share of pushes on the dials this task did not aim at — family (five up lines in `source:familyLife`, now 5 of 11), integrity (2 of 9 in `source:identity`), composure (9 up / 10 down across the table)? Give the before / after weights per dial. Does any dial that passed at the stage-54 bench (composure 50, integrity 51, family 51) leave 40–60 on this arithmetic?
+3. **QoL graded-only.** Every path that puts a `source:qol` entry in a pool, coded and tab: does each carry a `dial:` tag? Any that is now dropped where it used to be written. Every reader of the bare `QoL` kind or the `[QoL]` bracket on a life line or a log row (trait profile, hood pulse, wake pins, lives slice, newsroom sourcing): does it still see a graded `QoL-Composure-Down-S`?
+4. **First Friday.** Readers of `FirstFriday`-kind lines or of the `source:firstFriday` tag that assumed sociability. `runRelationshipEngine.js` writes its own `Relationship-FirstFriday` lines — untouched here; say if that leaves a contradiction.
+5. **The placed rows and the share claim.** I claim: every eligible PoolKey takes an equal share of the tab's mass (`balanceContentLedgerPoolWeights_`), a row stops entering pools after 40 draws in a Cycle, so a row placed in a one-signed-row pool takes half that pool's written lines. Check it against the code, including: unsigned rows in the same PoolKey (drawn and dropped — do they eat the share?), the `eclExclusivePools` rule on `tribune.newsroom`, `source:media` rows now being graded-only, and whether row Weight changes anything across pools. Would the loader take all nine rows (`loadEventContentLedger.js`)?
+6. **Row 357 off.** What else reads that row or the `culture.citywide` PoolKey; what happens to a PoolKey whose only remaining row is hood-gated.
+7. **The measure.** The bench counted line pushes from `LifeHistory_Log`. (a) Which kinds are on the log but never on the citizen's cell (I found `Advancement` "Intake at Tier …": 0 in the cells of `output/simulation_ledger_snapshot.jsonl`, 412 log lines in the ten-Cycle bench) and which are on the cell but not the log (bets, money)? For each of the eight dials, how far does the log count sit from the cell count on C115–C116 live data? (b) `utilities/citizenMemory.js` `applyEvent_` / `applyCycleEffects_`: a dial moves for good only after three same-way Cycles with the swing still felt. The stage-54 bench's `Dial_Pulse` rows show sociabilityDown 0–1 against sociabilityUp 40–98 a Cycle at 85% up by lines, and openness 15–29 up against 0–4 down at 67%. From the code, at what share of up pushes does a dial's permanent down count come near its up count? Is the plan's acceptance 5 (60 / 40 by pushes) enough to make people move down for good?
+8. **Trick code.** In `scripts/codedPoolDownSide.test.js` and the two changed tests: an assertion that proves less than its label, a regex that cannot fail, a stub that hides the path under test (`getCitizenDialBands_` is stubbed to null, `hoodTexturePool_` to empty — say what that leaves unproven).
+
+Each finding: file:line, what is there, the evidence. No proposals for what the sim should do or what a line should say instead; say what is wrong and why.

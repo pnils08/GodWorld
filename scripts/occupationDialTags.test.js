@@ -161,4 +161,4 @@ mmLines.forEach(function (l) {
 ok(mmLines.length === 46 && nDown >= 5 && nPlain === 5, 'newsroom lines ' + mmLines.length + ': ' + nUp + ' / ' + nDown + ' / ' + nPlain);
 ok(mmd.indexOf("if (primaryTag !== 'Media' && Object.keys(ownFx).length) writtenTag = primaryTag;") > 0, 'the media-mode admission never writes a bare Media');
 
-console.log('occupationDialTags.test.js: ' + n + ' assertions passed — tab rows ' + c.up + ' up / ' + c.down + ' down / ' + c.plain + ' plain; coded flavours ' + fUp + ' / ' + fDown + ' / ' + fPlain + '; media work ' + mUp + ' / ' + mDown + ' / ' + mPlain + '; paper-reader rows 4; newsroom lines ' + nUp + ' / ' + nDown + ' / ' + nPlain);
+console.log('occupationDialTags.test.js: ' + n + ' assertions passed — tab rows ' + c.up + ' up / ' + c.down + ' down / ' + c.plain + ' plain; coded flavours ' + fUp + ' / ' + fDown + ' / ' + fPlain + '; media work ' + mUp + ' / ' + mDown + ' / ' + mPlain + '; paper-reader rows ' + P.MEDIA_SIGNS.length + '; newsroom lines ' + nUp + ' / ' + nDown + ' / ' + nPlain);

@@ -76,14 +76,18 @@ console.log('═══ engine.350 — the coded pools as written');
   const compShare = w.composure.up / (w.composure.up + w.composure.down);
   assert(`composure keeps its lines (${w.composure.nUp} up, ${w.composure.nDown} down) and its balance`, w.composure.nUp === 9 && w.composure.nDown === 10 && compShare >= 0.4 && compShare <= 0.6, JSON.stringify(w.composure));
   const ffSign = {}; ff.lines.forEach((l) => { ffSign[l[1]] = (ffSign[l[1]] || 0) + 1; });
-  assert('First Friday reads by what each line says: sociability 2 up / 1 down, openness 3 / 1, out-and-about 2 / 1',
-    ffSign['dial:sociability:up'] === 2 && ffSign['dial:sociability:down'] === 1 && ffSign['dial:openness:up'] === 3 && ffSign['dial:openness:down'] === 1 &&
-    ffSign['dial:outabout:up'] === 2 && ffSign['dial:outabout:down'] === 1, JSON.stringify(ffSign));
+  assert('First Friday reads by what each line says: sociability 2 up / 1 down, openness 3 / 1, out-and-about 2 up',
+    ff.lines.length === 9 && ffSign['dial:sociability:up'] === 2 && ffSign['dial:sociability:down'] === 1 && ffSign['dial:openness:up'] === 3 && ffSign['dial:openness:down'] === 1 &&
+    ffSign['dial:outabout:up'] === 2 && !ffSign['dial:outabout:down'], JSON.stringify(ffSign));
+  // the pool reaches every adult in every hood and its draw rides out-and-about (agy 2026-11-18): no line about
+  // staying in or about living near the galleries
+  const ffHome = ff.lines.filter((l) => /stayed in|stayed home|shut the window|blocks? (off|away)|from (the|their) (window|porch)/i.test(l[0]));
+  assert('no First Friday line is a night stayed in or a home near the galleries', ffHome.length === 0, JSON.stringify(ffHome));
 
   // canon guard (S280): a line never asserts the citizen's own family
   const FAMILY = /\b(their|his|her|my)\s+(late\s+)?(spouse|wife|husband|partner|son|daughter|child|children|kid|kids|sister|brother|mother|father|mom|dad)\b/i;
   const fam = all.filter((e) => FAMILY.test(e.text));
-  assert('no line asserts the citizen\'s own spouse, child, sibling or parent', fam.length === 0, JSON.stringify(fam.map((e) => e.text)));
+  assert('no line gives the citizen a spouse, child, sibling or parent of their own (possessive forms; a stranger\'s kid is not one)', fam.length === 0, JSON.stringify(fam.map((e) => e.text)));
   // a down line carries no word a heavy content rule reads (hospital, promotion, business, wedding, a move, a hiring).
   // The last rule (relative / friend / neighbor / community / gathering) is the one these lines are about; it
   // reads only a line with no kind of its own, and these are written graded.
@@ -139,7 +143,8 @@ console.log('═══ engine.350 — the writer');
     const e = Object.keys(bySrcText).find((t) => l.text.indexOf(t) === 0); if (!e) return;
     const ent = bySrcText[e], m = SIGN.exec(ent.tags[1]);
     const want = M.gradedTag_(KIND_BY_SOURCE[ent.tags[0]], m[1], m[2] === 'up', 'S');
-    if (l.tag !== want) misTagged.push(l.tag + ' :: ' + l.text);
+    const wfx = M.nudgesForEvent_(l.tag, 1, l.text);   // the written line itself, as the fold reads it
+    if (l.tag !== want || Object.keys(wfx).length !== 1 || wfx[m[1]] !== (m[2] === 'up' ? 1 : -1)) misTagged.push(l.tag + ' ' + JSON.stringify(wfx) + ' :: ' + l.text);
     seenText[e] = 1;
     if (push[m[1]]) push[m[1]][m[2]]++;
     if (m[2] === 'down') seenDown++;
@@ -161,7 +166,12 @@ console.log('═══ engine.350 — the writer');
   assert('a gallery looked at is a night out', findLine(lines, 'checked out First Friday galleries').length > 0 && findLine(lines, 'checked out First Friday galleries').every((l) => l.tag === 'FirstFriday-Outabout-Up-S'));
   assert('an artist found is something new', findLine(lines, 'discovered new local artists').length > 0 && findLine(lines, 'discovered new local artists').every((l) => l.tag === 'FirstFriday-Openness-Up-S'));
   assert('the art walk alone is sociability down', findLine(lines, 'went to the art walk alone').length > 0 && findLine(lines, 'went to the art walk alone').every((l) => l.tag === 'FirstFriday-Sociability-Down-S'));
-  assert('the window shut on it is out-and-about down', findLine(lines, 'heard the art walk from three blocks off').length > 0 && findLine(lines, 'heard the art walk from three blocks off').every((l) => l.tag === 'FirstFriday-Outabout-Down-S'));
+  const ffWrong = [];
+  ff.lines.forEach((l) => {
+    const m = SIGN.exec(l[1]), want = M.gradedTag_('FirstFriday', m[1], m[2] === 'up', 'S'), got = findLine(lines, l[0]);
+    if (!got.length || !got.every((g) => g.tag === want)) ffWrong.push(l[0] + ' -> ' + (got[0] ? got[0].tag : 'never drawn'));
+  });
+  assert('each of the nine First Friday lines is drawn and written under its own sign', ffWrong.length === 0, JSON.stringify(ffWrong));
   assert('every First Friday tag folds one step', Object.keys(byTag).every((t) => { const fx = M.nudgesForEvent_(t, 1, ''); const k = Object.keys(fx); return k.length === 1 && Math.abs(fx[k[0]]) === 1; }), JSON.stringify(byTag));
   assert('no bare [FirstFriday] line', !byTag.FirstFriday);
 }
@@ -176,6 +186,32 @@ console.log('═══ engine.350 — the writer');
   assert('"felt the neighborhood tension in small interactions" is composure down (was sociability +3, warmth +2 on the word "neighbor")',
     tension.length > 0 && tension.every((l) => l.tag === 'QoL-Composure-Down-S') && JSON.stringify(M.nudgesForEvent_('QoL', 1, 'felt the neighborhood tension in small interactions')) === '{"sociability":3,"warmth":2}',
     JSON.stringify(tension.slice(0, 2)) + ' ' + JSON.stringify(M.nudgesForEvent_('QoL', 1, 'felt the neighborhood tension in small interactions')));
+}
+
+{
+  // the cause decides the dial (agy 2026-11-18: the runs above carry no qolParts, so only the mood lines were drawn).
+  // A hood low on work and housing: "heard another neighbor was between jobs" is drive down, never the word "neighbor".
+  const lines = [];
+  for (let seed = 1; seed <= 1500; seed++) {
+    const ctx = ctxFor(seed, { qol: 0.2 });
+    ctx.summary.crimeMetrics.context.byHood.Temescal.qolParts = { safety: 0.1, work: -0.4, health: 0.05, street: 0.02, housing: -0.3, mood: 0.0 };
+    GEN.generateCitizensEvents_(ctx);
+    String(ctx.ledger.rows[0][5] || '').split('\n').filter(Boolean).forEach((l) => { const m = /^C101 — \[([^\]]+)\] (.*)$/.exec(l); if (m) lines.push({ tag: m[1], text: m[2] }); });
+  }
+  const jobs = findLine(lines, 'heard another neighbor was between jobs'), rent = findLine(lines, 'watched a neighbor pack up for somewhere cheaper');
+  assert('"heard another neighbor was between jobs" is drive down, one step', jobs.length > 0 && jobs.every((l) => l.tag === 'QoL-Drive-Down-S' && JSON.stringify(M.nudgesForEvent_(l.tag, 1, l.text)) === '{"drive":-1}'), JSON.stringify(jobs.slice(0, 2)));
+  assert('"watched a neighbor pack up for somewhere cheaper" is composure down, one step', rent.length > 0 && rent.every((l) => l.tag === 'QoL-Composure-Down-S' && JSON.stringify(M.nudgesForEvent_(l.tag, 1, l.text)) === '{"composure":-1}'), JSON.stringify(rent.slice(0, 2)));
+  assert('no bare [QoL] line with the causes in', lines.filter((l) => l.tag === 'QoL').length === 0);
+}
+{
+  // the dial-band path (stubbed off above): with real bands the First Friday draw rides out-and-about, and every
+  // line is still written under its own sign
+  const bandsFor = (oa) => () => { const mult = {}, current = {}; DIALS.forEach((d) => { mult[d] = 1; current[d] = 50; }); mult.outabout = oa; return { mult, current, bands: {} }; };
+  const count = (oa) => { global.getCitizenDialBands_ = bandsFor(oa); const ls = run(2000, { firstFriday: true }); global.getCitizenDialBands_ = () => null; return ls; };
+  const hi = count(1.5), lo = count(0.5);
+  const ffN = (ls) => ls.filter((l) => /^FirstFriday/.test(l.tag)).length;
+  const odd = hi.concat(lo).filter((l) => /^FirstFriday/.test(l.tag) && !/^FirstFriday-(Sociability|Openness|Outabout)-(Up|Down)-S$/.test(l.tag));
+  assert(`someone out and about draws First Friday more than a homebody (${ffN(hi)} against ${ffN(lo)} lines), every line graded`, ffN(hi) > ffN(lo) * 1.5 && ffN(lo) > 0 && odd.length === 0, JSON.stringify(odd.slice(0, 2)));
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

@@ -1583,7 +1583,9 @@ function scoreLedgerCitizenForOffice_(row, headers, district, hoods, incumbentPo
   else if (tier === 3) score += 5;
   if (iDial >= 0 && row[iDial]) {
     var dDrive = readDialBase_(row[iDial], 'drive');
-    if (dDrive != null) score += dialBandIndexFromValue_(dDrive);
+    // engine.349 Task 14: the drive term by the number, 0..4 (10 -> 0, 50 -> 2, 90 -> 4). The three
+    // bars above (drive 60, integrity 40, composure 40) are who may stand, and stay (builder 2026-11-18).
+    if (dDrive != null && isFinite(Number(dDrive))) score += dialPos_(Number(dDrive)) + 2;
   }
   var iFirst = col('First');
   var iLast = col('Last');

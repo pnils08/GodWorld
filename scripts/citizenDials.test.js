@@ -79,8 +79,10 @@ console.log('═══ Section B — the band is a label; readers take the numbe
   assert('B4e dialPos_: 50 -> 0, 55 -> 0.25, 70 -> 1, 5 -> -2', near(E.dialPos_(50), 0) && near(E.dialPos_(55), 0.25) && near(E.dialPos_(70), 1) && near(E.dialPos_(5), -2));
   assert('B4f dialHigh_(v, 2): 70 -> 0, 80 -> 0.5, 90 -> 1', near(E.dialHigh_(70, 2), 0) && near(E.dialHigh_(80, 2), 0.5) && near(E.dialHigh_(90, 2), 1) && E.dialHigh_(50, 2) === 0);
   assert('B4g dialLow_(v, 1): 50 -> 0, 40 -> 0.5, 30 -> 1', near(E.dialLow_(50, 1), 0) && near(E.dialLow_(40, 1), 0.5) && near(E.dialLow_(30, 1), 1) && E.dialLow_(60, 1) === 0);
-  let threw = false; try { E.dialLadder_('abc', [0, 0, 0, 0, 0]); } catch (e) { threw = true; }
-  assert('B4h a dial that is not a number throws, never reads as the middle', threw);
+  const throwsOn = v => { try { E.dialLadder_(v, [9, 9, 9, 9, 9]); return false; } catch (e) { return true; } };
+  assert('B4h a dial that is not a number throws, never reads as the middle or the bottom (abc, null, undefined, empty, false, NaN)',
+    ['abc', null, undefined, '', '  ', false, NaN].every(throwsOn));
+  assert('B4i a numeric string still reads (the face fallback hands the regex match on as a number or a string)', E.dialLadder_('70', E.BAND_MULT) === 1.25 && E.dialLadder_(70, E.BAND_MULT) === 1.25);
 
   assert('B5 neutral citizen describes as unremarkable ("")', E.describe_(c) === '');
   assert('B6 high-drive citizen reads "driven"/"relentless"', /driven|relentless/.test(E.describe_(hi)));

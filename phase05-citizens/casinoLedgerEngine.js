@@ -967,14 +967,13 @@ function processCasinoLedger_(ctx, cycle) {
     // citizen does not sit down; a volatile one draws the tilt stake band whatever the
     // posture says. By the numbers off the row's DialState (engine.349 Task 14): the
     // odds of sitting down thin from integrity 70 (whole) through 80 (half) to 90 (none);
-    // a tilt week comes at composure 30 (never) through 20 (half the weeks) to 10 (always),
-    // a draw spent only when the odds are between 0 and 1.
+    // a bet is placed on tilt at composure 30 (never) through 20 (half of them) to 10 (always) —
+    // decided for the citizen who is placing one, a draw spent only when the odds are between
+    // 0 and 1 (agy 2026-11-18 §3: never for a row that cannot bet).
     var gateBands = (iDial >= 0 && typeof getCitizenDialBands_ === 'function') ? getCitizenDialBands_(ctx, pid, crow[iDial] || '') : null;
     var refuseShare = gateBands ? dialHigh_(gateBands.current.integrity, 2) : 0;
     if (refuseShare >= 1) { S.casinoGates = S.casinoGates || { refused: 0, tilt: 0 }; S.casinoGates.refused++; continue; }
     var tiltShare = gateBands ? dialLow_(gateBands.current.composure, 2) : 0;
-    var tilt = tiltShare >= 1 || (tiltShare > 0 && rng() < tiltShare);
-    if (tilt) { S.casinoGates = S.casinoGates || { refused: 0, tilt: 0 }; S.casinoGates.tilt++; }
     var wantShow = showOn && casinoEligible_(status, age, income, nw, emp, 'undocked', isPilot);
     var wantSports = casinoEligible_(status, age, income, nw, emp, 'sports', isPilot);
     if (!wantShow && !wantSports) continue;
@@ -984,6 +983,8 @@ function processCasinoLedger_(ctx, cycle) {
     var p = CASINO_PLACE_P * driveF * (wantShow ? showF : 1) * (wantSports ? sportsF : 1) * (1 - refuseShare);
     if (rng() >= p) continue;
 
+    var tilt = tiltShare >= 1 || (tiltShare > 0 && rng() < tiltShare);
+    if (tilt) { S.casinoGates = S.casinoGates || { refused: 0, tilt: 0 }; S.casinoGates.tilt++; }   // bets placed on tilt
     var pickShow = wantShow && (!wantSports || rng() < 0.5);
     var stake = casinoStake_(income, nw, iWL >= 0 ? crow[iWL] : 5, rng, postureE ? postureE.posture : undefined, tilt);
     if (stake == null) continue;

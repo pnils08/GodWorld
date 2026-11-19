@@ -24,6 +24,8 @@ const C = require('../utilities/compressLifeHistory.js');
 global.getGriefConfig_ = C.getGriefConfig_;
 global.activeGriefFromRegisters_ = C.activeGriefFromRegisters_;
 global.getCitizenDialBands_ = () => null;
+// engine.349 Task 14: the generator reads a dial by citizenMemory.js's number readers (globals on Apps Script)
+['dialLadder_', 'dialPos_', 'dialHigh_', 'dialLow_'].forEach((k) => { global[k] = E[k]; });
 global.hoodTexturePool_ = () => [];
 
 const simYearSrc_ = () => { const s = fs.readFileSync(path.resolve(__dirname, '../phase01-config/advanceSimulationCalendar.js'), 'utf8'); return s.match(/function simYearFromCycle_[\s\S]*?\n}\n/)[0] + s.match(/function simYearOf_[\s\S]*?\n}\n/)[0]; };

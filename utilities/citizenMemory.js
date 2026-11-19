@@ -249,7 +249,8 @@ function band_(c, dial) { return BAND_SIGNED[bandIndex_(current_(c, dial))]; }
 var BAND_CENTERS = [10, 30, 50, 70, 90];
 // dialLadder_(v, table5) -> the table read at the number
 function dialLadder_(v, table) {
-  var n = Number(v);
+  // a number or a numeric string only: null, '' and false would coerce to 0 and read as the bottom
+  var n = (typeof v === 'number') ? v : ((typeof v === 'string' && v.trim() !== '') ? Number(v) : NaN);
   if (isNaN(n)) throw new Error('dialLadder_: dial value is not a number (' + v + ')');
   if (n <= BAND_CENTERS[0]) return table[0];
   for (var i = 1; i < BAND_CENTERS.length; i++) {

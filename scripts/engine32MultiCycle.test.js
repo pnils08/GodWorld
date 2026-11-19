@@ -143,7 +143,7 @@ const FILLER_TAGS = ['Background', 'Weather', 'Personal'];
 function runTrace(cycles, opts) {
   opts = opts || {};
   const rows = buildPopulation();
-  const tally = { fires: 0, commits: 0, resisted: 0, outlawCommits: 0, neutralCommits: 0 };
+  const tally = { fires: 0, commits: 0, resisted: 0, outlawCommits: 0, neutralCommits: 0, temptedCommits: 0, temptedFires: 0, outlawFires: 0 };
   const meanIntegrity = [];
   const iLife = HEADERS.indexOf('LifeHistory');
   let bounded = true;
@@ -179,6 +179,8 @@ function runTrace(cycles, opts) {
     }
     for (const ev of (ctx.summary.conductEvents || [])) {
       tally.fires++;
+      if (/^Tempted/.test(ev.citizen)) tally.temptedFires++;
+      if (/^Outlaw/.test(ev.citizen)) tally.outlawFires++;
       if (ev.tag === 'Resisted' || ev.tag === 'BoundaryKept') tally.resisted++;
       else if (ev.tag === 'BoundaryCompromised') tally.slips = (tally.slips || 0) + 1; // engine.201 ruling 3: not a crime
       else {
@@ -186,6 +188,7 @@ function runTrace(cycles, opts) {
         // attribute by cohort via the citizen name we seeded ("Outlaw N" / "Neutral N")
         if (/^Outlaw/.test(ev.citizen)) tally.outlawCommits++;
         if (/^Neutral/.test(ev.citizen)) tally.neutralCommits++;
+        if (/^Tempted/.test(ev.citizen)) tally.temptedCommits++;
       }
     }
     // The REAL Phase-9 fold — events -> DialState/TraitProfile, trim carries forward
@@ -268,14 +271,21 @@ assert('G7a spike city fires FEWER moral tests than calm city',
 // cohort at integrity 25 now commits a little, and one seed read 0.123 against 0.102). Ten
 // paired seeds pool to about 60 commits a side; the lean has to show there.
 {
-  let cC = 0, cF = 0, sC = 0, sF = 0;
+  let cC = 0, cF = 0, sC = 0, sF = 0, tC = 0, tF = 0, oC = 0, oF = 0, nC = 0;
   [2026, 7, 11, 13, 17, 19, 23, 29, 31, 37].forEach(seed => {
     rngImpl = mulberry32(seed); const a = runTrace(120);
     rngImpl = mulberry32(seed); const b = runTrace(120, { crimePressure: 80 });
     cC += a.tally.commits; cF += a.tally.fires; sC += b.tally.commits; sF += b.tally.fires;
+    tC += a.tally.temptedCommits; tF += a.tally.temptedFires; oC += a.tally.outlawCommits; oF += a.tally.outlawFires; nC += a.tally.neutralCommits;
   });
-  assert('G7b spike commit share < calm commit share, ten paired seeds pooled (lean positive, no runaway)',
-    cF > 500 && sF > 300 && (sC / sF) < (cC / cF), (sC / sF).toFixed(3) + ' vs ' + (cC / cF).toFixed(3) + ' (' + sC + '/' + sF + ' vs ' + cC + '/' + cF + ')');
+  // the counterweight is x0.6 on the commit ladder: the pooled share has to sit clearly under calm's, not a hair under
+  assert('G7b spike commit share under 0.85 of the calm share, ten paired seeds pooled (lean positive, no runaway)',
+    cF > 500 && sF > 300 && (sC / sF) < 0.85 * (cC / cF), (sC / sF).toFixed(3) + ' vs ' + (cC / cF).toFixed(3) + ' (' + sC + '/' + sF + ' vs ' + cC + '/' + cF + ')');
+  // engine.349 Task 14: the tempted cohort (seeded at integrity 25, the door a quarter open) is the new reach.
+  // It commits, far less often per test than the outlaws, and the neutral cohort still never does.
+  assert('G7d tempted cohort (integrity 25) commits a little: some commits, a per-test share under half the outlaws\'; neutrals none',
+    tF > 20 && tC > 0 && (tC / tF) < 0.5 * (oC / Math.max(1, oF)) && nC === 0,
+    'tempted ' + tC + '/' + tF + ' outlaw ' + oC + '/' + oF + ' neutral ' + nC);
 }
 assert('G7c spike trace stays bounded too', spike.bounded);
 

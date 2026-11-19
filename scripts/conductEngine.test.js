@@ -121,7 +121,7 @@ console.log('═══ T7 Section 2 — the integrity ladder (commit odds + seve
 {
   const saint = trials(6000, dialState({ integrity: 90 }));
   assert('2.1 saint (band +2): moral tests DO fire', saint.total > 20, 'fired ' + saint.total);
-  assert('2.2 saint: ZERO transgressions (crimeReachable gate)',
+  assert('2.2 saint: ZERO transgressions (the crime door is shut: crimeReach 0)',
     saint['Transgression-Petty'] + saint['Transgression-Serious'] + saint['Transgression-Grave'] === 0,
     JSON.stringify(saint));
   // engine.201 ruling 3: a citizen the crime ladder cannot reach resolves as BoundaryKept / BoundaryCompromised
@@ -130,20 +130,27 @@ console.log('═══ T7 Section 2 — the integrity ladder (commit odds + seve
   // accessor contract (getCitizenDialBands_ crimeReach): a share off the integrity number —
   // 0 at 30 and up, 0.5 at 20, 1 at 10. Integrity 50 and 30 never commit.
   const neutral = trials(6000, dialState({}));            // integrity 50 -> band 0
-  const midLow = trials(6000, dialState({ integrity: 30 })); // band -1 -> still unreachable
-  const outlaw = trials(6000, dialState({ integrity: 10, composure: 10 })); // band -2 -> commitP .75
+  const midLow = trials(6000, dialState({ integrity: 30 })); // crimeReach 0 -> still unreachable
+  const outlaw = trials(6000, dialState({ integrity: 10, composure: 10 })); // crimeReach 1 -> commitP .75
+  const quarter = trials(6000, dialState({ integrity: 25 })); // crimeReach 0.25
   const commitShare = c => (c.total ? (c['Transgression-Petty'] + c['Transgression-Serious'] + c['Transgression-Grave']) / c.total : 0);
   const slipShare = c => (c.total ? c.BoundaryCompromised / c.total : 0);
   assert('2.9 ruling 3: neutral citizens slip ~25% of ordinary tests', slipShare(neutral) > 0.2 && slipShare(neutral) < 0.3, slipShare(neutral).toFixed(3));
   assert('2.10 ruling 3: slip odds order by integrity band (-1 > 0 > +2)', slipShare(midLow) > slipShare(neutral) && slipShare(neutral) > slipShare(saint), [slipShare(midLow), slipShare(neutral), slipShare(saint)].map(v => v.toFixed(3)).join(' '));
   assert('2.11 crime-reachable citizens never take the ordinary-slip path', outlaw.BoundaryCompromised === 0 && outlaw.BoundaryKept === 0, JSON.stringify(outlaw));
-  assert('2.4 neutral (band 0): ZERO commits — crimeReachable gate holds',
+  assert('2.4 neutral (integrity 50): ZERO commits — the crime door is shut',
     commitShare(neutral) === 0 && neutral.total > 20, commitShare(neutral).toFixed(3) + ' of ' + neutral.total);
   assert('2.4b integrity 30: ZERO commits — the crime door opens under 30 (engine.349 Task 14: a share, 0 at 30, half at 20, whole at 10)',
     commitShare(midLow) === 0 && midLow.total > 20, commitShare(midLow).toFixed(3) + ' of ' + midLow.total);
-  assert('2.5 band -2 commit share ~0.75 (>0.6 measured)',
+  {
+    // engine.349 Task 14, measured: integrity 25 commits about 0.15 of its tests, resists about 0.10, and the rest are ordinary boundary tests
+    const n = quarter.total, cs = commitShare(quarter), rs = quarter.Resisted / n, bs = (quarter.BoundaryKept + quarter.BoundaryCompromised) / n;
+    assert('2.4c integrity 25, measured: commits ~0.15 (0.08-0.24), Resisted ~0.10 (0.04-0.18), boundary tests ~0.75 (0.62-0.86)',
+      n > 20 && cs > 0.08 && cs < 0.24 && rs > 0.04 && rs < 0.18 && bs > 0.62 && bs < 0.86, [n, cs.toFixed(3), rs.toFixed(3), bs.toFixed(3)].join(' '));
+  }
+  assert('2.5 integrity 10 commit share ~0.75 (>0.6 measured)',
     commitShare(outlaw) > 0.6, commitShare(outlaw).toFixed(3) + ' of ' + outlaw.total);
-  assert('2.6 ladder orders: -2 commits, -1 does not', commitShare(outlaw) > commitShare(midLow));
+  assert('2.6 ladder orders: 10 commits most, 25 some, 30 none', commitShare(outlaw) > commitShare(quarter) && commitShare(quarter) > commitShare(midLow));
   assert('2.7 outlaw severity ladder reaches past Petty',
     outlaw['Transgression-Serious'] + outlaw['Transgression-Grave'] > 0, JSON.stringify(outlaw));
   assert('2.8 Petty stays the most common transgression (no grave-spam)',
@@ -219,14 +226,29 @@ console.log('═══ T7 Section 4 — caps, write path, dial-loop closure');
     const slip = w2Resolve(integrity, 50, threshold - 0.001), keep = w2Resolve(integrity, 50, threshold + 0.001);
     assert(`T14 integrity ${integrity} slips under ${threshold}, holds over it`, slip.tag === 'BoundaryCompromised' && keep.tag === 'BoundaryKept', JSON.stringify({ slip: slip.tag, keep: keep.tag }));
   }
-  // the crime door is a share: integrity 25 = a quarter open, commit odds 0.25 x 0.60 = 0.15;
-  // what is left of the roll is an ordinary temptation at the table's 0.35 (0.15 + 0.85 x 0.35 = 0.4475).
-  const q = [w2Resolve(25, 50, 0.149), w2Resolve(25, 50, 0.151), w2Resolve(25, 50, 0.446), w2Resolve(25, 50, 0.449)].map(r => r.tag);
-  assert('T14 integrity 25: commits under 0.15, then slips, then holds — never "Resisted"',
-    q[0] === 'Transgression-Petty' && q[1] === 'BoundaryCompromised' && q[2] === 'BoundaryCompromised' && q[3] === 'BoundaryKept', q.join(' '));
-  // integrity 20 is the old edge: half open, commit 0.5 x 0.65 = 0.325; past it a test not failed is a crime resisted
-  const h = [w2Resolve(20, 50, 0.324), w2Resolve(20, 50, 0.326)].map(r => r.tag);
-  assert('T14 integrity 20: commits under 0.325, resists over it', h[0] === 'Transgression-Petty' && h[1] === 'Resisted', h.join(' '));
+  // The crime door is a share (agy 2026-11-18 §2a: one roll cut in four, no jump from +1 to +5).
+  // cuts(integrity, composure) -> the roll's three cut points computed here from the documented
+  // rule, not from the engine: commit below reach x L, Resisted below reach, slip below
+  // reach + (1 - reach) x slipP, kept above.
+  const outcomeAt = (i, c, r) => w2Resolve(i, c, r).tag;
+  const fourWay = (label, i, c, reach, L, slipP) => {
+    const commit = reach * L, slipTop = reach + (1 - reach) * slipP, e = 0.001;
+    const got = [commit - e, commit + e, reach - e, reach + e, slipTop - e, slipTop + e].map(r => (r > 0 && r < 1) ? outcomeAt(i, c, r) : null);
+    const want = ['Transgression-Petty', 'Resisted', 'Resisted', 'BoundaryCompromised', 'BoundaryCompromised', 'BoundaryKept'];
+    assert('T14 ' + label + `: commit < ${commit.toFixed(4)} <= Resisted < ${reach} <= slip < ${slipTop.toFixed(4)} <= kept`,
+      got.every((g, k) => g === null || g === want[k]), got.join(' '));
+  };
+  fourWay('integrity 25 (a quarter open)', 25, 50, 0.25, 0.60, 0.35);
+  fourWay('integrity 20 (the old edge, half open)', 20, 50, 0.5, 0.65, 0.35);
+  fourWay('integrity 15 (three quarters open)', 15, 50, 0.75, 0.70, 0.35);
+  // the burnout path: composure 10 opens the door for integrity under 50 (reach = how far integrity sits under 50, to 30)
+  fourWay('integrity 40 + composure 10 (half open)', 40, 10, 0.5, 0.45, 0.30);
+  fourWay('integrity 45 + composure 10 (a quarter open)', 45, 10, 0.25, 0.40, 0.275);
+  // no jump at the old edge: one hair either side of integrity 20 gives the same outcome at the same roll
+  const hair = [0.1, 0.33, 0.45, 0.55, 0.9].map(r => outcomeAt(19.9, 50, r) === outcomeAt(20.1, 50, r));
+  assert('T14 no cliff at integrity 20: 19.9 and 20.1 resolve alike at five rolls', hair.every(Boolean), hair.join(' '));
+  // whole door: the old crime ladder; shut door: the old ordinary temptation
+  assert('T14 integrity 10: commit < 0.75 <= Resisted, never a boundary line', outcomeAt(10, 50, 0.749) === 'Transgression-Petty' && outcomeAt(10, 50, 0.751) === 'Resisted' && outcomeAt(10, 50, 0.999) === 'Resisted');
   const none = [w2Resolve(30, 50, 0), w2Resolve(35, 50, 0)].map(r => r.tag);
   assert('T14 integrity 30 and up (steady composure): the crime door is shut', none.every(t => t === 'BoundaryCompromised'), none.join(' '));
 }

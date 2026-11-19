@@ -73,11 +73,11 @@ function trace(popId, cycles, perCycle) {
     // <3 entries -> engine correctly skips (unseeded neutral); treat as all-50 base.
     const base = ds ? JSON.parse(ds).base : global.newCitizen_().base;
     bases.push(base);
-    // the crime door via the Phase-5 seam (reads this citizen's DialState; null -> shut). Open here =
-    // at least half open (crimeReach >= 0.5: integrity 20 and under) — engine.349 Task 14
+    // the crime door via the Phase-5 seam (reads this citizen's DialState; null -> shut): crimeReach,
+    // the share of it that is open (0 at integrity 30 and up, 0.5 at 20, 1 at 10) — engine.349 Task 14
     const seamCtx = { citizenLookup: { [popId]: { DialState: ds } } };
     const seam = C.getCitizenDialBands_(seamCtx, popId);
-    reach.push(!!(seam && seam.crimeReach >= 0.5));
+    reach.push(seam ? seam.crimeReach : 0);
   }
   return { bases, reach, finalDial: ds, finalFace: tp };
 }
@@ -109,17 +109,18 @@ assert('O2 all dials 0-100 bounded', allInRange(oneoff.bases));
 console.log('═══ CRIMINAL — sustained Transgression-Serious (integrity erodes; crime LOCKS over cycles)');
 const crim = trace('POP-CRIMINAL', 12, () => ['Transgression-Serious', 'Transgression-Serious', 'Transgression-Serious']);
 console.log('   integrity trajectory:', crim.bases.map(b => Math.round(b.integrity)).join(' '));
-console.log('   crimeReachable    :', crim.reach.map(r => r ? 'Y' : '.').join(' '));
+console.log('   crimeReach        :', crim.reach.map(r => r.toFixed(2)).join(' '));
 assert('C1 integrity NOT in low band after cycle 1 (one pattern-start does not damn)', bandIdx(crim.bases[0].integrity) > 0, String(crim.bases[0].integrity));
-assert('C2 crime NOT reachable at cycle 1', crim.reach[0] === false);
-assert('C3 crime IS reachable by the end (sustained pattern locked it)', crim.reach[11] === true, String(crim.bases[11].integrity));
+assert('C2 after cycle 1 of three serious acts the door is ajar, under half open (the felt value has dropped under 30; base has not)', crim.reach[0] > 0 && crim.reach[0] < 0.5 && crim.bases[0].integrity > 30, crim.reach[0].toFixed(2) + ' base ' + crim.bases[0].integrity);
+assert('C3 the door is wide open by the end (sustained pattern locked it): it widens over the first four cycles and holds at 0.99 or more from there', crim.reach[11] === 1 && crim.reach[0] < crim.reach[1] && crim.reach[1] < crim.reach[2] && crim.reach[2] < crim.reach[3] && crim.reach.slice(3).every(r => r >= 0.99), crim.reach.map(r => r.toFixed(4)).join(' '));
 assert('C4 integrity base never erased/snapped up to 50 mid-trace', crim.bases.every(b => b.integrity <= 50.001));
 assert('C5 all dials 0-100 bounded', allInRange(crim.bases));
 
 console.log('═══ ONE-OFF CRIME — a SINGLE transgression, then ambient (must NOT lock crime)');
 const oneCrime = trace('POP-ONECRIME', 12, (cy) => cy === 1 ? ['Transgression-Serious'] : ['Background', 'Background']);
 console.log('   integrity trajectory:', oneCrime.bases.map(b => Math.round(b.integrity)).join(' '));
-assert('X1 crime never reachable from a single transgression', oneCrime.reach.every(r => r === false));
+console.log('   crimeReach        :', oneCrime.reach.map(r => r.toFixed(2)).join(' '));
+assert('X1 a single transgression never opens the crime door at all (crimeReach 0 every cycle)', oneCrime.reach.every(r => r === 0), oneCrime.reach.map(r => r.toFixed(2)).join(' '));
 assert('X2 integrity stays out of the low band', oneCrime.bases.every(b => bandIdx(b.integrity) > 0));
 
 console.log('═══ NO-ERASE STRESS — active cycles then quiet (base must CLIMB then HOLD across quiet runs)');

@@ -24,6 +24,10 @@ global.Logger = { log() {} };
 const M = require('../utilities/citizenDialMap.js');
 const C = require('../utilities/compressLifeHistory.js');
 global.getCitizenDialBands_ = () => null;
+// engine.349 Task 14: the generator reads a dial by citizenMemory.js's number readers (globals on Apps Script)
+{ const CM = require('../utilities/citizenMemory.js'); ['dialLadder_', 'dialPos_', 'dialHigh_', 'dialLow_'].forEach((k) => { global[k] = CM[k]; }); }
+// a stubbed dial surface carries every dial, as the real one does (the archetype weights read all of them)
+const fullCur_ = (over) => Object.assign({ drive: 50, sociability: 50, warmth: 50, openness: 50, composure: 50, integrity: 50, family: 50, outabout: 50, fandom: 50 }, over || {});
 global.hoodTexturePool_ = (ctx, hood, byLabel, bespoke) => (bespoke && bespoke[hood] ? bespoke[hood].slice() : []); // engine.148 P3: hood texture stubbed to the bespoke lines
 global.getGriefConfig_ = C.getGriefConfig_;
 global.activeGriefFromRegisters_ = C.activeGriefFromRegisters_;
@@ -274,7 +278,7 @@ console.log('═══ engine.208 C5: the sports picker');
   const weeks = { "A's": { cls: 'TITLE' }, Oaks: { cls: 'LOSING_WEEK' } };
   const prevBands = global.getCitizenDialBands_;
   const mult = { drive: 1, sociability: 1, warmth: 1, openness: 1, composure: 1, integrity: 1, family: 1, outabout: 1, fandom: 1 };
-  global.getCitizenDialBands_ = (ctx, popId) => ({ mult, current: { warmth: 50, drive: 50, fandom: popId === 'POP-FAN' ? 70 : 40 } });
+  global.getCitizenDialBands_ = (ctx, popId) => ({ mult, current: fullCur_({ fandom: popId === 'POP-FAN' ? 70 : 40 }) });
   const seen = { as: null, oaks: null, city: null }; let gameSports = 0, fanGateWrong = 0, fanGateRight = 0;
   for (let s = 1; s <= 200; s++) {
     const player = makeRow('POP-GAME'); player[4] = 'GAME';
@@ -315,7 +319,7 @@ console.log('═══ engine.349 Task 14: a dial term is a share of the row, no
   const prevBands = global.getCitizenDialBands_;
   const mult = { drive: 1, sociability: 1, warmth: 1, openness: 1, composure: 1, integrity: 1, family: 1, outabout: 1, fandom: 1 };
   const FAN = { 'POP-F70': 70, 'POP-F60': 60, 'POP-F55': 55, 'POP-F50': 50, 'POP-F45': 45, 'POP-F30': 30 };
-  global.getCitizenDialBands_ = (ctx, popId) => ({ mult, current: { warmth: 50, drive: 50, fandom: FAN[popId] } });
+  global.getCitizenDialBands_ = (ctx, popId) => ({ mult, current: fullCur_({ fandom: FAN[popId] }) });
   const ids = Object.keys(FAN), up = {}, down = {};
   ids.forEach((id) => { up[id] = 0; down[id] = 0; });
   for (let s = 1; s <= 600; s++) {
@@ -326,11 +330,84 @@ console.log('═══ engine.349 Task 14: a dial term is a share of the row, no
       if (t.indexOf('could not have named') >= 0) down[ids[i]]++;
     });
   }
-  global.getCitizenDialBands_ = prevBands;
   const show = JSON.stringify({ up, down });
   assert('fandom>=60: 70 draws it most, 60 less, 55 less again, 50 never', up['POP-F70'] > up['POP-F60'] && up['POP-F60'] > up['POP-F55'] && up['POP-F55'] > 0 && up['POP-F50'] === 0 && up['POP-F45'] === 0, show);
   assert('fandom<=39: 30 draws it most, 45 a little, 50 never (49 is where it starts)', down['POP-F30'] > down['POP-F45'] && down['POP-F45'] > 0 && down['POP-F50'] === 0 && down['POP-F55'] === 0, show);
   assert('the citizen at 50 draws neither row', up['POP-F50'] === 0 && down['POP-F50'] === 0, show);
+
+  // agy 2026-11-18 §5b: the PoolKey balancing gives every eligible PoolKey the same mass. A PoolKey whose
+  // only eligible row sits behind a dial term must be offered at the SHARE of that mass, however often the
+  // pool is re-balanced: against a plain one-row PoolKey of the same Weight, the 55 draws the dial row about
+  // a quarter as often, the 60 about half, the 70 as often.
+  const FIX2 = FIX.concat([['line', 'test.plain', '', 'waved at the mail carrier across the street', '80', '', 'source:neighborhood,dial:sociability:up', '', '']]);
+  global.getCitizenDialBands_ = (ctx, popId) => ({ mult, current: fullCur_({ warmth: FAN[popId], drive: FAN[popId], fandom: FAN[popId] }) });
+  const fanN = {}, plainN = {};
+  ids.forEach((id) => { fanN[id] = 0; plainN[id] = 0; });
+  for (let s2 = 1; s2 <= 1500; s2++) {
+    const ctx = makeCtx(ids.map((id) => makeRow(id)), mulberry32(s2 * 613), FIX2);
+    generateCitizensEvents_(ctx);
+    emittedLines(ctx).forEach((t, i) => {
+      if (t.indexOf('planned the whole night') >= 0) fanN[ids[i]]++;
+      if (t.indexOf('waved at the mail carrier') >= 0) plainN[ids[i]]++;
+    });
+  }
+  const ratio = (id) => fanN[id] / Math.max(1, plainN[id]);
+  const show2 = ids.map((id) => id.slice(4) + ' ' + fanN[id] + '/' + plainN[id]).join(', ');
+  assert('two PoolKeys: the 70 draws the dial row about as often as the plain row (0.7-1.4)', plainN['POP-F70'] > 60 && ratio('POP-F70') > 0.7 && ratio('POP-F70') < 1.4, show2);
+  assert('two PoolKeys: the 60 about half as often (0.3-0.75), the 55 about a quarter (0.1-0.45) — the balancing does not hand the share back', ratio('POP-F60') > 0.3 && ratio('POP-F60') < 0.75 && ratio('POP-F55') > 0.1 && ratio('POP-F55') < 0.45 && ratio('POP-F55') < ratio('POP-F60'), show2);
+  assert('two PoolKeys: the 50 never draws the dial row and still draws the plain one', fanN['POP-F50'] === 0 && plainN['POP-F50'] > 60, show2);
+
+  // warmth and drive, the two dial fields the live tab uses, and a FRAGMENT behind a dial term
+  const FIX3 = [
+    LEDGER_HDR,
+    ['line', 'test.warm', '', 'cheered the pilot like family', '80', 'warmth>=60', 'source:neighborhood,dial:warmth:up', '', ''],
+    ['line', 'test.driven', '', 'was already planning the next run', '80', 'drive>=60', 'source:neighborhood,dial:drive:up', '', ''],
+    ['line', 'test.frag', '', 'walked home $MOOD', '80', '', 'source:neighborhood,dial:composure:up', '', ''],
+    ['fragment', '', 'MOOD', 'glowing about the win', '1', 'warmth>=60', '', '', ''],
+    ['fragment', '', 'MOOD', 'with nothing much on their mind', '1', '', '', '', '']
+  ];
+  const warmN = {}, drivenN = {}, glowN = {}, plainFragN = {};
+  ids.forEach((id) => { warmN[id] = 0; drivenN[id] = 0; glowN[id] = 0; plainFragN[id] = 0; });
+  for (let s3 = 1; s3 <= 1500; s3++) {
+    const ctx = makeCtx(ids.map((id) => makeRow(id)), mulberry32(s3 * 389), FIX3);
+    generateCitizensEvents_(ctx);
+    emittedLines(ctx).forEach((t, i) => {
+      if (t.indexOf('cheered the pilot') >= 0) warmN[ids[i]]++;
+      if (t.indexOf('planning the next run') >= 0) drivenN[ids[i]]++;
+      if (t.indexOf('glowing about the win') >= 0) glowN[ids[i]]++;
+      if (t.indexOf('nothing much on their mind') >= 0) plainFragN[ids[i]]++;
+    });
+  }
+  global.getCitizenDialBands_ = prevBands;
+  const show3 = JSON.stringify({ warmN, drivenN, glowN, plainFragN });
+  assert('warmth>=60 and drive>=60 rows: 70 > 60 > 55 > 0, never at 50', ['POP-F70', 'POP-F60', 'POP-F55'].every((id, k, arr) => warmN[id] > 0 && drivenN[id] > 0 && (k === 0 || (warmN[id] < warmN[arr[k - 1]] && drivenN[id] < drivenN[arr[k - 1]]))) && warmN['POP-F50'] === 0 && drivenN['POP-F50'] === 0, show3);
+  const gShare = (id) => glowN[id] / Math.max(1, glowN[id] + plainFragN[id]);
+  assert('a fragment behind warmth>=60: half the fills at 70 (0.4-0.6), about a third at 60 (0.22-0.45), about a fifth at 55 (0.1-0.3), never at 50',
+    gShare('POP-F70') > 0.4 && gShare('POP-F70') < 0.6 && gShare('POP-F60') > 0.22 && gShare('POP-F60') < 0.45 && gShare('POP-F55') > 0.1 && gShare('POP-F55') < 0.3 && glowN['POP-F50'] === 0 && plainFragN['POP-F50'] > 30, show3);
+}
+
+console.log('═══ engine.349 Task 14: the archetype\'s pool weights off the numbers');
+{
+  const E2 = require('../utilities/citizenMemory.js');
+  const prevG = {}; ['dialHigh_', 'dialLow_', 'dialPos_', 'dialLadder_'].forEach((k) => { prevG[k] = global[k]; global[k] = E2[k]; });
+  const full = fs.readFileSync(path.resolve(__dirname, '../phase05-citizens/generateCitizensEvents.js'), 'utf8');
+  const i0 = full.indexOf('  function getArchetypeWeights_('), i1 = full.indexOf('  /**\n   * Derive tone from TraitProfile');
+  const AW = new Function(full.slice(i0, i1) + '\nreturn { getArchetypeWeights_, archetypeWeightsFromDials_ };')();
+  const flat = { drive: 50, sociability: 50, warmth: 50, family: 50, openness: 50, composure: 50, outabout: 50, integrity: 50 };
+  const at = (o) => AW.archetypeWeightsFromDials_(Object.assign({}, flat, o));
+  const near = (a, b) => Math.abs(a - b) < 1e-9;
+  const same = (a, b) => Object.keys(b).every((k) => near(a[k], b[k]));
+  assert('extraction found both functions', i0 > 0 && i1 > i0 && typeof AW.archetypeWeightsFromDials_ === 'function');
+  assert('all 50: every weight 1', Object.keys(at({})).every((k) => at({})[k] === 1));
+  assert('a dial on its old band middle earns the label\'s whole table: drive 70 = Striver, sociability 70 = Connector, openness 70 = Watcher, composure 70 = Anchor, warmth+family 70 = Caretaker',
+    same(at({ drive: 70 }), AW.getArchetypeWeights_('Striver')) && same(at({ sociability: 70 }), AW.getArchetypeWeights_('Connector')) && same(at({ openness: 70 }), AW.getArchetypeWeights_('Watcher')) &&
+    same(at({ composure: 70 }), AW.getArchetypeWeights_('Anchor')) && same(at({ warmth: 70, family: 70 }), AW.getArchetypeWeights_('Caretaker')));
+  assert('the middle counts: drive 55 -> work x1.075, 60 -> x1.15 (the label switched x1.3 on at 60), 45 -> x1', near(at({ drive: 55 }).work, 1.075) && near(at({ drive: 60 }).work, 1.15) && at({ drive: 45 }).work === 1);
+  assert('the leading dial wins, as the label does: drive 58, sociability 66 -> the Connector table at 0.8, no work weight', near(at({ drive: 58, sociability: 66 }).alliance, 1 + 0.3 * 0.8) && at({ drive: 58, sociability: 66 }).work === 1);
+  assert('composure 10 = the Catalyst table whole, whatever the leading dial; composure 20 = half of it and half the leading dial\'s', same(at({ composure: 10, drive: 70 }), AW.getArchetypeWeights_('Catalyst')) &&
+    near(at({ composure: 20, drive: 70 }).rivalry, 1 + 0.2 * 0.5 + 0.2 * 0.5) && near(at({ composure: 20, drive: 70 }).work, 1 + 0.3 * 0.5));
+  assert('integrity 10 (the Outlaw, no table): every weight 1', Object.keys(at({ integrity: 10, drive: 90, composure: 10 })).every((k) => near(at({ integrity: 10, drive: 90, composure: 10 })[k], 1)));
+  Object.keys(prevG).forEach((k) => { global[k] = prevG[k]; });
 }
 
 console.log('═══ engine.94 B.1: one bounded history build from fixtures');

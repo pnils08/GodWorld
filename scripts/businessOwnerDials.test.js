@@ -102,6 +102,30 @@ for (const [name, rows, personnel] of [
   const low = w.applyBusinessDynamics_(owned), plain = w.applyBusinessDynamics_(neutral);
   check('verified low composure still closes a declining venture one Cycle earlier', low.closed === 1 && plain.closed === 0, { low: low.closed, neutral: plain.closed });
 }
+// engine.349 Task 14: the owner's numbers, not bands — through applyBusinessDynamics_ with the real seedUnit_ draw.
+{
+  const at = (cycle, composure, drive, prevStreak, declining) => {
+    const ctx = fixture([person('POP-99001', 'Alpha', drive, composure)], 'POP-99001 (Synthetic Alpha, Owner)', declining);
+    ctx.config.cycleCount = cycle; ctx.summary.cycleId = cycle; ctx.now = 'C' + cycle;
+    if (prevStreak != null) ctx.summary.previousCycleState.businessDynamics['BIZ-SYNTHETIC-OWNER'][0] = prevStreak;
+    return w.applyBusinessDynamics_(ctx);
+  };
+  const cycles = []; for (let c = 200; c < 400; c++) cycles.push(c);
+  // streak reaches the bar (prev 7 -> 8 = bizClosureStreak): composure 70+ always buys the cycle, 50 never, 60 about half the time
+  const kept = comp => cycles.filter(c => at(c, comp, 50, 7, true).closed === 0).length;
+  const k50 = kept(50), k55 = kept(55), k60 = kept(60), k70 = kept(70);
+  check('composure 50 buys nothing, 70 always buys the cycle', k50 === 0 && k70 === 200, { k50, k70 });
+  check('composure 60 buys the extra cycle about half the time (70-130 of 200), 55 about a quarter (25-75)', k60 >= 70 && k60 <= 130 && k55 >= 25 && k55 <= 75 && k55 < k60, { k55, k60 });
+  // one cycle short of the bar (prev 6 -> 7): composure 30 always closes early, 50 never, 40 about half the time
+  const early = comp => cycles.filter(c => at(c, comp, 50, 6, true).closed === 1).length;
+  const e50 = early(50), e40 = early(40), e30 = early(30);
+  check('composure 30 always costs a cycle, 50 never, 40 about half the time (70-130 of 200)', e30 === 200 && e50 === 0 && e40 >= 70 && e40 <= 130, { e30, e40, e50 });
+  check('the same business in the same Cycle gets the same answer twice', [0, 1, 2].every(k => at(200 + k, 60, 50, 7, true).closed === at(200 + k, 60, 50, 7, true).closed));
+  // drive: the share of the expand multiplier (x1.25): none at 70, half at 80, all at 90
+  const g = drive => { const ctx = fixture([person('POP-99001', 'Alpha', drive, 50)], 'POP-99001 (Synthetic Alpha, Owner)', false); w.applyBusinessDynamics_(ctx); return ctx.writes.find(x => x.tab === 'Business_Ledger' && x.row === 2 && x.col === 6).values[0][1]; };
+  const g50 = g(50), g70 = g(70), g80 = g(80), g90 = g(90);
+  check('drive 70 expands nothing, 80 half as much as 90', g70 === g50 && g80 > g70 && g90 > g80 && Math.abs((g80 - g70) - (g90 - g70) / 2) < 0.011 /* growth is stored to two places */, { g50, g70, g80, g90 });
+}
 // engine.242b (2026-09-19): per-hood business momentum. Child areas fold to their parent; 'City-wide'
 // and unmapped labels carry none; no canon seed → no momentum (never raw labels); a closure takes its
 // revenue share; the writer factor is growth vs the city's median hood growth, bounded 0.88–1.12.

@@ -22,8 +22,9 @@
  * from damning anyone.
  *
  * Dial biasing (the T5 back-arc pointed at the dark side):
- * - crimeReach scales COMMIT (getCitizenDialBands_, a share 0..1 off the numbers,
- *   engine.349 Task 14): nothing at integrity 30 and up, half at 20, whole at 10 —
+ * - crimeReach (getCitizenDialBands_, a share 0..1 off the numbers, engine.349 Task 14)
+ *   is the odds that a test is a CRIME test (commit or Resisted) rather than an ordinary
+ *   temptation (slip or kept): nothing at integrity 30 and up, half at 20, whole at 10 —
  *   or integrity under 50 on a citizen whose composure has gone to the bottom.
  *   "No one is safe" arrives via drift to far-low, not via dice.
  * - Every table here is read at the number (dialLadder_: the values a citizen at
@@ -216,40 +217,43 @@ function runConductEngine_(ctx) {
     if (cRng() >= chance) continue;
 
     // ═══════════════════════════════════════════════════════════════════════
-    // RESOLVE — commit vs resist, by the integrity number
+    // RESOLVE — by the integrity number, on one roll (draw count unchanged)
     // ═══════════════════════════════════════════════════════════════════════
+    // The test is a CRIME test at odds `reach` (how far the door is open) and an ordinary
+    // temptation otherwise — one roll, cut in four:
+    //   [0, reach x L)        commits                    L = the commit ladder: integrity 30 -> 0.55,
+    //   [reach x L, reach)    Resisted (+5)                  10 -> 0.75; x0.6 under a crime spike
+    //   [reach, reach + (1 - reach) x slipP)   BoundaryCompromised (-1)
+    //   the rest              BoundaryKept (+1)
+    // reach 1 is the old crime ladder whole, reach 0 the old ordinary temptation whole; between
+    // them every outcome's odds move in a straight line, so there is no integrity at which a
+    // test not failed jumps from +1 to +5 (agy 2026-11-18 §2a).
     var reach = dialBands.crimeReach;
-    var commitP = 0;
-    if (reach > 0) {
-      // integrity 30 -> 0.55, 10 -> 0.75, times how far the door is open
-      commitP = reach * (0.35 + 0.20 * Math.max(0, -dialBands.pos.integrity));
-      // Counterweight: resilience under crime pressure (hood-grain, T8)
-      if (spike) commitP *= 0.6;
-    }
+    var commitL = 0.35 + 0.20 * Math.max(0, -dialBands.pos.integrity);
+    // Counterweight: resilience under crime pressure (hood-grain, T8)
+    if (spike) commitL *= 0.6;
+    var commitP = reach * commitL;
 
     var resolveRoll = cRng();
     var committed = resolveRoll < commitP;
     var eventTag, pick;
 
-    if (!committed && reach < 0.5) {
-      // engine.201 Wave 2 (ruling 3): a citizen short of the crime door still meets ordinary
-      // temptations. Same draw as before (draw count unchanged); integrity sets the odds — a
-      // principled citizen rarely slips, a slippery one often. Kept = integrity +1, slipped = -1:
-      // ordinary scale, so being tested no longer hands out a crime-sized +5. The roll is what
-      // is left of it after the commit share, so the slip odds are the table's.
+    if (!committed && resolveRoll < reach) {
+      eventTag = "Resisted";
+      pick = resistPool[Math.floor(cRng() * resistPool.length)];
+    } else if (!committed) {
+      // engine.201 Wave 2 (ruling 3): short of the crime door a citizen meets ordinary temptations.
+      // Integrity sets the odds — a principled citizen rarely slips, a slippery one often.
+      // Kept = integrity +1, slipped = -1: ordinary scale, so being tested does not hand out a
+      // crime-sized +5.
       var slipP = dialLadder_(conductCur.integrity, CONDUCT_SLIP_P_);
-      var slipRoll = commitP > 0 ? (resolveRoll - commitP) / (1 - commitP) : resolveRoll;
-      if (slipRoll < slipP) {
+      if (resolveRoll < reach + (1 - reach) * slipP) {
         eventTag = "BoundaryCompromised";
         pick = slipPool[Math.floor(cRng() * slipPool.length)];
       } else {
         eventTag = "BoundaryKept";
         pick = resistPool[Math.floor(cRng() * resistPool.length)];
       }
-    } else if (!committed) {
-      // past the old door (reach 0.5 = integrity 20): a test not failed is a crime resisted
-      eventTag = "Resisted";
-      pick = resistPool[Math.floor(cRng() * resistPool.length)];
     } else {
       // Severity ladder — lower integrity -> deeper severity; low composure shifts further down.
       var graveP = dialLadder_(conductCur.integrity, CONDUCT_GRAVE_P_);

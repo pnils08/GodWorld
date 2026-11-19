@@ -23,6 +23,8 @@ const CANON_HOODS = {
   byDistrict: { D3: ['Fruitvale', 'San Antonio'], D2: ['Downtown'] }
 };
 const calendarSource = fs.readFileSync(path.resolve(__dirname, '../phase01-config/advanceSimulationCalendar.js'), 'utf8'); // engine.164: simYearOf_
+// engine.349 Task 14: the office score reads drive by dialPos_ (citizenMemory.js, a global on Apps Script)
+{ const CM = require('../utilities/citizenMemory.js'); ['dialLadder_', 'dialPos_', 'dialHigh_', 'dialLow_'].forEach((k) => { global[k] = CM[k]; }); }
 const A = new Function(calendarSource + loaderSource + approvalSource + '\nreturn {' +
   'getApprovalCeilingConfig_: getApprovalCeilingConfig_,' +
   'resolveApprovalCeilingLifecycle_: resolveApprovalCeilingLifecycle_,' +
@@ -368,6 +370,15 @@ console.log('═══ H. v1.5 demotion campaign — the drop is the vote');
     A.scoreLedgerCitizenForOffice_(lazy, scoreHeaders, 'D3', CANON_HOODS.byDistrict.D3, 'POP-00034', {}, 2042) === null);
   check('H8 high-Drive principled local scores',
     !!(A.scoreLedgerCitizenForOffice_(fit, scoreHeaders, 'D3', CANON_HOODS.byDistrict.D3, 'POP-00034', {}, 2042)));
+  {
+    // engine.349 Task 14: the drive term of the score reads the number (65 and 75 were one band); the three
+    // bars to stand (drive 60, integrity 40, composure 40) stay — builder 2026-11-18
+    const withDrive = (d) => { const r = fit.slice(); r[scoreHeaders.indexOf('DialState')] = JSON.stringify({ base: { drive: d, integrity: 68, composure: 64, sociability: 50, warmth: 50, openness: 50, family: 50, outabout: 50 }, streak: {} }); return A.scoreLedgerCitizenForOffice_(r, scoreHeaders, 'D3', CANON_HOODS.byDistrict.D3, 'POP-00034', {}, 2042); };
+    const s65 = withDrive(65), s75 = withDrive(75), s59 = withDrive(59), s70 = withDrive(70), s90 = withDrive(90);
+    check('H8a drive 75 outscores drive 65 by half a step; 70 and 90 sit a step and two above the 50 mark; 59 still may not stand',
+      s59 === null && Math.abs((s75.score - s65.score) - 0.5) < 1e-9 && Math.abs((s90.score - s70.score) - 1) < 1e-9,
+      JSON.stringify({ s65: s65 && s65.score, s75: s75 && s75.score, s70: s70 && s70.score, s90: s90 && s90.score, s59: s59 }));
+  }
 
   // civic.31 (builder 2026-09-04): "the path in is always Generic_Citizens —
   // you emerge from there." An empty qualified pool no longer mints an

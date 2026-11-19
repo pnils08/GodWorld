@@ -53,6 +53,12 @@
  *
  * Row weights still control selection WITHIN a PoolKey. Hardcoded entries have
  * no eclPoolKey and are untouched. No RNG is consumed here.
+ *
+ * engine.349 Task 14: a row behind a dial term carries `dialShare` (0..1, the share of its
+ * Weight this citizen is offered). The balancing here is done on the rows' full weights and
+ * the share is applied at the draw (pickWeighted_), so a PoolKey whose eligible rows all sit
+ * behind the same dial term is offered at that share of a bucket, not at a whole one, however
+ * many times the pool is re-balanced (agy 2026-11-18 §5b).
  */
 function balanceContentLedgerPoolWeights_(pool) {
   var groups = {};
@@ -924,6 +930,34 @@ function generateCitizensEvents_(ctx) {
     return weights;
   }
 
+  // engine.349 Task 14 (agy 2026-11-18 §1a.3): the archetype's pool weights by the NUMBER. The
+  // label is earned at 60 and used to switch the whole table on there (drive 59 -> work x1.0,
+  // 60 -> x1.3). Here the citizen's leading dial — the same candidates and order the label is
+  // derived from (compressLifeHistory.js deriveArchetypeFromBands_), on the felt value — earns
+  // its archetype's table by its share: nothing at 50, half at 60, all of it at 70. Composure at
+  // the bottom earns the Catalyst table the same way (none at 30, all at 10) and takes that
+  // share from the leading dial; integrity at the bottom (the Outlaw, who has no table) takes
+  // its share from both. The label itself is untouched: it still names the citizen and tags the line.
+  function archetypeWeightsFromDials_(cur) {
+    var weights = getArchetypeWeights_('');   // all 1.0
+    var cand = [
+      { a: 'Striver', v: cur.drive }, { a: 'Connector', v: cur.sociability },
+      { a: 'Caretaker', v: (cur.warmth + cur.family) / 2 }, { a: 'Watcher', v: cur.openness },
+      { a: 'Anchor', v: cur.composure }, { a: 'Regular', v: cur.outabout }
+    ];
+    var lead = cand[0];
+    for (var i = 1; i < cand.length; i++) { if (cand[i].v > lead.v) lead = cand[i]; }
+    var outlaw = dialLow_(cur.integrity, 2);
+    var catalyst = dialLow_(cur.composure, 2) * (1 - outlaw);
+    var leadShare = dialHigh_(lead.v, 1) * (1 - outlaw) * (1 - dialLow_(cur.composure, 2));
+    var leadT = getArchetypeWeights_(lead.a), catT = getArchetypeWeights_('Catalyst');
+    for (var k in weights) {
+      if (!weights.hasOwnProperty(k)) continue;
+      weights[k] = 1 + (leadT[k] - 1) * leadShare + (catT[k] - 1) * catalyst;
+    }
+    return weights;
+  }
+
   /**
    * Derive tone from TraitProfile for template slotter
    * Tones: plain, noir, bright, tense, tender
@@ -1322,13 +1356,19 @@ function generateCitizensEvents_(ctx) {
     return null;
   }
 
+  // engine.349 Task 14: an entry's draw mass is its weight times its dialShare (a content row
+  // behind a dial term; absent = 1). The share is read here and never written into the weight.
+  function drawMass_(e) {
+    var m = Math.max(0.001, Number(e.weight || 1));
+    return (typeof e.dialShare === 'number') ? m * e.dialShare : m;
+  }
   function pickWeighted_(arr) {
     var total = 0;
-    for (var i = 0; i < arr.length; i++) total += Math.max(0.001, Number(arr[i].weight || 1));
+    for (var i = 0; i < arr.length; i++) total += drawMass_(arr[i]);
     var r = roll() * total;
     var acc = 0;
     for (var j = 0; j < arr.length; j++) {
-      acc += Math.max(0.001, Number(arr[j].weight || 1));
+      acc += drawMass_(arr[j]);
       if (r <= acc) return arr[j];
     }
     return arr[arr.length - 1];
@@ -1461,7 +1501,7 @@ function generateCitizensEvents_(ctx) {
           if (!evalContentConditions_(frags[fi].conditions, scopes)) continue;
           var fragShare = contentDialShare_(frags[fi].conditions, scopes);
           // a fragment behind a dial term is drawn at that share of its weight (a copy: the ledger row is shared)
-          eligible.push(fragShare < 1 ? { text: frags[fi].text, weight: Number(frags[fi].weight || 1) * fragShare } : frags[fi]);
+          eligible.push(fragShare < 1 ? { text: frags[fi].text, weight: frags[fi].weight, dialShare: fragShare } : frags[fi]);
         }
         // S329 (Grok review item 5): per-cycle fragment soft cap — the same
         // MOOD clause was stamping many citizens per cycle (smoke: 23x). Prefer
@@ -2884,6 +2924,9 @@ function generateCitizensEvents_(ctx) {
     if (dialBands) {
       var dmAct = dialBands.mult;
       chance *= (dmAct.drive + dmAct.outabout + dmAct.sociability) / 3;
+      // engine.349 Task 14: with dials, the archetype's pool weights come off the numbers; a
+      // citizen with no DialState keeps the label's table
+      archetypeWeights = archetypeWeightsFromDials_(dialBands.current);
     }
 
     var citizenBonds = [];
@@ -3480,7 +3523,9 @@ function generateCitizensEvents_(ctx) {
           if (!evalContentConditions_(clEntry.conditions, condScopes)) continue;
           if (!contentSlotsFillable_(clEntry, contentLedger, condScopes, String(popId).trim().toUpperCase())) continue;
           var clTags = clEntry.grain ? mergeTags(clEntry.tags, ["grain:" + clEntry.grain]) : clEntry.tags;
-          var clPooled = makeEntry(clEntry.text, mergeTags(clTags, calendarTags), clEntry.weight * contentDialShare_(clEntry.conditions, condScopes), false);
+          var clPooled = makeEntry(clEntry.text, mergeTags(clTags, calendarTags), clEntry.weight, false);
+          var clShare = contentDialShare_(clEntry.conditions, condScopes);
+          if (clShare < 1) clPooled.dialShare = clShare; // engine.349 Task 14: read at the draw (pickWeighted_), after the pool balancing
           clPooled.ledgerLine = clEntry;      // draw-time compose hook
           clPooled.ledgerScopes = condScopes; // fragment eligibility at compose
           clPooled.eclKey = eclRowKey_(clk, clEntry.text); // S329 telemetry identity

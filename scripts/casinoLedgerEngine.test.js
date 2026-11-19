@@ -443,5 +443,62 @@ check('issued slip settles at posted odds, not new market odds', settledPricing.
     return c.tab === 'Casino_Ledger' && c.r === 3 && c.c === headers.indexOf('Odds') + 1;
   }) && settledPricingCtx.ledger.rows[0][slHeaders.indexOf('NetWorth')] === slRow[slHeaders.indexOf('NetWorth')] + 101 - 40); // engine.262: the ledger records the gross ticket, NetWorth moves by the net win
 
+// engine.349 Task 14: the casino's dial doors by the number, through processCasinoLedger_ (no posture in
+// this harness, so the drive factor is the ladder; on live the maneuver posture stands in for it).
+{
+  const CM = require('../utilities/citizenMemory.js');
+  const CLH = require('../utilities/compressLifeHistory.js');
+  const prevGate = global.getCitizenDialBands_;
+  const need = ['DIALS', 'current_', 'deserialize_', 'dialMultiplier_'];
+  const prevNeed = need.map(function (k) { return global[k]; });
+  need.forEach(function (k) { global[k] = CM[k]; });
+  global.getCitizenDialBands_ = CLH.getCitizenDialBands_;
+  const iDS = slHeaders.indexOf('DialState'), iSt = slHeaders.indexOf('Status');
+  // one citizen, one Cycle; rolls = the rng sequence, the last value repeating. -> what happened and how many draws it took
+  const runOne = function (dials, rolls, status) {
+    const c = CM.newCitizen_(dials); const row = slRow.slice();
+    row[iDS] = CLH.serializeDialState_(c); if (status) row[iSt] = status;
+    let draws = 0;
+    const ctx = { ledger: { headers: slHeaders, rows: [row], dirty: false },
+      ss: { getSheetByName: function (name) { return name === 'Casino_Ledger' ? sheet([headers, rowFrom({ WagerId: 'HOUSE', Status: 'house', HouseFloatAfter: 250000 })]) : null; } },
+      rng: function () { const v = rolls[Math.min(draws, rolls.length - 1)]; draws++; return v; },
+      summary: { undockedFeedEntries: [], undockedPilots: {}, sportsFeedEntries: [],
+        undockedNextCast: [{ popId: 'POP-00099', name: 'Ex One', slot: 'cast-1', targetCycle: 106 }] } };
+    const out = runCasino_(ctx, 105);
+    const slipRow = (ctx._appends || []).filter(function (x) { return x.tab === 'Casino_Ledger'; }).map(function (x) { return x.row; }).filter(function (r) { return r[0] !== 'HOUSE'; })[0];
+    return { placed: out.placed, draws: draws, gates: ctx.summary.casinoGates || { refused: 0, tilt: 0 }, stake: slipRow ? slipRow[headers.indexOf('Stake')] : null };
+  };
+  // the placing odds for a citizen = the largest first roll that still places, found by bisection
+  const placeP = function (dials) {
+    let lo = 0, hi = 0.2;
+    for (let k = 0; k < 40; k++) { const mid = (lo + hi) / 2; if (runOne(dials, [mid, 0.5]).placed === 1) lo = mid; else hi = mid; }
+    return lo;
+  };
+  const near = function (a, b, tol) { return Math.abs(a - b) < (tol || 1e-6); };
+  const p50 = placeP({});
+  check('T14 casino: a plain citizen places at some odds', p50 > 0.005 && p50 < 0.1, String(p50));
+  check('T14 casino: integrity 70 sits down as often as 50; 75 three quarters; 80 half; 85 a quarter',
+    near(placeP({ integrity: 70 }), p50) && near(placeP({ integrity: 75 }), 0.75 * p50) && near(placeP({ integrity: 80 }), 0.5 * p50) && near(placeP({ integrity: 85 }), 0.25 * p50),
+    [70, 75, 80, 85].map(function (v) { return (placeP({ integrity: v }) / p50).toFixed(4); }).join(' '));
+  const inc = runOne({ integrity: 90 }, [0.0, 0.5]);
+  check('T14 casino: integrity 90 does not sit down — counted refused, no draw spent', inc.placed === 0 && inc.gates.refused === 1 && inc.draws === 0, JSON.stringify(inc));
+  check('T14 casino: drive 55 places x1.1, 60 x1.2, 70 and up x1.4 (the ladder, no posture)',
+    near(placeP({ drive: 55 }), 1.1 * p50) && near(placeP({ drive: 60 }), 1.2 * p50) && near(placeP({ drive: 70 }), 1.4 * p50) && near(placeP({ drive: 90 }), 1.4 * p50) && near(placeP({ drive: 30 }), p50),
+    [55, 60, 70, 90, 30].map(function (v) { return (placeP({ drive: v }) / p50).toFixed(4); }).join(' '));
+  // tilt: decided only for a citizen who is placing a bet; a draw only when the odds are strictly between 0 and 1
+  const calm = runOne({ composure: 50 }, [0.0, 0.5]);
+  const always = runOne({ composure: 10 }, [0.0, 0.5]);
+  const halfYes = runOne({ composure: 20 }, [0.0, 0.49, 0.5]);   // second draw is the tilt roll: 0.49 < 0.5
+  const halfNo = runOne({ composure: 20 }, [0.0, 0.51, 0.5]);
+  check('T14 casino: composure 50 never tilts, 10 always, neither spends a tilt draw', calm.gates.tilt === 0 && always.gates.tilt === 1 && calm.placed === 1 && always.placed === 1 && calm.draws === always.draws && always.stake >= calm.stake /* the tilt stake band itself: dialGates.test.js */, JSON.stringify({ calm: calm, always: always }));
+  check('T14 casino: composure 20 tilts on a roll under 0.5 and not over it, one extra draw either way', halfYes.gates.tilt === 1 && halfNo.gates.tilt === 0 && halfYes.draws === calm.draws + 1 && halfNo.draws === calm.draws + 1,
+    JSON.stringify({ halfYes: halfYes, halfNo: halfNo }));
+  const noBet = runOne({ composure: 20 }, [0.99, 0.0]);           // the placing roll fails
+  check('T14 casino: a citizen who places nothing spends one draw (the placing roll) and is never counted on tilt', noBet.placed === 0 && noBet.draws === 1 && noBet.gates.tilt === 0, JSON.stringify(noBet));
+  const cannot = runOne({ composure: 20 }, [0.0, 0.0], 'Inactive');
+  check('T14 casino: a row that cannot bet spends no draw and is never counted on tilt', cannot.placed === 0 && cannot.draws === 0 && cannot.gates.tilt === 0, JSON.stringify(cannot));
+  global.getCitizenDialBands_ = prevGate; need.forEach(function (k, i) { global[k] = prevNeed[i]; });
+}
+
 if (failed) { console.error(failed + ' failed'); process.exit(1); }
 console.log('casinoLedgerEngine: ok');

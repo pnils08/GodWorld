@@ -66,11 +66,13 @@ function makeCtx(rows) {
 // run N independent single-citizen cycles, collect picked event texts + tags
 function trials(n, rowOpts) {
   const events = [];
+  events.unwritten = 0;   // engine.350: draws that landed on a plain line (a look out of the window) and were not written
   for (let i = 0; i < n; i++) {
     rngImpl = mulberry32(i + 7);
     const ctx = makeCtx([makeRow('POP-H' + i, rowOpts)]);
     runHouseholdEngine_(ctx);
     for (const ev of (ctx.summary.householdEvents || [])) events.push(ev);
+    if (ctx.summary.engine299) events.unwritten += ctx.summary.engine299.noDial;
   }
   return events;
 }
@@ -107,8 +109,10 @@ console.log('═══ T4 Section 1 — circumstance gates');
     'of ' + family.length);
   assert('1.5 married parent DOES draw parent lines', family.filter(isParentLine).length > 0,
     'of ' + family.length);
-  assert('1.6 circumstance lines tag Household (Family category)',
-    family.filter(ev => isPartneredLine(ev) || isParentLine(ev)).every(ev => ev.tag === 'Household'));
+  // engine.350: a home line is written under the dial it names, one step — the kind is still Household
+  assert('1.6 circumstance lines are Household lines, family up one step (was a bare Household: family +5)',
+    family.filter(ev => isPartneredLine(ev) || isParentLine(ev)).every(ev => ev.tag === 'Household-Family-Up-S' &&
+      M.baseTag_(ev.tag) === 'Household' && JSON.stringify(M.nudgesForEvent_(ev.tag, 1, ev.event)) === '{"family":1}'));
 }
 
 console.log('═══ T4 Section 2 — health texture (ambient Health output)');
@@ -118,9 +122,11 @@ console.log('═══ T4 Section 2 — health texture (ambient Health output)')
   const recovering = evs.filter(ev => ev.tag === 'Recovering');
   assert('2.1 ailment lines land with tag Health', health.length > 0, String(health.length));
   assert('2.2 wellness lines land with tag Recovering', recovering.length > 0, String(recovering.length));
-  const share = (health.length + recovering.length) / evs.length;
-  assert('2.3 health texture is a minority share of household output (<0.5)',
-    share < 0.5 && share > 0.05, share.toFixed(3));
+  // engine.350: a draw that lands on a plain line is not written; the ailment and recovery lines keep the odds
+  // they had, so the share is taken over every draw, written or not
+  const share = (health.length + recovering.length) / (evs.length + evs.unwritten);
+  assert('2.3 health texture is a minority share of household draws (<0.5), and plain draws are counted',
+    share < 0.5 && share > 0.05 && evs.unwritten > 0, share.toFixed(3) + ' of ' + (evs.length + evs.unwritten) + ' draws, ' + evs.unwritten + ' unwritten');
   // both tags resolve to composure-moving nudges in DIAL_MAP (loop closes)
   const hFx = M.nudgesForEvent_('Health', 1, '');
   const rFx = M.nudgesForEvent_('Recovering', 1, '');
@@ -157,6 +163,7 @@ console.log('\nengine.47 Hop 5 — households bend around tonight\'s result');
   const isGN = ev => /^Household-GameNight(-Win|-Loss)?$/.test(ev.tag);
   const runWithFeed = (n, feed, weeks) => {
     const events = [];
+    events.unwritten = 0;   // engine.350: draws that landed on a plain line
     for (let i = 0; i < n; i++) {
       rngImpl = mulberry32(i + 7);
       const ctx = makeCtx([makeRow('POP-G' + i)]);
@@ -164,6 +171,7 @@ console.log('\nengine.47 Hop 5 — households bend around tonight\'s result');
       ctx.summary.sportsWeek = weeks || {};
       runHouseholdEngine_(ctx);
       for (const ev of (ctx.summary.householdEvents || [])) events.push(ev);
+      if (ctx.summary.engine299) events.unwritten += ctx.summary.engine299.noDial;
     }
     return events;
   };
@@ -185,7 +193,9 @@ console.log('\nengine.47 Hop 5 — households bend around tonight\'s result');
   assert('5.4 a loss draws the quiet-house lines', loss.length > 0 && loss.every(ev => /quiet|early|loss/.test(ev.event)), loss.map(e => e.event).slice(0, 3).join(' | '));
   const quiet = runWithFeed(3000, []);
   assert('5.5 no game in the feed — no game-night line (no invented games)', quiet.filter(ev => isGN(ev)).length === 0);
-  assert('5.6 the draw chance is unchanged — same event count with or without a game', quiet.length === winStreak.length, quiet.length + ' vs ' + winStreak.length);
+  assert('5.6 the draw chance is unchanged — same number of draws (written or plain) with or without a game',
+    quiet.length + quiet.unwritten === winStreak.length + winStreak.unwritten && quiet.length > 0,
+    (quiet.length + quiet.unwritten) + ' vs ' + (winStreak.length + winStreak.unwritten));
   // codex re-review F1: a blank, retired or unknown team ahead of the club that played is no club's night
   const mixed = runWithFeed(600, [{ eventType: 'game-result', teamsUsed: 'NBA', streak: 'W5' }, { eventType: 'game-result', teamsUsed: '', streak: 'W5' },
     { eventType: 'game-result', teamsUsed: 'Oaks', streak: 'L5' }], { Oaks: { g: 3, hotCold: 'cold' } }).filter(ev => isGN(ev));

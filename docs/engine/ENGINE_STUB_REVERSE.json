@@ -2,7 +2,7 @@
   "generated": "2026-11-18",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 181,
-  "functionsMapped": 1797,
+  "functionsMapped": 1800,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -998,7 +998,6 @@
         "phase01-config/godWorldEngine2.js::runCyclePhases_",
         "phase01-config/godWorldEngine2.js::runWorldCycleLocked_",
         "phase02-world-state/applySeasonWeights.js::applySeasonalWeights_",
-        "phase05-citizens/runRelationshipEngine.js::runRelationshipEngine_",
         "phase06-analysis/applyShockMonitor.js::applyShockMonitor_",
         "phase06-analysis/prioritizeEvents.js::prioritizeEvents_",
         "phase07-evening-media/mediaFeedbackEngine.js::amplifyArcsFromCoverage_",
@@ -3053,9 +3052,12 @@
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase05-citizens/generateCivicModeEvents.js::generateCivicModeEvents_",
         "phase05-citizens/generateMediaModeEvents.js::generateMediaModeEvents_",
+        "phase05-citizens/runAsUniversePipeline.js::runAsUniversePipeline_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
         "phase05-citizens/runEducationEngine.js::runEducationEngine_",
-        "phase05-citizens/runNeighborhoodEngine.js::runNeighborhoodEngine_"
+        "phase05-citizens/runHouseholdEngine.js::runHouseholdEngine_",
+        "phase05-citizens/runNeighborhoodEngine.js::runNeighborhoodEngine_",
+        "phase05-citizens/runRelationshipEngine.js::runRelationshipEngine_"
       ],
       "readers": [
         "phase04-events/generateGameModeMicroEvents.js::generateGameModeMicroEvents_",
@@ -3063,10 +3065,13 @@
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase05-citizens/generateCivicModeEvents.js::generateCivicModeEvents_",
         "phase05-citizens/generateMediaModeEvents.js::generateMediaModeEvents_",
+        "phase05-citizens/runAsUniversePipeline.js::runAsUniversePipeline_",
         "phase05-citizens/runCareerEngine.js::applyEmployerSuccess_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
         "phase05-citizens/runEducationEngine.js::runEducationEngine_",
-        "phase05-citizens/runNeighborhoodEngine.js::runNeighborhoodEngine_"
+        "phase05-citizens/runHouseholdEngine.js::runHouseholdEngine_",
+        "phase05-citizens/runNeighborhoodEngine.js::runNeighborhoodEngine_",
+        "phase05-citizens/runRelationshipEngine.js::runRelationshipEngine_"
       ]
     },
     "gameModeMicroEventDetails": {
@@ -3848,16 +3853,6 @@
       ],
       "readers": []
     },
-    "carriedMediaEffects": {
-      "writers": [
-        "phase07-evening-media/mediaFeedbackEngine.js::seedCarriedMediaEffects_"
-      ],
-      "readers": [
-        "phase05-citizens/runRelationshipEngine.js::runRelationshipEngine_",
-        "phase07-evening-media/mediaFeedbackEngine.js::getMediaEventModifier_",
-        "phase07-evening-media/mediaFeedbackEngine.js::getMediaInfluencedEvent_"
-      ]
-    },
     "youthEvents": {
       "writers": [
         "phase05-citizens/runYouthEngine.js::runYouthEngine_"
@@ -4315,6 +4310,15 @@
         "phase08-v3-chicago/v3DomainWriter.js::saveV3Domains_",
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_",
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_"
+      ]
+    },
+    "carriedMediaEffects": {
+      "writers": [
+        "phase07-evening-media/mediaFeedbackEngine.js::seedCarriedMediaEffects_"
+      ],
+      "readers": [
+        "phase07-evening-media/mediaFeedbackEngine.js::getMediaEventModifier_",
+        "phase07-evening-media/mediaFeedbackEngine.js::getMediaInfluencedEvent_"
       ]
     },
     "mediaSummary": {

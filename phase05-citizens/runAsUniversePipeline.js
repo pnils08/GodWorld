@@ -131,6 +131,94 @@ var POSTCAREER_TEXTURE_BESPOKE_ = {
   ]
 };
 
+// engine.350 Task 7 (builder 2026-11-16: a line moves a dial by what it says, down as often as up; 2026-11-18
+// "we fixing all this"). A retired player's everyday line was a bare PostCareer (family +4, openness +2) whatever
+// it said — "watching boats at the estuary", "noticing more baseball chatter in everyday places" — and the same
+// under the First Friday, Creation Day, holiday and season suffixes. Each line is listed here under the dial it
+// moves and which way, read off the sentence, and written one step: PostCareer-<Dial>-<Up|Down>-S. A line listed
+// plain is a look at the block with nothing felt or done in it: drawn, counted and not written. The appearance,
+// clinic-visit, fundraiser, getaway and training lines have kinds of their own (PostCareer-Influence, -Community,
+// -Fundraiser, -Travel, -Wellness) and are untouched.
+var POSTCAREER_SIGN_LINES_ = {
+  "outabout:up": [
+    "watching the civic district from a bench in retirement", "enjoying quiet walks past the public buildings",
+    "walking the main street in the afternoon", "picking up groceries near the transit stop",
+    "enjoying an early dinner before the night crowd", "strolling the main avenue in retirement", "browsing the shops along the avenue",
+    "browsing the storefronts in retirement", "enjoying the shopping-street bustle", "walking near the hospital grounds",
+    "visiting the market street in the mornings", "savoring a favorite family-run counter", "enjoying the village main street in retirement",
+    "visiting the bakery each morning", "attending openings along the corridor", "enjoying Temescal's cafe culture in retirement",
+    "grabbing coffee at a favorite Temescal spot", "watching city life from a Downtown bench", "savoring tacos at a Fruitvale favorite",
+    "taking peaceful walks around Lake Merritt", "strolling through Rockridge's tree-lined streets", "browsing shops along College Ave",
+    "taking in Jack London's waterfront scenery", "attending gallery openings in the arts district", "enjoying dim sum in Chinatown",
+    "appreciating the neighborhood's bustling markets", "strolling along leafy Piedmont Ave", "enjoying the boutique shops and cafes",
+    "wandering First Friday galleries in retirement"
+  ],
+  "composure:up": [
+    "enjoying the school-day rhythm of the neighborhood", "enjoying the neighborhood's constant motion", "enjoying the orderly pace of the neighborhood",
+    "settling into the neighborhood's quiet pace", "enjoying the calm of the block", "appreciating the steady rhythm of the neighborhood",
+    "settling into the neighborhood's small-town pace", "reflecting on a lifetime of work from the front step", "enjoying the lake's calming presence",
+    "watching the birds at the lake", "settling into Laurel's quiet residential pace", "enjoying the neighborhood's calm atmosphere",
+    "enjoying Rockridge's refined neighborhood feel", "watching boats at the estuary", "appreciating the quiet neighborhood charm",
+    "settling into the familiar cadence of the season", "enjoying the slower pace away from game nights", "letting the body rest into an offseason rhythm",
+    "settling into the steady cadence of the regular season", "enjoying a quieter New Year's celebration", "enjoying a peaceful holiday season"
+  ],
+  "composure:down": ["feeling the long-season grind from a distance"],
+  "openness:up": [
+    "sitting in on open campus talks", "enjoying the young energy of the blocks", "exploring the corridor's galleries in retirement",
+    "enjoying the creative energy of the neighborhood", "reflecting on how the blocks have changed", "appreciating the creative energy around Temescal",
+    "enjoying the cultural richness of the neighborhood", "reflecting on the area's history", "enjoying the arts district's creative energy",
+    "enjoying Uptown's cultural scene in retirement", "appreciating the urban arts atmosphere", "exploring KONO's street art and galleries",
+    "appreciating the neighborhood's creative spirit", "enjoying the DIY arts scene", "reflecting on the new year in retirement",
+    "enjoying the art walk's creative energy", "appreciating Oakland's cultural scene", "reflecting on the journey that brought them here"
+  ],
+  "sociability:up": [
+    "chatting with shopkeepers in retirement", "waving to neighbors from the porch", "chatting with familiar shopkeepers",
+    "enjoying the corner store's steady company", "connecting with Fruitvale's vibrant community", "connecting with the community",
+    "connecting with artists at First Friday"
+  ],
+  "warmth:up": [
+    "volunteering at a neighborhood clinic", "appreciating the caretakers of the neighborhood", "enjoying the generations mixing on the block",
+    "appreciating the community feel", "reflecting on blessings in retirement", "feeling connected to deep roots today",
+    "appreciating the community's origins"
+  ],
+  "family:up": ["gathering with family for Thanksgiving", "spending time with loved ones"],
+  "fandom:up": [
+    "enjoying the district's event-day buzz", "following the arena's calendar in retirement", "enjoying the familiar rhythm of spring prep",
+    "feeling the quiet excitement that comes with camp season", "feeling the steady hum of game nights around the city",
+    "feeling the first-month energy of a new season", "feeling the season sharpen as summer fades", "feeling the heightened attention around the team",
+    "feeling the lingering intensity of postseason coverage", "feeling the weight of a championship moment in the air",
+    "noticing the city move as one around the biggest games"
+  ],
+  "plain": [
+    "observing the official rhythm of the neighborhood", "keeping up with health news from the clinics", "watching the neighborhood build out",
+    "watching the commuter flow from a station bench", "watching the district wake up in the evening",
+    "appreciating the neighborhood's late energy from a distance", "keeping appointments close to home", "taking in the patchwork rhythm of the block",
+    "watching the neighborhood change from a bench", "watching the early shifts head out", "appreciating the working rhythm of the neighborhood",
+    "watching game-day crowds from a distance", "following the boom from the front step", "observing Downtown's bustling activity from a distance",
+    "taking in the urban rhythm of Downtown Oakland", "watching West Oakland's evolution in retirement", "appreciating the neighborhood's character",
+    "noticing the city ease back into baseball season", "noticing more baseball chatter in everyday places",
+    "noticing the city feels a little quieter on weeknights", "noticing early-season excitement around town", "noticing the steady rhythm of midseason life",
+    "noticing the city's attention tighten as the year turns", "noticing game nights become routine again", "noticing the city get louder after big games",
+    "noticing more conversations drifting back to baseball", "sensing something foundational in the air", "continuing to adjust to post-career life"
+  ]
+};
+var POSTCAREER_SIGN_BY_TEXT_ = (function() {
+  var out = {};
+  for (var sign in POSTCAREER_SIGN_LINES_) {
+    if (!POSTCAREER_SIGN_LINES_.hasOwnProperty(sign)) continue;
+    for (var i = 0; i < POSTCAREER_SIGN_LINES_[sign].length; i++) out[POSTCAREER_SIGN_LINES_[sign][i]] = sign === "plain" ? null : sign;
+  }
+  return out;
+})();
+// The tag a retired player's everyday line is written under: PostCareer-<Dial>-<Up|Down>-S, or '' (not written).
+// why: 'plain' (listed, no sign) | 'unlisted' (no entry) — the counter key.
+function postCareerLineTag_(text) {
+  if (!POSTCAREER_SIGN_BY_TEXT_.hasOwnProperty(text)) return { tag: '', why: 'unlisted' };
+  var m = /^([a-z]+):(up|down)$/.exec(POSTCAREER_SIGN_BY_TEXT_[text] || '');
+  if (!m) return { tag: '', why: 'plain' };
+  return { tag: 'PostCareer-' + m[1].charAt(0).toUpperCase() + m[1].slice(1) + '-' + (m[2] === 'up' ? 'Up' : 'Down') + '-S', why: '' };
+}
+
 function runAsUniversePipeline_(ctx) {
 
   // Phase 42 §5.6: SL read/mutate via shared ctx.ledger; commit at Phase 10.
@@ -525,21 +613,12 @@ function runAsUniversePipeline_(ctx) {
         np = hoodTexturePool_(ctx, neighborhood, POSTCAREER_TEXTURE_BY_CHARACTER_, POSTCAREER_TEXTURE_BESPOKE_, 'runAsUniversePipeline_');
         for (i = 0; i < np.length; i++) { pool.push(np[i]); }
 
-        if (pool.length === 0) pool.push("continuing to adjust to post-career life");
-
         var pick = pool[Math.floor(rng() * pool.length)];
 
-        // Determine event tag (v3.0 - expanded tags)
-        var eventTag = "PostCareer";
-        if (firstFridayNotes.indexOf(pick) >= 0) {
-          eventTag = "PostCareer-FirstFriday";
-        } else if (creationDayNotes.indexOf(pick) >= 0) {
-          eventTag = "PostCareer-CreationDay";
-        } else if (holiday !== "none" && holidayPools[holiday] && holidayPools[holiday].indexOf(pick) >= 0) {
-          eventTag = "PostCareer-Holiday";
-        } else if ((sportsAtmosphereNotes[canonSportsPhase] || []).indexOf(pick) >= 0) {
-          eventTag = "PostCareer-Sports";
-        } else if (vacationPool.indexOf(pick) >= 0) {
+        // Determine event tag (v3.0 - expanded tags). engine.350: an everyday line is written under the dial it
+        // names, one step; the First Friday, Creation Day, holiday and season suffixes (bare PostCareer) are gone.
+        var eventTag;
+        if (vacationPool.indexOf(pick) >= 0) {
           eventTag = "PostCareer-Travel";
         } else if (fundraiserPool.indexOf(pick) >= 0) {
           eventTag = "PostCareer-Fundraiser";
@@ -549,6 +628,19 @@ function runAsUniversePipeline_(ctx) {
           eventTag = "PostCareer-Influence";
         } else if (wellnessPool.indexOf(pick) >= 0) {
           eventTag = "PostCareer-Wellness";
+        } else {
+          // a plain line or one with no entry is drawn, counted and not written, so the appearance, clinic,
+          // fundraiser, getaway, training and signed everyday lines keep the odds they had
+          var pcSigned = postCareerLineTag_(pick);
+          if (!pcSigned.tag) {
+            S.engine299 = S.engine299 || { noDial: 0, noDialBySource: {} };
+            S.engine299.noDial++;
+            var pcKey = 'runAsUniversePipeline:PostCareer:' + pcSigned.why;
+            S.engine299.noDialBySource[pcKey] = (S.engine299.noDialBySource[pcKey] || 0) + 1;
+            rows[r] = row;
+            continue;
+          }
+          eventTag = pcSigned.tag;
         }
 
         var stamp = inWorldStamp_(ctx);

@@ -449,25 +449,40 @@ function runNeighborhoodEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // FIRST FRIDAY EVENTS (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  var firstFridayEvents = {
+  // engine.350 (2026-11-18): each line carries its own sign, by what it says — all eleven were sociability up
+  // (signed as a pool at engine.299), and none of them is company: a crowd seen on your own block is the block
+  // out and about, an artist setting up is something new. The other side of living on the art walk is written
+  // too; these lines reach only the people who live in the three hoods, so a night with the window shut is theirs.
+  var firstFridaySigns = {
     'Uptown': [
-      "noticed First Friday crowds filling the galleries",
-      "felt the monthly art walk energy in Uptown",
-      "observed artists setting up on the sidewalks",
-      "sensed the creative community coming alive"
+      ["noticed First Friday crowds filling the galleries", "dial:outabout:up"],
+      ["felt the monthly art walk energy in Uptown", "dial:outabout:up"],
+      ["observed artists setting up on the sidewalks", "dial:openness:up"],
+      ["sensed the creative community coming alive", "dial:openness:up"],
+      ["heard the art walk from the front room and shut the window", "dial:outabout:down"],
+      ["pushed through the gallery crowd just to reach their own front door", "dial:sociability:down"]
     ],
     'KONO': [
-      "felt KONO's First Friday buzz",
-      "noticed gallery openings along the corridor",
-      "observed the neighborhood's artistic energy peak",
-      "sensed the monthly creative surge"
+      ["felt KONO's First Friday buzz", "dial:outabout:up"],
+      ["noticed gallery openings along the corridor", "dial:openness:up"],
+      ["observed the neighborhood's artistic energy peak", "dial:openness:up"],
+      ["sensed the monthly creative surge", "dial:openness:up"],
+      ["kept the blinds down while the corridor filled with First Friday visitors", "dial:outabout:down"],
+      ["walked the long way home to stay clear of the gallery crowds", "dial:sociability:down"]
     ],
     'Temescal': [
-      "noticed First Friday spillover into Temescal",
-      "felt the neighborhood's evening energy rise",
-      "observed art enthusiasts wandering the streets"
+      ["noticed First Friday spillover into Temescal", "dial:outabout:up"],
+      ["felt the neighborhood's evening energy rise", "dial:outabout:up"],
+      ["observed art enthusiasts wandering the streets", "dial:outabout:up"],
+      ["stayed in while the First Friday spillover went by outside", "dial:outabout:down"]
     ]
   };
+  var firstFridayEvents = {};   // hood -> the texts (the tag lookup below reads this)
+  for (var ffHood in firstFridaySigns) {
+    if (!firstFridaySigns.hasOwnProperty(ffHood)) continue;
+    firstFridayEvents[ffHood] = [];
+    for (var ffk = 0; ffk < firstFridaySigns[ffHood].length; ffk++) firstFridayEvents[ffHood].push(firstFridaySigns[ffHood][ffk][0]);
+  }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CREATION DAY EVENTS (v2.2)
@@ -619,8 +634,8 @@ function runNeighborhoodEngine_(ctx) {
       }
 
       // Add First Friday events (v2.2) — out at the art walk
-      if (isFirstFriday && firstFridayEvents[neighborhood]) {
-        eventPool = eventPool.concat(signed_(firstFridayEvents[neighborhood], 'dial:sociability:up'));
+      if (isFirstFriday && firstFridaySigns[neighborhood]) {
+        for (var ffp = 0; ffp < firstFridaySigns[neighborhood].length; ffp++) eventPool.push({ t: firstFridaySigns[neighborhood][ffp][0], d: firstFridaySigns[neighborhood][ffp][1] });
       }
 
       // Add Creation Day events (v2.2) — belonging

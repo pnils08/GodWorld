@@ -302,10 +302,19 @@ assert('B1 bounded under continuous folding (every dial 0-100)', hot.bounded);
   const sd = Math.sqrt(fams.reduce((a, v) => a + (v - mean) * (v - mean), 0) / fams.length);
   assert('B3a family dial NOT population-pinned (<half at 100)',
     pinned < fams.length / 2, pinned + '/' + fams.length + ' pinned');
-  assert('B3b family variance exists but stays damped (0 < sd, no degenerate collapse)',
-    sd > 0.05, 'sd=' + sd.toFixed(2));
-  assert('B3c only SOME citizens moved family (household recipients) — not all, not none',
-    movers > 0 && movers < fams.length, movers + '/' + fams.length + ' moved');
+  // engine.350 (2026-11-18): a home line is one step on the dial it names (was a bare Household: family +5,
+  // whatever the line said — "heard an ambulance pass in the night" raised family by five, and three of those
+  // inside the swing's ten-Cycle fade hardened it). A one-step swing fades in about four Cycles and a household
+  // line comes round every few weeks, so three same-way Cycles in a row do not happen at the seed speed keys:
+  // nobody's family moves for good from home lines alone. Asserted so it cannot change unseen. Movement at one
+  // step a line is what the speed keys are for (engine.349 Task 9: lines doubled, a quarter of each week
+  // sticks); this harness stamps every line Cycle 0, so it folds on the legacy path and cannot run that row —
+  // the bench does.
+  assert('B3b at the seed speed a one-step home line does not harden: family stays where it was',
+    movers === 0 && sd === 0, movers + '/' + fams.length + ' moved, sd=' + sd.toFixed(2));
+  const homeLines = hot.rows.map(r => String(r[HEADERS.indexOf('LifeHistory')] || '')).join('\n').match(/\[Household-[A-Za-z]+-(Up|Down)-S\]/g) || [];
+  assert('B3c home lines still on the cells at the end of the trace are one step each, none bare', homeLines.length > 0 &&
+    !/\[Household(-FirstFriday|-Holiday|-CreationDay)?\]/.test(hot.rows.map(r => String(r[HEADERS.indexOf('LifeHistory')] || '')).join('\n')), String(homeLines.length));
 }
 
 {

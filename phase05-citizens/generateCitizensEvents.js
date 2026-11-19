@@ -1229,7 +1229,9 @@ function generateCitizensEvents_(ctx) {
   // tripped a content rule was written bare and read by that word — "heard another neighbor was between jobs"
   // moved sociability +3 and warmth +2 on the word "neighbor". Every QoL entry carries the dial of its cause
   // and the sign of its bank (qolPoolFor_, patrolPoolFor_); it is written by that, or not written.
-  var GRADED_ONLY_KIND_ = { "Work": true, "Media": true, "QoL": true };
+  // Continuity the same: no dial-map key, so a memory or follow-up line was read by any content-rule word in it,
+  // and the three coded follow-up lines carried no sign and were drawn and dropped. They carry one now.
+  var GRADED_ONLY_KIND_ = { "Work": true, "Media": true, "QoL": true, "Continuity": true };
   var MEDIA_POOL_SIGN_ = {
     "Media-Anxious": "dial:composure:down", "Media-Crisis": "dial:composure:down", "Media-Hopeful": "dial:composure:up",
     "Media-Holiday": "dial:warmth:up", "Media-OaklandPride": "dial:warmth:up", "Media-Arts": "dial:openness:up",
@@ -3297,13 +3299,13 @@ function generateCitizensEvents_(ctx) {
     // Continuity pool
     if (mem && mem.unresolved) {
       if (mem.unresolved.rivalry && chanceHit(0.5)) {
-        pool.push(makeEntry("followed up on an unresolved tension without making it obvious", ["source:continuity", "continuity:rivalry"], 1.25, false));
+        pool.push(makeEntry("followed up on an unresolved tension without making it obvious", ["source:continuity", "continuity:rivalry", "dial:composure:down"], 1.25, false));   // engine.350: a tension still carried
       }
       if (mem.unresolved.alliance && chanceHit(0.45)) {
-        pool.push(makeEntry("checked in on a quiet agreement that still needs maintenance", ["source:continuity", "continuity:alliance"], 1.2, false));
+        pool.push(makeEntry("checked in on a quiet agreement that still needs maintenance", ["source:continuity", "continuity:alliance", "dial:sociability:up"], 1.2, false));   // engine.350: tending a tie
       }
       if (mem.unresolved.arc && chanceHit(0.5)) {
-        pool.push(makeEntry("took a small step in an ongoing situation—nothing loud, but real", ["source:continuity", "continuity:arc"], 1.25, false));
+        pool.push(makeEntry("took a small step in an ongoing situation—nothing loud, but real", ["source:continuity", "continuity:arc", "dial:drive:up"], 1.25, false));   // engine.350: a step taken
       }
     }
 

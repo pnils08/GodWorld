@@ -328,8 +328,11 @@ function generateGenericCitizenMicroEvents_(ctx) {
   // writes carries the dial it moves and which way — by what the line says. Fixed texts are signed here;
   // a hood line takes the hood's own trajectory (S.neighborhoodState, Neighborhood_Map NeighborhoodTrajectory:
   // growth Up / decay Down; steady → no sign, not written); the dynamic lines are signed by their shape. A
-  // line with no sign is not written and is counted in S.engine299.noDialBySource. Kinds that already carry
-  // deltas (Community, Cultural) keep their bare tag. The two world-event presence lines are deliberately
+  // line with no sign is not written and is counted in S.engine299.noDialBySource. The culture and community
+  // lines are signed like the rest (engine.350, 2026-11-18): they kept a bare Cultural (openness +4, out-and-about
+  // +3) or Community (sociability +4, warmth +2) — a night out's worth for "noticed vibrant cultural activity
+  // around town" (39 and 77 such lines in the stage-54 bench's ten Cycles); their signs were already in the list
+  // below and never read. The two world-event presence lines are deliberately
   // unsigned (S.worldEvents holds good news too; presence is not a direction — codex 2026-10-18 Task 3 F1).
   var SIGN_BY_TEXT_ = {
     "enjoyed a calm, uneventful day": "dial:composure:up",
@@ -435,7 +438,7 @@ function generateGenericCitizenMicroEvents_(ctx) {
     if (!m) return '';
     return kind + '-' + m[1].charAt(0).toUpperCase() + m[1].slice(1) + '-' + (m[2] === 'up' ? 'Up' : 'Down') + '-S';
   }
-  var KIND_HAS_DELTAS_ = { 'Community': true, 'Cultural': true };   // utilities/citizenDialMap.js DIAL_MAP, read 2026-10-18
+  var KIND_HAS_DELTAS_ = {};   // engine.350: no kind this engine writes keeps a bare tag (Community and Cultural did until 2026-11-18)
 
   // Build basePool
   var basePool = base

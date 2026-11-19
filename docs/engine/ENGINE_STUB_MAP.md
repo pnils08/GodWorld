@@ -2576,9 +2576,11 @@
 ### runAsUniversePipeline.js
 - **mulberry32_uni_(seed)**
 
+- **postCareerLineTag_(text)**
+
 - **runAsUniversePipeline_(ctx)**
-  Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.weather, S.weatherMood, S.worldEvents
-  Writes: S.canonSportsPhase, S.eventsGenerated, S.postCareerEvents
+  Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.economicMood, S.engine299, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.weather, S.weatherMood, S.worldEvents
+  Writes: S.canonSportsPhase, S.engine299, S.eventsGenerated, S.postCareerEvents
   Config: ctx.config.cycleCount, ctx.config.rngSeed
   Sheets: LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
@@ -2713,9 +2715,11 @@
   RNG: ctx.rng / safeRand_(ctx)
 
 ### runHouseholdEngine.js
+- **householdLineTag_(text)**
+
 - **runHouseholdEngine_(ctx)**
-  Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsFeedEntries, S.sportsSeason, S.sportsWeek, S.weather, S.weatherMood, S.worldEvents
-  Writes: S.eventsGenerated, S.householdEvents
+  Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.economicMood, S.engine299, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsFeedEntries, S.sportsSeason, S.sportsWeek, S.weather, S.weatherMood, S.worldEvents
+  Writes: S.engine299, S.eventsGenerated, S.householdEvents
   Config: ctx.config.cycleCount
   Sheets: LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
@@ -2735,9 +2739,11 @@
   RNG: ctx.rng / safeRand_(ctx)
 
 ### runRelationshipEngine.js
+- **relationshipLineTag_(kind, text)**
+
 - **runRelationshipEngine_(ctx)**
-  Reads: S.absoluteCycle, S.carriedMediaEffects, S.cityDynamics, S.cycleActiveCitizens, S.cycleId, S.eventsGenerated, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.season, S.weather, S.weatherEventPools, S.worldEvents
-  Writes: S.cycleActiveCitizens, S.eventsGenerated
+  Reads: S.absoluteCycle, S.cityDynamics, S.cycleActiveCitizens, S.cycleId, S.engine299, S.eventsGenerated, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.weather, S.weatherEventPools, S.worldEvents
+  Writes: S.cycleActiveCitizens, S.engine299, S.eventsGenerated
   Sheets: LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
 
@@ -4941,4 +4947,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 181
-**Functions mapped:** 1797
+**Functions mapped:** 1800

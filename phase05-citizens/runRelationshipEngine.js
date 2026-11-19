@@ -35,6 +35,74 @@
  * ============================================================================
  */
 
+// engine.350 Task 7 (builder 2026-11-16: a line moves a dial by what it says, down as often as up; 2026-11-18
+// on the engines still writing a social line as up whatever it said: "we fixing all this"). Every line of
+// the everyday pools was a bare Relationship: sociability +5, warmth +2, the size of a wedding — "felt distant
+// from people around them" and "had a minor disagreement with someone they know" among them; on a holiday,
+// a First Friday or Creation Day the same under a calendar suffix; the culture and community lines a bare
+// Cultural (openness +4, out-and-about +3) or Community (sociability +4, warmth +2). Each line is listed
+// here under the dial it moves and which way, read off the sentence, and written one step:
+// <Kind>-<Dial>-<Up|Down>-S. A line listed plain says nothing the citizen did or felt toward anyone; it
+// and any line not listed (a weather or media line handed in from another engine) is drawn, counted and
+// not written, so every other line keeps the odds it had.
+// The bond lines (Rivalry, Alliance, Mentorship, Arc) are about a bond the citizen holds and keep their kinds.
+var RELATIONSHIP_SIGN_LINES_ = {
+  "sociability:up": [
+    "reconnected with an old friend", "built a new casual acquaintance",
+    "experienced renewed social energy", "connected with new people as spring began",
+    "engaged in lively summer social interactions", "joined friends for evening hangouts",
+    "reconnected with acquaintances during fall transition", "joined neighbors outside to cool off",
+    "discussed recent city events with someone they knew", "felt more comfortable reaching out to others",
+    "attended a cultural event with friends", "met someone new at a community gathering",
+    "participated in a neighborhood activity", "helped organize something with neighbors",
+    "celebrated the turning of the year with others", "exchanged greetings with neighbors on the holiday",
+    "connected with neighbors during trick-or-treat", "attended a costume gathering",
+    "wandered the First Friday art walk with friends", "met an artist at a gallery opening",
+    "ran into acquaintances at First Friday", "made a new connection in the art district",
+    "shared stories about the early days with neighbors", "connected with others over shared history"
+  ],
+  "sociability:down": [
+    "felt distant from people around them", "limited social activity due to winter mood",
+    "kept interactions brief during heavy fog", "cut short outdoor interactions due to wind",
+    "kept social distance due to tense atmosphere"
+  ],
+  "warmth:up": [
+    "spent time with a close friend", "shared a moment of support with a neighbor",
+    "felt stronger connection to their block", "shared New Year hopes with a friend",
+    "shared gratitude with family and friends", "exchanged gifts and well-wishes with loved ones",
+    "felt holiday warmth in community interactions", "exchanged Valentine's greetings with someone special",
+    "felt a deep sense of community belonging"
+  ],
+  "warmth:down": ["had a minor disagreement with someone they know"],
+  "family:up": [
+    "gathered with family for Easter", "reconnected with relatives over the holiday",
+    "honored family bonds on the holiday", "called a parent to express appreciation"
+  ],
+  "openness:up": ["felt energized by the city's creative buzz", "felt the creative community energy"],
+  "outabout:down": ["stayed indoors and messaged friends remotely"],
+  "plain": [
+    "relied on familiar social circles during cold period", "felt shift in social energy as routines returned",
+    "felt social atmosphere shift due to today's happenings", "felt romantic energy in social interactions",
+    "sensed something foundational in the air"
+  ]
+};
+var RELATIONSHIP_SIGN_BY_TEXT_ = (function() {
+  var out = {};
+  for (var sign in RELATIONSHIP_SIGN_LINES_) {
+    if (!RELATIONSHIP_SIGN_LINES_.hasOwnProperty(sign)) continue;
+    for (var i = 0; i < RELATIONSHIP_SIGN_LINES_[sign].length; i++) out[RELATIONSHIP_SIGN_LINES_[sign][i]] = sign === "plain" ? null : sign;
+  }
+  return out;
+})();
+// The tag a social line is written under: <kind>-<Dial>-<Up|Down>-S, or '' (not written).
+// why: 'plain' (listed, no sign) | 'unlisted' (no entry) — the counter key.
+function relationshipLineTag_(kind, text) {
+  if (!RELATIONSHIP_SIGN_BY_TEXT_.hasOwnProperty(text)) return { tag: '', why: 'unlisted' };
+  var m = /^([a-z]+):(up|down)$/.exec(RELATIONSHIP_SIGN_BY_TEXT_[text] || '');
+  if (!m) return { tag: '', why: 'plain' };
+  return { tag: kind + '-' + m[1].charAt(0).toUpperCase() + m[1].slice(1) + '-' + (m[2] === 'up' ? 'Up' : 'Down') + '-S', why: '' };
+}
+
 function runRelationshipEngine_(ctx) {
 
   var rng = safeRand_(ctx);
@@ -502,43 +570,25 @@ function runRelationshipEngine_(ctx) {
         eventTag = "Mentorship";
       } else if (arcRels.indexOf(pick) >= 0) {
         eventTag = "Arc";
-      } else if (holidayRels.indexOf(pick) >= 0) {
-        eventTag = "Relationship-Holiday";        // engine.299: a relationship line on a holiday folds as Relationship (calendar suffix), not a bare plain day
-      } else if (firstFridayRels.indexOf(pick) >= 0) {
-        eventTag = "Relationship-FirstFriday";
-      } else if (creationDayRels.indexOf(pick) >= 0) {
-        eventTag = "Relationship-CreationDay";
-      } else if (culturalRels.indexOf(pick) >= 0) {
-        eventTag = "Cultural";
-      } else if (communityRels.indexOf(pick) >= 0) {
-        eventTag = "Community";
-      }
-
-      // Check for Media Event Tag
-      var mediaEffects = ctx.summary.mediaEffects || ctx.summary.carriedMediaEffects; // G-EC59: last week's paper at Phase 5
-      if (mediaEffects && mediaEffects.eventPools) {
-        var allMediaEvents = [].concat(
-          mediaEffects.eventPools.anxious || [],
-          mediaEffects.eventPools.hopeful || [],
-          mediaEffects.eventPools.crisis || [],
-          mediaEffects.eventPools.celebrity || [],
-          mediaEffects.eventPools.sports || []
-        );
-        if (allMediaEvents.indexOf(pick) >= 0) {
-          eventTag = "Media";
+      } else {
+        // engine.350: a social line is written under the dial it names, one step. The culture and community
+        // lines keep their kinds; a holiday, First Friday or Creation Day line is a Relationship line (the
+        // calendar suffixes were bare Relationship: +5 / +2 whatever the line said). A plain line, or a weather
+        // or media line another engine handed in (no sign here), is drawn, counted against the cap and in
+        // S.engine299.noDialBySource, and not written — every other line keeps the odds it had. The citizen
+        // still counts as out among people this Cycle (the bond engine's pool).
+        var relKind = culturalRels.indexOf(pick) >= 0 ? "Cultural" : (communityRels.indexOf(pick) >= 0 ? "Community" : "Relationship");
+        var relSigned = relationshipLineTag_(relKind, pick);
+        if (!relSigned.tag) {
+          ctx.summary.engine299 = ctx.summary.engine299 || { noDial: 0, noDialBySource: {} };
+          ctx.summary.engine299.noDial++;
+          var relKey = 'runRelationshipEngine:Relationship:' + relSigned.why;
+          ctx.summary.engine299.noDialBySource[relKey] = (ctx.summary.engine299.noDialBySource[relKey] || 0) + 1;
+          ctx.summary.cycleActiveCitizens.push(popId);
+          globalEvents++;
+          continue;
         }
-      }
-
-      // Check for Weather Event Tag
-      if (ctx.summary.weatherEventPools) {
-        var allWeatherEvents = [].concat(
-          ctx.summary.weatherEventPools.base || [],
-          ctx.summary.weatherEventPools.enhanced || [],
-          ctx.summary.weatherEventPools.special || []
-        );
-        if (allWeatherEvents.indexOf(pick) >= 0) {
-          eventTag = "Relationship-Weather";       // engine.299: folds as Relationship (texture suffix), not a bare {} Weather day
-        }
+        eventTag = relSigned.tag;
       }
 
       var stamp = inWorldStamp_(ctx);

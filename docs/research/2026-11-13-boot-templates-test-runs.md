@@ -21,6 +21,8 @@ pointers:
   - "`output/engine-sheet/2026-11-14-director-ask-dry-run.md` — Run 5 raw outputs: a council member's question to the Stabilization Fund director and his answers; harness `2026-11-14-director-ask-dry-run.js` beside it"
 ---
 
+**Builder 2026-11-18: the templates drawn from these runs are garbage.** Kept from this log: §Worker inventory and §Worker data map (the data search). The runs are history.
+
 # Boot templates: test runs and findings
 
 **Builder (2026-11-13):** "review the written agents, voices … ensure they boot the agent into its character … wake in their persona/identity, with access to their memory store … without being told what to say, having a template we know works is probably better than 40 different write ups. is less more? is more more?" · "the plan will be to figure out the template or templates needed, we dont have to make the mayor template be the same as citizen voice, there can be different templates depending on the cron type" · "save these findings and make sure the plan points to it as a test run and we can continue to notate the findings".

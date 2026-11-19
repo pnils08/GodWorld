@@ -14,9 +14,9 @@ pointers:
   - "[[2026-09-16-work-wake-packs]] — civic.34, the work wake this extends"
   - "[[2026-11-03-mags-memory-one-home]] — pipeline.100, the review that led here"
   - "[[2026-11-10-stop-puppeting-the-newsroom]] — pipeline.111, the reporter order of work"
-  - "[[../reference/AGENT_BOOT_TEMPLATES]] — Task 9 output: the boot templates, draft"
-  - "[[../research/2026-11-13-boot-templates-test-runs]] — Task 9 research basis: what each wake loads, the boot test runs and findings"
-  - "[[../research/2026-11-17-reporter-records-roster]] — the reporters' records roster, approved"
+  - "[[../reference/AGENT_BOOT_TEMPLATES]] — templates marked garbage; kept for the worker data search"
+  - "[[../research/2026-11-13-boot-templates-test-runs]] — what each wake loads, the test runs, the worker data map"
+  - "[[../research/2026-11-17-reporter-records-roster]] — the reporters' records roster, approved: the data search, reporters"
 ---
 
 # Role Citizens Wake As Themselves Plan
@@ -25,7 +25,7 @@ pointers:
 
 **Rows:** pipeline.110 · **Owner:** engine-sheet
 
-**Where this plan is (2026-11-18):** workers done and live, 14 of 14 on the lean template. Next: the reporter template — no structure decided, no working example exists. Council on hold. Mayor not started. Task 8 waits on the tracker repair.
+**Where this plan is (2026-11-18):** workers live, 14 of 14. Every drafted template is marked garbage; what is kept is the data search — which records each cron should have. Reporter structure: nothing decided. Council on hold. Task 8 waits on the tracker repair.
 
 ## Tasks
 
@@ -39,7 +39,7 @@ pointers:
 | 6 | Tests and dry runs through the real scripts | es | done |
 | 7 | Read the first live runs: Tue 2026-11-10 and Thu 2026-11-12 | es | done; fixes owed, Task 8 |
 | 8 | A position written as an outcome (D8, D5, Okoro); a closed project woken as open (INIT-003, INIT-006) | es | reverted 11-13 — waits on the tracker repair |
-| 9 | Boot review: what each wake loads, then the template for each type. No model run without the builder's word | es | in progress — by type below; runs [[../research/2026-11-13-boot-templates-test-runs]]; templates [[../reference/AGENT_BOOT_TEMPLATES]] |
+| 9 | Boot review: what each wake loads, then the template for each type. No model run without the builder's word | es | templates marked garbage 2026-11-18; kept: the data search ([[../research/2026-11-13-boot-templates-test-runs]] §Worker data map, [[../reference/AGENT_BOOT_TEMPLATES]] §3.1–3.2, [[../research/2026-11-15-worker-records-all-tabs]], [[../research/2026-11-17-reporter-records-roster]]) |
 | 10 | The police chief's weekday wake onto the worker template | es | done — worker model 2026-11-14, lean 2026-11-17, approved; owed: read his first live lean record (Thu 11-19 05:45) |
 | 11 | A council seat's weekday wake onto the council template | es | on hold |
 
@@ -48,12 +48,12 @@ pointers:
 | Type | Set on | Left before approval | Status |
 |---|---|---|---|
 | What each wake loads | — | — | done |
-| Citizen | Vinnie Keane | a low-record citizen | drafted, not approved |
-| Council seat | — | everything | on hold; the first build was removed 2026-11-16 |
-| Mayor | her own template | everything | not started |
-| Worker | the police chief | read the first live lean records | live, all 14 lean, each approved 2026-11-16/17 |
-| Reporter | none — no working example exists | the structure, part by part, with the builder | next |
-| Gate | — | everything | not started |
+| Citizen | Vinnie Keane | — | template garbage |
+| Council seat | — | everything | on hold; template garbage; the first build was removed 2026-11-16 |
+| Mayor | — | everything | not started; template garbage |
+| Worker | the police chief | read the first live lean records | template doc garbage; the 14 workers run in code as approved 2026-11-16/17, unchanged |
+| Reporter | none — no working example exists | everything except the data search | template garbage; roster kept |
+| Gate | — | everything | not started; template garbage |
 
 ### Reporter rulings (builder, 2026-11-17)
 
@@ -66,7 +66,6 @@ pointers:
 - Interviews carry no neighbourhood restriction.
 - Every reporter can call any of the 14 workers (no caller exists yet) and gets the lookup tool.
 - Each reporter writes on their beat's days.
-- The template content is [[../reference/AGENT_BOOT_TEMPLATES]] §4: sheet line and temperament, written part, page memory, records and task. IDENTITY / LENS / RULES go legacy on switch.
 
 ## Acceptance
 
@@ -86,7 +85,7 @@ pointers:
 
 ## Changelog
 
-- 2026-11-18 (engine-sheet) — Reporter template: no structure decided, no working example. Reads of the reporters' records, roster and traits filed here earlier were removed from this plan.
+- 2026-11-18 (engine-sheet) — All drafted templates marked garbage; template page cut to the worker data search. Reporter structure: nothing decided.
 - 2026-11-18 (engine-sheet) — Side files only, no wake reads them: `output/engine-sheet/2026-11-18-reporter-wake-print.js` and its print. No model run.
 - 2026-11-17 (engine-sheet) — Reporter roster approved row by row; agy reviewed the reporter draft; five sim questions ruled.
 - 2026-11-17 (engine-sheet) — Police chief onto the lean worker, approved. 14 of 14 lean. Council on hold.

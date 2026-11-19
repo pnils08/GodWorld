@@ -3,6 +3,7 @@
 # default stage 57, pushed by 2026-11-18-push-e350d-bench.sh). Copied from 2026-11-18-e350c-bench.sh.
 #   LEG=<name>            names the cells file and the snaps (default d)
 #   PLACED=1              the nine placed rows and the flyer row go on the BENCH tab (leave off once they are on live)
+#   TABREADS=1            scripts/contentTabReads.js applied to the BENCH tab (72 rows off, 38 Tags cells)
 #   SPEED="2 0.25"        the two speed keys set on the BENCH World_Config before the first fire (engine.349 Task 9)
 #   STAGE=57 MAN=stage57-e350d.sha256
 # What follows is the coded-pool leg's own header.
@@ -16,7 +17,7 @@
 set -uo pipefail
 cd /root/GodWorld
 N=${1:-10}
-STAGE=${STAGE:-57}; MAN=${MAN:-stage57-e350d.sha256}; LEG=${LEG:-d}; PLACED=${PLACED:-0}; SPEED=${SPEED:-}
+STAGE=${STAGE:-57}; MAN=${MAN:-stage57-e350d.sha256}; LEG=${LEG:-d}; PLACED=${PLACED:-0}; SPEED=${SPEED:-}; TABREADS=${TABREADS:-0}
 export E350_LEG=$LEG
 O=output/engine-sheet; R=output/research-build; B=1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA
 SP=$R/e350$LEG-bench-logs; mkdir -p $SP
@@ -43,7 +44,7 @@ fire() { # <n>
   echo "fire C$(( C + 1 )) rc=$rc $v $(grep -o '"wallS": [0-9]*' $SP/fire$1.out)"
   if [ $rc -ne 0 ] || ! echo "$v" | grep -q '"PASS"'; then echo "HALT fire"; q < $SP/fire$1.out | tail -30; exit 2; fi
 }
-echo "== $(date -Is) engine.350 bench leg $LEG, stage $STAGE, $N fires, placed=$PLACED speed=${SPEED:-seed}"
+echo "== $(date -Is) engine.350 bench leg $LEG, stage $STAGE, $N fires, placed=$PLACED tabreads=$TABREADS speed=${SPEED:-seed}"
 AIM=$(node $O/2026-10-19-aimcheck.js 2>&1 | q); echo "$AIM" | tail -1
 echo "$AIM" | grep -q "^AIM = BENCH" || { echo "HALT aim not proven"; exit 5; }
 
@@ -53,6 +54,11 @@ if ( cd $PB && find . -type f ! -name .clasp.json | sort | xargs sha256sum ) | d
 prep e350$LEG
 if [ "$PLACED" = "1" ]; then echo "== the nine placed rows and the flyer row, bench tab only"
   node $TC placed 2>&1 | q; [ ${PIPESTATUS[0]} -eq 0 ] || { echo "HALT placed"; exit 7; }; fi
+if [ "$TABREADS" = "1" ]; then echo "== the tab read row by row, bench tab only"; sleep 20
+  LIVE0=$(node scripts/contentTabReads.js 2>&1 | q | grep "^tab:")
+  node scripts/contentTabReads.js --sheet $B --apply 2>&1 | q | grep -v "^  R"; [ ${PIPESTATUS[0]} -eq 0 ] || { echo "HALT tabreads"; exit 7; }
+  LIVE1=$(node scripts/contentTabReads.js 2>&1 | q | grep "^tab:"); echo "live before / after the bench write: $LIVE0 // $LIVE1"
+  [ "$LIVE0" = "$LIVE1" ] || { echo "HALT the live tab changed"; exit 7; }; fi
 if [ -n "$SPEED" ]; then echo "== speed keys, bench only"; sleep 20
   node $TC speed $SPEED 2>&1 | q; [ ${PIPESTATUS[0]} -eq 0 ] || { echo "HALT speed"; exit 7; }; fi
 node $TC cellreset 2>&1 | q

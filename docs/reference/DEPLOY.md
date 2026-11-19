@@ -67,7 +67,9 @@ Cloud Shell sometimes clears installed packages. If clasp fails, run `npm instal
 **Previous bench:** `SANDBOX 0908` (`1FFpUs98L0wrEcfAaQy6-Ir2xYiCq9baCc0SzqzAMrtM`) — RETIRED 2026-10-04: its script project hit Apps Script's 200-version cap (push lands, no new deployment; web app frozen @200 = `d7ac5fff`, C119). Full trail: [[DEPLOY_HISTORY]] §Retired sandboxes.
 
 
-**Live (2026-11-19, 02:01 CST):** PROD = **stage 58** = stage 57 + the middle counts: every reader of a dial band reads the number (thirteen files, `a8f4ebe23`, engine.349 Task 14), web app **@193** — DEPLOY_HISTORY §PROD stage 58. Bench: SANDBOX 1004 **@214 = stage 58**, data synced back to live C116. No sheet write goes with it. Committed and not in this tree: engine-sheet's `phase05-citizens/civicInitiativeEngine.js` (civic.49, `f99ad848a`), benched and pushed by its own lane on top of stage 58.
+**Live (2026-11-19, 09:00 CST):** PROD = **stage 59** = stage 58 + `phase05-citizens/civicInitiativeEngine.js` at `f99ad848a` (an IND-led initiative can pass — the council vote counts each seat once, civic.49), web app **@194** — DEPLOY_HISTORY §PROD stage 59. Bench: SANDBOX 1004 **@215 = stage 59**, data synced back to live C116.
+
+**Previous live (2026-11-19, 02:01 CST):** PROD = **stage 58** = stage 57 + the middle counts: every reader of a dial band reads the number (thirteen files, `a8f4ebe23`, engine.349 Task 14), web app **@193** — DEPLOY_HISTORY §PROD stage 58. Bench: SANDBOX 1004 **@214 = stage 58**, data synced back to live C116. No sheet write goes with it. Committed and not in this tree: engine-sheet's `phase05-citizens/civicInitiativeEngine.js` (civic.49, `f99ad848a`), benched and pushed by its own lane on top of stage 58.
 
 **Previous live (2026-11-18, 21:58 CST):** PROD = **stage 57** = stage 56 + the other engines write a line by what it says (six files, `5c0c090bd`, engine.350 Task 7), web app **@192** — DEPLOY_HISTORY §PROD stage 57. Bench: SANDBOX 1004 **@212 = stage 57**, data synced back to live C116. The content tab is written and the speed keys set (`dialLineScale` 2, `dialDirectShare` 0.25) on live, by the builder the same night.
 

@@ -1,0 +1,43 @@
+AIM = BENCH (script read the bench marker)
+== sync from live
+  verify Reflection_Intake: bench 2923 rows vs live 2923 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+{"fireGuardMinutes":"0","cycleCountFormatted":"116","cycleCountIsNumber":true}
+door: {"target":"bench","http":200,"ok":true,"record":{"cycle":126,"startedMs":1795074640234,"state":"done","finishedMs":1795074893851},"raw":"{\"cycle\":126,\"startedMs\":1795074640234,\"state\":\"done\",\
+clearfire 126: {"ok":true,"cleared":{"cycle":126,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+-- pause 75 s (read quota)
+Edition_Coverage_Ratings C116: 7 rows (window 115,114,113,112,111,110,109,108)
+Citizen_Media_Usage C116: 22 rows from live C115
+Oakland_Sports_Feed C117: 0 rows
+appended 7 to Edition_Coverage_Ratings; marked rows on the tab now 7
+appended 22 to Citizen_Media_Usage; marked rows on the tab now 22
+target BENCH 1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA cycleCount 116
+INIT-009 row 9 {"Status":"failed","VoteCycle":"116","Lead":"IND"} -> pending-vote @117
+INIT-011 row 11 {"Status":"failed","VoteCycle":"","Lead":"IND"} -> pending-vote @117
+INIT-013 row 13 {"Status":"failed","VoteCycle":"","Lead":"IND"} -> pending-vote @117
+INIT-015 row 15 {"Status":"proposed","VoteCycle":"","Lead":"OPP"} -> pending-vote @117
+target BENCH 1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA cycleCount 116
+saved before
+bench cycleCount 116
+fire C117 rc=0 "verdict": "PASS" "wallS": 223
+target BENCH 1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA cycleCount 117
+saved after
+target BENCH 1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA cycleCount 117
+INIT-009 IND | Status vetoed | Outcome PASSED | Passed 5-4. | nine seats ✓
+INIT-011 IND | Status failed | Outcome FAILED | Failed 4-5. | nine seats ✓
+INIT-013 IND | Status failed | Outcome FAILED | Failed 4-5. | nine seats ✓
+INIT-015 OPP | Status passed | Outcome PASSED | Passed 5-4. | nine seats ✓
+INIT-001 CHANGED BudgetRemaining: 20600000 -> 20200000; LastDisburseCycle: 116 -> 117
+INIT-002 CHANGED BudgetRemaining: 10817307.66 -> 10576923.04; LastDisburseCycle: 116 -> 117
+INIT-003 unchanged
+INIT-005 CHANGED StageHold: {"v":1,"obs":115,"up":0,"down":0,"first":114,"regressed":0,"m":0.1,"r":0.5,"st":0} -> {"v":1,"obs":116,"up":0,"down":0,"first":114,"regressed":0,"m":0.1,"r":0.5,"st":0}; BudgetRemaining: 15576923.05 -> 15230769.2; LastDisburseCycle: 116 -> 117
+INIT-006 unchanged
+INIT-007 unchanged
+INIT-008 unchanged
+INIT-010 unchanged
+INIT-012 unchanged
+INIT-014 unchanged
+== final sync from live
+RESULT check exit 0
+exit 0

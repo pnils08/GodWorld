@@ -25,10 +25,10 @@ pointers:
 
 | # | Task | Owner | Status |
 |---|------|-------|--------|
-| 1 | `resolveCouncilVote_`: an IND member the lead or opposition block already counted is not rolled again as a swing voter; OPP/CRC seats that are neither lead nor opposition vote at the unnamed-IND probability (mood + need), rolled after the IND loop. Tests `scripts/civicInitiativeVote.test.js` (11) | es | built, unbenched |
+| 1 | `resolveCouncilVote_`: an IND member the lead or opposition block already counted is not rolled again as a swing voter; OPP/CRC seats that are neither lead nor opposition vote at the unnamed-IND probability (mood + need), rolled after the IND loop. Tests `scripts/civicInitiativeVote.test.js` (11) | es | done `f99ad848a` |
 | 2 | Parity proof, old code vs new, same dice: OPP-led (CRC opposition, named swing), OPP-led blank opposition, school board — identical in 18,000 runs; IND-led blank opposition: 0 of 4,000 pass → 712 / 1,245 / 1,893 of 4,000 at mood −0.6 / 0 / +0.6 | es | done (scratch run, this session) |
-| 3 | Bench: SANDBOX 1004 on live-synced C116 state, a bench-only IND-led proposed row with a VoteCycle, fire C117, read the roll call (nine seats once, OPP seats voted) and the other rows unchanged | es | waiting on the shared sandbox |
-| 4 | PROD `clasp push` with the smoke-test note | es | after 3 |
+| 3 | Bench: SANDBOX 1004 on live-synced C116 state, a bench-only IND-led proposed row with a VoteCycle, fire C117, read the roll call (nine seats once, OPP seats voted) and the other rows unchanged | es | done: SANDBOX 1004 @215, fire C117 PASS; INIT-009/011/013 (IND) and INIT-015 (OPP control) each nine seats; others unchanged (DEPLOY_HISTORY §PROD stage 59) |
+| 4 | PROD `clasp push` with the smoke-test note | es | done: PROD stage 59 @194, built tree = benched manifest, pull-back identical |
 | 5 | Tracker restore of INIT-003, 006, 008–014 to the C114 natural path: 70 cells (63 + INIT-014's 7), written through the sheet library after Task 4 is live, each row read back; INIT-008 and 009 restored with VoteCycle blank; INIT-014's C116 vote voided; INIT-007's Status is not in it (not ruled). Cell list `output/engine-sheet/2026-11-19-tracker-restore/restoreCellList.dry.js` | es | cell list built and checked, read-only; writes after Task 4 |
 
 ## Acceptance
@@ -59,7 +59,7 @@ pointers:
 
 | # | Concept | Origin | What it adds | Status |
 |---|---|---|---|---|
-| N1 | `processOverrideVote_` has the same shape (lead + IND rolled again; a vetoed IND-led initiative cannot reach the 6 an override needs) | es · code read | a passed IND-led initiative that the mayor vetoes cannot be overridden | held for builder |
+| N1 | `processOverrideVote_` has the same shape (lead + IND rolled again; a vetoed IND-led initiative cannot reach the 6 an override needs) | es · code read | a passed IND-led initiative that the mayor vetoes cannot be overridden | held for builder — the bench showed it: INIT-009 passed 5-4 and the mayor vetoed it; the override cannot reach 6 |
 | N2 | `OppositionFaction` blank defaults to CRC even when the lead is CRC (a faction counted yes and no) | es · code read | no CRC-led row exists on the tracker today | held for builder |
 
 ## Open questions
@@ -68,5 +68,6 @@ pointers:
 
 ## Changelog
 
+- 2026-11-19 (es) — bench C117 PASS, PROD stage 59 @194 live; tracker restore next; override path (N1) is the builder's to rule before any IND-led vote is dated.
 - 2026-11-19 (es) — restore doc checked against sources, accurate bar one wording; builder approved B, C, D on that condition; 70-cell list built read-only; writes wait for the vote fix to be live.
 - 2026-11-19 (es) — plan written; Task 1 built and parity-proven; the bench waits on research-build's use of the sandbox.

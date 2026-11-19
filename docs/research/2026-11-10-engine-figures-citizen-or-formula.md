@@ -8,7 +8,7 @@ tags: [engine, cohesion, audit]
 
 # Engine figures: produced by citizens or by a formula (research.33)
 
-**Source:** a read-only pass over `phase01-config` … `phase11`, `utilities/` by an Explore agent, 2026-11-10, 98 tool calls; nothing was run. **Verdict: adopt** as the map for governance.60 and for the rebuild order. **Ignited plans:** [[../plans/2026-11-10-cohesion-loop]], [[../archive/plans/2026-11-10-stop-puppeting-the-newsroom]].
+**Source:** a read-only pass over `phase01-config` … `phase11`, `utilities/` by an Explore agent, 2026-11-10, 98 tool calls; nothing was run. **Verdict: adopt** as the map for governance.60 and for the rebuild order. **Ignited plans:** [[../plans/2026-11-10-cohesion-loop]], the stop-puppeting plan (deleted 2026-11-18).
 
 **Why:** builder 2026-11-10 — "I'll never get what I'm asking for until the engine loops a city and no ledger is running off hardcoded numbers".
 

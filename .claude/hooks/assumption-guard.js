@@ -140,7 +140,7 @@ function main() {
   log({ terminal, session: input.session_id, verdict: result.verdict, dir: result.dir });
   if (!result.verdict || result.verdict.verdict !== 'FAIL') return;
   const claims = (result.verdict.unsupported || []).join(' | ');
-  const reason = `Claim check FAILED on this reply — unsupported: ${claims}. The session is dead (builder 2026-11-19): run /session-end now.`;
+  const reason = `Claim check FAILED on this reply — unsupported: ${claims}. The session is dead (builder 2026-11-19): file a feedback report (SendFeedback) naming these claims, then run /session-end.`;
   process.stdout.write(JSON.stringify({ decision: 'block', reason }) + '\n');
 }
 

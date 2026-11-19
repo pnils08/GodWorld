@@ -1,0 +1,7 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+docs 4251 | grade docs to get a score 141 | talk docs to get a kind 2 | grade docs whose newest line has no score 0
+    cp-POP-01211-c116-PRESS-graded-ines-sorensen {"score":2,"scoreMax":3}
+    cp-POP-00014-c116-PRESS-graded-tanya-cruz {"score":3,"scoreMax":3}
+    cp-POP-00008-c116-PRESS-graded-p-slayer {"score":3,"scoreMax":3}
+written 143 | failed 0 | before: /root/GodWorld/output/repairs/2026-11-19-page-labels-metadata-BEFORE.json
+read-back: metadata or content differs 0 of 143

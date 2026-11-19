@@ -1,0 +1,2843 @@
+{
+ "at": "2026-11-19T22:23:18.532Z",
+ "entries": [
+  {
+   "id": "pts3BsBj3UoF6r8FHU5nkZ",
+   "customId": "cp-POP-01211-c116-PRESS-graded-ines-sorensen",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-01211",
+    "cycle": 116,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Flat",
+    "event": "Media",
+    "ask": "You filed a story for the Tribune: graded: 2/3 — The piece fails to present every citizen's verbatim line before their n",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 2,
+    "scoreMax": 3
+   },
+   "content": "2/3 — The piece fails to present every citizen's verbatim line before their name and adds extensive commentary rather than keeping the frame short and plain."
+  },
+  {
+   "id": "ostdkxeGJrgA6pAtsX12Ti",
+   "customId": "cp-POP-00014-c116-PRESS-graded-tanya-cruz",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00014",
+    "cycle": 116,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/3 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 3
+   },
+   "content": "3/3 — nothing fell short"
+  },
+  {
+   "id": "LjAV4k7wogLFam7jrS4ByV",
+   "customId": "cp-POP-00008-c116-PRESS-graded-p-slayer",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00008",
+    "cycle": 116,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Flat",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/3 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 3
+   },
+   "content": "3/3 — nothing fell short"
+  },
+  {
+   "id": "vdF1NonmPkX9X2N85eeBZ1",
+   "customId": "cp-POP-00166-c116-PRESS-graded-elliot-marbury",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00166",
+    "cycle": 116,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Flat",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/3 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 3
+   },
+   "content": "3/3 — nothing fell short"
+  },
+  {
+   "id": "efJUV65pHbz5vXEYPNuvRY",
+   "customId": "cp-POP-00157-c116-PRESS-graded-noah-tan",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00157",
+    "cycle": 116,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Flat",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/3 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 3
+   },
+   "content": "3/3 — nothing fell short"
+  },
+  {
+   "id": "YnneZrmUiurH154DoebrHm",
+   "customId": "cp-POP-00799-c116-PRESS-graded-freelance-firebrand",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00799",
+    "cycle": 116,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Flat",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/3 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 3
+   },
+   "content": "3/3 — nothing fell short"
+  },
+  {
+   "id": "pj34njF1NAgxywtedC44DX",
+   "customId": "cp-POP-00591-c116-PRESS-graded-selena-grant",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00591",
+    "cycle": 116,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Flat",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/3 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 3
+   },
+   "content": "3/3 — nothing fell short"
+  },
+  {
+   "id": "M6GvrikNkRiyGWE8yphg2J",
+   "customId": "cp-POP-00156-c116-PRESS-graded-angela-reyes",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00156",
+    "cycle": 116,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Flat",
+    "event": "Career",
+    "ask": "You filed a story for the Tribune: graded: 2/3 — The opening paragraph begins with character color rather than a packet-",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 2,
+    "scoreMax": 3
+   },
+   "content": "2/3 — The opening paragraph begins with character color rather than a packet-backed school, youth-program, apprenticeship, or continuity fact."
+  },
+  {
+   "id": "spNdiXwnYVK6kpaRDakQ1j",
+   "customId": "cp-POP-00057-c116-PRESS-graded-rachel-torres",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00057",
+    "cycle": 116,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/3 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 3
+   },
+   "content": "3/3 — nothing fell short"
+  },
+  {
+   "id": "h8RKKpYxeSZULS7eughVwY",
+   "customId": "cp-POP-00636-c116-PRESS-graded-luis-navarro",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00636",
+    "cycle": 116,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Flat",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/3 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 3
+   },
+   "content": "3/3 — nothing fell short"
+  },
+  {
+   "id": "KTV6G7u88bGYiaT5pG7shg",
+   "customId": "cp-POP-01076-c116-PRESS-graded-nia-rook",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-01076",
+    "cycle": 116,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Flat",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/3 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 3
+   },
+   "content": "3/3 — nothing fell short"
+  },
+  {
+   "id": "Ni3mbVy8CKPViudFgf6bEJ",
+   "customId": "cp-POP-01210-c116-PRESS-graded-tamsin-pruitt",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-01210",
+    "cycle": 116,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Flat",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/3 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 3
+   },
+   "content": "3/3 — nothing fell short"
+  },
+  {
+   "id": "nmG8XEu3MB46e6b5YykrgW",
+   "customId": "cp-POP-00017-c116-PRESS-graded-anthony-raines",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00017",
+    "cycle": 116,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/3 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 3
+   },
+   "content": "3/3 — nothing fell short"
+  },
+  {
+   "id": "bbmJBFzMyNcPAHqo8tGhuR",
+   "customId": "cp-POP-00155-c116-PRESS-graded-trevor-shimizu",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00155",
+    "cycle": 116,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/3 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 3
+   },
+   "content": "3/3 — nothing fell short"
+  },
+  {
+   "id": "7NH64nqAxHcAMngVHtPND4",
+   "customId": "cp-POP-00154-c116-PRESS-graded-lila-mezran",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00154",
+    "cycle": 116,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/3 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 3
+   },
+   "content": "3/3 — nothing fell short"
+  },
+  {
+   "id": "p41LEYCPkbyHCyYpqHrQ3A",
+   "customId": "cp-POP-00153-c116-PRESS-graded-business-desk",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00153",
+    "cycle": 116,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/3 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 3
+   },
+   "content": "3/3 — nothing fell short"
+  },
+  {
+   "id": "ur87iPCtZZi6eLmzXykvMh",
+   "customId": "cp-POP-00011-c116-PRESS-graded-carmen-delaine",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00011",
+    "cycle": 116,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/3 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 3
+   },
+   "content": "3/3 — nothing fell short"
+  },
+  {
+   "id": "TRjeRpGotCEh3BwhRxtayN",
+   "customId": "cp-POP-00017-c115-PRESS-graded-anthony-raines",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00017",
+    "cycle": 115,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/3 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 3
+   },
+   "content": "3/3 — nothing fell short"
+  },
+  {
+   "id": "c7SXznBkEf7jpuNEH7cFVK",
+   "customId": "cp-POP-01076-c115-PRESS-graded-nia-rook-weekly",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-01076",
+    "cycle": 115,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/3 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 3
+   },
+   "content": "3/3 — nothing fell short"
+  },
+  {
+   "id": "2gwyBemTHzHmWguzQLkxv3",
+   "customId": "cp-POP-00164-c115-PRESS-graded-celeste-tran",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00164",
+    "cycle": 115,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/3 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 3
+   },
+   "content": "3/3 — nothing fell short"
+  },
+  {
+   "id": "ack6eexdVTTEBSuqq9QF9m",
+   "customId": "cp-POP-00013-c115-PRESS-graded-maria-keen",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00013",
+    "cycle": 115,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/3 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 3
+   },
+   "content": "3/3 — nothing fell short"
+  },
+  {
+   "id": "1uBXvzaeR8SWEVWUqmgBFQ",
+   "customId": "cp-POP-00159-c115-PRESS-graded-sharon-okafor",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00159",
+    "cycle": 115,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Calm",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 1/3 — The piece does not open with a venue, location, and condition, nor does",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 1,
+    "scoreMax": 3
+   },
+   "content": "1/3 — The piece does not open with a venue, location, and condition, nor does it frame a venue condition as a behavior question."
+  },
+  {
+   "id": "z94MvwN4oeobgvo7eMJfox",
+   "customId": "cp-POP-00158-c115-PRESS-graded-kai-marston",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00158",
+    "cycle": 115,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/3 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 3
+   },
+   "content": "3/3 — nothing fell short"
+  },
+  {
+   "id": "V5CUMNveb9HKPS3daYk1N3",
+   "customId": "cp-POP-00160-c115-PRESS-graded-mason-ortega",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00160",
+    "cycle": 115,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Calm",
+    "event": "Media",
+    "ask": "You filed a story for the Tribune: graded: 2/3 — The piece invents individual workers, shifts, and direct quotes rather ",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 2,
+    "scoreMax": 3
+   },
+   "content": "2/3 — The piece invents individual workers, shifts, and direct quotes rather than treating the signal without inventing personnel or workplace conditions."
+  },
+  {
+   "id": "ygUuupxhivxiGw2n8kHQua",
+   "customId": "cp-POP-00592-c115-PRESS-graded-talia-finch",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00592",
+    "cycle": 115,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Frustrated",
+    "event": "Media",
+    "ask": "You filed a story for the Tribune: graded: 2/3 — The piece quotes postgame player remarks rather than letting the people",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 2,
+    "scoreMax": 3
+   },
+   "content": "2/3 — The piece quotes postgame player remarks rather than letting the people in the room speak on what the city thinks of the franchise."
+  },
+  {
+   "id": "yyNzRg3b6quu578XojEEtM",
+   "customId": "cp-POP-00007-c115-PRESS-graded-hal-richmond",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00007",
+    "cycle": 115,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Frustrated",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 1/3 — The opening paragraph does not establish the ground the man came from, ",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 1,
+    "scoreMax": 3
+   },
+   "content": "1/3 — The opening paragraph does not establish the ground the man came from, and the piece omits his own recorded words."
+  },
+  {
+   "id": "Cr4wBhthQBU4cmNkTkMVyt",
+   "customId": "cp-POP-00016-c115-PRESS-graded-simon-leary",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00016",
+    "cycle": 115,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Frustrated",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 1/3 — The opening focuses on Hayward rather than the present sports structure",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 1,
+    "scoreMax": 3
+   },
+   "content": "1/3 — The opening focuses on Hayward rather than the present sports structure, and the essay fails to interpret the structure as civic architecture."
+  },
+  {
+   "id": "UYU1s3u2LQZvbTyNfovVNc",
+   "customId": "cp-POP-00012-c115-PRESS-graded-elliot-graye",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00012",
+    "cycle": 115,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/3 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 3
+   },
+   "content": "3/3 — nothing fell short"
+  },
+  {
+   "id": "45qjs87R5TjPHiLJSWuYek",
+   "customId": "cp-POP-01211-c115-PRESS-graded-ines-sorensen",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-01211",
+    "cycle": 115,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Calm",
+    "event": "Media",
+    "ask": "You filed a story for the Tribune: graded: 2/3 — The piece includes quotes given to reporters and editorial commentary a",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 2,
+    "scoreMax": 3
+   },
+   "content": "2/3 — The piece puts names and reporter commentary before citizen quotes rather than leading with their lines and keeping the frame minimal.\n\n---\n\n3/3 — nothing fell short\n\n---\n\n3/3 — nothing fell short\n\n---\n\n3/3 — nothing fell short\n\n---\n\n2/3 — The piece includes quotes given to reporters and editorial commentary about past coverage rather than strictly carrying what citizens wrote on their own pages."
+  },
+  {
+   "id": "sqq4xsH88HYk478P1wuZx5",
+   "customId": "cp-POP-00014-c115-PRESS-graded-tanya-cruz",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00014",
+    "cycle": 115,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/3 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 3
+   },
+   "content": "3/3 — nothing fell short"
+  },
+  {
+   "id": "eFmwfcUhTDN5wKcggFcfcb",
+   "customId": "cp-POP-00008-c115-PRESS-graded-p-slayer",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00008",
+    "cycle": 115,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/3 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 3
+   },
+   "content": "3/3 — nothing fell short"
+  },
+  {
+   "id": "r411go79nQWTZtnxaufdym",
+   "customId": "cp-POP-00166-c115-PRESS-graded-elliot-marbury",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00166",
+    "cycle": 115,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/3 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 3
+   },
+   "content": "3/3 — nothing fell short"
+  },
+  {
+   "id": "gvQBVK8Wv1BgipCpFvqHsZ",
+   "customId": "cp-POP-00157-c115-PRESS-graded-noah-tan",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00157",
+    "cycle": 115,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Calm",
+    "event": "Background",
+    "ask": "You filed a story for the Tribune: graded: 2/3 — The piece falls short of the 400-word minimum target.",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 2,
+    "scoreMax": 3
+   },
+   "content": "2/3 — The piece falls short of the 400-word minimum target."
+  },
+  {
+   "id": "udxouQfxb8QeNzVRbTs8xY",
+   "customId": "cp-POP-00799-c115-PRESS-graded-freelance-firebrand",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00799",
+    "cycle": 115,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/3 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 3
+   },
+   "content": "3/3 — nothing fell short"
+  },
+  {
+   "id": "D46RSpreRoCoePUhHKTXaP",
+   "customId": "cp-POP-01076-c115-PRESS-graded-nia-rook",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-01076",
+    "cycle": 115,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/3 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 3
+   },
+   "content": "4/4 — nothing fell short\n\n---\n\n3/3 — nothing fell short\n\n---\n\n3/3 — nothing fell short\n\n---\n\n3/3 — nothing fell short"
+  },
+  {
+   "id": "E2yxCUPTRFf3JD89dNMLdF",
+   "customId": "cp-POP-00591-c115-PRESS-graded-selena-grant",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00591",
+    "cycle": 115,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "LPE2KRdMdzpP5qK6fFRk9Q",
+   "customId": "cp-POP-00156-c115-PRESS-graded-angela-reyes",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00156",
+    "cycle": 115,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Calm",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/4 — The opening paragraph opens with a narrative scene rather than a packet",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 4
+   },
+   "content": "3/4 — The opening paragraph opens with a narrative scene rather than a packet-backed school, youth-program, apprenticeship, or continuity fact."
+  },
+  {
+   "id": "73jsmW6g8hsz8yB5qpwEt9",
+   "customId": "cp-POP-00057-c115-PRESS-graded-rachel-torres",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00057",
+    "cycle": 115,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "abfcZnwtV4HChKHbKM3zTH",
+   "customId": "cp-POP-00636-c115-PRESS-graded-luis-navarro",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00636",
+    "cycle": 115,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "VJrrUQB5akvQasXjH7TktT",
+   "customId": "cp-POP-01210-c115-PRESS-graded-tamsin-pruitt",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-01210",
+    "cycle": 115,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/3 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 3
+   },
+   "content": "4/4 — nothing fell short\n\n---\n\n3/3 — nothing fell short\n\n---\n\n3/3 — nothing fell short\n\n---\n\n3/3 — nothing fell short"
+  },
+  {
+   "id": "KnV5xsUEeQNoSAPoKhB5uw",
+   "customId": "cp-POP-00155-c115-PRESS-graded-trevor-shimizu",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00155",
+    "cycle": 115,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "N1TmvnYvKViEK5PCr349YP",
+   "customId": "cp-POP-00154-c115-PRESS-graded-lila-mezran",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00154",
+    "cycle": 115,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Calm",
+    "event": "Career",
+    "ask": "You filed a story for the Tribune: graded: 3/4 — The opening begins with an anecdotal feature hook about a plumber rathe",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 4
+   },
+   "content": "3/4 — The opening begins with an anecdotal feature hook about a plumber rather than a health-service, access, place, or implementation fact."
+  },
+  {
+   "id": "iBDXxfqSeuEh5vSEDMaPdu",
+   "customId": "cp-POP-00153-c115-PRESS-graded-business-desk",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00153",
+    "cycle": 115,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "vXyTZG7vmzdXR9KoEzmBVM",
+   "customId": "cp-POP-00011-c115-PRESS-graded-carmen-delaine",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00011",
+    "cycle": 115,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "NZZVv4EMqe2uc49qqYBm2b",
+   "customId": "cp-POP-01076-c114-PRESS-graded-nia-rook-weekly",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-01076",
+    "cycle": 114,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "82Lnkw6CZuam6SMjr7JaT1",
+   "customId": "cp-POP-00164-c114-PRESS-graded-celeste-tran",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00164",
+    "cycle": 114,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "18PvUKZNd488ybDLBEREYG",
+   "customId": "cp-POP-00013-c114-PRESS-graded-maria-keen",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00013",
+    "cycle": 114,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "UPBXcbKyNaPDbMefXP6NZV",
+   "customId": "cp-POP-00159-c114-PRESS-graded-sharon-okafor",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00159",
+    "cycle": 114,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Calm",
+    "event": "Media",
+    "ask": "You filed a story for the Tribune: graded: 1/4 — The piece addresses a person's fading fame rather than opening with and",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 1,
+    "scoreMax": 4
+   },
+   "content": "1/4 — The piece addresses a person's fading fame rather than opening with and framing a Packet-supplied venue condition."
+  },
+  {
+   "id": "KP9BzqpGmpTete6QuNbfrK",
+   "customId": "cp-POP-00158-c114-PRESS-graded-kai-marston",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00158",
+    "cycle": 114,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "iEmn6s7Q8bp14xnPmz9hxy",
+   "customId": "cp-POP-00160-c114-PRESS-graded-mason-ortega",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00160",
+    "cycle": 114,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Calm",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 2/4 — The opening introduces two restaurants rather than one, and the closing",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 2,
+    "scoreMax": 4
+   },
+   "content": "3/4 — The closing asks general workplace questions rather than identifying the worker or operating account still needed.\n\n---\n\n2/4 — The opening introduces two restaurants rather than one, and the closing asks broad questions instead of identifying the worker or operating account still needed."
+  },
+  {
+   "id": "GDRA5TBtd3xBBiYc1wXcgV",
+   "customId": "cp-POP-00592-c114-PRESS-graded-talia-finch",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00592",
+    "cycle": 114,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "fyAWZCih1kZw5r9t2GBbs3",
+   "customId": "cp-POP-00007-c114-PRESS-graded-hal-richmond",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00007",
+    "cycle": 114,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Calm",
+    "event": "Background",
+    "ask": "You filed a story for the Tribune: graded: 3/4 — The opening paragraph delivers the present fact but does not establish ",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 4
+   },
+   "content": "3/4 — The opening paragraph delivers the present fact but does not establish the ground the man came from."
+  },
+  {
+   "id": "7y7CWdsrjPo8zqYQerJg7B",
+   "customId": "cp-POP-00016-c114-PRESS-graded-simon-leary",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00016",
+    "cycle": 114,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Frustrated",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 2/4 — The opening paragraph does not open with the supplied present structure",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 2,
+    "scoreMax": 4
+   },
+   "content": "2/4 — The opening paragraph does not open with the supplied present structure, and the piece falls short of the target word count."
+  },
+  {
+   "id": "KzkL7fpJieDd1y34E3A87P",
+   "customId": "cp-POP-00012-c114-PRESS-graded-elliot-graye",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00012",
+    "cycle": 114,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "8u9Hdu7H66QKd5ogCp5Gwn",
+   "customId": "cp-POP-00001-c114-DISCORD-talk-202611050818",
+   "metadataBefore": {
+    "type": "talk",
+    "popId": "POP-00001",
+    "cycle": 114,
+    "daypart": "DISCORD",
+    "terminal": "engine/sheet"
+   },
+   "add": {
+    "kind": "talk"
+   },
+   "content": "The sentences that stuck with me were the ones about the half-second at contact and the sound cutting out, not the parade or the plaque. The kid's clean swing was the only thing I noticed beyond that, and I'm not sure yet what it means."
+  },
+  {
+   "id": "DbD5P28GooPVJsVxJQivju",
+   "customId": "cp-POP-01211-c114-PRESS-graded-ines-sorensen",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-01211",
+    "cycle": 114,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short\n\n---\n\n3/4 — The piece introduces Ingmar Jordan before his quote rather than placing the line first, and includes commentary beyond framing what citizens wrote.\n\n---\n\n3/4 — The piece adds editorial summary and comparison across the speakers, violating the requirement of nothing paraphrased and nothing added.\n\n---\n\n3/4 — The fourth entry places Omar Amici's name and frame before his words and includes an editorial summary paragraph between entries.\n\n---\n\n4/4 — nothing fell short"
+  },
+  {
+   "id": "wwBSthveoG4oQavQRmncJS",
+   "customId": "cp-POP-00014-c114-PRESS-graded-tanya-cruz",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00014",
+    "cycle": 114,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Calm",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 2/4 — The opening sets a scene rather than leading with a sports fact, and th",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 2,
+    "scoreMax": 4
+   },
+   "content": "2/4 — The opening sets a scene rather than leading with a sports fact, and the closing ends on a rhetorical question instead of identifying the access or observation still needed."
+  },
+  {
+   "id": "zLK7gLKuL23VRwpguEhWJY",
+   "customId": "cp-POP-00008-c114-PRESS-graded-p-slayer",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00008",
+    "cycle": 114,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "5extwR91vKntQxfPw1stfR",
+   "customId": "cp-POP-00166-c114-PRESS-graded-elliot-marbury",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00166",
+    "cycle": 114,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "465aQppB36n36LTo9JWm69",
+   "customId": "cp-POP-00157-c114-PRESS-graded-noah-tan",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00157",
+    "cycle": 114,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "o6ASaQpuqXiAKf2VMdh2FA",
+   "customId": "cp-POP-00799-c114-PRESS-graded-freelance-firebrand",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00799",
+    "cycle": 114,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "uRQnKUFZUot8nWdjch25Ke",
+   "customId": "cp-POP-00591-c114-PRESS-graded-selena-grant",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00591",
+    "cycle": 114,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "Csj9heYPWfv5izDWu2D8R5",
+   "customId": "cp-POP-00156-c114-PRESS-graded-angela-reyes",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00156",
+    "cycle": 114,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Calm",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 2/4 — The opening paragraph begins with narrative scene-setting rather than a",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 2,
+    "scoreMax": 4
+   },
+   "content": "2/4 — The opening paragraph begins with narrative scene-setting rather than a Packet-backed school, youth-program, apprenticeship, or continuity fact, and the piece falls short of the target word count."
+  },
+  {
+   "id": "rAoa1YU86xxHzNH2ba5UTg",
+   "customId": "cp-POP-00057-c114-PRESS-graded-rachel-torres",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00057",
+    "cycle": 114,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "TNEFm6KuwuFpbhqyP1g2ZV",
+   "customId": "cp-POP-00636-c114-PRESS-graded-luis-navarro",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00636",
+    "cycle": 114,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "3/4 — The opening leads with narrative framing rather than the strongest Packet-backed fact followed by the unresolved question.\n\n---\n\n4/4 — nothing fell short"
+  },
+  {
+   "id": "s2yhaXn3FGieh6Xf88RZCz",
+   "customId": "cp-POP-01076-c114-PRESS-graded-nia-rook",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-01076",
+    "cycle": 114,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "5fYuki9VpEj1u5M5nGbhEn",
+   "customId": "cp-POP-01210-c114-PRESS-graded-tamsin-pruitt",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-01210",
+    "cycle": 114,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short\n\n---\n\n3/4 — The piece ends with a roundup paragraph summarizing all persons rather than concluding directly on the last person's passage.\n\n---\n\n4/4 — nothing fell short"
+  },
+  {
+   "id": "Pd7ofa33h8mwhif4AhdV6B",
+   "customId": "cp-POP-00017-c114-PRESS-graded-anthony-raines",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00017",
+    "cycle": 114,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "Rcswtm5PxZ5oPhJr5vMq5d",
+   "customId": "cp-POP-00155-c114-PRESS-graded-trevor-shimizu",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00155",
+    "cycle": 114,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "Qo3gJAX7GMrqpPLgceW2Vs",
+   "customId": "cp-POP-00154-c114-PRESS-graded-lila-mezran",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00154",
+    "cycle": 114,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Calm",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 2/4 — The opening paragraph begins with a resident profile rather than a Pack",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 2,
+    "scoreMax": 4
+   },
+   "content": "2/4 — The opening paragraph begins with a resident profile rather than a Packet-backed fact, and the text falls short of the 1000-word target."
+  },
+  {
+   "id": "fyeXuUHkU3LHGEWonZMnMc",
+   "customId": "cp-POP-00153-c114-PRESS-graded-business-desk",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00153",
+    "cycle": 114,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "KkYert78bhCxwRNcKwygWZ",
+   "customId": "cp-POP-00011-c114-PRESS-graded-carmen-delaine",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00011",
+    "cycle": 114,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "DEBVd1eHcUdycWAqS3nN97",
+   "customId": "cp-POP-00001-c114-DISCORD-talk-202611040637",
+   "metadataBefore": {
+    "type": "talk",
+    "popId": "POP-00001",
+    "cycle": 114,
+    "daypart": "DISCORD",
+    "terminal": "engine/sheet"
+   },
+   "add": {
+    "kind": "talk"
+   },
+   "content": "I wasn't sure where the talk was going, but I kept coming back to how easily everyone assumed the ending was already written, when I still haven't decided anything for myself."
+  },
+  {
+   "id": "EEGPPrknvdwW4v1gpz4oGj",
+   "customId": "cp-POP-00008-c113-PRESS-graded-p-slayer",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00008",
+    "cycle": 113,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Calm",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/4 — The closing ends on a flat rhetorical question rather than a dare, conf",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 4
+   },
+   "content": "3/4 — The closing ends on a flat rhetorical question rather than a dare, confession, or live-friction update."
+  },
+  {
+   "id": "LTZyRQzogo8JfBPhgjZ8AS",
+   "customId": "cp-POP-01076-c113-PRESS-graded-nia-rook-weekly",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-01076",
+    "cycle": 113,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "2AXspAVYFmjYsyYm7qhQaJ",
+   "customId": "cp-POP-00164-c113-PRESS-graded-celeste-tran",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00164",
+    "cycle": 113,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Calm",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/4 — The closing trails off into a rhetorical question rather than stating t",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 4
+   },
+   "content": "3/4 — The closing trails off into a rhetorical question rather than stating the pattern's implication about the city's mood."
+  },
+  {
+   "id": "npW9uVSmSsB8nybkZkWdto",
+   "customId": "cp-POP-00013-c113-PRESS-graded-maria-keen",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00013",
+    "cycle": 113,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "kfkqD9L9KudSHY788AuBkw",
+   "customId": "cp-POP-00159-c113-PRESS-graded-sharon-okafor",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00159",
+    "cycle": 113,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Calm",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 2/4 — The opening fails to name a specific venue and its condition, focusing ",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 2,
+    "scoreMax": 4
+   },
+   "content": "2/4 — The opening fails to name a specific venue and its condition, focusing instead on personal reputations."
+  },
+  {
+   "id": "oMCW156ZLpdTMHrSFnaUn1",
+   "customId": "cp-POP-00158-c113-PRESS-graded-kai-marston",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00158",
+    "cycle": 113,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "cs8xZweRdBB5eaX8gQHycA",
+   "customId": "cp-POP-00160-c113-PRESS-graded-mason-ortega",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00160",
+    "cycle": 113,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Frustrated",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 2/4 — The closing does not name the worker or operating account still needed,",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 2,
+    "scoreMax": 4
+   },
+   "content": "2/4 — The closing does not name the worker or operating account still needed, and the piece falls short of the target word count."
+  },
+  {
+   "id": "WNxmcobxRnnyYyuWtCGHfM",
+   "customId": "cp-POP-00592-c113-PRESS-graded-talia-finch",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00592",
+    "cycle": 113,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "oSpvGDikRQNUgcMkquERR1",
+   "customId": "cp-POP-00007-c113-PRESS-graded-hal-richmond",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00007",
+    "cycle": 113,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Calm",
+    "event": "Career",
+    "ask": "You filed a story for the Tribune: graded: 3/4 — The opening paragraph presents the present fact but omits the ground th",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 4
+   },
+   "content": "3/4 — The opening paragraph presents the present fact but omits the ground the man came from."
+  },
+  {
+   "id": "gpTrT93Nd7ULmiUsrm8unJ",
+   "customId": "cp-POP-00016-c113-PRESS-graded-simon-leary",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00016",
+    "cycle": 113,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Frustrated",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/4 — The piece falls short of the 450-word target.",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 4
+   },
+   "content": "3/4 — The piece falls short of the 450-word target."
+  },
+  {
+   "id": "crLA3oTuTPJpLhtHoWaNVv",
+   "customId": "cp-POP-00012-c113-PRESS-graded-elliot-graye",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00012",
+    "cycle": 113,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "ZqRLVBSYZ91iFy6FbiTZ24",
+   "customId": "cp-POP-01211-c113-PRESS-graded-ines-sorensen",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-01211",
+    "cycle": 113,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Calm",
+    "event": "Media",
+    "ask": "You filed a story for the Tribune: graded: 3/4 — The names and framing precede the quotes for Omar Amici and Dax Monroe ",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short\n\n---\n\n3/4 — The piece ends on an attribution line rather than leaving the final speaker's own words standing as the closing.\n\n---\n\n2/4 — The piece fell short of the 300-word minimum and ended on an attribution frame rather than leaving the last person's words standing.\n\n---\n\n2/4 — The piece includes editorializing and a summary of what the voices add up to, rather than leaving the citizen's verbatim words standing alone with nothing added or paraphrased.\n\n---\n\n3/4 — The names and framing precede the quotes for Omar Amici and Dax Monroe instead of putting the line first, and the quotes were gathered by reporter questions rather than drawn from what citizens wrote on their own pages."
+  },
+  {
+   "id": "cGBomJMRpEcNqGRfi34J5S",
+   "customId": "cp-POP-00014-c113-PRESS-graded-tanya-cruz",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00014",
+    "cycle": 113,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "VocPqPnZs3QwpQJrT4yiph",
+   "customId": "cp-POP-00166-c113-PRESS-graded-elliot-marbury",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00166",
+    "cycle": 113,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "sktn8FHDG2sjqUHiwmmBFa",
+   "customId": "cp-POP-00157-c113-PRESS-graded-noah-tan",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00157",
+    "cycle": 113,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "fJY6HV9CNUXF4C8JkJ4csa",
+   "customId": "cp-POP-00799-c113-PRESS-graded-freelance-firebrand",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00799",
+    "cycle": 113,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "Aj4K47RXU3HwxeB8rPj8ys",
+   "customId": "cp-POP-01076-c113-PRESS-graded-nia-rook",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-01076",
+    "cycle": 113,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "3/4 — The piece falls short of the 350-word minimum target.\n\n---\n\n4/4 — nothing fell short\n\n---\n\n4/4 — nothing fell short\n\n---\n\n4/4 — nothing fell short"
+  },
+  {
+   "id": "p6h7drGrD3HB1htUWEPyRB",
+   "customId": "cp-POP-00591-c113-PRESS-graded-selena-grant",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00591",
+    "cycle": 113,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "88eoG7UcYwznxaJQXQTr1u",
+   "customId": "cp-POP-00156-c113-PRESS-graded-angela-reyes",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00156",
+    "cycle": 113,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Frustrated",
+    "event": "Career",
+    "ask": "You filed a story for the Tribune: graded: 1/4 — The piece opens on character narrative rather than a Packet-backed fact",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 1,
+    "scoreMax": 4
+   },
+   "content": "1/4 — The piece opens on character narrative rather than a Packet-backed fact, covers neighborhood stagnation rather than translating an initiative into program stability, and falls short of the word count."
+  },
+  {
+   "id": "kvnMs7p3XdS7JjyhArbSPQ",
+   "customId": "cp-POP-00057-c113-PRESS-graded-rachel-torres",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00057",
+    "cycle": 113,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "6sCnGHz2itT3V9SGGvLN58",
+   "customId": "cp-POP-00636-c113-PRESS-graded-luis-navarro",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00636",
+    "cycle": 113,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "KHR1u7kX6AUtpARe76dZnH",
+   "customId": "cp-POP-00154-c113-PRESS-graded-lila-mezran",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00154",
+    "cycle": 113,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "EJBh4YqipnEuzLTjheo7Vn",
+   "customId": "cp-POP-01210-c113-PRESS-graded-tamsin-pruitt",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-01210",
+    "cycle": 113,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "2/4 — The piece falls short of the 450-word minimum target and ends with a multi-person roundup rather than concluding on the final person's passage.\n\n---\n\n4/4 — nothing fell short\n\n---\n\n4/4 — nothing fell short\n\n---\n\n4/4 — nothing fell short\n\n---\n\n4/4 — nothing fell short"
+  },
+  {
+   "id": "6AH1ZCfSaxdF1EqHRacsYR",
+   "customId": "cp-POP-00017-c113-PRESS-graded-anthony-raines",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00017",
+    "cycle": 113,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "391PhTPTRFiLVsUUdkJUwy",
+   "customId": "cp-POP-00155-c113-PRESS-graded-trevor-shimizu",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00155",
+    "cycle": 113,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "Ft2uzEXoWyiiegytBHNj8w",
+   "customId": "cp-POP-00153-c113-PRESS-graded-business-desk",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00153",
+    "cycle": 113,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "ipmDqDEAqv2MFbs7jND4Ev",
+   "customId": "cp-POP-00011-c113-PRESS-graded-carmen-delaine",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00011",
+    "cycle": 113,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "ZiCz2yPXssJ9e7bdvmgNdm",
+   "customId": "cp-POP-00007-c112-PRESS-graded-hal-richmond",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00007",
+    "cycle": 112,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "ff4ATJwNH8CL7iJWM4YfJf",
+   "customId": "cp-POP-01076-c112-PRESS-graded-nia-rook-weekly",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-01076",
+    "cycle": 112,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Frustrated",
+    "event": "Career",
+    "ask": "You filed a story for the Tribune: graded: 1/4 — The piece fell short of the 350-word minimum, derailed into out-of-worl",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 1,
+    "scoreMax": 4
+   },
+   "content": "1/4 — The piece fell short of the 350-word minimum, derailed into out-of-world civilian dialogue rather than a full leaderboard digest, and ended on a prompt question instead of setting up who the city watches next."
+  },
+  {
+   "id": "fWxekkwTwkvDvettKXVFLm",
+   "customId": "cp-POP-00164-c112-PRESS-graded-celeste-tran",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00164",
+    "cycle": 112,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "H1Qn5HuQcymG5THNJShRc9",
+   "customId": "cp-POP-00013-c112-PRESS-graded-maria-keen",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00013",
+    "cycle": 112,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "5KZEyVKCF7LzyhiTSmJcQk",
+   "customId": "cp-POP-00159-c112-PRESS-graded-sharon-okafor",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00159",
+    "cycle": 112,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Calm",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 2/4 — The piece focuses on Lena Cross's fading fame rather than introducing a",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 2,
+    "scoreMax": 4
+   },
+   "content": "2/4 — The piece focuses on Lena Cross's fading fame rather than introducing and framing a Packet-named venue, location, and condition."
+  },
+  {
+   "id": "JNwwtMJXLUV6yCs2iUz7Co",
+   "customId": "cp-POP-00158-c112-PRESS-graded-kai-marston",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00158",
+    "cycle": 112,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "LMoHibryZFKy5GXaEFUawS",
+   "customId": "cp-POP-00160-c112-PRESS-graded-mason-ortega",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00160",
+    "cycle": 112,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Calm",
+    "event": "Background",
+    "ask": "You filed a story for the Tribune: graded: 3/4 — The piece invents specific workers, shifts, service states, and quotes ",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 4
+   },
+   "content": "3/4 — The piece invents specific workers, shifts, service states, and quotes rather than treating the signal without invented labor details."
+  },
+  {
+   "id": "gTv1LKWdBAruUXSRAFtRx9",
+   "customId": "cp-POP-00592-c112-PRESS-graded-talia-finch",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00592",
+    "cycle": 112,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "4a6DyR8DrxGodQ4GeAS8xm",
+   "customId": "cp-POP-00016-c112-PRESS-graded-simon-leary",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00016",
+    "cycle": 112,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "G8TQW2KqWr2WCWLCk7S9Gd",
+   "customId": "cp-POP-00012-c112-PRESS-graded-elliot-graye",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00012",
+    "cycle": 112,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "dmvUQNDh7gKt47pz5A7apV",
+   "customId": "cp-POP-01076-c112-PRESS-graded-nia-rook",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-01076",
+    "cycle": 112,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Calm",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/4 — The piece falls short of the 350-word minimum target.",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 4
+   },
+   "content": "2/4 — The piece falls below the 350-word minimum and ends on a vague meta-reference rather than a specific sentence for hallways to argue about.\n\n---\n\n3/4 — The piece is under the 350-word minimum target.\n\n---\n\n3/4 — The piece falls short of the 350-word minimum target."
+  },
+  {
+   "id": "zpSCVeErjX6UWjPCCjN9rx",
+   "customId": "cp-POP-01211-c112-PRESS-graded-ines-sorensen",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-01211",
+    "cycle": 112,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "3/4 — The piece falls short of the 300-word minimum target.\n\n---\n\n4/4 — nothing fell short\n\n---\n\n2/4 — The piece fell short of the 300-word minimum and ended on an attribution line rather than leaving the speaker's own words standing.\n\n---\n\n4/4 — nothing fell short"
+  },
+  {
+   "id": "cUJ1facobhBXREZ37DBAF9",
+   "customId": "cp-POP-00014-c112-PRESS-graded-tanya-cruz",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00014",
+    "cycle": 112,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Frustrated",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/4 — The closing fails to specify the access or observation still needed.",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 4
+   },
+   "content": "3/4 — The closing fails to specify the access or observation still needed."
+  },
+  {
+   "id": "E4E86DMsWHYw87dCPfq28F",
+   "customId": "cp-POP-00008-c112-PRESS-graded-p-slayer",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00008",
+    "cycle": 112,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "3miB1QZnPyCKeExva8UyuF",
+   "customId": "cp-POP-00166-c112-PRESS-graded-elliot-marbury",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00166",
+    "cycle": 112,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "2dqK9iHuyW9skwC8qXCvkq",
+   "customId": "cp-POP-00157-c112-PRESS-graded-noah-tan",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00157",
+    "cycle": 112,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "maL48PQyFPgq86BdreZfVG",
+   "customId": "cp-POP-00799-c112-PRESS-graded-freelance-firebrand",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00799",
+    "cycle": 112,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "jxpRDSyCLLDxa6baKAKZH3",
+   "customId": "cp-POP-00591-c112-PRESS-graded-selena-grant",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00591",
+    "cycle": 112,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "vcj9veUPBFFzqVQrhhG6VF",
+   "customId": "cp-POP-00156-c112-PRESS-graded-angela-reyes",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00156",
+    "cycle": 112,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Frustrated",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 2/4 — The opening paragraph opens with narrative scene-setting rather than a ",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 2,
+    "scoreMax": 4
+   },
+   "content": "2/4 — The opening paragraph opens with narrative scene-setting rather than a Packet-backed school, youth-program, apprenticeship, or continuity fact, and the piece falls short of the target word count."
+  },
+  {
+   "id": "orjiF2dcLYtnwsNpV7hsJ6",
+   "customId": "cp-POP-00057-c112-PRESS-graded-rachel-torres",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00057",
+    "cycle": 112,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Calm",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/4 — The piece falls well short of the 500-word minimum target length.",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 4
+   },
+   "content": "3/4 — The piece falls well short of the 500-word minimum target length."
+  },
+  {
+   "id": "LQmVEQPLqvnCroyzhpjEpL",
+   "customId": "cp-POP-00636-c112-PRESS-graded-luis-navarro",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00636",
+    "cycle": 112,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "rbo6PXR4ZHeCg9YcdiJFZ3",
+   "customId": "cp-POP-01210-c112-PRESS-graded-tamsin-pruitt",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-01210",
+    "cycle": 112,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Frustrated",
+    "event": "Background",
+    "ask": "You filed a story for the Tribune: graded: 0/4 — The piece falls severely short of the target word count and fails to re",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 0,
+    "scoreMax": 4
+   },
+   "content": "3/4 — The piece falls short of the 450-word minimum target.\n\n---\n\n0/4 — The piece falls under the 450-word minimum and reports personal moods and street vibes rather than milestone life events like births, deaths, or hospitalizations.\n\n---\n\n0/4 — The piece fails to report lifecycle news events, ends on a discussion question rather than a factual record, and falls far short of the target word count.\n\n---\n\n0/4 — The piece falls severely short of the target word count and fails to report any individual person events."
+  },
+  {
+   "id": "eVShNLRHLeqqvaJUEjGQBx",
+   "customId": "cp-POP-00017-c112-PRESS-graded-anthony-raines",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00017",
+    "cycle": 112,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "hSqQfVdv3eJeshjEyrukxE",
+   "customId": "cp-POP-00155-c112-PRESS-graded-trevor-shimizu",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00155",
+    "cycle": 112,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "V4kX3q2PCFENwn45qH7fAm",
+   "customId": "cp-POP-00154-c112-PRESS-graded-lila-mezran",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00154",
+    "cycle": 112,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Calm",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 2/4 — The opening begins with anecdotal scene-setting instead of a Packet-bac",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 2,
+    "scoreMax": 4
+   },
+   "content": "2/4 — The opening begins with anecdotal scene-setting instead of a Packet-backed health-service or access fact, and the closing ends on a rhetorical question rather than stating the next record still needed."
+  },
+  {
+   "id": "QAabsGSu8gx9FSyCY9CbaP",
+   "customId": "cp-POP-00153-c112-PRESS-graded-business-desk",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00153",
+    "cycle": 112,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "7C56g3q8wx7UgpP2focMEf",
+   "customId": "cp-POP-00011-c112-PRESS-graded-carmen-delaine",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00011",
+    "cycle": 112,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "L887znEkRyEvrw7MPH1V8n",
+   "customId": "cp-POP-01076-c111-PRESS-graded-nia-rook-weekly",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-01076",
+    "cycle": 111,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Calm",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/4 — The closing fails to set up who the city watches next.",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 4
+   },
+   "content": "3/4 — The closing fails to set up who the city watches next."
+  },
+  {
+   "id": "Q27SW7JTxhm5rbc2Q2RCPe",
+   "customId": "cp-POP-00164-c111-PRESS-graded-celeste-tran",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00164",
+    "cycle": 111,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Calm",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/4 — The piece falls short of the 400-word minimum target at 256 words.",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 4
+   },
+   "content": "3/4 — The piece falls short of the 400-word minimum target at 256 words."
+  },
+  {
+   "id": "RDw2Wh5iue6Pz21S7uaUUL",
+   "customId": "cp-POP-00013-c111-PRESS-graded-maria-keen",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00013",
+    "cycle": 111,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "EC7vo3FQ8RLCnFJWf5ky2w",
+   "customId": "cp-POP-00159-c111-PRESS-graded-sharon-okafor",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00159",
+    "cycle": 111,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Calm",
+    "event": "Media",
+    "ask": "You filed a story for the Tribune: graded: 2/4 — The piece focuses on celebrity media trajectories rather than opening w",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 2,
+    "scoreMax": 4
+   },
+   "content": "2/4 — The piece focuses on celebrity media trajectories rather than opening with and framing a Packet-supplied venue condition."
+  },
+  {
+   "id": "H9JojCA4CSAqwcKX18p1Qh",
+   "customId": "cp-POP-00158-c111-PRESS-graded-kai-marston",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00158",
+    "cycle": 111,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "Qm9Ph3XCpvQqapndXjL5bd",
+   "customId": "cp-POP-00160-c111-PRESS-graded-mason-ortega",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00160",
+    "cycle": 111,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Frustrated",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 2/4 — The piece invents workers, shifts, and dialogue rather than treating th",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 2,
+    "scoreMax": 4
+   },
+   "content": "2/4 — The piece invents workers, shifts, and dialogue rather than treating the signal as an evidence-bounded question, and fails to close on the worker or operating account still needed."
+  },
+  {
+   "id": "ksuDjecsd2yAjFivfX8Qjx",
+   "customId": "cp-POP-01076-c111-PRESS-graded-nia-rook",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-01076",
+    "cycle": 111,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Calm",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/4 — The piece falls short of the 350-word minimum target.",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 4
+   },
+   "content": "3/4 — The piece falls short of the 350-word minimum.\n\n---\n\n3/4 — The piece falls short of the 350-word minimum target."
+  },
+  {
+   "id": "3sZ95TyhV3h2Q2Y293t5Mb",
+   "customId": "cp-POP-00592-c111-PRESS-graded-talia-finch",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00592",
+    "cycle": 111,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "z6tXjrVLTVnMzSaVQQ7Q2d",
+   "customId": "cp-POP-00007-c111-PRESS-graded-hal-richmond",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00007",
+    "cycle": 111,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Calm",
+    "event": "Background",
+    "ask": "You filed a story for the Tribune: graded: 3/4 — The closing paragraph does not name the historical echo.",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 3,
+    "scoreMax": 4
+   },
+   "content": "3/4 — The closing paragraph does not name the historical echo."
+  },
+  {
+   "id": "hUyNVgjaFYCXcMsFEcKdqN",
+   "customId": "cp-POP-00016-c111-PRESS-graded-simon-leary",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00016",
+    "cycle": 111,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "Lp2YcXwMKv741nXi4DgN3z",
+   "customId": "cp-POP-00012-c111-PRESS-graded-elliot-graye",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00012",
+    "cycle": 111,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Calm",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 2/4 — The piece covers multiple faith-community signals rather than focusing ",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 2,
+    "scoreMax": 4
+   },
+   "content": "2/4 — The piece covers multiple faith-community signals rather than focusing on one, and falls short of the target word count."
+  },
+  {
+   "id": "rMVXGXwBodc2QCPdScTTta",
+   "customId": "cp-POP-00011-c111-PRESS-graded",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00011",
+    "cycle": 111,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "u2T5qTapfrFtfGHdD9qSe1",
+   "customId": "cp-POP-00166-c111-PRESS-graded",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00166",
+    "cycle": 111,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 4/4 — nothing fell short.",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "3/4 — The piece exceeds the 350–600 target word count at 793 words.\n\n---\n\n4/4 — nothing fell short."
+  },
+  {
+   "id": "c4ykpVtcCYjtswHyUKpBvm",
+   "customId": "cp-POP-00014-c111-PRESS-graded",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00014",
+    "cycle": 111,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 4,
+    "scoreMax": 4
+   },
+   "content": "4/4 — nothing fell short"
+  },
+  {
+   "id": "Ww8WfhrPm23iV7oTKkaGbg",
+   "customId": "cp-POP-00157-c111-PRESS-graded",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00157",
+    "cycle": 111,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 2,
+    "scoreMax": 4
+   },
+   "content": "2/4 — The piece is under the 400-word minimum and concludes with a rhetorical question rather than what remains unfinished for the subject."
+  },
+  {
+   "id": "kH2fVhjDma6vNCkYvDqPqg",
+   "customId": "cp-POP-00636-c111-PRESS-graded",
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00636",
+    "cycle": 111,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "kind": "graded"
+   },
+   "add": {
+    "score": 2,
+    "scoreMax": 4
+   },
+   "content": "2/4 — The opening lacks the unresolved question in the first paragraph, and the closing ends on a rhetorical question rather than the next needed record or answer."
+  }
+ ]
+}

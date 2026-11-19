@@ -31,8 +31,7 @@ function ledgerRow(popid) {
   const system = [sl.line || '(sheet line unread: ' + sl.error + ')', row.CitizenBio ? row.CitizenBio : '', '', JOBS[persona] || '(no job sentence written)']
     .concat(memory.entries.length ? ['', 'From your own memory:', ...memory.entries.map((m) => '- (' + m.when + ') ' + m.text)] : []).filter((x, i, a) => !(x === '' && a[i - 1] === '')).join('\n');
   const slice = fs.readFileSync(path.join(ROOT, 'output/slices/c' + cycle, persona + '.md'), 'utf8');
-  // the paper's earlier mentions of a person (any Cycle) are history: a lookup away (canon_recall), not in the pack
-  const facts = slice.split('\n').filter((l) => /^- /.test(l) && !/^- (Angle|Hook|Note):/.test(l) && !/the Tribune named them/.test(l)).map((l) => l.replace(/\s*_\[[^\]]*\]_\s*$/, ''));
+  const facts = slice.split('\n').filter((l) => /^- /.test(l) && !/^- (Angle|Hook|Note):/.test(l)).map((l) => l.replace(/\s*_\[[^\]]*\]_\s*$/, ''));
   let quotes = [];
   try { quotes = (JSON.parse(fs.readFileSync(path.join(ROOT, 'output/cron-compare', desk + '_c' + cycle + '_' + persona + '_packet-v2_packet.json'), 'utf8')).quotes || []).filter((q) => q && q.quote); } catch (e) { /* none landed */ }
   const user = ['The people of Cycle ' + cycle + ':\n' + facts.join('\n'),

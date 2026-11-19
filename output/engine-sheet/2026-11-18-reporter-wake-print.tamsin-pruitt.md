@@ -15,7 +15,7 @@ From your own memory:
 - (Cycle 116) filed: The Page: Who Moved, Who Won, Who Walked the Stage in C116
 - (Cycle 116) filed: The Lives Page, Cycle 116
 
-## In front of her (9845 characters)
+## In front of her (9349 characters)
 
 The people of Cycle 116:
 - Saniya Williams moved into a place of their own in Rockridge, renting (C116)
@@ -43,8 +43,6 @@ The people of Cycle 116:
 - Celeste Moon — helped a neighbor navigate the West Oakland Stabilization Fund portal because the interface was confusing, KONO — one of 4 people the Cycle's safety turn reached (Smoke over the rooftops — a blaze contained, but the block smells it for days.) (C116)
 - Celeste Moon — in their life, C116: a flyer for a seniors lunch program flutters on a community bulletin board
 - Celeste Moon — in their life, C116: the city buzzes with energy after the A's third straight win, fans wearing green and gold everywhere.
-- Celeste Moon — the Tribune named them in a piece headlined Downtown, Overcast, Nobody's Name on It (Civic, C106)
-- Celeste Moon — the Tribune named them in a piece headlined FIRST FRIDAY CONTINUES: SECOND CONSECUTIVE WEEK OF MAXIMUM NIGHTLIFE (Culture, C75)
 - Omar Lopez — said no to something and felt the shape of who they are in it, Ivy Hill — one of 4 people the Cycle's civic turn reached (safety (negative); effects: {"sentiment_modifier":-0.06,"community_modifier":-0.04}) (C116)
 - Omar Lopez — in their life, C115: bought milk at Ivy Hill Market on the climb home from work
 - Omar Lopez — in their life, C116: has watched Hillcrest Kitchen go quiet lately
@@ -54,8 +52,6 @@ The people of Cycle 116:
 - Devon Willis — in their life, C116: had a work moment: a table with unusual energy
 - Devon Willis — in their life, C116: argued A's loyalty versus Oaks curiosity over dinner and lost to both
 - Devon Willis — in their life, C116: painted over graffiti on the recreation center wall alongside five neighbors they barely knew near a quiet side street
-- Devon Willis — the Tribune named them in a piece headlined A Neighborhood’s Quiet Witness (Culture, C105)
-- Devon Willis — the Tribune named them in a piece headlined The Quiet Sighting at Adams Point United Methodist (Culture, C104)
 - Rasha Brown — received their diploma at the outdoor commencement, Fruitvale (C116 — what happened in their life, not words they said)
 - Rasha Brown — in their life, C116: the Fruitvale Transit Hub Phase II is sparking excitement, with plans for a brighter future taking shape.
 - Rasha Brown — in their life, C116: grabbed coffee from the cart outside the hospital before the morning rush hit

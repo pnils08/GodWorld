@@ -29,7 +29,7 @@ pointers:
 | 2 | Parity proof, old code vs new, same dice: OPP-led (CRC opposition, named swing), OPP-led blank opposition, school board — identical in 18,000 runs; IND-led blank opposition: 0 of 4,000 pass → 712 / 1,245 / 1,893 of 4,000 at mood −0.6 / 0 / +0.6 | es | done (scratch run, this session) |
 | 3 | Bench: SANDBOX 1004 on live-synced C116 state, a bench-only IND-led proposed row with a VoteCycle, fire C117, read the roll call (nine seats once, OPP seats voted) and the other rows unchanged | es | waiting on the shared sandbox |
 | 4 | PROD `clasp push` with the smoke-test note | es | after 3 |
-| 5 | Tracker restore of INIT-003/006/007?/008–014 to the C114 natural path (the Google Doc's cell list), written through the sheet library, each row read back; INIT-008 and 009 restored with VoteCycle blank until Task 4 is live; INIT-014's C116 vote voided | es | choices B, C, D not yet ruled |
+| 5 | Tracker restore of INIT-003, 006, 008–014 to the C114 natural path: 70 cells (63 + INIT-014's 7), written through the sheet library after Task 4 is live, each row read back; INIT-008 and 009 restored with VoteCycle blank; INIT-014's C116 vote voided; INIT-007's Status is not in it (not ruled). Cell list `output/engine-sheet/2026-11-19-tracker-restore/restoreCellList.dry.js` | es | cell list built and checked, read-only; writes after Task 4 |
 
 ## Acceptance
 
@@ -41,7 +41,7 @@ pointers:
 
 | Review | Lane | Pointer | Result |
 |---|---|---|---|
-| Restore plan (Google Doc) | other lane | the doc, read 2026-11-19 | facts verified against the live tracker, the Nov 1 snapshot and the code |
+| Restore plan (Google Doc) | other lane | the doc, read 2026-11-19 | ACCURATE (builder: B, C, D as the doc suggests, on that condition). Checked: every live value; INIT-008–013 before-values equal the Nov 1 snapshot; INIT-003 equals the C114 audit and C115 world-state; code lines cited exist. One correction: INIT-006's next action is the C115 text minus its stale cycle prefix, "Construction milestone review against the assembled evidence file" (the doc paraphrased it). Notes cells are the live text minus the hand-added line (live wording was cleaned after Nov 1) |
 
 ### Agreed
 
@@ -64,8 +64,9 @@ pointers:
 
 ## Open questions
 
-- B (which Ivy Hill proposals are restored), C (the INIT-010 / 003 / 006 note lines), D (INIT-010's next action wording) — the doc's suggestions, not yet ruled.
+- INIT-007's Status (passed, no vote on record, writer unknown): the doc's one extra cell, not in the 70 — the builder says whether it was his hand.
 
 ## Changelog
 
+- 2026-11-19 (es) — restore doc checked against sources, accurate bar one wording; builder approved B, C, D on that condition; 70-cell list built read-only; writes wait for the vote fix to be live.
 - 2026-11-19 (es) — plan written; Task 1 built and parity-proven; the bench waits on research-build's use of the sandbox.

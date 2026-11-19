@@ -29,7 +29,7 @@ pointers:
 | 2 | Parity proof, old code vs new, same dice: OPP-led (CRC opposition, named swing), OPP-led blank opposition, school board — identical in 18,000 runs; IND-led blank opposition: 0 of 4,000 pass → 712 / 1,245 / 1,893 of 4,000 at mood −0.6 / 0 / +0.6 | es | done (scratch run, this session) |
 | 3 | Bench: SANDBOX 1004 on live-synced C116 state, a bench-only IND-led proposed row with a VoteCycle, fire C117, read the roll call (nine seats once, OPP seats voted) and the other rows unchanged | es | done: SANDBOX 1004 @215, fire C117 PASS; INIT-009/011/013 (IND) and INIT-015 (OPP control) each nine seats; others unchanged (DEPLOY_HISTORY §PROD stage 59) |
 | 4 | PROD `clasp push` with the smoke-test note | es | done: PROD stage 59 @194, built tree = benched manifest, pull-back identical |
-| 5 | Tracker restore of INIT-003, 006, 008–014 to the C114 natural path: 70 cells (63 + INIT-014's 7), written through the sheet library after Task 4 is live, each row read back; INIT-008 and 009 restored with VoteCycle blank; INIT-014's C116 vote voided; INIT-007's Status is not in it (not ruled). Cell list `output/engine-sheet/2026-11-19-tracker-restore/restoreCellList.dry.js` | es | cell list built and checked, read-only; writes after Task 4 |
+| 5 | Tracker restore of INIT-003, 006, 008–014 to the C114 natural path: 70 cells (63 + INIT-014's 7), written through the sheet library after Task 4 is live, each row read back; INIT-008 and 009 restored with VoteCycle blank; INIT-014's C116 vote voided; INIT-007's Status is not in it (not ruled). Cell list `output/engine-sheet/2026-11-19-tracker-restore/restoreCellList.dry.js` | es | done 2026-11-19: 69 cells written (70th already 117), one row at a time, each read back; untouched rows identical; before-snapshot `tracker.before.json`; pre-mortem SAFE TO RUN; Engine_Errors still 9 |
 
 ## Acceptance
 
@@ -68,6 +68,7 @@ pointers:
 
 ## Changelog
 
+- 2026-11-19 (es) — tracker restored: INIT-003, 006, 008–014 on the C114 natural path, no vote dates; the first IND-led vote waits on the override ruling (N1). Storyline_Ledger read after the C117 fire.
 - 2026-11-19 (es) — bench C117 PASS, PROD stage 59 @194 live; tracker restore next; override path (N1) is the builder's to rule before any IND-led vote is dated.
 - 2026-11-19 (es) — restore doc checked against sources, accurate bar one wording; builder approved B, C, D on that condition; 70-cell list built read-only; writes wait for the vote fix to be live.
 - 2026-11-19 (es) — plan written; Task 1 built and parity-proven; the bench waits on research-build's use of the sandbox.

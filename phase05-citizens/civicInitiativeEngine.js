@@ -1232,6 +1232,19 @@ function resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInf
   // Get list of available IND members
   var availableIndMembers = councilState.indMembers || [];
   var remainingIndCount = availableIndMembers.length;
+
+  // civic.49 (builder 2026-11-19): a member votes once. An IND member the lead or opposition block
+  // above already counted (an IND-led initiative; an IND opposition) is not rolled again as a swing
+  // voter. Before this, an IND-led initiative counted both IND seats yes by faction and rolled the
+  // same two again — a roll call with names twice, and 4 yes at most against 5 needed.
+  for (var fd = 0; fd < factionVoteResults.length; fd++) {
+    for (var fi = 0; fi < availableIndMembers.length; fi++) {
+      if (availableIndMembers[fi] && availableIndMembers[fi].name === factionVoteResults[fd].name) {
+        processedIndMembers[factionVoteResults[fd].name] = true;
+        remainingIndCount--;
+      }
+    }
+  }
   
   // ═══════════════════════════════════════════════════════════════════════════
   // v1.1: PROCESS PRIMARY SWING VOTER
@@ -1239,7 +1252,7 @@ function resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInf
   // v1.3: Calculate demographic influence for this initiative
   var demographicInfluence = calculateDemographicInfluence_(demoContext);
 
-  if (swingVoter) {
+  if (swingVoter && !processedIndMembers[swingVoter]) {
     var primaryAvailable = isSwingVoterAvailable_(swingVoter, councilState, availableIndMembers);
 
     if (primaryAvailable) {
@@ -1335,6 +1348,37 @@ function resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInf
     });
   }
   
+  // civic.49 (builder 2026-11-19): a faction that is neither the lead nor the opposition (OPP when IND leads
+  // against the CRC default; CRC when IND leads against OPP) votes by the city's mood and the affected
+  // hoods' need — the same probability an unnamed IND member gets — instead of sitting out. Runs after the
+  // IND loop, so a row with no such faction rolls exactly the dice it rolled before.
+  var thirdFactions = ['OPP', 'CRC'];
+  for (var tf = 0; tf < thirdFactions.length; tf++) {
+    var tfKey = thirdFactions[tf];
+    if (tfKey === leadFaction || tfKey === opposition || !councilState.factions[tfKey]) continue;
+    var tfMembers = councilState.factions[tfKey].members || [];
+    for (var tm = 0; tm < tfMembers.length; tm++) {
+      var tmUnavail = false;
+      for (var tu = 0; tu < (councilState.unavailable || []).length; tu++) {
+        if (councilState.unavailable[tu].name === tfMembers[tm]) { tmUnavail = true; break; }
+      }
+      if (tmUnavail) continue;
+      var thirdProb = 0.5 + (sentiment * 0.15);
+      thirdProb += demographicInfluence;
+      if (thirdProb < 0.15) thirdProb = 0.15;
+      if (thirdProb > 0.85) thirdProb = 0.85;
+      var thirdVotedYes = rng() < thirdProb;
+      if (thirdVotedYes) { yesVotes++; } else { noVotes++; }
+      swingVoterResults.push({
+        name: tfMembers[tm],
+        vote: thirdVotedYes ? 'yes' : 'no',
+        probability: thirdProb,
+        source: 'sentiment',
+        faction: tfKey
+      });
+    }
+  }
+
   // Determine outcome
   var passed = yesVotes >= votesNeeded;
   var voteCount = yesVotes + '-' + noVotes;

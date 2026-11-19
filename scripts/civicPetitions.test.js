@@ -203,7 +203,7 @@ test('disk loader and CLI are local-only, read-only, cycle checked and fail loud
 });
 test('beats dump treats Reflection_Intake as optional, including empty and present cases', async () => {
   const source = fs.readFileSync(path.join(__dirname, 'dumpBeatTabs.js'), 'utf8');
-  const required = ['Business_Ledger', 'Employment_Roster', 'Casino_Ledger', 'Transit_Metrics', 'Crime_Metrics',
+  const required = ['Business_Ledger', 'Neighborhood_Map', 'Relationship_Bonds', 'Casino_Ledger', 'Transit_Metrics', 'Crime_Metrics',
     'Neighborhood_Demographics', 'Hospital_Ledger', 'Health_Cause_Queue', 'Community_Programs',
     'Faith_Organizations', 'Faith_Ledger', 'Cycle_Weather', 'Household_Ledger', 'Story_Seed_Deck', 'Story_Hook_Deck'];
   for (const present of [false, true]) {
@@ -216,7 +216,7 @@ test('beats dump treats Reflection_Intake as optional, including empty and prese
     const RAW = {
       LifeHistory_Log: [['Timestamp', 'POPID', 'Name', 'EventTag', 'EventText', 'Neighborhood', 'Cycle'], ['Y3C8', 'POP-99902', '', 'Daily', 'walked', '', '999']],
       Hospital_Ledger: [['AdmissionId', 'POPID', 'Name', 'Neighborhood', 'Cause', 'AdmitCycle', 'StatusNow', 'LastTransitionCycle', 'DischargeCycle']],
-      Simulation_Ledger: [['POPID', 'First', 'Last', 'Neighborhood', 'RoleType', 'HouseholdId', 'Status', 'BirthYear'], ['POP-99902', 'Syn', 'Thetic', 'Downtown', 'Clerk', '', 'Active', '1990']],
+      Simulation_Ledger: [['POPID', 'First', 'Last', 'Neighborhood', 'RoleType', 'HouseholdId', 'Status', 'BirthYear', 'EmployerBizId'], ['POP-99902', 'Syn', 'Thetic', 'Downtown', 'Clerk', '', 'Active', '1990', 'BIZ-99999']],
     };
     const mod = { exports: {} };
     const req = (name) => {
@@ -225,6 +225,7 @@ test('beats dump treats Reflection_Intake as optional, including empty and prese
         if (name === 'path') return path;
         if (name === 'crypto') return require('crypto');
         if (name === '../lib/wakePerception') return require('../lib/wakePerception');
+        if (name === '../lib/employmentRoster') return require('../lib/employmentRoster');
         if (name === '../lib/sheets') return {
           async listSheets() { return required.concat(present ? ['Reflection_Intake'] : []).map(title => ({ title })); },
           async getSheetAsObjects(tab) { reads.push(tab); return tab === 'Reflection_Intake' ? synthetic : []; },
@@ -236,7 +237,7 @@ test('beats dump treats Reflection_Intake as optional, including empty and prese
     vm.runInNewContext(source, {
       module: mod,
       __dirname, console: { log() {}, error(...m) { errors.push(m.join(' ')); } },
-      process: { argv: ['node', 'dumpBeatTabs.js', '999', '--quiet'], exit(code) { throw new Error('dump exited ' + code); } },
+      process: { argv: ['node', 'dumpBeatTabs.js', '999', '--quiet'], exit(code) { throw new Error('dump exited ' + code + (errors.length ? ': ' + errors.join(' | ') : '')); } },
       require: req,
     }, { filename: 'dumpBeatTabs.js' });
     await new Promise(resolve => setImmediate(resolve));
@@ -244,6 +245,9 @@ test('beats dump treats Reflection_Intake as optional, including empty and prese
     assert.equal(writes.get('Reflection_Intake.jsonl'), present ? JSON.stringify(synthetic[0]) + '\n' : '');
     assert.equal(JSON.parse(writes.get('meta.json')).rows.Reflection_Intake, present ? 1 : 0);
     assert.equal(reads.includes('Reflection_Intake'), present);
+    // the roster is built off the ledger read, never read from the March tab
+    assert.equal(reads.includes('Employment_Roster'), false);
+    assert.deepEqual(JSON.parse(writes.get('Employment_Roster.jsonl')), { BIZ_ID: 'BIZ-99999', POP_ID: 'POP-99902', CitizenName: 'Syn Thetic', RoleType: 'Clerk', Status: 'Active', MappingLayer: 'ledger' });
   }
 });
 (async () => {

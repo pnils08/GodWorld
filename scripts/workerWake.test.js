@@ -186,6 +186,18 @@ test('memory_recall says unavailable, never empty, when the page cannot be read'
   assert.match(out, /unavailable right now — this is not an empty record/);
 });
 
+test('sheet_read: Employment_Roster is built from the ledger, never read from the March tab', async () => {
+  const led = [['POPID', 'First', 'Last', 'RoleType', 'Status', 'EmployerBizId'], ['POP-1', 'Ana', 'Ruiz', 'Baker', 'Active', 'BIZ-00007'], ['POP-4', 'Di', 'Fox', 'Teacher', 'Retired', 'BIZ-00016']];
+  const asked = [];
+  const d = deps('/nowhere', { sheets: { getSheetAsObjects: async () => [], getRawSheetData: async (tab) => { asked.push(tab); return tab === 'Simulation_Ledger' ? led : [['BIZ_ID', 'POP_ID'], ['BIZ-1', 'POP-STALE']]; } } });
+  const exec = ww.toolExecutor({ popid: 'POP-00140', cycle: 116, stage: { patrol: [] }, deps: d });
+  const out = await exec('sheet_read', { tab: 'Employment_Roster' });
+  assert.match(out, /BIZ_ID \| POP_ID \| CitizenName/);
+  assert.match(out, /BIZ-00007 \| POP-1 \| Ana Ruiz \| Baker \| Active \| ledger/);
+  assert.doesNotMatch(out, /POP-STALE|POP-4/);
+  assert.deepEqual(asked, ['Simulation_Ledger']);
+});
+
 test('sheet_read: a sheet kept by Cycle reads newest first; from_cycle / to_cycle read earlier Cycles', async () => {
   const arcs = []; for (let c = 60; c <= 116; c++) arcs.push({ Cycle: String(c), ArcId: 'a' + c, Neighborhood: 'Downtown' });
   const d = deps('/nowhere', { sheets: { getSheetAsObjects: async () => arcs, getRawSheetData: async () => [Object.keys(arcs[0])].concat(arcs.map((x) => Object.values(x))) } });

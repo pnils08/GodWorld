@@ -25,6 +25,7 @@
 const fs = require('fs');
 const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
+const { rosterGridFromLedger } = require('../lib/employmentRoster');   // Employment_Roster is built off the ledger, not read from its March tab
 
 function defaults(deps) {
   const d = deps || {};
@@ -710,7 +711,8 @@ async function sheetRead(input, deps) {   // the reporters' reader (cron-desk-wr
   const tab = String((input || {}).tab || '').trim();
   if (!SHEETS.includes(tab)) return 'no such sheet. The sheets: ' + SHEETS.join(', ');
   try {
-    const data = await sheets.getRawSheetData(tab); const match = String(input.match || '').trim().toLowerCase();
+    // Employment_Roster is built from the ledger (lib/employmentRoster.js), never read from the March tab
+    const data = tab === 'Employment_Roster' ? rosterGridFromLedger(await sheets.getRawSheetData('Simulation_Ledger')) : await sheets.getRawSheetData(tab); const match = String(input.match || '').trim().toLowerCase();
     const head = data[0] || [];
     const ci = head.indexOf(cycleColOf(head));
     // a Cycle bound that is not a number is no bound (a blank or "latest" never empties the read)

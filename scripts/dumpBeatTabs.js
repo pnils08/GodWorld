@@ -37,6 +37,7 @@ const path = require('path');
 const crypto = require('crypto');
 const sheets = require('../lib/sheets');
 const { livedEventsFrom, LIVED_WINDOW } = require('../lib/wakePerception'); // pipeline.73 step 2 — the wake's own event set
+const { rosterFromLedger } = require('../lib/employmentRoster');             // who works where, off the ledger
 
 const ROOT = path.resolve(__dirname, '..');
 const OUT_DIR = path.join(ROOT, 'output', 'beats');
@@ -45,8 +46,7 @@ const META = path.join(OUT_DIR, 'meta.json');
 
 // The beat tabs and who they feed (plan Task 4 names the columns per seat).
 const BEAT_TABS = [
-  'Business_Ledger',          // business / food — with Employment_Roster for the faces
-  'Employment_Roster',
+  'Business_Ledger',          // business / food — the faces come from Employment_Roster.jsonl, derived from Simulation_Ledger below (not a tab read)
   'Casino_Ledger',            // business — casino activity (builder, S433)
   'Transit_Metrics',          // Trevor
   'Crime_Metrics',            // Rachel
@@ -99,10 +99,12 @@ const quiet = args.includes('--quiet');
 const cycleArg = args.find(a => !a.startsWith('--')) || null;
 function log(...m) { if (!quiet) console.error(...m); }
 
-// pipeline.73 step 2 — two derived files beside the tabs (not tabs: never listed in ALL_TABS).
+// pipeline.73 step 2 — derived files beside the tabs (not tabs: never listed in ALL_TABS).
 // LifeHistory_Log.jsonl = the raw tab's rows for the stamped Cycle and the one before, header keys verbatim.
 // Lived_Events.jsonl     = the lived wake's news-grade events for that window, names joined from the
 //                          same Simulation_Ledger read (the archive for the deceased).
+// Employment_Roster.jsonl = who works where, built from the same Simulation_Ledger read (lib/employmentRoster.js; builder
+//                          2026-11-18). The sheet tab of that name is a March copy nobody maintains and is not read.
 const hdrOf = (rows) => (rows && rows[0]) || [];
 function toObjects(rows) { const h = hdrOf(rows); return (rows || []).slice(1).map(r => Object.fromEntries(h.map((k, i) => [k, r[i] === undefined ? '' : r[i]]))); }
 function lifeWindowRows(logRaw, stamp) {
@@ -131,7 +133,7 @@ function livedEventRows(src, stamp) {
     return out;
   });
 }
-module.exports = { lifeWindowRows, livedEventRows, toObjects, resolveStamp, requireCols, publishGeneration };
+module.exports = { rosterFromLedger, lifeWindowRows, livedEventRows, toObjects, resolveStamp, requireCols, publishGeneration };
 
 function readMeta(p) { try { return JSON.parse(fs.readFileSync(p, 'utf8')); } catch (_) { return null; } }
 
@@ -222,7 +224,7 @@ async function main() {
   log('dumpBeatTabs: reading LifeHistory_Log, Hospital_Ledger, Simulation_Ledger for the lived window…');
   const logRaw = requireCols('LifeHistory_Log', await sheets.getRawSheetData('LifeHistory_Log'), ['POPID', 'EventTag', 'EventText', 'Cycle'], true);
   const hospRaw = requireCols('Hospital_Ledger', await sheets.getRawSheetData('Hospital_Ledger'), ['AdmissionId', 'POPID', 'AdmitCycle', 'DischargeCycle', 'Cause'], false);
-  const ledgerRaw = requireCols('Simulation_Ledger', await sheets.getRawSheetData('Simulation_Ledger'), ['POPID', 'First', 'Last', 'Neighborhood', 'RoleType', 'HouseholdId', 'Status', 'BirthYear'], true);
+  const ledgerRaw = requireCols('Simulation_Ledger', await sheets.getRawSheetData('Simulation_Ledger'), ['POPID', 'First', 'Last', 'Neighborhood', 'RoleType', 'HouseholdId', 'Status', 'BirthYear', 'EmployerBizId'], true);
   const lifeRows = lifeWindowRows(logRaw, stamp);
   const anyDeath = lifeRows.some(r => /^Death$/i.test(String(r.EventTag || '').trim()));
   const archiveRaw = anyDeath ? requireCols('Citizen_Archive', await sheets.getRawSheetData('Citizen_Archive'), ['POPID', 'First', 'Last', 'HouseholdId', 'SpouseId'], true) : [];
@@ -233,12 +235,13 @@ async function main() {
   for (const tab of ALL_TABS) files[tab] = data[tab].map(r => JSON.stringify(r));
   files.LifeHistory_Log = lifeRows.map(r => JSON.stringify(r));
   files.Lived_Events = livedRows.map(r => JSON.stringify(r));
+  files.Employment_Roster = rosterFromLedger(ledgerRaw).map(r => JSON.stringify(r));
   const counts = Object.fromEntries(Object.keys(files).map(k => [k, files[k].length])); // LifeHistory_Log = the window rows written
   const sourceHashes = Object.fromEntries(Object.keys(files).map(k => [k,
     crypto.createHash('sha256').update(files[k].length ? files[k].join('\n') + '\n' : '').digest('hex')]));
   const advancing = priorCycle != null && stamp > priorCycle;
   const meta = {
-    source: 'beat tabs (' + ALL_TABS.length + ') + LifeHistory_Log window (Cycle ' + (stamp - LIVED_WINDOW) + '–' + stamp + ') + Lived_Events (derived)',
+    source: 'beat tabs (' + ALL_TABS.length + ') + LifeHistory_Log window (Cycle ' + (stamp - LIVED_WINDOW) + '–' + stamp + ') + Lived_Events + Employment_Roster (derived)',
     cycle: stamp,
     prevCycle: advancing ? priorCycle : (readMeta(path.join(PREV_DIR, 'meta.json')) || {}).cycle ?? null,
     rows: counts,
@@ -250,7 +253,7 @@ async function main() {
   };
   publishGeneration(OUT_DIR, files, meta, advancing);
 
-  log(`dumpBeatTabs: wrote ${ALL_TABS.length} tabs + 2 derived → ${path.relative(ROOT, OUT_DIR)}/` + (advancing ? ` (prior cycle ${priorCycle} kept in prev/)` : ''));
+  log(`dumpBeatTabs: wrote ${ALL_TABS.length} tabs + 3 derived → ${path.relative(ROOT, OUT_DIR)}/` + (advancing ? ` (prior cycle ${priorCycle} kept in prev/)` : ''));
   if (!quiet) console.log(JSON.stringify({ ok: true, cycle: meta.cycle, prevCycle: meta.prevCycle, rows: counts }));
 }
 

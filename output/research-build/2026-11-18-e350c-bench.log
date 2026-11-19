@@ -1,0 +1,223 @@
+== 2026-11-18T19:24:25-06:00 engine.350 coded-pool bench, 10 fires
+AIM = BENCH (script read the bench marker)
+bench code = stage 56 (pull-back)
+== sync from live (e350c)
+  verify Story_Hook_Deck: bench 2221 rows vs live 2221 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+{"fireGuardMinutes":"0","cycleCountFormatted":"116","cycleCountIsNumber":true}
+door: {"target":"bench","http":200,"ok":true,"record":{"cycle":119,"startedMs":1795037216695,"state":"done","finishedMs":1795037443285},"raw":"{\"cycle\":119,\"startedMs\":1795037216695,\"state\":\"done\",\
+clearfire 119: {"ok":true,"cleared":{"cycle":119,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+-- pause 75 s (read quota)
+== the nine placed rows and the flyer row, bench tab only
+placed: bench rows 1149 -> 1158 (appended 9); placed rows read back 9 of 9; flyer row R357 Active=no on the bench: true; live rows 1149 -> 1149, no placed row on live: true, live flyer Active: yes
+cells file emptied
+snap c-before: cycleCount 116, 1075 citizens with a DialState, Engine_Errors rows 9, dialBetMediumPct=absent dialBetLargePct=absent
+Edition_Coverage_Ratings C116: 7 rows (window 115,114,113,112,111,110,109,108)
+Citizen_Media_Usage C116: 22 rows from live C115
+Oakland_Sports_Feed C117: 0 rows
+appended 7 to Edition_Coverage_Ratings; marked rows on the tab now 7
+appended 22 to Citizen_Media_Usage; marked rows on the tab now 22
+bench cycleCount 116
+fire C117 rc=0 "verdict": "PASS" "wallS": 214
+cells C117 (Y3C13): 2257 lines on 954 citizens, 2252 move a dial | sociability 154/135 · warmth 106/133 · openness 153/191 · drive 81/72
+Edition_Coverage_Ratings C117: 7 rows (window 115,114,113,112,111,110,109,108)
+Citizen_Media_Usage C117: 36 rows from live C115
+Oakland_Sports_Feed C118: 2 rows
+appended 7 to Edition_Coverage_Ratings; marked rows on the tab now 14
+appended 36 to Citizen_Media_Usage; marked rows on the tab now 58
+appended 2 to Oakland_Sports_Feed; marked rows on the tab now 2
+bench cycleCount 117
+fire C118 rc=0 "verdict": "PASS" "wallS": 206
+cells C118 (Y3C14): 2338 lines on 981 citizens, 2325 move a dial | sociability 199/158 · warmth 150/135 · openness 187/174 · drive 89/68
+Edition_Coverage_Ratings C118: 7 rows (window 115,114,113,112,111,110,109,108)
+Citizen_Media_Usage C118: 36 rows from live C115
+Oakland_Sports_Feed C119: 2 rows
+appended 7 to Edition_Coverage_Ratings; marked rows on the tab now 21
+appended 36 to Citizen_Media_Usage; marked rows on the tab now 94
+appended 2 to Oakland_Sports_Feed; marked rows on the tab now 4
+bench cycleCount 118
+fire C119 rc=0 "verdict": "PASS" "wallS": 217
+cells C119 (Y3C15): 2343 lines on 981 citizens, 2335 move a dial | sociability 196/149 · warmth 155/135 · openness 157/176 · drive 77/57
+Edition_Coverage_Ratings C119: 7 rows (window 115,114,113,112,111,110,109,108)
+Citizen_Media_Usage C119: 36 rows from live C115
+Oakland_Sports_Feed C120: 2 rows
+appended 7 to Edition_Coverage_Ratings; marked rows on the tab now 28
+appended 36 to Citizen_Media_Usage; marked rows on the tab now 130
+appended 2 to Oakland_Sports_Feed; marked rows on the tab now 6
+bench cycleCount 119
+fire C120 rc=0 "verdict": "PASS" "wallS": 201
+cells C120 (Y3C16): 2574 lines on 1007 citizens, 2419 move a dial | sociability 190/168 · warmth 145/160 · openness 146/185 · drive 105/93
+Edition_Coverage_Ratings C120: 7 rows (window 115,114,113,112,111,110,109,108)
+Citizen_Media_Usage C120: 36 rows from live C115
+Oakland_Sports_Feed C121: 2 rows
+appended 7 to Edition_Coverage_Ratings; marked rows on the tab now 35
+appended 36 to Citizen_Media_Usage; marked rows on the tab now 166
+appended 2 to Oakland_Sports_Feed; marked rows on the tab now 8
+bench cycleCount 120
+fire C121 rc=0 "verdict": "PASS" "wallS": 223
+cells C121 (Y3C17): 2361 lines on 1002 citizens, 2349 move a dial | sociability 205/140 · warmth 150/117 · openness 134/195 · drive 71/80
+Edition_Coverage_Ratings C121: 7 rows (window 115,114,113,112,111,110,109,108)
+Citizen_Media_Usage C121: 36 rows from live C115
+Oakland_Sports_Feed C122: 2 rows
+appended 7 to Edition_Coverage_Ratings; marked rows on the tab now 42
+appended 36 to Citizen_Media_Usage; marked rows on the tab now 202
+appended 2 to Oakland_Sports_Feed; marked rows on the tab now 10
+bench cycleCount 121
+fire C122 rc=0 "verdict": "PASS" "wallS": 218
+cells C122 (Y3C18): 2371 lines on 990 citizens, 2367 move a dial | sociability 213/184 · warmth 149/119 · openness 180/172 · drive 91/81
+Edition_Coverage_Ratings C122: 7 rows (window 115,114,113,112,111,110,109,108)
+Citizen_Media_Usage C122: 36 rows from live C115
+Oakland_Sports_Feed C123: 2 rows
+appended 7 to Edition_Coverage_Ratings; marked rows on the tab now 49
+appended 36 to Citizen_Media_Usage; marked rows on the tab now 238
+appended 2 to Oakland_Sports_Feed; marked rows on the tab now 12
+bench cycleCount 122
+fire C123 rc=0 "verdict": "PASS" "wallS": 189
+cells C123 (Y3C19): 2456 lines on 996 citizens, 2445 move a dial | sociability 207/167 · warmth 191/148 · openness 183/184 · drive 95/66
+Edition_Coverage_Ratings C123: 7 rows (window 115,114,113,112,111,110,109,108)
+Citizen_Media_Usage C123: 36 rows from live C115
+Oakland_Sports_Feed C124: 2 rows
+appended 7 to Edition_Coverage_Ratings; marked rows on the tab now 56
+appended 36 to Citizen_Media_Usage; marked rows on the tab now 274
+appended 2 to Oakland_Sports_Feed; marked rows on the tab now 14
+bench cycleCount 123
+fire C124 rc=0 "verdict": "PASS" "wallS": 183
+cells C124 (Y3C20): 2361 lines on 994 citizens, 2356 move a dial | sociability 188/141 · warmth 148/146 · openness 167/191 · drive 85/71
+Edition_Coverage_Ratings C124: 7 rows (window 115,114,113,112,111,110,109,108)
+Citizen_Media_Usage C124: 36 rows from live C115
+Oakland_Sports_Feed C125: 2 rows
+appended 7 to Edition_Coverage_Ratings; marked rows on the tab now 63
+appended 36 to Citizen_Media_Usage; marked rows on the tab now 310
+appended 2 to Oakland_Sports_Feed; marked rows on the tab now 16
+bench cycleCount 124
+fire C125 rc=0 "verdict": "PASS" "wallS": 205
+cells C125 (Y3C21): 1874 lines on 814 citizens, 1868 move a dial | sociability 146/112 · warmth 112/121 · openness 110/136 · drive 97/74
+Edition_Coverage_Ratings C125: 7 rows (window 115,114,113,112,111,110,109,108)
+Citizen_Media_Usage C125: 36 rows from live C115
+Oakland_Sports_Feed C126: 2 rows
+appended 7 to Edition_Coverage_Ratings; marked rows on the tab now 70
+appended 36 to Citizen_Media_Usage; marked rows on the tab now 346
+appended 2 to Oakland_Sports_Feed; marked rows on the tab now 18
+bench cycleCount 125
+fire C126 rc=0 "verdict": "PASS" "wallS": 216
+cells C126 (Y3C22): 2229 lines on 944 citizens, 2221 move a dial | sociability 220/124 · warmth 142/132 · openness 168/172 · drive 99/70
+snap c-after: cycleCount 126, 1090 citizens with a DialState, Engine_Errors rows 9, dialBetMediumPct=10 dialBetLargePct=20
+count c-all C117–C126: 22323 log lines on 1087 citizens, 11161 from the tab, 22071 move a dial
+  drive        lines 1149 / 740 (61% up) | points 2769 / 783 (78% up)
+  sociability  lines 1800 / 1325 (58% up) | points 2481 / 1325 (65% up)
+  warmth       lines 1160 / 1158 (50% up) | points 1412 / 1158 (55% up)
+  openness     lines 1661 / 1776 (48% up) | points 1998 / 1776 (53% up)
+  composure    lines 2436 / 2380 (51% up) | points 2560 / 2794 (48% up)
+  integrity    lines 391 / 507 (44% up) | points 447 / 507 (47% up)
+  family       lines 624 / 681 (48% up) | points 986 / 681 (59% up)
+  outabout     lines 2438 / 1449 (63% up) | points 2528 / 1449 (64% up)
+  fandom       lines 1348 / 228 (86% up) | points 1410 / 228 (86% up)
+  bets by size: {}
+  bare lines of a cut kind: {"Media":{"n":30,"ex":["The spotlight moved on — Tier 3 -> 4 (attention faded)","Assumed fame at 26 media usage — permanent; Tier 1 floor","Updated to Tier 1 — earned on 10 citations (was Tier 2)"]},"Cultural":{"n":45,"ex":["felt energized by the city's creative buzz","felt the city's creative pulse","noticed vibrant cultural activity around town"]},"Community":{"n":73,"ex":["felt stronger connection to their block","felt welcomed by neighborhood energy","noticed community members connecting"]},"Graduation":{"n":14,"ex":["received their diploma at the outdoor commencement","graduated with their class in a joyful spring celebration","graduated with their class in a joyful spring celebration"]}}
+  kinds: Neighborhood 3898 (2234/1664) · Personal 3544 (1313/2231) · Civic Perception 3350 (1927/1423) · Daily 2523 (1519/1004) · Sports 1423 (1199/224) · Background 1215 (548/667) · Lifestyle 1094 (367/727) · PrevEvening 871 (542/329) · Media 695 (310/385) · Advancement 412 (186/0) · Micro-Event 349 (147/202) · Friction 266 (0/528) · Education 217 (190/27) · Strain 217 (0/434) · FirstFriday 216 (191/25) · Community 172 (244/1) · Work 146 (137/9) · LifeEvent-Promotion-Up-S 132 (132/0)
+bands (permanent base) c-before -> c-after: 1073 citizens in both; moved 879 (82%); crossed a band on any of 8 dials 51 (5%)
+  drive        mean 57.3 | under 40: 0 | under 20: 0 | 60 and over: 259 | at 0: 0 | at 100: 0 | crossed 2
+  sociability  mean 57.8 | under 40: 0 | under 20: 0 | 60 and over: 256 | at 0: 0 | at 100: 4 | crossed 8
+  warmth       mean 52.7 | under 40: 0 | under 20: 0 | 60 and over: 94 | at 0: 0 | at 100: 0 | crossed 5
+  openness     mean 53.2 | under 40: 0 | under 20: 0 | 60 and over: 138 | at 0: 0 | at 100: 0 | crossed 6
+  composure    mean 53.8 | under 40: 5 | under 20: 0 | 60 and over: 169 | at 0: 0 | at 100: 0 | crossed 9
+  integrity    mean 50.2 | under 40: 14 | under 20: 0 | 60 and over: 27 | at 0: 0 | at 100: 0 | crossed 15
+  family       mean 56.0 | under 40: 1 | under 20: 0 | 60 and over: 259 | at 0: 0 | at 100: 0 | crossed 5
+  outabout     mean 51.2 | under 40: 0 | under 20: 0 | 60 and over: 24 | at 0: 0 | at 100: 0 | crossed 5
+bands (felt value) c-before -> c-after: 1073 citizens in both; moved 1072 (100%); crossed a band on any of 8 dials 170 (16%)
+  drive        mean 57.4 | under 40: 0 | under 20: 0 | 60 and over: 267 | at 0: 0 | at 100: 0 | crossed 48
+  sociability  mean 58.1 | under 40: 0 | under 20: 0 | 60 and over: 259 | at 0: 0 | at 100: 3 | crossed 41
+  warmth       mean 52.9 | under 40: 0 | under 20: 0 | 60 and over: 94 | at 0: 0 | at 100: 0 | crossed 18
+  openness     mean 53.3 | under 40: 0 | under 20: 0 | 60 and over: 144 | at 0: 0 | at 100: 0 | crossed 26
+  composure    mean 53.6 | under 40: 5 | under 20: 0 | 60 and over: 171 | at 0: 0 | at 100: 0 | crossed 22
+  integrity    mean 50.2 | under 40: 14 | under 20: 0 | 60 and over: 29 | at 0: 0 | at 100: 0 | crossed 17
+  family       mean 56.2 | under 40: 1 | under 20: 0 | 60 and over: 263 | at 0: 0 | at 100: 0 | crossed 17
+  outabout     mean 51.5 | under 40: 0 | under 20: 0 | 60 and over: 28 | at 0: 0 | at 100: 0 | crossed 6
+Engine_Errors rows 9 -> 9; dialBetMediumPct=10 dialBetLargePct=20
+cross C117–C126: 22323 log lines
+  drive up: Advancement 181 · LifeEvent-Promotion-Up-S 132 · CivicRole-Up-S 107 · Relocation 72 · Education 66 · Personal 64 · Team 60 · Business-Gain 60 · Daily 54
+  drive down: tab down pool 466 · Personal 152 · Background 46 · QoL 20 · CivicRole-Down-M 15 · Retirement 9 · Career-Layoff 9 · Education 6 · CivicRole-Down-L 6
+  sociability up: Neighborhood 337 · tab Civic Perception 266 · tab Daily 180 · tab Neighborhood 143 · tab Media 139 · CivicRole-Up-S 107 · Community 102 · PrevEvening 96 · FirstFriday 70
+  sociability down: tab down pool 459 · tab Civic Perception 220 · tab Media 203 · Neighborhood 183 · tab Daily 163 · Background 44 · Personal 36 · FirstFriday 11 · CivicRole-Down-L 6
+  warmth up: Personal 240 · Daily 162 · tab Daily 137 · Community 118 · tab Media 84 · Background 84 · tab Civic Perception 72 · Relationship 62 · Neighborhood 48
+  warmth down: tab down pool 433 · Personal 226 · Daily 165 · tab Media 89 · tab Daily 86 · tab Civic Perception 68 · Background 48 · Neighborhood 43
+  openness up: tab Civic Perception 621 · Lifestyle 263 · Personal 181 · Background 99 · Cultural 76 · FirstFriday 74 · Neighborhood 64 · Business-Gain 60 · Education 52
+  openness down: tab Civic Perception 834 · tab down pool 488 · Lifestyle 239 · Personal 144 · Background 48 · FirstFriday 14 · Education 9
+  composure up: tab Civic Perception 815 · Personal 642 · Background 227 · tab Daily 187 · Micro-Event 147 · Daily 92 · tab Neighborhood 51 · tab Faith 31 · CivicRole-Up-M 25
+  composure down: Neighborhood 394 · tab Civic Perception 301 · Friction 266 · Personal 257 · Strain 217 · Micro-Event 202 · PrevEvening 148 · tab Neighborhood 102 · tab Media 85
+  integrity up: tab Daily 174 · Personal 116 · tab Work 33 · Reputation 27 · BoundaryKept 23 · Media 11 · tab Neighborhood 3 · Civic 3 · tab Reputation 1
+  integrity down: tab down pool 500 · BoundaryCompromised 7
+  family up: Daily 344 · tab Daily 113 · Household 40 · Holiday 39 · tab PostCareer 22 · PostCareer 22 · tab Neighborhood 13 · Personal 11 · Retirement 9
+  family down: tab down pool 434 · Strain 195 · tab Daily 40 · Sports-Moved 6 · Personal 6
+  outabout up: tab Neighborhood 851 · Neighborhood 613 · PrevEvening 293 · tab PrevEvening 153 · tab Civic Perception 128 · Lifestyle 104 · Daily 73 · FirstFriday 47 · Cultural 45
+  outabout down: tab down pool 429 · Neighborhood 429 · Friction 262 · PrevEvening 181 · tab Neighborhood 53 · Strain 21 · QoL 20 · Weather 14 · Background 14
+  fandom up: tab Sports 1169 · Undocked-Audience 55 · tab Sports-Win 47 · Background 26 · Sports 21 · Sports-Win 15 · Media 8 · tab Neighborhood 7
+  fandom down: Sports 224 · Household-GameNight-Loss 4
+cells C117–C126 (10 Cycles): 23164 life lines on the citizens' own cells
+  drive        lines 890 / 732 (55% up) | points 1131 / 748 (60%) | citizen-weeks net up / down 819 / 658 (55%)
+      up: LifeEvent-Promotion-Up-S 132 · CivicRole-Up-S 107 · Relocation 72 · Education 66 · Personal 64 · Team 60 · Daily 54
+      down: Personal 618 · Background 46 · QoL 20 · CivicRole-Down-M 15 · Career-Layoff 9 · Education 6 · CivicRole-Down-L 6
+  sociability  lines 1918 / 1478 (56% up) | points 2517 / 1478 (63%) | citizen-weeks net up / down 1599 / 1191 (57%)
+      up: Neighborhood 480 · Civic Perception 266 · Daily 183 · Media 151 · ConnectionMaintained 145 · CivicRole-Up-S 107 · Community 102
+      down: Neighborhood 642 · Civic Perception 220 · Media 203 · Daily 163 · ConnectionWithdrawn 153 · Background 44 · Personal 36
+  warmth       lines 1448 / 1346 (52% up) | points 1767 / 1346 (57%) | citizen-weeks net up / down 1213 / 1099 (52%)
+      up: Daily 299 · Bond 263 · Personal 240 · Community 118 · Media 86 · Background 84 · Neighborhood 76
+      down: Personal 659 · Daily 251 · TrustGuarded 188 · Media 89 · Civic Perception 68 · Background 48 · Neighborhood 43
+  openness     lines 1585 / 1776 (47% up) | points 1784 / 1776 (50%) | citizen-weeks net up / down 1286 / 1468 (47%)
+      up: Civic Perception 621 · Lifestyle 263 · Personal 181 · Neighborhood 106 · Background 99 · Cultural 76 · FirstFriday 74
+      down: Civic Perception 834 · Lifestyle 727 · Personal 144 · Background 48 · FirstFriday 14 · Education 9
+  composure    lines 2670 / 2500 (52% up) | points 2955 / 2973 (50%) | citizen-weeks net up / down 1952 / 1843 (51%)
+      up: Civic Perception 815 · Personal 642 · Daily 279 · Background 227 · Micro-Event 147 · Money 128 · Home 98
+      down: Neighborhood 496 · Civic Perception 301 · Friction 266 · Personal 257 · Strain 217 · Micro-Event 202 · PrevEvening 148
+  integrity    lines 391 / 507 (44% up) | points 447 / 507 (47%) | citizen-weeks net up / down 369 / 484 (43%)
+      up: Daily 174 · Personal 116 · Work 33 · Reputation 28 · BoundaryKept 23 · Media 11 · Neighborhood 3
+      down: Personal 500 · BoundaryCompromised 7
+  family       lines 710 / 685 (51% up) | points 1239 / 692 (64%) | citizen-weeks net up / down 654 / 618 (51%)
+      up: Daily 457 · LifeEvent-Home-Up-S 45 · PostCareer 44 · Household 40 · Holiday 39 · Money 30 · Wedding 18
+      down: Daily 474 · Strain 195 · Sports-Moved 6 · Personal 6 · LifeEvent-Home-Down-M 3 · Divorce 1
+  outabout     lines 2438 / 1449 (63% up) | points 2528 / 1449 (64%) | citizen-weeks net up / down 1958 / 1089 (64%)
+      up: Neighborhood 1464 · PrevEvening 446 · Civic Perception 128 · Lifestyle 104 · Daily 73 · FirstFriday 47 · Cultural 45
+      down: Neighborhood 482 · Background 443 · Friction 262 · PrevEvening 181 · Strain 21 · QoL 20 · Weather 14
+  fandom       lines 1348 / 228 (86% up) | points 1410 / 228 (86%) | citizen-weeks net up / down 1242 / 201 (86%)
+      up: Sports 1190 · Sports-Win 62 · Undocked-Audience 55 · Background 26 · Media 8 · Neighborhood 7
+      down: Sports 224 · Household-GameNight-Loss 4
+Dial_Pulse cols: Cycle | Citizens | Moved | CrossedBand | AllMiddle | AnyLow | AnyHigh | driveUp | driveDown | sociabilityUp | sociabilityDown | warmthUp | warmthDown | opennessUp | opennessDown | composureUp | composureDown | integrityUp | integrityDown | familyUp | familyDown | outaboutUp | outaboutDown | fandomUp | fandomDown | LinesFolded | Reflections | Worn | Regained
+  117 | 1077 | 340 | 7 | 688 | 5 | 462 | 44 | 1 | 64 | 0 | 19 | 4 | 50 | 2 | 35 | 33 | 28 | 31 | 5 | 6 | 55 | 5 | 55 | 0 | 2084 | 36 | 31 | 26
+  117 | 1078 | 358 | 7 | 689 | 5 | 462 | 48 | 1 | 73 | 0 | 28 | 4 | 50 | 1 | 39 | 36 | 27 | 32 | 7 | 8 | 63 | 6 | 52 | 0 | 2437 | 36 | 32 | 25
+  117 | 1078 | 371 | 7 | 690 | 5 | 461 | 45 | 1 | 76 | 0 | 23 | 4 | 55 | 1 | 47 | 29 | 29 | 31 | 10 | 7 | 57 | 7 | 58 | 0 | 2530 | 36 | 31 | 26
+  117 | 1077 | 352 | 7 | 688 | 5 | 462 | 39 | 1 | 72 | 0 | 23 | 3 | 53 | 1 | 38 | 36 | 26 | 34 | 12 | 8 | 49 | 5 | 54 | 0 | 2454 | 36 | 34 | 24
+  117 | 1077 | 355 | 7 | 688 | 5 | 462 | 39 | 2 | 72 | 1 | 23 | 4 | 53 | 1 | 38 | 37 | 26 | 34 | 12 | 8 | 49 | 5 | 54 | 0 | 2454 | 39 | 34 | 24
+  117 | 1077 | 363 | 7 | 688 | 5 | 462 | 46 | 1 | 75 | 0 | 26 | 3 | 53 | 1 | 44 | 40 | 26 | 34 | 13 | 8 | 49 | 7 | 54 | 0 | 2454 | 55 | 34 | 24
+  117 | 1077 | 375 | 7 | 688 | 5 | 462 | 56 | 1 | 78 | 0 | 22 | 5 | 53 | 1 | 43 | 46 | 29 | 32 | 12 | 8 | 58 | 4 | 58 | 0 | 2460 | 71 | 32 | 26
+  118 | 1077 | 354 | 4 | 687 | 5 | 463 | 39 | 0 | 98 | 0 | 33 | 0 | 47 | 0 | 22 | 18 | 25 | 37 | 8 | 4 | 49 | 6 | 30 | 0 | 2327 | 0 | 37 | 19
+  117 | 1077 | 347 | 6 | 688 | 5 | 462 | 61 | 1 | 81 | 0 | 21 | 4 | 45 | 1 | 38 | 45 | 28 | 30 | 7 | 7 | 43 | 6 | 47 | 0 | 2527 | 71 | 30 | 27
+  118 | 1078 | 291 | 5 | 689 | 5 | 462 | 30 | 0 | 74 | 0 | 26 | 0 | 32 | 1 | 24 | 16 | 25 | 38 | 7 | 6 | 35 | 6 | 26 | 0 | 2355 | 0 | 38 | 20
+  117 | 1078 | 322 | 7 | 689 | 5 | 462 | 50 | 1 | 70 | 0 | 17 | 5 | 40 | 1 | 38 | 45 | 27 | 31 | 6 | 7 | 45 | 6 | 47 | 0 | 2533 | 71 | 31 | 26
+  118 | 1082 | 320 | 6 | 691 | 5 | 464 | 18 | 0 | 77 | 0 | 30 | 0 | 45 | 0 | 16 | 17 | 20 | 43 | 6 | 7 | 53 | 6 | 30 | 0 | 2447 | 0 | 43 | 18
+  119 | 1083 | 314 | 3 | 692 | 5 | 464 | 14 | 0 | 58 | 0 | 27 | 0 | 30 | 1 | 22 | 25 | 34 | 56 | 6 | 5 | 35 | 4 | 29 | 0 | 2421 | 0 | 56 | 29
+  120 | 1083 | 315 | 19 | 679 | 19 | 465 | 22 | 1 | 61 | 0 | 25 | 1 | 22 | 1 | 34 | 25 | 41 | 39 | 8 | 5 | 30 | 6 | 35 | 0 | 2549 | 0 | 39 | 40
+  121 | 1083 | 303 | 6 | 678 | 20 | 465 | 18 | 0 | 48 | 0 | 27 | 1 | 29 | 4 | 23 | 20 | 32 | 32 | 8 | 9 | 32 | 10 | 45 | 0 | 2427 | 0 | 32 | 31
+  122 | 1082 | 294 | 6 | 675 | 20 | 467 | 14 | 1 | 71 | 0 | 34 | 1 | 27 | 1 | 17 | 23 | 29 | 44 | 5 | 7 | 31 | 3 | 31 | 0 | 2359 | 0 | 44 | 25
+  123 | 1083 | 279 | 2 | 677 | 19 | 466 | 18 | 0 | 46 | 0 | 33 | 0 | 28 | 4 | 25 | 14 | 33 | 35 | 7 | 6 | 28 | 3 | 36 | 0 | 2425 | 0 | 34 | 33
+  124 | 1084 | 233 | 3 | 679 | 18 | 465 | 9 | 1 | 45 | 0 | 31 | 0 | 15 | 0 | 19 | 20 | 23 | 27 | 3 | 5 | 25 | 8 | 28 | 0 | 2354 | 0 | 27 | 23
+  125 | 1084 | 236 | 2 | 679 | 18 | 465 | 20 | 2 | 40 | 0 | 21 | 1 | 14 | 1 | 18 | 24 | 20 | 49 | 6 | 7 | 17 | 3 | 20 | 0 | 1859 | 0 | 49 | 19
+  126 | 1085 | 280 | 4 | 680 | 18 | 466 | 15 | 0 | 54 | 1 | 17 | 1 | 23 | 2 | 21 | 18 | 43 | 44 | 9 | 7 | 21 | 10 | 28 | 0 | 2163 | 0 | 43 | 40
+  117 | 1078 | 322 | 7 | 689 | 5 | 462 | 50 | 1 | 70 | 0 | 17 | 5 | 40 | 1 | 38 | 45 | 27 | 31 | 6 | 7 | 45 | 6 | 47 | 0 | 2533 | 71 | 31 | 26
+  118 | 1082 | 320 | 6 | 691 | 5 | 464 | 18 | 0 | 77 | 0 | 30 | 0 | 45 | 0 | 16 | 17 | 20 | 43 | 6 | 7 | 53 | 6 | 30 | 0 | 2447 | 0 | 43 | 18
+  117 | 1078 | 327 | 7 | 689 | 5 | 462 | 50 | 3 | 71 | 0 | 31 | 6 | 35 | 1 | 46 | 50 | 23 | 34 | 5 | 8 | 49 | 9 | 39 | 0 | 2436 | 90 | 34 | 23
+  118 | 1082 | 315 | 2 | 693 | 5 | 462 | 16 | 0 | 75 | 0 | 35 | 0 | 30 | 0 | 24 | 17 | 26 | 36 | 11 | 5 | 58 | 5 | 29 | 0 | 2380 | 0 | 36 | 21
+  119 | 1082 | 309 | 5 | 693 | 5 | 462 | 16 | 0 | 56 | 0 | 33 | 0 | 31 | 1 | 17 | 24 | 31 | 54 | 7 | 6 | 42 | 4 | 29 | 0 | 2418 | 0 | 54 | 27
+  117 | 1077 | 308 | 3 | 689 | 5 | 461 | 53 | 2 | 47 | 0 | 12 | 5 | 34 | 1 | 46 | 44 | 29 | 32 | 8 | 8 | 42 | 11 | 65 | 0 | 2523 | 98 | 32 | 25
+  118 | 1077 | 257 | 3 | 688 | 5 | 461 | 20 | 0 | 34 | 0 | 18 | 0 | 28 | 1 | 27 | 17 | 20 | 44 | 5 | 6 | 38 | 3 | 26 | 0 | 2337 | 0 | 44 | 18
+  119 | 1078 | 280 | 3 | 688 | 5 | 462 | 12 | 0 | 46 | 0 | 19 | 1 | 21 | 3 | 21 | 20 | 32 | 48 | 7 | 6 | 43 | 5 | 32 | 0 | 2346 | 0 | 48 | 30
+  120 | 1078 | 240 | 16 | 676 | 19 | 462 | 15 | 0 | 19 | 1 | 15 | 3 | 11 | 6 | 25 | 19 | 36 | 36 | 4 | 6 | 35 | 1 | 38 | 0 | 2577 | 0 | 36 | 35
+  121 | 1078 | 238 | 5 | 673 | 21 | 463 | 15 | 0 | 25 | 2 | 13 | 3 | 12 | 13 | 18 | 14 | 28 | 33 | 9 | 4 | 37 | 3 | 34 | 0 | 2366 | 0 | 32 | 27
+  122 | 1081 | 242 | 7 | 675 | 21 | 464 | 15 | 0 | 22 | 6 | 11 | 4 | 15 | 7 | 21 | 15 | 21 | 41 | 3 | 9 | 27 | 9 | 43 | 0 | 2378 | 0 | 40 | 21
+  123 | 1082 | 249 | 7 | 675 | 21 | 465 | 25 | 1 | 18 | 8 | 16 | 2 | 10 | 6 | 24 | 23 | 34 | 37 | 3 | 2 | 38 | 4 | 31 | 0 | 2462 | 0 | 36 | 32
+  124 | 1087 | 230 | 5 | 680 | 21 | 465 | 13 | 0 | 22 | 5 | 17 | 5 | 14 | 10 | 22 | 30 | 28 | 32 | 7 | 5 | 21 | 2 | 25 | 0 | 2371 | 0 | 32 | 28
+  125 | 1089 | 223 | 5 | 682 | 20 | 466 | 12 | 0 | 13 | 4 | 9 | 5 | 9 | 4 | 20 | 15 | 24 | 53 | 6 | 10 | 21 | 6 | 27 | 0 | 1880 | 0 | 53 | 22
+  126 | 1090 | 242 | 4 | 683 | 20 | 466 | 17 | 2 | 18 | 2 | 11 | 5 | 10 | 10 | 20 | 21 | 43 | 54 | 5 | 4 | 28 | 3 | 23 | 0 | 2233 | 0 | 54 | 43
+== final sync from live
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+== 2026-11-18T20:37:51-06:00 e350c bench done

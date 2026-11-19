@@ -38,7 +38,7 @@ G 'var HOUSEHOLD_SIGN_LINES_ = {' phase05-citizens/runHouseholdEngine.js
 G 'var POSTCAREER_SIGN_LINES_ = {' phase05-citizens/runAsUniversePipeline.js
 G 'var KIND_HAS_DELTAS_ = {};' phase04-events/generateGenericCitizenMicroEvent.js
 G 'var firstFridaySigns = {' phase05-citizens/runNeighborhoodEngine.js
-G 'var GRADED_ONLY_KIND_ = { "Work": true, "Media": true, "QoL": true, "Continuity": true };' phase05-citizens/generateCitizensEvents.js
+G 'var GRADED_ONLY_KIND_ = { "Work": true, "Media": true, "QoL": true, "Continuity": true, "PostCareer": true };' phase05-citizens/generateCitizensEvents.js
 G 'var firstFridayLines = \[' phase05-citizens/generateCitizensEvents.js
 tree "$W/stage" > "$MAN"
 PAT=$(echo $FILES | sed 's/ /$|/g')'$'

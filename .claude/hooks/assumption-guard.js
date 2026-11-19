@@ -1,17 +1,21 @@
 #!/usr/bin/env node
 // Stop hook — builder 2026-11-19: "it hooks every reply for you to read it again, and
 // if any claim in the response was not supported by facts the session is dead and
-// close it".
+// close it"; then: "not the session just the current reply and use haiku", "that means
+// run session-end not exit my terminal", "there should be 1 message in the hook, not the
+// session".
 //
 // Builder terminals only (tmux window research-build / engine-sheet). After each reply:
-// 1. the reply text (this turn's text blocks, plus last_assistant_message) and the
-//    session's record (Mike's messages, every tool call and its result) are written
-//    to a scratch folder;
-// 2. a headless Sonnet run reads both and checks every claim in the reply against the
-//    record;
-// 3. FAIL → the turn ends (continue:false, the unsupported claims as the reason) and
-//    the claude process gets SIGTERM. PASS or a checker error → the reply stands; every
-//    verdict is logged to output/claim-check/claim-check.jsonl.
+// 1. the one reply (this turn's text, plus last_assistant_message) and that reply's own
+//    tool calls and results are written to a scratch folder — nothing earlier in the
+//    session;
+// 2. a headless Haiku run checks every claim in the reply against those results and the
+//    project files (read-only);
+// 3. FAIL → the stop is blocked with the unsupported claims and the order to run
+//    /session-end; the terminal stays open. PASS or a checker error → the reply stands.
+//    Every verdict is logged to output/claim-check/claim-check.jsonl. A stop already
+//    driven by this hook (stop_hook_active) is not checked again, so the session-end
+//    run does not loop.
 // The checker runs outside the project folder with TMUX_PANE cleared, so this hook
 // never fires on its own run.
 
@@ -46,7 +50,7 @@ function blockText(b) {
   return '';
 }
 
-// The session record and this turn's reply, from the transcript.
+// This turn's reply and its own tool calls and results, from the transcript.
 function readTranscript(transcriptPath) {
   const entries = [];
   for (const line of fs.readFileSync(transcriptPath, 'utf8').split('\n')) {
@@ -63,30 +67,31 @@ function readTranscript(transcriptPath) {
   const reply = [];
   entries.forEach((e, i) => {
     const c = e.message && e.message.content;
-    if (!c || (e.type !== 'user' && e.type !== 'assistant')) return;
+    if (i < turnStart || !c || (e.type !== 'user' && e.type !== 'assistant')) return;
     const blocks = Array.isArray(c) ? c : [c];
     for (const b of blocks) {
       if (e.type === 'assistant' && b.type === 'text') {
-        if (i >= turnStart) reply.push(b.text);
+        reply.push(b.text);
         continue;
       }
       if (b.type === 'thinking') continue;
       const t = blockText(b);
       if (!t) continue;
-      const who = b.type === 'tool_use' ? 'TOOL CALL' : b.type === 'tool_result' ? 'TOOL RESULT' : 'MIKE';
+      const who = b.type === 'tool_use' ? 'TOOL CALL' : 'TOOL RESULT';
       record.push(`[${who}] ${t}`);
     }
   });
   return { record: record.join('\n\n'), reply: reply.join('\n\n') };
 }
 
-const CHECK_PROMPT = `You check one reply from a builder session against that session's record.
+const CHECK_PROMPT = `You check one reply from a builder session.
 
 Files in this folder:
 - reply.txt — the reply.
-- record.txt — everything before and during it: [MIKE] messages, [TOOL CALL]s and their [TOOL RESULT]s.
+- record.txt — the [TOOL CALL]s the reply made and their [TOOL RESULT]s.
+The project is at /root/GodWorld (read-only for you).
 
-Find every claim in the reply about the project, its code, files, sheets, deploys, git, settings, what was done, or what Mike said. For each one, search record.txt for the tool result or Mike message that supports it. Plans ("I'll do X"), questions, and quotes from Mike are not claims. A claim is supported only if the record shows it; general knowledge does not count.
+Find every claim in the reply about the project, its code, files, sheets, deploys, git, settings, or what was done. For each one, find the support in record.txt or in the project's files. Plans ("I'll do X"), questions, and quotes from Mike are not claims. A claim is supported only if a result or a file shows it; general knowledge does not count.
 
 End with exactly one line of JSON and nothing after it:
 {"verdict":"PASS"} if every claim is supported, or
@@ -101,8 +106,9 @@ function check(record, reply) {
   delete env.TMUX;
   const run = spawnSync('claude', [
     '-p', CHECK_PROMPT,
-    '--model', 'sonnet',
-    '--allowedTools', 'Read', 'Grep',
+    '--model', 'haiku',
+    '--allowedTools', 'Read', 'Grep', 'Glob',
+    '--add-dir', ROOT,
     '--no-session-persistence',
   ], { cwd: dir, env, encoding: 'utf8', timeout: 170000 });
   const out = (run.stdout || '').trim();
@@ -114,18 +120,6 @@ function check(record, reply) {
   }
 }
 
-function claudePid() {
-  let pid = process.ppid;
-  for (let n = 0; n < 6 && pid > 1; n++) {
-    const out = execSync(`ps -o ppid= -o comm= -p ${pid}`, { encoding: 'utf8' }).trim();
-    const m = out.match(/^(\d+)\s+(.*)$/);
-    if (!m) return 0;
-    if (/claude/i.test(m[2])) return pid;
-    pid = Number(m[1]);
-  }
-  return 0;
-}
-
 function log(row) {
   fs.mkdirSync(path.dirname(LOG), { recursive: true });
   fs.appendFileSync(LOG, JSON.stringify(Object.assign({ at: new Date().toISOString() }, row)) + '\n');
@@ -135,6 +129,7 @@ function main() {
   const input = JSON.parse(fs.readFileSync(0, 'utf8') || '{}');
   const terminal = windowName();
   if (!TERMINALS.includes(terminal)) return;
+  if (input.stop_hook_active) return;
   if (!input.transcript_path || !fs.existsSync(input.transcript_path)) return;
   const t = readTranscript(input.transcript_path);
   let reply = t.reply;
@@ -145,11 +140,8 @@ function main() {
   log({ terminal, session: input.session_id, verdict: result.verdict, dir: result.dir });
   if (!result.verdict || result.verdict.verdict !== 'FAIL') return;
   const claims = (result.verdict.unsupported || []).join(' | ');
-  const reason = `claim check FAILED — unsupported: ${claims} — session closed (builder 2026-11-19).`;
-  process.stdout.write(JSON.stringify({ continue: false, stopReason: reason }) + '\n');
-  if (process.env.CLAIM_CHECK_NO_KILL === '1') return;
-  const pid = claudePid();
-  if (pid) setTimeout(() => { try { process.kill(pid, 'SIGTERM'); } catch (e) {} }, 500);
+  const reason = `Claim check FAILED on this reply — unsupported: ${claims}. The session is dead (builder 2026-11-19): run /session-end now.`;
+  process.stdout.write(JSON.stringify({ decision: 'block', reason }) + '\n');
 }
 
 main();

@@ -4,4 +4,4 @@
 
 **NEXT[engine-sheet]:** no row (his word 11-19; civic.49 is the city-workers job), plan 2026-11-19-ind-led-initiatives-can-pass → build N1 (override vote counts each seat once, the Task 1 shape), bench, deploy, then read Storyline_Ledger after C117. pipeline.110: templates garbage (his 11-18); council on hold. No model run without his word.
 
-**NEXT[research-build]:** No push from here (es pushes). pipeline.112 → read output/research-build/2026-11-19-p112-readback-846.log, compare every wall against the BEFORE files, read the cron writes (plan Task 5), then take the reader fallbacks out. Then engine.350 Task 15. Live sheet writes are refused here. The delete guard is his: never open.
+**NEXT[research-build]:** No push from here (es pushes). pipeline.112 → the 58 entries shown differently after the rewrite (plan changelog 11-19; several writes in one entry), then the cron writes (plan Task 5), then the reader fallbacks out. Then engine.350 Task 15. Live sheet writes are refused here. The delete guard is his: never open.

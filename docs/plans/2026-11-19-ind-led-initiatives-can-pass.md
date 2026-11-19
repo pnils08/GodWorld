@@ -64,10 +64,11 @@ pointers:
 
 ## Open questions
 
-- INIT-007's Status (passed, no vote on record, writer unknown): the doc's one extra cell, not in the 70 — the builder says whether it was his hand.
+- ~~INIT-007's Status (passed, no vote on record, writer unknown)~~ — ruled 2026-11-19 (builder, verbatim): "int belongs to baylight its no a stand-alone iniative, never was". INIT-007 is part of Baylight, not an initiative of its own. Its tracker row is not changed by this ruling.
 
 ## Changelog
 
+- 2026-11-19 (es) — INIT-007 ruled: part of Baylight, never a stand-alone initiative (builder). Open question closed; the override vote (N1) is the only ruling left.
 - 2026-11-19 (es) — tracker restored: INIT-003, 006, 008–014 on the C114 natural path, no vote dates; the first IND-led vote waits on the override ruling (N1). Storyline_Ledger read after the C117 fire.
 - 2026-11-19 (es) — bench C117 PASS, PROD stage 59 @194 live; tracker restore next; override path (N1) is the builder's to rule before any IND-led vote is dated.
 - 2026-11-19 (es) — restore doc checked against sources, accurate bar one wording; builder approved B, C, D on that condition; 70-cell list built read-only; writes wait for the vote fix to be live.

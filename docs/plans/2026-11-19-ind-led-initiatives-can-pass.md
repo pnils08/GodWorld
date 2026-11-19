@@ -68,6 +68,7 @@ pointers:
 
 ## Changelog
 
+- 2026-11-19 (es) — N1 built `94728b5e4`: processOverrideVote_ counts each seat once; third faction votes at 0.55; blank lead/opposition read OPP/CRC. Parity 6,000 runs per case on five lead/opposition pairs (OPP-CRC, OPP-blank, IND-OPP, CRC-OPP same; IND-blank 0 → 611); untested pairs: CRC-blank, OPP-IND. Tests 17/17. Bench SANDBOX 1004 @216 pushed (pull-back identical); fire started, result not yet read.
 - 2026-11-19 (es) — N1 is code, not a builder ruling: the override vote gets the Task 1 shape (each seat once), benched and deployed like stage 59.
 - 2026-11-19 (es) — N1 wording corrected: the bench recorded INIT-009's pass and veto only; the override outcome is a code read, not a bench result.
 - 2026-11-19 (es) — INIT-007 ruled: part of Baylight, never a stand-alone initiative (builder). Open question closed; the override vote (N1) is the only ruling left.

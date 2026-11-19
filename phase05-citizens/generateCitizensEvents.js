@@ -1378,6 +1378,7 @@ function generateCitizensEvents_(ctx) {
       if (typeof t.v === "number") {
         var av = Number(actual);
         if (isNaN(av)) return false;
+        if (t.soft) { if (!(contentDialTermShare_(t, av) > 0)) return false; continue; } // engine.349 Task 14
         if (t.op === "<=") { if (!(av <= t.v)) return false; }
         else if (t.op === ">=") { if (!(av >= t.v)) return false; }
         else if (t.op === "<") { if (!(av < t.v)) return false; }
@@ -1395,6 +1396,26 @@ function generateCitizensEvents_(ctx) {
       }
     }
     return true;
+  }
+
+  // engine.349 Task 14: a dial term (warmth>=60) is a share of the row's Weight, not a cliff —
+  // nothing 10 points short of the number, half at it, whole 10 points past (the loader marks
+  // the term `soft`). contentDialShare_ is the product over a row's dial terms, 1 with none.
+  var CONTENT_DIAL_RAMP = 10;
+  function contentDialTermShare_(t, av) {
+    var up = (t.op === ">=" || t.op === ">");
+    var s = (up ? (av - (t.v - CONTENT_DIAL_RAMP)) : ((t.v + CONTENT_DIAL_RAMP) - av)) / (2 * CONTENT_DIAL_RAMP);
+    return s < 0 ? 0 : (s > 1 ? 1 : s);
+  }
+  function contentDialShare_(terms, scopes) {
+    var share = 1;
+    if (!terms) return share;
+    for (var i = 0; i < terms.length; i++) {
+      if (!terms[i].soft) continue;
+      var av = Number(scopes[terms[i].f]);
+      share *= isNaN(av) ? 0 : contentDialTermShare_(terms[i], av);
+    }
+    return share;
   }
 
   // Injection-time guarantee: every fragment slot in this line has >=1
@@ -1437,7 +1458,10 @@ function generateCitizensEvents_(ctx) {
         var eligible = [];
         var frags = ledger.fragments[slot] || [];
         for (var fi = 0; fi < frags.length; fi++) {
-          if (evalContentConditions_(frags[fi].conditions, scopes)) eligible.push(frags[fi]);
+          if (!evalContentConditions_(frags[fi].conditions, scopes)) continue;
+          var fragShare = contentDialShare_(frags[fi].conditions, scopes);
+          // a fragment behind a dial term is drawn at that share of its weight (a copy: the ledger row is shared)
+          eligible.push(fragShare < 1 ? { text: frags[fi].text, weight: Number(frags[fi].weight || 1) * fragShare } : frags[fi]);
         }
         // S329 (Grok review item 5): per-cycle fragment soft cap — the same
         // MOOD clause was stamping many citizens per cycle (smoke: 23x). Prefer
@@ -3456,7 +3480,7 @@ function generateCitizensEvents_(ctx) {
           if (!evalContentConditions_(clEntry.conditions, condScopes)) continue;
           if (!contentSlotsFillable_(clEntry, contentLedger, condScopes, String(popId).trim().toUpperCase())) continue;
           var clTags = clEntry.grain ? mergeTags(clEntry.tags, ["grain:" + clEntry.grain]) : clEntry.tags;
-          var clPooled = makeEntry(clEntry.text, mergeTags(clTags, calendarTags), clEntry.weight, false);
+          var clPooled = makeEntry(clEntry.text, mergeTags(clTags, calendarTags), clEntry.weight * contentDialShare_(clEntry.conditions, condScopes), false);
           clPooled.ledgerLine = clEntry;      // draw-time compose hook
           clPooled.ledgerScopes = condScopes; // fragment eligibility at compose
           clPooled.eclKey = eclRowKey_(clk, clEntry.text); // S329 telemetry identity

@@ -1196,7 +1196,7 @@
 
 - **noteVentureClosedOwners_(ctx, keyPersonnelCell, bizName, cycle)**
 
-- **bizOwnerBands_(ctx, keyPersonnelCell)**
+- **bizOwnerDials_(ctx, keyPersonnelCell)**
 
 - **bizDriftOne_(cfg, biz, prevState, inputs, cycle)**
 
@@ -1375,7 +1375,7 @@
 
 - **bondTraitOf_(ctx, popId, trait)**
 
-- **bondDialBand_(ctx, popId, dial)**
+- **bondDialPos_(ctx, popId, dial)**
 
 - **bondPairFactor_(ctx, popA, popB, dial)**
 
@@ -2902,7 +2902,7 @@
 
 - **dialBandIndexFromValue_(v)**
 
-- **holderIntegrityBand_(ctx, holderName)**
+- **holderIntegrityPos_(ctx, holderName)**
 
 - **readDialBase_(dialState, dial)**
 
@@ -4203,7 +4203,15 @@
 
 - **band_(c, dial)**
 
-- **bandMultiplier_(c, dial)**
+- **dialLadder_(v, table)**
+
+- **dialPos_(v)**
+
+- **dialHigh_(v, k)**
+
+- **dialLow_(v, k)**
+
+- **dialMultiplier_(c, dial)**
 
 - **describe_(c)**
 
@@ -4947,4 +4955,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 181
-**Functions mapped:** 1800
+**Functions mapped:** 1804

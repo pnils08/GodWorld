@@ -22,13 +22,13 @@
  * from damning anyone.
  *
  * Dial biasing (the T5 back-arc pointed at the dark side):
- * - crimeReachable gates COMMIT. The engine.31 accessor contract
- *   (compressLifeHistory.js ~L800: bandIndex <= 0) makes ONLY band -2
- *   (raw integrity < 20) reachable today — everyone else draws tests but
- *   always resists. "No one is safe" arrives via drift to far-low, not via
- *   dice. The commitP formula below is band-generic: if engine.31 ever
- *   widens the contract, the -1 rung opens automatically at .55.
- * - Deeper negative integrity -> higher commit odds + deeper severity.
+ * - crimeReach scales COMMIT (getCitizenDialBands_, a share 0..1 off the numbers,
+ *   engine.349 Task 14): nothing at integrity 30 and up, half at 20, whole at 10 —
+ *   or integrity under 50 on a citizen whose composure has gone to the bottom.
+ *   "No one is safe" arrives via drift to far-low, not via dice.
+ * - Every table here is read at the number (dialLadder_: the values a citizen at
+ *   10 / 30 / 50 / 70 / 90 gets, a straight line between).
+ * - Lower integrity -> higher commit odds + deeper severity.
  * - Low composure -> slightly more tests (stress invites temptation) and
  *   deeper severity on commit.
  *
@@ -45,6 +45,12 @@
  *
  * ============================================================================
  */
+
+// engine.349 Task 14: the odds tables by integrity, read at the number (dialLadder_) —
+// the value at integrity 10 / 30 / 50 / 70 / 90, a straight line between.
+var CONDUCT_SLIP_P_ = [0.35, 0.35, 0.25, 0.15, 0.05];      // an ordinary temptation given in to
+var CONDUCT_GRAVE_P_ = [0.10, 0.05, 0.02, 0.02, 0.02];     // a committed act is grave
+var CONDUCT_SERIOUS_P_ = [0.45, 0.30, 0.15, 0.15, 0.15];   // ... or serious; the rest is petty
 
 function runConductEngine_(ctx) {
 
@@ -194,8 +200,9 @@ function runConductEngine_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     var chance = 0.012;
 
-    // Stress invites temptation
-    if (dialBands.bands.composure <= -1) chance *= 1.25;
+    // Stress invites temptation: x1.25 at composure 30 and under, nothing at 50 and up
+    var conductCur = dialBands.current;
+    chance *= 1 + 0.25 * dialLow_(conductCur.composure, 1);
     if (econMood <= 35) chance *= 1.2;
 
     // Counterweight: under crime pressure (hood-grain, engine.33 T8) the
@@ -209,14 +216,13 @@ function runConductEngine_(ctx) {
     if (cRng() >= chance) continue;
 
     // ═══════════════════════════════════════════════════════════════════════
-    // RESOLVE — commit vs resist, integrity-band biased
+    // RESOLVE — commit vs resist, by the integrity number
     // ═══════════════════════════════════════════════════════════════════════
-    var intBand = dialBands.bands.integrity;
+    var reach = dialBands.crimeReach;
     var commitP = 0;
-    if (dialBands.crimeReachable) {
-      // band-generic ladder: -1 -> 0.55, -2 -> 0.75. Today only -2 is
-      // reachable (accessor contract); the -1 rung is dormant, not dead.
-      commitP = 0.35 + (-intBand * 0.20);
+    if (reach > 0) {
+      // integrity 30 -> 0.55, 10 -> 0.75, times how far the door is open
+      commitP = reach * (0.35 + 0.20 * Math.max(0, -dialBands.pos.integrity));
       // Counterweight: resilience under crime pressure (hood-grain, T8)
       if (spike) commitP *= 0.6;
     }
@@ -225,13 +231,15 @@ function runConductEngine_(ctx) {
     var committed = resolveRoll < commitP;
     var eventTag, pick;
 
-    if (!dialBands.crimeReachable) {
-      // engine.201 Wave 2 (ruling 3): a citizen the crime ladder cannot reach still meets ordinary
-      // temptations. Same draw as before (draw count unchanged); integrity band sets the odds — a
+    if (!committed && reach < 0.5) {
+      // engine.201 Wave 2 (ruling 3): a citizen short of the crime door still meets ordinary
+      // temptations. Same draw as before (draw count unchanged); integrity sets the odds — a
       // principled citizen rarely slips, a slippery one often. Kept = integrity +1, slipped = -1:
-      // ordinary scale, so being tested no longer hands out a crime-sized +5.
-      var slipP = intBand <= -1 ? 0.35 : (intBand === 0 ? 0.25 : (intBand === 1 ? 0.15 : 0.05));
-      if (resolveRoll < slipP) {
+      // ordinary scale, so being tested no longer hands out a crime-sized +5. The roll is what
+      // is left of it after the commit share, so the slip odds are the table's.
+      var slipP = dialLadder_(conductCur.integrity, CONDUCT_SLIP_P_);
+      var slipRoll = commitP > 0 ? (resolveRoll - commitP) / (1 - commitP) : resolveRoll;
+      if (slipRoll < slipP) {
         eventTag = "BoundaryCompromised";
         pick = slipPool[Math.floor(cRng() * slipPool.length)];
       } else {
@@ -239,15 +247,13 @@ function runConductEngine_(ctx) {
         pick = resistPool[Math.floor(cRng() * resistPool.length)];
       }
     } else if (!committed) {
+      // past the old door (reach 0.5 = integrity 20): a test not failed is a crime resisted
       eventTag = "Resisted";
       pick = resistPool[Math.floor(cRng() * resistPool.length)];
     } else {
-      // Severity ladder — deeper negative integrity -> deeper severity;
-      // low composure shifts further down.
-      var graveP = 0.02, seriousP = 0.15;
-      if (intBand <= -1) { graveP = 0.05; seriousP = 0.30; }
-      if (intBand <= -2) { graveP = 0.10; seriousP = 0.45; }
-      if (dialBands.bands.composure <= -1) { seriousP += 0.05; }
+      // Severity ladder — lower integrity -> deeper severity; low composure shifts further down.
+      var graveP = dialLadder_(conductCur.integrity, CONDUCT_GRAVE_P_);
+      var seriousP = dialLadder_(conductCur.integrity, CONDUCT_SERIOUS_P_) + 0.05 * dialLow_(conductCur.composure, 1);
 
       var sevRoll = cRng();
       if (sevRoll < graveP) {

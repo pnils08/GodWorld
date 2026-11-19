@@ -55,6 +55,7 @@ var CASINO_ODDS_FLOOR = 1.40;
 var CASINO_ODDS_CEIL = 8.00;
 var CASINO_SPORTS_FLOOR = 1.05;
 var CASINO_PLACE_P = 0.012;
+var CASINO_DRIVE_F_ = [1.0, 1.0, 1.0, 1.4, 1.4];   // the placing odds by drive at 10 / 30 / 50 / 70 / 90 (dialLadder_)
 var CASINO_RECORD_RE = /^\d+\s*[-–]\s*\d+$/;
 
 var UNDOCKED_DRAW_TAB = 'Undocked_Draw';
@@ -960,13 +961,19 @@ function processCasinoLedger_(ctx, cycle) {
     // when the maneuver phase ran, its factor replaces the raw drive read.
     var postureE = (typeof maneuverPostureOf_ === 'function') ? maneuverPostureOf_(ctx, pid) : null;
     var drive = casinoDrive_(iDial >= 0 ? crow[iDial] : '', iTrait >= 0 ? crow[iTrait] : '');
-    var driveF = postureE ? maneuverFactor_(ctx, pid, null) : (drive >= 60 ? 1.4 : 1.0);
+    // engine.349 Task 14: drive by the number — x1.0 at 50 and under, x1.4 at 70 and up
+    var driveF = postureE ? maneuverFactor_(ctx, pid, null) : dialLadder_(drive, CASINO_DRIVE_F_);
     // engine.178 (S438): the dials gate AROUND the posture factor. An incorruptible
-    // citizen (integrity +2) does not sit down; a volatile one (composure -2) draws
-    // the tilt stake band whatever the posture says. Bands off the row's DialState.
+    // citizen does not sit down; a volatile one draws the tilt stake band whatever the
+    // posture says. By the numbers off the row's DialState (engine.349 Task 14): the
+    // odds of sitting down thin from integrity 70 (whole) through 80 (half) to 90 (none);
+    // a tilt week comes at composure 30 (never) through 20 (half the weeks) to 10 (always),
+    // a draw spent only when the odds are between 0 and 1.
     var gateBands = (iDial >= 0 && typeof getCitizenDialBands_ === 'function') ? getCitizenDialBands_(ctx, pid, crow[iDial] || '') : null;
-    if (gateBands && gateBands.bands.integrity >= 2) { S.casinoGates = S.casinoGates || { refused: 0, tilt: 0 }; S.casinoGates.refused++; continue; }
-    var tilt = !!(gateBands && gateBands.bands.composure <= -2);
+    var refuseShare = gateBands ? dialHigh_(gateBands.current.integrity, 2) : 0;
+    if (refuseShare >= 1) { S.casinoGates = S.casinoGates || { refused: 0, tilt: 0 }; S.casinoGates.refused++; continue; }
+    var tiltShare = gateBands ? dialLow_(gateBands.current.composure, 2) : 0;
+    var tilt = tiltShare >= 1 || (tiltShare > 0 && rng() < tiltShare);
     if (tilt) { S.casinoGates = S.casinoGates || { refused: 0, tilt: 0 }; S.casinoGates.tilt++; }
     var wantShow = showOn && casinoEligible_(status, age, income, nw, emp, 'undocked', isPilot);
     var wantSports = casinoEligible_(status, age, income, nw, emp, 'sports', isPilot);
@@ -974,7 +981,7 @@ function processCasinoLedger_(ctx, cycle) {
 
     var showF = wantShow ? 1.5 : 1.0;
     var sportsF = wantSports ? 1.3 : 1.0;
-    var p = CASINO_PLACE_P * driveF * (wantShow ? showF : 1) * (wantSports ? sportsF : 1);
+    var p = CASINO_PLACE_P * driveF * (wantShow ? showF : 1) * (wantSports ? sportsF : 1) * (1 - refuseShare);
     if (rng() >= p) continue;
 
     var pickShow = wantShow && (!wantSports || rng() < 0.5);

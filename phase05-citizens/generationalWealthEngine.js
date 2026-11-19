@@ -3254,7 +3254,7 @@ function updateHeritage_(ss, ctx, cycle) {
         challengers.sort(function (a, b) { return String(a[iPop]) < String(b[iPop]) ? -1 : 1; });
         var champTerms = function (row) {
           var gb = (iDialH >= 0 && typeof getCitizenDialBands_ === 'function') ? getCitizenDialBands_(ctx, String(row[iPop]).trim(), row[iDialH] || '') : null;
-          return { drive: gb ? gb.bands.drive : 0, integrity: gb ? gb.bands.integrity : 0 };
+          return { drive: gb ? gb.pos.drive : 0, integrity: gb ? gb.pos.integrity : 0 };
         };
         for (var ch = 0; ch < challengers.length; ch++) {
           var crH = contestRoll_(ctx.summary, rng, champTerms(stakeRow), champTerms(challengers[ch]), 'heritage-stake', String(stakeRow[iPop]), String(challengers[ch][iPop]));

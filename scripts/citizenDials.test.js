@@ -56,20 +56,31 @@ console.log('═══ Section A — dial mechanic');
   assert('A8 integrity floors at 0 under relentless transgression', E.current_(c6, 'integrity') >= 0 && E.current_(c6, 'integrity') < 40);
 }
 
-console.log('═══ Section B — band layer is the only interface');
+console.log('═══ Section B — the band is a label; readers take the number (engine.349 Task 14)');
 {
   assert('B1 bandIndex boundaries (0,19->0; 20->1; 50->2; 79->3; 80,100->4)',
     E.bandIndex_(0) === 0 && E.bandIndex_(19) === 0 && E.bandIndex_(20) === 1 &&
     E.bandIndex_(50) === 2 && E.bandIndex_(79) === 3 && E.bandIndex_(80) === 4 && E.bandIndex_(100) === 4);
 
   const c = E.newCitizen_();
-  assert('B2 neutral citizen -> band 0 (signed) + multiplier 1.0', E.band_(c, 'drive') === 0 && E.bandMultiplier_(c, 'drive') === 1.0);
+  assert('B2 neutral citizen -> band 0 (signed) + multiplier 1.0', E.band_(c, 'drive') === 0 && E.dialMultiplier_(c, 'drive') === 1.0);
 
   const hi = E.newCitizen_({ drive: 90 });
   const lo = E.newCitizen_({ drive: 10 });
-  assert('B3 high band -> multiplier > 1, low band -> multiplier < 1', E.bandMultiplier_(hi, 'drive') > 1 && E.bandMultiplier_(lo, 'drive') < 1);
-  assert('B4 78 and 73 are identical in effect (same band, same multiplier)',
-    E.bandMultiplier_(E.newCitizen_({ drive: 78 }), 'drive') === E.bandMultiplier_(E.newCitizen_({ drive: 73 }), 'drive'));
+  assert('B3 high band -> multiplier > 1, low band -> multiplier < 1', E.dialMultiplier_(hi, 'drive') > 1 && E.dialMultiplier_(lo, 'drive') < 1);
+  const near = (a, b) => Math.abs(a - b) < 1e-9;
+  const mult = v => E.dialMultiplier_(E.newCitizen_({ drive: v }), 'drive');
+  assert('B4 78 and 73 are not the same citizen: the number counts', mult(78) > mult(73));
+  assert('B4a the old band values hold at each band middle (10/30/50/70/90)',
+    near(mult(10), 0.5) && near(mult(30), 0.75) && near(mult(50), 1.0) && near(mult(70), 1.25) && near(mult(90), 1.5));
+  assert('B4b the middle counts: 45 -> 0.9375, 55 -> 1.0625', near(mult(45), 0.9375) && near(mult(55), 1.0625), `${mult(45)} ${mult(55)}`);
+  assert('B4c no cliff at an edge: 59.9 and 60.1 are a hair apart', Math.abs(mult(60.1) - mult(59.9)) < 0.01);
+  assert('B4d flat past 10 and 90', near(mult(0), 0.5) && near(mult(100), 1.5));
+  assert('B4e dialPos_: 50 -> 0, 55 -> 0.25, 70 -> 1, 5 -> -2', near(E.dialPos_(50), 0) && near(E.dialPos_(55), 0.25) && near(E.dialPos_(70), 1) && near(E.dialPos_(5), -2));
+  assert('B4f dialHigh_(v, 2): 70 -> 0, 80 -> 0.5, 90 -> 1', near(E.dialHigh_(70, 2), 0) && near(E.dialHigh_(80, 2), 0.5) && near(E.dialHigh_(90, 2), 1) && E.dialHigh_(50, 2) === 0);
+  assert('B4g dialLow_(v, 1): 50 -> 0, 40 -> 0.5, 30 -> 1', near(E.dialLow_(50, 1), 0) && near(E.dialLow_(40, 1), 0.5) && near(E.dialLow_(30, 1), 1) && E.dialLow_(60, 1) === 0);
+  let threw = false; try { E.dialLadder_('abc', [0, 0, 0, 0, 0]); } catch (e) { threw = true; }
+  assert('B4h a dial that is not a number throws, never reads as the middle', threw);
 
   assert('B5 neutral citizen describes as unremarkable ("")', E.describe_(c) === '');
   assert('B6 high-drive citizen reads "driven"/"relentless"', /driven|relentless/.test(E.describe_(hi)));

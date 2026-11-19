@@ -109,7 +109,7 @@ const NBHDS = ['Temescal', 'Downtown', 'Fruitvale', 'Lake Merritt', 'West Oaklan
   'Rockridge', 'Jack London', 'Uptown', 'KONO', 'Chinatown', 'Piedmont Ave'];
 
 // Cohorts: 50 neutral (no DialState — seeds organically through lived events),
-// 5 tempted (band -1, unreachable), 5 outlaw (band -2, crimeReachable).
+// 5 tempted (integrity 25: the crime door a quarter open), 5 outlaw (integrity 10: wide open).
 function buildPopulation() {
   const rows = [];
   for (let i = 0; i < 50; i++) {
@@ -264,10 +264,19 @@ const spike = runTrace(120, { crimePressure: 80 });
 console.log('   conduct tally:', JSON.stringify(spike.tally));
 assert('G7a spike city fires FEWER moral tests than calm city',
   spike.tally.fires < calm.tally.fires, spike.tally.fires + ' vs ' + calm.tally.fires);
-assert('G7b spike commit share <= calm commit share (lean positive, no runaway)',
-  (spike.tally.commits / Math.max(1, spike.tally.fires)) <= (calm.tally.commits / Math.max(1, calm.tally.fires)),
-  (spike.tally.commits / Math.max(1, spike.tally.fires)).toFixed(3) + ' vs ' +
-  (calm.tally.commits / Math.max(1, calm.tally.fires)).toFixed(3));
+// engine.349 Task 14: one trace holds 8 or 9 commits, too few to compare a share (the tempted
+// cohort at integrity 25 now commits a little, and one seed read 0.123 against 0.102). Ten
+// paired seeds pool to about 60 commits a side; the lean has to show there.
+{
+  let cC = 0, cF = 0, sC = 0, sF = 0;
+  [2026, 7, 11, 13, 17, 19, 23, 29, 31, 37].forEach(seed => {
+    rngImpl = mulberry32(seed); const a = runTrace(120);
+    rngImpl = mulberry32(seed); const b = runTrace(120, { crimePressure: 80 });
+    cC += a.tally.commits; cF += a.tally.fires; sC += b.tally.commits; sF += b.tally.fires;
+  });
+  assert('G7b spike commit share < calm commit share, ten paired seeds pooled (lean positive, no runaway)',
+    cF > 500 && sF > 300 && (sC / sF) < (cC / cF), (sC / sF).toFixed(3) + ' vs ' + (cC / cF).toFixed(3) + ' (' + sC + '/' + sF + ' vs ' + cC + '/' + cF + ')');
+}
 assert('G7c spike trace stays bounded too', spike.bounded);
 
 console.log('═══ Trace B — high volume (5 filler lines/citizen/cycle), folds fire every cycle');

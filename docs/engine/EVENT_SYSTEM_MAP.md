@@ -56,7 +56,7 @@ Ripples become digested narrative media for LLMs.
 | `runHouseholdEngine.js` | 5 | ENGINE (T3-4) | ~70 home/family texture | `familyFreq`. MaritalStatus/NumChildren gates pools. |
 | `runEducationEngine.js` | 5 | ENGINE (T3-4) | ~50 learning texture | `mult.openness` |
 | `runNeighborhoodEngine.js` | 5 | ENGINE (T3-4) | ~70 neighborhood mood + holiday | `mult.outabout`. Assigns Neighborhood if missing. **engine.299:** a hood texture line carries the hood's own NeighborhoodTrajectory as its sign (growth Up / decay Down; steady → not written, counted); context lines carry their own; Friction/Strain tint unchanged. |
-| `runConductEngine.js` | 5 | ENGINE (T3-4) | petty/serious/grave/resist | **CORE:** `crimeReachable` gates commit. |
+| `runConductEngine.js` | 5 | ENGINE (T3-4) | petty/serious/grave/resist | **CORE:** `crimeReach` (a share off the integrity number) scales commit. |
 | `runYouthEngine.js` | 5 | (none) | academic/sports/civic/resilience | `mult.drive` |
 
 ---

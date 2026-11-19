@@ -14,6 +14,9 @@ global.queueCellIntent_ = function (ctx, tab, r, c, v) {
 // engine.148: the calendar's year helper, from the real source — the flat Apps Script namespace resolves it the same way
 global.simYearOf_ = new Function(require('fs').readFileSync(require('path').resolve(__dirname, '../phase01-config/advanceSimulationCalendar.js'), 'utf8') + '\nreturn simYearOf_;')();
 
+// engine.349 Task 14: the dial readers (dialLadder_, dialHigh_, dialLow_) are citizenMemory.js globals
+{ const CM = require('../utilities/citizenMemory.js'); ['dialLadder_', 'dialPos_', 'dialHigh_', 'dialLow_'].forEach(k => { global[k] = CM[k]; }); }
+
 const E = require('../phase05-citizens/casinoLedgerEngine.js');
 // engine.350: the settle reads the bet-size bars through the dial map's own World_Config reader
 const DM = require('../utilities/citizenDialMap.js');

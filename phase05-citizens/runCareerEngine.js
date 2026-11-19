@@ -1504,14 +1504,19 @@ function runCareerEngine_(ctx) {
     // engine.32 T5 — Drive dial scales career-event frequency (0.5..1.5).
     // null bands (no DialState) -> base rates unchanged.
     var dialBands = getCitizenDialBands_(ctx, popId, iDialState >= 0 ? (row[iDialState] || "") : "");
-    // engine.182 (S438, builder: "what does that trait do?"): AMBITION COSTS. A citizen in the
-    // top drive band whose composure sits at or below neutral is working themselves thin —
-    // Strain every cycle the condition holds, and it never adapts (PRESSURE_NO_ADAPT).
+    // engine.182 (S438, builder: "what does that trait do?"): AMBITION COSTS. A citizen at the
+    // top of drive whose composure sits at or below neutral is working themselves thin —
+    // Strain, and it never adapts (PRESSURE_NO_ADAPT). By the numbers (engine.349 Task 14):
+    // the odds of a Strain week are (drive: 0 at 70, half at 80, sure at 90) x (composure:
+    // sure at 50 and under, half at 60, 0 at 70); a draw is spent only when the odds are
+    // between 0 and 1.
     // One pressure tag per citizen per cycle still applies (the hood tint claims first).
     // engine.274: checked for every row that clears the gates above (it sat behind the
     // event cap), and `existing` is re-read after it — a texture event below rebuilt the
     // cell from the stale copy and overwrote the Strain line just written.
-    if (dialBands && dialBands.bands.drive >= 2 && dialBands.bands.composure <= 0 && iLife >= 0) {
+    var overworkP = (dialBands && iLife >= 0)
+      ? dialHigh_(dialBands.current.drive, 2) * (1 - dialHigh_(dialBands.current.composure, 1)) : 0;
+    if (overworkP > 0 && (overworkP >= 1 || roll() < overworkP)) {
       emitPressureTag_(ctx, row, iLife, popId, 'overwork', pressureText_('overwork', cycle + r));
       existing = row[iLife] ? row[iLife].toString() : "";
     }
@@ -1918,7 +1923,7 @@ function runCareerEngine_(ctx) {
       var slots = sameField.slice(0, openings);
       var leftOut = sameField.length > openings ? pool[sameField[openings]] : null;
       // engine.179 (S438): the LAST slot is contested when the first left-out candidate
-      // shares its need band — drive + credential (both on the band scale), the dice
+      // shares its need band — drive (its number on the signed scale) + credential, the dice
       // decide, the underdog can win. The need sort stays: poorest first is the cause.
       if (leftOut && openings > 0 && typeof contestRoll_ === 'function') {
         var lastIdx = slots[openings - 1], outIdx = sameField[openings];
@@ -1926,8 +1931,8 @@ function runCareerEngine_(ctx) {
           var bandsIn = getCitizenDialBands_(ctx, pool[lastIdx].pop, iDialState >= 0 ? (rows[pool[lastIdx].r][iDialState] || '') : '');
           var bandsOut = getCitizenDialBands_(ctx, leftOut.pop, iDialState >= 0 ? (rows[leftOut.r][iDialState] || '') : '');
           var cr = contestRoll_(S, roll,
-            { drive: bandsIn ? bandsIn.bands.drive : 0, credential: credentialBand_(pool[lastIdx].eduLabel) },
-            { drive: bandsOut ? bandsOut.bands.drive : 0, credential: credentialBand_(leftOut.eduLabel) },
+            { drive: bandsIn ? bandsIn.pos.drive : 0, credential: credentialBand_(pool[lastIdx].eduLabel) },
+            { drive: bandsOut ? bandsOut.pos.drive : 0, credential: credentialBand_(leftOut.eduLabel) },
             'job-slot', pool[lastIdx].pop, leftOut.pop);
           if (!cr.aWins) { slots[openings - 1] = outIdx; leftOut = pool[lastIdx]; }
         }

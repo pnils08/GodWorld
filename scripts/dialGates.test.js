@@ -38,60 +38,65 @@ function ledgerCtx(rows) { return { summary: {}, config: { dialOwnerStreakRoom: 
   void w;
 }
 
-// ---- bonds: band pair factor + maintenance
+// ---- bonds: pair factor off the numbers + maintenance
 {
-  const B = pick(src('../phase05-citizens/bondEngine.js'), ['bondDialBand_', 'bondPairFactor_', 'bondWarmthFactor_', 'bondFamilyFactor_']);
+  const B = pick(src('../phase05-citizens/bondEngine.js'), ['bondDialPos_', 'bondPairFactor_', 'bondWarmthFactor_', 'bondFamilyFactor_']);
   const ctx = ledgerCtx([
     ['POP-W1', 'Warm', 'One', ds({ warmth: 90, family: 85 })], ['POP-W2', 'Warm', 'Two', ds({ warmth: 88, family: 15 })],
     ['POP-C1', 'Cold', 'One', ds({ warmth: 10 })], ['POP-N1', 'Neutral', 'One', ds({})],
-    ['POP-F1', 'Face', 'Only', ''],
+    ['POP-F1', 'Face', 'Only', ''], ['POP-M1', 'Mid', 'Warm', ds({ warmth: 55 })], ['POP-M2', 'Mid', 'Cool', ds({ warmth: 45 })],
   ]);
   ctx.ledger.headers.push('TraitProfile'); ctx.ledger.rows[4].push('Archetype:Connector|warmth:85|family:50');
-  assert('bond: warm band +2', B.bondDialBand_(ctx, 'POP-W1', 'warmth') === 2);
-  assert('bond: cold band -2', B.bondDialBand_(ctx, 'POP-C1', 'warmth') === -2);
-  assert('bond: neutral band 0', B.bondDialBand_(ctx, 'POP-N1', 'warmth') === 0);
-  assert('bond: name key resolves', B.bondDialBand_(ctx, 'Warm One', 'warmth') === 2);
-  assert('bond: face fallback when no DialState', B.bondDialBand_(ctx, 'POP-F1', 'warmth') === 2);
-  assert('bond: warm pair 1.25', Math.abs(B.bondWarmthFactor_(ctx, 'POP-W1', 'POP-W2') - 1.25) < 1e-9);
+  assert('bond: warmth 90 -> +2', B.bondDialPos_(ctx, 'POP-W1', 'warmth') === 2);
+  assert('bond: warmth 10 -> -2', B.bondDialPos_(ctx, 'POP-C1', 'warmth') === -2);
+  assert('bond: neutral 0', B.bondDialPos_(ctx, 'POP-N1', 'warmth') === 0);
+  assert('bond: name key resolves', B.bondDialPos_(ctx, 'Warm One', 'warmth') === 2);
+  assert('bond: face fallback when no DialState (warmth:85 -> 1.75)', Math.abs(B.bondDialPos_(ctx, 'POP-F1', 'warmth') - 1.75) < 1e-9);
+  assert('bond: the middle counts — 55 -> +0.25, 45 -> -0.25', Math.abs(B.bondDialPos_(ctx, 'POP-M1', 'warmth') - 0.25) < 1e-9 && Math.abs(B.bondDialPos_(ctx, 'POP-M2', 'warmth') + 0.25) < 1e-9);
+  assert('bond: a 55 pair warms a little faster than a 45 pair', B.bondWarmthFactor_(ctx, 'POP-M1', 'POP-M1') > 1 && B.bondWarmthFactor_(ctx, 'POP-M2', 'POP-M2') < 1 &&
+    Math.abs(B.bondWarmthFactor_(ctx, 'POP-M1', 'POP-M1') - 1.03125) < 1e-9);
+  assert('bond: warm pair (90 + 88) 1.24375', Math.abs(B.bondWarmthFactor_(ctx, 'POP-W1', 'POP-W2') - 1.24375) < 1e-9, String(B.bondWarmthFactor_(ctx, 'POP-W1', 'POP-W2')));
   assert('bond: cold pair 0.75', Math.abs(B.bondWarmthFactor_(ctx, 'POP-C1', 'POP-C1') - 0.75) < 1e-9);
   assert('bond: mixed pair 1.0', Math.abs(B.bondWarmthFactor_(ctx, 'POP-W1', 'POP-C1') - 1.0) < 1e-9);
-  assert('bond: family factor reads family, not warmth', B.bondFamilyFactor_(ctx, 'POP-W1', 'POP-W2') === 1.0);
+  assert('bond: family factor reads family, not warmth (85 and 15 cancel)', Math.abs(B.bondFamilyFactor_(ctx, 'POP-W1', 'POP-W2') - 1.0) < 1e-9);
   // maintenance: the stale-bond decay scales by (2 - warmth factor)
-  assert('bond: warm pair neglect decay x0.75', Math.abs(0.5 * (2 - B.bondWarmthFactor_(ctx, 'POP-W1', 'POP-W2')) - 0.375) < 1e-9);
+  assert('bond: warm pair neglect decay x0.75', Math.abs(0.5 * (2 - B.bondWarmthFactor_(ctx, 'POP-W1', 'POP-W1')) - 0.375) < 1e-9);
   assert('bond: cold pair neglect decay x1.25', Math.abs(0.5 * (2 - B.bondWarmthFactor_(ctx, 'POP-C1', 'POP-C1')) - 0.625) < 1e-9);
 }
 
-// ---- business: owner bands, drive expansion, closure room
+// ---- business: the owner's numbers, drive expansion, closure room
 {
   const GW = pick(calSrc + src('../phase05-citizens/generationalWealthEngine.js'), ['parseKeyPersonnelOwners_']);
   global.parseKeyPersonnelOwners_ = GW.parseKeyPersonnelOwners_;
-  const BD = pick(src('../phase05-citizens/applyBusinessDynamics.js'), ['bizDriftOne_', 'bizOwnerBands_', 'bizClamp_']);
+  const BD = pick(src('../phase05-citizens/applyBusinessDynamics.js'), ['bizDriftOne_', 'bizOwnerDials_', 'bizClamp_']);
   const cfg = { bizVol_default: 1, bizEventShockScale: 1, bizCoverageUnit: 0.1, bizVitalityGain: 0.1, bizSuccessVitalityHigh: 9, bizSuccessApprovalHigh: 90,
     bizSuccessWindow: 99, bizSuccessPenalty: 0, bizDisruptBaseChance: 0, bizDisruptSuccessMult: 1, bizDisruptShock: 0, bizNoiseBound: 0,
     bizDriftMaxDown: 2, bizDriftMaxUp: 2, bizGrowthFloor: -5, bizGrowthCeil: 20 };
   const biz = { id: 'BIZ-1', sector: 'Retail', growth: 2, revenue: 100000 };
   const inputsBase = { chaosAtBusiness: false, chaosInHood: false, initiativeAdvanced: true, coverageDeviation: 0.1, vitality: 5, vitalityMedian: 5, mayorApproval: 50 };
-  const plain = BD.bizDriftOne_(cfg, biz, { streak: 0, win: 0 }, Object.assign({ ownerDriveBand: 0, ownerExpandMult: 1.25 }, inputsBase), 106);
-  const driven = BD.bizDriftOne_(cfg, biz, { streak: 0, win: 0 }, Object.assign({ ownerDriveBand: 2, ownerExpandMult: 1.25 }, inputsBase), 106);
-  assert('business: positive drift x1.25 for a driven owner', Math.abs(driven.drift - plain.drift * 1.25) < 1e-9, `${plain.drift} ${driven.drift}`);
+  const plain = BD.bizDriftOne_(cfg, biz, { streak: 0, win: 0 }, Object.assign({ ownerDriveHigh: 0, ownerExpandMult: 1.25 }, inputsBase), 106);
+  const driven = BD.bizDriftOne_(cfg, biz, { streak: 0, win: 0 }, Object.assign({ ownerDriveHigh: 1, ownerExpandMult: 1.25 }, inputsBase), 106);
+  const halfDriven = BD.bizDriftOne_(cfg, biz, { streak: 0, win: 0 }, Object.assign({ ownerDriveHigh: E.dialHigh_(80, 2), ownerExpandMult: 1.25 }, inputsBase), 106);
+  assert('business: positive drift x1.25 for a driven owner (drive 90)', Math.abs(driven.drift - plain.drift * 1.25) < 1e-9, `${plain.drift} ${driven.drift}`);
+  assert('business: drive 80 earns half the multiplier (x1.125)', Math.abs(halfDriven.drift - plain.drift * 1.125) < 1e-9, `${plain.drift} ${halfDriven.drift}`);
   const bad = { chaosAtBusiness: -1, chaosInHood: -1, initiativeAdvanced: false, coverageDeviation: -0.1, vitality: 5, vitalityMedian: 5, mayorApproval: 50 };
-  const badPlain = BD.bizDriftOne_(cfg, biz, { streak: 0, win: 0 }, Object.assign({ ownerDriveBand: 0, ownerExpandMult: 1.25 }, bad), 106);
-  const badDriven = BD.bizDriftOne_(cfg, biz, { streak: 0, win: 0 }, Object.assign({ ownerDriveBand: 2, ownerExpandMult: 1.25 }, bad), 106);
+  const badPlain = BD.bizDriftOne_(cfg, biz, { streak: 0, win: 0 }, Object.assign({ ownerDriveHigh: 0, ownerExpandMult: 1.25 }, bad), 106);
+  const badDriven = BD.bizDriftOne_(cfg, biz, { streak: 0, win: 0 }, Object.assign({ ownerDriveHigh: 1, ownerExpandMult: 1.25 }, bad), 106);
   assert('business: a bad week is never multiplied', badDriven.drift === badPlain.drift && badPlain.drift < 0);
   const ctx = ledgerCtx([['POP-00901', 'Steady', 'Owner', ds({ composure: 85, drive: 90 })], ['POP-00902', 'Volatile', 'Owner', ds({ composure: 10 })]]);
-  const b1 = BD.bizOwnerBands_(ctx, 'POP-00901 (Steady Owner, Owner); POP-00902 (Volatile Owner, Manager)');
-  assert('business: owner resolved to bands (first owner entry)', b1 && b1.composure === 2 && b1.drive === 2, JSON.stringify(b1));
-  assert('business: no owner tag -> null', BD.bizOwnerBands_(ctx, 'POP-00902 (Volatile Owner, Manager)') === null);
-  assert('business: unknown pop -> null', BD.bizOwnerBands_(ctx, 'POP-00999 (Ghost, Owner)') === null);
-  const byName = BD.bizOwnerBands_(ctx, 'Steady Owner (Founder)');
-  assert('business: name-only founder resolves by full name', byName && byName.composure === 2, JSON.stringify(byName));
-  assert('business: co-founders resolve the first that matches', BD.bizOwnerBands_(ctx, 'Nobody Known / Volatile Owner (Co-Founders)').composure === -2);
+  const b1 = BD.bizOwnerDials_(ctx, 'POP-00901 (Steady Owner, Owner); POP-00902 (Volatile Owner, Manager)');
+  assert('business: owner resolved to their numbers (first owner entry)', b1 && b1.composure === 85 && b1.drive === 90, JSON.stringify(b1));
+  assert('business: no owner tag -> null', BD.bizOwnerDials_(ctx, 'POP-00902 (Volatile Owner, Manager)') === null);
+  assert('business: unknown pop -> null', BD.bizOwnerDials_(ctx, 'POP-00999 (Ghost, Owner)') === null);
+  const byName = BD.bizOwnerDials_(ctx, 'Steady Owner (Founder)');
+  assert('business: name-only founder resolves by full name', byName && byName.composure === 85, JSON.stringify(byName));
+  assert('business: co-founders resolve the first that matches', BD.bizOwnerDials_(ctx, 'Nobody Known / Volatile Owner (Co-Founders)').composure === 10);
   assert('business: closure room arithmetic', (3 + 1) === 4 && (3 - 1) === 2);
 }
 
 // ---- civic: integrity scales the ceiling chance; holder by name
 {
-  const CV = pick(calSrc + src('../phase05-citizens/updateCivicApprovalRatings.js'), ['applyApprovalCeilingRisk_', 'holderIntegrityBand_']);
+  const CV = pick(calSrc + src('../phase05-citizens/updateCivicApprovalRatings.js'), ['applyApprovalCeilingRisk_', 'holderIntegrityPos_']);
   const config = { threshold: 80, minStreakCycles: 2, baseChance: 0.1, chanceStep: 0.05, maxChance: 0.9, approvalDrop: 20 };
   const st = { cycle: 106, status: 'active', approval: 85, highStreak: 3, untilCycle: null, source: '' };
   const r = () => 0.99;
@@ -101,12 +106,13 @@ function ledgerCtx(rows) { return { summary: {}, config: { dialOwnerStreakRoom: 
   assert('civic: chance x1.5 for low integrity', Math.abs(cLow - c1 * 1.5) < 1e-9, `${c1} ${cLow}`);
   assert('civic: chance x0.5 for high integrity', Math.abs(cHigh - c1 * 0.5) < 1e-9);
   assert('civic: capped at maxChance', CV.applyApprovalCeilingRisk_(Object.assign({ chanceMult: 100 }, st), config, r).chance === 0.9);
-  const ctx = ledgerCtx([['POP-M1', 'Avery', 'Santana', ds({ integrity: 85 })], ['POP-M2', 'Warren', 'Ashford', ds({ integrity: 12 })], ['POP-M3', 'Plain', 'Person', ds({})]]);
-  assert('civic: holder +2 by name', CV.holderIntegrityBand_(ctx, 'Avery Santana') === 2);
-  assert('civic: holder -2 by name (case-insensitive)', CV.holderIntegrityBand_(ctx, 'warren ashford') === -2);
-  assert('civic: neutral holder 0', CV.holderIntegrityBand_(ctx, 'Plain Person') === 0);
-  assert('civic: unknown holder null', CV.holderIntegrityBand_(ctx, 'Nobody Here') === null);
-  assert('civic: blank holder null', CV.holderIntegrityBand_(ctx, '') === null);
+  const ctx = ledgerCtx([['POP-M1', 'Avery', 'Santana', ds({ integrity: 90 })], ['POP-M2', 'Warren', 'Ashford', ds({ integrity: 10 })], ['POP-M3', 'Plain', 'Person', ds({})], ['POP-M4', 'Mid', 'Holder', ds({ integrity: 55 })]]);
+  assert('civic: holder at 90 -> +2 by name', CV.holderIntegrityPos_(ctx, 'Avery Santana') === 2);
+  assert('civic: holder at 10 -> -2 by name (case-insensitive)', CV.holderIntegrityPos_(ctx, 'warren ashford') === -2);
+  assert('civic: neutral holder 0', CV.holderIntegrityPos_(ctx, 'Plain Person') === 0);
+  assert('civic: the middle counts — a holder at 55 reads +0.25', Math.abs(CV.holderIntegrityPos_(ctx, 'Mid Holder') - 0.25) < 1e-9);
+  assert('civic: unknown holder null', CV.holderIntegrityPos_(ctx, 'Nobody Here') === null);
+  assert('civic: blank holder null', CV.holderIntegrityPos_(ctx, '') === null);
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

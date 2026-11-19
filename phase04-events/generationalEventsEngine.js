@@ -1413,12 +1413,14 @@ function checkHealthEvent_(ctx, popId, age, lifeHistory, cal, neighborhood) {
   if (cal.season === "winter") c *= 1.5;
   if (STRESS_HOLIDAYS.indexOf(cal.holiday) >= 0) c *= 1.4;
   if (cal.month === 1) c *= 1.3;
-  // engine.182 (S438): burnout opens the hospital path — composure in the bottom band
-  // multiplies the health-event chance (dialBurnoutHealthMult). Bands off the cache the
-  // main loop primed with the row's DialState; a citizen with no dials pays nothing extra.
+  // engine.182 (S438): burnout opens the hospital path — composure at the bottom multiplies
+  // the health-event chance (dialBurnoutHealthMult). By the number (engine.349 Task 14):
+  // nothing at composure 30 and up, half the extra at 20, all of it at 10. Dials off the cache
+  // the main loop primed with the row's DialState; a citizen with no dials pays nothing extra.
   if (typeof getCitizenDialBands_ === 'function') {
     var hb = getCitizenDialBands_(ctx, popId);
-    if (hb && hb.bands && hb.bands.composure <= -2) c *= pressureBar_(ctx, 'dialBurnoutHealthMult');
+    var burnout = hb ? dialLow_(hb.current.composure, 2) : 0;
+    if (burnout > 0) c *= 1 + (pressureBar_(ctx, 'dialBurnoutHealthMult') - 1) * burnout;
   }
 
   // engine.102 W3 (crisis-through-hoods amendment): the dose keys off the

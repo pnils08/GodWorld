@@ -29,6 +29,8 @@ const path = require('path');
 
 // --- Apps Script global surface ---
 global.Logger = { log() {} };
+// engine.349 Task 14: the bond engine reads a dial by dialPos_ (citizenMemory.js, a global on Apps Script)
+{ const CM = require('../utilities/citizenMemory.js'); ['dialLadder_', 'dialPos_', 'dialHigh_', 'dialLow_'].forEach(k => { global[k] = CM[k]; }); }
 global.parseJSON = (v, fallback) => { try { const p = JSON.parse(v); return p === null ? fallback : p; } catch (e) { return fallback; } };
 global.inWorldStamp_ = (ctx) => 'Y3C' + ((ctx && ctx.config && ctx.config.cycleCount) || 0);
 global.safeRand_ = (ctx) => ctx.rng;

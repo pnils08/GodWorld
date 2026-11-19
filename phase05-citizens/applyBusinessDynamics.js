@@ -321,7 +321,7 @@ function bizClamp_(n, lo, hi) { return Math.max(lo, Math.min(hi, n)); }
 // engine.178 (S438): the owner's signed dial bands off Key_Personnel -> ledger DialState.
 // First owner/founder entry carrying a POPID wins; null when none resolves.
 // engine.201 Wave 2 (builder ruling 2, 2026-09-13): a venture that fails lowers its owner's openness —
-// the retreat to routine. Owners resolve exactly as bizOwnerBands_ does (POPID when the cell carries one,
+// the retreat to routine. Owners resolve exactly as bizOwnerDials_ does (POPID when the cell carries one,
 // else full name; a name shared by two ledger rows resolves nothing). Line lands in the owner's own
 // LifeHistory cell, the only place the Phase-9 fold reads. Returns owners lined.
 var VENTURE_GONE_STATUS = { deceased: 1, inactive: 1, traded: 1, pending: 1 };
@@ -363,7 +363,7 @@ function noteVentureClosedOwners_(ctx, keyPersonnelCell, bizName, cycle) {
   return lined;
 }
 
-function bizOwnerBands_(ctx, keyPersonnelCell) {
+function bizOwnerDials_(ctx, keyPersonnelCell) {
   if (!keyPersonnelCell || typeof parseKeyPersonnelOwners_ !== 'function' || typeof getCitizenDialBands_ !== 'function') return null;
   if (!ctx._bizDialByPop) {
     ctx._bizDialByPop = {}; ctx._bizDialByName = {};
@@ -394,7 +394,7 @@ function bizOwnerBands_(ctx, keyPersonnelCell) {
     }
     if (!pop || !ds) continue;
     var gb = getCitizenDialBands_(ctx, pop, ds);
-    if (gb && gb.bands) return gb.bands;
+    if (gb && gb.current) return gb.current;
   }
   return null;
 }
@@ -464,8 +464,9 @@ function bizDriftOne_(cfg, biz, prevState, inputs, cycle) {
   var noise = (seedUnit_(cycle + '|' + biz.id + '|noise') * 2 - 1) * cfg.bizNoiseBound;
 
   var drift = bizClamp_((ev + vitMod + pressure + shock + noise) * vol, -cfg.bizDriftMaxDown, cfg.bizDriftMaxUp);
-  // engine.178: a driven owner (drive +2) turns a good week into a bigger one; never a bad one into a good one
-  if (drift > 0 && inputs.ownerDriveBand >= 2 && inputs.ownerExpandMult > 1) drift = bizClamp_(drift * inputs.ownerExpandMult, 0, cfg.bizDriftMaxUp);
+  // engine.178: a driven owner turns a good week into a bigger one; never a bad one into a good one.
+  // ownerDriveHigh is the share of the multiplier the owner's drive earns (0 at 70, half at 80, all at 90).
+  if (drift > 0 && inputs.ownerDriveHigh > 0 && inputs.ownerExpandMult > 1) drift = bizClamp_(drift * (1 + (inputs.ownerExpandMult - 1) * inputs.ownerDriveHigh), 0, cfg.bizDriftMaxUp);
   // engine.193 cut 3b: the ship's offset steps AROUND the weekly drift cap (a port shock is
   // not a slow week). The business keeps a shock-free track underneath (growth minus the
   // offset carried from last week) that drifts exactly as it would with no ship; the
@@ -611,9 +612,10 @@ function applyBusinessDynamics_(ctx) {
     }
     var hs = ns[hood];
     // engine.178 (S438): the OWNER's dials — composure buys (or costs) a decline cycle
-    // before closure; drive +2 multiplies a positive drift. Owner = Key_Personnel
+    // before closure; high drive multiplies a positive drift. Owner = Key_Personnel
     // (owner/founder tag, POPID-carrying) resolved to the ledger row's DialState.
-    var ownerB = bizOwnerBands_(ctx, iKP >= 0 ? row[iKP] : '');
+    // engine.349 Task 14: the owner's numbers (the felt values 0-100), not bands.
+    var ownerB = bizOwnerDials_(ctx, iKP >= 0 ? row[iKP] : '');
     var barTerm = 0, barHood = '';
     if (sportsGame && bizIsBar_(row[iSec])) {
       barHood = bizHoodKey(hood) || hood;   // a child area reads its parent's venue and nightlife
@@ -631,7 +633,7 @@ function applyBusinessDynamics_(ctx) {
       vitality: hs && hs.retailVitality !== undefined ? hs.retailVitality : null,
       vitalityMedian: vitalityMedian,
       mayorApproval: mayorApproval,
-      ownerDriveBand: ownerB ? ownerB.drive : 0,
+      ownerDriveHigh: ownerB ? dialHigh_(ownerB.drive, 2) : 0,
       ownerExpandMult: pressureBar_(ctx, 'dialOwnerDriveExpandMult'),
       sportsWeek: barTerm   // engine.205 slice D
     };
@@ -654,7 +656,12 @@ function applyBusinessDynamics_(ctx) {
       if (!barByHood[bhk]) barByHood[bhk] = { ids: [], pp: 0 };
       barByHood[bhk].ids.push(id); barByHood[bhk].pp += d.parts.sports;
     }
-    var ownerRoom = ownerB ? (ownerB.composure >= 1 ? 1 : ownerB.composure <= -1 ? -1 : 0) * pressureBar_(ctx, 'dialOwnerStreakRoom') : 0;
+    // the room in decline cycles: +dialOwnerStreakRoom at composure 70 and up, -the same at 30 and
+    // under, a straight line between. A streak counts whole cycles, so a part of a cycle is a
+    // seeded draw at that share (composure 60 buys the extra cycle half the time).
+    var ownerRoomRaw = ownerB ? (dialHigh_(ownerB.composure, 1) - dialLow_(ownerB.composure, 1)) * pressureBar_(ctx, 'dialOwnerStreakRoom') : 0;
+    var ownerRoom = Math.floor(ownerRoomRaw);
+    if (ownerRoomRaw > ownerRoom && seedUnit_(cycle + '|' + id + '|ownerRoom') < ownerRoomRaw - ownerRoom) ownerRoom += 1;
     if (ownerRoom) { out.ownerRoom = (out.ownerRoom || 0) + 1; }
     out.rows++;
     if (inputs.initiativeAdvanced) out.initLift = (out.initLift || 0) + 1;   // engine.250: the bench reads these off the log line

@@ -77,11 +77,13 @@ assert('overwork text pool', /switch off|late night|weekend/.test(M.pressureText
   global.nudgesForEvent_ = M.nudgesForEvent_; global.baseTag_ = M.baseTag_;
   const C2 = require('../utilities/compressLifeHistory.js');
   const mk = (over) => { const c = E2.newCitizen_(); Object.assign(c.base, over); return C2.serializeDialState_(c); };
-  const reach = (over, id) => C2.getCitizenDialBands_({}, id, mk(over)).crimeReachable;
-  assert('integrity 15 -> reachable', reach({ integrity: 15 }, 'P-A') === true);
-  assert('integrity 30 + composure 15 (burnout) -> reachable', reach({ integrity: 30, composure: 15 }, 'P-B') === true);
-  assert('integrity 30 + composure 50 -> not reachable', reach({ integrity: 30, composure: 50 }, 'P-C') === false);
-  assert('integrity 50 + composure 15 -> not reachable (integrity must slip)', reach({ integrity: 50, composure: 15 }, 'P-D') === false);
+  // engine.349 Task 14: the door is a share off the numbers (the old yes/no edge = 0.5)
+  const reach = (over, id) => C2.getCitizenDialBands_({}, id, mk(over)).crimeReach;
+  const near = (a, b) => Math.abs(a - b) < 1e-9;
+  assert('integrity 15 -> reach 0.75', near(reach({ integrity: 15 }, 'P-A'), 0.75));
+  assert('integrity 30 + composure 15 (burnout) -> reach 0.75', near(reach({ integrity: 30, composure: 15 }, 'P-B'), 0.75));
+  assert('integrity 30 + composure 50 -> not reachable', reach({ integrity: 30, composure: 50 }, 'P-C') === 0);
+  assert('integrity 50 + composure 15 -> not reachable (integrity must slip)', reach({ integrity: 50, composure: 15 }, 'P-D') === 0);
 }
 
 // ---- the map: ambient tints, pressure tags move, casino/layoff route

@@ -10,7 +10,7 @@
  *
  * The raw 0-100 value drives NOTHING directly. bandIndex_() buckets it
  * (weighted to a wide, quiet middle) and EVERY consumer reads the BAND:
- *   - bandMultiplier_()  -> event-generation probability  (primary, high-volume)
+ *   - dialMultiplier_()  -> event-generation probability, off the number (primary, high-volume)
  *   - describe_()        -> voice descriptor word          (secondary)
  * The fine value is only an accumulator, so a sustained run of events drifts a
  * citizen across a band over time; 78 and 73 behave identically (same band).
@@ -62,12 +62,12 @@ function setDialTuning_(t) {
 var CHAOS_SEV = { high: 2, low: 1 };  // outcome.severity -> numeric severity
 var CHAOS_FADE_GAP = 6;               // chaos-free cycles before exposure fades one step (recovery)
 
-// Band layer (S253 working cut — 5 bands, tune empirically in Phase 1/6).
-// BAND_CUTS slice 0-100 into band index 0..4. The middle band (40-60) is the
-// wide, quiet "unremarkable / average person"; the ends are where stories live.
+// Band layer (S253 working cut — 5 bands). BAND_CUTS slice 0-100 into band index 0..4;
+// the bands are a measure and a label. Readers take the number (dialLadder_ below):
+// BAND_MULT and BAND_SIGNED are the values at each band's middle.
 var BAND_CUTS = [20, 40, 60, 80];               // <20 |20-40|40-60|60-80| >=80
-var BAND_MULT = [0.5, 0.75, 1.0, 1.25, 1.5];    // event-probability multiplier per band index
-var BAND_SIGNED = [-2, -1, 0, 1, 2];            // signed band for readability
+var BAND_MULT = [0.5, 0.75, 1.0, 1.25, 1.5];    // event-probability multiplier at 10 / 30 / 50 / 70 / 90
+var BAND_SIGNED = [-2, -1, 0, 1, 2];            // the signed scale at 10 / 30 / 50 / 70 / 90
 
 function clamp100_(n) { return n < 0 ? 0 : (n > 100 ? 100 : n); }
 function round1_(n) { return Math.round(n * 10) / 10; }
@@ -232,15 +232,43 @@ function settleCycle_(c) {
   }
 }
 
-// raw 0-100 -> band index 0..4 (the ONLY thing consumers read)
+// raw 0-100 -> band index 0..4. A MEASURE and a LABEL only (Dial_Moves crossings, the
+// archetype, the face words): engine.349 Task 14 — no odds, gate or contest reads it.
 function bandIndex_(v) {
   for (var i = 0; i < BAND_CUTS.length; i++) { if (v < BAND_CUTS[i]) return i; }
   return BAND_CUTS.length; // top band
 }
-// signed band -2..+2 (for readable output / engine.32 seam)
+// signed band -2..+2 (the face's Conduct: token)
 function band_(c, dial) { return BAND_SIGNED[bandIndex_(current_(c, dial))]; }
-// event-probability multiplier for the events this dial governs (the back-arc consumer)
-function bandMultiplier_(c, dial) { return BAND_MULT[bandIndex_(current_(c, dial))]; }
+
+// engine.349 Task 14 (builder 2026-11-18: "make the middle count") — every reader takes the
+// NUMBER. The old per-band tables stay the tuning: a table's five values are what a citizen
+// at the middle of each band gets (10 / 30 / 50 / 70 / 90) and the reader draws a straight
+// line between them, flat past 10 and 90. So a 55 gets a quarter of the way from the 50
+// value to the 70 value, and nothing changes for a citizen sitting on a band's middle.
+var BAND_CENTERS = [10, 30, 50, 70, 90];
+// dialLadder_(v, table5) -> the table read at the number
+function dialLadder_(v, table) {
+  var n = Number(v);
+  if (isNaN(n)) throw new Error('dialLadder_: dial value is not a number (' + v + ')');
+  if (n <= BAND_CENTERS[0]) return table[0];
+  for (var i = 1; i < BAND_CENTERS.length; i++) {
+    if (n <= BAND_CENTERS[i]) {
+      var t = (n - BAND_CENTERS[i - 1]) / (BAND_CENTERS[i] - BAND_CENTERS[i - 1]);
+      return table[i - 1] + (table[i] - table[i - 1]) * t;
+    }
+  }
+  return table[table.length - 1];
+}
+// where the number sits on the old signed scale, -2..+2, unrounded (50 -> 0, 55 -> 0.25, 70 -> 1)
+function dialPos_(v) { return dialLadder_(v, BAND_SIGNED); }
+// the old yes / no doors as a share 0..1: "band >= k" was a cliff at the band edge; the share
+// runs from 0 at the middle of the band below to 1 at the middle of band k (the old edge = 0.5).
+// dialHigh_(v, 2): 70 -> 0, 80 -> 0.5, 90 -> 1.   dialLow_(v, 1): 50 -> 0, 40 -> 0.5, 30 -> 1.
+function dialHigh_(v, k) { var s = dialPos_(v) - (k - 1); return s < 0 ? 0 : (s > 1 ? 1 : s); }
+function dialLow_(v, k) { var s = -dialPos_(v) - (k - 1); return s < 0 ? 0 : (s > 1 ? 1 : s); }
+// event-probability multiplier for the events this dial governs, 0.5..1.5 off the number
+function dialMultiplier_(c, dial) { return dialLadder_(current_(c, dial), BAND_MULT); }
 
 // band -> voice descriptor; neutral band = '' (an average citizen is unremarkable)
 var PHRASE = {
@@ -473,8 +501,9 @@ function applyIntegrityWear_(c, worn, cycle, rate, floor) {
 // engine.179 (S438) — CONTESTS RESOLVED BY CHARACTER (research.28 Cut D)
 // ----------------------------------------------------------------------------
 // Two citizens want the same thing. Exactly TWO terms per contest, weight 1 each,
-// every term on the signed band scale -2..+2 (a credential is converted, never an
-// ordinal). gap = Σ(a − b) ∈ [−8, +8]; p(a wins) = clamp(0.5 + 0.08·gap, 0.2, 0.8):
+// every term on the signed scale -2..+2 (a dial by dialPos_, unrounded — engine.349 Task 14;
+// a credential is converted, never an ordinal). gap = Σ(a − b) ∈ [−8, +8];
+// p(a wins) = clamp(0.5 + 0.08·gap, 0.2, 0.8):
 // the fully polar mismatch caps at 4:1, the underdog always can win (doctrine §2:
 // causes, then dice). The CK3 scheme-against-resistance shape. Fenced by §10: the
 // GC family-match and marriage lotteries never call this.
@@ -514,7 +543,8 @@ function contestRoll_(S, rng, aTerms, bTerms, site, aId, bId) {
     c.n++; if (aWins) c.aWins++;
     if ((gap > 0 && !aWins) || (gap < 0 && aWins)) c.underdogWins++;
     c.bySite[site || '?'] = (c.bySite[site || '?'] || 0) + 1;
-    c.gaps[String(gap)] = (c.gaps[String(gap)] || 0) + 1;
+    var gapKey = String(Math.round(gap));   // the tally is by whole step; the odds use the gap as it is
+    c.gaps[gapKey] = (c.gaps[gapKey] || 0) + 1;
   }
   return { aWins: aWins, p: p, gap: gap, roll: roll, a: aId, b: bId };
 }
@@ -531,7 +561,8 @@ if (typeof module !== 'undefined' && module.exports) {
     setDialTuning_: setDialTuning_, DIAL_TUNING: DIAL_TUNING, MOOD_DECAY: MOOD_DECAY, HARDEN_FRACTION: HARDEN_FRACTION,
     applyReflectionDualTag_: applyReflectionDualTag_,
     accreteReflectionsIntoBase_: accreteReflectionsIntoBase_, settleCycle_: settleCycle_,
-    bandIndex_: bandIndex_, band_: band_, bandMultiplier_: bandMultiplier_,
+    bandIndex_: bandIndex_, band_: band_, BAND_CENTERS: BAND_CENTERS, BAND_SIGNED: BAND_SIGNED,
+    dialLadder_: dialLadder_, dialPos_: dialPos_, dialHigh_: dialHigh_, dialLow_: dialLow_, dialMultiplier_: dialMultiplier_,
     describe_: describe_, snapshot_: snapshot_,
     serialize_: serialize_, deserialize_: deserialize_,
     accrueChaos_: accrueChaos_, checkChaosReaction_: checkChaosReaction_,

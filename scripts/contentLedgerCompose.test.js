@@ -302,6 +302,37 @@ console.log('═══ engine.208 C5: the sports picker');
   assert('fandom>=60 row never reaches fandom 40', fanGateWrong === 0, `hits=${fanGateWrong}`);
 }
 
+console.log('═══ engine.349 Task 14: a dial term is a share of the row, not a cliff');
+{
+  const parse = new Function(loaderSrc + '\nreturn parseContentConditions_;')();
+  assert('loader marks a dial inequality soft', parse('warmth>=60')[0].soft === true && parse('drive<40')[0].soft === true && parse('undocked;fandom<=39')[1].soft === true);
+  assert('= on a dial and any other number stay exact', parse('warmth=60')[0].soft === undefined && parse('momentum>=3')[0].soft === undefined);
+  const FIX = [
+    LEDGER_HDR,
+    ['line', 'test.fan', '', 'planned the whole night around the game', '80', 'fandom>=60', 'source:neighborhood,dial:fandom:up', '', ''],
+    ['line', 'test.cold', '', 'could not have named one player on the roster', '80', 'fandom<=39', 'source:neighborhood,dial:fandom:down', '', '']
+  ];
+  const prevBands = global.getCitizenDialBands_;
+  const mult = { drive: 1, sociability: 1, warmth: 1, openness: 1, composure: 1, integrity: 1, family: 1, outabout: 1, fandom: 1 };
+  const FAN = { 'POP-F70': 70, 'POP-F60': 60, 'POP-F55': 55, 'POP-F50': 50, 'POP-F45': 45, 'POP-F30': 30 };
+  global.getCitizenDialBands_ = (ctx, popId) => ({ mult, current: { warmth: 50, drive: 50, fandom: FAN[popId] } });
+  const ids = Object.keys(FAN), up = {}, down = {};
+  ids.forEach((id) => { up[id] = 0; down[id] = 0; });
+  for (let s = 1; s <= 600; s++) {
+    const ctx = makeCtx(ids.map((id) => makeRow(id)), mulberry32(s * 977), FIX);
+    generateCitizensEvents_(ctx);
+    emittedLines(ctx).forEach((t, i) => {
+      if (t.indexOf('planned the whole night') >= 0) up[ids[i]]++;
+      if (t.indexOf('could not have named') >= 0) down[ids[i]]++;
+    });
+  }
+  global.getCitizenDialBands_ = prevBands;
+  const show = JSON.stringify({ up, down });
+  assert('fandom>=60: 70 draws it most, 60 less, 55 less again, 50 never', up['POP-F70'] > up['POP-F60'] && up['POP-F60'] > up['POP-F55'] && up['POP-F55'] > 0 && up['POP-F50'] === 0 && up['POP-F45'] === 0, show);
+  assert('fandom<=39: 30 draws it most, 45 a little, 50 never (49 is where it starts)', down['POP-F30'] > down['POP-F45'] && down['POP-F45'] > 0 && down['POP-F50'] === 0 && down['POP-F55'] === 0, show);
+  assert('the citizen at 50 draws neither row', up['POP-F50'] === 0 && down['POP-F50'] === 0, show);
+}
+
 console.log('═══ engine.94 B.1: one bounded history build from fixtures');
 {
   const owner = makeRow('POP-TEST-OWNER', { hood: 'Fixture Hood',

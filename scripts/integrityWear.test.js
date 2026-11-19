@@ -229,7 +229,7 @@ function integ(ctx, i) { return JSON.parse(ctx.ledger.rows[i][iDS]); }
   base = JSON.parse(cell).base.integrity;
   assert('3.24 fifty Cycles of debt at rate 1, floor 15: base rests at the floor', near(base, 15) && near(JSON.parse(cell).wear.d, 35), String(base));
   assert('3.25 ...and the citizen is now crime-reachable through the real accessor',
-    C.getCitizenDialBands_({}, 'POP-A', cell).crimeReachable === true && C.getCitizenDialBands_({}, 'POP-Z', ds(50)).crimeReachable === false);
+    C.getCitizenDialBands_({}, 'POP-A', cell).crimeReach >= 0.5 && C.getCitizenDialBands_({}, 'POP-Z', ds(50)).crimeReach === 0);
   for (cy = 250; cy < 290; cy++) {                                   // debt gone: pressure.l stops advancing
     rows = [row('POP-A', cell)]; ctx = makeCtx(rows, cy, { integrityWearRate: 1, integrityWearFloor: 15 });
     C.compressLifeHistory_(ctx, {}); cell = rows[0][iDS];

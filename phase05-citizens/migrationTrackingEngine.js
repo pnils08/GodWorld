@@ -742,16 +742,19 @@ function processRelocations_(ctx, cycle) {
     if (arrived) continue;
 
     var current = hoods[unit.hood];
-    // engine.178 (S438): the unit head's OPENNESS band closes or opens the misfit door —
-    // a rigid citizen (-2) never moves for money alone; a restless one (+2) clears the
-    // income ratio at dialOpenMoveThresholdMult of it. The pressure lane (displacement)
+    // engine.178 (S438): the unit head's OPENNESS closes or opens the misfit door — a rigid
+    // citizen never moves for money alone; a restless one clears the income ratio at
+    // dialOpenMoveThresholdMult of it. By the number (engine.349 Task 14): the ratio eases
+    // from openness 70 (none) through 80 (half) to 90 (all of it); the misfit odds thin from
+    // openness 30 (whole) through 20 (half) to 10 (none). The pressure lane (displacement)
     // is a cause, not a want, and reads no dial.
     var headRow = rows[unit.rowIdxs[0]];
     var headBands = (iDialStateR >= 0 && typeof getCitizenDialBands_ === 'function')
       ? getCitizenDialBands_(ctx, String(headRow[iPOPID] || ''), headRow[iDialStateR] || '') : null;
-    var openBand = headBands ? headBands.bands.openness : 0;
-    var misfitRatio = RELOCATION.MISFIT_INCOME_RATIO * (openBand >= 2 ? pressureBar_(ctx, 'dialOpenMoveThresholdMult') : 1);
-    var misfit = openBand > -2 && unit.income >= current.income * misfitRatio;
+    var restless = headBands ? dialHigh_(headBands.current.openness, 2) : 0;
+    var rigid = headBands ? dialLow_(headBands.current.openness, 2) : 0;
+    var misfitRatio = RELOCATION.MISFIT_INCOME_RATIO * (restless > 0 ? 1 + (pressureBar_(ctx, 'dialOpenMoveThresholdMult') - 1) * restless : 1);
+    var misfit = rigid < 1 && unit.income >= current.income * misfitRatio;
     var lane = unit.planning ? 'pressure' : (misfit ? 'misfit' : null);
     if (!lane) continue;
 
@@ -760,6 +763,7 @@ function processRelocations_(ctx, cycle) {
     // ambition); the pressure lane is the crisis escape and runs at its own odds —
     // a household pulling in under debt is not made slower to leave a rent it cannot carry.
     if (lane === 'misfit' && typeof maneuverFactor_ === 'function') chance *= maneuverFactor_(ctx, rows[unit.rowIdxs[0]][iPOPID], null);
+    if (lane === 'misfit') chance *= 1 - rigid;
     if (rng() >= chance) continue;
 
     // ── Destination: best deterministic fit, must clear current by margin ──

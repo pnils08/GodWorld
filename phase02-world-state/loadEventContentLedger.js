@@ -118,10 +118,15 @@ var CONTENT_LEDGER_DSL_FIELDS = {
   // were on it). Without this the protagonists of the episode draw the same
   // lines as everyone watching from Oakland.
   undockedpilot: { kind: 'flag' },
-  warmth:       { kind: 'num' },
-  drive:        { kind: 'num' },
+  // engine.349 Task 14 (builder 2026-11-18: "make the middle count"): a dial term with
+  // < <= > >= is not a cliff. The row is offered at a share of its Weight that runs from
+  // nothing 10 points short of the number to all of it 10 points past (warmth>=60: 50 -> 0,
+  // 55 -> a quarter, 60 -> half, 70 -> whole). `dial: true` marks the fields read that way;
+  // = and != on a dial stay exact.
+  warmth:       { kind: 'num', dial: true },
+  drive:        { kind: 'num', dial: true },
   // engine.208: Dial 9, the citizen's live fandom (base+mood, 0-100); null fails the term
-  fandom:       { kind: 'num' },
+  fandom:       { kind: 'num', dial: true },
   bereaved:     { kind: 'num' },     // Cycles since DialState.grief.l
   charged:      { kind: 'num' },     // Cycles since latest Judicial_Ledger.ArrestCycle
   defaulted:    { kind: 'num' },     // Cycles since DialState.debtDefault.l
@@ -167,7 +172,9 @@ function parseContentConditions_(raw) {
     if (spec.kind === 'num') {
       var n = Number(valRaw);
       if (isNaN(n)) return null;
-      terms.push({ f: field, op: op, v: n });
+      var numTerm = { f: field, op: op, v: n };
+      if (spec.dial && op !== '=' && op !== '!=') numTerm.soft = true;   // engine.349 Task 14: a share, not a cliff
+      terms.push(numTerm);
       continue;
     }
     // enum / str take only equality ops

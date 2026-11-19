@@ -73,10 +73,11 @@ function trace(popId, cycles, perCycle) {
     // <3 entries -> engine correctly skips (unseeded neutral); treat as all-50 base.
     const base = ds ? JSON.parse(ds).base : global.newCitizen_().base;
     bases.push(base);
-    // crimeReachable via the Phase-5 seam (reads this citizen's DialState; null -> false)
+    // the crime door via the Phase-5 seam (reads this citizen's DialState; null -> shut). Open here =
+    // at least half open (crimeReach >= 0.5: integrity 20 and under) — engine.349 Task 14
     const seamCtx = { citizenLookup: { [popId]: { DialState: ds } } };
     const seam = C.getCitizenDialBands_(seamCtx, popId);
-    reach.push(!!(seam && seam.crimeReachable));
+    reach.push(!!(seam && seam.crimeReach >= 0.5));
   }
   return { bases, reach, finalDial: ds, finalFace: tp };
 }

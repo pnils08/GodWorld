@@ -127,8 +127,8 @@ console.log('═══ T7 Section 2 — the integrity ladder (commit odds + seve
   // engine.201 ruling 3: a citizen the crime ladder cannot reach resolves as BoundaryKept / BoundaryCompromised
   assert('2.3 saint: every resolution is an ordinary boundary test, slips rare (~5%)', saint.BoundaryKept + saint.BoundaryCompromised === saint.total && saint.BoundaryCompromised / saint.total < 0.08, JSON.stringify(saint));
 
-  // accessor contract (engine.31, compressLifeHistory.js ~L800): crimeReachable
-  // = bandIndex <= 0 = raw integrity < 20 = band -2 ONLY. Bands 0 and -1 resist.
+  // accessor contract (getCitizenDialBands_ crimeReach): a share off the integrity number —
+  // 0 at 30 and up, 0.5 at 20, 1 at 10. Integrity 50 and 30 never commit.
   const neutral = trials(6000, dialState({}));            // integrity 50 -> band 0
   const midLow = trials(6000, dialState({ integrity: 30 })); // band -1 -> still unreachable
   const outlaw = trials(6000, dialState({ integrity: 10, composure: 10 })); // band -2 -> commitP .75
@@ -139,7 +139,7 @@ console.log('═══ T7 Section 2 — the integrity ladder (commit odds + seve
   assert('2.11 crime-reachable citizens never take the ordinary-slip path', outlaw.BoundaryCompromised === 0 && outlaw.BoundaryKept === 0, JSON.stringify(outlaw));
   assert('2.4 neutral (band 0): ZERO commits — crimeReachable gate holds',
     commitShare(neutral) === 0 && neutral.total > 20, commitShare(neutral).toFixed(3) + ' of ' + neutral.total);
-  assert('2.4b band -1: ZERO commits — only far-low integrity is reachable (accessor contract)',
+  assert('2.4b integrity 30: ZERO commits — the crime door opens under 30 (engine.349 Task 14: a share, 0 at 30, half at 20, whole at 10)',
     commitShare(midLow) === 0 && midLow.total > 20, commitShare(midLow).toFixed(3) + ' of ' + midLow.total);
   assert('2.5 band -2 commit share ~0.75 (>0.6 measured)',
     commitShare(outlaw) > 0.6, commitShare(outlaw).toFixed(3) + ' of ' + outlaw.total);
@@ -213,6 +213,22 @@ console.log('═══ T7 Section 4 — caps, write path, dial-loop closure');
       crime.every(r => !/Boundary/.test(r.life) && r.logTag === r.tag),
       JSON.stringify({ slip, keep, crime: crime.map(r => r.tag) }));
   }
+  // engine.349 Task 14 ("make the middle count"): the slip odds are read at the number —
+  // 45 / 55 / 60 sit on the line between the band middles, not on the 50 value.
+  for (const [integrity, threshold] of [[45, 0.275], [55, 0.225], [60, 0.20], [80, 0.10]]) {
+    const slip = w2Resolve(integrity, 50, threshold - 0.001), keep = w2Resolve(integrity, 50, threshold + 0.001);
+    assert(`T14 integrity ${integrity} slips under ${threshold}, holds over it`, slip.tag === 'BoundaryCompromised' && keep.tag === 'BoundaryKept', JSON.stringify({ slip: slip.tag, keep: keep.tag }));
+  }
+  // the crime door is a share: integrity 25 = a quarter open, commit odds 0.25 x 0.60 = 0.15;
+  // what is left of the roll is an ordinary temptation at the table's 0.35 (0.15 + 0.85 x 0.35 = 0.4475).
+  const q = [w2Resolve(25, 50, 0.149), w2Resolve(25, 50, 0.151), w2Resolve(25, 50, 0.446), w2Resolve(25, 50, 0.449)].map(r => r.tag);
+  assert('T14 integrity 25: commits under 0.15, then slips, then holds — never "Resisted"',
+    q[0] === 'Transgression-Petty' && q[1] === 'BoundaryCompromised' && q[2] === 'BoundaryCompromised' && q[3] === 'BoundaryKept', q.join(' '));
+  // integrity 20 is the old edge: half open, commit 0.5 x 0.65 = 0.325; past it a test not failed is a crime resisted
+  const h = [w2Resolve(20, 50, 0.324), w2Resolve(20, 50, 0.326)].map(r => r.tag);
+  assert('T14 integrity 20: commits under 0.325, resists over it', h[0] === 'Transgression-Petty' && h[1] === 'Resisted', h.join(' '));
+  const none = [w2Resolve(30, 50, 0), w2Resolve(35, 50, 0)].map(r => r.tag);
+  assert('T14 integrity 30 and up (steady composure): the crime door is shut', none.every(t => t === 'BoundaryCompromised'), none.join(' '));
 }
 
 // engine.201 S453 — synthetic, local-only opportunity and lifecycle controls.

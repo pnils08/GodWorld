@@ -704,8 +704,8 @@ function updateExistingBonds_(ctx) {
       if (rivalPop) {
         var suitorPop = romanceSuitorOf_(ctx, bonds, bond, rivalPop);
         var crT = contestRoll_(S, rng,
-          { warmth: bondDialBand_(ctx, suitorPop, 'warmth'), sociability: bondDialBand_(ctx, suitorPop, 'sociability') },
-          { warmth: bondDialBand_(ctx, rivalPop, 'warmth'), sociability: bondDialBand_(ctx, rivalPop, 'sociability') },
+          { warmth: bondDialPos_(ctx, suitorPop, 'warmth'), sociability: bondDialPos_(ctx, suitorPop, 'sociability') },
+          { warmth: bondDialPos_(ctx, rivalPop, 'warmth'), sociability: bondDialPos_(ctx, rivalPop, 'sociability') },
           'romantic-triangle', suitorPop, rivalPop);
         if (!crT.aWins) rr = 1; // the rival took the week: no step, no big week
       }
@@ -1180,7 +1180,7 @@ function detectNewBonds_(ctx) {
 
   for (var i = 0; i < activeCitizens.length; i++) {
     var citizenA = activeCitizens[i];
-    var sociabilityFactor = 1 + 0.125 * bondDialBand_(ctx, citizenA, 'sociability');
+    var sociabilityFactor = 1 + 0.125 * bondDialPos_(ctx, citizenA, 'sociability');
     if (rng() >= BOND_ENCOUNTER_CHANCE * sociabilityFactor * calFactor) continue;
     var pick = Math.floor(rng() * (activeCitizens.length - 1));
     if (pick >= i) pick++; // never themselves
@@ -2083,27 +2083,27 @@ function bondTraitOf_(ctx, popId, trait) {
   return m ? Number(m[1]) : 50;
 }
 
-// engine.178 (S438): the BAND surface replaces the face regex — signed band -2..+2
-// off the row's live DialState (base+mood) via the same getCitizenDialBands_ seam every
+// engine.178 (S438): the dial surface replaces the face regex — the dial on the signed scale
+// -2..+2, by the number and unrounded (engine.349 Task 14: 50 -> 0, 55 -> 0.25, 70 -> 1), off
+// the row's live DialState (base+mood) via the same getCitizenDialBands_ seam every
 // generator reads; the face (`warmth:NN`) is the cadence-lagged fallback, a miss is 0.
-function bondDialBand_(ctx, popId, dial) {
+function bondDialPos_(ctx, popId, dial) {
   bondTraitOf_(ctx, popId, dial); // ensures the maps are built (same walk)
   var key = String(popId || '').trim();
   var ds = ctx._bondDials ? (ctx._bondDials[key.toUpperCase()] || ctx._bondDials[key.toLowerCase()]) : null;
   if (ds && typeof getCitizenDialBands_ === 'function') {
     var gb = getCitizenDialBands_(ctx, key.toUpperCase(), ds);
-    if (gb && gb.bands && gb.bands[dial] != null) return gb.bands[dial];
+    if (gb && gb.pos && gb.pos[dial] != null) return gb.pos[dial];
   }
-  var v = bondTraitOf_(ctx, popId, dial); // face fallback, 0-100 -> band
-  return v < 20 ? -2 : v < 40 ? -1 : v < 60 ? 0 : v < 80 ? 1 : 2;
+  return dialPos_(bondTraitOf_(ctx, popId, dial)); // face fallback, 0-100 -> the same scale
 }
-// Pair factor 0.75x (both -2) .. 1.25x (both +2), the engine.59 envelope kept
+// Pair factor 0.75x (both at 10 or under) .. 1.25x (both at 90 or over), the engine.59 envelope kept
 function bondPairFactor_(ctx, popA, popB, dial) {
-  return 1 + 0.125 * ((bondDialBand_(ctx, popA, dial) + bondDialBand_(ctx, popB, dial)) / 2);
+  return 1 + 0.125 * ((bondDialPos_(ctx, popA, dial) + bondDialPos_(ctx, popB, dial)) / 2);
 }
 // Pair warmth: 0.75x (cold pair) .. 1.25x (warm pair)
 function bondWarmthFactor_(ctx, popA, popB) { return bondPairFactor_(ctx, popA, popB, 'warmth'); }
-// Pair family-mindedness: same band — courts and marries faster
+// Pair family-mindedness: same scale — courts and marries faster
 function bondFamilyFactor_(ctx, popA, popB) { return bondPairFactor_(ctx, popA, popB, 'family'); }
 
 // engine.59 (S320): suitor fitness — education, savings, debt as courtship
@@ -2777,7 +2777,7 @@ function processGCMarriageLottery_(ctx) {
     if (!avail.length) continue;
     var scarcity = Math.min(1, avail.length / GC_POOL_REF);
     var chance = GC_MARRY_CHANCE * bondFitnessOf_(P) * scarcity *
-      (1 + 0.125 * bondDialBand_(ctx, pid, 'family')); // engine.178: band surface (was the face regex)
+      (1 + 0.125 * bondDialPos_(ctx, pid, 'family')); // engine.178: band surface (was the face regex)
     if (rng() >= chance) continue;
 
     // ── Winner: pick the spouse (age ±8 pref, nbhd pref) ──

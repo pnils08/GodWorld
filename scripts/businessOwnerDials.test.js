@@ -62,7 +62,7 @@ const invalidCases = [
 ];
 for (const [name, rows, personnel] of invalidCases) {
   const ctx = fixture(rows, personnel), before = JSON.stringify(ctx.ledger);
-  const bands = w.bizOwnerBands_(ctx, personnel);
+  const bands = w.bizOwnerDials_(ctx, personnel);
   check(name + ' resolves no owner bands', bands === null && JSON.stringify(ctx.ledger) === before, bands);
   const growing = run(rows, personnel, false), neutral = run(rows, '', false);
   check(name + ' cannot amplify persisted business growth/revenue', growing.growth === neutral.growth && growing.revenue === neutral.revenue, { actual: growing.growth, neutral: neutral.growth });
@@ -87,12 +87,12 @@ for (const [name, rows, personnel] of [
 }
 {
   const ctx = fixture([a, person('POP-99002', 'Alpha', 10, 10)], '');
-  const ambiguous = w.bizOwnerBands_(ctx, 'Synthetic Alpha (Owner)');
-  const exact = w.bizOwnerBands_(ctx, 'POP-99001 (Synthetic Alpha, Owner)');
-  check('cached ambiguous-name lookup does not poison exact-ID lookup', ambiguous === null && exact.drive === 2 && exact.composure === 2, { ambiguous, exact });
-  check('non-owner personnel remains outside the dial reader', w.bizOwnerBands_(fixture([a], ''), 'Synthetic Alpha (Manager)') === null);
+  const ambiguous = w.bizOwnerDials_(ctx, 'Synthetic Alpha (Owner)');
+  const exact = w.bizOwnerDials_(ctx, 'POP-99001 (Synthetic Alpha, Owner)');
+  check('cached ambiguous-name lookup does not poison exact-ID lookup', ambiguous === null && exact.drive === 90 && exact.composure === 90, { ambiguous, exact });
+  check('non-owner personnel remains outside the dial reader', w.bizOwnerDials_(fixture([a], ''), 'Synthetic Alpha (Manager)') === null);
   const missingDials = person('POP-99003', 'Gamma'); missingDials[3] = '';
-  check('unique citizen without DialState supplies no bands', w.bizOwnerBands_(fixture([missingDials], ''), 'Synthetic Gamma (Owner)') === null);
+  check('unique citizen without DialState supplies no bands', w.bizOwnerDials_(fixture([missingDials], ''), 'Synthetic Gamma (Owner)') === null);
 }
 {
   const rows = [person('POP-99001', 'Alpha', 10, 10)];

@@ -827,10 +827,11 @@ function updateCivicApprovalRatings_(ctx) {
     // APPLY AND CLAMP
     // ─────────────────────────────────────────────────────────────────────
     var newApproval = Math.max(10, Math.min(95, currentApproval + delta));
-    // engine.178 (S438): the officeholder's INTEGRITY band scales the ceiling's scandal
-    // chance — -2 x dialIntegrityScandalLow, +2 x dialIntegrityScandalHigh, +-1 halfway,
-    // neutral x1. Holder resolved by name against the ledger (the office row carries no POPID).
-    var holderInteg = holderIntegrityBand_(ctx, holder);
+    // engine.178 (S438): the officeholder's INTEGRITY scales the ceiling's scandal chance —
+    // x dialIntegrityScandalLow at integrity 10, x dialIntegrityScandalHigh at 90, x1 at 50,
+    // a straight line between (engine.349 Task 14: the number on the signed scale, not a band).
+    // Holder resolved by name against the ledger (the office row carries no POPID).
+    var holderInteg = holderIntegrityPos_(ctx, holder);
     var scandalMult = 1;
     if (holderInteg !== null && holderInteg !== 0) {
       var lowM = pressureBar_(ctx, 'dialIntegrityScandalLow'), highM = pressureBar_(ctx, 'dialIntegrityScandalHigh');
@@ -1466,9 +1467,10 @@ function dialBandIndexFromValue_(v) {
   return 4;
 }
 
-// engine.178 (S438): an officeholder's signed integrity band, resolved by full name
-// against ctx.ledger (First + Last, case-insensitive). null when unresolved / no dials.
-function holderIntegrityBand_(ctx, holderName) {
+// engine.178 (S438): an officeholder's integrity on the signed scale -2..+2 (the number,
+// unrounded — engine.349 Task 14), resolved by full name against ctx.ledger (First + Last,
+// case-insensitive). null when unresolved / no dials.
+function holderIntegrityPos_(ctx, holderName) {
   var nm = String(holderName || '').trim().toLowerCase();
   if (!nm || !ctx || !ctx.ledger || !ctx.ledger.headers) return null;
   if (!ctx._holderDialByName) {
@@ -1483,7 +1485,7 @@ function holderIntegrityBand_(ctx, holderName) {
   var hit = ctx._holderDialByName[nm];
   if (!hit || typeof getCitizenDialBands_ !== 'function') return null;
   var gb = getCitizenDialBands_(ctx, hit.pop.toUpperCase(), hit.ds);
-  return (gb && gb.bands && gb.bands.integrity != null) ? gb.bands.integrity : null;
+  return (gb && gb.pos && gb.pos.integrity != null) ? gb.pos.integrity : null;
 }
 
 function readDialBase_(dialState, dial) {

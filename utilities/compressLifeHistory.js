@@ -1431,14 +1431,16 @@ function getCitizenArchetype_(ctx, popId) {
   return profile;
 }
 
-// engine.31 Phase 5 — the event-bias SEAM engine.32 reads.
+// engine.31 Phase 5 — the event-bias SEAM the generators read.
 // Reads the AUTHORITATIVE DialState (machine truth), NOT the derived TraitProfile
-// face string, and returns the band surface generators consume. Cached per ctx
-// like the archetype. Returns null when DialState is absent/empty (pre-deploy, or
-// a never-seeded citizen) — engine.32 generators treat null as "use base rates."
-// Contract (criterion 8): Integrity low band -> crime reachable; Drive band ->
-// career-event frequency; Family band -> birth/marriage frequency. Generation
-// itself lives in engine.32; this only EXPOSES the read surface.
+// face string. Cached per ctx like the archetype. Returns null when DialState is
+// absent/empty (a never-seeded citizen) — generators treat null as "use base rates."
+// engine.349 Task 14 (builder 2026-11-18: "make the middle count"): the surface is the
+// NUMBER, there is no band on it. current = the felt value 0-100 (base + mood);
+// pos = the same on the signed scale -2..+2, unrounded; mult = the event-odds
+// multiplier 0.5..1.5 off the number (citizenMemory.js dialLadder_). A yes / no door
+// is read by dialHigh_ / dialLow_ on current, as a share. The name keeps "Bands"
+// because forty files call it.
 // dialStrOpt (engine.32 T5): generators that iterate ledger rows directly
 // (phase04 + the phase05 life engines run before citizenLookup is built) pass
 // the row's DialState cell — citizenLookup stays the lookup of record when
@@ -1455,27 +1457,25 @@ function getCitizenDialBands_(ctx, popId, dialStrOpt) {
   if (!parsed.base) { ctx._dialBandCache[popId] = null; return null; }
 
   var c = deserialize_(parsed);
-  var bands = {}, mult = {};
+  var current = {}, pos = {}, mult = {};
   for (var i = 0; i < DIALS.length; i++) {
     var d = DIALS[i];
-    bands[d] = band_(c, d);            // signed -2..+2 (readable / engine.32)
-    mult[d] = bandMultiplier_(c, d);   // 0.5..1.5 event-probability multiplier
+    // current_() is the same base+mood clamp lib/citizenDials.js uses, so the sheet-side
+    // vocabulary (the content tab's warmth>=60) and the Node-side reader cannot drift apart
+    current[d] = current_(c, d);
+    pos[d] = dialPos_(current[d]);
+    mult[d] = dialMultiplier_(c, d);
   }
-  // research.27 Phase 2.3 (S376): raw 0-100 dials alongside the bands. The ECL
-  // DSL conditions on numbers (warmth>=60), not on the signed band, and this
-  // reuses current_() — the same base+mood clamp lib/citizenDials.js uses — so
-  // the sheet-side vocabulary and the Node-side reader cannot drift apart.
-  var current = {};
-  for (var ci = 0; ci < DIALS.length; ci++) current[DIALS[ci]] = current_(c, DIALS[ci]);
 
   var result = {
-    bands: bands,
-    mult: mult,
     current: current,
-    // engine.182 (S438): the lowest integrity band opens crime; so does integrity slipping (band -1)
-    // on a citizen who has come apart (composure band -2) — burnout reaches the dark end sooner.
-    crimeReachable: bandIndex_(current_(c, 'integrity')) <= 0 ||
-      (bandIndex_(current_(c, 'integrity')) <= 1 && bandIndex_(current_(c, 'composure')) <= 0),
+    pos: pos,
+    mult: mult,
+    // engine.182 (S438): low integrity opens crime; so does integrity slipping on a citizen
+    // who has come apart (composure at the bottom). A share 0..1 — the conduct engine
+    // multiplies its commit odds by it: 0 at integrity 30, 0.5 at 20 (the old edge), 1 at 10.
+    crimeReach: Math.max(dialLow_(current.integrity, 2),
+      Math.min(dialLow_(current.integrity, 1), dialLow_(current.composure, 2))),
     careerFreq: mult.drive,                                    // Drive -> career events
     familyFreq: mult.family                                    // Family-oriented -> birth/marriage
   };

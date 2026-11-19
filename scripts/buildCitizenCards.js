@@ -48,6 +48,7 @@ var https = require('https');
 var sheets = require('../lib/sheets');
 var coverageAnchors = require('../lib/coverageAnchorRetirements');
 var citizenMemory = require('../utilities/citizenMemory'); // engine.31 dial model — describe_/deserialize_ for the Essence line
+var citizenDials = require('../lib/citizenDials'); // engine.349 Task 14: the middle's lean words
 
 var API_KEY = process.env.SUPERMEMORY_CC_API_KEY;
 var CONTAINER_TAG = 'world-data';
@@ -596,10 +597,12 @@ function milestoneKey_(line) {
   return (m ? m[0] : String(line)).trim().toLowerCase();
 }
 
-// DialState (JSON {base,streak}, engine.31) -> "driven, warm, often out".
-// Absent/corrupt/all-neutral -> null (no Essence line). Uses the real dial
-// model (citizenMemory describe_), not a duplicate band map — the card can
-// never drift from the engine's read of the same cell.
+// DialState (JSON {base,streak}, engine.31) -> "driven, warm, often out, leans private".
+// Absent/corrupt -> null (no Essence line). Uses the real dial model (citizenMemory
+// describe_), not a duplicate band map — the card can never drift from the engine's read
+// of the same cell. engine.349 Task 14: a dial inside 40-60 reads by its lean, the same
+// words the wake prompt uses (lib/citizenDials leanings); nothing 4 off 50 anywhere ->
+// 'even-keeled, unremarkable'.
 function dialEssence_(dialStateRaw) {
   var s = (dialStateRaw || '').trim();
   if (!s) return null;
@@ -607,8 +610,12 @@ function dialEssence_(dialStateRaw) {
   try { parsed = JSON.parse(s); } catch (e) { return null; }
   if (!parsed || typeof parsed !== 'object' || !parsed.base) return null;
   var c = citizenMemory.deserialize_(parsed);
+  var parts = [];
   var desc = citizenMemory.describe_(c);
-  return desc || 'even-keeled, unremarkable'; // all dials mid-band — by design the quiet middle
+  if (desc) parts.push(desc);
+  var leans = citizenDials.leanings(citizenDials.currentDials(s));
+  if (leans.length) parts.push(leans.join(', '));
+  return parts.length ? parts.join(', ') : 'even-keeled, unremarkable';
 }
 
 async function buildCard(citizen, appearances, refs) {

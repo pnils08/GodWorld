@@ -102,7 +102,7 @@ const grow = (pop, o) => { const r = GH.map(() => ''); r[g('POPID')] = pop; r[g(
 global.__SOC = {};
 const B = load('../phase05-citizens/bondEngine.js', ['bondCanCourt_', 'detectNewBonds_', 'marryCitizens_', 'BOND_TYPES', 'updateExistingBonds_',
   'processRomanceAndMarriage_', 'processGCCourtship_', 'BOND_ENCOUNTER_CHANCE', 'getBondKey_'],
-  'bondWarmthFactor_ = function () { return 1; }; bondFamilyFactor_ = function () { return 1; }; bondDialBand_ = function (ctx, p) { return global.__SOC[p] || 0; }; var __bid = 0; generateBondId_ = function () { return "BOND-T" + (++__bid); };',
+  'bondWarmthFactor_ = function () { return 1; }; bondFamilyFactor_ = function () { return 1; }; bondDialPos_ = function (ctx, p) { return global.__SOC[p] || 0; }; var __bid = 0; generateBondId_ = function () { return "BOND-T" + (++__bid); };',
   ['../utilities/safeRand.js', '../phase05-citizens/bondPersistence.js', '../phase04-events/generationalEventsEngine.js']);
 const seq = (arr, rest) => { const q = arr.slice(); return () => (q.length ? q.shift() : (rest === undefined ? 0.99 : rest)); };
 {

@@ -59,7 +59,7 @@ pointers:
 
 | # | Concept | Origin | What it adds | Status |
 |---|---|---|---|---|
-| N1 | `processOverrideVote_` has the same shape (lead + IND rolled again; a vetoed IND-led initiative cannot reach the 6 an override needs) | es · code read | a passed IND-led initiative that the mayor vetoes cannot be overridden | held for builder — the bench showed it: INIT-009 passed 5-4 and the mayor vetoed it; the override cannot reach 6 |
+| N1 | `processOverrideVote_` has the same shape (lead + IND rolled again; a vetoed IND-led initiative cannot reach the 6 an override needs) | es · code read | a passed IND-led initiative that the mayor vetoes cannot be overridden | held for builder — the bench showed INIT-009 pass 5-4 and the mayor veto it; no override vote ran on the bench, so "cannot reach 6" is from the code read, not a bench result |
 | N2 | `OppositionFaction` blank defaults to CRC even when the lead is CRC (a faction counted yes and no) | es · code read | no CRC-led row exists on the tracker today | held for builder |
 
 ## Open questions
@@ -68,6 +68,7 @@ pointers:
 
 ## Changelog
 
+- 2026-11-19 (es) — N1 wording corrected: the bench recorded INIT-009's pass and veto only; the override outcome is a code read, not a bench result.
 - 2026-11-19 (es) — INIT-007 ruled: part of Baylight, never a stand-alone initiative (builder). Open question closed; the override vote (N1) is the only ruling left.
 - 2026-11-19 (es) — tracker restored: INIT-003, 006, 008–014 on the C114 natural path, no vote dates; the first IND-led vote waits on the override ruling (N1). Storyline_Ledger read after the C117 fire.
 - 2026-11-19 (es) — bench C117 PASS, PROD stage 59 @194 live; tracker restore next; override path (N1) is the builder's to rule before any IND-led vote is dated.

@@ -23,6 +23,8 @@ pointers:
 
 **Goal:** the Mayor, the council, the agented offices, Varek and every player the feed names wake on their own week, as themselves, and that wake lands on their page.
 
+**The point of the template work is no puppeting:** nothing tells a cron what to say. A cron wakes as the person it is, with their memory, their records and tools, and a task.
+
 **Rows:** pipeline.110 · **Owner:** engine-sheet
 
 **Where this plan is (2026-11-18):** workers live, 14 of 14. Every drafted template is marked garbage; what is kept is the data search — which records each cron should have. Reporter structure: nothing decided. Council on hold. Task 8 waits on the tracker repair.

@@ -21,6 +21,10 @@ global.queueBatchAppendIntent_ = () => {};
 global.inWorldStamp_ = () => 'C101';
 global.getCitizenDialBands_ = () => null;
 const M = require('../utilities/citizenDialMap.js');
+const E = require('../utilities/citizenMemory.js');
+Object.assign(global, E);   // the fold's helpers (applyCycleEffects_, settleCycle_ …) are globals in Apps Script
+global.nudgesForEvent_ = M.nudgesForEvent_; global.baseTag_ = M.baseTag_;
+const C = require('../utilities/compressLifeHistory.js');
 
 function mulberry32(seed) { return function () { seed |= 0; seed = (seed + 0x6D2B79F5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
 let rngImpl = mulberry32(1);
@@ -68,8 +72,14 @@ console.log('═══ runRelationshipEngine — social lines');
     R.tag('Relationship', 'felt distant from people around them').tag === 'Relationship-Sociability-Down-S' && JSON.stringify(M.nudgesForEvent_('Relationship', 1, '')) === '{"sociability":5,"warmth":2}');
   assert('"had a minor disagreement with someone they know" is warmth down', R.tag('Relationship', 'had a minor disagreement with someone they know').tag === 'Relationship-Warmth-Down-S');
 
+  // the weather and media engines are present, as on a real Cycle (agy 2026-11-18: with them absent the harness hid
+  // that every line they handed in was unlisted): a heat wave with specials, a weather line and a media line on offer
+  const OUTSIDE = ['walked through drizzle, unbothered', 'sought shade during the heat wave', 'read an anxious headline twice'];
+  global.getWeatherEvent_ = () => ({ text: OUTSIDE[0] });
+  global.hasWeatherCondition_ = (ctx, c) => c === 'heat_wave';
+  global.getMediaInfluencedEvent_ = () => ({ text: OUTSIDE[2] });
   const HEADERS = ['POPID', 'First', 'Last', 'Tier', 'ClockMode', 'UNI (y/n)', 'MED (y/n)', 'CIV (y/n)', 'LifeHistory', 'LastUpdated', 'Neighborhood', 'DialState', 'Status'];
-  const lines = []; let dropped = 0, active = 0, written = 0; const bySrc = {};
+  const lines = []; let dropped = 0, active = 0, written = 0, overCap = 0, fullWithDrops = 0; const bySrc = {};
   for (let seed = 1; seed <= 500; seed++) {
     rngImpl = mulberry32(seed * 7919);
     const rows = []; for (let i = 0; i < 150; i++) rows.push(['POP-R' + i, 'T', 'R' + i, 3, 'ENGINE', 'n', 'n', 'n', '', '', 'Temescal', '', 'active']);
@@ -77,20 +87,26 @@ console.log('═══ runRelationshipEngine — social lines');
     const ctx = { now: new Date(0), config: {}, ledger: { headers: HEADERS.slice(), rows, dirty: false },
       summary: { season, holiday: seed % 5 === 0 ? 'Thanksgiving' : 'none', isFirstFriday: seed % 3 === 0, isCreationDay: seed % 7 === 0,
         weather: { type: ['clear', 'rain', 'fog', 'hot', 'wind'][seed % 5], impact: 1 }, worldEvents: seed % 2 ? [{ domain: 'CIVIC' }] : [],
+        weatherEventPools: { special: [OUTSIDE[1]], base: [OUTSIDE[0]] }, mediaEffects: { eventPools: { anxious: [OUTSIDE[2]] } },
         cityDynamics: { sentiment: seed % 4 === 0 ? -0.5 : 0.5, culturalActivity: 1.5, communityEngagement: 1.4 }, eventsGenerated: 0, cycleId: 101 } };
     R.run(ctx);
     const got = lifeLines(ctx.ledger.rows, 8); written += got.length; got.forEach((l) => lines.push(l));
+    if (got.length > 8) overCap++;
+    if (got.length === 8 && ctx.summary.engine299 && ctx.summary.engine299.noDial > 0) fullWithDrops++;
     if (ctx.summary.engine299) { dropped += ctx.summary.engine299.noDial; for (const k in ctx.summary.engine299.noDialBySource) bySrc[k] = (bySrc[k] || 0) + ctx.summary.engine299.noDialBySource[k]; }
     active += ctx.summary.cycleActiveCitizens.length;
   }
   const bare = lines.filter((l) => /^(Relationship|Cultural|Community|Media)$/.test(l.tag) || /^Relationship-(Holiday|FirstFriday|CreationDay|Weather)$/.test(l.tag));
-  assert(`the engine writes no bare or calendar-suffixed social line (${written} lines in 500 runs)`, written > 1500 && bare.length === 0, JSON.stringify(bare.slice(0, 3)));
+  assert(`the engine writes no bare or calendar-suffixed social line, and no Media line (${written} lines in 500 runs)`, written > 1500 && bare.length === 0 && !lines.some((l) => /^Media/.test(l.tag)), JSON.stringify(bare.slice(0, 3)));
   const wrong = lines.filter((l) => { const want = (l.text in R.byText) ? R.tag(/^Cultural/.test(l.tag) ? 'Cultural' : (/^Community/.test(l.tag) ? 'Community' : 'Relationship'), l.text).tag : null; return want !== l.tag; });
   assert('every written line carries the tag its sentence is listed under', wrong.length === 0, JSON.stringify(wrong.slice(0, 3)));
   const down = lines.filter((l) => /-Down-S$/.test(l.tag)).length;
   assert(`the down side is written (${down} of ${written} lines)`, down > written * 0.08);
   const plainWritten = lines.filter((l) => R.byText[l.text] === null);
   assert(`a plain line is drawn, counted and not written (${dropped} draws)`, dropped > 50 && plainWritten.length === 0 && bySrc['runRelationshipEngine:Relationship:plain'] === dropped && !bySrc['runRelationshipEngine:Relationship:unlisted'], JSON.stringify(bySrc));
+  assert('no weather or media line is taken into the social pool: none written, none drawn and dropped', !lines.some((l) => OUTSIDE.indexOf(l.text) >= 0) && !bySrc['runRelationshipEngine:Relationship:unlisted']);
+  assert(`the cap is on lines written: no run wrote more than 8, and ${fullWithDrops} runs wrote all 8 with plain draws beside them`, overCap === 0 && fullWithDrops > 20);
+  delete global.getWeatherEvent_; delete global.hasWeatherCondition_; delete global.getMediaInfluencedEvent_;
   assert('a citizen whose draw was plain still counts as out among people (the bond engine\'s pool)', active === written + dropped, active + ' vs ' + (written + dropped));
   assert('the culture and community lines keep their kinds, graded', lines.some((l) => /^Cultural-(Openness|Sociability)-Up-S$/.test(l.tag)) && lines.some((l) => /^Community-(Sociability|Warmth)-Up-S$/.test(l.tag)));
 }
@@ -120,7 +136,7 @@ console.log('═══ runHouseholdEngine — home lines');
     if (ctx.summary.engine299) { dropped += ctx.summary.engine299.noDial; for (const k in ctx.summary.engine299.noDialBySource) bySrc[k] = (bySrc[k] || 0) + ctx.summary.engine299.noDialBySource[k]; }
   }
   const bare = events.filter((e) => /^Household(-FirstFriday|-CreationDay|-Holiday)?$/.test(e.tag));
-  assert(`the engine writes no bare or calendar-suffixed home line (${events.length} lines)`, events.length > 300 && bare.length === 0, JSON.stringify(bare.slice(0, 3)));
+  assert(`the engine writes no bare or calendar-suffixed home line (${events.length} lines)`, events.length > 200 && bare.length === 0, JSON.stringify(bare.slice(0, 3)));
   const home = events.filter((e) => /^Household-/.test(e.tag) && !/GameNight/.test(e.tag));
   const wrong = home.filter((e) => H.tag(e.event).tag !== e.tag);
   assert(`every written home line carries the tag its sentence is listed under (${home.length})`, home.length > 200 && wrong.length === 0, JSON.stringify(wrong.slice(0, 3)));
@@ -190,6 +206,36 @@ console.log('═══ the other three');
   assert('generator: Continuity is written graded only', /var GRADED_ONLY_KIND_ = \{[^}]*"Continuity": true/.test(c));
   const follow = [...c.matchAll(/makeEntry\("([^"]+)", \["source:continuity", "continuity:(rivalry|alliance|arc)", "dial:([a-z]+):(up|down)"\]/g)];
   assert('generator: the three follow-up lines carry a sign (they were drawn and dropped)', follow.length === 3 && follow.every((m) => DIALS.indexOf(m[3]) >= 0), String(follow.length));
+  // a retiree's everyday lines (the coded pool; the tab's retirement rows are scripts/contentTabReads.js)
+  assert('generator: a retiree\'s line is written graded only (was a bare PostCareer: family +4, openness +2)', /var GRADED_ONLY_KIND_ = \{[^}]*"PostCareer": true/.test(c) && JSON.stringify(M.nudgesForEvent_('PostCareer', 1, '')) === '{"family":4,"openness":2}');
+  const ret = new Function(c.slice(c.indexOf('      var retiredPool = ['), c.indexOf('      for (var rpi = 0;')) + '\nreturn retiredPool;')();
+  const retSigns = ret.map((r) => /^dial:([a-z]+):(up|down)$/.exec(r[1]));
+  assert('generator: each of the seven retiree lines carries its own sign, five up and two down, the pool at the mass of five',
+    ret.length === 7 && retSigns.every((m) => m && DIALS.indexOf(m[1]) >= 0) && retSigns.filter((m) => m[2] === 'down').length === 2 && c.indexOf('5 / retiredPool.length') > 0, JSON.stringify(ret.map((r) => r[1])));
+  assert('generator: a retiree line folds one step under PostCareer', ret.every((r, i) => { const m = retSigns[i], fx = M.nudgesForEvent_(M.gradedTag_('PostCareer', m[1], m[2] === 'up', 'S'), 1, r[0]); return Object.keys(fx).length === 1 && Math.abs(fx[m[1]]) === 1; }));
+}
+
+// ── what one step a line does in the fold itself (the real foldNewEntries_, stamped Cycles)
+console.log('═══ the fold — one step a line, today\'s speed and the ruled speed');
+{
+  const everyFifth = (tag, tune, gap) => { const c = E.newCitizen_(); c.folded = 0; const es = []; for (let i = 1; i <= 8; i++) es.push({ tag, text: 'x', cycle: i * (gap || 5) }); C.foldNewEntries_(c, es, null, tune, null, 8 * (gap || 5)); return c.base.family; };
+  const SEED = { lineScale: 1, directShare: 0 }, MIDDLE = { lineScale: 2, directShare: 0.25 };
+  const oldUp = everyFifth('Household', SEED), newUp = everyFifth('Household-Family-Up-S', SEED), weekly = everyFifth('Household-Family-Up-S', SEED, 1);
+  const midUp = everyFifth('Household-Family-Up-S', MIDDLE), midDown = everyFifth('Household-Family-Down-S', MIDDLE);
+  assert(`a bare Household (+5) every fifth Cycle hardened family at today's speed (50 -> ${oldUp.toFixed(1)}) — the old behaviour, whatever the line said`, oldUp > 53);
+  assert(`a one-step home line every fifth Cycle does not (50 -> ${newUp.toFixed(1)}); every Cycle it does (${weekly.toFixed(1)})`, newUp === 50 && weekly > 51);
+  assert(`at the ruled speed (lines doubled, a quarter sticks) the same line moves family for good, either way (${midUp.toFixed(1)} up, ${midDown.toFixed(1)} down)`,
+    midUp > 52 && midDown < 48 && Math.abs((midUp - 50) + (midDown - 50)) < 1e-9);
+}
+
+// ── a reader that matched the bare tag (agy 2026-11-18): the world summary's "Who Lived It"
+console.log('═══ readers');
+{
+  const BWS = require('./buildWorldSummary.js');
+  const row = (tag, text) => ({ Cycle: '117', EventTag: tag, POPID: 'POP-00001', Name: 'A B', EventText: text, Neighborhood: 'Temescal' });
+  const out = BWS.emitWhoLivedIt([row('Household-Family-Up-S', 'shared quiet time at home with household members'), row('Household-Composure-Down-S', 'heard an ambulance pass in the night'),
+    row('Relationship-Sociability-Down-S', 'felt distant from people around them'), row('Health', 'slept badly for a few nights running'), row('Neighborhood-Outabout-Up-S|source:x', 'a composite texture row')], [], 117).join('\n');
+  assert('the world summary lists a graded home or social line under its kind', /### Household \(2\)/.test(out) && /### Relationship \(1\)/.test(out) && /### Health \(1\)/.test(out) && !/Neighborhood/.test(out.replace(/\(Temescal\)/g, '')), out.slice(0, 300));
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

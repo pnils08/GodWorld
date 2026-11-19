@@ -43,8 +43,8 @@
 // Cultural (openness +4, out-and-about +3) or Community (sociability +4, warmth +2). Each line is listed
 // here under the dial it moves and which way, read off the sentence, and written one step:
 // <Kind>-<Dial>-<Up|Down>-S. A line listed plain says nothing the citizen did or felt toward anyone; it
-// and any line not listed (a weather or media line handed in from another engine) is drawn, counted and
-// not written, so every other line keeps the odds it had.
+// is drawn, counted and not written, so every other line keeps the odds it had. A line a sentence feels
+// something in is signed by what is felt; one that only sees or hears the block is plain.
 // The bond lines (Rivalry, Alliance, Mentorship, Arc) are about a bond the citizen holds and keep their kinds.
 var RELATIONSHIP_SIGN_LINES_ = {
   "sociability:up": [
@@ -71,7 +71,8 @@ var RELATIONSHIP_SIGN_LINES_ = {
     "felt stronger connection to their block", "shared New Year hopes with a friend",
     "shared gratitude with family and friends", "exchanged gifts and well-wishes with loved ones",
     "felt holiday warmth in community interactions", "exchanged Valentine's greetings with someone special",
-    "felt a deep sense of community belonging"
+    "felt a deep sense of community belonging", "relied on familiar social circles during cold period",
+    "felt romantic energy in social interactions"
   ],
   "warmth:down": ["had a minor disagreement with someone they know"],
   "family:up": [
@@ -81,8 +82,7 @@ var RELATIONSHIP_SIGN_LINES_ = {
   "openness:up": ["felt energized by the city's creative buzz", "felt the creative community energy"],
   "outabout:down": ["stayed indoors and messaged friends remotely"],
   "plain": [
-    "relied on familiar social circles during cold period", "felt shift in social energy as routines returned",
-    "felt social atmosphere shift due to today's happenings", "felt romantic energy in social interactions",
+    "felt shift in social energy as routines returned", "felt social atmosphere shift due to today's happenings",
     "sensed something foundational in the air"
   ]
 };
@@ -533,28 +533,11 @@ function runRelationshipEngine_(ctx) {
         pool = pool.concat(arcRels);
       }
 
-      // Add Weather Events
-      if (typeof getWeatherEvent_ === 'function' && rng() < 0.2) {
-        var weatherEvent = getWeatherEvent_(ctx, false);
-        if (weatherEvent) {
-          pool.push(weatherEvent.text);
-        }
-      }
-
-      // Add Weather Special Events During Heat Wave
-      if (typeof hasWeatherCondition_ === 'function' && hasWeatherCondition_(ctx, 'heat_wave')) {
-        if (ctx.summary.weatherEventPools && ctx.summary.weatherEventPools.special) {
-          pool = pool.concat(ctx.summary.weatherEventPools.special);
-        }
-      }
-
-      // Add Media-Influenced Events
-      if (typeof getMediaInfluencedEvent_ === 'function' && rng() < 0.15) {
-        var mediaEvent = getMediaInfluencedEvent_(ctx);
-        if (mediaEvent) {
-          pool.push(mediaEvent.text);
-        }
-      }
+      // engine.350 (agy 2026-11-18): this engine used to take a weather line (getWeatherEvent_, and every
+      // heat-wave special), and a media line (getMediaInfluencedEvent_) into its pool and write them as social
+      // lines — "walked through drizzle" as a bare Relationship (sociability +5), a news-climate line as a bare
+      // Media. Neither is a social line and neither is in the list above; the weather and the news reach a
+      // citizen through the engines that own them (the generator's weather and media pools, each line signed).
 
       // ═══════════════════════════════════════════════════════════════════════
       // PICK EVENT
@@ -573,10 +556,10 @@ function runRelationshipEngine_(ctx) {
       } else {
         // engine.350: a social line is written under the dial it names, one step. The culture and community
         // lines keep their kinds; a holiday, First Friday or Creation Day line is a Relationship line (the
-        // calendar suffixes were bare Relationship: +5 / +2 whatever the line said). A plain line, or a weather
-        // or media line another engine handed in (no sign here), is drawn, counted against the cap and in
-        // S.engine299.noDialBySource, and not written — every other line keeps the odds it had. The citizen
-        // still counts as out among people this Cycle (the bond engine's pool).
+        // calendar suffixes were bare Relationship: +5 / +2 whatever the line said). A plain line is drawn,
+        // counted in S.engine299.noDialBySource and not written — every other line keeps the odds it had. It
+        // does not count against the cap (the cap is on lines written, as in the household engine). The citizen
+        // still counts as out among people this Cycle (the bond engine's pool), as before.
         var relKind = culturalRels.indexOf(pick) >= 0 ? "Cultural" : (communityRels.indexOf(pick) >= 0 ? "Community" : "Relationship");
         var relSigned = relationshipLineTag_(relKind, pick);
         if (!relSigned.tag) {
@@ -585,7 +568,6 @@ function runRelationshipEngine_(ctx) {
           var relKey = 'runRelationshipEngine:Relationship:' + relSigned.why;
           ctx.summary.engine299.noDialBySource[relKey] = (ctx.summary.engine299.noDialBySource[relKey] || 0) + 1;
           ctx.summary.cycleActiveCitizens.push(popId);
-          globalEvents++;
           continue;
         }
         eventTag = relSigned.tag;

@@ -125,46 +125,46 @@ var HOUSEHOLD_TEXTURE_BESPOKE_ = {
 // step: Household-<Dial>-<Up|Down>-S. A line listed plain is a look out of the window with nothing felt or done
 // in it; it is drawn, counted (S.engine299.noDialBySource) and not written, so every other line keeps the odds
 // it had. The ailment, recovery and game-night lines have kinds of their own and are untouched.
+// The rule between signed and plain (agy 2026-11-18): a line that only sees, hears or smells the block is plain;
+// one that says what was felt, enjoyed or done is signed by that — "felt the steady pace of the block" composure
+// up, "felt the tiredness of a hard-working street" composure down, "heard the trains from the window" plain.
 var HOUSEHOLD_SIGN_LINES_ = {
   "family:up": [
     "shared quiet time at home with household members", "reminisced about past times with household members",
-    "discussed light city news with household members", "prepared the home for New Year's celebration",
-    "gathered with household for countdown", "prepared Easter gathering at home", "enjoyed holiday brunch with household",
-    "carved pumpkins with household members", "prepared Thanksgiving meal at home", "hosted family for Thanksgiving dinner",
-    "shared gratitude with household members", "prepared the home for seasonal gatherings", "exchanged gifts with household members",
+    "discussed light city news with household members", "gathered with household for countdown", "prepared Easter gathering at home",
+    "enjoyed holiday brunch with household", "carved pumpkins with household members", "prepared Thanksgiving meal at home",
+    "hosted family for Thanksgiving dinner", "shared gratitude with household members", "exchanged gifts with household members",
     "enjoyed holiday meal with family", "shared a special dinner at home", "exchanged Valentine's greetings with household",
     "prepared breakfast in bed for mom", "celebrated mother's day at home", "celebrated dad with a home-cooked meal",
     "spent quality time with father at home", "reflected on household history and roots", "shared stories of how the household began",
-    "felt positive atmosphere inside the home", "watched part of a game together at home",
-    "cooked dinner with their spouse and talked through the week", "settled into a quiet evening on the couch with their partner",
-    "split the weekend errands with their spouse", "planned the month's budget together with their partner",
-    "helped the kids with homework at the kitchen table", "wrangled the kids through the bedtime routine",
-    "watched a movie with the kids piled on the couch", "packed school lunches for the morning rush",
+    "watched part of a game together at home", "cooked dinner with their spouse and talked through the week",
+    "settled into a quiet evening on the couch with their partner", "split the weekend errands with their spouse",
+    "planned the month's budget together with their partner", "helped the kids with homework at the kitchen table",
+    "wrangled the kids through the bedtime routine", "watched a movie with the kids piled on the couch", "packed school lunches for the morning rush",
     "the family kept vigil at the hospital"
   ],
-  "family:down": ["felt some household tension from the weather", "felt slight tension among household members"],
+  "family:down": [
+    "felt some household tension from the weather", "felt slight tension among household members"
+  ],
   "composure:up": [
     "spent a calm evening in their living space", "relaxed inside the home during off-hours", "enjoyed a cozy evening at home",
     "had a quiet, reflective evening indoors", "opened all the windows to enjoy the perfect weather",
-    "kept doors/windows open to enjoy evening warmth", "watched the snow fall from the window",
-    "relaxed at home after First Friday festivities", "felt secure about the household's financial situation",
-    "heard the avenue traffic fade in the evening", "noticed the tidy calm of the block from the window",
-    "enjoyed the quiet of the block from inside", "felt the steady pace of the block from inside",
-    "heard the village street go quiet for the night", "enjoyed the lakeside neighborhood tranquility",
-    "enjoyed the quiet residential evening", "appreciated the peaceful block", "appreciated the tree-lined street view",
-    "enjoyed the leafy street view from inside", "appreciated the residential tranquility"
+    "kept doors/windows open to enjoy evening warmth", "relaxed at home after First Friday festivities",
+    "felt secure about the household's financial situation", "enjoyed the quiet of the block from inside",
+    "felt the steady pace of the block from inside", "enjoyed the lakeside neighborhood tranquility", "enjoyed the quiet residential evening",
+    "appreciated the peaceful block", "appreciated the tree-lined street view", "enjoyed the leafy street view from inside",
+    "appreciated the residential tranquility", "felt positive atmosphere inside the home"
   ],
   "composure:down": [
-    "felt slight shift in home mood due to recent events", "discussed household budget concerns", "looked for ways to cut household costs",
-    "the household juggled shifts to cover the hospital stay", "the family traded hospital visits between work and school runs",
-    "heard an ambulance pass in the night", "noticed construction dust on the windowsill", "felt the tiredness of a hard-working street",
-    "heard construction start at dawn", "felt the boom-time churn of the block from inside"
+    "discussed household budget concerns", "looked for ways to cut household costs", "the household juggled shifts to cover the hospital stay",
+    "the family traded hospital visits between work and school runs", "heard an ambulance pass in the night",
+    "noticed construction dust on the windowsill", "felt the tiredness of a hard-working street", "heard construction start at dawn",
+    "felt the boom-time churn of the block from inside"
   ],
   "warmth:up": [
     "prepared candy for trick-or-treaters", "felt a sense of home and belonging today", "felt connected to the block from inside the home",
     "neighbors dropped off meals while the household held things together", "felt the tired, caring pace of the block from inside",
-    "smelled cooking from a neighbor's kitchen", "smelled cooking from a nearby home", "smelled food from a nearby kitchen",
-    "felt the neighborhood's cultural warmth"
+    "felt the neighborhood's cultural warmth", "appreciated the home's foundational meaning"
   ],
   "sociability:up": [
     "invited friends over before the art walk", "chatted with neighbors from the porch", "waved to a neighbor from the porch",
@@ -172,23 +172,28 @@ var HOUSEHOLD_SIGN_LINES_ = {
   ],
   "openness:up": [
     "discussed local cultural events at home", "played music that matched the city's creative mood",
-    "heard music from a studio down the block", "noticed a new mural from the window", "felt the creative energy of the corridor from inside",
-    "noticed the creative neighborhood energy from inside", "felt the creative energy from inside", "appreciated the DIY neighborhood spirit"
+    "felt the creative energy of the corridor from inside", "noticed the creative neighborhood energy from inside",
+    "felt the creative energy from inside", "appreciated the DIY neighborhood spirit"
   ],
-  "drive:up": ["managed small chores and daily responsibilities", "organized part of the home during seasonal transition", "discussed new year resolutions at home"],
-  "outabout:up": ["got ready at home before heading to First Friday"],
-  "outabout:down": ["spent extra time indoors due to cold weather", "stayed inside and listened to the rain"],
+  "drive:up": [
+    "managed small chores and daily responsibilities", "organized part of the home during seasonal transition",
+    "discussed new year resolutions at home", "tidied up after New Year's festivities"
+  ],
+  "outabout:up": [
+    "got ready at home before heading to First Friday"
+  ],
+  "outabout:down": [
+    "spent extra time indoors due to cold weather", "stayed inside and listened to the rain"
+  ],
   "fandom:up": [
-    "tuned into postseason coverage as a household", "debated playoff chances with household members",
-    "gathered to watch the championship at home", "felt the household buzz with championship excitement",
-    "heard the crowd roar from the arena", "felt the district's pregame buzz from inside"
+    "tuned into postseason coverage as a household", "debated playoff chances with household members", "gathered to watch the championship at home",
+    "felt the household buzz with championship excitement", "felt the district's pregame buzz from inside"
   ],
   "plain": [
     "handled routine household matters", "prepared home for cooler fall conditions", "kept indoor lights on during heavy fog",
     "used fans or open windows to cool the home", "adjusted the thermostat for the cold snap", "secured items near windows during windy conditions",
-    "tidied up after New Year's festivities", "decorated the home for Halloween", "decorated the home for the holidays",
-    "appreciated the home's foundational meaning",
-    "heard the civic district go quiet from inside", "noticed the official buildings lit up at night", "watched the last office workers head home",
+    "decorated the home for Halloween", "decorated the home for the holidays", "heard the civic district go quiet from inside",
+    "noticed the official buildings lit up at night", "watched the last office workers head home",
     "noticed a neighbor coming home from a clinic shift", "heard school-age kids on the sidewalk", "noticed the main street quiet after closing",
     "watched neighbors carry groceries home", "heard student voices drifting past", "watched the block change from the window",
     "heard the trains from the window", "noticed the station crowd from the front step", "watched the commuter rush from inside",
@@ -196,17 +201,22 @@ var HOUSEHOLD_SIGN_LINES_ = {
     "watched neighbors walk home from work", "heard neighborhood kids playing outside", "noticed porch lights coming on down the street",
     "heard shop shutters roll down for the night", "noticed the storefronts lit from the window", "watched shoppers heading home with bags",
     "heard the hospital shift change from the window", "noticed a neighbor in scrubs heading out", "heard families gathering next door",
-    "noticed the market street winding down from inside", "heard the corner store bell from the window", "noticed apartments lighting up across the street",
-    "felt the block's patchwork rhythm from inside", "noticed the bakery closing from the window", "heard neighbors leaving for early shifts",
-    "noticed the block's working rhythm from inside", "noticed game-day traffic from the window", "noticed a new building frame from the window",
-    "heard city sounds drifting up from the street", "noticed the urban energy even from inside", "watched Downtown activity from the window",
-    "heard music from a neighbor's gathering", "watched joggers pass by from the window", "heard geese from the lake",
-    "heard trains in the distance", "noticed the neighborhood's industrial rhythm", "observed development activity from the window",
-    "heard BART rumble in the distance", "noticed the upscale neighborhood calm", "heard waterfront activity from the window",
-    "noticed the arts district energy nearby", "smelled the estuary air", "heard gallery foot traffic from the window",
-    "noticed the urban arts neighborhood vibe", "noticed the neighborhood's artistic character from home", "heard creative activity on the street",
-    "heard the morning market bustle outside", "smelled cooking from nearby restaurants", "felt the neighborhood's bustling energy",
-    "noticed the boutique neighborhood's quiet charm"
+    "noticed the market street winding down from inside", "heard the corner store bell from the window",
+    "noticed apartments lighting up across the street", "felt the block's patchwork rhythm from inside", "noticed the bakery closing from the window",
+    "heard neighbors leaving for early shifts", "noticed the block's working rhythm from inside", "noticed game-day traffic from the window",
+    "noticed a new building frame from the window", "heard city sounds drifting up from the street", "noticed the urban energy even from inside",
+    "watched Downtown activity from the window", "heard music from a neighbor's gathering", "watched joggers pass by from the window",
+    "heard geese from the lake", "heard trains in the distance", "noticed the neighborhood's industrial rhythm",
+    "observed development activity from the window", "heard BART rumble in the distance", "noticed the upscale neighborhood calm",
+    "heard waterfront activity from the window", "noticed the arts district energy nearby", "smelled the estuary air",
+    "heard gallery foot traffic from the window", "noticed the urban arts neighborhood vibe",
+    "noticed the neighborhood's artistic character from home", "heard creative activity on the street", "heard the morning market bustle outside",
+    "smelled cooking from nearby restaurants", "felt the neighborhood's bustling energy", "noticed the boutique neighborhood's quiet charm",
+    "prepared the home for New Year's celebration", "prepared the home for seasonal gatherings", "watched the snow fall from the window",
+    "heard the avenue traffic fade in the evening", "heard the village street go quiet for the night",
+    "noticed the tidy calm of the block from the window", "felt slight shift in home mood due to recent events",
+    "smelled cooking from a neighbor's kitchen", "smelled cooking from a nearby home", "smelled food from a nearby kitchen",
+    "heard music from a studio down the block", "noticed a new mural from the window", "heard the crowd roar from the arena"
   ]
 };
 var HOUSEHOLD_SIGN_BY_TEXT_ = (function() {

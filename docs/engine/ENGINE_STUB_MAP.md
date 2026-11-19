@@ -2742,7 +2742,7 @@
 - **relationshipLineTag_(kind, text)**
 
 - **runRelationshipEngine_(ctx)**
-  Reads: S.absoluteCycle, S.cityDynamics, S.cycleActiveCitizens, S.cycleId, S.engine299, S.eventsGenerated, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.weather, S.weatherEventPools, S.worldEvents
+  Reads: S.absoluteCycle, S.cityDynamics, S.cycleActiveCitizens, S.cycleId, S.engine299, S.eventsGenerated, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.weather, S.worldEvents
   Writes: S.cycleActiveCitizens, S.engine299, S.eventsGenerated
   Sheets: LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)

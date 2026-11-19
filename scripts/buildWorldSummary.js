@@ -302,12 +302,16 @@ const WHO_LIVED_IT_TAGS = ['Promotion', 'Wedding', 'Birth', 'Death', 'Retirement
   'Graduation', 'Health', 'Recovering', 'Stabilized', 'Relationship', 'Household'];
 const WHO_LIVED_IT_CAP = 15; // per tag class — "+N more" past this
 
+// engine.350: a home or social line is written under the dial it names (Household-Family-Up-S); the section is
+// keyed by the kind, so the graded form counts as its kind (an exact match on the bare tag dropped every one).
+const whoLivedKind_ = (tag) => { const g = require('../utilities/citizenDialMap.js').gradedParts_(tag); return g ? g.kind : tag; };
+
 function emitWhoLivedIt(lhlRows, householdRows, cycle) {
   const lines = [`## Who Lived It (cycle ${cycle})`, ''];
   const byTag = {};
   for (const r of (lhlRows || [])) {
     if (String(r.Cycle) !== String(cycle)) continue;
-    const tag = String(r.EventTag || '').trim();
+    const tag = whoLivedKind_(String(r.EventTag || '').trim());
     if (!WHO_LIVED_IT_TAGS.includes(tag)) continue;
     (byTag[tag] = byTag[tag] || []).push(r);
   }

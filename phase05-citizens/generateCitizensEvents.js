@@ -1231,7 +1231,9 @@ function generateCitizensEvents_(ctx) {
   // and the sign of its bank (qolPoolFor_, patrolPoolFor_); it is written by that, or not written.
   // Continuity the same: no dial-map key, so a memory or follow-up line was read by any content-rule word in it,
   // and the three coded follow-up lines carried no sign and were drawn and dropped. They carry one now.
-  var GRADED_ONLY_KIND_ = { "Work": true, "Media": true, "QoL": true, "Continuity": true };
+  // PostCareer the same for a retiree's everyday line (the coded pool and the tab's retirement rows): written
+  // by its own sign, one step — never the bare key (family +4, openness +2).
+  var GRADED_ONLY_KIND_ = { "Work": true, "Media": true, "QoL": true, "Continuity": true, "PostCareer": true };
   var MEDIA_POOL_SIGN_ = {
     "Media-Anxious": "dial:composure:down", "Media-Crisis": "dial:composure:down", "Media-Hopeful": "dial:composure:up",
     "Media-Holiday": "dial:warmth:up", "Media-OaklandPride": "dial:warmth:up", "Media-Arts": "dial:openness:up",
@@ -3077,16 +3079,23 @@ function generateCitizensEvents_(ctx) {
     // changes what they get): retired citizens lost the work-shift pool; this is
     // what replaced it. Route: PostCareer {family:4, openness:2} — the existing
     // post-career state key, same scale as workers' Work {drive:4} texture.
+    // engine.350 (2026-11-18): the Work texture was cut to one step on what the line says; a retiree's
+    // line the same. Each was a bare PostCareer (family +4, openness +2) whatever it said — on the tab's
+    // retirement rows too ("napped through the end of a movie and claimed to have seen it before"). Each
+    // carries its own sign now, the other side of a retired week is written, and the pool keeps the mass
+    // its five lines had.
     if (status === "retired") {
       var retiredPool = [
-        "took the long morning walk that used to be a commute",
-        "gave a whole afternoon to a hobby without once checking the clock",
-        "dispensed advice at the hardware store — unsolicited, graciously received",
-        "watched the morning rush from the good bench, coffee in hand, exempt",
-        "volunteered an hour and accidentally stayed three"
+        ["took the long morning walk that used to be a commute", "dial:outabout:up"],
+        ["gave a whole afternoon to a hobby without once checking the clock", "dial:openness:up"],
+        ["dispensed advice at the hardware store — unsolicited, graciously received", "dial:sociability:up"],
+        ["watched the morning rush from the good bench, coffee in hand, exempt", "dial:composure:up"],
+        ["volunteered an hour and accidentally stayed three", "dial:warmth:up"],
+        ["picked up the phone to tell the old crew something and remembered there was nothing to report", "dial:sociability:down"],
+        ["let the afternoon go by without finding one thing that needed them", "dial:drive:down"]
       ];
       for (var rpi = 0; rpi < retiredPool.length; rpi++) {
-        pool.push(makeEntry(retiredPool[rpi], mergeTags(["source:retirement"], calendarTags), 1.0, false));
+        pool.push(makeEntry(retiredPool[rpi][0], mergeTags(["source:retirement", retiredPool[rpi][1]], calendarTags), 5 / retiredPool.length, false));
       }
     }
 

@@ -2502,8 +2502,7 @@
       "readers": [
         "phase02-world-state/applyWeatherModel.js::applyWeatherModel_",
         "phase02-world-state/applyWeatherModel.js::getNeighborhoodWeatherEvent_",
-        "phase02-world-state/applyWeatherModel.js::getWeatherEvent_",
-        "phase05-citizens/runRelationshipEngine.js::runRelationshipEngine_"
+        "phase02-world-state/applyWeatherModel.js::getWeatherEvent_"
       ]
     },
     "weatherFrontTracking": {

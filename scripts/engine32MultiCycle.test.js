@@ -310,7 +310,7 @@ assert('B1 bounded under continuous folding (every dial 0-100)', hot.bounded);
   // step a line is what the speed keys are for (engine.349 Task 9: lines doubled, a quarter of each week
   // sticks); this harness stamps every line Cycle 0, so it folds on the legacy path and cannot run that row —
   // the bench does.
-  assert('B3b at the seed speed a one-step home line does not harden: family stays where it was',
+  assert('B3b on this harness (every line stamped Cycle 0: the legacy fold) one-step home lines leave family where it was — the mechanism itself is proven on stamped Cycles in homeSocialLineSign.test.js',
     movers === 0 && sd === 0, movers + '/' + fams.length + ' moved, sd=' + sd.toFixed(2));
   const homeLines = hot.rows.map(r => String(r[HEADERS.indexOf('LifeHistory')] || '')).join('\n').match(/\[Household-[A-Za-z]+-(Up|Down)-S\]/g) || [];
   assert('B3c home lines still on the cells at the end of the trace are one step each, none bare', homeLines.length > 0 &&

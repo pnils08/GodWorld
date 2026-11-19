@@ -142,34 +142,40 @@ var POSTCAREER_TEXTURE_BESPOKE_ = {
 var POSTCAREER_SIGN_LINES_ = {
   "outabout:up": [
     "watching the civic district from a bench in retirement", "enjoying quiet walks past the public buildings",
-    "walking the main street in the afternoon", "picking up groceries near the transit stop",
-    "enjoying an early dinner before the night crowd", "strolling the main avenue in retirement", "browsing the shops along the avenue",
-    "browsing the storefronts in retirement", "enjoying the shopping-street bustle", "walking near the hospital grounds",
-    "visiting the market street in the mornings", "savoring a favorite family-run counter", "enjoying the village main street in retirement",
-    "visiting the bakery each morning", "attending openings along the corridor", "enjoying Temescal's cafe culture in retirement",
-    "grabbing coffee at a favorite Temescal spot", "watching city life from a Downtown bench", "savoring tacos at a Fruitvale favorite",
-    "taking peaceful walks around Lake Merritt", "strolling through Rockridge's tree-lined streets", "browsing shops along College Ave",
-    "taking in Jack London's waterfront scenery", "attending gallery openings in the arts district", "enjoying dim sum in Chinatown",
-    "appreciating the neighborhood's bustling markets", "strolling along leafy Piedmont Ave", "enjoying the boutique shops and cafes",
-    "wandering First Friday galleries in retirement"
+    "walking the main street in the afternoon", "picking up groceries near the transit stop", "enjoying an early dinner before the night crowd",
+    "strolling the main avenue in retirement", "browsing the shops along the avenue", "browsing the storefronts in retirement",
+    "enjoying the shopping-street bustle", "walking near the hospital grounds", "visiting the market street in the mornings",
+    "savoring a favorite family-run counter", "enjoying the village main street in retirement", "visiting the bakery each morning",
+    "attending openings along the corridor", "enjoying Temescal's cafe culture in retirement", "grabbing coffee at a favorite Temescal spot",
+    "watching city life from a Downtown bench", "savoring tacos at a Fruitvale favorite", "taking peaceful walks around Lake Merritt",
+    "strolling through Rockridge's tree-lined streets", "browsing shops along College Ave", "taking in Jack London's waterfront scenery",
+    "attending gallery openings in the arts district", "enjoying dim sum in Chinatown", "appreciating the neighborhood's bustling markets",
+    "strolling along leafy Piedmont Ave", "enjoying the boutique shops and cafes", "wandering First Friday galleries in retirement",
+    "watching the commuter flow from a station bench", "watching the neighborhood change from a bench", "watching the birds at the lake",
+    "watching boats at the estuary", "taking in the urban rhythm of Downtown Oakland"
   ],
   "composure:up": [
-    "enjoying the school-day rhythm of the neighborhood", "enjoying the neighborhood's constant motion", "enjoying the orderly pace of the neighborhood",
-    "settling into the neighborhood's quiet pace", "enjoying the calm of the block", "appreciating the steady rhythm of the neighborhood",
-    "settling into the neighborhood's small-town pace", "reflecting on a lifetime of work from the front step", "enjoying the lake's calming presence",
-    "watching the birds at the lake", "settling into Laurel's quiet residential pace", "enjoying the neighborhood's calm atmosphere",
-    "enjoying Rockridge's refined neighborhood feel", "watching boats at the estuary", "appreciating the quiet neighborhood charm",
-    "settling into the familiar cadence of the season", "enjoying the slower pace away from game nights", "letting the body rest into an offseason rhythm",
-    "settling into the steady cadence of the regular season", "enjoying a quieter New Year's celebration", "enjoying a peaceful holiday season"
+    "enjoying the school-day rhythm of the neighborhood", "enjoying the neighborhood's constant motion",
+    "enjoying the orderly pace of the neighborhood", "settling into the neighborhood's quiet pace", "enjoying the calm of the block",
+    "appreciating the steady rhythm of the neighborhood", "settling into the neighborhood's small-town pace",
+    "reflecting on a lifetime of work from the front step", "enjoying the lake's calming presence", "settling into Laurel's quiet residential pace",
+    "enjoying the neighborhood's calm atmosphere", "enjoying Rockridge's refined neighborhood feel", "appreciating the quiet neighborhood charm",
+    "settling into the familiar cadence of the season", "enjoying the slower pace away from game nights",
+    "letting the body rest into an offseason rhythm", "settling into the steady cadence of the regular season",
+    "enjoying a quieter New Year's celebration", "enjoying a peaceful holiday season", "appreciating the neighborhood's late energy from a distance",
+    "appreciating the working rhythm of the neighborhood", "appreciating the neighborhood's character"
   ],
-  "composure:down": ["feeling the long-season grind from a distance"],
+  "composure:down": [
+    "feeling the long-season grind from a distance"
+  ],
   "openness:up": [
     "sitting in on open campus talks", "enjoying the young energy of the blocks", "exploring the corridor's galleries in retirement",
-    "enjoying the creative energy of the neighborhood", "reflecting on how the blocks have changed", "appreciating the creative energy around Temescal",
-    "enjoying the cultural richness of the neighborhood", "reflecting on the area's history", "enjoying the arts district's creative energy",
-    "enjoying Uptown's cultural scene in retirement", "appreciating the urban arts atmosphere", "exploring KONO's street art and galleries",
-    "appreciating the neighborhood's creative spirit", "enjoying the DIY arts scene", "reflecting on the new year in retirement",
-    "enjoying the art walk's creative energy", "appreciating Oakland's cultural scene", "reflecting on the journey that brought them here"
+    "enjoying the creative energy of the neighborhood", "reflecting on how the blocks have changed",
+    "appreciating the creative energy around Temescal", "enjoying the cultural richness of the neighborhood", "reflecting on the area's history",
+    "enjoying the arts district's creative energy", "enjoying Uptown's cultural scene in retirement", "appreciating the urban arts atmosphere",
+    "exploring KONO's street art and galleries", "appreciating the neighborhood's creative spirit", "enjoying the DIY arts scene",
+    "reflecting on the new year in retirement", "enjoying the art walk's creative energy", "appreciating Oakland's cultural scene",
+    "reflecting on the journey that brought them here"
   ],
   "sociability:up": [
     "chatting with shopkeepers in retirement", "waving to neighbors from the porch", "chatting with familiar shopkeepers",
@@ -181,24 +187,25 @@ var POSTCAREER_SIGN_LINES_ = {
     "appreciating the community feel", "reflecting on blessings in retirement", "feeling connected to deep roots today",
     "appreciating the community's origins"
   ],
-  "family:up": ["gathering with family for Thanksgiving", "spending time with loved ones"],
+  "family:up": [
+    "gathering with family for Thanksgiving", "spending time with loved ones"
+  ],
   "fandom:up": [
     "enjoying the district's event-day buzz", "following the arena's calendar in retirement", "enjoying the familiar rhythm of spring prep",
     "feeling the quiet excitement that comes with camp season", "feeling the steady hum of game nights around the city",
-    "feeling the first-month energy of a new season", "feeling the season sharpen as summer fades", "feeling the heightened attention around the team",
-    "feeling the lingering intensity of postseason coverage", "feeling the weight of a championship moment in the air",
-    "noticing the city move as one around the biggest games"
+    "feeling the first-month energy of a new season", "feeling the season sharpen as summer fades",
+    "feeling the heightened attention around the team", "feeling the lingering intensity of postseason coverage",
+    "feeling the weight of a championship moment in the air", "noticing the city move as one around the biggest games"
   ],
   "plain": [
     "observing the official rhythm of the neighborhood", "keeping up with health news from the clinics", "watching the neighborhood build out",
-    "watching the commuter flow from a station bench", "watching the district wake up in the evening",
-    "appreciating the neighborhood's late energy from a distance", "keeping appointments close to home", "taking in the patchwork rhythm of the block",
-    "watching the neighborhood change from a bench", "watching the early shifts head out", "appreciating the working rhythm of the neighborhood",
-    "watching game-day crowds from a distance", "following the boom from the front step", "observing Downtown's bustling activity from a distance",
-    "taking in the urban rhythm of Downtown Oakland", "watching West Oakland's evolution in retirement", "appreciating the neighborhood's character",
+    "watching the district wake up in the evening", "keeping appointments close to home", "taking in the patchwork rhythm of the block",
+    "watching the early shifts head out", "watching game-day crowds from a distance", "following the boom from the front step",
+    "observing Downtown's bustling activity from a distance", "watching West Oakland's evolution in retirement",
     "noticing the city ease back into baseball season", "noticing more baseball chatter in everyday places",
-    "noticing the city feels a little quieter on weeknights", "noticing early-season excitement around town", "noticing the steady rhythm of midseason life",
-    "noticing the city's attention tighten as the year turns", "noticing game nights become routine again", "noticing the city get louder after big games",
+    "noticing the city feels a little quieter on weeknights", "noticing early-season excitement around town",
+    "noticing the steady rhythm of midseason life", "noticing the city's attention tighten as the year turns",
+    "noticing game nights become routine again", "noticing the city get louder after big games",
     "noticing more conversations drifting back to baseball", "sensing something foundational in the air", "continuing to adjust to post-career life"
   ]
 };
@@ -612,6 +619,8 @@ function runAsUniversePipeline_(ctx) {
         // Neighborhood
         np = hoodTexturePool_(ctx, neighborhood, POSTCAREER_TEXTURE_BY_CHARACTER_, POSTCAREER_TEXTURE_BESPOKE_, 'runAsUniversePipeline_');
         for (i = 0; i < np.length; i++) { pool.push(np[i]); }
+
+        if (pool.length === 0) pool.push("continuing to adjust to post-career life");
 
         var pick = pool[Math.floor(rng() * pool.length)];
 

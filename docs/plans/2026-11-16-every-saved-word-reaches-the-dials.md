@@ -494,7 +494,87 @@ Movement at today's speed (Task 9 not applied): 89% of citizens moved for good o
 - **A line about an office goes to the people who work there.** The tab could aim by title, money or hood, not by workplace: a new Conditions field `employer` (EmployerBizId), any-of with `|`. The two `work.tech` rows on the live tab read `lifestate=working; employer=BIZ-00001|BIZ-00002|BIZ-00003|BIZ-00004` (the four Baylight District tech offices: 12 tracked citizens after C116, was 435 eligible; of the 143 times the lines had been drawn, 5 were by someone who works there).
 - Bench @210, three fires PASS, Engine_Errors 9 → 9: the two lines drawn twice, both by employees of those offices, by nobody else; Work 34 up / 10 down. Tests `scripts/employerCondition.test.js` (26). DEPLOY_HISTORY §PROD stage 55.
 
-**Next step of Task 7 (not started):** a down side for sociability, warmth, openness and drive where the up lines are — FirstFriday (236 lines in ten Cycles, all sociability up), the coded Neighborhood / Daily / Personal / Civic Perception pools, the tab's Neighborhood, Civic Perception and Daily rows — by signing what is there by what it says and writing the missing lines, then the tab Weight. Then Task 9 (speed).
+### The coded pools' down side (2026-11-18, second session)
+
+**The measure first** (gap log C116 G-EC61). Two reads before any line was written:
+
+- The stage-54 bench counted pushes off `LifeHistory_Log`. The fold reads the citizen's own cell, and the two differ: the log carries the advancement intake lines ("Intake at Tier …": 190 in live C115–C116, drive +6 by word-match, on no cell; 412 in the ten-Cycle bench) and misses what only the cells hold (bonds, money, bets, the reflection events). Live C115–C116, log against cell: drive 499 / 43 against 326 / 41. The "drive 65%" above is a log number. From here the bench counts the cells after each fire.
+- A dial moves for good only after three same-way Cycles with the swing still felt (`citizenMemory.js` `applyEvent_`; an opposite Cycle resets the streak). The stage-54 bench's own `Dial_Pulse` rows, C118–C126, citizens moved for good a Cycle: sociability 40–98 up against 0–1 down (85% of pushes up), warmth 17–34 against 0–1 (80%), openness 14–50 against 0–4 (67%), drive 9–39 against 0–2; composure and family, at 50–51% of pushes, about even. agy ran the fold itself: 85% up gives 445 permanent moves up for one down, 67% gives 11, 60% gives 4, 55% gives 2, 53% gives 1.5, 50% gives 1. **Acceptance 5 (pushes within 60 / 40) does not give his ruling ("down as often as up") in who changes.** The pools are built toward 50 / 50; the bench reports the pulse beside the pushes.
+
+**Where the up side was** (live log C115–C116, lines a Cycle): the generator's eight domain-moment sources — 8 lines sociability up and none down, 10 warmth, 13 openness (about 10 draws a line a Cycle); First Friday's six lines, all `dial:sociability:up`; and on the tab a handful of citywide rows that each take a whole PoolKey's share: "painted over graffiti … alongside five neighbors" and "a flyer for a seniors lunch program flutters on a community bulletin board" 40 a Cycle each (the per-row cap), the Tribune rows 20–24, the two faith pools 13–20 a row. The drive lean is mostly elsewhere: advancement intake (log only), the promotion die (has its own down side), real moves and business gains.
+
+**Built** (`8f4d6dd4d`, agy's review folded `176bd116f`):
+
+- **Domain moments** (`generateCitizensEvents.js` `DOMAIN_MOMENTS`): 30 lines of the other side, written here in the pools' own voice and under the same canon guard (a relative, a neighbor, a stranger). By draw weight sociability 8 up / 7 down, warmth 10 / 10, openness 13 / 11, drive 2 / 4. A source keeps the draw mass it had (`DOMAIN_MOMENT_MASS_LINES_`: eight lines at 0.9), so the new lines split a share, they do not grow it. Side effect by the same arithmetic (agy §2): family's five up lines draw 27% less (stage-54 family 51% → about 46%), integrity 11% less.
+- **First Friday**: each line carries its own sign — a gallery looked at is out-and-about, an artist found is openness, the crowd is sociability. Three lines added (one up, two down, both nights someone went); nine lines at the mass of six. A stay-in line was written and cut on review: the pool reaches every adult in every hood, its draw rides the out-and-about multiplier, and a First Friday line lifts the hood's pulse.
+- **QoL** joins the graded-only kinds: it has no dial-map key, so a line whose words tripped a content rule was read by the word ("heard another neighbor was between jobs", "felt the neighborhood tension in small interactions": sociability +3, warmth +2 on "neighbor"; 13 lines in two bench Cycles). It is written by its cause and its bank.
+- **The tab, nine placed rows** (`scripts/downLinesEclPool.js` `PLACED`, on no sheet until his go): one down row in the pool of each heavy up row — `community.program`, `tribune.newsroom` ×2, `sports.citywide`, `faith.attending`, `faith.volunteering` ×2, `civic.stabilization-fund`, `civic.health-center` — same source, same Conditions, Weight 1. And one row off: `culture.citywide` row 357, the flyer (it says nothing the citizen did).
+- Tests: `scripts/codedPoolDownSide.test.js` 51; `downLinesEclPool.test.js` 387; `occupationDialTags.test.js` 551; 24 test files that load the generator green.
+
+Reads put to the builder with the bench count (his to overrule): a birthday card left unsent, a relative's story not asked after, a kindness not returned → warmth down; a knock not answered, a gathering left by the side door, the long way round to miss the corner → sociability down; the usual ordered without looking, the new lamp put back in its box, a new idea argued with before it was heard → openness down; a half-built shelf moved to the closet → drive down; the art walk alone and silent → sociability down; the flyer on the bulletin board → not about the citizen, row off.
+
+Not built here, recorded: the other engines that write First Friday or a social line as up whatever it says (G-EC63: neighborhood, relationship, household, post-career; the relationship engine reads "felt distant from people around them" as sociability +5); tab rows that name a congregation or a place and reach anyone (G-EC62).
+
+#### Review reconciled (agy, 2026-11-18 — `output/antigravity/2026-11-18-review-e350-coded-pool-down-side.md`, verdict HOLD)
+
+| Finding | Checked against | Disposition |
+|---|---|---|
+| The stay-in First Friday line asserts a home near the galleries; reaches all 22 hoods | `generateCitizensEvents.js` First Friday push, no hood gate | taken — line removed |
+| First Friday draw is multiplied by out-and-about, so a homebody drew the stay-in line least | the `dwTag === 'source:firstFriday'` branch | taken — by the same removal |
+| A down First Friday line still lifts the hood pulse | `neighborhoodPulseMap.js` `pulseKindForLine_` | kept — both remaining down lines are nights someone went; G-EC63 |
+| Faith rows reach every adult; the health-center row has no hood; the recap row rides `source:media` past the player filter | loader DSL, `condScopes`, live rows 238, 211, 329 | recorded G-EC62 — the placed rows reach who the rows they answer reach |
+| Family's up lines draw 27% less, integrity 11%; both stay inside 40–60 | re-run of the weights | recorded above; read at the bench |
+| QoL: every pool path carries a sign; no reader loses the graded form | `qolPoolFor_`, `patrolPoolFor_`, the four readers | confirmed, nothing to do |
+| Neighborhood, relationship, household and post-career engines still write First Friday up-only | each file read | recorded G-EC63 |
+| "Splits the pool's share with the up row" is true only in a one-signed-row pool; unsigned rows eat draws; the cap is per row | `balanceContentLedgerPoolWeights_`, the 40-draw cap, live rows | taken — wording corrected; estimates re-done from the bench |
+| Row 357 off leaves `culture.citywide` to one Lake Merritt row | live tab | recorded; put to the builder with the row |
+| The log is not the cell; 60 / 40 by pushes is 4 : 1 in permanent moves | `citizenMemory.js`; the stage-54 pulse rows | taken — G-EC61, the bench counts cells and reports the pulse |
+| Test blind spots: no `qolParts`, bands stubbed off, 4 of 10 First Friday lines checked, the written line's fold unchecked, placed-row validation loose | the three test files | taken — runs and assertions added |
+| Narrow family regex; routing checked by source text | test file | label corrected; routing is proven by the writer run |
+
+### The other engines (2026-11-18, second session) — builder on G-EC62 / G-EC63: "Yeah we fixing all this", "Fix it all"
+
+Five more writers put a line on a citizen at a fixed size whatever it said — the class Task 7 cut for Work, Career, Education and Media. Built `b78af111d`, on top of the coded-pool candidate; each line is listed under the dial it moves and which way, read off the sentence, and written one step. A plain line (a look out of the window) is drawn, counted (`S.engine299.noDialBySource`) and not written, so every other line keeps the odds it had.
+
+| Engine | Was | Lines listed | Now |
+|---|---|---|---|
+| `runRelationshipEngine.js` (at most 8 a Cycle) | bare `Relationship`: sociability +5, warmth +2 — on "felt distant from people around them"; same under the holiday / First Friday / Creation Day / weather suffixes; its culture and community lines a bare `Cultural` / `Community` | 51: 39 up, 7 down, 5 plain | `Relationship-<Dial>-<Up\|Down>-S` (and `Cultural-…`, `Community-…`); bond lines keep their kinds |
+| `runHouseholdEngine.js` | bare `Household`: family +5 — on "heard an ambulance pass in the night", "felt slight tension among household members" | 163: 84 up, 14 down, 65 plain, over eight dials | `Household-<Dial>-…-S`; ailment, recovery and game-night lines untouched |
+| `runAsUniversePipeline.js` (retired players) | bare `PostCareer`: family +4, openness +2, and its calendar and season suffixes | 124: 95 up, 1 down, 28 plain | `PostCareer-<Dial>-…-S`; the appearance / clinic / fundraiser / getaway / training kinds untouched |
+| `generateGenericCitizenMicroEvent.js` | its culture and community lines kept a bare `Cultural` (+4 / +3) and `Community` (+4 / +2): 39 and 77 lines in the stage-54 bench | 6 | written by the signs already in its list |
+| `runNeighborhoodEngine.js` First Friday (Uptown, KONO, Temescal) | 11 lines signed as a pool, all sociability up | 16 (5 written: the other side of living on the art walk) | each line its own sign; none is sociability up |
+| `generateCitizensEvents.js` | `Continuity` had no dial-map key (read by word-match); its three coded follow-up lines had no sign and were drawn and dropped | 3 | graded-only; the three signed |
+
+**What it does to movement at today's speed** (`scripts/engine32MultiCycle.test.js` B3b): a one-step swing fades in about four Cycles and a home line comes round every few weeks, so three same-way Cycles in a row do not happen — nobody's family moves for good from home lines alone. Before, three +5 lines inside the swing's ten-Cycle fade hardened it, upward only. One step a line needs the speed keys of Task 9 (a share of each week straight to the permanent dial), which is next.
+
+Tests: `scripts/homeSocialLineSign.test.js` (38), `householdEngine.t4.test.js` 28, `engine32MultiCycle.test.js` 19; 59 test files that load these engines or the dial map green.
+
+#### The other engines — review reconciled (agy, 2026-11-18 — `output/antigravity/2026-11-18-review-e350-other-engines-line-signs.md`, verdict HOLD)
+
+| Finding | Checked against | Disposition |
+|---|---|---|
+| `buildWorldSummary.js` "Who Lived It" matches the bare `Relationship` / `Household` tags; every graded row would vanish from the summary | `WHO_LIVED_IT_TAGS`, `emitWhoLivedIt` | taken — keyed by the kind (`gradedParts_`); test added |
+| The relationship engine takes weather and media lines into its pool; none is in the list, so each is drawn, dropped, burns the cap of 8 and marks the citizen active (20–40% of draws in a heat wave) | the three push blocks; `applyWeatherModel.js`, `mediaFeedbackEngine.js` pools | taken — the engine no longer takes them (they were written as a bare Relationship +5 or a bare Media); the weather and the news reach a citizen through the engines that own them |
+| A plain draw counted against the relationship cap but not the household cap | `globalEvents++` | taken — the cap is on lines written in both |
+| 26 signs disputed, most of them one table disagreeing with itself (a smell from a neighbor's kitchen warm, from a restaurant plain; a bench in one hood out-and-about, in another plain) | each line read again | 22 taken: the rule written into the tables — a line that only sees, hears or smells the block is plain, one that says what was felt or done is signed by that. Kept: the "felt the <mood> of the block" lines signed by the mood named; the neighborhood engine's First Friday lines on out-and-about (that engine's own dial for the hood being alive) |
+| "continuing to adjust to post-career life" listed but unreachable | the fallback push the first cut dropped | taken — fallback restored |
+| Down lines of `FirstFriday` / `Cultural` / `Community` kinds still lift the hood pulse | `pulseKindForLine_` | recorded (G-EC63); the generator's two First Friday down lines are nights someone went |
+| At today's speed nothing but multi-step tags, reflections and the generator's weekly lines moves family, sociability or warmth for good; at the middle row the count of permanent moves follows the share of pushes (60% up → 1.5 : 1, was 4.3 : 1) | agy's run of `foldNewEntries_`; re-run here on a home line every fifth Cycle: 50 → 50.0 at today's speed, 53.9 up / 46.1 down at the middle row, and 55.3 for the old bare +5 | taken as the case for Task 9 next; `homeSocialLineSign.test.js` pins the three numbers |
+| Still at a fixed size: the bond kinds, `Public`, `Reputation`, `Faith`, `PostCareer-Influence` / `-Wellness`, the Creation Day pool; the relationship cap runs in ledger order | each file | recorded G-EC65 — about 20 lines a Cycle together, most of them a real event (a recognition, a service) |
+| Tests: the weather / media functions absent from the harness; section 3 reads source text; the multi-cycle family check runs on the legacy fold path and proves nothing | the three files | taken — outside lines present in the run, the cap and the fold on stamped Cycles asserted; the multi-cycle label says what that harness can prove. Section 3's source-text checks stay (the generator, generic and neighborhood writers are run end to end by their own test files) |
+
+### The content tab read row by row (2026-11-18) — gap log C116 G-EC64
+
+Two helper agents (Sonnet) read the live tab against the generator's rules: one every signed row for a wrong read, one every row that is drawn and thrown away. research-build cut both lists; nothing in a sentence is rewritten. Tool `scripts/contentTabReads.js` (dry-run against live 2026-11-18: 72 Active cells, 38 Tags cells, 0 conflicts; test 52).
+
+| List | Rows | What |
+|---|---|---|
+| Switched off (`Active = no`) | 72 | scenes with nobody the citizen is in them: 32 that carried a sign and were written as a step on a dial (the flyer; "a DJ spins records at a crowded bar near Broadway"), 40 that carried none and cost the citizen the draw |
+| Re-signed | 11 | hood rows whose dial is not in the sentence (a grocery errand under family → out-and-about; a neighbor helped with boxes under openness → warmth) |
+| Signed | 27 | 15 money rows (`source:economy` routes to `Daily` and none had a sign: **no money-texture row of the tab has ever been written**), 2 night-market rows, the 10 retirement rows (were a bare PostCareer) |
+| Placed (above) | 9 | the other side, in the pools where the up rows are |
+
+Not taken from the agents' lists: the 7 work rows research-build read as plain on 11-18; hood-trend and hood-mood rows (they say how the place is going); the teen rows; rows that give the citizen a relative the Conditions cell does not guarantee (recorded in G-EC64). With it the generator: a retiree's line is graded-only (`PostCareer` in `GRADED_ONLY_KIND_`), its five coded lines signed and two of the other side written.
 
 ## Tasks
 

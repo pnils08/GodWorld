@@ -6,7 +6,7 @@
 
 Builder 2026-11-10: "sim behavior rests with me but sim cohesiveness doesn't and there are enough ways for agents to address this without waiting on a human." · "We can assign agents to audit this autonomously, draft a fix and hand it to a CLI inbox, CLI can set a wake 3 times a day to check that inbox, 2 CLI (rb and es) run on these and check on each other to ensure not stuck on an approval prompt, I have Claude duet who can help, Claude Code cloud can play in, I have 100 credits on Anthropic API."
 
-What a cohesion defect is, from the day's evidence ([[2026-11-10-stop-puppeting-the-newsroom]] §Open G, H): a figure no citizen produces (transit ridership, fund spending, hood sick counts), a loop that feeds nothing back (reporters' findings reached no builder), a constant standing in for a system.
+What a cohesion defect is, from the day's evidence ([[../archive/plans/2026-11-10-stop-puppeting-the-newsroom]] §Open G, H): a figure no citizen produces (transit ridership, fund spending, hood sick counts), a loop that feeds nothing back (reporters' findings reached no builder), a constant standing in for a system.
 
 ## What already exists (read 2026-11-10)
 

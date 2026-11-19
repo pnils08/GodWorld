@@ -13,7 +13,7 @@ pointers:
   - "[[../engine/ROLLOUT_PLAN]] — pipeline.110"
   - "[[2026-09-16-work-wake-packs]] — civic.34, the work wake this extends"
   - "[[2026-11-03-mags-memory-one-home]] — pipeline.100, the review that led here"
-  - "[[2026-11-10-stop-puppeting-the-newsroom]] — pipeline.111, the reporter order of work"
+  - "[[../archive/plans/2026-11-10-stop-puppeting-the-newsroom]] — pipeline.111, the reporter order of work"
   - "[[../reference/AGENT_BOOT_TEMPLATES]] — templates marked garbage; kept for the worker data search"
   - "[[../research/2026-11-13-boot-templates-test-runs]] — what each wake loads, the test runs, the worker data map"
   - "[[../research/2026-11-17-reporter-records-roster]] — the reporters' records roster, approved: the data search, reporters"

@@ -488,10 +488,12 @@ check('issued slip settles at posted odds, not new market odds', settledPricing.
   // tilt: decided only for a citizen who is placing a bet; a draw only when the odds are strictly between 0 and 1
   const calm = runOne({ composure: 50 }, [0.0, 0.5]);
   const always = runOne({ composure: 10 }, [0.0, 0.5]);
-  const halfYes = runOne({ composure: 20 }, [0.0, 0.49, 0.5]);   // second draw is the tilt roll: 0.49 < 0.5
-  const halfNo = runOne({ composure: 20 }, [0.0, 0.51, 0.5]);
+  // draws: the placing roll, the show / sports pick (0.1 -> the show, as for the calm citizen), then the tilt roll
+  const halfYes = runOne({ composure: 20 }, [0.0, 0.1, 0.49, 0.5]);   // 0.49 < 0.5
+  const halfNo = runOne({ composure: 20 }, [0.0, 0.1, 0.51, 0.5]);
+  const calmSame = runOne({ composure: 50 }, [0.0, 0.1, 0.5]);
   check('T14 casino: composure 50 never tilts, 10 always, neither spends a tilt draw', calm.gates.tilt === 0 && always.gates.tilt === 1 && calm.placed === 1 && always.placed === 1 && calm.draws === always.draws && always.stake >= calm.stake /* the tilt stake band itself: dialGates.test.js */, JSON.stringify({ calm: calm, always: always }));
-  check('T14 casino: composure 20 tilts on a roll under 0.5 and not over it, one extra draw either way', halfYes.gates.tilt === 1 && halfNo.gates.tilt === 0 && halfYes.draws === calm.draws + 1 && halfNo.draws === calm.draws + 1,
+  check('T14 casino: composure 20 tilts on a roll under 0.5 and not over it, one extra draw either way', halfYes.gates.tilt === 1 && halfNo.gates.tilt === 0 && halfYes.draws === calmSame.draws + 1 && halfNo.draws === calmSame.draws + 1 && halfYes.placed === 1 && halfNo.placed === 1,
     JSON.stringify({ halfYes: halfYes, halfNo: halfNo }));
   const noBet = runOne({ composure: 20 }, [0.99, 0.0]);           // the placing roll fails
   check('T14 casino: a citizen who places nothing spends one draw (the placing roll) and is never counted on tilt', noBet.placed === 0 && noBet.draws === 1 && noBet.gates.tilt === 0, JSON.stringify(noBet));

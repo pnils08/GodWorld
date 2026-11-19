@@ -28,3 +28,18 @@ Left as they were, on purpose: `bandIndex_` in `buildDialMoves_` (a measure), th
 7. **Trick code.** In the changed test files: assertions that prove less than their label, stubs that hide the path, a restated expected value that only mirrors the new code. In particular `scripts/engine32MultiCycle.test.js` G7b (was one seed, now ten paired seeds pooled) — is the new assert weaker than the old one in any way that matters — and `scripts/citizenDialMultiCycle.test.js` C2/C3 (reach read as `crimeReach >= 0.5`).
 
 Each finding: file:line, what is there, the evidence. I want the disputed ones, not a recount of the agreed ones.
+
+---
+
+## Re-review of the fold (2026-11-19) — commit `a701ded16`
+
+Your review is folded in `a701ded16` (`git show a701ded16`; the commit message lists each finding and what was done). Same rules: read-only, no sandbox, no model. Write to `output/antigravity/2026-11-19-rereview-e349-the-middle-counts.md`. Only what is wrong or weaker in the fold — not a recount.
+
+The builder's word on the three fixed bars (2026-11-18): a fan at fandom 60 stays ("agree and as the fandom raises it should have effect as well"), a citizen climbs at ambition 60 ("sounds good"), the bars to stand for office stay ("look fine as well"). Those are closed; do not re-raise them.
+
+1. `runConductEngine.js` — the one roll cut in four. Recompute the table you gave in §2a for the new code (integrity 10, 15, 20, 25, 30, 45, 50, 55; composure 50 and 10; with and without the spike) and give the expected integrity move per test at each point. Is it one direction all the way down from 30 to 10 with no bump, and does the composure-10 path still hand anyone a `Resisted` they could not get before at a rate that matters?
+2. `generateCitizensEvents.js` `archetypeWeightsFromDials_` — against the label's table: equal at each archetype's band middle? What does a citizen whose label is `Striver` on base but whose felt drive sits at 58 get, old against new, and the reverse (label `Drifter`, felt 62)? From the snapshot: the city's summed weight on `source:occupation`, `relationship:alliance`, `relationship:rivalry`, `source:neighborhood`, `source:continuity`, old against new.
+3. `drawMass_` / `dialShare` — any draw from the citizen's pool that does not go through `pickWeighted_` and so ignores the share (reserved entries, caps, the exclusive-pool check, `eclEligibleByPool`, telemetry that counts a row as eligible at full weight). Does anything copy or rebuild a pool entry and drop `dialShare`?
+4. `casinoLedgerEngine.js` — the tilt draw now sits between the placing roll and the show / sports pick. Does that order change which market a bettor lands on for the same seed in a way a test pinned before, and is `S.casinoGates` read anywhere that expected the old meaning (rows in the tilt band, bet or not)?
+5. `lib/citizenDials.js` `LEANS` — the new words in each of the three frames (`Your temperament: …`, `Lately you've been …`, `You've been carrying a … mood lately`). Any that still breaks a frame or reads as strong as its pole.
+6. The new tests — any that only mirrors the code, or a tolerance band wide enough to pass the bug it names (in particular the two-PoolKey ratios in `scripts/contentLedgerCompose.test.js` and the 70–130 of 200 bands in `scripts/businessOwnerDials.test.js`).

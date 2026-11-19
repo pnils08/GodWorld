@@ -55,30 +55,41 @@
  * no eclPoolKey and are untouched. No RNG is consumed here.
  *
  * engine.349 Task 14: a row behind a dial term carries `dialShare` (0..1, the share of its
- * Weight this citizen is offered). The balancing here is done on the rows' full weights and
- * the share is applied at the draw (pickWeighted_), so a PoolKey whose eligible rows all sit
- * behind the same dial term is offered at that share of a bucket, not at a whole one, however
- * many times the pool is re-balanced (agy 2026-11-18 §5b).
+ * Weight this citizen is offered), read at the draw (pickWeighted_). A PoolKey's bucket is
+ * scaled by how far the PoolKey is open to the citizen — its most-open row's share — and
+ * split inside by what each row is offered at (weight x share). So: a PoolKey whose rows all
+ * sit behind one dial term gets that share of a bucket, not a whole one (agy 2026-11-18 §5b);
+ * a part-offered row beside plain rows takes only its share from them, and at share 0 they
+ * hold the bucket as if it were absent (agy 2026-11-19 §3). Running it again on balanced
+ * weights changes nothing (it runs once per event draw).
  */
 function balanceContentLedgerPoolWeights_(pool) {
   var groups = {};
   var keys = [];
-  var ledgerTotal = 0;
 
   for (var i = 0; i < pool.length; i++) {
     var entry = pool[i];
     if (!entry.eclPoolKey) continue;
     var weight = Math.max(0.001, Number(entry.weight || 1));
+    var share = (typeof entry.dialShare === 'number') ? entry.dialShare : 1;
     if (!groups[entry.eclPoolKey]) {
-      groups[entry.eclPoolKey] = { entries: [], total: 0 };
+      groups[entry.eclPoolKey] = { entries: [], offered: 0, open: 0 };
       keys.push(entry.eclPoolKey);
     }
-    groups[entry.eclPoolKey].entries.push(entry);
-    groups[entry.eclPoolKey].total += weight;
-    ledgerTotal += weight;
+    var g = groups[entry.eclPoolKey];
+    g.entries.push(entry);
+    g.offered += weight * share;          // what this citizen is offered of the PoolKey
+    if (share > g.open) g.open = share;   // how far the PoolKey is open to them: its most-open row
   }
 
-  if (keys.length < 2 || ledgerTotal <= 0) return pool;
+  if (keys.length < 2) return pool;
+
+  // A PoolKey's whole mass is what it is offered at, over how far it is open: an all-plain
+  // PoolKey counts its weights, an all-gated one counts them in full too (so re-running this
+  // on balanced weights changes nothing).
+  var ledgerTotal = 0;
+  for (var t = 0; t < keys.length; t++) ledgerTotal += groups[keys[t]].offered / groups[keys[t]].open;
+  if (ledgerTotal <= 0) return pool;
 
   var bucketMass = ledgerTotal / keys.length;
   for (var k = 0; k < keys.length; k++) {
@@ -86,7 +97,9 @@ function balanceContentLedgerPoolWeights_(pool) {
     for (var j = 0; j < group.entries.length; j++) {
       var row = group.entries[j];
       var rowWeight = Math.max(0.001, Number(row.weight || 1));
-      row.weight = bucketMass * (rowWeight / group.total);
+      // the row's draw mass (weight x dialShare, pickWeighted_) comes to
+      // bucketMass x open x (its offered mass / the PoolKey's offered mass)
+      row.weight = bucketMass * group.open * (rowWeight / group.offered);
     }
   }
   return pool;
@@ -932,12 +945,15 @@ function generateCitizensEvents_(ctx) {
 
   // engine.349 Task 14 (agy 2026-11-18 §1a.3): the archetype's pool weights by the NUMBER. The
   // label is earned at 60 and used to switch the whole table on there (drive 59 -> work x1.0,
-  // 60 -> x1.3). Here the citizen's leading dial — the same candidates and order the label is
-  // derived from (compressLifeHistory.js deriveArchetypeFromBands_), on the felt value — earns
-  // its archetype's table by its share: nothing at 50, half at 60, all of it at 70. Composure at
-  // the bottom earns the Catalyst table the same way (none at 30, all at 10) and takes that
-  // share from the leading dial; integrity at the bottom (the Outlaw, who has no table) takes
-  // its share from both. The label itself is untouched: it still names the citizen and tags the line.
+  // 60 -> x1.3). Here each candidate dial — the same six the label is derived from
+  // (compressLifeHistory.js deriveArchetypeFromBands_), on the felt value — has a share:
+  // nothing at 50, half at 60, all of it at 70. The tables are blended by the square of the
+  // shares (the leading dial dominates, and two dials crossing each other flip nothing —
+  // agy 2026-11-19 §2) and the blend is earned at the leading dial's share. One dial at 70,
+  // the rest at 50 = that archetype's table whole. Composure at the bottom earns the Catalyst
+  // table the same way (none at 30, all at 10) and takes that share from the blend; integrity
+  // at the bottom (the Outlaw, who has no table) takes its share from both. The label itself
+  // is untouched: it still names the citizen and tags the line.
   function archetypeWeightsFromDials_(cur) {
     var weights = getArchetypeWeights_('');   // all 1.0
     var cand = [
@@ -945,15 +961,23 @@ function generateCitizensEvents_(ctx) {
       { a: 'Caretaker', v: (cur.warmth + cur.family) / 2 }, { a: 'Watcher', v: cur.openness },
       { a: 'Anchor', v: cur.composure }, { a: 'Regular', v: cur.outabout }
     ];
-    var lead = cand[0];
-    for (var i = 1; i < cand.length; i++) { if (cand[i].v > lead.v) lead = cand[i]; }
+    var top = 0, sq = 0, i;
+    for (i = 0; i < cand.length; i++) {
+      cand[i].s = dialHigh_(cand[i].v, 1);
+      cand[i].t = getArchetypeWeights_(cand[i].a);
+      if (cand[i].s > top) top = cand[i].s;
+      sq += cand[i].s * cand[i].s;
+    }
     var outlaw = dialLow_(cur.integrity, 2);
-    var catalyst = dialLow_(cur.composure, 2) * (1 - outlaw);
-    var leadShare = dialHigh_(lead.v, 1) * (1 - outlaw) * (1 - dialLow_(cur.composure, 2));
-    var leadT = getArchetypeWeights_(lead.a), catT = getArchetypeWeights_('Catalyst');
+    var catalystRaw = dialLow_(cur.composure, 2);
+    var catalyst = catalystRaw * (1 - outlaw);
+    var blend = top * (1 - outlaw) * (1 - catalystRaw);
+    var catT = getArchetypeWeights_('Catalyst');
     for (var k in weights) {
       if (!weights.hasOwnProperty(k)) continue;
-      weights[k] = 1 + (leadT[k] - 1) * leadShare + (catT[k] - 1) * catalyst;
+      var mix = 0;
+      if (sq > 0) { for (i = 0; i < cand.length; i++) mix += cand[i].s * cand[i].s * (cand[i].t[k] - 1); mix /= sq; }
+      weights[k] = 1 + mix * blend + (catT[k] - 1) * catalyst;
     }
     return weights;
   }
@@ -3534,7 +3558,7 @@ function generateCitizensEvents_(ctx) {
           if (clk === TRANSIT_COMMUTE_POOL) clPooled.transitCommute = true;
           else clPooled.eclPoolKey = clk;      // PoolKey mass-balancing identity
           eclTelemetry.eligible[clPooled.eclKey] = (eclTelemetry.eligible[clPooled.eclKey] || 0) + 1;
-          eclEligibleByPool[clk] = (eclEligibleByPool[clk] || 0) + 1;
+          eclEligibleByPool[clk] = (eclEligibleByPool[clk] || 0) + clShare; // a part-offered row counts for its share (agy 2026-11-19 §3)
           pool.push(clPooled);
         }
       }

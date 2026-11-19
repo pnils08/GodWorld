@@ -357,6 +357,60 @@ console.log('═══ engine.349 Task 14: a dial term is a share of the row, no
   assert('two PoolKeys: the 60 about half as often (0.3-0.75), the 55 about a quarter (0.1-0.45) — the balancing does not hand the share back', ratio('POP-F60') > 0.3 && ratio('POP-F60') < 0.75 && ratio('POP-F55') > 0.1 && ratio('POP-F55') < 0.45 && ratio('POP-F55') < ratio('POP-F60'), show2);
   assert('two PoolKeys: the 50 never draws the dial row and still draws the plain one', fanN['POP-F50'] === 0 && plainN['POP-F50'] > 60, show2);
 
+  // agy 2026-11-19 §3: a MIXED PoolKey. test.mix holds a plain row and a dial row of the same Weight; test.plain2 is
+  // a second plain PoolKey. For the 50 (dial row not offered) the mix PoolKey is one plain row, so its plain row is
+  // drawn as often as test.plain2's. For the 55 the dial row takes only a quarter-weight from its neighbour: the
+  // PoolKey's two rows together are still drawn about as often as test.plain2's row, split about 4 : 1. For the 70, 1 : 1.
+  const FIXM = [
+    LEDGER_HDR,
+    ['line', 'test.mix', '', 'stood in line for coffee and said nothing', '80', '', 'source:neighborhood,dial:composure:up', '', ''],
+    ['line', 'test.mix', '', 'planned the whole night around the game', '80', 'fandom>=60', 'source:neighborhood,dial:fandom:up', '', ''],
+    ['line', 'test.plain2', '', 'waved at the mail carrier across the street', '80', '', 'source:neighborhood,dial:sociability:up', '', '']
+  ];
+  const mixPlain = {}, mixDial = {}, other = {};
+  ids.forEach((id) => { mixPlain[id] = 0; mixDial[id] = 0; other[id] = 0; });
+  for (let s4 = 1; s4 <= 2500; s4++) {
+    const ctx = makeCtx(ids.map((id) => makeRow(id)), mulberry32(s4 * 271), FIXM);
+    generateCitizensEvents_(ctx);
+    emittedLines(ctx).forEach((t, i) => {
+      if (t.indexOf('stood in line for coffee') >= 0) mixPlain[ids[i]]++;
+      if (t.indexOf('planned the whole night') >= 0) mixDial[ids[i]]++;
+      if (t.indexOf('waved at the mail carrier') >= 0) other[ids[i]]++;
+    });
+  }
+  const showM = ids.map((id) => id.slice(4) + ' mix ' + mixPlain[id] + '+' + mixDial[id] + ' other ' + other[id]).join(', ');
+  const poolRatio = (id) => (mixPlain[id] + mixDial[id]) / Math.max(1, other[id]);
+  const inRatio = (id) => mixDial[id] / Math.max(1, mixPlain[id]);
+  // A citizen draws several lines a Cycle and never the same one twice, so a two-row PoolKey out-draws a one-row
+  // PoolKey a little once its second row is on offer (1.3 at 55, 1.5 at 70 here); the exact masses are pinned on
+  // the balancing itself below. What the dilution looked like: the PoolKey at 55 fell to about 0.6 of the other
+  // and its plain row to about half.
+  assert('mixed PoolKey: at 50 the PoolKey is drawn as often as the other (0.75-1.33); at 55 and 70 never less (0.9-1.7)',
+    ['POP-F50', 'POP-F55', 'POP-F70'].every((id) => other[id] > 80) && poolRatio('POP-F50') > 0.75 && poolRatio('POP-F50') < 1.33 &&
+    ['POP-F55', 'POP-F70'].every((id) => poolRatio(id) > 0.9 && poolRatio(id) < 1.7), showM);
+  assert('mixed PoolKey: at 55 the plain row keeps its place beside a quarter-offered neighbour (over 0.75 of the other PoolKey\'s row)', mixPlain['POP-F55'] / other['POP-F55'] > 0.75, showM);
+  assert('mixed PoolKey: inside it the dial row is drawn at its share of its neighbour — never at 50, about a quarter at 55 (0.12-0.42), about even at 70 (0.75-1.33)',
+    mixDial['POP-F50'] === 0 && inRatio('POP-F55') > 0.12 && inRatio('POP-F55') < 0.42 && inRatio('POP-F70') > 0.75 && inRatio('POP-F70') < 1.33, showM);
+  {
+    // the balancing itself, on bare entries: the masses it leaves, and that a second pass changes nothing
+    const bal = new Function(genSrc + '\nreturn balanceContentLedgerPoolWeights_;')();
+    const mass = (e) => e.weight * (typeof e.dialShare === 'number' ? e.dialShare : 1);
+    const mk = () => [
+      { eclPoolKey: 'A', weight: 1 }, { eclPoolKey: 'A', weight: 1, dialShare: 0.25 },   // mixed: open 1
+      { eclPoolKey: 'B', weight: 2, dialShare: 0.5 }, { eclPoolKey: 'B', weight: 2, dialShare: 0.25 },   // all gated: open 0.5
+      { eclPoolKey: 'C', weight: 3 },                                                     // plain
+      { weight: 7 }                                                                       // hardcoded: untouched
+    ];
+    const p1 = bal(mk()), m1 = p1.map(mass);
+    // whole masses: A 1.25 / 1 = 1.25, B 1.5 / 0.5 = 3, C 3 -> bucket 7.25 / 3
+    const B = 7.25 / 3, near6 = (a, b) => Math.abs(a - b) < 1e-9;
+    assert('balancing: a mixed PoolKey holds a whole bucket, split 4 : 1 by what is offered', near6(m1[0] + m1[1], B) && near6(m1[0] / m1[1], 4), JSON.stringify(m1));
+    assert('balancing: an all-gated PoolKey holds the bucket times its most-open share (0.5), split 2 : 1', near6(m1[2] + m1[3], B * 0.5) && near6(m1[2] / m1[3], 2), JSON.stringify(m1));
+    assert('balancing: a plain PoolKey holds a whole bucket; a hardcoded entry is untouched', near6(m1[4], B) && m1[5] === 7);
+    const m2 = bal(p1).map(mass), m3 = bal(p1).map(mass);
+    assert('balancing: a second and a third pass change nothing (it runs once per event draw)', m2.every((v, i) => near6(v, m1[i])) && m3.every((v, i) => near6(v, m1[i])), JSON.stringify(m3));
+  }
+
   // warmth and drive, the two dial fields the live tab uses, and a FRAGMENT behind a dial term
   const FIX3 = [
     LEDGER_HDR,
@@ -403,7 +457,21 @@ console.log('═══ engine.349 Task 14: the archetype\'s pool weights off the
     same(at({ drive: 70 }), AW.getArchetypeWeights_('Striver')) && same(at({ sociability: 70 }), AW.getArchetypeWeights_('Connector')) && same(at({ openness: 70 }), AW.getArchetypeWeights_('Watcher')) &&
     same(at({ composure: 70 }), AW.getArchetypeWeights_('Anchor')) && same(at({ warmth: 70, family: 70 }), AW.getArchetypeWeights_('Caretaker')));
   assert('the middle counts: drive 55 -> work x1.075, 60 -> x1.15 (the label switched x1.3 on at 60), 45 -> x1', near(at({ drive: 55 }).work, 1.075) && near(at({ drive: 60 }).work, 1.15) && at({ drive: 45 }).work === 1);
-  assert('the leading dial wins, as the label does: drive 58, sociability 66 -> the Connector table at 0.8, no work weight', near(at({ drive: 58, sociability: 66 }).alliance, 1 + 0.3 * 0.8) && at({ drive: 58, sociability: 66 }).work === 1);
+  {
+    // agy 2026-11-19 §2: two dials crossing each other flip nothing. Shares 0.4 (drive 58) and 0.8 (sociability 66):
+    // blended by their squares (0.16 : 0.64), earned at the leading share 0.8.
+    const m = at({ drive: 58, sociability: 66 });
+    assert('two leaning dials blend by the square of their shares: drive 58 + sociability 66 -> alliance 1 + 0.3 x 0.8 x 0.8, work 1 + 0.3 x 0.2 x 0.8',
+      near(m.alliance, 1 + 0.3 * (0.64 / 0.80) * 0.8) && near(m.work, 1 + 0.3 * (0.16 / 0.80) * 0.8), JSON.stringify(m));
+    const below = at({ drive: 70, sociability: 69.9 }), above = at({ drive: 70, sociability: 70.1 });
+    assert('no flip when sociability passes drive at 70: work and alliance move by under 0.01 across the crossing', Math.abs(below.work - above.work) < 0.01 && Math.abs(below.alliance - above.alliance) < 0.01 && near(above.work, 1.15) && near(above.alliance, 1.15), JSON.stringify({ below, above }));
+    const reg = [at({ drive: 69.9, outabout: 69.9 }), at({ drive: 69.9, outabout: 70.1 })];
+    assert('no collapse when out-and-about (the Regular, who has no table) passes drive', Math.abs(reg[0].work - reg[1].work) < 0.01 && reg[0].work > 1.1, JSON.stringify(reg.map((x) => x.work)));
+    assert('a lone leaning dial is untouched by the blend: drive 62 alone -> work 1 + 0.3 x 0.6', near(at({ drive: 62 }).work, 1.18) && near(at({ drive: 62 }).rivalry, 1.12));
+    const lbl = AW.getArchetypeWeights_('Drifter');
+    assert('all 50 against the Drifter label: equal on the five categories the pool reads (the label\'s reflective / volatile 1.1 are read by nothing)',
+      ['alliance', 'rivalry', 'neighborhood', 'work', 'continuity'].every((k) => at({})[k] === lbl[k]) && lbl.reflective === 1.1 && at({}).reflective === 1);
+  }
   assert('composure 10 = the Catalyst table whole, whatever the leading dial; composure 20 = half of it and half the leading dial\'s', same(at({ composure: 10, drive: 70 }), AW.getArchetypeWeights_('Catalyst')) &&
     near(at({ composure: 20, drive: 70 }).rivalry, 1 + 0.2 * 0.5 + 0.2 * 0.5) && near(at({ composure: 20, drive: 70 }).work, 1 + 0.3 * 0.5));
   assert('integrity 10 (the Outlaw, no table): every weight 1', Object.keys(at({ integrity: 10, drive: 90, composure: 10 })).every((k) => near(at({ integrity: 10, drive: 90, composure: 10 })[k], 1)));

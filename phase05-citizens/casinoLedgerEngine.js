@@ -983,9 +983,10 @@ function processCasinoLedger_(ctx, cycle) {
     var p = CASINO_PLACE_P * driveF * (wantShow ? showF : 1) * (wantSports ? sportsF : 1) * (1 - refuseShare);
     if (rng() >= p) continue;
 
+    var pickShow = wantShow && (!wantSports || rng() < 0.5);
+    // tilt is decided where the stake is drawn, so the market pick above keeps its draw (agy 2026-11-19 §4)
     var tilt = tiltShare >= 1 || (tiltShare > 0 && rng() < tiltShare);
     if (tilt) { S.casinoGates = S.casinoGates || { refused: 0, tilt: 0 }; S.casinoGates.tilt++; }   // bets placed on tilt
-    var pickShow = wantShow && (!wantSports || rng() < 0.5);
     var stake = casinoStake_(income, nw, iWL >= 0 ? crow[iWL] : 5, rng, postureE ? postureE.posture : undefined, tilt);
     if (stake == null) continue;
 

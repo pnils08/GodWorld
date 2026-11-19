@@ -197,11 +197,11 @@ console.log('═══ T7 Section 4 — caps, write path, dial-loop closure');
 
 // engine.201 W2 regression: force real resolution draws at each ordinary slip boundary.
 {
-  function w2Resolve(integrity, composure, resolve) {
+  function w2Resolve(integrity, composure, resolve, ctxOpts) {
     const sequence = [0, resolve, 0.99, 0.5]; let draws = 0;
     rngImpl = () => sequence[draws++];
     appended = [];
-    const ctx = makeCtx([makeRow('SYNTHETIC-W2-CONDUCT', dialState({ integrity, composure }))]);
+    const ctx = makeCtx([makeRow('SYNTHETIC-W2-CONDUCT', dialState({ integrity, composure }))], ctxOpts);
     ctx.config.cycleCount = 100;
     runConductEngine_(ctx);
     const events = ctx.summary.conductEvents || [];
@@ -230,10 +230,10 @@ console.log('═══ T7 Section 4 — caps, write path, dial-loop closure');
   // cuts(integrity, composure) -> the roll's three cut points computed here from the documented
   // rule, not from the engine: commit below reach x L, Resisted below reach, slip below
   // reach + (1 - reach) x slipP, kept above.
-  const outcomeAt = (i, c, r) => w2Resolve(i, c, r).tag;
-  const fourWay = (label, i, c, reach, L, slipP) => {
+  const outcomeAt = (i, c, r, o) => w2Resolve(i, c, r, o).tag;
+  const fourWay = (label, i, c, reach, L, slipP, o) => {
     const commit = reach * L, slipTop = reach + (1 - reach) * slipP, e = 0.001;
-    const got = [commit - e, commit + e, reach - e, reach + e, slipTop - e, slipTop + e].map(r => (r > 0 && r < 1) ? outcomeAt(i, c, r) : null);
+    const got = [commit - e, commit + e, reach - e, reach + e, slipTop - e, slipTop + e].map(r => (r > 0 && r < 1) ? outcomeAt(i, c, r, o) : null);
     const want = ['Transgression-Petty', 'Resisted', 'Resisted', 'BoundaryCompromised', 'BoundaryCompromised', 'BoundaryKept'];
     assert('T14 ' + label + `: commit < ${commit.toFixed(4)} <= Resisted < ${reach} <= slip < ${slipTop.toFixed(4)} <= kept`,
       got.every((g, k) => g === null || g === want[k]), got.join(' '));
@@ -244,6 +244,9 @@ console.log('═══ T7 Section 4 — caps, write path, dial-loop closure');
   // the burnout path: composure 10 opens the door for integrity under 50 (reach = how far integrity sits under 50, to 30)
   fourWay('integrity 40 + composure 10 (half open)', 40, 10, 0.5, 0.45, 0.30);
   fourWay('integrity 45 + composure 10 (a quarter open)', 45, 10, 0.25, 0.40, 0.275);
+  // under a crime spike the commit ladder is x0.6 and nothing else moves (agy 2026-11-19 §6)
+  fourWay('integrity 25 under a crime spike', 25, 50, 0.25, 0.60 * 0.6, 0.35, { crimePressure: 80 });
+  fourWay('integrity 15 under a crime spike', 15, 50, 0.75, 0.70 * 0.6, 0.35, { crimePressure: 80 });
   // no jump at the old edge: one hair either side of integrity 20 gives the same outcome at the same roll
   const hair = [0.1, 0.33, 0.45, 0.55, 0.9].map(r => outcomeAt(19.9, 50, r) === outcomeAt(20.1, 50, r));
   assert('T14 no cliff at integrity 20: 19.9 and 20.1 resolve alike at five rolls', hair.every(Boolean), hair.join(' '));

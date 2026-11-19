@@ -115,7 +115,7 @@ for (const [name, rows, personnel] of [
   const kept = comp => cycles.filter(c => at(c, comp, 50, 7, true).closed === 0).length;
   const k50 = kept(50), k55 = kept(55), k60 = kept(60), k70 = kept(70);
   check('composure 50 buys nothing, 70 always buys the cycle', k50 === 0 && k70 === 200, { k50, k70 });
-  check('composure 60 buys the extra cycle about half the time (70-130 of 200), 55 about a quarter (25-75)', k60 >= 70 && k60 <= 130 && k55 >= 25 && k55 <= 75 && k55 < k60, { k55, k60 });
+  check('composure 60 buys the extra cycle about half the time (70-130 of 200), 55 about a quarter (25-75)', k60 >= 70 && k60 <= 130 && k55 >= 25 && k55 <= 75 && k60 - k55 >= 25 /* the two bands touch at 70-75: the gap is what tells them apart */, { k55, k60 });
   // one cycle short of the bar (prev 6 -> 7): composure 30 always closes early, 50 never, 40 about half the time
   const early = comp => cycles.filter(c => at(c, comp, 50, 6, true).closed === 1).length;
   const e50 = early(50), e40 = early(40), e30 = early(30);

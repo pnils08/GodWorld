@@ -94,7 +94,8 @@ async function loadPositionWall(popId, limit) {
     // Prefer CIVIC daypart posts; fall back to any recent if none yet tagged
     const civic = all.filter((p) => {
       const dp = String((p.metadata && p.metadata.daypart) || '');
-      return dp === 'CIVIC' || WALL_LABEL_RE.test(p.content);
+      // plan Task 1 (a): an office post by its daypart or its key; the leading text is the fallback for a doc with neither
+      return dp === 'CIVIC' || /-CIVIC-/.test(String(p.customId || '')) || WALL_LABEL_RE.test(p.content);
     });
     const posts = (civic.length ? civic : all).slice(0, n);
     return { tag, posts };

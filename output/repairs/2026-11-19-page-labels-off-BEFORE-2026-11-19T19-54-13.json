@@ -1,0 +1,46 @@
+{
+ "at": "2026-11-19T19:54:25.561Z",
+ "only": "stated",
+ "entries": [
+  {
+   "id": "ukmmH5hvVpJAAD3WhVCJ4T",
+   "customId": "cp-POP-00041-c116-CIVIC-cascade-STMT-116-baylight_authority-003",
+   "old": "stated: [Jack London and Downtown community impact mitigation — running records] Keisha Ramos — The hotline and the dust records don't pause while a memo is written — they are what the review is measuring, and they keep running.",
+   "next": "The hotline and the dust records don't pause while a memo is written — they are what the review is measuring, and they keep running.",
+   "add": {
+    "topic": "Jack London and Downtown community impact mitigation — running records",
+    "speaker": "Keisha Ramos"
+   },
+   "metadataBefore": {
+    "type": "office-position",
+    "popId": "POP-00041",
+    "cycle": "116",
+    "daypart": "CIVIC",
+    "terminal": "engine/sheet",
+    "kind": "cascade",
+    "office": "civic-office-baylight-authority",
+    "holder": "Keisha Ramos"
+   }
+  },
+  {
+   "id": "FNEXaa77DthQhXJM6n3VHk",
+   "customId": "cp-POP-00791-c116-CIVIC-cascade-STMT-116-transit_hub-003",
+   "old": "stated: [Who answers for Fruitvale this cycle] Elena Soria Dominguez — I don't answer for Fruitvale from a cubicle — I answer for it because my kids walk to the BART station past these drawings, and so do yours.",
+   "next": "I don't answer for Fruitvale from a cubicle — I answer for it because my kids walk to the BART station past these drawings, and so do yours.",
+   "add": {
+    "topic": "Who answers for Fruitvale this cycle",
+    "speaker": "Elena Soria Dominguez"
+   },
+   "metadataBefore": {
+    "type": "office-position",
+    "popId": "POP-00791",
+    "cycle": "116",
+    "daypart": "CIVIC",
+    "terminal": "engine/sheet",
+    "kind": "cascade",
+    "office": "civic-project-transit-hub",
+    "holder": "Elena Soria Dominguez"
+   }
+  }
+ ]
+}

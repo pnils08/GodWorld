@@ -1,0 +1,44 @@
+{
+ "at": "2026-11-19T19:55:36.015Z",
+ "only": "graded",
+ "entries": [
+  {
+   "id": "pts3BsBj3UoF6r8FHU5nkZ",
+   "customId": "cp-POP-01211-c116-PRESS-graded-ines-sorensen",
+   "old": "graded: 2/3 — The piece fails to present every citizen's verbatim line before their name and adds extensive commentary rather than keeping the frame short and plain.",
+   "next": "2/3 — The piece fails to present every citizen's verbatim line before their name and adds extensive commentary rather than keeping the frame short and plain.",
+   "add": {
+    "kind": "graded"
+   },
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-01211",
+    "cycle": 116,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Flat",
+    "event": "Media",
+    "ask": "You filed a story for the Tribune: graded: 2/3 — The piece fails to present every citizen's verbatim line before their n"
+   }
+  },
+  {
+   "id": "ostdkxeGJrgA6pAtsX12Ti",
+   "customId": "cp-POP-00014-c116-PRESS-graded-tanya-cruz",
+   "old": "graded: 3/3 — nothing fell short",
+   "next": "3/3 — nothing fell short",
+   "add": {
+    "kind": "graded"
+   },
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-00014",
+    "cycle": 116,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Content",
+    "event": "Education",
+    "ask": "You filed a story for the Tribune: graded: 3/3 — nothing fell short"
+   }
+  }
+ ]
+}

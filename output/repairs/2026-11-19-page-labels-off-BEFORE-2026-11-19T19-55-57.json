@@ -1,0 +1,44 @@
+{
+ "at": "2026-11-19T19:56:09.434Z",
+ "only": "filed",
+ "entries": [
+  {
+   "id": "nwR8JcaK6KyBdDhjQ5whkp",
+   "customId": "cp-POP-01076-c116-PRESS-wed-pmlgdn",
+   "old": "filed: Soo Loo’s Tuesday-night run left UNDOCKED with a tidy little contradiction: five fights, four iron o",
+   "next": "Soo Loo’s Tuesday-night run left UNDOCKED with a tidy little contradiction: five fights, four iron o",
+   "add": {
+    "kind": "filed"
+   },
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-01076",
+    "cycle": 116,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Flat",
+    "event": "Media-Drive-Up-S",
+    "ask": "You filed a story for the Tribune: filed: Soo Loo’s Tuesday-night run left UNDOCKED with a tidy little contradiction: fi"
+   }
+  },
+  {
+   "id": "E9rhXPmxAXhjhNntvY6nfe",
+   "customId": "cp-POP-01211-c116-PRESS-wed-lpbdgn",
+   "old": "filed: \"I walk past that fence every day. The development's not for me — it's happening around me.\"",
+   "next": "\"I walk past that fence every day. The development's not for me — it's happening around me.\"",
+   "add": {
+    "kind": "filed"
+   },
+   "metadataBefore": {
+    "type": "reflection",
+    "popId": "POP-01211",
+    "cycle": 116,
+    "daypart": "PRESS",
+    "terminal": "engine/sheet",
+    "affect": "Flat",
+    "event": "Media-Drive-Up-S",
+    "ask": "You filed a story for the Tribune: filed: \"I walk past that fence every day. The development's not for me — it's happeni"
+   }
+  }
+ ]
+}

@@ -9,7 +9,8 @@
  * them, Grok drafts (`from`: g1 / g2 = Grok round 1 / 2 as drafted or trimmed, rb = written here;
  * drafts in output/research-build/2026-11-17-e350-grok-downlines*.json).
  *
- * One PoolKey a dial (`down.<dial>`). A PoolKey is a draw bucket: every eligible key takes the same
+ * 148 rows in one PoolKey a dial (`down.<dial>`), and 9 rows placed in the pools where the up rows are (PLACED,
+ * 2026-11-18). One PoolKey a dial (`down.<dial>`). A PoolKey is a draw bucket: every eligible key takes the same
  * share of the tab's draws and Weight sets a row's share inside its key and the tab's mass against
  * the coded pools (generateCitizensEvents.js balanceContentLedgerPoolWeights_). WEIGHT below is
  * the tuning number, set from the bench count of pushes up against down, on the sheet, no deploy.
@@ -220,21 +221,72 @@ function row(dial, line) {
   return {
     Kind: 'line', PoolKey: 'down.' + dial, Slot: '', Text: line[0], Weight: String(WEIGHT),
     Conditions: WHO[line[1]], Tags: [ROUTE[dial].source, AUTH, 'dial:' + dial + ':down'].join(','),
-    Grain: 'citizen', Active: 'yes', from: line[2]
+    Grain: 'citizen', Active: 'yes', from: line[2], dial: dial, source: ROUTE[dial].source, kind: ROUTE[dial].kind
+  };
+}
+
+// engine.350, the down side where the up rows are (2026-11-18). Every eligible PoolKey takes the same share
+// of the tab's draws, so a PoolKey with one signed row hands that row its whole share: on the live log
+// C115–C116 "painted over graffiti … alongside five neighbors" was drawn 40 times a Cycle (the per-row cap),
+// the two faith pools and the Tribune pool 30 to 60, each all up on sociability or warmth, against one share
+// for the 21 rows of down.sociability. A row placed IN such a pool splits that pool's share with the up row
+// it answers: same PoolKey, same source (so the same kind), the Conditions cell of the row it answers,
+// Weight 1 as its neighbours. One small moment on the same ground, the other way.
+// [PoolKey, dial, source, kind, Conditions, text, the live row it answers]
+const PLACED_AUTH = 'auth:rb-1118';
+const PLACED = [
+  ['community.program', 'sociability', 'source:civicNews', 'Civic Perception', 'band!=child',
+    'saw the sign-up sheet for the recreation center clean-up and walked past it a second time',
+    'painted over graffiti on the recreation center wall alongside five neighbors they barely knew'],
+  ['tribune.newsroom', 'sociability', 'source:media', 'Media', '',
+    'recognized a name in the Tribune and decided against mentioning it to anyone',
+    'read the Tribune\'s front page twice — once for the news, once to see who was in it'],
+  ['tribune.newsroom', 'warmth', 'source:media', 'Media', '',
+    'found their neighborhood in the Tribune again and resented, a little, who got quoted',
+    'saved the Tribune clipping with their neighborhood in it — the good one'],
+  ['sports.citywide', 'sociability', 'source:media', 'Media', '',
+    'heard the recap of last night\'s game start up at the counter and took the coffee to go',
+    'caught the recap of last night\'s game at the counter and stayed for the second retelling'],
+  ['faith.attending', 'sociability', 'source:familyLife', 'Daily', 'band!=child',
+    'left by the side aisle during the last hymn to miss the talk in the parking lot',
+    'stayed thirty minutes after the service just catching up in the parking lot'],
+  ['faith.volunteering', 'warmth', 'source:familyLife', 'Daily', 'band!=child',
+    'sorted the donation bags and judged, privately, what people had seen fit to give',
+    'organized the clothing drive donations and recognized a coat they had donated two years ago'],
+  ['faith.volunteering', 'sociability', 'source:familyLife', 'Daily', 'band!=child',
+    'took the job at the back of the fellowship hall, the one nobody talks during',
+    'drove the church van for the senior trip and listened to three hours of unfiltered neighborhood gossip'],
+  ['civic.stabilization-fund', 'warmth', 'source:civicNews', 'Civic Perception', 'wealth<=5',
+    'watched a neighbor fight the Stabilization Fund portal on a phone and kept what they knew to themselves',
+    'helped a neighbor navigate the West Oakland Stabilization Fund portal because the interface was confusing'],
+  ['civic.health-center', 'openness', 'source:civicNews', 'Civic Perception', 'band!=child',
+    'walked past the renderings for the Temescal Community Health Center and decided it would never look like that',
+    'stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence']
+];
+
+function placedRow(p) {
+  return {
+    Kind: 'line', PoolKey: p[0], Slot: '', Text: p[5], Weight: '1',
+    Conditions: p[4], Tags: [p[2], PLACED_AUTH, 'dial:' + p[1] + ':down'].join(','),
+    Grain: 'citizen', Active: 'yes', from: 'rb', dial: p[1], source: p[2], kind: p[3], answers: p[6]
   };
 }
 
 const ROWS = [];
 Object.keys(LINES).forEach(function (dial) { LINES[dial].forEach(function (l) { ROWS.push(row(dial, l)); }); });
+const DOWN_POOL_ROWS = ROWS.length;
+PLACED.forEach(function (p) { ROWS.push(placedRow(p)); });
 
 const OUT_OF_WORLD = /videogame|video game|openrouter|grok|DialState|World_Config|sociability|composure|outabout|\bdial\b/i;
 
 function validateRows(rows) {
   const list = rows || ROWS; const errors = []; const seen = {};
   list.forEach(function (r, i) {
-    const m = /^down\.([a-z]+)$/.exec(r.PoolKey);
+    const placed = r.answers != null;
+    const m = placed ? [r.PoolKey, r.dial] : /^down\.([a-z]+)$/.exec(r.PoolKey);
     if (r.Kind !== 'line') errors.push(i + ': Kind');
     if (!m || !ROUTE[m[1]]) { errors.push(i + ': PoolKey'); return; }
+    if (placed && (/^down\./.test(r.PoolKey) || !PLACED.some(function (p) { return p[0] === r.PoolKey && p[5] === r.Text && p[4] === r.Conditions && p[2] === r.source; }))) errors.push(i + ': a placed row is one of PLACED, as written');
     if (!r.Text) errors.push(i + ': empty Text');
     if (/^[A-Z]/.test(r.Text) || /[.!?]$/.test(r.Text)) errors.push(i + ': a clause — lowercase start, no closing mark');
     if (/\d/.test(r.Text)) errors.push(i + ': no numbers in a line');
@@ -244,10 +296,10 @@ function validateRows(rows) {
     if (OUT_OF_WORLD.test(r.Text)) errors.push(i + ': out-of-world word');
     const k = r.Text.toLowerCase(); if (seen[k]) errors.push(i + ': repeats row ' + seen[k]); seen[k] = String(i);
     if (r.Tags.indexOf(';') >= 0) errors.push(i + ': tags must be comma-split');
-    if (U.firstTag(r.Tags) !== ROUTE[m[1]].source) errors.push(i + ': first tag must be ' + ROUTE[m[1]].source);
+    if (U.firstTag(r.Tags) !== (placed ? r.source : ROUTE[m[1]].source)) errors.push(i + ': first tag must be ' + (placed ? r.source : ROUTE[m[1]].source));
     if (r.Tags.split(',').indexOf('dial:' + m[1] + ':down') < 0) errors.push(i + ': dial tag');
     if (r.Tags.split(',').filter(function (t) { return t.indexOf('dial:') === 0; }).length !== 1) errors.push(i + ': one dial tag a line');
-    if (Object.keys(WHO).map(function (w) { return WHO[w]; }).indexOf(r.Conditions) < 0) errors.push(i + ': Conditions');
+    if (!placed && Object.keys(WHO).map(function (w) { return WHO[w]; }).indexOf(r.Conditions) < 0) errors.push(i + ': Conditions');
     if (!(Number(r.Weight) > 0)) errors.push(i + ': Weight');
   });
   return { valid: !errors.length, errors: errors, count: list.length };
@@ -271,4 +323,4 @@ if (require.main === module) {
   process.exit(v.valid ? 0 : 1);
 }
 
-module.exports = { HDR, ROWS, LINES, ROUTE, WHO, WEIGHT, validateRows, toSheetValues, counts, firstTag: U.firstTag };
+module.exports = { HDR, ROWS, LINES, ROUTE, WHO, WEIGHT, PLACED, DOWN_POOL_ROWS, validateRows, toSheetValues, counts, firstTag: U.firstTag };

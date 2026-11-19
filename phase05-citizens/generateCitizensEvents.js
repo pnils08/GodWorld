@@ -1225,7 +1225,11 @@ function generateCitizensEvents_(ctx) {
   // the coded line came from, MEDIA_POOL_SIGN_): was a bare Media (sociability +4) whatever it said —
   // "disagreed with a Tribune column out loud to an empty kitchen". Builder 2026-10-02 on these lines: "reads
   // the tribune no". Reading the paper is one small step on what the line says, never a hiring's worth.
-  var GRADED_ONLY_KIND_ = { "Work": true, "Media": true };
+  // QoL the same (engine.350, the down side): the kind has no key in the dial map, so a QoL line whose words
+  // tripped a content rule was written bare and read by that word — "heard another neighbor was between jobs"
+  // moved sociability +3 and warmth +2 on the word "neighbor". Every QoL entry carries the dial of its cause
+  // and the sign of its bank (qolPoolFor_, patrolPoolFor_); it is written by that, or not written.
+  var GRADED_ONLY_KIND_ = { "Work": true, "Media": true, "QoL": true };
   var MEDIA_POOL_SIGN_ = {
     "Media-Anxious": "dial:composure:down", "Media-Crisis": "dial:composure:down", "Media-Hopeful": "dial:composure:up",
     "Media-Holiday": "dial:warmth:up", "Media-OaklandPride": "dial:warmth:up", "Media-Arts": "dial:openness:up",
@@ -2012,6 +2016,13 @@ function generateCitizensEvents_(ctx) {
   // - weight 0.9 so engine-tied pools (chaos/prevEvening/nbhdState) keep a
   //   slight edge in the draw; these are the floor of a life, not the news.
   // engine.299 (builder 2026-10-18): each line carries the dial it moves and which way — what the line says.
+  // engine.350 (builder 2026-11-16: "down as often as up"): the pools said the up side of sociability, warmth
+  // and openness and nothing else (8 / 0, 10 / 0, 13 / 0 lines; stage-54 bench, ten Cycles from code alone:
+  // sociability 1,505 pushes up to 4 down, warmth 1,097 to 2, openness 1,293 to 14). The down side is written
+  // here, same voice and size: the knock not answered, the kindness not returned, the new thing put back in
+  // its box. The canon guard above holds for these too (a relative, a neighbor, a stranger — never a spouse or
+  // a child). A source keeps the draw mass it had (DOMAIN_MOMENT_MASS_LINES_): more lines split the same share.
+  var DOMAIN_MOMENT_MASS_LINES_ = 8;   // a source draws as eight lines at 0.9, however many it holds
   var DOMAIN_MOMENTS = {
     "source:familyLife": [
       ["checked in with a relative", "dial:family:up"],
@@ -2021,7 +2032,10 @@ function generateCitizensEvents_(ctx) {
       ["spent the evening sorting a box of things that used to be someone's", "dial:family:up"],
       ["wrote half a letter to family, then decided to call instead", "dial:family:up"],
       ["retold an old family story and caught a detail they'd never noticed", "dial:warmth:up"],
-      ["smelled something on the stove next door that belonged to childhood", "dial:warmth:up"]
+      ["smelled something on the stove next door that belonged to childhood", "dial:warmth:up"],
+      ["let a relative's long story run out without asking one question back", "dial:warmth:down"],
+      ["read a relative's good news and felt the small mean pinch before the gladness", "dial:warmth:down"],
+      ["found last year's birthday card still unsent in a drawer and left it there", "dial:warmth:down"]
     ],
     "source:homeLife": [
       ["had a quiet moment at home", "dial:composure:up"],
@@ -2031,7 +2045,11 @@ function generateCitizensEvents_(ctx) {
       ["brought home a new plant and picked its spot carefully", "dial:warmth:up"],
       ["lent a neighbor a tool and got a story back with it", "dial:sociability:up"],
       ["rearranged the front room and kept walking in to look at it", "dial:openness:up"],
-      ["unpacked a box that had stayed sealed since the last move", "dial:composure:up"]
+      ["unpacked a box that had stayed sealed since the last move", "dial:composure:up"],
+      ["heard a knock, stood still in the hallway, and waited for the footsteps to go", "dial:sociability:down"],
+      ["watered every plant in the place but the one that had been a gift", "dial:warmth:down"],
+      ["put the new lamp back in its box and set the old one where it had always been", "dial:openness:down"],
+      ["moved the half-built shelf from the table to the closet, still half-built", "dial:drive:down"]
     ],
     "source:reflection": [
       ["thought about an old friend on the walk home", "dial:warmth:up"],
@@ -2041,7 +2059,11 @@ function generateCitizensEvents_(ctx) {
       ["remembered a teacher who'd said one thing that stuck", "dial:openness:up"],
       ["felt unexpectedly nostalgic at the smell of rain on warm pavement", "dial:warmth:up"],
       ["realized the week had passed without a single thing worth retelling", "dial:drive:down"],
-      ["caught themselves narrating the day as if telling it to someone gone", "dial:composure:down"]
+      ["caught themselves narrating the day as if telling it to someone gone", "dial:composure:down"],
+      ["went back over an old slight on the walk home and found it had kept every edge", "dial:warmth:down"],
+      ["remembered a kindness never returned and decided it was too late to matter", "dial:warmth:down"],
+      ["caught themselves arguing with a new idea before they had heard the end of it", "dial:openness:down"],
+      ["realized they had told the same three stories all year and wanted no fourth", "dial:openness:down"]
     ],
     "source:curiosity": [
       ["read about something unfamiliar and kept pulling the thread", "dial:openness:up"],
@@ -2051,7 +2073,14 @@ function generateCitizensEvents_(ctx) {
       ["learned a useless, wonderful fact and told two people", "dial:openness:up"],
       ["started a small project with no deadline and no reason", "dial:openness:up"],
       ["listened to a style of music they'd always skipped, twice", "dial:openness:up"],
-      ["looked up how something works and came away more amazed, not less", "dial:openness:up"]
+      ["looked up how something works and came away more amazed, not less", "dial:openness:up"],
+      ["ordered the usual without looking at the board and felt nothing about it", "dial:openness:down"],
+      ["started reading about something unfamiliar and quit at the second paragraph", "dial:openness:down"],
+      ["took the same street home again and never once looked up", "dial:openness:down"],
+      ["skipped past the song they didn't know to get to the one they did", "dial:openness:down"],
+      ["walked by the new place on the corner and decided from the sidewalk it wasn't for them", "dial:openness:down"],
+      ["left the borrowed book on the shelf another week, spine uncracked", "dial:openness:down"],
+      ["heard how something works explained wrong and couldn't be bothered to look it up", "dial:openness:down"]
     ],
     "source:communityLife": [
       ["helped someone carry groceries up the block", "dial:warmth:up"],
@@ -2061,7 +2090,13 @@ function generateCitizensEvents_(ctx) {
       ["noticed a familiar face missing from the morning routine", "dial:composure:down"],
       ["traded produce over a fence and came out ahead", "dial:sociability:up"],
       ["held the door and got a whole conversation for it", "dial:sociability:up"],
-      ["waved at the regulars on the usual route, all present and accounted for", "dial:sociability:up"]
+      ["waved at the regulars on the usual route, all present and accounted for", "dial:sociability:up"],
+      ["saw a familiar face across the street and studied a shop window until it passed", "dial:sociability:down"],
+      ["let the phone ring out, watched it stop, and felt the room go quiet", "dial:sociability:down"],
+      ["left a small local gathering after ten minutes by the side door", "dial:sociability:down"],
+      ["nodded at a neighbor's hello and kept walking so it couldn't become a conversation", "dial:sociability:down"],
+      ["took the long way around the block to miss the people on the corner", "dial:sociability:down"],
+      ["watched someone wrestle a heavy bag up the block and stayed where they were", "dial:warmth:down"]
     ],
     "source:identity": [
       ["realized they're becoming more like an older relative — and didn't mind", "dial:composure:up"],
@@ -2071,7 +2106,8 @@ function generateCitizensEvents_(ctx) {
       ["noticed younger people asking them for advice now", "dial:drive:up"],
       ["caught their reflection in a shop window and stood a little straighter", "dial:composure:up"],
       ["said no to something and felt the shape of who they are in it", "dial:integrity:up"],
-      ["kept a small promise to themselves nobody else knew about", "dial:integrity:up"]
+      ["kept a small promise to themselves nobody else knew about", "dial:integrity:up"],
+      ["noticed they had stopped saying what they meant to do next", "dial:drive:down"]
     ],
     // S280 build item 4 (Kimi intake add, anonymous form): being half-witness
     // to a stranger's life, turned inward. No cross-citizen wiring — the
@@ -2084,7 +2120,12 @@ function generateCitizensEvents_(ctx) {
       ["heard a kid explain something to a parent with total authority and grinned", "dial:warmth:up"],
       ["saw someone running for the bus make it, and felt weirdly invested", "dial:warmth:up"],
       ["watched a couple argue quietly over groceries and rooted for them anyway", "dial:warmth:up"],
-      ["caught a stranger humming their song and felt briefly, wrongly, known", "dial:sociability:up"]
+      ["caught a stranger humming their song and felt briefly, wrongly, known", "dial:sociability:up"],
+      ["saw a stranger drop a glove and let them get half a block before deciding it wasn't theirs to chase", "dial:warmth:down"],
+      ["overheard a neighbor's good news through the wall and turned the radio up", "dial:warmth:down"],
+      ["watched a kid try the same trick twenty times and was annoyed, briefly, by the hope in it", "dial:warmth:down"],
+      ["heard laughter from the next table and felt it as something that happens to other people", "dial:sociability:down"],
+      ["listened to someone explain a new way of doing a thing and decided the old way was fine before they finished", "dial:openness:down"]
     ],
     // S280 build item 6 (Gemini intake add, content only): the gravity of
     // routine — autopilot noticed from inside. The dial-locking mechanic was
@@ -2105,7 +2146,7 @@ function generateCitizensEvents_(ctx) {
       var dmItem = dmLines[dmi];                                   // engine.299: ["text", "dial:<dial>:<up|down>"]
       var dmText = Array.isArray(dmItem) ? dmItem[0] : dmItem;
       var dmTags = (Array.isArray(dmItem) && dmItem[1]) ? [dmKey, dmItem[1]] : [dmKey];
-      baseDaily.push(makeEntry(dmText, dmTags, 0.9, false));
+      baseDaily.push(makeEntry(dmText, dmTags, 0.9 * Math.min(dmLines.length, DOMAIN_MOMENT_MASS_LINES_) / dmLines.length, false));
     }
   }
 
@@ -2454,10 +2495,25 @@ function generateCitizensEvents_(ctx) {
     FathersDay: [["thought about family bonds", "dial:family:up"], ["noticed families celebrating", "dial:family:up"], ["felt grateful for paternal figures", "dial:warmth:up"]]
   };
 
-  var firstFridayTexts = ["checked out First Friday galleries", "enjoyed the art walk atmosphere", "felt the creative energy of First Friday", "wandered through open studios", "discovered new local artists", "soaked in the community arts scene"];
+  // engine.350: each First Friday line carries its own sign, by what it says. All six were sociability up
+  // (236 lines in the stage-54 bench's ten Cycles, none down): a gallery looked at is a night out, an artist
+  // found is something new, and only the crowd is company. The night's other side is written too. The pool
+  // keeps the mass its six lines had at 1.2.
+  var firstFridayLines = [
+    ["checked out First Friday galleries", "dial:outabout:up"],
+    ["enjoyed the art walk atmosphere", "dial:outabout:up"],
+    ["felt the creative energy of First Friday", "dial:openness:up"],
+    ["wandered through open studios", "dial:openness:up"],
+    ["discovered new local artists", "dial:openness:up"],
+    ["soaked in the community arts scene", "dial:sociability:up"],
+    ["ran into half the block at the art walk and came home hoarse", "dial:sociability:up"],
+    ["went to the art walk alone, spoke to no one, and left before the music started", "dial:sociability:down"],
+    ["stood at the back of a crowded gallery, decided none of it was for them, and went home", "dial:openness:down"],
+    ["heard the art walk from three blocks off and shut the window", "dial:outabout:down"]
+  ];
   var firstFridayPool = [];
-  for (var ffi = 0; ffi < firstFridayTexts.length; ffi++) {
-    firstFridayPool.push(makeEntry(firstFridayTexts[ffi], ["source:firstFriday", "dial:sociability:up"], 1.2, false));   // engine.299: out at the art walk
+  for (var ffi = 0; ffi < firstFridayLines.length; ffi++) {
+    firstFridayPool.push(makeEntry(firstFridayLines[ffi][0], ["source:firstFriday", firstFridayLines[ffi][1]], 1.2 * 6 / firstFridayLines.length, false));
   }
 
   var creationDayTexts = ["felt a sense of belonging in Oakland", "reflected on roots in the community", "appreciated the city's foundational spirit", "felt connected to Oakland's story"];

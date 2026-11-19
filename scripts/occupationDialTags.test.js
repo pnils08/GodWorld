@@ -47,7 +47,7 @@ ok(pl.todo.length === c.up + c.down && pl.plain === c.plain && pl.tagged === 0, 
 ok(pl.unlisted.length === 1 && pl.unlisted[0].text === 'a row nobody signed' && pl.notOnTab.length === P.MEDIA_SIGNS.length && pl.conflicts.length === 0, 'unlisted / missing / conflicts');
 // the paper-reader rows: every one found and tagged; a source:media fragment is not a line and is left alone
 const mpl = P.plan(mediaTab);
-ok(P.MEDIA_SIGNS.length === 4 && mpl.todo.length === 4 && mpl.unlisted.length === 0, 'paper-reader rows to tag ' + mpl.todo.length + ', unlisted ' + mpl.unlisted.length);
+ok(P.MEDIA_SIGNS.length === 7 && mpl.todo.length === 7 && mpl.unlisted.length === 0, 'paper-reader rows to tag ' + mpl.todo.length + ', unlisted ' + mpl.unlisted.length);
 ok(mpl.todo.every(function (x) { return /^source:media,auth:x,dial:[a-z]+:(up|down)$/.test(x.to); }), 'the source stays first on a paper-reader row');
 ok(pl.todo[0].row === 2 && pl.tagsCol === 6, 'sheet row and Tags column');
 const tagged = tab.map(function (r, i) { const o = r.slice(); const td = pl.todo.filter(function (x) { return x.row === i + 1; })[0]; if (td) o[6] = td.to; return o; });

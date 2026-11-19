@@ -18,11 +18,17 @@ function ok(cond, msg) { assert.ok(cond, msg); n++; }
 // 1. the module's own rules
 const v = P.validateRows(P.ROWS);
 ok(v.valid, 'validateRows: ' + v.errors.join('; '));
-ok(P.ROWS.length === 148, 'row count ' + P.ROWS.length);
+ok(P.DOWN_POOL_ROWS === 148 && P.ROWS.length === 148 + P.PLACED.length && P.PLACED.length === 9, 'row count ' + P.ROWS.length);
 Object.keys(P.ROUTE).forEach(function (d) { ok((P.counts()['down.' + d] || 0) >= 20, 'at least 20 lines for ' + d); });
 ok(!P.validateRows([Object.assign({}, P.ROWS[0], { Text: 'Went home.' })]).valid, 'a capitalised sentence is refused');
 ok(!P.validateRows([Object.assign({}, P.ROWS[0], { Tags: 'source:communityLife,dial:sociability:up' })]).valid, 'an up tag is refused');
 ok(!P.validateRows([Object.assign({}, P.ROWS[0], { Conditions: 'band=grownup' })]).valid, 'an unknown Conditions cell is refused');
+// the placed rows (2026-11-18): a row in the pool of the up row it answers
+const placed = P.ROWS.filter(function (r) { return r.answers != null; });
+ok(placed.length === 9 && placed.every(function (r) { return r.Weight === '1' && !/^down\./.test(r.PoolKey); }), 'nine placed rows at Weight 1, none in a down.* pool');
+ok(!P.validateRows([Object.assign({}, placed[0], { Text: 'walked past the sign-up sheet again and again and again' })]).valid, 'a placed row not in PLACED is refused');
+ok(!P.validateRows([Object.assign({}, placed[0], { Conditions: '' })]).valid, 'a placed row with another Conditions cell is refused');
+ok(!P.validateRows([Object.assign({}, placed[0], { PoolKey: 'down.sociability' })]).valid, 'a placed row in a down.* pool is refused');
 
 // 2. the tab loader takes every row
 global.Logger = { log() {} };
@@ -34,7 +40,7 @@ loadEventContentLedger_(ctx);
 const CL = ctx.summary.contentLedger;
 ok(CL && CL.skipped === 0, 'loader skipped ' + (CL && CL.skipped));
 ok(CL.lineCount === P.ROWS.length, 'loader line count ' + CL.lineCount);
-Object.keys(P.ROUTE).forEach(function (d) { ok((CL.lines['down.' + d] || []).length === P.counts()['down.' + d], 'pool down.' + d + ' loaded whole'); });
+Object.keys(P.counts()).forEach(function (k) { ok((CL.lines[k] || []).length === P.counts()[k], 'pool ' + k + ' loaded whole'); });
 
 // 3. the generator's own sign rule (cut out by text: if the block moves, this fails loudly)
 const gce = fs.readFileSync(path.join(__dirname, '..', 'phase05-citizens', 'generateCitizensEvents.js'), 'utf8');
@@ -43,7 +49,7 @@ ok(a > 0 && b > a, 'sign block found in generateCitizensEvents.js');
 const gradedTag_ = M.gradedTag_, nudgesForEvent_ = M.nudgesForEvent_; // read by the block below
 const gradedTagFor_ = eval('(function(){' + gce.slice(a, b) + '; return gradedTagFor_; })()');
 P.ROWS.forEach(function (r) {
-  const dial = r.PoolKey.slice('down.'.length), route = P.ROUTE[dial];
+  const dial = r.dial, route = { kind: r.kind, source: r.source };
   const tag = gradedTagFor_(route.kind, r.Tags.split(','));
   const want = route.kind + '-' + dial.charAt(0).toUpperCase() + dial.slice(1) + '-Down-S';
   ok(tag === want, r.Text + ' -> ' + tag);

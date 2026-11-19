@@ -137,7 +137,11 @@ const MEDIA_SIGNS = [
   ['tribune.newsroom', 'read the Tribune\'s front page twice — once for the news, once to see who was in it', 'sociability:up'],
   ['tribune.newsroom', 'disagreed with a Tribune column out loud to an empty kitchen', 'composure:down'],
   ['tribune.newsroom', 'saved the Tribune clipping with their neighborhood in it — the good one', 'warmth:up'],
-  ['sports.citywide', 'caught the recap of last night\'s game at the counter and stayed for the second retelling', 'sociability:up']
+  ['sports.citywide', 'caught the recap of last night\'s game at the counter and stayed for the second retelling', 'sociability:up'],
+  // the other side of the three rows above, placed in their pools (scripts/downLinesEclPool.js PLACED, 2026-11-18)
+  ['tribune.newsroom', 'recognized a name in the Tribune and decided against mentioning it to anyone', 'sociability:down'],
+  ['tribune.newsroom', 'found their neighborhood in the Tribune again and resented, a little, who got quoted', 'warmth:down'],
+  ['sports.citywide', 'heard the recap of last night\'s game start up at the counter and took the coffee to go', 'sociability:down']
 ];
 const ALL_SIGNS = SIGNS.concat(MEDIA_SIGNS);
 

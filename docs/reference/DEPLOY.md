@@ -67,7 +67,7 @@ Cloud Shell sometimes clears installed packages. If clasp fails, run `npm instal
 **Previous bench:** `SANDBOX 0908` (`1FFpUs98L0wrEcfAaQy6-Ir2xYiCq9baCc0SzqzAMrtM`) — RETIRED 2026-10-04: its script project hit Apps Script's 200-version cap (push lands, no new deployment; web app frozen @200 = `d7ac5fff`, C119). Full trail: [[DEPLOY_HISTORY]] §Retired sandboxes.
 
 
-**Live (2026-11-18, 21:58 CST):** PROD = **stage 57** = stage 56 + the other engines write a line by what it says (six files, `5c0c090bd`, engine.350 Task 7), web app **@192** — DEPLOY_HISTORY §PROD stage 57. Bench: SANDBOX 1004 **@212 = stage 57**, data synced back to live C116. Waiting on the builder: the live content-tab write and the two speed keys.
+**Live (2026-11-18, 21:58 CST):** PROD = **stage 57** = stage 56 + the other engines write a line by what it says (six files, `5c0c090bd`, engine.350 Task 7), web app **@192** — DEPLOY_HISTORY §PROD stage 57. Bench: SANDBOX 1004 **@212 = stage 57**, data synced back to live C116. The content tab is written (builder, same night). Waiting on the builder: the two speed keys.
 
 **Previous live (2026-11-18, 20:40 CST):** PROD = **stage 56** = stage 55 + the down side of the coded pools (one file, `176bd116f`), web app **@191** — DEPLOY_HISTORY §PROD stage 56.
 

@@ -2,6 +2,6 @@
 
 **PIN:** S678 | Day 231 | Canon C116 | PROD @190 (stage 55; history: DEPLOY_HISTORY §PROD) | next live fire C117 Sun 2026-11-22
 
-**NEXT[engine-sheet]:** pipeline.110 → reporter template: no structure decided (builder 11-18); decide it with him part by part, then build. Hal is the closest (never ask again). His dials and identity section stay. His canon disagrees on his age: his word. Council on hold. No model run without his word.
+**NEXT[engine-sheet]:** pipeline.110 → reporter template: do not re-plan it; read the plan Changelog 2026-11-18 first. Next: he names what already works in the live builds; one journalist set up (Tamsin a candidate; Hal, Nia out), the rest follow. Council on hold. No model run without his word.
 
 **NEXT[research-build]:** No push from here (es pushes). engine.350 → live stage 55; next: a down side for sociability, warmth, openness, drive in the coded pools (plan §The bench), then speed keys, engine.351. pipeline.112 → fold codex-rb's review. The delete guard is his: never open it.

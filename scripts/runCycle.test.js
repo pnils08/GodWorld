@@ -24,6 +24,13 @@ const hook = (payload) => spawnSync('node', [path.join(__dirname, 'runCycleGuard
 // 1. chain order matches the skill: 5.56 right behind 5, close last
 t('order', rc.ORDER.join(' ') === '1 2 2.5 3 3.5 4 4.1 5 5.56 5.5 5.55 5.58 5.6 5.7 5.8 5.85 6 6.1');
 
+// 1b. step 5.56 gate: the roster is built off the ledger — empty or dangling is a failed step, not a pass
+const bizRows = [{ BIZ_ID: 'BIZ-00001' }, { BIZ_ID: 'BIZ-00002' }];
+t('roster gate passes a roster whose businesses all exist', rc.rosterGate([{ POP_ID: 'POP-1', BIZ_ID: 'BIZ-00001' }, { POP_ID: 'POP-2', BIZ_ID: 'BIZ-00002' }], bizRows).ok === true);
+t('roster gate fails an empty roster', rc.rosterGate([], bizRows).ok === false);
+t('roster gate fails a worker at a business that is not on the Business_Ledger', /POP-3 at BIZ-99999/.test(rc.rosterGate([{ POP_ID: 'POP-3', BIZ_ID: 'BIZ-99999' }], bizRows).detail || ''));
+t('roster gate fails an unreadable file (null), never passes it', rc.rosterGate(null, bizRows).ok === false && rc.rosterGate([{ BIZ_ID: 'BIZ-00001' }], null).ok === false);
+
 // 2. blocker = first step before id that has not passed
 write(C, ['1', '2', '2.5']);
 t('blocker none for 3', rc.blocker(rc.loadState(C), '3') === null);

@@ -31,7 +31,20 @@ const FIRST_ENFORCED = 116;
 
 const out = (...p) => path.join(ROOT, 'output', ...p);
 const readJson = (p) => { try { return JSON.parse(fs.readFileSync(p, 'utf8')); } catch (_) { return null; } };
+const readJsonl = (p) => { try { return fs.readFileSync(p, 'utf8').split('\n').filter(Boolean).map((l) => JSON.parse(l)); } catch (_) { return null; } };
 const mtime = (p) => { try { return fs.statSync(p).mtimeMs; } catch (_) { return 0; } };
+
+// Step 5.56 gate (builder 2026-11-18): the roster the reporters and the world-view read is built off the
+// Simulation_Ledger by the beat dump. A roster of zero people, or a worker at a business the Business_Ledger
+// does not hold, is the dump reading the ledger wrong — the step fails rather than hand it on.
+function rosterGate(roster, biz) {
+  if (!Array.isArray(roster) || !Array.isArray(biz)) return { ok: false, detail: 'beat dump has no readable Employment_Roster.jsonl / Business_Ledger.jsonl' };
+  if (!roster.length) return { ok: false, detail: 'Employment_Roster.jsonl is empty — no citizen has a tracked employer on the ledger read' };
+  const ids = new Set(biz.map((b) => String(b.BIZ_ID || '').trim()).filter(Boolean));
+  const dangling = roster.filter((r) => !ids.has(String(r.BIZ_ID || '').trim()));
+  if (dangling.length) return { ok: false, detail: `${dangling.length} roster worker(s) at a business the Business_Ledger does not hold (first: ${dangling[0].POP_ID} at ${dangling[0].BIZ_ID})` };
+  return { ok: true, detail: `roster ${roster.length} workers at ${new Set(roster.map((r) => r.BIZ_ID)).size} businesses` };
+}
 
 function run(args, opts = {}) {
   const r = spawnSync('node', args, { cwd: ROOT, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, timeout: (opts.timeoutSec || 600) * 1000 });
@@ -112,7 +125,9 @@ const STEPS = [
       const s = readJson(out('simulation_ledger_snapshot.meta.json')) || {}; const b = readJson(out('beats', 'meta.json')) || {};
       if (Number(s.cycle) !== c.cycle || Date.parse(s.generatedAt) < t0) return { ok: false, detail: `ledger snapshot meta reads C${s.cycle} @ ${s.generatedAt}` };
       if (Number(b.cycle) !== c.cycle || Number(b.prevCycle) !== c.cycle - 1) return { ok: false, detail: `beat dump meta reads C${b.cycle} (prev C${b.prevCycle})` };
-      return { ok: true, outcome: 'pass', detail: `snapshot C${c.cycle}; beats C${c.cycle}, prev C${c.cycle - 1}` }; } },
+      const ro = rosterGate(readJsonl(out('beats', 'Employment_Roster.jsonl')), readJsonl(out('beats', 'Business_Ledger.jsonl')));
+      if (!ro.ok) return { ok: false, detail: ro.detail };
+      return { ok: true, outcome: 'pass', detail: `snapshot C${c.cycle}; beats C${c.cycle}, prev C${c.cycle - 1}; ${ro.detail}` }; } },
 
   { id: '5.5', title: 'Neighborhood texture', scripts: ['buildNeighborhoodTexture'],
     run: (c) => { const t0 = Date.now(); const r = run(['scripts/buildNeighborhoodTexture.js', String(c.cycle)]);
@@ -290,6 +305,6 @@ async function main(argv) {
   return 2;
 }
 
-module.exports = { STEPS, ORDER, FIRST_ENFORCED, STATE_DIR, loadState, isClosed, blocker, nextStep, civisOutcome };
+module.exports = { rosterGate, STEPS, ORDER, FIRST_ENFORCED, STATE_DIR, loadState, isClosed, blocker, nextStep, civisOutcome };
 
 if (require.main === module) main(process.argv.slice(2)).then(code => process.exit(code));

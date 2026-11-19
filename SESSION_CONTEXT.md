@@ -4,4 +4,4 @@
 
 **NEXT[engine-sheet]:** pipeline.110 → all drafted templates are garbage (builder 11-18); kept: the data search (worker data map, reporter records roster). Reporter structure: nothing decided, start from the builder. Council on hold. No model run without his word.
 
-**NEXT[research-build]:** No push from here (es pushes). engine.349 → the middle counts (his 11-18: readers read the number, rebuilt not patched; plan Task 14). engine.350 → the recorded items (Task 15). Read C117 first if fired. Then engine.351, pipeline.112. Live sheet writes are refused here: he runs them. The delete guard is his: never open.
+**NEXT[research-build]:** No push from here (es pushes). engine.349 → the middle counts (his 11-18: readers read the number, rebuilt not patched; plan Task 14). engine.350 → the recorded items (Task 15). Then engine.351, pipeline.112. Live sheet writes are refused here: he runs them. The delete guard is his: never open.

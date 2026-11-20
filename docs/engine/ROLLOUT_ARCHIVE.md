@@ -973,6 +973,14 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) — not `done-pending-archive` sweep rows, moved by hand per rollout-rules §6 wontfix/unresolvable-stale convention.
 
+## SS759 Archive Pass (2026-11-20, engine-sheet) — post-SNaN closures sweep
+
+1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 engine.*.
+
+- **engine.353** [engine-sheet] — Game clock skips youth life (builder 11-20): LIVE stage 61 @196; bench C117 0 of 36 youth lines on GAME rows **State at archive:** done-pending-archive. Pointer: [[../plans/2026-11-20-game-clock-skips-youth-life]]
+
+This pass: 1 rows — engine.353. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S664 Archive Pass (2026-11-16, research-build) — post-S663 closures sweep
 
 4 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 2 pipeline.* + 2 engine.*.

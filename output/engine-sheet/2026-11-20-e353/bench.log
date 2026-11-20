@@ -1,0 +1,19 @@
+AIM = BENCH (script read the bench marker)
+== sync from live
+  verify Reflection_Intake: bench 2960 rows vs live 2960 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+{"fireGuardMinutes":"0","cycleCountFormatted":"116","cycleCountIsNumber":true}
+door: {"target":"bench","http":200,"ok":true,"record":{"cycle":117,"startedMs":1795128855948,"state":"done","finishedMs":1795129002984},"raw":"{\"cycle\":117,\"startedMs\":1795128855948,\"state\":\"done\",\
+clearfire 117: {"ok":true,"cleared":{"cycle":117,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+-- pause 75 s (read quota)
+Edition_Coverage_Ratings C116: 7 rows (window 115,114,113,112,111,110,109,108)
+Citizen_Media_Usage C116: 19 rows from live C115
+Oakland_Sports_Feed C117: 0 rows
+appended 7 to Edition_Coverage_Ratings; marked rows on the tab now 7
+appended 19 to Citizen_Media_Usage; marked rows on the tab now 19
+bench cycleCount 116
+fire C117 rc=0 "verdict": "PASS" "wallS": 194
+C117 youth lines 36 | on GAME-clock rows 0 | on ENGINE 36
+== final sync from live
+RESULT check exit 0

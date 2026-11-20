@@ -198,6 +198,13 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD stage 61 — the youth engine skips the game clock (2026-11-20, engine-sheet, engine.353)
+
+- **What:** one file, `phase05-citizens/runYouthEngine.js` at `e009abb28`, on stage 60. `getNamedYouth_` skips a GAME-clock row (builder 2026-11-20: "Game clock is the filter"). Plan [[../plans/2026-11-20-game-clock-skips-youth-life]].
+- **Proof:** `scripts/educationLoop.test.js` 122/122 (GAME 22 and 16 out, ENGINE same ages in). Live C115–C116 had 7 youth lines on 5 GAME rows (Stanley, Carr, Haynes, Ham, Tipre). Bench SANDBOX 1004 @217 (stage 60 + the file; pull-back byte-identical), live-synced C116, fire C117 PASS (194 s): 36 youth lines, 0 on GAME-clock rows, 36 on ENGINE. Manifest `output/engine-sheet/2026-11-20-e353/e353.sha256`, log `bench.log`.
+- **Stage 61 @196 (2026-11-20):** live pulled = stage 60 (`civic49n1.sha256`), push + deploy, built tree = the benched manifest, pull-back byte-identical. No sheet write.
+- **Back out:** push the stage 60 tree (`output/engine-sheet/2026-11-19-civic49-n1/civic49n1.sha256`) and cut a version.
+
 ### PROD stage 60 — the override vote counts each seat once (2026-11-19, engine-sheet, civic.49 N1)
 
 - **What:** one file, `phase05-citizens/civicInitiativeEngine.js` at `94728b5e4`, on stage 59. `processOverrideVote_` gets the Task 1 shape: each seat votes once; a faction that is neither lead nor opposition votes at 0.55; a blank lead/opposition reads OPP/CRC. Plan [[../plans/2026-11-19-ind-led-initiatives-can-pass]] N1.

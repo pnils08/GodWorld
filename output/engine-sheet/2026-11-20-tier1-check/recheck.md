@@ -35,5 +35,5 @@ Then (builder: "Yes"): Sage Yamamoto POP-01126 (Teacher, 20) AF953 and Daniela K
 
 ## Item 6 — pay vs the cards (builder 2026-11-20: "Yes but mark Aitken is next cycle news he sim doesn't know he signed with Rockies yet")
 - Travis Coles POP-00533 Income AA422 24000000 → 21000000 (card: $21.0M 2042–2043), read back.
-- Mark Aitken POP-00003 Income left at 21400000 (his A's pay). Found: his RoleType K4 already reads "First Baseman, Colorado Rockies" — changed between the 2026-11-14 and 2026-11-17 snapshots, ahead of the sim; before it read "First Baseman, Oakland A's Legend — Player Rep, Community Liaison". Not changed; put to the builder.
+- Mark Aitken POP-00003 Income left at 21400000 (his A's pay). Found: his RoleType K4 already reads "First Baseman, Colorado Rockies" — changed between the 2026-11-14 and 2026-11-17 snapshots, ahead of the sim; before it read "First Baseman, Oakland A's Legend — Player Rep, Community Liaison". Builder: "The sim doesn't known his on the Rockies" → K4 restored to "First Baseman, Oakland A's Legend — Player Rep, Community Liaison" (the 11-14 value), read back.
 - Mike Kinder POP-00114 (Former Manager, Retired, Tier 1) Income "-": Tier 1–2 retirees are exempt from the engine's retired → 0 rule (generationalWealthEngine D5: "a retired star's $220k is Paulson's call"); put to the builder.

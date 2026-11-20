@@ -89,7 +89,7 @@ Readers, each reading both shapes:
 | reporterWall.js `loadReporterWall`, cron-desk-writer.js `memory_recall`, lib/wakePerception.js own-page readback | a filing or a grade is shown through `recordLine` — "filed: <headline>" / "graded: 3/3 — …", as before |
 | scanCitizenPages.js `citizenText` | untouched; with the label gone its strip finds nothing |
 
-What a model reads does not change: walls, the worker's statement line, the last-grade ask and a reporter's own recall show the same lines as before. What changes is what the store holds. A page read that shows raw content with no kind beside it (a citizen wake's own-page readback of a `talk` line, a Discord voice's recall) now shows the words without `TALK[cN]:` in front.
+What a model reads does not change: walls, the worker's statement line, the last-grade ask and a reporter's own recall show the same lines as before. What changes is what the store holds. A page read that shows raw content with no kind beside it (a citizen wake's own-page readback of a `talk` line, a Discord voice's recall) now shows the words without `TALK[cN]:` in front. [Wrong as written for office lines and filings: the memory tools, a Discord voice's recall and the citizen lookup showed those raw, without topic, speaker, action, signal or kind, until the close fixed it — §Close, the second pass.]
 
 Store behaviour, probed 2026-11-19 on throwaway docs in their own container (deleted after): a `POST` under a taken customId appends the content and merges the metadata; a `PATCH` by id replaces the content, merges the metadata, keeps `createdAt` and the list order (the list is by `createdAt`); metadata values of 200 characters are kept; a write is `queued` for a few seconds before a read shows it.
 
@@ -113,14 +113,24 @@ Tests: `lib/pageLabels.test.js` 38; `lib/reporterDialEvents.test.js` 31 (named k
 
 Tests moved to the stored shape: `lib/pageLabels.test.js`, `lib/reporterDialEvents.test.js`, `scripts/cronDeskFanoutHandoff.test.js`, `scripts/scanCitizenPages.test.js`, `scripts/workerWake.test.js`, `scripts/buildLivesSlice.test.js`, `scripts/buildVoicesSlice.test.js`.
 
-**Shown lines, store-wide off the BEFORE files: 17 of 1,355 differ** (58 before `2dc01efa7`): 2 by a trailing space inside a topic bracket; 15 office entries from C104 whose older write is now shown under the newer write's topic — metadata holds one topic a doc. The only office docs holding several writes are 20 from one rerun of C104's chain; these 15 sit 36th–56th on their holders' pages, and a wall reads the newest 12. Originals in the BEFORE files. Recorded, not fixed.
+**Second pass, the same night (builder: "If no one reads back to 104 then the entire sim is broken").** The first pass said the 15 C104 office entries shown under the wrong topic were out of every reader's reach; that was wrong. A page search reaches the whole page (two C104 entries in one council member's top four, read live), and three readers show search hits to a model. The same read found a wider break: every reader that shows page content as stored showed an office line without its topic, speaker, action or signal and a filing or grade without its kind — the label had carried them. Fixed:
+
+| What | Now |
+|---|---|
+| lib/pageLabels.js `shownLine` | any entry as a model is shown it: an office line through `wallLine`, a filing or grade through `recordLine`, everything else as stored |
+| Readers that showed content as stored | through `shownLine`: workerWake.js `memoryRecall` (a worker's or seat's memory tool, newest and search), lib/personaProvider.js `augment` (both the shown list and its dedupe set) and `pageRecallText_` (a Discord voice's recall), lib/discordLookups.js `pageFor` (the citizen lookup), cron-desk-writer.js `toolMemoryRecall` (newest and search). lib/wakePerception.js already leaves office lines out and shows filings by `recordLine` |
+| A doc holding several writes | `metadata.writes`, each write's own topic / speaker / action / signal (the store keeps one value per key, the newest write's); `wallLine` shows each write with its own, and where a search hit holds only some of a doc's writes, shows a fact only where the writes agree — never the wrong one. `wallLine` splits on the store's join and on a search hit's (`"\n\n--- "`) |
+| officeWall.js `recordPosition` | before a write lands on a taken key (a re-entered Sunday chain or a backfill rerun appends — the chain's guard at cron-civic-run.js `runChain` re-enters a staged close), reads the doc (`citizenPage.pageDocByCustomId_`) and passes `writes` when the facts differ (`pageLabels.writesAfter`); a failed read writes as before |
+| The 15 C104 docs | `writes` from the BEFORE files (`output/repairs/2026-11-19-page-labels-writes.js`: written 15, failed 0, read back with the list and shown as the old entry 15 of 15; metadata before in `…-writes-BEFORE.json`; log `output/research-build/2026-11-19-p112-writes.log`) |
+
+Live, on the new code: a worker's memory tool for POP-00042 shows `stated: [topic] Ramon Vega — …` and `datawake: … | signal: …`; a Discord voice's recall for POP-00501 shows a C104 two-write entry with each write under its own topic, as stored before; a reporter's memory tool for POP-00012 shows `filed:` / `graded:`. The Discord bot restarted 23:39 CST to load it (the crons load each run). **Shown lines, store-wide, live metadata off the BEFORE files: 2 of 1,355 differ**, each by a trailing space the old label had inside its topic bracket — the words and facts are the same. Tests `lib/pageLabels.test.js` 57 (writes list, search join, a partial hit, `writesAfter`, `shownLine`, `recordPosition` on a taken key with the store stubbed); `node scripts/run-tests.js` 348 of 348.
 
 ## Acceptance
 
 1. A fresh scan of `citizen-pages` finds no entry starting with `TENSION[`, `TENSION-RESOLVED[`, `TALK[`, `stated:`, `datawake:`, `filed:` or `graded:`.
 2. An official's position wall and a reporter's "your last piece came back from the desk" line read the same before and after (one office, one reporter, compared on the next live run).
 
-Read 2026-11-19, on the code with the fallbacks out: (1) met — 0 labelled entries of 4,276, the 25 docs written since the new writers included. (2) met — two offices' walls (POP-00034, POP-00042), 12 posts, each the same as its stored-before entry; eight reporters who did not file that night (every grade doc read a rewritten one), each last-grade line the same as the old entry gave. Store-wide, 17 entries are shown differently from before: 2 by a space inside the topic bracket, 15 C104 office entries (§Changelog, the close). The live reporter read is the Fri 11-20 06:15 angle wake.
+Read 2026-11-19, on the code with the fallbacks out: (1) met — 0 labelled entries of 4,276, the 25 docs written since the new writers included. (2) met — two offices' walls (POP-00034, POP-00042), 12 posts, each the same as its stored-before entry; eight reporters who did not file that night (every grade doc read a rewritten one), each last-grade line the same as the old entry gave. Store-wide after the second pass, 2 of 1,355 are shown differently, each by a stray space inside a topic bracket (§Close). The live reporter read is the Fri 11-20 06:15 angle wake.
 
 ## Out of this plan
 
@@ -158,6 +168,7 @@ City hall's wakes (the officials' morning wake, the seat wakes, the 14 workers f
 
 ## Changelog
 
+- 2026-11-19 (research-build) — Second pass (§Close): every page reader shows office lines and filings as they read; per-write facts kept on a doc of several writes; the 15 C104 docs repaired; 2 of 1,355 shown lines differ, by a space.
 - 2026-11-19 (research-build) — Closed to §2: scan 0 labelled of 4,276; reader fallbacks out but the digest's tab test; Acceptance 1 and 2 met; 17 shown lines differ (§Close). Owed: Fri 06:15 angle, Sun chain, Mon datawake, organic exchange / talk.
 - 2026-11-16 (research-build) — Plan written from the full page scan and the reader/writer trace; sent to codex-rb for one review before any build.
 - 2026-11-16 (research-build) — Task 3 ruled by the builder (grade is not the dial event); the office wakes' dial question ruled yes and filed as engine.347.

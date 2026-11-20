@@ -739,7 +739,8 @@ async function sheetRead(input, deps) {   // the reporters' reader (cron-desk-wr
 }
 async function memoryRecall(popid, input, deps) {   // newest by date, and the page search on a query; unavailable is said as unavailable, never as empty
   const { page } = defaults(deps);
-  const line = (d) => '- (' + ((d.metadata || {}).cycle != null ? 'Cycle ' + d.metadata.cycle : 'earlier') + ') ' + String(d.content || '').replace(/\s+/g, ' ').trim().slice(0, 500);
+  // pipeline.112: an office statement or a filing is stored without its label; shown as it always read
+  const line = (d) => '- (' + ((d.metadata || {}).cycle != null ? 'Cycle ' + d.metadata.cycle : 'earlier') + ') ' + String(pageLabels.shownLine(d.content, d.metadata)).replace(/\s+/g, ' ').trim().slice(0, 500);
   const rec = await page.recentPage_(popid, 5);
   if (!rec || rec.error) return 'Your memory is unavailable right now — this is not an empty record.';
   const parts = [];

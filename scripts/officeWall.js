@@ -74,7 +74,8 @@ async function ensurePositionWall(popId) {
 // pipeline.112: the page holds the holder's own words; the topic, the speaker, the action and the signal ride the
 // doc's metadata. A reader is shown the line as it always read ("stated: [topic] Name — words",
 // "datawake: words | action: … | signal: …"), built by lib/pageLabels.js wallLine.
-const { wallLine } = require(path.join(ROOT, 'lib', 'pageLabels'));
+const wallLabels = require(path.join(ROOT, 'lib', 'pageLabels'));
+const { wallLine } = wallLabels;
 
 async function loadPositionWall(popId, limit) {
   const n = limit == null ? 6 : limit;
@@ -151,18 +152,28 @@ async function recordPosition(popId, text, opts) {
     const page = require(path.join(ROOT, 'lib', 'citizenPage'));
     const ptr = await page.ensurePagePointer_(popId);
     if (ptr.error) return { recorded: false, error: ptr.error };
+    const extra = {
+      type: 'office-position',
+      kind: o.kind || 'stated',
+      office: o.office || null,
+      holder: o.holder || null,
+      ...(o.extra || {}),
+    };
+    // pipeline.112: a write that lands on a doc already holding one (a rerun under the same key appends) keeps each
+    // write's own topic, speaker, action and signal in metadata.writes — the store keeps only the newest write's.
+    // A failed read (null) writes as before.
+    const customId = page.pageCustomId_(ptr.tag, { cycle: o.cycle, daypart: 'CIVIC', key: o.key || 'position' });
+    const prior = customId ? await page.pageDocByCustomId_(popId, customId) : false;
+    if (prior && prior.content) {
+      const writes = wallLabels.writesAfter(prior.content, prior.metadata, extra);
+      if (writes) extra.writes = writes;
+    }
     // maxChars: a worker's statement lands whole (pipeline.110 Task 10); every other caller keeps the 1,200 cut
     const appended = await page.appendReflection_(popId, body.slice(0, o.maxChars || 1200), {
       cycle: o.cycle,
       daypart: 'CIVIC',
       key: o.key || 'position',
-      extra: {
-        type: 'office-position',
-        kind: o.kind || 'stated',
-        office: o.office || null,
-        holder: o.holder || null,
-        ...(o.extra || {}),
-      },
+      extra,
     });
     if (appended.error) return { recorded: false, error: appended.error, tag: ptr.tag };
     return { recorded: true, tag: ptr.tag, id: appended.id, customId: appended.customId };

@@ -873,14 +873,14 @@ async function toolMemoryRecall(popId, input) {
     const recent = await recentPage_(popId, 5);
     if (recent.results && recent.results.length) {
       parts.push('YOUR RECENT MEMORY (newest first):');
-      // pipeline.112: a filing or a grade is stored without its label; shown with its kind in front, as it always read
-      for (const d of recent.results) parts.push('- ' + String(require('../lib/pageLabels').recordLine(d.content || '', d.metadata)).replace(/\s+/g, ' ').slice(0, 400));
+      // pipeline.112: a filing, a grade or an office line is stored without its label; shown as it always read
+      for (const d of recent.results) parts.push('- ' + String(require('../lib/pageLabels').shownLine(d.content || '', d.metadata)).replace(/\s+/g, ' ').slice(0, 400));
     }
     if (input.query) {
       const hits = await readPage_(popId, input.query, 5);
       if (hits.results && hits.results.length) {
         parts.push('ON "' + input.query + '":');
-        for (const d of hits.results) parts.push('- ' + String(d.content || d.chunk || '').replace(/\s+/g, ' ').slice(0, 400));
+        for (const d of hits.results) parts.push('- ' + String(require('../lib/pageLabels').shownLine(d.content || d.chunk || '', d.metadata)).replace(/\s+/g, ' ').slice(0, 400));
       }
     }
     return parts.length ? cap(parts.join('\n'), 6000) : 'Your page has no notes yet — this is your first recorded wake on this thread.';

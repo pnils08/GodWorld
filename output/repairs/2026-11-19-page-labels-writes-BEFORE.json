@@ -1,0 +1,244 @@
+{
+ "saved": [
+  {
+   "id": "DJ595XU3n85WRK2toRcAc5",
+   "customId": "cp-POP-00501-c104-CIVIC-cascade-STMT-104-council_d1-004",
+   "metadataBefore": {
+    "type": "office-position",
+    "popId": "POP-00501",
+    "cycle": "104",
+    "daypart": "CIVIC",
+    "terminal": "engine/sheet",
+    "kind": "cascade",
+    "office": "civic-office-council-d1",
+    "holder": "Denise Carter",
+    "topic": "Constituent Policy Briefing",
+    "speaker": "Denise Carter"
+   }
+  },
+  {
+   "id": "dkpjvvm4M9wiytbRftjchw",
+   "customId": "cp-POP-00501-c104-CIVIC-cascade-STMT-104-council_d1-003",
+   "metadataBefore": {
+    "type": "office-position",
+    "popId": "POP-00501",
+    "cycle": "104",
+    "daypart": "CIVIC",
+    "terminal": "engine/sheet",
+    "kind": "cascade",
+    "office": "civic-office-council-d1",
+    "holder": "Denise Carter",
+    "topic": "Oakland Youth Apprenticeship Pipeline — Corrective Action Plan",
+    "speaker": "Denise Carter"
+   }
+  },
+  {
+   "id": "4xqpyHDqPugdd9mbRaRA7Q",
+   "customId": "cp-POP-00501-c104-CIVIC-cascade-STMT-104-council_d1-002",
+   "metadataBefore": {
+    "type": "office-position",
+    "popId": "POP-00501",
+    "cycle": "104",
+    "daypart": "CIVIC",
+    "terminal": "engine/sheet",
+    "kind": "cascade",
+    "office": "civic-office-council-d1",
+    "holder": "Denise Carter",
+    "topic": "Oakland Alternative Response Initiative — Citywide Expansion Plan",
+    "speaker": "Denise Carter"
+   }
+  },
+  {
+   "id": "Stn7ktjtVhYMXAMa1MZgs5",
+   "customId": "cp-POP-00501-c104-CIVIC-cascade-STMT-104-council_d1-001",
+   "metadataBefore": {
+    "type": "office-position",
+    "popId": "POP-00501",
+    "cycle": "104",
+    "daypart": "CIVIC",
+    "terminal": "engine/sheet",
+    "kind": "cascade",
+    "office": "civic-office-council-d1",
+    "holder": "Denise Carter",
+    "topic": "West Oakland Stabilization Fund — Month-Five Disbursement Batch",
+    "speaker": "Denise Carter"
+   }
+  },
+  {
+   "id": "YNV9TPoKeks9GsK3vPXQJX",
+   "customId": "cp-POP-00503-c104-CIVIC-cascade-STMT-104-council_d3-004",
+   "metadataBefore": {
+    "type": "office-position",
+    "popId": "POP-00503",
+    "cycle": "104",
+    "daypart": "CIVIC",
+    "terminal": "engine/sheet",
+    "kind": "cascade",
+    "office": "civic-office-council-d3",
+    "holder": "Rose Delgado",
+    "topic": "San Antonio Recovery and Fruitvale Credit",
+    "speaker": "Rose Delgado"
+   }
+  },
+  {
+   "id": "qVCYtWspVvenR85jy9jkvN",
+   "customId": "cp-POP-00503-c104-CIVIC-cascade-STMT-104-council_d3-002",
+   "metadataBefore": {
+    "type": "office-position",
+    "popId": "POP-00503",
+    "cycle": "104",
+    "daypart": "CIVIC",
+    "terminal": "engine/sheet",
+    "kind": "cascade",
+    "office": "civic-office-council-d3",
+    "holder": "Rose Delgado",
+    "topic": "Fruitvale Transit Hub Phase II Compliance",
+    "speaker": "Rose Delgado"
+   }
+  },
+  {
+   "id": "ueV8WvXhgNcbEM1znkrgDc",
+   "customId": "cp-POP-00042-c104-CIVIC-cascade-STMT-104-council_d4-004",
+   "metadataBefore": {
+    "type": "office-position",
+    "popId": "POP-00042",
+    "cycle": "104",
+    "daypart": "CIVIC",
+    "terminal": "engine/sheet",
+    "kind": "cascade",
+    "office": "civic-office-council-d4",
+    "holder": "Ramon Vega",
+    "topic": "Glenview infrastructure and constituent accountability",
+    "speaker": "Ramon Vega"
+   }
+  },
+  {
+   "id": "uKQCeiwMxnLQt9b49dFDxv",
+   "customId": "cp-POP-00042-c104-CIVIC-cascade-STMT-104-council_d4-003",
+   "metadataBefore": {
+    "type": "office-position",
+    "popId": "POP-00042",
+    "cycle": "104",
+    "daypart": "CIVIC",
+    "terminal": "engine/sheet",
+    "kind": "cascade",
+    "office": "civic-office-council-d4",
+    "holder": "Ramon Vega",
+    "topic": "Oakland Alternative Response Initiative — Citywide Expansion Plan",
+    "speaker": "Ramon Vega"
+   }
+  },
+  {
+   "id": "uzugvifzWPpszecjkVfjpk",
+   "customId": "cp-POP-00042-c104-CIVIC-cascade-STMT-104-council_d4-002",
+   "metadataBefore": {
+    "type": "office-position",
+    "popId": "POP-00042",
+    "cycle": "104",
+    "daypart": "CIVIC",
+    "terminal": "engine/sheet",
+    "kind": "cascade",
+    "office": "civic-office-council-d4",
+    "holder": "Ramon Vega",
+    "topic": "West Oakland Stabilization Fund — Month-Five Disbursement",
+    "speaker": "Ramon Vega"
+   }
+  },
+  {
+   "id": "gxgB98KtGY5V3Z5zeg2AWF",
+   "customId": "cp-POP-00042-c104-CIVIC-cascade-STMT-104-council_d4-001",
+   "metadataBefore": {
+    "type": "office-position",
+    "popId": "POP-00042",
+    "cycle": "104",
+    "daypart": "CIVIC",
+    "terminal": "engine/sheet",
+    "kind": "cascade",
+    "office": "civic-office-council-d4",
+    "holder": "Ramon Vega",
+    "topic": "Baylight District — Final Council Vote",
+    "speaker": "Ramon Vega"
+   }
+  },
+  {
+   "id": "YrKM8rYrPqAHUovLakpKuJ",
+   "customId": "cp-POP-00044-c104-CIVIC-cascade-STMT-104-council_d6-002",
+   "metadataBefore": {
+    "type": "office-position",
+    "popId": "POP-00044",
+    "cycle": "104",
+    "daypart": "CIVIC",
+    "terminal": "engine/sheet",
+    "kind": "cascade",
+    "office": "civic-office-council-d6",
+    "holder": "Elliott Crane",
+    "topic": "Development Accountability",
+    "speaker": "Elliott Crane"
+   }
+  },
+  {
+   "id": "aCu9iodCDtu691duesWiCy",
+   "customId": "cp-POP-00506-c104-CIVIC-cascade-STMT-104-council_d9-001",
+   "metadataBefore": {
+    "type": "office-position",
+    "popId": "POP-00506",
+    "cycle": "104",
+    "daypart": "CIVIC",
+    "terminal": "engine/sheet",
+    "kind": "cascade",
+    "office": "civic-office-council-d9",
+    "holder": "Terrence Mobley",
+    "topic": "Baylight District Final Council Vote",
+    "speaker": "Terrence Mobley"
+   }
+  },
+  {
+   "id": "BxKJGZFZpZgG1F9YZD5aT2",
+   "customId": "cp-POP-00044-c104-CIVIC-cascade-STMT-104-council_d6-001",
+   "metadataBefore": {
+    "type": "office-position",
+    "popId": "POP-00044",
+    "cycle": "104",
+    "daypart": "CIVIC",
+    "terminal": "engine/sheet",
+    "kind": "cascade",
+    "office": "civic-office-council-d6",
+    "holder": "Elliott Crane",
+    "topic": "Community Safety",
+    "speaker": "Elliott Crane"
+   }
+  },
+  {
+   "id": "1qgaJ8yrCLFC426hnRem92",
+   "customId": "cp-POP-00505-c104-CIVIC-cascade-STMT-104-council_d8-002",
+   "metadataBefore": {
+    "type": "office-position",
+    "popId": "POP-00505",
+    "cycle": "104",
+    "daypart": "CIVIC",
+    "terminal": "engine/sheet",
+    "kind": "cascade",
+    "office": "civic-office-council-d8",
+    "holder": "Nina Chen",
+    "topic": "Adams Point Success",
+    "speaker": "Nina Chen"
+   }
+  },
+  {
+   "id": "wrBbajBdzYakeKU6DBobPe",
+   "customId": "cp-POP-00505-c104-CIVIC-cascade-STMT-104-council_d8-001",
+   "metadataBefore": {
+    "type": "office-position",
+    "popId": "POP-00505",
+    "cycle": "104",
+    "daypart": "CIVIC",
+    "terminal": "engine/sheet",
+    "kind": "cascade",
+    "office": "civic-office-council-d8",
+    "holder": "Nina Chen",
+    "topic": "Grand Lake Liquor Licenses",
+    "speaker": "Nina Chen"
+   }
+  }
+ ]
+}

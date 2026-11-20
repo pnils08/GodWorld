@@ -1,0 +1,17 @@
+docs whose writes carry different facts: 15
+write cp-POP-00501-c104-CIVIC-cascade-STMT-104-council_d1-004 | writes 132 chars | shown as before: true
+write cp-POP-00501-c104-CIVIC-cascade-STMT-104-council_d1-003 | writes 178 chars | shown as before: true
+write cp-POP-00501-c104-CIVIC-cascade-STMT-104-council_d1-002 | writes 183 chars | shown as before: true
+write cp-POP-00501-c104-CIVIC-cascade-STMT-104-council_d1-001 | writes 173 chars | shown as before: true
+write cp-POP-00503-c104-CIVIC-cascade-STMT-104-council_d3-004 | writes 153 chars | shown as before: true
+write cp-POP-00503-c104-CIVIC-cascade-STMT-104-council_d3-002 | writes 158 chars | shown as before: true
+write cp-POP-00042-c104-CIVIC-cascade-STMT-104-council_d4-004 | writes 150 chars | shown as before: true
+write cp-POP-00042-c104-CIVIC-cascade-STMT-104-council_d4-003 | writes 193 chars | shown as before: true
+write cp-POP-00042-c104-CIVIC-cascade-STMT-104-council_d4-002 | writes 167 chars | shown as before: true
+write cp-POP-00042-c104-CIVIC-cascade-STMT-104-council_d4-001 | writes 166 chars | shown as before: true
+write cp-POP-00044-c104-CIVIC-cascade-STMT-104-council_d6-002 | writes 140 chars | shown as before: true
+write cp-POP-00506-c104-CIVIC-cascade-STMT-104-council_d9-001 | writes 138 chars | shown as before: true
+write cp-POP-00044-c104-CIVIC-cascade-STMT-104-council_d6-001 | writes 133 chars | shown as before: true
+write cp-POP-00505-c104-CIVIC-cascade-STMT-104-council_d8-002 | writes 101 chars | shown as before: true
+write cp-POP-00505-c104-CIVIC-cascade-STMT-104-council_d8-001 | writes 107 chars | shown as before: true
+written 15 | failed 0 | read back with writes and shown as the old entry 15 | differ 0 | metadata before: /root/GodWorld/output/repairs/2026-11-19-page-labels-writes-BEFORE.json

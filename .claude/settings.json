@@ -228,11 +228,6 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node /root/GodWorld/.claude/hooks/assumption-guard.js",
-            "timeout": 180
-          },
-          {
-            "type": "command",
             "command": "bash /root/GodWorld/scripts/session-end-audit.sh",
             "timeout": 10,
             "async": true

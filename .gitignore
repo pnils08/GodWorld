@@ -100,3 +100,10 @@ output/.wdcards-state.json
 # sources for stages 4f-4p, all superseded; later pushes record the deployed
 # tree as a stage manifest (output/engine-sheet/stage*.sha256). No script reads them.
 output/engine*/prod-stage*/
+
+# Test-shell runs — throwaway reporter test runs (154 MB by 2026-11-19); files
+# already committed stay tracked, new runs stay on disk only (builder 2026-11-19)
+output/test-shell/
+
+# The memory-write unlock is a local timestamp file set by hand, never shared
+.claude/.memory-write-*

@@ -92,3 +92,7 @@ Aaliyah Santos POP-01040 SpouseId "POP-00536 Everson Morello" → "POP-00536 Eva
 - Flag spellings (UNI "No"×1; MED "Yes"×1, "No"×1; CIV "No"×3, " no"×1): every engine reader lowercases before comparing to yes/y (educationCareerEngine 274–288, runRelationshipEngine 389–391, civicInitiativeEngine 1028, generateMonthlyCivicSweep 90, generationalWealthEngine 3083); " no" untrimmed still reads as not-yes.
 - HH-KEANE (Keanes POP-00001/00002, Household_Ledger row 531, couple, Piedmont Ave, owned): an authored id; householdFormationEngine AUTO_HH_ID marks HH-<cycle>-<n> as formation-minted and the spouse-merge prefers authored ids — by design.
 - "Cy Newell" (Household_Ledger row 631): head POP-00050 (now Ernesto Quintero, in HH-0106-F002), Members [], formed C103, dissolved C104. No ledger row points to it; a dissolved empty row is history.
+
+## Item 10 (builder 2026-11-20: "change them to match the cycle they are sandwiched in … that was before we got the dry runs figured out")
+
+Reflection_Intake C96:C107 (POP-00182, 00240, 00246, 00186, 00175, 00170, 00248, 00259, 00201, 00304, 00269, 00286; stamped 2026-07-07 to 07-09) Cycle 119 → 100, read back. Neighbors rows 94–95 and 108–109 are C100 with the same dates. All twelve already Applied = yes, so no reader re-applies them. The C119/C126 docs in the citizens' Supermemory pages are not touched (the newsroom mirror already drops cycles above live).

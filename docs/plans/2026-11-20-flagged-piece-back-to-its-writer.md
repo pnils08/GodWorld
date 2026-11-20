@@ -41,7 +41,7 @@ pointers:
 | 3 | The scoreboard row (`reward-loop-c<N>.jsonl`) carries each round: first-draft grade and gate result, each fix's, findings cleared — so improvement shows per journalist and model, on the same piece | rb | built 2026-11-20 — `sentBack` on the scoreboard row (round, findings, score, gate result), the `.wake.json` record, the staged sidecar, the flags file |
 | 4 | Delivery and counts read the final state: a piece that passed on its fix posts as published-track with "fixed after the desk sent it back"; a piece still flagged posts every finding, not five | rb | built 2026-11-20 — every finding; findings past Discord's 2,000 characters ride at the top of the attached piece; "sent back to the writer N times; fixed and passed / still flagged" |
 | 5 | `runWake` (:3638) and the :3735 route: read whether any cron still runs them; if one does, the same return; if none, say so here | rb | read 2026-11-20: neither runs from a cron (the `--wake` crontab line is commented "old"; the live write is `--stage=write --fanout`) — the return is in `runWrite` only |
-| 6 | Tests on the return and the stop; one shell run on a C116 flagged piece (no publish); then live on the next 18:15 write run | rb | tests 2026-11-20: `lib/sentBack.test.js` 26, `scripts/deliver-articles.test.js`; `node scripts/run-tests.js` 349/349. Shell run: awaits the builder's word (a model run). Live: Fri 2026-11-20 18:15 |
+| 6 | Tests on the return and the stop; one shell run on a C116 flagged piece (no publish); then live on the next 18:15 write run | rb | tests 2026-11-20: `lib/sentBack.test.js` 26, `scripts/deliver-articles.test.js`; `node scripts/run-tests.js` 349/349. Shell run 2026-11-20 (builder: "Yes"), `output/test-shell/20261120-004035-tamsin-pruitt-sentback/`, Tamsin's C116 piece flagged 11-19: the real gate on it through the new `gateDraft` — flagged, 1 high finding (a quote put on Wilson Shepard not in his record), 3/3; sent back with that finding (`--sent-back`, the writer's own seat: Sonnet 5.5, 6 tool calls) — the quote is gone, the rest kept, 1,451 → 1,282 words; gated again — pass, 0 findings, 3/3, staged in the shell. Cost: writer 59,905 in / 4,818 out ≈ $0.17, two gates $0.031. The loop's own control flow (the `while`) did not run in the shell — a re-gate keeps the writer out by design; live: Fri 2026-11-20 18:15 |
 
 ## Acceptance
 
@@ -75,5 +75,6 @@ pointers:
 
 ## Changelog
 
+- 2026-11-20 (research-build) — Shell run on Tamsin's flagged C116 piece: sent back with its one finding, the fix passed the gate 0 findings, 3/3; ≈ $0.20. A round on a Sonnet seat is ~$0.18, not the ~$0.06 average.
 - 2026-11-20 (research-build) — Tasks 1–5 built, flagged pieces only (the builder's call still open); tests 349/349; live from Fri 18:15. A write run takes ~7 min, Discord 18:45: a few rounds still land.
 - 2026-11-20 (research-build) — Plan written from the builder's words and the pipeline.77 / .79 / .83 records; nothing built. Sent for one review before the build.

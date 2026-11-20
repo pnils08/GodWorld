@@ -1,19 +1,17 @@
 #!/usr/bin/env node
 // MessageDisplay hook — builder 2026-11-19: "fix the hook to where i dont see any message
-// unless it proven and backed". In the builder terminals (tmux window research-build /
-// engine-sheet) every batch of reply text is drawn as nothing. The reply stays in the
-// transcript. When assumption-guard.js passes a reply it leaves the passed text in a pass
-// file and has the session answer SHOW; that answer is drawn as the passed reply, so the
-// builder sees it as a reply of its own (builder 2026-11-19: "If they don't appear then
-// they don't exist" — the guard's systemMessage never reached him).
+// unless it proven and backed"; "Nothing reaches me unless it verified first , I don't
+// need verified , if the message appears it passed". In the builder terminals (tmux window
+// research-build / engine-sheet) every batch of reply text is drawn as nothing, except a
+// VERIFIED answer to assumption-guard.js's re-read: that is drawn as the reply it passed,
+// read back from the transcript. The transcript keeps every reply as written.
 // Other windows, crons and `claude -p` runs draw the text unchanged.
 
 const { execSync } = require('child_process');
 const fs = require('fs');
-const path = require('path');
+const { split, PASS } = require('./assumption-guard');
 
 const TERMINALS = ['research-build', 'engine-sheet'];
-const STATE = path.join(__dirname, '..', 'state');
 
 function windowName() {
   if (!process.env.TMUX_PANE) return '';
@@ -24,24 +22,14 @@ function windowName() {
   }
 }
 
-function passFile(sessionId) {
-  return path.join(STATE, `reply-pass-${String(sessionId).replace(/[^\w-]/g, '')}.json`);
-}
-
-// What to draw for one batch: the passed reply on the first batch of the SHOW answer,
-// nothing on every other batch.
+// What to draw for one batch: the passed reply in place of a VERIFIED answer,
+// nothing for every other batch.
 function display(input) {
-  const file = input.session_id ? passFile(input.session_id) : '';
-  let pass = null;
-  if (file && fs.existsSync(file)) {
-    try { pass = JSON.parse(fs.readFileSync(file, 'utf8')); } catch (e) {}
-  }
-  if (!pass || !pass.text || (pass.shown && pass.shown !== input.message_id)) return '';
-  if (!pass.shown) {
-    pass.shown = input.message_id || 'shown';
-    fs.writeFileSync(file, JSON.stringify(pass));
-  }
-  return input.index ? '' : pass.text;
+  if (input.index || String(input.delta || '').trim() !== PASS) return '';
+  const t = input.transcript_path;
+  if (!t || !fs.existsSync(t)) return '';
+  const s = split(t);
+  return s && s.reply ? s.reply : '';
 }
 
 function main() {
@@ -52,4 +40,4 @@ function main() {
 }
 
 if (require.main === module) main();
-module.exports = { display, passFile };
+module.exports = { display };

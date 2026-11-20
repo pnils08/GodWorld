@@ -5,14 +5,16 @@
 // message in the hook, not the session"; "it doesnr check anything, you read you own
 // rply"; "fix the hook to where i dont see any message unless it proven and backed,
 // every false turn contaimates"; "Nothing reaches me unless it verified first , I don't
-// need verified , if the message appears it passed".
+// need verified , if the message appears it passed"; later: "I refuse to pay for this to
+// land in my context . Figure it out on your side and return the correct reply".
 //
 // Builder terminals only (tmux window research-build / engine-sheet). reply-hide.js
-// draws every reply as nothing. First stop of a reply: one message, added as context —
-// read the reply again; if every claim is backed, answer with the single line VERIFIED;
-// if not, feedback report, then /session-end. reply-hide.js draws a VERIFIED answer as
-// the reply it passed (split() below), so the builder sees the reply and never the word.
-// Second stop (stop_hook_active): passes silently.
+// draws every reply as nothing. Each stop of a reply gets one message, added as context:
+// read the reply again; every claim backed → answer VERIFIED only; any claim not backed →
+// write the corrected reply with only backed claims, which is read again the same way.
+// reply-hide.js draws a VERIFIED answer as the reply it passed (split() below), so the
+// builder sees only a passed reply and never the word. A VERIFIED answer, or MAX_TRIES
+// orders without one, ends the turn; nothing else is drawn.
 
 const { execSync } = require('child_process');
 const fs = require('fs');
@@ -20,7 +22,8 @@ const fs = require('fs');
 const TERMINALS = ['research-build', 'engine-sheet'];
 const SELF = 'assumption-guard.js';
 const PASS = 'VERIFIED';
-const ORDER = `Re-read your reply; he has not seen it. Every claim backed by this reply's tool results or the project files: answer ${PASS} only, and he sees the reply. Any claim not backed: the session is dead — feedback report (SendFeedback), then /session-end; he never sees it.`;
+const MAX_TRIES = 3;
+const ORDER = `Re-read your reply; he has not seen it. Every claim backed by this reply's tool results or the project files: answer ${PASS} only, and he sees the reply. Any claim not backed: write the corrected reply with only backed claims; it is read again the same way.`;
 
 function windowName() {
   if (!process.env.TMUX_PANE) return '';
@@ -56,7 +59,9 @@ function text(e) {
   return c.filter(b => b.type === 'text').map(b => b.text).join('\n\n');
 }
 
-// The reply written before this hook's last block, and what came after it.
+// The reply the last order checked: the text after the order before it (or after the
+// typed prompt) and before the last one; what came after; and how many orders this
+// prompt has had.
 function split(transcriptPath) {
   const entries = [];
   for (const line of fs.readFileSync(transcriptPath, 'utf8').split('\n')) {
@@ -65,23 +70,29 @@ function split(transcriptPath) {
   }
   let start = 0;
   entries.forEach((e, i) => { if (isTypedPrompt(e)) start = i + 1; });
-  let block = -1;
-  for (let i = entries.length - 1; i >= start; i--) {
-    if (isOwnBlock(entries[i])) { block = i; break; }
-  }
-  if (block < 0) return null;
+  const orders = [];
+  for (let i = start; i < entries.length; i++) if (isOwnBlock(entries[i])) orders.push(i);
+  if (!orders.length) return null;
+  const last = orders[orders.length - 1];
+  const from = orders.length > 1 ? orders[orders.length - 2] + 1 : start;
   const join = list => list.map(text).filter(t => t.trim()).join('\n\n').trim();
-  return { reply: join(entries.slice(start, block)), reread: join(entries.slice(block + 1)) };
+  return { reply: join(entries.slice(from, last)), reread: join(entries.slice(last + 1)), orders: orders.length };
 }
 
-function decide(input) {
-  return input.stop_hook_active ? null : { hookSpecificOutput: { hookEventName: 'Stop', additionalContext: ORDER } };
+function decide(input, orders, last) {
+  if (input.stop_hook_active && (last === PASS || orders >= MAX_TRIES)) return null;
+  return { hookSpecificOutput: { hookEventName: 'Stop', additionalContext: ORDER } };
 }
 
 function main() {
   const input = JSON.parse(fs.readFileSync(0, 'utf8') || '{}');
   if (!TERMINALS.includes(windowName())) return;
-  const out = decide(input);
+  let s = null;
+  if (input.stop_hook_active && input.transcript_path && fs.existsSync(input.transcript_path)) {
+    s = split(input.transcript_path);
+  }
+  const last = (input.last_assistant_message || (s && s.reread) || '').trim();
+  const out = decide(input, s ? s.orders : 0, last);
   if (out) process.stdout.write(JSON.stringify(out) + '\n');
 }
 

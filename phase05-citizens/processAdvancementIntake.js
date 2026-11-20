@@ -2367,6 +2367,22 @@ function checkFamilyMatchPromotions_(ctx, cycle) {
   }
   var active = function (row) { return row && String(row[L.status] || '').trim().toLowerCase() === 'active'; };
 
+  // ── engine.339 (builder 2026-11-20): only a woman becoming a man's spouse changes her name — a man the old draw
+  //    renamed into his wife's family gets his own name back; the link stays ──
+  for (var mr = 1; mr < gData.length; mr++) {
+    if (String(gData[mr][fc.status] || '').trim().toLowerCase() !== 'family') continue;
+    if (String(gData[mr][fc.role] || '').trim().toLowerCase() !== 'spouse') continue;
+    var mMaiden = String(gData[mr][fc.maiden] || '').trim();
+    if (!mMaiden || gX < 0 || String(gData[mr][gX] || '').trim().toLowerCase() !== 'male') continue;
+    var mWas = gData[mr].slice(), mAs = String(gData[mr][gL] || '').trim();
+    gData[mr][gL] = mMaiden; gData[mr][fc.maiden] = '';
+    noteGcContext_(gData, mr, findColByName_(gh, 'EmergenceContext'), 'Own name back (a husband keeps his name), C' + cycle);
+    try { writeGcRow_(genericSheet, gData, mr); } catch (eM) { gData[mr] = mWas; throw eM; }
+    results.namesRestored = (results.namesRestored || 0) + 1;
+    Logger.log('checkFamilyMatchPromotions_: ' + String(gData[mr][gF]) + ' ' + mAs + ' is ' + String(gData[mr][gF]) + ' ' + mMaiden +
+      ' again — a husband keeps his name; still the spouse of ' + String(gData[mr][fc.of] || '') + ' (C' + cycle + ')');
+  }
+
   // ── D5: release links whose spot closed ──
   for (var anchorPop in links.byAnchor) {
     if (!links.byAnchor.hasOwnProperty(anchorPop)) continue;
@@ -2504,7 +2520,7 @@ function checkFamilyMatchPromotions_(ctx, cycle) {
       if (wantSex && (gX < 0 || String(gData[gi][gX] || '').trim().toLowerCase() !== wantSex)) continue;
       var gHood = gN >= 0 ? String(gData[gi][gN] || '').trim() : '';
       if (!aHood || !gHood || !(gHood === aHood || (prox && prox.near(gHood, aHood)))) continue;
-      if (taken[normalizeCitizenName_(gData[gi][gF]) + ' ' + normalizeCitizenName_(c.surname)]) continue;
+      if (wantSex === 'female' && taken[normalizeCitizenName_(gData[gi][gF]) + ' ' + normalizeCitizenName_(c.surname)]) continue; // engine.339: only she takes the name
       fit.push(gi);
     }
     if (!fit.length) {
@@ -2515,9 +2531,12 @@ function checkFamilyMatchPromotions_(ctx, cycle) {
     var won = fit[Math.floor(rng() * fit.length)];
     var ownLast = String(gData[won][gL]).trim();
     var wasRow = gData[won].slice();
+    // engine.339 (builder 2026-11-20): "No one cane ever change their name on GC unless it's a female becoming a males
+    // spouse" — a woman takes his surname (her own kept as MaidenName); a man drawn as a woman's spouse keeps his
+    var takesName = wantSex === 'female';
     gData[won][fc.status] = 'Family';
-    gData[won][gL] = c.surname;
-    gData[won][fc.maiden] = ownLast;
+    gData[won][gL] = takesName ? c.surname : ownLast;
+    gData[won][fc.maiden] = takesName ? ownLast : '';
     gData[won][fc.of] = c.pop;
     gData[won][fc.role] = type;
     if (gN >= 0 && aHood) gData[won][gN] = aHood; // they share the family's home
@@ -2525,12 +2544,12 @@ function checkFamilyMatchPromotions_(ctx, cycle) {
       'Family: ' + type + ' of ' + String(aRow[L.first] || '').trim() + ' ' + c.surname + ' (' + c.pop + '), C' + cycle);
     try { writeGcRow_(genericSheet, gData, won); } catch (eW) { gData[won] = wasRow; throw eW; }
     claimed[won] = true;
-    takeName(gData[won][gF], c.surname);
+    takeName(gData[won][gF], gData[won][gL]);
     if (!links.byAnchor[c.pop]) links.byAnchor[c.pop] = { spouse: [], child: [], parent: [] };
     links.byAnchor[c.pop][type].push(won);
     results.linked++;
     Logger.log('checkFamilyMatchPromotions_: ' + String(gData[won][gF]) + ' ' + ownLast + ' is the ' + type + ' of ' +
-      c.pop + ' — now ' + String(gData[won][gF]) + ' ' + c.surname + ', in the background (C' + cycle + ')');
+      c.pop + (takesName ? ' — now ' + String(gData[won][gF]) + ' ' + c.surname : ' — keeps his name') + ', in the background (C' + cycle + ')');
   }
   return results;
 }

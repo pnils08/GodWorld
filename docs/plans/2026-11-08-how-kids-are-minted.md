@@ -154,6 +154,19 @@ Why it matters: a wake reads the citizen's own newest pages back before they spe
 
 The shape of the fix, if the builder wants one: a guard in the wake writers that refuses a page when the sheet's Cycle is ahead of the live world. Code only. Not built. The 29 pages are not to be edited or deleted by hand (CLAUDE.md rule 4); what happens to them is his call.
 
+## As built (2026-11-20, Task 2 — commit `1d74b2e49`)
+
+| Cut | Where | What |
+|---|---|---|
+| a | `generationalEventsEngine.js` `AGE_RANGES.BIRTH`, birth block | top 42 → 40; a spouse on the ledger outside 21–40 (`BIRTH_COPARENT_MIN_AGE` 21 .. 40) blocks the partner's roll; an off-camera spouse blocks nothing |
+| b, c | `processAdvancementIntake.js` `mintFamilyGcRow_`, `checkFamilyMatchPromotions_` D3 | a child or parent hit appends one new Generic_Citizens row: First from the pool's sex-tagged names (unique against ledger, pool, intake queue), Last = the drawn citizen's surname, MaidenName blank, Status Family, FamilyOf / FamilyRole, the family's hood, EmergenceCount 0, EmergedCycle `Cycle N`, Occupation student under 18 else `GC_OCCUPATIONS`. BirthYear: child = drawn BY + 21..40 (and the on-ledger spouse's BY + 21..40), never after the sim year; parent = the minor's BY − 40..−21, the other sex of the parent on camera. No fit → noFit, logged with the reason |
+| d | D3 spouse | unchanged: a pool row, renamed, its own surname in MaidenName |
+| e | D5 release | a child / parent row with a MaidenName is released to its own name (Status Active); idempotent |
+| f | `wireFamilyMatch_`, `wireFamilyToDeceased_` | a child / parent link under 21 years apart refused whole, logged; a spouse under 21 years older is not written into the child's ParentIds. The step-parent write (`bondEngine.js` `marryCitizens_`) is untouched (on engine.304's do-not-touch list) |
+| — | shipping with it | the 2026-11-08 intake-die deletion never reached PROD (PROD's intake still wrote `profile.MaritalStatus` / `profile.NumChildren`; PROD's `utilities/citizenDerivation.js` still rolled them). The candidate carries `cdf7ed12a`'s intake hunk and `6ead67356`'s derivation file: an arrival is single (youth under 18) with 0 children |
+
+**Measured on the 11-18 snapshot (base formula, no dials or heritage):** births eligible 171 → 122, expected ≈ 0.57 → 0.47 a Cycle (≈ 30 → 25 a year); the cap stays 1. The lottery: 599 citizens with an open spot, ≈ 6 drawn a Cycle, ≈ 2.6 children (or parents) born into the background pool a Cycle; none reach the ledger until usage moves them.
+
 ## Reviews reconciled
 
 | Review | Verdict | Finding | Outcome |

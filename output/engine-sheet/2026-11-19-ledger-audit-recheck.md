@@ -86,3 +86,9 @@ Item 8 note: the reply after closing item 6 named the next item as "nine citizen
 ## Item 8
 
 Aaliyah Santos POP-01040 SpouseId "POP-00536 Everson Morello" → "POP-00536 Evan Morello" (P869, read back). POP-00536's ledger name is Evan Morello and his SpouseId points back to her; canon C44 names "Evan Morello … the actor, local"; "Everson" appears nowhere in canon or pages. The id was already right; only the name text in her cell changed.
+
+## Item 9 — checked, nothing trips the engine, nothing written
+
+- Flag spellings (UNI "No"×1; MED "Yes"×1, "No"×1; CIV "No"×3, " no"×1): every engine reader lowercases before comparing to yes/y (educationCareerEngine 274–288, runRelationshipEngine 389–391, civicInitiativeEngine 1028, generateMonthlyCivicSweep 90, generationalWealthEngine 3083); " no" untrimmed still reads as not-yes.
+- HH-KEANE (Keanes POP-00001/00002, Household_Ledger row 531, couple, Piedmont Ave, owned): an authored id; householdFormationEngine AUTO_HH_ID marks HH-<cycle>-<n> as formation-minted and the spouse-merge prefers authored ids — by design.
+- "Cy Newell" (Household_Ledger row 631): head POP-00050 (now Ernesto Quintero, in HH-0106-F002), Members [], formed C103, dissolved C104. No ledger row points to it; a dissolved empty row is history.

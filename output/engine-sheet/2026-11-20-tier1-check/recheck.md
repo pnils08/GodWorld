@@ -26,3 +26,8 @@ OrginCity and the cards agree; the bios were wrong. Written, read back: CitizenB
 
 ## Bio rule (builder 2026-11-20): "Bios should not repeat what a row already gives a cron , age and salary don't fit the purpose of this bio space , it's to flag key details about their life that should be know upfront"
 Rewritten to the rule, read back (birth year/origin, salary/contract, neighborhood, team/position and stat lines dropped; life details kept): Kelley AT19, Davis AT21, Horn AT22, Ramos AT25, Richards AT30, Adash Stanley AT852, Calzado AT1067; Mooney AT1065 cleared (his bio held only row facts). The three item-4 mismatches (Davis Laurel, Ramos $8.2M, Richards $750K) are gone with them. The other ledger bios have not been swept to this rule.
+
+Builder 2026-11-20 on bios: "the bios is an unbuilt commodity rn, it may have some type of writer for it but it's not set" — the rule stands; no bio sweep or writer is in scope here.
+
+## Item 5 — Rick Walker POP-00198 (builder: "change him to a college degree is necessary")
+"K-8 Teacher,Former Line cook", EducationLevel hs-diploma → bachelors (AF150, read back). Vocabulary from credentialRank_ (educationCareerEngine.js). Teachers on the ledger before the write: bachelors 14, masters 2, hs-diploma 3 (Walker and two others, listed in the reply).

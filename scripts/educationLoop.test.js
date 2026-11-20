@@ -332,6 +332,10 @@ console.log('\n9. engine.144 loop 4 — youth texture, the minors\' whole textur
   const named = Y.getNamedYouth_(yctx([yrow('P5', 2037), yrow('P4', 2038), yrow('P17', 2025), yrow('P18', 2024), yrow('P30', 2012)], 1));
   const ids = named.map(n => n.id + ':' + n.age).join(',');
   check('getNamedYouth_ reads simYear 2042 (2037-born is 5, in; 2038-born is 4, out; 2024-born is 18, still in the 5–22 window)', ids === 'P5:5,P17:17,P18:18', ids);
+  // engine.353 (builder 2026-11-20: "Game clock is the filter") — a GAME-clock row never draws school life
+  const gameRow = (pop, by) => { const r = yrow(pop, by); r[5] = 'GAME'; return r; };
+  const named353 = Y.getNamedYouth_(yctx([gameRow('G22', 2020), gameRow('G16', 2026), yrow('E22', 2020), yrow('E16', 2026)], 1)).map(n => n.id).join(',');
+  check('engine.353: GAME-clock 22- and 16-year-olds are out; ENGINE-clock rows of the same ages stay in', named353 === 'E22,E16', named353);
   // the texture pass
   let hit5to17 = 0, trials = 0, lineTeen = '', lineChild = '', under5 = 0, adult = 0, suffix = 0, bareEdu = 0;
   for (let i = 0; i < 300; i++) {

@@ -676,6 +676,7 @@ function getNamedYouth_(ctx) {
   var iNeighborhood = idx('Neighborhood');
   var iStatus = idx('Status');
   var iDialState = idx('DialState'); // engine.32 T5 — Drive dial -> youth-event frequency
+  var iClock = idx('ClockMode'); // engine.353 (builder 2026-11-20: "Game clock is the filter")
 
   // v1.2 FIX: Require valid ID column
   if (iId < 0) {
@@ -704,6 +705,10 @@ function getNamedYouth_(ctx) {
 
     // v1.2 FIX: Skip rows without valid citizen ID
     if (!citizenId) {
+      continue;
+    }
+    // engine.353: a GAME-clock row lives the game's life, never school life (a 22-year-old Oaks guard drew a midterm)
+    if (iClock >= 0 && String(row[iClock] || '').trim().toUpperCase() === 'GAME') {
       continue;
     }
 

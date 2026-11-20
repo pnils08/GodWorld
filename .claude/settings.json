@@ -239,17 +239,6 @@
           }
         ]
       }
-    ],
-    "MessageDisplay": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node /root/GodWorld/.claude/hooks/reply-hide.js",
-            "timeout": 5
-          }
-        ]
-      }
     ]
   },
   "enabledPlugins": {

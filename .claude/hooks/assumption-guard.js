@@ -12,18 +12,20 @@
 // draws every reply as nothing. Each stop of a reply gets one message, added as context:
 // read the reply again; every claim backed → answer VERIFIED only; any claim not backed →
 // write the corrected reply with only backed claims, which is read again the same way.
-// reply-hide.js draws a VERIFIED answer as the reply it passed (split() below), so the
-// builder sees only a passed reply and never the word. A VERIFIED answer, or MAX_TRIES
-// orders without one, ends the turn; nothing else is drawn.
+// A pass is answered with no text at all (builder 2026-11-19: "Get that mother fucking
+// verified out of my chat now"): he reads the session away from the terminal, where
+// every reply and every VERIFIED answer showed — the terminal's screen, captured, had
+// hidden both, so reply-hide.js never reached what he reads, and it is unwired. A pass,
+// or the corrected reply, ends the turn: one order per reply (builder 2026-11-19:
+// "there should be 1 message in the hook"; "It's firing more than once").
 
 const { execSync } = require('child_process');
 const fs = require('fs');
 
 const TERMINALS = ['research-build', 'engine-sheet'];
 const SELF = 'assumption-guard.js';
-const PASS = 'VERIFIED';
-const MAX_TRIES = 3;
-const ORDER = `Re-read your reply; he has not seen it. Every claim backed by this reply's tool results or the project files: answer ${PASS} only, and he sees the reply. Any claim not backed: write the corrected reply with only backed claims; it is read again the same way.`;
+const MAX_TRIES = 1;
+const ORDER = `Re-read your reply; he has not seen it. Every claim backed by this reply's tool results or the project files: end your turn with no text at all. Any claim not backed: write the corrected reply with only backed claims.`;
 
 function windowName() {
   if (!process.env.TMUX_PANE) return '';
@@ -79,8 +81,9 @@ function split(transcriptPath) {
   return { reply: join(entries.slice(from, last)), reread: join(entries.slice(last + 1)), orders: orders.length };
 }
 
-function decide(input, orders, last) {
-  if (input.stop_hook_active && (last === PASS || orders >= MAX_TRIES)) return null;
+// A pass is no text after the last order.
+function decide(input, orders, reread) {
+  if (input.stop_hook_active && (reread === '' || orders >= MAX_TRIES)) return null;
   return { hookSpecificOutput: { hookEventName: 'Stop', additionalContext: ORDER } };
 }
 
@@ -91,10 +94,9 @@ function main() {
   if (input.stop_hook_active && input.transcript_path && fs.existsSync(input.transcript_path)) {
     s = split(input.transcript_path);
   }
-  const last = (input.last_assistant_message || (s && s.reread) || '').trim();
-  const out = decide(input, s ? s.orders : 0, last);
+  const out = decide(input, s ? s.orders : 0, s ? s.reread : null);
   if (out) process.stdout.write(JSON.stringify(out) + '\n');
 }
 
 if (require.main === module) main();
-module.exports = { split, decide, PASS };
+module.exports = { split, decide };

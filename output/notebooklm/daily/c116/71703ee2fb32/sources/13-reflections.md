@@ -1,0 +1,13 @@
+# Lake Merritt, in their own words
+
+## Deacon Seymour — Manager, Oakland A's
+
+> I'll tell you what my chain looked like, because it's the only one I can speak to from the inside. I got hurt at work, somebody called it in, the ambulance came, and I was admitted. Simple as that. I didn't have to think about whether the ambulance would come, or whether the hospital would take me, or whether I could afford the bed. I just had to lie there and let it happen. That's the part I can't stop thinking about when I look at the numbers out of Chinatown. My accident didn't make me tougher or smarter than anybody else. It made me lucky. And luck isn't a system. If I'd lived a few blocks over, if my job didn't carry the insurance it does, if I didn't have people who knew my name and could make a call — that chain looks different. It looks like waiting. It looks like hoping. It looks like a neighborhood carrying its sick the way Chinatown is carrying its sick, with no name on a ledger to show for it. I don't know who's in those six beds. But I know what it feels like to be in a bed and have people check on you. And I know what it would feel like to be in a bed and have nobody even know you're there.
+
+## Elle Lilo — Harbor Tugboat Captain
+
+> I've been on that water for thirty-nine years, and I've watched this neighborhood grow up around the port. The numbers going up—the cranes, the new buildings—that's real. But I'll tell you what I see from the wheelhouse: the same faces showing up at the union hall, the same guys on the dock at 5 a.m. Tre Mingo's one of them. The work's steady, but the cost of living here keeps climbing, and I watch good people do the math on whether they can stay. I moved myself, just a few miles, to make it work. That's the part nobody puts on a spreadsheet—the quiet decisions people make every day to keep doing the job they love in the place they grew up.
+
+## Ximena Mehta — Bart Transit PR
+
+> Honestly, when I see 12th Street drop like that on a mild week with stuff going on downtown, I don't read it as people not wanting to ride. I read it as people finding another way to get where they're going. That congestion number is low enough that driving doesn't feel like a punishment yet. And the fact that Coliseum and Fruitvale went up? That tells me the riders are still out there, they're just moving to the stations that connect to their actual lives — the East Oakland events, the hub work at Fruitvale. From the platform, what I see is that downtown is a destination, but it's not the only one anymore. People are spreading out, and BART's job is to make sure we're where they're going next, not just where they used to go.

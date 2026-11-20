@@ -1,0 +1,60 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "116",
+  "provider": "openrouter",
+  "model": "x-ai/grok-4.3",
+  "configuredWriterModel": "x-ai/grok-4.3",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "noah-tan",
+  "byline": {
+    "name": "Noah Tan",
+    "popid": "POP-00157",
+    "beatDomain": "ENVIRONMENT"
+  },
+  "laneEntries": 115,
+  "quotesLanded": 1,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "canon_recall",
+    "canon_recall",
+    "canon_recall"
+  ],
+  "toolCalls": 3,
+  "wordCount": 492,
+  "targetWords": "400-700",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 492,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "2702176666af8fa225a6221cc1848863dad03d0ba236d2e3eff60e870ba88456",
+    "costUsd": 0.0006
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/3 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/civic_c116_noah-tan_packet-v2_x-ai-grok-4-3.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "tauth.com]\n{\n  \"popId\": \"POP-00157\",\n  \"name\": \"Noah Tan\",\n  \"recorded\": true,\n  \"text\": \"filed: Ximena Mehta stood at the edge of the platform at 12th Street, coat folded over one arm, watching th\"\n}"
+  },
+  "ranAt": "2026-11-19T00:17:13.291Z"
+}

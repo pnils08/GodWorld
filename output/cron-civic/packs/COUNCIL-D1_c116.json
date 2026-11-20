@@ -1,0 +1,1268 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "empty": false,
+  "actor": {
+    "id": "POP-00501",
+    "name": "Denise Carter",
+    "role": "City Council District 1",
+    "officeId": "COUNCIL-D1",
+    "district": "D1",
+    "faction": "OPP",
+    "agentDir": "civic-office-council-d1",
+    "initiative": null,
+    "dials": {
+      "approval": 64
+    }
+  },
+  "task": {
+    "a": "district-week",
+    "goal": "what is happening in Brooklyn"
+  },
+  "pulse": {
+    "className": "district-heat",
+    "score": 229.72727272727272,
+    "label": "Brooklyn — sentiment -0.04 vs city 0.107",
+    "lever": "what is happening in Brooklyn",
+    "hood": "Brooklyn",
+    "initiative": null,
+    "vsCity": {
+      "sentiment": -0.04,
+      "citySentiment": 0.10727272727272728,
+      "crime": 0.64,
+      "cityCrime": 0.6499999999999999,
+      "heat": 29.727272727272727,
+      "outlier": true
+    }
+  },
+  "prewrite": {
+    "claim": "what is happening in Brooklyn",
+    "lineFacts": [
+      "approval 64",
+      "Brooklyn: sentiment -0.04 vs city 0.107; crime index 0.64 vs city 0.650; decay momentum 0; decay momentum 0",
+      "Brooklyn crime: property 37, violent 27, incidents 5 (cycle 116) — city property 39.5, violent 25.8, incidents 5.7",
+      "Brooklyn: sentiment -0.04 vs city 0.107; crime index 0.64 vs city 0.650; decay momentum 0; retail 7.31; housing pressure 0; decay; momentum 0"
+    ],
+    "missing": [
+      "no shop names on disk for this turf",
+      "no invented vote, POPID, or complete"
+    ]
+  },
+  "game": {
+    "geographyIssue": null,
+    "lastMove": {
+      "text": "Latest moves:\nC115 - answer CONF-115-civic-office-council-d1: awaiting the Sunday fold\nLatest terminal outcome (C114):\n- work INIT-010: applied to the tracker",
+      "moves": [
+        {
+          "moveId": "MV-115-civic-office-council-d1-2026-11-11:answer:CONF-115-civic-office-council-d1",
+          "cycle": 115,
+          "date": "2026-11-11",
+          "agentDir": "civic-office-council-d1",
+          "popid": "POP-00501",
+          "type": "answer",
+          "payload": {
+            "confrontationId": "CONF-115-civic-office-council-d1",
+            "text": "Director Vance — you asked this office for the Brooklyn service-audit baseline and the District 1 OARI evaluation, and for what we see behind Brooklyn's continuing negative sentiment. Here is what the record shows me and what it does not. Brooklyn reads -0.11 this cycle against a city at 0.020, down from -0.09; the crime index is 0.62 against a city 0.647; retail vitality is 6.22; housing pressure sits at zero; and the trajectory reading is decay with momentum at zero. What that tells me is a neighborhood that is not being pulled down by a single dramatic cause — it is flat, tired, and not recovering on its own. What it does not tell me is why, and I will not manufacture a reason to fill the gap. The service-audit baseline is not yet documented in anything I can cite, so I am not certifying a number I cannot show you. The D1 OARI evaluation is likewise incomplete on my side; the initiative is dispatch-live on my board with the next step due next cycle, and I will bring the evaluation when it is real rather than when it is convenient. In the meantime I am keeping the stabilization and tenant-defense money in motion so Brooklyn and West Oakland households are not held hostage to a missing file. If your department can supply the service records that would close the baseline, this office will take them and finish the audit with you.",
+            "directiveCycle": 115,
+            "confrontationSeat": "civic-office-council-d1"
+          },
+          "status": "pending",
+          "at": "2026-11-11T11:56:23.972Z"
+        },
+        {
+          "moveId": "MV-114-civic-office-council-d1-2026-11-05",
+          "cycle": 114,
+          "date": "2026-11-05",
+          "agentDir": "civic-office-council-d1",
+          "popid": "POP-00501",
+          "type": "work",
+          "payload": {
+            "initiativeId": "INIT-010"
+          },
+          "status": "applied",
+          "at": "2026-11-09T07:27:17.415Z",
+          "closeCycle": 115,
+          "detail": "LastWorkCycle/LastWorkSeat written for INIT-010"
+        }
+      ]
+    },
+    "board": [
+      {
+        "id": "INIT-001",
+        "name": "West Oakland Stabilization Fund",
+        "domain": "economic",
+        "phase": "disbursement-active",
+        "status": "passed",
+        "nextActionCycle": 117,
+        "voteCycle": 78,
+        "stage": "Standing",
+        "cyclesSinceStageChange": 8,
+        "lastStageChangeCycle": 108,
+        "sponsored": false,
+        "hoods": [
+          "West Oakland"
+        ],
+        "needsNext": "Standing — no delivering gate exists for this domain yet",
+        "budget": "budget $20,600,000 left, renewable",
+        "requirement": {
+          "stage": "Standing",
+          "next": null,
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": "no-delivering-gate",
+          "text": "Standing — no delivering gate exists for this domain yet"
+        },
+        "metricEvidence": null
+      },
+      {
+        "id": "INIT-002",
+        "name": "Oakland Alternative Response Initiative",
+        "domain": "safety",
+        "phase": "dispatch-live",
+        "status": "passed",
+        "nextActionCycle": 117,
+        "voteCycle": 82,
+        "stage": "Standing",
+        "cyclesSinceStageChange": 8,
+        "lastStageChangeCycle": 108,
+        "sponsored": false,
+        "hoods": [
+          "West Oakland",
+          "Fruitvale",
+          "East Oakland"
+        ],
+        "needsNext": "Standing — no delivering gate exists for this domain yet",
+        "budget": "budget $10,817,307.66 left, renewable",
+        "requirement": {
+          "stage": "Standing",
+          "next": null,
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": "no-delivering-gate",
+          "text": "Standing — no delivering gate exists for this domain yet"
+        },
+        "metricEvidence": null
+      },
+      {
+        "id": "INIT-007",
+        "name": "Oakland Youth Apprenticeship Pipeline",
+        "domain": "workforce",
+        "phase": "stalled",
+        "status": "passed",
+        "nextActionCycle": 117,
+        "voteCycle": null,
+        "stage": null,
+        "cyclesSinceStageChange": null,
+        "lastStageChangeCycle": null,
+        "sponsored": false,
+        "hoods": [
+          "West Oakland",
+          "East Oakland",
+          "Fruitvale"
+        ],
+        "needsNext": "stalled — one work move revives it",
+        "budget": "budget $12,500,000 left",
+        "requirement": null,
+        "metricEvidence": null
+      },
+      {
+        "id": "INIT-010",
+        "name": "West Oakland Tenant Defense Fund",
+        "domain": "economic",
+        "phase": "vote-scheduled",
+        "status": "failed",
+        "nextActionCycle": null,
+        "voteCycle": 112,
+        "stage": "FAILED",
+        "cyclesSinceStageChange": 3,
+        "lastStageChangeCycle": 113,
+        "sponsored": true,
+        "hoods": [
+          "West Oakland"
+        ],
+        "needsNext": "FAILED — not a stage this model knows",
+        "budget": "budget $4,200,000 left",
+        "requirement": {
+          "stage": "FAILED",
+          "next": null,
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": "unknown-stage",
+          "text": "FAILED — not a stage this model knows"
+        },
+        "metricEvidence": null
+      }
+    ],
+    "boardAvailable": true,
+    "boardIds": [
+      "INIT-001",
+      "INIT-002",
+      "INIT-007",
+      "INIT-010"
+    ],
+    "boardText": "Your board:\n- INIT-001 West Oakland Stabilization Fund [disbursement-active] — Standing — no delivering gate exists for this domain yet — budget $20,600,000 left, renewable — next step due C117\n- INIT-002 Oakland Alternative Response Initiative [dispatch-live] — Standing — no delivering gate exists for this domain yet — budget $10,817,307.66 left, renewable — next step due C117\n- INIT-007 Oakland Youth Apprenticeship Pipeline [stalled] — stalled — one work move revives it — budget $12,500,000 left — next step due C117\n- INIT-010 West Oakland Tenant Defense Fund [vote-scheduled] — FAILED — not a stage this model knows — budget $4,200,000 left",
+    "categories": {
+      "available": true,
+      "list": [
+        {
+          "key": "health",
+          "label": "clinics, care",
+          "band": "$5M-$100M",
+          "canDeliver": true
+        },
+        {
+          "key": "transit",
+          "label": "stations, lines",
+          "band": "$20M-$500M",
+          "canDeliver": true
+        },
+        {
+          "key": "education",
+          "label": "schools, youth learning",
+          "band": "$1M-$50M",
+          "canDeliver": true
+        },
+        {
+          "key": "economic",
+          "label": "business, local economy",
+          "band": "$2M-$50M",
+          "canDeliver": false
+        },
+        {
+          "key": "workforce",
+          "label": "jobs, training",
+          "band": "$1M-$30M",
+          "canDeliver": false
+        },
+        {
+          "key": "safety",
+          "label": "public safety, response",
+          "band": "$2M-$30M",
+          "canDeliver": false
+        },
+        {
+          "key": "sports",
+          "label": "stadiums, recreation",
+          "band": "$10M-$500M",
+          "canDeliver": false
+        },
+        {
+          "key": "environment",
+          "label": "parks, air, water",
+          "band": "$1M-$30M",
+          "canDeliver": false
+        }
+      ],
+      "text": "Propose in your own words under one category; reach is hood, district, or all (citywide seats only). Budget must sit in the band. * = runs, but cannot reach Delivering yet.\n- health: clinics, care $5M-$100M\n- transit: stations, lines $20M-$500M\n- education: schools, youth learning $1M-$50M\n- economic*: business, local economy $2M-$50M\n- workforce*: jobs, training $1M-$30M\n- safety*: public safety, response $2M-$30M\n- sports*: stadiums, recreation $10M-$500M\n- environment*: parks, air, water $1M-$30M"
+    },
+    "petitionPool": {
+      "available": true,
+      "complaints": [
+        {
+          "cycle": "115",
+          "hood": "West Oakland",
+          "snippet": "filed: The Fund Has Moved $7 Million Out of $28 Million. The Record Names Two Households.",
+          "affect": "Frustrated"
+        }
+      ],
+      "participation": [
+        {
+          "cycle": "114",
+          "hood": "West Oakland",
+          "snippet": "I can tell you that Uptown's number being the highest doesn't surprise me — it's a busy…",
+          "affect": "Calm"
+        },
+        {
+          "cycle": "114",
+          "hood": "West Oakland",
+          "snippet": "filed: The Fund Has Moved $6.6 Million in West Oakland. The Public Record Names Two…",
+          "affect": "Calm"
+        },
+        {
+          "cycle": "114",
+          "hood": "West Oakland",
+          "snippet": "Yeah, that's still how I feel. The Oaks trying to be part of the community is a positive…",
+          "affect": "Content"
+        },
+        {
+          "cycle": "114",
+          "hood": "West Oakland",
+          "snippet": "To be honest, I'm not really sure about The Reaves Line Transit Fund's impact on…",
+          "affect": "Calm"
+        }
+      ],
+      "unlocatedRows": 0,
+      "invalidCycleRows": 0,
+      "sinceCycle": 114,
+      "throughCycle": 116,
+      "window": "Complaint display C114–C116; condition counter C116 only.",
+      "text": "Complaint display C114–C116; condition counter C116 only.\nPeople are talking (1 complaint):\n- filed: The Fund Has Moved $7 Million Out of $28 Million. The Record Names Two Households. (West Oakland, C115)\nConstructive civic participation (not complaints): 4."
+    },
+    "workingCity": {
+      "available": true,
+      "totalStaff": 5,
+      "shownStaff": 5,
+      "text": "The working city:\n- Rafael Montez: The Badge & Paddle announcement is done, and I'm still turning over the image of the Chief of Police swinging… (C115)\n- Elena Soria Dominguez: The schematics are done, and they're good. But they're just paper until the community review is documented… (C115)\n- Bobby Chen-Ramirez: Q2 audit went out clean, filed on schedule, and the merchant-clinic walkthrough is now a standing thing. That… (C115)\n- Vanessa Tran-Muñoz: The Chinatown call is still sitting with me. We got someone there, but the wait was too long, and I keep… (C115)\n- Marcus Webb: The renewal ordinance went to council today; that part's done, the draft held. I keep thinking about cycle… (C115)"
+    },
+    "patrol": {
+      "available": true,
+      "strategy": "balanced",
+      "setAtClose": 116,
+      "text": "City patrol strategy, set by the Police Chief at the C116 close: balanced (patrols spread evenly — the default posture). Chief's note: Crime indices flat to slightly down citywide with no single district deteriorating sharply enough to justify shifting resources; balanced posture maintains even coverage and preserves OARI co-response coordination."
+    },
+    "confrontations": {
+      "available": true,
+      "all": [
+        {
+          "id": "CONF-106-civic-office-council-d1",
+          "cycle": 106,
+          "agentDir": "civic-office-council-d1",
+          "demand": "Denise Carter — City Council District 1 — Present an economic recovery plan for West Oakland addressing depressed RetailVitality (5.01) and elevated CrimeIndex (1.10).",
+          "sourceText": "## Denise Carter — City Council District 1\n\n- **Agent:** `.claude/agents/civic-office-council-d1/`\n- **Address:** Present an economic recovery plan for West Oakland addressing depressed RetailVitality (5.01) and elevated CrimeIndex (1.10).\n- **Why:** West Oakland holds the lowest retail vitality rank among active commercial zones in C106, coinciding with a 5-point approval drop (76 in C106) for the D1 office.\n- **Acceptance:** A public policy statement or council memorandum outlining targeted commercial corridor relief and safety oversight for West Oakland.\n- **Silence consequence:** Continued economic slide in West Oakland commercial corridors without targeted legislative intervention.\n",
+          "src": "output/mara-directives/mara_directive_c106_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-108-civic-office-council-d1",
+          "cycle": 108,
+          "agentDir": "civic-office-council-d1",
+          "demand": "Denise Carter — City Council District 1 — File the District 1 evaluation report for the Oakland Alternative Response Initiative (INIT-002) to determine permanent dispatch expansion.",
+          "sourceText": "## Denise Carter — City Council District 1\n\n- **Agent:** `.claude/agents/civic-office-council-d1/`\n- **Address:** File the District 1 evaluation report for the Oakland Alternative Response Initiative (INIT-002) to determine permanent dispatch expansion.\n- **Why:** Tracker sequencing mandates completion of D1 OARI evaluation in C108 alongside Month-eight stabilization fund completion, as West Oakland registers decay momentum 2 with CrimeIndex at 0.58.\n- **Acceptance:** A formal D1 program evaluation report detailing call diversion rates, response times, and an expansion recommendation for INIT-002.\n- **Silence consequence:** Citywide expansion decisions for alternative response remain blocked without baseline performance data from the pilot district.\n",
+          "src": "output/mara-directives/mara_directive_c108_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-109-civic-office-council-d1",
+          "cycle": 109,
+          "agentDir": "civic-office-council-d1",
+          "demand": "Denise Carter — City Council District 1 — Transmit the formal District 1 evaluation report for the Oakland Alternative Response Initiative (INIT-002) to clear the citywide expansion decision.",
+          "sourceText": "## Denise Carter — City Council District 1\n\n- **Agent:** `.claude/agents/civic-office-council-d1/`\n- **Address:** Transmit the formal District 1 evaluation report for the Oakland Alternative Response Initiative (INIT-002) to clear the citywide expansion decision.\n- **Why:** INIT-002 has operated on a C109 dispatch-live evaluation milestone that was carried over from C108 without an official program transmittal, risking stall threshold triggers alongside INIT-001 and INIT-007.\n- **Acceptance:** Publication and committee transmittal of the D1 OARI evaluation report detailing call diversion volumes, response times, and an actionable expansion finding.\n- **Silence consequence:** Citywide alternative emergency dispatch expansion remains stalled at the pilot stage without baseline D1 operational data.\n",
+          "src": "output/mara-directives/mara_directive_c109_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-111-civic-office-council-d1",
+          "cycle": 111,
+          "agentDir": "civic-office-council-d1",
+          "demand": "Denise Carter — City Council District 1 — Co-sponsor and file the ordinance for INIT-010 and submit a municipal service plan for the Brooklyn commercial corridor.",
+          "sourceText": "## Denise Carter — City Council District 1\n\n- **Agent:** `.claude/agents/civic-office-council-d1/`\n- **Address:** Co-sponsor and file the ordinance for INIT-010 and submit a municipal service plan for the Brooklyn commercial corridor.\n- **Why:** INIT-010 sits at announced status with its C110 filing milestone missed and C112 stall clock closing, while Brooklyn records sentiment of 0.21, a crime index of 0.60, and a decay momentum of 4.\n- **Acceptance:** Co-sponsorship and filing of the INIT-010 Tenant Defense Fund ordinance with the City Clerk, plus a filed service audit for Brooklyn in C112.\n- **Silence consequence:** Tenant defense legislation fails to reach committee before the C112 clock expires, and Brooklyn's commercial vitality (7.63) deteriorates without intervention.\n",
+          "src": "output/mara-directives/mara_directive_c111_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-112-civic-office-council-d1",
+          "cycle": 112,
+          "agentDir": "civic-office-council-d1",
+          "demand": "Denise Carter — City Council District 1 — Cast the committee vote to advance the West Oakland Tenant Defense Fund (INIT-010) and publish a targeted municipal service response for the Brooklyn corridor.",
+          "sourceText": "## Denise Carter — City Council District 1\n\n- **Agent:** `.claude/agents/civic-office-council-d1/`\n- **Address:** Cast the committee vote to advance the West Oakland Tenant Defense Fund (INIT-010) and publish a targeted municipal service response for the Brooklyn corridor.\n- **Why:** District 1 logged zero voice in the C112 close while INIT-010 reached its scheduled committee vote milestone and Brooklyn deteriorated to a sentiment of -0.12, crime index of 0.62, and decay momentum of 3 with one active citizen complaint on the record.\n- **Acceptance:** A recorded committee vote on INIT-010 and a published Brooklyn service audit observable in C113.\n- **Silence consequence:** INIT-010 stalls at the committee gate before reaching the full council, leaving D1 tenants without defense appropriations as Brooklyn commercial decay deepens.\n",
+          "src": "output/mara-directives/mara_directive_c112_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-113-civic-office-council-d1",
+          "cycle": 113,
+          "agentDir": "civic-office-council-d1",
+          "demand": "Denise Carter — City Council District 1 — Publish a municipal mitigation response for the 2 active District 1 citizen complaints and execute the D1 OARI evaluation review under INIT-002.",
+          "sourceText": "## Denise Carter — City Council District 1\n\n- **Agent:** `.claude/agents/civic-office-council-d1/`\n- **Address:** Publish a municipal mitigation response for the 2 active District 1 citizen complaints and execute the D1 OARI evaluation review under INIT-002.\n- **Why:** District 1 carries 2 unaddressed petitions on the record while Brooklyn shows decay momentum of 2 and sentiment of 0.00, with INIT-001, INIT-002, INIT-007, and INIT-010 facing C114 milestone deadlines.\n- **Acceptance:** Recorded disposition of the 2 D1 citizen complaints and published D1 dispatch evaluation metrics for INIT-002 in C114.\n- **Silence consequence:** Brooklyn corridor decay accelerates without municipal intervention and District 1 response metrics remain absent from citywide safety reporting.\n",
+          "src": "output/mara-directives/mara_directive_c113_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-114-civic-office-council-d1",
+          "cycle": 114,
+          "agentDir": "civic-office-council-d1",
+          "demand": "Denise Carter — City Council District 1 — Publish the baseline findings of the Brooklyn municipal service audit and file District 1 dispatch evaluation metrics for the Oakland Alternative Response Initiative (INIT-002).",
+          "sourceText": "## Denise Carter — City Council District 1\n\n- **Agent:** `.claude/agents/civic-office-council-d1/`\n- **Address:** Publish the baseline findings of the Brooklyn municipal service audit and file District 1 dispatch evaluation metrics for the Oakland Alternative Response Initiative (INIT-002).\n- **Why:** Brooklyn logged the city's lowest sentiment at -0.09 with decay momentum of 1 in C114, while District 1 carries 1 unresolved citizen petition and faces C115 stall clocks across INIT-001, INIT-002, INIT-007, and INIT-010.\n- **Acceptance:** A published administrative service audit report for Brooklyn and filed D1 evaluation data for INIT-002 in C115.\n- **Silence consequence:** Brooklyn corridor sentiment declines further without municipal intervention, and District 1 alternative response data remains missing from citywide safety reporting.\n",
+          "src": "output/mara-directives/mara_directive_c114_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-115-civic-office-council-d1",
+          "cycle": 115,
+          "agentDir": "civic-office-council-d1",
+          "demand": "Denise Carter — City Council District 1 — File your promised answer on the Brooklyn service-audit baseline and District 1 OARI evaluation, explaining what the office sees behind Brooklyn’s continuing negative sentiment.",
+          "sourceText": "## Denise Carter — City Council District 1\n\n- **Agent:** `.claude/agents/civic-office-council-d1/`\n- **Address:** File your promised answer on the Brooklyn service-audit baseline and District 1 OARI evaluation, explaining what the office sees behind Brooklyn’s continuing negative sentiment.\n- **Why:** Your Cycle 114 weekday statement said you would file that answer; Brooklyn’s sentiment moved from -0.09 in that statement to -0.11 in the Cycle 115 neighborhood record, while its crime index is 0.62 and recorded decay momentum is zero.\n- **Acceptance:** References to any existing audit baseline and D1 dispatch evaluation, their findings and limitations, and the status of the transformer-related service issue you identified; if either document does not exist, say so and identify the responsible office and next reporting date.\n- **Promise:** P-25699b7f650ca053",
+          "src": "output/mara-directives/mara_directive_c115_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-116-civic-office-council-d1",
+          "cycle": 116,
+          "agentDir": "civic-office-council-d1",
+          "demand": "Denise Carter — City Council District 1 — Account for the outstanding Brooklyn service-audit baseline and District 1 OARI evaluation, identifying the records and departmental assistance needed to finish your promised answer.",
+          "sourceText": "## Denise Carter — City Council District 1\n\n- **Agent:** `.claude/agents/civic-office-council-d1/`\n- **Address:** Account for the outstanding Brooklyn service-audit baseline and District 1 OARI evaluation, identifying the records and departmental assistance needed to finish your promised answer.\n- **Why:** Your Cycle 115 weekday reply says neither document is complete or citable; the Cycle 116 district evidence shows Brooklyn sentiment improving from -0.11 to -0.04 but remaining below the listed city benchmark of 0.107, with decay momentum still zero.\n- **Acceptance:** References and findings for any completed work; otherwise, the missing records, responsible offices, specific assistance requested from Planning or other departments, and a next reporting date, without presenting an assembled baseline as a completed audit or assuming why sentiment remains negative.\n- **Promise:** P-25699b7f650ca053",
+          "src": "output/mara-directives/mara_directive_c116_AUTO.txt",
+          "expectsMove": "answer"
+        }
+      ],
+      "latestCycle": 116,
+      "open": [
+        {
+          "id": "CONF-116-civic-office-council-d1",
+          "cycle": 116,
+          "agentDir": "civic-office-council-d1",
+          "demand": "Denise Carter — City Council District 1 — Account for the outstanding Brooklyn service-audit baseline and District 1 OARI evaluation, identifying the records and departmental assistance needed to finish your promised answer.",
+          "sourceText": "## Denise Carter — City Council District 1\n\n- **Agent:** `.claude/agents/civic-office-council-d1/`\n- **Address:** Account for the outstanding Brooklyn service-audit baseline and District 1 OARI evaluation, identifying the records and departmental assistance needed to finish your promised answer.\n- **Why:** Your Cycle 115 weekday reply says neither document is complete or citable; the Cycle 116 district evidence shows Brooklyn sentiment improving from -0.11 to -0.04 but remaining below the listed city benchmark of 0.107, with decay momentum still zero.\n- **Acceptance:** References and findings for any completed work; otherwise, the missing records, responsible offices, specific assistance requested from Planning or other departments, and a next reporting date, without presenting an assembled baseline as a completed audit or assuming why sentiment remains negative.\n- **Promise:** P-25699b7f650ca053",
+          "src": "output/mara-directives/mara_directive_c116_AUTO.txt",
+          "expectsMove": "answer"
+        }
+      ],
+      "answeredIds": [
+        "CONF-112-civic-office-council-d1",
+        "CONF-113-civic-office-council-d1",
+        "CONF-106-civic-office-council-d1",
+        "CONF-115-civic-office-council-d1"
+      ]
+    },
+    "confrontation": {
+      "id": "CONF-116-civic-office-council-d1",
+      "cycle": 116,
+      "agentDir": "civic-office-council-d1",
+      "demand": "Denise Carter — City Council District 1 — Account for the outstanding Brooklyn service-audit baseline and District 1 OARI evaluation, identifying the records and departmental assistance needed to finish your promised answer.",
+      "sourceText": "## Denise Carter — City Council District 1\n\n- **Agent:** `.claude/agents/civic-office-council-d1/`\n- **Address:** Account for the outstanding Brooklyn service-audit baseline and District 1 OARI evaluation, identifying the records and departmental assistance needed to finish your promised answer.\n- **Why:** Your Cycle 115 weekday reply says neither document is complete or citable; the Cycle 116 district evidence shows Brooklyn sentiment improving from -0.11 to -0.04 but remaining below the listed city benchmark of 0.107, with decay momentum still zero.\n- **Acceptance:** References and findings for any completed work; otherwise, the missing records, responsible offices, specific assistance requested from Planning or other departments, and a next reporting date, without presenting an assembled baseline as a completed audit or assuming why sentiment remains negative.\n- **Promise:** P-25699b7f650ca053",
+      "src": "output/mara-directives/mara_directive_c116_AUTO.txt",
+      "expectsMove": "answer"
+    },
+    "conditions": {
+      "available": true,
+      "proposals": [],
+      "text": "No proposals in the available board/move evidence need condition counts."
+    },
+    "problemContinuity": {
+      "available": true,
+      "cycle": 116,
+      "problems": [
+        {
+          "id": "[\"Brooklyn\",\"health.sickResidents\"]",
+          "hood": "Brooklyn",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 66,
+          "cycle": 116
+        },
+        {
+          "id": "[\"Brooklyn\",\"safety.aboveMedianHoods\"]",
+          "hood": "Brooklyn",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 116
+        },
+        {
+          "id": "[\"West Oakland\",\"health.sickResidents\"]",
+          "hood": "West Oakland",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 84,
+          "cycle": 116
+        },
+        {
+          "id": "[\"West Oakland\",\"safety.aboveMedianHoods\"]",
+          "hood": "West Oakland",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 116
+        }
+      ],
+      "visibleProblems": [
+        {
+          "id": "[\"Brooklyn\",\"health.sickResidents\"]",
+          "hood": "Brooklyn",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 66,
+          "cycle": 116
+        },
+        {
+          "id": "[\"Brooklyn\",\"safety.aboveMedianHoods\"]",
+          "hood": "Brooklyn",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 116
+        },
+        {
+          "id": "[\"West Oakland\",\"health.sickResidents\"]",
+          "hood": "West Oakland",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 84,
+          "cycle": 116
+        },
+        {
+          "id": "[\"West Oakland\",\"safety.aboveMedianHoods\"]",
+          "hood": "West Oakland",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 116
+        }
+      ],
+      "passedOver": [
+        {
+          "id": "[\"West Oakland\",\"health.sickResidents\"]",
+          "hood": "West Oakland",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 84,
+          "cycle": 116,
+          "passedOverCycle": 115
+        },
+        {
+          "id": "[\"West Oakland\",\"safety.aboveMedianHoods\"]",
+          "hood": "West Oakland",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 116,
+          "passedOverCycle": 115
+        }
+      ],
+      "issues": [],
+      "missingFoldCycles": [],
+      "text": "Health and safety readings this week (C116).\n- Brooklyn: 66 residents sick; violence above the city middle\n- West Oakland: 84 residents sick; violence above the city middle"
+    }
+  },
+  "signal": {
+    "kind": "district-heat",
+    "hoods": [
+      "West Oakland",
+      "Brooklyn"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00666",
+        "name": "Kaila Raimon",
+        "neighborhood": "Brooklyn",
+        "role": "Sourdough Baker",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Brooklyn — Brooklyn — sentiment -0.04 vs city 0.107"
+      },
+      {
+        "pop": "POP-00714",
+        "name": "Drago Helio",
+        "neighborhood": "Brooklyn",
+        "role": "Home Health Aide",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Brooklyn — Brooklyn — sentiment -0.04 vs city 0.107"
+      },
+      {
+        "pop": "POP-00988",
+        "name": "Sefu Helio",
+        "neighborhood": "Brooklyn",
+        "role": "student",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Brooklyn — Brooklyn — sentiment -0.04 vs city 0.107"
+      },
+      {
+        "pop": "POP-01010",
+        "name": "Minh Raimon",
+        "neighborhood": "Brooklyn",
+        "role": "Carpenter Apprentice",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Brooklyn — Brooklyn — sentiment -0.04 vs city 0.107"
+      }
+    ],
+    "businesses": [],
+    "churches": [],
+    "sources": []
+  },
+  "known": [
+    {
+      "id": "F-office-COUNCIL-D1",
+      "t": "FACT",
+      "text": "Denise Carter holds COUNCIL-D1 at approval 64",
+      "src": "engine_audit snapshots.Civic_Office_Ledger"
+    },
+    {
+      "id": "F-heat-Brooklyn",
+      "t": "FACT",
+      "text": "Brooklyn: sentiment -0.04 vs city 0.107; crime index 0.64 vs city 0.650; decay momentum 0; decay momentum 0",
+      "src": "engine_audit snapshots.Neighborhood_Map ranked vs city"
+    },
+    {
+      "id": "F-crime-Brooklyn",
+      "t": "FACT",
+      "text": "Brooklyn crime: property 37, violent 27, incidents 5 (cycle 116) — city property 39.5, violent 25.8, incidents 5.7",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-hood-Brooklyn",
+      "t": "FACT",
+      "text": "Brooklyn: sentiment -0.04 vs city 0.107; crime index 0.64 vs city 0.650; decay momentum 0; retail 7.31; housing pressure 0; decay; momentum 0",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    }
+  ],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "COUNCIL-D1",
+        "PopId": "POP-00501",
+        "Holder": "Denise Carter",
+        "District": "D1",
+        "Approval": "64"
+      }
+    ],
+    "civicPeers": [
+      {
+        "OfficeId": "COUNCIL-D3",
+        "PopId": "POP-00503",
+        "Holder": "Rose Delgado",
+        "District": "D3",
+        "Faction": "OPP",
+        "Approval": 85
+      },
+      {
+        "OfficeId": "COUNCIL-D5",
+        "PopId": "POP-00043",
+        "Holder": "Janae Rivers",
+        "District": "D5",
+        "Faction": "OPP",
+        "Approval": 85
+      },
+      {
+        "OfficeId": "COUNCIL-D9",
+        "PopId": "POP-00506",
+        "Holder": "Terrence Mobley",
+        "District": "D9",
+        "Faction": "OPP",
+        "Approval": 55
+      }
+    ]
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + moves + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  },
+  "brief": {
+    "version": "CIVIC-BRIEF/2",
+    "cycle": 116,
+    "generation": {
+      "cycle": 116,
+      "observedAt": "2026-11-16T00:58:10.580Z",
+      "sources": {
+        "sports": {
+          "available": true,
+          "hash": "ab9d7b6adf55c0d602a2de14f526ceb80f6a5d6fa2f83bd980e0098902c80b11"
+        },
+        "summary": {
+          "available": true,
+          "hash": "048c56a97ab8aa476d2605c1cb6290e1376fcd755596acf223858b57306b693b"
+        }
+      },
+      "hash": "8bf58509d24a03b95f8e88a49a51e50b409fb1c4c8aa344e61a1acf7e941275d",
+      "completeThrough": "2026-11-16T00:58:10.580Z",
+      "issues": [],
+      "statement": "Events reflect the saved export as of its refresh watermark; later same-Cycle events require a new export."
+    },
+    "sections": {
+      "events": {
+        "available": true,
+        "items": [
+          {
+            "eventId": "EV-world-e12d3bec14fb0f37",
+            "status": "occurred",
+            "occurredCycle": 116,
+            "ageCycles": 0,
+            "category": "world-faith",
+            "significance": "local",
+            "hoods": [
+              "West Oakland"
+            ],
+            "citywideRelevance": false,
+            "sourceRef": "output/world_summary_c116.md:398",
+            "fact": "New Covenant Pentecostal Assembly: seniors lunch program marks milestone",
+            "retrievalKey": "event/EV-world-e12d3bec14fb0f37"
+          }
+        ],
+        "omittedCount": 0,
+        "retrievalKeys": [
+          "event/EV-world-e12d3bec14fb0f37"
+        ]
+      },
+      "measuredState": {
+        "districts": [
+          {
+            "district": "D1",
+            "available": true,
+            "retrievalKey": "district/D1",
+            "neighborhoods": [
+              {
+                "hood": "West Oakland",
+                "available": true,
+                "measured": {
+                  "Sentiment": {
+                    "value": "0.39",
+                    "previous": "0.31",
+                    "change": 0.08000000000000002
+                  },
+                  "CrimeIndex": {
+                    "value": "0.6",
+                    "previous": "0.61",
+                    "change": -0.010000000000000009
+                  },
+                  "RetailVitality": {
+                    "value": "14.36",
+                    "previous": "13.65",
+                    "change": 0.7099999999999991
+                  },
+                  "HousingPressure": {
+                    "value": "5.5",
+                    "previous": "4.5",
+                    "change": 1
+                  },
+                  "NeighborhoodTrajectory": {
+                    "value": "growth",
+                    "previous": "growth",
+                    "change": null
+                  },
+                  "TrajectoryMomentum": {
+                    "value": "10",
+                    "previous": "9",
+                    "change": 1
+                  }
+                }
+              },
+              {
+                "hood": "Brooklyn",
+                "available": true,
+                "measured": {
+                  "Sentiment": {
+                    "value": "-0.04",
+                    "previous": "-0.11",
+                    "change": 0.07
+                  },
+                  "CrimeIndex": {
+                    "value": "0.64",
+                    "previous": "0.62",
+                    "change": 0.020000000000000018
+                  },
+                  "RetailVitality": {
+                    "value": "7.31",
+                    "previous": "6.22",
+                    "change": 1.0899999999999999
+                  },
+                  "HousingPressure": {
+                    "value": "0",
+                    "previous": "0",
+                    "change": 0
+                  },
+                  "NeighborhoodTrajectory": {
+                    "value": "decay",
+                    "previous": "decay",
+                    "change": null
+                  },
+                  "TrajectoryMomentum": {
+                    "value": "0",
+                    "previous": "0",
+                    "change": 0
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "previousCycleAvailable": true
+      },
+      "commitments": {
+        "priorMoves": [
+          {
+            "moveId": "MV-115-civic-office-council-d1-2026-11-11:answer:CONF-115-civic-office-council-d1",
+            "type": "answer",
+            "status": "pending",
+            "cycle": 115,
+            "retrievalKey": "prior/MV-115-civic-office-council-d1-2026-11-11:answer:CONF-115-civic-office-council-d1"
+          },
+          {
+            "moveId": "MV-114-civic-office-council-d1-2026-11-05",
+            "type": "work",
+            "status": "applied",
+            "cycle": 114,
+            "retrievalKey": "prior/MV-114-civic-office-council-d1-2026-11-05"
+          }
+        ],
+        "evidenceAvailable": true,
+        "outcomeFeedAvailable": false,
+        "actionOutcomes": [],
+        "actionReconciliationAvailable": false,
+        "actionReconciliationReason": "ENOENT: no such file or directory, open '/root/GodWorld/output/beats/Civic_Action_Ledger.jsonl'",
+        "reconciledActions": []
+      },
+      "opportunities": {
+        "board": [
+          {
+            "id": "INIT-001",
+            "name": "West Oakland Stabilization Fund",
+            "domain": "economic",
+            "phase": "disbursement-active",
+            "status": "passed",
+            "nextActionCycle": 117,
+            "voteCycle": 78,
+            "stage": "Standing",
+            "cyclesSinceStageChange": 8,
+            "lastStageChangeCycle": 108,
+            "sponsored": false,
+            "hoods": [
+              "West Oakland"
+            ],
+            "needsNext": "Standing — no delivering gate exists for this domain yet",
+            "budget": "budget $20,600,000 left, renewable",
+            "requirement": {
+              "stage": "Standing",
+              "next": null,
+              "clears": false,
+              "moveThatClears": null,
+              "blocked": "no-delivering-gate",
+              "text": "Standing — no delivering gate exists for this domain yet"
+            },
+            "metricEvidence": null,
+            "retrievalKey": "project/INIT-001"
+          },
+          {
+            "id": "INIT-002",
+            "name": "Oakland Alternative Response Initiative",
+            "domain": "safety",
+            "phase": "dispatch-live",
+            "status": "passed",
+            "nextActionCycle": 117,
+            "voteCycle": 82,
+            "stage": "Standing",
+            "cyclesSinceStageChange": 8,
+            "lastStageChangeCycle": 108,
+            "sponsored": false,
+            "hoods": [
+              "West Oakland",
+              "Fruitvale",
+              "East Oakland"
+            ],
+            "needsNext": "Standing — no delivering gate exists for this domain yet",
+            "budget": "budget $10,817,307.66 left, renewable",
+            "requirement": {
+              "stage": "Standing",
+              "next": null,
+              "clears": false,
+              "moveThatClears": null,
+              "blocked": "no-delivering-gate",
+              "text": "Standing — no delivering gate exists for this domain yet"
+            },
+            "metricEvidence": null,
+            "retrievalKey": "project/INIT-002"
+          },
+          {
+            "id": "INIT-007",
+            "name": "Oakland Youth Apprenticeship Pipeline",
+            "domain": "workforce",
+            "phase": "stalled",
+            "status": "passed",
+            "nextActionCycle": 117,
+            "voteCycle": null,
+            "stage": null,
+            "cyclesSinceStageChange": null,
+            "lastStageChangeCycle": null,
+            "sponsored": false,
+            "hoods": [
+              "West Oakland",
+              "East Oakland",
+              "Fruitvale"
+            ],
+            "needsNext": "stalled — one work move revives it",
+            "budget": "budget $12,500,000 left",
+            "requirement": null,
+            "metricEvidence": null,
+            "retrievalKey": "project/INIT-007"
+          },
+          {
+            "id": "INIT-010",
+            "name": "West Oakland Tenant Defense Fund",
+            "domain": "economic",
+            "phase": "vote-scheduled",
+            "status": "failed",
+            "nextActionCycle": null,
+            "voteCycle": 112,
+            "stage": "FAILED",
+            "cyclesSinceStageChange": 3,
+            "lastStageChangeCycle": 113,
+            "sponsored": true,
+            "hoods": [
+              "West Oakland"
+            ],
+            "needsNext": "FAILED — not a stage this model knows",
+            "budget": "budget $4,200,000 left",
+            "requirement": {
+              "stage": "FAILED",
+              "next": null,
+              "clears": false,
+              "moveThatClears": null,
+              "blocked": "unknown-stage",
+              "text": "FAILED — not a stage this model knows"
+            },
+            "metricEvidence": null,
+            "retrievalKey": "project/INIT-010"
+          }
+        ],
+        "omittedCount": 0,
+        "boardRetrievalKeys": [
+          "project/INIT-001",
+          "project/INIT-002",
+          "project/INIT-007",
+          "project/INIT-010"
+        ],
+        "selectedInitiative": null,
+        "resourceBalanceAvailable": false,
+        "budgetAuthorityKey": "budget/authority",
+        "openChoice": "No selected initiative; a reasoned no-op or a grounded opportunity is available."
+      },
+      "response": {
+        "petitionWindow": "Complaint display C114–C116; condition counter C116 only.",
+        "complaints": 1,
+        "participation": 4,
+        "mediaOutcomeAvailable": false,
+        "committedResponseAvailable": false,
+        "committedResponse": [],
+        "note": "Response counts require saved experience and reaction receipts, and are not a representative poll. Only published receipts appear as coverage."
+      },
+      "authorizedActions": {
+        "categoriesAvailable": true,
+        "categoryKeys": [
+          "health",
+          "transit",
+          "education",
+          "economic",
+          "workforce",
+          "safety",
+          "sports",
+          "environment"
+        ],
+        "detailKey": "budget/authority",
+        "note": "Move validation and later execution decide authority. An accepted request is not an applied outcome."
+      }
+    }
+  },
+  "_briefEvidence": {
+    "event": {
+      "EV-world-e12d3bec14fb0f37": {
+        "eventId": "EV-world-e12d3bec14fb0f37",
+        "sourceRef": "output/world_summary_c116.md:398",
+        "sourceRevision": "1f060dbbba436be7c8254ea3c3adbeb330bfea772b192c1630809cdf95be8cd3",
+        "occurredCycle": 116,
+        "status": "occurred",
+        "observedAt": "2026-11-16T00:58:10.580Z",
+        "category": "world-faith",
+        "significance": "local",
+        "hoods": [
+          "West Oakland"
+        ],
+        "citywideRelevance": false,
+        "entityIds": [],
+        "facts": [
+          "New Covenant Pentecostal Assembly: seniors lunch program marks milestone"
+        ],
+        "aliases": []
+      }
+    },
+    "district": {
+      "D1": {
+        "available": true,
+        "district": "D1",
+        "neighborhoods": [
+          {
+            "hood": "West Oakland",
+            "available": true,
+            "measured": {
+              "Sentiment": {
+                "value": "0.39",
+                "previous": "0.31",
+                "change": 0.08000000000000002
+              },
+              "CrimeIndex": {
+                "value": "0.6",
+                "previous": "0.61",
+                "change": -0.010000000000000009
+              },
+              "RetailVitality": {
+                "value": "14.36",
+                "previous": "13.65",
+                "change": 0.7099999999999991
+              },
+              "HousingPressure": {
+                "value": "5.5",
+                "previous": "4.5",
+                "change": 1
+              },
+              "NeighborhoodTrajectory": {
+                "value": "growth",
+                "previous": "growth",
+                "change": null
+              },
+              "TrajectoryMomentum": {
+                "value": "10",
+                "previous": "9",
+                "change": 1
+              }
+            },
+            "sourceRef": "engine_audit snapshots.Neighborhood_Map"
+          },
+          {
+            "hood": "Brooklyn",
+            "available": true,
+            "measured": {
+              "Sentiment": {
+                "value": "-0.04",
+                "previous": "-0.11",
+                "change": 0.07
+              },
+              "CrimeIndex": {
+                "value": "0.64",
+                "previous": "0.62",
+                "change": 0.020000000000000018
+              },
+              "RetailVitality": {
+                "value": "7.31",
+                "previous": "6.22",
+                "change": 1.0899999999999999
+              },
+              "HousingPressure": {
+                "value": "0",
+                "previous": "0",
+                "change": 0
+              },
+              "NeighborhoodTrajectory": {
+                "value": "decay",
+                "previous": "decay",
+                "change": null
+              },
+              "TrajectoryMomentum": {
+                "value": "0",
+                "previous": "0",
+                "change": 0
+              }
+            },
+            "sourceRef": "engine_audit snapshots.Neighborhood_Map"
+          }
+        ],
+        "previousCycleAvailable": true
+      }
+    },
+    "project": {
+      "INIT-001": {
+        "id": "INIT-001",
+        "name": "West Oakland Stabilization Fund",
+        "domain": "economic",
+        "phase": "disbursement-active",
+        "status": "passed",
+        "nextActionCycle": 117,
+        "voteCycle": 78,
+        "stage": "Standing",
+        "cyclesSinceStageChange": 8,
+        "lastStageChangeCycle": 108,
+        "sponsored": false,
+        "hoods": [
+          "West Oakland"
+        ],
+        "needsNext": "Standing — no delivering gate exists for this domain yet",
+        "budget": "budget $20,600,000 left, renewable",
+        "requirement": {
+          "stage": "Standing",
+          "next": null,
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": "no-delivering-gate",
+          "text": "Standing — no delivering gate exists for this domain yet"
+        },
+        "metricEvidence": null
+      },
+      "INIT-002": {
+        "id": "INIT-002",
+        "name": "Oakland Alternative Response Initiative",
+        "domain": "safety",
+        "phase": "dispatch-live",
+        "status": "passed",
+        "nextActionCycle": 117,
+        "voteCycle": 82,
+        "stage": "Standing",
+        "cyclesSinceStageChange": 8,
+        "lastStageChangeCycle": 108,
+        "sponsored": false,
+        "hoods": [
+          "West Oakland",
+          "Fruitvale",
+          "East Oakland"
+        ],
+        "needsNext": "Standing — no delivering gate exists for this domain yet",
+        "budget": "budget $10,817,307.66 left, renewable",
+        "requirement": {
+          "stage": "Standing",
+          "next": null,
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": "no-delivering-gate",
+          "text": "Standing — no delivering gate exists for this domain yet"
+        },
+        "metricEvidence": null
+      },
+      "INIT-007": {
+        "id": "INIT-007",
+        "name": "Oakland Youth Apprenticeship Pipeline",
+        "domain": "workforce",
+        "phase": "stalled",
+        "status": "passed",
+        "nextActionCycle": 117,
+        "voteCycle": null,
+        "stage": null,
+        "cyclesSinceStageChange": null,
+        "lastStageChangeCycle": null,
+        "sponsored": false,
+        "hoods": [
+          "West Oakland",
+          "East Oakland",
+          "Fruitvale"
+        ],
+        "needsNext": "stalled — one work move revives it",
+        "budget": "budget $12,500,000 left",
+        "requirement": null,
+        "metricEvidence": null
+      },
+      "INIT-010": {
+        "id": "INIT-010",
+        "name": "West Oakland Tenant Defense Fund",
+        "domain": "economic",
+        "phase": "vote-scheduled",
+        "status": "failed",
+        "nextActionCycle": null,
+        "voteCycle": 112,
+        "stage": "FAILED",
+        "cyclesSinceStageChange": 3,
+        "lastStageChangeCycle": 113,
+        "sponsored": true,
+        "hoods": [
+          "West Oakland"
+        ],
+        "needsNext": "FAILED — not a stage this model knows",
+        "budget": "budget $4,200,000 left",
+        "requirement": {
+          "stage": "FAILED",
+          "next": null,
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": "unknown-stage",
+          "text": "FAILED — not a stage this model knows"
+        },
+        "metricEvidence": null
+      }
+    },
+    "budget": {
+      "authority": {
+        "officeId": "COUNCIL-D1",
+        "district": "D1",
+        "categories": [
+          {
+            "key": "health",
+            "label": "clinics, care",
+            "band": "$5M-$100M",
+            "canDeliver": true
+          },
+          {
+            "key": "transit",
+            "label": "stations, lines",
+            "band": "$20M-$500M",
+            "canDeliver": true
+          },
+          {
+            "key": "education",
+            "label": "schools, youth learning",
+            "band": "$1M-$50M",
+            "canDeliver": true
+          },
+          {
+            "key": "economic",
+            "label": "business, local economy",
+            "band": "$2M-$50M",
+            "canDeliver": false
+          },
+          {
+            "key": "workforce",
+            "label": "jobs, training",
+            "band": "$1M-$30M",
+            "canDeliver": false
+          },
+          {
+            "key": "safety",
+            "label": "public safety, response",
+            "band": "$2M-$30M",
+            "canDeliver": false
+          },
+          {
+            "key": "sports",
+            "label": "stadiums, recreation",
+            "band": "$10M-$500M",
+            "canDeliver": false
+          },
+          {
+            "key": "environment",
+            "label": "parks, air, water",
+            "band": "$1M-$30M",
+            "canDeliver": false
+          }
+        ],
+        "resourceBalance": null,
+        "resourceBalanceAvailable": false,
+        "note": "Category bands are filing constraints. Spendable treasury balance requires typed current allocation evidence."
+      }
+    },
+    "prior": {
+      "MV-115-civic-office-council-d1-2026-11-11:answer:CONF-115-civic-office-council-d1": {
+        "moveId": "MV-115-civic-office-council-d1-2026-11-11:answer:CONF-115-civic-office-council-d1",
+        "cycle": 115,
+        "date": "2026-11-11",
+        "agentDir": "civic-office-council-d1",
+        "popid": "POP-00501",
+        "type": "answer",
+        "payload": {
+          "confrontationId": "CONF-115-civic-office-council-d1",
+          "text": "Director Vance — you asked this office for the Brooklyn service-audit baseline and the District 1 OARI evaluation, and for what we see behind Brooklyn's continuing negative sentiment. Here is what the record shows me and what it does not. Brooklyn reads -0.11 this cycle against a city at 0.020, down from -0.09; the crime index is 0.62 against a city 0.647; retail vitality is 6.22; housing pressure sits at zero; and the trajectory reading is decay with momentum at zero. What that tells me is a neighborhood that is not being pulled down by a single dramatic cause — it is flat, tired, and not recovering on its own. What it does not tell me is why, and I will not manufacture a reason to fill the gap. The service-audit baseline is not yet documented in anything I can cite, so I am not certifying a number I cannot show you. The D1 OARI evaluation is likewise incomplete on my side; the initiative is dispatch-live on my board with the next step due next cycle, and I will bring the evaluation when it is real rather than when it is convenient. In the meantime I am keeping the stabilization and tenant-defense money in motion so Brooklyn and West Oakland households are not held hostage to a missing file. If your department can supply the service records that would close the baseline, this office will take them and finish the audit with you.",
+          "directiveCycle": 115,
+          "confrontationSeat": "civic-office-council-d1"
+        },
+        "status": "pending",
+        "at": "2026-11-11T11:56:23.972Z"
+      },
+      "MV-114-civic-office-council-d1-2026-11-05": {
+        "moveId": "MV-114-civic-office-council-d1-2026-11-05",
+        "cycle": 114,
+        "date": "2026-11-05",
+        "agentDir": "civic-office-council-d1",
+        "popid": "POP-00501",
+        "type": "work",
+        "payload": {
+          "initiativeId": "INIT-010"
+        },
+        "status": "applied",
+        "at": "2026-11-09T07:27:17.415Z",
+        "closeCycle": 115,
+        "detail": "LastWorkCycle/LastWorkSeat written for INIT-010"
+      }
+    }
+  }
+}

@@ -1,0 +1,419 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-01076",
+    "name": "Nia Rook",
+    "role": "desk reporter",
+    "desk": "undocked-digest"
+  },
+  "task": {
+    "goal": "Cover the UNDOCKED week and its show history.",
+    "assignment": "UNDOCKED week: pilots who flew this cycle (Elijah Brown, Brooklyn Nguyen, P Slayer). Standings: Luis Taz leads the board — rank #1, 45.19 achievement points, 0 credits, 2 cycle(s) led, current streak 2. In the chair: Elijah Brown — Electrician; Brooklyn Nguyen — Community Programs Coordinator; P Slayer — Journalist, Fan Columnist - Sports.",
+    "approach": null,
+    "voice": null,
+    "writingMode": "SOURCE_BRIEF",
+    "reportingQuestion": "What did earlier approved UNDOCKED episodes record for the pilots in this week's assignment?"
+  },
+  "signal": {
+    "kind": "undocked-digest",
+    "hood": null,
+    "src": "undocked-week:weekly-c115",
+    "plan": {
+      "focus": "UNDOCKED pilots' performance in C115"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-01195",
+        "name": "Elijah Brown",
+        "profile": "Elijah Brown — UNDOCKED pilot",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00184",
+        "name": "Brooklyn Nguyen",
+        "profile": "Brooklyn Nguyen — UNDOCKED pilot",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00008",
+        "name": "P Slayer",
+        "profile": "P Slayer — UNDOCKED pilot",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-01195-f0101eb580",
+        "pop": "POP-01195",
+        "name": "Elijah Brown",
+        "quote": "I didn't really have a strategy on my two nights on UNDOCKED. I just flew and tried to make it through as many systems as I could until the time ran out. I ended up even on credits both nights, so that was good.",
+        "factIds": [
+          "F-8e0466f83471",
+          "F-eb27a415821d"
+        ],
+        "src": "packet.W2[POP-01195]"
+      },
+      {
+        "id": "Q-POP-00184-bc41e27b57",
+        "pop": "POP-00184",
+        "name": "Brooklyn Nguyen",
+        "quote": "To be honest, my mining efforts didn't really pay off in terms of credits. I came out even on both Tuesday and Friday nights. I mined some copper, iron, and sol alloy ore, but it didn't translate into any profit.",
+        "factIds": [
+          "F-3d44b1703f09",
+          "F-8978bd4574d4"
+        ],
+        "src": "packet.W2[POP-00184]"
+      },
+      {
+        "id": "Q-POP-00008-0feae2fee6",
+        "pop": "POP-00008",
+        "name": "P Slayer",
+        "quote": "To be honest, my route choices on UNDOCKED Wednesday night were pretty spontaneous. I was flying, reacting to what was around me. I got into a couple of fights, but that's just part of the show. I've been playing to climb the ranks, and sometimes that means taking risks.",
+        "factIds": [
+          "F-4b0f8572de45"
+        ],
+        "src": "packet.W2[POP-00008]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Nia Rook",
+        "text": "The role of route choice in determining outcomes",
+        "usable": false
+      },
+      {
+        "from": "Nia Rook",
+        "text": "The impact of mining on overall performance",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C115",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-bc84fc0b7718"
+    },
+    {
+      "t": "FACT",
+      "text": "UNDOCKED week-in-review c115",
+      "src": "undocked-week:weekly-c115",
+      "id": "F-4c341e271917"
+    },
+    {
+      "t": "FACT",
+      "text": "Elijah Brown's Monday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Timberline, Arcturus, Ross 154, Maplevale, Miaplacidus, Cervantes, Ridgecrest, Hatysa, Nembus, Kitalpha, Lacaille 8760, Kepler 442, Theemin and Hollowcrest; came out even on credits; flew until the show's time ran out.",
+      "src": "undocked-week:weekly-c115",
+      "id": "F-8e0466f83471"
+    },
+    {
+      "t": "FACT",
+      "text": "Elijah Brown's Thursday night on UNDOCKED: went through Last Light, Fang, Errai, Wezen, Brightfall, Birchwood, Pinecross, Aludra, Tejat, Gsc 0002, Torcular, Gsc 0043, Gsc 0045, Dabih, Rimegate, Veritate, Betelgeuse and Gsc 0037; came out even on credits; flew until the show's time ran out.",
+      "src": "undocked-week:weekly-c115",
+      "id": "F-eb27a415821d"
+    },
+    {
+      "t": "FACT",
+      "text": "Brooklyn Nguyen's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes, Ridgecrest and Nembus; mined 3 copper ore, 3 iron ore and 1 sol alloy ore; came out even on credits; flew until the show's time ran out.",
+      "src": "undocked-week:weekly-c115",
+      "id": "F-3d44b1703f09"
+    },
+    {
+      "t": "FACT",
+      "text": "Brooklyn Nguyen's Friday night on UNDOCKED: went through Sirius, Nova Terra, Furud, Acrux, Botein, Intercrus, Atlas, Cedarhold, Achernar, Ruchbah, Ironhollow, Gsc 0041, Shaula, Alnair, Wolf 1061, Gsc 0031, Gsc 0021 and Gliese 876; came out even on credits; flew until the show's time ran out.",
+      "src": "undocked-week:weekly-c115",
+      "id": "F-8978bd4574d4"
+    },
+    {
+      "t": "FACT",
+      "text": "P Slayer's Wednesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes and Nembus; mined 1 iron ore; got into 2 fights; came out even on credits; flew until the show's time ran out.",
+      "src": "undocked-week:weekly-c115",
+      "id": "F-4b0f8572de45"
+    },
+    {
+      "t": "FACT",
+      "text": "Elijah Brown — Electrician (ledger)",
+      "src": "undocked-week:weekly-c115",
+      "id": "F-065ad2c00196"
+    },
+    {
+      "t": "FACT",
+      "text": "Brooklyn Nguyen — Community Programs Coordinator (ledger)",
+      "src": "undocked-week:weekly-c115",
+      "id": "F-5f23a0bafd9f"
+    },
+    {
+      "t": "FACT",
+      "text": "P Slayer — Journalist, Fan Columnist - Sports (ledger)",
+      "src": "undocked-week:weekly-c115",
+      "id": "F-08817bf42f56"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C11, Spring, holiday=none",
+      "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+      "id": "F-82d77e9a4a71"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to a supplied source ref.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "nia-rook-undocked-weekly-digest-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Turn the week's UNDOCKED episodes into one leaderboard/digest naming every pilot who flew — not a single-episode recap. Standings-forward: rank, streaks, who's climbing, who's fading, what the whole cast looked like this week.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "third-person leaderboard recap — entertainment-beat energy, ranking-and-recap format",
+      "targetWords": "350-650",
+      "opening": "the week's cast and its consequence for the board"
+    },
+    "authorizedTexture": [
+      "an in-world bar, watch-party, break-room, bus, or sidewalk setting where the city watches or argues; a new named business goes on INTAKE BIZ",
+      "the reporter's own recap persona, approved show history, and who's-up-who's-down framing across the week's cast",
+      "unnamed audience argument and aspiration lines as city color, never as measured sentiment",
+      "metaphor and emotional inference grounded in a supplied typed fact from the week's feed or standings"
+    ],
+    "textureConditions": [
+      "a named person must resolve to a ledger citizen; a new in-world place or business is scene color, not a recorded show event",
+      "this week's episode facts come from the supplied typed feed; prior episode facts come from the approved undocked_history result — a blank CreditsDelta is unsettled, never zero and never invented",
+      "pilot speech only from the wake-2 packet interviews — no other quote source exists for this lane",
+      "standings/leaderboard facts (Rank, CyclesLed, CurrentStreak) come only from the supplied Standings block — never invented math",
+      "unnamed audience reaction stays rhetorical — it must not become a count, a poll, or a named person",
+      "every pilot named in the supplied week's roster should appear at least once, even briefly, so the article actually prints their name"
+    ],
+    "canonBlockers": [
+      "video game",
+      "videogame",
+      "simulation",
+      "engine",
+      "MCP",
+      "server",
+      "commander",
+      "tool",
+      "API",
+      "spacemolt-lib",
+      "openrouter",
+      "real-world calendar dates (YYYY-MM-DD)",
+      "captains_log",
+      "leaderboard math beyond the supplied Standings/pilot facts"
+    ]
+  },
+  "manifest": {
+    "id": "AM-709f7d702689",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-bc84fc0b7718",
+        "t": "FACT",
+        "text": "Current cycle: C115",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-4c341e271917",
+        "t": "FACT",
+        "text": "UNDOCKED week-in-review c115",
+        "src": "undocked-week:weekly-c115"
+      },
+      {
+        "id": "F-8e0466f83471",
+        "t": "FACT",
+        "text": "Elijah Brown's Monday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Timberline, Arcturus, Ross 154, Maplevale, Miaplacidus, Cervantes, Ridgecrest, Hatysa, Nembus, Kitalpha, Lacaille 8760, Kepler 442, Theemin and Hollowcrest; came out even on credits; flew until the show's time ran out.",
+        "src": "undocked-week:weekly-c115"
+      },
+      {
+        "id": "F-eb27a415821d",
+        "t": "FACT",
+        "text": "Elijah Brown's Thursday night on UNDOCKED: went through Last Light, Fang, Errai, Wezen, Brightfall, Birchwood, Pinecross, Aludra, Tejat, Gsc 0002, Torcular, Gsc 0043, Gsc 0045, Dabih, Rimegate, Veritate, Betelgeuse and Gsc 0037; came out even on credits; flew until the show's time ran out.",
+        "src": "undocked-week:weekly-c115"
+      },
+      {
+        "id": "F-3d44b1703f09",
+        "t": "FACT",
+        "text": "Brooklyn Nguyen's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes, Ridgecrest and Nembus; mined 3 copper ore, 3 iron ore and 1 sol alloy ore; came out even on credits; flew until the show's time ran out.",
+        "src": "undocked-week:weekly-c115"
+      },
+      {
+        "id": "F-8978bd4574d4",
+        "t": "FACT",
+        "text": "Brooklyn Nguyen's Friday night on UNDOCKED: went through Sirius, Nova Terra, Furud, Acrux, Botein, Intercrus, Atlas, Cedarhold, Achernar, Ruchbah, Ironhollow, Gsc 0041, Shaula, Alnair, Wolf 1061, Gsc 0031, Gsc 0021 and Gliese 876; came out even on credits; flew until the show's time ran out.",
+        "src": "undocked-week:weekly-c115"
+      },
+      {
+        "id": "F-4b0f8572de45",
+        "t": "FACT",
+        "text": "P Slayer's Wednesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes and Nembus; mined 1 iron ore; got into 2 fights; came out even on credits; flew until the show's time ran out.",
+        "src": "undocked-week:weekly-c115"
+      },
+      {
+        "id": "F-065ad2c00196",
+        "t": "FACT",
+        "text": "Elijah Brown — Electrician (ledger)",
+        "src": "undocked-week:weekly-c115"
+      },
+      {
+        "id": "F-5f23a0bafd9f",
+        "t": "FACT",
+        "text": "Brooklyn Nguyen — Community Programs Coordinator (ledger)",
+        "src": "undocked-week:weekly-c115"
+      },
+      {
+        "id": "F-08817bf42f56",
+        "t": "FACT",
+        "text": "P Slayer — Journalist, Fan Columnist - Sports (ledger)",
+        "src": "undocked-week:weekly-c115"
+      },
+      {
+        "id": "F-82d77e9a4a71",
+        "t": "FACT",
+        "text": "Calendar: Y3C11, Spring, holiday=none",
+        "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-01195-f0101eb580",
+        "speakerId": "POP-01195",
+        "speakerName": "Elijah Brown",
+        "text": "I didn't really have a strategy on my two nights on UNDOCKED. I just flew and tried to make it through as many systems as I could until the time ran out. I ended up even on credits both nights, so that was good.",
+        "factIds": [
+          "F-8e0466f83471",
+          "F-eb27a415821d"
+        ],
+        "src": "packet.W2[POP-01195]"
+      },
+      {
+        "id": "Q-POP-00184-bc41e27b57",
+        "speakerId": "POP-00184",
+        "speakerName": "Brooklyn Nguyen",
+        "text": "To be honest, my mining efforts didn't really pay off in terms of credits. I came out even on both Tuesday and Friday nights. I mined some copper, iron, and sol alloy ore, but it didn't translate into any profit.",
+        "factIds": [
+          "F-3d44b1703f09",
+          "F-8978bd4574d4"
+        ],
+        "src": "packet.W2[POP-00184]"
+      },
+      {
+        "id": "Q-POP-00008-0feae2fee6",
+        "speakerId": "POP-00008",
+        "speakerName": "P Slayer",
+        "text": "To be honest, my route choices on UNDOCKED Wednesday night were pretty spontaneous. I was flying, reacting to what was around me. I got into a couple of fights, but that's just part of the show. I've been playing to climb the ranks, and sometimes that means taking risks.",
+        "factIds": [
+          "F-4b0f8572de45"
+        ],
+        "src": "packet.W2[POP-00008]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-01195",
+        "name": "Elijah Brown",
+        "profile": "Elijah Brown — UNDOCKED pilot",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00184",
+        "name": "Brooklyn Nguyen",
+        "profile": "Brooklyn Nguyen — UNDOCKED pilot",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00008",
+        "name": "P Slayer",
+        "profile": "P Slayer — UNDOCKED pilot",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Nia Rook",
+        "text": "The role of route choice in determining outcomes",
+        "publishable": false
+      },
+      {
+        "from": "Nia Rook",
+        "text": "The impact of mining on overall performance",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "an in-world bar, watch-party, break-room, bus, or sidewalk setting where the city watches or argues; a new named business goes on INTAKE BIZ",
+      "the reporter's own recap persona, approved show history, and who's-up-who's-down framing across the week's cast",
+      "unnamed audience argument and aspiration lines as city color, never as measured sentiment",
+      "metaphor and emotional inference grounded in a supplied typed fact from the week's feed or standings"
+    ],
+    "textureConditions": [
+      "a named person must resolve to a ledger citizen; a new in-world place or business is scene color, not a recorded show event",
+      "this week's episode facts come from the supplied typed feed; prior episode facts come from the approved undocked_history result — a blank CreditsDelta is unsettled, never zero and never invented",
+      "pilot speech only from the wake-2 packet interviews — no other quote source exists for this lane",
+      "standings/leaderboard facts (Rank, CyclesLed, CurrentStreak) come only from the supplied Standings block — never invented math",
+      "unnamed audience reaction stays rhetorical — it must not become a count, a poll, or a named person",
+      "every pilot named in the supplied week's roster should appear at least once, even briefly, so the article actually prints their name"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

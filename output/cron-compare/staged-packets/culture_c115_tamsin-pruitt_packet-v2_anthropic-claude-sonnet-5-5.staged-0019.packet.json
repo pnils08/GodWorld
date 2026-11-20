@@ -1,0 +1,1011 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-01210",
+    "name": "Tamsin Pruitt",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "The lives of C115: 9 people — Harmony Gupta moved into a place of their own in Laurel, renting",
+    "approach": "Lives approach: this slice is the people something happened to this Cycle — a birth, a death in the house, a hospital stay, a retirement, a promotion; a household set up or a place of their own; a win or a loss on the book; the people a turn of the city reached and what it did to their day; and the smaller moments the record kept. Each person gets their own passage: the event, then the thread under it — the stay or strain that led there, the other lines the record kept for them, what the Tribune or this page already said of them, and what they did next if the record says. Read the thread in order and name where two lines of it do not agree; do not restate a ledger value as the story. The fact exactly right; never a trend, never a number first; the person, not the system the event belongs to. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent p",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "lives",
+      "hood": null,
+      "facts": [
+        "Harmony Gupta moved into a place of their own in Laurel, renting (C115)",
+        "Harmony Gupta — in their life, C114: checked the Civis Systems Field livestream just to see if the grass had been laid down yet",
+        "Harmony Gupta — in their life, C114: closed their eyes during the choir solo and actually felt the tension leave their shoulders",
+        "Harmony Gupta — in their life, C114: stayed cautious after hearing last night felt tense",
+        "Harmony Gupta — in their life, C115: waited at the Laurel Cleaners counter while someone hunted for the claim ticket",
+        "Christine Nakamura moved into a place of their own in Jack London, renting (C115)",
+        "Christine Nakamura — in their life, C114: saved the Tribune clipping with their neighborhood in it — the good one",
+        "Christine Nakamura — in their life, C114: drove the church van for the senior trip and listened to three hours of unfiltered neighborhood gossip near the waterfront",
+        "Christine Nakamura — in their life, C115: heard Downtown was packed last night",
+        "Christine Nakamura — the Tribune named them in a piece headlined Temescal's Ledger Is Growing. The Question Is Who It's Growing For. (Business, C113)",
+        "Christine Nakamura — the Tribune named them in a piece headlined AFTER THE BELL (Education, C88)",
+        "Christine Nakamura — the Tribune named them in a piece headlined THE FIRST WEEK (Education, C88)",
+        "Elijah Campbell — argued the bullpen order at the barbershop like it was city policy, D1 — one of 4 people the Cycle's city turn reached (West Oakland Stabilization Fund sitting (0, capped); Oakland Alternative Response Initiative sitting (0, capped); Oakland Youth…) (C115)",
+        "Elijah Campbell — in their life, C114: learned a fare's whole week from the back seat in under ten minutes",
+        "Elijah Campbell — in their life, C114: watched a Baylight shuttle and a city bus pull up side by side at the light and waved at both drivers near a quiet side street",
+        "Elijah Campbell — in their life, C115: walked a different street home just to see it",
+        "Elijah Campbell — in their life, C115: read the Tribune's front page twice — once for the news, once to see who was in it",
+        "Jem Steele — realized the week had passed without a single thing worth retelling, Rockridge — one of 4 people the Cycle's community turn reached (C115)",
+        "Jem Steele — in their life, C114: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+        "Jem Steele — in their life, C114: heard someone at the cafe complain about the Baylight District noise and bit their tongue",
+        "Enzo Walker — grabbed coffee from the cart outside the hospital before the morning rush hit, Lake Merritt — one of 4 people the Cycle's community turn reached (Enzo Walker — the city keeps saying the name: Tier 4 -> 3) (C115)",
+        "Enzo Walker — in their life, C114: walked past the bedroom that stays clean now and closed the door without going in",
+        "Enzo Walker — in their life, C114: drove the church van for the senior trip and listened to three hours of unfiltered neighborhood gossip",
+        "Enzo Walker — in their life, C115: wrangled the kids through the bedtime routine",
+        "Enzo Walker — in their life, C115: unpacked a box that had stayed sealed since the last move",
+        "Enzo Walker — the Tribune named them in a piece headlined The Board in the Trailer Says 9.5 Percent. Enzo Walker Is Counting Something Else. (Business Reporter, C114)",
+        "Enzo Walker — the Tribune named them in a piece headlined West Oakland’s new business money is moving faster than the block can absorb (Business, C109)",
+        "Enzo Walker — the Tribune named them in a piece headlined West Oakland Gets Safer as the Apprenticeship Bill It's Waiting On Heads to a Vote (Civic Affairs, C97)",
+        "Ingeborg Hallstrom — moved from Dimond to Downtown — moving up from Dimond, Downtown (C115 — what happened in their life, not words they said)",
+        "Ingeborg Hallstrom — in their life, C114: carried three boxes of canned goods from the pantry truck and felt it in their lower back",
+        "Ingeborg Hallstrom — in their life, C115: read the Tribune's front page twice — once for the news, once to see who was in it",
+        "Ingeborg Hallstrom — in their life, C115: handled responsibilities that didn't make the news",
+        "Ingeborg Hallstrom — in their life, C115: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+        "Priya Raghunathan — moved from Temescal to KONO — moving up from Temescal, KONO (C115 — what happened in their life, not words they said)",
+        "Priya Raghunathan — in their life, C114: felt unexpectedly nostalgic at the smell of rain on warm pavement near Temescal Alley",
+        "Priya Raghunathan — in their life, C114: Casino Town put the belt haul next to the A's and the window did not pretend they were different nights",
+        "Priya Raghunathan — in their life, C115: adjusted today's plans after last night's gridlock",
+        "Priya Raghunathan — in their life, C115: framed an old ticket stub that had finally earned its frame",
+        "Wanjiru Liu — walked across the stage at their commencement ceremony, Rockridge (C115 — what happened in their life, not words they said)",
+        "Wanjiru Liu — in their life, C115: pulled copper wire through a Baylight sub-basement until their shoulders burned",
+        "Elias Varek — Civis Systems returned $488443 to the line this week, West Oakland (C115 — what happened in their life, not words they said)",
+        "Elias Varek — in their life, C114: noticed the new streetlights went in before anyone had to ask",
+        "Elias Varek — in their life, C114: heard the freight trains clanking near the Port and timed their breathing to the rhythm",
+        "Elias Varek — in their life, C115: headed over to The Aitken Line Founding Celebration in Jack London last night",
+        "Elias Varek — in their life, C115: Varek Systems returned $34932 to the line this week",
+        "Elias Varek — Lives already wrote this person: a moment the record kept (C114)",
+        "Elias Varek — the Tribune named them in a piece headlined The Board in the Trailer Says 9.5 Percent. Enzo Walker Is Counting Something Else. (Business Reporter, C114)",
+        "Elias Varek — the Tribune named them in a piece headlined The Lives Page, Cycle 114 (Culture, C114)",
+        "Elias Varek — the Tribune named them in a piece headlined Oaks' First Win Offers a Useful Opening Read (Sports, C112)"
+      ],
+      "priorCycle": null,
+      "note": null,
+      "engineHooks": [
+        "Household dissolved in Lake Merritt due to economic hardship (observational analysis)",
+        "A family bought their home in Chinatown (observational analysis)",
+        "The Cortez household (2) moved from Uptown to West Oakland — moving up from Uptown (observational analysis)",
+        "Xavier Ramington moved from Temescal to West Oakland — moving up from Temescal (desk rotation)"
+      ],
+      "roomIsYours": "the plain respect, what the event meant in that house or on that block, the detail the family would have picked — from the lines below, never invented",
+      "pageVoices": [
+        "Elias Varek, own page (after work, C115): “Civis is flat. $60.3 against $60.2 — that’s not a plateau, that’s a wall. I built the instrument that this city reads itself with, and it’s stopped telling me anything new. Then there’s the signal in West Oakland that still hasn’t answered …”"
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-lives",
+    "hood": null,
+    "src": "output/beats/Lived_Events.jsonl @C115 batch 654abb",
+    "plan": {
+      "focus": "Lives of C115: 9 people"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00844",
+        "name": "Harmony Gupta",
+        "profile": "Harmony Gupta — Plumber — Laurel",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-01108",
+        "name": "Christine Nakamura",
+        "profile": "Christine Nakamura — Co-Founder, Gridiron Analytics — Jack London",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00969",
+        "name": "Elijah Campbell",
+        "profile": "Elijah Campbell — Taxi Driver — Adams Point",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00544",
+        "name": "Jem Steele",
+        "profile": "Jem Steele — Athlete — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00844-7bce96fac4",
+        "pop": "POP-00844",
+        "name": "Harmony Gupta",
+        "quote": "This cycle has been pretty normal for me. I waited at the Laurel Cleaners counter while someone hunted for the claim ticket. Other than that, it's been business as usual.",
+        "factIds": [
+          "F-40eb422aa41e",
+          "F-82d77e9a4a71"
+        ],
+        "src": "packet.W2[POP-00844]"
+      },
+      {
+        "id": "Q-POP-01108-4e4a2d7e1b",
+        "pop": "POP-01108",
+        "name": "Christine Nakamura",
+        "quote": "I've been settling into my new place in Jack London. I heard Downtown was packed last night, which is a bit of a change from my usual quiet evenings. I did drive the church van for a senior trip recently and got to hear some neighborhood gossip near the waterfront.",
+        "factIds": [
+          "F-366fd5f4e7be",
+          "F-05330002334e",
+          "F-1a82232d1823"
+        ],
+        "src": "packet.W2[POP-01108]"
+      },
+      {
+        "id": "Q-POP-00969-931c2862b6",
+        "pop": "POP-00969",
+        "name": "Elijah Campbell",
+        "quote": "I've been doing a lot of driving around Oakland lately. This cycle, I decided to mix things up a bit and walked a different street home just to see what it was like. It's funny, I also argued with some guys at the barbershop about the A's bullpen order. I guess that's just part of being a fan, right?",
+        "factIds": [
+          "F-fe068d9d6d9c",
+          "F-367e9b8f4875"
+        ],
+        "src": "packet.W2[POP-00969]"
+      },
+      {
+        "id": "Q-POP-00544-9f4c800d17",
+        "pop": "POP-00544",
+        "name": "Jem Steele",
+        "quote": "This week felt pretty uneventful for me. I didn't really do anything out of the ordinary.",
+        "factIds": [
+          "F-452481d6cfd7"
+        ],
+        "src": "packet.W2[POP-00544]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Harmony Gupta's experience moving into a new place could be an interesting story to explore further.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C115",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-bc84fc0b7718"
+    },
+    {
+      "t": "FACT",
+      "text": "Harmony Gupta moved into a place of their own in Laurel, renting",
+      "src": "output/beats/Lived_Events.jsonl @C115 batch 654abb",
+      "id": "F-5c2f72693f7b"
+    },
+    {
+      "t": "FACT",
+      "text": "Harmony Gupta first. The event is the lead; one true detail; what came next only if the record says.",
+      "src": "output/beats/Lived_Events.jsonl @C115 batch 654abb",
+      "id": "F-abdefbf6f677"
+    },
+    {
+      "t": "FACT",
+      "text": "Harmony Gupta moved into a place of their own in Laurel, renting (C115)",
+      "src": "output/beats/Household_Ledger.jsonl @C115",
+      "id": "F-acf32ecda127"
+    },
+    {
+      "t": "FACT",
+      "text": "Harmony Gupta — in their life, C114: checked the Civis Systems Field livestream just to see if the grass had been laid down yet",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-3e6a0962f6b6"
+    },
+    {
+      "t": "FACT",
+      "text": "Harmony Gupta — in their life, C114: closed their eyes during the choir solo and actually felt the tension leave their shoulders",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-5ce5f5c7e6d5"
+    },
+    {
+      "t": "FACT",
+      "text": "Harmony Gupta — in their life, C114: stayed cautious after hearing last night felt tense",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-5899fc6d42d9"
+    },
+    {
+      "t": "FACT",
+      "text": "Harmony Gupta — in their life, C115: waited at the Laurel Cleaners counter while someone hunted for the claim ticket",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-40eb422aa41e"
+    },
+    {
+      "t": "FACT",
+      "text": "Christine Nakamura moved into a place of their own in Jack London, renting (C115)",
+      "src": "output/beats/Household_Ledger.jsonl @C115",
+      "id": "F-366fd5f4e7be"
+    },
+    {
+      "t": "FACT",
+      "text": "Christine Nakamura — in their life, C114: saved the Tribune clipping with their neighborhood in it — the good one",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-ee30bb4e2d77"
+    },
+    {
+      "t": "FACT",
+      "text": "Christine Nakamura — in their life, C114: drove the church van for the senior trip and listened to three hours of unfiltered neighborhood gossip near the waterfront",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-1a82232d1823"
+    },
+    {
+      "t": "FACT",
+      "text": "Christine Nakamura — in their life, C115: heard Downtown was packed last night",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-05330002334e"
+    },
+    {
+      "t": "FACT",
+      "text": "Christine Nakamura — the Tribune named them in a piece headlined Temescal's Ledger Is Growing. The Question Is Who It's Growing For. (Business, C113)",
+      "src": "archive/ARTICLE_INDEX.jsonl 87e7fa2ba6bb3437",
+      "id": "F-f7d8f5b10813"
+    },
+    {
+      "t": "FACT",
+      "text": "Christine Nakamura — the Tribune named them in a piece headlined AFTER THE BELL (Education, C88)",
+      "src": "archive/ARTICLE_INDEX.jsonl ad118899af938716",
+      "id": "F-2d4d6df14b9b"
+    },
+    {
+      "t": "FACT",
+      "text": "Christine Nakamura — the Tribune named them in a piece headlined THE FIRST WEEK (Education, C88)",
+      "src": "archive/ARTICLE_INDEX.jsonl 6039803b3e59a84b",
+      "id": "F-98fdb02f58e7"
+    },
+    {
+      "t": "FACT",
+      "text": "Elijah Campbell — argued the bullpen order at the barbershop like it was city policy, D1 — one of 4 people the Cycle's city turn reached (West Oakland Stabilization Fund sitting (0, capped); Oakland Alternative Response Initiative sitting (0, capped); Oakland Youth…) (C115)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C115",
+      "id": "F-367e9b8f4875"
+    },
+    {
+      "t": "FACT",
+      "text": "Elijah Campbell — in their life, C114: learned a fare's whole week from the back seat in under ten minutes",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-31b777be9739"
+    },
+    {
+      "t": "FACT",
+      "text": "Elijah Campbell — in their life, C114: watched a Baylight shuttle and a city bus pull up side by side at the light and waved at both drivers near a quiet side street",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-9187fb9b30d2"
+    },
+    {
+      "t": "FACT",
+      "text": "Elijah Campbell — in their life, C115: walked a different street home just to see it",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-fe068d9d6d9c"
+    },
+    {
+      "t": "FACT",
+      "text": "Elijah Campbell — in their life, C115: read the Tribune's front page twice — once for the news, once to see who was in it",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-69bbb18be777"
+    },
+    {
+      "t": "FACT",
+      "text": "Jem Steele — realized the week had passed without a single thing worth retelling, Rockridge — one of 4 people the Cycle's community turn reached (C115)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C115",
+      "id": "F-452481d6cfd7"
+    },
+    {
+      "t": "FACT",
+      "text": "Jem Steele — in their life, C114: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-80dba92a6c66"
+    },
+    {
+      "t": "FACT",
+      "text": "Jem Steele — in their life, C114: heard someone at the cafe complain about the Baylight District noise and bit their tongue",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-8712274ecbba"
+    },
+    {
+      "t": "FACT",
+      "text": "Enzo Walker — grabbed coffee from the cart outside the hospital before the morning rush hit, Lake Merritt — one of 4 people the Cycle's community turn reached (Enzo Walker — the city keeps saying the name: Tier 4 -> 3) (C115)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C115",
+      "id": "F-293f9647ada2"
+    },
+    {
+      "t": "FACT",
+      "text": "Enzo Walker — in their life, C114: walked past the bedroom that stays clean now and closed the door without going in",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-289e8f70e2b5"
+    },
+    {
+      "t": "FACT",
+      "text": "Enzo Walker — in their life, C114: drove the church van for the senior trip and listened to three hours of unfiltered neighborhood gossip",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-fca4da297568"
+    },
+    {
+      "t": "FACT",
+      "text": "Enzo Walker — in their life, C115: wrangled the kids through the bedtime routine",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-937e6372a7a8"
+    },
+    {
+      "t": "FACT",
+      "text": "Enzo Walker — in their life, C115: unpacked a box that had stayed sealed since the last move",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-795f5187c387"
+    },
+    {
+      "t": "FACT",
+      "text": "Enzo Walker — the Tribune named them in a piece headlined The Board in the Trailer Says 9.5 Percent. Enzo Walker Is Counting Something Else. (Business Reporter, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl 384044afdbad94f5",
+      "id": "F-037032eeebe5"
+    },
+    {
+      "t": "FACT",
+      "text": "Enzo Walker — the Tribune named them in a piece headlined West Oakland’s new business money is moving faster than the block can absorb (Business, C109)",
+      "src": "archive/ARTICLE_INDEX.jsonl a103ffd5a1f6a103",
+      "id": "F-549028ed98c7"
+    },
+    {
+      "t": "FACT",
+      "text": "Enzo Walker — the Tribune named them in a piece headlined West Oakland Gets Safer as the Apprenticeship Bill It's Waiting On Heads to a Vote (Civic Affairs, C97)",
+      "src": "archive/ARTICLE_INDEX.jsonl 1fb507378ab81fb5",
+      "id": "F-56295ce8c7ea"
+    },
+    {
+      "t": "FACT",
+      "text": "Ingeborg Hallstrom — moved from Dimond to Downtown — moving up from Dimond, Downtown (C115 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-9f321fee9d0a"
+    },
+    {
+      "t": "FACT",
+      "text": "Ingeborg Hallstrom — in their life, C114: carried three boxes of canned goods from the pantry truck and felt it in their lower back",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-58faed370feb"
+    },
+    {
+      "t": "FACT",
+      "text": "Ingeborg Hallstrom — in their life, C115: read the Tribune's front page twice — once for the news, once to see who was in it",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-9a99ca88589a"
+    },
+    {
+      "t": "FACT",
+      "text": "Ingeborg Hallstrom — in their life, C115: handled responsibilities that didn't make the news",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-ff912b9869e3"
+    },
+    {
+      "t": "FACT",
+      "text": "Ingeborg Hallstrom — in their life, C115: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-d43a13090368"
+    },
+    {
+      "t": "FACT",
+      "text": "Priya Raghunathan — moved from Temescal to KONO — moving up from Temescal, KONO (C115 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-e455dd3daebf"
+    },
+    {
+      "t": "FACT",
+      "text": "Priya Raghunathan — in their life, C114: felt unexpectedly nostalgic at the smell of rain on warm pavement near Temescal Alley",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-045c05c5d20d"
+    },
+    {
+      "t": "FACT",
+      "text": "Priya Raghunathan — in their life, C114: Casino Town put the belt haul next to the A's and the window did not pretend they were different nights",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-70f4e5f97326"
+    },
+    {
+      "t": "FACT",
+      "text": "Priya Raghunathan — in their life, C115: adjusted today's plans after last night's gridlock",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-e7be0900736d"
+    },
+    {
+      "t": "FACT",
+      "text": "Priya Raghunathan — in their life, C115: framed an old ticket stub that had finally earned its frame",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-61ae1379ebee"
+    },
+    {
+      "t": "FACT",
+      "text": "Wanjiru Liu — walked across the stage at their commencement ceremony, Rockridge (C115 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-41f2e5795854"
+    },
+    {
+      "t": "FACT",
+      "text": "Wanjiru Liu — in their life, C115: pulled copper wire through a Baylight sub-basement until their shoulders burned",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-0eee2b171933"
+    },
+    {
+      "t": "FACT",
+      "text": "Elias Varek — Civis Systems returned $488443 to the line this week, West Oakland (C115 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-11c83489b87d"
+    },
+    {
+      "t": "FACT",
+      "text": "Elias Varek — in their life, C114: noticed the new streetlights went in before anyone had to ask",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-c9ed1a09b9b0"
+    },
+    {
+      "t": "FACT",
+      "text": "Elias Varek — in their life, C114: heard the freight trains clanking near the Port and timed their breathing to the rhythm",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "id": "F-0a18f4548891"
+    },
+    {
+      "t": "FACT",
+      "text": "Elias Varek — in their life, C115: headed over to The Aitken Line Founding Celebration in Jack London last night",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-0fb939bb35e4"
+    },
+    {
+      "t": "FACT",
+      "text": "Elias Varek — in their life, C115: Varek Systems returned $34932 to the line this week",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-2afbf66cd72b"
+    },
+    {
+      "t": "FACT",
+      "text": "Elias Varek — Lives already wrote this person: a moment the record kept (C114)",
+      "src": "output/cron-compare/lives_covered.json",
+      "id": "F-65df14e48ae8"
+    },
+    {
+      "t": "FACT",
+      "text": "Elias Varek — the Tribune named them in a piece headlined The Board in the Trailer Says 9.5 Percent. Enzo Walker Is Counting Something Else. (Business Reporter, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl 384044afdbad94f5",
+      "id": "F-9f71e8f7811e"
+    },
+    {
+      "t": "FACT",
+      "text": "Elias Varek — the Tribune named them in a piece headlined The Lives Page, Cycle 114 (Culture, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl 9746e4e747ffdd0a",
+      "id": "F-b66573ef89b1"
+    },
+    {
+      "t": "FACT",
+      "text": "Elias Varek — the Tribune named them in a piece headlined Oaks' First Win Offers a Useful Opening Read (Sports, C112)",
+      "src": "archive/ARTICLE_INDEX.jsonl 5df1d92b058d51c6",
+      "id": "F-fae86de6a8ad"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C11, Spring, holiday=none",
+      "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+      "id": "F-82d77e9a4a71"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "tamsin-lives-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Put the cycle's person events in the paper as news, one person at a time — a birth, a death, a hospital stay, a retirement, a promotion, a household set up or a place of one's own, a win or a loss on the book, what a turn of the city did to someone's day, and the smaller moments the record kept. The event is the lead, the person is named as the slice names them, and what came next appears only when a later record holds it. A stake or a payout is the person's own fact, not a statistic. The page is the city's real calendar; every person on it is one the record holds.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "plain respect — a neighborhood weekly's births-and-obituaries hand, unhurried, exact",
+      "targetWords": "450-1200",
+      "opening": "the heaviest event on the slice, stated as it happened to the named person"
+    },
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "canonBlockers": [
+      "any person, event, quote, venue, employer or family member not on the slice",
+      "a paraphrased or invented quote",
+      "a cause, diagnosis or outcome the record does not state",
+      "a statistic, rate or trend claim — the page is people, not numbers",
+      "intake bookkeeping rows (Emerged into Tier, Added to Simulation_Ledger, Updated to Tier) written as life events",
+      "raw engine labels or decimals printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-6aae0d9dd397",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-bc84fc0b7718",
+        "t": "FACT",
+        "text": "Current cycle: C115",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-5c2f72693f7b",
+        "t": "FACT",
+        "text": "Harmony Gupta moved into a place of their own in Laurel, renting",
+        "src": "output/beats/Lived_Events.jsonl @C115 batch 654abb"
+      },
+      {
+        "id": "F-abdefbf6f677",
+        "t": "FACT",
+        "text": "Harmony Gupta first. The event is the lead; one true detail; what came next only if the record says.",
+        "src": "output/beats/Lived_Events.jsonl @C115 batch 654abb"
+      },
+      {
+        "id": "F-acf32ecda127",
+        "t": "FACT",
+        "text": "Harmony Gupta moved into a place of their own in Laurel, renting (C115)",
+        "src": "output/beats/Household_Ledger.jsonl @C115"
+      },
+      {
+        "id": "F-3e6a0962f6b6",
+        "t": "FACT",
+        "text": "Harmony Gupta — in their life, C114: checked the Civis Systems Field livestream just to see if the grass had been laid down yet",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-5ce5f5c7e6d5",
+        "t": "FACT",
+        "text": "Harmony Gupta — in their life, C114: closed their eyes during the choir solo and actually felt the tension leave their shoulders",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-5899fc6d42d9",
+        "t": "FACT",
+        "text": "Harmony Gupta — in their life, C114: stayed cautious after hearing last night felt tense",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-40eb422aa41e",
+        "t": "FACT",
+        "text": "Harmony Gupta — in their life, C115: waited at the Laurel Cleaners counter while someone hunted for the claim ticket",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-366fd5f4e7be",
+        "t": "FACT",
+        "text": "Christine Nakamura moved into a place of their own in Jack London, renting (C115)",
+        "src": "output/beats/Household_Ledger.jsonl @C115"
+      },
+      {
+        "id": "F-ee30bb4e2d77",
+        "t": "FACT",
+        "text": "Christine Nakamura — in their life, C114: saved the Tribune clipping with their neighborhood in it — the good one",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-1a82232d1823",
+        "t": "FACT",
+        "text": "Christine Nakamura — in their life, C114: drove the church van for the senior trip and listened to three hours of unfiltered neighborhood gossip near the waterfront",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-05330002334e",
+        "t": "FACT",
+        "text": "Christine Nakamura — in their life, C115: heard Downtown was packed last night",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-f7d8f5b10813",
+        "t": "FACT",
+        "text": "Christine Nakamura — the Tribune named them in a piece headlined Temescal's Ledger Is Growing. The Question Is Who It's Growing For. (Business, C113)",
+        "src": "archive/ARTICLE_INDEX.jsonl 87e7fa2ba6bb3437"
+      },
+      {
+        "id": "F-2d4d6df14b9b",
+        "t": "FACT",
+        "text": "Christine Nakamura — the Tribune named them in a piece headlined AFTER THE BELL (Education, C88)",
+        "src": "archive/ARTICLE_INDEX.jsonl ad118899af938716"
+      },
+      {
+        "id": "F-98fdb02f58e7",
+        "t": "FACT",
+        "text": "Christine Nakamura — the Tribune named them in a piece headlined THE FIRST WEEK (Education, C88)",
+        "src": "archive/ARTICLE_INDEX.jsonl 6039803b3e59a84b"
+      },
+      {
+        "id": "F-367e9b8f4875",
+        "t": "FACT",
+        "text": "Elijah Campbell — argued the bullpen order at the barbershop like it was city policy, D1 — one of 4 people the Cycle's city turn reached (West Oakland Stabilization Fund sitting (0, capped); Oakland Alternative Response Initiative sitting (0, capped); Oakland Youth…) (C115)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C115"
+      },
+      {
+        "id": "F-31b777be9739",
+        "t": "FACT",
+        "text": "Elijah Campbell — in their life, C114: learned a fare's whole week from the back seat in under ten minutes",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-9187fb9b30d2",
+        "t": "FACT",
+        "text": "Elijah Campbell — in their life, C114: watched a Baylight shuttle and a city bus pull up side by side at the light and waved at both drivers near a quiet side street",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-fe068d9d6d9c",
+        "t": "FACT",
+        "text": "Elijah Campbell — in their life, C115: walked a different street home just to see it",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-69bbb18be777",
+        "t": "FACT",
+        "text": "Elijah Campbell — in their life, C115: read the Tribune's front page twice — once for the news, once to see who was in it",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-452481d6cfd7",
+        "t": "FACT",
+        "text": "Jem Steele — realized the week had passed without a single thing worth retelling, Rockridge — one of 4 people the Cycle's community turn reached (C115)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C115"
+      },
+      {
+        "id": "F-80dba92a6c66",
+        "t": "FACT",
+        "text": "Jem Steele — in their life, C114: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-8712274ecbba",
+        "t": "FACT",
+        "text": "Jem Steele — in their life, C114: heard someone at the cafe complain about the Baylight District noise and bit their tongue",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-293f9647ada2",
+        "t": "FACT",
+        "text": "Enzo Walker — grabbed coffee from the cart outside the hospital before the morning rush hit, Lake Merritt — one of 4 people the Cycle's community turn reached (Enzo Walker — the city keeps saying the name: Tier 4 -> 3) (C115)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C115"
+      },
+      {
+        "id": "F-289e8f70e2b5",
+        "t": "FACT",
+        "text": "Enzo Walker — in their life, C114: walked past the bedroom that stays clean now and closed the door without going in",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-fca4da297568",
+        "t": "FACT",
+        "text": "Enzo Walker — in their life, C114: drove the church van for the senior trip and listened to three hours of unfiltered neighborhood gossip",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-937e6372a7a8",
+        "t": "FACT",
+        "text": "Enzo Walker — in their life, C115: wrangled the kids through the bedtime routine",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-795f5187c387",
+        "t": "FACT",
+        "text": "Enzo Walker — in their life, C115: unpacked a box that had stayed sealed since the last move",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-037032eeebe5",
+        "t": "FACT",
+        "text": "Enzo Walker — the Tribune named them in a piece headlined The Board in the Trailer Says 9.5 Percent. Enzo Walker Is Counting Something Else. (Business Reporter, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl 384044afdbad94f5"
+      },
+      {
+        "id": "F-549028ed98c7",
+        "t": "FACT",
+        "text": "Enzo Walker — the Tribune named them in a piece headlined West Oakland’s new business money is moving faster than the block can absorb (Business, C109)",
+        "src": "archive/ARTICLE_INDEX.jsonl a103ffd5a1f6a103"
+      },
+      {
+        "id": "F-56295ce8c7ea",
+        "t": "FACT",
+        "text": "Enzo Walker — the Tribune named them in a piece headlined West Oakland Gets Safer as the Apprenticeship Bill It's Waiting On Heads to a Vote (Civic Affairs, C97)",
+        "src": "archive/ARTICLE_INDEX.jsonl 1fb507378ab81fb5"
+      },
+      {
+        "id": "F-9f321fee9d0a",
+        "t": "FACT",
+        "text": "Ingeborg Hallstrom — moved from Dimond to Downtown — moving up from Dimond, Downtown (C115 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-58faed370feb",
+        "t": "FACT",
+        "text": "Ingeborg Hallstrom — in their life, C114: carried three boxes of canned goods from the pantry truck and felt it in their lower back",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-9a99ca88589a",
+        "t": "FACT",
+        "text": "Ingeborg Hallstrom — in their life, C115: read the Tribune's front page twice — once for the news, once to see who was in it",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-ff912b9869e3",
+        "t": "FACT",
+        "text": "Ingeborg Hallstrom — in their life, C115: handled responsibilities that didn't make the news",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-d43a13090368",
+        "t": "FACT",
+        "text": "Ingeborg Hallstrom — in their life, C115: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-e455dd3daebf",
+        "t": "FACT",
+        "text": "Priya Raghunathan — moved from Temescal to KONO — moving up from Temescal, KONO (C115 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-045c05c5d20d",
+        "t": "FACT",
+        "text": "Priya Raghunathan — in their life, C114: felt unexpectedly nostalgic at the smell of rain on warm pavement near Temescal Alley",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-70f4e5f97326",
+        "t": "FACT",
+        "text": "Priya Raghunathan — in their life, C114: Casino Town put the belt haul next to the A's and the window did not pretend they were different nights",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-e7be0900736d",
+        "t": "FACT",
+        "text": "Priya Raghunathan — in their life, C115: adjusted today's plans after last night's gridlock",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-61ae1379ebee",
+        "t": "FACT",
+        "text": "Priya Raghunathan — in their life, C115: framed an old ticket stub that had finally earned its frame",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-41f2e5795854",
+        "t": "FACT",
+        "text": "Wanjiru Liu — walked across the stage at their commencement ceremony, Rockridge (C115 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-0eee2b171933",
+        "t": "FACT",
+        "text": "Wanjiru Liu — in their life, C115: pulled copper wire through a Baylight sub-basement until their shoulders burned",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-11c83489b87d",
+        "t": "FACT",
+        "text": "Elias Varek — Civis Systems returned $488443 to the line this week, West Oakland (C115 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-c9ed1a09b9b0",
+        "t": "FACT",
+        "text": "Elias Varek — in their life, C114: noticed the new streetlights went in before anyone had to ask",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-0a18f4548891",
+        "t": "FACT",
+        "text": "Elias Varek — in their life, C114: heard the freight trains clanking near the Port and timed their breathing to the rhythm",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114"
+      },
+      {
+        "id": "F-0fb939bb35e4",
+        "t": "FACT",
+        "text": "Elias Varek — in their life, C115: headed over to The Aitken Line Founding Celebration in Jack London last night",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-2afbf66cd72b",
+        "t": "FACT",
+        "text": "Elias Varek — in their life, C115: Varek Systems returned $34932 to the line this week",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-65df14e48ae8",
+        "t": "FACT",
+        "text": "Elias Varek — Lives already wrote this person: a moment the record kept (C114)",
+        "src": "output/cron-compare/lives_covered.json"
+      },
+      {
+        "id": "F-9f71e8f7811e",
+        "t": "FACT",
+        "text": "Elias Varek — the Tribune named them in a piece headlined The Board in the Trailer Says 9.5 Percent. Enzo Walker Is Counting Something Else. (Business Reporter, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl 384044afdbad94f5"
+      },
+      {
+        "id": "F-b66573ef89b1",
+        "t": "FACT",
+        "text": "Elias Varek — the Tribune named them in a piece headlined The Lives Page, Cycle 114 (Culture, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl 9746e4e747ffdd0a"
+      },
+      {
+        "id": "F-fae86de6a8ad",
+        "t": "FACT",
+        "text": "Elias Varek — the Tribune named them in a piece headlined Oaks' First Win Offers a Useful Opening Read (Sports, C112)",
+        "src": "archive/ARTICLE_INDEX.jsonl 5df1d92b058d51c6"
+      },
+      {
+        "id": "F-82d77e9a4a71",
+        "t": "FACT",
+        "text": "Calendar: Y3C11, Spring, holiday=none",
+        "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00844-7bce96fac4",
+        "speakerId": "POP-00844",
+        "speakerName": "Harmony Gupta",
+        "text": "This cycle has been pretty normal for me. I waited at the Laurel Cleaners counter while someone hunted for the claim ticket. Other than that, it's been business as usual.",
+        "factIds": [
+          "F-40eb422aa41e",
+          "F-82d77e9a4a71"
+        ],
+        "src": "packet.W2[POP-00844]"
+      },
+      {
+        "id": "Q-POP-01108-4e4a2d7e1b",
+        "speakerId": "POP-01108",
+        "speakerName": "Christine Nakamura",
+        "text": "I've been settling into my new place in Jack London. I heard Downtown was packed last night, which is a bit of a change from my usual quiet evenings. I did drive the church van for a senior trip recently and got to hear some neighborhood gossip near the waterfront.",
+        "factIds": [
+          "F-366fd5f4e7be",
+          "F-05330002334e",
+          "F-1a82232d1823"
+        ],
+        "src": "packet.W2[POP-01108]"
+      },
+      {
+        "id": "Q-POP-00969-931c2862b6",
+        "speakerId": "POP-00969",
+        "speakerName": "Elijah Campbell",
+        "text": "I've been doing a lot of driving around Oakland lately. This cycle, I decided to mix things up a bit and walked a different street home just to see what it was like. It's funny, I also argued with some guys at the barbershop about the A's bullpen order. I guess that's just part of being a fan, right?",
+        "factIds": [
+          "F-fe068d9d6d9c",
+          "F-367e9b8f4875"
+        ],
+        "src": "packet.W2[POP-00969]"
+      },
+      {
+        "id": "Q-POP-00544-9f4c800d17",
+        "speakerId": "POP-00544",
+        "speakerName": "Jem Steele",
+        "text": "This week felt pretty uneventful for me. I didn't really do anything out of the ordinary.",
+        "factIds": [
+          "F-452481d6cfd7"
+        ],
+        "src": "packet.W2[POP-00544]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00844",
+        "name": "Harmony Gupta",
+        "profile": "Harmony Gupta — Plumber — Laurel",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-01108",
+        "name": "Christine Nakamura",
+        "profile": "Christine Nakamura — Co-Founder, Gridiron Analytics — Jack London",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00969",
+        "name": "Elijah Campbell",
+        "profile": "Elijah Campbell — Taxi Driver — Adams Point",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00544",
+        "name": "Jem Steele",
+        "profile": "Jem Steele — Athlete — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Harmony Gupta's experience moving into a new place could be an interesting story to explore further.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

@@ -1,0 +1,377 @@
+{
+  "version": "ARTS-SLICE-1",
+  "empty": false,
+  "cycle": 115,
+  "kind": "beat-arts",
+  "seat": {
+    "slug": "kai-marston",
+    "name": "Kai Marston",
+    "popid": "POP-00158",
+    "desk": "culture",
+    "domain": "arts",
+    "builder": "buildArtsSlice.js"
+  },
+  "hood": "Rockridge",
+  "pulse": {
+    "className": "beat-arts",
+    "score": 100,
+    "label": "32 culture figures rising; 1 new on the record",
+    "hood": "Rockridge",
+    "source": "output/beats/Cultural_Ledger.jsonl @C115"
+  },
+  "story": {
+    "kind": "beat-arts",
+    "angle": "Benji Dillon is rising — the acts and the rooms they play",
+    "label": "32 culture figures rising; 1 new on the record",
+    "hookLine": "Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 49, rising), last seen C105.",
+    "hood": "Rockridge",
+    "citizens": [
+      "Benji Dillon (POP-00018)",
+      "Darrin Davis (POP-00021)",
+      "Danny Horn (POP-00022)",
+      "Travis Coles (POP-00533)",
+      "Anthony Raines (POP-00017)",
+      "Vinnie Keane (POP-00001)",
+      "Rosa Foster (POP-00849)",
+      "Kai Tanaka (POP-01068)",
+      "Mateo Nguyen (POP-01091)",
+      "Mei Renteria (POP-01043)",
+      "Alma Zhang (POP-00834)",
+      "Jose Nelson (POP-01228)",
+      "Dmitri Volkov (POP-01159)",
+      "Lo Thoop (POP-00667)",
+      "Grace Yamamoto (POP-00798)",
+      "Octavia Pena (POP-01236)",
+      "Rev. Han (POP-00954)",
+      "Ezekiel Campbell (POP-00645)"
+    ],
+    "popids": [
+      "POP-00018",
+      "POP-00021",
+      "POP-00022",
+      "POP-00533",
+      "POP-00017",
+      "POP-00001",
+      "POP-00849",
+      "POP-01068",
+      "POP-01091",
+      "POP-01043",
+      "POP-00834",
+      "POP-01228",
+      "POP-01159",
+      "POP-00667",
+      "POP-00798",
+      "POP-01236",
+      "POP-00954",
+      "POP-00645"
+    ],
+    "ref": "output/beats/Cultural_Ledger.jsonl @C115",
+    "cycle": 115
+  },
+  "approach": "Arts & entertainment approach: this slice is the culture ledger — who is rising, who just appeared, who is fading, with their domains and neighborhoods — plus the city's culture seeds this cycle. Present-tense, neighborhood act not gallery PR. The names and trajectories are real; the garage rehearsal, the opening-night crowd, the set list are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-00018",
+      "name": "Benji Dillon",
+      "role": "Pitcher, Oakland A's Legend",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+      "why": "fame rising (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00021",
+      "name": "Darrin Davis",
+      "role": "Left Fielder, Oakland A's Legend",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Darrin Davis — Left Fielder, Oakland A's Legend — Piedmont Ave",
+      "why": "fame rising (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00022",
+      "name": "Danny Horn",
+      "role": "Center Fielder, Oakland A's - Best player in the MLB",
+      "neighborhood": "Temescal",
+      "business": null,
+      "profile": "Danny Horn — Center Fielder, Oakland A's - Best player in the MLB — Temescal",
+      "why": "fame rising (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00533",
+      "name": "Travis Coles",
+      "role": "Starting Pitcher, Oakland A's",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Travis Coles — Starting Pitcher, Oakland A's — Downtown",
+      "why": "fame rising (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00017",
+      "name": "Anthony Raines",
+      "role": "Journalist, Lead Beat Reporter - Oakland A's",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Anthony Raines — Journalist, Lead Beat Reporter - Oakland A's — Rockridge",
+      "why": "new on the culture record this cycle (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00001",
+      "name": "Vinnie Keane",
+      "role": "Former Designated Hitter, Oakland A's Legend",
+      "neighborhood": "Grand Lake",
+      "business": null,
+      "profile": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Grand Lake",
+      "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00849",
+      "name": "Rosa Foster",
+      "role": "Plumber",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Rosa Foster — Plumber — Rockridge",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-01068",
+      "name": "Kai Tanaka",
+      "role": "artist",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Kai Tanaka — artist — Fruitvale",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-01091",
+      "name": "Mateo Nguyen",
+      "role": "Bakery worker",
+      "neighborhood": "Brooklyn",
+      "business": null,
+      "profile": "Mateo Nguyen — Bakery worker — Brooklyn",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-01043",
+      "name": "Mei Renteria",
+      "role": "Security guard",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Mei Renteria — Security guard — Fruitvale",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00834",
+      "name": "Alma Zhang",
+      "role": "Glazier",
+      "neighborhood": "Laurel",
+      "business": null,
+      "profile": "Alma Zhang — Glazier — Laurel",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-01228",
+      "name": "Jose Nelson",
+      "role": "Security guard",
+      "neighborhood": "Dimond",
+      "business": null,
+      "profile": "Jose Nelson — Security guard — Dimond",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-01159",
+      "name": "Dmitri Volkov",
+      "role": "Firefighter",
+      "neighborhood": "Brooklyn",
+      "business": null,
+      "profile": "Dmitri Volkov — Firefighter — Brooklyn",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00667",
+      "name": "Lo Thoop",
+      "role": "Creative Writing Teacher",
+      "neighborhood": "Jack London",
+      "business": null,
+      "profile": "Lo Thoop — Creative Writing Teacher — Jack London",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00798",
+      "name": "Grace Yamamoto",
+      "role": "Independent Bookstore Owner",
+      "neighborhood": "Adams Point",
+      "business": null,
+      "profile": "Grace Yamamoto — Independent Bookstore Owner — Adams Point",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-01236",
+      "name": "Octavia Pena",
+      "role": "Building maintenance tech",
+      "neighborhood": "Adams Point",
+      "business": null,
+      "profile": "Octavia Pena — Building maintenance tech — Adams Point",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00954",
+      "name": "Rev. Han",
+      "role": "Senior Pastor / Faith Leader",
+      "neighborhood": "Adams Point",
+      "business": null,
+      "profile": "Rev. Han — Senior Pastor / Faith Leader — Adams Point",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00645",
+      "name": "Ezekiel Campbell",
+      "role": "Taxi driver",
+      "neighborhood": "Adams Point",
+      "business": null,
+      "profile": "Ezekiel Campbell — Taxi driver — Adams Point",
+      "why": "culture seed this cycle (Story_Seed_Deck)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 49, rising), last seen C105",
+      "src": "output/beats/Cultural_Ledger.jsonl @C115"
+    },
+    {
+      "text": "Darrin Davis (A's player), Sports, Piedmont Ave — fame rising (fame 42, rising), last seen C108",
+      "src": "output/beats/Cultural_Ledger.jsonl @C115"
+    },
+    {
+      "text": "Danny Horn (A's player), Sports, Temescal — fame rising (fame 35, rising), last seen C99",
+      "src": "output/beats/Cultural_Ledger.jsonl @C115"
+    },
+    {
+      "text": "Travis Coles (A's player), Sports, Downtown — fame rising (fame 34, rising), last seen C96",
+      "src": "output/beats/Cultural_Ledger.jsonl @C115"
+    },
+    {
+      "text": "Anthony Raines (Journalist, Lead Beat Reporter - Oakland A's), Media, Rockridge — new on the culture record this cycle (fame 25, rising)",
+      "src": "output/beats/Cultural_Ledger.jsonl @C115"
+    },
+    {
+      "text": "Vinnie Keane (A's player), Sports, Grand Lake — fading — the where-are-they-now file (fame 48, cooling), last seen C115",
+      "src": "output/beats/Cultural_Ledger.jsonl @C115"
+    },
+    {
+      "text": "CITY SEED (Citywide): Rosa Foster; Kai Tanaka; Mateo Nguyen",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C115"
+    },
+    {
+      "text": "CITY SEED (Citywide): Alma Zhang; Jose Nelson; Dmitri Volkov",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C115"
+    },
+    {
+      "text": "CITY SEED (Adams Point): Grace Yamamoto; Octavia Pena; Rev. Han · at Lakeshore Cafe; Adams Point United Methodist Church",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C115"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "Benji Dillon is rising — the acts and the rooms they play",
+    "hookLine": "Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 49, rising), last seen C105.",
+    "anchorFacts": [
+      "Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 49, rising), last seen C105",
+      "Darrin Davis (A's player), Sports, Piedmont Ave — fame rising (fame 42, rising), last seen C108",
+      "Danny Horn (A's player), Sports, Temescal — fame rising (fame 35, rising), last seen C99",
+      "Travis Coles (A's player), Sports, Downtown — fame rising (fame 34, rising), last seen C96",
+      "Anthony Raines (Journalist, Lead Beat Reporter - Oakland A's), Media, Rockridge — new on the culture record this cycle (fame 25, rising)",
+      "Vinnie Keane (A's player), Sports, Grand Lake — fading — the where-are-they-now file (fame 48, cooling), last seen C115",
+      "CITY SEED (Citywide): Rosa Foster; Kai Tanaka; Mateo Nguyen",
+      "CITY SEED (Citywide): Alma Zhang; Jose Nelson; Dmitri Volkov",
+      "CITY SEED (Adams Point): Grace Yamamoto; Octavia Pena; Rev. Han · at Lakeshore Cafe; Adams Point United Methodist Church"
+    ],
+    "evidence": [
+      {
+        "text": "Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 49, rising), last seen C105",
+        "src": "output/beats/Cultural_Ledger.jsonl @C115"
+      },
+      {
+        "text": "Darrin Davis (A's player), Sports, Piedmont Ave — fame rising (fame 42, rising), last seen C108",
+        "src": "output/beats/Cultural_Ledger.jsonl @C115"
+      },
+      {
+        "text": "Danny Horn (A's player), Sports, Temescal — fame rising (fame 35, rising), last seen C99",
+        "src": "output/beats/Cultural_Ledger.jsonl @C115"
+      },
+      {
+        "text": "Travis Coles (A's player), Sports, Downtown — fame rising (fame 34, rising), last seen C96",
+        "src": "output/beats/Cultural_Ledger.jsonl @C115"
+      },
+      {
+        "text": "Anthony Raines (Journalist, Lead Beat Reporter - Oakland A's), Media, Rockridge — new on the culture record this cycle (fame 25, rising)",
+        "src": "output/beats/Cultural_Ledger.jsonl @C115"
+      },
+      {
+        "text": "Vinnie Keane (A's player), Sports, Grand Lake — fading — the where-are-they-now file (fame 48, cooling), last seen C115",
+        "src": "output/beats/Cultural_Ledger.jsonl @C115"
+      },
+      {
+        "text": "CITY SEED (Citywide): Rosa Foster; Kai Tanaka; Mateo Nguyen",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C115"
+      },
+      {
+        "text": "CITY SEED (Citywide): Alma Zhang; Jose Nelson; Dmitri Volkov",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C115"
+      },
+      {
+        "text": "CITY SEED (Adams Point): Grace Yamamoto; Octavia Pena; Rev. Han · at Lakeshore Cafe; Adams Point United Methodist Church",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C115"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": null,
+    "hooks": [
+      {
+        "text": "Fruitvale housing pressure at 8.5/10: rents climbing, households stretching to stay",
+        "angle": "desk rotation",
+        "domain": "COMMUNITY",
+        "hood": "Fruitvale",
+        "priority": 7
+      },
+      {
+        "text": "Uptown boom sustained — momentum 10/10, the block everyone wants onto",
+        "angle": "desk rotation",
+        "domain": "COMMUNITY",
+        "hood": "Uptown",
+        "priority": 7
+      },
+      {
+        "text": "The Soto household (2) moved from Jack London to KONO — leaving Jack London for a better fit — sold up and bought in KONO",
+        "angle": "desk rotation",
+        "domain": "COMMUNITY",
+        "hood": "KONO",
+        "priority": 5
+      },
+      {
+        "text": "Ingeborg Hallstrom moved from Dimond to Downtown — moving up from Dimond",
+        "angle": "desk rotation",
+        "domain": "COMMUNITY",
+        "hood": "Downtown",
+        "priority": 5
+      }
+    ],
+    "note": null,
+    "pageVoices": [],
+    "roomIsYours": "the rehearsal space, the flyer on the pole, who showed up, what the room felt like when the second act started"
+  },
+  "rising": 32,
+  "appeared": 1,
+  "fading": 1,
+  "seeds": 24,
+  "pointers": [
+    "output/beats/Cultural_Ledger.jsonl @C115",
+    "output/beats/Story_Hook_Deck.jsonl (hooks for Kai Marston this cycle)"
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "116",
+  "persona": "carmen-delaine",
+  "byline": "Carmen Delaine",
+  "bylinePopid": "POP-00011",
+  "article": "output/cron-compare/staged/civic_c116_carmen-delaine_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Brenda Okoro",
+        "role": "quoted-source",
+        "popid": "POP-00037"
+      },
+      {
+        "name": "Marcus Webb",
+        "role": "quoted-source",
+        "popid": "POP-00790"
+      },
+      {
+        "name": "Elliott Crane",
+        "role": "mentioned",
+        "popid": "POP-00044",
+        "floor": true
+      },
+      {
+        "name": "Leonard Tran",
+        "role": "mentioned",
+        "popid": "POP-00502",
+        "floor": true
+      },
+      {
+        "name": "Ramon Vega",
+        "role": "mentioned",
+        "popid": "POP-00042",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "INIT-001:disbursement-active",
+        "verb": "advanced"
+      }
+    ],
+    "hoods": [
+      "West Oakland"
+    ],
+    "claims": [
+      {
+        "claim": "Renewal means West Oakland businesses and residents, 23 days on the clock, and a closeout record on the table before council votes.",
+        "sourceRef": "citizenVoice PRESS Brenda Okoro"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-b3d3cbfdf784",
+    "draftSha256": "1312e473619ec5085e01ea2bb428e06a055b203288e6b0978b48e85ae3462f0f",
+    "verdict": "output/cron-compare/civic_c116_carmen-delaine_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-17T00:15:52.428Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 500",
+      "words": 901,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "1312e473619ec5085e01ea2bb428e06a055b203288e6b0978b48e85ae3462f0f",
+      "costUsd": 0.0015
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-17T00:15:59.596Z"
+}

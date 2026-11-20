@@ -1,0 +1,211 @@
+{
+  "version": "LIFESTYLE-SLICE-1",
+  "empty": false,
+  "cycle": 115,
+  "kind": "beat-lifestyle",
+  "seat": {
+    "slug": "sharon-okafor",
+    "name": "Sharon Okafor",
+    "popid": "POP-00159",
+    "desk": "culture",
+    "domain": "lifestyle",
+    "builder": "buildLifestyleSlice.js"
+  },
+  "hood": "Grand Lake",
+  "pulse": {
+    "className": "beat-lifestyle",
+    "score": 100,
+    "label": "Benji Dillon leads the fame table; 4 fading, 1 new",
+    "hood": "Grand Lake",
+    "source": "output/beats/Cultural_Ledger.jsonl @C115"
+  },
+  "story": {
+    "kind": "beat-lifestyle",
+    "angle": "Vinnie Keane is fading — how the city follows its names",
+    "label": "Benji Dillon leads the fame table; 4 fading, 1 new",
+    "hookLine": "Vinnie Keane (A's player), Sports, Grand Lake, National-tier — fading (fame 48, cooling), 7 media mentions.",
+    "hood": "Grand Lake",
+    "citizens": [
+      "Vinnie Keane (POP-00001)",
+      "Lena Cross (POP-00539)",
+      "Rowan Pierce (POP-00545)",
+      "Benji Dillon (POP-00018)",
+      "Anthony Raines (POP-00017)"
+    ],
+    "popids": [
+      "POP-00001",
+      "POP-00539",
+      "POP-00545",
+      "POP-00018",
+      "POP-00017"
+    ],
+    "ref": "output/beats/Cultural_Ledger.jsonl @C115",
+    "cycle": 115
+  },
+  "approach": "Lifestyle approach: this slice is the fame record — who the city knows, who is fading, who just arrived — with their domains, tiers and neighborhoods. Behavior patterns, warm analytical. The names and trajectories are real; the morning routine, the regular order, what the neighbors think are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-00001",
+      "name": "Vinnie Keane",
+      "role": "Former Designated Hitter, Oakland A's Legend",
+      "neighborhood": "Grand Lake",
+      "business": null,
+      "profile": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Grand Lake",
+      "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00539",
+      "name": "Lena Cross",
+      "role": "Actor",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Lena Cross — Actor — Piedmont Ave",
+      "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00545",
+      "name": "Rowan Pierce",
+      "role": "Freelance Writer",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Rowan Pierce — Freelance Writer — Piedmont Ave",
+      "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00018",
+      "name": "Benji Dillon",
+      "role": "Pitcher, Oakland A's Legend",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+      "why": "the city knows them (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00017",
+      "name": "Anthony Raines",
+      "role": "Journalist, Lead Beat Reporter - Oakland A's",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Anthony Raines — Journalist, Lead Beat Reporter - Oakland A's — Rockridge",
+      "why": "new on the culture record this cycle (Cultural_Ledger)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "Vinnie Keane (A's player), Sports, Grand Lake, National-tier — fading — the where-are-they-now file (fame 48, cooling), 7 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C115"
+    },
+    {
+      "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 3, cooling), 17 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C115"
+    },
+    {
+      "text": "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 2, cooling), 15 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C115"
+    },
+    {
+      "text": "Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 49, rising), 1 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C115"
+    },
+    {
+      "text": "Anthony Raines (Journalist, Lead Beat Reporter - Oakland A's), Media, Rockridge, Local-tier — new on the culture record this cycle (fame 25, rising), 0 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C115"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "Vinnie Keane is fading — how the city follows its names",
+    "hookLine": "Vinnie Keane (A's player), Sports, Grand Lake, National-tier — fading (fame 48, cooling), 7 media mentions.",
+    "anchorFacts": [
+      "Vinnie Keane (A's player), Sports, Grand Lake, National-tier — fading — the where-are-they-now file (fame 48, cooling), 7 media mentions",
+      "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 3, cooling), 17 media mentions",
+      "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 2, cooling), 15 media mentions",
+      "Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 49, rising), 1 media mentions",
+      "Anthony Raines (Journalist, Lead Beat Reporter - Oakland A's), Media, Rockridge, Local-tier — new on the culture record this cycle (fame 25, rising), 0 media mentions"
+    ],
+    "evidence": [
+      {
+        "text": "Vinnie Keane (A's player), Sports, Grand Lake, National-tier — fading — the where-are-they-now file (fame 48, cooling), 7 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C115"
+      },
+      {
+        "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 3, cooling), 17 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C115"
+      },
+      {
+        "text": "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 2, cooling), 15 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C115"
+      },
+      {
+        "text": "Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 49, rising), 1 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C115"
+      },
+      {
+        "text": "Anthony Raines (Journalist, Lead Beat Reporter - Oakland A's), Media, Rockridge, Local-tier — new on the culture record this cycle (fame 25, rising), 0 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C115"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": null,
+    "hooks": [
+      {
+        "text": "defaulted on the debts — the savings are gone and the record carries it",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Adams Point",
+        "priority": 3
+      },
+      {
+        "text": "the bad week cost more than the savings could hold — borrowed to cover it",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Laurel",
+        "priority": 3
+      },
+      {
+        "text": "A family bought their home in Chinatown",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Chinatown",
+        "priority": 3
+      },
+      {
+        "text": "Downtown housing pressure at 10/10: rents climbing, households stretching to stay",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Downtown",
+        "priority": 7
+      },
+      {
+        "text": "Laurel cooling off: foot traffic down, storefronts quieter than the rest of the city",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Laurel",
+        "priority": 6
+      },
+      {
+        "text": "Fruitvale boom sustained — momentum 10/10, the block everyone wants onto",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Fruitvale",
+        "priority": 7
+      }
+    ],
+    "note": null,
+    "pageVoices": [],
+    "roomIsYours": "the coffee order, the dog's name, who recognizes them at the farmers market and who pretends not to"
+  },
+  "known": 51,
+  "fading": 4,
+  "appeared": 1,
+  "pointers": [
+    "output/beats/Cultural_Ledger.jsonl @C115",
+    "output/beats/Story_Hook_Deck.jsonl (hooks for Sharon Okafor this cycle)"
+  ]
+}

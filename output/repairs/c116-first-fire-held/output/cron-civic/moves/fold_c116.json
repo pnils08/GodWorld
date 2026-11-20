@@ -1,0 +1,35 @@
+{
+  "cycle": 116,
+  "moveCycle": 115,
+  "work": {
+    "INIT-015": [
+      "MV-115-civic-office-mayor-2026-11-09"
+    ],
+    "INIT-002": [
+      "MV-115-civic-office-council-d5-2026-11-10",
+      "MV-115-proj-oari-2026-11-10"
+    ],
+    "INIT-001": [
+      "MV-115-proj-stabilization-fund-2026-11-10"
+    ],
+    "INIT-005": [
+      "MV-115-proj-health-center-2026-11-12"
+    ],
+    "INIT-003": [
+      "MV-115-proj-transit-hub-2026-11-12"
+    ],
+    "INIT-006": [
+      "MV-115-proj-baylight-2026-11-12"
+    ]
+  },
+  "candidates": [],
+  "foldedAt": "2026-11-15T21:25:24.282Z",
+  "patrol": {
+    "moveId": "MV-115-civic-office-police-chief-2026-11-12",
+    "strategy": "balanced",
+    "note": "Crime indices flat to slightly down citywide with no single district deteriorating sharply enough to justify shifting resources; balanced posture maintains even coverage and preserves OARI co-response coordination.",
+    "agentDir": "civic-office-police-chief",
+    "date": "2026-11-12"
+  },
+  "patrolSuperseded": []
+}

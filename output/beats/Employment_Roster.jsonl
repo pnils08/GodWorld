@@ -30,15 +30,15 @@
 {"BIZ_ID":"BIZ-00005","POP_ID":"POP-00033","CitizenName":"John Ellis","RoleType":"Starting Pitcher, Oakland A's","Status":"Active","MappingLayer":"existing"}
 {"BIZ_ID":"BIZ-00017","POP_ID":"POP-00034","CitizenName":"Avery Santana","RoleType":"Mayor of Oakland","Status":"Active","MappingLayer":"existing"}
 {"BIZ_ID":"BIZ-00017","POP_ID":"POP-00035","CitizenName":"Laila Cortez","RoleType":"Chief of Staff","Status":"Active","MappingLayer":"existing"}
-{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00036","CitizenName":"Marcus Osei","RoleType":"City Council Member","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00036","CitizenName":"Marcus Osei","RoleType":"Deputy Mayor (Econ Dev)","Status":"Active","MappingLayer":"existing"}
 {"BIZ_ID":"BIZ-00017","POP_ID":"POP-00037","CitizenName":"Brenda Okoro","RoleType":"Deputy Mayor (Community Affairs)","Status":"Active","MappingLayer":"existing"}
 {"BIZ_ID":"BIZ-00017","POP_ID":"POP-00038","CitizenName":"Theo Park","RoleType":"Communications Director","Status":"Active","MappingLayer":"existing"}
 {"BIZ_ID":"BIZ-00017","POP_ID":"POP-00039","CitizenName":"Simone Ellis","RoleType":"Chief Legal Counsel","Status":"Active","MappingLayer":"existing"}
 {"BIZ_ID":"BIZ-00017","POP_ID":"POP-00040","CitizenName":"Aaron Whitfield","RoleType":"City Manager","Status":"Active","MappingLayer":"existing"}
 {"BIZ_ID":"BIZ-00020","POP_ID":"POP-00041","CitizenName":"Keisha Ramos","RoleType":"Director, Baylight Redevelopment Authority","Status":"Active","MappingLayer":"existing"}
-{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00042","CitizenName":"Ramon Vega","RoleType":"City Council President - D1","Status":"Active","MappingLayer":"existing"}
-{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00043","CitizenName":"Janae Rivers","RoleType":"City Council Member","Status":"Active","MappingLayer":"existing"}
-{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00044","CitizenName":"Elliott Crane","RoleType":"City Council Member","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00042","CitizenName":"Ramon Vega","RoleType":"City Council District 4","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00043","CitizenName":"Janae Rivers","RoleType":"City Council District 5","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00044","CitizenName":"Elliott Crane","RoleType":"City Council District 6","Status":"Active","MappingLayer":"existing"}
 {"BIZ_ID":"BIZ-00017","POP_ID":"POP-00045","CitizenName":"Eric Clove","RoleType":"Ethics Commission","Status":"Active","MappingLayer":"existing"}
 {"BIZ_ID":"BIZ-00017","POP_ID":"POP-00046","CitizenName":"Manny Ellen","RoleType":"Elections Office","Status":"Active","MappingLayer":"existing"}
 {"BIZ_ID":"BIZ-00017","POP_ID":"POP-00047","CitizenName":"Babe Bono","RoleType":"Redevelopment Board","Status":"Active","MappingLayer":"existing"}
@@ -381,12 +381,12 @@
 {"BIZ_ID":"BIZ-00015","POP_ID":"POP-00498","CitizenName":"Beatrix Santos","RoleType":"Herbalist","Status":"Active","MappingLayer":"existing"}
 {"BIZ_ID":"BIZ-00016","POP_ID":"POP-00499","CitizenName":"Jalen Serf","RoleType":"School Psychologist","Status":"Active","MappingLayer":"existing"}
 {"BIZ_ID":"BIZ-00020","POP_ID":"POP-00500","CitizenName":"Bali Cruz","RoleType":"Historic Preservation Carpenter","Status":"Active","MappingLayer":"existing"}
-{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00501","CitizenName":"Denise Carter","RoleType":"City Council Member","Status":"Active","MappingLayer":"existing"}
-{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00502","CitizenName":"Leonard Tran","RoleType":"City Council Member - D2","Status":"Active","MappingLayer":"existing"}
-{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00503","CitizenName":"Rose Delgado","RoleType":"City Council District - D3","Status":"Active","MappingLayer":"existing"}
-{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00504","CitizenName":"Warren Ashford","RoleType":"City Council Member - D7","Status":"Active","MappingLayer":"existing"}
-{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00505","CitizenName":"Nina Chen","RoleType":"City Council Member - D8","Status":"Active","MappingLayer":"existing"}
-{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00506","CitizenName":"Terrence Mobley","RoleType":"City Council Member - D9","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00501","CitizenName":"Denise Carter","RoleType":"City Council District 1","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00502","CitizenName":"Leonard Tran","RoleType":"City Council District 2","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00503","CitizenName":"Rose Delgado","RoleType":"City Council District 3","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00504","CitizenName":"Warren Ashford","RoleType":"City Council District 7","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00505","CitizenName":"Nina Chen","RoleType":"City Council District 8","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00506","CitizenName":"Terrence Mobley","RoleType":"City Council District 9","Status":"Active","MappingLayer":"existing"}
 {"BIZ_ID":"BIZ-00017","POP_ID":"POP-00507","CitizenName":"Mara Vance","RoleType":"City Planning Director","Status":"Active","MappingLayer":"existing"}
 {"BIZ_ID":"BIZ-00028","POP_ID":"POP-00511","CitizenName":"Dimmie Washington","RoleType":"Executive Director - WONA","Status":"Active","MappingLayer":"existing"}
 {"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00512","CitizenName":"Raymond Torres","RoleType":"Bay Area Tenants Union Rep","Status":"SELF_EMPLOYED","MappingLayer":"existing"}

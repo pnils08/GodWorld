@@ -46,8 +46,7 @@
     "hood": "West Oakland",
     "src": "world_summary_c115.md ## Sports",
     "plan": {
-      "focus": "Taveras's Undocked pledge to Keane's academy remains unpaid despite his credit lead, raising a ledger question.",
-      "closeQuestion": "Does the payout hinge on points, credits, or something the feed hasn't printed?"
+      "focus": "Taveras's Undocked pledge to Keane's academy remains unpaid despite his credit lead, raising a ledger question."
     },
     "runningStories": []
   },
@@ -176,8 +175,7 @@
       "renderMode": "SOURCE_BRIEF",
       "voice": "precise third-person sports analysis",
       "targetWords": "evidence-bounded",
-      "opening": "the strongest Packet-backed player line or roster fact",
-      "closing": "the sample, roster, or dossier evidence still needed to test the claim"
+      "opening": "the strongest Packet-backed player line or roster fact"
     },
     "authorizedTexture": [
       "plain-language comparison of supplied player lines with each statistic kept with its named subject",
@@ -262,10 +260,6 @@
       {
         "id": "P_ACCOUNTABILITY",
         "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
-      },
-      {
-        "id": "P_CLOSE",
-        "rule": "Use the supplied closeQuestion as a question, never as proof."
       }
     ],
     "unverifiedLeads": [

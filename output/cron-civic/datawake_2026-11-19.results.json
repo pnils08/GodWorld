@@ -1,0 +1,57 @@
+{
+  "date": "2026-11-19",
+  "cycle": 116,
+  "results": [
+    {
+      "office": "civic-office-council-d9",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-office-council-d9_2026-11-19.json"
+    },
+    {
+      "office": "civic-office-council-d3",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-office-council-d3_2026-11-19.json"
+    },
+    {
+      "office": "civic-office-council-d4",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-office-council-d4_2026-11-19.json"
+    },
+    {
+      "office": "civic-office-okoro",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-office-okoro_2026-11-19.json"
+    },
+    {
+      "office": "civic-office-police-chief",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-office-police-chief_2026-11-19.json"
+    },
+    {
+      "office": "worker-chief-fire",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/worker-chief-fire_2026-11-19.json"
+    },
+    {
+      "office": "worker-emerg-dir",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/worker-emerg-dir_2026-11-19.json"
+    }
+  ],
+  "owed": null,
+  "ranAt": "2026-11-19T11:46:31.415Z"
+}

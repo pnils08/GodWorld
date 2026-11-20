@@ -1,0 +1,63 @@
+{
+  "mode": "wake-write",
+  "desk": "undocked-digest",
+  "cycle": "115",
+  "provider": "openrouter",
+  "model": "openai/gpt-6-luna",
+  "configuredWriterModel": "openai/gpt-6-luna",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "nia-rook-weekly",
+  "byline": {
+    "name": "Nia Rook",
+    "popid": "POP-01076",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 1,
+  "quotesLanded": 3,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "undocked_history",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall"
+  ],
+  "toolCalls": 5,
+  "wordCount": 424,
+  "targetWords": "350-650",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 350",
+    "words": 424,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "b58b0082673b03e1d70eccd1905f1d70652109c0a272a983548136c8d50bdef4",
+    "costUsd": 0.001
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/3 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/undocked-digest_c115_nia-rook-weekly_packet-v2_openai-gpt-6-luna.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": ": ⌘ multiple files { path: ['.env.local', '.env'] }\n{\n  \"popId\": \"POP-01076\",\n  \"name\": \"Nia Rook\",\n  \"recorded\": true,\n  \"text\": \"filed: UNDOCKED: Three pilots finish even; Luis Taz keeps the lead\"\n}"
+  },
+  "ranAt": "2026-11-14T16:16:03.230Z",
+  "dispositionReconciledAt": "2026-11-14T18:00:02.992Z"
+}

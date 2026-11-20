@@ -1,0 +1,57 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "116",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "elliot-marbury",
+  "byline": {
+    "name": "Elliot Marbury",
+    "popid": "POP-00166",
+    "beatDomain": "GENERAL"
+  },
+  "laneEntries": 17,
+  "quotesLanded": 0,
+  "disposition": "flagged",
+  "rheaPass": false,
+  "rheaFlagCount": 1,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "dossier_read",
+    "canon_recall",
+    "canon_recall"
+  ],
+  "toolCalls": 3,
+  "wordCount": 921,
+  "targetWords": "evidence-bounded; 350-600",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 350",
+    "words": 921,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "f1bd7a435c3f4fee4ebd2867247a7fa0255f1afa126cd37840e1947c3b9b8798",
+    "costUsd": 0.0015
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/3 — nothing fell short"
+  },
+  "article": "output/cron-compare/flagged/sports_c116_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "selfRecord": null,
+  "ranAt": "2026-11-19T00:18:19.466Z"
+}

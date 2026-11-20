@@ -83,7 +83,13 @@
       }
     ],
     "businesses": [],
-    "storylines": [],
+    "storylines": [
+      {
+        "slug": "INIT-009:vote-ready",
+        "verb": "referenced",
+        "attachedBy": "stepAttach"
+      }
+    ],
     "hoods": [],
     "claims": [
       {

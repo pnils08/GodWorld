@@ -1,0 +1,291 @@
+{
+ "cycles": [
+  117,
+  118,
+  119
+ ],
+ "X": {
+  "drive": {
+   "up": {
+    "Sports": 2,
+    "Education": 22,
+    "Daily": 14,
+    "tab Civic Perception": 13,
+    "Personal": 27,
+    "Background": 19,
+    "tab Neighborhood": 4,
+    "Promotion": 9,
+    "Advancement": 92,
+    "Business-Owner": 1,
+    "Relocation": 13,
+    "Maneuver-Climb": 11,
+    "CivicRole-Up-S": 24,
+    "CivicRole-Up-M": 7,
+    "Cultural": 8,
+    "Team": 8,
+    "Civic": 7,
+    "Business-Gain": 15,
+    "Career": 7,
+    "LifeEvent-Promotion-Up-M": 4,
+    "LifeEvent-Promotion-Up-S": 34,
+    "Career-Hired": 4,
+    "Career-FieldChange": 1,
+    "tab Work": 5,
+    "Community": 4,
+    "Media": 3,
+    "Graduation": 1
+   },
+   "down": {
+    "Personal": 43,
+    "tab down pool": 120,
+    "CivicRole-Down-M": 2,
+    "Retirement": 3,
+    "Education": 1,
+    "tab Neighborhood": 2,
+    "tab Work": 1,
+    "LifeEvent-Promotion-Down-M": 2
+   }
+  },
+  "sociability": {
+   "up": {
+    "Reputation": 11,
+    "Sports": 1,
+    "tab Neighborhood": 131,
+    "Background": 30,
+    "Neighborhood": 119,
+    "tab Reputation": 1,
+    "tab Civic Perception": 126,
+    "tab Media": 81,
+    "PrevEvening": 20,
+    "Personal": 28,
+    "tab Daily": 64,
+    "QoL": 13,
+    "Rivalry": 4,
+    "tab Work": 4,
+    "Advancement": 3,
+    "Relationship": 19,
+    "CivicRole-Up-S": 24,
+    "CivicRole-Up-M": 7,
+    "Community": 16,
+    "Cultural": 2,
+    "Education": 5,
+    "Media": 15,
+    "FirstFriday": 71,
+    "Team": 2,
+    "Public": 4,
+    "Career": 2,
+    "PostCareer-Community": 1,
+    "Civic": 1
+   },
+   "down": {
+    "tab down pool": 139,
+    "tab Work": 2
+   }
+  },
+  "warmth": {
+   "up": {
+    "Sports": 1,
+    "Personal": 110,
+    "tab Media": 38,
+    "tab Daily": 63,
+    "Neighborhood": 23,
+    "tab Civic Perception": 38,
+    "Daily": 75,
+    "Background": 58,
+    "tab Neighborhood": 10,
+    "Faith": 13,
+    "tab Faith": 6,
+    "QoL": 13,
+    "tab Work": 9,
+    "Relationship": 19,
+    "Civic": 9,
+    "Community": 25,
+    "PostCareer-Community": 1,
+    "Education": 1,
+    "Holiday": 2
+   },
+   "down": {
+    "tab down pool": 141,
+    "Media": 1
+   }
+  },
+  "openness": {
+   "up": {
+    "Sports-Moved": 6,
+    "Education": 12,
+    "tab Civic Perception": 235,
+    "Personal": 73,
+    "tab PostCareer": 10,
+    "Lifestyle": 161,
+    "PostCareer": 9,
+    "tab Neighborhood": 13,
+    "Background": 38,
+    "Work": 2,
+    "Advancement": 2,
+    "Business-Owner": 1,
+    "Maneuver-Climb": 11,
+    "Civic": 3,
+    "Business-Gain": 15,
+    "Career-FieldChange": 1,
+    "Cultural": 23,
+    "Neighborhood": 20,
+    "FirstFriday": 5,
+    "Career": 2,
+    "Graduation": 1,
+    "Holiday": 2
+   },
+   "down": {
+    "tab down pool": 130,
+    "tab Civic Perception": 189
+   }
+  },
+  "composure": {
+   "up": {
+    "Sports-PlayedWin": 5,
+    "Sports": 5,
+    "Neighborhood": 12,
+    "tab Civic Perception": 237,
+    "Personal": 221,
+    "tab Neighborhood": 16,
+    "tab Daily": 75,
+    "Daily": 30,
+    "Micro-Event": 40,
+    "Background": 83,
+    "Faith": 13,
+    "tab Work": 4,
+    "tab Faith": 6,
+    "Promotion": 9,
+    "Maneuver-Hold": 7,
+    "CivicRole-Up-M": 7,
+    "Recovering": 6,
+    "Community": 3,
+    "Team": 2,
+    "Cultural": 1,
+    "Education": 6,
+    "Life": 1,
+    "LifeEvent-Promotion-Up-M": 4,
+    "Career-Hired": 4,
+    "Sports-Played": 2,
+    "Relocation": 3,
+    "Career": 2,
+    "Media": 1
+   },
+   "down": {
+    "Education": 2,
+    "Personal": 109,
+    "tab Media": 44,
+    "PrevEvening": 57,
+    "tab Neighborhood": 34,
+    "tab Civic Perception": 93,
+    "Neighborhood": 138,
+    "Daily": 27,
+    "Micro-Event": 55,
+    "tab Daily": 10,
+    "Background": 27,
+    "Rivalry": 4,
+    "Work": 4,
+    "QoL": 3,
+    "Friction": 80,
+    "Strain": 66,
+    "CivicRole-Down-S": 13,
+    "CivicRole-Down-M": 2,
+    "Team": 3,
+    "Media": 2,
+    "Career": 2,
+    "LifeEvent-Promotion-Down-S": 18,
+    "Relocation": 3,
+    "Setback": 2,
+    "Health": 3,
+    "Community": 1,
+    "Cultural": 2,
+    "tab Work": 3,
+    "LifeEvent-Promotion-Down-M": 2
+   }
+  },
+  "integrity": {
+   "up": {
+    "Reputation": 11,
+    "tab Daily": 69,
+    "tab Reputation": 1,
+    "Personal": 35,
+    "tab Work": 10,
+    "BoundaryKept": 6,
+    "Civic": 2
+   },
+   "down": {
+    "tab down pool": 125,
+    "BoundaryCompromised": 3
+   }
+  },
+  "family": {
+   "up": {
+    "Daily": 123,
+    "tab Daily": 50,
+    "tab PostCareer": 10,
+    "PostCareer": 9,
+    "tab Neighborhood": 3,
+    "Household": 8,
+    "Retirement": 3,
+    "Personal": 3,
+    "Household-GameNight-Loss": 1,
+    "Holiday": 9
+   },
+   "down": {
+    "Sports-Moved": 6,
+    "tab Daily": 16,
+    "tab down pool": 123,
+    "Strain": 60,
+    "Personal": 2
+   }
+  },
+  "outabout": {
+   "up": {
+    "Education": 7,
+    "tab Neighborhood": 276,
+    "PrevEvening": 103,
+    "Lifestyle": 26,
+    "Neighborhood": 220,
+    "tab PrevEvening": 47,
+    "Daily": 23,
+    "tab Civic Perception": 39,
+    "Personal": 3,
+    "QoL": 6,
+    "Background": 8,
+    "Career": 5,
+    "tab Background": 3,
+    "Cultural": 18,
+    "Community": 1,
+    "FirstFriday": 2,
+    "Holiday": 22,
+    "Media": 2
+   },
+   "down": {
+    "tab down pool": 104,
+    "PrevEvening": 58,
+    "Neighborhood": 124,
+    "tab Neighborhood": 19,
+    "QoL": 8,
+    "Friction": 79,
+    "Strain": 6,
+    "Life": 1,
+    "Personal": 3
+   }
+  },
+  "fandom": {
+   "up": {
+    "Sports-Win": 15,
+    "tab Sports": 337,
+    "Undocked-Audience": 45,
+    "Sports": 25,
+    "tab Sports-Win": 30,
+    "Background": 7,
+    "Media": 3,
+    "tab Neighborhood": 2
+   },
+   "down": {
+    "Sports": 58,
+    "Household-GameNight-Loss": 1
+   }
+  }
+ }
+}

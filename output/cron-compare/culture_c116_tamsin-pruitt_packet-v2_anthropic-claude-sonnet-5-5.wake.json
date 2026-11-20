@@ -1,0 +1,129 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "116",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "tamsin-pruitt",
+  "byline": {
+    "name": "Tamsin Pruitt",
+    "popid": "POP-01210",
+    "beatDomain": "COMMUNITY"
+  },
+  "laneEntries": 30,
+  "quotesLanded": 4,
+  "disposition": "flagged",
+  "rheaPass": false,
+  "rheaFlagCount": 1,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "citizen_lookup",
+    "citizen_lookup",
+    "citizen_lookup",
+    "citizen_lookup",
+    "canon_recall",
+    "canon_recall"
+  ],
+  "toolCalls": 6,
+  "wordCount": 1221,
+  "targetWords": "450-1200",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [
+    {
+      "text": "Wilson Shepard moved into a place of their own in West Oakland, renting",
+      "run": "wilson shepard moved into a place"
+    },
+    {
+      "text": "Wilson Shepard — in their life, C115: fielded a round of texts from people who hadn't called in years",
+      "run": "a round of texts from people"
+    },
+    {
+      "text": "Wilson Shepard — in their life, C116: came home to find the neighbors had left a case of something cold on the porch — still buzzing hours after the game",
+      "run": "the neighbors had left a case"
+    },
+    {
+      "text": "Ira Leu — in their life, C115: a flyer for a seniors lunch program flutters on a community bulletin board",
+      "run": "a flyer for a seniors lunch"
+    },
+    {
+      "text": "Ira Leu — in their life, C115: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+      "run": "stopped to read the architectural renderings"
+    },
+    {
+      "text": "Ira Leu — in their life, C116: read the Tribune's front page twice — once for the news, once to see who was in it",
+      "run": "read the tribunes front page twice"
+    },
+    {
+      "text": "Matilda Diop — in their life, C115: found a quiet minute at a front porch and the muffled thump of a car stereo playing last summer's hit",
+      "run": "thump of a car stereo playing"
+    },
+    {
+      "text": "Matilda Diop — in their life, C115: disagreed with a Tribune column out loud to an empty kitchen near a bench near the water",
+      "run": "with a tribune column out loud"
+    },
+    {
+      "text": "Matilda Diop — in their life, C116: washed the blood out of the rig at the end of shift and tried not to think about the address",
+      "run": "washed the blood out of the"
+    },
+    {
+      "text": "Darrin Davis — in their life, C116: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+      "run": "painted over graffiti on the recreation"
+    },
+    {
+      "text": "Darrin Davis — in their life, C116: stayed thirty minutes after the service just catching up in the parking lot",
+      "run": "service just catching up in the"
+    },
+    {
+      "text": "Omar Farah — picked up the first paycheck and stood in the bank line like an adult, Chinatown (C116 — what happened in their life, not words they said)",
+      "run": "and stood in the bank line"
+    },
+    {
+      "text": "Tariq Cooper — drove alone for the first time and took the long way home on purpose, Piedmont Ave (C116 — what happened in their life, not words they said)",
+      "run": "drove alone for the first time"
+    },
+    {
+      "text": "Tariq Cooper — in their life, C115: iced a rolled ankle and watched film of a game they were not in",
+      "run": "iced a rolled ankle and watched"
+    },
+    {
+      "text": "Tariq Cooper — in their life, C116: stayed up past everyone talking about what comes after this",
+      "run": "stayed up past everyone talking about"
+    },
+    {
+      "text": "Sadie Williams — had a rough week and still showed up to the spelling bee, Chinatown (C116 — what happened in their life, not words they said)",
+      "run": "and still showed up to the"
+    },
+    {
+      "text": "Elias Varek — in their life, C115: headed over to The Aitken Line Founding Celebration in Jack London last night",
+      "run": "over to the aitken line founding"
+    }
+  ],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 450",
+    "words": 1221,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "eaed223e799c38aa6c64f09582f7909f764686961f8caac099568a22eee588ec",
+    "costUsd": 0.0016
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/3 — nothing fell short"
+  },
+  "article": "output/cron-compare/flagged/culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "selfRecord": null,
+  "ranAt": "2026-11-20T00:19:40.341Z"
+}

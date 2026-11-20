@@ -1,0 +1,60 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "115",
+  "persona": "mason-ortega",
+  "byline": "Mason Ortega",
+  "bylinePopid": "POP-00160",
+  "article": "output/cron-compare/staged/culture_c115_mason-ortega_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Manfred Owens",
+        "role": "quoted-source",
+        "popid": "POP-00028"
+      },
+      {
+        "name": "Iris Pham",
+        "role": "quoted-source",
+        "popid": "POP-01203"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Baylight District"
+    ],
+    "claims": [
+      {
+        "claim": "The book at Oakland Casino Town is mostly the same faces every night, and I'm the one who keeps track of who's in and who's out. Philly runs the floor, Gregory handles the stuff nobody talks about, and I sit near the back with the ledger. The regulars are the ones who've been coming for years — dealers, pit bosses, a few old-timers who just want a seat and a coffee. My shift starts when the evening crowd picks up and ends when the last table closes. It's steady work, but the rhythm is quieter than people think. Most nights it's just the hum of the machines and the clink of chips, and me making sure the numbers line up before I hand the sheet to Philly.",
+        "sourceRef": "citizenVoice PRESS Manfred Owens"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-b58a30d50023",
+    "draftSha256": "51d360a8e6d154c62b54b806958373f365cc77d4a53b0cc505daccdb12fce400",
+    "verdict": "output/cron-compare/culture_c115_mason-ortega_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-11-14T00:15:27.329Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": false,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 346,
+      "short": "The piece invents individual workers, shifts, and direct quotes rather than treating the signal without inventing personnel or workplace conditions.",
+      "score": 2,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "51d360a8e6d154c62b54b806958373f365cc77d4a53b0cc505daccdb12fce400",
+      "costUsd": 0.0008
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-14T00:15:38.963Z"
+}

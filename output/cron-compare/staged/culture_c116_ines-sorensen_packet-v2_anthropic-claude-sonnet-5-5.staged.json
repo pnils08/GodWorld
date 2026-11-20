@@ -1,0 +1,66 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "116",
+  "persona": "ines-sorensen",
+  "byline": "Ines Sorensen",
+  "bylinePopid": "POP-01211",
+  "article": "output/cron-compare/staged/culture_c116_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Tre Mingo",
+        "role": "quoted-source",
+        "popid": "POP-00123"
+      },
+      {
+        "name": "Caroline Cabrera",
+        "role": "mentioned",
+        "popid": "POP-00847",
+        "floor": true
+      },
+      {
+        "name": "Guadalupe Lupe",
+        "role": "mentioned",
+        "popid": "POP-00643",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "I walk past that fence every day. The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching rents climb while the people I work with talk about leaving.",
+        "sourceRef": "citizenVoice PRESS Tre Mingo"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "gate": "off",
+    "model": null,
+    "manifestId": null,
+    "draftSha256": "9864d28507bc4cfa9cdf7a1c79cdcc0576e1b178fe36ac9ebdb2a60f2dd1cf90",
+    "verdict": null,
+    "ranAt": "2026-11-19T00:22:16.610Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": false,
+      "inTarget": true,
+      "inTargetBy": "code floor 300",
+      "words": 505,
+      "short": "The piece fails to present every citizen's verbatim line before their name and adds extensive commentary rather than keeping the frame short and plain.",
+      "score": 2,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "scoredWithoutRhea": true,
+      "draftSha256": "9864d28507bc4cfa9cdf7a1c79cdcc0576e1b178fe36ac9ebdb2a60f2dd1cf90"
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-19T00:22:16.610Z"
+}

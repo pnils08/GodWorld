@@ -1,0 +1,40 @@
+{
+  "model": "anthropic/claude-sonnet-5.5",
+  "calls": [
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Faith_Organizations",
+        "match": "Adams Point United Methodist"
+      },
+      "resultChars": 271,
+      "resultHead": "Organization | FaithTradition | Neighborhood | Founded | Congregation | Leader | Character | ActiveStatus | LeaderPOPID | MembersList\nAdams Point United Methodist | Methodist | Adams Point | 1892 | 300 | Rev. Daniel Han | progressive, LGBTQ affirming | active | POP-00757"
+    },
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Faith_Ledger",
+        "match": "Interfaith Council"
+      },
+      "resultChars": 537,
+      "resultHead": "Timestamp | Cycle | Organization | FaithTradition | EventType | EventDescription | Neighborhood | Attendance | Status\nC78 | 78 | Interfaith Council | Interfaith | interfaith_dialogue | interfaith council meeting held | Downtown | 275 | occurred\nY3C10 | 114 | Interfaith Council | Interfaith | interfaith_dialogue | dialogue series addresses shared concerns | Chinatown | 53 | occurred\nY3C11 | 115 | Interfaith Council | Interfaith | interfaith_dialogue | interfaith prayer breakfast brings leaders together | Adams Point | 123 | occurred"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Adams Point United Methodist"
+      },
+      "resultChars": 2163,
+      "resultHead": "[C94 · edition] # Adams Point Opens Doors By Maria Keen | Bay Tribune Neighborhoods The Tuesday morning light came through the stained glass at the east end of Adams Point United Methodist, filling the sanctuary in blocks of blue and amber. Rev. Daniel Han stood in the aisle, watching two teenagers move a folding table from the fellowship hall. One of them—a girl in a green jacket—asked him something I couldn't hear. He nodded, smiled, pointed toward the kitchen. \"We opened up this cycle because we looked around and saw people who\n[C104 · daily · Sharon Okafor] # The Quiet Sighting at Adams Po"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Daniel Han"
+      },
+      "resultChars": 536,
+      "resultHead": "[C94 · edition] # Adams Point Opens Doors By Maria Keen | Bay Tribune Neighborhoods The Tuesday morning light came through the stained glass at the east end of Adams Point United Methodist, filling the sanctuary in blocks of blue and amber. Rev. Daniel Han stood in the aisle, watching two teenagers move a folding table from the fellowship hall. One of them—a girl in a green jacket—asked him something I couldn't hear. He nodded, smiled, pointed toward the kitchen. \"We opened up this cycle because we looked around and saw people who"
+    }
+  ],
+  "ranAt": "2026-11-20T00:15:39.984Z"
+}

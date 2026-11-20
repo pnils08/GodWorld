@@ -1,0 +1,75 @@
+{
+  "office": "okoro",
+  "agentDir": "civic-office-okoro",
+  "holder": "Brenda Okoro",
+  "popid": "POP-00037",
+  "title": "Deputy Mayor (Community)",
+  "date": "2026-11-19",
+  "cycle": 116,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "**Deputy Mayor Brenda Okoro — Weekly Report, Cycle 116**\n\nHere is what my records show this week, and what I intend to do about it.\n\n**The Fund.** The West Oakland Stabilization Fund sits at disbursement-active with about $20.6 million remaining against the $28 million authorization. The $400,000 tranche executed this cycle under the 23-day standard. The charter renewal is on the Council calendar — and I said it plainly this cycle: renewal means West Oakland businesses and residents, 23 days on the clock, and a closeout record on the table before Council votes. I am not calling that vote. Final action waits on the verified C114 closeout, the business-and-resident scope intact, and the 23-day standard preserved. That is the next scheduled action, and it is the Council's to take, not mine to hurry.\n\n**The map is not one city.** Six neighborhoods are running hot — Downtown, West Oakland, Fruitvale, Jack London and Uptown all at momentum 10/10, with Downtown, Fruitvale, Jack London and Uptown pinned at housing pressure 9.5 to 10. West Oakland's pressure is 5.5 but its sentiment, 0.39, is the highest on the map. That is not a coincidence — it is what a stabilization fund looks like when it is actually working. People feel it. But five residents in Jack London and five in Uptown are already planning to leave for a better income fit. When the boom is the story, the displacement underneath it is the story too.\n\n**The blocks that are hurting.** Ivy Hill, Brooklyn, San Antonio, Glenview, Dimond, Eastlake, Laurel — decay, negative migration, and in Ivy Hill and Brooklyn, sentiment below zero. Ivy Hill's numbers are not abstract to me: 1,361 adults, 419 seniors, 90 unemployed, 112 sick. That is where the feet on the ground go. I said last cycle that these blocks don't care about a charter renewal — they care whether I show up. I meant it.\n\n**Piedmont Avenue.** Rising, and the ledger shows why: four households moved in this cycle — the Keane household from Grand Lake, the Okoro household from Rockridge, Eric Taveras and Adash Stanley from Downtown. Growth is real there. So is the question of who it serves. B'nai Tikvah's pantry is serving neighbors in need on that same avenue. Rising and hungry, at once.\n\n**Faith communities.** Fruitvale's St. Esperanza begins a new job-training session; New Covenant Pentecostal in West Oakland marks a seniors-lunch milestone; Temple Beth Or, B'nai Tikvah and Or Hashalom are all running pantries and training. Our faith institutions are doing stabilization work the city budget cannot buy. I will be in those rooms.\n\n**What I am doing next.** Verification of the closeout and the Council's renewal consideration — on their calendar, not mine. Feet on the ground in Ivy Hill and San Antonio. And a real accounting of the pressure in Downtown, Fruitvale, Jack London and Uptown before the exodus becomes a number instead of a rumor. Triage is triage — but I won't pretend a press line fixes a broken sidewalk.",
+  "moves": [],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-11-19T11:45:57.112Z",
+  "usage": {
+    "prompt_tokens": 21047,
+    "completion_tokens": 895,
+    "cost": 0.002
+  },
+  "fellBackFrom": null,
+  "template": "worker/2",
+  "toolTrace": [
+    {
+      "tool": "memory_recall",
+      "input": {
+        "query": "charter renewal"
+      },
+      "resultChars": 3120
+    },
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Neighborhood_Demographics",
+        "match": "Ivy Hill"
+      },
+      "resultChars": 247
+    },
+    {
+      "tool": "record_read",
+      "input": {
+        "record": "Community, faith, culture and festival events on the city's event ledger",
+        "from_cycle": 114
+      },
+      "resultChars": 1722
+    },
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Civic_Office_Ledger",
+        "from_cycle": 114
+      },
+      "resultChars": 6182
+    }
+  ],
+  "memory": {
+    "searchedOn": "community programs housing neighborhoods",
+    "entries": 5,
+    "fromSearch": 6,
+    "newest": 1,
+    "failed": []
+  },
+  "figuresNotHanded": [
+    "20.6"
+  ],
+  "finishReason": "stop",
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00037",
+    "id": "54177LDSNX3ZvkFgEgAJ5N",
+    "customId": "cp-POP-00037-c116-CIVIC-datawake-2026-11-19"
+  }
+}

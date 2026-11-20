@@ -1,0 +1,70 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "116",
+  "persona": "luis-navarro",
+  "byline": "Luis Navarro",
+  "bylinePopid": "POP-00636",
+  "article": "output/cron-compare/staged/civic_c116_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Rose Delgado",
+        "role": "mentioned",
+        "popid": "POP-00503"
+      },
+      {
+        "name": "Avery Santana",
+        "role": "mentioned",
+        "popid": "POP-00034",
+        "floor": true
+      },
+      {
+        "name": "Carmen Delaine",
+        "role": "mentioned",
+        "popid": "POP-00011",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "INIT-007:implementation-active",
+        "verb": "advanced"
+      }
+    ],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "A seat in the classroom is not a paycheck. Four cycles in one stage — publish the gap analysis and show Fruitvale's young people in the roles.",
+        "sourceRef": "citizenVoice PRESS Rose Delgado"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-7fe558892dd6",
+    "draftSha256": "16aa20f43adcfb9b9cf9d3a415dec08caa39abb51336d68ab2c298fb4a3f7ad3",
+    "verdict": "output/cron-compare/civic_c116_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-18T00:15:47.677Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 400",
+      "words": 687,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "16aa20f43adcfb9b9cf9d3a415dec08caa39abb51336d68ab2c298fb4a3f7ad3",
+      "costUsd": 0.0014
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-18T00:15:53.723Z"
+}

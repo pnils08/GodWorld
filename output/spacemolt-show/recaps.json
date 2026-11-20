@@ -328,5 +328,47 @@
     "cycle": "115",
     "stem": "undocked_c115_nia-rook_packet-v2_openai-gpt-6-luna",
     "disposition": "staged"
+  },
+  "undocked-pop00008-Y3C11": {
+    "at": "2026-11-13T00:21:44.060Z",
+    "cycle": "115",
+    "stem": "undocked_c115_nia-rook_packet-v2_openai-gpt-6-luna",
+    "disposition": "staged"
+  },
+  "undocked-pop01195-Y3C11-e2": {
+    "at": "2026-11-14T00:22:27.938Z",
+    "cycle": "115",
+    "stem": "undocked_c115_nia-rook_packet-v2_openai-gpt-6-luna",
+    "disposition": "staged"
+  },
+  "weekly-c115": {
+    "at": "2026-11-14T16:15:38.610Z",
+    "cycle": "115",
+    "stem": "undocked-digest_c115_nia-rook-weekly_packet-v2_openai-gpt-6-luna",
+    "disposition": "staged"
+  },
+  "undocked-pop01188-Y3C12": {
+    "at": "2026-11-17T00:24:39.381Z",
+    "cycle": "116",
+    "stem": "undocked_c116_nia-rook_packet-v2_openai-gpt-6-luna",
+    "disposition": "staged"
+  },
+  "undocked-pop00918-Y3C12": {
+    "at": "2026-11-18T00:21:12.633Z",
+    "cycle": "116",
+    "stem": "undocked_c116_nia-rook_packet-v2_openai-gpt-6-luna",
+    "disposition": "flagged"
+  },
+  "undocked-pop00663-Y3C12": {
+    "at": "2026-11-19T00:23:07.569Z",
+    "cycle": "116",
+    "stem": "undocked_c116_nia-rook_packet-v2_openai-gpt-6-luna",
+    "disposition": "staged"
+  },
+  "undocked-pop01188-Y3C12-e2": {
+    "at": "2026-11-20T00:21:11.954Z",
+    "cycle": "116",
+    "stem": "undocked_c116_nia-rook_packet-v2_openai-gpt-6-luna",
+    "disposition": "staged"
   }
 }

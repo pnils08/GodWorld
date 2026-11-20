@@ -1,0 +1,32 @@
+{
+  "status": "arc-seed",
+  "cycle": "116",
+  "desk": "culture",
+  "persona": "elliot-graye",
+  "hood": "Adams Point",
+  "quotes": [
+    {
+      "pop": "POP-00757",
+      "name": "Daniel Han",
+      "quote": "I've seen firsthand the impact of job training programs in our community. While Adams Point United Methodist isn't directly running such a program, our involvement in the Interfaith Council has shown me the value of faith organizations coming together to support local initiatives. I recall the interfaith prayer breakfast we had last cycle, where leaders from various faith backgrounds gathered to discuss ways to serve the community. It's this kind of collaboration that can lead to meaningful support for job training and other vital programs."
+    },
+    {
+      "pop": "POP-00756",
+      "name": "Ramon Solano",
+      "quote": "I've heard that Adams Point United Methodist is involved with the Interfaith Council, and that they had a prayer breakfast that brought leaders together. As a faith leader myself, I appreciate efforts to build bridges between different communities."
+    },
+    {
+      "pop": "POP-00758",
+      "name": "Robert Jaston",
+      "quote": "I've seen Adams Point United Methodist participate in the Interfaith Council's prayer breakfast, bringing leaders together in Adams Point. It's heartening to see different faith communities come together like that."
+    },
+    {
+      "pop": "POP-00759",
+      "name": "Naomi Sterling",
+      "quote": "I've seen Adams Point United Methodist play a role in the Interfaith Council's efforts, particularly during their interfaith prayer breakfast in C115, which brought together leaders from various faith backgrounds. As a faith leader myself, I appreciate the work they do in fostering dialogue and cooperation among different communities."
+    }
+  ],
+  "claim": "I've seen firsthand the impact of job training programs in our community. While Adams Point United Methodist isn't directly running such a program, our involvement in the Interfaith Council has shown me the value of faith organizations coming together to support local initiatives. I recall the interfaith prayer breakfast we had last cycle, where leaders from various faith backgrounds gathered to discuss ways to serve the community. It's this kind of collaboration that can lead to meaningful support for job training and other vital programs.",
+  "src": "citizenVoice PRESS c116",
+  "ranAt": "2026-11-19T19:15:56.517Z"
+}

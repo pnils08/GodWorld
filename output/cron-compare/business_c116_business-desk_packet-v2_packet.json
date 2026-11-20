@@ -1,0 +1,1195 @@
+{
+  "stage": "report",
+  "desk": "business",
+  "cycle": "116",
+  "persona": "business-desk",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Jordan Velez",
+    "popid": "POP-00153"
+  },
+  "assignment": {
+    "story": {
+      "angle": "Jack London businesses: Port of Oakland, Green & Gold Tavern, Anchor Build — the people who work there",
+      "label": "Jack London businesses · Port of Oakland, Green & Gold Tavern",
+      "hookLine": "Tre Mingo, Port Worker at Port of Oakland. 18 named workers at 5 named businesses in Jack London on the ledger this cycle.",
+      "hood": "Jack London",
+      "pulseClass": "hood-businesses",
+      "namedBusinesses": [
+        "Port of Oakland",
+        "Green & Gold Tavern",
+        "Anchor Build",
+        "Harborline Grill",
+        "Blue Lantern Bar"
+      ],
+      "citizens": [
+        "Tre Mingo (POP-00123)",
+        "Elle Lilo (POP-00177)",
+        "Blair Patel (POP-00189)",
+        "Elena Leon (POP-00193)",
+        "Hector Leech (POP-00252)",
+        "Trenton Nawan (POP-00273)",
+        "Guadalupe Lupe (POP-00643)",
+        "Sora Hint (POP-01008)",
+        "Travis Golin (POP-00205)",
+        "Briar Soto (POP-00926)",
+        "Kaila Brown (POP-01035)",
+        "Marguerite Salcedo (POP-01093)",
+        "Tomas Renteria (POP-00744)",
+        "Quynh Le (POP-00878)",
+        "Jalen Hill (POP-00960)",
+        "Bruce Wright (POP-00965)",
+        "Yuki Ji (POP-00783)",
+        "Guadalupe Lee (POP-00970)"
+      ],
+      "popids": [
+        "POP-00123",
+        "POP-00177",
+        "POP-00189",
+        "POP-00193",
+        "POP-00252",
+        "POP-00273",
+        "POP-00643",
+        "POP-01008",
+        "POP-00205",
+        "POP-00926",
+        "POP-01035",
+        "POP-01093",
+        "POP-00744",
+        "POP-00878",
+        "POP-00960",
+        "POP-00965",
+        "POP-00783",
+        "POP-00970"
+      ],
+      "ref": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+      "cycle": 116
+    }
+  },
+  "angle": "output/cron-compare/business_c116_business-desk_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 3,
+  "quotes": [
+    {
+      "pop": "POP-00123",
+      "name": "Tre Mingo",
+      "quote": "I walk past that fence every day. The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching rents climb while the people I work with talk about leaving. The businesses are growing, the numbers look good, but the folks on the ledger aren't the ones who get to stay. I don't feel like I'm part of it. I feel like I'm watching it from the other side of the fence.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\"answer\":\"quote\",\"quote\":\"I walk past that fence every day. The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching rents climb while the people I work with talk about leaving. The businesses are growing, the numbers look good, but the folks on the ledger aren't the ones who get to stay. I don't feel like I'm part of it. I feel like I'm watching it from the other side of the fence.\",\"fact_ids\":[\"F-dcf3c551e335\",\"F-d9ca037b296b\",\"F-3538dd99467c\"],\"basis\":\"lived-context\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-dcf3c551e335",
+          "F-d9ca037b296b",
+          "F-3538dd99467c"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00123-80a4664501",
+        "authoredQuote": true,
+        "publishableQuote": "I walk past that fence every day. The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching rents climb while the people I work with talk about leaving. The businesses are growing, the numbers look good, but the folks on the ledger aren't the ones who get to stay. I don't feel like I'm part of it. I feel like I'm watching it from the other side of the fence."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00123",
+          "name": "Tre Mingo",
+          "role": "Port Worker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jordan Velez",
+          "question": "When you walk past the Baylight fence line on your way to the gate, do you feel like that development is for you — or just happening around you? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Jack London",
+          "focus": "The gap between Jack London's business growth and the displacement pressure on the workers who power it — told through Tre Mingo and the people on the ledger at the Port, Green & Gold, and Anchor Build.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Tre Mingo — Port Worker — Port of Oakland, Jack London",
+          "evidence": [
+            {
+              "id": "EV-2871b38811",
+              "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+              "text": "Tre Mingo, Port Worker at Port of Oakland. 18 named workers at 5 named businesses in Jack London on the ledger this cycle."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Tre Mingo, Port Worker at Port of Oakland. 18 named workers at 5 named businesses in Jack London on the ledger this cycle.",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-dcf3c551e335"
+          },
+          {
+            "t": "FACT",
+            "text": "Port of Oakland · Port & Logistics · 1501 employees · growth 12.9% · revenue $430.2M (+$1.1M vs C115) · on the roster: Tre Mingo (Port Worker); Elle Lilo (Harbor Tugboat Captain); Blair Patel (Ship Repair Foreman); Elena Leon (Longshoreman (Port of Oakland)) +25 more",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-d9ca037b296b"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "Jack London businesses · Port of Oakland, Green & Gold Tavern",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-3538dd99467c"
+          },
+          {
+            "t": "FACT",
+            "text": "Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 12.7% · revenue $3.7M (+$9k vs C115) · on the roster: Hector Leech (Dishwasher); Trenton Nawan (Server); Guadalupe Lupe (Bartender); Sora Hint (Barista) +1 more",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-cb064eda4300"
+          },
+          {
+            "t": "FACT",
+            "text": "Anchor Build · Construction · 181 employees · growth 13.7% · revenue $148.4M (+$389k vs C115) · key personnel: Marguerite Salcedo (managing partner) · on the roster: Travis Golin (Construction laborer); Briar Soto (Electrician); Kaila Brown (Construction worker); Marguerite Salcedo (Managing Partner, Anchor Build)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-47fd26c1dbe2"
+          },
+          {
+            "t": "FACT",
+            "text": "Harborline Grill · Restaurant & Dining · 7 employees · growth 12% · revenue $869k (+$2k vs C115) · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-5b8d329b1119"
+          },
+          {
+            "t": "FACT",
+            "text": "Blue Lantern Bar · Nightlife & Entertainment · 31 employees · growth 13.9% · revenue $4M (+$11k vs C115) · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-500e32a705c3"
+          },
+          {
+            "t": "FACT",
+            "text": "Tre Mingo — Port Worker — Port of Oakland, Jack London",
+            "src": "Simulation_Ledger profile for POP-00123",
+            "id": "F-2d2b0d61ff1e"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01093",
+      "name": "Marguerite Salcedo",
+      "quote": "Look, I run the numbers every day. Anchor Build is growing — 13.7%, 181 people on the payroll. That's real. But I'd be lying if I said I don't see the squeeze. My crews — the electricians, the laborers, the folks swinging hammers — they're the ones building these new units, and half of them can't afford to live in the buildings they're putting up. That's not a talking point, that's what I hear at the job site. I've got guys driving in from Antioch, from Stockton, because Jack London rent went up again. We're not pricing out strangers — we're pricing out the people who pour the concrete. And that keeps me up at night, because I've been in this business long enough to know you can't build a neighborhood on the backs of people who can't stay in it.",
+      "disp": "driven, hard to sit still; draws people in, deep with them; steady, hard to shake; principled, plays it straight",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Look, I run the numbers every day. Anchor Build is growing — 13.7%, 181 people on the payroll. That's real. But I'd be lying if I said I don't see the squeeze. My crews — the electricians, the laborers, the folks swinging hammers — they're the ones building these new units, and half of them can't afford to live in the buildings they're putting up. That's not a talking point, that's what I hear at the job site. I've got guys driving in from Antioch, from Stockton, because Jack London rent went up again. We're not pricing out strangers — we're pricing out the people who pour the concrete. And that keeps me up at night, because I've been in this business long enough to know you can't build a neighborhood on the backs of people who can't stay in it.\",\n  \"fact_ids\": [\n    \"F-47fd26c1dbe2\",\n    \"F-d9ca037b296b\",\n    \"F-cb064eda4300\"\n  ],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": [\n    \"I could point you to a couple of my foremen who've told me they're looking at moving their families out of Oakland entirely — but I don't have names I can give you.\"\n  ],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-47fd26c1dbe2",
+          "F-d9ca037b296b",
+          "F-cb064eda4300"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [
+          "I could point you to a couple of my foremen who've told me they're looking at moving their families out of Oakland entirely — but I don't have names I can give you."
+        ],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01093-7340f99c40",
+        "authoredQuote": true,
+        "publishableQuote": "Look, I run the numbers every day. Anchor Build is growing — 13.7%, 181 people on the payroll. That's real. But I'd be lying if I said I don't see the squeeze. My crews — the electricians, the laborers, the folks swinging hammers — they're the ones building these new units, and half of them can't afford to live in the buildings they're putting up. That's not a talking point, that's what I hear at the job site. I've got guys driving in from Antioch, from Stockton, because Jack London rent went up again. We're not pricing out strangers — we're pricing out the people who pour the concrete. And that keeps me up at night, because I've been in this business long enough to know you can't build a neighborhood on the backs of people who can't stay in it."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01093",
+          "name": "Marguerite Salcedo",
+          "role": "Managing Partner, Anchor Build",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jordan Velez",
+          "question": "Anchor Build is up 13.7% and you're managing 181 workers — are the projects you're building keeping Jack London affordable for the people on your crews, or pricing them out? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Jack London",
+          "focus": "The gap between Jack London's business growth and the displacement pressure on the workers who power it — told through Tre Mingo and the people on the ledger at the Port, Green & Gold, and Anchor Build.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Marguerite Salcedo — Managing Partner, Anchor Build — Anchor Build, Jack London",
+          "evidence": [
+            {
+              "id": "EV-33734f684b",
+              "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+              "text": "Tre Mingo, Port Worker at Port of Oakland. 18 named workers at 5 named businesses in Jack London on the ledger this cycle."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Anchor Build · Construction · 181 employees · growth 13.7% · revenue $148.4M (+$389k vs C115) · key personnel: Marguerite Salcedo (managing partner) · on the roster: Travis Golin (Construction laborer); Briar Soto (Electrician); Kaila Brown (Construction worker); Marguerite Salcedo (Managing Partner, Anchor Build)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-47fd26c1dbe2"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "Jack London businesses · Port of Oakland, Green & Gold Tavern",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-3538dd99467c"
+          },
+          {
+            "t": "FACT",
+            "text": "Tre Mingo, Port Worker at Port of Oakland. 18 named workers at 5 named businesses in Jack London on the ledger this cycle.",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-dcf3c551e335"
+          },
+          {
+            "t": "FACT",
+            "text": "Port of Oakland · Port & Logistics · 1501 employees · growth 12.9% · revenue $430.2M (+$1.1M vs C115) · on the roster: Tre Mingo (Port Worker); Elle Lilo (Harbor Tugboat Captain); Blair Patel (Ship Repair Foreman); Elena Leon (Longshoreman (Port of Oakland)) +25 more",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-d9ca037b296b"
+          },
+          {
+            "t": "FACT",
+            "text": "Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 12.7% · revenue $3.7M (+$9k vs C115) · on the roster: Hector Leech (Dishwasher); Trenton Nawan (Server); Guadalupe Lupe (Bartender); Sora Hint (Barista) +1 more",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-cb064eda4300"
+          },
+          {
+            "t": "FACT",
+            "text": "Harborline Grill · Restaurant & Dining · 7 employees · growth 12% · revenue $869k (+$2k vs C115) · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-5b8d329b1119"
+          },
+          {
+            "t": "FACT",
+            "text": "Blue Lantern Bar · Nightlife & Entertainment · 31 employees · growth 13.9% · revenue $4M (+$11k vs C115) · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-500e32a705c3"
+          },
+          {
+            "t": "FACT",
+            "text": "Marguerite Salcedo — Managing Partner, Anchor Build — Anchor Build, Jack London",
+            "src": "Simulation_Ledger profile for POP-01093",
+            "id": "F-3211d751c044"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00177",
+      "name": "Elle Lilo",
+      "quote": "I've been on that water for thirty-nine years, and I've watched this neighborhood grow up around the port. The numbers going up—the cranes, the new buildings—that's real. But I'll tell you what I see from the wheelhouse: the same faces showing up at the union hall, the same guys on the dock at 5 a.m. Tre Mingo's one of them. The work's steady, but the cost of living here keeps climbing, and I watch good people do the math on whether they can stay. I moved myself, just a few miles, to make it work. That's the part nobody puts on a spreadsheet—the quiet decisions people make every day to keep doing the job they love in the place they grew up.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; warm, tender with people; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've been on that water for thirty-nine years, and I've watched this neighborhood grow up around the port. The numbers going up—the cranes, the new buildings—that's real. But I'll tell you what I see from the wheelhouse: the same faces showing up at the union hall, the same guys on the dock at 5 a.m. Tre Mingo's one of them. The work's steady, but the cost of living here keeps climbing, and I watch good people do the math on whether they can stay. I moved myself, just a few miles, to make it work. That's the part nobody puts on a spreadsheet—the quiet decisions people make every day to keep doing the job they love in the place they grew up.\",\n  \"fact_ids\": [\n    \"F-d9ca037b296b\",\n    \"F-dcf3c551e335\"\n  ],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d9ca037b296b",
+          "F-dcf3c551e335"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00177-cbf4afdb19",
+        "authoredQuote": true,
+        "publishableQuote": "I've been on that water for thirty-nine years, and I've watched this neighborhood grow up around the port. The numbers going up—the cranes, the new buildings—that's real. But I'll tell you what I see from the wheelhouse: the same faces showing up at the union hall, the same guys on the dock at 5 a.m. Tre Mingo's one of them. The work's steady, but the cost of living here keeps climbing, and I watch good people do the math on whether they can stay. I moved myself, just a few miles, to make it work. That's the part nobody puts on a spreadsheet—the quiet decisions people make every day to keep doing the job they love in the place they grew up."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00177",
+          "name": "Elle Lilo",
+          "role": "Harbor Tugboat Captain",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jordan Velez",
+          "question": "As a resident of Jack London, what have you seen, felt, or understood about \"The gap between Jack London's business growth and the displacement pressure on the workers who power it — told through Tre Mingo and the people on the ledger at the Port, Green & Gold, and Anchor Build.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Jack London",
+          "focus": "The gap between Jack London's business growth and the displacement pressure on the workers who power it — told through Tre Mingo and the people on the ledger at the Port, Green & Gold, and Anchor Build.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Elle Lilo — Harbor Tugboat Captain — Port of Oakland, Jack London",
+          "evidence": [
+            {
+              "id": "EV-12749d0136",
+              "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+              "text": "Tre Mingo, Port Worker at Port of Oakland. 18 named workers at 5 named businesses in Jack London on the ledger this cycle."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Port of Oakland · Port & Logistics · 1501 employees · growth 12.9% · revenue $430.2M (+$1.1M vs C115) · on the roster: Tre Mingo (Port Worker); Elle Lilo (Harbor Tugboat Captain); Blair Patel (Ship Repair Foreman); Elena Leon (Longshoreman (Port of Oakland)) +25 more",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-d9ca037b296b"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "Jack London businesses · Port of Oakland, Green & Gold Tavern",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-3538dd99467c"
+          },
+          {
+            "t": "FACT",
+            "text": "Tre Mingo, Port Worker at Port of Oakland. 18 named workers at 5 named businesses in Jack London on the ledger this cycle.",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-dcf3c551e335"
+          },
+          {
+            "t": "FACT",
+            "text": "Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 12.7% · revenue $3.7M (+$9k vs C115) · on the roster: Hector Leech (Dishwasher); Trenton Nawan (Server); Guadalupe Lupe (Bartender); Sora Hint (Barista) +1 more",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-cb064eda4300"
+          },
+          {
+            "t": "FACT",
+            "text": "Anchor Build · Construction · 181 employees · growth 13.7% · revenue $148.4M (+$389k vs C115) · key personnel: Marguerite Salcedo (managing partner) · on the roster: Travis Golin (Construction laborer); Briar Soto (Electrician); Kaila Brown (Construction worker); Marguerite Salcedo (Managing Partner, Anchor Build)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-47fd26c1dbe2"
+          },
+          {
+            "t": "FACT",
+            "text": "Harborline Grill · Restaurant & Dining · 7 employees · growth 12% · revenue $869k (+$2k vs C115) · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-5b8d329b1119"
+          },
+          {
+            "t": "FACT",
+            "text": "Blue Lantern Bar · Nightlife & Entertainment · 31 employees · growth 13.9% · revenue $4M (+$11k vs C115) · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-500e32a705c3"
+          },
+          {
+            "t": "FACT",
+            "text": "Elle Lilo — Harbor Tugboat Captain — Port of Oakland, Jack London",
+            "src": "Simulation_Ledger profile for POP-00177",
+            "id": "F-c1b4eb14d9d4"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00123",
+      "name": "Tre Mingo",
+      "quote": "I walk past that fence every day. The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching rents climb while the people I work with talk about leaving. The businesses are growing, the numbers look good, but the folks on the ledger aren't the ones who get to stay. I don't feel like I'm part of it. I feel like I'm watching it from the other side of the fence.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\"answer\":\"quote\",\"quote\":\"I walk past that fence every day. The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching rents climb while the people I work with talk about leaving. The businesses are growing, the numbers look good, but the folks on the ledger aren't the ones who get to stay. I don't feel like I'm part of it. I feel like I'm watching it from the other side of the fence.\",\"fact_ids\":[\"F-dcf3c551e335\",\"F-d9ca037b296b\",\"F-3538dd99467c\"],\"basis\":\"lived-context\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-dcf3c551e335",
+          "F-d9ca037b296b",
+          "F-3538dd99467c"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00123-80a4664501",
+        "authoredQuote": true,
+        "publishableQuote": "I walk past that fence every day. The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching rents climb while the people I work with talk about leaving. The businesses are growing, the numbers look good, but the folks on the ledger aren't the ones who get to stay. I don't feel like I'm part of it. I feel like I'm watching it from the other side of the fence."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00123",
+          "name": "Tre Mingo",
+          "role": "Port Worker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jordan Velez",
+          "question": "When you walk past the Baylight fence line on your way to the gate, do you feel like that development is for you — or just happening around you? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Jack London",
+          "focus": "The gap between Jack London's business growth and the displacement pressure on the workers who power it — told through Tre Mingo and the people on the ledger at the Port, Green & Gold, and Anchor Build.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Tre Mingo — Port Worker — Port of Oakland, Jack London",
+          "evidence": [
+            {
+              "id": "EV-2871b38811",
+              "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+              "text": "Tre Mingo, Port Worker at Port of Oakland. 18 named workers at 5 named businesses in Jack London on the ledger this cycle."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Tre Mingo, Port Worker at Port of Oakland. 18 named workers at 5 named businesses in Jack London on the ledger this cycle.",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-dcf3c551e335"
+          },
+          {
+            "t": "FACT",
+            "text": "Port of Oakland · Port & Logistics · 1501 employees · growth 12.9% · revenue $430.2M (+$1.1M vs C115) · on the roster: Tre Mingo (Port Worker); Elle Lilo (Harbor Tugboat Captain); Blair Patel (Ship Repair Foreman); Elena Leon (Longshoreman (Port of Oakland)) +25 more",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-d9ca037b296b"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "Jack London businesses · Port of Oakland, Green & Gold Tavern",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-3538dd99467c"
+          },
+          {
+            "t": "FACT",
+            "text": "Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 12.7% · revenue $3.7M (+$9k vs C115) · on the roster: Hector Leech (Dishwasher); Trenton Nawan (Server); Guadalupe Lupe (Bartender); Sora Hint (Barista) +1 more",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-cb064eda4300"
+          },
+          {
+            "t": "FACT",
+            "text": "Anchor Build · Construction · 181 employees · growth 13.7% · revenue $148.4M (+$389k vs C115) · key personnel: Marguerite Salcedo (managing partner) · on the roster: Travis Golin (Construction laborer); Briar Soto (Electrician); Kaila Brown (Construction worker); Marguerite Salcedo (Managing Partner, Anchor Build)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-47fd26c1dbe2"
+          },
+          {
+            "t": "FACT",
+            "text": "Harborline Grill · Restaurant & Dining · 7 employees · growth 12% · revenue $869k (+$2k vs C115) · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-5b8d329b1119"
+          },
+          {
+            "t": "FACT",
+            "text": "Blue Lantern Bar · Nightlife & Entertainment · 31 employees · growth 13.9% · revenue $4M (+$11k vs C115) · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-500e32a705c3"
+          },
+          {
+            "t": "FACT",
+            "text": "Tre Mingo — Port Worker — Port of Oakland, Jack London",
+            "src": "Simulation_Ledger profile for POP-00123",
+            "id": "F-2d2b0d61ff1e"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01093",
+      "name": "Marguerite Salcedo",
+      "quote": "Look, I run the numbers every day. Anchor Build is growing — 13.7%, 181 people on the payroll. That's real. But I'd be lying if I said I don't see the squeeze. My crews — the electricians, the laborers, the folks swinging hammers — they're the ones building these new units, and half of them can't afford to live in the buildings they're putting up. That's not a talking point, that's what I hear at the job site. I've got guys driving in from Antioch, from Stockton, because Jack London rent went up again. We're not pricing out strangers — we're pricing out the people who pour the concrete. And that keeps me up at night, because I've been in this business long enough to know you can't build a neighborhood on the backs of people who can't stay in it.",
+      "disp": "driven, hard to sit still; draws people in, deep with them; steady, hard to shake; principled, plays it straight",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Look, I run the numbers every day. Anchor Build is growing — 13.7%, 181 people on the payroll. That's real. But I'd be lying if I said I don't see the squeeze. My crews — the electricians, the laborers, the folks swinging hammers — they're the ones building these new units, and half of them can't afford to live in the buildings they're putting up. That's not a talking point, that's what I hear at the job site. I've got guys driving in from Antioch, from Stockton, because Jack London rent went up again. We're not pricing out strangers — we're pricing out the people who pour the concrete. And that keeps me up at night, because I've been in this business long enough to know you can't build a neighborhood on the backs of people who can't stay in it.\",\n  \"fact_ids\": [\n    \"F-47fd26c1dbe2\",\n    \"F-d9ca037b296b\",\n    \"F-cb064eda4300\"\n  ],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": [\n    \"I could point you to a couple of my foremen who've told me they're looking at moving their families out of Oakland entirely — but I don't have names I can give you.\"\n  ],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-47fd26c1dbe2",
+          "F-d9ca037b296b",
+          "F-cb064eda4300"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [
+          "I could point you to a couple of my foremen who've told me they're looking at moving their families out of Oakland entirely — but I don't have names I can give you."
+        ],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01093-7340f99c40",
+        "authoredQuote": true,
+        "publishableQuote": "Look, I run the numbers every day. Anchor Build is growing — 13.7%, 181 people on the payroll. That's real. But I'd be lying if I said I don't see the squeeze. My crews — the electricians, the laborers, the folks swinging hammers — they're the ones building these new units, and half of them can't afford to live in the buildings they're putting up. That's not a talking point, that's what I hear at the job site. I've got guys driving in from Antioch, from Stockton, because Jack London rent went up again. We're not pricing out strangers — we're pricing out the people who pour the concrete. And that keeps me up at night, because I've been in this business long enough to know you can't build a neighborhood on the backs of people who can't stay in it."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01093",
+          "name": "Marguerite Salcedo",
+          "role": "Managing Partner, Anchor Build",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jordan Velez",
+          "question": "Anchor Build is up 13.7% and you're managing 181 workers — are the projects you're building keeping Jack London affordable for the people on your crews, or pricing them out? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Jack London",
+          "focus": "The gap between Jack London's business growth and the displacement pressure on the workers who power it — told through Tre Mingo and the people on the ledger at the Port, Green & Gold, and Anchor Build.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Marguerite Salcedo — Managing Partner, Anchor Build — Anchor Build, Jack London",
+          "evidence": [
+            {
+              "id": "EV-33734f684b",
+              "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+              "text": "Tre Mingo, Port Worker at Port of Oakland. 18 named workers at 5 named businesses in Jack London on the ledger this cycle."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Anchor Build · Construction · 181 employees · growth 13.7% · revenue $148.4M (+$389k vs C115) · key personnel: Marguerite Salcedo (managing partner) · on the roster: Travis Golin (Construction laborer); Briar Soto (Electrician); Kaila Brown (Construction worker); Marguerite Salcedo (Managing Partner, Anchor Build)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-47fd26c1dbe2"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "Jack London businesses · Port of Oakland, Green & Gold Tavern",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-3538dd99467c"
+          },
+          {
+            "t": "FACT",
+            "text": "Tre Mingo, Port Worker at Port of Oakland. 18 named workers at 5 named businesses in Jack London on the ledger this cycle.",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-dcf3c551e335"
+          },
+          {
+            "t": "FACT",
+            "text": "Port of Oakland · Port & Logistics · 1501 employees · growth 12.9% · revenue $430.2M (+$1.1M vs C115) · on the roster: Tre Mingo (Port Worker); Elle Lilo (Harbor Tugboat Captain); Blair Patel (Ship Repair Foreman); Elena Leon (Longshoreman (Port of Oakland)) +25 more",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-d9ca037b296b"
+          },
+          {
+            "t": "FACT",
+            "text": "Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 12.7% · revenue $3.7M (+$9k vs C115) · on the roster: Hector Leech (Dishwasher); Trenton Nawan (Server); Guadalupe Lupe (Bartender); Sora Hint (Barista) +1 more",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-cb064eda4300"
+          },
+          {
+            "t": "FACT",
+            "text": "Harborline Grill · Restaurant & Dining · 7 employees · growth 12% · revenue $869k (+$2k vs C115) · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-5b8d329b1119"
+          },
+          {
+            "t": "FACT",
+            "text": "Blue Lantern Bar · Nightlife & Entertainment · 31 employees · growth 13.9% · revenue $4M (+$11k vs C115) · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-500e32a705c3"
+          },
+          {
+            "t": "FACT",
+            "text": "Marguerite Salcedo — Managing Partner, Anchor Build — Anchor Build, Jack London",
+            "src": "Simulation_Ledger profile for POP-01093",
+            "id": "F-3211d751c044"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00643",
+      "name": "Guadalupe Lupe",
+      "quote": null,
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: answer must be quote|abstain; abstain cannot include quote text",
+      "raw": "{\"quote\":\"The tavern's doing fine, sure — we're busy, the money's coming in. But I hear it every night, the same thing from the regulars who've been coming here for years. They're not talking about the A's or the new spots opening up. They're talking about rent. Tre Mingo works the Port, he's a good guy, and even he's said to me he doesn't know how much longer he can swing it around here. The businesses are growing, but the people who actually pour the drinks and load the ships — they're the ones getting squeezed out. It's like the neighborhood's getting nicer for everyone except the people who make it run.\",\"fact_ids\":[\"F-dcf3c551e335\",\"F-cb064eda4300\"],\"basis\":\"lived-context\",\"unverifiedLead\":[\"Tre Mingo might be looking at places further out, maybe near the Coliseum or deeper into East Oakland, if the rent keeps climbing.\"],\"abstain_reason\":null}",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00643",
+          "name": "Guadalupe Lupe",
+          "role": "Bartender",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jordan Velez",
+          "question": "The tavern's doing fine — revenue up, regulars in the seats — but what are you hearing from the people at the bar about whether they can afford to stay in the neighborhood? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Jack London",
+          "focus": "The gap between Jack London's business growth and the displacement pressure on the workers who power it — told through Tre Mingo and the people on the ledger at the Port, Green & Gold, and Anchor Build.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Guadalupe Lupe — Bartender — Green & Gold Tavern, Jack London",
+          "evidence": [
+            {
+              "id": "EV-b694dd86a1",
+              "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+              "text": "Tre Mingo, Port Worker at Port of Oakland. 18 named workers at 5 named businesses in Jack London on the ledger this cycle."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 12.7% · revenue $3.7M (+$9k vs C115) · on the roster: Hector Leech (Dishwasher); Trenton Nawan (Server); Guadalupe Lupe (Bartender); Sora Hint (Barista) +1 more",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-cb064eda4300"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "Jack London businesses · Port of Oakland, Green & Gold Tavern",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-3538dd99467c"
+          },
+          {
+            "t": "FACT",
+            "text": "Tre Mingo, Port Worker at Port of Oakland. 18 named workers at 5 named businesses in Jack London on the ledger this cycle.",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-dcf3c551e335"
+          },
+          {
+            "t": "FACT",
+            "text": "Port of Oakland · Port & Logistics · 1501 employees · growth 12.9% · revenue $430.2M (+$1.1M vs C115) · on the roster: Tre Mingo (Port Worker); Elle Lilo (Harbor Tugboat Captain); Blair Patel (Ship Repair Foreman); Elena Leon (Longshoreman (Port of Oakland)) +25 more",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-d9ca037b296b"
+          },
+          {
+            "t": "FACT",
+            "text": "Anchor Build · Construction · 181 employees · growth 13.7% · revenue $148.4M (+$389k vs C115) · key personnel: Marguerite Salcedo (managing partner) · on the roster: Travis Golin (Construction laborer); Briar Soto (Electrician); Kaila Brown (Construction worker); Marguerite Salcedo (Managing Partner, Anchor Build)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-47fd26c1dbe2"
+          },
+          {
+            "t": "FACT",
+            "text": "Harborline Grill · Restaurant & Dining · 7 employees · growth 12% · revenue $869k (+$2k vs C115) · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-5b8d329b1119"
+          },
+          {
+            "t": "FACT",
+            "text": "Blue Lantern Bar · Nightlife & Entertainment · 31 employees · growth 13.9% · revenue $4M (+$11k vs C115) · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-500e32a705c3"
+          },
+          {
+            "t": "FACT",
+            "text": "Guadalupe Lupe — Bartender — Green & Gold Tavern, Jack London",
+            "src": "Simulation_Ledger profile for POP-00643",
+            "id": "F-1911ae51d255"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00177",
+      "name": "Elle Lilo",
+      "quote": "I've been on that water for thirty-nine years, and I've watched this neighborhood grow up around the port. The numbers going up—the cranes, the new buildings—that's real. But I'll tell you what I see from the wheelhouse: the same faces showing up at the union hall, the same guys on the dock at 5 a.m. Tre Mingo's one of them. The work's steady, but the cost of living here keeps climbing, and I watch good people do the math on whether they can stay. I moved myself, just a few miles, to make it work. That's the part nobody puts on a spreadsheet—the quiet decisions people make every day to keep doing the job they love in the place they grew up.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; warm, tender with people; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've been on that water for thirty-nine years, and I've watched this neighborhood grow up around the port. The numbers going up—the cranes, the new buildings—that's real. But I'll tell you what I see from the wheelhouse: the same faces showing up at the union hall, the same guys on the dock at 5 a.m. Tre Mingo's one of them. The work's steady, but the cost of living here keeps climbing, and I watch good people do the math on whether they can stay. I moved myself, just a few miles, to make it work. That's the part nobody puts on a spreadsheet—the quiet decisions people make every day to keep doing the job they love in the place they grew up.\",\n  \"fact_ids\": [\n    \"F-d9ca037b296b\",\n    \"F-dcf3c551e335\"\n  ],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d9ca037b296b",
+          "F-dcf3c551e335"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00177-cbf4afdb19",
+        "authoredQuote": true,
+        "publishableQuote": "I've been on that water for thirty-nine years, and I've watched this neighborhood grow up around the port. The numbers going up—the cranes, the new buildings—that's real. But I'll tell you what I see from the wheelhouse: the same faces showing up at the union hall, the same guys on the dock at 5 a.m. Tre Mingo's one of them. The work's steady, but the cost of living here keeps climbing, and I watch good people do the math on whether they can stay. I moved myself, just a few miles, to make it work. That's the part nobody puts on a spreadsheet—the quiet decisions people make every day to keep doing the job they love in the place they grew up."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00177",
+          "name": "Elle Lilo",
+          "role": "Harbor Tugboat Captain",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jordan Velez",
+          "question": "As a resident of Jack London, what have you seen, felt, or understood about \"The gap between Jack London's business growth and the displacement pressure on the workers who power it — told through Tre Mingo and the people on the ledger at the Port, Green & Gold, and Anchor Build.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Jack London",
+          "focus": "The gap between Jack London's business growth and the displacement pressure on the workers who power it — told through Tre Mingo and the people on the ledger at the Port, Green & Gold, and Anchor Build.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Elle Lilo — Harbor Tugboat Captain — Port of Oakland, Jack London",
+          "evidence": [
+            {
+              "id": "EV-12749d0136",
+              "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+              "text": "Tre Mingo, Port Worker at Port of Oakland. 18 named workers at 5 named businesses in Jack London on the ledger this cycle."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Port of Oakland · Port & Logistics · 1501 employees · growth 12.9% · revenue $430.2M (+$1.1M vs C115) · on the roster: Tre Mingo (Port Worker); Elle Lilo (Harbor Tugboat Captain); Blair Patel (Ship Repair Foreman); Elena Leon (Longshoreman (Port of Oakland)) +25 more",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-d9ca037b296b"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "Jack London businesses · Port of Oakland, Green & Gold Tavern",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-3538dd99467c"
+          },
+          {
+            "t": "FACT",
+            "text": "Tre Mingo, Port Worker at Port of Oakland. 18 named workers at 5 named businesses in Jack London on the ledger this cycle.",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-dcf3c551e335"
+          },
+          {
+            "t": "FACT",
+            "text": "Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 12.7% · revenue $3.7M (+$9k vs C115) · on the roster: Hector Leech (Dishwasher); Trenton Nawan (Server); Guadalupe Lupe (Bartender); Sora Hint (Barista) +1 more",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-cb064eda4300"
+          },
+          {
+            "t": "FACT",
+            "text": "Anchor Build · Construction · 181 employees · growth 13.7% · revenue $148.4M (+$389k vs C115) · key personnel: Marguerite Salcedo (managing partner) · on the roster: Travis Golin (Construction laborer); Briar Soto (Electrician); Kaila Brown (Construction worker); Marguerite Salcedo (Managing Partner, Anchor Build)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-47fd26c1dbe2"
+          },
+          {
+            "t": "FACT",
+            "text": "Harborline Grill · Restaurant & Dining · 7 employees · growth 12% · revenue $869k (+$2k vs C115) · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-5b8d329b1119"
+          },
+          {
+            "t": "FACT",
+            "text": "Blue Lantern Bar · Nightlife & Entertainment · 31 employees · growth 13.9% · revenue $4M (+$11k vs C115) · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-500e32a705c3"
+          },
+          {
+            "t": "FACT",
+            "text": "Elle Lilo — Harbor Tugboat Captain — Port of Oakland, Jack London",
+            "src": "Simulation_Ledger profile for POP-00177",
+            "id": "F-c1b4eb14d9d4"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-11-16T19:16:01.837Z"
+}

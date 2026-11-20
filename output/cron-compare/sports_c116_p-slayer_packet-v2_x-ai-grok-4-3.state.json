@@ -1,0 +1,382 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00008",
+    "name": "P Slayer",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+    "approach": "Fan-heat approach (P Slayer pulse): do NOT open from the FO press release or the award board. Open from gut or Oakland sensory (bar, lot, bleacher row, BART after). First-person I/we only. Pick 1–2 charge-bag modes from this slice. Friction pivot required — name the counter-argument, kill it. ONE real foil number max (from FoilNumber / AnchorFacts); never invent x-stats or roster moves. Hook PriorTake when present — eat it or double down (\"I was wrong\" is craft). End on charge that sticks: dare, confession, or update. Not Anthony. Not Hal. Not multi-voice sports-desk average.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "fan-heat",
+      "fanCharge": "fury",
+      "bagModes": [
+        "1 Hate the Move",
+        "3 Friction Pivot"
+      ],
+      "friction": "The stands feel sold out or sold short — write into that gap, not the press release.",
+      "centralFeeling": "Oakland should feel the FO heard the bleachers.",
+      "priorTake": "NONE — write cold or invent no prior; wall may still inject at wake",
+      "sceneRule": "You may invent unnamed bar / lot / BART / bleacher texture that contradicts nothing on this slice. Do not invent star players, contracts, stats, or quotes. Named people stay on PLAYERS list or Tribune colleagues (Anthony, Hal, Mags) as foils."
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "roster-move",
+    "hood": "Lake Merritt",
+    "src": "Oakland_Sports_Feed cycle 116; world_summary_c116.md \"## Sports\" · Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+    "plan": {
+      "focus": "Fan reaction to the trade and the impact on the A's infield"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00081",
+        "name": "Carmen Mesa",
+        "profile": "Carmen Mesa — Starting Pitcher, Philadelphia Phillies",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00527",
+        "name": "Mike Paulson",
+        "profile": "Mike Paulson — General Manager, Oakland A's & The Oaks",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00053",
+        "name": "Kevin Clark",
+        "profile": "Kevin Clark — Third Baseman, Oakland A's",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00527-d079c91f8e",
+        "pop": "POP-00527",
+        "name": "Mike Paulson",
+        "quote": "The trade was about maximizing our return on Carmen Mesa, a player with high potential who didn't quite fit into our rotation. We got Giancarlo Hernandez, a third baseman with an A-potential glove, and Antone Baez, a left fielder with C potential. It's a good haul. Now, we've got a battle brewing at third base between Hernandez, Kevin Clark, and Ernesto Quintero. I'm excited to see how these guys compete and push each other to be better.",
+        "factIds": [
+          "F-e76852f945e3",
+          "F-a09331ee598f"
+        ],
+        "src": "packet.W2[POP-00527]"
+      },
+      {
+        "id": "Q-POP-00053-04228b1f09",
+        "pop": "POP-00053",
+        "name": "Kevin Clark",
+        "quote": "I'm not gonna lie, it's a little weird having Giancarlo Hernandez on the team now. I mean, we're talking about a guy with an A-potential glove at third base, which is my position. It's a competition, and I'm ready for it. I've been around long enough to know that the front office is looking for the best fit, and if that means Hernandez gets more playing time, so be it. I'm just here to help the team win.",
+        "factIds": [
+          "F-e76852f945e3",
+          "F-a09331ee598f"
+        ],
+        "src": "packet.W2[POP-00053]"
+      },
+      {
+        "id": "Q-POP-00081-00e219fa44",
+        "pop": "POP-00081",
+        "name": "Carmen Mesa",
+        "quote": "I've seen a mix of emotions around the neighborhood since the trade. Some folks are still reeling from Mark Aitken leaving for Colorado, and now with Giancarlo Hernandez coming in, people are wondering what that means for Kevin Clark's chances. The A's infield is definitely a topic of conversation. I've heard some people saying it's a good move, while others are concerned about the impact on the team's local identity.",
+        "factIds": [
+          "F-ea0fe5944e85",
+          "F-7a0f9dccc567",
+          "F-f834aeb1460c"
+        ],
+        "src": "packet.W2[POP-00081]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "P Slayer",
+        "text": "The trade may spark a heated debate among A's fans about the team's direction",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C116",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-871096fd8925"
+    },
+    {
+      "t": "FACT",
+      "text": "Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+      "src": "Oakland_Sports_Feed cycle 116; world_summary_c116.md \"## Sports\" · Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+      "id": "F-a09331ee598f"
+    },
+    {
+      "t": "FACT",
+      "text": "The stands feel sold out or sold short — write into that gap, not the press release.",
+      "src": "Oakland_Sports_Feed cycle 116; world_summary_c116.md \"## Sports\" · Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+      "id": "F-ea0fe5944e85"
+    },
+    {
+      "t": "FACT",
+      "text": "StoryAngle (feed): Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+      "src": "Oakland_Sports_Feed cycle 116; world_summary_c116.md \"## Sports\" · Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+      "id": "F-b4908bb76645"
+    },
+    {
+      "t": "FACT",
+      "text": "Stats (feed): Giancarlo Hernandez/78OVR/A POT/96FLD/80REAC/70ARM/65CON R/68CON L, Antone Baez/70OVR/C POT, Carmen Mesa/81OVR/B POT/9IP/5H/12SO/0R (first start vs Cubs), Porter Broadway/70OVR/C POT, Jose Fuentes/63OVR/B POT, A's budget/$129.42M before/$130.35M after",
+      "src": "Oakland_Sports_Feed cycle 116; world_summary_c116.md \"## Sports\" · Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+      "id": "F-f834aeb1460c"
+    },
+    {
+      "t": "FACT",
+      "text": "Event: A's — trade-recap (off-season)",
+      "src": "Oakland_Sports_Feed cycle 116; world_summary_c116.md \"## Sports\" · Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+      "id": "F-7a0f9dccc567"
+    },
+    {
+      "t": "FACT",
+      "text": "NamesUsed: Carmen Mesa (SP), Porter Broadway (RP), Jose Fuentes (2B), Giancarlo Hernandez (3B), Antone Baez (LF), Mike Paulson (GM), Kevin Clark (3B), Ernesto Quintero (3B/1B)",
+      "src": "Oakland_Sports_Feed cycle 116; world_summary_c116.md \"## Sports\" · Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+      "id": "F-e76852f945e3"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+      "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+      "id": "F-647fd9067a33"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "p-slayer-fan-heat-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Turn a Packet-backed sports result or roster move into fan consequence. Owning or doubling down on a prior take and applying fan or front-office pressure are success; press-box analysis and tidy resolution are not.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "first-person I/we fan-heat column",
+      "targetWords": "400-700",
+      "opening": "a bar, lot, bleacher, sidewalk, or sports-viewing sensory moment"
+    },
+    "authorizedTexture": [
+      "a bar, lot, bleacher, sidewalk, or sports-viewing setting; a named in-world venue is allotted texture",
+      "the reporter's own presence, gut reaction, or sensory observation",
+      "collective I or we used as columnist rhetoric and emotional stance, not as measured public sentiment or a poll",
+      "a rhetorical counterargument from unnamed fans used as an argument foil, not as an attributed quote",
+      "metaphor and emotional inference grounded in a supplied fact"
+    ],
+    "textureConditions": [
+      "I or we must not claim a verified collective sentiment, count, gathering, or event",
+      "an unnamed counterargument must remain rhetorical rather than becoming a quote or sourced statement",
+      "scene texture must carry no roster move, result, stat, contract, injury, player act, or front-office act",
+      "a prior-take confession or paraphrase requires a Packet-backed prior article or wall entry, and an exact quote requires supplied text",
+      "in-world named spots that are not real Oakland are allotted hallucination and belong on INTAKE BIZ if newly named",
+      "player, team, roster, statistic, result, and front-office facts still require Packet support"
+    ],
+    "canonBlockers": [
+      "a real-world player, team, venue, business, institution, or organization imported into the city; or an invented person given the authority of an established citizen",
+      "an unsupported roster move, signing, trade, non-move, result, record, streak, award, contract, or front-office act",
+      "an unsupported stat, metric, number, date, duration, or salary",
+      "an unsupported injury, medical, private-life, or mindset claim",
+      "a fabricated player, coach, or front-office quote or interview",
+      "collective fan sentiment presented as measured fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-d4c5945564a0",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-871096fd8925",
+        "t": "FACT",
+        "text": "Current cycle: C116",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-a09331ee598f",
+        "t": "FACT",
+        "text": "Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+        "src": "Oakland_Sports_Feed cycle 116; world_summary_c116.md \"## Sports\" · Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen"
+      },
+      {
+        "id": "F-ea0fe5944e85",
+        "t": "FACT",
+        "text": "The stands feel sold out or sold short — write into that gap, not the press release.",
+        "src": "Oakland_Sports_Feed cycle 116; world_summary_c116.md \"## Sports\" · Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen"
+      },
+      {
+        "id": "F-b4908bb76645",
+        "t": "FACT",
+        "text": "StoryAngle (feed): Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+        "src": "Oakland_Sports_Feed cycle 116; world_summary_c116.md \"## Sports\" · Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen"
+      },
+      {
+        "id": "F-f834aeb1460c",
+        "t": "FACT",
+        "text": "Stats (feed): Giancarlo Hernandez/78OVR/A POT/96FLD/80REAC/70ARM/65CON R/68CON L, Antone Baez/70OVR/C POT, Carmen Mesa/81OVR/B POT/9IP/5H/12SO/0R (first start vs Cubs), Porter Broadway/70OVR/C POT, Jose Fuentes/63OVR/B POT, A's budget/$129.42M before/$130.35M after",
+        "src": "Oakland_Sports_Feed cycle 116; world_summary_c116.md \"## Sports\" · Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen"
+      },
+      {
+        "id": "F-7a0f9dccc567",
+        "t": "FACT",
+        "text": "Event: A's — trade-recap (off-season)",
+        "src": "Oakland_Sports_Feed cycle 116; world_summary_c116.md \"## Sports\" · Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen"
+      },
+      {
+        "id": "F-e76852f945e3",
+        "t": "FACT",
+        "text": "NamesUsed: Carmen Mesa (SP), Porter Broadway (RP), Jose Fuentes (2B), Giancarlo Hernandez (3B), Antone Baez (LF), Mike Paulson (GM), Kevin Clark (3B), Ernesto Quintero (3B/1B)",
+        "src": "Oakland_Sports_Feed cycle 116; world_summary_c116.md \"## Sports\" · Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen"
+      },
+      {
+        "id": "F-647fd9067a33",
+        "t": "FACT",
+        "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+        "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00527-d079c91f8e",
+        "speakerId": "POP-00527",
+        "speakerName": "Mike Paulson",
+        "text": "The trade was about maximizing our return on Carmen Mesa, a player with high potential who didn't quite fit into our rotation. We got Giancarlo Hernandez, a third baseman with an A-potential glove, and Antone Baez, a left fielder with C potential. It's a good haul. Now, we've got a battle brewing at third base between Hernandez, Kevin Clark, and Ernesto Quintero. I'm excited to see how these guys compete and push each other to be better.",
+        "factIds": [
+          "F-e76852f945e3",
+          "F-a09331ee598f"
+        ],
+        "src": "packet.W2[POP-00527]"
+      },
+      {
+        "id": "Q-POP-00053-04228b1f09",
+        "speakerId": "POP-00053",
+        "speakerName": "Kevin Clark",
+        "text": "I'm not gonna lie, it's a little weird having Giancarlo Hernandez on the team now. I mean, we're talking about a guy with an A-potential glove at third base, which is my position. It's a competition, and I'm ready for it. I've been around long enough to know that the front office is looking for the best fit, and if that means Hernandez gets more playing time, so be it. I'm just here to help the team win.",
+        "factIds": [
+          "F-e76852f945e3",
+          "F-a09331ee598f"
+        ],
+        "src": "packet.W2[POP-00053]"
+      },
+      {
+        "id": "Q-POP-00081-00e219fa44",
+        "speakerId": "POP-00081",
+        "speakerName": "Carmen Mesa",
+        "text": "I've seen a mix of emotions around the neighborhood since the trade. Some folks are still reeling from Mark Aitken leaving for Colorado, and now with Giancarlo Hernandez coming in, people are wondering what that means for Kevin Clark's chances. The A's infield is definitely a topic of conversation. I've heard some people saying it's a good move, while others are concerned about the impact on the team's local identity.",
+        "factIds": [
+          "F-ea0fe5944e85",
+          "F-7a0f9dccc567",
+          "F-f834aeb1460c"
+        ],
+        "src": "packet.W2[POP-00081]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00081",
+        "name": "Carmen Mesa",
+        "profile": "Carmen Mesa — Starting Pitcher, Philadelphia Phillies",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00527",
+        "name": "Mike Paulson",
+        "profile": "Mike Paulson — General Manager, Oakland A's & The Oaks",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00053",
+        "name": "Kevin Clark",
+        "profile": "Kevin Clark — Third Baseman, Oakland A's",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "P Slayer",
+        "text": "The trade may spark a heated debate among A's fans about the team's direction",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "a bar, lot, bleacher, sidewalk, or sports-viewing setting; a named in-world venue is allotted texture",
+      "the reporter's own presence, gut reaction, or sensory observation",
+      "collective I or we used as columnist rhetoric and emotional stance, not as measured public sentiment or a poll",
+      "a rhetorical counterargument from unnamed fans used as an argument foil, not as an attributed quote",
+      "metaphor and emotional inference grounded in a supplied fact"
+    ],
+    "textureConditions": [
+      "I or we must not claim a verified collective sentiment, count, gathering, or event",
+      "an unnamed counterargument must remain rhetorical rather than becoming a quote or sourced statement",
+      "scene texture must carry no roster move, result, stat, contract, injury, player act, or front-office act",
+      "a prior-take confession or paraphrase requires a Packet-backed prior article or wall entry, and an exact quote requires supplied text",
+      "in-world named spots that are not real Oakland are allotted hallucination and belong on INTAKE BIZ if newly named",
+      "player, team, roster, statistic, result, and front-office facts still require Packet support"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

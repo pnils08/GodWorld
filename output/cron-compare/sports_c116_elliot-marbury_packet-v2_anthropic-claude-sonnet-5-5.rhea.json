@@ -1,0 +1,85 @@
+{
+  "draft": "output/cron-compare/sports_c116_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "116",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "f1bd7a435c3f4fee4ebd2867247a7fa0255f1afa126cd37840e1947c3b9b8798",
+  "pass": false,
+  "flags": [
+    {
+      "claim": "Benji Dillon threw 150.1 innings with 65 walks. That is 3.9 walks per nine and 2.03 strikeouts per walk, at an ERA of 4.43.",
+      "issue": "Direct contradiction of recorded sports state: Ground truth C116/C114 explicitly records Benji Dillon's 2041 season line as 140.2 IP, 56 BB, 120 SO, and a 4.61 ERA (9-8 record, 2.0 WAR), not 150.1 IP, 65 BB, or 4.43 ERA.",
+      "severity": "high"
+    }
+  ],
+  "flagCount": 1,
+  "highSeverityCount": 1,
+  "summary": "Benji Dillon 2041 season statistics contradict canonical ground truth (140.2 IP, 4.61 ERA, 56 BB).",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "revise",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "marbury-data-desk-v1",
+    "packageVersion": "MARBURY-LEP2-2",
+    "manifestId": "AM-87cbffc20ddb",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "170",
+          "2042"
+        ]
+      },
+      {
+        "code": "UNAPPROVED_QUOTE",
+        "values": [
+          "possible",
+          "carried a full workload."
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Arturo Ramos",
+      "Benji Dillon",
+      "Henry Rivas"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0161,
+  "durationMs": 13321,
+  "parseError": false,
+  "ranAt": "2026-11-19T00:18:04.824Z",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 350",
+    "words": 921,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "f1bd7a435c3f4fee4ebd2867247a7fa0255f1afa126cd37840e1947c3b9b8798",
+    "costUsd": 0.0015
+  }
+}

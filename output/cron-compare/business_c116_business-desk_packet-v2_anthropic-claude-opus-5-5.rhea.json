@@ -1,0 +1,100 @@
+{
+  "draft": "output/cron-compare/business_c116_business-desk_packet-v2_anthropic-claude-opus-5-5.md",
+  "cycle": "116",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "e6f06c0c914e60885af50e57f70fcf6918bcd3ded4ceceadb75a1b258e1f9e6d",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes match exact interview records, named citizen roles match ledger profiles, and economic/migration context aligns with Cycle 116 world state.",
+  "review": {
+    "profileId": "jordan-velez",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "jordan-economic-labor-v1",
+    "packageVersion": "JORDAN-LEP2-2",
+    "manifestId": "AM-88a5a854b025",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "1",
+          "501",
+          "111",
+          "425.1",
+          "13.7",
+          "000",
+          "80",
+          "61",
+          "7th"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Briar Soto",
+      "Bruce Wright",
+      "Elle Lilo",
+      "Guadalupe Lee",
+      "Guadalupe Lupe",
+      "Hector Leech",
+      "Jalen Hill",
+      "Jordan Velez",
+      "Kaila Brown",
+      "Marguerite Salcedo",
+      "Quynh Le",
+      "Sora Hint",
+      "Tomas Renteria",
+      "Travis Golin",
+      "Tre Mingo",
+      "Trenton Nawan",
+      "Yuki Ji"
+    ],
+    "unverified": [
+      "Anchor Build",
+      "Blue Lantern Bar",
+      "Business Reporter",
+      "Gold Tavern",
+      "Harborline Grill",
+      "Marine Systems"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0153,
+  "durationMs": 44390,
+  "parseError": false,
+  "ranAt": "2026-11-17T00:17:54.891Z",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 500",
+    "words": 1040,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "e6f06c0c914e60885af50e57f70fcf6918bcd3ded4ceceadb75a1b258e1f9e6d",
+    "costUsd": 0.001
+  }
+}

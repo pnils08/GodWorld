@@ -1,0 +1,786 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "116",
+  "persona": "freelance-firebrand",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00799",
+      "name": "Jax Caldera",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "The map says decay; the program roster does not answer it.",
+      "approach": "Firebrand approach (sim stink-audit): do NOT open from the official timeline. Find what does not line up — metric vs claim, money vs outcome, boomtown copy vs decay, crisis with no owner. Write into the contradiction. Name who must answer. End on the unanswered question. Scene color is yours (weather, street, bar), including your own route through one or many bars, so long as it contradicts nothing on this slice. Do not invent a named business or institution that the sim has not supplied. Never invent careers for named people — RoleType lines are immutable. Never invent citizen names.",
+      "creativeBrief": {
+        "kind": "data-accountability",
+        "method": "TWO_SIDED_DATA_AUDIT",
+        "mismatch": {
+          "a": "KONO: decay [RetailVitality -1.06, HousingPressure +1.000] — RetailVitality now 8.68 (12 of 22, city median 9.21); HousingPressure now 1.5 (15 of 22, city median 0); Sentiment now 0.05 (15 of 22, city median 0.06) — with no matching active initiative",
+          "aSrc": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+          "b": "No active initiative (or mitigator) owns this break on the record",
+          "bSrc": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19"
+        },
+        "scopeHoods": [
+          "KONO"
+        ],
+        "missing": [
+          "the prior comparison needed to validate the flagged direction",
+          "an office response to the data mismatch"
+        ],
+        "sceneRule": "You may invent one or many bar/street/sensory scenes and Jax's own presence or route through them, so long as the color contradicts no supplied sim fact. A generic bar is persona texture, not a new canon business. Named people must stay on the CITIZENS list or be unnamed. Do not invent a named business or institution. RoleType is immutable — do not reassign careers.",
+        "sourcePointers": [
+          "output/cron-compare/stink_c116.json",
+          "output/desk_signal_c116.json",
+          "output/world_summary_c116.md",
+          "output/neighborhood_texture_c116.md",
+          "output/engine_audit_c116.json",
+          "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "anomaly",
+      "hood": "KONO",
+      "score": 51,
+      "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+      "nearby": [
+        {
+          "text": "Avery Santana (mayor gavel): Keep the transmitted charter renewal ordinance on this cycle's Council calendar; require verified C114 closeout publication before final action, with business-and-resident scope and the 23-da",
+          "src": "output/civic-voice/mayor_gavel_c116.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): Direct execution and publication of the D3 Fruitvale briefing record with district-level and Fruitvale data; hold expansion pending that record, the D5 audit and the Baylight feasibility revi",
+          "src": "output/civic-voice/mayor_gavel_c116.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): Hold further design advancement until preliminary schematics are delivered and a documented Fruitvale public comment-and-response record is published; preserve the C86 authorization. — \"Phase",
+          "src": "output/civic-voice/mayor_gavel_c116.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): Require the Q3 clinical intake audit filing with HCAI and the Council Clerk and completion of the Telegraph and 47th merchant walkthrough before certifying operational oversight. — \"Temescal'",
+          "src": "output/civic-voice/mayor_gavel_c116.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): Decline to certify a construction milestone; require the evidence-file review while independent remediation verification, hotline, dust-control and workforce oversight continue. — \"I will mea",
+          "src": "output/civic-voice/mayor_gavel_c116.json"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00596",
+          "name": "Michael Corliss",
+          "profile": "Michael Corliss (POP-00596) — role: Photographer; neighborhood: KONO; born: 2019; careerStage: entry-level; wealth: 2; employerBiz: BIZ-00018; skills: Creative & Arts; tier: 3",
+          "role": "Photographer",
+          "hood": "KONO",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+            "pop": "POP-00596",
+            "rowName": "Michael Corliss",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01061",
+          "name": "Celeste Moon",
+          "profile": "Celeste Moon (POP-01061) — role: singer; neighborhood: KONO; born: 1988; careerStage: entry-level; wealth: 0; employerBiz: SELF_EMPLOYED; skills: Creative & Arts; tier: 3",
+          "role": "singer",
+          "hood": "KONO",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+            "pop": "POP-01061",
+            "rowName": "Celeste Moon",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01111",
+          "name": "Jasmine Torres",
+          "profile": "Jasmine Torres (POP-01111) — role: Founder, Tenth Street Digital; neighborhood: KONO; born: 2010; careerStage: mid-career; wealth: 4; employerBiz: BIZ-00011; skills: Small Business; tier: 3",
+          "role": "Founder, Tenth Street Digital",
+          "hood": "KONO",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+            "pop": "POP-01111",
+            "rowName": "Jasmine Torres",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00276",
+          "name": "Dmitri Soto",
+          "profile": "Dmitri Soto (POP-00276) — role: Container Yard Supervisor; neighborhood: KONO; born: 1994; careerStage: senior; wealth: 5; employerBiz: BIZ-00012; skills: Port & Labor; tier: 3",
+          "role": "Container Yard Supervisor",
+          "hood": "KONO",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+            "pop": "POP-00276",
+            "rowName": "Dmitri Soto",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00650",
+          "name": "Mesi Westin",
+          "profile": "Mesi Westin (POP-00650) — role: Dishwasher; neighborhood: KONO; born: 2011; careerStage: mid-career; wealth: 3; employerBiz: BIZ-00050; skills: The Vulnerable; tier: 3",
+          "role": "Dishwasher",
+          "hood": "KONO",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+            "pop": "POP-00650",
+            "rowName": "Mesi Westin",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01017",
+          "name": "Valentina Campbell",
+          "profile": "Valentina Campbell (POP-01017) — role: Server; neighborhood: Jack London; born: 2024; careerStage: student; wealth: 0; employerBiz: BIZ-00041; skills: Food & Culture; tier: 4",
+          "role": "Server",
+          "hood": "Jack London",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+            "pop": "POP-01017",
+            "rowName": "Valentina Campbell",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00791",
+          "name": "Elena Soria Dominguez",
+          "profile": "Elena Soria Dominguez (POP-00791) — role: Transit Hub Planning Lead; neighborhood: Fruitvale; born: 1999; careerStage: mid-career; wealth: 6; employerBiz: BIZ-00096; skills: Government & Civic; tier: 3",
+          "role": "Transit Hub Planning Lead",
+          "hood": "Fruitvale",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+            "pop": "POP-00791",
+            "rowName": "Elena Soria Dominguez",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00935",
+          "name": "Emiko Zhang",
+          "profile": "Emiko Zhang (POP-00935) — role: Home Health Aide; neighborhood: Jack London; born: 1984; careerStage: senior; wealth: 7; employerBiz: BIZ-00015; skills: Healthcare; tier: 4",
+          "role": "Home Health Aide",
+          "hood": "Jack London",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+            "pop": "POP-00935",
+            "rowName": "Emiko Zhang",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00471",
+          "name": "Anna Baker",
+          "profile": "Anna Baker (POP-00471) — role: Trade Union Representative; neighborhood: Jack London; born: 1967; careerStage: retired; wealth: 8; employerBiz: BIZ-00012; skills: Port & Labor; tier: 4",
+          "role": "Trade Union Representative",
+          "hood": "Jack London",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+            "pop": "POP-00471",
+            "rowName": "Anna Baker",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C116",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-871096fd8925"
+      },
+      {
+        "t": "FACT",
+        "text": "KONO: decay [RetailVitality -1.06, HousingPressure +1.000] — RetailVitality now 8.68 (12 of 22, city median 9.21); HousingPressure now 1.5 (15 of 22, city median 0); Sentiment now 0.05 (15 of 22, city median 0.06) — with no matching active initiative",
+        "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+        "id": "F-6c35947cd157"
+      },
+      {
+        "t": "FACT",
+        "text": "No active initiative (or mitigator) owns this break on the record",
+        "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+        "id": "F-2ec3483bbbcd"
+      },
+      {
+        "t": "FACT",
+        "text": "Season: Spring | Weather: 54°F mild, W 8 mph, clear (frontState CLEAR), humidity 53, visibility 10",
+        "src": "World_Config/weather snapshot for C116",
+        "id": "F-81483aca176f"
+      },
+      {
+        "t": "FACT",
+        "text": "The lingering smell of smoke reminds everyone of the recent blaze, though life on the block seems to carry on as usual. A newcomer from Jack London has settled in.",
+        "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+        "id": "F-5c3b59f42deb"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ]
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "street",
+    "candidates": [
+      {
+        "pop": "POP-00596",
+        "name": "Michael Corliss",
+        "role": "Photographer",
+        "hood": "KONO",
+        "profile": "Michael Corliss (POP-00596) — role: Photographer; neighborhood: KONO; born: 2019; careerStage: entry-level; wealth: 2; employerBiz: BIZ-00018; skills: Creative & Arts; tier: 3",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+          "pop": "POP-00596",
+          "rowName": "Michael Corliss",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01061",
+        "name": "Celeste Moon",
+        "role": "singer",
+        "hood": "KONO",
+        "profile": "Celeste Moon (POP-01061) — role: singer; neighborhood: KONO; born: 1988; careerStage: entry-level; wealth: 0; employerBiz: SELF_EMPLOYED; skills: Creative & Arts; tier: 3",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+          "pop": "POP-01061",
+          "rowName": "Celeste Moon",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01111",
+        "name": "Jasmine Torres",
+        "role": "Founder, Tenth Street Digital",
+        "hood": "KONO",
+        "profile": "Jasmine Torres (POP-01111) — role: Founder, Tenth Street Digital; neighborhood: KONO; born: 2010; careerStage: mid-career; wealth: 4; employerBiz: BIZ-00011; skills: Small Business; tier: 3",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+          "pop": "POP-01111",
+          "rowName": "Jasmine Torres",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00276",
+        "name": "Dmitri Soto",
+        "role": "Container Yard Supervisor",
+        "hood": "KONO",
+        "profile": "Dmitri Soto (POP-00276) — role: Container Yard Supervisor; neighborhood: KONO; born: 1994; careerStage: senior; wealth: 5; employerBiz: BIZ-00012; skills: Port & Labor; tier: 3",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+          "pop": "POP-00276",
+          "rowName": "Dmitri Soto",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00650",
+        "name": "Mesi Westin",
+        "role": "Dishwasher",
+        "hood": "KONO",
+        "profile": "Mesi Westin (POP-00650) — role: Dishwasher; neighborhood: KONO; born: 2011; careerStage: mid-career; wealth: 3; employerBiz: BIZ-00050; skills: The Vulnerable; tier: 3",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+          "pop": "POP-00650",
+          "rowName": "Mesi Westin",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01017",
+        "name": "Valentina Campbell",
+        "role": "Server",
+        "hood": "Jack London",
+        "profile": "Valentina Campbell (POP-01017) — role: Server; neighborhood: Jack London; born: 2024; careerStage: student; wealth: 0; employerBiz: BIZ-00041; skills: Food & Culture; tier: 4",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+          "pop": "POP-01017",
+          "rowName": "Valentina Campbell",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00791",
+        "name": "Elena Soria Dominguez",
+        "role": "Transit Hub Planning Lead",
+        "hood": "Fruitvale",
+        "profile": "Elena Soria Dominguez (POP-00791) — role: Transit Hub Planning Lead; neighborhood: Fruitvale; born: 1999; careerStage: mid-career; wealth: 6; employerBiz: BIZ-00096; skills: Government & Civic; tier: 3",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+          "pop": "POP-00791",
+          "rowName": "Elena Soria Dominguez",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00935",
+        "name": "Emiko Zhang",
+        "role": "Home Health Aide",
+        "hood": "Jack London",
+        "profile": "Emiko Zhang (POP-00935) — role: Home Health Aide; neighborhood: Jack London; born: 1984; careerStage: senior; wealth: 7; employerBiz: BIZ-00015; skills: Healthcare; tier: 4",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+          "pop": "POP-00935",
+          "rowName": "Emiko Zhang",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00471",
+        "name": "Anna Baker",
+        "role": "Trade Union Representative",
+        "hood": "Jack London",
+        "profile": "Anna Baker (POP-00471) — role: Trade Union Representative; neighborhood: Jack London; born: 1967; careerStage: retired; wealth: 8; employerBiz: BIZ-00012; skills: Port & Labor; tier: 4",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+          "pop": "POP-00471",
+          "rowName": "Anna Baker",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Jax Caldera",
+    "popid": "POP-00799"
+  },
+  "assignment": {
+    "story": {
+      "ref": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+      "label": "KONO: decay [RetailVitality -1.06, HousingPressure +1.000] — RetailVitality now 8.68 (12 of 22, city median 9.21); HousingPressure now 1.5 (15 of 22, city median 0); Sentiment now 0.05 (15 of 22, city median 0.06) — with no matching active initiative",
+      "kind": "anomaly",
+      "angle": "The map says decay; the program roster does not answer it.",
+      "hookLine": null,
+      "hood": "KONO",
+      "popids": [
+        "POP-00596",
+        "POP-01061",
+        "POP-01111",
+        "POP-00276",
+        "POP-00650",
+        "POP-01017",
+        "POP-00791",
+        "POP-00935",
+        "POP-00471"
+      ],
+      "citizens": [
+        "Michael Corliss — Photographer, KONO",
+        "Celeste Moon — singer, KONO",
+        "Jasmine Torres — Founder, Tenth Street Digital, KONO",
+        "Dmitri Soto — Container Yard Supervisor, KONO",
+        "Mesi Westin — Dishwasher, KONO",
+        "Valentina Campbell — Server, Jack London",
+        "Elena Soria Dominguez — Transit Hub Planning Lead, Fruitvale",
+        "Emiko Zhang — Home Health Aide, Jack London",
+        "Anna Baker — Trade Union Representative, Jack London"
+      ],
+      "stinkClass": "metric-contradiction",
+      "stinkScore": 51
+    },
+    "approach": "Firebrand approach (sim stink-audit): do NOT open from the official timeline. Find what does not line up — metric vs claim, money vs outcome, boomtown copy vs decay, crisis with no owner. Write into the contradiction. Name who must answer. End on the unanswered question. Scene color is yours (weather, street, bar), including your own route through one or many bars, so long as it contradicts nothing on this slice. Do not invent a named business or institution that the sim has not supplied. Never invent careers for named people — RoleType lines are immutable. Never invent citizen names."
+  },
+  "jaxSlice": {
+    "stink": {
+      "className": "metric-contradiction",
+      "score": 51,
+      "label": "math-imbalance (medium) | KONO: decay [RetailVitality -1.06, HousingPressure +1.000] — RetailVitality now 8.68 (12 of 22, city median 9.21); HousingPressure now 1.5 (15 of 22, city median 0); Sentiment now 0.05 (15 of 22, city median 0.06) — with no matching active initiative",
+      "ref": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+      "kind": "anomaly",
+      "desk": "civic"
+    },
+    "contradiction": {
+      "a": "KONO: decay [RetailVitality -1.06, HousingPressure +1.000] — RetailVitality now 8.68 (12 of 22, city median 9.21); HousingPressure now 1.5 (15 of 22, city median 0); Sentiment now 0.05 (15 of 22, city median 0.06) — with no matching active initiative",
+      "b": "No active initiative (or mitigator) owns this break on the record",
+      "frame": "The map says decay; the program roster does not answer it.",
+      "aSrc": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+      "bSrc": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19"
+    },
+    "scene": {
+      "weather": "Season: Spring | Weather: 54°F mild, W 8 mph, clear (frontState CLEAR), humidity 53, visibility 10",
+      "hood": "KONO",
+      "neighborhoodTexture": "The lingering smell of smoke reminds everyone of the recent blaze, though life on the block seems to carry on as usual. A newcomer from Jack London has settled in.",
+      "whoLivedIt": [
+        "HH-0116-F007 | solo | head POP-00889 | KONO"
+      ],
+      "chaos": [
+        "| fire_engine | major_blaze_contained | neighborhood KONO | Sentiment | -0.06 | FALSE |",
+        "- fire_engine → KONO: Smoke over the rooftops — a blaze contained, but the block smells it for days."
+      ],
+      "colorRoom": "You may invent one or many bar/street/sensory scenes and Jax's own presence or route through them, so long as the color contradicts no supplied sim fact. A generic bar is persona texture, not a new canon business. Named people must stay on the CITIZENS list or be unnamed. Do not invent a named business or institution. RoleType is immutable — do not reassign careers."
+    },
+    "citizens": [
+      {
+        "popid": "POP-00596",
+        "name": "Michael Corliss",
+        "role": "Photographer",
+        "neighborhood": "KONO",
+        "careerStage": "entry-level",
+        "employerBizId": "BIZ-00018",
+        "profile": "Michael Corliss (POP-00596) — role: Photographer; neighborhood: KONO; born: 2019; careerStage: entry-level; wealth: 2; employerBiz: BIZ-00018; skills: Creative & Arts; tier: 3",
+        "why": "stink-handle"
+      },
+      {
+        "popid": "POP-01061",
+        "name": "Celeste Moon",
+        "role": "singer",
+        "neighborhood": "KONO",
+        "careerStage": "entry-level",
+        "employerBizId": "SELF_EMPLOYED",
+        "profile": "Celeste Moon (POP-01061) — role: singer; neighborhood: KONO; born: 1988; careerStage: entry-level; wealth: 0; employerBiz: SELF_EMPLOYED; skills: Creative & Arts; tier: 3",
+        "why": "stink-handle"
+      },
+      {
+        "popid": "POP-01111",
+        "name": "Jasmine Torres",
+        "role": "Founder, Tenth Street Digital",
+        "neighborhood": "KONO",
+        "careerStage": "mid-career",
+        "employerBizId": "BIZ-00011",
+        "profile": "Jasmine Torres (POP-01111) — role: Founder, Tenth Street Digital; neighborhood: KONO; born: 2010; careerStage: mid-career; wealth: 4; employerBiz: BIZ-00011; skills: Small Business; tier: 3",
+        "why": "stink-handle"
+      },
+      {
+        "popid": "POP-00276",
+        "name": "Dmitri Soto",
+        "role": "Container Yard Supervisor",
+        "neighborhood": "KONO",
+        "careerStage": "senior",
+        "employerBizId": "BIZ-00012",
+        "profile": "Dmitri Soto (POP-00276) — role: Container Yard Supervisor; neighborhood: KONO; born: 1994; careerStage: senior; wealth: 5; employerBiz: BIZ-00012; skills: Port & Labor; tier: 3",
+        "why": "same-hood-signal"
+      },
+      {
+        "popid": "POP-00650",
+        "name": "Mesi Westin",
+        "role": "Dishwasher",
+        "neighborhood": "KONO",
+        "careerStage": "mid-career",
+        "employerBizId": "BIZ-00050",
+        "profile": "Mesi Westin (POP-00650) — role: Dishwasher; neighborhood: KONO; born: 2011; careerStage: mid-career; wealth: 3; employerBiz: BIZ-00050; skills: The Vulnerable; tier: 3",
+        "why": "same-hood-signal"
+      },
+      {
+        "popid": "POP-01017",
+        "name": "Valentina Campbell",
+        "role": "Server",
+        "neighborhood": "Jack London",
+        "careerStage": "student",
+        "employerBizId": "BIZ-00041",
+        "profile": "Valentina Campbell (POP-01017) — role: Server; neighborhood: Jack London; born: 2024; careerStage: student; wealth: 0; employerBiz: BIZ-00041; skills: Food & Culture; tier: 4",
+        "why": "bond-hop from interview pool"
+      },
+      {
+        "popid": "POP-00791",
+        "name": "Elena Soria Dominguez",
+        "role": "Transit Hub Planning Lead",
+        "neighborhood": "Fruitvale",
+        "careerStage": "mid-career",
+        "employerBizId": "BIZ-00096",
+        "profile": "Elena Soria Dominguez (POP-00791) — role: Transit Hub Planning Lead; neighborhood: Fruitvale; born: 1999; careerStage: mid-career; wealth: 6; employerBiz: BIZ-00096; skills: Government & Civic; tier: 3",
+        "why": "bond-hop from interview pool"
+      },
+      {
+        "popid": "POP-00935",
+        "name": "Emiko Zhang",
+        "role": "Home Health Aide",
+        "neighborhood": "Jack London",
+        "careerStage": "senior",
+        "employerBizId": "BIZ-00015",
+        "profile": "Emiko Zhang (POP-00935) — role: Home Health Aide; neighborhood: Jack London; born: 1984; careerStage: senior; wealth: 7; employerBiz: BIZ-00015; skills: Healthcare; tier: 4",
+        "why": "bond-hop from interview pool"
+      },
+      {
+        "popid": "POP-00471",
+        "name": "Anna Baker",
+        "role": "Trade Union Representative",
+        "neighborhood": "Jack London",
+        "careerStage": "retired",
+        "employerBizId": "BIZ-00012",
+        "profile": "Anna Baker (POP-00471) — role: Trade Union Representative; neighborhood: Jack London; born: 1967; careerStage: retired; wealth: 8; employerBiz: BIZ-00012; skills: Port & Labor; tier: 4",
+        "why": "bond-hop from interview pool"
+      }
+    ],
+    "bonds": [
+      {
+        "bondId": "BOND-2AEE3713",
+        "a": "POP-00276",
+        "b": "POP-01017",
+        "type": "friendship",
+        "intensity": "6.1",
+        "origin": "neighbor",
+        "neighborhood": "Jack London",
+        "aName": "Dmitri Soto",
+        "bName": "Valentina Campbell",
+        "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+      },
+      {
+        "bondId": "BOND-1BF24CCB",
+        "a": "POP-00791",
+        "b": "POP-00276",
+        "type": "alliance",
+        "intensity": "9.05",
+        "origin": "random",
+        "neighborhood": "cross-neighborhood",
+        "aName": "Elena Soria Dominguez",
+        "bName": "Dmitri Soto",
+        "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+      },
+      {
+        "bondId": "BOND-5F2CAADC",
+        "a": "POP-00276",
+        "b": "POP-00592",
+        "type": "professional",
+        "intensity": "5.75",
+        "origin": "neighbor",
+        "neighborhood": "Jack London",
+        "aName": "Dmitri Soto",
+        "bName": "Talia Finch",
+        "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+      },
+      {
+        "bondId": "BOND-83678FBB",
+        "a": "POP-00935",
+        "b": "POP-00650",
+        "type": "friendship",
+        "intensity": "6.8",
+        "origin": "neighbor",
+        "neighborhood": "Jack London",
+        "aName": "Emiko Zhang",
+        "bName": "Mesi Westin",
+        "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+      },
+      {
+        "bondId": "BOND-BD090A74",
+        "a": "POP-00471",
+        "b": "POP-00650",
+        "type": "friendship",
+        "intensity": "6",
+        "origin": "neighbor",
+        "neighborhood": "Jack London",
+        "aName": "Anna Baker",
+        "bName": "Mesi Westin",
+        "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+      }
+    ],
+    "gaps": {
+      "note": "Ledgers/surfaces that would deepen Jax further if wired or fixed",
+      "missingOrThin": [
+        {
+          "source": "EmployerBizId → Business_Ledger name/address",
+          "status": "gap",
+          "why": "RoleType alone; no shop name/street for employer scene color without inventing"
+        },
+        {
+          "source": "Cultural_Ledger venues by neighborhood",
+          "status": "gap-on-disk",
+          "why": "Bar/venue canon list not auto-attached to slice — Jax opens in bars; needs hood venue pointer"
+        },
+        {
+          "source": "Faith_Ledger / Faith_Organizations by hood",
+          "status": "partial",
+          "why": "Texture file sometimes names congregations; not joined to stink hood systematically"
+        },
+        {
+          "source": "LifeHistory_Log raw (beyond Who Lived It digest)",
+          "status": "partial",
+          "why": "Digest is tag-summary; full event prose would deepen street color without inventing people"
+        },
+        {
+          "source": "Relationship_Bonds live refresh",
+          "status": "stale-risk",
+          "why": "bond-ledger-live.tsv may lag; bond-hop quality depends on export freshness"
+        },
+        {
+          "source": "Neighborhood_Map row metrics on slice",
+          "status": "partial",
+          "why": "Stink label carries some decay numbers; full hood board not embedded as color (avoid jargon in prose)"
+        },
+        {
+          "source": "Map hoods with zero Simulation_Ledger residents (e.g. Brooklyn on C102)",
+          "status": "sim-gap",
+          "why": "Audit can flag decay for a hood nobody lives in on the ledger — stink is real, interview pool empty; slice walks to next candidate with residents"
+        },
+        {
+          "source": "Citizen pages / DialState",
+          "status": "via-citizenVoice",
+          "why": "Quote stage loads dials; slice does not pre-print dial prose (correct — voice owns it)"
+        }
+      ],
+      "colorAllowed": [
+        "Weather line from Riley/world_summary",
+        "neighborhood_texture paragraph (perception-only, often nameless)",
+        "Who Lived It lines for this hood",
+        "Chaos_Cars rows touching hood/citizen",
+        "Bond edges among pool (professional/friend/family)"
+      ]
+    }
+  },
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Jax Caldera",
+    "popid": "POP-00799",
+    "text": "I'm going to track down why KONO's numbers don't add up. The neighborhood looks alive, but the stats say decay. I need to find out who's responsible and what's really going on.",
+    "plan": {
+      "chase": "I'm going to track down why KONO's numbers don't add up. The neighborhood looks alive, but the stats say decay. I need to find out who's responsible and what's really going on.",
+      "focus": "KONO's mismatched vitality metrics and housing pressure",
+      "why": "The neighborhood's condition doesn't match the data; there's no clear initiative to address it",
+      "checks": [
+        "Talk to local business owners about their experiences",
+        "Review city reports on KONO's housing pressure",
+        "Interview city officials about their initiatives in KONO"
+      ],
+      "targets": [
+        {
+          "pop": "POP-01111",
+          "question": "What's your take on KONO's current state and the city's support?",
+          "basis": "Founder of Tenth Street Digital in KONO"
+        },
+        {
+          "pop": "POP-00276",
+          "question": "How do you see KONO's housing pressure affecting local workers?",
+          "basis": "Container Yard Supervisor in KONO"
+        }
+      ],
+      "interpretation": "The data suggests a disconnect between KONO's appearance and its official metrics, indicating a need for a closer look at the city's initiatives and local perceptions.",
+      "unverifiedLead": [
+        "A conversation with a local business owner hinted at frustration with the lack of city support",
+        "The recent blaze and newcomer settlement suggest KONO is undergoing changes"
+      ]
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Avery Santana (mayor gavel): Keep the transmitted charter renewal ordinance on this cycle's Council calendar; require verified C114 closeout publication before final action, with business-and-resident scope and the 23-da",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c116.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Direct execution and publication of the D3 Fruitvale briefing record with district-level and Fruitvale data; hold expansion pending that record, the D5 audit and the Baylight feasibility revi",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c116.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Hold further design advancement until preliminary schematics are delivered and a documented Fruitvale public comment-and-response record is published; preserve the C86 authorization. — \"Phase",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c116.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Require the Q3 clinical intake audit filing with HCAI and the Council Clerk and completion of the Telegraph and 47th merchant walkthrough before certifying operational oversight. — \"Temescal'",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c116.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Decline to certify a construction milestone; require the evidence-file review while independent remediation verification, hotline, dust-control and workforce oversight continue. — \"I will mea",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c116.json",
+      "popids": []
+    }
+  ],
+  "laneEntries": 115,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-18T12:15:42.526Z"
+}

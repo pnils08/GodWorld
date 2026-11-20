@@ -1,0 +1,78 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "116",
+  "persona": "p-slayer",
+  "byline": "P Slayer",
+  "bylinePopid": "POP-00008",
+  "article": "output/cron-compare/staged/sports_c116_p-slayer_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Carmen Mesa",
+        "role": "quoted-source",
+        "popid": "POP-00081"
+      },
+      {
+        "name": "Kevin Clark",
+        "role": "quoted-source",
+        "popid": "POP-00053"
+      },
+      {
+        "name": "Ernesto Quintero",
+        "role": "mentioned",
+        "popid": "POP-00050",
+        "floor": true
+      },
+      {
+        "name": "Giancarlo Hernandez",
+        "role": "mentioned",
+        "popid": "POP-01239",
+        "floor": true
+      },
+      {
+        "name": "Mark Aitken",
+        "role": "mentioned",
+        "popid": "POP-00003",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Lake Merritt"
+    ],
+    "claims": [
+      {
+        "claim": "I'm not gonna lie, it's a little weird having Giancarlo Hernandez on the team now. I mean, we're talking about a guy with an A-potential glove at third base, which is my position. It's a competition, and I'm ready for it. I've been around long enough to know that the front office is looking for the best fit, and if that means Hernandez gets more playing time, so be it. I'm just here to help the team win.",
+        "sourceRef": "citizenVoice PRESS Kevin Clark"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-d4c5945564a0",
+    "draftSha256": "33c2ea354662778998ff2e921bb71b3ac8a324b5d0fbf51a37c2321bd51a3daf",
+    "verdict": "output/cron-compare/sports_c116_p-slayer_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-11-19T00:18:59.011Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 400",
+      "words": 582,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "33c2ea354662778998ff2e921bb71b3ac8a324b5d0fbf51a37c2321bd51a3daf",
+      "costUsd": 0.001
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-19T00:19:03.660Z"
+}

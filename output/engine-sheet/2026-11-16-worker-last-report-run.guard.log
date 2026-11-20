@@ -1,0 +1,23 @@
+2026-11-17T04:16:31.173Z	2216342	guard	loaded	/root/GodWorld/output/engine-sheet/2026-11-16-worker-last-report-run.js CHIEF-FIRE 2026-11-23 | allow=/root/GodWorld/output/engine-sheet
+2026-11-17T04:16:33.110Z	2216342	net	allowed	POST https://oauth2.googleapis.com/token
+2026-11-17T04:16:33.240Z	2216342	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/Simulation_Ledger
+2026-11-17T04:16:34.250Z	2216342	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/Heritage_Ledger
+2026-11-17T04:16:34.446Z	2216342	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/Household_Ledger
+2026-11-17T04:16:34.918Z	2216342	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/Civic_Office_Ledger
+2026-11-17T04:16:35.195Z	2216342	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/Chaos_Cars
+2026-11-17T04:16:35.394Z	2216342	net	allowed	POST https://api.supermemory.ai/v3/search
+2026-11-17T04:16:35.759Z	2216342	net	allowed	POST https://api.supermemory.ai/v3/documents/list
+2026-11-17T04:16:35.907Z	2216342	net	allowed	GET https://api.supermemory.ai/v3/documents/3ue4eX2v5FRhgPqficH7cU
+2026-11-17T04:16:36.040Z	2216342	net	allowed	POST https://openrouter.ai/api/v1/chat/completions
+2026-11-17T04:16:37.152Z	2216342	net	allowed	POST https://api.supermemory.ai/v3/documents/list
+2026-11-17T04:16:37.295Z	2216342	net	allowed	GET https://api.supermemory.ai/v3/documents/3ue4eX2v5FRhgPqficH7cU
+2026-11-17T04:16:37.470Z	2216342	net	allowed	POST https://api.supermemory.ai/v3/search
+2026-11-17T04:16:37.734Z	2216342	net	allowed	POST https://openrouter.ai/api/v1/chat/completions
+2026-11-17T04:16:40.648Z	2216342	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/Business_Ledger
+2026-11-17T04:16:40.896Z	2216342	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/Neighborhood_Map
+2026-11-17T04:16:41.107Z	2216342	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/Neighborhood_Demographics
+2026-11-17T04:16:41.269Z	2216342	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/Business_Ledger
+2026-11-17T04:16:41.605Z	2216342	net	allowed	POST https://openrouter.ai/api/v1/chat/completions
+2026-11-17T04:16:42.891Z	2216342	net	allowed	GET https://sheets.googleapis.com/v4/spreadsheets/1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk/values/Cycle_Weather
+2026-11-17T04:16:43.098Z	2216342	net	allowed	POST https://api.supermemory.ai/v3/search
+2026-11-17T04:16:43.423Z	2216342	net	allowed	POST https://openrouter.ai/api/v1/chat/completions

@@ -1,0 +1,22 @@
+{
+  "initiative": "INIT-006",
+  "initiativeId": "INIT-006",
+  "cycle": 116,
+  "primaryVoice": "Mayor gavel (mayor_gavel-007)",
+  "consolidatedFrom": [
+    "STMT-116-baylight_authority-001 (Ramos — Baylight District Construction Milestone — C116 Determination Status)",
+    "STMT-116-baylight_authority-002 (Ramos — Baylight District Community Impact Mitigation — Jack London Oversight Carries...)",
+    "STMT-116-council_d2-002 (Tran D2 — Baylight evidence review)",
+    "STMT-116-mayor_gavel-007 (Mayor gavel — Baylight milestone and oversight)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-006",
+    "LastWorkCycle": 116,
+    "LastWorkSeat": "proj-baylight"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-115-proj-baylight-2026-11-12"
+    ]
+  }
+}

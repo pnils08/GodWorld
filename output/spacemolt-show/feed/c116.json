@@ -1,0 +1,171 @@
+{
+  "v": "UNDOCKED-FEED/1",
+  "cycle": 116,
+  "events": [
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 116,
+      "EventType": "undocked-episode",
+      "POPID": "POP-01188",
+      "Holder": "Marguerite Kimball-Ostrow",
+      "EpisodeId": "undocked-pop01188-Y3C12",
+      "CreditsDelta": 0,
+      "PointsDelta": 27.93,
+      "Systems": [
+        "sol",
+        "sirius",
+        "nova_terra",
+        "furud",
+        "acrux",
+        "botein",
+        "intercrus",
+        "atlas",
+        "cedarhold",
+        "garnet",
+        "achernar",
+        "ruchbah",
+        "ironhollow",
+        "gsc_0041",
+        "pherkad",
+        "shaula"
+      ],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 2,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop01188-2026-11-16T02-30-31.json"
+    },
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 116,
+      "EventType": "undocked-episode",
+      "POPID": "POP-00918",
+      "Holder": "Manju Abebe",
+      "EpisodeId": "undocked-pop00918-Y3C12",
+      "CreditsDelta": 0,
+      "PointsDelta": 27.42,
+      "Systems": [
+        "sol",
+        "alpha_centauri",
+        "tau_ceti",
+        "electra",
+        "mimosa",
+        "ross_154",
+        "arcturus",
+        "timberline",
+        "maplevale",
+        "miaplacidus",
+        "cervantes",
+        "ridgecrest",
+        "hatysa",
+        "nembus"
+      ],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 1,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00918-2026-11-17T02-30-26.json"
+    },
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 116,
+      "EventType": "undocked-episode",
+      "POPID": "POP-00663",
+      "Holder": "Soo Loo",
+      "EpisodeId": "undocked-pop00663-Y3C12",
+      "CreditsDelta": 24,
+      "PointsDelta": 11.13,
+      "Systems": [
+        "sol",
+        "alpha_centauri",
+        "tau_ceti",
+        "electra"
+      ],
+      "CombatEvents": 5,
+      "MishapCount": 0,
+      "Magnitude": 3,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00663-2026-11-18T02-30-29.json"
+    },
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 116,
+      "EventType": "undocked-episode",
+      "POPID": "POP-01188",
+      "Holder": "Marguerite Kimball-Ostrow",
+      "EpisodeId": "undocked-pop01188-Y3C12-e2",
+      "CreditsDelta": 0,
+      "PointsDelta": 9.23,
+      "Systems": [
+        "antares",
+        "gsc_0041",
+        "shaula",
+        "alnair",
+        "wolf_1061",
+        "gsc_0031",
+        "gsc_0021",
+        "gliese_876",
+        "felis",
+        "biham",
+        "gsc_0035",
+        "jasmine",
+        "mirach",
+        "azha",
+        "groombridge_1618",
+        "silverbend",
+        "alnilam",
+        "jishui"
+      ],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 1,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop01188-2026-11-19T02-30-32.json"
+    },
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 116,
+      "EventType": "undocked-episode",
+      "POPID": "POP-00918",
+      "Holder": "Manju Abebe",
+      "EpisodeId": "undocked-pop00918-Y3C12-e2",
+      "CreditsDelta": 0,
+      "PointsDelta": 11.83,
+      "Systems": [
+        "sirius",
+        "nova_terra",
+        "furud",
+        "acrux",
+        "botein",
+        "intercrus",
+        "gsc_0044",
+        "atlas",
+        "cedarhold",
+        "achernar",
+        "ruchbah",
+        "ironhollow",
+        "pherkad",
+        "shaula",
+        "alnair",
+        "wolf_1061",
+        "gsc_0031",
+        "gsc_0021"
+      ],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 2,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00918-2026-11-20T02-30-32.json"
+    }
+  ]
+}

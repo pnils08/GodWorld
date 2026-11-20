@@ -1,0 +1,375 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00157",
+    "name": "Noah Tan",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "C116 mild, 54°F — 6 cycles of clear — what this weather does to a day in the city",
+    "approach": "Weather and environment approach: this slice is the cycle's weather row, the streak, and the last three cycles beside it, plus whoever the record says lived it. Science-first ground translation — temperature is context, never the lede. Show what this weather moved. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "environment",
+      "hood": null,
+      "facts": [
+        "This cycle: mild, 54°F, impact 1, comfort 0.65, mood content, 6 cycles of clear",
+        "Last 3 cycles: C113 clear 58°F, C114 mild 55°F, C115 mild 55°F"
+      ],
+      "priorCycle": "PRIOR_CYCLE_IN_TABLE",
+      "note": "no resident on the record lived the weather this cycle — the people out in it are yours, unnamed",
+      "engineHooks": [
+        "Adash Stanley moved from Downtown to Piedmont Ave — moving up from Downtown (desk rotation)"
+      ],
+      "roomIsYours": "the sidewalk, the coats, what this weather does to a plan, who is out in it and who stayed in, what the bay smells like today",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF",
+    "runningStoriesNote": "signal.runningStories are events the city is already living through and where each one stands. Background only — write nothing about tracking them."
+  },
+  "signal": {
+    "kind": "beat-weather",
+    "hood": null,
+    "src": "output/beats/Cycle_Weather.jsonl CycleID 116",
+    "plan": {
+      "focus": "What six cycles of clear, mild weather do to a day in Oakland — who gets to treat it as a gift and who experiences it as a constant."
+    },
+    "runningStories": [
+      "The Downtown Transit Snarl [Downtown] — decline, week 3",
+      "West Oakland Stabilization Fund — disbursement-active [West Oakland] — under way",
+      "Oakland Alternative Response Initiative — dispatch-live [West Oakland, Fruitvale, East Oakland] — under way",
+      "Fruitvale Transit Hub Phase II — Visioning — complete [Fruitvale] — under way",
+      "Temescal Community Health Center — operational [Temescal] — under way",
+      "Baylight District — Final Council Vote — complete [Jack London, Downtown] — under way",
+      "Oakland Youth Apprenticeship Pipeline — implementation-active [West Oakland, East Oakland, Fruitvale] — under way",
+      "Downtown Economic Revitalization — vote-scheduled [Downtown] — under way",
+      "Commercial Stabilization for Grand Lake — vote-scheduled [Grand Lake] — under way",
+      "West Oakland Tenant Defense Fund — vote-scheduled [West Oakland] — under way",
+      "Ivy Hill Revitalization Initiative — announced [Ivy Hill] — under way",
+      "Dimond Revitalization Initiative — announced [Dimond] — under way",
+      "Ivy Hill Community Revitalization — announced [Ivy Hill] — under way",
+      "Ivy Hill Community Support Initiative — vote-scheduled [Ivy Hill] — under way",
+      "Laurel Neighborhood Patch and Clean-Up — announced [Laurel] — under way",
+      "Fruitvale Transit Hub Phase II — Visioning — design-phase [Fruitvale] — ENDED this week; now complete",
+      "Baylight District — Final Council Vote — construction-active [Jack London, Downtown] — ENDED this week; now complete",
+      "West Oakland Tenant Defense Fund — announced [West Oakland] — ENDED this week; now vote-scheduled",
+      "Commercial Stabilization for Grand Lake — vote-ready [Grand Lake] — ENDED this week; now vote-scheduled",
+      "Ivy Hill Community Support Initiative — announced [Ivy Hill] — ENDED this week; now vote-scheduled"
+    ]
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00042",
+        "name": "Ramon Vega",
+        "profile": "Ramon Vega — City Council District 4",
+        "quotationEligible": false,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-01039",
+        "name": "Ximena Mehta",
+        "profile": "Ximena Mehta — Bart Transit PR",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-01039-b13e145a66",
+        "pop": "POP-01039",
+        "name": "Ximena Mehta",
+        "quote": "Yeah, I still see it that way. Six weeks of mild weather like this — that's not a punishment, that's a gift, and people treat it like one. They walk, they bike, they take the long way home around the lake. I don't look at a quiet 12th Street on a Saturday and think we're losing riders. I look at it and think everyone's outside enjoying the day before the fog rolls back in. That's just Oakland in the spring.",
+        "factIds": [
+          "F-ab4ab9c12777",
+          "F-2254619c1805",
+          "F-647fd9067a33"
+        ],
+        "src": "packet.W2[POP-01039]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Ximena Mehta",
+        "text": "Whether the warmer weather is pulling more weekend foot traffic to the Lake Merritt vendors and farmers market",
+        "usable": false
+      },
+      {
+        "from": "Noah Tan",
+        "text": "The sidewalk traffic on College Avenue seemed slower and more deliberate this morning, but that is observation, not record.",
+        "usable": false
+      },
+      {
+        "from": "Noah Tan",
+        "text": "A man in a light jacket sat on a bench near the Rockridge BART entrance reading a paperback for over twenty minutes — I did not get his name or his story.",
+        "usable": false
+      },
+      {
+        "from": "Noah Tan",
+        "text": "The bay smelled like salt and cold pavement, which is not a fact anyone filed.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C116",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-871096fd8925"
+    },
+    {
+      "t": "FACT",
+      "text": "C116 mild, 54°F — 6 cycles of clear",
+      "src": "output/beats/Cycle_Weather.jsonl CycleID 116",
+      "id": "F-c147a523031d"
+    },
+    {
+      "t": "FACT",
+      "text": "C116 mild, 54°F — 6 cycles of clear.",
+      "src": "output/beats/Cycle_Weather.jsonl CycleID 116",
+      "id": "F-766ee870000c"
+    },
+    {
+      "t": "FACT",
+      "text": "This cycle: mild, 54°F, impact 1, comfort 0.65, mood content, 6 cycles of clear",
+      "src": "output/beats/Cycle_Weather.jsonl CycleID 116",
+      "id": "F-5849bd1dc90a"
+    },
+    {
+      "t": "FACT",
+      "text": "Last 3 cycles: C113 clear 58°F, C114 mild 55°F, C115 mild 55°F",
+      "src": "output/beats/Cycle_Weather.jsonl",
+      "id": "F-2590f80fce06"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+      "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+      "id": "F-647fd9067a33"
+    },
+    {
+      "t": "INTERPRETATION",
+      "text": "Honestly, when I see 12th Street drop like that on a mild week with stuff going on downtown, I don't read it as people not wanting to ride.",
+      "src": "cp-POP-01039-c116-PRESS-mon-necime",
+      "id": "F-ab4ab9c12777"
+    },
+    {
+      "t": "FACT",
+      "text": "Ximena Mehta — Bart Transit PR",
+      "src": "Simulation_Ledger profile for POP-01039",
+      "id": "F-2254619c1805"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "noah-weather-ground-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Show what this season moved in GodWorld. The weather snapshot is context, never the Article. Live a Packet-backed person or place on a day like this.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "third-person civic environment reporting from the street",
+      "targetWords": "400-700",
+      "opening": "a named person or Packet-named place living this cycle's season"
+    },
+    "authorizedTexture": [
+      "sensory dress of a Packet-named place already in the season-feel facts",
+      "the reporter's presence at that place",
+      "transitions that add no forecast or unsupplied measurement"
+    ],
+    "textureConditions": [
+      "every named person, place, illness, holiday, venue, and movement change must come from the Packet",
+      "do not announce season or temperature as the lede",
+      "do not import real-world Oakland winter tropes absent from the Packet",
+      "raw engine fields and source paths may not appear as public prose"
+    ],
+    "canonBlockers": [
+      "an invented forecast, record, alert, hazard, cause, authority, meteorologist, resident, quote, impact, comparison, or measurement",
+      "a named institution, agency, person, neighborhood, or organization not found in the supplied record",
+      "unsupported danger, rarity, trend, health, travel, infrastructure, or causal language",
+      "raw engine fields, scores, source paths, or row metadata printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-49d63ecd0a68",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-871096fd8925",
+        "t": "FACT",
+        "text": "Current cycle: C116",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-c147a523031d",
+        "t": "FACT",
+        "text": "C116 mild, 54°F — 6 cycles of clear",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 116"
+      },
+      {
+        "id": "F-766ee870000c",
+        "t": "FACT",
+        "text": "C116 mild, 54°F — 6 cycles of clear.",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 116"
+      },
+      {
+        "id": "F-5849bd1dc90a",
+        "t": "FACT",
+        "text": "This cycle: mild, 54°F, impact 1, comfort 0.65, mood content, 6 cycles of clear",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 116"
+      },
+      {
+        "id": "F-2590f80fce06",
+        "t": "FACT",
+        "text": "Last 3 cycles: C113 clear 58°F, C114 mild 55°F, C115 mild 55°F",
+        "src": "output/beats/Cycle_Weather.jsonl"
+      },
+      {
+        "id": "F-647fd9067a33",
+        "t": "FACT",
+        "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+        "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)"
+      },
+      {
+        "id": "F-ab4ab9c12777",
+        "t": "INTERPRETATION",
+        "text": "Honestly, when I see 12th Street drop like that on a mild week with stuff going on downtown, I don't read it as people not wanting to ride.",
+        "src": "cp-POP-01039-c116-PRESS-mon-necime"
+      },
+      {
+        "id": "F-2254619c1805",
+        "t": "FACT",
+        "text": "Ximena Mehta — Bart Transit PR",
+        "src": "Simulation_Ledger profile for POP-01039"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-01039-b13e145a66",
+        "speakerId": "POP-01039",
+        "speakerName": "Ximena Mehta",
+        "text": "Yeah, I still see it that way. Six weeks of mild weather like this — that's not a punishment, that's a gift, and people treat it like one. They walk, they bike, they take the long way home around the lake. I don't look at a quiet 12th Street on a Saturday and think we're losing riders. I look at it and think everyone's outside enjoying the day before the fog rolls back in. That's just Oakland in the spring.",
+        "factIds": [
+          "F-ab4ab9c12777",
+          "F-2254619c1805",
+          "F-647fd9067a33"
+        ],
+        "src": "packet.W2[POP-01039]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00042",
+        "name": "Ramon Vega",
+        "profile": "Ramon Vega — City Council District 4",
+        "src": "packet.W1.exposure",
+        "quotationEligible": false
+      },
+      {
+        "id": "POP-01039",
+        "name": "Ximena Mehta",
+        "profile": "Ximena Mehta — Bart Transit PR",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Ximena Mehta",
+        "text": "Whether the warmer weather is pulling more weekend foot traffic to the Lake Merritt vendors and farmers market",
+        "publishable": false
+      },
+      {
+        "from": "Noah Tan",
+        "text": "The sidewalk traffic on College Avenue seemed slower and more deliberate this morning, but that is observation, not record.",
+        "publishable": false
+      },
+      {
+        "from": "Noah Tan",
+        "text": "A man in a light jacket sat on a bench near the Rockridge BART entrance reading a paperback for over twenty minutes — I did not get his name or his story.",
+        "publishable": false
+      },
+      {
+        "from": "Noah Tan",
+        "text": "The bay smelled like salt and cold pavement, which is not a fact anyone filed.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "sensory dress of a Packet-named place already in the season-feel facts",
+      "the reporter's presence at that place",
+      "transitions that add no forecast or unsupplied measurement"
+    ],
+    "textureConditions": [
+      "every named person, place, illness, holiday, venue, and movement change must come from the Packet",
+      "do not announce season or temperature as the lede",
+      "do not import real-world Oakland winter tropes absent from the Packet",
+      "raw engine fields and source paths may not appear as public prose"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

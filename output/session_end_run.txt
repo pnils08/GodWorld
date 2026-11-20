@@ -1,5 +1,5 @@
 ========================================================================
-sessionEndMechanical: terminal=research-build, rotate-history=false, dry-run=false
+sessionEndMechanical: terminal=engine-sheet, rotate-history=false, dry-run=false
 ========================================================================
 Expected upstream model step (BEFORE this script):
   1. SESSION_CONTEXT.md PIN + NEXT[terminal] line + ROLLOUT_PLAN.md updated
@@ -14,16 +14,16 @@ Mechanical sub-steps (6):
 ========================================================================
 
 --- [1/6] session summary → Supermemory (best-effort) ---
-✓ session log → Supermemory [session-logs] doc sgoEnLwLHBMVWtGwTAidEZ (2293 chars, 2 summary rows folded)
+✓ session log → Supermemory [session-logs] doc Xoxzu358fkfEeu4vmqTeX9 (2964 chars, 23 summary rows folded)
 
 --- [2/6] auditPlanTagDrift (informational) ---
   # Plan tag drift audit
   
-  Generated: 2026-11-12T05:57:52.650Z
-  Plans scanned: 172
-  No frontmatter: 12
+  Generated: 2026-11-19T23:08:46.350Z
+  Plans scanned: 179
+  No frontmatter: 11
   No changelog: 8
-  No status-verb match: 150
+  No status-verb match: 158
   Drifts found: 0
   
   No plan-tag drift detected.
@@ -32,43 +32,29 @@ Mechanical sub-steps (6):
 --- [3/6] ROLLOUT conformance lint (informational) ---
   ROLLOUT LINT: clean — every row is a sweep-safe pointer within budget.
   ROLLOUT IN HAND: more than one in-progress row per terminal (job model = one):
-    engine-sheet: 2 — pipeline.100, pipeline.110
-    research-build: 6 — engine.339, pipeline.111, pipeline.109, pipeline.108, pipeline.101, pipeline.89
-  ROLLOUT OVERDUE: 20 waiting row(s) past their Cycle/date or naming none — read the record, then flip, re-date or close:
-    L33 engine.286: latest Cycle named C112, live is C115; latest date named 2026-10-28, today is 2026-11-11
-    L35 engine.208: latest Cycle named C114, live is C115; latest date named 2026-11-01, today is 2026-11-11
-    L49 engine.301: latest Cycle named C113, live is C115; latest date named 2026-10-25, today is 2026-11-11
-    L50 engine.206: latest Cycle named C114, live is C115; latest date named 2026-10-28, today is 2026-11-11
-    L51 engine.319: latest Cycle named C114, live is C115; latest date named 2026-10-27, today is 2026-11-11
-    L52 engine.320: latest Cycle named C114, live is C115; latest date named 2026-10-27, today is 2026-11-11
-    L53 research.29: latest Cycle named C112, live is C115; latest date named 2026-10-31, today is 2026-11-11
-    L54 engine.95: latest Cycle named C114, live is C115; latest date named 2026-11-01, today is 2026-11-11
-    L58 engine.201: latest Cycle named C113, live is C115
-    L59 engine.197: latest Cycle named C113, live is C115
-    L60 pipeline.83: latest date named 2026-10-31, today is 2026-11-11
-    L62 engine.270: latest Cycle named C114, live is C115; latest date named 2026-11-01, today is 2026-11-11
-    L63 pipeline.74: latest Cycle named C113, live is C115
-    L64 pipeline.73: latest date named 2026-10-31, today is 2026-11-11
-    L65 pipeline.80: latest date named 2026-10-31, today is 2026-11-11
-    L66 engine.287: latest Cycle named C113, live is C115; latest date named 2026-10-10, today is 2026-11-11
-    L67 engine.288: latest Cycle named C114, live is C115; latest date named 2026-11-01, today is 2026-11-11
-    L68 engine.289: latest Cycle named C114, live is C115; latest date named 2026-11-01, today is 2026-11-11
-    L70 engine.280: latest Cycle named C113, live is C115; latest date named 2026-10-08, today is 2026-11-11
-    L71 engine.310: latest Cycle named C114, live is C115; latest date named 2026-11-01, today is 2026-11-11
+    engine-sheet: 3 — pipeline.100, pipeline.110, pipeline.113
+    research-build: 10 — engine.346, engine.339, pipeline.111, pipeline.109, pipeline.108, pipeline.101, pipeline.89, infrastructure.19, pipeline.112, engine.350
+  ROLLOUT OVERDUE: 2 waiting row(s) past their Cycle/date or naming none — read the record, then flip, re-date or close:
+    L32 engine.286: latest Cycle named C112, live is C116; latest date named 2026-10-28, today is 2026-11-19
+    L63 engine.280: latest Cycle named C113, live is C116; latest date named 2026-10-08, today is 2026-11-19
 
 --- [4/6] worked rows have their plan updated ---
-  ✓ every row named in this session's [research-build] commits has its plan updated
+  ✓ every row named in this session's [engine-sheet] commits has its plan updated
 
 --- [5/6] cross-terminal git stack check (read-only) ---
-  ⚠ 3 unpushed commit(s) ahead of origin/main:
-    a7b7892f1 pipeline.108: take the unapproved whole-words code back out; record the builder's word on the shows. [research/build]
-    8153ec134 pipeline.108: Tue 11-10 show read against its 24 sources; citizens' words reach the daily show whole, not the tab's 180 characters. [research/build]
-    ce193d68f pipeline.100 plan: the old-vs-new Pulse preview struck from Task 3, the design, Acceptance 3 and P1 (builder 11-11: "all I've ruled on is we are not doing the side by side"). Nothing else ruled; no work in motion. Noted: CHARACTER.md lines 11-17 name the builder, the Pulse goes to canon. [engine-sheet]
+  ⚠ 7 unpushed commit(s) ahead of origin/main:
+    f280e0c3a S721 soft close: PIN odometer. Explaining the veto path, the reply said a veto is likelier against another faction without reading the same-faction chance, and that 5 votes pass every initiative (some rows need 6). Failed the reply check. NEXT[engine-sheet] unchanged. [engine/sheet]
+    ee803f93c S720 soft close: PIN odometer. The reply said four seats sat out the old override vote; on the old code an IND-led row with a blank opposition left all seven OPP and CRC seats out (blank opposition counted nobody). Failed the reply check. NEXT[engine-sheet] unchanged. [engine/sheet]
+    d556cc553 S719 soft close: PIN odometer. The reply said the override vote counted the independents twice and left four seats out without saying that is only when the independents lead; failed the reply check. NEXT[engine-sheet] unchanged. [engine/sheet]
+    aabf33cb2 S718 soft close: PIN odometer. The ready report called the three unpushed commits the same three as before from a count, not a list; failed the reply check. NEXT[engine-sheet] unchanged. [engine/sheet]
+    8be2ba30c S717 soft close: PIN odometer; NEXT[engine-sheet] carries the N1 bench result and the denied PROD push. The ready report said nothing was out of place while NEXT still said the fire had only started; failed the reply check. [engine/sheet]
+    3830e7b87 Builder terminals: a passed reply is drawn as a reply, not a hook message line (builder 2026-11-19: "If they don't appear then they don't exist"; "If you don't guess they come through I'm not seeing anything you say").
+    74a3552f2 S716 soft close: PIN odometer. Reply told the builder he had not missed the replies, judged from this terminal's own screen capture, without knowing which screen he reads (the engine-sheet session's builder wrote "I haven't seen any responses"). Failed the reply check, closed unseen. NEXT[research-build] unchanged. Committed locally; es pushes. [research/build]
   Model decision: push if all yours, hold if other terminals stacked.
 
 --- [6/6] pm2 restart ---
   ✓ godworld-dashboard restarted
 
 ========================================================================
-sessionEndMechanical: complete (terminal=research-build)
+sessionEndMechanical: complete (terminal=engine-sheet)
 ========================================================================

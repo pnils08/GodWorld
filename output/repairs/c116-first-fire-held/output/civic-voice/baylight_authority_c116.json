@@ -1,0 +1,39 @@
+{
+  "office": "baylight_authority",
+  "cycle": 116,
+  "speaker": "Keisha Ramos",
+  "cascadeSummary": "The political frame is locked: no construction-milestone pass and no final-vote outcome this cycle — the evidence must independently support the milestone, and I do not override that. My job is the determination question. The C115 review is a file assembled for determination, not a determination made; the findings are not yet published, so I hold the milestone at construction-active and say so plainly rather than substituting the file for a result.",
+  "maraAnswer": {
+    "confrontationId": "CONF-115-civic-office-baylight-authority",
+    "kind": "answer",
+    "text": "The truthful answer is that the Cycle 115 construction milestone review has reached no determination yet, and the findings have not been published. What exists is the assembled evidence file — independent soil verification, 48-hour hotline logs, haul-route dust-control records, and Jack London workforce results — and an evidence file is a basis for review, not a milestone result. I do not have a determination to report, and I will not dress the file up as one. The tracker entry reads past due because the milestone remains undetermined; the review is conducted but not concluded, so the phase holds at construction-active. What the public can inspect today is the file itself, and the findings memo will be published to the Baylight record with its determination and evidentiary basis when the review concludes — and it will be published whether the determination is pass, fail, or conditional. Unresolved conditions remain live and are what the review measures: remediation verification sign-offs on the remaining Phase II parcels, and the Jack London workforce results against the local-hire and apprenticeship targets. I will not substitute the construction-active phase, or the existence of the file, for a milestone result — the gavel's rule and mine are the same sentence."
+  },
+  "statements": [
+    {
+      "statementId": "STMT-116-baylight_authority-001",
+      "type": "milestone_update",
+      "topic": "Baylight District Construction Milestone — C116 Determination Status",
+      "initiative": "INIT-006",
+      "decision": "HOLD the construction milestone at construction-active; publish that the C115 review has reached no determination and the findings are not yet published, while remediation, hotline, dust-control, and workforce oversight continue.",
+      "quote": "An evidence file is not a verdict — the review is conducted, not concluded, and I will not call a milestone passed because a file exists.",
+      "fullStatement": "Here is what is true on the ground this cycle. The Cycle 115 evidence file is assembled and open to inspection: independent soil verification, the 48-hour hotline logs, the haul-route dust-control records, and the Jack London workforce results. What it is not is a determination. The review has been conducted and the findings memo is not yet published, and I am not going to stand at a podium and read a file aloud as though it were a verdict. So the milestone holds — no construction-milestone pass is declared, and no final-vote outcome is claimed. The build does not stop while the review concludes: Phase II remediation proceeds under independent oversight, the 48-hour hotline stays live on the fence, dust control stays active on the haul routes, and the Jack London workforce coordination continues. When the findings memo publishes, it publishes with its determination and its evidentiary basis attached — pass, fail, or conditional — and the tracker will read that result honestly. Until then, the phase holds at construction-active because that is where the work is.",
+      "trackerUpdates": {
+        "initiative": "INIT-006",
+        "ImplementationPhase": "construction-active",
+        "MilestoneNotes": "C116: C115 milestone review conducted but no determination reached and findings not yet published; milestone holds at construction-active; remediation, hotline, dust-control, workforce oversight continue.",
+        "NextScheduledAction": "Publish C115 findings memo with determination and evidentiary basis; evidence file open to public inspection",
+        "NextActionCycle": 117
+      }
+    },
+    {
+      "statementId": "STMT-116-baylight_authority-002",
+      "type": "community_engagement",
+      "topic": "Baylight District Community Impact Mitigation — Jack London Oversight Carries Into C116",
+      "initiative": "INIT-006",
+      "decision": "Continue the 48-hour hotline, haul-route dust control, and Jack London workforce coordination as the conditions the C115 review measures against — unchanged and active.",
+      "quote": "The hotline and the dust records don't pause while a memo is written — they are what the review is measuring, and they keep running.",
+      "fullStatement": "A reporter who walks the fence this cycle will see the same things the review file is counting: the 48-hour construction number posted and answered, the water trucks running the haul routes, and the Jack London coordination calendar still on the board. None of that pauses because a findings memo is in draft. That is the point of building the mitigation into the project instead of bolting it on afterward — the records accumulate whether or not anyone is watching them this week, and they are exactly the evidence the review will weigh. The Jack London results — local hire against target, apprenticeship pipeline, the business-side feedback from the C114 room — carry into the review as live conditions, not past achievements. I hold the milestone at construction-active and the oversight at full. The next thing the public sees is the findings memo, and the next thing the tracker sees is whatever that memo says.",
+      "trackerUpdates": {}
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "116",
+  "persona": "tamsin-pruitt",
+  "byline": "Tamsin Pruitt",
+  "bylinePopid": "POP-01210",
+  "article": "output/cron-compare/staged/culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged-0020.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Edmund Alegero",
+        "role": "quoted-source",
+        "popid": "POP-00282"
+      },
+      {
+        "name": "Wanjiru Liu",
+        "role": "quoted-source",
+        "popid": "POP-00842"
+      },
+      {
+        "name": "Drago Helio",
+        "role": "quoted-source",
+        "popid": "POP-00714"
+      },
+      {
+        "name": "Yu Zen",
+        "role": "mentioned",
+        "popid": "POP-00194"
+      },
+      {
+        "name": "Adash Stanley",
+        "role": "mentioned",
+        "popid": "POP-01023",
+        "floor": true
+      },
+      {
+        "name": "Davey Martinez",
+        "role": "mentioned",
+        "popid": "POP-00213",
+        "floor": true
+      },
+      {
+        "name": "Grace Oyelaran",
+        "role": "mentioned",
+        "popid": "POP-01162",
+        "floor": true
+      },
+      {
+        "name": "Harry Hayward",
+        "role": "mentioned",
+        "popid": "POP-01223",
+        "floor": true
+      },
+      {
+        "name": "Joaquín Nakamura",
+        "role": "mentioned",
+        "popid": "POP-00248",
+        "floor": true
+      },
+      {
+        "name": "Mark Aitken",
+        "role": "mentioned",
+        "popid": "POP-00003",
+        "floor": true
+      },
+      {
+        "name": "Mesi Westin",
+        "role": "mentioned",
+        "popid": "POP-00650",
+        "floor": true
+      },
+      {
+        "name": "Rick Dillon",
+        "role": "mentioned",
+        "popid": "POP-00743",
+        "floor": true
+      },
+      {
+        "name": "Shawn Nguyen",
+        "role": "mentioned",
+        "popid": "POP-00971",
+        "floor": true
+      },
+      {
+        "name": "Tanisha Freeman",
+        "role": "mentioned",
+        "popid": "POP-00848",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "Getting my own place in Lake Merritt is a big deal for me. It's a step up, you know? I've been working hard, and it's nice to have a spot that's just mine. I've been following the A's news, and it's tough to see Mark Aitken leave. He's from around here, and he's always been involved in the community. But I'm trying to focus on my own game, you know? I've got my own things to work on.",
+        "sourceRef": "citizenVoice PRESS Edmund Alegero"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-e3d7b623b3ad",
+    "draftSha256": "ae676aa515f0ae4e5c966fcc66184e76c6fcd6bc9a48f0457f624e6dc652f16a",
+    "verdict": "output/cron-compare/culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-18T00:20:16.075Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 450",
+      "words": 1363,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "ae676aa515f0ae4e5c966fcc66184e76c6fcd6bc9a48f0457f624e6dc652f16a",
+      "costUsd": 0.0015
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-18T00:20:19.658Z"
+}

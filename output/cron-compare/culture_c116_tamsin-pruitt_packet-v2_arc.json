@@ -1,0 +1,32 @@
+{
+  "status": "arc-seed",
+  "cycle": "116",
+  "desk": "culture",
+  "persona": "tamsin-pruitt",
+  "hood": null,
+  "quotes": [
+    {
+      "pop": "POP-01022",
+      "name": "Wilson Shepard",
+      "quote": "To be honest, my new living situation in West Oakland hasn't really affected my coaching. I've been focused on the team's performance, and my daily routine hasn't changed much. I'm still the same person, with the same goals for the Oaks."
+    },
+    {
+      "pop": "POP-00789",
+      "name": "Elias Varek",
+      "quote": "The recent financial returns for Civis Systems show a minimal change, $489,017 this week, which is just slightly up from the previous week's $488,443. For Varek Systems, the returns are $35,112 this week, compared to $34,932 last week. These numbers indicate a stable, but not growing, revenue stream for both companies. I'm concerned that Civis Systems is flat where it matters, and I'm still trying to understand the implications of this stability."
+    },
+    {
+      "pop": "POP-01247",
+      "name": "Theo Rahimi",
+      "quote": "Having a place of my own in Eastlake feels really great. It's like a new start for me. I've been working hard and it's nice to have a space that's just mine. The neighborhood is coming together too, with all the new households moving in. It's an exciting time."
+    },
+    {
+      "pop": "POP-00703",
+      "name": "Ira Leu",
+      "quote": "I didn't go to the health center staff's unwind at the bar, but I heard they were pretty relieved after their first busy week. The Temescal Community Health Center is finally up and running, and I'm sure it's a big change for them."
+    }
+  ],
+  "claim": "To be honest, my new living situation in West Oakland hasn't really affected my coaching. I've been focused on the team's performance, and my daily routine hasn't changed much. I'm still the same person, with the same goals for the Oaks.",
+  "src": "citizenVoice PRESS c116",
+  "ranAt": "2026-11-19T19:18:21.140Z"
+}

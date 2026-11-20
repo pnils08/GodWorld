@@ -1,0 +1,1001 @@
+{
+  "stage": "report",
+  "desk": "undocked-digest",
+  "cycle": "115",
+  "persona": "nia-rook-weekly",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Nia Rook",
+    "popid": "POP-01076"
+  },
+  "assignment": {
+    "story": {
+      "ref": "undocked-week:weekly-c115",
+      "label": "UNDOCKED week-in-review c115",
+      "kind": "undocked-digest",
+      "angle": "UNDOCKED week: pilots who flew this cycle (Elijah Brown, Brooklyn Nguyen, P Slayer). Standings: Luis Taz leads the board — rank #1, 45.19 achievement points, 0 credits, 2 cycle(s) led, current streak 2. In the chair: Elijah Brown — Electrician; Brooklyn Nguyen — Community Programs Coordinator; P Slayer — Journalist, Fan Columnist - Sports.",
+      "facts": [
+        "Elijah Brown's Monday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Timberline, Arcturus, Ross 154, Maplevale, Miaplacidus, Cervantes, Ridgecrest, Hatysa, Nembus, Kitalpha, Lacaille 8760, Kepler 442, Theemin and Hollowcrest; came out even on credits; flew until the show's time ran out.",
+        "Elijah Brown's Thursday night on UNDOCKED: went through Last Light, Fang, Errai, Wezen, Brightfall, Birchwood, Pinecross, Aludra, Tejat, Gsc 0002, Torcular, Gsc 0043, Gsc 0045, Dabih, Rimegate, Veritate, Betelgeuse and Gsc 0037; came out even on credits; flew until the show's time ran out.",
+        "Brooklyn Nguyen's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes, Ridgecrest and Nembus; mined 3 copper ore, 3 iron ore and 1 sol alloy ore; came out even on credits; flew until the show's time ran out.",
+        "Brooklyn Nguyen's Friday night on UNDOCKED: went through Sirius, Nova Terra, Furud, Acrux, Botein, Intercrus, Atlas, Cedarhold, Achernar, Ruchbah, Ironhollow, Gsc 0041, Shaula, Alnair, Wolf 1061, Gsc 0031, Gsc 0021 and Gliese 876; came out even on credits; flew until the show's time ran out.",
+        "P Slayer's Wednesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes and Nembus; mined 1 iron ore; got into 2 fights; came out even on credits; flew until the show's time ran out.",
+        "Elijah Brown — Electrician (ledger)",
+        "Brooklyn Nguyen — Community Programs Coordinator (ledger)",
+        "P Slayer — Journalist, Fan Columnist - Sports (ledger)"
+      ],
+      "citizens": [
+        "Elijah Brown — Electrician, UNDOCKED cast pilot",
+        "Brooklyn Nguyen — Community Programs Coordinator, UNDOCKED cast pilot",
+        "P Slayer — Journalist, Fan Columnist - Sports, UNDOCKED cast pilot"
+      ],
+      "popids": [
+        "POP-01195",
+        "POP-00184",
+        "POP-00008"
+      ]
+    }
+  },
+  "angle": "output/cron-compare/undocked-digest_c115_nia-rook-weekly_packet-v2_angle.json",
+  "quotesRequested": 3,
+  "quotesLanded": 3,
+  "quotes": [
+    {
+      "pop": "POP-01195",
+      "name": "Elijah Brown",
+      "quote": "I didn't really have a strategy on my two nights on UNDOCKED. I just flew and tried to make it through as many systems as I could until the time ran out. I ended up even on credits both nights, so that was good.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I didn't really have a strategy on my two nights on UNDOCKED. I just flew and tried to make it through as many systems as I could until the time ran out. I ended up even on credits both nights, so that was good.\",\n  \"fact_ids\": [\"F-8e0466f83471\", \"F-eb27a415821d\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-8e0466f83471",
+          "F-eb27a415821d"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01195-f0101eb580",
+        "authoredQuote": true,
+        "publishableQuote": "I didn't really have a strategy on my two nights on UNDOCKED. I just flew and tried to make it through as many systems as I could until the time ran out. I ended up even on credits both nights, so that was good."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01195",
+          "name": "Elijah Brown",
+          "role": "UNDOCKED pilot",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "What was Elijah Brown's strategy on his two nights? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked-digest",
+          "hood": null,
+          "focus": "UNDOCKED pilots' performance in C115",
+          "src": "undocked-week:weekly-c115"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Elijah Brown — UNDOCKED pilot",
+          "evidence": [
+            {
+              "id": "EV-3d8f92f0bf",
+              "src": "undocked-week:weekly-c115",
+              "text": "UNDOCKED week-in-review c115"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Elijah Brown's Monday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Timberline, Arcturus, Ross 154, Maplevale, Miaplacidus, Cervantes, Ridgecrest, Hatysa, Nembus, Kitalpha, Lacaille 8760, Kepler 442, Theemin and Hollowcrest; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-8e0466f83471"
+          },
+          {
+            "t": "FACT",
+            "text": "Elijah Brown's Thursday night on UNDOCKED: went through Last Light, Fang, Errai, Wezen, Brightfall, Birchwood, Pinecross, Aludra, Tejat, Gsc 0002, Torcular, Gsc 0043, Gsc 0045, Dabih, Rimegate, Veritate, Betelgeuse and Gsc 0037; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-eb27a415821d"
+          },
+          {
+            "t": "FACT",
+            "text": "Elijah Brown — Electrician (ledger)",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-065ad2c00196"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C115",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-bc84fc0b7718"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED week-in-review c115",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-4c341e271917"
+          },
+          {
+            "t": "FACT",
+            "text": "Brooklyn Nguyen's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes, Ridgecrest and Nembus; mined 3 copper ore, 3 iron ore and 1 sol alloy ore; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-3d44b1703f09"
+          },
+          {
+            "t": "FACT",
+            "text": "Brooklyn Nguyen's Friday night on UNDOCKED: went through Sirius, Nova Terra, Furud, Acrux, Botein, Intercrus, Atlas, Cedarhold, Achernar, Ruchbah, Ironhollow, Gsc 0041, Shaula, Alnair, Wolf 1061, Gsc 0031, Gsc 0021 and Gliese 876; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-8978bd4574d4"
+          },
+          {
+            "t": "FACT",
+            "text": "P Slayer's Wednesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes and Nembus; mined 1 iron ore; got into 2 fights; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-4b0f8572de45"
+          },
+          {
+            "t": "FACT",
+            "text": "Elijah Brown — UNDOCKED pilot",
+            "src": "Simulation_Ledger profile for POP-01195",
+            "id": "F-4a3e1e8e13de"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C11, Spring, holiday=none",
+            "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+            "id": "F-82d77e9a4a71"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00184",
+      "name": "Brooklyn Nguyen",
+      "quote": "To be honest, my mining efforts didn't really pay off in terms of credits. I came out even on both Tuesday and Friday nights. I mined some copper, iron, and sol alloy ore, but it didn't translate into any profit.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, my mining efforts didn't really pay off in terms of credits. I came out even on both Tuesday and Friday nights. I mined some copper, iron, and sol alloy ore, but it didn't translate into any profit.\",\n  \"fact_ids\": [\"F-3d44b1703f09\", \"F-8978bd4574d4\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-3d44b1703f09",
+          "F-8978bd4574d4"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00184-bc41e27b57",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, my mining efforts didn't really pay off in terms of credits. I came out even on both Tuesday and Friday nights. I mined some copper, iron, and sol alloy ore, but it didn't translate into any profit."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00184",
+          "name": "Brooklyn Nguyen",
+          "role": "UNDOCKED pilot",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "How did Brooklyn Nguyen's mining efforts pay off? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked-digest",
+          "hood": null,
+          "focus": "UNDOCKED pilots' performance in C115",
+          "src": "undocked-week:weekly-c115"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Brooklyn Nguyen — UNDOCKED pilot",
+          "evidence": [
+            {
+              "id": "EV-9983d2bbff",
+              "src": "undocked-week:weekly-c115",
+              "text": "UNDOCKED week-in-review c115"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Brooklyn Nguyen's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes, Ridgecrest and Nembus; mined 3 copper ore, 3 iron ore and 1 sol alloy ore; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-3d44b1703f09"
+          },
+          {
+            "t": "FACT",
+            "text": "Brooklyn Nguyen's Friday night on UNDOCKED: went through Sirius, Nova Terra, Furud, Acrux, Botein, Intercrus, Atlas, Cedarhold, Achernar, Ruchbah, Ironhollow, Gsc 0041, Shaula, Alnair, Wolf 1061, Gsc 0031, Gsc 0021 and Gliese 876; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-8978bd4574d4"
+          },
+          {
+            "t": "FACT",
+            "text": "Brooklyn Nguyen — Community Programs Coordinator (ledger)",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-5f23a0bafd9f"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C115",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-bc84fc0b7718"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED week-in-review c115",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-4c341e271917"
+          },
+          {
+            "t": "FACT",
+            "text": "Elijah Brown's Monday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Timberline, Arcturus, Ross 154, Maplevale, Miaplacidus, Cervantes, Ridgecrest, Hatysa, Nembus, Kitalpha, Lacaille 8760, Kepler 442, Theemin and Hollowcrest; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-8e0466f83471"
+          },
+          {
+            "t": "FACT",
+            "text": "Elijah Brown's Thursday night on UNDOCKED: went through Last Light, Fang, Errai, Wezen, Brightfall, Birchwood, Pinecross, Aludra, Tejat, Gsc 0002, Torcular, Gsc 0043, Gsc 0045, Dabih, Rimegate, Veritate, Betelgeuse and Gsc 0037; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-eb27a415821d"
+          },
+          {
+            "t": "FACT",
+            "text": "P Slayer's Wednesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes and Nembus; mined 1 iron ore; got into 2 fights; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-4b0f8572de45"
+          },
+          {
+            "t": "FACT",
+            "text": "Brooklyn Nguyen — UNDOCKED pilot",
+            "src": "Simulation_Ledger profile for POP-00184",
+            "id": "F-0f7faf8ea20e"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C11, Spring, holiday=none",
+            "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+            "id": "F-82d77e9a4a71"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00008",
+      "name": "P Slayer",
+      "quote": "To be honest, my route choices on UNDOCKED Wednesday night were pretty spontaneous. I was flying, reacting to what was around me. I got into a couple of fights, but that's just part of the show. I've been playing to climb the ranks, and sometimes that means taking risks.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; curious, open to new things; often out in the neighborhood; lives and dies with them",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, my route choices on UNDOCKED Wednesday night were pretty spontaneous. I was flying, reacting to what was around me. I got into a couple of fights, but that's just part of the show. I've been playing to climb the ranks, and sometimes that means taking risks.\",\n  \"fact_ids\": [\"F-4b0f8572de45\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-4b0f8572de45"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00008-0feae2fee6",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, my route choices on UNDOCKED Wednesday night were pretty spontaneous. I was flying, reacting to what was around me. I got into a couple of fights, but that's just part of the show. I've been playing to climb the ranks, and sometimes that means taking risks."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00008",
+          "name": "P Slayer",
+          "role": "UNDOCKED pilot",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "What led to P Slayer getting into fights on Wednesday night? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked-digest",
+          "hood": null,
+          "focus": "UNDOCKED pilots' performance in C115",
+          "src": "undocked-week:weekly-c115"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "P Slayer — UNDOCKED pilot",
+          "evidence": [
+            {
+              "id": "EV-8c8b4a6acd",
+              "src": "undocked-week:weekly-c115",
+              "text": "UNDOCKED week-in-review c115"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "P Slayer's Wednesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes and Nembus; mined 1 iron ore; got into 2 fights; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-4b0f8572de45"
+          },
+          {
+            "t": "FACT",
+            "text": "P Slayer — Journalist, Fan Columnist - Sports (ledger)",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-08817bf42f56"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C115",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-bc84fc0b7718"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED week-in-review c115",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-4c341e271917"
+          },
+          {
+            "t": "FACT",
+            "text": "Elijah Brown's Monday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Timberline, Arcturus, Ross 154, Maplevale, Miaplacidus, Cervantes, Ridgecrest, Hatysa, Nembus, Kitalpha, Lacaille 8760, Kepler 442, Theemin and Hollowcrest; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-8e0466f83471"
+          },
+          {
+            "t": "FACT",
+            "text": "Elijah Brown's Thursday night on UNDOCKED: went through Last Light, Fang, Errai, Wezen, Brightfall, Birchwood, Pinecross, Aludra, Tejat, Gsc 0002, Torcular, Gsc 0043, Gsc 0045, Dabih, Rimegate, Veritate, Betelgeuse and Gsc 0037; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-eb27a415821d"
+          },
+          {
+            "t": "FACT",
+            "text": "Brooklyn Nguyen's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes, Ridgecrest and Nembus; mined 3 copper ore, 3 iron ore and 1 sol alloy ore; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-3d44b1703f09"
+          },
+          {
+            "t": "FACT",
+            "text": "Brooklyn Nguyen's Friday night on UNDOCKED: went through Sirius, Nova Terra, Furud, Acrux, Botein, Intercrus, Atlas, Cedarhold, Achernar, Ruchbah, Ironhollow, Gsc 0041, Shaula, Alnair, Wolf 1061, Gsc 0031, Gsc 0021 and Gliese 876; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-8978bd4574d4"
+          },
+          {
+            "t": "FACT",
+            "text": "P Slayer — UNDOCKED pilot",
+            "src": "Simulation_Ledger profile for POP-00008",
+            "id": "F-0e6dd6b4e263"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C11, Spring, holiday=none",
+            "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+            "id": "F-82d77e9a4a71"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-01195",
+      "name": "Elijah Brown",
+      "quote": "I didn't really have a strategy on my two nights on UNDOCKED. I just flew and tried to make it through as many systems as I could until the time ran out. I ended up even on credits both nights, so that was good.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I didn't really have a strategy on my two nights on UNDOCKED. I just flew and tried to make it through as many systems as I could until the time ran out. I ended up even on credits both nights, so that was good.\",\n  \"fact_ids\": [\"F-8e0466f83471\", \"F-eb27a415821d\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-8e0466f83471",
+          "F-eb27a415821d"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01195-f0101eb580",
+        "authoredQuote": true,
+        "publishableQuote": "I didn't really have a strategy on my two nights on UNDOCKED. I just flew and tried to make it through as many systems as I could until the time ran out. I ended up even on credits both nights, so that was good."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01195",
+          "name": "Elijah Brown",
+          "role": "UNDOCKED pilot",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "What was Elijah Brown's strategy on his two nights? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked-digest",
+          "hood": null,
+          "focus": "UNDOCKED pilots' performance in C115",
+          "src": "undocked-week:weekly-c115"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Elijah Brown — UNDOCKED pilot",
+          "evidence": [
+            {
+              "id": "EV-3d8f92f0bf",
+              "src": "undocked-week:weekly-c115",
+              "text": "UNDOCKED week-in-review c115"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Elijah Brown's Monday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Timberline, Arcturus, Ross 154, Maplevale, Miaplacidus, Cervantes, Ridgecrest, Hatysa, Nembus, Kitalpha, Lacaille 8760, Kepler 442, Theemin and Hollowcrest; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-8e0466f83471"
+          },
+          {
+            "t": "FACT",
+            "text": "Elijah Brown's Thursday night on UNDOCKED: went through Last Light, Fang, Errai, Wezen, Brightfall, Birchwood, Pinecross, Aludra, Tejat, Gsc 0002, Torcular, Gsc 0043, Gsc 0045, Dabih, Rimegate, Veritate, Betelgeuse and Gsc 0037; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-eb27a415821d"
+          },
+          {
+            "t": "FACT",
+            "text": "Elijah Brown — Electrician (ledger)",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-065ad2c00196"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C115",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-bc84fc0b7718"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED week-in-review c115",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-4c341e271917"
+          },
+          {
+            "t": "FACT",
+            "text": "Brooklyn Nguyen's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes, Ridgecrest and Nembus; mined 3 copper ore, 3 iron ore and 1 sol alloy ore; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-3d44b1703f09"
+          },
+          {
+            "t": "FACT",
+            "text": "Brooklyn Nguyen's Friday night on UNDOCKED: went through Sirius, Nova Terra, Furud, Acrux, Botein, Intercrus, Atlas, Cedarhold, Achernar, Ruchbah, Ironhollow, Gsc 0041, Shaula, Alnair, Wolf 1061, Gsc 0031, Gsc 0021 and Gliese 876; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-8978bd4574d4"
+          },
+          {
+            "t": "FACT",
+            "text": "P Slayer's Wednesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes and Nembus; mined 1 iron ore; got into 2 fights; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-4b0f8572de45"
+          },
+          {
+            "t": "FACT",
+            "text": "Elijah Brown — UNDOCKED pilot",
+            "src": "Simulation_Ledger profile for POP-01195",
+            "id": "F-4a3e1e8e13de"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C11, Spring, holiday=none",
+            "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+            "id": "F-82d77e9a4a71"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00184",
+      "name": "Brooklyn Nguyen",
+      "quote": "To be honest, my mining efforts didn't really pay off in terms of credits. I came out even on both Tuesday and Friday nights. I mined some copper, iron, and sol alloy ore, but it didn't translate into any profit.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, my mining efforts didn't really pay off in terms of credits. I came out even on both Tuesday and Friday nights. I mined some copper, iron, and sol alloy ore, but it didn't translate into any profit.\",\n  \"fact_ids\": [\"F-3d44b1703f09\", \"F-8978bd4574d4\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-3d44b1703f09",
+          "F-8978bd4574d4"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00184-bc41e27b57",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, my mining efforts didn't really pay off in terms of credits. I came out even on both Tuesday and Friday nights. I mined some copper, iron, and sol alloy ore, but it didn't translate into any profit."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00184",
+          "name": "Brooklyn Nguyen",
+          "role": "UNDOCKED pilot",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "How did Brooklyn Nguyen's mining efforts pay off? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked-digest",
+          "hood": null,
+          "focus": "UNDOCKED pilots' performance in C115",
+          "src": "undocked-week:weekly-c115"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Brooklyn Nguyen — UNDOCKED pilot",
+          "evidence": [
+            {
+              "id": "EV-9983d2bbff",
+              "src": "undocked-week:weekly-c115",
+              "text": "UNDOCKED week-in-review c115"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Brooklyn Nguyen's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes, Ridgecrest and Nembus; mined 3 copper ore, 3 iron ore and 1 sol alloy ore; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-3d44b1703f09"
+          },
+          {
+            "t": "FACT",
+            "text": "Brooklyn Nguyen's Friday night on UNDOCKED: went through Sirius, Nova Terra, Furud, Acrux, Botein, Intercrus, Atlas, Cedarhold, Achernar, Ruchbah, Ironhollow, Gsc 0041, Shaula, Alnair, Wolf 1061, Gsc 0031, Gsc 0021 and Gliese 876; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-8978bd4574d4"
+          },
+          {
+            "t": "FACT",
+            "text": "Brooklyn Nguyen — Community Programs Coordinator (ledger)",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-5f23a0bafd9f"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C115",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-bc84fc0b7718"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED week-in-review c115",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-4c341e271917"
+          },
+          {
+            "t": "FACT",
+            "text": "Elijah Brown's Monday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Timberline, Arcturus, Ross 154, Maplevale, Miaplacidus, Cervantes, Ridgecrest, Hatysa, Nembus, Kitalpha, Lacaille 8760, Kepler 442, Theemin and Hollowcrest; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-8e0466f83471"
+          },
+          {
+            "t": "FACT",
+            "text": "Elijah Brown's Thursday night on UNDOCKED: went through Last Light, Fang, Errai, Wezen, Brightfall, Birchwood, Pinecross, Aludra, Tejat, Gsc 0002, Torcular, Gsc 0043, Gsc 0045, Dabih, Rimegate, Veritate, Betelgeuse and Gsc 0037; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-eb27a415821d"
+          },
+          {
+            "t": "FACT",
+            "text": "P Slayer's Wednesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes and Nembus; mined 1 iron ore; got into 2 fights; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-4b0f8572de45"
+          },
+          {
+            "t": "FACT",
+            "text": "Brooklyn Nguyen — UNDOCKED pilot",
+            "src": "Simulation_Ledger profile for POP-00184",
+            "id": "F-0f7faf8ea20e"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C11, Spring, holiday=none",
+            "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+            "id": "F-82d77e9a4a71"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00008",
+      "name": "P Slayer",
+      "quote": "To be honest, my route choices on UNDOCKED Wednesday night were pretty spontaneous. I was flying, reacting to what was around me. I got into a couple of fights, but that's just part of the show. I've been playing to climb the ranks, and sometimes that means taking risks.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; curious, open to new things; often out in the neighborhood; lives and dies with them",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, my route choices on UNDOCKED Wednesday night were pretty spontaneous. I was flying, reacting to what was around me. I got into a couple of fights, but that's just part of the show. I've been playing to climb the ranks, and sometimes that means taking risks.\",\n  \"fact_ids\": [\"F-4b0f8572de45\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-4b0f8572de45"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00008-0feae2fee6",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, my route choices on UNDOCKED Wednesday night were pretty spontaneous. I was flying, reacting to what was around me. I got into a couple of fights, but that's just part of the show. I've been playing to climb the ranks, and sometimes that means taking risks."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00008",
+          "name": "P Slayer",
+          "role": "UNDOCKED pilot",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "What led to P Slayer getting into fights on Wednesday night? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked-digest",
+          "hood": null,
+          "focus": "UNDOCKED pilots' performance in C115",
+          "src": "undocked-week:weekly-c115"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "P Slayer — UNDOCKED pilot",
+          "evidence": [
+            {
+              "id": "EV-8c8b4a6acd",
+              "src": "undocked-week:weekly-c115",
+              "text": "UNDOCKED week-in-review c115"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "P Slayer's Wednesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes and Nembus; mined 1 iron ore; got into 2 fights; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-4b0f8572de45"
+          },
+          {
+            "t": "FACT",
+            "text": "P Slayer — Journalist, Fan Columnist - Sports (ledger)",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-08817bf42f56"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C115",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-bc84fc0b7718"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED week-in-review c115",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-4c341e271917"
+          },
+          {
+            "t": "FACT",
+            "text": "Elijah Brown's Monday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Timberline, Arcturus, Ross 154, Maplevale, Miaplacidus, Cervantes, Ridgecrest, Hatysa, Nembus, Kitalpha, Lacaille 8760, Kepler 442, Theemin and Hollowcrest; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-8e0466f83471"
+          },
+          {
+            "t": "FACT",
+            "text": "Elijah Brown's Thursday night on UNDOCKED: went through Last Light, Fang, Errai, Wezen, Brightfall, Birchwood, Pinecross, Aludra, Tejat, Gsc 0002, Torcular, Gsc 0043, Gsc 0045, Dabih, Rimegate, Veritate, Betelgeuse and Gsc 0037; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-eb27a415821d"
+          },
+          {
+            "t": "FACT",
+            "text": "Brooklyn Nguyen's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes, Ridgecrest and Nembus; mined 3 copper ore, 3 iron ore and 1 sol alloy ore; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-3d44b1703f09"
+          },
+          {
+            "t": "FACT",
+            "text": "Brooklyn Nguyen's Friday night on UNDOCKED: went through Sirius, Nova Terra, Furud, Acrux, Botein, Intercrus, Atlas, Cedarhold, Achernar, Ruchbah, Ironhollow, Gsc 0041, Shaula, Alnair, Wolf 1061, Gsc 0031, Gsc 0021 and Gliese 876; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked-week:weekly-c115",
+            "id": "F-8978bd4574d4"
+          },
+          {
+            "t": "FACT",
+            "text": "P Slayer — UNDOCKED pilot",
+            "src": "Simulation_Ledger profile for POP-00008",
+            "id": "F-0e6dd6b4e263"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C11, Spring, holiday=none",
+            "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+            "id": "F-82d77e9a4a71"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-11-14T15:15:39.579Z"
+}

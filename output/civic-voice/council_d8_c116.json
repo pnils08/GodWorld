@@ -1,0 +1,40 @@
+{
+  "office": "council_d8",
+  "cycle": 116,
+  "speaker": "Nina Chen",
+  "cascadeSummary": "District 8 re-affirms its YES vote on the Commercial Stabilization for Grand Lake ordinance under strict Chen-Vega audit protocols, while clarifying for the record that an individual affirmative floor vote does not equate to council enactment without a certified roll call. In Eastlake, we demand published municipal service schedules and establish a complaint-to-response crosswalk addressing the district's three recorded maintenance cases. Across Lake Merritt and Adams Point, we insist on procedural oversight to ensure misfiled documents are rectified and baseline municipal services are delivered reliably.",
+  "statements": [
+    {
+      "statementId": "STMT-116-council_d8-001",
+      "type": "vote_statement",
+      "topic": "Commercial Stabilization for Grand Lake Floor Vote and Disposition Record",
+      "initiative": "Commercial Stabilization for Grand Lake",
+      "decision": "Cast floor vote of YES on INIT-009 with Chen-Vega audit protocols intact, while recording that an individual member's affirmative vote does not constitute council enactment pending a certified roll call from the City Clerk.",
+      "quote": "An individual affirmative vote is not an enacted ordinance; District 8 votes YES to secure Chen-Vega fiscal controls, but final disposition rests on a certified roll call.",
+      "fullStatement": "District 8 records a vote of YES on the $2.5 million Commercial Stabilization for Grand Lake ordinance, conditioned strictly on the preservation of the Chen-Vega audit protocols and milestone reporting. In response to Planning Director Mara Vance's directive, I must clarify the official record: while my individual seat voted YES in Cycle 115 and re-affirms YES today, an individual floor position is not an enacted policy. The live initiative tracker recorded INIT-009 as failed rather than passed due to the absence of a certified roll call. We require the City Clerk to publish the official roll-call decision record before funds are released. Relief without accountability is merely an expenditure; District 8 supports stabilization only when every dollar deployed in Grand Lake is tracked, verified, and earned.",
+      "disposition": "YES",
+      "actionAsked": "The City Clerk must record and certify the roll-call vote on INIT-009 and publish the official final decision record with all Chen-Vega audit conditions attached.",
+      "tone": "procedural",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-116-council_d8-002",
+      "type": "policy_statement",
+      "topic": "Eastlake Maintenance Allocations, Service Schedules, and Complaint Reconciliation",
+      "initiative": null,
+      "decision": "Direct Public Works and City Planning to publish verified baseline maintenance schedules for Eastlake and reconcile the district's three recorded complaints into a formal response crosswalk.",
+      "quote": "Revitalization cannot halt at Grand Avenue while adjacent commercial corridors wait for unverified schedules and unanswered maintenance complaints.",
+      "fullStatement": "In direct response to Planning Director Vance's inquiry regarding Eastlake allocations, District 8 clarifies that the proposed baseline municipal maintenance allocations remain in docketing review pending Public Works authorization. The district office has received three formal constituent complaints regarding corridor decay and delayed maintenance. I am directing staff to establish a formal complaint-to-response crosswalk mapping each case to its responsible department, remediation schedule, and follow-up deadline. Revitalization cannot halt at Grand Avenue while Eastlake shoulders documented corridor decay without verified service schedules. Furthermore, as community anchors like the Cathedral of the Living Word and Or Hashalom Renewal Community continue their vital civic and job training work across Lake Merritt and Grand Lake, city administration must meet them with equal administrative diligence, resolving misfiled documents and delivering predictable municipal maintenance.",
+      "disposition": "statement",
+      "actionAsked": "Direct the Department of Public Works to release verified service schedules for Eastlake and complete a documented crosswalk resolving District 8's three recorded maintenance complaints.",
+      "tone": "procedural",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    }
+  ]
+}

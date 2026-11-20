@@ -1,0 +1,324 @@
+{
+  "stage": "angle",
+  "desk": "undocked-digest",
+  "cycle": "115",
+  "persona": "nia-rook-weekly",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-01076",
+      "name": "Nia Rook",
+      "role": "desk reporter",
+      "desk": "undocked-digest"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "UNDOCKED week: pilots who flew this cycle (Elijah Brown, Brooklyn Nguyen, P Slayer). Standings: Luis Taz leads the board — rank #1, 45.19 achievement points, 0 credits, 2 cycle(s) led, current streak 2. In the chair: Elijah Brown — Electrician; Brooklyn Nguyen — Community Programs Coordinator; P Slayer — Journalist, Fan Columnist - Sports.",
+      "approach": null
+    },
+    "signal": {
+      "kind": "undocked-digest",
+      "hood": null,
+      "score": null,
+      "src": "undocked-week:weekly-c115",
+      "nearby": [
+        {
+          "text": "",
+          "src": ""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-01195",
+          "name": "Elijah Brown",
+          "profile": "Elijah Brown — UNDOCKED pilot",
+          "role": "UNDOCKED pilot",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "undocked-feed-row",
+          "evidence": {
+            "source": "output/spacemolt-show/feed/c115.json",
+            "episodeId": "undocked-pop01195-Y3C11",
+            "pop": "POP-01195"
+          }
+        },
+        {
+          "pop": "POP-00184",
+          "name": "Brooklyn Nguyen",
+          "profile": "Brooklyn Nguyen — UNDOCKED pilot",
+          "role": "UNDOCKED pilot",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "undocked-feed-row",
+          "evidence": {
+            "source": "output/spacemolt-show/feed/c115.json",
+            "episodeId": "undocked-pop00184-Y3C11",
+            "pop": "POP-00184"
+          }
+        },
+        {
+          "pop": "POP-00008",
+          "name": "P Slayer",
+          "profile": "P Slayer — UNDOCKED pilot",
+          "role": "UNDOCKED pilot",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "undocked-feed-row",
+          "evidence": {
+            "source": "output/spacemolt-show/feed/c115.json",
+            "episodeId": "undocked-pop00008-Y3C11",
+            "pop": "POP-00008"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C115",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-bc84fc0b7718"
+      },
+      {
+        "t": "FACT",
+        "text": "UNDOCKED week-in-review c115",
+        "src": "undocked-week:weekly-c115",
+        "id": "F-4c341e271917"
+      },
+      {
+        "t": "FACT",
+        "text": "Elijah Brown's Monday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Timberline, Arcturus, Ross 154, Maplevale, Miaplacidus, Cervantes, Ridgecrest, Hatysa, Nembus, Kitalpha, Lacaille 8760, Kepler 442, Theemin and Hollowcrest; came out even on credits; flew until the show's time ran out.",
+        "src": "undocked-week:weekly-c115",
+        "id": "F-8e0466f83471"
+      },
+      {
+        "t": "FACT",
+        "text": "Elijah Brown's Thursday night on UNDOCKED: went through Last Light, Fang, Errai, Wezen, Brightfall, Birchwood, Pinecross, Aludra, Tejat, Gsc 0002, Torcular, Gsc 0043, Gsc 0045, Dabih, Rimegate, Veritate, Betelgeuse and Gsc 0037; came out even on credits; flew until the show's time ran out.",
+        "src": "undocked-week:weekly-c115",
+        "id": "F-eb27a415821d"
+      },
+      {
+        "t": "FACT",
+        "text": "Brooklyn Nguyen's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes, Ridgecrest and Nembus; mined 3 copper ore, 3 iron ore and 1 sol alloy ore; came out even on credits; flew until the show's time ran out.",
+        "src": "undocked-week:weekly-c115",
+        "id": "F-3d44b1703f09"
+      },
+      {
+        "t": "FACT",
+        "text": "Brooklyn Nguyen's Friday night on UNDOCKED: went through Sirius, Nova Terra, Furud, Acrux, Botein, Intercrus, Atlas, Cedarhold, Achernar, Ruchbah, Ironhollow, Gsc 0041, Shaula, Alnair, Wolf 1061, Gsc 0031, Gsc 0021 and Gliese 876; came out even on credits; flew until the show's time ran out.",
+        "src": "undocked-week:weekly-c115",
+        "id": "F-8978bd4574d4"
+      },
+      {
+        "t": "FACT",
+        "text": "P Slayer's Wednesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes and Nembus; mined 1 iron ore; got into 2 fights; came out even on credits; flew until the show's time ran out.",
+        "src": "undocked-week:weekly-c115",
+        "id": "F-4b0f8572de45"
+      },
+      {
+        "t": "FACT",
+        "text": "Elijah Brown — Electrician (ledger)",
+        "src": "undocked-week:weekly-c115",
+        "id": "F-065ad2c00196"
+      },
+      {
+        "t": "FACT",
+        "text": "Brooklyn Nguyen — Community Programs Coordinator (ledger)",
+        "src": "undocked-week:weekly-c115",
+        "id": "F-5f23a0bafd9f"
+      },
+      {
+        "t": "FACT",
+        "text": "P Slayer — Journalist, Fan Columnist - Sports (ledger)",
+        "src": "undocked-week:weekly-c115",
+        "id": "F-08817bf42f56"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ]
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-01195",
+        "name": "Elijah Brown",
+        "role": "UNDOCKED pilot",
+        "hood": null,
+        "profile": "Elijah Brown — UNDOCKED pilot",
+        "mode": "named",
+        "sourceKind": "undocked-feed-row",
+        "evidence": {
+          "source": "output/spacemolt-show/feed/c115.json",
+          "episodeId": "undocked-pop01195-Y3C11",
+          "pop": "POP-01195"
+        }
+      },
+      {
+        "pop": "POP-00184",
+        "name": "Brooklyn Nguyen",
+        "role": "UNDOCKED pilot",
+        "hood": null,
+        "profile": "Brooklyn Nguyen — UNDOCKED pilot",
+        "mode": "named",
+        "sourceKind": "undocked-feed-row",
+        "evidence": {
+          "source": "output/spacemolt-show/feed/c115.json",
+          "episodeId": "undocked-pop00184-Y3C11",
+          "pop": "POP-00184"
+        }
+      },
+      {
+        "pop": "POP-00008",
+        "name": "P Slayer",
+        "role": "UNDOCKED pilot",
+        "hood": null,
+        "profile": "P Slayer — UNDOCKED pilot",
+        "mode": "named",
+        "sourceKind": "undocked-feed-row",
+        "evidence": {
+          "source": "output/spacemolt-show/feed/c115.json",
+          "episodeId": "undocked-pop00008-Y3C11",
+          "pop": "POP-00008"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Nia Rook",
+    "popid": "POP-01076"
+  },
+  "assignment": {
+    "story": {
+      "ref": "undocked-week:weekly-c115",
+      "label": "UNDOCKED week-in-review c115",
+      "kind": "undocked-digest",
+      "angle": "UNDOCKED week: pilots who flew this cycle (Elijah Brown, Brooklyn Nguyen, P Slayer). Standings: Luis Taz leads the board — rank #1, 45.19 achievement points, 0 credits, 2 cycle(s) led, current streak 2. In the chair: Elijah Brown — Electrician; Brooklyn Nguyen — Community Programs Coordinator; P Slayer — Journalist, Fan Columnist - Sports.",
+      "facts": [
+        "Elijah Brown's Monday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Timberline, Arcturus, Ross 154, Maplevale, Miaplacidus, Cervantes, Ridgecrest, Hatysa, Nembus, Kitalpha, Lacaille 8760, Kepler 442, Theemin and Hollowcrest; came out even on credits; flew until the show's time ran out.",
+        "Elijah Brown's Thursday night on UNDOCKED: went through Last Light, Fang, Errai, Wezen, Brightfall, Birchwood, Pinecross, Aludra, Tejat, Gsc 0002, Torcular, Gsc 0043, Gsc 0045, Dabih, Rimegate, Veritate, Betelgeuse and Gsc 0037; came out even on credits; flew until the show's time ran out.",
+        "Brooklyn Nguyen's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes, Ridgecrest and Nembus; mined 3 copper ore, 3 iron ore and 1 sol alloy ore; came out even on credits; flew until the show's time ran out.",
+        "Brooklyn Nguyen's Friday night on UNDOCKED: went through Sirius, Nova Terra, Furud, Acrux, Botein, Intercrus, Atlas, Cedarhold, Achernar, Ruchbah, Ironhollow, Gsc 0041, Shaula, Alnair, Wolf 1061, Gsc 0031, Gsc 0021 and Gliese 876; came out even on credits; flew until the show's time ran out.",
+        "P Slayer's Wednesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes and Nembus; mined 1 iron ore; got into 2 fights; came out even on credits; flew until the show's time ran out.",
+        "Elijah Brown — Electrician (ledger)",
+        "Brooklyn Nguyen — Community Programs Coordinator (ledger)",
+        "P Slayer — Journalist, Fan Columnist - Sports (ledger)"
+      ],
+      "citizens": [
+        "Elijah Brown — Electrician, UNDOCKED cast pilot",
+        "Brooklyn Nguyen — Community Programs Coordinator, UNDOCKED cast pilot",
+        "P Slayer — Journalist, Fan Columnist - Sports, UNDOCKED cast pilot"
+      ],
+      "popids": [
+        "POP-01195",
+        "POP-00184",
+        "POP-00008"
+      ]
+    }
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Nia Rook",
+    "popid": "POP-01076",
+    "text": "I'm going to dig into the UNDOCKED pilots' performance this cycle, focusing on their strategies and outcomes. Elijah Brown, Brooklyn Nguyen, and P Slayer are the pilots I'm looking at. I want to understand what worked for them and what didn't.",
+    "plan": {
+      "chase": "I'm going to dig into the UNDOCKED pilots' performance this cycle, focusing on their strategies and outcomes. Elijah Brown, Brooklyn Nguyen, and P Slayer are the pilots I'm looking at. I want to understand what worked for them and what didn't.",
+      "focus": "UNDOCKED pilots' performance in C115",
+      "why": "The current standings show Luis Taz leading, but I'm interested in the pilots who flew this cycle and how they did.",
+      "checks": [
+        "Elijah Brown's routes and outcomes",
+        "Brooklyn Nguyen's mining results",
+        "P Slayer's fight encounters"
+      ],
+      "targets": [
+        {
+          "pop": "POP-01195",
+          "question": "What was Elijah Brown's strategy on his two nights?",
+          "basis": "Elijah Brown's Monday and Thursday night performances"
+        },
+        {
+          "pop": "POP-00184",
+          "question": "How did Brooklyn Nguyen's mining efforts pay off?",
+          "basis": "Brooklyn Nguyen's Tuesday and Friday night performances"
+        },
+        {
+          "pop": "POP-00008",
+          "question": "What led to P Slayer getting into fights on Wednesday night?",
+          "basis": "P Slayer's Wednesday night performance"
+        }
+      ],
+      "interpretation": "The pilots' performances varied, with some achieving even credits and others encountering fights. I'm looking for patterns or insights that can explain these outcomes.",
+      "unverifiedLead": [
+        "The role of route choice in determining outcomes",
+        "The impact of mining on overall performance"
+      ]
+    }
+  },
+  "lanePicks": [
+    {
+      "popids": []
+    }
+  ],
+  "laneEntries": 1,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-14T14:15:26.633Z"
+}

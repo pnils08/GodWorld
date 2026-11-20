@@ -1,16 +1,18 @@
-Brooklyn Nguyen’s UNDOCKED night ended even on credits, which gives the episode its tidy little complication: a long flight, a real haul, and no balance-sheet victory lap.
+## UNDOCKED: Elijah Brown’s long night ends even
 
-On Tuesday night, Nguyen flew through thirteen systems and mined three copper ore, three iron ore, and one sol alloy ore before the show’s time ran out. “I came out even on credits after Tuesday's UNDOCKED flight. I mined 3 copper ore, 3 iron ore, and 1 sol alloy ore flying through all those systems,” Nguyen said afterward. The quote lands like a recap in miniature: movement and material, then that stubbornly level finish.
+Elijah Brown’s Thursday-night run on UNDOCKED finished even on credits, while Luis Taz remained the name to beat at the top of the board. No windfall, no dramatic balance swing: Brown flew until the show’s time ran out, and the scoreboard still belonged to Taz.
 
-The board’s current headline belongs to Luis Taz: rank #1, 45.19 achievement points, zero credits, two cycles led, and a current streak of two. That is the standing, not a verdict on Nguyen’s flight. The episode gives us no basis to say her even-credit run changed Taz’s position, and the show is more fun when we don’t pretend every night has to be a board-turning twist.
+That’s a neat little tension for a recap. The board prizes a lead; the episode gives us a journey that doesn’t cash out as a credit change. Brown moved through Last Light, Fang, Errai, Wezen, Brightfall, Birchwood, Pinecross, Aludra, Tejat, Gsc 0002, Torcular, Gsc 0043, Gsc 0045, Dabih, Rimegate, Veritate, Betelgeuse and Gsc 0037. The list has the satisfying rhythm of a route that keeps opening another door. Then: even.
 
-There is a useful bit of history here, though. The approved C114 show history records Taz in several episodes, including one route through a long string of systems that ended with zero combat and zero mishaps. That’s not an earlier rank, or proof of how the lead was built; it’s a reminder that UNDOCKED can make a long route part of a pilot’s on-screen identity. Now Nguyen’s Tuesday night puts its own kind of persistence on the card: thirteen systems, three kinds of ore, and time called before the credits moved either way.
+Brown put it plainly: “I flew on UNDOCKED Thursday night and went through a bunch of systems until the show's time ran out. I ended up even on credits. My standing is 3rd of 30, with 38.35 points and 0 credits, so it didn't seem to hurt me.”
 
-In a Fruitvale watch room, I can hear the friendly argument writing itself. One imaginary viewer wants the haul celebrated; another says the even balance is the night’s real punchline. They can both be right. Nguyen’s episode is not a windfall story. It’s a route story, with a finish that refuses to dress itself up as something else.
+I like that last shrug. “It didn’t seem to hurt me” is not a victory speech; it’s a pilot looking at a long night and deciding the result can stand. In a Rockridge break room, you can imagine the argument making its way around the table: is an even finish a quiet success, or just the kind of episode where the route becomes the reward? I’d take the route. The show ran out of time before Brown ran out of places to go.
 
-That’s a satisfying kind of UNDOCKED night: not a grand reversal, not a neat lesson, just a pilot who kept flying until the show’s time ran out. Taz remains the board’s name to beat. Nguyen leaves the chair with a more modest distinction—the episode’s clean contrast between a substantial haul and an even finish. Tomorrow’s hallway can argue about which part counts more.
+The available approved history has no earlier episode for Brown, so this is a first glimpse in that record—not proof that he’s never been on the show before. For the board’s longer arc, the paper’s C114 coverage followed Taz taking the lead on an even run, with a one-cycle streak led. Now Taz is still ranked first, with two cycles led in a row. That’s the forward motion: not a claim about how the board’s points changed, but a lead that has lasted another cycle.
+
+So Brown gets the episode’s best image: a long string of system names, time running out, and the credits landing exactly where they started. Taz gets the board’s continuing headline. UNDOCKED leaves room for both kinds of drama—the quiet satisfaction of a run completed, and the question of how long a leader can stay there.
 
 ## INTAKE
-NAMES: Brooklyn Nguyen | quoted-source
-HOOD: Fruitvale
-CLAIM: I came out even on credits after Tuesday's UNDOCKED flight. I mined 3 copper ore, 3 iron ore, and 1 sol alloy ore flying through all those systems. | citizenVoice PRESS Brooklyn Nguyen
+NAMES: Elijah Brown | quoted-source
+HOOD: Rockridge
+CLAIM: I flew on UNDOCKED Thursday night and went through a bunch of systems until the show's time ran out. I ended up even on credits. My standing is 3rd of 30, with 38.35 points and 0 credits, so it didn't seem to hurt me. | citizenVoice PRESS Elijah Brown

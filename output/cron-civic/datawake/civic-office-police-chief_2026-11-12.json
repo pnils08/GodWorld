@@ -1,0 +1,61 @@
+{
+  "office": "police_chief",
+  "agentDir": "civic-office-police-chief",
+  "holder": "Rafael Montez",
+  "popid": "POP-00136",
+  "title": "Police Chief",
+  "date": "2026-11-12",
+  "cycle": 115,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "No public safety event in this cycle's export requires an institutional statement from this office. The district readings show crime indices holding in a tight band across the city — Fruitvale at 0.67 and San Antonio at 0.73 remain the highest, with most neighborhoods flat or down slightly from last cycle. That is a steady picture, not an announcement. I am holding the citywide patrol posture at balanced, keeping OARI co-response coordination in East and West Oakland in place, and watching the districts rather than speaking about them.",
+  "moves": [
+    {
+      "type": "patrol",
+      "payload": {
+        "strategy": "balanced",
+        "note": "Crime indices flat to slightly down citywide with no single district deteriorating sharply enough to justify shifting resources; balanced posture maintains even coverage and preserves OARI co-response coordination."
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "0",
+  "ranAt": "2026-11-12T11:50:34.720Z",
+  "usage": {
+    "prompt_tokens": 12792,
+    "completion_tokens": 185,
+    "total_tokens": 12977,
+    "cost": 0.000578596,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.000578596,
+      "upstream_inference_prompt_cost": 0.000486096,
+      "upstream_inference_completions_cost": 0.0000925
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "fellBackFrom": null,
+  "evidenceGenerationHash": "8bfd87940a666380c5a9b73d2151cff4f6286856fa3673a770c7259a48d6c71b",
+  "evidenceReads": [],
+  "provider": "Wafer",
+  "finishReason": "stop",
+  "elapsedMs": 4299,
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00136",
+    "id": "2Dnj2b6dfBmCmf2aBJpMsa",
+    "customId": "cp-POP-00136-c115-CIVIC-datawake-2026-11-12"
+  }
+}

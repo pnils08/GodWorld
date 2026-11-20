@@ -1,0 +1,43 @@
+{
+  "office": "district_attorney",
+  "agentDir": "civic-office-district-attorney",
+  "holder": "Clarissa Dane",
+  "popid": "POP-00143",
+  "title": "District Attorney",
+  "date": "2026-11-18",
+  "cycle": 116,
+  "model": "moonshotai/kimi-k3.1-pro",
+  "statement": "**Cycle 116 — Weekly Report of District Attorney Clarissa Dane**\n\nFor the record:\n\n**Arrests and custody.** Oakland began the cycle with **67 people in custody**, recorded **24 arrest intakes** and **43 exits**, and ended with **48 in custody**. With no transfers in or out, the population reconciles exactly: **67 + 24 − 43 = 48**. That is a net decrease of **19 people**, approximately **28.4%** from the start of the cycle. It is a reduction in the custody population, not by itself proof of case resolution or improved public safety. The bed-capacity field is blank, so I cannot report an occupancy rate or capacity compliance. Nor will I describe all 43 exits as releases without disposition-level information.\n\nThe neighborhood table accounts for all 24 intakes and all 48 people in custody at cycle end. **Downtown and Grand Lake recorded two intakes each; the other 20 listed neighborhoods recorded one each.** At cycle end, Grand Lake accounted for four people in custody, Downtown and San Antonio for three each, and the remaining 19 neighborhoods for two each. **West Oakland recorded one intake and two people in custody at cycle end.**\n\n**Cases and court fines.** The supplied case ledger contains **no entries**. Accordingly, this record provides no basis for reporting a pending caseload or a breakdown of filings, declinations, dismissals, convictions, or acquittals.\n\nThe court nevertheless recorded **$108,884 in fine revenue paid to the city**, leaving a post-entry balance of **$131,753,831**. The ledger attributes that revenue to **24 cleared charges fined at the neighborhood rate**. The matching number does not establish that these are the same 24 events as this cycle’s arrest intakes. Charges, people, cases, arrests, and custody exits are different units and must not be merged without case-level identifiers.\n\n**Incidents and clearance.** The neighborhood table lists **125 incidents across 22 neighborhoods**. Downtown has the highest count at **eight**, with **20% clearance**. Grand Lake and Lake Merritt each list **seven**; their clearance rates are **25%** and **21%**, respectively. **Grand Lake is the only neighborhood marked rising; every other listed trend is steady.**\n\nReported clearance rates range from **19% in Glenview** to **25% in Grand Lake**. West Oakland lists **five incidents and 24% clearance**. East Oakland also lists five incidents and 24% clearance, with the highest recorded violent level, **33.28**. Fruitvale lists six incidents, 21% clearance, and a violent level of **30.32**. Temescal has the highest listed property level, **47.22**. These figures identify where review is warranted; they do not explain causation or change the evidence standard in any individual case.\n\n**Patrol and safety entries.** The patrol ledger records two events: a **ticket involving Joaquín Nakamura** and a **pulled-over warning involving Henry Rivas**. Neither entry should be counted as an arrest or prosecution. The safety-event ledger records **no events** for Cycle 116.\n\n**Action.** I am directing my office to seek a charge-by-charge reconciliation connecting arrest intakes, court cases, dispositions, custody exits, and fine entries; to obtain the missing bed-capacity and exit-reason information; and to flag Downtown’s incident volume, Grand Lake’s rising trend, and the violent-level readings in East Oakland and Fruitvale for charging-review attention. My office will report what the records establish—and will not fill the gaps with assumptions.",
+  "moves": [],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-11-18T11:47:49.360Z",
+  "usage": {
+    "prompt_tokens": 3310,
+    "completion_tokens": 4734,
+    "cost": 0.0728
+  },
+  "fellBackFrom": null,
+  "template": "worker/2",
+  "toolTrace": [],
+  "memory": {
+    "searchedOn": "charges custody arrests court",
+    "entries": 7,
+    "fromSearch": 5,
+    "newest": 2,
+    "failed": []
+  },
+  "figuresNotHanded": [
+    "125"
+  ],
+  "finishReason": "stop",
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00143",
+    "id": "GhGgmfBFignLWnREPWDC8k",
+    "customId": "cp-POP-00143-c116-CIVIC-datawake-2026-11-18"
+  }
+}

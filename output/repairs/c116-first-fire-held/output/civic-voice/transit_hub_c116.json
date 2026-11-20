@@ -1,0 +1,34 @@
+{
+  "office": "transit_hub",
+  "cycle": 116,
+  "speaker": "Elena Soria Dominguez",
+  "cascadeSummary": "The gavel and D3's office have done the right thing and confirmed what I asked for: the C86 authorization stays, and the design does not advance until the preliminary schematics are delivered and Fruitvale's comments are answered in writing. This cycle I execute the delivery and the documented community review at the Cesar Chavez branch and the senior center — English, Spanish, and Mam — and I build the comment-and-response record the next design step must clear. The phase holds at design-phase with no claim of advancement until that record exists.",
+  "statements": [
+    {
+      "statementId": "STMT-116-transit_hub-001",
+      "type": "operational_status",
+      "topic": "Preliminary schematics delivery and documented Fruitvale comment-and-response record",
+      "initiative": "INIT-003",
+      "decision": "Hold further design advancement at design-phase; execute preliminary schematics delivery and documented community review at the Cesar Chavez branch and senior center in English, Spanish, and Mam, building the comment-and-response record that the next design step must clear.",
+      "quote": "Every schematic gets a comment number, every comment number gets a written answer in the language it was asked in — and until that record exists, these drawings do not move an inch.",
+      "fullStatement": "The mayor's directive and Councilmember Delgado's hold say the same thing I've been saying: the C86 authorization stands, and a $230 million design does not advance on schematics nobody has seen and a community review nobody has documented. So this cycle I'm executing the delivery. The preliminary schematics — the massing, the station plaza, the pedestrian crossing at 14th Avenue, the ground-floor retail footprints, the affordability projections — are taped up on butcher paper at the Cesar Chavez branch and again at the senior center, with Spanish and Mam interpreters in the room, not at the back. Every comment gets a number on the record. Every number gets a written answer in the language it was asked in, from the office or the consultant who owns that piece of the drawing. That's the comment-and-response record, and that's what the next design step has to clear before it moves. If it doesn't clear it, I'll say so in writing. The phase holds at design-phase — no claim of final design, no advancement, no milestone manufactured to fit a calendar.",
+      "trackerUpdates": {
+        "initiative": "INIT-003",
+        "ImplementationPhase": "design-phase",
+        "MilestoneNotes": "C116: Preliminary schematics delivered and documented Fruitvale comment-and-response review begun at Cesar Chavez branch and senior center (EN/ES/Mam); advancement held pending record",
+        "NextScheduledAction": "Complete and publish the Fruitvale comment-and-response record; deliver to council for verification before any design advancement",
+        "NextActionCycle": 117
+      }
+    },
+    {
+      "statementId": "STMT-116-transit_hub-002",
+      "type": "constituent_advocacy",
+      "topic": "What Fruitvale needs from me this cycle",
+      "initiative": null,
+      "decision": "Keep answering for Fruitvale on the ground — walk the site with the people who live on it, keep the bilingual record honest, and keep the 14th Avenue crossing and the small businesses on International in front of the design team.",
+      "quote": "I don't answer for Fruitvale from a cubicle. I answer for it because my kids walk to the BART station past these drawings, and so do yours.",
+      "fullStatement": "What Fruitvale needs from me this cycle isn't a new promise — it's the record. The neighborhood is in a good mood, the street trade is busy, church held a job-training workshop that lifted people. That mood is earned by people who get up at five to sell tamales on International and open the panadería before the BART crowd comes through. They are the reason a $230 million project has to answer to them first, not last. So I keep walking the site with the neighbors who live on it. I keep the pedestrian crossing at 14th Avenue in front of the design team because a kid nearly got hit there last spring and the community brought it up three times before the city noticed. I keep the small businesses on International in the conversation, not just in the abstract displacement slide. And I keep the whole record bilingual, because a comment answered in English only is a comment not answered. I don't answer for Fruitvale from a cubicle — I answer for it because I grew up on E. 12th, my kids walk to the station past these drawings, and so do yours.",
+      "trackerUpdates": {}
+    }
+  ]
+}

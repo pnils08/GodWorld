@@ -1,0 +1,69 @@
+{
+  "office": "council_d1",
+  "agentDir": "civic-office-council-d1",
+  "holder": "Denise Carter",
+  "popid": "POP-00501",
+  "title": "City Council District 1",
+  "date": "2026-11-17",
+  "cycle": 116,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "Brooklyn this week is moving in the right direction and I want to say that plainly before I say anything else — sentiment came up from -0.11 to -0.04, retail vitality is climbing, and the decay has stopped sliding. That is still the lowest reading in the city against a positive citywide number, and it is still my district. What I won't do is let a small improvement be the end of the story: Kaila Raimon, Drago Helio, Sefu Helio, and Minh Raimon live where the number is lowest, and Brooklyn has 66 residents sick with violence above the city middle. Director Vance asked me to account for the Brooklyn service-audit baseline and the District 1 OARI evaluation. I'm answering her directly: those are records requests, not rhetoric, and I'm naming what I need from her department to finish the answer I promised instead of asking my neighbors to wait again. I'm also moving to revive the Youth Apprenticeship Pipeline — a stalled program with money still on it is a promise nobody is keeping, and placement is the half that matters.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-116-civic-office-council-d1",
+        "text": "Director Vance — on the Brooklyn service-audit baseline: I need the department's own baseline survey records for Brooklyn as of the last completed audit, the departmental liaison who signs off on those records, and written confirmation of which baseline figures your office considers current versus superseded. On the District 1 OARI evaluation: I need the evaluation scope document, the co-response dispatch records for D1 that the evaluation depends on, and a named department contact who can confirm the evaluation's status in writing. I am not asking your office to produce conclusions — I am asking for the records and the assistance so the answer I promised my district can actually be completed and filed, not deferred again.",
+        "directiveCycle": 116,
+        "confrontationSeat": "civic-office-council-d1"
+      }
+    },
+    {
+      "type": "work",
+      "payload": {
+        "initiativeId": "INIT-007"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-11-17T11:45:39.624Z",
+  "usage": {
+    "prompt_tokens": 6914,
+    "completion_tokens": 435,
+    "total_tokens": 7349,
+    "cost": 0.00030701,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00030701,
+      "upstream_inference_prompt_cost": 0.00027656,
+      "upstream_inference_completions_cost": 0.00003045
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "fellBackFrom": null,
+  "evidenceGenerationHash": "8bf58509d24a03b95f8e88a49a51e50b409fb1c4c8aa344e61a1acf7e941275d",
+  "evidenceReads": [],
+  "provider": "Sail Research",
+  "finishReason": "stop",
+  "elapsedMs": 3375,
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00501",
+    "id": "7FRF1M1SYJHbKRCoVHFSj1",
+    "customId": "cp-POP-00501-c116-CIVIC-datawake-2026-11-17"
+  }
+}

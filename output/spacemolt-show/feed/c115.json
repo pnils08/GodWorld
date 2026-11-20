@@ -100,6 +100,117 @@
         "credits_delta_windowed"
       ],
       "StagedPath": "output/spacemolt-show/staged/undocked-pop00008-2026-11-12T02-30-29.json"
+    },
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 115,
+      "EventType": "undocked-episode",
+      "POPID": "POP-01195",
+      "Holder": "Elijah Brown",
+      "EpisodeId": "undocked-pop01195-Y3C11-e2",
+      "CreditsDelta": 0,
+      "PointsDelta": 10.22,
+      "Systems": [
+        "last_light",
+        "fang",
+        "errai",
+        "wezen",
+        "brightfall",
+        "birchwood",
+        "pinecross",
+        "aludra",
+        "tejat",
+        "gsc_0002",
+        "torcular",
+        "gsc_0043",
+        "gsc_0045",
+        "dabih",
+        "rimegate",
+        "veritate",
+        "betelgeuse",
+        "gsc_0037"
+      ],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 2,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop01195-2026-11-13T02-30-33.json"
+    },
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 115,
+      "EventType": "undocked-episode",
+      "POPID": "POP-00184",
+      "Holder": "Brooklyn Nguyen",
+      "EpisodeId": "undocked-pop00184-Y3C11-e2",
+      "CreditsDelta": 0,
+      "PointsDelta": 11.83,
+      "Systems": [
+        "sirius",
+        "nova_terra",
+        "furud",
+        "acrux",
+        "botein",
+        "intercrus",
+        "atlas",
+        "cedarhold",
+        "achernar",
+        "ruchbah",
+        "ironhollow",
+        "gsc_0041",
+        "shaula",
+        "alnair",
+        "wolf_1061",
+        "gsc_0031",
+        "gsc_0021",
+        "gliese_876"
+      ],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 2,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00184-2026-11-14T02-30-38.json"
+    },
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 115,
+      "EventType": "undocked-episode",
+      "POPID": "POP-00008",
+      "Holder": "P Slayer",
+      "EpisodeId": "undocked-pop00008-Y3C11-e2",
+      "CreditsDelta": 0,
+      "PointsDelta": 12.23,
+      "Systems": [
+        "sirius",
+        "lacaille_9352",
+        "grumium",
+        "celaeno",
+        "lanternwick",
+        "diadem",
+        "intercrus",
+        "gsc_0044",
+        "atlas",
+        "garnet",
+        "achernar",
+        "ruchbah",
+        "ironhollow",
+        "gsc_0041",
+        "shaula",
+        "alnair",
+        "wolf_1061",
+        "pherkad"
+      ],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 2,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00008-2026-11-15T02-30-29.json"
     }
   ]
 }

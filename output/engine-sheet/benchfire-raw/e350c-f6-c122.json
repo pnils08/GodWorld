@@ -1,0 +1,806 @@
+{
+ "ok": true,
+ "ranMs": 214743,
+ "state": "done",
+ "persist": {
+  "executed": 637,
+  "errors": []
+ },
+ "diag59": {
+  "cycle": 122,
+  "poolSize": 878,
+  "poolSample": [
+   "Kasumi Verma",
+   "Hector Quintanilla",
+   "Miguel King"
+  ],
+  "bonds": 848,
+  "friendGrowths": 304,
+  "factors": [
+   "POP-00801xPOP-00818:1.000",
+   "POP-00927xPOP-00481:1.000",
+   "POP-00759xPOP-00927:1.000",
+   "POP-00233xPOP-00885:1.000",
+   "POP-00304xPOP-00504:1.000"
+  ],
+  "mapKeys": 1750,
+  "mapSample": [
+   "Kasumi Verma",
+   "POP-00833",
+   "Hector Quintanilla",
+   "POP-01164"
+  ],
+  "gatePass": 576,
+  "friendBondSample": [
+   "POP-00476>active",
+   "POP-01001>active",
+   "POP-00017>active"
+  ],
+  "enumFriendship": "friendship"
+ },
+ "diag61": {
+  "rate": 4.4,
+  "desc": "steady",
+  "prevRate": 4.62,
+  "mood": 49,
+  "nudge": 0,
+  "jitter": -0.25,
+  "loop": {
+   "accrued": 984,
+   "debtUp": 1,
+   "debtDown": 32,
+   "leanUp": 1,
+   "leanDown": 30,
+   "eventUp": 0,
+   "eventDown": 1,
+   "defaults": 1,
+   "unmarked": 0,
+   "expense": 5,
+   "windfall": 3
+  },
+  "propertyTax": {
+   "taxDay": false,
+   "households": 0,
+   "payers": 0,
+   "collected": 0,
+   "borrowed": 0,
+   "cityTotal": 0,
+   "businessTax": 0
+  },
+  "mobility": {
+   "events": 1,
+   "up": 0,
+   "down": 1
+  }
+ },
+ "timing": {
+  "cycle": 122,
+  "totalMs": 202696,
+  "phaseCount": 132,
+  "slowest": [
+   {
+    "phase": "Phase11-MaintainLifeHistoryLog",
+    "ms": 37949,
+    "ok": true
+   },
+   {
+    "phase": "Phase10-ExecuteIntents",
+    "ms": 24238,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-Advancement",
+    "ms": 16942,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-CitizenEvents",
+    "ms": 10496,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-HouseholdFormation",
+    "ms": 9378,
+    "ok": true
+   }
+  ],
+  "timings": [
+   {
+    "phase": "Phase1-LoadConfig",
+    "ms": 272,
+    "ok": true
+   },
+   {
+    "phase": "Phase1-CanonHoods",
+    "ms": 411,
+    "ok": true
+   },
+   {
+    "phase": "Phase1-AdvanceTime",
+    "ms": 0,
+    "ok": true
+   },
+   {
+    "phase": "Phase1-SeedRng",
+    "ms": 2,
+    "ok": true
+   },
+   {
+    "phase": "Phase1-Calendar",
+    "ms": 3,
+    "ok": true
+   },
+   {
+    "phase": "Phase1-ResetAudit",
+    "ms": 1,
+    "ok": true
+   },
+   {
+    "phase": "Phase1-PrevEvening",
+    "ms": 158,
+    "ok": true
+   },
+   {
+    "phase": "Phase1-PrevCycleState",
+    "ms": 938,
+    "ok": true
+   },
+   {
+    "phase": "Phase2-SportsSeason",
+    "ms": 1090,
+    "ok": true
+   },
+   {
+    "phase": "Phase2-SeasonalWeights",
+    "ms": 0,
+    "ok": true
+   },
+   {
+    "phase": "Phase2-SportsFeed",
+    "ms": 533,
+    "ok": true
+   },
+   {
+    "phase": "Phase2-CivicSentiment",
+    "ms": 4,
+    "ok": true
+   },
+   {
+    "phase": "Phase2-EditionCoverage",
+    "ms": 406,
+    "ok": true
+   },
+   {
+    "phase": "Phase2-CivicStageCohort",
+    "ms": 747,
+    "ok": true
+   },
+   {
+    "phase": "Phase2-InitiativeEffects",
+    "ms": 1241,
+    "ok": true
+   },
+   {
+    "phase": "Phase2-Weather",
+    "ms": 2,
+    "ok": true
+   },
+   {
+    "phase": "Phase2-CommuteFlows",
+    "ms": 424,
+    "ok": true
+   },
+   {
+    "phase": "Phase2-NeighborhoodState",
+    "ms": 260,
+    "ok": true
+   },
+   {
+    "phase": "Phase2-CityDynamics",
+    "ms": 500,
+    "ok": true
+   },
+   {
+    "phase": "Phase2-ContentLedger",
+    "ms": 563,
+    "ok": true
+   },
+   {
+    "phase": "Phase2-UndockedFeed",
+    "ms": 489,
+    "ok": true
+   },
+   {
+    "phase": "Phase2-Transit",
+    "ms": 1717,
+    "ok": true
+   },
+   {
+    "phase": "Phase3-Population",
+    "ms": 372,
+    "ok": true
+   },
+   {
+    "phase": "Phase3-Demographics",
+    "ms": 2136,
+    "ok": true
+   },
+   {
+    "phase": "Phase3-CrisisSpikes",
+    "ms": 1,
+    "ok": true
+   },
+   {
+    "phase": "Phase3-CrisisBuckets",
+    "ms": 14,
+    "ok": true
+   },
+   {
+    "phase": "Phase3-Crime",
+    "ms": 1881,
+    "ok": true
+   },
+   {
+    "phase": "Phase3-NeighborhoodDemo",
+    "ms": 982,
+    "ok": true
+   },
+   {
+    "phase": "Phase4-CycleRecovery",
+    "ms": 0,
+    "ok": true
+   },
+   {
+    "phase": "Phase4-DomainCooldowns",
+    "ms": 1,
+    "ok": true
+   },
+   {
+    "phase": "Phase4-WorldEvents",
+    "ms": 628,
+    "ok": true
+   },
+   {
+    "phase": "Phase4-FaithEvents",
+    "ms": 736,
+    "ok": true
+   },
+   {
+    "phase": "Phase4-CareJusticeDemand",
+    "ms": 435,
+    "ok": true
+   },
+   {
+    "phase": "Phase4-ChaosCars",
+    "ms": 839,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-GenericCitizens",
+    "ms": 4663,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-GenericMicroEvents",
+    "ms": 26,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-GameModeMicroEvents",
+    "ms": 6,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-GameNightMoments",
+    "ms": 518,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-EnsureEventsLedger",
+    "ms": 1,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-EnsureMediaLedger",
+    "ms": 2,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-EnsureEventsV3",
+    "ms": 4,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-EnsureBonds",
+    "ms": 735,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-LoadBonds",
+    "ms": 493,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-SeedBonds",
+    "ms": 483,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-Relationships",
+    "ms": 6,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-Neighborhoods",
+    "ms": 4,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-Universe",
+    "ms": 2,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-Initiatives",
+    "ms": 1500,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-ApprovalRatings",
+    "ms": 1253,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-CivicModeEvents",
+    "ms": 596,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-MediaModeEvents",
+    "ms": 6,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-BusinessDynamics",
+    "ms": 1017,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-CivicRoles",
+    "ms": 610,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-Maneuver",
+    "ms": 939,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-Career",
+    "ms": 1995,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-Education",
+    "ms": 3330,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-Household",
+    "ms": 1,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-Conduct",
+    "ms": 1,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-Generational",
+    "ms": 2599,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-Judicial",
+    "ms": 15,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-Youth",
+    "ms": 1130,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-Intake",
+    "ms": 1437,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-NamedCitizens",
+    "ms": 0,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-CitizenEvents",
+    "ms": 10496,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-Promotions",
+    "ms": 3091,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-Bonds",
+    "ms": 3954,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-Advancement",
+    "ms": 16942,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-HouseholdFormation",
+    "ms": 9378,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-GenerationalWealth",
+    "ms": 8192,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-EducationCareer",
+    "ms": 1615,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-Trajectory",
+    "ms": 406,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-MigrationTracking",
+    "ms": 2226,
+    "ok": true
+   },
+   {
+    "phase": "Phase6-FilterNoise",
+    "ms": 1,
+    "ok": true
+   },
+   {
+    "phase": "Phase6-Prioritize",
+    "ms": 0,
+    "ok": true
+   },
+   {
+    "phase": "Phase6-Spotlights",
+    "ms": 0,
+    "ok": true
+   },
+   {
+    "phase": "Phase6-RecurringCitizens",
+    "ms": 2,
+    "ok": true
+   },
+   {
+    "phase": "Phase6-CivicLoad",
+    "ms": 2,
+    "ok": true
+   },
+   {
+    "phase": "Phase6-EconomicRipple",
+    "ms": 592,
+    "ok": true
+   },
+   {
+    "phase": "Phase6-InitiativeRipple",
+    "ms": 2,
+    "ok": true
+   },
+   {
+    "phase": "Phase6-Migration",
+    "ms": 985,
+    "ok": true
+   },
+   {
+    "phase": "Phase6-PatternDetect",
+    "ms": 2819,
+    "ok": true
+   },
+   {
+    "phase": "Phase6-ShockMonitor",
+    "ms": 1,
+    "ok": true
+   },
+   {
+    "phase": "Phase6-Textures",
+    "ms": 1,
+    "ok": true
+   },
+   {
+    "phase": "Phase6-TransitSignals",
+    "ms": 0,
+    "ok": true
+   },
+   {
+    "phase": "Phase6.5-Validation",
+    "ms": 4,
+    "ok": true
+   },
+   {
+    "phase": "Phase7-CityEvents",
+    "ms": 1094,
+    "ok": true
+   },
+   {
+    "phase": "Phase7-Nightlife",
+    "ms": 1,
+    "ok": true
+   },
+   {
+    "phase": "Phase7-Sports",
+    "ms": 0,
+    "ok": true
+   },
+   {
+    "phase": "Phase7-Food",
+    "ms": 587,
+    "ok": true
+   },
+   {
+    "phase": "Phase7-Famous",
+    "ms": 5546,
+    "ok": true
+   },
+   {
+    "phase": "Phase7-FameFlush",
+    "ms": 3,
+    "ok": true
+   },
+   {
+    "phase": "Phase7-EveningMedia",
+    "ms": 1,
+    "ok": true
+   },
+   {
+    "phase": "Phase7-CitySystems",
+    "ms": 445,
+    "ok": true
+   },
+   {
+    "phase": "Phase7-MediaPacket",
+    "ms": 2,
+    "ok": true
+   },
+   {
+    "phase": "Phase7-SeasonalSeeds",
+    "ms": 0,
+    "ok": true
+   },
+   {
+    "phase": "Phase7-ChaosWeights",
+    "ms": 0,
+    "ok": true
+   },
+   {
+    "phase": "Phase7-StorySeeds",
+    "ms": 640,
+    "ok": true
+   },
+   {
+    "phase": "Phase7-ContractSeeds",
+    "ms": 7222,
+    "ok": true
+   },
+   {
+    "phase": "Phase8-V3Preload",
+    "ms": 0,
+    "ok": true
+   },
+   {
+    "phase": "Phase8-V3Integration",
+    "ms": 73,
+    "ok": true
+   },
+   {
+    "phase": "Phase8-CycleWeightSignal",
+    "ms": 0,
+    "ok": true
+   },
+   {
+    "phase": "Phase8-DemographicDrift",
+    "ms": 1,
+    "ok": true
+   },
+   {
+    "phase": "Phase9-DigestSummary",
+    "ms": 0,
+    "ok": true
+   },
+   {
+    "phase": "Phase9-CompressLifeHistory",
+    "ms": 995,
+    "ok": true
+   },
+   {
+    "phase": "Phase9-FinalizePopulation",
+    "ms": 136,
+    "ok": true
+   },
+   {
+    "phase": "Phase9-EveningSnapshot",
+    "ms": 7,
+    "ok": true
+   },
+   {
+    "phase": "Phase9-FinalizeCycleState",
+    "ms": 6,
+    "ok": true
+   },
+   {
+    "phase": "Phase10-WriteDigest",
+    "ms": 0,
+    "ok": true
+   },
+   {
+    "phase": "Phase10-CycleWeather",
+    "ms": 195,
+    "ok": true
+   },
+   {
+    "phase": "Phase10-RecordEvents25",
+    "ms": 5,
+    "ok": true
+   },
+   {
+    "phase": "Phase10-RecordEventsV3",
+    "ms": 6,
+    "ok": true
+   },
+   {
+    "phase": "Phase10-ChaosNbhdResolve",
+    "ms": 765,
+    "ok": true
+   },
+   {
+    "phase": "Phase10-NeighborhoodMap",
+    "ms": 964,
+    "ok": true
+   },
+   {
+    "phase": "Phase10-Bonds",
+    "ms": 466,
+    "ok": true
+   },
+   {
+    "phase": "Phase10-BondLedger",
+    "ms": 200,
+    "ok": true
+   },
+   {
+    "phase": "Phase10-Domains",
+    "ms": 4,
+    "ok": true
+   },
+   {
+    "phase": "Phase10-Seeds",
+    "ms": 881,
+    "ok": true
+   },
+   {
+    "phase": "Phase10-Hooks",
+    "ms": 8,
+    "ok": true
+   },
+   {
+    "phase": "Phase10-Textures",
+    "ms": 4,
+    "ok": true
+   },
+   {
+    "phase": "Phase10-CyclePacket",
+    "ms": 1964,
+    "ok": true
+   },
+   {
+    "phase": "Phase10-CareJusticeCensus",
+    "ms": 5068,
+    "ok": true
+   },
+   {
+    "phase": "Phase10-MediaLedger",
+    "ms": 383,
+    "ok": true
+   },
+   {
+    "phase": "Phase10-CycleSeed",
+    "ms": 5,
+    "ok": true
+   },
+   {
+    "phase": "Phase10-EveningSnapshot",
+    "ms": 563,
+    "ok": true
+   },
+   {
+    "phase": "Phase10-CycleState",
+    "ms": 6377,
+    "ok": true
+   },
+   {
+    "phase": "Phase10-PopIdHighWater",
+    "ms": 4,
+    "ok": true
+   },
+   {
+    "phase": "Phase10-CommitLedger",
+    "ms": 0,
+    "ok": true
+   },
+   {
+    "phase": "Phase10-ExecuteIntents",
+    "ms": 24238,
+    "ok": true
+   },
+   {
+    "phase": "Phase11-MediaIntake",
+    "ms": 2296,
+    "ok": true
+   },
+   {
+    "phase": "Phase11-BusinessArchive",
+    "ms": 1,
+    "ok": true
+   },
+   {
+    "phase": "Phase11-CitizenArchive",
+    "ms": 1724,
+    "ok": true
+   },
+   {
+    "phase": "Phase11-MaintainLifeHistoryLog",
+    "ms": 37949,
+    "ok": true
+   }
+  ]
+ },
+ "diag187": {
+  "cycle": 122,
+  "flag": "none",
+  "prevFlag": "none",
+  "reasons": [],
+  "duration": 0,
+  "read": {
+   "chaos": 13,
+   "prevChaos": 13,
+   "chaosSaturationThreshold": 21,
+   "medium": 2,
+   "high": 0,
+   "migration": 1429,
+   "migrationThreshold": 2097,
+   "civicLoadScore": 7,
+   "sentiment": 0.1204,
+   "prevSentiment": 0.09,
+   "econMood": 49,
+   "weatherImpact": 1,
+   "comfortIndex": 0.75,
+   "conflictPotential": 0,
+   "peakArcs": 0,
+   "highTensionArcs": 0,
+   "coverageIntensity": null,
+   "crisisSaturation": null
+  }
+ },
+ "citizenArchive": {
+  "enabled": true,
+  "candidates": 0,
+  "archived": 0,
+  "skipped": 0,
+  "skippedWhy": {},
+  "remaining": 1081,
+  "highWaterBumped": false
+ }
+}

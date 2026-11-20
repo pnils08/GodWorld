@@ -1,0 +1,17 @@
+{
+  "desk": "sports",
+  "cycle": "116",
+  "model": "openai/gpt-5.6-luna",
+  "turns": 6,
+  "maxTurns": 15,
+  "usageInputTokens": 28577,
+  "usageOutputTokens": 1532,
+  "savedFiles": [
+    "output/cron-compare/sports_c116_talia-finch_packet-v2_openai-gpt-5-6-luna.md"
+  ],
+  "compareAgainst": "output/desk-output/sports_c116.md",
+  "durationMs": 20511,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-11-20T00:17:48.106Z"
+}

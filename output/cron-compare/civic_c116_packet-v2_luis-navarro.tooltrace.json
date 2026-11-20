@@ -1,0 +1,31 @@
+{
+  "model": "anthropic/claude-sonnet-5.5",
+  "calls": [
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Initiative_Tracker",
+        "match": "Apprenticeship"
+      },
+      "resultChars": 2237,
+      "resultHead": "InitiativeID | Name | Type | Status | Budget | VoteRequirement | VoteCycle | Projection | LeadFaction | OppositionFaction | SwingVoter | Outcome | SwingVoter2 | SwingVoter2Lean | Consequences | Notes | LastUpdated | AffectedNeighborhoods | PolicyDomain | MayoralAction | MayoralActionCycle | VetoReason | OverrideVoteCycle | OverrideOutcome | ImplementationPhase | MilestoneNotes | NextScheduledAction | NextActionCycle | Proposer | ProposingOffice | ProposedCycle | Stage | StageBaseline | LastStageChangeCycle | LastWorkCycle | LastWorkSeat | PriorPhase | StageHold | BudgetTotal | BudgetRemaining "
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Youth Apprenticeship Pipeline"
+      },
+      "resultChars": 3240,
+      "resultHead": "[C92 · edition] # Where Are the Apprentices? But the Baylight pipeline was supposed to start eighteen months before the cranes showed up — not after the NBA arena announcement. The question isn't about vision. The question is about sequence. I went looking for enrollment numbers. How many students from Oakland Technical are in the HS Pathway? How many Young Adults from West Oakland are drawing the $600 a week stipend the spec authorized? How many of the 139 registered apprentices Ramos counted at Baylight came through the Pipeline\n[C92 · edition] # Where Are the Apprentices? But the Baylight p"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Rose Delgado"
+      },
+      "resultChars": 3240,
+      "resultHead": "[C101 · edition] Fruitvale's Bargain Comes Due of strain lightly. That she did it anyway is the story underneath the headline: the accountability structure Delgado promised at groundbreaking is still active, still watching, four cycles in. Rose Delgado, who represents Fruitvale on the council, put the district's own read on the word \"bargain\" bluntly. \"Honestly? The Tribune calling Fruitvale a 'bargain' feels like someone admiring the paint job while ignoring the cracks in the foundation,\" she said. \"Yeah, my block's got the best p\n[earlier · reference] District 3 — Rose Delgado (Oakland Progr"
+    }
+  ],
+  "ranAt": "2026-11-18T00:15:39.881Z"
+}

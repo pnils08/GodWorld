@@ -1,0 +1,618 @@
+{
+  "cycle": 116,
+  "mayor": "Avery Santana",
+  "executiveBranch": {
+    "mayor": "Avery Santana",
+    "mayorDetail": {
+      "name": "Avery Santana",
+      "title": "Mayor",
+      "popId": "POP-00034",
+      "status": "active",
+      "approvalRating": "79"
+    },
+    "deputyMayor": "Brenda Okoro",
+    "deputyMayorDetail": {
+      "name": "Brenda Okoro",
+      "title": "Deputy Mayor (Community)",
+      "popId": "POP-00037",
+      "status": "active"
+    }
+  },
+  "council": [
+    {
+      "name": "Denise Carter",
+      "district": "D1",
+      "faction": "OPP",
+      "status": "active"
+    },
+    {
+      "name": "Leonard Tran",
+      "district": "D2",
+      "faction": "IND",
+      "status": "active"
+    },
+    {
+      "name": "Rose Delgado",
+      "district": "D3",
+      "faction": "OPP",
+      "status": "active"
+    },
+    {
+      "name": "Ramon Vega",
+      "district": "D4",
+      "faction": "IND",
+      "status": "active"
+    },
+    {
+      "name": "Janae Rivers",
+      "district": "D5",
+      "faction": "OPP",
+      "status": "active"
+    },
+    {
+      "name": "Elliott Crane",
+      "district": "D6",
+      "faction": "CRC",
+      "status": "active"
+    },
+    {
+      "name": "Warren Ashford",
+      "district": "D7",
+      "faction": "CRC",
+      "status": "active"
+    },
+    {
+      "name": "Nina Chen",
+      "district": "D8",
+      "faction": "CRC",
+      "status": "active"
+    },
+    {
+      "name": "Terrence Mobley",
+      "district": "D9",
+      "faction": "OPP",
+      "status": "active"
+    }
+  ],
+  "asRoster": [
+    {
+      "name": "Mark Aitken",
+      "position": "First Baseman, Colorado Rockies",
+      "popId": "POP-00003",
+      "tier": "1",
+      "status": "Active"
+    },
+    {
+      "name": "Benji Dillon",
+      "position": "Pitcher, Oakland A's Legend",
+      "popId": "POP-00018",
+      "tier": "1",
+      "status": "Active"
+    },
+    {
+      "name": "Isley Kelley",
+      "position": "Shortstop, Oakland A's Legend",
+      "popId": "POP-00019",
+      "tier": "1",
+      "status": "Active"
+    },
+    {
+      "name": "Darrin Davis",
+      "position": "Left Fielder, Oakland A's Legend",
+      "popId": "POP-00021",
+      "tier": "1",
+      "status": "Active"
+    },
+    {
+      "name": "Danny Horn",
+      "position": "Center Fielder, Oakland A's - Best player in the MLB",
+      "popId": "POP-00022",
+      "tier": "1",
+      "status": "Active"
+    },
+    {
+      "name": "Henry Rivas",
+      "position": "Starting Pitcher, Oakland A's",
+      "popId": "POP-00024",
+      "tier": "2",
+      "status": "Active"
+    },
+    {
+      "name": "Arturo Ramos",
+      "position": "Starting Pitcher, Oakland A's",
+      "popId": "POP-00025",
+      "tier": "1",
+      "status": "Active"
+    },
+    {
+      "name": "Martin Richards",
+      "position": "Third Baseman, New York Mets",
+      "popId": "POP-00031",
+      "tier": "1",
+      "status": "Active"
+    },
+    {
+      "name": "John Ellis",
+      "position": "Starting Pitcher, Oakland A's",
+      "popId": "POP-00033",
+      "tier": "2",
+      "status": "Active"
+    },
+    {
+      "name": "Ernesto Quintero",
+      "position": "3B/1B , Oakland A's",
+      "popId": "POP-00050",
+      "tier": "1",
+      "status": "Active"
+    },
+    {
+      "name": "Desmond Morton",
+      "position": "Left Fielder, Oakland A's",
+      "popId": "POP-00051",
+      "tier": "2",
+      "status": "Active"
+    },
+    {
+      "name": "Clark Saryan",
+      "position": "Closing Pitcher, Las Vegas Aviators (AAA)",
+      "popId": "POP-00052",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Kevin Clark",
+      "position": "Third Baseman, Oakland A's",
+      "popId": "POP-00053",
+      "tier": "3",
+      "status": "Active"
+    },
+    {
+      "name": "JR Rosado",
+      "position": "Left Fielder, Oakland A's",
+      "popId": "POP-00054",
+      "tier": "3",
+      "status": "Active"
+    },
+    {
+      "name": "Sidney Tumolo",
+      "position": "Second Baseman, Oakland A's",
+      "popId": "POP-00058",
+      "tier": "3",
+      "status": "Active"
+    },
+    {
+      "name": "Marco Fabregas",
+      "position": "Catcher, Las Vegas Aviators (AAA)",
+      "popId": "POP-00060",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Julio Valencia",
+      "position": "Setup/Closing Pitcher, Oakland A's",
+      "popId": "POP-00077",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Sergio Aybar",
+      "position": "Catcher, Las Vegas Aviators (AAA)",
+      "popId": "POP-00078",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Frank Reyna",
+      "position": "Right Fielder, Oakland A's",
+      "popId": "POP-00079",
+      "tier": "3",
+      "status": "Active"
+    },
+    {
+      "name": "Richie Haynes",
+      "position": "Starting Pitcher, Midland RockHounds (AA)",
+      "popId": "POP-00080",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Carmen Mesa",
+      "position": "Starting Pitcher, Philadelphia Phillies",
+      "popId": "POP-00081",
+      "tier": "3",
+      "status": "Active"
+    },
+    {
+      "name": "Chad Tipre",
+      "position": "Relief Pitcher, Midland RockHounds (AA)",
+      "popId": "POP-00083",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Richie Ramiro",
+      "position": "First Baseman, Midland RockHounds (AA)",
+      "popId": "POP-00085",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Delmon Regan",
+      "position": "Relief Pitcher, Midland RockHounds (AA)",
+      "popId": "POP-00091",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Carlos Flores",
+      "position": "Center Fielder, Midland RockHounds (AA)",
+      "popId": "POP-00092",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Kevin Ham",
+      "position": "Second Baseman, Stockton Ports (A)",
+      "popId": "POP-00103",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Jeff Mateo",
+      "position": "First Baseman, Stockton Ports (A)",
+      "popId": "POP-00106",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Giuseppe Santiago",
+      "position": "Relief Pitcher, Stockton Ports (A)",
+      "popId": "POP-00107",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Dan Perez",
+      "position": "Hitting Coach, Oakland A's",
+      "popId": "POP-00115",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Fernando Lima",
+      "position": "Pitching Coach, Oakland A's",
+      "popId": "POP-00116",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Babe Bradford",
+      "position": "First Base Coach, Oakland A's",
+      "popId": "POP-00117",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Stephan Kollars",
+      "position": "Third Base Coach, Oakland A's",
+      "popId": "POP-00118",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Beverly Peterson",
+      "position": "Scout, Oakland A's",
+      "popId": "POP-00119",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Lou Hollis",
+      "position": "Scout, Oakland A's",
+      "popId": "POP-00120",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Otis Redd",
+      "position": "Scout, Oakland A's",
+      "popId": "POP-00121",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Mike Paulson",
+      "position": "General Manager, Oakland A's & The Oaks",
+      "popId": "POP-00527",
+      "tier": "1",
+      "status": "Active"
+    },
+    {
+      "name": "Deacon Seymour",
+      "position": "Manager, Oakland A's",
+      "popId": "POP-00528",
+      "tier": "2",
+      "status": "Active"
+    },
+    {
+      "name": "Travis Coles",
+      "position": "Starting Pitcher, Oakland A's",
+      "popId": "POP-00533",
+      "tier": "1",
+      "status": "Active"
+    },
+    {
+      "name": "Mariano Rosales",
+      "position": "Closing Pitcher, Oakland As",
+      "popId": "POP-00555",
+      "tier": "3",
+      "status": "Active"
+    },
+    {
+      "name": "Eric Taveras",
+      "position": "Second Baseman, Oakland A's",
+      "popId": "POP-00597",
+      "tier": "1",
+      "status": "Active"
+    },
+    {
+      "name": "Vladimir Gonzalez",
+      "position": "Right Fielder, Oakland A's",
+      "popId": "POP-00598",
+      "tier": "2",
+      "status": "Active"
+    },
+    {
+      "name": "Jose Colon",
+      "position": "Catcher, Oakland A's",
+      "popId": "POP-00599",
+      "tier": "3",
+      "status": "Active"
+    },
+    {
+      "name": "Wilson Shepard",
+      "position": "Head Coach, Oakland Oaks",
+      "popId": "POP-01022",
+      "tier": "2",
+      "status": "Active"
+    },
+    {
+      "name": "Adash Stanley",
+      "position": "PG / The Oaks ",
+      "popId": "POP-01023",
+      "tier": "1",
+      "status": "Active"
+    },
+    {
+      "name": "AJ Dybantsa",
+      "position": "SF / The Oaks",
+      "popId": "POP-01024",
+      "tier": "2",
+      "status": "Active"
+    },
+    {
+      "name": "Coen Carr",
+      "position": "SG / The Oaks",
+      "popId": "POP-01026",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Austin Reaves",
+      "position": "SG / The Oaks",
+      "popId": "POP-01027",
+      "tier": "2",
+      "status": "Active"
+    },
+    {
+      "name": "Wendell Carter Jr.",
+      "position": "C / The Oaks",
+      "popId": "POP-01028",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Elliot Abraham",
+      "position": "General Manager, Oakland Oaks",
+      "popId": "POP-01046",
+      "tier": "3",
+      "status": "Active"
+    },
+    {
+      "name": "Pablo Almanzar",
+      "position": "SP / Oakland A's",
+      "popId": "POP-01078",
+      "tier": "3",
+      "status": "Active"
+    },
+    {
+      "name": "Dillon Brooks",
+      "position": "SF / The Oaks",
+      "popId": "POP-01079",
+      "tier": "3",
+      "status": "Active"
+    },
+    {
+      "name": "Louis Cross",
+      "position": "Relief Pitcher / Oakland A's",
+      "popId": "POP-01080",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Hitoki Ka",
+      "position": "Relief Pitcher / Oakland A's",
+      "popId": "POP-01081",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Ian Devine",
+      "position": "Relief Pitcher / Oakland A's",
+      "popId": "POP-01082",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Antone Bautista",
+      "position": "Relief Pitcher / Oakland A's",
+      "popId": "POP-01083",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Harry Hayward",
+      "position": "Oakland Oaks - Power Forward",
+      "popId": "POP-01223",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Trevor Henderson",
+      "position": "Oakland Oaks - Center",
+      "popId": "POP-01224",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Robert Mooney",
+      "position": "Farm Director, Oakland A's",
+      "popId": "POP-01238",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Giancarlo Hernandez",
+      "position": "Third Baseman, Oakland A's",
+      "popId": "POP-01239",
+      "tier": "3",
+      "status": "Active"
+    },
+    {
+      "name": "Henry Calzado",
+      "position": "Catcher, Oakland A's",
+      "popId": "POP-01240",
+      "tier": "4",
+      "status": "Active"
+    }
+  ],
+  "initiatives": [
+    {
+      "name": "West Oakland Stabilization Fund",
+      "id": "INIT-001",
+      "status": "PASSED",
+      "voteBreakdown": "Cycle 78: Passed 6-3. Ramon Vega voted yes. Leonard Tran voted no. (Elliott Crane voted yes remotely)",
+      "implementationPhase": "disbursement-active",
+      "nextScheduledAction": "Council consideration of the transmitted charter-renewal ordinance",
+      "nextActionCycle": 117
+    },
+    {
+      "name": "Oakland Alternative Response Initiative",
+      "id": "INIT-002",
+      "status": "PASSED",
+      "voteBreakdown": "Cycle 82: Passed 5-4. Ramon Vega voted no. Leonard Tran voted yes.",
+      "implementationPhase": "dispatch-live",
+      "nextScheduledAction": "Execute and publish the D3 briefing record with district-level and Fruitvale data",
+      "nextActionCycle": 117
+    },
+    {
+      "name": "Fruitvale Transit Hub Phase II — Visioning",
+      "id": "INIT-003",
+      "status": "PASSED",
+      "voteBreakdown": "Cycle 86: Visioning phase concluded. Input documented.\nCycle 94: Vote scheduled C94 (visioning-complete + vote-ready phase transition; was VoteCycle=86).\nCycle 94: Visioning phase concluded. Input documented.",
+      "implementationPhase": "complete",
+      "nextScheduledAction": null,
+      "nextActionCycle": null
+    },
+    {
+      "name": "Temescal Community Health Center",
+      "id": "INIT-005",
+      "status": "PASSED",
+      "voteBreakdown": "Cycle 80: Passed 6-2. Ramon Vega voted yes. Leonard Tran voted yes. (Elliott Crane absent)",
+      "implementationPhase": "operational",
+      "nextScheduledAction": "File the Q3 intake audit and complete the Telegraph & 47th merchant-verification walkthrough",
+      "nextActionCycle": 117
+    },
+    {
+      "name": "Baylight District — Final Council Vote",
+      "id": "INIT-006",
+      "status": "PASSED",
+      "voteBreakdown": "Cycle 83: Passed 6-3. Denise Carter voted yes. Rose Delgado voted yes. Janae Rivers voted yes. Terrence Mobley voted yes. Elliott Crane voted no. Warren Ashford voted no. Nina Chen voted no. Ramon Vega voted yes. Leonard Tran voted yes.",
+      "implementationPhase": "complete",
+      "nextScheduledAction": null,
+      "nextActionCycle": 117
+    },
+    {
+      "name": "Oakland Youth Apprenticeship Pipeline",
+      "id": "INIT-007",
+      "status": "PASSED",
+      "voteBreakdown": "[ENGINE-CLOCK n=3 from=C109] Announced C73 Baylight supplemental. Luis Navarro feature. 3 tracks, 8 trades, 400+ Baylight placements by Year 3. No coverage since C73 — 12-cycle gap. Multiple milestones (Oakland City Schools MOU C76, Oakland Community College District MOU C78, budget allocation C80, A's commitment C83) unverified.",
+      "implementationPhase": "pilot_evaluation",
+      "nextScheduledAction": "Publish the placement-gap analysis and adjustment plan with West Oakland and Fruitvale review",
+      "nextActionCycle": 117
+    },
+    {
+      "name": "Downtown Economic Revitalization",
+      "id": "INIT-008",
+      "status": "FAILED",
+      "voteBreakdown": "economic imbalance\nCycle 113: Rejected.",
+      "implementationPhase": "vote-scheduled",
+      "nextScheduledAction": null,
+      "nextActionCycle": null
+    },
+    {
+      "name": "Commercial Stabilization for Grand Lake",
+      "id": "INIT-009",
+      "status": "FAILED",
+      "voteBreakdown": "Proposed by Leonard Tran in C109 — neighborhood math-imbalance flag on Grand Lake retail.\nCycle 113: Rejected.",
+      "implementationPhase": "vote-scheduled",
+      "nextScheduledAction": "Recorded full-council vote with Chen-Vega conditions and a Clerk-certified roll call",
+      "nextActionCycle": 117
+    },
+    {
+      "name": "West Oakland Tenant Defense Fund",
+      "id": "INIT-010",
+      "status": "FAILED",
+      "voteBreakdown": "Proposed by Denise Carter in C109 — eviction filings outpacing Stabilization Fund relief.\nCycle 112: Passed 6-3. Denise Carter voted yes. Rose Delgado voted yes. Janae Rivers voted yes. Terrence Mobley voted yes. Elliott Crane voted no. Warren Ashford voted no. Nina Chen voted no. Leonard Tran voted yes. Ramon Vega voted yes.\nCycle 113: Rejected.",
+      "implementationPhase": "vote-scheduled",
+      "nextScheduledAction": "Publish the legal-support analysis, then record the committee decision",
+      "nextActionCycle": 117
+    },
+    {
+      "name": "Ivy Hill Revitalization Initiative",
+      "id": "INIT-011",
+      "status": "FAILED",
+      "voteBreakdown": "Commercial contraction and public safety concerns in Ivy Hill\nCycle 113: Rejected.",
+      "implementationPhase": "announced",
+      "nextScheduledAction": null,
+      "nextActionCycle": null
+    },
+    {
+      "name": "Dimond Revitalization Initiative",
+      "id": "INIT-012",
+      "status": "FAILED",
+      "voteBreakdown": "Commercial contraction and public safety concerns in Dimond\nCycle 113: Rejected.",
+      "implementationPhase": "announced",
+      "nextScheduledAction": null,
+      "nextActionCycle": null
+    },
+    {
+      "name": "Ivy Hill Community Revitalization",
+      "id": "INIT-013",
+      "status": "FAILED",
+      "voteBreakdown": "addressing decay momentum and crime index\nCycle 113: Rejected.",
+      "implementationPhase": "announced",
+      "nextScheduledAction": null,
+      "nextActionCycle": null
+    },
+    {
+      "name": "Ivy Hill Community Support Initiative",
+      "id": "INIT-014",
+      "status": "FAILED",
+      "voteBreakdown": "Ivy Hill is showing signs of decay momentum and increased crime index, requiring immediate community support and targeted investment.\nCycle 116: Failed 3-4. Leonard Tran voted yes. Ramon Vega voted yes. Elliott Crane voted no. Warren Ashford voted no. Nina Chen voted no. Leonard Tran voted yes. Ramon Vega voted no.",
+      "implementationPhase": "vote-scheduled",
+      "nextScheduledAction": "Provide a Clerk filing reference or explicitly confirm that filing has not occurred",
+      "nextActionCycle": 117
+    }
+  ]
+}

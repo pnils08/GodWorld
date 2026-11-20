@@ -54,5 +54,6 @@
     "recorded": true,
     "out": " ⌘ custom filepath { path: '/custom/path/.env' }\n{\n  \"popId\": \"POP-00155\",\n  \"name\": \"Trevor Shimizu\",\n  \"recorded\": true,\n  \"text\": \"filed: Nineteenth Street Filled Up, and the Rows Do Not Say Why\"\n}"
   },
-  "ranAt": "2026-11-10T00:19:59.513Z"
+  "ranAt": "2026-11-10T00:19:59.513Z",
+  "dispositionReconciledAt": "2026-11-14T18:00:02.511Z"
 }

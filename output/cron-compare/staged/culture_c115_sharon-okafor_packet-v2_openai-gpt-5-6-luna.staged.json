@@ -1,0 +1,82 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "115",
+  "persona": "sharon-okafor",
+  "byline": "Sharon Okafor",
+  "bylinePopid": "POP-00159",
+  "article": "output/cron-compare/staged/culture_c115_sharon-okafor_packet-v2_openai-gpt-5-6-luna.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Vinnie Keane",
+        "role": "quoted-source",
+        "popid": "POP-00001"
+      },
+      {
+        "name": "Lena Cross",
+        "role": "quoted-source",
+        "popid": "POP-00539"
+      },
+      {
+        "name": "Benji Dillon",
+        "role": "quoted-source",
+        "popid": "POP-00018"
+      },
+      {
+        "name": "Anthony Raines",
+        "role": "quoted-source",
+        "popid": "POP-00017"
+      },
+      {
+        "name": "Rowan Pierce",
+        "role": "mentioned",
+        "popid": "POP-00545",
+        "floor": true
+      },
+      {
+        "name": "Wendell Carter Jr",
+        "role": "mentioned",
+        "popid": "POP-01028",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Grand Lake"
+    ],
+    "claims": [
+      {
+        "claim": "As a rising name in Rockridge, I've gotten used to people knowing who I am and what I do. It's not something I think about much anymore, to be honest. I just do my job and try to be a good neighbor. I've lived here long enough that it's just part of the fabric of my life. People will sometimes stop me at the corner store or mention something about my stories, and that's nice. It's a good feeling to be recognized for the work you do, especially when it's for something you care about as much as I do about the A's. Benji Dillon's still the big name around here, though - he's a Rockridge icon. I've had some great conversations with him about the community and the team.",
+        "sourceRef": "citizenVoice PRESS Anthony Raines"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-81e1eb95e7bd",
+    "draftSha256": "01b3b5fd2147e3387e31fdb449266b4ebe1d25fb45e04f29d0d79fe2dca99528",
+    "verdict": "output/cron-compare/culture_c115_sharon-okafor_packet-v2_openai-gpt-5-6-luna.rhea.json",
+    "ranAt": "2026-11-14T00:17:17.362Z",
+    "contractScore": {
+      "opened": false,
+      "purposeMet": false,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 697,
+      "short": "The piece does not open with a venue, location, and condition, nor does it frame a venue condition as a behavior question.",
+      "score": 1,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "01b3b5fd2147e3387e31fdb449266b4ebe1d25fb45e04f29d0d79fe2dca99528",
+      "costUsd": 0.001
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-14T00:17:20.072Z"
+}

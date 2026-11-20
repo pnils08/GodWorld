@@ -1,0 +1,39 @@
+{
+  "model": "anthropic/claude-sonnet-5.5",
+  "calls": [
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Initiative_Tracker",
+        "match": "Stabilization"
+      },
+      "resultChars": 5350,
+      "resultHead": "InitiativeID | Name | Type | Status | Budget | VoteRequirement | VoteCycle | Projection | LeadFaction | OppositionFaction | SwingVoter | Outcome | SwingVoter2 | SwingVoter2Lean | Consequences | Notes | LastUpdated | AffectedNeighborhoods | PolicyDomain | MayoralAction | MayoralActionCycle | VetoReason | OverrideVoteCycle | OverrideOutcome | ImplementationPhase | MilestoneNotes | NextScheduledAction | NextActionCycle | Proposer | ProposingOffice | ProposedCycle | Stage | StageBaseline | LastStageChangeCycle | LastWorkCycle | LastWorkSeat | PriorPhase | StageHold | BudgetTotal | BudgetRemaining "
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "West Oakland Stabilization Fund"
+      },
+      "resultChars": 3251,
+      "resultHead": "[C108 · daily · Carmen Delaine] Irene Fay, a barista at a West Oakland coffee shop, echoes the sentiment. “I’ve heard folks at the coffee shop talking about the Stabilization Fund,” she says, “but honestly, it feels like one of those things that happens somewhere else—like I see the signs about meetings sometimes, but it doesn’t touch my day-to-day yet.” The fund’s purpose is clear: to stabilize West Oakland by investing in local infrastructure, small businesses, and community programs. Yet, as Darius Clark, another bakery worker, notes, “I���ve \n[C105 · daily · Carmen Delaine] Yet, on the gro"
+    },
+    {
+      "tool": "citizen_lookup",
+      "input": {
+        "name": "Marcus Webb"
+      },
+      "resultChars": 183,
+      "resultHead": "Marcus Webb — role: OEWD Program Director; neighborhood: Downtown; born: 2000; wealth: 5; careerStage: mid-career; employerBiz: BIZ-00094; skills: Government & Civic; popid: POP-00790"
+    },
+    {
+      "tool": "citizen_lookup",
+      "input": {
+        "name": "Brenda Okoro"
+      },
+      "resultChars": 195,
+      "resultHead": "Brenda Okoro — role: Deputy Mayor (Community Affairs); neighborhood: Piedmont Ave; born: 1987; wealth: 6; careerStage: senior; employerBiz: BIZ-00017; skills: Government & Civic; popid: POP-00037"
+    }
+  ],
+  "ranAt": "2026-11-17T00:15:44.196Z"
+}

@@ -1,0 +1,65 @@
+{
+  "draft": "output/cron-compare/civic_c116_noah-tan_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "116",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "2702176666af8fa225a6221cc1848863dad03d0ba236d2e3eff60e870ba88456",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Draft verified clean: Ximena Mehta quote matches exact interview record and Adash Stanley relocation aligns with cycle 116 migration ledger.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "noah-weather-ground-v1",
+    "packageVersion": "NOAH-LEP2-1",
+    "manifestId": "AM-49d63ecd0a68",
+    "lexicalObservations": [],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Adash Stanley",
+      "Ximena Mehta"
+    ],
+    "unverified": [
+      "Piedmont Avenue"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 1,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0137,
+  "durationMs": 6820,
+  "parseError": false,
+  "ranAt": "2026-11-19T00:16:49.003Z",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 492,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "2702176666af8fa225a6221cc1848863dad03d0ba236d2e3eff60e870ba88456",
+    "costUsd": 0.0006
+  }
+}

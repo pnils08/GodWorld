@@ -1,0 +1,65 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "115",
+  "persona": "ines-sorensen",
+  "byline": "Ines Sorensen",
+  "bylinePopid": "POP-01211",
+  "article": "output/cron-compare/staged/culture_c115_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.staged-1715.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Jose Colon",
+        "role": "mentioned",
+        "popid": "POP-00599"
+      },
+      {
+        "name": "Mike Paulson",
+        "role": "quoted-source",
+        "popid": "POP-00527"
+      },
+      {
+        "name": "Sergio Aybar",
+        "role": "quoted-source",
+        "popid": "POP-00078"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "The catcher situation keeps circling back on me. Jose's had a rough year, and Calzado outhit him in fewer games—that's hard to ignore, but Calzado is out of options and can't be sent down without waivers, so we're stuck evaluating our needs against our hands.",
+        "sourceRef": "citizenVoice PRESS Mike Paulson"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "gate": "off",
+    "model": null,
+    "manifestId": null,
+    "draftSha256": "c6113a8e3fdd942612042f80e8af78e783c84fd89461372aec42ae058c2e5db7",
+    "verdict": null,
+    "ranAt": "2026-11-14T17:15:41.371Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 300",
+      "words": 485,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "scoredWithoutRhea": true,
+      "draftSha256": "c6113a8e3fdd942612042f80e8af78e783c84fd89461372aec42ae058c2e5db7"
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-14T17:15:41.371Z"
+}

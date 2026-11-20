@@ -1,0 +1,30 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ◈ encrypted .env [www.dotenvx.com]
+{
+ "label": "e350n-f8",
+ "expect": 123,
+ "at": "2026-11-19T07:37:53.460Z",
+ "pre": {
+  "bench": 123,
+  "live": 116,
+  "ee": 9,
+  "rileyLast": 123,
+  "checkpoint": null
+ },
+ "wallS": 201,
+ "http": 200,
+ "resp": {
+  "ok": true,
+  "state": "done",
+  "ranMs": 197276,
+  "persistErrors": []
+ },
+ "post": {
+  "bench": 124,
+  "live": 116,
+  "ee": 9,
+  "rileyLast": 124,
+  "checkpoint": null
+ },
+ "newEE": [],
+ "verdict": "PASS"
+}

@@ -1,0 +1,70 @@
+{
+  "office": "council_d7",
+  "agentDir": "civic-office-council-d7",
+  "holder": "Warren Ashford",
+  "popid": "POP-00504",
+  "title": "City Council District 7",
+  "date": "2026-11-18",
+  "cycle": 116,
+  "model": "google/gemini-3.8-flash",
+  "statement": "Rockridge retail vitality is holding at 12.22, yet sentiment registers at 0.02 against the citywide 0.107 mark, demonstrating persistent operational friction that solid corridor foot traffic alone cannot resolve. Following the contained fire in KONO, municipal follow-through must center on disciplined structural code inspections and tracking emergency costs rather than unmonitored off-budget allocations. In District 7, we verify ground conditions before deploying resources, while ensuring Temescal Community Health Center continues delivering under its remaining $15,576,923.05 operational budget.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-116-civic-office-council-d7",
+        "text": "Municipal follow-through on the KONO fire must follow strict code compliance and fiscal protocol: an immediate, documented structural inspection by building officials, verification that utility connections meet fire code prior to re-occupancy, and an itemized accounting of municipal emergency response costs filed against existing contingency reserves. We do not approve open-ended appropriations without verified damage assessments and clear cost accounting.",
+        "directiveCycle": 116,
+        "confrontationSeat": "civic-office-council-d7"
+      }
+    },
+    {
+      "type": "canvass",
+      "payload": {
+        "hood": "Rockridge",
+        "note": "Assessing corridor merchant sentiment and municipal service delivery where retail vitality sits at 12.22 but sentiment trails at 0.02."
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "2",
+  "ranAt": "2026-11-18T11:45:28.918Z",
+  "usage": {
+    "prompt_tokens": 7056,
+    "completion_tokens": 2496,
+    "total_tokens": 9552,
+    "cost": 0.014652,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.014652,
+      "upstream_inference_prompt_cost": 0.005292,
+      "upstream_inference_completions_cost": 0.00936
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 2139,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "fellBackFrom": null,
+  "evidenceGenerationHash": "8bf58509d24a03b95f8e88a49a51e50b409fb1c4c8aa344e61a1acf7e941275d",
+  "evidenceReads": [],
+  "provider": "Google",
+  "finishReason": "stop",
+  "elapsedMs": 21464,
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00504",
+    "id": "ekqKfHqmptYBGtNTuRWdta",
+    "customId": "cp-POP-00504-c116-CIVIC-datawake-2026-11-18"
+  }
+}

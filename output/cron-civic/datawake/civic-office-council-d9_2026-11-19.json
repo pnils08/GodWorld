@@ -1,0 +1,69 @@
+{
+  "office": "council_d9",
+  "agentDir": "civic-office-council-d9",
+  "holder": "Terrence Mobley",
+  "popid": "POP-00506",
+  "title": "City Council District 9",
+  "date": "2026-11-19",
+  "cycle": 116,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "Laurel is moving in the right direction — sentiment up to 0.05 from -0.15, crime index down to 0.65 — but decay momentum remains and retail vitality slipped to 5.7. The patch and clean-up is still in announced, and the C116 legislation-filing deadline was missed. This week I'm answering the Planning Director's directive with the record I have, and I'm putting the work move on the board: completing scope and outreach and getting a Clerk-verified filing so residents can check it themselves. I'm not going to treat a budget line as the finish line.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-116-civic-office-council-d9",
+        "text": "Director Vance — here is the record separated as you asked. The Laurel Neighborhood Patch and Clean-Up (INIT-015) remains in announced status with the six-million-dollar budget unspent; the C116 legislation-filing deadline was missed, and scope, outreach and a Clerk-verified filing are still outstanding. That is the overdue legislation side. The missed-pickup recovery and the four district complaints are tracked separately in the C114–C116 complaint window — Grand Lake incident-table filing (Uptown, C115), the Laurel outreach complaint (C114), the Laurel calls-vs-numbers post (C114), and the Coliseum rider filing (Laurel, C114). I do not have a completed service-status record to hand you; what I have is the announcement and the missed filing. My commitment this cycle is to complete scope and outreach and obtain the Clerk-verified filing, so the next record you see from my office is verifiable, not asserted.",
+        "directiveCycle": 116,
+        "confrontationSeat": "civic-office-council-d9"
+      }
+    },
+    {
+      "type": "work",
+      "payload": {
+        "initiativeId": "INIT-015"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "62",
+  "ranAt": "2026-11-19T11:45:18.113Z",
+  "usage": {
+    "prompt_tokens": 6099,
+    "completion_tokens": 393,
+    "total_tokens": 6492,
+    "cost": 0.00138078,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00138078,
+      "upstream_inference_prompt_cost": 0.00109782,
+      "upstream_inference_completions_cost": 0.00028296
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "fellBackFrom": null,
+  "evidenceGenerationHash": "8bf58509d24a03b95f8e88a49a51e50b409fb1c4c8aa344e61a1acf7e941275d",
+  "evidenceReads": [],
+  "provider": "Nebius",
+  "finishReason": "stop",
+  "elapsedMs": 2114,
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00506",
+    "id": "EutNmvwK7ck5wXbA4DDtbL",
+    "customId": "cp-POP-00506-c116-CIVIC-datawake-2026-11-19"
+  }
+}

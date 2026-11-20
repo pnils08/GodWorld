@@ -1,0 +1,598 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "116",
+  "persona": "selena-grant",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00591",
+      "name": "Selena Grant",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Oaks — season-state C116 · 8-1 · W4 — the second club's board read",
+      "approach": "Oaks beat-analyst approach: this slice is the Oaks feed raw — the record, the streak, the stats lines, the trigger behind each event. Third-person board read on the second club, not fan heat. Numbers come from the feed only — never invent a stat. The named players are real; the press row, the cage, the bus are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "oaks",
+        "hood": "West Oakland",
+        "facts": [
+          "Oaks — season-state (early-season), C116: Was the 0-9 start by design, and is this a defensive team now?",
+          "Record 8-1 · streak W4",
+          "Trigger: milestone",
+          "Franchise stability: growing",
+          "Oaks — team-update (early-season), C116: Number one in the NBA in year one: the Oaks top the power rankings, a game before the Spurs came to town",
+          "Record 9-2 · streak L1",
+          "Stats (feed): Oaks/NBA.com Power Ranking/#1 of 31/no change, Oaks/9-1 at ranking/3-0 last week/6-1 last two weeks/9-1 last month, Oaks/now 9-2 after Spurs loss, Oaks wins over ranked teams/DET #3/OKC #4/NYK #6/PHI #8",
+          "Oaks — game-result (early-season), C116: The Spurs hand the Oaks their first home loss. Spurs 126 - Oaks 117",
+          "Stats (feed): T. Jerome/23PTS/2STL/6-8FG/6-8 3PT/5-7FT off the bench in 21 minutes, AJ Dybantsa/19PTS/4REB/6-14FG/3-5 3PT, Wendell Carter Jr/14PTS/12REB/4OREB/6-11FT, Adash Stanley/14PTS/5REB/7ASST, Austin Reaves/13PTS/6REB/6ASST/4TO, Dillon Brooks/13PTS/5-19FG/0-6 3PT, Harry Hayward/5PTS/10REB/3ASST/2-9FG, Oaks/41-95FG/43%/12-36 3PT/23-32FT/14TO/44 BENCH",
+          "Trigger: tough-loss",
+          "Oaks — game-result (early-season), C116: The Oaks shoot 80 percent in Denver and set a franchise record. Oaks 147 - Nuggets 114",
+          "Record 9-1 · streak W5"
+        ],
+        "priorCycle": null,
+        "note": null,
+        "engineHooks": [],
+        "roomIsYours": "the near-empty press row, the bullpen chatter, what the manager says when the record is ugly, the drumbeat of a losing streak",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-oaks-beat",
+      "hood": "West Oakland",
+      "score": null,
+      "src": "output/beats/Oakland_Sports_Feed.jsonl @C116",
+      "nearby": [
+        {
+          "text": "A's | trade-recap | (off-season) | Carmen Mesa, Jose Fuentes, Giancarlo Hernandez, Mike Paulson, Kevin Clark, Ernesto Quintero",
+          "src": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (off-season) | Kevin Clark, Giancarlo Hernandez, Ernesto Quintero, Deacon Seymour, Mike Paulson",
+          "src": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | rumor | (off-season) | Mark Aitken, Mike Paulson, Ernesto Quintero",
+          "src": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | rumor | (off-season) | Benji Dillon, Mike Paulson, Deacon Seymour",
+          "src": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | season-state | (early-season) | Wilson Shepard, Mike Paulson, Elliot Abraham",
+          "src": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": []
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C116",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-871096fd8925"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — season-state C116 · 8-1 · W4",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C116",
+        "id": "F-2ff59834989a"
+      },
+      {
+        "t": "FACT",
+        "text": "Was the 0-9 start by design, and is this a defensive team now?",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C116",
+        "id": "F-70c3cb98e296"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — season-state (early-season), C116: Was the 0-9 start by design, and is this a defensive team now?",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C116",
+        "id": "F-3b94b6113d99"
+      },
+      {
+        "t": "FACT",
+        "text": "Record 8-1 · streak W4",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C116",
+        "id": "F-40010f643ae6"
+      },
+      {
+        "t": "FACT",
+        "text": "Trigger: milestone",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C116",
+        "id": "F-ed3f035ab3b2"
+      },
+      {
+        "t": "FACT",
+        "text": "Franchise stability: growing",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C116",
+        "id": "F-31e075d22e3a"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — team-update (early-season), C116: Number one in the NBA in year one: the Oaks top the power rankings, a game before the Spurs came to town",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C116",
+        "id": "F-0a122663dce1"
+      },
+      {
+        "t": "FACT",
+        "text": "Record 9-2 · streak L1",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C116",
+        "id": "F-cf55abf72fc3"
+      },
+      {
+        "t": "FACT",
+        "text": "Stats (feed): Oaks/NBA.com Power Ranking/#1 of 31/no change, Oaks/9-1 at ranking/3-0 last week/6-1 last two weeks/9-1 last month, Oaks/now 9-2 after Spurs loss, Oaks wins over ranked teams/DET #3/OKC #4/NYK #6/PHI #8",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C116",
+        "id": "F-7e7754f10367"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — game-result (early-season), C116: The Spurs hand the Oaks their first home loss. Spurs 126 - Oaks 117",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C116",
+        "id": "F-cd0c3988f862"
+      },
+      {
+        "t": "FACT",
+        "text": "Stats (feed): T. Jerome/23PTS/2STL/6-8FG/6-8 3PT/5-7FT off the bench in 21 minutes, AJ Dybantsa/19PTS/4REB/6-14FG/3-5 3PT, Wendell Carter Jr/14PTS/12REB/4OREB/6-11FT, Adash Stanley/14PTS/5REB/7ASST, Austin Reaves/13PTS/6REB/6ASST/4TO, Dillon Brooks/13PTS/5-19FG/0-6 3PT, Harry Hayward/5PTS/10REB/3ASST/2-9FG, Oaks/41-95FG/43%/12-36 3PT/23-32FT/14TO/44 BENCH",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C116",
+        "id": "F-33dbebc69985"
+      },
+      {
+        "t": "FACT",
+        "text": "Trigger: tough-loss",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C116",
+        "id": "F-52f52c841a0f"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — game-result (early-season), C116: The Oaks shoot 80 percent in Denver and set a franchise record. Oaks 147 - Nuggets 114",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C116",
+        "id": "F-0049d50eed31"
+      },
+      {
+        "t": "FACT",
+        "text": "Record 9-1 · streak W5",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C116",
+        "id": "F-dd325303d62e"
+      },
+      {
+        "t": "FACT",
+        "text": "Stats (feed): T. Jerome/28PTS/10ASST/3REB/12-16FG/2-4 3PT off the bench, Austin Reaves/27PTS/12ASST/2STL/11-14FG/5-5 3PT in 41 minutes, AJ Dybantsa/18PTS/4REB/8-8FG/2-2 3PT, Wendell Carter Jr/17PTS/9REB/8-8FG, Adash Stanley/15PTS/3ASST/6-6FG/3-3 3PT, Dillon Brooks/14PTS/7-12FG, Harry Hayward/14PTS/4ASST/5-5FG/4-4 3PT in 19 minutes, J. Valanciunas/6PTS/6REB/3-3FG, Oaks/63-79FG/80%/19-26 3PT/73%/40AST/5TO/72 PAINT/56 BENCH",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C116",
+        "id": "F-a501756b1343"
+      },
+      {
+        "t": "FACT",
+        "text": "Trigger: big-win",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C116",
+        "id": "F-edbc7ae32029"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — season-state (early-season), C116: From 0-9 to 8-1: Wilson Shepard's Oaks caught people off guard, just like he said they would",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C116",
+        "id": "F-80b14f704ce2"
+      },
+      {
+        "t": "FACT",
+        "text": "Stats (feed): Oaks/8-1/W4/109.9 PPG/89.6 OPP PPG/+20.3 margin, Oaks/0-4 rookie camp/0-5 preseason, Oaks/1-0 NBA Cup, Opponents held under 85/CHA 82/DET 78/TOR 75/WAS 62",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C116",
+        "id": "F-64c656fef76b"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ]
+      },
+      "rule": "No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "records",
+    "candidates": [],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Selena Grant",
+    "popid": "POP-00591"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-oaks-beat",
+      "angle": "Oaks — season-state C116 · 8-1 · W4 — the second club's board read",
+      "label": "Oaks — season-state C116 · 8-1 · W4",
+      "hookLine": "Was the 0-9 start by design, and is this a defensive team now?",
+      "hood": "West Oakland",
+      "citizens": [
+        "Elliot Abraham (POP-01046)",
+        "Wilson Shepard (POP-01022)",
+        "Mike Paulson (POP-00527)",
+        "Adash Stanley (POP-01023)",
+        "Austin Reaves (POP-01027)",
+        "Dillon Brooks (POP-01079)",
+        "Harry Hayward (POP-01223)"
+      ],
+      "popids": [
+        "POP-01046",
+        "POP-01022",
+        "POP-00527",
+        "POP-01023",
+        "POP-01027",
+        "POP-01079",
+        "POP-01223"
+      ],
+      "ref": "output/beats/Oakland_Sports_Feed.jsonl @C116",
+      "cycle": 116
+    },
+    "approach": "Oaks beat-analyst approach: this slice is the Oaks feed raw — the record, the streak, the stats lines, the trigger behind each event. Third-person board read on the second club, not fan heat. Numbers come from the feed only — never invent a stat. The named players are real; the press row, the cage, the bus are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "OAKS-BEAT-1",
+    "kind": "beat-oaks-beat",
+    "seat": {
+      "slug": "selena-grant",
+      "name": "Selena Grant",
+      "popid": "POP-00591",
+      "desk": "sports",
+      "domain": "oaks",
+      "builder": "buildOaksBeatSlice.js"
+    },
+    "hood": "West Oakland",
+    "pulse": {
+      "className": "beat-oaks-beat",
+      "score": 100,
+      "label": "Oaks — season-state C116 · 8-1 · W4",
+      "hood": "West Oakland",
+      "source": "output/beats/Oakland_Sports_Feed.jsonl @C116"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Oaks — season-state C116 · 8-1 · W4 — the second club's board read",
+      "hookLine": "Was the 0-9 start by design, and is this a defensive team now?",
+      "anchorFacts": [
+        "Oaks — season-state (early-season), C116: Was the 0-9 start by design, and is this a defensive team now?",
+        "Record 8-1 · streak W4",
+        "Trigger: milestone",
+        "Franchise stability: growing",
+        "Oaks — team-update (early-season), C116: Number one in the NBA in year one: the Oaks top the power rankings, a game before the Spurs came to town",
+        "Record 9-2 · streak L1",
+        "Stats (feed): Oaks/NBA.com Power Ranking/#1 of 31/no change, Oaks/9-1 at ranking/3-0 last week/6-1 last two weeks/9-1 last month, Oaks/now 9-2 after Spurs loss, Oaks wins over ranked teams/DET #3/OKC #4/NYK #6/PHI #8",
+        "Trigger: milestone",
+        "Franchise stability: growing",
+        "Oaks — game-result (early-season), C116: The Spurs hand the Oaks their first home loss. Spurs 126 - Oaks 117",
+        "Record 9-2 · streak L1",
+        "Stats (feed): T. Jerome/23PTS/2STL/6-8FG/6-8 3PT/5-7FT off the bench in 21 minutes, AJ Dybantsa/19PTS/4REB/6-14FG/3-5 3PT, Wendell Carter Jr/14PTS/12REB/4OREB/6-11FT, Adash Stanley/14PTS/5REB/7ASST, Austin Reaves/13PTS/6REB/6ASST/4TO, Dillon Brooks/13PTS/5-19FG/0-6 3PT, Harry Hayward/5PTS/10REB/3ASST/2-9FG, Oaks/41-95FG/43%/12-36 3PT/23-32FT/14TO/44 BENCH",
+        "Trigger: tough-loss",
+        "Franchise stability: growing",
+        "Oaks — game-result (early-season), C116: The Oaks shoot 80 percent in Denver and set a franchise record. Oaks 147 - Nuggets 114",
+        "Record 9-1 · streak W5",
+        "Stats (feed): T. Jerome/28PTS/10ASST/3REB/12-16FG/2-4 3PT off the bench, Austin Reaves/27PTS/12ASST/2STL/11-14FG/5-5 3PT in 41 minutes, AJ Dybantsa/18PTS/4REB/8-8FG/2-2 3PT, Wendell Carter Jr/17PTS/9REB/8-8FG, Adash Stanley/15PTS/3ASST/6-6FG/3-3 3PT, Dillon Brooks/14PTS/7-12FG, Harry Hayward/14PTS/4ASST/5-5FG/4-4 3PT in 19 minutes, J. Valanciunas/6PTS/6REB/3-3FG, Oaks/63-79FG/80%/19-26 3PT/73%/40AST/5TO/72 PAINT/56 BENCH",
+        "Trigger: big-win",
+        "Franchise stability: growing",
+        "Oaks — season-state (early-season), C116: From 0-9 to 8-1: Wilson Shepard's Oaks caught people off guard, just like he said they would",
+        "Record 8-1 · streak W4",
+        "Stats (feed): Oaks/8-1/W4/109.9 PPG/89.6 OPP PPG/+20.3 margin, Oaks/0-4 rookie camp/0-5 preseason, Oaks/1-0 NBA Cup, Opponents held under 85/CHA 82/DET 78/TOR 75/WAS 62",
+        "Trigger: milestone",
+        "Franchise stability: growing"
+      ],
+      "evidence": [
+        {
+          "text": "Oaks — season-state (early-season), C116: Was the 0-9 start by design, and is this a defensive team now?",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116"
+        },
+        {
+          "text": "Record 8-1 · streak W4",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116"
+        },
+        {
+          "text": "Trigger: milestone",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116"
+        },
+        {
+          "text": "Franchise stability: growing",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116"
+        },
+        {
+          "text": "Oaks — team-update (early-season), C116: Number one in the NBA in year one: the Oaks top the power rankings, a game before the Spurs came to town",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116"
+        },
+        {
+          "text": "Record 9-2 · streak L1",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116"
+        },
+        {
+          "text": "Stats (feed): Oaks/NBA.com Power Ranking/#1 of 31/no change, Oaks/9-1 at ranking/3-0 last week/6-1 last two weeks/9-1 last month, Oaks/now 9-2 after Spurs loss, Oaks wins over ranked teams/DET #3/OKC #4/NYK #6/PHI #8",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116"
+        },
+        {
+          "text": "Trigger: milestone",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116"
+        },
+        {
+          "text": "Franchise stability: growing",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116"
+        },
+        {
+          "text": "Oaks — game-result (early-season), C116: The Spurs hand the Oaks their first home loss. Spurs 126 - Oaks 117",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116"
+        },
+        {
+          "text": "Record 9-2 · streak L1",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116"
+        },
+        {
+          "text": "Stats (feed): T. Jerome/23PTS/2STL/6-8FG/6-8 3PT/5-7FT off the bench in 21 minutes, AJ Dybantsa/19PTS/4REB/6-14FG/3-5 3PT, Wendell Carter Jr/14PTS/12REB/4OREB/6-11FT, Adash Stanley/14PTS/5REB/7ASST, Austin Reaves/13PTS/6REB/6ASST/4TO, Dillon Brooks/13PTS/5-19FG/0-6 3PT, Harry Hayward/5PTS/10REB/3ASST/2-9FG, Oaks/41-95FG/43%/12-36 3PT/23-32FT/14TO/44 BENCH",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116"
+        },
+        {
+          "text": "Trigger: tough-loss",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116"
+        },
+        {
+          "text": "Franchise stability: growing",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116"
+        },
+        {
+          "text": "Oaks — game-result (early-season), C116: The Oaks shoot 80 percent in Denver and set a franchise record. Oaks 147 - Nuggets 114",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116"
+        },
+        {
+          "text": "Record 9-1 · streak W5",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116"
+        },
+        {
+          "text": "Stats (feed): T. Jerome/28PTS/10ASST/3REB/12-16FG/2-4 3PT off the bench, Austin Reaves/27PTS/12ASST/2STL/11-14FG/5-5 3PT in 41 minutes, AJ Dybantsa/18PTS/4REB/8-8FG/2-2 3PT, Wendell Carter Jr/17PTS/9REB/8-8FG, Adash Stanley/15PTS/3ASST/6-6FG/3-3 3PT, Dillon Brooks/14PTS/7-12FG, Harry Hayward/14PTS/4ASST/5-5FG/4-4 3PT in 19 minutes, J. Valanciunas/6PTS/6REB/3-3FG, Oaks/63-79FG/80%/19-26 3PT/73%/40AST/5TO/72 PAINT/56 BENCH",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116"
+        },
+        {
+          "text": "Trigger: big-win",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116"
+        },
+        {
+          "text": "Franchise stability: growing",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116"
+        },
+        {
+          "text": "Oaks — season-state (early-season), C116: From 0-9 to 8-1: Wilson Shepard's Oaks caught people off guard, just like he said they would",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116"
+        },
+        {
+          "text": "Record 8-1 · streak W4",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116"
+        },
+        {
+          "text": "Stats (feed): Oaks/8-1/W4/109.9 PPG/89.6 OPP PPG/+20.3 margin, Oaks/0-4 rookie camp/0-5 preseason, Oaks/1-0 NBA Cup, Opponents held under 85/CHA 82/DET 78/TOR 75/WAS 62",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116"
+        },
+        {
+          "text": "Trigger: milestone",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116"
+        },
+        {
+          "text": "Franchise stability: growing",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": null,
+      "hooks": [],
+      "note": null,
+      "pageVoices": [],
+      "roomIsYours": "the near-empty press row, the bullpen chatter, what the manager says when the record is ugly, the drumbeat of a losing streak"
+    },
+    "citizens": [
+      {
+        "popid": "POP-01046",
+        "name": "Elliot Abraham",
+        "role": "General Manager, Oakland Oaks",
+        "neighborhood": "Jack London",
+        "business": null,
+        "profile": "Elliot Abraham — General Manager, Oakland Oaks — Jack London",
+        "why": "named on the Oaks feed C116 (Oakland_Sports_Feed)"
+      },
+      {
+        "popid": "POP-01022",
+        "name": "Wilson Shepard",
+        "role": "Head Coach, Oakland Oaks",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Wilson Shepard — Head Coach, Oakland Oaks — West Oakland",
+        "why": "named on the Oaks feed C116 (Oakland_Sports_Feed)"
+      },
+      {
+        "popid": "POP-00527",
+        "name": "Mike Paulson",
+        "role": "General Manager, Oakland A's & The Oaks",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Mike Paulson — General Manager, Oakland A's & The Oaks — West Oakland",
+        "why": "named on the Oaks feed C116 (Oakland_Sports_Feed)"
+      },
+      {
+        "popid": "POP-01023",
+        "name": "Adash Stanley",
+        "role": "PG / The Oaks ",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Adash Stanley — PG / The Oaks  — Piedmont Ave",
+        "why": "named on the Oaks feed C116 (Oakland_Sports_Feed)"
+      },
+      {
+        "popid": "POP-01027",
+        "name": "Austin Reaves",
+        "role": "SG / The Oaks",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Austin Reaves — SG / The Oaks — West Oakland",
+        "why": "named on the Oaks feed C116 (Oakland_Sports_Feed)"
+      },
+      {
+        "popid": "POP-01079",
+        "name": "Dillon Brooks",
+        "role": "SF / The Oaks",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Dillon Brooks — SF / The Oaks — West Oakland",
+        "why": "named on the Oaks feed C116 (Oakland_Sports_Feed)"
+      },
+      {
+        "popid": "POP-01223",
+        "name": "Harry Hayward",
+        "role": "Oakland Oaks - Power Forward",
+        "neighborhood": "KONO",
+        "business": null,
+        "profile": "Harry Hayward — Oakland Oaks - Power Forward — KONO",
+        "why": "named on the Oaks feed C116 (Oakland_Sports_Feed)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Oakland_Sports_Feed.jsonl @C116"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Selena Grant",
+    "popid": "POP-00591",
+    "text": "The Oaks' 8-1 record and four-game winning streak is a milestone worth exploring. I'll be looking into what this says about the team's growth and stability, and whether their early-season success is a sign of something more lasting. The contrast between their 0-9 start and current form is striking, and I'd like to understand the factors that have contributed to this turnaround.",
+    "plan": {
+      "chase": "The Oaks' 8-1 record and four-game winning streak is a milestone worth exploring. I'll be looking into what this says about the team's growth and stability, and whether their early-season success is a sign of something more lasting. The contrast between their 0-9 start and current form is striking, and I'd like to understand the factors that have contributed to this turnaround.",
+      "focus": "Oaks' season-state",
+      "why": "The team's rapid improvement is a compelling narrative, and understanding the reasons behind it could provide valuable insights into their prospects for the rest of the season.",
+      "checks": [
+        "F-2ff59834989a",
+        "F-ed3f035ab3b2",
+        "F-31e075d22e3a",
+        "F-80b14f704ce2"
+      ],
+      "targets": [],
+      "interpretation": "The Oaks' early-season success is a story worth telling, and one that could shed light on the team's potential for sustained success.",
+      "unverifiedLead": [
+        "What specific changes have contributed to the Oaks' turnaround?",
+        "Is their defensive improvement a key factor in their success?"
+      ]
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | trade-recap | (off-season) | Carmen Mesa, Jose Fuentes, Giancarlo Hernandez, Mike Paulson, Kevin Clark, Ernesto Quintero",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00081",
+        "POP-00101",
+        "POP-01239",
+        "POP-00527",
+        "POP-00053",
+        "POP-00050"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (off-season) | Kevin Clark, Giancarlo Hernandez, Ernesto Quintero, Deacon Seymour, Mike Paulson",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00053",
+        "POP-01239",
+        "POP-00050",
+        "POP-00528",
+        "POP-00527"
+      ]
+    },
+    {
+      "label": "A's | rumor | (off-season) | Mark Aitken, Mike Paulson, Ernesto Quintero",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00003",
+        "POP-00527",
+        "POP-00050"
+      ]
+    },
+    {
+      "label": "A's | rumor | (off-season) | Benji Dillon, Mike Paulson, Deacon Seymour",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00018",
+        "POP-00527",
+        "POP-00528"
+      ]
+    },
+    {
+      "label": "Oaks | season-state | (early-season) | Wilson Shepard, Mike Paulson, Elliot Abraham",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01022",
+        "POP-00527",
+        "POP-01046"
+      ]
+    }
+  ],
+  "laneEntries": 17,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-17T12:16:57.357Z"
+}

@@ -1,0 +1,62 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "116",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "lila-mezran",
+  "byline": {
+    "name": "Dr. Lila Mezran",
+    "popid": "POP-00154",
+    "beatDomain": "HEALTH"
+  },
+  "laneEntries": 115,
+  "quotesLanded": 3,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "sheet_read",
+    "sheet_read",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall"
+  ],
+  "toolCalls": 5,
+  "wordCount": 1252,
+  "targetWords": "evidence-bounded",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 1252,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "00c2138fc9f957688389c835739d3d13589ad3bf58d09725bc0418274ad9ba28",
+    "costUsd": 0.0013
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/3 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/civic_c116_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "ig/godworld/.env // tip: ◈ secrets for agents [www.dotenvx.com]\n{\n  \"popId\": \"POP-00154\",\n  \"name\": \"Lila Mezran\",\n  \"recorded\": true,\n  \"text\": \"filed: Six Beds in Chinatown, and No Names Attached\"\n}"
+  },
+  "ranAt": "2026-11-17T00:19:52.033Z"
+}

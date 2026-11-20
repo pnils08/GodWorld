@@ -18,8 +18,8 @@ Cycle **C115** · kind `beat-trends` · hood **Fruitvale**
 - Rico Valez — Musician — Fruitvale — the city is talking about them (Cultural_Ledger)
 - Rowan Pierce — Freelance Writer — Piedmont Ave — the city is talking about them (Cultural_Ledger)
 - Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Grand Lake — the city is talking about them (Cultural_Ledger)
-- Evan Lewis — Bus driver — Laurel — has been saying it on their own page — transit, C114: “The platform records don't tell you about them.”
-- Omar Amici — Construction laborer — Uptown — has been saying it on their own page — rent, C114: “The streets are busier than ever, and it seems like every other place is a for-rent sign these days.”
+- Omar Amici — Construction laborer — Uptown — has been saying it on their own page — rent, C115: “It's like the neighborhood I knew is being priced out.”
+- Eleanor Rivera — BART Station Manager — West Oakland — has been saying it on their own page — transit, C114: “It's usually a rhythm stacking up — something at the station, something on the line, something in that neighborhood.”
 
 ## CITY HOOKS FOR YOU (colour, not fact)
 - Household in Lake Merritt spending 53% of income on housing (observational analysis)
@@ -32,11 +32,11 @@ Cycle **C115** · kind `beat-trends` · hood **Fruitvale**
 - Uptown boom sustained — momentum 10/10, the block everyone wants onto (desk rotation)
 
 ## THE PAGES SAY (the citizens' own words — colour and sourcing, never a number in print)
-- the A's — fading; most of the city over the last two months, still talking this week. Loudest: Vinnie Keane (Grand Lake), on their own page at C115 (not an interview — colour only, never a quote): “After retiring from the A's, I've been keeping busy with appearances and staying involved with the community.”
-- transit — fading; dozens of citizens over the last two months, quiet this week. Loudest: Evan Lewis (Laurel), on their own page at C114 (not an interview — colour only, never a quote): “The platform records don't tell you about them.”
-- rent — fading; dozens of citizens over the last two months, still talking this week. Loudest: Omar Amici (Uptown), on their own page at C114 (not an interview — colour only, never a quote): “The streets are busier than ever, and it seems like every other place is a for-rent sign these days.”
+- the A's — fading; most of the city over the last two months, still talking this week. Loudest: Vinnie Keane (Grand Lake), on their own page at C115 (not an interview — colour only, never a quote): “The A's trade is a mixed bag for me.”
+- rent — fading; dozens of citizens over the last two months, still talking this week. Loudest: Omar Amici (Uptown), on their own page at C115 (not an interview — colour only, never a quote): “It's like the neighborhood I knew is being priced out.”
+- transit — fading; dozens of citizens over the last two months, still talking this week. Loudest: Eleanor Rivera (West Oakland), on their own page at C114 (not an interview — colour only, never a quote): “It's usually a rhythm stacking up — something at the station, something on the line, something in that neighborhood.”
 - the clinic — rising; dozens of citizens over the last two months, still talking this week. Loudest: Yu Zen (Rockridge), on their own page at C114 (not an interview — colour only, never a quote): “When I was in that hospital bed after my accident, I learned something about who shows up for you.”
-- the Oaks — fading; a dozen or so citizens over the last two months, still talking this week. Loudest: Trenton Nawan (Jack London), on their own page at C114 (not an interview — colour only, never a quote): “I'm still feeling pretty good about the Oaks.”
+- faith — rising; dozens of citizens over the last two months, still talking this week. Loudest: Eunice Marston (Downtown), on their own page at C115 (not an interview — colour only, never a quote): “As a faith leader in Downtown, I appreciate the work of various faith organizations throughout Oakland, including those in Fruitvale.”
 
 ## THE ROOM IS YOURS
 the group chat, the third rewatch, who suddenly has an opinion about something nobody mentioned last month, what the city collectively decided to care about

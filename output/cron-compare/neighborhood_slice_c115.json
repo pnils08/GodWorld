@@ -1,0 +1,204 @@
+{
+  "version": "HOOD-SLICE-3",
+  "empty": false,
+  "cycle": 115,
+  "kind": "beat-neighborhood",
+  "seat": {
+    "slug": "maria-keen",
+    "name": "Maria Keen",
+    "popid": "POP-00013",
+    "desk": "culture",
+    "domain": "neighborhood",
+    "builder": "buildNeighborhoodSlice.js"
+  },
+  "hood": "Uptown",
+  "pulse": {
+    "className": "beat-neighborhood",
+    "score": 100,
+    "label": "Uptown: 1 active program on the record",
+    "hood": "Uptown",
+    "source": "output/beats/Community_Programs.jsonl @C115"
+  },
+  "story": {
+    "kind": "beat-neighborhood",
+    "angle": "Uptown — the programs that hold the block and the people who founded them",
+    "label": "Uptown: 1 active program on the record",
+    "hookLine": "1 active programs in Uptown; no founder is on the ledger — the block is yours.",
+    "hood": "Uptown",
+    "citizens": [],
+    "popids": [],
+    "ref": "output/beats/Community_Programs.jsonl @C115",
+    "cycle": 115
+  },
+  "approach": "Neighborhood approach: this slice is one block's record — its community programs and their founders, who is moving in or out, who the block has in a hospital bed or in custody, what it paid on tax day, whose debts crossed the line, and the city's neighborhood hooks this cycle. First-person witness, one block one truth. The programs, founders, movement numbers, patients, defendants and money lines are real; the stoop conversations, the mailboxes, the dog everyone knows are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [],
+  "facts": [
+    {
+      "text": "Oakland Sound Archive (arts), Uptown, since C101",
+      "src": "output/beats/Community_Programs.jsonl @C115 PRG-012"
+    },
+    {
+      "text": "Uptown this cycle: 63 students, 506 adults, 65 seniors — moved vs C114: +1 adults",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C115 vs prev/"
+    },
+    {
+      "text": "Uptown: 7 charges → 1 arrest → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl @C115 judicial Uptown"
+    },
+    {
+      "text": "Uptown: 21 sick residents → 0 admissions → 0 in care at the close (0 tracked, 0 other residents) → 0 beds occupied; tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl @C115 hospital Uptown"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "Uptown — the programs that hold the block and the people who founded them",
+    "hookLine": "1 active programs in Uptown; no founder is on the ledger — the block is yours.",
+    "anchorFacts": [
+      "Oakland Sound Archive (arts), Uptown, since C101",
+      "Uptown this cycle: 63 students, 506 adults, 65 seniors — moved vs C114: +1 adults",
+      "Uptown: 7 charges → 1 arrest → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+      "Uptown: 21 sick residents → 0 admissions → 0 in care at the close (0 tracked, 0 other residents) → 0 beds occupied; tracked: none tracked"
+    ],
+    "evidence": [
+      {
+        "text": "Oakland Sound Archive (arts), Uptown, since C101",
+        "src": "output/beats/Community_Programs.jsonl @C115 PRG-012"
+      },
+      {
+        "text": "Uptown this cycle: 63 students, 506 adults, 65 seniors — moved vs C114: +1 adults",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C115 vs prev/"
+      },
+      {
+        "text": "Uptown: 7 charges → 1 arrest → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl @C115 judicial Uptown"
+      },
+      {
+        "text": "Uptown: 21 sick residents → 0 admissions → 0 in care at the close (0 tracked, 0 other residents) → 0 beds occupied; tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl @C115 hospital Uptown"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": {
+      "state": "PRIOR_CYCLE_ON_DISK",
+      "vs": 114
+    },
+    "hooks": [
+      {
+        "text": "Household dissolved in Lake Merritt due to economic hardship",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Lake Merritt",
+        "priority": 3
+      },
+      {
+        "text": "Household in Lake Merritt spending 53% of income on housing",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Lake Merritt",
+        "priority": 6
+      },
+      {
+        "text": "defaulted on the debts — the savings are gone and the record carries it",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "West Oakland",
+        "priority": 3
+      },
+      {
+        "text": "defaulted on the debts — the savings are gone and the record carries it",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Fruitvale",
+        "priority": 3
+      },
+      {
+        "text": "Downtown boom sustained — momentum 10/10, the block everyone wants onto",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Downtown",
+        "priority": 7
+      },
+      {
+        "text": "West Oakland boom sustained — momentum 9/10, the block everyone wants onto",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "West Oakland",
+        "priority": 7
+      },
+      {
+        "text": "Jack London housing pressure at 10/10: rents climbing, households stretching to stay",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Jack London",
+        "priority": 7
+      },
+      {
+        "text": "The Cortez household (2) moved from Uptown to West Oakland — moving up from Uptown",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "West Oakland",
+        "priority": 5
+      }
+    ],
+    "note": "no program founder in Uptown resolves on the ledger",
+    "pageVoices": [],
+    "roomIsYours": "the stoop, the corner store counter, who moved in last month and who is thinking about leaving, what the block argues about"
+  },
+  "programs": [
+    "Oakland Sound Archive"
+  ],
+  "rotation": {
+    "index": 7,
+    "of": 9
+  },
+  "careJustice": {
+    "custody": {
+      "scope": "neighborhood",
+      "hood": "Uptown",
+      "complete": true,
+      "completeness": "complete",
+      "demand": 7,
+      "intakes": 1,
+      "tracked": 0,
+      "other": 1,
+      "closing": 4,
+      "trackedOcc": 0,
+      "otherOcc": 4,
+      "beds": null,
+      "exits": 2,
+      "names": []
+    },
+    "care": {
+      "scope": "neighborhood",
+      "hood": "Uptown",
+      "complete": true,
+      "completeness": "complete",
+      "demand": 21,
+      "intakes": 0,
+      "tracked": 0,
+      "other": 0,
+      "closing": 0,
+      "trackedOcc": 0,
+      "otherOcc": 0,
+      "beds": 0,
+      "exits": 0,
+      "names": []
+    },
+    "debt": {
+      "defaults": [],
+      "overLine": 13,
+      "crisisByHood": {}
+    }
+  },
+  "pointers": [
+    "output/beats/Community_Programs.jsonl @C115",
+    "output/beats/Story_Hook_Deck.jsonl (hooks for Maria Keen this cycle)"
+  ]
+}

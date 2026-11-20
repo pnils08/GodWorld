@@ -1,0 +1,63 @@
+{
+  "office": "council_d6",
+  "agentDir": "civic-office-council-d6",
+  "holder": "Elliott Crane",
+  "popid": "POP-00044",
+  "title": "City Council District 6",
+  "date": "2026-11-17",
+  "cycle": 116,
+  "model": "google/gemini-3.8-flash",
+  "statement": "District 6 remains steady along Piedmont Avenue, though my focus this cycle is ensuring public health authorities thoroughly evaluate the local health spike affecting 93 residents and report their findings promptly to the community without adding unnecessary bureaucracy.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-116-civic-office-council-d6",
+        "text": "Our office has tracked the medium-severity health spike affecting 93 residents along Piedmont Avenue and has requested substantiated findings from the coordinating health-response authorities. Residents and local merchants deserve clear, verified answers rather than speculative estimates. We expect the responsible agency to issue a transparent public update as soon as clinical assessments and baseline verification are finalized.",
+        "directiveCycle": 116,
+        "confrontationSeat": "civic-office-council-d6"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "1",
+  "ranAt": "2026-11-17T11:45:31.697Z",
+  "usage": {
+    "prompt_tokens": 5245,
+    "completion_tokens": 1681,
+    "total_tokens": 6926,
+    "cost": 0.0102375,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0102375,
+      "upstream_inference_prompt_cost": 0.00393375,
+      "upstream_inference_completions_cost": 0.00630375
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 1479,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "fellBackFrom": null,
+  "evidenceGenerationHash": "8bf58509d24a03b95f8e88a49a51e50b409fb1c4c8aa344e61a1acf7e941275d",
+  "evidenceReads": [],
+  "provider": "Google",
+  "finishReason": "stop",
+  "elapsedMs": 12458,
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00044",
+    "id": "Q57kQ7Xwphe7hR6dRcwBF4",
+    "customId": "cp-POP-00044-c116-CIVIC-datawake-2026-11-17"
+  }
+}

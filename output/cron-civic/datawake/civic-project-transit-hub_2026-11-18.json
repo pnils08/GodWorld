@@ -1,0 +1,43 @@
+{
+  "office": "transit_hub",
+  "agentDir": "civic-project-transit-hub",
+  "holder": "Elena Soria Dominguez",
+  "popid": "POP-00791",
+  "title": "Transit Hub Planning Lead",
+  "date": "2026-11-18",
+  "cycle": 116,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "**Weekly Report — Cycle 116. Elena Soria Dominguez, Transit Hub Planning Lead.**\n\nHere's what's on the record this week, and here's what actually changed.\n\n**Fruitvale.** The hub's visioning phase is complete and it's showing where it counts: 9,343 riders this cycle, up from 8,943 — a 4.5% gain — with the best on-time performance of any station in the system at 0.83. No BART train events on the sheet. No payments out on INIT-003 this cycle. So I want to be clear with the Mayor and the council: the numbers moved, but nothing was built. That's ridership following life, not a drawing.\n\n**The rest of the system.** On-time performance came down citywide — 12th Street 0.86 to 0.81, 19th Street 0.81 to 0.78, Lake Merritt 0.83 to 0.77. 12th Street lost 2,313 riders and 19th Street 2,251. I told this room in an earlier cycle not to hang that on the hub, and I'll say it again, though this week I'd note it plainly: game-day crowds through Jack London and Downtown, crowded platforms, and a gridlock day �� traffic index 79, worst on I-880 South. My East Oakland stations, Fruitvale and Coliseum, both held at 0.83. That's not a coincidence I'm claiming; it's what the sheet says.\n\n**Roads.** Every corridor improved against the prior cycle — I-880 North 100 to 89, I-880 South 98 to 92, I-980 100 to 86, Broadway 85 to 72, International 84 to 73. Heavy congestion remains, but the direction is right, and International Blvd — the corridor my neighbors actually walk and cross — moved from heavy to moderate. Event traffic from the Oaks home week is in the record on top of that.\n\n**Infrastructure.** A medium-severity public-works spike in Glenview and a stalled bus in East Oakland. Neither on my docket, both on my radar, and neither acceptable to shrug at.\n\n**Where the project stands.** Closure isn't decision. The schematics delivery and the documented Fruitvale community review are directed, and further design advancement waits on a public comment-and-response record that does not yet exist. Merchant covenants are executed and Mayer & Associates is under contract with community oversight provisions. Doña Esperanza's cart is in those drawings. I intend it to stay there when they're real.\n\nThat's my report. It's on the record as given.",
+  "moves": [],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-11-18T11:46:29.849Z",
+  "usage": {
+    "prompt_tokens": 4128,
+    "completion_tokens": 562,
+    "cost": 0.0006
+  },
+  "fellBackFrom": null,
+  "template": "worker/2",
+  "toolTrace": [],
+  "memory": {
+    "searchedOn": "transit hub ridership stations",
+    "entries": 8,
+    "fromSearch": 6,
+    "newest": 2,
+    "failed": []
+  },
+  "figuresNotHanded": [
+    "4.5%"
+  ],
+  "finishReason": "stop",
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00791",
+    "id": "yjoUDq55Pg7NjEyZK9dVbG",
+    "customId": "cp-POP-00791-c116-CIVIC-datawake-2026-11-18"
+  }
+}

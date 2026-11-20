@@ -1,0 +1,34 @@
+{
+  "office": "oari",
+  "cycle": 116,
+  "speaker": "Dr. Vanessa Tran-Munoz",
+  "cascadeSummary": "The Mayor, Councilmember Delgado, and Councilmember Rivers all directed the same deliverable this cycle: execute and publish the D3 briefing record with district-level Fruitvale data, and hold expansion. I executed and documented that briefing last cycle, and I am not claiming expansion or declaring the D5 audit or Baylight feasibility review complete. This cycle I publish the record formally, make it inspectable, and keep the oversight file open — nothing more.",
+  "statements": [
+    {
+      "statementId": "STMT-116-oari-001",
+      "type": "operational_status",
+      "topic": "D3 Fruitvale briefing record published and inspectionable; expansion held; D5 audit and Baylight feasibility review remain open",
+      "initiative": "INIT-002",
+      "decision": "Publish the D3 Fruitvale briefing record with district-level and Fruitvale data as a public record this cycle; hold expansion; record the D5 dispatch audit and Baylight feasibility review as incomplete, not done.",
+      "quote": "Fruitvale can pull the record and read the numbers for its own streets. That is what a briefing is worth — it is a public record, not a press release. Expansion still waits, and the D5 audit and Baylight review stay open.",
+      "fullStatement": "The D3 Fruitvale briefing record — the district-level and Fruitvale-corridor data — is published this cycle as a public record. Anyone with a library card and a phone can pull it, read the numbers for their own streets, and see what alternative response has actually done in Fruitvale. The Mayor and Councilmembers Delgado and Rivers directed that the record be executed and published, and it is. What I will not do is treat that record as authorization. The D5 dispatch audit remains open. The Baylight feasibility review remains open. Neither one is complete, and I am not saying it is. Expansion is held until the record, the audit, and the review are all in a place where a neighbor can see them. The people who called 911 in Fruitvale and East Oakland got the numbers — that is the point. The next step is not mine to take in a press release; it is what the public record supports.",
+      "trackerUpdates": {
+        "initiative": "INIT-002",
+        "ImplementationPhase": "dispatch-live",
+        "MilestoneNotes": "C116: D3 Fruitvale briefing record published with district-level data; expansion held; D5 audit and Baylight feasibility review remain open and incomplete.",
+        "NextScheduledAction": "Complete D5 dispatch audit and Baylight feasibility review; hold expansion until both are documented",
+        "NextActionCycle": 117
+      }
+    },
+    {
+      "statementId": "STMT-116-oari-002",
+      "type": "constituent_commitment",
+      "topic": "Fruitvale and West Oakland residents — what the published record and the calm actually mean",
+      "initiative": "INIT-002",
+      "decision": "Commit to keeping the Fruitvale and West Oakland records inspectable and to keeping the oversight file moving with dates, not announcements.",
+      "quote": "The briefing record is a promise you can check. Fruitvale's numbers, West Oakland's calm, and the crews who show up for both — the only thing I can promise the neighborhoods is a record they can pull and read.",
+      "fullStatement": "To the residents of Fruitvale and West Oakland — the publishing of the Fruitvale briefing record is a promise you can check. The numbers are for your streets in your neighborhood, and the calm in West Oakland is not a City Hall press release; it is neighbors and the crews who show up for them. I will keep the record inspectable and the oversight file moving with dates, not announcements. The program works because the people it serves can hold it to account. That is the standard, and I am not going to lower it.",
+      "trackerUpdates": {}
+    }
+  ]
+}

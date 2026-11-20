@@ -1,0 +1,702 @@
+{
+  "stage": "angle",
+  "desk": "culture",
+  "cycle": "116",
+  "persona": "elliot-graye",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00012",
+      "name": "Elliot Graye",
+      "role": "desk reporter",
+      "desk": "culture"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "interfaith dialogue at Interfaith Council (Adams Point) — the week in faith, and Adams Point United Methodist in focus",
+      "approach": "Faith and quiet-work approach: this slice is the week's faith events on the record — services, holy days, outreach, crisis response, with the congregations and neighborhoods named — plus one congregation in focus and the community programs around it. Dignity, not doctrine wars. The events, institutions and people are real; the sanctuary on a weeknight, the basement kitchen, the Tuesday meeting are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "faith",
+        "hood": "Adams Point",
+        "facts": [
+          "Interfaith Council (Adams Point), C115 — interfaith dialogue: interfaith prayer breakfast brings leaders together (attendance 123)",
+          "Interfaith Council (Chinatown), C114 — interfaith dialogue: dialogue series addresses shared concerns (attendance 53)",
+          "St. Esperanza Parish (Fruitvale), C116 — community program: job training workshop begins new session (attendance 86)",
+          "New Covenant Pentecostal Assembly (West Oakland), C116 — community program: seniors lunch program marks milestone (attendance 153)",
+          "Temple Beth Or (Rockridge), C116 — community program: food pantry serves neighbors in need (attendance 89)",
+          "B'nai Tikvah Synagogue (Piedmont Ave), C116 — community program: food pantry serves neighbors in need (attendance 32)",
+          "Or Hashalom Renewal Community (Grand Lake), C116 — community program: job training workshop begins new session (attendance 58)",
+          "Cathedral of the Living Word (Lake Merritt), C115 — community program: after-school tutoring program expands (attendance 250)",
+          "In focus: Adams Point United Methodist — Methodist, Adams Point, congregation 300, founded 150 years ago, led today by Rev. Daniel Han — progressive, LGBTQ affirming"
+        ],
+        "priorCycle": null,
+        "note": null,
+        "engineHooks": [
+          "Heavy faith activity this cycle. Multiple incidents creating a pattern. Deep-dive opportunity. (general coverage)",
+          "Fruitvale boom sustained — momentum 10/10, the block everyone wants onto (observational analysis)"
+        ],
+        "roomIsYours": "the sanctuary on a weeknight, the folding chairs, who sets up and who stays late, what the leader says when the room is half empty",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-faith",
+      "hood": "Adams Point",
+      "score": null,
+      "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+      "nearby": [
+        {
+          "text": "Grand Lake neighborhood texture — how residents experience the improvement | Residents of Grand Lake feel the change firsthand.",
+          "src": "output/engine_audit_c116.json patterns[7]; evidence: Initiative_Tracker row(s) 9; storyline INIT-009:vote-scheduled"
+        },
+        {
+          "text": "Fruitvale | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c116.md \"### Fruitvale\"; events: world_summary_c116.md \"## World Events\""
+        },
+        {
+          "text": "Glenview | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c116.md \"### Glenview\"; events: world_summary_c116.md \"## World Events\""
+        },
+        {
+          "text": "Grand Lake | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c116.md \"### Grand Lake\"; events: world_summary_c116.md \"## World Events\""
+        },
+        {
+          "text": "Piedmont Ave | 2 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c116.md \"### Piedmont Ave\"; events: world_summary_c116.md \"## World Events\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00757",
+          "name": "Daniel Han",
+          "profile": "Daniel Han — Senior Pastor / Faith Leader — Lake Merritt",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Lake Merritt",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+            "pop": "POP-00757",
+            "rowName": "Daniel Han",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00756",
+          "name": "Ramon Solano",
+          "profile": "Ramon Solano — Senior Pastor / Faith Leader — Fruitvale",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Fruitvale",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+            "pop": "POP-00756",
+            "rowName": "Ramon Solano",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00758",
+          "name": "Robert Jaston",
+          "profile": "Robert Jaston — Senior Pastor / Faith Leader — West Oakland",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+            "pop": "POP-00758",
+            "rowName": "Robert Jaston",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00759",
+          "name": "Naomi Sterling",
+          "profile": "Naomi Sterling — Senior Pastor / Faith Leader — Rockridge",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+            "pop": "POP-00759",
+            "rowName": "Naomi Sterling",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00760",
+          "name": "Yael Bauer",
+          "profile": "Yael Bauer — Senior Pastor / Faith Leader — Piedmont Ave",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Piedmont Ave",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+            "pop": "POP-00760",
+            "rowName": "Yael Bauer",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00767",
+          "name": "Miriam Goldstein",
+          "profile": "Miriam Goldstein — Senior Pastor / Faith Leader — Lake Merritt",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Lake Merritt",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+            "pop": "POP-00767",
+            "rowName": "Miriam Goldstein",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00755",
+          "name": "Antoine Vermeer",
+          "profile": "Antoine Vermeer — Senior Pastor / Faith Leader — Lake Merritt",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Lake Merritt",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+            "pop": "POP-00755",
+            "rowName": "Antoine Vermeer",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C116",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-871096fd8925"
+      },
+      {
+        "t": "FACT",
+        "text": "8 faith events on the record since C110 · Adams Point United Methodist in Adams Point | 7 named on the record",
+        "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+        "id": "F-2bd5760c22c2"
+      },
+      {
+        "t": "FACT",
+        "text": "Interfaith Council (Adams Point), C115: interfaith prayer breakfast brings leaders together",
+        "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+        "id": "F-5d78669c0730"
+      },
+      {
+        "t": "FACT",
+        "text": "Interfaith Council (Adams Point), C115 — interfaith dialogue: interfaith prayer breakfast brings leaders together (attendance 123)",
+        "src": "output/beats/Faith_Ledger.jsonl C115 \"Interfaith Council\"",
+        "id": "F-081007882588"
+      },
+      {
+        "t": "FACT",
+        "text": "Interfaith Council (Chinatown), C114 — interfaith dialogue: dialogue series addresses shared concerns (attendance 53)",
+        "src": "output/beats/Faith_Ledger.jsonl C114 \"Interfaith Council\"",
+        "id": "F-74afa9e34a82"
+      },
+      {
+        "t": "FACT",
+        "text": "St. Esperanza Parish (Fruitvale), C116 — community program: job training workshop begins new session (attendance 86)",
+        "src": "output/beats/Faith_Ledger.jsonl C116 \"St. Esperanza Parish\"",
+        "id": "F-6781f038cd36"
+      },
+      {
+        "t": "FACT",
+        "text": "New Covenant Pentecostal Assembly (West Oakland), C116 — community program: seniors lunch program marks milestone (attendance 153)",
+        "src": "output/beats/Faith_Ledger.jsonl C116 \"New Covenant Pentecostal Assembly\"",
+        "id": "F-cd3239eaf5d0"
+      },
+      {
+        "t": "FACT",
+        "text": "Temple Beth Or (Rockridge), C116 — community program: food pantry serves neighbors in need (attendance 89)",
+        "src": "output/beats/Faith_Ledger.jsonl C116 \"Temple Beth Or\"",
+        "id": "F-e83f4386e722"
+      },
+      {
+        "t": "FACT",
+        "text": "B'nai Tikvah Synagogue (Piedmont Ave), C116 — community program: food pantry serves neighbors in need (attendance 32)",
+        "src": "output/beats/Faith_Ledger.jsonl C116 \"B'nai Tikvah Synagogue\"",
+        "id": "F-5fce806aa4fe"
+      },
+      {
+        "t": "FACT",
+        "text": "Or Hashalom Renewal Community (Grand Lake), C116 — community program: job training workshop begins new session (attendance 58)",
+        "src": "output/beats/Faith_Ledger.jsonl C116 \"Or Hashalom Renewal Community\"",
+        "id": "F-5f1e496fdad2"
+      },
+      {
+        "t": "FACT",
+        "text": "Cathedral of the Living Word (Lake Merritt), C115 — community program: after-school tutoring program expands (attendance 250)",
+        "src": "output/beats/Faith_Ledger.jsonl C115 \"Cathedral of the Living Word\"",
+        "id": "F-69f177f26a50"
+      },
+      {
+        "t": "FACT",
+        "text": "In focus: Adams Point United Methodist — Methodist, Adams Point, congregation 300, founded 150 years ago, led today by Rev. Daniel Han — progressive, LGBTQ affirming",
+        "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+        "id": "F-3ca302deb209"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ]
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-00757",
+        "name": "Daniel Han",
+        "role": "Senior Pastor / Faith Leader",
+        "hood": "Lake Merritt",
+        "profile": "Daniel Han — Senior Pastor / Faith Leader — Lake Merritt",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+          "pop": "POP-00757",
+          "rowName": "Daniel Han",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00756",
+        "name": "Ramon Solano",
+        "role": "Senior Pastor / Faith Leader",
+        "hood": "Fruitvale",
+        "profile": "Ramon Solano — Senior Pastor / Faith Leader — Fruitvale",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+          "pop": "POP-00756",
+          "rowName": "Ramon Solano",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00758",
+        "name": "Robert Jaston",
+        "role": "Senior Pastor / Faith Leader",
+        "hood": "West Oakland",
+        "profile": "Robert Jaston — Senior Pastor / Faith Leader — West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+          "pop": "POP-00758",
+          "rowName": "Robert Jaston",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00759",
+        "name": "Naomi Sterling",
+        "role": "Senior Pastor / Faith Leader",
+        "hood": "Rockridge",
+        "profile": "Naomi Sterling — Senior Pastor / Faith Leader — Rockridge",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+          "pop": "POP-00759",
+          "rowName": "Naomi Sterling",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00760",
+        "name": "Yael Bauer",
+        "role": "Senior Pastor / Faith Leader",
+        "hood": "Piedmont Ave",
+        "profile": "Yael Bauer — Senior Pastor / Faith Leader — Piedmont Ave",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+          "pop": "POP-00760",
+          "rowName": "Yael Bauer",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00767",
+        "name": "Miriam Goldstein",
+        "role": "Senior Pastor / Faith Leader",
+        "hood": "Lake Merritt",
+        "profile": "Miriam Goldstein — Senior Pastor / Faith Leader — Lake Merritt",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+          "pop": "POP-00767",
+          "rowName": "Miriam Goldstein",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00755",
+        "name": "Antoine Vermeer",
+        "role": "Senior Pastor / Faith Leader",
+        "hood": "Lake Merritt",
+        "profile": "Antoine Vermeer — Senior Pastor / Faith Leader — Lake Merritt",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+          "pop": "POP-00755",
+          "rowName": "Antoine Vermeer",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Elliot Graye",
+    "popid": "POP-00012"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-faith",
+      "angle": "interfaith dialogue at Interfaith Council (Adams Point) — the week in faith, and Adams Point United Methodist in focus",
+      "label": "8 faith events on the record since C110 · Adams Point United Methodist in Adams Point | 7 named on the record",
+      "hookLine": "Interfaith Council (Adams Point), C115: interfaith prayer breakfast brings leaders together",
+      "hood": "Adams Point",
+      "citizens": [
+        "Daniel Han (POP-00757)",
+        "Ramon Solano (POP-00756)",
+        "Robert Jaston (POP-00758)",
+        "Naomi Sterling (POP-00759)",
+        "Yael Bauer (POP-00760)",
+        "Miriam Goldstein (POP-00767)",
+        "Antoine Vermeer (POP-00755)"
+      ],
+      "popids": [
+        "POP-00757",
+        "POP-00756",
+        "POP-00758",
+        "POP-00759",
+        "POP-00760",
+        "POP-00767",
+        "POP-00755"
+      ],
+      "ref": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+      "cycle": 116
+    },
+    "approach": "Faith and quiet-work approach: this slice is the week's faith events on the record — services, holy days, outreach, crisis response, with the congregations and neighborhoods named — plus one congregation in focus and the community programs around it. Dignity, not doctrine wars. The events, institutions and people are real; the sanctuary on a weeknight, the basement kitchen, the Tuesday meeting are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "FAITH-SLICE-2",
+    "kind": "beat-faith",
+    "seat": {
+      "slug": "elliot-graye",
+      "name": "Elliot Graye",
+      "popid": "POP-00012",
+      "desk": "culture",
+      "domain": "faith",
+      "builder": "buildFaithSlice.js"
+    },
+    "hood": "Adams Point",
+    "pulse": {
+      "className": "beat-faith",
+      "score": 100,
+      "label": "8 faith events on the record since C110 · Adams Point United Methodist in Adams Point | 7 named on the record",
+      "hood": "Adams Point",
+      "source": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\""
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "interfaith dialogue at Interfaith Council (Adams Point) — the week in faith, and Adams Point United Methodist in focus",
+      "hookLine": "Interfaith Council (Adams Point), C115: interfaith prayer breakfast brings leaders together",
+      "anchorFacts": [
+        "Interfaith Council (Adams Point), C115 — interfaith dialogue: interfaith prayer breakfast brings leaders together (attendance 123)",
+        "Interfaith Council (Chinatown), C114 — interfaith dialogue: dialogue series addresses shared concerns (attendance 53)",
+        "St. Esperanza Parish (Fruitvale), C116 — community program: job training workshop begins new session (attendance 86)",
+        "New Covenant Pentecostal Assembly (West Oakland), C116 — community program: seniors lunch program marks milestone (attendance 153)",
+        "Temple Beth Or (Rockridge), C116 — community program: food pantry serves neighbors in need (attendance 89)",
+        "B'nai Tikvah Synagogue (Piedmont Ave), C116 — community program: food pantry serves neighbors in need (attendance 32)",
+        "Or Hashalom Renewal Community (Grand Lake), C116 — community program: job training workshop begins new session (attendance 58)",
+        "Cathedral of the Living Word (Lake Merritt), C115 — community program: after-school tutoring program expands (attendance 250)",
+        "In focus: Adams Point United Methodist — Methodist, Adams Point, congregation 300, founded 150 years ago, led today by Rev. Daniel Han — progressive, LGBTQ affirming"
+      ],
+      "evidence": [
+        {
+          "text": "Interfaith Council (Adams Point), C115 — interfaith dialogue: interfaith prayer breakfast brings leaders together (attendance 123)",
+          "src": "output/beats/Faith_Ledger.jsonl C115 \"Interfaith Council\""
+        },
+        {
+          "text": "Interfaith Council (Chinatown), C114 — interfaith dialogue: dialogue series addresses shared concerns (attendance 53)",
+          "src": "output/beats/Faith_Ledger.jsonl C114 \"Interfaith Council\""
+        },
+        {
+          "text": "St. Esperanza Parish (Fruitvale), C116 — community program: job training workshop begins new session (attendance 86)",
+          "src": "output/beats/Faith_Ledger.jsonl C116 \"St. Esperanza Parish\""
+        },
+        {
+          "text": "New Covenant Pentecostal Assembly (West Oakland), C116 — community program: seniors lunch program marks milestone (attendance 153)",
+          "src": "output/beats/Faith_Ledger.jsonl C116 \"New Covenant Pentecostal Assembly\""
+        },
+        {
+          "text": "Temple Beth Or (Rockridge), C116 — community program: food pantry serves neighbors in need (attendance 89)",
+          "src": "output/beats/Faith_Ledger.jsonl C116 \"Temple Beth Or\""
+        },
+        {
+          "text": "B'nai Tikvah Synagogue (Piedmont Ave), C116 — community program: food pantry serves neighbors in need (attendance 32)",
+          "src": "output/beats/Faith_Ledger.jsonl C116 \"B'nai Tikvah Synagogue\""
+        },
+        {
+          "text": "Or Hashalom Renewal Community (Grand Lake), C116 — community program: job training workshop begins new session (attendance 58)",
+          "src": "output/beats/Faith_Ledger.jsonl C116 \"Or Hashalom Renewal Community\""
+        },
+        {
+          "text": "Cathedral of the Living Word (Lake Merritt), C115 — community program: after-school tutoring program expands (attendance 250)",
+          "src": "output/beats/Faith_Ledger.jsonl C115 \"Cathedral of the Living Word\""
+        },
+        {
+          "text": "In focus: Adams Point United Methodist — Methodist, Adams Point, congregation 300, founded 150 years ago, led today by Rev. Daniel Han — progressive, LGBTQ affirming",
+          "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\""
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": null,
+      "hooks": [
+        {
+          "text": "Heavy faith activity this cycle. Multiple incidents creating a pattern. Deep-dive opportunity.",
+          "angle": "general coverage",
+          "domain": "FAITH",
+          "hood": null,
+          "priority": 3
+        },
+        {
+          "text": "Fruitvale boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Fruitvale",
+          "priority": 7
+        }
+      ],
+      "note": null,
+      "pageVoices": [],
+      "roomIsYours": "the sanctuary on a weeknight, the folding chairs, who sets up and who stays late, what the leader says when the room is half empty"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00757",
+        "name": "Daniel Han",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Lake Merritt",
+        "business": null,
+        "profile": "Daniel Han — Senior Pastor / Faith Leader — Lake Merritt",
+        "why": "leads Adams Point United Methodist (Faith_Organizations)"
+      },
+      {
+        "popid": "POP-00756",
+        "name": "Ramon Solano",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Fruitvale",
+        "business": null,
+        "profile": "Ramon Solano — Senior Pastor / Faith Leader — Fruitvale",
+        "why": "leads St. Esperanza Parish — community program this week (Faith_Ledger)"
+      },
+      {
+        "popid": "POP-00758",
+        "name": "Robert Jaston",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Robert Jaston — Senior Pastor / Faith Leader — West Oakland",
+        "why": "leads New Covenant Pentecostal Assembly — community program this week (Faith_Ledger)"
+      },
+      {
+        "popid": "POP-00759",
+        "name": "Naomi Sterling",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Naomi Sterling — Senior Pastor / Faith Leader — Rockridge",
+        "why": "leads Temple Beth Or — community program this week (Faith_Ledger)"
+      },
+      {
+        "popid": "POP-00760",
+        "name": "Yael Bauer",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Yael Bauer — Senior Pastor / Faith Leader — Piedmont Ave",
+        "why": "leads B'nai Tikvah Synagogue — community program this week (Faith_Ledger)"
+      },
+      {
+        "popid": "POP-00767",
+        "name": "Miriam Goldstein",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Lake Merritt",
+        "business": null,
+        "profile": "Miriam Goldstein — Senior Pastor / Faith Leader — Lake Merritt",
+        "why": "leads Or Hashalom Renewal Community — community program this week (Faith_Ledger)"
+      },
+      {
+        "popid": "POP-00755",
+        "name": "Antoine Vermeer",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Lake Merritt",
+        "business": null,
+        "profile": "Antoine Vermeer — Senior Pastor / Faith Leader — Lake Merritt",
+        "why": "leads Cathedral of the Living Word — community program this week (Faith_Ledger)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Elliot Graye this cycle)"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Elliot Graye",
+    "popid": "POP-00012",
+    "text": "I'm planning to follow up on the community programs around Adams Point United Methodist, focusing on their job training initiatives and how they intersect with other faith-based organizations in the area. I'll be reaching out to Rev. Daniel Han for insight into their efforts and exploring the impact on the local community.",
+    "plan": {
+      "chase": "I'm planning to follow up on the community programs around Adams Point United Methodist, focusing on their job training initiatives and how they intersect with other faith-based organizations in the area. I'll be reaching out to Rev. Daniel Han for insight into their efforts and exploring the impact on the local community.",
+      "focus": "Adams Point United Methodist",
+      "why": "The congregation is a significant presence in Adams Point, with a history of community service and progressive values. Their job training programs and interfaith collaborations are worth examining.",
+      "checks": [
+        "Verify attendance numbers for recent community programs",
+        "Confirm the details of Adams Point United Methodist's job training initiatives"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00757",
+          "question": "Can you share more about Adams Point United Methodist's job training programs and their impact on the local community?",
+          "basis": "Rev. Daniel Han is the Senior Pastor of Adams Point United Methodist"
+        }
+      ],
+      "interpretation": "The faith community in Adams Point is actively engaged in supporting local residents through various programs, and Adams Point United Methodist is a key player in these efforts.",
+      "unverifiedLead": [
+        "Potential collaboration between Adams Point United Methodist and other faith-based organizations in the area"
+      ]
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Grand Lake neighborhood texture — how residents experience the improvement | Residents of Grand Lake feel the change firsthand.",
+      "kind": "anomaly",
+      "hood": "Grand Lake",
+      "ref": "output/engine_audit_c116.json patterns[7]; evidence: Initiative_Tracker row(s) 9; storyline INIT-009:vote-scheduled",
+      "popids": [
+        "POP-01218",
+        "POP-01244",
+        "POP-01249"
+      ]
+    },
+    {
+      "label": "Fruitvale | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Fruitvale",
+      "ref": "output/neighborhood_texture_c116.md \"### Fruitvale\"; events: world_summary_c116.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Glenview | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Glenview",
+      "ref": "output/neighborhood_texture_c116.md \"### Glenview\"; events: world_summary_c116.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Grand Lake | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Grand Lake",
+      "ref": "output/neighborhood_texture_c116.md \"### Grand Lake\"; events: world_summary_c116.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Piedmont Ave | 2 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Piedmont Ave",
+      "ref": "output/neighborhood_texture_c116.md \"### Piedmont Ave\"; events: world_summary_c116.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 30,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-19T12:15:34.633Z"
+}

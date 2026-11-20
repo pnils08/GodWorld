@@ -1,0 +1,298 @@
+[
+  {
+    "pop": "POP-00050",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00050\",\"name\":\"Ernesto Quintero\",\"role\":\"3B/1B , Oakland A's\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Ines Sorensen\",\"question\":\"Ernesto Quintero's thoughts on the trade and its impact? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-voices\",\"hood\":null,\"focus\":\"The reaction to Mark Aitken's departure and the A's roster changes\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch 346c91\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Ernesto Quintero — 3B/1B , Oakland A's — Baylight District\",\"evidence\":[{\"id\":\"EV-a8123be5dd\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch 346c91\",\"text\":\"Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Ernesto Quintero, 3B/1B , Oakland A's, Baylight District (POP-00050) — 7 pages; latest after work, C116; new since your last piece: “Man, this cycle's been a lot to process. First the Mesa trade—that one stings, even if I get why Paulson made it. Carmen had that fire in him, you…”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-cc1cc0ac3eb4\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C116\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-871096fd8925\"},{\"t\":\"FACT\",\"text\":\"Voices roster, C116: 485 citizens with pages, 18 new since your last piece\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch 346c91\",\"id\":\"F-e48a1349f461\"},{\"t\":\"FACT\",\"text\":\"Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch 346c91\",\"id\":\"F-2a41d9dddf2e\"},{\"t\":\"FACT\",\"text\":\"Soo Loo, Corporate Accountant, Downtown (POP-00663) — 4 pages; latest the night page, a question they carry, C116; new since your last piece: “Should I shut the screen and join her, or stay in this stillness a little longer?”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-90a57134384a\"},{\"t\":\"FACT\",\"text\":\"Giancarlo Hernandez, Third Baseman, Oakland A's (POP-01239) — 1 page; latest after work, C116; new since your last piece: “Yeah, I saw the articles. I know what they're saying — that Kevin's looking over his shoulder, that I'm some kind of glove-first insurance policy, or…”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-be9d6a7f6153\"},{\"t\":\"FACT\",\"text\":\"Harry Hayward, Oakland Oaks - Power Forward, KONO (POP-01223) — 6 pages; latest after work, C116; new since your last piece; you ran them C115: “Yeah, I saw the feed. Both games. They're real, they happened, and I was there for both of them. The Denver night was special. That's the kind of…”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-b9a2e4a9d0a0\"},{\"t\":\"FACT\",\"text\":\"Dillon Brooks, SF / The Oaks, West Oakland (POP-01079) — 4 pages; latest after work, C116; new since your last piece: “Man. I ain't gonna lie, reading that Denver box score back still gives me chills. 147 points, 80 percent from the field, 73 from three? That's the…”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-2af66389f9e7\"},{\"t\":\"FACT\",\"text\":\"Ernesto Quintero — 3B/1B , Oakland A's — Baylight District\",\"src\":\"Simulation_Ledger profile for POP-00050\",\"id\":\"F-d66efbf64730\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C12, Spring, holiday=Spring Equinox\",\"src\":\"output/world_summary_c116.md Calendar context (Simulation_Calendar)\",\"id\":\"F-647fd9067a33\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00050",
+        "name": "Ernesto Quintero",
+        "role": "3B/1B , Oakland A's",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Ines Sorensen",
+        "question": "Ernesto Quintero's thoughts on the trade and its impact? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-voices",
+        "hood": null,
+        "focus": "The reaction to Mark Aitken's departure and the A's roster changes",
+        "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 346c91"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Ernesto Quintero — 3B/1B , Oakland A's — Baylight District",
+        "evidence": [
+          {
+            "id": "EV-a8123be5dd",
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 346c91",
+            "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Ernesto Quintero, 3B/1B , Oakland A's, Baylight District (POP-00050) — 7 pages; latest after work, C116; new since your last piece: “Man, this cycle's been a lot to process. First the Mesa trade—that one stings, even if I get why Paulson made it. Carmen had that fire in him, you…”",
+          "src": "output/citizen_pages/index.jsonl roster",
+          "id": "F-cc1cc0ac3eb4"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C116",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-871096fd8925"
+        },
+        {
+          "t": "FACT",
+          "text": "Voices roster, C116: 485 citizens with pages, 18 new since your last piece",
+          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 346c91",
+          "id": "F-e48a1349f461"
+        },
+        {
+          "t": "FACT",
+          "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.",
+          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 346c91",
+          "id": "F-2a41d9dddf2e"
+        },
+        {
+          "t": "FACT",
+          "text": "Soo Loo, Corporate Accountant, Downtown (POP-00663) — 4 pages; latest the night page, a question they carry, C116; new since your last piece: “Should I shut the screen and join her, or stay in this stillness a little longer?”",
+          "src": "output/citizen_pages/index.jsonl roster",
+          "id": "F-90a57134384a"
+        },
+        {
+          "t": "FACT",
+          "text": "Giancarlo Hernandez, Third Baseman, Oakland A's (POP-01239) — 1 page; latest after work, C116; new since your last piece: “Yeah, I saw the articles. I know what they're saying — that Kevin's looking over his shoulder, that I'm some kind of glove-first insurance policy, or…”",
+          "src": "output/citizen_pages/index.jsonl roster",
+          "id": "F-be9d6a7f6153"
+        },
+        {
+          "t": "FACT",
+          "text": "Harry Hayward, Oakland Oaks - Power Forward, KONO (POP-01223) — 6 pages; latest after work, C116; new since your last piece; you ran them C115: “Yeah, I saw the feed. Both games. They're real, they happened, and I was there for both of them. The Denver night was special. That's the kind of…”",
+          "src": "output/citizen_pages/index.jsonl roster",
+          "id": "F-b9a2e4a9d0a0"
+        },
+        {
+          "t": "FACT",
+          "text": "Dillon Brooks, SF / The Oaks, West Oakland (POP-01079) — 4 pages; latest after work, C116; new since your last piece: “Man. I ain't gonna lie, reading that Denver box score back still gives me chills. 147 points, 80 percent from the field, 73 from three? That's the…”",
+          "src": "output/citizen_pages/index.jsonl roster",
+          "id": "F-2af66389f9e7"
+        },
+        {
+          "t": "FACT",
+          "text": "Ernesto Quintero — 3B/1B , Oakland A's — Baylight District",
+          "src": "Simulation_Ledger profile for POP-00050",
+          "id": "F-d66efbf64730"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+          "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+          "id": "F-647fd9067a33"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00643",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00643\",\"name\":\"Guadalupe Lupe\",\"role\":\"Bartender\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Ines Sorensen\",\"question\":\"Guadalupe Lupe's concerns about rising rents in Uptown? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-voices\",\"hood\":null,\"focus\":\"The reaction to Mark Aitken's departure and the A's roster changes\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch 346c91\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Guadalupe Lupe — Bartender — Jack London\",\"evidence\":[{\"id\":\"EV-a1036787de\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch 346c91\",\"text\":\"Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Guadalupe Lupe, Bartender, Jack London (POP-00643) — 8 pages; latest to a reporter, a question they carry, C116: “How much longer can people like Tre Mingo afford to stay here before rent pushes them out?”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-65a069c0871e\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C116\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-871096fd8925\"},{\"t\":\"FACT\",\"text\":\"Voices roster, C116: 485 citizens with pages, 18 new since your last piece\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch 346c91\",\"id\":\"F-e48a1349f461\"},{\"t\":\"FACT\",\"text\":\"Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch 346c91\",\"id\":\"F-2a41d9dddf2e\"},{\"t\":\"FACT\",\"text\":\"Soo Loo, Corporate Accountant, Downtown (POP-00663) — 4 pages; latest the night page, a question they carry, C116; new since your last piece: “Should I shut the screen and join her, or stay in this stillness a little longer?”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-90a57134384a\"},{\"t\":\"FACT\",\"text\":\"Giancarlo Hernandez, Third Baseman, Oakland A's (POP-01239) — 1 page; latest after work, C116; new since your last piece: “Yeah, I saw the articles. I know what they're saying — that Kevin's looking over his shoulder, that I'm some kind of glove-first insurance policy, or…”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-be9d6a7f6153\"},{\"t\":\"FACT\",\"text\":\"Harry Hayward, Oakland Oaks - Power Forward, KONO (POP-01223) — 6 pages; latest after work, C116; new since your last piece; you ran them C115: “Yeah, I saw the feed. Both games. They're real, they happened, and I was there for both of them. The Denver night was special. That's the kind of…”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-b9a2e4a9d0a0\"},{\"t\":\"FACT\",\"text\":\"Dillon Brooks, SF / The Oaks, West Oakland (POP-01079) — 4 pages; latest after work, C116; new since your last piece: “Man. I ain't gonna lie, reading that Denver box score back still gives me chills. 147 points, 80 percent from the field, 73 from three? That's the…”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-2af66389f9e7\"},{\"t\":\"FACT\",\"text\":\"Guadalupe Lupe — Bartender — Jack London\",\"src\":\"Simulation_Ledger profile for POP-00643\",\"id\":\"F-6769aa54ed95\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C12, Spring, holiday=Spring Equinox\",\"src\":\"output/world_summary_c116.md Calendar context (Simulation_Calendar)\",\"id\":\"F-647fd9067a33\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00643",
+        "name": "Guadalupe Lupe",
+        "role": "Bartender",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Ines Sorensen",
+        "question": "Guadalupe Lupe's concerns about rising rents in Uptown? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-voices",
+        "hood": null,
+        "focus": "The reaction to Mark Aitken's departure and the A's roster changes",
+        "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 346c91"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Guadalupe Lupe — Bartender — Jack London",
+        "evidence": [
+          {
+            "id": "EV-a1036787de",
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 346c91",
+            "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Guadalupe Lupe, Bartender, Jack London (POP-00643) — 8 pages; latest to a reporter, a question they carry, C116: “How much longer can people like Tre Mingo afford to stay here before rent pushes them out?”",
+          "src": "output/citizen_pages/index.jsonl roster",
+          "id": "F-65a069c0871e"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C116",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-871096fd8925"
+        },
+        {
+          "t": "FACT",
+          "text": "Voices roster, C116: 485 citizens with pages, 18 new since your last piece",
+          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 346c91",
+          "id": "F-e48a1349f461"
+        },
+        {
+          "t": "FACT",
+          "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.",
+          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 346c91",
+          "id": "F-2a41d9dddf2e"
+        },
+        {
+          "t": "FACT",
+          "text": "Soo Loo, Corporate Accountant, Downtown (POP-00663) — 4 pages; latest the night page, a question they carry, C116; new since your last piece: “Should I shut the screen and join her, or stay in this stillness a little longer?”",
+          "src": "output/citizen_pages/index.jsonl roster",
+          "id": "F-90a57134384a"
+        },
+        {
+          "t": "FACT",
+          "text": "Giancarlo Hernandez, Third Baseman, Oakland A's (POP-01239) — 1 page; latest after work, C116; new since your last piece: “Yeah, I saw the articles. I know what they're saying — that Kevin's looking over his shoulder, that I'm some kind of glove-first insurance policy, or…”",
+          "src": "output/citizen_pages/index.jsonl roster",
+          "id": "F-be9d6a7f6153"
+        },
+        {
+          "t": "FACT",
+          "text": "Harry Hayward, Oakland Oaks - Power Forward, KONO (POP-01223) — 6 pages; latest after work, C116; new since your last piece; you ran them C115: “Yeah, I saw the feed. Both games. They're real, they happened, and I was there for both of them. The Denver night was special. That's the kind of…”",
+          "src": "output/citizen_pages/index.jsonl roster",
+          "id": "F-b9a2e4a9d0a0"
+        },
+        {
+          "t": "FACT",
+          "text": "Dillon Brooks, SF / The Oaks, West Oakland (POP-01079) — 4 pages; latest after work, C116; new since your last piece: “Man. I ain't gonna lie, reading that Denver box score back still gives me chills. 147 points, 80 percent from the field, 73 from three? That's the…”",
+          "src": "output/citizen_pages/index.jsonl roster",
+          "id": "F-2af66389f9e7"
+        },
+        {
+          "t": "FACT",
+          "text": "Guadalupe Lupe — Bartender — Jack London",
+          "src": "Simulation_Ledger profile for POP-00643",
+          "id": "F-6769aa54ed95"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+          "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+          "id": "F-647fd9067a33"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  }
+]

@@ -1,0 +1,38 @@
+{
+  "model": "anthropic/claude-sonnet-5.5",
+  "calls": [
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Oakland Sound Archive"
+      },
+      "resultChars": 197,
+      "resultHead": "No published piece from before C115 came back for \"Oakland Sound Archive\". That is not proof the paper never covered it (an empty answer can also be a failed lookup) — do not write that it did not."
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Caroline Cabrera"
+      },
+      "resultChars": 192,
+      "resultHead": "No published piece from before C115 came back for \"Caroline Cabrera\". That is not proof the paper never covered it (an empty answer can also be a failed lookup) — do not write that it did not."
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Uptown"
+      },
+      "resultChars": 3293,
+      "resultHead": "[C112 · daily · Jordan Velez] If the small places are the reason Uptown feels like a neighborhood, it is fair to ask who benefits when the neighborhood gets more valuable. The answer is not settled by asking. My mother ran a laundromat on 7th Street, and her customers kept coming right up until the building sold. Regulars are loyal. Loyalty does not pay a landlord who has watched the office tenants next door. Nakamura's regulars are still coming in. Lopez's machine is still running. The block is moving. Does a rising Uptown lift Night Walk Reco\n[C114 · daily · Ines Sorensen] I'm not going to t"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Toto Foto"
+      },
+      "resultChars": 185,
+      "resultHead": "No published piece from before C115 came back for \"Toto Foto\". That is not proof the paper never covered it (an empty answer can also be a failed lookup) — do not write that it did not."
+    }
+  ],
+  "ranAt": "2026-11-14T00:18:06.451Z"
+}

@@ -1,0 +1,25 @@
+{
+  "initiative": "INIT-003",
+  "initiativeId": "INIT-003",
+  "cycle": 116,
+  "primaryVoice": "Mayor gavel (mayor_gavel-003)",
+  "consolidatedFrom": [
+    "STMT-116-mayor_gavel-003 (Mayor gavel — Fruitvale Transit Hub Phase II design evidence)",
+    "STMT-116-transit_hub-001 (Soria Dominguez — Fruitvale Transit Hub Phase II — engine flag held at evidence gate)",
+    "STMT-116-transit_hub-002 (Soria Dominguez — The answer desk and the comment log — what's actually on the table now)",
+    "STMT-116-transit_hub-003 (Soria Dominguez — Who answers for Fruitvale this cycle)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-003",
+    "MilestoneNotes": "C116: Further design advancement held pending preliminary schematics and a documented Fruitvale public comment-and-response record.",
+    "NextScheduledAction": "Deliver schematics and publish Fruitvale comment-and-response record",
+    "NextActionCycle": 117,
+    "LastWorkCycle": 116,
+    "LastWorkSeat": "proj-transit-hub"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-115-proj-transit-hub-2026-11-12"
+    ]
+  }
+}

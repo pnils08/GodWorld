@@ -1,0 +1,55 @@
+{
+  "office": "stabilization_fund",
+  "cycle": 116,
+  "speaker": "Marcus Webb",
+  "cascadeSummary": "The C114 closeout is published, the renewal draft is in the Clerk's hands, and the ordinance is on this cycle's Council calendar with business-and-resident scope and the 23-day standard written into it — so my job this cycle is to hold the queue steady and let the record do the talking in the hearing, not to announce a vote I don't control. On Grand Lake, the $2.5M goes to the Clerk's recorded full-council roll with every Chen-Vega milestone and audit condition still attached; I don't get to write the outcome. West Oakland's constituents get the same thing they've gotten every week: the check before the notice, and a straight answer about the timeline.",
+  "statements": [
+    {
+      "statementId": "STMT-116-stabilization_fund-001",
+      "type": "position",
+      "topic": "Charter renewal on Council calendar with closeout in the hearing record",
+      "initiative": "INIT-001",
+      "decision": "Hold the operational line: renewal stays on this cycle's Council calendar with West Oakland business-and-resident scope and the 23-day standard intact, and the published C114 closeout goes into the hearing record before a final vote. No tranche is called into an ordinance the Council hasn't voted on.",
+      "quote": "The closeout is published, the ordinance is on the calendar with the scope that works and the 23-day clock still running — the hearing record carries the proof, and the roll call belongs to the Council.",
+      "fullStatement": "The C114 closeout is published and the charter renewal ordinance is on this cycle's Council calendar exactly as transmitted: West Oakland businesses and residents, the 23-day processing standard, and the audited C114 closeout entered in the hearing record before any final decision. I'm not claiming renewal — that's the Council's call and I won't script it for them. What I do control is the queue. Monday morning the eligibility review desk at the 14th Street office opens on the same 23-day clock it has held since C111, and I'll be walking the hearing binder myself to the Clerk with the closeout tabbed for the record. If a councilmember wants the ledger, it's in the binder. If they want the standard, it's in the ordinance. If they want a different outcome, the roll writes it.",
+      "trackerUpdates": {
+        "initiative": "INIT-001",
+        "ImplementationPhase": "vote-scheduled",
+        "MilestoneNotes": "C116: C114 closeout published; renewal ordinance on Council calendar with business-and-resident scope and 23-day standard; no outcome claimed.",
+        "NextScheduledAction": "Council consideration of charter renewal ordinance with C114 closeout in hearing record",
+        "NextActionCycle": 116
+      }
+    },
+    {
+      "statementId": "STMT-116-stabilization_fund-002",
+      "type": "position",
+      "topic": "Grand Lake $2.5M to recorded full-council roll with Chen-Vega conditions",
+      "initiative": "INIT-009",
+      "decision": "Hold: the $2.5M Commercial Stabilization for Grand Lake stays on this cycle's calendar for the recorded full-council vote with every Chen-Vega milestone and audit condition attached, and I ask the Clerk to certify the roll without forecasting the result.",
+      "quote": "Grand Lake's two and a half million dollars goes to the Clerk's roll with every milestone and audit condition stapled to it — I back YES, and I still don't get to write the result.",
+      "fullStatement": "Grand Lake's two and a half million dollars is on this cycle's agenda for the recorded full-council vote, and it walks in with the Chen-Vega milestone reporting and audit conditions still attached — not appended afterward, not softened in a substitute. I'm backing YES because the conditions are the deal, not a garnish on it. Before the vote I'll confirm with the Clerk's office that the milestone schedule and audit criteria are entered as part of the item, and after the roll I'll ask for certification so the outcome lives in the record rather than in anybody's memory of the room. What a reporter would see is a binder: milestones on one tab, audit conditions on the next, and the Clerk's certification clipped to the front once the vote is taken.",
+      "trackerUpdates": {
+        "initiative": "INIT-009",
+        "ImplementationPhase": "vote-ready",
+        "MilestoneNotes": "C116: Recorded full-council vote scheduled with Chen-Vega milestone and audit conditions attached; roll certification requested, no outcome claimed.",
+        "NextScheduledAction": "Recorded full-council vote on INIT-009 with Clerk roll certification",
+        "NextActionCycle": 116
+      }
+    },
+    {
+      "statementId": "STMT-116-stabilization_fund-003",
+      "type": "constituent",
+      "topic": "West Oakland queue, 23-day standard, and tenant-defense sequencing",
+      "initiative": "INIT-010",
+      "decision": "Keep the 23-day standard running through the renewal hearing; sequence the West Oakland Tenant Defense Fund committee decision behind publication of the legal-support analysis so no vote precedes the public record, with no outcome presumed.",
+      "quote": "The rent does not wait for the ordinance and the vote doesn't come before the analysis — West Oakland gets the legal-support record first, and the 23-day clock keeps running while it does.",
+      "fullStatement": "Two things are true in West Oakland this cycle at the same time. The mood is up — street trade is busy, the New Covenant lunch program hit its milestone, and people on the blocks can feel that — and the housing pressure hasn't gone anywhere. So the queue runs on the 23-day standard straight through the renewal hearing. My desk is at the 14th Street office, and the eligibility review doesn't pause because there's a vote upstairs. On the tenant-defense money, the sequence matters more than the speed: the $4.2 million proposal stays on the committee's agenda, but it sits behind publication of the legal-support analysis, because a recorded committee judgment made before the analysis is public isn't judgment, it's a guess with a gavel. I'll publish when the analysis lands and the committee records its decision — and I'm not presuming what that decision is.",
+      "trackerUpdates": {
+        "initiative": "INIT-010",
+        "MilestoneNotes": "C116: Committee decision sequenced behind publication of legal-support analysis; 23-day queue standard maintained through renewal hearing.",
+        "NextScheduledAction": "Publish legal-support analysis, then record committee decision on $4.2M proposal",
+        "NextActionCycle": 116
+      }
+    }
+  ]
+}

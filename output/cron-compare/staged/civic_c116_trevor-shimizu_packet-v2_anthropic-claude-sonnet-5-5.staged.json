@@ -1,0 +1,63 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "116",
+  "persona": "trevor-shimizu",
+  "byline": "Trevor Shimizu",
+  "bylinePopid": "POP-00155",
+  "article": "output/cron-compare/staged/civic_c116_trevor-shimizu_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Eleanor Rivera",
+        "role": "mentioned",
+        "popid": "POP-00617"
+      },
+      {
+        "name": "Ximena Mehta",
+        "role": "mentioned",
+        "popid": "POP-01039"
+      },
+      {
+        "name": "Rosario Medina",
+        "role": "mentioned",
+        "popid": "POP-01053"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "Honestly, from the booth, a five-point drop on a crowded day doesn't read as people leaving the station. It reads as people arriving later, all at once. You see the platforms fill up in waves instead of a steady stream, and that's when the dwell time stretches — the trains are there, but everyone's squeezing on at the same time, doors cycle slower, and the whole rhythm backs up. The ledger shows the number that got on. What it doesn't show is the crowd that's still on the platform when the doors close, waiting for the next one. That's not a loss — that's a delay that shows up in the next train's count.",
+        "sourceRef": "citizenVoice PRESS Eleanor Rivera"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-af6b04c603c3",
+    "draftSha256": "340607d8c96e8f4d2ffff319e6576640608cd5e8b3df5e68397f73a23dfc7092",
+    "verdict": "output/cron-compare/civic_c116_trevor-shimizu_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-17T00:20:31.250Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 500",
+      "words": 940,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "340607d8c96e8f4d2ffff319e6576640608cd5e8b3df5e68397f73a23dfc7092",
+      "costUsd": 0.0013
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-17T00:20:35.989Z"
+}

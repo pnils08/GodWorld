@@ -3,26 +3,25 @@
   "cycle": "115",
   "backend": "api",
   "model": "google/gemini-3.7-flash",
-  "draftSha256": "62c903ad9c1eee900c3b4610f20c95f0660e21506e511cc42049ee88aae918f4",
+  "draftSha256": "b8610b7435e778358b24ef518382fe5446e57d11d16e2311dd3b2ccb56724c0a",
   "pass": true,
   "flags": [],
   "flagCount": 0,
   "highSeverityCount": 0,
-  "summary": "Brooklyn Nguyen quote matches interview record exactly; citizen identities, show details, and ground truth verified clean.",
+  "summary": "Elijah Brown's UNDOCKED recap accurately uses verified ledger data and exact interview quotes with no canon contradictions or fourth-wall violations.",
   "review": {
-    "profileId": "default",
+    "profileId": "culture-recaps",
     "canonIntegrity": "pass",
     "texture": "authorized"
   },
   "reviewProfile": {
     "id": "nia-rook-undocked-recap-v1",
     "packageVersion": "NIAROOK-UNDOCKED-2",
-    "manifestId": "AM-4d0bf68fdbcc",
+    "manifestId": "AM-6c8eddbc4467",
     "lexicalObservations": [
       {
         "code": "UNAPPROVED_NUMBER",
         "values": [
-          "45.19",
           "114"
         ]
       }
@@ -31,7 +30,7 @@
   },
   "nameCheck": {
     "verified": [
-      "Brooklyn Nguyen",
+      "Elijah Brown",
       "Luis Taz"
     ],
     "unverified": []
@@ -51,21 +50,21 @@
     "pageContradictions": [],
     "packetChecked": true
   },
-  "apiCostUsd": 0.0104,
-  "durationMs": 4062,
+  "apiCostUsd": 0.0117,
+  "durationMs": 5523,
   "parseError": false,
-  "ranAt": "2026-11-12T00:25:21.096Z",
+  "ranAt": "2026-11-14T00:22:25.250Z",
   "contractScore": {
     "opened": true,
     "purposeMet": true,
     "inTarget": true,
     "inTargetBy": "code floor 350",
-    "words": 383,
+    "words": 396,
     "short": "",
     "score": 3,
     "max": 3,
     "model": "google/gemini-3.7-flash",
-    "draftSha256": "62c903ad9c1eee900c3b4610f20c95f0660e21506e511cc42049ee88aae918f4",
+    "draftSha256": "b8610b7435e778358b24ef518382fe5446e57d11d16e2311dd3b2ccb56724c0a",
     "costUsd": 0.0009
   }
 }

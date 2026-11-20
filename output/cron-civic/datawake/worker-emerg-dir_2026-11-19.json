@@ -1,0 +1,41 @@
+{
+  "office": "worker_emerg_dir",
+  "agentDir": "worker-emerg-dir",
+  "holder": "Shawna Delgado",
+  "popid": "POP-00152",
+  "title": "Emergency Management Director",
+  "date": "2026-11-19",
+  "cycle": 116,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "Shawna Delgado, Emergency Management Director — Weekly Report, Cycle 116.\n\n**Weather.** Cycle 116 came in mild, 54 degrees, impact 1, no advisories and no alerts. This is the sixth consecutive clear cycle. There is nothing on the city's weather event ledger for the cycle and nothing on the crisis-event ledger set moving by weather. Operationally, that is the whole story: a quiet week.\n\n**Crisis arcs.** One arc remains open. The Downtown Transit Snarl is in decline — tension 2.45, down from where it has been, easing but still strained. It has been in this phase since Cycle 115 and open since Cycle 114. The item I would keep in front of the council is the underlying housing pressure in Downtown: 10.00 against a citywide figure of 2.52. Our transit picture is improving; the pressure driving people onto and off those routes is not. I would not close the arc while that ratio stands where it does, and I'd expect it to be the thing that reopens the snarl if anything does.\n\n**Shock and pattern flags.** Shock flag: none. Pattern flag: none. Civic load: minor-variance. I read that as the city absorbing the week without displacement.\n\n**What I am watching into Cycle 117.** First, whether Downtown's tension continues to fall now that it has held a full cycle in decline — a second cycle of easing would let me start talking about an exit condition. Second, the streak. Six clear cycles is good news and also the point where I start watching the other direction; a run this long tends to end with a single high-impact event rather than a gradual one, and my office's readiness posture should not drift just because the ledger is empty. I have nothing to move on that this cycle — no event, no advisory — so this is a note, not a call to action.\n\n**Bottom line for the record:** no active weather threat, no new crisis events, one crisis arc easing under persistent housing strain, citywide civic load within minor variance. Nothing in this cycle requires a mayoral decision or a public advisory from this office.\n\nThat is my report for Cycle 116.",
+  "moves": [],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-11-19T11:46:30.023Z",
+  "usage": {
+    "prompt_tokens": 1353,
+    "completion_tokens": 454,
+    "cost": 0.0004
+  },
+  "fellBackFrom": null,
+  "template": "worker/2",
+  "toolTrace": [],
+  "memory": {
+    "searchedOn": "crisis emergency weather alerts",
+    "entries": 0,
+    "fromSearch": 0,
+    "newest": 0,
+    "failed": []
+  },
+  "figuresNotHanded": [],
+  "finishReason": "stop",
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00152",
+    "id": "Tpj9yv2dq5bPzeVdJBxSyt",
+    "customId": "cp-POP-00152-c116-CIVIC-datawake-2026-11-19"
+  }
+}

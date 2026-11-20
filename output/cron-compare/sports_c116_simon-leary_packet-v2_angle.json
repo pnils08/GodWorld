@@ -1,0 +1,472 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "116",
+  "persona": "simon-leary",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00016",
+      "name": "Simon Leary",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "The Oaks record is 8-1.",
+      "approach": "Long-view approach (Simon Leary): third-person essayist. Treat supplied sports facts as present structure, not as proof of history or collective memory. A metaphor about continuity, load, or change may interpret the Packet but may not add a person, place, institution, event, season, statistic, cause, organizational intention, or citywide belief. Do not write a game recap, Hal elegy, P Slayer fan heat, or Anthony board memo.",
+      "creativeBrief": {
+        "kind": "sports-long-view",
+        "pulseClass": "role-change-under-continuity",
+        "bagModes": [
+          "2 Keystone Player",
+          "4 Load-Bearing Continuity"
+        ],
+        "claim": "A role change inside a sustained team record can support a structural interpretation; it does not establish franchise history, organizational intent, or citywide meaning.",
+        "anchorFacts": [
+          "The Oaks record is 8-1.",
+          "The Oaks have won 4 straight."
+        ],
+        "missing": [
+          "why the role change was made",
+          "historical comparison or franchise precedent",
+          "organizational intention or future plan",
+          "citywide, clubhouse, or fan interpretation"
+        ],
+        "sceneRule": "No witnessed room or scene is supplied. Structure and continuity may appear only as clearly interpretive metaphor grounded in the approved present facts.",
+        "sourcePointers": [
+          "output/world_summary_c116.md ## Sports",
+          "docs/media/SIMON_LONGVIEW_BAG.md"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "long-view-signal",
+      "hood": "West Oakland",
+      "score": null,
+      "src": "world_summary_c116.md ## Sports",
+      "nearby": [
+        {
+          "text": "A's | trade-recap | (off-season) | Carmen Mesa, Jose Fuentes, Giancarlo Hernandez, Mike Paulson, Kevin Clark, Ernesto Quintero",
+          "src": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (off-season) | Kevin Clark, Giancarlo Hernandez, Ernesto Quintero, Deacon Seymour, Mike Paulson",
+          "src": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | rumor | (off-season) | Mark Aitken, Mike Paulson, Ernesto Quintero",
+          "src": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | rumor | (off-season) | Benji Dillon, Mike Paulson, Deacon Seymour",
+          "src": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | season-state | (early-season) | Wilson Shepard, Mike Paulson, Elliot Abraham",
+          "src": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-01022",
+          "name": "Wilson Shepard",
+          "profile": "Wilson Shepard — Head Coach, Oakland Oaks",
+          "role": "Head Coach, Oakland Oaks",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c116.md ## Sports",
+            "pop": "POP-01022",
+            "rowName": "Wilson Shepard",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00527",
+          "name": "Mike Paulson",
+          "profile": "Mike Paulson — General Manager, Oakland A's & The Oaks",
+          "role": "General Manager, Oakland A's & The Oaks",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c116.md ## Sports",
+            "pop": "POP-00527",
+            "rowName": "Mike Paulson",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01046",
+          "name": "Elliot Abraham",
+          "profile": "Elliot Abraham — General Manager, Oakland Oaks",
+          "role": "General Manager, Oakland Oaks",
+          "hood": "Jack London",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c116.md ## Sports",
+            "pop": "POP-01046",
+            "rowName": "Elliot Abraham",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C116",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-871096fd8925"
+      },
+      {
+        "t": "FACT",
+        "text": "The Oaks record is 8-1.",
+        "src": "world_summary_c116.md ## Sports",
+        "id": "F-cd9d6df1f0ce"
+      },
+      {
+        "t": "FACT",
+        "text": "The Oaks have won 4 straight.",
+        "src": "world_summary_c116.md ## Sports",
+        "id": "F-a314c794ecea"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ]
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-01022",
+        "name": "Wilson Shepard",
+        "role": "Head Coach, Oakland Oaks",
+        "hood": "West Oakland",
+        "profile": "Wilson Shepard — Head Coach, Oakland Oaks",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c116.md ## Sports",
+          "pop": "POP-01022",
+          "rowName": "Wilson Shepard",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00527",
+        "name": "Mike Paulson",
+        "role": "General Manager, Oakland A's & The Oaks",
+        "hood": "West Oakland",
+        "profile": "Mike Paulson — General Manager, Oakland A's & The Oaks",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c116.md ## Sports",
+          "pop": "POP-00527",
+          "rowName": "Mike Paulson",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01046",
+        "name": "Elliot Abraham",
+        "role": "General Manager, Oakland Oaks",
+        "hood": "Jack London",
+        "profile": "Elliot Abraham — General Manager, Oakland Oaks",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c116.md ## Sports",
+          "pop": "POP-01046",
+          "rowName": "Elliot Abraham",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Simon Leary",
+    "popid": "POP-00016"
+  },
+  "assignment": {
+    "story": {
+      "angle": "The Oaks record is 8-1.",
+      "label": "The Oaks record is 8-1.",
+      "hookLine": "The Oaks record is 8-1.",
+      "kind": "long-view-signal",
+      "hood": "West Oakland",
+      "popids": [
+        "POP-01022",
+        "POP-00527",
+        "POP-01046"
+      ],
+      "citizens": [
+        "Wilson Shepard (POP-01022)",
+        "Mike Paulson (POP-00527)",
+        "Elliot Abraham (POP-01046)"
+      ],
+      "ref": "world_summary_c116.md ## Sports",
+      "cycle": 116
+    },
+    "approach": "Long-view approach (Simon Leary): third-person essayist. Treat supplied sports facts as present structure, not as proof of history or collective memory. A metaphor about continuity, load, or change may interpret the Packet but may not add a person, place, institution, event, season, statistic, cause, organizational intention, or citywide belief. Do not write a game recap, Hal elegy, P Slayer fan heat, or Anthony board memo."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": {
+    "pulse": {
+      "className": "role-change-under-continuity",
+      "score": 84,
+      "label": "The Oaks record is 8-1."
+    },
+    "prewrite": {
+      "bagModes": [
+        {
+          "id": 2,
+          "name": "Keystone Player"
+        },
+        {
+          "id": 4,
+          "name": "Load-Bearing Continuity"
+        }
+      ],
+      "anchorFacts": [
+        "The Oaks record is 8-1.",
+        "The Oaks have won 4 straight."
+      ],
+      "claim": "A role change inside a sustained team record can support a structural interpretation; it does not establish franchise history, organizational intent, or citywide meaning.",
+      "missing": [
+        "why the role change was made",
+        "historical comparison or franchise precedent",
+        "organizational intention or future plan",
+        "citywide, clubhouse, or fan interpretation"
+      ],
+      "hooks": []
+    },
+    "players": [
+      {
+        "name": "Wilson Shepard",
+        "popid": "POP-01022",
+        "role": "Head Coach, Oakland Oaks",
+        "neighborhood": "West Oakland",
+        "why": "feed-names"
+      },
+      {
+        "name": "Mike Paulson",
+        "popid": "POP-00527",
+        "role": "General Manager, Oakland A's & The Oaks",
+        "neighborhood": "West Oakland",
+        "why": "feed-names"
+      },
+      {
+        "name": "Elliot Abraham",
+        "popid": "POP-01046",
+        "role": "General Manager, Oakland Oaks",
+        "neighborhood": "Jack London",
+        "why": "feed-names"
+      }
+    ],
+    "scene": {
+      "colorRoom": "No witnessed room or scene is supplied. Structure and continuity may appear only as clearly interpretive metaphor grounded in the approved present facts."
+    },
+    "candidates": [
+      {
+        "score": 84,
+        "cycle": 116,
+        "team": "Oaks",
+        "label": "From 0-9 to 8-1: Wilson Shepard's Oaks caught people off guard, just like he said they would"
+      },
+      {
+        "score": 84,
+        "cycle": 116,
+        "team": "Oaks",
+        "label": "The Oaks shoot 80 percent in Denver and set a franchise record. Oaks 147 - Nuggets 114"
+      },
+      {
+        "score": 72,
+        "cycle": 116,
+        "team": "Oaks",
+        "label": "The Spurs hand the Oaks their first home loss. Spurs 126 - Oaks 117"
+      },
+      {
+        "score": 58,
+        "cycle": 116,
+        "team": "A's",
+        "label": "Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen"
+      },
+      {
+        "score": 58,
+        "cycle": 116,
+        "team": "A's",
+        "label": "The bat or the glove? Kevin Clark's .327 against Giancarlo Hernandez's 96 fielding for third base"
+      },
+      {
+        "score": 58,
+        "cycle": 116,
+        "team": "A's",
+        "label": "Benji Dillon hasn't retired yet. The 5-time Cy Young winner leaves the door open after Keane walks through his"
+      }
+    ]
+  },
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Simon Leary",
+    "popid": "POP-00016",
+    "text": "The record is 8-1, and the streak is four. That is the structure I am supposed to read, and I keep circling it the way I circle the grate on College Avenue — looking for the thing that was left behind on purpose. The Oaks have not lost since the season turned, and the shape of the infield has changed underneath them. Quintero moves across the diamond, Clark and Hernandez split the hot corner, and the team keeps winning. That is the load-bearing fact: the wall did not move, only the hands on it. I want to stand at the edge of the field and watch the geometry hold. I want to ask Wilson Shepard what he sees when he looks at a lineup that rearranges itself and still finds the same result. I want",
+    "plan": {
+      "chase": "The record is 8-1, and the streak is four. That is the structure I am supposed to read, and I keep circling it the way I circle the grate on College Avenue — looking for the thing that was left behind on purpose. The Oaks have not lost since the season turned, and the shape of the infield has changed underneath them. Quintero moves across the diamond, Clark and Hernandez split the hot corner, and the team keeps winning. That is the load-bearing fact: the wall did not move, only the hands on it. I want to stand at the edge of the field and watch the geometry hold. I want to ask Wilson Shepard what he sees when he looks at a lineup that rearranges itself and still finds the same result. I want",
+      "focus": "The 8-1 record as a load-bearing structure that holds through a role change — Quintero to first, Clark and Hernandez at third — and what continuity means when the hands change but the wall does not.",
+      "why": "The assignment asks for a structural interpretation of a sustained record, not a game recap and not a history lesson. The role change is the supplied present fact that gives the record its tension: the team keeps winning while the infield rearranges. That is the civic architecture — the thing that holds when the people inside it shift.",
+      "checks": [
+        "Open with the 8-1 record and the four straight wins, not with a neighborhood or a memory.",
+        "Treat the role change as present structure, not as proof of franchise history or organizational intent.",
+        "Use the metaphor of load-bearing continuity — a wall, a bridge, a building — grounded only in the supplied facts.",
+        "Do not add a person, place, institution, event, season, statistic, cause, or citywide belief beyond the Packet.",
+        "Do not write a game recap, a Hal elegy, P Slayer fan heat, or an Anthony board memo.",
+        "Keep the essay in third person, essayist register, with the short sentence landing hardest."
+      ],
+      "targets": [
+        {
+          "pop": "POP-01022",
+          "question": "When the infield shifts and the record holds, what does that tell you about the structure versus the people in it?",
+          "basis": "Named as Head Coach of the Oakland Oaks in the supplied signal; the 8-1 record is the present structure under his watch."
+        },
+        {
+          "pop": "POP-00527",
+          "question": "Does a record that survives a role change read as the team's architecture or as the players' individual load-bearing?",
+          "basis": "Named as General Manager of both the A's and the Oaks in the supplied signal; the role change is the present fact under his roster."
+        },
+        {
+          "pop": "POP-01046",
+          "question": "When you look at an 8-1 start, do you see the streak or the arrangement that made it possible?",
+          "basis": "Named as General Manager of the Oakland Oaks in the supplied signal; the record is the present structure he manages."
+        }
+      ],
+      "interpretation": "A role change inside a sustained team record can support a structural interpretation; it does not establish franchise history, organizational intent, or citywide meaning. The 8-1 record is the wall. The infield shift is the hand that moves along it. The essay reads the wall, not the hand's biography.",
+      "unverifiedLead": [
+        "The infield rearrangement may have been discussed in the clubhouse before the season, but no such conversation is supplied.",
+        "The record may carry different weight for the coaching staff than for the front office, but no such difference is established.",
+        "The streak may be read by fans as a sign of depth, but no fan interpretation is supplied."
+      ]
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | trade-recap | (off-season) | Carmen Mesa, Jose Fuentes, Giancarlo Hernandez, Mike Paulson, Kevin Clark, Ernesto Quintero",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00081",
+        "POP-00101",
+        "POP-01239",
+        "POP-00527",
+        "POP-00053",
+        "POP-00050"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (off-season) | Kevin Clark, Giancarlo Hernandez, Ernesto Quintero, Deacon Seymour, Mike Paulson",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00053",
+        "POP-01239",
+        "POP-00050",
+        "POP-00528",
+        "POP-00527"
+      ]
+    },
+    {
+      "label": "A's | rumor | (off-season) | Mark Aitken, Mike Paulson, Ernesto Quintero",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00003",
+        "POP-00527",
+        "POP-00050"
+      ]
+    },
+    {
+      "label": "A's | rumor | (off-season) | Benji Dillon, Mike Paulson, Deacon Seymour",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00018",
+        "POP-00527",
+        "POP-00528"
+      ]
+    },
+    {
+      "label": "Oaks | season-state | (early-season) | Wilson Shepard, Mike Paulson, Elliot Abraham",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01022",
+        "POP-00527",
+        "POP-01046"
+      ]
+    }
+  ],
+  "laneEntries": 17,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-19T12:15:52.457Z"
+}

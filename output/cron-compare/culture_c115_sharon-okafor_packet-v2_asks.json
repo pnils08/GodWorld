@@ -1,0 +1,595 @@
+[
+  {
+    "pop": "POP-00017",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00017\",\"name\":\"Anthony Raines\",\"role\":\"Journalist, Lead Beat Reporter - Oakland A's\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Sharon Okafor\",\"question\":\"How does Anthony Raines experience life as a rising name in Rockridge? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-lifestyle\",\"hood\":\"Grand Lake\",\"focus\":\"Anthony Raines\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Anthony Raines — Journalist, Lead Beat Reporter - Oakland A's — Rockridge\",\"evidence\":[{\"id\":\"EV-f0227345ca\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"text\":\"Vinnie Keane (A's player), Sports, Grand Lake, National-tier — fading (fame 48, cooling), 7 media mentions.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Anthony Raines (Journalist, Lead Beat Reporter - Oakland A's), Media, Rockridge, Local-tier — new on the culture record this cycle (fame 25, rising), 0 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-fce0a2081162\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"Benji Dillon leads the fame table; 4 fading, 1 new\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-7d2ed2d529eb\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane (A's player), Sports, Grand Lake, National-tier — fading (fame 48, cooling), 7 media mentions.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-65b8a0bc243e\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane (A's player), Sports, Grand Lake, National-tier — fading — the where-are-they-now file (fame 48, cooling), 7 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-36e6126227fc\"},{\"t\":\"FACT\",\"text\":\"Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 3, cooling), 17 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-b073bca41972\"},{\"t\":\"FACT\",\"text\":\"Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 2, cooling), 15 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-9af3c5e09458\"},{\"t\":\"FACT\",\"text\":\"Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 49, rising), 1 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-6291b9e24d10\"},{\"t\":\"FACT\",\"text\":\"Anthony Raines — Journalist, Lead Beat Reporter - Oakland A's — Rockridge\",\"src\":\"Simulation_Ledger profile for POP-00017\",\"id\":\"F-18a5cf9d73f6\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00017",
+        "name": "Anthony Raines",
+        "role": "Journalist, Lead Beat Reporter - Oakland A's",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Sharon Okafor",
+        "question": "How does Anthony Raines experience life as a rising name in Rockridge? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-lifestyle",
+        "hood": "Grand Lake",
+        "focus": "Anthony Raines",
+        "src": "output/beats/Cultural_Ledger.jsonl @C115"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Anthony Raines — Journalist, Lead Beat Reporter - Oakland A's — Rockridge",
+        "evidence": [
+          {
+            "id": "EV-f0227345ca",
+            "src": "output/beats/Cultural_Ledger.jsonl @C115",
+            "text": "Vinnie Keane (A's player), Sports, Grand Lake, National-tier — fading (fame 48, cooling), 7 media mentions."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Anthony Raines (Journalist, Lead Beat Reporter - Oakland A's), Media, Rockridge, Local-tier — new on the culture record this cycle (fame 25, rising), 0 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-fce0a2081162"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C115",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-bc84fc0b7718"
+        },
+        {
+          "t": "FACT",
+          "text": "Benji Dillon leads the fame table; 4 fading, 1 new",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-7d2ed2d529eb"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane (A's player), Sports, Grand Lake, National-tier — fading (fame 48, cooling), 7 media mentions.",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-65b8a0bc243e"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane (A's player), Sports, Grand Lake, National-tier — fading — the where-are-they-now file (fame 48, cooling), 7 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-36e6126227fc"
+        },
+        {
+          "t": "FACT",
+          "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 3, cooling), 17 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-b073bca41972"
+        },
+        {
+          "t": "FACT",
+          "text": "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 2, cooling), 15 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-9af3c5e09458"
+        },
+        {
+          "t": "FACT",
+          "text": "Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 49, rising), 1 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-6291b9e24d10"
+        },
+        {
+          "t": "FACT",
+          "text": "Anthony Raines — Journalist, Lead Beat Reporter - Oakland A's — Rockridge",
+          "src": "Simulation_Ledger profile for POP-00017",
+          "id": "F-18a5cf9d73f6"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C11, Spring, holiday=none",
+          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+          "id": "F-82d77e9a4a71"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00018",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00018\",\"name\":\"Benji Dillon\",\"role\":\"Pitcher, Oakland A's Legend\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Sharon Okafor\",\"question\":\"How does Benji Dillon view Anthony Raines's new role and presence in Rockridge? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-lifestyle\",\"hood\":\"Grand Lake\",\"focus\":\"Anthony Raines\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Benji Dillon — Pitcher, Oakland A's Legend — Rockridge\",\"evidence\":[{\"id\":\"EV-bc5262854b\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"text\":\"Vinnie Keane (A's player), Sports, Grand Lake, National-tier — fading (fame 48, cooling), 7 media mentions.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Benji Dillon leads the fame table; 4 fading, 1 new\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-7d2ed2d529eb\"},{\"t\":\"FACT\",\"text\":\"Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 49, rising), 1 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-6291b9e24d10\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane (A's player), Sports, Grand Lake, National-tier — fading (fame 48, cooling), 7 media mentions.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-65b8a0bc243e\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane (A's player), Sports, Grand Lake, National-tier — fading — the where-are-they-now file (fame 48, cooling), 7 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-36e6126227fc\"},{\"t\":\"FACT\",\"text\":\"Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 3, cooling), 17 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-b073bca41972\"},{\"t\":\"FACT\",\"text\":\"Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 2, cooling), 15 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-9af3c5e09458\"},{\"t\":\"FACT\",\"text\":\"Anthony Raines (Journalist, Lead Beat Reporter - Oakland A's), Media, Rockridge, Local-tier — new on the culture record this cycle (fame 25, rising), 0 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-fce0a2081162\"},{\"t\":\"FACT\",\"text\":\"Benji Dillon — Pitcher, Oakland A's Legend — Rockridge\",\"src\":\"Simulation_Ledger profile for POP-00018\",\"id\":\"F-2620383281c8\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00018",
+        "name": "Benji Dillon",
+        "role": "Pitcher, Oakland A's Legend",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Sharon Okafor",
+        "question": "How does Benji Dillon view Anthony Raines's new role and presence in Rockridge? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-lifestyle",
+        "hood": "Grand Lake",
+        "focus": "Anthony Raines",
+        "src": "output/beats/Cultural_Ledger.jsonl @C115"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+        "evidence": [
+          {
+            "id": "EV-bc5262854b",
+            "src": "output/beats/Cultural_Ledger.jsonl @C115",
+            "text": "Vinnie Keane (A's player), Sports, Grand Lake, National-tier — fading (fame 48, cooling), 7 media mentions."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Benji Dillon leads the fame table; 4 fading, 1 new",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-7d2ed2d529eb"
+        },
+        {
+          "t": "FACT",
+          "text": "Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 49, rising), 1 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-6291b9e24d10"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C115",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-bc84fc0b7718"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane (A's player), Sports, Grand Lake, National-tier — fading (fame 48, cooling), 7 media mentions.",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-65b8a0bc243e"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane (A's player), Sports, Grand Lake, National-tier — fading — the where-are-they-now file (fame 48, cooling), 7 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-36e6126227fc"
+        },
+        {
+          "t": "FACT",
+          "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 3, cooling), 17 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-b073bca41972"
+        },
+        {
+          "t": "FACT",
+          "text": "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 2, cooling), 15 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-9af3c5e09458"
+        },
+        {
+          "t": "FACT",
+          "text": "Anthony Raines (Journalist, Lead Beat Reporter - Oakland A's), Media, Rockridge, Local-tier — new on the culture record this cycle (fame 25, rising), 0 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-fce0a2081162"
+        },
+        {
+          "t": "FACT",
+          "text": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+          "src": "Simulation_Ledger profile for POP-00018",
+          "id": "F-2620383281c8"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C11, Spring, holiday=none",
+          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+          "id": "F-82d77e9a4a71"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00001",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00001\",\"name\":\"Vinnie Keane\",\"role\":\"Former Designated Hitter, Oakland A's Legend\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Sharon Okafor\",\"question\":\"As a resident of Grand Lake, what have you seen, felt, or understood about \\\"Anthony Raines\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-lifestyle\",\"hood\":\"Grand Lake\",\"focus\":\"Anthony Raines\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Grand Lake\",\"evidence\":[{\"id\":\"EV-f657c09bc8\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"text\":\"Vinnie Keane (A's player), Sports, Grand Lake, National-tier — fading (fame 48, cooling), 7 media mentions.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Vinnie Keane (A's player), Sports, Grand Lake, National-tier — fading (fame 48, cooling), 7 media mentions.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-65b8a0bc243e\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane (A's player), Sports, Grand Lake, National-tier — fading — the where-are-they-now file (fame 48, cooling), 7 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-36e6126227fc\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"Benji Dillon leads the fame table; 4 fading, 1 new\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-7d2ed2d529eb\"},{\"t\":\"FACT\",\"text\":\"Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 3, cooling), 17 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-b073bca41972\"},{\"t\":\"FACT\",\"text\":\"Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 2, cooling), 15 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-9af3c5e09458\"},{\"t\":\"FACT\",\"text\":\"Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 49, rising), 1 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-6291b9e24d10\"},{\"t\":\"FACT\",\"text\":\"Anthony Raines (Journalist, Lead Beat Reporter - Oakland A's), Media, Rockridge, Local-tier — new on the culture record this cycle (fame 25, rising), 0 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-fce0a2081162\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Grand Lake\",\"src\":\"Simulation_Ledger profile for POP-00001\",\"id\":\"F-c3e2dd064d1f\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "Former Designated Hitter, Oakland A's Legend",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Sharon Okafor",
+        "question": "As a resident of Grand Lake, what have you seen, felt, or understood about \"Anthony Raines\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-lifestyle",
+        "hood": "Grand Lake",
+        "focus": "Anthony Raines",
+        "src": "output/beats/Cultural_Ledger.jsonl @C115"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Grand Lake",
+        "evidence": [
+          {
+            "id": "EV-f657c09bc8",
+            "src": "output/beats/Cultural_Ledger.jsonl @C115",
+            "text": "Vinnie Keane (A's player), Sports, Grand Lake, National-tier — fading (fame 48, cooling), 7 media mentions."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane (A's player), Sports, Grand Lake, National-tier — fading (fame 48, cooling), 7 media mentions.",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-65b8a0bc243e"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane (A's player), Sports, Grand Lake, National-tier — fading — the where-are-they-now file (fame 48, cooling), 7 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-36e6126227fc"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C115",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-bc84fc0b7718"
+        },
+        {
+          "t": "FACT",
+          "text": "Benji Dillon leads the fame table; 4 fading, 1 new",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-7d2ed2d529eb"
+        },
+        {
+          "t": "FACT",
+          "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 3, cooling), 17 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-b073bca41972"
+        },
+        {
+          "t": "FACT",
+          "text": "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 2, cooling), 15 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-9af3c5e09458"
+        },
+        {
+          "t": "FACT",
+          "text": "Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 49, rising), 1 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-6291b9e24d10"
+        },
+        {
+          "t": "FACT",
+          "text": "Anthony Raines (Journalist, Lead Beat Reporter - Oakland A's), Media, Rockridge, Local-tier — new on the culture record this cycle (fame 25, rising), 0 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-fce0a2081162"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Grand Lake",
+          "src": "Simulation_Ledger profile for POP-00001",
+          "id": "F-c3e2dd064d1f"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C11, Spring, holiday=none",
+          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+          "id": "F-82d77e9a4a71"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00539",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00539\",\"name\":\"Lena Cross\",\"role\":\"Actor\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Sharon Okafor\",\"question\":\"What have you seen, felt, or understood about \\\"Anthony Raines\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-lifestyle\",\"hood\":\"Grand Lake\",\"focus\":\"Anthony Raines\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Lena Cross — Actor — Piedmont Ave\",\"evidence\":[{\"id\":\"EV-e91075dccb\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"text\":\"Vinnie Keane (A's player), Sports, Grand Lake, National-tier — fading (fame 48, cooling), 7 media mentions.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 3, cooling), 17 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-b073bca41972\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"Benji Dillon leads the fame table; 4 fading, 1 new\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-7d2ed2d529eb\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane (A's player), Sports, Grand Lake, National-tier — fading (fame 48, cooling), 7 media mentions.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-65b8a0bc243e\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane (A's player), Sports, Grand Lake, National-tier — fading — the where-are-they-now file (fame 48, cooling), 7 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-36e6126227fc\"},{\"t\":\"FACT\",\"text\":\"Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 2, cooling), 15 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-9af3c5e09458\"},{\"t\":\"FACT\",\"text\":\"Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 49, rising), 1 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-6291b9e24d10\"},{\"t\":\"FACT\",\"text\":\"Anthony Raines (Journalist, Lead Beat Reporter - Oakland A's), Media, Rockridge, Local-tier — new on the culture record this cycle (fame 25, rising), 0 media mentions\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-fce0a2081162\"},{\"t\":\"FACT\",\"text\":\"Lena Cross — Actor — Piedmont Ave\",\"src\":\"Simulation_Ledger profile for POP-00539\",\"id\":\"F-f580a535e402\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00539",
+        "name": "Lena Cross",
+        "role": "Actor",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Sharon Okafor",
+        "question": "What have you seen, felt, or understood about \"Anthony Raines\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-lifestyle",
+        "hood": "Grand Lake",
+        "focus": "Anthony Raines",
+        "src": "output/beats/Cultural_Ledger.jsonl @C115"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Lena Cross — Actor — Piedmont Ave",
+        "evidence": [
+          {
+            "id": "EV-e91075dccb",
+            "src": "output/beats/Cultural_Ledger.jsonl @C115",
+            "text": "Vinnie Keane (A's player), Sports, Grand Lake, National-tier — fading (fame 48, cooling), 7 media mentions."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 3, cooling), 17 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-b073bca41972"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C115",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-bc84fc0b7718"
+        },
+        {
+          "t": "FACT",
+          "text": "Benji Dillon leads the fame table; 4 fading, 1 new",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-7d2ed2d529eb"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane (A's player), Sports, Grand Lake, National-tier — fading (fame 48, cooling), 7 media mentions.",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-65b8a0bc243e"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane (A's player), Sports, Grand Lake, National-tier — fading — the where-are-they-now file (fame 48, cooling), 7 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-36e6126227fc"
+        },
+        {
+          "t": "FACT",
+          "text": "Rowan Pierce (journalist), Media, Piedmont Ave, Regional-tier — fading — the where-are-they-now file (fame 2, cooling), 15 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-9af3c5e09458"
+        },
+        {
+          "t": "FACT",
+          "text": "Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 49, rising), 1 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-6291b9e24d10"
+        },
+        {
+          "t": "FACT",
+          "text": "Anthony Raines (Journalist, Lead Beat Reporter - Oakland A's), Media, Rockridge, Local-tier — new on the culture record this cycle (fame 25, rising), 0 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-fce0a2081162"
+        },
+        {
+          "t": "FACT",
+          "text": "Lena Cross — Actor — Piedmont Ave",
+          "src": "Simulation_Ledger profile for POP-00539",
+          "id": "F-f580a535e402"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C11, Spring, holiday=none",
+          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+          "id": "F-82d77e9a4a71"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  }
+]

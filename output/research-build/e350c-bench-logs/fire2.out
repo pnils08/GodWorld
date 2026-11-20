@@ -1,0 +1,30 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+{
+ "label": "e350c-f2",
+ "expect": 117,
+ "at": "2026-11-19T01:36:55.060Z",
+ "pre": {
+  "bench": 117,
+  "live": 116,
+  "ee": 9,
+  "rileyLast": 117,
+  "checkpoint": null
+ },
+ "wallS": 206,
+ "http": 200,
+ "resp": {
+  "ok": true,
+  "state": "done",
+  "ranMs": 200536,
+  "persistErrors": []
+ },
+ "post": {
+  "bench": 118,
+  "live": 116,
+  "ee": 9,
+  "rileyLast": 118,
+  "checkpoint": null
+ },
+ "newEE": [],
+ "verdict": "PASS"
+}

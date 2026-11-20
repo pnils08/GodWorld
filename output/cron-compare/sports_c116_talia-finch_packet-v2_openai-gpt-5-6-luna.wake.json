@@ -1,0 +1,62 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "116",
+  "provider": "openrouter",
+  "model": "openai/gpt-5.6-luna",
+  "configuredWriterModel": "openai/gpt-5.6-luna",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "talia-finch",
+  "byline": {
+    "name": "Talia Finch",
+    "popid": "POP-00592",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 17,
+  "quotesLanded": 4,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "canon_recall",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall"
+  ],
+  "toolCalls": 5,
+  "wordCount": 521,
+  "targetWords": "400-650",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": false,
+    "purposeMet": false,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 521,
+    "short": "The opening lacks a specific venue and sensory detail, while the piece violates constraints by discussing the A's and failing to set the scene inside a textured room.",
+    "score": 1,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "36edd7a6403331d0c262325929027dbccfca301b650684d8b018136757ede459",
+    "costUsd": 0.0011
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 1/3 — The opening lacks a specific venue and sensory detail, while the piece violates constraints by discussing the A's and failing to set the scene inside a textured room."
+  },
+  "article": "output/cron-compare/staged/sports_c116_talia-finch_packet-v2_openai-gpt-5-6-luna.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "◇ injected env (33) from ../.config/godworld/.env // tip: ⌁ auth for agents [www.vestauth.com]\n{\n  \"popId\": \"POP-00592\",\n  \"name\": \"Talia Finch\",\n  \"recorded\": true,\n  \"text\": \"SPORTS\"\n}"
+  },
+  "ranAt": "2026-11-20T00:18:26.582Z"
+}

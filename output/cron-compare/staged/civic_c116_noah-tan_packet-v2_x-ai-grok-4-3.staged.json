@@ -1,0 +1,59 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "116",
+  "persona": "noah-tan",
+  "byline": "Noah Tan",
+  "bylinePopid": "POP-00157",
+  "article": "output/cron-compare/staged/civic_c116_noah-tan_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Ximena Mehta",
+        "role": "mentioned",
+        "popid": "POP-01039"
+      },
+      {
+        "name": "Adash Stanley",
+        "role": "mentioned",
+        "popid": "POP-01023",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "Yeah, I still see it that way. Six weeks of mild weather like this — that's not a punishment, that's a gift, and people treat it like one. They walk, they bike, they take the long way home around the lake. I don't look at a quiet 12th Street on a Saturday and think we're losing riders. I look at it and think everyone's outside enjoying the day before the fog rolls back in. That's just Oakland in the spring.",
+        "sourceRef": "citizenVoice PRESS Ximena Mehta"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-49d63ecd0a68",
+    "draftSha256": "2702176666af8fa225a6221cc1848863dad03d0ba236d2e3eff60e870ba88456",
+    "verdict": "output/cron-compare/civic_c116_noah-tan_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-11-19T00:16:49.003Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 400",
+      "words": 492,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "2702176666af8fa225a6221cc1848863dad03d0ba236d2e3eff60e870ba88456",
+      "costUsd": 0.0006
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-19T00:16:52.320Z"
+}

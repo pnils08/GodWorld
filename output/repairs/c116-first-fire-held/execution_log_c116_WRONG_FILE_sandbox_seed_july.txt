@@ -1,0 +1,125 @@
+Execution log 116 SANDBOX SEED
+3:00:10 PM	Notice	Execution started
+3:00:12 PM	Info	initializeSeededRng_: Initialized RNG with seed 1
+3:00:14 PM	Info	resetCycleAuditIssues_: Cleared audit issues for new cycle
+3:00:14 PM	Info	loadPreviousEvening_: Loaded evening data from cycle 115
+3:00:14 PM	Info	loadPreviousCycleState_: Restored state from cycle 115
+3:00:14 PM	Info	restoreCarriedRipples_: carried 0 economic + 1 initiative ripple(s) from cycle 115
+3:00:15 PM	Info	applySportsSeason_ v3.0: No feed entries for cycle 116
+3:00:15 PM	Info	Sports sentiment: A's = 0.100 (record: 81-25, season: playoffs, streak: W14, fan: high, media: national)
+3:00:15 PM	Info	Sports trigger: A's -> hot-streak @ Fruitvale
+3:00:15 PM	Info	Sports sentiment: NBA = -0.030 (record: Wed Feb 04 2026 00:00:00 GMT-0600 (Central Standard Time), season: playoffs, streak: -, fan: low, media: national)
+3:00:15 PM	Info	Sports trigger: NBA -> breaking-news @ Jack London
+3:00:15 PM	Info	Sports sentiment: Oaks = 0.040 (record: -, season: playoffs, streak: W5, fan: high, media: regional)
+3:00:15 PM	Info	Sports trigger: Oaks -> breaking-news @ Downtown
+3:00:15 PM	Info	applySportsFeedTriggers_ v3.0: Total sentiment adjustment: 0.110
+3:00:15 PM	Info	loadCivicVoiceSentiment_ v1.0: No civic sentiment file found (defaulting to 0)
+3:00:16 PM	Info	applyEditionCoverageEffects_ v2.1: No unprocessed entries for cycle 116
+3:00:16 PM	Info	  West Oakland Stabilization Fund: disbursement-active (economic) → intensity 1.00 → West Oakland
+3:00:16 PM	Info	  Oakland Alternative Response Initiative: dispatch-live (safety) → intensity 1.00 → West Oakland, Fruitvale, East Oakland
+3:00:16 PM	Info	  Fruitvale Transit Hub Phase II — Visioning: construction-planning (transit) → intensity 0.30 → Fruitvale
+3:00:16 PM	Info	  Temescal Community Health Center: construction-active (health) → intensity 0.80 → Temescal
+3:00:16 PM	Info	  Baylight District — Final Council Vote: construction-planning (sports) → intensity 0.30 → Jack London, Downtown
+3:00:16 PM	Info	  Oakland Youth Apprenticeship Pipeline: implementation-active (workforce) → intensity 0.80 → West Oakland, East Oakland, Fruitvale
+3:00:16 PM	Info	applyInitiativeImplementationEffects_ v1.0: 6 initiatives → sentiment 0.1020, 6 neighborhoods, 4 triggers
+3:00:17 PM	Info	applyCityDynamics_ engine.45 T3b: Crime ripple fired — cluster WATERFRONT_WEST, 1 prev-cycle spike(s)
+3:00:17 PM	Info	applyCityDynamics_ v3.0: Media feedback applied (sentiment 0.024, crisisSat 0.30, celebBuzz 0.36)
+3:00:17 PM	Info	applyCityDynamics_ engine.45 T3a: Sports sentiment boost applied — 0.1100
+3:00:18 PM	Info	[ContentLedger] 1 row(s) skipped fail-closed; 1 lines / 3 fragments loaded.
+3:00:20 PM	Info	generateCrisisBuckets_ v2.8: Spawned 1 crisis arcs
+3:00:23 PM	Info	batchUpdateNeighborhoodDemographics_: Updated 17 rows, added 0 new rows
+3:00:23 PM	Info	updateNeighborhoodDemographics_ v1.1: Updated 17 neighborhoods | Cycle 116
+3:00:26 PM	Info	runChaosCarsEngine_: 14 events | 0 tier-1 | 3 business cell writes | 0 friction
+3:00:27 PM	Info	loadRelationshipBonds_ v2.2: Loaded 319 active bonds
+3:00:27 PM	Info	seedRelationshipBonds_: Starting seed (current: 320)
+3:00:27 PM	Info	seedRelationshipBonds_: Loaded 869 active citizens
+3:00:27 PM	Info	seedRelationshipBonds_: Created 48 family bonds
+3:00:27 PM	Info	seedRelationshipBonds_: Created 232 neighborhood bonds
+3:00:27 PM	Info	seedRelationshipBonds_: Created 0 occupation bonds
+3:00:27 PM	Info	seedRelationshipBonds_: Created 41 random bonds
+3:00:27 PM	Info	seedRelationshipBonds_: Stored 321 bonds in ctx.summary.relationshipBonds
+3:00:27 PM	Info	seedRelationshipBonds_: Complete. Total bonds: 321
+3:00:29 PM	Info	civicInitiativeEngine v1.6: Processed 0 initiatives | Votes: 0 | Grants: 0 | Demographics: active
+3:00:30 PM	Info	  Warren Ashford (D7): 37 → 36 (Δ-1) Temescal Community Health Center performing despite opposition (-2), recovery toward 50 (+1)
+3:00:30 PM	Info	updateCivicApprovalRatings_ v1.1: Queued 1 approval rating updates
+3:00:30 PM	Info	updateCivicApprovalRatings_ v1.0: 1 officials updated, 0 threshold triggers
+3:00:30 PM	Info	generateCivicModeEvents v1.0: 11 events for CIVIC citizens
+3:00:30 PM	Info	generateMediaModeEvents v1.0: 11 events for MEDIA citizens
+3:00:33 PM	Info	runGenerationalEngine_ v2.4: 7 events | Recoveries: 0 | Deaths: 0
+3:00:34 PM	Info	runBondEngine_ v2.4: Loaded 22 neighborhoods from Neighborhood_Map
+3:00:34 PM	Info	ensureBondEngineData_ v2.4: activeCitizens=8, citizenLookup=892, sources=[Simulation_Ledger]
+3:00:34 PM	Info	detectNewBonds_ v2.4: Found 0 potential bonds from 8 active citizens (calendar: SpringEquinox)
+3:00:34 PM	Info	runBondEngine_ v2.4: Complete. Total bonds: 321 | Calendar: SpringEquinox
+3:00:41 PM	Info	processAdvancementIntake_ v1.4 starting - Cycle 116
+3:00:42 PM	Info	processAdvancementRows_: No data rows in intake
+3:00:42 PM	Info	processAdvancementIntake_ v1.4 complete: {"usageProcessed":0,"usageSkipped":0,"advancementsProcessed":0,"intakeProcessed":0,"promotionsTriggered":0,"errors":[]}
+3:00:42 PM	Info	processGenerationalWealth_ v2.1: Starting...
+3:00:42 PM	Info	processGenerationalWealth_ v2.1: Complete. Income: 346, Wealth: 900, Inheritance: 0, Mobility: 0, Homes: 0
+3:00:42 PM	Info	processEducationCareer_ v2.1: Starting...
+3:00:43 PM	Info	processEducationCareer_ v2.1: Complete. Education: 2, Career: 6, Stagnant: 333, Income: 0
+3:00:43 PM	Info	processGentrification_ v1.0: Starting...
+3:00:43 PM	Info	processGentrification_ v1.0: Complete.
+3:00:43 PM	Info	  Analyzed: 21, Gentrifying: 1, Alerts: 3
+3:00:43 PM	Info	processMigrationTracking_ v1.1: Starting...
+3:00:44 PM	Info	processMigrationTracking_ v1.1: Complete.
+3:00:44 PM	Info	  Assessed: 900, High risk: 13, Events: 0
+3:00:44 PM	Info	applyCivicLoadIndicator_ v2.3: Cycle 116 | Events (this cycle): 4 | Active arcs: 1 | Score: 14 | Load: load-strain
+3:00:45 PM	Info	runEconomicRippleEngine_ v2.5: mood=50.5 | ripples=0 | prevMigration=-6 | layoffs=0
+3:00:45 PM	Info	applyActiveInitiativeRipples_: 1 active, 0 expired this cycle
+3:00:47 PM	Info	Phase 6.5: Validation complete - PASS
+3:00:51 PM	Info	populateMediaIntake_ v2.3: Populated 3 media mentions
+3:00:51 PM	Info	runMediaFeedbackEngine_ v2.3: neutral | Holiday: SpringEquinox | Sports: unknown
+3:00:56 PM	Info	buildContractSeeds_: 9 seeds (6 major / 3 texture) from 11 ripples + 2076 citizen events, cycle 116 | container=1syShVWfudY0eCC9rnR7AWZ8-b-fs5RpJW2bhn6nZtzs
+3:00:57 PM	Info	loadActiveArcsFromLedger_: Loaded 36 active arcs from Event_Arc_Ledger
+3:00:57 PM	Info	processArcLifecycle_ v1.2: Processing 36 arcs
+3:00:57 PM	Info	processArcLifecycle_ v1.2: Complete. Resolutions: 0, Phase changes: 0
+3:00:58 PM	Info	updateStorylineStatus_ v1.2: Complete. Dormant: 0, Concluded: 0, Abandoned: 0, Reactivated: 0
+3:00:58 PM	Info	v3Integration v3.4: Cycle 116 | Calendar: SpringEquinox (minor) | FirstFriday: false | CreationDay: false | Sports: unknown
+3:00:58 PM	Info	eventArcEngine v3.7: Processed 36 arcs | cycle: 116 | phases: peak:36
+3:00:58 PM	Info	domainTracker_ v3.4: Cooldown on CIVIC (-3)
+3:00:58 PM	Info	chicagoSatelliteEngine_ v3.7: Cycle 116 | Weather: clear | Sentiment: 0.13 | Holiday: SpringEquinox | Bulls: off-season
+3:00:59 PM	Info	runEconomicRippleEngine_ v2.5: mood=51 | ripples=0 | prevMigration=-6 | layoffs=0
+3:00:59 PM	Info	runMediaFeedbackEngine_ v2.3: optimistic | Holiday: SpringEquinox | Sports: unknown
+3:00:59 PM	Info	runBondEngine_ v2.4: Loaded 22 neighborhoods from Neighborhood_Map
+3:00:59 PM	Info	ensureBondEngineData_ v2.4: activeCitizens=815, citizenLookup=892, sources=[]
+3:01:00 PM	Info	detectNewBonds_ v2.4: Found 0 potential bonds from 815 active citizens (calendar: SpringEquinox)
+3:01:00 PM	Info	runBondEngine_ v2.4: Complete. Total bonds: 321 | Calendar: SpringEquinox
+3:01:00 PM	Info	v3Integration v3.4: Complete | Modules: 8/8 | Arcs: 36 | Textures: 18 | Domains: 11 | Ripples: 0 | Bonds: 321
+3:01:00 PM	Info	compressLifeHistory_ v2.0: Updated 629, skipped 284, reflections 0/0 citizens, biases 2/2 citizens, unlived 3
+3:01:00 PM	Info	finalizeWorldPopulation_ v1.3: Queued intents for Cycle 116 | Holiday: SpringEquinox | Sports: unknown
+3:01:00 PM	Info	snapshotEveningForCarryForward_: Built snapshot for cycle 116 (3 hotspots, vol=10, safety=tense)
+3:01:01 PM	Info	recordCycleWeather_ v1.2: Queued weather for cycle 116 - mild 56°F
+3:01:01 PM	Info	recordWorldEvents25_ v2.2: Queued 9 events | Holiday: SpringEquinox | Sports: unknown
+3:01:01 PM	Info	recordWorldEventsv3_ v3.7: Queued 9 events for cycle 116
+3:01:01 PM	Info	saveV3NeighborhoodMap_ v3.6: Updated 21 neighborhoods | Cycle 116 | Holiday: SpringEquinox
+3:01:01 PM	Info	saveV3ArcsToLedger_ v3.3: Queued 36 arcs | Holiday: SpringEquinox | Sports: unknown
+3:01:02 PM	Info	saveRelationshipBonds_ v2.3: Queued 321 bonds for save
+3:01:02 PM	Info	saveV3BondsToLedger_ v2.4: Wrote 321 bond(s) for Cycle 116
+3:01:02 PM	Info	saveV3Domains_ v3.4: Queued row for Cycle 116 | Dominant: CIVIC | Total: 46 | Holiday: SpringEquinox
+3:01:03 PM	Info	migrateSeedDeckV4_: v3 deck parked as Story_Seed_Deck_v3_legacy_2 (11 rows kept)
+3:01:09 PM	Info	saveV3Seeds_ v4.0: Queued 9 contract seeds for cycle 116
+3:01:09 PM	Info	saveV3Hooks_ v3.5: Queued 23 hooks for cycle 116
+3:01:09 PM	Info	saveV3Textures_ v3.5: Queued 18 textures for cycle 116
+3:01:10 PM	Info	buildCyclePacket_ v3.8: Cycle 116 | Election: false
+3:01:12 PM	Info	generateMediaBriefing_ v2.5: Briefing generated for Cycle 116 | Holiday: SpringEquinox | Election: false
+3:01:12 PM	Info	recordMediaLedger_ v3.2: Queued 3 media entries
+3:01:12 PM	Info	saveCycleSeed_: Queued seed 1 for cycle 116
+3:01:12 PM	Info	saveEveningSnapshot_: Saved 955 bytes for cycle 116
+3:01:12 PM	Info	savePreviousCycleState_: Saved 4633 bytes for cycle 116
+3:01:12 PM	Info	executeEnsureIntent_: Ripple_Ledger already exists — no-op
+3:01:12 PM	Info	executeEnsureIntent_: Chaos_Cars already exists — no-op
+3:01:13 PM	Info	executeReplaceIntent_: Replaced Relationship_Bonds with 322 rows
+3:01:24 PM	Info	executePersistIntents_: Executed 156 intents in 11492ms
+3:01:24 PM	Info	processMediaIntake_ v2.6: Starting intake processing for cycle 116
+3:01:26 PM	Info	processStorylineIntake_: 0 new, 0 resolved
+3:01:26 PM	Info	routeCitizenUsageToIntake_: Routed 0 citizens (new: 0, existing: 0)
+3:01:26 PM	Info	processMediaIntake_ v2.6: Complete. Articles: 0, Storylines: 0, Citizens: 0, Routed: 0 (new: 0, existing: 0), Fame: 0 mentions → 0 updates
+3:01:30 PM	Info	archiveLifeHistory: maxCycle=116, retainCycles=12, cutoff=104, totalRows=27667
+3:01:30 PM	Info	archiveLifeHistory: 2148 rows to archive, 25519 rows to keep
+3:01:31 PM	Info	archiveLifeHistory: Appended 2148 rows to LifeHistory_Archive (now 19950 rows)
+3:01:46 PM	Info	archiveLifeHistory: LifeHistory_Log now has 25519 data rows
+3:01:46 PM	Info	Archived: 2148 rows across 1 cycles (C104-C104)
+3:01:46 PM	Info	archiveLifeHistory v1.0: COMPLETE — 2148 archived, 25519 retained
+3:01:46 PM	Info	Cache flush: 3 writes, 0 appends
+3:01:46 PM	Info	Cycle completed. Engine errors logged: 0; audit issues tracked: 1
+3:01:46 PM	Notice	Execution completed

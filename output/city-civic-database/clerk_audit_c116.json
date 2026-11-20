@@ -1,0 +1,30 @@
+{
+  "cycle": 116,
+  "checks": [
+    {
+      "check": "No single office contradicts itself within its own statements",
+      "pass": true,
+      "evidence": "Each seat's bullets are internally consistent (e.g., mayor_gavel holds INIT-001 pending C114 closeout throughout; council_d7 backs YES on INIT-009 with conditions across all three bullets; no office names two different figures for the same item in its own lines)."
+    },
+    {
+      "check": "Tracker updates use only contract phases",
+      "pass": true,
+      "evidence": "All phases in trackerUpdates are contract terms — construction-active (INIT-006), stalled (INIT-007), vote-scheduled (INIT-009), announced (INIT-014/015), vote-scheduled (INIT-001 via stabilization_fund), vote-ready (INIT-009), operational (INIT-002); no invented phase labels."
+    },
+    {
+      "check": "Statements read as in-world civic voice",
+      "pass": true,
+      "evidence": "All seats speak in-world as City Hall offices (mayor directing calendar holds, council members conditioning votes, Clerk-certified roll calls, merchant walkthroughs) without breaking to out-of-world framing."
+    }
+  ],
+  "overall": "pass",
+  "issues": [],
+  "missingVoices": [
+    "council_d1"
+  ],
+  "observations": [
+    "Cross-office disagreement (expected politics, not a failure): mayor_gavel and council_d6/okoro/stabilization_fund treat the charter renewal figure as $28M, consistent; but INIT-001 phase differs — mayor_gavel files no phase while stabilization_fund sets vote-scheduled; INIT-009 phase differs — mayor_gavel says vote-scheduled while stabilization_fund says vote-ready for the same $2.5M Grand Lake item.",
+    "INIT-014 C115 filing claim: mayor_gavel calls it unverified while council_d4 also holds pending a verifiable filing reference — consistent, no contradiction, noted for the apply gate.",
+    "INIT-015 Laurel: council_d9 and mayor_gavel both record missed deadline / announced-not-filed — aligned."
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "office": "worker_staff_manager",
+  "agentDir": "worker-staff-manager",
+  "holder": "Aaron Whitfield",
+  "popid": "POP-00040",
+  "title": "City Manager",
+  "date": "2026-11-17",
+  "cycle": 116,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "**City Manager's Weekly Report — Cycle 116, on the record**\n\n**Treasury.** The city closed the week with a balance of $131,753,831. The week's revenue came in three streams: the $5,000,000 weekly allocation, $917 in parking and traffic fines, and $108,884 in court receipts from 24 cleared charges fined at the hood rate. No extraordinary outlays this week; the projected position remains stable against standing commitments.\n\n**Initiatives.** Work proceeded on four fronts this Cycle (INIT-001, 002, 005, 015). I want to be plain with the Council about what is moving and what is not:\n\n- **INIT-001, West Oakland Stabilization Fund** ($28M, $20.6M remaining): disbursement is active; verification of the C114 closeout and charter-renewal consideration come to Council at Cycle 117.\n- **INIT-002, Oakland Alternative Response Initiative** ($12.5M, $10.82M remaining): dispatch is live. The D3 Fruitvale briefing record is to be executed and published, with D5 and Baylight dates filed, at Cycle 117.\n- **INIT-005, Temescal Community Health Center** ($45M, $15.58M remaining): operational, with the Q3 audit due to HCAI and the Clerk and the merchant walkthrough to complete.\n- **INIT-015, Laurel Patch and Clean-Up** ($6M, unspent): scope and outreach to be completed with a Clerk-verified filing by Cycle 117.\n- **INIT-007, Youth Apprenticeship Pipeline** ($12.5M, unspent): stalled. The placement-gap analysis and adjustment plan are overdue and I am flagging them for Cycle 117 as a priority, not a footnote.\n- The failed initiatives — INIT-008 through INIT-014 — carry no draw on the treasury, though several still have certification and publication actions pending (INIT-009 roll call, INIT-010 legal-support analysis). Those are paperwork obligations and I intend to see them discharged on schedule.\n\n**Services on the street.** A mixed week. The garbage truck missed a pickup in Dimond — a sentiment drag I don't like repeating. A sweeper beautified Lake Merritt and lifted retail vitality in East Oakland. A PG&E planned shutoff hit one business on BIZ-00075, while a dumping clearance served BIZ-00115. One resident, Grace Oyelaran, received a sweeper parking ticket. None of these are large, but the missed pickup in Dimond is the one I'd want corrected before it compounds.\n\n**City load.** Population 405,992, employment at 95.4%, illness at 3.96%. Traffic 1.11, retail 1.41, tourism 0.85, nightlife 1.14, public spaces 1.12, sentiment +0.09. Civic load is at minor variance; no shock and no pattern flagged. The city is carrying its load.\n\n**Events.** Nine events logged: two civic, two infrastructure, one health. The medium-severity public-works spike in Glenview is the item to watch; the misfiled document at Lake Merritt and the zoning adjustment in Temescal are routine and being handled.\n\n**Bottom line.** The books are in order and the city is stable. The work ahead of us at Cycle 117 is procedural and specific: file the audits and analyses, publish the briefings, and get the Laurel filing certified. I'll report on each as it closes.",
+  "moves": [],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-11-17T11:45:59.633Z",
+  "usage": {
+    "prompt_tokens": 2617,
+    "completion_tokens": 752,
+    "cost": 0.0007
+  },
+  "fellBackFrom": null,
+  "template": "worker/2",
+  "toolTrace": [],
+  "memory": {
+    "searchedOn": "city budget treasury services",
+    "entries": 1,
+    "fromSearch": 0,
+    "newest": 1,
+    "failed": []
+  },
+  "figuresNotHanded": [
+    "20.6",
+    "10.82",
+    "15.58",
+    "95.4%",
+    "3.96%"
+  ],
+  "finishReason": "stop",
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00040",
+    "id": "HSAq5JZhNcharwBjuPVkFq",
+    "customId": "cp-POP-00040-c116-CIVIC-datawake-2026-11-17"
+  }
+}

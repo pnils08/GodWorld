@@ -1,0 +1,64 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "115",
+  "provider": "openrouter",
+  "model": "openai/gpt-5.6-luna",
+  "configuredWriterModel": "openai/gpt-5.6-luna",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "talia-finch",
+  "byline": {
+    "name": "Talia Finch",
+    "popid": "POP-00592",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 12,
+  "quotesLanded": 3,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "canon_recall",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall"
+  ],
+  "toolCalls": 6,
+  "wordCount": 519,
+  "targetWords": "400-650",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": false,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 519,
+    "short": "The piece quotes postgame player remarks rather than letting the people in the room speak on what the city thinks of the franchise.",
+    "score": 2,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "fa8b230de75d84427f631fcbb1b2aae14498aca73418b3c9c50c8c4ab6f4278d",
+    "costUsd": 0.0015
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 2/3 — The piece quotes postgame player remarks rather than letting the people in the room speak on what the city thinks of the franchise."
+  },
+  "article": "output/cron-compare/staged/sports_c115_talia-finch_packet-v2_openai-gpt-5-6-luna.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "w.dotenvx.com]\n{\n  \"popId\": \"POP-00592\",\n  \"name\": \"Talia Finch\",\n  \"recorded\": true,\n  \"text\": \"filed: Harry Hayward is the name I keep hearing in San Antonio, even with the television turned low.\"\n}"
+  },
+  "ranAt": "2026-11-13T00:19:09.969Z",
+  "dispositionReconciledAt": "2026-11-14T18:00:02.912Z"
+}

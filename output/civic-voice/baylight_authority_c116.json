@@ -1,0 +1,46 @@
+{
+  "office": "baylight_authority",
+  "cycle": 116,
+  "speaker": "Keisha Ramos",
+  "cascadeSummary": "The Mayor's gavel set the C115 construction milestone as an evidence-gated event, and the evidence file is assembled. This cycle I conduct the review and publish the findings — the milestone is not declared passed before the findings say so. I let the low-severity Jack London and Downtown improvement flags pass without claiming a milestone or a final vote, and I hold the ImplementationPhase; the review determines whether it advances, not the calendar.",
+  "maraAnswer": {
+    "confrontationId": "CONF-115-civic-office-baylight-authority",
+    "kind": "deferral",
+    "text": "Mara — straight answer: the C115 review reached no pass determination, and I am not going to dress the assembled file up as a verdict. The evidence file is assembled and covers independent soil verification, 48-hour hotline logs, dust-control records on the haul routes, and the Jack London workforce results, but the review is conducted, not concluded. The tracker still reads C115 past due because the milestone determination is still open — an evidence file is not a milestone result, and construction-active is a phase, not a finding. On the public side: the file and the running hotline and dust records are open to inspection now, and I will publish the findings and the determination with their evidentiary basis, plus any unresolved remediation or workforce conditions, and correct the tracker entry when the determination is signed — Decision 5 requires exactly that public evidence-file determination before any future milestone decision, and that is the sequence I am holding to."
+  },
+  "statements": [
+    {
+      "statementId": "STMT-116-baylight_authority-001",
+      "type": "decision",
+      "topic": "Baylight District — Final Council Vote — evidence-file determination and oversight continuation",
+      "initiative": "INIT-006",
+      "decision": "Let the low-severity Jack London and Downtown improvement flags pass without declaring a construction milestone passed or claiming a final vote; continue remediation, independent oversight, the 48-hour hotline, dust control, and workforce oversight, and require a public evidence-file determination before any future milestone decision.",
+      "quote": "An improvement flag is not a construction finding, and an evidence file is not a verdict — I will not call a milestone passed because a file exists or because the street looks up.",
+      "fullStatement": "[Baylight District — Final Council Vote — C116 Evidence-File Determination] Keisha Ramos — I am letting the low-severity Jack London and Downtown improvement flags pass, and I want to be plain about what that does and does not mean. It does not mean a construction milestone passed. It does not mean a final vote. The Council, the Mayor, and this office are aligned on one rule: oversight documents must carry the weight of the next milestone, and upbeat street conditions cannot do that work for them. So remediation continues under independent verification, the 48-hour hotline stays live, dust control stays active on the haul routes, and workforce oversight keeps running. The evidence file assembled last cycle — independent soil verification, hotline logs, dust records, Jack London workforce results — is open to inspection, and it is the basis on which I will publish a determination. Until that determination is signed, the C115 review sits open on the tracker, and I will not paper over that with a calendar date. The soil sample doesn't care what we say about it. Neither does the record.",
+      "trackerUpdates": {
+        "initiative": "INIT-006",
+        "MilestoneNotes": "C116: Evidence-file review held open; low-severity flags passed, no milestone or final vote declared, oversight continues."
+      }
+    },
+    {
+      "statementId": "STMT-116-baylight_authority-002",
+      "type": "statement",
+      "topic": "Baylight C115 findings publication and tracker status",
+      "initiative": "INIT-006",
+      "decision": "Publish the C115 review status as conducted-not-concluded, with the evidence file open to inspection and the determination pending; keep the tracker entry unchanged until the determination is signed.",
+      "quote": "The review is conducted, not concluded — and I will not call a milestone passed because a file exists.",
+      "fullStatement": "[Baylight District Construction Milestone — C116 Determination Status] Keisha Ramos — I keep getting asked whether the C115 milestone passed, and the honest answer is that the review is conducted, not concluded. What exists is the evidence file: independent soil verification, the 48-hour hotline logs, dust-control records on the haul routes, and the Jack London workforce results, all open to inspection. What does not exist yet is a signed determination, and I will not manufacture one to make a tracker line look tidy. The tracker still reads C115 past due because that is the truth of where the review stands. When the determination is signed, I will publish it with its evidentiary basis and any unresolved remediation or workforce conditions, and the tracker will move because the finding moved it — not because the calendar did.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-116-baylight_authority-003",
+      "type": "statement",
+      "topic": "Jack London and Downtown community impact mitigation — running records",
+      "initiative": "INIT-006",
+      "decision": "Continue and document the 48-hour hotline, active dust control on haul routes, and Jack London workforce coordination while the evidence-file determination is pending.",
+      "quote": "The hotline and the dust records don't pause while a memo is written — they are what the review is measuring, and they keep running.",
+      "fullStatement": "[Baylight District Community Impact Mitigation — Jack London Oversight Carries In] Keisha Ramos — The low-severity improvement flags in Jack London and Downtown are good news about the street, but they are not a reason to stand down the protections. The 48-hour hotline stays live and answered. Dust control stays active on the haul routes and documented. The Jack London workforce coordination that put businesses across from the trades at the same table keeps meeting. If a reporter walks the fence line this week, what they should see is crews working under the same oversight as last cycle, dust records being filled in, and a hotline number on the plywood that rings a person. The hotline and the dust records don't pause while a memo is written — they are what the review is measuring, and they keep running.",
+      "trackerUpdates": {}
+    }
+  ]
+}

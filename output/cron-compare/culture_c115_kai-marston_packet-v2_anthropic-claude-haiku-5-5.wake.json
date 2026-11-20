@@ -1,0 +1,62 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "115",
+  "provider": "openrouter",
+  "model": "anthropic/claude-haiku-5.5",
+  "configuredWriterModel": "anthropic/claude-haiku-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "kai-marston",
+  "byline": {
+    "name": "Kai Marston",
+    "popid": "POP-00158",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 30,
+  "quotesLanded": 3,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "canon_recall",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall"
+  ],
+  "toolCalls": 4,
+  "wordCount": 739,
+  "targetWords": "500-800",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 500",
+    "words": 739,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "f647ab957201174fba6d8392178251f1942c2afac603e0ea16455b357847a4b7",
+    "costUsd": 0.0011
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/3 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/culture_c115_kai-marston_packet-v2_anthropic-claude-haiku-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "om ../.config/godworld/.env // tip: ⌘ custom filepath { path: '/custom/path/.env' }\n{\n  \"popId\": \"POP-00158\",\n  \"name\": \"Kai Marston\",\n  \"recorded\": true,\n  \"text\": \"filed: The Clipping on the Door\"\n}"
+  },
+  "ranAt": "2026-11-14T00:16:53.171Z",
+  "dispositionReconciledAt": "2026-11-14T18:00:02.746Z"
+}

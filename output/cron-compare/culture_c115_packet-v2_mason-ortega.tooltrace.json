@@ -1,0 +1,38 @@
+{
+  "model": "x-ai/grok-4.3",
+  "calls": [
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Manfred Owens"
+      },
+      "resultChars": 551,
+      "resultHead": "[C113 · daily · Tamsin Pruitt] Manfred Owens moved into a place of their own in Jack London, renting. They heard the rent talk on the block turn sharp. They noticed neighbors being more watchful today. They found a quiet minute at a bar patio and the hum of a bassline from a passing car. They walked the Mandela Parkway median under the trees and took the long way home. \"I've noticed that people around here are being more watchful lately, and there's been some sharp talk about rent on the block. It's making me a bit more aware of my surroundings,"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Iris Pham"
+      },
+      "resultChars": 1093,
+      "resultHead": "[C112 · daily · Nia Rook] In the Baylight District, the sidewalk outside the late-shift coffee window stayed busy long after the last cup was poured. A handful of regulars leaned against the ledge, phones still warm from the stream, trading glances when Iris Pham’s name came up again. She had moved up one spot on the night, the kind of quiet gain that registers first in the places where people already know her face from behind the counter. The barista’s flight carried a measured weight—credits earned without excess, systems held steady, no \n[C112 · daily · Nia Rook] At the corner booth of an u"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Oakland Casino Town"
+      },
+      "resultChars": 195,
+      "resultHead": "No published piece from before C115 came back for \"Oakland Casino Town\". That is not proof the paper never covered it (an empty answer can also be a failed lookup) — do not write that it did not."
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Bubic Burgers"
+      },
+      "resultChars": 189,
+      "resultHead": "No published piece from before C115 came back for \"Bubic Burgers\". That is not proof the paper never covered it (an empty answer can also be a failed lookup) — do not write that it did not."
+    }
+  ],
+  "ranAt": "2026-11-14T00:15:22.224Z"
+}

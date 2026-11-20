@@ -52,5 +52,6 @@
     "recorded": true,
     "out": "ig/godworld/.env // tip: ⌘ enable debugging { debug: true }\n{\n  \"popId\": \"POP-00591\",\n  \"name\": \"Selena Grant\",\n  \"recorded\": true,\n  \"text\": \"filed: Harry Hayward’s 22 Minutes Changed the Question\"\n}"
   },
-  "ranAt": "2026-11-11T00:19:02.635Z"
+  "ranAt": "2026-11-11T00:19:02.635Z",
+  "dispositionReconciledAt": "2026-11-14T18:00:02.883Z"
 }

@@ -1,0 +1,46 @@
+{
+  "model": "x-ai/grok-4.3",
+  "calls": [
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Rico Valez"
+      },
+      "resultChars": 3233,
+      "resultHead": "[C79 · edition] The overcast sky, sixty-two degrees and holding, kept the light soft and even. No glare. No squinting. Just that gray-pearl Oakland summer sky that makes neon signs and gallery lighting pop like they were designed for exactly this weather. In KONO, Sculptor Alma Vasquez had new work visible through the broad front window of her studio — steel and reclaimed wood pieces that looked like they were arguing with each other about what a bridge is supposed to do. A small crowd gathered on the sidewalk, peering in. Vasquez\n[C83 · piece] Up close it was abstract. From the far sidewalk, "
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Rowan Pierce"
+      },
+      "resultChars": 2740,
+      "resultHead": "[C111 · daily · Sharon Okafor] # When a Name Stops Arriving Piedmont Ave is where Lena Cross now occupies a strange kind of public space: present in the city’s conversation, but less urgently than before. Cross remains a Global-tier Arts celebrity, yet her trajectory is cooling, with 17 media mentions. The phrase “where-are-they-now” has a particular lifestyle weight. It turns a person into a question people carry around, one that can outlast the answer. Rowan Pierce is in the same neighborhood and moving through a similar narrowing of attention\n[C112 · daily · Kai Marston] Rockridge has a par"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Vinnie Keane"
+      },
+      "resultChars": 3221,
+      "resultHead": "[C100 · edition] Origins - Vinnie Keane Vinnie Keane - The Complete Origins (Parts I through IV) Written by Hal Richmond Part I - The Dock and the Dream He came from the water. Not the kind that glimmers in postcards, but the cold Atlantic that chews at the Massachusetts coast until the docks creak and the gulls go quiet. Vinnie Keane grew up the youngest of five children in a two-bedroom house where dinner smelled of diesel, salt, and hope. His father worked the harbor, a dock fisherman who measured time by tides and storms. His m\n[C100 · edition] Numbers could not contain him. His worth live"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Evan Lewis"
+      },
+      "resultChars": 186,
+      "resultHead": "No published piece from before C115 came back for \"Evan Lewis\". That is not proof the paper never covered it (an empty answer can also be a failed lookup) — do not write that it did not."
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Anthony Raines"
+      },
+      "resultChars": 51,
+      "resultHead": "tool budget exhausted — compose from what you have."
+    }
+  ],
+  "ranAt": "2026-11-14T00:19:02.406Z"
+}

@@ -1,0 +1,594 @@
+[
+  {
+    "pop": "POP-00136",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00136\",\"name\":\"Rafael Montez\",\"role\":\"Police Chief\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Sgt. Rachel Torres\",\"question\":\"Using only the supplied facts, what about \\\"The gap between Downtown's incident count and its clearance rate, and who answers for it across the 22-neighborhood table.\\\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-safety\",\"hood\":\"Downtown\",\"focus\":\"The gap between Downtown's incident count and its clearance rate, and who answers for it across the 22-neighborhood table.\",\"src\":\"output/beats/Crime_Metrics.jsonl @C116\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Rafael Montez — Police Chief — Oakland Police Department\",\"evidence\":[{\"id\":\"EV-167b240c9e\",\"src\":\"output/beats/Crime_Metrics.jsonl @C116\",\"text\":\"Downtown leads the incident count; Jack London waits longest for a response; 48 in custody citywide; 39 public-safety staff on the roster.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C116\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-871096fd8925\"},{\"t\":\"FACT\",\"text\":\"Downtown logged the most incidents (8) | 22 neighborhoods on the table\",\"src\":\"output/beats/Crime_Metrics.jsonl @C116\",\"id\":\"F-aab638a9fd42\"},{\"t\":\"FACT\",\"text\":\"Downtown leads the incident count; Jack London waits longest for a response; 48 in custody citywide; 39 public-safety staff on the roster.\",\"src\":\"output/beats/Crime_Metrics.jsonl @C116\",\"id\":\"F-ebf70137eaea\"},{\"t\":\"FACT\",\"text\":\"125 incidents across 22 neighborhoods; most in Downtown 8, Grand Lake 7, Lake Merritt 7, Fruitvale 6, Eastlake 6; fewest in Adams Point 5, Jack London 5, Chinatown 4\",\"src\":\"output/beats/Crime_Metrics.jsonl @C116\",\"id\":\"F-31d4f44809f2\"},{\"t\":\"FACT\",\"text\":\"Downtown: 8 incidents (+3 vs C115), response 10.1 min, clearance 20%, property index 37, violent index 20\",\"src\":\"output/beats/Crime_Metrics.jsonl @C116\",\"id\":\"F-826a5a5ce305\"},{\"t\":\"FACT\",\"text\":\"Slowest response: Jack London: 5 incidents (-1 vs C115), response 10.9 min, clearance 22%, property index 37, violent index 22\",\"src\":\"output/beats/Crime_Metrics.jsonl @C116\",\"id\":\"F-c41499e47fe8\"},{\"t\":\"FACT\",\"text\":\"Moved this cycle — rising: Grand Lake; easing: none\",\"src\":\"output/beats/Crime_Metrics.jsonl @C116\",\"id\":\"F-7be042c7340c\"},{\"t\":\"FACT\",\"text\":\"Citywide custody this cycle: 24 arrests (0 tracked, 24 other residents); 48 in custody at the close; 43 left\",\"src\":\"output/beats/Care_Justice_Census.jsonl judicial @C116 city\",\"id\":\"F-9a56ec2b9631\"},{\"t\":\"FACT\",\"text\":\"Rafael Montez — Police Chief — Oakland Police Department\",\"src\":\"Simulation_Ledger profile for POP-00136\",\"id\":\"F-50c22c9cdd5a\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C12, Spring, holiday=Spring Equinox\",\"src\":\"output/world_summary_c116.md Calendar context (Simulation_Calendar)\",\"id\":\"F-647fd9067a33\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00136",
+        "name": "Rafael Montez",
+        "role": "Police Chief",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Sgt. Rachel Torres",
+        "question": "Using only the supplied facts, what about \"The gap between Downtown's incident count and its clearance rate, and who answers for it across the 22-neighborhood table.\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-safety",
+        "hood": "Downtown",
+        "focus": "The gap between Downtown's incident count and its clearance rate, and who answers for it across the 22-neighborhood table.",
+        "src": "output/beats/Crime_Metrics.jsonl @C116"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Rafael Montez — Police Chief — Oakland Police Department",
+        "evidence": [
+          {
+            "id": "EV-167b240c9e",
+            "src": "output/beats/Crime_Metrics.jsonl @C116",
+            "text": "Downtown leads the incident count; Jack London waits longest for a response; 48 in custody citywide; 39 public-safety staff on the roster."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C116",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-871096fd8925"
+        },
+        {
+          "t": "FACT",
+          "text": "Downtown logged the most incidents (8) | 22 neighborhoods on the table",
+          "src": "output/beats/Crime_Metrics.jsonl @C116",
+          "id": "F-aab638a9fd42"
+        },
+        {
+          "t": "FACT",
+          "text": "Downtown leads the incident count; Jack London waits longest for a response; 48 in custody citywide; 39 public-safety staff on the roster.",
+          "src": "output/beats/Crime_Metrics.jsonl @C116",
+          "id": "F-ebf70137eaea"
+        },
+        {
+          "t": "FACT",
+          "text": "125 incidents across 22 neighborhoods; most in Downtown 8, Grand Lake 7, Lake Merritt 7, Fruitvale 6, Eastlake 6; fewest in Adams Point 5, Jack London 5, Chinatown 4",
+          "src": "output/beats/Crime_Metrics.jsonl @C116",
+          "id": "F-31d4f44809f2"
+        },
+        {
+          "t": "FACT",
+          "text": "Downtown: 8 incidents (+3 vs C115), response 10.1 min, clearance 20%, property index 37, violent index 20",
+          "src": "output/beats/Crime_Metrics.jsonl @C116",
+          "id": "F-826a5a5ce305"
+        },
+        {
+          "t": "FACT",
+          "text": "Slowest response: Jack London: 5 incidents (-1 vs C115), response 10.9 min, clearance 22%, property index 37, violent index 22",
+          "src": "output/beats/Crime_Metrics.jsonl @C116",
+          "id": "F-c41499e47fe8"
+        },
+        {
+          "t": "FACT",
+          "text": "Moved this cycle — rising: Grand Lake; easing: none",
+          "src": "output/beats/Crime_Metrics.jsonl @C116",
+          "id": "F-7be042c7340c"
+        },
+        {
+          "t": "FACT",
+          "text": "Citywide custody this cycle: 24 arrests (0 tracked, 24 other residents); 48 in custody at the close; 43 left",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C116 city",
+          "id": "F-9a56ec2b9631"
+        },
+        {
+          "t": "FACT",
+          "text": "Rafael Montez — Police Chief — Oakland Police Department",
+          "src": "Simulation_Ledger profile for POP-00136",
+          "id": "F-50c22c9cdd5a"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+          "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+          "id": "F-647fd9067a33"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00137",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00137\",\"name\":\"Kimberly Cho\",\"role\":\"DEPUTY CHIEF OF OPERATIONS\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Sgt. Rachel Torres\",\"question\":\"Using only the supplied facts, what about \\\"The gap between Downtown's incident count and its clearance rate, and who answers for it across the 22-neighborhood table.\\\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-safety\",\"hood\":\"Downtown\",\"focus\":\"The gap between Downtown's incident count and its clearance rate, and who answers for it across the 22-neighborhood table.\",\"src\":\"output/beats/Crime_Metrics.jsonl @C116\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Kimberly Cho — DEPUTY CHIEF OF OPERATIONS — Oakland Police Department\",\"evidence\":[{\"id\":\"EV-87c819fe38\",\"src\":\"output/beats/Crime_Metrics.jsonl @C116\",\"text\":\"Downtown leads the incident count; Jack London waits longest for a response; 48 in custody citywide; 39 public-safety staff on the roster.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C116\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-871096fd8925\"},{\"t\":\"FACT\",\"text\":\"Downtown logged the most incidents (8) | 22 neighborhoods on the table\",\"src\":\"output/beats/Crime_Metrics.jsonl @C116\",\"id\":\"F-aab638a9fd42\"},{\"t\":\"FACT\",\"text\":\"Downtown leads the incident count; Jack London waits longest for a response; 48 in custody citywide; 39 public-safety staff on the roster.\",\"src\":\"output/beats/Crime_Metrics.jsonl @C116\",\"id\":\"F-ebf70137eaea\"},{\"t\":\"FACT\",\"text\":\"125 incidents across 22 neighborhoods; most in Downtown 8, Grand Lake 7, Lake Merritt 7, Fruitvale 6, Eastlake 6; fewest in Adams Point 5, Jack London 5, Chinatown 4\",\"src\":\"output/beats/Crime_Metrics.jsonl @C116\",\"id\":\"F-31d4f44809f2\"},{\"t\":\"FACT\",\"text\":\"Downtown: 8 incidents (+3 vs C115), response 10.1 min, clearance 20%, property index 37, violent index 20\",\"src\":\"output/beats/Crime_Metrics.jsonl @C116\",\"id\":\"F-826a5a5ce305\"},{\"t\":\"FACT\",\"text\":\"Slowest response: Jack London: 5 incidents (-1 vs C115), response 10.9 min, clearance 22%, property index 37, violent index 22\",\"src\":\"output/beats/Crime_Metrics.jsonl @C116\",\"id\":\"F-c41499e47fe8\"},{\"t\":\"FACT\",\"text\":\"Moved this cycle — rising: Grand Lake; easing: none\",\"src\":\"output/beats/Crime_Metrics.jsonl @C116\",\"id\":\"F-7be042c7340c\"},{\"t\":\"FACT\",\"text\":\"Citywide custody this cycle: 24 arrests (0 tracked, 24 other residents); 48 in custody at the close; 43 left\",\"src\":\"output/beats/Care_Justice_Census.jsonl judicial @C116 city\",\"id\":\"F-9a56ec2b9631\"},{\"t\":\"FACT\",\"text\":\"Kimberly Cho — DEPUTY CHIEF OF OPERATIONS — Oakland Police Department\",\"src\":\"Simulation_Ledger profile for POP-00137\",\"id\":\"F-824d30ff6008\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C12, Spring, holiday=Spring Equinox\",\"src\":\"output/world_summary_c116.md Calendar context (Simulation_Calendar)\",\"id\":\"F-647fd9067a33\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00137",
+        "name": "Kimberly Cho",
+        "role": "DEPUTY CHIEF OF OPERATIONS",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Sgt. Rachel Torres",
+        "question": "Using only the supplied facts, what about \"The gap between Downtown's incident count and its clearance rate, and who answers for it across the 22-neighborhood table.\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-safety",
+        "hood": "Downtown",
+        "focus": "The gap between Downtown's incident count and its clearance rate, and who answers for it across the 22-neighborhood table.",
+        "src": "output/beats/Crime_Metrics.jsonl @C116"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Kimberly Cho — DEPUTY CHIEF OF OPERATIONS — Oakland Police Department",
+        "evidence": [
+          {
+            "id": "EV-87c819fe38",
+            "src": "output/beats/Crime_Metrics.jsonl @C116",
+            "text": "Downtown leads the incident count; Jack London waits longest for a response; 48 in custody citywide; 39 public-safety staff on the roster."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C116",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-871096fd8925"
+        },
+        {
+          "t": "FACT",
+          "text": "Downtown logged the most incidents (8) | 22 neighborhoods on the table",
+          "src": "output/beats/Crime_Metrics.jsonl @C116",
+          "id": "F-aab638a9fd42"
+        },
+        {
+          "t": "FACT",
+          "text": "Downtown leads the incident count; Jack London waits longest for a response; 48 in custody citywide; 39 public-safety staff on the roster.",
+          "src": "output/beats/Crime_Metrics.jsonl @C116",
+          "id": "F-ebf70137eaea"
+        },
+        {
+          "t": "FACT",
+          "text": "125 incidents across 22 neighborhoods; most in Downtown 8, Grand Lake 7, Lake Merritt 7, Fruitvale 6, Eastlake 6; fewest in Adams Point 5, Jack London 5, Chinatown 4",
+          "src": "output/beats/Crime_Metrics.jsonl @C116",
+          "id": "F-31d4f44809f2"
+        },
+        {
+          "t": "FACT",
+          "text": "Downtown: 8 incidents (+3 vs C115), response 10.1 min, clearance 20%, property index 37, violent index 20",
+          "src": "output/beats/Crime_Metrics.jsonl @C116",
+          "id": "F-826a5a5ce305"
+        },
+        {
+          "t": "FACT",
+          "text": "Slowest response: Jack London: 5 incidents (-1 vs C115), response 10.9 min, clearance 22%, property index 37, violent index 22",
+          "src": "output/beats/Crime_Metrics.jsonl @C116",
+          "id": "F-c41499e47fe8"
+        },
+        {
+          "t": "FACT",
+          "text": "Moved this cycle — rising: Grand Lake; easing: none",
+          "src": "output/beats/Crime_Metrics.jsonl @C116",
+          "id": "F-7be042c7340c"
+        },
+        {
+          "t": "FACT",
+          "text": "Citywide custody this cycle: 24 arrests (0 tracked, 24 other residents); 48 in custody at the close; 43 left",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C116 city",
+          "id": "F-9a56ec2b9631"
+        },
+        {
+          "t": "FACT",
+          "text": "Kimberly Cho — DEPUTY CHIEF OF OPERATIONS — Oakland Police Department",
+          "src": "Simulation_Ledger profile for POP-00137",
+          "id": "F-824d30ff6008"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+          "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+          "id": "F-647fd9067a33"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01141",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01141\",\"name\":\"Dolores Nwachukwu\",\"role\":\"Police Captain\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Sgt. Rachel Torres\",\"question\":\"Captain Nwachukwu, Downtown's eight charges produced two arrests and three held at close. Where does that case flow break down? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-safety\",\"hood\":\"Downtown\",\"focus\":\"The gap between Downtown's incident count and its clearance rate, and who answers for it across the 22-neighborhood table.\",\"src\":\"output/beats/Crime_Metrics.jsonl @C116\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Dolores Nwachukwu — Police Captain — Oakland Police Department\",\"evidence\":[{\"id\":\"EV-6f0a4e419d\",\"src\":\"output/beats/Crime_Metrics.jsonl @C116\",\"text\":\"Downtown leads the incident count; Jack London waits longest for a response; 48 in custody citywide; 39 public-safety staff on the roster.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C116\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-871096fd8925\"},{\"t\":\"FACT\",\"text\":\"Downtown logged the most incidents (8) | 22 neighborhoods on the table\",\"src\":\"output/beats/Crime_Metrics.jsonl @C116\",\"id\":\"F-aab638a9fd42\"},{\"t\":\"FACT\",\"text\":\"Downtown leads the incident count; Jack London waits longest for a response; 48 in custody citywide; 39 public-safety staff on the roster.\",\"src\":\"output/beats/Crime_Metrics.jsonl @C116\",\"id\":\"F-ebf70137eaea\"},{\"t\":\"FACT\",\"text\":\"125 incidents across 22 neighborhoods; most in Downtown 8, Grand Lake 7, Lake Merritt 7, Fruitvale 6, Eastlake 6; fewest in Adams Point 5, Jack London 5, Chinatown 4\",\"src\":\"output/beats/Crime_Metrics.jsonl @C116\",\"id\":\"F-31d4f44809f2\"},{\"t\":\"FACT\",\"text\":\"Downtown: 8 incidents (+3 vs C115), response 10.1 min, clearance 20%, property index 37, violent index 20\",\"src\":\"output/beats/Crime_Metrics.jsonl @C116\",\"id\":\"F-826a5a5ce305\"},{\"t\":\"FACT\",\"text\":\"Slowest response: Jack London: 5 incidents (-1 vs C115), response 10.9 min, clearance 22%, property index 37, violent index 22\",\"src\":\"output/beats/Crime_Metrics.jsonl @C116\",\"id\":\"F-c41499e47fe8\"},{\"t\":\"FACT\",\"text\":\"Moved this cycle — rising: Grand Lake; easing: none\",\"src\":\"output/beats/Crime_Metrics.jsonl @C116\",\"id\":\"F-7be042c7340c\"},{\"t\":\"FACT\",\"text\":\"Citywide custody this cycle: 24 arrests (0 tracked, 24 other residents); 48 in custody at the close; 43 left\",\"src\":\"output/beats/Care_Justice_Census.jsonl judicial @C116 city\",\"id\":\"F-9a56ec2b9631\"},{\"t\":\"FACT\",\"text\":\"Dolores Nwachukwu — Police Captain — Oakland Police Department\",\"src\":\"Simulation_Ledger profile for POP-01141\",\"id\":\"F-7118a8770ecf\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C12, Spring, holiday=Spring Equinox\",\"src\":\"output/world_summary_c116.md Calendar context (Simulation_Calendar)\",\"id\":\"F-647fd9067a33\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01141",
+        "name": "Dolores Nwachukwu",
+        "role": "Police Captain",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Sgt. Rachel Torres",
+        "question": "Captain Nwachukwu, Downtown's eight charges produced two arrests and three held at close. Where does that case flow break down? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-safety",
+        "hood": "Downtown",
+        "focus": "The gap between Downtown's incident count and its clearance rate, and who answers for it across the 22-neighborhood table.",
+        "src": "output/beats/Crime_Metrics.jsonl @C116"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Dolores Nwachukwu — Police Captain — Oakland Police Department",
+        "evidence": [
+          {
+            "id": "EV-6f0a4e419d",
+            "src": "output/beats/Crime_Metrics.jsonl @C116",
+            "text": "Downtown leads the incident count; Jack London waits longest for a response; 48 in custody citywide; 39 public-safety staff on the roster."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C116",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-871096fd8925"
+        },
+        {
+          "t": "FACT",
+          "text": "Downtown logged the most incidents (8) | 22 neighborhoods on the table",
+          "src": "output/beats/Crime_Metrics.jsonl @C116",
+          "id": "F-aab638a9fd42"
+        },
+        {
+          "t": "FACT",
+          "text": "Downtown leads the incident count; Jack London waits longest for a response; 48 in custody citywide; 39 public-safety staff on the roster.",
+          "src": "output/beats/Crime_Metrics.jsonl @C116",
+          "id": "F-ebf70137eaea"
+        },
+        {
+          "t": "FACT",
+          "text": "125 incidents across 22 neighborhoods; most in Downtown 8, Grand Lake 7, Lake Merritt 7, Fruitvale 6, Eastlake 6; fewest in Adams Point 5, Jack London 5, Chinatown 4",
+          "src": "output/beats/Crime_Metrics.jsonl @C116",
+          "id": "F-31d4f44809f2"
+        },
+        {
+          "t": "FACT",
+          "text": "Downtown: 8 incidents (+3 vs C115), response 10.1 min, clearance 20%, property index 37, violent index 20",
+          "src": "output/beats/Crime_Metrics.jsonl @C116",
+          "id": "F-826a5a5ce305"
+        },
+        {
+          "t": "FACT",
+          "text": "Slowest response: Jack London: 5 incidents (-1 vs C115), response 10.9 min, clearance 22%, property index 37, violent index 22",
+          "src": "output/beats/Crime_Metrics.jsonl @C116",
+          "id": "F-c41499e47fe8"
+        },
+        {
+          "t": "FACT",
+          "text": "Moved this cycle — rising: Grand Lake; easing: none",
+          "src": "output/beats/Crime_Metrics.jsonl @C116",
+          "id": "F-7be042c7340c"
+        },
+        {
+          "t": "FACT",
+          "text": "Citywide custody this cycle: 24 arrests (0 tracked, 24 other residents); 48 in custody at the close; 43 left",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C116 city",
+          "id": "F-9a56ec2b9631"
+        },
+        {
+          "t": "FACT",
+          "text": "Dolores Nwachukwu — Police Captain — Oakland Police Department",
+          "src": "Simulation_Ledger profile for POP-01141",
+          "id": "F-7118a8770ecf"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+          "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+          "id": "F-647fd9067a33"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00138",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00138\",\"name\":\"Leonard Briggs\",\"role\":\"DEPUTY CHIEF OF COMMUNITY ENGAGEMENT\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Sgt. Rachel Torres\",\"question\":\"Using only the supplied facts, what about \\\"The gap between Downtown's incident count and its clearance rate, and who answers for it across the 22-neighborhood table.\\\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-safety\",\"hood\":\"Downtown\",\"focus\":\"The gap between Downtown's incident count and its clearance rate, and who answers for it across the 22-neighborhood table.\",\"src\":\"output/beats/Crime_Metrics.jsonl @C116\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Leonard Briggs — DEPUTY CHIEF OF COMMUNITY ENGAGEMENT — Oakland Police Department\",\"evidence\":[{\"id\":\"EV-20c6de33a4\",\"src\":\"output/beats/Crime_Metrics.jsonl @C116\",\"text\":\"Downtown leads the incident count; Jack London waits longest for a response; 48 in custody citywide; 39 public-safety staff on the roster.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C116\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-871096fd8925\"},{\"t\":\"FACT\",\"text\":\"Downtown logged the most incidents (8) | 22 neighborhoods on the table\",\"src\":\"output/beats/Crime_Metrics.jsonl @C116\",\"id\":\"F-aab638a9fd42\"},{\"t\":\"FACT\",\"text\":\"Downtown leads the incident count; Jack London waits longest for a response; 48 in custody citywide; 39 public-safety staff on the roster.\",\"src\":\"output/beats/Crime_Metrics.jsonl @C116\",\"id\":\"F-ebf70137eaea\"},{\"t\":\"FACT\",\"text\":\"125 incidents across 22 neighborhoods; most in Downtown 8, Grand Lake 7, Lake Merritt 7, Fruitvale 6, Eastlake 6; fewest in Adams Point 5, Jack London 5, Chinatown 4\",\"src\":\"output/beats/Crime_Metrics.jsonl @C116\",\"id\":\"F-31d4f44809f2\"},{\"t\":\"FACT\",\"text\":\"Downtown: 8 incidents (+3 vs C115), response 10.1 min, clearance 20%, property index 37, violent index 20\",\"src\":\"output/beats/Crime_Metrics.jsonl @C116\",\"id\":\"F-826a5a5ce305\"},{\"t\":\"FACT\",\"text\":\"Slowest response: Jack London: 5 incidents (-1 vs C115), response 10.9 min, clearance 22%, property index 37, violent index 22\",\"src\":\"output/beats/Crime_Metrics.jsonl @C116\",\"id\":\"F-c41499e47fe8\"},{\"t\":\"FACT\",\"text\":\"Moved this cycle — rising: Grand Lake; easing: none\",\"src\":\"output/beats/Crime_Metrics.jsonl @C116\",\"id\":\"F-7be042c7340c\"},{\"t\":\"FACT\",\"text\":\"Citywide custody this cycle: 24 arrests (0 tracked, 24 other residents); 48 in custody at the close; 43 left\",\"src\":\"output/beats/Care_Justice_Census.jsonl judicial @C116 city\",\"id\":\"F-9a56ec2b9631\"},{\"t\":\"FACT\",\"text\":\"Leonard Briggs — DEPUTY CHIEF OF COMMUNITY ENGAGEMENT — Oakland Police Department\",\"src\":\"Simulation_Ledger profile for POP-00138\",\"id\":\"F-9e4490506512\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C12, Spring, holiday=Spring Equinox\",\"src\":\"output/world_summary_c116.md Calendar context (Simulation_Calendar)\",\"id\":\"F-647fd9067a33\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00138",
+        "name": "Leonard Briggs",
+        "role": "DEPUTY CHIEF OF COMMUNITY ENGAGEMENT",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Sgt. Rachel Torres",
+        "question": "Using only the supplied facts, what about \"The gap between Downtown's incident count and its clearance rate, and who answers for it across the 22-neighborhood table.\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-safety",
+        "hood": "Downtown",
+        "focus": "The gap between Downtown's incident count and its clearance rate, and who answers for it across the 22-neighborhood table.",
+        "src": "output/beats/Crime_Metrics.jsonl @C116"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Leonard Briggs — DEPUTY CHIEF OF COMMUNITY ENGAGEMENT — Oakland Police Department",
+        "evidence": [
+          {
+            "id": "EV-20c6de33a4",
+            "src": "output/beats/Crime_Metrics.jsonl @C116",
+            "text": "Downtown leads the incident count; Jack London waits longest for a response; 48 in custody citywide; 39 public-safety staff on the roster."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C116",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-871096fd8925"
+        },
+        {
+          "t": "FACT",
+          "text": "Downtown logged the most incidents (8) | 22 neighborhoods on the table",
+          "src": "output/beats/Crime_Metrics.jsonl @C116",
+          "id": "F-aab638a9fd42"
+        },
+        {
+          "t": "FACT",
+          "text": "Downtown leads the incident count; Jack London waits longest for a response; 48 in custody citywide; 39 public-safety staff on the roster.",
+          "src": "output/beats/Crime_Metrics.jsonl @C116",
+          "id": "F-ebf70137eaea"
+        },
+        {
+          "t": "FACT",
+          "text": "125 incidents across 22 neighborhoods; most in Downtown 8, Grand Lake 7, Lake Merritt 7, Fruitvale 6, Eastlake 6; fewest in Adams Point 5, Jack London 5, Chinatown 4",
+          "src": "output/beats/Crime_Metrics.jsonl @C116",
+          "id": "F-31d4f44809f2"
+        },
+        {
+          "t": "FACT",
+          "text": "Downtown: 8 incidents (+3 vs C115), response 10.1 min, clearance 20%, property index 37, violent index 20",
+          "src": "output/beats/Crime_Metrics.jsonl @C116",
+          "id": "F-826a5a5ce305"
+        },
+        {
+          "t": "FACT",
+          "text": "Slowest response: Jack London: 5 incidents (-1 vs C115), response 10.9 min, clearance 22%, property index 37, violent index 22",
+          "src": "output/beats/Crime_Metrics.jsonl @C116",
+          "id": "F-c41499e47fe8"
+        },
+        {
+          "t": "FACT",
+          "text": "Moved this cycle — rising: Grand Lake; easing: none",
+          "src": "output/beats/Crime_Metrics.jsonl @C116",
+          "id": "F-7be042c7340c"
+        },
+        {
+          "t": "FACT",
+          "text": "Citywide custody this cycle: 24 arrests (0 tracked, 24 other residents); 48 in custody at the close; 43 left",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C116 city",
+          "id": "F-9a56ec2b9631"
+        },
+        {
+          "t": "FACT",
+          "text": "Leonard Briggs — DEPUTY CHIEF OF COMMUNITY ENGAGEMENT — Oakland Police Department",
+          "src": "Simulation_Ledger profile for POP-00138",
+          "id": "F-9e4490506512"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+          "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+          "id": "F-647fd9067a33"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  }
+]

@@ -1,0 +1,30 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ enable debugging { debug: true }
+{
+ "label": "e350-f3",
+ "expect": 118,
+ "at": "2026-11-18T21:26:51.960Z",
+ "pre": {
+  "bench": 118,
+  "live": 116,
+  "ee": 9,
+  "rileyLast": 118,
+  "checkpoint": null
+ },
+ "wallS": 232,
+ "http": 200,
+ "resp": {
+  "ok": true,
+  "state": "done",
+  "ranMs": 227581,
+  "persistErrors": []
+ },
+ "post": {
+  "bench": 119,
+  "live": 116,
+  "ee": 9,
+  "rileyLast": 119,
+  "checkpoint": null
+ },
+ "newEE": [],
+ "verdict": "PASS"
+}

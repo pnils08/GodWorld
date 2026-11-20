@@ -1,0 +1,1195 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "116",
+  "persona": "freelance-firebrand",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Jax Caldera",
+    "popid": "POP-00799"
+  },
+  "assignment": {
+    "story": {
+      "ref": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+      "label": "KONO: decay [RetailVitality -1.06, HousingPressure +1.000] — RetailVitality now 8.68 (12 of 22, city median 9.21); HousingPressure now 1.5 (15 of 22, city median 0); Sentiment now 0.05 (15 of 22, city median 0.06) — with no matching active initiative",
+      "kind": "anomaly",
+      "angle": "The map says decay; the program roster does not answer it.",
+      "hookLine": null,
+      "hood": "KONO",
+      "popids": [
+        "POP-00596",
+        "POP-01061",
+        "POP-01111",
+        "POP-00276",
+        "POP-00650",
+        "POP-01017",
+        "POP-00791",
+        "POP-00935",
+        "POP-00471"
+      ],
+      "citizens": [
+        "Michael Corliss — Photographer, KONO",
+        "Celeste Moon — singer, KONO",
+        "Jasmine Torres — Founder, Tenth Street Digital, KONO",
+        "Dmitri Soto — Container Yard Supervisor, KONO",
+        "Mesi Westin — Dishwasher, KONO",
+        "Valentina Campbell — Server, Jack London",
+        "Elena Soria Dominguez — Transit Hub Planning Lead, Fruitvale",
+        "Emiko Zhang — Home Health Aide, Jack London",
+        "Anna Baker — Trade Union Representative, Jack London"
+      ],
+      "stinkClass": "metric-contradiction",
+      "stinkScore": 51
+    }
+  },
+  "angle": "output/cron-compare/civic_c116_freelance-firebrand_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 4,
+  "quotes": [
+    {
+      "pop": "POP-01111",
+      "name": "Jasmine Torres",
+      "quote": "KONO's got a bit of a mixed bag going on right now. On one hand, life on the block seems pretty normal despite the lingering smell of smoke from the recent blaze. We've even got a newcomer from Jack London settling in, which is always nice to see. On the other hand, I've noticed that the neighborhood's vibe feels a bit off, and I'm not sure if it's just me being a fan of the A's and still feeling a little down about Mark Aitken leaving. I mean, he was a big part of Oakland, not just the team. As for the city's support, I'm not really sure what to say. I moved here from Chinatown a little while back because KONO felt like a better fit for me and my wife, but it's clear there's some tension around housing and retail vitality. I hope the city can figure out a way to balance things out.",
+      "disp": "a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"KONO's got a bit of a mixed bag going on right now. On one hand, life on the block seems pretty normal despite the lingering smell of smoke from the recent blaze. We've even got a newcomer from Jack London settling in, which is always nice to see. On the other hand, I've noticed that the neighborhood's vibe feels a bit off, and I'm not sure if it's just me being a fan of the A's and still feeling a little down about Mark Aitken leaving. I mean, he was a big part of Oakland, not just the team. As for the city's support, I'm not really sure what to say. I moved here from Chinatown a little while back because KONO felt like a better fit for me and my wife, but it's clear there's some tension around housing and retail vitality. I hope the city can figure out a way to balance things out.\",\n  \"fact_ids\": [\"F-5c3b59f42deb\", \"F-6c35947cd157\", \"F-3af4838dc22b\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5c3b59f42deb",
+          "F-6c35947cd157",
+          "F-3af4838dc22b"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01111-e26f7b9e32",
+        "authoredQuote": true,
+        "publishableQuote": "KONO's got a bit of a mixed bag going on right now. On one hand, life on the block seems pretty normal despite the lingering smell of smoke from the recent blaze. We've even got a newcomer from Jack London settling in, which is always nice to see. On the other hand, I've noticed that the neighborhood's vibe feels a bit off, and I'm not sure if it's just me being a fan of the A's and still feeling a little down about Mark Aitken leaving. I mean, he was a big part of Oakland, not just the team. As for the city's support, I'm not really sure what to say. I moved here from Chinatown a little while back because KONO felt like a better fit for me and my wife, but it's clear there's some tension around housing and retail vitality. I hope the city can figure out a way to balance things out."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01111",
+          "name": "Jasmine Torres",
+          "role": "Founder, Tenth Street Digital",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "What's your take on KONO's current state and the city's support? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "KONO",
+          "focus": "KONO's mismatched vitality metrics and housing pressure",
+          "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Jasmine Torres (POP-01111) — role: Founder, Tenth Street Digital; neighborhood: KONO; born: 2010; careerStage: mid-career; wealth: 4; employerBiz: BIZ-00011; skills: Small Business; tier: 3",
+          "evidence": [
+            {
+              "id": "EV-a2b15a8e07",
+              "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+              "text": "KONO: decay [RetailVitality -1.06, HousingPressure +1.000] — RetailVitality now 8.68 (12 of 22, city median 9.21); HousingPressure now 1.5 (15 of 22, city median 0); Sentiment now 0.05 (15 of 22, city median 0.06) — with no matching active initiative"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "KONO: decay [RetailVitality -1.06, HousingPressure +1.000] — RetailVitality now 8.68 (12 of 22, city median 9.21); HousingPressure now 1.5 (15 of 22, city median 0); Sentiment now 0.05 (15 of 22, city median 0.06) — with no matching active initiative",
+            "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-6c35947cd157"
+          },
+          {
+            "t": "FACT",
+            "text": "No active initiative (or mitigator) owns this break on the record",
+            "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-2ec3483bbbcd"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Spring | Weather: 54°F mild, W 8 mph, clear (frontState CLEAR), humidity 53, visibility 10",
+            "src": "World_Config/weather snapshot for C116",
+            "id": "F-81483aca176f"
+          },
+          {
+            "t": "FACT",
+            "text": "The lingering smell of smoke reminds everyone of the recent blaze, though life on the block seems to carry on as usual. A newcomer from Jack London has settled in.",
+            "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-5c3b59f42deb"
+          },
+          {
+            "t": "FACT",
+            "text": "Jasmine Torres (POP-01111) — role: Founder, Tenth Street Digital; neighborhood: KONO; born: 2010; careerStage: mid-career; wealth: 4; employerBiz: BIZ-00011; skills: Small Business; tier: 3",
+            "src": "Simulation_Ledger profile for POP-01111",
+            "id": "F-3af4838dc22b"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00276",
+      "name": "Dmitri Soto",
+      "quote": "To be honest, I haven't really seen the housing pressure affecting local workers around here. KONO's been bustling, retail's busy, and we're getting new households moving in. I've made the move here myself recently, from Jack London, and it's been a positive change so far.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; curious, open to new things; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I haven't really seen the housing pressure affecting local workers around here. KONO's been bustling, retail's busy, and we're getting new households moving in. I've made the move here myself recently, from Jack London, and it's been a positive change so far.\",\n  \"fact_ids\": [\"F-5c3b59f42deb\", \"F-06d55be9fafd\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5c3b59f42deb",
+          "F-06d55be9fafd"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00276-ab7e5f6a02",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I haven't really seen the housing pressure affecting local workers around here. KONO's been bustling, retail's busy, and we're getting new households moving in. I've made the move here myself recently, from Jack London, and it's been a positive change so far."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00276",
+          "name": "Dmitri Soto",
+          "role": "Container Yard Supervisor",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "How do you see KONO's housing pressure affecting local workers? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "KONO",
+          "focus": "KONO's mismatched vitality metrics and housing pressure",
+          "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Dmitri Soto (POP-00276) — role: Container Yard Supervisor; neighborhood: KONO; born: 1994; careerStage: senior; wealth: 5; employerBiz: BIZ-00012; skills: Port & Labor; tier: 3",
+          "evidence": [
+            {
+              "id": "EV-daa828e98c",
+              "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+              "text": "KONO: decay [RetailVitality -1.06, HousingPressure +1.000] — RetailVitality now 8.68 (12 of 22, city median 9.21); HousingPressure now 1.5 (15 of 22, city median 0); Sentiment now 0.05 (15 of 22, city median 0.06) — with no matching active initiative"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "KONO: decay [RetailVitality -1.06, HousingPressure +1.000] — RetailVitality now 8.68 (12 of 22, city median 9.21); HousingPressure now 1.5 (15 of 22, city median 0); Sentiment now 0.05 (15 of 22, city median 0.06) — with no matching active initiative",
+            "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-6c35947cd157"
+          },
+          {
+            "t": "FACT",
+            "text": "No active initiative (or mitigator) owns this break on the record",
+            "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-2ec3483bbbcd"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Spring | Weather: 54°F mild, W 8 mph, clear (frontState CLEAR), humidity 53, visibility 10",
+            "src": "World_Config/weather snapshot for C116",
+            "id": "F-81483aca176f"
+          },
+          {
+            "t": "FACT",
+            "text": "The lingering smell of smoke reminds everyone of the recent blaze, though life on the block seems to carry on as usual. A newcomer from Jack London has settled in.",
+            "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-5c3b59f42deb"
+          },
+          {
+            "t": "FACT",
+            "text": "Dmitri Soto (POP-00276) — role: Container Yard Supervisor; neighborhood: KONO; born: 1994; careerStage: senior; wealth: 5; employerBiz: BIZ-00012; skills: Port & Labor; tier: 3",
+            "src": "Simulation_Ledger profile for POP-00276",
+            "id": "F-06d55be9fafd"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00596",
+      "name": "Michael Corliss",
+      "quote": "I've seen KONO's energy firsthand - we're always out and about, whether it's a game or a night out at Midnight Norae Karaoke. But with the housing pressure, it's like there's this undercurrent that's hard to ignore. I've painted over graffiti with neighbors I barely knew, and that's felt like a small win, but it's also made me wonder what's being lost as the neighborhood changes.",
+      "disp": "driven, hard to sit still; restless for the new, adventurous; often out in the neighborhood; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen KONO's energy firsthand - we're always out and about, whether it's a game or a night out at Midnight Norae Karaoke. But with the housing pressure, it's like there's this undercurrent that's hard to ignore. I've painted over graffiti with neighbors I barely knew, and that's felt like a small win, but it's also made me wonder what's being lost as the neighborhood changes.\",\n  \"fact_ids\": [\"F-5c3b59f42deb\", \"F-6c35947cd157\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5c3b59f42deb",
+          "F-6c35947cd157"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00596-3f03f23e34",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen KONO's energy firsthand - we're always out and about, whether it's a game or a night out at Midnight Norae Karaoke. But with the housing pressure, it's like there's this undercurrent that's hard to ignore. I've painted over graffiti with neighbors I barely knew, and that's felt like a small win, but it's also made me wonder what's being lost as the neighborhood changes."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00596",
+          "name": "Michael Corliss",
+          "role": "Photographer",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "As a resident of KONO, what have you seen, felt, or understood about \"KONO's mismatched vitality metrics and housing pressure\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "KONO",
+          "focus": "KONO's mismatched vitality metrics and housing pressure",
+          "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Michael Corliss (POP-00596) — role: Photographer; neighborhood: KONO; born: 2019; careerStage: entry-level; wealth: 2; employerBiz: BIZ-00018; skills: Creative & Arts; tier: 3",
+          "evidence": [
+            {
+              "id": "EV-a4faaee3b9",
+              "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+              "text": "KONO: decay [RetailVitality -1.06, HousingPressure +1.000] — RetailVitality now 8.68 (12 of 22, city median 9.21); HousingPressure now 1.5 (15 of 22, city median 0); Sentiment now 0.05 (15 of 22, city median 0.06) — with no matching active initiative"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "KONO: decay [RetailVitality -1.06, HousingPressure +1.000] — RetailVitality now 8.68 (12 of 22, city median 9.21); HousingPressure now 1.5 (15 of 22, city median 0); Sentiment now 0.05 (15 of 22, city median 0.06) — with no matching active initiative",
+            "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-6c35947cd157"
+          },
+          {
+            "t": "FACT",
+            "text": "No active initiative (or mitigator) owns this break on the record",
+            "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-2ec3483bbbcd"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Spring | Weather: 54°F mild, W 8 mph, clear (frontState CLEAR), humidity 53, visibility 10",
+            "src": "World_Config/weather snapshot for C116",
+            "id": "F-81483aca176f"
+          },
+          {
+            "t": "FACT",
+            "text": "The lingering smell of smoke reminds everyone of the recent blaze, though life on the block seems to carry on as usual. A newcomer from Jack London has settled in.",
+            "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-5c3b59f42deb"
+          },
+          {
+            "t": "FACT",
+            "text": "Michael Corliss (POP-00596) — role: Photographer; neighborhood: KONO; born: 2019; careerStage: entry-level; wealth: 2; employerBiz: BIZ-00018; skills: Creative & Arts; tier: 3",
+            "src": "Simulation_Ledger profile for POP-00596",
+            "id": "F-52bba3f95823"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01061",
+      "name": "Celeste Moon",
+      "quote": "To be honest, I've noticed that around here, there's a lot of community spirit, people looking out for each other. I helped a neighbor with the West Oakland Stabilization Fund portal recently because it was really confusing for them. We also have a seniors lunch program flyer on our community board. It's nice to see that kind of activity. At the same time, housing feels like a big issue. I've seen newcomers moving in, like the person from Jack London who just settled in down the street. But there's also the lingering smell of smoke from that recent blaze, which is a harsh reminder of some of the challenges we're facing.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I've noticed that around here, there's a lot of community spirit, people looking out for each other. I helped a neighbor with the West Oakland Stabilization Fund portal recently because it was really confusing for them. We also have a seniors lunch program flyer on our community board. It's nice to see that kind of activity. At the same time, housing feels like a big issue. I've seen newcomers moving in, like the person from Jack London who just settled in down the street. But there's also the lingering smell of smoke from that recent blaze, which is a harsh reminder of some of the challenges we're facing.\",\n  \"fact_ids\": [\"F-5c3b59f42deb\", \"F-6c35947cd157\", \"F-2249086377d3\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5c3b59f42deb",
+          "F-6c35947cd157",
+          "F-2249086377d3"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01061-4e7cd18ba7",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I've noticed that around here, there's a lot of community spirit, people looking out for each other. I helped a neighbor with the West Oakland Stabilization Fund portal recently because it was really confusing for them. We also have a seniors lunch program flyer on our community board. It's nice to see that kind of activity. At the same time, housing feels like a big issue. I've seen newcomers moving in, like the person from Jack London who just settled in down the street. But there's also the lingering smell of smoke from that recent blaze, which is a harsh reminder of some of the challenges we're facing."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01061",
+          "name": "Celeste Moon",
+          "role": "singer",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "As a resident of KONO, what have you seen, felt, or understood about \"KONO's mismatched vitality metrics and housing pressure\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "KONO",
+          "focus": "KONO's mismatched vitality metrics and housing pressure",
+          "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Celeste Moon (POP-01061) — role: singer; neighborhood: KONO; born: 1988; careerStage: entry-level; wealth: 0; employerBiz: SELF_EMPLOYED; skills: Creative & Arts; tier: 3",
+          "evidence": [
+            {
+              "id": "EV-3794ea6645",
+              "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+              "text": "KONO: decay [RetailVitality -1.06, HousingPressure +1.000] — RetailVitality now 8.68 (12 of 22, city median 9.21); HousingPressure now 1.5 (15 of 22, city median 0); Sentiment now 0.05 (15 of 22, city median 0.06) — with no matching active initiative"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "KONO: decay [RetailVitality -1.06, HousingPressure +1.000] — RetailVitality now 8.68 (12 of 22, city median 9.21); HousingPressure now 1.5 (15 of 22, city median 0); Sentiment now 0.05 (15 of 22, city median 0.06) — with no matching active initiative",
+            "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-6c35947cd157"
+          },
+          {
+            "t": "FACT",
+            "text": "No active initiative (or mitigator) owns this break on the record",
+            "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-2ec3483bbbcd"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Spring | Weather: 54°F mild, W 8 mph, clear (frontState CLEAR), humidity 53, visibility 10",
+            "src": "World_Config/weather snapshot for C116",
+            "id": "F-81483aca176f"
+          },
+          {
+            "t": "FACT",
+            "text": "The lingering smell of smoke reminds everyone of the recent blaze, though life on the block seems to carry on as usual. A newcomer from Jack London has settled in.",
+            "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-5c3b59f42deb"
+          },
+          {
+            "t": "FACT",
+            "text": "Celeste Moon (POP-01061) — role: singer; neighborhood: KONO; born: 1988; careerStage: entry-level; wealth: 0; employerBiz: SELF_EMPLOYED; skills: Creative & Arts; tier: 3",
+            "src": "Simulation_Ledger profile for POP-01061",
+            "id": "F-2249086377d3"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-01111",
+      "name": "Jasmine Torres",
+      "quote": "KONO's got a bit of a mixed bag going on right now. On one hand, life on the block seems pretty normal despite the lingering smell of smoke from the recent blaze. We've even got a newcomer from Jack London settling in, which is always nice to see. On the other hand, I've noticed that the neighborhood's vibe feels a bit off, and I'm not sure if it's just me being a fan of the A's and still feeling a little down about Mark Aitken leaving. I mean, he was a big part of Oakland, not just the team. As for the city's support, I'm not really sure what to say. I moved here from Chinatown a little while back because KONO felt like a better fit for me and my wife, but it's clear there's some tension around housing and retail vitality. I hope the city can figure out a way to balance things out.",
+      "disp": "a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"KONO's got a bit of a mixed bag going on right now. On one hand, life on the block seems pretty normal despite the lingering smell of smoke from the recent blaze. We've even got a newcomer from Jack London settling in, which is always nice to see. On the other hand, I've noticed that the neighborhood's vibe feels a bit off, and I'm not sure if it's just me being a fan of the A's and still feeling a little down about Mark Aitken leaving. I mean, he was a big part of Oakland, not just the team. As for the city's support, I'm not really sure what to say. I moved here from Chinatown a little while back because KONO felt like a better fit for me and my wife, but it's clear there's some tension around housing and retail vitality. I hope the city can figure out a way to balance things out.\",\n  \"fact_ids\": [\"F-5c3b59f42deb\", \"F-6c35947cd157\", \"F-3af4838dc22b\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5c3b59f42deb",
+          "F-6c35947cd157",
+          "F-3af4838dc22b"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01111-e26f7b9e32",
+        "authoredQuote": true,
+        "publishableQuote": "KONO's got a bit of a mixed bag going on right now. On one hand, life on the block seems pretty normal despite the lingering smell of smoke from the recent blaze. We've even got a newcomer from Jack London settling in, which is always nice to see. On the other hand, I've noticed that the neighborhood's vibe feels a bit off, and I'm not sure if it's just me being a fan of the A's and still feeling a little down about Mark Aitken leaving. I mean, he was a big part of Oakland, not just the team. As for the city's support, I'm not really sure what to say. I moved here from Chinatown a little while back because KONO felt like a better fit for me and my wife, but it's clear there's some tension around housing and retail vitality. I hope the city can figure out a way to balance things out."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01111",
+          "name": "Jasmine Torres",
+          "role": "Founder, Tenth Street Digital",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "What's your take on KONO's current state and the city's support? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "KONO",
+          "focus": "KONO's mismatched vitality metrics and housing pressure",
+          "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Jasmine Torres (POP-01111) — role: Founder, Tenth Street Digital; neighborhood: KONO; born: 2010; careerStage: mid-career; wealth: 4; employerBiz: BIZ-00011; skills: Small Business; tier: 3",
+          "evidence": [
+            {
+              "id": "EV-a2b15a8e07",
+              "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+              "text": "KONO: decay [RetailVitality -1.06, HousingPressure +1.000] — RetailVitality now 8.68 (12 of 22, city median 9.21); HousingPressure now 1.5 (15 of 22, city median 0); Sentiment now 0.05 (15 of 22, city median 0.06) — with no matching active initiative"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "KONO: decay [RetailVitality -1.06, HousingPressure +1.000] — RetailVitality now 8.68 (12 of 22, city median 9.21); HousingPressure now 1.5 (15 of 22, city median 0); Sentiment now 0.05 (15 of 22, city median 0.06) — with no matching active initiative",
+            "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-6c35947cd157"
+          },
+          {
+            "t": "FACT",
+            "text": "No active initiative (or mitigator) owns this break on the record",
+            "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-2ec3483bbbcd"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Spring | Weather: 54°F mild, W 8 mph, clear (frontState CLEAR), humidity 53, visibility 10",
+            "src": "World_Config/weather snapshot for C116",
+            "id": "F-81483aca176f"
+          },
+          {
+            "t": "FACT",
+            "text": "The lingering smell of smoke reminds everyone of the recent blaze, though life on the block seems to carry on as usual. A newcomer from Jack London has settled in.",
+            "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-5c3b59f42deb"
+          },
+          {
+            "t": "FACT",
+            "text": "Jasmine Torres (POP-01111) — role: Founder, Tenth Street Digital; neighborhood: KONO; born: 2010; careerStage: mid-career; wealth: 4; employerBiz: BIZ-00011; skills: Small Business; tier: 3",
+            "src": "Simulation_Ledger profile for POP-01111",
+            "id": "F-3af4838dc22b"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00276",
+      "name": "Dmitri Soto",
+      "quote": "To be honest, I haven't really seen the housing pressure affecting local workers around here. KONO's been bustling, retail's busy, and we're getting new households moving in. I've made the move here myself recently, from Jack London, and it's been a positive change so far.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; curious, open to new things; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I haven't really seen the housing pressure affecting local workers around here. KONO's been bustling, retail's busy, and we're getting new households moving in. I've made the move here myself recently, from Jack London, and it's been a positive change so far.\",\n  \"fact_ids\": [\"F-5c3b59f42deb\", \"F-06d55be9fafd\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5c3b59f42deb",
+          "F-06d55be9fafd"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00276-ab7e5f6a02",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I haven't really seen the housing pressure affecting local workers around here. KONO's been bustling, retail's busy, and we're getting new households moving in. I've made the move here myself recently, from Jack London, and it's been a positive change so far."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00276",
+          "name": "Dmitri Soto",
+          "role": "Container Yard Supervisor",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "How do you see KONO's housing pressure affecting local workers? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "KONO",
+          "focus": "KONO's mismatched vitality metrics and housing pressure",
+          "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Dmitri Soto (POP-00276) — role: Container Yard Supervisor; neighborhood: KONO; born: 1994; careerStage: senior; wealth: 5; employerBiz: BIZ-00012; skills: Port & Labor; tier: 3",
+          "evidence": [
+            {
+              "id": "EV-daa828e98c",
+              "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+              "text": "KONO: decay [RetailVitality -1.06, HousingPressure +1.000] — RetailVitality now 8.68 (12 of 22, city median 9.21); HousingPressure now 1.5 (15 of 22, city median 0); Sentiment now 0.05 (15 of 22, city median 0.06) — with no matching active initiative"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "KONO: decay [RetailVitality -1.06, HousingPressure +1.000] — RetailVitality now 8.68 (12 of 22, city median 9.21); HousingPressure now 1.5 (15 of 22, city median 0); Sentiment now 0.05 (15 of 22, city median 0.06) — with no matching active initiative",
+            "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-6c35947cd157"
+          },
+          {
+            "t": "FACT",
+            "text": "No active initiative (or mitigator) owns this break on the record",
+            "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-2ec3483bbbcd"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Spring | Weather: 54°F mild, W 8 mph, clear (frontState CLEAR), humidity 53, visibility 10",
+            "src": "World_Config/weather snapshot for C116",
+            "id": "F-81483aca176f"
+          },
+          {
+            "t": "FACT",
+            "text": "The lingering smell of smoke reminds everyone of the recent blaze, though life on the block seems to carry on as usual. A newcomer from Jack London has settled in.",
+            "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-5c3b59f42deb"
+          },
+          {
+            "t": "FACT",
+            "text": "Dmitri Soto (POP-00276) — role: Container Yard Supervisor; neighborhood: KONO; born: 1994; careerStage: senior; wealth: 5; employerBiz: BIZ-00012; skills: Port & Labor; tier: 3",
+            "src": "Simulation_Ledger profile for POP-00276",
+            "id": "F-06d55be9fafd"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00596",
+      "name": "Michael Corliss",
+      "quote": "I've seen KONO's energy firsthand - we're always out and about, whether it's a game or a night out at Midnight Norae Karaoke. But with the housing pressure, it's like there's this undercurrent that's hard to ignore. I've painted over graffiti with neighbors I barely knew, and that's felt like a small win, but it's also made me wonder what's being lost as the neighborhood changes.",
+      "disp": "driven, hard to sit still; restless for the new, adventurous; often out in the neighborhood; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen KONO's energy firsthand - we're always out and about, whether it's a game or a night out at Midnight Norae Karaoke. But with the housing pressure, it's like there's this undercurrent that's hard to ignore. I've painted over graffiti with neighbors I barely knew, and that's felt like a small win, but it's also made me wonder what's being lost as the neighborhood changes.\",\n  \"fact_ids\": [\"F-5c3b59f42deb\", \"F-6c35947cd157\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5c3b59f42deb",
+          "F-6c35947cd157"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00596-3f03f23e34",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen KONO's energy firsthand - we're always out and about, whether it's a game or a night out at Midnight Norae Karaoke. But with the housing pressure, it's like there's this undercurrent that's hard to ignore. I've painted over graffiti with neighbors I barely knew, and that's felt like a small win, but it's also made me wonder what's being lost as the neighborhood changes."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00596",
+          "name": "Michael Corliss",
+          "role": "Photographer",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "As a resident of KONO, what have you seen, felt, or understood about \"KONO's mismatched vitality metrics and housing pressure\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "KONO",
+          "focus": "KONO's mismatched vitality metrics and housing pressure",
+          "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Michael Corliss (POP-00596) — role: Photographer; neighborhood: KONO; born: 2019; careerStage: entry-level; wealth: 2; employerBiz: BIZ-00018; skills: Creative & Arts; tier: 3",
+          "evidence": [
+            {
+              "id": "EV-a4faaee3b9",
+              "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+              "text": "KONO: decay [RetailVitality -1.06, HousingPressure +1.000] — RetailVitality now 8.68 (12 of 22, city median 9.21); HousingPressure now 1.5 (15 of 22, city median 0); Sentiment now 0.05 (15 of 22, city median 0.06) — with no matching active initiative"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "KONO: decay [RetailVitality -1.06, HousingPressure +1.000] — RetailVitality now 8.68 (12 of 22, city median 9.21); HousingPressure now 1.5 (15 of 22, city median 0); Sentiment now 0.05 (15 of 22, city median 0.06) — with no matching active initiative",
+            "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-6c35947cd157"
+          },
+          {
+            "t": "FACT",
+            "text": "No active initiative (or mitigator) owns this break on the record",
+            "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-2ec3483bbbcd"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Spring | Weather: 54°F mild, W 8 mph, clear (frontState CLEAR), humidity 53, visibility 10",
+            "src": "World_Config/weather snapshot for C116",
+            "id": "F-81483aca176f"
+          },
+          {
+            "t": "FACT",
+            "text": "The lingering smell of smoke reminds everyone of the recent blaze, though life on the block seems to carry on as usual. A newcomer from Jack London has settled in.",
+            "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-5c3b59f42deb"
+          },
+          {
+            "t": "FACT",
+            "text": "Michael Corliss (POP-00596) — role: Photographer; neighborhood: KONO; born: 2019; careerStage: entry-level; wealth: 2; employerBiz: BIZ-00018; skills: Creative & Arts; tier: 3",
+            "src": "Simulation_Ledger profile for POP-00596",
+            "id": "F-52bba3f95823"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01061",
+      "name": "Celeste Moon",
+      "quote": "To be honest, I've noticed that around here, there's a lot of community spirit, people looking out for each other. I helped a neighbor with the West Oakland Stabilization Fund portal recently because it was really confusing for them. We also have a seniors lunch program flyer on our community board. It's nice to see that kind of activity. At the same time, housing feels like a big issue. I've seen newcomers moving in, like the person from Jack London who just settled in down the street. But there's also the lingering smell of smoke from that recent blaze, which is a harsh reminder of some of the challenges we're facing.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I've noticed that around here, there's a lot of community spirit, people looking out for each other. I helped a neighbor with the West Oakland Stabilization Fund portal recently because it was really confusing for them. We also have a seniors lunch program flyer on our community board. It's nice to see that kind of activity. At the same time, housing feels like a big issue. I've seen newcomers moving in, like the person from Jack London who just settled in down the street. But there's also the lingering smell of smoke from that recent blaze, which is a harsh reminder of some of the challenges we're facing.\",\n  \"fact_ids\": [\"F-5c3b59f42deb\", \"F-6c35947cd157\", \"F-2249086377d3\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5c3b59f42deb",
+          "F-6c35947cd157",
+          "F-2249086377d3"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01061-4e7cd18ba7",
+        "authoredQuote": true,
+        "publishableQuote": "To be honest, I've noticed that around here, there's a lot of community spirit, people looking out for each other. I helped a neighbor with the West Oakland Stabilization Fund portal recently because it was really confusing for them. We also have a seniors lunch program flyer on our community board. It's nice to see that kind of activity. At the same time, housing feels like a big issue. I've seen newcomers moving in, like the person from Jack London who just settled in down the street. But there's also the lingering smell of smoke from that recent blaze, which is a harsh reminder of some of the challenges we're facing."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01061",
+          "name": "Celeste Moon",
+          "role": "singer",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "As a resident of KONO, what have you seen, felt, or understood about \"KONO's mismatched vitality metrics and housing pressure\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "KONO",
+          "focus": "KONO's mismatched vitality metrics and housing pressure",
+          "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Celeste Moon (POP-01061) — role: singer; neighborhood: KONO; born: 1988; careerStage: entry-level; wealth: 0; employerBiz: SELF_EMPLOYED; skills: Creative & Arts; tier: 3",
+          "evidence": [
+            {
+              "id": "EV-3794ea6645",
+              "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+              "text": "KONO: decay [RetailVitality -1.06, HousingPressure +1.000] — RetailVitality now 8.68 (12 of 22, city median 9.21); HousingPressure now 1.5 (15 of 22, city median 0); Sentiment now 0.05 (15 of 22, city median 0.06) — with no matching active initiative"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "KONO: decay [RetailVitality -1.06, HousingPressure +1.000] — RetailVitality now 8.68 (12 of 22, city median 9.21); HousingPressure now 1.5 (15 of 22, city median 0); Sentiment now 0.05 (15 of 22, city median 0.06) — with no matching active initiative",
+            "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-6c35947cd157"
+          },
+          {
+            "t": "FACT",
+            "text": "No active initiative (or mitigator) owns this break on the record",
+            "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-2ec3483bbbcd"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Spring | Weather: 54°F mild, W 8 mph, clear (frontState CLEAR), humidity 53, visibility 10",
+            "src": "World_Config/weather snapshot for C116",
+            "id": "F-81483aca176f"
+          },
+          {
+            "t": "FACT",
+            "text": "The lingering smell of smoke reminds everyone of the recent blaze, though life on the block seems to carry on as usual. A newcomer from Jack London has settled in.",
+            "src": "output/engine_audit_c116.json patterns[2]; evidence: Neighborhood_Map row(s) 19",
+            "id": "F-5c3b59f42deb"
+          },
+          {
+            "t": "FACT",
+            "text": "Celeste Moon (POP-01061) — role: singer; neighborhood: KONO; born: 1988; careerStage: entry-level; wealth: 0; employerBiz: SELF_EMPLOYED; skills: Creative & Arts; tier: 3",
+            "src": "Simulation_Ledger profile for POP-01061",
+            "id": "F-2249086377d3"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-11-18T19:16:07.117Z"
+}

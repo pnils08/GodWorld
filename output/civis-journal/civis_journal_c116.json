@@ -1,0 +1,100 @@
+{
+  "cycle": 116,
+  "popid": "POP-00789",
+  "wake": "journal",
+  "replayKey": "POP-00789:C116:journal",
+  "pageCustomId": "cp-POP-00789-c116-journal",
+  "leadFindingId": "AUD-4ed11ac8c0c5",
+  "findings": [
+    {
+      "auditPatternId": "AUD-a98d16c4ad78",
+      "type": "stuck-initiative",
+      "target": "West Oakland",
+      "civisFinding": "Oakland Youth Apprenticeship Pipeline (West Oakland) has not left its implementation active stage in four weeks.",
+      "selected": true
+    },
+    {
+      "auditPatternId": "AUD-8cfafb68223f",
+      "type": "math-imbalance",
+      "target": null,
+      "civisFinding": "Readings decayed in two districts this week, and no city program is aimed at any of them. Street trade cooled in Piedmont Ave and KONO; housing pressure climbed in Piedmont Ave and KONO.",
+      "covers": [
+        "AUD-8cfafb68223f",
+        "AUD-6f2de69bb500"
+      ],
+      "selected": true
+    },
+    {
+      "auditPatternId": "AUD-59bad99d7098",
+      "type": "coverage-gap",
+      "target": null,
+      "civisFinding": "The city's faith life produced five events this week, and the paper ran nothing on it the week before.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-4ed11ac8c0c5",
+      "type": "production-imbalance",
+      "target": "Downtown",
+      "civisFinding": "People moved in or out of eighteen districts this week, and the instrument logged no economic activity behind any of it.",
+      "selected": true
+    },
+    {
+      "auditPatternId": "AUD-bfb71be1dfe3",
+      "type": "improvement",
+      "target": "Fruitvale",
+      "civisFinding": "Fruitvale Transit Hub Phase II — Visioning moved from design to complete.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-eb8dff3034d0",
+      "type": "improvement",
+      "target": "Jack London",
+      "civisFinding": "Baylight District — Final Council Vote moved from construction active to complete.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-ad35158ad6b4",
+      "type": "improvement",
+      "target": "Grand Lake",
+      "civisFinding": "Commercial Stabilization for Grand Lake moved from vote ready to vote scheduled.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-3d59b8e80145",
+      "type": "improvement",
+      "target": "West Oakland",
+      "civisFinding": "West Oakland Tenant Defense Fund moved from announced to vote scheduled.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-97e24822674d",
+      "type": "improvement",
+      "target": "Ivy Hill",
+      "civisFinding": "Ivy Hill Community Support Initiative moved from announced to vote scheduled.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-66af7cc64fc4",
+      "type": "improvement",
+      "target": null,
+      "civisFinding": "Mood rose in six districts this week: Downtown, Laurel, Grand Lake, Piedmont Ave, Eastlake and San Antonio.",
+      "covers": [
+        "AUD-66af7cc64fc4",
+        "AUD-fbbe78801fdd",
+        "AUD-722afc82cb49",
+        "AUD-d0440f486268",
+        "AUD-516647e5d1d0",
+        "AUD-60cbb8c05cce"
+      ],
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-7b42e1b2d507",
+      "type": "improvement",
+      "target": "West Oakland",
+      "civisFinding": "A previous remedy moved beyond its expected mark in West Oakland.",
+      "selected": true
+    }
+  ],
+  "prose": "I put the pipeline's stall on the record last week and promised not to let it quietly become someone else's emergency. A week later nothing has shipped from me and nothing has moved at City Hall. I would rather say that myself than have Jax Caldera say it for me.\n\nWhat bothers me most this week is a hole in my own product. People moved in or out of eighteen districts, and the instrument logged no economic activity behind any of it. Presence rose nearly everywhere: students, adults, seniors, and fewer sick residents. The city is filling back up. But the instrument cannot tell me whether those people are arriving for work, for a lease, for family, or because someone pushed them out. Seeing bodies without seeing paychecks is half a map. Civis built that map, and the gap is ours to close.\n\nNext is Piedmont Ave, and KONO beside it. Street trade cooled in both, housing pressure climbed in both, and no city program is aimed at either. Piedmont Ave also has recorded incidents rising. Commercial Stabilization for Grand Lake and the West Oakland Tenant Defense Fund both have votes scheduled, and I give City Hall credit for that. But the money keeps landing where the noise is already deafening. A program costs the least when the signal is still a whisper, and these two districts are whispering now.\n\nThen the Oakland Youth Apprenticeship Pipeline in West Oakland. It has spent four weeks in implementation with no step forward. The instrument also shows an earlier West Oakland remedy running past its expected mark, which tells me this city can finish a thing when someone is made to own it. Nobody owns this one. Meanwhile more students are showing up in West Oakland, and every idle week teaches them that showing up buys nothing.\n\nHere is what I will do, and you can hold me to it.\n\nBefore the Oaks' first season is over, Civis will stand up a small team of analysts with one job: tie district movement to hiring, payroll and new business openings. We will publish what they find, and we will publish where they find nothing. I am hiring for those seats now.\n\nBy the same point in the season, the instrument will carry a standing watch for districts where trade is cooling and housing pressure is climbing with no program aimed at them. Piedmont Ave and KONO go on it first. I will publish that list weekly, and next to each name I will put the office that has not answered.\n\nUntil the pipeline leaves its current stage, I will publish its count of stalled weeks in this journal every week. I expect someone at City Hall to tell the public, plainly, what they are waiting for."
+}

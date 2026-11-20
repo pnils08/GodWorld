@@ -1,0 +1,38 @@
+{
+  "office": "council_d7",
+  "cycle": 116,
+  "speaker": "Warren Ashford",
+  "cascadeSummary": "For District 7 this cycle, I am enforcing the required Q3 clinical intake audit filing and merchant walkthrough for the Temescal Community Health Center without approving any new operational spending. In response to the Planning Director's directive on Rockridge, our canvass confirms that retail vitality at 11.89 and busy street trade have diverged from sentiment at -0.06, which points to friction over municipal service delivery rather than a lack of commercial traffic—justifying strict municipal service audits rather than unmonitored commercial corridor subsidies. On the broader docket, I reaffirm my recorded YES vote on INIT-009 for Grand Lake commercial stabilization solely because the Chen-Vega milestone and audit protections remain fully binding.",
+  "statements": [
+    {
+      "statementId": "STMT-116-council_d7-001",
+      "type": "oversight_statement",
+      "topic": "Temescal Community Health Center Q3 Audit and Merchant Verification",
+      "initiative": "Temescal Community Health Center",
+      "decision": "Enforce the scheduled Q3 clinical intake audit filing to HCAI and the Council Clerk, complete the recurring Telegraph & 47th merchant verification walkthrough, and authorize zero new operational appropriations.",
+      "quote": "Clinical dollars require clinical proof, and an open health center still owes the public its Q3 intake audit and an on-the-ground merchant walkthrough.",
+      "fullStatement": "The Temescal Community Health Center opened ahead of schedule and $1.2 million under budget, but fiscal discipline does not terminate at ribbon cutting. The facility holds substantial operational funding, and District 7's oversight framework demands hard, verifiable numbers on clinical utilization. This cycle, we require the timely submission of the Q3 intake audit to HCAI and the Council Clerk, alongside our institutionalized merchant-clinic verification walkthrough at Telegraph and 47th. We are not authorizing additional tranches or expanding the program envelope. Accountability is maintained through rigorous, recurring reconciliation, ensuring that public health investments substantiate their caseload baseline without drifting into unmonitored overhead.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-116-council_d7-002",
+      "type": "policy_statement",
+      "topic": "Rockridge Merchant Sentiment and Municipal Service Verification",
+      "initiative": null,
+      "decision": "Maintain current baseline municipal services in Rockridge while auditing Department of Public Works route efficiency, rejecting any unmonitored commercial corridor cash injections.",
+      "quote": "A recovery in retail vitality to 11.89 alongside negative sentiment proves foot traffic is not the problem; throwing unmonitored city funds at the street is not the solution.",
+      "fullStatement": "Responding to Planning Director Vance's inquiry regarding our Rockridge canvass: our field data confirms retail vitality recovered from 10.98 in Cycle 114 to 11.89 in Cycle 115, and street trade remains busy, yet merchant sentiment sits at -0.06. This divergence confirms that merchant dissatisfaction is not an aggregate revenue or customer deficit solvable by speculative commercial subsidies. The canvass identified friction around municipal service delivery, street cleaning consistency, and infrastructure maintenance. We reject assuming that health center operations or broad city spending packages will patch local commercial corridors. My office maintains current municipal baseline services while initiating an internal review of scheduled public works maintenance along College Avenue. We act on diagnostic data, not unbudgeted stopgap grants.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-116-council_d7-003",
+      "type": "vote_statement",
+      "topic": "Commercial Stabilization for Grand Lake Recorded Roll Call",
+      "initiative": "Commercial Stabilization for Grand Lake",
+      "decision": "Reaffirm YES position for the recorded full-council vote on INIT-009 with all Chen-Vega audit milestones and reporting requirements strictly attached.",
+      "quote": "Accountability triggers make the difference between a sound investment and an open checkbook; because those audit milestones are intact, my recorded vote is yes.",
+      "fullStatement": "District 7 maintains a YES disposition on INIT-009 as the measure moves to a recorded full-council roll call. My support was conditioned from day one on mandatory Chen-Vega audit protocols, verifiable performance milestones, and strict disbursement reporting. Every single dollar allocated for commercial stabilization in Grand Lake must be tied to documented performance metrics rather than open-ended draws. Grand Lake merchants deserve certainty, and Oakland taxpayers deserve proof that public funds generate tangible local stability. The administration must ensure that no funds move without these reporting checkpoints active and verified by the Clerk and the Auditor.",
+      "trackerUpdates": {}
+    }
+  ]
+}

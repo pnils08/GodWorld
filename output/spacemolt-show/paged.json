@@ -326,5 +326,37 @@
   "undocked-pop00008-2026-11-12T02-30-29": {
     "status": "landed",
     "id": "cp-POP-00008-c115-UNDOCKED-wed-dcpalg"
+  },
+  "undocked-pop01195-2026-11-13T02-30-33": {
+    "status": "landed",
+    "id": "cp-POP-01195-c115-UNDOCKED-thu-oddhdi"
+  },
+  "undocked-pop00184-2026-11-14T02-30-38": {
+    "status": "landed",
+    "id": "cp-POP-00184-c115-UNDOCKED-fri-janndb"
+  },
+  "undocked-pop00008-2026-11-15T02-30-29": {
+    "status": "landed",
+    "id": "cp-POP-00008-c115-UNDOCKED-sat-glcodh"
+  },
+  "undocked-pop01188-2026-11-16T02-30-31": {
+    "status": "landed",
+    "id": "cp-POP-01188-c116-UNDOCKED-sun-jkofam"
+  },
+  "undocked-pop00918-2026-11-17T02-30-26": {
+    "status": "landed",
+    "id": "cp-POP-00918-c116-UNDOCKED-mon-gohjbn"
+  },
+  "undocked-pop00663-2026-11-18T02-30-29": {
+    "status": "landed",
+    "id": "cp-POP-00663-c116-UNDOCKED-tue-fbmcoa"
+  },
+  "undocked-pop01188-2026-11-19T02-30-32": {
+    "status": "landed",
+    "id": "cp-POP-01188-c116-UNDOCKED-wed-bglpao"
+  },
+  "undocked-pop00918-2026-11-20T02-30-32": {
+    "status": "landed",
+    "id": "cp-POP-00918-c116-UNDOCKED-thu-gbdbam"
   }
 }

@@ -1,17 +1,17 @@
 {
   "desk": "sports",
   "cycle": "115",
-  "model": "x-ai/grok-4.3",
-  "turns": 4,
+  "model": "anthropic/claude-sonnet-5.5",
+  "turns": 9,
   "maxTurns": 15,
-  "usageInputTokens": 20766,
-  "usageOutputTokens": 1630,
+  "usageInputTokens": 61697,
+  "usageOutputTokens": 4245,
   "savedFiles": [
-    "output/cron-compare/sports_c115_tanya-cruz_packet-v2_x-ai-grok-4-3.md"
+    "output/cron-compare/sports_c115_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5.md"
   ],
   "compareAgainst": "output/desk-output/sports_c115.md",
-  "durationMs": 14817,
+  "durationMs": 42207,
   "dryRun": false,
   "packetOnly": true,
-  "ranAt": "2026-11-12T00:20:43.267Z"
+  "ranAt": "2026-11-14T18:00:46.178Z"
 }

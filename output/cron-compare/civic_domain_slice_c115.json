@@ -1459,6 +1459,22 @@
     },
     {
       "kind": "civic-datawake",
+      "label": "Leonard Tran: 0",
+      "ref": "output/cron-civic/datawake/civic-office-council-d2_2026-11-12.json",
+      "hood": null,
+      "popids": [
+        "POP-00502"
+      ],
+      "handle": {
+        "angle": "I’m holding off on another move on Baylight District — Final Council Vote. The initiative is marked passed and complete, with no next action scheduled. Jack London’s latest readings show sentiment eased while retail vitality rose; I’d rathe",
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-datawake",
+      "sourceIndex": 92
+    },
+    {
+      "kind": "civic-datawake",
       "label": "Rose Delgado: San Antonio sentiment -0.16 vs city 0.020; crime index 0.73 vs city 0.647; retail vitality 5.22 (from 6.43); D3 approval 59",
       "ref": "output/cron-civic/datawake/civic-office-council-d3_2026-11-10.json",
       "hood": null,
@@ -1471,7 +1487,7 @@
         "citizens": []
       },
       "source": "civic-datawake",
-      "sourceIndex": 92
+      "sourceIndex": 93
     },
     {
       "kind": "civic-datawake",
@@ -1487,7 +1503,7 @@
         "citizens": []
       },
       "source": "civic-datawake",
-      "sourceIndex": 93
+      "sourceIndex": 94
     },
     {
       "kind": "civic-datawake",
@@ -1503,7 +1519,7 @@
         "citizens": []
       },
       "source": "civic-datawake",
-      "sourceIndex": 94
+      "sourceIndex": 95
     },
     {
       "kind": "civic-datawake",
@@ -1519,7 +1535,7 @@
         "citizens": []
       },
       "source": "civic-datawake",
-      "sourceIndex": 95
+      "sourceIndex": 96
     },
     {
       "kind": "civic-datawake",
@@ -1535,7 +1551,7 @@
         "citizens": []
       },
       "source": "civic-datawake",
-      "sourceIndex": 96
+      "sourceIndex": 97
     },
     {
       "kind": "civic-datawake",
@@ -1551,7 +1567,23 @@
         "citizens": []
       },
       "source": "civic-datawake",
-      "sourceIndex": 97
+      "sourceIndex": 98
+    },
+    {
+      "kind": "civic-datawake",
+      "label": "Terrence Mobley: Laurel is the reason I'm on this dais, and this week the numbers on my turf are not good: sentiment at -0.15 against a city at 0.020, property crime at 43 against a city 39.5, inci",
+      "ref": "output/cron-civic/datawake/civic-office-council-d9_2026-11-12.json",
+      "hood": null,
+      "popids": [
+        "POP-00506"
+      ],
+      "handle": {
+        "angle": "Laurel is the reason I'm on this dais, and this week the numbers on my turf are not good: sentiment at -0.15 against a city at 0.020, property crime at 43 against a city 39.5, incidents at 7 against 5.9, and a trajectory that has flipped fr",
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-datawake",
+      "sourceIndex": 99
     },
     {
       "kind": "civic-datawake",
@@ -1567,7 +1599,23 @@
         "citizens": []
       },
       "source": "civic-datawake",
-      "sourceIndex": 98
+      "sourceIndex": 100
+    },
+    {
+      "kind": "civic-datawake",
+      "label": "Rafael Montez: 0",
+      "ref": "output/cron-civic/datawake/civic-office-police-chief_2026-11-12.json",
+      "hood": null,
+      "popids": [
+        "POP-00136"
+      ],
+      "handle": {
+        "angle": "No public safety event in this cycle's export requires an institutional statement from this office. The district readings show crime indices holding in a tight band across the city — Fruitvale at 0.67 and San Antonio at 0.73 remain the high",
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-datawake",
+      "sourceIndex": 101
     },
     {
       "kind": "weather",
@@ -1581,7 +1629,7 @@
         "citizens": []
       },
       "source": "world-summary",
-      "sourceIndex": 99
+      "sourceIndex": 102
     },
     {
       "kind": "season-feel",
@@ -1595,7 +1643,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 100
+      "sourceIndex": 103
     },
     {
       "kind": "season-feel",
@@ -1609,7 +1657,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 101
+      "sourceIndex": 104
     },
     {
       "kind": "season-feel",
@@ -1623,7 +1671,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 102
+      "sourceIndex": 105
     },
     {
       "kind": "season-feel",
@@ -1637,7 +1685,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 103
+      "sourceIndex": 106
     },
     {
       "kind": "season-feel",
@@ -1651,7 +1699,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 104
+      "sourceIndex": 107
     },
     {
       "kind": "season-feel",
@@ -1665,7 +1713,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 105
+      "sourceIndex": 108
     },
     {
       "kind": "season-feel",
@@ -1679,7 +1727,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 106
+      "sourceIndex": 109
     },
     {
       "kind": "season-feel",
@@ -1693,7 +1741,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 107
+      "sourceIndex": 110
     },
     {
       "kind": "season-feel",
@@ -1707,7 +1755,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 108
+      "sourceIndex": 111
     },
     {
       "kind": "health-city",
@@ -1721,7 +1769,7 @@
         "citizens": []
       },
       "source": "world-summary-health",
-      "sourceIndex": 109
+      "sourceIndex": 112
     },
     {
       "kind": "health-lived",
@@ -1739,7 +1787,7 @@
         ]
       },
       "source": "world-summary-health",
-      "sourceIndex": 110
+      "sourceIndex": 113
     }
   ],
   "packets": {
@@ -2434,7 +2482,7 @@
             "Howard Travis (POP-00255)"
           ],
           "source": "world-summary-health",
-          "sourceIndex": 110
+          "sourceIndex": 113
         },
         {
           "actionId": null,
@@ -2588,7 +2636,7 @@
           "hookLine": "FAITH — interfaith_dialogue — Adams Point: interfaith prayer breakfast brings leaders together at Adams Point",
           "citizens": [],
           "source": "season-feel",
-          "sourceIndex": 100
+          "sourceIndex": 103
         },
         {
           "actionId": null,
@@ -2603,7 +2651,7 @@
           "hookLine": "FAITH — community_program — Lake Merritt: Cathedral of the Living Word: after-school tutoring program expands",
           "citizens": [],
           "source": "season-feel",
-          "sourceIndex": 101
+          "sourceIndex": 104
         },
         {
           "actionId": null,
@@ -2618,7 +2666,7 @@
           "hookLine": "FAITH — community_program — East Oakland: Masjid An-Nur Oakland: seniors lunch program marks milestone",
           "citizens": [],
           "source": "season-feel",
-          "sourceIndex": 102
+          "sourceIndex": 105
         },
         {
           "actionId": null,
@@ -2633,7 +2681,7 @@
           "hookLine": "FAITH — community_program — Chinatown: Bay Pure Land Buddhist Temple: job training workshop begins new session",
           "citizens": [],
           "source": "season-feel",
-          "sourceIndex": 103
+          "sourceIndex": 106
         },
         {
           "actionId": null,
@@ -2648,7 +2696,7 @@
           "hookLine": "FAITH — outreach — Downtown: Telegraph Presbyterian Fellowship: prison ministry team visits facility",
           "citizens": [],
           "source": "season-feel",
-          "sourceIndex": 104
+          "sourceIndex": 107
         },
         {
           "actionId": null,
@@ -2663,7 +2711,7 @@
           "hookLine": "Civic Watch Patio in Glenview is quiet; movement restricted on this weather.",
           "citizens": [],
           "source": "season-feel",
-          "sourceIndex": 105
+          "sourceIndex": 108
         }
       ],
       "pointers": [

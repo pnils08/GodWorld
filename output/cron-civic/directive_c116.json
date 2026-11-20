@@ -1,0 +1,181 @@
+{
+  "stage": "directive",
+  "cycle": 116,
+  "model": "openai/gpt-6.1-sol",
+  "mayorModel": "moonshotai/kimi-k3.1-pro",
+  "roster": [
+    "civic-office-mayor",
+    "civic-office-council-d1",
+    "civic-office-council-d2",
+    "civic-office-council-d3",
+    "civic-office-council-d4",
+    "civic-office-council-d5",
+    "civic-office-council-d6",
+    "civic-office-council-d7",
+    "civic-office-council-d8",
+    "civic-office-council-d9",
+    "civic-project-stabilization-fund",
+    "civic-project-oari",
+    "civic-project-health-center",
+    "civic-project-transit-hub",
+    "civic-office-baylight-authority"
+  ],
+  "blocks": [
+    {
+      "head": "Avery Santana — Mayor",
+      "agentDir": "civic-office-mayor",
+      "promises": [
+        "P-d94459ae1189b667",
+        "P-b87ef751a66c370d"
+      ]
+    },
+    {
+      "head": "Denise Carter — City Council District 1",
+      "agentDir": "civic-office-council-d1",
+      "promises": [
+        "P-25699b7f650ca053"
+      ]
+    },
+    {
+      "head": "Rose Delgado — City Council District 3",
+      "agentDir": "civic-office-council-d3",
+      "promises": [
+        "P-71776abe706ff093"
+      ]
+    },
+    {
+      "head": "Ramon Vega — City Council District 4",
+      "agentDir": "civic-office-council-d4",
+      "promises": []
+    },
+    {
+      "head": "Janae Rivers — City Council District 5",
+      "agentDir": "civic-office-council-d5",
+      "promises": [
+        "P-36f7939757489205"
+      ]
+    },
+    {
+      "head": "Elliott Crane — City Council District 6",
+      "agentDir": "civic-office-council-d6",
+      "promises": []
+    },
+    {
+      "head": "Warren Ashford — City Council District 7",
+      "agentDir": "civic-office-council-d7",
+      "promises": []
+    },
+    {
+      "head": "Nina Chen — City Council District 8",
+      "agentDir": "civic-office-council-d8",
+      "promises": [
+        "P-6903e362468303b6"
+      ]
+    },
+    {
+      "head": "Terrence Mobley — City Council District 9",
+      "agentDir": "civic-office-council-d9",
+      "promises": [
+        "P-b6cac45e0bdc5443"
+      ]
+    },
+    {
+      "head": "Elena Soria Dominguez — Transit Hub Planning Lead",
+      "agentDir": "civic-project-transit-hub",
+      "promises": []
+    },
+    {
+      "head": "Keisha Ramos — Baylight Authority Director",
+      "agentDir": "civic-office-baylight-authority",
+      "promises": []
+    }
+  ],
+  "notDirecting": true,
+  "notDirectingProblem": null,
+  "rejectedBlocks": [],
+  "truncated": 0,
+  "promises": {
+    "staged": 0,
+    "statuses": 0,
+    "rejected": []
+  },
+  "memoryReads": [
+    {
+      "query": "",
+      "status": "ok",
+      "hits": 8,
+      "why": null
+    }
+  ],
+  "notes": 0,
+  "toolCalls": [
+    {
+      "tool": "memory_recall",
+      "resultChars": 13462
+    },
+    {
+      "tool": "sheet_read",
+      "resultChars": 6083
+    },
+    {
+      "tool": "sheet_read",
+      "resultChars": 6025
+    },
+    {
+      "tool": "sheet_read",
+      "resultChars": 2650
+    },
+    {
+      "tool": "sheet_read",
+      "resultChars": 2354
+    },
+    {
+      "tool": "sheet_read",
+      "resultChars": 2237
+    },
+    {
+      "tool": "sheet_read",
+      "resultChars": 1908
+    },
+    {
+      "tool": "sheet_read",
+      "resultChars": 1962
+    },
+    {
+      "tool": "sheet_read",
+      "resultChars": 51
+    },
+    {
+      "tool": "sheet_read",
+      "resultChars": 51
+    }
+  ],
+  "usage": {
+    "in": 178277,
+    "out": 4453,
+    "billedUsd": 0.3606,
+    "rateUsd": 0.4011,
+    "finishReason": "stop"
+  },
+  "attempts": [
+    {
+      "model": "openai/gpt-6.1-sol",
+      "tools": true,
+      "blocks": 11,
+      "notDirecting": true,
+      "usage": {
+        "in": 178277,
+        "out": 4453,
+        "billedUsd": 0.3606,
+        "rateUsd": 0.4011,
+        "finishReason": "stop"
+      }
+    }
+  ],
+  "note": null,
+  "commit": "complete",
+  "directive": "output/mara-directives/mara_directive_c116_AUTO.txt",
+  "staged": "output/mara-directives/staged_c116.json",
+  "ranAt": "2026-11-16T01:28:12.158Z",
+  "commitReceipt": "output/mara-directives/commit_c116.json"
+}

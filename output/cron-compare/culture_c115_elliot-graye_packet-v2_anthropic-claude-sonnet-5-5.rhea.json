@@ -1,0 +1,90 @@
+{
+  "draft": "output/cron-compare/culture_c115_elliot-graye_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "115",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "d44d33705bfa55612e8babbf58376c650246c5093c6a1b1ca6906c40d327c962",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Draft verified clean: all quotes match exact interview records, canon faith mappings are properly adhered to, and C115 faith events align with ground truth.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "graye-faith-ground-v1",
+    "packageVersion": "GRAYE-LEP2-2",
+    "manifestId": "AM-3ad340ac2021",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "482",
+          "105",
+          "480",
+          "106",
+          "427",
+          "107",
+          "97"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Eunice Marston",
+      "Kenji Tanaka",
+      "Lucia Polito",
+      "Ramon Solano"
+    ],
+    "unverified": [
+      "An Epiphany",
+      "Bay Pure Land Buddhist",
+      "Esperanza Parish",
+      "Faith Ledger",
+      "Father Solano",
+      "Gurdwara Singh Sabha Fruitvale",
+      "Interfaith Council",
+      "Living Word",
+      "Masjid An-Nur Oakland",
+      "Postpartum Oakland Network",
+      "Senior Pastor"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0122,
+  "durationMs": 7138,
+  "parseError": false,
+  "ranAt": "2026-11-13T00:15:52.177Z",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 1091,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "d44d33705bfa55612e8babbf58376c650246c5093c6a1b1ca6906c40d327c962",
+    "costUsd": 0.0012
+  }
+}

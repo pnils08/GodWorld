@@ -1,0 +1,98 @@
+{
+  "draft": "output/cron-compare/sports_c115_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "115",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "fed108c9a6916a82af5f714a100a43b158378f5355c9dfda79368c636152e5cb",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Accurate analysis of Taveras's Undocked pledge and standings with all figures, bios, and canon references fully verified against ground truth.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "anthony-sports-analytics-v1",
+    "packageVersion": "ANTHONY-LEP2-3",
+    "manifestId": "AM-8b16207016d2",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "25",
+          "54",
+          "32.1",
+          "-115",
+          "1",
+          "170",
+          "112",
+          "29",
+          "86",
+          "89",
+          "114",
+          "111",
+          "113"
+        ]
+      },
+      {
+        "code": "UNAPPROVED_QUOTE",
+        "values": [
+          "nearly four times"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Clarissa Dane",
+      "Eric Taveras",
+      "Ronald Silk",
+      "Vinnie Keane"
+    ],
+    "unverified": [
+      "Earlier Tribune",
+      "Mandela Parkway",
+      "Taveras's Undocked",
+      "West Oakland Baseball Academy",
+      "Whether Taveras",
+      "With Keane",
+      "World Series"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0116,
+  "durationMs": 5232,
+  "parseError": false,
+  "ranAt": "2026-11-14T18:00:51.877Z",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 776,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "fed108c9a6916a82af5f714a100a43b158378f5355c9dfda79368c636152e5cb",
+    "costUsd": 0.0019
+  }
+}

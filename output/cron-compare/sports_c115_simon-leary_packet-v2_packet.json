@@ -1,0 +1,415 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "115",
+  "persona": "simon-leary",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Simon Leary",
+    "popid": "POP-00016"
+  },
+  "assignment": {
+    "story": {
+      "angle": "The Oaks record is 8-1.",
+      "label": "The Oaks record is 8-1.",
+      "hookLine": "The Oaks record is 8-1.",
+      "kind": "long-view-signal",
+      "hood": "San Antonio",
+      "popids": [
+        "POP-01223",
+        "POP-01022"
+      ],
+      "citizens": [
+        "Harry Hayward (POP-01223)",
+        "Wilson Shepard (POP-01022)"
+      ],
+      "ref": "world_summary_c115.md ## Sports",
+      "cycle": 115
+    }
+  },
+  "angle": "output/cron-compare/sports_c115_simon-leary_packet-v2_angle.json",
+  "quotesRequested": 2,
+  "quotesLanded": 1,
+  "quotes": [
+    {
+      "pop": "POP-01223",
+      "name": "Harry Hayward",
+      "quote": "I mean, the record is the record — 8-1, four straight. That's what we're all carrying. For me, the role shifts game to game, and I just try to be ready for whatever minutes Coach gives me. The Philly night was a good one, but it doesn't change how I approach the next one. You don't overthink it. You just keep playing your part and let the structure hold.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\n  \"answer\": \"quote\",\n  \"quote\": \"I mean, the record is the record — 8-1, four straight. That's what we're all carrying. For me, the role shifts game to game, and I just try to be ready for whatever minutes Coach gives me. The Philly night was a good one, but it doesn't change how I approach the next one. You don't overthink it. You just keep playing your part and let the structure hold.\",\n  \"fact_ids\": [\"F-d3fcc9879b21\", \"F-31ce4c706287\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d3fcc9879b21",
+          "F-31ce4c706287"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01223-ae32afc864",
+        "authoredQuote": true,
+        "publishableQuote": "I mean, the record is the record — 8-1, four straight. That's what we're all carrying. For me, the role shifts game to game, and I just try to be ready for whatever minutes Coach gives me. The Philly night was a good one, but it doesn't change how I approach the next one. You don't overthink it. You just keep playing your part and let the structure hold."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01223",
+          "name": "Harry Hayward",
+          "role": "Oakland Oaks - Power Forward",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Simon Leary",
+          "question": "Harry Hayward is a named player on the Oaks — does his role sit inside the record in a way that lets me talk about load and adjustment without claiming intent? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "long-view-signal",
+          "hood": "San Antonio",
+          "focus": "A sustained record as a load-bearing structure, and what it means when a role changes inside it without the structure failing.",
+          "src": "world_summary_c115.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Harry Hayward — Oakland Oaks - Power Forward",
+          "evidence": [
+            {
+              "id": "EV-76c42ef7dd",
+              "src": "world_summary_c115.md ## Sports",
+              "text": "The Oaks record is 8-1."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C115",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-bc84fc0b7718"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks record is 8-1.",
+            "src": "world_summary_c115.md ## Sports",
+            "id": "F-d3fcc9879b21"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks have won 4 straight.",
+            "src": "world_summary_c115.md ## Sports",
+            "id": "F-31ce4c706287"
+          },
+          {
+            "t": "FACT",
+            "text": "Harry Hayward — Oakland Oaks - Power Forward",
+            "src": "Simulation_Ledger profile for POP-01223",
+            "id": "F-a38d42a8c011"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C11, Spring, holiday=none",
+            "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+            "id": "F-82d77e9a4a71"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-01223",
+      "name": "Harry Hayward",
+      "quote": "I mean, the record is the record — 8-1, four straight. That's what we're all carrying. For me, the role shifts game to game, and I just try to be ready for whatever minutes Coach gives me. The Philly night was a good one, but it doesn't change how I approach the next one. You don't overthink it. You just keep playing your part and let the structure hold.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\n  \"answer\": \"quote\",\n  \"quote\": \"I mean, the record is the record — 8-1, four straight. That's what we're all carrying. For me, the role shifts game to game, and I just try to be ready for whatever minutes Coach gives me. The Philly night was a good one, but it doesn't change how I approach the next one. You don't overthink it. You just keep playing your part and let the structure hold.\",\n  \"fact_ids\": [\"F-d3fcc9879b21\", \"F-31ce4c706287\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d3fcc9879b21",
+          "F-31ce4c706287"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01223-ae32afc864",
+        "authoredQuote": true,
+        "publishableQuote": "I mean, the record is the record — 8-1, four straight. That's what we're all carrying. For me, the role shifts game to game, and I just try to be ready for whatever minutes Coach gives me. The Philly night was a good one, but it doesn't change how I approach the next one. You don't overthink it. You just keep playing your part and let the structure hold."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01223",
+          "name": "Harry Hayward",
+          "role": "Oakland Oaks - Power Forward",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Simon Leary",
+          "question": "Harry Hayward is a named player on the Oaks — does his role sit inside the record in a way that lets me talk about load and adjustment without claiming intent? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "long-view-signal",
+          "hood": "San Antonio",
+          "focus": "A sustained record as a load-bearing structure, and what it means when a role changes inside it without the structure failing.",
+          "src": "world_summary_c115.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Harry Hayward — Oakland Oaks - Power Forward",
+          "evidence": [
+            {
+              "id": "EV-76c42ef7dd",
+              "src": "world_summary_c115.md ## Sports",
+              "text": "The Oaks record is 8-1."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C115",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-bc84fc0b7718"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks record is 8-1.",
+            "src": "world_summary_c115.md ## Sports",
+            "id": "F-d3fcc9879b21"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks have won 4 straight.",
+            "src": "world_summary_c115.md ## Sports",
+            "id": "F-31ce4c706287"
+          },
+          {
+            "t": "FACT",
+            "text": "Harry Hayward — Oakland Oaks - Power Forward",
+            "src": "Simulation_Ledger profile for POP-01223",
+            "id": "F-a38d42a8c011"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C11, Spring, holiday=none",
+            "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+            "id": "F-82d77e9a4a71"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01022",
+      "name": "Wilson Shepard",
+      "quote": null,
+      "disp": "a real fan, plans around games",
+      "recorded": false,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: answer must be quote|abstain",
+      "raw": "{\"answer\":\"Yeah, you can reference the position. That's not a secret—it's on the door, it's in the box scores, it's how folks know me around here. But the decisions and the plans, those belong to the whole staff and the players who go out and execute. My name being attached doesn't make me the one pulling every string. The structure's bigger than any one title, and honestly, that's what's holding this thing together. Eight and one—that's not me, that's the room.\",\"fact_ids\":[\"F-bf4cd0f8b3df\",\"F-d3fcc9879b21\"],\"basis\":\"lived-context\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01022",
+          "name": "Wilson Shepard",
+          "role": "Head Coach, Oakland Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Simon Leary",
+          "question": "Wilson Shepard is the head coach — can I reference his position as part of the structure without attributing a decision or plan to him? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "long-view-signal",
+          "hood": "San Antonio",
+          "focus": "A sustained record as a load-bearing structure, and what it means when a role changes inside it without the structure failing.",
+          "src": "world_summary_c115.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Wilson Shepard — Head Coach, Oakland Oaks",
+          "evidence": [
+            {
+              "id": "EV-a52150527f",
+              "src": "world_summary_c115.md ## Sports",
+              "text": "The Oaks record is 8-1."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C115",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-bc84fc0b7718"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks record is 8-1.",
+            "src": "world_summary_c115.md ## Sports",
+            "id": "F-d3fcc9879b21"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks have won 4 straight.",
+            "src": "world_summary_c115.md ## Sports",
+            "id": "F-31ce4c706287"
+          },
+          {
+            "t": "FACT",
+            "text": "Wilson Shepard — Head Coach, Oakland Oaks",
+            "src": "Simulation_Ledger profile for POP-01022",
+            "id": "F-bf4cd0f8b3df"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C11, Spring, holiday=none",
+            "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+            "id": "F-82d77e9a4a71"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-11-12T19:17:29.308Z"
+}

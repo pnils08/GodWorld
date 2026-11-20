@@ -1,0 +1,1324 @@
+{
+  "stage": "report",
+  "desk": "culture",
+  "cycle": "116",
+  "persona": "elliot-graye",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Elliot Graye",
+    "popid": "POP-00012"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-faith",
+      "angle": "interfaith dialogue at Interfaith Council (Adams Point) — the week in faith, and Adams Point United Methodist in focus",
+      "label": "8 faith events on the record since C110 · Adams Point United Methodist in Adams Point | 7 named on the record",
+      "hookLine": "Interfaith Council (Adams Point), C115: interfaith prayer breakfast brings leaders together",
+      "hood": "Adams Point",
+      "citizens": [
+        "Daniel Han (POP-00757)",
+        "Ramon Solano (POP-00756)",
+        "Robert Jaston (POP-00758)",
+        "Naomi Sterling (POP-00759)",
+        "Yael Bauer (POP-00760)",
+        "Miriam Goldstein (POP-00767)",
+        "Antoine Vermeer (POP-00755)"
+      ],
+      "popids": [
+        "POP-00757",
+        "POP-00756",
+        "POP-00758",
+        "POP-00759",
+        "POP-00760",
+        "POP-00767",
+        "POP-00755"
+      ],
+      "ref": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+      "cycle": 116
+    }
+  },
+  "angle": "output/cron-compare/culture_c116_elliot-graye_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 4,
+  "quotes": [
+    {
+      "pop": "POP-00757",
+      "name": "Daniel Han",
+      "quote": "I've seen firsthand the impact of job training programs in our community. While Adams Point United Methodist isn't directly running such a program, our involvement in the Interfaith Council has shown me the value of faith organizations coming together to support local initiatives. I recall the interfaith prayer breakfast we had last cycle, where leaders from various faith backgrounds gathered to discuss ways to serve the community. It's this kind of collaboration that can lead to meaningful support for job training and other vital programs.",
+      "disp": "casually interested in the teams; somewhat warm; somewhat sociable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen firsthand the impact of job training programs in our community. While Adams Point United Methodist isn't directly running such a program, our involvement in the Interfaith Council has shown me the value of faith organizations coming together to support local initiatives. I recall the interfaith prayer breakfast we had last cycle, where leaders from various faith backgrounds gathered to discuss ways to serve the community. It's this kind of collaboration that can lead to meaningful support for job training and other vital programs.\",\n  \"fact_ids\": [\"F-5d78669c0730\", \"F-081007882588\", \"F-d7d6402d0e75\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5d78669c0730",
+          "F-081007882588",
+          "F-d7d6402d0e75"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00757-422b07364f",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen firsthand the impact of job training programs in our community. While Adams Point United Methodist isn't directly running such a program, our involvement in the Interfaith Council has shown me the value of faith organizations coming together to support local initiatives. I recall the interfaith prayer breakfast we had last cycle, where leaders from various faith backgrounds gathered to discuss ways to serve the community. It's this kind of collaboration that can lead to meaningful support for job training and other vital programs."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00757",
+          "name": "Daniel Han",
+          "role": "Senior Pastor / Faith Leader",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "Can you share more about Adams Point United Methodist's job training programs and their impact on the local community? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "Adams Point",
+          "focus": "Adams Point United Methodist",
+          "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Daniel Han — Senior Pastor / Faith Leader — Lake Merritt",
+          "evidence": [
+            {
+              "id": "EV-29a6324538",
+              "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+              "text": "Interfaith Council (Adams Point), C115: interfaith prayer breakfast brings leaders together"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "In focus: Adams Point United Methodist — Methodist, Adams Point, congregation 300, founded 150 years ago, led today by Rev. Daniel Han — progressive, LGBTQ affirming",
+            "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+            "id": "F-3ca302deb209"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C110 · Adams Point United Methodist in Adams Point | 7 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+            "id": "F-2bd5760c22c2"
+          },
+          {
+            "t": "FACT",
+            "text": "Interfaith Council (Adams Point), C115: interfaith prayer breakfast brings leaders together",
+            "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+            "id": "F-5d78669c0730"
+          },
+          {
+            "t": "FACT",
+            "text": "Interfaith Council (Adams Point), C115 — interfaith dialogue: interfaith prayer breakfast brings leaders together (attendance 123)",
+            "src": "output/beats/Faith_Ledger.jsonl C115 \"Interfaith Council\"",
+            "id": "F-081007882588"
+          },
+          {
+            "t": "FACT",
+            "text": "Interfaith Council (Chinatown), C114 — interfaith dialogue: dialogue series addresses shared concerns (attendance 53)",
+            "src": "output/beats/Faith_Ledger.jsonl C114 \"Interfaith Council\"",
+            "id": "F-74afa9e34a82"
+          },
+          {
+            "t": "FACT",
+            "text": "St. Esperanza Parish (Fruitvale), C116 — community program: job training workshop begins new session (attendance 86)",
+            "src": "output/beats/Faith_Ledger.jsonl C116 \"St. Esperanza Parish\"",
+            "id": "F-6781f038cd36"
+          },
+          {
+            "t": "FACT",
+            "text": "New Covenant Pentecostal Assembly (West Oakland), C116 — community program: seniors lunch program marks milestone (attendance 153)",
+            "src": "output/beats/Faith_Ledger.jsonl C116 \"New Covenant Pentecostal Assembly\"",
+            "id": "F-cd3239eaf5d0"
+          },
+          {
+            "t": "FACT",
+            "text": "Daniel Han — Senior Pastor / Faith Leader — Lake Merritt",
+            "src": "Simulation_Ledger profile for POP-00757",
+            "id": "F-d7d6402d0e75"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00756",
+      "name": "Ramon Solano",
+      "quote": "I've heard that Adams Point United Methodist is involved with the Interfaith Council, and that they had a prayer breakfast that brought leaders together. As a faith leader myself, I appreciate efforts to build bridges between different communities.",
+      "disp": "somewhat warm",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've heard that Adams Point United Methodist is involved with the Interfaith Council, and that they had a prayer breakfast that brought leaders together. As a faith leader myself, I appreciate efforts to build bridges between different communities.\",\n  \"fact_ids\": [\"F-5d78669c0730\", \"F-081007882588\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5d78669c0730",
+          "F-081007882588"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00756-bc7d6e3ea9",
+        "authoredQuote": true,
+        "publishableQuote": "I've heard that Adams Point United Methodist is involved with the Interfaith Council, and that they had a prayer breakfast that brought leaders together. As a faith leader myself, I appreciate efforts to build bridges between different communities."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00756",
+          "name": "Ramon Solano",
+          "role": "Senior Pastor / Faith Leader",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "What have you seen, felt, or understood about \"Adams Point United Methodist\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "Adams Point",
+          "focus": "Adams Point United Methodist",
+          "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Ramon Solano — Senior Pastor / Faith Leader — Fruitvale",
+          "evidence": [
+            {
+              "id": "EV-ecab3b3992",
+              "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+              "text": "Interfaith Council (Adams Point), C115: interfaith prayer breakfast brings leaders together"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C110 · Adams Point United Methodist in Adams Point | 7 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+            "id": "F-2bd5760c22c2"
+          },
+          {
+            "t": "FACT",
+            "text": "Interfaith Council (Adams Point), C115: interfaith prayer breakfast brings leaders together",
+            "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+            "id": "F-5d78669c0730"
+          },
+          {
+            "t": "FACT",
+            "text": "Interfaith Council (Adams Point), C115 — interfaith dialogue: interfaith prayer breakfast brings leaders together (attendance 123)",
+            "src": "output/beats/Faith_Ledger.jsonl C115 \"Interfaith Council\"",
+            "id": "F-081007882588"
+          },
+          {
+            "t": "FACT",
+            "text": "Interfaith Council (Chinatown), C114 — interfaith dialogue: dialogue series addresses shared concerns (attendance 53)",
+            "src": "output/beats/Faith_Ledger.jsonl C114 \"Interfaith Council\"",
+            "id": "F-74afa9e34a82"
+          },
+          {
+            "t": "FACT",
+            "text": "St. Esperanza Parish (Fruitvale), C116 — community program: job training workshop begins new session (attendance 86)",
+            "src": "output/beats/Faith_Ledger.jsonl C116 \"St. Esperanza Parish\"",
+            "id": "F-6781f038cd36"
+          },
+          {
+            "t": "FACT",
+            "text": "New Covenant Pentecostal Assembly (West Oakland), C116 — community program: seniors lunch program marks milestone (attendance 153)",
+            "src": "output/beats/Faith_Ledger.jsonl C116 \"New Covenant Pentecostal Assembly\"",
+            "id": "F-cd3239eaf5d0"
+          },
+          {
+            "t": "FACT",
+            "text": "Temple Beth Or (Rockridge), C116 — community program: food pantry serves neighbors in need (attendance 89)",
+            "src": "output/beats/Faith_Ledger.jsonl C116 \"Temple Beth Or\"",
+            "id": "F-e83f4386e722"
+          },
+          {
+            "t": "FACT",
+            "text": "Ramon Solano — Senior Pastor / Faith Leader — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00756",
+            "id": "F-875ed4ba05eb"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00758",
+      "name": "Robert Jaston",
+      "quote": "I've seen Adams Point United Methodist participate in the Interfaith Council's prayer breakfast, bringing leaders together in Adams Point. It's heartening to see different faith communities come together like that.",
+      "disp": "somewhat warm; somewhat sociable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen Adams Point United Methodist participate in the Interfaith Council's prayer breakfast, bringing leaders together in Adams Point. It's heartening to see different faith communities come together like that.\",\n  \"fact_ids\": [\"F-5d78669c0730\", \"F-081007882588\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5d78669c0730",
+          "F-081007882588"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00758-8275028870",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen Adams Point United Methodist participate in the Interfaith Council's prayer breakfast, bringing leaders together in Adams Point. It's heartening to see different faith communities come together like that."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00758",
+          "name": "Robert Jaston",
+          "role": "Senior Pastor / Faith Leader",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "What have you seen, felt, or understood about \"Adams Point United Methodist\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "Adams Point",
+          "focus": "Adams Point United Methodist",
+          "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Robert Jaston — Senior Pastor / Faith Leader — West Oakland",
+          "evidence": [
+            {
+              "id": "EV-3610722be0",
+              "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+              "text": "Interfaith Council (Adams Point), C115: interfaith prayer breakfast brings leaders together"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C110 · Adams Point United Methodist in Adams Point | 7 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+            "id": "F-2bd5760c22c2"
+          },
+          {
+            "t": "FACT",
+            "text": "Interfaith Council (Adams Point), C115: interfaith prayer breakfast brings leaders together",
+            "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+            "id": "F-5d78669c0730"
+          },
+          {
+            "t": "FACT",
+            "text": "Interfaith Council (Adams Point), C115 — interfaith dialogue: interfaith prayer breakfast brings leaders together (attendance 123)",
+            "src": "output/beats/Faith_Ledger.jsonl C115 \"Interfaith Council\"",
+            "id": "F-081007882588"
+          },
+          {
+            "t": "FACT",
+            "text": "Interfaith Council (Chinatown), C114 — interfaith dialogue: dialogue series addresses shared concerns (attendance 53)",
+            "src": "output/beats/Faith_Ledger.jsonl C114 \"Interfaith Council\"",
+            "id": "F-74afa9e34a82"
+          },
+          {
+            "t": "FACT",
+            "text": "St. Esperanza Parish (Fruitvale), C116 — community program: job training workshop begins new session (attendance 86)",
+            "src": "output/beats/Faith_Ledger.jsonl C116 \"St. Esperanza Parish\"",
+            "id": "F-6781f038cd36"
+          },
+          {
+            "t": "FACT",
+            "text": "New Covenant Pentecostal Assembly (West Oakland), C116 — community program: seniors lunch program marks milestone (attendance 153)",
+            "src": "output/beats/Faith_Ledger.jsonl C116 \"New Covenant Pentecostal Assembly\"",
+            "id": "F-cd3239eaf5d0"
+          },
+          {
+            "t": "FACT",
+            "text": "Temple Beth Or (Rockridge), C116 — community program: food pantry serves neighbors in need (attendance 89)",
+            "src": "output/beats/Faith_Ledger.jsonl C116 \"Temple Beth Or\"",
+            "id": "F-e83f4386e722"
+          },
+          {
+            "t": "FACT",
+            "text": "Robert Jaston — Senior Pastor / Faith Leader — West Oakland",
+            "src": "Simulation_Ledger profile for POP-00758",
+            "id": "F-93ea4f11830d"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00759",
+      "name": "Naomi Sterling",
+      "quote": "I've seen Adams Point United Methodist play a role in the Interfaith Council's efforts, particularly during their interfaith prayer breakfast in C115, which brought together leaders from various faith backgrounds. As a faith leader myself, I appreciate the work they do in fostering dialogue and cooperation among different communities.",
+      "disp": "somewhat warm; fairly steady",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen Adams Point United Methodist play a role in the Interfaith Council's efforts, particularly during their interfaith prayer breakfast in C115, which brought together leaders from various faith backgrounds. As a faith leader myself, I appreciate the work they do in fostering dialogue and cooperation among different communities.\",\n  \"fact_ids\": [\"F-5d78669c0730\", \"F-081007882588\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5d78669c0730",
+          "F-081007882588"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00759-5430bfd51d",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen Adams Point United Methodist play a role in the Interfaith Council's efforts, particularly during their interfaith prayer breakfast in C115, which brought together leaders from various faith backgrounds. As a faith leader myself, I appreciate the work they do in fostering dialogue and cooperation among different communities."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00759",
+          "name": "Naomi Sterling",
+          "role": "Senior Pastor / Faith Leader",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "What have you seen, felt, or understood about \"Adams Point United Methodist\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "Adams Point",
+          "focus": "Adams Point United Methodist",
+          "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Naomi Sterling — Senior Pastor / Faith Leader — Rockridge",
+          "evidence": [
+            {
+              "id": "EV-8fb9721c15",
+              "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+              "text": "Interfaith Council (Adams Point), C115: interfaith prayer breakfast brings leaders together"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C110 · Adams Point United Methodist in Adams Point | 7 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+            "id": "F-2bd5760c22c2"
+          },
+          {
+            "t": "FACT",
+            "text": "Interfaith Council (Adams Point), C115: interfaith prayer breakfast brings leaders together",
+            "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+            "id": "F-5d78669c0730"
+          },
+          {
+            "t": "FACT",
+            "text": "Interfaith Council (Adams Point), C115 — interfaith dialogue: interfaith prayer breakfast brings leaders together (attendance 123)",
+            "src": "output/beats/Faith_Ledger.jsonl C115 \"Interfaith Council\"",
+            "id": "F-081007882588"
+          },
+          {
+            "t": "FACT",
+            "text": "Interfaith Council (Chinatown), C114 — interfaith dialogue: dialogue series addresses shared concerns (attendance 53)",
+            "src": "output/beats/Faith_Ledger.jsonl C114 \"Interfaith Council\"",
+            "id": "F-74afa9e34a82"
+          },
+          {
+            "t": "FACT",
+            "text": "St. Esperanza Parish (Fruitvale), C116 — community program: job training workshop begins new session (attendance 86)",
+            "src": "output/beats/Faith_Ledger.jsonl C116 \"St. Esperanza Parish\"",
+            "id": "F-6781f038cd36"
+          },
+          {
+            "t": "FACT",
+            "text": "New Covenant Pentecostal Assembly (West Oakland), C116 — community program: seniors lunch program marks milestone (attendance 153)",
+            "src": "output/beats/Faith_Ledger.jsonl C116 \"New Covenant Pentecostal Assembly\"",
+            "id": "F-cd3239eaf5d0"
+          },
+          {
+            "t": "FACT",
+            "text": "Temple Beth Or (Rockridge), C116 — community program: food pantry serves neighbors in need (attendance 89)",
+            "src": "output/beats/Faith_Ledger.jsonl C116 \"Temple Beth Or\"",
+            "id": "F-e83f4386e722"
+          },
+          {
+            "t": "FACT",
+            "text": "Naomi Sterling — Senior Pastor / Faith Leader — Rockridge",
+            "src": "Simulation_Ledger profile for POP-00759",
+            "id": "F-31f4090db03e"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00757",
+      "name": "Daniel Han",
+      "quote": "I've seen firsthand the impact of job training programs in our community. While Adams Point United Methodist isn't directly running such a program, our involvement in the Interfaith Council has shown me the value of faith organizations coming together to support local initiatives. I recall the interfaith prayer breakfast we had last cycle, where leaders from various faith backgrounds gathered to discuss ways to serve the community. It's this kind of collaboration that can lead to meaningful support for job training and other vital programs.",
+      "disp": "casually interested in the teams; somewhat warm; somewhat sociable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen firsthand the impact of job training programs in our community. While Adams Point United Methodist isn't directly running such a program, our involvement in the Interfaith Council has shown me the value of faith organizations coming together to support local initiatives. I recall the interfaith prayer breakfast we had last cycle, where leaders from various faith backgrounds gathered to discuss ways to serve the community. It's this kind of collaboration that can lead to meaningful support for job training and other vital programs.\",\n  \"fact_ids\": [\"F-5d78669c0730\", \"F-081007882588\", \"F-d7d6402d0e75\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5d78669c0730",
+          "F-081007882588",
+          "F-d7d6402d0e75"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00757-422b07364f",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen firsthand the impact of job training programs in our community. While Adams Point United Methodist isn't directly running such a program, our involvement in the Interfaith Council has shown me the value of faith organizations coming together to support local initiatives. I recall the interfaith prayer breakfast we had last cycle, where leaders from various faith backgrounds gathered to discuss ways to serve the community. It's this kind of collaboration that can lead to meaningful support for job training and other vital programs."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00757",
+          "name": "Daniel Han",
+          "role": "Senior Pastor / Faith Leader",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "Can you share more about Adams Point United Methodist's job training programs and their impact on the local community? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "Adams Point",
+          "focus": "Adams Point United Methodist",
+          "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Daniel Han — Senior Pastor / Faith Leader — Lake Merritt",
+          "evidence": [
+            {
+              "id": "EV-29a6324538",
+              "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+              "text": "Interfaith Council (Adams Point), C115: interfaith prayer breakfast brings leaders together"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "In focus: Adams Point United Methodist — Methodist, Adams Point, congregation 300, founded 150 years ago, led today by Rev. Daniel Han — progressive, LGBTQ affirming",
+            "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+            "id": "F-3ca302deb209"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C110 · Adams Point United Methodist in Adams Point | 7 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+            "id": "F-2bd5760c22c2"
+          },
+          {
+            "t": "FACT",
+            "text": "Interfaith Council (Adams Point), C115: interfaith prayer breakfast brings leaders together",
+            "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+            "id": "F-5d78669c0730"
+          },
+          {
+            "t": "FACT",
+            "text": "Interfaith Council (Adams Point), C115 — interfaith dialogue: interfaith prayer breakfast brings leaders together (attendance 123)",
+            "src": "output/beats/Faith_Ledger.jsonl C115 \"Interfaith Council\"",
+            "id": "F-081007882588"
+          },
+          {
+            "t": "FACT",
+            "text": "Interfaith Council (Chinatown), C114 — interfaith dialogue: dialogue series addresses shared concerns (attendance 53)",
+            "src": "output/beats/Faith_Ledger.jsonl C114 \"Interfaith Council\"",
+            "id": "F-74afa9e34a82"
+          },
+          {
+            "t": "FACT",
+            "text": "St. Esperanza Parish (Fruitvale), C116 — community program: job training workshop begins new session (attendance 86)",
+            "src": "output/beats/Faith_Ledger.jsonl C116 \"St. Esperanza Parish\"",
+            "id": "F-6781f038cd36"
+          },
+          {
+            "t": "FACT",
+            "text": "New Covenant Pentecostal Assembly (West Oakland), C116 — community program: seniors lunch program marks milestone (attendance 153)",
+            "src": "output/beats/Faith_Ledger.jsonl C116 \"New Covenant Pentecostal Assembly\"",
+            "id": "F-cd3239eaf5d0"
+          },
+          {
+            "t": "FACT",
+            "text": "Daniel Han — Senior Pastor / Faith Leader — Lake Merritt",
+            "src": "Simulation_Ledger profile for POP-00757",
+            "id": "F-d7d6402d0e75"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00756",
+      "name": "Ramon Solano",
+      "quote": "I've heard that Adams Point United Methodist is involved with the Interfaith Council, and that they had a prayer breakfast that brought leaders together. As a faith leader myself, I appreciate efforts to build bridges between different communities.",
+      "disp": "somewhat warm",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've heard that Adams Point United Methodist is involved with the Interfaith Council, and that they had a prayer breakfast that brought leaders together. As a faith leader myself, I appreciate efforts to build bridges between different communities.\",\n  \"fact_ids\": [\"F-5d78669c0730\", \"F-081007882588\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5d78669c0730",
+          "F-081007882588"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00756-bc7d6e3ea9",
+        "authoredQuote": true,
+        "publishableQuote": "I've heard that Adams Point United Methodist is involved with the Interfaith Council, and that they had a prayer breakfast that brought leaders together. As a faith leader myself, I appreciate efforts to build bridges between different communities."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00756",
+          "name": "Ramon Solano",
+          "role": "Senior Pastor / Faith Leader",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "What have you seen, felt, or understood about \"Adams Point United Methodist\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "Adams Point",
+          "focus": "Adams Point United Methodist",
+          "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Ramon Solano — Senior Pastor / Faith Leader — Fruitvale",
+          "evidence": [
+            {
+              "id": "EV-ecab3b3992",
+              "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+              "text": "Interfaith Council (Adams Point), C115: interfaith prayer breakfast brings leaders together"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C110 · Adams Point United Methodist in Adams Point | 7 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+            "id": "F-2bd5760c22c2"
+          },
+          {
+            "t": "FACT",
+            "text": "Interfaith Council (Adams Point), C115: interfaith prayer breakfast brings leaders together",
+            "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+            "id": "F-5d78669c0730"
+          },
+          {
+            "t": "FACT",
+            "text": "Interfaith Council (Adams Point), C115 — interfaith dialogue: interfaith prayer breakfast brings leaders together (attendance 123)",
+            "src": "output/beats/Faith_Ledger.jsonl C115 \"Interfaith Council\"",
+            "id": "F-081007882588"
+          },
+          {
+            "t": "FACT",
+            "text": "Interfaith Council (Chinatown), C114 — interfaith dialogue: dialogue series addresses shared concerns (attendance 53)",
+            "src": "output/beats/Faith_Ledger.jsonl C114 \"Interfaith Council\"",
+            "id": "F-74afa9e34a82"
+          },
+          {
+            "t": "FACT",
+            "text": "St. Esperanza Parish (Fruitvale), C116 — community program: job training workshop begins new session (attendance 86)",
+            "src": "output/beats/Faith_Ledger.jsonl C116 \"St. Esperanza Parish\"",
+            "id": "F-6781f038cd36"
+          },
+          {
+            "t": "FACT",
+            "text": "New Covenant Pentecostal Assembly (West Oakland), C116 — community program: seniors lunch program marks milestone (attendance 153)",
+            "src": "output/beats/Faith_Ledger.jsonl C116 \"New Covenant Pentecostal Assembly\"",
+            "id": "F-cd3239eaf5d0"
+          },
+          {
+            "t": "FACT",
+            "text": "Temple Beth Or (Rockridge), C116 — community program: food pantry serves neighbors in need (attendance 89)",
+            "src": "output/beats/Faith_Ledger.jsonl C116 \"Temple Beth Or\"",
+            "id": "F-e83f4386e722"
+          },
+          {
+            "t": "FACT",
+            "text": "Ramon Solano — Senior Pastor / Faith Leader — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00756",
+            "id": "F-875ed4ba05eb"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00758",
+      "name": "Robert Jaston",
+      "quote": "I've seen Adams Point United Methodist participate in the Interfaith Council's prayer breakfast, bringing leaders together in Adams Point. It's heartening to see different faith communities come together like that.",
+      "disp": "somewhat warm; somewhat sociable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen Adams Point United Methodist participate in the Interfaith Council's prayer breakfast, bringing leaders together in Adams Point. It's heartening to see different faith communities come together like that.\",\n  \"fact_ids\": [\"F-5d78669c0730\", \"F-081007882588\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5d78669c0730",
+          "F-081007882588"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00758-8275028870",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen Adams Point United Methodist participate in the Interfaith Council's prayer breakfast, bringing leaders together in Adams Point. It's heartening to see different faith communities come together like that."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00758",
+          "name": "Robert Jaston",
+          "role": "Senior Pastor / Faith Leader",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "What have you seen, felt, or understood about \"Adams Point United Methodist\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "Adams Point",
+          "focus": "Adams Point United Methodist",
+          "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Robert Jaston — Senior Pastor / Faith Leader — West Oakland",
+          "evidence": [
+            {
+              "id": "EV-3610722be0",
+              "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+              "text": "Interfaith Council (Adams Point), C115: interfaith prayer breakfast brings leaders together"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C110 · Adams Point United Methodist in Adams Point | 7 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+            "id": "F-2bd5760c22c2"
+          },
+          {
+            "t": "FACT",
+            "text": "Interfaith Council (Adams Point), C115: interfaith prayer breakfast brings leaders together",
+            "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+            "id": "F-5d78669c0730"
+          },
+          {
+            "t": "FACT",
+            "text": "Interfaith Council (Adams Point), C115 — interfaith dialogue: interfaith prayer breakfast brings leaders together (attendance 123)",
+            "src": "output/beats/Faith_Ledger.jsonl C115 \"Interfaith Council\"",
+            "id": "F-081007882588"
+          },
+          {
+            "t": "FACT",
+            "text": "Interfaith Council (Chinatown), C114 — interfaith dialogue: dialogue series addresses shared concerns (attendance 53)",
+            "src": "output/beats/Faith_Ledger.jsonl C114 \"Interfaith Council\"",
+            "id": "F-74afa9e34a82"
+          },
+          {
+            "t": "FACT",
+            "text": "St. Esperanza Parish (Fruitvale), C116 — community program: job training workshop begins new session (attendance 86)",
+            "src": "output/beats/Faith_Ledger.jsonl C116 \"St. Esperanza Parish\"",
+            "id": "F-6781f038cd36"
+          },
+          {
+            "t": "FACT",
+            "text": "New Covenant Pentecostal Assembly (West Oakland), C116 — community program: seniors lunch program marks milestone (attendance 153)",
+            "src": "output/beats/Faith_Ledger.jsonl C116 \"New Covenant Pentecostal Assembly\"",
+            "id": "F-cd3239eaf5d0"
+          },
+          {
+            "t": "FACT",
+            "text": "Temple Beth Or (Rockridge), C116 — community program: food pantry serves neighbors in need (attendance 89)",
+            "src": "output/beats/Faith_Ledger.jsonl C116 \"Temple Beth Or\"",
+            "id": "F-e83f4386e722"
+          },
+          {
+            "t": "FACT",
+            "text": "Robert Jaston — Senior Pastor / Faith Leader — West Oakland",
+            "src": "Simulation_Ledger profile for POP-00758",
+            "id": "F-93ea4f11830d"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00759",
+      "name": "Naomi Sterling",
+      "quote": "I've seen Adams Point United Methodist play a role in the Interfaith Council's efforts, particularly during their interfaith prayer breakfast in C115, which brought together leaders from various faith backgrounds. As a faith leader myself, I appreciate the work they do in fostering dialogue and cooperation among different communities.",
+      "disp": "somewhat warm; fairly steady",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen Adams Point United Methodist play a role in the Interfaith Council's efforts, particularly during their interfaith prayer breakfast in C115, which brought together leaders from various faith backgrounds. As a faith leader myself, I appreciate the work they do in fostering dialogue and cooperation among different communities.\",\n  \"fact_ids\": [\"F-5d78669c0730\", \"F-081007882588\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5d78669c0730",
+          "F-081007882588"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00759-5430bfd51d",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen Adams Point United Methodist play a role in the Interfaith Council's efforts, particularly during their interfaith prayer breakfast in C115, which brought together leaders from various faith backgrounds. As a faith leader myself, I appreciate the work they do in fostering dialogue and cooperation among different communities."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00759",
+          "name": "Naomi Sterling",
+          "role": "Senior Pastor / Faith Leader",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "What have you seen, felt, or understood about \"Adams Point United Methodist\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "Adams Point",
+          "focus": "Adams Point United Methodist",
+          "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Naomi Sterling — Senior Pastor / Faith Leader — Rockridge",
+          "evidence": [
+            {
+              "id": "EV-8fb9721c15",
+              "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+              "text": "Interfaith Council (Adams Point), C115: interfaith prayer breakfast brings leaders together"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C110 · Adams Point United Methodist in Adams Point | 7 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+            "id": "F-2bd5760c22c2"
+          },
+          {
+            "t": "FACT",
+            "text": "Interfaith Council (Adams Point), C115: interfaith prayer breakfast brings leaders together",
+            "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\"",
+            "id": "F-5d78669c0730"
+          },
+          {
+            "t": "FACT",
+            "text": "Interfaith Council (Adams Point), C115 — interfaith dialogue: interfaith prayer breakfast brings leaders together (attendance 123)",
+            "src": "output/beats/Faith_Ledger.jsonl C115 \"Interfaith Council\"",
+            "id": "F-081007882588"
+          },
+          {
+            "t": "FACT",
+            "text": "Interfaith Council (Chinatown), C114 — interfaith dialogue: dialogue series addresses shared concerns (attendance 53)",
+            "src": "output/beats/Faith_Ledger.jsonl C114 \"Interfaith Council\"",
+            "id": "F-74afa9e34a82"
+          },
+          {
+            "t": "FACT",
+            "text": "St. Esperanza Parish (Fruitvale), C116 — community program: job training workshop begins new session (attendance 86)",
+            "src": "output/beats/Faith_Ledger.jsonl C116 \"St. Esperanza Parish\"",
+            "id": "F-6781f038cd36"
+          },
+          {
+            "t": "FACT",
+            "text": "New Covenant Pentecostal Assembly (West Oakland), C116 — community program: seniors lunch program marks milestone (attendance 153)",
+            "src": "output/beats/Faith_Ledger.jsonl C116 \"New Covenant Pentecostal Assembly\"",
+            "id": "F-cd3239eaf5d0"
+          },
+          {
+            "t": "FACT",
+            "text": "Temple Beth Or (Rockridge), C116 — community program: food pantry serves neighbors in need (attendance 89)",
+            "src": "output/beats/Faith_Ledger.jsonl C116 \"Temple Beth Or\"",
+            "id": "F-e83f4386e722"
+          },
+          {
+            "t": "FACT",
+            "text": "Naomi Sterling — Senior Pastor / Faith Leader — Rockridge",
+            "src": "Simulation_Ledger profile for POP-00759",
+            "id": "F-31f4090db03e"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-11-19T19:15:56.515Z"
+}

@@ -1,0 +1,47 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "116",
+  "persona": "anthony-raines",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Anthony Raines",
+    "popid": "POP-00017"
+  },
+  "assignment": {
+    "story": {
+      "kind": "sports-analytics",
+      "angle": "The A's move on the feed is a board-architecture question first: does the fit close a hole or stack redundancy — Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+      "label": "A's · trade-recap — Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+      "hookLine": "Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+      "hood": "Lake Merritt",
+      "pulseClass": "roster-architecture",
+      "team": "A's",
+      "eventKind": "trade-recap",
+      "citizens": [
+        "Carmen Mesa (POP-00081)",
+        "Giancarlo Hernandez (POP-01239)",
+        "Mike Paulson (POP-00527)",
+        "Kevin Clark (POP-00053)",
+        "Ernesto Quintero (POP-00050)"
+      ],
+      "popids": [
+        "POP-00081",
+        "POP-01239",
+        "POP-00527",
+        "POP-00053",
+        "POP-00050"
+      ],
+      "ref": "world_summary_c116.md ## Sports",
+      "cycle": 116
+    }
+  },
+  "angle": "output/cron-compare/sports_c116_anthony-raines_packet-v2_angle.json",
+  "quotesRequested": 0,
+  "quotesLanded": 0,
+  "quotes": [],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [],
+  "ranAt": "2026-11-16T19:17:50.251Z"
+}

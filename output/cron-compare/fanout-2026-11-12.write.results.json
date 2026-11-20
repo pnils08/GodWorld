@@ -1,0 +1,221 @@
+{
+  "date": "2026-11-12",
+  "stage": "write",
+  "results": [
+    {
+      "name": "Elliot Graye",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 6,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 1091,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Simon Leary",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 2,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 474,
+        "contractScore": 1,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Hal Richmond",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 6,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 975,
+        "contractScore": 1,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Talia Finch",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 6,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 519,
+        "contractScore": 2,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Tamsin Pruitt",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 6,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [
+          {
+            "text": "Harmony Gupta moved into a place of their own in Laurel, renting",
+            "run": "moved into a place of their"
+          },
+          {
+            "text": "Harmony Gupta — in their life, C114: checked the Civis Systems Field livestream just to see if the grass had been laid down yet",
+            "run": "checked the civis systems field livestream"
+          },
+          {
+            "text": "Harmony Gupta — in their life, C114: closed their eyes during the choir solo and actually felt the tension leave their shoulders",
+            "run": "choir solo and actually felt the"
+          },
+          {
+            "text": "Harmony Gupta — in their life, C115: waited at the Laurel Cleaners counter while someone hunted for the claim ticket",
+            "run": "waited at the laurel cleaners counter"
+          },
+          {
+            "text": "Christine Nakamura — in their life, C114: saved the Tribune clipping with their neighborhood in it — the good one",
+            "run": "neighborhood in it the good one"
+          },
+          {
+            "text": "Christine Nakamura — in their life, C115: heard Downtown was packed last night",
+            "run": "heard downtown was packed last night"
+          },
+          {
+            "text": "Elijah Campbell — in their life, C114: learned a fare's whole week from the back seat in under ten minutes",
+            "run": "a fares whole week from the"
+          },
+          {
+            "text": "Elijah Campbell — in their life, C114: watched a Baylight shuttle and a city bus pull up side by side at the light and waved at both drivers near a quiet side s",
+            "run": "a baylight shuttle and a city"
+          },
+          {
+            "text": "Elijah Campbell — in their life, C115: walked a different street home just to see it",
+            "run": "walked a different street home just"
+          },
+          {
+            "text": "Elijah Campbell — in their life, C115: read the Tribune's front page twice — once for the news, once to see who was in it",
+            "run": "read the tribunes front page twice"
+          },
+          {
+            "text": "Jem Steele — in their life, C114: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+            "run": "read the flyer about the fruitvale"
+          },
+          {
+            "text": "Jem Steele — in their life, C114: heard someone at the cafe complain about the Baylight District noise and bit their tongue",
+            "run": "heard someone at the cafe complain"
+          },
+          {
+            "text": "Enzo Walker — in their life, C114: walked past the bedroom that stays clean now and closed the door without going in",
+            "run": "walked past the bedroom that stays"
+          },
+          {
+            "text": "Enzo Walker — in their life, C115: wrangled the kids through the bedtime routine",
+            "run": "the kids through the bedtime routine"
+          },
+          {
+            "text": "Enzo Walker — in their life, C115: unpacked a box that had stayed sealed since the last move",
+            "run": "unpacked a box that had stayed"
+          },
+          {
+            "text": "Ingeborg Hallstrom — in their life, C114: carried three boxes of canned goods from the pantry truck and felt it in their lower back",
+            "run": "carried three boxes of canned goods"
+          },
+          {
+            "text": "Ingeborg Hallstrom — in their life, C115: read the Tribune's front page twice — once for the news, once to see who was in it",
+            "run": "read the tribunes front page twice"
+          },
+          {
+            "text": "Ingeborg Hallstrom — in their life, C115: handled responsibilities that didn't make the news",
+            "run": "handled responsibilities that didnt make the"
+          },
+          {
+            "text": "Ingeborg Hallstrom — in their life, C115: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+            "run": "read the flyer about the fruitvale"
+          },
+          {
+            "text": "Priya Raghunathan — in their life, C114: felt unexpectedly nostalgic at the smell of rain on warm pavement near Temescal Alley",
+            "run": "the smell of rain on warm"
+          },
+          {
+            "text": "Priya Raghunathan — in their life, C115: framed an old ticket stub that had finally earned its frame",
+            "run": "framed an old ticket stub that"
+          },
+          {
+            "text": "Wanjiru Liu — walked across the stage at their commencement ceremony, Rockridge (C115 — what happened in their life, not words they said)",
+            "run": "walked across the stage at their"
+          },
+          {
+            "text": "Wanjiru Liu — in their life, C115: pulled copper wire through a Baylight sub-basement until their shoulders burned",
+            "run": "copper wire through a baylight sub"
+          },
+          {
+            "text": "Elias Varek — in their life, C115: headed over to The Aitken Line Founding Celebration in Jack London last night",
+            "run": "headed over to the aitken line"
+          }
+        ],
+        "words": 1192,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Ines Sorensen",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 3,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 537,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 6,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 364,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    }
+  ],
+  "checkTotals": {
+    "seats": 7,
+    "toolSeats": 7,
+    "capHits": 0,
+    "thin": 0,
+    "verbatim": 1,
+    "graded": 7,
+    "gradeSum": 16,
+    "gradeMax": [
+      3
+    ]
+  },
+  "ranAt": "2026-11-13T00:22:08.015Z"
+}

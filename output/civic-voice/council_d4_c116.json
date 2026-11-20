@@ -1,0 +1,28 @@
+{
+  "office": "council_d4",
+  "cycle": 116,
+  "speaker": "Ramon Vega",
+  "cascadeSummary": "I am holding review of INIT-014 until the Clerk provides a verifiable filing reference; a prior claim is not enough to establish that the legislation is properly filed. For Glenview, the record does not tell us what the civic response meeting established or what work was performed, so I am asking staff to document those facts, identify the responsible department and give residents a next update date.",
+  "statements": [
+    {
+      "statementId": "STMT-116-council_d4-001",
+      "type": "vote_statement",
+      "topic": "Ivy Hill Community Support Initiative filing verification",
+      "initiative": "Ivy Hill Community Support Initiative",
+      "decision": "Hold the filed-legislation review until the Clerk supplies a verifiable filing reference.",
+      "quote": "A review should begin with a filing the Clerk can verify, not an assertion that one exists.",
+      "fullStatement": "Ivy Hill’s current conditions warrant attention: the packet describes soured mood, slow street trade, and low crime. That is a reason to listen and assess, not to manufacture an emergency. I have already asked for filing verification, and the record before us still supplies no Clerk reference. I will hold the review of INIT-014 until that reference is provided. This is a procedural pause, not a finding that the initiative is unnecessary or that the filing was completed.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-116-council_d4-002",
+      "type": "statement",
+      "topic": "Glenview Civic Response Meeting and public-works follow-through",
+      "initiative": null,
+      "decision": "Request a documented account of the meeting, work performed, remaining issues, responsible department, and next update date.",
+      "quote": "A meeting is not a work record; Glenview deserves to know what happened next.",
+      "fullStatement": "The supplied record confirms a Glenview Civic Response Meeting and a current medium-severity public-works spike, but it does not say what the meeting established, what work was performed, or what remains open. I cannot report findings that are not in the record. I am asking staff to provide the meeting findings and work status, identify the department responsible for any remaining municipal follow-through, and give residents a next update date. Until those facts are documented, I will neither declare the issue resolved nor inflate it into a broader emergency.",
+      "trackerUpdates": {}
+    }
+  ]
+}

@@ -1,0 +1,219 @@
+{
+  "stage": "angle",
+  "desk": "undocked",
+  "cycle": "116",
+  "persona": "nia-rook",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-01076",
+      "name": "Nia Rook",
+      "role": "desk reporter",
+      "desk": "undocked"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "UNDOCKED episode: Marguerite Kimball-Ostrow, Wednesday night. Standings: Luis Taz leads the board — rank #1, 45.19 achievement points, 0 credits, 3 cycle(s) led, current streak 3. In the chair: Marguerite Kimball-Ostrow — Elementary Teacher.",
+      "approach": "UNDOCKED show beat: current episode and standings from the approved feed; earlier episodes from the approved show history."
+    },
+    "signal": {
+      "kind": "undocked",
+      "hood": "Piedmont Ave",
+      "score": null,
+      "src": "undocked:undocked-pop01188-Y3C12-e2",
+      "nearby": [
+        {
+          "text": "UNDOCKED: Marguerite Kimball-Ostrow, Wednesday night",
+          "src": "undocked:undocked-pop01188-Y3C12-e2"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-01188",
+          "name": "Marguerite Kimball-Ostrow",
+          "profile": "Marguerite Kimball-Ostrow — UNDOCKED pilot",
+          "role": "UNDOCKED pilot",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "undocked-feed-row",
+          "evidence": {
+            "source": "output/spacemolt-show/feed/c116.json",
+            "episodeId": "undocked-pop01188-Y3C12-e2",
+            "pop": "POP-01188"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C116",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-871096fd8925"
+      },
+      {
+        "t": "FACT",
+        "text": "UNDOCKED: Marguerite Kimball-Ostrow, Wednesday night",
+        "src": "undocked:undocked-pop01188-Y3C12-e2",
+        "id": "F-bd1187d0f929"
+      },
+      {
+        "t": "FACT",
+        "text": "Marguerite Kimball-Ostrow's Wednesday night on UNDOCKED: went through Antares, Gsc 0041, Shaula, Alnair, Wolf 1061, Gsc 0031, Gsc 0021, Gliese 876, Felis, Biham, Gsc 0035, Jasmine, Mirach, Azha, Groombridge 1618, Silverbend, Alnilam and Jishui; came out even on credits; flew until the show's time ran out.",
+        "src": "undocked:undocked-pop01188-Y3C12-e2",
+        "id": "F-fd9ac3c2a9e9"
+      },
+      {
+        "t": "FACT",
+        "text": "Marguerite Kimball-Ostrow — Elementary Teacher (ledger)",
+        "src": "undocked:undocked-pop01188-Y3C12-e2",
+        "id": "F-e63c24ec205a"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ]
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-01188",
+        "name": "Marguerite Kimball-Ostrow",
+        "role": "UNDOCKED pilot",
+        "hood": null,
+        "profile": "Marguerite Kimball-Ostrow — UNDOCKED pilot",
+        "mode": "named",
+        "sourceKind": "undocked-feed-row",
+        "evidence": {
+          "source": "output/spacemolt-show/feed/c116.json",
+          "episodeId": "undocked-pop01188-Y3C12-e2",
+          "pop": "POP-01188"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Nia Rook",
+    "popid": "POP-01076"
+  },
+  "assignment": {
+    "story": {
+      "ref": "undocked:undocked-pop01188-Y3C12-e2",
+      "label": "UNDOCKED: Marguerite Kimball-Ostrow, Wednesday night",
+      "kind": "undocked",
+      "angle": "UNDOCKED episode: Marguerite Kimball-Ostrow, Wednesday night. Standings: Luis Taz leads the board — rank #1, 45.19 achievement points, 0 credits, 3 cycle(s) led, current streak 3. In the chair: Marguerite Kimball-Ostrow — Elementary Teacher.",
+      "facts": [
+        "Marguerite Kimball-Ostrow's Wednesday night on UNDOCKED: went through Antares, Gsc 0041, Shaula, Alnair, Wolf 1061, Gsc 0031, Gsc 0021, Gliese 876, Felis, Biham, Gsc 0035, Jasmine, Mirach, Azha, Groombridge 1618, Silverbend, Alnilam and Jishui; came out even on credits; flew until the show's time ran out.",
+        "Marguerite Kimball-Ostrow — Elementary Teacher (ledger)"
+      ],
+      "citizens": [
+        "Marguerite Kimball-Ostrow — Elementary Teacher, UNDOCKED cast pilot"
+      ],
+      "popids": [
+        "POP-01188"
+      ],
+      "hood": "Piedmont Ave"
+    },
+    "approach": "UNDOCKED show beat: current episode and standings from the approved feed; earlier episodes from the approved show history."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Nia Rook",
+    "popid": "POP-01076",
+    "text": "Nia Rook is on Marguerite Kimball-Ostrow's tail after her Wednesday night UNDOCKED episode. The Elementary Teacher flew through 18 stars and came out even on credits. Luis Taz still leads the board, but Nia's watching to see if Marguerite can keep the pressure on. The real story here isn't just the standings, though - it's about the players and their strategies. Nia's going to dig into what made Marguerite's night tick, and whether she can keep the momentum going.",
+    "plan": {
+      "chase": "Nia Rook is on Marguerite Kimball-Ostrow's tail after her Wednesday night UNDOCKED episode. The Elementary Teacher flew through 18 stars and came out even on credits. Luis Taz still leads the board, but Nia's watching to see if Marguerite can keep the pressure on. The real story here isn't just the standings, though - it's about the players and their strategies. Nia's going to dig into what made Marguerite's night tick, and whether she can keep the momentum going.",
+      "focus": "Marguerite Kimball-Ostrow's UNDOCKED performance",
+      "why": "To understand the dynamics of the current UNDOCKED standings and the strategies employed by top players",
+      "checks": [
+        "UNDOCKED episode details",
+        "Player standings",
+        "Strategies employed by Marguerite Kimball-Ostrow"
+      ],
+      "targets": [
+        {
+          "pop": "POP-01188",
+          "question": "What was Marguerite Kimball-Ostrow's strategy on Wednesday night?",
+          "basis": "UNDOCKED episode details"
+        }
+      ],
+      "interpretation": "The UNDOCKED standings are heating up, with Luis Taz holding strong but Marguerite Kimball-Ostrow putting up a fight. The key to understanding the competition lies in the players' individual strategies and performances.",
+      "unverifiedLead": [
+        "Marguerite Kimball-Ostrow may be gaining ground on Luis Taz"
+      ]
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "UNDOCKED: Marguerite Kimball-Ostrow, Wednesday night",
+      "kind": "undocked",
+      "hood": "Piedmont Ave",
+      "ref": "undocked:undocked-pop01188-Y3C12-e2",
+      "popids": [
+        "POP-01188"
+      ]
+    }
+  ],
+  "laneEntries": 1,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-19T12:17:17.764Z"
+}

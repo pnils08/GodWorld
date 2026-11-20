@@ -1,0 +1,25 @@
+{
+  "initiative": "INIT-005",
+  "initiativeId": "INIT-005",
+  "cycle": 116,
+  "primaryVoice": "Mayor gavel (mayor_gavel-006)",
+  "consolidatedFrom": [
+    "STMT-116-health_center-001 (Chen-Ramirez — Q3 clinical intake audit filed to HCAI and Council Clerk — third filing on th...)",
+    "STMT-116-health_center-002 (Chen-Ramirez — Recurring Telegraph & 47th merchant verification walkthrough — completed this...)",
+    "STMT-116-health_center-003 (Chen-Ramirez — Temescal constituents — elders on the bench at 51st, the 2.3-mile gap that no...)",
+    "STMT-116-mayor_gavel-006 (Mayor gavel — Temescal health-center audit and merchant verification)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-005",
+    "MilestoneNotes": "C116: Ordered the Q3 intake audit filing and Telegraph & 47th merchant walkthrough; no new operational appropriations authorized.",
+    "NextScheduledAction": "File the Q3 intake audit and complete the Telegraph & 47th merchant-verification walkthrough",
+    "NextActionCycle": 116,
+    "LastWorkCycle": 116,
+    "LastWorkSeat": "proj-health-center"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-115-proj-health-center-2026-11-12"
+    ]
+  }
+}

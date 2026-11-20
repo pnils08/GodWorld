@@ -1,0 +1,23 @@
+{
+  "initiative": "INIT-015",
+  "initiativeId": "INIT-015",
+  "cycle": 116,
+  "primaryVoice": "Mayor gavel (mayor_gavel-010)",
+  "consolidatedFrom": [
+    "STMT-116-mayor_gavel-010 (Mayor gavel — Laurel cleanup legislation deadline)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-015",
+    "ImplementationPhase": "announced",
+    "MilestoneNotes": "C116: Legislation-filing deadline missed; INIT-015 remains announced pending scope, outreach and Clerk-verified filing.",
+    "NextScheduledAction": "Complete scope and outreach; obtain Clerk-verified filing",
+    "NextActionCycle": 117,
+    "LastWorkCycle": 116,
+    "LastWorkSeat": "civic-office-mayor"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-115-civic-office-mayor-2026-11-09"
+    ]
+  }
+}

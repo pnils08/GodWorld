@@ -1,0 +1,48 @@
+{
+  "office": "council_d2",
+  "cycle": 116,
+  "speaker": "Leonard Tran",
+  "cascadeSummary": "I am correcting the record on INIT-008: my stated support for YES does not establish that a vote occurred, and the supplied material contains no roll call or appropriation authorization. I will not treat Baylight’s improvement flag as proof of a construction milestone, and I support the scheduled Grand Lake vote with its conditions intact. D2’s current conditions merit attention, not a crisis declaration or new spending.",
+  "statements": [
+    {
+      "statementId": "STMT-116-council_d2-001",
+      "type": "vote_statement",
+      "topic": "INIT-008 vote and appropriation record",
+      "initiative": "Downtown Economic Revitalization",
+      "decision": "I cannot confirm that a legislative vote occurred or that Chinatown or Uptown appropriations were authorized; request the Clerk's record and correct the public account accordingly.",
+      "quote": "A stated YES is not a roll call, and a proposed allocation is not an appropriation.",
+      "fullStatement": "Last cycle I said I supported a recorded YES on Downtown Economic Revitalization. That was my stated position, not evidence that Council actually voted. The supplied Cycle 115 tracker description says INIT-008 was failed and still vote-scheduled, with no dated next step; it does not explain the basis for that status. No Clerk roll call is available in this packet, so I cannot claim a vote occurred or identify my vote in a recorded tally. Nor does the record show that Chinatown or Uptown appropriation tracks were authorized. I ask that the Clerk's record and the status basis be produced before anyone describes those proposed tracks as delivered funding.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-116-council_d2-002",
+      "type": "statement",
+      "topic": "Baylight evidence review",
+      "initiative": "Baylight District — Final Council Vote",
+      "decision": "Take no new phase or funding action; continue oversight and require a public evidence-file determination before any future milestone decision.",
+      "quote": "An improvement flag is not a construction finding.",
+      "fullStatement": "Jack London and Downtown are reporting upbeat conditions, but that does not establish that Baylight has met a construction milestone. The record says an evidence-file review was ordered and no milestone pass was declared; the current low-severity improvement flag does not change that. I support continued remediation and independent oversight, along with the hotline, dust control, and workforce oversight described in the agenda. Before any future milestone decision, the public should receive a determination based on the evidence file. I am not asking for another vote or funding action now.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-116-council_d2-003",
+      "type": "vote_statement",
+      "topic": "Grand Lake recorded full-council decision",
+      "initiative": "Commercial Stabilization for Grand Lake",
+      "decision": "Support the scheduled recorded vote with the milestone and audit conditions intact; ask the Clerk to certify the roll call.",
+      "quote": "Put the conditions in the decision, and put the decision in the Clerk's record.",
+      "fullStatement": "I continue to support a YES on the scheduled Grand Lake proposal, with every Chen-Vega milestone and audit condition attached. A position stated before the hearing is not a forecast of the Council's result, and I will not presume how the other members vote. I ask the Clerk to certify the roll call so residents can see the actual decision and the conditions that govern it. That is the standard I want applied to this vote and to the record of INIT-008 as well.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-116-council_d2-004",
+      "type": "statement",
+      "topic": "D2 neighborhood conditions",
+      "initiative": null,
+      "decision": "Take no new district spending action; continue monitoring neighborhood conditions without characterizing them as a crisis.",
+      "quote": "Busy streets and low crime are good news; they call for attention, not a crisis declaration.",
+      "fullStatement": "Jack London and Downtown are clearly upbeat, with busy street trade and low crime. Chinatown is steady, and Baylight’s street trade is slow despite mildly positive mood. Those differences are worth tracking, but the brief does not establish an emergency or justify new spending. I will keep attention on how these neighborhoods are doing and avoid claiming that a project caused conditions the evidence does not establish. For now, no additional district action is warranted.",
+      "trackerUpdates": {}
+    }
+  ]
+}

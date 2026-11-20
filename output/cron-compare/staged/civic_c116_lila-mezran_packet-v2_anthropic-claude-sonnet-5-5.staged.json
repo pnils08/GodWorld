@@ -1,0 +1,65 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "116",
+  "persona": "lila-mezran",
+  "byline": "Dr. Lila Mezran",
+  "bylinePopid": "POP-00154",
+  "article": "output/cron-compare/staged/civic_c116_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Yu Zen",
+        "role": "quoted-source",
+        "popid": "POP-00194"
+      },
+      {
+        "name": "Deacon Seymour",
+        "role": "quoted-source",
+        "popid": "POP-00528"
+      },
+      {
+        "name": "Maurice Franklin",
+        "role": "quoted-source",
+        "popid": "POP-00801"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Chinatown"
+    ],
+    "claims": [
+      {
+        "claim": "The walk from Rockridge to the hospital is a straight shot down College Avenue, past the shops and the families out on the sidewalks, then over toward Broadway. It's a route I know well, but I wasn't walking it before I was admitted. The days before, I was working through another weekend, telling myself it was fine. My wife held down the house, the kids, the meals, the school runs — she always does. At work, my team covered my accounts, my clients, the paperwork. I didn't have a shift to hand off; I just had to trust people. And I did. But I'll tell you, when you're in that bed, you think about the people who carried you there — and the ones who carried you before you even fell.",
+        "sourceRef": "citizenVoice PRESS Yu Zen"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-994206d70deb",
+    "draftSha256": "00c2138fc9f957688389c835739d3d13589ad3bf58d09725bc0418274ad9ba28",
+    "verdict": "output/cron-compare/civic_c116_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-17T00:19:15.954Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 1252,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "00c2138fc9f957688389c835739d3d13589ad3bf58d09725bc0418274ad9ba28",
+      "costUsd": 0.0013
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-17T00:19:25.254Z"
+}

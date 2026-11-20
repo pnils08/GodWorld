@@ -1,0 +1,23 @@
+{"Cycle":"110","Entry":"OPENING","Amount":"100000000","Counterparty":"GENERAL-FUND","BalanceAfter":"100000000","Note":"general fund opens (Baylight apart — its own tax-increment district)"}
+{"Cycle":"110","Entry":"PREFUNDED","Amount":"0","Counterparty":"INIT-001","BalanceAfter":"100000000","Note":"funded before the treasury"}
+{"Cycle":"110","Entry":"PREFUNDED","Amount":"0","Counterparty":"INIT-002","BalanceAfter":"100000000","Note":"funded before the treasury"}
+{"Cycle":"110","Entry":"PREFUNDED","Amount":"0","Counterparty":"INIT-005","BalanceAfter":"100000000","Note":"funded before the treasury"}
+{"Cycle":"110","Entry":"REVENUE","Amount":"5000000","Counterparty":"WEEKLY-ALLOCATION","BalanceAfter":"105000000","Note":"weekly budget allocation"}
+{"Cycle":"110","Entry":"REVENUE","Amount":"500","Counterparty":"TICKETS","BalanceAfter":"105000500","Note":"parking ticket, street sweeper, POP-00657"}
+{"Cycle":"110","Entry":"REVENUE","Amount":"153351","Counterparty":"COURT","BalanceAfter":"105153851","Note":"34 cleared charges, fined at the hood rate"}
+{"Cycle":"111","Entry":"REVENUE","Amount":"5000000","Counterparty":"WEEKLY-ALLOCATION","BalanceAfter":"110153851","Note":"weekly budget allocation"}
+{"Cycle":"111","Entry":"REVENUE","Amount":"135242","Counterparty":"COURT","BalanceAfter":"110289093","Note":"30 cleared charges, fined at the hood rate"}
+{"Cycle":"112","Entry":"REVENUE","Amount":"5000000","Counterparty":"WEEKLY-ALLOCATION","BalanceAfter":"115289093","Note":"weekly budget allocation"}
+{"Cycle":"112","Entry":"REVENUE","Amount":"122035","Counterparty":"COURT","BalanceAfter":"115411128","Note":"27 cleared charges, fined at the hood rate"}
+{"Cycle":"113","Entry":"REVENUE","Amount":"5000000","Counterparty":"WEEKLY-ALLOCATION","BalanceAfter":"120411128","Note":"weekly budget allocation"}
+{"Cycle":"113","Entry":"APPROPRIATION","Amount":"-4200000","Counterparty":"INIT-010","BalanceAfter":"116211128","Note":"funded in full"}
+{"Cycle":"113","Entry":"REVENUE","Amount":"322","Counterparty":"TICKETS","BalanceAfter":"116211450","Note":"parking ticket, street sweeper, POP-00494"}
+{"Cycle":"113","Entry":"REVENUE","Amount":"131369","Counterparty":"COURT","BalanceAfter":"116342819","Note":"29 cleared charges, fined at the hood rate"}
+{"Cycle":"114","Entry":"REVENUE","Amount":"5000000","Counterparty":"WEEKLY-ALLOCATION","BalanceAfter":"121342819","Note":"weekly budget allocation"}
+{"Cycle":"114","Entry":"REVENUE","Amount":"193849","Counterparty":"COURT","BalanceAfter":"121536668","Note":"43 cleared charges, fined at the hood rate"}
+{"Cycle":"115","Entry":"REVENUE","Amount":"5000000","Counterparty":"WEEKLY-ALLOCATION","BalanceAfter":"126536668","Note":"weekly budget allocation"}
+{"Cycle":"115","Entry":"REVENUE","Amount":"107362","Counterparty":"COURT","BalanceAfter":"126644030","Note":"24 cleared charges, fined at the hood rate"}
+{"Cycle":"116","Entry":"REVENUE","Amount":"5000000","Counterparty":"WEEKLY-ALLOCATION","BalanceAfter":"131644030","Note":"weekly budget allocation"}
+{"Cycle":"116","Entry":"REVENUE","Amount":"481","Counterparty":"TICKETS","BalanceAfter":"131644511","Note":"parking ticket, street sweeper, POP-01162"}
+{"Cycle":"116","Entry":"REVENUE","Amount":"436","Counterparty":"TICKETS","BalanceAfter":"131644947","Note":"ticket, cop car, POP-00248"}
+{"Cycle":"116","Entry":"REVENUE","Amount":"108884","Counterparty":"COURT","BalanceAfter":"131753831","Note":"24 cleared charges, fined at the hood rate"}

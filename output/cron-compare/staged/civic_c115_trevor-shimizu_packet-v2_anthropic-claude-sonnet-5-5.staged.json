@@ -28,7 +28,18 @@
       }
     ],
     "businesses": [],
-    "storylines": [],
+    "storylines": [
+      {
+        "slug": "INIT-003:design-phase",
+        "verb": "referenced",
+        "attachedBy": "stepAttach"
+      },
+      {
+        "slug": "INIT-006:construction-active",
+        "verb": "referenced",
+        "attachedBy": "stepAttach"
+      }
+    ],
     "hoods": [],
     "claims": [
       {

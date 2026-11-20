@@ -1,0 +1,1256 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-01210",
+    "name": "Tamsin Pruitt",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "The lives of C116: 11 people — Edmund Alegero moved into a place of their own in Lake Merritt, renting",
+    "approach": "Lives approach: this slice is the people something happened to this Cycle — a birth, a death in the house, a hospital stay, a retirement, a promotion; a household set up or a place of their own; a win or a loss on the book; the people a turn of the city reached and what it did to their day; and the smaller moments the record kept. Each person gets their own passage: the event, then the thread under it — the stay or strain that led there, the other lines the record kept for them, what the Tribune or this page already said of them, and what they did next if the record says. Read the thread in order and name where two lines of it do not agree; do not restate a ledger value as the story. The fact exactly right; never a trend, never a number first; the person, not the system the event belongs to. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent p",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "lives",
+      "hood": null,
+      "facts": [
+        "Edmund Alegero moved into a place of their own in Lake Merritt, renting (C116)",
+        "Edmund Alegero — in their life, C116: read the Tribune's front page twice — once for the news, once to see who was in it",
+        "Edmund Alegero — in their life, C116: noticed younger people asking them for advice now",
+        "Edmund Alegero — in their life, C116: bought a new A's jersey and the hum of a bassline from a passing car",
+        "Edmund Alegero — in their life, C116: disagreed with a Tribune column out loud to an empty kitchen",
+        "Wanjiru Liu moved into a place of their own in Rockridge, renting (C116)",
+        "Wanjiru Liu — in their life, C115: pulled copper wire through a Baylight sub-basement until their shoulders burned",
+        "Wanjiru Liu — in their life, C115: walked across the stage at their commencement ceremony",
+        "Wanjiru Liu — in their life, C116: helped a neighbor navigate the West Oakland Stabilization Fund portal because the interface was confusing",
+        "Wanjiru Liu — in their life, C116: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "Wanjiru Liu — Lives already wrote this person: a moment the record kept (C115)",
+        "Wanjiru Liu — the Tribune named them in a piece headlined The Lives Page, Cycle 115 (Culture, C115)",
+        "Drago Helio won on the UNDOCKED book — staked 460, paid 842, Brooklyn (C116)",
+        "Drago Helio — in their life, C115: a flyer for a seniors lunch program flutters on a community bulletin board",
+        "Drago Helio — in their life, C116: everyone's week landed on the table over one long dinner",
+        "Drago Helio — in their life, C116: caught themselves lowering their voice when talking about the block's future near a quiet side street",
+        "Drago Helio — the Tribune named them in a piece headlined The Lives Page, Cycle 114 (Culture, C114)",
+        "Yu Zen lost on the UNDOCKED book — staked 372, the book kept it, Rockridge (C116)",
+        "Yu Zen — in their life, C115: the bartender wiping down counters while discussing the stalled train delays with a regular",
+        "Yu Zen — in their life, C115: reconnected with an old friend",
+        "Yu Zen — in their life, C115: the third late night this week, and the ceiling again at four",
+        "Yu Zen — in their life, C116: worked through another weekend and called it fine",
+        "Yu Zen — the Tribune named them in a piece headlined The Name Nobody Said in Uptown (Culture, C115)",
+        "Yu Zen — the Tribune named them in a piece headlined Rockridge Wine Bar Says \"Steady.\" The Map Says Decay. Who Answers? (Civic, C114)",
+        "Yu Zen — the Tribune named them in a piece headlined Chinatown's 137 Sick: Six Beds Hold Part of the Count, Kitchens Hold the Rest (Civic, C114)",
+        "Shawn Nguyen — showed up to set up the chairs in the fellowship hall because if they didn't do it, no one would, Fruitvale — one of 4 people the Cycle's city turn reached (Fruitvale Transit Hub Phase II — Visioning is complete — ongoing transit effects in Fruitvale; the city feels it through these neighborhoods) (C116)",
+        "Shawn Nguyen — in their life, C115: workers at the transit hub construction site take a break, their laughter echoing under the overpass",
+        "Shawn Nguyen — in their life, C115: drove the whole way home without remembering a single turn",
+        "Shawn Nguyen — in their life, C116: remembered a teacher who'd said one thing that stuck",
+        "Shawn Nguyen — in their life, C116: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+        "Shawn Nguyen — the Tribune named them in a piece headlined Who's Actually Getting Hired? (Bay Tribune, C87)",
+        "Shawn Nguyen — the Tribune named them in a piece headlined Shovels Cleared: Baylight Legal Instruments Filed, Construction Legally Authorized (Civic Ledger, C84)",
+        "Shawn Nguyen — the Tribune named them in a piece headlined The $60 Million Hole Gets Two New Projects Poured On Top of It (Infrastructure, C84)",
+        "Davey Martinez — answered 'how's it going' the exact same way for the fifth time this week, Temescal — one of 4 people the Cycle's city turn reached (Temescal Community Health Center is operational — ongoing health effects in Temescal; the city feels it through these neighborhoods) (C116)",
+        "Davey Martinez — in their life, C115: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "Davey Martinez — in their life, C115: noticed a familiar face missing from the morning routine",
+        "Davey Martinez — in their life, C116: built a new casual acquaintance",
+        "Davey Martinez — in their life, C116: let the phone ring twice before answering so it wouldn't seem like they'd been waiting",
+        "Tanisha Freeman — attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard, Grand Lake — one of 4 people the Cycle's city turn reached (Initiative work landed in 6 neighborhood(s): Downtown, Temescal, West Oakland, Fruitvale, Jack London, East Oakland) (C116)",
+        "Tanisha Freeman — in their life, C115: a flyer for a seniors lunch program flutters on a community bulletin board",
+        "Tanisha Freeman — in their life, C115: helped a neighbor navigate the West Oakland Stabilization Fund portal because the interface was confusing",
+        "Tanisha Freeman — the Tribune named them in a piece headlined The Lives Page, Cycle 114 (Culture, C114)",
+        "Mesi Westin — moved from Jack London to KONO — moving for a better fit between household income and housing costs, KONO (C116 — what happened in their life, not words they said)",
+        "Mesi Westin — in their life, C116: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "Mesi Westin — in their life, C116: found a quiet minute at a ferry-adjacent corner and the quiet satisfaction of finding a favorite song on the jukebox",
+        "Mesi Westin — in their life, C116: grabbed coffee from the cart outside the hospital before the morning rush hit near the waterfront",
+        "Mesi Westin — in their life, C116: still feeling the energy from last night's city buzz",
+        "Adash Stanley — moved from Downtown to Piedmont Ave — moving up from Downtown, Piedmont Ave (C116 — what happened in their life, not words they said)",
+        "Adash Stanley — in their life, C115: pulled an all-nighter for the midterm and swore it was the last one",
+        "Adash Stanley — in their life, C116: drove home with the radio off, letting the win settle — unable to stop pacing the kitchen",
+        "Adash Stanley — in their life, C116: told the story of the moment three times at dinner and it got better each time",
+        "Adash Stanley — in their life, C116: stayed up rewatching two plays that will not matter to anyone else — unable to let the night go",
+        "Adash Stanley — the Tribune named them in a piece headlined Harry Hayward’s 22 Minutes Changed the Question (Sports, C115)",
+        "Adash Stanley — the Tribune named them in a piece headlined Harry Hayward is the name I keep hearing in San Antonio, even with the television turned low. (Sports, C115)",
+        "Adash Stanley — the Tribune named them in a piece headlined Sports (Sports, C114)",
+        "Grace Oyelaran — Street sweeper: parking ticket., West Oakland (C116 — what happened in their life, not words they said)",
+        "Grace Oyelaran — in their life, C115: an old photo album surfaced and the evening went where it wanted",
+        "Grace Oyelaran — in their life, C115: learned a useless, wonderful fact and told two people near a student cafe",
+        "Grace Oyelaran — in their life, C116: woke up at 5 AM just to have thirty minutes of total silence before the house woke up",
+        "Grace Oyelaran — in their life, C116: realized the week had passed without a single thing worth retelling",
+        "Joaquín Nakamura — Cop car: ticket., Uptown (C116 — what happened in their life, not words they said)",
+        "Joaquín Nakamura — in their life, C115: felt a lift at Pulse District after the win",
+        "Joaquín Nakamura — in their life, C116: compared rent notes with a neighbor over the fence in Uptown",
+        "Joaquín Nakamura — in their life, C116: memorized the starting rotation for the Oaks and tested themselves on the BART ride home near a gallery opening",
+        "Joaquín Nakamura — in their life, C116: bought a new A's jersey and the hum of a bassline from a passing car near a street mural",
+        "Joaquín Nakamura — the Tribune named them in a piece headlined Fourteen Neighborhoods, One Pattern: Oakland's Retail Slide Has No Owner (Business, C101)"
+      ],
+      "priorCycle": null,
+      "note": "none of today's people has written their own page this Cycle — no quotes",
+      "engineHooks": [
+        "A family bought their home in Chinatown (observational analysis)",
+        "A family bought their home in Chinatown (observational analysis)",
+        "A family bought their home in Fruitvale (observational analysis)",
+        "The Keane household (2) moved from Grand Lake to Piedmont Ave — moving up from Grand Lake — sold up and bought in Piedmont Ave (observational analysis)"
+      ],
+      "roomIsYours": "the plain respect, what the event meant in that house or on that block, the detail the family would have picked — from the lines below, never invented",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-lives",
+    "hood": null,
+    "src": "output/beats/Lived_Events.jsonl @C116 batch e826e2",
+    "plan": {
+      "focus": "The lives of C116: 11 people"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00282",
+        "name": "Edmund Alegero",
+        "profile": "Edmund Alegero — Construction laborer — Lake Merritt",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00842",
+        "name": "Wanjiru Liu",
+        "profile": "Wanjiru Liu — Electrician — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00714",
+        "name": "Drago Helio",
+        "profile": "Drago Helio — Home Health Aide — Brooklyn",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00194",
+        "name": "Yu Zen",
+        "profile": "Yu Zen — Commercial Insurance Broker — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00282-cf5ce427d2",
+        "pop": "POP-00282",
+        "name": "Edmund Alegero",
+        "quote": "Getting my own place in Lake Merritt is a big deal for me. It's a step up, you know? I've been working hard, and it's nice to have a spot that's just mine. I've been following the A's news, and it's tough to see Mark Aitken leave. He's from around here, and he's always been involved in the community. But I'm trying to focus on my own game, you know? I've got my own things to work on.",
+        "factIds": [
+          "F-bd7d1c41b228",
+          "F-3d7599cdcbf8",
+          "F-31682f43ff2c"
+        ],
+        "src": "packet.W2[POP-00282]"
+      },
+      {
+        "id": "Q-POP-00842-5b671cf9ba",
+        "pop": "POP-00842",
+        "name": "Wanjiru Liu",
+        "quote": "To be honest, I'm still getting used to my new place in Rockridge. As an electrician, it's not directly related to where I live, but having a stable home life helps me focus on my work. I've been keeping busy with jobs around the neighborhood and helping out when I can. The Oakland Alternative Response Initiative making waves locally is a good sign too; it feels like the community is coming together. I'm just taking things one day at a time and looking forward to continuing my work as an electrician here.",
+        "factIds": [
+          "F-6216acc6414c",
+          "F-a9ab1572014c",
+          "F-189df1dbb9e0"
+        ],
+        "src": "packet.W2[POP-00842]"
+      },
+      {
+        "id": "Q-POP-00714-963bf06269",
+        "pop": "POP-00714",
+        "name": "Drago Helio",
+        "quote": "The win on the UNDOCKED book put a little extra cash in my pocket, and it was nice to share the story with my family over dinner. We were all talking about our weeks, and it was a good night. It didn't change my outlook, but it was a welcome surprise.",
+        "factIds": [
+          "F-806a1134675f",
+          "F-883982896d9f"
+        ],
+        "src": "packet.W2[POP-00714]"
+      },
+      {
+        "id": "Q-POP-00194-0e2ad53722",
+        "pop": "POP-00194",
+        "name": "Yu Zen",
+        "quote": "To be honest, losing on the UNDOCKED book stung. I'd staked 372 on it, and it didn't come through. It's not just about the money; it's the frustration. I've been working non-stop, trying to get back on my feet after my accident, and a loss like that doesn't help. It's just another thing to deal with on top of everything else.",
+        "factIds": [
+          "F-f175c70acbc1",
+          "F-b90dc4850f1b"
+        ],
+        "src": "packet.W2[POP-00194]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The impact of Mark Aitken's departure from the A's on the community, especially on young players and fans.",
+        "usable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The potential effects of the Fruitvale Transit Hub Phase II on the daily lives of residents like Shawn Nguyen and Tanisha Freeman.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C116",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-871096fd8925"
+    },
+    {
+      "t": "FACT",
+      "text": "Edmund Alegero moved into a place of their own in Lake Merritt, renting",
+      "src": "output/beats/Lived_Events.jsonl @C116 batch e826e2",
+      "id": "F-bd7d1c41b228"
+    },
+    {
+      "t": "FACT",
+      "text": "Edmund Alegero first. The event is the lead; one true detail; what came next only if the record says.",
+      "src": "output/beats/Lived_Events.jsonl @C116 batch e826e2",
+      "id": "F-685d62cf2da8"
+    },
+    {
+      "t": "FACT",
+      "text": "Edmund Alegero moved into a place of their own in Lake Merritt, renting (C116)",
+      "src": "output/beats/Household_Ledger.jsonl @C116",
+      "id": "F-3d7599cdcbf8"
+    },
+    {
+      "t": "FACT",
+      "text": "Edmund Alegero — in their life, C116: read the Tribune's front page twice — once for the news, once to see who was in it",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-5743b0e75225"
+    },
+    {
+      "t": "FACT",
+      "text": "Edmund Alegero — in their life, C116: noticed younger people asking them for advice now",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-39e08897af84"
+    },
+    {
+      "t": "FACT",
+      "text": "Edmund Alegero — in their life, C116: bought a new A's jersey and the hum of a bassline from a passing car",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-31682f43ff2c"
+    },
+    {
+      "t": "FACT",
+      "text": "Edmund Alegero — in their life, C116: disagreed with a Tribune column out loud to an empty kitchen",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-2374caea7061"
+    },
+    {
+      "t": "FACT",
+      "text": "Wanjiru Liu moved into a place of their own in Rockridge, renting (C116)",
+      "src": "output/beats/Household_Ledger.jsonl @C116",
+      "id": "F-6216acc6414c"
+    },
+    {
+      "t": "FACT",
+      "text": "Wanjiru Liu — in their life, C115: pulled copper wire through a Baylight sub-basement until their shoulders burned",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-0eee2b171933"
+    },
+    {
+      "t": "FACT",
+      "text": "Wanjiru Liu — in their life, C115: walked across the stage at their commencement ceremony",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-2d983d4617f8"
+    },
+    {
+      "t": "FACT",
+      "text": "Wanjiru Liu — in their life, C116: helped a neighbor navigate the West Oakland Stabilization Fund portal because the interface was confusing",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-8fd53e8d6616"
+    },
+    {
+      "t": "FACT",
+      "text": "Wanjiru Liu — in their life, C116: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-189df1dbb9e0"
+    },
+    {
+      "t": "FACT",
+      "text": "Wanjiru Liu — Lives already wrote this person: a moment the record kept (C115)",
+      "src": "output/cron-compare/lives_covered.json",
+      "id": "F-5c5d3321c6c6"
+    },
+    {
+      "t": "FACT",
+      "text": "Wanjiru Liu — the Tribune named them in a piece headlined The Lives Page, Cycle 115 (Culture, C115)",
+      "src": "archive/ARTICLE_INDEX.jsonl 4da79b355f8b8455",
+      "id": "F-9c7f1c8e48c6"
+    },
+    {
+      "t": "FACT",
+      "text": "Drago Helio won on the UNDOCKED book — staked 460, paid 842, Brooklyn (C116)",
+      "src": "output/beats/Casino_Ledger.jsonl @C116",
+      "id": "F-806a1134675f"
+    },
+    {
+      "t": "FACT",
+      "text": "Drago Helio — in their life, C115: a flyer for a seniors lunch program flutters on a community bulletin board",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-496b1d008393"
+    },
+    {
+      "t": "FACT",
+      "text": "Drago Helio — in their life, C116: everyone's week landed on the table over one long dinner",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-883982896d9f"
+    },
+    {
+      "t": "FACT",
+      "text": "Drago Helio — in their life, C116: caught themselves lowering their voice when talking about the block's future near a quiet side street",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-493df0525177"
+    },
+    {
+      "t": "FACT",
+      "text": "Drago Helio — the Tribune named them in a piece headlined The Lives Page, Cycle 114 (Culture, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl 9746e4e747ffdd0a",
+      "id": "F-6d6685e26f31"
+    },
+    {
+      "t": "FACT",
+      "text": "Yu Zen lost on the UNDOCKED book — staked 372, the book kept it, Rockridge (C116)",
+      "src": "output/beats/Casino_Ledger.jsonl @C116",
+      "id": "F-f175c70acbc1"
+    },
+    {
+      "t": "FACT",
+      "text": "Yu Zen — in their life, C115: the bartender wiping down counters while discussing the stalled train delays with a regular",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-841d66bb50bf"
+    },
+    {
+      "t": "FACT",
+      "text": "Yu Zen — in their life, C115: reconnected with an old friend",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-38e14a6df2b5"
+    },
+    {
+      "t": "FACT",
+      "text": "Yu Zen — in their life, C115: the third late night this week, and the ceiling again at four",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-074efeefc44f"
+    },
+    {
+      "t": "FACT",
+      "text": "Yu Zen — in their life, C116: worked through another weekend and called it fine",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-b90dc4850f1b"
+    },
+    {
+      "t": "FACT",
+      "text": "Yu Zen — the Tribune named them in a piece headlined The Name Nobody Said in Uptown (Culture, C115)",
+      "src": "archive/ARTICLE_INDEX.jsonl c4de0e286c2cdf34",
+      "id": "F-65de2f44ba9f"
+    },
+    {
+      "t": "FACT",
+      "text": "Yu Zen — the Tribune named them in a piece headlined Rockridge Wine Bar Says \"Steady.\" The Map Says Decay. Who Answers? (Civic, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl 77223d1e2e7334d4",
+      "id": "F-2b7a99cb143f"
+    },
+    {
+      "t": "FACT",
+      "text": "Yu Zen — the Tribune named them in a piece headlined Chinatown's 137 Sick: Six Beds Hold Part of the Count, Kitchens Hold the Rest (Civic, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl f5baef8c2be8a0e4",
+      "id": "F-1e0d7267304f"
+    },
+    {
+      "t": "FACT",
+      "text": "Shawn Nguyen — showed up to set up the chairs in the fellowship hall because if they didn't do it, no one would, Fruitvale — one of 4 people the Cycle's city turn reached (Fruitvale Transit Hub Phase II — Visioning is complete — ongoing transit effects in Fruitvale; the city feels it through these neighborhoods) (C116)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C116",
+      "id": "F-bcd0731ff29b"
+    },
+    {
+      "t": "FACT",
+      "text": "Shawn Nguyen — in their life, C115: workers at the transit hub construction site take a break, their laughter echoing under the overpass",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-b170b1df8182"
+    },
+    {
+      "t": "FACT",
+      "text": "Shawn Nguyen — in their life, C115: drove the whole way home without remembering a single turn",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-097784989114"
+    },
+    {
+      "t": "FACT",
+      "text": "Shawn Nguyen — in their life, C116: remembered a teacher who'd said one thing that stuck",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-2a24be0adb4e"
+    },
+    {
+      "t": "FACT",
+      "text": "Shawn Nguyen — in their life, C116: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-c78b159fd389"
+    },
+    {
+      "t": "FACT",
+      "text": "Shawn Nguyen — the Tribune named them in a piece headlined Who's Actually Getting Hired? (Bay Tribune, C87)",
+      "src": "archive/ARTICLE_INDEX.jsonl 43421902d90ce162",
+      "id": "F-2228f47fbe6c"
+    },
+    {
+      "t": "FACT",
+      "text": "Shawn Nguyen — the Tribune named them in a piece headlined Shovels Cleared: Baylight Legal Instruments Filed, Construction Legally Authorized (Civic Ledger, C84)",
+      "src": "archive/ARTICLE_INDEX.jsonl c86afc38194faba9",
+      "id": "F-872cc6b97652"
+    },
+    {
+      "t": "FACT",
+      "text": "Shawn Nguyen — the Tribune named them in a piece headlined The $60 Million Hole Gets Two New Projects Poured On Top of It (Infrastructure, C84)",
+      "src": "archive/ARTICLE_INDEX.jsonl 4e081812a7dccf2d",
+      "id": "F-6cf229c44152"
+    },
+    {
+      "t": "FACT",
+      "text": "Davey Martinez — answered 'how's it going' the exact same way for the fifth time this week, Temescal — one of 4 people the Cycle's city turn reached (Temescal Community Health Center is operational — ongoing health effects in Temescal; the city feels it through these neighborhoods) (C116)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C116",
+      "id": "F-e7a37dbdc1ea"
+    },
+    {
+      "t": "FACT",
+      "text": "Davey Martinez — in their life, C115: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-49da9ca47e5a"
+    },
+    {
+      "t": "FACT",
+      "text": "Davey Martinez — in their life, C115: noticed a familiar face missing from the morning routine",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-f491ebe1694b"
+    },
+    {
+      "t": "FACT",
+      "text": "Davey Martinez — in their life, C116: built a new casual acquaintance",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-90d9a74d8596"
+    },
+    {
+      "t": "FACT",
+      "text": "Davey Martinez — in their life, C116: let the phone ring twice before answering so it wouldn't seem like they'd been waiting",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-9b6e3abefa79"
+    },
+    {
+      "t": "FACT",
+      "text": "Tanisha Freeman — attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard, Grand Lake — one of 4 people the Cycle's city turn reached (Initiative work landed in 6 neighborhood(s): Downtown, Temescal, West Oakland, Fruitvale, Jack London, East Oakland) (C116)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C116",
+      "id": "F-26ca7cb76260"
+    },
+    {
+      "t": "FACT",
+      "text": "Tanisha Freeman — in their life, C115: a flyer for a seniors lunch program flutters on a community bulletin board",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-0151818cef5e"
+    },
+    {
+      "t": "FACT",
+      "text": "Tanisha Freeman — in their life, C115: helped a neighbor navigate the West Oakland Stabilization Fund portal because the interface was confusing",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-86b49c7a1b2d"
+    },
+    {
+      "t": "FACT",
+      "text": "Tanisha Freeman — the Tribune named them in a piece headlined The Lives Page, Cycle 114 (Culture, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl 9746e4e747ffdd0a",
+      "id": "F-f7137803236a"
+    },
+    {
+      "t": "FACT",
+      "text": "Mesi Westin — moved from Jack London to KONO — moving for a better fit between household income and housing costs, KONO (C116 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-8bdfcba55445"
+    },
+    {
+      "t": "FACT",
+      "text": "Mesi Westin — in their life, C116: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-6b9d7c40e660"
+    },
+    {
+      "t": "FACT",
+      "text": "Mesi Westin — in their life, C116: found a quiet minute at a ferry-adjacent corner and the quiet satisfaction of finding a favorite song on the jukebox",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-25012d7a5233"
+    },
+    {
+      "t": "FACT",
+      "text": "Mesi Westin — in their life, C116: grabbed coffee from the cart outside the hospital before the morning rush hit near the waterfront",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-15bdb2ede3ce"
+    },
+    {
+      "t": "FACT",
+      "text": "Mesi Westin — in their life, C116: still feeling the energy from last night's city buzz",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-75782283e7f7"
+    },
+    {
+      "t": "FACT",
+      "text": "Adash Stanley — moved from Downtown to Piedmont Ave — moving up from Downtown, Piedmont Ave (C116 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-6eb4691cbab8"
+    },
+    {
+      "t": "FACT",
+      "text": "Adash Stanley — in their life, C115: pulled an all-nighter for the midterm and swore it was the last one",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-b4d47e429784"
+    },
+    {
+      "t": "FACT",
+      "text": "Adash Stanley — in their life, C116: drove home with the radio off, letting the win settle — unable to stop pacing the kitchen",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-0050c824e475"
+    },
+    {
+      "t": "FACT",
+      "text": "Adash Stanley — in their life, C116: told the story of the moment three times at dinner and it got better each time",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-1ff51746497b"
+    },
+    {
+      "t": "FACT",
+      "text": "Adash Stanley — in their life, C116: stayed up rewatching two plays that will not matter to anyone else — unable to let the night go",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-868e132caff6"
+    },
+    {
+      "t": "FACT",
+      "text": "Adash Stanley — the Tribune named them in a piece headlined Harry Hayward’s 22 Minutes Changed the Question (Sports, C115)",
+      "src": "archive/ARTICLE_INDEX.jsonl e6337698fa6a6fc3",
+      "id": "F-f9619adcc51a"
+    },
+    {
+      "t": "FACT",
+      "text": "Adash Stanley — the Tribune named them in a piece headlined Harry Hayward is the name I keep hearing in San Antonio, even with the television turned low. (Sports, C115)",
+      "src": "archive/ARTICLE_INDEX.jsonl 684cac834bbbaa83",
+      "id": "F-ff8620f07bbf"
+    },
+    {
+      "t": "FACT",
+      "text": "Adash Stanley — the Tribune named them in a piece headlined Sports (Sports, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl 5b40caf33696eaed",
+      "id": "F-7ed15ac54bb9"
+    },
+    {
+      "t": "FACT",
+      "text": "Grace Oyelaran — Street sweeper: parking ticket., West Oakland (C116 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-714164f67fdc"
+    },
+    {
+      "t": "FACT",
+      "text": "Grace Oyelaran — in their life, C115: an old photo album surfaced and the evening went where it wanted",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-982cfe6a73a5"
+    },
+    {
+      "t": "FACT",
+      "text": "Grace Oyelaran — in their life, C115: learned a useless, wonderful fact and told two people near a student cafe",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-6892abb0d7ee"
+    },
+    {
+      "t": "FACT",
+      "text": "Grace Oyelaran — in their life, C116: woke up at 5 AM just to have thirty minutes of total silence before the house woke up",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-c7102c07a46d"
+    },
+    {
+      "t": "FACT",
+      "text": "Grace Oyelaran — in their life, C116: realized the week had passed without a single thing worth retelling",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-e126fc3b2b87"
+    },
+    {
+      "t": "FACT",
+      "text": "Joaquín Nakamura — Cop car: ticket., Uptown (C116 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-a6e5c1812a28"
+    },
+    {
+      "t": "FACT",
+      "text": "Joaquín Nakamura — in their life, C115: felt a lift at Pulse District after the win",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-126f18e1a3d6"
+    },
+    {
+      "t": "FACT",
+      "text": "Joaquín Nakamura — in their life, C116: compared rent notes with a neighbor over the fence in Uptown",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-f6e4bc2793a2"
+    },
+    {
+      "t": "FACT",
+      "text": "Joaquín Nakamura — in their life, C116: memorized the starting rotation for the Oaks and tested themselves on the BART ride home near a gallery opening",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-5fe86da229f7"
+    },
+    {
+      "t": "FACT",
+      "text": "Joaquín Nakamura — in their life, C116: bought a new A's jersey and the hum of a bassline from a passing car near a street mural",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-4b27b05a7fc3"
+    },
+    {
+      "t": "FACT",
+      "text": "Joaquín Nakamura — the Tribune named them in a piece headlined Fourteen Neighborhoods, One Pattern: Oakland's Retail Slide Has No Owner (Business, C101)",
+      "src": "archive/ARTICLE_INDEX.jsonl 7c46178070ee41f5",
+      "id": "F-bdea7671116d"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+      "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+      "id": "F-647fd9067a33"
+    },
+    {
+      "t": "FACT",
+      "text": "Wanjiru Liu — Electrician — Rockridge",
+      "src": "Simulation_Ledger profile for POP-00842",
+      "id": "F-a9ab1572014c"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "tamsin-lives-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Put the cycle's person events in the paper as news, one person at a time — a birth, a death, a hospital stay, a retirement, a promotion, a household set up or a place of one's own, a win or a loss on the book, what a turn of the city did to someone's day, and the smaller moments the record kept. The event is the lead, the person is named as the slice names them, and what came next appears only when a later record holds it. A stake or a payout is the person's own fact, not a statistic. The page is the city's real calendar; every person on it is one the record holds.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "plain respect — a neighborhood weekly's births-and-obituaries hand, unhurried, exact",
+      "targetWords": "450-1200",
+      "opening": "the heaviest event on the slice, stated as it happened to the named person"
+    },
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "canonBlockers": [
+      "any person, event, quote, venue, employer or family member not on the slice",
+      "a paraphrased or invented quote",
+      "a cause, diagnosis or outcome the record does not state",
+      "a statistic, rate or trend claim — the page is people, not numbers",
+      "intake bookkeeping rows (Emerged into Tier, Added to Simulation_Ledger, Updated to Tier) written as life events",
+      "raw engine labels or decimals printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-e3d7b623b3ad",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-871096fd8925",
+        "t": "FACT",
+        "text": "Current cycle: C116",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-bd7d1c41b228",
+        "t": "FACT",
+        "text": "Edmund Alegero moved into a place of their own in Lake Merritt, renting",
+        "src": "output/beats/Lived_Events.jsonl @C116 batch e826e2"
+      },
+      {
+        "id": "F-685d62cf2da8",
+        "t": "FACT",
+        "text": "Edmund Alegero first. The event is the lead; one true detail; what came next only if the record says.",
+        "src": "output/beats/Lived_Events.jsonl @C116 batch e826e2"
+      },
+      {
+        "id": "F-3d7599cdcbf8",
+        "t": "FACT",
+        "text": "Edmund Alegero moved into a place of their own in Lake Merritt, renting (C116)",
+        "src": "output/beats/Household_Ledger.jsonl @C116"
+      },
+      {
+        "id": "F-5743b0e75225",
+        "t": "FACT",
+        "text": "Edmund Alegero — in their life, C116: read the Tribune's front page twice — once for the news, once to see who was in it",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-39e08897af84",
+        "t": "FACT",
+        "text": "Edmund Alegero — in their life, C116: noticed younger people asking them for advice now",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-31682f43ff2c",
+        "t": "FACT",
+        "text": "Edmund Alegero — in their life, C116: bought a new A's jersey and the hum of a bassline from a passing car",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-2374caea7061",
+        "t": "FACT",
+        "text": "Edmund Alegero — in their life, C116: disagreed with a Tribune column out loud to an empty kitchen",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-6216acc6414c",
+        "t": "FACT",
+        "text": "Wanjiru Liu moved into a place of their own in Rockridge, renting (C116)",
+        "src": "output/beats/Household_Ledger.jsonl @C116"
+      },
+      {
+        "id": "F-0eee2b171933",
+        "t": "FACT",
+        "text": "Wanjiru Liu — in their life, C115: pulled copper wire through a Baylight sub-basement until their shoulders burned",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-2d983d4617f8",
+        "t": "FACT",
+        "text": "Wanjiru Liu — in their life, C115: walked across the stage at their commencement ceremony",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-8fd53e8d6616",
+        "t": "FACT",
+        "text": "Wanjiru Liu — in their life, C116: helped a neighbor navigate the West Oakland Stabilization Fund portal because the interface was confusing",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-189df1dbb9e0",
+        "t": "FACT",
+        "text": "Wanjiru Liu — in their life, C116: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-5c5d3321c6c6",
+        "t": "FACT",
+        "text": "Wanjiru Liu — Lives already wrote this person: a moment the record kept (C115)",
+        "src": "output/cron-compare/lives_covered.json"
+      },
+      {
+        "id": "F-9c7f1c8e48c6",
+        "t": "FACT",
+        "text": "Wanjiru Liu — the Tribune named them in a piece headlined The Lives Page, Cycle 115 (Culture, C115)",
+        "src": "archive/ARTICLE_INDEX.jsonl 4da79b355f8b8455"
+      },
+      {
+        "id": "F-806a1134675f",
+        "t": "FACT",
+        "text": "Drago Helio won on the UNDOCKED book — staked 460, paid 842, Brooklyn (C116)",
+        "src": "output/beats/Casino_Ledger.jsonl @C116"
+      },
+      {
+        "id": "F-496b1d008393",
+        "t": "FACT",
+        "text": "Drago Helio — in their life, C115: a flyer for a seniors lunch program flutters on a community bulletin board",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-883982896d9f",
+        "t": "FACT",
+        "text": "Drago Helio — in their life, C116: everyone's week landed on the table over one long dinner",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-493df0525177",
+        "t": "FACT",
+        "text": "Drago Helio — in their life, C116: caught themselves lowering their voice when talking about the block's future near a quiet side street",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-6d6685e26f31",
+        "t": "FACT",
+        "text": "Drago Helio — the Tribune named them in a piece headlined The Lives Page, Cycle 114 (Culture, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl 9746e4e747ffdd0a"
+      },
+      {
+        "id": "F-f175c70acbc1",
+        "t": "FACT",
+        "text": "Yu Zen lost on the UNDOCKED book — staked 372, the book kept it, Rockridge (C116)",
+        "src": "output/beats/Casino_Ledger.jsonl @C116"
+      },
+      {
+        "id": "F-841d66bb50bf",
+        "t": "FACT",
+        "text": "Yu Zen — in their life, C115: the bartender wiping down counters while discussing the stalled train delays with a regular",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-38e14a6df2b5",
+        "t": "FACT",
+        "text": "Yu Zen — in their life, C115: reconnected with an old friend",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-074efeefc44f",
+        "t": "FACT",
+        "text": "Yu Zen — in their life, C115: the third late night this week, and the ceiling again at four",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-b90dc4850f1b",
+        "t": "FACT",
+        "text": "Yu Zen — in their life, C116: worked through another weekend and called it fine",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-65de2f44ba9f",
+        "t": "FACT",
+        "text": "Yu Zen — the Tribune named them in a piece headlined The Name Nobody Said in Uptown (Culture, C115)",
+        "src": "archive/ARTICLE_INDEX.jsonl c4de0e286c2cdf34"
+      },
+      {
+        "id": "F-2b7a99cb143f",
+        "t": "FACT",
+        "text": "Yu Zen — the Tribune named them in a piece headlined Rockridge Wine Bar Says \"Steady.\" The Map Says Decay. Who Answers? (Civic, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl 77223d1e2e7334d4"
+      },
+      {
+        "id": "F-1e0d7267304f",
+        "t": "FACT",
+        "text": "Yu Zen — the Tribune named them in a piece headlined Chinatown's 137 Sick: Six Beds Hold Part of the Count, Kitchens Hold the Rest (Civic, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl f5baef8c2be8a0e4"
+      },
+      {
+        "id": "F-bcd0731ff29b",
+        "t": "FACT",
+        "text": "Shawn Nguyen — showed up to set up the chairs in the fellowship hall because if they didn't do it, no one would, Fruitvale — one of 4 people the Cycle's city turn reached (Fruitvale Transit Hub Phase II — Visioning is complete — ongoing transit effects in Fruitvale; the city feels it through these neighborhoods) (C116)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C116"
+      },
+      {
+        "id": "F-b170b1df8182",
+        "t": "FACT",
+        "text": "Shawn Nguyen — in their life, C115: workers at the transit hub construction site take a break, their laughter echoing under the overpass",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-097784989114",
+        "t": "FACT",
+        "text": "Shawn Nguyen — in their life, C115: drove the whole way home without remembering a single turn",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-2a24be0adb4e",
+        "t": "FACT",
+        "text": "Shawn Nguyen — in their life, C116: remembered a teacher who'd said one thing that stuck",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-c78b159fd389",
+        "t": "FACT",
+        "text": "Shawn Nguyen — in their life, C116: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-2228f47fbe6c",
+        "t": "FACT",
+        "text": "Shawn Nguyen — the Tribune named them in a piece headlined Who's Actually Getting Hired? (Bay Tribune, C87)",
+        "src": "archive/ARTICLE_INDEX.jsonl 43421902d90ce162"
+      },
+      {
+        "id": "F-872cc6b97652",
+        "t": "FACT",
+        "text": "Shawn Nguyen — the Tribune named them in a piece headlined Shovels Cleared: Baylight Legal Instruments Filed, Construction Legally Authorized (Civic Ledger, C84)",
+        "src": "archive/ARTICLE_INDEX.jsonl c86afc38194faba9"
+      },
+      {
+        "id": "F-6cf229c44152",
+        "t": "FACT",
+        "text": "Shawn Nguyen — the Tribune named them in a piece headlined The $60 Million Hole Gets Two New Projects Poured On Top of It (Infrastructure, C84)",
+        "src": "archive/ARTICLE_INDEX.jsonl 4e081812a7dccf2d"
+      },
+      {
+        "id": "F-e7a37dbdc1ea",
+        "t": "FACT",
+        "text": "Davey Martinez — answered 'how's it going' the exact same way for the fifth time this week, Temescal — one of 4 people the Cycle's city turn reached (Temescal Community Health Center is operational — ongoing health effects in Temescal; the city feels it through these neighborhoods) (C116)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C116"
+      },
+      {
+        "id": "F-49da9ca47e5a",
+        "t": "FACT",
+        "text": "Davey Martinez — in their life, C115: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-f491ebe1694b",
+        "t": "FACT",
+        "text": "Davey Martinez — in their life, C115: noticed a familiar face missing from the morning routine",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-90d9a74d8596",
+        "t": "FACT",
+        "text": "Davey Martinez — in their life, C116: built a new casual acquaintance",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-9b6e3abefa79",
+        "t": "FACT",
+        "text": "Davey Martinez — in their life, C116: let the phone ring twice before answering so it wouldn't seem like they'd been waiting",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-26ca7cb76260",
+        "t": "FACT",
+        "text": "Tanisha Freeman — attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard, Grand Lake — one of 4 people the Cycle's city turn reached (Initiative work landed in 6 neighborhood(s): Downtown, Temescal, West Oakland, Fruitvale, Jack London, East Oakland) (C116)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C116"
+      },
+      {
+        "id": "F-0151818cef5e",
+        "t": "FACT",
+        "text": "Tanisha Freeman — in their life, C115: a flyer for a seniors lunch program flutters on a community bulletin board",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-86b49c7a1b2d",
+        "t": "FACT",
+        "text": "Tanisha Freeman — in their life, C115: helped a neighbor navigate the West Oakland Stabilization Fund portal because the interface was confusing",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-f7137803236a",
+        "t": "FACT",
+        "text": "Tanisha Freeman — the Tribune named them in a piece headlined The Lives Page, Cycle 114 (Culture, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl 9746e4e747ffdd0a"
+      },
+      {
+        "id": "F-8bdfcba55445",
+        "t": "FACT",
+        "text": "Mesi Westin — moved from Jack London to KONO — moving for a better fit between household income and housing costs, KONO (C116 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-6b9d7c40e660",
+        "t": "FACT",
+        "text": "Mesi Westin — in their life, C116: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-25012d7a5233",
+        "t": "FACT",
+        "text": "Mesi Westin — in their life, C116: found a quiet minute at a ferry-adjacent corner and the quiet satisfaction of finding a favorite song on the jukebox",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-15bdb2ede3ce",
+        "t": "FACT",
+        "text": "Mesi Westin — in their life, C116: grabbed coffee from the cart outside the hospital before the morning rush hit near the waterfront",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-75782283e7f7",
+        "t": "FACT",
+        "text": "Mesi Westin — in their life, C116: still feeling the energy from last night's city buzz",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-6eb4691cbab8",
+        "t": "FACT",
+        "text": "Adash Stanley — moved from Downtown to Piedmont Ave — moving up from Downtown, Piedmont Ave (C116 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-b4d47e429784",
+        "t": "FACT",
+        "text": "Adash Stanley — in their life, C115: pulled an all-nighter for the midterm and swore it was the last one",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-0050c824e475",
+        "t": "FACT",
+        "text": "Adash Stanley — in their life, C116: drove home with the radio off, letting the win settle — unable to stop pacing the kitchen",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-1ff51746497b",
+        "t": "FACT",
+        "text": "Adash Stanley — in their life, C116: told the story of the moment three times at dinner and it got better each time",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-868e132caff6",
+        "t": "FACT",
+        "text": "Adash Stanley — in their life, C116: stayed up rewatching two plays that will not matter to anyone else — unable to let the night go",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-f9619adcc51a",
+        "t": "FACT",
+        "text": "Adash Stanley — the Tribune named them in a piece headlined Harry Hayward’s 22 Minutes Changed the Question (Sports, C115)",
+        "src": "archive/ARTICLE_INDEX.jsonl e6337698fa6a6fc3"
+      },
+      {
+        "id": "F-ff8620f07bbf",
+        "t": "FACT",
+        "text": "Adash Stanley — the Tribune named them in a piece headlined Harry Hayward is the name I keep hearing in San Antonio, even with the television turned low. (Sports, C115)",
+        "src": "archive/ARTICLE_INDEX.jsonl 684cac834bbbaa83"
+      },
+      {
+        "id": "F-7ed15ac54bb9",
+        "t": "FACT",
+        "text": "Adash Stanley — the Tribune named them in a piece headlined Sports (Sports, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl 5b40caf33696eaed"
+      },
+      {
+        "id": "F-714164f67fdc",
+        "t": "FACT",
+        "text": "Grace Oyelaran — Street sweeper: parking ticket., West Oakland (C116 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-982cfe6a73a5",
+        "t": "FACT",
+        "text": "Grace Oyelaran — in their life, C115: an old photo album surfaced and the evening went where it wanted",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-6892abb0d7ee",
+        "t": "FACT",
+        "text": "Grace Oyelaran — in their life, C115: learned a useless, wonderful fact and told two people near a student cafe",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-c7102c07a46d",
+        "t": "FACT",
+        "text": "Grace Oyelaran — in their life, C116: woke up at 5 AM just to have thirty minutes of total silence before the house woke up",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-e126fc3b2b87",
+        "t": "FACT",
+        "text": "Grace Oyelaran — in their life, C116: realized the week had passed without a single thing worth retelling",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-a6e5c1812a28",
+        "t": "FACT",
+        "text": "Joaquín Nakamura — Cop car: ticket., Uptown (C116 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-126f18e1a3d6",
+        "t": "FACT",
+        "text": "Joaquín Nakamura — in their life, C115: felt a lift at Pulse District after the win",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-f6e4bc2793a2",
+        "t": "FACT",
+        "text": "Joaquín Nakamura — in their life, C116: compared rent notes with a neighbor over the fence in Uptown",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-5fe86da229f7",
+        "t": "FACT",
+        "text": "Joaquín Nakamura — in their life, C116: memorized the starting rotation for the Oaks and tested themselves on the BART ride home near a gallery opening",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-4b27b05a7fc3",
+        "t": "FACT",
+        "text": "Joaquín Nakamura — in their life, C116: bought a new A's jersey and the hum of a bassline from a passing car near a street mural",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-bdea7671116d",
+        "t": "FACT",
+        "text": "Joaquín Nakamura — the Tribune named them in a piece headlined Fourteen Neighborhoods, One Pattern: Oakland's Retail Slide Has No Owner (Business, C101)",
+        "src": "archive/ARTICLE_INDEX.jsonl 7c46178070ee41f5"
+      },
+      {
+        "id": "F-647fd9067a33",
+        "t": "FACT",
+        "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+        "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)"
+      },
+      {
+        "id": "F-a9ab1572014c",
+        "t": "FACT",
+        "text": "Wanjiru Liu — Electrician — Rockridge",
+        "src": "Simulation_Ledger profile for POP-00842"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00282-cf5ce427d2",
+        "speakerId": "POP-00282",
+        "speakerName": "Edmund Alegero",
+        "text": "Getting my own place in Lake Merritt is a big deal for me. It's a step up, you know? I've been working hard, and it's nice to have a spot that's just mine. I've been following the A's news, and it's tough to see Mark Aitken leave. He's from around here, and he's always been involved in the community. But I'm trying to focus on my own game, you know? I've got my own things to work on.",
+        "factIds": [
+          "F-bd7d1c41b228",
+          "F-3d7599cdcbf8",
+          "F-31682f43ff2c"
+        ],
+        "src": "packet.W2[POP-00282]"
+      },
+      {
+        "id": "Q-POP-00842-5b671cf9ba",
+        "speakerId": "POP-00842",
+        "speakerName": "Wanjiru Liu",
+        "text": "To be honest, I'm still getting used to my new place in Rockridge. As an electrician, it's not directly related to where I live, but having a stable home life helps me focus on my work. I've been keeping busy with jobs around the neighborhood and helping out when I can. The Oakland Alternative Response Initiative making waves locally is a good sign too; it feels like the community is coming together. I'm just taking things one day at a time and looking forward to continuing my work as an electrician here.",
+        "factIds": [
+          "F-6216acc6414c",
+          "F-a9ab1572014c",
+          "F-189df1dbb9e0"
+        ],
+        "src": "packet.W2[POP-00842]"
+      },
+      {
+        "id": "Q-POP-00714-963bf06269",
+        "speakerId": "POP-00714",
+        "speakerName": "Drago Helio",
+        "text": "The win on the UNDOCKED book put a little extra cash in my pocket, and it was nice to share the story with my family over dinner. We were all talking about our weeks, and it was a good night. It didn't change my outlook, but it was a welcome surprise.",
+        "factIds": [
+          "F-806a1134675f",
+          "F-883982896d9f"
+        ],
+        "src": "packet.W2[POP-00714]"
+      },
+      {
+        "id": "Q-POP-00194-0e2ad53722",
+        "speakerId": "POP-00194",
+        "speakerName": "Yu Zen",
+        "text": "To be honest, losing on the UNDOCKED book stung. I'd staked 372 on it, and it didn't come through. It's not just about the money; it's the frustration. I've been working non-stop, trying to get back on my feet after my accident, and a loss like that doesn't help. It's just another thing to deal with on top of everything else.",
+        "factIds": [
+          "F-f175c70acbc1",
+          "F-b90dc4850f1b"
+        ],
+        "src": "packet.W2[POP-00194]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00282",
+        "name": "Edmund Alegero",
+        "profile": "Edmund Alegero — Construction laborer — Lake Merritt",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00842",
+        "name": "Wanjiru Liu",
+        "profile": "Wanjiru Liu — Electrician — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00714",
+        "name": "Drago Helio",
+        "profile": "Drago Helio — Home Health Aide — Brooklyn",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00194",
+        "name": "Yu Zen",
+        "profile": "Yu Zen — Commercial Insurance Broker — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The impact of Mark Aitken's departure from the A's on the community, especially on young players and fans.",
+        "publishable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The potential effects of the Fruitvale Transit Hub Phase II on the daily lives of residents like Shawn Nguyen and Tanisha Freeman.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

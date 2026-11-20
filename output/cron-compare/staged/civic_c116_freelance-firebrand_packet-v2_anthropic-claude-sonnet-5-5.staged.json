@@ -1,0 +1,76 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "116",
+  "persona": "freelance-firebrand",
+  "byline": "Jax Caldera",
+  "bylinePopid": "POP-00799",
+  "article": "output/cron-compare/staged/civic_c116_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Michael Corliss",
+        "role": "mentioned",
+        "popid": "POP-00596"
+      },
+      {
+        "name": "Celeste Moon",
+        "role": "mentioned",
+        "popid": "POP-01061"
+      },
+      {
+        "name": "Jasmine Torres",
+        "role": "quoted-source",
+        "popid": "POP-01111"
+      },
+      {
+        "name": "Dmitri Soto",
+        "role": "quoted-source",
+        "popid": "POP-00276"
+      },
+      {
+        "name": "Warren Ashford",
+        "role": "mentioned",
+        "popid": "POP-00504",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "KONO"
+    ],
+    "claims": [
+      {
+        "claim": "KONO's got a bit of a mixed bag going on right now. On one hand, life on the block seems pretty normal despite the lingering smell of smoke from the recent blaze. We've even got a newcomer from Jack London settling in, which is always nice to see. On the other hand, I've noticed that the neighborhood's vibe feels a bit off, and I'm not sure if it's just me being a fan of the A's and still feeling a little down about Mark Aitken leaving. I mean, he was a big part of Oakland, not just the team. As for the city's support, I'm not really sure what to say. I moved here from Chinatown a little while back because KONO felt like a better fit for me and my wife, but it's clear there's some tension around housing and retail vitality. I hope the city can figure out a way to balance things out.",
+        "sourceRef": "citizenVoice PRESS Jasmine Torres"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-f753879540bd",
+    "draftSha256": "1b0ade0e8ce0782a10e642753b044afdab275f556f50d0c54d5ee70211be551d",
+    "verdict": "output/cron-compare/civic_c116_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-19T00:15:45.566Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 400",
+      "words": 679,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "1b0ade0e8ce0782a10e642753b044afdab275f556f50d0c54d5ee70211be551d",
+      "costUsd": 0.0011
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-19T00:15:56.123Z"
+}

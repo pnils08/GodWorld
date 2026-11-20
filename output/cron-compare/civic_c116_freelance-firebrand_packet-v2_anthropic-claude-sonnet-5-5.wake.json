@@ -1,0 +1,61 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "116",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "freelance-firebrand",
+  "byline": {
+    "name": "Jax Caldera",
+    "popid": "POP-00799",
+    "beatDomain": "ACCOUNTABILITY"
+  },
+  "laneEntries": 115,
+  "quotesLanded": 4,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "canon_search",
+    "sheet_read",
+    "canon_recall",
+    "canon_recall"
+  ],
+  "toolCalls": 4,
+  "wordCount": 679,
+  "targetWords": "400-650",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 679,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "1b0ade0e8ce0782a10e642753b044afdab275f556f50d0c54d5ee70211be551d",
+    "costUsd": 0.0011
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/3 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/civic_c116_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "/ tip: ◈ encrypted .env [www.dotenvx.com]\n{\n  \"popId\": \"POP-00799\",\n  \"name\": \"Jax Caldera\",\n  \"recorded\": true,\n  \"text\": \"filed: Who Owns KONO's Rent Pressure When Everyone Says Business Is Good?\"\n}"
+  },
+  "ranAt": "2026-11-19T00:16:17.140Z"
+}

@@ -1,0 +1,132 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "116",
+  "persona": "anthony-raines",
+  "byline": "Anthony Raines",
+  "bylinePopid": "POP-00017",
+  "article": "output/cron-compare/staged/sports_c116_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Carmen Mesa",
+        "role": "mentioned",
+        "popid": "POP-00081",
+        "floor": true
+      },
+      {
+        "name": "Deacon Seymour",
+        "role": "mentioned",
+        "popid": "POP-00528",
+        "floor": true
+      },
+      {
+        "name": "Desmond Morton",
+        "role": "mentioned",
+        "popid": "POP-00051",
+        "floor": true
+      },
+      {
+        "name": "Eric Taveras",
+        "role": "mentioned",
+        "popid": "POP-00597",
+        "floor": true
+      },
+      {
+        "name": "Ernesto Quintero",
+        "role": "mentioned",
+        "popid": "POP-00050",
+        "floor": true
+      },
+      {
+        "name": "Frank Reyna",
+        "role": "mentioned",
+        "popid": "POP-00079",
+        "floor": true
+      },
+      {
+        "name": "Giancarlo Hernandez",
+        "role": "mentioned",
+        "popid": "POP-01239",
+        "floor": true
+      },
+      {
+        "name": "Henry Rivas",
+        "role": "mentioned",
+        "popid": "POP-00024",
+        "floor": true
+      },
+      {
+        "name": "Kevin Clark",
+        "role": "mentioned",
+        "popid": "POP-00053",
+        "floor": true
+      },
+      {
+        "name": "Mark Aitken",
+        "role": "mentioned",
+        "popid": "POP-00003",
+        "floor": true
+      },
+      {
+        "name": "Martin Richards",
+        "role": "mentioned",
+        "popid": "POP-00031",
+        "floor": true
+      },
+      {
+        "name": "Mike Paulson",
+        "role": "mentioned",
+        "popid": "POP-00527",
+        "floor": true
+      },
+      {
+        "name": "Pablo Almanzar",
+        "role": "mentioned",
+        "popid": "POP-01078",
+        "floor": true
+      },
+      {
+        "name": "Vladimir Gonzalez",
+        "role": "mentioned",
+        "popid": "POP-00598",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "A's · trade-recap — Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+        "sourceRef": "world_summary_c116.md ## Sports"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-da5a9ce34b94",
+    "draftSha256": "9f7422e481e6073143127e7ca365b22c67b9df8471291d4be566c8257dd6ee45",
+    "verdict": "output/cron-compare/sports_c116_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-17T00:21:52.158Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 932,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "9f7422e481e6073143127e7ca365b22c67b9df8471291d4be566c8257dd6ee45",
+      "costUsd": 0.0015
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-17T00:21:56.988Z"
+}

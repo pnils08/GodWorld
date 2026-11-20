@@ -1,0 +1,36 @@
+# The Lives Page, Cycle 115
+
+**Harmony Gupta, a plumber, moved into a place of their own in Laurel this cycle. It is a rental.** The household record for C115 has the move and nothing else about it: no street, no landlord, no date within the cycle. The same cycle also left Harmony at the Laurel Cleaners counter, waiting while someone in the back hunted for a claim ticket.
+
+"This cycle has been pretty normal for me," Harmony said. "I waited at the Laurel Cleaners counter while someone hunted for the claim ticket. Other than that, it's been business as usual."
+
+Business as usual, with a new key in the pocket. The record does not say whether the ticket turned up. It does keep what came before. In C114, Harmony closed their eyes during a choir solo "and actually felt the tension leave their shoulders." The same week, Harmony checked the Civis Systems Field livestream to see whether the grass had been laid down yet, and stayed cautious after hearing the night before had felt tense. Those were the weeks leading up to the move. The record does not say they were connected, and this page won't say so either. The Tribune's archive returned nothing earlier on Harmony. This is the first time the page has had them.
+
+**Christine Nakamura, co-founder of Gridiron Analytics, moved into a place of her own in Jack London, renting (C115).** The Tribune has named her before. She was in the C88 Education pieces, "The First Week" and "After the Bell," about the baseball-and-schools program she and Daniel Yoon piloted at two schools. She was in the paper's C113 Business piece, "Temescal's Ledger Is Growing. The Question Is Who It's Growing For."
+
+Here two lines of her thread do not agree. The household ledger puts the move into Jack London in C115. Her own life history carries a relocation line, stamped Y3C8, that already reads "moved from Temescal to Jack London." The record does not reconcile them, and it would be wrong to pick one for it. What it does agree on is the address now. She says:
+
+"I've been settling into my new place in Jack London. I heard Downtown was packed last night, which is a bit of a change from my usual quiet evenings. I did drive the church van for a senior trip recently and got to hear some neighborhood gossip near the waterfront."
+
+In C114 the record has her driving that van for three hours of unfiltered gossip near the waterfront. It also has her saving the Tribune clipping with her neighborhood in it, "the good one."
+
+**Wanjiru Liu, an electrician, walked across the stage at their commencement ceremony in Rockridge (C115).** The record's other C115 line for Wanjiru is from the job: pulling copper wire through a Baylight sub-basement until their shoulders burned. It says nothing about what the degree or certificate was. Their thread shows two weeks of the work and the people around it. Otis Redd "became a real friend, not just a colleague" (stamped Y3C9), and so did Genevieve Martinez (Y3C11). The record has not yet said who sat in the seats. Wanjiru is entry-level, and a stage and a sub-basement both belong to this cycle.
+
+**Ingeborg Hallstrom moved from Dimond to Downtown (C115).** The record gives the two neighborhoods and no reason. In C114 Ingeborg carried three boxes of canned goods off the pantry truck and felt it in their lower back, which is as close as the record comes to a before. In C115 Ingeborg read the Tribune's front page twice, once for the news and once to see who was in it. They read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline. And the record says they "handled responsibilities that didn't make the news," which is all it says.
+
+**Priya Raghunathan moved from Temescal to KONO (C115).** A week earlier, near Temescal Alley, Priya was caught off guard by the smell of rain on warm pavement. The record calls it nostalgia and gives the feeling no more weight than that. This cycle Priya adjusted the day's plans after the night's gridlock, and framed an old ticket stub "that had finally earned its frame." Which game, or which night, the stub is from, the record does not say.
+
+**Enzo Walker, a plumber in Lake Merritt, unpacked a box that had stayed sealed since the last move (C115).** In the same cycle he got the kids through the bedtime routine. Earlier, in a line stamped Y3C10, the record says he'd been ten weeks in Lake Merritt and "the move worked." It also says he walked past the bedroom that stays clean now and closed the door without going in. The record does not say whose room it is or why it stays clean, and nobody should fill that in for it. What the record holds is a man who opened a box last cycle and still has a door he doesn't open. The Tribune's C114 Business piece, "The Board in the Trailer Says 9.5 Percent. Enzo Walker Is Counting Something Else," had him on the page already. This cycle he grabbed a coffee from the cart outside the hospital before the morning rush.
+
+**Elijah Campbell, a taxi driver out of Adams Point, argued the bullpen order at the barbershop like it was city policy (C115).** "I've been doing a lot of driving around Oakland lately," he said. "This cycle, I decided to mix things up a bit and walked a different street home just to see what it was like. It's funny, I also argued with some guys at the barbershop about the A's bullpen order. I guess that's just part of being a fan, right?" In C114 the record has him learning a fare's whole week from the back seat in under ten minutes. It also has him waving at two drivers, a Baylight shuttle and a city bus, side by side at a light. The record says he read the front page twice, as Ingeborg did.
+
+**Jem Steele, an athlete in Rockridge, realized the week had passed without a single thing worth retelling (C115).** "This week felt pretty uneventful for me," Jem said. "I didn't really do anything out of the ordinary." The record's C114 lines are small ones. Jem read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline, and heard someone at the cafe complain about the Baylight District noise and bit their tongue. This page keeps a quiet week as a week.
+
+**Elias Varek headed over to The Aitken Line Founding Celebration in Jack London last night (C115).** Lives wrote him in C114, and the Tribune named him in the C112 Sports piece "Oaks' First Win Offers a Useful Opening Read." After work he left a line on his own page: "I built the instrument that this city reads itself with, and it's stopped telling me anything new." The record shows his firm, Varek Systems, and Civis Systems both returning money to the line this week. It does not say whether that was on his mind at the celebration.
+
+## INTAKE
+NAMES: Harmony Gupta | mentioned
+NAMES: Christine Nakamura | quoted-source
+NAMES: Elijah Campbell | quoted-source
+NAMES: Jem Steele | mentioned
+CLAIM: This cycle has been pretty normal for me. I waited at the Laurel Cleaners counter while someone hunted for the claim ticket. Other than that, it's been business as usual. | citizenVoice PRESS Harmony Gupta

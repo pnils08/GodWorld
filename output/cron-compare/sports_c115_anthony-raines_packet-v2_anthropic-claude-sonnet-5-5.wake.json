@@ -1,0 +1,65 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "115",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "anthony-raines",
+  "byline": {
+    "name": "Anthony Raines",
+    "popid": "POP-00017",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 12,
+  "quotesLanded": 0,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "canon_recall",
+    "canon_recall",
+    "sheet_read",
+    "citizen_lookup",
+    "citizen_lookup",
+    "sheet_read",
+    "canon_recall",
+    "canon_recall"
+  ],
+  "toolCalls": 8,
+  "wordCount": 776,
+  "targetWords": "evidence-bounded",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 776,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "fed108c9a6916a82af5f714a100a43b158378f5355c9dfda79368c636152e5cb",
+    "costUsd": 0.0019
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/3 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/sports_c115_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "ww.dotenvx.com]\n{\n  \"popId\": \"POP-00017\",\n  \"name\": \"Anthony Raines\",\n  \"recorded\": true,\n  \"text\": \"filed: Fifth on Points, First in Credits: Taveras's Undocked Pledge Has Nothing to Attach To Yet\"\n}"
+  },
+  "ranAt": "2026-11-14T18:01:24.108Z"
+}

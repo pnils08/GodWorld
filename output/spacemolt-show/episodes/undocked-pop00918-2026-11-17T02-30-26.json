@@ -1,0 +1,19 @@
+{
+  "show": "UNDOCKED",
+  "session": "undocked-pop00918",
+  "model": "openrouter/anthropic/claude-haiku-5.5",
+  "startedAt": "2026-11-17T02:30:26.524Z",
+  "endedAt": "2026-11-17T02:50:41.618Z",
+  "capMinutes": 20,
+  "exitCode": null,
+  "capped": true,
+  "stopReason": "window",
+  "toolCalls": 45,
+  "turns": 50,
+  "tokensIn": 204384,
+  "tokensOut": 6202,
+  "toolErrors": 4,
+  "estCostUsd": 0.0235,
+  "log": "output/spacemolt-show/episodes/undocked-pop00918-2026-11-17T02-30-26.log",
+  "runner": "scripts/undockedEpisode.js"
+}

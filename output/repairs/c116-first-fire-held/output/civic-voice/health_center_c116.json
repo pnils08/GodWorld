@@ -1,0 +1,38 @@
+{
+  "office": "health_center",
+  "cycle": 116,
+  "speaker": "Bobby Chen-Ramirez",
+  "cascadeSummary": "The Q3 intake audit is due and it gets filed — to HCAI and the Council Clerk — with the merchant-and-clinic-staff walkthrough at Telegraph & 47th completed the same week, so the filing has walking-tour evidence behind it, not just a spreadsheet. No new operational appropriations requested; the directive says no new spending and I didn't need any to do this. Ashford gets his numbers, the shopkeepers get their walkthrough, and the record gets both on the same date.",
+  "statements": [
+    {
+      "statementId": "STMT-116-health_center-001",
+      "type": "operational_status",
+      "topic": "Q3 clinical intake audit filed to HCAI and Council Clerk — third filing on the standing quarterly schedule",
+      "initiative": "INIT-005",
+      "decision": "File the Q3 clinical intake audit to HCAI and the Council Clerk this cycle, third consecutive quarterly filing on the standing schedule, no new appropriations requested.",
+      "quote": "The Q3 audit goes in the same week the walkthrough happens — because a filing that can't survive a walking tour isn't worth the paper I print it on.",
+      "fullStatement": "The Q3 clinical intake audit files this cycle to HCAI and the Council Clerk, third one on the standing quarterly schedule — Q1 was the first utilization filing at C113, Q2 went in at C115, Q3 goes in now. The format hasn't changed because the format works: encounter counts against the benchmarks Ashford's office adopted at C112, dollars reconciled to the $45 million construction line and the post-occupancy operating ledger, deficiency log with closeout dates, and the public-data commitment held so any resident can pull the same numbers I hand the Clerk. What's different this quarter is that the merchant-and-clinic-staff walkthrough happens in the same week as the filing, not after it. Devon and my front-desk lead walk Telegraph & 47th with the shopkeepers — the pharmacy across the street, the food-truck row operators who've been there since the fence went up — and they see the same building the audit counts. If a merchant asks why the intake numbers look the way they do, the answer is standing in the lobby where they can point at it. No new operational appropriation this cycle. The directive says announce no new spending; I didn't need any to file a report I already owed. The clinic opened two weeks early and $1.2 million under budget at C109 and it has stayed open and staffed since. The audit is the proof of that, not a request for more money to prove it. If HCAI comes back with questions — and they will, they always do — they'll come to a desk that has the answers already written down.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-116-health_center-002",
+      "type": "operational_status",
+      "topic": "Recurring Telegraph & 47th merchant verification walkthrough — completed this cycle, fourth consecutive",
+      "initiative": "INIT-005",
+      "decision": "Complete the recurring Telegraph & 47th merchant verification walkthrough with shopkeepers and clinic frontline staff this cycle; document findings in the audit file.",
+      "quote": "The shopkeepers across the street see more of this clinic's real traffic than any dashboard I get. They walk it with me every quarter, and their notes go in the file.",
+      "fullStatement": "The Telegraph & 47th merchant verification walkthrough runs again this cycle — fourth consecutive since C114, and it's on the calendar like a site inspection now because that's what it is. Devon and my front-desk lead walk the perimeter with the pharmacy owner across the street, the food-truck row operators, and the merchants association rep who reads the bulletin board on the corner. What they're checking isn't ceremonial: the entrance sightlines from Telegraph, the signage readability from the bus stop, the intake desk's wait-room flow at midday when the clinic is at its busiest, and whether the exterior lighting at the 47th Street side still reads safe after dark now that the fence is long gone. Merchant notes go in the file alongside the audit — if the pharmacy says the intake entrance feels congested at 11 AM, that's not a complaint, that's operational data, and it gets logged with a responsible desk and a follow-up date. That's what institutionalized means: it doesn't depend on my mood or my calendar. It happens quarterly, the findings are written down, and the next walkthrough starts from the last one's notes. The shops on Telegraph were in the room when this clinic was a fence and a rendering. They stay in the room now that the doors are open.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-116-health_center-003",
+      "type": "constituent_priority",
+      "topic": "Temescal constituents — elders on the bench at 51st, the 2.3-mile gap that no longer exists, street-level accountability",
+      "initiative": "INIT-005",
+      "decision": "Report on the ground what a Temescal constituent gets from this clinic this cycle — the audit answered at the front desk, not just at the Clerk's office.",
+      "quote": "A clinic that sits empty isn't a clinic — it's a monument. Ours is a working building in a working neighborhood, and the audit is how the neighborhood checks the work.",
+      "fullStatement": "The people I fight for in Temescal aren't an abstraction in a filing — they're the retirees on the bench at 51st who used to take two buses and a transfer to reach a health center 2.3 miles out of the neighborhood, and who now walk in the front door on Telegraph. This cycle, what they get from me is a clinic that can prove it's serving them. The Q3 intake audit is the public's document as much as HCAI's — the encounter counts, the benchmark comparison, the deficiency log are all committed to the public portal on the standing schedule, so a resident who wants to know whether the doors that opened at C109 are doors that work can pull the numbers themselves instead of taking my word. The walkthrough is the same promise from the other end: the merchants who watch the sidewalk every day get to walk the building and say what they see. I don't do speeches about health equity. I file audits and I walk the perimeter with the people who live here, and if the building stops working, the numbers and the walkthrough will say so before I have to. That's the accountability Temescal asked for when it waited out five cycles of priority-designation delay — the record is the record, and the record stays public.",
+      "trackerUpdates": {}
+    }
+  ]
+}

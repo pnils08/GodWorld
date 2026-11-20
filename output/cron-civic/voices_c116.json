@@ -1,0 +1,655 @@
+{
+  "stage": "hearing",
+  "cycle": 116,
+  "results": [
+    {
+      "dir": "civic-office-okoro",
+      "slug": "okoro",
+      "model": "deepseek/deepseek-v4.1-flash-1017",
+      "ok": true,
+      "output": "output/civic-voice/okoro_c116.json",
+      "statements": 3,
+      "attempts": 1,
+      "seat": {
+        "officeId": "STAFF-DM-COMM",
+        "title": "Deputy Mayor (Community)",
+        "holder": "Brenda Okoro",
+        "popid": "POP-00037",
+        "district": "citywide",
+        "faction": "STAFF",
+        "approval": 65,
+        "agentDir": "civic-office-okoro",
+        "dataDomain": "community-development",
+        "dataSources": [
+          "Initiative_Tracker (stabilization-fund)",
+          "output/world_summary_c{XX}.md §neighborhoods"
+        ],
+        "dutyDays": "sun-thu",
+        "model": "deepseek/deepseek-v4.1-flash-1017"
+      },
+      "voiceJson": {
+        "office": "okoro",
+        "cycle": 116,
+        "speaker": "Brenda Okoro",
+        "cascadeSummary": "I'm backing the Mayor's agenda where it matches the record I've kept: West Oakland's renewal goes to council this cycle with business-and-resident scope and the 23-day standard intact, but only with the C114 closeout publication in the hearing record, and I'm not announcing a new tranche because renewal is council's call. Grand Lake stays on the calendar for a recorded full-council vote with every Chen-Vega milestone and audit condition attached, and I'm asking the Clerk to certify the roll call rather than forecasting it. On the ground, I'm pairing Ivy Hill and San Antonio with the Glenview public-works spike and the Piedmont Avenue health spike — status reports with names and next dates, not a citywide press line.",
+        "statements": [
+          {
+            "statementId": "STMT-116-okoro-001",
+            "type": "position",
+            "topic": "West Oakland Stabilization Fund — charter renewal to council this cycle",
+            "initiative": "INIT-001",
+            "decision": "Support placing the $28M charter renewal on this cycle's council agenda only with West Oakland business-and-resident scope and the 23-day processing standard intact, and require the ordered C114 closeout publication in the hearing record before a final renewal decision.",
+            "quote": "Renewal means West Oakland businesses and residents, 23 days on the clock, and a closeout record on the table before council votes.",
+            "fullStatement": "The renewal ordinance is where I said it would be — on council's agenda this cycle, with the scope that actually works: West Oakland businesses and residents both eligible, 23 days processing, every closeout record public. I'm supporting renewal on exactly those terms. But I said the closeout publication would be in the hearing record before a final decision, and I meant it — public money deserves public proof, and council should vote with the C114 closeout in front of them, not after. I'm not announcing a new tranche. That's council's call to make, and my job is to keep the record clean enough for them to make it.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-116-okoro-002",
+            "type": "position",
+            "topic": "Commercial Stabilization for Grand Lake — recorded full-council vote",
+            "initiative": "INIT-009",
+            "decision": "Keep the scheduled recorded full-council vote on this cycle's agenda and back YES on the $2.5M, with every Chen-Vega milestone and audit condition attached, and ask the Clerk to certify the roll call without forecasting the outcome.",
+            "quote": "The Grand Lake decision will live in the Clerk's roll call, with milestones and audits written into the result — not appended afterward.",
+            "fullStatement": "Grand Lake gets $2.5 million with every Chen-Vega milestone and audit condition intact — nothing appended later, nothing counted by a hearing statement. I'm backing YES and I'm keeping the recorded full-council vote on this cycle's agenda. What I will not do is forecast it. The outcome lives in the Clerk's certified roll call, and that's exactly where public money should prove itself. Public money deserves public proof, and this cycle Grand Lake gets both.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-116-okoro-003",
+            "type": "position",
+            "topic": "Neighborhood conditions — Ivy Hill, San Antonio, Glenview, Piedmont Ave",
+            "initiative": null,
+            "decision": "Request public status reports from the responsible departments on Glenview's medium-severity public-works spike and Piedmont Avenue's medium-severity health spike — what happened, what's resolved, next update date — and pair direct listening in Ivy Hill with attention to San Antonio's struggling trade, without authorizing new spending or declaring a broader emergency.",
+            "quote": "Public-works answers in Glenview, health answers on Piedmont Avenue, and feet on the ground in Ivy Hill and San Antonio — that's responsive city government.",
+            "fullStatement": "Oakland isn't one mood. Ivy Hill is soured and slow, San Antonio is flat with trade struggling, and those blocks get feet on the ground, not a citywide press line. This cycle also brought a medium-severity public-works spike in Glenview and a medium-severity health spike on Piedmont Avenue. I'm asking the responsible departments for public status reports on both — what happened, what's been resolved, and the next update date — and I'm pairing that with direct listening in Ivy Hill and San Antonio. No new spending, no broader emergency declared. Just answers with names and dates attached, and me showing up where the proof lives.",
+            "trackerUpdates": {}
+          }
+        ]
+      },
+      "lever": ""
+    },
+    {
+      "dir": "civic-office-council-d9",
+      "slug": "council_d9",
+      "model": "deepseek/deepseek-v4.1-flash-1017",
+      "ok": true,
+      "output": "output/civic-voice/council_d9_c116.json",
+      "statements": 3,
+      "attempts": 1,
+      "seat": {
+        "officeId": "COUNCIL-D9",
+        "title": "City Council District 9",
+        "holder": "Terrence Mobley",
+        "popid": "POP-00506",
+        "district": "D9",
+        "faction": "OPP",
+        "approval": 55,
+        "agentDir": "civic-office-council-d9",
+        "dataDomain": "district-representation",
+        "dataSources": [
+          "output/world_summary_c{XX}.md §neighborhoods (D9)",
+          "Initiative_Tracker AffectedNeighborhoods"
+        ],
+        "dutyDays": "sun-thu",
+        "model": "deepseek/deepseek-v4.1-flash-1017"
+      },
+      "voiceJson": {
+        "office": "council_d9",
+        "cycle": 116,
+        "speaker": "Terrence Mobley",
+        "cascadeSummary": "I'm voting YES on the Mayor's Laurel cleanup agenda item with a hard condition attached: INIT-015 stays 'announced,' drafting and Clerk-verified filing are due this cycle, and if verification isn't obtained I'll record the deadline as missed rather than dress it up. The Planning Director's directive is right that I owe Laurel a straight report on the missed pickup, the four district complaints and the actual work completed versus merely proposed — so I'm demanding that record separately and not treating the $6 million as approved money. On Uptown and Laurel I'm holding my read: steady, not a crisis, and I won't manufacture one.",
+        "statements": [
+          {
+            "statementId": "STMT-116-council_d9-001",
+            "type": "vote_statement",
+            "topic": "Laurel cleanup legislation and verified filing",
+            "initiative": "INIT-015",
+            "decision": "YES on keeping Laurel cleanup drafting and Clerk-verified filing on this cycle's required agenda; INIT-015 remains announced, not filed, and a missed verification gets recorded as a missed deadline.",
+            "quote": "A Laurel cleanup becomes real through a defined scope, resident outreach, and a Clerk entry neighbors can verify for themselves.",
+            "fullStatement": "I proposed this measure and I'm not walking away from it, but I won't call it filed when it isn't. INIT-015 is announced — that's it. What I want on this cycle's agenda is completed drafting and a Clerk-verified filing number, with the $6 million legislation defining cleanup scope, direct neighborhood outreach, visible follow-through and maintenance responsibility. If the Clerk's reference doesn't come back this cycle, I want the record to say the filing deadline was missed. That's not a failure of ambition; it's the only way a neighbor in Laurel can check whether the work is real. A promise is not progress until it's on paper, and I'll say that until the paper exists.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-116-council_d9-002",
+            "type": "oversight_statement",
+            "topic": "Laurel patch and clean-up — proposal versus completed work, missed pickup and complaint record",
+            "initiative": "INIT-015",
+            "decision": "Request a public status report separating proposal, filing, authorization and completed work for the Laurel patch and clean-up, identifying what happened on the missed pickup, what the recorded district complaints require, and the responsible offices with next dates.",
+            "quote": "Show me what was actually picked up, what the four complaints actually say, and who answers for the next date — not what the six million dollars is supposed to buy someday.",
+            "fullStatement": "The Planning Director asked me to report back on Laurel, and she's right that I owe it. Here's what I can honestly say from the brief: this measure is announced, not filed; the six million is a proposal, not approved spending; and Laurel's record shows four district complaints alongside reduced storefront activity. What I don't have in front of me is the missed-pickup detail or the complaint ledger, and I'm not going to invent either one. So I'm asking the responsible departments for a public status report that separates proposal from filing, authorization from completed work, and names what happened on the missed pickup, what those four complaints actually require, and which office owns each next step with a date. Laurel residents deserve a document they can read, not a promise they have to take on faith.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-116-council_d9-003",
+            "type": "district_statement",
+            "topic": "District 9 neighborhoods — Laurel and Uptown this cycle",
+            "initiative": null,
+            "decision": "Read D9 as steady: Uptown mildly positive with busy street trade and low crime; Laurel mildly positive with slow trade and low crime; no crisis declaration, no new spending, continued attention to Laurel's commercial pace.",
+            "quote": "Uptown is walking steady and Laurel is still catching its breath — neither one needs me to overstate the case.",
+            "fullStatement": "My approval sits at 62, down a point, and I'm not going to panic about that or blame it on the neighborhoods. Uptown is mildly positive, street trade is busy, crime is low. Laurel is mildly positive too, with slower street trade and low crime. That's a district keeping its footing, not a district on fire. I've said all week I won't manufacture a crisis where the brief shows one isn't there, and I'm holding that line. What Laurel does need is the cleanup scope on paper and honest reporting on the complaints and the slow trade — work I'm pursuing through the legislation and the status report, not through a press release. Stability in Laurel is work, not luck; the way to keep it is records, not rhetoric.",
+            "trackerUpdates": {}
+          }
+        ]
+      },
+      "lever": ""
+    },
+    {
+      "dir": "civic-office-council-d4",
+      "slug": "council_d4",
+      "model": "openai/gpt-6-luna",
+      "ok": true,
+      "output": "output/civic-voice/council_d4_c116.json",
+      "statements": 2,
+      "attempts": 1,
+      "seat": {
+        "officeId": "COUNCIL-D4",
+        "title": "City Council District 4",
+        "holder": "Ramon Vega",
+        "popid": "POP-00042",
+        "district": "D4",
+        "faction": "IND",
+        "approval": 55,
+        "agentDir": "civic-office-council-d4",
+        "dataDomain": "district-representation",
+        "dataSources": [
+          "output/world_summary_c{XX}.md §neighborhoods (D4)",
+          "Initiative_Tracker AffectedNeighborhoods"
+        ],
+        "dutyDays": "sun-thu",
+        "model": "openai/gpt-6-luna"
+      },
+      "voiceJson": {
+        "office": "council_d4",
+        "cycle": 116,
+        "speaker": "Ramon Vega",
+        "cascadeSummary": "I am holding review of INIT-014 until the Clerk provides a verifiable filing reference; a prior claim is not enough to establish that the legislation is properly filed. For Glenview, the record does not tell us what the civic response meeting established or what work was performed, so I am asking staff to document those facts, identify the responsible department and give residents a next update date.",
+        "statements": [
+          {
+            "statementId": "STMT-116-council_d4-001",
+            "type": "vote_statement",
+            "topic": "Ivy Hill Community Support Initiative filing verification",
+            "initiative": "Ivy Hill Community Support Initiative",
+            "decision": "Hold the filed-legislation review until the Clerk supplies a verifiable filing reference.",
+            "quote": "A review should begin with a filing the Clerk can verify, not an assertion that one exists.",
+            "fullStatement": "Ivy Hill’s current conditions warrant attention: the packet describes soured mood, slow street trade, and low crime. That is a reason to listen and assess, not to manufacture an emergency. I have already asked for filing verification, and the record before us still supplies no Clerk reference. I will hold the review of INIT-014 until that reference is provided. This is a procedural pause, not a finding that the initiative is unnecessary or that the filing was completed.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-116-council_d4-002",
+            "type": "statement",
+            "topic": "Glenview Civic Response Meeting and public-works follow-through",
+            "initiative": null,
+            "decision": "Request a documented account of the meeting, work performed, remaining issues, responsible department, and next update date.",
+            "quote": "A meeting is not a work record; Glenview deserves to know what happened next.",
+            "fullStatement": "The supplied record confirms a Glenview Civic Response Meeting and a current medium-severity public-works spike, but it does not say what the meeting established, what work was performed, or what remains open. I cannot report findings that are not in the record. I am asking staff to provide the meeting findings and work status, identify the department responsible for any remaining municipal follow-through, and give residents a next update date. Until those facts are documented, I will neither declare the issue resolved nor inflate it into a broader emergency.",
+            "trackerUpdates": {}
+          }
+        ]
+      },
+      "lever": ""
+    },
+    {
+      "dir": "civic-office-council-d6",
+      "slug": "council_d6",
+      "model": "google/gemini-3.8-flash",
+      "ok": true,
+      "output": "output/civic-voice/council_d6_c116.json",
+      "statements": 3,
+      "attempts": 1,
+      "seat": {
+        "officeId": "COUNCIL-D6",
+        "title": "City Council District 6",
+        "holder": "Elliott Crane",
+        "popid": "POP-00044",
+        "district": "D6",
+        "faction": "CRC",
+        "approval": 55,
+        "agentDir": "civic-office-council-d6",
+        "dataDomain": "district-representation",
+        "dataSources": [
+          "output/world_summary_c{XX}.md §neighborhoods (D6)",
+          "Initiative_Tracker AffectedNeighborhoods"
+        ],
+        "dutyDays": "sun-thu",
+        "model": "google/gemini-3.8-flash"
+      },
+      "voiceJson": {
+        "office": "council_d6",
+        "cycle": 116,
+        "speaker": "Elliott Crane",
+        "cascadeSummary": "I voted to sustain rigorous fiscal accountability across city initiatives while ensuring municipal baselines in District 6 remain sound. I affirmed my vote for Grand Lake commercial stabilization under strict Chen-Vega audit milestones, demanded verified closeout ledgers before acting on the West Oakland Stabilization Fund charter renewal, and requested departmental follow-through on Piedmont Avenue's public health spike without creating unnecessary bureaucracy.",
+        "statements": [
+          {
+            "statementId": "STMT-116-council_d6-001",
+            "type": "vote_statement",
+            "topic": "West Oakland Stabilization Fund Charter Renewal",
+            "initiative": "West Oakland Stabilization Fund",
+            "decision": "Condition any charter renewal vote on publication and verification of the C114 closeout ledger and preservation of the 23-day processing standard.",
+            "quote": "A charter extension cannot outpace the ledger; we must verify audited closeout documentation before committing city resources.",
+            "fullStatement": "The West Oakland Stabilization Fund has played a significant role since Cycle 78, but municipal reauthorizations demand rigorous accountability. I support the requirement that the ordered Month-12 closeout ledger be formally entered into the hearing record before Council makes any final decision on renewal. District 6 taxpayers expect every public dollar to be documented, unearned tranches eliminated, and the existing 23-day processing standard maintained. Until that verified closeout documentation is delivered and inspected, I will not authorize a multi-million-dollar charter extension.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-116-council_d6-002",
+            "type": "vote_statement",
+            "topic": "Commercial Stabilization for Grand Lake Recorded Vote",
+            "initiative": "Commercial Stabilization for Grand Lake",
+            "decision": "Vote YES on the $2.5 million Commercial Stabilization for Grand Lake proposal with Chen-Vega audit and milestone requirements attached.",
+            "quote": "Public investment earns my vote when enforceable audits and transparent milestones protect the public purse from day one.",
+            "fullStatement": "I cast my vote in favor of the Commercial Stabilization for Grand Lake initiative because its structure incorporates the necessary fiscal controls established by colleagues Chen and Vega. Commercial corridors are the lifeblood of Oakland's economy, but revitalization programs cannot operate on blank checks. By embedding mandatory milestone reporting, independent audit protocols, and strict disbursement criteria directly into the Clerk's certified roll call, this $2.5 million investment balances economic support with prudent fiscal oversight. That is the standard all future neighborhood stabilization funding should meet.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-116-council_d6-003",
+            "type": "policy_statement",
+            "topic": "Piedmont Avenue Baseline Services and Health Follow-up",
+            "initiative": null,
+            "decision": "Direct relevant city departments to provide an informational update on Piedmont Avenue's medium-severity health spike while maintaining core municipal services without added bureaucratic overhead.",
+            "quote": "Routine city maintenance and targeted public health follow-through must protect our commercial vitality without inventing new bureaucratic machinery.",
+            "fullStatement": "District 6 remains commercially vibrant with busy street trade, low crime, and vital community mutual aid, such as the food pantry at B'nai Tikvah Synagogue serving neighbors in need. However, the recent medium-severity health spike on Piedmont Avenue requires a clear, factual update from the responsible health and public service departments. City Hall's duty is to deliver timely diagnostic answers, coordinate necessary municipal baseline cleanups, and resolve local service spikes without declaring unwarranted emergencies or creating redundant administrative structures.",
+            "trackerUpdates": {}
+          }
+        ]
+      },
+      "lever": ""
+    },
+    {
+      "dir": "civic-office-council-d2",
+      "slug": "council_d2",
+      "model": "openai/gpt-6-luna",
+      "ok": true,
+      "output": "output/civic-voice/council_d2_c116.json",
+      "statements": 4,
+      "attempts": 1,
+      "seat": {
+        "officeId": "COUNCIL-D2",
+        "title": "City Council District 2",
+        "holder": "Leonard Tran",
+        "popid": "POP-00502",
+        "district": "D2",
+        "faction": "IND",
+        "approval": 59,
+        "agentDir": "civic-office-council-d2",
+        "dataDomain": "district-representation",
+        "dataSources": [
+          "output/world_summary_c{XX}.md §neighborhoods (D2)",
+          "Initiative_Tracker AffectedNeighborhoods"
+        ],
+        "dutyDays": "sun-thu",
+        "model": "openai/gpt-6-luna"
+      },
+      "voiceJson": {
+        "office": "council_d2",
+        "cycle": 116,
+        "speaker": "Leonard Tran",
+        "cascadeSummary": "I am correcting the record on INIT-008: my stated support for YES does not establish that a vote occurred, and the supplied material contains no roll call or appropriation authorization. I will not treat Baylight’s improvement flag as proof of a construction milestone, and I support the scheduled Grand Lake vote with its conditions intact. D2’s current conditions merit attention, not a crisis declaration or new spending.",
+        "statements": [
+          {
+            "statementId": "STMT-116-council_d2-001",
+            "type": "vote_statement",
+            "topic": "INIT-008 vote and appropriation record",
+            "initiative": "Downtown Economic Revitalization",
+            "decision": "I cannot confirm that a legislative vote occurred or that Chinatown or Uptown appropriations were authorized; request the Clerk's record and correct the public account accordingly.",
+            "quote": "A stated YES is not a roll call, and a proposed allocation is not an appropriation.",
+            "fullStatement": "Last cycle I said I supported a recorded YES on Downtown Economic Revitalization. That was my stated position, not evidence that Council actually voted. The supplied Cycle 115 tracker description says INIT-008 was failed and still vote-scheduled, with no dated next step; it does not explain the basis for that status. No Clerk roll call is available in this packet, so I cannot claim a vote occurred or identify my vote in a recorded tally. Nor does the record show that Chinatown or Uptown appropriation tracks were authorized. I ask that the Clerk's record and the status basis be produced before anyone describes those proposed tracks as delivered funding.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-116-council_d2-002",
+            "type": "statement",
+            "topic": "Baylight evidence review",
+            "initiative": "Baylight District — Final Council Vote",
+            "decision": "Take no new phase or funding action; continue oversight and require a public evidence-file determination before any future milestone decision.",
+            "quote": "An improvement flag is not a construction finding.",
+            "fullStatement": "Jack London and Downtown are reporting upbeat conditions, but that does not establish that Baylight has met a construction milestone. The record says an evidence-file review was ordered and no milestone pass was declared; the current low-severity improvement flag does not change that. I support continued remediation and independent oversight, along with the hotline, dust control, and workforce oversight described in the agenda. Before any future milestone decision, the public should receive a determination based on the evidence file. I am not asking for another vote or funding action now.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-116-council_d2-003",
+            "type": "vote_statement",
+            "topic": "Grand Lake recorded full-council decision",
+            "initiative": "Commercial Stabilization for Grand Lake",
+            "decision": "Support the scheduled recorded vote with the milestone and audit conditions intact; ask the Clerk to certify the roll call.",
+            "quote": "Put the conditions in the decision, and put the decision in the Clerk's record.",
+            "fullStatement": "I continue to support a YES on the scheduled Grand Lake proposal, with every Chen-Vega milestone and audit condition attached. A position stated before the hearing is not a forecast of the Council's result, and I will not presume how the other members vote. I ask the Clerk to certify the roll call so residents can see the actual decision and the conditions that govern it. That is the standard I want applied to this vote and to the record of INIT-008 as well.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-116-council_d2-004",
+            "type": "statement",
+            "topic": "D2 neighborhood conditions",
+            "initiative": null,
+            "decision": "Take no new district spending action; continue monitoring neighborhood conditions without characterizing them as a crisis.",
+            "quote": "Busy streets and low crime are good news; they call for attention, not a crisis declaration.",
+            "fullStatement": "Jack London and Downtown are clearly upbeat, with busy street trade and low crime. Chinatown is steady, and Baylight’s street trade is slow despite mildly positive mood. Those differences are worth tracking, but the brief does not establish an emergency or justify new spending. I will keep attention on how these neighborhoods are doing and avoid claiming that a project caused conditions the evidence does not establish. For now, no additional district action is warranted.",
+            "trackerUpdates": {}
+          }
+        ]
+      },
+      "lever": ""
+    },
+    {
+      "dir": "civic-office-council-d7",
+      "slug": "council_d7",
+      "model": "google/gemini-3.8-flash",
+      "ok": true,
+      "output": "output/civic-voice/council_d7_c116.json",
+      "statements": 3,
+      "attempts": 1,
+      "seat": {
+        "officeId": "COUNCIL-D7",
+        "title": "City Council District 7",
+        "holder": "Warren Ashford",
+        "popid": "POP-00504",
+        "district": "D7",
+        "faction": "CRC",
+        "approval": 51,
+        "agentDir": "civic-office-council-d7",
+        "dataDomain": "district-representation",
+        "dataSources": [
+          "output/world_summary_c{XX}.md §neighborhoods (D7)",
+          "Initiative_Tracker AffectedNeighborhoods"
+        ],
+        "dutyDays": "sun-thu",
+        "model": "google/gemini-3.8-flash"
+      },
+      "voiceJson": {
+        "office": "council_d7",
+        "cycle": 116,
+        "speaker": "Warren Ashford",
+        "cascadeSummary": "In Cycle 116, District 7 calendared the mandatory Q3 clinical intake audit and recurring merchant walkthrough for the Temescal Community Health Center, refusing to certify operational milestones without public documentation. In response to the Planning Director's directive on Rockridge, I directed staff to maintain current baseline services while auditing municipal service responsiveness rather than throwing unmonitored commercial subsidies at a corridor with strong retail vitality. Finally, I reaffirmed my recorded YES vote on INIT-009 for Grand Lake commercial stabilization, backed by strict Chen-Vega audit triggers.",
+        "statements": [
+          {
+            "statementId": "STMT-116-council_d7-001",
+            "type": "vote_statement",
+            "topic": "Temescal Community Health Center Q3 Audit and Merchant Verification",
+            "initiative": "Temescal Community Health Center",
+            "decision": "Require timely filing of the Q3 clinical intake audit with HCAI and the Council Clerk alongside completion of the recurring Telegraph and 47th merchant verification walkthrough before certifying operational oversight.",
+            "quote": "Clinical dollars require clinical proof; an open facility does not get an exemption from delivering its quarterly audit data.",
+            "fullStatement": "The Temescal Community Health Center opened under budget and ahead of schedule, but delivering care does not waive fiscal accountability. Operating funds require verified intake metrics. This cycle, District 7 enforces the standing schedule: the Q3 intake audit must be formally submitted to HCAI and the Council Clerk, and the merchant-clinic verification walkthrough at Telegraph and 47th must be executed and documented. We do not rubber-stamp operational milestones based on ribbon cuttings or assumptions. The data must be placed on the public record first.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-116-council_d7-002",
+            "type": "policy_statement",
+            "topic": "Rockridge Corridor Service Review and Merchant Sentiment",
+            "initiative": null,
+            "decision": "Maintain current municipal baseline services while rejecting new unmonitored commercial corridor expenditures; direct City Planning and Public Works to verify municipal service delivery timelines rather than authorizing new subsidies.",
+            "quote": "When retail vitality climbs to 11.89 while merchant sentiment dips to -0.06, foot traffic is not the problem, and throwing unmonitored city cash at the street is not the solution.",
+            "fullStatement": "In response to Planning Director Mara Vance's inquiry regarding our Rockridge canvass: observed conditions confirm retail vitality has recovered to 11.89 and street trade remains busy with low crime. Merchant sentiment, however, registered at -0.06, demonstrating that commercial activity and merchant mood are decoupled. Our canvass established that merchants are frustrated by municipal service response times and regulatory friction, not a lack of customer volume. Writing a blank check for corridor marketing will not fix operational friction. District 7 supports maintaining existing baseline service allocations while demanding an objective audit of municipal service delivery response times before any budget adjustment is entertained.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-116-council_d7-003",
+            "type": "vote_statement",
+            "topic": "Commercial Stabilization for Grand Lake Recorded Roll Call",
+            "initiative": "Commercial Stabilization for Grand Lake",
+            "decision": "Record YES on INIT-009 contingent upon the strict preservation of the Chen-Vega milestone reporting and mandatory audit triggers.",
+            "quote": "Accountability triggers make the difference between a sound commercial investment and an open checkbook.",
+            "fullStatement": "On the full-council roll call for INIT-009 Commercial Stabilization for Grand Lake, my vote is recorded as YES because the mandatory Chen-Vega audit milestones and clawback provisions remain binding in the text. Fiscal conservatism is not about opposing every commercial expenditure; it is about guaranteeing that public funds are tied to verifiable performance benchmarks and transparent accounting. If those milestones are missed, funding pauses immediately. With those oversight gates secured in the record, this investment protects taxpayer dollars while assisting commercial stability.",
+            "trackerUpdates": {}
+          }
+        ]
+      },
+      "lever": ""
+    },
+    {
+      "dir": "civic-office-council-d8",
+      "slug": "council_d8",
+      "model": "google/gemini-3.8-flash",
+      "ok": true,
+      "output": "output/civic-voice/council_d8_c116.json",
+      "statements": 2,
+      "attempts": 1,
+      "seat": {
+        "officeId": "COUNCIL-D8",
+        "title": "City Council District 8",
+        "holder": "Nina Chen",
+        "popid": "POP-00505",
+        "district": "D8",
+        "faction": "CRC",
+        "approval": 55,
+        "agentDir": "civic-office-council-d8",
+        "dataDomain": "district-representation",
+        "dataSources": [
+          "output/world_summary_c{XX}.md §neighborhoods (D8)",
+          "Initiative_Tracker AffectedNeighborhoods"
+        ],
+        "dutyDays": "sun-thu",
+        "model": "google/gemini-3.8-flash"
+      },
+      "voiceJson": {
+        "office": "council_d8",
+        "cycle": 116,
+        "speaker": "Nina Chen",
+        "cascadeSummary": "District 8 re-affirms its YES vote on the Commercial Stabilization for Grand Lake ordinance under strict Chen-Vega audit protocols, while clarifying for the record that an individual affirmative floor vote does not equate to council enactment without a certified roll call. In Eastlake, we demand published municipal service schedules and establish a complaint-to-response crosswalk addressing the district's three recorded maintenance cases. Across Lake Merritt and Adams Point, we insist on procedural oversight to ensure misfiled documents are rectified and baseline municipal services are delivered reliably.",
+        "statements": [
+          {
+            "statementId": "STMT-116-council_d8-001",
+            "type": "vote_statement",
+            "topic": "Commercial Stabilization for Grand Lake Floor Vote and Disposition Record",
+            "initiative": "Commercial Stabilization for Grand Lake",
+            "decision": "Cast floor vote of YES on INIT-009 with Chen-Vega audit protocols intact, while recording that an individual member's affirmative vote does not constitute council enactment pending a certified roll call from the City Clerk.",
+            "quote": "An individual affirmative vote is not an enacted ordinance; District 8 votes YES to secure Chen-Vega fiscal controls, but final disposition rests on a certified roll call.",
+            "fullStatement": "District 8 records a vote of YES on the $2.5 million Commercial Stabilization for Grand Lake ordinance, conditioned strictly on the preservation of the Chen-Vega audit protocols and milestone reporting. In response to Planning Director Mara Vance's directive, I must clarify the official record: while my individual seat voted YES in Cycle 115 and re-affirms YES today, an individual floor position is not an enacted policy. The live initiative tracker recorded INIT-009 as failed rather than passed due to the absence of a certified roll call. We require the City Clerk to publish the official roll-call decision record before funds are released. Relief without accountability is merely an expenditure; District 8 supports stabilization only when every dollar deployed in Grand Lake is tracked, verified, and earned.",
+            "disposition": "YES",
+            "actionAsked": "The City Clerk must record and certify the roll-call vote on INIT-009 and publish the official final decision record with all Chen-Vega audit conditions attached.",
+            "tone": "procedural",
+            "targets": [
+              "civic"
+            ],
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-116-council_d8-002",
+            "type": "policy_statement",
+            "topic": "Eastlake Maintenance Allocations, Service Schedules, and Complaint Reconciliation",
+            "initiative": null,
+            "decision": "Direct Public Works and City Planning to publish verified baseline maintenance schedules for Eastlake and reconcile the district's three recorded complaints into a formal response crosswalk.",
+            "quote": "Revitalization cannot halt at Grand Avenue while adjacent commercial corridors wait for unverified schedules and unanswered maintenance complaints.",
+            "fullStatement": "In direct response to Planning Director Vance's inquiry regarding Eastlake allocations, District 8 clarifies that the proposed baseline municipal maintenance allocations remain in docketing review pending Public Works authorization. The district office has received three formal constituent complaints regarding corridor decay and delayed maintenance. I am directing staff to establish a formal complaint-to-response crosswalk mapping each case to its responsible department, remediation schedule, and follow-up deadline. Revitalization cannot halt at Grand Avenue while Eastlake shoulders documented corridor decay without verified service schedules. Furthermore, as community anchors like the Cathedral of the Living Word and Or Hashalom Renewal Community continue their vital civic and job training work across Lake Merritt and Grand Lake, city administration must meet them with equal administrative diligence, resolving misfiled documents and delivering predictable municipal maintenance.",
+            "disposition": "statement",
+            "actionAsked": "Direct the Department of Public Works to release verified service schedules for Eastlake and complete a documented crosswalk resolving District 8's three recorded maintenance complaints.",
+            "tone": "procedural",
+            "targets": [
+              "civic"
+            ],
+            "trackerUpdates": {}
+          }
+        ]
+      },
+      "lever": ""
+    },
+    {
+      "dir": "civic-office-council-d5",
+      "slug": "council_d5",
+      "model": "deepseek/deepseek-v4.1-flash-1017",
+      "ok": true,
+      "output": "output/civic-voice/council_d5_c116.json",
+      "statements": 5,
+      "attempts": 1,
+      "seat": {
+        "officeId": "COUNCIL-D5",
+        "title": "City Council District 5",
+        "holder": "Janae Rivers",
+        "popid": "POP-00043",
+        "district": "D5",
+        "faction": "OPP",
+        "approval": 85,
+        "agentDir": "civic-office-council-d5",
+        "dataDomain": "district-representation",
+        "dataSources": [
+          "output/world_summary_c{XX}.md §neighborhoods (D5)",
+          "Initiative_Tracker AffectedNeighborhoods"
+        ],
+        "dutyDays": "sun-thu",
+        "model": "deepseek/deepseek-v4.1-flash-1017"
+      },
+      "voiceJson": {
+        "office": "council_d5",
+        "cycle": 116,
+        "speaker": "Janae Rivers",
+        "cascadeSummary": "I am holding the apprenticeship pipeline's disposition to the actual publication of the placement-gap analysis this cycle — West Oakland and Fruitvale named, owned, and dated — and I say plainly that the Fruitvale briefing record and the long-incomplete D5 audit must land on the public record before alternative response takes another step. Today I also put East Oakland's unanswered complaint on the Council response crosswalk with a named office and a next date, because my district gets answers, not patience. I vote YES on the Grand Lake proposal only with the Chen-Vega milestones and audit conditions intact, and I will not have the Mayor's office move faster on expansion than it moves on documentation.",
+        "statements": [
+          {
+            "statementId": "STMT-116-council_d5-001",
+            "type": "vote_statement",
+            "topic": "Oakland Alternative Response Initiative — briefing record and expansion hold",
+            "initiative": "Oakland Alternative Response Initiative",
+            "decision": "Hold expansion until the D3 Fruitvale briefing record is executed and published with district-level and Fruitvale data, community participation documented, and responsible next dates filed for the still-incomplete D5 audit and Baylight feasibility review.",
+            "quote": "East Oakland's calls are already in this program — so East Oakland's record and Fruitvale's record get published before this program expands one block.",
+            "fullStatement": "I represent the district where alternative response already runs. The dispatch protocol is deployed, the calls are answered, and the promise was that residents who call 911 see their own record, in their own neighborhood, before the program grows. So I hold expansion. The D3 Fruitvale briefing record gets executed and published this cycle with district-level and Fruitvale data and documented community participation. The D5 audit that has been outstanding — and the Baylight feasibility review — come back with responsible offices and next dates, not another cycle of silence. I am not slowing this program because I want it smaller. I am slowing it until it can prove it is reaching people fairly, because expanding on a story instead of a record is how communities get skipped.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-116-council_d5-002",
+            "type": "vote_statement",
+            "topic": "Oakland Youth Apprenticeship Pipeline — placement-gap analysis publication and disposition",
+            "initiative": "Oakland Youth Apprenticeship Pipeline",
+            "decision": "Require publication this cycle of the placement-gap analysis and adjustment plan with explicit West Oakland and Fruitvale reviews, named placement reach, specific corrections, responsible owners, and next reporting dates — then set a binary disposition on the hearing agenda: evidence-supported advancement or recorded fail.",
+            "quote": "We handed East Oakland's youth the first rung. Now the ladder has to reach West Oakland and Fruitvale in a document the public can open, or we record the failure and try again in the open.",
+            "fullStatement": "I led on this pipeline because East Oakland's young people have been handed a first rung and told the ladder goes up. Four cycles in the same stage is not accountability — it is a filing cabinet. This cycle the placement-gap analysis and adjustment plan get published, with West Oakland and Fruitvale reviewed by name, who placements actually reach, the specific intake and placement corrections, the office that owns each one, and the next reporting date. Then this hearing ends in a disposition: evidence that supports advancing, or a recorded fail on the record. I support the Mayor's binary disposition because a program that serves young people owes them a verdict, not an automatic hold. The low-severity improvement flags are noted; they are not a finished analysis, and I will not represent them as one.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-116-council_d5-003",
+            "type": "statement",
+            "topic": "D5 constituent complaint — public response and next date",
+            "initiative": null,
+            "decision": "Place the unresolved D5 constituent complaint on the Mayor's ten-complaint response crosswalk with covered complaint ID, responsible office, proposed remedy, and next date, and hold the record until the Clerk supplies verified references rather than asserting docket numbers.",
+            "quote": "One unanswered complaint is one neighbor we told to wait — and I am done telling East Oakland to wait.",
+            "fullStatement": "My district has a complaint that went unresolved, and the public deserves to see it handled like any other on the ledger. I am asking that it appear on the complaint crosswalk with its covered ID, the responsible office that owes the remedy, the proposed fix, and the next date — so a neighbor can check the line rather than take my word for it. I also accept the discipline the Mayor applied to INIT-014: a response is not a resolution and a filing claim is not a Clerk entry without evidence, so the covered complaints get named, the uncovered ones get status, and the record waits for the Clerk's verified reference. I am not trading the integrity of this crosswalk for speed. East Oakland gets both: answers with dates, and answers that are true.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-116-council_d5-004",
+            "type": "vote_statement",
+            "topic": "Commercial Stabilization for Grand Lake — recorded full-council decision",
+            "initiative": "Commercial Stabilization for Grand Lake",
+            "decision": "Vote YES on the $2.5 million Grand Lake proposal with all Chen-Vega milestones and audit conditions remaining attached, and ask the Clerk to certify the roll call without forecasting the outcome.",
+            "quote": "Yes on Grand Lake — and yes with the receipts attached, not the conditions stripped.",
+            "fullStatement": "I vote yes on Grand Lake, and I say it the same way I said it last cycle: yes with the Chen-Vega milestones and audit conditions written into the result, not appended afterward by letter. A $2.5 million investment in commercial stabilization earns my vote when the public can follow the milestones and audit the spending, and when this body's decision lives in the Clerk's roll call rather than in a press release. I do not forecast the tally and I do not speak for the other eight seats. I put my name, and D5's vote, on the record as one member of nine, and I ask the Clerk to certify it so residents can read it for themselves.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-116-council_d5-005",
+            "type": "statement",
+            "topic": "Neighborhood conditions and civic life — East Oakland follow-through",
+            "initiative": null,
+            "decision": "Press responsible departments for public status on the reported service conditions, support direct listening in the north-end neighborhoods, and protect East Oakland's low crime as a result to defend rather than a budget line to absorb.",
+            "quote": "East Oakland's low crime is a result to protect, not a budget cut to absorb — and I will not treat our streets as the place where the city saves money.",
+            "fullStatement": "The report from my district says what residents already know: the mood has lifted, street trade is steady, crime is low. That is a result, and results have to be defended in a budget season and through every service map this Council touches. I keep pressing for public status from the responsible departments on the medium-severity spikes reported elsewhere — Glenview's public works and Piedmont Avenue's health — because that is what responsive government looks like, not a directive to invent an emergency. And I want room for neighborhoods to gather: the Mayor's mention of three block parties is the part of city life I will fight for. My district's work this cycle is follow-through, and I will keep asking the department that owes a date for the date.",
+            "trackerUpdates": {}
+          }
+        ]
+      },
+      "lever": ""
+    },
+    {
+      "dir": "civic-office-council-d1",
+      "slug": "council_d1",
+      "model": "deepseek/deepseek-v4.1-flash-1017",
+      "ok": false,
+      "error": "schema incomplete (office/speaker/statements[].decision/quote/fullStatement/trackerUpdates)"
+    },
+    {
+      "dir": "civic-office-council-d3",
+      "slug": "council_d3",
+      "model": "deepseek/deepseek-v4.1-flash-1017",
+      "ok": true,
+      "output": "output/civic-voice/council_d3_c116.json",
+      "statements": 4,
+      "attempts": 2,
+      "seat": {
+        "officeId": "COUNCIL-D3",
+        "title": "City Council District 3",
+        "holder": "Rose Delgado",
+        "popid": "POP-00503",
+        "district": "D3",
+        "faction": "OPP",
+        "approval": 85,
+        "agentDir": "civic-office-council-d3",
+        "dataDomain": "district-representation",
+        "dataSources": [
+          "output/world_summary_c{XX}.md §neighborhoods (D3)",
+          "Initiative_Tracker AffectedNeighborhoods"
+        ],
+        "dutyDays": "sun-thu",
+        "model": "deepseek/deepseek-v4.1-flash-1017"
+      },
+      "voiceJson": {
+        "office": "council_d3",
+        "cycle": 116,
+        "speaker": "Rose Delgado",
+        "cascadeSummary": "I answer Director Vance with the D3 briefing record and hold OARI expansion until the D5 audit and Baylight review land. The Fruitvale Transit Hub stays at the C86 authorization with no new phase until schematics and a documented public comment-and-response exist. The apprenticeship pipeline gets its placement-gap analysis published this cycle with explicit Fruitvale review, and San Antonio's commercial blocks get a named office and a next public date rather than a footnote.",
+        "statements": [
+          {
+            "statementId": "STMT-116-council_d3-001",
+            "type": "vote_statement",
+            "topic": "Oakland Alternative Response Initiative — D3 briefing record and expansion hold",
+            "initiative": "INIT-002",
+            "decision": "Publish the D3 Fruitvale briefing record with district-level and Fruitvale data this cycle; hold expansion until the D5 audit and Baylight feasibility review are complete.",
+            "quote": "Fruitvale gets the briefing and the numbers in the daylight — expansion waits until the audit and the Baylight review are actually done.",
+            "fullStatement": "Director Vance asked me straight and I will answer straight. My Cycle 114 statement put the OARI briefing in Fruitvale and promised the review calendar and the public numbers. The record shows the documented briefing landed in East Oakland while the transit review sessions opened at the branch library and senior center. So this cycle I execute and publish the D3 briefing record: the Fruitvale data, the district-level breakdown, the notice and accessibility arrangements, and the Clerk filing reference — completed documentation distinguished from the OARI packet and transit response record scheduled for Cycle 116. No duplicate briefing. And expansion stays held until the D5 audit and the Baylight feasibility review are actually done, with responsible next dates on the record.",
+            "disposition": "YES",
+            "actionAsked": "Publish the D3 briefing record with Fruitvale and district-level data, notice and accessibility arrangements, and Clerk filing references this cycle; keep expansion held until the D5 audit and Baylight review report.",
+            "tone": "direct, accountable",
+            "targets": [
+              "civic"
+            ],
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-116-council_d3-002",
+            "type": "vote_statement",
+            "topic": "Fruitvale Transit Hub Phase II — schematics and public comment-and-response",
+            "initiative": "INIT-003",
+            "decision": "Let the low-severity engine flag pass with no new phase or funding action; gate any design advancement on delivered preliminary schematics and a documented Fruitvale comment-and-response record.",
+            "quote": "A $230 million design does not advance on schematics nobody has seen and a community review nobody has documented.",
+            "fullStatement": "The C86 authorization stands — $230 million, the visioning framework binding, and the community oversight provisions intact. But a calendar reminder is not a design step. This cycle I let the low-severity flag pass without new phase or funding action, and I keep the gate where it belongs: delivered preliminary schematics and a documented Fruitvale public comment-and-response record before any further design advancement. The C115 record is closed. Nothing here says the project is failing — it says the next step is earned with paper and answers, not with a flag.",
+            "disposition": "statement",
+            "actionAsked": "Hold further design advancement until preliminary schematics are delivered and a Fruitvale public comment-and-response record is published.",
+            "tone": "firm, procedural",
+            "targets": [
+              "civic"
+            ],
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-116-council_d3-003",
+            "type": "vote_statement",
+            "topic": "Oakland Youth Apprenticeship Pipeline — placement-gap analysis and Fruitvale review",
+            "initiative": "INIT-007",
+            "decision": "Require publication of the placement-gap analysis and adjustment plan this cycle with explicit West Oakland and Fruitvale reviews, named owners, and next reporting dates; put a binary disposition on the hearing agenda after publication.",
+            "quote": "A seat in the classroom is not a paycheck. Four cycles in one stage — publish the gap analysis and show Fruitvale's young people in the roles.",
+            "fullStatement": "Four cycles in the same stage is not implementation, it is a holding pattern. This cycle the placement-gap analysis and adjustment plan get published with the West Oakland and Fruitvale reviews written in — who the placements actually reach, what corrections are being made, who owns each correction, and the next reporting date. Then the hearing takes a binary disposition: advancement on published evidence, or a recorded fail if the required materials are still undelivered. No automatic hold, no quiet drift. Fruitvale's young people were promised roles, not a queue.",
+            "disposition": "YES",
+            "actionAsked": "Publish the placement-gap analysis and adjustment plan with explicit West Oakland and Fruitvale reviews, named owners and next dates; schedule a binary disposition vote after publication.",
+            "tone": "impatient, accountable",
+            "targets": [
+              "civic"
+            ],
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-116-council_d3-004",
+            "type": "statement",
+            "topic": "San Antonio commercial blocks — next public update",
+            "initiative": null,
+            "decision": "Name the responsible office for the San Antonio commercial-block update and set the next public date, pairing it with direct listening in the neighborhood.",
+            "quote": "San Antonio's commercial blocks are flat and slow, and that is a district matter, not a footnote.",
+            "fullStatement": "Fruitvale is growing and San Antonio is flat — same district, two different weeks, and I am not going to let the quieter one disappear from the record. San Antonio's street trade is struggling and the mood is flat. So this cycle I name the office responsible for the commercial-block update and set the next public date, and I pair that with direct listening on the blocks themselves rather than a memo from City Hall. No new spending is authorized here. What is authorized is a date, a name, and neighbors who can see the work being tracked.",
+            "disposition": "statement",
+            "actionAsked": "Name the responsible office and set the next public update date for San Antonio's commercial blocks, with direct neighborhood listening.",
+            "tone": "steady, neighborhood-first",
+            "targets": [
+              "civic"
+            ],
+            "trackerUpdates": {}
+          }
+        ]
+      },
+      "lever": ""
+    }
+  ],
+  "ranAt": "2026-11-16T01:21:09.266Z"
+}

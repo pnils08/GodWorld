@@ -1,0 +1,481 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00013",
+    "name": "Maria Keen",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Uptown — the programs that hold the block and the people who founded them",
+    "approach": "Neighborhood approach: this slice is one block's record — its community programs and their founders, who is moving in or out, who the block has in a hospital bed or in custody, what it paid on tax day, whose debts crossed the line, and the city's neighborhood hooks this cycle. First-person witness, one block one truth. The programs, founders, movement numbers, patients, defendants and money lines are real; the stoop conversations, the mailboxes, the dog everyone knows are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "neighborhood",
+      "hood": "Uptown",
+      "facts": [
+        "Oakland Sound Archive (arts), Uptown, since C101",
+        "Uptown this cycle: 63 students, 506 adults, 65 seniors — moved vs C114: +1 adults",
+        "Uptown: 7 charges → 1 arrest → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "Uptown: 21 sick residents → 0 admissions → 0 in care at the close (0 tracked, 0 other residents) → 0 beds occupied; tracked: none tracked"
+      ],
+      "priorCycle": "PRIOR_CYCLE_ON_DISK",
+      "note": "no program founder in Uptown resolves on the ledger",
+      "engineHooks": [
+        "Household dissolved in Lake Merritt due to economic hardship (observational analysis)",
+        "Household in Lake Merritt spending 53% of income on housing (observational analysis)",
+        "defaulted on the debts — the savings are gone and the record carries it (observational analysis)",
+        "defaulted on the debts — the savings are gone and the record carries it (observational analysis)"
+      ],
+      "roomIsYours": "the stoop, the corner store counter, who moved in last month and who is thinking about leaving, what the block argues about",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-neighborhood",
+    "hood": "Uptown",
+    "src": "output/beats/Community_Programs.jsonl @C115",
+    "plan": {
+      "focus": "Uptown's community programs and their founders"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00302",
+        "name": "Toto Foto",
+        "profile": "Toto Foto — Theater Director",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00136",
+        "name": "Rafael Montez",
+        "profile": "Rafael Montez — Police Chief",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00141",
+        "name": "Priya Narang",
+        "profile": "Priya Narang — EMS DIRECTOR",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00847",
+        "name": "Caroline Cabrera",
+        "profile": "Caroline Cabrera — After-School Program Director",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00302-8511078b31",
+        "pop": "POP-00302",
+        "name": "Toto Foto",
+        "quote": "I love walking through Uptown on a busy Saturday like that. The market was buzzing, and it felt like everyone was out enjoying the day. I saw some familiar faces, exchanged a few hellos. The energy's always good there.",
+        "factIds": [
+          "F-b153db690e08"
+        ],
+        "src": "packet.W2[POP-00302]"
+      },
+      {
+        "id": "Q-POP-00847-6a51a10627",
+        "pop": "POP-00847",
+        "name": "Caroline Cabrera",
+        "quote": "I still see that numbers don't tell the whole story here in Uptown. The changes we're going through - with rents going up and families having to stretch to stay - it's not just about statistics. I've seen it firsthand with the kids in my after-school program and the people I talk to around the neighborhood. It's about real lives.",
+        "factIds": [
+          "F-a45bbc9693d1",
+          "F-490c50666f1f"
+        ],
+        "src": "packet.W2[POP-00847]"
+      },
+      {
+        "id": "Q-POP-00136-95f9469835",
+        "pop": "POP-00136",
+        "name": "Rafael Montez",
+        "quote": "To be honest, that 26% clearance rate in Uptown still sticks with me. It's not just a number; it represents real cases and real people. We're working to improve our follow-through and community trust. It's a tough spot, but we're on it.",
+        "factIds": [
+          "F-70a59792ae51"
+        ],
+        "src": "packet.W2[POP-00136]"
+      },
+      {
+        "id": "Q-POP-00141-eadfd0e7a6",
+        "pop": "POP-00141",
+        "name": "Priya Narang",
+        "quote": "The A's winning season still brings a lot of energy to Uptown. I started a jar on my counter to save up for season tickets next year. It's not just about the games, though - when they're doing well, the whole neighborhood feels it. The bars and galleries stay packed, and you can feel the energy.",
+        "factIds": [
+          "F-931cc175ae98",
+          "F-d9b105380dd7"
+        ],
+        "src": "packet.W2[POP-00141]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Maria Keen",
+        "text": "Potential for a human interest angle focusing on the people behind Uptown's community programs",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C115",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-bc84fc0b7718"
+    },
+    {
+      "t": "FACT",
+      "text": "Uptown: 1 active program on the record",
+      "src": "output/beats/Community_Programs.jsonl @C115",
+      "id": "F-2ca6744ca287"
+    },
+    {
+      "t": "FACT",
+      "text": "1 active programs in Uptown; no founder is on the ledger — the block is yours.",
+      "src": "output/beats/Community_Programs.jsonl @C115",
+      "id": "F-43acabf62f87"
+    },
+    {
+      "t": "FACT",
+      "text": "Oakland Sound Archive (arts), Uptown, since C101",
+      "src": "output/beats/Community_Programs.jsonl @C115 PRG-012",
+      "id": "F-7777f25e51d7"
+    },
+    {
+      "t": "FACT",
+      "text": "Uptown this cycle: 63 students, 506 adults, 65 seniors — moved vs C114: +1 adults",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C115 vs prev/",
+      "id": "F-766e5fe60c18"
+    },
+    {
+      "t": "FACT",
+      "text": "Uptown: 7 charges → 1 arrest → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl @C115 judicial Uptown",
+      "id": "F-f85e5439e439"
+    },
+    {
+      "t": "FACT",
+      "text": "Uptown: 21 sick residents → 0 admissions → 0 in care at the close (0 tracked, 0 other residents) → 0 beds occupied; tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl @C115 hospital Uptown",
+      "id": "F-0c0a53ddc16e"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C11, Spring, holiday=none",
+      "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+      "id": "F-82d77e9a4a71"
+    },
+    {
+      "t": "FACT",
+      "text": "Y3C11 — [Lifestyle-Outabout-Up-S] browsed a busy weekend market in Uptown",
+      "src": "output/simulation_ledger_snapshot.jsonl",
+      "id": "F-b153db690e08"
+    },
+    {
+      "t": "INTERPRETATION",
+      "text": "Look, I work with kids every day in Uptown, and what I see is that numbers don't always tell the whole story.",
+      "src": "cp-POP-00847-c107-PRESS",
+      "id": "F-a45bbc9693d1"
+    },
+    {
+      "t": "FACT",
+      "text": "Caroline Cabrera — After-School Program Director",
+      "src": "Simulation_Ledger profile for POP-00847",
+      "id": "F-490c50666f1f"
+    },
+    {
+      "t": "INTERPRETATION",
+      "text": "Uptown had the most incidents this cycle, and a 26% clearance rate means we're not closing enough of them.",
+      "src": "cp-POP-00136-c114-PRESS-tue-epjbdd",
+      "id": "F-70a59792ae51"
+    },
+    {
+      "t": "INTERPRETATION",
+      "text": "The A's winning season is a big deal for us in Uptown.",
+      "src": "cp-POP-00141-c113-PRESS",
+      "id": "F-931cc175ae98"
+    },
+    {
+      "t": "FACT",
+      "text": "Priya Narang — EMS DIRECTOR",
+      "src": "Simulation_Ledger profile for POP-00141",
+      "id": "F-d9b105380dd7"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "maria-ground-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Translate one Packet-named neighborhood or evening condition into a human-scale ground brief without inventing Maria's attendance, a neighbor, an action, a quote, or a civic outcome.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "intimate neighborhood ground brief",
+      "targetWords": "evidence-bounded",
+      "opening": "one Packet-named place and condition"
+    },
+    "authorizedTexture": [
+      "warm interpretation of a supplied place or condition without claiming attendance or observation",
+      "unnamed sensory metaphor carrying no person, action, event, institution, or factual premise"
+    ],
+    "textureConditions": [
+      "first person may express interpretation but may not assert presence, walking, seeing, hearing, meeting, speaking, or memory unless the Packet supplies it",
+      "every named person, place, business, institution, gathering, action, quote, policy effect, and civic outcome requires Packet support"
+    ],
+    "canonBlockers": [
+      "invented attendance, witnessed scene, neighbor, worker, patron, dialogue, gathering, action, policy consequence, or civic outcome",
+      "an invented or altered venue, person, neighborhood, event, institution, relationship, date, count, or quote",
+      "raw nightlife metrics, engine labels, or collective neighborhood sentiment presented as public fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-c194861c0242",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-bc84fc0b7718",
+        "t": "FACT",
+        "text": "Current cycle: C115",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-2ca6744ca287",
+        "t": "FACT",
+        "text": "Uptown: 1 active program on the record",
+        "src": "output/beats/Community_Programs.jsonl @C115"
+      },
+      {
+        "id": "F-43acabf62f87",
+        "t": "FACT",
+        "text": "1 active programs in Uptown; no founder is on the ledger — the block is yours.",
+        "src": "output/beats/Community_Programs.jsonl @C115"
+      },
+      {
+        "id": "F-7777f25e51d7",
+        "t": "FACT",
+        "text": "Oakland Sound Archive (arts), Uptown, since C101",
+        "src": "output/beats/Community_Programs.jsonl @C115 PRG-012"
+      },
+      {
+        "id": "F-766e5fe60c18",
+        "t": "FACT",
+        "text": "Uptown this cycle: 63 students, 506 adults, 65 seniors — moved vs C114: +1 adults",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C115 vs prev/"
+      },
+      {
+        "id": "F-f85e5439e439",
+        "t": "FACT",
+        "text": "Uptown: 7 charges → 1 arrest → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl @C115 judicial Uptown"
+      },
+      {
+        "id": "F-0c0a53ddc16e",
+        "t": "FACT",
+        "text": "Uptown: 21 sick residents → 0 admissions → 0 in care at the close (0 tracked, 0 other residents) → 0 beds occupied; tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl @C115 hospital Uptown"
+      },
+      {
+        "id": "F-82d77e9a4a71",
+        "t": "FACT",
+        "text": "Calendar: Y3C11, Spring, holiday=none",
+        "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)"
+      },
+      {
+        "id": "F-b153db690e08",
+        "t": "FACT",
+        "text": "Y3C11 — [Lifestyle-Outabout-Up-S] browsed a busy weekend market in Uptown",
+        "src": "output/simulation_ledger_snapshot.jsonl"
+      },
+      {
+        "id": "F-a45bbc9693d1",
+        "t": "INTERPRETATION",
+        "text": "Look, I work with kids every day in Uptown, and what I see is that numbers don't always tell the whole story.",
+        "src": "cp-POP-00847-c107-PRESS"
+      },
+      {
+        "id": "F-490c50666f1f",
+        "t": "FACT",
+        "text": "Caroline Cabrera — After-School Program Director",
+        "src": "Simulation_Ledger profile for POP-00847"
+      },
+      {
+        "id": "F-70a59792ae51",
+        "t": "INTERPRETATION",
+        "text": "Uptown had the most incidents this cycle, and a 26% clearance rate means we're not closing enough of them.",
+        "src": "cp-POP-00136-c114-PRESS-tue-epjbdd"
+      },
+      {
+        "id": "F-931cc175ae98",
+        "t": "INTERPRETATION",
+        "text": "The A's winning season is a big deal for us in Uptown.",
+        "src": "cp-POP-00141-c113-PRESS"
+      },
+      {
+        "id": "F-d9b105380dd7",
+        "t": "FACT",
+        "text": "Priya Narang — EMS DIRECTOR",
+        "src": "Simulation_Ledger profile for POP-00141"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00302-8511078b31",
+        "speakerId": "POP-00302",
+        "speakerName": "Toto Foto",
+        "text": "I love walking through Uptown on a busy Saturday like that. The market was buzzing, and it felt like everyone was out enjoying the day. I saw some familiar faces, exchanged a few hellos. The energy's always good there.",
+        "factIds": [
+          "F-b153db690e08"
+        ],
+        "src": "packet.W2[POP-00302]"
+      },
+      {
+        "id": "Q-POP-00847-6a51a10627",
+        "speakerId": "POP-00847",
+        "speakerName": "Caroline Cabrera",
+        "text": "I still see that numbers don't tell the whole story here in Uptown. The changes we're going through - with rents going up and families having to stretch to stay - it's not just about statistics. I've seen it firsthand with the kids in my after-school program and the people I talk to around the neighborhood. It's about real lives.",
+        "factIds": [
+          "F-a45bbc9693d1",
+          "F-490c50666f1f"
+        ],
+        "src": "packet.W2[POP-00847]"
+      },
+      {
+        "id": "Q-POP-00136-95f9469835",
+        "speakerId": "POP-00136",
+        "speakerName": "Rafael Montez",
+        "text": "To be honest, that 26% clearance rate in Uptown still sticks with me. It's not just a number; it represents real cases and real people. We're working to improve our follow-through and community trust. It's a tough spot, but we're on it.",
+        "factIds": [
+          "F-70a59792ae51"
+        ],
+        "src": "packet.W2[POP-00136]"
+      },
+      {
+        "id": "Q-POP-00141-eadfd0e7a6",
+        "speakerId": "POP-00141",
+        "speakerName": "Priya Narang",
+        "text": "The A's winning season still brings a lot of energy to Uptown. I started a jar on my counter to save up for season tickets next year. It's not just about the games, though - when they're doing well, the whole neighborhood feels it. The bars and galleries stay packed, and you can feel the energy.",
+        "factIds": [
+          "F-931cc175ae98",
+          "F-d9b105380dd7"
+        ],
+        "src": "packet.W2[POP-00141]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00302",
+        "name": "Toto Foto",
+        "profile": "Toto Foto — Theater Director",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00136",
+        "name": "Rafael Montez",
+        "profile": "Rafael Montez — Police Chief",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00141",
+        "name": "Priya Narang",
+        "profile": "Priya Narang — EMS DIRECTOR",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00847",
+        "name": "Caroline Cabrera",
+        "profile": "Caroline Cabrera — After-School Program Director",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Maria Keen",
+        "text": "Potential for a human interest angle focusing on the people behind Uptown's community programs",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "warm interpretation of a supplied place or condition without claiming attendance or observation",
+      "unnamed sensory metaphor carrying no person, action, event, institution, or factual premise"
+    ],
+    "textureConditions": [
+      "first person may express interpretation but may not assert presence, walking, seeing, hearing, meeting, speaking, or memory unless the Packet supplies it",
+      "every named person, place, business, institution, gathering, action, quote, policy effect, and civic outcome requires Packet support"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

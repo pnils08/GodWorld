@@ -1,0 +1,30 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌁ auth for agents [www.vestauth.com]
+{
+ "label": "e350d-f8",
+ "expect": 123,
+ "at": "2026-11-19T03:34:18.870Z",
+ "pre": {
+  "bench": 123,
+  "live": 116,
+  "ee": 9,
+  "rileyLast": 123,
+  "checkpoint": null
+ },
+ "wallS": 196,
+ "http": 200,
+ "resp": {
+  "ok": true,
+  "state": "done",
+  "ranMs": 191541,
+  "persistErrors": []
+ },
+ "post": {
+  "bench": 124,
+  "live": 116,
+  "ee": 9,
+  "rileyLast": 124,
+  "checkpoint": null
+ },
+ "newEE": [],
+ "verdict": "PASS"
+}

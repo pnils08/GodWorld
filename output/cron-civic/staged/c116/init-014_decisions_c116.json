@@ -1,0 +1,16 @@
+{
+  "initiative": "INIT-014",
+  "initiativeId": "INIT-014",
+  "cycle": 116,
+  "primaryVoice": "Mayor gavel (mayor_gavel-009)",
+  "consolidatedFrom": [
+    "STMT-116-mayor_gavel-009 (Mayor gavel — INIT-014 filing correction and Ivy Hill review hold)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-014",
+    "ImplementationPhase": "announced",
+    "MilestoneNotes": "C116: C115 filing claim is unverified; Council review held pending a Clerk docket reference or a recorded missed deadline.",
+    "NextScheduledAction": "Supply Clerk filing reference or record missed deadline",
+    "NextActionCycle": 116
+  }
+}

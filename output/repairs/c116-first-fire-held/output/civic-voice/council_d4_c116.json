@@ -1,0 +1,48 @@
+{
+  "office": "council_d4",
+  "cycle": 116,
+  "speaker": "Ramon Vega",
+  "cascadeSummary": "I am tabling review of the Ivy Hill Community Support Initiative until the Clerk verifies the filing or the record establishes that it did not occur; a prior claim is not a filing reference. For Glenview, the supplied record does not establish what the civic response meeting found or what work was done, so I am requesting a documented account, a responsible department, and a next update date. I remain prepared to support the Grand Lake proposal with its safeguards intact, without claiming a recorded outcome before the roll exists.",
+  "statements": [
+    {
+      "statementId": "STMT-116-council_d4-001",
+      "type": "vote_statement",
+      "topic": "Ivy Hill Community Support Initiative filing verification",
+      "initiative": "Ivy Hill Community Support Initiative",
+      "decision": "Table council review until the Clerk provides a filing reference or the record explicitly establishes that filing has not occurred.",
+      "quote": "A filing claim is not a Clerk reference; verify the record before we take it up.",
+      "fullStatement": "I said last cycle that the Ivy Hill legislation had been filed, but the current record gives me no Clerk reference to verify that claim. I will not proceed to council review on an unverified filing. The Clerk should provide the reference, or establish plainly that filing has not occurred; until then, this item is tabled. That is a process correction, not a judgment that Ivy Hill needs an emergency label. The evidence in this packet describes soured mood, slow trade, and low crime, and the review should proceed on a verified record.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-116-council_d4-002",
+      "type": "statement",
+      "topic": "District 4 neighborhood conditions",
+      "initiative": null,
+      "decision": "Request neighborhood-specific attention proportionate to the reported conditions, with documented follow-through on Glenview's public-works spike.",
+      "quote": "Take the Glenview spike seriously, document the work, and do not turn it into a citywide crisis.",
+      "fullStatement": "In District 4, Glenview has a medium-severity public-works spike even as its mood is mildly positive; its street trade is slow and crime is low. Ivy Hill's mood has soured, with slow trade and low crime. Dimond is flat, with slow trade, low crime, and a zoning adjustment; its mood has held steady. These are different neighborhood conditions, not one emergency. I want staff follow-through tied to the actual issue in each place, and a clear account of the Glenview work, without claiming more than the record supports.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-116-council_d4-003",
+      "type": "statement",
+      "topic": "Glenview Civic Response Meeting follow-through",
+      "initiative": null,
+      "decision": "Request that staff document the meeting's findings and any work performed, reconcile the reported severity, name the responsible department, and provide the next public update date.",
+      "quote": "The meeting is not a finding; tell residents what was learned, what was done, and who reports next.",
+      "fullStatement": "The Cycle 115 city summary records a Glenview Civic Response Meeting and describes a low-severity public-works spike. This cycle's brief reports a medium-severity spike, but supplies no meeting findings, work record, responsible department, or next update date. I cannot responsibly say what staff found or what work was performed. Please publish those details, reconcile the severity descriptions, identify the department responsible for any remaining work, and give residents a next public update date. Until that account is in the record, I cannot conclude that follow-through is complete or that no further municipal action is needed.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-116-council_d4-004",
+      "type": "vote_statement",
+      "topic": "Recorded full-council decision",
+      "initiative": "Commercial Stabilization for Grand Lake",
+      "decision": "Maintain a YES position with the milestone and audit conditions intact; do not claim an outcome before the recorded roll.",
+      "quote": "I remain for the proposal with its safeguards intact; the roll, not this statement, records the decision.",
+      "fullStatement": "My position on Commercial Stabilization for Grand Lake remains YES, with the milestone and audit conditions intact. That support does not substitute for the recorded full-council vote, and I will not describe an outcome before the roll exists. The conditions are part of the case for the proposal, not details to be dropped after a hearing. I ask that the Clerk record the council's decision clearly so residents can distinguish a member's stated position from the final result.",
+      "trackerUpdates": {}
+    }
+  ]
+}

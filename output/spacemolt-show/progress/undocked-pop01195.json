@@ -1,10 +1,33 @@
 {
   "session": "undocked-pop01195",
-  "takenAt": "2026-11-10T02:30:21.885Z",
+  "takenAt": "2026-11-13T02:30:33.607Z",
   "account": {
-    "total": 0,
-    "earned": [],
+    "total": 15,
+    "earned": [
+      {
+        "id": "wanderer",
+        "name": "Wanderer",
+        "points": 10,
+        "at": "2026-11-10T02:42:17.43927923Z"
+      },
+      {
+        "id": "maiden_jump",
+        "name": "Maiden Jump",
+        "points": 5,
+        "at": "2026-11-10T02:32:57.478066647Z"
+      }
+    ],
     "progress": {
+      "wanderer": {
+        "name": "Wanderer",
+        "points": 10,
+        "frac": 1
+      },
+      "maiden_jump": {
+        "name": "Maiden Jump",
+        "points": 5,
+        "frac": 1
+      },
       "doors_and_corners": {
         "name": "Doors and Corners",
         "points": 5,
@@ -40,6 +63,11 @@
         "points": 20,
         "frac": 0
       },
+      "exterminate": {
+        "name": "Exterminate!",
+        "points": 10,
+        "frac": 0
+      },
       "first_blood": {
         "name": "First Blood",
         "points": 10,
@@ -48,6 +76,11 @@
       "pirate_slayer": {
         "name": "Pirate Slayer",
         "points": 30,
+        "frac": 0
+      },
+      "resistance_is_not_futile": {
+        "name": "Resistance Is Not Futile",
+        "points": 25,
         "frac": 0
       },
       "warrior": {
@@ -88,7 +121,7 @@
       "cartographer": {
         "name": "Cartographer",
         "points": 30,
-        "frac": 0.01
+        "frac": 0.18
       },
       "deep_core_master": {
         "name": "Deep Core Master",
@@ -98,11 +131,16 @@
       "far_traveler": {
         "name": "Far Traveler",
         "points": 25,
-        "frac": 0
+        "frac": 0.0004983333333333334
       },
       "first_contact": {
         "name": "First Contact",
         "points": 5,
+        "frac": 0
+      },
+      "folding_space": {
+        "name": "Folding Space",
+        "points": 10,
         "frac": 0
       },
       "halfway_there": {
@@ -113,6 +151,16 @@
       "jump_master": {
         "name": "Jump Master",
         "points": 20,
+        "frac": 0.00068
+      },
+      "second_star_to_the_right": {
+        "name": "Second Star to the Right",
+        "points": 40,
+        "frac": 0
+      },
+      "the_truth_is_out_there": {
+        "name": "The Truth Is Out There",
+        "points": 25,
         "frac": 0
       },
       "threshold_crosser": {
@@ -120,20 +168,25 @@
         "points": 20,
         "frac": 0
       },
+      "to_boldly_go": {
+        "name": "To Boldly Go",
+        "points": 15,
+        "frac": 0
+      },
       "voyager_i": {
         "name": "Voyager I",
         "points": 10,
-        "frac": 0.04
+        "frac": 0.72
       },
       "voyager_ii": {
         "name": "Voyager II",
         "points": 25,
-        "frac": 0.004
+        "frac": 0.072
       },
-      "wanderer": {
-        "name": "Wanderer",
-        "points": 10,
-        "frac": 0.1
+      "where_no_one_has_gone_before": {
+        "name": "Where No One Has Gone Before",
+        "points": 25,
+        "frac": 0
       },
       "artisan": {
         "name": "Artisan",
@@ -170,6 +223,11 @@
         "points": 20,
         "frac": 0
       },
+      "the_gatekeeper": {
+        "name": "The Gatekeeper",
+        "points": 40,
+        "frac": 0
+      },
       "deep_core_savant": {
         "name": "Deep Core Savant",
         "points": 30,
@@ -193,7 +251,7 @@
       "master_explorer": {
         "name": "Master Explorer",
         "points": 25,
-        "frac": 0
+        "frac": 0.02
       },
       "master_miner": {
         "name": "Master Miner",
@@ -242,11 +300,6 @@
       },
       "first_steps": {
         "name": "First Steps",
-        "points": 5,
-        "frac": 0
-      },
-      "maiden_jump": {
-        "name": "Maiden Jump",
         "points": 5,
         "frac": 0
       },

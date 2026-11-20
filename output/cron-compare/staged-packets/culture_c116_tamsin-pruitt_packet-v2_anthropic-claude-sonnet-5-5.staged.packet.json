@@ -1,0 +1,1712 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-01210",
+    "name": "Tamsin Pruitt",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "The lives of C116: 13 people — Priya Nair welcomed a new child, Downtown",
+    "approach": "Lives approach: this slice is the people something happened to this Cycle — a birth, a death in the house, a hospital stay, a retirement, a promotion; a household set up or a place of their own; a win or a loss on the book; the people a turn of the city reached and what it did to their day; and the smaller moments the record kept. Each person gets their own passage: the event, then the thread under it — the stay or strain that led there, the other lines the record kept for them, what the Tribune or this page already said of them, and what they did next if the record says. Read the thread in order and name where two lines of it do not agree; do not restate a ledger value as the story. The fact exactly right; never a trend, never a number first; the person, not the system the event belongs to. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent p",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "lives",
+      "hood": "Downtown",
+      "facts": [
+        "Priya Nair welcomed a new child, Downtown (C116). What came next: the record does not say yet",
+        "Priya Nair — in their life, C116: memorized the starting rotation for the Oaks and tested themselves on the BART ride home",
+        "Priya Nair — the Tribune named them in a piece headlined Downtown’s Growth Has Different Clocks (Business, C110)",
+        "Xing Patel retired from work as Ship Repair Foreman, Jack London (C116). What came next: the record does not say yet",
+        "Xing Patel — in their life, C115: felt renewed motivation to learn as the season shifted",
+        "Xing Patel — in their life, C115: a mover's truck idles outside a newly renovated building",
+        "Xing Patel — in their life, C116: the city buzzes with energy after the A's third straight win, fans wearing green and gold everywhere.",
+        "Xing Patel — in their life, C116: traded an extra ticket for a promise to bring the kid next time",
+        "Marcus Osei moved into a place of their own in Chinatown, renting (C116)",
+        "Marcus Osei — in their life, C115: squeezed past three-generation tables at Eight Treasures Dim Sum House",
+        "Marcus Osei — in their life, C115: didn't recognize themselves in an old photograph at first glance",
+        "Marcus Osei — in their life, C116: wondered when exactly they became the adult in the room",
+        "Marcus Osei — in their life, C116: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "Marcus Osei — the Tribune named them in a piece headlined Chinatown's Illness Toll Ripples Through Tight-Knit Community (Civic, C107)",
+        "Marcus Osei — the Tribune named them in a piece headlined Three Portfolios, One Test: Okoro Posts Numbers Before The Checkpoint (Civic Affairs, C95)",
+        "Marcus Osei — the Tribune named them in a piece headlined The Day She Named Dates (Civic Ledger, C92)",
+        "Dillon Trevor moved into a place of their own in Downtown, renting (C116)",
+        "Dillon Trevor — in their life, C115: checked the scores twice a day all week, happy every time",
+        "Dillon Trevor — in their life, C116: split a check six ways in her head faster than the register could",
+        "Dillon Trevor — in their life, C116: heard the rent talk on the block turn sharp",
+        "Dillon Trevor — in their life, C116: a group of fans huddle under an awning debating last night's game, their voices rising above the sound of rain hitting the pavement",
+        "Dillon Trevor — the Tribune named them in a piece headlined Oakland Oaks Gear Up for Opening Night (Sports, C107)",
+        "Dillon Trevor — the Tribune named them in a piece headlined The Oaks' Groundswell in Downtown (Sports, C107)",
+        "Dillon Trevor — the Tribune named them in a piece headlined The Drop Nobody Claimed (Civic Affairs, C102)",
+        "Vinnie Keane lost on the UNDOCKED book — staked 592, the book kept it, Piedmont Ave (C116)",
+        "Vinnie Keane — in their life, C115: got recognized twice at the grocery store after the story ran",
+        "Vinnie Keane — in their life, C116: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "Vinnie Keane — in their life, C116: realized the same seven meals had rotated for a month, and shrugged",
+        "Vinnie Keane — in their life, C116: caught their reflection in a shop window and stood a little straighter",
+        "Vinnie Keane — Lives already wrote this person: a moment the record kept (C114), the retirement (C115)",
+        "Vinnie Keane — the Tribune named them in a piece headlined The Clipping on the Door (Culture, C115)",
+        "Vinnie Keane — the Tribune named them in a piece headlined The Names We Keep Saying (Culture, C115)",
+        "Vinnie Keane — the Tribune named them in a piece headlined Fifth on Points, First in Credits: Taveras's Undocked Pledge Has Nothing to Attach To Yet (Sports, C115)",
+        "Amara Keane won on the UNDOCKED book — staked 489, paid 895, Piedmont Ave (C116)",
+        "Amara Keane — in their life, C116: split the last of the coffee and the morning's plans with their partner",
+        "Amara Keane — in their life, C116: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+        "Amara Keane — in their life, C116: moved from Grand Lake to Piedmont Ave — moving up from Grand Lake — sold up and bought in Piedmont Ave",
+        "Amara Keane — in their life, C116: noticed minor shifts in everyday neighborhood flow",
+        "Amara Keane — the Tribune named them in a piece headlined Bay Tribune | Arts & Entertainment (desk unknown, C99)",
+        "Amara Keane — the Tribune named them in a piece headlined Three fifty-three in seventeen at-bats. A farewell season refusing the script. (Sports, C92)",
+        "Amara Keane — the Tribune named them in a piece headlined THE LAST SUMMER IN GREEN AND GOLD (Senior Historian, C80)",
+        "Carmen Mesa — spent the night on the phone working out where the family would land, Lake Merritt — one of 6 people the Cycle's sports turn reached (A's [traded]; A's [playoff-push]; A's [off-season]; A's [off-season]; Oaks L1 [milestone]; Oaks L1 [big-win]; Oaks L1 [tough-loss]; Oaks L1…) (C116)",
+        "Carmen Mesa — in their life, C116: called the one friend who would tell it straight",
+        "Carmen Mesa — in their life, C116: packed a bag with the news still settling",
+        "Carmen Mesa — in their life, C116: closed their eyes during the choir solo and actually felt the tension leave their shoulders",
+        "Carmen Mesa — in their life, C116: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+        "Carmen Mesa — the Tribune named them in a piece headlined The Name Nobody Said in Uptown (Culture, C115)",
+        "Carmen Mesa — the Tribune named them in a piece headlined The Ledger Closes Before the Ink Is Dry (Sports, C111)",
+        "Carmen Mesa — the Tribune named them in a piece headlined The Home-Run Race: Quintero and Taveras Light Up SF (Sports, C98)",
+        "Linda Chow — read about something unfamiliar and kept pulling the thread, West Oakland — one of 4 people the Cycle's sports turn reached (Citywide reaction: last week's Tribune SPORTS coverage rated +5 (positive, 1 article, Tanya Cruz).) (C116)",
+        "Linda Chow — in their life, C116: heard the rent talk on the block turn sharp",
+        "Linda Chow — in their life, C116: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+        "Linda Chow — the Tribune named them in a piece headlined The Sea-Level Desk Is Down to Three (Business, C115)",
+        "Linda Chow — the Tribune named them in a piece headlined The Page: Lives of Cycle 113 (Culture, C113)",
+        "Linda Chow — the Tribune named them in a piece headlined THE BLOCKS (Culture, C86)",
+        "Jorry Cula — carried three boxes of canned goods from the pantry truck and felt it in their lower back, Uptown — one of 4 people the Cycle's city turn reached (Oakland Alternative Response Initiative is dispatch-live — ongoing safety effects in West Oakland, Fruitvale, East Oakland; the city feels…) (C116)",
+        "Jorry Cula — in their life, C115: the third late night this week, and the ceiling again at four",
+        "Jorry Cula — in their life, C115: argued the bullpen order at the barbershop like it was city policy",
+        "Jorry Cula — in their life, C115: drove the church van for the senior trip and listened to three hours of unfiltered neighborhood gossip",
+        "Jorry Cula — in their life, C116: worked through another weekend and called it fine",
+        "Daire Green — cooked a recipe from memory that no one had written down, Fruitvale (C116 — what happened in their life, not words they said)",
+        "Daire Green — in their life, C115: disagreed with a Tribune column out loud to an empty kitchen",
+        "Daire Green — in their life, C116: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "Daire Green — in their life, C116: grabbed coffee from the cart outside the hospital before the morning rush hit",
+        "Daire Green — in their life, C116: compared rent notes with a neighbor over the fence in Fruitvale",
+        "Daire Green — Lives already wrote this person: a moment the record kept (C114)",
+        "Brenda Okoro and Elio Perez and Howard Perez — moved from Rockridge to Piedmont Ave — leaving Rockridge for a better fit, Piedmont Ave (C116 — what happened in their life, not words they said)",
+        "Brenda Okoro — in their life, C116: the bartender wiping down counters while discussing the stalled train delays with a regular",
+        "Brenda Okoro — in their life, C116: put on their good suit for the Sunday service because some traditions still matter near a bookstore corner",
+        "Brenda Okoro — in their life, C116: noticed younger people asking them for advice now",
+        "Brenda Okoro — in their life, C116: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+        "Brenda Okoro — the Tribune named them in a piece headlined The Fund Has Moved $7 Million Out of $28 Million. The Record Names Two Households. (Civic, C115)",
+        "Brenda Okoro — the Tribune named them in a piece headlined The Fund Has Moved $6.6 Million in West Oakland. The Public Record Names Two Households. (Civic, C114)",
+        "Brenda Okoro — the Tribune named them in a piece headlined West Oakland Stabilization Fund: Month Eleven Clears (Civic, C112)",
+        "Elio Perez — in their life, C115: caught themselves bragging a little about the neighborhood lately",
+        "Elio Perez — in their life, C115: grabbed coffee from the cart outside the hospital before the morning rush hit",
+        "Elio Perez — in their life, C116: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+        "Elio Perez — in their life, C116: overheard a goodbye at the corner that sounded permanent, and carried it a block",
+        "Elio Perez — the Tribune named them in a piece headlined The Same Empty Lot, Four Times (Civic, C109)",
+        "Elio Perez — the Tribune named them in a piece headlined The Weight of Neutral (Weather, C109)",
+        "Elio Perez — the Tribune named them in a piece headlined The File Nobody's Holding (Civic, C108)",
+        "Howard Perez — in their life, C115: felt energy from seasonal change",
+        "Howard Perez — in their life, C115: heard someone at the cafe complain about the Baylight District noise and bit their tongue",
+        "Howard Perez — in their life, C115: listened to a style of music they'd always skipped, twice",
+        "Howard Perez — the Tribune named them in a piece headlined I’LL BELIEVE IT WHEN I SEE IT”: WEST OAKLAND RESIDENTS ON THE STABILIZATION FUND (Managing Editor, C76)",
+        "Elle Lilo — moved from Jack London to Lake Merritt — moving for a better fit between household income and housing costs, Lake Merritt (C116 — what happened in their life, not words they said)",
+        "Elle Lilo — in their life, C115: grabbed coffee from the cart outside the hospital before the morning rush hit",
+        "Elle Lilo — in their life, C115: stayed thirty minutes after the service just catching up in the parking lot",
+        "Elle Lilo — in their life, C115: left the playoff watch party with hoarse vocals and sticky shoes",
+        "Elle Lilo — in their life, C116: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+        "Elle Lilo — Lives already wrote this person: the new household (C114), the retirement (C115)",
+        "Elle Lilo — the Tribune named them in a piece headlined Chinatown's 140 Sick Are Mostly at Home, and Home Is Doing the Work (Civic, C113)",
+        "Elle Lilo — the Tribune named them in a piece headlined Last, UNDOCKED. Nia Rook has Eric Taveras holding the top spot and Cristina Booker's ten-point Mon (Civic, C113)",
+        "Elle Lilo — the Tribune named them in a piece headlined Six Names for 142 Sick Residents (Civic, C112)",
+        "Eric Taveras — moved from Downtown to Piedmont Ave — moving up from Downtown, Piedmont Ave (C116 — what happened in their life, not words they said)",
+        "Eric Taveras — in their life, C115: had a neighbor tape the article to the building's front door",
+        "Eric Taveras — in their life, C115: stayed an extra hour at the community center because nobody wanted to leave",
+        "Eric Taveras — in their life, C116: held the door and got a whole conversation for it",
+        "Eric Taveras — in their life, C116: handled attention with practiced ease",
+        "Eric Taveras — the Tribune named them in a piece headlined Fifth on Points, First in Credits: Taveras's Undocked Pledge Has Nothing to Attach To Yet (Sports, C115)",
+        "Eric Taveras — the Tribune named them in a piece headlined Taveras's 54 Home Runs Sit Outside Seven Seasons of His Own Record (Sports, C115)",
+        "Eric Taveras — the Tribune named them in a piece headlined UNDOCKED: Cristina Booker’s double-digit burst couldn’t carry the whole week (Undocked-digest, C113)"
+      ],
+      "priorCycle": null,
+      "note": "none of today's people has written their own page this Cycle — no quotes",
+      "engineHooks": [
+        "A family bought their home in Chinatown (observational analysis)",
+        "A family bought their home in Chinatown (observational analysis)",
+        "A family bought their home in Fruitvale (observational analysis)",
+        "The Keane household (2) moved from Grand Lake to Piedmont Ave — moving up from Grand Lake — sold up and bought in Piedmont Ave (observational analysis)"
+      ],
+      "roomIsYours": "the plain respect, what the event meant in that house or on that block, the detail the family would have picked — from the lines below, never invented",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-lives",
+    "hood": "Downtown",
+    "src": "output/beats/Lived_Events.jsonl @C116 batch d5f73c",
+    "plan": {
+      "focus": "Lives of C116: 13 people in Downtown Oakland"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00440",
+        "name": "Xing Patel",
+        "profile": "Xing Patel — Ship Repair Foreman — Jack London",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00036",
+        "name": "Marcus Osei",
+        "profile": "Marcus Osei — Deputy Mayor (Econ Dev) — Chinatown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00224",
+        "name": "Dillon Trevor",
+        "profile": "Dillon Trevor — Server — Downtown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00440-36047f87e7",
+        "pop": "POP-00440",
+        "name": "Xing Patel",
+        "quote": "I've been enjoying my retirement. The A's games have been exciting lately, and I was able to trade an extra ticket for a promise from someone to bring their kid next time. It's been nice to have more free time and be able to watch the games with my family.",
+        "factIds": [
+          "F-23137720de45",
+          "F-025588fa8f2f",
+          "F-b0fe13826b26"
+        ],
+        "src": "packet.W2[POP-00440]"
+      },
+      {
+        "id": "Q-POP-00036-8ab42401bd",
+        "pop": "POP-00036",
+        "name": "Marcus Osei",
+        "quote": "What's rattling me is seeing how many folks in Chinatown are struggling, and it's not just us. Downtown Oakland's got its own issues. If 13 people there are making headlines, that's 13 too many. We need to make sure our economic development plans are actually helping people on the ground, not just the ones with the loudest voices.",
+        "factIds": [
+          "F-7d06c9f402e9",
+          "F-99ac11438201",
+          "F-2307b7941590"
+        ],
+        "src": "packet.W2[POP-00036]"
+      },
+      {
+        "id": "Q-POP-00224-59ff9a0c79",
+        "pop": "POP-00224",
+        "name": "Dillon Trevor",
+        "quote": "I've seen the neighborhood change a lot lately. Rents are going up, and it's getting harder to make ends meet. I'm not sure how much longer I can stay here, but I love the energy of Downtown. The A's games are always a highlight, and it's great to see fans gathering to talk about the game, even on rainy nights.",
+        "factIds": [
+          "F-7168317441df",
+          "F-c468c85b18ee",
+          "F-46311b5129c7"
+        ],
+        "src": "packet.W2[POP-00224]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The new child welcomed by Priya Nair may have brought changes to their daily routine.",
+        "usable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Xing Patel's retirement could be related to their renewed motivation to learn.",
+        "usable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Marcus Osei's decision to rent in Chinatown might be influenced by their role as Deputy Mayor (Econ Dev).",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C116",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-871096fd8925"
+    },
+    {
+      "t": "FACT",
+      "text": "Priya Nair welcomed a new child, Downtown",
+      "src": "output/beats/Lived_Events.jsonl @C116 batch d5f73c",
+      "id": "F-2ffb7f9ee563"
+    },
+    {
+      "t": "FACT",
+      "text": "Priya Nair first. The event is the lead; one true detail; what came next only if the record says.",
+      "src": "output/beats/Lived_Events.jsonl @C116 batch d5f73c",
+      "id": "F-87c54a1286c6"
+    },
+    {
+      "t": "FACT",
+      "text": "Priya Nair welcomed a new child, Downtown (C116). What came next: the record does not say yet",
+      "src": "output/beats/Lived_Events.jsonl @C116",
+      "id": "F-3cc564f0f468"
+    },
+    {
+      "t": "FACT",
+      "text": "Priya Nair — in their life, C116: memorized the starting rotation for the Oaks and tested themselves on the BART ride home",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-82579f27ca78"
+    },
+    {
+      "t": "FACT",
+      "text": "Priya Nair — the Tribune named them in a piece headlined Downtown’s Growth Has Different Clocks (Business, C110)",
+      "src": "archive/ARTICLE_INDEX.jsonl 3f308e25e07bdc82",
+      "id": "F-0f21787ad4b6"
+    },
+    {
+      "t": "FACT",
+      "text": "Xing Patel retired from work as Ship Repair Foreman, Jack London (C116). What came next: the record does not say yet",
+      "src": "output/beats/Lived_Events.jsonl @C116",
+      "id": "F-f5badeb0b181"
+    },
+    {
+      "t": "FACT",
+      "text": "Xing Patel — in their life, C115: felt renewed motivation to learn as the season shifted",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-c306151d73c5"
+    },
+    {
+      "t": "FACT",
+      "text": "Xing Patel — in their life, C115: a mover's truck idles outside a newly renovated building",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-857e7ba5f099"
+    },
+    {
+      "t": "FACT",
+      "text": "Xing Patel — in their life, C116: the city buzzes with energy after the A's third straight win, fans wearing green and gold everywhere.",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-025588fa8f2f"
+    },
+    {
+      "t": "FACT",
+      "text": "Xing Patel — in their life, C116: traded an extra ticket for a promise to bring the kid next time",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-23137720de45"
+    },
+    {
+      "t": "FACT",
+      "text": "Marcus Osei moved into a place of their own in Chinatown, renting (C116)",
+      "src": "output/beats/Household_Ledger.jsonl @C116",
+      "id": "F-6c28d71dadb7"
+    },
+    {
+      "t": "FACT",
+      "text": "Marcus Osei — in their life, C115: squeezed past three-generation tables at Eight Treasures Dim Sum House",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-0ae51635b602"
+    },
+    {
+      "t": "FACT",
+      "text": "Marcus Osei — in their life, C115: didn't recognize themselves in an old photograph at first glance",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-c5dc6ba99177"
+    },
+    {
+      "t": "FACT",
+      "text": "Marcus Osei — in their life, C116: wondered when exactly they became the adult in the room",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-c4f14ff46bc9"
+    },
+    {
+      "t": "FACT",
+      "text": "Marcus Osei — in their life, C116: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-99ac11438201"
+    },
+    {
+      "t": "FACT",
+      "text": "Marcus Osei — the Tribune named them in a piece headlined Chinatown's Illness Toll Ripples Through Tight-Knit Community (Civic, C107)",
+      "src": "archive/ARTICLE_INDEX.jsonl a50693c681c6a506",
+      "id": "F-2307b7941590"
+    },
+    {
+      "t": "FACT",
+      "text": "Marcus Osei — the Tribune named them in a piece headlined Three Portfolios, One Test: Okoro Posts Numbers Before The Checkpoint (Civic Affairs, C95)",
+      "src": "archive/ARTICLE_INDEX.jsonl 23da22e80424c6be",
+      "id": "F-bc06feac43b7"
+    },
+    {
+      "t": "FACT",
+      "text": "Marcus Osei — the Tribune named them in a piece headlined The Day She Named Dates (Civic Ledger, C92)",
+      "src": "archive/ARTICLE_INDEX.jsonl 3bded77182cc18fd",
+      "id": "F-137852871bc8"
+    },
+    {
+      "t": "FACT",
+      "text": "Dillon Trevor moved into a place of their own in Downtown, renting (C116)",
+      "src": "output/beats/Household_Ledger.jsonl @C116",
+      "id": "F-577aec27da49"
+    },
+    {
+      "t": "FACT",
+      "text": "Dillon Trevor — in their life, C115: checked the scores twice a day all week, happy every time",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-9f3a050b492b"
+    },
+    {
+      "t": "FACT",
+      "text": "Dillon Trevor — in their life, C116: split a check six ways in her head faster than the register could",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-46311b5129c7"
+    },
+    {
+      "t": "FACT",
+      "text": "Dillon Trevor — in their life, C116: heard the rent talk on the block turn sharp",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-7168317441df"
+    },
+    {
+      "t": "FACT",
+      "text": "Dillon Trevor — in their life, C116: a group of fans huddle under an awning debating last night's game, their voices rising above the sound of rain hitting the pavement",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-c468c85b18ee"
+    },
+    {
+      "t": "FACT",
+      "text": "Dillon Trevor — the Tribune named them in a piece headlined Oakland Oaks Gear Up for Opening Night (Sports, C107)",
+      "src": "archive/ARTICLE_INDEX.jsonl 75751b8e57277575",
+      "id": "F-9be2d8c4a75d"
+    },
+    {
+      "t": "FACT",
+      "text": "Dillon Trevor — the Tribune named them in a piece headlined The Oaks' Groundswell in Downtown (Sports, C107)",
+      "src": "archive/ARTICLE_INDEX.jsonl bea849f57403bea8",
+      "id": "F-140fad19aeb2"
+    },
+    {
+      "t": "FACT",
+      "text": "Dillon Trevor — the Tribune named them in a piece headlined The Drop Nobody Claimed (Civic Affairs, C102)",
+      "src": "archive/ARTICLE_INDEX.jsonl 184f3d41f73477a1",
+      "id": "F-dd55bc25c897"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane lost on the UNDOCKED book — staked 592, the book kept it, Piedmont Ave (C116)",
+      "src": "output/beats/Casino_Ledger.jsonl @C116",
+      "id": "F-d18f68b25b2b"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane — in their life, C115: got recognized twice at the grocery store after the story ran",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-49e13b539f93"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane — in their life, C116: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-19a009e21989"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane — in their life, C116: realized the same seven meals had rotated for a month, and shrugged",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-8a8d4f688791"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane — in their life, C116: caught their reflection in a shop window and stood a little straighter",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-732283de8451"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane — Lives already wrote this person: a moment the record kept (C114), the retirement (C115)",
+      "src": "output/cron-compare/lives_covered.json",
+      "id": "F-ca05b0049b2b"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane — the Tribune named them in a piece headlined The Clipping on the Door (Culture, C115)",
+      "src": "archive/ARTICLE_INDEX.jsonl e41f10c836cea7b4",
+      "id": "F-a85f9dc0452c"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane — the Tribune named them in a piece headlined The Names We Keep Saying (Culture, C115)",
+      "src": "archive/ARTICLE_INDEX.jsonl af3c80da720ceb06",
+      "id": "F-6f905ec4589f"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane — the Tribune named them in a piece headlined Fifth on Points, First in Credits: Taveras's Undocked Pledge Has Nothing to Attach To Yet (Sports, C115)",
+      "src": "archive/ARTICLE_INDEX.jsonl a94be9008fdfe845",
+      "id": "F-8ec970fb8b1a"
+    },
+    {
+      "t": "FACT",
+      "text": "Amara Keane won on the UNDOCKED book — staked 489, paid 895, Piedmont Ave (C116)",
+      "src": "output/beats/Casino_Ledger.jsonl @C116",
+      "id": "F-51eed49f7978"
+    },
+    {
+      "t": "FACT",
+      "text": "Amara Keane — in their life, C116: split the last of the coffee and the morning's plans with their partner",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-a9d2c41039c0"
+    },
+    {
+      "t": "FACT",
+      "text": "Amara Keane — in their life, C116: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-70979e9efbd6"
+    },
+    {
+      "t": "FACT",
+      "text": "Amara Keane — in their life, C116: moved from Grand Lake to Piedmont Ave — moving up from Grand Lake — sold up and bought in Piedmont Ave",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-9b6218c571e7"
+    },
+    {
+      "t": "FACT",
+      "text": "Amara Keane — in their life, C116: noticed minor shifts in everyday neighborhood flow",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-2cabb0ca127f"
+    },
+    {
+      "t": "FACT",
+      "text": "Amara Keane — the Tribune named them in a piece headlined Bay Tribune | Arts & Entertainment (desk unknown, C99)",
+      "src": "archive/ARTICLE_INDEX.jsonl 3c40a16239af3c40",
+      "id": "F-9d5f01dfd3c3"
+    },
+    {
+      "t": "FACT",
+      "text": "Amara Keane — the Tribune named them in a piece headlined Three fifty-three in seventeen at-bats. A farewell season refusing the script. (Sports, C92)",
+      "src": "archive/ARTICLE_INDEX.jsonl a415636600a30ec4",
+      "id": "F-d4c5be26574f"
+    },
+    {
+      "t": "FACT",
+      "text": "Amara Keane — the Tribune named them in a piece headlined THE LAST SUMMER IN GREEN AND GOLD (Senior Historian, C80)",
+      "src": "archive/ARTICLE_INDEX.jsonl 246a701e97524ad5",
+      "id": "F-ca2529c79096"
+    },
+    {
+      "t": "FACT",
+      "text": "Carmen Mesa — spent the night on the phone working out where the family would land, Lake Merritt — one of 6 people the Cycle's sports turn reached (A's [traded]; A's [playoff-push]; A's [off-season]; A's [off-season]; Oaks L1 [milestone]; Oaks L1 [big-win]; Oaks L1 [tough-loss]; Oaks L1…) (C116)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C116",
+      "id": "F-c0719543d1bd"
+    },
+    {
+      "t": "FACT",
+      "text": "Carmen Mesa — in their life, C116: called the one friend who would tell it straight",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-a1716165f3db"
+    },
+    {
+      "t": "FACT",
+      "text": "Carmen Mesa — in their life, C116: packed a bag with the news still settling",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-f91dcb21b050"
+    },
+    {
+      "t": "FACT",
+      "text": "Carmen Mesa — in their life, C116: closed their eyes during the choir solo and actually felt the tension leave their shoulders",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-b43092f7a75a"
+    },
+    {
+      "t": "FACT",
+      "text": "Carmen Mesa — in their life, C116: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-01392cac7f9a"
+    },
+    {
+      "t": "FACT",
+      "text": "Carmen Mesa — the Tribune named them in a piece headlined The Name Nobody Said in Uptown (Culture, C115)",
+      "src": "archive/ARTICLE_INDEX.jsonl c4de0e286c2cdf34",
+      "id": "F-0ca86b11d11a"
+    },
+    {
+      "t": "FACT",
+      "text": "Carmen Mesa — the Tribune named them in a piece headlined The Ledger Closes Before the Ink Is Dry (Sports, C111)",
+      "src": "archive/ARTICLE_INDEX.jsonl 9c87d9c351fe088c",
+      "id": "F-57d09fc3073d"
+    },
+    {
+      "t": "FACT",
+      "text": "Carmen Mesa — the Tribune named them in a piece headlined The Home-Run Race: Quintero and Taveras Light Up SF (Sports, C98)",
+      "src": "archive/ARTICLE_INDEX.jsonl 4aeac6a01bda75c6",
+      "id": "F-e6c1f26f0e89"
+    },
+    {
+      "t": "FACT",
+      "text": "Linda Chow — read about something unfamiliar and kept pulling the thread, West Oakland — one of 4 people the Cycle's sports turn reached (Citywide reaction: last week's Tribune SPORTS coverage rated +5 (positive, 1 article, Tanya Cruz).) (C116)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C116",
+      "id": "F-b3dd6a607063"
+    },
+    {
+      "t": "FACT",
+      "text": "Linda Chow — in their life, C116: heard the rent talk on the block turn sharp",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-a0e0135570a0"
+    },
+    {
+      "t": "FACT",
+      "text": "Linda Chow — in their life, C116: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-dcc7a265ea83"
+    },
+    {
+      "t": "FACT",
+      "text": "Linda Chow — the Tribune named them in a piece headlined The Sea-Level Desk Is Down to Three (Business, C115)",
+      "src": "archive/ARTICLE_INDEX.jsonl 0fea3b9384f40a35",
+      "id": "F-84dc679cd552"
+    },
+    {
+      "t": "FACT",
+      "text": "Linda Chow — the Tribune named them in a piece headlined The Page: Lives of Cycle 113 (Culture, C113)",
+      "src": "archive/ARTICLE_INDEX.jsonl 147bf0b94e0c90f7",
+      "id": "F-40dc6bf317a9"
+    },
+    {
+      "t": "FACT",
+      "text": "Linda Chow — the Tribune named them in a piece headlined THE BLOCKS (Culture, C86)",
+      "src": "archive/ARTICLE_INDEX.jsonl 32e78115b00878e3",
+      "id": "F-b44066e8ce80"
+    },
+    {
+      "t": "FACT",
+      "text": "Jorry Cula — carried three boxes of canned goods from the pantry truck and felt it in their lower back, Uptown — one of 4 people the Cycle's city turn reached (Oakland Alternative Response Initiative is dispatch-live — ongoing safety effects in West Oakland, Fruitvale, East Oakland; the city feels…) (C116)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C116",
+      "id": "F-5d294f025e4c"
+    },
+    {
+      "t": "FACT",
+      "text": "Jorry Cula — in their life, C115: the third late night this week, and the ceiling again at four",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-c90d1256af55"
+    },
+    {
+      "t": "FACT",
+      "text": "Jorry Cula — in their life, C115: argued the bullpen order at the barbershop like it was city policy",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-4009602630ea"
+    },
+    {
+      "t": "FACT",
+      "text": "Jorry Cula — in their life, C115: drove the church van for the senior trip and listened to three hours of unfiltered neighborhood gossip",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-c911dee3bb11"
+    },
+    {
+      "t": "FACT",
+      "text": "Jorry Cula — in their life, C116: worked through another weekend and called it fine",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-5ea36c2e06e4"
+    },
+    {
+      "t": "FACT",
+      "text": "Daire Green — cooked a recipe from memory that no one had written down, Fruitvale (C116 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-95ada7f00412"
+    },
+    {
+      "t": "FACT",
+      "text": "Daire Green — in their life, C115: disagreed with a Tribune column out loud to an empty kitchen",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-98436d074b87"
+    },
+    {
+      "t": "FACT",
+      "text": "Daire Green — in their life, C116: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-4f550d55452b"
+    },
+    {
+      "t": "FACT",
+      "text": "Daire Green — in their life, C116: grabbed coffee from the cart outside the hospital before the morning rush hit",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-eaa147236a27"
+    },
+    {
+      "t": "FACT",
+      "text": "Daire Green — in their life, C116: compared rent notes with a neighbor over the fence in Fruitvale",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-686c156ca1d4"
+    },
+    {
+      "t": "FACT",
+      "text": "Daire Green — Lives already wrote this person: a moment the record kept (C114)",
+      "src": "output/cron-compare/lives_covered.json",
+      "id": "F-10656bc73f42"
+    },
+    {
+      "t": "FACT",
+      "text": "Brenda Okoro and Elio Perez and Howard Perez — moved from Rockridge to Piedmont Ave — leaving Rockridge for a better fit, Piedmont Ave (C116 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-78f18924f679"
+    },
+    {
+      "t": "FACT",
+      "text": "Brenda Okoro — in their life, C116: the bartender wiping down counters while discussing the stalled train delays with a regular",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-30a272e52063"
+    },
+    {
+      "t": "FACT",
+      "text": "Brenda Okoro — in their life, C116: put on their good suit for the Sunday service because some traditions still matter near a bookstore corner",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-eca0355e78ae"
+    },
+    {
+      "t": "FACT",
+      "text": "Brenda Okoro — in their life, C116: noticed younger people asking them for advice now",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-cc4b1e9efac8"
+    },
+    {
+      "t": "FACT",
+      "text": "Brenda Okoro — in their life, C116: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-ebf99764339b"
+    },
+    {
+      "t": "FACT",
+      "text": "Brenda Okoro — the Tribune named them in a piece headlined The Fund Has Moved $7 Million Out of $28 Million. The Record Names Two Households. (Civic, C115)",
+      "src": "archive/ARTICLE_INDEX.jsonl 6aedd777086b1ceb",
+      "id": "F-c9fd959840cb"
+    },
+    {
+      "t": "FACT",
+      "text": "Brenda Okoro — the Tribune named them in a piece headlined The Fund Has Moved $6.6 Million in West Oakland. The Public Record Names Two Households. (Civic, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl 3c4089861e250c37",
+      "id": "F-6e31dece03c5"
+    },
+    {
+      "t": "FACT",
+      "text": "Brenda Okoro — the Tribune named them in a piece headlined West Oakland Stabilization Fund: Month Eleven Clears (Civic, C112)",
+      "src": "archive/ARTICLE_INDEX.jsonl 28f8f65cdafc67a7",
+      "id": "F-3a4997d0ba07"
+    },
+    {
+      "t": "FACT",
+      "text": "Elio Perez — in their life, C115: caught themselves bragging a little about the neighborhood lately",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-6036ebaa2c09"
+    },
+    {
+      "t": "FACT",
+      "text": "Elio Perez — in their life, C115: grabbed coffee from the cart outside the hospital before the morning rush hit",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-c9ad2aa7612f"
+    },
+    {
+      "t": "FACT",
+      "text": "Elio Perez — in their life, C116: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-2c1e157b7906"
+    },
+    {
+      "t": "FACT",
+      "text": "Elio Perez — in their life, C116: overheard a goodbye at the corner that sounded permanent, and carried it a block",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-6d27a86400f4"
+    },
+    {
+      "t": "FACT",
+      "text": "Elio Perez — the Tribune named them in a piece headlined The Same Empty Lot, Four Times (Civic, C109)",
+      "src": "archive/ARTICLE_INDEX.jsonl b716b8bcdb4e5805",
+      "id": "F-c0c1c5bfe0ee"
+    },
+    {
+      "t": "FACT",
+      "text": "Elio Perez — the Tribune named them in a piece headlined The Weight of Neutral (Weather, C109)",
+      "src": "archive/ARTICLE_INDEX.jsonl 22b873e66f0f22b8",
+      "id": "F-9fe833c854d4"
+    },
+    {
+      "t": "FACT",
+      "text": "Elio Perez — the Tribune named them in a piece headlined The File Nobody's Holding (Civic, C108)",
+      "src": "archive/ARTICLE_INDEX.jsonl 37f98dcedc46d3db",
+      "id": "F-961c686d4db9"
+    },
+    {
+      "t": "FACT",
+      "text": "Howard Perez — in their life, C115: felt energy from seasonal change",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-a95794e89b93"
+    },
+    {
+      "t": "FACT",
+      "text": "Howard Perez — in their life, C115: heard someone at the cafe complain about the Baylight District noise and bit their tongue",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-dcc84ab7dfc3"
+    },
+    {
+      "t": "FACT",
+      "text": "Howard Perez — in their life, C115: listened to a style of music they'd always skipped, twice",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-8ac806707e8d"
+    },
+    {
+      "t": "FACT",
+      "text": "Howard Perez — the Tribune named them in a piece headlined I’LL BELIEVE IT WHEN I SEE IT”: WEST OAKLAND RESIDENTS ON THE STABILIZATION FUND (Managing Editor, C76)",
+      "src": "archive/ARTICLE_INDEX.jsonl 73f4dc10ca151611",
+      "id": "F-f403c5221ed5"
+    },
+    {
+      "t": "FACT",
+      "text": "Elle Lilo — moved from Jack London to Lake Merritt — moving for a better fit between household income and housing costs, Lake Merritt (C116 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-8f9d20ef9fed"
+    },
+    {
+      "t": "FACT",
+      "text": "Elle Lilo — in their life, C115: grabbed coffee from the cart outside the hospital before the morning rush hit",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-4b86fdf5921e"
+    },
+    {
+      "t": "FACT",
+      "text": "Elle Lilo — in their life, C115: stayed thirty minutes after the service just catching up in the parking lot",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-20cdc1867906"
+    },
+    {
+      "t": "FACT",
+      "text": "Elle Lilo — in their life, C115: left the playoff watch party with hoarse vocals and sticky shoes",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-150a0b0b8f95"
+    },
+    {
+      "t": "FACT",
+      "text": "Elle Lilo — in their life, C116: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-e79922043116"
+    },
+    {
+      "t": "FACT",
+      "text": "Elle Lilo — Lives already wrote this person: the new household (C114), the retirement (C115)",
+      "src": "output/cron-compare/lives_covered.json",
+      "id": "F-ce0b64d91d88"
+    },
+    {
+      "t": "FACT",
+      "text": "Elle Lilo — the Tribune named them in a piece headlined Chinatown's 140 Sick Are Mostly at Home, and Home Is Doing the Work (Civic, C113)",
+      "src": "archive/ARTICLE_INDEX.jsonl 415a8378a3cc8be1",
+      "id": "F-949eab6a11ff"
+    },
+    {
+      "t": "FACT",
+      "text": "Elle Lilo — the Tribune named them in a piece headlined Last, UNDOCKED. Nia Rook has Eric Taveras holding the top spot and Cristina Booker's ten-point Mon (Civic, C113)",
+      "src": "archive/ARTICLE_INDEX.jsonl 7b568104deca2649",
+      "id": "F-01db0778278f"
+    },
+    {
+      "t": "FACT",
+      "text": "Elle Lilo — the Tribune named them in a piece headlined Six Names for 142 Sick Residents (Civic, C112)",
+      "src": "archive/ARTICLE_INDEX.jsonl bad852382ed2ab09",
+      "id": "F-ca6b2975e581"
+    },
+    {
+      "t": "FACT",
+      "text": "Eric Taveras — moved from Downtown to Piedmont Ave — moving up from Downtown, Piedmont Ave (C116 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-d0e079a44705"
+    },
+    {
+      "t": "FACT",
+      "text": "Eric Taveras — in their life, C115: had a neighbor tape the article to the building's front door",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-a2d0097f217a"
+    },
+    {
+      "t": "FACT",
+      "text": "Eric Taveras — in their life, C115: stayed an extra hour at the community center because nobody wanted to leave",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-5fe74fef7d9e"
+    },
+    {
+      "t": "FACT",
+      "text": "Eric Taveras — in their life, C116: held the door and got a whole conversation for it",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-7305b5421d3c"
+    },
+    {
+      "t": "FACT",
+      "text": "Eric Taveras — in their life, C116: handled attention with practiced ease",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-532f5aeb1624"
+    },
+    {
+      "t": "FACT",
+      "text": "Eric Taveras — the Tribune named them in a piece headlined Fifth on Points, First in Credits: Taveras's Undocked Pledge Has Nothing to Attach To Yet (Sports, C115)",
+      "src": "archive/ARTICLE_INDEX.jsonl a94be9008fdfe845",
+      "id": "F-82e71f022b20"
+    },
+    {
+      "t": "FACT",
+      "text": "Eric Taveras — the Tribune named them in a piece headlined Taveras's 54 Home Runs Sit Outside Seven Seasons of His Own Record (Sports, C115)",
+      "src": "archive/ARTICLE_INDEX.jsonl 754314993768e11d",
+      "id": "F-af1b14aa7622"
+    },
+    {
+      "t": "FACT",
+      "text": "Eric Taveras — the Tribune named them in a piece headlined UNDOCKED: Cristina Booker’s double-digit burst couldn’t carry the whole week (Undocked-digest, C113)",
+      "src": "archive/ARTICLE_INDEX.jsonl 2e25dc1a49c52e25",
+      "id": "F-053d62ec414c"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+      "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+      "id": "F-647fd9067a33"
+    },
+    {
+      "t": "FACT",
+      "text": "Xing Patel — Ship Repair Foreman — Jack London",
+      "src": "Simulation_Ledger profile for POP-00440",
+      "id": "F-b0fe13826b26"
+    },
+    {
+      "t": "FACT",
+      "text": "Marcus Osei — Deputy Mayor (Econ Dev) — Chinatown",
+      "src": "Simulation_Ledger profile for POP-00036",
+      "id": "F-7d06c9f402e9"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "tamsin-lives-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Put the cycle's person events in the paper as news, one person at a time — a birth, a death, a hospital stay, a retirement, a promotion, a household set up or a place of one's own, a win or a loss on the book, what a turn of the city did to someone's day, and the smaller moments the record kept. The event is the lead, the person is named as the slice names them, and what came next appears only when a later record holds it. A stake or a payout is the person's own fact, not a statistic. The page is the city's real calendar; every person on it is one the record holds.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "plain respect — a neighborhood weekly's births-and-obituaries hand, unhurried, exact",
+      "targetWords": "450-1200",
+      "opening": "the heaviest event on the slice, stated as it happened to the named person"
+    },
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "canonBlockers": [
+      "any person, event, quote, venue, employer or family member not on the slice",
+      "a paraphrased or invented quote",
+      "a cause, diagnosis or outcome the record does not state",
+      "a statistic, rate or trend claim — the page is people, not numbers",
+      "intake bookkeeping rows (Emerged into Tier, Added to Simulation_Ledger, Updated to Tier) written as life events",
+      "raw engine labels or decimals printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-66f2f2270563",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-871096fd8925",
+        "t": "FACT",
+        "text": "Current cycle: C116",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-2ffb7f9ee563",
+        "t": "FACT",
+        "text": "Priya Nair welcomed a new child, Downtown",
+        "src": "output/beats/Lived_Events.jsonl @C116 batch d5f73c"
+      },
+      {
+        "id": "F-87c54a1286c6",
+        "t": "FACT",
+        "text": "Priya Nair first. The event is the lead; one true detail; what came next only if the record says.",
+        "src": "output/beats/Lived_Events.jsonl @C116 batch d5f73c"
+      },
+      {
+        "id": "F-3cc564f0f468",
+        "t": "FACT",
+        "text": "Priya Nair welcomed a new child, Downtown (C116). What came next: the record does not say yet",
+        "src": "output/beats/Lived_Events.jsonl @C116"
+      },
+      {
+        "id": "F-82579f27ca78",
+        "t": "FACT",
+        "text": "Priya Nair — in their life, C116: memorized the starting rotation for the Oaks and tested themselves on the BART ride home",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-0f21787ad4b6",
+        "t": "FACT",
+        "text": "Priya Nair — the Tribune named them in a piece headlined Downtown’s Growth Has Different Clocks (Business, C110)",
+        "src": "archive/ARTICLE_INDEX.jsonl 3f308e25e07bdc82"
+      },
+      {
+        "id": "F-f5badeb0b181",
+        "t": "FACT",
+        "text": "Xing Patel retired from work as Ship Repair Foreman, Jack London (C116). What came next: the record does not say yet",
+        "src": "output/beats/Lived_Events.jsonl @C116"
+      },
+      {
+        "id": "F-c306151d73c5",
+        "t": "FACT",
+        "text": "Xing Patel — in their life, C115: felt renewed motivation to learn as the season shifted",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-857e7ba5f099",
+        "t": "FACT",
+        "text": "Xing Patel — in their life, C115: a mover's truck idles outside a newly renovated building",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-025588fa8f2f",
+        "t": "FACT",
+        "text": "Xing Patel — in their life, C116: the city buzzes with energy after the A's third straight win, fans wearing green and gold everywhere.",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-23137720de45",
+        "t": "FACT",
+        "text": "Xing Patel — in their life, C116: traded an extra ticket for a promise to bring the kid next time",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-6c28d71dadb7",
+        "t": "FACT",
+        "text": "Marcus Osei moved into a place of their own in Chinatown, renting (C116)",
+        "src": "output/beats/Household_Ledger.jsonl @C116"
+      },
+      {
+        "id": "F-0ae51635b602",
+        "t": "FACT",
+        "text": "Marcus Osei — in their life, C115: squeezed past three-generation tables at Eight Treasures Dim Sum House",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-c5dc6ba99177",
+        "t": "FACT",
+        "text": "Marcus Osei — in their life, C115: didn't recognize themselves in an old photograph at first glance",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-c4f14ff46bc9",
+        "t": "FACT",
+        "text": "Marcus Osei — in their life, C116: wondered when exactly they became the adult in the room",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-99ac11438201",
+        "t": "FACT",
+        "text": "Marcus Osei — in their life, C116: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-2307b7941590",
+        "t": "FACT",
+        "text": "Marcus Osei — the Tribune named them in a piece headlined Chinatown's Illness Toll Ripples Through Tight-Knit Community (Civic, C107)",
+        "src": "archive/ARTICLE_INDEX.jsonl a50693c681c6a506"
+      },
+      {
+        "id": "F-bc06feac43b7",
+        "t": "FACT",
+        "text": "Marcus Osei — the Tribune named them in a piece headlined Three Portfolios, One Test: Okoro Posts Numbers Before The Checkpoint (Civic Affairs, C95)",
+        "src": "archive/ARTICLE_INDEX.jsonl 23da22e80424c6be"
+      },
+      {
+        "id": "F-137852871bc8",
+        "t": "FACT",
+        "text": "Marcus Osei — the Tribune named them in a piece headlined The Day She Named Dates (Civic Ledger, C92)",
+        "src": "archive/ARTICLE_INDEX.jsonl 3bded77182cc18fd"
+      },
+      {
+        "id": "F-577aec27da49",
+        "t": "FACT",
+        "text": "Dillon Trevor moved into a place of their own in Downtown, renting (C116)",
+        "src": "output/beats/Household_Ledger.jsonl @C116"
+      },
+      {
+        "id": "F-9f3a050b492b",
+        "t": "FACT",
+        "text": "Dillon Trevor — in their life, C115: checked the scores twice a day all week, happy every time",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-46311b5129c7",
+        "t": "FACT",
+        "text": "Dillon Trevor — in their life, C116: split a check six ways in her head faster than the register could",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-7168317441df",
+        "t": "FACT",
+        "text": "Dillon Trevor — in their life, C116: heard the rent talk on the block turn sharp",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-c468c85b18ee",
+        "t": "FACT",
+        "text": "Dillon Trevor — in their life, C116: a group of fans huddle under an awning debating last night's game, their voices rising above the sound of rain hitting the pavement",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-9be2d8c4a75d",
+        "t": "FACT",
+        "text": "Dillon Trevor — the Tribune named them in a piece headlined Oakland Oaks Gear Up for Opening Night (Sports, C107)",
+        "src": "archive/ARTICLE_INDEX.jsonl 75751b8e57277575"
+      },
+      {
+        "id": "F-140fad19aeb2",
+        "t": "FACT",
+        "text": "Dillon Trevor — the Tribune named them in a piece headlined The Oaks' Groundswell in Downtown (Sports, C107)",
+        "src": "archive/ARTICLE_INDEX.jsonl bea849f57403bea8"
+      },
+      {
+        "id": "F-dd55bc25c897",
+        "t": "FACT",
+        "text": "Dillon Trevor — the Tribune named them in a piece headlined The Drop Nobody Claimed (Civic Affairs, C102)",
+        "src": "archive/ARTICLE_INDEX.jsonl 184f3d41f73477a1"
+      },
+      {
+        "id": "F-d18f68b25b2b",
+        "t": "FACT",
+        "text": "Vinnie Keane lost on the UNDOCKED book — staked 592, the book kept it, Piedmont Ave (C116)",
+        "src": "output/beats/Casino_Ledger.jsonl @C116"
+      },
+      {
+        "id": "F-49e13b539f93",
+        "t": "FACT",
+        "text": "Vinnie Keane — in their life, C115: got recognized twice at the grocery store after the story ran",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-19a009e21989",
+        "t": "FACT",
+        "text": "Vinnie Keane — in their life, C116: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-8a8d4f688791",
+        "t": "FACT",
+        "text": "Vinnie Keane — in their life, C116: realized the same seven meals had rotated for a month, and shrugged",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-732283de8451",
+        "t": "FACT",
+        "text": "Vinnie Keane — in their life, C116: caught their reflection in a shop window and stood a little straighter",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-ca05b0049b2b",
+        "t": "FACT",
+        "text": "Vinnie Keane — Lives already wrote this person: a moment the record kept (C114), the retirement (C115)",
+        "src": "output/cron-compare/lives_covered.json"
+      },
+      {
+        "id": "F-a85f9dc0452c",
+        "t": "FACT",
+        "text": "Vinnie Keane — the Tribune named them in a piece headlined The Clipping on the Door (Culture, C115)",
+        "src": "archive/ARTICLE_INDEX.jsonl e41f10c836cea7b4"
+      },
+      {
+        "id": "F-6f905ec4589f",
+        "t": "FACT",
+        "text": "Vinnie Keane — the Tribune named them in a piece headlined The Names We Keep Saying (Culture, C115)",
+        "src": "archive/ARTICLE_INDEX.jsonl af3c80da720ceb06"
+      },
+      {
+        "id": "F-8ec970fb8b1a",
+        "t": "FACT",
+        "text": "Vinnie Keane — the Tribune named them in a piece headlined Fifth on Points, First in Credits: Taveras's Undocked Pledge Has Nothing to Attach To Yet (Sports, C115)",
+        "src": "archive/ARTICLE_INDEX.jsonl a94be9008fdfe845"
+      },
+      {
+        "id": "F-51eed49f7978",
+        "t": "FACT",
+        "text": "Amara Keane won on the UNDOCKED book — staked 489, paid 895, Piedmont Ave (C116)",
+        "src": "output/beats/Casino_Ledger.jsonl @C116"
+      },
+      {
+        "id": "F-a9d2c41039c0",
+        "t": "FACT",
+        "text": "Amara Keane — in their life, C116: split the last of the coffee and the morning's plans with their partner",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-70979e9efbd6",
+        "t": "FACT",
+        "text": "Amara Keane — in their life, C116: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-9b6218c571e7",
+        "t": "FACT",
+        "text": "Amara Keane — in their life, C116: moved from Grand Lake to Piedmont Ave — moving up from Grand Lake — sold up and bought in Piedmont Ave",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-2cabb0ca127f",
+        "t": "FACT",
+        "text": "Amara Keane — in their life, C116: noticed minor shifts in everyday neighborhood flow",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-9d5f01dfd3c3",
+        "t": "FACT",
+        "text": "Amara Keane — the Tribune named them in a piece headlined Bay Tribune | Arts & Entertainment (desk unknown, C99)",
+        "src": "archive/ARTICLE_INDEX.jsonl 3c40a16239af3c40"
+      },
+      {
+        "id": "F-d4c5be26574f",
+        "t": "FACT",
+        "text": "Amara Keane — the Tribune named them in a piece headlined Three fifty-three in seventeen at-bats. A farewell season refusing the script. (Sports, C92)",
+        "src": "archive/ARTICLE_INDEX.jsonl a415636600a30ec4"
+      },
+      {
+        "id": "F-ca2529c79096",
+        "t": "FACT",
+        "text": "Amara Keane — the Tribune named them in a piece headlined THE LAST SUMMER IN GREEN AND GOLD (Senior Historian, C80)",
+        "src": "archive/ARTICLE_INDEX.jsonl 246a701e97524ad5"
+      },
+      {
+        "id": "F-c0719543d1bd",
+        "t": "FACT",
+        "text": "Carmen Mesa — spent the night on the phone working out where the family would land, Lake Merritt — one of 6 people the Cycle's sports turn reached (A's [traded]; A's [playoff-push]; A's [off-season]; A's [off-season]; Oaks L1 [milestone]; Oaks L1 [big-win]; Oaks L1 [tough-loss]; Oaks L1…) (C116)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C116"
+      },
+      {
+        "id": "F-a1716165f3db",
+        "t": "FACT",
+        "text": "Carmen Mesa — in their life, C116: called the one friend who would tell it straight",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-f91dcb21b050",
+        "t": "FACT",
+        "text": "Carmen Mesa — in their life, C116: packed a bag with the news still settling",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-b43092f7a75a",
+        "t": "FACT",
+        "text": "Carmen Mesa — in their life, C116: closed their eyes during the choir solo and actually felt the tension leave their shoulders",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-01392cac7f9a",
+        "t": "FACT",
+        "text": "Carmen Mesa — in their life, C116: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-0ca86b11d11a",
+        "t": "FACT",
+        "text": "Carmen Mesa — the Tribune named them in a piece headlined The Name Nobody Said in Uptown (Culture, C115)",
+        "src": "archive/ARTICLE_INDEX.jsonl c4de0e286c2cdf34"
+      },
+      {
+        "id": "F-57d09fc3073d",
+        "t": "FACT",
+        "text": "Carmen Mesa — the Tribune named them in a piece headlined The Ledger Closes Before the Ink Is Dry (Sports, C111)",
+        "src": "archive/ARTICLE_INDEX.jsonl 9c87d9c351fe088c"
+      },
+      {
+        "id": "F-e6c1f26f0e89",
+        "t": "FACT",
+        "text": "Carmen Mesa — the Tribune named them in a piece headlined The Home-Run Race: Quintero and Taveras Light Up SF (Sports, C98)",
+        "src": "archive/ARTICLE_INDEX.jsonl 4aeac6a01bda75c6"
+      },
+      {
+        "id": "F-b3dd6a607063",
+        "t": "FACT",
+        "text": "Linda Chow — read about something unfamiliar and kept pulling the thread, West Oakland — one of 4 people the Cycle's sports turn reached (Citywide reaction: last week's Tribune SPORTS coverage rated +5 (positive, 1 article, Tanya Cruz).) (C116)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C116"
+      },
+      {
+        "id": "F-a0e0135570a0",
+        "t": "FACT",
+        "text": "Linda Chow — in their life, C116: heard the rent talk on the block turn sharp",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-dcc7a265ea83",
+        "t": "FACT",
+        "text": "Linda Chow — in their life, C116: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-84dc679cd552",
+        "t": "FACT",
+        "text": "Linda Chow — the Tribune named them in a piece headlined The Sea-Level Desk Is Down to Three (Business, C115)",
+        "src": "archive/ARTICLE_INDEX.jsonl 0fea3b9384f40a35"
+      },
+      {
+        "id": "F-40dc6bf317a9",
+        "t": "FACT",
+        "text": "Linda Chow — the Tribune named them in a piece headlined The Page: Lives of Cycle 113 (Culture, C113)",
+        "src": "archive/ARTICLE_INDEX.jsonl 147bf0b94e0c90f7"
+      },
+      {
+        "id": "F-b44066e8ce80",
+        "t": "FACT",
+        "text": "Linda Chow — the Tribune named them in a piece headlined THE BLOCKS (Culture, C86)",
+        "src": "archive/ARTICLE_INDEX.jsonl 32e78115b00878e3"
+      },
+      {
+        "id": "F-5d294f025e4c",
+        "t": "FACT",
+        "text": "Jorry Cula — carried three boxes of canned goods from the pantry truck and felt it in their lower back, Uptown — one of 4 people the Cycle's city turn reached (Oakland Alternative Response Initiative is dispatch-live — ongoing safety effects in West Oakland, Fruitvale, East Oakland; the city feels…) (C116)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C116"
+      },
+      {
+        "id": "F-c90d1256af55",
+        "t": "FACT",
+        "text": "Jorry Cula — in their life, C115: the third late night this week, and the ceiling again at four",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-4009602630ea",
+        "t": "FACT",
+        "text": "Jorry Cula — in their life, C115: argued the bullpen order at the barbershop like it was city policy",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-c911dee3bb11",
+        "t": "FACT",
+        "text": "Jorry Cula — in their life, C115: drove the church van for the senior trip and listened to three hours of unfiltered neighborhood gossip",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-5ea36c2e06e4",
+        "t": "FACT",
+        "text": "Jorry Cula — in their life, C116: worked through another weekend and called it fine",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-95ada7f00412",
+        "t": "FACT",
+        "text": "Daire Green — cooked a recipe from memory that no one had written down, Fruitvale (C116 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-98436d074b87",
+        "t": "FACT",
+        "text": "Daire Green — in their life, C115: disagreed with a Tribune column out loud to an empty kitchen",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-4f550d55452b",
+        "t": "FACT",
+        "text": "Daire Green — in their life, C116: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-eaa147236a27",
+        "t": "FACT",
+        "text": "Daire Green — in their life, C116: grabbed coffee from the cart outside the hospital before the morning rush hit",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-686c156ca1d4",
+        "t": "FACT",
+        "text": "Daire Green — in their life, C116: compared rent notes with a neighbor over the fence in Fruitvale",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-10656bc73f42",
+        "t": "FACT",
+        "text": "Daire Green — Lives already wrote this person: a moment the record kept (C114)",
+        "src": "output/cron-compare/lives_covered.json"
+      },
+      {
+        "id": "F-78f18924f679",
+        "t": "FACT",
+        "text": "Brenda Okoro and Elio Perez and Howard Perez — moved from Rockridge to Piedmont Ave — leaving Rockridge for a better fit, Piedmont Ave (C116 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-30a272e52063",
+        "t": "FACT",
+        "text": "Brenda Okoro — in their life, C116: the bartender wiping down counters while discussing the stalled train delays with a regular",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-eca0355e78ae",
+        "t": "FACT",
+        "text": "Brenda Okoro — in their life, C116: put on their good suit for the Sunday service because some traditions still matter near a bookstore corner",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-cc4b1e9efac8",
+        "t": "FACT",
+        "text": "Brenda Okoro — in their life, C116: noticed younger people asking them for advice now",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-ebf99764339b",
+        "t": "FACT",
+        "text": "Brenda Okoro — in their life, C116: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-c9fd959840cb",
+        "t": "FACT",
+        "text": "Brenda Okoro — the Tribune named them in a piece headlined The Fund Has Moved $7 Million Out of $28 Million. The Record Names Two Households. (Civic, C115)",
+        "src": "archive/ARTICLE_INDEX.jsonl 6aedd777086b1ceb"
+      },
+      {
+        "id": "F-6e31dece03c5",
+        "t": "FACT",
+        "text": "Brenda Okoro — the Tribune named them in a piece headlined The Fund Has Moved $6.6 Million in West Oakland. The Public Record Names Two Households. (Civic, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl 3c4089861e250c37"
+      },
+      {
+        "id": "F-3a4997d0ba07",
+        "t": "FACT",
+        "text": "Brenda Okoro — the Tribune named them in a piece headlined West Oakland Stabilization Fund: Month Eleven Clears (Civic, C112)",
+        "src": "archive/ARTICLE_INDEX.jsonl 28f8f65cdafc67a7"
+      },
+      {
+        "id": "F-6036ebaa2c09",
+        "t": "FACT",
+        "text": "Elio Perez — in their life, C115: caught themselves bragging a little about the neighborhood lately",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-c9ad2aa7612f",
+        "t": "FACT",
+        "text": "Elio Perez — in their life, C115: grabbed coffee from the cart outside the hospital before the morning rush hit",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-2c1e157b7906",
+        "t": "FACT",
+        "text": "Elio Perez — in their life, C116: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-6d27a86400f4",
+        "t": "FACT",
+        "text": "Elio Perez — in their life, C116: overheard a goodbye at the corner that sounded permanent, and carried it a block",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-c0c1c5bfe0ee",
+        "t": "FACT",
+        "text": "Elio Perez — the Tribune named them in a piece headlined The Same Empty Lot, Four Times (Civic, C109)",
+        "src": "archive/ARTICLE_INDEX.jsonl b716b8bcdb4e5805"
+      },
+      {
+        "id": "F-9fe833c854d4",
+        "t": "FACT",
+        "text": "Elio Perez — the Tribune named them in a piece headlined The Weight of Neutral (Weather, C109)",
+        "src": "archive/ARTICLE_INDEX.jsonl 22b873e66f0f22b8"
+      },
+      {
+        "id": "F-961c686d4db9",
+        "t": "FACT",
+        "text": "Elio Perez — the Tribune named them in a piece headlined The File Nobody's Holding (Civic, C108)",
+        "src": "archive/ARTICLE_INDEX.jsonl 37f98dcedc46d3db"
+      },
+      {
+        "id": "F-a95794e89b93",
+        "t": "FACT",
+        "text": "Howard Perez — in their life, C115: felt energy from seasonal change",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-dcc84ab7dfc3",
+        "t": "FACT",
+        "text": "Howard Perez — in their life, C115: heard someone at the cafe complain about the Baylight District noise and bit their tongue",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-8ac806707e8d",
+        "t": "FACT",
+        "text": "Howard Perez — in their life, C115: listened to a style of music they'd always skipped, twice",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-f403c5221ed5",
+        "t": "FACT",
+        "text": "Howard Perez — the Tribune named them in a piece headlined I’LL BELIEVE IT WHEN I SEE IT”: WEST OAKLAND RESIDENTS ON THE STABILIZATION FUND (Managing Editor, C76)",
+        "src": "archive/ARTICLE_INDEX.jsonl 73f4dc10ca151611"
+      },
+      {
+        "id": "F-8f9d20ef9fed",
+        "t": "FACT",
+        "text": "Elle Lilo — moved from Jack London to Lake Merritt — moving for a better fit between household income and housing costs, Lake Merritt (C116 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-4b86fdf5921e",
+        "t": "FACT",
+        "text": "Elle Lilo — in their life, C115: grabbed coffee from the cart outside the hospital before the morning rush hit",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-20cdc1867906",
+        "t": "FACT",
+        "text": "Elle Lilo — in their life, C115: stayed thirty minutes after the service just catching up in the parking lot",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-150a0b0b8f95",
+        "t": "FACT",
+        "text": "Elle Lilo — in their life, C115: left the playoff watch party with hoarse vocals and sticky shoes",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-e79922043116",
+        "t": "FACT",
+        "text": "Elle Lilo — in their life, C116: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-ce0b64d91d88",
+        "t": "FACT",
+        "text": "Elle Lilo — Lives already wrote this person: the new household (C114), the retirement (C115)",
+        "src": "output/cron-compare/lives_covered.json"
+      },
+      {
+        "id": "F-949eab6a11ff",
+        "t": "FACT",
+        "text": "Elle Lilo — the Tribune named them in a piece headlined Chinatown's 140 Sick Are Mostly at Home, and Home Is Doing the Work (Civic, C113)",
+        "src": "archive/ARTICLE_INDEX.jsonl 415a8378a3cc8be1"
+      },
+      {
+        "id": "F-01db0778278f",
+        "t": "FACT",
+        "text": "Elle Lilo — the Tribune named them in a piece headlined Last, UNDOCKED. Nia Rook has Eric Taveras holding the top spot and Cristina Booker's ten-point Mon (Civic, C113)",
+        "src": "archive/ARTICLE_INDEX.jsonl 7b568104deca2649"
+      },
+      {
+        "id": "F-ca6b2975e581",
+        "t": "FACT",
+        "text": "Elle Lilo — the Tribune named them in a piece headlined Six Names for 142 Sick Residents (Civic, C112)",
+        "src": "archive/ARTICLE_INDEX.jsonl bad852382ed2ab09"
+      },
+      {
+        "id": "F-d0e079a44705",
+        "t": "FACT",
+        "text": "Eric Taveras — moved from Downtown to Piedmont Ave — moving up from Downtown, Piedmont Ave (C116 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-a2d0097f217a",
+        "t": "FACT",
+        "text": "Eric Taveras — in their life, C115: had a neighbor tape the article to the building's front door",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-5fe74fef7d9e",
+        "t": "FACT",
+        "text": "Eric Taveras — in their life, C115: stayed an extra hour at the community center because nobody wanted to leave",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-7305b5421d3c",
+        "t": "FACT",
+        "text": "Eric Taveras — in their life, C116: held the door and got a whole conversation for it",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-532f5aeb1624",
+        "t": "FACT",
+        "text": "Eric Taveras — in their life, C116: handled attention with practiced ease",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-82e71f022b20",
+        "t": "FACT",
+        "text": "Eric Taveras — the Tribune named them in a piece headlined Fifth on Points, First in Credits: Taveras's Undocked Pledge Has Nothing to Attach To Yet (Sports, C115)",
+        "src": "archive/ARTICLE_INDEX.jsonl a94be9008fdfe845"
+      },
+      {
+        "id": "F-af1b14aa7622",
+        "t": "FACT",
+        "text": "Eric Taveras — the Tribune named them in a piece headlined Taveras's 54 Home Runs Sit Outside Seven Seasons of His Own Record (Sports, C115)",
+        "src": "archive/ARTICLE_INDEX.jsonl 754314993768e11d"
+      },
+      {
+        "id": "F-053d62ec414c",
+        "t": "FACT",
+        "text": "Eric Taveras — the Tribune named them in a piece headlined UNDOCKED: Cristina Booker’s double-digit burst couldn’t carry the whole week (Undocked-digest, C113)",
+        "src": "archive/ARTICLE_INDEX.jsonl 2e25dc1a49c52e25"
+      },
+      {
+        "id": "F-647fd9067a33",
+        "t": "FACT",
+        "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+        "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)"
+      },
+      {
+        "id": "F-b0fe13826b26",
+        "t": "FACT",
+        "text": "Xing Patel — Ship Repair Foreman — Jack London",
+        "src": "Simulation_Ledger profile for POP-00440"
+      },
+      {
+        "id": "F-7d06c9f402e9",
+        "t": "FACT",
+        "text": "Marcus Osei — Deputy Mayor (Econ Dev) — Chinatown",
+        "src": "Simulation_Ledger profile for POP-00036"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00440-36047f87e7",
+        "speakerId": "POP-00440",
+        "speakerName": "Xing Patel",
+        "text": "I've been enjoying my retirement. The A's games have been exciting lately, and I was able to trade an extra ticket for a promise from someone to bring their kid next time. It's been nice to have more free time and be able to watch the games with my family.",
+        "factIds": [
+          "F-23137720de45",
+          "F-025588fa8f2f",
+          "F-b0fe13826b26"
+        ],
+        "src": "packet.W2[POP-00440]"
+      },
+      {
+        "id": "Q-POP-00036-8ab42401bd",
+        "speakerId": "POP-00036",
+        "speakerName": "Marcus Osei",
+        "text": "What's rattling me is seeing how many folks in Chinatown are struggling, and it's not just us. Downtown Oakland's got its own issues. If 13 people there are making headlines, that's 13 too many. We need to make sure our economic development plans are actually helping people on the ground, not just the ones with the loudest voices.",
+        "factIds": [
+          "F-7d06c9f402e9",
+          "F-99ac11438201",
+          "F-2307b7941590"
+        ],
+        "src": "packet.W2[POP-00036]"
+      },
+      {
+        "id": "Q-POP-00224-59ff9a0c79",
+        "speakerId": "POP-00224",
+        "speakerName": "Dillon Trevor",
+        "text": "I've seen the neighborhood change a lot lately. Rents are going up, and it's getting harder to make ends meet. I'm not sure how much longer I can stay here, but I love the energy of Downtown. The A's games are always a highlight, and it's great to see fans gathering to talk about the game, even on rainy nights.",
+        "factIds": [
+          "F-7168317441df",
+          "F-c468c85b18ee",
+          "F-46311b5129c7"
+        ],
+        "src": "packet.W2[POP-00224]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00440",
+        "name": "Xing Patel",
+        "profile": "Xing Patel — Ship Repair Foreman — Jack London",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00036",
+        "name": "Marcus Osei",
+        "profile": "Marcus Osei — Deputy Mayor (Econ Dev) — Chinatown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00224",
+        "name": "Dillon Trevor",
+        "profile": "Dillon Trevor — Server — Downtown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The new child welcomed by Priya Nair may have brought changes to their daily routine.",
+        "publishable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Xing Patel's retirement could be related to their renewed motivation to learn.",
+        "publishable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Marcus Osei's decision to rent in Chinatown might be influenced by their role as Deputy Mayor (Econ Dev).",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

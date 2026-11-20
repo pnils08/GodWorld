@@ -1,0 +1,57 @@
+{
+  "model": "anthropic/claude-sonnet-5.5",
+  "calls": [
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Faith_Organizations",
+        "match": "St. Esperanza"
+      },
+      "resultChars": 270,
+      "resultHead": "Organization | FaithTradition | Neighborhood | Founded | Congregation | Leader | Character | ActiveStatus | LeaderPOPID | MembersList\nSt. Esperanza Parish | Catholic | Fruitvale | 1923 | 800 | Fr. Ramon Solano | Latino community center, family focus | active | POP-00756"
+    },
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Faith_Ledger",
+        "match": "Bay Pure Land"
+      },
+      "resultChars": 545,
+      "resultHead": "Timestamp | Cycle | Organization | FaithTradition | EventType | EventDescription | Neighborhood | Attendance | Status\nY3C5 | 109 | Bay Pure Land Buddhist Temple | Buddhist | crisis_response | congregation opens doors for community support | Chinatown | 41 | occurred\nY3C7 | 111 | Bay Pure Land Buddhist Temple | Buddhist | community_program | community health fair hosted | Chinatown | 38 | occurred\nY3C11 | 115 | Bay Pure Land Buddhist Temple | Buddhist | community_program | job training workshop begins new session | Chinatown | 40 | occurred"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "St. Esperanza Parish"
+      },
+      "resultChars": 3250,
+      "resultHead": "[C97 · edition] The Season the Congregations Carried — and the Shortstop in a Deacon's Robes By Maria Keen | Bay Tribune Culture The doors opened Saturday morning at St. Esperanza Parish on International Boulevard in Fruitvale, and the smell of marigolds came first — fresh-cut stems in tall glass vases flanking the entrance, some of them already browning at the edges. Father Ramon Solano stood at the threshold in his white alb, greeting people as they came in with the kind of slowness that says he had nowhere else to be. There wer\n[C96 · edition] The Network That Holds: Oakland's Congregations"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Bay Pure Land Buddhist Temple"
+      },
+      "resultChars": 3277,
+      "resultHead": "[C113 · daily · Elliot Graye] # Forty-One in the Room at Bay Pure Land, and a Pantry That Predates the Count Bay Pure Land Buddhist Temple, in Chinatown, opened its doors for community support in Cycle 109. The Faith Ledger's event row for that cycle is short. It lists the temple, the tradition, the event type \"crisis_response\" and the description \"congregation opens doors for community support.\" It gives an attendance of 41 and a status of \"occurred.\" The row doesn't say what the crisis was. It doesn't say who came through the door, what they \n[C114 · daily · Elliot Graye] # Doors Opened in C"
+    },
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Faith_Ledger",
+        "match": "Esperanza"
+      },
+      "resultChars": 1722,
+      "resultHead": "Timestamp | Cycle | Organization | FaithTradition | EventType | EventDescription | Neighborhood | Attendance | Status\nC97 | 97 | St. Esperanza Parish | Catholic | holy_day | traditional All Saints rituals observed | Fruitvale | 510 | occurred\nC98 | 98 | St. Esperanza Parish | Catholic | holy_day | traditional All Saints rituals observed | Fruitvale | 510 | occurred\nC99 | 99 | St. Esperanza Parish | Catholic | holy_day | special All Saints service fills sanctuary | Fruitvale | 509 | occurred\nY2C48 | 100 | St. Esperanza Parish | Catholic | holy_day | traditional All Saints rituals observed | Fru"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Ramon Solano Fruitvale"
+      },
+      "resultChars": 1610,
+      "resultHead": "[C99 · edition] Re: Fruitvale Rising POP-00756 | Ramon Solano | Priest, St. Esperanza Parish, Fruitvale (N1) POP-00755 | Antoine Vermeer | Bishop, Cathedral of the Living Word, Lake Merritt (N1) POP-00349 | Jiu Wong | Laurel; retired carpet installer; L1 (gratitude) POP-00618 | Lucy Ferreira | Fruitvale; senior physical therapist; L2 (Fruitvale rising) Re: Fruitvale Rising POP-00505 | Nina Chen | City Council, District 8, Civic Reform Coalition; voted no, district posts OARI's best numbers (Q1) Vanessa Tran-Muñoz — Director, Oakla\n[C97 · edition] The Season the Congregations Carried — and the "
+    }
+  ],
+  "ranAt": "2026-11-13T00:15:44.220Z"
+}

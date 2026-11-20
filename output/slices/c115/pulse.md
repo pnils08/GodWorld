@@ -1,19 +1,19 @@
 # The pulse — what the pages say, C115
 
-Window C108–C115 · 962 pages from 317 citizens (59 this Cycle) · index 2026-11-11T14:50:08.945Z
+Window C108–C115 · 1062 pages from 331 citizens (159 this Cycle) · index 2026-11-15T12:15:12.694Z
 
 _A sourcing signal and colour — never a published statistic. Write “the block is talking about rent again”, not a share._
 
 ## THEMES (strongest first)
 | theme | trend | citizens | pages | this Cycle | last Cycle |
 |---|---|---|---|---|---|
-| the A's | fading | 56 | 87 | 5 | 35 |
-| transit | fading | 29 | 51 | 0 | 14 |
-| rent | fading | 21 | 41 | 1 | 13 |
-| the clinic | rising | 19 | 37 | 3 | 1 |
-| the Oaks | fading | 14 | 29 | 2 | 7 |
-| faith | fading | 16 | 29 | 0 | 3 |
-| work | fading | 19 | 24 | 3 | 5 |
+| the A's | fading | 61 | 101 | 19 | 35 |
+| rent | fading | 22 | 45 | 5 | 13 |
+| transit | fading | 30 | 52 | 1 | 14 |
+| the clinic | rising | 21 | 39 | 5 | 1 |
+| faith | rising | 20 | 35 | 6 | 3 |
+| the Oaks | fading | 14 | 32 | 5 | 7 |
+| work | steady | 20 | 25 | 4 | 5 |
 | the council | fading | 11 | 14 | 1 | 3 |
 | Lena Cross * | fading | 6 | 7 | 0 | 4 |
 | debt and money | steady | 4 | 5 | 2 | 2 |
@@ -27,39 +27,39 @@ _* a name on this Cycle's culture record_
 
 ## WHO IS SAYING IT (the citizen's text as written; the Cycle they said it)
 ### the A's
-- Vinnie Keane, Former Designated Hitter, Oakland A's Legend — Grand Lake — C115 (11 pages): “After retiring from the A's, I've been keeping busy with appearances and staying involved with the community.”  _[cp-POP-00001-c115-PRESS-mon-eiofnj]_
+- Vinnie Keane, Former Designated Hitter, Oakland A's Legend — Grand Lake — C115 (14 pages): “The A's trade is a mixed bag for me.”  _[cp-POP-00001-c115-PRESS-fri-bblilh]_
+- Evan Lewis, Bus driver — Laurel — C115 (7 pages): “The A's trade news is what's been on my mind lately, and how it's affecting the community.”  _[cp-POP-00200-c115-PRESS-fri-cpmpda]_
 - Mariana Kapoor, student — Chinatown — C114 (4 pages): “To be honest, I don't really know much about the A's success.”  _[cp-POP-00998-c114-PRESS-sun-eahfka]_
-- Pilar Ramirez, Paramedic — Lake Merritt — C114 (3 pages): “To be honest, I'm not really sure how the community can benefit from the A's success.”  _[cp-POP-00943-c114-PRESS-sun-gpfibm]_
-
-### transit
-- Evan Lewis, Bus driver — Laurel — C114 (5 pages): “The platform records don't tell you about them.”  _[cp-POP-00200-c114-PRESS-mon-eapnmh]_
-- Eleanor Rivera, BART Station Manager — West Oakland — C114 (3 pages): “It's usually a rhythm stacking up — something at the station, something on the line, something in that neighborhood.”  _[cp-POP-00617-c114-PRESS-mon-fdjoib]_
-- Jerald Jensen, Janitor — West Oakland — C114 (4 pages): “The platform records don't catch the quiet.”  _[cp-POP-00280-c114-PRESS-mon-mlhclk]_
 
 ### rent
-- Omar Amici, Construction laborer — Uptown — C114 (11 pages): “The streets are busier than ever, and it seems like every other place is a for-rent sign these days.”  _[cp-POP-00263-c114-PRESS-sat-hneglg]_
+- Omar Amici, Construction laborer — Uptown — C115 (13 pages): “It's like the neighborhood I knew is being priced out.”  _[cp-POP-00263-c115-PRESS-fri-ehodgl]_
 - Yolanda Beckford, Firefighter-Paramedic — West Oakland — C114 (3 pages): “Me, I'm just trying to keep up with the shifts and the rent.”  _[cp-POP-01160-c114-CONVO-sat]_
-- Soriya Rodriguez, Ex-Offender Reentry Counselor — West Oakland — C114 (2 pages): “Rent's been a beast for everyone around here lately, but that's good your brother landed the promotion.”  _[cp-POP-00441-c114-CONVO-sat]_
+- Isaac Martinez, Plumber — Ivy Hill — C115 (2 pages): “My neighbor's been fighting a rent hike for six months, and I don't see how keeping a landlord in place helps her out.”  _[cp-POP-00784-c115-DEBATE-wed]_
+
+### transit
+- Eleanor Rivera, BART Station Manager — West Oakland — C114 (3 pages): “It's usually a rhythm stacking up — something at the station, something on the line, something in that neighborhood.”  _[cp-POP-00617-c114-PRESS-mon-fdjoib]_
+- Jerald Jensen, Janitor — West Oakland — C114 (4 pages): “The platform records don't catch the quiet.”  _[cp-POP-00280-c114-PRESS-mon-mlhclk]_
+- Austin Reaves, SG / The Oaks — West Oakland — C114 (2 pages): “To be honest, I'm not really sure about The Reaves Line Transit Fund's impact on Temescal.”  _[cp-POP-01027-c114-PRESS-fri-dlpldh]_
 
 ### the clinic
 - Yu Zen, Commercial Insurance Broker — Rockridge — C114 (8 pages): “When I was in that hospital bed after my accident, I learned something about who shows up for you.”  _[cp-POP-00194-c114-PRESS-mon-nbkeph]_
 - Maurice Franklin, Drone Fleet Coordinator — Rockridge — C112 (5 pages): “After coming home from the hospital, I had to get my feet back on the ground, and the first thing I did was check my finances.”  _[cp-POP-00801-c112-PRESS]_
 - Deacon Seymour, Manager, Oakland A's — Lake Merritt — C115 (3 pages): “I spent my own stretch in a hospital bed not long ago, and I know what it's like to have your name on the door, to have people checking on you.”  _[cp-POP-00528-c115-PRESS-mon-eobapl]_
 
-### the Oaks
-- Trenton Nawan, Server — Jack London — C114 (6 pages): “I'm still feeling pretty good about the Oaks.”  _[cp-POP-00273-c114-PRESS-thu-mmooah]_
-- Adash Stanley, PG / The Oaks — Downtown — C114 (4 pages): “I've felt the excitement building around the Oaks, it's like the whole city is waking up with the team.”  _[cp-POP-01023-c114-PRESS-thu-foeckf]_
-- Daniel Cloak, Bakery Worker — West Oakland — C114 (3 pages): “The Oaks trying to be part of the community is a positive step.”  _[cp-POP-00722-c114-PRESS-wed-mjoana]_
-
 ### faith
-- Eunice Marston, Senior Pastor / Faith Leader — Downtown — C112 (5 pages): “As a faith leader, I believe our congregation's role in the community during times of crisis is to offer support and be present for those affected.”  _[cp-POP-00753-c112-PRESS]_
-- Kenji Tanaka, Senior Pastor / Faith Leader — Chinatown — C113 (4 pages): “I've seen that faith communities in Oakland, like the Bay Pure Land Buddhist Temple in my own neighborhood, can be a source of comfort and support for people.”  _[cp-POP-00763-c113-PRESS]_
+- Eunice Marston, Senior Pastor / Faith Leader — Downtown — C115 (6 pages): “As a faith leader in Downtown, I appreciate the work of various faith organizations throughout Oakland, including those in Fruitvale.”  _[cp-POP-00753-c115-PRESS-thu-jomnng]_
+- Kenji Tanaka, Senior Pastor / Faith Leader — Chinatown — C115 (5 pages): “I've seen that faith communities in Oakland are stepping up to support each other, like the Bay Pure Land Buddhist Temple opening their doors for community support.”  _[cp-POP-00763-c115-PRESS-thu-egdfci]_
 - Naomi Sterling, Senior Pastor / Faith Leader — Rockridge — C114 (4 pages): “As a faith leader, I've been focused on our community's response to challenges, and it's heartening to see different faith organizations coming together to support each other.”  _[cp-POP-00759-c114-PRESS-wed-enekbg]_
+
+### the Oaks
+- Adash Stanley, PG / The Oaks — Downtown — C115 (6 pages): “My neighbors seem to be catching the buzz around the Oaks' success.”  _[cp-POP-01023-c115-PRESS-thu-kblcep]_
+- Trenton Nawan, Server — Jack London — C114 (6 pages): “I'm still feeling pretty good about the Oaks.”  _[cp-POP-00273-c114-PRESS-thu-mmooah]_
+- Daniel Cloak, Bakery Worker — West Oakland — C114 (3 pages): “The Oaks trying to be part of the community is a positive step.”  _[cp-POP-00722-c114-PRESS-wed-mjoana]_
 
 ### work
 - Brooklyn Nguyen, Community Programs Coordinator — Fruitvale — C115 (2 pages): “I keep the plant I brought home on my desk, and I watered it today, and I thought, "When did I start keeping a plant at work because I'm here more than I'm home?" That's the grating thing.”  _[cp-POP-00184-c115-night-tue]_
 - Tara Ellison, Journalist — Rockridge — C113 (2 pages): “To be honest, I've just been doing my job as a journalist, covering local news and events.”  _[cp-POP-00546-c113-PRESS-fri-ajabkg]_
-- Rafael Phillips, Nurse aide — Rockridge — C114 (1 page): “I keep telling myself the routine is enough, that keeping my head down at work and flying those contracts on the show for nothing but points will somehow turn it around.”  _[cp-POP-01077-c114-night-wed]_
+- Manfred Owens, Booky — Jack London — C115 (1 page): “My shift starts when the evening crowd picks up and ends when the last table closes.”  _[cp-POP-00028-c115-PRESS-fri-pgchfg]_
 
 ### the council
 - Rosalind Young, Smoke Shop Owner — Laurel — C114 (2 pages): “Honestly, I can't say any city council person has ever reached out to me directly about anything.”  _[cp-POP-00495-c114-PRESS-tue-dcpfnh]_
@@ -87,7 +87,7 @@ _* a name on this Cycle's culture record_
 - Dank Abara, Waiter — San Antonio — C108 (1 page): “--- I've noticed that Marin Tao's rising fame seems to be getting a lot of attention in Oakland, and as a waiter, I've heard people talking about it around San Antonio.”  _[cp-POP-00796-c108-PRESS]_
 
 ## WHERE THE PAGES COME FROM
-West Oakland 45 · Rockridge 37 · Lake Merritt 27 · Fruitvale 32 · Chinatown 30 · Downtown 28 · Jack London 18 · Temescal 24 · Laurel 20 · Uptown 16
+West Oakland 47 · Rockridge 39 · Fruitvale 33 · Lake Merritt 27 · Chinatown 30 · Downtown 29 · Jack London 20 · Temescal 25 · Laurel 21 · Uptown 17
 
-Not counted: MEDIA-clock 263 · office holders 141 · no ledger row 1 · leak-guarded 1
+Not counted: MEDIA-clock 305 · office holders 169 · no ledger row 1 · leak-guarded 1
 

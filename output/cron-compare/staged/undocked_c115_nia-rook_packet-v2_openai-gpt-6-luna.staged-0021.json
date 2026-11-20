@@ -1,0 +1,62 @@
+{
+  "status": "staged",
+  "desk": "undocked",
+  "cycle": "115",
+  "persona": "nia-rook",
+  "byline": "Nia Rook",
+  "bylinePopid": "POP-01076",
+  "article": "output/cron-compare/staged/undocked_c115_nia-rook_packet-v2_openai-gpt-6-luna.staged-0021.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "P Slayer",
+        "role": "mentioned",
+        "popid": "POP-00008"
+      },
+      {
+        "name": "Luis Taz",
+        "role": "mentioned",
+        "popid": "POP-00298",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "West Oakland"
+    ],
+    "claims": [
+      {
+        "claim": "To be honest, my route choices on UNDOCKED Wednesday night were pretty spontaneous. I was flying, reacting to what was around me. I went through a bunch of systems, Sol, Alpha Centauri, and others, and got into a couple of fights. I mined some iron ore, but didn't really come out ahead or behind on credits. It was a solid night, just trying to stay in the game as long as I could. I didn't have a specific strategy going in, just playing it by ear.",
+        "sourceRef": "citizenVoice PRESS P Slayer"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-dbdb7b6cfc56",
+    "draftSha256": "05cb8411cb8a02b1137079f7232f6b9e57f95a1d4054b74b2857838d85f3dd29",
+    "verdict": "output/cron-compare/undocked_c115_nia-rook_packet-v2_openai-gpt-6-luna.rhea.json",
+    "ranAt": "2026-11-13T00:21:40.352Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 350",
+      "words": 364,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "05cb8411cb8a02b1137079f7232f6b9e57f95a1d4054b74b2857838d85f3dd29",
+      "costUsd": 0.001
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-13T00:21:44.059Z"
+}

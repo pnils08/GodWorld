@@ -1,0 +1,38 @@
+{
+  "office": "council_d9",
+  "cycle": 116,
+  "speaker": "Terrence Mobley",
+  "cascadeSummary": "I'm voting YES on the Mayor's Laurel cleanup agenda item with a hard condition attached: INIT-015 stays 'announced,' drafting and Clerk-verified filing are due this cycle, and if verification isn't obtained I'll record the deadline as missed rather than dress it up. The Planning Director's directive is right that I owe Laurel a straight report on the missed pickup, the four district complaints and the actual work completed versus merely proposed — so I'm demanding that record separately and not treating the $6 million as approved money. On Uptown and Laurel I'm holding my read: steady, not a crisis, and I won't manufacture one.",
+  "statements": [
+    {
+      "statementId": "STMT-116-council_d9-001",
+      "type": "vote_statement",
+      "topic": "Laurel cleanup legislation and verified filing",
+      "initiative": "INIT-015",
+      "decision": "YES on keeping Laurel cleanup drafting and Clerk-verified filing on this cycle's required agenda; INIT-015 remains announced, not filed, and a missed verification gets recorded as a missed deadline.",
+      "quote": "A Laurel cleanup becomes real through a defined scope, resident outreach, and a Clerk entry neighbors can verify for themselves.",
+      "fullStatement": "I proposed this measure and I'm not walking away from it, but I won't call it filed when it isn't. INIT-015 is announced — that's it. What I want on this cycle's agenda is completed drafting and a Clerk-verified filing number, with the $6 million legislation defining cleanup scope, direct neighborhood outreach, visible follow-through and maintenance responsibility. If the Clerk's reference doesn't come back this cycle, I want the record to say the filing deadline was missed. That's not a failure of ambition; it's the only way a neighbor in Laurel can check whether the work is real. A promise is not progress until it's on paper, and I'll say that until the paper exists.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-116-council_d9-002",
+      "type": "oversight_statement",
+      "topic": "Laurel patch and clean-up — proposal versus completed work, missed pickup and complaint record",
+      "initiative": "INIT-015",
+      "decision": "Request a public status report separating proposal, filing, authorization and completed work for the Laurel patch and clean-up, identifying what happened on the missed pickup, what the recorded district complaints require, and the responsible offices with next dates.",
+      "quote": "Show me what was actually picked up, what the four complaints actually say, and who answers for the next date — not what the six million dollars is supposed to buy someday.",
+      "fullStatement": "The Planning Director asked me to report back on Laurel, and she's right that I owe it. Here's what I can honestly say from the brief: this measure is announced, not filed; the six million is a proposal, not approved spending; and Laurel's record shows four district complaints alongside reduced storefront activity. What I don't have in front of me is the missed-pickup detail or the complaint ledger, and I'm not going to invent either one. So I'm asking the responsible departments for a public status report that separates proposal from filing, authorization from completed work, and names what happened on the missed pickup, what those four complaints actually require, and which office owns each next step with a date. Laurel residents deserve a document they can read, not a promise they have to take on faith.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-116-council_d9-003",
+      "type": "district_statement",
+      "topic": "District 9 neighborhoods — Laurel and Uptown this cycle",
+      "initiative": null,
+      "decision": "Read D9 as steady: Uptown mildly positive with busy street trade and low crime; Laurel mildly positive with slow trade and low crime; no crisis declaration, no new spending, continued attention to Laurel's commercial pace.",
+      "quote": "Uptown is walking steady and Laurel is still catching its breath — neither one needs me to overstate the case.",
+      "fullStatement": "My approval sits at 62, down a point, and I'm not going to panic about that or blame it on the neighborhoods. Uptown is mildly positive, street trade is busy, crime is low. Laurel is mildly positive too, with slower street trade and low crime. That's a district keeping its footing, not a district on fire. I've said all week I won't manufacture a crisis where the brief shows one isn't there, and I'm holding that line. What Laurel does need is the cleanup scope on paper and honest reporting on the complaints and the slow trade — work I'm pursuing through the legislation and the status report, not through a press release. Stability in Laurel is work, not luck; the way to keep it is records, not rhetoric.",
+      "trackerUpdates": {}
+    }
+  ]
+}

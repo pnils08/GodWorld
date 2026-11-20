@@ -1,0 +1,69 @@
+{
+  "office": "worker_ems_dir",
+  "agentDir": "worker-ems-dir",
+  "holder": "Priya Narang",
+  "popid": "POP-00141",
+  "title": "EMS Director",
+  "date": "2026-11-16",
+  "cycle": 116,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "Here's what the sheets actually say, Priya — and I want to flag three things before anyone builds a story on these totals.\n\n**The illness line is softer than it looks.**\nCitywide illness intakes fall in a straight line: 38 → 37 → 36 → 35 → 35 → 34 → 34 (Cycles 110–116). Bed census falls with it, 77 → 68. But read the neighborhood rows underneath and almost nothing moves — 2 per neighborhood, cycle after cycle. The whole decline lives in four places:\n\n- **Chinatown**: 3 → 3 → 3 → 3 → 3 → 3 → 3 — the highest illness intake in the city every single cycle, and it never decreases.\n- **Downtown**: 2 → 2 → 2 → 2 → 2 → 1 → 1\n- **Jack London**: 2 → 2 → 2 → 1 → 1 → 1 → 1\n- **Brooklyn**: 2 → 2 → 1 → 1 → 1 → 1 → 1 (dropped between C111 and C112)\n- **East Oakland**: 3 → 2 → 2 … (one-time drop after C110)\n\nSo \"citywide illness is improving\" is the wrong read. What we have is flat burden everywhere plus improvement in three or four neighborhoods. Chinatown is a standing outlier and nobody upstream has touched it. That's the finding I'd want on the record, not the aggregate.\n\n**The injury column is empty because the injury column is empty.**\nZero injury intakes, citywide, all 22 neighborhoods, all seven cycles. Not \"low\" — zero. Meanwhile the ambulance sheet logs a workplace accident in Ivy Hill (C110), an Uptown workplace accident (C114), and two workplace accidents in C105 that actually produced hospital admissions (Yu Zen, Deacon Seymour). Those events exist; they just aren't landing as injury intakes in the ledger. That's a data-integrity problem, not a public-health improvement. Before I cite injury numbers to anyone I'd want to know whether EMS events are reaching Hospital_Ledger at all — the intake type and source fields are blank on every admission row, which tells me the feed isn't wired up.\n\n**Heat is zero, and I don't trust it.**\nZero heat intakes across all cycles, all neighborhoods, in the middle of summer arcs. Same story — my instinct is a gap in intake coding rather than an absence of heat illness. I'd hold this loosely.\n\n**Two other things worth flagging:**\n\n- **Uptown, KONO, Lake Merritt, Baylight District** show **0** intakes and **0** sick residents. Our small-population neighborhoods are being skipped. Uptown is mine, and with the A's season packing the bars and galleries, the call volume on my side is up — the ledger doesn't reflect that at all.\n- **Piedmont Ave** has the current live thread: a **medium-severity health spike in C116** on the event ledger, and that's where **Ariana Lee** (42, serious-condition, cancer) is tracked. Chinatown's C113 low-severity spike lines up with its flat-high intake pattern.\n- **Temescal's health-crisis arc** sat at peak tension 10 from C95 through at least C101 on the arc sheet, while Temescal's intake rows never move off 2. Either the arc resolved off-ledger or the two systems are measuring different things. I can't tell you which from here.\n\n**On the record:** the illness trend is real but narrow, the injury and heat zeros are almost certainly missing data, and Chinatown's persistent three-per-cycle is the one number I'd put in front of the board. I'd rather say that precisely than let a clean-looking 38-to-34 line get read as a win.",
+  "moves": [],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-11-16T11:47:02.384Z",
+  "usage": {
+    "prompt_tokens": 42553,
+    "completion_tokens": 1000,
+    "cost": 0.0037
+  },
+  "fellBackFrom": null,
+  "template": "worker/1",
+  "toolTrace": [
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Hospital_Ledger"
+      },
+      "resultChars": 581
+    },
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Domain_Tracker"
+      },
+      "resultChars": 4597
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "hospital intakes illness"
+      },
+      "resultChars": 200
+    },
+    {
+      "tool": "memory_recall",
+      "input": {
+        "query": "hospital"
+      },
+      "resultChars": 2075
+    }
+  ],
+  "memory": {
+    "searchedOn": "hospital intakes ambulance illness injury",
+    "entries": 2,
+    "fromSearch": 0,
+    "newest": 2
+  },
+  "figuresNotHanded": [],
+  "finishReason": "stop",
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00141",
+    "id": "Rdx1JnPBineDgTZTvNm6y9",
+    "customId": "cp-POP-00141-c116-CIVIC-datawake-2026-11-16"
+  }
+}

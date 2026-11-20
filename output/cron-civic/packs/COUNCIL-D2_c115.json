@@ -50,8 +50,24 @@
   "game": {
     "geographyIssue": null,
     "lastMove": {
-      "text": "Latest moves:\nC114 - work INIT-006: applied to the tracker\nLatest terminal outcome (C114):\n- work INIT-006: applied to the tracker",
+      "text": "Latest moves:\nC115 - answer CONF-115-civic-office-council-d2: awaiting the Sunday fold\nLatest terminal outcome (C114):\n- work INIT-006: applied to the tracker",
       "moves": [
+        {
+          "moveId": "MV-115-civic-office-council-d2-2026-11-09:answer:CONF-115-civic-office-council-d2",
+          "cycle": 115,
+          "date": "2026-11-09",
+          "agentDir": "civic-office-council-d2",
+          "popid": "POP-00502",
+          "type": "answer",
+          "payload": {
+            "confrontationId": "CONF-115-civic-office-council-d2",
+            "text": "My stated support for Downtown Economic Revitalization was my public position, not proof that I cast a YES vote. The current initiative record says INIT-008 is failed and vote-scheduled for C114, but this brief does not provide a roll call or identify my vote. The legislative outcome recorded here is that the initiative failed; I cannot claim a specific individual vote or a more detailed decision without that record.",
+            "directiveCycle": 115,
+            "confrontationSeat": "civic-office-council-d2"
+          },
+          "status": "pending",
+          "at": "2026-11-09T11:46:19.125Z"
+        },
         {
           "moveId": "MV-114-civic-office-council-d2-2026-11-03",
           "cycle": 114,
@@ -332,33 +348,15 @@
         }
       ],
       "latestCycle": 115,
-      "open": [
-        {
-          "id": "CONF-115-civic-office-council-d2",
-          "cycle": 115,
-          "agentDir": "civic-office-council-d2",
-          "demand": "Leonard Tran — City Council District 2 — Reconcile your stated YES commitment on Downtown Economic Revitalization with INIT-008’s failed status and identify what legislative decision actually occurred.",
-          "sourceText": "## Leonard Tran — City Council District 2\n\n- **Agent:** `.claude/agents/civic-office-council-d2/`\n- **Address:** Reconcile your stated YES commitment on Downtown Economic Revitalization with INIT-008’s failed status and identify what legislative decision actually occurred.\n- **Why:** Your Cycle 115 Sunday statement supported a binding vote and promised a YES, but the Cycle 115 live tracker lists INIT-008 as failed, still in vote-scheduled phase, with no dated next step.\n- **Acceptance:** The recorded decision and your vote if a vote occurred, or a clear statement that no such record is available; explain the basis for the failed status and whether any Chinatown or Uptown appropriations were actually authorized, without treating proposed allocation tracks as delivered funding.\n- **Promise:** P-1adc611984aee8f1",
-          "src": "output/mara-directives/mara_directive_c115_AUTO.txt",
-          "expectsMove": "answer"
-        }
-      ],
+      "open": [],
       "answeredIds": [
         "CONF-106-civic-office-council-d2",
         "CONF-108-civic-office-council-d2",
         "CONF-109-civic-office-council-d2",
         "CONF-111-civic-office-council-d2",
-        "CONF-104-civic-office-council-d2"
+        "CONF-104-civic-office-council-d2",
+        "CONF-115-civic-office-council-d2"
       ]
-    },
-    "confrontation": {
-      "id": "CONF-115-civic-office-council-d2",
-      "cycle": 115,
-      "agentDir": "civic-office-council-d2",
-      "demand": "Leonard Tran — City Council District 2 — Reconcile your stated YES commitment on Downtown Economic Revitalization with INIT-008’s failed status and identify what legislative decision actually occurred.",
-      "sourceText": "## Leonard Tran — City Council District 2\n\n- **Agent:** `.claude/agents/civic-office-council-d2/`\n- **Address:** Reconcile your stated YES commitment on Downtown Economic Revitalization with INIT-008’s failed status and identify what legislative decision actually occurred.\n- **Why:** Your Cycle 115 Sunday statement supported a binding vote and promised a YES, but the Cycle 115 live tracker lists INIT-008 as failed, still in vote-scheduled phase, with no dated next step.\n- **Acceptance:** The recorded decision and your vote if a vote occurred, or a clear statement that no such record is available; explain the basis for the failed status and whether any Chinatown or Uptown appropriations were actually authorized, without treating proposed allocation tracks as delivered funding.\n- **Promise:** P-1adc611984aee8f1",
-      "src": "output/mara-directives/mara_directive_c115_AUTO.txt",
-      "expectsMove": "answer"
     },
     "conditions": {
       "available": true,
@@ -453,24 +451,6 @@
         }
       ],
       "passedOver": [
-        {
-          "id": "[\"Chinatown\",\"health.sickResidents\"]",
-          "hood": "Chinatown",
-          "conditionKey": "health.sickResidents",
-          "label": "sick residents",
-          "count": 135,
-          "cycle": 115,
-          "passedOverCycle": 110
-        },
-        {
-          "id": "[\"Chinatown\",\"safety.aboveMedianHoods\"]",
-          "hood": "Chinatown",
-          "conditionKey": "safety.aboveMedianHoods",
-          "label": "hoods above city violent-level median",
-          "count": 1,
-          "cycle": 115,
-          "passedOverCycle": 110
-        },
         {
           "id": "[\"Baylight District\",\"health.sickResidents\"]",
           "hood": "Baylight District",
@@ -868,6 +848,13 @@
       },
       "commitments": {
         "priorMoves": [
+          {
+            "moveId": "MV-115-civic-office-council-d2-2026-11-09:answer:CONF-115-civic-office-council-d2",
+            "type": "answer",
+            "status": "pending",
+            "cycle": 115,
+            "retrievalKey": "prior/MV-115-civic-office-council-d2-2026-11-09:answer:CONF-115-civic-office-council-d2"
+          },
           {
             "moveId": "MV-114-civic-office-council-d2-2026-11-03",
             "type": "work",
@@ -1376,6 +1363,22 @@
       }
     },
     "prior": {
+      "MV-115-civic-office-council-d2-2026-11-09:answer:CONF-115-civic-office-council-d2": {
+        "moveId": "MV-115-civic-office-council-d2-2026-11-09:answer:CONF-115-civic-office-council-d2",
+        "cycle": 115,
+        "date": "2026-11-09",
+        "agentDir": "civic-office-council-d2",
+        "popid": "POP-00502",
+        "type": "answer",
+        "payload": {
+          "confrontationId": "CONF-115-civic-office-council-d2",
+          "text": "My stated support for Downtown Economic Revitalization was my public position, not proof that I cast a YES vote. The current initiative record says INIT-008 is failed and vote-scheduled for C114, but this brief does not provide a roll call or identify my vote. The legislative outcome recorded here is that the initiative failed; I cannot claim a specific individual vote or a more detailed decision without that record.",
+          "directiveCycle": 115,
+          "confrontationSeat": "civic-office-council-d2"
+        },
+        "status": "pending",
+        "at": "2026-11-09T11:46:19.125Z"
+      },
       "MV-114-civic-office-council-d2-2026-11-03": {
         "moveId": "MV-114-civic-office-council-d2-2026-11-03",
         "cycle": 114,

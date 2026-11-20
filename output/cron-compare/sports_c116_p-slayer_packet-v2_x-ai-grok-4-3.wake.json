@@ -1,0 +1,61 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "116",
+  "provider": "openrouter",
+  "model": "x-ai/grok-4.3",
+  "configuredWriterModel": "x-ai/grok-4.3",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "p-slayer",
+  "byline": {
+    "name": "P Slayer",
+    "popid": "POP-00008",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 17,
+  "quotesLanded": 3,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "canon_recall",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall"
+  ],
+  "toolCalls": 4,
+  "wordCount": 582,
+  "targetWords": "400-700",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 582,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "33c2ea354662778998ff2e921bb71b3ac8a324b5d0fbf51a37c2321bd51a3daf",
+    "costUsd": 0.001
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/3 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/sports_c116_p-slayer_packet-v2_x-ai-grok-4-3.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": " '.env'] }\n{\n  \"popId\": \"POP-00008\",\n  \"name\": \"P Slayer\",\n  \"recorded\": true,\n  \"text\": \"filed: I sat on the low wall outside the Lake Merritt station, phone still hot in my hand from the notifica\"\n}"
+  },
+  "ranAt": "2026-11-19T00:19:25.402Z"
+}

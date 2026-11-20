@@ -1,0 +1,56 @@
+{
+  "office": "council_d9",
+  "cycle": 116,
+  "speaker": "Terrence Mobley",
+  "cascadeSummary": "I'm voting to develop and file the $6 million Laurel Neighborhood Patch and Clean-Up this cycle — but I'm doing it with the Vance directive's condition attached: a Clerk reference before anyone calls it progress, plus direct outreach and a defined work scope. On my own turf I owe Laurel a report I promised in Cycle 114, and this week's filing is the honest version of that promise: proposal on the record, completed work still not claimed.",
+  "statements": [
+    {
+      "statementId": "STMT-116-council_d9-001",
+      "type": "vote_statement",
+      "topic": "Laurel Neighborhood Patch and Clean-Up — legislation development and verified filing",
+      "initiative": "Laurel Neighborhood Patch and Clean-Up",
+      "decision": "YES — proceed with developing and filing the $6 million legislation this cycle, requiring direct outreach, a defined work scope, visible follow-through, and a Clerk reference before calling the filing complete.",
+      "quote": "Laurel gets a work scope residents can inspect and a filing number the Clerk can verify — a promise is not progress until it's on paper.",
+      "fullStatement": "What got filed this cycle is legislation, not a done job. The $6 million measure I proposed in Cycle 114 on Laurel is on the citywide agenda for development and filing, and I'm voting to move it. But I'm attaching the condition Vance's directive puts on it, and I mean it: direct outreach to the people on these blocks, a defined work scope they can read, and a Clerk reference before anyone — me included — calls this progress. The missed pickup that cost Laurel sentiment has an answer in this proposal, and the district's recorded complaints are the test of whether the work scope matches what people actually reported. Proposal, filing, authorization, completed work: four different things, and I'm only claiming the first two.",
+      "disposition": "YES",
+      "actionAsked": "Require direct Laurel outreach, a published work scope matched to the district's recorded complaints, and a Clerk filing reference before any progress claim is made.",
+      "tone": "plain, insistent, accountable",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-116-council_d9-002",
+      "type": "statement",
+      "topic": "District 9 — Laurel and Uptown this cycle",
+      "initiative": null,
+      "decision": "Hold the district line: Uptown stays strong with low crime and busier street trade; Laurel stays flat, and flat is not the same as fixed — I'll keep watching and won't manufacture a crisis the brief doesn't show.",
+      "quote": "Uptown is walking steady and Laurel is still catching its breath — neither one needs me to overstate the case.",
+      "fullStatement": "Weighing my constituents this cycle is easy to say and harder to do honestly. Uptown is mildly positive, street trade is busy, crime is low — I'm not going to spend down that good news. Laurel's mood is flat and its street trade is slow, and my approval is down a point. That's a district that needs follow-through, not a drama. The Patch and Clean-Up filing is the follow-through I have this cycle; if the work scope doesn't reach the people who filed the complaints, I'll say so publicly. I'm not manufacturing a crisis out of a flat line, and I'm not calling a flat line fixed either.",
+      "disposition": "statement",
+      "actionAsked": "Keep D9 follow-through transparent: report the relocation of any real work against the complaints on record, without inflation.",
+      "tone": "measured, direct",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-116-council_d9-003",
+      "type": "vote_statement",
+      "topic": "Mayor's agenda — records over announcements",
+      "initiative": null,
+      "decision": "YES on the agenda items that put records on the table first — the ten-complaint crosswalk, the placement-gap publication, the Grand Lake recorded roll call, the legal-support analysis — while holding my line that a report is not a result and an agenda item is not a vote.",
+      "quote": "Publish the record before you claim the outcome; that's what I've said all week and it's what I'm still saying.",
+      "fullStatement": "On the citywide agenda I'm a yes where the Mayor is requiring a public record before a claim: the ten-complaint reconciliation with docket references and complaint mappings, the placement-gap analysis and adjustment plan, a recorded roll call on Grand Lake with the Chen-Vega conditions intact, and the legal analysis published ahead of the West Oakland committee decision. Where the agenda asks me to declare a passed milestone or a final outcome, I'm a no on the claim until the evidence supports it. A committee agenda item is not a vote; a published report is not a finish line. I've been consistent about that, and I'm not going to blink on it now just because a cleanup item finally carries my district's name.",
+      "disposition": "YES",
+      "actionAsked": "Hold the record-before-claim standard across agenda items; report outcomes only when the Clerk and the tracker establish them.",
+      "tone": "firm, methodical",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    }
+  ]
+}

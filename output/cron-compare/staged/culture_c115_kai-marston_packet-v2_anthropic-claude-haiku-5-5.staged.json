@@ -1,0 +1,71 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "115",
+  "persona": "kai-marston",
+  "byline": "Kai Marston",
+  "bylinePopid": "POP-00158",
+  "article": "output/cron-compare/staged/culture_c115_kai-marston_packet-v2_anthropic-claude-haiku-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Benji Dillon",
+        "role": "quoted-source",
+        "popid": "POP-00018"
+      },
+      {
+        "name": "Darrin Davis",
+        "role": "quoted-source",
+        "popid": "POP-00021"
+      },
+      {
+        "name": "Anthony Raines",
+        "role": "quoted-source",
+        "popid": "POP-00017"
+      },
+      {
+        "name": "Vinnie Keane",
+        "role": "mentioned",
+        "popid": "POP-00001",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Rockridge"
+    ],
+    "claims": [
+      {
+        "claim": "To be honest, I've noticed people recognizing me more often around Rockridge and at the grocery store. It feels a bit surreal, but I'm trying to stay grounded. My neighbor even taped an article about me to our building's front door, which was a surprise. I'm just trying to keep doing what I do and not let it change me too much.",
+        "sourceRef": "citizenVoice PRESS Benji Dillon"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-309fdf2dbbe9",
+    "draftSha256": "f647ab957201174fba6d8392178251f1942c2afac603e0ea16455b357847a4b7",
+    "verdict": "output/cron-compare/culture_c115_kai-marston_packet-v2_anthropic-claude-haiku-5-5.rhea.json",
+    "ranAt": "2026-11-14T00:16:26.683Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 500",
+      "words": 739,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "f647ab957201174fba6d8392178251f1942c2afac603e0ea16455b357847a4b7",
+      "costUsd": 0.0011
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-14T00:16:30.883Z"
+}

@@ -1,7 +1,7 @@
 [
   {
     "pop": "POP-00263",
-    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00263\",\"name\":\"Omar Amici\",\"role\":\"Construction laborer\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Ines Sorensen\",\"question\":\"To be honest, the changes in Uptown have me feeling a bit uneasy. The streets are busier than ever, and it seems like every other place is a for-rent sign. Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-voices\",\"hood\":null,\"focus\":\"The reaction of Uptown residents to the A's trade of Carmen Mesa\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch fd0b35\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Omar Amici — Construction laborer — Uptown\",\"evidence\":[{\"id\":\"EV-4febec3567\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch fd0b35\",\"text\":\"Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Omar Amici, Construction laborer, Uptown (POP-00263) — 16 pages; latest to a reporter, C114; you ran them C114: “To be honest, the changes in Uptown have me feeling a bit uneasy. The streets are busier than ever, and it seems like every other place is a for-rent…”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-eb3d2d666c84\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"Voices roster, C115: 451 citizens with pages, 1 new since your last piece\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch fd0b35\",\"id\":\"F-78ddf221b586\"},{\"t\":\"FACT\",\"text\":\"Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch fd0b35\",\"id\":\"F-a9c4837ce2f1\"},{\"t\":\"FACT\",\"text\":\"Elijah Brown, Electrician, Rockridge (POP-01195) — 2 pages; latest the night page, a question they carry, C115; new since your last piece: “Does that porch light always flicker, or have I just never looked up long enough to see it?”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-3baf9bdd9c9a\"},{\"t\":\"FACT\",\"text\":\"Amara Keane, Pianist, Philanthropist, Grand Lake (POP-00002) — 9 pages; latest in conversation, C115: “Hey, you. That's a sweet memory—those early mornings were something else. My day's shaping up nicely, actually; I've got a quiet afternoon with some…”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-7e94b2f160c1\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane, Former Designated Hitter, Oakland A's Legend, Grand Lake (POP-00001) — 33 pages; latest in conversation, C115; Lives carried a moment the record kept this Cycle: “Amara, hey. I was just thinking about you—walking the lake this morning and remembering how we used to grab coffee before my early workouts. How's…”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-e52faa4ea5fd\"},{\"t\":\"FACT\",\"text\":\"Richie Ramiro, First Baseman, Midland RockHounds (AA), Uptown (POP-00085) — 1 page; latest to a reporter, C115; Lives carried the new household this Cycle: “I've seen Vinnie Keane around Grand Lake a few times since he retired. He seems to be enjoying life, taking it easy. I don't know him personally, but…”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-56bf73a7f42c\"},{\"t\":\"FACT\",\"text\":\"Omar Amici — Construction laborer — Uptown\",\"src\":\"Simulation_Ledger profile for POP-00263\",\"id\":\"F-49cb41ed222b\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00263\",\"name\":\"Omar Amici\",\"role\":\"Construction laborer\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Ines Sorensen\",\"question\":\"How are residents feeling about the changes in Uptown? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-voices\",\"hood\":null,\"focus\":\"The human stories behind Oakland's sports and community developments.\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch cddeb2\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Omar Amici — Construction laborer — Uptown\",\"evidence\":[{\"id\":\"EV-fbc79ac3eb\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch cddeb2\",\"text\":\"Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Omar Amici, Construction laborer, Uptown (POP-00263) — 18 pages; latest to a reporter, C115; you ran them C115: “is shifting away from the people who've been here all along. It's like the neighborhood I knew is being priced out.”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-a9022b7e0d01\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"Voices roster, C115: 474 citizens with pages, 2 new since your last piece\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch cddeb2\",\"id\":\"F-905fe046137a\"},{\"t\":\"FACT\",\"text\":\"Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch cddeb2\",\"id\":\"F-05861e1ad875\"},{\"t\":\"FACT\",\"text\":\"Ross Cabral, Catcher, Las Vegas Aviators (AAA), Temescal (POP-00055) — 4 pages; latest the morning page, a question they carry, C115; new since your last piece: “Will that call ever come saying it was a clerical error, or am I just a piece on a board?”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-1384d3bb6598\"},{\"t\":\"FACT\",\"text\":\"Kendra Lyle-Nnamdi, Police Sergeant, East Oakland (POP-01143) — 2 pages; latest the night page, C115; new since your last piece: “The fog's thick tonight, rolling in off the bay just like it always does. I'm standing at the edge of the old docks, where the cranes look like…”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-2dda882b2a76\"},{\"t\":\"FACT\",\"text\":\"Jessica Brooks, Herbalist, Jack London (POP-00709) — 1 page; latest in conversation, C115: “Sonia! It's so good to hear your voice. I've been keeping busy—the shop's been steady, and Camila's doing well. I actually spent this morning just…”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-762db9d17d21\"},{\"t\":\"FACT\",\"text\":\"Elijah Brown, Electrician, Rockridge (POP-01195) — 4 pages; latest to a reporter, C115: “I flew on UNDOCKED Thursday night and went through a bunch of systems until the show's time ran out. I ended up even on credits. My standing is 3rd…”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-82d3890c53d1\"},{\"t\":\"FACT\",\"text\":\"Omar Amici — Construction laborer — Uptown\",\"src\":\"Simulation_Ledger profile for POP-00263\",\"id\":\"F-49cb41ed222b\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
     "packetContract": "LEP/2",
     "inputPacket": {
       "v": "LEP/2",
@@ -15,13 +15,13 @@
       "task": {
         "goal": "Answer one reporter question in your own first-person voice from your simulated life",
         "reporter": "Ines Sorensen",
-        "question": "To be honest, the changes in Uptown have me feeling a bit uneasy. The streets are busier than ever, and it seems like every other place is a for-rent sign. Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        "question": "How are residents feeling about the changes in Uptown? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
       },
       "signal": {
         "kind": "beat-voices",
         "hood": null,
-        "focus": "The reaction of Uptown residents to the A's trade of Carmen Mesa",
-        "src": "output/citizen_pages/index.jsonl (pages, whole store) batch fd0b35"
+        "focus": "The human stories behind Oakland's sports and community developments.",
+        "src": "output/citizen_pages/index.jsonl (pages, whole store) batch cddeb2"
       },
       "exposure": {
         "basis": [
@@ -30,8 +30,8 @@
         "self": "Omar Amici — Construction laborer — Uptown",
         "evidence": [
           {
-            "id": "EV-4febec3567",
-            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch fd0b35",
+            "id": "EV-fbc79ac3eb",
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch cddeb2",
             "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame."
           }
         ],
@@ -40,9 +40,9 @@
       "known": [
         {
           "t": "FACT",
-          "text": "Omar Amici, Construction laborer, Uptown (POP-00263) — 16 pages; latest to a reporter, C114; you ran them C114: “To be honest, the changes in Uptown have me feeling a bit uneasy. The streets are busier than ever, and it seems like every other place is a for-rent…”",
+          "text": "Omar Amici, Construction laborer, Uptown (POP-00263) — 18 pages; latest to a reporter, C115; you ran them C115: “is shifting away from the people who've been here all along. It's like the neighborhood I knew is being priced out.”",
           "src": "output/citizen_pages/index.jsonl roster",
-          "id": "F-eb3d2d666c84"
+          "id": "F-a9022b7e0d01"
         },
         {
           "t": "FACT",
@@ -52,39 +52,39 @@
         },
         {
           "t": "FACT",
-          "text": "Voices roster, C115: 451 citizens with pages, 1 new since your last piece",
-          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch fd0b35",
-          "id": "F-78ddf221b586"
+          "text": "Voices roster, C115: 474 citizens with pages, 2 new since your last piece",
+          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch cddeb2",
+          "id": "F-905fe046137a"
         },
         {
           "t": "FACT",
           "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.",
-          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch fd0b35",
-          "id": "F-a9c4837ce2f1"
+          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch cddeb2",
+          "id": "F-05861e1ad875"
         },
         {
           "t": "FACT",
-          "text": "Elijah Brown, Electrician, Rockridge (POP-01195) — 2 pages; latest the night page, a question they carry, C115; new since your last piece: “Does that porch light always flicker, or have I just never looked up long enough to see it?”",
+          "text": "Ross Cabral, Catcher, Las Vegas Aviators (AAA), Temescal (POP-00055) — 4 pages; latest the morning page, a question they carry, C115; new since your last piece: “Will that call ever come saying it was a clerical error, or am I just a piece on a board?”",
           "src": "output/citizen_pages/index.jsonl roster",
-          "id": "F-3baf9bdd9c9a"
+          "id": "F-1384d3bb6598"
         },
         {
           "t": "FACT",
-          "text": "Amara Keane, Pianist, Philanthropist, Grand Lake (POP-00002) — 9 pages; latest in conversation, C115: “Hey, you. That's a sweet memory—those early mornings were something else. My day's shaping up nicely, actually; I've got a quiet afternoon with some…”",
+          "text": "Kendra Lyle-Nnamdi, Police Sergeant, East Oakland (POP-01143) — 2 pages; latest the night page, C115; new since your last piece: “The fog's thick tonight, rolling in off the bay just like it always does. I'm standing at the edge of the old docks, where the cranes look like…”",
           "src": "output/citizen_pages/index.jsonl roster",
-          "id": "F-7e94b2f160c1"
+          "id": "F-2dda882b2a76"
         },
         {
           "t": "FACT",
-          "text": "Vinnie Keane, Former Designated Hitter, Oakland A's Legend, Grand Lake (POP-00001) — 33 pages; latest in conversation, C115; Lives carried a moment the record kept this Cycle: “Amara, hey. I was just thinking about you—walking the lake this morning and remembering how we used to grab coffee before my early workouts. How's…”",
+          "text": "Jessica Brooks, Herbalist, Jack London (POP-00709) — 1 page; latest in conversation, C115: “Sonia! It's so good to hear your voice. I've been keeping busy—the shop's been steady, and Camila's doing well. I actually spent this morning just…”",
           "src": "output/citizen_pages/index.jsonl roster",
-          "id": "F-e52faa4ea5fd"
+          "id": "F-762db9d17d21"
         },
         {
           "t": "FACT",
-          "text": "Richie Ramiro, First Baseman, Midland RockHounds (AA), Uptown (POP-00085) — 1 page; latest to a reporter, C115; Lives carried the new household this Cycle: “I've seen Vinnie Keane around Grand Lake a few times since he retired. He seems to be enjoying life, taking it easy. I don't know him personally, but…”",
+          "text": "Elijah Brown, Electrician, Rockridge (POP-01195) — 4 pages; latest to a reporter, C115: “I flew on UNDOCKED Thursday night and went through a bunch of systems until the show's time ran out. I ended up even on credits. My standing is 3rd…”",
           "src": "output/citizen_pages/index.jsonl roster",
-          "id": "F-56bf73a7f42c"
+          "id": "F-82d3890c53d1"
         },
         {
           "t": "FACT",
@@ -149,7 +149,7 @@
   },
   {
     "pop": "POP-00141",
-    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00141\",\"name\":\"Priya Narang\",\"role\":\"EMS DIRECTOR\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Ines Sorensen\",\"question\":\"Using only the supplied facts, what about \\\"The reaction of Uptown residents to the A's trade of Carmen Mesa\\\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-voices\",\"hood\":null,\"focus\":\"The reaction of Uptown residents to the A's trade of Carmen Mesa\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch fd0b35\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Priya Narang — EMS DIRECTOR — Uptown\",\"evidence\":[{\"id\":\"EV-732c411e64\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch fd0b35\",\"text\":\"Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Priya Narang, EMS DIRECTOR, Uptown (POP-00141) — 16 pages; latest to a reporter, C114; you ran them C114: “The A's winning season really brings Uptown together. When they're doing well, the whole neighborhood feels it. The bars and galleries stay packed,…”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-688899d1e123\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"Voices roster, C115: 451 citizens with pages, 1 new since your last piece\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch fd0b35\",\"id\":\"F-78ddf221b586\"},{\"t\":\"FACT\",\"text\":\"Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch fd0b35\",\"id\":\"F-a9c4837ce2f1\"},{\"t\":\"FACT\",\"text\":\"Elijah Brown, Electrician, Rockridge (POP-01195) — 2 pages; latest the night page, a question they carry, C115; new since your last piece: “Does that porch light always flicker, or have I just never looked up long enough to see it?”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-3baf9bdd9c9a\"},{\"t\":\"FACT\",\"text\":\"Amara Keane, Pianist, Philanthropist, Grand Lake (POP-00002) — 9 pages; latest in conversation, C115: “Hey, you. That's a sweet memory—those early mornings were something else. My day's shaping up nicely, actually; I've got a quiet afternoon with some…”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-7e94b2f160c1\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane, Former Designated Hitter, Oakland A's Legend, Grand Lake (POP-00001) — 33 pages; latest in conversation, C115; Lives carried a moment the record kept this Cycle: “Amara, hey. I was just thinking about you—walking the lake this morning and remembering how we used to grab coffee before my early workouts. How's…”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-e52faa4ea5fd\"},{\"t\":\"FACT\",\"text\":\"Richie Ramiro, First Baseman, Midland RockHounds (AA), Uptown (POP-00085) — 1 page; latest to a reporter, C115; Lives carried the new household this Cycle: “I've seen Vinnie Keane around Grand Lake a few times since he retired. He seems to be enjoying life, taking it easy. I don't know him personally, but…”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-56bf73a7f42c\"},{\"t\":\"FACT\",\"text\":\"Priya Narang — EMS DIRECTOR — Uptown\",\"src\":\"Simulation_Ledger profile for POP-00141\",\"id\":\"F-823de4e3c246\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00141\",\"name\":\"Priya Narang\",\"role\":\"EMS DIRECTOR\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Ines Sorensen\",\"question\":\"Using only the supplied facts, what about \\\"The human stories behind Oakland's sports and community developments.\\\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-voices\",\"hood\":null,\"focus\":\"The human stories behind Oakland's sports and community developments.\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch cddeb2\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Priya Narang — EMS DIRECTOR — Uptown\",\"evidence\":[{\"id\":\"EV-5fe7ba61ad\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch cddeb2\",\"text\":\"Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Priya Narang, EMS DIRECTOR, Uptown (POP-00141) — 20 pages; latest to a reporter, C115; you ran them C115: “The A's winning season still brings a lot of energy to Uptown. I started a jar on my counter to save up for season tickets next year. It's not just…”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-ffb10255b36a\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"Voices roster, C115: 474 citizens with pages, 2 new since your last piece\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch cddeb2\",\"id\":\"F-905fe046137a\"},{\"t\":\"FACT\",\"text\":\"Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch cddeb2\",\"id\":\"F-05861e1ad875\"},{\"t\":\"FACT\",\"text\":\"Ross Cabral, Catcher, Las Vegas Aviators (AAA), Temescal (POP-00055) — 4 pages; latest the morning page, a question they carry, C115; new since your last piece: “Will that call ever come saying it was a clerical error, or am I just a piece on a board?”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-1384d3bb6598\"},{\"t\":\"FACT\",\"text\":\"Kendra Lyle-Nnamdi, Police Sergeant, East Oakland (POP-01143) — 2 pages; latest the night page, C115; new since your last piece: “The fog's thick tonight, rolling in off the bay just like it always does. I'm standing at the edge of the old docks, where the cranes look like…”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-2dda882b2a76\"},{\"t\":\"FACT\",\"text\":\"Jessica Brooks, Herbalist, Jack London (POP-00709) — 1 page; latest in conversation, C115: “Sonia! It's so good to hear your voice. I've been keeping busy—the shop's been steady, and Camila's doing well. I actually spent this morning just…”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-762db9d17d21\"},{\"t\":\"FACT\",\"text\":\"Elijah Brown, Electrician, Rockridge (POP-01195) — 4 pages; latest to a reporter, C115: “I flew on UNDOCKED Thursday night and went through a bunch of systems until the show's time ran out. I ended up even on credits. My standing is 3rd…”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-82d3890c53d1\"},{\"t\":\"FACT\",\"text\":\"Priya Narang — EMS DIRECTOR — Uptown\",\"src\":\"Simulation_Ledger profile for POP-00141\",\"id\":\"F-823de4e3c246\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
     "packetContract": "LEP/2",
     "inputPacket": {
       "v": "LEP/2",
@@ -163,13 +163,13 @@
       "task": {
         "goal": "Answer one reporter question in your own first-person voice from your simulated life",
         "reporter": "Ines Sorensen",
-        "question": "Using only the supplied facts, what about \"The reaction of Uptown residents to the A's trade of Carmen Mesa\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet."
+        "question": "Using only the supplied facts, what about \"The human stories behind Oakland's sports and community developments.\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet."
       },
       "signal": {
         "kind": "beat-voices",
         "hood": null,
-        "focus": "The reaction of Uptown residents to the A's trade of Carmen Mesa",
-        "src": "output/citizen_pages/index.jsonl (pages, whole store) batch fd0b35"
+        "focus": "The human stories behind Oakland's sports and community developments.",
+        "src": "output/citizen_pages/index.jsonl (pages, whole store) batch cddeb2"
       },
       "exposure": {
         "basis": [
@@ -178,8 +178,8 @@
         "self": "Priya Narang — EMS DIRECTOR — Uptown",
         "evidence": [
           {
-            "id": "EV-732c411e64",
-            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch fd0b35",
+            "id": "EV-5fe7ba61ad",
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch cddeb2",
             "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame."
           }
         ],
@@ -188,9 +188,9 @@
       "known": [
         {
           "t": "FACT",
-          "text": "Priya Narang, EMS DIRECTOR, Uptown (POP-00141) — 16 pages; latest to a reporter, C114; you ran them C114: “The A's winning season really brings Uptown together. When they're doing well, the whole neighborhood feels it. The bars and galleries stay packed,…”",
+          "text": "Priya Narang, EMS DIRECTOR, Uptown (POP-00141) — 20 pages; latest to a reporter, C115; you ran them C115: “The A's winning season still brings a lot of energy to Uptown. I started a jar on my counter to save up for season tickets next year. It's not just…”",
           "src": "output/citizen_pages/index.jsonl roster",
-          "id": "F-688899d1e123"
+          "id": "F-ffb10255b36a"
         },
         {
           "t": "FACT",
@@ -200,193 +200,45 @@
         },
         {
           "t": "FACT",
-          "text": "Voices roster, C115: 451 citizens with pages, 1 new since your last piece",
-          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch fd0b35",
-          "id": "F-78ddf221b586"
+          "text": "Voices roster, C115: 474 citizens with pages, 2 new since your last piece",
+          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch cddeb2",
+          "id": "F-905fe046137a"
         },
         {
           "t": "FACT",
           "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.",
-          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch fd0b35",
-          "id": "F-a9c4837ce2f1"
+          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch cddeb2",
+          "id": "F-05861e1ad875"
         },
         {
           "t": "FACT",
-          "text": "Elijah Brown, Electrician, Rockridge (POP-01195) — 2 pages; latest the night page, a question they carry, C115; new since your last piece: “Does that porch light always flicker, or have I just never looked up long enough to see it?”",
+          "text": "Ross Cabral, Catcher, Las Vegas Aviators (AAA), Temescal (POP-00055) — 4 pages; latest the morning page, a question they carry, C115; new since your last piece: “Will that call ever come saying it was a clerical error, or am I just a piece on a board?”",
           "src": "output/citizen_pages/index.jsonl roster",
-          "id": "F-3baf9bdd9c9a"
+          "id": "F-1384d3bb6598"
         },
         {
           "t": "FACT",
-          "text": "Amara Keane, Pianist, Philanthropist, Grand Lake (POP-00002) — 9 pages; latest in conversation, C115: “Hey, you. That's a sweet memory—those early mornings were something else. My day's shaping up nicely, actually; I've got a quiet afternoon with some…”",
+          "text": "Kendra Lyle-Nnamdi, Police Sergeant, East Oakland (POP-01143) — 2 pages; latest the night page, C115; new since your last piece: “The fog's thick tonight, rolling in off the bay just like it always does. I'm standing at the edge of the old docks, where the cranes look like…”",
           "src": "output/citizen_pages/index.jsonl roster",
-          "id": "F-7e94b2f160c1"
+          "id": "F-2dda882b2a76"
         },
         {
           "t": "FACT",
-          "text": "Vinnie Keane, Former Designated Hitter, Oakland A's Legend, Grand Lake (POP-00001) — 33 pages; latest in conversation, C115; Lives carried a moment the record kept this Cycle: “Amara, hey. I was just thinking about you—walking the lake this morning and remembering how we used to grab coffee before my early workouts. How's…”",
+          "text": "Jessica Brooks, Herbalist, Jack London (POP-00709) — 1 page; latest in conversation, C115: “Sonia! It's so good to hear your voice. I've been keeping busy—the shop's been steady, and Camila's doing well. I actually spent this morning just…”",
           "src": "output/citizen_pages/index.jsonl roster",
-          "id": "F-e52faa4ea5fd"
+          "id": "F-762db9d17d21"
         },
         {
           "t": "FACT",
-          "text": "Richie Ramiro, First Baseman, Midland RockHounds (AA), Uptown (POP-00085) — 1 page; latest to a reporter, C115; Lives carried the new household this Cycle: “I've seen Vinnie Keane around Grand Lake a few times since he retired. He seems to be enjoying life, taking it easy. I don't know him personally, but…”",
+          "text": "Elijah Brown, Electrician, Rockridge (POP-01195) — 4 pages; latest to a reporter, C115: “I flew on UNDOCKED Thursday night and went through a bunch of systems until the show's time ran out. I ended up even on credits. My standing is 3rd…”",
           "src": "output/citizen_pages/index.jsonl roster",
-          "id": "F-56bf73a7f42c"
+          "id": "F-82d3890c53d1"
         },
         {
           "t": "FACT",
           "text": "Priya Narang — EMS DIRECTOR — Uptown",
           "src": "Simulation_Ledger profile for POP-00141",
           "id": "F-823de4e3c246"
-        },
-        {
-          "t": "FACT",
-          "text": "Calendar: Y3C11, Spring, holiday=none",
-          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
-          "id": "F-82d77e9a4a71"
-        }
-      ],
-      "limits": {
-        "quoteEligible": true,
-        "assert": [
-          "FACT already supplied",
-          "your own feeling",
-          "your own intention"
-        ],
-        "classify": [
-          "FACT",
-          "OBSERVATION",
-          "INTERPRETATION",
-          "INTENTION",
-          "LEAD"
-        ],
-        "never": [
-          "invent a named person",
-          "invent a public event",
-          "invent a date",
-          "invent a count",
-          "turn suspicion into observation"
-        ],
-        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
-      },
-      "output": {
-        "contract": "CITIZEN_INTERVIEW/1",
-        "format": "json-only",
-        "schema": {
-          "answer": "quote|abstain",
-          "quote": "your exact first-person response; null on abstain",
-          "fact_ids": [
-            "one or more supplied fact ids that prompted the response"
-          ],
-          "basis": "lived-context|direct-reaction|null",
-          "unverifiedLead": [
-            "concrete follow-up lead that must not be printed as fact"
-          ],
-          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
-        },
-        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
-      }
-    },
-    "evidenceBound": true,
-    "interviewMode": true,
-    "livedContextAllowed": true,
-    "model": "meta-llama/llama-4-maverick",
-    "record": true,
-    "maxTokens": 420
-  },
-  {
-    "pop": "POP-00346",
-    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00346\",\"name\":\"Ingmar Jordan\",\"role\":\"Spoken Word Poet\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Ines Sorensen\",\"question\":\"To be honest, I've lost on the UNDOCKED book, but it's not really on my mind when I'm thinking about the neighborhood changes. Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-voices\",\"hood\":null,\"focus\":\"The reaction of Uptown residents to the A's trade of Carmen Mesa\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch fd0b35\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Ingmar Jordan — Spoken Word Poet — Uptown\",\"evidence\":[{\"id\":\"EV-fb55a8f088\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch fd0b35\",\"text\":\"Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Ingmar Jordan, Spoken Word Poet, Uptown (POP-00346) — 6 pages; latest to a reporter, C114; you ran them C114: “To be honest, I've lost on the UNDOCKED book, but it's not really on my mind when I'm thinking about the neighborhood changes.”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-96fa582afc0e\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"Voices roster, C115: 451 citizens with pages, 1 new since your last piece\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch fd0b35\",\"id\":\"F-78ddf221b586\"},{\"t\":\"FACT\",\"text\":\"Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.\",\"src\":\"output/citizen_pages/index.jsonl (pages, whole store) batch fd0b35\",\"id\":\"F-a9c4837ce2f1\"},{\"t\":\"FACT\",\"text\":\"Elijah Brown, Electrician, Rockridge (POP-01195) — 2 pages; latest the night page, a question they carry, C115; new since your last piece: “Does that porch light always flicker, or have I just never looked up long enough to see it?”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-3baf9bdd9c9a\"},{\"t\":\"FACT\",\"text\":\"Amara Keane, Pianist, Philanthropist, Grand Lake (POP-00002) — 9 pages; latest in conversation, C115: “Hey, you. That's a sweet memory—those early mornings were something else. My day's shaping up nicely, actually; I've got a quiet afternoon with some…”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-7e94b2f160c1\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane, Former Designated Hitter, Oakland A's Legend, Grand Lake (POP-00001) — 33 pages; latest in conversation, C115; Lives carried a moment the record kept this Cycle: “Amara, hey. I was just thinking about you—walking the lake this morning and remembering how we used to grab coffee before my early workouts. How's…”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-e52faa4ea5fd\"},{\"t\":\"FACT\",\"text\":\"Richie Ramiro, First Baseman, Midland RockHounds (AA), Uptown (POP-00085) — 1 page; latest to a reporter, C115; Lives carried the new household this Cycle: “I've seen Vinnie Keane around Grand Lake a few times since he retired. He seems to be enjoying life, taking it easy. I don't know him personally, but…”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-56bf73a7f42c\"},{\"t\":\"FACT\",\"text\":\"Ingmar Jordan — Spoken Word Poet — Uptown\",\"src\":\"Simulation_Ledger profile for POP-00346\",\"id\":\"F-97484b54bb71\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
-    "packetContract": "LEP/2",
-    "inputPacket": {
-      "v": "LEP/2",
-      "wake": "W2",
-      "actor": {
-        "id": "POP-00346",
-        "name": "Ingmar Jordan",
-        "role": "Spoken Word Poet",
-        "desk": null
-      },
-      "task": {
-        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
-        "reporter": "Ines Sorensen",
-        "question": "To be honest, I've lost on the UNDOCKED book, but it's not really on my mind when I'm thinking about the neighborhood changes. Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
-      },
-      "signal": {
-        "kind": "beat-voices",
-        "hood": null,
-        "focus": "The reaction of Uptown residents to the A's trade of Carmen Mesa",
-        "src": "output/citizen_pages/index.jsonl (pages, whole store) batch fd0b35"
-      },
-      "exposure": {
-        "basis": [
-          "assignment"
-        ],
-        "self": "Ingmar Jordan — Spoken Word Poet — Uptown",
-        "evidence": [
-          {
-            "id": "EV-fb55a8f088",
-            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch fd0b35",
-            "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame."
-          }
-        ],
-        "editorialTarget": true
-      },
-      "known": [
-        {
-          "t": "FACT",
-          "text": "Ingmar Jordan, Spoken Word Poet, Uptown (POP-00346) — 6 pages; latest to a reporter, C114; you ran them C114: “To be honest, I've lost on the UNDOCKED book, but it's not really on my mind when I'm thinking about the neighborhood changes.”",
-          "src": "output/citizen_pages/index.jsonl roster",
-          "id": "F-96fa582afc0e"
-        },
-        {
-          "t": "FACT",
-          "text": "Current cycle: C115",
-          "src": "cron-desk-run explicit cycle argument",
-          "id": "F-bc84fc0b7718"
-        },
-        {
-          "t": "FACT",
-          "text": "Voices roster, C115: 451 citizens with pages, 1 new since your last piece",
-          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch fd0b35",
-          "id": "F-78ddf221b586"
-        },
-        {
-          "t": "FACT",
-          "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.",
-          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch fd0b35",
-          "id": "F-a9c4837ce2f1"
-        },
-        {
-          "t": "FACT",
-          "text": "Elijah Brown, Electrician, Rockridge (POP-01195) — 2 pages; latest the night page, a question they carry, C115; new since your last piece: “Does that porch light always flicker, or have I just never looked up long enough to see it?”",
-          "src": "output/citizen_pages/index.jsonl roster",
-          "id": "F-3baf9bdd9c9a"
-        },
-        {
-          "t": "FACT",
-          "text": "Amara Keane, Pianist, Philanthropist, Grand Lake (POP-00002) — 9 pages; latest in conversation, C115: “Hey, you. That's a sweet memory—those early mornings were something else. My day's shaping up nicely, actually; I've got a quiet afternoon with some…”",
-          "src": "output/citizen_pages/index.jsonl roster",
-          "id": "F-7e94b2f160c1"
-        },
-        {
-          "t": "FACT",
-          "text": "Vinnie Keane, Former Designated Hitter, Oakland A's Legend, Grand Lake (POP-00001) — 33 pages; latest in conversation, C115; Lives carried a moment the record kept this Cycle: “Amara, hey. I was just thinking about you—walking the lake this morning and remembering how we used to grab coffee before my early workouts. How's…”",
-          "src": "output/citizen_pages/index.jsonl roster",
-          "id": "F-e52faa4ea5fd"
-        },
-        {
-          "t": "FACT",
-          "text": "Richie Ramiro, First Baseman, Midland RockHounds (AA), Uptown (POP-00085) — 1 page; latest to a reporter, C115; Lives carried the new household this Cycle: “I've seen Vinnie Keane around Grand Lake a few times since he retired. He seems to be enjoying life, taking it easy. I don't know him personally, but…”",
-          "src": "output/citizen_pages/index.jsonl roster",
-          "id": "F-56bf73a7f42c"
-        },
-        {
-          "t": "FACT",
-          "text": "Ingmar Jordan — Spoken Word Poet — Uptown",
-          "src": "Simulation_Ledger profile for POP-00346",
-          "id": "F-97484b54bb71"
         },
         {
           "t": "FACT",

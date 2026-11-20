@@ -1,0 +1,423 @@
+[
+  {
+    "pop": "POP-00302",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00302\",\"name\":\"Toto Foto\",\"role\":\"Theater Director\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Maria Keen\",\"question\":\"Your own current-cycle line says: \\\"Y3C11 — [Lifestyle-Outabout-Up-S] browsed a busy weekend market in Uptown\\\". What did you notice about Uptown? Speak only from that line and your own reaction.\"},\"signal\":{\"kind\":\"beat-neighborhood\",\"hood\":\"Uptown\",\"focus\":\"Uptown's community programs and their founders\",\"src\":\"output/beats/Community_Programs.jsonl @C115\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Toto Foto — Theater Director\",\"evidence\":[{\"id\":\"EV-LIFE-7c36d5874d\",\"src\":\"output/simulation_ledger_snapshot.jsonl\",\"text\":\"Y3C11 — [Lifestyle-Outabout-Up-S] browsed a busy weekend market in Uptown\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Y3C11 — [Lifestyle-Outabout-Up-S] browsed a busy weekend market in Uptown\",\"src\":\"output/simulation_ledger_snapshot.jsonl\",\"id\":\"F-b153db690e08\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00302",
+        "name": "Toto Foto",
+        "role": "Theater Director",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Maria Keen",
+        "question": "Your own current-cycle line says: \"Y3C11 — [Lifestyle-Outabout-Up-S] browsed a busy weekend market in Uptown\". What did you notice about Uptown? Speak only from that line and your own reaction."
+      },
+      "signal": {
+        "kind": "beat-neighborhood",
+        "hood": "Uptown",
+        "focus": "Uptown's community programs and their founders",
+        "src": "output/beats/Community_Programs.jsonl @C115"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Toto Foto — Theater Director",
+        "evidence": [
+          {
+            "id": "EV-LIFE-7c36d5874d",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "text": "Y3C11 — [Lifestyle-Outabout-Up-S] browsed a busy weekend market in Uptown"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Y3C11 — [Lifestyle-Outabout-Up-S] browsed a busy weekend market in Uptown",
+          "src": "output/simulation_ledger_snapshot.jsonl",
+          "id": "F-b153db690e08"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C11, Spring, holiday=none",
+          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+          "id": "F-82d77e9a4a71"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00847",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00847\",\"name\":\"Caroline Cabrera\",\"role\":\"After-School Program Director\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Maria Keen\",\"question\":\"Your own page at C107 says: \\\"Look, I work with kids every day in Uptown, and what I see is that numbers don't always tell the whole story\\\". Is that still how you see Uptown? Speak only from that and your own reaction.\"},\"signal\":{\"kind\":\"beat-neighborhood\",\"hood\":\"Uptown\",\"focus\":\"Uptown's community programs and their founders\",\"src\":\"output/beats/Community_Programs.jsonl @C115\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Caroline Cabrera — After-School Program Director\",\"evidence\":[{\"id\":\"EV-PAGE-57a55f8cda\",\"src\":\"cp-POP-00847-c107-PRESS\",\"text\":\"Look, I work with kids every day in Uptown, and what I see is that numbers don't always tell the whole story.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"INTERPRETATION\",\"text\":\"Look, I work with kids every day in Uptown, and what I see is that numbers don't always tell the whole story.\",\"src\":\"cp-POP-00847-c107-PRESS\",\"id\":\"F-a45bbc9693d1\"},{\"t\":\"FACT\",\"text\":\"Caroline Cabrera — After-School Program Director\",\"src\":\"Simulation_Ledger profile for POP-00847\",\"id\":\"F-490c50666f1f\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00847",
+        "name": "Caroline Cabrera",
+        "role": "After-School Program Director",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Maria Keen",
+        "question": "Your own page at C107 says: \"Look, I work with kids every day in Uptown, and what I see is that numbers don't always tell the whole story\". Is that still how you see Uptown? Speak only from that and your own reaction."
+      },
+      "signal": {
+        "kind": "beat-neighborhood",
+        "hood": "Uptown",
+        "focus": "Uptown's community programs and their founders",
+        "src": "output/beats/Community_Programs.jsonl @C115"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Caroline Cabrera — After-School Program Director",
+        "evidence": [
+          {
+            "id": "EV-PAGE-57a55f8cda",
+            "src": "cp-POP-00847-c107-PRESS",
+            "text": "Look, I work with kids every day in Uptown, and what I see is that numbers don't always tell the whole story."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "INTERPRETATION",
+          "text": "Look, I work with kids every day in Uptown, and what I see is that numbers don't always tell the whole story.",
+          "src": "cp-POP-00847-c107-PRESS",
+          "id": "F-a45bbc9693d1"
+        },
+        {
+          "t": "FACT",
+          "text": "Caroline Cabrera — After-School Program Director",
+          "src": "Simulation_Ledger profile for POP-00847",
+          "id": "F-490c50666f1f"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C11, Spring, holiday=none",
+          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+          "id": "F-82d77e9a4a71"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00136",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00136\",\"name\":\"Rafael Montez\",\"role\":\"Police Chief\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Maria Keen\",\"question\":\"Your own page at C114 says: \\\"Uptown had the most incidents this cycle, and a 26% clearance rate means we're not closing enough of them\\\". Is that still how you see Uptown? Speak only from that and your own reaction.\"},\"signal\":{\"kind\":\"beat-neighborhood\",\"hood\":\"Uptown\",\"focus\":\"Uptown's community programs and their founders\",\"src\":\"output/beats/Community_Programs.jsonl @C115\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Rafael Montez — Police Chief\",\"evidence\":[{\"id\":\"EV-PAGE-f2e5e3e51f\",\"src\":\"cp-POP-00136-c114-PRESS-tue-epjbdd\",\"text\":\"Uptown had the most incidents this cycle, and a 26% clearance rate means we're not closing enough of them.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"INTERPRETATION\",\"text\":\"Uptown had the most incidents this cycle, and a 26% clearance rate means we're not closing enough of them.\",\"src\":\"cp-POP-00136-c114-PRESS-tue-epjbdd\",\"id\":\"F-70a59792ae51\"},{\"t\":\"FACT\",\"text\":\"Rafael Montez — Police Chief\",\"src\":\"Simulation_Ledger profile for POP-00136\",\"id\":\"F-bc843a7e0394\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00136",
+        "name": "Rafael Montez",
+        "role": "Police Chief",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Maria Keen",
+        "question": "Your own page at C114 says: \"Uptown had the most incidents this cycle, and a 26% clearance rate means we're not closing enough of them\". Is that still how you see Uptown? Speak only from that and your own reaction."
+      },
+      "signal": {
+        "kind": "beat-neighborhood",
+        "hood": "Uptown",
+        "focus": "Uptown's community programs and their founders",
+        "src": "output/beats/Community_Programs.jsonl @C115"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Rafael Montez — Police Chief",
+        "evidence": [
+          {
+            "id": "EV-PAGE-f2e5e3e51f",
+            "src": "cp-POP-00136-c114-PRESS-tue-epjbdd",
+            "text": "Uptown had the most incidents this cycle, and a 26% clearance rate means we're not closing enough of them."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "INTERPRETATION",
+          "text": "Uptown had the most incidents this cycle, and a 26% clearance rate means we're not closing enough of them.",
+          "src": "cp-POP-00136-c114-PRESS-tue-epjbdd",
+          "id": "F-70a59792ae51"
+        },
+        {
+          "t": "FACT",
+          "text": "Rafael Montez — Police Chief",
+          "src": "Simulation_Ledger profile for POP-00136",
+          "id": "F-bc843a7e0394"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C11, Spring, holiday=none",
+          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+          "id": "F-82d77e9a4a71"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00141",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00141\",\"name\":\"Priya Narang\",\"role\":\"EMS DIRECTOR\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Maria Keen\",\"question\":\"Your own page at C113 says: \\\"The A's winning season is a big deal for us in Uptown\\\". Is that still how you see Uptown? Speak only from that and your own reaction.\"},\"signal\":{\"kind\":\"beat-neighborhood\",\"hood\":\"Uptown\",\"focus\":\"Uptown's community programs and their founders\",\"src\":\"output/beats/Community_Programs.jsonl @C115\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Priya Narang — EMS DIRECTOR\",\"evidence\":[{\"id\":\"EV-PAGE-094b29b689\",\"src\":\"cp-POP-00141-c113-PRESS\",\"text\":\"The A's winning season is a big deal for us in Uptown.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"INTERPRETATION\",\"text\":\"The A's winning season is a big deal for us in Uptown.\",\"src\":\"cp-POP-00141-c113-PRESS\",\"id\":\"F-931cc175ae98\"},{\"t\":\"FACT\",\"text\":\"Priya Narang — EMS DIRECTOR\",\"src\":\"Simulation_Ledger profile for POP-00141\",\"id\":\"F-d9b105380dd7\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00141",
+        "name": "Priya Narang",
+        "role": "EMS DIRECTOR",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Maria Keen",
+        "question": "Your own page at C113 says: \"The A's winning season is a big deal for us in Uptown\". Is that still how you see Uptown? Speak only from that and your own reaction."
+      },
+      "signal": {
+        "kind": "beat-neighborhood",
+        "hood": "Uptown",
+        "focus": "Uptown's community programs and their founders",
+        "src": "output/beats/Community_Programs.jsonl @C115"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Priya Narang — EMS DIRECTOR",
+        "evidence": [
+          {
+            "id": "EV-PAGE-094b29b689",
+            "src": "cp-POP-00141-c113-PRESS",
+            "text": "The A's winning season is a big deal for us in Uptown."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "INTERPRETATION",
+          "text": "The A's winning season is a big deal for us in Uptown.",
+          "src": "cp-POP-00141-c113-PRESS",
+          "id": "F-931cc175ae98"
+        },
+        {
+          "t": "FACT",
+          "text": "Priya Narang — EMS DIRECTOR",
+          "src": "Simulation_Ledger profile for POP-00141",
+          "id": "F-d9b105380dd7"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C11, Spring, holiday=none",
+          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+          "id": "F-82d77e9a4a71"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  }
+]

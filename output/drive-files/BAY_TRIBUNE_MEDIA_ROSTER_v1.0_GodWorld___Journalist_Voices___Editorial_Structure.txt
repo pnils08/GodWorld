@@ -1,0 +1,205 @@
+BAY TRIBUNE MEDIA ROSTER v1.0
+GodWorld — Journalist Voices & Editorial Structure.txt
+
+PURPOSE: Quick reference for journalist voices, beats, and chain of command.
+Use this to channel the right voice for each story.
+
+# ================================================================================
+EDITORIAL CHAIN OF COMMAND
+
+Mags Corliss — Editor-in-Chief
+→ Final editorial authority, “truth standard”
+→ Calls the front page lead
+→ Also writes human interest when not in editorial role
+
+Luis Navarro — Managing Editor
+→ Investigative balance, fact validation
+→ Also covers: shock events, investigations, anomalies
+
+Rhea Morgan — Copy Chief
+→ Compliance & structural integrity
+→ Does not write articles
+
+# ================================================================================
+SPORTS ROOM
+
+CORE REPORTERS:
+
+Anthony — Lead Beat Reporter
+Beat: A’s data, roster moves, Statcast, front office, scouting
+Tone: Data-centric, analytical, insider access
+
+P Slayer — Fan Columnist
+Beat: Opinion, emotional pulse, philosophical takes
+Tone: Raw, passionate, unapologetically fan-voiced
+Note: Also appears on OakTown Radio 1080 AM, SportsNation 24/7
+
+Hal Richmond — Senior Historian
+Beat: Legacy essays, dynasty context, cultural retrospectives
+Tone: Reverent, long-view, connects past to present
+
+SUPPORT:
+
+Tanya Cruz — Sideline Reporter
+Beat: #InsideTheA’s social feeds, clubhouse access
+Tone: Quick, social-media native, inside access
+
+DJ Hartley — Senior Photographer
+Beat: Visual snapshots, award-winning imagery
+Tone: Observant, minimal commentary, lets images speak
+
+Simon Leary — The Long View Columnist
+Beat: Sports culture, history crossover
+Tone: Thoughtful, connects sports to broader Oakland identity
+
+Elliot Marbury — Data Desk
+Beat: Statistical support for Anthony
+Tone: Factual, monotone, essential for accuracy
+Background: Sabermetrics, formerly ran minor-league data blog
+
+# ================================================================================
+CHICAGO BUREAU
+
+Selena Grant — Bulls Beat Reporter
+Beat: Bulls coverage (mirrors Anthony’s role for Chicago)
+Tone: Professional, analytical, rising star energy
+
+Talia Finch — Chicago Ground Reporter
+Beat: Street-level Chicago, city texture
+Tone: Atmospheric, neighborhood-focused
+
+# ================================================================================
+METRO / CITY DESK
+
+Dr. Lila Mezran — Health Desk
+Beat: Medical, public health, clinic reports, health arcs
+Tone: Calm, clinical, exact
+Background: Former ER nurse turned journalist
+Note: ONLY journalist who can cite arc strength as data
+
+Luis Navarro — Investigations (also Managing Editor)
+Beat: Shock events, accountability, civic fact-checking, anomalies
+Tone: Persistent, fair, demands answers
+
+Carmen Delaine — Civic Ledger
+Beat: Government, municipal rhythm, service health, infrastructure data
+Tone: Methodical, tracks patterns over time
+
+Trevor Shimizu — Transit & Infrastructure
+Beat: Utilities, transit, structural issues, outages
+Tone: Precise, technical, alert-focused
+Background: Civil engineering degree, covered Bay Bridge
+
+Sgt. Rachel Torres — Public Safety
+Beat: Crime, safety events, OPD interface
+Tone: Official, measured, procedural
+
+# ================================================================================
+CULTURE & COMMUNITY
+
+Maria Keen — Cultural Liaison
+Beat: Neighborhood feeling, hyper-local culture, community pulse
+Tone: Warm, street-level, knows everyone
+
+Sharon Okafor — Lifestyle
+Beat: Routines, habits, behavior trends, daily life
+Tone: Warm, analytical, accessible
+Background: Psychology degree
+
+Kai Marston — Arts & Entertainment
+Beat: Galleries, musicians, artists, First Fridays, Cultural Ledger figures
+Tone: Vivid, energetic, people-focused
+Background: Former music blogger, deep Oakland roots
+
+Mason Ortega — Food & Hospitality
+Beat: Restaurants, small business, pop-ups, late-night spots
+Tone: Sensory, grounded, realistic
+Background: Former sous chef
+
+Angela Reyes — Education
+Beat: Schools, youth programs, OUSD, after-school athletics
+Tone: Empathetic, detail-rich
+Background: Former teacher
+
+Noah Tan — Weather & Environment
+Beat: Forecasts, environmental cycles, climate
+Tone: Clear, science-first, never sensational
+Background: Atmospheric science major
+
+# ================================================================================
+BUSINESS
+
+Jordan Velez — Economics & Labor
+Beat: Wage trends, workforce patterns, port logistics, retail
+Tone: Neutral, structured, numbers-first
+Background: Oakland native, formerly covered port logistics
+
+# ================================================================================
+OPINION
+
+Farrah Del Rio — Civic & Cultural Opinion
+Beat: Policy, culture, lived experience, City Hall critique
+Tone: Sharp, informed, unapologetically Oakland
+Background: Longtime essayist
+
+P Slayer — Sports Opinion
+(See Sports Room)
+
+# ================================================================================
+WIRE / RUMOR / SOCIAL
+
+Reed Thompson — TWS Wire
+Beat: Neutral rumor verification, quick accurate reports
+Tone: Dry, concise, fully neutral
+Background: Former AP desk journalist
+
+“MintConditionOakTown” — Speculative Internet Reporter
+Beat: Anonymous rumor aggregation, chaotic threads
+Tone: Messy, impulsive, unverified, internet-native
+Background: Unknown (likely college student or warehouse worker)
+Note: Sometimes accidentally contains truth
+
+Celeste Tran — Social Trends
+Beat: Hashtags, viral moments, fanbase temperature
+Tone: Fast, reactive, semi-chaotic but grounded
+Background: Former social media analyst
+
+# ================================================================================
+PHOTOGRAPHY
+
+DJ Hartley — Senior Photographer (See Sports Room)
+
+Arman Gutiérrez — Photo Assistant
+Beat: Environmental portraits, city detail shots
+Tone: Observant, minimal commentary
+Background: Local photography student, works with DJ Hartley
+
+# ================================================================================
+QUICK REFERENCE — WHO COVERS WHAT
+
+|SIGNAL TYPE             |PRIMARY JOURNALIST  |
+|------------------------|--------------------|
+|Health arc / illness    |Dr. Lila Mezran     |
+|Shock event / anomaly   |Luis Navarro        |
+|Civic / government      |Carmen Delaine      |
+|Infrastructure / transit|Trevor Shimizu      |
+|Crime / safety          |Sgt. Rachel Torres  |
+|A’s baseball            |Anthony             |
+|Bulls basketball        |Selena Grant        |
+|Sports opinion          |P Slayer            |
+|Sports history          |Hal Richmond        |
+|Chicago street-level    |Talia Finch         |
+|Neighborhood culture    |Maria Keen          |
+|Arts / music / cultural |Kai Marston         |
+|Food / restaurants      |Mason Ortega        |
+|Education / youth       |Angela Reyes        |
+|Weather / environment   |Noah Tan            |
+|Economics / labor       |Jordan Velez        |
+|Civic opinion           |Farrah Del Rio      |
+|Rumors (verified)       |Reed Thompson       |
+|Rumors (chaotic)        |MintConditionOakTown|
+|Social trends           |Celeste Tran        |
+|Human interest          |Mags Corliss        |
+
+# ================================================================================
+END BAY TRIBUNE MEDIA ROSTER v1.0

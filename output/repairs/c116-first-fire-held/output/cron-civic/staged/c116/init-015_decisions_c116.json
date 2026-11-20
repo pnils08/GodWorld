@@ -1,0 +1,22 @@
+{
+  "initiative": "INIT-015",
+  "initiativeId": "INIT-015",
+  "cycle": 116,
+  "primaryVoice": "Mayor gavel (mayor_gavel-011)",
+  "consolidatedFrom": [
+    "STMT-116-mayor_gavel-011 (Mayor gavel — Laurel legislation development and verified filing)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-015",
+    "MilestoneNotes": "C116: $6M legislation development and submission directed with outreach, defined scope and visible follow-through; filing awaits Clerk verification.",
+    "NextScheduledAction": "Develop and submit the legislation and obtain a Clerk filing reference",
+    "NextActionCycle": 116,
+    "LastWorkCycle": 116,
+    "LastWorkSeat": "civic-office-mayor"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-115-civic-office-mayor-2026-11-09"
+    ]
+  }
+}

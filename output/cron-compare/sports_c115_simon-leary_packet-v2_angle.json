@@ -1,0 +1,417 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "115",
+  "persona": "simon-leary",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00016",
+      "name": "Simon Leary",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "The Oaks record is 8-1.",
+      "approach": "Long-view approach (Simon Leary): third-person essayist. Treat supplied sports facts as present structure, not as proof of history or collective memory. A metaphor about continuity, load, or change may interpret the Packet but may not add a person, place, institution, event, season, statistic, cause, organizational intention, or citywide belief. Do not write a game recap, Hal elegy, P Slayer fan heat, or Anthony board memo.",
+      "creativeBrief": {
+        "kind": "sports-long-view",
+        "pulseClass": "role-change-under-continuity",
+        "bagModes": [
+          "2 Keystone Player",
+          "4 Load-Bearing Continuity"
+        ],
+        "claim": "A role change inside a sustained team record can support a structural interpretation; it does not establish franchise history, organizational intent, or citywide meaning.",
+        "anchorFacts": [
+          "The Oaks record is 8-1.",
+          "The Oaks have won 4 straight."
+        ],
+        "missing": [
+          "why the role change was made",
+          "historical comparison or franchise precedent",
+          "organizational intention or future plan",
+          "citywide, clubhouse, or fan interpretation"
+        ],
+        "sceneRule": "No witnessed room or scene is supplied. Structure and continuity may appear only as clearly interpretive metaphor grounded in the approved present facts.",
+        "sourcePointers": [
+          "output/world_summary_c115.md ## Sports",
+          "docs/media/SIMON_LONGVIEW_BAG.md"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "long-view-signal",
+      "hood": "San Antonio",
+      "score": null,
+      "src": "world_summary_c115.md ## Sports",
+      "nearby": [
+        {
+          "text": "A's | roster-move | (off-season) | Vinnie Keane",
+          "src": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | community-outreach | (off-season) | Darrin Davis, Rafael Montez",
+          "src": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (off-season) | Eric Taveras, Vinnie Keane",
+          "src": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | rumor | (off-season) | Jose Colon, Sergio Aybar, Marco Fabregas, Mike Paulson",
+          "src": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | player-feature | (early-season) | Harry Hayward, Wilson Shepard",
+          "src": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-01223",
+          "name": "Harry Hayward",
+          "profile": "Harry Hayward — Oakland Oaks - Power Forward",
+          "role": "Oakland Oaks - Power Forward",
+          "hood": "KONO",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c115.md ## Sports",
+            "pop": "POP-01223",
+            "rowName": "Harry Hayward",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01022",
+          "name": "Wilson Shepard",
+          "profile": "Wilson Shepard — Head Coach, Oakland Oaks",
+          "role": "Head Coach, Oakland Oaks",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c115.md ## Sports",
+            "pop": "POP-01022",
+            "rowName": "Wilson Shepard",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C115",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-bc84fc0b7718"
+      },
+      {
+        "t": "FACT",
+        "text": "The Oaks record is 8-1.",
+        "src": "world_summary_c115.md ## Sports",
+        "id": "F-d3fcc9879b21"
+      },
+      {
+        "t": "FACT",
+        "text": "The Oaks have won 4 straight.",
+        "src": "world_summary_c115.md ## Sports",
+        "id": "F-31ce4c706287"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ]
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-01223",
+        "name": "Harry Hayward",
+        "role": "Oakland Oaks - Power Forward",
+        "hood": "KONO",
+        "profile": "Harry Hayward — Oakland Oaks - Power Forward",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c115.md ## Sports",
+          "pop": "POP-01223",
+          "rowName": "Harry Hayward",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01022",
+        "name": "Wilson Shepard",
+        "role": "Head Coach, Oakland Oaks",
+        "hood": "West Oakland",
+        "profile": "Wilson Shepard — Head Coach, Oakland Oaks",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c115.md ## Sports",
+          "pop": "POP-01022",
+          "rowName": "Wilson Shepard",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Simon Leary",
+    "popid": "POP-00016"
+  },
+  "assignment": {
+    "story": {
+      "angle": "The Oaks record is 8-1.",
+      "label": "The Oaks record is 8-1.",
+      "hookLine": "The Oaks record is 8-1.",
+      "kind": "long-view-signal",
+      "hood": "San Antonio",
+      "popids": [
+        "POP-01223",
+        "POP-01022"
+      ],
+      "citizens": [
+        "Harry Hayward (POP-01223)",
+        "Wilson Shepard (POP-01022)"
+      ],
+      "ref": "world_summary_c115.md ## Sports",
+      "cycle": 115
+    },
+    "approach": "Long-view approach (Simon Leary): third-person essayist. Treat supplied sports facts as present structure, not as proof of history or collective memory. A metaphor about continuity, load, or change may interpret the Packet but may not add a person, place, institution, event, season, statistic, cause, organizational intention, or citywide belief. Do not write a game recap, Hal elegy, P Slayer fan heat, or Anthony board memo."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": {
+    "pulse": {
+      "className": "role-change-under-continuity",
+      "score": 84,
+      "label": "The Oaks record is 8-1."
+    },
+    "prewrite": {
+      "bagModes": [
+        {
+          "id": 2,
+          "name": "Keystone Player"
+        },
+        {
+          "id": 4,
+          "name": "Load-Bearing Continuity"
+        }
+      ],
+      "anchorFacts": [
+        "The Oaks record is 8-1.",
+        "The Oaks have won 4 straight."
+      ],
+      "claim": "A role change inside a sustained team record can support a structural interpretation; it does not establish franchise history, organizational intent, or citywide meaning.",
+      "missing": [
+        "why the role change was made",
+        "historical comparison or franchise precedent",
+        "organizational intention or future plan",
+        "citywide, clubhouse, or fan interpretation"
+      ],
+      "hooks": []
+    },
+    "players": [
+      {
+        "name": "Harry Hayward",
+        "popid": "POP-01223",
+        "role": "Oakland Oaks - Power Forward",
+        "neighborhood": "KONO",
+        "why": "feed-names"
+      },
+      {
+        "name": "Wilson Shepard",
+        "popid": "POP-01022",
+        "role": "Head Coach, Oakland Oaks",
+        "neighborhood": "West Oakland",
+        "why": "feed-names"
+      }
+    ],
+    "scene": {
+      "colorRoom": "No witnessed room or scene is supplied. Structure and continuity may appear only as clearly interpretive metaphor grounded in the approved present facts."
+    },
+    "candidates": [
+      {
+        "score": 84,
+        "cycle": 115,
+        "team": "Oaks",
+        "label": "Second-round rookie Harry Hayward scores a career high and makes his case for a bigger role"
+      },
+      {
+        "score": 84,
+        "cycle": 115,
+        "team": "Oaks",
+        "label": "The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109"
+      },
+      {
+        "score": 84,
+        "cycle": 115,
+        "team": "Oaks",
+        "label": "Down two after three in Philadelphia, the Oaks drop 40 in the fourth and Hayward scores a career high. Oaks 120 - 76ers 106"
+      },
+      {
+        "score": 58,
+        "cycle": 115,
+        "team": "A's",
+        "label": "It's official: Vinnie Keane retires. Undrafted to undeniable, and staying in Grand Lake."
+      },
+      {
+        "score": 58,
+        "cycle": 115,
+        "team": "A's",
+        "label": "The backup outhit the starter and two kids are knocking. Who catches for the A's in 2042?"
+      },
+      {
+        "score": 54,
+        "cycle": 114,
+        "team": "Oaks",
+        "label": "The Oaks bounce back with a 60-point rout in Toronto. Oaks 135 - Raptors 75"
+      }
+    ]
+  },
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Simon Leary",
+    "popid": "POP-00016",
+    "text": "The Oaks are 8-1 and have won four straight, and the desk wants a long-view piece that treats that record as present structure, not as proof of anything beyond itself. I'm not going to write a recap or a celebration. I'm going to write about what a record actually is — a carried load, a sequence of small decisions that hold. The role change angle is there in the packet: someone's role shifted inside a sustained run, and the run kept going. That's the structural fact I can work with. I don't know why the change was made, and I won't pretend to. I'll stand outside the arena, metaphorically, and watch how a thing holds its shape when one hand lets go and another takes the weight. The piece open",
+    "plan": {
+      "chase": "The Oaks are 8-1 and have won four straight, and the desk wants a long-view piece that treats that record as present structure, not as proof of anything beyond itself. I'm not going to write a recap or a celebration. I'm going to write about what a record actually is — a carried load, a sequence of small decisions that hold. The role change angle is there in the packet: someone's role shifted inside a sustained run, and the run kept going. That's the structural fact I can work with. I don't know why the change was made, and I won't pretend to. I'll stand outside the arena, metaphorically, and watch how a thing holds its shape when one hand lets go and another takes the weight. The piece open",
+      "focus": "A sustained record as a load-bearing structure, and what it means when a role changes inside it without the structure failing.",
+      "why": "The assignment is a long-view essay, not a game story. The record is the only solid ground I'm given. The role change is the tension. The piece should interpret that tension — continuity under adjustment — without inventing causes or outcomes.",
+      "checks": [
+        "Open with the supplied present structure: the Oaks are 8-1, four straight.",
+        "Do not add any person, place, institution, event, date, number, or cause beyond the two anchor facts.",
+        "Keep the metaphor abstract — continuity, load, change — and grounded only in the approved facts.",
+        "Stay under the target word count.",
+        "No recap, no Hal elegy, no P Slayer heat, no Anthony board memo."
+      ],
+      "targets": [
+        {
+          "pop": "POP-01223",
+          "question": "Harry Hayward is a named player on the Oaks — does his role sit inside the record in a way that lets me talk about load and adjustment without claiming intent?",
+          "basis": "He is the only player named in the supplied signal, and the piece needs a human anchor for the structural metaphor."
+        },
+        {
+          "pop": "POP-01022",
+          "question": "Wilson Shepard is the head coach — can I reference his position as part of the structure without attributing a decision or plan to him?",
+          "basis": "He is the other supplied name, and the role-change angle needs a figure who holds responsibility, even if I don't say what he did."
+        }
+      ],
+      "interpretation": "A record is not a monument. It is a carried thing — a load that stays steady only because the hands underneath keep adjusting. When one hand shifts, the load doesn't fall; it just finds a new balance. That is the whole piece. The Oaks are 8-1. They have won four straight. Somewhere in that run, a role changed, and the run kept going. That is enough.",
+      "unverifiedLead": [
+        "I don't know why the role change was made, and I won't guess.",
+        "I don't know if the record means anything to the city or the clubhouse, and I won't claim it does."
+      ]
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | roster-move | (off-season) | Vinnie Keane",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00001"
+      ]
+    },
+    {
+      "label": "A's | community-outreach | (off-season) | Darrin Davis, Rafael Montez",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00021",
+        "POP-00136"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (off-season) | Eric Taveras, Vinnie Keane",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00597",
+        "POP-00001"
+      ]
+    },
+    {
+      "label": "A's | rumor | (off-season) | Jose Colon, Sergio Aybar, Marco Fabregas, Mike Paulson",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00599",
+        "POP-00078",
+        "POP-00060",
+        "POP-00527"
+      ]
+    },
+    {
+      "label": "Oaks | player-feature | (early-season) | Harry Hayward, Wilson Shepard",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 115; rendered: world_summary_c115.md \"## Sports\" C115 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01223",
+        "POP-01022"
+      ]
+    }
+  ],
+  "laneEntries": 12,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-12T12:17:01.625Z"
+}

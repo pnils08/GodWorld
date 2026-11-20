@@ -1,0 +1,60 @@
+{
+  "status": "staged",
+  "desk": "undocked",
+  "cycle": "116",
+  "persona": "nia-rook",
+  "byline": "Nia Rook",
+  "bylinePopid": "POP-01076",
+  "article": "output/cron-compare/staged/undocked_c116_nia-rook_packet-v2_openai-gpt-6-luna.staged-0023.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Soo Loo",
+        "role": "quoted-source",
+        "popid": "POP-00663"
+      },
+      {
+        "name": "Luis Taz",
+        "role": "mentioned",
+        "popid": "POP-00298",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "I think the key to my success on Tuesday night was staying focused and adapting to the situations as they came up. I took the First Hunt contract, sold some iron ore, and managed to come out 24 credits up despite getting into a few fights. It's all about making the right decisions under pressure, something I'm used to from my day job as a Corporate Accountant.",
+        "sourceRef": "citizenVoice PRESS Soo Loo"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-7b832dff2f69",
+    "draftSha256": "a73a9fc0efb9ba26da499338f5a85201eeef11bf60084372eeaa5c451939b860",
+    "verdict": "output/cron-compare/undocked_c116_nia-rook_packet-v2_openai-gpt-6-luna.rhea.json",
+    "ranAt": "2026-11-19T00:23:03.423Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 350",
+      "words": 395,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "a73a9fc0efb9ba26da499338f5a85201eeef11bf60084372eeaa5c451939b860",
+      "costUsd": 0.0009
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-19T00:23:07.564Z"
+}

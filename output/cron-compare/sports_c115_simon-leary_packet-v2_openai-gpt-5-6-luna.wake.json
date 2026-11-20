@@ -1,0 +1,60 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "115",
+  "provider": "openrouter",
+  "model": "openai/gpt-5.6-luna",
+  "configuredWriterModel": "openai/gpt-5.6-luna",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "simon-leary",
+  "byline": {
+    "name": "Simon Leary",
+    "popid": "POP-00016",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 12,
+  "quotesLanded": 1,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "canon_recall",
+    "canon_recall"
+  ],
+  "toolCalls": 2,
+  "wordCount": 474,
+  "targetWords": "evidence-bounded",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": false,
+    "purposeMet": false,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 474,
+    "short": "The opening focuses on Hayward rather than the present sports structure, and the essay fails to interpret the structure as civic architecture.",
+    "score": 1,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "88f4dd0eab7fa53861dfdd1650ce416ae3fef218c5f4f4361ec78eec2f471c75",
+    "costUsd": 0.0019
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 1/3 — The opening focuses on Hayward rather than the present sports structure, and the essay fails to interpret the structure as civic architecture."
+  },
+  "article": "output/cron-compare/staged/sports_c115_simon-leary_packet-v2_openai-gpt-5-6-luna.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "jected env (33) from ../.config/godworld/.env // tip: ◈ encrypted .env [www.dotenvx.com]\n{\n  \"popId\": \"POP-00016\",\n  \"name\": \"Simon Leary\",\n  \"recorded\": true,\n  \"text\": \"filed: The Part That Holds\"\n}"
+  },
+  "ranAt": "2026-11-13T00:17:09.885Z",
+  "dispositionReconciledAt": "2026-11-14T18:00:02.898Z"
+}

@@ -1,0 +1,111 @@
+{
+  "v": "NIA-SLICE/1",
+  "cycle": 115,
+  "empty": false,
+  "pilots": [
+    {
+      "POPID": "POP-01195",
+      "episodes": 2,
+      "creditsDelta": 0,
+      "combatEvents": 0,
+      "mishapCount": 0,
+      "hasWindowed": false,
+      "name": "Elijah Brown",
+      "hood": "Rockridge",
+      "roleType": "Electrician",
+      "employerBizId": "BIZ-00056",
+      "tier": "4",
+      "career": [],
+      "who": "Elijah Brown — Electrician",
+      "nights": [
+        "Elijah Brown's Monday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Timberline, Arcturus, Ross 154, Maplevale, Miaplacidus, Cervantes, Ridgecrest, Hatysa, Nembus, Kitalpha, Lacaille 8760, Kepler 442, Theemin and Hollowcrest; came out even on credits; flew until the show's time ran out.",
+        "Elijah Brown's Thursday night on UNDOCKED: went through Last Light, Fang, Errai, Wezen, Brightfall, Birchwood, Pinecross, Aludra, Tejat, Gsc 0002, Torcular, Gsc 0043, Gsc 0045, Dabih, Rimegate, Veritate, Betelgeuse and Gsc 0037; came out even on credits; flew until the show's time ran out."
+      ],
+      "nightSource": "record"
+    },
+    {
+      "POPID": "POP-00184",
+      "episodes": 2,
+      "creditsDelta": 0,
+      "combatEvents": 0,
+      "mishapCount": 0,
+      "hasWindowed": false,
+      "name": "Brooklyn Nguyen",
+      "hood": "Fruitvale",
+      "roleType": "Community Programs Coordinator",
+      "employerBizId": "BIZ-00094",
+      "tier": "4",
+      "career": [],
+      "who": "Brooklyn Nguyen — Community Programs Coordinator",
+      "nights": [
+        "Brooklyn Nguyen's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes, Ridgecrest and Nembus; mined 3 copper ore, 3 iron ore and 1 sol alloy ore; came out even on credits; flew until the show's time ran out.",
+        "Brooklyn Nguyen's Friday night on UNDOCKED: went through Sirius, Nova Terra, Furud, Acrux, Botein, Intercrus, Atlas, Cedarhold, Achernar, Ruchbah, Ironhollow, Gsc 0041, Shaula, Alnair, Wolf 1061, Gsc 0031, Gsc 0021 and Gliese 876; came out even on credits; flew until the show's time ran out."
+      ],
+      "nightSource": "record"
+    },
+    {
+      "POPID": "POP-00008",
+      "episodes": 1,
+      "creditsDelta": 0,
+      "combatEvents": 2,
+      "mishapCount": 0,
+      "hasWindowed": false,
+      "name": "P Slayer",
+      "hood": "West Oakland",
+      "roleType": "Journalist, Fan Columnist - Sports",
+      "employerBizId": "BIZ-00018",
+      "tier": "3",
+      "career": [],
+      "who": "P Slayer — Journalist, Fan Columnist - Sports",
+      "nights": [
+        "P Slayer's Wednesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes and Nembus; mined 1 iron ore; got into 2 fights; came out even on credits; flew until the show's time ran out."
+      ],
+      "nightSource": "record"
+    }
+  ],
+  "standings": {
+    "asOf": "2026-11-14T02:55:51.734Z",
+    "leader": {
+      "Rank": 1,
+      "POPID": "POP-00298",
+      "Holder": "Luis Taz",
+      "Episodes": 3,
+      "PointsTotal": 45.19,
+      "CreditsTotal": 0,
+      "CombatTotal": 12,
+      "MishapTotal": 0,
+      "BestMagnitude": 2,
+      "LastAiredCycle": 115,
+      "CyclesLed": 2,
+      "CurrentStreak": 2,
+      "PointsPending": 0
+    }
+  },
+  "story": {
+    "ref": "undocked-week:weekly-c115",
+    "label": "UNDOCKED week-in-review c115",
+    "kind": "undocked-digest",
+    "angle": "UNDOCKED week: pilots who flew this cycle (Elijah Brown, Brooklyn Nguyen, P Slayer). Standings: Luis Taz leads the board — rank #1, 45.19 achievement points, 0 credits, 2 cycle(s) led, current streak 2. In the chair: Elijah Brown — Electrician; Brooklyn Nguyen — Community Programs Coordinator; P Slayer — Journalist, Fan Columnist - Sports.",
+    "facts": [
+      "Elijah Brown's Monday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Timberline, Arcturus, Ross 154, Maplevale, Miaplacidus, Cervantes, Ridgecrest, Hatysa, Nembus, Kitalpha, Lacaille 8760, Kepler 442, Theemin and Hollowcrest; came out even on credits; flew until the show's time ran out.",
+      "Elijah Brown's Thursday night on UNDOCKED: went through Last Light, Fang, Errai, Wezen, Brightfall, Birchwood, Pinecross, Aludra, Tejat, Gsc 0002, Torcular, Gsc 0043, Gsc 0045, Dabih, Rimegate, Veritate, Betelgeuse and Gsc 0037; came out even on credits; flew until the show's time ran out.",
+      "Brooklyn Nguyen's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes, Ridgecrest and Nembus; mined 3 copper ore, 3 iron ore and 1 sol alloy ore; came out even on credits; flew until the show's time ran out.",
+      "Brooklyn Nguyen's Friday night on UNDOCKED: went through Sirius, Nova Terra, Furud, Acrux, Botein, Intercrus, Atlas, Cedarhold, Achernar, Ruchbah, Ironhollow, Gsc 0041, Shaula, Alnair, Wolf 1061, Gsc 0031, Gsc 0021 and Gliese 876; came out even on credits; flew until the show's time ran out.",
+      "P Slayer's Wednesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes and Nembus; mined 1 iron ore; got into 2 fights; came out even on credits; flew until the show's time ran out.",
+      "Elijah Brown — Electrician (ledger)",
+      "Brooklyn Nguyen — Community Programs Coordinator (ledger)",
+      "P Slayer — Journalist, Fan Columnist - Sports (ledger)"
+    ],
+    "citizens": [
+      "Elijah Brown — Electrician, UNDOCKED cast pilot",
+      "Brooklyn Nguyen — Community Programs Coordinator, UNDOCKED cast pilot",
+      "P Slayer — Journalist, Fan Columnist - Sports, UNDOCKED cast pilot"
+    ],
+    "popids": [
+      "POP-01195",
+      "POP-00184",
+      "POP-00008"
+    ]
+  },
+  "generatedAt": "2026-11-14T14:15:10.592Z"
+}

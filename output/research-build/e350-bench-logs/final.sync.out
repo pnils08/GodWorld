@@ -1,0 +1,24 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+source (LIVE): Simulation_Narrative — 85 tabs
+dest (BENCH):  Sandox_104_c109-live_Simulation_Narrative — 88 tabs
+tabs to sync: 85 | missing on bench (will create): 0
+bench-only tabs (untouched): Dial_Moves, Dial_Pulse, Spot_Diag
+read 82937 rows across 85 tabs from live
+sanitized 11 oversized cell(s) (>49900 chars, values-API cap)
+bench tabs cleared (1 batch call)
+  ...10/85 tabs written
+  ...20/85 tabs written
+  ...30/85 tabs written
+  ...40/85 tabs written
+  ...50/85 tabs written
+  ...60/85 tabs written
+  ...70/85 tabs written
+  ...80/85 tabs written
+  ...85/85 tabs written
+SYNCED 85 tabs. Bench is live-equivalent.
+  verify LifeHistory_Log: bench 28094 rows vs live 28094 — OK
+  verify LifeHistory_Archive: bench 19218 rows vs live 19218 — OK
+  verify Relationship_Bond_Ledger: bench 7233 rows vs live 7233 — OK
+  verify Reflection_Intake: bench 2906 rows vs live 2906 — OK
+  verify Story_Hook_Deck: bench 2221 rows vs live 2221 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.

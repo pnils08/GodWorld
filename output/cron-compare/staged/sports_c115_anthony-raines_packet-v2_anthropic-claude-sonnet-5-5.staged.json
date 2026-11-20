@@ -1,0 +1,74 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "115",
+  "persona": "anthony-raines",
+  "byline": "Anthony Raines",
+  "bylinePopid": "POP-00017",
+  "article": "output/cron-compare/staged/sports_c115_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Clarissa Dane",
+        "role": "mentioned",
+        "popid": "POP-00143",
+        "floor": true
+      },
+      {
+        "name": "Eric Taveras",
+        "role": "mentioned",
+        "popid": "POP-00597",
+        "floor": true
+      },
+      {
+        "name": "Ronald Silk",
+        "role": "mentioned",
+        "popid": "POP-00647",
+        "floor": true
+      },
+      {
+        "name": "Vinnie Keane",
+        "role": "mentioned",
+        "popid": "POP-00001",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "West Oakland"
+    ],
+    "claims": [
+      {
+        "claim": "A's · player-feature — Fifth on points, first in credits: Taveras's Undocked pledge to Keane's academy is still waiting on a payout",
+        "sourceRef": "world_summary_c115.md ## Sports"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-8b16207016d2",
+    "draftSha256": "fed108c9a6916a82af5f714a100a43b158378f5355c9dfda79368c636152e5cb",
+    "verdict": "output/cron-compare/sports_c115_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-14T18:00:51.877Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 776,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "fed108c9a6916a82af5f714a100a43b158378f5355c9dfda79368c636152e5cb",
+      "costUsd": 0.0019
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-14T18:00:59.303Z"
+}

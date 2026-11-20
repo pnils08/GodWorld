@@ -1,0 +1,612 @@
+[
+  {
+    "pop": "POP-01022",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01022\",\"name\":\"Wilson Shepard\",\"role\":\"Head Coach, Oakland Oaks\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Tamsin Pruitt\",\"question\":\"How does your new living situation in West Oakland affect your coaching? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-lives\",\"hood\":null,\"focus\":\"The lives of nine individuals who experienced significant events in C116, including Wilson Shepard, Theo Rahimi, Ira Leu, Matilda Diop, Darrin Davis, Omar Farah, Tariq Cooper, Sadie Williams, and Elias Varek.\",\"src\":\"output/beats/Lived_Events.jsonl @C116 batch 346c91\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Wilson Shepard — Head Coach, Oakland Oaks — West Oakland\",\"evidence\":[{\"id\":\"EV-ac67e1fd36\",\"src\":\"output/beats/Lived_Events.jsonl @C116 batch 346c91\",\"text\":\"Wilson Shepard first. The event is the lead; one true detail; what came next only if the record says.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Wilson Shepard moved into a place of their own in West Oakland, renting\",\"src\":\"output/beats/Lived_Events.jsonl @C116 batch 346c91\",\"id\":\"F-3e45fbf97f4e\"},{\"t\":\"FACT\",\"text\":\"Wilson Shepard first. The event is the lead; one true detail; what came next only if the record says.\",\"src\":\"output/beats/Lived_Events.jsonl @C116 batch 346c91\",\"id\":\"F-c57c4b8f343c\"},{\"t\":\"FACT\",\"text\":\"Wilson Shepard moved into a place of their own in West Oakland, renting (C116)\",\"src\":\"output/beats/Household_Ledger.jsonl @C116\",\"id\":\"F-07601503c46b\"},{\"t\":\"FACT\",\"text\":\"Wilson Shepard — in their life, C115: fielded a round of texts from people who hadn't called in years\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C115\",\"id\":\"F-4df887a862e9\"},{\"t\":\"FACT\",\"text\":\"Wilson Shepard — in their life, C116: saw their name in the sports pages again\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C116\",\"id\":\"F-42467fe0f2f0\"},{\"t\":\"FACT\",\"text\":\"Wilson Shepard — in their life, C116: kept the phone buzzing on the counter all night and let it\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C116\",\"id\":\"F-f17d9b042e3b\"},{\"t\":\"FACT\",\"text\":\"Wilson Shepard — in their life, C116: came home to find the neighbors had left a case of something cold on the porch — still buzzing hours after the game\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C116\",\"id\":\"F-0c69cd168b28\"},{\"t\":\"FACT\",\"text\":\"Wilson Shepard — the Tribune named them in a piece headlined The Oaks Still Have to Become Somebody’s Team (Sports, C110)\",\"src\":\"archive/ARTICLE_INDEX.jsonl c2b99604810ac2b9\",\"id\":\"F-71c375b00914\"},{\"t\":\"FACT\",\"text\":\"Wilson Shepard — the Tribune named them in a piece headlined Oakland Oaks Struggle in Preseason Opener (Sports, C108)\",\"src\":\"archive/ARTICLE_INDEX.jsonl 66bd8fa6234066bd\",\"id\":\"F-84970f15acae\"},{\"t\":\"FACT\",\"text\":\"Wilson Shepard — the Tribune named them in a piece headlined The Oaks' Groundswell in Downtown (Sports, C107)\",\"src\":\"archive/ARTICLE_INDEX.jsonl bea849f57403bea8\",\"id\":\"F-404b35cda8e9\"},{\"t\":\"FACT\",\"text\":\"Wilson Shepard — Head Coach, Oakland Oaks — West Oakland\",\"src\":\"Simulation_Ledger profile for POP-01022\",\"id\":\"F-a56b409a3900\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C12, Spring, holiday=Spring Equinox\",\"src\":\"output/world_summary_c116.md Calendar context (Simulation_Calendar)\",\"id\":\"F-647fd9067a33\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01022",
+        "name": "Wilson Shepard",
+        "role": "Head Coach, Oakland Oaks",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Tamsin Pruitt",
+        "question": "How does your new living situation in West Oakland affect your coaching? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-lives",
+        "hood": null,
+        "focus": "The lives of nine individuals who experienced significant events in C116, including Wilson Shepard, Theo Rahimi, Ira Leu, Matilda Diop, Darrin Davis, Omar Farah, Tariq Cooper, Sadie Williams, and Elias Varek.",
+        "src": "output/beats/Lived_Events.jsonl @C116 batch 346c91"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Wilson Shepard — Head Coach, Oakland Oaks — West Oakland",
+        "evidence": [
+          {
+            "id": "EV-ac67e1fd36",
+            "src": "output/beats/Lived_Events.jsonl @C116 batch 346c91",
+            "text": "Wilson Shepard first. The event is the lead; one true detail; what came next only if the record says."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Wilson Shepard moved into a place of their own in West Oakland, renting",
+          "src": "output/beats/Lived_Events.jsonl @C116 batch 346c91",
+          "id": "F-3e45fbf97f4e"
+        },
+        {
+          "t": "FACT",
+          "text": "Wilson Shepard first. The event is the lead; one true detail; what came next only if the record says.",
+          "src": "output/beats/Lived_Events.jsonl @C116 batch 346c91",
+          "id": "F-c57c4b8f343c"
+        },
+        {
+          "t": "FACT",
+          "text": "Wilson Shepard moved into a place of their own in West Oakland, renting (C116)",
+          "src": "output/beats/Household_Ledger.jsonl @C116",
+          "id": "F-07601503c46b"
+        },
+        {
+          "t": "FACT",
+          "text": "Wilson Shepard — in their life, C115: fielded a round of texts from people who hadn't called in years",
+          "src": "output/beats/LifeHistory_Log.jsonl @C115",
+          "id": "F-4df887a862e9"
+        },
+        {
+          "t": "FACT",
+          "text": "Wilson Shepard — in their life, C116: saw their name in the sports pages again",
+          "src": "output/beats/LifeHistory_Log.jsonl @C116",
+          "id": "F-42467fe0f2f0"
+        },
+        {
+          "t": "FACT",
+          "text": "Wilson Shepard — in their life, C116: kept the phone buzzing on the counter all night and let it",
+          "src": "output/beats/LifeHistory_Log.jsonl @C116",
+          "id": "F-f17d9b042e3b"
+        },
+        {
+          "t": "FACT",
+          "text": "Wilson Shepard — in their life, C116: came home to find the neighbors had left a case of something cold on the porch — still buzzing hours after the game",
+          "src": "output/beats/LifeHistory_Log.jsonl @C116",
+          "id": "F-0c69cd168b28"
+        },
+        {
+          "t": "FACT",
+          "text": "Wilson Shepard — the Tribune named them in a piece headlined The Oaks Still Have to Become Somebody’s Team (Sports, C110)",
+          "src": "archive/ARTICLE_INDEX.jsonl c2b99604810ac2b9",
+          "id": "F-71c375b00914"
+        },
+        {
+          "t": "FACT",
+          "text": "Wilson Shepard — the Tribune named them in a piece headlined Oakland Oaks Struggle in Preseason Opener (Sports, C108)",
+          "src": "archive/ARTICLE_INDEX.jsonl 66bd8fa6234066bd",
+          "id": "F-84970f15acae"
+        },
+        {
+          "t": "FACT",
+          "text": "Wilson Shepard — the Tribune named them in a piece headlined The Oaks' Groundswell in Downtown (Sports, C107)",
+          "src": "archive/ARTICLE_INDEX.jsonl bea849f57403bea8",
+          "id": "F-404b35cda8e9"
+        },
+        {
+          "t": "FACT",
+          "text": "Wilson Shepard — Head Coach, Oakland Oaks — West Oakland",
+          "src": "Simulation_Ledger profile for POP-01022",
+          "id": "F-a56b409a3900"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+          "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+          "id": "F-647fd9067a33"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00789",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00789\",\"name\":\"Elias Varek\",\"role\":\"Founder of Civis Systems\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Tamsin Pruitt\",\"question\":\"What do the recent financial returns mean for Civis Systems and Varek Systems? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-lives\",\"hood\":null,\"focus\":\"The lives of nine individuals who experienced significant events in C116, including Wilson Shepard, Theo Rahimi, Ira Leu, Matilda Diop, Darrin Davis, Omar Farah, Tariq Cooper, Sadie Williams, and Elias Varek.\",\"src\":\"output/beats/Lived_Events.jsonl @C116 batch 346c91\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Elias Varek — Founder of Civis Systems — West Oakland\",\"evidence\":[{\"id\":\"EV-527c5f1d92\",\"src\":\"output/beats/Lived_Events.jsonl @C116 batch 346c91\",\"text\":\"Wilson Shepard first. The event is the lead; one true detail; what came next only if the record says.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Elias Varek — Civis Systems returned $489017 to the line this week, West Oakland (C116 — what happened in their life, not words they said)\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C116\",\"id\":\"F-0bc4eebf1e97\"},{\"t\":\"FACT\",\"text\":\"Elias Varek — in their life, C115: headed over to The Aitken Line Founding Celebration in Jack London last night\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C115\",\"id\":\"F-0fb939bb35e4\"},{\"t\":\"FACT\",\"text\":\"Elias Varek — in their life, C115: Civis Systems returned $488443 to the line this week\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C115\",\"id\":\"F-851b1664ccba\"},{\"t\":\"FACT\",\"text\":\"Elias Varek — in their life, C115: Varek Systems returned $34932 to the line this week\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C115\",\"id\":\"F-2afbf66cd72b\"},{\"t\":\"FACT\",\"text\":\"Elias Varek — in their life, C116: Varek Systems returned $35112 to the line this week\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C116\",\"id\":\"F-74d65b514df8\"},{\"t\":\"FACT\",\"text\":\"Elias Varek — Lives already wrote this person: a moment the record kept (C115)\",\"src\":\"output/cron-compare/lives_covered.json\",\"id\":\"F-6303a20f1153\"},{\"t\":\"FACT\",\"text\":\"Elias Varek — the Tribune named them in a piece headlined The Lives Page, Cycle 115 (Culture, C115)\",\"src\":\"archive/ARTICLE_INDEX.jsonl 4da79b355f8b8455\",\"id\":\"F-ef923c4b81a5\"},{\"t\":\"FACT\",\"text\":\"Elias Varek — the Tribune named them in a piece headlined The Board in the Trailer Says 9.5 Percent. Enzo Walker Is Counting Something Else. (Business Reporter, C114)\",\"src\":\"archive/ARTICLE_INDEX.jsonl 384044afdbad94f5\",\"id\":\"F-9f71e8f7811e\"},{\"t\":\"FACT\",\"text\":\"Elias Varek — the Tribune named them in a piece headlined The Lives Page, Cycle 114 (Culture, C114)\",\"src\":\"archive/ARTICLE_INDEX.jsonl 9746e4e747ffdd0a\",\"id\":\"F-b66573ef89b1\"},{\"t\":\"FACT\",\"text\":\"Elias Varek — Founder of Civis Systems — West Oakland\",\"src\":\"Simulation_Ledger profile for POP-00789\",\"id\":\"F-dc59dc1a98cb\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C12, Spring, holiday=Spring Equinox\",\"src\":\"output/world_summary_c116.md Calendar context (Simulation_Calendar)\",\"id\":\"F-647fd9067a33\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00789",
+        "name": "Elias Varek",
+        "role": "Founder of Civis Systems",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Tamsin Pruitt",
+        "question": "What do the recent financial returns mean for Civis Systems and Varek Systems? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-lives",
+        "hood": null,
+        "focus": "The lives of nine individuals who experienced significant events in C116, including Wilson Shepard, Theo Rahimi, Ira Leu, Matilda Diop, Darrin Davis, Omar Farah, Tariq Cooper, Sadie Williams, and Elias Varek.",
+        "src": "output/beats/Lived_Events.jsonl @C116 batch 346c91"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Elias Varek — Founder of Civis Systems — West Oakland",
+        "evidence": [
+          {
+            "id": "EV-527c5f1d92",
+            "src": "output/beats/Lived_Events.jsonl @C116 batch 346c91",
+            "text": "Wilson Shepard first. The event is the lead; one true detail; what came next only if the record says."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Elias Varek — Civis Systems returned $489017 to the line this week, West Oakland (C116 — what happened in their life, not words they said)",
+          "src": "output/beats/LifeHistory_Log.jsonl @C116",
+          "id": "F-0bc4eebf1e97"
+        },
+        {
+          "t": "FACT",
+          "text": "Elias Varek — in their life, C115: headed over to The Aitken Line Founding Celebration in Jack London last night",
+          "src": "output/beats/LifeHistory_Log.jsonl @C115",
+          "id": "F-0fb939bb35e4"
+        },
+        {
+          "t": "FACT",
+          "text": "Elias Varek — in their life, C115: Civis Systems returned $488443 to the line this week",
+          "src": "output/beats/LifeHistory_Log.jsonl @C115",
+          "id": "F-851b1664ccba"
+        },
+        {
+          "t": "FACT",
+          "text": "Elias Varek — in their life, C115: Varek Systems returned $34932 to the line this week",
+          "src": "output/beats/LifeHistory_Log.jsonl @C115",
+          "id": "F-2afbf66cd72b"
+        },
+        {
+          "t": "FACT",
+          "text": "Elias Varek — in their life, C116: Varek Systems returned $35112 to the line this week",
+          "src": "output/beats/LifeHistory_Log.jsonl @C116",
+          "id": "F-74d65b514df8"
+        },
+        {
+          "t": "FACT",
+          "text": "Elias Varek — Lives already wrote this person: a moment the record kept (C115)",
+          "src": "output/cron-compare/lives_covered.json",
+          "id": "F-6303a20f1153"
+        },
+        {
+          "t": "FACT",
+          "text": "Elias Varek — the Tribune named them in a piece headlined The Lives Page, Cycle 115 (Culture, C115)",
+          "src": "archive/ARTICLE_INDEX.jsonl 4da79b355f8b8455",
+          "id": "F-ef923c4b81a5"
+        },
+        {
+          "t": "FACT",
+          "text": "Elias Varek — the Tribune named them in a piece headlined The Board in the Trailer Says 9.5 Percent. Enzo Walker Is Counting Something Else. (Business Reporter, C114)",
+          "src": "archive/ARTICLE_INDEX.jsonl 384044afdbad94f5",
+          "id": "F-9f71e8f7811e"
+        },
+        {
+          "t": "FACT",
+          "text": "Elias Varek — the Tribune named them in a piece headlined The Lives Page, Cycle 114 (Culture, C114)",
+          "src": "archive/ARTICLE_INDEX.jsonl 9746e4e747ffdd0a",
+          "id": "F-b66573ef89b1"
+        },
+        {
+          "t": "FACT",
+          "text": "Elias Varek — Founder of Civis Systems — West Oakland",
+          "src": "Simulation_Ledger profile for POP-00789",
+          "id": "F-dc59dc1a98cb"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+          "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+          "id": "F-647fd9067a33"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01247",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01247\",\"name\":\"Theo Rahimi\",\"role\":\"student\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Tamsin Pruitt\",\"question\":\"What's it like having a place of your own in Eastlake? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-lives\",\"hood\":null,\"focus\":\"The lives of nine individuals who experienced significant events in C116, including Wilson Shepard, Theo Rahimi, Ira Leu, Matilda Diop, Darrin Davis, Omar Farah, Tariq Cooper, Sadie Williams, and Elias Varek.\",\"src\":\"output/beats/Lived_Events.jsonl @C116 batch 346c91\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Theo Rahimi — student — Eastlake\",\"evidence\":[{\"id\":\"EV-e32c4c980a\",\"src\":\"output/beats/Lived_Events.jsonl @C116 batch 346c91\",\"text\":\"Wilson Shepard first. The event is the lead; one true detail; what came next only if the record says.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Theo Rahimi moved into a place of their own in Eastlake, renting (C116)\",\"src\":\"output/beats/Household_Ledger.jsonl @C116\",\"id\":\"F-0af0e067096b\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C116\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-871096fd8925\"},{\"t\":\"FACT\",\"text\":\"Wilson Shepard moved into a place of their own in West Oakland, renting\",\"src\":\"output/beats/Lived_Events.jsonl @C116 batch 346c91\",\"id\":\"F-3e45fbf97f4e\"},{\"t\":\"FACT\",\"text\":\"Wilson Shepard first. The event is the lead; one true detail; what came next only if the record says.\",\"src\":\"output/beats/Lived_Events.jsonl @C116 batch 346c91\",\"id\":\"F-c57c4b8f343c\"},{\"t\":\"FACT\",\"text\":\"Wilson Shepard moved into a place of their own in West Oakland, renting (C116)\",\"src\":\"output/beats/Household_Ledger.jsonl @C116\",\"id\":\"F-07601503c46b\"},{\"t\":\"FACT\",\"text\":\"Wilson Shepard — in their life, C115: fielded a round of texts from people who hadn't called in years\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C115\",\"id\":\"F-4df887a862e9\"},{\"t\":\"FACT\",\"text\":\"Wilson Shepard — in their life, C116: saw their name in the sports pages again\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C116\",\"id\":\"F-42467fe0f2f0\"},{\"t\":\"FACT\",\"text\":\"Wilson Shepard — in their life, C116: kept the phone buzzing on the counter all night and let it\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C116\",\"id\":\"F-f17d9b042e3b\"},{\"t\":\"FACT\",\"text\":\"Theo Rahimi — student — Eastlake\",\"src\":\"Simulation_Ledger profile for POP-01247\",\"id\":\"F-9535b1bfa729\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C12, Spring, holiday=Spring Equinox\",\"src\":\"output/world_summary_c116.md Calendar context (Simulation_Calendar)\",\"id\":\"F-647fd9067a33\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01247",
+        "name": "Theo Rahimi",
+        "role": "student",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Tamsin Pruitt",
+        "question": "What's it like having a place of your own in Eastlake? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-lives",
+        "hood": null,
+        "focus": "The lives of nine individuals who experienced significant events in C116, including Wilson Shepard, Theo Rahimi, Ira Leu, Matilda Diop, Darrin Davis, Omar Farah, Tariq Cooper, Sadie Williams, and Elias Varek.",
+        "src": "output/beats/Lived_Events.jsonl @C116 batch 346c91"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Theo Rahimi — student — Eastlake",
+        "evidence": [
+          {
+            "id": "EV-e32c4c980a",
+            "src": "output/beats/Lived_Events.jsonl @C116 batch 346c91",
+            "text": "Wilson Shepard first. The event is the lead; one true detail; what came next only if the record says."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Theo Rahimi moved into a place of their own in Eastlake, renting (C116)",
+          "src": "output/beats/Household_Ledger.jsonl @C116",
+          "id": "F-0af0e067096b"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C116",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-871096fd8925"
+        },
+        {
+          "t": "FACT",
+          "text": "Wilson Shepard moved into a place of their own in West Oakland, renting",
+          "src": "output/beats/Lived_Events.jsonl @C116 batch 346c91",
+          "id": "F-3e45fbf97f4e"
+        },
+        {
+          "t": "FACT",
+          "text": "Wilson Shepard first. The event is the lead; one true detail; what came next only if the record says.",
+          "src": "output/beats/Lived_Events.jsonl @C116 batch 346c91",
+          "id": "F-c57c4b8f343c"
+        },
+        {
+          "t": "FACT",
+          "text": "Wilson Shepard moved into a place of their own in West Oakland, renting (C116)",
+          "src": "output/beats/Household_Ledger.jsonl @C116",
+          "id": "F-07601503c46b"
+        },
+        {
+          "t": "FACT",
+          "text": "Wilson Shepard — in their life, C115: fielded a round of texts from people who hadn't called in years",
+          "src": "output/beats/LifeHistory_Log.jsonl @C115",
+          "id": "F-4df887a862e9"
+        },
+        {
+          "t": "FACT",
+          "text": "Wilson Shepard — in their life, C116: saw their name in the sports pages again",
+          "src": "output/beats/LifeHistory_Log.jsonl @C116",
+          "id": "F-42467fe0f2f0"
+        },
+        {
+          "t": "FACT",
+          "text": "Wilson Shepard — in their life, C116: kept the phone buzzing on the counter all night and let it",
+          "src": "output/beats/LifeHistory_Log.jsonl @C116",
+          "id": "F-f17d9b042e3b"
+        },
+        {
+          "t": "FACT",
+          "text": "Theo Rahimi — student — Eastlake",
+          "src": "Simulation_Ledger profile for POP-01247",
+          "id": "F-9535b1bfa729"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+          "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+          "id": "F-647fd9067a33"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00703",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00703\",\"name\":\"Ira Leu\",\"role\":\"Artisan Cheesemaker\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Tamsin Pruitt\",\"question\":\"How did the health center staff's unwind at the bar reflect their first busy week? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-lives\",\"hood\":null,\"focus\":\"The lives of nine individuals who experienced significant events in C116, including Wilson Shepard, Theo Rahimi, Ira Leu, Matilda Diop, Darrin Davis, Omar Farah, Tariq Cooper, Sadie Williams, and Elias Varek.\",\"src\":\"output/beats/Lived_Events.jsonl @C116 batch 346c91\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Ira Leu — Artisan Cheesemaker — Temescal\",\"evidence\":[{\"id\":\"EV-13a5abdeed\",\"src\":\"output/beats/Lived_Events.jsonl @C116 batch 346c91\",\"text\":\"Wilson Shepard first. The event is the lead; one true detail; what came next only if the record says.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Ira Leu — the health center staff unwind at the bar after their first busy week, Temescal — one of 4 people the Cycle's city turn reached (West Oakland Stabilization Fund sitting (0, capped); Oakland Alternative Response Initiative sitting (0, capped); Fruitvale Transit Hub…) (C116)\",\"src\":\"output/beats/Story_Seed_Deck.jsonl @C116\",\"id\":\"F-e39aa03bf9cc\"},{\"t\":\"FACT\",\"text\":\"Ira Leu — in their life, C115: a flyer for a seniors lunch program flutters on a community bulletin board\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C115\",\"id\":\"F-db7716e5ce5f\"},{\"t\":\"FACT\",\"text\":\"Ira Leu — in their life, C115: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C115\",\"id\":\"F-5c2abda03c55\"},{\"t\":\"FACT\",\"text\":\"Ira Leu — in their life, C115: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C115\",\"id\":\"F-9ea231077c56\"},{\"t\":\"FACT\",\"text\":\"Ira Leu — in their life, C116: read the Tribune's front page twice — once for the news, once to see who was in it\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C116\",\"id\":\"F-3b75cf29176f\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C116\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-871096fd8925\"},{\"t\":\"FACT\",\"text\":\"Wilson Shepard moved into a place of their own in West Oakland, renting\",\"src\":\"output/beats/Lived_Events.jsonl @C116 batch 346c91\",\"id\":\"F-3e45fbf97f4e\"},{\"t\":\"FACT\",\"text\":\"Wilson Shepard first. The event is the lead; one true detail; what came next only if the record says.\",\"src\":\"output/beats/Lived_Events.jsonl @C116 batch 346c91\",\"id\":\"F-c57c4b8f343c\"},{\"t\":\"FACT\",\"text\":\"Ira Leu — Artisan Cheesemaker — Temescal\",\"src\":\"Simulation_Ledger profile for POP-00703\",\"id\":\"F-0c272ba05705\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C12, Spring, holiday=Spring Equinox\",\"src\":\"output/world_summary_c116.md Calendar context (Simulation_Calendar)\",\"id\":\"F-647fd9067a33\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00703",
+        "name": "Ira Leu",
+        "role": "Artisan Cheesemaker",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Tamsin Pruitt",
+        "question": "How did the health center staff's unwind at the bar reflect their first busy week? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-lives",
+        "hood": null,
+        "focus": "The lives of nine individuals who experienced significant events in C116, including Wilson Shepard, Theo Rahimi, Ira Leu, Matilda Diop, Darrin Davis, Omar Farah, Tariq Cooper, Sadie Williams, and Elias Varek.",
+        "src": "output/beats/Lived_Events.jsonl @C116 batch 346c91"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Ira Leu — Artisan Cheesemaker — Temescal",
+        "evidence": [
+          {
+            "id": "EV-13a5abdeed",
+            "src": "output/beats/Lived_Events.jsonl @C116 batch 346c91",
+            "text": "Wilson Shepard first. The event is the lead; one true detail; what came next only if the record says."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Ira Leu — the health center staff unwind at the bar after their first busy week, Temescal — one of 4 people the Cycle's city turn reached (West Oakland Stabilization Fund sitting (0, capped); Oakland Alternative Response Initiative sitting (0, capped); Fruitvale Transit Hub…) (C116)",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C116",
+          "id": "F-e39aa03bf9cc"
+        },
+        {
+          "t": "FACT",
+          "text": "Ira Leu — in their life, C115: a flyer for a seniors lunch program flutters on a community bulletin board",
+          "src": "output/beats/LifeHistory_Log.jsonl @C115",
+          "id": "F-db7716e5ce5f"
+        },
+        {
+          "t": "FACT",
+          "text": "Ira Leu — in their life, C115: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+          "src": "output/beats/LifeHistory_Log.jsonl @C115",
+          "id": "F-5c2abda03c55"
+        },
+        {
+          "t": "FACT",
+          "text": "Ira Leu — in their life, C115: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+          "src": "output/beats/LifeHistory_Log.jsonl @C115",
+          "id": "F-9ea231077c56"
+        },
+        {
+          "t": "FACT",
+          "text": "Ira Leu — in their life, C116: read the Tribune's front page twice — once for the news, once to see who was in it",
+          "src": "output/beats/LifeHistory_Log.jsonl @C116",
+          "id": "F-3b75cf29176f"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C116",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-871096fd8925"
+        },
+        {
+          "t": "FACT",
+          "text": "Wilson Shepard moved into a place of their own in West Oakland, renting",
+          "src": "output/beats/Lived_Events.jsonl @C116 batch 346c91",
+          "id": "F-3e45fbf97f4e"
+        },
+        {
+          "t": "FACT",
+          "text": "Wilson Shepard first. The event is the lead; one true detail; what came next only if the record says.",
+          "src": "output/beats/Lived_Events.jsonl @C116 batch 346c91",
+          "id": "F-c57c4b8f343c"
+        },
+        {
+          "t": "FACT",
+          "text": "Ira Leu — Artisan Cheesemaker — Temescal",
+          "src": "Simulation_Ledger profile for POP-00703",
+          "id": "F-0c272ba05705"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+          "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+          "id": "F-647fd9067a33"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  }
+]

@@ -1,0 +1,28 @@
+{
+  "initiative": "INIT-006",
+  "initiativeId": "INIT-006",
+  "cycle": 116,
+  "primaryVoice": "Mayor gavel (mayor_gavel-005)",
+  "consolidatedFrom": [
+    "STMT-116-baylight_authority-001 (Ramos — Baylight District — Final Council Vote — evidence-file determination and over...)",
+    "STMT-116-baylight_authority-002 (Ramos — Baylight C115 findings publication and tracker status)",
+    "STMT-116-baylight_authority-003 (Ramos — Jack London and Downtown community impact mitigation — running records)",
+    "STMT-116-council_d2-002 (Tran D2 — Baylight evidence review)",
+    "STMT-116-mayor_gavel-005 (Mayor gavel — Baylight construction milestone and continuing oversight)",
+    "STMT-116-mayor_open-006 (Mayor agenda — Baylight evidence-file review and construction oversight)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-006",
+    "ImplementationPhase": "construction-active",
+    "MilestoneNotes": "C116: No construction milestone certified; evidence-file review and independent remediation, hotline, dust-control and workforce oversight continue.",
+    "NextScheduledAction": "Complete evidence-file milestone review",
+    "NextActionCycle": 117,
+    "LastWorkCycle": 116,
+    "LastWorkSeat": "proj-baylight"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-115-proj-baylight-2026-11-12"
+    ]
+  }
+}

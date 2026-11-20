@@ -1,0 +1,34 @@
+{
+  "office": "oari",
+  "cycle": 116,
+  "speaker": "Vanessa Tran-Muñoz",
+  "cascadeSummary": "The D3 Fruitvale briefing record was executed and published last cycle with district-level and Fruitvale data, documented community participation, and an inspectionable record, and expansion stays held exactly as the Mayor and Council directed. This cycle I am closing the loop operationally: the record is live in a public location, the D5 audit and Baylight feasibility review carry responsible next dates rather than open-ended status, and I am telling Fruitvale and West Oakland plainly that a briefing record is a promise they can pull and read — not a press release. I am not declaring any oversight file complete and not expanding one block.",
+  "statements": [
+    {
+      "statementId": "STMT-116-oari-001",
+      "type": "decision",
+      "topic": "D3 Fruitvale briefing record — execution, publication, and expansion hold",
+      "initiative": "INIT-002",
+      "decision": "Execute and publish the D3 Fruitvale briefing record with district-level and Fruitvale data, documented community participation, and an inspectionable public copy; hold expansion; file responsible next dates for the D5 audit and Baylight feasibility review.",
+      "quote": "Fruitvale can pull the record and read the numbers for its own streets — that is what a briefing is worth, and expansion still waits.",
+      "fullStatement": "Vanessa Tran-Muñoz — The D3 Fruitvale briefing record is executed and published, and I want to be plain about what that means. It carries district-level data and Fruitvale's own street numbers, it documents who showed up and who spoke, and it is filed somewhere any Fruitvale resident or merchant can walk in and pull it — not a slide deck that lives on somebody's laptop. Expansion is held, exactly as the Mayor and Council directed. The record is a promise you can check; the D5 dispatch audit and the Baylight feasibility review remain open, and I am filing responsible next dates for both rather than letting them sit. Feasibility first, authorization second, never the other way around — one published briefing does not finish an oversight file.",
+      "trackerUpdates": {
+        "initiative": "INIT-002",
+        "ImplementationPhase": "operational",
+        "MilestoneNotes": "C116: D3 Fruitvale briefing record executed, published and inspectionable; expansion held; D5 audit and Baylight review next dates filed.",
+        "NextScheduledAction": "Publish D5 dispatch audit and Baylight feasibility review next responsible dates; hold expansion.",
+        "NextActionCycle": 117
+      }
+    },
+    {
+      "statementId": "STMT-116-oari-002",
+      "type": "position",
+      "topic": "Fruitvale and West Oakland residents — what the published record and the crews mean",
+      "initiative": null,
+      "decision": "Restate to both neighborhoods that the record is public and the crews are the credit, and that West Oakland's calm is not a City Hall press release.",
+      "quote": "West Oakland's calm isn't a City Hall press release — it's neighbors and the crews who show up for them, and the Fruitvale numbers are how we prove those crews reach the right streets.",
+      "fullStatement": "Vanessa Tran-Muñoz — To Fruitvale and West Oakland both: the briefing record is a promise you can check, and the calm in West Oakland isn't a City Hall press release — it's neighbors and the crews who show up for them. The Fruitvale numbers are how we prove those crews are reaching the right streets and not just the loudest ones. I'm not going to stand here and call a finished briefing a finished program. What I can promise the neighborhoods is a record they can pull and read, and a director who will not expand a single block until the D5 audit and the Baylight review are actually done.",
+      "trackerUpdates": {}
+    }
+  ]
+}

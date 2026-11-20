@@ -1,0 +1,214 @@
+{
+  "loggedAt": "2026-11-19T12:17:17.825Z",
+  "cycle": 116,
+  "writersWithFiles": [
+    "Anthony Raines",
+    "Hal Richmond",
+    "P Slayer",
+    "Simon Leary",
+    "Tanya Cruz",
+    "Selena Grant",
+    "Talia Finch"
+  ],
+  "rows": [
+    {
+      "n": 1,
+      "team": "A's",
+      "eventType": "trade-recap",
+      "eventTrigger": "traded",
+      "snippet": "Paulson cashes in the Carmen Mesa chip",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "P Slayer",
+        "Simon Leary",
+        "Tanya Cruz"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 2,
+      "team": "A's",
+      "eventType": "player-feature",
+      "eventTrigger": "playoff-push",
+      "snippet": "The bat or the glove? Kevin Clark's .3",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "P Slayer",
+        "Simon Leary",
+        "Tanya Cruz"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 3,
+      "team": "A's",
+      "eventType": "rumor",
+      "eventTrigger": "off-season",
+      "snippet": "The Angels show strong interest in A's",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "Tanya Cruz"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 4,
+      "team": "A's",
+      "eventType": "rumor",
+      "eventTrigger": "off-season",
+      "snippet": "Benji Dillon hasn't retired yet. The 5",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "P Slayer",
+        "Simon Leary",
+        "Tanya Cruz"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 5,
+      "team": "Oaks",
+      "eventType": "season-state",
+      "eventTrigger": "milestone",
+      "snippet": "From 0-9 to 8-1: Wilson Shepard's Oaks",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "Simon Leary",
+        "Tanya Cruz",
+        "Selena Grant",
+        "Talia Finch"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 6,
+      "team": "Oaks",
+      "eventType": "game-result",
+      "eventTrigger": "big-win",
+      "snippet": "The Oaks shoot 80 percent in Denver an",
+      "writers": [
+        "Anthony Raines",
+        "P Slayer",
+        "Simon Leary",
+        "Tanya Cruz",
+        "Selena Grant",
+        "Talia Finch"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 7,
+      "team": "Oaks",
+      "eventType": "game-result",
+      "eventTrigger": "tough-loss",
+      "snippet": "The Spurs hand the Oaks their first ho",
+      "writers": [
+        "Anthony Raines",
+        "P Slayer",
+        "Simon Leary",
+        "Tanya Cruz",
+        "Selena Grant",
+        "Talia Finch"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 8,
+      "team": "Oaks",
+      "eventType": "team-update",
+      "eventTrigger": "milestone",
+      "snippet": "Number one in the NBA in year one: the",
+      "writers": [
+        "Selena Grant",
+        "Talia Finch"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 9,
+      "team": "A's",
+      "eventType": "trade-recap",
+      "eventTrigger": "traded",
+      "snippet": "What does the Mesa trade mean for Hern",
+      "writers": [
+        "P Slayer",
+        "Simon Leary"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 10,
+      "team": "A's",
+      "eventType": "rumor",
+      "eventTrigger": "off-season",
+      "snippet": "Does Mark Aitken stay in Oakland, and ",
+      "writers": [
+        "Simon Leary",
+        "Tanya Cruz"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 11,
+      "team": "Oaks",
+      "eventType": "season-state",
+      "eventTrigger": "milestone",
+      "snippet": "Was the 0-9 start by design, and is th",
+      "writers": [
+        "Selena Grant",
+        "Talia Finch"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    }
+  ],
+  "stranded": 0
+}

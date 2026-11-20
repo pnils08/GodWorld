@@ -1,0 +1,75 @@
+{
+  "draft": "output/cron-compare/sports_c116_tanya-cruz_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "116",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "c54b945785dc407433a57d8423eee86b2a05907f1328258182791fa3f4a0db1c",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Draft strictly adheres to ground truth, uses exact authorized interview quotes, and preserves canon continuity.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "tanya-sideline-v1",
+    "packageVersion": "TANYA-LEP2-1",
+    "manifestId": "AM-50627cca4102",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "100"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Benji Dillon",
+      "Deacon Seymour",
+      "Kevin Clark",
+      "Mike Paulson",
+      "Vinnie Keane"
+    ],
+    "unverified": [
+      "Cy Young"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0132,
+  "durationMs": 5171,
+  "parseError": false,
+  "ranAt": "2026-11-19T00:20:01.042Z",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 567,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "c54b945785dc407433a57d8423eee86b2a05907f1328258182791fa3f4a0db1c",
+    "costUsd": 0.0034
+  }
+}

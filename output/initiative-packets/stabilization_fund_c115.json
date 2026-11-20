@@ -4,7 +4,7 @@
     "initiative": "stabilization-fund",
     "initiativeId": "INIT-001",
     "cycle": 115,
-    "generatedAt": "2026-11-09T08:49:28.831Z",
+    "generatedAt": "2026-11-16T00:03:19.402Z",
     "description": "Neighborhood Stabilization Fund — $28M for housing stability, small business support, and workforce development in displacement-risk neighborhoods"
   },
   "initiative": {
@@ -151,7 +151,7 @@
       "3": 54,
       "4": 188
     },
-    "avgIncome": 1774501,
+    "avgIncome": 1853527,
     "medianIncome": 95887,
     "atDisplacementRisk": 253,
     "linkedProfiles": [

@@ -1,0 +1,62 @@
+{
+  "status": "staged",
+  "desk": "undocked",
+  "cycle": "116",
+  "persona": "nia-rook",
+  "byline": "Nia Rook",
+  "bylinePopid": "POP-01076",
+  "article": "output/cron-compare/staged/undocked_c116_nia-rook_packet-v2_openai-gpt-6-luna.staged-0021.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Marguerite Kimball-Ostrow",
+        "role": "quoted-source",
+        "popid": "POP-01188"
+      },
+      {
+        "name": "Luis Taz",
+        "role": "mentioned",
+        "popid": "POP-00298",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Piedmont Ave"
+    ],
+    "claims": [
+      {
+        "claim": "I didn't really have a strategy on Wednesday night. I just flew through the systems one by one, and it happened to come out even on credits. I wasn't really focusing on that; I was just trying to explore and see where the show would take me.",
+        "sourceRef": "citizenVoice PRESS Marguerite Kimball-Ostrow"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-6c6b0a9097eb",
+    "draftSha256": "979a9f6d1c8785dc051329eea742fb65e9f4e7562141064ccdac24c5f088207c",
+    "verdict": "output/cron-compare/undocked_c116_nia-rook_packet-v2_openai-gpt-6-luna.rhea.json",
+    "ranAt": "2026-11-20T00:21:06.993Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 350",
+      "words": 437,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "979a9f6d1c8785dc051329eea742fb65e9f4e7562141064ccdac24c5f088207c",
+      "costUsd": 0.0011
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-20T00:21:11.951Z"
+}

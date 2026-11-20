@@ -1,0 +1,60 @@
+{
+  "office": "council_d3",
+  "agentDir": "civic-office-council-d3",
+  "holder": "Rose Delgado",
+  "popid": "POP-00503",
+  "title": "City Council District 3",
+  "date": "2026-11-19",
+  "cycle": 116,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "San Antonio this week is a neighborhood turning a corner, and I am not going to sit still while it does. Sentiment moved from -0.16 to -0.03 — still under the city's 0.107, but climbing, and the crime index held flat at 0.73 instead of worsening. Retail vitality slipped to 4.84 from 5.22, and that is the piece I will not let be treated as noise: commercial blocks that lose their footing take the sentiment climb down with them. Fruitvale is in growth with vitality at 13.94, and I intend to use what is working next door on behalf of San Antonio rather than let City Hall claim the improvement or the decline for itself. The youth apprenticeship pipeline sitting stalled with a Fruitvale complaint on file is the work move I can make now, and I will make it.",
+  "moves": [
+    {
+      "type": "work",
+      "payload": {
+        "initiativeId": "INIT-007"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "INIT-007 — one work move applied toward reviving the stalled Oakland Youth Apprenticeship Pipeline (Fruitvale among its listed hoods)",
+  "ranAt": "2026-11-19T11:45:25.067Z",
+  "usage": {
+    "prompt_tokens": 6696,
+    "completion_tokens": 249,
+    "total_tokens": 6945,
+    "cost": 0.00138456,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00138456,
+      "upstream_inference_prompt_cost": 0.00120528,
+      "upstream_inference_completions_cost": 0.00017928
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "fellBackFrom": null,
+  "evidenceGenerationHash": "8bf58509d24a03b95f8e88a49a51e50b409fb1c4c8aa344e61a1acf7e941275d",
+  "evidenceReads": [],
+  "provider": "Alibaba",
+  "finishReason": "stop",
+  "elapsedMs": 2504,
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00503",
+    "id": "4F5xHLR2zPqkD7Zk8PFPsk",
+    "customId": "cp-POP-00503-c116-CIVIC-datawake-2026-11-19"
+  }
+}

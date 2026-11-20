@@ -1,0 +1,96 @@
+{
+  "draft": "output/cron-compare/civic_c116_trevor-shimizu_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "116",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "340607d8c96e8f4d2ffff319e6576640608cd5e8b3df5e68397f73a23dfc7092",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All named citizen quotes, transit data, and civic references match Cycle 116 canon and interview records exactly.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "trevor-infrastructure-systems-v1",
+    "packageVersion": "TREVOR-LEP2-2",
+    "manifestId": "AM-af6b04c603c3",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "526",
+          "111",
+          "293",
+          "112",
+          "162",
+          "113",
+          "341",
+          "114",
+          "011",
+          "78",
+          "564",
+          "1",
+          "746",
+          "462",
+          "66",
+          "400",
+          "532",
+          "965",
+          "433",
+          "11"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Eleanor Rivera",
+      "Rosario Medina",
+      "Ximena Mehta"
+    ],
+    "unverified": [
+      "International Blvd",
+      "Spring Equinox",
+      "St Oakland",
+      "St Oakland City Center",
+      "Telegraph Ave"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0138,
+  "durationMs": 6857,
+  "parseError": false,
+  "ranAt": "2026-11-17T00:20:31.250Z",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 500",
+    "words": 940,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "340607d8c96e8f4d2ffff319e6576640608cd5e8b3df5e68397f73a23dfc7092",
+    "costUsd": 0.0013
+  }
+}

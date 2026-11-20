@@ -1,0 +1,66 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "115",
+  "persona": "ines-sorensen",
+  "byline": "Ines Sorensen",
+  "bylinePopid": "POP-01211",
+  "article": "output/cron-compare/staged/culture_c115_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.staged-1815.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Omar Amici",
+        "role": "quoted-source",
+        "popid": "POP-00263"
+      },
+      {
+        "name": "Priya Narang",
+        "role": "mentioned",
+        "popid": "POP-00141"
+      },
+      {
+        "name": "Evan Morello",
+        "role": "mentioned",
+        "popid": "POP-00536",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "To be honest, the changes in Uptown have me feeling a bit uneasy. The streets are busier than ever, and it seems like every other place is a for-rent sign these days. I've lived here long enough to see the neighborhood transform, but this feels different. It's like the neighborhood is shifting away from the people who've been here all along. It's like the neighborhood I knew is being priced out.",
+        "sourceRef": "citizenVoice PRESS Omar Amici"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "gate": "off",
+    "model": null,
+    "manifestId": null,
+    "draftSha256": "b351050c4e11b0ee6700c8fae0416ac739a36865a63d32282d9213110a9a6d6f",
+    "verdict": null,
+    "ranAt": "2026-11-15T18:15:44.966Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": false,
+      "inTarget": true,
+      "inTargetBy": "code floor 300",
+      "words": 450,
+      "short": "The piece includes quotes given to reporters and editorial commentary about past coverage rather than strictly carrying what citizens wrote on their own pages.",
+      "score": 2,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "scoredWithoutRhea": true,
+      "draftSha256": "b351050c4e11b0ee6700c8fae0416ac739a36865a63d32282d9213110a9a6d6f"
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-15T18:15:44.966Z"
+}

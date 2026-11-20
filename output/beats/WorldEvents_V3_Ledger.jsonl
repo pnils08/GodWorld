@@ -469,3 +469,13 @@
 {"Timestamp":"Y3C11","Cycle":"115","EventDescription":"Masjid An-Nur Oakland: seniors lunch program marks milestone","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
 {"Timestamp":"Y3C11","Cycle":"115","EventDescription":"Bay Pure Land Buddhist Temple: job training workshop begins new session","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Chinatown"}
 {"Timestamp":"Y3C11","Cycle":"115","EventDescription":"Telegraph Presbyterian Fellowship: prison ministry team visits facility","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"Y3C12","Cycle":"116","EventDescription":"Medium-severity public-works spike in Glenview","EventType":"infra-incident","Domain":"INFRASTRUCTURE","Severity":"medium","Neighborhood":"Glenview"}
+{"Timestamp":"Y3C12","Cycle":"116","EventDescription":"Medium-severity health spike in Piedmont Ave","EventType":"health-event","Domain":"HEALTH","Severity":"medium","Neighborhood":"Piedmont Ave"}
+{"Timestamp":"Y3C12","Cycle":"116","EventDescription":"misfiled document","EventType":"civic-activity","Domain":"CIVIC","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"Y3C12","Cycle":"116","EventDescription":"zoning adjustment","EventType":"civic-activity","Domain":"CIVIC","Severity":"low","Neighborhood":"Temescal"}
+{"Timestamp":"Y3C12","Cycle":"116","EventDescription":"stalled bus","EventType":"misc-event","Domain":"TRAFFIC","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"Y3C12","Cycle":"116","EventDescription":"St. Esperanza Parish: job training workshop begins new session","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"Y3C12","Cycle":"116","EventDescription":"New Covenant Pentecostal Assembly: seniors lunch program marks milestone","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"West Oakland"}
+{"Timestamp":"Y3C12","Cycle":"116","EventDescription":"Temple Beth Or: food pantry serves neighbors in need","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Rockridge"}
+{"Timestamp":"Y3C12","Cycle":"116","EventDescription":"B'nai Tikvah Synagogue: food pantry serves neighbors in need","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Piedmont Ave"}
+{"Timestamp":"Y3C12","Cycle":"116","EventDescription":"Or Hashalom Renewal Community: job training workshop begins new session","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Grand Lake"}

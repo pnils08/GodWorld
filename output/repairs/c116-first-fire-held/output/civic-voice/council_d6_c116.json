@@ -1,0 +1,56 @@
+{
+  "office": "council_d6",
+  "cycle": 116,
+  "speaker": "Elliott Crane",
+  "cascadeSummary": "For District 6, I am prioritizing municipal baseline maintenance along Piedmont Avenue and directing administrative follow-through on our localized medium-severity health spike. Citywide, I reaffirm my YES vote for Commercial Stabilization for Grand Lake (INIT-009) to record the roll with all Chen-Vega audit protocols intact. Regarding the West Oakland Stabilization Fund (INIT-001), I support bringing the transmitted charter renewal ordinance to the floor on the strict condition that Month-12 closeout records are verified and no new tranche is added.",
+  "statements": [
+    {
+      "statementId": "STMT-116-council_d6-001",
+      "type": "district_statement",
+      "topic": "Piedmont Avenue Baseline Services and Health Follow-up",
+      "initiative": null,
+      "decision": "Direct administrative follow-up on the Piedmont Avenue medium-severity health spike while maintaining core municipal baseline services and supporting community anchors.",
+      "quote": "Routine city maintenance and targeted public health follow-through must protect our commercial vitality without inventing new bureaucratic machinery.",
+      "fullStatement": "Piedmont Avenue remains commercially steady, with low crime and bustling street trade anchored by vital neighborhood institutions like B'nai Tikvah Synagogue and its community food pantry. While local sentiment has lifted, the reported medium-severity health spike requires disciplined administrative oversight rather than alarmism. I concur with placing this health spike on the executive follow-up calendar with a designated lead office and public update schedule before closure. City Hall's primary responsibility is simple: keep municipal baselines responsive, support local civic life, and ensure health follow-up happens efficiently without disrupting the steady daily commerce of District 6.",
+      "disposition": "statement",
+      "actionAsked": "Assign executive health follow-up with a lead agency and public reporting timeline for the Piedmont Avenue health spike while maintaining municipal baseline services.",
+      "tone": "disciplined, measured, oversight-focused",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-116-council_d6-002",
+      "type": "policy_statement",
+      "topic": "West Oakland Stabilization Fund Charter Renewal Ordinance",
+      "initiative": "West Oakland Stabilization Fund",
+      "decision": "Support council consideration of the transmitted charter renewal ordinance bounded strictly to verified Month-12 closeouts with no additional funding tranche.",
+      "quote": "A charter extension is warranted only when bounded by verified closeout ledgers and the existing 23-day processing standard, with zero unearned tranches.",
+      "fullStatement": "Having cast a crossover vote to establish the West Oakland Stabilization Fund back in Cycle 78, I have consistently insisted that ongoing authorization must rest on verifiable performance. The transmitted charter renewal ordinance properly restricts eligibility to businesses and residents, preserves the mandatory 23-day processing standard, and introduces no new spending tranche. I support bringing this ordinance forward for council review, but my final vote remains contingent upon public verification of the Month-12 closeout ledger. Fiscal discipline means renewal cannot run ahead of the accounting.",
+      "disposition": "statement",
+      "actionAsked": "Transmit the complete Month-12 closeout documentation for Council inspection alongside the charter renewal ordinance.",
+      "tone": "judicious, fiscally accountable, process-oriented",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-116-council_d6-003",
+      "type": "vote_statement",
+      "topic": "Commercial Stabilization for Grand Lake Recorded Vote",
+      "initiative": "Commercial Stabilization for Grand Lake",
+      "decision": "Reaffirm YES vote for the recorded full-council roll, preserving all Chen-Vega audit protocols and milestone reporting mandates.",
+      "quote": "Public investment earns my vote when enforceable audits and transparent milestones protect the public purse from day one.",
+      "fullStatement": "I reaffirm my YES vote on Commercial Stabilization for Grand Lake (INIT-009) as we proceed to a recorded full-council roll call. My support for commercial corridors across Oakland mirrors what works on Piedmont Avenue: steady stewardship paired with rigorous oversight. Because this measure incorporates the Chen-Vega audit framework, mandatory milestone reporting, and clawback provisions, it provides the structural accountability necessary for public investment. I call for the full council roll to be formally entered into the record under these exact terms.",
+      "disposition": "YES",
+      "actionAsked": "Record the full Council roll call on INIT-009 with all Chen-Vega audit and reporting covenants intact.",
+      "tone": "principled, accountable, affirmative",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    }
+  ]
+}

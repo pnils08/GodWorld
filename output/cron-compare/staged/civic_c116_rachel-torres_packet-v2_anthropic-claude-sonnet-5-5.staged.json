@@ -1,0 +1,65 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "116",
+  "persona": "rachel-torres",
+  "byline": "Sgt. Rachel Torres",
+  "bylinePopid": "POP-00057",
+  "article": "output/cron-compare/staged/civic_c116_rachel-torres_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Rafael Montez",
+        "role": "subject",
+        "popid": "POP-00136"
+      },
+      {
+        "name": "Kimberly Cho",
+        "role": "subject",
+        "popid": "POP-00137"
+      },
+      {
+        "name": "Dolores Nwachukwu",
+        "role": "quoted-source",
+        "popid": "POP-01141"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Downtown"
+    ],
+    "claims": [
+      {
+        "claim": "Downtown's number being the highest doesn't surprise me — it's a busy corridor with a lot of foot traffic and storefronts, and that's where a lot of the petty stuff gets reported. The clearance rate is a different problem. We're stretched thin, and a lot of those cases are property crimes where there's no witness and no easy lead. Two arrests out of eight incidents — that's not a failure of effort, it's a reality of the caseload. We're doing what we can with the staff we have, and I'd rather be honest about that than pretend otherwise.",
+        "sourceRef": "citizenVoice PRESS Dolores Nwachukwu"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-92371617c87e",
+    "draftSha256": "1051e2040feba4408d1c278c904c9992b9f8537a73cb595777b605a11387f93b",
+    "verdict": "output/cron-compare/civic_c116_rachel-torres_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-18T00:16:46.711Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 500",
+      "words": 806,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "1051e2040feba4408d1c278c904c9992b9f8537a73cb595777b605a11387f93b",
+      "costUsd": 0.001
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-18T00:16:51.047Z"
+}

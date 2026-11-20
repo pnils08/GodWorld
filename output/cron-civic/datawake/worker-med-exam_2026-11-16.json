@@ -1,0 +1,62 @@
+{
+  "office": "worker_med_exam",
+  "agentDir": "worker-med-exam",
+  "holder": "Jonas Patel",
+  "popid": "POP-00142",
+  "title": "Medical Examiner",
+  "date": "2026-11-16",
+  "cycle": 116,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "I need to push back on the framing here, and I want to be precise about why.\n\n**What the archive list actually is.** Those nine names — Isabelle Louis, Dune Topez, Marcello Ramas, Lilo Belton, Margarita Tanaka, Sumiko Mensah, Marisela Rios, Antwan Warren, Florencia Shah — are flagged `defects-at-exit`, and the only defect noted is `schoolQualityUnusable`. That's a data-quality rejection, not a death certificate. A record kicked out of the education model because the school-quality field choked on it says nothing about whether the person is alive. Two of them, Mensah and Rios, carry additional parse errors — a misspelled career stage, a blank employer with a role attached, a migration flag set. These are malformed rows, not obituaries. I would not sign my name to a death register built on the same class of error as a spelling glitch.\n\n**What the hospital ledger actually says.** I pulled it directly. Three admissions, and every one of them reads `recovered`. Yu Zen, Deacon Seymour, Maurice Franklin — all discharged, all with an outcome. Yu Zen's row even shows a discharge cycle *before* the transition cycle it's listed with, which is its own inconsistency. But status \"active\" with \"recovered\" beside it is a workflow artifact, not a patient on a slab. Nobody on that sheet is dead.\n\n**What I know firsthand.** Marcus Osei is recovering. Elliott Crane will walk again. Ariana Lee has stage-four cancer and no family listed — she's the one who keeps me up. And Yu Zen's lacerations still don't match the official fall story, no matter how many times the city tells me the camera was blind. Those are real open questions. The archive dump doesn't touch any of them.\n\nSo: I'm not going to confirm nine residents as deceased on the strength of a defect flag. If someone wants to feed this list to the Tribune or to a funeral home, I'll stop it. What I *can* do is pull the raw population record for the Cycle-106 and Cycle-107 exits and cross-reference each POPID — but my expectation is that we find bad field parsing, not bodies. And separately, my gut still says Yu Zen's file deserves the attention this list is asking for were it real.",
+  "moves": [],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-11-16T11:47:16.619Z",
+  "usage": {
+    "prompt_tokens": 7004,
+    "completion_tokens": 614,
+    "cost": 0.0025
+  },
+  "fellBackFrom": null,
+  "template": "worker/1",
+  "toolTrace": [
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Hospital_Ledger"
+      },
+      "resultChars": 581
+    },
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Domain_Tracker"
+      },
+      "resultChars": 4597
+    },
+    {
+      "tool": "memory_recall",
+      "input": {
+        "query": "hospital ledger deaths archive deceased"
+      },
+      "resultChars": 2089
+    }
+  ],
+  "memory": {
+    "searchedOn": "deaths cause of death",
+    "entries": 2,
+    "fromSearch": 0,
+    "newest": 2
+  },
+  "figuresNotHanded": [],
+  "finishReason": "stop",
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00142",
+    "id": "ANohzzBzLzx9FwTJNg5Hr5",
+    "customId": "cp-POP-00142-c116-CIVIC-datawake-2026-11-16"
+  }
+}

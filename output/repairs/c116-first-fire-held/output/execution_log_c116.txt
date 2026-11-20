@@ -1,0 +1,297 @@
+Execution log LIVE 116
+3:00:05 PM	Notice	Execution started
+3:00:09 PM	Info	engine.94 Sheet contract ready: seeded 0 config row(s), added 0 civic header(s)
+3:00:10 PM	Info	engine.133 config ready: seeded 0 row(s)
+3:00:10 PM	Info	engine.135 config ready: seeded 0 row(s)
+3:00:10 PM	Info	engine.96 config ready: seeded 0 row(s)
+3:00:10 PM	Info	engine.160 config ready: seeded 0 row(s)
+3:00:11 PM	Info	engine.213 config ready: seeded 0 row(s)
+3:00:11 PM	Info	engine.157 config ready: seeded 0 row(s)
+3:00:11 PM	Info	engine.161 config ready: seeded 0 row(s)
+3:00:11 PM	Info	engine.148 config ready: seeded 0 row(s)
+3:00:11 PM	Info	engine.176 config ready: seeded 0 row(s)
+3:00:12 PM	Info	engine.178 config ready: seeded 0 row(s)
+3:00:12 PM	Info	engine.192 config ready: seeded 0 row(s)
+3:00:12 PM	Info	engine.221 config ready: seeded 0 row(s)
+3:00:12 PM	Info	engine.272 config ready: seeded 0 row(s)
+3:00:12 PM	Info	engine.275 config ready: seeded 0 row(s)
+3:00:13 PM	Info	engine.286 config ready: seeded 0 row(s)
+3:00:13 PM	Info	engine.276 config ready: seeded 0 row(s)
+3:00:13 PM	Info	engine.338 config ready: seeded 0 row(s)
+3:00:14 PM	Info	engine.271 config ready: seeded 0 row(s)
+3:00:14 PM	Info	engine.254 config ready: seeded 0 row(s)
+3:00:14 PM	Info	engine.95 config ready: seeded 0 row(s)
+3:00:17 PM	Info	initializeSeededRng_: Initialized RNG with seed 116
+3:00:17 PM	Info	resetCycleAuditIssues_: Cleared audit issues for new cycle
+3:00:17 PM	Info	loadPreviousEvening_: Loaded evening data from cycle 115
+3:00:17 PM	Info	loadPreviousCycleState_: Restored state from cycle 115
+3:00:17 PM	Info	restoreCarriedRipples_: carried 3 economic + 1 initiative ripple(s) from cycle 115
+3:00:17 PM	Info	seedCarriedNeighborhoodEconomies_: 22 hood(s) opened on last Cycle's economic mood
+3:00:17 PM	Info	seedCarriedActivityObservations_: 8 Cycle(s) of activity history opened (baseline for the relative gates)
+3:00:17 PM	Info	seedCarriedSeedList_: 30 story seed(s) from cycle 115 opened as S.storySeedsCarried for Phase 2 (the seed gates' input)
+3:00:17 PM	Info	seedCarriedSeedList_: 45 contract seed(s) from cycle 115 opened as S.contractSeedsCarried for Phase 2 (the seed gates' input)
+3:00:17 PM	Info	seedCarriedCityDynamics_: city mood carrier opened (8 metrics, sentiment 0.02)
+3:00:17 PM	Info	seedCarriedFranchiseWeight_: 2 franchise weight(s) carried: {"A's":1,"Oaks":0.4426}
+3:00:18 PM	Info	  sportsWeek A's: g 0 h 0 w 0 l 0 lens off-season vol 0 stakes 0 reach 0.15 exp 0.75 n 3 surprise 0 unsigned 0 signed 0 venueShare 0 venue Baylight District median null streak -
+3:00:18 PM	Info	  sportsWeek Oaks: g 2 h 1 w 1 l 1 lens early-season vol 0.49 stakes 0.33 reach 0.25 exp 0.52 n 7 surprise -0.05 unsigned 0.07 signed 0 venueShare 0.5 venue Jack London/Downtown median 0.04 streak L1
+3:00:18 PM	Info	  sportsCity: intensity 0.07 signed 0 reach 0.25 games 2 median 0.09 band quiet
+3:00:18 PM	Info	  sportsStreak Oaks: L1 bar 5 → no headline
+3:00:18 PM	Info	applySportsSeason_ v3.1: 14 feed entries for cycle 116
+3:00:18 PM	Info	  Season: early-season (deepest of A's off-season, Oaks early-season), Active: baseball, basketball
+3:00:19 PM	Info	Sports aftermath: A's title quiet 6 since C110 (2-0, share 0.100) = 0.038
+3:00:19 PM	Info	Sports sentiment: Oaks = -0.000 (record: 9-2, season: early-season, streak: L1, fan: excited, media: regional)
+3:00:19 PM	Info	Sports trigger: A's -> traded @ city-wide
+3:00:19 PM	Info	Sports trigger: A's -> clubhouse-tension @ city-wide
+3:00:19 PM	Info	Sports trigger: A's -> clubhouse-tension @ city-wide
+3:00:19 PM	Info	Sports trigger: A's -> retirement @ city-wide
+3:00:19 PM	Info	Sports trigger: A's -> milestone @ city-wide
+3:00:19 PM	Info	Sports trigger: Oaks -> big-win @ Jack London
+3:00:19 PM	Info	Sports trigger: Oaks -> tough-loss @ Jack London
+3:00:19 PM	Info	Sports trigger: Oaks -> milestone @ Jack London
+3:00:19 PM	Info	Sports trigger: A's -> traded @ city-wide
+3:00:19 PM	Info	Sports trigger: A's -> clubhouse-tension @ city-wide
+3:00:19 PM	Info	Sports trigger: Oaks -> milestone @ Jack London
+3:00:19 PM	Info	applySportsFeedTriggers_ v3.0: Total sentiment adjustment: 0.037 (games -0.000, aftermath 0.038)
+3:00:19 PM	Info	loadCivicVoiceSentiment_ v2.0: Loaded sentiment 0.512 from World_Config (stamped cycle 115, engine cycle 116)
+3:00:19 PM	Info	applyEditionCoverageEffects_ v2.1: Processing 5 domain ratings
+3:00:19 PM	Info	  COMMUNITY: r2 positive → sentiment 0.0150, cooldown +1.00 (2 articles)
+3:00:19 PM	Info	  CULTURE: r0 positive → sentiment 0.0000, cooldown +0.00 (2 articles)
+3:00:19 PM	Info	  SPORTS: r5 positive → sentiment 0.0450, cooldown +5.00 (1 articles)
+3:00:19 PM	Info	  CIVIC: r1 positive → sentiment 0.0150, cooldown +0.80 (3 articles)
+3:00:19 PM	Info	  INFRASTRUCTURE: r0 neutral → sentiment 0.0000, cooldown +0.00 (1 articles)
+3:00:19 PM	Info	  COMPOUND: civic voice + civic media aligned (positive) → +0.0037
+3:00:19 PM	Info	applyEditionCoverageEffects_ v2.1: Sentiment adjustment: 0.0788
+3:00:19 PM	Info	applyEditionCoverageEffects_ v2.1: Complete. 5 domains → sentiment 0.0788, 1 triggers, 5 domain balance entries
+3:00:19 PM	Info	applyEditionCoverageEffects_ v2.1: Queued 5 mark-processed cell intents
+3:00:20 PM	Info	freezeCivicStageCohort_: Neighborhood_Demographics C115 frozen
+3:00:20 PM	Info	  West Oakland Stabilization Fund: disbursement-active (economic) → intensity 1.00 → West Oakland
+3:00:20 PM	Info	  Oakland Alternative Response Initiative: dispatch-live (safety) → intensity 1.00 → West Oakland, Fruitvale, East Oakland
+3:00:20 PM	Info	  Fruitvale Transit Hub Phase II — Visioning: complete (transit) → intensity 0.50 → Fruitvale
+3:00:20 PM	Info	  Temescal Community Health Center: operational (health) → intensity 0.90 → Temescal
+3:00:20 PM	Info	  Baylight District — Final Council Vote: operational (sports) → intensity 0.90 → Jack London, Downtown, Baylight District
+3:00:20 PM	Info	  Oakland Youth Apprenticeship Pipeline: implementation-active (workforce) → intensity 0.80 → West Oakland, East Oakland, Fruitvale
+3:00:20 PM	Info	applyInitiativeImplementationEffects_: engine.132 health relief from "Temescal Community Health Center" intensity 0.9 -> Temescal
+3:00:20 PM	Info	applyInitiativeImplementationEffects_: engine.259 fund disbursement — 1 program(s): INIT-001 economic tranche 400000 of 21000000
+3:00:20 PM	Info	applyInitiativeImplementationEffects_: Job 5 spend — INIT-002 operating -240384.62 -> 10817307.66 (45 wk left); INIT-005 operating -346153.85 -> 15576923.05 (45 wk left)
+3:00:20 PM	Info	applyInitiativeImplementationEffects_ v1.0: 6 initiatives → sentiment 0.1210, 7 neighborhoods, 5 triggers
+3:00:21 PM	Info	buildCommuteFlows_ v1.1: 808/1063 commuters resolved (372 cross-hood, 436 local), 106 origin-destination pairs, 255 unresolved (181 city-wide/non-hood, 74 off-ledger, 0 dangling biz-id, 0 biz without hood)
+3:00:21 PM	Info	applyNeighborhoodEffectsFold_: initiative → 7 hood(s), approval (cycle 115 carry) → 22 hood(s)
+3:00:21 PM	Info	applyCityDynamics_ v3.0: Media feedback applied (sentiment 0.000, crisisSat 0.30, celebBuzz 0.36)
+3:00:21 PM	Info	applyCityDynamics_ v3.1: Edition coverage neighborhood effects applied — traffic 0.050, retail 0.080, nightlife 0.100, publicSpaces 0.030, engagement 0.060, cultural 0.012
+3:00:21 PM	Info	applyCityDynamics_ engine.45 T3a: Sports sentiment boost applied — 0.0373
+3:00:21 PM	Info	applyCityDynamics_ v3.2: Edition coverage sentiment boost applied — 0.0788
+3:00:22 PM	Info	[ContentLedger] 1 row(s) skipped fail-closed; 955 lines / 30 fragments loaded.
+3:00:22 PM	Info	loadUndockedFeed_: 6 episode(s) airing c116 — pilots POP-01195, POP-00184, POP-00008
+3:00:24 PM	Info	hospitalTalkback: ok | C115 beds 69 middle 73 ratio 0.945 applied 0
+3:00:25 PM	Info	generateCrisisBuckets_ v3.0: 1 active crisis arc(s) (1 carried in) | cycle 116
+3:00:26 PM	Info	updateNeighborhoodDemographics_: city migration 1388 → table 151 (table 44166 / city 405992)
+3:00:26 PM	Info	updateNeighborhoodDemographics_: liveHoodCount=22 inflowModSum=22 | Cycle 116
+3:00:26 PM	Info	driftNeighborhoodEducation_ engine.192: 22/22 hoods moved (medians pressure 0 crime 33.32 funding 13000)
+3:00:27 PM	Info	batchUpdateNeighborhoodDemographics_: Updated 22 rows, added 0 new rows
+3:00:27 PM	Info	updateNeighborhoodDemographics_ v1.4-e135: Updated 22 neighborhoods | Cycle 116
+3:00:28 PM	Info	careJusticeDemand C116 Downtown charges=8 clr=0.2 jud=2 sick=71 hosp=1 oari=-/0/0 tracked=86 table=2790 rate=25559.43949274545 share=0.0033647060227752425
+3:00:28 PM	Info	careJusticeDemand C116 Temescal charges=6 clr=0.22 jud=1 sick=80 hosp=2 oari=-/0/0 tracked=59 table=2752 rate=25211.318094636372 share=0.002340218777079809
+3:00:28 PM	Info	careJusticeDemand C116 Laurel charges=6 clr=0.24 jud=1 sick=104 hosp=2 oari=-/0/0 tracked=58 table=2221 rate=20346.7796105332 share=0.0028505739537265313
+3:00:28 PM	Info	careJusticeDemand C116 West Oakland charges=5 clr=0.24 jud=1 sick=84 hosp=2 oari=deployed/1/1 tracked=135 table=2372 rate=21730.104113545593 share=0.0062125795299732105
+3:00:28 PM	Info	careJusticeDemand C116 Fruitvale charges=6 clr=0.21 jud=1 sick=107 hosp=2 oari=deployed/2/1 tracked=108 table=2354 rate=21565.204503914978 share=0.005008067508953765
+3:00:28 PM	Info	careJusticeDemand C116 Jack London charges=5 clr=0.22 jud=1 sick=65 hosp=1 oari=-/0/0 tracked=74 table=2596 rate=23782.18814450437 share=0.0031115723898223406
+3:00:28 PM	Info	careJusticeDemand C116 Rockridge charges=6 clr=0.2 jud=1 sick=96 hosp=2 oari=-/0/0 tracked=91 table=2218 rate=20319.296342261438 share=0.004478501541942281
+3:00:28 PM	Info	careJusticeDemand C116 Adams Point charges=5 clr=0.21 jud=1 sick=80 hosp=2 oari=-/0/0 tracked=11 table=2417 rate=22142.353137622133 share=0.0004967855011448566
+3:00:28 PM	Info	careJusticeDemand C116 Grand Lake charges=7 clr=0.25 jud=2 sick=98 hosp=2 oari=-/0/0 tracked=11 table=2345 rate=21482.754699099667 share=0.0005120386167450399
+3:00:28 PM	Info	careJusticeDemand C116 Piedmont Ave charges=6 clr=0.22 jud=1 sick=93 hosp=2 oari=-/0/0 tracked=59 table=2193 rate=20090.269106663356 share=0.002936745132021722
+3:00:28 PM	Info	careJusticeDemand C116 Chinatown charges=4 clr=0.23 jud=1 sick=132 hosp=3 oari=-/0/0 tracked=68 table=2212 rate=20264.329805717898 share=0.003355650083271579
+3:00:28 PM	Info	careJusticeDemand C116 Brooklyn charges=5 clr=0.24 jud=1 sick=66 hosp=1 oari=-/0/0 tracked=11 table=2154 rate=19732.986619130355 share=0.0005574422266792565
+3:00:28 PM	Info	careJusticeDemand C116 Eastlake charges=6 clr=0.21 jud=1 sick=84 hosp=2 oari=-/0/0 tracked=11 table=2273 rate=20823.156260577205 share=0.0005282580537910773
+3:00:28 PM	Info	careJusticeDemand C116 Glenview charges=5 clr=0.19 jud=1 sick=85 hosp=2 oari=-/0/0 tracked=12 table=2217 rate=20310.13525283751 share=0.0005908380151394359
+3:00:28 PM	Info	careJusticeDemand C116 Dimond charges=5 clr=0.24 jud=1 sick=89 hosp=2 oari=-/0/0 tracked=12 table=2181 rate=19980.33603357628 share=0.0006005904995708983
+3:00:28 PM	Info	careJusticeDemand C116 Ivy Hill charges=6 clr=0.22 jud=1 sick=112 hosp=2 oari=-/0/0 tracked=11 table=2108 rate=19311.57650562989 share=0.0005696065257434149
+3:00:28 PM	Info	careJusticeDemand C116 San Antonio charges=5 clr=0.24 jud=1 sick=105 hosp=2 oari=-/0/0 tracked=11 table=2235 rate=20475.03486246813 share=0.0005372396224908808
+3:00:28 PM	Info	careJusticeDemand C116 KONO charges=5 clr=0.23 jud=1 sick=16 hosp=0 oari=-/0/0 tracked=22 table=543 rate=4974.4715571902425 share=0.004422580317742611
+3:00:28 PM	Info	careJusticeDemand C116 Lake Merritt charges=7 clr=0.21 jud=1 sick=17 hosp=0 oari=-/0/0 tracked=101 table=608 rate=5569.942369745244 share=0.01813304219243107
+3:00:28 PM	Info	careJusticeDemand C116 Uptown charges=6 clr=0.22 jud=1 sick=21 hosp=0 oari=-/0/0 tracked=83 table=634 rate=5808.130694767246 share=0.0142903120404604
+3:00:28 PM	Info	careJusticeDemand C116 Baylight District charges=6 clr=0.22 jud=1 sick=13 hosp=0 oari=-/0/0 tracked=12 table=520 rate=4763.766500440011 share=0.0025190151530079413
+3:00:28 PM	Info	careJusticeDemand C116 East Oakland charges=5 clr=0.24 jud=1 sick=114 hosp=2 oari=deployed/1/1 tracked=17 table=2374 rate=21748.42629239344 share=0.0007816657523374823
+3:00:28 PM	Info	careJusticeDemand C116 city charges=125 jud=24 sick=1732 hosp=34 oari=West Oakland,Fruitvale,East Oakland/4/3
+3:00:29 PM	Info	careJusticeNamed C116 cop_car dial=1 calls=125 expected=0.47054007557438754 named=2 [Uptown:POP-00248 West Oakland:POP-00024]
+3:00:29 PM	Info	careJusticeNamed C116 ambulance dial=1 calls=34 expected=0.0739880889504124 named=0 []
+3:00:29 PM	Info	careJusticeNamed C116 oari_van dial=1 calls=4 expected=0.017010380300218224 named=0 []
+3:00:29 PM	Info	runChaosCarsEngine_: 13 events | 0 tier-1 | 4 businesses hit | ship none | 0 friction
+3:00:37 PM	Info	generateGenericCitizens_ v2.6: Generated 12 (baseCount=12, rng=seeded) | neighborhoods: Piedmont Ave=1, East Oakland=1, KONO=1, Dimond=3, Fruitvale=2, Eastlake=1, Uptown=1, Glenview=1, San Antonio=1 | types: adult=2, student=7, senior=2, young_professional=1
+3:00:37 PM	Info	applyGameNightMoments_: unresolved feed names, cycle 116: Porter Broadway, Jose Fuentes, Antone Baez, T, Jerome
+3:00:38 PM	Info	applyGameNightMoments_: cycle 116 — 45 named, 0 staff, 0 fan line(s), 42 trigger line(s), 3 retired, 0 injured, 0 returned, 5 asked; weeks {}
+3:00:40 PM	Info	loadRelationshipBonds_ v2.2: Loaded 697 active bonds
+3:00:40 PM	Info	seedRelationshipBonds_: Already have 697 bonds, skipping seed
+3:00:41 PM	Info	civicInitiativeEngine: engine.255 budget back-fill — 1 row(s) stamped
+3:00:42 PM	Info	civicInitiativeEngine: INIT-005 Delivering observation C115 edge 0.190721 vs margin 0.1 -> up 0 down 0
+3:00:42 PM	Info	civicInitiativeEngine: INIT-007 grace exhausted (3/3) — released to silence, this one is genuinely stalled
+3:00:42 PM	Info	initiativeRipple: Ivy Hill Community Support Initiative → safety ripple (negative) affecting 1 neighborhoods for 8 cycles
+3:00:42 PM	Info	civicInitiativeEngine v2.1: Examined 14 initiatives | In-scope 4 | Resolved 1 | Votes: 1 | Grants: 0 | Demographics: active
+3:00:43 PM	Info	updateCivicApprovalRatings_ engine.213: hoods scored 22, city level 0.52, press score 1.30 → 1
+3:00:43 PM	Info	  Avery Santana (CITYWIDE): 72 → 79 (Δ+7) West Oakland Stabilization Fund sitting (0, capped), Oakland Alternative Response Initiative sitting (0, capped), Fruitvale Transit Hub Phase II — Visioning completed (+3), Temescal Community Health Center sitting (0, capped), Baylight District — Final Council Vote completed (+3), Oakland Youth Apprenticeship Pipeline sitting (0, capped), Downtown Economic Revitalization sitting (0, capped), Commercial Stabilization for Grand Lake advanced (+2), West Oakland Tenant Defense Fund advanced (+1), Ivy Hill Revitalization Initiative sitting (0, capped), Dimond Revitalization Initiative sitting (0, capped), Ivy Hill Community Revitalization sitting (0, capped), Ivy Hill Community Support Initiative advanced (+1), Laurel Neighborhood Patch and Clean-Up sitting (0, capped), level target 57 (mood +0.52 city, press +1) → -3
+3:00:43 PM	Info	  Denise Carter (D1): 63 → 64 (Δ+1) West Oakland Stabilization Fund sitting (0, capped), Oakland Alternative Response Initiative sitting (0, capped), Oakland Youth Apprenticeship Pipeline sitting (0, capped), West Oakland Tenant Defense Fund advanced (+2), level target 59 (mood +0.63 (district 0.74, city 0.52), district +0.26 vs middle, press +1) → -1
+3:00:43 PM	Info	  Leonard Tran (D2): 69 → 70 (Δ+1) Baylight District — Final Council Vote completed (+1), Downtown Economic Revitalization sitting (0, capped), Commercial Stabilization for Grand Lake advanced (+2), level target 61 (mood +0.60 (district 0.69, city 0.52), district +0.56 vs middle, press +1) → -2
+3:00:43 PM	Info	  Rose Delgado (D3): 59 → 62 (Δ+3) Oakland Alternative Response Initiative sitting (0, capped), Fruitvale Transit Hub Phase II — Visioning completed (+3), Oakland Youth Apprenticeship Pipeline sitting (0, capped), level target 57 (mood +0.62 (district 0.72, city 0.52), district -0.10 vs middle, press +1) → +0
+3:00:43 PM	Info	  Ramon Vega (D4): 56 → 57 (Δ+1) Ivy Hill Revitalization Initiative sitting (0, capped), Dimond Revitalization Initiative sitting (0, capped), Ivy Hill Community Revitalization sitting (0, capped), Ivy Hill Community Support Initiative advanced (+2), level target 52 (mood +0.34 (district 0.16, city 0.52), district -0.80 vs middle, press +1) → -1, integrity band 1 scales scandal chance x0.75
+3:00:43 PM	Info	  Warren Ashford (D7): 62 → 61 (Δ-1) Temescal Community Health Center sitting (0, capped), level target 58 (mood +0.54 (district 0.56, city 0.52), district +0.07 vs middle, press +1) → -1, integrity band 1 scales scandal chance x0.75
+3:00:43 PM	Info	  Terrence Mobley (D9): 63 → 62 (Δ-1) Laurel Neighborhood Patch and Clean-Up sitting (0, capped), level target 58 (mood +0.48 (district 0.44, city 0.52), district +0.15 vs middle, press +1) → -1
+3:00:43 PM	Info	updateCivicApprovalRatings_ v1.1: Queued 7 approval rating updates
+3:00:43 PM	Info	updateCivicApprovalRatings_ v1.0: 7 officials updated, 0 threshold triggers
+3:00:43 PM	Info	generateCivicModeEvents v1.0: 13 events for CIVIC citizens
+3:00:43 PM	Info	generateMediaModeEvents v1.0: 17 events for MEDIA citizens
+3:00:44 PM	Info	applyBusinessDynamics_ engine.193b settle: Port of Oakland (Jack London, default) 12.45 → 12.93 = settle -0.52 + drift 1 [ev 1.23, vit 0.5, pressure 0, shock 0, noise 0.17] + ship 0
+3:00:44 PM	Info	applyBusinessDynamics_ engine.193b settle: AC Transit (Downtown, default) 12.16 → 12.65 = settle -0.51 + drift 1 [ev 1.23, vit 0.5, pressure 0, shock 0, noise -0.02] + ship 0
+3:00:44 PM	Info	applyBusinessDynamics_ engine.193b settle: Oakland Hospital (City-wide, health) 7.6 → 7.51 = settle -0.23 + drift 0.14 [ev 0.23, vit 0, pressure 0, shock 0, noise -0.03] + ship 0
+3:00:44 PM	Info	applyBusinessDynamics_ engine.193b settle: Oakland City Schools (City-wide, education) 7.37 → 7.37 = settle -0.27 + drift 0.27 [ev 0.23, vit 0, pressure 0, shock 0, noise 0.22] + ship 0
+3:00:44 PM	Info	applyBusinessDynamics_ engine.193b settle: City of Oakland (Downtown, default) 11.57 → 12.09 = settle -0.48 + drift 1 [ev 1.23, vit 0.5, pressure 0, shock 0, noise -0.05] + ship 0
+3:00:44 PM	Info	applyBusinessDynamics_ engine.193b settle: EBMUD (Downtown, default) 12.05 → 12.55 = settle -0.5 + drift 1 [ev 1.23, vit 0.5, pressure 0, shock 0, noise 0.13] + ship 0
+3:00:44 PM	Info	applyBusinessDynamics_ engine.193b settle: Piedmont Avenue Medical Center (Piedmont Ave, health) 9.93 → 9.94 = settle -0.35 + drift 0.36 [ev 0.23, vit 0.5, pressure 0, shock 0, noise -0.22] + ship 0
+3:00:44 PM	Info	applyBusinessDynamics_ engine.193b settle: Estuary Power & Gas (City-wide, default) 8.02 → 7.95 = settle -0.3 + drift 0.23 [ev 0.23, vit 0, pressure 0, shock 0, noise 0.01] + ship 0
+3:00:44 PM	Info	applyBusinessDynamics_ engine.193b settle: Oakland Community College District (City-wide, education) 7.31 → 7.2 = settle -0.27 + drift 0.15 [ev 0.23, vit 0, pressure 0, shock 0, noise 0.03] + ship 0
+3:00:44 PM	Info	applyBusinessDynamics_ engine.96:283 businesses, 283 drifted, 25 in distress, 3 disrupted, 0 under success pressure, 18 shed, 0 closing now, 0 winding down, mayor 72, initiative lift 65 / drag 0, ship none, game-week bars 59 at 0pp
+3:00:45 PM	Info	engine.157 maneuver: climb 217 / hold 718 / retreat 26 — 16 line(s) written; bar 60, debt 6, margin 5
+3:00:47 PM	Info	Economic_Parameters: loaded 315 roles
+3:00:47 PM	Info	runCareerEngine v2.7 rehire matcher: 1 hired (0 career changes) from unemployed pool of 6
+3:00:47 PM	Info	runCareerEngine v2.6 headcount: 10 businesses moved, 0 skipped (blank Employee_Count), 1 reconciliation firings across 1 businesses
+3:00:52 PM	Info	P6 BIRTH: POP-01241 Amara Morales -> HH-0102-F037
+3:00:52 PM	Info	runGenerationalEngine_ v2.4: 2 events | Recoveries: 0 | Deaths: 0
+3:00:52 PM	Info	judicialLifecycle C116: lost-pay settlements 0
+3:00:52 PM	Info	judicialLifecycle C116: court revenue 108884 from 24 cleared charges; named fines 0 / 0
+3:00:53 PM	Info	runYouthEngine_ loop 4 texture: 27 line(s) on 38 minor(s) 5–17
+3:01:03 PM	Info	generateCitizensEvents_: youth-mode gate stepped aside for 50 minor(s)
+3:01:07 PM	Info	checkForPromotions_ v2.3: 6 citizens promoted (6 by migration wave)
+3:01:07 PM	Info	runBondEngine_ v2.4: Loaded 23 neighborhoods from Neighborhood_Map
+3:01:07 PM	Info	ensureBondEngineData_ v2.6: activeCitizens=915, bondPool=873, citizenLookup=1026, sources=[Simulation_Ledger]
+3:01:07 PM	Info	engine.59 diag: trait map built, 2096 keys
+3:01:08 PM	Info	detectNewBonds_ v2.4: Found 25 potential bonds from 108 meetings among 873 active citizens (calendar: SpringEquinox, factor 1)
+3:01:08 PM	Info	runBondEngine_ v2.4: Created bond POP-00145 <-> POP-00531 (neighbor)
+3:01:08 PM	Info	runBondEngine_ v2.4: Created bond POP-00763 <-> POP-00698 (neighbor)
+3:01:08 PM	Info	runBondEngine_ v2.4: Created bond POP-00737 <-> POP-01144 (tension)
+3:01:08 PM	Info	runBondEngine_ v2.4: Created bond POP-00276 <-> POP-00886 (neighbor)
+3:01:08 PM	Info	runBondEngine_ v2.4: Created bond POP-00030 <-> POP-01102 (neighbor)
+3:01:08 PM	Info	runBondEngine_ v2.4: Created bond POP-01154 <-> POP-00710 (neighbor)
+3:01:08 PM	Info	runBondEngine_ v2.4: Created bond POP-00573 <-> POP-00314 (tension)
+3:01:08 PM	Info	runBondEngine_ v2.4: Created bond POP-01219 <-> POP-00537 (neighbor)
+3:01:08 PM	Info	runBondEngine_ v2.4: Created bond POP-00783 <-> POP-00810 (neighbor)
+3:01:08 PM	Info	runBondEngine_ v2.4: Created bond POP-00901 <-> POP-01192 (neighbor)
+3:01:08 PM	Info	runBondEngine_ v2.4: Created bond POP-00856 <-> POP-00290 (neighbor)
+3:01:08 PM	Info	runBondEngine_ v2.4: Created bond POP-00801 <-> POP-00195 (neighbor)
+3:01:08 PM	Info	runBondEngine_ v2.4: Created bond POP-00217 <-> POP-00239 (neighbor)
+3:01:08 PM	Info	runBondEngine_ v2.4: Created bond POP-00309 <-> POP-00155 (neighbor)
+3:01:08 PM	Info	runBondEngine_ v2.4: Created bond POP-00212 <-> POP-00170 (neighbor)
+3:01:08 PM	Info	runBondEngine_ v2.4: Created bond POP-00449 <-> POP-00475 (tension)
+3:01:08 PM	Info	runBondEngine_ v2.4: Created bond POP-00488 <-> POP-01193 (neighbor)
+3:01:08 PM	Info	runBondEngine_ v2.4: Created bond POP-00904 <-> POP-00636 (neighbor)
+3:01:08 PM	Info	runBondEngine_ v2.4: Created bond POP-00841 <-> POP-00301 (neighbor)
+3:01:08 PM	Info	runBondEngine_ v2.4: Created bond POP-00020 <-> POP-00957 (neighbor)
+3:01:08 PM	Info	runBondEngine_ v2.4: Created bond POP-00502 <-> POP-01093 (neighbor)
+3:01:08 PM	Info	runBondEngine_ v2.4: Created bond POP-00593 <-> POP-00453 (neighbor)
+3:01:08 PM	Info	runBondEngine_ v2.4: Created bond POP-00935 <-> POP-00664 (neighbor)
+3:01:08 PM	Info	runBondEngine_ v2.4: Created bond POP-00892 <-> POP-01080 (neighbor)
+3:01:08 PM	Info	runBondEngine_ v2.4: Created bond POP-00251 <-> POP-00477 (tension)
+3:01:09 PM	Info	processFaithJoins_: 3 joined, 0 drifted
+3:01:09 PM	Info	runBondEngine_ v2.4: Complete. Total bonds: 722 | Calendar: SpringEquinox
+3:01:09 PM	Info	processAdvancementIntake_ v1.4 starting - Cycle 116
+3:01:11 PM	Info	applyTierLadderState_: 8 promoted, 80 seeded cell(s) held, 0 ambiguous name(s) skipped
+3:01:11 PM	Info	applyTierLadderState_: 2 assumed fame, 2 fame-floored to Tier 1, 2 cultural row(s) registered/brightened
+3:01:16 PM	Info	decayMediaAttention_: 10 attention decays, 0 tier demotions
+3:01:17 PM	Info	checkFamilyMatchPromotions_: released Victor Mitchell — the child spot of POP-00756 closed (C116)
+3:01:17 PM	Info	checkFamilyMatchPromotions_: released Miguel Johnson — the child spot of POP-00844 closed (C116)
+3:01:17 PM	Info	checkFamilyMatchPromotions_: released Owen Campbell — the child spot of POP-00770 closed (C116)
+3:01:17 PM	Info	checkFamilyMatchPromotions_: released Jacob Wright — the child spot of POP-00765 closed (C116)
+3:01:17 PM	Info	checkFamilyMatchPromotions_: released Ivy Harris — the child spot of POP-00761 closed (C116)
+3:01:18 PM	Info	checkFamilyMatchPromotions_: Omar Nguyen is the child of POP-00504 — now Omar Ashford, in the background (C116)
+3:01:18 PM	Info	checkFamilyMatchPromotions_: Minh Singh is the child of POP-01107 — now Minh Yoon, in the background (C116)
+3:01:18 PM	Info	checkFamilyMatchPromotions_: Xavier Phillips is the child of POP-00159 — now Xavier Okafor, in the background (C116)
+3:01:18 PM	Info	checkFamilyMatchPromotions_: Kenji Harris is the spouse of POP-00491 — now Kenji Gonzalez, in the background (C116)
+3:01:18 PM	Info	checkFamilyMatchPromotions_: Shawn Nguyen is the child of POP-00488 — now Shawn Ochoa, in the background (C116)
+3:01:21 PM	Info	processAdvancementIntake_ v1.4 complete: {"usageProcessed":85,"usageSkipped":1,"advancementsProcessed":93,"promotionsTriggered":8,"errors":[],"paperFame":13,"paperFameNoRow":36,"paperFameUnresolved":1,"ladderSeededHeld":80,"emergencePromotionsQueued":0,"familyEmergencesQueued":0,"familyLinks":5,"familyLinksReleased":5,"ownerMintsQueued":0,"ownersWired":0,"emergenceBondsSeeded":0}
+3:01:23 PM	Info	formCriteriaHouseholds_ engine.64: formed 0, adopted 0, solo 3
+3:01:25 PM	Info	householdFormationEngine: engine.259 fund disbursement — 1 program(s), 0 grant(s) $0, debited $400000 | INIT-001: 0 grant(s) $0 of tranche $400000, remaining 20600000 (eligible 0; skipped unflagged 94, cooldown 0, off-hood 586)
+3:01:26 PM	Info	processHouseholdFormation_ v1.0: Complete.
+3:01:26 PM	Info	Processed: 1033, Formed: 0, Dissolved: 0, Births: 0
+3:01:26 PM	Info	processGenerationalWealth_ v2.1: Starting...
+3:01:27 PM	Info	applyOwnerDraw_ engine.96 T10: 24 businesses, 25 owners, 18 paid, 5 gains, 0 unresolved
+3:01:27 PM	Info	ENGINE61_RATE: 5 (steady) prev=5.33 mood=52 nudge=0.01 jitter=-0.31
+3:01:27 PM	Info	undockedDrawCast_: c117 cast POP-00343, POP-01062, POP-00287 (pool 980)
+3:01:28 PM	Info	processCasinoLedger_: settled 6 placed 18 carried 22 voided 15 float 246005
+3:01:28 PM	Info	processMoneyLoop_ engine.276: rate 5, accrued 979, debt +2/-28 (lean +1/-28, events +1/-0), defaults 0, shocks 2x/2w, lines 15
+3:01:29 PM	Info	trackWealthMobility_ engine.61 T5: 0 moves (0 up / 0 down)
+3:01:30 PM	Info	trackHomeOwnership_ engine.65 T2: 1 purchases
+3:01:33 PM	Info	updateHeritage_ engine.65: lines 11, joined 0, founded 0 (), promoted 0, demoted 0, dormant 0, revived 0, biz 0
+3:01:33 PM	Info	processGenerationalWealth_ v2.1: Complete. Income: 0, Wealth: 1074, Inheritance: 0, Mobility: 0, Homes: 1
+3:01:33 PM	Info	processEducationCareer_ v2.2: Starting...
+3:01:34 PM	Info	settleAdulthood_ engine.60 T4: settled 0 (rich 0 / solid 0 / rough 0)
+3:01:34 PM	Info	processEducationCareer_ v2.2: Complete. Education: 3, MinorStages: 0/49, Career: 0, Stagnant: 359, Income: 0
+3:01:34 PM	Info	processNeighborhoodTrajectory_ v1.0: Starting...
+3:01:34 PM	Info	processNeighborhoodTrajectory_ v1.0: Complete. Analyzed: 22, Growth: 7, Decay: 9, Hooks: 10
+3:01:34 PM	Info	processMigrationTracking_ v1.1: Starting...
+3:01:39 PM	Info	processRelocations_: 4 unit(s) relocated; 3 owned/unknown household unit(s) anchored (G-EC70); 16 canon faith-leader unit(s) anchored
+3:01:39 PM	Info	processSettledInCheck_ engine.61: 4 verdict(s)
+3:01:39 PM	Info	processMigrationTracking_ v1.1: Complete.
+3:01:39 PM	Info	  Assessed: 1073, High risk: 147, Events: 4
+3:01:39 PM	Info	applyCivicLoadIndicator_ v2.3: Cycle 116 | Events (this cycle): 5 | Active arcs: 1 | Score: 9 | Load: minor-variance
+3:01:39 PM	Info	runEconomicRippleEngine_ v2.5: mood=51.1 | ripples=4 | prevMigration=4 | layoffs=1
+3:01:39 PM	Info	applyActiveInitiativeRipples_: 2 active, 0 expired this cycle
+3:01:40 PM	Info	applyMigrationDrift_: totalPopulation=403790 worldMig=1388 (source: World_Population)
+3:01:42 PM	Info	Phase 6.5: Validation complete - PASS
+3:01:43 PM	Info	decayCulturalFame_: 13 entities fading
+3:01:48 PM	Info	flushCulturalFame_: {"touched":20,"written":17,"pending":2,"paperCredited":13,"paperNoRow":36,"failed":[]}
+3:01:49 PM	Info	populateMediaIntake_ v2.3: Populated 3 media mentions
+3:01:49 PM	Warning	priorityEngine clamp: raw=13.00 final=10.00 domain=HEALTH severity=MED
+3:01:49 PM	Warning	priorityEngine clamp: raw=13.00 final=10.00 domain=HEALTH severity=MED
+3:01:56 PM	Info	buildContractSeeds_: 49 seeds (33 major / 16 texture) from 76 ripples + 2104 citizen events, cycle 116 | container=1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk
+3:01:56 PM	Info	v3Integration v3.4: Cycle 116 | Calendar: SpringEquinox (minor) | FirstFriday: false | CreationDay: false | Sports: early-season
+3:01:56 PM	Info	domainTracker_ v3.4: Cooldown on FAITH (-1)
+3:01:56 PM	Info	runMediaFeedbackEngine_ v2.3: neutral | Holiday: SpringEquinox | Sports: early-season
+3:01:56 PM	Info	v3Integration v3.4: Complete | Modules: 4/4 | Arcs: 1 | Textures: 7 | Domains: 8 | Ripples: 4 | Bonds: 722
+3:01:57 PM	Info	compressLifeHistory_ v3.0: Updated 1074, skipped 0, reflections 236/127 citizens, biases 0/0 citizens, folded 2367 entries, settled 1074, FUTURE-STAMPED 2 lines / 13 watermarks past C116, fandom seeded 10 (0 as household fans), pressure {"hood:Friction":20,"hood:Strain":1,"overwork:Strain":21,"debt:adapted":25,"debt:Strain":2}, contests {"n":1,"aWins":1,"underdogWins":0,"bySite":{"job-slot":1},"gaps":{"0":1}}, pushes 1, integrity wear 38/23 at rate 1, unlived 9, bonds nudged 12
+3:01:57 PM	Info	finalizeWorldPopulation_ v1.3: Queued intents for Cycle 116 | Holiday: SpringEquinox | Sports: early-season
+3:01:57 PM	Info	snapshotEveningForCarryForward_: Built snapshot for cycle 116 (3 hotspots, vol=10, safety=tense)
+3:01:57 PM	Info	compactCrimeSpikes_: carrying 1 crime spike(s) to next cycle
+3:01:57 PM	Info	recordCycleWeather_ v1.2: Queued weather for cycle 116 - mild 54°F
+3:01:57 PM	Info	recordWorldEvents25_ v2.2: Queued 10 events | Holiday: SpringEquinox | Sports: early-season
+3:01:57 PM	Info	recordWorldEventsv3_ v3.7: Queued 10 events for cycle 116
+3:01:59 PM	Info	saveV3NeighborhoodMap_ v3.6: Updated 22 neighborhoods | Cycle 116 | Holiday: SpringEquinox
+3:01:59 PM	Info	saveRelationshipBonds_ v2.3: Queued 722 bonds for save
+3:02:00 PM	Info	saveV3BondsToLedger_ v2.4: Wrote 62 bond(s) for Cycle 116
+3:02:00 PM	Info	saveV3Domains_ v3.4: Queued row for Cycle 116 | Dominant: FAITH | Total: 9 | Holiday: SpringEquinox
+3:02:01 PM	Info	saveV3Seeds_ v4.0: Queued 49 contract seeds for cycle 116
+3:02:01 PM	Info	saveV3Hooks_ v3.5: Queued 37 hooks for cycle 116
+3:02:01 PM	Info	saveV3Textures_ v3.5: Queued 7 textures for cycle 116
+3:02:02 PM	Info	persistHospitalLedger_ (engine.52): cycle 116 | open 0 | admits 0 | discharges 0 | deaths 0 | ghost beds released 0 | missed admits reconciled 0
+3:02:03 PM	Info	buildCyclePacket_ v3.8: Cycle 116
+3:02:08 PM	Info	persistCareJusticeCensus_ C116: write 216 rows at 1298 | hospital complete | judicial complete | outside-table tracked 3
+3:02:08 PM	Info	recordMediaLedger_ v3.2: Queued 3 media entries
+3:02:08 PM	Info	saveCycleSeed_: Queued seed 116 for cycle 116
+3:02:09 PM	Info	saveEveningSnapshot_: Saved 2184 bytes for cycle 116
+3:02:09 PM	Info	savePreviousCycleState_: Saved 14019 bytes for cycle 116
+3:02:10 PM	Info	savePreviousCycleState_: Saved 380 bytes of hood economies for cycle 116
+3:02:10 PM	Info	compactCrimeSpikes_: carrying 1 crime spike(s) to next cycle
+3:02:11 PM	Info	savePreviousCycleState_: Saved 1241 bytes of activity history for cycle 116
+3:02:12 PM	Info	savePreviousCycleState_: Saved 1619 bytes of story seeds (31 of 31) for cycle 116
+3:02:13 PM	Info	savePreviousCycleState_: Saved 3490 bytes of contract seeds (48 of 48) for cycle 116
+3:02:14 PM	Info	savePreviousCycleState_: Saved franchise weights {"A's":{"w":1,"weeks":0,"fans":0},"Oaks":{"w":0.4345,"weeks":5,"fans":3.2}} for cycle 116
+3:02:16 PM	Info	savePreviousCycleState_: Saved 149 bytes of city dynamics carrier for cycle 116
+3:02:16 PM	Info	popIdAllocator engine.90: popIdHighWater → 1247
+3:02:16 PM	Info	executeEnsureIntent_: Ripple_Ledger already exists — no-op
+3:02:16 PM	Info	executeEnsureIntent_: Chaos_Cars already exists — no-op
+3:02:16 PM	Info	executeEnsureIntent_: Content_Telemetry already exists — no-op
+3:02:19 PM	Info	executeReplaceIntent_: Replaced Relationship_Bonds with 723 rows
+3:02:36 PM	Info	executePersistIntents_: Executed 866 intents in 20411ms
+3:02:36 PM	Info	processMediaIntake_ v2.6: Starting intake processing for cycle 116
+3:02:40 PM	Info	routeCitizenUsageToIntake_: Routed 86 citizens (new: 0, existing: 86)
+3:02:40 PM	Info	processMediaIntake_ v2.6: Complete. Articles: 0, Citizens: 0, Routed: 86 (new: 0, existing: 86), Fame: 0 mentions → 0 updates
+3:02:42 PM	Info	archiveCitizenExits_ engine.90: POP-00055 archived (traded-away, C116)
+3:02:43 PM	Info	archiveCitizenExits_ engine.90 C116: 1 archived, 0 skipped, 1073 remain on Simulation_Ledger
+3:02:52 PM	Info	archiveLifeHistory: maxCycle=116, retainCycles=12, cutoff=104, totalRows=29690
+3:02:52 PM	Info	archiveLifeHistory: 1674 rows to archive, 28016 rows to keep
+3:02:53 PM	Info	archiveLifeHistory: Appended 1674 rows to LifeHistory_Archive (now 19218 rows)
+3:03:18 PM	Info	archiveLifeHistory: LifeHistory_Log now has 28016 data rows
+3:03:18 PM	Info	Archived: 1674 rows across 1 cycles (C104-C104)
+3:03:18 PM	Info	archiveLifeHistory v1.0: COMPLETE — 1674 archived, 28016 retained
+3:03:19 PM	Info	Cache flush: 5 writes, 0 appends
+3:03:19 PM	Info	PHASE_TIMING_BEGIN
+3:03:19 PM	Info	{"cycle":116,"totalMs":182191,"phaseCount":132,"slowest":[{"phase":"Phase11-MaintainLifeHistoryLog","ms":35837,"ok":true},{"phase":"Phase10-ExecuteIntents","ms":20413,"ok":true},{"phase":"Phase5-Advancement","ms":12648,"ok":true},{"phase":"Phase5-CitizenEvents","ms":8912,"ok":true},{"phase":"Phase7-ContractSeeds","ms":7062,"ok":true}],"timings":[{"phase":"Phase1-LoadConfig","ms":178,"ok":true},{"phase":"Phase1-CanonHoods","ms":308,"ok":true},{"phase":"Phase1-AdvanceTime","ms":0,"ok":true},{"phase":"Phase1-SeedRng","ms":1,"ok":true},{"phase":"Phase1-Calendar","ms":1,"ok":true},{"phase":"Phase1-ResetAudit","ms":1,"ok":true},{"phase":"Phase1-PrevEvening","ms":57,"ok":true},{"phase":"Phase1-PrevCycleState","ms":331,"ok":true},{"phase":"Phase2-SportsSeason","ms":872,"ok":true},{"phase":"Phase2-SeasonalWeights","ms":1,"ok":true},{"phase":"Phase2-SportsFeed","ms":603,"ok":true},{"phase":"Phase2-CivicSentiment","ms":1,"ok":true},{"phase":"Phase2-EditionCoverage","ms":284,"ok":true},{"phase":"Phase2-CivicStageCohort","ms":748,"ok":true},{"phase":"Phase2-InitiativeEffects","ms":605,"ok":true},{"phase":"Phase2-Weather","ms":2,"ok":true},{"phase":"Phase2-CommuteFlows","ms":294,"ok":true},{"phase":"Phase2-NeighborhoodState","ms":185,"ok":true},{"phase":"Phase2-CityDynamics","ms":378,"ok":true},{"phase":"Phase2-ContentLedger","ms":371,"ok":true},{"phase":"Phase2-UndockedFeed","ms":294,"ok":true},{"phase":"Phase2-Transit","ms":956,"ok":true},{"phase":"Phase3-Population","ms":445,"ok":true},{"phase":"Phase3-Demographics","ms":1442,"ok":true},{"phase":"Phase3-CrisisSpikes","ms":1,"ok":true},{"phase":"Phase3-CrisisBuckets","ms":1,"ok":true},{"phase":"Phase3-Crime","ms":1513,"ok":true},{"phase":"Phase3-NeighborhoodDemo","ms":600,"ok":true},{"phase":"Phase4-CycleRecovery","ms":1,"ok":true},{"phase":"Phase4-DomainCooldowns","ms":0,"ok":true},{"phase":"Phase4-WorldEvents","ms":626,"ok":true},{"phase":"Phase4-FaithEvents","ms":576,"ok":true},{"phase":"Phase4-CareJusticeDemand","ms":395,"ok":true},{"phase":"Phase4-ChaosCars","ms":1100,"ok":true},{"phase":"Phase5-GenericCitizens","ms":7040,"ok":true},{"phase":"Phase5-GenericMicroEvents","ms":26,"ok":true},{"phase":"Phase5-GameModeMicroEvents","ms":5,"ok":true},{"phase":"Phase5-GameNightMoments","ms":985,"ok":true},{"phase":"Phase5-EnsureEventsLedger","ms":1,"ok":true},{"phase":"Phase5-EnsureMediaLedger","ms":1,"ok":true},{"phase":"Phase5-EnsureEventsV3","ms":1,"ok":true},{"phase":"Phase5-EnsureBonds","ms":1608,"ok":true},{"phase":"Phase5-LoadBonds","ms":391,"ok":true},{"phase":"Phase5-SeedBonds","ms":346,"ok":true},{"phase":"Phase5-Relationships","ms":10,"ok":true},{"phase":"Phase5-Neighborhoods","ms":5,"ok":true},{"phase":"Phase5-Universe","ms":2,"ok":true},{"phase":"Phase5-Initiatives","ms":1709,"ok":true},{"phase":"Phase5-ApprovalRatings","ms":1148,"ok":true},{"phase":"Phase5-CivicModeEvents","ms":464,"ok":true},{"phase":"Phase5-MediaModeEvents","ms":3,"ok":true},{"phase":"Phase5-BusinessDynamics","ms":845,"ok":true},{"phase":"Phase5-CivicRoles","ms":550,"ok":true},{"phase":"Phase5-Maneuver","ms":759,"ok":true},{"phase":"Phase5-Career","ms":1553,"ok":true},{"phase":"Phase5-Education","ms":3252,"ok":true},{"phase":"Phase5-Household","ms":1,"ok":true},{"phase":"Phase5-Conduct","ms":1,"ok":true},{"phase":"Phase5-Generational","ms":2008,"ok":true},{"phase":"Phase5-Judicial","ms":2,"ok":true},{"phase":"Phase5-Youth","ms":844,"ok":true},{"phase":"Phase5-Intake","ms":1019,"ok":true},{"phase":"Phase5-NamedCitizens","ms":1,"ok":true},{"phase":"Phase5-CitizenEvents","ms":8912,"ok":true},{"phase":"Phase5-Promotions","ms":4214,"ok":true},{"phase":"Phase5-Bonds","ms":1516,"ok":true},{"phase":"Phase5-Advancement","ms":12648,"ok":true},{"phase":"Phase5-HouseholdFormation","ms":4244,"ok":true},{"phase":"Phase5-GenerationalWealth","ms":6992,"ok":true},{"phase":"Phase5-EducationCareer","ms":1596,"ok":true},{"phase":"Phase5-Trajectory","ms":291,"ok":true},{"phase":"Phase5-MigrationTracking","ms":4231,"ok":true},{"phase":"Phase6-FilterNoise","ms":0,"ok":true},{"phase":"Phase6-Prioritize","ms":0,"ok":true},{"phase":"Phase6-Spotlights","ms":1,"ok":true},{"phase":"Phase6-RecurringCitizens","ms":1,"ok":true},{"phase":"Phase6-CivicLoad","ms":1,"ok":true},{"phase":"Phase6-EconomicRipple","ms":509,"ok":true},{"phase":"Phase6-InitiativeRipple","ms":1,"ok":true},{"phase":"Phase6-Migration","ms":659,"ok":true},{"phase":"Phase6-PatternDetect","ms":1857,"ok":true},{"phase":"Phase6-ShockMonitor","ms":2,"ok":true},{"phase":"Phase6-Textures","ms":2,"ok":true},{"phase":"Phase6-TransitSignals","ms":0,"ok":true},{"phase":"Phase6.5-Validation","ms":4,"ok":true},{"phase":"Phase7-CityEvents","ms":359,"ok":true},{"phase":"Phase7-Nightlife","ms":2,"ok":true},{"phase":"Phase7-Sports","ms":0,"ok":true},{"phase":"Phase7-Food","ms":420,"ok":true},{"phase":"Phase7-Famous","ms":5683,"ok":true},{"phase":"Phase7-FameFlush","ms":1,"ok":true},{"phase":"Phase7-EveningMedia","ms":1,"ok":true},{"phase":"Phase7-CitySystems","ms":380,"ok":true},{"phase":"Phase7-MediaPacket","ms":2,"ok":true},{"phase":"Phase7-SeasonalSeeds","ms":1,"ok":true},{"phase":"Phase7-ChaosWeights","ms":0,"ok":true},{"phase":"Phase7-StorySeeds","ms":376,"ok":true},{"phase":"Phase7-ContractSeeds","ms":7062,"ok":true},{"phase":"Phase8-V3Preload","ms":1,"ok":true},{"phase":"Phase8-V3Integration","ms":28,"ok":true},{"phase":"Phase8-CycleWeightSignal","ms":1,"ok":true},{"phase":"Phase8-DemographicDrift","ms":1,"ok":true},{"phase":"Phase9-DigestSummary","ms":0,"ok":true},{"phase":"Phase9-CompressLifeHistory","ms":902,"ok":true},{"phase":"Phase9-FinalizePopulation","ms":92,"ok":true},{"phase":"Phase9-EveningSnapshot","ms":1,"ok":true},{"phase":"Phase9-FinalizeCycleState","ms":1,"ok":true},{"phase":"Phase10-WriteDigest","ms":0,"ok":true},{"phase":"Phase10-CycleWeather","ms":221,"ok":true},{"phase":"Phase10-RecordEvents25","ms":2,"ok":true},{"phase":"Phase10-RecordEventsV3","ms":2,"ok":true},{"phase":"Phase10-ChaosNbhdResolve","ms":765,"ok":true},{"phase":"Phase10-NeighborhoodMap","ms":762,"ok":true},{"phase":"Phase10-Bonds","ms":400,"ok":true},{"phase":"Phase10-BondLedger","ms":1187,"ok":true},{"phase":"Phase10-Domains","ms":1,"ok":true},{"phase":"Phase10-Seeds","ms":709,"ok":true},{"phase":"Phase10-Hooks","ms":2,"ok":true},{"phase":"Phase10-Textures","ms":1,"ok":true},{"phase":"Phase10-CyclePacket","ms":1402,"ok":true},{"phase":"Phase10-CareJusticeCensus","ms":5533,"ok":true},{"phase":"Phase10-MediaLedger","ms":314,"ok":true},{"phase":"Phase10-CycleSeed","ms":2,"ok":true},{"phase":"Phase10-EveningSnapshot","ms":497,"ok":true},{"phase":"Phase10-CycleState","ms":6760,"ok":true},{"phase":"Phase10-PopIdHighWater","ms":1,"ok":true},{"phase":"Phase10-CommitLedger","ms":0,"ok":true},{"phase":"Phase10-ExecuteIntents","ms":20413,"ok":true},{"phase":"Phase11-MediaIntake","ms":4282,"ok":true},{"phase":"Phase11-BusinessArchive","ms":1,"ok":true},{"phase":"Phase11-CitizenArchive","ms":2351,"ok":true},{"phase":"Phase11-MaintainLifeHistoryLog","ms":35837,"ok":true}]}
+3:03:19 PM	Info	PHASE_TIMING_END
+3:03:19 PM	Info	Cycle completed. Engine errors logged: 0; audit issues tracked: 0; rng draws: 44748
+3:03:20 PM	Notice	Execution completed

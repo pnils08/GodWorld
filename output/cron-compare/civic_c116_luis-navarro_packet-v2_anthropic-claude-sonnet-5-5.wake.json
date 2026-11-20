@@ -1,0 +1,60 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "116",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "luis-navarro",
+  "byline": {
+    "name": "Luis Navarro",
+    "popid": "POP-00636",
+    "beatDomain": "CIVIC"
+  },
+  "laneEntries": 115,
+  "quotesLanded": 1,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "sheet_read",
+    "canon_recall",
+    "canon_recall"
+  ],
+  "toolCalls": 3,
+  "wordCount": 687,
+  "targetWords": "400-700",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 687,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "16aa20f43adcfb9b9cf9d3a415dec08caa39abb51336d68ab2c298fb4a3f7ad3",
+    "costUsd": 0.0014
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/3 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/civic_c116_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "ing { override: true }\n{\n  \"popId\": \"POP-00636\",\n  \"name\": \"Luis Navarro\",\n  \"recorded\": true,\n  \"text\": \"filed: Four Cycles, One Stage: The Apprenticeship Pipeline's Gap Analysis Is Due Next Cycle\"\n}"
+  },
+  "ranAt": "2026-11-18T00:16:15.569Z"
+}

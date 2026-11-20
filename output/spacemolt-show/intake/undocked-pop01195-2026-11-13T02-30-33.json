@@ -1,0 +1,60 @@
+{
+  "v": "UNDOCKED-INTAKE/1",
+  "Timestamp": "2026-11-13T02:55:44.092Z",
+  "POPID": "POP-01195",
+  "Cycle": 115,
+  "Seq": 2,
+  "Daypart": "SHOW",
+  "Tag": "undocked-episode",
+  "EpisodeId": "undocked-pop01195-2026-11-13T02-30-33",
+  "Applied": "yes",
+  "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop01195-2026-11-13T02-30-33.json",
+  "Holder": "Elijah Brown",
+  "CreditsDelta": 0,
+  "Magnitude": 2,
+  "Flags": [
+    "credits_delta_windowed"
+  ],
+  "Excerpt": "Elijah Brown credits=0 systems=last_light,fang,errai,wezen,brightfall,birchwood,pinecross,aludra,tejat,gsc_0002,torcular,gsc_0043,gsc_0045,dabih,rimegate,veritate,betelgeuse,gsc_0037",
+  "DecidedAt": "2026-11-13T02:55:44.096Z",
+  "DecidedBy": "auto-gate",
+  "Note": "auto-approved on contract validation (§2.5)",
+  "FeedEvent": {
+    "v": "UNDOCKED-FEED/1",
+    "Cycle": 115,
+    "EventType": "undocked-episode",
+    "POPID": "POP-01195",
+    "Holder": "Elijah Brown",
+    "EpisodeId": "undocked-pop01195-Y3C11-e2",
+    "CreditsDelta": 0,
+    "PointsDelta": 10.22,
+    "Systems": [
+      "last_light",
+      "fang",
+      "errai",
+      "wezen",
+      "brightfall",
+      "birchwood",
+      "pinecross",
+      "aludra",
+      "tejat",
+      "gsc_0002",
+      "torcular",
+      "gsc_0043",
+      "gsc_0045",
+      "dabih",
+      "rimegate",
+      "veritate",
+      "betelgeuse",
+      "gsc_0037"
+    ],
+    "CombatEvents": 0,
+    "MishapCount": 0,
+    "Magnitude": 2,
+    "Flags": [
+      "credits_delta_windowed"
+    ],
+    "StagedPath": "output/spacemolt-show/staged/undocked-pop01195-2026-11-13T02-30-33.json"
+  },
+  "PointsDelta": 10.22
+}

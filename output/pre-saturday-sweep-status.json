@@ -1,39 +1,19 @@
 {
-  "ranAt": "2026-11-07T18:02:45.534Z",
-  "cycle": 114,
+  "ranAt": "2026-11-14T18:01:24.217Z",
+  "cycle": 115,
   "reportComplete": 26,
   "candidates": [
-    "civic_c114_luis-navarro_packet-v2",
-    "culture_c114_mason-ortega_packet-v2",
-    "sports_c114_selena-grant_packet-v2"
+    "sports_c115_anthony-raines_packet-v2"
   ],
   "retried": [
     {
-      "stem": "civic_c114_luis-navarro_packet-v2",
-      "desk": "civic",
-      "persona": "luis-navarro",
-      "ok": true,
-      "errorMessage": null,
-      "staged": true
-    },
-    {
-      "stem": "culture_c114_mason-ortega_packet-v2",
-      "desk": "culture",
-      "persona": "mason-ortega",
-      "ok": true,
-      "errorMessage": null,
-      "staged": false
-    },
-    {
-      "stem": "sports_c114_selena-grant_packet-v2",
+      "stem": "sports_c115_anthony-raines_packet-v2",
       "desk": "sports",
-      "persona": "selena-grant",
+      "persona": "anthony-raines",
       "ok": true,
       "errorMessage": null,
       "staged": true
     }
   ],
-  "stillUncovered": [
-    "culture_c114_mason-ortega_packet-v2"
-  ]
+  "stillUncovered": []
 }

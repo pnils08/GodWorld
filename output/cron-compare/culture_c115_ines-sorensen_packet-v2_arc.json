@@ -8,20 +8,15 @@
     {
       "pop": "POP-00263",
       "name": "Omar Amici",
-      "quote": "To be honest, the changes in Uptown have me feeling a bit uneasy. The streets are busier than ever, and it seems like every other place is a for-rent sign these days. I've lived here long enough to see the neighborhood transform, but this feels different. It's like the neighborhood is shifting away from the people who've been here for a while."
+      "quote": "To be honest, the changes in Uptown have me feeling a bit uneasy. The streets are busier than ever, and it seems like every other place is a for-rent sign these days. I've lived here long enough to see the neighborhood transform, but this feels different. It's like the neighborhood is shifting away from the people who've been here all along. It's like the neighborhood I knew is being priced out."
     },
     {
       "pop": "POP-00141",
       "name": "Priya Narang",
-      "quote": "The A's winning season really brings Uptown together. When they're doing well, the whole neighborhood feels it. The bars and galleries stay packed, and you can feel the energy."
-    },
-    {
-      "pop": "POP-00346",
-      "name": "Ingmar Jordan",
-      "quote": "To be honest, I've lost on the UNDOCKED book, but it's not really on my mind when I'm thinking about the neighborhood changes."
+      "quote": "The A's winning season still brings a lot of energy to Uptown. When they're doing well, the whole neighborhood feels it. The bars and galleries stay packed, and you can feel the energy. It's not just about the games, though - it's like we're all connected through the team. As EMS Director, I see the impact firsthand; the increased activity and gatherings mean more calls and more people to respond to. It's a double-edged sword - more energy, but also more work. Still, it's hard not to get caught up in the excitement."
     }
   ],
-  "claim": "To be honest, the changes in Uptown have me feeling a bit uneasy. The streets are busier than ever, and it seems like every other place is a for-rent sign these days. I've lived here long enough to see the neighborhood transform, but this feels different. It's like the neighborhood is shifting away from the people who've been here for a while.",
+  "claim": "To be honest, the changes in Uptown have me feeling a bit uneasy. The streets are busier than ever, and it seems like every other place is a for-rent sign these days. I've lived here long enough to see the neighborhood transform, but this feels different. It's like the neighborhood is shifting away from the people who've been here all along. It's like the neighborhood I knew is being priced out.",
   "src": "citizenVoice PRESS c115",
-  "ranAt": "2026-11-11T19:24:46.684Z"
+  "ranAt": "2026-11-15T15:15:40.369Z"
 }

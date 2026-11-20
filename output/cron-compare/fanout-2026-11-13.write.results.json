@@ -1,0 +1,272 @@
+{
+  "date": "2026-11-13",
+  "stage": "write",
+  "results": [
+    {
+      "name": "Mason Ortega",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 4,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 346,
+        "contractScore": 2,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Kai Marston",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 4,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 739,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Sharon Okafor",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 7,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 697,
+        "contractScore": 1,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Maria Keen",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 4,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 770,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Celeste Tran",
+      "desk": "wire",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 5,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 571,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Tamsin Pruitt",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 6,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [
+          {
+            "text": "Lena Marchetti moved into a place of their own in East Oakland, renting",
+            "run": "lena marchetti moved into a place"
+          },
+          {
+            "text": "Lena Marchetti — in their life, C115: heard someone at the cafe complain about the Baylight District noise and bit their tongue",
+            "run": "heard someone cafe complain baylight district noise bit tongue"
+          },
+          {
+            "text": "Dominic Okeke-Brandt — in their life, C115: organized the clothing drive donations and recognized a coat they had donated two years ago near the main street sid",
+            "run": "organized the clothing drive donations and"
+          },
+          {
+            "text": "Dominic Okeke-Brandt — in their life, C115: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+            "run": "a community feedback session for the"
+          },
+          {
+            "text": "Dominic Okeke-Brandt — in their life, C115: counted cranes on the skyline from the bus stop and got a different number than yesterday",
+            "run": "cranes on the skyline from the"
+          },
+          {
+            "text": "Kai Davis — in their life, C114: walked a different street home just to see it",
+            "run": "walked a different street home just"
+          },
+          {
+            "text": "Kai Davis — in their life, C114: slipped into the back pew at Foothill Baptist Tabernacle just to sit somewhere air-conditioned and quiet",
+            "run": "slipped into the back pew at"
+          },
+          {
+            "text": "Kai Davis — in their life, C115: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+            "run": "recognized the oari van idling outside"
+          },
+          {
+            "text": "Kai Davis — in their life, C115: bought a new A's jersey and counted what was going right for once",
+            "run": "bought a new as jersey and"
+          },
+          {
+            "text": "Evan Lewis — in their life, C114: finally fixed the thing that had been broken for months",
+            "run": "finally fixed the thing that had"
+          },
+          {
+            "text": "Evan Lewis — in their life, C114: complained about the neighborhood to anyone who'd listen",
+            "run": "complained about the neighborhood to anyone"
+          },
+          {
+            "text": "Evan Lewis — in their life, C115: found a quiet minute at a neighborhood bakery and still riding the high from last night's win",
+            "run": "found a quiet minute at a"
+          },
+          {
+            "text": "Vladimir Gonzalez — in their life, C115: tried a new recipe that mostly worked",
+            "run": "tried a new recipe that mostly"
+          },
+          {
+            "text": "Vladimir Gonzalez — in their life, C115: read the Tribune's front page twice — once for the news, once to see who was in it",
+            "run": "read the tribunes front page twice"
+          },
+          {
+            "text": "Vladimir Gonzalez — in their life, C115: cooked an old family recipe from memory, mostly getting it right",
+            "run": "cooked an old family recipe from"
+          },
+          {
+            "text": "Isley Kelley — Kelley Mercantile returned $2063 to the line this week, Rockridge (C115 — what happened in their life, not words they said)",
+            "run": "returned 2063 to the line this"
+          },
+          {
+            "text": "Isley Kelley — in their life, C114: fielded a round of texts from people who hadn't called in years",
+            "run": "fielded a round of texts from"
+          },
+          {
+            "text": "Isley Kelley — in their life, C114: felt quietly proud of how they handled something small",
+            "run": "felt quietly proud of how they"
+          },
+          {
+            "text": "Isley Kelley — in their life, C114: looked up how something works and came away more amazed, not less",
+            "run": "looked up how something works and"
+          },
+          {
+            "text": "Benji Dillon — Dillon Clinic returned $7548 to the line this week, Rockridge (C115 — what happened in their life, not words they said)",
+            "run": "returned 7548 to the line this"
+          },
+          {
+            "text": "Benji Dillon — in their life, C114: got recognized twice at the grocery store after the story ran",
+            "run": "recognized twice at the grocery store"
+          },
+          {
+            "text": "Benji Dillon — in their life, C114: the kids could say Father Miguel before they could say the mayor's name",
+            "run": "the kids could say father miguel"
+          },
+          {
+            "text": "Benji Dillon — in their life, C114: felt quietly proud of how they handled something small",
+            "run": "felt quietly proud of how they"
+          },
+          {
+            "text": "Benji Dillon — in their life, C115: put on their good suit for the Sunday service because some traditions still matter",
+            "run": "good suit for the sunday service"
+          },
+          {
+            "text": "Latasha Jefferson — in their life, C114: drank the free cold brew in the company kitchen and felt completely disconnected from the neighborhood outside",
+            "run": "drank the free cold brew in"
+          },
+          {
+            "text": "Latasha Jefferson — in their life, C114: checked the front door lock three times after everyone else was asleep",
+            "run": "checked the front door lock three"
+          },
+          {
+            "text": "Latasha Jefferson — in their life, C114: checked out a new shop that just opened nearby",
+            "run": "checked out a new shop that"
+          },
+          {
+            "text": "Latasha Jefferson — in their life, C115: one of the kids asked a question at dinner that stopped the room",
+            "run": "one of the kids asked a"
+          },
+          {
+            "text": "Tyler Filet — The schedule at Portside Bio came out with their name in the slot that used to belong to someone senior., Lake Merritt (C115 — what happened in th",
+            "run": "name in the slot that used"
+          },
+          {
+            "text": "Tyler Filet — in their life, C114: couldn't sleep for the wind rattling the window frame near a front porch",
+            "run": "couldnt sleep for the wind rattling"
+          },
+          {
+            "text": "Tyler Filet — in their life, C114: wondered if a decision from years back had been the right one",
+            "run": "a decision from years back had"
+          },
+          {
+            "text": "Tyler Filet — in their life, C115: disagreed with a Tribune column out loud to an empty kitchen",
+            "run": "disagreed with a tribune column out"
+          },
+          {
+            "text": "Tyler Filet — in their life, C115: grabbed coffee from the cart outside the hospital before the morning rush hit",
+            "run": "coffee from the cart outside the"
+          }
+        ],
+        "words": 1391,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Ines Sorensen",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 3,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 538,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 6,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 396,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    }
+  ],
+  "checkTotals": {
+    "seats": 8,
+    "toolSeats": 8,
+    "capHits": 0,
+    "thin": 0,
+    "verbatim": 1,
+    "graded": 8,
+    "gradeSum": 21,
+    "gradeMax": [
+      3
+    ]
+  },
+  "ranAt": "2026-11-14T00:22:53.396Z"
+}

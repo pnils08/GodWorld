@@ -1,0 +1,70 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "115",
+  "persona": "elliot-graye",
+  "byline": "Elliot Graye",
+  "bylinePopid": "POP-00012",
+  "article": "output/cron-compare/staged/culture_c115_elliot-graye_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Ramon Solano",
+        "role": "quoted-source",
+        "popid": "POP-00756"
+      },
+      {
+        "name": "Kenji Tanaka",
+        "role": "quoted-source",
+        "popid": "POP-00763"
+      },
+      {
+        "name": "Eunice Marston",
+        "role": "quoted-source",
+        "popid": "POP-00753"
+      },
+      {
+        "name": "Lucia Polito",
+        "role": "quoted-source",
+        "popid": "POP-00004"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Fruitvale"
+    ],
+    "claims": [
+      {
+        "claim": "As the Senior Pastor of St. Esperanza Parish, I've seen firsthand how our church supports the Latino community in Fruitvale. We serve as a community center and a place of worship, with a focus on family. Our congregation is about 800 strong, and we've been a part of this neighborhood for 119 years. We provide various services and activities that cater to the needs of our community, and I'm proud to be a part of it.",
+        "sourceRef": "citizenVoice PRESS Ramon Solano"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-3ad340ac2021",
+    "draftSha256": "d44d33705bfa55612e8babbf58376c650246c5093c6a1b1ca6906c40d327c962",
+    "verdict": "output/cron-compare/culture_c115_elliot-graye_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-13T00:15:52.177Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 1091,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "d44d33705bfa55612e8babbf58376c650246c5093c6a1b1ca6906c40d327c962",
+      "costUsd": 0.0012
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-13T00:15:57.825Z"
+}

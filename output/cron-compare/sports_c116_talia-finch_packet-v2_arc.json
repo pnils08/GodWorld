@@ -1,0 +1,32 @@
+{
+  "status": "arc-seed",
+  "cycle": "116",
+  "desk": "sports",
+  "persona": "talia-finch",
+  "hood": "West Oakland",
+  "quotes": [
+    {
+      "pop": "POP-01022",
+      "name": "Wilson Shepard",
+      "quote": "The team's performance so far has been great, we're 8-1 and the guys are playing with confidence. I think we've found our rhythm, and it's a testament to the hard work they've been putting in. The offense is clicking, and we're getting good contributions from everyone. Of course, we had a hiccup against San Antonio, but that's to be expected. We're still a young team, and we're learning as we go. Overall, I'm proud of how we're performing, and I'm excited to see how we'll do as the season progresses."
+    },
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "To be honest, Mark Aitken leaving still has me a bit down. I keep thinking about what it means for the A's and the community. It's not just about the player; it's about what he represents. I try not to overthink it, but it's hard not to feel a little empty knowing he's gone."
+    },
+    {
+      "pop": "POP-01046",
+      "name": "Elliot Abraham",
+      "quote": "I've seen the fans are excited, and it's infectious. The team's turnaround has really brought them out, and you can feel the energy. We're 8-1 now after a tough start, and it's like a different team. The confidence in the room is palpable, and it's translating to the stands."
+    },
+    {
+      "pop": "POP-00527",
+      "name": "Mike Paulson",
+      "quote": "As a resident of West Oakland, I've seen the mood around the Oaks shift dramatically. The team was 0-9 to start, and now they're 8-1. The fans are excited, and you can feel the confidence in the air. It's not just about the wins, though; it's about the team's performance and how they've gelled. I've heard people talking about whether the early struggles were by design, and now they're curious to see if this is a sustainable change. The energy is positive, and it's great to see the community rallying around the team."
+    }
+  ],
+  "claim": "The team's performance so far has been great, we're 8-1 and the guys are playing with confidence. I think we've found our rhythm, and it's a testament to the hard work they've been putting in. The offense is clicking, and we're getting good contributions from everyone. Of course, we had a hiccup against San Antonio, but that's to be expected. We're still a young team, and we're learning as we go. Overall, I'm proud of how we're performing, and I'm excited to see how we'll do as the season progresses.",
+  "src": "citizenVoice PRESS c116",
+  "ranAt": "2026-11-19T19:17:29.882Z"
+}

@@ -55,5 +55,6 @@
     "recorded": true,
     "out": "rom ../.config/godworld/.env // tip: ◈ encrypted .env [www.dotenvx.com]\n{\n  \"popId\": \"POP-00153\",\n  \"name\": \"Jordan Velez\",\n  \"recorded\": true,\n  \"text\": \"filed: The Sea-Level Desk Is Down to Three\"\n}"
   },
-  "ranAt": "2026-11-10T00:17:32.511Z"
+  "ranAt": "2026-11-10T00:17:32.511Z",
+  "dispositionReconciledAt": "2026-11-14T18:00:02.044Z"
 }

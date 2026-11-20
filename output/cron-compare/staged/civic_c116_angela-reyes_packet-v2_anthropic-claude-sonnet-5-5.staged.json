@@ -1,0 +1,60 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "116",
+  "persona": "angela-reyes",
+  "byline": "Angela Reyes",
+  "bylinePopid": "POP-00156",
+  "article": "output/cron-compare/staged/civic_c116_angela-reyes_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Mei Wong",
+        "role": "quoted-source",
+        "popid": "POP-01036"
+      },
+      {
+        "name": "Gloria Liu",
+        "role": "quoted-source",
+        "popid": "POP-00827"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Rockridge"
+    ],
+    "claims": [
+      {
+        "claim": "When a new student comes in mid-cycle, the first thing I notice is the quiet. Not the building being quiet, but the way the hallways get a little more careful. Teachers glance up a beat longer when they hear footsteps they don't recognize. The office staff moves a little faster. And the child themselves — they're usually trying to take up as little space as possible, which is the opposite of what we want. Getting them caught up isn't about a test or a worksheet. It's about finding one adult in the building who they trust by the end of the first week. That's the whole job. The academics follow once that trust is there. We're lucky in Rockridge because we have the resources to do that well — small classes, aides who know the kids by name, a PTA that shows up. But I've seen it work in schools with a fraction of our funding, and it always comes down to the same thing: one person who says, 'I've got you.' That's what I look for first, and that's what I make sure happens before we even talk about grade-level standards.",
+        "sourceRef": "citizenVoice PRESS Gloria Liu"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-c2dcdc96e0bd",
+    "draftSha256": "b1eca11827d04de3aacb23420411fdd6cb0948fb5a50e65d91406e5e1edc2c94",
+    "verdict": "output/cron-compare/civic_c116_angela-reyes_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-18T00:17:48.882Z",
+    "contractScore": {
+      "opened": false,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 963,
+      "short": "The opening paragraph begins with character color rather than a packet-backed school, youth-program, apprenticeship, or continuity fact.",
+      "score": 2,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "b1eca11827d04de3aacb23420411fdd6cb0948fb5a50e65d91406e5e1edc2c94",
+      "costUsd": 0.0019
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-18T00:17:57.234Z"
+}

@@ -1,0 +1,498 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00166",
+    "name": "Elliot Marbury",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Henry Rivas — 8 seasons on the dossier, 2041 the latest | pitcher command memo, multi-year — what the line proves, on what sample, and what would disprove it",
+    "approach": "Data-desk approach: this slice is one player's season-by-season line off the dossier, the rates worked out from it, and two peers at the same job. Third person, dry, source-forward. One hard claim the numbers carry, with its sample size stated; a thin season is variance, not identity. Say which number next season would kill the claim. No quotes, no scene, no clubhouse — the memo is the proof. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "data-desk",
+      "hood": null,
+      "facts": [
+        "Henry Rivas — SP, Athletics; 8 seasons on the dossier",
+        "Henry Rivas 2041 ATH: 22 G, 22 GS, 11-4, 0 SV, 136.1 IP, 123 H, 40 ER, 16 HR, 24 BB, 133 SO, ERA 2.64",
+        "Henry Rivas 2040 ATH: 33 G, 33 GS, 14-12, 0 SV, 184.2 IP, 176 H, 76 ER, 24 HR, 59 BB, 169 SO, ERA 3.7",
+        "Henry Rivas 2039 ATH: 33 G, 33 GS, 17-5, 0 SV, 187.2 IP, 191 H, 80 ER, 21 HR, 38 BB, 184 SO, ERA 3.84",
+        "Henry Rivas 2038 ATH: 33 G, 33 GS, 14-5, 0 SV, 183.1 IP, 188 H, 69 ER, 24 HR, 39 BB, 175 SO, ERA 3.39",
+        "Henry Rivas 2037 PHI: 32 G, 32 GS, 9-15, 0 SV, 170.0 IP, 180 H, 60 ER, 27 HR, 52 BB, 157 SO, ERA 3.18",
+        "Henry Rivas 2036 PHI: 33 G, 33 GS, 13-14, 0 SV, 181.2 IP, 191 H, 63 ER, 18 HR, 50 BB, 149 SO, ERA 4.65",
+        "Henry Rivas 2041 rates (136.1 IP): 8.8 K per 9, 1.6 BB per 9, 5.54 K per BB (worked from the season line)",
+        "Henry Rivas 2040 rates (184.2 IP): 8.2 K per 9, 2.9 BB per 9, 2.86 K per BB (worked from the season line)",
+        "Henry Rivas 2039 rates (187.2 IP): 8.8 K per 9, 1.8 BB per 9, 4.84 K per BB (worked from the season line)",
+        "Henry Rivas 2038 rates (183.1 IP): 8.6 K per 9, 1.9 BB per 9, 4.49 K per BB (worked from the season line)",
+        "Henry Rivas 2037 rates (170.0 IP): 8.3 K per 9, 2.8 BB per 9, 3.02 K per BB (worked from the season line)"
+      ],
+      "priorCycle": "DOSSIER",
+      "note": "subject is on this cycle's feed",
+      "engineHooks": [],
+      "roomIsYours": "the order the columns are read in, which season is the hinge, what the peer band makes ordinary or strange",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-data-desk",
+    "hood": null,
+    "src": "output/player_truesource_mirror.json Henry Rivas @C116",
+    "plan": {
+      "focus": "Henry Rivas's 2041 walk rate as a partial-season artifact, not a command breakthrough"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Elliot Marbury",
+        "text": "Whether Rivas's 2041 season was shortened by injury or by workload management is not on the dossier; the innings count is the only fact.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C116",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-871096fd8925"
+    },
+    {
+      "t": "FACT",
+      "text": "Henry Rivas — 8 seasons on the dossier, 2041 the latest | pitcher command memo, multi-year",
+      "src": "output/player_truesource_mirror.json Henry Rivas @C116",
+      "id": "F-f9c386f63131"
+    },
+    {
+      "t": "FACT",
+      "text": "Henry Rivas's 2041 line against 7 earlier seasons and 2 peers.",
+      "src": "output/player_truesource_mirror.json Henry Rivas @C116",
+      "id": "F-edea2015bc7e"
+    },
+    {
+      "t": "FACT",
+      "text": "Henry Rivas — SP, Athletics; 8 seasons on the dossier",
+      "src": "output/player_truesource_mirror.json Henry Rivas",
+      "id": "F-c1f5563548a8"
+    },
+    {
+      "t": "FACT",
+      "text": "Henry Rivas 2041 ATH: 22 G, 22 GS, 11-4, 0 SV, 136.1 IP, 123 H, 40 ER, 16 HR, 24 BB, 133 SO, ERA 2.64",
+      "src": "output/player_truesource_mirror.json Henry Rivas",
+      "id": "F-8ae483b469c7"
+    },
+    {
+      "t": "FACT",
+      "text": "Henry Rivas 2040 ATH: 33 G, 33 GS, 14-12, 0 SV, 184.2 IP, 176 H, 76 ER, 24 HR, 59 BB, 169 SO, ERA 3.7",
+      "src": "output/player_truesource_mirror.json Henry Rivas",
+      "id": "F-324afa4d15d3"
+    },
+    {
+      "t": "FACT",
+      "text": "Henry Rivas 2039 ATH: 33 G, 33 GS, 17-5, 0 SV, 187.2 IP, 191 H, 80 ER, 21 HR, 38 BB, 184 SO, ERA 3.84",
+      "src": "output/player_truesource_mirror.json Henry Rivas",
+      "id": "F-a3d0ed4e28d2"
+    },
+    {
+      "t": "FACT",
+      "text": "Henry Rivas 2038 ATH: 33 G, 33 GS, 14-5, 0 SV, 183.1 IP, 188 H, 69 ER, 24 HR, 39 BB, 175 SO, ERA 3.39",
+      "src": "output/player_truesource_mirror.json Henry Rivas",
+      "id": "F-93103d872dad"
+    },
+    {
+      "t": "FACT",
+      "text": "Henry Rivas 2037 PHI: 32 G, 32 GS, 9-15, 0 SV, 170.0 IP, 180 H, 60 ER, 27 HR, 52 BB, 157 SO, ERA 3.18",
+      "src": "output/player_truesource_mirror.json Henry Rivas",
+      "id": "F-4a13e5e80af6"
+    },
+    {
+      "t": "FACT",
+      "text": "Henry Rivas 2036 PHI: 33 G, 33 GS, 13-14, 0 SV, 181.2 IP, 191 H, 63 ER, 18 HR, 50 BB, 149 SO, ERA 4.65",
+      "src": "output/player_truesource_mirror.json Henry Rivas",
+      "id": "F-b732abafde19"
+    },
+    {
+      "t": "FACT",
+      "text": "Henry Rivas 2041 rates (136.1 IP): 8.8 K per 9, 1.6 BB per 9, 5.54 K per BB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json Henry Rivas",
+      "id": "F-542ca0677dea"
+    },
+    {
+      "t": "FACT",
+      "text": "Henry Rivas 2040 rates (184.2 IP): 8.2 K per 9, 2.9 BB per 9, 2.86 K per BB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json Henry Rivas",
+      "id": "F-a3c4b982529a"
+    },
+    {
+      "t": "FACT",
+      "text": "Henry Rivas 2039 rates (187.2 IP): 8.8 K per 9, 1.8 BB per 9, 4.84 K per BB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json Henry Rivas",
+      "id": "F-ef9a1bb0a2ca"
+    },
+    {
+      "t": "FACT",
+      "text": "Henry Rivas 2038 rates (183.1 IP): 8.6 K per 9, 1.9 BB per 9, 4.49 K per BB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json Henry Rivas",
+      "id": "F-fdd68beb9a57"
+    },
+    {
+      "t": "FACT",
+      "text": "Henry Rivas 2037 rates (170.0 IP): 8.3 K per 9, 2.8 BB per 9, 3.02 K per BB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json Henry Rivas",
+      "id": "F-a3058067ef91"
+    },
+    {
+      "t": "FACT",
+      "text": "Henry Rivas 2036 rates (181.2 IP): 7.4 K per 9, 2.5 BB per 9, 2.98 K per BB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json Henry Rivas",
+      "id": "F-9eab1de9544a"
+    },
+    {
+      "t": "FACT",
+      "text": "Peer — Benji Dillon (SP, Athletics) 2041 ATH: 35 G, 28 GS, 10-8, 1 SV, 150.1 IP, 155 H, 74 ER, 16 HR, 65 BB, 132 SO, ERA 4.43",
+      "src": "output/player_truesource_mirror.json Benji Dillon",
+      "id": "F-0ca9a1a03748"
+    },
+    {
+      "t": "FACT",
+      "text": "Peer — Benji Dillon 2041 rates (150.1 IP): 7.9 K per 9, 3.9 BB per 9, 2.03 K per BB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json Benji Dillon",
+      "id": "F-abeac4aace05"
+    },
+    {
+      "t": "FACT",
+      "text": "Peer — Arturo Ramos (SP, Athletics) 2041 ATH: 33 G, 33 GS, 23-1, 0 SV, 212.2 IP, 176 H, 57 ER, 24 HR, 41 BB, 182 SO, ERA 2.41",
+      "src": "output/player_truesource_mirror.json Arturo Ramos",
+      "id": "F-e2ed9672faec"
+    },
+    {
+      "t": "FACT",
+      "text": "Peer — Arturo Ramos 2041 rates (212.2 IP): 7.7 K per 9, 1.7 BB per 9, 4.44 K per BB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json Arturo Ramos",
+      "id": "F-55760dd338e7"
+    },
+    {
+      "t": "FACT",
+      "text": "This cycle (feed notes, off-season): He was called up in C91 when Henry Rivas dislocated his shoulder, threw a complete game shutout against the Cubs in his first start, 9 innings, 5 hits and 12 strikeouts, and struck out 10 more against the Rays his next time out.",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl @C116",
+      "id": "F-ddd2bb02eb64"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+      "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+      "id": "F-647fd9067a33"
+    },
+    {
+      "t": "FACT",
+      "text": "Henry Rivas 2035 PHI: 33 G, 33 GS, 16-9, 0 SV, 187.2 IP, 203 H, 65 ER, 22 HR, 54 BB, 193 SO, ERA 3.13",
+      "src": "tool:dossier_read:Henry Rivas",
+      "id": "F-d0f272d9822d"
+    },
+    {
+      "t": "FACT",
+      "text": "Henry Rivas 2034 PHI: 23 G, 23 GS, 10-4, 0 SV, 130.1 IP, 105 H, 31 ER, 11 HR, 39 BB, 128 SO, ERA 2.21",
+      "src": "tool:dossier_read:Henry Rivas",
+      "id": "F-1a07f3185939"
+    },
+    {
+      "t": "FACT",
+      "text": "Henry Rivas 2035 rates (187.2 IP): 9.3 K per 9, 2.6 BB per 9, 3.57 K per BB (worked from the season line)",
+      "src": "tool:dossier_read:Henry Rivas",
+      "id": "F-c4d7ace291e3"
+    },
+    {
+      "t": "FACT",
+      "text": "Henry Rivas 2034 rates (130.1 IP): 8.8 K per 9, 2.7 BB per 9, 3.28 K per BB (worked from the season line)",
+      "src": "tool:dossier_read:Henry Rivas",
+      "id": "F-8fd4ac5b04c0"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. No named ledger citizen spoke for this piece (manifest.approvedQuotes is empty): put no words in a named citizen's mouth. Unnamed voices are yours. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "marbury-data-desk-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Put one audit-grade claim in the paper: a single player's Packet-backed season lines, the rates the Packet has already worked from them, and the peer band, with the sample stated. The memo is the proof. One falsifiable claim the numbers carry is success; a quote, a scene, fan heat, elegy, or a number the Packet does not hold is not.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "dry third-person data-desk memo, source-forward",
+      "targetWords": "evidence-bounded; 350-600",
+      "opening": "the one Packet-backed season line or rate that carries the claim"
+    },
+    "authorizedTexture": [
+      "plain-language reading of supplied season lines with each statistic kept with its named player and season",
+      "a trend or peer-band interpretation explicitly limited by the supplied games, innings, or at-bats",
+      "a blank or thin sample named as blank or thin rather than filled in"
+    ],
+    "textureConditions": [
+      "every named player, team, position, season, and source must come from the Packet",
+      "every statistic and rate must be a Packet figure as supplied; the memo performs no arithmetic the Packet has not already worked",
+      "a season year belongs to the player's dossier as supplied and is never moved, merged, or projected forward",
+      "the piece interviews nobody and attributes no statement, mood, or intention to any player, coach, or front office"
+    ],
+    "canonBlockers": [
+      "a statistic or rate attributed to the wrong player or the wrong season, or two players' lines merged into one subject",
+      "a rate, split, projection, or advanced metric the Packet does not supply",
+      "an invented award, contract, salary, injury, roster move, result, quote, interview, or front-office act",
+      "a named player, team, venue, institution, league, organization, or real-world entity not found in the supplied record",
+      "a one-season or thin-sample line presented as settled identity"
+    ]
+  },
+  "manifest": {
+    "id": "AM-87cbffc20ddb",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-871096fd8925",
+        "t": "FACT",
+        "text": "Current cycle: C116",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-f9c386f63131",
+        "t": "FACT",
+        "text": "Henry Rivas — 8 seasons on the dossier, 2041 the latest | pitcher command memo, multi-year",
+        "src": "output/player_truesource_mirror.json Henry Rivas @C116"
+      },
+      {
+        "id": "F-edea2015bc7e",
+        "t": "FACT",
+        "text": "Henry Rivas's 2041 line against 7 earlier seasons and 2 peers.",
+        "src": "output/player_truesource_mirror.json Henry Rivas @C116"
+      },
+      {
+        "id": "F-c1f5563548a8",
+        "t": "FACT",
+        "text": "Henry Rivas — SP, Athletics; 8 seasons on the dossier",
+        "src": "output/player_truesource_mirror.json Henry Rivas"
+      },
+      {
+        "id": "F-8ae483b469c7",
+        "t": "FACT",
+        "text": "Henry Rivas 2041 ATH: 22 G, 22 GS, 11-4, 0 SV, 136.1 IP, 123 H, 40 ER, 16 HR, 24 BB, 133 SO, ERA 2.64",
+        "src": "output/player_truesource_mirror.json Henry Rivas"
+      },
+      {
+        "id": "F-324afa4d15d3",
+        "t": "FACT",
+        "text": "Henry Rivas 2040 ATH: 33 G, 33 GS, 14-12, 0 SV, 184.2 IP, 176 H, 76 ER, 24 HR, 59 BB, 169 SO, ERA 3.7",
+        "src": "output/player_truesource_mirror.json Henry Rivas"
+      },
+      {
+        "id": "F-a3d0ed4e28d2",
+        "t": "FACT",
+        "text": "Henry Rivas 2039 ATH: 33 G, 33 GS, 17-5, 0 SV, 187.2 IP, 191 H, 80 ER, 21 HR, 38 BB, 184 SO, ERA 3.84",
+        "src": "output/player_truesource_mirror.json Henry Rivas"
+      },
+      {
+        "id": "F-93103d872dad",
+        "t": "FACT",
+        "text": "Henry Rivas 2038 ATH: 33 G, 33 GS, 14-5, 0 SV, 183.1 IP, 188 H, 69 ER, 24 HR, 39 BB, 175 SO, ERA 3.39",
+        "src": "output/player_truesource_mirror.json Henry Rivas"
+      },
+      {
+        "id": "F-4a13e5e80af6",
+        "t": "FACT",
+        "text": "Henry Rivas 2037 PHI: 32 G, 32 GS, 9-15, 0 SV, 170.0 IP, 180 H, 60 ER, 27 HR, 52 BB, 157 SO, ERA 3.18",
+        "src": "output/player_truesource_mirror.json Henry Rivas"
+      },
+      {
+        "id": "F-b732abafde19",
+        "t": "FACT",
+        "text": "Henry Rivas 2036 PHI: 33 G, 33 GS, 13-14, 0 SV, 181.2 IP, 191 H, 63 ER, 18 HR, 50 BB, 149 SO, ERA 4.65",
+        "src": "output/player_truesource_mirror.json Henry Rivas"
+      },
+      {
+        "id": "F-542ca0677dea",
+        "t": "FACT",
+        "text": "Henry Rivas 2041 rates (136.1 IP): 8.8 K per 9, 1.6 BB per 9, 5.54 K per BB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Henry Rivas"
+      },
+      {
+        "id": "F-a3c4b982529a",
+        "t": "FACT",
+        "text": "Henry Rivas 2040 rates (184.2 IP): 8.2 K per 9, 2.9 BB per 9, 2.86 K per BB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Henry Rivas"
+      },
+      {
+        "id": "F-ef9a1bb0a2ca",
+        "t": "FACT",
+        "text": "Henry Rivas 2039 rates (187.2 IP): 8.8 K per 9, 1.8 BB per 9, 4.84 K per BB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Henry Rivas"
+      },
+      {
+        "id": "F-fdd68beb9a57",
+        "t": "FACT",
+        "text": "Henry Rivas 2038 rates (183.1 IP): 8.6 K per 9, 1.9 BB per 9, 4.49 K per BB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Henry Rivas"
+      },
+      {
+        "id": "F-a3058067ef91",
+        "t": "FACT",
+        "text": "Henry Rivas 2037 rates (170.0 IP): 8.3 K per 9, 2.8 BB per 9, 3.02 K per BB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Henry Rivas"
+      },
+      {
+        "id": "F-9eab1de9544a",
+        "t": "FACT",
+        "text": "Henry Rivas 2036 rates (181.2 IP): 7.4 K per 9, 2.5 BB per 9, 2.98 K per BB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Henry Rivas"
+      },
+      {
+        "id": "F-0ca9a1a03748",
+        "t": "FACT",
+        "text": "Peer — Benji Dillon (SP, Athletics) 2041 ATH: 35 G, 28 GS, 10-8, 1 SV, 150.1 IP, 155 H, 74 ER, 16 HR, 65 BB, 132 SO, ERA 4.43",
+        "src": "output/player_truesource_mirror.json Benji Dillon"
+      },
+      {
+        "id": "F-abeac4aace05",
+        "t": "FACT",
+        "text": "Peer — Benji Dillon 2041 rates (150.1 IP): 7.9 K per 9, 3.9 BB per 9, 2.03 K per BB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Benji Dillon"
+      },
+      {
+        "id": "F-e2ed9672faec",
+        "t": "FACT",
+        "text": "Peer — Arturo Ramos (SP, Athletics) 2041 ATH: 33 G, 33 GS, 23-1, 0 SV, 212.2 IP, 176 H, 57 ER, 24 HR, 41 BB, 182 SO, ERA 2.41",
+        "src": "output/player_truesource_mirror.json Arturo Ramos"
+      },
+      {
+        "id": "F-55760dd338e7",
+        "t": "FACT",
+        "text": "Peer — Arturo Ramos 2041 rates (212.2 IP): 7.7 K per 9, 1.7 BB per 9, 4.44 K per BB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Arturo Ramos"
+      },
+      {
+        "id": "F-ddd2bb02eb64",
+        "t": "FACT",
+        "text": "This cycle (feed notes, off-season): He was called up in C91 when Henry Rivas dislocated his shoulder, threw a complete game shutout against the Cubs in his first start, 9 innings, 5 hits and 12 strikeouts, and struck out 10 more against the Rays his next time out.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C116"
+      },
+      {
+        "id": "F-647fd9067a33",
+        "t": "FACT",
+        "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+        "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)"
+      },
+      {
+        "id": "F-d0f272d9822d",
+        "t": "FACT",
+        "text": "Henry Rivas 2035 PHI: 33 G, 33 GS, 16-9, 0 SV, 187.2 IP, 203 H, 65 ER, 22 HR, 54 BB, 193 SO, ERA 3.13",
+        "src": "tool:dossier_read:Henry Rivas"
+      },
+      {
+        "id": "F-1a07f3185939",
+        "t": "FACT",
+        "text": "Henry Rivas 2034 PHI: 23 G, 23 GS, 10-4, 0 SV, 130.1 IP, 105 H, 31 ER, 11 HR, 39 BB, 128 SO, ERA 2.21",
+        "src": "tool:dossier_read:Henry Rivas"
+      },
+      {
+        "id": "F-c4d7ace291e3",
+        "t": "FACT",
+        "text": "Henry Rivas 2035 rates (187.2 IP): 9.3 K per 9, 2.6 BB per 9, 3.57 K per BB (worked from the season line)",
+        "src": "tool:dossier_read:Henry Rivas"
+      },
+      {
+        "id": "F-8fd4ac5b04c0",
+        "t": "FACT",
+        "text": "Henry Rivas 2034 rates (130.1 IP): 8.8 K per 9, 2.7 BB per 9, 3.28 K per BB (worked from the season line)",
+        "src": "tool:dossier_read:Henry Rivas"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Elliot Marbury",
+        "text": "Whether Rivas's 2041 season was shortened by injury or by workload management is not on the dossier; the innings count is the only fact.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "plain-language reading of supplied season lines with each statistic kept with its named player and season",
+      "a trend or peer-band interpretation explicitly limited by the supplied games, innings, or at-bats",
+      "a blank or thin sample named as blank or thin rather than filled in"
+    ],
+    "textureConditions": [
+      "every named player, team, position, season, and source must come from the Packet",
+      "every statistic and rate must be a Packet figure as supplied; the memo performs no arithmetic the Packet has not already worked",
+      "a season year belongs to the player's dossier as supplied and is never moved, merged, or projected forward",
+      "the piece interviews nobody and attributes no statement, mood, or intention to any player, coach, or front office"
+    ],
+    "forbiddenClaimClasses": [],
+    "toolFacts": [
+      "F-d0f272d9822d",
+      "F-1a07f3185939",
+      "F-c4d7ace291e3",
+      "F-8fd4ac5b04c0"
+    ]
+  }
+}

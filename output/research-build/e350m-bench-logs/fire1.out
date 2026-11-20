@@ -1,0 +1,152 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ enable debugging { debug: true }
+{
+ "label": "e350m-f1",
+ "expect": 116,
+ "at": "2026-11-19T05:36:40.917Z",
+ "pre": {
+  "bench": 116,
+  "live": 116,
+  "ee": 9,
+  "rileyLast": 116,
+  "checkpoint": null
+ },
+ "wallS": 216,
+ "http": 200,
+ "resp": {
+  "ok": true,
+  "state": "done",
+  "ranMs": 211753,
+  "persistErrors": [],
+  "carryForward": [
+   {
+    "key": "PREV_EVENING_JSON",
+    "event": "ghost-skipped",
+    "stamped": 126,
+    "cycleId": 117
+   },
+   {
+    "key": "PREV_EVENING_JSON",
+    "event": "recovered-from-sheet",
+    "cycle": 116,
+    "cycleId": 117
+   },
+   {
+    "key": "PREV_CYCLE_STATE_JSON",
+    "event": "ghost-skipped",
+    "stamped": 126,
+    "cycleId": 117
+   },
+   {
+    "key": "PREV_CYCLE_STATE_JSON",
+    "event": "recovered-from-sheet",
+    "cycle": 116,
+    "cycleId": 117
+   },
+   {
+    "key": "PREV_HOOD_ECON_JSON",
+    "event": "ghost-skipped",
+    "stamped": 126,
+    "cycleId": 117
+   },
+   {
+    "key": "PREV_HOOD_ECON_JSON",
+    "event": "recovered-from-sheet",
+    "cycle": 116,
+    "cycleId": 117
+   },
+   {
+    "key": "PREV_ACTIVITY_OBS_JSON",
+    "event": "ghost-skipped",
+    "stamped": 126,
+    "cycleId": 117
+   },
+   {
+    "key": "PREV_ACTIVITY_OBS_JSON",
+    "event": "recovered-from-sheet",
+    "cycle": 116,
+    "cycleId": 117
+   },
+   {
+    "key": "PREV_STORY_SEEDS_JSON",
+    "event": "ghost-skipped",
+    "stamped": 126,
+    "cycleId": 117
+   },
+   {
+    "key": "PREV_STORY_SEEDS_JSON",
+    "event": "recovered-from-sheet",
+    "cycle": 116,
+    "cycleId": 117
+   },
+   {
+    "key": "PREV_CONTRACT_SEEDS_JSON",
+    "event": "ghost-skipped",
+    "stamped": 126,
+    "cycleId": 117
+   },
+   {
+    "key": "PREV_CONTRACT_SEEDS_JSON",
+    "event": "recovered-from-sheet",
+    "cycle": 116,
+    "cycleId": 117
+   },
+   {
+    "key": "PREV_CITY_DYN_JSON",
+    "event": "ghost-skipped",
+    "stamped": 126,
+    "cycleId": 117
+   },
+   {
+    "key": "PREV_CITY_DYN_JSON",
+    "event": "recovered-from-sheet",
+    "cycle": 116,
+    "cycleId": 117
+   },
+   {
+    "key": "PREV_RELOC_FLOW_JSON",
+    "event": "ghost-skipped",
+    "stamped": 126,
+    "cycleId": 117
+   },
+   {
+    "key": "PREV_RELOC_FLOW_JSON",
+    "event": "recovered-from-sheet",
+    "cycle": 116,
+    "cycleId": 117
+   },
+   {
+    "key": "PREV_FRANCHISE_WEIGHT_JSON",
+    "event": "ghost-skipped",
+    "stamped": 126,
+    "cycleId": 117
+   },
+   {
+    "key": "PREV_FRANCHISE_WEIGHT_JSON",
+    "event": "recovered-from-sheet",
+    "cycle": 116,
+    "cycleId": 117
+   },
+   {
+    "key": "CHAOS_NBHD_FOLD_JSON",
+    "event": "ghost-skipped",
+    "stamped": 126,
+    "cycleId": 117
+   },
+   {
+    "key": "CHAOS_NBHD_FOLD_JSON",
+    "event": "recovered-from-sheet",
+    "cycle": 116,
+    "cycleId": 117
+   }
+  ]
+ },
+ "post": {
+  "bench": 117,
+  "live": 116,
+  "ee": 9,
+  "rileyLast": 117,
+  "checkpoint": null
+ },
+ "newEE": [],
+ "verdict": "PASS"
+}

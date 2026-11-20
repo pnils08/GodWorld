@@ -1,0 +1,64 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "115",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "elliot-graye",
+  "byline": {
+    "name": "Elliot Graye",
+    "popid": "POP-00012",
+    "beatDomain": "COMMUNITY"
+  },
+  "laneEntries": 30,
+  "quotesLanded": 4,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "sheet_read",
+    "sheet_read",
+    "canon_recall",
+    "canon_recall",
+    "sheet_read",
+    "canon_recall"
+  ],
+  "toolCalls": 6,
+  "wordCount": 1091,
+  "targetWords": "evidence-bounded",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 1091,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "d44d33705bfa55612e8babbf58376c650246c5093c6a1b1ca6906c40d327c962",
+    "costUsd": 0.0012
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/3 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/culture_c115_elliot-graye_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "env' }\n{\n  \"popId\": \"POP-00012\",\n  \"name\": \"Elliot Graye\",\n  \"recorded\": true,\n  \"text\": \"filed: St. Esperanza Counts Its Lunches: What Fruitvale's Parish Has Logged While Other Doors Opened This W\"\n}"
+  },
+  "ranAt": "2026-11-13T00:16:20.194Z",
+  "dispositionReconciledAt": "2026-11-14T18:00:02.536Z"
+}

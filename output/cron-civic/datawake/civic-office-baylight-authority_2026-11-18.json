@@ -1,0 +1,86 @@
+{
+  "office": "baylight_authority",
+  "agentDir": "civic-office-baylight-authority",
+  "holder": "Keisha Ramos",
+  "popid": "POP-00041",
+  "title": "Baylight Authority Director",
+  "date": "2026-11-18",
+  "cycle": 116,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "**Cycle 116 — Weekly Report on the Record**\n**Keisha Ramos, Director, Baylight Authority**\n\nINIT-006 status: unchanged, and I want that said plainly before anything else. The C115 evidence-file review is closed. No construction milestone has been declared passed. The tracker still reads \"remediation, hotline, dust-control, and workforce oversight continue,\" and that is the accurate description, so I'm not going to dress it up. The review is conducted; it is not concluded. I won't call a milestone passed because a file exists.\n\nWhat is running: the 48-hour construction hotline is live, dust control is active on the haul routes, and independent oversight is on site. Those records don't pause while a memo is written. They are what the review is measuring.\n\nThen this week's item, and I'd rather name it than have it found: Marine Systems' ledger row in the Baylight District now shows zero employees. It was five, then three, and in the last two cycles it went to zero. My office has no explanation from the company, and I'm not going to invent one. I said last cycle that two families losing a paycheck in this district sits wrong with me, and it sits worse now. I'm asking Marine Systems directly, in writing: what happens to the sea-level monitoring work, and what happens to the people — severance, notice, a path back in. I'll report the answer when I have it, not my guess at it.\n\nThe rest of my own numbers, for the record. The Baylight District is still on a decay trajectory that started in Cycle 108, sentiment barely above zero at 0.06, mild outflow. The boom around us is real — West Oakland, Jack London, Fruitvale all growing — but an anchor district with a shrinking science employer on its ledger and no milestone on the wall isn't a place I'm going to tell you is on the way up. I know what the pavement looks like right now. I walk it.\n\nOne thing outside the district I'm watching, because it compounds: Glenview has had a public-works spike three cycles running — low, low, then medium this cycle. Glenview is one of the neighborhoods the boom skipped. I'm not the authority there, but I'm asking Public Works for a scope and timeline, because a \"spike\" isn't information and the people in Glenview deserve better than a severity label.\n\nNext cycle: I'll have the Marine Systems answer or I'll say I don't have one. And I'll have the next construction action on INIT-006 written down before the foundation gets poured — not after.",
+  "moves": [],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-11-18T11:46:54.281Z",
+  "usage": {
+    "prompt_tokens": 26683,
+    "completion_tokens": 1413,
+    "cost": 0.0035
+  },
+  "fellBackFrom": null,
+  "template": "worker/2",
+  "toolTrace": [
+    {
+      "tool": "memory_recall",
+      "input": {
+        "query": "Baylight remediation milestone review Cycle 115"
+      },
+      "resultChars": 2966
+    },
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Employment_Roster",
+        "match": "Marine Systems"
+      },
+      "resultChars": 66
+    },
+    {
+      "tool": "memory_recall",
+      "input": {
+        "query": "Marine Systems severance jobs hotline dust Jack London workforce"
+      },
+      "resultChars": 3306
+    },
+    {
+      "tool": "neighborhood_read",
+      "input": {
+        "neighborhood": "Baylight District"
+      },
+      "resultChars": 2216
+    },
+    {
+      "tool": "record_read",
+      "input": {
+        "record": "Business, economic and infrastructure events on the city's event ledger",
+        "from_cycle": 113
+      },
+      "resultChars": 626
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Marine Systems Baylight"
+      },
+      "resultChars": 550
+    }
+  ],
+  "memory": {
+    "searchedOn": "baylight harbor construction",
+    "entries": 8,
+    "fromSearch": 6,
+    "newest": 2,
+    "failed": []
+  },
+  "figuresNotHanded": [],
+  "finishReason": "stop",
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00041",
+    "id": "KJ4R8FJ6C1mot1pXuEgB65",
+    "customId": "cp-POP-00041-c116-CIVIC-datawake-2026-11-18"
+  }
+}

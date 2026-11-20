@@ -1,0 +1,74 @@
+{
+  "office": "stabilization_fund",
+  "agentDir": "civic-project-stabilization-fund",
+  "holder": "Marcus Webb",
+  "popid": "POP-00790",
+  "title": "OEWD Program Director (Stabilization Fund)",
+  "date": "2026-11-18",
+  "cycle": 116,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "**Cycle 116 weekly report — Marcus Webb, OEWD Program Director, West Oakland Stabilization Fund (INIT-001)**\n\n**Where the money stands.** The Fund's authorization is $28 million; the tracker shows $20.6 million remaining as of this Cycle. The last recorded disbursement was Cycle 116 under the standing 23-day processing standard. I'm not going to quote a cumulative number beyond what the sheet supports: the payments record carries one row total, and the tracker's tranche lines are the authority for the rest. The four household grants I can name on the record — HH-0102-F027, HH-0109-F017, HH-0110-F019, HH-0113-F023, all West Oakland renters — are active, last paid between Cycles 109 and 113, no flags.\n\n**The queue.** No new payment lines this Cycle. That is the part I answer for plainly: the clock held on what was already in motion, but nothing new went out the door in Cycle 116. Next cycle's opening task is the same as this cycle's closing one — get the next authorization batch in front of the Deputy Mayor's desk, not a memo about it.\n\n**The charter renewal.** The ordinance is on the Council calendar. The closeout from Cycle 114 is published, the business-and-resident scope is preserved exactly as corrected in C109, and the 23-day standard is written into the conditions. Final action is set for Cycle 117. I want to be clear about the two things the press has rightly pressed on: the scope did move twice on the record (C108 then C109), and that history is now part of the hearing record rather than a footnote — and the renewal vote is the Council's to cast, not mine to predict. What I control is the proof, and the proof is published.\n\n**The neighborhoods.** West Oakland's housing pressure reads 5.5 this Cycle with a median rent of $3,669 and a trajectory of growth. That is the pressure the Fund exists to answer, and it is the reason the queue cannot idle while paperwork moves. I'm also noting the tenant-defense sequencing decision on the record this Cycle: the legal-support record goes first, and the 23-day clock runs while it does — the rent doesn't wait for an ordinance.\n\n**What I'm watching.** The Council roll call in 117. Before it, verified closeout, verified scope, verified clock — all three on the hearing record. After it, execution on Day One of whatever the Council decides.",
+  "moves": [],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-11-18T11:46:18.316Z",
+  "usage": {
+    "prompt_tokens": 13945,
+    "completion_tokens": 719,
+    "cost": 0.0015
+  },
+  "fellBackFrom": null,
+  "template": "worker/2",
+  "toolTrace": [
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Cycle_Weather",
+        "from_cycle": 114
+      },
+      "resultChars": 290
+    },
+    {
+      "tool": "memory_recall",
+      "input": {
+        "query": "charter renewal council committee closeout"
+      },
+      "resultChars": 3360
+    },
+    {
+      "tool": "record_read",
+      "input": {
+        "record": "The city's payments on INIT-001",
+        "from_cycle": 112
+      },
+      "resultChars": 83
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "West Oakland Stabilization Fund charter renewal"
+      },
+      "resultChars": 3301
+    }
+  ],
+  "memory": {
+    "searchedOn": "stabilization fund households rent grants",
+    "entries": 8,
+    "fromSearch": 6,
+    "newest": 2,
+    "failed": []
+  },
+  "figuresNotHanded": [
+    "20.6"
+  ],
+  "finishReason": "stop",
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00790",
+    "id": "UUkPc1fGYdMP8uPPyZChaQ",
+    "customId": "cp-POP-00790-c116-CIVIC-datawake-2026-11-18"
+  }
+}

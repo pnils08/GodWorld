@@ -1,0 +1,169 @@
+{
+  "office": "mayor_gavel",
+  "cycle": 116,
+  "speaker": "Avery Santana",
+  "cascadeSummary": "I am moving overdue work through verifiable records, not assumed outcomes: charter-renewal consideration, the Fruitvale briefing, Temescal's audit and walkthrough, a formal apprenticeship evaluation, and the scheduled Grand Lake and tenant-defense decisions. I am holding Fruitvale design advancement and Baylight milestone claims where the evidence remains incomplete. I am withdrawing the unverified INIT-014 filing claim, keeping INIT-015 announced pending Clerk verification, and requiring a complete complaint crosswalk rather than inventing docket references.",
+  "statements": [
+    {
+      "statementId": "STMT-116-mayor_gavel-001",
+      "type": "public_remark",
+      "topic": "Cycle 115 petition-response reconciliation",
+      "initiative": null,
+      "decision": "Withdraw any implication that seven petition responses are verified filings; require a Clerk-reconciled crosswalk covering all ten complaints, while acknowledging that the supplied packet lacks the ledger and docket references needed to complete it now.",
+      "quote": "Seven promised responses are not seven completed filings; every complaint needs a docket, an owner, a remedy, and a next date.",
+      "fullStatement": "Planning Director Mara Vance's Cycle 116 directive is justified. My Cycle 115 opening statement promised seven petition-specific filings, but the packet now describes ten complaints without supplying the complaint ledger, complaint identifiers, or response docket references. I cannot honestly invent that crosswalk. I am withdrawing any implication that the seven responses are verified as filed and directing my office to reconcile the record with the Clerk. The published crosswalk must map each response to its complaints, give the status of every remaining complaint, and name each responsible office, proposed remedy, and next date. No complaint will be counted answered by inference.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-116-mayor_gavel-002",
+      "type": "initiative_response",
+      "topic": "INIT-014 filing correction and council review",
+      "initiative": "Ivy Hill Community Support Initiative",
+      "decision": "Withdraw the Cycle 115 filing claim, keep INIT-014 treated as announced and not verifiably filed, and request that council review wait for a Clerk reference or an explicit determination that no filing occurred.",
+      "quote": "I said the Ivy Hill legislation was filed; without a Clerk reference, I am withdrawing that claim and holding council review.",
+      "fullStatement": "My Cycle 115 closing statement said INIT-014 was filed. The current record does not substantiate that statement: no Clerk reference is supplied, and the live tracker still shows the $2.5 million initiative as announced with its filing step overdue since Cycle 114. I am withdrawing the filing claim and treating filing as unverified, not completed for purposes of council review. I am asking that review be tabled until the Clerk provides a reference or the record expressly establishes that no filing occurred. Ivy Hill's slow trade and soured mood still merit attention alongside its low crime, but honesty about process comes first.",
+      "trackerUpdates": {
+        "initiative": "INIT-014",
+        "MilestoneNotes": "C116: Withdrew the unverified filing claim; no Clerk reference supplied, and council review should wait for verification.",
+        "NextScheduledAction": "Provide a Clerk filing reference or explicitly confirm that filing has not occurred",
+        "NextActionCycle": 116
+      }
+    },
+    {
+      "statementId": "STMT-116-mayor_gavel-003",
+      "type": "initiative_response",
+      "topic": "West Oakland Stabilization Fund charter renewal",
+      "initiative": "West Oakland Stabilization Fund",
+      "decision": "Call for council consideration of the transmitted charter-renewal ordinance this cycle, preserving business-and-resident scope, the 23-day processing standard, and C114 closeout evidence; announce no new tranche.",
+      "quote": "Renewal must protect the charter, preserve the 23-day standard, and show West Oakland the evidence before another dollar is announced.",
+      "fullStatement": "West Oakland businesses and residents deserve a Stabilization Fund whose purpose does not drift with the political winds. I am calling for council consideration of the transmitted charter-renewal ordinance this cycle, with the business-and-resident scope, 23-day processing standard, and C114 closeout evidence intact. The Fund retains its $28 million authorization; I am announcing no new tranche today. To colleagues who want scrutiny, I agree that renewal should carry evidence rather than nostalgia. Council can now judge the charter on its record, while current disbursement operations continue under the established standards.",
+      "trackerUpdates": {
+        "initiative": "INIT-001",
+        "MilestoneNotes": "C116: Called for charter-renewal consideration with business-and-resident scope, 23-day standard and C114 evidence; no new tranche.",
+        "NextScheduledAction": "Council consideration of the transmitted charter-renewal ordinance",
+        "NextActionCycle": 116
+      }
+    },
+    {
+      "statementId": "STMT-116-mayor_gavel-004",
+      "type": "initiative_response",
+      "topic": "D3 Fruitvale alternative-response briefing",
+      "initiative": "Oakland Alternative Response Initiative",
+      "decision": "Direct execution and publication of the D3 briefing record with district-level and Fruitvale data this cycle; hold expansion and record the D5 audit and Baylight feasibility review as incomplete.",
+      "quote": "Fruitvale gets the data and the public briefing before Oakland asks any other neighborhood to consider expansion.",
+      "fullStatement": "Oakland's alternative-response work earns trust when residents can inspect the record. I am directing execution and publication of the D3 Fruitvale briefing record this cycle, including district-level and Fruitvale data. Expansion remains held. The D5 audit and Baylight feasibility review are incomplete, and my office will not describe them as otherwise. Janae Rivers and Rose Delgado have been clear about the standard, and I share it. This $12.5 million initiative remains dispatch-live while the required public evidence catches up to the commitments we have made.",
+      "trackerUpdates": {
+        "initiative": "INIT-002",
+        "MilestoneNotes": "C116: Ordered the D3 briefing executed and published with district and Fruitvale data; expansion held; D5 audit and Baylight review incomplete.",
+        "NextScheduledAction": "Execute and publish the D3 briefing record with district-level and Fruitvale data",
+        "NextActionCycle": 116
+      }
+    },
+    {
+      "statementId": "STMT-116-mayor_gavel-005",
+      "type": "initiative_response",
+      "topic": "Fruitvale Transit Hub evidence gate",
+      "initiative": "Fruitvale Transit Hub Phase II — Visioning",
+      "decision": "Let the low-severity flag pass without further design advancement; require verifiable preliminary schematics and a documented Fruitvale public comment-and-response record first.",
+      "quote": "A $230 million transit promise moves on delivered schematics and answered public comments, not on pressure to manufacture a milestone.",
+      "fullStatement": "Fruitvale's energy is positive, and Phase II remains a $230 million commitment authorized at C86. I am letting this cycle's low-severity improvement flag pass without a new design authorization. The outstanding test is concrete: preliminary schematics and a documented Fruitvale community review, followed by a public comment-and-response record. Until those materials are verifiable, further design advancement waits. That is not retreat; it is how we protect the binding visioning framework and make the next decision worthy of residents' trust.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-116-mayor_gavel-006",
+      "type": "initiative_response",
+      "topic": "Temescal health-center audit and merchant verification",
+      "initiative": "Temescal Community Health Center",
+      "decision": "Direct the Q3 clinical intake audit filing to HCAI and the Council Clerk and completion of the recurring Telegraph & 47th merchant-verification walkthrough; authorize no new operational appropriations.",
+      "quote": "The health center is open; our job now is to keep its public reporting as dependable as its doors.",
+      "fullStatement": "Temescal's health center opened ahead of schedule and $1.2 million under budget, but an opening is not the end of accountability. I am directing the Q3 clinical intake audit filing to HCAI and the Council Clerk and completion of the recurring merchant-verification walkthrough at Telegraph & 47th. Warren Ashford's utilization-audit expectations remain part of the operating routine, not a favor to one district. I am authorizing no new operational appropriations. The center remains operational within the existing $45 million initiative while the filing and walkthrough establish the next verified record.",
+      "trackerUpdates": {
+        "initiative": "INIT-005",
+        "MilestoneNotes": "C116: Ordered the Q3 intake audit filing and Telegraph & 47th merchant walkthrough; no new operational appropriations authorized.",
+        "NextScheduledAction": "File the Q3 intake audit and complete the Telegraph & 47th merchant-verification walkthrough",
+        "NextActionCycle": 116
+      }
+    },
+    {
+      "statementId": "STMT-116-mayor_gavel-007",
+      "type": "initiative_response",
+      "topic": "Baylight milestone and oversight",
+      "initiative": "Baylight District — Final Council Vote",
+      "decision": "Declare no construction-milestone pass or final-vote outcome; continue independent remediation oversight, the construction hotline, haul-route dust control, and Jack London workforce coordination under the existing evidence review.",
+      "quote": "Baylight keeps moving under independent oversight; neither a good week Downtown nor a calendar deadline substitutes for a passed milestone.",
+      "fullStatement": "Jack London and Downtown are busy, and Baylight's mood is positive, but I will not convert that into a construction-milestone pass or a final-vote claim. I am holding the milestone determination where the evidence left it: independent remediation verification, hotline and dust-control records, and Jack London workforce results still govern the review. Remediation, independent oversight, the construction hotline, haul-route dust control, and workforce coordination continue. The $2.1 billion project remains construction-active. When the evidence supports a milestone, I will announce it; no such pass is declared today.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-116-mayor_gavel-008",
+      "type": "initiative_response",
+      "topic": "Youth apprenticeship placement evaluation",
+      "initiative": "Oakland Youth Apprenticeship Pipeline",
+      "decision": "Move INIT-007 to pilot_evaluation and direct publication of the placement-gap analysis and adjustment plan this cycle, with explicit West Oakland and Fruitvale review and concrete program adjustments.",
+      "quote": "Four cycles without movement end with a public gap analysis, specific adjustments, and an honest evaluation of who placements are reaching.",
+      "fullStatement": "Young people in West Oakland, East Oakland, and Fruitvale need placements, not another assurance that implementation continues. I am moving the Oakland Youth Apprenticeship Pipeline into a formal placement-evaluation phase and directing publication of the placement-gap analysis and adjustment plan this cycle. The review must explicitly cover West Oakland and Fruitvale, identify placement gaps, and state what will change. This phase change is not a declaration of success; it is the accountability step that follows the first cohort report. The $12.5 million program will be judged by the published record and the adjustments that follow.",
+      "trackerUpdates": {
+        "initiative": "INIT-007",
+        "ImplementationPhase": "pilot_evaluation",
+        "MilestoneNotes": "C116: Moved to pilot_evaluation; placement-gap analysis and adjustment plan ordered with explicit West Oakland and Fruitvale review.",
+        "NextScheduledAction": "Publish the placement-gap analysis and adjustment plan with West Oakland and Fruitvale review",
+        "NextActionCycle": 116
+      }
+    },
+    {
+      "statementId": "STMT-116-mayor_gavel-009",
+      "type": "policy_position",
+      "topic": "Grand Lake recorded full-council decision",
+      "initiative": "Commercial Stabilization for Grand Lake",
+      "decision": "Maintain a YES position and request that the scheduled recorded full-council vote proceed with all Chen-Vega conditions intact; claim no outcome until the Clerk certifies the roll call.",
+      "quote": "Grand Lake deserves a certified roll call, with every Chen-Vega safeguard attached, rather than another round of statements mistaken for passage.",
+      "fullStatement": "My position on INIT-009 remains YES. The $2.5 million Grand Lake proposal should now receive its recorded full-council decision, with Nina Chen and Ramon Vega's milestone-reporting and audit conditions intact. I am not counting my support, any individual council member's YES, or a hearing statement as council passage. The Clerk-certified roll call will determine the outcome. To colleagues concerned about spending, those conditions are not decoration; they are the framework for deciding whether this investment delivers. Grand Lake's upbeat mood is welcome, but the vote must stand on the legislation and the public record.",
+      "trackerUpdates": {
+        "initiative": "INIT-009",
+        "MilestoneNotes": "C116: Requested the scheduled recorded vote proceed with Chen-Vega conditions intact; no outcome claimed pending Clerk certification.",
+        "NextScheduledAction": "Recorded full-council vote with Chen-Vega conditions and a Clerk-certified roll call",
+        "NextActionCycle": 116
+      }
+    },
+    {
+      "statementId": "STMT-116-mayor_gavel-010",
+      "type": "policy_position",
+      "topic": "West Oakland tenant-defense analysis and committee decision",
+      "initiative": "West Oakland Tenant Defense Fund",
+      "decision": "Require publication of the legal-support analysis before the scheduled recorded committee decision on the $4.2 million proposal; claim no vote outcome or appropriation in advance.",
+      "quote": "West Oakland should get the legal analysis before the committee vote, and a recorded decision before anyone calls the process finished.",
+      "fullStatement": "The West Oakland Tenant Defense Fund has had enough procedural movement without a decision. I am directing publication of the committee's legal-support analysis before the recorded committee vote on the $4.2 million proposal. The analysis must be public in time for members and residents to read it; the committee must then record its decision, whichever way it votes. I am not claiming passage, defeat, or a new appropriation in advance. This is about whether the proposed legal defense is sound and accountable, not about manufacturing an emergency. The committee owes West Oakland a clear answer this cycle.",
+      "trackerUpdates": {
+        "initiative": "INIT-010",
+        "MilestoneNotes": "C116: Legal-support analysis ordered before the recorded committee decision; no vote outcome or appropriation claimed.",
+        "NextScheduledAction": "Publish the legal-support analysis, then record the committee decision",
+        "NextActionCycle": 116
+      }
+    },
+    {
+      "statementId": "STMT-116-mayor_gavel-011",
+      "type": "initiative_response",
+      "topic": "Laurel legislation development and verified filing",
+      "initiative": "Laurel Neighborhood Patch and Clean-Up",
+      "decision": "Proceed with development and submission of the $6 million legislation, requiring direct outreach, a defined work scope, and visible follow-through; keep the phase announced until a Clerk filing reference verifies completion.",
+      "quote": "Laurel will get a defined cleanup scope, direct outreach, and visible follow-through; I will not call legislation filed before the Clerk can verify it.",
+      "fullStatement": "Laurel's earlier retail reading did not settle what residents are experiencing, and slow trade still calls for practical follow-through. I am proceeding this cycle with development and submission of the $6 million Laurel Neighborhood Patch and Clean-Up legislation. It must include direct outreach, a defined work scope, and visible follow-through that neighbors can inspect. I am not stamping the initiative legislation-filed or claiming completion before the Clerk supplies a filing reference. That distinction matters after the INIT-014 correction. The proposal stays announced while the legislation is prepared and submitted; verified filing is the next gate, not a talking point.",
+      "trackerUpdates": {
+        "initiative": "INIT-015",
+        "MilestoneNotes": "C116: $6M legislation development and submission directed with outreach, defined scope and visible follow-through; filing awaits Clerk verification.",
+        "NextScheduledAction": "Develop and submit the legislation and obtain a Clerk filing reference",
+        "NextActionCycle": 116
+      }
+    },
+    {
+      "statementId": "STMT-116-mayor_gavel-012",
+      "type": "public_remark",
+      "topic": "Glenview and Piedmont Avenue spikes, neighborhood sentiment, and civic life",
+      "initiative": null,
+      "decision": "Direct bounded administrative follow-up on the Glenview public-works and Piedmont Avenue health spikes, maintain baseline services and community anchors, and recognize neighborhood concerns and civic activity without inventing outcomes.",
+      "quote": "Oakland can respond to Glenview and Piedmont Avenue, listen where moods have soured, and still make room for block parties and civic joy.",
+      "fullStatement": "A quiet cycle does not erase the medium-severity public-works spike in Glenview or the medium-severity health spike in Piedmont Avenue. I am directing administrative follow-up on both, with the Piedmont response maintaining core municipal services and supporting community anchors. The record should show what happened, what is being done, and when the public will hear more; I am not inventing those facts today. Brooklyn and Ivy Hill's soured moods also deserve direct listening, not a crisis label. And Oakland's civic life matters: this week's family block parties and faith-led job training, senior meals, and food pantries are part of how neighbors keep this city strong.",
+      "trackerUpdates": {}
+    }
+  ]
+}

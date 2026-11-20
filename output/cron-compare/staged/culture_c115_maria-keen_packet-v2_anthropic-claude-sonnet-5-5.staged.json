@@ -1,0 +1,76 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "115",
+  "persona": "maria-keen",
+  "byline": "Maria Keen",
+  "bylinePopid": "POP-00013",
+  "article": "output/cron-compare/staged/culture_c115_maria-keen_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Toto Foto",
+        "role": "quoted-source",
+        "popid": "POP-00302"
+      },
+      {
+        "name": "Rafael Montez",
+        "role": "quoted-source",
+        "popid": "POP-00136"
+      },
+      {
+        "name": "Priya Narang",
+        "role": "quoted-source",
+        "popid": "POP-00141"
+      },
+      {
+        "name": "Caroline Cabrera",
+        "role": "quoted-source",
+        "popid": "POP-00847"
+      },
+      {
+        "name": "Omar Amici",
+        "role": "mentioned",
+        "popid": "POP-00263",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Uptown"
+    ],
+    "claims": [
+      {
+        "claim": "I love walking through Uptown on a busy Saturday like that. The market was buzzing, and it felt like everyone was out enjoying the day. I saw some familiar faces, exchanged a few hellos. The energy's always good there.",
+        "sourceRef": "citizenVoice PRESS Toto Foto"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-c194861c0242",
+    "draftSha256": "294b85ecee5b4b3d8e56f5085cf47e056ce48532fec08a78cdfb730c863ce725",
+    "verdict": "output/cron-compare/culture_c115_maria-keen_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-14T00:18:12.005Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 770,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "294b85ecee5b4b3d8e56f5085cf47e056ce48532fec08a78cdfb730c863ce725",
+      "costUsd": 0.001
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-14T00:18:15.987Z"
+}

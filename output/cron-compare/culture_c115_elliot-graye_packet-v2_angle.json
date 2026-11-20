@@ -1,0 +1,722 @@
+{
+  "stage": "angle",
+  "desk": "culture",
+  "cycle": "115",
+  "persona": "elliot-graye",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00012",
+      "name": "Elliot Graye",
+      "role": "desk reporter",
+      "desk": "culture"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "crisis response at Bay Pure Land Buddhist Temple (Chinatown) — the week in faith, and St. Esperanza Parish in focus",
+      "approach": "Faith and quiet-work approach: this slice is the week's faith events on the record — services, holy days, outreach, crisis response, with the congregations and neighborhoods named — plus one congregation in focus and the community programs around it. Dignity, not doctrine wars. The events, institutions and people are real; the sanctuary on a weeknight, the basement kitchen, the Tuesday meeting are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "faith",
+        "hood": "Fruitvale",
+        "facts": [
+          "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+          "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+          "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+          "Interfaith Council (Adams Point), C115 — interfaith dialogue: interfaith prayer breakfast brings leaders together (attendance 123)",
+          "Interfaith Council (Chinatown), C114 — interfaith dialogue: dialogue series addresses shared concerns (attendance 53)",
+          "Cathedral of the Living Word (Lake Merritt), C115 — community program: after-school tutoring program expands (attendance 250)",
+          "Masjid An-Nur Oakland (East Oakland), C115 — community program: seniors lunch program marks milestone (attendance 50)",
+          "Bay Pure Land Buddhist Temple (Chinatown), C115 — community program: job training workshop begins new session (attendance 40)",
+          "In focus: St. Esperanza Parish — Catholic, Fruitvale, congregation 800, founded 119 years ago, led today by Fr. Ramon Solano — Latino community center, family focus",
+          "Fruitvale Summer Speed Series (youth-sports), Fruitvale, since C101",
+          "Fruitvale Transit Corridor Mutual Aid (mutual-aid), Fruitvale, since C101",
+          "Postpartum Oakland Network (health), Fruitvale, founded by Lucia Polito, since C101"
+        ],
+        "priorCycle": null,
+        "note": null,
+        "engineHooks": [
+          "Heavy faith activity this cycle. Multiple incidents creating a pattern. Deep-dive opportunity. (general coverage)",
+          "the bad week cost more than the savings could hold — borrowed to cover it (observational analysis)",
+          "Ruth Anyanwu moved from East Oakland to Downtown — moving up from East Oakland (desk rotation)"
+        ],
+        "roomIsYours": "the sanctuary on a weeknight, the folding chairs, who sets up and who stays late, what the leader says when the room is half empty",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-faith",
+      "hood": "Fruitvale",
+      "score": null,
+      "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+      "nearby": [
+        {
+          "text": "Grand Lake neighborhood texture — how residents experience the improvement | Residents of Grand Lake feel the change firsthand.",
+          "src": "output/engine_audit_c115.json patterns[9]; evidence: Initiative_Tracker row(s) 9; storyline INIT-009:vote-ready"
+        },
+        {
+          "text": "Adams Point | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c115.md \"### Adams Point\"; events: world_summary_c115.md \"## World Events\""
+        },
+        {
+          "text": "Chinatown | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c115.md \"### Chinatown\"; events: world_summary_c115.md \"## World Events\""
+        },
+        {
+          "text": "Downtown | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c115.md \"### Downtown\"; events: world_summary_c115.md \"## World Events\""
+        },
+        {
+          "text": "East Oakland | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c115.md \"### East Oakland\"; events: world_summary_c115.md \"## World Events\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00756",
+          "name": "Ramon Solano",
+          "profile": "Ramon Solano — Senior Pastor / Faith Leader — Fruitvale",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Fruitvale",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+            "pop": "POP-00756",
+            "rowName": "Ramon Solano",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00763",
+          "name": "Kenji Tanaka",
+          "profile": "Kenji Tanaka — Senior Pastor / Faith Leader — Chinatown",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Chinatown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+            "pop": "POP-00763",
+            "rowName": "Kenji Tanaka",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00753",
+          "name": "Eunice Marston",
+          "profile": "Eunice Marston — Senior Pastor / Faith Leader — Downtown",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Downtown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+            "pop": "POP-00753",
+            "rowName": "Eunice Marston",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00755",
+          "name": "Antoine Vermeer",
+          "profile": "Antoine Vermeer — Senior Pastor / Faith Leader — Lake Merritt",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Lake Merritt",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+            "pop": "POP-00755",
+            "rowName": "Antoine Vermeer",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00762",
+          "name": "Aziz Rahimi",
+          "profile": "Aziz Rahimi — Senior Pastor / Faith Leader — Fruitvale",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Fruitvale",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+            "pop": "POP-00762",
+            "rowName": "Aziz Rahimi",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00004",
+          "name": "Lucia Polito",
+          "profile": "Lucia Polito — Aura Wellness Practitioner — Fruitvale",
+          "role": "Aura Wellness Practitioner",
+          "hood": "Fruitvale",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+            "pop": "POP-00004",
+            "rowName": "Lucia Polito",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C115",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-bc84fc0b7718"
+      },
+      {
+        "t": "FACT",
+        "text": "8 faith events on the record since C109 · St. Esperanza Parish in Fruitvale | 6 named on the record",
+        "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+        "id": "F-9df05990cff8"
+      },
+      {
+        "t": "FACT",
+        "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+        "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+        "id": "F-ca3d288da136"
+      },
+      {
+        "t": "FACT",
+        "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+        "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+        "id": "F-61024524d215"
+      },
+      {
+        "t": "FACT",
+        "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+        "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+        "id": "F-c6268244f8ea"
+      },
+      {
+        "t": "FACT",
+        "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+        "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\"",
+        "id": "F-2e38ae74adc2"
+      },
+      {
+        "t": "FACT",
+        "text": "Interfaith Council (Adams Point), C115 — interfaith dialogue: interfaith prayer breakfast brings leaders together (attendance 123)",
+        "src": "output/beats/Faith_Ledger.jsonl C115 \"Interfaith Council\"",
+        "id": "F-081007882588"
+      },
+      {
+        "t": "FACT",
+        "text": "Interfaith Council (Chinatown), C114 — interfaith dialogue: dialogue series addresses shared concerns (attendance 53)",
+        "src": "output/beats/Faith_Ledger.jsonl C114 \"Interfaith Council\"",
+        "id": "F-74afa9e34a82"
+      },
+      {
+        "t": "FACT",
+        "text": "Cathedral of the Living Word (Lake Merritt), C115 — community program: after-school tutoring program expands (attendance 250)",
+        "src": "output/beats/Faith_Ledger.jsonl C115 \"Cathedral of the Living Word\"",
+        "id": "F-69f177f26a50"
+      },
+      {
+        "t": "FACT",
+        "text": "Masjid An-Nur Oakland (East Oakland), C115 — community program: seniors lunch program marks milestone (attendance 50)",
+        "src": "output/beats/Faith_Ledger.jsonl C115 \"Masjid An-Nur Oakland\"",
+        "id": "F-db672410a415"
+      },
+      {
+        "t": "FACT",
+        "text": "Bay Pure Land Buddhist Temple (Chinatown), C115 — community program: job training workshop begins new session (attendance 40)",
+        "src": "output/beats/Faith_Ledger.jsonl C115 \"Bay Pure Land Buddhist Temple\"",
+        "id": "F-e15ab73b184a"
+      },
+      {
+        "t": "FACT",
+        "text": "In focus: St. Esperanza Parish — Catholic, Fruitvale, congregation 800, founded 119 years ago, led today by Fr. Ramon Solano — Latino community center, family focus",
+        "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+        "id": "F-2b18f5dfa775"
+      },
+      {
+        "t": "FACT",
+        "text": "Fruitvale Summer Speed Series (youth-sports), Fruitvale, since C101",
+        "src": "output/beats/Community_Programs.jsonl PRG-004",
+        "id": "F-d36eee7f47b5"
+      },
+      {
+        "t": "FACT",
+        "text": "Fruitvale Transit Corridor Mutual Aid (mutual-aid), Fruitvale, since C101",
+        "src": "output/beats/Community_Programs.jsonl PRG-010",
+        "id": "F-8f8b47280edd"
+      },
+      {
+        "t": "FACT",
+        "text": "Postpartum Oakland Network (health), Fruitvale, founded by Lucia Polito, since C101",
+        "src": "output/beats/Community_Programs.jsonl PRG-016",
+        "id": "F-535a79178865"
+      },
+      {
+        "t": "FACT",
+        "text": "Also in Fruitvale: Gurdwara Singh Sabha Fruitvale (Sikh)",
+        "src": "output/beats/Faith_Organizations.jsonl",
+        "id": "F-81fb11f8789e"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ]
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-00756",
+        "name": "Ramon Solano",
+        "role": "Senior Pastor / Faith Leader",
+        "hood": "Fruitvale",
+        "profile": "Ramon Solano — Senior Pastor / Faith Leader — Fruitvale",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+          "pop": "POP-00756",
+          "rowName": "Ramon Solano",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00763",
+        "name": "Kenji Tanaka",
+        "role": "Senior Pastor / Faith Leader",
+        "hood": "Chinatown",
+        "profile": "Kenji Tanaka — Senior Pastor / Faith Leader — Chinatown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+          "pop": "POP-00763",
+          "rowName": "Kenji Tanaka",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00753",
+        "name": "Eunice Marston",
+        "role": "Senior Pastor / Faith Leader",
+        "hood": "Downtown",
+        "profile": "Eunice Marston — Senior Pastor / Faith Leader — Downtown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+          "pop": "POP-00753",
+          "rowName": "Eunice Marston",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00755",
+        "name": "Antoine Vermeer",
+        "role": "Senior Pastor / Faith Leader",
+        "hood": "Lake Merritt",
+        "profile": "Antoine Vermeer — Senior Pastor / Faith Leader — Lake Merritt",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+          "pop": "POP-00755",
+          "rowName": "Antoine Vermeer",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00762",
+        "name": "Aziz Rahimi",
+        "role": "Senior Pastor / Faith Leader",
+        "hood": "Fruitvale",
+        "profile": "Aziz Rahimi — Senior Pastor / Faith Leader — Fruitvale",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+          "pop": "POP-00762",
+          "rowName": "Aziz Rahimi",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00004",
+        "name": "Lucia Polito",
+        "role": "Aura Wellness Practitioner",
+        "hood": "Fruitvale",
+        "profile": "Lucia Polito — Aura Wellness Practitioner — Fruitvale",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+          "pop": "POP-00004",
+          "rowName": "Lucia Polito",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Elliot Graye",
+    "popid": "POP-00012"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-faith",
+      "angle": "crisis response at Bay Pure Land Buddhist Temple (Chinatown) — the week in faith, and St. Esperanza Parish in focus",
+      "label": "8 faith events on the record since C109 · St. Esperanza Parish in Fruitvale | 6 named on the record",
+      "hookLine": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+      "hood": "Fruitvale",
+      "citizens": [
+        "Ramon Solano (POP-00756)",
+        "Kenji Tanaka (POP-00763)",
+        "Eunice Marston (POP-00753)",
+        "Antoine Vermeer (POP-00755)",
+        "Aziz Rahimi (POP-00762)",
+        "Lucia Polito (POP-00004)"
+      ],
+      "popids": [
+        "POP-00756",
+        "POP-00763",
+        "POP-00753",
+        "POP-00755",
+        "POP-00762",
+        "POP-00004"
+      ],
+      "ref": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+      "cycle": 115
+    },
+    "approach": "Faith and quiet-work approach: this slice is the week's faith events on the record — services, holy days, outreach, crisis response, with the congregations and neighborhoods named — plus one congregation in focus and the community programs around it. Dignity, not doctrine wars. The events, institutions and people are real; the sanctuary on a weeknight, the basement kitchen, the Tuesday meeting are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "FAITH-SLICE-2",
+    "kind": "beat-faith",
+    "seat": {
+      "slug": "elliot-graye",
+      "name": "Elliot Graye",
+      "popid": "POP-00012",
+      "desk": "culture",
+      "domain": "faith",
+      "builder": "buildFaithSlice.js"
+    },
+    "hood": "Fruitvale",
+    "pulse": {
+      "className": "beat-faith",
+      "score": 100,
+      "label": "8 faith events on the record since C109 · St. Esperanza Parish in Fruitvale | 6 named on the record",
+      "hood": "Fruitvale",
+      "source": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\""
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "crisis response at Bay Pure Land Buddhist Temple (Chinatown) — the week in faith, and St. Esperanza Parish in focus",
+      "hookLine": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+      "anchorFacts": [
+        "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+        "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+        "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+        "Interfaith Council (Adams Point), C115 — interfaith dialogue: interfaith prayer breakfast brings leaders together (attendance 123)",
+        "Interfaith Council (Chinatown), C114 — interfaith dialogue: dialogue series addresses shared concerns (attendance 53)",
+        "Cathedral of the Living Word (Lake Merritt), C115 — community program: after-school tutoring program expands (attendance 250)",
+        "Masjid An-Nur Oakland (East Oakland), C115 — community program: seniors lunch program marks milestone (attendance 50)",
+        "Bay Pure Land Buddhist Temple (Chinatown), C115 — community program: job training workshop begins new session (attendance 40)",
+        "In focus: St. Esperanza Parish — Catholic, Fruitvale, congregation 800, founded 119 years ago, led today by Fr. Ramon Solano — Latino community center, family focus",
+        "Fruitvale Summer Speed Series (youth-sports), Fruitvale, since C101",
+        "Fruitvale Transit Corridor Mutual Aid (mutual-aid), Fruitvale, since C101",
+        "Postpartum Oakland Network (health), Fruitvale, founded by Lucia Polito, since C101",
+        "Also in Fruitvale: Gurdwara Singh Sabha Fruitvale (Sikh)"
+      ],
+      "evidence": [
+        {
+          "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+          "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\""
+        },
+        {
+          "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+          "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\""
+        },
+        {
+          "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+          "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\""
+        },
+        {
+          "text": "Interfaith Council (Adams Point), C115 — interfaith dialogue: interfaith prayer breakfast brings leaders together (attendance 123)",
+          "src": "output/beats/Faith_Ledger.jsonl C115 \"Interfaith Council\""
+        },
+        {
+          "text": "Interfaith Council (Chinatown), C114 — interfaith dialogue: dialogue series addresses shared concerns (attendance 53)",
+          "src": "output/beats/Faith_Ledger.jsonl C114 \"Interfaith Council\""
+        },
+        {
+          "text": "Cathedral of the Living Word (Lake Merritt), C115 — community program: after-school tutoring program expands (attendance 250)",
+          "src": "output/beats/Faith_Ledger.jsonl C115 \"Cathedral of the Living Word\""
+        },
+        {
+          "text": "Masjid An-Nur Oakland (East Oakland), C115 — community program: seniors lunch program marks milestone (attendance 50)",
+          "src": "output/beats/Faith_Ledger.jsonl C115 \"Masjid An-Nur Oakland\""
+        },
+        {
+          "text": "Bay Pure Land Buddhist Temple (Chinatown), C115 — community program: job training workshop begins new session (attendance 40)",
+          "src": "output/beats/Faith_Ledger.jsonl C115 \"Bay Pure Land Buddhist Temple\""
+        },
+        {
+          "text": "In focus: St. Esperanza Parish — Catholic, Fruitvale, congregation 800, founded 119 years ago, led today by Fr. Ramon Solano — Latino community center, family focus",
+          "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\""
+        },
+        {
+          "text": "Fruitvale Summer Speed Series (youth-sports), Fruitvale, since C101",
+          "src": "output/beats/Community_Programs.jsonl PRG-004"
+        },
+        {
+          "text": "Fruitvale Transit Corridor Mutual Aid (mutual-aid), Fruitvale, since C101",
+          "src": "output/beats/Community_Programs.jsonl PRG-010"
+        },
+        {
+          "text": "Postpartum Oakland Network (health), Fruitvale, founded by Lucia Polito, since C101",
+          "src": "output/beats/Community_Programs.jsonl PRG-016"
+        },
+        {
+          "text": "Also in Fruitvale: Gurdwara Singh Sabha Fruitvale (Sikh)",
+          "src": "output/beats/Faith_Organizations.jsonl"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": null,
+      "hooks": [
+        {
+          "text": "Heavy faith activity this cycle. Multiple incidents creating a pattern. Deep-dive opportunity.",
+          "angle": "general coverage",
+          "domain": "FAITH",
+          "hood": null,
+          "priority": 3
+        },
+        {
+          "text": "the bad week cost more than the savings could hold — borrowed to cover it",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Temescal",
+          "priority": 3
+        },
+        {
+          "text": "Ruth Anyanwu moved from East Oakland to Downtown — moving up from East Oakland",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "Downtown",
+          "priority": 5
+        }
+      ],
+      "note": null,
+      "pageVoices": [],
+      "roomIsYours": "the sanctuary on a weeknight, the folding chairs, who sets up and who stays late, what the leader says when the room is half empty"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00756",
+        "name": "Ramon Solano",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Fruitvale",
+        "business": null,
+        "profile": "Ramon Solano — Senior Pastor / Faith Leader — Fruitvale",
+        "why": "leads St. Esperanza Parish (Faith_Organizations)"
+      },
+      {
+        "popid": "POP-00763",
+        "name": "Kenji Tanaka",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Chinatown",
+        "business": null,
+        "profile": "Kenji Tanaka — Senior Pastor / Faith Leader — Chinatown",
+        "why": "leads Bay Pure Land Buddhist Temple — crisis response this week (Faith_Ledger)"
+      },
+      {
+        "popid": "POP-00753",
+        "name": "Eunice Marston",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Eunice Marston — Senior Pastor / Faith Leader — Downtown",
+        "why": "leads Telegraph Presbyterian Fellowship — holy day this week (Faith_Ledger)"
+      },
+      {
+        "popid": "POP-00755",
+        "name": "Antoine Vermeer",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Lake Merritt",
+        "business": null,
+        "profile": "Antoine Vermeer — Senior Pastor / Faith Leader — Lake Merritt",
+        "why": "leads Cathedral of the Living Word — holy day this week (Faith_Ledger)"
+      },
+      {
+        "popid": "POP-00762",
+        "name": "Aziz Rahimi",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Fruitvale",
+        "business": null,
+        "profile": "Aziz Rahimi — Senior Pastor / Faith Leader — Fruitvale",
+        "why": "leads Masjid An-Nur Oakland — community program this week (Faith_Ledger)"
+      },
+      {
+        "popid": "POP-00004",
+        "name": "Lucia Polito",
+        "role": "Aura Wellness Practitioner",
+        "neighborhood": "Fruitvale",
+        "business": null,
+        "profile": "Lucia Polito — Aura Wellness Practitioner — Fruitvale",
+        "why": "founded Postpartum Oakland Network (Community_Programs)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Elliot Graye this cycle)"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Elliot Graye",
+    "popid": "POP-00012",
+    "text": "I plan to follow up on the crisis response at Bay Pure Land Buddhist Temple in Chinatown and put St. Esperanza Parish in Fruitvale in focus. I'll explore how these faith communities are supporting their neighborhoods.",
+    "plan": {
+      "chase": "I plan to follow up on the crisis response at Bay Pure Land Buddhist Temple in Chinatown and put St. Esperanza Parish in Fruitvale in focus. I'll explore how these faith communities are supporting their neighborhoods.",
+      "focus": "St. Esperanza Parish",
+      "why": "St. Esperanza Parish is a significant institution in Fruitvale, with a long history and a strong community presence. Understanding its role and activities can provide insight into the neighborhood's fabric.",
+      "checks": [
+        "Verify attendance numbers for faith events",
+        "Confirm the role of Fr. Ramon Solano at St. Esperanza Parish"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00756",
+          "question": "How does St. Esperanza Parish support the Latino community in Fruitvale?",
+          "basis": "Fr. Ramon Solano is the Senior Pastor at St. Esperanza Parish"
+        },
+        {
+          "pop": "POP-00004",
+          "question": "What is the relationship between St. Esperanza Parish and Postpartum Oakland Network?",
+          "basis": "Lucia Polito founded Postpartum Oakland Network in Fruitvale"
+        }
+      ],
+      "interpretation": "The faith community in Fruitvale is actively engaged in supporting its neighborhood through various programs and services.",
+      "unverifiedLead": [
+        "The after-school tutoring program at Cathedral of the Living Word may be a model for other faith communities",
+        "The job training workshop at Bay Pure Land Buddhist Temple could be an area to explore further"
+      ]
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Grand Lake neighborhood texture — how residents experience the improvement | Residents of Grand Lake feel the change firsthand.",
+      "kind": "anomaly",
+      "hood": "Grand Lake",
+      "ref": "output/engine_audit_c115.json patterns[9]; evidence: Initiative_Tracker row(s) 9; storyline INIT-009:vote-ready",
+      "popids": [
+        "POP-01115",
+        "POP-01175",
+        "POP-01207"
+      ]
+    },
+    {
+      "label": "Adams Point | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Adams Point",
+      "ref": "output/neighborhood_texture_c115.md \"### Adams Point\"; events: world_summary_c115.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Chinatown | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Chinatown",
+      "ref": "output/neighborhood_texture_c115.md \"### Chinatown\"; events: world_summary_c115.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Downtown | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Downtown",
+      "ref": "output/neighborhood_texture_c115.md \"### Downtown\"; events: world_summary_c115.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "East Oakland | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "East Oakland",
+      "ref": "output/neighborhood_texture_c115.md \"### East Oakland\"; events: world_summary_c115.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 30,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-12T12:15:54.222Z"
+}

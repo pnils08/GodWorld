@@ -1,0 +1,62 @@
+{
+  "mode": "wake-write",
+  "desk": "undocked",
+  "cycle": "116",
+  "provider": "openrouter",
+  "model": "openai/gpt-6-luna",
+  "configuredWriterModel": "openai/gpt-6-luna",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "nia-rook",
+  "byline": {
+    "name": "Nia Rook",
+    "popid": "POP-01076",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 1,
+  "quotesLanded": 1,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "undocked_history",
+    "undocked_history",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall"
+  ],
+  "toolCalls": 5,
+  "wordCount": 437,
+  "targetWords": "350-600",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 350",
+    "words": 437,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "979a9f6d1c8785dc051329eea742fb65e9f4e7562141064ccdac24c5f088207c",
+    "costUsd": 0.0011
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/3 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/undocked_c116_nia-rook_packet-v2_openai-gpt-6-luna.staged-0021.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "d/.env // tip: ⌘ custom filepath { path: '/custom/path/.env' }\n{\n  \"popId\": \"POP-01076\",\n  \"name\": \"Nia Rook\",\n  \"recorded\": true,\n  \"text\": \"UNDOCKED: Marguerite Kimball-Ostrow lets the route lead\"\n}"
+  },
+  "ranAt": "2026-11-20T00:21:34.764Z"
+}

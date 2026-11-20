@@ -1,0 +1,131 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "116",
+  "persona": "tamsin-pruitt",
+  "byline": "Tamsin Pruitt",
+  "bylinePopid": "POP-01210",
+  "article": "output/cron-compare/staged/culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Xing Patel",
+        "role": "quoted-source",
+        "popid": "POP-00440"
+      },
+      {
+        "name": "Marcus Osei",
+        "role": "quoted-source",
+        "popid": "POP-00036"
+      },
+      {
+        "name": "Dillon Trevor",
+        "role": "quoted-source",
+        "popid": "POP-00224"
+      },
+      {
+        "name": "Amara Keane",
+        "role": "mentioned",
+        "popid": "POP-00002",
+        "floor": true
+      },
+      {
+        "name": "Brenda Okoro",
+        "role": "mentioned",
+        "popid": "POP-00037",
+        "floor": true
+      },
+      {
+        "name": "Carmen Mesa",
+        "role": "mentioned",
+        "popid": "POP-00081",
+        "floor": true
+      },
+      {
+        "name": "Elio Perez",
+        "role": "mentioned",
+        "popid": "POP-00201",
+        "floor": true
+      },
+      {
+        "name": "Elle Lilo",
+        "role": "mentioned",
+        "popid": "POP-00177",
+        "floor": true
+      },
+      {
+        "name": "Eric Taveras",
+        "role": "mentioned",
+        "popid": "POP-00597",
+        "floor": true
+      },
+      {
+        "name": "Howard Perez",
+        "role": "mentioned",
+        "popid": "POP-01034",
+        "floor": true
+      },
+      {
+        "name": "Jorry Cula",
+        "role": "mentioned",
+        "popid": "POP-00182",
+        "floor": true
+      },
+      {
+        "name": "Linda Chow",
+        "role": "mentioned",
+        "popid": "POP-00749",
+        "floor": true
+      },
+      {
+        "name": "Priya Nair",
+        "role": "mentioned",
+        "popid": "POP-00531",
+        "floor": true
+      },
+      {
+        "name": "Vinnie Keane",
+        "role": "mentioned",
+        "popid": "POP-00001",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Downtown"
+    ],
+    "claims": [
+      {
+        "claim": "I've been enjoying my retirement. The A's games have been exciting lately, and I was able to trade an extra ticket for a promise from someone to bring their kid next time. It's been nice to have more free time and be able to watch the games with my family.",
+        "sourceRef": "citizenVoice PRESS Xing Patel"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-66f2f2270563",
+    "draftSha256": "d6714b177e1e9260b3fbe6e2c06c20ea22851c209bfc078eb521ab2681b17789",
+    "verdict": "output/cron-compare/culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-17T00:23:31.962Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 450",
+      "words": 1673,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "d6714b177e1e9260b3fbe6e2c06c20ea22851c209bfc078eb521ab2681b17789",
+      "costUsd": 0.0018
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-17T00:23:35.732Z"
+}

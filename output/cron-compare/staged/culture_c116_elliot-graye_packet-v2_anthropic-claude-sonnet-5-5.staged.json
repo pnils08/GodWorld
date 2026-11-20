@@ -1,0 +1,76 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "116",
+  "persona": "elliot-graye",
+  "byline": "Elliot Graye",
+  "bylinePopid": "POP-00012",
+  "article": "output/cron-compare/staged/culture_c116_elliot-graye_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Daniel Han",
+        "role": "quoted-source",
+        "popid": "POP-00757"
+      },
+      {
+        "name": "Ramon Solano",
+        "role": "quoted-source",
+        "popid": "POP-00756"
+      },
+      {
+        "name": "Robert Jaston",
+        "role": "quoted-source",
+        "popid": "POP-00758"
+      },
+      {
+        "name": "Naomi Sterling",
+        "role": "quoted-source",
+        "popid": "POP-00759"
+      },
+      {
+        "name": "Maria Keen",
+        "role": "mentioned",
+        "popid": "POP-00013",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Adams Point"
+    ],
+    "claims": [
+      {
+        "claim": "I've seen firsthand the impact of job training programs in our community. While Adams Point United Methodist isn't directly running such a program, our involvement in the Interfaith Council has shown me the value of faith organizations coming together to support local initiatives. I recall the interfaith prayer breakfast we had last cycle, where leaders from various faith backgrounds gathered to discuss ways to serve the community. It's this kind of collaboration that can lead to meaningful support for job training and other vital programs.",
+        "sourceRef": "citizenVoice PRESS Daniel Han"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-09a41495ce6f",
+    "draftSha256": "136cadb8e2342849c48fe5177f5c050a1c6b6171391fd31f7ebf5d3a4d12a392",
+    "verdict": "output/cron-compare/culture_c116_elliot-graye_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-20T00:15:50.412Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 871,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "136cadb8e2342849c48fe5177f5c050a1c6b6171391fd31f7ebf5d3a4d12a392",
+      "costUsd": 0.001
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-20T00:15:56.784Z"
+}

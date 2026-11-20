@@ -1,0 +1,62 @@
+{
+  "model": "openai/gpt-5.6-luna",
+  "calls": [
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Anthony Raines"
+      },
+      "resultChars": 3240,
+      "resultHead": "[C97 · edition] The Crowded Corner: Davis Returns and Paulson's Roster Math Gets Hard The math is hard. It is supposed to be hard. Building a team this good creates exactly this kind of problem. *Anthony Raines covers the Oakland A's for the Bay Tribune. He has covered the franchise since the first championship cycle.* The Crowded Corner: Davis Returns and Paulson's Roster Math Gets Hard By Anthony Raines | Bay Tribune Sports The Oakland A's are forty-six and twelve, leading the American League West by eleven and a half games, and\n[C95 · edition] Thirty-Two And Six: The Cy Young Race In Oaklan"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Benji Dillon"
+      },
+      "resultChars": 3244,
+      "resultHead": "[C94 · supplemental] It is true, he said, that the franchise is running a farewell campaign for Vinnie Keane. Keane is set to retire. That is confirmed. That was already in print. What had not been in print — what I want to make sure lands here — is the architecture underneath it. *Benji Dillon came back on a one-year deal to make one last run with Vinnie.* That sentence has not appeared in this paper before this piece. Read it again. Dillon is back not as an afterthought, not as a rotation anchor who happens to be aging in the same di\n[C100 · edition] Origins - Benji Dillon Benji Dillon: The "
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Vinnie Keane"
+      },
+      "resultChars": 3221,
+      "resultHead": "[C100 · edition] Origins - Vinnie Keane Vinnie Keane - The Complete Origins (Parts I through IV) Written by Hal Richmond Part I - The Dock and the Dream He came from the water. Not the kind that glimmers in postcards, but the cold Atlantic that chews at the Massachusetts coast until the docks creak and the gulls go quiet. Vinnie Keane grew up the youngest of five children in a two-bedroom house where dinner smelled of diesel, salt, and hope. His father worked the harbor, a dock fisherman who measured time by tides and storms. His m\n[C100 · edition] Numbers could not contain him. His worth live"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Lena Cross"
+      },
+      "resultChars": 3309,
+      "resultHead": "[C114 · daily · Tamsin Pruitt] # The Lives Page, Cycle 114 Lena Cross has a place of her own on Piedmont Ave, and she is renting it. The household ledger set it down in C114. The ledger lists Cross as an actor, and Piedmont Ave is the neighborhood it names for her. It does not say where she lived before or what the rent is. The record kept two small lines for her that week. She felt the creative energy of First Friday. She also adjusted the day's plans after the night before's gridlock, which is the kind of line a person gets when the roads have\n[C114 · daily · Sharon Okafor] # When a Name Fad"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Rockridge"
+      },
+      "resultChars": 51,
+      "resultHead": "tool budget exhausted — compose from what you have."
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Grand Lake"
+      },
+      "resultChars": 51,
+      "resultHead": "tool budget exhausted — compose from what you have."
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Piedmont Ave"
+      },
+      "resultChars": 51,
+      "resultHead": "tool budget exhausted — compose from what you have."
+    }
+  ],
+  "ranAt": "2026-11-14T00:17:11.938Z"
+}

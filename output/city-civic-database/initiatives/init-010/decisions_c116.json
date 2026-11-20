@@ -1,0 +1,16 @@
+{
+  "initiative": "INIT-010",
+  "initiativeId": "INIT-010",
+  "cycle": 116,
+  "primaryVoice": "Mayor gavel (mayor_gavel-008)",
+  "consolidatedFrom": [
+    "STMT-116-mayor_gavel-008 (Mayor gavel — West Oakland tenant-defense analysis and committee record)",
+    "STMT-116-stabilization_fund-003 (Webb — West Oakland queue, 23-day standard, and tenant-defense sequencing)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-010",
+    "MilestoneNotes": "C116: Legal-support analysis must precede the committee vote; no decision or funding outcome claimed pending a Clerk-recorded result.",
+    "NextScheduledAction": "Publish legal-support analysis and record committee decision",
+    "NextActionCycle": 116
+  }
+}

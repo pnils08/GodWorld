@@ -1,0 +1,62 @@
+{
+  "draft": "output/cron-compare/sports_c115_simon-leary_packet-v2_openai-gpt-5-6-luna.md",
+  "cycle": "115",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "88f4dd0eab7fa53861dfdd1650ce416ae3fef218c5f4f4361ec78eec2f471c75",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Draft perfectly matches ground truth: Oaks 8-1 record, 4-game win streak, and Harry Hayward quote are fully verified.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "simon-longview-v1",
+    "packageVersion": "SIMON-LEP2-1",
+    "manifestId": "AM-db53291da7df",
+    "lexicalObservations": [],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Harry Hayward"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 1,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.011,
+  "durationMs": 4838,
+  "parseError": false,
+  "ranAt": "2026-11-13T00:16:40.662Z",
+  "contractScore": {
+    "opened": false,
+    "purposeMet": false,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 474,
+    "short": "The opening focuses on Hayward rather than the present sports structure, and the essay fails to interpret the structure as civic architecture.",
+    "score": 1,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "88f4dd0eab7fa53861dfdd1650ce416ae3fef218c5f4f4361ec78eec2f471c75",
+    "costUsd": 0.0019
+  }
+}

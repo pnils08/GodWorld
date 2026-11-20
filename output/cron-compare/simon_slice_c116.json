@@ -1,0 +1,150 @@
+{
+  "empty": false,
+  "cycle": 116,
+  "kind": "simon-longview",
+  "desk": "sports",
+  "journalist": {
+    "name": "Simon Leary",
+    "popid": "POP-00016",
+    "persona": "simon-leary"
+  },
+  "pulse": {
+    "className": "role-change-under-continuity",
+    "score": 84,
+    "label": "The Oaks record is 8-1."
+  },
+  "prewrite": {
+    "bagModes": [
+      {
+        "id": 2,
+        "name": "Keystone Player"
+      },
+      {
+        "id": 4,
+        "name": "Load-Bearing Continuity"
+      }
+    ],
+    "anchorFacts": [
+      "The Oaks record is 8-1.",
+      "The Oaks have won 4 straight."
+    ],
+    "claim": "A role change inside a sustained team record can support a structural interpretation; it does not establish franchise history, organizational intent, or citywide meaning.",
+    "missing": [
+      "why the role change was made",
+      "historical comparison or franchise precedent",
+      "organizational intention or future plan",
+      "citywide, clubhouse, or fan interpretation"
+    ],
+    "hooks": []
+  },
+  "hooks": [],
+  "seeds": [],
+  "civicFacts": [
+    "FranchiseStability (feed): stable — sports feed",
+    "EconomicFootprint (feed): stable — sports feed",
+    "EventTrigger (feed): traded — sports feed",
+    "HomeNeighborhood (feed): Lake Merritt — sports feed",
+    "FranchiseStability (feed): stable — sports feed",
+    "EconomicFootprint (feed): stable — sports feed"
+  ],
+  "story": {
+    "angle": "The Oaks record is 8-1.",
+    "label": "The Oaks record is 8-1.",
+    "hookLine": "The Oaks record is 8-1.",
+    "kind": "long-view-signal",
+    "hood": "West Oakland",
+    "popids": [
+      "POP-01022",
+      "POP-00527",
+      "POP-01046"
+    ],
+    "citizens": [
+      "Wilson Shepard (POP-01022)",
+      "Mike Paulson (POP-00527)",
+      "Elliot Abraham (POP-01046)"
+    ],
+    "ref": "world_summary_c116.md ## Sports",
+    "cycle": 116
+  },
+  "approach": "Long-view approach (Simon Leary): third-person essayist. Treat supplied sports facts as present structure, not as proof of history or collective memory. A metaphor about continuity, load, or change may interpret the Packet but may not add a person, place, institution, event, season, statistic, cause, organizational intention, or citywide belief. Do not write a game recap, Hal elegy, P Slayer fan heat, or Anthony board memo.",
+  "players": [
+    {
+      "name": "Wilson Shepard",
+      "popid": "POP-01022",
+      "role": "Head Coach, Oakland Oaks",
+      "neighborhood": "West Oakland",
+      "why": "feed-names"
+    },
+    {
+      "name": "Mike Paulson",
+      "popid": "POP-00527",
+      "role": "General Manager, Oakland A's & The Oaks",
+      "neighborhood": "West Oakland",
+      "why": "feed-names"
+    },
+    {
+      "name": "Elliot Abraham",
+      "popid": "POP-01046",
+      "role": "General Manager, Oakland Oaks",
+      "neighborhood": "Jack London",
+      "why": "feed-names"
+    }
+  ],
+  "scene": {
+    "colorRoom": "No witnessed room or scene is supplied. Structure and continuity may appear only as clearly interpretive metaphor grounded in the approved present facts."
+  },
+  "candidates": [
+    {
+      "score": 84,
+      "cycle": 116,
+      "team": "Oaks",
+      "label": "From 0-9 to 8-1: Wilson Shepard's Oaks caught people off guard, just like he said they would"
+    },
+    {
+      "score": 84,
+      "cycle": 116,
+      "team": "Oaks",
+      "label": "The Oaks shoot 80 percent in Denver and set a franchise record. Oaks 147 - Nuggets 114"
+    },
+    {
+      "score": 72,
+      "cycle": 116,
+      "team": "Oaks",
+      "label": "The Spurs hand the Oaks their first home loss. Spurs 126 - Oaks 117"
+    },
+    {
+      "score": 58,
+      "cycle": 116,
+      "team": "A's",
+      "label": "Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen"
+    },
+    {
+      "score": 58,
+      "cycle": 116,
+      "team": "A's",
+      "label": "The bat or the glove? Kevin Clark's .327 against Giancarlo Hernandez's 96 fielding for third base"
+    },
+    {
+      "score": 58,
+      "cycle": 116,
+      "team": "A's",
+      "label": "Benji Dillon hasn't retired yet. The 5-time Cy Young winner leaves the door open after Keane walks through his"
+    },
+    {
+      "score": 58,
+      "cycle": 116,
+      "team": "A's",
+      "label": "What does the Mesa trade mean for Hernandez, Kevin Clark and Mark Aitken?"
+    },
+    {
+      "score": 58,
+      "cycle": 116,
+      "team": "A's",
+      "label": "Does Mark Aitken stay in Oakland, and who leads the clubhouse if he goes?"
+    }
+  ],
+  "pointers": [
+    "output/world_summary_c116.md ## Sports",
+    "docs/media/SIMON_LONGVIEW_BAG.md"
+  ]
+}

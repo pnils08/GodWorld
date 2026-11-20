@@ -1,0 +1,53 @@
+{
+  "office": "council_d2",
+  "agentDir": "civic-office-council-d2",
+  "holder": "Leonard Tran",
+  "popid": "POP-00502",
+  "title": "City Council District 2",
+  "date": "2026-11-18",
+  "cycle": 116,
+  "model": "openai/gpt-6-luna",
+  "statement": "I am holding Baylight District — Final Council Vote this week. The board marks it complete and schedules no next action, so I see no basis for another work move. Jack London’s sentiment is positive and its crime index is below the city figure, though retail vitality eased; Baylight District is still marked as declining. I want to review implementation outcomes before considering any further step, rather than treating completion as proof of a particular neighborhood result.",
+  "moves": [],
+  "movesRejected": [],
+  "numberMoved": "0",
+  "ranAt": "2026-11-18T11:46:03.650Z",
+  "usage": {
+    "prompt_tokens": 6719,
+    "completion_tokens": 593,
+    "total_tokens": 7312,
+    "cost": 0.0011363,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 6716,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0011363,
+      "upstream_inference_prompt_cost": 0.0008398,
+      "upstream_inference_completions_cost": 0.0002965
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 474,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "fellBackFrom": null,
+  "evidenceGenerationHash": "8bf58509d24a03b95f8e88a49a51e50b409fb1c4c8aa344e61a1acf7e941275d",
+  "evidenceReads": [],
+  "provider": "OpenAI",
+  "finishReason": "stop",
+  "elapsedMs": 6716,
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00502",
+    "id": "NtqEodUwVLodtw4N9LhkCo",
+    "customId": "cp-POP-00502-c116-CIVIC-datawake-2026-11-18"
+  }
+}

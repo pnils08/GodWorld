@@ -1,0 +1,30 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ override existing { override: true }
+{
+ "label": "e350m-f8",
+ "expect": 123,
+ "at": "2026-11-19T06:22:45.255Z",
+ "pre": {
+  "bench": 123,
+  "live": 116,
+  "ee": 9,
+  "rileyLast": 123,
+  "checkpoint": null
+ },
+ "wallS": 200,
+ "http": 200,
+ "resp": {
+  "ok": true,
+  "state": "done",
+  "ranMs": 194943,
+  "persistErrors": []
+ },
+ "post": {
+  "bench": 124,
+  "live": 116,
+  "ee": 9,
+  "rileyLast": 124,
+  "checkpoint": null
+ },
+ "newEE": [],
+ "verdict": "PASS"
+}

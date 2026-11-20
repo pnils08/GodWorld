@@ -1,0 +1,27 @@
+{
+  "status": "arc-seed",
+  "cycle": "115",
+  "desk": "sports",
+  "persona": "talia-finch",
+  "hood": "San Antonio",
+  "quotes": [
+    {
+      "pop": "POP-01023",
+      "name": "Adash Stanley",
+      "quote": "My neighbors seem to be catching the buzz around the Oaks' success. I came home after a win and found they'd left a case of something cold on my porch. We swapped stories about what was going on around the block near the courthouse, and the vibe was positive. They know I'm part of the team, so I think they're happy to see us doing well."
+    },
+    {
+      "pop": "POP-01223",
+      "name": "Harry Hayward",
+      "quote": "I'm just trying to do my part and help the team win. The fans seem really excited, and it's great to see them enjoying the games. We feel the energy when we're on the court, and it's a good vibe. I haven't really had a chance to talk to many fans directly, but I've seen the signs and heard the cheers. It's nice to know they're supporting us."
+    },
+    {
+      "pop": "POP-01027",
+      "name": "Austin Reaves",
+      "quote": "The fans are excited, and you can feel it. We've been playing well, and the energy's been building. I'm not surprised, though - Oaks fans are loyal and passionate. When we're clicking, the crowd gets behind us, and it's a great feeling."
+    }
+  ],
+  "claim": "My neighbors seem to be catching the buzz around the Oaks' success. I came home after a win and found they'd left a case of something cold on my porch. We swapped stories about what was going on around the block near the courthouse, and the vibe was positive. They know I'm part of the team, so I think they're happy to see us doing well.",
+  "src": "citizenVoice PRESS c115",
+  "ranAt": "2026-11-12T19:19:26.738Z"
+}

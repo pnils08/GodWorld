@@ -1,0 +1,90 @@
+{
+  "artifactClass": "NLM_DAILY_RUN",
+  "sourceVersion": "2.0",
+  "canonStatus": "NOT_CANON",
+  "cycle": 115,
+  "generatedAt": "2026-11-13T09:19:50.128Z",
+  "lastAttemptAt": "2026-11-13T09:27:13.059Z",
+  "hours": 36,
+  "packHash": "fe7a603a055d01307e7e4b10075f60058fcd05aa21a662da18e2d5ff59ae7da8",
+  "worldSummary": "output/world_summary_c115.md",
+  "citizenDigest": "output/citizen-day-digest.md",
+  "reports": [
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/culture_c115_elliot-graye_packet-v2_anthropic-claude-sonnet-5-5.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/culture_c115_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.staged-0020.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged-0019.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/sports_c115_hal-richmond_packet-v2_anthropic-claude-sonnet-5-5.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/sports_c115_simon-leary_packet-v2_openai-gpt-5-6-luna.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/sports_c115_talia-finch_packet-v2_openai-gpt-5-6-luna.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/undocked_c115_nia-rook_packet-v2_openai-gpt-6-luna.staged-0021.md"
+    }
+  ],
+  "flaggedReports": [],
+  "editionDay": false,
+  "firstMorning": false,
+  "routingShadow": {
+    "version": "NLM-DAILY-ROUTER/1",
+    "mode": "shadow",
+    "profile": "REPORTED_DAY",
+    "format": "deep_dive",
+    "length": "default",
+    "activationEligible": true,
+    "reportedDayThreshold": 1,
+    "sourceClasses": [
+      "WORLD_STATE",
+      "CITIZEN_DIGEST",
+      "W1_CHASE",
+      "W2_QUOTES",
+      "W3_PASSED"
+    ],
+    "reasonCodes": [
+      "RHEA_PASSED_11",
+      "REPORTED_THRESHOLD_MET_1"
+    ],
+    "dispositionCounts": {
+      "passed": 11,
+      "rheaFlagged": 0,
+      "neverGated": 0
+    },
+    "fingerprint": "39e7f312b5aa85f6f3cc29178246284ea86c8b43e10dc5f6e846207aeb6ed08e"
+  },
+  "newsroomPulse": {
+    "fingerprint": "42fb7cab2cdbcd9743f60ecf973e6fe32d42d6835eb877a29f863e68047c1d1d",
+    "counts": {
+      "angles": 7,
+      "asks": 6,
+      "fanoutAssignments": 7,
+      "w2Ready": 6,
+      "quotes": 15,
+      "passed": 11,
+      "rheaFlagged": 0,
+      "neverGated": 0,
+      "flagged": 0,
+      "pending": 0
+    },
+    "priorCompletedCycle": null
+  },
+  "archiveNotebookId": "417e2d29-4167-420f-a9cc-76fb6b2b7de2",
+  "newsroomNotebookId": "73cd50b5-4b8f-4329-bb42-0783c8d93763",
+  "dryRun": true
+}

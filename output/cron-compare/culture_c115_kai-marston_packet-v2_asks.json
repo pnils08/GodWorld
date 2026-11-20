@@ -1,0 +1,596 @@
+[
+  {
+    "pop": "POP-00018",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00018\",\"name\":\"Benji Dillon\",\"role\":\"Pitcher, Oakland A's Legend\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Kai Marston\",\"question\":\"How is Benji Dillon's rising fame affecting his life in Rockridge? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-arts\",\"hood\":\"Rockridge\",\"focus\":\"Benji Dillon's influence on Rockridge's arts and entertainment\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Benji Dillon — Pitcher, Oakland A's Legend — Rockridge\",\"evidence\":[{\"id\":\"EV-bc5262854b\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"text\":\"Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 49, rising), last seen C105.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 49, rising), last seen C105.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-a12e8eaa5c99\"},{\"t\":\"FACT\",\"text\":\"Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 49, rising), last seen C105\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-18987e0cebcb\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"32 culture figures rising; 1 new on the record\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-39f24cbdde38\"},{\"t\":\"FACT\",\"text\":\"Darrin Davis (A's player), Sports, Piedmont Ave — fame rising (fame 42, rising), last seen C108\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-2a680dddd1e8\"},{\"t\":\"FACT\",\"text\":\"Danny Horn (A's player), Sports, Temescal — fame rising (fame 35, rising), last seen C99\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-e020abd1a3a7\"},{\"t\":\"FACT\",\"text\":\"Travis Coles (A's player), Sports, Downtown — fame rising (fame 34, rising), last seen C96\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-2e9ad247ab84\"},{\"t\":\"FACT\",\"text\":\"Anthony Raines (Journalist, Lead Beat Reporter - Oakland A's), Media, Rockridge — new on the culture record this cycle (fame 25, rising)\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-0f21271ed181\"},{\"t\":\"FACT\",\"text\":\"Benji Dillon — Pitcher, Oakland A's Legend — Rockridge\",\"src\":\"Simulation_Ledger profile for POP-00018\",\"id\":\"F-2620383281c8\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00018",
+        "name": "Benji Dillon",
+        "role": "Pitcher, Oakland A's Legend",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Kai Marston",
+        "question": "How is Benji Dillon's rising fame affecting his life in Rockridge? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-arts",
+        "hood": "Rockridge",
+        "focus": "Benji Dillon's influence on Rockridge's arts and entertainment",
+        "src": "output/beats/Cultural_Ledger.jsonl @C115"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+        "evidence": [
+          {
+            "id": "EV-bc5262854b",
+            "src": "output/beats/Cultural_Ledger.jsonl @C115",
+            "text": "Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 49, rising), last seen C105."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 49, rising), last seen C105.",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-a12e8eaa5c99"
+        },
+        {
+          "t": "FACT",
+          "text": "Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 49, rising), last seen C105",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-18987e0cebcb"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C115",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-bc84fc0b7718"
+        },
+        {
+          "t": "FACT",
+          "text": "32 culture figures rising; 1 new on the record",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-39f24cbdde38"
+        },
+        {
+          "t": "FACT",
+          "text": "Darrin Davis (A's player), Sports, Piedmont Ave — fame rising (fame 42, rising), last seen C108",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-2a680dddd1e8"
+        },
+        {
+          "t": "FACT",
+          "text": "Danny Horn (A's player), Sports, Temescal — fame rising (fame 35, rising), last seen C99",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-e020abd1a3a7"
+        },
+        {
+          "t": "FACT",
+          "text": "Travis Coles (A's player), Sports, Downtown — fame rising (fame 34, rising), last seen C96",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-2e9ad247ab84"
+        },
+        {
+          "t": "FACT",
+          "text": "Anthony Raines (Journalist, Lead Beat Reporter - Oakland A's), Media, Rockridge — new on the culture record this cycle (fame 25, rising)",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-0f21271ed181"
+        },
+        {
+          "t": "FACT",
+          "text": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+          "src": "Simulation_Ledger profile for POP-00018",
+          "id": "F-2620383281c8"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C11, Spring, holiday=none",
+          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+          "id": "F-82d77e9a4a71"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00017",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00017\",\"name\":\"Anthony Raines\",\"role\":\"Journalist, Lead Beat Reporter - Oakland A's\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Kai Marston\",\"question\":\"What observations does Anthony Raines have about Benji Dillon's influence on the local culture? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-arts\",\"hood\":\"Rockridge\",\"focus\":\"Benji Dillon's influence on Rockridge's arts and entertainment\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Anthony Raines — Journalist, Lead Beat Reporter - Oakland A's — Rockridge\",\"evidence\":[{\"id\":\"EV-f0227345ca\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"text\":\"Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 49, rising), last seen C105.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Anthony Raines (Journalist, Lead Beat Reporter - Oakland A's), Media, Rockridge — new on the culture record this cycle (fame 25, rising)\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-0f21271ed181\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"32 culture figures rising; 1 new on the record\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-39f24cbdde38\"},{\"t\":\"FACT\",\"text\":\"Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 49, rising), last seen C105.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-a12e8eaa5c99\"},{\"t\":\"FACT\",\"text\":\"Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 49, rising), last seen C105\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-18987e0cebcb\"},{\"t\":\"FACT\",\"text\":\"Darrin Davis (A's player), Sports, Piedmont Ave — fame rising (fame 42, rising), last seen C108\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-2a680dddd1e8\"},{\"t\":\"FACT\",\"text\":\"Danny Horn (A's player), Sports, Temescal — fame rising (fame 35, rising), last seen C99\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-e020abd1a3a7\"},{\"t\":\"FACT\",\"text\":\"Travis Coles (A's player), Sports, Downtown — fame rising (fame 34, rising), last seen C96\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-2e9ad247ab84\"},{\"t\":\"FACT\",\"text\":\"Anthony Raines — Journalist, Lead Beat Reporter - Oakland A's — Rockridge\",\"src\":\"Simulation_Ledger profile for POP-00017\",\"id\":\"F-18a5cf9d73f6\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00017",
+        "name": "Anthony Raines",
+        "role": "Journalist, Lead Beat Reporter - Oakland A's",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Kai Marston",
+        "question": "What observations does Anthony Raines have about Benji Dillon's influence on the local culture? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-arts",
+        "hood": "Rockridge",
+        "focus": "Benji Dillon's influence on Rockridge's arts and entertainment",
+        "src": "output/beats/Cultural_Ledger.jsonl @C115"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Anthony Raines — Journalist, Lead Beat Reporter - Oakland A's — Rockridge",
+        "evidence": [
+          {
+            "id": "EV-f0227345ca",
+            "src": "output/beats/Cultural_Ledger.jsonl @C115",
+            "text": "Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 49, rising), last seen C105."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Anthony Raines (Journalist, Lead Beat Reporter - Oakland A's), Media, Rockridge — new on the culture record this cycle (fame 25, rising)",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-0f21271ed181"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C115",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-bc84fc0b7718"
+        },
+        {
+          "t": "FACT",
+          "text": "32 culture figures rising; 1 new on the record",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-39f24cbdde38"
+        },
+        {
+          "t": "FACT",
+          "text": "Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 49, rising), last seen C105.",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-a12e8eaa5c99"
+        },
+        {
+          "t": "FACT",
+          "text": "Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 49, rising), last seen C105",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-18987e0cebcb"
+        },
+        {
+          "t": "FACT",
+          "text": "Darrin Davis (A's player), Sports, Piedmont Ave — fame rising (fame 42, rising), last seen C108",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-2a680dddd1e8"
+        },
+        {
+          "t": "FACT",
+          "text": "Danny Horn (A's player), Sports, Temescal — fame rising (fame 35, rising), last seen C99",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-e020abd1a3a7"
+        },
+        {
+          "t": "FACT",
+          "text": "Travis Coles (A's player), Sports, Downtown — fame rising (fame 34, rising), last seen C96",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-2e9ad247ab84"
+        },
+        {
+          "t": "FACT",
+          "text": "Anthony Raines — Journalist, Lead Beat Reporter - Oakland A's — Rockridge",
+          "src": "Simulation_Ledger profile for POP-00017",
+          "id": "F-18a5cf9d73f6"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C11, Spring, holiday=none",
+          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+          "id": "F-82d77e9a4a71"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00021",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00021\",\"name\":\"Darrin Davis\",\"role\":\"Left Fielder, Oakland A's Legend\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Kai Marston\",\"question\":\"What have you seen, felt, or understood about \\\"Benji Dillon's influence on Rockridge's arts and entertainment\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-arts\",\"hood\":\"Rockridge\",\"focus\":\"Benji Dillon's influence on Rockridge's arts and entertainment\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Darrin Davis — Left Fielder, Oakland A's Legend — Piedmont Ave\",\"evidence\":[{\"id\":\"EV-5e61280455\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"text\":\"Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 49, rising), last seen C105.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Darrin Davis (A's player), Sports, Piedmont Ave — fame rising (fame 42, rising), last seen C108\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-2a680dddd1e8\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"32 culture figures rising; 1 new on the record\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-39f24cbdde38\"},{\"t\":\"FACT\",\"text\":\"Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 49, rising), last seen C105.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-a12e8eaa5c99\"},{\"t\":\"FACT\",\"text\":\"Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 49, rising), last seen C105\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-18987e0cebcb\"},{\"t\":\"FACT\",\"text\":\"Danny Horn (A's player), Sports, Temescal — fame rising (fame 35, rising), last seen C99\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-e020abd1a3a7\"},{\"t\":\"FACT\",\"text\":\"Travis Coles (A's player), Sports, Downtown — fame rising (fame 34, rising), last seen C96\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-2e9ad247ab84\"},{\"t\":\"FACT\",\"text\":\"Anthony Raines (Journalist, Lead Beat Reporter - Oakland A's), Media, Rockridge — new on the culture record this cycle (fame 25, rising)\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-0f21271ed181\"},{\"t\":\"FACT\",\"text\":\"Darrin Davis — Left Fielder, Oakland A's Legend — Piedmont Ave\",\"src\":\"Simulation_Ledger profile for POP-00021\",\"id\":\"F-8f00159f4598\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00021",
+        "name": "Darrin Davis",
+        "role": "Left Fielder, Oakland A's Legend",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Kai Marston",
+        "question": "What have you seen, felt, or understood about \"Benji Dillon's influence on Rockridge's arts and entertainment\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-arts",
+        "hood": "Rockridge",
+        "focus": "Benji Dillon's influence on Rockridge's arts and entertainment",
+        "src": "output/beats/Cultural_Ledger.jsonl @C115"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Darrin Davis — Left Fielder, Oakland A's Legend — Piedmont Ave",
+        "evidence": [
+          {
+            "id": "EV-5e61280455",
+            "src": "output/beats/Cultural_Ledger.jsonl @C115",
+            "text": "Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 49, rising), last seen C105."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Darrin Davis (A's player), Sports, Piedmont Ave — fame rising (fame 42, rising), last seen C108",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-2a680dddd1e8"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C115",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-bc84fc0b7718"
+        },
+        {
+          "t": "FACT",
+          "text": "32 culture figures rising; 1 new on the record",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-39f24cbdde38"
+        },
+        {
+          "t": "FACT",
+          "text": "Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 49, rising), last seen C105.",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-a12e8eaa5c99"
+        },
+        {
+          "t": "FACT",
+          "text": "Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 49, rising), last seen C105",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-18987e0cebcb"
+        },
+        {
+          "t": "FACT",
+          "text": "Danny Horn (A's player), Sports, Temescal — fame rising (fame 35, rising), last seen C99",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-e020abd1a3a7"
+        },
+        {
+          "t": "FACT",
+          "text": "Travis Coles (A's player), Sports, Downtown — fame rising (fame 34, rising), last seen C96",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-2e9ad247ab84"
+        },
+        {
+          "t": "FACT",
+          "text": "Anthony Raines (Journalist, Lead Beat Reporter - Oakland A's), Media, Rockridge — new on the culture record this cycle (fame 25, rising)",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-0f21271ed181"
+        },
+        {
+          "t": "FACT",
+          "text": "Darrin Davis — Left Fielder, Oakland A's Legend — Piedmont Ave",
+          "src": "Simulation_Ledger profile for POP-00021",
+          "id": "F-8f00159f4598"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C11, Spring, holiday=none",
+          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+          "id": "F-82d77e9a4a71"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00022",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00022\",\"name\":\"Danny Horn\",\"role\":\"Center Fielder, Oakland A's - Best player in the MLB\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Kai Marston\",\"question\":\"What have you seen, felt, or understood about \\\"Benji Dillon's influence on Rockridge's arts and entertainment\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-arts\",\"hood\":\"Rockridge\",\"focus\":\"Benji Dillon's influence on Rockridge's arts and entertainment\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Danny Horn — Center Fielder, Oakland A's - Best player in the MLB — Temescal\",\"evidence\":[{\"id\":\"EV-dd9c93ccf5\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"text\":\"Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 49, rising), last seen C105.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Danny Horn (A's player), Sports, Temescal — fame rising (fame 35, rising), last seen C99\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-e020abd1a3a7\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"32 culture figures rising; 1 new on the record\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-39f24cbdde38\"},{\"t\":\"FACT\",\"text\":\"Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 49, rising), last seen C105.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-a12e8eaa5c99\"},{\"t\":\"FACT\",\"text\":\"Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 49, rising), last seen C105\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-18987e0cebcb\"},{\"t\":\"FACT\",\"text\":\"Darrin Davis (A's player), Sports, Piedmont Ave — fame rising (fame 42, rising), last seen C108\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-2a680dddd1e8\"},{\"t\":\"FACT\",\"text\":\"Travis Coles (A's player), Sports, Downtown — fame rising (fame 34, rising), last seen C96\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-2e9ad247ab84\"},{\"t\":\"FACT\",\"text\":\"Anthony Raines (Journalist, Lead Beat Reporter - Oakland A's), Media, Rockridge — new on the culture record this cycle (fame 25, rising)\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-0f21271ed181\"},{\"t\":\"FACT\",\"text\":\"Danny Horn — Center Fielder, Oakland A's - Best player in the MLB — Temescal\",\"src\":\"Simulation_Ledger profile for POP-00022\",\"id\":\"F-3dc8503c3adc\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00022",
+        "name": "Danny Horn",
+        "role": "Center Fielder, Oakland A's - Best player in the MLB",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Kai Marston",
+        "question": "What have you seen, felt, or understood about \"Benji Dillon's influence on Rockridge's arts and entertainment\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-arts",
+        "hood": "Rockridge",
+        "focus": "Benji Dillon's influence on Rockridge's arts and entertainment",
+        "src": "output/beats/Cultural_Ledger.jsonl @C115"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Danny Horn — Center Fielder, Oakland A's - Best player in the MLB — Temescal",
+        "evidence": [
+          {
+            "id": "EV-dd9c93ccf5",
+            "src": "output/beats/Cultural_Ledger.jsonl @C115",
+            "text": "Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 49, rising), last seen C105."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Danny Horn (A's player), Sports, Temescal — fame rising (fame 35, rising), last seen C99",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-e020abd1a3a7"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C115",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-bc84fc0b7718"
+        },
+        {
+          "t": "FACT",
+          "text": "32 culture figures rising; 1 new on the record",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-39f24cbdde38"
+        },
+        {
+          "t": "FACT",
+          "text": "Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 49, rising), last seen C105.",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-a12e8eaa5c99"
+        },
+        {
+          "t": "FACT",
+          "text": "Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 49, rising), last seen C105",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-18987e0cebcb"
+        },
+        {
+          "t": "FACT",
+          "text": "Darrin Davis (A's player), Sports, Piedmont Ave — fame rising (fame 42, rising), last seen C108",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-2a680dddd1e8"
+        },
+        {
+          "t": "FACT",
+          "text": "Travis Coles (A's player), Sports, Downtown — fame rising (fame 34, rising), last seen C96",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-2e9ad247ab84"
+        },
+        {
+          "t": "FACT",
+          "text": "Anthony Raines (Journalist, Lead Beat Reporter - Oakland A's), Media, Rockridge — new on the culture record this cycle (fame 25, rising)",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-0f21271ed181"
+        },
+        {
+          "t": "FACT",
+          "text": "Danny Horn — Center Fielder, Oakland A's - Best player in the MLB — Temescal",
+          "src": "Simulation_Ledger profile for POP-00022",
+          "id": "F-3dc8503c3adc"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C11, Spring, holiday=none",
+          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+          "id": "F-82d77e9a4a71"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  }
+]

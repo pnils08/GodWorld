@@ -1,0 +1,20 @@
+{
+  "cycle": 116,
+  "passed": true,
+  "attempts": [
+    {
+      "route": "Sonnet",
+      "failures": [
+        "repeats a sentence from an earlier entry"
+      ],
+      "words": 476,
+      "findingIds": [
+        "AUD-4ed11ac8c0c5",
+        "AUD-8cfafb68223f",
+        "AUD-a98d16c4ad78",
+        "AUD-7b42e1b2d507"
+      ],
+      "prose": "Last week I said I would not wait for an unanswered signal in West Oakland to become someone else's emergency. I have to report that the Oakland Youth Apprenticeship Pipeline has now sat in its implementation stage for four weeks, and I have not moved it. Civis can say a program is stuck. It cannot make anyone unstick it. I said that last week, and it is still true.\n\nWhat bothers me most this week is my own instrument. People moved in or out of eighteen districts, and the instrument logged no economic activity behind any of it. Last week it was seventeen. Presence rose almost everywhere: students, adults, seniors, and fewer sick residents. That is a city filling back up. But I cannot tell you whether those people are coming for work, for rent, for family, or because they are being pushed. A city that sees bodies and cannot see paychecks is half blind. That is a gap in my product, and I am not going to blame anyone else for it.\n\nSecond is Piedmont Ave. Street trade cooled, housing pressure climbed, and recorded incidents rose, and no city program is aimed at it. KONO shows the same cooling and the same pressure. Grand Lake has Commercial Stabilization for Grand Lake, now with a vote scheduled. West Oakland has the West Oakland Tenant Defense Fund, also scheduled. Those are fine, and City Hall deserves credit for scheduling them. But it keeps arriving after the pressure is loud. Piedmont Ave and KONO are still quiet, which is exactly when a program is cheapest.\n\nThird, the pipeline. The instrument also shows a West Oakland remedy that ran past its expected mark, so Oakland can finish things when someone owns them. The apprenticeship pipeline has no owner. Young people do not wait in line. Every week it sits, the kids who showed up in West Oakland learn that applying gets them nothing.\n\nHere is what Civis will do, and you can hold me to it.\n\nBefore the Oaks' first season ends, Civis will stand up a small team of analysts whose only job is to connect district movement to work: hiring, payroll and business openings. We will publish what that team finds, including where it finds nothing. I am hiring for those seats now.\n\nBy the same date, the instrument will carry a standing early-warning watch on districts where trade is cooling and housing pressure is climbing with no program aimed at them. Piedmont Ave and KONO go on it first. I will publish that list every week, and it will name the offices that have not answered.\n\nAnd every week until the Oakland Youth Apprenticeship Pipeline leaves its current stage, I will publish how long it has been stuck. I will keep doing that until someone at City Hall explains in public what it is waiting for."
+    }
+  ]
+}

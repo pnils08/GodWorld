@@ -1,0 +1,48 @@
+{
+  "model": "anthropic/claude-sonnet-5.5",
+  "calls": [
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Neighborhood_Demographics",
+        "match": "Chinatown"
+      },
+      "resultChars": 248,
+      "resultHead": "Neighborhood | Students | Adults | Seniors | Unemployed | Sick | LastUpdated | SchoolQualityIndex | GraduationRate | CollegeReadinessRate | TeacherQuality | Funding\nChinatown | 314 | 1502 | 396 | 83 | 132 | 116 | 6.82 | 85.46 | 52.78 | 6.91 | 12000"
+    },
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Care_Justice_Census",
+        "match": "Chinatown"
+      },
+      "resultChars": 2185,
+      "resultHead": "Cycle | System | GeographicScope | Neighborhood | IntakeType | PopulationBasis | CoveredPopulation | MethodVersion | Completeness | TotalIntakes | TrackedIntakes | OtherResidentIntakes | OccupancyMeasure | OpeningOccupancy | ClosingOccupancy | TrackedOccupancy | OtherResidentOccupancy | BedsOccupied | TransfersIn | TransfersOut | Exits | Corrections\n115 | hospital | neighborhood | Chinatown | all | hood-table | 2205 | cj-2 | complete | 3 | 0 | 3 | in-care | 6 | 6 | 0 | 6 | 6 | 0 | 0 | 3 | 0\n115 | judicial | neighborhood | Chinatown | arrest | hood-table | 2205 | cj-2 | complete | 1 | 0 | 1 | i"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Chinatown sick residents hospital"
+      },
+      "resultChars": 1661,
+      "resultHead": "[C113 · daily · Dr. Lila Mezran] The census lists none of the six as tracked, so they are residents the city counts but does not follow by name. By comparison, Adams Point, Dimond, Downtown and East Oakland each have 4 in care. Citywide, the hospital took 35 admissions, held 71 in care at the close in 71 beds, and discharged 37. The world record also carries a recorded health cluster for Chinatown, rated low-severity. In clinic language, \"low-severity\" means the record does not call it an emergency. It also does not say the households are fine. Wh\n[C112 · daily · Dr. Lila Mezran] None of those"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Deacon Seymour"
+      },
+      "resultChars": 3220,
+      "resultHead": "[C100 · edition] During his final seasons, Seymour became something rare. Players began seeking advice before coaches. Not because he was loud. Because he listened. Rookies would spend twenty minutes talking. Deacon would ask one question. And somehow it was always the right question. Within two years of retirement, he accepted a player development role. The climb began. ⸻ Minor League Coaching Most former players rush toward manager positions. Seymour did the opposite. He spent years in: • rookie ball • instructional leagues • dev\n[C82 · edition] Deacon Seymour stood at the edge of the outfie"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Maurice Franklin"
+      },
+      "resultChars": 2713,
+      "resultHead": "[C115 · daily · Tamsin Pruitt] In C113 Franklin traded produce over a fence and came out ahead. In C114 they drove the church van on the senior trip and listened to three hours of unfiltered neighborhood gossip. That same cycle, Latasha Rivera became a real friend and not just a colleague. In C115 Franklin recognized the OARI van idling outside the corner store and knew better than to ask who it was waiting for. The paper has named Franklin before, and the lines don't all agree. Letters in C91 carried a Maurice Franklin of Rockridge as a retired\n[C91 · piece] | Maurice Franklin | — | Rockridge"
+    }
+  ],
+  "ranAt": "2026-11-17T00:19:06.035Z"
+}

@@ -1,0 +1,17 @@
+# Lake Merritt, in their own words
+
+## Mags Corliss — Editor-in-Chief
+
+> Mild tonight, fifty-five and no wind. Robert has the second glass poured and is saying nothing, which is his way of letting me start. The vote isn't here yet. It's one more night of the clerk's desk, and the city is leaning toward it. West Oakland's mood has dropped again, seven points by the district's own measure, and nothing happened to cause it. A renewal sat in a drawer and people felt the drawer. Marcus Webb keeps saying the paperwork is done, and I keep believing him. Last night I said I wanted to know who checks the mailbox. Tonight I think the answer is nobody, unless we do. A promise has to outlive the person who made it and the desk it sits on. Somebody on the internet put it better than I can: a workflow is only durable if its state survives its scheduler. A fund meant to keep people in their homes is that kind of workflow. Ivy Hill goes to the table with it. I'm told the words for the gavel are already written. I don't hold that against anyone, since ceremony is how a city stead
+
+## Keisha Ramos — Director, Baylight Redevelopment Authority
+
+> The Cycle 115 review is closed, and the soil reports came back clean — I keep saying that to myself like I need to hear it out loud. Between the trucks running quiet and the hotline being live, the neighborhood is holding its breath, and I feel every one of those exhalations in my own chest. Marine Systems dropping from five to three people still sits wrong with me; that's two families less in this district with a paycheck, no matter how clean the dirt is. I keep checking the independent oversight reports when I should be walking away from the desk, but the habit is the only thing that lets me sleep. This week, the site itself told me the truth: prep work is moving, contracts are signed, and the only thing left is to keep the trust from cracking before the first foundation is poured.
+
+## Ramon Vega — City Council President - D1
+
+> The week closed with Ivy Hill still moving through the proper channels — not as an emergency, but as a piece of work that deserves a clear text and a real hearing. The sentiment numbers are soft, retail is easing, but crime ticked down; that's a mixed picture, and I can live with mixed as long as we're honest about it. I keep coming back to the fact that I could have forced a faster vote, but speed without clarity just breeds distrust. The record shows I chose monitoring over manufactured urgency — that's the right call, even if it means the win comes slower. Tonight the building is quiet, and that's fine. Tomorrow I'll push again, but I'll push with the facts as they are, not as I wish them.
+
+## Nina Chen — City Council Member - D8
+
+> The vote on Grand Lake stabilization passed, and I'm still turning over what that means. Relief without accountability is just an expenditure — I said that on the record, and I meant it. But now the Chen-Vega audit protocols are the only thing standing between that money and the void, and I need to make sure they hold. Eastlake baseline services came through too, which is good, but the decay momentum there is at 1 and sentiment is sitting at -0.06, so the oversight work is just beginning. I keep coming back to that signal — District 8 is focusing on Eastlake to audit municipal maintenance schedules, and that's where the real accountability will be tested. Grand Lake was the headline, but Eastlake is the follow-through, and I'm not going to let the quiet building fool me into thinking the work is done.

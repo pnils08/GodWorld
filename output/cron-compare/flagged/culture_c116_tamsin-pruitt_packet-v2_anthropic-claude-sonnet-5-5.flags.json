@@ -1,0 +1,13 @@
+{
+  "draft": "culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "flags": [
+    {
+      "claim": "On his own page this cycle he put it this way: \"The rankings are a nice feather, but they don't win us a single possession.\"",
+      "issue": "Fabricated speech attributed to named ledger citizen Wilson Shepard (POP-01022) not present in interview record or ledger ground truth.",
+      "severity": "high"
+    }
+  ],
+  "checkFlags": [],
+  "contamination": [],
+  "summary": "Draft fails due to fabricated quote attributed to named ledger citizen Wilson Shepard."
+}

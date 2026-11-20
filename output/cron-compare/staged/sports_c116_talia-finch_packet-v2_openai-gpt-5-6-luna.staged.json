@@ -1,0 +1,76 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "116",
+  "persona": "talia-finch",
+  "byline": "Talia Finch",
+  "bylinePopid": "POP-00592",
+  "article": "output/cron-compare/staged/sports_c116_talia-finch_packet-v2_openai-gpt-5-6-luna.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Elliot Abraham",
+        "role": "quoted-source",
+        "popid": "POP-01046"
+      },
+      {
+        "name": "Wilson Shepard",
+        "role": "quoted-source",
+        "popid": "POP-01022"
+      },
+      {
+        "name": "Mike Paulson",
+        "role": "quoted-source",
+        "popid": "POP-00527"
+      },
+      {
+        "name": "Melton Neilon",
+        "role": "quoted-source",
+        "popid": "POP-00170"
+      },
+      {
+        "name": "Mark Aitken",
+        "role": "mentioned",
+        "popid": "POP-00003",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "West Oakland"
+    ],
+    "claims": [
+      {
+        "claim": "The team's performance so far has been great, we're 8-1 and the guys are playing with confidence. I think we've found our rhythm, and it's a testament to the hard work they've been putting in. The offense is clicking, and we're getting good contributions from everyone. Of course, we had a hiccup against San Antonio, but that's to be expected. We're still a young team, and we're learning as we go. Overall, I'm proud of how we're performing, and I'm excited to see how we'll do as the season progresses.",
+        "sourceRef": "citizenVoice PRESS Wilson Shepard"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-07993fc4256f",
+    "draftSha256": "36edd7a6403331d0c262325929027dbccfca301b650684d8b018136757ede459",
+    "verdict": "output/cron-compare/sports_c116_talia-finch_packet-v2_openai-gpt-5-6-luna.rhea.json",
+    "ranAt": "2026-11-20T00:17:58.520Z",
+    "contractScore": {
+      "opened": false,
+      "purposeMet": false,
+      "inTarget": true,
+      "inTargetBy": "code floor 400",
+      "words": 521,
+      "short": "The opening lacks a specific venue and sensory detail, while the piece violates constraints by discussing the A's and failing to set the scene inside a textured room.",
+      "score": 1,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "36edd7a6403331d0c262325929027dbccfca301b650684d8b018136757ede459",
+      "costUsd": 0.0011
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-20T00:18:04.685Z"
+}

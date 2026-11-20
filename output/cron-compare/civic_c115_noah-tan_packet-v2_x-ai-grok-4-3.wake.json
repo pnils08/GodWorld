@@ -54,5 +54,6 @@
     "recorded": true,
     "out": "bug: true }\n{\n  \"popId\": \"POP-00157\",\n  \"name\": \"Noah Tan\",\n  \"recorded\": true,\n  \"text\": \"filed: Ramon Vega stood on the same West Oakland block where the new bench had gone in the day before. The\"\n}"
   },
-  "ranAt": "2026-11-12T00:17:42.273Z"
+  "ranAt": "2026-11-12T00:17:42.273Z",
+  "dispositionReconciledAt": "2026-11-14T18:00:02.470Z"
 }

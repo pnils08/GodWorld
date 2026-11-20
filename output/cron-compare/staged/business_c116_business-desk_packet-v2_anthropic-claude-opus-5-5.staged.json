@@ -1,0 +1,137 @@
+{
+  "status": "staged",
+  "desk": "business",
+  "cycle": "116",
+  "persona": "business-desk",
+  "byline": "Jordan Velez",
+  "bylinePopid": "POP-00153",
+  "article": "output/cron-compare/staged/business_c116_business-desk_packet-v2_anthropic-claude-opus-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Tre Mingo",
+        "role": "mentioned",
+        "popid": "POP-00123"
+      },
+      {
+        "name": "Elle Lilo",
+        "role": "quoted-source",
+        "popid": "POP-00177"
+      },
+      {
+        "name": "Marguerite Salcedo",
+        "role": "mentioned",
+        "popid": "POP-01093"
+      },
+      {
+        "name": "Briar Soto",
+        "role": "mentioned",
+        "popid": "POP-00926",
+        "floor": true
+      },
+      {
+        "name": "Guadalupe Lee",
+        "role": "mentioned",
+        "popid": "POP-00970",
+        "floor": true
+      },
+      {
+        "name": "Guadalupe Lupe",
+        "role": "mentioned",
+        "popid": "POP-00643",
+        "floor": true
+      },
+      {
+        "name": "Hector Leech",
+        "role": "mentioned",
+        "popid": "POP-00252",
+        "floor": true
+      },
+      {
+        "name": "Jalen Hill",
+        "role": "mentioned",
+        "popid": "POP-00960",
+        "floor": true
+      },
+      {
+        "name": "Kaila Brown",
+        "role": "mentioned",
+        "popid": "POP-01035",
+        "floor": true
+      },
+      {
+        "name": "Quynh Le",
+        "role": "mentioned",
+        "popid": "POP-00878",
+        "floor": true
+      },
+      {
+        "name": "Sora Hint",
+        "role": "mentioned",
+        "popid": "POP-01008",
+        "floor": true
+      },
+      {
+        "name": "Tomas Renteria",
+        "role": "mentioned",
+        "popid": "POP-00744",
+        "floor": true
+      },
+      {
+        "name": "Travis Golin",
+        "role": "mentioned",
+        "popid": "POP-00205",
+        "floor": true
+      },
+      {
+        "name": "Trenton Nawan",
+        "role": "mentioned",
+        "popid": "POP-00273",
+        "floor": true
+      },
+      {
+        "name": "Yuki Ji",
+        "role": "mentioned",
+        "popid": "POP-00783",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Jack London"
+    ],
+    "claims": [
+      {
+        "claim": "I walk past that fence every day. The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching rents climb while the people I work with talk about leaving. The businesses are growing, the numbers look good, but the folks on the ledger aren't the ones who get to stay. I don't feel like I'm part of it. I feel like I'm watching it from the other side of the fence.",
+        "sourceRef": "citizenVoice PRESS Tre Mingo"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-88a5a854b025",
+    "draftSha256": "e6f06c0c914e60885af50e57f70fcf6918bcd3ded4ceceadb75a1b258e1f9e6d",
+    "verdict": "output/cron-compare/business_c116_business-desk_packet-v2_anthropic-claude-opus-5-5.rhea.json",
+    "ranAt": "2026-11-17T00:17:54.891Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 500",
+      "words": 1040,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "e6f06c0c914e60885af50e57f70fcf6918bcd3ded4ceceadb75a1b258e1f9e6d",
+      "costUsd": 0.001
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-17T00:17:57.876Z"
+}

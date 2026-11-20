@@ -1,0 +1,86 @@
+{
+  "draft": "output/cron-compare/culture_c116_elliot-graye_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "116",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "136cadb8e2342849c48fe5177f5c050a1c6b6171391fd31f7ebf5d3a4d12a392",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes match exact interview records, faith institutions adhere to authoritative canon mappings, and all civic/faith details align with Cycle 116 ground truth.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "graye-faith-ground-v1",
+    "packageVersion": "GRAYE-LEP2-2",
+    "manifestId": "AM-09a41495ce6f",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "94"
+        ]
+      },
+      {
+        "code": "UNAPPROVED_QUOTE",
+        "values": [
+          "we don't do that"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Daniel Han",
+      "Maria Keen",
+      "Naomi Sterling",
+      "Ramon Solano",
+      "Robert Jaston"
+    ],
+    "unverified": [
+      "Adams Point United Methodist",
+      "B'nai Tikvah Synagogue",
+      "Esperanza Parish",
+      "Interfaith Council",
+      "Living Word",
+      "Spring Equinox"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0143,
+  "durationMs": 9484,
+  "parseError": false,
+  "ranAt": "2026-11-20T00:15:50.412Z",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 871,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "136cadb8e2342849c48fe5177f5c050a1c6b6171391fd31f7ebf5d3a4d12a392",
+    "costUsd": 0.001
+  }
+}

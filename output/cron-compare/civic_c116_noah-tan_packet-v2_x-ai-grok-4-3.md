@@ -1,0 +1,15 @@
+Ximena Mehta stood at the edge of the platform at 12th Street, coat folded over one arm, watching the train doors close on an empty car. She had come down from Lake Merritt on foot that morning, the way she had for most of the last six clear stretches, and the quiet on the platform felt less like absence than a shift in how the city was using its light. A pair of riders who usually boarded here had passed the station entrance without slowing, one with a paper cup, the other already turning toward the path that runs the length of the water.
+
+She crossed to the bench that faces the street and sat. From there the sidewalk traffic moved in longer arcs than on the days when the air pressed in. People carried jackets instead of wearing them. A cyclist coasted past without a helmet, one hand loose on the bars, the other holding a rolled map. Mehta tracked the motion until it reached the corner, then looked back at the empty track.
+
+"Yeah, I still see it that way," she said when the question of ridership came up. "Six weeks of mild weather like this — that's not a punishment, that's a gift, and people treat it like one. They walk, they bike, they take the long way home around the lake. I don't look at a quiet 12th Street on a Saturday and think we're losing riders. I look at it and think everyone's outside enjoying the day before the fog rolls back in. That's just Oakland in the spring."
+
+The train that pulled in next carried half the usual load for the hour. Mehta stayed on the platform another minute, counting the passengers who stepped off and kept walking rather than transferring. One of them paused at the newsstand, bought nothing, and kept going north. Another turned west, coat still draped across the shoulder.
+
+Up on Piedmont Avenue the same stretch of clear days had changed the shape of a morning for at least one household. Adash Stanley carried the last box from the curb into the new place, the one that sits above the row of small shops that open early. The move from downtown had been logged as a rotation, but the light on the street made the short walk between the old stop and the new one feel like an extension of the same unbroken run of mornings. He left the door open while he unpacked, the way someone does when the air outside does not push back.
+
+Mehta watched the platform empty again. The question that stayed with her was not whether the pattern would hold, but which parts of the city would keep treating the stretch as ordinary and which would begin to mark it as the thing that let them change a route or a plan without cost. The next train arrived on time. She boarded without looking back at the street.
+
+## INTAKE
+NAMES: Ximena Mehta | mentioned
+CLAIM: Yeah, I still see it that way. Six weeks of mild weather like this — that's not a punishment, that's a gift, and people treat it like one. They walk, they bike, they take the long way home around the lake. I don't look at a quiet 12th Street on a Saturday and think we're losing riders. I look at it and think everyone's outside enjoying the day before the fog rolls back in. That's just Oakland in the spring. | citizenVoice PRESS Ximena Mehta

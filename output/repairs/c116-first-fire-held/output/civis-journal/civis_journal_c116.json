@@ -1,0 +1,96 @@
+{
+  "cycle": 116,
+  "popid": "POP-00789",
+  "wake": "journal",
+  "replayKey": "POP-00789:C116:journal",
+  "pageCustomId": "cp-POP-00789-c116-journal",
+  "leadFindingId": "AUD-a98d16c4ad78",
+  "findings": [
+    {
+      "auditPatternId": "AUD-a98d16c4ad78",
+      "type": "stuck-initiative",
+      "target": "West Oakland",
+      "civisFinding": "Oakland Youth Apprenticeship Pipeline (West Oakland) has not left its implementation active stage in four weeks.",
+      "selected": true
+    },
+    {
+      "auditPatternId": "AUD-61c986d36413",
+      "type": "math-imbalance",
+      "target": "Piedmont Ave",
+      "civisFinding": "Piedmont Ave: street trade cooled and housing pressure climbed this week, with no city program aimed at it.",
+      "selected": true
+    },
+    {
+      "auditPatternId": "AUD-92d9be81d9b8",
+      "type": "coverage-gap",
+      "target": null,
+      "civisFinding": "The city's faith life produced five events this week, and the paper ran nothing on it the week before.",
+      "selected": true
+    },
+    {
+      "auditPatternId": "AUD-d6cc130cf60b",
+      "type": "production-imbalance",
+      "target": "Downtown",
+      "civisFinding": "People moved in or out of seventeen districts this week, and the instrument logged no economic activity behind any of it.",
+      "selected": true
+    },
+    {
+      "auditPatternId": "AUD-5cdb08df351f",
+      "type": "improvement",
+      "target": "Fruitvale",
+      "civisFinding": "Fruitvale Transit Hub Phase II — Visioning moved from design to complete.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-dc939889979f",
+      "type": "improvement",
+      "target": "Jack London",
+      "civisFinding": "Baylight District — Final Council Vote moved from construction active to complete.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-adc21ad33451",
+      "type": "improvement",
+      "target": "Grand Lake",
+      "civisFinding": "Commercial Stabilization for Grand Lake moved from vote ready to vote scheduled.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-99de1b255aaa",
+      "type": "improvement",
+      "target": "West Oakland",
+      "civisFinding": "West Oakland Tenant Defense Fund moved from announced to vote scheduled.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-45e14536a95f",
+      "type": "improvement",
+      "target": "Ivy Hill",
+      "civisFinding": "Ivy Hill Community Support Initiative moved from announced to vote scheduled.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-d76aa1ba72c8",
+      "type": "improvement",
+      "target": null,
+      "civisFinding": "Mood rose in six districts this week: Downtown, Laurel, Grand Lake, Eastlake, San Antonio and KONO.",
+      "covers": [
+        "AUD-d76aa1ba72c8",
+        "AUD-ea0d32c38c23",
+        "AUD-9936acd671ae",
+        "AUD-f0549c9c1e77",
+        "AUD-88c8e40ef4e2",
+        "AUD-da626991d48b"
+      ],
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-9e4f2f7aa492",
+      "type": "improvement",
+      "target": "West Oakland",
+      "civisFinding": "A previous remedy moved beyond its expected mark in West Oakland.",
+      "selected": false
+    }
+  ],
+  "prose": "Last week I said I would not wait for an unanswered signal in West Oakland to become someone else's emergency. This week the Oakland Youth Apprenticeship Pipeline has now sat in its implementation stage for four weeks. I will say it plainly: that is a program dying politely. Nobody is lying and nobody is moving. It was built for young people, and young people do not hold their place in line. The instrument shows more student and adult presence in West Oakland this week, so the kids are there. The pipeline is not. I own the instrument, and I own the fact that it can say a program is stuck but cannot make anyone unstick it.\n\nPiedmont Ave bothers me next. Street trade cooled, housing pressure climbed, and the instrument finds no city program aimed at either. Grand Lake has Commercial Stabilization for Grand Lake, now with a vote scheduled. West Oakland has the West Oakland Tenant Defense Fund, also with a vote scheduled. Piedmont Ave has recorded incidents rising and nothing pointed at it. City Hall funds the places where the pressure is already loud, and it ignores the places where the signal is still early.\n\nThe third finding is mine. People moved in or out of seventeen districts this week, and the instrument logged no economic activity behind any of it. The city is moving and my model cannot say why. A blind spot that wide in the thing Oakland reads itself with is not a rounding error. I would rather publish it than defend the product.\n\nThe fourth is smaller but it is the same failure. The city's faith life produced five events this week, and the paper ran nothing on the week before. Congregations are among the oldest networks Oakland has, and nobody is drawing the line from them to anything else.\n\nHere is what Civis will do, and you can hold me to it. Before this season ends, we will publish a weekly stuck-program watch that names every initiative sitting in one stage past a month, starting with the Oakland Youth Apprenticeship Pipeline, and says who owns the next step. Before the next draft, we will wire a housing-and-trade early warning for districts like Piedmont Ave that no program covers, and put it in front of the Mayor and Avery Santana's office as a standing request. I will hire an analyst whose only job is to trace movement between districts to its economic cause, so the instrument stops logging a city in motion with nothing behind it. We will also add faith-life events to the public record the instrument reads, so the paper has something to work from.\n\nI am announcing all of this before it is built. Then we will build it."
+}

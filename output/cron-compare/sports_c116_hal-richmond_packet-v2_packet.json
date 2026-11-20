@@ -1,0 +1,47 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "116",
+  "persona": "hal-richmond",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Hal Richmond",
+    "popid": "POP-00007"
+  },
+  "assignment": {
+    "story": {
+      "angle": "What the supplied C116 line card establishes, and what history remains unsupplied.",
+      "label": "A's — trade-recap — supplied C116 line card",
+      "hookLine": "A's — trade-recap — supplied C116 line card",
+      "hood": "Lake Merritt",
+      "pulseClass": "era-door",
+      "team": "A's",
+      "eventKind": "trade-recap",
+      "closingNote": "the line that holds",
+      "citizens": [
+        "Carmen Mesa (POP-00081)",
+        "Giancarlo Hernandez (POP-01239)",
+        "Mike Paulson (POP-00527)",
+        "Kevin Clark (POP-00053)",
+        "Ernesto Quintero (POP-00050)"
+      ],
+      "popids": [
+        "POP-00081",
+        "POP-01239",
+        "POP-00527",
+        "POP-00053",
+        "POP-00050"
+      ],
+      "ref": "world_summary_c116.md ## Sports",
+      "cycle": 116
+    }
+  },
+  "angle": "output/cron-compare/sports_c116_hal-richmond_packet-v2_angle.json",
+  "quotesRequested": 0,
+  "quotesLanded": 0,
+  "quotes": [],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [],
+  "ranAt": "2026-11-19T19:16:32.876Z"
+}

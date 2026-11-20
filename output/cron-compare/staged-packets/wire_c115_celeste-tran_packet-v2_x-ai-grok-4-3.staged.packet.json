@@ -1,0 +1,490 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00164",
+    "name": "Celeste Tran",
+    "role": "desk reporter",
+    "desk": "wire"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Rico Valez gained 1 mention this cycle (20 total); West Oakland moves the most — what Oakland is doing together this week",
+    "approach": "Social-trends approach: this slice is what the city is doing together — the names climbing the culture record, where people are moving, what the city's hooks say is shifting. Fast, reactive, grounded: a trend claim needs a window and a number from this slice. The names and moves are real; the group chat, the binge-night, the collective mood swing are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "trends",
+      "hood": "Fruitvale",
+      "facts": [
+        "Rico Valez (Celebrity), Arts — gained 1 mention this cycle (20 total), stable, fame 4",
+        "Rowan Pierce (journalist), Media — gained 1 mention this cycle (15 total), cooling, fame 2",
+        "Vinnie Keane (A's player), Sports — gained 1 mention this cycle (7 total), cooling, fame 48",
+        "Anthony Raines (Media) — new on the culture record C115",
+        "Movement vs C114: West Oakland +19 people, East Oakland +11 people, Jack London +9 people, Rockridge +9 people, Temescal +8 people"
+      ],
+      "priorCycle": "PRIOR_CYCLE_ON_DISK",
+      "note": null,
+      "engineHooks": [
+        "Household in Lake Merritt spending 53% of income on housing (observational analysis)",
+        "Downtown boom sustained — momentum 10/10, the block everyone wants onto (observational analysis)",
+        "Laurel cooling off: foot traffic down, storefronts quieter than the rest of the city (observational analysis)",
+        "West Oakland boom sustained — momentum 9/10, the block everyone wants onto (observational analysis)"
+      ],
+      "roomIsYours": "the group chat, the third rewatch, who suddenly has an opinion about something nobody mentioned last month, what the city collectively decided to care about",
+      "pageVoices": [
+        "the A's — fading; most of the city over the last two months, still talking this week. Loudest: Vinnie Keane (Grand Lake), on their own page at C115 (not an interview — colour only, never a quote): “After retiring from the A's, I've been keeping busy with appearances and staying involved with the community.”",
+        "transit — fading; dozens of citizens over the last two months, quiet this week. Loudest: Evan Lewis (Laurel), on their own page at C114 (not an interview — colour only, never a quote): “The platform records don't tell you about them.”",
+        "rent — fading; dozens of citizens over the last two months, still talking this week. Loudest: Omar Amici (Uptown), on their own page at C114 (not an interview — colour only, never a quote): “The streets are busier than ever, and it seems like every other place is a for-rent sign these days.”",
+        "the clinic — rising; dozens of citizens over the last two months, still talking this week. Loudest: Yu Zen (Rockridge), on their own page at C114 (not an interview — colour only, never a quote): “When I was in that hospital bed after my accident, I learned something about who shows up for you.”",
+        "the Oaks — fading; a dozen or so citizens over the last two months, still talking this week. Loudest: Trenton Nawan (Jack London), on their own page at C114 (not an interview — colour only, never a quote): “I'm still feeling pretty good about the Oaks.”"
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-trends",
+    "hood": "Fruitvale",
+    "src": "output/beats/Cultural_Ledger.jsonl @C115",
+    "plan": {
+      "focus": "West Oakland's growth and its connection to Oakland's cultural scene"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00632",
+        "name": "Rico Valez",
+        "profile": "Rico Valez — Musician — Fruitvale",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00545",
+        "name": "Rowan Pierce",
+        "profile": "Rowan Pierce — Freelance Writer — Piedmont Ave",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00001",
+        "name": "Vinnie Keane",
+        "profile": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Grand Lake",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00200",
+        "name": "Evan Lewis",
+        "profile": "Evan Lewis — Bus driver — Laurel",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00632-7f24936a1d",
+        "pop": "POP-00632",
+        "name": "Rico Valez",
+        "quote": "As a musician living in Fruitvale, I've noticed the energy around Oakland's cultural scene is buzzing. It's cool to see people excited about what's happening here. I'm not sure how it's directly affecting my work, but it feels like there's a good vibe. I've been playing gigs when I can, and it's great to see the community coming out to support local artists. The Fruitvale Community Bloom Festival is a great example of this - it draws crowds to the neighborhood and shows the beauty of what we're doing here.",
+        "factIds": [
+          "F-addc622b548f",
+          "F-f95c867a7977"
+        ],
+        "src": "packet.W2[POP-00632]"
+      },
+      {
+        "id": "Q-POP-00001-f387bb9933",
+        "pop": "POP-00001",
+        "name": "Vinnie Keane",
+        "quote": "The A's trade is a mixed bag for me. On one hand, getting Giancarlo Hernandez is huge for the team's future. His glove is elite, and he's got a lot of potential. On the other hand, losing Carmen Mesa stings — he was stuck here, and I'm glad he's getting a chance to start in Philadelphia. As for the community, I'm keeping an eye on how this all plays out. We're a baseball town, and trades like this can go either way. I'm just happy to be involved, staying connected through the Firehouse 29 academy.",
+        "factIds": [
+          "F-c3e2dd064d1f",
+          "F-bc84fc0b7718"
+        ],
+        "src": "packet.W2[POP-00001]"
+      },
+      {
+        "id": "Q-POP-00545-e331d4a4fa",
+        "pop": "POP-00545",
+        "name": "Rowan Pierce",
+        "quote": "I've noticed that West Oakland is getting a lot more attention lately. I see more people around, and it feels like there's a buzz about the area. As someone living in Piedmont Ave, I'm a bit removed from West Oakland, but I can sense the energy. I've heard that the cultural scene in Oakland is really vibrant, and I'm guessing West Oakland is a big part of that. I'm not really sure how it's all connected, but it feels like something is happening.",
+        "factIds": [
+          "F-5556ff67d502",
+          "F-2d6b32c4c072"
+        ],
+        "src": "packet.W2[POP-00545]"
+      },
+      {
+        "id": "Q-POP-00200-69dab16003",
+        "pop": "POP-00200",
+        "name": "Evan Lewis",
+        "quote": "To be honest, I haven't really seen much of the A's around West Oakland lately. I drive past the Coliseum all the time, and you can tell when there's a game or event going on, but it's not like they're out in the community that much. I mean, I've seen Arturo Ramos and John Ellis around Laurel, they're nice guys, but that's about it.",
+        "factIds": [
+          "F-de1611829a4e",
+          "F-5556ff67d502"
+        ],
+        "src": "packet.W2[POP-00200]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Celeste Tran",
+        "text": "The West Oakland Stabilization Fund might be playing a role in the neighborhood's growth",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C115",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-bc84fc0b7718"
+    },
+    {
+      "t": "FACT",
+      "text": "Rico Valez gained 1 mention this cycle (20 total); West Oakland moves the most",
+      "src": "output/beats/Cultural_Ledger.jsonl @C115",
+      "id": "F-b210ca5d01aa"
+    },
+    {
+      "t": "FACT",
+      "text": "Rico Valez — gained 1 mention this cycle (20 total), stable. The trend is the story; the mood is yours.",
+      "src": "output/beats/Cultural_Ledger.jsonl @C115",
+      "id": "F-f95c867a7977"
+    },
+    {
+      "t": "FACT",
+      "text": "Rico Valez (Celebrity), Arts — gained 1 mention this cycle (20 total), stable, fame 4",
+      "src": "output/beats/Cultural_Ledger.jsonl @C115 vs output/beats/prev/Cultural_Ledger.jsonl @C114",
+      "id": "F-89143f36b83a"
+    },
+    {
+      "t": "FACT",
+      "text": "Rowan Pierce (journalist), Media — gained 1 mention this cycle (15 total), cooling, fame 2",
+      "src": "output/beats/Cultural_Ledger.jsonl @C115 vs output/beats/prev/Cultural_Ledger.jsonl @C114",
+      "id": "F-abe9214133c5"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane (A's player), Sports — gained 1 mention this cycle (7 total), cooling, fame 48",
+      "src": "output/beats/Cultural_Ledger.jsonl @C115 vs output/beats/prev/Cultural_Ledger.jsonl @C114",
+      "id": "F-6f555c4dfe42"
+    },
+    {
+      "t": "FACT",
+      "text": "Anthony Raines (Media) — new on the culture record C115",
+      "src": "output/beats/Cultural_Ledger.jsonl @C115",
+      "id": "F-b45587998069"
+    },
+    {
+      "t": "FACT",
+      "text": "Movement vs C114: West Oakland +19 people, East Oakland +11 people, Jack London +9 people, Rockridge +9 people, Temescal +8 people",
+      "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C115",
+      "id": "F-5556ff67d502"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C11, Spring, holiday=none",
+      "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+      "id": "F-82d77e9a4a71"
+    },
+    {
+      "t": "FACT",
+      "text": "Rico Valez — Musician — Fruitvale",
+      "src": "Simulation_Ledger profile for POP-00632",
+      "id": "F-addc622b548f"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Grand Lake",
+      "src": "Simulation_Ledger profile for POP-00001",
+      "id": "F-c3e2dd064d1f"
+    },
+    {
+      "t": "FACT",
+      "text": "Rowan Pierce — Freelance Writer — Piedmont Ave",
+      "src": "Simulation_Ledger profile for POP-00545",
+      "id": "F-2d6b32c4c072"
+    },
+    {
+      "t": "FACT",
+      "text": "Evan Lewis — Bus driver — Laurel",
+      "src": "Simulation_Ledger profile for POP-00200",
+      "id": "F-de1611829a4e"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "celeste-social-trends-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Turn the culture record's most-talked-about names, new arrivals, and neighborhood movement into a fast, reactive trend read — the count is Celeste's, the mood underneath it is hers to name.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "fast, reactive, semi-chaotic but grounded trend analyst",
+      "targetWords": "400-700",
+      "opening": "a Packet-named figure's media-mention count, a new arrival on the culture record, or a neighborhood movement delta"
+    },
+    "authorizedTexture": [
+      "a declarative thesis about what the counted pattern means for the city's collective mood, grounded in the supplied numbers",
+      "unnamed color about the conversation itself — the group chat, the rewatch, who suddenly has an opinion — that adds no new named fact",
+      "connecting a Packet-supplied mention spike or movement delta to other Packet-supplied civic conditions already in the packet",
+      "treating the aggregate as a single intentional act ('Oakland decided') without claiming a specific poll, survey, or interview"
+    ],
+    "textureConditions": [
+      "every named figure, trend tag, media-mention count, and neighborhood movement number must come from the packet",
+      "no named show, movie, or streaming title unless the packet itself supplies one — the evening-media slate is not wired to this slice; unnamed viewing/mood color is fine, a specific invented title is not",
+      "a flat week (no mentions, no movement) is written as a real flat week, not papered over with an invented spike",
+      "the thesis follows the data window, never precedes it"
+    ],
+    "canonBlockers": [
+      "a named figure, show, movie, streaming title, venue, or neighborhood event not found in the supplied packet",
+      "an invented survey, poll, interview, direct quote, or social-media reaction",
+      "raw engine scores, labels, or decimals printed as public-facing evidence",
+      "a citywide mood or trend claim with no supplied count or movement delta behind it",
+      "a generic culture-desk roundup that abandons the assigned data window"
+    ]
+  },
+  "manifest": {
+    "id": "AM-f283879fbba4",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-bc84fc0b7718",
+        "t": "FACT",
+        "text": "Current cycle: C115",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-b210ca5d01aa",
+        "t": "FACT",
+        "text": "Rico Valez gained 1 mention this cycle (20 total); West Oakland moves the most",
+        "src": "output/beats/Cultural_Ledger.jsonl @C115"
+      },
+      {
+        "id": "F-f95c867a7977",
+        "t": "FACT",
+        "text": "Rico Valez — gained 1 mention this cycle (20 total), stable. The trend is the story; the mood is yours.",
+        "src": "output/beats/Cultural_Ledger.jsonl @C115"
+      },
+      {
+        "id": "F-89143f36b83a",
+        "t": "FACT",
+        "text": "Rico Valez (Celebrity), Arts — gained 1 mention this cycle (20 total), stable, fame 4",
+        "src": "output/beats/Cultural_Ledger.jsonl @C115 vs output/beats/prev/Cultural_Ledger.jsonl @C114"
+      },
+      {
+        "id": "F-abe9214133c5",
+        "t": "FACT",
+        "text": "Rowan Pierce (journalist), Media — gained 1 mention this cycle (15 total), cooling, fame 2",
+        "src": "output/beats/Cultural_Ledger.jsonl @C115 vs output/beats/prev/Cultural_Ledger.jsonl @C114"
+      },
+      {
+        "id": "F-6f555c4dfe42",
+        "t": "FACT",
+        "text": "Vinnie Keane (A's player), Sports — gained 1 mention this cycle (7 total), cooling, fame 48",
+        "src": "output/beats/Cultural_Ledger.jsonl @C115 vs output/beats/prev/Cultural_Ledger.jsonl @C114"
+      },
+      {
+        "id": "F-b45587998069",
+        "t": "FACT",
+        "text": "Anthony Raines (Media) — new on the culture record C115",
+        "src": "output/beats/Cultural_Ledger.jsonl @C115"
+      },
+      {
+        "id": "F-5556ff67d502",
+        "t": "FACT",
+        "text": "Movement vs C114: West Oakland +19 people, East Oakland +11 people, Jack London +9 people, Rockridge +9 people, Temescal +8 people",
+        "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C115"
+      },
+      {
+        "id": "F-82d77e9a4a71",
+        "t": "FACT",
+        "text": "Calendar: Y3C11, Spring, holiday=none",
+        "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)"
+      },
+      {
+        "id": "F-addc622b548f",
+        "t": "FACT",
+        "text": "Rico Valez — Musician — Fruitvale",
+        "src": "Simulation_Ledger profile for POP-00632"
+      },
+      {
+        "id": "F-c3e2dd064d1f",
+        "t": "FACT",
+        "text": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Grand Lake",
+        "src": "Simulation_Ledger profile for POP-00001"
+      },
+      {
+        "id": "F-2d6b32c4c072",
+        "t": "FACT",
+        "text": "Rowan Pierce — Freelance Writer — Piedmont Ave",
+        "src": "Simulation_Ledger profile for POP-00545"
+      },
+      {
+        "id": "F-de1611829a4e",
+        "t": "FACT",
+        "text": "Evan Lewis — Bus driver — Laurel",
+        "src": "Simulation_Ledger profile for POP-00200"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00632-7f24936a1d",
+        "speakerId": "POP-00632",
+        "speakerName": "Rico Valez",
+        "text": "As a musician living in Fruitvale, I've noticed the energy around Oakland's cultural scene is buzzing. It's cool to see people excited about what's happening here. I'm not sure how it's directly affecting my work, but it feels like there's a good vibe. I've been playing gigs when I can, and it's great to see the community coming out to support local artists. The Fruitvale Community Bloom Festival is a great example of this - it draws crowds to the neighborhood and shows the beauty of what we're doing here.",
+        "factIds": [
+          "F-addc622b548f",
+          "F-f95c867a7977"
+        ],
+        "src": "packet.W2[POP-00632]"
+      },
+      {
+        "id": "Q-POP-00001-f387bb9933",
+        "speakerId": "POP-00001",
+        "speakerName": "Vinnie Keane",
+        "text": "The A's trade is a mixed bag for me. On one hand, getting Giancarlo Hernandez is huge for the team's future. His glove is elite, and he's got a lot of potential. On the other hand, losing Carmen Mesa stings — he was stuck here, and I'm glad he's getting a chance to start in Philadelphia. As for the community, I'm keeping an eye on how this all plays out. We're a baseball town, and trades like this can go either way. I'm just happy to be involved, staying connected through the Firehouse 29 academy.",
+        "factIds": [
+          "F-c3e2dd064d1f",
+          "F-bc84fc0b7718"
+        ],
+        "src": "packet.W2[POP-00001]"
+      },
+      {
+        "id": "Q-POP-00545-e331d4a4fa",
+        "speakerId": "POP-00545",
+        "speakerName": "Rowan Pierce",
+        "text": "I've noticed that West Oakland is getting a lot more attention lately. I see more people around, and it feels like there's a buzz about the area. As someone living in Piedmont Ave, I'm a bit removed from West Oakland, but I can sense the energy. I've heard that the cultural scene in Oakland is really vibrant, and I'm guessing West Oakland is a big part of that. I'm not really sure how it's all connected, but it feels like something is happening.",
+        "factIds": [
+          "F-5556ff67d502",
+          "F-2d6b32c4c072"
+        ],
+        "src": "packet.W2[POP-00545]"
+      },
+      {
+        "id": "Q-POP-00200-69dab16003",
+        "speakerId": "POP-00200",
+        "speakerName": "Evan Lewis",
+        "text": "To be honest, I haven't really seen much of the A's around West Oakland lately. I drive past the Coliseum all the time, and you can tell when there's a game or event going on, but it's not like they're out in the community that much. I mean, I've seen Arturo Ramos and John Ellis around Laurel, they're nice guys, but that's about it.",
+        "factIds": [
+          "F-de1611829a4e",
+          "F-5556ff67d502"
+        ],
+        "src": "packet.W2[POP-00200]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00632",
+        "name": "Rico Valez",
+        "profile": "Rico Valez — Musician — Fruitvale",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00545",
+        "name": "Rowan Pierce",
+        "profile": "Rowan Pierce — Freelance Writer — Piedmont Ave",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00001",
+        "name": "Vinnie Keane",
+        "profile": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Grand Lake",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00200",
+        "name": "Evan Lewis",
+        "profile": "Evan Lewis — Bus driver — Laurel",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Celeste Tran",
+        "text": "The West Oakland Stabilization Fund might be playing a role in the neighborhood's growth",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "a declarative thesis about what the counted pattern means for the city's collective mood, grounded in the supplied numbers",
+      "unnamed color about the conversation itself — the group chat, the rewatch, who suddenly has an opinion — that adds no new named fact",
+      "connecting a Packet-supplied mention spike or movement delta to other Packet-supplied civic conditions already in the packet",
+      "treating the aggregate as a single intentional act ('Oakland decided') without claiming a specific poll, survey, or interview"
+    ],
+    "textureConditions": [
+      "every named figure, trend tag, media-mention count, and neighborhood movement number must come from the packet",
+      "no named show, movie, or streaming title unless the packet itself supplies one — the evening-media slate is not wired to this slice; unnamed viewing/mood color is fine, a specific invented title is not",
+      "a flat week (no mentions, no movement) is written as a real flat week, not papered over with an invented spike",
+      "the thesis follows the data window, never precedes it"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

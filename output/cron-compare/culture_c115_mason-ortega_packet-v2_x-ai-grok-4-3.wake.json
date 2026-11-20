@@ -1,0 +1,62 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "115",
+  "provider": "openrouter",
+  "model": "x-ai/grok-4.3",
+  "configuredWriterModel": "x-ai/grok-4.3",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "mason-ortega",
+  "byline": {
+    "name": "Mason Ortega",
+    "popid": "POP-00160",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 30,
+  "quotesLanded": 2,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "canon_recall",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall"
+  ],
+  "toolCalls": 4,
+  "wordCount": 346,
+  "targetWords": "evidence-bounded",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": false,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 346,
+    "short": "The piece invents individual workers, shifts, and direct quotes rather than treating the signal without inventing personnel or workplace conditions.",
+    "score": 2,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "51d360a8e6d154c62b54b806958373f365cc77d4a53b0cc505daccdb12fce400",
+    "costUsd": 0.0008
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 2/3 — The piece invents individual workers, shifts, and direct quotes rather than treating the signal without inventing personnel or workplace conditions."
+  },
+  "article": "output/cron-compare/staged/culture_c115_mason-ortega_packet-v2_x-ai-grok-4-3.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "x.com]\n{\n  \"popId\": \"POP-00160\",\n  \"name\": \"Mason Ortega\",\n  \"recorded\": true,\n  \"text\": \"filed: Oakland Casino Town sits in the Baylight District with 99 names on the roster this cycle, three of t\"\n}"
+  },
+  "ranAt": "2026-11-14T00:16:02.286Z",
+  "dispositionReconciledAt": "2026-11-14T18:00:02.766Z"
+}

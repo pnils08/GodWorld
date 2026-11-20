@@ -1,0 +1,305 @@
+{
+  "date": "2026-11-16",
+  "stage": "write",
+  "results": [
+    {
+      "name": "Carmen Delaine",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 4,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 901,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Jordan Velez",
+      "desk": "business",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 5,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 1040,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Dr. Lila Mezran",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 5,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 1252,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Trevor Shimizu",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 4,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 940,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Anthony Raines",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 7,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 932,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Tamsin Pruitt",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 6,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [
+          {
+            "text": "Priya Nair welcomed a new child, Downtown",
+            "run": "priya nair welcomed new child downtown"
+          },
+          {
+            "text": "Priya Nair welcomed a new child, Downtown (C116). What came next: the record does not say yet",
+            "run": "what came next the record does"
+          },
+          {
+            "text": "Xing Patel retired from work as Ship Repair Foreman, Jack London (C116). What came next: the record does not say yet",
+            "run": "what came next the record does"
+          },
+          {
+            "text": "Xing Patel — in their life, C115: felt renewed motivation to learn as the season shifted",
+            "run": "felt renewed motivation to learn as"
+          },
+          {
+            "text": "Xing Patel — in their life, C116: traded an extra ticket for a promise to bring the kid next time",
+            "run": "traded an extra ticket for a"
+          },
+          {
+            "text": "Marcus Osei — in their life, C115: squeezed past three-generation tables at Eight Treasures Dim Sum House",
+            "run": "squeezed past three generation tables at"
+          },
+          {
+            "text": "Marcus Osei — in their life, C115: didn't recognize themselves in an old photograph at first glance",
+            "run": "didnt recognize themselves in an old"
+          },
+          {
+            "text": "Marcus Osei — in their life, C116: wondered when exactly they became the adult in the room",
+            "run": "wondered when exactly they became the"
+          },
+          {
+            "text": "Marcus Osei — in their life, C116: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+            "run": "read the flyer for the oakland"
+          },
+          {
+            "text": "Dillon Trevor — in their life, C116: split a check six ways in her head faster than the register could",
+            "run": "split a check six ways in"
+          },
+          {
+            "text": "Dillon Trevor — in their life, C116: heard the rent talk on the block turn sharp",
+            "run": "heard the rent talk on the"
+          },
+          {
+            "text": "Vinnie Keane — in their life, C115: got recognized twice at the grocery store after the story ran",
+            "run": "recognized twice at the grocery store"
+          },
+          {
+            "text": "Vinnie Keane — in their life, C116: realized the same seven meals had rotated for a month, and shrugged",
+            "run": "realized the same seven meals had"
+          },
+          {
+            "text": "Vinnie Keane — in their life, C116: caught their reflection in a shop window and stood a little straighter",
+            "run": "caught their reflection in a shop"
+          },
+          {
+            "text": "Amara Keane — in their life, C116: split the last of the coffee and the morning's plans with their partner",
+            "run": "split the last of the coffee"
+          },
+          {
+            "text": "Amara Keane — in their life, C116: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+            "run": "painted over graffiti on the recreation"
+          },
+          {
+            "text": "Carmen Mesa — in their life, C116: called the one friend who would tell it straight",
+            "run": "called the one friend who would"
+          },
+          {
+            "text": "Carmen Mesa — in their life, C116: packed a bag with the news still settling",
+            "run": "packed a bag with the news"
+          },
+          {
+            "text": "Carmen Mesa — in their life, C116: closed their eyes during the choir solo and actually felt the tension leave their shoulders",
+            "run": "felt the tension leave their shoulders"
+          },
+          {
+            "text": "Carmen Mesa — in their life, C116: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+            "run": "stopped to read the architectural renderings"
+          },
+          {
+            "text": "Linda Chow — in their life, C116: heard the rent talk on the block turn sharp",
+            "run": "heard the rent talk on the"
+          },
+          {
+            "text": "Linda Chow — in their life, C116: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+            "run": "stopped to read the architectural renderings"
+          },
+          {
+            "text": "Jorry Cula — in their life, C115: the third late night this week, and the ceiling again at four",
+            "run": "c115 third late night week ceiling again four"
+          },
+          {
+            "text": "Jorry Cula — in their life, C115: argued the bullpen order at the barbershop like it was city policy",
+            "run": "the bullpen order at the barbershop"
+          },
+          {
+            "text": "Daire Green — cooked a recipe from memory that no one had written down, Fruitvale (C116 — what happened in their life, not words they said)",
+            "run": "cooked a recipe from memory that"
+          },
+          {
+            "text": "Daire Green — in their life, C115: disagreed with a Tribune column out loud to an empty kitchen",
+            "run": "disagreed with a tribune column out"
+          },
+          {
+            "text": "Daire Green — in their life, C116: grabbed coffee from the cart outside the hospital before the morning rush hit",
+            "run": "grabbed coffee from the cart outside"
+          },
+          {
+            "text": "Daire Green — in their life, C116: compared rent notes with a neighbor over the fence in Fruitvale",
+            "run": "compared rent notes with a neighbor"
+          },
+          {
+            "text": "Brenda Okoro and Elio Perez and Howard Perez — moved from Rockridge to Piedmont Ave — leaving Rockridge for a better fit, Piedmont Ave (C116 — what happened in ",
+            "run": "moved from rockridge to piedmont ave"
+          },
+          {
+            "text": "Brenda Okoro — in their life, C116: put on their good suit for the Sunday service because some traditions still matter near a bookstore corner",
+            "run": "sunday service because some traditions still"
+          },
+          {
+            "text": "Brenda Okoro — in their life, C116: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+            "run": "painted over graffiti on the recreation"
+          },
+          {
+            "text": "Elio Perez — in their life, C115: grabbed coffee from the cart outside the hospital before the morning rush hit",
+            "run": "grabbed coffee from the cart outside"
+          },
+          {
+            "text": "Elio Perez — in their life, C116: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+            "run": "read the flyer about the fruitvale"
+          },
+          {
+            "text": "Elio Perez — in their life, C116: overheard a goodbye at the corner that sounded permanent, and carried it a block",
+            "run": "corner that sounded permanent and carried"
+          },
+          {
+            "text": "Howard Perez — in their life, C115: heard someone at the cafe complain about the Baylight District noise and bit their tongue",
+            "run": "cafe complain about the baylight district"
+          },
+          {
+            "text": "Howard Perez — in their life, C115: listened to a style of music they'd always skipped, twice",
+            "run": "to a style of music theyd"
+          },
+          {
+            "text": "Elle Lilo — moved from Jack London to Lake Merritt — moving for a better fit between household income and housing costs, Lake Merritt (C116 — what happened in t",
+            "run": "moved from jack london to lake"
+          },
+          {
+            "text": "Elle Lilo — in their life, C115: grabbed coffee from the cart outside the hospital before the morning rush hit",
+            "run": "grabbed coffee from the cart outside"
+          },
+          {
+            "text": "Elle Lilo — in their life, C115: stayed thirty minutes after the service just catching up in the parking lot",
+            "run": "c115 stayed thirty minutes service catching parking lot"
+          },
+          {
+            "text": "Elle Lilo — in their life, C115: left the playoff watch party with hoarse vocals and sticky shoes",
+            "run": "c115 left playoff watch party hoarse sticky shoes"
+          },
+          {
+            "text": "Elle Lilo — in their life, C116: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+            "run": "stopped to read the architectural renderings"
+          },
+          {
+            "text": "Eric Taveras — in their life, C115: had a neighbor tape the article to the building's front door",
+            "run": "article to the buildings front door"
+          },
+          {
+            "text": "Eric Taveras — in their life, C115: stayed an extra hour at the community center because nobody wanted to leave",
+            "run": "stayed an extra hour at the"
+          },
+          {
+            "text": "Eric Taveras — in their life, C116: held the door and got a whole conversation for it",
+            "run": "door and got a whole conversation"
+          },
+          {
+            "text": "Eric Taveras — in their life, C116: handled attention with practiced ease",
+            "run": "c116 handled attention practiced ease"
+          }
+        ],
+        "words": 1673,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 8,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 384,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    }
+  ],
+  "checkTotals": {
+    "seats": 7,
+    "toolSeats": 7,
+    "capHits": 0,
+    "thin": 0,
+    "verbatim": 1,
+    "graded": 7,
+    "gradeSum": 21,
+    "gradeMax": [
+      3
+    ]
+  },
+  "ranAt": "2026-11-17T00:25:00.634Z"
+}

@@ -1,0 +1,56 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "115",
+  "persona": "hal-richmond",
+  "byline": "Hal Richmond",
+  "bylinePopid": "POP-00007",
+  "article": "output/cron-compare/staged/sports_c115_hal-richmond_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Vinnie Keane",
+        "role": "mentioned",
+        "popid": "POP-00001",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Grand Lake"
+    ],
+    "claims": [
+      {
+        "claim": "A's — roster-move — supplied C115 line card",
+        "sourceRef": "world_summary_c115.md ## Sports"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-95275fdbd638",
+    "draftSha256": "deb4f6de3c8006b0a197f8775590d8c56b2f4095ff1b6e1f317b63ef8e36d968",
+    "verdict": "output/cron-compare/sports_c115_hal-richmond_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-13T00:17:49.447Z",
+    "contractScore": {
+      "opened": false,
+      "purposeMet": false,
+      "inTarget": true,
+      "inTargetBy": "code floor 800",
+      "words": 975,
+      "short": "The opening paragraph does not establish the ground the man came from, and the piece omits his own recorded words.",
+      "score": 1,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "deb4f6de3c8006b0a197f8775590d8c56b2f4095ff1b6e1f317b63ef8e36d968",
+      "costUsd": 0.0024
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-13T00:17:55.692Z"
+}

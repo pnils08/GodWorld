@@ -1,0 +1,594 @@
+[
+  {
+    "pop": "POP-01023",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01023\",\"name\":\"Adash Stanley\",\"role\":\"PG / The Oaks\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Talia Finch\",\"question\":\"How do Adash Stanley's neighbors feel about his performance this season? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-oaks-ground\",\"hood\":\"San Antonio\",\"focus\":\"Oaks fans and their reaction to the team's success\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C115\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Adash Stanley — PG / The Oaks — Downtown\",\"evidence\":[{\"id\":\"EV-3b6f2c20fe\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C115\",\"text\":\"excited\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Notebook (feed): The Oaks put the Orlando Magic away in the first quarter and made it three straight, Oaks 125 - Magic 109, in front of a 94% crowd at home. Oakland scored 41 in the opening quarter to lead 41-27, went up 73-52 at the half and 101-76 after three, and the Magic only got it respectable by winning a garbage-time fourth 33-24. Adash Stanley led with 24 points, 8 assists and zero turnovers, hitting 6 of 12 from three. AJ Dybantsa bounced back from his 4 for 15 night against Oklahoma C\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C115\",\"id\":\"F-657394860e8d\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"Oaks ground read C115 — excited\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C115\",\"id\":\"F-23ce024e5253\"},{\"t\":\"FACT\",\"text\":\"excited\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C115\",\"id\":\"F-fc004a14320a\"},{\"t\":\"FACT\",\"text\":\"Oaks fans, C115: excited\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C115\",\"id\":\"F-ae3fcf27c705\"},{\"t\":\"FACT\",\"text\":\"Room mood, C115: electric\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C115\",\"id\":\"F-6c55861f9d49\"},{\"t\":\"FACT\",\"text\":\"Notebook (feed): The Oaks went into a sold-out Philadelphia, lost a 14-point lead, and won it back with the best fourth quarter of their young season, Oaks 120 - 76ers 106. Oakland opened 31-17, but the 76ers poured in 36 in the second to cut it to 56-53 at the half and won the third 29-24 to lead 82-80 going into the fourth. Then the Oaks scored 40 and held Philadelphia to 24, turning a two-point deficit into a 14-point win. AJ Dybantsa led with 25 on 10 of 16 and a perfect 3 for 3 from deep, f\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C115\",\"id\":\"F-310e6bf543ef\"},{\"t\":\"FACT\",\"text\":\"Oaks — game-result (early-season), C115: Down two after three in Philadelphia, the Oaks drop 40 in the fourth and Hayward scores a career high. Oaks 120 - 76ers 106\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C115\",\"id\":\"F-3a5f97110a9a\"},{\"t\":\"FACT\",\"text\":\"Adash Stanley — PG / The Oaks — Downtown\",\"src\":\"Simulation_Ledger profile for POP-01023\",\"id\":\"F-26cdcab1a2d4\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01023",
+        "name": "Adash Stanley",
+        "role": "PG / The Oaks",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Talia Finch",
+        "question": "How do Adash Stanley's neighbors feel about his performance this season? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-oaks-ground",
+        "hood": "San Antonio",
+        "focus": "Oaks fans and their reaction to the team's success",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C115"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Adash Stanley — PG / The Oaks — Downtown",
+        "evidence": [
+          {
+            "id": "EV-3b6f2c20fe",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C115",
+            "text": "excited"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Notebook (feed): The Oaks put the Orlando Magic away in the first quarter and made it three straight, Oaks 125 - Magic 109, in front of a 94% crowd at home. Oakland scored 41 in the opening quarter to lead 41-27, went up 73-52 at the half and 101-76 after three, and the Magic only got it respectable by winning a garbage-time fourth 33-24. Adash Stanley led with 24 points, 8 assists and zero turnovers, hitting 6 of 12 from three. AJ Dybantsa bounced back from his 4 for 15 night against Oklahoma C",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+          "id": "F-657394860e8d"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C115",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-bc84fc0b7718"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks ground read C115 — excited",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C115",
+          "id": "F-23ce024e5253"
+        },
+        {
+          "t": "FACT",
+          "text": "excited",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C115",
+          "id": "F-fc004a14320a"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks fans, C115: excited",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+          "id": "F-ae3fcf27c705"
+        },
+        {
+          "t": "FACT",
+          "text": "Room mood, C115: electric",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+          "id": "F-6c55861f9d49"
+        },
+        {
+          "t": "FACT",
+          "text": "Notebook (feed): The Oaks went into a sold-out Philadelphia, lost a 14-point lead, and won it back with the best fourth quarter of their young season, Oaks 120 - 76ers 106. Oakland opened 31-17, but the 76ers poured in 36 in the second to cut it to 56-53 at the half and won the third 29-24 to lead 82-80 going into the fourth. Then the Oaks scored 40 and held Philadelphia to 24, turning a two-point deficit into a 14-point win. AJ Dybantsa led with 25 on 10 of 16 and a perfect 3 for 3 from deep, f",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+          "id": "F-310e6bf543ef"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — game-result (early-season), C115: Down two after three in Philadelphia, the Oaks drop 40 in the fourth and Hayward scores a career high. Oaks 120 - 76ers 106",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+          "id": "F-3a5f97110a9a"
+        },
+        {
+          "t": "FACT",
+          "text": "Adash Stanley — PG / The Oaks — Downtown",
+          "src": "Simulation_Ledger profile for POP-01023",
+          "id": "F-26cdcab1a2d4"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C11, Spring, holiday=none",
+          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+          "id": "F-82d77e9a4a71"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01223",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01223\",\"name\":\"Harry Hayward\",\"role\":\"Oakland Oaks - Power Forward\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Talia Finch\",\"question\":\"What's Harry Hayward's role in the team's success, and how are fans perceiving him? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-oaks-ground\",\"hood\":\"San Antonio\",\"focus\":\"Oaks fans and their reaction to the team's success\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C115\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Harry Hayward — Oakland Oaks - Power Forward — KONO\",\"evidence\":[{\"id\":\"EV-b299f05e9a\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C115\",\"text\":\"excited\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Notebook (feed): Nine games into the Oaks' first season, the most interesting name on the bench is the one nobody mentioned on draft night. Harry Hayward, the second-round power forward on a $4.5M deal, scored a career-high 19 in Philadelphia on 9 of 15 with 7 rebounds and 2 blocks in 22 minutes, and the Oaks needed every point to come back from two down after three. The night before, against Orlando, he played 16 minutes and still found a way onto the stat sheet with 5 points, 2 steals and a bl\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C115\",\"id\":\"F-052e435c05df\"},{\"t\":\"FACT\",\"text\":\"Oaks — player-feature (early-season), C115: Second-round rookie Harry Hayward scores a career high and makes his case for a bigger role\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C115\",\"id\":\"F-f50a3e6cb962\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"Oaks ground read C115 — excited\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C115\",\"id\":\"F-23ce024e5253\"},{\"t\":\"FACT\",\"text\":\"excited\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C115\",\"id\":\"F-fc004a14320a\"},{\"t\":\"FACT\",\"text\":\"Oaks fans, C115: excited\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C115\",\"id\":\"F-ae3fcf27c705\"},{\"t\":\"FACT\",\"text\":\"Room mood, C115: electric\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C115\",\"id\":\"F-6c55861f9d49\"},{\"t\":\"FACT\",\"text\":\"Notebook (feed): The Oaks went into a sold-out Philadelphia, lost a 14-point lead, and won it back with the best fourth quarter of their young season, Oaks 120 - 76ers 106. Oakland opened 31-17, but the 76ers poured in 36 in the second to cut it to 56-53 at the half and won the third 29-24 to lead 82-80 going into the fourth. Then the Oaks scored 40 and held Philadelphia to 24, turning a two-point deficit into a 14-point win. AJ Dybantsa led with 25 on 10 of 16 and a perfect 3 for 3 from deep, f\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C115\",\"id\":\"F-310e6bf543ef\"},{\"t\":\"FACT\",\"text\":\"Harry Hayward — Oakland Oaks - Power Forward — KONO\",\"src\":\"Simulation_Ledger profile for POP-01223\",\"id\":\"F-d07e8ec541ee\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01223",
+        "name": "Harry Hayward",
+        "role": "Oakland Oaks - Power Forward",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Talia Finch",
+        "question": "What's Harry Hayward's role in the team's success, and how are fans perceiving him? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-oaks-ground",
+        "hood": "San Antonio",
+        "focus": "Oaks fans and their reaction to the team's success",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C115"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Harry Hayward — Oakland Oaks - Power Forward — KONO",
+        "evidence": [
+          {
+            "id": "EV-b299f05e9a",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C115",
+            "text": "excited"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Notebook (feed): Nine games into the Oaks' first season, the most interesting name on the bench is the one nobody mentioned on draft night. Harry Hayward, the second-round power forward on a $4.5M deal, scored a career-high 19 in Philadelphia on 9 of 15 with 7 rebounds and 2 blocks in 22 minutes, and the Oaks needed every point to come back from two down after three. The night before, against Orlando, he played 16 minutes and still found a way onto the stat sheet with 5 points, 2 steals and a bl",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+          "id": "F-052e435c05df"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — player-feature (early-season), C115: Second-round rookie Harry Hayward scores a career high and makes his case for a bigger role",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+          "id": "F-f50a3e6cb962"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C115",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-bc84fc0b7718"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks ground read C115 — excited",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C115",
+          "id": "F-23ce024e5253"
+        },
+        {
+          "t": "FACT",
+          "text": "excited",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C115",
+          "id": "F-fc004a14320a"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks fans, C115: excited",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+          "id": "F-ae3fcf27c705"
+        },
+        {
+          "t": "FACT",
+          "text": "Room mood, C115: electric",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+          "id": "F-6c55861f9d49"
+        },
+        {
+          "t": "FACT",
+          "text": "Notebook (feed): The Oaks went into a sold-out Philadelphia, lost a 14-point lead, and won it back with the best fourth quarter of their young season, Oaks 120 - 76ers 106. Oakland opened 31-17, but the 76ers poured in 36 in the second to cut it to 56-53 at the half and won the third 29-24 to lead 82-80 going into the fourth. Then the Oaks scored 40 and held Philadelphia to 24, turning a two-point deficit into a 14-point win. AJ Dybantsa led with 25 on 10 of 16 and a perfect 3 for 3 from deep, f",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+          "id": "F-310e6bf543ef"
+        },
+        {
+          "t": "FACT",
+          "text": "Harry Hayward — Oakland Oaks - Power Forward — KONO",
+          "src": "Simulation_Ledger profile for POP-01223",
+          "id": "F-d07e8ec541ee"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C11, Spring, holiday=none",
+          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+          "id": "F-82d77e9a4a71"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01079",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01079\",\"name\":\"Dillon Brooks\",\"role\":\"SF / The Oaks\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Talia Finch\",\"question\":\"What have you seen, felt, or understood about \\\"Oaks fans and their reaction to the team's success\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-oaks-ground\",\"hood\":\"San Antonio\",\"focus\":\"Oaks fans and their reaction to the team's success\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C115\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Dillon Brooks — SF / The Oaks — West Oakland\",\"evidence\":[{\"id\":\"EV-f4b207400f\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C115\",\"text\":\"excited\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"Oaks ground read C115 — excited\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C115\",\"id\":\"F-23ce024e5253\"},{\"t\":\"FACT\",\"text\":\"excited\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C115\",\"id\":\"F-fc004a14320a\"},{\"t\":\"FACT\",\"text\":\"Oaks fans, C115: excited\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C115\",\"id\":\"F-ae3fcf27c705\"},{\"t\":\"FACT\",\"text\":\"Room mood, C115: electric\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C115\",\"id\":\"F-6c55861f9d49\"},{\"t\":\"FACT\",\"text\":\"Notebook (feed): The Oaks went into a sold-out Philadelphia, lost a 14-point lead, and won it back with the best fourth quarter of their young season, Oaks 120 - 76ers 106. Oakland opened 31-17, but the 76ers poured in 36 in the second to cut it to 56-53 at the half and won the third 29-24 to lead 82-80 going into the fourth. Then the Oaks scored 40 and held Philadelphia to 24, turning a two-point deficit into a 14-point win. AJ Dybantsa led with 25 on 10 of 16 and a perfect 3 for 3 from deep, f\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C115\",\"id\":\"F-310e6bf543ef\"},{\"t\":\"FACT\",\"text\":\"Oaks — game-result (early-season), C115: Down two after three in Philadelphia, the Oaks drop 40 in the fourth and Hayward scores a career high. Oaks 120 - 76ers 106\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C115\",\"id\":\"F-3a5f97110a9a\"},{\"t\":\"FACT\",\"text\":\"Context: record 8-1 · streak W4\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C115\",\"id\":\"F-857c392fa5d5\"},{\"t\":\"FACT\",\"text\":\"Dillon Brooks — SF / The Oaks — West Oakland\",\"src\":\"Simulation_Ledger profile for POP-01079\",\"id\":\"F-c129b9dc1750\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01079",
+        "name": "Dillon Brooks",
+        "role": "SF / The Oaks",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Talia Finch",
+        "question": "What have you seen, felt, or understood about \"Oaks fans and their reaction to the team's success\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-oaks-ground",
+        "hood": "San Antonio",
+        "focus": "Oaks fans and their reaction to the team's success",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C115"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Dillon Brooks — SF / The Oaks — West Oakland",
+        "evidence": [
+          {
+            "id": "EV-f4b207400f",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C115",
+            "text": "excited"
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C115",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-bc84fc0b7718"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks ground read C115 — excited",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C115",
+          "id": "F-23ce024e5253"
+        },
+        {
+          "t": "FACT",
+          "text": "excited",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C115",
+          "id": "F-fc004a14320a"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks fans, C115: excited",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+          "id": "F-ae3fcf27c705"
+        },
+        {
+          "t": "FACT",
+          "text": "Room mood, C115: electric",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+          "id": "F-6c55861f9d49"
+        },
+        {
+          "t": "FACT",
+          "text": "Notebook (feed): The Oaks went into a sold-out Philadelphia, lost a 14-point lead, and won it back with the best fourth quarter of their young season, Oaks 120 - 76ers 106. Oakland opened 31-17, but the 76ers poured in 36 in the second to cut it to 56-53 at the half and won the third 29-24 to lead 82-80 going into the fourth. Then the Oaks scored 40 and held Philadelphia to 24, turning a two-point deficit into a 14-point win. AJ Dybantsa led with 25 on 10 of 16 and a perfect 3 for 3 from deep, f",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+          "id": "F-310e6bf543ef"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — game-result (early-season), C115: Down two after three in Philadelphia, the Oaks drop 40 in the fourth and Hayward scores a career high. Oaks 120 - 76ers 106",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+          "id": "F-3a5f97110a9a"
+        },
+        {
+          "t": "FACT",
+          "text": "Context: record 8-1 · streak W4",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+          "id": "F-857c392fa5d5"
+        },
+        {
+          "t": "FACT",
+          "text": "Dillon Brooks — SF / The Oaks — West Oakland",
+          "src": "Simulation_Ledger profile for POP-01079",
+          "id": "F-c129b9dc1750"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C11, Spring, holiday=none",
+          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+          "id": "F-82d77e9a4a71"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01027",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01027\",\"name\":\"Austin Reaves\",\"role\":\"SG / The Oaks\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Talia Finch\",\"question\":\"What have you seen, felt, or understood about \\\"Oaks fans and their reaction to the team's success\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-oaks-ground\",\"hood\":\"San Antonio\",\"focus\":\"Oaks fans and their reaction to the team's success\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C115\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Austin Reaves — SG / The Oaks — West Oakland\",\"evidence\":[{\"id\":\"EV-909b2f8c6f\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C115\",\"text\":\"excited\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"Oaks ground read C115 — excited\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C115\",\"id\":\"F-23ce024e5253\"},{\"t\":\"FACT\",\"text\":\"excited\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C115\",\"id\":\"F-fc004a14320a\"},{\"t\":\"FACT\",\"text\":\"Oaks fans, C115: excited\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C115\",\"id\":\"F-ae3fcf27c705\"},{\"t\":\"FACT\",\"text\":\"Room mood, C115: electric\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C115\",\"id\":\"F-6c55861f9d49\"},{\"t\":\"FACT\",\"text\":\"Notebook (feed): The Oaks went into a sold-out Philadelphia, lost a 14-point lead, and won it back with the best fourth quarter of their young season, Oaks 120 - 76ers 106. Oakland opened 31-17, but the 76ers poured in 36 in the second to cut it to 56-53 at the half and won the third 29-24 to lead 82-80 going into the fourth. Then the Oaks scored 40 and held Philadelphia to 24, turning a two-point deficit into a 14-point win. AJ Dybantsa led with 25 on 10 of 16 and a perfect 3 for 3 from deep, f\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C115\",\"id\":\"F-310e6bf543ef\"},{\"t\":\"FACT\",\"text\":\"Oaks — game-result (early-season), C115: Down two after three in Philadelphia, the Oaks drop 40 in the fourth and Hayward scores a career high. Oaks 120 - 76ers 106\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C115\",\"id\":\"F-3a5f97110a9a\"},{\"t\":\"FACT\",\"text\":\"Context: record 8-1 · streak W4\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C115\",\"id\":\"F-857c392fa5d5\"},{\"t\":\"FACT\",\"text\":\"Austin Reaves — SG / The Oaks — West Oakland\",\"src\":\"Simulation_Ledger profile for POP-01027\",\"id\":\"F-d1f725faf549\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01027",
+        "name": "Austin Reaves",
+        "role": "SG / The Oaks",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Talia Finch",
+        "question": "What have you seen, felt, or understood about \"Oaks fans and their reaction to the team's success\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-oaks-ground",
+        "hood": "San Antonio",
+        "focus": "Oaks fans and their reaction to the team's success",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C115"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Austin Reaves — SG / The Oaks — West Oakland",
+        "evidence": [
+          {
+            "id": "EV-909b2f8c6f",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C115",
+            "text": "excited"
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C115",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-bc84fc0b7718"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks ground read C115 — excited",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C115",
+          "id": "F-23ce024e5253"
+        },
+        {
+          "t": "FACT",
+          "text": "excited",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C115",
+          "id": "F-fc004a14320a"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks fans, C115: excited",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+          "id": "F-ae3fcf27c705"
+        },
+        {
+          "t": "FACT",
+          "text": "Room mood, C115: electric",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+          "id": "F-6c55861f9d49"
+        },
+        {
+          "t": "FACT",
+          "text": "Notebook (feed): The Oaks went into a sold-out Philadelphia, lost a 14-point lead, and won it back with the best fourth quarter of their young season, Oaks 120 - 76ers 106. Oakland opened 31-17, but the 76ers poured in 36 in the second to cut it to 56-53 at the half and won the third 29-24 to lead 82-80 going into the fourth. Then the Oaks scored 40 and held Philadelphia to 24, turning a two-point deficit into a 14-point win. AJ Dybantsa led with 25 on 10 of 16 and a perfect 3 for 3 from deep, f",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+          "id": "F-310e6bf543ef"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — game-result (early-season), C115: Down two after three in Philadelphia, the Oaks drop 40 in the fourth and Hayward scores a career high. Oaks 120 - 76ers 106",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+          "id": "F-3a5f97110a9a"
+        },
+        {
+          "t": "FACT",
+          "text": "Context: record 8-1 · streak W4",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C115",
+          "id": "F-857c392fa5d5"
+        },
+        {
+          "t": "FACT",
+          "text": "Austin Reaves — SG / The Oaks — West Oakland",
+          "src": "Simulation_Ledger profile for POP-01027",
+          "id": "F-d1f725faf549"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C11, Spring, holiday=none",
+          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+          "id": "F-82d77e9a4a71"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  }
+]

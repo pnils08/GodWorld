@@ -3,28 +3,26 @@
   "cycle": "115",
   "backend": "api",
   "model": "google/gemini-3.7-flash",
-  "draftSha256": "02213ed743a3a566154c4fd0f15f34bb239ae963dd87a00f799963ececc6b4d7",
+  "draftSha256": "4498563ba27f538c0d74b3b11e12bd94011f7b9004053bfd32683cf90ac058be",
   "pass": true,
   "flags": [],
   "flagCount": 0,
   "highSeverityCount": 0,
-  "summary": "All 11 citizen profiles, migration events, household formations, and quotes perfectly match ledger canon and ground truth.",
+  "summary": "All citizen names, biographical data, interview quotes, and civic details match C115 ground truth and ledger profiles with zero canon violations.",
   "review": {
-    "profileId": "the-page",
+    "profileId": "default",
     "canonIntegrity": "pass",
     "texture": "authorized"
   },
   "reviewProfile": {
     "id": "tamsin-lives-v1",
     "packageVersion": "TAMSIN-LIVES-2",
-    "manifestId": "AM-c08188c723c1",
+    "manifestId": "AM-8d01a5afde02",
     "lexicalObservations": [
       {
         "code": "UNAPPROVED_NUMBER",
         "values": [
-          "111",
-          "112",
-          "1978"
+          "2007"
         ]
       }
     ],
@@ -32,23 +30,25 @@
   },
   "nameCheck": {
     "verified": [
-      "Everly Rainey",
-      "Jasmine Torres",
-      "Jesus Jorden",
-      "Kelvon Ochoa",
-      "Latasha Rivera",
-      "Marisol Achebe",
-      "Maurice Franklin",
-      "Mina Kapoor",
-      "Ruth Anyanwu",
-      "Soledad Coleman",
-      "Tom Jilner",
-      "Tomas Aguilar"
+      "Arturo Ramos",
+      "Benji Dillon",
+      "Dominic Okeke-Brandt",
+      "Evan Lewis",
+      "Father Miguel",
+      "Isley Kelley",
+      "John Ellis",
+      "Kai Davis",
+      "Latasha Jefferson",
+      "Lena Marchetti",
+      "Tyler Filet",
+      "Vladimir Gonzalez"
     ],
     "unverified": [
-      "Commercial Stabilization",
-      "Mutual Aid Network",
-      "Tribune's Business"
+      "Biotech Lab Director",
+      "Dillon Clinic",
+      "Foothill Baptist Tabernacle",
+      "Kelley Mercantile",
+      "Portside Bio"
     ]
   },
   "intake": {
@@ -66,21 +66,21 @@
     "pageContradictions": [],
     "packetChecked": true
   },
-  "apiCostUsd": 0.0129,
-  "durationMs": 6861,
+  "apiCostUsd": 0.0127,
+  "durationMs": 5638,
   "parseError": false,
-  "ranAt": "2026-11-12T00:23:10.557Z",
+  "ranAt": "2026-11-14T00:20:32.921Z",
   "contractScore": {
     "opened": true,
     "purposeMet": true,
     "inTarget": true,
     "inTargetBy": "code floor 450",
-    "words": 1305,
+    "words": 1391,
     "short": "",
     "score": 3,
     "max": 3,
     "model": "google/gemini-3.7-flash",
-    "draftSha256": "02213ed743a3a566154c4fd0f15f34bb239ae963dd87a00f799963ececc6b4d7",
-    "costUsd": 0.0015
+    "draftSha256": "4498563ba27f538c0d74b3b11e12bd94011f7b9004053bfd32683cf90ac058be",
+    "costUsd": 0.0014
   }
 }

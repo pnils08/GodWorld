@@ -26,147 +26,147 @@
     "citizen_lookup",
     "citizen_lookup",
     "citizen_lookup",
-    "citizen_lookup",
     "canon_recall",
-    "canon_recall"
+    "canon_recall",
+    "citizen_lookup"
   ],
   "toolCalls": 6,
-  "wordCount": 1305,
+  "wordCount": 1391,
   "targetWords": "450-1200",
   "capHit": 0,
   "checkFlags": [],
   "verbatimWarn": [
     {
-      "text": "Maurice Franklin moved into a place of their own in Rockridge, renting",
-      "run": "moved into a place of their"
+      "text": "Lena Marchetti moved into a place of their own in East Oakland, renting",
+      "run": "lena marchetti moved into a place"
     },
     {
-      "text": "Maurice Franklin — in their life, C114: borrowed against next month to close this one",
-      "run": "borrowed against next month to close"
+      "text": "Lena Marchetti — in their life, C115: heard someone at the cafe complain about the Baylight District noise and bit their tongue",
+      "run": "heard someone cafe complain baylight district noise bit tongue"
     },
     {
-      "text": "Maurice Franklin — in their life, C115: the card statement was the first thing read and the last thing forgotten",
-      "run": "the card statement was the first"
+      "text": "Dominic Okeke-Brandt — in their life, C115: organized the clothing drive donations and recognized a coat they had donated two years ago near the main street sid",
+      "run": "organized the clothing drive donations and"
     },
     {
-      "text": "Maurice Franklin — in their life, C115: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
-      "run": "recognized the oari van idling outside"
+      "text": "Dominic Okeke-Brandt — in their life, C115: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+      "run": "a community feedback session for the"
     },
     {
-      "text": "Maurice Franklin — in their life, C115: brought home a new plant and picked its spot carefully",
-      "run": "brought home a new plant and"
+      "text": "Dominic Okeke-Brandt — in their life, C115: counted cranes on the skyline from the bus stop and got a different number than yesterday",
+      "run": "cranes on the skyline from the"
     },
     {
-      "text": "Soledad Coleman — in their life, C114: badged into the Baylight office early and tried not to think about the protestors from last month",
-      "run": "badged into the baylight office early"
-    },
-    {
-      "text": "Soledad Coleman — in their life, C115: traded an extra ticket for a promise to bring the kid next time",
-      "run": "traded an extra ticket for a"
-    },
-    {
-      "text": "Soledad Coleman — in their life, C115: attended a small local gathering and stayed later than planned",
-      "run": "attended a small local gathering and"
-    },
-    {
-      "text": "Soledad Coleman — in their life, C115: realized the same seven meals had rotated for a month, and shrugged",
-      "run": "realized the same seven meals had"
-    },
-    {
-      "text": "Tom Jilner — in their life, C115: woke up at 5 AM just to have thirty minutes of total silence before the house woke up near a tidy sidewalk stretch",
-      "run": "thirty minutes of total silence before"
-    },
-    {
-      "text": "Tom Jilner — in their life, C115: said no to something and felt the shape of who they are in it",
-      "run": "said no to something and felt"
-    },
-    {
-      "text": "Marisol Achebe — in their life, C114: felt unexpectedly nostalgic at the smell of rain on warm pavement",
-      "run": "felt unexpectedly nostalgic at the smell"
-    },
-    {
-      "text": "Marisol Achebe — in their life, C115: caught themselves bragging a little about the neighborhood lately",
-      "run": "bragging a little about the neighborhood"
-    },
-    {
-      "text": "Mina Kapoor — in their life, C114: the for-rent signs outnumbered the welcome mats this month",
-      "run": "c114 the for rent signs outnumbered"
-    },
-    {
-      "text": "Mina Kapoor — in their life, C115: realized the week had passed without a single thing worth retelling",
-      "run": "passed without a single thing worth"
-    },
-    {
-      "text": "Mina Kapoor — in their life, C115: carried three boxes of canned goods from the pantry truck and felt it in their lower back",
-      "run": "carried three boxes of canned goods"
-    },
-    {
-      "text": "Mina Kapoor — in their life, C115: compared rent notes with a neighbor over the fence in Grand Lake",
-      "run": "compared rent notes with a neighbor"
-    },
-    {
-      "text": "Everly Rainey — in their life, C114: caught their partner humming the song they'd had stuck all day near a civic plaza",
-      "run": "caught their partner humming the song"
-    },
-    {
-      "text": "Everly Rainey — in their life, C115: listened to the ninth inning on the porch radio and let the street hear it too",
-      "run": "listened to the ninth inning on"
-    },
-    {
-      "text": "Tomas Aguilar — in their life, C114: one of the kids asked a question at dinner that stopped the room",
-      "run": "one of the kids asked a"
-    },
-    {
-      "text": "Kelvon Ochoa — moved from Rockridge to Lake Merritt — moving up from Rockridge — sold up and bought in Lake Merritt, Lake Merritt (C115 — what happened in their",
-      "run": "moved from rockridge to lake merritt"
-    },
-    {
-      "text": "Kelvon Ochoa — in their life, C115: The owner at Anthropic is talking about tightening up, and everyone heard it.",
-      "run": "talking about tightening up and everyone"
-    },
-    {
-      "text": "Kelvon Ochoa — in their life, C115: cooked the full Sunday dinner out of habit and packed half of it straight into the freezer near a coffee line",
-      "run": "cooked the full sunday dinner out"
-    },
-    {
-      "text": "Jesus Jorden — in their life, C115: grabbed coffee from the cart outside the hospital before the morning rush hit",
-      "run": "grabbed coffee from the cart outside"
-    },
-    {
-      "text": "Jesus Jorden — in their life, C115: wrote half a letter to family, then decided to call instead",
-      "run": "wrote half a letter to family"
-    },
-    {
-      "text": "Jasmine Torres — in their life, C114: listened to a style of music they'd always skipped, twice",
-      "run": "listened to a style of music"
-    },
-    {
-      "text": "Jasmine Torres — in their life, C115: tried a new recipe that mostly worked",
-      "run": "tried a new recipe that mostly"
-    },
-    {
-      "text": "Jasmine Torres — in their life, C115: heard a kid explain something to a parent with total authority and grinned",
-      "run": "heard a kid explain something to"
-    },
-    {
-      "text": "Ruth Anyanwu — moved from East Oakland to Downtown — moving up from East Oakland, Downtown (C115 — what happened in their life, not words they said)",
-      "run": "moved from east oakland to downtown"
-    },
-    {
-      "text": "Ruth Anyanwu — in their life, C115: bought a new A's jersey and the quiet satisfaction of finding a favorite song on the jukebox",
-      "run": "bought a new as jersey and"
-    },
-    {
-      "text": "Ruth Anyanwu — in their life, C115: walked a different street home just to see it",
+      "text": "Kai Davis — in their life, C114: walked a different street home just to see it",
       "run": "walked a different street home just"
     },
     {
-      "text": "Ruth Anyanwu — in their life, C115: played a relative's voicemail twice before saving it again near a lot mid-frame",
-      "run": "played a relatives voicemail twice before"
+      "text": "Kai Davis — in their life, C114: slipped into the back pew at Foothill Baptist Tabernacle just to sit somewhere air-conditioned and quiet",
+      "run": "slipped into the back pew at"
     },
     {
-      "text": "Ruth Anyanwu — in their life, C115: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+      "text": "Kai Davis — in their life, C115: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
       "run": "recognized the oari van idling outside"
+    },
+    {
+      "text": "Kai Davis — in their life, C115: bought a new A's jersey and counted what was going right for once",
+      "run": "bought a new as jersey and"
+    },
+    {
+      "text": "Evan Lewis — in their life, C114: finally fixed the thing that had been broken for months",
+      "run": "finally fixed the thing that had"
+    },
+    {
+      "text": "Evan Lewis — in their life, C114: complained about the neighborhood to anyone who'd listen",
+      "run": "complained about the neighborhood to anyone"
+    },
+    {
+      "text": "Evan Lewis — in their life, C115: found a quiet minute at a neighborhood bakery and still riding the high from last night's win",
+      "run": "found a quiet minute at a"
+    },
+    {
+      "text": "Vladimir Gonzalez — in their life, C115: tried a new recipe that mostly worked",
+      "run": "tried a new recipe that mostly"
+    },
+    {
+      "text": "Vladimir Gonzalez — in their life, C115: read the Tribune's front page twice — once for the news, once to see who was in it",
+      "run": "read the tribunes front page twice"
+    },
+    {
+      "text": "Vladimir Gonzalez — in their life, C115: cooked an old family recipe from memory, mostly getting it right",
+      "run": "cooked an old family recipe from"
+    },
+    {
+      "text": "Isley Kelley — Kelley Mercantile returned $2063 to the line this week, Rockridge (C115 — what happened in their life, not words they said)",
+      "run": "returned 2063 to the line this"
+    },
+    {
+      "text": "Isley Kelley — in their life, C114: fielded a round of texts from people who hadn't called in years",
+      "run": "fielded a round of texts from"
+    },
+    {
+      "text": "Isley Kelley — in their life, C114: felt quietly proud of how they handled something small",
+      "run": "felt quietly proud of how they"
+    },
+    {
+      "text": "Isley Kelley — in their life, C114: looked up how something works and came away more amazed, not less",
+      "run": "looked up how something works and"
+    },
+    {
+      "text": "Benji Dillon — Dillon Clinic returned $7548 to the line this week, Rockridge (C115 — what happened in their life, not words they said)",
+      "run": "returned 7548 to the line this"
+    },
+    {
+      "text": "Benji Dillon — in their life, C114: got recognized twice at the grocery store after the story ran",
+      "run": "recognized twice at the grocery store"
+    },
+    {
+      "text": "Benji Dillon — in their life, C114: the kids could say Father Miguel before they could say the mayor's name",
+      "run": "the kids could say father miguel"
+    },
+    {
+      "text": "Benji Dillon — in their life, C114: felt quietly proud of how they handled something small",
+      "run": "felt quietly proud of how they"
+    },
+    {
+      "text": "Benji Dillon — in their life, C115: put on their good suit for the Sunday service because some traditions still matter",
+      "run": "good suit for the sunday service"
+    },
+    {
+      "text": "Latasha Jefferson — in their life, C114: drank the free cold brew in the company kitchen and felt completely disconnected from the neighborhood outside",
+      "run": "drank the free cold brew in"
+    },
+    {
+      "text": "Latasha Jefferson — in their life, C114: checked the front door lock three times after everyone else was asleep",
+      "run": "checked the front door lock three"
+    },
+    {
+      "text": "Latasha Jefferson — in their life, C114: checked out a new shop that just opened nearby",
+      "run": "checked out a new shop that"
+    },
+    {
+      "text": "Latasha Jefferson — in their life, C115: one of the kids asked a question at dinner that stopped the room",
+      "run": "one of the kids asked a"
+    },
+    {
+      "text": "Tyler Filet — The schedule at Portside Bio came out with their name in the slot that used to belong to someone senior., Lake Merritt (C115 — what happened in th",
+      "run": "name in the slot that used"
+    },
+    {
+      "text": "Tyler Filet — in their life, C114: couldn't sleep for the wind rattling the window frame near a front porch",
+      "run": "couldnt sleep for the wind rattling"
+    },
+    {
+      "text": "Tyler Filet — in their life, C114: wondered if a decision from years back had been the right one",
+      "run": "a decision from years back had"
+    },
+    {
+      "text": "Tyler Filet — in their life, C115: disagreed with a Tribune column out loud to an empty kitchen",
+      "run": "disagreed with a tribune column out"
+    },
+    {
+      "text": "Tyler Filet — in their life, C115: grabbed coffee from the cart outside the hospital before the morning rush hit",
+      "run": "coffee from the cart outside the"
     }
   ],
   "rewardLoop": true,
@@ -175,22 +175,23 @@
     "purposeMet": true,
     "inTarget": true,
     "inTargetBy": "code floor 450",
-    "words": 1305,
+    "words": 1391,
     "short": "",
     "score": 3,
     "max": 3,
     "model": "google/gemini-3.7-flash",
-    "draftSha256": "02213ed743a3a566154c4fd0f15f34bb239ae963dd87a00f799963ececc6b4d7",
-    "costUsd": 0.0015
+    "draftSha256": "4498563ba27f538c0d74b3b11e12bd94011f7b9004053bfd32683cf90ac058be",
+    "costUsd": 0.0014
   },
   "gradeRecord": {
     "recorded": true,
     "line": "graded: 3/3 — nothing fell short"
   },
-  "article": "output/cron-compare/staged/culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged-0023.md",
+  "article": "output/cron-compare/staged/culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged-0021.md",
   "selfRecord": {
     "recorded": true,
-    "out": "om ../.config/godworld/.env // tip: ⌁ auth for agents [www.vestauth.com]\n{\n  \"popId\": \"POP-01210\",\n  \"name\": \"Tamsin Pruitt\",\n  \"recorded\": true,\n  \"text\": \"filed: The Page: Eleven Lives, Cycle 115\"\n}"
+    "out": " from ../.config/godworld/.env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }\n{\n  \"popId\": \"POP-01210\",\n  \"name\": \"Tamsin Pruitt\",\n  \"recorded\": true,\n  \"text\": \"filed: The Lives of C115\"\n}"
   },
-  "ranAt": "2026-11-12T00:23:38.112Z"
+  "ranAt": "2026-11-14T00:20:58.811Z",
+  "dispositionReconciledAt": "2026-11-14T18:00:02.816Z"
 }

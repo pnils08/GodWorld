@@ -1,0 +1,33 @@
+{
+  "office": "health_center",
+  "cycle": 116,
+  "speaker": "Bobby Chen-Ramirez",
+  "cascadeSummary": "This cycle I'm doing exactly what the mayor's Decision 4 asks and nothing more: calendaring the Q3 clinical intake audit to HCAI and the Council Clerk, and scheduling the recurring Telegraph & 47th merchant-clinic verification walkthrough. I'm not claiming either as complete — they get published after they happen, not before. The audit is how this neighborhood checks the work, and the walkthrough is how the shopkeepers get a say in it. On the constituent side, I'm keeping the elders-on-the-bench and storefront voices front and center — the 2.3-mile gap and the working-door test.",
+  "statements": [
+    {
+      "statementId": "STMT-116-health_center-001",
+      "type": "position",
+      "topic": "Q3 intake audit and merchant-clinic verification walkthrough calendared this cycle",
+      "initiative": "INIT-005",
+      "decision": "Calendar the Q3 clinical intake audit filing to HCAI and the Council Clerk, and schedule the recurring Telegraph & 47th merchant-clinic verification walkthrough for this cycle; publish completion and findings afterward, claim neither as complete now.",
+      "quote": "The Q3 audit goes in the same week the walkthrough happens — because a filing that can't survive a walking tour isn't worth the paper I print it on.",
+      "fullStatement": "The Q3 intake audit and the merchant-clinic verification walkthrough are on this cycle's calendar, and I'm claiming neither as done until they're done. Here's what it looks like on the ground: Monday I sit down with my front-desk staff and we pull the intake numbers — who walked in, who got scheduled, who got seen. That's the audit. Wednesday the shopkeepers from Telegraph and 47th walk the building with me and the front-desk team, same as every quarter — they see the real traffic, the real wait times, the lobby at ten in the morning. Thursday the walkthrough notes go in the file next to the audit, and Friday both go to HCAI and the Council Clerk. A reporter who visits sees a working building, not a ribbon cutting: the intake clerk's notebook, the walkthrough sign-in sheet, the door that opens. When it's filed I'll publish the findings — not before. The audit is how the neighborhood checks the work.",
+      "trackerUpdates": {
+        "initiative": "INIT-005",
+        "MilestoneNotes": "C116: Q3 intake audit + merchant walkthrough calendared; filings due this cycle, no completion claimed",
+        "NextScheduledAction": "File Q3 intake audit to HCAI/Council Clerk; complete Telegraph & 47th walkthrough; publish findings",
+        "NextActionCycle": 117
+      }
+    },
+    {
+      "statementId": "STMT-116-health_center-002",
+      "type": "position",
+      "topic": "Constituents — working door and the 2.3-mile gap",
+      "initiative": "INIT-005",
+      "decision": "Keep the working-door test at the center of the health center's community posture: elders-on-the-bench voices and storefront traffic drive what gets reported.",
+      "quote": "A clinic that sits empty isn't a clinic — it's a monument. Ours is a working building, and the audit is how the neighborhood checks the work.",
+      "fullStatement": "The people I'm fighting for this cycle are the ones I see from the site — the elders on the bench at 51st, the shopkeepers on Telegraph, the parents doing the two-bus calculation in their heads. The 2.3-mile gap that no longer stands between them and a door is the whole point. So my constituent work this cycle is simple and it's local: the walkthrough is theirs, the notes go in the file, and the audit is the document the neighborhood can point to. I'm not adding a program or claiming a new dollar. I'm keeping the door open and making the paperwork walk out into the daylight with it.",
+      "trackerUpdates": {}
+    }
+  ]
+}

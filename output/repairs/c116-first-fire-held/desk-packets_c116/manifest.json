@@ -1,0 +1,106 @@
+{
+  "cycle": 109,
+  "generator": "buildDeskPackets v1.7",
+  "packets": [
+    {
+      "desk": "civic",
+      "file": "civic_c109.json",
+      "sizeKB": 1430,
+      "summaryFile": "civic_summary_c109.json",
+      "summarySizeKB": 456.3,
+      "reporters": [
+        "Dr. Lila Mezran",
+        "Luis Navarro",
+        "Carmen Delaine",
+        "Trevor Shimizu",
+        "Sgt. Rachel Torres"
+      ],
+      "events": 3,
+      "seeds": 17,
+      "hooks": 6,
+      "arcs": 0,
+      "storylines": 15,
+      "interviewCandidates": 20,
+      "interviewCandidatesPool": 807
+    },
+    {
+      "desk": "sports",
+      "file": "sports_c109.json",
+      "sizeKB": 1394.9,
+      "summaryFile": "sports_summary_c109.json",
+      "summarySizeKB": 470.3,
+      "reporters": [
+        "Anthony",
+        "P Slayer",
+        "Hal Richmond",
+        "Tanya Cruz",
+        "DJ Hartley",
+        "Simon Leary",
+        "Elliot Marbury"
+      ],
+      "events": 0,
+      "seeds": 3,
+      "hooks": 4,
+      "arcs": 0,
+      "storylines": 25,
+      "interviewCandidates": 20,
+      "interviewCandidatesPool": 807
+    },
+    {
+      "desk": "culture",
+      "file": "culture_c109.json",
+      "sizeKB": 1477.4,
+      "summaryFile": "culture_summary_c109.json",
+      "summarySizeKB": 440.1,
+      "reporters": [
+        "Maria Keen",
+        "Sharon Okafor",
+        "Kai Marston",
+        "Mason Ortega",
+        "Angela Reyes",
+        "Noah Tan"
+      ],
+      "events": 6,
+      "seeds": 27,
+      "hooks": 38,
+      "arcs": 0,
+      "storylines": 11,
+      "interviewCandidates": 20,
+      "interviewCandidatesPool": 807
+    },
+    {
+      "desk": "business",
+      "file": "business_c109.json",
+      "sizeKB": 1321.4,
+      "summaryFile": "business_summary_c109.json",
+      "summarySizeKB": 445.8,
+      "reporters": [
+        "Jordan Velez"
+      ],
+      "events": 2,
+      "seeds": 4,
+      "hooks": 8,
+      "arcs": 0,
+      "storylines": 25,
+      "interviewCandidates": 20,
+      "interviewCandidatesPool": 807
+    },
+    {
+      "desk": "letters",
+      "file": "letters_c109.json",
+      "sizeKB": 1660.7,
+      "summaryFile": "letters_summary_c109.json",
+      "summarySizeKB": 486.8,
+      "reporters": [],
+      "events": 10,
+      "seeds": 51,
+      "hooks": 55,
+      "arcs": 0,
+      "storylines": 30,
+      "interviewCandidates": 20,
+      "interviewCandidatesPool": 807
+    }
+  ],
+  "newsroomMemoryPath": "/root/GodWorld/docs/mags-corliss/NEWSROOM_MEMORY.md",
+  "deskBriefingsDir": "/root/GodWorld/output/desk-briefings"
+}

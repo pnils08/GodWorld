@@ -1,0 +1,41 @@
+{
+  "office": "police_chief",
+  "agentDir": "civic-office-police-chief",
+  "holder": "Rafael Montez",
+  "popid": "POP-00136",
+  "title": "Police Chief",
+  "date": "2026-11-19",
+  "cycle": 116,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "Here's my weekly report for Cycle 116, on the record.\n\n**Chief's Weekly Report — Cycle 116**\n\n**The citywide picture.** Clearance came up to 0.223 from 0.203 last cycle, and average response time dropped to 10.05 minutes from 11.14. Incidents came in at 125, down from 130. Twenty-four arrests this cycle, and custody went from 67 at the start to 48 at the end — 43 exits. We moved people through the system faster than we brought them in, which is the honest read on that number. That's a leaner custody footprint, not a resolution.\n\n**No safety incidents and no open safety arcs on the ledger this cycle.** That's a clean sheet, and I'll take it, but I won't mistake a quiet log for a solved problem.\n\n**Where I'm watching.** The indices are flat across almost every district — that's the defining feature of this cycle. Grand Lake is the exception: flagged rising, PropertyCrimeIndex 44, CrimeIndex 0.70, and the only district to post a positive trend. It also carries the city's best clearance rate at 0.25, so at least the follow-through is keeping pace there. But rising is rising, and I want eyes on it.\n\nTemescal continues to carry the heaviest load: PropertyCrimeIndex 49, the city high, with a PressureRatio of 1.13 — tied for highest in the city with Fruitvale and San Antonio. Temescal also has the worst QolLevel at 47.68. Fruitvale's ViolentCrimeIndex at 31 and East Oakland's at 32 remain the two hardest numbers on this sheet, and both sit alongside their own pressure of 1.10 to 1.13. Those three districts — Temescal, Fruitvale, San Antonio — are where demand is running ahead of what patrol is delivering, and I'm not going to pretend otherwise.\n\nOn the other end, Downtown and Baylight District sit at 0.88 pressure with the lowest property indices in the city, 37 and 32 respectively. Grand Lake and Fruitvale had the cleanest response times at 9.5 minutes; Jack London was slowest at 10.9, and Uptown at 10.8 and Eastlake at 10.8 — all three were also slowest the last time I looked at this. That's a pattern, not noise, and I want to know why those three beats keep running behind.\n\nGlenview carries the lowest clearance rate on the sheet at 0.19, with a ViolentCrimeIndex of 28 and pressure at 1.07. That gap — decent volume, weak follow-through — is the kind of thing that erodes trust faster than any single bad week. It stays on my list.\n\n**Patrol strategy.** I'm holding **balanced**. No district deteriorated sharply enough this cycle to justify shifting resources wholesale, and a rising Grand Lake doesn't yet warrant pulling coverage from Temescal or Fruitvale, where the load is heavier. Balanced keeps even coverage and preserves the OARI co-response coordination established under the East Oakland protocol memo. I'd rather move deliberately than chase a single flag.\n\n**The simple version.** Crime indices flat, clearance and response both improved, custody down, no safety incidents. Three districts running hot on pressure, one district trending up, one district lagging on clearance, and a handful of beats that are consistently slow. That's the work in front of us, and the command staff review gets exactly that list.\n\n— Chief Rafael Montez",
+  "moves": [],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-11-19T11:46:14.602Z",
+  "usage": {
+    "prompt_tokens": 5070,
+    "completion_tokens": 751,
+    "cost": 0.0005
+  },
+  "fellBackFrom": null,
+  "template": "worker/2",
+  "toolTrace": [],
+  "memory": {
+    "searchedOn": "crime clearance response time arrests custody patrol",
+    "entries": 7,
+    "fromSearch": 5,
+    "newest": 2,
+    "failed": []
+  },
+  "figuresNotHanded": [],
+  "finishReason": "stop",
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00136",
+    "id": "bCcXBo2cLm3fpVCUmhfbsL",
+    "customId": "cp-POP-00136-c116-CIVIC-datawake-2026-11-19"
+  }
+}

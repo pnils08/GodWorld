@@ -1,0 +1,67 @@
+{
+  "draft": "output/cron-compare/culture_c115_sharon-okafor_packet-v2_openai-gpt-5-6-luna.md",
+  "cycle": "115",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "01b3b5fd2147e3387e31fdb449266b4ebe1d25fb45e04f29d0d79fe2dca99528",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All named citizen quotes, ledger profiles, and neighborhood associations match ground truth and interview records with zero defects.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "sharon-behavior-ground-v1",
+    "packageVersion": "SHARON-LEP2-1",
+    "manifestId": "AM-81e1eb95e7bd",
+    "lexicalObservations": [],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Anthony Raines",
+      "Benji Dillon",
+      "Lena Cross",
+      "Rowan Pierce",
+      "Vinnie Keane",
+      "Wendell Carter Jr"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0118,
+  "durationMs": 4966,
+  "parseError": false,
+  "ranAt": "2026-11-14T00:17:17.362Z",
+  "contractScore": {
+    "opened": false,
+    "purposeMet": false,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 697,
+    "short": "The piece does not open with a venue, location, and condition, nor does it frame a venue condition as a behavior question.",
+    "score": 1,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "01b3b5fd2147e3387e31fdb449266b4ebe1d25fb45e04f29d0d79fe2dca99528",
+    "costUsd": 0.001
+  }
+}

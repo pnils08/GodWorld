@@ -1,0 +1,33 @@
+{
+  "cycle": 116,
+  "checks": [
+    {
+      "check": "no single office contradicts ITSELF within its own statements",
+      "pass": true,
+      "evidence": "Council D2's four statements consistently hold a stated YES position while denying that a recorded vote occurred (no self-contradiction); Mayor, Okoro, Stabilization Fund, OARI, Transit, Baylight each repeat the same position across their bullets."
+    },
+    {
+      "check": "tracker updates use only contract phases",
+      "pass": true,
+      "evidence": "ImplementationPhase values emitted are only 'vote-ready' (INIT-009), 'dispatch-live' (INIT-002), 'design-phase' (INIT-003), and 'construction-active' (INIT-006) — all contract phases; INIT-007's 'pilot_evaluation' appears only in MilestoneNotes text, not as an ImplementationPhase field."
+    },
+    {
+      "check": "statements read as in-world civic voice",
+      "pass": true,
+      "evidence": "All seats speak in first-person civic register about dockets, roll calls, Clerk references, HCAI filings and district conditions (e.g., D9: 'a report is not a result and an agenda item is not a vote'), with no out-of-world framing."
+    }
+  ],
+  "overall": "pass",
+  "issues": [],
+  "observations": [
+    "Mayor and Stabilization Fund/Okoro/D6/D3/D8 all push INIT-001 charter-renewal to council this cycle with 23-day standard and no new tranche — aligned, not contradictory.",
+    "INIT-009: many seats (Mayor, Okoro, D2, D4, D6, D7, D8, Stabilization Fund) hold YES pending Clerk-certified roll; D2 alone notes the record does not establish whether a recorded vote occurred and requests reconciliation with tracker 'failed' status — a cross-office tension, expected politics.",
+    "INIT-006 (Baylight): Mayor declares no construction-milestone pass or final-vote outcome, Baylight HOLDs at construction-active with findings unpublished, D2 holds determination pending evidence — consistent hold posture across offices.",
+    "INIT-014: Mayor withdraws C115 filing claim and D4 tables council review — aligned pending Clerk reference; no filing reference appears in this cycle's seat statements.",
+    "INIT-002: Mayor, D3, D5, OARI all order D3 Fruitvale briefing published while holding expansion and recording D5 audit/Baylight review incomplete — consistent.",
+    "INIT-003: Transit Hub holds at design-phase pending Fruitvale comment-and-response record while D3 holds design advancement on same evidence — aligned."
+  ],
+  "missingVoices": [
+    "council_d1"
+  ]
+}

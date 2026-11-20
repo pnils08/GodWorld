@@ -1,0 +1,40 @@
+{
+  "model": "anthropic/claude-sonnet-5.5",
+  "calls": [
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Gloria Liu Rockridge"
+      },
+      "resultChars": 1101,
+      "resultHead": "[C108 · daily · Angela Reyes] # Rockridge Schools Maintain Excellence Amid Citywide Shifts In the middle of a bustling school day, Gloria Liu stands in the hallway of Rockridge’s top-ranked school, greeting students by name. Liu, the principal, has been here long enough to see the neighborhood’s reputation for educational excellence solidify—a reputation that remains unshaken even as enrollment fluctuates across the city. “Rockridge schools have always been a cornerstone of this community,” Liu says. “Even with the shifts in enrollment across t\n[C114 · daily · Angela Reyes] The index did slip."
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Mei Wong after-school"
+      },
+      "resultChars": 1101,
+      "resultHead": "[C107 · daily · Angela Reyes] Angela Reyes In Rockridge, Mei Wong watches the afternoon pick-up line from the steps of the after-school program where she works. Around her, parents call out greetings to one another, trading updates on homework and soccer practice. A teacher waves goodbye to a student clutching a backpack too big for their frame. Wong, her hands stuffed in her coat pockets, nods at the familiar rhythm. \"I don't work in KONO, so I can't speak directly to what's happening there with their schools,\" Wong says. \"But here in Rockridg\n[C112 · daily · Angela Reyes] # The Top Mark, Fro"
+    },
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Neighborhood_Demographics",
+        "match": "Rockridge"
+      },
+      "resultChars": 246,
+      "resultHead": "Neighborhood | Students | Adults | Seniors | Unemployed | Sick | LastUpdated | SchoolQualityIndex | GraduationRate | CollegeReadinessRate | TeacherQuality | Funding\nRockridge | 250 | 1511 | 457 | 46 | 96 | 116 | 8.4 | 93.81 | 74.03 | 9.12 | 15000"
+    },
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Community_Programs",
+        "match": "Rockridge"
+      },
+      "resultChars": 61,
+      "resultHead": "no row in Community_Programs names \"Rockridge\" (33 rows read)"
+    }
+  ],
+  "ranAt": "2026-11-18T00:17:40.539Z"
+}

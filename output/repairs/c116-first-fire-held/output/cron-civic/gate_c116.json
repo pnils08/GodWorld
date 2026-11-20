@@ -1,0 +1,36 @@
+{
+  "cycle": 116,
+  "pass": false,
+  "deterministicPass": true,
+  "sanityStatus": "fail-scoped",
+  "failures": [
+    {
+      "check": "sanity-read",
+      "detail": "INIT-003: The phase moves from \"complete\" in the prior row back to \"design-phase\" with no recorded reversal in the notes, which is a backward move against the row's own history."
+    }
+  ],
+  "touchedInitiatives": [
+    "INIT-006",
+    "INIT-014",
+    "INIT-001",
+    "INIT-002",
+    "INIT-005",
+    "INIT-007",
+    "INIT-009",
+    "INIT-010",
+    "INIT-015",
+    "INIT-003"
+  ],
+  "maxRows": 14,
+  "sanity": {
+    "pass": false,
+    "issues": [
+      "INIT-003: The phase moves from \"complete\" in the prior row back to \"design-phase\" with no recorded reversal in the notes, which is a backward move against the row's own history."
+    ],
+    "blockedInitiatives": [
+      "INIT-003"
+    ]
+  },
+  "model": "anthropic/claude-haiku-5.5",
+  "ranAt": "2026-11-15T21:25:41.191Z"
+}

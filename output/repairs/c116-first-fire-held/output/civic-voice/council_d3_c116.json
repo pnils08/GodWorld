@@ -1,0 +1,72 @@
+{
+  "office": "council_d3",
+  "cycle": 116,
+  "speaker": "Rose Delgado",
+  "cascadeSummary": "I am executing and publishing the D3 OARI briefing record with district-level and Fruitvale data, holding Fruitvale expansion until the outstanding D5 audit and Baylight feasibility review close. I am holding Fruitvale Transit Hub Phase II design advancement until the preliminary schematics and a documented Fruitvale comment-and-response record exist. I am requiring the Youth Apprenticeship placement-gap analysis and adjustment plan for publication with explicit Fruitvale review, and calling the next public update for San Antonio's commercial blocks.",
+  "statements": [
+    {
+      "statementId": "STMT-116-council_d3-001",
+      "type": "vote_statement",
+      "topic": "Oakland Alternative Response Initiative — D3 briefing record and expansion hold",
+      "initiative": "Oakland Alternative Response Initiative",
+      "decision": "Execute and publish the D3 briefing record with district-level and Fruitvale data this cycle; hold expansion until the D5 audit and Baylight feasibility review are complete.",
+      "quote": "Fruitvale gets the briefing and the numbers in the daylight — expansion waits until the audit and the Baylight review are actually done.",
+      "fullStatement": "The Oakland Alternative Response Initiative is dispatch-live, and Fruitvale was promised a briefing with its own data, not a citywide average. This cycle I am executing and publishing that D3 briefing record: the actual date and venue, the notice and accessibility arrangements, the district-level and Fruitvale response figures, and the Clerk filing reference. The transit lead reports review sessions opened at the branch library and senior center — I want those on the record too. The prior claim that the briefing happened in East Oakland is not this district's briefing, and I am not treating it as one. Expansion stays held until the D5 audit and Baylight feasibility review close. No one asks this district to accept expansion on a missing record.",
+      "disposition": "YES",
+      "actionAsked": "Publish the D3 briefing record with date, venue, notice, accessibility, district data, and Clerk filing reference; keep expansion held until the D5 audit and Baylight review are complete.",
+      "tone": "direct, district-first",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-116-council_d3-002",
+      "type": "vote_statement",
+      "topic": "Fruitvale Transit Hub Phase II — schematics and public comment-and-response",
+      "initiative": "Fruitvale Transit Hub Phase II — Visioning",
+      "decision": "Hold further design advancement pending delivered preliminary schematics and a documented Fruitvale comment-and-response record; preserve the C86 authorization.",
+      "quote": "The C86 authorization stands. A $230 million design does not advance on schematics nobody has seen and a community review nobody has documented.",
+      "fullStatement": "Fruitvale authorized this vision together, and the C86 authorization stands — I am not reopening that. What I am not doing is letting a $230 million design move forward while the preliminary schematics are still undelivered and the Fruitvale comment-and-response record is still undocumented. The merchants and residents who will live with this hub get to see the drawings and get real answers before the next phase. Hold means hold: schematics delivered, comments received, responses written, and then we talk about advancement. The engine flags a low-severity improvement issue here; that is a reason to finish the record, not to skip it.",
+      "disposition": "NO",
+      "actionAsked": "Deliver the preliminary schematics and publish a documented Fruitvale comment-and-response record before any further design advancement; preserve C86 authorization.",
+      "tone": "firm, process-bound",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-116-council_d3-003",
+      "type": "vote_statement",
+      "topic": "Oakland Youth Apprenticeship Pipeline — placement-gap analysis and Fruitvale review",
+      "initiative": "Oakland Youth Apprenticeship Pipeline",
+      "decision": "Require publication of the placement-gap analysis and adjustment plan with explicit West Oakland and Fruitvale review this cycle; treat nonpublication as a failed implementation step.",
+      "quote": "A seat in the classroom is not a paycheck. Four cycles in one stage — publish the gap analysis and show Fruitvale's young people in the roles.",
+      "fullStatement": "This pipeline has sat in the same stage for four cycles, and the ledger says so. The first cohort placement report came out; what has not come out is the placement-gap analysis and the adjustment plan that tells us why Fruitvale and West Oakland placements fall where they do and what changes. I am requiring publication this cycle with explicit West Oakland and Fruitvale review. If it does not publish, that is a failed implementation step, and I will say so on the record. Announcements that implementation continues are not a gap analysis. Show me the numbers, show me the adjustments, and show me Fruitvale's young people actually holding these roles.",
+      "disposition": "YES",
+      "actionAsked": "Publish the placement-gap analysis and program adjustment plan with explicit West Oakland and Fruitvale review; nonpublication this cycle counts as a failed implementation step.",
+      "tone": "accountability-focused, impatient",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-116-council_d3-004",
+      "type": "statement",
+      "topic": "San Antonio commercial blocks — next public update",
+      "initiative": null,
+      "decision": "Keep San Antonio's slow street trade and flat mood on the district follow-up list and call for a named office and next public update before any closure.",
+      "quote": "San Antonio's commercial blocks are flat and slow, and that is a district matter, not a footnote. Name the office, set the next date, and show the neighbors the work.",
+      "fullStatement": "Fruitvale is busy and upbeat, and San Antonio next door is flat with slow street trade. That contrast is not a mystery and it is not a citywide crisis — it is a district matter, and it belongs to the people who live and trade there. I am keeping San Antonio's commercial blocks on my follow-up list and asking for a named responsible office and a next public update before anyone closes the item. No new spending, no new program announcement — just a name, a date, and visible follow-through the neighbors can inspect. Fruitvale's credit stays with Fruitvale; San Antonio's fight stays with San Antonio.",
+      "disposition": "statement",
+      "actionAsked": "Name a responsible office and a next public update date for San Antonio's commercial blocks before closing the follow-up item.",
+      "tone": "plain, neighborly",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    }
+  ]
+}

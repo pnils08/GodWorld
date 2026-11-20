@@ -1,0 +1,48 @@
+{
+  "cycle": 116,
+  "pass": false,
+  "deterministicPass": true,
+  "sanityStatus": "fail-scoped",
+  "failures": [
+    {
+      "check": "sanity-read",
+      "detail": "INIT-006: Phase moves backward from \"complete\" to \"construction-active\", and Status stays \"passed\" even though the new C116 note says no construction milestone is certified, so the row's status and notes tell different stories."
+    },
+    {
+      "check": "sanity-read",
+      "detail": "INIT-014: Phase moves backward from \"vote-scheduled\" to \"announced\" with no recorded event explaining the regression, while the note now treats the prior C115 filing claim as unverified."
+    },
+    {
+      "check": "sanity-read",
+      "detail": "INIT-003: ImplementationPhase remains \"complete\" while the notes say further design advancement is held pending schematics and a Fruitvale comment-and-response record, so the phase and milestone notes contradict each other."
+    }
+  ],
+  "touchedInitiatives": [
+    "INIT-006",
+    "INIT-005",
+    "INIT-001",
+    "INIT-002",
+    "INIT-003",
+    "INIT-007",
+    "INIT-009",
+    "INIT-010",
+    "INIT-014",
+    "INIT-015"
+  ],
+  "maxRows": 14,
+  "sanity": {
+    "pass": false,
+    "issues": [
+      "INIT-006: Phase moves backward from \"complete\" to \"construction-active\", and Status stays \"passed\" even though the new C116 note says no construction milestone is certified, so the row's status and notes tell different stories.",
+      "INIT-014: Phase moves backward from \"vote-scheduled\" to \"announced\" with no recorded event explaining the regression, while the note now treats the prior C115 filing claim as unverified.",
+      "INIT-003: ImplementationPhase remains \"complete\" while the notes say further design advancement is held pending schematics and a Fruitvale comment-and-response record, so the phase and milestone notes contradict each other."
+    ],
+    "blockedInitiatives": [
+      "INIT-006",
+      "INIT-014",
+      "INIT-003"
+    ]
+  },
+  "model": "anthropic/claude-haiku-5.5",
+  "ranAt": "2026-11-16T01:26:25.741Z"
+}

@@ -1,0 +1,91 @@
+{
+  "office": "council_d2",
+  "agentDir": "civic-office-council-d2",
+  "holder": "Leonard Tran",
+  "popid": "POP-00502",
+  "title": "City Council District 2",
+  "date": "2026-11-12",
+  "cycle": 115,
+  "model": "openai/gpt-6-luna",
+  "statement": "I’m holding off on another move on Baylight District — Final Council Vote. The initiative is marked passed and complete, with no next action scheduled. Jack London’s latest readings show sentiment eased while retail vitality rose; I’d rather review implementation outcomes before proposing any further step than treat a completed vote as a reason to act again.",
+  "moves": [],
+  "movesRejected": [],
+  "numberMoved": "0",
+  "ranAt": "2026-11-12T11:51:16.123Z",
+  "usage": {
+    "prompt_tokens": 6671,
+    "completion_tokens": 688,
+    "total_tokens": 7359,
+    "cost": 0.000999895,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 1547,
+      "cache_write_tokens": 5121,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.000999895,
+      "upstream_inference_prompt_cost": 0.000655895,
+      "upstream_inference_completions_cost": 0.000344
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 591,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "fellBackFrom": null,
+  "evidenceGenerationHash": "8bfd87940a666380c5a9b73d2151cff4f6286856fa3673a770c7259a48d6c71b",
+  "evidenceReads": [
+    {
+      "round": 1,
+      "requests": [
+        {
+          "type": "project",
+          "id": "INIT-006"
+        }
+      ],
+      "replies": [
+        {
+          "key": "project/INIT-006",
+          "available": true,
+          "generationHash": "8bfd87940a666380c5a9b73d2151cff4f6286856fa3673a770c7259a48d6c71b",
+          "data": {
+            "id": "INIT-006",
+            "name": "Baylight District — Final Council Vote",
+            "domain": "sports",
+            "phase": "complete",
+            "status": "passed",
+            "nextActionCycle": null,
+            "voteCycle": 83,
+            "stage": null,
+            "cyclesSinceStageChange": 0,
+            "lastStageChangeCycle": 115,
+            "sponsored": false,
+            "hoods": [
+              "Jack London",
+              "Downtown"
+            ],
+            "needsNext": "advance or hold",
+            "budget": "budget $2,100,000,000 left",
+            "requirement": null,
+            "metricEvidence": null
+          }
+        }
+      ]
+    }
+  ],
+  "provider": "OpenAI",
+  "finishReason": "stop",
+  "elapsedMs": 9314,
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00502",
+    "id": "iuiucye8fXvHzffwRbLx53",
+    "customId": "cp-POP-00502-c115-CIVIC-datawake-2026-11-12"
+  }
+}

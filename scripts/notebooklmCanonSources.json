@@ -47,7 +47,8 @@
     "45e84e2f-87a7-4e37-a3ff-2d1f828239ef",
     "06e1843d-5c67-4052-8ddd-de2fc22413d1",
     "972bb82e-70f8-48a2-9bf2-9a9061d11f46",
-    "0f829b78-8866-4af2-9407-24568e65c5a3"
+    "0f829b78-8866-4af2-9407-24568e65c5a3",
+    "4a60554f-6c74-4823-820b-9f8e341d5023"
   ],
   "allowedCanonReferenceSourceIds": [
     "c31ff29f-42d5-4ed3-ba71-620c463a39a6",
@@ -844,6 +845,14 @@
         "Source file: output/lore-quarantine/lore_c114_john-ellis-deep-dive.md",
         "Cycle placement: Y3C10",
         "Verdict: pass (rhea)"
+      ]
+    },
+    "4a60554f-6c74-4823-820b-9f8e341d5023": {
+      "title": "The Cycle Pulse — Y3C11",
+      "classification": "published",
+      "reason": "Published Cycle Pulse edition, added to the permanent notebook by the Saturday run (cron-saturday-run.js stepPublish).",
+      "evidence": [
+        "editions/cycle_pulse_c115.txt"
       ]
     }
   }

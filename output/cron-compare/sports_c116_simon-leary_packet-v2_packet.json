@@ -1,0 +1,677 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "116",
+  "persona": "simon-leary",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Simon Leary",
+    "popid": "POP-00016"
+  },
+  "assignment": {
+    "story": {
+      "angle": "The Oaks record is 8-1.",
+      "label": "The Oaks record is 8-1.",
+      "hookLine": "The Oaks record is 8-1.",
+      "kind": "long-view-signal",
+      "hood": "West Oakland",
+      "popids": [
+        "POP-01022",
+        "POP-00527",
+        "POP-01046"
+      ],
+      "citizens": [
+        "Wilson Shepard (POP-01022)",
+        "Mike Paulson (POP-00527)",
+        "Elliot Abraham (POP-01046)"
+      ],
+      "ref": "world_summary_c116.md ## Sports",
+      "cycle": 116
+    }
+  },
+  "angle": "output/cron-compare/sports_c116_simon-leary_packet-v2_angle.json",
+  "quotesRequested": 3,
+  "quotesLanded": 2,
+  "quotes": [
+    {
+      "pop": "POP-01022",
+      "name": "Wilson Shepard",
+      "quote": "Structure is what holds when the names change. I've seen it in my own locker room — we went 0-9 before anyone counted a game, and the structure didn't wobble because the people in it kept doing their jobs. Same thing with the A's right now. Quintero sliding to first, Clark and Hernandez competing at third — that's not a rebuild, that's a system that trusts the next guy in. The record is just the wall. The hands change, but the wall doesn't move if the foundation's real. That's what I tell my guys when they start reading their own headlines: the ranking is a mirror, not a load-bearing beam. What holds is the work, day in and day out.",
+      "disp": "steady, hard to shake; a real fan, plans around games; somewhat sociable; somewhat ambitious",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\"answer\":\"quote\",\"quote\":\"Structure is what holds when the names change. I've seen it in my own locker room — we went 0-9 before anyone counted a game, and the structure didn't wobble because the people in it kept doing their jobs. Same thing with the A's right now. Quintero sliding to first, Clark and Hernandez competing at third — that's not a rebuild, that's a system that trusts the next guy in. The record is just the wall. The hands change, but the wall doesn't move if the foundation's real. That's what I tell my guys when they start reading their own headlines: the ranking is a mirror, not a load-bearing beam. What holds is the work, day in and day out.\",\"fact_ids\":[\"F-cd9d6df1f0ce\"],\"basis\":\"lived-context\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-cd9d6df1f0ce"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01022-61b2a19eba",
+        "authoredQuote": true,
+        "publishableQuote": "Structure is what holds when the names change. I've seen it in my own locker room — we went 0-9 before anyone counted a game, and the structure didn't wobble because the people in it kept doing their jobs. Same thing with the A's right now. Quintero sliding to first, Clark and Hernandez competing at third — that's not a rebuild, that's a system that trusts the next guy in. The record is just the wall. The hands change, but the wall doesn't move if the foundation's real. That's what I tell my guys when they start reading their own headlines: the ranking is a mirror, not a load-bearing beam. What holds is the work, day in and day out."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01022",
+          "name": "Wilson Shepard",
+          "role": "Head Coach, Oakland Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Simon Leary",
+          "question": "When the infield shifts and the record holds, what does that tell you about the structure versus the people in it? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "long-view-signal",
+          "hood": "West Oakland",
+          "focus": "The 8-1 record as a load-bearing structure that holds through a role change — Quintero to first, Clark and Hernandez at third — and what continuity means when the hands change but the wall does not.",
+          "src": "world_summary_c116.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Wilson Shepard — Head Coach, Oakland Oaks",
+          "evidence": [
+            {
+              "id": "EV-10cb2b6f6d",
+              "src": "world_summary_c116.md ## Sports",
+              "text": "The Oaks record is 8-1."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks record is 8-1.",
+            "src": "world_summary_c116.md ## Sports",
+            "id": "F-cd9d6df1f0ce"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks have won 4 straight.",
+            "src": "world_summary_c116.md ## Sports",
+            "id": "F-a314c794ecea"
+          },
+          {
+            "t": "FACT",
+            "text": "Wilson Shepard — Head Coach, Oakland Oaks",
+            "src": "Simulation_Ledger profile for POP-01022",
+            "id": "F-bf4cd0f8b3df"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00527",
+      "name": "Mike Paulson",
+      "quote": "Look, the record is the record. Eight and one is eight and one, and nobody's giving it back because the lineup card changed. But the question of whose record it is — that's the wrong way to look at it. The architecture is the organization. The players are the load-bearing walls. You take one out, you brace it, you move on. Quintero sliding to first, Clark and Hernandez at third — that's us bracing. The wall doesn't fall because the hands change. It holds because the foundation was laid right. That's what I tell myself on the days it doesn't hold.",
+      "disp": "can't switch off, working themselves thin; draws people in, deep with them; steady, hard to shake; principled, plays it straight; a real fan, plans around games; somewhat curious",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Look, the record is the record. Eight and one is eight and one, and nobody's giving it back because the lineup card changed. But the question of whose record it is — that's the wrong way to look at it. The architecture is the organization. The players are the load-bearing walls. You take one out, you brace it, you move on. Quintero sliding to first, Clark and Hernandez at third — that's us bracing. The wall doesn't fall because the hands change. It holds because the foundation was laid right. That's what I tell myself on the days it doesn't hold.\",\n  \"fact_ids\": [\"F-cd9d6df1f0ce\", \"F-a314c794ecea\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-cd9d6df1f0ce",
+          "F-a314c794ecea"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00527-2b45ff73d2",
+        "authoredQuote": true,
+        "publishableQuote": "Look, the record is the record. Eight and one is eight and one, and nobody's giving it back because the lineup card changed. But the question of whose record it is — that's the wrong way to look at it. The architecture is the organization. The players are the load-bearing walls. You take one out, you brace it, you move on. Quintero sliding to first, Clark and Hernandez at third — that's us bracing. The wall doesn't fall because the hands change. It holds because the foundation was laid right. That's what I tell myself on the days it doesn't hold."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00527",
+          "name": "Mike Paulson",
+          "role": "General Manager, Oakland A's & The Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Simon Leary",
+          "question": "Does a record that survives a role change read as the team's architecture or as the players' individual load-bearing? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "long-view-signal",
+          "hood": "West Oakland",
+          "focus": "The 8-1 record as a load-bearing structure that holds through a role change — Quintero to first, Clark and Hernandez at third — and what continuity means when the hands change but the wall does not.",
+          "src": "world_summary_c116.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Mike Paulson — General Manager, Oakland A's & The Oaks",
+          "evidence": [
+            {
+              "id": "EV-db21d4bf43",
+              "src": "world_summary_c116.md ## Sports",
+              "text": "The Oaks record is 8-1."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks record is 8-1.",
+            "src": "world_summary_c116.md ## Sports",
+            "id": "F-cd9d6df1f0ce"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks have won 4 straight.",
+            "src": "world_summary_c116.md ## Sports",
+            "id": "F-a314c794ecea"
+          },
+          {
+            "t": "FACT",
+            "text": "Mike Paulson — General Manager, Oakland A's & The Oaks",
+            "src": "Simulation_Ledger profile for POP-00527",
+            "id": "F-361f212af77a"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-01022",
+      "name": "Wilson Shepard",
+      "quote": "Structure is what holds when the names change. I've seen it in my own locker room — we went 0-9 before anyone counted a game, and the structure didn't wobble because the people in it kept doing their jobs. Same thing with the A's right now. Quintero sliding to first, Clark and Hernandez competing at third — that's not a rebuild, that's a system that trusts the next guy in. The record is just the wall. The hands change, but the wall doesn't move if the foundation's real. That's what I tell my guys when they start reading their own headlines: the ranking is a mirror, not a load-bearing beam. What holds is the work, day in and day out.",
+      "disp": "steady, hard to shake; a real fan, plans around games; somewhat sociable; somewhat ambitious",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\"answer\":\"quote\",\"quote\":\"Structure is what holds when the names change. I've seen it in my own locker room — we went 0-9 before anyone counted a game, and the structure didn't wobble because the people in it kept doing their jobs. Same thing with the A's right now. Quintero sliding to first, Clark and Hernandez competing at third — that's not a rebuild, that's a system that trusts the next guy in. The record is just the wall. The hands change, but the wall doesn't move if the foundation's real. That's what I tell my guys when they start reading their own headlines: the ranking is a mirror, not a load-bearing beam. What holds is the work, day in and day out.\",\"fact_ids\":[\"F-cd9d6df1f0ce\"],\"basis\":\"lived-context\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-cd9d6df1f0ce"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01022-61b2a19eba",
+        "authoredQuote": true,
+        "publishableQuote": "Structure is what holds when the names change. I've seen it in my own locker room — we went 0-9 before anyone counted a game, and the structure didn't wobble because the people in it kept doing their jobs. Same thing with the A's right now. Quintero sliding to first, Clark and Hernandez competing at third — that's not a rebuild, that's a system that trusts the next guy in. The record is just the wall. The hands change, but the wall doesn't move if the foundation's real. That's what I tell my guys when they start reading their own headlines: the ranking is a mirror, not a load-bearing beam. What holds is the work, day in and day out."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01022",
+          "name": "Wilson Shepard",
+          "role": "Head Coach, Oakland Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Simon Leary",
+          "question": "When the infield shifts and the record holds, what does that tell you about the structure versus the people in it? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "long-view-signal",
+          "hood": "West Oakland",
+          "focus": "The 8-1 record as a load-bearing structure that holds through a role change — Quintero to first, Clark and Hernandez at third — and what continuity means when the hands change but the wall does not.",
+          "src": "world_summary_c116.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Wilson Shepard — Head Coach, Oakland Oaks",
+          "evidence": [
+            {
+              "id": "EV-10cb2b6f6d",
+              "src": "world_summary_c116.md ## Sports",
+              "text": "The Oaks record is 8-1."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks record is 8-1.",
+            "src": "world_summary_c116.md ## Sports",
+            "id": "F-cd9d6df1f0ce"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks have won 4 straight.",
+            "src": "world_summary_c116.md ## Sports",
+            "id": "F-a314c794ecea"
+          },
+          {
+            "t": "FACT",
+            "text": "Wilson Shepard — Head Coach, Oakland Oaks",
+            "src": "Simulation_Ledger profile for POP-01022",
+            "id": "F-bf4cd0f8b3df"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00527",
+      "name": "Mike Paulson",
+      "quote": "Look, the record is the record. Eight and one is eight and one, and nobody's giving it back because the lineup card changed. But the question of whose record it is — that's the wrong way to look at it. The architecture is the organization. The players are the load-bearing walls. You take one out, you brace it, you move on. Quintero sliding to first, Clark and Hernandez at third — that's us bracing. The wall doesn't fall because the hands change. It holds because the foundation was laid right. That's what I tell myself on the days it doesn't hold.",
+      "disp": "can't switch off, working themselves thin; draws people in, deep with them; steady, hard to shake; principled, plays it straight; a real fan, plans around games; somewhat curious",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Look, the record is the record. Eight and one is eight and one, and nobody's giving it back because the lineup card changed. But the question of whose record it is — that's the wrong way to look at it. The architecture is the organization. The players are the load-bearing walls. You take one out, you brace it, you move on. Quintero sliding to first, Clark and Hernandez at third — that's us bracing. The wall doesn't fall because the hands change. It holds because the foundation was laid right. That's what I tell myself on the days it doesn't hold.\",\n  \"fact_ids\": [\"F-cd9d6df1f0ce\", \"F-a314c794ecea\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-cd9d6df1f0ce",
+          "F-a314c794ecea"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00527-2b45ff73d2",
+        "authoredQuote": true,
+        "publishableQuote": "Look, the record is the record. Eight and one is eight and one, and nobody's giving it back because the lineup card changed. But the question of whose record it is — that's the wrong way to look at it. The architecture is the organization. The players are the load-bearing walls. You take one out, you brace it, you move on. Quintero sliding to first, Clark and Hernandez at third — that's us bracing. The wall doesn't fall because the hands change. It holds because the foundation was laid right. That's what I tell myself on the days it doesn't hold."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00527",
+          "name": "Mike Paulson",
+          "role": "General Manager, Oakland A's & The Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Simon Leary",
+          "question": "Does a record that survives a role change read as the team's architecture or as the players' individual load-bearing? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "long-view-signal",
+          "hood": "West Oakland",
+          "focus": "The 8-1 record as a load-bearing structure that holds through a role change — Quintero to first, Clark and Hernandez at third — and what continuity means when the hands change but the wall does not.",
+          "src": "world_summary_c116.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Mike Paulson — General Manager, Oakland A's & The Oaks",
+          "evidence": [
+            {
+              "id": "EV-db21d4bf43",
+              "src": "world_summary_c116.md ## Sports",
+              "text": "The Oaks record is 8-1."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks record is 8-1.",
+            "src": "world_summary_c116.md ## Sports",
+            "id": "F-cd9d6df1f0ce"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks have won 4 straight.",
+            "src": "world_summary_c116.md ## Sports",
+            "id": "F-a314c794ecea"
+          },
+          {
+            "t": "FACT",
+            "text": "Mike Paulson — General Manager, Oakland A's & The Oaks",
+            "src": "Simulation_Ledger profile for POP-00527",
+            "id": "F-361f212af77a"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01046",
+      "name": "Elliot Abraham",
+      "quote": null,
+      "disp": "a real fan, plans around games; somewhat sociable; fairly steady",
+      "recorded": false,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: answer must be quote|abstain",
+      "raw": "```json\n{\n  \"answer\": \"I see the arrangement. The streak is just what happens when the arrangement holds. We put a lot into building this thing the right way — the defense, the rotations, the way guys trust each other out there. That doesn't happen by accident, and it doesn't show up in a preseason box score. So yeah, 8-1 feels good, but what feels better is knowing why it's 8-1. That's the part that travels.\",\n  \"fact_ids\": [\"F-cd9d6df1f0ce\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01046",
+          "name": "Elliot Abraham",
+          "role": "General Manager, Oakland Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Simon Leary",
+          "question": "When you look at an 8-1 start, do you see the streak or the arrangement that made it possible? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "long-view-signal",
+          "hood": "West Oakland",
+          "focus": "The 8-1 record as a load-bearing structure that holds through a role change — Quintero to first, Clark and Hernandez at third — and what continuity means when the hands change but the wall does not.",
+          "src": "world_summary_c116.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Elliot Abraham — General Manager, Oakland Oaks",
+          "evidence": [
+            {
+              "id": "EV-06aa83271b",
+              "src": "world_summary_c116.md ## Sports",
+              "text": "The Oaks record is 8-1."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks record is 8-1.",
+            "src": "world_summary_c116.md ## Sports",
+            "id": "F-cd9d6df1f0ce"
+          },
+          {
+            "t": "FACT",
+            "text": "The Oaks have won 4 straight.",
+            "src": "world_summary_c116.md ## Sports",
+            "id": "F-a314c794ecea"
+          },
+          {
+            "t": "FACT",
+            "text": "Elliot Abraham — General Manager, Oakland Oaks",
+            "src": "Simulation_Ledger profile for POP-01046",
+            "id": "F-22027af5ba3d"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-11-19T19:16:32.865Z"
+}

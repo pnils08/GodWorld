@@ -1,0 +1,66 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "115",
+  "persona": "ines-sorensen",
+  "byline": "Ines Sorensen",
+  "bylinePopid": "POP-01211",
+  "article": "output/cron-compare/staged/culture_c115_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.staged-0020.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Hazel Lanning",
+        "role": "mentioned",
+        "popid": "POP-00982"
+      },
+      {
+        "name": "Harry Hayward",
+        "role": "mentioned",
+        "popid": "POP-01223"
+      },
+      {
+        "name": "Brooklyn Nguyen",
+        "role": "mentioned",
+        "popid": "POP-00184",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "I've noticed the block's been quiet this week, and people are whispering about someone from the neighborhood, but I haven't caught the name. I'm not sure if it's related to another store closing.",
+        "sourceRef": "citizenVoice PRESS Hazel Lanning"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "gate": "off",
+    "model": null,
+    "manifestId": null,
+    "draftSha256": "babda51f6021c97f594dfad0e6266df77c79b733319cb9d5510539d63edba09d",
+    "verdict": null,
+    "ranAt": "2026-11-13T00:20:48.467Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 300",
+      "words": 537,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "scoredWithoutRhea": true,
+      "draftSha256": "babda51f6021c97f594dfad0e6266df77c79b733319cb9d5510539d63edba09d"
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-13T00:20:48.467Z"
+}

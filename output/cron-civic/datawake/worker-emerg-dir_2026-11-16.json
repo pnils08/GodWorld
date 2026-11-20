@@ -1,0 +1,86 @@
+{
+  "office": "worker_emerg_dir",
+  "agentDir": "worker-emerg-dir",
+  "holder": "Shawna Delgado",
+  "popid": "POP-00152",
+  "title": "Emergency Management Director",
+  "date": "2026-11-16",
+  "cycle": 116,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "Let me check transit metrics and the current cycle's ledger for the snarl itself.",
+  "moves": [],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-11-16T11:46:46.444Z",
+  "usage": {
+    "prompt_tokens": 38132,
+    "completion_tokens": 457,
+    "cost": 0.0072
+  },
+  "fellBackFrom": null,
+  "template": "worker/1",
+  "toolTrace": [
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Event_Arc_Ledger",
+        "match": "CRISIS-114-DOWNTOWN"
+      },
+      "resultChars": 730
+    },
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Neighborhood_Map",
+        "match": "Downtown"
+      },
+      "resultChars": 3005
+    },
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Crime_Metrics"
+      },
+      "resultChars": 2056
+    },
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Ripple_Ledger"
+      },
+      "resultChars": 6084
+    },
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Ripple_Ledger",
+        "match": "Downtown"
+      },
+      "resultChars": 4184
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Downtown Transit Snarl"
+      },
+      "resultChars": 198
+    }
+  ],
+  "memory": {
+    "searchedOn": "crisis emergency weather alerts",
+    "entries": 0,
+    "fromSearch": 0,
+    "newest": 0
+  },
+  "figuresNotHanded": [],
+  "finishReason": "tool_calls",
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00152",
+    "id": "nLvyecURVtk8pHYQGmzLiv",
+    "customId": "cp-POP-00152-c116-CIVIC-datawake-2026-11-16"
+  }
+}

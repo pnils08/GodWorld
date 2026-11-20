@@ -10,21 +10,21 @@
   },
   "assignment": {
     "story": {
-      "ref": "undocked:undocked-pop00184-Y3C11",
-      "label": "UNDOCKED: Brooklyn Nguyen, Tuesday night",
+      "ref": "undocked:undocked-pop01195-Y3C11-e2",
+      "label": "UNDOCKED: Elijah Brown, Thursday night",
       "kind": "undocked",
-      "angle": "UNDOCKED episode: Brooklyn Nguyen, Tuesday night. Standings: Luis Taz leads the board — rank #1, 45.19 achievement points, 0 credits, 2 cycle(s) led, current streak 2. In the chair: Brooklyn Nguyen — Community Programs Coordinator.",
+      "angle": "UNDOCKED episode: Elijah Brown, Thursday night. Standings: Luis Taz leads the board — rank #1, 45.19 achievement points, 0 credits, 2 cycle(s) led, current streak 2. In the chair: Elijah Brown — Electrician.",
       "facts": [
-        "Brooklyn Nguyen's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes, Ridgecrest and Nembus; mined 3 copper ore, 3 iron ore and 1 sol alloy ore; came out even on credits; flew until the show's time ran out.",
-        "Brooklyn Nguyen — Community Programs Coordinator (ledger)"
+        "Elijah Brown's Thursday night on UNDOCKED: went through Last Light, Fang, Errai, Wezen, Brightfall, Birchwood, Pinecross, Aludra, Tejat, Gsc 0002, Torcular, Gsc 0043, Gsc 0045, Dabih, Rimegate, Veritate, Betelgeuse and Gsc 0037; came out even on credits; flew until the show's time ran out.",
+        "Elijah Brown — Electrician (ledger)"
       ],
       "citizens": [
-        "Brooklyn Nguyen — Community Programs Coordinator, UNDOCKED cast pilot"
+        "Elijah Brown — Electrician, UNDOCKED cast pilot"
       ],
       "popids": [
-        "POP-00184"
+        "POP-01195"
       ],
-      "hood": "Fruitvale"
+      "hood": "Rockridge"
     }
   },
   "angle": "output/cron-compare/undocked_c115_nia-rook_packet-v2_angle.json",
@@ -32,55 +32,56 @@
   "quotesLanded": 1,
   "quotes": [
     {
-      "pop": "POP-00184",
-      "name": "Brooklyn Nguyen",
-      "quote": "I came out even on credits after Tuesday's UNDOCKED flight. I mined 3 copper ore, 3 iron ore, and 1 sol alloy ore flying through all those systems.",
-      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; close to family",
+      "pop": "POP-01195",
+      "name": "Elijah Brown",
+      "quote": "I flew on UNDOCKED Thursday night and went through a bunch of systems until the show's time ran out. I ended up even on credits. My standing is 3rd of 30, with 38.35 points and 0 credits, so it didn't seem to hurt me.",
+      "disp": "even-keeled, unremarkable",
       "recorded": true,
       "fallback": null,
-      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I came out even on credits after Tuesday's UNDOCKED flight. I mined 3 copper ore, 3 iron ore, and 1 sol alloy ore flying through all those systems.\",\n  \"fact_ids\": [\"F-d543fd847684\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I flew on UNDOCKED Thursday night and went through a bunch of systems until the show's time ran out. I ended up even on credits. My standing is 3rd of 30, with 38.35 points and 0 credits, so it didn't seem to hurt me.\",\n  \"fact_ids\": [\"F-d4a618c9eb55\", \"F-4a3e1e8e13de\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
       "claims": {
         "answer": "quote",
         "factIds": [
-          "F-d543fd847684"
+          "F-d4a618c9eb55",
+          "F-4a3e1e8e13de"
         ],
         "basis": "lived-context",
         "unverifiedLead": [],
         "abstainReason": null,
-        "quoteId": "Q-POP-00184-e1a9192380",
+        "quoteId": "Q-POP-01195-fdd827c21d",
         "authoredQuote": true,
-        "publishableQuote": "I came out even on credits after Tuesday's UNDOCKED flight. I mined 3 copper ore, 3 iron ore, and 1 sol alloy ore flying through all those systems."
+        "publishableQuote": "I flew on UNDOCKED Thursday night and went through a bunch of systems until the show's time ran out. I ended up even on credits. My standing is 3rd of 30, with 38.35 points and 0 credits, so it didn't seem to hurt me."
       },
       "inputPacket": {
         "v": "LEP/2",
         "wake": "W2",
         "actor": {
-          "id": "POP-00184",
-          "name": "Brooklyn Nguyen",
+          "id": "POP-01195",
+          "name": "Elijah Brown",
           "role": "UNDOCKED pilot",
           "desk": null
         },
         "task": {
           "goal": "Answer one reporter question in your own first-person voice from your simulated life",
           "reporter": "Nia Rook",
-          "question": "How did Brooklyn Nguyen's navigation and mining activities affect their credit balance? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+          "question": "How did Elijah Brown's gameplay on Thursday night affect his standing? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
         },
         "signal": {
           "kind": "undocked",
-          "hood": "Fruitvale",
-          "focus": "Brooklyn Nguyen's UNDOCKED episode on Tuesday night",
-          "src": "undocked:undocked-pop00184-Y3C11"
+          "hood": "Rockridge",
+          "focus": "Elijah Brown's UNDOCKED episode on Thursday night",
+          "src": "undocked:undocked-pop01195-Y3C11-e2"
         },
         "exposure": {
           "basis": [
             "assignment"
           ],
-          "self": "Brooklyn Nguyen — UNDOCKED pilot",
+          "self": "Elijah Brown — UNDOCKED pilot",
           "evidence": [
             {
-              "id": "EV-7035069336",
-              "src": "undocked:undocked-pop00184-Y3C11",
-              "text": "UNDOCKED: Brooklyn Nguyen, Tuesday night"
+              "id": "EV-709bb129ce",
+              "src": "undocked:undocked-pop01195-Y3C11-e2",
+              "text": "UNDOCKED: Elijah Brown, Thursday night"
             }
           ],
           "editorialTarget": true
@@ -88,21 +89,21 @@
         "known": [
           {
             "t": "FACT",
-            "text": "UNDOCKED: Brooklyn Nguyen, Tuesday night",
-            "src": "undocked:undocked-pop00184-Y3C11",
-            "id": "F-cf9ec8f302df"
+            "text": "UNDOCKED: Elijah Brown, Thursday night",
+            "src": "undocked:undocked-pop01195-Y3C11-e2",
+            "id": "F-f5724ab63530"
           },
           {
             "t": "FACT",
-            "text": "Brooklyn Nguyen's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes, Ridgecrest and Nembus; mined 3 copper ore, 3 iron ore and 1 sol alloy ore; came out even on credits; flew until the show's time ran out.",
-            "src": "undocked:undocked-pop00184-Y3C11",
-            "id": "F-d543fd847684"
+            "text": "Elijah Brown's Thursday night on UNDOCKED: went through Last Light, Fang, Errai, Wezen, Brightfall, Birchwood, Pinecross, Aludra, Tejat, Gsc 0002, Torcular, Gsc 0043, Gsc 0045, Dabih, Rimegate, Veritate, Betelgeuse and Gsc 0037; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked:undocked-pop01195-Y3C11-e2",
+            "id": "F-d4a618c9eb55"
           },
           {
             "t": "FACT",
-            "text": "Brooklyn Nguyen — Community Programs Coordinator (ledger)",
-            "src": "undocked:undocked-pop00184-Y3C11",
-            "id": "F-3989ab410ca4"
+            "text": "Elijah Brown — Electrician (ledger)",
+            "src": "undocked:undocked-pop01195-Y3C11-e2",
+            "id": "F-dfd1bc658cb8"
           },
           {
             "t": "FACT",
@@ -112,9 +113,9 @@
           },
           {
             "t": "FACT",
-            "text": "Brooklyn Nguyen — UNDOCKED pilot",
-            "src": "Simulation_Ledger profile for POP-00184",
-            "id": "F-0f7faf8ea20e"
+            "text": "Elijah Brown — UNDOCKED pilot",
+            "src": "Simulation_Ledger profile for POP-01195",
+            "id": "F-4a3e1e8e13de"
           },
           {
             "t": "FACT",
@@ -170,55 +171,56 @@
   "officeSilence": null,
   "interviews": [
     {
-      "pop": "POP-00184",
-      "name": "Brooklyn Nguyen",
-      "quote": "I came out even on credits after Tuesday's UNDOCKED flight. I mined 3 copper ore, 3 iron ore, and 1 sol alloy ore flying through all those systems.",
-      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; close to family",
+      "pop": "POP-01195",
+      "name": "Elijah Brown",
+      "quote": "I flew on UNDOCKED Thursday night and went through a bunch of systems until the show's time ran out. I ended up even on credits. My standing is 3rd of 30, with 38.35 points and 0 credits, so it didn't seem to hurt me.",
+      "disp": "even-keeled, unremarkable",
       "recorded": true,
       "fallback": null,
-      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I came out even on credits after Tuesday's UNDOCKED flight. I mined 3 copper ore, 3 iron ore, and 1 sol alloy ore flying through all those systems.\",\n  \"fact_ids\": [\"F-d543fd847684\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I flew on UNDOCKED Thursday night and went through a bunch of systems until the show's time ran out. I ended up even on credits. My standing is 3rd of 30, with 38.35 points and 0 credits, so it didn't seem to hurt me.\",\n  \"fact_ids\": [\"F-d4a618c9eb55\", \"F-4a3e1e8e13de\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
       "claims": {
         "answer": "quote",
         "factIds": [
-          "F-d543fd847684"
+          "F-d4a618c9eb55",
+          "F-4a3e1e8e13de"
         ],
         "basis": "lived-context",
         "unverifiedLead": [],
         "abstainReason": null,
-        "quoteId": "Q-POP-00184-e1a9192380",
+        "quoteId": "Q-POP-01195-fdd827c21d",
         "authoredQuote": true,
-        "publishableQuote": "I came out even on credits after Tuesday's UNDOCKED flight. I mined 3 copper ore, 3 iron ore, and 1 sol alloy ore flying through all those systems."
+        "publishableQuote": "I flew on UNDOCKED Thursday night and went through a bunch of systems until the show's time ran out. I ended up even on credits. My standing is 3rd of 30, with 38.35 points and 0 credits, so it didn't seem to hurt me."
       },
       "inputPacket": {
         "v": "LEP/2",
         "wake": "W2",
         "actor": {
-          "id": "POP-00184",
-          "name": "Brooklyn Nguyen",
+          "id": "POP-01195",
+          "name": "Elijah Brown",
           "role": "UNDOCKED pilot",
           "desk": null
         },
         "task": {
           "goal": "Answer one reporter question in your own first-person voice from your simulated life",
           "reporter": "Nia Rook",
-          "question": "How did Brooklyn Nguyen's navigation and mining activities affect their credit balance? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+          "question": "How did Elijah Brown's gameplay on Thursday night affect his standing? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
         },
         "signal": {
           "kind": "undocked",
-          "hood": "Fruitvale",
-          "focus": "Brooklyn Nguyen's UNDOCKED episode on Tuesday night",
-          "src": "undocked:undocked-pop00184-Y3C11"
+          "hood": "Rockridge",
+          "focus": "Elijah Brown's UNDOCKED episode on Thursday night",
+          "src": "undocked:undocked-pop01195-Y3C11-e2"
         },
         "exposure": {
           "basis": [
             "assignment"
           ],
-          "self": "Brooklyn Nguyen — UNDOCKED pilot",
+          "self": "Elijah Brown — UNDOCKED pilot",
           "evidence": [
             {
-              "id": "EV-7035069336",
-              "src": "undocked:undocked-pop00184-Y3C11",
-              "text": "UNDOCKED: Brooklyn Nguyen, Tuesday night"
+              "id": "EV-709bb129ce",
+              "src": "undocked:undocked-pop01195-Y3C11-e2",
+              "text": "UNDOCKED: Elijah Brown, Thursday night"
             }
           ],
           "editorialTarget": true
@@ -226,21 +228,21 @@
         "known": [
           {
             "t": "FACT",
-            "text": "UNDOCKED: Brooklyn Nguyen, Tuesday night",
-            "src": "undocked:undocked-pop00184-Y3C11",
-            "id": "F-cf9ec8f302df"
+            "text": "UNDOCKED: Elijah Brown, Thursday night",
+            "src": "undocked:undocked-pop01195-Y3C11-e2",
+            "id": "F-f5724ab63530"
           },
           {
             "t": "FACT",
-            "text": "Brooklyn Nguyen's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes, Ridgecrest and Nembus; mined 3 copper ore, 3 iron ore and 1 sol alloy ore; came out even on credits; flew until the show's time ran out.",
-            "src": "undocked:undocked-pop00184-Y3C11",
-            "id": "F-d543fd847684"
+            "text": "Elijah Brown's Thursday night on UNDOCKED: went through Last Light, Fang, Errai, Wezen, Brightfall, Birchwood, Pinecross, Aludra, Tejat, Gsc 0002, Torcular, Gsc 0043, Gsc 0045, Dabih, Rimegate, Veritate, Betelgeuse and Gsc 0037; came out even on credits; flew until the show's time ran out.",
+            "src": "undocked:undocked-pop01195-Y3C11-e2",
+            "id": "F-d4a618c9eb55"
           },
           {
             "t": "FACT",
-            "text": "Brooklyn Nguyen — Community Programs Coordinator (ledger)",
-            "src": "undocked:undocked-pop00184-Y3C11",
-            "id": "F-3989ab410ca4"
+            "text": "Elijah Brown — Electrician (ledger)",
+            "src": "undocked:undocked-pop01195-Y3C11-e2",
+            "id": "F-dfd1bc658cb8"
           },
           {
             "t": "FACT",
@@ -250,9 +252,9 @@
           },
           {
             "t": "FACT",
-            "text": "Brooklyn Nguyen — UNDOCKED pilot",
-            "src": "Simulation_Ledger profile for POP-00184",
-            "id": "F-0f7faf8ea20e"
+            "text": "Elijah Brown — UNDOCKED pilot",
+            "src": "Simulation_Ledger profile for POP-01195",
+            "id": "F-4a3e1e8e13de"
           },
           {
             "t": "FACT",
@@ -304,5 +306,5 @@
       }
     }
   ],
-  "ranAt": "2026-11-11T19:24:58.325Z"
+  "ranAt": "2026-11-13T19:21:51.472Z"
 }

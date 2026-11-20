@@ -1,0 +1,947 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-01210",
+    "name": "Tamsin Pruitt",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "The lives of C116: 9 people — Wilson Shepard moved into a place of their own in West Oakland, renting",
+    "approach": "Lives approach: this slice is the people something happened to this Cycle — a birth, a death in the house, a hospital stay, a retirement, a promotion; a household set up or a place of their own; a win or a loss on the book; the people a turn of the city reached and what it did to their day; and the smaller moments the record kept. Each person gets their own passage: the event, then the thread under it — the stay or strain that led there, the other lines the record kept for them, what the Tribune or this page already said of them, and what they did next if the record says. Read the thread in order and name where two lines of it do not agree; do not restate a ledger value as the story. The fact exactly right; never a trend, never a number first; the person, not the system the event belongs to. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent p",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "lives",
+      "hood": null,
+      "facts": [
+        "Wilson Shepard moved into a place of their own in West Oakland, renting (C116)",
+        "Wilson Shepard — in their life, C115: fielded a round of texts from people who hadn't called in years",
+        "Wilson Shepard — in their life, C116: saw their name in the sports pages again",
+        "Wilson Shepard — in their life, C116: kept the phone buzzing on the counter all night and let it",
+        "Wilson Shepard — in their life, C116: came home to find the neighbors had left a case of something cold on the porch — still buzzing hours after the game",
+        "Wilson Shepard — the Tribune named them in a piece headlined The Oaks Still Have to Become Somebody’s Team (Sports, C110)",
+        "Wilson Shepard — the Tribune named them in a piece headlined Oakland Oaks Struggle in Preseason Opener (Sports, C108)",
+        "Wilson Shepard — the Tribune named them in a piece headlined The Oaks' Groundswell in Downtown (Sports, C107)",
+        "Theo Rahimi moved into a place of their own in Eastlake, renting (C116)",
+        "Ira Leu — the health center staff unwind at the bar after their first busy week, Temescal — one of 4 people the Cycle's city turn reached (West Oakland Stabilization Fund sitting (0, capped); Oakland Alternative Response Initiative sitting (0, capped); Fruitvale Transit Hub…) (C116)",
+        "Ira Leu — in their life, C115: a flyer for a seniors lunch program flutters on a community bulletin board",
+        "Ira Leu — in their life, C115: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+        "Ira Leu — in their life, C115: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "Ira Leu — in their life, C116: read the Tribune's front page twice — once for the news, once to see who was in it",
+        "Matilda Diop — restocked the rig at shift change and counted the gauze twice, D1 — one of 4 people the Cycle's city turn reached (West Oakland Stabilization Fund sitting (0, capped); Oakland Alternative Response Initiative sitting (0, capped); Oakland Youth…) (C116)",
+        "Matilda Diop — in their life, C115: found a quiet minute at a front porch and the muffled thump of a car stereo playing last summer's hit",
+        "Matilda Diop — in their life, C115: disagreed with a Tribune column out loud to an empty kitchen near a bench near the water",
+        "Matilda Diop — in their life, C116: washed the blood out of the rig at the end of shift and tried not to think about the address",
+        "Darrin Davis — read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots, Piedmont Ave — one of 4 people the Cycle's community turn reached (Darrin Davis — the city is watching: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to…) (C116)",
+        "Darrin Davis — in their life, C115: saw their name in the sports pages again",
+        "Darrin Davis — in their life, C116: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+        "Darrin Davis — in their life, C116: drove the whole way home without remembering a single turn",
+        "Darrin Davis — in their life, C116: stayed thirty minutes after the service just catching up in the parking lot",
+        "Darrin Davis — Lives already wrote this person: what the Cycle's turn reached them with (C115)",
+        "Darrin Davis — the Tribune named them in a piece headlined The Clipping on the Door (Culture, C115)",
+        "Darrin Davis — the Tribune named them in a piece headlined The Pole on Rockridge Corner Is Starting to Say His Name (Culture, C114)",
+        "Darrin Davis — the Tribune named them in a piece headlined Fifty-Six, and the Road Behind It (Sports, C114)",
+        "Omar Farah — picked up the first paycheck and stood in the bank line like an adult, Chinatown (C116 — what happened in their life, not words they said)",
+        "Tariq Cooper — drove alone for the first time and took the long way home on purpose, Piedmont Ave (C116 — what happened in their life, not words they said)",
+        "Tariq Cooper — in their life, C115: iced a rolled ankle and watched film of a game they were not in",
+        "Tariq Cooper — in their life, C116: stayed up past everyone talking about what comes after this",
+        "Sadie Williams — had a rough week and still showed up to the spelling bee, Chinatown (C116 — what happened in their life, not words they said)",
+        "Elias Varek — Civis Systems returned $489017 to the line this week, West Oakland (C116 — what happened in their life, not words they said)",
+        "Elias Varek — in their life, C115: headed over to The Aitken Line Founding Celebration in Jack London last night",
+        "Elias Varek — in their life, C115: Civis Systems returned $488443 to the line this week",
+        "Elias Varek — in their life, C115: Varek Systems returned $34932 to the line this week",
+        "Elias Varek — in their life, C116: Varek Systems returned $35112 to the line this week",
+        "Elias Varek — Lives already wrote this person: a moment the record kept (C115)",
+        "Elias Varek — the Tribune named them in a piece headlined The Lives Page, Cycle 115 (Culture, C115)",
+        "Elias Varek — the Tribune named them in a piece headlined The Board in the Trailer Says 9.5 Percent. Enzo Walker Is Counting Something Else. (Business Reporter, C114)",
+        "Elias Varek — the Tribune named them in a piece headlined The Lives Page, Cycle 114 (Culture, C114)"
+      ],
+      "priorCycle": null,
+      "note": null,
+      "engineHooks": [
+        "A family bought their home in Chinatown (observational analysis)",
+        "A family bought their home in Chinatown (observational analysis)",
+        "A family bought their home in Fruitvale (observational analysis)",
+        "The Keane household (2) moved from Grand Lake to Piedmont Ave — moving up from Grand Lake — sold up and bought in Piedmont Ave (observational analysis)"
+      ],
+      "roomIsYours": "the plain respect, what the event meant in that house or on that block, the detail the family would have picked — from the lines below, never invented",
+      "pageVoices": [
+        "Wilson Shepard, own page (after work, C116): “[long exhale] Yeah, I saw the feed. The media's got a short memory, you know? Ten cycles ago they were asking if I knew what I was doing, and now we're sitting at 8-1 and they're ranking us number one. I appreciate the recognition, but I've…”",
+        "Elias Varek, own page (after work, C116): “(The numbers sit in front of me. I don't have to look at them twice. 616 percent. That's not growth, that's a transformation. But Civis is flat where it matters and the signal is still unanswered. I close the file.) Sixty-point-four. That'…”",
+        "Wilson Shepard, own page (the midday page, C116): “The rankings are a nice feather, but they don’t win us a single possession. San Antonio showed us exactly what happens when you start believing the noise — we went cold in the fourth because we played tight, not because they did anything sp…”"
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-lives",
+    "hood": null,
+    "src": "output/beats/Lived_Events.jsonl @C116 batch 346c91",
+    "plan": {
+      "focus": "The lives of nine individuals who experienced significant events in C116, including Wilson Shepard, Theo Rahimi, Ira Leu, Matilda Diop, Darrin Davis, Omar Farah, Tariq Cooper, Sadie Williams, and Elias Varek."
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-01022",
+        "name": "Wilson Shepard",
+        "profile": "Wilson Shepard — Head Coach, Oakland Oaks — West Oakland",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-01247",
+        "name": "Theo Rahimi",
+        "profile": "Theo Rahimi — student — Eastlake",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00703",
+        "name": "Ira Leu",
+        "profile": "Ira Leu — Artisan Cheesemaker — Temescal",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00789",
+        "name": "Elias Varek",
+        "profile": "Elias Varek — Founder of Civis Systems — West Oakland",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-01022-ce9f8db8ef",
+        "pop": "POP-01022",
+        "name": "Wilson Shepard",
+        "quote": "To be honest, my new living situation in West Oakland hasn't really affected my coaching. I've been focused on the team's performance, and my daily routine hasn't changed much. I'm still the same person, with the same goals for the Oaks.",
+        "factIds": [
+          "F-3e45fbf97f4e",
+          "F-a56b409a3900"
+        ],
+        "src": "packet.W2[POP-01022]"
+      },
+      {
+        "id": "Q-POP-00789-8cf587243e",
+        "pop": "POP-00789",
+        "name": "Elias Varek",
+        "quote": "The recent financial returns for Civis Systems show a minimal change, $489,017 this week, which is just slightly up from the previous week's $488,443. For Varek Systems, the returns are $35,112 this week, compared to $34,932 last week. These numbers indicate a stable, but not growing, revenue stream for both companies. I'm concerned that Civis Systems is flat where it matters, and I'm still trying to understand the implications of this stability.",
+        "factIds": [
+          "F-0bc4eebf1e97",
+          "F-851b1664ccba",
+          "F-2afbf66cd72b",
+          "F-74d65b514df8"
+        ],
+        "src": "packet.W2[POP-00789]"
+      },
+      {
+        "id": "Q-POP-01247-60e3a184ef",
+        "pop": "POP-01247",
+        "name": "Theo Rahimi",
+        "quote": "Having a place of my own in Eastlake feels really great. It's like a new start for me. I've been working hard and it's nice to have a space that's just mine. The neighborhood is coming together too, with all the new households moving in. It's an exciting time.",
+        "factIds": [
+          "F-0af0e067096b",
+          "F-9535b1bfa729"
+        ],
+        "src": "packet.W2[POP-01247]"
+      },
+      {
+        "id": "Q-POP-00703-7b2929bcfb",
+        "pop": "POP-00703",
+        "name": "Ira Leu",
+        "quote": "I didn't go to the health center staff's unwind at the bar, but I heard they were pretty relieved after their first busy week. The Temescal Community Health Center is finally up and running, and I'm sure it's a big change for them.",
+        "factIds": [
+          "F-e39aa03bf9cc",
+          "F-5c2abda03c55"
+        ],
+        "src": "packet.W2[POP-00703]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The new living situation for Wilson Shepard and its potential impact on the Oakland Oaks' performance",
+        "usable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The financial health of Civis Systems and its implications for West Oakland",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C116",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-871096fd8925"
+    },
+    {
+      "t": "FACT",
+      "text": "Wilson Shepard moved into a place of their own in West Oakland, renting",
+      "src": "output/beats/Lived_Events.jsonl @C116 batch 346c91",
+      "id": "F-3e45fbf97f4e"
+    },
+    {
+      "t": "FACT",
+      "text": "Wilson Shepard first. The event is the lead; one true detail; what came next only if the record says.",
+      "src": "output/beats/Lived_Events.jsonl @C116 batch 346c91",
+      "id": "F-c57c4b8f343c"
+    },
+    {
+      "t": "FACT",
+      "text": "Wilson Shepard moved into a place of their own in West Oakland, renting (C116)",
+      "src": "output/beats/Household_Ledger.jsonl @C116",
+      "id": "F-07601503c46b"
+    },
+    {
+      "t": "FACT",
+      "text": "Wilson Shepard — in their life, C115: fielded a round of texts from people who hadn't called in years",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-4df887a862e9"
+    },
+    {
+      "t": "FACT",
+      "text": "Wilson Shepard — in their life, C116: saw their name in the sports pages again",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-42467fe0f2f0"
+    },
+    {
+      "t": "FACT",
+      "text": "Wilson Shepard — in their life, C116: kept the phone buzzing on the counter all night and let it",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-f17d9b042e3b"
+    },
+    {
+      "t": "FACT",
+      "text": "Wilson Shepard — in their life, C116: came home to find the neighbors had left a case of something cold on the porch — still buzzing hours after the game",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-0c69cd168b28"
+    },
+    {
+      "t": "FACT",
+      "text": "Wilson Shepard — the Tribune named them in a piece headlined The Oaks Still Have to Become Somebody’s Team (Sports, C110)",
+      "src": "archive/ARTICLE_INDEX.jsonl c2b99604810ac2b9",
+      "id": "F-71c375b00914"
+    },
+    {
+      "t": "FACT",
+      "text": "Wilson Shepard — the Tribune named them in a piece headlined Oakland Oaks Struggle in Preseason Opener (Sports, C108)",
+      "src": "archive/ARTICLE_INDEX.jsonl 66bd8fa6234066bd",
+      "id": "F-84970f15acae"
+    },
+    {
+      "t": "FACT",
+      "text": "Wilson Shepard — the Tribune named them in a piece headlined The Oaks' Groundswell in Downtown (Sports, C107)",
+      "src": "archive/ARTICLE_INDEX.jsonl bea849f57403bea8",
+      "id": "F-404b35cda8e9"
+    },
+    {
+      "t": "FACT",
+      "text": "Theo Rahimi moved into a place of their own in Eastlake, renting (C116)",
+      "src": "output/beats/Household_Ledger.jsonl @C116",
+      "id": "F-0af0e067096b"
+    },
+    {
+      "t": "FACT",
+      "text": "Ira Leu — the health center staff unwind at the bar after their first busy week, Temescal — one of 4 people the Cycle's city turn reached (West Oakland Stabilization Fund sitting (0, capped); Oakland Alternative Response Initiative sitting (0, capped); Fruitvale Transit Hub…) (C116)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C116",
+      "id": "F-e39aa03bf9cc"
+    },
+    {
+      "t": "FACT",
+      "text": "Ira Leu — in their life, C115: a flyer for a seniors lunch program flutters on a community bulletin board",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-db7716e5ce5f"
+    },
+    {
+      "t": "FACT",
+      "text": "Ira Leu — in their life, C115: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-5c2abda03c55"
+    },
+    {
+      "t": "FACT",
+      "text": "Ira Leu — in their life, C115: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-9ea231077c56"
+    },
+    {
+      "t": "FACT",
+      "text": "Ira Leu — in their life, C116: read the Tribune's front page twice — once for the news, once to see who was in it",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-3b75cf29176f"
+    },
+    {
+      "t": "FACT",
+      "text": "Matilda Diop — restocked the rig at shift change and counted the gauze twice, D1 — one of 4 people the Cycle's city turn reached (West Oakland Stabilization Fund sitting (0, capped); Oakland Alternative Response Initiative sitting (0, capped); Oakland Youth…) (C116)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C116",
+      "id": "F-fcc209b21e83"
+    },
+    {
+      "t": "FACT",
+      "text": "Matilda Diop — in their life, C115: found a quiet minute at a front porch and the muffled thump of a car stereo playing last summer's hit",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-71e175c642b2"
+    },
+    {
+      "t": "FACT",
+      "text": "Matilda Diop — in their life, C115: disagreed with a Tribune column out loud to an empty kitchen near a bench near the water",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-1150ae394a6d"
+    },
+    {
+      "t": "FACT",
+      "text": "Matilda Diop — in their life, C116: washed the blood out of the rig at the end of shift and tried not to think about the address",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-2e42c7d9c1e7"
+    },
+    {
+      "t": "FACT",
+      "text": "Darrin Davis — read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots, Piedmont Ave — one of 4 people the Cycle's community turn reached (Darrin Davis — the city is watching: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to…) (C116)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C116",
+      "id": "F-4130e228c0bd"
+    },
+    {
+      "t": "FACT",
+      "text": "Darrin Davis — in their life, C115: saw their name in the sports pages again",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-47bc0c1db731"
+    },
+    {
+      "t": "FACT",
+      "text": "Darrin Davis — in their life, C116: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-5e0576783bb5"
+    },
+    {
+      "t": "FACT",
+      "text": "Darrin Davis — in their life, C116: drove the whole way home without remembering a single turn",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-db53dfa7c282"
+    },
+    {
+      "t": "FACT",
+      "text": "Darrin Davis — in their life, C116: stayed thirty minutes after the service just catching up in the parking lot",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-91deb298e5ce"
+    },
+    {
+      "t": "FACT",
+      "text": "Darrin Davis — Lives already wrote this person: what the Cycle's turn reached them with (C115)",
+      "src": "output/cron-compare/lives_covered.json",
+      "id": "F-644dadcb48e9"
+    },
+    {
+      "t": "FACT",
+      "text": "Darrin Davis — the Tribune named them in a piece headlined The Clipping on the Door (Culture, C115)",
+      "src": "archive/ARTICLE_INDEX.jsonl e41f10c836cea7b4",
+      "id": "F-e3868548d87a"
+    },
+    {
+      "t": "FACT",
+      "text": "Darrin Davis — the Tribune named them in a piece headlined The Pole on Rockridge Corner Is Starting to Say His Name (Culture, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl db859c2206e0282a",
+      "id": "F-89da35fb6509"
+    },
+    {
+      "t": "FACT",
+      "text": "Darrin Davis — the Tribune named them in a piece headlined Fifty-Six, and the Road Behind It (Sports, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl 6a58d696e6125498",
+      "id": "F-5a5ada4fa33d"
+    },
+    {
+      "t": "FACT",
+      "text": "Omar Farah — picked up the first paycheck and stood in the bank line like an adult, Chinatown (C116 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-5ae08da5d6a1"
+    },
+    {
+      "t": "FACT",
+      "text": "Tariq Cooper — drove alone for the first time and took the long way home on purpose, Piedmont Ave (C116 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-518cde8d9c9d"
+    },
+    {
+      "t": "FACT",
+      "text": "Tariq Cooper — in their life, C115: iced a rolled ankle and watched film of a game they were not in",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-11ef93a4d473"
+    },
+    {
+      "t": "FACT",
+      "text": "Tariq Cooper — in their life, C116: stayed up past everyone talking about what comes after this",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-6212c3151d74"
+    },
+    {
+      "t": "FACT",
+      "text": "Sadie Williams — had a rough week and still showed up to the spelling bee, Chinatown (C116 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-e5de3eb9f934"
+    },
+    {
+      "t": "FACT",
+      "text": "Elias Varek — Civis Systems returned $489017 to the line this week, West Oakland (C116 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-0bc4eebf1e97"
+    },
+    {
+      "t": "FACT",
+      "text": "Elias Varek — in their life, C115: headed over to The Aitken Line Founding Celebration in Jack London last night",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-0fb939bb35e4"
+    },
+    {
+      "t": "FACT",
+      "text": "Elias Varek — in their life, C115: Civis Systems returned $488443 to the line this week",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-851b1664ccba"
+    },
+    {
+      "t": "FACT",
+      "text": "Elias Varek — in their life, C115: Varek Systems returned $34932 to the line this week",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-2afbf66cd72b"
+    },
+    {
+      "t": "FACT",
+      "text": "Elias Varek — in their life, C116: Varek Systems returned $35112 to the line this week",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-74d65b514df8"
+    },
+    {
+      "t": "FACT",
+      "text": "Elias Varek — Lives already wrote this person: a moment the record kept (C115)",
+      "src": "output/cron-compare/lives_covered.json",
+      "id": "F-6303a20f1153"
+    },
+    {
+      "t": "FACT",
+      "text": "Elias Varek — the Tribune named them in a piece headlined The Lives Page, Cycle 115 (Culture, C115)",
+      "src": "archive/ARTICLE_INDEX.jsonl 4da79b355f8b8455",
+      "id": "F-ef923c4b81a5"
+    },
+    {
+      "t": "FACT",
+      "text": "Elias Varek — the Tribune named them in a piece headlined The Board in the Trailer Says 9.5 Percent. Enzo Walker Is Counting Something Else. (Business Reporter, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl 384044afdbad94f5",
+      "id": "F-9f71e8f7811e"
+    },
+    {
+      "t": "FACT",
+      "text": "Elias Varek — the Tribune named them in a piece headlined The Lives Page, Cycle 114 (Culture, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl 9746e4e747ffdd0a",
+      "id": "F-b66573ef89b1"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+      "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+      "id": "F-647fd9067a33"
+    },
+    {
+      "t": "FACT",
+      "text": "Wilson Shepard — Head Coach, Oakland Oaks — West Oakland",
+      "src": "Simulation_Ledger profile for POP-01022",
+      "id": "F-a56b409a3900"
+    },
+    {
+      "t": "FACT",
+      "text": "Theo Rahimi — student — Eastlake",
+      "src": "Simulation_Ledger profile for POP-01247",
+      "id": "F-9535b1bfa729"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "tamsin-lives-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Put the cycle's person events in the paper as news, one person at a time — a birth, a death, a hospital stay, a retirement, a promotion, a household set up or a place of one's own, a win or a loss on the book, what a turn of the city did to someone's day, and the smaller moments the record kept. The event is the lead, the person is named as the slice names them, and what came next appears only when a later record holds it. A stake or a payout is the person's own fact, not a statistic. The page is the city's real calendar; every person on it is one the record holds.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "plain respect — a neighborhood weekly's births-and-obituaries hand, unhurried, exact",
+      "targetWords": "450-1200",
+      "opening": "the heaviest event on the slice, stated as it happened to the named person"
+    },
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "canonBlockers": [
+      "any person, event, quote, venue, employer or family member not on the slice",
+      "a paraphrased or invented quote",
+      "a cause, diagnosis or outcome the record does not state",
+      "a statistic, rate or trend claim — the page is people, not numbers",
+      "intake bookkeeping rows (Emerged into Tier, Added to Simulation_Ledger, Updated to Tier) written as life events",
+      "raw engine labels or decimals printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-e4cd833ed935",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-871096fd8925",
+        "t": "FACT",
+        "text": "Current cycle: C116",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-3e45fbf97f4e",
+        "t": "FACT",
+        "text": "Wilson Shepard moved into a place of their own in West Oakland, renting",
+        "src": "output/beats/Lived_Events.jsonl @C116 batch 346c91"
+      },
+      {
+        "id": "F-c57c4b8f343c",
+        "t": "FACT",
+        "text": "Wilson Shepard first. The event is the lead; one true detail; what came next only if the record says.",
+        "src": "output/beats/Lived_Events.jsonl @C116 batch 346c91"
+      },
+      {
+        "id": "F-07601503c46b",
+        "t": "FACT",
+        "text": "Wilson Shepard moved into a place of their own in West Oakland, renting (C116)",
+        "src": "output/beats/Household_Ledger.jsonl @C116"
+      },
+      {
+        "id": "F-4df887a862e9",
+        "t": "FACT",
+        "text": "Wilson Shepard — in their life, C115: fielded a round of texts from people who hadn't called in years",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-42467fe0f2f0",
+        "t": "FACT",
+        "text": "Wilson Shepard — in their life, C116: saw their name in the sports pages again",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-f17d9b042e3b",
+        "t": "FACT",
+        "text": "Wilson Shepard — in their life, C116: kept the phone buzzing on the counter all night and let it",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-0c69cd168b28",
+        "t": "FACT",
+        "text": "Wilson Shepard — in their life, C116: came home to find the neighbors had left a case of something cold on the porch — still buzzing hours after the game",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-71c375b00914",
+        "t": "FACT",
+        "text": "Wilson Shepard — the Tribune named them in a piece headlined The Oaks Still Have to Become Somebody’s Team (Sports, C110)",
+        "src": "archive/ARTICLE_INDEX.jsonl c2b99604810ac2b9"
+      },
+      {
+        "id": "F-84970f15acae",
+        "t": "FACT",
+        "text": "Wilson Shepard — the Tribune named them in a piece headlined Oakland Oaks Struggle in Preseason Opener (Sports, C108)",
+        "src": "archive/ARTICLE_INDEX.jsonl 66bd8fa6234066bd"
+      },
+      {
+        "id": "F-404b35cda8e9",
+        "t": "FACT",
+        "text": "Wilson Shepard — the Tribune named them in a piece headlined The Oaks' Groundswell in Downtown (Sports, C107)",
+        "src": "archive/ARTICLE_INDEX.jsonl bea849f57403bea8"
+      },
+      {
+        "id": "F-0af0e067096b",
+        "t": "FACT",
+        "text": "Theo Rahimi moved into a place of their own in Eastlake, renting (C116)",
+        "src": "output/beats/Household_Ledger.jsonl @C116"
+      },
+      {
+        "id": "F-e39aa03bf9cc",
+        "t": "FACT",
+        "text": "Ira Leu — the health center staff unwind at the bar after their first busy week, Temescal — one of 4 people the Cycle's city turn reached (West Oakland Stabilization Fund sitting (0, capped); Oakland Alternative Response Initiative sitting (0, capped); Fruitvale Transit Hub…) (C116)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C116"
+      },
+      {
+        "id": "F-db7716e5ce5f",
+        "t": "FACT",
+        "text": "Ira Leu — in their life, C115: a flyer for a seniors lunch program flutters on a community bulletin board",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-5c2abda03c55",
+        "t": "FACT",
+        "text": "Ira Leu — in their life, C115: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-9ea231077c56",
+        "t": "FACT",
+        "text": "Ira Leu — in their life, C115: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-3b75cf29176f",
+        "t": "FACT",
+        "text": "Ira Leu — in their life, C116: read the Tribune's front page twice — once for the news, once to see who was in it",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-fcc209b21e83",
+        "t": "FACT",
+        "text": "Matilda Diop — restocked the rig at shift change and counted the gauze twice, D1 — one of 4 people the Cycle's city turn reached (West Oakland Stabilization Fund sitting (0, capped); Oakland Alternative Response Initiative sitting (0, capped); Oakland Youth…) (C116)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C116"
+      },
+      {
+        "id": "F-71e175c642b2",
+        "t": "FACT",
+        "text": "Matilda Diop — in their life, C115: found a quiet minute at a front porch and the muffled thump of a car stereo playing last summer's hit",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-1150ae394a6d",
+        "t": "FACT",
+        "text": "Matilda Diop — in their life, C115: disagreed with a Tribune column out loud to an empty kitchen near a bench near the water",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-2e42c7d9c1e7",
+        "t": "FACT",
+        "text": "Matilda Diop — in their life, C116: washed the blood out of the rig at the end of shift and tried not to think about the address",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-4130e228c0bd",
+        "t": "FACT",
+        "text": "Darrin Davis — read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots, Piedmont Ave — one of 4 people the Cycle's community turn reached (Darrin Davis — the city is watching: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to…) (C116)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C116"
+      },
+      {
+        "id": "F-47bc0c1db731",
+        "t": "FACT",
+        "text": "Darrin Davis — in their life, C115: saw their name in the sports pages again",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-5e0576783bb5",
+        "t": "FACT",
+        "text": "Darrin Davis — in their life, C116: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-db53dfa7c282",
+        "t": "FACT",
+        "text": "Darrin Davis — in their life, C116: drove the whole way home without remembering a single turn",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-91deb298e5ce",
+        "t": "FACT",
+        "text": "Darrin Davis — in their life, C116: stayed thirty minutes after the service just catching up in the parking lot",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-644dadcb48e9",
+        "t": "FACT",
+        "text": "Darrin Davis — Lives already wrote this person: what the Cycle's turn reached them with (C115)",
+        "src": "output/cron-compare/lives_covered.json"
+      },
+      {
+        "id": "F-e3868548d87a",
+        "t": "FACT",
+        "text": "Darrin Davis — the Tribune named them in a piece headlined The Clipping on the Door (Culture, C115)",
+        "src": "archive/ARTICLE_INDEX.jsonl e41f10c836cea7b4"
+      },
+      {
+        "id": "F-89da35fb6509",
+        "t": "FACT",
+        "text": "Darrin Davis — the Tribune named them in a piece headlined The Pole on Rockridge Corner Is Starting to Say His Name (Culture, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl db859c2206e0282a"
+      },
+      {
+        "id": "F-5a5ada4fa33d",
+        "t": "FACT",
+        "text": "Darrin Davis — the Tribune named them in a piece headlined Fifty-Six, and the Road Behind It (Sports, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl 6a58d696e6125498"
+      },
+      {
+        "id": "F-5ae08da5d6a1",
+        "t": "FACT",
+        "text": "Omar Farah — picked up the first paycheck and stood in the bank line like an adult, Chinatown (C116 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-518cde8d9c9d",
+        "t": "FACT",
+        "text": "Tariq Cooper — drove alone for the first time and took the long way home on purpose, Piedmont Ave (C116 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-11ef93a4d473",
+        "t": "FACT",
+        "text": "Tariq Cooper — in their life, C115: iced a rolled ankle and watched film of a game they were not in",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-6212c3151d74",
+        "t": "FACT",
+        "text": "Tariq Cooper — in their life, C116: stayed up past everyone talking about what comes after this",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-e5de3eb9f934",
+        "t": "FACT",
+        "text": "Sadie Williams — had a rough week and still showed up to the spelling bee, Chinatown (C116 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-0bc4eebf1e97",
+        "t": "FACT",
+        "text": "Elias Varek — Civis Systems returned $489017 to the line this week, West Oakland (C116 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-0fb939bb35e4",
+        "t": "FACT",
+        "text": "Elias Varek — in their life, C115: headed over to The Aitken Line Founding Celebration in Jack London last night",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-851b1664ccba",
+        "t": "FACT",
+        "text": "Elias Varek — in their life, C115: Civis Systems returned $488443 to the line this week",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-2afbf66cd72b",
+        "t": "FACT",
+        "text": "Elias Varek — in their life, C115: Varek Systems returned $34932 to the line this week",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-74d65b514df8",
+        "t": "FACT",
+        "text": "Elias Varek — in their life, C116: Varek Systems returned $35112 to the line this week",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-6303a20f1153",
+        "t": "FACT",
+        "text": "Elias Varek — Lives already wrote this person: a moment the record kept (C115)",
+        "src": "output/cron-compare/lives_covered.json"
+      },
+      {
+        "id": "F-ef923c4b81a5",
+        "t": "FACT",
+        "text": "Elias Varek — the Tribune named them in a piece headlined The Lives Page, Cycle 115 (Culture, C115)",
+        "src": "archive/ARTICLE_INDEX.jsonl 4da79b355f8b8455"
+      },
+      {
+        "id": "F-9f71e8f7811e",
+        "t": "FACT",
+        "text": "Elias Varek — the Tribune named them in a piece headlined The Board in the Trailer Says 9.5 Percent. Enzo Walker Is Counting Something Else. (Business Reporter, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl 384044afdbad94f5"
+      },
+      {
+        "id": "F-b66573ef89b1",
+        "t": "FACT",
+        "text": "Elias Varek — the Tribune named them in a piece headlined The Lives Page, Cycle 114 (Culture, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl 9746e4e747ffdd0a"
+      },
+      {
+        "id": "F-647fd9067a33",
+        "t": "FACT",
+        "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+        "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)"
+      },
+      {
+        "id": "F-a56b409a3900",
+        "t": "FACT",
+        "text": "Wilson Shepard — Head Coach, Oakland Oaks — West Oakland",
+        "src": "Simulation_Ledger profile for POP-01022"
+      },
+      {
+        "id": "F-9535b1bfa729",
+        "t": "FACT",
+        "text": "Theo Rahimi — student — Eastlake",
+        "src": "Simulation_Ledger profile for POP-01247"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-01022-ce9f8db8ef",
+        "speakerId": "POP-01022",
+        "speakerName": "Wilson Shepard",
+        "text": "To be honest, my new living situation in West Oakland hasn't really affected my coaching. I've been focused on the team's performance, and my daily routine hasn't changed much. I'm still the same person, with the same goals for the Oaks.",
+        "factIds": [
+          "F-3e45fbf97f4e",
+          "F-a56b409a3900"
+        ],
+        "src": "packet.W2[POP-01022]"
+      },
+      {
+        "id": "Q-POP-00789-8cf587243e",
+        "speakerId": "POP-00789",
+        "speakerName": "Elias Varek",
+        "text": "The recent financial returns for Civis Systems show a minimal change, $489,017 this week, which is just slightly up from the previous week's $488,443. For Varek Systems, the returns are $35,112 this week, compared to $34,932 last week. These numbers indicate a stable, but not growing, revenue stream for both companies. I'm concerned that Civis Systems is flat where it matters, and I'm still trying to understand the implications of this stability.",
+        "factIds": [
+          "F-0bc4eebf1e97",
+          "F-851b1664ccba",
+          "F-2afbf66cd72b",
+          "F-74d65b514df8"
+        ],
+        "src": "packet.W2[POP-00789]"
+      },
+      {
+        "id": "Q-POP-01247-60e3a184ef",
+        "speakerId": "POP-01247",
+        "speakerName": "Theo Rahimi",
+        "text": "Having a place of my own in Eastlake feels really great. It's like a new start for me. I've been working hard and it's nice to have a space that's just mine. The neighborhood is coming together too, with all the new households moving in. It's an exciting time.",
+        "factIds": [
+          "F-0af0e067096b",
+          "F-9535b1bfa729"
+        ],
+        "src": "packet.W2[POP-01247]"
+      },
+      {
+        "id": "Q-POP-00703-7b2929bcfb",
+        "speakerId": "POP-00703",
+        "speakerName": "Ira Leu",
+        "text": "I didn't go to the health center staff's unwind at the bar, but I heard they were pretty relieved after their first busy week. The Temescal Community Health Center is finally up and running, and I'm sure it's a big change for them.",
+        "factIds": [
+          "F-e39aa03bf9cc",
+          "F-5c2abda03c55"
+        ],
+        "src": "packet.W2[POP-00703]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-01022",
+        "name": "Wilson Shepard",
+        "profile": "Wilson Shepard — Head Coach, Oakland Oaks — West Oakland",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-01247",
+        "name": "Theo Rahimi",
+        "profile": "Theo Rahimi — student — Eastlake",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00703",
+        "name": "Ira Leu",
+        "profile": "Ira Leu — Artisan Cheesemaker — Temescal",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00789",
+        "name": "Elias Varek",
+        "profile": "Elias Varek — Founder of Civis Systems — West Oakland",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The new living situation for Wilson Shepard and its potential impact on the Oakland Oaks' performance",
+        "publishable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The financial health of Civis Systems and its implications for West Oakland",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "116",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "trevor-shimizu",
+  "byline": {
+    "name": "Trevor Shimizu",
+    "popid": "POP-00155",
+    "beatDomain": "INFRASTRUCTURE"
+  },
+  "laneEntries": 115,
+  "quotesLanded": 3,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "sheet_read",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall"
+  ],
+  "toolCalls": 4,
+  "wordCount": 940,
+  "targetWords": "500-800",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 500",
+    "words": 940,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "340607d8c96e8f4d2ffff319e6576640608cd5e8b3df5e68397f73a23dfc7092",
+    "costUsd": 0.0013
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/3 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/civic_c116_trevor-shimizu_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "/ tip: ⌁ auth for agents [www.vestauth.com]\n{\n  \"popId\": \"POP-00155\",\n  \"name\": \"Trevor Shimizu\",\n  \"recorded\": true,\n  \"text\": \"filed: 12th Street Lost 2,313 Riders. The Roads Didn't Pick Them Up.\"\n}"
+  },
+  "ranAt": "2026-11-17T00:21:04.066Z"
+}

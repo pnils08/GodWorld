@@ -1,38 +1,38 @@
 [
   {
-    "pop": "POP-00801",
-    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00801\",\"name\":\"Maurice Franklin\",\"role\":\"Drone Fleet Coordinator\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Tamsin Pruitt\",\"question\":\"What were the circumstances that led to Maurice Franklin moving into a new place in Rockridge? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-lives\",\"hood\":null,\"focus\":\"Maurice Franklin\",\"src\":\"output/beats/Lived_Events.jsonl @C115 batch fd0b35\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Maurice Franklin — Drone Fleet Coordinator — Rockridge\",\"evidence\":[{\"id\":\"EV-c29b189be8\",\"src\":\"output/beats/Lived_Events.jsonl @C115 batch fd0b35\",\"text\":\"Maurice Franklin first. The event is the lead; one true detail; what came next only if the record says.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Maurice Franklin moved into a place of their own in Rockridge, renting\",\"src\":\"output/beats/Lived_Events.jsonl @C115 batch fd0b35\",\"id\":\"F-5ac5466274c2\"},{\"t\":\"FACT\",\"text\":\"Maurice Franklin first. The event is the lead; one true detail; what came next only if the record says.\",\"src\":\"output/beats/Lived_Events.jsonl @C115 batch fd0b35\",\"id\":\"F-d87ebda98cc1\"},{\"t\":\"FACT\",\"text\":\"Maurice Franklin moved into a place of their own in Rockridge, renting (C115)\",\"src\":\"output/beats/Household_Ledger.jsonl @C115\",\"id\":\"F-0a2299946e2b\"},{\"t\":\"FACT\",\"text\":\"Maurice Franklin — in their life, C114: borrowed against next month to close this one\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C114\",\"id\":\"F-3a90e849c4ee\"},{\"t\":\"FACT\",\"text\":\"Maurice Franklin — in their life, C115: the card statement was the first thing read and the last thing forgotten\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C115\",\"id\":\"F-0c41020373fd\"},{\"t\":\"FACT\",\"text\":\"Maurice Franklin — in their life, C115: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C115\",\"id\":\"F-2f0af74be7a0\"},{\"t\":\"FACT\",\"text\":\"Maurice Franklin — in their life, C115: brought home a new plant and picked its spot carefully\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C115\",\"id\":\"F-220d99f5f595\"},{\"t\":\"FACT\",\"text\":\"Maurice Franklin — the Tribune named them in a piece headlined The Board in the Trailer Says 9.5 Percent. Enzo Walker Is Counting Something Else. (Business Reporter, C114)\",\"src\":\"archive/ARTICLE_INDEX.jsonl 384044afdbad94f5\",\"id\":\"F-173b29ed6c74\"},{\"t\":\"FACT\",\"text\":\"Maurice Franklin — the Tribune named them in a piece headlined Chinatown's 137 Sick: Six Beds Hold Part of the Count, Kitchens Hold the Rest (Civic, C114)\",\"src\":\"archive/ARTICLE_INDEX.jsonl f5baef8c2be8a0e4\",\"id\":\"F-48bb5e53c3e5\"},{\"t\":\"FACT\",\"text\":\"Maurice Franklin — the Tribune named them in a piece headlined Chinatown's 140 Sick Are Mostly at Home, and Home Is Doing the Work (Civic, C113)\",\"src\":\"archive/ARTICLE_INDEX.jsonl 415a8378a3cc8be1\",\"id\":\"F-d3b57b170bc5\"},{\"t\":\"FACT\",\"text\":\"Maurice Franklin — Drone Fleet Coordinator — Rockridge\",\"src\":\"Simulation_Ledger profile for POP-00801\",\"id\":\"F-debf96d7a429\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "pop": "POP-01167",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01167\",\"name\":\"Lena Marchetti\",\"role\":\"Crisis Clinician\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Tamsin Pruitt\",\"question\":\"What does Lena Marchetti's decision to move into a place of their own in East Oakland reveal about their current life situation? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-lives\",\"hood\":null,\"focus\":\"Lena Marchetti\",\"src\":\"output/beats/Lived_Events.jsonl @C115 batch 1138a0\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Lena Marchetti — Crisis Clinician — East Oakland\",\"evidence\":[{\"id\":\"EV-2fe41da292\",\"src\":\"output/beats/Lived_Events.jsonl @C115 batch 1138a0\",\"text\":\"Lena Marchetti first. The event is the lead; one true detail; what came next only if the record says.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Lena Marchetti moved into a place of their own in East Oakland, renting\",\"src\":\"output/beats/Lived_Events.jsonl @C115 batch 1138a0\",\"id\":\"F-168c2e488243\"},{\"t\":\"FACT\",\"text\":\"Lena Marchetti first. The event is the lead; one true detail; what came next only if the record says.\",\"src\":\"output/beats/Lived_Events.jsonl @C115 batch 1138a0\",\"id\":\"F-84d2998e4d69\"},{\"t\":\"FACT\",\"text\":\"Lena Marchetti moved into a place of their own in East Oakland, renting (C115)\",\"src\":\"output/beats/Household_Ledger.jsonl @C115\",\"id\":\"F-80f1f794cce8\"},{\"t\":\"FACT\",\"text\":\"Lena Marchetti — in their life, C114: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner near a fenced build site\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C114\",\"id\":\"F-12901c57ba25\"},{\"t\":\"FACT\",\"text\":\"Lena Marchetti — in their life, C115: said no to something and felt the shape of who they are in it near a fenced build site\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C115\",\"id\":\"F-e8d375636964\"},{\"t\":\"FACT\",\"text\":\"Lena Marchetti — in their life, C115: heard someone at the cafe complain about the Baylight District noise and bit their tongue\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C115\",\"id\":\"F-c0eab126d143\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"Dominic Okeke-Brandt moved into a place of their own in Laurel, renting (C115)\",\"src\":\"output/beats/Household_Ledger.jsonl @C115\",\"id\":\"F-f4f00e52cd70\"},{\"t\":\"FACT\",\"text\":\"Lena Marchetti — Crisis Clinician — East Oakland\",\"src\":\"Simulation_Ledger profile for POP-01167\",\"id\":\"F-734eb9a1a9aa\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
     "packetContract": "LEP/2",
     "inputPacket": {
       "v": "LEP/2",
       "wake": "W2",
       "actor": {
-        "id": "POP-00801",
-        "name": "Maurice Franklin",
-        "role": "Drone Fleet Coordinator",
+        "id": "POP-01167",
+        "name": "Lena Marchetti",
+        "role": "Crisis Clinician",
         "desk": null
       },
       "task": {
         "goal": "Answer one reporter question in your own first-person voice from your simulated life",
         "reporter": "Tamsin Pruitt",
-        "question": "What were the circumstances that led to Maurice Franklin moving into a new place in Rockridge? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        "question": "What does Lena Marchetti's decision to move into a place of their own in East Oakland reveal about their current life situation? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
       },
       "signal": {
         "kind": "beat-lives",
         "hood": null,
-        "focus": "Maurice Franklin",
-        "src": "output/beats/Lived_Events.jsonl @C115 batch fd0b35"
+        "focus": "Lena Marchetti",
+        "src": "output/beats/Lived_Events.jsonl @C115 batch 1138a0"
       },
       "exposure": {
         "basis": [
           "assignment"
         ],
-        "self": "Maurice Franklin — Drone Fleet Coordinator — Rockridge",
+        "self": "Lena Marchetti — Crisis Clinician — East Oakland",
         "evidence": [
           {
-            "id": "EV-c29b189be8",
-            "src": "output/beats/Lived_Events.jsonl @C115 batch fd0b35",
-            "text": "Maurice Franklin first. The event is the lead; one true detail; what came next only if the record says."
+            "id": "EV-2fe41da292",
+            "src": "output/beats/Lived_Events.jsonl @C115 batch 1138a0",
+            "text": "Lena Marchetti first. The event is the lead; one true detail; what came next only if the record says."
           }
         ],
         "editorialTarget": true
@@ -40,69 +40,57 @@
       "known": [
         {
           "t": "FACT",
-          "text": "Maurice Franklin moved into a place of their own in Rockridge, renting",
-          "src": "output/beats/Lived_Events.jsonl @C115 batch fd0b35",
-          "id": "F-5ac5466274c2"
+          "text": "Lena Marchetti moved into a place of their own in East Oakland, renting",
+          "src": "output/beats/Lived_Events.jsonl @C115 batch 1138a0",
+          "id": "F-168c2e488243"
         },
         {
           "t": "FACT",
-          "text": "Maurice Franklin first. The event is the lead; one true detail; what came next only if the record says.",
-          "src": "output/beats/Lived_Events.jsonl @C115 batch fd0b35",
-          "id": "F-d87ebda98cc1"
+          "text": "Lena Marchetti first. The event is the lead; one true detail; what came next only if the record says.",
+          "src": "output/beats/Lived_Events.jsonl @C115 batch 1138a0",
+          "id": "F-84d2998e4d69"
         },
         {
           "t": "FACT",
-          "text": "Maurice Franklin moved into a place of their own in Rockridge, renting (C115)",
+          "text": "Lena Marchetti moved into a place of their own in East Oakland, renting (C115)",
           "src": "output/beats/Household_Ledger.jsonl @C115",
-          "id": "F-0a2299946e2b"
+          "id": "F-80f1f794cce8"
         },
         {
           "t": "FACT",
-          "text": "Maurice Franklin — in their life, C114: borrowed against next month to close this one",
+          "text": "Lena Marchetti — in their life, C114: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner near a fenced build site",
           "src": "output/beats/LifeHistory_Log.jsonl @C114",
-          "id": "F-3a90e849c4ee"
+          "id": "F-12901c57ba25"
         },
         {
           "t": "FACT",
-          "text": "Maurice Franklin — in their life, C115: the card statement was the first thing read and the last thing forgotten",
+          "text": "Lena Marchetti — in their life, C115: said no to something and felt the shape of who they are in it near a fenced build site",
           "src": "output/beats/LifeHistory_Log.jsonl @C115",
-          "id": "F-0c41020373fd"
+          "id": "F-e8d375636964"
         },
         {
           "t": "FACT",
-          "text": "Maurice Franklin — in their life, C115: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+          "text": "Lena Marchetti — in their life, C115: heard someone at the cafe complain about the Baylight District noise and bit their tongue",
           "src": "output/beats/LifeHistory_Log.jsonl @C115",
-          "id": "F-2f0af74be7a0"
+          "id": "F-c0eab126d143"
         },
         {
           "t": "FACT",
-          "text": "Maurice Franklin — in their life, C115: brought home a new plant and picked its spot carefully",
-          "src": "output/beats/LifeHistory_Log.jsonl @C115",
-          "id": "F-220d99f5f595"
+          "text": "Current cycle: C115",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-bc84fc0b7718"
         },
         {
           "t": "FACT",
-          "text": "Maurice Franklin — the Tribune named them in a piece headlined The Board in the Trailer Says 9.5 Percent. Enzo Walker Is Counting Something Else. (Business Reporter, C114)",
-          "src": "archive/ARTICLE_INDEX.jsonl 384044afdbad94f5",
-          "id": "F-173b29ed6c74"
+          "text": "Dominic Okeke-Brandt moved into a place of their own in Laurel, renting (C115)",
+          "src": "output/beats/Household_Ledger.jsonl @C115",
+          "id": "F-f4f00e52cd70"
         },
         {
           "t": "FACT",
-          "text": "Maurice Franklin — the Tribune named them in a piece headlined Chinatown's 137 Sick: Six Beds Hold Part of the Count, Kitchens Hold the Rest (Civic, C114)",
-          "src": "archive/ARTICLE_INDEX.jsonl f5baef8c2be8a0e4",
-          "id": "F-48bb5e53c3e5"
-        },
-        {
-          "t": "FACT",
-          "text": "Maurice Franklin — the Tribune named them in a piece headlined Chinatown's 140 Sick Are Mostly at Home, and Home Is Doing the Work (Civic, C113)",
-          "src": "archive/ARTICLE_INDEX.jsonl 415a8378a3cc8be1",
-          "id": "F-d3b57b170bc5"
-        },
-        {
-          "t": "FACT",
-          "text": "Maurice Franklin — Drone Fleet Coordinator — Rockridge",
-          "src": "Simulation_Ledger profile for POP-00801",
-          "id": "F-debf96d7a429"
+          "text": "Lena Marchetti — Crisis Clinician — East Oakland",
+          "src": "Simulation_Ledger profile for POP-01167",
+          "id": "F-734eb9a1a9aa"
         },
         {
           "t": "FACT",
@@ -160,39 +148,39 @@
     "maxTokens": 420
   },
   {
-    "pop": "POP-00840",
-    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00840\",\"name\":\"Soledad Coleman\",\"role\":\"AI Safety Researcher (Anthropic)\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Tamsin Pruitt\",\"question\":\"What have you seen, felt, or understood about \\\"Maurice Franklin\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-lives\",\"hood\":null,\"focus\":\"Maurice Franklin\",\"src\":\"output/beats/Lived_Events.jsonl @C115 batch fd0b35\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Soledad Coleman — AI Safety Researcher (Anthropic) — Rockridge\",\"evidence\":[{\"id\":\"EV-6eefad1034\",\"src\":\"output/beats/Lived_Events.jsonl @C115 batch fd0b35\",\"text\":\"Maurice Franklin first. The event is the lead; one true detail; what came next only if the record says.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Soledad Coleman moved into a place of their own in Rockridge, renting (C115)\",\"src\":\"output/beats/Household_Ledger.jsonl @C115\",\"id\":\"F-55adb5642815\"},{\"t\":\"FACT\",\"text\":\"Soledad Coleman — in their life, C114: badged into the Baylight office early and tried not to think about the protestors from last month\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C114\",\"id\":\"F-f3c5ddabe56b\"},{\"t\":\"FACT\",\"text\":\"Soledad Coleman — in their life, C115: traded an extra ticket for a promise to bring the kid next time\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C115\",\"id\":\"F-55854a608e06\"},{\"t\":\"FACT\",\"text\":\"Soledad Coleman — in their life, C115: attended a small local gathering and stayed later than planned\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C115\",\"id\":\"F-4b83bd534d8c\"},{\"t\":\"FACT\",\"text\":\"Soledad Coleman — in their life, C115: realized the same seven meals had rotated for a month, and shrugged\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C115\",\"id\":\"F-8a8707362323\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"Maurice Franklin moved into a place of their own in Rockridge, renting\",\"src\":\"output/beats/Lived_Events.jsonl @C115 batch fd0b35\",\"id\":\"F-5ac5466274c2\"},{\"t\":\"FACT\",\"text\":\"Maurice Franklin first. The event is the lead; one true detail; what came next only if the record says.\",\"src\":\"output/beats/Lived_Events.jsonl @C115 batch fd0b35\",\"id\":\"F-d87ebda98cc1\"},{\"t\":\"FACT\",\"text\":\"Soledad Coleman — AI Safety Researcher (Anthropic) — Rockridge\",\"src\":\"Simulation_Ledger profile for POP-00840\",\"id\":\"F-a932c3ebde3a\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "pop": "POP-01184",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01184\",\"name\":\"Dominic Okeke-Brandt\",\"role\":\"Deputy Superintendent\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Tamsin Pruitt\",\"question\":\"What have you seen, felt, or understood about \\\"Lena Marchetti\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-lives\",\"hood\":null,\"focus\":\"Lena Marchetti\",\"src\":\"output/beats/Lived_Events.jsonl @C115 batch 1138a0\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Dominic Okeke-Brandt — Deputy Superintendent — Laurel\",\"evidence\":[{\"id\":\"EV-a804fc39f4\",\"src\":\"output/beats/Lived_Events.jsonl @C115 batch 1138a0\",\"text\":\"Lena Marchetti first. The event is the lead; one true detail; what came next only if the record says.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Dominic Okeke-Brandt moved into a place of their own in Laurel, renting (C115)\",\"src\":\"output/beats/Household_Ledger.jsonl @C115\",\"id\":\"F-f4f00e52cd70\"},{\"t\":\"FACT\",\"text\":\"Dominic Okeke-Brandt — in their life, C115: organized the clothing drive donations and recognized a coat they had donated two years ago near the main street sidewalk\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C115\",\"id\":\"F-e331cc0d880a\"},{\"t\":\"FACT\",\"text\":\"Dominic Okeke-Brandt — in their life, C115: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C115\",\"id\":\"F-7d6a5ab6b280\"},{\"t\":\"FACT\",\"text\":\"Dominic Okeke-Brandt — in their life, C115: noticed younger people asking them for advice now\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C115\",\"id\":\"F-e7878398317e\"},{\"t\":\"FACT\",\"text\":\"Dominic Okeke-Brandt — in their life, C115: counted cranes on the skyline from the bus stop and got a different number than yesterday\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C115\",\"id\":\"F-0f291d74898b\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"Lena Marchetti moved into a place of their own in East Oakland, renting\",\"src\":\"output/beats/Lived_Events.jsonl @C115 batch 1138a0\",\"id\":\"F-168c2e488243\"},{\"t\":\"FACT\",\"text\":\"Lena Marchetti first. The event is the lead; one true detail; what came next only if the record says.\",\"src\":\"output/beats/Lived_Events.jsonl @C115 batch 1138a0\",\"id\":\"F-84d2998e4d69\"},{\"t\":\"FACT\",\"text\":\"Dominic Okeke-Brandt — Deputy Superintendent — Laurel\",\"src\":\"Simulation_Ledger profile for POP-01184\",\"id\":\"F-c0d361138eae\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
     "packetContract": "LEP/2",
     "inputPacket": {
       "v": "LEP/2",
       "wake": "W2",
       "actor": {
-        "id": "POP-00840",
-        "name": "Soledad Coleman",
-        "role": "AI Safety Researcher (Anthropic)",
+        "id": "POP-01184",
+        "name": "Dominic Okeke-Brandt",
+        "role": "Deputy Superintendent",
         "desk": null
       },
       "task": {
         "goal": "Answer one reporter question in your own first-person voice from your simulated life",
         "reporter": "Tamsin Pruitt",
-        "question": "What have you seen, felt, or understood about \"Maurice Franklin\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        "question": "What have you seen, felt, or understood about \"Lena Marchetti\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
       },
       "signal": {
         "kind": "beat-lives",
         "hood": null,
-        "focus": "Maurice Franklin",
-        "src": "output/beats/Lived_Events.jsonl @C115 batch fd0b35"
+        "focus": "Lena Marchetti",
+        "src": "output/beats/Lived_Events.jsonl @C115 batch 1138a0"
       },
       "exposure": {
         "basis": [
           "assignment"
         ],
-        "self": "Soledad Coleman — AI Safety Researcher (Anthropic) — Rockridge",
+        "self": "Dominic Okeke-Brandt — Deputy Superintendent — Laurel",
         "evidence": [
           {
-            "id": "EV-6eefad1034",
-            "src": "output/beats/Lived_Events.jsonl @C115 batch fd0b35",
-            "text": "Maurice Franklin first. The event is the lead; one true detail; what came next only if the record says."
+            "id": "EV-a804fc39f4",
+            "src": "output/beats/Lived_Events.jsonl @C115 batch 1138a0",
+            "text": "Lena Marchetti first. The event is the lead; one true detail; what came next only if the record says."
           }
         ],
         "editorialTarget": false
@@ -200,33 +188,33 @@
       "known": [
         {
           "t": "FACT",
-          "text": "Soledad Coleman moved into a place of their own in Rockridge, renting (C115)",
+          "text": "Dominic Okeke-Brandt moved into a place of their own in Laurel, renting (C115)",
           "src": "output/beats/Household_Ledger.jsonl @C115",
-          "id": "F-55adb5642815"
+          "id": "F-f4f00e52cd70"
         },
         {
           "t": "FACT",
-          "text": "Soledad Coleman — in their life, C114: badged into the Baylight office early and tried not to think about the protestors from last month",
-          "src": "output/beats/LifeHistory_Log.jsonl @C114",
-          "id": "F-f3c5ddabe56b"
-        },
-        {
-          "t": "FACT",
-          "text": "Soledad Coleman — in their life, C115: traded an extra ticket for a promise to bring the kid next time",
+          "text": "Dominic Okeke-Brandt — in their life, C115: organized the clothing drive donations and recognized a coat they had donated two years ago near the main street sidewalk",
           "src": "output/beats/LifeHistory_Log.jsonl @C115",
-          "id": "F-55854a608e06"
+          "id": "F-e331cc0d880a"
         },
         {
           "t": "FACT",
-          "text": "Soledad Coleman — in their life, C115: attended a small local gathering and stayed later than planned",
+          "text": "Dominic Okeke-Brandt — in their life, C115: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
           "src": "output/beats/LifeHistory_Log.jsonl @C115",
-          "id": "F-4b83bd534d8c"
+          "id": "F-7d6a5ab6b280"
         },
         {
           "t": "FACT",
-          "text": "Soledad Coleman — in their life, C115: realized the same seven meals had rotated for a month, and shrugged",
+          "text": "Dominic Okeke-Brandt — in their life, C115: noticed younger people asking them for advice now",
           "src": "output/beats/LifeHistory_Log.jsonl @C115",
-          "id": "F-8a8707362323"
+          "id": "F-e7878398317e"
+        },
+        {
+          "t": "FACT",
+          "text": "Dominic Okeke-Brandt — in their life, C115: counted cranes on the skyline from the bus stop and got a different number than yesterday",
+          "src": "output/beats/LifeHistory_Log.jsonl @C115",
+          "id": "F-0f291d74898b"
         },
         {
           "t": "FACT",
@@ -236,21 +224,21 @@
         },
         {
           "t": "FACT",
-          "text": "Maurice Franklin moved into a place of their own in Rockridge, renting",
-          "src": "output/beats/Lived_Events.jsonl @C115 batch fd0b35",
-          "id": "F-5ac5466274c2"
+          "text": "Lena Marchetti moved into a place of their own in East Oakland, renting",
+          "src": "output/beats/Lived_Events.jsonl @C115 batch 1138a0",
+          "id": "F-168c2e488243"
         },
         {
           "t": "FACT",
-          "text": "Maurice Franklin first. The event is the lead; one true detail; what came next only if the record says.",
-          "src": "output/beats/Lived_Events.jsonl @C115 batch fd0b35",
-          "id": "F-d87ebda98cc1"
+          "text": "Lena Marchetti first. The event is the lead; one true detail; what came next only if the record says.",
+          "src": "output/beats/Lived_Events.jsonl @C115 batch 1138a0",
+          "id": "F-84d2998e4d69"
         },
         {
           "t": "FACT",
-          "text": "Soledad Coleman — AI Safety Researcher (Anthropic) — Rockridge",
-          "src": "Simulation_Ledger profile for POP-00840",
-          "id": "F-a932c3ebde3a"
+          "text": "Dominic Okeke-Brandt — Deputy Superintendent — Laurel",
+          "src": "Simulation_Ledger profile for POP-01184",
+          "id": "F-c0d361138eae"
         },
         {
           "t": "FACT",
@@ -308,39 +296,39 @@
     "maxTokens": 420
   },
   {
-    "pop": "POP-00691",
-    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00691\",\"name\":\"Tom Jilner\",\"role\":\"Wine Bar Owner\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Tamsin Pruitt\",\"question\":\"What have you seen, felt, or understood about \\\"Maurice Franklin\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-lives\",\"hood\":null,\"focus\":\"Maurice Franklin\",\"src\":\"output/beats/Lived_Events.jsonl @C115 batch fd0b35\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Tom Jilner — Wine Bar Owner — Rockridge\",\"evidence\":[{\"id\":\"EV-e1816727d4\",\"src\":\"output/beats/Lived_Events.jsonl @C115 batch fd0b35\",\"text\":\"Maurice Franklin first. The event is the lead; one true detail; what came next only if the record says.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Tom Jilner lost on the UNDOCKED book — staked 144, the book kept it, Rockridge (C115)\",\"src\":\"output/beats/Casino_Ledger.jsonl @C115\",\"id\":\"F-b5e3e0831db1\"},{\"t\":\"FACT\",\"text\":\"Tom Jilner — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C114\",\"id\":\"F-714480ccb508\"},{\"t\":\"FACT\",\"text\":\"Tom Jilner — in their life, C114: drove the whole way home without remembering a single turn\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C114\",\"id\":\"F-834fd04dcbd8\"},{\"t\":\"FACT\",\"text\":\"Tom Jilner — in their life, C115: woke up at 5 AM just to have thirty minutes of total silence before the house woke up near a tidy sidewalk stretch\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C115\",\"id\":\"F-e2b762b1f169\"},{\"t\":\"FACT\",\"text\":\"Tom Jilner — in their life, C115: said no to something and felt the shape of who they are in it\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C115\",\"id\":\"F-e63f314320ab\"},{\"t\":\"FACT\",\"text\":\"Tom Jilner — the Tribune named them in a piece headlined Rockridge Wine Bar Says \\\"Steady.\\\" The Map Says Decay. Who Answers? (Civic, C114)\",\"src\":\"archive/ARTICLE_INDEX.jsonl 77223d1e2e7334d4\",\"id\":\"F-216b3402c461\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"Maurice Franklin moved into a place of their own in Rockridge, renting\",\"src\":\"output/beats/Lived_Events.jsonl @C115 batch fd0b35\",\"id\":\"F-5ac5466274c2\"},{\"t\":\"FACT\",\"text\":\"Tom Jilner — Wine Bar Owner — Rockridge\",\"src\":\"Simulation_Ledger profile for POP-00691\",\"id\":\"F-32bff524b2bd\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "pop": "POP-00996",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00996\",\"name\":\"Kai Davis\",\"role\":\"Junior Accountant\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Tamsin Pruitt\",\"question\":\"What have you seen, felt, or understood about \\\"Lena Marchetti\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-lives\",\"hood\":null,\"focus\":\"Lena Marchetti\",\"src\":\"output/beats/Lived_Events.jsonl @C115 batch 1138a0\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Kai Davis — Junior Accountant — West Oakland\",\"evidence\":[{\"id\":\"EV-be0d4ced64\",\"src\":\"output/beats/Lived_Events.jsonl @C115 batch 1138a0\",\"text\":\"Lena Marchetti first. The event is the lead; one true detail; what came next only if the record says.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Kai Davis — found a forgotten photograph tucked in a book and sat with it a while, West Oakland — one of 4 people the Cycle's community turn reached (Daniel Cloak — the city keeps saying the name: Tier 2 -> 1) (C115)\",\"src\":\"output/beats/Story_Seed_Deck.jsonl @C115\",\"id\":\"F-cfd42cee1abf\"},{\"t\":\"FACT\",\"text\":\"Kai Davis — in their life, C114: walked a different street home just to see it\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C114\",\"id\":\"F-e993d4e144d2\"},{\"t\":\"FACT\",\"text\":\"Kai Davis — in their life, C114: slipped into the back pew at Foothill Baptist Tabernacle just to sit somewhere air-conditioned and quiet\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C114\",\"id\":\"F-f92c1fc90d78\"},{\"t\":\"FACT\",\"text\":\"Kai Davis — in their life, C115: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C115\",\"id\":\"F-7a1163381c5f\"},{\"t\":\"FACT\",\"text\":\"Kai Davis — in their life, C115: bought a new A's jersey and counted what was going right for once\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C115\",\"id\":\"F-7d42ca13492a\"},{\"t\":\"FACT\",\"text\":\"Kai Davis — the Tribune named them in a piece headlined The Lives Page, Cycle 114 (Culture, C114)\",\"src\":\"archive/ARTICLE_INDEX.jsonl 9746e4e747ffdd0a\",\"id\":\"F-527d77264a44\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"Lena Marchetti moved into a place of their own in East Oakland, renting\",\"src\":\"output/beats/Lived_Events.jsonl @C115 batch 1138a0\",\"id\":\"F-168c2e488243\"},{\"t\":\"FACT\",\"text\":\"Kai Davis — Junior Accountant — West Oakland\",\"src\":\"Simulation_Ledger profile for POP-00996\",\"id\":\"F-41d3e435f095\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
     "packetContract": "LEP/2",
     "inputPacket": {
       "v": "LEP/2",
       "wake": "W2",
       "actor": {
-        "id": "POP-00691",
-        "name": "Tom Jilner",
-        "role": "Wine Bar Owner",
+        "id": "POP-00996",
+        "name": "Kai Davis",
+        "role": "Junior Accountant",
         "desk": null
       },
       "task": {
         "goal": "Answer one reporter question in your own first-person voice from your simulated life",
         "reporter": "Tamsin Pruitt",
-        "question": "What have you seen, felt, or understood about \"Maurice Franklin\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        "question": "What have you seen, felt, or understood about \"Lena Marchetti\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
       },
       "signal": {
         "kind": "beat-lives",
         "hood": null,
-        "focus": "Maurice Franklin",
-        "src": "output/beats/Lived_Events.jsonl @C115 batch fd0b35"
+        "focus": "Lena Marchetti",
+        "src": "output/beats/Lived_Events.jsonl @C115 batch 1138a0"
       },
       "exposure": {
         "basis": [
           "assignment"
         ],
-        "self": "Tom Jilner — Wine Bar Owner — Rockridge",
+        "self": "Kai Davis — Junior Accountant — West Oakland",
         "evidence": [
           {
-            "id": "EV-e1816727d4",
-            "src": "output/beats/Lived_Events.jsonl @C115 batch fd0b35",
-            "text": "Maurice Franklin first. The event is the lead; one true detail; what came next only if the record says."
+            "id": "EV-be0d4ced64",
+            "src": "output/beats/Lived_Events.jsonl @C115 batch 1138a0",
+            "text": "Lena Marchetti first. The event is the lead; one true detail; what came next only if the record says."
           }
         ],
         "editorialTarget": false
@@ -348,39 +336,39 @@
       "known": [
         {
           "t": "FACT",
-          "text": "Tom Jilner lost on the UNDOCKED book — staked 144, the book kept it, Rockridge (C115)",
-          "src": "output/beats/Casino_Ledger.jsonl @C115",
-          "id": "F-b5e3e0831db1"
+          "text": "Kai Davis — found a forgotten photograph tucked in a book and sat with it a while, West Oakland — one of 4 people the Cycle's community turn reached (Daniel Cloak — the city keeps saying the name: Tier 2 -> 1) (C115)",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C115",
+          "id": "F-cfd42cee1abf"
         },
         {
           "t": "FACT",
-          "text": "Tom Jilner — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+          "text": "Kai Davis — in their life, C114: walked a different street home just to see it",
           "src": "output/beats/LifeHistory_Log.jsonl @C114",
-          "id": "F-714480ccb508"
+          "id": "F-e993d4e144d2"
         },
         {
           "t": "FACT",
-          "text": "Tom Jilner — in their life, C114: drove the whole way home without remembering a single turn",
+          "text": "Kai Davis — in their life, C114: slipped into the back pew at Foothill Baptist Tabernacle just to sit somewhere air-conditioned and quiet",
           "src": "output/beats/LifeHistory_Log.jsonl @C114",
-          "id": "F-834fd04dcbd8"
+          "id": "F-f92c1fc90d78"
         },
         {
           "t": "FACT",
-          "text": "Tom Jilner — in their life, C115: woke up at 5 AM just to have thirty minutes of total silence before the house woke up near a tidy sidewalk stretch",
+          "text": "Kai Davis — in their life, C115: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
           "src": "output/beats/LifeHistory_Log.jsonl @C115",
-          "id": "F-e2b762b1f169"
+          "id": "F-7a1163381c5f"
         },
         {
           "t": "FACT",
-          "text": "Tom Jilner — in their life, C115: said no to something and felt the shape of who they are in it",
+          "text": "Kai Davis — in their life, C115: bought a new A's jersey and counted what was going right for once",
           "src": "output/beats/LifeHistory_Log.jsonl @C115",
-          "id": "F-e63f314320ab"
+          "id": "F-7d42ca13492a"
         },
         {
           "t": "FACT",
-          "text": "Tom Jilner — the Tribune named them in a piece headlined Rockridge Wine Bar Says \"Steady.\" The Map Says Decay. Who Answers? (Civic, C114)",
-          "src": "archive/ARTICLE_INDEX.jsonl 77223d1e2e7334d4",
-          "id": "F-216b3402c461"
+          "text": "Kai Davis — the Tribune named them in a piece headlined The Lives Page, Cycle 114 (Culture, C114)",
+          "src": "archive/ARTICLE_INDEX.jsonl 9746e4e747ffdd0a",
+          "id": "F-527d77264a44"
         },
         {
           "t": "FACT",
@@ -390,15 +378,15 @@
         },
         {
           "t": "FACT",
-          "text": "Maurice Franklin moved into a place of their own in Rockridge, renting",
-          "src": "output/beats/Lived_Events.jsonl @C115 batch fd0b35",
-          "id": "F-5ac5466274c2"
+          "text": "Lena Marchetti moved into a place of their own in East Oakland, renting",
+          "src": "output/beats/Lived_Events.jsonl @C115 batch 1138a0",
+          "id": "F-168c2e488243"
         },
         {
           "t": "FACT",
-          "text": "Tom Jilner — Wine Bar Owner — Rockridge",
-          "src": "Simulation_Ledger profile for POP-00691",
-          "id": "F-32bff524b2bd"
+          "text": "Kai Davis — Junior Accountant — West Oakland",
+          "src": "Simulation_Ledger profile for POP-00996",
+          "id": "F-41d3e435f095"
         },
         {
           "t": "FACT",
@@ -456,39 +444,39 @@
     "maxTokens": 420
   },
   {
-    "pop": "POP-00526",
-    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00526\",\"name\":\"Marisol Achebe\",\"role\":\"Mutual Aid Network Organizer\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Tamsin Pruitt\",\"question\":\"What have you seen, felt, or understood about \\\"Maurice Franklin\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-lives\",\"hood\":null,\"focus\":\"Maurice Franklin\",\"src\":\"output/beats/Lived_Events.jsonl @C115 batch fd0b35\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Marisol Achebe — Mutual Aid Network Organizer — Fruitvale\",\"evidence\":[{\"id\":\"EV-755286fa46\",\"src\":\"output/beats/Lived_Events.jsonl @C115 batch fd0b35\",\"text\":\"Maurice Franklin first. The event is the lead; one true detail; what came next only if the record says.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Marisol Achebe lost on the UNDOCKED book — staked 134, the book kept it, Fruitvale (C115)\",\"src\":\"output/beats/Casino_Ledger.jsonl @C115\",\"id\":\"F-3f28df0288e5\"},{\"t\":\"FACT\",\"text\":\"Marisol Achebe — in their life, C114: felt unexpectedly nostalgic at the smell of rain on warm pavement\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C114\",\"id\":\"F-da9cf20df0b1\"},{\"t\":\"FACT\",\"text\":\"Marisol Achebe — in their life, C115: caught themselves bragging a little about the neighborhood lately\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C115\",\"id\":\"F-46e318f248fd\"},{\"t\":\"FACT\",\"text\":\"Marisol Achebe — in their life, C115: took a casual walk through their area\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C115\",\"id\":\"F-d110f851c166\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"Maurice Franklin moved into a place of their own in Rockridge, renting\",\"src\":\"output/beats/Lived_Events.jsonl @C115 batch fd0b35\",\"id\":\"F-5ac5466274c2\"},{\"t\":\"FACT\",\"text\":\"Maurice Franklin first. The event is the lead; one true detail; what came next only if the record says.\",\"src\":\"output/beats/Lived_Events.jsonl @C115 batch fd0b35\",\"id\":\"F-d87ebda98cc1\"},{\"t\":\"FACT\",\"text\":\"Maurice Franklin moved into a place of their own in Rockridge, renting (C115)\",\"src\":\"output/beats/Household_Ledger.jsonl @C115\",\"id\":\"F-0a2299946e2b\"},{\"t\":\"FACT\",\"text\":\"Marisol Achebe — Mutual Aid Network Organizer — Fruitvale\",\"src\":\"Simulation_Ledger profile for POP-00526\",\"id\":\"F-cd9db787e730\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "pop": "POP-00200",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00200\",\"name\":\"Evan Lewis\",\"role\":\"Bus driver\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Tamsin Pruitt\",\"question\":\"What have you seen, felt, or understood about \\\"Lena Marchetti\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-lives\",\"hood\":null,\"focus\":\"Lena Marchetti\",\"src\":\"output/beats/Lived_Events.jsonl @C115 batch 1138a0\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Evan Lewis — Bus driver — Laurel\",\"evidence\":[{\"id\":\"EV-c3c216d943\",\"src\":\"output/beats/Lived_Events.jsonl @C115 batch 1138a0\",\"text\":\"Lena Marchetti first. The event is the lead; one true detail; what came next only if the record says.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Evan Lewis — noticed more people keeping to themselves lately, Laurel — one of 4 people the Cycle's community turn reached (Evan Lewis — the city keeps saying the name: Tier 4 -> 3) (C115)\",\"src\":\"output/beats/Story_Seed_Deck.jsonl @C115\",\"id\":\"F-523d71887cd4\"},{\"t\":\"FACT\",\"text\":\"Evan Lewis — in their life, C114: finally fixed the thing that had been broken for months\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C114\",\"id\":\"F-b866ae7eba05\"},{\"t\":\"FACT\",\"text\":\"Evan Lewis — in their life, C114: complained about the neighborhood to anyone who'd listen\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C114\",\"id\":\"F-f253a26b9b36\"},{\"t\":\"FACT\",\"text\":\"Evan Lewis — in their life, C114: caught themselves lowering their voice when talking about the block's future\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C114\",\"id\":\"F-a4eae0cf578c\"},{\"t\":\"FACT\",\"text\":\"Evan Lewis — in their life, C115: found a quiet minute at a neighborhood bakery and still riding the high from last night's win\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C115\",\"id\":\"F-af37715024e9\"},{\"t\":\"FACT\",\"text\":\"Evan Lewis — the Tribune named them in a piece headlined Coliseum Lost 799 Riders on a Weekend With No Event on Its Row (Civic, C114)\",\"src\":\"archive/ARTICLE_INDEX.jsonl b0d2ad3d2b2dd56c\",\"id\":\"F-1084fb75deec\"},{\"t\":\"FACT\",\"text\":\"Evan Lewis — the Tribune named them in a piece headlined The Quiet Platform Still Has a Job (Civic, C113)\",\"src\":\"archive/ARTICLE_INDEX.jsonl da84550ec95e1ed6\",\"id\":\"F-9a949452e80c\"},{\"t\":\"FACT\",\"text\":\"Evan Lewis — the Tribune named them in a piece headlined At 19th Street, the busiest station runs on the slow side of the clock (Civic, C112)\",\"src\":\"archive/ARTICLE_INDEX.jsonl c4491d29da23c2ad\",\"id\":\"F-cd25d480efed\"},{\"t\":\"FACT\",\"text\":\"Evan Lewis — Bus driver — Laurel\",\"src\":\"Simulation_Ledger profile for POP-00200\",\"id\":\"F-de1611829a4e\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
     "packetContract": "LEP/2",
     "inputPacket": {
       "v": "LEP/2",
       "wake": "W2",
       "actor": {
-        "id": "POP-00526",
-        "name": "Marisol Achebe",
-        "role": "Mutual Aid Network Organizer",
+        "id": "POP-00200",
+        "name": "Evan Lewis",
+        "role": "Bus driver",
         "desk": null
       },
       "task": {
         "goal": "Answer one reporter question in your own first-person voice from your simulated life",
         "reporter": "Tamsin Pruitt",
-        "question": "What have you seen, felt, or understood about \"Maurice Franklin\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        "question": "What have you seen, felt, or understood about \"Lena Marchetti\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
       },
       "signal": {
         "kind": "beat-lives",
         "hood": null,
-        "focus": "Maurice Franklin",
-        "src": "output/beats/Lived_Events.jsonl @C115 batch fd0b35"
+        "focus": "Lena Marchetti",
+        "src": "output/beats/Lived_Events.jsonl @C115 batch 1138a0"
       },
       "exposure": {
         "basis": [
           "assignment"
         ],
-        "self": "Marisol Achebe — Mutual Aid Network Organizer — Fruitvale",
+        "self": "Evan Lewis — Bus driver — Laurel",
         "evidence": [
           {
-            "id": "EV-755286fa46",
-            "src": "output/beats/Lived_Events.jsonl @C115 batch fd0b35",
-            "text": "Maurice Franklin first. The event is the lead; one true detail; what came next only if the record says."
+            "id": "EV-c3c216d943",
+            "src": "output/beats/Lived_Events.jsonl @C115 batch 1138a0",
+            "text": "Lena Marchetti first. The event is the lead; one true detail; what came next only if the record says."
           }
         ],
         "editorialTarget": false
@@ -496,57 +484,57 @@
       "known": [
         {
           "t": "FACT",
-          "text": "Marisol Achebe lost on the UNDOCKED book — staked 134, the book kept it, Fruitvale (C115)",
-          "src": "output/beats/Casino_Ledger.jsonl @C115",
-          "id": "F-3f28df0288e5"
+          "text": "Evan Lewis — noticed more people keeping to themselves lately, Laurel — one of 4 people the Cycle's community turn reached (Evan Lewis — the city keeps saying the name: Tier 4 -> 3) (C115)",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C115",
+          "id": "F-523d71887cd4"
         },
         {
           "t": "FACT",
-          "text": "Marisol Achebe — in their life, C114: felt unexpectedly nostalgic at the smell of rain on warm pavement",
+          "text": "Evan Lewis — in their life, C114: finally fixed the thing that had been broken for months",
           "src": "output/beats/LifeHistory_Log.jsonl @C114",
-          "id": "F-da9cf20df0b1"
+          "id": "F-b866ae7eba05"
         },
         {
           "t": "FACT",
-          "text": "Marisol Achebe — in their life, C115: caught themselves bragging a little about the neighborhood lately",
+          "text": "Evan Lewis — in their life, C114: complained about the neighborhood to anyone who'd listen",
+          "src": "output/beats/LifeHistory_Log.jsonl @C114",
+          "id": "F-f253a26b9b36"
+        },
+        {
+          "t": "FACT",
+          "text": "Evan Lewis — in their life, C114: caught themselves lowering their voice when talking about the block's future",
+          "src": "output/beats/LifeHistory_Log.jsonl @C114",
+          "id": "F-a4eae0cf578c"
+        },
+        {
+          "t": "FACT",
+          "text": "Evan Lewis — in their life, C115: found a quiet minute at a neighborhood bakery and still riding the high from last night's win",
           "src": "output/beats/LifeHistory_Log.jsonl @C115",
-          "id": "F-46e318f248fd"
+          "id": "F-af37715024e9"
         },
         {
           "t": "FACT",
-          "text": "Marisol Achebe — in their life, C115: took a casual walk through their area",
-          "src": "output/beats/LifeHistory_Log.jsonl @C115",
-          "id": "F-d110f851c166"
+          "text": "Evan Lewis — the Tribune named them in a piece headlined Coliseum Lost 799 Riders on a Weekend With No Event on Its Row (Civic, C114)",
+          "src": "archive/ARTICLE_INDEX.jsonl b0d2ad3d2b2dd56c",
+          "id": "F-1084fb75deec"
         },
         {
           "t": "FACT",
-          "text": "Current cycle: C115",
-          "src": "cron-desk-run explicit cycle argument",
-          "id": "F-bc84fc0b7718"
+          "text": "Evan Lewis — the Tribune named them in a piece headlined The Quiet Platform Still Has a Job (Civic, C113)",
+          "src": "archive/ARTICLE_INDEX.jsonl da84550ec95e1ed6",
+          "id": "F-9a949452e80c"
         },
         {
           "t": "FACT",
-          "text": "Maurice Franklin moved into a place of their own in Rockridge, renting",
-          "src": "output/beats/Lived_Events.jsonl @C115 batch fd0b35",
-          "id": "F-5ac5466274c2"
+          "text": "Evan Lewis — the Tribune named them in a piece headlined At 19th Street, the busiest station runs on the slow side of the clock (Civic, C112)",
+          "src": "archive/ARTICLE_INDEX.jsonl c4491d29da23c2ad",
+          "id": "F-cd25d480efed"
         },
         {
           "t": "FACT",
-          "text": "Maurice Franklin first. The event is the lead; one true detail; what came next only if the record says.",
-          "src": "output/beats/Lived_Events.jsonl @C115 batch fd0b35",
-          "id": "F-d87ebda98cc1"
-        },
-        {
-          "t": "FACT",
-          "text": "Maurice Franklin moved into a place of their own in Rockridge, renting (C115)",
-          "src": "output/beats/Household_Ledger.jsonl @C115",
-          "id": "F-0a2299946e2b"
-        },
-        {
-          "t": "FACT",
-          "text": "Marisol Achebe — Mutual Aid Network Organizer — Fruitvale",
-          "src": "Simulation_Ledger profile for POP-00526",
-          "id": "F-cd9db787e730"
+          "text": "Evan Lewis — Bus driver — Laurel",
+          "src": "Simulation_Ledger profile for POP-00200",
+          "id": "F-de1611829a4e"
         },
         {
           "t": "FACT",

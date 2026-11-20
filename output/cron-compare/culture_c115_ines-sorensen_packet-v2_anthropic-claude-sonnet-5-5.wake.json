@@ -13,7 +13,7 @@
     "beatDomain": "COMMUNITY"
   },
   "laneEntries": 30,
-  "quotesLanded": 3,
+  "quotesLanded": 2,
   "disposition": "staged",
   "rheaPass": null,
   "rheaFlagCount": null,
@@ -26,11 +26,10 @@
     "canon_recall",
     "canon_recall",
     "canon_recall",
-    "canon_recall",
     "canon_recall"
   ],
-  "toolCalls": 5,
-  "wordCount": 475,
+  "toolCalls": 4,
+  "wordCount": 450,
   "targetWords": "300-600",
   "capHit": 0,
   "checkFlags": [],
@@ -41,22 +40,22 @@
     "purposeMet": false,
     "inTarget": true,
     "inTargetBy": "code floor 300",
-    "words": 475,
-    "short": "The piece puts names and reporter commentary before citizen quotes rather than leading with their lines and keeping the frame minimal.",
+    "words": 450,
+    "short": "The piece includes quotes given to reporters and editorial commentary about past coverage rather than strictly carrying what citizens wrote on their own pages.",
     "score": 2,
     "max": 3,
     "model": "google/gemini-3.7-flash",
     "scoredWithoutRhea": true,
-    "draftSha256": "0ee80226948da090e77b4a4dc296f95d9788848a092c78c102512691e65c2bc4"
+    "draftSha256": "b351050c4e11b0ee6700c8fae0416ac739a36865a63d32282d9213110a9a6d6f"
   },
   "gradeRecord": {
     "recorded": true,
-    "line": "graded: 2/3 — The piece puts names and reporter commentary before citizen quotes rather than leading with their lines and keeping the frame minimal."
+    "line": "graded: 2/3 — The piece includes quotes given to reporters and editorial commentary about past coverage rather than strictly carrying what citizens wrote on their own pages."
   },
-  "article": "output/cron-compare/staged/culture_c115_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "article": "output/cron-compare/staged/culture_c115_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.staged-1815.md",
   "selfRecord": {
     "recorded": true,
-    "out": " (33) from ../.config/godworld/.env // tip: ⌘ suppress logs { quiet: true }\n{\n  \"popId\": \"POP-01211\",\n  \"name\": \"Ines Sorensen\",\n  \"recorded\": true,\n  \"text\": \"filed: The Name Nobody Said in Uptown\"\n}"
+    "out": ".config/godworld/.env // tip: ⌁ auth for agents [www.vestauth.com]\n{\n  \"popId\": \"POP-01211\",\n  \"name\": \"Ines Sorensen\",\n  \"recorded\": true,\n  \"text\": \"filed: Uptown, the Second Half of the Sentence\"\n}"
   },
-  "ranAt": "2026-11-12T00:24:56.549Z"
+  "ranAt": "2026-11-15T18:16:11.295Z"
 }

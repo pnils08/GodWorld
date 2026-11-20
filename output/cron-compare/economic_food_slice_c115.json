@@ -1,0 +1,556 @@
+{
+  "version": "ECONOMIC-SLICE-4",
+  "empty": false,
+  "cycle": 115,
+  "kind": "food-workplaces",
+  "variant": "food",
+  "hood": "Baylight District",
+  "pulse": {
+    "className": "hood-kitchens",
+    "score": 20,
+    "label": "Baylight District kitchens · Oakland Casino Town, Bubic Burgers",
+    "hood": "Baylight District",
+    "namedBusinesses": [
+      "Oakland Casino Town",
+      "Bubic Burgers"
+    ]
+  },
+  "story": {
+    "angle": "Baylight District kitchens: Oakland Casino Town, Bubic Burgers — the people who work the shift",
+    "label": "Baylight District kitchens · Oakland Casino Town, Bubic Burgers",
+    "hookLine": "Gregory Mims, Organized Crime at Oakland Casino Town. 3 named workers at 1 named kitchen in Baylight District on the ledger this cycle.",
+    "hood": "Baylight District",
+    "pulseClass": "hood-kitchens",
+    "namedBusinesses": [
+      "Oakland Casino Town",
+      "Bubic Burgers"
+    ],
+    "citizens": [
+      "Gregory Mims (POP-00023)",
+      "Philly Rodriguez (POP-00027)",
+      "Manfred Owens (POP-00028)",
+      "Iris Pham (POP-01203)",
+      "Dawson Nguyen (POP-00347)",
+      "Ron Arenson (POP-00367)",
+      "Freya Rao (POP-01127)"
+    ],
+    "popids": [
+      "POP-00023",
+      "POP-00027",
+      "POP-00028",
+      "POP-01203",
+      "POP-00347",
+      "POP-00367",
+      "POP-01127"
+    ],
+    "ref": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+    "cycle": 115
+  },
+  "approach": "Food & hospitality approach — kitchens as workplaces: this slice is one neighborhood's restaurants, cafes and bars from the ledger and the people on the roster who work in them. The people on this slice are real; the rest of the room is yours — the line on a Tuesday, the regulars, the walk-in, the tip jar. One kitchen, one shift, one true thing about the work. Not a review. Not multi-voice culture-desk average. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "businesses": [
+    {
+      "bizId": "BIZ-00100",
+      "name": "Oakland Casino Town",
+      "sector": "Nightlife & Entertainment",
+      "hood": "Baylight District",
+      "employeeCount": 99,
+      "avgSalary": 70000,
+      "annualRevenue": null,
+      "growthRate": -2.34,
+      "keyPersonnel": null,
+      "staff": [
+        {
+          "popid": "POP-00023",
+          "name": "Gregory Mims",
+          "role": "Organized Crime"
+        },
+        {
+          "popid": "POP-00027",
+          "name": "Philly Rodriguez",
+          "role": "Casino Manager"
+        },
+        {
+          "popid": "POP-00028",
+          "name": "Manfred Owens",
+          "role": "Booky"
+        }
+      ],
+      "delta": {
+        "vsCycle": 114,
+        "employees": -1,
+        "revenue": null,
+        "growth": -0.5599999999999998
+      }
+    },
+    {
+      "bizId": "BIZ-00104",
+      "name": "Bubic Burgers",
+      "sector": "Food & Beverage",
+      "hood": "Baylight District",
+      "employeeCount": 15,
+      "avgSalary": 73000,
+      "annualRevenue": 2197091,
+      "growthRate": -0.33,
+      "keyPersonnel": "Kris Bubic",
+      "staff": [],
+      "delta": {
+        "vsCycle": 114,
+        "employees": 0,
+        "revenue": -139,
+        "growth": -0.76
+      }
+    }
+  ],
+  "seeds": [
+    {
+      "seedId": "306afbac",
+      "hood": "Baylight District",
+      "domain": "ECONOMIC",
+      "citizens": [
+        {
+          "popid": "POP-01203",
+          "name": "Iris Pham"
+        },
+        {
+          "popid": "POP-00347",
+          "name": "Dawson Nguyen"
+        },
+        {
+          "popid": "POP-00367",
+          "name": "Ron Arenson"
+        },
+        {
+          "popid": "POP-01127",
+          "name": "Freya Rao"
+        }
+      ],
+      "citizenEvents": [
+        "Iris Pham — traded produce over a fence and came out ahead",
+        "Dawson Nguyen — caught the recap of last night's game at the counter and stayed for the second retelling",
+        "Ron Arenson — drank the free cold brew in the company kitchen and felt completely disconnected from the neighborhood outside",
+        "Freya Rao — recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for near a pregame tailgate"
+      ],
+      "businesses": [
+        {
+          "bizId": "BIZ-00105",
+          "name": "Marine Systems"
+        },
+        {
+          "bizId": "BIZ-00100",
+          "name": "Oakland Casino Town"
+        }
+      ],
+      "otherEntities": "Vinnie Keane Gala (program)",
+      "magnitude": -8,
+      "trend": "carrying, -8.00 strength left of 4-cycle run",
+      "suggestedJournalist": null,
+      "suggestedAngle": "general coverage"
+    }
+  ],
+  "citizens": [
+    {
+      "popid": "POP-00023",
+      "name": "Gregory Mims",
+      "role": "Organized Crime",
+      "neighborhood": "Baylight District",
+      "business": "Oakland Casino Town",
+      "profile": "Gregory Mims — Organized Crime — Oakland Casino Town, Baylight District",
+      "why": "works at Oakland Casino Town (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00027",
+      "name": "Philly Rodriguez",
+      "role": "Casino Manager",
+      "neighborhood": "Baylight District",
+      "business": "Oakland Casino Town",
+      "profile": "Philly Rodriguez — Casino Manager — Oakland Casino Town, Baylight District",
+      "why": "works at Oakland Casino Town (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00028",
+      "name": "Manfred Owens",
+      "role": "Booky",
+      "neighborhood": "Baylight District",
+      "business": "Oakland Casino Town",
+      "profile": "Manfred Owens — Booky — Oakland Casino Town, Baylight District",
+      "why": "works at Oakland Casino Town (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01203",
+      "name": "Iris Pham",
+      "role": null,
+      "neighborhood": "Baylight District",
+      "business": null,
+      "profile": "Iris Pham — Baylight District",
+      "why": "city seed for Baylight District this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00347",
+      "name": "Dawson Nguyen",
+      "role": null,
+      "neighborhood": "Baylight District",
+      "business": null,
+      "profile": "Dawson Nguyen — Baylight District",
+      "why": "city seed for Baylight District this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00367",
+      "name": "Ron Arenson",
+      "role": null,
+      "neighborhood": "Baylight District",
+      "business": null,
+      "profile": "Ron Arenson — Baylight District",
+      "why": "city seed for Baylight District this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-01127",
+      "name": "Freya Rao",
+      "role": null,
+      "neighborhood": "Baylight District",
+      "business": null,
+      "profile": "Freya Rao — Baylight District",
+      "why": "city seed for Baylight District this cycle (Story_Seed_Deck)"
+    }
+  ],
+  "closures": [],
+  "contractionWatch": [],
+  "casino": null,
+  "cityMoney": null,
+  "deltas": {
+    "state": "PRIOR_CYCLE_ON_DISK",
+    "vs": 114
+  },
+  "prewrite": {
+    "pulseClass": "hood-kitchens",
+    "angle": "Baylight District kitchens: Oakland Casino Town, Bubic Burgers — the people who work the shift",
+    "hookLine": "Gregory Mims, Organized Crime at Oakland Casino Town. 3 named workers at 1 named kitchen in Baylight District on the ledger this cycle.",
+    "namedBusinesses": [
+      "Oakland Casino Town",
+      "Bubic Burgers"
+    ],
+    "anchorFacts": [
+      "Oakland Casino Town · Nightlife & Entertainment · 99 employees (-1 vs C114) · growth -2.3% · on the roster: Gregory Mims (Organized Crime); Philly Rodriguez (Casino Manager); Manfred Owens (Booky)",
+      "Bubic Burgers · Food & Beverage · 15 employees · growth -0.3% · revenue $2.2M (-$139 vs C114) · key personnel: Kris Bubic",
+      "CITY SEED (Baylight District): citizens Iris Pham; Dawson Nguyen; Ron Arenson; Freya Rao · businesses Marine Systems; Oakland Casino Town · Vinnie Keane Gala (program)"
+    ],
+    "evidence": [
+      {
+        "text": "Oakland Casino Town · Nightlife & Entertainment · 99 employees (-1 vs C114) · growth -2.3% · on the roster: Gregory Mims (Organized Crime); Philly Rodriguez (Casino Manager); Manfred Owens (Booky)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115"
+      },
+      {
+        "text": "Bubic Burgers · Food & Beverage · 15 employees · growth -0.3% · revenue $2.2M (-$139 vs C114) · key personnel: Kris Bubic",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115"
+      },
+      {
+        "text": "CITY SEED (Baylight District): citizens Iris Pham; Dawson Nguyen; Ron Arenson; Freya Rao · businesses Marine Systems; Oakland Casino Town · Vinnie Keane Gala (program)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C115"
+      }
+    ],
+    "hooks": [
+      {
+        "text": "High concentration of ambitious, driven personalities. Career competition and economic hustle stories.",
+        "angle": "baseline context piece",
+        "hood": null
+      },
+      {
+        "text": "Dearie Beacon has not advanced in 57 years",
+        "angle": "baseline context piece",
+        "hood": null
+      },
+      {
+        "text": "Felicia Grandberry has not advanced in 57 years",
+        "angle": "baseline context piece",
+        "hood": null
+      },
+      {
+        "text": "defaulted on the debts — the savings are gone and the record carries it",
+        "angle": "observational analysis",
+        "hood": "West Oakland"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+      "Do not contradict a role, employer or neighborhood listed here"
+    ]
+  },
+  "rotation": {
+    "pool": [
+      {
+        "hood": "Jack London",
+        "staffed": 5,
+        "workers": 14,
+        "lastCovered": 111
+      },
+      {
+        "hood": "Downtown",
+        "staffed": 2,
+        "workers": 2,
+        "lastCovered": 112
+      },
+      {
+        "hood": "Temescal",
+        "staffed": 1,
+        "workers": 2,
+        "lastCovered": null
+      },
+      {
+        "hood": "Uptown",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Chinatown",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Rockridge",
+        "staffed": 2,
+        "workers": 6,
+        "lastCovered": 113
+      },
+      {
+        "hood": "Fruitvale",
+        "staffed": 2,
+        "workers": 2,
+        "lastCovered": 114
+      },
+      {
+        "hood": "KONO",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "West Oakland",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Dimond",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Grand Lake",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Laurel",
+        "staffed": 2,
+        "workers": 2,
+        "lastCovered": 110
+      },
+      {
+        "hood": "Baylight District",
+        "staffed": 1,
+        "workers": 3,
+        "lastCovered": null
+      },
+      {
+        "hood": "East Oakland",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "Eastlake",
+        "staffed": 1,
+        "workers": 1,
+        "lastCovered": null
+      },
+      {
+        "hood": "San Antonio",
+        "staffed": 1,
+        "workers": 2,
+        "lastCovered": null
+      }
+    ],
+    "picked": "Baylight District"
+  },
+  "candidates": [
+    {
+      "className": "hood-kitchens",
+      "hood": "Jack London",
+      "label": "Jack London · 5 staffed / 10 listed",
+      "namedBusinesses": [
+        "Jack London Square Markets",
+        "Blue Lantern Bar",
+        "Green & Gold Tavern"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Downtown",
+      "label": "Downtown · 2 staffed / 4 listed",
+      "namedBusinesses": [
+        "Miso Metro",
+        "SpeedyBurger"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Temescal",
+      "label": "Temescal · 1 staffed / 2 listed",
+      "namedBusinesses": [
+        "OakTown Social"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Uptown",
+      "label": "Uptown · 1 staffed / 6 listed",
+      "namedBusinesses": [
+        "Art Walk Cafe"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Chinatown",
+      "label": "Chinatown · 1 staffed / 4 listed",
+      "namedBusinesses": [
+        "Heritage Bakehouse"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Rockridge",
+      "label": "Rockridge · 2 staffed / 2 listed",
+      "namedBusinesses": [
+        "OakHouse",
+        "Claremont Table"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Fruitvale",
+      "label": "Fruitvale · 2 staffed / 7 listed",
+      "namedBusinesses": [
+        "Fruitvale Diner",
+        "Marigold Cafe"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "KONO",
+      "label": "KONO · 1 staffed / 5 listed",
+      "namedBusinesses": [
+        "The Northgate Bar"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "West Oakland",
+      "label": "West Oakland · 1 staffed / 2 listed",
+      "namedBusinesses": [
+        "West Side Cafe"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Dimond",
+      "label": "Dimond · 1 staffed / 4 listed",
+      "namedBusinesses": [
+        "Romano's"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Grand Lake",
+      "label": "Grand Lake · 1 staffed / 5 listed",
+      "namedBusinesses": [
+        "Port Grind"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Laurel",
+      "label": "Laurel · 2 staffed / 3 listed",
+      "namedBusinesses": [
+        "Nino's",
+        "Schoolgate Cafe"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "East Oakland",
+      "label": "East Oakland · 1 staffed / 4 listed",
+      "namedBusinesses": [
+        "Sunrise Cafe"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "Eastlake",
+      "label": "Eastlake · 1 staffed / 4 listed",
+      "namedBusinesses": [
+        "Parkedge Diner"
+      ]
+    },
+    {
+      "className": "hood-kitchens",
+      "hood": "San Antonio",
+      "label": "San Antonio · 1 staffed / 2 listed",
+      "namedBusinesses": [
+        "Park Boulevard Cafe"
+      ]
+    }
+  ],
+  "signals": {
+    "businessLaneCount": 41,
+    "sample": [
+      {
+        "kind": "anomaly",
+        "label": "economic ailment — economic footprint, affected businesses, workforce impact in West Oakland",
+        "hood": "West Oakland, East Oakland, Fruitvale",
+        "ref": "output/engine_audit_c115.json patterns[0]; evidence: Initiative_Tracker row(s) 7; storyline INIT-007:implementation-active"
+      },
+      {
+        "kind": "anomaly",
+        "label": "transit ailment — economic footprint, affected businesses, workforce impact in Fruitvale",
+        "hood": "Fruitvale",
+        "ref": "output/engine_audit_c115.json patterns[2]; evidence: Neighborhood_Map row(s) 6; storyline INIT-007:implementation-active"
+      },
+      {
+        "kind": "anomaly",
+        "label": "economic ailment — economic footprint, affected businesses, workforce impact in Downtown",
+        "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Brooklyn, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, Baylight District",
+        "ref": "output/engine_audit_c115.json patterns[8]; evidence: Neighborhood_Map row(s) "
+      },
+      {
+        "kind": "anomaly",
+        "label": "Commercial Stabilization for Grand Lake — economic upside, jobs and footprint in Grand Lake",
+        "hood": "Grand Lake",
+        "ref": "output/engine_audit_c115.json patterns[9]; evidence: Initiative_Tracker row(s) 9; storyline INIT-009:vote-ready"
+      },
+      {
+        "kind": "anomaly",
+        "label": "INIT-007 — economic upside, jobs and footprint in West Oakland",
+        "hood": "West Oakland, Fruitvale",
+        "ref": "output/engine_audit_c115.json patterns[10]; evidence: Neighborhood_Map row(s) ; storyline INIT-007:implementation-active"
+      }
+    ]
+  },
+  "scene": {
+    "namedOnTop": [
+      "Oakland Casino Town",
+      "Bubic Burgers"
+    ]
+  },
+  "pointers": [
+    "output/beats/Business_Ledger.jsonl (283 rows @C115)",
+    "output/beats/Employment_Roster.jsonl (971 rows)",
+    "output/beats/Story_Seed_Deck.jsonl (business seeds this cycle: 2)",
+    "output/beats/prev/Business_Ledger.jsonl (movement vs C114)",
+    "output/beats/Story_Hook_Deck.jsonl (business hooks this cycle: 4)",
+    "output/desk_signal_c115.json lanes.business (pointers only)"
+  ]
+}

@@ -1,0 +1,598 @@
+[
+  {
+    "pop": "POP-00617",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00617\",\"name\":\"Eleanor Rivera\",\"role\":\"BART Station Manager\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Trevor Shimizu\",\"question\":\"When the platforms are crowded and the on-time number drops five points, what are you seeing at the fare gates that the ridership ledger doesn't capture — are people leaving the station, or just arriving later? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-transit\",\"hood\":null,\"focus\":\"Why the two busiest downtown stations shed a combined 4,564 riders in a mild, event-heavy week while Coliseum and Fruitvale gained — and what the transit workers on the roster see from the platform that the ledger doesn't show.\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 116\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Eleanor Rivera — BART Station Manager — BART Oakland Division\",\"evidence\":[{\"id\":\"EV-f5cd80d586\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 116\",\"text\":\"12th St Oakland City Center moved down the most this cycle — mild; holiday: Spring Equinox (no cut); base: ledger; game day (Downtown, Jack London); events in Downtown, Lake Merritt; crowded platforms (city transit congestion 0.14); 14 transit workers on the roster, 8 citizens who lived a transit line.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C116\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-871096fd8925\"},{\"t\":\"FACT\",\"text\":\"12th St Oakland City Center ridership down 2,313 vs C115 | 8 stations + 10 corridors on the record\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 116\",\"id\":\"F-c5d93f262c83\"},{\"t\":\"FACT\",\"text\":\"12th St Oakland City Center moved down the most this cycle — mild; holiday: Spring Equinox (no cut); base: ledger; game day (Downtown, Jack London); events in Downtown, Lake Merritt; crowded platforms (city transit congestion 0.14); 14 transit workers on the roster, 8 citizens who lived a transit line.\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 116\",\"id\":\"F-2d0a41f1dcc3\"},{\"t\":\"FACT\",\"text\":\"Day type this cycle: weekday; holiday: Spring Equinox (no cut) — no change to riders. A station that moved more than the citywide rule names its own reason on its row.\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 116 Factors (frame)\",\"id\":\"F-f525ffd3880b\"},{\"t\":\"FACT\",\"text\":\"The week on the line — every cause on the record this cycle, once: mild; holiday: Spring Equinox (no cut); game day (Downtown, Jack London); events in Downtown, Lake Merritt; crowded platforms (city transit congestion 0.14); game day (Downtown); events in Downtown, Lake Merritt, Temescal; events in Lake Merritt, Chinatown, Adams Point; events in East Oakland; Fruitvale Transit Hub Phase II — Visioning: complete; events in East Oakland, Baylight District; game day (Jack London); events in Temesca\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 116 Factors\",\"id\":\"F-df552133a6b1\"},{\"t\":\"FACT\",\"text\":\"Weather this cycle: mild, 54°F (6 cycles of clear)\",\"src\":\"output/beats/Cycle_Weather.jsonl CycleID 116\",\"id\":\"F-e5ab6d72fd50\"},{\"t\":\"FACT\",\"text\":\"Game on the sports feed this cycle: Oaks at San Antonio — One cycle after this page asked whether Wilson Shepard's offense still had another gear, the Oaks found it in Denver. They won their second NBA Cup game 147-114, the most points in franchise history, topping the 135 they put up in Toronto. Oakland led by 5 after one, by 18 at the half and by 23 after three, then scored 42 in the fourth. The shooting numbers barely look real: 63 of 79 from the field, 80 percent, and 19 of 26 from three, 73\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl Cycle 116\",\"id\":\"F-f11c0e135086\"},{\"t\":\"FACT\",\"text\":\"Game on the sports feed this cycle: Oaks at KONO — The Spurs handed the Oaks their first ever home loss. San Antonio came into Oakland for a Cup game in front of a 99 percent crowd and left with a 126-117 win, only the Oaks' second loss of the season. It was even for three quarters. The Oaks trailed by 8 after a slow 20-point first, won the second 35-25 to lead 55-53 at the half, and it was tied 90-90 going into the fourth. Then the offense that shot 80 percent in Denver went cold. The Oaks scor\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl Cycle 116\",\"id\":\"F-5bf65447ea13\"},{\"t\":\"FACT\",\"text\":\"Eleanor Rivera — BART Station Manager — BART Oakland Division\",\"src\":\"Simulation_Ledger profile for POP-00617\",\"id\":\"F-6412715ef9fb\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C12, Spring, holiday=Spring Equinox\",\"src\":\"output/world_summary_c116.md Calendar context (Simulation_Calendar)\",\"id\":\"F-647fd9067a33\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00617",
+        "name": "Eleanor Rivera",
+        "role": "BART Station Manager",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Trevor Shimizu",
+        "question": "When the platforms are crowded and the on-time number drops five points, what are you seeing at the fare gates that the ridership ledger doesn't capture — are people leaving the station, or just arriving later? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-transit",
+        "hood": null,
+        "focus": "Why the two busiest downtown stations shed a combined 4,564 riders in a mild, event-heavy week while Coliseum and Fruitvale gained — and what the transit workers on the roster see from the platform that the ledger doesn't show.",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 116"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Eleanor Rivera — BART Station Manager — BART Oakland Division",
+        "evidence": [
+          {
+            "id": "EV-f5cd80d586",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 116",
+            "text": "12th St Oakland City Center moved down the most this cycle — mild; holiday: Spring Equinox (no cut); base: ledger; game day (Downtown, Jack London); events in Downtown, Lake Merritt; crowded platforms (city transit congestion 0.14); 14 transit workers on the roster, 8 citizens who lived a transit line."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C116",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-871096fd8925"
+        },
+        {
+          "t": "FACT",
+          "text": "12th St Oakland City Center ridership down 2,313 vs C115 | 8 stations + 10 corridors on the record",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 116",
+          "id": "F-c5d93f262c83"
+        },
+        {
+          "t": "FACT",
+          "text": "12th St Oakland City Center moved down the most this cycle — mild; holiday: Spring Equinox (no cut); base: ledger; game day (Downtown, Jack London); events in Downtown, Lake Merritt; crowded platforms (city transit congestion 0.14); 14 transit workers on the roster, 8 citizens who lived a transit line.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 116",
+          "id": "F-2d0a41f1dcc3"
+        },
+        {
+          "t": "FACT",
+          "text": "Day type this cycle: weekday; holiday: Spring Equinox (no cut) — no change to riders. A station that moved more than the citywide rule names its own reason on its row.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 116 Factors (frame)",
+          "id": "F-f525ffd3880b"
+        },
+        {
+          "t": "FACT",
+          "text": "The week on the line — every cause on the record this cycle, once: mild; holiday: Spring Equinox (no cut); game day (Downtown, Jack London); events in Downtown, Lake Merritt; crowded platforms (city transit congestion 0.14); game day (Downtown); events in Downtown, Lake Merritt, Temescal; events in Lake Merritt, Chinatown, Adams Point; events in East Oakland; Fruitvale Transit Hub Phase II — Visioning: complete; events in East Oakland, Baylight District; game day (Jack London); events in Temesca",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 116 Factors",
+          "id": "F-df552133a6b1"
+        },
+        {
+          "t": "FACT",
+          "text": "Weather this cycle: mild, 54°F (6 cycles of clear)",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 116",
+          "id": "F-e5ab6d72fd50"
+        },
+        {
+          "t": "FACT",
+          "text": "Game on the sports feed this cycle: Oaks at San Antonio — One cycle after this page asked whether Wilson Shepard's offense still had another gear, the Oaks found it in Denver. They won their second NBA Cup game 147-114, the most points in franchise history, topping the 135 they put up in Toronto. Oakland led by 5 after one, by 18 at the half and by 23 after three, then scored 42 in the fourth. The shooting numbers barely look real: 63 of 79 from the field, 80 percent, and 19 of 26 from three, 73",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 116",
+          "id": "F-f11c0e135086"
+        },
+        {
+          "t": "FACT",
+          "text": "Game on the sports feed this cycle: Oaks at KONO — The Spurs handed the Oaks their first ever home loss. San Antonio came into Oakland for a Cup game in front of a 99 percent crowd and left with a 126-117 win, only the Oaks' second loss of the season. It was even for three quarters. The Oaks trailed by 8 after a slow 20-point first, won the second 35-25 to lead 55-53 at the half, and it was tied 90-90 going into the fourth. Then the offense that shot 80 percent in Denver went cold. The Oaks scor",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 116",
+          "id": "F-5bf65447ea13"
+        },
+        {
+          "t": "FACT",
+          "text": "Eleanor Rivera — BART Station Manager — BART Oakland Division",
+          "src": "Simulation_Ledger profile for POP-00617",
+          "id": "F-6412715ef9fb"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+          "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+          "id": "F-647fd9067a33"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01039",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01039\",\"name\":\"Ximena Mehta\",\"role\":\"Bart Transit PR\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Trevor Shimizu\",\"question\":\"The citywide congestion factor is on the record at 0.14 — is BART reading that as a demand signal or a capacity problem, and what does the downtown drop tell the agency about where riders are going? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-transit\",\"hood\":null,\"focus\":\"Why the two busiest downtown stations shed a combined 4,564 riders in a mild, event-heavy week while Coliseum and Fruitvale gained — and what the transit workers on the roster see from the platform that the ledger doesn't show.\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 116\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Ximena Mehta — Bart Transit PR — BART Oakland Division\",\"evidence\":[{\"id\":\"EV-1fe7af1596\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 116\",\"text\":\"12th St Oakland City Center moved down the most this cycle — mild; holiday: Spring Equinox (no cut); base: ledger; game day (Downtown, Jack London); events in Downtown, Lake Merritt; crowded platforms (city transit congestion 0.14); 14 transit workers on the roster, 8 citizens who lived a transit line.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C116\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-871096fd8925\"},{\"t\":\"FACT\",\"text\":\"12th St Oakland City Center ridership down 2,313 vs C115 | 8 stations + 10 corridors on the record\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 116\",\"id\":\"F-c5d93f262c83\"},{\"t\":\"FACT\",\"text\":\"12th St Oakland City Center moved down the most this cycle — mild; holiday: Spring Equinox (no cut); base: ledger; game day (Downtown, Jack London); events in Downtown, Lake Merritt; crowded platforms (city transit congestion 0.14); 14 transit workers on the roster, 8 citizens who lived a transit line.\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 116\",\"id\":\"F-2d0a41f1dcc3\"},{\"t\":\"FACT\",\"text\":\"Day type this cycle: weekday; holiday: Spring Equinox (no cut) — no change to riders. A station that moved more than the citywide rule names its own reason on its row.\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 116 Factors (frame)\",\"id\":\"F-f525ffd3880b\"},{\"t\":\"FACT\",\"text\":\"The week on the line — every cause on the record this cycle, once: mild; holiday: Spring Equinox (no cut); game day (Downtown, Jack London); events in Downtown, Lake Merritt; crowded platforms (city transit congestion 0.14); game day (Downtown); events in Downtown, Lake Merritt, Temescal; events in Lake Merritt, Chinatown, Adams Point; events in East Oakland; Fruitvale Transit Hub Phase II — Visioning: complete; events in East Oakland, Baylight District; game day (Jack London); events in Temesca\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 116 Factors\",\"id\":\"F-df552133a6b1\"},{\"t\":\"FACT\",\"text\":\"Weather this cycle: mild, 54°F (6 cycles of clear)\",\"src\":\"output/beats/Cycle_Weather.jsonl CycleID 116\",\"id\":\"F-e5ab6d72fd50\"},{\"t\":\"FACT\",\"text\":\"Game on the sports feed this cycle: Oaks at San Antonio — One cycle after this page asked whether Wilson Shepard's offense still had another gear, the Oaks found it in Denver. They won their second NBA Cup game 147-114, the most points in franchise history, topping the 135 they put up in Toronto. Oakland led by 5 after one, by 18 at the half and by 23 after three, then scored 42 in the fourth. The shooting numbers barely look real: 63 of 79 from the field, 80 percent, and 19 of 26 from three, 73\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl Cycle 116\",\"id\":\"F-f11c0e135086\"},{\"t\":\"FACT\",\"text\":\"Game on the sports feed this cycle: Oaks at KONO — The Spurs handed the Oaks their first ever home loss. San Antonio came into Oakland for a Cup game in front of a 99 percent crowd and left with a 126-117 win, only the Oaks' second loss of the season. It was even for three quarters. The Oaks trailed by 8 after a slow 20-point first, won the second 35-25 to lead 55-53 at the half, and it was tied 90-90 going into the fourth. Then the offense that shot 80 percent in Denver went cold. The Oaks scor\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl Cycle 116\",\"id\":\"F-5bf65447ea13\"},{\"t\":\"FACT\",\"text\":\"Ximena Mehta — Bart Transit PR — BART Oakland Division\",\"src\":\"Simulation_Ledger profile for POP-01039\",\"id\":\"F-68d81ed0c396\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C12, Spring, holiday=Spring Equinox\",\"src\":\"output/world_summary_c116.md Calendar context (Simulation_Calendar)\",\"id\":\"F-647fd9067a33\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01039",
+        "name": "Ximena Mehta",
+        "role": "Bart Transit PR",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Trevor Shimizu",
+        "question": "The citywide congestion factor is on the record at 0.14 — is BART reading that as a demand signal or a capacity problem, and what does the downtown drop tell the agency about where riders are going? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-transit",
+        "hood": null,
+        "focus": "Why the two busiest downtown stations shed a combined 4,564 riders in a mild, event-heavy week while Coliseum and Fruitvale gained — and what the transit workers on the roster see from the platform that the ledger doesn't show.",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 116"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Ximena Mehta — Bart Transit PR — BART Oakland Division",
+        "evidence": [
+          {
+            "id": "EV-1fe7af1596",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 116",
+            "text": "12th St Oakland City Center moved down the most this cycle — mild; holiday: Spring Equinox (no cut); base: ledger; game day (Downtown, Jack London); events in Downtown, Lake Merritt; crowded platforms (city transit congestion 0.14); 14 transit workers on the roster, 8 citizens who lived a transit line."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C116",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-871096fd8925"
+        },
+        {
+          "t": "FACT",
+          "text": "12th St Oakland City Center ridership down 2,313 vs C115 | 8 stations + 10 corridors on the record",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 116",
+          "id": "F-c5d93f262c83"
+        },
+        {
+          "t": "FACT",
+          "text": "12th St Oakland City Center moved down the most this cycle — mild; holiday: Spring Equinox (no cut); base: ledger; game day (Downtown, Jack London); events in Downtown, Lake Merritt; crowded platforms (city transit congestion 0.14); 14 transit workers on the roster, 8 citizens who lived a transit line.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 116",
+          "id": "F-2d0a41f1dcc3"
+        },
+        {
+          "t": "FACT",
+          "text": "Day type this cycle: weekday; holiday: Spring Equinox (no cut) — no change to riders. A station that moved more than the citywide rule names its own reason on its row.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 116 Factors (frame)",
+          "id": "F-f525ffd3880b"
+        },
+        {
+          "t": "FACT",
+          "text": "The week on the line — every cause on the record this cycle, once: mild; holiday: Spring Equinox (no cut); game day (Downtown, Jack London); events in Downtown, Lake Merritt; crowded platforms (city transit congestion 0.14); game day (Downtown); events in Downtown, Lake Merritt, Temescal; events in Lake Merritt, Chinatown, Adams Point; events in East Oakland; Fruitvale Transit Hub Phase II — Visioning: complete; events in East Oakland, Baylight District; game day (Jack London); events in Temesca",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 116 Factors",
+          "id": "F-df552133a6b1"
+        },
+        {
+          "t": "FACT",
+          "text": "Weather this cycle: mild, 54°F (6 cycles of clear)",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 116",
+          "id": "F-e5ab6d72fd50"
+        },
+        {
+          "t": "FACT",
+          "text": "Game on the sports feed this cycle: Oaks at San Antonio — One cycle after this page asked whether Wilson Shepard's offense still had another gear, the Oaks found it in Denver. They won their second NBA Cup game 147-114, the most points in franchise history, topping the 135 they put up in Toronto. Oakland led by 5 after one, by 18 at the half and by 23 after three, then scored 42 in the fourth. The shooting numbers barely look real: 63 of 79 from the field, 80 percent, and 19 of 26 from three, 73",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 116",
+          "id": "F-f11c0e135086"
+        },
+        {
+          "t": "FACT",
+          "text": "Game on the sports feed this cycle: Oaks at KONO — The Spurs handed the Oaks their first ever home loss. San Antonio came into Oakland for a Cup game in front of a 99 percent crowd and left with a 126-117 win, only the Oaks' second loss of the season. It was even for three quarters. The Oaks trailed by 8 after a slow 20-point first, won the second 35-25 to lead 55-53 at the half, and it was tied 90-90 going into the fourth. Then the offense that shot 80 percent in Denver went cold. The Oaks scor",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 116",
+          "id": "F-5bf65447ea13"
+        },
+        {
+          "t": "FACT",
+          "text": "Ximena Mehta — Bart Transit PR — BART Oakland Division",
+          "src": "Simulation_Ledger profile for POP-01039",
+          "id": "F-68d81ed0c396"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+          "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+          "id": "F-647fd9067a33"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00791",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00791\",\"name\":\"Elena Soria Dominguez\",\"role\":\"Transit Hub Planning Lead\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Trevor Shimizu\",\"question\":\"Fruitvale gained 400 riders the same cycle the Visioning phase completed — is the hub already pulling riders that downtown is losing, and what does the planning record show about that shift? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-transit\",\"hood\":null,\"focus\":\"Why the two busiest downtown stations shed a combined 4,564 riders in a mild, event-heavy week while Coliseum and Fruitvale gained — and what the transit workers on the roster see from the platform that the ledger doesn't show.\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 116\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Elena Soria Dominguez — Transit Hub Planning Lead — Fruitvale Transit Hub Authority\",\"evidence\":[{\"id\":\"EV-de34d58c26\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 116\",\"text\":\"12th St Oakland City Center moved down the most this cycle — mild; holiday: Spring Equinox (no cut); base: ledger; game day (Downtown, Jack London); events in Downtown, Lake Merritt; crowded platforms (city transit congestion 0.14); 14 transit workers on the roster, 8 citizens who lived a transit line.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C116\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-871096fd8925\"},{\"t\":\"FACT\",\"text\":\"12th St Oakland City Center ridership down 2,313 vs C115 | 8 stations + 10 corridors on the record\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 116\",\"id\":\"F-c5d93f262c83\"},{\"t\":\"FACT\",\"text\":\"12th St Oakland City Center moved down the most this cycle — mild; holiday: Spring Equinox (no cut); base: ledger; game day (Downtown, Jack London); events in Downtown, Lake Merritt; crowded platforms (city transit congestion 0.14); 14 transit workers on the roster, 8 citizens who lived a transit line.\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 116\",\"id\":\"F-2d0a41f1dcc3\"},{\"t\":\"FACT\",\"text\":\"Day type this cycle: weekday; holiday: Spring Equinox (no cut) — no change to riders. A station that moved more than the citywide rule names its own reason on its row.\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 116 Factors (frame)\",\"id\":\"F-f525ffd3880b\"},{\"t\":\"FACT\",\"text\":\"The week on the line — every cause on the record this cycle, once: mild; holiday: Spring Equinox (no cut); game day (Downtown, Jack London); events in Downtown, Lake Merritt; crowded platforms (city transit congestion 0.14); game day (Downtown); events in Downtown, Lake Merritt, Temescal; events in Lake Merritt, Chinatown, Adams Point; events in East Oakland; Fruitvale Transit Hub Phase II — Visioning: complete; events in East Oakland, Baylight District; game day (Jack London); events in Temesca\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 116 Factors\",\"id\":\"F-df552133a6b1\"},{\"t\":\"FACT\",\"text\":\"Weather this cycle: mild, 54°F (6 cycles of clear)\",\"src\":\"output/beats/Cycle_Weather.jsonl CycleID 116\",\"id\":\"F-e5ab6d72fd50\"},{\"t\":\"FACT\",\"text\":\"Game on the sports feed this cycle: Oaks at San Antonio — One cycle after this page asked whether Wilson Shepard's offense still had another gear, the Oaks found it in Denver. They won their second NBA Cup game 147-114, the most points in franchise history, topping the 135 they put up in Toronto. Oakland led by 5 after one, by 18 at the half and by 23 after three, then scored 42 in the fourth. The shooting numbers barely look real: 63 of 79 from the field, 80 percent, and 19 of 26 from three, 73\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl Cycle 116\",\"id\":\"F-f11c0e135086\"},{\"t\":\"FACT\",\"text\":\"Game on the sports feed this cycle: Oaks at KONO — The Spurs handed the Oaks their first ever home loss. San Antonio came into Oakland for a Cup game in front of a 99 percent crowd and left with a 126-117 win, only the Oaks' second loss of the season. It was even for three quarters. The Oaks trailed by 8 after a slow 20-point first, won the second 35-25 to lead 55-53 at the half, and it was tied 90-90 going into the fourth. Then the offense that shot 80 percent in Denver went cold. The Oaks scor\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl Cycle 116\",\"id\":\"F-5bf65447ea13\"},{\"t\":\"FACT\",\"text\":\"Elena Soria Dominguez — Transit Hub Planning Lead — Fruitvale Transit Hub Authority\",\"src\":\"Simulation_Ledger profile for POP-00791\",\"id\":\"F-79a3d1428db6\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C12, Spring, holiday=Spring Equinox\",\"src\":\"output/world_summary_c116.md Calendar context (Simulation_Calendar)\",\"id\":\"F-647fd9067a33\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00791",
+        "name": "Elena Soria Dominguez",
+        "role": "Transit Hub Planning Lead",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Trevor Shimizu",
+        "question": "Fruitvale gained 400 riders the same cycle the Visioning phase completed — is the hub already pulling riders that downtown is losing, and what does the planning record show about that shift? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-transit",
+        "hood": null,
+        "focus": "Why the two busiest downtown stations shed a combined 4,564 riders in a mild, event-heavy week while Coliseum and Fruitvale gained — and what the transit workers on the roster see from the platform that the ledger doesn't show.",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 116"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Elena Soria Dominguez — Transit Hub Planning Lead — Fruitvale Transit Hub Authority",
+        "evidence": [
+          {
+            "id": "EV-de34d58c26",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 116",
+            "text": "12th St Oakland City Center moved down the most this cycle — mild; holiday: Spring Equinox (no cut); base: ledger; game day (Downtown, Jack London); events in Downtown, Lake Merritt; crowded platforms (city transit congestion 0.14); 14 transit workers on the roster, 8 citizens who lived a transit line."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C116",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-871096fd8925"
+        },
+        {
+          "t": "FACT",
+          "text": "12th St Oakland City Center ridership down 2,313 vs C115 | 8 stations + 10 corridors on the record",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 116",
+          "id": "F-c5d93f262c83"
+        },
+        {
+          "t": "FACT",
+          "text": "12th St Oakland City Center moved down the most this cycle — mild; holiday: Spring Equinox (no cut); base: ledger; game day (Downtown, Jack London); events in Downtown, Lake Merritt; crowded platforms (city transit congestion 0.14); 14 transit workers on the roster, 8 citizens who lived a transit line.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 116",
+          "id": "F-2d0a41f1dcc3"
+        },
+        {
+          "t": "FACT",
+          "text": "Day type this cycle: weekday; holiday: Spring Equinox (no cut) — no change to riders. A station that moved more than the citywide rule names its own reason on its row.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 116 Factors (frame)",
+          "id": "F-f525ffd3880b"
+        },
+        {
+          "t": "FACT",
+          "text": "The week on the line — every cause on the record this cycle, once: mild; holiday: Spring Equinox (no cut); game day (Downtown, Jack London); events in Downtown, Lake Merritt; crowded platforms (city transit congestion 0.14); game day (Downtown); events in Downtown, Lake Merritt, Temescal; events in Lake Merritt, Chinatown, Adams Point; events in East Oakland; Fruitvale Transit Hub Phase II — Visioning: complete; events in East Oakland, Baylight District; game day (Jack London); events in Temesca",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 116 Factors",
+          "id": "F-df552133a6b1"
+        },
+        {
+          "t": "FACT",
+          "text": "Weather this cycle: mild, 54°F (6 cycles of clear)",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 116",
+          "id": "F-e5ab6d72fd50"
+        },
+        {
+          "t": "FACT",
+          "text": "Game on the sports feed this cycle: Oaks at San Antonio — One cycle after this page asked whether Wilson Shepard's offense still had another gear, the Oaks found it in Denver. They won their second NBA Cup game 147-114, the most points in franchise history, topping the 135 they put up in Toronto. Oakland led by 5 after one, by 18 at the half and by 23 after three, then scored 42 in the fourth. The shooting numbers barely look real: 63 of 79 from the field, 80 percent, and 19 of 26 from three, 73",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 116",
+          "id": "F-f11c0e135086"
+        },
+        {
+          "t": "FACT",
+          "text": "Game on the sports feed this cycle: Oaks at KONO — The Spurs handed the Oaks their first ever home loss. San Antonio came into Oakland for a Cup game in front of a 99 percent crowd and left with a 126-117 win, only the Oaks' second loss of the season. It was even for three quarters. The Oaks trailed by 8 after a slow 20-point first, won the second 35-25 to lead 55-53 at the half, and it was tied 90-90 going into the fourth. Then the offense that shot 80 percent in Denver went cold. The Oaks scor",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 116",
+          "id": "F-5bf65447ea13"
+        },
+        {
+          "t": "FACT",
+          "text": "Elena Soria Dominguez — Transit Hub Planning Lead — Fruitvale Transit Hub Authority",
+          "src": "Simulation_Ledger profile for POP-00791",
+          "id": "F-79a3d1428db6"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+          "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+          "id": "F-647fd9067a33"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01053",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01053\",\"name\":\"Rosario Medina\",\"role\":\"CBA Compliance Monitor, Fruitvale Transit Hub\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Trevor Shimizu\",\"question\":\"With the Visioning phase complete and the hub gaining riders, what does the community-benefits record show about who is actually using the station now — and is that the same population downtown is shedding? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-transit\",\"hood\":null,\"focus\":\"Why the two busiest downtown stations shed a combined 4,564 riders in a mild, event-heavy week while Coliseum and Fruitvale gained — and what the transit workers on the roster see from the platform that the ledger doesn't show.\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 116\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub — Fruitvale Transit Hub Authority\",\"evidence\":[{\"id\":\"EV-8a66304e4f\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 116\",\"text\":\"12th St Oakland City Center moved down the most this cycle — mild; holiday: Spring Equinox (no cut); base: ledger; game day (Downtown, Jack London); events in Downtown, Lake Merritt; crowded platforms (city transit congestion 0.14); 14 transit workers on the roster, 8 citizens who lived a transit line.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C116\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-871096fd8925\"},{\"t\":\"FACT\",\"text\":\"12th St Oakland City Center ridership down 2,313 vs C115 | 8 stations + 10 corridors on the record\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 116\",\"id\":\"F-c5d93f262c83\"},{\"t\":\"FACT\",\"text\":\"12th St Oakland City Center moved down the most this cycle — mild; holiday: Spring Equinox (no cut); base: ledger; game day (Downtown, Jack London); events in Downtown, Lake Merritt; crowded platforms (city transit congestion 0.14); 14 transit workers on the roster, 8 citizens who lived a transit line.\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 116\",\"id\":\"F-2d0a41f1dcc3\"},{\"t\":\"FACT\",\"text\":\"Day type this cycle: weekday; holiday: Spring Equinox (no cut) — no change to riders. A station that moved more than the citywide rule names its own reason on its row.\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 116 Factors (frame)\",\"id\":\"F-f525ffd3880b\"},{\"t\":\"FACT\",\"text\":\"The week on the line — every cause on the record this cycle, once: mild; holiday: Spring Equinox (no cut); game day (Downtown, Jack London); events in Downtown, Lake Merritt; crowded platforms (city transit congestion 0.14); game day (Downtown); events in Downtown, Lake Merritt, Temescal; events in Lake Merritt, Chinatown, Adams Point; events in East Oakland; Fruitvale Transit Hub Phase II — Visioning: complete; events in East Oakland, Baylight District; game day (Jack London); events in Temesca\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 116 Factors\",\"id\":\"F-df552133a6b1\"},{\"t\":\"FACT\",\"text\":\"Weather this cycle: mild, 54°F (6 cycles of clear)\",\"src\":\"output/beats/Cycle_Weather.jsonl CycleID 116\",\"id\":\"F-e5ab6d72fd50\"},{\"t\":\"FACT\",\"text\":\"Game on the sports feed this cycle: Oaks at San Antonio — One cycle after this page asked whether Wilson Shepard's offense still had another gear, the Oaks found it in Denver. They won their second NBA Cup game 147-114, the most points in franchise history, topping the 135 they put up in Toronto. Oakland led by 5 after one, by 18 at the half and by 23 after three, then scored 42 in the fourth. The shooting numbers barely look real: 63 of 79 from the field, 80 percent, and 19 of 26 from three, 73\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl Cycle 116\",\"id\":\"F-f11c0e135086\"},{\"t\":\"FACT\",\"text\":\"Game on the sports feed this cycle: Oaks at KONO — The Spurs handed the Oaks their first ever home loss. San Antonio came into Oakland for a Cup game in front of a 99 percent crowd and left with a 126-117 win, only the Oaks' second loss of the season. It was even for three quarters. The Oaks trailed by 8 after a slow 20-point first, won the second 35-25 to lead 55-53 at the half, and it was tied 90-90 going into the fourth. Then the offense that shot 80 percent in Denver went cold. The Oaks scor\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl Cycle 116\",\"id\":\"F-5bf65447ea13\"},{\"t\":\"FACT\",\"text\":\"Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub — Fruitvale Transit Hub Authority\",\"src\":\"Simulation_Ledger profile for POP-01053\",\"id\":\"F-1481462745c9\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C12, Spring, holiday=Spring Equinox\",\"src\":\"output/world_summary_c116.md Calendar context (Simulation_Calendar)\",\"id\":\"F-647fd9067a33\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01053",
+        "name": "Rosario Medina",
+        "role": "CBA Compliance Monitor, Fruitvale Transit Hub",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Trevor Shimizu",
+        "question": "With the Visioning phase complete and the hub gaining riders, what does the community-benefits record show about who is actually using the station now — and is that the same population downtown is shedding? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-transit",
+        "hood": null,
+        "focus": "Why the two busiest downtown stations shed a combined 4,564 riders in a mild, event-heavy week while Coliseum and Fruitvale gained — and what the transit workers on the roster see from the platform that the ledger doesn't show.",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 116"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub — Fruitvale Transit Hub Authority",
+        "evidence": [
+          {
+            "id": "EV-8a66304e4f",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 116",
+            "text": "12th St Oakland City Center moved down the most this cycle — mild; holiday: Spring Equinox (no cut); base: ledger; game day (Downtown, Jack London); events in Downtown, Lake Merritt; crowded platforms (city transit congestion 0.14); 14 transit workers on the roster, 8 citizens who lived a transit line."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C116",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-871096fd8925"
+        },
+        {
+          "t": "FACT",
+          "text": "12th St Oakland City Center ridership down 2,313 vs C115 | 8 stations + 10 corridors on the record",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 116",
+          "id": "F-c5d93f262c83"
+        },
+        {
+          "t": "FACT",
+          "text": "12th St Oakland City Center moved down the most this cycle — mild; holiday: Spring Equinox (no cut); base: ledger; game day (Downtown, Jack London); events in Downtown, Lake Merritt; crowded platforms (city transit congestion 0.14); 14 transit workers on the roster, 8 citizens who lived a transit line.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 116",
+          "id": "F-2d0a41f1dcc3"
+        },
+        {
+          "t": "FACT",
+          "text": "Day type this cycle: weekday; holiday: Spring Equinox (no cut) — no change to riders. A station that moved more than the citywide rule names its own reason on its row.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 116 Factors (frame)",
+          "id": "F-f525ffd3880b"
+        },
+        {
+          "t": "FACT",
+          "text": "The week on the line — every cause on the record this cycle, once: mild; holiday: Spring Equinox (no cut); game day (Downtown, Jack London); events in Downtown, Lake Merritt; crowded platforms (city transit congestion 0.14); game day (Downtown); events in Downtown, Lake Merritt, Temescal; events in Lake Merritt, Chinatown, Adams Point; events in East Oakland; Fruitvale Transit Hub Phase II — Visioning: complete; events in East Oakland, Baylight District; game day (Jack London); events in Temesca",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 116 Factors",
+          "id": "F-df552133a6b1"
+        },
+        {
+          "t": "FACT",
+          "text": "Weather this cycle: mild, 54°F (6 cycles of clear)",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 116",
+          "id": "F-e5ab6d72fd50"
+        },
+        {
+          "t": "FACT",
+          "text": "Game on the sports feed this cycle: Oaks at San Antonio — One cycle after this page asked whether Wilson Shepard's offense still had another gear, the Oaks found it in Denver. They won their second NBA Cup game 147-114, the most points in franchise history, topping the 135 they put up in Toronto. Oakland led by 5 after one, by 18 at the half and by 23 after three, then scored 42 in the fourth. The shooting numbers barely look real: 63 of 79 from the field, 80 percent, and 19 of 26 from three, 73",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 116",
+          "id": "F-f11c0e135086"
+        },
+        {
+          "t": "FACT",
+          "text": "Game on the sports feed this cycle: Oaks at KONO — The Spurs handed the Oaks their first ever home loss. San Antonio came into Oakland for a Cup game in front of a 99 percent crowd and left with a 126-117 win, only the Oaks' second loss of the season. It was even for three quarters. The Oaks trailed by 8 after a slow 20-point first, won the second 35-25 to lead 55-53 at the half, and it was tied 90-90 going into the fourth. Then the offense that shot 80 percent in Denver went cold. The Oaks scor",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 116",
+          "id": "F-5bf65447ea13"
+        },
+        {
+          "t": "FACT",
+          "text": "Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub — Fruitvale Transit Hub Authority",
+          "src": "Simulation_Ledger profile for POP-01053",
+          "id": "F-1481462745c9"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+          "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+          "id": "F-647fd9067a33"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  }
+]

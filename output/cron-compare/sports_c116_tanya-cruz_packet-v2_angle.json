@@ -1,0 +1,505 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "116",
+  "persona": "tanya-cruz",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00014",
+      "name": "Tanya Cruz",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Benji Dillon hasn't retired yet. The 5-time Cy Young winner leaves the door open after Keane walks through his",
+      "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview. The feed notes report what people said in paraphrase; none of it is a quote — never put it in quotation marks or attribute it as speech.",
+      "creativeBrief": {
+        "kind": "sideline-dispatch",
+        "pulseClass": "record-only-sideline",
+        "bagModes": [
+          "10 Inference Close"
+        ],
+        "claim": "The supplied sports record is the weather. The clubhouse SET is allotted hallucination fitted to that line.",
+        "anchorFacts": [
+          "Benji Dillon hasn't retired yet. The 5-time Cy Young winner leaves the door open after Keane walks through his.",
+          "Vinnie Keane made it official in C115. Benji Dillon has not, and the word now is that he is leaving the door open on purpose. Dillon came into 2041 calling it a farewell season, part of the Dynasty Five send-off alongside Keane and Kelley, and when the parade bus stopped after the seventh title it sounded like a goodbye: \"you realize you don't have to do it again. That's when you feel the weight of everything you've carried, and it's finally okay to put it down.",
+          "\" He has not put it down yet. The 5-time Cy Young winner, 38, made $13. 0M in 2041 and went 9-8 with a 4. 61 ERA, 120 strikeouts and 56 walks in 140. 2 innings, 2. 0 WAR, a long way from the 17-6 Cy Young chase of C34 and the 3 career no-hitters, but the A's still trusted him enough to move him to the bullpen in C104, his first relief appearance, and he handled it. His velocity is the story every reporter wants to write and nobody wants to be right about.",
+          "Dillon has been asking himself the same thing in private. In C109 he wondered, \"What's leaving me versus what I'm choosing to let go, is there even a difference anymore? \" and after the Keane farewell he asked where he fits now that Vinnie is done. He has reasons to stay home either way. He lives in Rockridge with Maya Torres-Dillon and their son Rick, and he opened the Dillon Clinic there. For the A's, a Dillon return would be a choice, not a need."
+        ],
+        "accessEvidence": {
+          "state": "ALLOTTED",
+          "facts": [
+            "clubhouse/sideline SET is the reporter's room"
+          ]
+        },
+        "quoteEvidence": {
+          "state": "NOT_SUPPLIED",
+          "quotes": []
+        },
+        "observationEvidence": {
+          "state": "ALLOTTED",
+          "facts": []
+        },
+        "missing": [
+          "Packet player quotes",
+          "injury or team-response facts beyond the supplied record",
+          "the rest of the feed notes (2 more sentences not carried)"
+        ],
+        "sceneRule": "Clubhouse SET is authorized. Invented player quotes and real-world venues are not.",
+        "sourcePointers": [
+          "output/world_summary_c116.md ## Sports",
+          "docs/media/TANYA_SIDELINE_BAG.md"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "sideline-signal",
+      "hood": "Rockridge",
+      "score": null,
+      "src": "world_summary_c116.md ## Sports",
+      "nearby": [
+        {
+          "text": "A's | trade-recap | (off-season) | Carmen Mesa, Jose Fuentes, Giancarlo Hernandez, Mike Paulson, Kevin Clark, Ernesto Quintero",
+          "src": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (off-season) | Kevin Clark, Giancarlo Hernandez, Ernesto Quintero, Deacon Seymour, Mike Paulson",
+          "src": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | rumor | (off-season) | Mark Aitken, Mike Paulson, Ernesto Quintero",
+          "src": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | rumor | (off-season) | Benji Dillon, Mike Paulson, Deacon Seymour",
+          "src": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | season-state | (early-season) | Wilson Shepard, Mike Paulson, Elliot Abraham",
+          "src": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00018",
+          "name": "Benji Dillon",
+          "profile": "Benji Dillon — Pitcher, Oakland A's Legend",
+          "role": "Pitcher, Oakland A's Legend",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c116.md ## Sports",
+            "pop": "POP-00018",
+            "rowName": "Benji Dillon",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00527",
+          "name": "Mike Paulson",
+          "profile": "Mike Paulson — General Manager, Oakland A's & The Oaks",
+          "role": "General Manager, Oakland A's & The Oaks",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c116.md ## Sports",
+            "pop": "POP-00527",
+            "rowName": "Mike Paulson",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00528",
+          "name": "Deacon Seymour",
+          "profile": "Deacon Seymour — Manager, Oakland A's",
+          "role": "Manager, Oakland A's",
+          "hood": "Lake Merritt",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c116.md ## Sports",
+            "pop": "POP-00528",
+            "rowName": "Deacon Seymour",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00001",
+          "name": "Vinnie Keane",
+          "profile": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend",
+          "role": "Former Designated Hitter, Oakland A's Legend",
+          "hood": "Piedmont Ave",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c116.md ## Sports",
+            "pop": "POP-00001",
+            "rowName": "Vinnie Keane",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00081",
+          "name": "Carmen Mesa",
+          "profile": "Carmen Mesa — Starting Pitcher, Philadelphia Phillies",
+          "role": "Starting Pitcher, Philadelphia Phillies",
+          "hood": "Lake Merritt",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c116.md ## Sports",
+            "pop": "POP-00081",
+            "rowName": "Carmen Mesa",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00003",
+          "name": "Mark Aitken",
+          "profile": "Mark Aitken — First Baseman, Colorado Rockies",
+          "role": "First Baseman, Colorado Rockies",
+          "hood": "Jack London",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c116.md ## Sports",
+            "pop": "POP-00003",
+            "rowName": "Mark Aitken",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C116",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-871096fd8925"
+      },
+      {
+        "t": "FACT",
+        "text": "Benji Dillon hasn't retired yet. The 5-time Cy Young winner leaves the door open after Keane walks through his",
+        "src": "world_summary_c116.md ## Sports",
+        "id": "F-99db82ee56ac"
+      },
+      {
+        "t": "FACT",
+        "text": "Benji Dillon hasn't retired yet. The 5-time Cy Young winner leaves the door open after Keane walks through his.",
+        "src": "world_summary_c116.md ## Sports",
+        "id": "F-878b5e737c3f"
+      },
+      {
+        "t": "FACT",
+        "text": "Vinnie Keane made it official in C115. Benji Dillon has not, and the word now is that he is leaving the door open on purpose. Dillon came into 2041 calling it a farewell season, part of the Dynasty Five send-off alongside Keane and Kelley, and when the parade bus stopped after the seventh title it sounded like a goodbye: \"you realize you don't have to do it again. That's when you feel the weight of everything you've carried, and it's finally okay to put it down.",
+        "src": "world_summary_c116.md ## Sports",
+        "id": "F-c23c5bf30dce"
+      },
+      {
+        "t": "FACT",
+        "text": "\" He has not put it down yet. The 5-time Cy Young winner, 38, made $13. 0M in 2041 and went 9-8 with a 4. 61 ERA, 120 strikeouts and 56 walks in 140. 2 innings, 2. 0 WAR, a long way from the 17-6 Cy Young chase of C34 and the 3 career no-hitters, but the A's still trusted him enough to move him to the bullpen in C104, his first relief appearance, and he handled it. His velocity is the story every reporter wants to write and nobody wants to be right about.",
+        "src": "world_summary_c116.md ## Sports",
+        "id": "F-44fedd2f43fa"
+      },
+      {
+        "t": "FACT",
+        "text": "Dillon has been asking himself the same thing in private. In C109 he wondered, \"What's leaving me versus what I'm choosing to let go, is there even a difference anymore? \" and after the Keane farewell he asked where he fits now that Vinnie is done. He has reasons to stay home either way. He lives in Rockridge with Maya Torres-Dillon and their son Rick, and he opened the Dillon Clinic there. For the A's, a Dillon return would be a choice, not a need.",
+        "src": "world_summary_c116.md ## Sports",
+        "id": "F-be00d48f3bd4"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ]
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-00018",
+        "name": "Benji Dillon",
+        "role": "Pitcher, Oakland A's Legend",
+        "hood": "Rockridge",
+        "profile": "Benji Dillon — Pitcher, Oakland A's Legend",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c116.md ## Sports",
+          "pop": "POP-00018",
+          "rowName": "Benji Dillon",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00527",
+        "name": "Mike Paulson",
+        "role": "General Manager, Oakland A's & The Oaks",
+        "hood": "West Oakland",
+        "profile": "Mike Paulson — General Manager, Oakland A's & The Oaks",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c116.md ## Sports",
+          "pop": "POP-00527",
+          "rowName": "Mike Paulson",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00528",
+        "name": "Deacon Seymour",
+        "role": "Manager, Oakland A's",
+        "hood": "Lake Merritt",
+        "profile": "Deacon Seymour — Manager, Oakland A's",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c116.md ## Sports",
+          "pop": "POP-00528",
+          "rowName": "Deacon Seymour",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "Former Designated Hitter, Oakland A's Legend",
+        "hood": "Piedmont Ave",
+        "profile": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c116.md ## Sports",
+          "pop": "POP-00001",
+          "rowName": "Vinnie Keane",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00081",
+        "name": "Carmen Mesa",
+        "role": "Starting Pitcher, Philadelphia Phillies",
+        "hood": "Lake Merritt",
+        "profile": "Carmen Mesa — Starting Pitcher, Philadelphia Phillies",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c116.md ## Sports",
+          "pop": "POP-00081",
+          "rowName": "Carmen Mesa",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00003",
+        "name": "Mark Aitken",
+        "role": "First Baseman, Colorado Rockies",
+        "hood": "Jack London",
+        "profile": "Mark Aitken — First Baseman, Colorado Rockies",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c116.md ## Sports",
+          "pop": "POP-00003",
+          "rowName": "Mark Aitken",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014"
+  },
+  "assignment": {
+    "story": {
+      "angle": "Benji Dillon hasn't retired yet. The 5-time Cy Young winner leaves the door open after Keane walks through his",
+      "label": "Benji Dillon hasn't retired yet. The 5-time Cy Young winner leaves the door open after Keane walks through his",
+      "hookLine": "Benji Dillon hasn't retired yet. The 5-time Cy Young winner leaves the door open after Keane walks through his",
+      "kind": "sideline-signal",
+      "hood": "Rockridge",
+      "popids": [
+        "POP-00018",
+        "POP-00527",
+        "POP-00528",
+        "POP-00001",
+        "POP-00081",
+        "POP-00003"
+      ],
+      "citizens": [
+        "Benji Dillon (POP-00018)",
+        "Mike Paulson (POP-00527)",
+        "Deacon Seymour (POP-00528)",
+        "Vinnie Keane (POP-00001)",
+        "Carmen Mesa (POP-00081)",
+        "Mark Aitken (POP-00003)"
+      ],
+      "ref": "world_summary_c116.md ## Sports",
+      "cycle": 116
+    },
+    "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview. The feed notes report what people said in paraphrase; none of it is a quote — never put it in quotation marks or attribute it as speech."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014",
+    "text": "I'm standing in the clubhouse hallway where the light stays low this time of the off-season, and the door to the weight room is open but nobody's in it. Vinnie's locker is already cleared out — that happened fast, the way it always does when a guy means it. But Benji's stall still has his glove on the shelf, and that's the thing nobody's saying out loud. The word is he's leaving the door open on purpose, and I've known Benji long enough to know the difference between a guy who's packing and a guy who's just not unpacking yet. The numbers say he's not the 17-6 Cy Young guy anymore — 9-8, 4.61, 2.0 WAR, and they moved him to the bullpen in C104 and he handled it like he handles everything, qui",
+    "plan": {
+      "chase": "I'm standing in the clubhouse hallway where the light stays low this time of the off-season, and the door to the weight room is open but nobody's in it. Vinnie's locker is already cleared out — that happened fast, the way it always does when a guy means it. But Benji's stall still has his glove on the shelf, and that's the thing nobody's saying out loud. The word is he's leaving the door open on purpose, and I've known Benji long enough to know the difference between a guy who's packing and a guy who's just not unpacking yet. The numbers say he's not the 17-6 Cy Young guy anymore — 9-8, 4.61, 2.0 WAR, and they moved him to the bullpen in C104 and he handled it like he handles everything, qui",
+      "focus": "Benji Dillon's unresolved retirement decision and what it means for the A's clubhouse identity after Keane's departure and Aitken's exit to Colorado.",
+      "why": "The A's are losing their long-standing local voices — Keane retired, Aitken signed with Colorado — and Dillon is the last one holding the door open. His decision shapes whether the clubhouse keeps its veteran anchor or fully turns over to the young infield. The supplied record shows he's not a need, which makes his choice purely personal, and that's the human story worth chasing.",
+      "checks": [
+        "No invented player quotes — only paraphrase of what the feed notes report.",
+        "No real-world Oakland venues — clubhouse SET is the only authorized scene.",
+        "No new named people, institutions, events, dates, counts, or numbers beyond the supplied record.",
+        "Unresolved feed names keep their supplied label with no identity, role, quote, or interview.",
+        "First-person sideline voice, punchy, not literary."
+      ],
+      "targets": [
+        {
+          "pop": "POP-00018",
+          "question": "What is the actual timeline for Benji's decision, and has he spoken to Paulson or Seymour about where he fits if he comes back?",
+          "basis": "Supplied record says Dillon hasn't retired and is leaving the door open on purpose; the A's don't need him, so his return would be a choice — the question is whether he's made it."
+        },
+        {
+          "pop": "POP-00527",
+          "question": "Has Paulson had a direct conversation with Dillon about a 2042 role, or is the front office waiting for Dillon to come to them?",
+          "basis": "Supplied record says the A's trusted Dillon enough to move him to the bullpen in C104, and that a Dillon return would be a choice, not a need — Paulson's posture matters for how the decision lands."
+        },
+        {
+          "pop": "POP-00528",
+          "question": "How is Seymour planning the pitching staff without Dillon, and has he left a bullpen slot open in case Dillon decides to return?",
+          "basis": "Supplied record says Dillon handled his first relief appearance in C104, and the A's are moving forward with young infielders — Seymour's planning reveals whether the door is actually open or just not closed."
+        }
+      ],
+      "interpretation": "The clubhouse is in a limbo that nobody's naming. Keane walked through his door, Aitken walked out to Colorado, and Dillon is standing in the frame of his own, glove still on the shelf. The A's don't need him — that's the part that makes this interesting. He's not being chased; he's being chosen or not chosen by himself. The question he asked in C109 about what's leaving him versus what he's letting go is now the actual decision in front of him, and I think the answer is going to come from somet",
+      "unverifiedLead": [
+        "Benji Dillon has been seen at the Dillon Clinic in Rockridge more often than usual this off-season, though that could just be the normal rhythm of his life there.",
+        "There's chatter in the clubhouse that Dillon has been asking younger pitchers about their off-season programs, which could mean he's thinking about coming back or could just mean he's being a mentor.",
+        "The A's have not made any public statement about Dillon's status, and the silence from the front office is notable given how quickly they moved on other roster decisions."
+      ]
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | trade-recap | (off-season) | Carmen Mesa, Jose Fuentes, Giancarlo Hernandez, Mike Paulson, Kevin Clark, Ernesto Quintero",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00081",
+        "POP-00101",
+        "POP-01239",
+        "POP-00527",
+        "POP-00053",
+        "POP-00050"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (off-season) | Kevin Clark, Giancarlo Hernandez, Ernesto Quintero, Deacon Seymour, Mike Paulson",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00053",
+        "POP-01239",
+        "POP-00050",
+        "POP-00528",
+        "POP-00527"
+      ]
+    },
+    {
+      "label": "A's | rumor | (off-season) | Mark Aitken, Mike Paulson, Ernesto Quintero",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00003",
+        "POP-00527",
+        "POP-00050"
+      ]
+    },
+    {
+      "label": "A's | rumor | (off-season) | Benji Dillon, Mike Paulson, Deacon Seymour",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00018",
+        "POP-00527",
+        "POP-00528"
+      ]
+    },
+    {
+      "label": "Oaks | season-state | (early-season) | Wilson Shepard, Mike Paulson, Elliot Abraham",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01022",
+        "POP-00527",
+        "POP-01046"
+      ]
+    }
+  ],
+  "laneEntries": 17,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-18T12:16:53.992Z"
+}

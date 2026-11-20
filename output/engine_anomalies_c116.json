@@ -1,0 +1,83 @@
+{
+  "cycle": 116,
+  "generatedAt": "C116",
+  "detectorVersion": "1.2.0",
+  "anomalies": [
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Rockridge"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "Rockridge",
+          "previousMigrationFlow": -2,
+          "currentMigrationFlow": 1,
+          "delta": "3.00",
+          "subCheck": "migration-shift",
+          "band": 3
+        }
+      },
+      "description": "Rockridge migration flow shifted -2 → 1",
+      "historicalContext": {
+        "priorCycles": [
+          -2
+        ],
+        "currentCycle": 1
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.2.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Baylight District"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "Baylight District",
+          "previousMigrationFlow": -4,
+          "currentMigrationFlow": -1,
+          "delta": "3.00",
+          "subCheck": "migration-shift",
+          "band": 3
+        }
+      },
+      "description": "Baylight District migration flow shifted -4 → -1",
+      "historicalContext": {
+        "priorCycles": [
+          -4
+        ],
+        "currentCycle": -1
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.2.0"
+    }
+  ],
+  "summary": {
+    "total": 2,
+    "byTriage": {
+      "suppress-until-verified": 2
+    }
+  }
+}

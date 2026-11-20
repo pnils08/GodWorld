@@ -1,0 +1,65 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "115",
+  "persona": "talia-finch",
+  "byline": "Talia Finch",
+  "bylinePopid": "POP-00592",
+  "article": "output/cron-compare/staged/sports_c115_talia-finch_packet-v2_openai-gpt-5-6-luna.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Adash Stanley",
+        "role": "quoted-source",
+        "popid": "POP-01023"
+      },
+      {
+        "name": "Harry Hayward",
+        "role": "mentioned",
+        "popid": "POP-01223"
+      },
+      {
+        "name": "Austin Reaves",
+        "role": "mentioned",
+        "popid": "POP-01027"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "San Antonio"
+    ],
+    "claims": [
+      {
+        "claim": "My neighbors seem to be catching the buzz around the Oaks' success. I came home after a win and found they'd left a case of something cold on my porch. We swapped stories about what was going on around the block near the courthouse, and the vibe was positive. They know I'm part of the team, so I think they're happy to see us doing well.",
+        "sourceRef": "citizenVoice PRESS Adash Stanley"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-b150dee79de3",
+    "draftSha256": "fa8b230de75d84427f631fcbb1b2aae14498aca73418b3c9c50c8c4ab6f4278d",
+    "verdict": "output/cron-compare/sports_c115_talia-finch_packet-v2_openai-gpt-5-6-luna.rhea.json",
+    "ranAt": "2026-11-13T00:18:39.946Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": false,
+      "inTarget": true,
+      "inTargetBy": "code floor 400",
+      "words": 519,
+      "short": "The piece quotes postgame player remarks rather than letting the people in the room speak on what the city thinks of the franchise.",
+      "score": 2,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "fa8b230de75d84427f631fcbb1b2aae14498aca73418b3c9c50c8c4ab6f4278d",
+      "costUsd": 0.0015
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-13T00:18:44.056Z"
+}

@@ -1,0 +1,41 @@
+{
+  "office": "health_center",
+  "agentDir": "civic-project-health-center",
+  "holder": "Bobby Chen-Ramirez",
+  "popid": "POP-00792",
+  "title": "Health Center Project Director",
+  "date": "2026-11-17",
+  "cycle": 116,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "**Weekly report — Cycle 116, Temescal Community Health Center (INIT-005)**\n\n**The Q3 filing and the walkthrough come first.** This is the last cycle before operational oversight gets certified, and the tracker is plain about what's owed: file the Q3 intake audit with HCAI and the Clerk, and complete the Telegraph & 47th merchant walkthrough. I'm not treating either as a formality. The Q2 audit went out clean because we did the work, not because the schedule said so. Same standard this time. Budget is at $15,576,923.05 remaining, which is where it should be at this stage — no new city disbursements this cycle, nothing pending that should alarm anyone.\n\n**What the numbers show.** Citywide we took 34 intakes this cycle against 69 in care at the start, 68 at the end, 35 exits, no transfers either direction. The system is holding steady — the beds match the people in them, all the way across the twenty-two neighborhoods. Temescal specifically: 2 intakes, 4 in care, 4 beds. That's the building doing exactly what we said it would do, and I'd rather say that plainly than let the quiet numbers hide the question underneath them.\n\n**The question underneath them.** Temescal has 80 residents sick this cycle. Laurel is at 104, Fruitvale 107, Ivy Hill 112, East Oakland 114 — and East Oakland and Chinatown carry the heaviest loads on the board, Chinatown at 132. We have a medium-severity health spike logged in Piedmont Ave this cycle, 93 sick there. Our center sits in one neighborhood, but the need is drawn across the whole map. I keep coming back to the same knot: the paperwork passes, the inspections pass, the beds are open — and I still don't get to see whether the person in Fruitvale or East Oakland can get here without two buses. The utilization audit is my instrument for answering that honestly, which is why the Q3 filing isn't a checkbox to me.\n\n**Programs.** Five health programs active in the community — East Bay Harm Reduction Alliance and Foothill Baptist Tabernacle's seniors lunch in East Oakland, the Postpartum Oakland Network in Fruitvale, Elders in Place citywide, New Covenant Pentecostal's seniors lunch in West Oakland. These are the partners doing the work the center can't do from a building. I'll want the walkthrough next cycle to tell me whether the merchant corridor is actually connecting people to us, or just to our front desk.\n\n**What I'm doing next cycle.** File the Q3 audit with HCAI and the Clerk. Complete the merchant walkthrough at Telegraph & 47th — with eyes on it, not a signature. And bring back a report that says whether the hours match the need, because that's the only line in this report that will tell me the truth.\n\n— Bobby Chen-Ramirez, Health Center Project Director, Temescal",
+  "moves": [],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-11-17T11:46:13.583Z",
+  "usage": {
+    "prompt_tokens": 4038,
+    "completion_tokens": 627,
+    "cost": 0.0007
+  },
+  "fellBackFrom": null,
+  "template": "worker/2",
+  "toolTrace": [],
+  "memory": {
+    "searchedOn": "health center clinic patients",
+    "entries": 7,
+    "fromSearch": 5,
+    "newest": 2,
+    "failed": []
+  },
+  "figuresNotHanded": [],
+  "finishReason": "stop",
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00792",
+    "id": "ZZm69aeP7G7cwkvKbcXbuD",
+    "customId": "cp-POP-00792-c116-CIVIC-datawake-2026-11-17"
+  }
+}

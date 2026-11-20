@@ -1,0 +1,72 @@
+{
+  "office": "council_d3",
+  "cycle": 116,
+  "speaker": "Rose Delgado",
+  "cascadeSummary": "I answer Director Vance with the D3 briefing record and hold OARI expansion until the D5 audit and Baylight review land. The Fruitvale Transit Hub stays at the C86 authorization with no new phase until schematics and a documented public comment-and-response exist. The apprenticeship pipeline gets its placement-gap analysis published this cycle with explicit Fruitvale review, and San Antonio's commercial blocks get a named office and a next public date rather than a footnote.",
+  "statements": [
+    {
+      "statementId": "STMT-116-council_d3-001",
+      "type": "vote_statement",
+      "topic": "Oakland Alternative Response Initiative — D3 briefing record and expansion hold",
+      "initiative": "INIT-002",
+      "decision": "Publish the D3 Fruitvale briefing record with district-level and Fruitvale data this cycle; hold expansion until the D5 audit and Baylight feasibility review are complete.",
+      "quote": "Fruitvale gets the briefing and the numbers in the daylight — expansion waits until the audit and the Baylight review are actually done.",
+      "fullStatement": "Director Vance asked me straight and I will answer straight. My Cycle 114 statement put the OARI briefing in Fruitvale and promised the review calendar and the public numbers. The record shows the documented briefing landed in East Oakland while the transit review sessions opened at the branch library and senior center. So this cycle I execute and publish the D3 briefing record: the Fruitvale data, the district-level breakdown, the notice and accessibility arrangements, and the Clerk filing reference — completed documentation distinguished from the OARI packet and transit response record scheduled for Cycle 116. No duplicate briefing. And expansion stays held until the D5 audit and the Baylight feasibility review are actually done, with responsible next dates on the record.",
+      "disposition": "YES",
+      "actionAsked": "Publish the D3 briefing record with Fruitvale and district-level data, notice and accessibility arrangements, and Clerk filing references this cycle; keep expansion held until the D5 audit and Baylight review report.",
+      "tone": "direct, accountable",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-116-council_d3-002",
+      "type": "vote_statement",
+      "topic": "Fruitvale Transit Hub Phase II — schematics and public comment-and-response",
+      "initiative": "INIT-003",
+      "decision": "Let the low-severity engine flag pass with no new phase or funding action; gate any design advancement on delivered preliminary schematics and a documented Fruitvale comment-and-response record.",
+      "quote": "A $230 million design does not advance on schematics nobody has seen and a community review nobody has documented.",
+      "fullStatement": "The C86 authorization stands — $230 million, the visioning framework binding, and the community oversight provisions intact. But a calendar reminder is not a design step. This cycle I let the low-severity flag pass without new phase or funding action, and I keep the gate where it belongs: delivered preliminary schematics and a documented Fruitvale public comment-and-response record before any further design advancement. The C115 record is closed. Nothing here says the project is failing — it says the next step is earned with paper and answers, not with a flag.",
+      "disposition": "statement",
+      "actionAsked": "Hold further design advancement until preliminary schematics are delivered and a Fruitvale public comment-and-response record is published.",
+      "tone": "firm, procedural",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-116-council_d3-003",
+      "type": "vote_statement",
+      "topic": "Oakland Youth Apprenticeship Pipeline — placement-gap analysis and Fruitvale review",
+      "initiative": "INIT-007",
+      "decision": "Require publication of the placement-gap analysis and adjustment plan this cycle with explicit West Oakland and Fruitvale reviews, named owners, and next reporting dates; put a binary disposition on the hearing agenda after publication.",
+      "quote": "A seat in the classroom is not a paycheck. Four cycles in one stage — publish the gap analysis and show Fruitvale's young people in the roles.",
+      "fullStatement": "Four cycles in the same stage is not implementation, it is a holding pattern. This cycle the placement-gap analysis and adjustment plan get published with the West Oakland and Fruitvale reviews written in — who the placements actually reach, what corrections are being made, who owns each correction, and the next reporting date. Then the hearing takes a binary disposition: advancement on published evidence, or a recorded fail if the required materials are still undelivered. No automatic hold, no quiet drift. Fruitvale's young people were promised roles, not a queue.",
+      "disposition": "YES",
+      "actionAsked": "Publish the placement-gap analysis and adjustment plan with explicit West Oakland and Fruitvale reviews, named owners and next dates; schedule a binary disposition vote after publication.",
+      "tone": "impatient, accountable",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-116-council_d3-004",
+      "type": "statement",
+      "topic": "San Antonio commercial blocks — next public update",
+      "initiative": null,
+      "decision": "Name the responsible office for the San Antonio commercial-block update and set the next public date, pairing it with direct listening in the neighborhood.",
+      "quote": "San Antonio's commercial blocks are flat and slow, and that is a district matter, not a footnote.",
+      "fullStatement": "Fruitvale is growing and San Antonio is flat — same district, two different weeks, and I am not going to let the quieter one disappear from the record. San Antonio's street trade is struggling and the mood is flat. So this cycle I name the office responsible for the commercial-block update and set the next public date, and I pair that with direct listening on the blocks themselves rather than a memo from City Hall. No new spending is authorized here. What is authorized is a date, a name, and neighbors who can see the work being tracked.",
+      "disposition": "statement",
+      "actionAsked": "Name the responsible office and set the next public update date for San Antonio's commercial blocks, with direct neighborhood listening.",
+      "tone": "steady, neighborhood-first",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    }
+  ]
+}

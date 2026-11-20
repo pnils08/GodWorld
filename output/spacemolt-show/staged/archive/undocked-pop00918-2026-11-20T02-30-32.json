@@ -1,0 +1,471 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop00918-2026-11-20T02-30-32",
+  "popid": "POP-00918",
+  "holder": "Manju Abebe",
+  "session": "undocked-pop00918",
+  "window": {
+    "startedAt": "2026-11-20T02:30:32.559Z",
+    "endedAt": "2026-11-20T02:50:37.531Z"
+  },
+  "runner": {
+    "turns": 39,
+    "exitCode": 0,
+    "capped": true,
+    "toolErrors": 0,
+    "estCostUsd": 0.0209,
+    "tokensIn": 184428,
+    "tokensOut": 4900,
+    "log": "output/spacemolt-show/episodes/undocked-pop00918-2026-11-20T02-30-32.log",
+    "stopReason": "window",
+    "toolCalls": 38
+  },
+  "stall": null,
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "mission",
+      "combat",
+      "navigation",
+      "session",
+      "achievement"
+    ],
+    "fetchedAt": "2026-11-20T02:55:38.298Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "hits": 0,
+      "note": "gameplay in window carries no credit event — measured zero",
+      "value": 0
+    },
+    "points_delta": {
+      "type": "FACT",
+      "source": "get_achievements",
+      "basis": "progress",
+      "items": [
+        {
+          "id": "cartographer",
+          "name": "Cartographer",
+          "gained": 5.1
+        },
+        {
+          "id": "voyager_i",
+          "name": "Voyager I",
+          "gained": 4.4
+        },
+        {
+          "id": "voyager_ii",
+          "name": "Voyager II",
+          "gained": 1.7
+        },
+        {
+          "id": "chronicler",
+          "name": "Chronicler",
+          "gained": 0.6
+        },
+        {
+          "id": "far_traveler",
+          "name": "Far Traveler",
+          "gained": 0.01
+        },
+        {
+          "id": "jump_master",
+          "name": "Jump Master",
+          "gained": 0.01
+        }
+      ],
+      "beforeTakenAt": "2026-11-20T02:30:32.321Z",
+      "value": 11.83
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "sirius",
+        "nova_terra",
+        "furud",
+        "acrux",
+        "botein",
+        "intercrus",
+        "gsc_0044",
+        "atlas",
+        "cedarhold",
+        "achernar",
+        "ruchbah",
+        "ironhollow",
+        "pherkad",
+        "shaula",
+        "alnair",
+        "wolf_1061",
+        "gsc_0031",
+        "gsc_0021"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {},
+        "sold": {}
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 0,
+        "trading": 0,
+        "mission": 0,
+        "combat": 0,
+        "navigation": 17,
+        "session": 1,
+        "achievement": 1
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [],
+        "trading": [],
+        "mission": [],
+        "combat": [],
+        "navigation": [
+          {
+            "id": 285711628,
+            "created_at": "2026-11-20T02:50:34Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from GSC-0031 to GSC-0021",
+            "data": {
+              "arrival_poi": "gsc_0021_star",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "gsc_0031",
+              "is_pathfinder": false,
+              "to_system": "gsc_0021",
+              "to_system_name": "GSC-0021"
+            }
+          },
+          {
+            "id": 285708910,
+            "created_at": "2026-11-20T02:49:26Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Wolf 1061 to GSC-0031",
+            "data": {
+              "arrival_poi": "gsc_0031_belt",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "wolf_1061",
+              "is_pathfinder": false,
+              "to_system": "gsc_0031",
+              "to_system_name": "GSC-0031"
+            }
+          },
+          {
+            "id": 285707090,
+            "created_at": "2026-11-20T02:48:15Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Alnair to Wolf 1061",
+            "data": {
+              "arrival_poi": "wolf_1061_frozen_drift",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "alnair",
+              "is_pathfinder": false,
+              "to_system": "wolf_1061",
+              "to_system_name": "Wolf 1061"
+            }
+          },
+          {
+            "id": 285702886,
+            "created_at": "2026-11-20T02:47:05Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Shaula to Alnair",
+            "data": {
+              "arrival_poi": "alnair_ice_fields",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "shaula",
+              "is_pathfinder": false,
+              "to_system": "alnair",
+              "to_system_name": "Alnair"
+            }
+          },
+          {
+            "id": 285701195,
+            "created_at": "2026-11-20T02:45:55Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Pherkad to Shaula",
+            "data": {
+              "arrival_poi": "shaula_gas_plume",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "pherkad",
+              "is_pathfinder": false,
+              "to_system": "shaula",
+              "to_system_name": "Shaula"
+            }
+          },
+          {
+            "id": 285698208,
+            "created_at": "2026-11-20T02:44:45Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Ironhollow to Pherkad",
+            "data": {
+              "arrival_poi": "pherkad_null_rift",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "ironhollow",
+              "is_pathfinder": false,
+              "to_system": "pherkad",
+              "to_system_name": "Pherkad"
+            }
+          },
+          {
+            "id": 285696523,
+            "created_at": "2026-11-20T02:43:35Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Ruchbah to Ironhollow",
+            "data": {
+              "arrival_poi": "ironhollow_fading_signal",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "ruchbah",
+              "is_pathfinder": false,
+              "to_system": "ironhollow",
+              "to_system_name": "Ironhollow"
+            }
+          },
+          {
+            "id": 285694773,
+            "created_at": "2026-11-20T02:42:24Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Achernar to Ruchbah",
+            "data": {
+              "arrival_poi": "ruchbah_ii",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "achernar",
+              "is_pathfinder": false,
+              "to_system": "ruchbah",
+              "to_system_name": "Ruchbah"
+            }
+          },
+          {
+            "id": 285693025,
+            "created_at": "2026-11-20T02:41:15Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Cedarhold to Achernar",
+            "data": {
+              "arrival_poi": "achernar_frost_ring",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "cedarhold",
+              "is_pathfinder": false,
+              "to_system": "achernar",
+              "to_system_name": "Achernar"
+            }
+          },
+          {
+            "id": 285690220,
+            "created_at": "2026-11-20T02:40:05Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Atlas to Cedarhold",
+            "data": {
+              "arrival_poi": "cedarhold_dim_lattice",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "atlas",
+              "is_pathfinder": false,
+              "to_system": "cedarhold",
+              "to_system_name": "Cedarhold"
+            }
+          },
+          {
+            "id": 285688391,
+            "created_at": "2026-11-20T02:38:55Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from GSC-0044 to Atlas",
+            "data": {
+              "arrival_poi": "atlas_belt",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "gsc_0044",
+              "is_pathfinder": false,
+              "to_system": "atlas",
+              "to_system_name": "Atlas"
+            }
+          },
+          {
+            "id": 285686558,
+            "created_at": "2026-11-20T02:37:45Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Intercrus to GSC-0044",
+            "data": {
+              "arrival_poi": "forgotten_tailings",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "intercrus",
+              "is_pathfinder": false,
+              "to_system": "gsc_0044",
+              "to_system_name": "GSC-0044"
+            }
+          },
+          {
+            "id": 285684746,
+            "created_at": "2026-11-20T02:36:34Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Botein to Intercrus",
+            "data": {
+              "arrival_poi": "intercrus_ice_fields",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "botein",
+              "is_pathfinder": false,
+              "to_system": "intercrus",
+              "to_system_name": "Intercrus"
+            }
+          },
+          {
+            "id": 285682004,
+            "created_at": "2026-11-20T02:35:25Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Acrux to Botein",
+            "data": {
+              "arrival_poi": "raysheet_nebula",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "acrux",
+              "is_pathfinder": false,
+              "to_system": "botein",
+              "to_system_name": "Botein"
+            }
+          },
+          {
+            "id": 285680115,
+            "created_at": "2026-11-20T02:34:14Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Furud to Acrux",
+            "data": {
+              "arrival_poi": "acrux_iv",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "furud",
+              "is_pathfinder": false,
+              "to_system": "acrux",
+              "to_system_name": "Acrux"
+            }
+          },
+          {
+            "id": 285678298,
+            "created_at": "2026-11-20T02:33:05Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Nova Terra to Furud",
+            "data": {
+              "arrival_poi": "furud_vapor_fields",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "nova_terra",
+              "is_pathfinder": false,
+              "to_system": "furud",
+              "to_system_name": "Furud"
+            }
+          },
+          {
+            "id": 285676341,
+            "created_at": "2026-11-20T02:31:54Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Sirius to Nova Terra",
+            "data": {
+              "arrival_poi": "nova_terra_gas_plume",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "sirius",
+              "is_pathfinder": false,
+              "to_system": "nova_terra",
+              "to_system_name": "Nova Terra"
+            }
+          }
+        ],
+        "session": [
+          {
+            "id": 285673320,
+            "created_at": "2026-11-20T02:30:33Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "ManjuAbebe logged in",
+            "data": {
+              "last_login_at": "2026-11-20T02:30:32Z",
+              "source": "password"
+            }
+          }
+        ],
+        "achievement": [
+          {
+            "id": 285696854,
+            "created_at": "2026-11-20T02:43:46Z",
+            "category": "achievement",
+            "event_type": "achievement.unlocked",
+            "summary": "Unlocked achievement: Voyager I",
+            "data": {
+              "achievement_id": "voyager_i",
+              "points": 10
+            }
+          }
+        ]
+      }
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 1,
+    "listed": 1,
+    "entries": [
+      {
+        "index": 0,
+        "created_at": "2026-11-20 02:50:37",
+        "text": "[Session Handoff] - **Mid-action state:** Just jumped to GSC-0021 and arrived at `gsc_0021_star`. The system has not been inspected yet, so the next step is `get_system` on GSC-0021.\n- **Immediate next step:** Call `get_system`, then `get_status` to check fuel and credits after the recent jumps. Last confirmed status was Ironhollow: 72/100 fuel, 0/72 cargo, 500cr, 100/100 hull.\n- **Location and ship:** Pilot ManjuAbebe (solarian) in the Theoria (theoria). Current system is GSC-0021, a lawless system. Route so far: Ruchbah → Ironhollow → Pherkad → Shaula → Alnair → Wolf 1061 → GSC-0031 → GSC"
+      }
+    ],
+    "unwindowed": []
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "draft": "undocked_c116_nia-rook_packet-v2_openai-gpt-6-luna.md",
+  "flags": [
+    {
+      "claim": "Kimball-Ostrow put it plainly: “I didn't really do anything special on Sunday. I just flew through the systems one by one, and it happened to come out even on credits. I wasn't really focusing on that; I was just trying to explore and see where the show would take me.”",
+      "issue": "Fabricated speech: Words placed in the mouth of named ledger citizen Marguerite Kimball-Ostrow (POP-01188) that do not exist in the interview record.",
+      "severity": "high"
+    },
+    {
+      "severity": "high",
+      "check": "intake-quoted-source",
+      "issue": "quoted-source with no wake-2 packet backing: Marguerite Kimball-Ostrow"
+    }
+  ],
+  "checkFlags": [],
+  "contamination": [],
+  "summary": "Direct quote fabricated and attributed to named ledger citizen Marguerite Kimball-Ostrow."
+}

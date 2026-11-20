@@ -41,6 +41,25 @@
 City hall ran headless this cycle. The voice decisions above are locked canon; project operational details live in output/civic-voice/*_c115.json. Desks report FROM this section.
 
 ## Newsroom wire (AUTO — cron-desk-run.js)
+- c115 culture | Ines Sorensen: "Uptown, the Second Half of the Sentence" (staged)
+- c115 sports | Anthony Raines: "Fifth on Points, First in Credits: Taveras's Undocked Pledge Has Nothing to Attach To Yet" (staged)
+- c115 culture | Ines Sorensen: ""Man, the week's got me thinking about that spot behind the plate."" (staged)
+- c115 undocked-digest | Nia Rook: "UNDOCKED: Three pilots finish even; Luis Taz keeps the lead" (staged)
+- c115 undocked | Nia Rook: "UNDOCKED: Elijah Brown’s long night ends even" (staged)
+- c115 culture | Ines Sorensen: ""I've noticed the block's been quiet this week, and people are whispering about someone fr" (staged)
+- c115 culture | Tamsin Pruitt: "The Lives of C115" (staged)
+- c115 wire | Celeste Tran: "Rico Valez picked up one more mention this cycle and now sits at twenty total, the kind of" (staged)
+- c115 culture | Maria Keen: "The Archive on the Block Nobody Signed For" (staged)
+- c115 culture | Sharon Okafor: "The Names We Keep Saying" (staged)
+- c115 culture | Kai Marston: "The Clipping on the Door" (staged)
+- c115 culture | Mason Ortega: "Oakland Casino Town sits in the Baylight District with 99 names on the roster this cycle," (staged)
+- c115 undocked | Nia Rook: "P Slayer’s Wednesday night ends even, and the top of the UNDOCKED board stays Luis Taz’s t" (staged)
+- c115 culture | Ines Sorensen: "Voices: The Quiet Block, the Coffee Machine, the Fourth Quarter" (staged)
+- c115 culture | Tamsin Pruitt: "The Lives Page, Cycle 115" (staged)
+- c115 sports | Talia Finch: "Harry Hayward is the name I keep hearing in San Antonio, even with the television turned l" (staged)
+- c115 sports | Hal Richmond: "The Name Outlasts the Salary" (staged)
+- c115 sports | Simon Leary: "The Part That Holds" (staged)
+- c115 culture | Elliot Graye: "St. Esperanza Counts Its Lunches: What Fruitvale's Parish Has Logged While Other Doors Ope" (staged)
 - c115 undocked | Nia Rook: "Brooklyn Nguyen’s UNDOCKED night ended even on credits, which gives the episode its tidy l" (staged)
 - c115 culture | Ines Sorensen: "The Name Nobody Said in Uptown" (staged)
 - c115 culture | Tamsin Pruitt: "The Page: Eleven Lives, Cycle 115" (staged)
@@ -62,6 +81,48 @@ City hall ran headless this cycle. The voice decisions above are locked canon; p
 - c115 civic | Carmen Delaine: "The Fund Has Moved $7 Million Out of $28 Million. The Record Names Two Households." (staged)
 
 ## What the writers couldn't find (AUTO — cron-desk-run.js)
+- c115 culture | Ines Sorensen (staged)
+  - said: "I don't know why I keep coming back to it—the staging, the timeline, the fact that we got her in as fast as we did.' She wrote about the board too, and the two men on it: 'Deacon's hand and Maurice…"
+  - said: "Nothing in the page says what the whole of it was."
+- c115 sports | Anthony Raines (staged)
+  - said: "The feed does not say whether he can repeat it."
+  - said: "It is a fair question, and nothing in the record answers it."
+  - tool: canon_recall "Ronald Silk UNDOCKED" → tool budget exhausted — compose from what you have.
+  - tool: canon_recall "Clarissa Dane UNDOCKED" → tool budget exhausted — compose from what you have.
+- c115 culture | Tamsin Pruitt (staged)
+  - said: "The record does not say what the question was."
+  - said: "The record does not say whether it is that apartment, or what changed."
+  - said: "The record does not say whose picture it was."
+  - said: "The record does not say what the line is, and it is not words Kelley said."
+  - said: "The record does not give her role or her employer."
+  - said: "The record does not say the question."
+- c115 wire | Celeste Tran (staged)
+  - tool: canon_recall "Anthony Raines" → tool budget exhausted — compose from what you have.
+- c115 culture | Maria Keen (staged)
+  - said: "I mean the family stretching to stay, and the four in custody, and whoever started the Archive in C101 and has not yet been named to us."
+- c115 culture | Sharon Okafor (staged)
+  - tool: canon_recall "Rockridge" → tool budget exhausted — compose from what you have.
+  - tool: canon_recall "Grand Lake" → tool budget exhausted — compose from what you have.
+  - tool: canon_recall "Piedmont Ave" → tool budget exhausted — compose from what you have.
+- c115 culture | Mason Ortega (staged)
+  - said: "The roster doesn't carry them because they're not the ones making the decisions or taking the credit."
+- c115 culture | Tamsin Pruitt (staged)
+  - said: "The record does not say whether the ticket turned up."
+  - said: "The record does not say they were connected, and this page won't say so either."
+  - said: "This cycle Priya adjusted the day's plans after the night's gridlock, and framed an old ticket stub 'that had finally earned its frame.' Which game, or which night, the stub is from, the record doe…"
+  - said: "The record does not say whose room it is or why it stays clean, and nobody should fill that in for it."
+- c115 sports | Talia Finch (staged)
+  - tool: canon_recall "KONO" → tool budget exhausted — compose from what you have.
+  - tool: canon_recall "Downtown" → tool budget exhausted — compose from what you have.
+- c115 sports | Simon Leary (staged)
+  - said: "A sustained record does not remove uncertainty; it gives uncertainty somewhere to stand."
+- c115 culture | Elliot Graye (staged)
+  - said: "The ledger does not say why the figures fell."
+  - said: "The ledger does not answer that fully, and neither does the neighborhood."
+  - said: "The record does not say whether any of them work with St."
+  - said: "The ledger does not list who attended either one, or whether anyone from Fruitvale was among them."
+  - said: "The paper's C113 and C114 coverage has already worked through the temple's C109 crisis-response row, which logged 41 and did not say what the crisis was."
+  - said: "The record does not say whether the parish ran something this cycle that no one logged, or whether nothing needed logging."
 - c115 undocked | Nia Rook (staged)
   - tool: canon_recall "Fruitvale" → tool budget exhausted — compose from what you have.
 - c115 culture | Ines Sorensen (staged)

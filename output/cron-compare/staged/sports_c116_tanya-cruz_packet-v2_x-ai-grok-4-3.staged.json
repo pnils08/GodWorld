@@ -1,0 +1,75 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "116",
+  "persona": "tanya-cruz",
+  "byline": "Tanya Cruz",
+  "bylinePopid": "POP-00014",
+  "article": "output/cron-compare/staged/sports_c116_tanya-cruz_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Mike Paulson",
+        "role": "mentioned",
+        "popid": "POP-00527"
+      },
+      {
+        "name": "Deacon Seymour",
+        "role": "mentioned",
+        "popid": "POP-00528"
+      },
+      {
+        "name": "Vinnie Keane",
+        "role": "mentioned",
+        "popid": "POP-00001"
+      },
+      {
+        "name": "Benji Dillon",
+        "role": "mentioned",
+        "popid": "POP-00018",
+        "floor": true
+      },
+      {
+        "name": "Kevin Clark",
+        "role": "mentioned",
+        "popid": "POP-00053",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "I've talked to Benji. Not about a role, not about a number — about where his head is at. He's earned the right to take his time with this. Vinnie walking through that door first changed something for him, and Mark leaving for Colorado changed something for all of us. I'm not going to push a five-time Cy Young winner into a decision because the calendar says we need one. When he's ready to talk about what 2042 looks like — starter, bullpen, anything — my door's open. He knows that. He's always known that.",
+        "sourceRef": "citizenVoice PRESS Mike Paulson"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-50627cca4102",
+    "draftSha256": "c54b945785dc407433a57d8423eee86b2a05907f1328258182791fa3f4a0db1c",
+    "verdict": "output/cron-compare/sports_c116_tanya-cruz_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-11-19T00:20:01.042Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 567,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "c54b945785dc407433a57d8423eee86b2a05907f1328258182791fa3f4a0db1c",
+      "costUsd": 0.0034
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-19T00:20:10.075Z"
+}

@@ -1,0 +1,61 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "116",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "ines-sorensen",
+  "byline": {
+    "name": "Ines Sorensen",
+    "popid": "POP-01211",
+    "beatDomain": "COMMUNITY"
+  },
+  "laneEntries": 30,
+  "quotesLanded": 2,
+  "disposition": "staged",
+  "rheaPass": null,
+  "rheaFlagCount": null,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "canon_recall",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall"
+  ],
+  "toolCalls": 4,
+  "wordCount": 609,
+  "targetWords": "300-600",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": false,
+    "inTarget": true,
+    "inTargetBy": "code floor 300",
+    "words": 609,
+    "short": "The piece introduces Edmund Alegero and Guadalupe Lupe by name before their quotes instead of leading with the line first.",
+    "score": 2,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "scoredWithoutRhea": true,
+    "draftSha256": "121dadd6559d40378ab9a08c6d86ea0bf5baa5fe9606d7ac946158d9c6fa6002"
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 2/3 — The piece introduces Edmund Alegero and Guadalupe Lupe by name before their quotes instead of leading with the line first."
+  },
+  "article": "output/cron-compare/staged/culture_c116_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.staged-0020.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": " ⌁ auth for agents [www.vestauth.com]\n{\n  \"popId\": \"POP-01211\",\n  \"name\": \"Ines Sorensen\",\n  \"recorded\": true,\n  \"text\": \"“Oakland raised him. I'm hoping he remembers that when the offers come in.”\"\n}"
+  },
+  "ranAt": "2026-11-20T00:20:35.935Z"
+}

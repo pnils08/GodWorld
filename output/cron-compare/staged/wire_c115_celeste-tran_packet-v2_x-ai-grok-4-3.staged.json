@@ -1,0 +1,94 @@
+{
+  "status": "staged",
+  "desk": "wire",
+  "cycle": "115",
+  "persona": "celeste-tran",
+  "byline": "Celeste Tran",
+  "bylinePopid": "POP-00164",
+  "article": "output/cron-compare/staged/wire_c115_celeste-tran_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Rico Valez",
+        "role": "mentioned",
+        "popid": "POP-00632"
+      },
+      {
+        "name": "Rowan Pierce",
+        "role": "mentioned",
+        "popid": "POP-00545"
+      },
+      {
+        "name": "Vinnie Keane",
+        "role": "mentioned",
+        "popid": "POP-00001"
+      },
+      {
+        "name": "Evan Lewis",
+        "role": "mentioned",
+        "popid": "POP-00200"
+      },
+      {
+        "name": "Anthony Raines",
+        "role": "mentioned",
+        "popid": "POP-00017",
+        "floor": true
+      },
+      {
+        "name": "Arturo Ramos",
+        "role": "mentioned",
+        "popid": "POP-00025",
+        "floor": true
+      },
+      {
+        "name": "Carmen Mesa",
+        "role": "mentioned",
+        "popid": "POP-00081",
+        "floor": true
+      },
+      {
+        "name": "John Ellis",
+        "role": "mentioned",
+        "popid": "POP-00033",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Fruitvale"
+    ],
+    "claims": [
+      {
+        "claim": "As a musician living in Fruitvale, I've noticed the energy around Oakland's cultural scene is buzzing. It's cool to see people excited about what's happening here. I'm not sure how it's directly affecting my work, but it feels like there's a good vibe. I've been playing gigs when I can, and it's great to see the community coming out to support local artists. The Fruitvale Community Bloom Festival is a great example of this - it draws crowds to the neighborhood and shows the beauty of what we're doing here.",
+        "sourceRef": "citizenVoice PRESS Rico Valez"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-f283879fbba4",
+    "draftSha256": "725697316ed6c41e89d7881049967b2dd3d840a439b3f558aefc4e5f1059a9bb",
+    "verdict": "output/cron-compare/wire_c115_celeste-tran_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-11-14T00:19:08.307Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 400",
+      "words": 571,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "725697316ed6c41e89d7881049967b2dd3d840a439b3f558aefc4e5f1059a9bb",
+      "costUsd": 0.0007
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-14T00:19:11.180Z"
+}

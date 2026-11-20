@@ -4,55 +4,55 @@
     {
       "tool": "citizen_lookup",
       "input": {
-        "name": "Maurice Franklin",
+        "name": "Lena Marchetti",
         "thread": true
       },
-      "resultChars": 1721,
-      "resultHead": "Maurice Franklin — role: Drone Fleet Coordinator; neighborhood: Rockridge; born: 1978; wealth: 8; careerStage: mid-career; employerBiz: BIZ-00052; skills: 2041-Specific; popid: POP-00801\nMaurice Franklin (POP-00801) — 28 life-history entries on the record; last 15, oldest first:\nY3C6 — [Civic Perception] read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots\nY3C7 — [Daily] spent the evening sorting a box of things that used to be someone's\nY3C7 — [Neighborhood] grabbed something from College Avenue\nY3C7 — [Friction] borrowed against "
+      "resultChars": 1530,
+      "resultHead": "Lena Marchetti — role: Crisis Clinician; neighborhood: East Oakland; born: 2007; wealth: 6; careerStage: mid-career; employerBiz: BIZ-00095; skills: Healthcare; popid: POP-01167\nLena Marchetti (POP-01167) — 11 life-history entries on the record; last 11, oldest first:\nY3C7 — [Neighborhood] held the door and got a whole conversation for it near a fenced build site\nY3C7 — [PrevEvening] heard about First Friday arts district dining - gallery crowd trending at local restaurants\nY3C8 — [Background-Composure-Up-S] stepped outside briefly; peaceful moment\nY3C8 — [Background-Openness-Up-S] rearranged "
     },
     {
       "tool": "citizen_lookup",
       "input": {
-        "name": "Soledad Coleman",
+        "name": "Dominic Okeke-Brandt",
         "thread": true
       },
-      "resultChars": 1813,
-      "resultHead": "Soledad Coleman — role: AI Safety Researcher (Anthropic); neighborhood: Rockridge; born: 1990; wealth: 8; careerStage: senior; employerBiz: BIZ-00001; skills: Tech & Innovation; popid: POP-00840\nSoledad Coleman (POP-00840) — 27 life-history entries on the record; last 15, oldest first:\nY3C2 — [Neighborhood] navigated the stroller traffic on College Avenue and silently judged the parking jobs near a coffee line\nY3C6 — [PrevEvening] heard about Lake Merritt Open-Air Book Market over in Lake Merritt last night\nY3C6 — [Daily] got roped into helping Elijah Brown haul something heavy up a flight of "
+      "resultChars": 1952,
+      "resultHead": "Dominic Okeke-Brandt — role: Deputy Superintendent; neighborhood: Laurel; born: 1997; wealth: 6; careerStage: senior; employerBiz: BIZ-00016; skills: Education; popid: POP-01184\nDominic Okeke-Brandt (POP-01184) — 16 life-history entries on the record; last 15, oldest first:\nY3C7 — [Neighborhood] walked the perimeter of the Coliseum District Development and tried to picture what it would look like in five years\nY3C7 — [Neighborhood] helped someone carry groceries up the block near the school gate\nY3C7 — [Daily] priced out the bigger apartment and decided to wait another year\nY3C8 — [Personal-In"
     },
     {
       "tool": "citizen_lookup",
       "input": {
-        "name": "Tom Jilner",
+        "name": "Tyler Filet",
         "thread": true
       },
-      "resultChars": 1840,
-      "resultHead": "Tom Jilner — role: Wine Bar Owner; neighborhood: Rockridge; born: 2003; wealth: 6; careerStage: mid-career; employerBiz: SELF_EMPLOYED; skills: Food & Culture; popid: POP-00691\nTom Jilner (POP-00691) — 26 life-history entries on the record; last 15, oldest first:\nY3C4 — [Daily] negotiated bedtime like a seasoned diplomat, and lost gracefully\nY3C4 — [Daily] put on their good suit for the Sunday service because some traditions still matter\nY3C5 — [Neighborhood] noticed another renovated Victorian on the block and calculated what the property taxes must be\nY3C5 — [Civic Perception] counted cranes"
-    },
-    {
-      "tool": "citizen_lookup",
-      "input": {
-        "name": "Marisol Achebe",
-        "thread": true
-      },
-      "resultChars": 1723,
-      "resultHead": "Marisol Achebe — role: Mutual Aid Network Organizer; neighborhood: Fruitvale; born: 2003; wealth: 5; careerStage: mid-career; employerBiz: BIZ-00028; skills: Faith & Community; popid: POP-00526\nMarisol Achebe (POP-00526) — 32 life-history entries on the record; last 15, oldest first:\nY3C6 — [Personal] wondered if a decision from years back had been the right one\nY3C7 — [Neighborhood] heard the steady thump of a bassline from three cars down at the stoplight and nodded along\nY3C7 — [Daily] slipped into the back pew at Foothill Baptist Tabernacle just to sit somewhere air-conditioned and quiet\nY"
+      "resultChars": 1896,
+      "resultHead": "Tyler Filet — role: Biotech Lab Director (Portside Bio); neighborhood: Lake Merritt; born: 1986; wealth: 8; careerStage: senior; employerBiz: BIZ-00010; skills: Tech & Innovation; popid: POP-00447\nTyler Filet (POP-00447) — 30 life-history entries on the record; last 15, oldest first:\nY3C5 — [Background] reorganized a closet and found something thought lost near the pergola\nY3C5 — [Work] drank the free cold brew in the company kitchen and felt completely disconnected from the neighborhood outside\nY3C6 — [Lifestyle] looked up how something works and came away more amazed, not less\nY3C6 — [PrevEv"
     },
     {
       "tool": "canon_recall",
       "input": {
-        "query": "Maurice Franklin"
+        "query": "Lena Marchetti"
       },
-      "resultChars": 2177,
-      "resultHead": "[C91 · piece] | Maurice Franklin | — | Rockridge | Retired transit supervisor | Letters | NEW — needs ledger entry | New citizens introduced: 7 (Varek, Aguilar, Peterson, Turner, Brown, Harris, Franklin) Arcs closed: 1 (Darius Clark — Stabilization Fund) STORYLINES UPDATED That's what you hear, that's what you see on the news. But right now, with this team this hot, I feel like — I don't know. Like maybe there's something here to believe in. Like maybe Oakland gets to be a place where good things happen too. I know it's just spo\n[C91 · edition] But this team, this fall, something's different. "
+      "resultChars": 190,
+      "resultHead": "No published piece from before C115 came back for \"Lena Marchetti\". That is not proof the paper never covered it (an empty answer can also be a failed lookup) — do not write that it did not."
     },
     {
       "tool": "canon_recall",
       "input": {
-        "query": "The Page of Lives A Place of Their Own"
+        "query": "Dominic Okeke-Brandt"
       },
-      "resultChars": 3297,
-      "resultHead": "[C113 · daily · Tamsin Pruitt] # The Page of Lives, C113: A Place of Their Own Orion Kerkering moved into a rented place of his own in Lake Merritt this cycle. The ledger carries him as a retired former A's, and the Tribune once named him in \"Unsung Architects of a Dynasty.\" Christopher Johnson, a Lake Merritt janitor, has seen the new place. \"I've seen Orion Kerkering's new place, they're renting in Lake Merritt,\" he said. \"I noticed it because I've been keeping an eye on the neighborhood. It's nice to see young folks setting up on their own. I\n[C113 · daily · Tamsin Pruitt] # The Page: Lives"
+      "resultChars": 196,
+      "resultHead": "No published piece from before C115 came back for \"Dominic Okeke-Brandt\". That is not proof the paper never covered it (an empty answer can also be a failed lookup) — do not write that it did not."
+    },
+    {
+      "tool": "citizen_lookup",
+      "input": {
+        "name": "Vladimir Gonzalez",
+        "thread": true
+      },
+      "resultChars": 1780,
+      "resultHead": "Vladimir Gonzalez — role: Right Fielder, Oakland A's; neighborhood: Fruitvale; born: 2016; wealth: 9; careerStage: early-career; employerBiz: BIZ-00005; skills: athlete; popid: POP-00598\nVladimir Gonzalez (POP-00598) — 23 life-history entries on the record; last 15, oldest first:\nY3C8 — [Personal-Composure-Up-S] felt quietly proud of how they handled something small\nY3C9 — [Sports-Sociability-Up-S] saw their name in the sports pages again\nY3C9 — [Neighborhood-Sociability-Up-S] a flyer for a seniors lunch program flutters on a community bulletin board\nY3C10 — [Sports-Sociability-Up-S] got asked"
     }
   ],
-  "ranAt": "2026-11-12T00:23:03.144Z"
+  "ranAt": "2026-11-14T00:20:26.909Z"
 }

@@ -1,0 +1,53 @@
+{
+  "office": "council_d4",
+  "agentDir": "civic-office-council-d4",
+  "holder": "Ramon Vega",
+  "popid": "POP-00042",
+  "title": "City Council District 4",
+  "date": "2026-11-19",
+  "cycle": 116,
+  "model": "openai/gpt-6-luna",
+  "statement": "Ivy Hill’s latest readings are mixed, not a settled picture: sentiment improved from -0.14 to -0.06 and retail vitality rose from 5.17 to 5.54, while the crime index edged up from 0.66 to 0.67, slightly above the city’s 0.650. The reported crime figures are also a little above city levels: six incidents versus 5.7, with property and violent figures of 40 and 27 versus 39.5 and 25.8. I’ll keep attention on those conditions without manufacturing an emergency or adding another proposal. INIT-014 is already scheduled for a vote this Cycle, so I’m taking no additional action on it here.",
+  "moves": [],
+  "movesRejected": [],
+  "numberMoved": "0",
+  "ranAt": "2026-11-19T11:45:37.463Z",
+  "usage": {
+    "prompt_tokens": 6861,
+    "completion_tokens": 728,
+    "total_tokens": 7589,
+    "cost": 0.00122155,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 6858,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00122155,
+      "upstream_inference_prompt_cost": 0.00085755,
+      "upstream_inference_completions_cost": 0.000364
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 548,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "fellBackFrom": null,
+  "evidenceGenerationHash": "8bf58509d24a03b95f8e88a49a51e50b409fb1c4c8aa344e61a1acf7e941275d",
+  "evidenceReads": [],
+  "provider": "OpenAI",
+  "finishReason": "stop",
+  "elapsedMs": 7857,
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00042",
+    "id": "t45GP54PHhdNm7rXFb2Tkr",
+    "customId": "cp-POP-00042-c116-CIVIC-datawake-2026-11-19"
+  }
+}

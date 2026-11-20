@@ -1,0 +1,69 @@
+{
+  "office": "council_d3",
+  "agentDir": "civic-office-council-d3",
+  "holder": "Rose Delgado",
+  "popid": "POP-00503",
+  "title": "City Council District 3",
+  "date": "2026-11-16",
+  "cycle": 116,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "San Antonio is not a mystery this week — sentiment is still under water at -0.03 against a city at 0.107, the crime index sits at 0.73 against 0.650 citywide, and retail vitality slipped to 4.84 from 5.22. But the number I keep looking at is the one that moved the other way: sentiment up from -0.16. That is a neighborhood climbing, not a neighborhood collapsing, and my job is to feed that climb rather than narrate the fall. Meanwhile Fruitvale is growing and has a Youth Apprenticeship Pipeline stalled on it for three cycles with a complaint on file — a seat in the classroom is still not a paycheck. So this week I answer Director Vance and put the district's briefing-and-notice record where the public can check it, and I push the pipeline one work move forward. Nothing about San Antonio gets settled by a city report; it gets settled by people in the room, in daylight, with the numbers on the table.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-116-civic-office-council-d3",
+        "text": "Director Vance — the consolidated briefing-and-notice record is linked to the published OARI packet so the venue, the notice dates, the public numbers and the access arrangements can be checked directly instead of anyone repeating the briefing. What is on that record: the D3 community briefing convened in Fruitvale in daylight, the notice dates as issued, the Fruitvale response-time and San Antonio comparison figures as published, and the access arrangements made for people who could not attend in person. The packet carries OARI as dispatch-live with $10,817,307.66 remaining and renewable, next step due C117 — the record now sits beside that, not behind it. If a line is missing from the link, name it and I will supply it from the district file rather than have your office reconstruct it.",
+        "directiveCycle": 116,
+        "confrontationSeat": "civic-office-council-d3"
+      }
+    },
+    {
+      "type": "work",
+      "payload": {
+        "initiativeId": "INIT-007"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-11-16T11:46:17.025Z",
+  "usage": {
+    "prompt_tokens": 6599,
+    "completion_tokens": 440,
+    "total_tokens": 7039,
+    "cost": 0.00150462,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00150462,
+      "upstream_inference_prompt_cost": 0.00118782,
+      "upstream_inference_completions_cost": 0.0003168
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "fellBackFrom": null,
+  "evidenceGenerationHash": "8bf58509d24a03b95f8e88a49a51e50b409fb1c4c8aa344e61a1acf7e941275d",
+  "evidenceReads": [],
+  "provider": "DigitalOcean",
+  "finishReason": "stop",
+  "elapsedMs": 2250,
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00503",
+    "id": "QipDJqEVyRJjaZt6RhA97b",
+    "customId": "cp-POP-00503-c116-CIVIC-datawake-2026-11-16"
+  }
+}

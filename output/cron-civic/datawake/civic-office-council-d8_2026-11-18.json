@@ -1,0 +1,70 @@
+{
+  "office": "council_d8",
+  "agentDir": "civic-office-council-d8",
+  "holder": "Nina Chen",
+  "popid": "POP-00505",
+  "title": "City Council District 8",
+  "date": "2026-11-18",
+  "cycle": 116,
+  "model": "google/gemini-3.8-flash",
+  "statement": "Procedural integrity requires that every council action rests on an official roll call and verifiable docket records. District 8 continues to insist on Chen-Vega audit controls for Grand Lake commercial stabilization, while demanding transparent departmental coordination to reconcile municipal service delivery and health readings across Eastlake and Adams Point.",
+  "moves": [
+    {
+      "type": "canvass",
+      "payload": {
+        "hood": "Grand Lake",
+        "note": "Field verification of small commercial corridor conditions and audit readiness in Grand Lake."
+      }
+    },
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-116-civic-office-council-d8",
+        "text": "District 8 records confirm that active complaint dockets currently reflect 4 entries filed exclusively in Lake Merritt, with zero formal complaints docketed for Eastlake. The Eastlake canvass docket initiated in Cycle 115 remains pending administrative reconciliation, and our office requires certified departmental service schedules to address baseline health readings of 84 sick residents and elevated safety indices before any authorization status can be closed.",
+        "directiveCycle": 116,
+        "confrontationSeat": "civic-office-council-d8"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "2",
+  "ranAt": "2026-11-18T11:45:52.841Z",
+  "usage": {
+    "prompt_tokens": 6724,
+    "completion_tokens": 3563,
+    "total_tokens": 10287,
+    "cost": 0.01840425,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.01840425,
+      "upstream_inference_prompt_cost": 0.005043,
+      "upstream_inference_completions_cost": 0.01336125
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 3289,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "fellBackFrom": null,
+  "evidenceGenerationHash": "8bf58509d24a03b95f8e88a49a51e50b409fb1c4c8aa344e61a1acf7e941275d",
+  "evidenceReads": [],
+  "provider": "Google",
+  "finishReason": "stop",
+  "elapsedMs": 18339,
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00505",
+    "id": "PuBsnG6WWeu5CBaWDCYv4c",
+    "customId": "cp-POP-00505-c116-CIVIC-datawake-2026-11-18"
+  }
+}

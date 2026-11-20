@@ -2,7 +2,7 @@
   "Mike Paulson": {
     "popId": "POP-00527",
     "name": "Mike Paulson",
-    "totalRefs": 13,
+    "totalRefs": 14,
     "articles": [
       {
         "source": "",
@@ -68,6 +68,11 @@
         "source": "Anthony Raines",
         "title": "sports_c114_anthony-raines-23ad",
         "cycle": "114"
+      },
+      {
+        "source": "Tanya Cruz",
+        "title": "sports_c115_tanya-cruz-0fa5",
+        "cycle": "115"
       }
     ]
   },
@@ -198,7 +203,7 @@
   "Vinnie Keane": {
     "popId": "POP-00001",
     "name": "Vinnie Keane",
-    "totalRefs": 18,
+    "totalRefs": 20,
     "articles": [
       {
         "source": "",
@@ -289,13 +294,23 @@
         "source": "Celeste Tran",
         "title": "wire_c114_celeste-tran-0fa5",
         "cycle": "114"
+      },
+      {
+        "source": "Kai Marston",
+        "title": "culture_c115_kai-marston-97bf",
+        "cycle": "115"
+      },
+      {
+        "source": "Tanya Cruz",
+        "title": "sports_c115_tanya-cruz-0fa5",
+        "cycle": "115"
       }
     ]
   },
   "Darrin Davis": {
     "popId": "POP-00021",
     "name": "Darrin Davis",
-    "totalRefs": 10,
+    "totalRefs": 11,
     "articles": [
       {
         "source": "",
@@ -346,6 +361,11 @@
         "source": "Kai Marston",
         "title": "culture_c114_kai-marston-97bf",
         "cycle": "114"
+      },
+      {
+        "source": "Kai Marston",
+        "title": "culture_c115_kai-marston-97bf",
+        "cycle": "115"
       }
     ]
   },
@@ -513,7 +533,7 @@
   "Benji Dillon": {
     "popId": "POP-00018",
     "name": "Benji Dillon",
-    "totalRefs": 15,
+    "totalRefs": 18,
     "articles": [
       {
         "source": "",
@@ -589,13 +609,28 @@
         "source": "Kai Marston",
         "title": "culture_c114_kai-marston-97bf",
         "cycle": "114"
+      },
+      {
+        "source": "Kai Marston",
+        "title": "culture_c115_kai-marston-97bf",
+        "cycle": "115"
+      },
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c115_tamsin-pruitt-23ad-0021",
+        "cycle": "115"
+      },
+      {
+        "source": "Tanya Cruz",
+        "title": "sports_c115_tanya-cruz-0fa5",
+        "cycle": "115"
       }
     ]
   },
   "Avery Santana": {
     "popId": "POP-00034",
     "name": "Avery Santana",
-    "totalRefs": 12,
+    "totalRefs": 14,
     "articles": [
       {
         "source": "",
@@ -656,6 +691,16 @@
         "source": "Carmen Delaine",
         "title": "civic_c112_carmen-delaine-97bf",
         "cycle": "112"
+      },
+      {
+        "source": "Carmen Delaine",
+        "title": "civic_c115_carmen-delaine-23ad",
+        "cycle": "115"
+      },
+      {
+        "source": "Luis Navarro",
+        "title": "civic_c115_luis-navarro-23ad",
+        "cycle": "115"
       }
     ]
   },
@@ -699,7 +744,7 @@
   "Elliott Crane": {
     "popId": "POP-00044",
     "name": "Elliott Crane",
-    "totalRefs": 12,
+    "totalRefs": 13,
     "articles": [
       {
         "source": "",
@@ -760,13 +805,18 @@
         "source": "Luis Navarro",
         "title": "civic_c113_luis-navarro-23ad",
         "cycle": "113"
+      },
+      {
+        "source": "Carmen Delaine",
+        "title": "civic_c115_carmen-delaine-23ad",
+        "cycle": "115"
       }
     ]
   },
   "Brenda Okoro": {
     "popId": "POP-00037",
     "name": "Brenda Okoro",
-    "totalRefs": 5,
+    "totalRefs": 6,
     "articles": [
       {
         "source": "",
@@ -792,6 +842,11 @@
         "source": "Carmen Delaine",
         "title": "civic_c112_carmen-delaine-97bf",
         "cycle": "112"
+      },
+      {
+        "source": "Carmen Delaine",
+        "title": "civic_c115_carmen-delaine-23ad",
+        "cycle": "115"
       }
     ]
   },
@@ -1181,7 +1236,7 @@
   "Ramon Vega": {
     "popId": "POP-00042",
     "name": "Ramon Vega",
-    "totalRefs": 11,
+    "totalRefs": 12,
     "articles": [
       {
         "source": "",
@@ -1237,6 +1292,11 @@
         "source": "Maria Keen",
         "title": "culture_c113_maria-keen-23ad",
         "cycle": "113"
+      },
+      {
+        "source": "Carmen Delaine",
+        "title": "civic_c115_carmen-delaine-23ad",
+        "cycle": "115"
       }
     ]
   },
@@ -1481,7 +1541,7 @@
   "Leonard Tran": {
     "popId": "POP-00502",
     "name": "Leonard Tran",
-    "totalRefs": 9,
+    "totalRefs": 10,
     "articles": [
       {
         "source": "",
@@ -1527,6 +1587,11 @@
         "source": "Luis Navarro",
         "title": "civic_c113_luis-navarro-23ad",
         "cycle": "113"
+      },
+      {
+        "source": "Carmen Delaine",
+        "title": "civic_c115_carmen-delaine-23ad",
+        "cycle": "115"
       }
     ]
   },
@@ -1585,7 +1650,7 @@
   "Warren Ashford": {
     "popId": "POP-00504",
     "name": "Warren Ashford",
-    "totalRefs": 8,
+    "totalRefs": 9,
     "articles": [
       {
         "source": "",
@@ -1626,6 +1691,11 @@
         "source": "Luis Navarro",
         "title": "civic_c113_luis-navarro-23ad",
         "cycle": "113"
+      },
+      {
+        "source": "Jax Caldera",
+        "title": "civic_c115_freelance-firebrand-23ad",
+        "cycle": "115"
       }
     ]
   },
@@ -1743,7 +1813,7 @@
   "Marcus Webb": {
     "popId": "POP-00790",
     "name": "Marcus Webb",
-    "totalRefs": 5,
+    "totalRefs": 6,
     "articles": [
       {
         "source": "",
@@ -1769,6 +1839,11 @@
         "source": "Luis Navarro",
         "title": "civic_c113_luis-navarro-23ad",
         "cycle": "113"
+      },
+      {
+        "source": "Carmen Delaine",
+        "title": "civic_c115_carmen-delaine-23ad",
+        "cycle": "115"
       }
     ]
   },
@@ -2194,7 +2269,7 @@
   "Arturo Ramos": {
     "popId": "POP-00025",
     "name": "Arturo Ramos",
-    "totalRefs": 3,
+    "totalRefs": 4,
     "articles": [
       {
         "source": "",
@@ -2210,13 +2285,18 @@
         "source": "Celeste Tran",
         "title": "wire_c114_celeste-tran-0fa5",
         "cycle": "114"
+      },
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c115_tamsin-pruitt-23ad-0021",
+        "cycle": "115"
       }
     ]
   },
   "John Ellis": {
     "popId": "POP-00033",
     "name": "John Ellis",
-    "totalRefs": 7,
+    "totalRefs": 8,
     "articles": [
       {
         "source": "",
@@ -2252,6 +2332,11 @@
         "source": "Celeste Tran",
         "title": "wire_c114_celeste-tran-0fa5",
         "cycle": "114"
+      },
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c115_tamsin-pruitt-23ad-0021",
+        "cycle": "115"
       }
     ]
   },
@@ -2314,7 +2399,7 @@
   "P Slayer": {
     "popId": "POP-00008",
     "name": "P Slayer",
-    "totalRefs": 6,
+    "totalRefs": 7,
     "articles": [
       {
         "source": "",
@@ -2345,6 +2430,11 @@
         "source": "",
         "title": "2 articles",
         "cycle": "84"
+      },
+      {
+        "source": "Nia Rook",
+        "title": "undocked-digest_c115_nia-rook-weekly-70bb",
+        "cycle": "115"
       }
     ]
   },
@@ -2490,7 +2580,7 @@
   "Luis Navarro": {
     "popId": "POP-00636",
     "name": "Luis Navarro",
-    "totalRefs": 3,
+    "totalRefs": 4,
     "articles": [
       {
         "source": "",
@@ -2506,6 +2596,11 @@
         "source": "",
         "title": "1 article",
         "cycle": "84"
+      },
+      {
+        "source": "Jax Caldera",
+        "title": "civic_c115_freelance-firebrand-23ad",
+        "cycle": "115"
       }
     ]
   },
@@ -2790,6 +2885,18 @@
       }
     ]
   },
+  "Omar Clark": {
+    "popId": "POP-01243",
+    "name": "Omar Clark",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "",
+        "title": "Talia Finch scene -- processing Giddey highlights and Paulson departure anxiety at Nino's",
+        "cycle": "80"
+      }
+    ]
+  },
   "Gloria Hutchins": {
     "popId": "POP-00727",
     "name": "Gloria Hutchins",
@@ -2926,7 +3033,7 @@
   "Father Miguel": {
     "popId": "POP-00734",
     "name": "Father Miguel",
-    "totalRefs": 2,
+    "totalRefs": 3,
     "articles": [
       {
         "source": "",
@@ -2937,6 +3044,11 @@
         "source": "Nia Rook",
         "title": "undocked-digest_c113_nia-rook-weekly-70bb",
         "cycle": "113"
+      },
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c115_tamsin-pruitt-23ad-0021",
+        "cycle": "115"
       }
     ]
   },
@@ -3043,7 +3155,7 @@
   "Isley Kelley": {
     "popId": "POP-00019",
     "name": "Isley Kelley",
-    "totalRefs": 4,
+    "totalRefs": 5,
     "articles": [
       {
         "source": "",
@@ -3064,6 +3176,11 @@
         "source": "P Slayer",
         "title": "sports_c105_p-slayer-8f8c",
         "cycle": "105"
+      },
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c115_tamsin-pruitt-23ad-0021",
+        "cycle": "115"
       }
     ]
   },
@@ -3354,7 +3471,7 @@
   "Jasmine Torres": {
     "popId": "POP-01111",
     "name": "Jasmine Torres",
-    "totalRefs": 2,
+    "totalRefs": 3,
     "articles": [
       {
         "source": "",
@@ -3365,6 +3482,11 @@
         "source": "edition",
         "title": "28, Tenth Street Digital founder",
         "cycle": "89"
+      },
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c115_tamsin-pruitt-23ad-0023",
+        "cycle": "115"
       }
     ]
   },
@@ -4469,7 +4591,7 @@
   "Coen Cartier": {
     "popId": "POP-00338",
     "name": "Coen Cartier",
-    "totalRefs": 2,
+    "totalRefs": 3,
     "articles": [
       {
         "source": "Trevor Shimizu",
@@ -4480,6 +4602,11 @@
         "source": "Trevor Shimizu",
         "title": "civic_c109_trevor-shimizu-abcf",
         "cycle": "109"
+      },
+      {
+        "source": "Trevor Shimizu",
+        "title": "civic_c115_trevor-shimizu-23ad",
+        "cycle": "115"
       }
     ]
   },
@@ -4549,7 +4676,7 @@
   "Vladimir Gonzalez": {
     "popId": "POP-00598",
     "name": "Vladimir Gonzalez",
-    "totalRefs": 6,
+    "totalRefs": 7,
     "articles": [
       {
         "source": "P Slayer",
@@ -4580,6 +4707,11 @@
         "source": "Anthony Raines",
         "title": "sports_c114_anthony-raines-23ad",
         "cycle": "114"
+      },
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c115_tamsin-pruitt-23ad-0021",
+        "cycle": "115"
       }
     ]
   },
@@ -4681,12 +4813,17 @@
   "Kelvon Ochoa": {
     "popId": "POP-00481",
     "name": "Kelvon Ochoa",
-    "totalRefs": 1,
+    "totalRefs": 2,
     "articles": [
       {
         "source": "Jordan Velez",
         "title": "business_c108_business-desk-abcf",
         "cycle": "108"
+      },
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c115_tamsin-pruitt-23ad-0023",
+        "cycle": "115"
       }
     ]
   },
@@ -4770,12 +4907,17 @@
   "Ximena Mehta": {
     "popId": "POP-01039",
     "name": "Ximena Mehta",
-    "totalRefs": 1,
+    "totalRefs": 2,
     "articles": [
       {
         "source": "Trevor Shimizu",
         "title": "civic_c108_trevor-shimizu-abcf",
         "cycle": "108"
+      },
+      {
+        "source": "Trevor Shimizu",
+        "title": "civic_c115_trevor-shimizu-23ad",
+        "cycle": "115"
       }
     ]
   },
@@ -4855,12 +4997,17 @@
   "Dank Abara": {
     "popId": "POP-00796",
     "name": "Dank Abara",
-    "totalRefs": 1,
+    "totalRefs": 2,
     "articles": [
       {
         "source": "Celeste Tran",
         "title": "wire_c108_celeste-tran-8f8c",
         "cycle": "108"
+      },
+      {
+        "source": "Jax Caldera",
+        "title": "civic_c115_freelance-firebrand-23ad",
+        "cycle": "115"
       }
     ]
   },
@@ -5062,7 +5209,7 @@
   "Elena Soria Dominguez": {
     "popId": "POP-00791",
     "name": "Elena Soria Dominguez",
-    "totalRefs": 3,
+    "totalRefs": 4,
     "articles": [
       {
         "source": "Luis Navarro",
@@ -5078,6 +5225,11 @@
         "source": "Trevor Shimizu",
         "title": "civic_c114_trevor-shimizu-23ad",
         "cycle": "114"
+      },
+      {
+        "source": "Trevor Shimizu",
+        "title": "civic_c115_trevor-shimizu-23ad",
+        "cycle": "115"
       }
     ]
   },
@@ -5130,7 +5282,7 @@
   "Dmitri Soto": {
     "popId": "POP-00276",
     "name": "Dmitri Soto",
-    "totalRefs": 2,
+    "totalRefs": 3,
     "articles": [
       {
         "source": "Jordan Velez",
@@ -5141,13 +5293,18 @@
         "source": "Ines Sorensen",
         "title": "culture_c112_ines-sorensen-0fa5-1615",
         "cycle": "112"
+      },
+      {
+        "source": "Jax Caldera",
+        "title": "civic_c115_freelance-firebrand-23ad",
+        "cycle": "115"
       }
     ]
   },
   "Evan Lewis": {
     "popId": "POP-00200",
     "name": "Evan Lewis",
-    "totalRefs": 3,
+    "totalRefs": 4,
     "articles": [
       {
         "source": "Trevor Shimizu",
@@ -5163,6 +5320,11 @@
         "source": "Celeste Tran",
         "title": "wire_c114_celeste-tran-0fa5",
         "cycle": "114"
+      },
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c115_tamsin-pruitt-23ad-0021",
+        "cycle": "115"
       }
     ]
   },
@@ -5388,7 +5550,7 @@
   "Maurice Franklin": {
     "popId": "POP-00801",
     "name": "Maurice Franklin",
-    "totalRefs": 2,
+    "totalRefs": 3,
     "articles": [
       {
         "source": "Dr. Lila Mezran",
@@ -5399,6 +5561,11 @@
         "source": "Jordan Velez",
         "title": "business_c114_business-desk-cef6",
         "cycle": "114"
+      },
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c115_tamsin-pruitt-23ad-0023",
+        "cycle": "115"
       }
     ]
   },
@@ -5578,12 +5745,17 @@
   "Mina Kapoor": {
     "popId": "POP-01200",
     "name": "Mina Kapoor",
-    "totalRefs": 1,
+    "totalRefs": 2,
     "articles": [
       {
         "source": "Tamsin Pruitt",
         "title": "culture_c113_tamsin-pruitt-23ad",
         "cycle": "113"
+      },
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c115_tamsin-pruitt-23ad-0023",
+        "cycle": "115"
       }
     ]
   },
@@ -5679,12 +5851,17 @@
   "Elijah Brown": {
     "popId": "POP-01195",
     "name": "Elijah Brown",
-    "totalRefs": 1,
+    "totalRefs": 2,
     "articles": [
       {
         "source": "Jordan Velez",
         "title": "business_c114_business-desk-cef6",
         "cycle": "114"
+      },
+      {
+        "source": "Nia Rook",
+        "title": "undocked-digest_c115_nia-rook-weekly-70bb",
+        "cycle": "115"
       }
     ]
   },
@@ -5804,12 +5981,17 @@
   "Tyler Filet": {
     "popId": "POP-00447",
     "name": "Tyler Filet",
-    "totalRefs": 1,
+    "totalRefs": 2,
     "articles": [
       {
         "source": "Tamsin Pruitt",
         "title": "culture_c114_tamsin-pruitt-23ad-0020",
         "cycle": "114"
+      },
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c115_tamsin-pruitt-23ad-0021",
+        "cycle": "115"
       }
     ]
   },
@@ -5912,12 +6094,17 @@
   "Luis Taz": {
     "popId": "POP-00298",
     "name": "Luis Taz",
-    "totalRefs": 1,
+    "totalRefs": 2,
     "articles": [
       {
         "source": "Nia Rook",
         "title": "undocked-digest_c114_nia-rook-weekly-70bb",
         "cycle": "114"
+      },
+      {
+        "source": "Nia Rook",
+        "title": "undocked-digest_c115_nia-rook-weekly-70bb",
+        "cycle": "115"
       }
     ]
   },
@@ -5954,6 +6141,186 @@
         "source": "Celeste Tran",
         "title": "wire_c114_celeste-tran-0fa5",
         "cycle": "114"
+      }
+    ]
+  },
+  "Priya Raghunathan": {
+    "popId": "POP-01214",
+    "name": "Priya Raghunathan",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "Jax Caldera",
+        "title": "civic_c115_freelance-firebrand-23ad",
+        "cycle": "115"
+      }
+    ]
+  },
+  "Anthony Raines": {
+    "popId": "POP-00017",
+    "name": "Anthony Raines",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "Kai Marston",
+        "title": "culture_c115_kai-marston-97bf",
+        "cycle": "115"
+      }
+    ]
+  },
+  "Dominic Okeke-Brandt": {
+    "popId": "POP-01184",
+    "name": "Dominic Okeke-Brandt",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c115_tamsin-pruitt-23ad-0021",
+        "cycle": "115"
+      }
+    ]
+  },
+  "Kai Davis": {
+    "popId": "POP-00996",
+    "name": "Kai Davis",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c115_tamsin-pruitt-23ad-0021",
+        "cycle": "115"
+      }
+    ]
+  },
+  "Latasha Jefferson": {
+    "popId": "POP-00805",
+    "name": "Latasha Jefferson",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c115_tamsin-pruitt-23ad-0021",
+        "cycle": "115"
+      }
+    ]
+  },
+  "Lena Marchetti": {
+    "popId": "POP-01167",
+    "name": "Lena Marchetti",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c115_tamsin-pruitt-23ad-0021",
+        "cycle": "115"
+      }
+    ]
+  },
+  "Soledad Coleman": {
+    "popId": "POP-00840",
+    "name": "Soledad Coleman",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c115_tamsin-pruitt-23ad-0023",
+        "cycle": "115"
+      }
+    ]
+  },
+  "Tom Jilner": {
+    "popId": "POP-00691",
+    "name": "Tom Jilner",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c115_tamsin-pruitt-23ad-0023",
+        "cycle": "115"
+      }
+    ]
+  },
+  "Marisol Achebe": {
+    "popId": "POP-00526",
+    "name": "Marisol Achebe",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c115_tamsin-pruitt-23ad-0023",
+        "cycle": "115"
+      }
+    ]
+  },
+  "Everly Rainey": {
+    "popId": "POP-00737",
+    "name": "Everly Rainey",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c115_tamsin-pruitt-23ad-0023",
+        "cycle": "115"
+      }
+    ]
+  },
+  "Jesus Jorden": {
+    "popId": "POP-00721",
+    "name": "Jesus Jorden",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c115_tamsin-pruitt-23ad-0023",
+        "cycle": "115"
+      }
+    ]
+  },
+  "Latasha Rivera": {
+    "popId": "POP-00818",
+    "name": "Latasha Rivera",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c115_tamsin-pruitt-23ad-0023",
+        "cycle": "115"
+      }
+    ]
+  },
+  "Ruth Anyanwu": {
+    "popId": "POP-01147",
+    "name": "Ruth Anyanwu",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c115_tamsin-pruitt-23ad-0023",
+        "cycle": "115"
+      }
+    ]
+  },
+  "Tomas Aguilar": {
+    "popId": "POP-00529",
+    "name": "Tomas Aguilar",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c115_tamsin-pruitt-23ad-0023",
+        "cycle": "115"
+      }
+    ]
+  },
+  "Brooklyn Nguyen": {
+    "popId": "POP-00184",
+    "name": "Brooklyn Nguyen",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "Nia Rook",
+        "title": "undocked-digest_c115_nia-rook-weekly-70bb",
+        "cycle": "115"
       }
     ]
   }

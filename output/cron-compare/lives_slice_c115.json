@@ -15,959 +15,946 @@
   "pulse": {
     "className": "beat-lives",
     "score": 100,
-    "label": "Maurice Franklin moved into a place of their own in Rockridge, renting",
+    "label": "Lena Marchetti moved into a place of their own in East Oakland, renting",
     "hood": null,
-    "source": "output/beats/Lived_Events.jsonl @C115 batch fd0b35"
+    "source": "output/beats/Lived_Events.jsonl @C115 batch 1138a0"
   },
   "story": {
     "kind": "beat-lives",
-    "angle": "The lives of C115: 11 people — Maurice Franklin moved into a place of their own in Rockridge, renting",
-    "label": "Maurice Franklin moved into a place of their own in Rockridge, renting",
-    "hookLine": "Maurice Franklin first. The event is the lead; one true detail; what came next only if the record says.",
+    "angle": "The lives of C115: 9 people — Lena Marchetti moved into a place of their own in East Oakland, renting",
+    "label": "Lena Marchetti moved into a place of their own in East Oakland, renting",
+    "hookLine": "Lena Marchetti first. The event is the lead; one true detail; what came next only if the record says.",
     "hood": null,
     "citizens": [
-      "Maurice Franklin (POP-00801)",
-      "Soledad Coleman (POP-00840)",
-      "Tom Jilner (POP-00691)",
-      "Marisol Achebe (POP-00526)",
-      "Mina Kapoor (POP-01200)",
-      "Everly Rainey (POP-00737)",
-      "Tomas Aguilar (POP-00529)",
-      "Kelvon Ochoa (POP-00481)",
-      "Jesus Jorden (POP-00721)",
-      "Jasmine Torres (POP-01111)",
-      "Ruth Anyanwu (POP-01147)"
+      "Lena Marchetti (POP-01167)",
+      "Dominic Okeke-Brandt (POP-01184)",
+      "Kai Davis (POP-00996)",
+      "Evan Lewis (POP-00200)",
+      "Vladimir Gonzalez (POP-00598)",
+      "Isley Kelley (POP-00019)",
+      "Benji Dillon (POP-00018)",
+      "Latasha Jefferson (POP-00805)",
+      "Tyler Filet (POP-00447)"
     ],
     "popids": [
-      "POP-00801",
-      "POP-00840",
-      "POP-00691",
-      "POP-00526",
-      "POP-01200",
-      "POP-00737",
-      "POP-00529",
-      "POP-00481",
-      "POP-00721",
-      "POP-01111",
-      "POP-01147"
+      "POP-01167",
+      "POP-01184",
+      "POP-00996",
+      "POP-00200",
+      "POP-00598",
+      "POP-00019",
+      "POP-00018",
+      "POP-00805",
+      "POP-00447"
     ],
-    "ref": "output/beats/Lived_Events.jsonl @C115 batch fd0b35",
+    "ref": "output/beats/Lived_Events.jsonl @C115 batch 1138a0",
     "cycle": 115
   },
   "approach": "Lives approach: this slice is the people something happened to this Cycle — a birth, a death in the house, a hospital stay, a retirement, a promotion; a household set up or a place of their own; a win or a loss on the book; the people a turn of the city reached and what it did to their day; and the smaller moments the record kept. Each person gets their own passage: the event, then the thread under it — the stay or strain that led there, the other lines the record kept for them, what the Tribune or this page already said of them, and what they did next if the record says. Read the thread in order and name where two lines of it do not agree; do not restate a ledger value as the story. The fact exactly right; never a trend, never a number first; the person, not the system the event belongs to. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
   "citizens": [
     {
-      "popid": "POP-00801",
-      "name": "Maurice Franklin",
-      "role": "Drone Fleet Coordinator",
-      "neighborhood": "Rockridge",
+      "popid": "POP-01167",
+      "name": "Lena Marchetti",
+      "role": "Crisis Clinician",
+      "neighborhood": "East Oakland",
       "business": null,
-      "profile": "Maurice Franklin — Drone Fleet Coordinator — Rockridge",
+      "profile": "Lena Marchetti — Crisis Clinician — East Oakland",
       "why": "moved into a place of their own this Cycle"
     },
     {
-      "popid": "POP-00840",
-      "name": "Soledad Coleman",
-      "role": "AI Safety Researcher (Anthropic)",
-      "neighborhood": "Rockridge",
+      "popid": "POP-01184",
+      "name": "Dominic Okeke-Brandt",
+      "role": "Deputy Superintendent",
+      "neighborhood": "Laurel",
       "business": null,
-      "profile": "Soledad Coleman — AI Safety Researcher (Anthropic) — Rockridge",
+      "profile": "Dominic Okeke-Brandt — Deputy Superintendent — Laurel",
       "why": "moved into a place of their own this Cycle"
     },
     {
-      "popid": "POP-00691",
-      "name": "Tom Jilner",
-      "role": "Wine Bar Owner",
-      "neighborhood": "Rockridge",
+      "popid": "POP-00996",
+      "name": "Kai Davis",
+      "role": "Junior Accountant",
+      "neighborhood": "West Oakland",
       "business": null,
-      "profile": "Tom Jilner — Wine Bar Owner — Rockridge",
-      "why": "lost on the UNDOCKED book this Cycle"
+      "profile": "Kai Davis — Junior Accountant — West Oakland",
+      "why": "reached by the Cycle's community turn: found a forgotten photograph tucked in a book and sat with it a while"
     },
     {
-      "popid": "POP-00526",
-      "name": "Marisol Achebe",
-      "role": "Mutual Aid Network Organizer",
+      "popid": "POP-00200",
+      "name": "Evan Lewis",
+      "role": "Bus driver",
+      "neighborhood": "Laurel",
+      "business": null,
+      "profile": "Evan Lewis — Bus driver — Laurel",
+      "why": "reached by the Cycle's community turn: noticed more people keeping to themselves lately"
+    },
+    {
+      "popid": "POP-00598",
+      "name": "Vladimir Gonzalez",
+      "role": "Right Fielder, Oakland A's",
       "neighborhood": "Fruitvale",
       "business": null,
-      "profile": "Marisol Achebe — Mutual Aid Network Organizer — Fruitvale",
-      "why": "lost on the UNDOCKED book this Cycle"
+      "profile": "Vladimir Gonzalez — Right Fielder, Oakland A's — Fruitvale",
+      "why": "reached by the Cycle's community turn: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence"
     },
     {
-      "popid": "POP-01200",
-      "name": "Mina Kapoor",
-      "role": "Hair stylist",
-      "neighborhood": "Grand Lake",
+      "popid": "POP-00019",
+      "name": "Isley Kelley",
+      "role": "Shortstop, Oakland A's Legend",
+      "neighborhood": "Rockridge",
       "business": null,
-      "profile": "Mina Kapoor — Hair stylist — Grand Lake",
-      "why": "reached by the Cycle's city turn: noticed neighbors being more watchful today"
+      "profile": "Isley Kelley — Shortstop, Oakland A's Legend — Rockridge",
+      "why": "business-gain this Cycle: Kelley Mercantile returned $2063 to the line this week"
     },
     {
-      "popid": "POP-00737",
-      "name": "Everly Rainey",
-      "role": "waterfront developer",
-      "neighborhood": "Downtown",
+      "popid": "POP-00018",
+      "name": "Benji Dillon",
+      "role": "Pitcher, Oakland A's Legend",
+      "neighborhood": "Rockridge",
       "business": null,
-      "profile": "Everly Rainey — waterfront developer — Downtown",
-      "why": "reached by the Cycle's city turn: wrote half a letter to family, then decided to call instead"
+      "profile": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+      "why": "business-gain this Cycle: Dillon Clinic returned $7548 to the line this week"
     },
     {
-      "popid": "POP-00529",
-      "name": "Tomas Aguilar",
-      "role": "Freight Logistics Coordinator (Port of Oakland)",
-      "neighborhood": "Jack London",
-      "business": null,
-      "profile": "Tomas Aguilar — Freight Logistics Coordinator (Port of Oakland) — Jack London",
-      "why": "reached by the Cycle's safety turn: bought a new A's jersey and let the week's noise settle"
-    },
-    {
-      "popid": "POP-00481",
-      "name": "Kelvon Ochoa",
+      "popid": "POP-00805",
+      "name": "Latasha Jefferson",
       "role": "AI Safety Researcher (Anthropic)",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Latasha Jefferson — AI Safety Researcher (Anthropic) — Rockridge",
+      "why": "lifeevent-promotion-down-s this Cycle: A manager at Anthropic walked past three times and did not stop once."
+    },
+    {
+      "popid": "POP-00447",
+      "name": "Tyler Filet",
+      "role": "Biotech Lab Director (Portside Bio)",
       "neighborhood": "Lake Merritt",
       "business": null,
-      "profile": "Kelvon Ochoa — AI Safety Researcher (Anthropic) — Lake Merritt",
-      "why": "relocation-drive-up-m this Cycle: moved from Rockridge to Lake Merritt — moving up from Rockridge — sold up and bought in Lake Merritt"
-    },
-    {
-      "popid": "POP-00721",
-      "name": "Jesus Jorden",
-      "role": "Pastry Chef, OakHouse",
-      "neighborhood": "Fruitvale",
-      "business": null,
-      "profile": "Jesus Jorden — Pastry Chef, OakHouse — Fruitvale",
-      "why": "relocation-drive-up-m this Cycle: moved from Temescal to Fruitvale — moving up from Temescal"
-    },
-    {
-      "popid": "POP-01111",
-      "name": "Jasmine Torres",
-      "role": "Founder, Tenth Street Digital",
-      "neighborhood": "KONO",
-      "business": null,
-      "profile": "Jasmine Torres — Founder, Tenth Street Digital — KONO",
-      "why": "relocation-composure-up-m this Cycle: moved from Chinatown to KONO — leaving Chinatown for a better fit"
-    },
-    {
-      "popid": "POP-01147",
-      "name": "Ruth Anyanwu",
-      "role": "Police Officer",
-      "neighborhood": "Downtown",
-      "business": null,
-      "profile": "Ruth Anyanwu — Police Officer — Downtown",
-      "why": "relocation-drive-up-m this Cycle: moved from East Oakland to Downtown — moving up from East Oakland"
+      "profile": "Tyler Filet — Biotech Lab Director (Portside Bio) — Lake Merritt",
+      "why": "lifeevent-promotion-up-s this Cycle: The schedule at Portside Bio came out with their name in the slot that used to belong to someone senior."
     }
   ],
   "facts": [
     {
-      "text": "Maurice Franklin moved into a place of their own in Rockridge, renting (C115)",
+      "text": "Lena Marchetti moved into a place of their own in East Oakland, renting (C115)",
       "src": "output/beats/Household_Ledger.jsonl @C115",
-      "id": "household:HH-0115-F006:115",
+      "id": "household:HH-0115-F010:115",
       "kind": "household",
-      "popid": "POP-00801"
+      "popid": "POP-01167"
     },
     {
-      "text": "Maurice Franklin — in their life, C114: borrowed against next month to close this one",
+      "text": "Lena Marchetti — in their life, C114: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner near a fenced build site",
       "src": "output/beats/LifeHistory_Log.jsonl @C114",
       "kind": "thread",
-      "popid": "POP-00801"
+      "popid": "POP-01167"
     },
     {
-      "text": "Maurice Franklin — in their life, C115: the card statement was the first thing read and the last thing forgotten",
+      "text": "Lena Marchetti — in their life, C115: said no to something and felt the shape of who they are in it near a fenced build site",
       "src": "output/beats/LifeHistory_Log.jsonl @C115",
       "kind": "thread",
-      "popid": "POP-00801"
+      "popid": "POP-01167"
     },
     {
-      "text": "Maurice Franklin — in their life, C115: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+      "text": "Lena Marchetti — in their life, C115: heard someone at the cafe complain about the Baylight District noise and bit their tongue",
       "src": "output/beats/LifeHistory_Log.jsonl @C115",
       "kind": "thread",
-      "popid": "POP-00801"
+      "popid": "POP-01167"
     },
     {
-      "text": "Maurice Franklin — in their life, C115: brought home a new plant and picked its spot carefully",
-      "src": "output/beats/LifeHistory_Log.jsonl @C115",
-      "kind": "thread",
-      "popid": "POP-00801"
-    },
-    {
-      "text": "Maurice Franklin — the Tribune named them in a piece headlined The Board in the Trailer Says 9.5 Percent. Enzo Walker Is Counting Something Else. (Business Reporter, C114)",
-      "src": "archive/ARTICLE_INDEX.jsonl 384044afdbad94f5",
-      "kind": "thread",
-      "popid": "POP-00801"
-    },
-    {
-      "text": "Maurice Franklin — the Tribune named them in a piece headlined Chinatown's 137 Sick: Six Beds Hold Part of the Count, Kitchens Hold the Rest (Civic, C114)",
-      "src": "archive/ARTICLE_INDEX.jsonl f5baef8c2be8a0e4",
-      "kind": "thread",
-      "popid": "POP-00801"
-    },
-    {
-      "text": "Maurice Franklin — the Tribune named them in a piece headlined Chinatown's 140 Sick Are Mostly at Home, and Home Is Doing the Work (Civic, C113)",
-      "src": "archive/ARTICLE_INDEX.jsonl 415a8378a3cc8be1",
-      "kind": "thread",
-      "popid": "POP-00801"
-    },
-    {
-      "text": "Soledad Coleman moved into a place of their own in Rockridge, renting (C115)",
+      "text": "Dominic Okeke-Brandt moved into a place of their own in Laurel, renting (C115)",
       "src": "output/beats/Household_Ledger.jsonl @C115",
-      "id": "household:HH-0115-F007:115",
+      "id": "household:HH-0115-F011:115",
       "kind": "household",
-      "popid": "POP-00840"
+      "popid": "POP-01184"
     },
     {
-      "text": "Soledad Coleman — in their life, C114: badged into the Baylight office early and tried not to think about the protestors from last month",
-      "src": "output/beats/LifeHistory_Log.jsonl @C114",
-      "kind": "thread",
-      "popid": "POP-00840"
-    },
-    {
-      "text": "Soledad Coleman — in their life, C115: traded an extra ticket for a promise to bring the kid next time",
+      "text": "Dominic Okeke-Brandt — in their life, C115: organized the clothing drive donations and recognized a coat they had donated two years ago near the main street sidewalk",
       "src": "output/beats/LifeHistory_Log.jsonl @C115",
       "kind": "thread",
-      "popid": "POP-00840"
+      "popid": "POP-01184"
     },
     {
-      "text": "Soledad Coleman — in their life, C115: attended a small local gathering and stayed later than planned",
+      "text": "Dominic Okeke-Brandt — in their life, C115: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
       "src": "output/beats/LifeHistory_Log.jsonl @C115",
       "kind": "thread",
-      "popid": "POP-00840"
+      "popid": "POP-01184"
     },
     {
-      "text": "Soledad Coleman — in their life, C115: realized the same seven meals had rotated for a month, and shrugged",
+      "text": "Dominic Okeke-Brandt — in their life, C115: noticed younger people asking them for advice now",
       "src": "output/beats/LifeHistory_Log.jsonl @C115",
       "kind": "thread",
-      "popid": "POP-00840"
+      "popid": "POP-01184"
     },
     {
-      "text": "Tom Jilner lost on the UNDOCKED book — staked 144, the book kept it, Rockridge (C115)",
-      "src": "output/beats/Casino_Ledger.jsonl @C115",
-      "id": "casino:f67953e74a0047cd:115",
-      "kind": "casino",
-      "popid": "POP-00691"
-    },
-    {
-      "text": "Tom Jilner — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
-      "src": "output/beats/LifeHistory_Log.jsonl @C114",
-      "kind": "thread",
-      "popid": "POP-00691"
-    },
-    {
-      "text": "Tom Jilner — in their life, C114: drove the whole way home without remembering a single turn",
-      "src": "output/beats/LifeHistory_Log.jsonl @C114",
-      "kind": "thread",
-      "popid": "POP-00691"
-    },
-    {
-      "text": "Tom Jilner — in their life, C115: woke up at 5 AM just to have thirty minutes of total silence before the house woke up near a tidy sidewalk stretch",
+      "text": "Dominic Okeke-Brandt — in their life, C115: counted cranes on the skyline from the bus stop and got a different number than yesterday",
       "src": "output/beats/LifeHistory_Log.jsonl @C115",
       "kind": "thread",
-      "popid": "POP-00691"
+      "popid": "POP-01184"
     },
     {
-      "text": "Tom Jilner — in their life, C115: said no to something and felt the shape of who they are in it",
-      "src": "output/beats/LifeHistory_Log.jsonl @C115",
-      "kind": "thread",
-      "popid": "POP-00691"
-    },
-    {
-      "text": "Tom Jilner — the Tribune named them in a piece headlined Rockridge Wine Bar Says \"Steady.\" The Map Says Decay. Who Answers? (Civic, C114)",
-      "src": "archive/ARTICLE_INDEX.jsonl 77223d1e2e7334d4",
-      "kind": "thread",
-      "popid": "POP-00691"
-    },
-    {
-      "text": "Marisol Achebe lost on the UNDOCKED book — staked 134, the book kept it, Fruitvale (C115)",
-      "src": "output/beats/Casino_Ledger.jsonl @C115",
-      "id": "casino:7cd7a46fc6b05fc9:115",
-      "kind": "casino",
-      "popid": "POP-00526"
-    },
-    {
-      "text": "Marisol Achebe — in their life, C114: felt unexpectedly nostalgic at the smell of rain on warm pavement",
-      "src": "output/beats/LifeHistory_Log.jsonl @C114",
-      "kind": "thread",
-      "popid": "POP-00526"
-    },
-    {
-      "text": "Marisol Achebe — in their life, C115: caught themselves bragging a little about the neighborhood lately",
-      "src": "output/beats/LifeHistory_Log.jsonl @C115",
-      "kind": "thread",
-      "popid": "POP-00526"
-    },
-    {
-      "text": "Marisol Achebe — in their life, C115: took a casual walk through their area",
-      "src": "output/beats/LifeHistory_Log.jsonl @C115",
-      "kind": "thread",
-      "popid": "POP-00526"
-    },
-    {
-      "text": "Mina Kapoor — noticed neighbors being more watchful today, Grand Lake — one of 4 people the Cycle's city turn reached (Commercial Stabilization for Grand Lake is vote-ready — ongoing economic effects in Grand Lake; the city feels it through these…) (C115)",
+      "text": "Kai Davis — found a forgotten photograph tucked in a book and sat with it a while, West Oakland — one of 4 people the Cycle's community turn reached (Daniel Cloak — the city keeps saying the name: Tier 2 -> 1) (C115)",
       "src": "output/beats/Story_Seed_Deck.jsonl @C115",
-      "id": "seed:2970e1a0:115:POP-01200",
+      "id": "seed:b805a677:115:POP-00996",
       "kind": "seed",
-      "popid": "POP-01200"
+      "popid": "POP-00996"
     },
     {
-      "text": "Mina Kapoor — in their life, C114: the for-rent signs outnumbered the welcome mats this month",
+      "text": "Kai Davis — in their life, C114: walked a different street home just to see it",
       "src": "output/beats/LifeHistory_Log.jsonl @C114",
       "kind": "thread",
-      "popid": "POP-01200"
+      "popid": "POP-00996"
     },
     {
-      "text": "Mina Kapoor — in their life, C115: realized the week had passed without a single thing worth retelling",
+      "text": "Kai Davis — in their life, C114: slipped into the back pew at Foothill Baptist Tabernacle just to sit somewhere air-conditioned and quiet",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "kind": "thread",
+      "popid": "POP-00996"
+    },
+    {
+      "text": "Kai Davis — in their life, C115: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
       "src": "output/beats/LifeHistory_Log.jsonl @C115",
       "kind": "thread",
-      "popid": "POP-01200"
+      "popid": "POP-00996"
     },
     {
-      "text": "Mina Kapoor — in their life, C115: carried three boxes of canned goods from the pantry truck and felt it in their lower back",
+      "text": "Kai Davis — in their life, C115: bought a new A's jersey and counted what was going right for once",
       "src": "output/beats/LifeHistory_Log.jsonl @C115",
       "kind": "thread",
-      "popid": "POP-01200"
+      "popid": "POP-00996"
     },
     {
-      "text": "Mina Kapoor — in their life, C115: compared rent notes with a neighbor over the fence in Grand Lake",
-      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "text": "Kai Davis — the Tribune named them in a piece headlined The Lives Page, Cycle 114 (Culture, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl 9746e4e747ffdd0a",
       "kind": "thread",
-      "popid": "POP-01200"
+      "popid": "POP-00996"
     },
     {
-      "text": "Mina Kapoor — the Tribune named them in a piece headlined The Page of Lives, C113: A Place of Their Own (Culture, C113)",
-      "src": "archive/ARTICLE_INDEX.jsonl 753f8ac13ffa3029",
-      "kind": "thread",
-      "popid": "POP-01200"
-    },
-    {
-      "text": "Everly Rainey — wrote half a letter to family, then decided to call instead, Downtown — one of 4 people the Cycle's city turn reached (Initiative work landed in 7 neighborhood(s): Downtown, Temescal, West Oakland, Fruitvale, Jack London, Grand Lake, East Oakland) (C115)",
+      "text": "Evan Lewis — noticed more people keeping to themselves lately, Laurel — one of 4 people the Cycle's community turn reached (Evan Lewis — the city keeps saying the name: Tier 4 -> 3) (C115)",
       "src": "output/beats/Story_Seed_Deck.jsonl @C115",
-      "id": "seed:42fe3bcd:115:POP-00737",
+      "id": "seed:74842708:115:POP-00200",
       "kind": "seed",
-      "popid": "POP-00737"
+      "popid": "POP-00200"
     },
     {
-      "text": "Everly Rainey — in their life, C114: caught their partner humming the song they'd had stuck all day near a civic plaza",
+      "text": "Evan Lewis — in their life, C114: finally fixed the thing that had been broken for months",
       "src": "output/beats/LifeHistory_Log.jsonl @C114",
       "kind": "thread",
-      "popid": "POP-00737"
+      "popid": "POP-00200"
     },
     {
-      "text": "Everly Rainey — in their life, C115: listened to the ninth inning on the porch radio and let the street hear it too",
+      "text": "Evan Lewis — in their life, C114: complained about the neighborhood to anyone who'd listen",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "kind": "thread",
+      "popid": "POP-00200"
+    },
+    {
+      "text": "Evan Lewis — in their life, C114: caught themselves lowering their voice when talking about the block's future",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "kind": "thread",
+      "popid": "POP-00200"
+    },
+    {
+      "text": "Evan Lewis — in their life, C115: found a quiet minute at a neighborhood bakery and still riding the high from last night's win",
       "src": "output/beats/LifeHistory_Log.jsonl @C115",
       "kind": "thread",
-      "popid": "POP-00737"
+      "popid": "POP-00200"
     },
     {
-      "text": "Everly Rainey — in their life, C115: a DJ spins records at a crowded bar near Broadway, the bassline thumping through the foggy night",
-      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "text": "Evan Lewis — the Tribune named them in a piece headlined Coliseum Lost 799 Riders on a Weekend With No Event on Its Row (Civic, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl b0d2ad3d2b2dd56c",
       "kind": "thread",
-      "popid": "POP-00737"
+      "popid": "POP-00200"
     },
     {
-      "text": "Tomas Aguilar — bought a new A's jersey and let the week's noise settle, Jack London — one of 4 people the Cycle's safety turn reached (Papers served at the counter — a lawsuit, and lawyers the shop never budgeted for.) (C115)",
+      "text": "Evan Lewis — the Tribune named them in a piece headlined The Quiet Platform Still Has a Job (Civic, C113)",
+      "src": "archive/ARTICLE_INDEX.jsonl da84550ec95e1ed6",
+      "kind": "thread",
+      "popid": "POP-00200"
+    },
+    {
+      "text": "Evan Lewis — the Tribune named them in a piece headlined At 19th Street, the busiest station runs on the slow side of the clock (Civic, C112)",
+      "src": "archive/ARTICLE_INDEX.jsonl c4491d29da23c2ad",
+      "kind": "thread",
+      "popid": "POP-00200"
+    },
+    {
+      "text": "Vladimir Gonzalez — stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence, Fruitvale — one of 4 people the Cycle's community turn reached (Vladimir Gonzalez — the city keeps saying the name: Tier 3 -> 2) (C115)",
       "src": "output/beats/Story_Seed_Deck.jsonl @C115",
-      "id": "seed:02cd5790:115:POP-00529",
+      "id": "seed:6892ee9f:115:POP-00598",
       "kind": "seed",
-      "popid": "POP-00529"
+      "popid": "POP-00598"
     },
     {
-      "text": "Tomas Aguilar — in their life, C114: one of the kids asked a question at dinner that stopped the room",
+      "text": "Vladimir Gonzalez — in their life, C114: got asked about the club at a family dinner",
       "src": "output/beats/LifeHistory_Log.jsonl @C114",
       "kind": "thread",
-      "popid": "POP-00529"
+      "popid": "POP-00598"
     },
     {
-      "text": "Tomas Aguilar — in their life, C114: a flyer for a seniors lunch program flutters on a community bulletin board",
-      "src": "output/beats/LifeHistory_Log.jsonl @C114",
-      "kind": "thread",
-      "popid": "POP-00529"
-    },
-    {
-      "text": "Tomas Aguilar — the Tribune named them in a piece headlined THE PAGE: Eleven Lives, Cycle 113 (Culture, C113)",
-      "src": "archive/ARTICLE_INDEX.jsonl 22b32bfe211dfd63",
-      "kind": "thread",
-      "popid": "POP-00529"
-    },
-    {
-      "text": "Tomas Aguilar — the Tribune named them in a piece headlined Oakland on the NBA Expansion List: The Systems Guy Behind the Bid (Business, C91)",
-      "src": "archive/ARTICLE_INDEX.jsonl fd2640e7ebaa48d1",
-      "kind": "thread",
-      "popid": "POP-00529"
-    },
-    {
-      "text": "Kelvon Ochoa — moved from Rockridge to Lake Merritt — moving up from Rockridge — sold up and bought in Lake Merritt, Lake Merritt (C115 — what happened in their life, not words they said)",
+      "text": "Vladimir Gonzalez — in their life, C115: tried a new recipe that mostly worked",
       "src": "output/beats/LifeHistory_Log.jsonl @C115",
-      "id": "moment:POP-00481:115:Relocation-Drive-Up-M",
+      "kind": "thread",
+      "popid": "POP-00598"
+    },
+    {
+      "text": "Vladimir Gonzalez — in their life, C115: read the Tribune's front page twice — once for the news, once to see who was in it",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "kind": "thread",
+      "popid": "POP-00598"
+    },
+    {
+      "text": "Vladimir Gonzalez — in their life, C115: cooked an old family recipe from memory, mostly getting it right",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "kind": "thread",
+      "popid": "POP-00598"
+    },
+    {
+      "text": "Vladimir Gonzalez — the Tribune named them in a piece headlined Coles' Line Is the Only One of the Four That the Rates Fully Back (Sports, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl 8955f06b47deb7d0",
+      "kind": "thread",
+      "popid": "POP-00598"
+    },
+    {
+      "text": "Vladimir Gonzalez — the Tribune named them in a piece headlined Vladimir Gonzalez, 506 At-Bats: One Home Run Every 36.1 (Sports, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl 0b6d0f92bae7f5ab",
+      "kind": "thread",
+      "popid": "POP-00598"
+    },
+    {
+      "text": "Vladimir Gonzalez — the Tribune named them in a piece headlined Morton's 285 At-Bats Are the Evidence the Outfield Math Has to Start From (Sports, C113)",
+      "src": "archive/ARTICLE_INDEX.jsonl aae472d18001dd16",
+      "kind": "thread",
+      "popid": "POP-00598"
+    },
+    {
+      "text": "Isley Kelley — Kelley Mercantile returned $2063 to the line this week, Rockridge (C115 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "moment:POP-00019:115:Business-Gain",
       "kind": "moment",
-      "popid": "POP-00481"
+      "popid": "POP-00019"
     },
     {
-      "text": "Kelvon Ochoa — in their life, C115: The owner at Anthropic is talking about tightening up, and everyone heard it.",
-      "src": "output/beats/LifeHistory_Log.jsonl @C115",
-      "kind": "thread",
-      "popid": "POP-00481"
-    },
-    {
-      "text": "Kelvon Ochoa — in their life, C115: still feeling the energy from last night's city buzz",
-      "src": "output/beats/LifeHistory_Log.jsonl @C115",
-      "kind": "thread",
-      "popid": "POP-00481"
-    },
-    {
-      "text": "Kelvon Ochoa — in their life, C115: cooked the full Sunday dinner out of habit and packed half of it straight into the freezer near a coffee line",
-      "src": "output/beats/LifeHistory_Log.jsonl @C115",
-      "kind": "thread",
-      "popid": "POP-00481"
-    },
-    {
-      "text": "Kelvon Ochoa — in their life, C115: a group of fans huddle under an awning debating last night's game, their voices rising above the sound of rain hitting the pavement",
-      "src": "output/beats/LifeHistory_Log.jsonl @C115",
-      "kind": "thread",
-      "popid": "POP-00481"
-    },
-    {
-      "text": "Jesus Jorden — moved from Temescal to Fruitvale — moving up from Temescal, Fruitvale (C115 — what happened in their life, not words they said)",
-      "src": "output/beats/LifeHistory_Log.jsonl @C115",
-      "id": "moment:POP-00721:115:Relocation-Drive-Up-M",
-      "kind": "moment",
-      "popid": "POP-00721"
-    },
-    {
-      "text": "Jesus Jorden — in their life, C114: felt a lift at Dario's Bar after the win",
+      "text": "Isley Kelley — in their life, C114: fielded a round of texts from people who hadn't called in years",
       "src": "output/beats/LifeHistory_Log.jsonl @C114",
       "kind": "thread",
-      "popid": "POP-00721"
+      "popid": "POP-00019"
     },
     {
-      "text": "Jesus Jorden — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots near a cafe near the clinics",
+      "text": "Isley Kelley — in their life, C114: felt quietly proud of how they handled something small",
       "src": "output/beats/LifeHistory_Log.jsonl @C114",
       "kind": "thread",
-      "popid": "POP-00721"
+      "popid": "POP-00019"
     },
     {
-      "text": "Jesus Jorden — in their life, C115: grabbed coffee from the cart outside the hospital before the morning rush hit",
-      "src": "output/beats/LifeHistory_Log.jsonl @C115",
-      "kind": "thread",
-      "popid": "POP-00721"
-    },
-    {
-      "text": "Jesus Jorden — in their life, C115: wrote half a letter to family, then decided to call instead",
-      "src": "output/beats/LifeHistory_Log.jsonl @C115",
-      "kind": "thread",
-      "popid": "POP-00721"
-    },
-    {
-      "text": "Jasmine Torres — moved from Chinatown to KONO — leaving Chinatown for a better fit, KONO (C115 — what happened in their life, not words they said)",
-      "src": "output/beats/LifeHistory_Log.jsonl @C115",
-      "id": "moment:POP-01111:115:Relocation-Composure-Up-M",
-      "kind": "moment",
-      "popid": "POP-01111"
-    },
-    {
-      "text": "Jasmine Torres — in their life, C114: listened to a style of music they'd always skipped, twice",
+      "text": "Isley Kelley — in their life, C114: looked up how something works and came away more amazed, not less",
       "src": "output/beats/LifeHistory_Log.jsonl @C114",
       "kind": "thread",
-      "popid": "POP-01111"
+      "popid": "POP-00019"
     },
     {
-      "text": "Jasmine Torres — in their life, C115: the bartender wipes down the counter between rounds of A's highlights",
+      "text": "Isley Kelley — in their life, C114: Kelley Mercantile returned $2058 to the line this week",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "kind": "thread",
+      "popid": "POP-00019"
+    },
+    {
+      "text": "Isley Kelley — Lives already wrote this person: a moment the record kept (C114)",
+      "src": "output/cron-compare/lives_covered.json",
+      "kind": "thread",
+      "popid": "POP-00019"
+    },
+    {
+      "text": "Isley Kelley — the Tribune named them in a piece headlined The Lives Page, Cycle 114 (Culture, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl 9746e4e747ffdd0a",
+      "kind": "thread",
+      "popid": "POP-00019"
+    },
+    {
+      "text": "Isley Kelley — the Tribune named them in a piece headlined Fifty-Six, and the Road Behind It (Sports, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl 6a58d696e6125498",
+      "kind": "thread",
+      "popid": "POP-00019"
+    },
+    {
+      "text": "Isley Kelley — the Tribune named them in a piece headlined Trade Deadline Earthquake: A's Send Richards to Mets, Reshape the Infield (Sports, Edition 101, C101)",
+      "src": "archive/ARTICLE_INDEX.jsonl 894ea90d682cb645",
+      "kind": "thread",
+      "popid": "POP-00019"
+    },
+    {
+      "text": "Benji Dillon — Dillon Clinic returned $7548 to the line this week, Rockridge (C115 — what happened in their life, not words they said)",
       "src": "output/beats/LifeHistory_Log.jsonl @C115",
-      "kind": "thread",
-      "popid": "POP-01111"
-    },
-    {
-      "text": "Jasmine Torres — in their life, C115: tried a new recipe that mostly worked",
-      "src": "output/beats/LifeHistory_Log.jsonl @C115",
-      "kind": "thread",
-      "popid": "POP-01111"
-    },
-    {
-      "text": "Jasmine Torres — in their life, C115: heard a kid explain something to a parent with total authority and grinned",
-      "src": "output/beats/LifeHistory_Log.jsonl @C115",
-      "kind": "thread",
-      "popid": "POP-01111"
-    },
-    {
-      "text": "Jasmine Torres — the Tribune named them in a piece headlined THE QUIET INVESTMENT (Business, C88)",
-      "src": "archive/ARTICLE_INDEX.jsonl dec644376e5295d6",
-      "kind": "thread",
-      "popid": "POP-01111"
-    },
-    {
-      "text": "Jasmine Torres — the Tribune named them in a piece headlined The Oakland Stack (Social Trends, C84)",
-      "src": "archive/ARTICLE_INDEX.jsonl 03e7888a95a8413b",
-      "kind": "thread",
-      "popid": "POP-01111"
-    },
-    {
-      "text": "Ruth Anyanwu — moved from East Oakland to Downtown — moving up from East Oakland, Downtown (C115 — what happened in their life, not words they said)",
-      "src": "output/beats/LifeHistory_Log.jsonl @C115",
-      "id": "moment:POP-01147:115:Relocation-Drive-Up-M",
+      "id": "moment:POP-00018:115:Business-Gain",
       "kind": "moment",
-      "popid": "POP-01147"
+      "popid": "POP-00018"
     },
     {
-      "text": "Ruth Anyanwu — in their life, C115: bought a new A's jersey and the quiet satisfaction of finding a favorite song on the jukebox",
-      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "text": "Benji Dillon — in their life, C114: got recognized twice at the grocery store after the story ran",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
       "kind": "thread",
-      "popid": "POP-01147"
+      "popid": "POP-00018"
     },
     {
-      "text": "Ruth Anyanwu — in their life, C115: walked a different street home just to see it",
-      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "text": "Benji Dillon — in their life, C114: the kids could say Father Miguel before they could say the mayor's name",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
       "kind": "thread",
-      "popid": "POP-01147"
+      "popid": "POP-00018"
     },
     {
-      "text": "Ruth Anyanwu — in their life, C115: played a relative's voicemail twice before saving it again near a lot mid-frame",
-      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "text": "Benji Dillon — in their life, C114: felt quietly proud of how they handled something small",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
       "kind": "thread",
-      "popid": "POP-01147"
+      "popid": "POP-00018"
     },
     {
-      "text": "Ruth Anyanwu — in their life, C115: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+      "text": "Benji Dillon — in their life, C115: put on their good suit for the Sunday service because some traditions still matter",
       "src": "output/beats/LifeHistory_Log.jsonl @C115",
       "kind": "thread",
-      "popid": "POP-01147"
+      "popid": "POP-00018"
+    },
+    {
+      "text": "Benji Dillon — Lives already wrote this person: a moment the record kept (C114)",
+      "src": "output/cron-compare/lives_covered.json",
+      "kind": "thread",
+      "popid": "POP-00018"
+    },
+    {
+      "text": "Benji Dillon — the Tribune named them in a piece headlined The Pole on Rockridge Corner Is Starting to Say His Name (Culture, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl db859c2206e0282a",
+      "kind": "thread",
+      "popid": "POP-00018"
+    },
+    {
+      "text": "Benji Dillon — the Tribune named them in a piece headlined The Lives Page, Cycle 114 (Culture, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl 9746e4e747ffdd0a",
+      "kind": "thread",
+      "popid": "POP-00018"
+    },
+    {
+      "text": "Benji Dillon — the Tribune named them in a piece headlined Ellis's Game Five Line Carries the Title (Sports, C111)",
+      "src": "archive/ARTICLE_INDEX.jsonl 932d071f77813236",
+      "kind": "thread",
+      "popid": "POP-00018"
+    },
+    {
+      "text": "Latasha Jefferson — A manager at Anthropic walked past three times and did not stop once., Rockridge (C115 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "moment:POP-00805:115:LifeEvent-Promotion-Down-S",
+      "kind": "moment",
+      "popid": "POP-00805"
+    },
+    {
+      "text": "Latasha Jefferson — in their life, C114: drank the free cold brew in the company kitchen and felt completely disconnected from the neighborhood outside",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "kind": "thread",
+      "popid": "POP-00805"
+    },
+    {
+      "text": "Latasha Jefferson — in their life, C114: checked the front door lock three times after everyone else was asleep",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "kind": "thread",
+      "popid": "POP-00805"
+    },
+    {
+      "text": "Latasha Jefferson — in their life, C114: checked out a new shop that just opened nearby",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "kind": "thread",
+      "popid": "POP-00805"
+    },
+    {
+      "text": "Latasha Jefferson — in their life, C115: one of the kids asked a question at dinner that stopped the room",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "kind": "thread",
+      "popid": "POP-00805"
+    },
+    {
+      "text": "Tyler Filet — The schedule at Portside Bio came out with their name in the slot that used to belong to someone senior., Lake Merritt (C115 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "moment:POP-00447:115:LifeEvent-Promotion-Up-S",
+      "kind": "moment",
+      "popid": "POP-00447"
+    },
+    {
+      "text": "Tyler Filet — in their life, C114: couldn't sleep for the wind rattling the window frame near a front porch",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "kind": "thread",
+      "popid": "POP-00447"
+    },
+    {
+      "text": "Tyler Filet — in their life, C114: wondered if a decision from years back had been the right one",
+      "src": "output/beats/LifeHistory_Log.jsonl @C114",
+      "kind": "thread",
+      "popid": "POP-00447"
+    },
+    {
+      "text": "Tyler Filet — in their life, C115: disagreed with a Tribune column out loud to an empty kitchen",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "kind": "thread",
+      "popid": "POP-00447"
+    },
+    {
+      "text": "Tyler Filet — in their life, C115: grabbed coffee from the cart outside the hospital before the morning rush hit",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "kind": "thread",
+      "popid": "POP-00447"
+    },
+    {
+      "text": "Tyler Filet — Lives already wrote this person: the new household (C114)",
+      "src": "output/cron-compare/lives_covered.json",
+      "kind": "thread",
+      "popid": "POP-00447"
+    },
+    {
+      "text": "Tyler Filet — the Tribune named them in a piece headlined The Lives of C114 (Culture, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl ad7f65b09c46717e",
+      "kind": "thread",
+      "popid": "POP-00447"
     }
   ],
   "prewrite": {
     "schema": "BEAT-SLICE-1",
     "method": "BEAT_TAB_FACTS",
     "missing": [],
-    "angle": "The lives of C115: 11 people — Maurice Franklin moved into a place of their own in Rockridge, renting",
-    "hookLine": "Maurice Franklin first. The event is the lead; one true detail; what came next only if the record says.",
+    "angle": "The lives of C115: 9 people — Lena Marchetti moved into a place of their own in East Oakland, renting",
+    "hookLine": "Lena Marchetti first. The event is the lead; one true detail; what came next only if the record says.",
     "anchorFacts": [
-      "Maurice Franklin moved into a place of their own in Rockridge, renting (C115)",
-      "Maurice Franklin — in their life, C114: borrowed against next month to close this one",
-      "Maurice Franklin — in their life, C115: the card statement was the first thing read and the last thing forgotten",
-      "Maurice Franklin — in their life, C115: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
-      "Maurice Franklin — in their life, C115: brought home a new plant and picked its spot carefully",
-      "Maurice Franklin — the Tribune named them in a piece headlined The Board in the Trailer Says 9.5 Percent. Enzo Walker Is Counting Something Else. (Business Reporter, C114)",
-      "Maurice Franklin — the Tribune named them in a piece headlined Chinatown's 137 Sick: Six Beds Hold Part of the Count, Kitchens Hold the Rest (Civic, C114)",
-      "Maurice Franklin — the Tribune named them in a piece headlined Chinatown's 140 Sick Are Mostly at Home, and Home Is Doing the Work (Civic, C113)",
-      "Soledad Coleman moved into a place of their own in Rockridge, renting (C115)",
-      "Soledad Coleman — in their life, C114: badged into the Baylight office early and tried not to think about the protestors from last month",
-      "Soledad Coleman — in their life, C115: traded an extra ticket for a promise to bring the kid next time",
-      "Soledad Coleman — in their life, C115: attended a small local gathering and stayed later than planned",
-      "Soledad Coleman — in their life, C115: realized the same seven meals had rotated for a month, and shrugged",
-      "Tom Jilner lost on the UNDOCKED book — staked 144, the book kept it, Rockridge (C115)",
-      "Tom Jilner — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
-      "Tom Jilner — in their life, C114: drove the whole way home without remembering a single turn",
-      "Tom Jilner — in their life, C115: woke up at 5 AM just to have thirty minutes of total silence before the house woke up near a tidy sidewalk stretch",
-      "Tom Jilner — in their life, C115: said no to something and felt the shape of who they are in it",
-      "Tom Jilner — the Tribune named them in a piece headlined Rockridge Wine Bar Says \"Steady.\" The Map Says Decay. Who Answers? (Civic, C114)",
-      "Marisol Achebe lost on the UNDOCKED book — staked 134, the book kept it, Fruitvale (C115)",
-      "Marisol Achebe — in their life, C114: felt unexpectedly nostalgic at the smell of rain on warm pavement",
-      "Marisol Achebe — in their life, C115: caught themselves bragging a little about the neighborhood lately",
-      "Marisol Achebe — in their life, C115: took a casual walk through their area",
-      "Mina Kapoor — noticed neighbors being more watchful today, Grand Lake — one of 4 people the Cycle's city turn reached (Commercial Stabilization for Grand Lake is vote-ready — ongoing economic effects in Grand Lake; the city feels it through these…) (C115)",
-      "Mina Kapoor — in their life, C114: the for-rent signs outnumbered the welcome mats this month",
-      "Mina Kapoor — in their life, C115: realized the week had passed without a single thing worth retelling",
-      "Mina Kapoor — in their life, C115: carried three boxes of canned goods from the pantry truck and felt it in their lower back",
-      "Mina Kapoor — in their life, C115: compared rent notes with a neighbor over the fence in Grand Lake",
-      "Mina Kapoor — the Tribune named them in a piece headlined The Page of Lives, C113: A Place of Their Own (Culture, C113)",
-      "Everly Rainey — wrote half a letter to family, then decided to call instead, Downtown — one of 4 people the Cycle's city turn reached (Initiative work landed in 7 neighborhood(s): Downtown, Temescal, West Oakland, Fruitvale, Jack London, Grand Lake, East Oakland) (C115)",
-      "Everly Rainey — in their life, C114: caught their partner humming the song they'd had stuck all day near a civic plaza",
-      "Everly Rainey — in their life, C115: listened to the ninth inning on the porch radio and let the street hear it too",
-      "Everly Rainey — in their life, C115: a DJ spins records at a crowded bar near Broadway, the bassline thumping through the foggy night",
-      "Tomas Aguilar — bought a new A's jersey and let the week's noise settle, Jack London — one of 4 people the Cycle's safety turn reached (Papers served at the counter — a lawsuit, and lawyers the shop never budgeted for.) (C115)",
-      "Tomas Aguilar — in their life, C114: one of the kids asked a question at dinner that stopped the room",
-      "Tomas Aguilar — in their life, C114: a flyer for a seniors lunch program flutters on a community bulletin board",
-      "Tomas Aguilar — the Tribune named them in a piece headlined THE PAGE: Eleven Lives, Cycle 113 (Culture, C113)",
-      "Tomas Aguilar — the Tribune named them in a piece headlined Oakland on the NBA Expansion List: The Systems Guy Behind the Bid (Business, C91)",
-      "Kelvon Ochoa — moved from Rockridge to Lake Merritt — moving up from Rockridge — sold up and bought in Lake Merritt, Lake Merritt (C115 — what happened in their life, not words they said)",
-      "Kelvon Ochoa — in their life, C115: The owner at Anthropic is talking about tightening up, and everyone heard it.",
-      "Kelvon Ochoa — in their life, C115: still feeling the energy from last night's city buzz",
-      "Kelvon Ochoa — in their life, C115: cooked the full Sunday dinner out of habit and packed half of it straight into the freezer near a coffee line",
-      "Kelvon Ochoa — in their life, C115: a group of fans huddle under an awning debating last night's game, their voices rising above the sound of rain hitting the pavement",
-      "Jesus Jorden — moved from Temescal to Fruitvale — moving up from Temescal, Fruitvale (C115 — what happened in their life, not words they said)",
-      "Jesus Jorden — in their life, C114: felt a lift at Dario's Bar after the win",
-      "Jesus Jorden — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots near a cafe near the clinics",
-      "Jesus Jorden — in their life, C115: grabbed coffee from the cart outside the hospital before the morning rush hit",
-      "Jesus Jorden — in their life, C115: wrote half a letter to family, then decided to call instead",
-      "Jasmine Torres — moved from Chinatown to KONO — leaving Chinatown for a better fit, KONO (C115 — what happened in their life, not words they said)",
-      "Jasmine Torres — in their life, C114: listened to a style of music they'd always skipped, twice",
-      "Jasmine Torres — in their life, C115: the bartender wipes down the counter between rounds of A's highlights",
-      "Jasmine Torres — in their life, C115: tried a new recipe that mostly worked",
-      "Jasmine Torres — in their life, C115: heard a kid explain something to a parent with total authority and grinned",
-      "Jasmine Torres — the Tribune named them in a piece headlined THE QUIET INVESTMENT (Business, C88)",
-      "Jasmine Torres — the Tribune named them in a piece headlined The Oakland Stack (Social Trends, C84)",
-      "Ruth Anyanwu — moved from East Oakland to Downtown — moving up from East Oakland, Downtown (C115 — what happened in their life, not words they said)",
-      "Ruth Anyanwu — in their life, C115: bought a new A's jersey and the quiet satisfaction of finding a favorite song on the jukebox",
-      "Ruth Anyanwu — in their life, C115: walked a different street home just to see it",
-      "Ruth Anyanwu — in their life, C115: played a relative's voicemail twice before saving it again near a lot mid-frame",
-      "Ruth Anyanwu — in their life, C115: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for"
+      "Lena Marchetti moved into a place of their own in East Oakland, renting (C115)",
+      "Lena Marchetti — in their life, C114: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner near a fenced build site",
+      "Lena Marchetti — in their life, C115: said no to something and felt the shape of who they are in it near a fenced build site",
+      "Lena Marchetti — in their life, C115: heard someone at the cafe complain about the Baylight District noise and bit their tongue",
+      "Dominic Okeke-Brandt moved into a place of their own in Laurel, renting (C115)",
+      "Dominic Okeke-Brandt — in their life, C115: organized the clothing drive donations and recognized a coat they had donated two years ago near the main street sidewalk",
+      "Dominic Okeke-Brandt — in their life, C115: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+      "Dominic Okeke-Brandt — in their life, C115: noticed younger people asking them for advice now",
+      "Dominic Okeke-Brandt — in their life, C115: counted cranes on the skyline from the bus stop and got a different number than yesterday",
+      "Kai Davis — found a forgotten photograph tucked in a book and sat with it a while, West Oakland — one of 4 people the Cycle's community turn reached (Daniel Cloak — the city keeps saying the name: Tier 2 -> 1) (C115)",
+      "Kai Davis — in their life, C114: walked a different street home just to see it",
+      "Kai Davis — in their life, C114: slipped into the back pew at Foothill Baptist Tabernacle just to sit somewhere air-conditioned and quiet",
+      "Kai Davis — in their life, C115: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+      "Kai Davis — in their life, C115: bought a new A's jersey and counted what was going right for once",
+      "Kai Davis — the Tribune named them in a piece headlined The Lives Page, Cycle 114 (Culture, C114)",
+      "Evan Lewis — noticed more people keeping to themselves lately, Laurel — one of 4 people the Cycle's community turn reached (Evan Lewis — the city keeps saying the name: Tier 4 -> 3) (C115)",
+      "Evan Lewis — in their life, C114: finally fixed the thing that had been broken for months",
+      "Evan Lewis — in their life, C114: complained about the neighborhood to anyone who'd listen",
+      "Evan Lewis — in their life, C114: caught themselves lowering their voice when talking about the block's future",
+      "Evan Lewis — in their life, C115: found a quiet minute at a neighborhood bakery and still riding the high from last night's win",
+      "Evan Lewis — the Tribune named them in a piece headlined Coliseum Lost 799 Riders on a Weekend With No Event on Its Row (Civic, C114)",
+      "Evan Lewis — the Tribune named them in a piece headlined The Quiet Platform Still Has a Job (Civic, C113)",
+      "Evan Lewis — the Tribune named them in a piece headlined At 19th Street, the busiest station runs on the slow side of the clock (Civic, C112)",
+      "Vladimir Gonzalez — stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence, Fruitvale — one of 4 people the Cycle's community turn reached (Vladimir Gonzalez — the city keeps saying the name: Tier 3 -> 2) (C115)",
+      "Vladimir Gonzalez — in their life, C114: got asked about the club at a family dinner",
+      "Vladimir Gonzalez — in their life, C115: tried a new recipe that mostly worked",
+      "Vladimir Gonzalez — in their life, C115: read the Tribune's front page twice — once for the news, once to see who was in it",
+      "Vladimir Gonzalez — in their life, C115: cooked an old family recipe from memory, mostly getting it right",
+      "Vladimir Gonzalez — the Tribune named them in a piece headlined Coles' Line Is the Only One of the Four That the Rates Fully Back (Sports, C114)",
+      "Vladimir Gonzalez — the Tribune named them in a piece headlined Vladimir Gonzalez, 506 At-Bats: One Home Run Every 36.1 (Sports, C114)",
+      "Vladimir Gonzalez — the Tribune named them in a piece headlined Morton's 285 At-Bats Are the Evidence the Outfield Math Has to Start From (Sports, C113)",
+      "Isley Kelley — Kelley Mercantile returned $2063 to the line this week, Rockridge (C115 — what happened in their life, not words they said)",
+      "Isley Kelley — in their life, C114: fielded a round of texts from people who hadn't called in years",
+      "Isley Kelley — in their life, C114: felt quietly proud of how they handled something small",
+      "Isley Kelley — in their life, C114: looked up how something works and came away more amazed, not less",
+      "Isley Kelley — in their life, C114: Kelley Mercantile returned $2058 to the line this week",
+      "Isley Kelley — Lives already wrote this person: a moment the record kept (C114)",
+      "Isley Kelley — the Tribune named them in a piece headlined The Lives Page, Cycle 114 (Culture, C114)",
+      "Isley Kelley — the Tribune named them in a piece headlined Fifty-Six, and the Road Behind It (Sports, C114)",
+      "Isley Kelley — the Tribune named them in a piece headlined Trade Deadline Earthquake: A's Send Richards to Mets, Reshape the Infield (Sports, Edition 101, C101)",
+      "Benji Dillon — Dillon Clinic returned $7548 to the line this week, Rockridge (C115 — what happened in their life, not words they said)",
+      "Benji Dillon — in their life, C114: got recognized twice at the grocery store after the story ran",
+      "Benji Dillon — in their life, C114: the kids could say Father Miguel before they could say the mayor's name",
+      "Benji Dillon — in their life, C114: felt quietly proud of how they handled something small",
+      "Benji Dillon — in their life, C115: put on their good suit for the Sunday service because some traditions still matter",
+      "Benji Dillon — Lives already wrote this person: a moment the record kept (C114)",
+      "Benji Dillon — the Tribune named them in a piece headlined The Pole on Rockridge Corner Is Starting to Say His Name (Culture, C114)",
+      "Benji Dillon — the Tribune named them in a piece headlined The Lives Page, Cycle 114 (Culture, C114)",
+      "Benji Dillon — the Tribune named them in a piece headlined Ellis's Game Five Line Carries the Title (Sports, C111)",
+      "Latasha Jefferson — A manager at Anthropic walked past three times and did not stop once., Rockridge (C115 — what happened in their life, not words they said)",
+      "Latasha Jefferson — in their life, C114: drank the free cold brew in the company kitchen and felt completely disconnected from the neighborhood outside",
+      "Latasha Jefferson — in their life, C114: checked the front door lock three times after everyone else was asleep",
+      "Latasha Jefferson — in their life, C114: checked out a new shop that just opened nearby",
+      "Latasha Jefferson — in their life, C115: one of the kids asked a question at dinner that stopped the room",
+      "Tyler Filet — The schedule at Portside Bio came out with their name in the slot that used to belong to someone senior., Lake Merritt (C115 — what happened in their life, not words they said)",
+      "Tyler Filet — in their life, C114: couldn't sleep for the wind rattling the window frame near a front porch",
+      "Tyler Filet — in their life, C114: wondered if a decision from years back had been the right one",
+      "Tyler Filet — in their life, C115: disagreed with a Tribune column out loud to an empty kitchen",
+      "Tyler Filet — in their life, C115: grabbed coffee from the cart outside the hospital before the morning rush hit",
+      "Tyler Filet — Lives already wrote this person: the new household (C114)",
+      "Tyler Filet — the Tribune named them in a piece headlined The Lives of C114 (Culture, C114)"
     ],
     "evidence": [
       {
-        "text": "Maurice Franklin moved into a place of their own in Rockridge, renting (C115)",
+        "text": "Lena Marchetti moved into a place of their own in East Oakland, renting (C115)",
         "src": "output/beats/Household_Ledger.jsonl @C115",
-        "id": "household:HH-0115-F006:115",
+        "id": "household:HH-0115-F010:115",
         "kind": "household",
-        "popid": "POP-00801"
+        "popid": "POP-01167"
       },
       {
-        "text": "Maurice Franklin — in their life, C114: borrowed against next month to close this one",
+        "text": "Lena Marchetti — in their life, C114: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner near a fenced build site",
         "src": "output/beats/LifeHistory_Log.jsonl @C114",
         "kind": "thread",
-        "popid": "POP-00801"
+        "popid": "POP-01167"
       },
       {
-        "text": "Maurice Franklin — in their life, C115: the card statement was the first thing read and the last thing forgotten",
+        "text": "Lena Marchetti — in their life, C115: said no to something and felt the shape of who they are in it near a fenced build site",
         "src": "output/beats/LifeHistory_Log.jsonl @C115",
         "kind": "thread",
-        "popid": "POP-00801"
+        "popid": "POP-01167"
       },
       {
-        "text": "Maurice Franklin — in their life, C115: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+        "text": "Lena Marchetti — in their life, C115: heard someone at the cafe complain about the Baylight District noise and bit their tongue",
         "src": "output/beats/LifeHistory_Log.jsonl @C115",
         "kind": "thread",
-        "popid": "POP-00801"
+        "popid": "POP-01167"
       },
       {
-        "text": "Maurice Franklin — in their life, C115: brought home a new plant and picked its spot carefully",
-        "src": "output/beats/LifeHistory_Log.jsonl @C115",
-        "kind": "thread",
-        "popid": "POP-00801"
-      },
-      {
-        "text": "Maurice Franklin — the Tribune named them in a piece headlined The Board in the Trailer Says 9.5 Percent. Enzo Walker Is Counting Something Else. (Business Reporter, C114)",
-        "src": "archive/ARTICLE_INDEX.jsonl 384044afdbad94f5",
-        "kind": "thread",
-        "popid": "POP-00801"
-      },
-      {
-        "text": "Maurice Franklin — the Tribune named them in a piece headlined Chinatown's 137 Sick: Six Beds Hold Part of the Count, Kitchens Hold the Rest (Civic, C114)",
-        "src": "archive/ARTICLE_INDEX.jsonl f5baef8c2be8a0e4",
-        "kind": "thread",
-        "popid": "POP-00801"
-      },
-      {
-        "text": "Maurice Franklin — the Tribune named them in a piece headlined Chinatown's 140 Sick Are Mostly at Home, and Home Is Doing the Work (Civic, C113)",
-        "src": "archive/ARTICLE_INDEX.jsonl 415a8378a3cc8be1",
-        "kind": "thread",
-        "popid": "POP-00801"
-      },
-      {
-        "text": "Soledad Coleman moved into a place of their own in Rockridge, renting (C115)",
+        "text": "Dominic Okeke-Brandt moved into a place of their own in Laurel, renting (C115)",
         "src": "output/beats/Household_Ledger.jsonl @C115",
-        "id": "household:HH-0115-F007:115",
+        "id": "household:HH-0115-F011:115",
         "kind": "household",
-        "popid": "POP-00840"
+        "popid": "POP-01184"
       },
       {
-        "text": "Soledad Coleman — in their life, C114: badged into the Baylight office early and tried not to think about the protestors from last month",
-        "src": "output/beats/LifeHistory_Log.jsonl @C114",
-        "kind": "thread",
-        "popid": "POP-00840"
-      },
-      {
-        "text": "Soledad Coleman — in their life, C115: traded an extra ticket for a promise to bring the kid next time",
+        "text": "Dominic Okeke-Brandt — in their life, C115: organized the clothing drive donations and recognized a coat they had donated two years ago near the main street sidewalk",
         "src": "output/beats/LifeHistory_Log.jsonl @C115",
         "kind": "thread",
-        "popid": "POP-00840"
+        "popid": "POP-01184"
       },
       {
-        "text": "Soledad Coleman — in their life, C115: attended a small local gathering and stayed later than planned",
+        "text": "Dominic Okeke-Brandt — in their life, C115: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
         "src": "output/beats/LifeHistory_Log.jsonl @C115",
         "kind": "thread",
-        "popid": "POP-00840"
+        "popid": "POP-01184"
       },
       {
-        "text": "Soledad Coleman — in their life, C115: realized the same seven meals had rotated for a month, and shrugged",
+        "text": "Dominic Okeke-Brandt — in their life, C115: noticed younger people asking them for advice now",
         "src": "output/beats/LifeHistory_Log.jsonl @C115",
         "kind": "thread",
-        "popid": "POP-00840"
+        "popid": "POP-01184"
       },
       {
-        "text": "Tom Jilner lost on the UNDOCKED book — staked 144, the book kept it, Rockridge (C115)",
-        "src": "output/beats/Casino_Ledger.jsonl @C115",
-        "id": "casino:f67953e74a0047cd:115",
-        "kind": "casino",
-        "popid": "POP-00691"
-      },
-      {
-        "text": "Tom Jilner — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
-        "src": "output/beats/LifeHistory_Log.jsonl @C114",
-        "kind": "thread",
-        "popid": "POP-00691"
-      },
-      {
-        "text": "Tom Jilner — in their life, C114: drove the whole way home without remembering a single turn",
-        "src": "output/beats/LifeHistory_Log.jsonl @C114",
-        "kind": "thread",
-        "popid": "POP-00691"
-      },
-      {
-        "text": "Tom Jilner — in their life, C115: woke up at 5 AM just to have thirty minutes of total silence before the house woke up near a tidy sidewalk stretch",
+        "text": "Dominic Okeke-Brandt — in their life, C115: counted cranes on the skyline from the bus stop and got a different number than yesterday",
         "src": "output/beats/LifeHistory_Log.jsonl @C115",
         "kind": "thread",
-        "popid": "POP-00691"
+        "popid": "POP-01184"
       },
       {
-        "text": "Tom Jilner — in their life, C115: said no to something and felt the shape of who they are in it",
-        "src": "output/beats/LifeHistory_Log.jsonl @C115",
-        "kind": "thread",
-        "popid": "POP-00691"
-      },
-      {
-        "text": "Tom Jilner — the Tribune named them in a piece headlined Rockridge Wine Bar Says \"Steady.\" The Map Says Decay. Who Answers? (Civic, C114)",
-        "src": "archive/ARTICLE_INDEX.jsonl 77223d1e2e7334d4",
-        "kind": "thread",
-        "popid": "POP-00691"
-      },
-      {
-        "text": "Marisol Achebe lost on the UNDOCKED book — staked 134, the book kept it, Fruitvale (C115)",
-        "src": "output/beats/Casino_Ledger.jsonl @C115",
-        "id": "casino:7cd7a46fc6b05fc9:115",
-        "kind": "casino",
-        "popid": "POP-00526"
-      },
-      {
-        "text": "Marisol Achebe — in their life, C114: felt unexpectedly nostalgic at the smell of rain on warm pavement",
-        "src": "output/beats/LifeHistory_Log.jsonl @C114",
-        "kind": "thread",
-        "popid": "POP-00526"
-      },
-      {
-        "text": "Marisol Achebe — in their life, C115: caught themselves bragging a little about the neighborhood lately",
-        "src": "output/beats/LifeHistory_Log.jsonl @C115",
-        "kind": "thread",
-        "popid": "POP-00526"
-      },
-      {
-        "text": "Marisol Achebe — in their life, C115: took a casual walk through their area",
-        "src": "output/beats/LifeHistory_Log.jsonl @C115",
-        "kind": "thread",
-        "popid": "POP-00526"
-      },
-      {
-        "text": "Mina Kapoor — noticed neighbors being more watchful today, Grand Lake — one of 4 people the Cycle's city turn reached (Commercial Stabilization for Grand Lake is vote-ready — ongoing economic effects in Grand Lake; the city feels it through these…) (C115)",
+        "text": "Kai Davis — found a forgotten photograph tucked in a book and sat with it a while, West Oakland — one of 4 people the Cycle's community turn reached (Daniel Cloak — the city keeps saying the name: Tier 2 -> 1) (C115)",
         "src": "output/beats/Story_Seed_Deck.jsonl @C115",
-        "id": "seed:2970e1a0:115:POP-01200",
+        "id": "seed:b805a677:115:POP-00996",
         "kind": "seed",
-        "popid": "POP-01200"
+        "popid": "POP-00996"
       },
       {
-        "text": "Mina Kapoor — in their life, C114: the for-rent signs outnumbered the welcome mats this month",
+        "text": "Kai Davis — in their life, C114: walked a different street home just to see it",
         "src": "output/beats/LifeHistory_Log.jsonl @C114",
         "kind": "thread",
-        "popid": "POP-01200"
+        "popid": "POP-00996"
       },
       {
-        "text": "Mina Kapoor — in their life, C115: realized the week had passed without a single thing worth retelling",
+        "text": "Kai Davis — in their life, C114: slipped into the back pew at Foothill Baptist Tabernacle just to sit somewhere air-conditioned and quiet",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114",
+        "kind": "thread",
+        "popid": "POP-00996"
+      },
+      {
+        "text": "Kai Davis — in their life, C115: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
         "src": "output/beats/LifeHistory_Log.jsonl @C115",
         "kind": "thread",
-        "popid": "POP-01200"
+        "popid": "POP-00996"
       },
       {
-        "text": "Mina Kapoor — in their life, C115: carried three boxes of canned goods from the pantry truck and felt it in their lower back",
+        "text": "Kai Davis — in their life, C115: bought a new A's jersey and counted what was going right for once",
         "src": "output/beats/LifeHistory_Log.jsonl @C115",
         "kind": "thread",
-        "popid": "POP-01200"
+        "popid": "POP-00996"
       },
       {
-        "text": "Mina Kapoor — in their life, C115: compared rent notes with a neighbor over the fence in Grand Lake",
-        "src": "output/beats/LifeHistory_Log.jsonl @C115",
+        "text": "Kai Davis — the Tribune named them in a piece headlined The Lives Page, Cycle 114 (Culture, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl 9746e4e747ffdd0a",
         "kind": "thread",
-        "popid": "POP-01200"
+        "popid": "POP-00996"
       },
       {
-        "text": "Mina Kapoor — the Tribune named them in a piece headlined The Page of Lives, C113: A Place of Their Own (Culture, C113)",
-        "src": "archive/ARTICLE_INDEX.jsonl 753f8ac13ffa3029",
-        "kind": "thread",
-        "popid": "POP-01200"
-      },
-      {
-        "text": "Everly Rainey — wrote half a letter to family, then decided to call instead, Downtown — one of 4 people the Cycle's city turn reached (Initiative work landed in 7 neighborhood(s): Downtown, Temescal, West Oakland, Fruitvale, Jack London, Grand Lake, East Oakland) (C115)",
+        "text": "Evan Lewis — noticed more people keeping to themselves lately, Laurel — one of 4 people the Cycle's community turn reached (Evan Lewis — the city keeps saying the name: Tier 4 -> 3) (C115)",
         "src": "output/beats/Story_Seed_Deck.jsonl @C115",
-        "id": "seed:42fe3bcd:115:POP-00737",
+        "id": "seed:74842708:115:POP-00200",
         "kind": "seed",
-        "popid": "POP-00737"
+        "popid": "POP-00200"
       },
       {
-        "text": "Everly Rainey — in their life, C114: caught their partner humming the song they'd had stuck all day near a civic plaza",
+        "text": "Evan Lewis — in their life, C114: finally fixed the thing that had been broken for months",
         "src": "output/beats/LifeHistory_Log.jsonl @C114",
         "kind": "thread",
-        "popid": "POP-00737"
+        "popid": "POP-00200"
       },
       {
-        "text": "Everly Rainey — in their life, C115: listened to the ninth inning on the porch radio and let the street hear it too",
+        "text": "Evan Lewis — in their life, C114: complained about the neighborhood to anyone who'd listen",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114",
+        "kind": "thread",
+        "popid": "POP-00200"
+      },
+      {
+        "text": "Evan Lewis — in their life, C114: caught themselves lowering their voice when talking about the block's future",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114",
+        "kind": "thread",
+        "popid": "POP-00200"
+      },
+      {
+        "text": "Evan Lewis — in their life, C115: found a quiet minute at a neighborhood bakery and still riding the high from last night's win",
         "src": "output/beats/LifeHistory_Log.jsonl @C115",
         "kind": "thread",
-        "popid": "POP-00737"
+        "popid": "POP-00200"
       },
       {
-        "text": "Everly Rainey — in their life, C115: a DJ spins records at a crowded bar near Broadway, the bassline thumping through the foggy night",
-        "src": "output/beats/LifeHistory_Log.jsonl @C115",
+        "text": "Evan Lewis — the Tribune named them in a piece headlined Coliseum Lost 799 Riders on a Weekend With No Event on Its Row (Civic, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl b0d2ad3d2b2dd56c",
         "kind": "thread",
-        "popid": "POP-00737"
+        "popid": "POP-00200"
       },
       {
-        "text": "Tomas Aguilar — bought a new A's jersey and let the week's noise settle, Jack London — one of 4 people the Cycle's safety turn reached (Papers served at the counter — a lawsuit, and lawyers the shop never budgeted for.) (C115)",
+        "text": "Evan Lewis — the Tribune named them in a piece headlined The Quiet Platform Still Has a Job (Civic, C113)",
+        "src": "archive/ARTICLE_INDEX.jsonl da84550ec95e1ed6",
+        "kind": "thread",
+        "popid": "POP-00200"
+      },
+      {
+        "text": "Evan Lewis — the Tribune named them in a piece headlined At 19th Street, the busiest station runs on the slow side of the clock (Civic, C112)",
+        "src": "archive/ARTICLE_INDEX.jsonl c4491d29da23c2ad",
+        "kind": "thread",
+        "popid": "POP-00200"
+      },
+      {
+        "text": "Vladimir Gonzalez — stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence, Fruitvale — one of 4 people the Cycle's community turn reached (Vladimir Gonzalez — the city keeps saying the name: Tier 3 -> 2) (C115)",
         "src": "output/beats/Story_Seed_Deck.jsonl @C115",
-        "id": "seed:02cd5790:115:POP-00529",
+        "id": "seed:6892ee9f:115:POP-00598",
         "kind": "seed",
-        "popid": "POP-00529"
+        "popid": "POP-00598"
       },
       {
-        "text": "Tomas Aguilar — in their life, C114: one of the kids asked a question at dinner that stopped the room",
+        "text": "Vladimir Gonzalez — in their life, C114: got asked about the club at a family dinner",
         "src": "output/beats/LifeHistory_Log.jsonl @C114",
         "kind": "thread",
-        "popid": "POP-00529"
+        "popid": "POP-00598"
       },
       {
-        "text": "Tomas Aguilar — in their life, C114: a flyer for a seniors lunch program flutters on a community bulletin board",
-        "src": "output/beats/LifeHistory_Log.jsonl @C114",
-        "kind": "thread",
-        "popid": "POP-00529"
-      },
-      {
-        "text": "Tomas Aguilar — the Tribune named them in a piece headlined THE PAGE: Eleven Lives, Cycle 113 (Culture, C113)",
-        "src": "archive/ARTICLE_INDEX.jsonl 22b32bfe211dfd63",
-        "kind": "thread",
-        "popid": "POP-00529"
-      },
-      {
-        "text": "Tomas Aguilar — the Tribune named them in a piece headlined Oakland on the NBA Expansion List: The Systems Guy Behind the Bid (Business, C91)",
-        "src": "archive/ARTICLE_INDEX.jsonl fd2640e7ebaa48d1",
-        "kind": "thread",
-        "popid": "POP-00529"
-      },
-      {
-        "text": "Kelvon Ochoa — moved from Rockridge to Lake Merritt — moving up from Rockridge — sold up and bought in Lake Merritt, Lake Merritt (C115 — what happened in their life, not words they said)",
+        "text": "Vladimir Gonzalez — in their life, C115: tried a new recipe that mostly worked",
         "src": "output/beats/LifeHistory_Log.jsonl @C115",
-        "id": "moment:POP-00481:115:Relocation-Drive-Up-M",
+        "kind": "thread",
+        "popid": "POP-00598"
+      },
+      {
+        "text": "Vladimir Gonzalez — in their life, C115: read the Tribune's front page twice — once for the news, once to see who was in it",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115",
+        "kind": "thread",
+        "popid": "POP-00598"
+      },
+      {
+        "text": "Vladimir Gonzalez — in their life, C115: cooked an old family recipe from memory, mostly getting it right",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115",
+        "kind": "thread",
+        "popid": "POP-00598"
+      },
+      {
+        "text": "Vladimir Gonzalez — the Tribune named them in a piece headlined Coles' Line Is the Only One of the Four That the Rates Fully Back (Sports, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl 8955f06b47deb7d0",
+        "kind": "thread",
+        "popid": "POP-00598"
+      },
+      {
+        "text": "Vladimir Gonzalez — the Tribune named them in a piece headlined Vladimir Gonzalez, 506 At-Bats: One Home Run Every 36.1 (Sports, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl 0b6d0f92bae7f5ab",
+        "kind": "thread",
+        "popid": "POP-00598"
+      },
+      {
+        "text": "Vladimir Gonzalez — the Tribune named them in a piece headlined Morton's 285 At-Bats Are the Evidence the Outfield Math Has to Start From (Sports, C113)",
+        "src": "archive/ARTICLE_INDEX.jsonl aae472d18001dd16",
+        "kind": "thread",
+        "popid": "POP-00598"
+      },
+      {
+        "text": "Isley Kelley — Kelley Mercantile returned $2063 to the line this week, Rockridge (C115 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115",
+        "id": "moment:POP-00019:115:Business-Gain",
         "kind": "moment",
-        "popid": "POP-00481"
+        "popid": "POP-00019"
       },
       {
-        "text": "Kelvon Ochoa — in their life, C115: The owner at Anthropic is talking about tightening up, and everyone heard it.",
-        "src": "output/beats/LifeHistory_Log.jsonl @C115",
-        "kind": "thread",
-        "popid": "POP-00481"
-      },
-      {
-        "text": "Kelvon Ochoa — in their life, C115: still feeling the energy from last night's city buzz",
-        "src": "output/beats/LifeHistory_Log.jsonl @C115",
-        "kind": "thread",
-        "popid": "POP-00481"
-      },
-      {
-        "text": "Kelvon Ochoa — in their life, C115: cooked the full Sunday dinner out of habit and packed half of it straight into the freezer near a coffee line",
-        "src": "output/beats/LifeHistory_Log.jsonl @C115",
-        "kind": "thread",
-        "popid": "POP-00481"
-      },
-      {
-        "text": "Kelvon Ochoa — in their life, C115: a group of fans huddle under an awning debating last night's game, their voices rising above the sound of rain hitting the pavement",
-        "src": "output/beats/LifeHistory_Log.jsonl @C115",
-        "kind": "thread",
-        "popid": "POP-00481"
-      },
-      {
-        "text": "Jesus Jorden — moved from Temescal to Fruitvale — moving up from Temescal, Fruitvale (C115 — what happened in their life, not words they said)",
-        "src": "output/beats/LifeHistory_Log.jsonl @C115",
-        "id": "moment:POP-00721:115:Relocation-Drive-Up-M",
-        "kind": "moment",
-        "popid": "POP-00721"
-      },
-      {
-        "text": "Jesus Jorden — in their life, C114: felt a lift at Dario's Bar after the win",
+        "text": "Isley Kelley — in their life, C114: fielded a round of texts from people who hadn't called in years",
         "src": "output/beats/LifeHistory_Log.jsonl @C114",
         "kind": "thread",
-        "popid": "POP-00721"
+        "popid": "POP-00019"
       },
       {
-        "text": "Jesus Jorden — in their life, C114: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots near a cafe near the clinics",
+        "text": "Isley Kelley — in their life, C114: felt quietly proud of how they handled something small",
         "src": "output/beats/LifeHistory_Log.jsonl @C114",
         "kind": "thread",
-        "popid": "POP-00721"
+        "popid": "POP-00019"
       },
       {
-        "text": "Jesus Jorden — in their life, C115: grabbed coffee from the cart outside the hospital before the morning rush hit",
-        "src": "output/beats/LifeHistory_Log.jsonl @C115",
-        "kind": "thread",
-        "popid": "POP-00721"
-      },
-      {
-        "text": "Jesus Jorden — in their life, C115: wrote half a letter to family, then decided to call instead",
-        "src": "output/beats/LifeHistory_Log.jsonl @C115",
-        "kind": "thread",
-        "popid": "POP-00721"
-      },
-      {
-        "text": "Jasmine Torres — moved from Chinatown to KONO — leaving Chinatown for a better fit, KONO (C115 — what happened in their life, not words they said)",
-        "src": "output/beats/LifeHistory_Log.jsonl @C115",
-        "id": "moment:POP-01111:115:Relocation-Composure-Up-M",
-        "kind": "moment",
-        "popid": "POP-01111"
-      },
-      {
-        "text": "Jasmine Torres — in their life, C114: listened to a style of music they'd always skipped, twice",
+        "text": "Isley Kelley — in their life, C114: looked up how something works and came away more amazed, not less",
         "src": "output/beats/LifeHistory_Log.jsonl @C114",
         "kind": "thread",
-        "popid": "POP-01111"
+        "popid": "POP-00019"
       },
       {
-        "text": "Jasmine Torres — in their life, C115: the bartender wipes down the counter between rounds of A's highlights",
+        "text": "Isley Kelley — in their life, C114: Kelley Mercantile returned $2058 to the line this week",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114",
+        "kind": "thread",
+        "popid": "POP-00019"
+      },
+      {
+        "text": "Isley Kelley — Lives already wrote this person: a moment the record kept (C114)",
+        "src": "output/cron-compare/lives_covered.json",
+        "kind": "thread",
+        "popid": "POP-00019"
+      },
+      {
+        "text": "Isley Kelley — the Tribune named them in a piece headlined The Lives Page, Cycle 114 (Culture, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl 9746e4e747ffdd0a",
+        "kind": "thread",
+        "popid": "POP-00019"
+      },
+      {
+        "text": "Isley Kelley — the Tribune named them in a piece headlined Fifty-Six, and the Road Behind It (Sports, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl 6a58d696e6125498",
+        "kind": "thread",
+        "popid": "POP-00019"
+      },
+      {
+        "text": "Isley Kelley — the Tribune named them in a piece headlined Trade Deadline Earthquake: A's Send Richards to Mets, Reshape the Infield (Sports, Edition 101, C101)",
+        "src": "archive/ARTICLE_INDEX.jsonl 894ea90d682cb645",
+        "kind": "thread",
+        "popid": "POP-00019"
+      },
+      {
+        "text": "Benji Dillon — Dillon Clinic returned $7548 to the line this week, Rockridge (C115 — what happened in their life, not words they said)",
         "src": "output/beats/LifeHistory_Log.jsonl @C115",
-        "kind": "thread",
-        "popid": "POP-01111"
-      },
-      {
-        "text": "Jasmine Torres — in their life, C115: tried a new recipe that mostly worked",
-        "src": "output/beats/LifeHistory_Log.jsonl @C115",
-        "kind": "thread",
-        "popid": "POP-01111"
-      },
-      {
-        "text": "Jasmine Torres — in their life, C115: heard a kid explain something to a parent with total authority and grinned",
-        "src": "output/beats/LifeHistory_Log.jsonl @C115",
-        "kind": "thread",
-        "popid": "POP-01111"
-      },
-      {
-        "text": "Jasmine Torres — the Tribune named them in a piece headlined THE QUIET INVESTMENT (Business, C88)",
-        "src": "archive/ARTICLE_INDEX.jsonl dec644376e5295d6",
-        "kind": "thread",
-        "popid": "POP-01111"
-      },
-      {
-        "text": "Jasmine Torres — the Tribune named them in a piece headlined The Oakland Stack (Social Trends, C84)",
-        "src": "archive/ARTICLE_INDEX.jsonl 03e7888a95a8413b",
-        "kind": "thread",
-        "popid": "POP-01111"
-      },
-      {
-        "text": "Ruth Anyanwu — moved from East Oakland to Downtown — moving up from East Oakland, Downtown (C115 — what happened in their life, not words they said)",
-        "src": "output/beats/LifeHistory_Log.jsonl @C115",
-        "id": "moment:POP-01147:115:Relocation-Drive-Up-M",
+        "id": "moment:POP-00018:115:Business-Gain",
         "kind": "moment",
-        "popid": "POP-01147"
+        "popid": "POP-00018"
       },
       {
-        "text": "Ruth Anyanwu — in their life, C115: bought a new A's jersey and the quiet satisfaction of finding a favorite song on the jukebox",
-        "src": "output/beats/LifeHistory_Log.jsonl @C115",
+        "text": "Benji Dillon — in their life, C114: got recognized twice at the grocery store after the story ran",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114",
         "kind": "thread",
-        "popid": "POP-01147"
+        "popid": "POP-00018"
       },
       {
-        "text": "Ruth Anyanwu — in their life, C115: walked a different street home just to see it",
-        "src": "output/beats/LifeHistory_Log.jsonl @C115",
+        "text": "Benji Dillon — in their life, C114: the kids could say Father Miguel before they could say the mayor's name",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114",
         "kind": "thread",
-        "popid": "POP-01147"
+        "popid": "POP-00018"
       },
       {
-        "text": "Ruth Anyanwu — in their life, C115: played a relative's voicemail twice before saving it again near a lot mid-frame",
-        "src": "output/beats/LifeHistory_Log.jsonl @C115",
+        "text": "Benji Dillon — in their life, C114: felt quietly proud of how they handled something small",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114",
         "kind": "thread",
-        "popid": "POP-01147"
+        "popid": "POP-00018"
       },
       {
-        "text": "Ruth Anyanwu — in their life, C115: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+        "text": "Benji Dillon — in their life, C115: put on their good suit for the Sunday service because some traditions still matter",
         "src": "output/beats/LifeHistory_Log.jsonl @C115",
         "kind": "thread",
-        "popid": "POP-01147"
+        "popid": "POP-00018"
+      },
+      {
+        "text": "Benji Dillon — Lives already wrote this person: a moment the record kept (C114)",
+        "src": "output/cron-compare/lives_covered.json",
+        "kind": "thread",
+        "popid": "POP-00018"
+      },
+      {
+        "text": "Benji Dillon — the Tribune named them in a piece headlined The Pole on Rockridge Corner Is Starting to Say His Name (Culture, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl db859c2206e0282a",
+        "kind": "thread",
+        "popid": "POP-00018"
+      },
+      {
+        "text": "Benji Dillon — the Tribune named them in a piece headlined The Lives Page, Cycle 114 (Culture, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl 9746e4e747ffdd0a",
+        "kind": "thread",
+        "popid": "POP-00018"
+      },
+      {
+        "text": "Benji Dillon — the Tribune named them in a piece headlined Ellis's Game Five Line Carries the Title (Sports, C111)",
+        "src": "archive/ARTICLE_INDEX.jsonl 932d071f77813236",
+        "kind": "thread",
+        "popid": "POP-00018"
+      },
+      {
+        "text": "Latasha Jefferson — A manager at Anthropic walked past three times and did not stop once., Rockridge (C115 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115",
+        "id": "moment:POP-00805:115:LifeEvent-Promotion-Down-S",
+        "kind": "moment",
+        "popid": "POP-00805"
+      },
+      {
+        "text": "Latasha Jefferson — in their life, C114: drank the free cold brew in the company kitchen and felt completely disconnected from the neighborhood outside",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114",
+        "kind": "thread",
+        "popid": "POP-00805"
+      },
+      {
+        "text": "Latasha Jefferson — in their life, C114: checked the front door lock three times after everyone else was asleep",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114",
+        "kind": "thread",
+        "popid": "POP-00805"
+      },
+      {
+        "text": "Latasha Jefferson — in their life, C114: checked out a new shop that just opened nearby",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114",
+        "kind": "thread",
+        "popid": "POP-00805"
+      },
+      {
+        "text": "Latasha Jefferson — in their life, C115: one of the kids asked a question at dinner that stopped the room",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115",
+        "kind": "thread",
+        "popid": "POP-00805"
+      },
+      {
+        "text": "Tyler Filet — The schedule at Portside Bio came out with their name in the slot that used to belong to someone senior., Lake Merritt (C115 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115",
+        "id": "moment:POP-00447:115:LifeEvent-Promotion-Up-S",
+        "kind": "moment",
+        "popid": "POP-00447"
+      },
+      {
+        "text": "Tyler Filet — in their life, C114: couldn't sleep for the wind rattling the window frame near a front porch",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114",
+        "kind": "thread",
+        "popid": "POP-00447"
+      },
+      {
+        "text": "Tyler Filet — in their life, C114: wondered if a decision from years back had been the right one",
+        "src": "output/beats/LifeHistory_Log.jsonl @C114",
+        "kind": "thread",
+        "popid": "POP-00447"
+      },
+      {
+        "text": "Tyler Filet — in their life, C115: disagreed with a Tribune column out loud to an empty kitchen",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115",
+        "kind": "thread",
+        "popid": "POP-00447"
+      },
+      {
+        "text": "Tyler Filet — in their life, C115: grabbed coffee from the cart outside the hospital before the morning rush hit",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115",
+        "kind": "thread",
+        "popid": "POP-00447"
+      },
+      {
+        "text": "Tyler Filet — Lives already wrote this person: the new household (C114)",
+        "src": "output/cron-compare/lives_covered.json",
+        "kind": "thread",
+        "popid": "POP-00447"
+      },
+      {
+        "text": "Tyler Filet — the Tribune named them in a piece headlined The Lives of C114 (Culture, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl ad7f65b09c46717e",
+        "kind": "thread",
+        "popid": "POP-00447"
       }
     ],
     "forbidden": [
@@ -1026,19 +1013,19 @@
     "peopleCap": 16,
     "roomIsYours": "the plain respect, what the event meant in that house or on that block, the detail the family would have picked — from the lines below, never invented"
   },
-  "day": "2026-11-11",
+  "day": "2026-11-13",
   "counted": {
     "events": 4,
     "pending": 0,
     "todays": 0,
     "households": 2,
-    "casino": 2,
+    "casino": 0,
     "seeds": 3,
     "moments": 4,
     "stays": 0
   },
   "pointers": [
-    "output/beats/Lived_Events.jsonl @C115 batch fd0b35",
+    "output/beats/Lived_Events.jsonl @C115 batch 1138a0",
     "output/beats/Story_Hook_Deck.jsonl (hooks for Tamsin Pruitt this cycle)"
   ]
 }

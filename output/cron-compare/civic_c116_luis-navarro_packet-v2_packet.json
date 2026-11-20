@@ -1,0 +1,63 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "116",
+  "persona": "luis-navarro",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Luis Navarro",
+    "popid": "POP-00636"
+  },
+  "assignment": {
+    "story": {
+      "ref": "output/engine_audit_c116.json patterns[0]; evidence: Initiative_Tracker row(s) 7; storyline INIT-007:implementation-active",
+      "label": "stuck-initiative (medium) | Initiative \"Oakland Youth Apprenticeship Pipeline\" in phase \"implementation-active\" for 4 cycles",
+      "kind": "anomaly",
+      "angle": "Oakland Youth Apprenticeship Pipeline stalled in implementation-active — remedy path + responsible office",
+      "hookLine": "The economic initiative carrying West Oakland has not advanced in 4 cycles.",
+      "hood": "West Oakland, East Oakland, Fruitvale",
+      "popids": [],
+      "citizens": []
+    }
+  },
+  "angle": "output/cron-compare/civic_c116_luis-navarro_packet-v2_angle.json",
+  "quotesRequested": 1,
+  "quotesLanded": 1,
+  "quotes": [
+    {
+      "pop": "POP-00503",
+      "name": "Rose Delgado",
+      "quote": "A seat in the classroom is not a paycheck. Four cycles in one stage — publish the gap analysis and show Fruitvale's young people in the roles.",
+      "sourceKind": "office-record",
+      "officeRecord": {
+        "sourceKind": "office-record",
+        "cycle": 116,
+        "officeSlug": "council_d3",
+        "statementId": "STMT-116-council_d3-003",
+        "quote": "A seat in the classroom is not a paycheck. Four cycles in one stage — publish the gap analysis and show Fruitvale's young people in the roles.",
+        "topic": "Oakland Youth Apprenticeship Pipeline — placement-gap analysis and Fruitvale review",
+        "initiativeId": "INIT-007",
+        "filePath": "output/civic-voice/council_d3_c116.json",
+        "holderPopid": "POP-00503",
+        "speakerName": "Rose Delgado"
+      }
+    }
+  ],
+  "officeRecords": [
+    {
+      "sourceKind": "office-record",
+      "cycle": 116,
+      "officeSlug": "council_d3",
+      "statementId": "STMT-116-council_d3-003",
+      "quote": "A seat in the classroom is not a paycheck. Four cycles in one stage — publish the gap analysis and show Fruitvale's young people in the roles.",
+      "topic": "Oakland Youth Apprenticeship Pipeline — placement-gap analysis and Fruitvale review",
+      "initiativeId": "INIT-007",
+      "filePath": "output/civic-voice/council_d3_c116.json",
+      "holderPopid": "POP-00503",
+      "speakerName": "Rose Delgado"
+    }
+  ],
+  "officeSilence": null,
+  "interviews": [],
+  "ranAt": "2026-11-17T19:15:01.685Z"
+}

@@ -1,0 +1,858 @@
+{
+  "empty": false,
+  "cycle": 116,
+  "kind": "evening-life",
+  "journalist": {
+    "shared": true,
+    "consumers": [
+      "mason-ortega",
+      "kai-marston",
+      "sharon-okafor",
+      "maria-keen",
+      "elliot-graye"
+    ]
+  },
+  "texture": {
+    "famous": [
+      "Theo Banks",
+      "Ernesto Quintero",
+      "Desmond Morton"
+    ],
+    "restaurants": [
+      {
+        "name": "Harborline Grill",
+        "hood": "Jack London"
+      },
+      {
+        "name": "Port Grind",
+        "hood": "Grand Lake"
+      },
+      {
+        "name": "Third Street Late Kitchen",
+        "hood": "Jack London"
+      }
+    ],
+    "fastFood": [
+      {
+        "name": "SpeedyBurger",
+        "hood": "Downtown"
+      }
+    ],
+    "nightlife": [
+      {
+        "name": "Bridge & Barrel",
+        "hood": "Jack London"
+      }
+    ],
+    "nightlifeMeta": {
+      "volume": 3,
+      "vibe": "quiet",
+      "movement": "restricted",
+      "weatherImpact": 1
+    },
+    "cityEvents": [
+      "The Kelley Family Block Party",
+      "The Horn Family Block Party",
+      "The Keane Family Block Party"
+    ],
+    "tv": [
+      "Bay Area Alert",
+      "Inside the A's Front Office",
+      "Giancarlo Hernandez (3B) — Player Profile"
+    ],
+    "movies": [
+      "Ninth Inning"
+    ],
+    "sportsBroadcast": "Oakland Sports Tonight",
+    "streamingTrend": "political commentary surge",
+    "foodTrend": "High mobility / civic-tension food trend"
+  },
+  "signals": {
+    "fameCount": 11,
+    "sightingCount": 3,
+    "faithCount": 6,
+    "eveningPointer": {
+      "ref": "output/world_summary_c116.md \"## Evening Texture\"",
+      "label": "Named venues that moved — restaurants, fast food, nightlife spots, city events, media"
+    },
+    "sightings": [
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Theo Banks spotted at Parkridge Cleaners",
+        "name": "Theo Banks",
+        "venue": "Parkridge Cleaners",
+        "ref": "Ripple_Ledger cycle 116 (CauseType lifestyle-sighting); rendered: world_summary_c116.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "Glenview",
+        "popids": []
+      },
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Ernesto Quintero spotted at Marine Systems",
+        "name": "Ernesto Quintero",
+        "venue": "Marine Systems",
+        "ref": "Ripple_Ledger cycle 116 (CauseType lifestyle-sighting); rendered: world_summary_c116.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "Baylight District",
+        "popids": []
+      },
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Desmond Morton spotted at Jade Thread Tailors",
+        "name": "Desmond Morton",
+        "venue": "Jade Thread Tailors",
+        "ref": "Ripple_Ledger cycle 116 (CauseType lifestyle-sighting); rendered: world_summary_c116.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "Chinatown",
+        "popids": []
+      }
+    ],
+    "fame": [
+      {
+        "kind": "fame-event",
+        "label": "fame-rise | Darrin Davis — the city is watching: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "name": "Darrin Davis",
+        "ref": "Ripple_Ledger cycle 116 (CauseType fame-event); rendered: world_summary_c116.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Piedmont Ave",
+        "popids": [
+          "POP-00021"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "fame-permanent | P Slayer — assumed fame (25 on record)",
+        "name": "P Slayer",
+        "ref": "Ripple_Ledger cycle 116 (CauseType fame-event); rendered: world_summary_c116.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "West Oakland",
+        "popids": [
+          "POP-00008"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "fame-permanent | Nia Rook — assumed fame (25 on record)",
+        "name": "Nia Rook",
+        "ref": "Ripple_Ledger cycle 116 (CauseType fame-event); rendered: world_summary_c116.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "West Oakland",
+        "popids": [
+          "POP-01076"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Tanya Cruz — the city keeps saying the name: Tier 3 -> 2",
+        "name": "Tanya Cruz",
+        "ref": "Ripple_Ledger cycle 116 (CauseType fame-event); rendered: world_summary_c116.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Laurel",
+        "popids": [
+          "POP-00014"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Trevor Shimizu — the city keeps saying the name: Tier 3 -> 2",
+        "name": "Trevor Shimizu",
+        "ref": "Ripple_Ledger cycle 116 (CauseType fame-event); rendered: world_summary_c116.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Laurel",
+        "popids": [
+          "POP-00155"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Kai Marston — the city keeps saying the name: Tier 3 -> 2",
+        "name": "Kai Marston",
+        "ref": "Ripple_Ledger cycle 116 (CauseType fame-event); rendered: world_summary_c116.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Rockridge",
+        "popids": [
+          "POP-00158"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Dmitri Soto — the city keeps saying the name: Tier 4 -> 3",
+        "name": "Dmitri Soto",
+        "ref": "Ripple_Ledger cycle 116 (CauseType fame-event); rendered: world_summary_c116.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "KONO",
+        "popids": [
+          "POP-00276"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Coen Cartier — the city keeps saying the name: Tier 4 -> 3",
+        "name": "Coen Cartier",
+        "ref": "Ripple_Ledger cycle 116 (CauseType fame-event); rendered: world_summary_c116.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Chinatown",
+        "popids": [
+          "POP-00338"
+        ]
+      }
+    ]
+  },
+  "pulse": {
+    "className": "quiet-nightlife",
+    "score": 24,
+    "label": "Bridge & Barrel (Jack London) · quiet night",
+    "named": "Bridge & Barrel",
+    "hood": "Jack London",
+    "person": null,
+    "venue": null
+  },
+  "candidates": [
+    {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Bridge & Barrel (Jack London) · quiet night",
+      "named": "Bridge & Barrel",
+      "hood": "Jack London"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Theo Banks at Parkridge Cleaners (Glenview)",
+      "named": "Parkridge Cleaners",
+      "hood": "Glenview"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Ernesto Quintero at Marine Systems (Baylight District)",
+      "named": "Marine Systems",
+      "hood": "Baylight District"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Desmond Morton at Jade Thread Tailors (Chinatown)",
+      "named": "Jade Thread Tailors",
+      "hood": "Chinatown"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Harborline Grill (Jack London)",
+      "named": "Harborline Grill",
+      "hood": "Jack London"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Port Grind (Grand Lake)",
+      "named": "Port Grind",
+      "hood": "Grand Lake"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Third Street Late Kitchen (Jack London)",
+      "named": "Third Street Late Kitchen",
+      "hood": "Jack London"
+    },
+    {
+      "className": "city-event",
+      "score": 17,
+      "label": "The Kelley Family Block Party",
+      "named": "The Kelley Family Block Party",
+      "hood": null
+    },
+    {
+      "className": "city-event",
+      "score": 17,
+      "label": "The Horn Family Block Party",
+      "named": "The Horn Family Block Party",
+      "hood": null
+    },
+    {
+      "className": "city-event",
+      "score": 17,
+      "label": "The Keane Family Block Party",
+      "named": "The Keane Family Block Party",
+      "hood": null
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Darrin Davis — fame rise",
+      "named": "Darrin Davis",
+      "hood": "Piedmont Ave"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "P Slayer — fame rise",
+      "named": "P Slayer",
+      "hood": "West Oakland"
+    }
+  ],
+  "pulses": [
+    {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Bridge & Barrel (Jack London) · quiet night",
+      "named": "Bridge & Barrel",
+      "hood": "Jack London",
+      "names": [
+        "Bridge & Barrel"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Nightlife",
+      "angle": "Bridge & Barrel is open and quiet in Jack London. What that condition means is not yet established.",
+      "hookLine": "Bridge & Barrel is open and quiet in Jack London.",
+      "sceneBits": [
+        "VENUE: Bridge & Barrel",
+        "HOOD: Jack London",
+        "EVENING RECORD: open and quiet"
+      ],
+      "nightlifeMeta": {
+        "volume": 3,
+        "vibe": "quiet",
+        "movement": "restricted",
+        "weatherImpact": 1
+      },
+      "cycle": 116
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Theo Banks at Parkridge Cleaners (Glenview)",
+      "named": "Parkridge Cleaners",
+      "hood": "Glenview",
+      "names": [
+        "Theo Banks",
+        "Parkridge Cleaners"
+      ],
+      "person": "Theo Banks",
+      "venue": "Parkridge Cleaners",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 116 (CauseType lifestyle-sighting); rendered: world_summary_c116.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Theo Banks spotted at Parkridge Cleaners in Glenview — ground truth only, no invented companions",
+      "hookLine": "sighting | Theo Banks spotted at Parkridge Cleaners",
+      "sceneBits": [
+        "PERSON: Theo Banks",
+        "VENUE: Parkridge Cleaners",
+        "HOOD: Glenview"
+      ],
+      "cycle": 116
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Ernesto Quintero at Marine Systems (Baylight District)",
+      "named": "Marine Systems",
+      "hood": "Baylight District",
+      "names": [
+        "Ernesto Quintero",
+        "Marine Systems"
+      ],
+      "person": "Ernesto Quintero",
+      "venue": "Marine Systems",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 116 (CauseType lifestyle-sighting); rendered: world_summary_c116.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Ernesto Quintero spotted at Marine Systems in Baylight District — ground truth only, no invented companions",
+      "hookLine": "sighting | Ernesto Quintero spotted at Marine Systems",
+      "sceneBits": [
+        "PERSON: Ernesto Quintero",
+        "VENUE: Marine Systems",
+        "HOOD: Baylight District"
+      ],
+      "cycle": 116
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Desmond Morton at Jade Thread Tailors (Chinatown)",
+      "named": "Jade Thread Tailors",
+      "hood": "Chinatown",
+      "names": [
+        "Desmond Morton",
+        "Jade Thread Tailors"
+      ],
+      "person": "Desmond Morton",
+      "venue": "Jade Thread Tailors",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 116 (CauseType lifestyle-sighting); rendered: world_summary_c116.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Desmond Morton spotted at Jade Thread Tailors in Chinatown — ground truth only, no invented companions",
+      "hookLine": "sighting | Desmond Morton spotted at Jade Thread Tailors",
+      "sceneBits": [
+        "PERSON: Desmond Morton",
+        "VENUE: Jade Thread Tailors",
+        "HOOD: Chinatown"
+      ],
+      "cycle": 116
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Harborline Grill (Jack London)",
+      "named": "Harborline Grill",
+      "hood": "Jack London",
+      "names": [
+        "Harborline Grill"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "Harborline Grill appears on the evening restaurant list in Jack London. What was happening there is not established.",
+      "hookLine": "Harborline Grill appears on the evening restaurant list in Jack London.",
+      "sceneBits": [
+        "VENUE: Harborline Grill",
+        "HOOD: Jack London"
+      ],
+      "cycle": 116
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Port Grind (Grand Lake)",
+      "named": "Port Grind",
+      "hood": "Grand Lake",
+      "names": [
+        "Port Grind"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "Port Grind appears on the evening restaurant list in Grand Lake. What was happening there is not established.",
+      "hookLine": "Port Grind appears on the evening restaurant list in Grand Lake.",
+      "sceneBits": [
+        "VENUE: Port Grind",
+        "HOOD: Grand Lake"
+      ],
+      "cycle": 116
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Third Street Late Kitchen (Jack London)",
+      "named": "Third Street Late Kitchen",
+      "hood": "Jack London",
+      "names": [
+        "Third Street Late Kitchen"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "Third Street Late Kitchen appears on the evening restaurant list in Jack London. What was happening there is not established.",
+      "hookLine": "Third Street Late Kitchen appears on the evening restaurant list in Jack London.",
+      "sceneBits": [
+        "VENUE: Third Street Late Kitchen",
+        "HOOD: Jack London"
+      ],
+      "cycle": 116
+    },
+    {
+      "className": "city-event",
+      "score": 17,
+      "label": "The Kelley Family Block Party",
+      "named": "The Kelley Family Block Party",
+      "hood": null,
+      "names": [
+        "The Kelley Family Block Party"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "Arts/cultural event: The Kelley Family Block Party — present-tense room, not calendar filler",
+      "hookLine": "The Kelley Family Block Party is on the evening board.",
+      "sceneBits": [
+        "EVENT: The Kelley Family Block Party",
+        "ARTS SIGNAL: yes"
+      ],
+      "cycle": 116
+    },
+    {
+      "className": "city-event",
+      "score": 17,
+      "label": "The Horn Family Block Party",
+      "named": "The Horn Family Block Party",
+      "hood": null,
+      "names": [
+        "The Horn Family Block Party"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "Arts/cultural event: The Horn Family Block Party — present-tense room, not calendar filler",
+      "hookLine": "The Horn Family Block Party is on the evening board.",
+      "sceneBits": [
+        "EVENT: The Horn Family Block Party",
+        "ARTS SIGNAL: yes"
+      ],
+      "cycle": 116
+    },
+    {
+      "className": "city-event",
+      "score": 17,
+      "label": "The Keane Family Block Party",
+      "named": "The Keane Family Block Party",
+      "hood": null,
+      "names": [
+        "The Keane Family Block Party"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "Arts/cultural event: The Keane Family Block Party — present-tense room, not calendar filler",
+      "hookLine": "The Keane Family Block Party is on the evening board.",
+      "sceneBits": [
+        "EVENT: The Keane Family Block Party",
+        "ARTS SIGNAL: yes"
+      ],
+      "cycle": 116
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Darrin Davis — fame rise",
+      "named": "Darrin Davis",
+      "hood": "Piedmont Ave",
+      "names": [
+        "Darrin Davis"
+      ],
+      "person": "Darrin Davis",
+      "popids": [
+        "POP-00021"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 116 (CauseType fame-event); rendered: world_summary_c116.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Darrin Davis — city watching; do not invent the private life",
+      "hookLine": "fame-rise | Darrin Davis — the city is watching: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+      "sceneBits": [
+        "PERSON: Darrin Davis",
+        "HOOD: Piedmont Ave",
+        "LABEL: fame-rise | Darrin Davis — the city is watching: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots"
+      ],
+      "cycle": 116
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "P Slayer — fame rise",
+      "named": "P Slayer",
+      "hood": "West Oakland",
+      "names": [
+        "P Slayer"
+      ],
+      "person": "P Slayer",
+      "popids": [
+        "POP-00008"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 116 (CauseType fame-event); rendered: world_summary_c116.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "P Slayer — city watching; do not invent the private life",
+      "hookLine": "fame-permanent | P Slayer — assumed fame (25 on record)",
+      "sceneBits": [
+        "PERSON: P Slayer",
+        "HOOD: West Oakland",
+        "LABEL: fame-permanent | P Slayer — assumed fame (25 on record)"
+      ],
+      "cycle": 116
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Nia Rook — fame rise",
+      "named": "Nia Rook",
+      "hood": "West Oakland",
+      "names": [
+        "Nia Rook"
+      ],
+      "person": "Nia Rook",
+      "popids": [
+        "POP-01076"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 116 (CauseType fame-event); rendered: world_summary_c116.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Nia Rook — city watching; do not invent the private life",
+      "hookLine": "fame-permanent | Nia Rook — assumed fame (25 on record)",
+      "sceneBits": [
+        "PERSON: Nia Rook",
+        "HOOD: West Oakland",
+        "LABEL: fame-permanent | Nia Rook — assumed fame (25 on record)"
+      ],
+      "cycle": 116
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Tanya Cruz — fame rise",
+      "named": "Tanya Cruz",
+      "hood": "Laurel",
+      "names": [
+        "Tanya Cruz"
+      ],
+      "person": "Tanya Cruz",
+      "popids": [
+        "POP-00014"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 116 (CauseType fame-event); rendered: world_summary_c116.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Tanya Cruz — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Tanya Cruz — the city keeps saying the name: Tier 3 -> 2",
+      "sceneBits": [
+        "PERSON: Tanya Cruz",
+        "HOOD: Laurel",
+        "LABEL: tier-climb | Tanya Cruz — the city keeps saying the name: Tier 3 -> 2"
+      ],
+      "cycle": 116
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Trevor Shimizu — fame rise",
+      "named": "Trevor Shimizu",
+      "hood": "Laurel",
+      "names": [
+        "Trevor Shimizu"
+      ],
+      "person": "Trevor Shimizu",
+      "popids": [
+        "POP-00155"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 116 (CauseType fame-event); rendered: world_summary_c116.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Trevor Shimizu — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Trevor Shimizu — the city keeps saying the name: Tier 3 -> 2",
+      "sceneBits": [
+        "PERSON: Trevor Shimizu",
+        "HOOD: Laurel",
+        "LABEL: tier-climb | Trevor Shimizu — the city keeps saying the name: Tier 3 -> 2"
+      ],
+      "cycle": 116
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Kai Marston — fame rise",
+      "named": "Kai Marston",
+      "hood": "Rockridge",
+      "names": [
+        "Kai Marston"
+      ],
+      "person": "Kai Marston",
+      "popids": [
+        "POP-00158"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 116 (CauseType fame-event); rendered: world_summary_c116.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Kai Marston — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Kai Marston — the city keeps saying the name: Tier 3 -> 2",
+      "sceneBits": [
+        "PERSON: Kai Marston",
+        "HOOD: Rockridge",
+        "LABEL: tier-climb | Kai Marston — the city keeps saying the name: Tier 3 -> 2"
+      ],
+      "cycle": 116
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Dmitri Soto — fame rise",
+      "named": "Dmitri Soto",
+      "hood": "KONO",
+      "names": [
+        "Dmitri Soto"
+      ],
+      "person": "Dmitri Soto",
+      "popids": [
+        "POP-00276"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 116 (CauseType fame-event); rendered: world_summary_c116.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Dmitri Soto — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Dmitri Soto — the city keeps saying the name: Tier 4 -> 3",
+      "sceneBits": [
+        "PERSON: Dmitri Soto",
+        "HOOD: KONO",
+        "LABEL: tier-climb | Dmitri Soto — the city keeps saying the name: Tier 4 -> 3"
+      ],
+      "cycle": 116
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Coen Cartier — fame rise",
+      "named": "Coen Cartier",
+      "hood": "Chinatown",
+      "names": [
+        "Coen Cartier"
+      ],
+      "person": "Coen Cartier",
+      "popids": [
+        "POP-00338"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 116 (CauseType fame-event); rendered: world_summary_c116.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Coen Cartier — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Coen Cartier — the city keeps saying the name: Tier 4 -> 3",
+      "sceneBits": [
+        "PERSON: Coen Cartier",
+        "HOOD: Chinatown",
+        "LABEL: tier-climb | Coen Cartier — the city keeps saying the name: Tier 4 -> 3"
+      ],
+      "cycle": 116
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Luis Navarro — fame rise",
+      "named": "Luis Navarro",
+      "hood": "Fruitvale",
+      "names": [
+        "Luis Navarro"
+      ],
+      "person": "Luis Navarro",
+      "popids": [
+        "POP-00636"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 116 (CauseType fame-event); rendered: world_summary_c116.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Luis Navarro — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Luis Navarro — the city keeps saying the name: Tier 3 -> 2",
+      "sceneBits": [
+        "PERSON: Luis Navarro",
+        "HOOD: Fruitvale",
+        "LABEL: tier-climb | Luis Navarro — the city keeps saying the name: Tier 3 -> 2"
+      ],
+      "cycle": 116
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Jax Caldera — fame rise",
+      "named": "Jax Caldera",
+      "hood": "Chinatown",
+      "names": [
+        "Jax Caldera"
+      ],
+      "person": "Jax Caldera",
+      "popids": [
+        "POP-00799"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 116 (CauseType fame-event); rendered: world_summary_c116.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Jax Caldera — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Jax Caldera — the city keeps saying the name: Tier 3 -> 2",
+      "sceneBits": [
+        "PERSON: Jax Caldera",
+        "HOOD: Chinatown",
+        "LABEL: tier-climb | Jax Caldera — the city keeps saying the name: Tier 3 -> 2"
+      ],
+      "cycle": 116
+    }
+  ],
+  "recommend": {
+    "bag": "lifestyle",
+    "slug": "sharon-okafor",
+    "name": "Sharon Okafor",
+    "popid": "POP-00159",
+    "bagDoc": "docs/media/SHARON_LIFESTYLE_BAG.md",
+    "reason": "top pulse quiet-nightlife → lifestyle",
+    "pulseClass": "quiet-nightlife",
+    "pulseLabel": "Bridge & Barrel (Jack London) · quiet night"
+  },
+  "perSeat": {
+    "mason-ortega": {
+      "pulseClass": "named-restaurant",
+      "label": "Harborline Grill (Jack London)",
+      "score": 34,
+      "bag": "kitchen"
+    },
+    "kai-marston": {
+      "pulseClass": "quiet-nightlife",
+      "label": "Bridge & Barrel (Jack London) · quiet night",
+      "score": 32,
+      "bag": "arts"
+    },
+    "sharon-okafor": {
+      "pulseClass": "quiet-nightlife",
+      "label": "Bridge & Barrel (Jack London) · quiet night",
+      "score": 32,
+      "bag": "lifestyle"
+    },
+    "maria-keen": {
+      "pulseClass": "quiet-nightlife",
+      "label": "Bridge & Barrel (Jack London) · quiet night",
+      "score": 32,
+      "bag": "ground"
+    },
+    "elliot-graye": {
+      "pulseClass": "fame-sighting",
+      "label": "Theo Banks at Parkridge Cleaners (Glenview)",
+      "score": 31,
+      "bag": "faith"
+    }
+  },
+  "approach": "Evening-life approach (shared culture pack): open from a NAMED place or sighting in this slice — restaurant, bar, festival, TV slate, or fame stop — never invent venues or employees. Use nightlife volume/vibe/movement as scene color only; translate to human language (no raw decimals as lead). Pick ONE life pulse; ride the recommended consumer bag when it matches your seat (kitchen / arts / lifestyle / ground / faith). Do not file multi-voice culture-desk average. One room, one night, one truth.",
+  "story": {
+    "angle": "Bridge & Barrel is open and quiet in Jack London. What that condition means is not yet established.",
+    "label": "Bridge & Barrel (Jack London) · quiet night",
+    "hookLine": "Bridge & Barrel is open and quiet in Jack London.",
+    "hood": "Jack London",
+    "pulseClass": "quiet-nightlife",
+    "citizens": [],
+    "popids": [],
+    "named": "Bridge & Barrel",
+    "venue": "Bridge & Barrel",
+    "ref": "world_summary ## Evening Texture · Nightlife",
+    "cycle": 116
+  },
+  "prewrite": {
+    "pulseClass": "quiet-nightlife",
+    "angle": "Bridge & Barrel is open and quiet in Jack London. What that condition means is not yet established.",
+    "hookLine": "Bridge & Barrel is open and quiet in Jack London.",
+    "anchorFacts": [
+      "NAMED: Bridge & Barrel",
+      "HOOD: Jack London",
+      "VENUE: Bridge & Barrel",
+      "HOOD: Jack London",
+      "EVENING RECORD: open and quiet"
+    ],
+    "bagRecommend": "lifestyle",
+    "bagSlug": "sharon-okafor"
+  },
+  "scene": {
+    "venues": [
+      {
+        "name": "Harborline Grill",
+        "hood": "Jack London"
+      },
+      {
+        "name": "Port Grind",
+        "hood": "Grand Lake"
+      },
+      {
+        "name": "Third Street Late Kitchen",
+        "hood": "Jack London"
+      },
+      {
+        "name": "SpeedyBurger",
+        "hood": "Downtown"
+      },
+      {
+        "name": "Bridge & Barrel",
+        "hood": "Jack London"
+      }
+    ],
+    "nightlifeMeta": {
+      "volume": 3,
+      "vibe": "quiet",
+      "movement": "restricted",
+      "weatherImpact": 1
+    },
+    "cityEvents": [
+      "The Kelley Family Block Party",
+      "The Horn Family Block Party",
+      "The Keane Family Block Party"
+    ],
+    "tv": [
+      "Bay Area Alert",
+      "Inside the A's Front Office",
+      "Giancarlo Hernandez (3B) — Player Profile"
+    ],
+    "movies": [
+      "Ninth Inning"
+    ],
+    "colorRoom": "Named places only from Evening Texture / desk_signal. The supplied evening record describes nightlife as quiet; raw scoring fields stay internal.  Sensory room (weather, light, sound) is free; careers and employees are not."
+  },
+  "pointers": [
+    "output/world_summary_c116.md ## Evening Texture",
+    "output/desk_signal_c116.json lanes.culture",
+    "docs/media/SHARON_LIFESTYLE_BAG.md"
+  ]
+}

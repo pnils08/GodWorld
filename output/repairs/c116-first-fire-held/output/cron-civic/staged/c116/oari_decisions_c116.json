@@ -1,0 +1,25 @@
+{
+  "initiative": "INIT-002",
+  "initiativeId": "INIT-002",
+  "cycle": 116,
+  "primaryVoice": "Mayor gavel (mayor_gavel-004)",
+  "consolidatedFrom": [
+    "STMT-116-mayor_gavel-004 (Mayor gavel — D3 Fruitvale alternative-response briefing)",
+    "STMT-116-oari-001 (Tran-Muñoz — D3 Fruitvale briefing record published and inspectionable; expansion held; D5...)",
+    "STMT-116-oari-002 (Tran-Muñoz — Fruitvale and West Oakland residents — what the published record and the calm...)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-002",
+    "MilestoneNotes": "C116: Ordered the D3 briefing executed and published with district and Fruitvale data; expansion held; D5 audit and Baylight review incomplete.",
+    "NextScheduledAction": "Execute and publish the D3 briefing record with district-level and Fruitvale data",
+    "NextActionCycle": 116,
+    "LastWorkCycle": 116,
+    "LastWorkSeat": "civic-office-council-d5, proj-oari"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-115-civic-office-council-d5-2026-11-10",
+      "MV-115-proj-oari-2026-11-10"
+    ]
+  }
+}

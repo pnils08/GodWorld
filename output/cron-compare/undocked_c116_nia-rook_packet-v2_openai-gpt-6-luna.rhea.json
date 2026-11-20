@@ -1,0 +1,72 @@
+{
+  "draft": "output/cron-compare/undocked_c116_nia-rook_packet-v2_openai-gpt-6-luna.md",
+  "cycle": "116",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "979a9f6d1c8785dc051329eea742fb65e9f4e7562141064ccdac24c5f088207c",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Draft passes all sourcing checks; quote matches interview record exactly and ledger entities are verified.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "nia-rook-undocked-recap-v1",
+    "packageVersion": "NIAROOK-UNDOCKED-2",
+    "manifestId": "AM-6c6b0a9097eb",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "1",
+          "45.19",
+          "115"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Luis Taz",
+      "Marguerite Kimball-Ostrow"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 1,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0133,
+  "durationMs": 5753,
+  "parseError": false,
+  "ranAt": "2026-11-20T00:21:06.993Z",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 350",
+    "words": 437,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "979a9f6d1c8785dc051329eea742fb65e9f4e7562141064ccdac24c5f088207c",
+    "costUsd": 0.0011
+  }
+}

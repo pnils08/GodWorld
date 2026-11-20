@@ -56,5 +56,6 @@
     "recorded": true,
     "out": "ing { override: true }\n{\n  \"popId\": \"POP-00011\",\n  \"name\": \"Carmen Delaine\",\n  \"recorded\": true,\n  \"text\": \"filed: The Fund Has Moved $7 Million Out of $28 Million. The Record Names Two Households.\"\n}"
   },
-  "ranAt": "2026-11-10T00:16:15.902Z"
+  "ranAt": "2026-11-10T00:16:15.902Z",
+  "dispositionReconciledAt": "2026-11-14T18:00:02.155Z"
 }

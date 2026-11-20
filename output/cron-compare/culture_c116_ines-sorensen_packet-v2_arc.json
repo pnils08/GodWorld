@@ -1,0 +1,22 @@
+{
+  "status": "arc-seed",
+  "cycle": "116",
+  "desk": "culture",
+  "persona": "ines-sorensen",
+  "hood": null,
+  "quotes": [
+    {
+      "pop": "POP-00050",
+      "name": "Ernesto Quintero",
+      "quote": "Man, this cycle's been a lot to process. First the Mesa trade—that one stings, even if I get why Paulson made it. Carmen had that fire in him, you know? And now with Mark Aitken leaving, it's a big change for the team. I'm trying not to get too ahead of myself, but it's clear the A's are looking to shake things up. I'm ready to step up and take on a new role, though. Sliding to first base opens up opportunities for the team, and I'm looking forward to the challenge."
+    },
+    {
+      "pop": "POP-00643",
+      "name": "Guadalupe Lupe",
+      "quote": "I've heard it every night from the regulars, they're worried about rent. Tre Mingo, who works at the Port, even mentioned it to me. People are concerned about how much longer they can afford to stay here."
+    }
+  ],
+  "claim": "Man, this cycle's been a lot to process. First the Mesa trade—that one stings, even if I get why Paulson made it. Carmen had that fire in him, you know? And now with Mark Aitken leaving, it's a big change for the team. I'm trying not to get too ahead of myself, but it's clear the A's are looking to shake things up. I'm ready to step up and take on a new role, though. Sliding to first base opens up opportunities for the team, and I'm looking forward to the challenge.",
+  "src": "citizenVoice PRESS c116",
+  "ranAt": "2026-11-19T19:18:49.765Z"
+}

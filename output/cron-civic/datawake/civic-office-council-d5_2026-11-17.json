@@ -1,0 +1,69 @@
+{
+  "office": "council_d5",
+  "agentDir": "civic-office-council-d5",
+  "holder": "Janae Rivers",
+  "popid": "POP-00043",
+  "title": "City Council District 5",
+  "date": "2026-11-17",
+  "cycle": 116,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "This week I'm doing what I promised in my own district and around it: the Fruitvale briefing record for the Alternative Response Initiative gets executed and published so D3 families can see their own calls answered, and East Oakland's record gets filed alongside it — no more waiting on a document nobody can open. I'm also answering Director Vance straight on the apprenticeship placement-gap analysis: the data is the city's to publish, and I'm naming where D5's contribution stands rather than letting a stalled pipeline read as a closed door. Our streets are holding steady and our storefronts are up, and I intend to keep it that way by earning every bit of it in the open.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-116-civic-office-council-d5",
+        "text": "Director Vance — the placement-gap analysis is a city workforce publication, not a district handout, and I won't pretend D5's office owns the publishing stamp. What I own is D5's side: East Oakland young people's intake and placement figures, gathered with the neighborhood organizations already doing the work, and I will deliver that contribution in a form the publishing office can actually use. So identify the office of record for the pipeline's placement-gap analysis and the format it needs, and I will file East Oakland's contribution against it this cycle — with the community organizations' names attached, not just a spreadsheet. If the publishing office can't be named, say so plainly, and I'll bring the gap into a public briefing myself rather than let silence stand in for a document.",
+        "directiveCycle": 116,
+        "confrontationSeat": "civic-office-council-d5"
+      }
+    },
+    {
+      "type": "work",
+      "payload": {
+        "initiativeId": "INIT-002"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "INIT-002 advanced one work move (briefing record execution and publication); D5 contribution scoped for the apprenticeship placement-gap analysis via CONF-116 answer.",
+  "ranAt": "2026-11-17T11:45:14.665Z",
+  "usage": {
+    "prompt_tokens": 6578,
+    "completion_tokens": 433,
+    "total_tokens": 7011,
+    "cost": 0.0009972,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0009972,
+      "upstream_inference_prompt_cost": 0.00078936,
+      "upstream_inference_completions_cost": 0.00020784
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "fellBackFrom": null,
+  "evidenceGenerationHash": "8bf58509d24a03b95f8e88a49a51e50b409fb1c4c8aa344e61a1acf7e941275d",
+  "evidenceReads": [],
+  "provider": "River",
+  "finishReason": "stop",
+  "elapsedMs": 6537,
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00043",
+    "id": "b3JeshsYhsT9Hf4w4Vamp1",
+    "customId": "cp-POP-00043-c116-CIVIC-datawake-2026-11-17"
+  }
+}

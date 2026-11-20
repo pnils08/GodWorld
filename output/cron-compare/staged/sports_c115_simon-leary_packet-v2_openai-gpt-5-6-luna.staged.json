@@ -1,0 +1,53 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "115",
+  "persona": "simon-leary",
+  "byline": "Simon Leary",
+  "bylinePopid": "POP-00016",
+  "article": "output/cron-compare/staged/sports_c115_simon-leary_packet-v2_openai-gpt-5-6-luna.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Harry Hayward",
+        "role": "quoted-source",
+        "popid": "POP-01223"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "I mean, the record is the record — 8-1, four straight. That's what we're all carrying. For me, the role shifts game to game, and I just try to be ready for whatever minutes Coach gives me. The Philly night was a good one, but it doesn't change how I approach the next one. You don't overthink it. You just keep playing your part and let the structure hold.",
+        "sourceRef": "citizenVoice PRESS Harry Hayward"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-db53291da7df",
+    "draftSha256": "88f4dd0eab7fa53861dfdd1650ce416ae3fef218c5f4f4361ec78eec2f471c75",
+    "verdict": "output/cron-compare/sports_c115_simon-leary_packet-v2_openai-gpt-5-6-luna.rhea.json",
+    "ranAt": "2026-11-13T00:16:40.662Z",
+    "contractScore": {
+      "opened": false,
+      "purposeMet": false,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 474,
+      "short": "The opening focuses on Hayward rather than the present sports structure, and the essay fails to interpret the structure as civic architecture.",
+      "score": 1,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "88f4dd0eab7fa53861dfdd1650ce416ae3fef218c5f4f4361ec78eec2f471c75",
+      "costUsd": 0.0019
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-13T00:16:47.769Z"
+}

@@ -1,0 +1,56 @@
+{
+  "office": "council_d5",
+  "cycle": 116,
+  "speaker": "Janae Rivers",
+  "cascadeSummary": "I am voting to execute and publish the D3 Fruitvale briefing record with district-level data this cycle — the expansion stays held until the record is real, and the D5 audit and Baylight review stay outstanding and named as such. On the apprenticeship pipeline, four cycles in one stage is a promise curdling into paperwork, so I am holding for the published placement-gap analysis with the West Oakland and Fruitvale findings and a responsible office and follow-up report behind each adjustment. East Oakland stays steady because neighbors carry it; my job this cycle is to make the record match what we told them.",
+  "statements": [
+    {
+      "statementId": "STMT-116-council_d5-001",
+      "type": "vote_statement",
+      "topic": "Oakland Alternative Response Initiative — D3 Fruitvale briefing execution and publication",
+      "initiative": "INIT-002",
+      "decision": "Vote YES to execute and publish the D3 Fruitvale briefing record with district-level and Fruitvale data this cycle; expansion remains held; the D5 audit and Baylight feasibility review are recorded as incomplete, not done.",
+      "quote": "The people who called 911 in Fruitvale and East Oakland get to see their own numbers in their own neighborhood before this program takes one more step.",
+      "fullStatement": "I am voting to execute and publish the D3 Fruitvale briefing record this cycle, with district-level data and the Fruitvale findings in the record where families can read them. Expansion stays held until that record exists — I said before that no Fruitvale expansion happens before a documented Fruitvale briefing, and I meant it. I also want the record to say plainly what is still missing: the D5 audit is not complete, and the Baylight feasibility review is not complete. East Oakland has been steady this cycle, and that is a result worth protecting — but it does not excuse a program from showing its data in the districts it touches. Safety reform earns confidence by showing district-level evidence, not by moving fast on an empty page.",
+      "disposition": "YES",
+      "actionAsked": "Execute and publish the D3 Fruitvale briefing record with district-level and Fruitvale data; hold expansion; mark the D5 audit and Baylight feasibility review as outstanding.",
+      "tone": "passionate-substantive",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-116-council_d5-002",
+      "type": "vote_statement",
+      "topic": "Oakland Youth Apprenticeship Pipeline — placement-gap analysis and adjustment plan publication",
+      "initiative": "INIT-007",
+      "decision": "Vote YES to require publication of the placement-gap analysis and adjustment plan this cycle, connecting each documented West Oakland and Fruitvale gap to a specific intake or placement adjustment with a named responsible office and a follow-up placement report; treat nonpublication as a failed implementation step.",
+      "quote": "We handed East Oakland's youth the first rung — now the ladder has to reach West Oakland and Fruitvale, in a document the public can inspect.",
+      "fullStatement": "Four cycles in one stage is not a phase — it is a promise curdling into paperwork. We handed East Oakland's youth the first rung, and I am not going to sit quiet while West Oakland and Fruitvale wait for a ladder that exists only in an announcement. This cycle the placement-gap analysis and adjustment plan gets published: each documented gap tied to a specific intake or placement adjustment, a responsible office named, and a follow-up placement report due with a date on it. Unresolved recruitment bottlenecks get named out loud, not folded into a phase report. And the recommendation has to rest on evidence, not on how long we have been in this stage. Our kids deserve a record they can hold, not another progress note that says implementation continues.",
+      "disposition": "YES",
+      "actionAsked": "Publish the placement-gap analysis and adjustment plan this cycle with named West Oakland and Fruitvale adjustments, a responsible office, a follow-up placement report, and the recruitment bottlenecks identified; treat nonpublication as a failed implementation step.",
+      "tone": "righteous-direct",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-116-council_d5-003",
+      "type": "statement",
+      "topic": "D5 constituent complaint and East Oakland follow-through",
+      "initiative": null,
+      "decision": "Record a YES on the Mayor's petition-response crosswalk requirement as it reaches East Oakland complaints, and release the D5 constituent-complaint resolution to the public record this cycle with the office and next date attached.",
+      "quote": "One unanswered complaint is one neighbor we told to wait — and I am done telling East Oakland to wait.",
+      "fullStatement": "The Mayor's directive on the ten-complaint reconciliation is right, and it lands on East Oakland too. A crosswalk covering all ten complaints, with a responsible office and a next date on every docket, is the minimum. I am releasing the D5 constituent-complaint resolution into the public record this cycle — not a promise that it is handled, but a record of what we were asked, what we found, and when the next answer comes. Seven of ten cannot stand in for ten. East Oakland's mood has been steady and street trade is holding, and I will not trade that stability for a quiet file. You called; the city answers in writing.",
+      "disposition": "statement",
+      "actionAsked": "Publish the D5 constituent-complaint resolution with the responsible office and next date and support the full ten-complaint public crosswalk.",
+      "tone": "community-celebratory",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    }
+  ]
+}

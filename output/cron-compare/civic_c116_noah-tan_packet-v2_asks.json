@@ -1,0 +1,320 @@
+[
+  {
+    "pop": "POP-00042",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00042\",\"name\":\"Ramon Vega\",\"role\":\"City Council District 4\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Noah Tan\",\"question\":\"Your own page at C115 says: \\\"Mild doesn't have to mean weak — I still believe that\\\". Is that still how you see mild? Speak only from that and your own reaction.\"},\"signal\":{\"kind\":\"beat-weather\",\"hood\":null,\"focus\":\"What six cycles of clear, mild weather do to a day in Oakland — who gets to treat it as a gift and who experiences it as a constant.\",\"src\":\"output/beats/Cycle_Weather.jsonl CycleID 116\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Ramon Vega — City Council District 4\",\"evidence\":[{\"id\":\"EV-PAGE-89146d28f8\",\"src\":\"cp-POP-00042-c115-PRESS-wed-chnocp\",\"text\":\"Mild doesn't have to mean weak — I still believe that.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"INTERPRETATION\",\"text\":\"Mild doesn't have to mean weak — I still believe that.\",\"src\":\"cp-POP-00042-c115-PRESS-wed-chnocp\",\"id\":\"F-4b4bec5bafcb\"},{\"t\":\"FACT\",\"text\":\"Ramon Vega — City Council District 4\",\"src\":\"Simulation_Ledger profile for POP-00042\",\"id\":\"F-9ab6e9303de2\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C12, Spring, holiday=Spring Equinox\",\"src\":\"output/world_summary_c116.md Calendar context (Simulation_Calendar)\",\"id\":\"F-647fd9067a33\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00042",
+        "name": "Ramon Vega",
+        "role": "City Council District 4",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Noah Tan",
+        "question": "Your own page at C115 says: \"Mild doesn't have to mean weak — I still believe that\". Is that still how you see mild? Speak only from that and your own reaction."
+      },
+      "signal": {
+        "kind": "beat-weather",
+        "hood": null,
+        "focus": "What six cycles of clear, mild weather do to a day in Oakland — who gets to treat it as a gift and who experiences it as a constant.",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 116"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Ramon Vega — City Council District 4",
+        "evidence": [
+          {
+            "id": "EV-PAGE-89146d28f8",
+            "src": "cp-POP-00042-c115-PRESS-wed-chnocp",
+            "text": "Mild doesn't have to mean weak — I still believe that."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "INTERPRETATION",
+          "text": "Mild doesn't have to mean weak — I still believe that.",
+          "src": "cp-POP-00042-c115-PRESS-wed-chnocp",
+          "id": "F-4b4bec5bafcb"
+        },
+        {
+          "t": "FACT",
+          "text": "Ramon Vega — City Council District 4",
+          "src": "Simulation_Ledger profile for POP-00042",
+          "id": "F-9ab6e9303de2"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+          "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+          "id": "F-647fd9067a33"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01039",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01039\",\"name\":\"Ximena Mehta\",\"role\":\"Bart Transit PR\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Noah Tan\",\"question\":\"Your own page at C116 says: \\\"Honestly, when I see 12th Street drop like that on a mild week with stuff going on downtown, I don't read it as people not wanting to ride\\\". Is that still how you see mild? Speak only from that and your own reaction.\"},\"signal\":{\"kind\":\"beat-weather\",\"hood\":null,\"focus\":\"What six cycles of clear, mild weather do to a day in Oakland — who gets to treat it as a gift and who experiences it as a constant.\",\"src\":\"output/beats/Cycle_Weather.jsonl CycleID 116\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Ximena Mehta — Bart Transit PR\",\"evidence\":[{\"id\":\"EV-PAGE-5005d3e3bc\",\"src\":\"cp-POP-01039-c116-PRESS-mon-necime\",\"text\":\"Honestly, when I see 12th Street drop like that on a mild week with stuff going on downtown, I don't read it as people not wanting to ride.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"INTERPRETATION\",\"text\":\"Honestly, when I see 12th Street drop like that on a mild week with stuff going on downtown, I don't read it as people not wanting to ride.\",\"src\":\"cp-POP-01039-c116-PRESS-mon-necime\",\"id\":\"F-ab4ab9c12777\"},{\"t\":\"FACT\",\"text\":\"Ximena Mehta — Bart Transit PR\",\"src\":\"Simulation_Ledger profile for POP-01039\",\"id\":\"F-2254619c1805\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C12, Spring, holiday=Spring Equinox\",\"src\":\"output/world_summary_c116.md Calendar context (Simulation_Calendar)\",\"id\":\"F-647fd9067a33\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01039",
+        "name": "Ximena Mehta",
+        "role": "Bart Transit PR",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Noah Tan",
+        "question": "Your own page at C116 says: \"Honestly, when I see 12th Street drop like that on a mild week with stuff going on downtown, I don't read it as people not wanting to ride\". Is that still how you see mild? Speak only from that and your own reaction."
+      },
+      "signal": {
+        "kind": "beat-weather",
+        "hood": null,
+        "focus": "What six cycles of clear, mild weather do to a day in Oakland — who gets to treat it as a gift and who experiences it as a constant.",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 116"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Ximena Mehta — Bart Transit PR",
+        "evidence": [
+          {
+            "id": "EV-PAGE-5005d3e3bc",
+            "src": "cp-POP-01039-c116-PRESS-mon-necime",
+            "text": "Honestly, when I see 12th Street drop like that on a mild week with stuff going on downtown, I don't read it as people not wanting to ride."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "INTERPRETATION",
+          "text": "Honestly, when I see 12th Street drop like that on a mild week with stuff going on downtown, I don't read it as people not wanting to ride.",
+          "src": "cp-POP-01039-c116-PRESS-mon-necime",
+          "id": "F-ab4ab9c12777"
+        },
+        {
+          "t": "FACT",
+          "text": "Ximena Mehta — Bart Transit PR",
+          "src": "Simulation_Ledger profile for POP-01039",
+          "id": "F-2254619c1805"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+          "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+          "id": "F-647fd9067a33"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01053",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01053\",\"name\":\"Rosario Medina\",\"role\":\"CBA Compliance Monitor, Fruitvale Transit Hub\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Noah Tan\",\"question\":\"Your own page at C116 says: \\\"The people on my platform don't have the luxury of working from home or driving in when the weather's mild\\\". Is that still how you see mild? Speak only from that and your own reaction.\"},\"signal\":{\"kind\":\"beat-weather\",\"hood\":null,\"focus\":\"What six cycles of clear, mild weather do to a day in Oakland — who gets to treat it as a gift and who experiences it as a constant.\",\"src\":\"output/beats/Cycle_Weather.jsonl CycleID 116\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub\",\"evidence\":[{\"id\":\"EV-PAGE-32e3868cea\",\"src\":\"cp-POP-01053-c116-PRESS-mon-fcigpj\",\"text\":\"The people on my platform don't have the luxury of working from home or driving in when the weather's mild.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"INTERPRETATION\",\"text\":\"The people on my platform don't have the luxury of working from home or driving in when the weather's mild.\",\"src\":\"cp-POP-01053-c116-PRESS-mon-fcigpj\",\"id\":\"F-df5c058ec5d0\"},{\"t\":\"FACT\",\"text\":\"Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub\",\"src\":\"Simulation_Ledger profile for POP-01053\",\"id\":\"F-85e0f61cb5fe\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C12, Spring, holiday=Spring Equinox\",\"src\":\"output/world_summary_c116.md Calendar context (Simulation_Calendar)\",\"id\":\"F-647fd9067a33\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01053",
+        "name": "Rosario Medina",
+        "role": "CBA Compliance Monitor, Fruitvale Transit Hub",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Noah Tan",
+        "question": "Your own page at C116 says: \"The people on my platform don't have the luxury of working from home or driving in when the weather's mild\". Is that still how you see mild? Speak only from that and your own reaction."
+      },
+      "signal": {
+        "kind": "beat-weather",
+        "hood": null,
+        "focus": "What six cycles of clear, mild weather do to a day in Oakland — who gets to treat it as a gift and who experiences it as a constant.",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 116"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub",
+        "evidence": [
+          {
+            "id": "EV-PAGE-32e3868cea",
+            "src": "cp-POP-01053-c116-PRESS-mon-fcigpj",
+            "text": "The people on my platform don't have the luxury of working from home or driving in when the weather's mild."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "INTERPRETATION",
+          "text": "The people on my platform don't have the luxury of working from home or driving in when the weather's mild.",
+          "src": "cp-POP-01053-c116-PRESS-mon-fcigpj",
+          "id": "F-df5c058ec5d0"
+        },
+        {
+          "t": "FACT",
+          "text": "Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub",
+          "src": "Simulation_Ledger profile for POP-01053",
+          "id": "F-85e0f61cb5fe"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+          "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+          "id": "F-647fd9067a33"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  }
+]

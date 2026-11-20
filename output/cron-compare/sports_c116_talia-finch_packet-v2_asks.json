@@ -1,0 +1,554 @@
+[
+  {
+    "pop": "POP-01022",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01022\",\"name\":\"Wilson Shepard\",\"role\":\"Head Coach, Oakland Oaks\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Talia Finch\",\"question\":\"What's your take on the team's performance so far? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-oaks-ground\",\"hood\":\"West Oakland\",\"focus\":\"Oaks fans and their reaction to the team's performance\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C116\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Wilson Shepard — Head Coach, Oakland Oaks — West Oakland\",\"evidence\":[{\"id\":\"EV-0a64be05e2\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C116\",\"text\":\"excited\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Notebook (feed): The Oaks are 8-1 after an 0-9 start through rookie camp and the preseason. Was the 0-9 really about rest and experiments, as Elliot Abraham said in C111, or did the team change something, and will Abraham say so now that it is working? Has the Draymond Green situation settled for him? Is this a defensive team now, or does Wilson Shepard's offense still have another gear? How much of Mike Paulson's attention does the A's offseason take from the Oaks? And with Jerami Grant's faile\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C116\",\"id\":\"F-e2582f6151f1\"},{\"t\":\"FACT\",\"text\":\"Notebook (feed): One cycle after this page asked whether Wilson Shepard's offense still had another gear, the Oaks found it in Denver. They won their second NBA Cup game 147-114, the most points in franchise history, topping the 135 they put up in Toronto. Oakland led by 5 after one, by 18 at the half and by 23 after three, then scored 42 in the fourth. The shooting numbers barely look real: 63 of 79 from the field, 80 percent, and 19 of 26 from three, 73 percent. The Oaks handed out 40 assists\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C116\",\"id\":\"F-cb83079b9144\"},{\"t\":\"FACT\",\"text\":\"Notebook (feed): Ten cycles ago this page was asking Wilson Shepard for answers. The Oaks went 0-4 in rookie camp and 0-5 in the preseason, 0-9 before they had played a game that counted, and in C109 the media wanted to know why the team was losing and why the full roster had never been on the floor together. Shepard, a first-year head coach who spent the previous season as an offensive assistant in Minnesota, kept saying the same thing. In C107 he said the Oaks would \\\"catch people off guard thi\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C116\",\"id\":\"F-2af0d182302c\"},{\"t\":\"FACT\",\"text\":\"Oaks — season-state (early-season), C116: From 0-9 to 8-1: Wilson Shepard's Oaks caught people off guard, just like he said they would\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C116\",\"id\":\"F-80b14f704ce2\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C116\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-871096fd8925\"},{\"t\":\"FACT\",\"text\":\"Oaks ground read C116 — excited\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C116\",\"id\":\"F-e5f3786b633c\"},{\"t\":\"FACT\",\"text\":\"excited\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C116\",\"id\":\"F-63ee48441d28\"},{\"t\":\"FACT\",\"text\":\"Oaks fans, C116: excited\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C116\",\"id\":\"F-4052dfdcce7d\"},{\"t\":\"FACT\",\"text\":\"Wilson Shepard — Head Coach, Oakland Oaks — West Oakland\",\"src\":\"Simulation_Ledger profile for POP-01022\",\"id\":\"F-a56b409a3900\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C12, Spring, holiday=Spring Equinox\",\"src\":\"output/world_summary_c116.md Calendar context (Simulation_Calendar)\",\"id\":\"F-647fd9067a33\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01022",
+        "name": "Wilson Shepard",
+        "role": "Head Coach, Oakland Oaks",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Talia Finch",
+        "question": "What's your take on the team's performance so far? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-oaks-ground",
+        "hood": "West Oakland",
+        "focus": "Oaks fans and their reaction to the team's performance",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C116"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Wilson Shepard — Head Coach, Oakland Oaks — West Oakland",
+        "evidence": [
+          {
+            "id": "EV-0a64be05e2",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C116",
+            "text": "excited"
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Notebook (feed): The Oaks are 8-1 after an 0-9 start through rookie camp and the preseason. Was the 0-9 really about rest and experiments, as Elliot Abraham said in C111, or did the team change something, and will Abraham say so now that it is working? Has the Draymond Green situation settled for him? Is this a defensive team now, or does Wilson Shepard's offense still have another gear? How much of Mike Paulson's attention does the A's offseason take from the Oaks? And with Jerami Grant's faile",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116",
+          "id": "F-e2582f6151f1"
+        },
+        {
+          "t": "FACT",
+          "text": "Notebook (feed): One cycle after this page asked whether Wilson Shepard's offense still had another gear, the Oaks found it in Denver. They won their second NBA Cup game 147-114, the most points in franchise history, topping the 135 they put up in Toronto. Oakland led by 5 after one, by 18 at the half and by 23 after three, then scored 42 in the fourth. The shooting numbers barely look real: 63 of 79 from the field, 80 percent, and 19 of 26 from three, 73 percent. The Oaks handed out 40 assists",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116",
+          "id": "F-cb83079b9144"
+        },
+        {
+          "t": "FACT",
+          "text": "Notebook (feed): Ten cycles ago this page was asking Wilson Shepard for answers. The Oaks went 0-4 in rookie camp and 0-5 in the preseason, 0-9 before they had played a game that counted, and in C109 the media wanted to know why the team was losing and why the full roster had never been on the floor together. Shepard, a first-year head coach who spent the previous season as an offensive assistant in Minnesota, kept saying the same thing. In C107 he said the Oaks would \"catch people off guard thi",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116",
+          "id": "F-2af0d182302c"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — season-state (early-season), C116: From 0-9 to 8-1: Wilson Shepard's Oaks caught people off guard, just like he said they would",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116",
+          "id": "F-80b14f704ce2"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C116",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-871096fd8925"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks ground read C116 — excited",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C116",
+          "id": "F-e5f3786b633c"
+        },
+        {
+          "t": "FACT",
+          "text": "excited",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C116",
+          "id": "F-63ee48441d28"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks fans, C116: excited",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116",
+          "id": "F-4052dfdcce7d"
+        },
+        {
+          "t": "FACT",
+          "text": "Wilson Shepard — Head Coach, Oakland Oaks — West Oakland",
+          "src": "Simulation_Ledger profile for POP-01022",
+          "id": "F-a56b409a3900"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+          "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+          "id": "F-647fd9067a33"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00170",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00170\",\"name\":\"Melton Neilon\",\"role\":\"Sourdough Baker\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Talia Finch\",\"question\":\"Your own page at C114 says: \\\"To be honest, the Oaks' loss still has me a bit down, but I'm trying not to overthink it\\\". Is that still how you see Oaks? Speak only from that and your own reaction.\"},\"signal\":{\"kind\":\"beat-oaks-ground\",\"hood\":\"West Oakland\",\"focus\":\"Oaks fans and their reaction to the team's performance\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C116\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Melton Neilon — Sourdough Baker\",\"evidence\":[{\"id\":\"EV-PAGE-bdb2f84aeb\",\"src\":\"cp-POP-00170-c114-PRESS-wed-fgkakh\",\"text\":\"To be honest, the Oaks' loss still has me a bit down, but I'm trying not to overthink it.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"INTERPRETATION\",\"text\":\"To be honest, the Oaks' loss still has me a bit down, but I'm trying not to overthink it.\",\"src\":\"cp-POP-00170-c114-PRESS-wed-fgkakh\",\"id\":\"F-19342b51d854\"},{\"t\":\"FACT\",\"text\":\"Melton Neilon — Sourdough Baker\",\"src\":\"Simulation_Ledger profile for POP-00170\",\"id\":\"F-1c49e2ddc864\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C12, Spring, holiday=Spring Equinox\",\"src\":\"output/world_summary_c116.md Calendar context (Simulation_Calendar)\",\"id\":\"F-647fd9067a33\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00170",
+        "name": "Melton Neilon",
+        "role": "Sourdough Baker",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Talia Finch",
+        "question": "Your own page at C114 says: \"To be honest, the Oaks' loss still has me a bit down, but I'm trying not to overthink it\". Is that still how you see Oaks? Speak only from that and your own reaction."
+      },
+      "signal": {
+        "kind": "beat-oaks-ground",
+        "hood": "West Oakland",
+        "focus": "Oaks fans and their reaction to the team's performance",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C116"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Melton Neilon — Sourdough Baker",
+        "evidence": [
+          {
+            "id": "EV-PAGE-bdb2f84aeb",
+            "src": "cp-POP-00170-c114-PRESS-wed-fgkakh",
+            "text": "To be honest, the Oaks' loss still has me a bit down, but I'm trying not to overthink it."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "INTERPRETATION",
+          "text": "To be honest, the Oaks' loss still has me a bit down, but I'm trying not to overthink it.",
+          "src": "cp-POP-00170-c114-PRESS-wed-fgkakh",
+          "id": "F-19342b51d854"
+        },
+        {
+          "t": "FACT",
+          "text": "Melton Neilon — Sourdough Baker",
+          "src": "Simulation_Ledger profile for POP-00170",
+          "id": "F-1c49e2ddc864"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+          "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+          "id": "F-647fd9067a33"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01046",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01046\",\"name\":\"Elliot Abraham\",\"role\":\"General Manager, Oakland Oaks\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Talia Finch\",\"question\":\"What have you seen, felt, or understood about \\\"Oaks fans and their reaction to the team's performance\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-oaks-ground\",\"hood\":\"West Oakland\",\"focus\":\"Oaks fans and their reaction to the team's performance\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C116\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Elliot Abraham — General Manager, Oakland Oaks — Jack London\",\"evidence\":[{\"id\":\"EV-44afe08416\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C116\",\"text\":\"excited\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Notebook (feed): The Oaks are 8-1 after an 0-9 start through rookie camp and the preseason. Was the 0-9 really about rest and experiments, as Elliot Abraham said in C111, or did the team change something, and will Abraham say so now that it is working? Has the Draymond Green situation settled for him? Is this a defensive team now, or does Wilson Shepard's offense still have another gear? How much of Mike Paulson's attention does the A's offseason take from the Oaks? And with Jerami Grant's faile\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C116\",\"id\":\"F-e2582f6151f1\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C116\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-871096fd8925\"},{\"t\":\"FACT\",\"text\":\"Oaks ground read C116 — excited\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C116\",\"id\":\"F-e5f3786b633c\"},{\"t\":\"FACT\",\"text\":\"excited\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C116\",\"id\":\"F-63ee48441d28\"},{\"t\":\"FACT\",\"text\":\"Oaks fans, C116: excited\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C116\",\"id\":\"F-4052dfdcce7d\"},{\"t\":\"FACT\",\"text\":\"Room mood, C116: confident\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C116\",\"id\":\"F-09f4f8129241\"},{\"t\":\"FACT\",\"text\":\"Oaks — season-state (early-season), C116: Was the 0-9 start by design, and is this a defensive team now?\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C116\",\"id\":\"F-3b94b6113d99\"},{\"t\":\"FACT\",\"text\":\"Context: record 8-1 · streak W4\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C116\",\"id\":\"F-a776a0d70846\"},{\"t\":\"FACT\",\"text\":\"Elliot Abraham — General Manager, Oakland Oaks — Jack London\",\"src\":\"Simulation_Ledger profile for POP-01046\",\"id\":\"F-a1d345025c8d\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C12, Spring, holiday=Spring Equinox\",\"src\":\"output/world_summary_c116.md Calendar context (Simulation_Calendar)\",\"id\":\"F-647fd9067a33\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01046",
+        "name": "Elliot Abraham",
+        "role": "General Manager, Oakland Oaks",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Talia Finch",
+        "question": "What have you seen, felt, or understood about \"Oaks fans and their reaction to the team's performance\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-oaks-ground",
+        "hood": "West Oakland",
+        "focus": "Oaks fans and their reaction to the team's performance",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C116"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Elliot Abraham — General Manager, Oakland Oaks — Jack London",
+        "evidence": [
+          {
+            "id": "EV-44afe08416",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C116",
+            "text": "excited"
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Notebook (feed): The Oaks are 8-1 after an 0-9 start through rookie camp and the preseason. Was the 0-9 really about rest and experiments, as Elliot Abraham said in C111, or did the team change something, and will Abraham say so now that it is working? Has the Draymond Green situation settled for him? Is this a defensive team now, or does Wilson Shepard's offense still have another gear? How much of Mike Paulson's attention does the A's offseason take from the Oaks? And with Jerami Grant's faile",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116",
+          "id": "F-e2582f6151f1"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C116",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-871096fd8925"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks ground read C116 — excited",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C116",
+          "id": "F-e5f3786b633c"
+        },
+        {
+          "t": "FACT",
+          "text": "excited",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C116",
+          "id": "F-63ee48441d28"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks fans, C116: excited",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116",
+          "id": "F-4052dfdcce7d"
+        },
+        {
+          "t": "FACT",
+          "text": "Room mood, C116: confident",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116",
+          "id": "F-09f4f8129241"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — season-state (early-season), C116: Was the 0-9 start by design, and is this a defensive team now?",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116",
+          "id": "F-3b94b6113d99"
+        },
+        {
+          "t": "FACT",
+          "text": "Context: record 8-1 · streak W4",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116",
+          "id": "F-a776a0d70846"
+        },
+        {
+          "t": "FACT",
+          "text": "Elliot Abraham — General Manager, Oakland Oaks — Jack London",
+          "src": "Simulation_Ledger profile for POP-01046",
+          "id": "F-a1d345025c8d"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+          "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+          "id": "F-647fd9067a33"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00527",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00527\",\"name\":\"Mike Paulson\",\"role\":\"General Manager, Oakland A's & The Oaks\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Talia Finch\",\"question\":\"As a resident of West Oakland, what have you seen, felt, or understood about \\\"Oaks fans and their reaction to the team's performance\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-oaks-ground\",\"hood\":\"West Oakland\",\"focus\":\"Oaks fans and their reaction to the team's performance\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C116\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Mike Paulson — General Manager, Oakland A's & The Oaks — West Oakland\",\"evidence\":[{\"id\":\"EV-efd57bd226\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C116\",\"text\":\"excited\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Notebook (feed): The Oaks are 8-1 after an 0-9 start through rookie camp and the preseason. Was the 0-9 really about rest and experiments, as Elliot Abraham said in C111, or did the team change something, and will Abraham say so now that it is working? Has the Draymond Green situation settled for him? Is this a defensive team now, or does Wilson Shepard's offense still have another gear? How much of Mike Paulson's attention does the A's offseason take from the Oaks? And with Jerami Grant's faile\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C116\",\"id\":\"F-e2582f6151f1\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C116\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-871096fd8925\"},{\"t\":\"FACT\",\"text\":\"Oaks ground read C116 — excited\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C116\",\"id\":\"F-e5f3786b633c\"},{\"t\":\"FACT\",\"text\":\"excited\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl @C116\",\"id\":\"F-63ee48441d28\"},{\"t\":\"FACT\",\"text\":\"Oaks fans, C116: excited\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C116\",\"id\":\"F-4052dfdcce7d\"},{\"t\":\"FACT\",\"text\":\"Room mood, C116: confident\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C116\",\"id\":\"F-09f4f8129241\"},{\"t\":\"FACT\",\"text\":\"Oaks — season-state (early-season), C116: Was the 0-9 start by design, and is this a defensive team now?\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C116\",\"id\":\"F-3b94b6113d99\"},{\"t\":\"FACT\",\"text\":\"Context: record 8-1 · streak W4\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl C116\",\"id\":\"F-a776a0d70846\"},{\"t\":\"FACT\",\"text\":\"Mike Paulson — General Manager, Oakland A's & The Oaks — West Oakland\",\"src\":\"Simulation_Ledger profile for POP-00527\",\"id\":\"F-efb577a45c6c\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C12, Spring, holiday=Spring Equinox\",\"src\":\"output/world_summary_c116.md Calendar context (Simulation_Calendar)\",\"id\":\"F-647fd9067a33\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00527",
+        "name": "Mike Paulson",
+        "role": "General Manager, Oakland A's & The Oaks",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Talia Finch",
+        "question": "As a resident of West Oakland, what have you seen, felt, or understood about \"Oaks fans and their reaction to the team's performance\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-oaks-ground",
+        "hood": "West Oakland",
+        "focus": "Oaks fans and their reaction to the team's performance",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C116"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Mike Paulson — General Manager, Oakland A's & The Oaks — West Oakland",
+        "evidence": [
+          {
+            "id": "EV-efd57bd226",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl @C116",
+            "text": "excited"
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Notebook (feed): The Oaks are 8-1 after an 0-9 start through rookie camp and the preseason. Was the 0-9 really about rest and experiments, as Elliot Abraham said in C111, or did the team change something, and will Abraham say so now that it is working? Has the Draymond Green situation settled for him? Is this a defensive team now, or does Wilson Shepard's offense still have another gear? How much of Mike Paulson's attention does the A's offseason take from the Oaks? And with Jerami Grant's faile",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116",
+          "id": "F-e2582f6151f1"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C116",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-871096fd8925"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks ground read C116 — excited",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C116",
+          "id": "F-e5f3786b633c"
+        },
+        {
+          "t": "FACT",
+          "text": "excited",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C116",
+          "id": "F-63ee48441d28"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks fans, C116: excited",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116",
+          "id": "F-4052dfdcce7d"
+        },
+        {
+          "t": "FACT",
+          "text": "Room mood, C116: confident",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116",
+          "id": "F-09f4f8129241"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — season-state (early-season), C116: Was the 0-9 start by design, and is this a defensive team now?",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116",
+          "id": "F-3b94b6113d99"
+        },
+        {
+          "t": "FACT",
+          "text": "Context: record 8-1 · streak W4",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C116",
+          "id": "F-a776a0d70846"
+        },
+        {
+          "t": "FACT",
+          "text": "Mike Paulson — General Manager, Oakland A's & The Oaks — West Oakland",
+          "src": "Simulation_Ledger profile for POP-00527",
+          "id": "F-efb577a45c6c"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+          "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+          "id": "F-647fd9067a33"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  }
+]

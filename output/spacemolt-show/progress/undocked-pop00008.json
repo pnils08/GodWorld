@@ -1,10 +1,44 @@
 {
   "session": "undocked-pop00008",
-  "takenAt": "2026-11-12T02:30:29.426Z",
+  "takenAt": "2026-11-15T02:30:28.895Z",
   "account": {
-    "total": 0,
-    "earned": [],
+    "total": 20,
+    "earned": [
+      {
+        "id": "first_contact",
+        "name": "First Contact",
+        "points": 5,
+        "at": "2026-11-12T02:41:27.930647418Z"
+      },
+      {
+        "id": "wanderer",
+        "name": "Wanderer",
+        "points": 10,
+        "at": "2026-11-12T02:46:11.183364042Z"
+      },
+      {
+        "id": "maiden_jump",
+        "name": "Maiden Jump",
+        "points": 5,
+        "at": "2026-11-12T02:33:18.311385265Z"
+      }
+    ],
     "progress": {
+      "first_contact": {
+        "name": "First Contact",
+        "points": 5,
+        "frac": 1
+      },
+      "wanderer": {
+        "name": "Wanderer",
+        "points": 10,
+        "frac": 1
+      },
+      "maiden_jump": {
+        "name": "Maiden Jump",
+        "points": 5,
+        "frac": 1
+      },
       "doors_and_corners": {
         "name": "Doors and Corners",
         "points": 5,
@@ -98,7 +132,7 @@
       "cartographer": {
         "name": "Cartographer",
         "points": 30,
-        "frac": 0.01
+        "frac": 0.13
       },
       "deep_core_master": {
         "name": "Deep Core Master",
@@ -108,12 +142,7 @@
       "far_traveler": {
         "name": "Far Traveler",
         "points": 25,
-        "frac": 0
-      },
-      "first_contact": {
-        "name": "First Contact",
-        "points": 5,
-        "frac": 0
+        "frac": 0.00042146666666666665
       },
       "folding_space": {
         "name": "Folding Space",
@@ -128,7 +157,7 @@
       "jump_master": {
         "name": "Jump Master",
         "points": 20,
-        "frac": 0
+        "frac": 0.00052
       },
       "second_star_to_the_right": {
         "name": "Second Star to the Right",
@@ -138,7 +167,7 @@
       "the_truth_is_out_there": {
         "name": "The Truth Is Out There",
         "points": 25,
-        "frac": 0
+        "frac": 0.1
       },
       "threshold_crosser": {
         "name": "Threshold Crosser",
@@ -153,17 +182,12 @@
       "voyager_i": {
         "name": "Voyager I",
         "points": 10,
-        "frac": 0.04
+        "frac": 0.52
       },
       "voyager_ii": {
         "name": "Voyager II",
         "points": 25,
-        "frac": 0.004
-      },
-      "wanderer": {
-        "name": "Wanderer",
-        "points": 10,
-        "frac": 0.1
+        "frac": 0.052
       },
       "where_no_one_has_gone_before": {
         "name": "Where No One Has Gone Before",
@@ -188,17 +212,17 @@
       "prospector_i": {
         "name": "Prospector I",
         "points": 10,
-        "frac": 0
+        "frac": 0.0007
       },
       "prospector_ii": {
         "name": "Prospector II",
         "points": 20,
-        "frac": 0
+        "frac": 0.000028
       },
       "prospector_iii": {
         "name": "Prospector III",
         "points": 40,
-        "frac": 0
+        "frac": 0.0000014
       },
       "scrap_magnate": {
         "name": "Scrap Magnate",
@@ -233,7 +257,7 @@
       "master_explorer": {
         "name": "Master Explorer",
         "points": 25,
-        "frac": 0
+        "frac": 0.02
       },
       "master_miner": {
         "name": "Master Miner",
@@ -282,11 +306,6 @@
       },
       "first_steps": {
         "name": "First Steps",
-        "points": 5,
-        "frac": 0
-      },
-      "maiden_jump": {
-        "name": "Maiden Jump",
         "points": 5,
         "frac": 0
       },

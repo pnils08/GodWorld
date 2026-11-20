@@ -1,0 +1,172 @@
+{
+  "empty": false,
+  "cycle": 116,
+  "kind": "tanya-sideline",
+  "desk": "sports",
+  "journalist": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014",
+    "persona": "tanya-cruz"
+  },
+  "pulse": {
+    "className": "record-only-sideline",
+    "score": 70,
+    "label": "Benji Dillon hasn't retired yet. The 5-time Cy Young winner leaves the door open after Keane walks through his"
+  },
+  "prewrite": {
+    "bagModes": [
+      {
+        "id": 10,
+        "name": "Inference Close"
+      }
+    ],
+    "anchorFacts": [
+      "Benji Dillon hasn't retired yet. The 5-time Cy Young winner leaves the door open after Keane walks through his.",
+      "Vinnie Keane made it official in C115. Benji Dillon has not, and the word now is that he is leaving the door open on purpose. Dillon came into 2041 calling it a farewell season, part of the Dynasty Five send-off alongside Keane and Kelley, and when the parade bus stopped after the seventh title it sounded like a goodbye: \"you realize you don't have to do it again. That's when you feel the weight of everything you've carried, and it's finally okay to put it down.",
+      "\" He has not put it down yet. The 5-time Cy Young winner, 38, made $13. 0M in 2041 and went 9-8 with a 4. 61 ERA, 120 strikeouts and 56 walks in 140. 2 innings, 2. 0 WAR, a long way from the 17-6 Cy Young chase of C34 and the 3 career no-hitters, but the A's still trusted him enough to move him to the bullpen in C104, his first relief appearance, and he handled it. His velocity is the story every reporter wants to write and nobody wants to be right about.",
+      "Dillon has been asking himself the same thing in private. In C109 he wondered, \"What's leaving me versus what I'm choosing to let go, is there even a difference anymore? \" and after the Keane farewell he asked where he fits now that Vinnie is done. He has reasons to stay home either way. He lives in Rockridge with Maya Torres-Dillon and their son Rick, and he opened the Dillon Clinic there. For the A's, a Dillon return would be a choice, not a need."
+    ],
+    "claim": "The supplied sports record is the weather. The clubhouse SET is allotted hallucination fitted to that line.",
+    "accessEvidence": {
+      "state": "ALLOTTED",
+      "facts": [
+        "clubhouse/sideline SET is the reporter's room"
+      ]
+    },
+    "quoteEvidence": {
+      "state": "NOT_SUPPLIED",
+      "quotes": []
+    },
+    "observationEvidence": {
+      "state": "ALLOTTED",
+      "facts": []
+    },
+    "missing": [
+      "Packet player quotes",
+      "injury or team-response facts beyond the supplied record",
+      "the rest of the feed notes (2 more sentences not carried)"
+    ],
+    "hooks": []
+  },
+  "hooks": [],
+  "seeds": [],
+  "story": {
+    "angle": "Benji Dillon hasn't retired yet. The 5-time Cy Young winner leaves the door open after Keane walks through his",
+    "label": "Benji Dillon hasn't retired yet. The 5-time Cy Young winner leaves the door open after Keane walks through his",
+    "hookLine": "Benji Dillon hasn't retired yet. The 5-time Cy Young winner leaves the door open after Keane walks through his",
+    "kind": "sideline-signal",
+    "hood": "Rockridge",
+    "popids": [
+      "POP-00018",
+      "POP-00527",
+      "POP-00528",
+      "POP-00001",
+      "POP-00081",
+      "POP-00003"
+    ],
+    "citizens": [
+      "Benji Dillon (POP-00018)",
+      "Mike Paulson (POP-00527)",
+      "Deacon Seymour (POP-00528)",
+      "Vinnie Keane (POP-00001)",
+      "Carmen Mesa (POP-00081)",
+      "Mark Aitken (POP-00003)"
+    ],
+    "ref": "world_summary_c116.md ## Sports",
+    "cycle": 116
+  },
+  "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview. The feed notes report what people said in paraphrase; none of it is a quote — never put it in quotation marks or attribute it as speech.",
+  "players": [
+    {
+      "name": "Benji Dillon",
+      "popid": "POP-00018",
+      "role": "Pitcher, Oakland A's Legend",
+      "neighborhood": "Rockridge",
+      "why": "feed-names"
+    },
+    {
+      "name": "Mike Paulson",
+      "popid": "POP-00527",
+      "role": "General Manager, Oakland A's & The Oaks",
+      "neighborhood": "West Oakland",
+      "why": "feed-names"
+    },
+    {
+      "name": "Deacon Seymour",
+      "popid": "POP-00528",
+      "role": "Manager, Oakland A's",
+      "neighborhood": "Lake Merritt",
+      "why": "feed-names"
+    },
+    {
+      "name": "Vinnie Keane",
+      "popid": "POP-00001",
+      "role": "Former Designated Hitter, Oakland A's Legend",
+      "neighborhood": "Piedmont Ave",
+      "why": "feed-names"
+    },
+    {
+      "name": "Carmen Mesa",
+      "popid": "POP-00081",
+      "role": "Starting Pitcher, Philadelphia Phillies",
+      "neighborhood": "Lake Merritt",
+      "why": "feed-names"
+    },
+    {
+      "name": "Mark Aitken",
+      "popid": "POP-00003",
+      "role": "First Baseman, Colorado Rockies",
+      "neighborhood": "Jack London",
+      "why": "feed-names"
+    }
+  ],
+  "scene": {
+    "colorRoom": "Clubhouse SET is authorized. Invented player quotes and real-world venues are not."
+  },
+  "candidates": [
+    {
+      "score": 70,
+      "label": "Benji Dillon hasn't retired yet. The 5-time Cy Young winner leaves the door open after Keane walks through his",
+      "cycle": 116
+    },
+    {
+      "score": 70,
+      "label": "From 0-9 to 8-1: Wilson Shepard's Oaks caught people off guard, just like he said they would",
+      "cycle": 116
+    },
+    {
+      "score": 58,
+      "label": "Does Mark Aitken stay in Oakland, and who leads the clubhouse if he goes?",
+      "cycle": 116
+    },
+    {
+      "score": 50,
+      "label": "Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+      "cycle": 116
+    },
+    {
+      "score": 50,
+      "label": "The bat or the glove? Kevin Clark's .327 against Giancarlo Hernandez's 96 fielding for third base",
+      "cycle": 116
+    },
+    {
+      "score": 50,
+      "label": "The Angels show strong interest in A's free agent Mark Aitken, the Oakland native whose whole life is in Jack London",
+      "cycle": 116
+    },
+    {
+      "score": 50,
+      "label": "The Oaks shoot 80 percent in Denver and set a franchise record. Oaks 147 - Nuggets 114",
+      "cycle": 116
+    },
+    {
+      "score": 50,
+      "label": "The Spurs hand the Oaks their first home loss. Spurs 126 - Oaks 117",
+      "cycle": 116
+    }
+  ],
+  "pointers": [
+    "output/world_summary_c116.md ## Sports",
+    "docs/media/TANYA_SIDELINE_BAG.md"
+  ]
+}

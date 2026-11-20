@@ -1,0 +1,38 @@
+{
+  "office": "council_d7",
+  "cycle": 116,
+  "speaker": "Warren Ashford",
+  "cascadeSummary": "In Cycle 116, District 7 calendared the mandatory Q3 clinical intake audit and recurring merchant walkthrough for the Temescal Community Health Center, refusing to certify operational milestones without public documentation. In response to the Planning Director's directive on Rockridge, I directed staff to maintain current baseline services while auditing municipal service responsiveness rather than throwing unmonitored commercial subsidies at a corridor with strong retail vitality. Finally, I reaffirmed my recorded YES vote on INIT-009 for Grand Lake commercial stabilization, backed by strict Chen-Vega audit triggers.",
+  "statements": [
+    {
+      "statementId": "STMT-116-council_d7-001",
+      "type": "vote_statement",
+      "topic": "Temescal Community Health Center Q3 Audit and Merchant Verification",
+      "initiative": "Temescal Community Health Center",
+      "decision": "Require timely filing of the Q3 clinical intake audit with HCAI and the Council Clerk alongside completion of the recurring Telegraph and 47th merchant verification walkthrough before certifying operational oversight.",
+      "quote": "Clinical dollars require clinical proof; an open facility does not get an exemption from delivering its quarterly audit data.",
+      "fullStatement": "The Temescal Community Health Center opened under budget and ahead of schedule, but delivering care does not waive fiscal accountability. Operating funds require verified intake metrics. This cycle, District 7 enforces the standing schedule: the Q3 intake audit must be formally submitted to HCAI and the Council Clerk, and the merchant-clinic verification walkthrough at Telegraph and 47th must be executed and documented. We do not rubber-stamp operational milestones based on ribbon cuttings or assumptions. The data must be placed on the public record first.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-116-council_d7-002",
+      "type": "policy_statement",
+      "topic": "Rockridge Corridor Service Review and Merchant Sentiment",
+      "initiative": null,
+      "decision": "Maintain current municipal baseline services while rejecting new unmonitored commercial corridor expenditures; direct City Planning and Public Works to verify municipal service delivery timelines rather than authorizing new subsidies.",
+      "quote": "When retail vitality climbs to 11.89 while merchant sentiment dips to -0.06, foot traffic is not the problem, and throwing unmonitored city cash at the street is not the solution.",
+      "fullStatement": "In response to Planning Director Mara Vance's inquiry regarding our Rockridge canvass: observed conditions confirm retail vitality has recovered to 11.89 and street trade remains busy with low crime. Merchant sentiment, however, registered at -0.06, demonstrating that commercial activity and merchant mood are decoupled. Our canvass established that merchants are frustrated by municipal service response times and regulatory friction, not a lack of customer volume. Writing a blank check for corridor marketing will not fix operational friction. District 7 supports maintaining existing baseline service allocations while demanding an objective audit of municipal service delivery response times before any budget adjustment is entertained.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-116-council_d7-003",
+      "type": "vote_statement",
+      "topic": "Commercial Stabilization for Grand Lake Recorded Roll Call",
+      "initiative": "Commercial Stabilization for Grand Lake",
+      "decision": "Record YES on INIT-009 contingent upon the strict preservation of the Chen-Vega milestone reporting and mandatory audit triggers.",
+      "quote": "Accountability triggers make the difference between a sound commercial investment and an open checkbook.",
+      "fullStatement": "On the full-council roll call for INIT-009 Commercial Stabilization for Grand Lake, my vote is recorded as YES because the mandatory Chen-Vega audit milestones and clawback provisions remain binding in the text. Fiscal conservatism is not about opposing every commercial expenditure; it is about guaranteeing that public funds are tied to verifiable performance benchmarks and transparent accounting. If those milestones are missed, funding pauses immediately. With those oversight gates secured in the record, this investment protects taxpayer dollars while assisting commercial stability.",
+      "trackerUpdates": {}
+    }
+  ]
+}

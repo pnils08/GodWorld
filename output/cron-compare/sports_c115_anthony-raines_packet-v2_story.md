@@ -13,3 +13,10 @@ The board says Taveras sits fifth on points with 20 over 3 entries, but he leads
 ## §3 INTERVIEWS (wake 2 — real citizens, real quotes)
 
 
+## §4 THE ARTICLE (wake 3)
+- draft: output/cron-compare/staged/sports_c115_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5.staged.md
+- disposition: staged
+- rhea: PASS
+- self-score footer: retired (reward loop — score in .wake.json contractScore)
+- tool use: canon_recall, canon_recall, sheet_read, citizen_lookup, citizen_lookup, sheet_read, canon_recall, canon_recall
+

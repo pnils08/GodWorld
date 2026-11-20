@@ -4,7 +4,7 @@
     "initiative": "transit-hub",
     "initiativeId": "INIT-003",
     "cycle": 115,
-    "generatedAt": "2026-11-09T08:49:28.838Z",
+    "generatedAt": "2026-11-16T00:03:19.413Z",
     "description": "Fruitvale Transit Hub Modernization — $230M for transit-oriented development and community hub"
   },
   "initiative": {
@@ -136,7 +136,7 @@
       "3": 20,
       "4": 81
     },
-    "avgIncome": 312343,
+    "avgIncome": 502433,
     "medianIncome": 95000,
     "atDisplacementRisk": 108,
     "linkedProfiles": [],

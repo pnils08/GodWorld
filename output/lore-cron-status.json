@@ -1,20 +1,20 @@
 {
-  "ranAt": "2026-11-08T08:54:36.019Z",
+  "ranAt": "2026-11-13T21:04:45.224Z",
   "target": {
-    "popid": "POP-00033",
-    "name": "John Ellis",
+    "popid": "POP-00036",
+    "name": "Marcus Osei",
     "tier": "2"
   },
   "ok": true,
   "errorMessage": null,
   "newQuarantineFiles": [
-    "lore_c114_john-ellis-deep-dive.md"
+    "marcus_osei_deep_dive/marcus_osei_deep_dive.md"
   ],
   "driveUploads": [
     {
-      "file": "lore_c114_john-ellis-deep-dive.md",
+      "file": "marcus_osei_deep_dive/marcus_osei_deep_dive.md",
       "uploaded": true
     }
   ],
-  "nextStep": "Run /lore-ingest on lore_c114_john-ellis-deep-dive.md at next research-build session."
+  "nextStep": "Run /lore-ingest on marcus_osei_deep_dive/marcus_osei_deep_dive.md at next research-build session."
 }

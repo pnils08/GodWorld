@@ -1,0 +1,60 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "116",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "rachel-torres",
+  "byline": {
+    "name": "Sgt. Rachel Torres",
+    "popid": "POP-00057",
+    "beatDomain": "SAFETY"
+  },
+  "laneEntries": 115,
+  "quotesLanded": 1,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "sheet_read",
+    "canon_recall",
+    "canon_recall"
+  ],
+  "toolCalls": 3,
+  "wordCount": 806,
+  "targetWords": "500-800",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 500",
+    "words": 806,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "1051e2040feba4408d1c278c904c9992b9f8537a73cb595777b605a11387f93b",
+    "costUsd": 0.001
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/3 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/civic_c116_rachel-torres_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "g: true }\n{\n  \"popId\": \"POP-00057\",\n  \"name\": \"Rachel Torres\",\n  \"recorded\": true,\n  \"text\": \"filed: Downtown's Eight: Two Arrests, Three Still Held, and a Clearance Rate That Counts Something Else\"\n}"
+  },
+  "ranAt": "2026-11-18T00:17:12.158Z"
+}

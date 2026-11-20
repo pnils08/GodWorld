@@ -1,0 +1,2215 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "116",
+  "persona": "p-slayer",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00008",
+      "name": "P Slayer",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+      "approach": "Fan-heat approach (P Slayer pulse): do NOT open from the FO press release or the award board. Open from gut or Oakland sensory (bar, lot, bleacher row, BART after). First-person I/we only. Pick 1–2 charge-bag modes from this slice. Friction pivot required — name the counter-argument, kill it. ONE real foil number max (from FoilNumber / AnchorFacts); never invent x-stats or roster moves. Hook PriorTake when present — eat it or double down (\"I was wrong\" is craft). End on charge that sticks: dare, confession, or update. Not Anthony. Not Hal. Not multi-voice sports-desk average.",
+      "creativeBrief": {
+        "kind": "fan-heat",
+        "fanCharge": "fury",
+        "bagModes": [
+          "1 Hate the Move",
+          "3 Friction Pivot"
+        ],
+        "friction": "The stands feel sold out or sold short — write into that gap, not the press release.",
+        "centralFeeling": "Oakland should feel the FO heard the bleachers.",
+        "priorTake": "NONE — write cold or invent no prior; wall may still inject at wake",
+        "sceneRule": "You may invent unnamed bar / lot / BART / bleacher texture that contradicts nothing on this slice. Do not invent star players, contracts, stats, or quotes. Named people stay on PLAYERS list or Tribune colleagues (Anthony, Hal, Mags) as foils."
+      }
+    },
+    "signal": {
+      "kind": "roster-move",
+      "hood": "Lake Merritt",
+      "score": null,
+      "src": "Oakland_Sports_Feed cycle 116; world_summary_c116.md \"## Sports\" · Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+      "team": "A's",
+      "nearby": [
+        {
+          "text": "A's | trade-recap | (off-season) | Carmen Mesa, Jose Fuentes, Giancarlo Hernandez, Mike Paulson, Kevin Clark, Ernesto Quintero",
+          "src": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (off-season) | Kevin Clark, Giancarlo Hernandez, Ernesto Quintero, Deacon Seymour, Mike Paulson",
+          "src": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | rumor | (off-season) | Mark Aitken, Mike Paulson, Ernesto Quintero",
+          "src": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | rumor | (off-season) | Benji Dillon, Mike Paulson, Deacon Seymour",
+          "src": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | season-state | (early-season) | Wilson Shepard, Mike Paulson, Elliot Abraham",
+          "src": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00081",
+          "name": "Carmen Mesa",
+          "profile": "Carmen Mesa — Starting Pitcher, Philadelphia Phillies",
+          "role": "Starting Pitcher, Philadelphia Phillies",
+          "hood": "Lake Merritt",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "Oakland_Sports_Feed cycle 116; world_summary_c116.md \"## Sports\" · Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+            "pop": "POP-00081",
+            "rowName": "Carmen Mesa",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01239",
+          "name": "Giancarlo Hernandez",
+          "profile": "Giancarlo Hernandez — Third Baseman, Oakland A's",
+          "role": "Third Baseman, Oakland A's",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "Oakland_Sports_Feed cycle 116; world_summary_c116.md \"## Sports\" · Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+            "pop": "POP-01239",
+            "rowName": "Giancarlo Hernandez",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00527",
+          "name": "Mike Paulson",
+          "profile": "Mike Paulson — General Manager, Oakland A's & The Oaks",
+          "role": "General Manager, Oakland A's & The Oaks",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "Oakland_Sports_Feed cycle 116; world_summary_c116.md \"## Sports\" · Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+            "pop": "POP-00527",
+            "rowName": "Mike Paulson",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00053",
+          "name": "Kevin Clark",
+          "profile": "Kevin Clark — Third Baseman, Oakland A's",
+          "role": "Third Baseman, Oakland A's",
+          "hood": "Jack London",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "Oakland_Sports_Feed cycle 116; world_summary_c116.md \"## Sports\" · Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+            "pop": "POP-00053",
+            "rowName": "Kevin Clark",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00050",
+          "name": "Ernesto Quintero",
+          "profile": "Ernesto Quintero — 3B/1B , Oakland A's",
+          "role": "3B/1B , Oakland A's",
+          "hood": "Baylight District",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "Oakland_Sports_Feed cycle 116; world_summary_c116.md \"## Sports\" · Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+            "pop": "POP-00050",
+            "rowName": "Ernesto Quintero",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00024",
+          "name": "Henry Rivas",
+          "profile": "Henry Rivas — Starting Pitcher, Oakland A's",
+          "role": "Starting Pitcher, Oakland A's",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "Oakland_Sports_Feed cycle 116; world_summary_c116.md \"## Sports\" · Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+            "pop": "POP-00024",
+            "rowName": "Henry Rivas",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01078",
+          "name": "Pablo Almanzar",
+          "profile": "Pablo Almanzar — SP / Oakland A's",
+          "role": "SP / Oakland A's",
+          "hood": "Chinatown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "Oakland_Sports_Feed cycle 116; world_summary_c116.md \"## Sports\" · Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+            "pop": "POP-01078",
+            "rowName": "Pablo Almanzar",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00015",
+          "name": "DeShawn Hartley",
+          "profile": "DeShawn Hartley — Photographer",
+          "role": "Photographer",
+          "hood": "Jack London",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 116,
+            "tag": "Sports-Fandom-Up-S",
+            "line": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and let the week's noise settle",
+            "highlightKind": "team",
+            "entity": "A's",
+            "predicate": "fan"
+          }
+        },
+        {
+          "pop": "POP-00148",
+          "name": "Gordon Tate",
+          "profile": "Gordon Tate — SUPERIOR COURT LIAISON",
+          "role": "SUPERIOR COURT LIAISON",
+          "hood": "Downtown",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 116,
+            "tag": "Sports-Fandom-Up-S",
+            "line": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and a sense of anticipation hangs in the air",
+            "highlightKind": "team",
+            "entity": "A's",
+            "predicate": "fan"
+          }
+        },
+        {
+          "pop": "POP-00248",
+          "name": "Joaquín Nakamura",
+          "profile": "Joaquín Nakamura — Kombucha Brewer",
+          "role": "Kombucha Brewer",
+          "hood": "Uptown",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 116,
+            "tag": "Sports-Fandom-Up-S",
+            "line": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and the hum of a bassline from a passing car near a street mural",
+            "highlightKind": "team",
+            "entity": "A's",
+            "predicate": "fan"
+          }
+        },
+        {
+          "pop": "POP-00282",
+          "name": "Edmund Alegero",
+          "profile": "Edmund Alegero — Construction laborer",
+          "role": "Construction laborer",
+          "hood": "Lake Merritt",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 116,
+            "tag": "Sports-Fandom-Up-S",
+            "line": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and the hum of a bassline from a passing car",
+            "highlightKind": "team",
+            "entity": "A's",
+            "predicate": "fan"
+          }
+        },
+        {
+          "pop": "POP-00536",
+          "name": "Evan Morello",
+          "profile": "Evan Morello — Actor",
+          "role": "Actor",
+          "hood": "Uptown",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 116,
+            "tag": "Sports-Fandom-Up-S",
+            "line": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and felt the season starting to turn",
+            "highlightKind": "team",
+            "entity": "A's",
+            "predicate": "fan"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C116",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-871096fd8925"
+      },
+      {
+        "t": "FACT",
+        "text": "Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+        "src": "Oakland_Sports_Feed cycle 116; world_summary_c116.md \"## Sports\" · Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+        "id": "F-a09331ee598f"
+      },
+      {
+        "t": "FACT",
+        "text": "The stands feel sold out or sold short — write into that gap, not the press release.",
+        "src": "Oakland_Sports_Feed cycle 116; world_summary_c116.md \"## Sports\" · Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+        "id": "F-ea0fe5944e85"
+      },
+      {
+        "t": "FACT",
+        "text": "StoryAngle (feed): Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+        "src": "Oakland_Sports_Feed cycle 116; world_summary_c116.md \"## Sports\" · Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+        "id": "F-b4908bb76645"
+      },
+      {
+        "t": "FACT",
+        "text": "Stats (feed): Giancarlo Hernandez/78OVR/A POT/96FLD/80REAC/70ARM/65CON R/68CON L, Antone Baez/70OVR/C POT, Carmen Mesa/81OVR/B POT/9IP/5H/12SO/0R (first start vs Cubs), Porter Broadway/70OVR/C POT, Jose Fuentes/63OVR/B POT, A's budget/$129.42M before/$130.35M after",
+        "src": "Oakland_Sports_Feed cycle 116; world_summary_c116.md \"## Sports\" · Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+        "id": "F-f834aeb1460c"
+      },
+      {
+        "t": "FACT",
+        "text": "Event: A's — trade-recap (off-season)",
+        "src": "Oakland_Sports_Feed cycle 116; world_summary_c116.md \"## Sports\" · Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+        "id": "F-7a0f9dccc567"
+      },
+      {
+        "t": "FACT",
+        "text": "NamesUsed: Carmen Mesa (SP), Porter Broadway (RP), Jose Fuentes (2B), Giancarlo Hernandez (3B), Antone Baez (LF), Mike Paulson (GM), Kevin Clark (3B), Ernesto Quintero (3B/1B)",
+        "src": "Oakland_Sports_Feed cycle 116; world_summary_c116.md \"## Sports\" · Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+        "id": "F-e76852f945e3"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ]
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "street",
+    "candidates": [
+      {
+        "pop": "POP-00081",
+        "name": "Carmen Mesa",
+        "role": "Starting Pitcher, Philadelphia Phillies",
+        "hood": "Lake Merritt",
+        "profile": "Carmen Mesa — Starting Pitcher, Philadelphia Phillies",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "Oakland_Sports_Feed cycle 116; world_summary_c116.md \"## Sports\" · Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+          "pop": "POP-00081",
+          "rowName": "Carmen Mesa",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01239",
+        "name": "Giancarlo Hernandez",
+        "role": "Third Baseman, Oakland A's",
+        "hood": null,
+        "profile": "Giancarlo Hernandez — Third Baseman, Oakland A's",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "Oakland_Sports_Feed cycle 116; world_summary_c116.md \"## Sports\" · Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+          "pop": "POP-01239",
+          "rowName": "Giancarlo Hernandez",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00527",
+        "name": "Mike Paulson",
+        "role": "General Manager, Oakland A's & The Oaks",
+        "hood": "West Oakland",
+        "profile": "Mike Paulson — General Manager, Oakland A's & The Oaks",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "Oakland_Sports_Feed cycle 116; world_summary_c116.md \"## Sports\" · Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+          "pop": "POP-00527",
+          "rowName": "Mike Paulson",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00053",
+        "name": "Kevin Clark",
+        "role": "Third Baseman, Oakland A's",
+        "hood": "Jack London",
+        "profile": "Kevin Clark — Third Baseman, Oakland A's",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "Oakland_Sports_Feed cycle 116; world_summary_c116.md \"## Sports\" · Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+          "pop": "POP-00053",
+          "rowName": "Kevin Clark",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00050",
+        "name": "Ernesto Quintero",
+        "role": "3B/1B , Oakland A's",
+        "hood": "Baylight District",
+        "profile": "Ernesto Quintero — 3B/1B , Oakland A's",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "Oakland_Sports_Feed cycle 116; world_summary_c116.md \"## Sports\" · Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+          "pop": "POP-00050",
+          "rowName": "Ernesto Quintero",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00024",
+        "name": "Henry Rivas",
+        "role": "Starting Pitcher, Oakland A's",
+        "hood": "West Oakland",
+        "profile": "Henry Rivas — Starting Pitcher, Oakland A's",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "Oakland_Sports_Feed cycle 116; world_summary_c116.md \"## Sports\" · Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+          "pop": "POP-00024",
+          "rowName": "Henry Rivas",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01078",
+        "name": "Pablo Almanzar",
+        "role": "SP / Oakland A's",
+        "hood": "Chinatown",
+        "profile": "Pablo Almanzar — SP / Oakland A's",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "Oakland_Sports_Feed cycle 116; world_summary_c116.md \"## Sports\" · Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+          "pop": "POP-01078",
+          "rowName": "Pablo Almanzar",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00015",
+        "name": "DeShawn Hartley",
+        "role": "Photographer",
+        "hood": "Jack London",
+        "profile": "DeShawn Hartley — Photographer",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 116,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and let the week's noise settle",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and let the week's noise settle"
+      },
+      {
+        "pop": "POP-00148",
+        "name": "Gordon Tate",
+        "role": "SUPERIOR COURT LIAISON",
+        "hood": "Downtown",
+        "profile": "Gordon Tate — SUPERIOR COURT LIAISON",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 116,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and a sense of anticipation hangs in the air",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and a sense of anticipation hangs in the air"
+      },
+      {
+        "pop": "POP-00248",
+        "name": "Joaquín Nakamura",
+        "role": "Kombucha Brewer",
+        "hood": "Uptown",
+        "profile": "Joaquín Nakamura — Kombucha Brewer",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 116,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and the hum of a bassline from a passing car near a street mural",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and the hum of a bassline from a passing car near a street mural"
+      },
+      {
+        "pop": "POP-00282",
+        "name": "Edmund Alegero",
+        "role": "Construction laborer",
+        "hood": "Lake Merritt",
+        "profile": "Edmund Alegero — Construction laborer",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 116,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and the hum of a bassline from a passing car",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and the hum of a bassline from a passing car"
+      },
+      {
+        "pop": "POP-00536",
+        "name": "Evan Morello",
+        "role": "Actor",
+        "hood": "Uptown",
+        "profile": "Evan Morello — Actor",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 116,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and felt the season starting to turn",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and felt the season starting to turn"
+      },
+      {
+        "pop": "POP-00631",
+        "name": "Derry Webb",
+        "role": "Youth Basketball Coach",
+        "hood": "Uptown",
+        "profile": "Derry Webb — Youth Basketball Coach",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 116,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and felt the season starting to turn near Fox Theater frontage",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and felt the season starting to turn near Fox Theater frontage"
+      },
+      {
+        "pop": "POP-00656",
+        "name": "Brianna Scott",
+        "role": "Food Truck Operator",
+        "hood": "Jack London",
+        "profile": "Brianna Scott — Food Truck Operator",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 116,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and the muffled thump of a car stereo playing last summer's hit",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and the muffled thump of a car stereo playing last summer's hit"
+      },
+      {
+        "pop": "POP-00748",
+        "name": "Vince Okoye",
+        "role": "Software engineer",
+        "hood": "Lake Merritt",
+        "profile": "Vince Okoye — Software engineer",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 116,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and still riding the high from last night's win",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and still riding the high from last night's win"
+      },
+      {
+        "pop": "POP-00756",
+        "name": "Ramon Solano",
+        "role": "Senior Pastor / Faith Leader",
+        "hood": "Fruitvale",
+        "profile": "Ramon Solano — Senior Pastor / Faith Leader",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 116,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and still riding the high from last night's win near the station plaza",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and still riding the high from last night's win near the station plaza"
+      },
+      {
+        "pop": "POP-00757",
+        "name": "Daniel Han",
+        "role": "Senior Pastor / Faith Leader",
+        "hood": "Lake Merritt",
+        "profile": "Daniel Han — Senior Pastor / Faith Leader",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 116,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and felt the season starting to turn",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and felt the season starting to turn"
+      },
+      {
+        "pop": "POP-00765",
+        "name": "Anand Krishnamurthy",
+        "role": "Senior Pastor / Faith Leader",
+        "hood": "Rockridge",
+        "profile": "Anand Krishnamurthy — Senior Pastor / Faith Leader",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 116,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and the quiet satisfaction of finding a favorite song on the jukebox",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and the quiet satisfaction of finding a favorite song on the jukebox"
+      },
+      {
+        "pop": "POP-00897",
+        "name": "Soledad Brown",
+        "role": "Paramedic",
+        "hood": "Laurel",
+        "profile": "Soledad Brown — Paramedic",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 116,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and counted what was going right for once",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and counted what was going right for once"
+      },
+      {
+        "pop": "POP-00980",
+        "name": "Karim Avery",
+        "role": "Security Guard",
+        "hood": "Fruitvale",
+        "profile": "Karim Avery — Security Guard",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 116,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and the hum of a bassline from a passing car near the station plaza",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and the hum of a bassline from a passing car near the station plaza"
+      },
+      {
+        "pop": "POP-01040",
+        "name": "Aaliyah Santos",
+        "role": "Office worker",
+        "hood": "Uptown",
+        "profile": "Aaliyah Santos — Office worker",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 116,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and the hum of a bassline from a passing car",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and the hum of a bassline from a passing car"
+      },
+      {
+        "pop": "POP-01057",
+        "name": "Nina Reyes",
+        "role": "actress",
+        "hood": "Fruitvale",
+        "profile": "Nina Reyes — actress",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 116,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and a sense of anticipation hangs in the air",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and a sense of anticipation hangs in the air"
+      },
+      {
+        "pop": "POP-01087",
+        "name": "Marcus King",
+        "role": "Warehouse worker",
+        "hood": "Glenview",
+        "profile": "Marcus King — Warehouse worker",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 116,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and the quiet satisfaction of finding a favorite song on the jukebox",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and the quiet satisfaction of finding a favorite song on the jukebox"
+      },
+      {
+        "pop": "POP-01125",
+        "name": "Ronald Phillips",
+        "role": "Barista",
+        "hood": "Ivy Hill",
+        "profile": "Ronald Phillips — Barista",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 116,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and a sense of anticipation hangs in the air",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and a sense of anticipation hangs in the air"
+      },
+      {
+        "pop": "POP-01137",
+        "name": "Wren Choi",
+        "role": "Youth mentor",
+        "hood": "Glenview",
+        "profile": "Wren Choi — Youth mentor",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 116,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and the quiet satisfaction of finding a favorite song on the jukebox",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and the quiet satisfaction of finding a favorite song on the jukebox"
+      },
+      {
+        "pop": "POP-01202",
+        "name": "Dahlia Cruz",
+        "role": "QA tester",
+        "hood": "Baylight District",
+        "profile": "Dahlia Cruz — QA tester",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 116,
+          "tag": "Sports-Fandom-Up-S",
+          "line": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and the muffled thump of a car stereo playing last summer's hit",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedLifeLine": "Y3C12 — [Sports-Fandom-Up-S] bought a new A's jersey and the muffled thump of a car stereo playing last summer's hit"
+      },
+      {
+        "pop": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "Former Designated Hitter, Oakland A's Legend",
+        "hood": "Piedmont Ave",
+        "profile": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "WFrBFBqxSLEeUaQA4qfFce",
+          "customId": "cp-POP-00001-c115-PRESS-fri-bblilh",
+          "cycle": 115,
+          "excerpt": "The A's trade is a mixed bag for me.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "The A's trade is a mixed bag for me."
+      },
+      {
+        "pop": "POP-00038",
+        "name": "Theo Park",
+        "role": "Communications Director",
+        "hood": "Rockridge",
+        "profile": "Theo Park — Communications Director",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "LSTk8ML7HriPSR5kvsqmF3",
+          "customId": "cp-POP-00038-c102-PRESS",
+          "cycle": 102,
+          "excerpt": "It's those little things - like how the guy ahead of me (pretty sure he's a janitor at the Islamic Center) was chatting with Danny Horn from the A's like they were old buddies.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "It's those little things - like how the guy ahead of me (pretty sure he's a janitor at the Islamic Center) was chatting with Danny Horn from the A's like they were old buddies."
+      },
+      {
+        "pop": "POP-00141",
+        "name": "Priya Narang",
+        "role": "EMS DIRECTOR",
+        "hood": "Uptown",
+        "profile": "Priya Narang — EMS DIRECTOR",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "Uo8istBtpPTbDUNhGNQniY",
+          "customId": "cp-POP-00141-c113-PRESS",
+          "cycle": 113,
+          "excerpt": "The A's winning season is a big deal for us in Uptown.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "The A's winning season is a big deal for us in Uptown."
+      },
+      {
+        "pop": "POP-00145",
+        "name": "Janelle Rourke",
+        "role": "ASSISTANT DISTRICT ATTORNEY (Community Safety)",
+        "hood": "Uptown",
+        "profile": "Janelle Rourke — ASSISTANT DISTRICT ATTORNEY (Community Safety)",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "FMHtKZEuaGKmy6wgvbJ5Xc",
+          "customId": "cp-POP-00145-c111-PRESS",
+          "cycle": 111,
+          "excerpt": "I bought a new A's jersey and, honestly, it's been really exciting to put it on.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I bought a new A's jersey and, honestly, it's been really exciting to put it on."
+      },
+      {
+        "pop": "POP-00174",
+        "name": "Tariq Jello",
+        "role": "Appliance Repair Technician",
+        "hood": "Laurel",
+        "profile": "Tariq Jello — Appliance Repair Technician",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "wiqSuFFt24WesXBeG2vACS",
+          "customId": "cp-POP-00174-c106-midday",
+          "cycle": 106,
+          "excerpt": "I see his face on those A's billboards downtown and I still nod like we're good.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I see his face on those A's billboards downtown and I still nod like we're good."
+      },
+      {
+        "pop": "POP-00181",
+        "name": "Xavier Ramington",
+        "role": "Herbalist",
+        "hood": "West Oakland",
+        "profile": "Xavier Ramington — Herbalist",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "aP5YeMEryXvzMre4oJ44Jv",
+          "customId": "cp-POP-00181-c101-night",
+          "cycle": 101,
+          "excerpt": "The A's news should excite me, but all I keep turning over is whether Vinnie really was downtown—if he's back, if he's okay.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "The A's news should excite me, but all I keep turning over is whether Vinnie really was downtown—if he's back, if he's okay."
+      },
+      {
+        "pop": "POP-00185",
+        "name": "Lila Patty",
+        "role": "Solar Panel Installation Lead",
+        "hood": "West Oakland",
+        "profile": "Lila Patty — Solar Panel Installation Lead",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "scqTCnQLg2npHCFytTwL2J",
+          "customId": "cp-POP-00185-c112-PRESS",
+          "cycle": 112,
+          "excerpt": "I bought a new A's jersey and took a walk near a new construction site to clear my head after a long week.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I bought a new A's jersey and took a walk near a new construction site to clear my head after a long week."
+      },
+      {
+        "pop": "POP-00190",
+        "name": "Jackson Sift",
+        "role": "Ex-Offender Reentry Counselor",
+        "hood": "West Oakland",
+        "profile": "Jackson Sift — Ex-Offender Reentry Counselor",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "ajbg29ybL8z4b7gciL9T1K",
+          "customId": "cp-POP-00190-c109-PRESS",
+          "cycle": 109,
+          "excerpt": "I've been feeling the energy in the city, especially with the A's doing well.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I've been feeling the energy in the city, especially with the A's doing well."
+      },
+      {
+        "pop": "POP-00192",
+        "name": "Bea Cartier",
+        "role": "Roofing Contractor",
+        "hood": "Laurel",
+        "profile": "Bea Cartier — Roofing Contractor",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "yG1Q5da9amEzFgZj45MsaR",
+          "customId": "cp-POP-00192-c102-morning",
+          "cycle": 102,
+          "excerpt": "Maybe it's seeing those A's players around town, all that energy and purpose, that makes me wonder if I settled too soon.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "Maybe it's seeing those A's players around town, all that energy and purpose, that makes me wonder if I settled too soon."
+      },
+      {
+        "pop": "POP-00194",
+        "name": "Yu Zen",
+        "role": "Commercial Insurance Broker",
+        "hood": "Rockridge",
+        "profile": "Yu Zen — Commercial Insurance Broker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "1azVikaPJW3dQZzTLqFx2i",
+          "customId": "cp-POP-00194-c113-PRESS-fri-ihdbmi",
+          "cycle": 113,
+          "excerpt": "I can tell you that I've noticed the commotion at the train station when the delayed train leaves, and I've seen the regulars debating the A's game at the diner, but that's about it.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I can tell you that I've noticed the commotion at the train station when the delayed train leaves, and I've seen the regulars debating the A's game at the diner, but that's about it."
+      },
+      {
+        "pop": "POP-00196",
+        "name": "Inga Creator",
+        "role": "Boutique Owner",
+        "hood": "Uptown",
+        "profile": "Inga Creator — Boutique Owner",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "pEcgqPCmN99gx3otHor9d9",
+          "customId": "cp-POP-00196-c111-PRESS",
+          "cycle": 111,
+          "excerpt": "I celebrated by buying a new A's jersey - it's my way of showing team spirit.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I celebrated by buying a new A's jersey - it's my way of showing team spirit."
+      },
+      {
+        "pop": "POP-00200",
+        "name": "Evan Lewis",
+        "role": "Bus driver",
+        "hood": "Laurel",
+        "profile": "Evan Lewis — Bus driver",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "cCk55Ty4iifcsNKdnxZzSd",
+          "customId": "cp-POP-00200-c115-PRESS-fri-cpmpda",
+          "cycle": 115,
+          "excerpt": "The A's trade news is what's been on my mind lately, and how it's affecting the community.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "The A's trade news is what's been on my mind lately, and how it's affecting the community."
+      },
+      {
+        "pop": "POP-00231",
+        "name": "Calvin Turner",
+        "role": "Mechanic",
+        "hood": "Fruitvale",
+        "profile": "Calvin Turner — Mechanic",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "wQKk6AU7tLKP7gFxpuuQot",
+          "customId": "cp-POP-00231-c103-evening",
+          "cycle": 103,
+          "excerpt": "Maybe it's that stupid argument about the A's trades—she took it personal when I said Richards was better off in New York.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "Maybe it's that stupid argument about the A's trades—she took it personal when I said Richards was better off in New York."
+      },
+      {
+        "pop": "POP-00233",
+        "name": "Mason Walt",
+        "role": "Electrician",
+        "hood": "Rockridge",
+        "profile": "Mason Walt — Electrician",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "Xj4mNMUajCorMiQVuYLCTD",
+          "customId": "cp-POP-00233-c100-evening",
+          "cycle": 100,
+          "excerpt": "Sometimes I count how many A's caps walk past and wonder if any of them know Vinnie like I do.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "Sometimes I count how many A's caps walk past and wonder if any of them know Vinnie like I do."
+      },
+      {
+        "pop": "POP-00235",
+        "name": "Aaliyah Brennan",
+        "role": "Mobile Clinic Nurse",
+        "hood": "Lake Merritt",
+        "profile": "Aaliyah Brennan — Mobile Clinic Nurse",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "RUdR2ceiAZA9G21uYJYUEc",
+          "customId": "cp-POP-00235-c110-PRESS",
+          "cycle": 110,
+          "excerpt": "To be honest, I'm not sure what my performance means for my standing in the city - I've just been trying to keep up with my work at the mobile clinic and enjoy the little moments, like the A's winning streak.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "To be honest, I'm not sure what my performance means for my standing in the city - I've just been trying to keep up with my work at the mobile clinic and enjoy the little moments, like the A's winning streak."
+      },
+      {
+        "pop": "POP-00247",
+        "name": "Baxter Thompson",
+        "role": "Construction laborer",
+        "hood": "Rockridge",
+        "profile": "Baxter Thompson — Construction laborer",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "gKea4HdpZv4WUfF7uvUJWZ",
+          "customId": "cp-POP-00247-c102-evening",
+          "cycle": 102,
+          "excerpt": "That A's team firing on all cylinders reminds me of being 30 and feeling unstoppable—now I gotta find that fire in different ways.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "That A's team firing on all cylinders reminds me of being 30 and feeling unstoppable—now I gotta find that fire in different ways."
+      },
+      {
+        "pop": "POP-00272",
+        "name": "Joseph Cramp",
+        "role": "Janitor",
+        "hood": "Downtown",
+        "profile": "Joseph Cramp — Janitor",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "v3hKf6zGX6CMmTGJ1vPyD7",
+          "customId": "cp-POP-00272-c111-midday",
+          "cycle": 111,
+          "excerpt": "I got a soft spot for the A's, always have, but the real win for me is that this town finally feels like it’s got a pulse again after all those years of near-misses.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I got a soft spot for the A's, always have, but the real win for me is that this town finally feels like it’s got a pulse again after all those years of near-misses."
+      },
+      {
+        "pop": "POP-00273",
+        "name": "Trenton Nawan",
+        "role": "Server",
+        "hood": "Jack London",
+        "profile": "Trenton Nawan — Server",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "Tz12aZoyTPT4H31as9vi8v",
+          "customId": "cp-POP-00273-c106-PRESS",
+          "cycle": 106,
+          "excerpt": "Honestly, I don't follow the A's trades too closely—too busy keeping up with my own hustle—but when you hear folks at the diner talking about Cy Newel's ERA and Busch's batting average, even I can tell they're building something different t",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "Honestly, I don't follow the A's trades too closely—too busy keeping up with my own hustle—but when you hear folks at the diner talking about Cy Newel's ERA and Busch's batting average, even I can tell they're building something different t"
+      },
+      {
+        "pop": "POP-00300",
+        "name": "Belle Lopez",
+        "role": "Home Health Aide",
+        "hood": "Jack London",
+        "profile": "Belle Lopez — Home Health Aide",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "PQTG4M6bcjahexbiwKcn6P",
+          "customId": "cp-POP-00300-c114-night-thu",
+          "cycle": 114,
+          "excerpt": "I guess I just want the A's to be smart, not flashy—spend on the kids coming up, trust the farm, because that's how you build something that lasts.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I guess I just want the A's to be smart, not flashy—spend on the kids coming up, trust the farm, because that's how you build something that lasts."
+      },
+      {
+        "pop": "POP-00494",
+        "name": "Weston Herrin",
+        "role": "Refugee Resettlement Case Worker",
+        "hood": "Chinatown",
+        "profile": "Weston Herrin — Refugee Resettlement Case Worker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "YU5qPb5EjoUweq7qsSAYqf",
+          "customId": "cp-POP-00494-c113-night-sat",
+          "cycle": 113,
+          "excerpt": "Today, this old couple on 8th asked me if the A's still play in Oakland, and I told them about the new ballpark talks.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "Today, this old couple on 8th asked me if the A's still play in Oakland, and I told them about the new ballpark talks."
+      },
+      {
+        "pop": "POP-00495",
+        "name": "Rosalind Young",
+        "role": "Smoke Shop Owner",
+        "hood": "Laurel",
+        "profile": "Rosalind Young — Smoke Shop Owner",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "LBmmX2jC9YWEk1eGfyFFKP",
+          "customId": "cp-POP-00495-c107-PRESS",
+          "cycle": 107,
+          "excerpt": "I've seen the A's do well lately, and it feels like the whole neighborhood is buzzing about it.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I've seen the A's do well lately, and it feels like the whole neighborhood is buzzing about it."
+      },
+      {
+        "pop": "POP-00498",
+        "name": "Beatrix Santos",
+        "role": "Herbalist",
+        "hood": "Temescal",
+        "profile": "Beatrix Santos — Herbalist",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "y5kiuyszoiQWGrFQUMtX6a",
+          "customId": "cp-POP-00498-c115-CONVO-sat",
+          "cycle": 115,
+          "excerpt": "I saw Danny Horn from the A's walk in there the other day with his kids, and it just made me smile—everyone's using it, not just the people who fought for it.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I saw Danny Horn from the A's walk in there the other day with his kids, and it just made me smile—everyone's using it, not just the people who fought for it."
+      },
+      {
+        "pop": "POP-00514",
+        "name": "Vincent Ramirez",
+        "role": "OPOA President",
+        "hood": "Lake Merritt",
+        "profile": "Vincent Ramirez — OPOA President",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "3Zd8o2WBhwV4g7fV2XZrgk",
+          "customId": "cp-POP-00514-c114-midday-tue",
+          "cycle": 114,
+          "excerpt": "He’s got his retired life and his opinions about the A's, and I’ve got my meetings and my quiet nights with Pilar.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "He’s got his retired life and his opinions about the A's, and I’ve got my meetings and my quiet nights with Pilar."
+      },
+      {
+        "pop": "POP-00539",
+        "name": "Lena Cross",
+        "role": "Actor",
+        "hood": "Piedmont Ave",
+        "profile": "Lena Cross — Actor",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "V7kqdzu3daZNPCqfoQfnnF",
+          "customId": "cp-POP-00539-c115-PRESS-fri-kajkmk",
+          "cycle": 115,
+          "excerpt": "I mean, I've seen some new faces around, and the A's are always a hot topic, so maybe he's getting some buzz in certain circles.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I mean, I've seen some new faces around, and the A's are always a hot topic, so maybe he's getting some buzz in certain circles."
+      },
+      {
+        "pop": "POP-00632",
+        "name": "Rico Valez",
+        "role": "Musician",
+        "hood": "Fruitvale",
+        "profile": "Rico Valez — Musician",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "QWzx4f3xaaWrF5qbP8mR5T",
+          "customId": "cp-POP-00632-c102-PRESS",
+          "cycle": 102,
+          "excerpt": "Look, I'm just a guy who plays guitar at La Estrella on weekends and watches the A's when Allen Lopez is pitching.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "Look, I'm just a guy who plays guitar at La Estrella on weekends and watches the A's when Allen Lopez is pitching."
+      },
+      {
+        "pop": "POP-00642",
+        "name": "Ollie Campbell",
+        "role": "Bakery Worker",
+        "hood": "Jack London",
+        "profile": "Ollie Campbell — Bakery Worker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "3WppGYjrRteh5xZoEcho9R",
+          "customId": "cp-POP-00642-c106-PRESS",
+          "cycle": 106,
+          "excerpt": "Honestly, I don't follow baseball too closely, but folks at the bakery were saying the A's traded some good players this season.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "Honestly, I don't follow baseball too closely, but folks at the bakery were saying the A's traded some good players this season."
+      },
+      {
+        "pop": "POP-00643",
+        "name": "Guadalupe Lupe",
+        "role": "Bartender",
+        "hood": "Jack London",
+        "profile": "Guadalupe Lupe — Bartender",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "4Bwk7Qcyz5Lue5nZieVKEV",
+          "customId": "cp-POP-00643-c106-PRESS",
+          "cycle": 106,
+          "excerpt": "Honestly, I don't follow the A's too closely, but from what I hear at the bar, people seem pretty bummed about losing some of their favorite players this season.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "Honestly, I don't follow the A's too closely, but from what I hear at the bar, people seem pretty bummed about losing some of their favorite players this season."
+      },
+      {
+        "pop": "POP-00644",
+        "name": "Rafael Pilgrim",
+        "role": "Server",
+        "hood": "Fruitvale",
+        "profile": "Rafael Pilgrim — Server",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "7tktJtoajh2xuSmRoXZQjP",
+          "customId": "cp-POP-00644-c107-PRESS",
+          "cycle": 107,
+          "excerpt": "Makes me think the A's might actually have a shot if they keep pitching like that when it counts.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "Makes me think the A's might actually have a shot if they keep pitching like that when it counts."
+      },
+      {
+        "pop": "POP-00649",
+        "name": "Jire Hilt",
+        "role": "Line Cook",
+        "hood": "Jack London",
+        "profile": "Jire Hilt — Line Cook",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "x6djA1dD5CosF7DmDC85AU",
+          "customId": "cp-POP-00649-c112-PRESS",
+          "cycle": 112,
+          "excerpt": "I bought a new A's jersey and I have to say, it's got me pretty excited.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I bought a new A's jersey and I have to say, it's got me pretty excited."
+      },
+      {
+        "pop": "POP-00663",
+        "name": "Soo Loo",
+        "role": "Corporate Accountant",
+        "hood": "Downtown",
+        "profile": "Soo Loo — Corporate Accountant",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "jF1rXiEudWaBXWChpbzKLh",
+          "customId": "cp-POP-00663-c108-PRESS",
+          "cycle": 108,
+          "excerpt": "I've been noticing how the city's energy shifts when the A's are doing well.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I've been noticing how the city's energy shifts when the A's are doing well."
+      },
+      {
+        "pop": "POP-00691",
+        "name": "Tom Jilner",
+        "role": "Wine Bar Owner",
+        "hood": "Rockridge",
+        "profile": "Tom Jilner — Wine Bar Owner",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "6A8zq7d3sNoEthsEFG6hqi",
+          "customId": "cp-POP-00691-c110-CONVO",
+          "cycle": 110,
+          "excerpt": "*Tugs at my suit sleeve absentmindedly* \"Kid's tougher than I was at his age—tells the A's stats like scripture since they won the Series.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "*Tugs at my suit sleeve absentmindedly* \"Kid's tougher than I was at his age—tells the A's stats like scripture since they won the Series."
+      },
+      {
+        "pop": "POP-00770",
+        "name": "Kato Rivers",
+        "role": "Fitness Trainer",
+        "hood": "Laurel",
+        "profile": "Kato Rivers — Fitness Trainer",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "6ovGYPVimo9YaRptX3MkQ9",
+          "customId": "cp-POP-00770-c110-PRESS",
+          "cycle": 110,
+          "excerpt": "I've been too busy with my daily routine and watching the A's games to think about anything like that.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I've been too busy with my daily routine and watching the A's games to think about anything like that."
+      },
+      {
+        "pop": "POP-00789",
+        "name": "Elias Varek",
+        "role": "Founder of Civis Systems",
+        "hood": "West Oakland",
+        "profile": "Elias Varek — Founder of Civis Systems",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "4cWDkTDYMmfYrx5cHgvkzk",
+          "customId": "cp-POP-00789-c101-CONVO",
+          "cycle": 101,
+          "excerpt": "Between the port expansion and the A's new stadium plans, seems like we're the afterthought again.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "Between the port expansion and the A's new stadium plans, seems like we're the afterthought again."
+      },
+      {
+        "pop": "POP-00790",
+        "name": "Marcus Webb",
+        "role": "OEWD Program Director",
+        "hood": "Downtown",
+        "profile": "Marcus Webb — OEWD Program Director",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "aE2GrhuHFLEmNNBoWEFTDF",
+          "customId": "cp-POP-00790-c101-morning",
+          "cycle": 101,
+          "excerpt": "I love the A's, but how many affordable housing units could that build in West Oakland?",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I love the A's, but how many affordable housing units could that build in West Oakland?"
+      },
+      {
+        "pop": "POP-00791",
+        "name": "Elena Soria Dominguez",
+        "role": "Transit Hub Planning Lead",
+        "hood": "Fruitvale",
+        "profile": "Elena Soria Dominguez — Transit Hub Planning Lead",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "1n7RmRRVXNofDXe5wYigLT",
+          "customId": "cp-POP-00791-c114-work-thu",
+          "cycle": 114,
+          "excerpt": "I keep going over the alignment in my head, checking the bus pull-outs and the panadería's loading zone, and I'm tired of being the one who has to hold all of that alone.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I keep going over the alignment in my head, checking the bus pull-outs and the panadería's loading zone, and I'm tired of being the one who has to hold all of that alone."
+      },
+      {
+        "pop": "POP-00801",
+        "name": "Maurice Franklin",
+        "role": "Drone Fleet Coordinator",
+        "hood": "Rockridge",
+        "profile": "Maurice Franklin — Drone Fleet Coordinator",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "jG6kqTGzeCkmyoZPgxkxmq",
+          "customId": "cp-POP-00801-c111-midday",
+          "cycle": 111,
+          "excerpt": "I remember writing that letter to the Tribune about believing in Oakland again, and now the kids in Rockridge are wearing A's caps to school like it's the most natural thing in the world.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I remember writing that letter to the Tribune about believing in Oakland again, and now the kids in Rockridge are wearing A's caps to school like it's the most natural thing in the world."
+      },
+      {
+        "pop": "POP-00806",
+        "name": "Nakia Pena",
+        "role": "Independent Bookstore Owner",
+        "hood": "Temescal",
+        "profile": "Nakia Pena — Independent Bookstore Owner",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "i9xag9MB5aFzbg26Z5bJv2",
+          "customId": "cp-POP-00806-c113-morning",
+          "cycle": 113,
+          "excerpt": "And I keep catchin' myself checkin' the A's schedule, wonderin' if Danny's got another walk-off in him tonight — that's the one thing that can actually lift my mood without costin' me a dime.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "And I keep catchin' myself checkin' the A's schedule, wonderin' if Danny's got another walk-off in him tonight — that's the one thing that can actually lift my mood without costin' me a dime."
+      },
+      {
+        "pop": "POP-00842",
+        "name": "Wanjiru Liu",
+        "role": "Electrician",
+        "hood": "Rockridge",
+        "profile": "Wanjiru Liu — Electrician",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "tYDNcge1pv4zdG2AEe9cTx",
+          "customId": "cp-POP-00842-c108-PRESS",
+          "cycle": 108,
+          "excerpt": "I've been keeping up with the A's, they're doing great this season, and that's been exciting for the city.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I've been keeping up with the A's, they're doing great this season, and that's been exciting for the city."
+      },
+      {
+        "pop": "POP-00926",
+        "name": "Briar Soto",
+        "role": "Electrician",
+        "hood": "KONO",
+        "profile": "Briar Soto — Electrician",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "zvMYmJbuV44qM4y6Rma3Eb",
+          "customId": "cp-POP-00926-c115-midday-wed",
+          "cycle": 115,
+          "excerpt": "The A's sent Mesa away, and I keep circling back to it.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "The A's sent Mesa away, and I keep circling back to it."
+      },
+      {
+        "pop": "POP-00943",
+        "name": "Pilar Ramirez",
+        "role": "Paramedic",
+        "hood": "Lake Merritt",
+        "profile": "Pilar Ramirez — Paramedic",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "QYTZTNNQCkG2dSR4Ruz5dS",
+          "customId": "cp-POP-00943-c114-PRESS-sun-gpfibm",
+          "cycle": 114,
+          "excerpt": "To be honest, I'm not really sure how the community can benefit from the A's success.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "To be honest, I'm not really sure how the community can benefit from the A's success."
+      },
+      {
+        "pop": "POP-00969",
+        "name": "Elijah Campbell",
+        "role": "Taxi Driver",
+        "hood": "Adams Point",
+        "profile": "Elijah Campbell — Taxi Driver",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "QGpgYhSHxkvjTtfU6az9QL",
+          "customId": "cp-POP-00969-c115-PRESS-thu-chjjaf",
+          "cycle": 115,
+          "excerpt": "It's funny, I also argued with some guys at the barbershop about the A's bullpen order.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "It's funny, I also argued with some guys at the barbershop about the A's bullpen order."
+      },
+      {
+        "pop": "POP-00998",
+        "name": "Mariana Kapoor",
+        "role": "student",
+        "hood": "Chinatown",
+        "profile": "Mariana Kapoor — student",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "oveav2LNkMEfgpuCczU9EC",
+          "customId": "cp-POP-00998-c114-PRESS-sun-eahfka",
+          "cycle": 114,
+          "excerpt": "To be honest, I don't really know much about the A's success.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "To be honest, I don't really know much about the A's success."
+      },
+      {
+        "pop": "POP-01001",
+        "name": "Mateo Jilner",
+        "role": "student",
+        "hood": "Rockridge",
+        "profile": "Mateo Jilner — student",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "p6Wgrmpfy7Tw1N22Q28Yhj",
+          "customId": "cp-POP-01001-c102-CONVO",
+          "cycle": 102,
+          "excerpt": "Actually just taped up the A's schedule in our closet—can you believe they're 107-31?",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "Actually just taped up the A's schedule in our closet—can you believe they're 107-31?"
+      },
+      {
+        "pop": "POP-01005",
+        "name": "Jun Fisher",
+        "role": "student",
+        "hood": "Downtown",
+        "profile": "Jun Fisher — student",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "Q7hQmqmCFPE1wJqkBpN1ZD",
+          "customId": "cp-POP-01005-c113-morning",
+          "cycle": 113,
+          "excerpt": "Mason's a grown-up, and I'm just a kid, so I don't really know him except that he's the A's guy who sometimes waves when I'm out with my dad.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "Mason's a grown-up, and I'm just a kid, so I don't really know him except that he's the A's guy who sometimes waves when I'm out with my dad."
+      },
+      {
+        "pop": "POP-01011",
+        "name": "Layla Scott",
+        "role": "student",
+        "hood": "Lake Merritt",
+        "profile": "Layla Scott — student",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "pmgzyjAu1DbyMaowaS3san",
+          "customId": "cp-POP-01011-c105-CONVO",
+          "cycle": 105,
+          "excerpt": "(Lowering voice) I swear the ones by the lake have gotten bolder since the A's started winning.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "(Lowering voice) I swear the ones by the lake have gotten bolder since the A's started winning."
+      },
+      {
+        "pop": "POP-01012",
+        "name": "Mateo Wally",
+        "role": "student",
+        "hood": "Rockridge",
+        "profile": "Mateo Wally — student",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "fM4K3hvmT9PEkGTjQ9uxyW",
+          "customId": "cp-POP-01012-c102-CONVO",
+          "cycle": 102,
+          "excerpt": "\" I grin and shift my backpack, the A's cap almost falling out.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "\" I grin and shift my backpack, the A's cap almost falling out."
+      },
+      {
+        "pop": "POP-01045",
+        "name": "Vanessa Ramas",
+        "role": "Barista",
+        "hood": "Lake Merritt",
+        "profile": "Vanessa Ramas — Barista",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "RpFbimVFAm1f8ocXmzMwaY",
+          "customId": "cp-POP-01045-c103-PRESS",
+          "cycle": 103,
+          "excerpt": "I don't follow baseball too closely, but even I know the A's are having an amazing season.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I don't follow baseball too closely, but even I know the A's are having an amazing season."
+      },
+      {
+        "pop": "POP-01053",
+        "name": "Rosario Medina",
+        "role": "CBA Compliance Monitor, Fruitvale Transit Hub",
+        "hood": "Fruitvale",
+        "profile": "Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "EkdKp1vxipX3RDL9HHxGrH",
+          "customId": "cp-POP-01053-c111-PRESS",
+          "cycle": 111,
+          "excerpt": "I've been too busy enjoying the A's championship win and spending time with my family to think about anything else.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I've been too busy enjoying the A's championship win and spending time with my family to think about anything else."
+      },
+      {
+        "pop": "POP-01068",
+        "name": "Kai Tanaka",
+        "role": "artist",
+        "hood": "Fruitvale",
+        "profile": "Kai Tanaka — artist",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "r4yVTuReuVjefxQeVAvcSq",
+          "customId": "cp-POP-01068-c114-PRESS-fri-nlheag",
+          "cycle": 114,
+          "excerpt": "To be honest, I haven't really thought much about The A's and their community engagement in West Oakland.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "To be honest, I haven't really thought much about The A's and their community engagement in West Oakland."
+      },
+      {
+        "pop": "POP-01089",
+        "name": "Jacob Perez",
+        "role": "Delivery driver",
+        "hood": "Glenview",
+        "profile": "Jacob Perez — Delivery driver",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "d4aEDMMw4uhyzz4KmTC1me",
+          "customId": "cp-POP-01089-c107-PRESS",
+          "cycle": 107,
+          "excerpt": "Honestly, I don't follow sports much, but I did hear some guys at the gas station talking about the A's record.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "Honestly, I don't follow sports much, but I did hear some guys at the gas station talking about the A's record."
+      },
+      {
+        "pop": "POP-01107",
+        "name": "Daniel Yoon",
+        "role": "Co-Founder, Gridiron Analytics",
+        "hood": "West Oakland",
+        "profile": "Daniel Yoon — Co-Founder, Gridiron Analytics",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "E2pwAR3FuoZAAD2UngbPiU",
+          "customId": "cp-POP-01107-c111-PRESS",
+          "cycle": 111,
+          "excerpt": "I just picked up a new A's jersey.",
+          "highlightKind": "team",
+          "entity": "A's",
+          "predicate": "fan"
+        },
+        "matchedPageLine": "I just picked up a new A's jersey."
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "P Slayer",
+    "popid": "POP-00008"
+  },
+  "assignment": {
+    "story": {
+      "ref": "Oakland_Sports_Feed cycle 116; world_summary_c116.md \"## Sports\" · Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+      "label": "Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+      "kind": "roster-move",
+      "angle": "Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+      "hookLine": "The stands feel sold out or sold short — write into that gap, not the press release.",
+      "hood": "Lake Merritt",
+      "team": "A's",
+      "eventKind": "trade-recap",
+      "popids": [
+        "POP-00081",
+        "POP-01239",
+        "POP-00527",
+        "POP-00053",
+        "POP-00050",
+        "POP-00024",
+        "POP-01078"
+      ],
+      "citizens": [
+        "Carmen Mesa (POP-00081)",
+        "Porter Broadway",
+        "Jose Fuentes",
+        "Giancarlo Hernandez (POP-01239)",
+        "Antone Baez",
+        "Mike Paulson (POP-00527)",
+        "Kevin Clark (POP-00053)",
+        "Ernesto Quintero (POP-00050)",
+        "Henry Rivas (POP-00024)",
+        "Pablo Almanzar (POP-01078)"
+      ],
+      "pulseClass": "roster-move",
+      "pulseScore": 67,
+      "fanCharge": "fury",
+      "bagModeIds": [
+        1,
+        3
+      ]
+    },
+    "approach": "Fan-heat approach (P Slayer pulse): do NOT open from the FO press release or the award board. Open from gut or Oakland sensory (bar, lot, bleacher row, BART after). First-person I/we only. Pick 1–2 charge-bag modes from this slice. Friction pivot required — name the counter-argument, kill it. ONE real foil number max (from FoilNumber / AnchorFacts); never invent x-stats or roster moves. Hook PriorTake when present — eat it or double down (\"I was wrong\" is craft). End on charge that sticks: dare, confession, or update. Not Anthony. Not Hal. Not multi-voice sports-desk average."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": {
+    "pulse": {
+      "className": "roster-move",
+      "classes": [
+        "roster-move"
+      ],
+      "score": 67,
+      "label": "Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+      "team": "A's",
+      "eventKind": "trade-recap",
+      "seasonType": "off-season",
+      "feedCycle": 116,
+      "record": "-",
+      "streak": "-",
+      "mood": "uncertain",
+      "fanSentiment": "uncertain",
+      "neighborhood": "Lake Merritt",
+      "notes": "Mike Paulson answered the question this page asked in C114. Carmen Mesa was the A's best trade chip, and now he is gone, sent to the Phillies, the team the A's beat in five games for their seventh World Series title. Mesa, 23, 81 overall with B potential, goes to Philadelphia with relief prospect Porter Broadway, 20, 70 overall with C potential, and second baseman Jose Fuentes, 23, 63 overall with B potential. Coming back to Oakland are third baseman Giancarlo Hernandez and left fielder Antone Baez. Mesa never got a fair shot at a rotation spot here. He was called up in C91 when Henry Rivas dislocated his shoulder, threw a complete game shutout against the Cubs in his first start, 9 innings, 5 hits and 12 strikeouts, and struck out 10 more against the Rays his next time out. When Rivas came back, Mesa was optioned to AAA, and Pablo Almanzar got the late-season call-up and then the fifth rotation spot behind Coles, Ramos, Rivas and Ellis. Mesa, born in Cuba and living in Lake Merritt, was stuck at $780K with nowhere to start. Hernandez is the prize. He is 23, a 2036 first round pick born in the Dominican Republic, wears #15, bats and throws right, and has almost no major league service time. His glove is already elite: 96 fielding, 80 reaction and a 70 arm. The bat is behind the glove, 65 contact against righties and 68 against lefties with modest power, but he hits to all fields and improved in nearly every attribute this cycle, including +9 contact against lefties. He grades A potential at 78 overall and climbing. That gives the A's three young third basemen with A potential. Ernesto Quintero took the job from Martin Richards, and Kevin Clark, 22, was supposed to be next, with Quintero sliding to first base if Mark Aitken leaves in free agency. Baez, 24, 70 overall with C potential, starts in the minors, organizational outfield depth behind Desmond Morton, Frank Reyna and JR Rosado. The Phillies players carry no listed salary, and the A's budget room rises from $129.42M to $130.35M.",
+      "stats": "Giancarlo Hernandez/78OVR/A POT/96FLD/80REAC/70ARM/65CON R/68CON L, Antone Baez/70OVR/C POT, Carmen Mesa/81OVR/B POT/9IP/5H/12SO/0R (first start vs Cubs), Porter Broadway/70OVR/C POT, Jose Fuentes/63OVR/B POT, A's budget/$129.42M before/$130.35M after"
+    },
+    "charge": {
+      "bagModes": [
+        {
+          "id": 1,
+          "name": "Hate the Move"
+        },
+        {
+          "id": 3,
+          "name": "Friction Pivot"
+        }
+      ],
+      "fanCharge": "fury",
+      "foilNumber": "9IP",
+      "centralFeeling": "Oakland should feel the FO heard the bleachers.",
+      "palette": [
+        "fury",
+        "euphoria",
+        "dread",
+        "defiance",
+        "confession",
+        "grief",
+        "dare"
+      ]
+    },
+    "prewrite": {
+      "reporter": "P.Slayer",
+      "bagModes": [
+        {
+          "id": 1,
+          "name": "Hate the Move"
+        },
+        {
+          "id": 3,
+          "name": "Friction Pivot"
+        }
+      ],
+      "fanCharge": "fury",
+      "priorTake": "NONE — write cold or invent no prior; wall may still inject at wake",
+      "anchorFacts": [
+        "StoryAngle (feed): Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+        "Stats (feed): Giancarlo Hernandez/78OVR/A POT/96FLD/80REAC/70ARM/65CON R/68CON L, Antone Baez/70OVR/C POT, Carmen Mesa/81OVR/B POT/9IP/5H/12SO/0R (first start vs Cubs), Porter Broadway/70OVR/C POT, Jose Fuentes/63OVR/B POT, A's budget/$129.42M before/$130.35M after",
+        "Event: A's — trade-recap (off-season)",
+        "NamesUsed: Carmen Mesa (SP), Porter Broadway (RP), Jose Fuentes (2B), Giancarlo Hernandez (3B), Antone Baez (LF), Mike Paulson (GM), Kevin Clark (3B), Ernesto Quintero (3B/1B)"
+      ],
+      "foilNumber": "9IP",
+      "centralFeeling": "Oakland should feel the FO heard the bleachers.",
+      "hooks": [
+        {
+          "text": "A's pushing for playoffs. City holding its breath. Stakes coverage.",
+          "angle": "conflict/tension coverage",
+          "hood": null
+        },
+        {
+          "text": "A's make a trade. Who went, who came, winners and losers, clubhouse ripple.",
+          "angle": "conflict/tension coverage",
+          "hood": null
+        },
+        {
+          "text": "Oaks drop a close one. The play that turned it, the mood after, what is next.",
+          "angle": "conflict/tension coverage",
+          "hood": "Jack London"
+        }
+      ]
+    },
+    "friction": {
+      "a": "Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+      "b": "FO language (transition / flexibility / prepared) or the tidy \"genius in hindsight\" read",
+      "frame": "The stands feel sold out or sold short — write into that gap, not the press release."
+    },
+    "priorTakes": [],
+    "players": [
+      {
+        "name": "Carmen Mesa",
+        "popid": "POP-00081",
+        "role": "Starting Pitcher, Philadelphia Phillies",
+        "neighborhood": "Lake Merritt",
+        "why": "feed-names"
+      },
+      {
+        "name": "Porter Broadway",
+        "popid": null,
+        "role": null,
+        "neighborhood": null,
+        "why": "feed-names"
+      },
+      {
+        "name": "Jose Fuentes",
+        "popid": null,
+        "role": null,
+        "neighborhood": null,
+        "why": "feed-names"
+      },
+      {
+        "name": "Giancarlo Hernandez",
+        "popid": "POP-01239",
+        "role": "Third Baseman, Oakland A's",
+        "neighborhood": null,
+        "why": "feed-names"
+      },
+      {
+        "name": "Antone Baez",
+        "popid": null,
+        "role": null,
+        "neighborhood": null,
+        "why": "feed-names"
+      },
+      {
+        "name": "Mike Paulson",
+        "popid": "POP-00527",
+        "role": "General Manager, Oakland A's & The Oaks",
+        "neighborhood": "West Oakland",
+        "why": "feed-names"
+      },
+      {
+        "name": "Kevin Clark",
+        "popid": "POP-00053",
+        "role": "Third Baseman, Oakland A's",
+        "neighborhood": "Jack London",
+        "why": "feed-names"
+      },
+      {
+        "name": "Ernesto Quintero",
+        "popid": "POP-00050",
+        "role": "3B/1B , Oakland A's",
+        "neighborhood": "Baylight District",
+        "why": "feed-names"
+      },
+      {
+        "name": "Henry Rivas",
+        "popid": "POP-00024",
+        "role": "Starting Pitcher, Oakland A's",
+        "neighborhood": "West Oakland",
+        "why": "feed-names"
+      },
+      {
+        "name": "Pablo Almanzar",
+        "popid": "POP-01078",
+        "role": "SP / Oakland A's",
+        "neighborhood": "Chinatown",
+        "why": "feed-names"
+      }
+    ],
+    "scene": {
+      "neighborhood": "Lake Merritt",
+      "record": "-",
+      "streak": "-",
+      "mood": "uncertain",
+      "fanSentiment": "uncertain",
+      "colorRoom": "You may invent unnamed bar / lot / BART / bleacher texture that contradicts nothing on this slice. Do not invent star players, contracts, stats, or quotes. Named people stay on PLAYERS list or Tribune colleagues (Anthony, Hal, Mags) as foils."
+    },
+    "candidates": [
+      {
+        "score": 67,
+        "cycle": 116,
+        "team": "A's",
+        "primary": "roster-move",
+        "angle": "Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+        "priorHits": 0
+      },
+      {
+        "score": 67,
+        "cycle": 116,
+        "team": "A's",
+        "primary": "roster-move",
+        "angle": "What does the Mesa trade mean for Hernandez, Kevin Clark and Mark Aitken?",
+        "priorHits": 0
+      },
+      {
+        "score": 65,
+        "cycle": 116,
+        "team": "Oaks",
+        "primary": "loss",
+        "angle": "The Spurs hand the Oaks their first home loss. Spurs 126 - Oaks 117",
+        "priorHits": 0
+      },
+      {
+        "score": 54,
+        "cycle": 115,
+        "team": "Oaks",
+        "primary": "insult-pulse",
+        "angle": "The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+        "priorHits": 0
+      },
+      {
+        "score": 49,
+        "cycle": 116,
+        "team": "Oaks",
+        "primary": "win-streak",
+        "angle": "The Oaks shoot 80 percent in Denver and set a franchise record. Oaks 147 - Nuggets 114",
+        "priorHits": 0
+      },
+      {
+        "score": 47,
+        "cycle": 116,
+        "team": "A's",
+        "primary": "prospect-callup",
+        "angle": "The bat or the glove? Kevin Clark's .327 against Giancarlo Hernandez's 96 fielding for third base",
+        "priorHits": 0
+      }
+    ]
+  },
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "P Slayer",
+    "popid": "POP-00008",
+    "text": "I'm going to the corner store to catch the vibe around the A's trade. People are still reeling from Mark Aitken leaving, and now Paulson cashes in the Carmen Mesa chip. I want to hear what they have to say about Giancarlo Hernandez joining the mix at third base.",
+    "plan": {
+      "chase": "I'm going to the corner store to catch the vibe around the A's trade. People are still reeling from Mark Aitken leaving, and now Paulson cashes in the Carmen Mesa chip. I want to hear what they have to say about Giancarlo Hernandez joining the mix at third base.",
+      "focus": "Fan reaction to the trade and the impact on the A's infield",
+      "why": "The stands feel sold out or sold short, and I need to write into that gap",
+      "checks": [
+        "Friction pivot: Does the trade feel like a step back for the A's?",
+        "Fan sentiment around Giancarlo Hernandez"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00527",
+          "question": "What's Mike Paulson's reasoning behind the trade, and how does he think it will play out?",
+          "basis": "Mike Paulson is the GM of the A's"
+        },
+        {
+          "pop": "POP-00053",
+          "question": "How does Kevin Clark feel about Giancarlo Hernandez joining the A's?",
+          "basis": "Kevin Clark is a potential third baseman for the A's"
+        },
+        {
+          "pop": "POP-01239",
+          "question": "What's Giancarlo Hernandez's mindset coming into the A's organization?",
+          "basis": "Giancarlo Hernandez is the player acquired in the trade"
+        }
+      ],
+      "interpretation": "The trade may be seen as a step back for the A's, but it could also be a smart move to address the infield needs",
+      "unverifiedLead": [
+        "The trade may spark a heated debate among A's fans about the team's direction"
+      ]
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | trade-recap | (off-season) | Carmen Mesa, Jose Fuentes, Giancarlo Hernandez, Mike Paulson, Kevin Clark, Ernesto Quintero",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00081",
+        "POP-00101",
+        "POP-01239",
+        "POP-00527",
+        "POP-00053",
+        "POP-00050"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (off-season) | Kevin Clark, Giancarlo Hernandez, Ernesto Quintero, Deacon Seymour, Mike Paulson",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00053",
+        "POP-01239",
+        "POP-00050",
+        "POP-00528",
+        "POP-00527"
+      ]
+    },
+    {
+      "label": "A's | rumor | (off-season) | Mark Aitken, Mike Paulson, Ernesto Quintero",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00003",
+        "POP-00527",
+        "POP-00050"
+      ]
+    },
+    {
+      "label": "A's | rumor | (off-season) | Benji Dillon, Mike Paulson, Deacon Seymour",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00018",
+        "POP-00527",
+        "POP-00528"
+      ]
+    },
+    {
+      "label": "Oaks | season-state | (early-season) | Wilson Shepard, Mike Paulson, Elliot Abraham",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01022",
+        "POP-00527",
+        "POP-01046"
+      ]
+    }
+  ],
+  "laneEntries": 17,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-18T12:16:37.670Z"
+}

@@ -1,0 +1,59 @@
+{
+  "v": "UNDOCKED-INTAKE/1",
+  "Timestamp": "2026-11-20T02:55:38.345Z",
+  "POPID": "POP-00918",
+  "Cycle": 116,
+  "Seq": 2,
+  "Daypart": "SHOW",
+  "Tag": "undocked-episode",
+  "EpisodeId": "undocked-pop00918-2026-11-20T02-30-32",
+  "Applied": "yes",
+  "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00918-2026-11-20T02-30-32.json",
+  "Holder": "Manju Abebe",
+  "CreditsDelta": 0,
+  "Magnitude": 2,
+  "Flags": [
+    "credits_delta_windowed"
+  ],
+  "Excerpt": "Manju Abebe credits=0 systems=sirius,nova_terra,furud,acrux,botein,intercrus,gsc_0044,atlas,cedarhold,achernar,ruchbah,ironhollow,pherkad,shaula,alnair,wolf_1061,gsc_0031,gsc_0021",
+  "DecidedAt": "2026-11-20T02:55:38.349Z",
+  "DecidedBy": "auto-gate",
+  "Note": "auto-approved on contract validation (§2.5)",
+  "FeedEvent": {
+    "v": "UNDOCKED-FEED/1",
+    "Cycle": 116,
+    "EventType": "undocked-episode",
+    "POPID": "POP-00918",
+    "Holder": "Manju Abebe",
+    "EpisodeId": "undocked-pop00918-Y3C12-e2",
+    "CreditsDelta": 0,
+    "PointsDelta": 11.83,
+    "Systems": [
+      "sirius",
+      "nova_terra",
+      "furud",
+      "acrux",
+      "botein",
+      "intercrus",
+      "gsc_0044",
+      "atlas",
+      "cedarhold",
+      "achernar",
+      "ruchbah",
+      "ironhollow",
+      "pherkad",
+      "shaula",
+      "alnair",
+      "wolf_1061",
+      "gsc_0031",
+      "gsc_0021"
+    ],
+    "CombatEvents": 0,
+    "MishapCount": 0,
+    "Magnitude": 2,
+    "Flags": [
+      "credits_delta_windowed"
+    ],
+    "StagedPath": "output/spacemolt-show/staged/undocked-pop00918-2026-11-20T02-30-32.json"
+  }
+}

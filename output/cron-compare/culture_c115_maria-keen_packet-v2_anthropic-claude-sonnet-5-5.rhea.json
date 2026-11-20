@@ -1,0 +1,69 @@
+{
+  "draft": "output/cron-compare/culture_c115_maria-keen_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "115",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "294b85ecee5b4b3d8e56f5085cf47e056ce48532fec08a78cdfb730c863ce725",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes match verified interview records exactly, ledger profiles are accurate, and no canon contradictions or real-world imports were detected.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "maria-ground-v1",
+    "packageVersion": "MARIA-LEP2-1",
+    "manifestId": "AM-c194861c0242",
+    "lexicalObservations": [],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Caroline Cabrera",
+      "Omar Amici",
+      "Priya Narang",
+      "Rafael Montez",
+      "Toto Foto"
+    ],
+    "unverified": [
+      "After-School Program Director",
+      "Theater Director"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0119,
+  "durationMs": 5198,
+  "parseError": false,
+  "ranAt": "2026-11-14T00:18:12.005Z",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 770,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "294b85ecee5b4b3d8e56f5085cf47e056ce48532fec08a78cdfb730c863ce725",
+    "costUsd": 0.001
+  }
+}

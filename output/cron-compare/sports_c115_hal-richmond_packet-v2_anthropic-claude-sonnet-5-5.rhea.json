@@ -1,0 +1,100 @@
+{
+  "draft": "output/cron-compare/sports_c115_hal-richmond_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "115",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "deb4f6de3c8006b0a197f8775590d8c56b2f4095ff1b6e1f317b63ef8e36d968",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Clean retrospective on Vinnie Keane's retirement perfectly matching C115 sports feed and bio data.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "hal-richmond-archive-v2",
+    "packageVersion": "HAL-LEP2-3",
+    "manifestId": "AM-95275fdbd638",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "229",
+          "2",
+          "321",
+          "250",
+          "000",
+          "100",
+          "2037",
+          "150",
+          "2039",
+          "55",
+          "93",
+          "90",
+          "85",
+          "79"
+        ]
+      },
+      {
+        "code": "UNAPPROVED_QUOTE",
+        "values": [
+          "the undrafted spark plug from Massachusetts.",
+          "that quiet acknowledgment that the legs and the range have done their work and the bat",
+          "the move worked."
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Hal Richmond",
+      "Vinnie Keane"
+    ],
+    "unverified": [
+      "Another Origins",
+      "Bay Tribune Sports",
+      "Gold Gloves",
+      "Home Run Derbies",
+      "Patron Saint",
+      "Saint Vinnie",
+      "Silver Sluggers",
+      "World Series"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0124,
+  "durationMs": 7568,
+  "parseError": false,
+  "ranAt": "2026-11-13T00:17:49.447Z",
+  "contractScore": {
+    "opened": false,
+    "purposeMet": false,
+    "inTarget": true,
+    "inTargetBy": "code floor 800",
+    "words": 975,
+    "short": "The opening paragraph does not establish the ground the man came from, and the piece omits his own recorded words.",
+    "score": 1,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "deb4f6de3c8006b0a197f8775590d8c56b2f4095ff1b6e1f317b63ef8e36d968",
+    "costUsd": 0.0024
+  }
+}

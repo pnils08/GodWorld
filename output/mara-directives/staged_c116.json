@@ -1,0 +1,57 @@
+{
+  "promises": [],
+  "statuses": [],
+  "rejectedPromises": [],
+  "memoryReads": [
+    {
+      "query": "",
+      "status": "ok",
+      "hits": 8,
+      "why": null
+    }
+  ],
+  "notes": [],
+  "trace": [
+    {
+      "tool": "memory_recall",
+      "resultChars": 13462
+    },
+    {
+      "tool": "sheet_read",
+      "resultChars": 6083
+    },
+    {
+      "tool": "sheet_read",
+      "resultChars": 6025
+    },
+    {
+      "tool": "sheet_read",
+      "resultChars": 2650
+    },
+    {
+      "tool": "sheet_read",
+      "resultChars": 2354
+    },
+    {
+      "tool": "sheet_read",
+      "resultChars": 2237
+    },
+    {
+      "tool": "sheet_read",
+      "resultChars": 1908
+    },
+    {
+      "tool": "sheet_read",
+      "resultChars": 1962
+    },
+    {
+      "tool": "sheet_read",
+      "resultChars": 51
+    },
+    {
+      "tool": "sheet_read",
+      "resultChars": 51
+    }
+  ],
+  "runEntry": "C116 — Mara Vance's directive, written after the close.\nDirected Avery Santana — Mayor: Provide the updated complaint-response crosswalk and Clerk-backed status of INIT-014, distinguishing corrected claims from completed filings.\nDirected Denise Carter — City Council District 1: Account for the outstanding Brooklyn service-audit baseline and District 1 OARI evaluation, identifying the records and departmental assistance needed to finish your promised answer.\nDirected Rose Delgado — City Council District 3: Link the district’s consolidated briefing-and-notice record to the published OARI packet so the venue, notice dates, public numbers and access arrangements can be checked without repeating the briefing.\nDirected Ramon Vega — City Council District 4: Obtain the documented Glenview meeting findings and public-works follow-through, and report whether Dimond’s recorded missed pickup requires any remaining municipal action.\nDirected Janae Rivers — City Council District 5: Account for your promised placement-gap publication by supplying the analysis or identifying the actual publishing office and the district contribution still needed.\nDirected Elliott Crane — City Council District 6: What has the responsible health-response office established about the Piedmont Avenue spike, and when will residents receive a public update?\nDirected Warren Ashford — City Council District 7: What municipal follow-through, if any, is needed after the contained KONO blaze?\nDirected Nina Chen — City Council District 8: Provide the Eastlake request dockets and authorization status, and reconcile the district’s complaint records by actual case and location.\nDirected Terrence Mobley — City Council District 9: Provide the Laurel filing and service-status record, separating the overdue legislation from missed-pickup recovery and the four district complaints.\nDirected Elena Soria Dominguez — Transit Hub Planning Lead: Clarify what INIT-003’s complete entry closes and where the unfinished design-review work remains tracked.\nDirected Keisha Ramos — Baylight Authority Director: Clarify what INIT-006’s complete entry closes while the construction milestone determination remains unsigned.\nNot directing:\n- Leonard Tran (City Council District 2): His Cycle 116 statement answers the prior question’s evidentiary limit: a YES position is not a recorded vote, and Downtown appropriations remain unverified; no dated next step establishes another missed obligation.\n- Marcus Webb (OEWD Program Director (Stabilization Fund)): His Cycle 116 statement reports the closeout published and renewal transmitted with scope and processing standards preserved; the live tracker now schedules council consideration for Cycle 117, and he cannot declare the council’s decision.\n- Vanessa Tran-Muñoz (OARI Program Director): Her Cycle 116 statement reports the briefing record published, holds expansion and explicitly leaves the audit and feasibility review incomplete; the live tracker dates the next step to Cycle 117, while the separate district-documentation question is directed to Rose Delgado.\n- Bobby Chen-Ramirez (Health Center Project Director): His Cycle 116 statement calendars the audit and walkthrough without claiming completion; the live tracker now dates that step to Cycle 117 rather than the supplied snapshot’s Cycle 116, so it is not presently overdue.\nOpen promises she is watching: mayor \"Transmit responsive legislative proposals for all seven executive-ledger complaints in C115, each identifying a responsible office, proposed remedy, and next public date; use the actual ledger for petition details and do not claim filing before docketing.\"; mayor \"In response to Decision 8, file INIT-014 legislation this cycle using current Ivy Hill conditions and no manufactured emergency premise.\"; council-d1 \"The director wants the Brooklyn service audit baseline and the District 1 dispatch evaluation for the Alternative Response Initiative on the record; I'll file that answer, because if the audit exists, the neighbors who live with it get to see it.\"; council-d3 \"This district gets the briefing, the review calendar, and the numbers in the open.\"; council-d5 \"So I am publishing the placement-gap analysis this cycle with their findings named, not folded into an average.\"; council-d8 \"Docket formal baseline municipal maintenance allocations and commercial corridor service standards for Eastlake\"; council-d9 \"My district, my name, and I'll report back on what actually moves.\"; council-d2 \"I support a binding vote on Downtown Economic Revitalization and will vote YES.\""
+}

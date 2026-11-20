@@ -1,0 +1,63 @@
+{
+  "mode": "wake-write",
+  "desk": "wire",
+  "cycle": "115",
+  "provider": "openrouter",
+  "model": "x-ai/grok-4.3",
+  "configuredWriterModel": "x-ai/grok-4.3",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "celeste-tran",
+  "byline": {
+    "name": "Celeste Tran",
+    "popid": "POP-00164",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 30,
+  "quotesLanded": 4,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "canon_recall",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall"
+  ],
+  "toolCalls": 5,
+  "wordCount": 571,
+  "targetWords": "400-700",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 571,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "725697316ed6c41e89d7881049967b2dd3d840a439b3f558aefc4e5f1059a9bb",
+    "costUsd": 0.0007
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/3 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/wire_c115_celeste-tran_packet-v2_x-ai-grok-4-3.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "h.com]\n{\n  \"popId\": \"POP-00164\",\n  \"name\": \"Celeste Tran\",\n  \"recorded\": true,\n  \"text\": \"filed: Rico Valez picked up one more mention this cycle and now sits at twenty total, the kind of steady cl\"\n}"
+  },
+  "ranAt": "2026-11-14T00:19:30.968Z",
+  "dispositionReconciledAt": "2026-11-14T18:00:03.037Z"
+}

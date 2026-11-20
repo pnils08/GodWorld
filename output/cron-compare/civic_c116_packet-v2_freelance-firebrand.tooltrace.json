@@ -1,0 +1,39 @@
+{
+  "model": "anthropic/claude-sonnet-5.5",
+  "calls": [
+    {
+      "tool": "canon_search",
+      "input": {
+        "query": "Jax Caldera KONO"
+      },
+      "resultChars": 1014,
+      "resultHead": "13 file(s) matched on disk for 'Jax Caldera KONO':\n— output/cron-compare/staged/civic_c115_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5.staged.md: -- Jax Caldera | tipline: JAX-TIPS\n— editions/cycle_pulse_c115.txt: Jax Caldera, on Telegraph, ran into a different kind of contradiction in KONO. Priya Raghunathan, who dispatches rail for BART, and Dmitri Soto, who runs a container yard, both said the neighborhood is busy, retail is st…\n— output/cron-compare/staged/civic_c112_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5.staged.md: -- Jax Caldera | tipline: JAX-TIPS\n— edit"
+    },
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Neighborhood_Map",
+        "match": "KONO"
+      },
+      "resultChars": 2420,
+      "resultHead": "Timestamp | Cycle | Neighborhood | NightlifeProfile | NoiseIndex | CrimeIndex | RetailVitality | EventAttractiveness | Sentiment | DemographicMarker | Holiday | HolidayPriority | FirstFriday | CreationDay | SportsSeason | MigrationFlow | NeighborhoodTrajectory | HousingPressure | TrajectoryStartCycle | MedianIncome | MedianRent | TrajectoryMomentum | District | CoreSimRank | IncomeTier | BoomExposure | BoomIndex | EmployerCharacter | WealthMin | WealthMax | ChildAreas | WeatherZone | Adjacent | AttentionWeight | Scenes | RentShare\nY3C12 | 116 | Temescal | 0.99 | 5.02 | 0.73 | 7.27 | 7.73 | 0.1"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "KONO"
+      },
+      "resultChars": 3233,
+      "resultHead": "[C95 · edition] On Stoops Without Coffee: The KONO Inflow Doesn't Move By Maria Keen | Bay Tribune Culture The stoop on 14th and Ashford is one step off the sidewalk and someone's always sitting on it. Tuesday afternoon at 4:17, it's Marcus, 36, who runs the hardware on the corner, and he's not looking at his phone. He's looking at the people who pass. The foot traffic is steady — the way it gets when nothing else is happening. Not sparse enough to feel lonely, not animated enough to feel like anything's starting. Someone in a yel\n[C96 · edition] Gone Dark: Three Cycles Without Power, and a Ci"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Midnight Norae Karaoke"
+      },
+      "resultChars": 198,
+      "resultHead": "No published piece from before C116 came back for \"Midnight Norae Karaoke\". That is not proof the paper never covered it (an empty answer can also be a failed lookup) — do not write that it did not."
+    }
+  ],
+  "ranAt": "2026-11-19T00:15:38.404Z"
+}

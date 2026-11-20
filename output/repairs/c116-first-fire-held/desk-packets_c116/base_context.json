@@ -1,0 +1,3984 @@
+{
+  "source": {
+    "sheetId": "1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk",
+    "generatedAt": "2026-11-15T23:36:12.801Z"
+  },
+  "baseContext": {
+    "cycle": 116,
+    "simYear": "3",
+    "cycleRef": "Y3C12",
+    "season": "Spring",
+    "holiday": {
+      "name": "Spring Equinox",
+      "priority": "active"
+    },
+    "isFirstFriday": false,
+    "isCreationDay": false,
+    "sportsSeason": "",
+    "weather": {
+      "type": "unknown",
+      "impact": ""
+    },
+    "sentiment": "",
+    "cycleWeight": "normal",
+    "economicContext": {
+      "employment": "",
+      "economyDescription": "",
+      "incomeDistribution": {
+        "under50k": 45,
+        "50k_100k": 457,
+        "100k_150k": 315,
+        "150k_200k": 65,
+        "over200k": 104
+      },
+      "medianIncome": 98900,
+      "totalCitizensWithIncome": 986,
+      "educationDistribution": {
+        "bachelors": 209,
+        "masters": 91,
+        "hs-diploma": 579,
+        "associates": 31,
+        "doctorate": 59,
+        "trade-cert": 41,
+        "Elementary": 14,
+        "Middle School": 8,
+        "High School": 16,
+        "hs-dropout": 4,
+        "Pre-K": 12,
+        "some-college": 9
+      },
+      "householdStats": {
+        "total": 680,
+        "rentBurdenCount": 66,
+        "averageIncome": 1330336
+      },
+      "neighborhoodEconomics": [
+        {
+          "neighborhood": "Lake Merritt",
+          "medianIncome": 185741,
+          "medianRent": 4644
+        },
+        {
+          "neighborhood": "Rockridge",
+          "medianIncome": 161930,
+          "medianRent": 4048
+        },
+        {
+          "neighborhood": "Piedmont Ave",
+          "medianIncome": 150300,
+          "medianRent": 3758
+        },
+        {
+          "neighborhood": "West Oakland",
+          "medianIncome": 146748,
+          "medianRent": 3669
+        },
+        {
+          "neighborhood": "Baylight District",
+          "medianIncome": 138745,
+          "medianRent": 3469
+        },
+        {
+          "neighborhood": "Brooklyn",
+          "medianIncome": 129093,
+          "medianRent": 3227
+        },
+        {
+          "neighborhood": "Downtown",
+          "medianIncome": 122910,
+          "medianRent": 3073
+        },
+        {
+          "neighborhood": "Jack London",
+          "medianIncome": 120621,
+          "medianRent": 3016
+        },
+        {
+          "neighborhood": "Grand Lake",
+          "medianIncome": 106479,
+          "medianRent": 2662
+        },
+        {
+          "neighborhood": "Fruitvale",
+          "medianIncome": 99978,
+          "medianRent": 2499
+        },
+        {
+          "neighborhood": "Uptown",
+          "medianIncome": 98329,
+          "medianRent": 2458
+        },
+        {
+          "neighborhood": "Adams Point",
+          "medianIncome": 94525,
+          "medianRent": 2363
+        },
+        {
+          "neighborhood": "Laurel",
+          "medianIncome": 85656,
+          "medianRent": 2141
+        },
+        {
+          "neighborhood": "Chinatown",
+          "medianIncome": 84843,
+          "medianRent": 1980
+        },
+        {
+          "neighborhood": "Eastlake",
+          "medianIncome": 83496,
+          "medianRent": 1809
+        },
+        {
+          "neighborhood": "KONO",
+          "medianIncome": 82658,
+          "medianRent": 2066
+        },
+        {
+          "neighborhood": "Glenview",
+          "medianIncome": 81264,
+          "medianRent": 1625
+        },
+        {
+          "neighborhood": "Dimond",
+          "medianIncome": 79520,
+          "medianRent": 1590
+        },
+        {
+          "neighborhood": "Ivy Hill",
+          "medianIncome": 77454,
+          "medianRent": 1549
+        },
+        {
+          "neighborhood": "East Oakland",
+          "medianIncome": 72072,
+          "medianRent": 1562
+        },
+        {
+          "neighborhood": "San Antonio",
+          "medianIncome": 69440,
+          "medianRent": 1620
+        },
+        {
+          "neighborhood": "Temescal",
+          "medianIncome": 68409,
+          "medianRent": 1710
+        }
+      ],
+      "businessSnapshot": [
+        {
+          "bizId": "BIZ-00016",
+          "name": "Oakland City Schools",
+          "sector": "Education",
+          "neighborhood": "City-wide",
+          "employeeCount": 5201,
+          "avgSalary": 74000,
+          "growthRate": "7.37"
+        },
+        {
+          "bizId": "BIZ-00025",
+          "name": "Piedmont Avenue Medical Center",
+          "sector": "Healthcare",
+          "neighborhood": "Piedmont Ave",
+          "employeeCount": 2601,
+          "avgSalary": 102000,
+          "growthRate": "9.94"
+        },
+        {
+          "bizId": "BIZ-00015",
+          "name": "Oakland Hospital",
+          "sector": "Healthcare",
+          "neighborhood": "City-wide",
+          "employeeCount": 2399,
+          "avgSalary": 98000,
+          "growthRate": "7.51"
+        },
+        {
+          "bizId": "BIZ-00013",
+          "name": "AC Transit",
+          "sector": "Public Transit",
+          "neighborhood": "Downtown",
+          "employeeCount": 2101,
+          "avgSalary": 78000,
+          "growthRate": "12.65"
+        },
+        {
+          "bizId": "BIZ-00019",
+          "name": "EBMUD",
+          "sector": "Utilities",
+          "neighborhood": "Downtown",
+          "employeeCount": 1900,
+          "avgSalary": 44312,
+          "growthRate": "12.55"
+        },
+        {
+          "bizId": "BIZ-00035",
+          "name": "Oakland Community College District",
+          "sector": "Education",
+          "neighborhood": "City-wide",
+          "employeeCount": 1800,
+          "avgSalary": 41019,
+          "growthRate": "7.2"
+        },
+        {
+          "bizId": "BIZ-00012",
+          "name": "Port of Oakland",
+          "sector": "Port & Logistics",
+          "neighborhood": "Jack London",
+          "employeeCount": 1501,
+          "avgSalary": 95000,
+          "growthRate": "12.93"
+        },
+        {
+          "bizId": "BIZ-00032",
+          "name": "Estuary Power & Gas",
+          "sector": "Utilities",
+          "neighborhood": "City-wide",
+          "employeeCount": 1401,
+          "avgSalary": 124345,
+          "growthRate": "7.95"
+        },
+        {
+          "bizId": "BIZ-00017",
+          "name": "City of Oakland",
+          "sector": "Municipal Government",
+          "neighborhood": "Downtown",
+          "employeeCount": 1201,
+          "avgSalary": 88000,
+          "growthRate": "12.09"
+        },
+        {
+          "bizId": "BIZ-00014",
+          "name": "BART Oakland Division",
+          "sector": "Public Transit",
+          "neighborhood": "Downtown",
+          "employeeCount": 900,
+          "avgSalary": 86086,
+          "growthRate": "16.7"
+        },
+        {
+          "bizId": "BIZ-00002",
+          "name": "DigitalOcean",
+          "sector": "Cloud Infrastructure",
+          "neighborhood": "Baylight District",
+          "employeeCount": 800,
+          "avgSalary": 153677,
+          "growthRate": "6.23"
+        },
+        {
+          "bizId": "BIZ-00031",
+          "name": "East Bay Regional Parks",
+          "sector": "Public Services",
+          "neighborhood": "City-wide",
+          "employeeCount": 750,
+          "avgSalary": 100439,
+          "growthRate": "12.29"
+        },
+        {
+          "bizId": "BIZ-00024",
+          "name": "Oakland Police Department",
+          "sector": "Public Safety",
+          "neighborhood": "City-wide",
+          "employeeCount": 701,
+          "avgSalary": 78682,
+          "growthRate": "11.18"
+        },
+        {
+          "bizId": "BIZ-00005",
+          "name": "Oakland Athletics",
+          "sector": "Sports Franchise",
+          "neighborhood": "Baylight District",
+          "employeeCount": 520,
+          "avgSalary": 3342924,
+          "growthRate": "6.83"
+        },
+        {
+          "bizId": "BIZ-00023",
+          "name": "Oakland Fire Department",
+          "sector": "Public Safety",
+          "neighborhood": "City-wide",
+          "employeeCount": 452,
+          "avgSalary": 79948,
+          "growthRate": "10.15"
+        },
+        {
+          "bizId": "BIZ-00020",
+          "name": "Baylight Construction Authority",
+          "sector": "Construction",
+          "neighborhood": "Baylight District",
+          "employeeCount": 451,
+          "avgSalary": 66868,
+          "growthRate": "2.69"
+        },
+        {
+          "bizId": "BIZ-00003",
+          "name": "Discord",
+          "sector": "Community Platform",
+          "neighborhood": "Baylight District",
+          "employeeCount": 350,
+          "avgSalary": 160000,
+          "growthRate": "6.64"
+        },
+        {
+          "bizId": "BIZ-00027",
+          "name": "Oakland Parks & Recreation",
+          "sector": "Public Services",
+          "neighborhood": "City-wide",
+          "employeeCount": 350,
+          "avgSalary": 62000,
+          "growthRate": "10.22"
+        },
+        {
+          "bizId": "BIZ-00034",
+          "name": "Oakland Housing Authority",
+          "sector": "Housing & Social Services",
+          "neighborhood": "City-wide",
+          "employeeCount": 320,
+          "avgSalary": 72000,
+          "growthRate": "7.28"
+        },
+        {
+          "bizId": "BIZ-00021",
+          "name": "Oakland Public Library System",
+          "sector": "Public Services",
+          "neighborhood": "City-wide",
+          "employeeCount": 301,
+          "avgSalary": 68000,
+          "growthRate": "9.76"
+        },
+        {
+          "bizId": "BIZ-00074",
+          "name": "Oakland Oaks",
+          "sector": "Sports",
+          "neighborhood": "Baylight District",
+          "employeeCount": 250,
+          "avgSalary": 15642857,
+          "growthRate": "12.18"
+        },
+        {
+          "bizId": "BIZ-00022",
+          "name": "Alameda County Courts",
+          "sector": "Legal & Judicial",
+          "neighborhood": "Downtown",
+          "employeeCount": 222,
+          "avgSalary": 95000,
+          "growthRate": "14.71"
+        },
+        {
+          "bizId": "BIZ-00056",
+          "name": "Coastline Construction",
+          "sector": "Construction",
+          "neighborhood": "West Oakland",
+          "employeeCount": 221,
+          "avgSalary": 85000,
+          "growthRate": "10.83"
+        },
+        {
+          "bizId": "BIZ-00057",
+          "name": "Anchor Build",
+          "sector": "Construction",
+          "neighborhood": "Jack London",
+          "employeeCount": 181,
+          "avgSalary": 80000,
+          "growthRate": "13.67"
+        },
+        {
+          "bizId": "BIZ-00058",
+          "name": "Mariner Construction",
+          "sector": "Construction",
+          "neighborhood": "West Oakland",
+          "employeeCount": 165,
+          "avgSalary": 90000,
+          "growthRate": "9.02"
+        },
+        {
+          "bizId": "BIZ-00183",
+          "name": "Bayline 6",
+          "sector": "Media & Journalism",
+          "neighborhood": "Jack London",
+          "employeeCount": 142,
+          "avgSalary": 82000,
+          "growthRate": "12.79"
+        },
+        {
+          "bizId": "BIZ-00059",
+          "name": "Foothill Builders",
+          "sector": "Construction",
+          "neighborhood": "Fruitvale",
+          "employeeCount": 110,
+          "avgSalary": 78000,
+          "growthRate": "13.48"
+        },
+        {
+          "bizId": "BIZ-00063",
+          "name": "Civis Systems Field \"The Town\"",
+          "sector": "As Stadium",
+          "neighborhood": "Baylight District",
+          "employeeCount": 110,
+          "avgSalary": 105000,
+          "growthRate": "6.97"
+        },
+        {
+          "bizId": "BIZ-00004",
+          "name": "Moltbook",
+          "sector": "Agent Communication",
+          "neighborhood": "Baylight District",
+          "employeeCount": 100,
+          "avgSalary": 115000,
+          "growthRate": "6.56"
+        },
+        {
+          "bizId": "BIZ-00054",
+          "name": "Pacific Standard Architecture",
+          "sector": "Architecture",
+          "neighborhood": "Downtown",
+          "employeeCount": 98,
+          "avgSalary": 112000,
+          "growthRate": "10.99"
+        },
+        {
+          "bizId": "BIZ-00100",
+          "name": "Oakland Casino Town",
+          "sector": "Nightlife & Entertainment",
+          "neighborhood": "Baylight District",
+          "employeeCount": 97,
+          "avgSalary": 70000,
+          "growthRate": "-1.34"
+        },
+        {
+          "bizId": "BIZ-00060",
+          "name": "Northgate Construction",
+          "sector": "Construction",
+          "neighborhood": "West Oakland",
+          "employeeCount": 95,
+          "avgSalary": 76000,
+          "growthRate": "10.49"
+        },
+        {
+          "bizId": "BIZ-00028",
+          "name": "West Oakland Community Center",
+          "sector": "Community Services",
+          "neighborhood": "West Oakland",
+          "employeeCount": 94,
+          "avgSalary": 58000,
+          "growthRate": "11.73"
+        },
+        {
+          "bizId": "BIZ-00001",
+          "name": "Anthropic",
+          "sector": "AI Research",
+          "neighborhood": "Baylight District",
+          "employeeCount": 86,
+          "avgSalary": 185000,
+          "growthRate": "3.68"
+        },
+        {
+          "bizId": "BIZ-00089",
+          "name": "Atlas Bay Architects",
+          "sector": "Architecture",
+          "neighborhood": "Downtown",
+          "employeeCount": 86,
+          "avgSalary": 110000,
+          "growthRate": "12.99"
+        },
+        {
+          "bizId": "BIZ-00018",
+          "name": "Bay Tribune",
+          "sector": "Media & Journalism",
+          "neighborhood": "Downtown",
+          "employeeCount": 62,
+          "avgSalary": 73758,
+          "growthRate": "14.71"
+        },
+        {
+          "bizId": "BIZ-00030",
+          "name": "Oakland Tech Collective",
+          "sector": "Coworking / Tech Hub",
+          "neighborhood": "Uptown",
+          "employeeCount": 62,
+          "avgSalary": 105000,
+          "growthRate": "16.4"
+        },
+        {
+          "bizId": "BIZ-00053",
+          "name": "Ridgeline Studio",
+          "sector": "Architecture",
+          "neighborhood": "Uptown",
+          "employeeCount": 61,
+          "avgSalary": 108000,
+          "growthRate": "16.25"
+        },
+        {
+          "bizId": "BIZ-00095",
+          "name": "Oakland Alternative Response Initiative",
+          "sector": "Public Safety / Crisis Response",
+          "neighborhood": "Downtown",
+          "employeeCount": 47,
+          "avgSalary": 74000,
+          "growthRate": "7.17"
+        },
+        {
+          "bizId": "BIZ-00009",
+          "name": "Oakmesh Systems",
+          "sector": "Civic Tech",
+          "neighborhood": "West Oakland",
+          "employeeCount": 46,
+          "avgSalary": 135000,
+          "growthRate": "36.12"
+        },
+        {
+          "bizId": "BIZ-00055",
+          "name": "Estuary Architects",
+          "sector": "Architecture",
+          "neighborhood": "Lake Merritt",
+          "employeeCount": 45,
+          "avgSalary": 105000,
+          "growthRate": "10.97"
+        },
+        {
+          "bizId": "BIZ-00186",
+          "name": "Varek Systems",
+          "sector": "Tech",
+          "neighborhood": "West Oakland",
+          "employeeCount": 45,
+          "avgSalary": 120000,
+          "growthRate": "11.8"
+        },
+        {
+          "bizId": "BIZ-00187",
+          "name": "Prescott Foundry Labs",
+          "sector": "Tech / Applied Robotics",
+          "neighborhood": "West Oakland",
+          "employeeCount": 45,
+          "avgSalary": 120000,
+          "growthRate": "11.24"
+        },
+        {
+          "bizId": "BIZ-00188",
+          "name": "Mandela Data Works",
+          "sector": "Tech / Data Infrastructure",
+          "neighborhood": "West Oakland",
+          "employeeCount": 45,
+          "avgSalary": 120000,
+          "growthRate": "9.36"
+        },
+        {
+          "bizId": "BIZ-00189",
+          "name": "Hoover Street Software",
+          "sector": "Tech / Software",
+          "neighborhood": "West Oakland",
+          "employeeCount": 45,
+          "avgSalary": 120000,
+          "growthRate": "11.38"
+        },
+        {
+          "bizId": "BIZ-00184",
+          "name": "Oakland 12",
+          "sector": "Media & Journalism",
+          "neighborhood": "Fruitvale",
+          "employeeCount": 42,
+          "avgSalary": 58000,
+          "growthRate": "8.38"
+        },
+        {
+          "bizId": "BIZ-00052",
+          "name": "Civis Systems",
+          "sector": "Urban Systems Intelligence Firm",
+          "neighborhood": "West Oakland",
+          "employeeCount": 41,
+          "avgSalary": 230000,
+          "growthRate": "616%"
+        },
+        {
+          "bizId": "BIZ-00026",
+          "name": "Fruitvale Community Clinic",
+          "sector": "Healthcare",
+          "neighborhood": "Fruitvale",
+          "employeeCount": 38,
+          "avgSalary": 85000,
+          "growthRate": "14.43"
+        },
+        {
+          "bizId": "BIZ-00182",
+          "name": "Dillon Clinic",
+          "sector": "Healthcare",
+          "neighborhood": "Rockridge",
+          "employeeCount": 38,
+          "avgSalary": 85000,
+          "growthRate": "5.95"
+        },
+        {
+          "bizId": "BIZ-00218",
+          "name": "Temescal Urgent Care",
+          "sector": "Urgent Care Clinic",
+          "neighborhood": "Temescal",
+          "employeeCount": 38,
+          "avgSalary": 85000,
+          "growthRate": "2.6"
+        },
+        {
+          "bizId": "BIZ-00220",
+          "name": "North Oakland Home Health",
+          "sector": "Home Health Agency",
+          "neighborhood": "Temescal",
+          "employeeCount": 38,
+          "avgSalary": 85000,
+          "growthRate": "2.12"
+        },
+        {
+          "bizId": "BIZ-00223",
+          "name": "College Avenue Medical Group",
+          "sector": "Medical Specialists",
+          "neighborhood": "Rockridge",
+          "employeeCount": 38,
+          "avgSalary": 85000,
+          "growthRate": "4.44"
+        },
+        {
+          "bizId": "BIZ-00230",
+          "name": "Glass & Frame Optometry",
+          "sector": "Optometry Clinic",
+          "neighborhood": "Piedmont Ave",
+          "employeeCount": 38,
+          "avgSalary": 85000,
+          "growthRate": "4.52"
+        },
+        {
+          "bizId": "BIZ-00246",
+          "name": "Lakeside Paws",
+          "sector": "Veterinary Clinic",
+          "neighborhood": "Adams Point",
+          "employeeCount": 38,
+          "avgSalary": 85000,
+          "growthRate": "2.23"
+        },
+        {
+          "bizId": "BIZ-00257",
+          "name": "Estuary Pediatrics",
+          "sector": "Pediatric Clinic",
+          "neighborhood": "Brooklyn",
+          "employeeCount": 38,
+          "avgSalary": 85000,
+          "growthRate": "0.93"
+        },
+        {
+          "bizId": "BIZ-00090",
+          "name": "Calderon-Nishi",
+          "sector": "Construction",
+          "neighborhood": "Temescal",
+          "employeeCount": 34,
+          "avgSalary": 78000,
+          "growthRate": "7.28"
+        },
+        {
+          "bizId": "BIZ-00029",
+          "name": "Coliseum District Development",
+          "sector": "Real Estate",
+          "neighborhood": "Coliseum",
+          "employeeCount": 31,
+          "avgSalary": 105000,
+          "growthRate": "10.05"
+        },
+        {
+          "bizId": "BIZ-00036",
+          "name": "Blue Lantern Bar",
+          "sector": "Nightlife & Entertainment",
+          "neighborhood": "Jack London",
+          "employeeCount": 31,
+          "avgSalary": 65000,
+          "growthRate": "13.86"
+        },
+        {
+          "bizId": "BIZ-00051",
+          "name": "SpeedyBurger",
+          "sector": "Fast Food & Quick Service",
+          "neighborhood": "Downtown",
+          "employeeCount": 31,
+          "avgSalary": 58000,
+          "growthRate": "13.2"
+        },
+        {
+          "bizId": "BIZ-00033",
+          "name": "Jack London Square Markets",
+          "sector": "Retail & Food",
+          "neighborhood": "Jack London",
+          "employeeCount": 30,
+          "avgSalary": 65000,
+          "growthRate": "10.99"
+        },
+        {
+          "bizId": "BIZ-00037",
+          "name": "Temple Lounge",
+          "sector": "Nightlife & Entertainment",
+          "neighborhood": "Downtown",
+          "employeeCount": 30,
+          "avgSalary": 66000,
+          "growthRate": "13.3"
+        },
+        {
+          "bizId": "BIZ-00039",
+          "name": "Pulse District",
+          "sector": "Nightlife & Entertainment",
+          "neighborhood": "Uptown",
+          "employeeCount": 30,
+          "avgSalary": 66000,
+          "growthRate": "8.53"
+        },
+        {
+          "bizId": "BIZ-00040",
+          "name": "Merritt Club",
+          "sector": "Nightlife & Entertainment",
+          "neighborhood": "Lake Merritt",
+          "employeeCount": 30,
+          "avgSalary": 102000,
+          "growthRate": "6.29"
+        },
+        {
+          "bizId": "BIZ-00041",
+          "name": "Green & Gold Tavern",
+          "sector": "Sports Bar & Dining",
+          "neighborhood": "Jack London",
+          "employeeCount": 30,
+          "avgSalary": 61000,
+          "growthRate": "12.68"
+        },
+        {
+          "bizId": "BIZ-00042",
+          "name": "Dragon Gate Lounge",
+          "sector": "Nightlife & Entertainment",
+          "neighborhood": "Chinatown",
+          "employeeCount": 30,
+          "avgSalary": 46000,
+          "growthRate": "4.89"
+        },
+        {
+          "bizId": "BIZ-00064",
+          "name": "Art Walk Cafe",
+          "sector": "Cafe / gallery",
+          "neighborhood": "Uptown",
+          "employeeCount": 30,
+          "avgSalary": 48000,
+          "growthRate": "10.62"
+        },
+        {
+          "bizId": "BIZ-00066",
+          "name": "Gallery Night Lounge",
+          "sector": "Bar / lounge",
+          "neighborhood": "Uptown",
+          "employeeCount": 30,
+          "avgSalary": 53000,
+          "growthRate": "10.55"
+        },
+        {
+          "bizId": "BIZ-00068",
+          "name": "Marigold Cafe",
+          "sector": "Cafe / dining",
+          "neighborhood": "Fruitvale",
+          "employeeCount": 30,
+          "avgSalary": 51000,
+          "growthRate": "12.69"
+        },
+        {
+          "bizId": "BIZ-00272",
+          "name": "Coliseum Way Builders",
+          "sector": "Construction",
+          "neighborhood": "East Oakland",
+          "employeeCount": 30,
+          "avgSalary": 80000,
+          "growthRate": "6.55"
+        },
+        {
+          "bizId": "BIZ-00273",
+          "name": "Hegenberger Concrete & Steel",
+          "sector": "Construction Supply",
+          "neighborhood": "East Oakland",
+          "employeeCount": 30,
+          "avgSalary": 80000,
+          "growthRate": "6.86"
+        },
+        {
+          "bizId": "BIZ-00078",
+          "name": "Foothill Baptist Tabernacle",
+          "sector": "Faith Organization",
+          "neighborhood": "East Oakland",
+          "employeeCount": 26,
+          "avgSalary": 58000,
+          "growthRate": "4.04"
+        },
+        {
+          "bizId": "BIZ-00199",
+          "name": "Broadway Mutual Bank",
+          "sector": "Finance & Banking",
+          "neighborhood": "Downtown",
+          "employeeCount": 26,
+          "avgSalary": 95000,
+          "growthRate": "6.61"
+        },
+        {
+          "bizId": "BIZ-00200",
+          "name": "Clay Street Law Group",
+          "sector": "Law Firm",
+          "neighborhood": "Downtown",
+          "employeeCount": 26,
+          "avgSalary": 95000,
+          "growthRate": "6.42"
+        },
+        {
+          "bizId": "BIZ-00201",
+          "name": "Fourteenth Street Capital",
+          "sector": "Wealth Management / Finance",
+          "neighborhood": "Downtown",
+          "employeeCount": 26,
+          "avgSalary": 95000,
+          "growthRate": "6.21"
+        },
+        {
+          "bizId": "BIZ-00202",
+          "name": "Tower Commercial Property",
+          "sector": "Real Estate Finance",
+          "neighborhood": "Downtown",
+          "employeeCount": 26,
+          "avgSalary": 95000,
+          "growthRate": "6.21"
+        },
+        {
+          "bizId": "BIZ-00224",
+          "name": "Claremont Advisory Partners",
+          "sector": "Management Consulting",
+          "neighborhood": "Rockridge",
+          "employeeCount": 26,
+          "avgSalary": 95000,
+          "growthRate": "5.96"
+        },
+        {
+          "bizId": "BIZ-00237",
+          "name": "Grand Avenue Trust & Estate",
+          "sector": "Estate Law",
+          "neighborhood": "Lake Merritt",
+          "employeeCount": 26,
+          "avgSalary": 95000,
+          "growthRate": "4.63"
+        },
+        {
+          "bizId": "BIZ-00254",
+          "name": "Eastlake Community Credit Union",
+          "sector": "Credit Union / Finance",
+          "neighborhood": "Eastlake",
+          "employeeCount": 26,
+          "avgSalary": 95000,
+          "growthRate": "4.14"
+        },
+        {
+          "bizId": "BIZ-00260",
+          "name": "International Boulevard Staffing",
+          "sector": "Staffing Agency / Professional Services",
+          "neighborhood": "San Antonio",
+          "employeeCount": 26,
+          "avgSalary": 95000,
+          "growthRate": "2.3"
+        },
+        {
+          "bizId": "BIZ-00006",
+          "name": "Baylight District Management",
+          "sector": "Development",
+          "neighborhood": "Baylight District",
+          "employeeCount": 25,
+          "avgSalary": 120000,
+          "growthRate": "5.34"
+        },
+        {
+          "bizId": "BIZ-00010",
+          "name": "Portside Bio",
+          "sector": "Biotech",
+          "neighborhood": "Brooklyn Basin",
+          "employeeCount": 25,
+          "avgSalary": 115000,
+          "growthRate": "13.67"
+        },
+        {
+          "bizId": "BIZ-00043",
+          "name": "OakHouse",
+          "sector": "Restaurant & Dining",
+          "neighborhood": "Rockridge",
+          "employeeCount": 22,
+          "avgSalary": 83000,
+          "growthRate": "10.07"
+        },
+        {
+          "bizId": "BIZ-00082",
+          "name": "New Covenant Pentecostal Assembly",
+          "sector": "Faith Organization",
+          "neighborhood": "West Oakland",
+          "employeeCount": 22,
+          "avgSalary": 56000,
+          "growthRate": "4.3"
+        },
+        {
+          "bizId": "BIZ-00099",
+          "name": "OakTown Echo",
+          "sector": "Media & Journalism",
+          "neighborhood": "West Oakland",
+          "employeeCount": 21,
+          "avgSalary": 90000,
+          "growthRate": "4.54"
+        },
+        {
+          "bizId": "BIZ-00008",
+          "name": "Gridiron Analytics",
+          "sector": "Sports Analytics",
+          "neighborhood": "Temescal",
+          "employeeCount": 20,
+          "avgSalary": 110000,
+          "growthRate": "26.75"
+        },
+        {
+          "bizId": "BIZ-00103",
+          "name": "Firehouse 29 West Oakland Baseball Academy",
+          "sector": "Sports",
+          "neighborhood": "West Oakland",
+          "employeeCount": 20,
+          "avgSalary": 76000,
+          "growthRate": "4.03"
+        },
+        {
+          "bizId": "BIZ-00094",
+          "name": "West Oakland Stabilization Fund",
+          "sector": "Community Development",
+          "neighborhood": "West Oakland",
+          "employeeCount": 19,
+          "avgSalary": 78000,
+          "growthRate": "4.82"
+        },
+        {
+          "bizId": "BIZ-00096",
+          "name": "Fruitvale Transit Hub Authority",
+          "sector": "Transit & Infrastructure",
+          "neighborhood": "Fruitvale",
+          "employeeCount": 18,
+          "avgSalary": 92000,
+          "growthRate": "7.77"
+        },
+        {
+          "bizId": "BIZ-00075",
+          "name": "Romano's",
+          "sector": "Food & Beverage",
+          "neighborhood": "Dimond",
+          "employeeCount": 16,
+          "avgSalary": 42000,
+          "growthRate": "5.4"
+        },
+        {
+          "bizId": "BIZ-00116",
+          "name": "Slip Street Kitchen",
+          "sector": "Restaurant & Dining",
+          "neighborhood": "Brooklyn",
+          "employeeCount": 16,
+          "avgSalary": 68000,
+          "growthRate": "3.72"
+        },
+        {
+          "bizId": "BIZ-00178",
+          "name": "First Lamp Club",
+          "sector": "Nightlife & Entertainment",
+          "neighborhood": "Uptown",
+          "employeeCount": 16,
+          "avgSalary": 53000,
+          "growthRate": "11.75"
+        },
+        {
+          "bizId": "BIZ-00104",
+          "name": "Bubic Burgers",
+          "sector": "Food & Beverage",
+          "neighborhood": "Baylight District",
+          "employeeCount": 15,
+          "avgSalary": 73000,
+          "growthRate": "0.67"
+        },
+        {
+          "bizId": "BIZ-00169",
+          "name": "Claremont Table",
+          "sector": "Restaurant & Dining",
+          "neighborhood": "Rockridge",
+          "employeeCount": 15,
+          "avgSalary": 83000,
+          "growthRate": "8.11"
+        },
+        {
+          "bizId": "BIZ-00207",
+          "name": "Harrison Street Chinese School",
+          "sector": "Education",
+          "neighborhood": "Chinatown",
+          "employeeCount": 15,
+          "avgSalary": 62000,
+          "growthRate": "2.12"
+        },
+        {
+          "bizId": "BIZ-00226",
+          "name": "Hillside Preparatory",
+          "sector": "Private School",
+          "neighborhood": "Rockridge",
+          "employeeCount": 15,
+          "avgSalary": 62000,
+          "growthRate": "3.25"
+        },
+        {
+          "bizId": "BIZ-00261",
+          "name": "Early Shift Childcare",
+          "sector": "Preschool & Early Education",
+          "neighborhood": "San Antonio",
+          "employeeCount": 15,
+          "avgSalary": 62000,
+          "growthRate": "0.42"
+        },
+        {
+          "bizId": "BIZ-00279",
+          "name": "MacArthur Tutoring Center",
+          "sector": "Tutoring",
+          "neighborhood": "Laurel",
+          "employeeCount": 15,
+          "avgSalary": 62000,
+          "growthRate": "0.67"
+        },
+        {
+          "bizId": "BIZ-00284",
+          "name": "Oakland City College — Laurel Campus",
+          "sector": "Education",
+          "neighborhood": "Laurel",
+          "employeeCount": 15,
+          "avgSalary": 62000,
+          "growthRate": "0.63"
+        },
+        {
+          "bizId": "BIZ-00073",
+          "name": "Spooky Spirits Lounge",
+          "sector": "Hospitality",
+          "neighborhood": "West Oakland",
+          "employeeCount": 14,
+          "avgSalary": 80000,
+          "growthRate": "9.28"
+        },
+        {
+          "bizId": "BIZ-00097",
+          "name": "Temescal Community Health Center",
+          "sector": "Healthcare",
+          "neighborhood": "Temescal",
+          "employeeCount": 14,
+          "avgSalary": 88000,
+          "growthRate": "0.78"
+        },
+        {
+          "bizId": "BIZ-00114",
+          "name": "Basin Grocer",
+          "sector": "Retail",
+          "neighborhood": "Brooklyn",
+          "employeeCount": 14,
+          "avgSalary": 72000,
+          "growthRate": "4.09"
+        },
+        {
+          "bizId": "BIZ-00119",
+          "name": "Ninth Street Kitchen",
+          "sector": "Restaurant & Dining",
+          "neighborhood": "Chinatown",
+          "employeeCount": 14,
+          "avgSalary": 44000,
+          "growthRate": "4.22"
+        },
+        {
+          "bizId": "BIZ-00148",
+          "name": "Market Day Kitchen",
+          "sector": "Restaurant & Dining",
+          "neighborhood": "Grand Lake",
+          "employeeCount": 14,
+          "avgSalary": 55000,
+          "growthRate": "12.13"
+        },
+        {
+          "bizId": "BIZ-00165",
+          "name": "Piedmont Avenue Specialists",
+          "sector": "Healthcare",
+          "neighborhood": "Piedmont Ave",
+          "employeeCount": 14,
+          "avgSalary": 143000,
+          "growthRate": "5.49"
+        },
+        {
+          "bizId": "BIZ-00077",
+          "name": "Nino's",
+          "sector": "Food & Beverage",
+          "neighborhood": "Laurel",
+          "employeeCount": 13,
+          "avgSalary": 45000,
+          "growthRate": "-0.22"
+        },
+        {
+          "bizId": "BIZ-00129",
+          "name": "Eastside Family Market",
+          "sector": "Retail",
+          "neighborhood": "East Oakland",
+          "employeeCount": 13,
+          "avgSalary": 40000,
+          "growthRate": "10.12"
+        },
+        {
+          "bizId": "BIZ-00156",
+          "name": "Northgate Kitchen",
+          "sector": "Restaurant & Dining",
+          "neighborhood": "KONO",
+          "employeeCount": 13,
+          "avgSalary": 43000,
+          "growthRate": "7.34"
+        },
+        {
+          "bizId": "BIZ-00007",
+          "name": "Ridgeline Ventures",
+          "sector": "Venture Capital",
+          "neighborhood": "Lake Merritt",
+          "employeeCount": 12,
+          "avgSalary": 210000,
+          "growthRate": "17.82"
+        },
+        {
+          "bizId": "BIZ-00085",
+          "name": "Temple Beth Or",
+          "sector": "Faith Organization",
+          "neighborhood": "Rockridge",
+          "employeeCount": 12,
+          "avgSalary": 61000,
+          "growthRate": "5.22"
+        },
+        {
+          "bizId": "BIZ-00115",
+          "name": "Basin Athletic Club",
+          "sector": "Services",
+          "neighborhood": "Brooklyn",
+          "employeeCount": 12,
+          "avgSalary": 72000,
+          "growthRate": "5.06"
+        },
+        {
+          "bizId": "BIZ-00120",
+          "name": "Golden Lotus Market",
+          "sector": "Retail",
+          "neighborhood": "Chinatown",
+          "employeeCount": 12,
+          "avgSalary": 46000,
+          "growthRate": "4.4"
+        },
+        {
+          "bizId": "BIZ-00132",
+          "name": "Foothill Kitchen",
+          "sector": "Restaurant & Dining",
+          "neighborhood": "East Oakland",
+          "employeeCount": 12,
+          "avgSalary": 37000,
+          "growthRate": "8.84"
+        },
+        {
+          "bizId": "BIZ-00134",
+          "name": "Eastlake Kitchen",
+          "sector": "Restaurant & Dining",
+          "neighborhood": "Eastlake",
+          "employeeCount": 12,
+          "avgSalary": 44000,
+          "growthRate": "2.36"
+        },
+        {
+          "bizId": "BIZ-00145",
+          "name": "Marquee Grocer",
+          "sector": "Retail",
+          "neighborhood": "Grand Lake",
+          "employeeCount": 12,
+          "avgSalary": 58000,
+          "growthRate": "11.37"
+        },
+        {
+          "bizId": "BIZ-00158",
+          "name": "The Northgate Bar",
+          "sector": "Nightlife & Entertainment",
+          "neighborhood": "KONO",
+          "employeeCount": 12,
+          "avgSalary": 45000,
+          "growthRate": "7.48"
+        },
+        {
+          "bizId": "BIZ-00160",
+          "name": "Laurel Market",
+          "sector": "Retail",
+          "neighborhood": "Laurel",
+          "employeeCount": 12,
+          "avgSalary": 47000,
+          "growthRate": "1.25"
+        },
+        {
+          "bizId": "BIZ-00172",
+          "name": "Shift Change Kitchen",
+          "sector": "Restaurant & Dining",
+          "neighborhood": "San Antonio",
+          "employeeCount": 12,
+          "avgSalary": 36000,
+          "growthRate": "-1.65"
+        },
+        {
+          "bizId": "BIZ-00048",
+          "name": "West Side Cafe",
+          "sector": "Restaurant & Dining",
+          "neighborhood": "West Oakland",
+          "employeeCount": 11,
+          "avgSalary": 75000,
+          "growthRate": "11.01"
+        },
+        {
+          "bizId": "BIZ-00081",
+          "name": "St. Esperanza Parish",
+          "sector": "Faith Organization",
+          "neighborhood": "Fruitvale",
+          "employeeCount": 11,
+          "avgSalary": 54000,
+          "growthRate": "5.97"
+        },
+        {
+          "bizId": "BIZ-00098",
+          "name": "Oakland Youth Apprenticeship Pipeline",
+          "sector": "Workforce Development",
+          "neighborhood": "Downtown",
+          "employeeCount": 11,
+          "avgSalary": 0,
+          "growthRate": "8"
+        },
+        {
+          "bizId": "BIZ-00109",
+          "name": "Vernon Street Market",
+          "sector": "Retail",
+          "neighborhood": "Adams Point",
+          "employeeCount": 11,
+          "avgSalary": 52000,
+          "growthRate": "1.67"
+        },
+        {
+          "bizId": "BIZ-00127",
+          "name": "Two Tables Kitchen",
+          "sector": "Restaurant & Dining",
+          "neighborhood": "Dimond",
+          "employeeCount": 11,
+          "avgSalary": 42000,
+          "growthRate": "5.75"
+        },
+        {
+          "bizId": "BIZ-00163",
+          "name": "MacArthur Kitchen",
+          "sector": "Restaurant & Dining",
+          "neighborhood": "Laurel",
+          "employeeCount": 11,
+          "avgSalary": 45000,
+          "growthRate": "0.16"
+        },
+        {
+          "bizId": "BIZ-00168",
+          "name": "Canopy Market",
+          "sector": "Retail",
+          "neighborhood": "Rockridge",
+          "employeeCount": 11,
+          "avgSalary": 88000,
+          "growthRate": "8.72"
+        },
+        {
+          "bizId": "BIZ-00173",
+          "name": "Twelfth Avenue Market",
+          "sector": "Retail",
+          "neighborhood": "San Antonio",
+          "employeeCount": 11,
+          "avgSalary": 39000,
+          "growthRate": "0.37"
+        },
+        {
+          "bizId": "BIZ-00191",
+          "name": "Heinold's First and Last Chance Saloon",
+          "sector": "Bar / Saloon / Historic Landmark",
+          "neighborhood": "Jack London",
+          "employeeCount": 11,
+          "avgSalary": 48000,
+          "growthRate": "6.66"
+        },
+        {
+          "bizId": "BIZ-00194",
+          "name": "Estuary Oyster House",
+          "sector": "Restaurant & Dining",
+          "neighborhood": "Jack London",
+          "employeeCount": 11,
+          "avgSalary": 48000,
+          "growthRate": "6.15"
+        },
+        {
+          "bizId": "BIZ-00195",
+          "name": "Dockside Comedy Club",
+          "sector": "Comedy Club",
+          "neighborhood": "Jack London",
+          "employeeCount": 11,
+          "avgSalary": 48000,
+          "growthRate": "6.89"
+        },
+        {
+          "bizId": "BIZ-00196",
+          "name": "Warehouse Nine Brewing",
+          "sector": "Brewery",
+          "neighborhood": "Jack London",
+          "employeeCount": 11,
+          "avgSalary": 48000,
+          "growthRate": "6.21"
+        },
+        {
+          "bizId": "BIZ-00197",
+          "name": "The Hold",
+          "sector": "Dance Club / Nightlife & Entertainment",
+          "neighborhood": "Jack London",
+          "employeeCount": 11,
+          "avgSalary": 48000,
+          "growthRate": "5.97"
+        },
+        {
+          "bizId": "BIZ-00198",
+          "name": "Third Street Late Kitchen",
+          "sector": "Late-Night Restaurant & Dining",
+          "neighborhood": "Jack London",
+          "employeeCount": 11,
+          "avgSalary": 48000,
+          "growthRate": "5.7"
+        },
+        {
+          "bizId": "BIZ-00204",
+          "name": "Eight Treasures Dim Sum House",
+          "sector": "Restaurant & Dining",
+          "neighborhood": "Chinatown",
+          "employeeCount": 11,
+          "avgSalary": 48000,
+          "growthRate": "2.73"
+        },
+        {
+          "bizId": "BIZ-00211",
+          "name": "Telegraph Supper Club",
+          "sector": "Restaurant & Dining",
+          "neighborhood": "Uptown",
+          "employeeCount": 11,
+          "avgSalary": 48000,
+          "growthRate": "5.44"
+        },
+        {
+          "bizId": "BIZ-00212",
+          "name": "Neon Alley Cocktails",
+          "sector": "Bar / Lounge",
+          "neighborhood": "Uptown",
+          "employeeCount": 11,
+          "avgSalary": 48000,
+          "growthRate": "5.43"
+        },
+        {
+          "bizId": "BIZ-00214",
+          "name": "Han River BBQ",
+          "sector": "Korean Restaurant",
+          "neighborhood": "KONO",
+          "employeeCount": 11,
+          "avgSalary": 48000,
+          "growthRate": "2.4"
+        },
+        {
+          "bizId": "BIZ-00217",
+          "name": "Midnight Norae Karaoke",
+          "sector": "Karaoke Bar",
+          "neighborhood": "KONO",
+          "employeeCount": 11,
+          "avgSalary": 48000,
+          "growthRate": "3.03"
+        },
+        {
+          "bizId": "BIZ-00221",
+          "name": "Shafter Street Coffee",
+          "sector": "Cafe",
+          "neighborhood": "Temescal",
+          "employeeCount": 11,
+          "avgSalary": 48000,
+          "growthRate": "2.06"
+        },
+        {
+          "bizId": "BIZ-00227",
+          "name": "Piedmont Avenue Bistro",
+          "sector": "Restaurant & Dining",
+          "neighborhood": "Piedmont Ave",
+          "employeeCount": 11,
+          "avgSalary": 48000,
+          "growthRate": "5.69"
+        },
+        {
+          "bizId": "BIZ-00228",
+          "name": "Montclair Patisserie",
+          "sector": "Bakery / Patisserie",
+          "neighborhood": "Piedmont Ave",
+          "employeeCount": 11,
+          "avgSalary": 48000,
+          "growthRate": "6.19"
+        },
+        {
+          "bizId": "BIZ-00236",
+          "name": "Lakeside Rowing Club",
+          "sector": "Private Club",
+          "neighborhood": "Lake Merritt",
+          "employeeCount": 11,
+          "avgSalary": 48000,
+          "growthRate": "3.96"
+        },
+        {
+          "bizId": "BIZ-00238",
+          "name": "The Pergola Cafe",
+          "sector": "Cafe",
+          "neighborhood": "Lake Merritt",
+          "employeeCount": 11,
+          "avgSalary": 48000,
+          "growthRate": "3.74"
+        },
+        {
+          "bizId": "BIZ-00241",
+          "name": "Lakeshore Cigar Club",
+          "sector": "Cigar Lounge",
+          "neighborhood": "Lake Merritt",
+          "employeeCount": 11,
+          "avgSalary": 48000,
+          "growthRate": "3.53"
+        },
+        {
+          "bizId": "BIZ-00242",
+          "name": "Grand Avenue Wine Bar",
+          "sector": "Wine Bar",
+          "neighborhood": "Lake Merritt",
+          "employeeCount": 11,
+          "avgSalary": 48000,
+          "growthRate": "3.78"
+        },
+        {
+          "bizId": "BIZ-00243",
+          "name": "Perkins Street Taqueria",
+          "sector": "Restaurant & Dining",
+          "neighborhood": "Adams Point",
+          "employeeCount": 11,
+          "avgSalary": 48000,
+          "growthRate": "1.67"
+        },
+        {
+          "bizId": "BIZ-00245",
+          "name": "Bellevue Coffee Roasters",
+          "sector": "Coffee Roaster",
+          "neighborhood": "Adams Point",
+          "employeeCount": 11,
+          "avgSalary": 48000,
+          "growthRate": "2.71"
+        },
+        {
+          "bizId": "BIZ-00248",
+          "name": "Grand Lake Saturday Market",
+          "sector": "Farmers Market",
+          "neighborhood": "Grand Lake",
+          "employeeCount": 11,
+          "avgSalary": 48000,
+          "growthRate": "6.08"
+        },
+        {
+          "bizId": "BIZ-00250",
+          "name": "Lakeshore Creamery",
+          "sector": "Ice Cream / Dessert Cafe",
+          "neighborhood": "Grand Lake",
+          "employeeCount": 11,
+          "avgSalary": 48000,
+          "growthRate": "6.28"
+        },
+        {
+          "bizId": "BIZ-00251",
+          "name": "Grand Slice",
+          "sector": "Pizzeria / Restaurant & Dining",
+          "neighborhood": "Grand Lake",
+          "employeeCount": 11,
+          "avgSalary": 48000,
+          "growthRate": "4.67"
+        },
+        {
+          "bizId": "BIZ-00252",
+          "name": "Lakeshore Pho House",
+          "sector": "Vietnamese Restaurant",
+          "neighborhood": "Eastlake",
+          "employeeCount": 11,
+          "avgSalary": 48000,
+          "growthRate": "2.72"
+        },
+        {
+          "bizId": "BIZ-00253",
+          "name": "Eastlake Tap Room",
+          "sector": "Bar",
+          "neighborhood": "Eastlake",
+          "employeeCount": 11,
+          "avgSalary": 48000,
+          "growthRate": "1.71"
+        },
+        {
+          "bizId": "BIZ-00262",
+          "name": "Panadería La Doce",
+          "sector": "Bakery",
+          "neighborhood": "San Antonio",
+          "employeeCount": 11,
+          "avgSalary": 48000,
+          "growthRate": "0.95"
+        },
+        {
+          "bizId": "BIZ-00265",
+          "name": "Taquería El Andén",
+          "sector": "Taquería / Restaurant",
+          "neighborhood": "Fruitvale",
+          "employeeCount": 11,
+          "avgSalary": 48000,
+          "growthRate": "6.27"
+        },
+        {
+          "bizId": "BIZ-00267",
+          "name": "Platform Brunch",
+          "sector": "Brunch Restaurant",
+          "neighborhood": "Fruitvale",
+          "employeeCount": 11,
+          "avgSalary": 48000,
+          "growthRate": "6.31"
+        },
+        {
+          "bizId": "BIZ-00269",
+          "name": "Taco Fusion",
+          "sector": "Fusion Restaurant",
+          "neighborhood": "Fruitvale",
+          "employeeCount": 11,
+          "avgSalary": 48000,
+          "growthRate": "6.09"
+        },
+        {
+          "bizId": "BIZ-00270",
+          "name": "Hub Ramen",
+          "sector": "Ramen Bar",
+          "neighborhood": "Fruitvale",
+          "employeeCount": 11,
+          "avgSalary": 48000,
+          "growthRate": "6.13"
+        },
+        {
+          "bizId": "BIZ-00271",
+          "name": "Masa & Vine",
+          "sector": "Small Plates & Natural Wine Bar",
+          "neighborhood": "Fruitvale",
+          "employeeCount": 11,
+          "avgSalary": 48000,
+          "growthRate": "6.28"
+        },
+        {
+          "bizId": "BIZ-00274",
+          "name": "Coliseum Corner Sports Bar",
+          "sector": "Sports Bar & Grill",
+          "neighborhood": "East Oakland",
+          "employeeCount": 11,
+          "avgSalary": 48000,
+          "growthRate": "5.6"
+        },
+        {
+          "bizId": "BIZ-00275",
+          "name": "Flatlands Soul Kitchen",
+          "sector": "Restaurant & Dining",
+          "neighborhood": "East Oakland",
+          "employeeCount": 11,
+          "avgSalary": 48000,
+          "growthRate": "3.75"
+        },
+        {
+          "bizId": "BIZ-00285",
+          "name": "Fruitvale Avenue Social Club",
+          "sector": "Social Club",
+          "neighborhood": "Dimond",
+          "employeeCount": 11,
+          "avgSalary": 48000,
+          "growthRate": "2.29"
+        },
+        {
+          "bizId": "BIZ-00286",
+          "name": "Dimond Billiards",
+          "sector": "Pool Hall & Bar",
+          "neighborhood": "Dimond",
+          "employeeCount": 11,
+          "avgSalary": 48000,
+          "growthRate": "2.95"
+        },
+        {
+          "bizId": "BIZ-00289",
+          "name": "Tops n Tassels",
+          "sector": "Gentlemen's Club / Adult Entertainment",
+          "neighborhood": "Dimond",
+          "employeeCount": 11,
+          "avgSalary": 48000,
+          "growthRate": "2.52"
+        },
+        {
+          "bizId": "BIZ-00062",
+          "name": "Dario's Bar",
+          "sector": "Bar / nightlife",
+          "neighborhood": "Telegraph corridor",
+          "employeeCount": 10,
+          "avgSalary": 35000,
+          "growthRate": "3.01"
+        },
+        {
+          "bizId": "BIZ-00101",
+          "name": "Oakland Entertainment Talent Agency",
+          "sector": "Talent Management",
+          "neighborhood": "Downtown",
+          "employeeCount": 10,
+          "avgSalary": 66000,
+          "growthRate": "7.91"
+        },
+        {
+          "bizId": "BIZ-00133",
+          "name": "Eastlake Corner Market",
+          "sector": "Retail",
+          "neighborhood": "Eastlake",
+          "employeeCount": 10,
+          "avgSalary": 46000,
+          "growthRate": "0.9"
+        },
+        {
+          "bizId": "BIZ-00144",
+          "name": "Glenview Kitchen",
+          "sector": "Restaurant & Dining",
+          "neighborhood": "Glenview",
+          "employeeCount": 10,
+          "avgSalary": 43000,
+          "growthRate": "-1.97"
+        },
+        {
+          "bizId": "BIZ-00076",
+          "name": "Port Grind",
+          "sector": "Food & Beverage",
+          "neighborhood": "Grand Lake",
+          "employeeCount": 9,
+          "avgSalary": 55000,
+          "growthRate": "13.1"
+        },
+        {
+          "bizId": "BIZ-00084",
+          "name": "Lakeshore Unitarian Universalist Fellowship",
+          "sector": "Faith Organization",
+          "neighborhood": "Lake Merritt",
+          "employeeCount": 9,
+          "avgSalary": 57000,
+          "growthRate": "2.9"
+        },
+        {
+          "bizId": "BIZ-00113",
+          "name": "Quay Coffee",
+          "sector": "Cafe / dining",
+          "neighborhood": "Brooklyn",
+          "employeeCount": 9,
+          "avgSalary": 65000,
+          "growthRate": "5.1"
+        },
+        {
+          "bizId": "BIZ-00123",
+          "name": "Heritage Bakehouse",
+          "sector": "Food & Beverage",
+          "neighborhood": "Chinatown",
+          "employeeCount": 9,
+          "avgSalary": 44000,
+          "growthRate": "5.9"
+        },
+        {
+          "bizId": "BIZ-00131",
+          "name": "Eastside Auto",
+          "sector": "Services",
+          "neighborhood": "East Oakland",
+          "employeeCount": 9,
+          "avgSalary": 40000,
+          "growthRate": "5.59"
+        },
+        {
+          "bizId": "BIZ-00136",
+          "name": "Parkedge Diner",
+          "sector": "Restaurant & Dining",
+          "neighborhood": "Eastlake",
+          "employeeCount": 9,
+          "avgSalary": 44000,
+          "growthRate": "3.17"
+        },
+        {
+          "bizId": "BIZ-00139",
+          "name": "Hillside Family Market",
+          "sector": "Retail",
+          "neighborhood": "Glenview",
+          "employeeCount": 9,
+          "avgSalary": 45000,
+          "growthRate": "-0.21"
+        },
+        {
+          "bizId": "BIZ-00192",
+          "name": "Embarcadero Music Hall",
+          "sector": "Music Venue",
+          "neighborhood": "Jack London",
+          "employeeCount": 9,
+          "avgSalary": 55000,
+          "growthRate": "6.05"
+        },
+        {
+          "bizId": "BIZ-00193",
+          "name": "Loading Dock Studios",
+          "sector": "Design Studio",
+          "neighborhood": "Jack London",
+          "employeeCount": 9,
+          "avgSalary": 55000,
+          "growthRate": "5.14"
+        },
+        {
+          "bizId": "BIZ-00208",
+          "name": "Paramount Theatre",
+          "sector": "Theater / Historic Landmark",
+          "neighborhood": "Uptown",
+          "employeeCount": 9,
+          "avgSalary": 55000,
+          "growthRate": "5.48"
+        },
+        {
+          "bizId": "BIZ-00209",
+          "name": "Uptown Playhouse",
+          "sector": "Theater Company / Performance Space",
+          "neighborhood": "Uptown",
+          "employeeCount": 9,
+          "avgSalary": 55000,
+          "growthRate": "4.89"
+        },
+        {
+          "bizId": "BIZ-00210",
+          "name": "Nineteenth Street Gallery",
+          "sector": "Art Gallery",
+          "neighborhood": "Uptown",
+          "employeeCount": 9,
+          "avgSalary": 55000,
+          "growthRate": "5.01"
+        },
+        {
+          "bizId": "BIZ-00213",
+          "name": "Fox Theater Oakland",
+          "sector": "Theater / Historic Landmark",
+          "neighborhood": "KONO",
+          "employeeCount": 9,
+          "avgSalary": 55000,
+          "growthRate": "2.59"
+        },
+        {
+          "bizId": "BIZ-00216",
+          "name": "Telegraph Studio Collective",
+          "sector": "Artist Studios",
+          "neighborhood": "KONO",
+          "employeeCount": 9,
+          "avgSalary": 55000,
+          "growthRate": "2.86"
+        },
+        {
+          "bizId": "BIZ-00247",
+          "name": "Lakeshore Grand Theatre",
+          "sector": "Movie Theater",
+          "neighborhood": "Grand Lake",
+          "employeeCount": 9,
+          "avgSalary": 55000,
+          "growthRate": "6.42"
+        },
+        {
+          "bizId": "BIZ-00281",
+          "name": "Laurel Music School",
+          "sector": "Music School",
+          "neighborhood": "Laurel",
+          "employeeCount": 9,
+          "avgSalary": 55000,
+          "growthRate": "1.38"
+        },
+        {
+          "bizId": "BIZ-00088",
+          "name": "Cathedral of the Living Word",
+          "sector": "Faith Organization",
+          "neighborhood": "Lake Merritt",
+          "employeeCount": 8,
+          "avgSalary": 52000,
+          "growthRate": "3.42"
+        },
+        {
+          "bizId": "BIZ-00091",
+          "name": "KONO Hardware",
+          "sector": "Retail",
+          "neighborhood": "KONO",
+          "employeeCount": 8,
+          "avgSalary": 45000,
+          "growthRate": "4.12"
+        },
+        {
+          "bizId": "BIZ-00108",
+          "name": "Lakeshore Cafe",
+          "sector": "Cafe / dining",
+          "neighborhood": "Adams Point",
+          "employeeCount": 8,
+          "avgSalary": 48000,
+          "growthRate": "2.61"
+        },
+        {
+          "bizId": "BIZ-00117",
+          "name": "Brooklyn Pharmacy",
+          "sector": "Retail",
+          "neighborhood": "Brooklyn",
+          "employeeCount": 8,
+          "avgSalary": 72000,
+          "growthRate": "3.63"
+        },
+        {
+          "bizId": "BIZ-00125",
+          "name": "Village Lock and Hardware",
+          "sector": "Retail",
+          "neighborhood": "Dimond",
+          "employeeCount": 8,
+          "avgSalary": 44000,
+          "growthRate": "4.29"
+        },
+        {
+          "bizId": "BIZ-00130",
+          "name": "Sunrise Cafe",
+          "sector": "Cafe / dining",
+          "neighborhood": "East Oakland",
+          "employeeCount": 8,
+          "avgSalary": 36000,
+          "growthRate": "7.4"
+        },
+        {
+          "bizId": "BIZ-00146",
+          "name": "Intermission Cafe",
+          "sector": "Cafe / dining",
+          "neighborhood": "Grand Lake",
+          "employeeCount": 8,
+          "avgSalary": 53000,
+          "growthRate": "7.55"
+        },
+        {
+          "bizId": "BIZ-00161",
+          "name": "Schoolgate Cafe",
+          "sector": "Cafe / dining",
+          "neighborhood": "Laurel",
+          "employeeCount": 8,
+          "avgSalary": 43000,
+          "growthRate": "0.92"
+        },
+        {
+          "bizId": "BIZ-00167",
+          "name": "Piedmont Avenue Pharmacy",
+          "sector": "Retail",
+          "neighborhood": "Piedmont Ave",
+          "employeeCount": 8,
+          "avgSalary": 83000,
+          "growthRate": "8.36"
+        },
+        {
+          "bizId": "BIZ-00170",
+          "name": "College Avenue Dental",
+          "sector": "Healthcare",
+          "neighborhood": "Rockridge",
+          "employeeCount": 8,
+          "avgSalary": 152000,
+          "growthRate": "4.38"
+        },
+        {
+          "bizId": "BIZ-00176",
+          "name": "Park Boulevard Cafe",
+          "sector": "Cafe / dining",
+          "neighborhood": "San Antonio",
+          "employeeCount": 8,
+          "avgSalary": 35000,
+          "growthRate": "1.59"
+        },
+        {
+          "bizId": "BIZ-00181",
+          "name": "Mayday Movers",
+          "sector": "Services",
+          "neighborhood": "Piedmont Ave",
+          "employeeCount": 8,
+          "avgSalary": 44000,
+          "growthRate": "4.93"
+        },
+        {
+          "bizId": "BIZ-00038",
+          "name": "OakTown Social",
+          "sector": "Nightlife & Entertainment",
+          "neighborhood": "Temescal",
+          "employeeCount": 7,
+          "avgSalary": 37000,
+          "growthRate": "1.86"
+        },
+        {
+          "bizId": "BIZ-00044",
+          "name": "Harborline Grill",
+          "sector": "Restaurant & Dining",
+          "neighborhood": "Jack London",
+          "employeeCount": 7,
+          "avgSalary": 61000,
+          "growthRate": "12"
+        },
+        {
+          "bizId": "BIZ-00072",
+          "name": "Mendez Printing",
+          "sector": "Services",
+          "neighborhood": "West Oakland",
+          "employeeCount": 7,
+          "avgSalary": 80000,
+          "growthRate": "6.37"
+        },
+        {
+          "bizId": "BIZ-00122",
+          "name": "Lantern Pharmacy",
+          "sector": "Retail",
+          "neighborhood": "Chinatown",
+          "employeeCount": 7,
+          "avgSalary": 46000,
+          "growthRate": "4.9"
+        },
+        {
+          "bizId": "BIZ-00124",
+          "name": "Sausal Creek Cafe",
+          "sector": "Cafe / dining",
+          "neighborhood": "Dimond",
+          "employeeCount": 7,
+          "avgSalary": 40000,
+          "growthRate": "4.47"
+        },
+        {
+          "bizId": "BIZ-00143",
+          "name": "Slopeview Hardware",
+          "sector": "Retail",
+          "neighborhood": "Glenview",
+          "employeeCount": 7,
+          "avgSalary": 45000,
+          "growthRate": "-1.73"
+        },
+        {
+          "bizId": "BIZ-00149",
+          "name": "Lakeshore Outfitters",
+          "sector": "Retail",
+          "neighborhood": "Grand Lake",
+          "employeeCount": 7,
+          "avgSalary": 58000,
+          "growthRate": "9.72"
+        },
+        {
+          "bizId": "BIZ-00162",
+          "name": "Laurel Pharmacy",
+          "sector": "Retail",
+          "neighborhood": "Laurel",
+          "employeeCount": 7,
+          "avgSalary": 47000,
+          "growthRate": "-0.12"
+        },
+        {
+          "bizId": "BIZ-00171",
+          "name": "Rockridge Pharmacy",
+          "sector": "Retail",
+          "neighborhood": "Rockridge",
+          "employeeCount": 7,
+          "avgSalary": 88000,
+          "growthRate": "7.16"
+        },
+        {
+          "bizId": "BIZ-00175",
+          "name": "San Antonio Pharmacy",
+          "sector": "Retail",
+          "neighborhood": "San Antonio",
+          "employeeCount": 7,
+          "avgSalary": 39000,
+          "growthRate": "0.7"
+        },
+        {
+          "bizId": "BIZ-00080",
+          "name": "Temescal Islamic Center",
+          "sector": "Faith Organization",
+          "neighborhood": "Temescal",
+          "employeeCount": 6,
+          "avgSalary": 51000,
+          "growthRate": "3.93"
+        },
+        {
+          "bizId": "BIZ-00092",
+          "name": "B'nai Tikvah Synagogue",
+          "sector": "Synagogue",
+          "neighborhood": "Piedmont Ave",
+          "employeeCount": 6,
+          "avgSalary": 56000,
+          "growthRate": "3.78"
+        },
+        {
+          "bizId": "BIZ-00112",
+          "name": "Point Press Laundry",
+          "sector": "Services",
+          "neighborhood": "Adams Point",
+          "employeeCount": 6,
+          "avgSalary": 52000,
+          "growthRate": "-0.03"
+        },
+        {
+          "bizId": "BIZ-00121",
+          "name": "Jade Thread Tailors",
+          "sector": "Services",
+          "neighborhood": "Chinatown",
+          "employeeCount": 6,
+          "avgSalary": 46000,
+          "growthRate": "5.33"
+        },
+        {
+          "bizId": "BIZ-00126",
+          "name": "Dimond Pharmacy",
+          "sector": "Retail",
+          "neighborhood": "Dimond",
+          "employeeCount": 6,
+          "avgSalary": 44000,
+          "growthRate": "4.67"
+        },
+        {
+          "bizId": "BIZ-00137",
+          "name": "Eastlake Pharmacy",
+          "sector": "Retail",
+          "neighborhood": "Eastlake",
+          "employeeCount": 6,
+          "avgSalary": 46000,
+          "growthRate": "2.22"
+        },
+        {
+          "bizId": "BIZ-00140",
+          "name": "Glenview Cafe",
+          "sector": "Cafe / dining",
+          "neighborhood": "Glenview",
+          "employeeCount": 6,
+          "avgSalary": 41000,
+          "growthRate": "-1.33"
+        },
+        {
+          "bizId": "BIZ-00147",
+          "name": "Grand Lake Books",
+          "sector": "Retail",
+          "neighborhood": "Grand Lake",
+          "employeeCount": 6,
+          "avgSalary": 58000,
+          "growthRate": "9.61"
+        },
+        {
+          "bizId": "BIZ-00157",
+          "name": "Telegraph Press",
+          "sector": "Services",
+          "neighborhood": "KONO",
+          "employeeCount": 6,
+          "avgSalary": 45000,
+          "growthRate": "5.56"
+        },
+        {
+          "bizId": "BIZ-00166",
+          "name": "Piedmont Avenue Clothiers",
+          "sector": "Retail",
+          "neighborhood": "Piedmont Ave",
+          "employeeCount": 6,
+          "avgSalary": 83000,
+          "growthRate": "8.16"
+        },
+        {
+          "bizId": "BIZ-00179",
+          "name": "Night Walk Records",
+          "sector": "Retail",
+          "neighborhood": "Uptown",
+          "employeeCount": 6,
+          "avgSalary": 53000,
+          "growthRate": "10.19"
+        },
+        {
+          "bizId": "BIZ-00190",
+          "name": "Seventh Street Rail Supply",
+          "sector": "Industrial Supply / Services",
+          "neighborhood": "West Oakland",
+          "employeeCount": 6,
+          "avgSalary": 45000,
+          "growthRate": "4.78"
+        },
+        {
+          "bizId": "BIZ-00203",
+          "name": "Oakland Asian Cultural Center",
+          "sector": "Cultural Center / Community / Historic Landmark",
+          "neighborhood": "Chinatown",
+          "employeeCount": 6,
+          "avgSalary": 45000,
+          "growthRate": "1.63"
+        },
+        {
+          "bizId": "BIZ-00222",
+          "name": "Telegraph Mutual Aid Kitchen",
+          "sector": "Community Kitchen",
+          "neighborhood": "Temescal",
+          "employeeCount": 6,
+          "avgSalary": 45000,
+          "growthRate": "0.32"
+        },
+        {
+          "bizId": "BIZ-00231",
+          "name": "Lakeview Salon",
+          "sector": "Hair Salon / Services",
+          "neighborhood": "Piedmont Ave",
+          "employeeCount": 6,
+          "avgSalary": 45000,
+          "growthRate": "4.12"
+        },
+        {
+          "bizId": "BIZ-00244",
+          "name": "Point Climbing Gym",
+          "sector": "Climbing Gym / Services",
+          "neighborhood": "Adams Point",
+          "employeeCount": 6,
+          "avgSalary": 45000,
+          "growthRate": "0.3"
+        },
+        {
+          "bizId": "BIZ-00256",
+          "name": "Basin Residential Management",
+          "sector": "Property Management / Real Estate",
+          "neighborhood": "Brooklyn",
+          "employeeCount": 6,
+          "avgSalary": 45000,
+          "growthRate": "-0.25"
+        },
+        {
+          "bizId": "BIZ-00258",
+          "name": "Shoreline Kayak & Paddle",
+          "sector": "Outdoor Rental / Services",
+          "neighborhood": "Brooklyn",
+          "employeeCount": 6,
+          "avgSalary": 45000,
+          "growthRate": "-0.54"
+        },
+        {
+          "bizId": "BIZ-00263",
+          "name": "San Antonio Transmission & Tire",
+          "sector": "Auto Repair / Services",
+          "neighborhood": "San Antonio",
+          "employeeCount": 6,
+          "avgSalary": 45000,
+          "growthRate": "0.15"
+        },
+        {
+          "bizId": "BIZ-00276",
+          "name": "Eastside Braids & Barbers",
+          "sector": "Hair Salon / Services",
+          "neighborhood": "East Oakland",
+          "employeeCount": 6,
+          "avgSalary": 45000,
+          "growthRate": "3.8"
+        },
+        {
+          "bizId": "BIZ-00277",
+          "name": "Stabilization Fund East Oakland Disbursement Office",
+          "sector": "Community Development",
+          "neighborhood": "East Oakland",
+          "employeeCount": 6,
+          "avgSalary": 45000,
+          "growthRate": "4.29"
+        },
+        {
+          "bizId": "BIZ-00278",
+          "name": "Oakland Coliseum",
+          "sector": "Stadium / Historic Landmark",
+          "neighborhood": "East Oakland",
+          "employeeCount": 6,
+          "avgSalary": 45000,
+          "growthRate": "3.53"
+        },
+        {
+          "bizId": "BIZ-00280",
+          "name": "Maxwell Park Youth League",
+          "sector": "Youth Recreation / Community",
+          "neighborhood": "Laurel",
+          "employeeCount": 6,
+          "avgSalary": 45000,
+          "growthRate": "0.31"
+        },
+        {
+          "bizId": "BIZ-00283",
+          "name": "Laurel Family Realty",
+          "sector": "Real Estate",
+          "neighborhood": "Laurel",
+          "employeeCount": 6,
+          "avgSalary": 45000,
+          "growthRate": "0.03"
+        },
+        {
+          "bizId": "BIZ-00011",
+          "name": "Tenth Street Digital",
+          "sector": "Civic Tech",
+          "neighborhood": "Old Oakland",
+          "employeeCount": 5,
+          "avgSalary": 85000,
+          "growthRate": "38.39"
+        },
+        {
+          "bizId": "BIZ-00079",
+          "name": "Masjid An-Nur Oakland",
+          "sector": "Faith Organization",
+          "neighborhood": "East Oakland",
+          "employeeCount": 5,
+          "avgSalary": 49000,
+          "growthRate": "3.88"
+        },
+        {
+          "bizId": "BIZ-00093",
+          "name": "Telegraph Presbyterian Fellowship",
+          "sector": "Church",
+          "neighborhood": "Downtown",
+          "employeeCount": 5,
+          "avgSalary": 53000,
+          "growthRate": "5.77"
+        },
+        {
+          "bizId": "BIZ-00106",
+          "name": "Brie Bouquets",
+          "sector": "Services",
+          "neighborhood": "Temescal",
+          "employeeCount": 5,
+          "avgSalary": 37000,
+          "growthRate": "3.28"
+        },
+        {
+          "bizId": "BIZ-00107",
+          "name": "Da Dough",
+          "sector": "Services",
+          "neighborhood": "Temescal",
+          "employeeCount": 5,
+          "avgSalary": 37000,
+          "growthRate": "0.99"
+        },
+        {
+          "bizId": "BIZ-00111",
+          "name": "Lakeside Cycles",
+          "sector": "Retail",
+          "neighborhood": "Adams Point",
+          "employeeCount": 5,
+          "avgSalary": 52000,
+          "growthRate": "1.13"
+        },
+        {
+          "bizId": "BIZ-00118",
+          "name": "Estuary Cleaners",
+          "sector": "Services",
+          "neighborhood": "Brooklyn",
+          "employeeCount": 5,
+          "avgSalary": 72000,
+          "growthRate": "1.69"
+        },
+        {
+          "bizId": "BIZ-00135",
+          "name": "Eastlake Barbers",
+          "sector": "Services",
+          "neighborhood": "Eastlake",
+          "employeeCount": 5,
+          "avgSalary": 46000,
+          "growthRate": "2.49"
+        },
+        {
+          "bizId": "BIZ-00138",
+          "name": "Eastlake Laundry",
+          "sector": "Services",
+          "neighborhood": "Eastlake",
+          "employeeCount": 5,
+          "avgSalary": 46000,
+          "growthRate": "1.29"
+        },
+        {
+          "bizId": "BIZ-00159",
+          "name": "Twentieth Street Gallery",
+          "sector": "Retail",
+          "neighborhood": "KONO",
+          "employeeCount": 5,
+          "avgSalary": 45000,
+          "growthRate": "5.69"
+        },
+        {
+          "bizId": "BIZ-00164",
+          "name": "Laurel Cleaners",
+          "sector": "Services",
+          "neighborhood": "Laurel",
+          "employeeCount": 5,
+          "avgSalary": 47000,
+          "growthRate": "-0.67"
+        },
+        {
+          "bizId": "BIZ-00174",
+          "name": "Sunny Day Laundry",
+          "sector": "Services",
+          "neighborhood": "San Antonio",
+          "employeeCount": 5,
+          "avgSalary": 39000,
+          "growthRate": "-0.97"
+        },
+        {
+          "bizId": "BIZ-00177",
+          "name": "Crew Cut Barbers",
+          "sector": "Services",
+          "neighborhood": "San Antonio",
+          "employeeCount": 5,
+          "avgSalary": 39000,
+          "growthRate": "0.52"
+        },
+        {
+          "bizId": "BIZ-00070",
+          "name": "Vance's Vintage",
+          "sector": "Retail",
+          "neighborhood": "West Oakland",
+          "employeeCount": 4,
+          "avgSalary": 80000,
+          "growthRate": "8.44"
+        },
+        {
+          "bizId": "BIZ-00087",
+          "name": "Lake Merritt Mindfulness Sangha",
+          "sector": "Faith Organization",
+          "neighborhood": "Downtown",
+          "employeeCount": 4,
+          "avgSalary": 47000,
+          "growthRate": "8.63"
+        },
+        {
+          "bizId": "BIZ-00110",
+          "name": "Northshore Dental",
+          "sector": "Healthcare",
+          "neighborhood": "Adams Point",
+          "employeeCount": 4,
+          "avgSalary": 90000,
+          "growthRate": "-1"
+        },
+        {
+          "bizId": "BIZ-00128",
+          "name": "Dimond Cleaners",
+          "sector": "Services",
+          "neighborhood": "Dimond",
+          "employeeCount": 4,
+          "avgSalary": 44000,
+          "growthRate": "3.04"
+        },
+        {
+          "bizId": "BIZ-00142",
+          "name": "Parkridge Cleaners",
+          "sector": "Services",
+          "neighborhood": "Glenview",
+          "employeeCount": 4,
+          "avgSalary": 45000,
+          "growthRate": "-1.08"
+        },
+        {
+          "bizId": "BIZ-00180",
+          "name": "Kelley Mercantile",
+          "sector": "Retail",
+          "neighborhood": "Rockridge",
+          "employeeCount": 4,
+          "avgSalary": 42000,
+          "growthRate": "7.96"
+        },
+        {
+          "bizId": "BIZ-00185",
+          "name": "Keane Mercantile",
+          "sector": "Retail",
+          "neighborhood": "Grand Lake",
+          "employeeCount": 4,
+          "avgSalary": 42000,
+          "growthRate": "6.55"
+        },
+        {
+          "bizId": "BIZ-00205",
+          "name": "Wong Family Seafood & Produce",
+          "sector": "Wholesale Grocery",
+          "neighborhood": "Chinatown",
+          "employeeCount": 4,
+          "avgSalary": 42000,
+          "growthRate": "2.16"
+        },
+        {
+          "bizId": "BIZ-00206",
+          "name": "Lucky Harbor Herbalist & Tea",
+          "sector": "Herbalist & Tea Shop",
+          "neighborhood": "Chinatown",
+          "employeeCount": 4,
+          "avgSalary": 42000,
+          "growthRate": "1.72"
+        },
+        {
+          "bizId": "BIZ-00215",
+          "name": "Seoul Corner Market",
+          "sector": "Korean Grocery",
+          "neighborhood": "KONO",
+          "employeeCount": 4,
+          "avgSalary": 42000,
+          "growthRate": "1.43"
+        },
+        {
+          "bizId": "BIZ-00219",
+          "name": "Longfellow Pharmacy",
+          "sector": "Pharmacy / Retail",
+          "neighborhood": "Temescal",
+          "employeeCount": 4,
+          "avgSalary": 42000,
+          "growthRate": "0.76"
+        },
+        {
+          "bizId": "BIZ-00225",
+          "name": "Rockridge Wine Merchants",
+          "sector": "Wine Shop",
+          "neighborhood": "Rockridge",
+          "employeeCount": 4,
+          "avgSalary": 42000,
+          "growthRate": "3.2"
+        },
+        {
+          "bizId": "BIZ-00229",
+          "name": "Avenue Florist",
+          "sector": "Florist Shop",
+          "neighborhood": "Piedmont Ave",
+          "employeeCount": 4,
+          "avgSalary": 42000,
+          "growthRate": "4.67"
+        },
+        {
+          "bizId": "BIZ-00232",
+          "name": "Marguerite's",
+          "sector": "Women's Boutique",
+          "neighborhood": "Piedmont Ave",
+          "employeeCount": 4,
+          "avgSalary": 42000,
+          "growthRate": "4.54"
+        },
+        {
+          "bizId": "BIZ-00233",
+          "name": "Pleasant Valley Menswear",
+          "sector": "Men's Clothing Store",
+          "neighborhood": "Piedmont Ave",
+          "employeeCount": 4,
+          "avgSalary": 42000,
+          "growthRate": "4.11"
+        },
+        {
+          "bizId": "BIZ-00234",
+          "name": "Little Avenue",
+          "sector": "Children's Boutique",
+          "neighborhood": "Piedmont Ave",
+          "employeeCount": 4,
+          "avgSalary": 42000,
+          "growthRate": "4.05"
+        },
+        {
+          "bizId": "BIZ-00235",
+          "name": "Linden Street Jewelers",
+          "sector": "Jewelry Store",
+          "neighborhood": "Piedmont Ave",
+          "employeeCount": 4,
+          "avgSalary": 42000,
+          "growthRate": "4.44"
+        },
+        {
+          "bizId": "BIZ-00239",
+          "name": "Lakeshore Market",
+          "sector": "Grocery",
+          "neighborhood": "Lake Merritt",
+          "employeeCount": 4,
+          "avgSalary": 42000,
+          "growthRate": "2.96"
+        },
+        {
+          "bizId": "BIZ-00240",
+          "name": "Adams & Daughters Antiques",
+          "sector": "Antiques Shop",
+          "neighborhood": "Lake Merritt",
+          "employeeCount": 4,
+          "avgSalary": 42000,
+          "growthRate": "3.17"
+        },
+        {
+          "bizId": "BIZ-00249",
+          "name": "Splash Pad Toys",
+          "sector": "Toy Store",
+          "neighborhood": "Grand Lake",
+          "employeeCount": 4,
+          "avgSalary": 42000,
+          "growthRate": "4.26"
+        },
+        {
+          "bizId": "BIZ-00255",
+          "name": "East Lake Garden Supply",
+          "sector": "Garden Center / Retail",
+          "neighborhood": "Eastlake",
+          "employeeCount": 4,
+          "avgSalary": 42000,
+          "growthRate": "1.26"
+        },
+        {
+          "bizId": "BIZ-00259",
+          "name": "Ninth Avenue Bottle Shop",
+          "sector": "Wine & Spirits Shop",
+          "neighborhood": "Brooklyn",
+          "employeeCount": 4,
+          "avgSalary": 42000,
+          "growthRate": "-0.49"
+        },
+        {
+          "bizId": "BIZ-00264",
+          "name": "Mercado Fruitvale",
+          "sector": "Mexican Grocery",
+          "neighborhood": "Fruitvale",
+          "employeeCount": 4,
+          "avgSalary": 42000,
+          "growthRate": "5.32"
+        },
+        {
+          "bizId": "BIZ-00266",
+          "name": "Boutique Reina",
+          "sector": "Quinceañera & Formalwear Boutique",
+          "neighborhood": "Fruitvale",
+          "employeeCount": 4,
+          "avgSalary": 42000,
+          "growthRate": "5.34"
+        },
+        {
+          "bizId": "BIZ-00268",
+          "name": "International Cycle Works",
+          "sector": "Bike Shop",
+          "neighborhood": "Fruitvale",
+          "employeeCount": 4,
+          "avgSalary": 42000,
+          "growthRate": "5"
+        },
+        {
+          "bizId": "BIZ-00282",
+          "name": "High Street Hardware",
+          "sector": "Hardware Store",
+          "neighborhood": "Laurel",
+          "employeeCount": 4,
+          "avgSalary": 42000,
+          "growthRate": "0.57"
+        },
+        {
+          "bizId": "BIZ-00287",
+          "name": "Sausal Creek Pawn & Jewelry",
+          "sector": "Pawn & Jewelry Shop",
+          "neighborhood": "Dimond",
+          "employeeCount": 4,
+          "avgSalary": 42000,
+          "growthRate": "1.48"
+        },
+        {
+          "bizId": "BIZ-00288",
+          "name": "Old Dimond Butcher",
+          "sector": "Butcher Shop",
+          "neighborhood": "Dimond",
+          "employeeCount": 4,
+          "avgSalary": 42000,
+          "growthRate": "1.72"
+        },
+        {
+          "bizId": "BIZ-00102",
+          "name": "Presti Accounting",
+          "sector": "Corporate",
+          "neighborhood": "Downtown",
+          "employeeCount": 3,
+          "avgSalary": 120000,
+          "growthRate": "8.34"
+        },
+        {
+          "bizId": "BIZ-00141",
+          "name": "Hillside Family Dental",
+          "sector": "Healthcare",
+          "neighborhood": "Glenview",
+          "employeeCount": 3,
+          "avgSalary": 78000,
+          "growthRate": "-1.27"
+        },
+        {
+          "bizId": "BIZ-00045",
+          "name": "Fruitvale Diner",
+          "sector": "Restaurant & Dining",
+          "neighborhood": "Fruitvale",
+          "employeeCount": 2,
+          "avgSalary": 51000,
+          "growthRate": "12.88"
+        },
+        {
+          "bizId": "BIZ-00046",
+          "name": "KONO Kitchen",
+          "sector": "Restaurant & Dining",
+          "neighborhood": "KONO",
+          "employeeCount": 2,
+          "avgSalary": 43000,
+          "growthRate": "2.38"
+        },
+        {
+          "bizId": "BIZ-00047",
+          "name": "Miso Metro",
+          "sector": "Restaurant & Dining",
+          "neighborhood": "Downtown",
+          "employeeCount": 2,
+          "avgSalary": 62000,
+          "growthRate": "12.77"
+        },
+        {
+          "bizId": "BIZ-00049",
+          "name": "Midnight Bistro",
+          "sector": "Restaurant & Dining",
+          "neighborhood": "Downtown",
+          "employeeCount": 2,
+          "avgSalary": 62000,
+          "growthRate": "13.48"
+        },
+        {
+          "bizId": "BIZ-00050",
+          "name": "Dockhouse BBQ",
+          "sector": "Restaurant & Dining",
+          "neighborhood": "Jack London",
+          "employeeCount": 2,
+          "avgSalary": 61000,
+          "growthRate": "11.72"
+        },
+        {
+          "bizId": "BIZ-00061",
+          "name": "Adams Point United Methodist Church",
+          "sector": "Faith / Methodist",
+          "neighborhood": "Adams Point",
+          "employeeCount": 1,
+          "avgSalary": 48000,
+          "growthRate": "-0.7"
+        },
+        {
+          "bizId": "BIZ-00154",
+          "name": "Hillcrest Kitchen",
+          "sector": "Restaurant & Dining",
+          "neighborhood": "Ivy Hill",
+          "employeeCount": 1,
+          "avgSalary": 41000,
+          "growthRate": "-4.31"
+        },
+        {
+          "bizId": "BIZ-00105",
+          "name": "Marine Systems",
+          "sector": "Science",
+          "neighborhood": "Baylight District",
+          "employeeCount": 0,
+          "avgSalary": 180000,
+          "growthRate": "-1.9"
+        },
+        {
+          "bizId": "BIZ-00150",
+          "name": "Ivy Hill Market",
+          "sector": "Retail",
+          "neighborhood": "Ivy Hill",
+          "employeeCount": 0,
+          "avgSalary": 43000,
+          "growthRate": "-5.69"
+        },
+        {
+          "bizId": "BIZ-00151",
+          "name": "Ivy Hill Cafe",
+          "sector": "Cafe / dining",
+          "neighborhood": "Ivy Hill",
+          "employeeCount": 0,
+          "avgSalary": 39000,
+          "growthRate": "-3.44"
+        },
+        {
+          "bizId": "BIZ-00152",
+          "name": "Ivy Cleaners",
+          "sector": "Services",
+          "neighborhood": "Ivy Hill",
+          "employeeCount": 0,
+          "avgSalary": 43000,
+          "growthRate": "-2.87"
+        },
+        {
+          "bizId": "BIZ-00153",
+          "name": "Ivy Hill Family Dental",
+          "sector": "Healthcare",
+          "neighborhood": "Ivy Hill",
+          "employeeCount": 0,
+          "avgSalary": 74000,
+          "growthRate": "-2.08"
+        },
+        {
+          "bizId": "BIZ-00155",
+          "name": "Fold Laundry",
+          "sector": "Services",
+          "neighborhood": "Ivy Hill",
+          "employeeCount": 0,
+          "avgSalary": 43000,
+          "growthRate": "-2.79"
+        }
+      ]
+    }
+  },
+  "canon": {
+    "council": [
+      {
+        "district": "D1",
+        "member": "Denise Carter",
+        "popId": "POP-00501",
+        "faction": "OPP",
+        "status": "active"
+      },
+      {
+        "district": "D2",
+        "member": "Leonard Tran",
+        "popId": "POP-00502",
+        "faction": "IND",
+        "status": "active"
+      },
+      {
+        "district": "D3",
+        "member": "Rose Delgado",
+        "popId": "POP-00503",
+        "faction": "OPP",
+        "status": "active"
+      },
+      {
+        "district": "D4",
+        "member": "Ramon Vega",
+        "popId": "POP-00042",
+        "faction": "IND",
+        "status": "active"
+      },
+      {
+        "district": "D5",
+        "member": "Janae Rivers",
+        "popId": "POP-00043",
+        "faction": "OPP",
+        "status": "active"
+      },
+      {
+        "district": "D6",
+        "member": "Elliott Crane",
+        "popId": "POP-00044",
+        "faction": "CRC",
+        "status": "active"
+      },
+      {
+        "district": "D7",
+        "member": "Warren Ashford",
+        "popId": "POP-00504",
+        "faction": "CRC",
+        "status": "active"
+      },
+      {
+        "district": "D8",
+        "member": "Nina Chen",
+        "popId": "POP-00505",
+        "faction": "CRC",
+        "status": "active"
+      },
+      {
+        "district": "D9",
+        "member": "Terrence Mobley",
+        "popId": "POP-00506",
+        "faction": "OPP",
+        "status": "active"
+      }
+    ],
+    "pendingVotes": [],
+    "statusAlerts": [],
+    "recentOutcomes": [
+      {
+        "name": "West Oakland Stabilization Fund",
+        "initiativeId": "INIT-001",
+        "status": "PASSED",
+        "outcome": "PASSED",
+        "budget": "$28M",
+        "voteRequirement": "6-3",
+        "voteCycle": "78",
+        "voteBreakdown": "Cycle 78: Passed 6-3. Ramon Vega voted yes. Leonard Tran voted no. (Elliott Crane voted yes remotely)",
+        "affectedNeighborhoods": "West Oakland",
+        "policyDomain": "economic",
+        "implementationPhase": "disbursement-active",
+        "milestoneNotes": "C107: Downtown canvass deployment authorized alongside a disbursement review.\nC108 conversion: passed C78 before the mayoral-action step existed; the mayor's own bill, recorded signed at C78.\nC108 conversion: Stage Standing — Stabilization Fund, disbursement-active since C78 (economic — not playable, no Delivering gate yet; the untended clock still runs). | C108 retag economic→housing (ruled C108 — the Fund is a household anti-displacement fund in canon; engine.255 wires it as the first budgeted disbursement).\nC108: scope recorded as chartered — stabilization grants for long-tenure West Oakland residents priced out as the flats built out (the remnant the charter named), not hood-wide relief; 47 checks (~$4.2M) disbursed under Deputy Mayor Okoro’s authority C84–C90; authorization $28M, ~$23.8M remaining.\nC108: retag reversed — housing→economic (the C108 retag was engine-sheet error; the Fund is not a housing fund).\nC109 scope correction: the Fund serves West Oakland businesses and residents. The C107 'Downtown canvass' line and the C108 'residents only' reading are superseded.\nC109: tranche $400,000 released in West Oakland (2 household grants, $81,188). Downtown is outside the Fund's area — that is INIT-008, proposed, not voted.\nC110: Disbursement $400K approved; 23-day avg processing time achieved\nC111: Disbursement $400K approved; 23-day processing standard maintained.\nC112: Disbursement $400K approved; 23-day processing standard maintained; cumulative $5M+ disbursed\nC113: C112 audit published; $400K approved with charter scope preservation directive\nC114: $400K executed under the 23-day standard; closeout publication and charter renewal drafting directed with West Oakland business-and-resident scope intact.\nC115: C114 closeout publication ordered and charter renewal ordinance transmitted; business-and-resident scope and 23-day standard preserved pending council action.\nC116: Called for charter-renewal consideration with business-and-resident scope, 23-day standard and C114 evidence; no new tranche.",
+        "nextScheduledAction": "Council consideration of the transmitted charter-renewal ordinance",
+        "nextActionCycle": 117
+      },
+      {
+        "name": "Oakland Alternative Response Initiative",
+        "initiativeId": "INIT-002",
+        "status": "PASSED",
+        "outcome": "PASSED",
+        "budget": "$12.5M",
+        "voteRequirement": "5-4",
+        "voteCycle": "82",
+        "voteBreakdown": "Cycle 82: Passed 5-4. Ramon Vega voted no. Leonard Tran voted yes.",
+        "affectedNeighborhoods": "West Oakland, Fruitvale, East Oakland",
+        "policyDomain": "safety",
+        "implementationPhase": "dispatch-live",
+        "milestoneNotes": "C107: East Oakland dispatch protocol deployment authorized; District 1 evaluation continues.\nC108 conversion: Stage Standing — OARI, dispatch-live, signed C82 (safety — not playable until the safety lever lands; the untended clock still runs).\nC109: Expanded to District 1 with evaluation metrics\nC112: Progress report accepted; D3 condition added for district-level data breakdown and community briefing before expansion\nC113: Progress report published; D3 Fruitvale briefing directed with Fruitvale data and Baylight feasibility review\nC114: D3 Fruitvale briefing and D5 audit directed; Fruitvale data and Baylight feasibility review docketed, with expansion held until after briefing.\nC115: D3 Fruitvale briefing execution and documentation required; expansion held, with D5 audit and Baylight feasibility review still incomplete.\nC116: Ordered the D3 briefing executed and published with district and Fruitvale data; expansion held; D5 audit and Baylight review incomplete.",
+        "nextScheduledAction": "Execute and publish the D3 briefing record with district-level and Fruitvale data",
+        "nextActionCycle": 117
+      },
+      {
+        "name": "Fruitvale Transit Hub Phase II — Visioning",
+        "initiativeId": "INIT-003",
+        "status": "PASSED",
+        "outcome": "COMPLETED",
+        "budget": "$230M",
+        "voteRequirement": "",
+        "voteCycle": "86",
+        "voteBreakdown": "Cycle 86: Visioning phase concluded. Input documented.\nCycle 94: Vote scheduled C94 (visioning-complete + vote-ready phase transition; was VoteCycle=86).\nCycle 94: Visioning phase concluded. Input documented.",
+        "affectedNeighborhoods": "Fruitvale",
+        "policyDomain": "transit",
+        "implementationPhase": "complete",
+        "milestoneNotes": "C107: Merchant covenants executed, design RFP published with community-informed requirements\nC108 conversion: no council passage on record (VoteCycle 94, Outcome COMPLETED, Status visioning-complete) — enters petition-pending; history above kept, VoteCycle cleared.\nC108 conversion: Stage Proposed — Fruitvale transit hub never had a council vote: petition-pending, history kept, vote via petition band or a call-vote move.\nC109: Mayer & Associates contracted with community oversight provisions\nC110: Preliminary schematics review authorized; Mayer & Associates contracted with community oversight\nC111: Advanced from visioning to design-phase; schematics delivery mandated Cycle 114.\nC111 correction: the council authorized Phase II at C86 ($230M budget, visioning framework binding, design consultant RFP to follow; projected 6-3). The C108 \"no council passage on record\" line was wrong. Vote restored at C86; no stage.\nC114: Preliminary schematics delivery and documented Fruitvale community review directed; further design advancement awaits a public comment-and-response record.\nC115: Schematics delivery and documented Fruitvale review required; further design advancement awaits a public comment-and-response record.\nC115: closed.",
+        "nextScheduledAction": null,
+        "nextActionCycle": null
+      },
+      {
+        "name": "Temescal Community Health Center",
+        "initiativeId": "INIT-005",
+        "status": "PASSED",
+        "outcome": "PASSED",
+        "budget": "$45M",
+        "voteRequirement": "5-4",
+        "voteCycle": "80",
+        "voteBreakdown": "Cycle 80: Passed 6-2. Ramon Vega voted yes. Leonard Tran voted yes. (Elliott Crane absent)",
+        "affectedNeighborhoods": "Temescal",
+        "policyDomain": "health",
+        "implementationPhase": "operational",
+        "milestoneNotes": "C107: MEP rough-ins completed, utility inspections certified ahead of schedule\nC108 conversion: passed C80 before the mayoral-action step existed; the mayor's own bill, recorded signed at C80.\nC108 conversion: Stage Standing — Temescal health center, construction-active since C80 (health — playable; delivers once a treating phase moves hood Sick against its conversion baseline).\nC109: opened — construction complete, open to the public.\nC109: Opened ahead of schedule, $1.2M under budget\nC111: Implemented pre-opening clinical intake workflow audits and expenditure reconciliations per D7 directive\nC112: Adopted D7 utilization audit benchmarks as standing procedure; first reporting cycle scheduled with public-data commitment.\nC113: First utilization audit filed to D7 and public portal\nC115: Q2 intake audit filed as standing schedule to HCAI + Council Clerk; merchant-clinic verification walkthrough at Telegraph & 47th institutionalized.\nC116: Ordered the Q3 intake audit filing and Telegraph & 47th merchant walkthrough; no new operational appropriations authorized.",
+        "nextScheduledAction": "File the Q3 intake audit and complete the Telegraph & 47th merchant-verification walkthrough",
+        "nextActionCycle": 117
+      },
+      {
+        "name": "Baylight District — Final Council Vote",
+        "initiativeId": "INIT-006",
+        "status": "PASSED",
+        "outcome": "PASSED",
+        "budget": "$2.1B",
+        "voteRequirement": "5-4",
+        "voteCycle": "83",
+        "voteBreakdown": "Cycle 83: Passed 6-3. Denise Carter voted yes. Rose Delgado voted yes. Janae Rivers voted yes. Terrence Mobley voted yes. Elliott Crane voted no. Warren Ashford voted no. Nina Chen voted no. Ramon Vega voted yes. Leonard Tran voted yes.",
+        "affectedNeighborhoods": "Jack London, Downtown",
+        "policyDomain": "sports",
+        "implementationPhase": "complete",
+        "milestoneNotes": "C107: Construction contracts executed; site preparation mobilization begins\nC109: Phase II remediation commenced with independent oversight\nC110: Soil test verification complete; Phase II remediation proceeds with independent oversight\nC111: Construction milestone review scheduled for Cycle 115; remediation proceeds with oversight.\nC112: Independent oversight verified; remediation continues; construction milestone review held for C115\nC113: Phase II remediation on schedule with independent oversight; 48hr construction hotline live; dust control active on haul routes; Jack London workforce coordination meeting set pre-C115 review.\nC114: C115 evidence file assembled — independent remediation verification, hotline/dust records, Jack London workforce results; no milestone declared passed\nC115: Evidence-file milestone review ordered; no construction milestone pass declared, and remediation, hotline, dust-control, and workforce oversight continue.\nC115: closed.",
+        "nextScheduledAction": null,
+        "nextActionCycle": 117
+      },
+      {
+        "name": "Oakland Youth Apprenticeship Pipeline",
+        "initiativeId": "INIT-007",
+        "status": "PASSED",
+        "outcome": "",
+        "budget": "$12.5M",
+        "voteRequirement": "",
+        "voteCycle": "",
+        "voteBreakdown": "[ENGINE-CLOCK n=3 from=C109] Announced C73 Baylight supplemental. Luis Navarro feature. 3 tracks, 8 trades, 400+ Baylight placements by Year 3. No coverage since C73 — 12-cycle gap. Multiple milestones (Oakland City Schools MOU C76, Oakland Community College District MOU C78, budget allocation C80, A's commitment C83) unverified.",
+        "affectedNeighborhoods": "West Oakland, East Oakland, Fruitvale",
+        "policyDomain": "workforce",
+        "implementationPhase": "pilot_evaluation",
+        "milestoneNotes": "C107: Public town hall enrollment event convened; applicant intake operational with cohort placement targets established.\nC111: First cohort placement report mandated for Cycle 112; implementation accountability enforced.\nC113: First cohort placement report published; accountability review directed\nC114: Placement-gap analysis and adjustment plan directed for publication, with explicit West Oakland and Fruitvale review.\nC115: Placement-gap analysis and adjustment plan required for publication with explicit West Oakland and Fruitvale review; implementation continues.\nC116: Moved to pilot_evaluation; placement-gap analysis and adjustment plan ordered with explicit West Oakland and Fruitvale review.",
+        "nextScheduledAction": "Publish the placement-gap analysis and adjustment plan with West Oakland and Fruitvale review",
+        "nextActionCycle": 117
+      },
+      {
+        "name": "Downtown Economic Revitalization",
+        "initiativeId": "INIT-008",
+        "status": "FAILED",
+        "outcome": "FAILED",
+        "budget": "$15M",
+        "voteRequirement": "",
+        "voteCycle": "114",
+        "voteBreakdown": "economic imbalance\nCycle 113: Rejected.",
+        "affectedNeighborhoods": "Downtown",
+        "policyDomain": "economic",
+        "implementationPhase": "vote-scheduled",
+        "milestoneNotes": "C110: Ordinance filed with City Clerk; $15M authorization pending council\nC111: Emergency Economic Development Committee hearing called for Cycle 112.\nC112: Emergency Economic Development Committee hearing convened; Ashford benchmarks attached; Uptown track committed for C114\nC113: Emergency committee convened; Uptown track committed for C114 with concrete timeline",
+        "nextScheduledAction": null,
+        "nextActionCycle": null
+      },
+      {
+        "name": "Commercial Stabilization for Grand Lake",
+        "initiativeId": "INIT-009",
+        "status": "FAILED",
+        "outcome": "FAILED",
+        "budget": "$2.5M",
+        "voteRequirement": "",
+        "voteCycle": "116",
+        "voteBreakdown": "Proposed by Leonard Tran in C109 — neighborhood math-imbalance flag on Grand Lake retail.\nCycle 113: Rejected.",
+        "affectedNeighborhoods": "Grand Lake",
+        "policyDomain": "economic",
+        "implementationPhase": "vote-scheduled",
+        "milestoneNotes": "C111: Referred to Economic Development Committee with mandatory milestone reporting and audit criteria.\nC112: Advanced to Economic Development Committee with mandatory milestones and audit protocols per Chen/Vega conditions\nC113: Advanced to full council with Chen/Vega milestone and audit conditions\nC114: Mayor backed YES and requested a recorded full-council decision with all Chen-Vega milestone and audit conditions intact.\nC115: Recorded full-council decision scheduled with Chen-Vega milestone and audit conditions intact; no vote outcome claimed.\nC116: Requested the scheduled recorded vote proceed with Chen-Vega conditions intact; no outcome claimed pending Clerk certification.",
+        "nextScheduledAction": "Recorded full-council vote with Chen-Vega conditions and a Clerk-certified roll call",
+        "nextActionCycle": 117
+      },
+      {
+        "name": "West Oakland Tenant Defense Fund",
+        "initiativeId": "INIT-010",
+        "status": "FAILED",
+        "outcome": "FAILED",
+        "budget": "$4.2M",
+        "voteRequirement": "",
+        "voteCycle": "112",
+        "voteBreakdown": "Proposed by Denise Carter in C109 — eviction filings outpacing Stabilization Fund relief.\nCycle 112: Passed 6-3. Denise Carter voted yes. Rose Delgado voted yes. Janae Rivers voted yes. Terrence Mobley voted yes. Elliott Crane voted no. Warren Ashford voted no. Nina Chen voted no. Leonard Tran voted yes. Ramon Vega voted yes.\nCycle 113: Rejected.",
+        "affectedNeighborhoods": "West Oakland",
+        "policyDomain": "economic",
+        "implementationPhase": "vote-scheduled",
+        "milestoneNotes": "C111: Referred to Housing and Community Development Committee with legal support analysis.\nC114: Committee directed to publish its legal-support analysis and record a decision on the $4.2M tenant-defense proposal.\nC115: Recorded committee decision scheduled; legal-support analysis must be published before the vote, with no outcome claimed in advance.\nC116: Legal-support analysis ordered before the recorded committee decision; no vote outcome or appropriation claimed.",
+        "nextScheduledAction": "Publish the legal-support analysis, then record the committee decision",
+        "nextActionCycle": 117
+      },
+      {
+        "name": "Ivy Hill Revitalization Initiative",
+        "initiativeId": "INIT-011",
+        "status": "FAILED",
+        "outcome": "FAILED",
+        "budget": "$2.5M",
+        "voteRequirement": "",
+        "voteCycle": "",
+        "voteBreakdown": "Commercial contraction and public safety concerns in Ivy Hill\nCycle 113: Rejected.",
+        "affectedNeighborhoods": "Ivy Hill",
+        "policyDomain": "economic",
+        "implementationPhase": "announced",
+        "milestoneNotes": "C113: Legislative ordinance filed; INIT-012 paired filing",
+        "nextScheduledAction": null,
+        "nextActionCycle": null
+      },
+      {
+        "name": "Dimond Revitalization Initiative",
+        "initiativeId": "INIT-012",
+        "status": "FAILED",
+        "outcome": "FAILED",
+        "budget": "$2.5M",
+        "voteRequirement": "",
+        "voteCycle": "",
+        "voteBreakdown": "Commercial contraction and public safety concerns in Dimond\nCycle 113: Rejected.",
+        "affectedNeighborhoods": "Dimond",
+        "policyDomain": "economic",
+        "implementationPhase": "announced",
+        "milestoneNotes": null,
+        "nextScheduledAction": null,
+        "nextActionCycle": null
+      },
+      {
+        "name": "Ivy Hill Community Revitalization",
+        "initiativeId": "INIT-013",
+        "status": "FAILED",
+        "outcome": "FAILED",
+        "budget": "$2M",
+        "voteRequirement": "",
+        "voteCycle": "",
+        "voteBreakdown": "addressing decay momentum and crime index\nCycle 113: Rejected.",
+        "affectedNeighborhoods": "Ivy Hill",
+        "policyDomain": "safety",
+        "implementationPhase": "announced",
+        "milestoneNotes": null,
+        "nextScheduledAction": null,
+        "nextActionCycle": null
+      },
+      {
+        "name": "Ivy Hill Community Support Initiative",
+        "initiativeId": "INIT-014",
+        "status": "FAILED",
+        "outcome": "FAILED",
+        "budget": "$2.5M",
+        "voteRequirement": "",
+        "voteCycle": "116",
+        "voteBreakdown": "Ivy Hill is showing signs of decay momentum and increased crime index, requiring immediate community support and targeted investment.\nCycle 116: Failed 3-4. Leonard Tran voted yes. Ramon Vega voted yes. Elliott Crane voted no. Warren Ashford voted no. Nina Chen voted no. Leonard Tran voted yes. Ramon Vega voted no.",
+        "affectedNeighborhoods": "Ivy Hill",
+        "policyDomain": "safety",
+        "implementationPhase": "vote-scheduled",
+        "milestoneNotes": "C115: Legislation filed on current Ivy Hill evidence—low crime, slow trade, and soured mood—with no manufactured emergency premise.\nC116: Withdrew the unverified filing claim; no Clerk reference supplied, and council review should wait for verification.",
+        "nextScheduledAction": "Provide a Clerk filing reference or explicitly confirm that filing has not occurred",
+        "nextActionCycle": 117
+      }
+    ],
+    "executiveBranch": {
+      "mayor": "Avery Santana",
+      "mayorDetail": {
+        "name": "Avery Santana",
+        "title": "Mayor",
+        "popId": "POP-00034",
+        "status": "active",
+        "approvalRating": "79"
+      },
+      "deputyMayor": "Brenda Okoro",
+      "deputyMayorDetail": {
+        "name": "Brenda Okoro",
+        "title": "Deputy Mayor (Community)",
+        "popId": "POP-00037",
+        "status": "active"
+      }
+    },
+    "asRoster": [
+      {
+        "popId": "POP-00003",
+        "name": "Mark Aitken",
+        "tier": "1",
+        "roleType": "First Baseman, Colorado Rockies",
+        "neighborhood": "Jack London",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00018",
+        "name": "Benji Dillon",
+        "tier": "1",
+        "roleType": "Pitcher, Oakland A's Legend",
+        "neighborhood": "Rockridge",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00019",
+        "name": "Isley Kelley",
+        "tier": "1",
+        "roleType": "Shortstop, Oakland A's Legend",
+        "neighborhood": "Rockridge",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00021",
+        "name": "Darrin Davis",
+        "tier": "1",
+        "roleType": "Left Fielder, Oakland A's Legend",
+        "neighborhood": "Piedmont Ave",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00022",
+        "name": "Danny Horn",
+        "tier": "1",
+        "roleType": "Center Fielder, Oakland A's - Best player in the MLB",
+        "neighborhood": "Temescal",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00024",
+        "name": "Henry Rivas",
+        "tier": "2",
+        "roleType": "Starting Pitcher, Oakland A's",
+        "neighborhood": "West Oakland",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00025",
+        "name": "Arturo Ramos",
+        "tier": "1",
+        "roleType": "Starting Pitcher, Oakland A's",
+        "neighborhood": "Piedmont Ave",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00031",
+        "name": "Martin Richards",
+        "tier": "1",
+        "roleType": "Third Baseman, New York Mets",
+        "neighborhood": "Fruitvale",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00033",
+        "name": "John Ellis",
+        "tier": "2",
+        "roleType": "Starting Pitcher, Oakland A's",
+        "neighborhood": "Piedmont Ave",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00050",
+        "name": "Ernesto Quintero",
+        "tier": "1",
+        "roleType": "3B/1B , Oakland A's",
+        "neighborhood": "Baylight District",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00051",
+        "name": "Desmond Morton",
+        "tier": "2",
+        "roleType": "Left Fielder, Oakland A's",
+        "neighborhood": "Chinatown",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00052",
+        "name": "Clark Saryan",
+        "tier": "4",
+        "roleType": "Closing Pitcher, Las Vegas Aviators (AAA)",
+        "neighborhood": "Downtown",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00053",
+        "name": "Kevin Clark",
+        "tier": "3",
+        "roleType": "Third Baseman, Oakland A's",
+        "neighborhood": "Jack London",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00054",
+        "name": "JR Rosado",
+        "tier": "3",
+        "roleType": "Left Fielder, Oakland A's",
+        "neighborhood": "Piedmont Ave",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00058",
+        "name": "Sidney Tumolo",
+        "tier": "3",
+        "roleType": "Second Baseman, Oakland A's",
+        "neighborhood": "West Oakland",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00060",
+        "name": "Marco Fabregas",
+        "tier": "4",
+        "roleType": "Catcher, Las Vegas Aviators (AAA)",
+        "neighborhood": "Laurel",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00077",
+        "name": "Julio Valencia",
+        "tier": "4",
+        "roleType": "Setup/Closing Pitcher, Oakland A's",
+        "neighborhood": "Uptown",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00078",
+        "name": "Sergio Aybar",
+        "tier": "4",
+        "roleType": "Catcher, Las Vegas Aviators (AAA)",
+        "neighborhood": "Jack London",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00079",
+        "name": "Frank Reyna",
+        "tier": "3",
+        "roleType": "Right Fielder, Oakland A's",
+        "neighborhood": "Lake Merritt",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00080",
+        "name": "Richie Haynes",
+        "tier": "4",
+        "roleType": "Starting Pitcher, Midland RockHounds (AA)",
+        "neighborhood": "Piedmont Ave",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00081",
+        "name": "Carmen Mesa",
+        "tier": "3",
+        "roleType": "Starting Pitcher, Philadelphia Phillies",
+        "neighborhood": "Lake Merritt",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00083",
+        "name": "Chad Tipre",
+        "tier": "4",
+        "roleType": "Relief Pitcher, Midland RockHounds (AA)",
+        "neighborhood": "Fruitvale",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00085",
+        "name": "Richie Ramiro",
+        "tier": "4",
+        "roleType": "First Baseman, Midland RockHounds (AA)",
+        "neighborhood": "Uptown",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00091",
+        "name": "Delmon Regan",
+        "tier": "4",
+        "roleType": "Relief Pitcher, Midland RockHounds (AA)",
+        "neighborhood": "Downtown",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00092",
+        "name": "Carlos Flores",
+        "tier": "4",
+        "roleType": "Center Fielder, Midland RockHounds (AA)",
+        "neighborhood": "Laurel",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00103",
+        "name": "Kevin Ham",
+        "tier": "4",
+        "roleType": "Second Baseman, Stockton Ports (A)",
+        "neighborhood": "Uptown",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00106",
+        "name": "Jeff Mateo",
+        "tier": "4",
+        "roleType": "First Baseman, Stockton Ports (A)",
+        "neighborhood": "Chinatown",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00107",
+        "name": "Giuseppe Santiago",
+        "tier": "4",
+        "roleType": "Relief Pitcher, Stockton Ports (A)",
+        "neighborhood": "Chinatown",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00115",
+        "name": "Dan Perez",
+        "tier": "4",
+        "roleType": "Hitting Coach, Oakland A's",
+        "neighborhood": "Lake Merritt",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00116",
+        "name": "Fernando Lima",
+        "tier": "4",
+        "roleType": "Pitching Coach, Oakland A's",
+        "neighborhood": "Chinatown",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00117",
+        "name": "Babe Bradford",
+        "tier": "4",
+        "roleType": "First Base Coach, Oakland A's",
+        "neighborhood": "Chinatown",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00118",
+        "name": "Stephan Kollars",
+        "tier": "4",
+        "roleType": "Third Base Coach, Oakland A's",
+        "neighborhood": "Chinatown",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00119",
+        "name": "Beverly Peterson",
+        "tier": "4",
+        "roleType": "Scout, Oakland A's",
+        "neighborhood": "East Oakland",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00120",
+        "name": "Lou Hollis",
+        "tier": "4",
+        "roleType": "Scout, Oakland A's",
+        "neighborhood": "Rockridge",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00121",
+        "name": "Otis Redd",
+        "tier": "4",
+        "roleType": "Scout, Oakland A's",
+        "neighborhood": "Rockridge",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00527",
+        "name": "Mike Paulson",
+        "tier": "1",
+        "roleType": "General Manager, Oakland A's & The Oaks",
+        "neighborhood": "West Oakland",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00528",
+        "name": "Deacon Seymour",
+        "tier": "2",
+        "roleType": "Manager, Oakland A's",
+        "neighborhood": "Lake Merritt",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00533",
+        "name": "Travis Coles",
+        "tier": "1",
+        "roleType": "Starting Pitcher, Oakland A's",
+        "neighborhood": "Downtown",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00555",
+        "name": "Mariano Rosales",
+        "tier": "3",
+        "roleType": "Closing Pitcher, Oakland As",
+        "neighborhood": "Jack London",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00597",
+        "name": "Eric Taveras",
+        "tier": "1",
+        "roleType": "Second Baseman, Oakland A's",
+        "neighborhood": "Downtown",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00598",
+        "name": "Vladimir Gonzalez",
+        "tier": "2",
+        "roleType": "Right Fielder, Oakland A's",
+        "neighborhood": "Fruitvale",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-00599",
+        "name": "Jose Colon",
+        "tier": "3",
+        "roleType": "Catcher, Oakland A's",
+        "neighborhood": "Chinatown",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-01022",
+        "name": "Wilson Shepard",
+        "tier": "2",
+        "roleType": "Head Coach, Oakland Oaks",
+        "neighborhood": "West Oakland",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-01023",
+        "name": "Adash Stanley",
+        "tier": "1",
+        "roleType": "PG / The Oaks ",
+        "neighborhood": "Downtown",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-01024",
+        "name": "AJ Dybantsa",
+        "tier": "2",
+        "roleType": "SF / The Oaks",
+        "neighborhood": "KONO",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-01026",
+        "name": "Coen Carr",
+        "tier": "4",
+        "roleType": "SG / The Oaks",
+        "neighborhood": "Uptown",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-01027",
+        "name": "Austin Reaves",
+        "tier": "2",
+        "roleType": "SG / The Oaks",
+        "neighborhood": "West Oakland",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-01028",
+        "name": "Wendell Carter Jr.",
+        "tier": "4",
+        "roleType": "C / The Oaks",
+        "neighborhood": "Piedmont Ave",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-01046",
+        "name": "Elliot Abraham",
+        "tier": "3",
+        "roleType": "General Manager, Oakland Oaks",
+        "neighborhood": "Jack London",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-01078",
+        "name": "Pablo Almanzar",
+        "tier": "3",
+        "roleType": "SP / Oakland A's",
+        "neighborhood": "Chinatown",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-01079",
+        "name": "Dillon Brooks",
+        "tier": "3",
+        "roleType": "SF / The Oaks",
+        "neighborhood": "West Oakland",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-01080",
+        "name": "Louis Cross",
+        "tier": "4",
+        "roleType": "Relief Pitcher / Oakland A's",
+        "neighborhood": "Grand Lake",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-01081",
+        "name": "Hitoki Ka",
+        "tier": "4",
+        "roleType": "Relief Pitcher / Oakland A's",
+        "neighborhood": "KONO",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-01082",
+        "name": "Ian Devine",
+        "tier": "4",
+        "roleType": "Relief Pitcher / Oakland A's",
+        "neighborhood": "Downtown",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-01083",
+        "name": "Antone Bautista",
+        "tier": "4",
+        "roleType": "Relief Pitcher / Oakland A's",
+        "neighborhood": "West Oakland",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-01223",
+        "name": "Harry Hayward",
+        "tier": "4",
+        "roleType": "Oakland Oaks - Power Forward",
+        "neighborhood": "KONO",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-01224",
+        "name": "Trevor Henderson",
+        "tier": "4",
+        "roleType": "Oakland Oaks - Center",
+        "neighborhood": "Lake Merritt",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-01238",
+        "name": "Robert Mooney",
+        "tier": "4",
+        "roleType": "Farm Director, Oakland A's",
+        "neighborhood": "",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-01239",
+        "name": "Giancarlo Hernandez",
+        "tier": "3",
+        "roleType": "Third Baseman, Oakland A's",
+        "neighborhood": "",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-01240",
+        "name": "Henry Calzado",
+        "tier": "4",
+        "roleType": "Catcher, Oakland A's",
+        "neighborhood": "",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      }
+    ]
+  },
+  "householdStats": {
+    "activeHouseholds": 680,
+    "cycleEvents": 3,
+    "rentBurdenCount": 66
+  },
+  "bondStats": {
+    "activeBonds": 622
+  }
+}

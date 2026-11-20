@@ -1,0 +1,218 @@
+{
+  "date": "2026-11-17",
+  "stage": "write",
+  "results": [
+    {
+      "name": "Luis Navarro",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 3,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 687,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Sgt. Rachel Torres",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 3,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 806,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Angela Reyes",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 4,
+        "capHits": 1,
+        "thin": false,
+        "verbatim": [],
+        "words": 963,
+        "contractScore": 2,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Selena Grant",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 10,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 463,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Tamsin Pruitt",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 6,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [
+          {
+            "text": "Edmund Alegero moved into a place of their own in Lake Merritt, renting",
+            "run": "edmund alegero moved into a place"
+          },
+          {
+            "text": "Edmund Alegero — in their life, C116: read the Tribune's front page twice — once for the news, once to see who was in it",
+            "run": "read the tribunes front page twice"
+          },
+          {
+            "text": "Edmund Alegero — in their life, C116: disagreed with a Tribune column out loud to an empty kitchen",
+            "run": "disagreed with a tribune column out"
+          },
+          {
+            "text": "Wanjiru Liu — in their life, C115: pulled copper wire through a Baylight sub-basement until their shoulders burned",
+            "run": "copper wire through a baylight sub"
+          },
+          {
+            "text": "Wanjiru Liu — in their life, C115: walked across the stage at their commencement ceremony",
+            "run": "c115 walked across stage commencement ceremony"
+          },
+          {
+            "text": "Wanjiru Liu — in their life, C116: helped a neighbor navigate the West Oakland Stabilization Fund portal because the interface was confusing",
+            "run": "the west oakland stabilization fund portal"
+          },
+          {
+            "text": "Yu Zen — in their life, C115: the third late night this week, and the ceiling again at four",
+            "run": "week and the ceiling again at"
+          },
+          {
+            "text": "Yu Zen — in their life, C116: worked through another weekend and called it fine",
+            "run": "worked through another weekend and called"
+          },
+          {
+            "text": "Shawn Nguyen — in their life, C115: drove the whole way home without remembering a single turn",
+            "run": "drove the whole way home without"
+          },
+          {
+            "text": "Shawn Nguyen — in their life, C116: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+            "run": "an oakland alternative response initiative team"
+          },
+          {
+            "text": "Davey Martinez — in their life, C115: noticed a familiar face missing from the morning routine",
+            "run": "noticed a familiar face missing from"
+          },
+          {
+            "text": "Davey Martinez — in their life, C116: let the phone ring twice before answering so it wouldn't seem like they'd been waiting",
+            "run": "let the phone ring twice before"
+          },
+          {
+            "text": "Tanisha Freeman — in their life, C115: helped a neighbor navigate the West Oakland Stabilization Fund portal because the interface was confusing",
+            "run": "the west oakland stabilization fund portal"
+          },
+          {
+            "text": "Mesi Westin — moved from Jack London to KONO — moving for a better fit between household income and housing costs, KONO (C116 — what happened in their life, not",
+            "run": "moved from jack london to kono"
+          },
+          {
+            "text": "Mesi Westin — in their life, C116: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+            "run": "the flyer for the oakland youth"
+          },
+          {
+            "text": "Mesi Westin — in their life, C116: grabbed coffee from the cart outside the hospital before the morning rush hit near the waterfront",
+            "run": "grabbed coffee from the cart outside"
+          },
+          {
+            "text": "Adash Stanley — in their life, C115: pulled an all-nighter for the midterm and swore it was the last one",
+            "run": "midterm and swore it was the"
+          },
+          {
+            "text": "Adash Stanley — in their life, C116: drove home with the radio off, letting the win settle — unable to stop pacing the kitchen",
+            "run": "drove home with the radio off"
+          },
+          {
+            "text": "Adash Stanley — in their life, C116: told the story of the moment three times at dinner and it got better each time",
+            "run": "told the story of the moment"
+          },
+          {
+            "text": "Adash Stanley — in their life, C116: stayed up rewatching two plays that will not matter to anyone else — unable to let the night go",
+            "run": "stayed up rewatching two plays that"
+          },
+          {
+            "text": "Grace Oyelaran — in their life, C115: an old photo album surfaced and the evening went where it wanted",
+            "run": "c115 an old photo album surfaced"
+          },
+          {
+            "text": "Grace Oyelaran — in their life, C115: learned a useless, wonderful fact and told two people near a student cafe",
+            "run": "learned a useless wonderful fact and"
+          },
+          {
+            "text": "Grace Oyelaran — in their life, C116: woke up at 5 AM just to have thirty minutes of total silence before the house woke up",
+            "run": "thirty minutes of total silence before"
+          },
+          {
+            "text": "Grace Oyelaran — in their life, C116: realized the week had passed without a single thing worth retelling",
+            "run": "the week had passed without a"
+          },
+          {
+            "text": "Joaquín Nakamura — in their life, C115: felt a lift at Pulse District after the win",
+            "run": "felt a lift at pulse district"
+          },
+          {
+            "text": "Joaquín Nakamura — in their life, C116: compared rent notes with a neighbor over the fence in Uptown",
+            "run": "compared rent notes with a neighbor"
+          },
+          {
+            "text": "Joaquín Nakamura — in their life, C116: memorized the starting rotation for the Oaks and tested themselves on the BART ride home near a gallery opening",
+            "run": "ride home near a gallery opening"
+          }
+        ],
+        "words": 1363,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 6,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 384,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    }
+  ],
+  "checkTotals": {
+    "seats": 6,
+    "toolSeats": 6,
+    "capHits": 1,
+    "thin": 0,
+    "verbatim": 1,
+    "graded": 6,
+    "gradeSum": 17,
+    "gradeMax": [
+      3
+    ]
+  },
+  "ranAt": "2026-11-18T00:21:32.623Z"
+}

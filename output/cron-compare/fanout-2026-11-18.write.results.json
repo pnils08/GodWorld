@@ -1,0 +1,292 @@
+{
+  "date": "2026-11-18",
+  "stage": "write",
+  "results": [
+    {
+      "name": "Jax Caldera",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 4,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 679,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Noah Tan",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 3,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 492,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Elliot Marbury",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 3,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 921,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "P Slayer",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 4,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 582,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Tanya Cruz",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 4,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 567,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Tamsin Pruitt",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 6,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [
+          {
+            "text": "Saniya Williams moved into a place of their own in Rockridge, renting",
+            "run": "moved into a place of their"
+          },
+          {
+            "text": "Saniya Williams — in their life, C115: navigated the stroller traffic on College Avenue and silently judged the parking jobs",
+            "run": "navigated the stroller traffic on college"
+          },
+          {
+            "text": "Saniya Williams — in their life, C115: juggled plans that didn't quite fit together",
+            "run": "juggled plans that didnt quite fit"
+          },
+          {
+            "text": "Saniya Williams — in their life, C115: carried three boxes of canned goods from the pantry truck and felt it in their lower back",
+            "run": "carried three boxes of canned goods"
+          },
+          {
+            "text": "Saniya Williams — in their life, C116: started a small project with no deadline and no reason",
+            "run": "started a small project with no"
+          },
+          {
+            "text": "Noor Ng — in their life, C115: drove the long loop past Lake Merritt at 2 AM because the car was the only place the baby would sleep",
+            "run": "drove the long loop past lake"
+          },
+          {
+            "text": "Amal Nair — in their life, C115: badged into the Baylight office early and tried not to think about the protestors from last month",
+            "run": "badged into the baylight office early"
+          },
+          {
+            "text": "Amal Nair — in their life, C115: found a quiet minute at a studio doorway and felt the season starting to turn",
+            "run": "found a quiet minute at a"
+          },
+          {
+            "text": "Amal Nair — in their life, C115: caught themselves narrating the day as if telling it to someone gone",
+            "run": "caught themselves narrating the day as"
+          },
+          {
+            "text": "Amal Nair — in their life, C116: a flyer for a seniors lunch program flutters on a community bulletin board",
+            "run": "c116 a flyer for a seniors"
+          },
+          {
+            "text": "Marisol Quintero — in their life, C115: overheard a stranger asking the way to a new shop on the block and pointed them right to it",
+            "run": "overheard a stranger asking the way"
+          },
+          {
+            "text": "Marisol Quintero — in their life, C116: watched the morning shuttles roll along the waterfront into the Baylight District and timed their own walk to beat them",
+            "run": "watched the morning shuttles roll along"
+          },
+          {
+            "text": "Marisol Quintero — in their life, C116: read about something unfamiliar and kept pulling the thread",
+            "run": "read about something unfamiliar and kept"
+          },
+          {
+            "text": "Marisol Quintero — in their life, C116: traded an extra ticket for a promise to bring the kid next time",
+            "run": "traded an extra ticket for a"
+          },
+          {
+            "text": "Marky Beal — in their life, C115: heard someone at the cafe complain about the Baylight District noise and bit their tongue near a local pop-up",
+            "run": "heard someone at the cafe complain"
+          },
+          {
+            "text": "Marky Beal — in their life, C116: grabbed coffee from the cart outside the hospital before the morning rush hit",
+            "run": "grabbed coffee from the cart outside"
+          },
+          {
+            "text": "Marky Beal — in their life, C116: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+            "run": "recognized the oari van idling outside"
+          },
+          {
+            "text": "Celeste Moon — in their life, C116: a flyer for a seniors lunch program flutters on a community bulletin board",
+            "run": "c116 a flyer for a seniors"
+          },
+          {
+            "text": "Celeste Moon — in their life, C116: the city buzzes with energy after the A's third straight win, fans wearing green and gold everywhere.",
+            "run": "after the as third straight win"
+          },
+          {
+            "text": "Omar Lopez — in their life, C115: bought milk at Ivy Hill Market on the climb home from work",
+            "run": "bought milk at ivy hill market"
+          },
+          {
+            "text": "Omar Lopez — in their life, C116: has watched Hillcrest Kitchen go quiet lately",
+            "run": "has watched hillcrest kitchen go quiet"
+          },
+          {
+            "text": "Omar Lopez — in their life, C116: vented about Ivy Hill on the walk home",
+            "run": "vented about ivy hill on the"
+          },
+          {
+            "text": "Devon Willis — graduated with their class in a joyful spring celebration, Adams Point (C116 — what happened in their life, not words they said)",
+            "run": "graduated with their class in a"
+          },
+          {
+            "text": "Devon Willis — in their life, C115: watched the morning shuttles roll along the waterfront into the Baylight District and timed their own walk to beat them near",
+            "run": "watched the morning shuttles roll along"
+          },
+          {
+            "text": "Devon Willis — in their life, C116: had a work moment: a table with unusual energy",
+            "run": "had a work moment a table"
+          },
+          {
+            "text": "Devon Willis — in their life, C116: argued A's loyalty versus Oaks curiosity over dinner and lost to both",
+            "run": "argued as loyalty versus oaks curiosity"
+          },
+          {
+            "text": "Devon Willis — in their life, C116: painted over graffiti on the recreation center wall alongside five neighbors they barely knew near a quiet side street",
+            "run": "painted over graffiti on the recreation"
+          },
+          {
+            "text": "Rasha Brown — in their life, C116: the Fruitvale Transit Hub Phase II is sparking excitement, with plans for a brighter future taking shape.",
+            "run": "the fruitvale transit hub phase ii"
+          },
+          {
+            "text": "Rasha Brown — in their life, C116: grabbed coffee from the cart outside the hospital before the morning rush hit",
+            "run": "grabbed coffee from the cart outside"
+          },
+          {
+            "text": "Rasha Brown — in their life, C116: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+            "run": "an oakland alternative response initiative team"
+          },
+          {
+            "text": "Rasha Brown — in their life, C116: helped a neighbor navigate the West Oakland Stabilization Fund portal because the interface was confusing",
+            "run": "the west oakland stabilization fund portal"
+          },
+          {
+            "text": "Manju Crenshaw — in their life, C116: timed contractions on a stopwatch and kept a steady voice through the loud part",
+            "run": "timed contractions on a stopwatch and"
+          },
+          {
+            "text": "Manju Crenshaw — in their life, C116: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+            "run": "an oakland alternative response initiative team"
+          },
+          {
+            "text": "Manju Crenshaw — in their life, C116: learned a useless, wonderful fact and told two people",
+            "run": "learned a useless wonderful fact and"
+          },
+          {
+            "text": "Manju Crenshaw — in their life, C116: wondered when exactly they became the adult in the room",
+            "run": "wondered when exactly they became the"
+          },
+          {
+            "text": "Iris Pham — in their life, C115: traded produce over a fence and came out ahead",
+            "run": "traded produce over a fence and"
+          },
+          {
+            "text": "Iris Pham — in their life, C116: watched the morning shuttles roll along the waterfront into the Baylight District and timed their own walk to beat them",
+            "run": "watched the morning shuttles roll along"
+          },
+          {
+            "text": "Iris Pham — in their life, C116: someone at the bar called a napkin a ledger and nobody laughed",
+            "run": "c116 someone at the bar called"
+          }
+        ],
+        "words": 1245,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Ines Sorensen",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 3,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 505,
+        "contractScore": 2,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 6,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 395,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    }
+  ],
+  "checkTotals": {
+    "seats": 8,
+    "toolSeats": 8,
+    "capHits": 0,
+    "thin": 0,
+    "verbatim": 1,
+    "graded": 8,
+    "gradeSum": 23,
+    "gradeMax": [
+      3
+    ]
+  },
+  "ranAt": "2026-11-19T00:23:27.739Z"
+}

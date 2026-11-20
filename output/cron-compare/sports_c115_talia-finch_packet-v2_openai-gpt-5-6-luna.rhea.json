@@ -1,0 +1,72 @@
+{
+  "draft": "output/cron-compare/sports_c115_talia-finch_packet-v2_openai-gpt-5-6-luna.md",
+  "cycle": "115",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "fa8b230de75d84427f631fcbb1b2aae14498aca73418b3c9c50c8c4ab6f4278d",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All player statistics, game details (Oaks 120 - 76ers 106), and exact quotes for Hayward, Stanley, and Reaves match ground truth flawlessly.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "talia-finch-oaks-v1",
+    "packageVersion": "TALIA-OAKS-1",
+    "manifestId": "AM-b150dee79de3",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "-106",
+          "23"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Adash Stanley",
+      "Austin Reaves",
+      "Harry Hayward"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0117,
+  "durationMs": 5985,
+  "parseError": false,
+  "ranAt": "2026-11-13T00:18:39.946Z",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": false,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 519,
+    "short": "The piece quotes postgame player remarks rather than letting the people in the room speak on what the city thinks of the franchise.",
+    "score": 2,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "fa8b230de75d84427f631fcbb1b2aae14498aca73418b3c9c50c8c4ab6f4278d",
+    "costUsd": 0.0015
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "116",
+  "persona": "elliot-marbury",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Elliot Marbury",
+    "popid": "POP-00166"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-data-desk",
+      "angle": "Henry Rivas — 8 seasons on the dossier, 2041 the latest | pitcher command memo, multi-year — what the line proves, on what sample, and what would disprove it",
+      "label": "Henry Rivas — 8 seasons on the dossier, 2041 the latest | pitcher command memo, multi-year",
+      "hookLine": "Henry Rivas's 2041 line against 7 earlier seasons and 2 peers.",
+      "hood": null,
+      "citizens": [
+        "Henry Rivas (POP-00024)"
+      ],
+      "popids": [
+        "POP-00024"
+      ],
+      "ref": "output/player_truesource_mirror.json Henry Rivas @C116",
+      "cycle": 116
+    }
+  },
+  "angle": "output/cron-compare/sports_c116_elliot-marbury_packet-v2_angle.json",
+  "quotesRequested": 0,
+  "quotesLanded": 0,
+  "quotes": [],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [],
+  "ranAt": "2026-11-18T19:16:38.001Z"
+}

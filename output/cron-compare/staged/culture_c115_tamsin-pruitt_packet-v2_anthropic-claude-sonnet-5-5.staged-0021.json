@@ -1,0 +1,134 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "115",
+  "persona": "tamsin-pruitt",
+  "byline": "Tamsin Pruitt",
+  "bylinePopid": "POP-01210",
+  "article": "output/cron-compare/staged/culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged-0021.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Dominic Okeke-Brandt",
+        "role": "quoted-source",
+        "popid": "POP-01184"
+      },
+      {
+        "name": "Kai Davis",
+        "role": "quoted-source",
+        "popid": "POP-00996"
+      },
+      {
+        "name": "Evan Lewis",
+        "role": "quoted-source",
+        "popid": "POP-00200"
+      },
+      {
+        "name": "Arturo Ramos",
+        "role": "mentioned",
+        "popid": "POP-00025",
+        "floor": true
+      },
+      {
+        "name": "Benji Dillon",
+        "role": "mentioned",
+        "popid": "POP-00018",
+        "floor": true
+      },
+      {
+        "name": "Father Miguel",
+        "role": "mentioned",
+        "popid": "POP-00734",
+        "floor": true
+      },
+      {
+        "name": "Isley Kelley",
+        "role": "mentioned",
+        "popid": "POP-00019",
+        "floor": true
+      },
+      {
+        "name": "John Ellis",
+        "role": "mentioned",
+        "popid": "POP-00033",
+        "floor": true
+      },
+      {
+        "name": "Latasha Jefferson",
+        "role": "mentioned",
+        "popid": "POP-00805",
+        "floor": true
+      },
+      {
+        "name": "Lena Marchetti",
+        "role": "mentioned",
+        "popid": "POP-01167",
+        "floor": true
+      },
+      {
+        "name": "Tyler Filet",
+        "role": "mentioned",
+        "popid": "POP-00447",
+        "floor": true
+      },
+      {
+        "name": "Vladimir Gonzalez",
+        "role": "mentioned",
+        "popid": "POP-00598",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "INIT-002:dispatch-live",
+        "verb": "referenced",
+        "attachedBy": "stepAttach"
+      },
+      {
+        "slug": "INIT-003:design-phase",
+        "verb": "referenced",
+        "attachedBy": "stepAttach"
+      },
+      {
+        "slug": "INIT-005:operational",
+        "verb": "referenced",
+        "attachedBy": "stepAttach"
+      }
+    ],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "I've seen Lena Marchetti's name come up a few times in conversations around town. To be honest, I don't know much about them, but they seem to be someone people are talking about. I've heard they're from East Oakland, but that's about it.",
+        "sourceRef": "citizenVoice PRESS Dominic Okeke-Brandt"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-8d01a5afde02",
+    "draftSha256": "4498563ba27f538c0d74b3b11e12bd94011f7b9004053bfd32683cf90ac058be",
+    "verdict": "output/cron-compare/culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-14T00:20:32.921Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 450",
+      "words": 1391,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "4498563ba27f538c0d74b3b11e12bd94011f7b9004053bfd32683cf90ac058be",
+      "costUsd": 0.0014
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-14T00:20:36.424Z"
+}

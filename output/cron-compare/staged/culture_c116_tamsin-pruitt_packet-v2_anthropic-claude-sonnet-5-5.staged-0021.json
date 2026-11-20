@@ -1,0 +1,111 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "116",
+  "persona": "tamsin-pruitt",
+  "byline": "Tamsin Pruitt",
+  "bylinePopid": "POP-01210",
+  "article": "output/cron-compare/staged/culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged-0021.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Saniya Williams",
+        "role": "quoted-source",
+        "popid": "POP-00860"
+      },
+      {
+        "name": "Noor Ng",
+        "role": "mentioned",
+        "popid": "POP-00889"
+      },
+      {
+        "name": "Amal Nair",
+        "role": "mentioned",
+        "popid": "POP-00815"
+      },
+      {
+        "name": "Marisol Quintero",
+        "role": "quoted-source",
+        "popid": "POP-01212"
+      },
+      {
+        "name": "Celeste Moon",
+        "role": "mentioned",
+        "popid": "POP-01061",
+        "floor": true
+      },
+      {
+        "name": "Devon Willis",
+        "role": "mentioned",
+        "popid": "POP-00782",
+        "floor": true
+      },
+      {
+        "name": "Iris Pham",
+        "role": "mentioned",
+        "popid": "POP-01203",
+        "floor": true
+      },
+      {
+        "name": "Manju Crenshaw",
+        "role": "mentioned",
+        "popid": "POP-00937",
+        "floor": true
+      },
+      {
+        "name": "Marky Beal",
+        "role": "mentioned",
+        "popid": "POP-00202",
+        "floor": true
+      },
+      {
+        "name": "Omar Lopez",
+        "role": "mentioned",
+        "popid": "POP-01136",
+        "floor": true
+      },
+      {
+        "name": "Rasha Brown",
+        "role": "mentioned",
+        "popid": "POP-00922",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "I haven't moved into a place of my own in Rockridge; I've lived here for a while now. Recently, I've been juggling a few things and started a small project with no deadline and no particular reason.",
+        "sourceRef": "citizenVoice PRESS Saniya Williams"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-fabce895af20",
+    "draftSha256": "632fd281073b13df75dba555deed37f67c86d1f71c4fb7c1c40a62993ed6cd8b",
+    "verdict": "output/cron-compare/culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-19T00:21:16.952Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 450",
+      "words": 1245,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "632fd281073b13df75dba555deed37f67c86d1f71c4fb7c1c40a62993ed6cd8b",
+      "costUsd": 0.0012
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-19T00:21:22.621Z"
+}

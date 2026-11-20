@@ -1,0 +1,61 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "116",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "elliot-graye",
+  "byline": {
+    "name": "Elliot Graye",
+    "popid": "POP-00012",
+    "beatDomain": "COMMUNITY"
+  },
+  "laneEntries": 30,
+  "quotesLanded": 4,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "sheet_read",
+    "sheet_read",
+    "canon_recall",
+    "canon_recall"
+  ],
+  "toolCalls": 4,
+  "wordCount": 871,
+  "targetWords": "evidence-bounded",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 871,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "136cadb8e2342849c48fe5177f5c050a1c6b6171391fd31f7ebf5d3a4d12a392",
+    "costUsd": 0.001
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/3 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/culture_c116_elliot-graye_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "ected env (33) from ../.config/godworld/.env // tip: ⌘ suppress logs { quiet: true }\n{\n  \"popId\": \"POP-00012\",\n  \"name\": \"Elliot Graye\",\n  \"recorded\": true,\n  \"text\": \"The Council That Moves Around\"\n}"
+  },
+  "ranAt": "2026-11-20T00:16:19.409Z"
+}

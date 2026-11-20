@@ -1,0 +1,124 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "115",
+  "persona": "tamsin-pruitt",
+  "byline": "Tamsin Pruitt",
+  "bylinePopid": "POP-01210",
+  "article": "output/cron-compare/staged/culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged-0019.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Harmony Gupta",
+        "role": "mentioned",
+        "popid": "POP-00844"
+      },
+      {
+        "name": "Christine Nakamura",
+        "role": "quoted-source",
+        "popid": "POP-01108"
+      },
+      {
+        "name": "Elijah Campbell",
+        "role": "quoted-source",
+        "popid": "POP-00969",
+        "ambiguous": true
+      },
+      {
+        "name": "Jem Steele",
+        "role": "mentioned",
+        "popid": "POP-00544"
+      },
+      {
+        "name": "Daniel Yoon",
+        "role": "mentioned",
+        "popid": "POP-01107",
+        "floor": true
+      },
+      {
+        "name": "Elias Varek",
+        "role": "mentioned",
+        "popid": "POP-00789",
+        "floor": true
+      },
+      {
+        "name": "Enzo Walker",
+        "role": "mentioned",
+        "popid": "POP-00291",
+        "floor": true
+      },
+      {
+        "name": "Genevieve Martinez",
+        "role": "mentioned",
+        "popid": "POP-00864",
+        "floor": true
+      },
+      {
+        "name": "Ingeborg Hallstrom",
+        "role": "mentioned",
+        "popid": "POP-01181",
+        "floor": true
+      },
+      {
+        "name": "Otis Redd",
+        "role": "mentioned",
+        "popid": "POP-00121",
+        "floor": true
+      },
+      {
+        "name": "Priya Raghunathan",
+        "role": "mentioned",
+        "popid": "POP-01214",
+        "floor": true
+      },
+      {
+        "name": "Wanjiru Liu",
+        "role": "mentioned",
+        "popid": "POP-00842",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "INIT-006:construction-active",
+        "verb": "referenced",
+        "attachedBy": "stepAttach"
+      }
+    ],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "This cycle has been pretty normal for me. I waited at the Laurel Cleaners counter while someone hunted for the claim ticket. Other than that, it's been business as usual.",
+        "sourceRef": "citizenVoice PRESS Harmony Gupta"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-6aae0d9dd397",
+    "draftSha256": "0c597c1ee649b74bfecd7e80159ebbb3a41a38caffbe8927bf5ea7fb1122e86a",
+    "verdict": "output/cron-compare/culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-13T00:19:54.894Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 450",
+      "words": 1192,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "0c597c1ee649b74bfecd7e80159ebbb3a41a38caffbe8927bf5ea7fb1122e86a",
+      "costUsd": 0.0014
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-13T00:19:57.959Z"
+}

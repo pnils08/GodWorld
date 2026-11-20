@@ -1,0 +1,64 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "115",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "hal-richmond",
+  "byline": {
+    "name": "Hal Richmond",
+    "popid": "POP-00007",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 12,
+  "quotesLanded": 0,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "canon_search",
+    "dossier_read",
+    "citizen_lookup",
+    "canon_recall",
+    "canon_search",
+    "canon_recall"
+  ],
+  "toolCalls": 6,
+  "wordCount": 975,
+  "targetWords": "800-1200 words, bounded by the Packet and what the tools returned",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": false,
+    "purposeMet": false,
+    "inTarget": true,
+    "inTargetBy": "code floor 800",
+    "words": 975,
+    "short": "The opening paragraph does not establish the ground the man came from, and the piece omits his own recorded words.",
+    "score": 1,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "deb4f6de3c8006b0a197f8775590d8c56b2f4095ff1b6e1f317b63ef8e36d968",
+    "costUsd": 0.0024
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 1/3 — The opening paragraph does not establish the ground the man came from, and the piece omits his own recorded words."
+  },
+  "article": "output/cron-compare/staged/sports_c115_hal-richmond_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "/.config/godworld/.env // tip: ⌘ custom filepath { path: '/custom/path/.env' }\n{\n  \"popId\": \"POP-00007\",\n  \"name\": \"Hal Richmond\",\n  \"recorded\": true,\n  \"text\": \"filed: The Name Outlasts the Salary\"\n}"
+  },
+  "ranAt": "2026-11-13T00:18:17.358Z",
+  "dispositionReconciledAt": "2026-11-14T18:00:02.848Z"
+}

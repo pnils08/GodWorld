@@ -1,0 +1,49 @@
+{
+  "office": "stabilization_fund",
+  "cycle": 116,
+  "speaker": "Marcus Webb",
+  "cascadeSummary": "I sent the transmitted charter-renewal ordinance to the council floor with the business-and-resident scope, the 23-day processing standard, and the C114 closeout evidence intact — and announced no new tranche, because renewal is the council's call and I won't call it for them. Grand Lake's $2.5M went to its recorded full-council vote with every Chen-Vega milestone and audit condition still attached, and I claim no outcome. The queue in West Oakland kept moving on the 23-day standard the whole time — that is the promise the record has to keep.",
+  "statements": [
+    {
+      "statementId": "STMT-116-stabilization_fund-001",
+      "type": "operational_status",
+      "topic": "Charter renewal ordinance transmitted to council with scope and closeout evidence intact — no new tranche",
+      "initiative": "INIT-001",
+      "decision": "Advance the transmitted charter-renewal ordinance to council consideration this cycle with the West Oakland business-and-resident scope, the 23-day processing standard, and the C114 closeout evidence preserved; announce no new tranche.",
+      "quote": "The renewal is on the council's desk with the scope that works and the closeout that proves it — and I am not calling a tranche into an ordinance the council hasn't voted on.",
+      "fullStatement": "The C114 closeout is on the public record and the transmitted charter-renewal ordinance goes to the council this cycle with three things stapled to it and nothing rewritten: the business-and-resident scope the charter named, the 23-day processing standard the last seven quarters kept, and the C114 closeout evidence a member can open and read line by line. What I am not doing is announcing a new tranche. Renewal is the council's call, not mine, and an ordinance that walks in pre-loaded with a dollar figure is an ordinance the council didn't get to vote on. The queue keeps moving on the 23-day standard while the paperwork goes to the record — that's the bounded promise West Oakland was made, and that's the one I can defend under audit.",
+      "trackerUpdates": {
+        "initiative": "INIT-001",
+        "MilestoneNotes": "C116: charter-renewal ordinance transmitted to council floor with business-and-resident scope, 23-day standard, and C114 closeout evidence intact; no new tranche announced",
+        "NextScheduledAction": "Council consideration of the transmitted charter-renewal ordinance; disbursement continues on the 23-day standard pending the roll",
+        "NextActionCycle": 117
+      }
+    },
+    {
+      "statementId": "STMT-116-stabilization_fund-002",
+      "type": "operational_status",
+      "topic": "Grand Lake $2.5M to recorded full-council vote with Chen-Vega milestone and audit conditions intact",
+      "initiative": "INIT-009",
+      "decision": "Maintain a YES position on INIT-009 and send the $2.5M to the recorded full-council vote this cycle with every Chen-Vega milestone and audit condition intact; claim no outcome before the roll exists.",
+      "quote": "Grand Lake's two and a half million dollars walks into the chamber with every milestone and audit condition still attached — and the roll is the only thing that writes the result.",
+      "fullStatement": "Grand Lake's two and a half million dollars goes to the recorded full-council vote this cycle with every Chen-Vega milestone and audit condition still stapled to it — the same conditions, not a summary of them, not a version negotiated at the rail. I hold the position I have held: a recorded yes-or-no with the conditions attached. What I do not do is claim an outcome before the roll exists. A hearing statement is not a vote, and a reporter's count of a room is not a roll. The record is the only thing that closes this, and the record is what the council produces this cycle. If the vote lands, the milestone and audit reporting attaches to the disbursement and the trail stays clean. If it does not, the record says so and we try again.",
+      "trackerUpdates": {
+        "initiative": "INIT-009",
+        "ImplementationPhase": "vote-ready",
+        "MilestoneNotes": "C116: $2.5M sent to recorded full-council vote with Chen-Vega milestone and audit conditions intact; no outcome claimed; YES position maintained",
+        "NextScheduledAction": "Recorded full-council roll on INIT-009; milestone and audit reporting attaches to disbursement if the vote lands",
+        "NextActionCycle": 117
+      }
+    },
+    {
+      "statementId": "STMT-116-stabilization_fund-003",
+      "type": "constituent_response",
+      "topic": "West Oakland queue on the 23-day standard while the ordinance is pending",
+      "initiative": null,
+      "decision": "Keep the West Oakland disbursement queue moving on the 23-day standard through the renewal wait, with no pause pending council action.",
+      "quote": "The rent does not wait for the ordinance, and the queue does not wait for the vote — the 23-day standard holds every week the charter is in front of the council.",
+      "fullStatement": "An ordinance in front of the council is not a reason to slow the queue. The 23-day standard holds this week and next while the charter renewal sits in front of the council, and the money keeps moving against the authorization still in the account. The people in the West Oakland line do not need a narrator, and they do not need the renewal vote used as a reason to hold a file — they need the case file to hold and the check to clear on the standard. That is the part I can answer for whether or not the ordinance is renewed, and it is the part I intend to keep answering for.",
+      "trackerUpdates": {}
+    }
+  ]
+}

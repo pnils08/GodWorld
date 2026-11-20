@@ -1,0 +1,24 @@
+{
+  "initiative": "INIT-003",
+  "initiativeId": "INIT-003",
+  "cycle": 116,
+  "primaryVoice": "Soria Dominguez (transit_hub-001)",
+  "consolidatedFrom": [
+    "STMT-116-transit_hub-001 (Soria Dominguez — Preliminary schematics delivery and documented Fruitvale comment-and-response...)",
+    "STMT-116-transit_hub-002 (Soria Dominguez — What Fruitvale needs from me this cycle)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-003",
+    "ImplementationPhase": "design-phase",
+    "MilestoneNotes": "C116: Preliminary schematics delivered and documented Fruitvale comment-and-response review begun at Cesar Chavez branch and senior center (EN/ES/Mam); advancement held pending record",
+    "NextScheduledAction": "Complete and publish the Fruitvale comment-and-response record; deliver to council for verification before any design advancement",
+    "NextActionCycle": 117,
+    "LastWorkCycle": 116,
+    "LastWorkSeat": "proj-transit-hub"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-115-proj-transit-hub-2026-11-12"
+    ]
+  }
+}

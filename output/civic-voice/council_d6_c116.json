@@ -1,0 +1,38 @@
+{
+  "office": "council_d6",
+  "cycle": 116,
+  "speaker": "Elliott Crane",
+  "cascadeSummary": "I voted to sustain rigorous fiscal accountability across city initiatives while ensuring municipal baselines in District 6 remain sound. I affirmed my vote for Grand Lake commercial stabilization under strict Chen-Vega audit milestones, demanded verified closeout ledgers before acting on the West Oakland Stabilization Fund charter renewal, and requested departmental follow-through on Piedmont Avenue's public health spike without creating unnecessary bureaucracy.",
+  "statements": [
+    {
+      "statementId": "STMT-116-council_d6-001",
+      "type": "vote_statement",
+      "topic": "West Oakland Stabilization Fund Charter Renewal",
+      "initiative": "West Oakland Stabilization Fund",
+      "decision": "Condition any charter renewal vote on publication and verification of the C114 closeout ledger and preservation of the 23-day processing standard.",
+      "quote": "A charter extension cannot outpace the ledger; we must verify audited closeout documentation before committing city resources.",
+      "fullStatement": "The West Oakland Stabilization Fund has played a significant role since Cycle 78, but municipal reauthorizations demand rigorous accountability. I support the requirement that the ordered Month-12 closeout ledger be formally entered into the hearing record before Council makes any final decision on renewal. District 6 taxpayers expect every public dollar to be documented, unearned tranches eliminated, and the existing 23-day processing standard maintained. Until that verified closeout documentation is delivered and inspected, I will not authorize a multi-million-dollar charter extension.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-116-council_d6-002",
+      "type": "vote_statement",
+      "topic": "Commercial Stabilization for Grand Lake Recorded Vote",
+      "initiative": "Commercial Stabilization for Grand Lake",
+      "decision": "Vote YES on the $2.5 million Commercial Stabilization for Grand Lake proposal with Chen-Vega audit and milestone requirements attached.",
+      "quote": "Public investment earns my vote when enforceable audits and transparent milestones protect the public purse from day one.",
+      "fullStatement": "I cast my vote in favor of the Commercial Stabilization for Grand Lake initiative because its structure incorporates the necessary fiscal controls established by colleagues Chen and Vega. Commercial corridors are the lifeblood of Oakland's economy, but revitalization programs cannot operate on blank checks. By embedding mandatory milestone reporting, independent audit protocols, and strict disbursement criteria directly into the Clerk's certified roll call, this $2.5 million investment balances economic support with prudent fiscal oversight. That is the standard all future neighborhood stabilization funding should meet.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-116-council_d6-003",
+      "type": "policy_statement",
+      "topic": "Piedmont Avenue Baseline Services and Health Follow-up",
+      "initiative": null,
+      "decision": "Direct relevant city departments to provide an informational update on Piedmont Avenue's medium-severity health spike while maintaining core municipal services without added bureaucratic overhead.",
+      "quote": "Routine city maintenance and targeted public health follow-through must protect our commercial vitality without inventing new bureaucratic machinery.",
+      "fullStatement": "District 6 remains commercially vibrant with busy street trade, low crime, and vital community mutual aid, such as the food pantry at B'nai Tikvah Synagogue serving neighbors in need. However, the recent medium-severity health spike on Piedmont Avenue requires a clear, factual update from the responsible health and public service departments. City Hall's duty is to deliver timely diagnostic answers, coordinate necessary municipal baseline cleanups, and resolve local service spikes without declaring unwarranted emergencies or creating redundant administrative structures.",
+      "trackerUpdates": {}
+    }
+  ]
+}

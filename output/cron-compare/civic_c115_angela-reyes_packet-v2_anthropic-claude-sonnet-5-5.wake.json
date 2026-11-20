@@ -55,5 +55,6 @@
     "recorded": true,
     "out": "/ tip: ⌘ enable debugging { debug: true }\n{\n  \"popId\": \"POP-00156\",\n  \"name\": \"Angela Reyes\",\n  \"recorded\": true,\n  \"text\": \"filed: Temescal's 314 Students Stayed Put, and the Table Ranks Them Last\"\n}"
   },
-  "ranAt": "2026-11-11T00:18:11.934Z"
+  "ranAt": "2026-11-11T00:18:11.934Z",
+  "dispositionReconciledAt": "2026-11-14T18:00:02.113Z"
 }

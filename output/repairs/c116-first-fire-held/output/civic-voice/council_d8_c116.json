@@ -1,0 +1,40 @@
+{
+  "office": "council_d8",
+  "cycle": 116,
+  "speaker": "Nina Chen",
+  "cascadeSummary": "In Cycle 116, District 8 records an individual floor vote of YES on the $2.5 million Commercial Stabilization for Grand Lake ordinance, clarifying that council passage remains pending the official roll-call certification. Concurrently, we demand formal docket references and verified service delivery schedules for Eastlake baseline municipal maintenance allocations, alongside a transparent crosswalk resolving District 8's three recorded service complaints.",
+  "statements": [
+    {
+      "statementId": "STMT-116-council_d8-001",
+      "type": "vote_statement",
+      "topic": "Commercial Stabilization for Grand Lake Recorded Floor Vote",
+      "initiative": "Commercial Stabilization for Grand Lake",
+      "decision": "Vote YES on INIT-009 with mandatory Chen-Vega audit protocols and milestone reporting, while clarifying that an individual YES vote does not constitute council passage pending official roll-call certification.",
+      "quote": "An individual affirmative vote is not an enacted ordinance; District 8 votes YES to secure Chen-Vega fiscal controls, but final disposition rests on a certified roll call.",
+      "fullStatement": "District 8 records a floor vote of YES on the $2.5 million Commercial Stabilization for Grand Lake ordinance, but I clarify for the record that my affirmative vote represents an individual council position rather than certified council passage. The live tracker reflects a prior failed administrative marker, and no final decision record confirming passage exists until this cycle's roll call is officially executed and gaveled. Relief without accountability is merely an expenditure. District 8 maintains its YES vote strictly on the condition that the Chen-Vega audit protocols, mandatory milestone verifications, and clawback provisions remain intact upon final disposition.",
+      "disposition": "YES",
+      "actionAsked": "Execute and record the official full-council roll-call vote on INIT-009 with all Chen-Vega audit and milestone reporting conditions attached.",
+      "tone": "procedural",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-116-council_d8-002",
+      "type": "oversight_statement",
+      "topic": "Eastlake Maintenance Allocations and Complaint Crosswalk Reconciliation",
+      "initiative": null,
+      "decision": "Require City Planning and Public Works to produce formal docket numbers, verified service schedules for Eastlake maintenance allocations, and a documented crosswalk for District 8's three recorded complaints.",
+      "quote": "Revitalization cannot halt at Grand Avenue while adjacent commercial corridors wait for unverified schedules and unanswered maintenance complaints.",
+      "fullStatement": "Procedural accountability requires distinguishing between proposed administrative actions and authorized municipal programs. I clarify that while District 8 has docketed requests for baseline municipal maintenance allocations in Eastlake, no formal legislative authorization reference or certified Public Works service schedule has yet been issued by the administration. Furthermore, regarding District 8's three recorded complaints concerning maintenance backlogs and corridor decay, the responsible departments have not yet filed formal response dockets. I demand that City Planning and Public Works formally transmit verified maintenance schedules, legislative docket references, and a detailed complaint-to-response crosswalk before any service claims are treated as fulfilled.",
+      "disposition": "statement",
+      "actionAsked": "Publish formal docket references and verified service schedules for Eastlake maintenance allocations, along with a documented crosswalk resolving District 8's three recorded complaints.",
+      "tone": "oversight",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    }
+  ]
+}

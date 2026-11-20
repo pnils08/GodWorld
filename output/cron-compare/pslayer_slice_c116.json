@@ -1,0 +1,331 @@
+{
+  "cycle": 116,
+  "builtAt": "2026-11-19T12:15:04.887Z",
+  "empty": false,
+  "journalist": {
+    "name": "P Slayer",
+    "popid": "POP-00008",
+    "persona": "p-slayer"
+  },
+  "approach": "Fan-heat approach (P Slayer pulse): do NOT open from the FO press release or the award board. Open from gut or Oakland sensory (bar, lot, bleacher row, BART after). First-person I/we only. Pick 1–2 charge-bag modes from this slice. Friction pivot required — name the counter-argument, kill it. ONE real foil number max (from FoilNumber / AnchorFacts); never invent x-stats or roster moves. Hook PriorTake when present — eat it or double down (\"I was wrong\" is craft). End on charge that sticks: dare, confession, or update. Not Anthony. Not Hal. Not multi-voice sports-desk average.",
+  "pulse": {
+    "className": "roster-move",
+    "classes": [
+      "roster-move"
+    ],
+    "score": 67,
+    "label": "Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+    "team": "A's",
+    "eventKind": "trade-recap",
+    "seasonType": "off-season",
+    "feedCycle": 116,
+    "record": "-",
+    "streak": "-",
+    "mood": "uncertain",
+    "fanSentiment": "uncertain",
+    "neighborhood": "Lake Merritt",
+    "notes": "Mike Paulson answered the question this page asked in C114. Carmen Mesa was the A's best trade chip, and now he is gone, sent to the Phillies, the team the A's beat in five games for their seventh World Series title. Mesa, 23, 81 overall with B potential, goes to Philadelphia with relief prospect Porter Broadway, 20, 70 overall with C potential, and second baseman Jose Fuentes, 23, 63 overall with B potential. Coming back to Oakland are third baseman Giancarlo Hernandez and left fielder Antone Baez. Mesa never got a fair shot at a rotation spot here. He was called up in C91 when Henry Rivas dislocated his shoulder, threw a complete game shutout against the Cubs in his first start, 9 innings, 5 hits and 12 strikeouts, and struck out 10 more against the Rays his next time out. When Rivas came back, Mesa was optioned to AAA, and Pablo Almanzar got the late-season call-up and then the fifth rotation spot behind Coles, Ramos, Rivas and Ellis. Mesa, born in Cuba and living in Lake Merritt, was stuck at $780K with nowhere to start. Hernandez is the prize. He is 23, a 2036 first round pick born in the Dominican Republic, wears #15, bats and throws right, and has almost no major league service time. His glove is already elite: 96 fielding, 80 reaction and a 70 arm. The bat is behind the glove, 65 contact against righties and 68 against lefties with modest power, but he hits to all fields and improved in nearly every attribute this cycle, including +9 contact against lefties. He grades A potential at 78 overall and climbing. That gives the A's three young third basemen with A potential. Ernesto Quintero took the job from Martin Richards, and Kevin Clark, 22, was supposed to be next, with Quintero sliding to first base if Mark Aitken leaves in free agency. Baez, 24, 70 overall with C potential, starts in the minors, organizational outfield depth behind Desmond Morton, Frank Reyna and JR Rosado. The Phillies players carry no listed salary, and the A's budget room rises from $129.42M to $130.35M.",
+    "stats": "Giancarlo Hernandez/78OVR/A POT/96FLD/80REAC/70ARM/65CON R/68CON L, Antone Baez/70OVR/C POT, Carmen Mesa/81OVR/B POT/9IP/5H/12SO/0R (first start vs Cubs), Porter Broadway/70OVR/C POT, Jose Fuentes/63OVR/B POT, A's budget/$129.42M before/$130.35M after"
+  },
+  "charge": {
+    "bagModes": [
+      {
+        "id": 1,
+        "name": "Hate the Move"
+      },
+      {
+        "id": 3,
+        "name": "Friction Pivot"
+      }
+    ],
+    "fanCharge": "fury",
+    "foilNumber": "9IP",
+    "centralFeeling": "Oakland should feel the FO heard the bleachers.",
+    "palette": [
+      "fury",
+      "euphoria",
+      "dread",
+      "defiance",
+      "confession",
+      "grief",
+      "dare"
+    ]
+  },
+  "prewrite": {
+    "reporter": "P.Slayer",
+    "bagModes": [
+      {
+        "id": 1,
+        "name": "Hate the Move"
+      },
+      {
+        "id": 3,
+        "name": "Friction Pivot"
+      }
+    ],
+    "fanCharge": "fury",
+    "priorTake": "NONE — write cold or invent no prior; wall may still inject at wake",
+    "anchorFacts": [
+      "StoryAngle (feed): Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+      "Stats (feed): Giancarlo Hernandez/78OVR/A POT/96FLD/80REAC/70ARM/65CON R/68CON L, Antone Baez/70OVR/C POT, Carmen Mesa/81OVR/B POT/9IP/5H/12SO/0R (first start vs Cubs), Porter Broadway/70OVR/C POT, Jose Fuentes/63OVR/B POT, A's budget/$129.42M before/$130.35M after",
+      "Event: A's — trade-recap (off-season)",
+      "NamesUsed: Carmen Mesa (SP), Porter Broadway (RP), Jose Fuentes (2B), Giancarlo Hernandez (3B), Antone Baez (LF), Mike Paulson (GM), Kevin Clark (3B), Ernesto Quintero (3B/1B)"
+    ],
+    "foilNumber": "9IP",
+    "centralFeeling": "Oakland should feel the FO heard the bleachers.",
+    "hooks": [
+      {
+        "text": "A's pushing for playoffs. City holding its breath. Stakes coverage.",
+        "angle": "conflict/tension coverage",
+        "hood": null
+      },
+      {
+        "text": "A's make a trade. Who went, who came, winners and losers, clubhouse ripple.",
+        "angle": "conflict/tension coverage",
+        "hood": null
+      },
+      {
+        "text": "Oaks drop a close one. The play that turned it, the mood after, what is next.",
+        "angle": "conflict/tension coverage",
+        "hood": "Jack London"
+      }
+    ]
+  },
+  "hooks": [
+    {
+      "text": "A's pushing for playoffs. City holding its breath. Stakes coverage.",
+      "angle": "conflict/tension coverage",
+      "hood": null
+    },
+    {
+      "text": "A's make a trade. Who went, who came, winners and losers, clubhouse ripple.",
+      "angle": "conflict/tension coverage",
+      "hood": null
+    },
+    {
+      "text": "Oaks drop a close one. The play that turned it, the mood after, what is next.",
+      "angle": "conflict/tension coverage",
+      "hood": "Jack London"
+    }
+  ],
+  "seeds": [],
+  "friction": {
+    "a": "Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+    "b": "FO language (transition / flexibility / prepared) or the tidy \"genius in hindsight\" read",
+    "frame": "The stands feel sold out or sold short — write into that gap, not the press release."
+  },
+  "priorTakes": [],
+  "story": {
+    "ref": "Oakland_Sports_Feed cycle 116; world_summary_c116.md \"## Sports\" · Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+    "label": "Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+    "kind": "roster-move",
+    "angle": "Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+    "hookLine": "The stands feel sold out or sold short — write into that gap, not the press release.",
+    "hood": "Lake Merritt",
+    "team": "A's",
+    "eventKind": "trade-recap",
+    "popids": [
+      "POP-00081",
+      "POP-01239",
+      "POP-00527",
+      "POP-00053",
+      "POP-00050",
+      "POP-00024",
+      "POP-01078"
+    ],
+    "citizens": [
+      "Carmen Mesa (POP-00081)",
+      "Porter Broadway",
+      "Jose Fuentes",
+      "Giancarlo Hernandez (POP-01239)",
+      "Antone Baez",
+      "Mike Paulson (POP-00527)",
+      "Kevin Clark (POP-00053)",
+      "Ernesto Quintero (POP-00050)",
+      "Henry Rivas (POP-00024)",
+      "Pablo Almanzar (POP-01078)"
+    ],
+    "pulseClass": "roster-move",
+    "pulseScore": 67,
+    "fanCharge": "fury",
+    "bagModeIds": [
+      1,
+      3
+    ]
+  },
+  "players": [
+    {
+      "name": "Carmen Mesa",
+      "popid": "POP-00081",
+      "role": "Starting Pitcher, Philadelphia Phillies",
+      "neighborhood": "Lake Merritt",
+      "why": "feed-names"
+    },
+    {
+      "name": "Porter Broadway",
+      "popid": null,
+      "role": null,
+      "neighborhood": null,
+      "why": "feed-names"
+    },
+    {
+      "name": "Jose Fuentes",
+      "popid": null,
+      "role": null,
+      "neighborhood": null,
+      "why": "feed-names"
+    },
+    {
+      "name": "Giancarlo Hernandez",
+      "popid": "POP-01239",
+      "role": "Third Baseman, Oakland A's",
+      "neighborhood": null,
+      "why": "feed-names"
+    },
+    {
+      "name": "Antone Baez",
+      "popid": null,
+      "role": null,
+      "neighborhood": null,
+      "why": "feed-names"
+    },
+    {
+      "name": "Mike Paulson",
+      "popid": "POP-00527",
+      "role": "General Manager, Oakland A's & The Oaks",
+      "neighborhood": "West Oakland",
+      "why": "feed-names"
+    },
+    {
+      "name": "Kevin Clark",
+      "popid": "POP-00053",
+      "role": "Third Baseman, Oakland A's",
+      "neighborhood": "Jack London",
+      "why": "feed-names"
+    },
+    {
+      "name": "Ernesto Quintero",
+      "popid": "POP-00050",
+      "role": "3B/1B , Oakland A's",
+      "neighborhood": "Baylight District",
+      "why": "feed-names"
+    },
+    {
+      "name": "Henry Rivas",
+      "popid": "POP-00024",
+      "role": "Starting Pitcher, Oakland A's",
+      "neighborhood": "West Oakland",
+      "why": "feed-names"
+    },
+    {
+      "name": "Pablo Almanzar",
+      "popid": "POP-01078",
+      "role": "SP / Oakland A's",
+      "neighborhood": "Chinatown",
+      "why": "feed-names"
+    }
+  ],
+  "scene": {
+    "neighborhood": "Lake Merritt",
+    "record": "-",
+    "streak": "-",
+    "mood": "uncertain",
+    "fanSentiment": "uncertain",
+    "colorRoom": "You may invent unnamed bar / lot / BART / bleacher texture that contradicts nothing on this slice. Do not invent star players, contracts, stats, or quotes. Named people stay on PLAYERS list or Tribune colleagues (Anthony, Hal, Mags) as foils."
+  },
+  "candidates": [
+    {
+      "score": 67,
+      "cycle": 116,
+      "team": "A's",
+      "primary": "roster-move",
+      "angle": "Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+      "priorHits": 0
+    },
+    {
+      "score": 67,
+      "cycle": 116,
+      "team": "A's",
+      "primary": "roster-move",
+      "angle": "What does the Mesa trade mean for Hernandez, Kevin Clark and Mark Aitken?",
+      "priorHits": 0
+    },
+    {
+      "score": 65,
+      "cycle": 116,
+      "team": "Oaks",
+      "primary": "loss",
+      "angle": "The Spurs hand the Oaks their first home loss. Spurs 126 - Oaks 117",
+      "priorHits": 0
+    },
+    {
+      "score": 54,
+      "cycle": 115,
+      "team": "Oaks",
+      "primary": "insult-pulse",
+      "angle": "The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+      "priorHits": 0
+    },
+    {
+      "score": 49,
+      "cycle": 116,
+      "team": "Oaks",
+      "primary": "win-streak",
+      "angle": "The Oaks shoot 80 percent in Denver and set a franchise record. Oaks 147 - Nuggets 114",
+      "priorHits": 0
+    },
+    {
+      "score": 47,
+      "cycle": 116,
+      "team": "A's",
+      "primary": "prospect-callup",
+      "angle": "The bat or the glove? Kevin Clark's .327 against Giancarlo Hernandez's 96 fielding for third base",
+      "priorHits": 0
+    },
+    {
+      "score": 46,
+      "cycle": 116,
+      "team": "A's",
+      "primary": "award-board",
+      "angle": "Benji Dillon hasn't retired yet. The 5-time Cy Young winner leaves the door open after Keane walks through his",
+      "priorHits": 0
+    },
+    {
+      "score": 41,
+      "cycle": 114,
+      "team": "Oaks",
+      "primary": "loss",
+      "angle": "The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100",
+      "priorHits": 0
+    }
+  ],
+  "pointers": [
+    "output/world_summary_c116.md ## Sports",
+    "output/desk_signal_c116.json lanes.sports",
+    "docs/media/P_SLAYER_CHARGE_BAG.md",
+    "docs/media/voices/p_slayer.md",
+    "docs/media/P_SLAYER_JOURNEY_INDEX.md",
+    "Oakland_Sports_Feed cycle 116; world_summary_c116.md \"## Sports\" · Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+    "output/beats/Story_Hook_Deck.jsonl + Story_Seed_Deck.jsonl (sports, this cycle)"
+  ],
+  "gaps": {
+    "note": "What would deepen fan-heat further",
+    "missingOrThin": [
+      {
+        "source": "cp-POP-00008 live wall at build time",
+        "status": "wake-time",
+        "why": "reporterWall injects at cron angle; slice uses on-disk prior columns so build stays offline"
+      },
+      {
+        "source": "As_Roster live line for foil",
+        "status": "feed-stats-proxy",
+        "why": "FoilNumber parsed from feed Stats/Notes; live roster sheet would refine without inventing"
+      },
+      {
+        "source": "TrueSource / truesource injury windows",
+        "status": "partial",
+        "why": "Injury-load class relies on feed wording; card detail would strengthen Superman mode"
+      }
+    ]
+  }
+}

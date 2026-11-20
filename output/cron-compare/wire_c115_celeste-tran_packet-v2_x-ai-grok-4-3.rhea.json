@@ -1,0 +1,84 @@
+{
+  "draft": "output/cron-compare/wire_c115_celeste-tran_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "115",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "725697316ed6c41e89d7881049967b2dd3d840a439b3f558aefc4e5f1059a9bb",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Draft verified clean against Cycle 115 ground truth with exact interview attribution and accurate citizen profiles.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "celeste-social-trends-v1",
+    "packageVersion": "CELESTE-TRENDS-1",
+    "manifestId": "AM-f283879fbba4",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "14th"
+        ]
+      },
+      {
+        "code": "UNAPPROVED_QUOTE",
+        "values": [
+          "On one hand, getting Giancarlo Hernandez is huge for the team’s future. His glove is elite, and he’s got a lot of potential. On the other hand, losing Carmen Mesa stings. As for the community, I’m keeping an eye on how this all plays out. We’re a baseball town, and trades like this can go either way. I’m just happy to be involved, staying connected through the Firehouse 29 academy."
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Anthony Raines",
+      "Arturo Ramos",
+      "Carmen Mesa",
+      "Evan Lewis",
+      "John Ellis",
+      "Rico Valez",
+      "Rowan Pierce",
+      "Vinnie Keane"
+    ],
+    "unverified": [
+      "Giancarlo Hernandez"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0121,
+  "durationMs": 5361,
+  "parseError": false,
+  "ranAt": "2026-11-14T00:19:08.307Z",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 571,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "725697316ed6c41e89d7881049967b2dd3d840a439b3f558aefc4e5f1059a9bb",
+    "costUsd": 0.0007
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "status": "arc-seed",
+  "cycle": "116",
+  "desk": "business",
+  "persona": "business-desk",
+  "hood": "Jack London",
+  "quotes": [
+    {
+      "pop": "POP-00123",
+      "name": "Tre Mingo",
+      "quote": "I walk past that fence every day. The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching rents climb while the people I work with talk about leaving. The businesses are growing, the numbers look good, but the folks on the ledger aren't the ones who get to stay. I don't feel like I'm part of it. I feel like I'm watching it from the other side of the fence."
+    },
+    {
+      "pop": "POP-01093",
+      "name": "Marguerite Salcedo",
+      "quote": "Look, I run the numbers every day. Anchor Build is growing — 13.7%, 181 people on the payroll. That's real. But I'd be lying if I said I don't see the squeeze. My crews — the electricians, the laborers, the folks swinging hammers — they're the ones building these new units, and half of them can't afford to live in the buildings they're putting up. That's not a talking point, that's what I hear at the job site. I've got guys driving in from Antioch, from Stockton, because Jack London rent went up again. We're not pricing out strangers — we're pricing out the people who pour the concrete. And that keeps me up at night, because I've been in this business long enough to know you can't build a neighborhood on the backs of people who can't stay in it."
+    },
+    {
+      "pop": "POP-00177",
+      "name": "Elle Lilo",
+      "quote": "I've been on that water for thirty-nine years, and I've watched this neighborhood grow up around the port. The numbers going up—the cranes, the new buildings—that's real. But I'll tell you what I see from the wheelhouse: the same faces showing up at the union hall, the same guys on the dock at 5 a.m. Tre Mingo's one of them. The work's steady, but the cost of living here keeps climbing, and I watch good people do the math on whether they can stay. I moved myself, just a few miles, to make it work. That's the part nobody puts on a spreadsheet—the quiet decisions people make every day to keep doing the job they love in the place they grew up."
+    }
+  ],
+  "claim": "I walk past that fence every day. The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching rents climb while the people I work with talk about leaving. The businesses are growing, the numbers look good, but the folks on the ledger aren't the ones who get to stay. I don't feel like I'm part of it. I feel like I'm watching it from the other side of the fence.",
+  "src": "citizenVoice PRESS c116",
+  "ranAt": "2026-11-16T19:16:01.842Z"
+}

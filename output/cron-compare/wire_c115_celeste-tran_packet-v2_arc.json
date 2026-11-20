@@ -1,0 +1,32 @@
+{
+  "status": "arc-seed",
+  "cycle": "115",
+  "desk": "wire",
+  "persona": "celeste-tran",
+  "hood": "Fruitvale",
+  "quotes": [
+    {
+      "pop": "POP-00632",
+      "name": "Rico Valez",
+      "quote": "As a musician living in Fruitvale, I've noticed the energy around Oakland's cultural scene is buzzing. It's cool to see people excited about what's happening here. I'm not sure how it's directly affecting my work, but it feels like there's a good vibe. I've been playing gigs when I can, and it's great to see the community coming out to support local artists. The Fruitvale Community Bloom Festival is a great example of this - it draws crowds to the neighborhood and shows the beauty of what we're doing here."
+    },
+    {
+      "pop": "POP-00001",
+      "name": "Vinnie Keane",
+      "quote": "The A's trade is a mixed bag for me. On one hand, getting Giancarlo Hernandez is huge for the team's future. His glove is elite, and he's got a lot of potential. On the other hand, losing Carmen Mesa stings — he was stuck here, and I'm glad he's getting a chance to start in Philadelphia. As for the community, I'm keeping an eye on how this all plays out. We're a baseball town, and trades like this can go either way. I'm just happy to be involved, staying connected through the Firehouse 29 academy."
+    },
+    {
+      "pop": "POP-00545",
+      "name": "Rowan Pierce",
+      "quote": "I've noticed that West Oakland is getting a lot more attention lately. I see more people around, and it feels like there's a buzz about the area. As someone living in Piedmont Ave, I'm a bit removed from West Oakland, but I can sense the energy. I've heard that the cultural scene in Oakland is really vibrant, and I'm guessing West Oakland is a big part of that. I'm not really sure how it's all connected, but it feels like something is happening."
+    },
+    {
+      "pop": "POP-00200",
+      "name": "Evan Lewis",
+      "quote": "To be honest, I haven't really seen much of the A's around West Oakland lately. I drive past the Coliseum all the time, and you can tell when there's a game or event going on, but it's not like they're out in the community that much. I mean, I've seen Arturo Ramos and John Ellis around Laurel, they're nice guys, but that's about it."
+    }
+  ],
+  "claim": "As a musician living in Fruitvale, I've noticed the energy around Oakland's cultural scene is buzzing. It's cool to see people excited about what's happening here. I'm not sure how it's directly affecting my work, but it feels like there's a good vibe. I've been playing gigs when I can, and it's great to see the community coming out to support local artists. The Fruitvale Community Bloom Festival is a great example of this - it draws crowds to the neighborhood and shows the beauty of what we're doing here.",
+  "src": "citizenVoice PRESS c115",
+  "ranAt": "2026-11-13T19:19:35.083Z"
+}

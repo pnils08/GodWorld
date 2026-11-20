@@ -1,0 +1,62 @@
+{
+  "office": "council_d9",
+  "agentDir": "civic-office-council-d9",
+  "holder": "Terrence Mobley",
+  "popid": "POP-00506",
+  "title": "City Council District 9",
+  "date": "2026-11-12",
+  "cycle": 115,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "Laurel is the reason I'm on this dais, and this week the numbers on my turf are not good: sentiment at -0.15 against a city at 0.020, property crime at 43 against a city 39.5, incidents at 7 against 5.9, and a trajectory that has flipped from steady to decay. I filed the Laurel Neighborhood Patch and Clean-Up last cycle because the small, unglamorous failures — the missed pickup, the quiet storefront row — are exactly what erodes a neighborhood's confidence. It is still sitting at Proposed, waiting on a council vote, and I want it moved. But I'm not going to dress a flat reading into a crisis, and I'm not going to promise a number I can't source. What I can do is answer the Planning Director's question honestly, keep the proposal on the record where residents can find it, and be clear that grand plans mean nothing if Laurel's basics don't get done.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-115-civic-office-council-d9",
+        "text": "Director Vance — what has moved on the Laurel Neighborhood Patch and Clean-Up is this: I proposed it in C114 and it is on the tracker at Proposed, which is where it sits until a council vote funds it. That is not a completed outcome and I won't describe it as one. On missed-pickup recovery, the record I have shows the complaint window is C113 through C115, with four complaints displayed, and the district-level readings show Laurel sentiment at -0.15 against a city at 0.020, property crime at 43 against a city 39.5, and incidents at 7 against 5.9 — the condition counter is C115 only. I do not have a parsed budget for the proposal in my brief, so I can't tell you what the pickup work costs line by line, and I won't invent it. What I am asking is that the complaints on the record be attached to the proposed work so the patch and clean-up answers the pickups residents actually reported rather than a general sweep.",
+        "directiveCycle": 115,
+        "confrontationSeat": "civic-office-council-d9"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-11-12T11:45:19.372Z",
+  "usage": {
+    "prompt_tokens": 5814,
+    "completion_tokens": 471,
+    "total_tokens": 6285,
+    "cost": 0.0011841552,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0011841552,
+      "upstream_inference_prompt_cost": 0.0010569852,
+      "upstream_inference_completions_cost": 0.00012717
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "fellBackFrom": null,
+  "evidenceGenerationHash": "8bfd87940a666380c5a9b73d2151cff4f6286856fa3673a770c7259a48d6c71b",
+  "evidenceReads": [],
+  "provider": "Sail Research",
+  "finishReason": "stop",
+  "elapsedMs": 4020,
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": false,
+    "error": "[err] fetch failed",
+    "tag": "cp-POP-00506"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "116",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "carmen-delaine",
+  "byline": {
+    "name": "Carmen Delaine",
+    "popid": "POP-00011",
+    "beatDomain": "CIVIC"
+  },
+  "laneEntries": 115,
+  "quotesLanded": 2,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "sheet_read",
+    "canon_recall",
+    "citizen_lookup",
+    "citizen_lookup"
+  ],
+  "toolCalls": 4,
+  "wordCount": 901,
+  "targetWords": "500-900",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 500",
+    "words": 901,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "1312e473619ec5085e01ea2bb428e06a055b203288e6b0978b48e85ae3462f0f",
+    "costUsd": 0.0015
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/3 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/civic_c116_carmen-delaine_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "le debugging { debug: true }\n{\n  \"popId\": \"POP-00011\",\n  \"name\": \"Carmen Delaine\",\n  \"recorded\": true,\n  \"text\": \"filed: The Fund Says Its Closeout Is Published. The Tracker Says It Isn't Verified.\"\n}"
+  },
+  "ranAt": "2026-11-17T00:16:24.979Z"
+}

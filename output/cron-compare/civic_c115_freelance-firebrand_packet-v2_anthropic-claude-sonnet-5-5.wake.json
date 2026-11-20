@@ -56,5 +56,6 @@
     "recorded": true,
     "out": " existing { override: true }\n{\n  \"popId\": \"POP-00799\",\n  \"name\": \"Jax Caldera\",\n  \"recorded\": true,\n  \"text\": \"filed: Who Owns KONO's Rent Pressure When Everyone on Telegraph Says Business Is Good?\"\n}"
   },
-  "ranAt": "2026-11-12T00:16:36.269Z"
+  "ranAt": "2026-11-12T00:16:36.269Z",
+  "dispositionReconciledAt": "2026-11-14T18:00:02.372Z"
 }

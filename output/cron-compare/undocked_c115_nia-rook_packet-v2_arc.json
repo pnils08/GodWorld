@@ -3,15 +3,15 @@
   "cycle": "115",
   "desk": "undocked",
   "persona": "nia-rook",
-  "hood": "Fruitvale",
+  "hood": "Rockridge",
   "quotes": [
     {
-      "pop": "POP-00184",
-      "name": "Brooklyn Nguyen",
-      "quote": "I came out even on credits after Tuesday's UNDOCKED flight. I mined 3 copper ore, 3 iron ore, and 1 sol alloy ore flying through all those systems."
+      "pop": "POP-01195",
+      "name": "Elijah Brown",
+      "quote": "I flew on UNDOCKED Thursday night and went through a bunch of systems until the show's time ran out. I ended up even on credits. My standing is 3rd of 30, with 38.35 points and 0 credits, so it didn't seem to hurt me."
     }
   ],
-  "claim": "I came out even on credits after Tuesday's UNDOCKED flight. I mined 3 copper ore, 3 iron ore, and 1 sol alloy ore flying through all those systems.",
+  "claim": "I flew on UNDOCKED Thursday night and went through a bunch of systems until the show's time ran out. I ended up even on credits. My standing is 3rd of 30, with 38.35 points and 0 credits, so it didn't seem to hurt me.",
   "src": "citizenVoice PRESS c115",
-  "ranAt": "2026-11-11T19:24:58.325Z"
+  "ranAt": "2026-11-13T19:21:51.473Z"
 }

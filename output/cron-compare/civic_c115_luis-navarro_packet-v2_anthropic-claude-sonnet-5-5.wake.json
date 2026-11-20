@@ -55,5 +55,6 @@
     "recorded": true,
     "out": " tip: ◈ secrets for agents [www.dotenvx.com]\n{\n  \"popId\": \"POP-00636\",\n  \"name\": \"Luis Navarro\",\n  \"recorded\": true,\n  \"text\": \"filed: Three Cycles Without a Move: The Youth Apprenticeship Pipeline\"\n}"
   },
-  "ranAt": "2026-11-11T00:16:05.165Z"
+  "ranAt": "2026-11-11T00:16:05.165Z",
+  "dispositionReconciledAt": "2026-11-14T18:00:02.456Z"
 }

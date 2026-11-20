@@ -1,0 +1,58 @@
+{
+  "v": "UNDOCKED-INTAKE/1",
+  "Timestamp": "2026-11-16T02:55:47.215Z",
+  "POPID": "POP-01188",
+  "Cycle": 116,
+  "Seq": 1,
+  "Daypart": "SHOW",
+  "Tag": "undocked-episode",
+  "EpisodeId": "undocked-pop01188-2026-11-16T02-30-31",
+  "Applied": "yes",
+  "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop01188-2026-11-16T02-30-31.json",
+  "Holder": "Marguerite Kimball-Ostrow",
+  "CreditsDelta": 0,
+  "Magnitude": 2,
+  "Flags": [
+    "credits_delta_windowed"
+  ],
+  "Excerpt": "Marguerite Kimball-Ostrow credits=0 systems=sol,sirius,nova_terra,furud,acrux,botein,intercrus,atlas,cedarhold,garnet,achernar,ruchbah,ironhollow,gsc_0041,pherkad,shaula",
+  "DecidedAt": "2026-11-16T02:55:47.220Z",
+  "DecidedBy": "auto-gate",
+  "Note": "auto-approved on contract validation (§2.5)",
+  "FeedEvent": {
+    "v": "UNDOCKED-FEED/1",
+    "Cycle": 116,
+    "EventType": "undocked-episode",
+    "POPID": "POP-01188",
+    "Holder": "Marguerite Kimball-Ostrow",
+    "EpisodeId": "undocked-pop01188-Y3C12",
+    "CreditsDelta": 0,
+    "PointsDelta": 27.93,
+    "Systems": [
+      "sol",
+      "sirius",
+      "nova_terra",
+      "furud",
+      "acrux",
+      "botein",
+      "intercrus",
+      "atlas",
+      "cedarhold",
+      "garnet",
+      "achernar",
+      "ruchbah",
+      "ironhollow",
+      "gsc_0041",
+      "pherkad",
+      "shaula"
+    ],
+    "CombatEvents": 0,
+    "MishapCount": 0,
+    "Magnitude": 2,
+    "Flags": [
+      "credits_delta_windowed"
+    ],
+    "StagedPath": "output/spacemolt-show/staged/undocked-pop01188-2026-11-16T02-30-31.json"
+  },
+  "PointsDelta": 27.93
+}

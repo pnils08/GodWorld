@@ -1,0 +1,481 @@
+{"Timestamp":"C68","Cycle":"68","EventDescription":"misfiled document","EventType":"misc-event","Domain":"General","Severity":"low","Neighborhood":"CENTRAL"}
+{"Timestamp":"C68","Cycle":"68","EventDescription":"locked-out worker","EventType":"health-alert","Domain":"Health","Severity":"low","Neighborhood":"WEST"}
+{"Timestamp":"C69","Cycle":"69","EventDescription":"lineup leak","EventType":"sports-news","Domain":"Sports","Severity":"low","Neighborhood":"SOUTH"}
+{"Timestamp":"C69","Cycle":"69","EventDescription":"kitchen fire (minor)","EventType":"business-incident","Domain":"Business","Severity":"low","Neighborhood":"WEST"}
+{"Timestamp":"C70","Cycle":"70","EventDescription":"pothole eruption","EventType":"health-alert","Domain":"Health","Severity":"low","Neighborhood":"CENTRAL"}
+{"Timestamp":"C71","Cycle":"71","EventDescription":"influencer prank","EventType":"health-alert","Domain":"Health","Severity":"low","Neighborhood":"West Oakland"}
+{"Timestamp":"C71","Cycle":"71","EventDescription":"missing funds","EventType":"misc-event","Domain":"General","Severity":"low","Neighborhood":"KONO"}
+{"Timestamp":"C72","Cycle":"72","EventDescription":"locked-out worker","EventType":"health-alert","Domain":"Health","Severity":"low","Neighborhood":"KONO"}
+{"Timestamp":"C72","Cycle":"72","EventDescription":"lost dog returned","EventType":"community-moment","Domain":"Community","Severity":"low","Neighborhood":"West Oakland"}
+{"Timestamp":"C72","Cycle":"72","EventDescription":"kitchen fire (minor)","EventType":"business-incident","Domain":"Business","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"C73","Cycle":"73","EventDescription":"misfiled document","EventType":"misc-event","Domain":"General","Severity":"low","Neighborhood":"Rockridge"}
+{"Timestamp":"C73","Cycle":"73","EventDescription":"noise complaint","EventType":"civic-activity","Domain":"Civic","Severity":"low","Neighborhood":"Chinatown"}
+{"Timestamp":"C73","Cycle":"73","EventDescription":"veteran tribute traffic","EventType":"health-alert","Domain":"Health","Severity":"low","Neighborhood":"Uptown"}
+{"Timestamp":"C73","Cycle":"73","EventDescription":"staff rumor","EventType":"sports-news","Domain":"Sports","Severity":"low","Neighborhood":"Laurel"}
+{"Timestamp":"C74","Cycle":"74","EventDescription":"porch piracy attempt","EventType":"safety-incident","Domain":"Safety","Severity":"low","Neighborhood":"Uptown"}
+{"Timestamp":"C74","Cycle":"74","EventDescription":"food truck line dispute","EventType":"business-incident","Domain":"Business","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"C74","Cycle":"74","EventDescription":"signal malfunction","EventType":"infra-incident","Domain":"Infrastructure","Severity":"low","Neighborhood":"Temescal"}
+{"Timestamp":"C75","Cycle":"75","EventDescription":"emergency committee meeting","EventType":"health-alert","Domain":"Health","Severity":"low","Neighborhood":"Chinatown"}
+{"Timestamp":"C75","Cycle":"75","EventDescription":"musician near Coliseum","EventType":"cultural-sighting","Domain":"Culture","Severity":"low","Neighborhood":"West Oakland"}
+{"Timestamp":"C75","Cycle":"75","EventDescription":"internet disruption","EventType":"health-alert","Domain":"Health","Severity":"low","Neighborhood":"Piedmont Ave"}
+{"Timestamp":"C75","Cycle":"75","EventDescription":"petty theft","EventType":"safety-incident","Domain":"Safety","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"C75","Cycle":"75","EventDescription":"transformer hiccup","EventType":"health-alert","Domain":"Health","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"C76","Cycle":"76","EventDescription":"food poisoning complaint","EventType":"civic-activity","Domain":"Civic","Severity":"low","Neighborhood":"West Oakland"}
+{"Timestamp":"C76","Cycle":"76","EventDescription":"staff walkout","EventType":"business-incident","Domain":"Business","Severity":"low","Neighborhood":"Rockridge"}
+{"Timestamp":"C77","Cycle":"77","EventDescription":"","EventType":"misc-event","Domain":"SAFETY","Severity":"medium","Neighborhood":"Downtown"}
+{"Timestamp":"C77","Cycle":"77","EventDescription":"","EventType":"misc-event","Domain":"CIVIC","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"C77","Cycle":"77","EventDescription":"transformer hiccup","EventType":"misc-event","Domain":"INFRASTRUCTURE","Severity":"low","Neighborhood":"Uptown"}
+{"Timestamp":"C77","Cycle":"77","EventDescription":"tailgate grill fire","EventType":"misc-event","Domain":"SPORTS","Severity":"low","Neighborhood":"Jack London"}
+{"Timestamp":"C78","Cycle":"78","EventDescription":"","EventType":"misc-event","Domain":"SAFETY","Severity":"low","Neighborhood":"KONO"}
+{"Timestamp":"C78","Cycle":"78","EventDescription":"","EventType":"misc-event","Domain":"CIVIC","Severity":"high","Neighborhood":"Lake Merritt"}
+{"Timestamp":"C78","Cycle":"78","EventDescription":"transformer hiccup","EventType":"misc-event","Domain":"INFRASTRUCTURE","Severity":"low","Neighborhood":"Laurel"}
+{"Timestamp":"C78","Cycle":"78","EventDescription":"3-block flicker","EventType":"misc-event","Domain":"INFRASTRUCTURE","Severity":"low","Neighborhood":"Temescal"}
+{"Timestamp":"C78","Cycle":"78","EventDescription":"musician near Coliseum","EventType":"misc-event","Domain":"CELEBRITY","Severity":"low","Neighborhood":"Piedmont Ave"}
+{"Timestamp":"C78","Cycle":"78","EventDescription":"First Presbyterian Church: choir performance highlights service","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"C78","Cycle":"78","EventDescription":"Allen Temple Baptist Church: guest speaker visits congregation","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"C78","Cycle":"78","EventDescription":"Cathedral of Christ the Light: special sermon addresses community concerns","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"C78","Cycle":"78","EventDescription":"St. Columba Catholic Church: guest speaker visits congregation","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"C78","Cycle":"78","EventDescription":"St. Columba Catholic Church: youth program graduation ceremony","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"C78","Cycle":"78","EventDescription":"Acts Full Gospel Church: youth program graduation ceremony","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"West Oakland"}
+{"Timestamp":"C78","Cycle":"78","EventDescription":"Temple Sinai: choir performance highlights service","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Rockridge"}
+{"Timestamp":"C78","Cycle":"78","EventDescription":"Beth Jacob Congregation: community grief gathering organized","EventType":"misc-event","Domain":"FAITH","Severity":"medium","Neighborhood":"Piedmont Ave"}
+{"Timestamp":"C78","Cycle":"78","EventDescription":"Islamic Center of Oakland: choir performance highlights service","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Temescal"}
+{"Timestamp":"C78","Cycle":"78","EventDescription":"Islamic Center of Oakland: food pantry serves neighbors in need","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Temescal"}
+{"Timestamp":"C78","Cycle":"78","EventDescription":"Masjid Al-Islam: special sermon addresses community concerns","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"C78","Cycle":"78","EventDescription":"Masjid Al-Islam: emergency assistance fund activated","EventType":"misc-event","Domain":"FAITH","Severity":"medium","Neighborhood":"East Oakland"}
+{"Timestamp":"C78","Cycle":"78","EventDescription":"Oakland Buddhist Temple observes Losar (Tibetan New Year)","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Chinatown"}
+{"Timestamp":"C78","Cycle":"78","EventDescription":"Oakland Buddhist Temple: special sermon addresses community concerns","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Chinatown"}
+{"Timestamp":"C78","Cycle":"78","EventDescription":"East Bay Meditation Center observes Losar (Tibetan New Year)","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"C78","Cycle":"78","EventDescription":"Shiva Vishnu Temple: choir performance highlights service","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Montclair"}
+{"Timestamp":"C78","Cycle":"78","EventDescription":"Shiva Vishnu Temple: job training workshop begins new session","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Montclair"}
+{"Timestamp":"C78","Cycle":"78","EventDescription":"Gurdwara Sahib of Oakland: guest speaker visits congregation","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"C78","Cycle":"78","EventDescription":"Kehilla Community Synagogue: food pantry serves neighbors in need","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Grand Lake"}
+{"Timestamp":"C78","Cycle":"78","EventDescription":"First Unitarian Church: weekly service draws faithful","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"C78","Cycle":"78","EventDescription":"First Unitarian Church: after-school tutoring program expands","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"C78","Cycle":"78","EventDescription":"interfaith council meeting held at Downtown","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"C79","Cycle":"79","EventDescription":"","EventType":"misc-event","Domain":"CIVIC","Severity":"high","Neighborhood":"Downtown"}
+{"Timestamp":"C79","Cycle":"79","EventDescription":"","EventType":"misc-event","Domain":"HEALTH","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"C79","Cycle":"79","EventDescription":"","EventType":"misc-event","Domain":"SAFETY","Severity":"medium","Neighborhood":"Lake Merritt"}
+{"Timestamp":"C79","Cycle":"79","EventDescription":"food truck line dispute","EventType":"misc-event","Domain":"CULTURE","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"C79","Cycle":"79","EventDescription":"fireworks debris complaint","EventType":"misc-event","Domain":"FESTIVAL","Severity":"low","Neighborhood":"Piedmont Ave"}
+{"Timestamp":"C79","Cycle":"79","EventDescription":"locked-out worker","EventType":"misc-event","Domain":"GENERAL","Severity":"low","Neighborhood":"KONO"}
+{"Timestamp":"C79","Cycle":"79","EventDescription":"sparkler burn incident","EventType":"misc-event","Domain":"FESTIVAL","Severity":"low","Neighborhood":"Rockridge"}
+{"Timestamp":"C79","Cycle":"79","EventDescription":"internet disruption","EventType":"misc-event","Domain":"INFRASTRUCTURE","Severity":"low","Neighborhood":"Piedmont Ave"}
+{"Timestamp":"C79","Cycle":"79","EventDescription":"BBQ grill flare-up","EventType":"misc-event","Domain":"FESTIVAL","Severity":"low","Neighborhood":"Chinatown"}
+{"Timestamp":"C79","Cycle":"79","EventDescription":"First Presbyterian Church: community health fair hosted","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"C79","Cycle":"79","EventDescription":"Allen Temple Baptist Church: choir performance highlights service","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"C79","Cycle":"79","EventDescription":"Allen Temple Baptist Church: food pantry serves neighbors in need","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"C79","Cycle":"79","EventDescription":"Cathedral of Christ the Light: special sermon addresses community concerns","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"C79","Cycle":"79","EventDescription":"Cathedral of Christ the Light: emergency assistance fund activated","EventType":"misc-event","Domain":"FAITH","Severity":"medium","Neighborhood":"Lake Merritt"}
+{"Timestamp":"C79","Cycle":"79","EventDescription":"St. Columba Catholic Church: choir performance highlights service","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"C79","Cycle":"79","EventDescription":"Lake Merritt United Methodist: special sermon addresses community concerns","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Adams Point"}
+{"Timestamp":"C79","Cycle":"79","EventDescription":"Lake Merritt United Methodist: seniors lunch program marks milestone","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Adams Point"}
+{"Timestamp":"C79","Cycle":"79","EventDescription":"Acts Full Gospel Church: weekly service draws faithful","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"West Oakland"}
+{"Timestamp":"C79","Cycle":"79","EventDescription":"Beth Jacob Congregation: guest speaker visits congregation","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Piedmont Ave"}
+{"Timestamp":"C79","Cycle":"79","EventDescription":"Islamic Center of Oakland: food pantry serves neighbors in need","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Temescal"}
+{"Timestamp":"C79","Cycle":"79","EventDescription":"Masjid Al-Islam: weekly service draws faithful","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"C79","Cycle":"79","EventDescription":"Masjid Al-Islam: after-school tutoring program expands","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"C79","Cycle":"79","EventDescription":"Oakland Buddhist Temple observes Losar (Tibetan New Year)","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Chinatown"}
+{"Timestamp":"C79","Cycle":"79","EventDescription":"East Bay Meditation Center observes Losar (Tibetan New Year)","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"C79","Cycle":"79","EventDescription":"Gurdwara Sahib of Oakland: guest speaker visits congregation","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"C79","Cycle":"79","EventDescription":"Kehilla Community Synagogue: food pantry serves neighbors in need","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Grand Lake"}
+{"Timestamp":"C79","Cycle":"79","EventDescription":"First Unitarian Church: job training workshop begins new session","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"C80","Cycle":"80","EventDescription":"","EventType":"misc-event","Domain":"INFRASTRUCTURE","Severity":"medium","Neighborhood":"Laurel"}
+{"Timestamp":"C80","Cycle":"80","EventDescription":"","EventType":"misc-event","Domain":"ENVIRONMENT","Severity":"low","Neighborhood":"Temescal"}
+{"Timestamp":"C80","Cycle":"80","EventDescription":"CIVIC — Inflow Strain (Downtown)","EventType":"misc-event","Domain":"CIVIC","Severity":"high","Neighborhood":"Downtown"}
+{"Timestamp":"C80","Cycle":"80","EventDescription":"local sports bar hosts a packed watch gathering","EventType":"misc-event","Domain":"SPORTS","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"C80","Cycle":"80","EventDescription":"street disturbance","EventType":"misc-event","Domain":"SAFETY","Severity":"low","Neighborhood":"Laurel"}
+{"Timestamp":"C80","Cycle":"80","EventDescription":"youth clinic announced at a local park","EventType":"misc-event","Domain":"SPORTS","Severity":"low","Neighborhood":"Uptown"}
+{"Timestamp":"C80","Cycle":"80","EventDescription":"First Presbyterian Church: choir performance highlights service","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"C80","Cycle":"80","EventDescription":"Allen Temple Baptist Church: community health fair hosted","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"C80","Cycle":"80","EventDescription":"Cathedral of Christ the Light: choir performance highlights service","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"C80","Cycle":"80","EventDescription":"Cathedral of Christ the Light: food pantry serves neighbors in need","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"C80","Cycle":"80","EventDescription":"St. Columba Catholic Church: special sermon addresses community concerns","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"C80","Cycle":"80","EventDescription":"St. Columba Catholic Church: emergency assistance fund activated","EventType":"misc-event","Domain":"FAITH","Severity":"medium","Neighborhood":"Fruitvale"}
+{"Timestamp":"C80","Cycle":"80","EventDescription":"Lake Merritt United Methodist: choir performance highlights service","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Adams Point"}
+{"Timestamp":"C80","Cycle":"80","EventDescription":"Acts Full Gospel Church: special sermon addresses community concerns","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"West Oakland"}
+{"Timestamp":"C80","Cycle":"80","EventDescription":"Acts Full Gospel Church: seniors lunch program marks milestone","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"West Oakland"}
+{"Timestamp":"C80","Cycle":"80","EventDescription":"Temple Sinai: weekly service draws faithful","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Rockridge"}
+{"Timestamp":"C80","Cycle":"80","EventDescription":"Islamic Center of Oakland: guest speaker visits congregation","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Temescal"}
+{"Timestamp":"C80","Cycle":"80","EventDescription":"Islamic Center of Oakland: community grief gathering organized","EventType":"misc-event","Domain":"FAITH","Severity":"medium","Neighborhood":"Temescal"}
+{"Timestamp":"C80","Cycle":"80","EventDescription":"Masjid Al-Islam: guest speaker visits congregation","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"C80","Cycle":"80","EventDescription":"Masjid Al-Islam: congregation volunteers for neighborhood cleanup","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"C80","Cycle":"80","EventDescription":"East Bay Meditation Center observes Obon","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"C80","Cycle":"80","EventDescription":"Shiva Vishnu Temple: choir performance highlights service","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Montclair"}
+{"Timestamp":"C80","Cycle":"80","EventDescription":"Kehilla Community Synagogue: guest speaker visits congregation","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Grand Lake"}
+{"Timestamp":"C80","Cycle":"80","EventDescription":"First Unitarian Church: food pantry serves neighbors in need","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"C81","Cycle":"81","EventDescription":"","EventType":"misc-event","Domain":"CULTURE","Severity":"low","Neighborhood":"Jack London"}
+{"Timestamp":"C81","Cycle":"81","EventDescription":"CIVIC — Inflow Strain (Fruitvale)","EventType":"misc-event","Domain":"CIVIC","Severity":"high","Neighborhood":"Fruitvale"}
+{"Timestamp":"C81","Cycle":"81","EventDescription":"flash choir","EventType":"misc-event","Domain":"GENERAL","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"C81","Cycle":"81","EventDescription":"athlete sighting","EventType":"misc-event","Domain":"CELEBRITY","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"C81","Cycle":"81","EventDescription":"influencer prank","EventType":"misc-event","Domain":"GENERAL","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"C81","Cycle":"81","EventDescription":"First Presbyterian Church: guest speaker visits congregation","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"C81","Cycle":"81","EventDescription":"Allen Temple Baptist Church: seniors lunch program marks milestone","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"C81","Cycle":"81","EventDescription":"Allen Temple Baptist Church: prison ministry team visits facility","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"C81","Cycle":"81","EventDescription":"Cathedral of Christ the Light: weekly service draws faithful","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"C81","Cycle":"81","EventDescription":"Cathedral of Christ the Light: food pantry serves neighbors in need","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"C81","Cycle":"81","EventDescription":"St. Columba Catholic Church: community health fair hosted","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"C81","Cycle":"81","EventDescription":"Acts Full Gospel Church: special sermon addresses community concerns","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"West Oakland"}
+{"Timestamp":"C81","Cycle":"81","EventDescription":"Acts Full Gospel Church: seniors lunch program marks milestone","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"West Oakland"}
+{"Timestamp":"C81","Cycle":"81","EventDescription":"Temple Sinai: weekly service draws faithful","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Rockridge"}
+{"Timestamp":"C81","Cycle":"81","EventDescription":"Islamic Center of Oakland: guest speaker visits congregation","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Temescal"}
+{"Timestamp":"C81","Cycle":"81","EventDescription":"Islamic Center of Oakland: community grief gathering organized","EventType":"misc-event","Domain":"FAITH","Severity":"medium","Neighborhood":"Temescal"}
+{"Timestamp":"C81","Cycle":"81","EventDescription":"Masjid Al-Islam: guest speaker visits congregation","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"C81","Cycle":"81","EventDescription":"Masjid Al-Islam: congregation volunteers for neighborhood cleanup","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"C81","Cycle":"81","EventDescription":"East Bay Meditation Center observes Obon","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"C81","Cycle":"81","EventDescription":"Shiva Vishnu Temple: choir performance highlights service","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Montclair"}
+{"Timestamp":"C81","Cycle":"81","EventDescription":"Kehilla Community Synagogue: guest speaker visits congregation","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Grand Lake"}
+{"Timestamp":"C81","Cycle":"81","EventDescription":"First Unitarian Church: food pantry serves neighbors in need","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"C82","Cycle":"82","EventDescription":"","EventType":"misc-event","Domain":"ENVIRONMENT","Severity":"low","Neighborhood":"West Oakland"}
+{"Timestamp":"C82","Cycle":"82","EventDescription":"","EventType":"misc-event","Domain":"SAFETY","Severity":"medium","Neighborhood":"Lake Merritt"}
+{"Timestamp":"C82","Cycle":"82","EventDescription":"water-pressure drop","EventType":"misc-event","Domain":"INFRASTRUCTURE","Severity":"low","Neighborhood":"KONO"}
+{"Timestamp":"C82","Cycle":"82","EventDescription":"online call-to-gather","EventType":"misc-event","Domain":"CIVIC","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"C82","Cycle":"82","EventDescription":"pothole eruption","EventType":"misc-event","Domain":"INFRASTRUCTURE","Severity":"low","Neighborhood":"Temescal"}
+{"Timestamp":"C82","Cycle":"82","EventDescription":"Oakland Buddhist Temple observes Obon","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Chinatown"}
+{"Timestamp":"C82","Cycle":"82","EventDescription":"East Bay Meditation Center observes Obon","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"C82","Cycle":"82","EventDescription":"Cathedral of Christ the Light: food pantry serves neighbors in need","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"C82","Cycle":"82","EventDescription":"St. Columba Catholic Church: seniors lunch program marks milestone","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"C82","Cycle":"82","EventDescription":"Beth Jacob Congregation: food pantry serves neighbors in need","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Piedmont Ave"}
+{"Timestamp":"C83","Cycle":"83","EventDescription":"","EventType":"misc-event","Domain":"ENVIRONMENT","Severity":"medium","Neighborhood":"KONO"}
+{"Timestamp":"C83","Cycle":"83","EventDescription":"foundation fundraiser dinner draws a crowd","EventType":"misc-event","Domain":"SPORTS","Severity":"low","Neighborhood":"West Oakland"}
+{"Timestamp":"C83","Cycle":"83","EventDescription":"autograph line causes a brief sidewalk jam","EventType":"misc-event","Domain":"SPORTS","Severity":"low","Neighborhood":"Temescal"}
+{"Timestamp":"C83","Cycle":"83","EventDescription":"stalled bus","EventType":"misc-event","Domain":"TRAFFIC","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"C83","Cycle":"83","EventDescription":"minor fender-bender","EventType":"misc-event","Domain":"GENERAL","Severity":"low","Neighborhood":"West Oakland"}
+{"Timestamp":"C83","Cycle":"83","EventDescription":"Cathedral of Christ the Light observes Assumption","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"C83","Cycle":"83","EventDescription":"St. Columba Catholic Church observes Assumption","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"C83","Cycle":"83","EventDescription":"Shiva Vishnu Temple observes Janmashtami","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Montclair"}
+{"Timestamp":"C83","Cycle":"83","EventDescription":"First Presbyterian Church: community health fair hosted","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"C83","Cycle":"83","EventDescription":"Allen Temple Baptist Church: youth program graduation ceremony","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"C84","Cycle":"84","EventDescription":"","EventType":"misc-event","Domain":"CULTURE","Severity":"high","Neighborhood":"West Oakland"}
+{"Timestamp":"C84","Cycle":"84","EventDescription":"endorsement shoot blocks off a small sidewalk area","EventType":"misc-event","Domain":"SPORTS","Severity":"low","Neighborhood":"West Oakland"}
+{"Timestamp":"C84","Cycle":"84","EventDescription":"jackknifed truck","EventType":"misc-event","Domain":"TRAFFIC","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"C84","Cycle":"84","EventDescription":"game day traffic surge","EventType":"misc-event","Domain":"SPORTS","Severity":"low","Neighborhood":"Temescal"}
+{"Timestamp":"C84","Cycle":"84","EventDescription":"St. Columba Catholic Church: congregation opens doors for community support","EventType":"misc-event","Domain":"FAITH","Severity":"medium","Neighborhood":"Fruitvale"}
+{"Timestamp":"C84","Cycle":"84","EventDescription":"Cathedral of Christ the Light observes Assumption","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"C84","Cycle":"84","EventDescription":"Shiva Vishnu Temple observes Janmashtami","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Montclair"}
+{"Timestamp":"C84","Cycle":"84","EventDescription":"First Presbyterian Church: seniors lunch program marks milestone","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"C84","Cycle":"84","EventDescription":"Allen Temple Baptist Church: food pantry serves neighbors in need","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"C85","Cycle":"85","EventDescription":"","EventType":"misc-event","Domain":"CIVIC","Severity":"medium","Neighborhood":"Chinatown"}
+{"Timestamp":"C85","Cycle":"85","EventDescription":"internet disruption","EventType":"misc-event","Domain":"INFRASTRUCTURE","Severity":"low","Neighborhood":"Uptown"}
+{"Timestamp":"C85","Cycle":"85","EventDescription":"noise complaint","EventType":"misc-event","Domain":"SAFETY","Severity":"low","Neighborhood":"Piedmont Ave"}
+{"Timestamp":"C85","Cycle":"85","EventDescription":"St. Columba Catholic Church observes Assumption","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"C85","Cycle":"85","EventDescription":"Shiva Vishnu Temple observes Janmashtami","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Montclair"}
+{"Timestamp":"C85","Cycle":"85","EventDescription":"St. Columba Catholic Church: food pantry serves neighbors in need","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"C85","Cycle":"85","EventDescription":"Acts Full Gospel Church: community health fair hosted","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"West Oakland"}
+{"Timestamp":"C85","Cycle":"85","EventDescription":"Temple Sinai: job training workshop begins new session","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Rockridge"}
+{"Timestamp":"C86","Cycle":"86","EventDescription":"","EventType":"misc-event","Domain":"CULTURE","Severity":"high","Neighborhood":"Fruitvale"}
+{"Timestamp":"C86","Cycle":"86","EventDescription":"cluster of fainting spells","EventType":"misc-event","Domain":"HEALTH","Severity":"low","Neighborhood":"Temescal"}
+{"Timestamp":"C86","Cycle":"86","EventDescription":"team-sponsored community cleanup day","EventType":"misc-event","Domain":"SPORTS","Severity":"low","Neighborhood":"KONO"}
+{"Timestamp":"C86","Cycle":"86","EventDescription":"local sports bar hosts a packed watch gathering","EventType":"misc-event","Domain":"SPORTS","Severity":"low","Neighborhood":"Temescal"}
+{"Timestamp":"C86","Cycle":"86","EventDescription":"St. Columba Catholic Church observes Assumption","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"C86","Cycle":"86","EventDescription":"Allen Temple Baptist Church: food pantry serves neighbors in need","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"C86","Cycle":"86","EventDescription":"Acts Full Gospel Church: seniors lunch program marks milestone","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"West Oakland"}
+{"Timestamp":"C86","Cycle":"86","EventDescription":"Masjid Al-Islam: job training workshop begins new session","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"C86","Cycle":"86","EventDescription":"Shiva Vishnu Temple: youth program graduation ceremony","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Montclair"}
+{"Timestamp":"C87","Cycle":"87","EventDescription":"","EventType":"misc-event","Domain":"CULTURE","Severity":"high","Neighborhood":"West Oakland"}
+{"Timestamp":"C87","Cycle":"87","EventDescription":"youth clinic announced at a local park","EventType":"misc-event","Domain":"SPORTS","Severity":"low","Neighborhood":"Uptown"}
+{"Timestamp":"C87","Cycle":"87","EventDescription":"suspicious activity check","EventType":"misc-event","Domain":"SAFETY","Severity":"low","Neighborhood":"Laurel"}
+{"Timestamp":"C87","Cycle":"87","EventDescription":"local sports bar hosts a packed watch gathering","EventType":"misc-event","Domain":"SPORTS","Severity":"low","Neighborhood":"Jack London"}
+{"Timestamp":"C87","Cycle":"87","EventDescription":"First Presbyterian Church: congregation opens doors for community support","EventType":"misc-event","Domain":"FAITH","Severity":"medium","Neighborhood":"Downtown"}
+{"Timestamp":"C87","Cycle":"87","EventDescription":"St. Columba Catholic Church: congregation opens doors for community support","EventType":"misc-event","Domain":"FAITH","Severity":"medium","Neighborhood":"Fruitvale"}
+{"Timestamp":"C87","Cycle":"87","EventDescription":"Cathedral of Christ the Light observes Assumption","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"C87","Cycle":"87","EventDescription":"Shiva Vishnu Temple observes Janmashtami","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Montclair"}
+{"Timestamp":"C87","Cycle":"87","EventDescription":"Cathedral of Christ the Light: job training workshop begins new session","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"C88","Cycle":"88","EventDescription":"","EventType":"misc-event","Domain":"CULTURE","Severity":"high","Neighborhood":"Rockridge"}
+{"Timestamp":"C88","Cycle":"88","EventDescription":"drone mistake","EventType":"misc-event","Domain":"GENERAL","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"C88","Cycle":"88","EventDescription":"association briefing","EventType":"misc-event","Domain":"CIVIC","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"C88","Cycle":"88","EventDescription":"water-pressure drop","EventType":"misc-event","Domain":"INFRASTRUCTURE","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"C88","Cycle":"88","EventDescription":"balloon release","EventType":"misc-event","Domain":"GENERAL","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"C88","Cycle":"88","EventDescription":"Lake Merritt United Methodist: congregation opens doors for community support","EventType":"misc-event","Domain":"FAITH","Severity":"medium","Neighborhood":"Adams Point"}
+{"Timestamp":"C88","Cycle":"88","EventDescription":"Temple Sinai observes Rosh Hashanah","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Rockridge"}
+{"Timestamp":"C88","Cycle":"88","EventDescription":"Beth Jacob Congregation observes Rosh Hashanah","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Piedmont Ave"}
+{"Timestamp":"C88","Cycle":"88","EventDescription":"Allen Temple Baptist Church: food pantry serves neighbors in need","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"C88","Cycle":"88","EventDescription":"St. Columba Catholic Church: job training workshop begins new session","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"C89","Cycle":"89","EventDescription":"","EventType":"misc-event","Domain":"HEALTH","Severity":"high","Neighborhood":"West Oakland"}
+{"Timestamp":"C89","Cycle":"89","EventDescription":"CIVIC — Inflow Strain (Chinatown)","EventType":"misc-event","Domain":"CIVIC","Severity":"high","Neighborhood":"Chinatown"}
+{"Timestamp":"C89","Cycle":"89","EventDescription":"autograph line causes a brief sidewalk jam","EventType":"misc-event","Domain":"SPORTS","Severity":"low","Neighborhood":"Uptown"}
+{"Timestamp":"C89","Cycle":"89","EventDescription":"earthquake rumble","EventType":"misc-event","Domain":"GENERAL","Severity":"low","Neighborhood":"Laurel"}
+{"Timestamp":"C89","Cycle":"89","EventDescription":"car break-in attempt","EventType":"misc-event","Domain":"SAFETY","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"C89","Cycle":"89","EventDescription":"Allen Temple Baptist Church: congregation opens doors for community support","EventType":"misc-event","Domain":"FAITH","Severity":"medium","Neighborhood":"East Oakland"}
+{"Timestamp":"C89","Cycle":"89","EventDescription":"Acts Full Gospel Church: congregation opens doors for community support","EventType":"misc-event","Domain":"FAITH","Severity":"medium","Neighborhood":"West Oakland"}
+{"Timestamp":"C89","Cycle":"89","EventDescription":"Temple Sinai observes Rosh Hashanah","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Rockridge"}
+{"Timestamp":"C89","Cycle":"89","EventDescription":"First Presbyterian Church: after-school tutoring program expands","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"C89","Cycle":"89","EventDescription":"Lake Merritt United Methodist: job training workshop begins new session","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Adams Point"}
+{"Timestamp":"C90","Cycle":"90","EventDescription":"","EventType":"misc-event","Domain":"HEALTH","Severity":"high","Neighborhood":"West Oakland"}
+{"Timestamp":"C90","Cycle":"90","EventDescription":"CIVIC — Inflow Strain (Chinatown)","EventType":"misc-event","Domain":"CIVIC","Severity":"high","Neighborhood":"Chinatown"}
+{"Timestamp":"C90","Cycle":"90","EventDescription":"game day traffic surge","EventType":"misc-event","Domain":"SPORTS","Severity":"low","Neighborhood":"Laurel"}
+{"Timestamp":"C90","Cycle":"90","EventDescription":"minor pursuit","EventType":"misc-event","Domain":"SAFETY","Severity":"low","Neighborhood":"Temescal"}
+{"Timestamp":"C90","Cycle":"90","EventDescription":"endorsement shoot blocks off a small sidewalk area","EventType":"misc-event","Domain":"SPORTS","Severity":"low","Neighborhood":"Uptown"}
+{"Timestamp":"C90","Cycle":"90","EventDescription":"Acts Full Gospel Church: community grief gathering organized","EventType":"misc-event","Domain":"FAITH","Severity":"medium","Neighborhood":"West Oakland"}
+{"Timestamp":"C90","Cycle":"90","EventDescription":"Temple Sinai observes Rosh Hashanah","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Rockridge"}
+{"Timestamp":"C90","Cycle":"90","EventDescription":"Beth Jacob Congregation observes Rosh Hashanah","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Piedmont Ave"}
+{"Timestamp":"C90","Cycle":"90","EventDescription":"Kehilla Community Synagogue observes High Holy Days","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Grand Lake"}
+{"Timestamp":"C90","Cycle":"90","EventDescription":"Allen Temple Baptist Church: job training workshop begins new session","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"C91","Cycle":"91","EventDescription":"","EventType":"misc-event","Domain":"CULTURE","Severity":"high","Neighborhood":"West Oakland"}
+{"Timestamp":"C91","Cycle":"91","EventDescription":"CIVIC — Inflow Strain (KONO)","EventType":"misc-event","Domain":"CIVIC","Severity":"high","Neighborhood":"KONO"}
+{"Timestamp":"C91","Cycle":"91","EventDescription":"street disturbance","EventType":"misc-event","Domain":"SAFETY","Severity":"low","Neighborhood":"KONO"}
+{"Timestamp":"C91","Cycle":"91","EventDescription":"Acts Full Gospel Church: congregation opens doors for community support","EventType":"misc-event","Domain":"FAITH","Severity":"medium","Neighborhood":"West Oakland"}
+{"Timestamp":"C91","Cycle":"91","EventDescription":"Temple Sinai observes Rosh Hashanah","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Rockridge"}
+{"Timestamp":"C91","Cycle":"91","EventDescription":"Allen Temple Baptist Church: seniors lunch program marks milestone","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"C91","Cycle":"91","EventDescription":"Cathedral of Christ the Light: food pantry serves neighbors in need","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"C91","Cycle":"91","EventDescription":"Lake Merritt United Methodist: job training workshop begins new session","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Adams Point"}
+{"Timestamp":"C92","Cycle":"92","EventDescription":"","EventType":"misc-event","Domain":"CIVIC","Severity":"low","Neighborhood":"Chinatown"}
+{"Timestamp":"C92","Cycle":"92","EventDescription":"","EventType":"misc-event","Domain":"ECONOMIC","Severity":"high","Neighborhood":"KONO"}
+{"Timestamp":"C92","Cycle":"92","EventDescription":"CIVIC — Inflow Strain (Fruitvale)","EventType":"misc-event","Domain":"CIVIC","Severity":"high","Neighborhood":"Fruitvale"}
+{"Timestamp":"C92","Cycle":"92","EventDescription":"influencer prank","EventType":"misc-event","Domain":"GENERAL","Severity":"low","Neighborhood":"Uptown"}
+{"Timestamp":"C92","Cycle":"92","EventDescription":"fan celebration spillover","EventType":"misc-event","Domain":"SPORTS","Severity":"low","Neighborhood":"Jack London"}
+{"Timestamp":"C92","Cycle":"92","EventDescription":"5-minute blackout","EventType":"misc-event","Domain":"INFRASTRUCTURE","Severity":"low","Neighborhood":"Rockridge"}
+{"Timestamp":"C92","Cycle":"92","EventDescription":"foundation fundraiser dinner draws a crowd","EventType":"misc-event","Domain":"SPORTS","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"C92","Cycle":"92","EventDescription":"Shiva Vishnu Temple observes Diwali","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Montclair"}
+{"Timestamp":"C92","Cycle":"92","EventDescription":"Allen Temple Baptist Church: community health fair hosted","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"C92","Cycle":"92","EventDescription":"St. Columba Catholic Church: seniors lunch program marks milestone","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"C92","Cycle":"92","EventDescription":"Lake Merritt United Methodist: seniors lunch program marks milestone","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Adams Point"}
+{"Timestamp":"C92","Cycle":"92","EventDescription":"Temple Sinai: youth program graduation ceremony","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Rockridge"}
+{"Timestamp":"C93","Cycle":"93","EventDescription":"","EventType":"misc-event","Domain":"CULTURE","Severity":"high","Neighborhood":"West Oakland"}
+{"Timestamp":"C93","Cycle":"93","EventDescription":"CIVIC — Inflow Strain (KONO)","EventType":"misc-event","Domain":"CIVIC","Severity":"high","Neighborhood":"KONO"}
+{"Timestamp":"C93","Cycle":"93","EventDescription":"suspicious activity check","EventType":"misc-event","Domain":"SAFETY","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"C93","Cycle":"93","EventDescription":"drone mistake","EventType":"misc-event","Domain":"GENERAL","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"C93","Cycle":"93","EventDescription":"Acts Full Gospel Church: community grief gathering organized","EventType":"misc-event","Domain":"FAITH","Severity":"medium","Neighborhood":"West Oakland"}
+{"Timestamp":"C93","Cycle":"93","EventDescription":"Temple Sinai observes Yom Kippur","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Rockridge"}
+{"Timestamp":"C93","Cycle":"93","EventDescription":"Beth Jacob Congregation observes Yom Kippur and Sukkot","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Piedmont Ave"}
+{"Timestamp":"C93","Cycle":"93","EventDescription":"Shiva Vishnu Temple observes Diwali","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Montclair"}
+{"Timestamp":"C93","Cycle":"93","EventDescription":"Allen Temple Baptist Church: food pantry serves neighbors in need","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"C94","Cycle":"94","EventDescription":"","EventType":"cultural-sighting","Domain":"CULTURE","Severity":"high","Neighborhood":"West Oakland"}
+{"Timestamp":"C94","Cycle":"94","EventDescription":"CIVIC — Inflow Strain (KONO)","EventType":"civic-activity","Domain":"CIVIC","Severity":"high","Neighborhood":"KONO"}
+{"Timestamp":"C94","Cycle":"94","EventDescription":"noise complaint","EventType":"safety-incident","Domain":"SAFETY","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"C94","Cycle":"94","EventDescription":"balloon release","EventType":"misc-event","Domain":"GENERAL","Severity":"low","Neighborhood":"KONO"}
+{"Timestamp":"C94","Cycle":"94","EventDescription":"Adams Point United Methodist: congregation opens doors for community support","EventType":"misc-event","Domain":"FAITH","Severity":"medium","Neighborhood":"Adams Point"}
+{"Timestamp":"C94","Cycle":"94","EventDescription":"Temple Beth Or observes Yom Kippur","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Rockridge"}
+{"Timestamp":"C94","Cycle":"94","EventDescription":"B'nai Tikvah Synagogue observes Yom Kippur and Sukkot","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Piedmont Ave"}
+{"Timestamp":"C94","Cycle":"94","EventDescription":"Bharat Mandir of the East Bay observes Diwali","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Montclair"}
+{"Timestamp":"C94","Cycle":"94","EventDescription":"Foothill Baptist Tabernacle: food pantry serves neighbors in need","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"C95","Cycle":"95","EventDescription":"","EventType":"cultural-sighting","Domain":"CULTURE","Severity":"high","Neighborhood":"West Oakland"}
+{"Timestamp":"C95","Cycle":"95","EventDescription":"CIVIC — Inflow Strain (KONO)","EventType":"civic-activity","Domain":"CIVIC","Severity":"high","Neighborhood":"KONO"}
+{"Timestamp":"C95","Cycle":"95","EventDescription":"car break-in attempt","EventType":"safety-incident","Domain":"SAFETY","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"C95","Cycle":"95","EventDescription":"team-sponsored community cleanup day","EventType":"sports-news","Domain":"SPORTS","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"C95","Cycle":"95","EventDescription":"New Covenant Pentecostal Assembly: congregation opens doors for community support","EventType":"misc-event","Domain":"FAITH","Severity":"medium","Neighborhood":"West Oakland"}
+{"Timestamp":"C95","Cycle":"95","EventDescription":"Temple Beth Or observes Yom Kippur","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Rockridge"}
+{"Timestamp":"C95","Cycle":"95","EventDescription":"Bharat Mandir of the East Bay observes Diwali","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Montclair"}
+{"Timestamp":"C95","Cycle":"95","EventDescription":"Foothill Baptist Tabernacle: seniors lunch program marks milestone","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"C95","Cycle":"95","EventDescription":"Cathedral of the Living Word: food pantry serves neighbors in need","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"C96","Cycle":"96","EventDescription":"","EventType":"infra-incident","Domain":"INFRASTRUCTURE","Severity":"medium","Neighborhood":"Piedmont Ave"}
+{"Timestamp":"C96","Cycle":"96","EventDescription":"","EventType":"cultural-sighting","Domain":"CULTURE","Severity":"high","Neighborhood":"Rockridge"}
+{"Timestamp":"C96","Cycle":"96","EventDescription":"fake blood slip hazard","EventType":"festival-incident","Domain":"FESTIVAL","Severity":"low","Neighborhood":"Uptown"}
+{"Timestamp":"C96","Cycle":"96","EventDescription":"teacher highlight","EventType":"education-news","Domain":"EDUCATION","Severity":"low","Neighborhood":"Laurel"}
+{"Timestamp":"C96","Cycle":"96","EventDescription":"stalled bus","EventType":"misc-event","Domain":"TRAFFIC","Severity":"low","Neighborhood":"Temescal"}
+{"Timestamp":"C96","Cycle":"96","EventDescription":"trick-or-treat traffic jam","EventType":"festival-incident","Domain":"FESTIVAL","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"C96","Cycle":"96","EventDescription":"costume altercation","EventType":"festival-incident","Domain":"FESTIVAL","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"C96","Cycle":"96","EventDescription":"Bharat Mandir of the East Bay observes Diwali","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Montclair"}
+{"Timestamp":"C96","Cycle":"96","EventDescription":"Telegraph Presbyterian Fellowship: food pantry serves neighbors in need","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"C96","Cycle":"96","EventDescription":"Foothill Baptist Tabernacle: job training workshop begins new session","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"C96","Cycle":"96","EventDescription":"Cathedral of the Living Word: job training workshop begins new session","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"C96","Cycle":"96","EventDescription":"St. Esperanza Parish: seniors lunch program marks milestone","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"C97","Cycle":"97","EventDescription":"","EventType":"safety-incident","Domain":"SAFETY","Severity":"medium","Neighborhood":"Piedmont Ave"}
+{"Timestamp":"C97","Cycle":"97","EventDescription":"","EventType":"infra-incident","Domain":"INFRASTRUCTURE","Severity":"medium","Neighborhood":"Fruitvale"}
+{"Timestamp":"C97","Cycle":"97","EventDescription":"game day traffic surge","EventType":"sports-news","Domain":"SPORTS","Severity":"low","Neighborhood":"Jack London"}
+{"Timestamp":"C97","Cycle":"97","EventDescription":"street performer permit issue","EventType":"cultural-sighting","Domain":"CULTURE","Severity":"low","Neighborhood":"KONO"}
+{"Timestamp":"C97","Cycle":"97","EventDescription":"parking lot fender-bender","EventType":"sports-news","Domain":"SPORTS","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"C97","Cycle":"97","EventDescription":"altar candle fire concern","EventType":"festival-incident","Domain":"FESTIVAL","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"C97","Cycle":"97","EventDescription":"youth clinic announced at a local park","EventType":"sports-news","Domain":"SPORTS","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"C97","Cycle":"97","EventDescription":"Cathedral of the Living Word: congregation opens doors for community support","EventType":"misc-event","Domain":"FAITH","Severity":"medium","Neighborhood":"Lake Merritt"}
+{"Timestamp":"C97","Cycle":"97","EventDescription":"Bharat Mandir of the East Bay: congregation opens doors for community support","EventType":"misc-event","Domain":"FAITH","Severity":"medium","Neighborhood":"Montclair"}
+{"Timestamp":"C97","Cycle":"97","EventDescription":"Foothill Baptist Tabernacle observes Thanksgiving","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"C97","Cycle":"97","EventDescription":"St. Esperanza Parish observes All Saints","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"C97","Cycle":"97","EventDescription":"Bharat Mandir of the East Bay observes Diwali celebrations continue","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Montclair"}
+{"Timestamp":"C98","Cycle":"98","EventDescription":"","EventType":"cultural-sighting","Domain":"CULTURE","Severity":"high","Neighborhood":"West Oakland"}
+{"Timestamp":"C98","Cycle":"98","EventDescription":"veteran tribute traffic","EventType":"civic-activity","Domain":"CIVIC","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"C98","Cycle":"98","EventDescription":"missing funds","EventType":"civic-activity","Domain":"CIVIC","Severity":"low","Neighborhood":"Uptown"}
+{"Timestamp":"C98","Cycle":"98","EventDescription":"Cathedral of the Living Word: congregation opens doors for community support","EventType":"misc-event","Domain":"FAITH","Severity":"medium","Neighborhood":"Lake Merritt"}
+{"Timestamp":"C98","Cycle":"98","EventDescription":"Bharat Mandir of the East Bay: congregation opens doors for community support","EventType":"misc-event","Domain":"FAITH","Severity":"medium","Neighborhood":"Montclair"}
+{"Timestamp":"C98","Cycle":"98","EventDescription":"Foothill Baptist Tabernacle observes Thanksgiving","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"C98","Cycle":"98","EventDescription":"St. Esperanza Parish observes All Saints","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"C98","Cycle":"98","EventDescription":"Bharat Mandir of the East Bay observes Diwali celebrations continue","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Montclair"}
+{"Timestamp":"C99","Cycle":"99","EventDescription":"","EventType":"cultural-sighting","Domain":"CULTURE","Severity":"medium","Neighborhood":"Fruitvale"}
+{"Timestamp":"C99","Cycle":"99","EventDescription":"committee vote","EventType":"civic-activity","Domain":"CIVIC","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"C99","Cycle":"99","EventDescription":"tailgate grill fire","EventType":"sports-news","Domain":"SPORTS","Severity":"low","Neighborhood":"Jack London"}
+{"Timestamp":"C99","Cycle":"99","EventDescription":"Foothill Baptist Tabernacle observes Thanksgiving","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"C99","Cycle":"99","EventDescription":"Cathedral of the Living Word observes All Saints","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"C99","Cycle":"99","EventDescription":"St. Esperanza Parish observes All Saints","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"C99","Cycle":"99","EventDescription":"Bharat Mandir of the East Bay observes Diwali celebrations continue","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Montclair"}
+{"Timestamp":"C99","Cycle":"99","EventDescription":"Gurdwara Singh Sabha Fruitvale observes Guru Nanak Gurpurab","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"C100","Cycle":"100","EventDescription":"","EventType":"infra-incident","Domain":"INFRASTRUCTURE","Severity":"low","Neighborhood":"Piedmont Ave"}
+{"Timestamp":"C100","Cycle":"100","EventDescription":"","EventType":"cultural-sighting","Domain":"CULTURE","Severity":"medium","Neighborhood":"Rockridge"}
+{"Timestamp":"C100","Cycle":"100","EventDescription":"flash choir","EventType":"misc-event","Domain":"GENERAL","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"C100","Cycle":"100","EventDescription":"jackknifed truck","EventType":"misc-event","Domain":"TRAFFIC","Severity":"low","Neighborhood":"Jack London"}
+{"Timestamp":"C100","Cycle":"100","EventDescription":"Foothill Baptist Tabernacle observes Thanksgiving","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"C100","Cycle":"100","EventDescription":"St. Esperanza Parish observes All Saints","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"C100","Cycle":"100","EventDescription":"Bharat Mandir of the East Bay observes Diwali celebrations continue","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Montclair"}
+{"Timestamp":"C100","Cycle":"100","EventDescription":"Gurdwara Singh Sabha Fruitvale observes Guru Nanak Gurpurab","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"C100","Cycle":"100","EventDescription":"Telegraph Presbyterian Fellowship: job training workshop begins new session","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"Y2C49","Cycle":"101","EventDescription":"","EventType":"civic-activity","Domain":"CIVIC","Severity":"low","Neighborhood":"Chinatown"}
+{"Timestamp":"Y2C49","Cycle":"101","EventDescription":"","EventType":"misc-event","Domain":"ECONOMIC","Severity":"high","Neighborhood":"KONO"}
+{"Timestamp":"Y2C49","Cycle":"101","EventDescription":"CIVIC — Inflow Strain (Fruitvale)","EventType":"civic-activity","Domain":"CIVIC","Severity":"high","Neighborhood":"Fruitvale"}
+{"Timestamp":"Y2C49","Cycle":"101","EventDescription":"high-wind pocket","EventType":"weather-event","Domain":"WEATHER","Severity":"low","Neighborhood":"Jack London"}
+{"Timestamp":"Y2C49","Cycle":"101","EventDescription":"lost dog returned","EventType":"misc-event","Domain":"GENERAL","Severity":"low","Neighborhood":"Laurel"}
+{"Timestamp":"Y2C49","Cycle":"101","EventDescription":"influencer filming","EventType":"misc-event","Domain":"CELEBRITY","Severity":"low","Neighborhood":"Temescal"}
+{"Timestamp":"Y2C49","Cycle":"101","EventDescription":"fan celebration spillover","EventType":"sports-news","Domain":"SPORTS","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"Y2C49","Cycle":"101","EventDescription":"Telegraph Presbyterian Fellowship: community grief gathering organized","EventType":"misc-event","Domain":"FAITH","Severity":"medium","Neighborhood":"Downtown"}
+{"Timestamp":"Y2C49","Cycle":"101","EventDescription":"B'nai Tikvah Synagogue: congregation opens doors for community support","EventType":"misc-event","Domain":"FAITH","Severity":"medium","Neighborhood":"Piedmont Ave"}
+{"Timestamp":"Y2C49","Cycle":"101","EventDescription":"Telegraph Presbyterian Fellowship observes Advent and Christmas","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"Y2C49","Cycle":"101","EventDescription":"Foothill Baptist Tabernacle observes Christmas","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"Y2C49","Cycle":"101","EventDescription":"Cathedral of the Living Word observes Advent and Christmas","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"Y2C50","Cycle":"102","EventDescription":"","EventType":"civic-activity","Domain":"CIVIC","Severity":"low","Neighborhood":"Chinatown"}
+{"Timestamp":"Y2C50","Cycle":"102","EventDescription":"","EventType":"misc-event","Domain":"ECONOMIC","Severity":"high","Neighborhood":"KONO"}
+{"Timestamp":"Y2C50","Cycle":"102","EventDescription":"suspicious activity check","EventType":"safety-incident","Domain":"SAFETY","Severity":"low","Neighborhood":"West Oakland"}
+{"Timestamp":"Y2C50","Cycle":"102","EventDescription":"street disturbance","EventType":"safety-incident","Domain":"SAFETY","Severity":"low","Neighborhood":"West Oakland"}
+{"Timestamp":"Y2C50","Cycle":"102","EventDescription":"private event fundraiser quietly fills a hotel ballroom","EventType":"sports-news","Domain":"SPORTS","Severity":"low","Neighborhood":"Jack London"}
+{"Timestamp":"Y2C50","Cycle":"102","EventDescription":"earthquake rumble","EventType":"misc-event","Domain":"GENERAL","Severity":"low","Neighborhood":"Laurel"}
+{"Timestamp":"Y2C50","Cycle":"102","EventDescription":"New Covenant Pentecostal Assembly: congregation opens doors for community support","EventType":"misc-event","Domain":"FAITH","Severity":"medium","Neighborhood":"West Oakland"}
+{"Timestamp":"Y2C50","Cycle":"102","EventDescription":"Temescal Islamic Center: pastoral counseling services expanded","EventType":"misc-event","Domain":"FAITH","Severity":"medium","Neighborhood":"Temescal"}
+{"Timestamp":"Y2C50","Cycle":"102","EventDescription":"Telegraph Presbyterian Fellowship observes Advent and Christmas","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"Y2C50","Cycle":"102","EventDescription":"Foothill Baptist Tabernacle observes Christmas","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"Y2C50","Cycle":"102","EventDescription":"Cathedral of the Living Word observes Advent and Christmas","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"Y2C51","Cycle":"103","EventDescription":"","EventType":"infra-incident","Domain":"INFRASTRUCTURE","Severity":"low","Neighborhood":"Chinatown"}
+{"Timestamp":"Y2C51","Cycle":"103","EventDescription":"athlete sighting","EventType":"misc-event","Domain":"CELEBRITY","Severity":"low","Neighborhood":"Uptown"}
+{"Timestamp":"Y2C51","Cycle":"103","EventDescription":"noise complaint","EventType":"safety-incident","Domain":"SAFETY","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"Y2C51","Cycle":"103","EventDescription":"stalled bus","EventType":"misc-event","Domain":"TRAFFIC","Severity":"low","Neighborhood":"Uptown"}
+{"Timestamp":"Y2C51","Cycle":"103","EventDescription":"actor spotted downtown","EventType":"misc-event","Domain":"CELEBRITY","Severity":"low","Neighborhood":"Chinatown"}
+{"Timestamp":"Y2C51","Cycle":"103","EventDescription":"minor fender-bender","EventType":"misc-event","Domain":"GENERAL","Severity":"low","Neighborhood":"Laurel"}
+{"Timestamp":"Y2C51","Cycle":"103","EventDescription":"Foothill Baptist Tabernacle observes Christmas","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"Y2C51","Cycle":"103","EventDescription":"Cathedral of the Living Word observes Advent and Christmas","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"Y2C51","Cycle":"103","EventDescription":"St. Esperanza Parish observes Advent and Christmas","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"Y2C51","Cycle":"103","EventDescription":"Adams Point United Methodist observes Christmas","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Adams Point"}
+{"Timestamp":"Y2C51","Cycle":"103","EventDescription":"New Covenant Pentecostal Assembly observes Christmas","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"West Oakland"}
+{"Timestamp":"Y2C52","Cycle":"104","EventDescription":"","EventType":"infra-incident","Domain":"INFRASTRUCTURE","Severity":"medium","Neighborhood":"KONO"}
+{"Timestamp":"Y2C52","Cycle":"104","EventDescription":"noise complaint","EventType":"safety-incident","Domain":"SAFETY","Severity":"medium","Neighborhood":"Chinatown"}
+{"Timestamp":"Y2C52","Cycle":"104","EventDescription":"car break-in attempt","EventType":"safety-incident","Domain":"SAFETY","Severity":"medium","Neighborhood":"West Oakland"}
+{"Timestamp":"Y2C52","Cycle":"104","EventDescription":"staff walkout","EventType":"business-incident","Domain":"BUSINESS","Severity":"medium","Neighborhood":"Uptown"}
+{"Timestamp":"Y2C52","Cycle":"104","EventDescription":"fireworks debris complaint","EventType":"festival-incident","Domain":"FESTIVAL","Severity":"medium","Neighborhood":"Jack London"}
+{"Timestamp":"Y2C52","Cycle":"104","EventDescription":"party overflow into street","EventType":"festival-incident","Domain":"FESTIVAL","Severity":"medium","Neighborhood":"Jack London"}
+{"Timestamp":"Y2C52","Cycle":"104","EventDescription":"fireworks injury","EventType":"festival-incident","Domain":"FESTIVAL","Severity":"medium","Neighborhood":"Uptown"}
+{"Timestamp":"Y2C52","Cycle":"104","EventDescription":"Temple Beth Or: congregation opens doors for community support","EventType":"misc-event","Domain":"FAITH","Severity":"medium","Neighborhood":"Rockridge"}
+{"Timestamp":"Y2C52","Cycle":"104","EventDescription":"Lakeshore Unitarian Universalist Fellowship: emergency assistance fund activated","EventType":"misc-event","Domain":"FAITH","Severity":"medium","Neighborhood":"Lake Merritt"}
+{"Timestamp":"Y2C52","Cycle":"104","EventDescription":"Telegraph Presbyterian Fellowship observes Advent and Christmas","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"Y2C52","Cycle":"104","EventDescription":"Foothill Baptist Tabernacle observes Christmas","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"Y2C52","Cycle":"104","EventDescription":"Cathedral of the Living Word observes Advent and Christmas","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"Y3C1","Cycle":"105","EventDescription":"","EventType":"health-event","Domain":"HEALTH","Severity":"medium","Neighborhood":"Adams Point"}
+{"Timestamp":"Y3C1","Cycle":"105","EventDescription":"West Oakland under strain: retail vitality 3.5 (city 6.4); crime index 1.18 (city 0.71)","EventType":"safety-incident","Domain":"SAFETY","Severity":"low","Neighborhood":"West Oakland"}
+{"Timestamp":"Y3C1","Cycle":"105","EventDescription":"email leak","EventType":"civic-activity","Domain":"CIVIC","Severity":"medium","Neighborhood":"Lake Merritt"}
+{"Timestamp":"Y3C1","Cycle":"105","EventDescription":"signal malfunction","EventType":"misc-event","Domain":"TRAFFIC","Severity":"medium","Neighborhood":"Laurel"}
+{"Timestamp":"Y3C1","Cycle":"105","EventDescription":"musician near Coliseum","EventType":"misc-event","Domain":"CELEBRITY","Severity":"medium","Neighborhood":"Laurel"}
+{"Timestamp":"Y3C1","Cycle":"105","EventDescription":"5-minute blackout","EventType":"infra-incident","Domain":"INFRASTRUCTURE","Severity":"medium","Neighborhood":"West Oakland"}
+{"Timestamp":"Y3C1","Cycle":"105","EventDescription":"forklift near-tip","EventType":"misc-event","Domain":"GENERAL","Severity":"medium","Neighborhood":"Brooklyn"}
+{"Timestamp":"Y3C1","Cycle":"105","EventDescription":"game day traffic surge","EventType":"sports-news","Domain":"SPORTS","Severity":"medium","Neighborhood":"Jack London"}
+{"Timestamp":"Y3C1","Cycle":"105","EventDescription":"Telegraph Presbyterian Fellowship observes Epiphany","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"Y3C1","Cycle":"105","EventDescription":"St. Esperanza Parish observes Epiphany","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"Y3C1","Cycle":"105","EventDescription":"Temescal Islamic Center: seniors lunch program marks milestone","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Temescal"}
+{"Timestamp":"Y3C1","Cycle":"105","EventDescription":"Lake Merritt Mindfulness Sangha: seniors lunch program marks milestone","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"Y3C1","Cycle":"105","EventDescription":"Bharat Mandir of the East Bay: seniors lunch program marks milestone","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Montclair"}
+{"Timestamp":"Y3C2","Cycle":"106","EventDescription":"","EventType":"health-event","Domain":"HEALTH","Severity":"low","Neighborhood":"Laurel"}
+{"Timestamp":"Y3C2","Cycle":"106","EventDescription":"flash choir","EventType":"misc-event","Domain":"GENERAL","Severity":"low","Neighborhood":"Grand Lake"}
+{"Timestamp":"Y3C2","Cycle":"106","EventDescription":"neighborhood grievance","EventType":"civic-activity","Domain":"CIVIC","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"Y3C2","Cycle":"106","EventDescription":"Telegraph Presbyterian Fellowship observes Epiphany","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"Y3C2","Cycle":"106","EventDescription":"Cathedral of the Living Word observes Epiphany","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"Y3C2","Cycle":"106","EventDescription":"St. Esperanza Parish observes Epiphany","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"Y3C2","Cycle":"106","EventDescription":"Telegraph Presbyterian Fellowship: job training workshop begins new session","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"Y3C2","Cycle":"106","EventDescription":"Foothill Baptist Tabernacle: community health fair hosted","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"Y3C3","Cycle":"107","EventDescription":"","EventType":"health-event","Domain":"HEALTH","Severity":"low","Neighborhood":"Adams Point"}
+{"Timestamp":"Y3C3","Cycle":"107","EventDescription":"","EventType":"civic-activity","Domain":"CIVIC","Severity":"high","Neighborhood":"Piedmont Ave"}
+{"Timestamp":"Y3C3","Cycle":"107","EventDescription":"pothole eruption","EventType":"infra-incident","Domain":"INFRASTRUCTURE","Severity":"medium","Neighborhood":"Downtown"}
+{"Timestamp":"Y3C3","Cycle":"107","EventDescription":"water-pressure drop","EventType":"infra-incident","Domain":"INFRASTRUCTURE","Severity":"medium","Neighborhood":"West Oakland"}
+{"Timestamp":"Y3C3","Cycle":"107","EventDescription":"food poisoning complaint","EventType":"business-incident","Domain":"BUSINESS","Severity":"medium","Neighborhood":"Jack London"}
+{"Timestamp":"Y3C3","Cycle":"107","EventDescription":"influencer filming","EventType":"misc-event","Domain":"CELEBRITY","Severity":"medium","Neighborhood":"Fruitvale"}
+{"Timestamp":"Y3C3","Cycle":"107","EventDescription":"Telegraph Presbyterian Fellowship: congregation opens doors for community support","EventType":"misc-event","Domain":"FAITH","Severity":"medium","Neighborhood":"Downtown"}
+{"Timestamp":"Y3C3","Cycle":"107","EventDescription":"Cathedral of the Living Word observes Epiphany","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"Y3C3","Cycle":"107","EventDescription":"St. Esperanza Parish observes Epiphany","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"Y3C3","Cycle":"107","EventDescription":"Telegraph Presbyterian Fellowship: seniors lunch program marks milestone","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"Y3C3","Cycle":"107","EventDescription":"Foothill Baptist Tabernacle: food pantry serves neighbors in need","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"Y3C4","Cycle":"108","EventDescription":"Medium-severity civic spike in Dimond","EventType":"civic-activity","Domain":"CIVIC","Severity":"medium","Neighborhood":"Dimond"}
+{"Timestamp":"Y3C4","Cycle":"108","EventDescription":"Low-severity health spike in KONO","EventType":"health-event","Domain":"HEALTH","Severity":"low","Neighborhood":"KONO"}
+{"Timestamp":"Y3C4","Cycle":"108","EventDescription":"graffiti tagging","EventType":"safety-incident","Domain":"SAFETY","Severity":"medium","Neighborhood":"Temescal"}
+{"Timestamp":"Y3C4","Cycle":"108","EventDescription":"3-block flicker","EventType":"infra-incident","Domain":"INFRASTRUCTURE","Severity":"medium","Neighborhood":"Brooklyn"}
+{"Timestamp":"Y3C4","Cycle":"108","EventDescription":"balloon release","EventType":"misc-event","Domain":"GENERAL","Severity":"medium","Neighborhood":"Downtown"}
+{"Timestamp":"Y3C4","Cycle":"108","EventDescription":"Cathedral of the Living Word observes Epiphany","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"Y3C4","Cycle":"108","EventDescription":"St. Esperanza Parish observes Epiphany","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"Y3C4","Cycle":"108","EventDescription":"Foothill Baptist Tabernacle: youth program graduation ceremony","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"Y3C4","Cycle":"108","EventDescription":"Cathedral of the Living Word: food pantry serves neighbors in need","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"Y3C4","Cycle":"108","EventDescription":"St. Esperanza Parish: seniors lunch program marks milestone","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"Y3C5","Cycle":"109","EventDescription":"Medium-severity economic spike in Baylight District","EventType":"misc-event","Domain":"ECONOMIC","Severity":"medium","Neighborhood":"Baylight District"}
+{"Timestamp":"Y3C5","Cycle":"109","EventDescription":"The West Oakland Crime Spike — West Oakland crisis eased after 3 cycles back within city range","EventType":"safety-incident","Domain":"SAFETY","Severity":"low","Neighborhood":"West Oakland"}
+{"Timestamp":"Y3C5","Cycle":"109","EventDescription":"lost dog returned","EventType":"misc-event","Domain":"GENERAL","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"Y3C5","Cycle":"109","EventDescription":"customer dispute","EventType":"business-incident","Domain":"BUSINESS","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"Y3C5","Cycle":"109","EventDescription":"misfiled document","EventType":"civic-activity","Domain":"CIVIC","Severity":"low","Neighborhood":"Grand Lake"}
+{"Timestamp":"Y3C5","Cycle":"109","EventDescription":"Bay Pure Land Buddhist Temple: congregation opens doors for community support","EventType":"misc-event","Domain":"FAITH","Severity":"medium","Neighborhood":"Chinatown"}
+{"Timestamp":"Y3C5","Cycle":"109","EventDescription":"Telegraph Presbyterian Fellowship observes Epiphany","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"Y3C5","Cycle":"109","EventDescription":"Cathedral of the Living Word observes Epiphany","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"Y3C5","Cycle":"109","EventDescription":"Foothill Baptist Tabernacle: community health fair hosted","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"Y3C5","Cycle":"109","EventDescription":"New Covenant Pentecostal Assembly: community health fair hosted","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"West Oakland"}
+{"Timestamp":"Y3C6","Cycle":"110","EventDescription":"High-severity public-works spike in Ivy Hill","EventType":"infra-incident","Domain":"INFRASTRUCTURE","Severity":"high","Neighborhood":"Ivy Hill"}
+{"Timestamp":"Y3C6","Cycle":"110","EventDescription":"small protest","EventType":"civic-activity","Domain":"CIVIC","Severity":"medium","Neighborhood":"Dimond"}
+{"Timestamp":"Y3C6","Cycle":"110","EventDescription":"art installation mishap","EventType":"cultural-sighting","Domain":"CULTURE","Severity":"medium","Neighborhood":"Brooklyn"}
+{"Timestamp":"Y3C6","Cycle":"110","EventDescription":"wine spill on artwork","EventType":"cultural-sighting","Domain":"CULTURE","Severity":"medium","Neighborhood":"Jack London"}
+{"Timestamp":"Y3C6","Cycle":"110","EventDescription":"endorsement shoot blocks off a small sidewalk area","EventType":"sports-news","Domain":"SPORTS","Severity":"medium","Neighborhood":"Downtown"}
+{"Timestamp":"Y3C6","Cycle":"110","EventDescription":"St. Esperanza Parish: seniors lunch program marks milestone","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"Y3C6","Cycle":"110","EventDescription":"Temple Beth Or: job training workshop begins new session","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Rockridge"}
+{"Timestamp":"Y3C6","Cycle":"110","EventDescription":"B'nai Tikvah Synagogue: seniors lunch program marks milestone","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Piedmont Ave"}
+{"Timestamp":"Y3C6","Cycle":"110","EventDescription":"Masjid An-Nur Oakland: seniors lunch program marks milestone","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"Y3C6","Cycle":"110","EventDescription":"Or Hashalom Renewal Community: food pantry serves neighbors in need","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Grand Lake"}
+{"Timestamp":"Y3C7","Cycle":"111","EventDescription":"Medium-severity civic spike in Fruitvale","EventType":"civic-activity","Domain":"CIVIC","Severity":"medium","Neighborhood":"Fruitvale"}
+{"Timestamp":"Y3C7","Cycle":"111","EventDescription":"signal malfunction","EventType":"misc-event","Domain":"TRAFFIC","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"Y3C7","Cycle":"111","EventDescription":"earthquake rumble","EventType":"misc-event","Domain":"GENERAL","Severity":"low","Neighborhood":"Eastlake"}
+{"Timestamp":"Y3C7","Cycle":"111","EventDescription":"teacher highlight","EventType":"education-news","Domain":"EDUCATION","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"Y3C7","Cycle":"111","EventDescription":"Masjid An-Nur Oakland: food pantry serves neighbors in need","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"Y3C7","Cycle":"111","EventDescription":"Bay Pure Land Buddhist Temple: community health fair hosted","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Chinatown"}
+{"Timestamp":"Y3C7","Cycle":"111","EventDescription":"Bharat Mandir of the East Bay: after-school tutoring program expands","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Montclair"}
+{"Timestamp":"Y3C7","Cycle":"111","EventDescription":"Or Hashalom Renewal Community: seniors lunch program marks milestone","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Grand Lake"}
+{"Timestamp":"Y3C7","Cycle":"111","EventDescription":"Lakeshore Unitarian Universalist Fellowship: seniors lunch program marks milestone","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"Y3C7","Cycle":"111","EventDescription":"Port of Oakland: berth delay — the waterfront, the shops and the builders who run on its cargo take the hit","EventType":"business-incident","Domain":"BUSINESS","Severity":"medium","Neighborhood":"Jack London"}
+{"Timestamp":"Y3C8","Cycle":"112","EventDescription":"Low-severity public-works spike in Grand Lake","EventType":"infra-incident","Domain":"INFRASTRUCTURE","Severity":"low","Neighborhood":"Grand Lake"}
+{"Timestamp":"Y3C8","Cycle":"112","EventDescription":"High-severity civic spike in Baylight District","EventType":"civic-activity","Domain":"CIVIC","Severity":"high","Neighborhood":"Baylight District"}
+{"Timestamp":"Y3C8","Cycle":"112","EventDescription":"tailgate grill fire","EventType":"sports-news","Domain":"SPORTS","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"Y3C8","Cycle":"112","EventDescription":"high-wind pocket","EventType":"weather-event","Domain":"WEATHER","Severity":"low","Neighborhood":"Baylight District"}
+{"Timestamp":"Y3C8","Cycle":"112","EventDescription":"staff walkout","EventType":"business-incident","Domain":"BUSINESS","Severity":"low","Neighborhood":"Uptown"}
+{"Timestamp":"Y3C8","Cycle":"112","EventDescription":"Telegraph Presbyterian Fellowship: after-school tutoring program expands","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"Y3C8","Cycle":"112","EventDescription":"Bharat Mandir of the East Bay: food pantry serves neighbors in need","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Montclair"}
+{"Timestamp":"Y3C8","Cycle":"112","EventDescription":"Or Hashalom Renewal Community: community health fair hosted","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Grand Lake"}
+{"Timestamp":"Y3C8","Cycle":"112","EventDescription":"Telegraph Presbyterian Fellowship: choir performance highlights service","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"Y3C8","Cycle":"112","EventDescription":"Cathedral of the Living Word: congregation volunteers for neighborhood cleanup","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"Y3C8","Cycle":"112","EventDescription":"Port of Oakland: the berth delay is over — the berths are filling again, and the businesses that waited it out take stock","EventType":"business-incident","Domain":"BUSINESS","Severity":"medium","Neighborhood":"Jack London"}
+{"Timestamp":"Y3C9","Cycle":"113","EventDescription":"Low-severity health spike in Chinatown","EventType":"health-event","Domain":"HEALTH","Severity":"low","Neighborhood":"Chinatown"}
+{"Timestamp":"Y3C9","Cycle":"113","EventDescription":"Medium-severity public-works spike in Jack London","EventType":"infra-incident","Domain":"INFRASTRUCTURE","Severity":"medium","Neighborhood":"Jack London"}
+{"Timestamp":"Y3C9","Cycle":"113","EventDescription":"budget amendment","EventType":"civic-activity","Domain":"CIVIC","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"Y3C9","Cycle":"113","EventDescription":"influencer prank","EventType":"misc-event","Domain":"GENERAL","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"Y3C9","Cycle":"113","EventDescription":"road closure decision","EventType":"civic-activity","Domain":"CIVIC","Severity":"low","Neighborhood":"Chinatown"}
+{"Timestamp":"Y3C9","Cycle":"113","EventDescription":"staff rumor","EventType":"civic-activity","Domain":"CIVIC","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"Y3C9","Cycle":"113","EventDescription":"St. Esperanza Parish: after-school tutoring program expands","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"Y3C9","Cycle":"113","EventDescription":"Temescal Islamic Center: job training workshop begins new session","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Temescal"}
+{"Timestamp":"Y3C9","Cycle":"113","EventDescription":"Lake Merritt Mindfulness Sangha: youth program graduation ceremony","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"Y3C9","Cycle":"113","EventDescription":"Lakeshore Unitarian Universalist Fellowship: after-school tutoring program expands","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"Y3C9","Cycle":"113","EventDescription":"Telegraph Presbyterian Fellowship: special sermon addresses community concerns","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"Y3C10","Cycle":"114","EventDescription":"Medium-severity economic spike in East Oakland","EventType":"misc-event","Domain":"ECONOMIC","Severity":"medium","Neighborhood":"East Oakland"}
+{"Timestamp":"Y3C10","Cycle":"114","EventDescription":"Medium-severity safety spike in Temescal","EventType":"safety-incident","Domain":"SAFETY","Severity":"medium","Neighborhood":"Temescal"}
+{"Timestamp":"Y3C10","Cycle":"114","EventDescription":"The Downtown Transit Snarl — Downtown under strain: transit disruption; housing pressure 10.00 (city 2.41)","EventType":"infra-incident","Domain":"INFRASTRUCTURE","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"Y3C10","Cycle":"114","EventDescription":"missing funds","EventType":"civic-activity","Domain":"CIVIC","Severity":"low","Neighborhood":"San Antonio"}
+{"Timestamp":"Y3C10","Cycle":"114","EventDescription":"food truck line dispute","EventType":"cultural-sighting","Domain":"CULTURE","Severity":"low","Neighborhood":"KONO"}
+{"Timestamp":"Y3C10","Cycle":"114","EventDescription":"street performer permit issue","EventType":"cultural-sighting","Domain":"CULTURE","Severity":"low","Neighborhood":"Grand Lake"}
+{"Timestamp":"Y3C10","Cycle":"114","EventDescription":"email leak","EventType":"civic-activity","Domain":"CIVIC","Severity":"low","Neighborhood":"Laurel"}
+{"Timestamp":"Y3C10","Cycle":"114","EventDescription":"dialogue series addresses shared concerns at Chinatown","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Chinatown"}
+{"Timestamp":"Y3C10","Cycle":"114","EventDescription":"Cathedral of the Living Word: job training workshop begins new session","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"Y3C10","Cycle":"114","EventDescription":"B'nai Tikvah Synagogue: seniors lunch program marks milestone","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Piedmont Ave"}
+{"Timestamp":"Y3C10","Cycle":"114","EventDescription":"Masjid An-Nur Oakland: after-school tutoring program expands","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"Y3C10","Cycle":"114","EventDescription":"Bharat Mandir of the East Bay: food pantry serves neighbors in need","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Montclair"}
+{"Timestamp":"Y3C11","Cycle":"115","EventDescription":"Low-severity public-works spike in Glenview","EventType":"infra-incident","Domain":"INFRASTRUCTURE","Severity":"low","Neighborhood":"Glenview"}
+{"Timestamp":"Y3C11","Cycle":"115","EventDescription":"neighborhood grievance","EventType":"civic-activity","Domain":"CIVIC","Severity":"low","Neighborhood":"Ivy Hill"}
+{"Timestamp":"Y3C11","Cycle":"115","EventDescription":"minor pursuit","EventType":"safety-incident","Domain":"SAFETY","Severity":"low","Neighborhood":"Eastlake"}
+{"Timestamp":"Y3C11","Cycle":"115","EventDescription":"locked-out worker","EventType":"misc-event","Domain":"GENERAL","Severity":"low","Neighborhood":"Temescal"}
+{"Timestamp":"Y3C11","Cycle":"115","EventDescription":"local sports bar hosts a packed watch gathering","EventType":"sports-news","Domain":"SPORTS","Severity":"low","Neighborhood":"Baylight District"}
+{"Timestamp":"Y3C11","Cycle":"115","EventDescription":"interfaith prayer breakfast brings leaders together at Adams Point","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Adams Point"}
+{"Timestamp":"Y3C11","Cycle":"115","EventDescription":"Cathedral of the Living Word: after-school tutoring program expands","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"Y3C11","Cycle":"115","EventDescription":"Masjid An-Nur Oakland: seniors lunch program marks milestone","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"East Oakland"}
+{"Timestamp":"Y3C11","Cycle":"115","EventDescription":"Bay Pure Land Buddhist Temple: job training workshop begins new session","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Chinatown"}
+{"Timestamp":"Y3C11","Cycle":"115","EventDescription":"Telegraph Presbyterian Fellowship: prison ministry team visits facility","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"Y3C12","Cycle":"116","EventDescription":"Medium-severity public-works spike in Glenview","EventType":"infra-incident","Domain":"INFRASTRUCTURE","Severity":"medium","Neighborhood":"Glenview"}
+{"Timestamp":"Y3C12","Cycle":"116","EventDescription":"Medium-severity health spike in Piedmont Ave","EventType":"health-event","Domain":"HEALTH","Severity":"medium","Neighborhood":"Piedmont Ave"}
+{"Timestamp":"Y3C12","Cycle":"116","EventDescription":"misfiled document","EventType":"civic-activity","Domain":"CIVIC","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"Y3C12","Cycle":"116","EventDescription":"zoning adjustment","EventType":"civic-activity","Domain":"CIVIC","Severity":"low","Neighborhood":"Dimond"}
+{"Timestamp":"Y3C12","Cycle":"116","EventDescription":"stalled bus","EventType":"misc-event","Domain":"TRAFFIC","Severity":"low","Neighborhood":"KONO"}
+{"Timestamp":"Y3C12","Cycle":"116","EventDescription":"St. Esperanza Parish: job training workshop begins new session","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"Y3C12","Cycle":"116","EventDescription":"New Covenant Pentecostal Assembly: seniors lunch program marks milestone","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"West Oakland"}
+{"Timestamp":"Y3C12","Cycle":"116","EventDescription":"Temple Beth Or: food pantry serves neighbors in need","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Rockridge"}
+{"Timestamp":"Y3C12","Cycle":"116","EventDescription":"B'nai Tikvah Synagogue: food pantry serves neighbors in need","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Piedmont Ave"}
+{"Timestamp":"Y3C12","Cycle":"116","EventDescription":"Or Hashalom Renewal Community: job training workshop begins new session","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Grand Lake"}

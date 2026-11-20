@@ -1,0 +1,69 @@
+{
+  "status": "staged",
+  "desk": "undocked-digest",
+  "cycle": "115",
+  "persona": "nia-rook-weekly",
+  "byline": "Nia Rook",
+  "bylinePopid": "POP-01076",
+  "article": "output/cron-compare/staged/undocked-digest_c115_nia-rook-weekly_packet-v2_openai-gpt-6-luna.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Elijah Brown",
+        "role": "subject",
+        "popid": "POP-01195"
+      },
+      {
+        "name": "Brooklyn Nguyen",
+        "role": "subject",
+        "popid": "POP-00184"
+      },
+      {
+        "name": "P Slayer",
+        "role": "subject",
+        "popid": "POP-00008"
+      },
+      {
+        "name": "Luis Taz",
+        "role": "mentioned",
+        "popid": "POP-00298",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "I didn't really have a strategy on my two nights on UNDOCKED. I just flew and tried to make it through as many systems as I could until the time ran out. I ended up even on credits both nights, so that was good.",
+        "sourceRef": "citizenVoice PRESS Elijah Brown"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-709f7d702689",
+    "draftSha256": "b58b0082673b03e1d70eccd1905f1d70652109c0a272a983548136c8d50bdef4",
+    "verdict": "output/cron-compare/undocked-digest_c115_nia-rook-weekly_packet-v2_openai-gpt-6-luna.rhea.json",
+    "ranAt": "2026-11-14T16:15:33.321Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 350",
+      "words": 424,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "b58b0082673b03e1d70eccd1905f1d70652109c0a272a983548136c8d50bdef4",
+      "costUsd": 0.001
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-14T16:15:38.606Z"
+}

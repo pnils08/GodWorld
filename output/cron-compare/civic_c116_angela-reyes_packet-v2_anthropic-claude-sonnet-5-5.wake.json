@@ -1,0 +1,61 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "116",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "angela-reyes",
+  "byline": {
+    "name": "Angela Reyes",
+    "popid": "POP-00156",
+    "beatDomain": "EDUCATION"
+  },
+  "laneEntries": 115,
+  "quotesLanded": 2,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "canon_recall",
+    "canon_recall",
+    "sheet_read",
+    "sheet_read"
+  ],
+  "toolCalls": 4,
+  "wordCount": 963,
+  "targetWords": "evidence-bounded",
+  "capHit": 1,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": false,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 963,
+    "short": "The opening paragraph begins with character color rather than a packet-backed school, youth-program, apprenticeship, or continuity fact.",
+    "score": 2,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "b1eca11827d04de3aacb23420411fdd6cb0948fb5a50e65d91406e5e1edc2c94",
+    "costUsd": 0.0019
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 2/3 — The opening paragraph begins with character color rather than a packet-backed school, youth-program, apprenticeship, or continuity fact."
+  },
+  "article": "output/cron-compare/staged/civic_c116_angela-reyes_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "from ../.config/godworld/.env // tip: ◈ secrets for agents [www.dotenvx.com]\n{\n  \"popId\": \"POP-00156\",\n  \"name\": \"Angela Reyes\",\n  \"recorded\": true,\n  \"text\": \"filed: One More Backpack in Rockridge\"\n}"
+  },
+  "ranAt": "2026-11-18T00:18:19.222Z"
+}

@@ -1,0 +1,474 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "116",
+  "persona": "hal-richmond",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00007",
+      "name": "Hal Richmond",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "What the supplied C116 line card establishes, and what history remains unsupplied.",
+      "approach": "Historian approach (Hal Richmond): the Origins of the Dynasty bar — third-person biography, first person at most once; literary, not wire, not bleacher rage. Present fact first (feed-true: StoryAngle, Stats, record), then the ground the man came from. An origin, road, nickname or recorded word may enter only when canon_search or the Packet holds it; otherwise leave it out. Pick 1–2 archive-bag shapes. Numbers plain as the record prints them, not poetry and not scouting grades. End on the closing note in this slice (the line that holds, or the quiet note the class carries). FORBIDDEN: fan \"we\" charge, Anthony salary–value architecture as spine, elegy as the default register, inventing seasons/x-stats, FO bullet strategy, business-desk storefront assignment, multi-voice sports-desk average.",
+      "creativeBrief": {
+        "kind": "sports-history",
+        "pulseClass": "era-door",
+        "bagModes": [
+          "6 What He Became",
+          "8 The Archive Entry"
+        ],
+        "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+        "presentFacts": [
+          "Event (feed): A's — trade-recap (off-season)",
+          "Cycle: C116"
+        ],
+        "dossierFacts": [
+          "Carmen Mesa TrueSource: 2041 REGULAR SEASON — Games: 10 Games Started: 10 Wins: 5 Losses: 3 Saves: 0 Blown Saves: 0 Holds: 0 Innings Pitched: 56.0 Hits Allowed: 44 Runs Allow | WAR: 1.3",
+          "Kevin Clark TrueSource: 2041 REGULAR SEASON G: 18 PA: 67 AB: 64 R: 11 H: 19 2B: 5 3B: 1 HR: 3 RBI: 12 BB: 1 SO: 3 HBP: 1 SF: 1 SAC: 0 GIDP: 1 AVG: 0.297 OBP: 0.313 SLG: 0.547 | WAR: 0.9",
+          "Ernesto Quintero TrueSource: 2041 REGULAR SEASON G: 145 PA: 589 AB: 554 R: 80 H: 156 2B: 25 3B: 3 HR: 46 RBI: 92 BB: 27 SO: 89 HBP: 4 SF: 3 SAC: 1 GIDP: 6 AVG: 0.282 OBP: 0.318 SL | WAR: 5.8 | AWARDS (Career Reference) - Top Prospect Tier 1 (2040) - Rookie of the Year (2041) - All-S"
+        ],
+        "missing": [
+          "Historical people, places, teams, events, seasons, and statistics are unsupplied unless named in the packet",
+          "No invented seasons or franchise history beyond packet + feed",
+          "No x-stats / barrel% / invented OPS+",
+          "Not a business-desk storefront assignment",
+          "Not P Slayer charge; not Anthony board architecture as spine"
+        ],
+        "closingNote": "the line that holds",
+        "priorFiling": "NONE — wall may still inject at wake",
+        "sceneRule": "An unnamed desk or quiet archive transition; literary texture may carry no witnessed event. People, places, teams, seasons, events, and statistics only from the packet. Not a business storefront beat.",
+        "sourcePointers": [
+          "output/world_summary_c116.md ## Sports",
+          "docs/media/HAL_ARCHIVE_BAG.md",
+          "output/beats/Story_Hook_Deck.jsonl + Story_Seed_Deck.jsonl (sports, this cycle)"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "story-signal",
+      "hood": "Lake Merritt",
+      "score": null,
+      "src": "world_summary_c116.md ## Sports",
+      "team": "A's",
+      "nearby": [
+        {
+          "text": "A's | trade-recap | (off-season) | Carmen Mesa, Jose Fuentes, Giancarlo Hernandez, Mike Paulson, Kevin Clark, Ernesto Quintero",
+          "src": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (off-season) | Kevin Clark, Giancarlo Hernandez, Ernesto Quintero, Deacon Seymour, Mike Paulson",
+          "src": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | rumor | (off-season) | Mark Aitken, Mike Paulson, Ernesto Quintero",
+          "src": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | rumor | (off-season) | Benji Dillon, Mike Paulson, Deacon Seymour",
+          "src": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | season-state | (early-season) | Wilson Shepard, Mike Paulson, Elliot Abraham",
+          "src": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": []
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C116",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-871096fd8925"
+      },
+      {
+        "t": "FACT",
+        "text": "A's — trade-recap — supplied C116 line card",
+        "src": "world_summary_c116.md ## Sports",
+        "id": "F-3b6916693cd4"
+      },
+      {
+        "t": "FACT",
+        "text": "Event (feed): A's — trade-recap (off-season)",
+        "src": "world_summary_c116.md ## Sports",
+        "id": "F-0692bd5bb58d"
+      },
+      {
+        "t": "FACT",
+        "text": "Cycle: C116",
+        "src": "world_summary_c116.md ## Sports",
+        "id": "F-54e162beb92c"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ]
+      },
+      "rule": "No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "records",
+    "candidates": [],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Hal Richmond",
+    "popid": "POP-00007"
+  },
+  "assignment": {
+    "story": {
+      "angle": "What the supplied C116 line card establishes, and what history remains unsupplied.",
+      "label": "A's — trade-recap — supplied C116 line card",
+      "hookLine": "A's — trade-recap — supplied C116 line card",
+      "hood": "Lake Merritt",
+      "pulseClass": "era-door",
+      "team": "A's",
+      "eventKind": "trade-recap",
+      "closingNote": "the line that holds",
+      "citizens": [
+        "Carmen Mesa (POP-00081)",
+        "Giancarlo Hernandez (POP-01239)",
+        "Mike Paulson (POP-00527)",
+        "Kevin Clark (POP-00053)",
+        "Ernesto Quintero (POP-00050)"
+      ],
+      "popids": [
+        "POP-00081",
+        "POP-01239",
+        "POP-00527",
+        "POP-00053",
+        "POP-00050"
+      ],
+      "ref": "world_summary_c116.md ## Sports",
+      "cycle": 116
+    },
+    "approach": "Historian approach (Hal Richmond): the Origins of the Dynasty bar — third-person biography, first person at most once; literary, not wire, not bleacher rage. Present fact first (feed-true: StoryAngle, Stats, record), then the ground the man came from. An origin, road, nickname or recorded word may enter only when canon_search or the Packet holds it; otherwise leave it out. Pick 1–2 archive-bag shapes. Numbers plain as the record prints them, not poetry and not scouting grades. End on the closing note in this slice (the line that holds, or the quiet note the class carries). FORBIDDEN: fan \"we\" charge, Anthony salary–value architecture as spine, elegy as the default register, inventing seasons/x-stats, FO bullet strategy, business-desk storefront assignment, multi-voice sports-desk average."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": {
+    "pulse": {
+      "className": "era-door",
+      "score": 82,
+      "label": "A's — trade-recap — supplied C116 line card",
+      "team": "A's",
+      "eventKind": "trade-recap",
+      "seasonType": "off-season",
+      "storyAngle": "Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+      "hasStats": true,
+      "record": "-",
+      "streak": "-",
+      "foilNumber": "9IP",
+      "closingNote": "the line that holds",
+      "feedCycle": 116
+    },
+    "bag": {
+      "modes": [
+        {
+          "id": 6,
+          "name": "What He Became"
+        },
+        {
+          "id": 8,
+          "name": "The Archive Entry"
+        }
+      ],
+      "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+      "closingNote": "the line that holds",
+      "claim": "Present fact: 9IP on the feed. Archive claim: the man behind the line — Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen Close toward the line that holds."
+    },
+    "prewrite": {
+      "reporter": "Hal Richmond",
+      "bagModes": [
+        {
+          "id": 6,
+          "name": "What He Became"
+        },
+        {
+          "id": 8,
+          "name": "The Archive Entry"
+        }
+      ],
+      "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+      "presentFacts": [
+        "Event (feed): A's — trade-recap (off-season)",
+        "Cycle: C116"
+      ],
+      "dossierFacts": [
+        "Carmen Mesa TrueSource: 2041 REGULAR SEASON — Games: 10 Games Started: 10 Wins: 5 Losses: 3 Saves: 0 Blown Saves: 0 Holds: 0 Innings Pitched: 56.0 Hits Allowed: 44 Runs Allow | WAR: 1.3",
+        "Kevin Clark TrueSource: 2041 REGULAR SEASON G: 18 PA: 67 AB: 64 R: 11 H: 19 2B: 5 3B: 1 HR: 3 RBI: 12 BB: 1 SO: 3 HBP: 1 SF: 1 SAC: 0 GIDP: 1 AVG: 0.297 OBP: 0.313 SLG: 0.547 | WAR: 0.9",
+        "Ernesto Quintero TrueSource: 2041 REGULAR SEASON G: 145 PA: 589 AB: 554 R: 80 H: 156 2B: 25 3B: 3 HR: 46 RBI: 92 BB: 27 SO: 89 HBP: 4 SF: 3 SAC: 1 GIDP: 6 AVG: 0.282 OBP: 0.318 SL | WAR: 5.8 | AWARDS (Career Reference) - Top Prospect Tier 1 (2040) - Rookie of the Year (2041) - All-S"
+      ],
+      "closingNote": "the line that holds",
+      "priorFiling": "NONE — wall may still inject at wake",
+      "claim": "Present fact: 9IP on the feed. Archive claim: the man behind the line — Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen Close toward the line that holds.",
+      "foilNumber": "9IP",
+      "missing": [
+        "Historical people, places, teams, events, seasons, and statistics are unsupplied unless named in the packet",
+        "No invented seasons or franchise history beyond packet + feed",
+        "No x-stats / barrel% / invented OPS+",
+        "Not a business-desk storefront assignment",
+        "Not P Slayer charge; not Anthony board architecture as spine"
+      ],
+      "hooks": []
+    },
+    "friction": {
+      "a": "Present feed fact: Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+      "b": "Wire copy / FO strategy / bleacher heat that skips time",
+      "frame": "Present first, then echo — end on the line that holds."
+    },
+    "priorTakes": [],
+    "players": [
+      {
+        "name": "Carmen Mesa",
+        "popid": "POP-00081",
+        "role": "Starting Pitcher, Philadelphia Phillies",
+        "neighborhood": "Lake Merritt",
+        "why": "feed-names"
+      },
+      {
+        "name": "Porter Broadway",
+        "popid": null,
+        "role": null,
+        "neighborhood": null,
+        "why": "feed-names"
+      },
+      {
+        "name": "Jose Fuentes",
+        "popid": null,
+        "role": null,
+        "neighborhood": null,
+        "why": "feed-names"
+      },
+      {
+        "name": "Giancarlo Hernandez",
+        "popid": "POP-01239",
+        "role": "Third Baseman, Oakland A's",
+        "neighborhood": null,
+        "why": "feed-names"
+      },
+      {
+        "name": "Antone Baez",
+        "popid": null,
+        "role": null,
+        "neighborhood": null,
+        "why": "feed-names"
+      },
+      {
+        "name": "Mike Paulson",
+        "popid": "POP-00527",
+        "role": "General Manager, Oakland A's & The Oaks",
+        "neighborhood": "West Oakland",
+        "why": "feed-names"
+      },
+      {
+        "name": "Kevin Clark",
+        "popid": "POP-00053",
+        "role": "Third Baseman, Oakland A's",
+        "neighborhood": "Jack London",
+        "why": "feed-names"
+      },
+      {
+        "name": "Ernesto Quintero",
+        "popid": "POP-00050",
+        "role": "3B/1B , Oakland A's",
+        "neighborhood": "Baylight District",
+        "why": "feed-names"
+      }
+    ],
+    "scene": {
+      "neighborhood": "Lake Merritt",
+      "record": "-",
+      "streak": "-",
+      "colorRoom": "An unnamed desk or quiet archive transition; literary texture may carry no witnessed event. People, places, teams, seasons, events, and statistics only from the packet. Not a business storefront beat."
+    },
+    "candidates": [
+      {
+        "score": 82,
+        "cycle": 116,
+        "team": "A's",
+        "primary": "era-door",
+        "hasStats": true,
+        "angle": "Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+        "priorHits": 0
+      },
+      {
+        "score": 81,
+        "cycle": 116,
+        "team": "A's",
+        "primary": "era-door",
+        "hasStats": true,
+        "angle": "Benji Dillon hasn't retired yet. The 5-time Cy Young winner leaves the door open after Keane walks through his",
+        "priorHits": 0
+      },
+      {
+        "score": 81,
+        "cycle": 116,
+        "team": "Oaks",
+        "primary": "era-door",
+        "hasStats": true,
+        "angle": "From 0-9 to 8-1: Wilson Shepard's Oaks caught people off guard, just like he said they would",
+        "priorHits": 0
+      },
+      {
+        "score": 78,
+        "cycle": 116,
+        "team": "A's",
+        "primary": "era-door",
+        "hasStats": true,
+        "angle": "The bat or the glove? Kevin Clark's .327 against Giancarlo Hernandez's 96 fielding for third base",
+        "priorHits": 0
+      },
+      {
+        "score": 78,
+        "cycle": 116,
+        "team": "A's",
+        "primary": "era-door",
+        "hasStats": true,
+        "angle": "The Angels show strong interest in A's free agent Mark Aitken, the Oakland native whose whole life is in Jack London",
+        "priorHits": 0
+      },
+      {
+        "score": 72,
+        "cycle": 115,
+        "team": "A's",
+        "primary": "era-door",
+        "hasStats": true,
+        "angle": "It's official: Vinnie Keane retires. Undrafted to undeniable, and staying in Grand Lake.",
+        "priorHits": 0
+      }
+    ]
+  },
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Hal Richmond",
+    "popid": "POP-00007",
+    "text": "The A's off-season moves, particularly Mark Aitken's departure and Ernesto Quintero's shift to first base, open up questions about the team's infield dynamics. I'll be looking into the implications of these changes, especially how Kevin Clark and Giancarlo Hernandez might fare at third base. The story will explore the history behind Aitken's role in the community and the team, as well as the potential for the young infield to carry on that legacy.",
+    "plan": {
+      "chase": "The A's off-season moves, particularly Mark Aitken's departure and Ernesto Quintero's shift to first base, open up questions about the team's infield dynamics. I'll be looking into the implications of these changes, especially how Kevin Clark and Giancarlo Hernandez might fare at third base. The story will explore the history behind Aitken's role in the community and the team, as well as the potential for the young infield to carry on that legacy.",
+      "focus": "A's infield dynamics and community impact",
+      "why": "The departure of Mark Aitken, a native Oakland player with deep community ties, and the subsequent lineup changes, present a significant story about the team's direction and its connection to the local fanbase.",
+      "checks": [
+        "Verify the details of the Carmen Mesa trade and its impact on the A's roster",
+        "Assess the readiness of Kevin Clark and Giancarlo Hernandez to take over at third base"
+      ],
+      "targets": [],
+      "interpretation": "The A's are at a crossroads with the loss of a key player and a community figure in Mark Aitken. The team's choices will reflect its priorities and potentially shape its relationship with Oakland.",
+      "unverifiedLead": [
+        "The potential for Kevin Clark to emerge as a key player at third base",
+        "The community's reaction to Aitken's departure and its implications for the A's"
+      ]
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | trade-recap | (off-season) | Carmen Mesa, Jose Fuentes, Giancarlo Hernandez, Mike Paulson, Kevin Clark, Ernesto Quintero",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00081",
+        "POP-00101",
+        "POP-01239",
+        "POP-00527",
+        "POP-00053",
+        "POP-00050"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (off-season) | Kevin Clark, Giancarlo Hernandez, Ernesto Quintero, Deacon Seymour, Mike Paulson",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00053",
+        "POP-01239",
+        "POP-00050",
+        "POP-00528",
+        "POP-00527"
+      ]
+    },
+    {
+      "label": "A's | rumor | (off-season) | Mark Aitken, Mike Paulson, Ernesto Quintero",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00003",
+        "POP-00527",
+        "POP-00050"
+      ]
+    },
+    {
+      "label": "A's | rumor | (off-season) | Benji Dillon, Mike Paulson, Deacon Seymour",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00018",
+        "POP-00527",
+        "POP-00528"
+      ]
+    },
+    {
+      "label": "Oaks | season-state | (early-season) | Wilson Shepard, Mike Paulson, Elliot Abraham",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 116; rendered: world_summary_c116.md \"## Sports\" C116 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01022",
+        "POP-00527",
+        "POP-01046"
+      ]
+    }
+  ],
+  "laneEntries": 17,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-19T12:16:05.790Z"
+}

@@ -1,0 +1,62 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "115",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "maria-keen",
+  "byline": {
+    "name": "Maria Keen",
+    "popid": "POP-00013",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 30,
+  "quotesLanded": 4,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "canon_recall",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall"
+  ],
+  "toolCalls": 4,
+  "wordCount": 770,
+  "targetWords": "evidence-bounded",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 770,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "294b85ecee5b4b3d8e56f5085cf47e056ce48532fec08a78cdfb730c863ce725",
+    "costUsd": 0.001
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/3 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/culture_c115_maria-keen_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "./.config/godworld/.env // tip: ◈ encrypted .env [www.dotenvx.com]\n{\n  \"popId\": \"POP-00013\",\n  \"name\": \"Maria Keen\",\n  \"recorded\": true,\n  \"text\": \"filed: The Archive on the Block Nobody Signed For\"\n}"
+  },
+  "ranAt": "2026-11-14T00:18:37.776Z",
+  "dispositionReconciledAt": "2026-11-14T18:00:02.753Z"
+}

@@ -1,0 +1,99 @@
+{
+  "draft": "output/cron-compare/culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "116",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "eaed223e799c38aa6c64f09582f7909f764686961f8caac099568a22eee588ec",
+  "pass": false,
+  "flags": [
+    {
+      "claim": "On his own page this cycle he put it this way: \"The rankings are a nice feather, but they don't win us a single possession.\"",
+      "issue": "Fabricated speech attributed to named ledger citizen Wilson Shepard (POP-01022) not present in interview record or ledger ground truth.",
+      "severity": "high"
+    }
+  ],
+  "flagCount": 1,
+  "highSeverityCount": 1,
+  "summary": "Draft fails due to fabricated quote attributed to named ledger citizen Wilson Shepard.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "revise",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "tamsin-lives-v1",
+    "packageVersion": "TAMSIN-LIVES-2",
+    "manifestId": "AM-e4cd833ed935",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "3",
+          "11"
+        ]
+      },
+      {
+        "code": "UNAPPROVED_QUOTE",
+        "values": [
+          "The rankings are a nice feather, but they don't win us a single possession."
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Darrin Davis",
+      "Elias Varek",
+      "Enzo Walker",
+      "Ira Leu",
+      "Matilda Diop",
+      "Omar Farah",
+      "Sadie Williams",
+      "Tariq Cooper",
+      "Theo Rahimi",
+      "Wilson Shepard"
+    ],
+    "unverified": [
+      "Aitken Line Founding Celebration",
+      "Become Somebody's Team",
+      "Civis Systems",
+      "For Varek Systems",
+      "Something Else",
+      "Trailer Says",
+      "Varek Systems"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0179,
+  "durationMs": 18659,
+  "parseError": false,
+  "ranAt": "2026-11-20T00:19:24.202Z",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 450",
+    "words": 1221,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "eaed223e799c38aa6c64f09582f7909f764686961f8caac099568a22eee588ec",
+    "costUsd": 0.0016
+  }
+}

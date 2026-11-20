@@ -1,0 +1,62 @@
+{
+  "mode": "wake-write",
+  "desk": "business",
+  "cycle": "116",
+  "provider": "openrouter",
+  "model": "anthropic/claude-opus-5.5",
+  "configuredWriterModel": "anthropic/claude-opus-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "business-desk",
+  "byline": {
+    "name": "Jordan Velez",
+    "popid": "POP-00153",
+    "beatDomain": "ECONOMIC"
+  },
+  "laneEntries": 47,
+  "quotesLanded": 3,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "sheet_read",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall"
+  ],
+  "toolCalls": 5,
+  "wordCount": 1040,
+  "targetWords": "500-800",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 500",
+    "words": 1040,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "e6f06c0c914e60885af50e57f70fcf6918bcd3ded4ceceadb75a1b258e1f9e6d",
+    "costUsd": 0.001
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/3 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/business_c116_business-desk_packet-v2_anthropic-claude-opus-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "ple files { path: ['.env.local', '.env'] }\n{\n  \"popId\": \"POP-00153\",\n  \"name\": \"Jordan Velez\",\n  \"recorded\": true,\n  \"text\": \"filed: Seven Miles of Growth, Measured From the Wrong Side of the Fence\"\n}"
+  },
+  "ranAt": "2026-11-17T00:18:21.732Z"
+}

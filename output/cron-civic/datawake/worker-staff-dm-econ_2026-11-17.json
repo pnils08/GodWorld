@@ -1,0 +1,41 @@
+{
+  "office": "worker_staff_dm_econ",
+  "agentDir": "worker-staff-dm-econ",
+  "holder": "Marcus Osei",
+  "popid": "POP-00036",
+  "title": "Deputy Mayor (Econ Dev)",
+  "date": "2026-11-17",
+  "cycle": 116,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "# Deputy Mayor's Weekly Report — Cycle 116\n\nHere's what the records show me this Cycle, and I'll be straight: it rattles me.\n\n**The citywide picture.** 283 businesses on the ledger, 31,399 staff, median pay $52,000. No closures this Cycle — I'll take that. But before anyone starts clapping, look at where the jobs actually sit. Downtown alone: 22 businesses, 6,819 staff. Baylight District, 12 businesses, 2,804. Piedmont Ave, 2,729. Now read down to my own neighborhood. **Chinatown: 11 businesses, 118 staff, median pay $46,000.** A hundred and eighteen jobs across the whole district. Family retail, income tier 3, retail vitality 9.74. That's the story I keep bringing to this podium and I'll bring it again.\n\n**Out of work.** This is the number that should stop everybody in this room. Temescal, 166 residents unemployed — 166 out of 2,139 adults, that's the worst count in the city, and their employer character is a clinic and their boom index is negative. San Antonio, 105. Dimond, 98. Glenview, 97. Eastlake, 92. Ivy Hill, 90. **Chinatown, 83 — out of 1,502 adults.** That's over five percent. And I'm one of the names on the hospital records this Cycle. When the council member can't dodge what's going through these streets, you know something's slipping through the cracks.\n\nEast Oakland, 87 out of 1,558. Fruitvale, 60. These aren't loud voices — they're quiet ones, and there are a lot of them.\n\n**What's moving.** The carryover shocks are still working through: Baylight District at -8, one Cycle left; Ivy Hill at -8 twice over, two and three Cycles in. And a fresh one this Cycle — **Adams Point United Methodist Church lost 2 employees, sector impact services/retail, -8.** A church losing staff is a neighborhood losing a service counter, and I want that on the record as economic news, not just a faith ledger line. Meanwhile the mail truck brought a business an insurance premium hike — someone's costs went up for no reason they earned.\n\n**The building inspector** passed one business, growth flat. Fine. It's a floor, not a ceiling.\n\n**What I want.** Our economic development plans have to reach the people on the ground, not the neighborhoods with the loudest voices. Downtown and Baylight have six and a half thousand jobs between them — good. Chinatown's got 118, Temescal's got 166 people out of work, and Ivy Hill's taking a third straight hit. If 13 people in one neighborhood make headlines, that's 13 too many; if 166 in another never make them, that's a failure of our reporting and our plans.\n\nThat's my report. On the record.",
+  "moves": [],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-11-17T11:45:50.615Z",
+  "usage": {
+    "prompt_tokens": 2902,
+    "completion_tokens": 637,
+    "cost": 0.0002
+  },
+  "fellBackFrom": null,
+  "template": "worker/2",
+  "toolTrace": [],
+  "memory": {
+    "searchedOn": "business jobs employment retail",
+    "entries": 2,
+    "fromSearch": 1,
+    "newest": 2,
+    "failed": []
+  },
+  "figuresNotHanded": [],
+  "finishReason": "stop",
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00036",
+    "id": "W28WPn7NxUQSVGS7YdphMg",
+    "customId": "cp-POP-00036-c116-CIVIC-datawake-2026-11-17"
+  }
+}

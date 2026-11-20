@@ -1,0 +1,595 @@
+[
+  {
+    "pop": "POP-00632",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00632\",\"name\":\"Rico Valez\",\"role\":\"Musician\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Celeste Tran\",\"question\":\"How does Rico Valez see the changing landscape of Oakland affecting his work? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-trends\",\"hood\":\"Fruitvale\",\"focus\":\"West Oakland's growth and its connection to Oakland's cultural scene\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Rico Valez — Musician — Fruitvale\",\"evidence\":[{\"id\":\"EV-8774357ae3\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"text\":\"Rico Valez — gained 1 mention this cycle (20 total), stable. The trend is the story; the mood is yours.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Rico Valez gained 1 mention this cycle (20 total); West Oakland moves the most\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-b210ca5d01aa\"},{\"t\":\"FACT\",\"text\":\"Rico Valez — gained 1 mention this cycle (20 total), stable. The trend is the story; the mood is yours.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-f95c867a7977\"},{\"t\":\"FACT\",\"text\":\"Rico Valez (Celebrity), Arts — gained 1 mention this cycle (20 total), stable, fame 4\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115 vs output/beats/prev/Cultural_Ledger.jsonl @C114\",\"id\":\"F-89143f36b83a\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"Rowan Pierce (journalist), Media — gained 1 mention this cycle (15 total), cooling, fame 2\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115 vs output/beats/prev/Cultural_Ledger.jsonl @C114\",\"id\":\"F-abe9214133c5\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane (A's player), Sports — gained 1 mention this cycle (7 total), cooling, fame 48\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115 vs output/beats/prev/Cultural_Ledger.jsonl @C114\",\"id\":\"F-6f555c4dfe42\"},{\"t\":\"FACT\",\"text\":\"Anthony Raines (Media) — new on the culture record C115\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-b45587998069\"},{\"t\":\"FACT\",\"text\":\"Movement vs C114: West Oakland +19 people, East Oakland +11 people, Jack London +9 people, Rockridge +9 people, Temescal +8 people\",\"src\":\"output/beats/prev/Neighborhood_Demographics.jsonl vs current @C115\",\"id\":\"F-5556ff67d502\"},{\"t\":\"FACT\",\"text\":\"Rico Valez — Musician — Fruitvale\",\"src\":\"Simulation_Ledger profile for POP-00632\",\"id\":\"F-addc622b548f\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00632",
+        "name": "Rico Valez",
+        "role": "Musician",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Celeste Tran",
+        "question": "How does Rico Valez see the changing landscape of Oakland affecting his work? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-trends",
+        "hood": "Fruitvale",
+        "focus": "West Oakland's growth and its connection to Oakland's cultural scene",
+        "src": "output/beats/Cultural_Ledger.jsonl @C115"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Rico Valez — Musician — Fruitvale",
+        "evidence": [
+          {
+            "id": "EV-8774357ae3",
+            "src": "output/beats/Cultural_Ledger.jsonl @C115",
+            "text": "Rico Valez — gained 1 mention this cycle (20 total), stable. The trend is the story; the mood is yours."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Rico Valez gained 1 mention this cycle (20 total); West Oakland moves the most",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-b210ca5d01aa"
+        },
+        {
+          "t": "FACT",
+          "text": "Rico Valez — gained 1 mention this cycle (20 total), stable. The trend is the story; the mood is yours.",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-f95c867a7977"
+        },
+        {
+          "t": "FACT",
+          "text": "Rico Valez (Celebrity), Arts — gained 1 mention this cycle (20 total), stable, fame 4",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115 vs output/beats/prev/Cultural_Ledger.jsonl @C114",
+          "id": "F-89143f36b83a"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C115",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-bc84fc0b7718"
+        },
+        {
+          "t": "FACT",
+          "text": "Rowan Pierce (journalist), Media — gained 1 mention this cycle (15 total), cooling, fame 2",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115 vs output/beats/prev/Cultural_Ledger.jsonl @C114",
+          "id": "F-abe9214133c5"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane (A's player), Sports — gained 1 mention this cycle (7 total), cooling, fame 48",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115 vs output/beats/prev/Cultural_Ledger.jsonl @C114",
+          "id": "F-6f555c4dfe42"
+        },
+        {
+          "t": "FACT",
+          "text": "Anthony Raines (Media) — new on the culture record C115",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-b45587998069"
+        },
+        {
+          "t": "FACT",
+          "text": "Movement vs C114: West Oakland +19 people, East Oakland +11 people, Jack London +9 people, Rockridge +9 people, Temescal +8 people",
+          "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C115",
+          "id": "F-5556ff67d502"
+        },
+        {
+          "t": "FACT",
+          "text": "Rico Valez — Musician — Fruitvale",
+          "src": "Simulation_Ledger profile for POP-00632",
+          "id": "F-addc622b548f"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C11, Spring, holiday=none",
+          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+          "id": "F-82d77e9a4a71"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00001",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00001\",\"name\":\"Vinnie Keane\",\"role\":\"Former Designated Hitter, Oakland A's Legend\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Celeste Tran\",\"question\":\"What's Vinnie Keane's take on the A's trade and its impact on the community? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-trends\",\"hood\":\"Fruitvale\",\"focus\":\"West Oakland's growth and its connection to Oakland's cultural scene\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Grand Lake\",\"evidence\":[{\"id\":\"EV-f657c09bc8\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"text\":\"Rico Valez — gained 1 mention this cycle (20 total), stable. The trend is the story; the mood is yours.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Vinnie Keane (A's player), Sports — gained 1 mention this cycle (7 total), cooling, fame 48\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115 vs output/beats/prev/Cultural_Ledger.jsonl @C114\",\"id\":\"F-6f555c4dfe42\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"Rico Valez gained 1 mention this cycle (20 total); West Oakland moves the most\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-b210ca5d01aa\"},{\"t\":\"FACT\",\"text\":\"Rico Valez — gained 1 mention this cycle (20 total), stable. The trend is the story; the mood is yours.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-f95c867a7977\"},{\"t\":\"FACT\",\"text\":\"Rico Valez (Celebrity), Arts — gained 1 mention this cycle (20 total), stable, fame 4\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115 vs output/beats/prev/Cultural_Ledger.jsonl @C114\",\"id\":\"F-89143f36b83a\"},{\"t\":\"FACT\",\"text\":\"Rowan Pierce (journalist), Media — gained 1 mention this cycle (15 total), cooling, fame 2\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115 vs output/beats/prev/Cultural_Ledger.jsonl @C114\",\"id\":\"F-abe9214133c5\"},{\"t\":\"FACT\",\"text\":\"Anthony Raines (Media) — new on the culture record C115\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-b45587998069\"},{\"t\":\"FACT\",\"text\":\"Movement vs C114: West Oakland +19 people, East Oakland +11 people, Jack London +9 people, Rockridge +9 people, Temescal +8 people\",\"src\":\"output/beats/prev/Neighborhood_Demographics.jsonl vs current @C115\",\"id\":\"F-5556ff67d502\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Grand Lake\",\"src\":\"Simulation_Ledger profile for POP-00001\",\"id\":\"F-c3e2dd064d1f\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "Former Designated Hitter, Oakland A's Legend",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Celeste Tran",
+        "question": "What's Vinnie Keane's take on the A's trade and its impact on the community? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-trends",
+        "hood": "Fruitvale",
+        "focus": "West Oakland's growth and its connection to Oakland's cultural scene",
+        "src": "output/beats/Cultural_Ledger.jsonl @C115"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Grand Lake",
+        "evidence": [
+          {
+            "id": "EV-f657c09bc8",
+            "src": "output/beats/Cultural_Ledger.jsonl @C115",
+            "text": "Rico Valez — gained 1 mention this cycle (20 total), stable. The trend is the story; the mood is yours."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane (A's player), Sports — gained 1 mention this cycle (7 total), cooling, fame 48",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115 vs output/beats/prev/Cultural_Ledger.jsonl @C114",
+          "id": "F-6f555c4dfe42"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C115",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-bc84fc0b7718"
+        },
+        {
+          "t": "FACT",
+          "text": "Rico Valez gained 1 mention this cycle (20 total); West Oakland moves the most",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-b210ca5d01aa"
+        },
+        {
+          "t": "FACT",
+          "text": "Rico Valez — gained 1 mention this cycle (20 total), stable. The trend is the story; the mood is yours.",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-f95c867a7977"
+        },
+        {
+          "t": "FACT",
+          "text": "Rico Valez (Celebrity), Arts — gained 1 mention this cycle (20 total), stable, fame 4",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115 vs output/beats/prev/Cultural_Ledger.jsonl @C114",
+          "id": "F-89143f36b83a"
+        },
+        {
+          "t": "FACT",
+          "text": "Rowan Pierce (journalist), Media — gained 1 mention this cycle (15 total), cooling, fame 2",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115 vs output/beats/prev/Cultural_Ledger.jsonl @C114",
+          "id": "F-abe9214133c5"
+        },
+        {
+          "t": "FACT",
+          "text": "Anthony Raines (Media) — new on the culture record C115",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-b45587998069"
+        },
+        {
+          "t": "FACT",
+          "text": "Movement vs C114: West Oakland +19 people, East Oakland +11 people, Jack London +9 people, Rockridge +9 people, Temescal +8 people",
+          "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C115",
+          "id": "F-5556ff67d502"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Grand Lake",
+          "src": "Simulation_Ledger profile for POP-00001",
+          "id": "F-c3e2dd064d1f"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C11, Spring, holiday=none",
+          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+          "id": "F-82d77e9a4a71"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00545",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00545\",\"name\":\"Rowan Pierce\",\"role\":\"Freelance Writer\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Celeste Tran\",\"question\":\"What have you seen, felt, or understood about \\\"West Oakland's growth and its connection to Oakland's cultural scene\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-trends\",\"hood\":\"Fruitvale\",\"focus\":\"West Oakland's growth and its connection to Oakland's cultural scene\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Rowan Pierce — Freelance Writer — Piedmont Ave\",\"evidence\":[{\"id\":\"EV-d4bf4ee6e2\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"text\":\"Rico Valez — gained 1 mention this cycle (20 total), stable. The trend is the story; the mood is yours.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Rowan Pierce (journalist), Media — gained 1 mention this cycle (15 total), cooling, fame 2\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115 vs output/beats/prev/Cultural_Ledger.jsonl @C114\",\"id\":\"F-abe9214133c5\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"Rico Valez gained 1 mention this cycle (20 total); West Oakland moves the most\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-b210ca5d01aa\"},{\"t\":\"FACT\",\"text\":\"Rico Valez — gained 1 mention this cycle (20 total), stable. The trend is the story; the mood is yours.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-f95c867a7977\"},{\"t\":\"FACT\",\"text\":\"Rico Valez (Celebrity), Arts — gained 1 mention this cycle (20 total), stable, fame 4\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115 vs output/beats/prev/Cultural_Ledger.jsonl @C114\",\"id\":\"F-89143f36b83a\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane (A's player), Sports — gained 1 mention this cycle (7 total), cooling, fame 48\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115 vs output/beats/prev/Cultural_Ledger.jsonl @C114\",\"id\":\"F-6f555c4dfe42\"},{\"t\":\"FACT\",\"text\":\"Anthony Raines (Media) — new on the culture record C115\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-b45587998069\"},{\"t\":\"FACT\",\"text\":\"Movement vs C114: West Oakland +19 people, East Oakland +11 people, Jack London +9 people, Rockridge +9 people, Temescal +8 people\",\"src\":\"output/beats/prev/Neighborhood_Demographics.jsonl vs current @C115\",\"id\":\"F-5556ff67d502\"},{\"t\":\"FACT\",\"text\":\"Rowan Pierce — Freelance Writer — Piedmont Ave\",\"src\":\"Simulation_Ledger profile for POP-00545\",\"id\":\"F-2d6b32c4c072\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00545",
+        "name": "Rowan Pierce",
+        "role": "Freelance Writer",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Celeste Tran",
+        "question": "What have you seen, felt, or understood about \"West Oakland's growth and its connection to Oakland's cultural scene\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-trends",
+        "hood": "Fruitvale",
+        "focus": "West Oakland's growth and its connection to Oakland's cultural scene",
+        "src": "output/beats/Cultural_Ledger.jsonl @C115"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Rowan Pierce — Freelance Writer — Piedmont Ave",
+        "evidence": [
+          {
+            "id": "EV-d4bf4ee6e2",
+            "src": "output/beats/Cultural_Ledger.jsonl @C115",
+            "text": "Rico Valez — gained 1 mention this cycle (20 total), stable. The trend is the story; the mood is yours."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Rowan Pierce (journalist), Media — gained 1 mention this cycle (15 total), cooling, fame 2",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115 vs output/beats/prev/Cultural_Ledger.jsonl @C114",
+          "id": "F-abe9214133c5"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C115",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-bc84fc0b7718"
+        },
+        {
+          "t": "FACT",
+          "text": "Rico Valez gained 1 mention this cycle (20 total); West Oakland moves the most",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-b210ca5d01aa"
+        },
+        {
+          "t": "FACT",
+          "text": "Rico Valez — gained 1 mention this cycle (20 total), stable. The trend is the story; the mood is yours.",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-f95c867a7977"
+        },
+        {
+          "t": "FACT",
+          "text": "Rico Valez (Celebrity), Arts — gained 1 mention this cycle (20 total), stable, fame 4",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115 vs output/beats/prev/Cultural_Ledger.jsonl @C114",
+          "id": "F-89143f36b83a"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane (A's player), Sports — gained 1 mention this cycle (7 total), cooling, fame 48",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115 vs output/beats/prev/Cultural_Ledger.jsonl @C114",
+          "id": "F-6f555c4dfe42"
+        },
+        {
+          "t": "FACT",
+          "text": "Anthony Raines (Media) — new on the culture record C115",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-b45587998069"
+        },
+        {
+          "t": "FACT",
+          "text": "Movement vs C114: West Oakland +19 people, East Oakland +11 people, Jack London +9 people, Rockridge +9 people, Temescal +8 people",
+          "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C115",
+          "id": "F-5556ff67d502"
+        },
+        {
+          "t": "FACT",
+          "text": "Rowan Pierce — Freelance Writer — Piedmont Ave",
+          "src": "Simulation_Ledger profile for POP-00545",
+          "id": "F-2d6b32c4c072"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C11, Spring, holiday=none",
+          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+          "id": "F-82d77e9a4a71"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00200",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00200\",\"name\":\"Evan Lewis\",\"role\":\"Bus driver\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Celeste Tran\",\"question\":\"What have you seen, felt, or understood about \\\"West Oakland's growth and its connection to Oakland's cultural scene\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-trends\",\"hood\":\"Fruitvale\",\"focus\":\"West Oakland's growth and its connection to Oakland's cultural scene\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Evan Lewis — Bus driver — Laurel\",\"evidence\":[{\"id\":\"EV-04a2bc50c0\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"text\":\"Rico Valez — gained 1 mention this cycle (20 total), stable. The trend is the story; the mood is yours.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C115\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-bc84fc0b7718\"},{\"t\":\"FACT\",\"text\":\"Rico Valez gained 1 mention this cycle (20 total); West Oakland moves the most\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-b210ca5d01aa\"},{\"t\":\"FACT\",\"text\":\"Rico Valez — gained 1 mention this cycle (20 total), stable. The trend is the story; the mood is yours.\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-f95c867a7977\"},{\"t\":\"FACT\",\"text\":\"Rico Valez (Celebrity), Arts — gained 1 mention this cycle (20 total), stable, fame 4\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115 vs output/beats/prev/Cultural_Ledger.jsonl @C114\",\"id\":\"F-89143f36b83a\"},{\"t\":\"FACT\",\"text\":\"Rowan Pierce (journalist), Media — gained 1 mention this cycle (15 total), cooling, fame 2\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115 vs output/beats/prev/Cultural_Ledger.jsonl @C114\",\"id\":\"F-abe9214133c5\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane (A's player), Sports — gained 1 mention this cycle (7 total), cooling, fame 48\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115 vs output/beats/prev/Cultural_Ledger.jsonl @C114\",\"id\":\"F-6f555c4dfe42\"},{\"t\":\"FACT\",\"text\":\"Anthony Raines (Media) — new on the culture record C115\",\"src\":\"output/beats/Cultural_Ledger.jsonl @C115\",\"id\":\"F-b45587998069\"},{\"t\":\"FACT\",\"text\":\"Movement vs C114: West Oakland +19 people, East Oakland +11 people, Jack London +9 people, Rockridge +9 people, Temescal +8 people\",\"src\":\"output/beats/prev/Neighborhood_Demographics.jsonl vs current @C115\",\"id\":\"F-5556ff67d502\"},{\"t\":\"FACT\",\"text\":\"Evan Lewis — Bus driver — Laurel\",\"src\":\"Simulation_Ledger profile for POP-00200\",\"id\":\"F-de1611829a4e\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C11, Spring, holiday=none\",\"src\":\"output/world_summary_c115.md Calendar context (Simulation_Calendar)\",\"id\":\"F-82d77e9a4a71\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00200",
+        "name": "Evan Lewis",
+        "role": "Bus driver",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Celeste Tran",
+        "question": "What have you seen, felt, or understood about \"West Oakland's growth and its connection to Oakland's cultural scene\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-trends",
+        "hood": "Fruitvale",
+        "focus": "West Oakland's growth and its connection to Oakland's cultural scene",
+        "src": "output/beats/Cultural_Ledger.jsonl @C115"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Evan Lewis — Bus driver — Laurel",
+        "evidence": [
+          {
+            "id": "EV-04a2bc50c0",
+            "src": "output/beats/Cultural_Ledger.jsonl @C115",
+            "text": "Rico Valez — gained 1 mention this cycle (20 total), stable. The trend is the story; the mood is yours."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C115",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-bc84fc0b7718"
+        },
+        {
+          "t": "FACT",
+          "text": "Rico Valez gained 1 mention this cycle (20 total); West Oakland moves the most",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-b210ca5d01aa"
+        },
+        {
+          "t": "FACT",
+          "text": "Rico Valez — gained 1 mention this cycle (20 total), stable. The trend is the story; the mood is yours.",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-f95c867a7977"
+        },
+        {
+          "t": "FACT",
+          "text": "Rico Valez (Celebrity), Arts — gained 1 mention this cycle (20 total), stable, fame 4",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115 vs output/beats/prev/Cultural_Ledger.jsonl @C114",
+          "id": "F-89143f36b83a"
+        },
+        {
+          "t": "FACT",
+          "text": "Rowan Pierce (journalist), Media — gained 1 mention this cycle (15 total), cooling, fame 2",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115 vs output/beats/prev/Cultural_Ledger.jsonl @C114",
+          "id": "F-abe9214133c5"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane (A's player), Sports — gained 1 mention this cycle (7 total), cooling, fame 48",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115 vs output/beats/prev/Cultural_Ledger.jsonl @C114",
+          "id": "F-6f555c4dfe42"
+        },
+        {
+          "t": "FACT",
+          "text": "Anthony Raines (Media) — new on the culture record C115",
+          "src": "output/beats/Cultural_Ledger.jsonl @C115",
+          "id": "F-b45587998069"
+        },
+        {
+          "t": "FACT",
+          "text": "Movement vs C114: West Oakland +19 people, East Oakland +11 people, Jack London +9 people, Rockridge +9 people, Temescal +8 people",
+          "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C115",
+          "id": "F-5556ff67d502"
+        },
+        {
+          "t": "FACT",
+          "text": "Evan Lewis — Bus driver — Laurel",
+          "src": "Simulation_Ledger profile for POP-00200",
+          "id": "F-de1611829a4e"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C11, Spring, holiday=none",
+          "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+          "id": "F-82d77e9a4a71"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  }
+]

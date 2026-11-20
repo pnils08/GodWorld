@@ -1,0 +1,27 @@
+{
+  "status": "arc-seed",
+  "cycle": "116",
+  "desk": "civic",
+  "persona": "trevor-shimizu",
+  "hood": null,
+  "quotes": [
+    {
+      "pop": "POP-00617",
+      "name": "Eleanor Rivera",
+      "quote": "Honestly, from the booth, a five-point drop on a crowded day doesn't read as people leaving the station. It reads as people arriving later, all at once. You see the platforms fill up in waves instead of a steady stream, and that's when the dwell time stretches — the trains are there, but everyone's squeezing on at the same time, doors cycle slower, and the whole rhythm backs up. The ledger shows the number that got on. What it doesn't show is the crowd that's still on the platform when the doors close, waiting for the next one. That's not a loss — that's a delay that shows up in the next train's count."
+    },
+    {
+      "pop": "POP-01039",
+      "name": "Ximena Mehta",
+      "quote": "Honestly, when I see 12th Street drop like that on a mild week with stuff going on downtown, I don't read it as people not wanting to ride. I read it as people finding another way to get where they're going. That congestion number is low enough that driving doesn't feel like a punishment yet. And the fact that Coliseum and Fruitvale went up? That tells me the riders are still out there, they're just moving to the stations that connect to their actual lives — the East Oakland events, the hub work at Fruitvale. From the platform, what I see is that downtown is a destination, but it's not the only one anymore. People are spreading out, and BART's job is to make sure we're where they're going next, not just where they used to go."
+    },
+    {
+      "pop": "POP-01053",
+      "name": "Rosario Medina",
+      "quote": "I can tell you what I see from the platform at Fruitvale, and it's not the same picture downtown is painting. The riders I see every day are the ones who live here — the folks who need this hub to get to work, to get their kids to school, to get to the doctor. The Visioning phase being done doesn't change that; it just means we finally put names to what we already knew. Downtown shedding riders while we gain? That's not a mystery to me. That's a different population with different options. The people on my platform don't have the luxury of working from home or driving in when the weather's mild. They're here because this is the line that gets them where they need to go. The ledger can show numbers going up and down, but it can't show the woman with three bags of groceries who just made the transfer, or the kid with a backpack who's heading to a job training session at St. Esperanza. That's who's using this station. And that's who the city needs to keep in mind when they talk about what's working and what's not."
+    }
+  ],
+  "claim": "Honestly, from the booth, a five-point drop on a crowded day doesn't read as people leaving the station. It reads as people arriving later, all at once. You see the platforms fill up in waves instead of a steady stream, and that's when the dwell time stretches — the trains are there, but everyone's squeezing on at the same time, doors cycle slower, and the whole rhythm backs up. The ledger shows the number that got on. What it doesn't show is the crowd that's still on the platform when the doors close, waiting for the next one. That's not a loss — that's a delay that shows up in the next train's count.",
+  "src": "citizenVoice PRESS c116",
+  "ranAt": "2026-11-16T19:17:50.243Z"
+}

@@ -1,0 +1,443 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00057",
+    "name": "Sgt. Rachel Torres",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Downtown logged the most incidents (8) | 22 neighborhoods on the table — what the table says and who answers for it",
+    "approach": "Public-safety approach: this slice is the crime table for every neighborhood — incidents, response time, clearance — the public-safety staff on the roster, the court record (who was charged, what the court did, what it cost them) and the custody trail from charges to arrests to who is held, hood by hood. Measured, third person, incident structure and classification gaps. The numbers, the officials and the defendants are real; the block, the call, the aftermath are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "public-safety",
+      "hood": "Downtown",
+      "facts": [
+        "125 incidents across 22 neighborhoods; most in Downtown 8, Grand Lake 7, Lake Merritt 7, Fruitvale 6, Eastlake 6; fewest in Adams Point 5, Jack London 5, Chinatown 4",
+        "Downtown: 8 incidents (+3 vs C115), response 10.1 min, clearance 20%, property index 37, violent index 20",
+        "Slowest response: Jack London: 5 incidents (-1 vs C115), response 10.9 min, clearance 22%, property index 37, violent index 22",
+        "Moved this cycle — rising: Grand Lake; easing: none",
+        "Citywide custody this cycle: 24 arrests (0 tracked, 24 other residents); 48 in custody at the close; 43 left",
+        "Grand Lake: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "Downtown: 8 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "San Antonio: 5 charges → 1 arrest → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "Adams Point: 5 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "Baylight District: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked"
+      ],
+      "priorCycle": "PRIOR_CYCLE_ON_DISK",
+      "note": "desk-signal incident rows attached as pointers (5)",
+      "engineHooks": [],
+      "roomIsYours": "the corner after the call, the dispatcher's pause, who was on the porch, what the neighborhood watch captain saw first",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF",
+    "runningStoriesNote": "signal.runningStories are events the city is already living through and where each one stands. Background only — write nothing about tracking them."
+  },
+  "signal": {
+    "kind": "beat-safety",
+    "hood": "Downtown",
+    "src": "output/beats/Crime_Metrics.jsonl @C116",
+    "plan": {
+      "focus": "The gap between Downtown's incident count and its clearance rate, and who answers for it across the 22-neighborhood table."
+    },
+    "runningStories": [
+      "The Downtown Transit Snarl [Downtown] — decline, week 3",
+      "West Oakland Stabilization Fund — disbursement-active [West Oakland] — under way",
+      "Oakland Alternative Response Initiative — dispatch-live [West Oakland, Fruitvale, East Oakland] — under way",
+      "Fruitvale Transit Hub Phase II — Visioning — complete [Fruitvale] — under way",
+      "Temescal Community Health Center — operational [Temescal] — under way",
+      "Baylight District — Final Council Vote — complete [Jack London, Downtown] — under way",
+      "Oakland Youth Apprenticeship Pipeline — implementation-active [West Oakland, East Oakland, Fruitvale] — under way",
+      "Downtown Economic Revitalization — vote-scheduled [Downtown] — under way",
+      "Commercial Stabilization for Grand Lake — vote-scheduled [Grand Lake] — under way",
+      "West Oakland Tenant Defense Fund — vote-scheduled [West Oakland] — under way",
+      "Ivy Hill Revitalization Initiative — announced [Ivy Hill] — under way",
+      "Dimond Revitalization Initiative — announced [Dimond] — under way",
+      "Ivy Hill Community Revitalization — announced [Ivy Hill] — under way",
+      "Ivy Hill Community Support Initiative — vote-scheduled [Ivy Hill] — under way",
+      "Laurel Neighborhood Patch and Clean-Up — announced [Laurel] — under way",
+      "Fruitvale Transit Hub Phase II — Visioning — design-phase [Fruitvale] — ENDED this week; now complete",
+      "Baylight District — Final Council Vote — construction-active [Jack London, Downtown] — ENDED this week; now complete",
+      "West Oakland Tenant Defense Fund — announced [West Oakland] — ENDED this week; now vote-scheduled",
+      "Commercial Stabilization for Grand Lake — vote-ready [Grand Lake] — ENDED this week; now vote-scheduled",
+      "Ivy Hill Community Support Initiative — announced [Ivy Hill] — ENDED this week; now vote-scheduled"
+    ]
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00136",
+        "name": "Rafael Montez",
+        "profile": "Rafael Montez — Police Chief — Oakland Police Department",
+        "quotationEligible": false,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00137",
+        "name": "Kimberly Cho",
+        "profile": "Kimberly Cho — DEPUTY CHIEF OF OPERATIONS — Oakland Police Department",
+        "quotationEligible": false,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-01141",
+        "name": "Dolores Nwachukwu",
+        "profile": "Dolores Nwachukwu — Police Captain — Oakland Police Department",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-01141-2aeae3204c",
+        "pop": "POP-01141",
+        "name": "Dolores Nwachukwu",
+        "quote": "Downtown's number being the highest doesn't surprise me — it's a busy corridor with a lot of foot traffic and storefronts, and that's where a lot of the petty stuff gets reported. The clearance rate is a different problem. We're stretched thin, and a lot of those cases are property crimes where there's no witness and no easy lead. Two arrests out of eight incidents — that's not a failure of effort, it's a reality of the caseload. We're doing what we can with the staff we have, and I'd rather be honest about that than pretend otherwise.",
+        "factIds": [
+          "F-aab638a9fd42",
+          "F-826a5a5ce305"
+        ],
+        "src": "packet.W2[POP-01141]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "A neighborhood watch captain near Downtown mentioned the corner where calls seem to stack up after 10 p.m. — worth checking whether the incident rows cluster by time of day.",
+        "usable": false
+      },
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "A dispatcher's pause after a Downtown call suggested the unit assignment took longer than the 10.1-minute average — worth verifying whether response times vary by shift.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C116",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-871096fd8925"
+    },
+    {
+      "t": "FACT",
+      "text": "Downtown logged the most incidents (8) | 22 neighborhoods on the table",
+      "src": "output/beats/Crime_Metrics.jsonl @C116",
+      "id": "F-aab638a9fd42"
+    },
+    {
+      "t": "FACT",
+      "text": "Downtown leads the incident count; Jack London waits longest for a response; 48 in custody citywide; 39 public-safety staff on the roster.",
+      "src": "output/beats/Crime_Metrics.jsonl @C116",
+      "id": "F-ebf70137eaea"
+    },
+    {
+      "t": "FACT",
+      "text": "125 incidents across 22 neighborhoods; most in Downtown 8, Grand Lake 7, Lake Merritt 7, Fruitvale 6, Eastlake 6; fewest in Adams Point 5, Jack London 5, Chinatown 4",
+      "src": "output/beats/Crime_Metrics.jsonl @C116",
+      "id": "F-31d4f44809f2"
+    },
+    {
+      "t": "FACT",
+      "text": "Downtown: 8 incidents (+3 vs C115), response 10.1 min, clearance 20%, property index 37, violent index 20",
+      "src": "output/beats/Crime_Metrics.jsonl @C116",
+      "id": "F-826a5a5ce305"
+    },
+    {
+      "t": "FACT",
+      "text": "Slowest response: Jack London: 5 incidents (-1 vs C115), response 10.9 min, clearance 22%, property index 37, violent index 22",
+      "src": "output/beats/Crime_Metrics.jsonl @C116",
+      "id": "F-c41499e47fe8"
+    },
+    {
+      "t": "FACT",
+      "text": "Moved this cycle — rising: Grand Lake; easing: none",
+      "src": "output/beats/Crime_Metrics.jsonl @C116",
+      "id": "F-7be042c7340c"
+    },
+    {
+      "t": "FACT",
+      "text": "Citywide custody this cycle: 24 arrests (0 tracked, 24 other residents); 48 in custody at the close; 43 left",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C116 city",
+      "id": "F-9a56ec2b9631"
+    },
+    {
+      "t": "FACT",
+      "text": "Grand Lake: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C116 Grand Lake",
+      "id": "F-1de9791d954c"
+    },
+    {
+      "t": "FACT",
+      "text": "Downtown: 8 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C116 Downtown",
+      "id": "F-714cb54f0873"
+    },
+    {
+      "t": "FACT",
+      "text": "San Antonio: 5 charges → 1 arrest → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C116 San Antonio",
+      "id": "F-76ee65897ce4"
+    },
+    {
+      "t": "FACT",
+      "text": "Adams Point: 5 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C116 Adams Point",
+      "id": "F-5464003db01a"
+    },
+    {
+      "t": "FACT",
+      "text": "Baylight District: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl judicial @C116 Baylight District",
+      "id": "F-68af7763408a"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+      "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+      "id": "F-647fd9067a33"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "rachel-public-safety-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Trace one Packet-backed public-safety incident, classification gap, or OARI response question without sensationalism or invented case detail.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "measured third-person public-safety reporting",
+      "targetWords": "500-800",
+      "opening": "a Packet-backed safety signal, place, or resident consequence"
+    },
+    "authorizedTexture": [
+      "unnamed restrained scene texture with no incident facts",
+      "analysis of a supplied classification or response gap",
+      "a practical close limited to the supplied record"
+    ],
+    "textureConditions": [
+      "every named person, institution, incident, agency, number, and date must come from the Packet",
+      "do not claim an interview, observation, quote, fear, trend, or response metric absent from the Packet",
+      "crime or safety interpretation must remain framed as analysis when not a supplied fact"
+    ],
+    "canonBlockers": [
+      "invented incident, arrest, officer, case, quote, clearance, response time, or agency action",
+      "unsupported crime classification or collective fear claim",
+      "raw engine labels or decimals as public-facing evidence",
+      "a named person or institution not supplied by the Packet"
+    ]
+  },
+  "manifest": {
+    "id": "AM-92371617c87e",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-871096fd8925",
+        "t": "FACT",
+        "text": "Current cycle: C116",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-aab638a9fd42",
+        "t": "FACT",
+        "text": "Downtown logged the most incidents (8) | 22 neighborhoods on the table",
+        "src": "output/beats/Crime_Metrics.jsonl @C116"
+      },
+      {
+        "id": "F-ebf70137eaea",
+        "t": "FACT",
+        "text": "Downtown leads the incident count; Jack London waits longest for a response; 48 in custody citywide; 39 public-safety staff on the roster.",
+        "src": "output/beats/Crime_Metrics.jsonl @C116"
+      },
+      {
+        "id": "F-31d4f44809f2",
+        "t": "FACT",
+        "text": "125 incidents across 22 neighborhoods; most in Downtown 8, Grand Lake 7, Lake Merritt 7, Fruitvale 6, Eastlake 6; fewest in Adams Point 5, Jack London 5, Chinatown 4",
+        "src": "output/beats/Crime_Metrics.jsonl @C116"
+      },
+      {
+        "id": "F-826a5a5ce305",
+        "t": "FACT",
+        "text": "Downtown: 8 incidents (+3 vs C115), response 10.1 min, clearance 20%, property index 37, violent index 20",
+        "src": "output/beats/Crime_Metrics.jsonl @C116"
+      },
+      {
+        "id": "F-c41499e47fe8",
+        "t": "FACT",
+        "text": "Slowest response: Jack London: 5 incidents (-1 vs C115), response 10.9 min, clearance 22%, property index 37, violent index 22",
+        "src": "output/beats/Crime_Metrics.jsonl @C116"
+      },
+      {
+        "id": "F-7be042c7340c",
+        "t": "FACT",
+        "text": "Moved this cycle — rising: Grand Lake; easing: none",
+        "src": "output/beats/Crime_Metrics.jsonl @C116"
+      },
+      {
+        "id": "F-9a56ec2b9631",
+        "t": "FACT",
+        "text": "Citywide custody this cycle: 24 arrests (0 tracked, 24 other residents); 48 in custody at the close; 43 left",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C116 city"
+      },
+      {
+        "id": "F-1de9791d954c",
+        "t": "FACT",
+        "text": "Grand Lake: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C116 Grand Lake"
+      },
+      {
+        "id": "F-714cb54f0873",
+        "t": "FACT",
+        "text": "Downtown: 8 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C116 Downtown"
+      },
+      {
+        "id": "F-76ee65897ce4",
+        "t": "FACT",
+        "text": "San Antonio: 5 charges → 1 arrest → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C116 San Antonio"
+      },
+      {
+        "id": "F-5464003db01a",
+        "t": "FACT",
+        "text": "Adams Point: 5 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C116 Adams Point"
+      },
+      {
+        "id": "F-68af7763408a",
+        "t": "FACT",
+        "text": "Baylight District: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C116 Baylight District"
+      },
+      {
+        "id": "F-647fd9067a33",
+        "t": "FACT",
+        "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+        "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-01141-2aeae3204c",
+        "speakerId": "POP-01141",
+        "speakerName": "Dolores Nwachukwu",
+        "text": "Downtown's number being the highest doesn't surprise me — it's a busy corridor with a lot of foot traffic and storefronts, and that's where a lot of the petty stuff gets reported. The clearance rate is a different problem. We're stretched thin, and a lot of those cases are property crimes where there's no witness and no easy lead. Two arrests out of eight incidents — that's not a failure of effort, it's a reality of the caseload. We're doing what we can with the staff we have, and I'd rather be honest about that than pretend otherwise.",
+        "factIds": [
+          "F-aab638a9fd42",
+          "F-826a5a5ce305"
+        ],
+        "src": "packet.W2[POP-01141]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00136",
+        "name": "Rafael Montez",
+        "profile": "Rafael Montez — Police Chief — Oakland Police Department",
+        "src": "packet.W1.exposure",
+        "quotationEligible": false
+      },
+      {
+        "id": "POP-00137",
+        "name": "Kimberly Cho",
+        "profile": "Kimberly Cho — DEPUTY CHIEF OF OPERATIONS — Oakland Police Department",
+        "src": "packet.W1.exposure",
+        "quotationEligible": false
+      },
+      {
+        "id": "POP-01141",
+        "name": "Dolores Nwachukwu",
+        "profile": "Dolores Nwachukwu — Police Captain — Oakland Police Department",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "A neighborhood watch captain near Downtown mentioned the corner where calls seem to stack up after 10 p.m. — worth checking whether the incident rows cluster by time of day.",
+        "publishable": false
+      },
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "A dispatcher's pause after a Downtown call suggested the unit assignment took longer than the 10.1-minute average — worth verifying whether response times vary by shift.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "unnamed restrained scene texture with no incident facts",
+      "analysis of a supplied classification or response gap",
+      "a practical close limited to the supplied record"
+    ],
+    "textureConditions": [
+      "every named person, institution, incident, agency, number, and date must come from the Packet",
+      "do not claim an interview, observation, quote, fear, trend, or response metric absent from the Packet",
+      "crime or safety interpretation must remain framed as analysis when not a supplied fact"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

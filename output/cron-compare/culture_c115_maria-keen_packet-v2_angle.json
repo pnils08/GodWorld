@@ -1,0 +1,1150 @@
+{
+  "stage": "angle",
+  "desk": "culture",
+  "cycle": "115",
+  "persona": "maria-keen",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00013",
+      "name": "Maria Keen",
+      "role": "desk reporter",
+      "desk": "culture"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Uptown — the programs that hold the block and the people who founded them",
+      "approach": "Neighborhood approach: this slice is one block's record — its community programs and their founders, who is moving in or out, who the block has in a hospital bed or in custody, what it paid on tax day, whose debts crossed the line, and the city's neighborhood hooks this cycle. First-person witness, one block one truth. The programs, founders, movement numbers, patients, defendants and money lines are real; the stoop conversations, the mailboxes, the dog everyone knows are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "neighborhood",
+        "hood": "Uptown",
+        "facts": [
+          "Oakland Sound Archive (arts), Uptown, since C101",
+          "Uptown this cycle: 63 students, 506 adults, 65 seniors — moved vs C114: +1 adults",
+          "Uptown: 7 charges → 1 arrest → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+          "Uptown: 21 sick residents → 0 admissions → 0 in care at the close (0 tracked, 0 other residents) → 0 beds occupied; tracked: none tracked"
+        ],
+        "priorCycle": "PRIOR_CYCLE_ON_DISK",
+        "note": "no program founder in Uptown resolves on the ledger",
+        "engineHooks": [
+          "Household dissolved in Lake Merritt due to economic hardship (observational analysis)",
+          "Household in Lake Merritt spending 53% of income on housing (observational analysis)",
+          "defaulted on the debts — the savings are gone and the record carries it (observational analysis)",
+          "defaulted on the debts — the savings are gone and the record carries it (observational analysis)"
+        ],
+        "roomIsYours": "the stoop, the corner store counter, who moved in last month and who is thinking about leaving, what the block argues about",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-neighborhood",
+      "hood": "Uptown",
+      "score": null,
+      "src": "output/beats/Community_Programs.jsonl @C115",
+      "nearby": [
+        {
+          "text": "Grand Lake neighborhood texture — how residents experience the improvement | Residents of Grand Lake feel the change firsthand.",
+          "src": "output/engine_audit_c115.json patterns[9]; evidence: Initiative_Tracker row(s) 9; storyline INIT-009:vote-ready"
+        },
+        {
+          "text": "Adams Point | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c115.md \"### Adams Point\"; events: world_summary_c115.md \"## World Events\""
+        },
+        {
+          "text": "Chinatown | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c115.md \"### Chinatown\"; events: world_summary_c115.md \"## World Events\""
+        },
+        {
+          "text": "Downtown | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c115.md \"### Downtown\"; events: world_summary_c115.md \"## World Events\""
+        },
+        {
+          "text": "East Oakland | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c115.md \"### East Oakland\"; events: world_summary_c115.md \"## World Events\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00302",
+          "name": "Toto Foto",
+          "profile": "Toto Foto — Theater Director",
+          "role": "Theater Director",
+          "hood": "Uptown",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 115,
+            "tag": "Lifestyle-Outabout-Up-S",
+            "line": "Y3C11 — [Lifestyle-Outabout-Up-S] browsed a busy weekend market in Uptown",
+            "highlightKind": "hood",
+            "entity": "Uptown",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00136",
+          "name": "Rafael Montez",
+          "profile": "Rafael Montez — Police Chief",
+          "role": "Police Chief",
+          "hood": "Piedmont Ave",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "NMgMA9wE1e3VQL6ZBMJQVM",
+            "customId": "cp-POP-00136-c114-PRESS-tue-epjbdd",
+            "cycle": 114,
+            "excerpt": "Uptown had the most incidents this cycle, and a 26% clearance rate means we're not closing enough of them.",
+            "highlightKind": "hood",
+            "entity": "Uptown",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00141",
+          "name": "Priya Narang",
+          "profile": "Priya Narang — EMS DIRECTOR",
+          "role": "EMS DIRECTOR",
+          "hood": "Uptown",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "Uo8istBtpPTbDUNhGNQniY",
+            "customId": "cp-POP-00141-c113-PRESS",
+            "cycle": 113,
+            "excerpt": "The A's winning season is a big deal for us in Uptown.",
+            "highlightKind": "hood",
+            "entity": "Uptown",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00182",
+          "name": "Jorry Cula",
+          "profile": "Jorry Cula — Record Shop Owner",
+          "role": "Record Shop Owner",
+          "hood": "Uptown",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "Zmc2FCDGFUUYLGebxgFEUj",
+            "customId": "cp-POP-00182-c100-morning",
+            "cycle": 100,
+            "excerpt": "I still see her around Uptown sometimes, and we’ll nod or chat, but it’s not the same.",
+            "highlightKind": "hood",
+            "entity": "Uptown",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00248",
+          "name": "Joaquín Nakamura",
+          "profile": "Joaquín Nakamura — Kombucha Brewer",
+          "role": "Kombucha Brewer",
+          "hood": "Uptown",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "nep9kCyRTr2PXHT1kVGCfN",
+            "customId": "cp-POP-00248-c103-evening",
+            "cycle": 103,
+            "excerpt": "And damn, the A’s are killing it this season—makes me wonder what it’d be like to have that kind of momentum in Uptown.",
+            "highlightKind": "hood",
+            "entity": "Uptown",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00263",
+          "name": "Omar Amici",
+          "profile": "Omar Amici — Construction laborer",
+          "role": "Construction laborer",
+          "hood": "Uptown",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "CXtLMrqJ2vjPqDMBq32T1v",
+            "customId": "cp-POP-00263-c114-PRESS-sat-hneglg",
+            "cycle": 114,
+            "excerpt": "To be honest, the changes in Uptown have me feeling a bit uneasy.",
+            "highlightKind": "hood",
+            "entity": "Uptown",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00271",
+          "name": "Luca Petrov",
+          "profile": "Luca Petrov — Dance Choreographer",
+          "role": "Dance Choreographer",
+          "hood": "Uptown",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "vkZn2bYMgw6B7RuDHEsfa9",
+            "customId": "cp-POP-00271-c100-morning",
+            "cycle": 100,
+            "excerpt": "Uptown’s nightlife keeps me buzzing, but sometimes I wonder if I’m just chasing the noise so I don’t have to hear myself think.",
+            "highlightKind": "hood",
+            "entity": "Uptown",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00279",
+          "name": "Mac Hillie",
+          "profile": "Mac Hillie — Bakery worker",
+          "role": "Bakery worker",
+          "hood": "Uptown",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "5Go2WSKRL59oynQ77KKAHb",
+            "customId": "cp-POP-00279-c113-PRESS",
+            "cycle": 113,
+            "excerpt": "To be honest, reconnecting with my old friend hasn't had much to do with my new living situation in Uptown.",
+            "highlightKind": "hood",
+            "entity": "Uptown",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00346",
+          "name": "Ingmar Jordan",
+          "profile": "Ingmar Jordan — Spoken Word Poet",
+          "role": "Spoken Word Poet",
+          "hood": "Uptown",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "iJten4pvwGKmXgz2gkgYey",
+            "customId": "cp-POP-00346-c113-PRESS",
+            "cycle": 113,
+            "excerpt": "I don't know if my losses on the book have affected my views on the changes, I just feel like it's all part of the bigger picture of Uptown evolving.",
+            "highlightKind": "hood",
+            "entity": "Uptown",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00847",
+          "name": "Caroline Cabrera",
+          "profile": "Caroline Cabrera — After-School Program Director",
+          "role": "After-School Program Director",
+          "hood": "Uptown",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "5KTkk5g7iQD2bLE5x6VT2P",
+            "customId": "cp-POP-00847-c107-PRESS",
+            "cycle": 107,
+            "excerpt": "Look, I work with kids every day in Uptown, and what I see is that numbers don't always tell the whole story.",
+            "highlightKind": "hood",
+            "entity": "Uptown",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-01056",
+          "name": "Theo Banks",
+          "profile": "Theo Banks — rapper",
+          "role": "rapper",
+          "hood": "Uptown",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "JJiqyuj9Jbj95nZ9UTYUvy",
+            "customId": "cp-POP-01056-c110-PRESS",
+            "cycle": 110,
+            "excerpt": "I'm over in Uptown, so I don't really get out that way too often.",
+            "highlightKind": "hood",
+            "entity": "Uptown",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-01141",
+          "name": "Dolores Nwachukwu",
+          "profile": "Dolores Nwachukwu — Police Captain",
+          "role": "Police Captain",
+          "hood": "West Oakland",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "amzX8TR6mdcYGxeoeBGMWD",
+            "customId": "cp-POP-01141-c114-PRESS-tue-bephnb",
+            "cycle": 114,
+            "excerpt": "I can tell you that Uptown's number being the highest doesn't surprise me — it's a busy corridor with a lot of foot traffic and storefronts, and that's where a lot of the petty stuff gets reported.",
+            "highlightKind": "hood",
+            "entity": "Uptown",
+            "predicate": "observe"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C115",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-bc84fc0b7718"
+      },
+      {
+        "t": "FACT",
+        "text": "Uptown: 1 active program on the record",
+        "src": "output/beats/Community_Programs.jsonl @C115",
+        "id": "F-2ca6744ca287"
+      },
+      {
+        "t": "FACT",
+        "text": "1 active programs in Uptown; no founder is on the ledger — the block is yours.",
+        "src": "output/beats/Community_Programs.jsonl @C115",
+        "id": "F-43acabf62f87"
+      },
+      {
+        "t": "FACT",
+        "text": "Oakland Sound Archive (arts), Uptown, since C101",
+        "src": "output/beats/Community_Programs.jsonl @C115 PRG-012",
+        "id": "F-7777f25e51d7"
+      },
+      {
+        "t": "FACT",
+        "text": "Uptown this cycle: 63 students, 506 adults, 65 seniors — moved vs C114: +1 adults",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C115 vs prev/",
+        "id": "F-766e5fe60c18"
+      },
+      {
+        "t": "FACT",
+        "text": "Uptown: 7 charges → 1 arrest → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl @C115 judicial Uptown",
+        "id": "F-f85e5439e439"
+      },
+      {
+        "t": "FACT",
+        "text": "Uptown: 21 sick residents → 0 admissions → 0 in care at the close (0 tracked, 0 other residents) → 0 beds occupied; tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl @C115 hospital Uptown",
+        "id": "F-0c0a53ddc16e"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ]
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "street",
+    "candidates": [
+      {
+        "pop": "POP-00302",
+        "name": "Toto Foto",
+        "role": "Theater Director",
+        "hood": "Uptown",
+        "profile": "Toto Foto — Theater Director",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 115,
+          "tag": "Lifestyle-Outabout-Up-S",
+          "line": "Y3C11 — [Lifestyle-Outabout-Up-S] browsed a busy weekend market in Uptown",
+          "highlightKind": "hood",
+          "entity": "Uptown",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C11 — [Lifestyle-Outabout-Up-S] browsed a busy weekend market in Uptown"
+      },
+      {
+        "pop": "POP-00136",
+        "name": "Rafael Montez",
+        "role": "Police Chief",
+        "hood": "Piedmont Ave",
+        "profile": "Rafael Montez — Police Chief",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "NMgMA9wE1e3VQL6ZBMJQVM",
+          "customId": "cp-POP-00136-c114-PRESS-tue-epjbdd",
+          "cycle": 114,
+          "excerpt": "Uptown had the most incidents this cycle, and a 26% clearance rate means we're not closing enough of them.",
+          "highlightKind": "hood",
+          "entity": "Uptown",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "Uptown had the most incidents this cycle, and a 26% clearance rate means we're not closing enough of them."
+      },
+      {
+        "pop": "POP-00141",
+        "name": "Priya Narang",
+        "role": "EMS DIRECTOR",
+        "hood": "Uptown",
+        "profile": "Priya Narang — EMS DIRECTOR",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "Uo8istBtpPTbDUNhGNQniY",
+          "customId": "cp-POP-00141-c113-PRESS",
+          "cycle": 113,
+          "excerpt": "The A's winning season is a big deal for us in Uptown.",
+          "highlightKind": "hood",
+          "entity": "Uptown",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "The A's winning season is a big deal for us in Uptown."
+      },
+      {
+        "pop": "POP-00182",
+        "name": "Jorry Cula",
+        "role": "Record Shop Owner",
+        "hood": "Uptown",
+        "profile": "Jorry Cula — Record Shop Owner",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "Zmc2FCDGFUUYLGebxgFEUj",
+          "customId": "cp-POP-00182-c100-morning",
+          "cycle": 100,
+          "excerpt": "I still see her around Uptown sometimes, and we’ll nod or chat, but it’s not the same.",
+          "highlightKind": "hood",
+          "entity": "Uptown",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I still see her around Uptown sometimes, and we’ll nod or chat, but it’s not the same."
+      },
+      {
+        "pop": "POP-00248",
+        "name": "Joaquín Nakamura",
+        "role": "Kombucha Brewer",
+        "hood": "Uptown",
+        "profile": "Joaquín Nakamura — Kombucha Brewer",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "nep9kCyRTr2PXHT1kVGCfN",
+          "customId": "cp-POP-00248-c103-evening",
+          "cycle": 103,
+          "excerpt": "And damn, the A’s are killing it this season—makes me wonder what it’d be like to have that kind of momentum in Uptown.",
+          "highlightKind": "hood",
+          "entity": "Uptown",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "And damn, the A’s are killing it this season—makes me wonder what it’d be like to have that kind of momentum in Uptown."
+      },
+      {
+        "pop": "POP-00263",
+        "name": "Omar Amici",
+        "role": "Construction laborer",
+        "hood": "Uptown",
+        "profile": "Omar Amici — Construction laborer",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "CXtLMrqJ2vjPqDMBq32T1v",
+          "customId": "cp-POP-00263-c114-PRESS-sat-hneglg",
+          "cycle": 114,
+          "excerpt": "To be honest, the changes in Uptown have me feeling a bit uneasy.",
+          "highlightKind": "hood",
+          "entity": "Uptown",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "To be honest, the changes in Uptown have me feeling a bit uneasy."
+      },
+      {
+        "pop": "POP-00271",
+        "name": "Luca Petrov",
+        "role": "Dance Choreographer",
+        "hood": "Uptown",
+        "profile": "Luca Petrov — Dance Choreographer",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "vkZn2bYMgw6B7RuDHEsfa9",
+          "customId": "cp-POP-00271-c100-morning",
+          "cycle": 100,
+          "excerpt": "Uptown’s nightlife keeps me buzzing, but sometimes I wonder if I’m just chasing the noise so I don’t have to hear myself think.",
+          "highlightKind": "hood",
+          "entity": "Uptown",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "Uptown’s nightlife keeps me buzzing, but sometimes I wonder if I’m just chasing the noise so I don’t have to hear myself think."
+      },
+      {
+        "pop": "POP-00279",
+        "name": "Mac Hillie",
+        "role": "Bakery worker",
+        "hood": "Uptown",
+        "profile": "Mac Hillie — Bakery worker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "5Go2WSKRL59oynQ77KKAHb",
+          "customId": "cp-POP-00279-c113-PRESS",
+          "cycle": 113,
+          "excerpt": "To be honest, reconnecting with my old friend hasn't had much to do with my new living situation in Uptown.",
+          "highlightKind": "hood",
+          "entity": "Uptown",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "To be honest, reconnecting with my old friend hasn't had much to do with my new living situation in Uptown."
+      },
+      {
+        "pop": "POP-00346",
+        "name": "Ingmar Jordan",
+        "role": "Spoken Word Poet",
+        "hood": "Uptown",
+        "profile": "Ingmar Jordan — Spoken Word Poet",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "iJten4pvwGKmXgz2gkgYey",
+          "customId": "cp-POP-00346-c113-PRESS",
+          "cycle": 113,
+          "excerpt": "I don't know if my losses on the book have affected my views on the changes, I just feel like it's all part of the bigger picture of Uptown evolving.",
+          "highlightKind": "hood",
+          "entity": "Uptown",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I don't know if my losses on the book have affected my views on the changes, I just feel like it's all part of the bigger picture of Uptown evolving."
+      },
+      {
+        "pop": "POP-00847",
+        "name": "Caroline Cabrera",
+        "role": "After-School Program Director",
+        "hood": "Uptown",
+        "profile": "Caroline Cabrera — After-School Program Director",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "5KTkk5g7iQD2bLE5x6VT2P",
+          "customId": "cp-POP-00847-c107-PRESS",
+          "cycle": 107,
+          "excerpt": "Look, I work with kids every day in Uptown, and what I see is that numbers don't always tell the whole story.",
+          "highlightKind": "hood",
+          "entity": "Uptown",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "Look, I work with kids every day in Uptown, and what I see is that numbers don't always tell the whole story."
+      },
+      {
+        "pop": "POP-01056",
+        "name": "Theo Banks",
+        "role": "rapper",
+        "hood": "Uptown",
+        "profile": "Theo Banks — rapper",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "JJiqyuj9Jbj95nZ9UTYUvy",
+          "customId": "cp-POP-01056-c110-PRESS",
+          "cycle": 110,
+          "excerpt": "I'm over in Uptown, so I don't really get out that way too often.",
+          "highlightKind": "hood",
+          "entity": "Uptown",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I'm over in Uptown, so I don't really get out that way too often."
+      },
+      {
+        "pop": "POP-01141",
+        "name": "Dolores Nwachukwu",
+        "role": "Police Captain",
+        "hood": "West Oakland",
+        "profile": "Dolores Nwachukwu — Police Captain",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "amzX8TR6mdcYGxeoeBGMWD",
+          "customId": "cp-POP-01141-c114-PRESS-tue-bephnb",
+          "cycle": 114,
+          "excerpt": "I can tell you that Uptown's number being the highest doesn't surprise me — it's a busy corridor with a lot of foot traffic and storefronts, and that's where a lot of the petty stuff gets reported.",
+          "highlightKind": "hood",
+          "entity": "Uptown",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I can tell you that Uptown's number being the highest doesn't surprise me — it's a busy corridor with a lot of foot traffic and storefronts, and that's where a lot of the petty stuff gets reported."
+      },
+      {
+        "pop": "POP-01142",
+        "name": "Tomas Reinholt",
+        "role": "Police Lieutenant",
+        "hood": "Laurel",
+        "profile": "Tomas Reinholt — Police Lieutenant",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "cQvWUrh6ikTRUueY3wNbzT",
+          "customId": "cp-POP-01142-c114-PRESS-tue-gjdmcj",
+          "cycle": 114,
+          "excerpt": "Look, I can tell you what the numbers say — Uptown's got the most calls, and the clearance rate sits at 26%.",
+          "highlightKind": "hood",
+          "entity": "Uptown",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "Look, I can tell you what the numbers say — Uptown's got the most calls, and the clearance rate sits at 26%."
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Maria Keen",
+    "popid": "POP-00013"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-neighborhood",
+      "angle": "Uptown — the programs that hold the block and the people who founded them",
+      "label": "Uptown: 1 active program on the record",
+      "hookLine": "1 active programs in Uptown; no founder is on the ledger — the block is yours.",
+      "hood": "Uptown",
+      "citizens": [],
+      "popids": [],
+      "ref": "output/beats/Community_Programs.jsonl @C115",
+      "cycle": 115
+    },
+    "approach": "Neighborhood approach: this slice is one block's record — its community programs and their founders, who is moving in or out, who the block has in a hospital bed or in custody, what it paid on tax day, whose debts crossed the line, and the city's neighborhood hooks this cycle. First-person witness, one block one truth. The programs, founders, movement numbers, patients, defendants and money lines are real; the stoop conversations, the mailboxes, the dog everyone knows are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": {
+    "pulse": {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Civic Watch Patio (Glenview) · quiet night",
+      "named": "Civic Watch Patio",
+      "hood": "Glenview",
+      "person": null,
+      "venue": null
+    },
+    "recommend": {
+      "bag": "lifestyle",
+      "slug": "sharon-okafor",
+      "name": "Sharon Okafor",
+      "popid": "POP-00159",
+      "bagDoc": "docs/media/SHARON_LIFESTYLE_BAG.md",
+      "reason": "top pulse quiet-nightlife → lifestyle",
+      "pulseClass": "quiet-nightlife",
+      "pulseLabel": "Civic Watch Patio (Glenview) · quiet night"
+    },
+    "prewrite": {
+      "pulseClass": "quiet-nightlife",
+      "angle": "Civic Watch Patio is open and quiet in Glenview. What that condition means is not yet established.",
+      "hookLine": "Civic Watch Patio is open and quiet in Glenview.",
+      "anchorFacts": [
+        "NAMED: Civic Watch Patio",
+        "HOOD: Glenview",
+        "VENUE: Civic Watch Patio",
+        "HOOD: Glenview",
+        "EVENING RECORD: open and quiet"
+      ],
+      "bagRecommend": "lifestyle",
+      "bagSlug": "sharon-okafor"
+    },
+    "texture": {
+      "famous": [
+        "Rowan Pierce",
+        "Vinnie Keane",
+        "Rico Valez"
+      ],
+      "restaurants": [
+        {
+          "name": "Eastlake Kitchen",
+          "hood": "Eastlake"
+        },
+        {
+          "name": "Port Grind",
+          "hood": "Grand Lake"
+        },
+        {
+          "name": "Jack London Square Markets",
+          "hood": "Jack London"
+        }
+      ],
+      "fastFood": [
+        {
+          "name": "SpeedyBurger",
+          "hood": "Downtown"
+        }
+      ],
+      "nightlife": [
+        {
+          "name": "Civic Watch Patio",
+          "hood": "Glenview"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 3,
+        "vibe": "quiet",
+        "movement": "restricted",
+        "weatherImpact": 1
+      },
+      "cityEvents": [
+        "Lake Merritt Blossom Walk",
+        "Glenview Civic Response Meeting",
+        "Fruitvale Community Bloom Festival"
+      ],
+      "tv": [
+        "Crisis Desk",
+        "Spring Lineup",
+        "A's Prospect Report",
+        "Film Room with T. Jerome (PG)"
+      ],
+      "movies": [
+        "New Bloom",
+        "The GM"
+      ],
+      "sportsBroadcast": "Oakland Sports Tonight",
+      "streamingTrend": "political commentary surge",
+      "foodTrend": "High mobility / civic-tension food trend"
+    },
+    "signals": {
+      "fameCount": 10,
+      "sightingCount": 3,
+      "sightings": [
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Rowan Pierce spotted at Presti Accounting",
+          "name": "Rowan Pierce",
+          "venue": "Presti Accounting",
+          "ref": "Ripple_Ledger cycle 115 (CauseType lifestyle-sighting); rendered: world_summary_c115.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Downtown",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Vinnie Keane spotted at Oakland Alternative Response Initiative",
+          "name": "Vinnie Keane",
+          "venue": "Oakland Alternative Response Initiative",
+          "ref": "Ripple_Ledger cycle 115 (CauseType lifestyle-sighting); rendered: world_summary_c115.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Downtown",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Rico Valez spotted at Vernon Street Market",
+          "name": "Rico Valez",
+          "venue": "Vernon Street Market",
+          "ref": "Ripple_Ledger cycle 115 (CauseType lifestyle-sighting); rendered: world_summary_c115.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Adams Point",
+          "popids": []
+        }
+      ]
+    },
+    "scene": {
+      "venues": [
+        {
+          "name": "Eastlake Kitchen",
+          "hood": "Eastlake"
+        },
+        {
+          "name": "Port Grind",
+          "hood": "Grand Lake"
+        },
+        {
+          "name": "Jack London Square Markets",
+          "hood": "Jack London"
+        },
+        {
+          "name": "SpeedyBurger",
+          "hood": "Downtown"
+        },
+        {
+          "name": "Civic Watch Patio",
+          "hood": "Glenview"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 3,
+        "vibe": "quiet",
+        "movement": "restricted",
+        "weatherImpact": 1
+      },
+      "cityEvents": [
+        "Lake Merritt Blossom Walk",
+        "Glenview Civic Response Meeting",
+        "Fruitvale Community Bloom Festival"
+      ],
+      "tv": [
+        "Crisis Desk",
+        "Spring Lineup",
+        "A's Prospect Report",
+        "Film Room with T. Jerome (PG)"
+      ],
+      "movies": [
+        "New Bloom",
+        "The GM"
+      ],
+      "colorRoom": "Named places only from Evening Texture / desk_signal. The supplied evening record describes nightlife as quiet; raw scoring fields stay internal.  Sensory room (weather, light, sound) is free; careers and employees are not."
+    },
+    "candidates": [
+      {
+        "className": "quiet-nightlife",
+        "score": 24,
+        "label": "Civic Watch Patio (Glenview) · quiet night",
+        "named": "Civic Watch Patio",
+        "hood": "Glenview"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Rowan Pierce at Presti Accounting (Downtown)",
+        "named": "Presti Accounting",
+        "hood": "Downtown"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Vinnie Keane at Oakland Alternative Response Initiative (Downtown)",
+        "named": "Oakland Alternative Response Initiative",
+        "hood": "Downtown"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Rico Valez at Vernon Street Market (Adams Point)",
+        "named": "Vernon Street Market",
+        "hood": "Adams Point"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Eastlake Kitchen (Eastlake)",
+        "named": "Eastlake Kitchen",
+        "hood": "Eastlake"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Port Grind (Grand Lake)",
+        "named": "Port Grind",
+        "hood": "Grand Lake"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Jack London Square Markets (Jack London)",
+        "named": "Jack London Square Markets",
+        "hood": "Jack London"
+      },
+      {
+        "className": "city-event",
+        "score": 17,
+        "label": "Fruitvale Community Bloom Festival",
+        "named": "Fruitvale Community Bloom Festival",
+        "hood": null
+      }
+    ],
+    "perSeat": {
+      "mason-ortega": {
+        "pulseClass": "named-restaurant",
+        "label": "Eastlake Kitchen (Eastlake)",
+        "score": 34,
+        "bag": "kitchen"
+      },
+      "kai-marston": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Civic Watch Patio (Glenview) · quiet night",
+        "score": 32,
+        "bag": "arts"
+      },
+      "sharon-okafor": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Civic Watch Patio (Glenview) · quiet night",
+        "score": 32,
+        "bag": "lifestyle"
+      },
+      "maria-keen": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Civic Watch Patio (Glenview) · quiet night",
+        "score": 32,
+        "bag": "ground"
+      },
+      "elliot-graye": {
+        "pulseClass": "fame-sighting",
+        "label": "Rowan Pierce at Presti Accounting (Downtown)",
+        "score": 31,
+        "bag": "faith"
+      }
+    }
+  },
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "HOOD-SLICE-3",
+    "kind": "beat-neighborhood",
+    "seat": {
+      "slug": "maria-keen",
+      "name": "Maria Keen",
+      "popid": "POP-00013",
+      "desk": "culture",
+      "domain": "neighborhood",
+      "builder": "buildNeighborhoodSlice.js"
+    },
+    "hood": "Uptown",
+    "pulse": {
+      "className": "beat-neighborhood",
+      "score": 100,
+      "label": "Uptown: 1 active program on the record",
+      "hood": "Uptown",
+      "source": "output/beats/Community_Programs.jsonl @C115"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Uptown — the programs that hold the block and the people who founded them",
+      "hookLine": "1 active programs in Uptown; no founder is on the ledger — the block is yours.",
+      "anchorFacts": [
+        "Oakland Sound Archive (arts), Uptown, since C101",
+        "Uptown this cycle: 63 students, 506 adults, 65 seniors — moved vs C114: +1 adults",
+        "Uptown: 7 charges → 1 arrest → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "Uptown: 21 sick residents → 0 admissions → 0 in care at the close (0 tracked, 0 other residents) → 0 beds occupied; tracked: none tracked"
+      ],
+      "evidence": [
+        {
+          "text": "Oakland Sound Archive (arts), Uptown, since C101",
+          "src": "output/beats/Community_Programs.jsonl @C115 PRG-012"
+        },
+        {
+          "text": "Uptown this cycle: 63 students, 506 adults, 65 seniors — moved vs C114: +1 adults",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C115 vs prev/"
+        },
+        {
+          "text": "Uptown: 7 charges → 1 arrest → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl @C115 judicial Uptown"
+        },
+        {
+          "text": "Uptown: 21 sick residents → 0 admissions → 0 in care at the close (0 tracked, 0 other residents) → 0 beds occupied; tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl @C115 hospital Uptown"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "PRIOR_CYCLE_ON_DISK",
+        "vs": 114
+      },
+      "hooks": [
+        {
+          "text": "Household dissolved in Lake Merritt due to economic hardship",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Lake Merritt",
+          "priority": 3
+        },
+        {
+          "text": "Household in Lake Merritt spending 53% of income on housing",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Lake Merritt",
+          "priority": 6
+        },
+        {
+          "text": "defaulted on the debts — the savings are gone and the record carries it",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "West Oakland",
+          "priority": 3
+        },
+        {
+          "text": "defaulted on the debts — the savings are gone and the record carries it",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Fruitvale",
+          "priority": 3
+        },
+        {
+          "text": "Downtown boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Downtown",
+          "priority": 7
+        },
+        {
+          "text": "West Oakland boom sustained — momentum 9/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "West Oakland",
+          "priority": 7
+        },
+        {
+          "text": "Jack London housing pressure at 10/10: rents climbing, households stretching to stay",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Jack London",
+          "priority": 7
+        },
+        {
+          "text": "The Cortez household (2) moved from Uptown to West Oakland — moving up from Uptown",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "West Oakland",
+          "priority": 5
+        }
+      ],
+      "note": "no program founder in Uptown resolves on the ledger",
+      "pageVoices": [],
+      "roomIsYours": "the stoop, the corner store counter, who moved in last month and who is thinking about leaving, what the block argues about"
+    },
+    "citizens": [],
+    "pointers": [
+      "output/beats/Community_Programs.jsonl @C115",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Maria Keen this cycle)"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Maria Keen",
+    "popid": "POP-00013",
+    "text": "I'm heading to Uptown to get a feel for the Oakland Sound Archive and its impact on the neighborhood. I want to talk to Toto Foto, the Theater Director, about the arts scene and how it intersects with the Archive. I'll also be on the lookout for anyone who can give me insight into the block's dynamics and the people who live there.",
+    "plan": {
+      "chase": "I'm heading to Uptown to get a feel for the Oakland Sound Archive and its impact on the neighborhood. I want to talk to Toto Foto, the Theater Director, about the arts scene and how it intersects with the Archive. I'll also be on the lookout for anyone who can give me insight into the block's dynamics and the people who live there.",
+      "focus": "Uptown's community programs and their founders",
+      "why": "The assignment is to cover one block in Uptown, focusing on its community programs and the people behind them. I'm drawn to the Oakland Sound Archive as a starting point.",
+      "checks": [
+        "Verify the Oakland Sound Archive's activities and influence",
+        "Identify key figures in Uptown's arts and community scene"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00302",
+          "question": "How does the Oakland Sound Archive fit into your vision for Uptown's arts scene?",
+          "basis": "Toto Foto is a Theater Director in Uptown and a potential source for understanding the local arts landscape."
+        },
+        {
+          "pop": "POP-00847",
+          "question": "What's your perspective on the after-school programs in Uptown and their connection to the community?",
+          "basis": "Caroline Cabrera is the After-School Program Director in Uptown, making her a valuable resource for insights into the neighborhood's programs."
+        }
+      ],
+      "interpretation": "The key to this story is understanding how community programs like the Oakland Sound Archive shape the identity and daily life of Uptown residents.",
+      "unverifiedLead": [
+        "Potential for a human interest angle focusing on the people behind Uptown's community programs"
+      ]
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Grand Lake neighborhood texture — how residents experience the improvement | Residents of Grand Lake feel the change firsthand.",
+      "kind": "anomaly",
+      "hood": "Grand Lake",
+      "ref": "output/engine_audit_c115.json patterns[9]; evidence: Initiative_Tracker row(s) 9; storyline INIT-009:vote-ready",
+      "popids": [
+        "POP-01115",
+        "POP-01175",
+        "POP-01207"
+      ]
+    },
+    {
+      "label": "Adams Point | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Adams Point",
+      "ref": "output/neighborhood_texture_c115.md \"### Adams Point\"; events: world_summary_c115.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Chinatown | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Chinatown",
+      "ref": "output/neighborhood_texture_c115.md \"### Chinatown\"; events: world_summary_c115.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Downtown | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Downtown",
+      "ref": "output/neighborhood_texture_c115.md \"### Downtown\"; events: world_summary_c115.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "East Oakland | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "East Oakland",
+      "ref": "output/neighborhood_texture_c115.md \"### East Oakland\"; events: world_summary_c115.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 30,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-13T12:17:25.068Z"
+}

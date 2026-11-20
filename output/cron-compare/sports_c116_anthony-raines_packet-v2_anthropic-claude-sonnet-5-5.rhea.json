@@ -1,0 +1,125 @@
+{
+  "draft": "output/cron-compare/sports_c116_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "116",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "9f7422e481e6073143127e7ca365b22c67b9df8471291d4be566c8257dd6ee45",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Accurate analysis of the Carmen Mesa trade and roster dynamics with perfect fidelity to C116 sports feed data.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "anthony-sports-analytics-v1",
+    "packageVersion": "ANTHONY-LEP2-3",
+    "manifestId": "AM-da5a9ce34b94",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "20",
+          "63",
+          "24",
+          "10",
+          "-3",
+          "56.0",
+          "44",
+          "8",
+          "11",
+          "67",
+          "3.21",
+          "10.8",
+          "1.8",
+          "6.09",
+          "56",
+          "93",
+          "780",
+          "129.42",
+          "130.35",
+          "22",
+          "55",
+          "327",
+          "79",
+          "76",
+          "72",
+          "83",
+          "87",
+          "62",
+          "2042",
+          "2047",
+          "+9"
+        ]
+      },
+      {
+        "code": "UNAPPROVED_QUOTE",
+        "values": [
+          "behind the glove."
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Carmen Mesa",
+      "Deacon Seymour",
+      "Desmond Morton",
+      "Eric Taveras",
+      "Ernesto Quintero",
+      "Frank Reyna",
+      "Giancarlo Hernandez",
+      "Henry Rivas",
+      "Jose Fuentes",
+      "Kevin Clark",
+      "Mark Aitken",
+      "Martin Richards",
+      "Mike Paulson",
+      "Pablo Almanzar",
+      "Vladimir Gonzalez"
+    ],
+    "unverified": [
+      "Antone Baez",
+      "Las Vegas",
+      "Porter Broadway",
+      "Selling Mesa",
+      "World Series"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0152,
+  "durationMs": 10181,
+  "parseError": false,
+  "ranAt": "2026-11-17T00:21:52.158Z",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 932,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "9f7422e481e6073143127e7ca365b22c67b9df8471291d4be566c8257dd6ee45",
+    "costUsd": 0.0015
+  }
+}

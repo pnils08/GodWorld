@@ -1,0 +1,91 @@
+{
+  "draft": "output/cron-compare/civic_c116_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "116",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "1b0ade0e8ce0782a10e642753b044afdab275f556f50d0c54d5ee70211be551d",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes, neighborhood metrics, civic assignments, and ripple references verify accurately against cycle 116 canon.",
+  "review": {
+    "profileId": "jax-caldera",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "jax-accountability-v1",
+    "packageVersion": "JAX-LEP2-2",
+    "manifestId": "AM-f753879540bd",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "12th",
+          "1.06",
+          "15th",
+          "1.000",
+          "2066",
+          "115",
+          "7"
+        ]
+      },
+      {
+        "code": "UNAPPROVED_QUOTE",
+        "values": [
+          "growth."
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Celeste Moon",
+      "Dmitri Soto",
+      "Jasmine Torres",
+      "Jax Caldera",
+      "Mark Aitken",
+      "Michael Corliss",
+      "Warren Ashford"
+    ],
+    "unverified": [
+      "Midnight Norae Karaoke",
+      "Tenth Street Digital",
+      "West Oakland Stabilization Fund"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0147,
+  "durationMs": 6772,
+  "parseError": false,
+  "ranAt": "2026-11-19T00:15:45.566Z",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 679,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "1b0ade0e8ce0782a10e642753b044afdab275f556f50d0c54d5ee70211be551d",
+    "costUsd": 0.0011
+  }
+}

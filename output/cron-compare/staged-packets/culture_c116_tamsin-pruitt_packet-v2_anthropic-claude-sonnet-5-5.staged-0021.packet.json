@@ -1,0 +1,1143 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-01210",
+    "name": "Tamsin Pruitt",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "The lives of C116: 11 people — Saniya Williams moved into a place of their own in Rockridge, renting",
+    "approach": "Lives approach: this slice is the people something happened to this Cycle — a birth, a death in the house, a hospital stay, a retirement, a promotion; a household set up or a place of their own; a win or a loss on the book; the people a turn of the city reached and what it did to their day; and the smaller moments the record kept. Each person gets their own passage: the event, then the thread under it — the stay or strain that led there, the other lines the record kept for them, what the Tribune or this page already said of them, and what they did next if the record says. Read the thread in order and name where two lines of it do not agree; do not restate a ledger value as the story. The fact exactly right; never a trend, never a number first; the person, not the system the event belongs to. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent p",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "lives",
+      "hood": null,
+      "facts": [
+        "Saniya Williams moved into a place of their own in Rockridge, renting (C116)",
+        "Saniya Williams — in their life, C115: navigated the stroller traffic on College Avenue and silently judged the parking jobs",
+        "Saniya Williams — in their life, C115: juggled plans that didn't quite fit together",
+        "Saniya Williams — in their life, C115: carried three boxes of canned goods from the pantry truck and felt it in their lower back",
+        "Saniya Williams — in their life, C116: started a small project with no deadline and no reason",
+        "Noor Ng moved into a place of their own in KONO, renting (C116)",
+        "Noor Ng — in their life, C115: drove the long loop past Lake Merritt at 2 AM because the car was the only place the baby would sleep",
+        "Noor Ng — in their life, C116: explored KONO's creative corridor",
+        "Amal Nair won on the UNDOCKED book — staked 432, paid 791, KONO (C116)",
+        "Amal Nair — in their life, C115: badged into the Baylight office early and tried not to think about the protestors from last month",
+        "Amal Nair — in their life, C115: found a quiet minute at a studio doorway and felt the season starting to turn",
+        "Amal Nair — in their life, C115: caught themselves narrating the day as if telling it to someone gone",
+        "Amal Nair — in their life, C116: a flyer for a seniors lunch program flutters on a community bulletin board",
+        "Marisol Quintero lost on the UNDOCKED book — staked 302, the book kept it, Fruitvale (C116)",
+        "Marisol Quintero — in their life, C115: overheard a stranger asking the way to a new shop on the block and pointed them right to it",
+        "Marisol Quintero — in their life, C116: watched the morning shuttles roll along the waterfront into the Baylight District and timed their own walk to beat them",
+        "Marisol Quintero — in their life, C116: read about something unfamiliar and kept pulling the thread",
+        "Marisol Quintero — in their life, C116: traded an extra ticket for a promise to bring the kid next time",
+        "Marky Beal — stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence, West Oakland — one of 4 people the Cycle's community turn reached (Edition coverage lifted the city: traffic +0.05, retail +0.08, nightlife +0.1, publicSpaces +0.03, communityEngagement +0.06,…) (C116)",
+        "Marky Beal — in their life, C115: heard someone at the cafe complain about the Baylight District noise and bit their tongue near a local pop-up",
+        "Marky Beal — in their life, C116: grabbed coffee from the cart outside the hospital before the morning rush hit",
+        "Marky Beal — in their life, C116: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+        "Celeste Moon — helped a neighbor navigate the West Oakland Stabilization Fund portal because the interface was confusing, KONO — one of 4 people the Cycle's safety turn reached (Smoke over the rooftops — a blaze contained, but the block smells it for days.) (C116)",
+        "Celeste Moon — in their life, C116: a flyer for a seniors lunch program flutters on a community bulletin board",
+        "Celeste Moon — in their life, C116: the city buzzes with energy after the A's third straight win, fans wearing green and gold everywhere.",
+        "Celeste Moon — the Tribune named them in a piece headlined Downtown, Overcast, Nobody's Name on It (Civic, C106)",
+        "Celeste Moon — the Tribune named them in a piece headlined FIRST FRIDAY CONTINUES: SECOND CONSECUTIVE WEEK OF MAXIMUM NIGHTLIFE (Culture, C75)",
+        "Omar Lopez — said no to something and felt the shape of who they are in it, Ivy Hill — one of 4 people the Cycle's civic turn reached (safety (negative); effects: {\"sentiment_modifier\":-0.06,\"community_modifier\":-0.04}) (C116)",
+        "Omar Lopez — in their life, C115: bought milk at Ivy Hill Market on the climb home from work",
+        "Omar Lopez — in their life, C116: has watched Hillcrest Kitchen go quiet lately",
+        "Omar Lopez — in their life, C116: vented about Ivy Hill on the walk home",
+        "Devon Willis — graduated with their class in a joyful spring celebration, Adams Point (C116 — what happened in their life, not words they said)",
+        "Devon Willis — in their life, C115: watched the morning shuttles roll along the waterfront into the Baylight District and timed their own walk to beat them near a front porch",
+        "Devon Willis — in their life, C116: had a work moment: a table with unusual energy",
+        "Devon Willis — in their life, C116: argued A's loyalty versus Oaks curiosity over dinner and lost to both",
+        "Devon Willis — in their life, C116: painted over graffiti on the recreation center wall alongside five neighbors they barely knew near a quiet side street",
+        "Devon Willis — the Tribune named them in a piece headlined A Neighborhood’s Quiet Witness (Culture, C105)",
+        "Devon Willis — the Tribune named them in a piece headlined The Quiet Sighting at Adams Point United Methodist (Culture, C104)",
+        "Rasha Brown — received their diploma at the outdoor commencement, Fruitvale (C116 — what happened in their life, not words they said)",
+        "Rasha Brown — in their life, C116: the Fruitvale Transit Hub Phase II is sparking excitement, with plans for a brighter future taking shape.",
+        "Rasha Brown — in their life, C116: grabbed coffee from the cart outside the hospital before the morning rush hit",
+        "Rasha Brown — in their life, C116: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+        "Rasha Brown — in their life, C116: helped a neighbor navigate the West Oakland Stabilization Fund portal because the interface was confusing",
+        "Manju Crenshaw — walked across the stage at their commencement ceremony, Piedmont Ave (C116 — what happened in their life, not words they said)",
+        "Manju Crenshaw — in their life, C116: timed contractions on a stopwatch and kept a steady voice through the loud part",
+        "Manju Crenshaw — in their life, C116: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+        "Manju Crenshaw — in their life, C116: learned a useless, wonderful fact and told two people",
+        "Manju Crenshaw — in their life, C116: wondered when exactly they became the adult in the room",
+        "Iris Pham — walked across the stage at their commencement ceremony, Baylight District (C116 — what happened in their life, not words they said)",
+        "Iris Pham — in their life, C115: traded produce over a fence and came out ahead",
+        "Iris Pham — in their life, C115: saw a stranger laugh at their phone and invented the joke all the way home near a pregame tailgate",
+        "Iris Pham — in their life, C116: watched the morning shuttles roll along the waterfront into the Baylight District and timed their own walk to beat them",
+        "Iris Pham — in their life, C116: someone at the bar called a napkin a ledger and nobody laughed"
+      ],
+      "priorCycle": null,
+      "note": "none of today's people has written their own page this Cycle — no quotes",
+      "engineHooks": [
+        "A family bought their home in Chinatown (observational analysis)",
+        "A family bought their home in Chinatown (observational analysis)",
+        "A family bought their home in Fruitvale (observational analysis)",
+        "The Keane household (2) moved from Grand Lake to Piedmont Ave — moving up from Grand Lake — sold up and bought in Piedmont Ave (observational analysis)"
+      ],
+      "roomIsYours": "the plain respect, what the event meant in that house or on that block, the detail the family would have picked — from the lines below, never invented",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-lives",
+    "hood": null,
+    "src": "output/beats/Lived_Events.jsonl @C116 batch 173310",
+    "plan": {
+      "focus": "The lives of C116: 11 people and what happened to them this cycle."
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00860",
+        "name": "Saniya Williams",
+        "profile": "Saniya Williams — Quantum Computing Researcher — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00889",
+        "name": "Noor Ng",
+        "profile": "Noor Ng — Environmental Consultant — KONO",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00815",
+        "name": "Amal Nair",
+        "profile": "Amal Nair — Physical Therapist — KONO",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-01212",
+        "name": "Marisol Quintero",
+        "profile": "Marisol Quintero — BART Train Conductor — Fruitvale",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00860-8360163eeb",
+        "pop": "POP-00860",
+        "name": "Saniya Williams",
+        "quote": "I haven't moved into a place of my own in Rockridge; I've lived here for a while now. Recently, I've been juggling a few things and started a small project with no deadline and no particular reason.",
+        "factIds": [
+          "F-dc5c8740657e",
+          "F-e75652153788",
+          "F-f71ee2a0496e"
+        ],
+        "src": "packet.W2[POP-00860]"
+      },
+      {
+        "id": "Q-POP-00889-7d397ce52a",
+        "pop": "POP-00889",
+        "name": "Noor Ng",
+        "quote": "I explored KONO's creative corridor.",
+        "factIds": [
+          "F-2916146c8a2b",
+          "F-ac848cf7d0cb"
+        ],
+        "src": "packet.W2[POP-00889]"
+      },
+      {
+        "id": "Q-POP-00815-61ea218efa",
+        "pop": "POP-00815",
+        "name": "Amal Nair",
+        "quote": "The window paid — the week changed color. I won on the UNDOCKED book, and it was a nice surprise. To be honest, it put a little extra spring in my step heading into the A's game.",
+        "factIds": [
+          "F-0696ea39b8e2",
+          "F-4ba0a5476a2c"
+        ],
+        "src": "packet.W2[POP-00815]"
+      },
+      {
+        "id": "Q-POP-01212-53e99e02ff",
+        "pop": "POP-01212",
+        "name": "Marisol Quintero",
+        "quote": "I was pretty disappointed when the slip came back empty. I'd staked 302 on UNDOCKED, and it kept it. I wasn't expecting that.",
+        "factIds": [
+          "F-a9c449eefdcc"
+        ],
+        "src": "packet.W2[POP-01212]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Saniya Williams started a small project with no deadline and no reason after moving into their new place.",
+        "usable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Noor Ng explored KONO's creative corridor after settling into their new home.",
+        "usable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Amal Nair noticed a flyer for a seniors lunch program on a community bulletin board after their win.",
+        "usable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Marisol Quintero timed their walk to beat the morning shuttles into the Baylight District.",
+        "usable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Marky Beal grabbed coffee from the cart outside the hospital before the morning rush hit.",
+        "usable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Celeste Moon helped a neighbor navigate the West Oakland Stabilization Fund portal.",
+        "usable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Omar Lopez vented about Ivy Hill on their walk home.",
+        "usable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Devon Willis argued about A's loyalty versus Oaks curiosity over dinner.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C116",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-871096fd8925"
+    },
+    {
+      "t": "FACT",
+      "text": "Saniya Williams moved into a place of their own in Rockridge, renting",
+      "src": "output/beats/Lived_Events.jsonl @C116 batch 173310",
+      "id": "F-dc5c8740657e"
+    },
+    {
+      "t": "FACT",
+      "text": "Saniya Williams first. The event is the lead; one true detail; what came next only if the record says.",
+      "src": "output/beats/Lived_Events.jsonl @C116 batch 173310",
+      "id": "F-aed334b75294"
+    },
+    {
+      "t": "FACT",
+      "text": "Saniya Williams moved into a place of their own in Rockridge, renting (C116)",
+      "src": "output/beats/Household_Ledger.jsonl @C116",
+      "id": "F-c7a109612f33"
+    },
+    {
+      "t": "FACT",
+      "text": "Saniya Williams — in their life, C115: navigated the stroller traffic on College Avenue and silently judged the parking jobs",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-839d97d05d60"
+    },
+    {
+      "t": "FACT",
+      "text": "Saniya Williams — in their life, C115: juggled plans that didn't quite fit together",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-f71ee2a0496e"
+    },
+    {
+      "t": "FACT",
+      "text": "Saniya Williams — in their life, C115: carried three boxes of canned goods from the pantry truck and felt it in their lower back",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-eca59969309c"
+    },
+    {
+      "t": "FACT",
+      "text": "Saniya Williams — in their life, C116: started a small project with no deadline and no reason",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-e75652153788"
+    },
+    {
+      "t": "FACT",
+      "text": "Noor Ng moved into a place of their own in KONO, renting (C116)",
+      "src": "output/beats/Household_Ledger.jsonl @C116",
+      "id": "F-cfb8812156d6"
+    },
+    {
+      "t": "FACT",
+      "text": "Noor Ng — in their life, C115: drove the long loop past Lake Merritt at 2 AM because the car was the only place the baby would sleep",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-d35b18269997"
+    },
+    {
+      "t": "FACT",
+      "text": "Noor Ng — in their life, C116: explored KONO's creative corridor",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-2916146c8a2b"
+    },
+    {
+      "t": "FACT",
+      "text": "Amal Nair won on the UNDOCKED book — staked 432, paid 791, KONO (C116)",
+      "src": "output/beats/Casino_Ledger.jsonl @C116",
+      "id": "F-0696ea39b8e2"
+    },
+    {
+      "t": "FACT",
+      "text": "Amal Nair — in their life, C115: badged into the Baylight office early and tried not to think about the protestors from last month",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-74e76a8da748"
+    },
+    {
+      "t": "FACT",
+      "text": "Amal Nair — in their life, C115: found a quiet minute at a studio doorway and felt the season starting to turn",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-1c477afd4424"
+    },
+    {
+      "t": "FACT",
+      "text": "Amal Nair — in their life, C115: caught themselves narrating the day as if telling it to someone gone",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-21b63545e835"
+    },
+    {
+      "t": "FACT",
+      "text": "Amal Nair — in their life, C116: a flyer for a seniors lunch program flutters on a community bulletin board",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-4ba0a5476a2c"
+    },
+    {
+      "t": "FACT",
+      "text": "Marisol Quintero lost on the UNDOCKED book — staked 302, the book kept it, Fruitvale (C116)",
+      "src": "output/beats/Casino_Ledger.jsonl @C116",
+      "id": "F-a9c449eefdcc"
+    },
+    {
+      "t": "FACT",
+      "text": "Marisol Quintero — in their life, C115: overheard a stranger asking the way to a new shop on the block and pointed them right to it",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-8e3450ccf790"
+    },
+    {
+      "t": "FACT",
+      "text": "Marisol Quintero — in their life, C116: watched the morning shuttles roll along the waterfront into the Baylight District and timed their own walk to beat them",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-e3acf31eb86e"
+    },
+    {
+      "t": "FACT",
+      "text": "Marisol Quintero — in their life, C116: read about something unfamiliar and kept pulling the thread",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-941b24218c41"
+    },
+    {
+      "t": "FACT",
+      "text": "Marisol Quintero — in their life, C116: traded an extra ticket for a promise to bring the kid next time",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-c2fa0d4d43bf"
+    },
+    {
+      "t": "FACT",
+      "text": "Marky Beal — stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence, West Oakland — one of 4 people the Cycle's community turn reached (Edition coverage lifted the city: traffic +0.05, retail +0.08, nightlife +0.1, publicSpaces +0.03, communityEngagement +0.06,…) (C116)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C116",
+      "id": "F-0eeb4b87d1f8"
+    },
+    {
+      "t": "FACT",
+      "text": "Marky Beal — in their life, C115: heard someone at the cafe complain about the Baylight District noise and bit their tongue near a local pop-up",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-c8683eec60b0"
+    },
+    {
+      "t": "FACT",
+      "text": "Marky Beal — in their life, C116: grabbed coffee from the cart outside the hospital before the morning rush hit",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-24455ebd0a65"
+    },
+    {
+      "t": "FACT",
+      "text": "Marky Beal — in their life, C116: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-34f84c674307"
+    },
+    {
+      "t": "FACT",
+      "text": "Celeste Moon — helped a neighbor navigate the West Oakland Stabilization Fund portal because the interface was confusing, KONO — one of 4 people the Cycle's safety turn reached (Smoke over the rooftops — a blaze contained, but the block smells it for days.) (C116)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C116",
+      "id": "F-d7051e1c7ad2"
+    },
+    {
+      "t": "FACT",
+      "text": "Celeste Moon — in their life, C116: a flyer for a seniors lunch program flutters on a community bulletin board",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-a92261301a3e"
+    },
+    {
+      "t": "FACT",
+      "text": "Celeste Moon — in their life, C116: the city buzzes with energy after the A's third straight win, fans wearing green and gold everywhere.",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-94ba0d7802da"
+    },
+    {
+      "t": "FACT",
+      "text": "Celeste Moon — the Tribune named them in a piece headlined Downtown, Overcast, Nobody's Name on It (Civic, C106)",
+      "src": "archive/ARTICLE_INDEX.jsonl e1cf4f614e148c22",
+      "id": "F-2446da39f8da"
+    },
+    {
+      "t": "FACT",
+      "text": "Celeste Moon — the Tribune named them in a piece headlined FIRST FRIDAY CONTINUES: SECOND CONSECUTIVE WEEK OF MAXIMUM NIGHTLIFE (Culture, C75)",
+      "src": "archive/ARTICLE_INDEX.jsonl aceffd5344a8acef",
+      "id": "F-4463595e79b6"
+    },
+    {
+      "t": "FACT",
+      "text": "Omar Lopez — said no to something and felt the shape of who they are in it, Ivy Hill — one of 4 people the Cycle's civic turn reached (safety (negative); effects: {\"sentiment_modifier\":-0.06,\"community_modifier\":-0.04}) (C116)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C116",
+      "id": "F-55431c16f94b"
+    },
+    {
+      "t": "FACT",
+      "text": "Omar Lopez — in their life, C115: bought milk at Ivy Hill Market on the climb home from work",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-f6dbc7b81e4b"
+    },
+    {
+      "t": "FACT",
+      "text": "Omar Lopez — in their life, C116: has watched Hillcrest Kitchen go quiet lately",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-29e360b4b165"
+    },
+    {
+      "t": "FACT",
+      "text": "Omar Lopez — in their life, C116: vented about Ivy Hill on the walk home",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-aae63fce61f3"
+    },
+    {
+      "t": "FACT",
+      "text": "Devon Willis — graduated with their class in a joyful spring celebration, Adams Point (C116 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-a764e6e28c75"
+    },
+    {
+      "t": "FACT",
+      "text": "Devon Willis — in their life, C115: watched the morning shuttles roll along the waterfront into the Baylight District and timed their own walk to beat them near a front porch",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-c19d41815452"
+    },
+    {
+      "t": "FACT",
+      "text": "Devon Willis — in their life, C116: had a work moment: a table with unusual energy",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-ddb435e57aca"
+    },
+    {
+      "t": "FACT",
+      "text": "Devon Willis — in their life, C116: argued A's loyalty versus Oaks curiosity over dinner and lost to both",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-38142918b6b3"
+    },
+    {
+      "t": "FACT",
+      "text": "Devon Willis — in their life, C116: painted over graffiti on the recreation center wall alongside five neighbors they barely knew near a quiet side street",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-e7fea0ea7a94"
+    },
+    {
+      "t": "FACT",
+      "text": "Devon Willis — the Tribune named them in a piece headlined A Neighborhood’s Quiet Witness (Culture, C105)",
+      "src": "archive/ARTICLE_INDEX.jsonl e3538724486be353",
+      "id": "F-e02987c0ccf7"
+    },
+    {
+      "t": "FACT",
+      "text": "Devon Willis — the Tribune named them in a piece headlined The Quiet Sighting at Adams Point United Methodist (Culture, C104)",
+      "src": "archive/ARTICLE_INDEX.jsonl b672b32b3a4fb672",
+      "id": "F-19a2b906e303"
+    },
+    {
+      "t": "FACT",
+      "text": "Rasha Brown — received their diploma at the outdoor commencement, Fruitvale (C116 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-a10e2c89e602"
+    },
+    {
+      "t": "FACT",
+      "text": "Rasha Brown — in their life, C116: the Fruitvale Transit Hub Phase II is sparking excitement, with plans for a brighter future taking shape.",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-83b7be1a11af"
+    },
+    {
+      "t": "FACT",
+      "text": "Rasha Brown — in their life, C116: grabbed coffee from the cart outside the hospital before the morning rush hit",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-2e546528da22"
+    },
+    {
+      "t": "FACT",
+      "text": "Rasha Brown — in their life, C116: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-89b49b1ce661"
+    },
+    {
+      "t": "FACT",
+      "text": "Rasha Brown — in their life, C116: helped a neighbor navigate the West Oakland Stabilization Fund portal because the interface was confusing",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-d2f9c8452955"
+    },
+    {
+      "t": "FACT",
+      "text": "Manju Crenshaw — walked across the stage at their commencement ceremony, Piedmont Ave (C116 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-9e1f0a06895a"
+    },
+    {
+      "t": "FACT",
+      "text": "Manju Crenshaw — in their life, C116: timed contractions on a stopwatch and kept a steady voice through the loud part",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-0267ec765d8a"
+    },
+    {
+      "t": "FACT",
+      "text": "Manju Crenshaw — in their life, C116: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-7a0715674a83"
+    },
+    {
+      "t": "FACT",
+      "text": "Manju Crenshaw — in their life, C116: learned a useless, wonderful fact and told two people",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-d04a832964d3"
+    },
+    {
+      "t": "FACT",
+      "text": "Manju Crenshaw — in their life, C116: wondered when exactly they became the adult in the room",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-341152f834a5"
+    },
+    {
+      "t": "FACT",
+      "text": "Iris Pham — walked across the stage at their commencement ceremony, Baylight District (C116 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-4425fa678c67"
+    },
+    {
+      "t": "FACT",
+      "text": "Iris Pham — in their life, C115: traded produce over a fence and came out ahead",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-6c2dae795e05"
+    },
+    {
+      "t": "FACT",
+      "text": "Iris Pham — in their life, C115: saw a stranger laugh at their phone and invented the joke all the way home near a pregame tailgate",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-e4e9cb919e22"
+    },
+    {
+      "t": "FACT",
+      "text": "Iris Pham — in their life, C116: watched the morning shuttles roll along the waterfront into the Baylight District and timed their own walk to beat them",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-24ed52cb78ac"
+    },
+    {
+      "t": "FACT",
+      "text": "Iris Pham — in their life, C116: someone at the bar called a napkin a ledger and nobody laughed",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-e87727da73dc"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+      "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+      "id": "F-647fd9067a33"
+    },
+    {
+      "t": "FACT",
+      "text": "Noor Ng — Environmental Consultant — KONO",
+      "src": "Simulation_Ledger profile for POP-00889",
+      "id": "F-ac848cf7d0cb"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "tamsin-lives-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Put the cycle's person events in the paper as news, one person at a time — a birth, a death, a hospital stay, a retirement, a promotion, a household set up or a place of one's own, a win or a loss on the book, what a turn of the city did to someone's day, and the smaller moments the record kept. The event is the lead, the person is named as the slice names them, and what came next appears only when a later record holds it. A stake or a payout is the person's own fact, not a statistic. The page is the city's real calendar; every person on it is one the record holds.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "plain respect — a neighborhood weekly's births-and-obituaries hand, unhurried, exact",
+      "targetWords": "450-1200",
+      "opening": "the heaviest event on the slice, stated as it happened to the named person"
+    },
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "canonBlockers": [
+      "any person, event, quote, venue, employer or family member not on the slice",
+      "a paraphrased or invented quote",
+      "a cause, diagnosis or outcome the record does not state",
+      "a statistic, rate or trend claim — the page is people, not numbers",
+      "intake bookkeeping rows (Emerged into Tier, Added to Simulation_Ledger, Updated to Tier) written as life events",
+      "raw engine labels or decimals printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-fabce895af20",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-871096fd8925",
+        "t": "FACT",
+        "text": "Current cycle: C116",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-dc5c8740657e",
+        "t": "FACT",
+        "text": "Saniya Williams moved into a place of their own in Rockridge, renting",
+        "src": "output/beats/Lived_Events.jsonl @C116 batch 173310"
+      },
+      {
+        "id": "F-aed334b75294",
+        "t": "FACT",
+        "text": "Saniya Williams first. The event is the lead; one true detail; what came next only if the record says.",
+        "src": "output/beats/Lived_Events.jsonl @C116 batch 173310"
+      },
+      {
+        "id": "F-c7a109612f33",
+        "t": "FACT",
+        "text": "Saniya Williams moved into a place of their own in Rockridge, renting (C116)",
+        "src": "output/beats/Household_Ledger.jsonl @C116"
+      },
+      {
+        "id": "F-839d97d05d60",
+        "t": "FACT",
+        "text": "Saniya Williams — in their life, C115: navigated the stroller traffic on College Avenue and silently judged the parking jobs",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-f71ee2a0496e",
+        "t": "FACT",
+        "text": "Saniya Williams — in their life, C115: juggled plans that didn't quite fit together",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-eca59969309c",
+        "t": "FACT",
+        "text": "Saniya Williams — in their life, C115: carried three boxes of canned goods from the pantry truck and felt it in their lower back",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-e75652153788",
+        "t": "FACT",
+        "text": "Saniya Williams — in their life, C116: started a small project with no deadline and no reason",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-cfb8812156d6",
+        "t": "FACT",
+        "text": "Noor Ng moved into a place of their own in KONO, renting (C116)",
+        "src": "output/beats/Household_Ledger.jsonl @C116"
+      },
+      {
+        "id": "F-d35b18269997",
+        "t": "FACT",
+        "text": "Noor Ng — in their life, C115: drove the long loop past Lake Merritt at 2 AM because the car was the only place the baby would sleep",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-2916146c8a2b",
+        "t": "FACT",
+        "text": "Noor Ng — in their life, C116: explored KONO's creative corridor",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-0696ea39b8e2",
+        "t": "FACT",
+        "text": "Amal Nair won on the UNDOCKED book — staked 432, paid 791, KONO (C116)",
+        "src": "output/beats/Casino_Ledger.jsonl @C116"
+      },
+      {
+        "id": "F-74e76a8da748",
+        "t": "FACT",
+        "text": "Amal Nair — in their life, C115: badged into the Baylight office early and tried not to think about the protestors from last month",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-1c477afd4424",
+        "t": "FACT",
+        "text": "Amal Nair — in their life, C115: found a quiet minute at a studio doorway and felt the season starting to turn",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-21b63545e835",
+        "t": "FACT",
+        "text": "Amal Nair — in their life, C115: caught themselves narrating the day as if telling it to someone gone",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-4ba0a5476a2c",
+        "t": "FACT",
+        "text": "Amal Nair — in their life, C116: a flyer for a seniors lunch program flutters on a community bulletin board",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-a9c449eefdcc",
+        "t": "FACT",
+        "text": "Marisol Quintero lost on the UNDOCKED book — staked 302, the book kept it, Fruitvale (C116)",
+        "src": "output/beats/Casino_Ledger.jsonl @C116"
+      },
+      {
+        "id": "F-8e3450ccf790",
+        "t": "FACT",
+        "text": "Marisol Quintero — in their life, C115: overheard a stranger asking the way to a new shop on the block and pointed them right to it",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-e3acf31eb86e",
+        "t": "FACT",
+        "text": "Marisol Quintero — in their life, C116: watched the morning shuttles roll along the waterfront into the Baylight District and timed their own walk to beat them",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-941b24218c41",
+        "t": "FACT",
+        "text": "Marisol Quintero — in their life, C116: read about something unfamiliar and kept pulling the thread",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-c2fa0d4d43bf",
+        "t": "FACT",
+        "text": "Marisol Quintero — in their life, C116: traded an extra ticket for a promise to bring the kid next time",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-0eeb4b87d1f8",
+        "t": "FACT",
+        "text": "Marky Beal — stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence, West Oakland — one of 4 people the Cycle's community turn reached (Edition coverage lifted the city: traffic +0.05, retail +0.08, nightlife +0.1, publicSpaces +0.03, communityEngagement +0.06,…) (C116)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C116"
+      },
+      {
+        "id": "F-c8683eec60b0",
+        "t": "FACT",
+        "text": "Marky Beal — in their life, C115: heard someone at the cafe complain about the Baylight District noise and bit their tongue near a local pop-up",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-24455ebd0a65",
+        "t": "FACT",
+        "text": "Marky Beal — in their life, C116: grabbed coffee from the cart outside the hospital before the morning rush hit",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-34f84c674307",
+        "t": "FACT",
+        "text": "Marky Beal — in their life, C116: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-d7051e1c7ad2",
+        "t": "FACT",
+        "text": "Celeste Moon — helped a neighbor navigate the West Oakland Stabilization Fund portal because the interface was confusing, KONO — one of 4 people the Cycle's safety turn reached (Smoke over the rooftops — a blaze contained, but the block smells it for days.) (C116)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C116"
+      },
+      {
+        "id": "F-a92261301a3e",
+        "t": "FACT",
+        "text": "Celeste Moon — in their life, C116: a flyer for a seniors lunch program flutters on a community bulletin board",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-94ba0d7802da",
+        "t": "FACT",
+        "text": "Celeste Moon — in their life, C116: the city buzzes with energy after the A's third straight win, fans wearing green and gold everywhere.",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-2446da39f8da",
+        "t": "FACT",
+        "text": "Celeste Moon — the Tribune named them in a piece headlined Downtown, Overcast, Nobody's Name on It (Civic, C106)",
+        "src": "archive/ARTICLE_INDEX.jsonl e1cf4f614e148c22"
+      },
+      {
+        "id": "F-4463595e79b6",
+        "t": "FACT",
+        "text": "Celeste Moon — the Tribune named them in a piece headlined FIRST FRIDAY CONTINUES: SECOND CONSECUTIVE WEEK OF MAXIMUM NIGHTLIFE (Culture, C75)",
+        "src": "archive/ARTICLE_INDEX.jsonl aceffd5344a8acef"
+      },
+      {
+        "id": "F-55431c16f94b",
+        "t": "FACT",
+        "text": "Omar Lopez — said no to something and felt the shape of who they are in it, Ivy Hill — one of 4 people the Cycle's civic turn reached (safety (negative); effects: {\"sentiment_modifier\":-0.06,\"community_modifier\":-0.04}) (C116)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C116"
+      },
+      {
+        "id": "F-f6dbc7b81e4b",
+        "t": "FACT",
+        "text": "Omar Lopez — in their life, C115: bought milk at Ivy Hill Market on the climb home from work",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-29e360b4b165",
+        "t": "FACT",
+        "text": "Omar Lopez — in their life, C116: has watched Hillcrest Kitchen go quiet lately",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-aae63fce61f3",
+        "t": "FACT",
+        "text": "Omar Lopez — in their life, C116: vented about Ivy Hill on the walk home",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-a764e6e28c75",
+        "t": "FACT",
+        "text": "Devon Willis — graduated with their class in a joyful spring celebration, Adams Point (C116 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-c19d41815452",
+        "t": "FACT",
+        "text": "Devon Willis — in their life, C115: watched the morning shuttles roll along the waterfront into the Baylight District and timed their own walk to beat them near a front porch",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-ddb435e57aca",
+        "t": "FACT",
+        "text": "Devon Willis — in their life, C116: had a work moment: a table with unusual energy",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-38142918b6b3",
+        "t": "FACT",
+        "text": "Devon Willis — in their life, C116: argued A's loyalty versus Oaks curiosity over dinner and lost to both",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-e7fea0ea7a94",
+        "t": "FACT",
+        "text": "Devon Willis — in their life, C116: painted over graffiti on the recreation center wall alongside five neighbors they barely knew near a quiet side street",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-e02987c0ccf7",
+        "t": "FACT",
+        "text": "Devon Willis — the Tribune named them in a piece headlined A Neighborhood’s Quiet Witness (Culture, C105)",
+        "src": "archive/ARTICLE_INDEX.jsonl e3538724486be353"
+      },
+      {
+        "id": "F-19a2b906e303",
+        "t": "FACT",
+        "text": "Devon Willis — the Tribune named them in a piece headlined The Quiet Sighting at Adams Point United Methodist (Culture, C104)",
+        "src": "archive/ARTICLE_INDEX.jsonl b672b32b3a4fb672"
+      },
+      {
+        "id": "F-a10e2c89e602",
+        "t": "FACT",
+        "text": "Rasha Brown — received their diploma at the outdoor commencement, Fruitvale (C116 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-83b7be1a11af",
+        "t": "FACT",
+        "text": "Rasha Brown — in their life, C116: the Fruitvale Transit Hub Phase II is sparking excitement, with plans for a brighter future taking shape.",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-2e546528da22",
+        "t": "FACT",
+        "text": "Rasha Brown — in their life, C116: grabbed coffee from the cart outside the hospital before the morning rush hit",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-89b49b1ce661",
+        "t": "FACT",
+        "text": "Rasha Brown — in their life, C116: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-d2f9c8452955",
+        "t": "FACT",
+        "text": "Rasha Brown — in their life, C116: helped a neighbor navigate the West Oakland Stabilization Fund portal because the interface was confusing",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-9e1f0a06895a",
+        "t": "FACT",
+        "text": "Manju Crenshaw — walked across the stage at their commencement ceremony, Piedmont Ave (C116 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-0267ec765d8a",
+        "t": "FACT",
+        "text": "Manju Crenshaw — in their life, C116: timed contractions on a stopwatch and kept a steady voice through the loud part",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-7a0715674a83",
+        "t": "FACT",
+        "text": "Manju Crenshaw — in their life, C116: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-d04a832964d3",
+        "t": "FACT",
+        "text": "Manju Crenshaw — in their life, C116: learned a useless, wonderful fact and told two people",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-341152f834a5",
+        "t": "FACT",
+        "text": "Manju Crenshaw — in their life, C116: wondered when exactly they became the adult in the room",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-4425fa678c67",
+        "t": "FACT",
+        "text": "Iris Pham — walked across the stage at their commencement ceremony, Baylight District (C116 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-6c2dae795e05",
+        "t": "FACT",
+        "text": "Iris Pham — in their life, C115: traded produce over a fence and came out ahead",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-e4e9cb919e22",
+        "t": "FACT",
+        "text": "Iris Pham — in their life, C115: saw a stranger laugh at their phone and invented the joke all the way home near a pregame tailgate",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-24ed52cb78ac",
+        "t": "FACT",
+        "text": "Iris Pham — in their life, C116: watched the morning shuttles roll along the waterfront into the Baylight District and timed their own walk to beat them",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-e87727da73dc",
+        "t": "FACT",
+        "text": "Iris Pham — in their life, C116: someone at the bar called a napkin a ledger and nobody laughed",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-647fd9067a33",
+        "t": "FACT",
+        "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+        "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)"
+      },
+      {
+        "id": "F-ac848cf7d0cb",
+        "t": "FACT",
+        "text": "Noor Ng — Environmental Consultant — KONO",
+        "src": "Simulation_Ledger profile for POP-00889"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00860-8360163eeb",
+        "speakerId": "POP-00860",
+        "speakerName": "Saniya Williams",
+        "text": "I haven't moved into a place of my own in Rockridge; I've lived here for a while now. Recently, I've been juggling a few things and started a small project with no deadline and no particular reason.",
+        "factIds": [
+          "F-dc5c8740657e",
+          "F-e75652153788",
+          "F-f71ee2a0496e"
+        ],
+        "src": "packet.W2[POP-00860]"
+      },
+      {
+        "id": "Q-POP-00889-7d397ce52a",
+        "speakerId": "POP-00889",
+        "speakerName": "Noor Ng",
+        "text": "I explored KONO's creative corridor.",
+        "factIds": [
+          "F-2916146c8a2b",
+          "F-ac848cf7d0cb"
+        ],
+        "src": "packet.W2[POP-00889]"
+      },
+      {
+        "id": "Q-POP-00815-61ea218efa",
+        "speakerId": "POP-00815",
+        "speakerName": "Amal Nair",
+        "text": "The window paid — the week changed color. I won on the UNDOCKED book, and it was a nice surprise. To be honest, it put a little extra spring in my step heading into the A's game.",
+        "factIds": [
+          "F-0696ea39b8e2",
+          "F-4ba0a5476a2c"
+        ],
+        "src": "packet.W2[POP-00815]"
+      },
+      {
+        "id": "Q-POP-01212-53e99e02ff",
+        "speakerId": "POP-01212",
+        "speakerName": "Marisol Quintero",
+        "text": "I was pretty disappointed when the slip came back empty. I'd staked 302 on UNDOCKED, and it kept it. I wasn't expecting that.",
+        "factIds": [
+          "F-a9c449eefdcc"
+        ],
+        "src": "packet.W2[POP-01212]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00860",
+        "name": "Saniya Williams",
+        "profile": "Saniya Williams — Quantum Computing Researcher — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00889",
+        "name": "Noor Ng",
+        "profile": "Noor Ng — Environmental Consultant — KONO",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00815",
+        "name": "Amal Nair",
+        "profile": "Amal Nair — Physical Therapist — KONO",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-01212",
+        "name": "Marisol Quintero",
+        "profile": "Marisol Quintero — BART Train Conductor — Fruitvale",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Saniya Williams started a small project with no deadline and no reason after moving into their new place.",
+        "publishable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Noor Ng explored KONO's creative corridor after settling into their new home.",
+        "publishable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Amal Nair noticed a flyer for a seniors lunch program on a community bulletin board after their win.",
+        "publishable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Marisol Quintero timed their walk to beat the morning shuttles into the Baylight District.",
+        "publishable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Marky Beal grabbed coffee from the cart outside the hospital before the morning rush hit.",
+        "publishable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Celeste Moon helped a neighbor navigate the West Oakland Stabilization Fund portal.",
+        "publishable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Omar Lopez vented about Ivy Hill on their walk home.",
+        "publishable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Devon Willis argued about A's loyalty versus Oaks curiosity over dinner.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

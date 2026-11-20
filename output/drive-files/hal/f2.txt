@@ -1,0 +1,95 @@
+THE RICHMOND ARCHIVE — AUTHORITATIVE INDEX: README, NAMING CONVENTION & TAG TAXONOMY
+=====================================================================================
+
+
+Corpus: Google Drive folder "Hal_Richmond" (id 1IS_TcknloSUYtteGVp73F3J87N2kEo95).
+42 files across: root, Origins, Profiles, Profiles/Identification, Essays, Features.
+This catalog is NON-DESTRUCTIVE: no original file was renamed, moved, deleted, or overwritten.
+Companion sheet: "Hal_Richmond_Authoritative_Index" (one row per file).
+
+
+-------------------------------------------------------------------------------------
+1. NAMING CONVENTION
+-------------------------------------------------------------------------------------
+Pattern:  YYYY[-MM][-DD]__desk__subject-entity__doc-type__version.ext
+
+
+  - Facets are separated by a DOUBLE underscore ( __ ). Words WITHIN a facet use hyphens ( - ).
+  - Date: the article's in-universe dateline where its header states one
+    (e.g. "Oakland, California — April 2040" -> 2040-04). Otherwise the Drive created date.
+    Month/day are included only when known.
+  - desk: origins | legacy | features | profiles | id   (editorial desk / section).
+  - subject-entity: the primary player/person/team the piece is about
+    (e.g. darrin-davis, oakland-athletics, hal-richmond).
+  - doc-type: origin-profile, comparison-essay, feature-column, season-essay,
+    injury-feature, image-manifest, canon-record, press-id, portrait, letters-column,
+    wedding-chronicle, etc.
+  - version: v1, v2, ...  (all current files are v1).
+  - ext: real extension. ~20 text files currently have NO extension and would gain .txt;
+    native Google Docs are shown with a .gdoc placeholder (they carry no Drive extension).
+
+
+-------------------------------------------------------------------------------------
+2. TAG TAXONOMY (namespaced  #facet/value)
+-------------------------------------------------------------------------------------
+Facets: sport, league, team, player, position, journalist, person, role, type, series,
+season, era, time, geo, theme, compares (real players referenced), award, publication,
+media, author, status, cycle, popid, doc-id, internal.
+
+
+Baseline applied to every article:
+  #sport/baseball #league/mlb #team/oakland-athletics #geo/oakland #era/dynasty
+  #author/hal-richmond #cycle/pre-cycle   (+ #publication/bay-tribune where applicable)
+
+
+CYCLE RULE (STRICT): a #cycle is a specific sim-engine run. A piece is tagged with a
+cycle ONLY if its own header explicitly declares one. NO file in this corpus declares a
+cycle, so EVERY item is tagged #cycle/pre-cycle. No cycles were invented.
+Note: doc-ids (e.g. 2040-Hal-03) and POPIDs (e.g. POP-00001) DO appear in some headers
+and are tagged as #doc-id/... and #popid/... — these are not cycles.
+
+
+-------------------------------------------------------------------------------------
+3. DATA-QUALITY FLAGS
+-------------------------------------------------------------------------------------
+  - duplicate          — same content exists in another file (see set summary below).
+  - misfiled           — physically stored in the wrong folder for its series/desk.
+  - continuity-conflict — corpus states contradictory facts about the same entity.
+  - missing-extension  — text file stored with no .txt extension (~20 files).
+
+
+-------------------------------------------------------------------------------------
+4. DUPLICATE SETS & CANONICAL PICKS (content-diff results)
+-------------------------------------------------------------------------------------
+Set A  "Letters from the Golden Era – Part I" x3: root PDF (2,728 B) + two Features txt
+       (both 1,549 B, identical text). CANONICAL = row #42 (id 1JIq1bA6, clean-resolving
+       text). Rule: prefer text over PDF. (Row #37's search-returned id did not re-resolve
+       on refetch — a sync/encoding artifact; content treated as identical.)
+Set B  "The Twelve Days in April" x2: #40 (1,810 B, WITH closing "Names Index" line) vs
+       #41 (1,784 B, WITHOUT it). Near-identical; only that trailing line differs.
+       CANONICAL = #40 (more complete).
+Set C  Legacy Part VI "Danny Horn" x2: Essays #17 vs Origins #1 (both 3,064 B, identical
+       text). CANONICAL = #17 (Essays, correctly filed). Origins copy = duplicate + misfiled.
+Set D  Legacy Part VII "Martin Richards" x2: Essays #19 vs Origins #2 (both 2,972 B,
+       identical text). CANONICAL = #19 (Essays). Origins copy = duplicate + misfiled.
+Set E  Portrait PNG "3280A591..." x2: root #15 vs Identification #14 (both exactly
+       3,275,017 B -> duplicate). CANONICAL = #14 (Identification, correctly filed).
+       Diff method: exact byte-size match (binaries not hashed to avoid loading 3 MB into context).
+
+
+-------------------------------------------------------------------------------------
+5. SERIES GAP & CONTINUITY
+-------------------------------------------------------------------------------------
+  - Legacy series is present as Parts II–VII (comparison essays). Part I is MISSING (series gap).
+  - Continuity conflict — Darrin Davis position: the Origins profile (#4) and Legacy Part VI
+    (#17 / #1) treat him as a CENTER fielder; Legacy Part V (#18) frames him as Oakland's great
+    LEFT fielder. Flagged on all three rows; not auto-resolved (needs an editorial decision).
+
+
+-------------------------------------------------------------------------------------
+6. WHY THIS IS AN INDEX, NOT AN IN-PLACE RENAME
+-------------------------------------------------------------------------------------
+The Drive connector exposes create_file and copy_file (writes) plus read/search/metadata
+(reads). It does NOT expose in-place rename, move, or description/property writes. So the
+proposed clean names and tags live here in the index. See the chat report for the three
+options (clean-copy tree / rename script / index-as-source-of-truth) and the recommendation.

@@ -1,0 +1,68 @@
+{
+  "draft": "output/cron-compare/sports_c116_p-slayer_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "116",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "33c2ea354662778998ff2e921bb71b3ac8a324b5d0fbf51a37c2321bd51a3daf",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes match exact interview records, and sports trade claims align precisely with Ground Truth.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "p-slayer-fan-heat-v1",
+    "packageVersion": "PSLAYER-LEP2-1",
+    "manifestId": "AM-d4c5945564a0",
+    "lexicalObservations": [],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Carmen Mesa",
+      "Ernesto Quintero",
+      "Giancarlo Hernandez",
+      "Kevin Clark",
+      "Mark Aitken"
+    ],
+    "unverified": [
+      "Antone Baez"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 2,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0139,
+  "durationMs": 7571,
+  "parseError": false,
+  "ranAt": "2026-11-19T00:18:59.011Z",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 582,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "33c2ea354662778998ff2e921bb71b3ac8a324b5d0fbf51a37c2321bd51a3daf",
+    "costUsd": 0.001
+  }
+}

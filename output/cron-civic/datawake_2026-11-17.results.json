@@ -1,0 +1,57 @@
+{
+  "date": "2026-11-17",
+  "cycle": 116,
+  "results": [
+    {
+      "office": "civic-office-council-d5",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-office-council-d5_2026-11-17.json"
+    },
+    {
+      "office": "civic-office-council-d6",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-office-council-d6_2026-11-17.json"
+    },
+    {
+      "office": "civic-office-council-d1",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-office-council-d1_2026-11-17.json"
+    },
+    {
+      "office": "worker-staff-dm-econ",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/worker-staff-dm-econ_2026-11-17.json"
+    },
+    {
+      "office": "worker-staff-manager",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/worker-staff-manager_2026-11-17.json"
+    },
+    {
+      "office": "civic-project-health-center",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-project-health-center_2026-11-17.json"
+    },
+    {
+      "office": "civic-project-oari",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-project-oari_2026-11-17.json"
+    }
+  ],
+  "owed": null,
+  "ranAt": "2026-11-17T11:46:28.893Z"
+}

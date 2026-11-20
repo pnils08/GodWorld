@@ -1,0 +1,353 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00160",
+    "name": "Mason Ortega",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Baylight District kitchens: Oakland Casino Town, Bubic Burgers — the people who work the shift",
+    "approach": "Food & hospitality approach — kitchens as workplaces: this slice is one neighborhood's restaurants, cafes and bars from the ledger and the people on the roster who work in them. The people on this slice are real; the rest of the room is yours — the line on a Tuesday, the regulars, the walk-in, the tip jar. One kitchen, one shift, one true thing about the work. Not a review. Not multi-voice culture-desk average. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "food-workplaces",
+      "hood": "Baylight District",
+      "pulseClass": "hood-kitchens",
+      "economicFrame": "Baylight District kitchens: Oakland Casino Town, Bubic Burgers — the people who work the shift",
+      "hook": "Gregory Mims, Organized Crime at Oakland Casino Town. 3 named workers at 1 named kitchen in Baylight District on the ledger this cycle.",
+      "namedBusinesses": [
+        "Oakland Casino Town",
+        "Bubic Burgers"
+      ],
+      "workplaces": [
+        "Oakland Casino Town — Nightlife & Entertainment — Gregory Mims (Organized Crime); Philly Rodriguez (Casino Manager); Manfred Owens (Booky)",
+        "Bubic Burgers — Food & Beverage — no roster names"
+      ],
+      "engineColour": [
+        "Iris Pham — traded produce over a fence and came out ahead",
+        "Dawson Nguyen — caught the recap of last night's game at the counter and stayed for the second retelling",
+        "Ron Arenson — drank the free cold brew in the company kitchen and felt completely disconnected from the neighborhood outside",
+        "Freya Rao — recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for near a pregame tailgate"
+      ],
+      "roomIsYours": "the line, the regulars, the pace, the tip jar, what the cook is worried about",
+      "forbidden": [
+        "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+        "Do not contradict a role, employer or neighborhood listed here"
+      ],
+      "sceneRule": null
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "story-signal",
+    "hood": "Baylight District",
+    "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+    "plan": {
+      "focus": "The unnamed workers behind the named businesses in Baylight District — who they are, what their shift looks like, and why the roster doesn't carry them."
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00028",
+        "name": "Manfred Owens",
+        "profile": "Manfred Owens — Booky — Oakland Casino Town, Baylight District",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-01203",
+        "name": "Iris Pham",
+        "profile": "Iris Pham — Baylight District",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00028-bb9a464e04",
+        "pop": "POP-00028",
+        "name": "Manfred Owens",
+        "quote": "The book at Oakland Casino Town is mostly the same faces every night, and I'm the one who keeps track of who's in and who's out. Philly runs the floor, Gregory handles the stuff nobody talks about, and I sit near the back with the ledger. The regulars are the ones who've been coming for years — dealers, pit bosses, a few old-timers who just want a seat and a coffee. My shift starts when the evening crowd picks up and ends when the last table closes. It's steady work, but the rhythm is quieter than people think. Most nights it's just the hum of the machines and the clink of chips, and me making sure the numbers line up before I hand the sheet to Philly.",
+        "factIds": [
+          "F-ca743cc2f158",
+          "F-9fcfc4a3d640"
+        ],
+        "src": "packet.W2[POP-00028]"
+      },
+      {
+        "id": "Q-POP-01203-dc48d3c9d9",
+        "pop": "POP-01203",
+        "name": "Iris Pham",
+        "quote": "I work at a coffee shop, so I know what it's like to be the person behind the counter that nobody thinks to name. When I see the roster for a place like Oakland Casino Town, it's all managers and the big names. But there's a whole crew in the back—cooks, cleaners, security—who show up every shift and keep the place running. They're the ones I see in the neighborhood, grabbing a quick coffee before their shift or heading home after a long night. The roster doesn't carry them because they're not the ones making the decisions or taking the credit. But without them, the whole thing falls apart.",
+        "factIds": [
+          "F-ca743cc2f158",
+          "F-ee611dea8b78"
+        ],
+        "src": "packet.W2[POP-01203]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Mason Ortega",
+        "text": "There may be a cook at Oakland Casino Town who has worked the graveyard shift for years and is known only by a nickname to the regulars.",
+        "usable": false
+      },
+      {
+        "from": "Mason Ortega",
+        "text": "The tip jar at Bubic Burgers might be split among a crew that rotates through the lunch rush, none of whom are listed on any official roster.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C115",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-bc84fc0b7718"
+    },
+    {
+      "t": "FACT",
+      "text": "Baylight District kitchens · Oakland Casino Town, Bubic Burgers",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+      "id": "F-c464146e3a56"
+    },
+    {
+      "t": "FACT",
+      "text": "Gregory Mims, Organized Crime at Oakland Casino Town. 3 named workers at 1 named kitchen in Baylight District on the ledger this cycle.",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+      "id": "F-ee611dea8b78"
+    },
+    {
+      "t": "FACT",
+      "text": "Oakland Casino Town · Nightlife & Entertainment · 99 employees (-1 vs C114) · growth -2.3% · on the roster: Gregory Mims (Organized Crime); Philly Rodriguez (Casino Manager); Manfred Owens (Booky)",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+      "id": "F-ca743cc2f158"
+    },
+    {
+      "t": "FACT",
+      "text": "Bubic Burgers · Food & Beverage · 15 employees · growth -0.3% · revenue $2.2M (-$139 vs C114) · key personnel: Kris Bubic",
+      "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115",
+      "id": "F-3e4372c57af6"
+    },
+    {
+      "t": "FACT",
+      "text": "CITY SEED (Baylight District): citizens Iris Pham; Dawson Nguyen; Ron Arenson; Freya Rao · businesses Marine Systems; Oakland Casino Town · Vinnie Keane Gala (program)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C115",
+      "id": "F-3dd3539a09d0"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C11, Spring, holiday=none",
+      "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+      "id": "F-82d77e9a4a71"
+    },
+    {
+      "t": "FACT",
+      "text": "Manfred Owens — Booky — Oakland Casino Town, Baylight District",
+      "src": "Simulation_Ledger profile for POP-00028",
+      "id": "F-9fcfc4a3d640"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "mason-kitchen-ground-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Treat a Packet-supplied restaurant signal as a workplace question without inventing Mason's presence, a worker, shift, service state, business condition, or labor consequence.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "evidence-bounded kitchen-work brief",
+      "targetWords": "evidence-bounded",
+      "opening": "one Packet-named restaurant and location"
+    },
+    "authorizedTexture": [
+      "workplace-oriented questions about a supplied restaurant without claiming an answer",
+      "kitchen vocabulary used only as interpretation and never as proof of a worker, action, condition, or event"
+    ],
+    "textureConditions": [
+      "a restaurant appearing on an evening list proves only the supplied venue-location relation, not that it was open, busy, staffed, serving, struggling, or observed",
+      "first-person embedding, every worker, owner, patron, shift, quote, action, count, wage, cost, supply issue, health score, and business outcome requires Packet support"
+    ],
+    "canonBlockers": [
+      "invented attendance, kitchen access, worker, owner, patron, service, rush, shift, dialogue, quote, wage, cost, ticket count, equipment state, supply problem, health score, business condition, or labor consequence",
+      "an invented or altered venue, person, neighborhood, event, relationship, date, number, or quote",
+      "review language, raw engine labels, citywide food trend assigned to one venue, or collective worker sentiment presented as fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-b58a30d50023",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-bc84fc0b7718",
+        "t": "FACT",
+        "text": "Current cycle: C115",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-c464146e3a56",
+        "t": "FACT",
+        "text": "Baylight District kitchens · Oakland Casino Town, Bubic Burgers",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115"
+      },
+      {
+        "id": "F-ee611dea8b78",
+        "t": "FACT",
+        "text": "Gregory Mims, Organized Crime at Oakland Casino Town. 3 named workers at 1 named kitchen in Baylight District on the ledger this cycle.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115"
+      },
+      {
+        "id": "F-ca743cc2f158",
+        "t": "FACT",
+        "text": "Oakland Casino Town · Nightlife & Entertainment · 99 employees (-1 vs C114) · growth -2.3% · on the roster: Gregory Mims (Organized Crime); Philly Rodriguez (Casino Manager); Manfred Owens (Booky)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115"
+      },
+      {
+        "id": "F-3e4372c57af6",
+        "t": "FACT",
+        "text": "Bubic Burgers · Food & Beverage · 15 employees · growth -0.3% · revenue $2.2M (-$139 vs C114) · key personnel: Kris Bubic",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C115"
+      },
+      {
+        "id": "F-3dd3539a09d0",
+        "t": "FACT",
+        "text": "CITY SEED (Baylight District): citizens Iris Pham; Dawson Nguyen; Ron Arenson; Freya Rao · businesses Marine Systems; Oakland Casino Town · Vinnie Keane Gala (program)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C115"
+      },
+      {
+        "id": "F-82d77e9a4a71",
+        "t": "FACT",
+        "text": "Calendar: Y3C11, Spring, holiday=none",
+        "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)"
+      },
+      {
+        "id": "F-9fcfc4a3d640",
+        "t": "FACT",
+        "text": "Manfred Owens — Booky — Oakland Casino Town, Baylight District",
+        "src": "Simulation_Ledger profile for POP-00028"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00028-bb9a464e04",
+        "speakerId": "POP-00028",
+        "speakerName": "Manfred Owens",
+        "text": "The book at Oakland Casino Town is mostly the same faces every night, and I'm the one who keeps track of who's in and who's out. Philly runs the floor, Gregory handles the stuff nobody talks about, and I sit near the back with the ledger. The regulars are the ones who've been coming for years — dealers, pit bosses, a few old-timers who just want a seat and a coffee. My shift starts when the evening crowd picks up and ends when the last table closes. It's steady work, but the rhythm is quieter than people think. Most nights it's just the hum of the machines and the clink of chips, and me making sure the numbers line up before I hand the sheet to Philly.",
+        "factIds": [
+          "F-ca743cc2f158",
+          "F-9fcfc4a3d640"
+        ],
+        "src": "packet.W2[POP-00028]"
+      },
+      {
+        "id": "Q-POP-01203-dc48d3c9d9",
+        "speakerId": "POP-01203",
+        "speakerName": "Iris Pham",
+        "text": "I work at a coffee shop, so I know what it's like to be the person behind the counter that nobody thinks to name. When I see the roster for a place like Oakland Casino Town, it's all managers and the big names. But there's a whole crew in the back—cooks, cleaners, security—who show up every shift and keep the place running. They're the ones I see in the neighborhood, grabbing a quick coffee before their shift or heading home after a long night. The roster doesn't carry them because they're not the ones making the decisions or taking the credit. But without them, the whole thing falls apart.",
+        "factIds": [
+          "F-ca743cc2f158",
+          "F-ee611dea8b78"
+        ],
+        "src": "packet.W2[POP-01203]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00028",
+        "name": "Manfred Owens",
+        "profile": "Manfred Owens — Booky — Oakland Casino Town, Baylight District",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-01203",
+        "name": "Iris Pham",
+        "profile": "Iris Pham — Baylight District",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Mason Ortega",
+        "text": "There may be a cook at Oakland Casino Town who has worked the graveyard shift for years and is known only by a nickname to the regulars.",
+        "publishable": false
+      },
+      {
+        "from": "Mason Ortega",
+        "text": "The tip jar at Bubic Burgers might be split among a crew that rotates through the lunch rush, none of whom are listed on any official roster.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "workplace-oriented questions about a supplied restaurant without claiming an answer",
+      "kitchen vocabulary used only as interpretation and never as proof of a worker, action, condition, or event"
+    ],
+    "textureConditions": [
+      "a restaurant appearing on an evening list proves only the supplied venue-location relation, not that it was open, busy, staffed, serving, struggling, or observed",
+      "first-person embedding, every worker, owner, patron, shift, quote, action, count, wage, cost, supply issue, health score, and business outcome requires Packet support"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

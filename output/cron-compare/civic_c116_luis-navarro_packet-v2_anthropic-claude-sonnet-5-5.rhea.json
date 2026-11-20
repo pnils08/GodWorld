@@ -1,0 +1,115 @@
+{
+  "draft": "output/cron-compare/civic_c116_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "116",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "16aa20f43adcfb9b9cf9d3a415dec08caa39abb51336d68ab2c298fb4a3f7ad3",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Draft verified clean against Cycle 116 ground truth, initiative states, and exact interview records.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "luis-investigation-record-v1",
+    "packageVersion": "LUIS-LEP2-2",
+    "manifestId": "AM-7fe558892dd6",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "107",
+          "111",
+          "112",
+          "113",
+          "114",
+          "115",
+          "117",
+          "3",
+          "101",
+          "86",
+          "31",
+          "12.5",
+          "12",
+          "500",
+          "000",
+          "73",
+          "98",
+          "9",
+          "-0",
+          "76",
+          "78",
+          "80",
+          "83",
+          "92",
+          "-01"
+        ]
+      },
+      {
+        "code": "UNAPPROVED_QUOTE",
+        "values": [
+          "Publish placement-gap analysis and program adjustment plan,",
+          "announced C73 as part of Baylight CBA package. Not a standalone council vote.",
+          "Apprenticeship Pipeline Passes 9-0.",
+          "passed.",
+          "not a standalone council vote",
+          "unverified"
+        ]
+      },
+      {
+        "code": "INVESTIGATION_EPISTEMIC_OVERREACH",
+        "values": [
+          "I checked",
+          "no request"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Avery Santana",
+      "Carmen Delaine",
+      "Rose Delgado"
+    ],
+    "unverified": [
+      "Apprenticeship Pipeline Passes"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 1,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0137,
+  "durationMs": 7407,
+  "parseError": false,
+  "ranAt": "2026-11-18T00:15:47.677Z",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 687,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "16aa20f43adcfb9b9cf9d3a415dec08caa39abb51336d68ab2c298fb4a3f7ad3",
+    "costUsd": 0.0014
+  }
+}

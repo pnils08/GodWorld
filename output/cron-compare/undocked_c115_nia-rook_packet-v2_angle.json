@@ -15,18 +15,18 @@
     },
     "task": {
       "goal": "Plan one Article chase without choosing a new assignment",
-      "assignment": "UNDOCKED episode: Brooklyn Nguyen, Tuesday night. Standings: Luis Taz leads the board — rank #1, 45.19 achievement points, 0 credits, 2 cycle(s) led, current streak 2. In the chair: Brooklyn Nguyen — Community Programs Coordinator.",
+      "assignment": "UNDOCKED episode: Elijah Brown, Thursday night. Standings: Luis Taz leads the board — rank #1, 45.19 achievement points, 0 credits, 2 cycle(s) led, current streak 2. In the chair: Elijah Brown — Electrician.",
       "approach": "UNDOCKED show beat: current episode and standings from the approved feed; earlier episodes from the approved show history."
     },
     "signal": {
       "kind": "undocked",
-      "hood": "Fruitvale",
+      "hood": "Rockridge",
       "score": null,
-      "src": "undocked:undocked-pop00184-Y3C11",
+      "src": "undocked:undocked-pop01195-Y3C11-e2",
       "nearby": [
         {
-          "text": "UNDOCKED: Brooklyn Nguyen, Tuesday night",
-          "src": "undocked:undocked-pop00184-Y3C11"
+          "text": "UNDOCKED: Elijah Brown, Thursday night",
+          "src": "undocked:undocked-pop01195-Y3C11-e2"
         }
       ]
     },
@@ -37,17 +37,17 @@
       ],
       "candidates": [
         {
-          "pop": "POP-00184",
-          "name": "Brooklyn Nguyen",
-          "profile": "Brooklyn Nguyen — UNDOCKED pilot",
+          "pop": "POP-01195",
+          "name": "Elijah Brown",
+          "profile": "Elijah Brown — UNDOCKED pilot",
           "role": "UNDOCKED pilot",
           "hood": null,
           "mode": "named",
           "sourceKind": "undocked-feed-row",
           "evidence": {
             "source": "output/spacemolt-show/feed/c115.json",
-            "episodeId": "undocked-pop00184-Y3C11",
-            "pop": "POP-00184"
+            "episodeId": "undocked-pop01195-Y3C11-e2",
+            "pop": "POP-01195"
           }
         }
       ]
@@ -61,21 +61,21 @@
       },
       {
         "t": "FACT",
-        "text": "UNDOCKED: Brooklyn Nguyen, Tuesday night",
-        "src": "undocked:undocked-pop00184-Y3C11",
-        "id": "F-cf9ec8f302df"
+        "text": "UNDOCKED: Elijah Brown, Thursday night",
+        "src": "undocked:undocked-pop01195-Y3C11-e2",
+        "id": "F-f5724ab63530"
       },
       {
         "t": "FACT",
-        "text": "Brooklyn Nguyen's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes, Ridgecrest and Nembus; mined 3 copper ore, 3 iron ore and 1 sol alloy ore; came out even on credits; flew until the show's time ran out.",
-        "src": "undocked:undocked-pop00184-Y3C11",
-        "id": "F-d543fd847684"
+        "text": "Elijah Brown's Thursday night on UNDOCKED: went through Last Light, Fang, Errai, Wezen, Brightfall, Birchwood, Pinecross, Aludra, Tejat, Gsc 0002, Torcular, Gsc 0043, Gsc 0045, Dabih, Rimegate, Veritate, Betelgeuse and Gsc 0037; came out even on credits; flew until the show's time ran out.",
+        "src": "undocked:undocked-pop01195-Y3C11-e2",
+        "id": "F-d4a618c9eb55"
       },
       {
         "t": "FACT",
-        "text": "Brooklyn Nguyen — Community Programs Coordinator (ledger)",
-        "src": "undocked:undocked-pop00184-Y3C11",
-        "id": "F-3989ab410ca4"
+        "text": "Elijah Brown — Electrician (ledger)",
+        "src": "undocked:undocked-pop01195-Y3C11-e2",
+        "id": "F-dfd1bc658cb8"
       }
     ],
     "limits": {
@@ -124,17 +124,17 @@
     "mode": "named",
     "candidates": [
       {
-        "pop": "POP-00184",
-        "name": "Brooklyn Nguyen",
+        "pop": "POP-01195",
+        "name": "Elijah Brown",
         "role": "UNDOCKED pilot",
         "hood": null,
-        "profile": "Brooklyn Nguyen — UNDOCKED pilot",
+        "profile": "Elijah Brown — UNDOCKED pilot",
         "mode": "named",
         "sourceKind": "undocked-feed-row",
         "evidence": {
           "source": "output/spacemolt-show/feed/c115.json",
-          "episodeId": "undocked-pop00184-Y3C11",
-          "pop": "POP-00184"
+          "episodeId": "undocked-pop01195-Y3C11-e2",
+          "pop": "POP-01195"
         }
       }
     ],
@@ -146,21 +146,21 @@
   },
   "assignment": {
     "story": {
-      "ref": "undocked:undocked-pop00184-Y3C11",
-      "label": "UNDOCKED: Brooklyn Nguyen, Tuesday night",
+      "ref": "undocked:undocked-pop01195-Y3C11-e2",
+      "label": "UNDOCKED: Elijah Brown, Thursday night",
       "kind": "undocked",
-      "angle": "UNDOCKED episode: Brooklyn Nguyen, Tuesday night. Standings: Luis Taz leads the board — rank #1, 45.19 achievement points, 0 credits, 2 cycle(s) led, current streak 2. In the chair: Brooklyn Nguyen — Community Programs Coordinator.",
+      "angle": "UNDOCKED episode: Elijah Brown, Thursday night. Standings: Luis Taz leads the board — rank #1, 45.19 achievement points, 0 credits, 2 cycle(s) led, current streak 2. In the chair: Elijah Brown — Electrician.",
       "facts": [
-        "Brooklyn Nguyen's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes, Ridgecrest and Nembus; mined 3 copper ore, 3 iron ore and 1 sol alloy ore; came out even on credits; flew until the show's time ran out.",
-        "Brooklyn Nguyen — Community Programs Coordinator (ledger)"
+        "Elijah Brown's Thursday night on UNDOCKED: went through Last Light, Fang, Errai, Wezen, Brightfall, Birchwood, Pinecross, Aludra, Tejat, Gsc 0002, Torcular, Gsc 0043, Gsc 0045, Dabih, Rimegate, Veritate, Betelgeuse and Gsc 0037; came out even on credits; flew until the show's time ran out.",
+        "Elijah Brown — Electrician (ledger)"
       ],
       "citizens": [
-        "Brooklyn Nguyen — Community Programs Coordinator, UNDOCKED cast pilot"
+        "Elijah Brown — Electrician, UNDOCKED cast pilot"
       ],
       "popids": [
-        "POP-00184"
+        "POP-01195"
       ],
-      "hood": "Fruitvale"
+      "hood": "Rockridge"
     },
     "approach": "UNDOCKED show beat: current episode and standings from the approved feed; earlier episodes from the approved show history."
   },
@@ -179,40 +179,40 @@
   "angleRead": {
     "name": "Nia Rook",
     "popid": "POP-01076",
-    "text": "Nia Rook is on the UNDOCKED beat, tracking Brooklyn Nguyen's Tuesday night episode. The show's standings are shifting with Luis Taz leading the board. The task is to understand Brooklyn's performance and its impact on the standings.",
+    "text": "I'm chasing Elijah Brown's Thursday night UNDOCKED episode to understand his strategy and how it impacted the standings. Luis Taz is still leading the board, and Elijah Brown's performance was notable.",
     "plan": {
-      "chase": "Nia Rook is on the UNDOCKED beat, tracking Brooklyn Nguyen's Tuesday night episode. The show's standings are shifting with Luis Taz leading the board. The task is to understand Brooklyn's performance and its impact on the standings.",
-      "focus": "Brooklyn Nguyen's UNDOCKED episode on Tuesday night",
-      "why": "To analyze the episode's outcome and its effect on the current standings",
+      "chase": "I'm chasing Elijah Brown's Thursday night UNDOCKED episode to understand his strategy and how it impacted the standings. Luis Taz is still leading the board, and Elijah Brown's performance was notable.",
+      "focus": "Elijah Brown's UNDOCKED episode on Thursday night",
+      "why": "To analyze his gameplay and its effect on the current standings",
       "checks": [
-        "Episode details",
-        "Standings update"
+        "Verify Elijah Brown's final credits and achievement points",
+        "Check Luis Taz's current streak and achievement points"
       ],
       "targets": [
         {
-          "pop": "POP-00184",
-          "question": "How did Brooklyn Nguyen's navigation and mining activities affect their credit balance?",
+          "pop": "POP-01195",
+          "question": "How did Elijah Brown's gameplay on Thursday night affect his standing?",
           "basis": "UNDOCKED episode details"
         }
       ],
-      "interpretation": "The episode's outcome seems to be neutral in terms of credits, but its impact on the standings needs further analysis.",
+      "interpretation": "Elijah Brown's performance on Thursday night was a key factor in the current standings, and understanding his strategy can provide insight into the competition",
       "unverifiedLead": [
-        "The performance might have implications for Luis Taz's lead in the standings."
+        "Elijah Brown's electrician background might influence his UNDOCKED strategy"
       ]
     }
   },
   "lanePicks": [
     {
-      "label": "UNDOCKED: Brooklyn Nguyen, Tuesday night",
+      "label": "UNDOCKED: Elijah Brown, Thursday night",
       "kind": "undocked",
-      "hood": "Fruitvale",
-      "ref": "undocked:undocked-pop00184-Y3C11",
+      "hood": "Rockridge",
+      "ref": "undocked:undocked-pop01195-Y3C11-e2",
       "popids": [
-        "POP-00184"
+        "POP-01195"
       ]
     }
   ],
   "laneEntries": 1,
   "angleCapHits": 0,
-  "ranAt": "2026-11-11T14:14:51.128Z"
+  "ranAt": "2026-11-13T12:19:58.162Z"
 }

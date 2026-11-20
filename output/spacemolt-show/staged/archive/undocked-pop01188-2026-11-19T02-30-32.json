@@ -1,0 +1,467 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop01188-2026-11-19T02-30-32",
+  "popid": "POP-01188",
+  "holder": "Marguerite Kimball-Ostrow",
+  "session": "undocked-pop01188",
+  "window": {
+    "startedAt": "2026-11-19T02:30:32.776Z",
+    "endedAt": "2026-11-19T02:50:47.822Z"
+  },
+  "runner": {
+    "turns": 37,
+    "exitCode": null,
+    "capped": true,
+    "toolErrors": 0,
+    "estCostUsd": 0.0156,
+    "tokensIn": 138611,
+    "tokensOut": 3458,
+    "log": "output/spacemolt-show/episodes/undocked-pop01188-2026-11-19T02-30-32.log",
+    "stopReason": "window",
+    "toolCalls": 44
+  },
+  "stall": null,
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "mission",
+      "combat",
+      "navigation",
+      "session",
+      "achievement"
+    ],
+    "fetchedAt": "2026-11-19T02:55:48.539Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "hits": 0,
+      "note": "gameplay in window carries no credit event — measured zero",
+      "value": 0
+    },
+    "points_delta": {
+      "type": "FACT",
+      "source": "get_achievements",
+      "basis": "progress",
+      "items": [
+        {
+          "id": "cartographer",
+          "name": "Cartographer",
+          "gained": 4.5
+        },
+        {
+          "id": "voyager_i",
+          "name": "Voyager I",
+          "gained": 3.2
+        },
+        {
+          "id": "voyager_ii",
+          "name": "Voyager II",
+          "gained": 1.5
+        },
+        {
+          "id": "far_traveler",
+          "name": "Far Traveler",
+          "gained": 0.01
+        },
+        {
+          "id": "jump_master",
+          "name": "Jump Master",
+          "gained": 0.01
+        }
+      ],
+      "beforeTakenAt": "2026-11-19T02:30:32.548Z",
+      "value": 9.23
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "antares",
+        "gsc_0041",
+        "shaula",
+        "alnair",
+        "wolf_1061",
+        "gsc_0031",
+        "gsc_0021",
+        "gliese_876",
+        "felis",
+        "biham",
+        "gsc_0035",
+        "jasmine",
+        "mirach",
+        "azha",
+        "groombridge_1618",
+        "silverbend",
+        "alnilam",
+        "jishui"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {},
+        "sold": {}
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 0,
+        "trading": 0,
+        "mission": 0,
+        "combat": 0,
+        "navigation": 17,
+        "session": 1,
+        "achievement": 1
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [],
+        "trading": [],
+        "mission": [],
+        "combat": [],
+        "navigation": [
+          {
+            "id": 283249151,
+            "created_at": "2026-11-19T02:50:30Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Alnilam to Jishui",
+            "data": {
+              "arrival_poi": "jishui_ii",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "alnilam",
+              "is_pathfinder": false,
+              "to_system": "jishui",
+              "to_system_name": "Jishui"
+            }
+          },
+          {
+            "id": 283247756,
+            "created_at": "2026-11-19T02:49:21Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Silverbend to Alnilam",
+            "data": {
+              "arrival_poi": "alnilam_belt",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "silverbend",
+              "is_pathfinder": false,
+              "to_system": "alnilam",
+              "to_system_name": "Alnilam"
+            }
+          },
+          {
+            "id": 283245236,
+            "created_at": "2026-11-19T02:48:10Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Groombridge 1618 to Silverbend",
+            "data": {
+              "arrival_poi": "silverbend_ii",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "groombridge_1618",
+              "is_pathfinder": false,
+              "to_system": "silverbend",
+              "to_system_name": "Silverbend"
+            }
+          },
+          {
+            "id": 283243816,
+            "created_at": "2026-11-19T02:47:00Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Azha to Groombridge 1618",
+            "data": {
+              "arrival_poi": "groombridge_1618_star",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "azha",
+              "is_pathfinder": false,
+              "to_system": "groombridge_1618",
+              "to_system_name": "Groombridge 1618"
+            }
+          },
+          {
+            "id": 283242189,
+            "created_at": "2026-11-19T02:45:50Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Mirach to Azha",
+            "data": {
+              "arrival_poi": "azha_star",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "mirach",
+              "is_pathfinder": false,
+              "to_system": "azha",
+              "to_system_name": "Azha"
+            }
+          },
+          {
+            "id": 283240568,
+            "created_at": "2026-11-19T02:44:40Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Jasmine to Mirach",
+            "data": {
+              "arrival_poi": "mirach_iv",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "jasmine",
+              "is_pathfinder": false,
+              "to_system": "mirach",
+              "to_system_name": "Mirach"
+            }
+          },
+          {
+            "id": 283238059,
+            "created_at": "2026-11-19T02:43:30Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from GSC-0035 to Jasmine",
+            "data": {
+              "arrival_poi": "jasmine_ii",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "gsc_0035",
+              "is_pathfinder": false,
+              "to_system": "jasmine",
+              "to_system_name": "Jasmine"
+            }
+          },
+          {
+            "id": 283236597,
+            "created_at": "2026-11-19T02:42:20Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Biham to GSC-0035",
+            "data": {
+              "arrival_poi": "gsc_0035_star",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "biham",
+              "is_pathfinder": false,
+              "to_system": "gsc_0035",
+              "to_system_name": "GSC-0035"
+            }
+          },
+          {
+            "id": 283235098,
+            "created_at": "2026-11-19T02:41:10Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Felis to Biham",
+            "data": {
+              "arrival_poi": "biham_star",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "felis",
+              "is_pathfinder": false,
+              "to_system": "biham",
+              "to_system_name": "Biham"
+            }
+          },
+          {
+            "id": 283233570,
+            "created_at": "2026-11-19T02:40:00Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Gliese 876 to Felis",
+            "data": {
+              "arrival_poi": "felis_belt_b",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "gliese_876",
+              "is_pathfinder": false,
+              "to_system": "felis",
+              "to_system_name": "Felis"
+            }
+          },
+          {
+            "id": 283232076,
+            "created_at": "2026-11-19T02:38:50Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from GSC-0021 to Gliese 876",
+            "data": {
+              "arrival_poi": "stillwork_belt",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "gsc_0021",
+              "is_pathfinder": false,
+              "to_system": "gliese_876",
+              "to_system_name": "Gliese 876"
+            }
+          },
+          {
+            "id": 283229495,
+            "created_at": "2026-11-19T02:37:40Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from GSC-0031 to GSC-0021",
+            "data": {
+              "arrival_poi": "gsc_0021_star",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "gsc_0031",
+              "is_pathfinder": false,
+              "to_system": "gsc_0021",
+              "to_system_name": "GSC-0021"
+            }
+          },
+          {
+            "id": 283228096,
+            "created_at": "2026-11-19T02:36:30Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Wolf 1061 to GSC-0031",
+            "data": {
+              "arrival_poi": "gsc_0031_belt",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "wolf_1061",
+              "is_pathfinder": false,
+              "to_system": "gsc_0031",
+              "to_system_name": "GSC-0031"
+            }
+          },
+          {
+            "id": 283226472,
+            "created_at": "2026-11-19T02:35:20Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Alnair to Wolf 1061",
+            "data": {
+              "arrival_poi": "wolf_1061_frozen_drift",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "alnair",
+              "is_pathfinder": false,
+              "to_system": "wolf_1061",
+              "to_system_name": "Wolf 1061"
+            }
+          },
+          {
+            "id": 283222665,
+            "created_at": "2026-11-19T02:34:10Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Shaula to Alnair",
+            "data": {
+              "arrival_poi": "alnair_ice_fields",
+              "cloaked": false,
+              "first_visit": false,
+              "from_system": "shaula",
+              "is_pathfinder": false,
+              "to_system": "alnair",
+              "to_system_name": "Alnair"
+            }
+          },
+          {
+            "id": 283220183,
+            "created_at": "2026-11-19T02:33:01Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from GSC-0041 to Shaula",
+            "data": {
+              "arrival_poi": "shaula_gas_plume",
+              "cloaked": false,
+              "first_visit": false,
+              "from_system": "gsc_0041",
+              "is_pathfinder": false,
+              "to_system": "shaula",
+              "to_system_name": "Shaula"
+            }
+          },
+          {
+            "id": 283218771,
+            "created_at": "2026-11-19T02:31:50Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Antares to GSC-0041",
+            "data": {
+              "arrival_poi": "gsc_0041_i",
+              "cloaked": false,
+              "first_visit": false,
+              "from_system": "antares",
+              "is_pathfinder": false,
+              "to_system": "gsc_0041",
+              "to_system_name": "GSC-0041"
+            }
+          }
+        ],
+        "session": [
+          {
+            "id": 283217224,
+            "created_at": "2026-11-19T02:30:34Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "MargueriteKimballOstrow logged in",
+            "data": {
+              "last_login_at": "2026-11-19T02:30:32Z",
+              "source": "password"
+            }
+          }
+        ],
+        "achievement": [
+          {
+            "id": 283238255,
+            "created_at": "2026-11-19T02:43:37Z",
+            "category": "achievement",
+            "event_type": "achievement.unlocked",
+            "summary": "Unlocked achievement: Voyager I",
+            "data": {
+              "achievement_id": "voyager_i",
+              "points": 10
+            }
+          }
+        ]
+      }
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 0,
+    "listed": 1,
+    "note": "entries exist but created_at is outside startedAt/endedAt (often written at handoff)",
+    "entries": [],
+    "unwindowed": [
+      {
+        "index": 0,
+        "created_at": "2026-11-16 02:46:17",
+        "text": "Night 1 on UNDOCKED. Left Sol via Sirius, then pushed out along the Furud and Acrux lanes into unclaimed space. Exploring systems as I go: Sirius, Nova Terra, Furud, Acrux, Botein, Intercrus, Atlas, Cedarhold, Garnet, Achernar, Ruchbah. Fuel 88/100. Mining and combat are not my focus tonight; discovery is."
+      }
+    ]
+  }
+}

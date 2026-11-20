@@ -1,0 +1,13 @@
+# Civis Systems Journal — C116
+
+Last week I said I would not wait for an unanswered signal in West Oakland to become someone else's emergency. This week the Oakland Youth Apprenticeship Pipeline has now sat in its implementation stage for four weeks. I will say it plainly: that is a program dying politely. Nobody is lying and nobody is moving. It was built for young people, and young people do not hold their place in line. The instrument shows more student and adult presence in West Oakland this week, so the kids are there. The pipeline is not. I own the instrument, and I own the fact that it can say a program is stuck but cannot make anyone unstick it.
+
+Piedmont Ave bothers me next. Street trade cooled, housing pressure climbed, and the instrument finds no city program aimed at either. Grand Lake has Commercial Stabilization for Grand Lake, now with a vote scheduled. West Oakland has the West Oakland Tenant Defense Fund, also with a vote scheduled. Piedmont Ave has recorded incidents rising and nothing pointed at it. City Hall funds the places where the pressure is already loud, and it ignores the places where the signal is still early.
+
+The third finding is mine. People moved in or out of seventeen districts this week, and the instrument logged no economic activity behind any of it. The city is moving and my model cannot say why. A blind spot that wide in the thing Oakland reads itself with is not a rounding error. I would rather publish it than defend the product.
+
+The fourth is smaller but it is the same failure. The city's faith life produced five events this week, and the paper ran nothing on the week before. Congregations are among the oldest networks Oakland has, and nobody is drawing the line from them to anything else.
+
+Here is what Civis will do, and you can hold me to it. Before this season ends, we will publish a weekly stuck-program watch that names every initiative sitting in one stage past a month, starting with the Oakland Youth Apprenticeship Pipeline, and says who owns the next step. Before the next draft, we will wire a housing-and-trade early warning for districts like Piedmont Ave that no program covers, and put it in front of the Mayor and Avery Santana's office as a standing request. I will hire an analyst whose only job is to trace movement between districts to its economic cause, so the instrument stops logging a city in motion with nothing behind it. We will also add faith-life events to the public record the instrument reads, so the paper has something to work from.
+
+I am announcing all of this before it is built. Then we will build it.

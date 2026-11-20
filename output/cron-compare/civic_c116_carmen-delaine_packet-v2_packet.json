@@ -1,0 +1,93 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "116",
+  "persona": "carmen-delaine",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Carmen Delaine",
+    "popid": "POP-00011"
+  },
+  "assignment": {
+    "story": {
+      "ref": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c116.json snapshots.Initiative_Tracker; storyline INIT-001:disbursement-active",
+      "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+      "kind": "initiative",
+      "angle": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+      "hookLine": "The civic record identifies a decision, initiative, or clock that needs a clear accounting.",
+      "hood": "West Oakland",
+      "popids": [],
+      "citizens": []
+    }
+  },
+  "angle": "output/cron-compare/civic_c116_carmen-delaine_packet-v2_angle.json",
+  "quotesRequested": 2,
+  "quotesLanded": 2,
+  "quotes": [
+    {
+      "pop": "POP-00037",
+      "name": "Brenda Okoro",
+      "quote": "Renewal means West Oakland businesses and residents, 23 days on the clock, and a closeout record on the table before council votes.",
+      "sourceKind": "office-record",
+      "officeRecord": {
+        "sourceKind": "office-record",
+        "cycle": 116,
+        "officeSlug": "okoro",
+        "statementId": "STMT-116-okoro-001",
+        "quote": "Renewal means West Oakland businesses and residents, 23 days on the clock, and a closeout record on the table before council votes.",
+        "topic": "West Oakland Stabilization Fund — charter renewal to council this cycle",
+        "initiativeId": "INIT-001",
+        "filePath": "output/civic-voice/okoro_c116.json",
+        "holderPopid": "POP-00037",
+        "speakerName": "Brenda Okoro"
+      }
+    },
+    {
+      "pop": "POP-00790",
+      "name": "Marcus Webb",
+      "quote": "The closeout is published, the ordinance is on the calendar with the scope that works and the 23-day clock still running — the hearing record carries the proof, and the roll call belongs to the Council.",
+      "sourceKind": "office-record",
+      "officeRecord": {
+        "sourceKind": "office-record",
+        "cycle": 116,
+        "officeSlug": "stabilization_fund",
+        "statementId": "STMT-116-stabilization_fund-001",
+        "quote": "The closeout is published, the ordinance is on the calendar with the scope that works and the 23-day clock still running — the hearing record carries the proof, and the roll call belongs to the Council.",
+        "topic": "Charter renewal on Council calendar with closeout in the hearing record",
+        "initiativeId": "INIT-001",
+        "filePath": "output/civic-voice/stabilization_fund_c116.json",
+        "holderPopid": "POP-00790",
+        "speakerName": "Marcus Webb"
+      }
+    }
+  ],
+  "officeRecords": [
+    {
+      "sourceKind": "office-record",
+      "cycle": 116,
+      "officeSlug": "okoro",
+      "statementId": "STMT-116-okoro-001",
+      "quote": "Renewal means West Oakland businesses and residents, 23 days on the clock, and a closeout record on the table before council votes.",
+      "topic": "West Oakland Stabilization Fund — charter renewal to council this cycle",
+      "initiativeId": "INIT-001",
+      "filePath": "output/civic-voice/okoro_c116.json",
+      "holderPopid": "POP-00037",
+      "speakerName": "Brenda Okoro"
+    },
+    {
+      "sourceKind": "office-record",
+      "cycle": 116,
+      "officeSlug": "stabilization_fund",
+      "statementId": "STMT-116-stabilization_fund-001",
+      "quote": "The closeout is published, the ordinance is on the calendar with the scope that works and the 23-day clock still running — the hearing record carries the proof, and the roll call belongs to the Council.",
+      "topic": "Charter renewal on Council calendar with closeout in the hearing record",
+      "initiativeId": "INIT-001",
+      "filePath": "output/civic-voice/stabilization_fund_c116.json",
+      "holderPopid": "POP-00790",
+      "speakerName": "Marcus Webb"
+    }
+  ],
+  "officeSilence": null,
+  "interviews": [],
+  "ranAt": "2026-11-16T19:15:01.985Z"
+}

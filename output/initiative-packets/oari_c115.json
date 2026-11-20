@@ -4,7 +4,7 @@
     "initiative": "oari",
     "initiativeId": "INIT-002",
     "cycle": 115,
-    "generatedAt": "2026-11-09T08:49:28.835Z",
+    "generatedAt": "2026-11-16T00:03:19.406Z",
     "description": "Oakland Alternative Response Initiative — $12.5M for civilian crisis response teams as alternative to armed police response"
   },
   "initiative": {
@@ -28,7 +28,7 @@
     "notes": "Cycle 82: Passed 5-4. Ramon Vega voted no. Leonard Tran voted yes.",
     "lastUpdated": "11/9/2026",
     "implementationPhase": "dispatch-live",
-    "milestoneNotes": "C107: East Oakland dispatch protocol deployment authorized; District 1 evaluation continues.\nC108 conversion: Stage Standing — OARI, dispatch-live, signed C82 (safety — not playable until the safety lever lands; the untended clock still runs).\nC109: Expanded to District 1 with evaluation metrics\nC112: Progress report accepted; D3 condition added for district-level data breakdown and community briefing before expansion\nC113: Progress report published; D3 East Oakland briefing directed with Fruitvale data and Baylight feasibility review\nC114: D3 East Oakland briefing and D5 audit directed; Fruitvale data and Baylight feasibility review docketed, with expansion held until after briefing.\nC115: D3 East Oakland briefing execution and documentation required; expansion held, with D5 audit and Baylight feasibility review still incomplete.",
+    "milestoneNotes": "C107: East Oakland dispatch protocol deployment authorized; District 1 evaluation continues.\nC108 conversion: Stage Standing — OARI, dispatch-live, signed C82 (safety — not playable until the safety lever lands; the untended clock still runs).\nC109: Expanded to District 1 with evaluation metrics\nC112: Progress report accepted; D3 condition added for district-level data breakdown and community briefing before expansion\nC113: Progress report published; D3 Fruitvale briefing directed with Fruitvale data and Baylight feasibility review\nC114: D3 Fruitvale briefing and D5 audit directed; Fruitvale data and Baylight feasibility review docketed, with expansion held until after briefing.\nC115: D3 Fruitvale briefing execution and documentation required; expansion held, with D5 audit and Baylight feasibility review still incomplete.",
     "nextScheduledAction": "Execute and publish the D3 briefing record with district-level and Fruitvale data",
     "nextActionCycle": "116"
   },
@@ -123,7 +123,7 @@
       "3": 75,
       "4": 284
     },
-    "avgIncome": 1478222,
+    "avgIncome": 1531371,
     "medianIncome": 98000,
     "atDisplacementRisk": 352,
     "linkedProfiles": [],

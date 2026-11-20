@@ -23,16 +23,15 @@
   },
   "footerPresent": null,
   "toolUse": [
-    "undocked_history",
-    "undocked_history",
     "citizen_lookup",
-    "canon_recall",
-    "canon_recall",
     "undocked_history",
+    "undocked_history",
+    "canon_recall",
+    "canon_recall",
     "canon_recall"
   ],
-  "toolCalls": 7,
-  "wordCount": 383,
+  "toolCalls": 6,
+  "wordCount": 396,
   "targetWords": "350-600",
   "capHit": 0,
   "checkFlags": [],
@@ -43,22 +42,23 @@
     "purposeMet": true,
     "inTarget": true,
     "inTargetBy": "code floor 350",
-    "words": 383,
+    "words": 396,
     "short": "",
     "score": 3,
     "max": 3,
     "model": "google/gemini-3.7-flash",
-    "draftSha256": "62c903ad9c1eee900c3b4610f20c95f0660e21506e511cc42049ee88aae918f4",
+    "draftSha256": "b8610b7435e778358b24ef518382fe5446e57d11d16e2311dd3b2ccb56724c0a",
     "costUsd": 0.0009
   },
   "gradeRecord": {
     "recorded": true,
     "line": "graded: 3/3 — nothing fell short"
   },
-  "article": "output/cron-compare/staged/undocked_c115_nia-rook_packet-v2_openai-gpt-6-luna.staged-0025.md",
+  "article": "output/cron-compare/staged/undocked_c115_nia-rook_packet-v2_openai-gpt-6-luna.staged-0022.md",
   "selfRecord": {
     "recorded": true,
-    "out": "th/.env' }\n{\n  \"popId\": \"POP-01076\",\n  \"name\": \"Nia Rook\",\n  \"recorded\": true,\n  \"text\": \"filed: Brooklyn Nguyen’s UNDOCKED night ended even on credits, which gives the episode its tidy little comp\"\n}"
+    "out": "nfig/godworld/.env // tip: ⌘ override existing { override: true }\n{\n  \"popId\": \"POP-01076\",\n  \"name\": \"Nia Rook\",\n  \"recorded\": true,\n  \"text\": \"filed: UNDOCKED: Elijah Brown’s long night ends even\"\n}"
   },
-  "ranAt": "2026-11-12T00:26:08.832Z"
+  "ranAt": "2026-11-14T00:22:53.393Z",
+  "dispositionReconciledAt": "2026-11-14T18:00:03.008Z"
 }

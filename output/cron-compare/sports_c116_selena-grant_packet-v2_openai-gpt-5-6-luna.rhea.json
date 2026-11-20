@@ -1,0 +1,77 @@
+{
+  "draft": "output/cron-compare/sports_c116_selena-grant_packet-v2_openai-gpt-5-6-luna.md",
+  "cycle": "116",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "b62fb4583086d9858a12eefdd9a4c38e790a04053e3df694d81fac436a5ad553",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All sports records, game statistics, and power ranking claims match Cycle 116 ground truth exactly with no fabrications or fourth-wall violations.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "selena-grant-oaks-v1",
+    "packageVersion": "SELENA-OAKS-2",
+    "manifestId": "AM-8ec6ef2ded38",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "-114",
+          "-117",
+          "43",
+          "-20.3"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Austin Reaves",
+      "Dillon Brooks",
+      "Harry Hayward",
+      "Wendell Carter Jr"
+    ],
+    "unverified": [
+      "Oklahoma City"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0152,
+  "durationMs": 12251,
+  "parseError": false,
+  "ranAt": "2026-11-18T00:18:54.705Z",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 463,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "b62fb4583086d9858a12eefdd9a4c38e790a04053e3df694d81fac436a5ad553",
+    "costUsd": 0.001
+  }
+}

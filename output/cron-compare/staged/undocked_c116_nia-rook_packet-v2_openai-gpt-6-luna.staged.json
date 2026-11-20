@@ -1,0 +1,61 @@
+{
+  "status": "staged",
+  "desk": "undocked",
+  "cycle": "116",
+  "persona": "nia-rook",
+  "byline": "Nia Rook",
+  "bylinePopid": "POP-01076",
+  "article": "output/cron-compare/staged/undocked_c116_nia-rook_packet-v2_openai-gpt-6-luna.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Marguerite Kimball-Ostrow",
+        "role": "quoted-source",
+        "popid": "POP-01188"
+      },
+      {
+        "name": "Luis Taz",
+        "role": "mentioned",
+        "popid": "POP-00298",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Piedmont Ave"
+    ],
+    "claims": [
+      {
+        "claim": "I didn't really do anything special on Sunday. I just flew through the systems one by one, and it happened to come out even on credits. I wasn't really focusing on that; I was just trying to explore and see where the show would take me.",
+        "sourceRef": "citizenVoice PRESS Marguerite Kimball-Ostrow"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-3ca442a12dae",
+    "draftSha256": "8c63a22f7426250726295f6562efbf28617d6c5d8ccbf65a07f4cc69da2f9e89",
+    "verdict": "output/cron-compare/undocked_c116_nia-rook_packet-v2_openai-gpt-6-luna.rhea.json",
+    "ranAt": "2026-11-17T00:24:35.675Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 350",
+      "words": 384,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "8c63a22f7426250726295f6562efbf28617d6c5d8ccbf65a07f4cc69da2f9e89",
+      "costUsd": 0.0009
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-17T00:24:39.379Z"
+}

@@ -1,0 +1,17 @@
+{
+  "desk": "culture",
+  "cycle": "116",
+  "model": "anthropic/claude-sonnet-5.5",
+  "turns": 5,
+  "maxTurns": 15,
+  "usageInputTokens": 383137,
+  "usageOutputTokens": 2587,
+  "savedFiles": [
+    "output/cron-compare/culture_c116_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.md"
+  ],
+  "compareAgainst": "output/desk-output/culture_c116.md",
+  "durationMs": 26001,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-11-20T00:20:06.748Z"
+}

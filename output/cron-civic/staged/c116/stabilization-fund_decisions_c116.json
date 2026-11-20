@@ -1,0 +1,23 @@
+{
+  "initiative": "INIT-001",
+  "initiativeId": "INIT-001",
+  "cycle": 116,
+  "primaryVoice": "Mayor gavel (mayor_gavel-001)",
+  "consolidatedFrom": [
+    "STMT-116-mayor_gavel-001 (Mayor gavel — West Oakland Stabilization Fund charter renewal)",
+    "STMT-116-stabilization_fund-001 (Webb — Charter renewal on Council calendar with closeout in the hearing record)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-001",
+    "MilestoneNotes": "C116: Charter renewal kept on Council calendar; final action requires verified C114 closeout, business-and-resident scope and the 23-day standard.",
+    "NextScheduledAction": "Verify C114 closeout and conduct Council charter-renewal consideration",
+    "NextActionCycle": 116,
+    "LastWorkCycle": 116,
+    "LastWorkSeat": "proj-stabilization-fund"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-115-proj-stabilization-fund-2026-11-10"
+    ]
+  }
+}

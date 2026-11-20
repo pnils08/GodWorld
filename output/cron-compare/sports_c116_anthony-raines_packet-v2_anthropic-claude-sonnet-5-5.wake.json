@@ -1,0 +1,64 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "116",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "anthony-raines",
+  "byline": {
+    "name": "Anthony Raines",
+    "popid": "POP-00017",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 17,
+  "quotesLanded": 0,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "dossier_read",
+    "dossier_read",
+    "canon_recall",
+    "canon_recall",
+    "sheet_read",
+    "dossier_read",
+    "dossier_read"
+  ],
+  "toolCalls": 7,
+  "wordCount": 932,
+  "targetWords": "evidence-bounded",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 932,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "9f7422e481e6073143127e7ca365b22c67b9df8471291d4be566c8257dd6ee45",
+    "costUsd": 0.0015
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/3 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/sports_c116_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": " // tip: ⌘ suppress logs { quiet: true }\n{\n  \"popId\": \"POP-00017\",\n  \"name\": \"Anthony Raines\",\n  \"recorded\": true,\n  \"text\": \"filed: The A's Sold a Surplus Starter and Bought Into a Surplus Infield\"\n}"
+  },
+  "ranAt": "2026-11-17T00:22:21.711Z"
+}

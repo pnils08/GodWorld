@@ -1,0 +1,57 @@
+{
+  "date": "2026-11-18",
+  "cycle": 116,
+  "results": [
+    {
+      "office": "civic-office-council-d7",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-office-council-d7_2026-11-18.json"
+    },
+    {
+      "office": "civic-office-council-d8",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-office-council-d8_2026-11-18.json"
+    },
+    {
+      "office": "civic-office-council-d2",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-office-council-d2_2026-11-18.json"
+    },
+    {
+      "office": "civic-project-stabilization-fund",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-project-stabilization-fund_2026-11-18.json"
+    },
+    {
+      "office": "civic-project-transit-hub",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-project-transit-hub_2026-11-18.json"
+    },
+    {
+      "office": "civic-office-baylight-authority",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-office-baylight-authority_2026-11-18.json"
+    },
+    {
+      "office": "civic-office-district-attorney",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-office-district-attorney_2026-11-18.json"
+    }
+  ],
+  "owed": null,
+  "ranAt": "2026-11-18T11:47:51.018Z"
+}

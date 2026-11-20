@@ -1,0 +1,43 @@
+{
+  "office": "transit_hub",
+  "cycle": 116,
+  "speaker": "Elena Soria Dominguez",
+  "cascadeSummary": "The mayor's gate is the gate I asked for: schematics delivered, answers written, nothing advances on a calendar reminder. So this cycle I let the low-severity flag pass — no new phase, no new funding — and I keep my desk on the only work that earns the next step: the schematics binder in the open, and the comment-and-response record logged in the language each comment came in. C115 is closed; the record is what remains, and it isn't finished.",
+  "statements": [
+    {
+      "statementId": "STMT-116-transit_hub-001",
+      "type": "decision",
+      "topic": "Fruitvale Transit Hub Phase II — engine flag held at evidence gate",
+      "initiative": "INIT-003",
+      "decision": "Let the low-severity engine flag pass without new phase or funding action; hold at design-phase pending the delivered schematics and the documented Fruitvale comment-and-response record.",
+      "quote": "A calendar reminder never built a station �� answers to Fruitvale do. The flag passes; the record stays open until it's real.",
+      "fullStatement": "[Fruitvale Transit Hub Phase II — C116 engine flag] Elena Soria Dominguez — I'm letting the engine flag pass, and I want Fruitvale to know exactly why that's the right call, not the quiet one. There is no new phase this cycle, no new money, no ribbon to cut on paper. The C86 authorization stands, the schematics are delivered, and the only thing standing between these drawings and the next design step is a comment-and-response record that is still being filled in, line by line. That's not a stall — that's the gate I asked the mayor to hold me to. So the flag passes at low severity and the answer desk stays open: St. Esperanza after Sunday mass, Tuesday evenings at the Cesar Chavez branch, Mam and Spanish and English side by side. Every comment gets a number. Every number gets a written answer in the language it was asked in. Until that binder is complete and published, these drawings do not move an inch.",
+      "trackerUpdates": {
+        "initiative": "INIT-003",
+        "MilestoneNotes": "C116: Engine flag let pass at evidence gate; held at design-phase pending delivered schematics and documented Fruitvale comment-and-response record.",
+        "NextScheduledAction": "Complete and publish the Fruitvale comment-and-response record; open bilingual answer desk at St. Esperanza and Cesar Chavez branch.",
+        "NextActionCycle": 117
+      }
+    },
+    {
+      "statementId": "STMT-116-transit_hub-002",
+      "type": "operational",
+      "topic": "The answer desk and the comment log — what's actually on the table now",
+      "initiative": "INIT-003",
+      "decision": "Run the documented review on the ground: numbered comment log, written responses in Spanish, English and Mam, published at the branch and the senior center before any design advancement.",
+      "quote": "Walk into the Chavez branch this week and you'll see the schematics at eye level and a numbered log under them — comment, answer, date, who signed it. That's the whole test.",
+      "fullStatement": "[Preliminary schematics — C116 Fruitvale community review] Elena Soria Dominguez — If you want to see what this cycle actually looks like, walk into the Cesar Chavez branch and look at the wall past the returns desk. The preliminary schematics are up at eye level — the BART plaza, the vendor apron where Doña Esperanza's cart sits, the protected crossings to the panadería, the pedestrian path around the staging lot. Under each sheet is the comment log: a number for every comment, the language it came in, the written answer, the date, and the name of the person at this desk who signed it. Brown paper and blue tape where a drawing got marked up on the spot, because people lean in and point and that's the point. A Mam speaker is at the senior center Thursday, not a phone number — a person, at a table. The question I keep getting is the right one: does the staging-lot path actually keep the vendors and the crossing safe during construction, or is that a drawing of a promise? That's exactly what the record has to answer in writing before anything advances. Schematics first, answers second, movement last. That's the order.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-116-transit_hub-003",
+      "type": "constituent",
+      "topic": "Who answers for Fruitvale this cycle",
+      "initiative": "INIT-003",
+      "decision": "Anchor the work in the people whose daily route the drawings change — the workers, vendors, riders, and families who cross at Fruitvale every day.",
+      "quote": "I don't answer for Fruitvale from a cubicle — I answer for it because my kids walk to the BART station past these drawings, and so do yours.",
+      "fullStatement": "[Who answers for Fruitvale this cycle] Elena Soria Dominguez — The construction crews taking their breaks under the overpass already see it — the platform's becoming a place people want to be before Phase II is real, and I'm not going to pretend a comment log is what's packing the row tracks. But that's precisely why this record matters now, while the drawings are still on the table and the people who cross at Fruitvale every day can still move a line on them. The abuelas walking to the panadería, the tamale vendors on the apron, the riders getting off at rush hour, the workers who know this station better than any consultant — they get the first look and the last word before design takes another step. I don't answer for Fruitvale from a cubicle. I answer for it because my kids walk past these drawings, and so do yours.",
+      "trackerUpdates": {}
+    }
+  ]
+}

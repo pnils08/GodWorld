@@ -1,0 +1,686 @@
+# GodWorld Daily Newsroom Source Pack — Cycle 115
+
+Artifact class: NLM_DAILY_SOURCE_PACK
+Canon status: NOT CANON. This is a bounded listening/research input.
+Authority order: current world summary first; published Edition archive second; staged and ungated newsroom reports are leads/interpretation only.
+Conflict rule: never let a staged or sample report override the world summary or published archive.
+Flagged reports are excluded from the report body and listed only as exclusions.
+Pack SHA-256: 65fda40cd0767faf5535d7621fa3c8d41b89ea4e283c0b62ca5ca5724a9e4b6f
+
+## Current world state — derived engine summary
+
+Source: output/world_summary_c115.md
+Cycle: 115
+
+# World Summary — Cycle 115
+
+**Season:** Spring | **Weather:** 55°F mild, W 10 mph, clear (frontState CLEAR), humidity 51, visibility 10
+**Cycle Weight:** medium-signal | **Pattern:** none | **Shock:** none | **Civic Load:** stable
+**Cycle Weight Reason:** High event volume (10); 36 high-priority story hooks; Wide domain spread (8 active); Domain saturation (4 in one domain).
+**Calendar context:** Y3C11, Spring, holiday=none | Sports season: A's off-season, Oaks early-season | First Friday: false
+
+---
+
+Snapshot: Cycle 115 | Pop 403,790 | Illness 4.0% | Employment 95.4% | Sentiment +0.13 | Weight medium-signal | Pattern none | Shock none | Load stable | Hospital 34 admissions, 69 in care at the close (0 tracked), 69 beds occupied
+
+## City State
+
+- **Population:** 403,790 | Illness rate 4.0% | Employment 95.4% | Economy stable | Hospital: 34 admissions, 69 in care at the close (0 tracked), 69 beds occupied
+- **Migration:** 1388 (MigrationDrift 4 this cycle)
+- **Events generated:** 2275 (prior-cycle 2305) | **Citizens aged:** 900 | **Intake processed:** 0
+- **Story seed count:** 30 (prior-cycle 44)
+- **Traffic load:** 1.01 | **Economic influence:** normal
+- **Nightlife volume:** 3 | **Vibe:** quiet | **Movement:** restricted
+- **City sentiment (Riley_Digest.CitySentiment):** +0.13
+- **Domain event counts (10 total):** FAITH 5, INFRASTRUCTURE 1, CIVIC 1, SAFETY 1, GENERAL 1, SPORTS 1
+
+### Neighborhood snapshot (Neighborhood_Map cycle 115)
+
+| Neighborhood | Sentiment | RetailVitality | EventAttractiveness | CrimeIndex |
+|---|---:|---:|---:|---:|
+| Jack London | +0.20 | 17.41 | 11.31 | 0.58 |
+| Uptown | +0.08 | 15.14 | 10.47 | 0.62 |
+| Grand Lake | -0.05 | 14.59 | 9.5 | 0.65 |
+| Downtown | +0.11 | 14.51 | 8.86 | 0.57 |
+| Piedmont Ave | +0.05 | 14.39 | 5.75 | 0.63 |
+| West Oakland | +0.31 | 13.65 | 6.36 | 0.61 |
+| Fruitvale | +0.29 | 13.46 | 9.32 | 0.67 |
+| Rockridge | -0.06 | 11.89 | 7.26 | 0.63 |
+| Chinatown | -0.08 | 10.24 | 9.82 | 0.63 |
+| KONO | -0.02 | 9.74 | 10.75 | 0.65 |
+| Lake Merritt | +0.03 | 9.48 | 4.58 | 0.59 |
+| East Oakland | +0.12 | 8.41 | 6.5 | 0.68 |
+| Dimond | -0.04 | 8.23 | 6 | 0.66 |
+| Temescal | +0.15 | 7.88 | 7.53 | 0.7 |
+| Eastlake | -0.06 | 7.82 | 6.03 | 0.71 |
+| Baylight District | +0.03 | 6.78 | 5 | 0.57 |
+| Adams Point | -0.04 | 6.71 | 4.75 | 0.68 |
+| Laurel | -0.15 | 6.50 | 6.38 | 0.68 |
+| Brooklyn | -0.11 | 6.22 | 4 | 0.62 |
+| Glenview | -0.01 | 5.72 | 4.25 | 0.72 |
+| San Antonio | -0.16 | 5.22 | 6 | 0.73 |
+| Ivy Hill | -0.14 | 5.17 | 4 | 0.66 |
+
+## What Moved (Ripple_Ledger, cycle 115 — 78 ripples)
+
+### migration (13)
+- CITIZEN_RELOCATED | The Cortez household (2) moved from Uptown to West Oakland — moving up from Uptown | West Oakland | mag 5 | targets POP-00035
+- CITIZEN_RELOCATED | Xavier Ramington moved from Temescal to West Oakland — moving up from Temescal | West Oakland | mag 5 | targets POP-00181
+- CITIZEN_RELOCATED | The Allen household (2) moved from Laurel to West Oakland — moving up from Laurel — sold the house in Laurel to rent up | West Oakland | mag 5 | targets POP-00199
+- CITIZEN_RELOCATED | The Soto household (2) moved from Jack London to KONO — leaving Jack London for a better fit — sold up and bought in KONO | KONO | mag 5 | targets POP-00276
+- CITIZEN_RELOCATED | Coen Cartier moved from Uptown to Chinatown — moving for a better fit between household income and housing costs | Chinatown | mag 5 | targets POP-00338
+- CITIZEN_RELOCATED | Brielle Lewis moved from Fruitvale to West Oakland — moving up from Fruitvale — sold the house in Fruitvale to rent up | West Oakland | mag 5 | targets POP-00459
+- CITIZEN_RELOCATED | Kelvon Ochoa moved from Rockridge to Lake Merritt — moving up from Rockridge — sold up and bought in Lake Merritt | Lake Merritt | mag 5 | targets POP-00481
+- CITIZEN_RELOCATED | Jesus Jorden moved from Temescal to Fruitvale — moving up from Temescal | Fruitvale | mag 5 | targets POP-00721
+- CITIZEN_RELOCATED | Jasmine Torres moved from Chinatown to KONO — leaving Chinatown for a better fit | KONO | mag 5 | targets POP-01111
+- CITIZEN_RELOCATED | Ruth Anyanwu moved from East Oakland to Downtown — moving up from East Oakland | Downtown | mag 5 | targets POP-01147
+- CITIZEN_RELOCATED | Ingeborg Hallstrom moved from Dimond to Downtown — moving up from Dimond | Downtown | mag 5 | targets POP-01181
+- CITIZEN_RELOCATED | Priya Raghunathan moved from Temescal to KONO — moving up from Temescal | KONO | mag 5 | targets POP-01214
+- MASS_EXODUS | 5 residents in Uptown planning to leave for a better household-income fit | Uptown | mag 8 | targets Uptown
+
+### trajectory (11)
+- NEIGHBORHOOD_BOOM | Downtown boom sustained — momentum 10/10, the block everyone wants onto | Downtown | mag 7 | targets Downtown
+- HOUSING_PRESSURE_HIGH | Downtown housing pressure at 10/10: rents climbing, households stretching to stay | Downtown | mag 7 | targets Downtown
+- NEIGHBORHOOD_COOLING | Laurel cooling off: foot traffic down, storefronts quieter than the rest of the city | Laurel | mag 6 | targets Laurel
+- NEIGHBORHOOD_BOOM | West Oakland boom sustained — momentum 9/10, the block everyone wants onto | West Oakland | mag 7 | targets West Oakland
+- NEIGHBORHOOD_BOOM | Fruitvale boom sustained — momentum 10/10, the block everyone wants onto | Fruitvale | mag 7 | targets Fruitvale
+- HOUSING_PRESSURE_HIGH | Fruitvale housing pressure at 8.5/10: rents climbing, households stretching to stay | Fruitvale | mag 7 | targets Fruitvale
+- NEIGHBORHOOD_BOOM | Jack London boom sustained — momentum 10/10, the block everyone wants onto | Jack London | mag 7 | targets Jack London
+- HOUSING_PRESSURE_HIGH | Jack London housing pressure at 10/10: rents climbing, households stretching to stay | Jack London | mag 7 | targets Jack London
+- NEIGHBORHOOD_RISING | KONO turning upward: retail busy, events drawing crowds, people moving in | KONO | mag 5 | targets KONO
+- NEIGHBORHOOD_BOOM | Uptown boom sustained — momentum 10/10, the block everyone wants onto | Uptown | mag 7 | targets Uptown
+- HOUSING_PRESSURE_HIGH | Uptown housing pressure at 10/10: rents climbing, households stretching to stay | Uptown | mag 7 | targets Uptown
+
+### fame-event (10)
+- fame-permanent | Anthony Raines — assumed fame (25 on record) | Rockridge | mag 0.1 | targets POP-00017
+- tier-climb | Maria Keen — the city keeps saying the name: Tier 3 -> 2 | Lake Merritt | mag 0.05 | targets POP-00013
+- tier-climb | Kai Marston — the city keeps saying the name: Tier 4 -> 3 | Rockridge | mag 0.05 | targets POP-00158
+- tier-climb | Celeste Tran — the city keeps saying the name: Tier 4 -> 3 | West Oakland | mag 0.05 | targets POP-00164
+- tier-climb | Evan Lewis — the city keeps saying the name: Tier 4 -> 3 | Laurel | mag 0.05 | targets POP-00200
+- tier-climb | Enzo Walker — the city keeps saying the name: Tier 4 -> 3 | Lake Merritt | mag 0.05 | targets POP-00291
+- tier-climb | Vladimir Gonzalez — the city keeps saying the name: Tier 3 -> 2 | Fruitvale | mag 0.05 | targets POP-00598
+- tier-climb | Daniel Cloak — the city keeps saying the name: Tier 2 -> 1 | West Oakland | mag 0.05 | targets POP-00722
+- tier-climb | Nia Rook — the city keeps saying the name: Tier 3 -> 2 | West Oakland | mag 0.05 | targets POP-01076
+- tier-climb | Tamsin Pruitt — the city keeps saying the name: Tier 3 -> 2 | Fruitvale | mag 0.05 | targets POP-01210
+
+### sports (5)
+- sentiment | A's [retirement]; A's [community-outreach]; A's [community-outreach]; Oaks W4 [big-win]; Oaks W4 [big-win] | mag 0.009
+- sentiment | aftermath: A's title week 5 after C110 | mag 0.044
+- game-night | The sports week reached 22 citizen(s) — 19 named, 11 staff week lines, 4 fan week lines, 12 trigger line(s); retirement: Vinnie Keane | mag 22 | targets POP-00001|POP-00021|POP-00136|POP-00597|POP-00599|POP-00078|POP-00060|POP-00527|POP-01223|POP-01022|POP-01023|POP-01024|POP-01079|POP-01027|POP-01028|POP-00198|POP-00212|POP-00224|POP-00273|POP-01026|+2 more
+- game-night-household | Game night reached 1 household(s) — streak W3 | mag 1 | targets POP-00308
+- game-night-texture | The town watched — game night shaped 33 citizen day(s) (streak W3) | mag 33 | targets POP-00017|POP-00127|POP-00136|POP-00139|POP-00144|POP-00151|POP-00181|POP-00220|POP-00283|POP-00284|POP-00307|POP-00329|POP-00438|POP-00451|POP-00476|POP-00507|POP-00627|POP-00643|POP-00693|POP-00728|+13 more
+
+### faith-event (5)
+- interfaith_dialogue | interfaith prayer breakfast brings leaders together | Adams Point | mag 0.01 | targets Interfaith Council
+- community_program | after-school tutoring program expands | Lake Merritt | mag 0.01 | targets Cathedral of the Living Word
+- community_program | seniors lunch program marks milestone | East Oakland | mag 0.01 | targets Masjid An-Nur Oakland
+- community_program | job training workshop begins new session | Chinatown | mag 0.01 | targets Bay Pure Land Buddhist Temple
+- outreach | prison ministry team visits facility | Downtown | mag 0.01 | targets Telegraph Presbyterian Fellowship
+
+### economic-event (3)
+- carryover | carryover: cycle 1 of 4 | Ivy Hill | mag -8 | targets BIZ-00150
+- carryover | carryover: cycle 2 of 4 | Ivy Hill | mag -8 | targets BIZ-00150
+- sector-impact:services/retail | Marine Systems lost 2 employees | Baylight District | mag -8 | targets BIZ-00105
+
+### city-event (3)
+- city-event | Lake Merritt Blossom Walk (Lake Merritt) | Lake Merritt | mag 0.02
+- city-event | Glenview Civic Response Meeting (Glenview) | Glenview | mag 0.02
+- city-event | Fruitvale Community Bloom Festival (Fruitvale) | Fruitvale | mag 0.02
+
+### lifestyle-sighting (3)
+- sighting | Rowan Pierce spotted at Presti Accounting | Downtown | mag 0.01 | targets BIZ-00102
+- sighting | Vinnie Keane spotted at Oakland Alternative Response Initiative | Downtown | mag 0.01 | targets BIZ-00095
+- sighting | Rico Valez spotted at Vernon Street Market | Adams Point | mag 0.01 | targets BIZ-00109
+
+### coverage-reaction (2)
+- INFRASTRUCTURE coverage reaction | Citywide reaction: last week's Tribune INFRASTRUCTURE coverage rated -3 (negative, 1 article, Trevor Shimizu). | mag -3
+- COMMUNITY coverage reaction | Citywide reaction: last week's Tribune COMMUNITY coverage rated +3 (positive, 1 article, Tamsin Pruitt). | mag 3
+
+### neighborhood-fold (2)
+
+### edition-coverage (2)
+- traffic/retail/nightlife/publicSpaces/communityEngagement/culturalActivity | Edition coverage lifted the city: traffic -0.03, retail +0.06, nightlife +0.012, publicSpaces +0, communityEngagement +0.084, culturalActivity +0.058 | mag -0.03
+- sentiment | prior-cycle coverage ratings × sentimentWeight × 0.015, clamped ±0.20 | mag 0.036
+
+### transit-event (2)
+- gridlock | Gridlock day — traffic index 87, worst on I-880 North with game-day crowds | mag 0.02
+- game-day-crowds | Oaks home week — 1 home game; game-day crowds through Jack London, Downtown, station ridership up to +1% | Jack London | mag 0.01 | targets Jack London|Downtown
+
+### chaos-event (1)
+- lawsuit_served | Papers served at the counter — a lawsuit, and lawyers the shop never budgeted for. | Jack London | mag 0.05 | targets BIZ-00050
+
+### initiative (1)
+- carryover | carryover: cycle 3 of 15 | West Oakland | mag 1 | targets West Oakland
+
+## Who Lived It (cycle 115)
+
+### Promotion (7)
+- POP-01232 Owen Davis — Emerged into Tier-4 in Eastlake (Eastlake)
+- POP-01233 Milena Hashimoto — Emerged into Tier-4 in Brooklyn (Brooklyn)
+- POP-01234 Tara Mehta — Emerged into Tier-4 in Glenview (Glenview)
+- POP-01235 Milena Coleman — Emerged into Tier-4 in Baylight District (Baylight District)
+- POP-01236 Octavia Pena — Emerged into Tier-4 in Adams Point (Adams Point)
+- POP-01237 Kira Liu — Emerged into Tier-4 in Dimond (Dimond)
+- POP-01093 Marguerite Salcedo — Promoted at Anchor Build (Tier 3 counted) after 9 years as a Managing Partner, Anchor Build. (Piedmont Ave)
+
+### Retirement (2)
+- POP-00001 Vinnie Keane — retired from the A's, announced C115 — the playing salary ends; appearances and the name pay $250,000 a year (Grand Lake)
+- POP-00177  — stepped back from professional life
+
+### Graduation (1)
+- POP-00842  — walked across the stage at their commencement ceremony
+
+### Recovering (1)
+- POP-00255 Howard Travis — caught up on sleep and woke up feeling like themselves again (Piedmont Ave)
+
+### Relationship (7)
+- POP-00132 Tobias Jurko — experienced renewed social energy (Piedmont Ave)
+- POP-00194 Yu Zen — reconnected with an old friend (Rockridge)
+- POP-00205 Travis Golin — had a minor disagreement with someone they know (Jack London)
+- POP-00209 Tiu Xiong — shared a moment of support with a neighbor (Uptown)
+- POP-00218 Joel Wren — felt distant from people around them (West Oakland)
+- POP-00222 Travis Paiz — experienced renewed social energy (Lake Merritt)
+- POP-00225 Andre Turner — felt distant from people around them (Downtown)
+
+### Household (4)
+- POP-00199 Mateo Allen — settled into a quiet evening on the couch with their partner (Laurel)
+- POP-00291 Enzo Walker — wrangled the kids through the bedtime routine (Lake Merritt)
+- POP-00360 Lingo Kim — discussed light city news with household members (Temescal)
+- POP-00467 Cedric Yamamoto — managed small chores and daily responsibilities (Uptown)
+
+### Households formed (14: solo 13, family 1)
+- HH-0115-F001 | solo | head POP-00085 | Uptown
+- HH-0115-F002 | solo | head POP-00344 | Downtown
+- HH-0115-F003 | solo | head POP-00507 | Rockridge
+- HH-0115-F004 | solo | head POP-00651 | Rockridge
+- HH-0115-F005 | solo | head POP-00754 | Fruitvale
+- HH-0115-F006 | solo | head POP-00801 | Rockridge
+- HH-0115-F007 | solo | head POP-00840 | Rockridge
+- HH-0115-F008 | solo | head POP-00844 | Laurel
+- HH-0115-F009 | solo | head POP-01108 | Jack London
+- HH-0115-F010 | solo | head POP-01167 | East Oakland
+- HH-0115-F011 | solo | head POP-01184 | Laurel
+- HH-0115-F012 | solo | head POP-01185 | Fruitvale
+- HH-0115-F013 | solo | head POP-01223 | KONO
+- HH-0115-F014 | family | head POP-01237 | Dimond
+
+## Sports (literal `Oakland_Sports_Feed.StoryAngle` column per row — current cycle + 2 prior)
+
+### C115 (7 entries)
+
+- **A's — roster-move (off-season):** Vinnie Keane (DH)
+  - StoryAngle: It's official: Vinnie Keane retires. Undrafted to undeniable, and staying in Grand Lake.
+  - Notes: Vinnie Keane made it official this cycle: he is retiring from baseball. The announcement closes a career that went from undrafted to undeniable, with 7 World Series titles in Oakland, an MVP, 7 All-Star selections, 3 Gold Gloves, 5 Silver Sluggers and 436 career homeruns. Keane said goodbye in pieces all season. He hit a 3-run homer in his final visit to New York, went 4-5 with a 3-run homer in his last regular season at bat to close the record 127-35 season, went 3-4 in a playoff game in Minnesota, and started at third base in the World Series clincher in Philadelphia, driving in a run. The parade in C111 and the Blue Lattern Bar night in C112 felt like the end, but this is the formal announcement. Keane is not leaving Oakland. He and his wife Amara live in Grand Lake, where the family opened Keane Mercantile, and the Keane Foundation runs the Firehouse 29 West Oakland Baseball Academy and the annual Keane for Kids Gala. His contract ran through 2041, so nothing is left on the books, only a DH/third base spot and a clubhouse voice to replace as Taveras and Quintero take over. The announcement also turns more light on Benji Dillon, his partner in the farewell season, who still has not said what he will do. Open questions: does Keane take a role with the A's under his friend Mike Paulson, does the franchise retire his number, and does his name go on something at the new Baylight stadium?
+  - Stats: Vinnie Keane 2041/127AB/.315AVG/40H/13HR/29RBI/1.1WAR, Vinnie Keane career/8229AB/2363H/436HR/1321RBI/.287AVG/.523SLG/71.4WAR/1x MVP/7x All-Star/3x Gold Glove/5x Silver Slugger/3x HR Derby/7x World Series
+  - Record -, Streak -, Mood reflective, FanSentiment high, Neighborhood Grand Lake
+- **A's — community-outreach (off-season):** Darrin Davis (DH), Rafael Montez (Police Chief)
+  - StoryAngle: Darrin Davis and Chief Montez put the badge on the pickleball court. First Youth Community Event is the Badge & Paddle Classic
+  - Notes: The Darrin Davis Community Youth Events program announced its first event this cycle: the Badge & Paddle Pickleball Classic, a free doubles tournament in East Oakland that puts Oakland kids, neighborhood residents and OPD officers on the same court. Partners are drawn at random, so nobody plays with who they came with. A teenager from Deep East might get a beat officer, a grandmother from Fruitvale might get the Chief. Davis announced it alongside Chief Rafael Montez, and the pairing is the point. The two met three years ago through the A's community policing work, with ride-alongs, youth clinics and school visits in West Oakland and Fruitvale, and what started as PR became a real friendship. Davis majored in criminal justice at Ohio State, was made an honorary police captain in his hometown of Columbus in 2032, and keeps that badge in his locker next to his batting gloves. His line has always been "Baseball's what I do. Justice is what I believe." Davis framed the tournament as the opposite of a crisis response: a chance for people to meet officers on a Saturday when nothing is wrong, and for officers to meet the neighborhoods they patrol by first name. Responders from the Oakland Alternative Response Initiative have been invited to enter a team, putting OPD and the behavioral health crews on the same bracket. OPD is the program's sponsor with support from the A's and Oaks, and every event stays free. Open questions: does Montez actually play, which A's and Oaks players sign up, and does Davis keep the program going if his playing days are winding down at 32 after missing major time twice in three seasons?
+  - Stats: -
+  - Record -, Streak -, Mood confident, FanSentiment excited, Neighborhood East Oakland
+- **A's — player-feature (off-season):** Eric Taveras (2B), Vinnie Keane (DH)
+  - StoryAngle: Fifth on points, first in credits: Taveras's Undocked pledge to Keane's academy is still waiting on a payout
+  - Notes: Back in C112, Eric Taveras posted on Moltbook that anything he won on Undocked would go to the Vinnie Keane Firehouse 29 West Oakland Baseball Academy. With Keane's retirement now official, that promise reads differently: the next face of the franchise pledging to the program that carries the last one's name. So where does it stand? Taveras is fifth in the Undocked standings with 20 points over 3 episodes. But his 1,170 credits are by far the most on the board, nearly four times second-place Clarissa Dane's 317. He led the standings for 2 cycles after his C112 episode, then got passed on points in C114 and C115 by Ronald Silk (38.15), Luis Taz (37.96), Daphne Stafford (32.93) and Lena Okafor (32.83). SpaceMolt still hasn't said what the rankings pay out, and no winnings have gone to anyone yet, so the pledge is real but the amount isn't. The Firehouse 29 academy already ties the two eras together: Adash Stanley volunteered there in C106, and the Keane Foundation runs it out of West Oakland. Taveras, 25, is coming off a 54 homerun season, Postseason MVP and World Series MVP in his first year on a $32.1M deal. Open questions: does Taveras go back on Undocked to reclaim the top spot, when does SpaceMolt pay, and does he give to Firehouse 29 anyway if the money never comes?
+  - Stats: Eric Taveras/3 EP/20 PTS/1170 CR/5th, Ronald Silk/2 EP/38.15 PTS/1st, Clarissa Dane/9 EP/10 PTS/317 CR
+  - Record -, Streak -, Mood hungry, FanSentiment excited, Neighborhood West Oakland
+- **A's — rumor (off-season):** Jose Colon (C), Henry Calzado (C), Sergio Aybar (C), Marco Fabregas (C), Mike Paulson (GM)
+  - StoryAngle: The backup outhit the starter and two kids are knocking. Who catches for the A's in 2042?
+  - Notes: Catcher is the one everyday spot nobody has asked about, and it is one Mike Paulson is looking at. Jose Colon has the job and the tools: 27, 84 overall, A potential, a switch hitter with a 72 arm and the Arm Strength Specialist tag. But 2041 was his weakest full season, .250 with a .290 OBP, 16 homeruns, 42 RBI and 1.7 WAR in 97 games, down from .276 with 19 homeruns in 2039. He makes $3.5M in 2042, then goes to arbitration through 2045. The backup outhit him. Henry Calzado, acquired from Baltimore for Julian Porcelli in the 2040 offseason, hit .285 with a .492 slugging, 11 homeruns and 2.4 WAR in 73 games, more WAR than Colon in 24 fewer games, and fielded .997. Calzado is 30, 75 overall with C potential, arbitration eligible 2042 to 2044, and has used all 3 minor league options, so he can't be sent down without waivers. Behind them in Las Vegas are two catchers pushing up. Sergio Aybar, 23, is the A potential prospect at 77 overall and the best defensive catcher in the organization (92 durability, 90 blocking, 86 arm, 80 fielding). His bat jumped this cycle, +6 contact and +6 power against righties, and he can also play third. Marco Fabregas, 24, is the 2038 first rounder, a B potential lefty pull hitter at 72 overall who improved in nearly every attribute this cycle. Paulson has options: ride Colon and bet on a 2039 bounce back, give Calzado more starts, push Aybar to the majors, or shop free agency with as much as $35.9M coming off the books if Dillon and Aitken both go along with Keane. And with two young catchers at AAA, is one of them the trade chip that fixes the bullpen or opens the Carmen Mesa logjam?
+  - Stats: Jose Colon/332AB/.250AVG/16HR/42RBI/1.7WAR, Henry Calzado/242AB/.285AVG/11HR/33RBI/2.4WAR, Sergio Aybar/77OVR/A POT/90BLK/86ARM, Marco Fabregas/72OVR/B POT/74CON R
+  - Record -, Streak -, Mood uncertain, FanSentiment uncertain, Neighborhood Chinatown
+- **Oaks — player-feature (early-season):** Harry Hayward (PF), Wilson Shepard (Coach)
+  - StoryAngle: Second-round rookie Harry Hayward scores a career high and makes his case for a bigger role
+  - Notes: Nine games into the Oaks' first season, the most interesting name on the bench is the one nobody mentioned on draft night. Harry Hayward, the second-round power forward on a $4.5M deal, scored a career-high 19 in Philadelphia on 9 of 15 with 7 rebounds and 2 blocks in 22 minutes, and the Oaks needed every point to come back from two down after three. The night before, against Orlando, he played 16 minutes and still found a way onto the stat sheet with 5 points, 2 steals and a block. His line so far reads like a player earning trust one game at a time: 12 points in Detroit, a 10-point, 10-rebound double-double in New York, 8 on 3 of 4 in 13 minutes in Indiana, 8 points, 5 rebounds, 3 assists, a steal and a block in 23 minutes in Toronto, 4 points and a steal in 13 minutes in the Cup opener against Oklahoma City, then Orlando and Philadelphia. He is 5 of 6 from three over his last five games and blocks shots at a rate few reserves match. His minutes have not settled yet, moving from 13 to 23, back to 13, then 16 and 22, and that is the question for Wilson Shepard: does Hayward's role keep growing, and whose minutes does it come from? With B. Simmons a DNP in three straight games and four of the last five, and T. Henderson Jr. and G. Trent Jr. getting only 4 minutes apiece in Philadelphia, the frontcourt rotation behind Wendell Carter Jr. looks like Hayward's to take. Open questions: does Shepard give him a fixed role, can a second-round rookie hold up when teams start to scout him, and does his $4.5M deal become the best value on a roster where Austin Reaves makes $30M?
+  - Stats: Harry Hayward PHI/19PTS/7REB/2BLK/9-15FG in 22 minutes, Harry Hayward ORL/5PTS/2STL/1BLK in 16 minutes, Harry Hayward OKC/4PTS/1STL/2-3FG in 13 minutes, Harry Hayward TOR/8PTS/5REB/3ASST in 23 minutes, Harry Hayward IND/8PTS/3-4FG in 13 minutes, Harry Hayward NYK/10PTS/10REB, Harry Hayward DET/12PTS, Harry Hayward/$4.5M
+  - Record 8-1, Streak W4, Mood hungry, FanSentiment excited, Neighborhood San Antonio
+- **Oaks — game-result (early-season):** Adash Stanley (PG), AJ Dybantsa (SF), Dillon Brooks (SF), Austin Reaves (SG), T. Jerome (PG)
+  - StoryAngle: The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109
+  - Notes: The Oaks put the Orlando Magic away in the first quarter and made it three straight, Oaks 125 - Magic 109, in front of a 94% crowd at home. Oakland scored 41 in the opening quarter to lead 41-27, went up 73-52 at the half and 101-76 after three, and the Magic only got it respectable by winning a garbage-time fourth 33-24. Adash Stanley led with 24 points, 8 assists and zero turnovers, hitting 6 of 12 from three. AJ Dybantsa bounced back from his 4 for 15 night against Oklahoma City by going 11 of 13 for 23 points, and Dillon Brooks followed his 22-point Cup opener with 23 on 10 of 14, giving him back-to-back 20-point games. Austin Reaves scored all 15 of his points from deep, 5 of 10 from three, with 7 assists, and Wendell Carter Jr. added 12 on 6 of 10. Off the bench T. Jerome had 9 points and 7 assists in 18 minutes and J. Valančiūnas went 4 for 5 for 8. Harry Hayward played 16 minutes after his 23 in Toronto and filled the line with 5 points, 2 steals and a block. As a team the Oaks shot 53 of 89, 18 of 33 from three, with 33 assists against only 4 turnovers, and went to the line just once all night. B. Simmons, who scored 5 in Toronto, was a DNP along with B. James Jr., J. Tate and Coen Carr. The Oaks move to 7-1.
+  - Stats: Adash Stanley/24PTS/5REB/8ASST/0TO/9-18FG/6-12 3PT, AJ Dybantsa/23PTS/5REB/4ASST/11-13FG, Dillon Brooks/23PTS/4REB/3ASST/10-14FG/3-5 3PT, Austin Reaves/15PTS/7ASST/5-10 3PT, Wendell Carter Jr/12PTS/5REB/6-10FG, T. Jerome/9PTS/7ASST, Harry Hayward/5PTS/2STL/1BLK in 16 minutes
+  - Record 7-1, Streak W3, Mood locked-in, FanSentiment excited, Neighborhood KONO
+- **Oaks — game-result (early-season):** AJ Dybantsa (SF), Adash Stanley (PG), Harry Hayward (PF), Wendell Carter Jr (C), T. Jerome (PG)
+  - StoryAngle: Down two after three in Philadelphia, the Oaks drop 40 in the fourth and Hayward scores a career high. Oaks 120 - 76ers 106
+  - Notes: The Oaks went into a sold-out Philadelphia, lost a 14-point lead, and won it back with the best fourth quarter of their young season, Oaks 120 - 76ers 106. Oakland opened 31-17, but the 76ers poured in 36 in the second to cut it to 56-53 at the half and won the third 29-24 to lead 82-80 going into the fourth. Then the Oaks scored 40 and held Philadelphia to 24, turning a two-point deficit into a 14-point win. AJ Dybantsa led with 25 on 10 of 16 and a perfect 3 for 3 from deep, following up his 11 of 13 night against Orlando. Adash Stanley added 23 on 8 of 13, 5 of 7 from three, with 7 assists. The story was Harry Hayward. After 16 minutes against Orlando, the second-round rookie played 22 and scored a career-high 19 on 9 of 15 with 7 rebounds and 2 blocks, topping his 12-point night in Detroit. Wendell Carter Jr. pulled down 15 rebounds, 3 of them offensive, with 12 points on 6 of 9, and T. Jerome ran the second unit with 9 assists in 22 minutes. J. Champagnie, scoreless against Orlando, hit 3 of 5 from three for 9 in 16 minutes. Austin Reaves had an off night, 4 of 14 in a team-high 41 minutes. B. Simmons was a DNP for the third straight game, his only minutes in the last five coming in the Toronto blowout, and B. James Jr., J. Tate and Coen Carr sat again. The Oaks shot 48 of 88 and 15 of 28 from three, but turned it over 14 times, after just 4 against Orlando. The Oaks win their fourth straight and move to 8-1.
+  - Stats: AJ Dybantsa/25PTS/6REB/10-16FG/3-3 3PT, Adash Stanley/23PTS/7ASST/8-13FG/5-7 3PT, Harry Hayward/19PTS/7REB/2BLK/9-15FG in 22 minutes, Wendell Carter Jr/12PTS/15REB/3OREB, T. Jerome/6PTS/9ASST, J. Champagnie/9PTS/3-5 3PT, Austin Reaves/12PTS/4-14FG
+  - Record 8-1, Streak W4, Mood electric, FanSentiment excited, Neighborhood San Antonio
+
+### C114 (11 entries)
+
+- **A's — rumor (off-season):** Ian Devine (RP), Louis Cross (RP), Hitoki Ka (RP), Mariano Rosales (CL), Clark Saryan (RP), Julio Valencia (CL)
+  - StoryAngle: $22 million in veteran relief and the rookies got the October innings. Is a bullpen refresh coming?
+  - Notes: The A's paid Ian Devine and Louis Cross a combined $22 million this past season, and when October came Devine was left off the playoff roster and rookie Clark Saryan took his spot. Cross finished at 0.9 WAR. Hitoki Ka was the best arm in the pen with a 0.90 ERA and Mariano Rosales saved 42, but the cracks showed in World Series game 2 when Saryan and Rosales gave up 2 runs each. With Saryan and Julio Valencia pushing up from the farm, does Paulson move a veteran contract to make room for the kids, or spend the money coming off the books on a high end arm?
+  - Stats: Ian Devine/51IP/3.35ERA/$10M, Louis Cross/64.1IP/2.66ERA/0.9WAR/$12M, Hitoki Ka/70IP/0.90ERA/10-1, Mariano Rosales/42SV/1.84ERA
+  - Record -, Streak -, Mood uncertain, FanSentiment uncertain, Neighborhood Eastlake
+- **A's — rumor (off-season):** Carmen Mesa (SP), Pablo Almanzar (SP), Henry Rivas (SP), Arturo Ramos (SP)
+  - StoryAngle: Five starters and one Carmen Mesa. Who is the odd arm out?
+  - Notes: Pablo Almanzar took the rotation spot most expected Carmen Mesa to fill, then threw a no-hitter in his debut and a 1-hitter to close the ALCS. That leaves the rotation full with Coles, Ramos, Rivas, Ellis and Almanzar. Mesa sits at AAA on a $780K deal with nowhere to start in Oakland. Henry Rivas is the most expensive arm at $28.2M and missed time this season before his complete game in World Series game 4. Is Mesa the A's best trade chip this winter, and how long does the front office keep paying top dollar for Rivas while the cheap arms win?
+  - Stats: Henry Rivas/136.1IP/11-4/2.64ERA/$28.2M, Arturo Ramos/212.2IP/23-1/2.41ERA/$8.1M, Pablo Almanzar/16IP/1.13ERA (playoffs)
+  - Record -, Streak -, Mood hungry, FanSentiment confident, Neighborhood Dimond
+- **A's — front-office (off-season):** Travis Coles (SP), John Ellis (SP), Ernesto Quintero (3B), Vladimir Gonzalez (RF), Mike Paulson (GM)
+  - StoryAngle: The bargain core: is it time to extend Coles, Ellis, Quintero and Gonzalez?
+  - Notes: With Keane and Dillon stepping away and Aitken testing the market, the bigger long term question for Mike Paulson may be the players who cost almost nothing. Travis Coles won the Cy Young at 21 on a $780K salary. John Ellis went 20-3 on the same number. Ernesto Quintero won Rookie of the Year with 46 homeruns at $980K, and Vladimir Gonzalez put up 4.7 WAR at $2.7M entering his peak. None of them are going anywhere yet, but every season they outplay their salary the price goes up. Does Paulson lock in the core now, or ride the bargains and pay later?
+  - Stats: Travis Coles/22-4/2.72ERA/254SO/6.2WAR/$780K, John Ellis/20-3/3.42ERA/$780K, Ernesto Quintero/.282AVG/46HR/92RBI/5.8WAR/$980K, Vladimir Gonzalez/.306AVG/28HR/4.7WAR/$2.7M
+  - Record -, Streak -, Mood confident, FanSentiment euphoric, Neighborhood Jack London
+- **A's — player-feature (off-season):** Benji Dillon (SP), Vinnie Keane (DH)
+  - StoryAngle: Keane said goodbye. Dillon still hasn't.
+  - Notes: The parade felt like a goodbye and the night at the Blue Lattern Bar was billed as one, but Benji Dillon still has not officially said he is retiring. Vinnie Keane made it clear. Dillon has not. One year removed from a top 5 Cy Young finish, Dillon lost velocity, went 9-8 with a 4.61 ERA and finished the season in the bullpen. Is there one more year in that arm, and if there is, is it in Oakland? Every cycle without an announcement makes the question louder.
+  - Stats: Benji Dillon/140.2IP/9-8/4.61ERA/120SO/2.0WAR
+  - Record -, Streak -, Mood reflective, FanSentiment uncertain, Neighborhood Jack London
+- **A's — player-feature (off-season):** Isley Kelley (SS), Darrin Davis (DH), Danny Horn (CF)
+  - StoryAngle: The last of the dynasty core: how long do Kelley and Davis have?
+  - Notes: When the parade ended the message was clear: Keane and Dillon step away, and Isley Kelley and Darrin Davis are left to carry the dynasty into the next era. Kelley hit .321 with 31 homeruns and won a Gold Glove and Silver Slugger at 33. Davis hit .305 with 26 steals at 32, but he has missed substantial time twice in the past three seasons. Together they make $62 million. Next to MVP Danny Horn they are the veteran spine, so how long does it hold while Quintero, Taveras and the kids take over?
+  - Stats: Isley Kelley/563AB/.321AVG/31HR/103RBI/7.4WAR/$33.6M, Darrin Davis/374AB/.305AVG/24HR/73RBI/26SB/$28.4M
+  - Record -, Streak -, Mood confident, FanSentiment euphoric, Neighborhood Glenview
+- **Oaks — game-result (early-season):** Adash Stanley (PG), Austin Reaves (SG), AJ Dybantsa (SF), Wendell Carter Jr (C)
+  - StoryAngle: The Oaks storm back from 20 down in Indiana but the Pacers end the perfect start. Pacers 104 - Oaks 100
+  - Notes: The Oaks' perfect start ends at four. In Indiana, in front of a building at 90% capacity, the Pacers built a 61-42 halftime lead behind a 34-point second quarter and led 82-62 after three. The Oaks answered with 38 points in the fourth and won the quarter 38-22, but the comeback came up four short, Pacers 104 - Oaks 100. Adash Stanley and Austin Reaves led the way with 19 apiece. Stanley hit 5 of 11 from three, and Reaves had 7 assists and 6 rebounds without a turnover. AJ Dybantsa added 15, Wendell Carter Jr. went 5 for 6 for 10 points and 7 rebounds, and T. Jerome chipped in 10 points and 5 assists. The Oaks fall to 4-1.
+  - Stats: Adash Stanley/19PTS/5REB/4ASST/5-11 3PT, Austin Reaves/19PTS/6REB/7ASST/0TO, AJ Dybantsa/15PTS/5REB, Wendell Carter Jr/10PTS/7REB/5-6FG, T. Jerome/10PTS/5ASST
+  - Record 4-1, Streak L1, Mood frustrated, FanSentiment excited, Neighborhood San Antonio
+- **Oaks — player-feature (early-season):** Harry Hayward (PF)
+  - StoryAngle: Second-round rookie Harry Hayward is shaping up as a solid rotation piece
+  - Notes: Five games in, rookie Harry Hayward is looking like a solid rotation piece. In 13 minutes in Indiana the second-round pick scored 8 points on 3 of 4 shooting, 2 of 2 from three, with 4 rebounds. It follows his 12-point night in Detroit and his 10-point, 10-rebound double-double in New York. Not bad for the name nobody talked about on draft night.
+  - Stats: Harry Hayward/8PTS/4REB/3-4FG/2-2 3PT in 13 minutes
+  - Record 4-1, Streak L1, Mood hungry, FanSentiment excited, Neighborhood San Antonio
+- **Oaks — game-result (early-season):** Austin Reaves (SG), Adash Stanley (PG), Wendell Carter Jr (C), AJ Dybantsa (SF)
+  - StoryAngle: The Oaks bounce back with a 60-point rout in Toronto. Oaks 135 - Raptors 75
+  - Notes: After the perfect start ended in Indiana, the Oaks went to Toronto and answered with the most lopsided win in franchise history, Oaks 135 - Raptors 75, in front of a 95% crowd. The Oaks led 39-19 after one, 73-40 at the half and 101-62 after three, and nobody played more than 28 minutes. Austin Reaves led with 20 on 4 of 6 from three, T. Jerome had 19 points, 7 rebounds and 7 assists, and Adash Stanley went 4 for 4 from three for 16 with 7 rebounds and 6 assists. Wendell Carter Jr. owned the glass with 14 points and 15 rebounds, 5 of them offensive. The Oaks shot 57 of 91, 19 of 28 from three, handed out 34 assists and turned it over only twice. The Oaks move to 5-1.
+  - Stats: Austin Reaves/20PTS/8-16FG/4-6 3PT, T. Jerome/19PTS/7REB/7ASST, Adash Stanley/16PTS/7REB/6ASST/4-4 3PT, Wendell Carter Jr/14PTS/15REB/5OREB, AJ Dybantsa/12PTS/5-8FG
+  - Record 5-1, Streak W1, Mood dominant, FanSentiment excited, Neighborhood San Antonio
+- **Oaks — player-feature (early-season):** Harry Hayward (PF)
+  - StoryAngle: Harry Hayward's minutes keep climbing, from 13 to 23
+  - Notes: Harry Hayward's minutes went up again. After 13 minutes in Indiana he played 23 in Toronto and filled the line: 8 points on 3 of 5, 2 of 2 from three for the second game running, 5 rebounds, 3 assists, a steal and a block. After 12 in Detroit, a double-double in New York and 8 in Indiana, the second-round rookie looks more like a rotation piece every game.
+  - Stats: Harry Hayward/8PTS/5REB/3ASST/1STL/1BLK/3-5FG/2-2 3PT in 23 minutes
+  - Record 5-1, Streak W1, Mood hungry, FanSentiment excited, Neighborhood San Antonio
+- **Oaks — team-update (early-season):** Trevor Henderson (C)
+  - StoryAngle: Henderson, Jerome and the depth turn a rout into a showcase
+  - Notes: The rout in Toronto gave the rest of the roster a night. T. Henderson Jr. scored 14 in 12 minutes on 7 of 10 shooting, T. Jerome put up 19 points, 7 rebounds and 7 assists, J. Valančiūnas added 8 on 4 of 5, G. Trent Jr. had 7 and B. Simmons 5. J. Champagnie handed out 6 assists in 20 minutes, and B. James Jr. got a minute at the end. Every Oak who played scored except James, and the only DNPs were J. Tate and Coen Carr.
+  - Stats: T. Henderson Jr./14PTS/7-10FG in 12 minutes, T. Jerome/19PTS/7REB/7ASST, J. Valančiūnas/8PTS/4-5FG, J. Champagnie/2PTS/6ASST
+  - Record 5-1, Streak W1, Mood confident, FanSentiment excited, Neighborhood San Antonio
+- **Oaks — game-result (early-season):** Dillon Brooks (SF), Adash Stanley (PG), Wendell Carter Jr (C), AJ Dybantsa (SF)
+  - StoryAngle: Dillon Brooks' six threes carry the Oaks past OKC in the Cup opener. Oaks 101 - Thunder 95
+  - Notes: The Oaks opened their first NBA Cup run at home in front of a sold-out crowd and held off the Oklahoma City Thunder, 101-95, behind Dillon Brooks' biggest scoring night as an Oak. The Oaks led after every quarter but never by much: 35-30 after one, 63-60 at the half and 78-74 after a 15-14 third. Brooks played 39 minutes and scored 22 on 8 of 15, hitting 6 of 9 from three, with 4 rebounds, 5 assists, 2 steals, a block and one turnover. In a game this close, his threes kept Oklahoma City at arm's length. Adash Stanley added 21 and 6 assists and went 6 for 6 at the line, though he turned it over 6 times. Wendell Carter Jr. was nearly perfect, 8 of 9 for 19 points and 13 rebounds, and AJ Dybantsa ground out a 13-point, 10-rebound double-double on a 4 for 15 night. As a team the Oaks went 13 of 13 from the line. The Oaks move to 6-1 and 1-0 in Cup play.
+  - Stats: Dillon Brooks/22PTS/4REB/5ASST/2STL/1BLK/8-15FG/6-9 3PT, Adash Stanley/21PTS/6ASST/6TO/6-6FT, Wendell Carter Jr/19PTS/13REB/8-9FG, AJ Dybantsa/13PTS/10REB/4-15FG
+  - Record 6-1, Streak W2, Mood locked-in, FanSentiment excited, Neighborhood KONO
+
+### C113 (6 entries)
+
+- **Oaks — game-result (early-season):** Adash Stanley (PG), Austin Reaves (SG), AJ Dybantsa (SF), Wilson Shepard (Coach)
+  - StoryAngle: The Oaks win again behind a big game behind Adash Stanley. The Oaks 91 - Pistons 78 on the road in Detroit.
+  - Notes: After getting their first win in their franchise history the Oaks followed with their second win in the very next game. The Oaks traveled to Detroit where its defense would shine in a 91-78 victory. Adash Stanley shined with 29 points while Austin Rivers facilitated the action with 10 assists while also contributing 12 points a 7 rebounds. AJ Dybansta continued his strong start and little spoken on second round pick , rookie Harry Hayward emergered with 12 points
+  - Stats: Adash Stanley/29PTS, Ausin Reaves/12PTS/7REB/10ASST, AJ Dybantsa/14PTS/9REB, Harry Hayward/12PTS
+  - Record 2-0, Streak W2, Mood hungry, FanSentiment neutral, Neighborhood Uptown
+- **Oaks — game-result (early-season):** Adash Stanley (PG), AJ Dybantsa (SF), Austin Reaves (SG), Harry Hayward (PF)
+  - StoryAngle: The Oaks remain sizzling hot after a winless preseason have now shot out of the gate winning 3 straight. Oaks 115 - Knicks 93 in New York
+  - Notes: Watch out now but the Oaks have won three straight games to start the inauguaral season. This time the Oaks traveled to New York to face the Knicks and had another convincing win beting the Knicks 115-93. Austin Reaves and AJ Dybansta lead scoring with 23 points a piece while Adash Stanley flirted with his first triple double. Harry Hayward repeats his strong performance recording a double double. 
+  - Stats: Adash Stanley/16PTS/11REB/9ASST/2STL/2BLK, Ausin Reaves/23PTS/9REB, AJ Dybantsa/23PTS, Harry Hayward/10PTS/10REB
+  - Record 3-0, Streak W3, Mood locked-in, FanSentiment excited, Neighborhood San Antonio
+- **Oaks — game-result (early-season):** Adash Stanley (PG), AJ Dybantsa (SF), Austin Reaves (SG), Harry Hayward (PF)
+  - StoryAngle: The Oaks completly dismantle the Wizards in Washington. Oaks 105 - Wizards 62
+  - Notes: The Oaks now have won their first 4 games to start their first season in the NBA. This latest being the most jarring yet. The Oaks traveled to Washington and blew out the Wizards with a score of 105-62. A 43 point win in just their forth game speaks to the roster configuration and the coaching in the young season. Adash Stanley and Austin Reaves both scored 23 respectively in a game that mainly featured well orchestrated defense by the Oaks
+  - Stats: Adash Stanley/23PTS/6REB/8ASST, Ausin Reaves/23PTS/5REB, AJ Dybantsa/8PTS/7REB
+  - Record 4-0, Streak W4, Mood locked-in, FanSentiment excited, Neighborhood San Antonio
+- **A's — rumor (off-season):** Desmond Morton (LF), Frank Reyna (RF), Danny Horn (CF), Vladimir Gonzalez (RF), JR Rosado (LF)
+  - StoryAngle: The Outfield squeeze for next season. 5 Outfielders for 3 positions
+  - Notes: Danny Horn is your starting CF. A returing MVP and the best player in baseball makes it an easy decision. Darrin Davis figures to be your DH as he remains under contract and showed his numbers did not decline, albiet he was injured. Davis has missed substantial time twice over the past three seasons. Vladimir is entering his peak and put up his best numbers of his career last season. Rates as a clutch perfomer and is essentially who you chose over Peter Busch last offseason. If those spots are set then you have three players for one left field opening. Desmond Morton is you highest rated prospect with 5 tools and has shown success at the MLB level, Frank Reyna is a power hitter with a mass of potential that also showed success. JR Rosado performed well in his major league experience and had good contact numbers but may trend as a role player in the grand scheme. What is the choice Paulson should make here.
+  - Stats: Desmond Morton/285AB/.291AVG/7HR/44RBI, Frank Reyna/164/.317AVG/14HR/34RBI,JR Rosado/184AB/.298AVG/7HR/27RBI
+  - Record -, Streak -, Mood reflective, FanSentiment euphoric, Neighborhood Downtown
+- **A's — community-outreach (off-season):** Darrin Davis (DH), Rafael Montez (Police Chief)
+  - StoryAngle: Darrin Davis works with the Oakland Police and Rafael Montez on youth outreach programs in the city.
+  - Notes: Darrin Davis and Rafael Montez annouce the start of the Darrin Davis Community Youth Events program that will be a city-wide outreach iniative to run various programs throughout the city. Entertainment, Workshops, Keynotes, etc, in an effort to bring Oakland youth together to focus on common goals to help the communties. The Oakland Police is spornsoring these events along with added support from the Oakland A's and Oaks. The events are said to be happening monthly throughout the city and will always be free of charge. More details to follow on schedule of events in the city
+  - Stats: -
+  - Record -, Streak -, Mood reflective, FanSentiment euphoric, Neighborhood East Oakland
+- **A's — rumor (off-season):** Mark Aitken (1B), Mike Paulson (GM)
+  - StoryAngle: Mark Aitken sets for Free Agency , but will always remain in Oakland.
+  - Notes: Mark Aitken ackowledged the pending Free Agency and his want to remain in Oakland. Aitken also acknowledged the business side of it and said he ultimately wouldnt have hurt feelings and is a life long Oakland resident regardless. Aitken who has been very active in the Oakland civic scene stated that he has grown very fond of Oakland and its residents and doesnt see somewhere else he would rather live. Aitken and Paulson have both acknowledged that preliminary talks have started but that Aitken is set to test the market this free agency.
+  - Stats: check Mark Aitken TrueSource
+  - Record -, Streak -, Mood reflective, FanSentiment uncertain, Neighborhood East Oakland
+
+## Evening Texture (Riley_Digest cycle 115)
+
+- **Famous people spotted:** Rowan Pierce, Vinnie Keane, Rico Valez
+- **Restaurants:** **Eastlake Kitchen** (Eastlake), **Port Grind** (Grand Lake), **Jack London Square Markets** (Jack London)
+- **Fast food:** **SpeedyBurger** (Downtown)
+- **Nightlife:** **Civic Watch Patio** (Glenview). Volume 3, vibe quiet, movement restricted. Weather impact 1.00.
+- **City events:** Lake Merritt Blossom Walk, Glenview Civic Response Meeting, Fruitvale Community Bloom Festival
+- **Evening media TV:** **Crisis Desk**, **Spring Lineup**, **A's Prospect Report**, **Film Room with T. Jerome (PG)**
+- **Evening media movies:** **New Bloom**, **The GM**
+- **Sports broadcast:** Oakland Sports Tonight
+- **Streaming trend:** political commentary surge
+- **Food trend:** High mobility / civic-tension food trend
+
+## World Events (cycle 115 — 10 total)
+
+**Low-severity:**
+- **INFRASTRUCTURE — crisis-spike — Glenview:** Low-severity public-works spike in Glenview (impactScore 20)
+- **CIVIC — texture — (no neighborhood):** neighborhood grievance
+- **SAFETY — texture — (no neighborhood):** minor pursuit
+- **GENERAL — texture — (no neighborhood):** locked-out worker
+- **SPORTS — texture — (no neighborhood):** local sports bar hosts a packed watch gathering
+- **FAITH — interfaith_dialogue — Adams Point:** interfaith prayer breakfast brings leaders together at Adams Point
+- **FAITH — community_program — Lake Merritt:** Cathedral of the Living Word: after-school tutoring program expands
+- **FAITH — community_program — East Oakland:** Masjid An-Nur Oakland: seniors lunch program marks milestone
+- **FAITH — community_program — Chinatown:** Bay Pure Land Buddhist Temple: job training workshop begins new session
+- **FAITH — outreach — Downtown:** Telegraph Presbyterian Fellowship: prison ministry team visits facility
+
+## Chaos Events (Chaos_Cars, cycle 115 — 5 total)
+
+| Vehicle | Outcome | Target | Metric | Magnitude | Floor fired |
+|---|---|---|---|---|---|
+| mail_truck | lawsuit_served | business BIZ-00050 | Growth_Rate | -1 | FALSE |
+| ice_cream_truck | block_party_catalyst | neighborhood Fruitvale | Sentiment | 0.08 | FALSE |
+| mail_truck | new_contract_letter | business BIZ-00162 | Growth_Rate | 1 | FALSE |
+| mail_truck | new_contract_letter | business BIZ-00224 | Growth_Rate | 1 | FALSE |
+| garbage_truck | dumping_cleared | neighborhood San Antonio | Sentiment | -0.08 | FALSE |
+
+**Narrative seeds:**
+- mail_truck → BIZ-00050: Papers served at the counter — a lawsuit, and lawyers the shop never budgeted for.
+
+## Three-Cycle Trends (C113–C115)
+
+- **Cycle weight:** C113 high-signal → C114 high-signal → C115 medium-signal
+- **Civic load:** C113 minor-variance → C114 minor-variance → C115 stable
+- **Pattern flag:** C113 elevated-activity → C114 calm-after-shock → C115 none
+- **Shock flag:** C113 none → C114 none → C115 none
+- **Migration drift:** C113 8 → C114 9 → C115 4
+- **Events generated:** C113 2222 → C114 2305 → C115 2275
+- **Story seed count:** C113 30 → C114 44 → C115 30
+- **City sentiment:** C113 0.1 → C114 0.15 → C115 0.13
+
+## The people, in their own words — daily citizen digest
+
+Source: output/citizen-day-digest.md
+Canon status: NOT CANON. Verbatim citizen reflections and life events from the world ledger — a listening slice, not published reporting.
+
+# Today in Oakland — told by its people
+
+A daily digest of citizen life over the last 24 hours, assembled from the citizens' own reflections and life events on record (through Cycle 115). Everything below is sourced from the world ledger — nothing is invented.
+
+## The big moments
+
+- **Tariq Harris** (Chinatown) — Trained the new person at Grand Lake Books and heard afterward it was the best onboarding in years.
+- **Xavier Davis** (Downtown) — Someone at Oakland Housing Authority is being groomed for the next step up, and it is not them.
+- **Priyanka Raman** (West Oakland) — A supervisor at Oakland Tech Collective asked what they want next, and seemed to mean it.
+- **Rupert Ochoa** (Fruitvale) — A client at West Oakland Community Center asked for someone more senior.
+- **Isaac Renteria** (Fruitvale) — A coworker at Baylight Construction Authority said the new hires keep getting pointed their way for answers.
+- **Chandni Kessler** (Laurel) — Covered for a coworker at Baylight Construction Authority for a week and heard nothing about it.
+- **Alexa Ward** (West Oakland) — A supervisor at Baylight Construction Authority corrected them in front of a customer.
+- **Tara Ellison** (Rockridge) — Was left off the invite at Bay Tribune for the meeting about their own account.
+- **Thuy Pham-Larsen** (Brooklyn) — Got pulled into a bigger conversation at Oakland City Schools than the job description covers.
+- **Tariq Mansouri** (West Oakland) — Someone from another team at Oakland Hospital asked if they would ever consider moving over.
+
+## The people, in their own words
+
+### Sonia Parikh — Podcast Host / Software Engineer — Fruitvale
+
+> Jess! Hey, it’s been too long. I swear I was just thinking about you the other day—I saw that meme you sent me and laughed way harder than I should have. How’ve you been? That does sound peaceful, honestly. Sometimes the slow stuff is the stuff you remember. I’ve been painting over graffiti with a few neighbors—barely knew them before, but now we’re on first-name basis. *(talking with Jessica Brooks)*
+
+> Beatrix and I—we still text about nothing, meme links and shitty weather, but it’s been months since we actually sat down. She’s got her own life now, her own orbit, and I keep telling myself that’s fine, that’s adult friendship. But there’s this quiet thing where I don’t know if we’d know what to do with each other if we were in the same room, and that scares me a little.
+
+*Around the neighborhood: organized the clothing drive donations and recognized a coat they had donated two years ago*
+
+### Rafael Montez — Police Chief — Piedmont Ave
+
+> To be honest, that 26% clearance rate in Uptown still sticks with me. It's not just a number; it represents real cases and real people. We're working to improve our follow-through and community trust. It's a tough spot, but we're on it.
+
+### Mason Ortega — Journalist, Food & Hospitality — Uptown
+
+> graded: 2/3 — The piece invents individual workers, shifts, and direct quotes rather than treating the signal without inventing personnel or workplace conditions.
+
+> filed: Oakland Casino Town sits in the Baylight District with 99 names on the roster this cycle, three of t
+
+### Benji Dillon — Pitcher, Oakland A's Legend — Rockridge
+
+> Anthony Raines is a friend, and I'm happy to see him covering the A's. He's got a good eye for the game, and his writing does justice to the team. It's nice having him around Rockridge; we chat about the A's whenever we run into each other.
+
+> To be honest, I've noticed people recognizing me more often around Rockridge and at the grocery store. It feels a bit surreal, but I'm trying to stay grounded. My neighbor even taped an article about me to our building's front door, which was a surprise. I'm just trying to keep doing what I do and not let it change me too much.
+
+*Around the neighborhood: put on their good suit for the Sunday service because some traditions still matter*
+
+### Anthony Raines — Journalist, Lead Beat Reporter - Oakland A's — Rockridge
+
+> As a rising name in Rockridge, I've gotten used to people knowing who I am and what I do. It's not something I think about much anymore, to be honest. I just do my job and try to be a good neighbor. I've lived here long enough that it's just part of the fabric of my life. People will sometimes stop me at the corner store or mention something about my stories, and that's nice.
+
+> Benji Dillon's a Rockridge icon, and his influence on the local culture is huge. I've seen it firsthand - people around here still talk about his games, his style. He's one of us, you know? The neighborhood loves him, and he loves it back. I've had conversations with him about the community, and he's always been passionate about giving back.
+
+*Around the neighborhood: one of the kids asked a question at dinner that stopped the room*
+
+---
+*Assembled 2026-11-14 from Reflection_Intake (46 reflections, 33 citizens) and LifeHistory_Log (85 life events) over the last 1 day by scripts/buildCitizenWeekDigest.js --daily. Read-only; no content generated.*
+
+## Daily program
+
+- proposed profile: REPORTED_DAY
+- proposed presentation: deep_dive/default
+- activation eligible: true
+- reason codes: RHEA_PASSED_7, REPORTED_THRESHOLD_MET_1
+- Rhea dispositions: passed=7, rhea-flagged=0, never-gated=0
+
+### W1 reporter chases
+
+- Ines Sorensen — Voices, C115: you pick whose own words carry the day: I'm focusing on the A's trade with the Phillies and its impact on the community. The acquisition of Giancarlo Hernandez and Antone Baez is a big deal, and I want to explore what it means for the team and the neighborhood.
+- Kai Marston — Benji Dillon is rising — the acts and the rooms they play: I'm going to follow up on Benji Dillon's rising fame in Rockridge. As a legendary A's player living in the neighborhood, his presence is felt locally. I'll check in with Anthony Raines, the Lead Beat Reporter for the A's, who's also based in Rockridge and new to the culture record this cycle. He might have insights into how Dillon's sports fame is influencing the local arts scene.
+- Maria Keen — Uptown — the programs that hold the block and the people who founded them: I'm heading to Uptown to get a feel for the Oakland Sound Archive and its impact on the neighborhood. I want to talk to Toto Foto, the Theater Director, about the arts scene and how it intersects with the Archive. I'll also be on the lookout for anyone who can give me insight into the block's dynamics and the people who live there.
+- Mason Ortega — Baylight District kitchens: Oakland Casino Town, Bubic Burgers — the people who work the shift: I'm standing outside Oakland Casino Town on a Tuesday night, watching the valet lane and the smokers by the side door. The ledger says 99 employees, down one, and the only names on the roster are Gregory Mims in Organized Crime, Philly Rodriguez the Casino Manager, and Manfred Owens the Booky. That's the whole kitchen, if you can call it that. I want to know who's actually working the floor, the cage, the back office — the people who aren't on the sheet. The place is a machine, and the machine runs on people nobody lists. I'm going to start with Philly Rodriguez, because a casino manager either knows everyone or is hiding from them. I'll ask about the shift, the regulars, the walk-ins, the t
+- Sharon Okafor — Vinnie Keane is fading — how the city follows its names: I'm going to follow Anthony Raines, the new Lead Beat Reporter for the Oakland A's, as he settles into his role in Rockridge. I'll observe how the neighborhood reacts to him and how he navigates his new position. The A's recent trade activities have been making headlines, and I'm curious to see how Raines covers the story and interacts with other A's legends like Benji Dillon, who lives in the same neighborhood.
+- Tamsin Pruitt — The lives of C115: 9 people — Lena Marchetti moved into a place of their own in East Oakland, renting: I'm planning to chase the story of Lena Marchetti moving into a place of their own in East Oakland. The event is the lead; one true detail; what came next only if the story says. Lena Marchetti saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner near a fenced build site in C114. This cycle, they said no to something and felt the shape of who they are in it near a fenced build site, and heard someone at the cafe complain about the Baylight District noise and bit their tongue. I'll check if these threads align and what the Tribune previously said about Lena Marchetti.
+- Nia Rook — UNDOCKED episode: Elijah Brown, Thursday night. Standings: Luis Taz leads the board — rank #1, 45.19 achievement points, 0 credits, 2 cycle(s) led, current streak 2. In the chair: Elijah Brown — Electrician.: I'm chasing Elijah Brown's Thursday night UNDOCKED episode to understand his strategy and how it impacted the standings. Luis Taz is still leading the board, and Elijah Brown's performance was notable.
+- Celeste Tran — Rico Valez gained 1 mention this cycle (20 total); West Oakland moves the most — what Oakland is doing together this week: I'm going to chase the story of West Oakland's surge in new residents and see how it ties into the city's cultural trends. The A's trade news is still buzzing, and I want to explore how that's affecting the community.
+
+### W2 Packet-backed quote coverage
+
+- Voices, C115: you pick whose own words carry the day: 3 quote(s).
+- Benji Dillon is rising — the acts and the rooms they play: 3 quote(s).
+- Uptown — the programs that hold the block and the people who founded them: 4 quote(s).
+- Baylight District kitchens: Oakland Casino Town, Bubic Burgers — the people who work the shift: 2 quote(s).
+- Vinnie Keane is fading — how the city follows its names: 4 quote(s).
+- The lives of C115: 9 people — Lena Marchetti moved into a place of their own in East Oakland, renting: 3 quote(s).
+- UNDOCKED episode: Elijah Brown, Thursday night. Standings: Luis Taz leads the board — rank #1, 45.19 achievement points, 0 credits, 2 cycle(s) led, current streak 2. In the chair: Elijah Brown — Electrician.: 1 quote(s).
+- Rico Valez gained 1 mention this cycle (20 total); West Oakland moves the most — what Oakland is doing together this week: 4 quote(s).
+
+## Recent newsroom reports — not established fact
+
+### STAGED — output/cron-compare/staged/culture_c115_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.staged-0021.md
+
+This report is behind the publication gate and is not yet canon.
+
+"I've noticed the block's been quiet this week, and people are whispering about someone from the neighborhood, but I haven't caught the name. I'm not sure if it's related to another store closing."
+
+That is Hazel Lanning, a student in Laurel. It's the line she gave this cycle. Her morning page runs longer and says it plainer: "The block's been weird quiet this week, like everyone's holding their breath. Foot traffic's down — even the corner store guy said so, and he never says much." Then she reaches for the one comparison a kid in this city has handy: "It's got that feeling before a game, when you know something's about to happen but the lineup hasn't been posted yet. I just hope it's not another store closing."
+
+She carries one question off the page, and I'm giving it to you whole: "Who's the someone everyone's whispering about, and is this going to be another store closing?" I don't have the name either. Neither does she.
+
+---
+
+"It's the little things, honestly. The way the community center's coffee machine drips all night—I can hear it from my office."
+
+Brooklyn Nguyen coordinates community programs. She lives in Fruitvale, and this was her night page, written when the place had stopped and the machine hadn't. She doesn't hurry past the joke on herself: "I know it's just a coffee machine. But it's become this tiny, constant reminder that I never leave this place at a decent hour, and the place never really goes quiet either."
+
+Her page goes on, and the next part is hers: "I keep the plant I brought home on my desk, and I watered it today, and I thought, 'When did I start keeping a plant at work because I'm here more than I'm home?'" She names what she's pointing at when she points at the machine. It's Martin, the distance, and "the neighborhood shifting under our feet." She says those are "too heavy to hold at 1 a.m." Then she finishes: "So I fixate on the drip. It's easier."
+
+She wrote about Martin once before, in C112. She had switched over to the Stabilization Fund, and she wrote that "life got louder, and we got busier." She asked then whether that was the same as drifting apart. That's the same question, carried to a different hour.
+
+---
+
+"is shifting away from the people who've been here all along. It's like the neighborhood I knew is being priced out."
+
+Omar Amici is a construction laborer in Uptown. The paper has run the front half of that sentence more than once, in its C113 and C114 pieces, with the for-rent signs and the busier streets. This cycle his own words go on to the end of it. In C112 he put the same worry another way on his night page, as a house he's "clawing toward." He wondered if Helena and Marmol "would still know me if I finally get it."
+
+He has never answered whether the house comes first or the neighborhood goes first. This cycle he doesn't try. He says the last line the way you set down a tool at the end of a shift:
+
+"It's like the neighborhood I knew is being priced out."
+
+### STAGED — output/cron-compare/staged/culture_c115_kai-marston_packet-v2_anthropic-claude-haiku-5-5.staged.md
+
+This report is behind the publication gate and is not yet canon.
+
+# The Clipping on the Door
+
+The flyer on the pole at the corner is for a Rockridge block party that has nothing to do with baseball. Somebody staples a second sheet over the first one, and then a third, until the paper is a stack of curled edges that no one reads anymore. Two doors down, a plain sheet of paper is taped flat to a building's front door with four strips of clear tape, and the printed headline on it is a story about Benji Dillon.
+
+Dillon is the reason people on this block are looking up. He is the A's left-handed pitcher the paper has been following for years, and the ledger has him rising. He doesn't live in the spotlight, though. He lives on a street where people still use their porches and still know each other's dogs.
+
+"To be honest, I've noticed people recognizing me more often around Rockridge and at the grocery store," Dillon says, when I catch him on the sidewalk with a reusable bag in one hand and his keys in the other. "It feels a bit surreal, but I'm trying to stay grounded. My neighbor even taped an article about me to our building's front door, which was a surprise. I'm just trying to keep doing what I do and not let it change me too much."
+
+He nods at the door. The clipping has gone a little soft at one corner from the morning damp. He doesn't pull it off. He doesn't look at it long, either. He looks like a man who has been stopped at the store four times this week and has decided to be polite about all of it.
+
+This is the strange texture of a rising name in a neighborhood this size. A fan can write about a pitcher for a paper without ever having met him, and a block can hang the paper on its door anyway. The clipping is a small act of ownership, and it is also a small act of display. Both things are true on the same doorstep.
+
+Anthony Raines, who covers the A's for this paper and lives on the same side of Rockridge, puts the local read into one breath. "Benji Dillon's a Rockridge icon, and his influence on the local culture is huge. I've seen it firsthand - people around here still talk about his games, his style. He's one of us, you know? The neighborhood loves him, and he loves it back." Raines is new on the culture record this cycle, and his own rise is the quieter story on the block. Here he is describing the neighborhood as the place where a sports figure becomes furniture.
+
+Across the A's clubhouse, the rising and fading names sit in different rows of the same ledger. Darrin Davis, the Piedmont Ave outfielder, is climbing too. "I've seen Benji Dillon's name popping up more often around the A's, and it's clear he's gaining traction," Davis says. "To be honest, I'm not super close to him, but you can tell when someone's rising through the ranks." Davis is careful about distance, and his caution is its own kind of signal. Rising, in this ledger, is a thing people see from outside before anyone inside the room agrees on it.
+
+Vinnie Keane is on the other side of the ledger. He is listed as cooling, the where-are-they-now file for a player whose last appearance was this cycle. The paper's C94 coverage already set the frame: Dillon came back on a one-year deal to make one last run with Keane. So the Rockridge doorstep carries two names at once, one climbing toward a bigger role and one being written into the past, both wearing the same team.
+
+I think about the clipping on the door for the rest of the walk. A printed article taped to a building is a strange kind of shrine. It is not a poster, not a mural, not a show. It is a piece of news that the neighbors decided to keep in view. Who answers for what that display means, when the rising name starts to feel like ordinary weather and the tape loosens and the paper comes down?
+
+Dillon, for his part, says he is trying to keep doing what he does. The block is trying to keep him where it can see him. Nobody on the sidewalk has settled which of those is the story.
+
+### STAGED — output/cron-compare/staged/culture_c115_maria-keen_packet-v2_anthropic-claude-sonnet-5-5.staged.md
+
+This report is behind the publication gate and is not yet canon.
+
+# The Archive on the Block Nobody Signed For
+
+The Oakland Sound Archive has been an Uptown arts program since C101. It is the only active program on the block's record this cycle. No founder is on the ledger beside it. I can't tell you who unlocked the door the first time or who still carries the key, and I won't make a name up to fill the space. What the record does say is that something named for keeping sound has been kept in Uptown for fourteen cycles, and the block has not let it go.
+
+The block it sits in is small in the ways that count. This cycle's neighborhood numbers put Uptown at 63 students, 506 adults and 65 seniors. Against C114, one adult more. A neighborhood that moves by one person is holding still, or only looks like it is. Caroline Cabrera, the After-School Program Director, has a view on what that stillness hides.
+
+"I still see that numbers don't tell the whole story here in Uptown," she said. "The changes we're going through - with rents going up and families having to stretch to stay - it's not just about statistics. I've seen it firsthand with the kids in my after-school program and the people I talk to around the neighborhood. It's about real lives."
+
+One adult more could be a newcomer, or it could be a family who stayed because someone covered a gap. The count can't tell those apart. The paper's C114 coverage had Omar Amici, a construction laborer who lives here, saying it seems like every other place is a for-rent sign these days. A program that keeps recordings of a place makes sense in a neighborhood where the place is the thing at risk of going.
+
+The block has a loud side too. Toto Foto, the Theater Director, described a weekend market in Uptown, the kind of Saturday the ledger logged this cycle as busy. "I love walking through Uptown on a busy Saturday like that," Foto said. "The market was buzzing, and it felt like everyone was out enjoying the day. I saw some familiar faces, exchanged a few hellos. The energy's always good there."
+
+*Familiar faces, a few hellos.* That is the sound any archive on this block would want first. No tape could hold the full texture of a market, but you would try. The hellos are the part you would be sorry to lose.
+
+Priya Narang, the EMS Director, hears the same energy from the other side of her own counter. "The A's winning season still brings a lot of energy to Uptown," she said. "I started a jar on my counter to save up for season tickets next year. It's not just about the games, though - when they're doing well, the whole neighborhood feels it. The bars and galleries stay packed, and you can feel the energy."
+
+She is the one person on this block whose job is to arrive when something goes wrong. The hospital census backs up how quiet that side of the block was at the close. Twenty-one residents were sick, and none were admitted. None were in care and no beds were occupied. For the person who answers the call, that is a quieter close than the number twenty-one suggests, and a jar of coins for season tickets is a plain way to spend the quiet.
+
+The justice side is not quiet. The census shows seven charges in Uptown, one arrest, and four residents in custody at the close. None of the four is a name the paper tracks. Police Chief Rafael Montez has not let go of the clearance figure. "To be honest, that 26% clearance rate in Uptown still sticks with me," he said. "It's not just a number; it represents real cases and real people. We're working to improve our follow-through and community trust. It's a tough spot, but we're on it."
+
+Four people held and no founder to speak for the archive, the market and the jar. Put them side by side and the block reads as busy, mostly well, and short on people whose names are written down next to what they built. A sound archive would catch the market, the ballgame bars and the hellos. It would not catch the four who are gone from the corners tonight.
+
+Who answers for the ones who don't make the recording? I mean the family stretching to stay, and the four in custody, and whoever started the Archive in C101 and has not yet been named to us. The ledger holds the program. I would like it to hold the person too.
+
+### STAGED — output/cron-compare/staged/culture_c115_mason-ortega_packet-v2_x-ai-grok-4-3.staged.md
+
+This report is behind the publication gate and is not yet canon.
+
+Oakland Casino Town sits in the Baylight District with 99 names on the roster this cycle, three of them listed by role. Manfred Owens keeps the book near the back tables once the evening crowd settles in. 
+
+"The book at Oakland Casino Town is mostly the same faces every night, and I'm the one who keeps track of who's in and who's out," Owens said. "Philly runs the floor, Gregory handles the stuff nobody talks about, and I sit near the back with the ledger. The regulars are the ones who've been coming for years — dealers, pit bosses, a few old-timers who just want a seat and a coffee. My shift starts when the evening crowd picks up and ends when the last table closes. It's steady work, but the rhythm is quieter than people think. Most nights it's just the hum of the machines and the clink of chips, and me making sure the numbers line up before I hand the sheet to Philly."
+
+Iris Pham works the counter at a coffee shop nearby and sees the same pattern from the other side of the shift change. 
+
+"I work at a coffee shop, so I know what it's like to be the person behind the counter that nobody thinks to name," Pham said. "When I see the roster for a place like Oakland Casino Town, it's all managers and the big names. But there's a whole crew in the back—cooks, cleaners, security—who show up every shift and keep the place running. They're the ones I see in the neighborhood, grabbing a quick coffee before their shift or heading home after a long night. The roster doesn't carry them because they're not the ones making the decisions or taking the credit. But without them, the whole thing falls apart."
+
+Bubic Burgers lists 15 employees on its own ledger line this cycle, none of them named beyond the key personnel entry. The question that stays open is how the work that never reaches the printed sheet still gets done when the doors open each day.
+
+### STAGED — output/cron-compare/staged/culture_c115_sharon-okafor_packet-v2_openai-gpt-5-6-luna.staged.md
+
+This report is behind the publication gate and is not yet canon.
+
+# The Names We Keep Saying
+
+Anthony Raines is doing the ordinary work of becoming known: covering the A’s, living in Rockridge, and trying to be a good neighbor. The recognition arrives in small interruptions rather than announcements.
+
+“People will sometimes stop me at the corner store or mention something about my stories, and that's nice,” Raines says. “It's a good feeling to be recognized for the work you do, especially when it's for something you care about as much as I do about the A's.”
+
+That is one way a name settles into a neighborhood. It does not arrive fully formed. It is repeated, tested against the work, and eventually attached to a face someone has seen before. Raines is new on this cycle’s culture record, a rising local-tier name in Media. His own account is less about arrival than about adjustment: “As a rising name in Rockridge, I've gotten used to people knowing who I am and what I do. It's not something I think about much anymore, to be honest. I just do my job and try to be a good neighbor.”
+
+Benji Dillon, already the big name around Rockridge, gives that process a generous reading. “Anthony Raines is a friend, and I'm happy to see him covering the A's,” Dillon says. “He's got a good eye for the game, and his writing does justice to the team. It's nice having him around Rockridge; we chat about the A's whenever we run into each other.”
+
+There is a useful distinction here between being recognized and being established. Raines has the first; Dillon, the second. Dillon is the city’s leading name on this cycle’s culture record, a rising local-tier A’s player in Rockridge. Raines is still new to the public accounting, even as his work has begun to circulate among people who care about the same team.
+
+Vinnie Keane, the former designated hitter and A’s legend whose name has cooled into the where-are-they-now file, describes the distance from Grand Lake. “To be honest, I haven't heard much about Anthony Raines around Grand Lake,” Keane says. “I know he's a journalist covering the A's, and I've seen his name pop up in the sports feed. I'm still getting used to not being on the field every day, so I don't really know him personally, but it sounds like he's making a name for himself in the sports scene.”
+
+Keane’s sentence holds two lives at once: the old name, still visible, and the new name, not yet familiar everywhere. A national-tier name can become less immediate without becoming meaningless. A local name can rise without having reached beyond the neighborhoods where the work is encountered first.
+
+Lena Cross, the actor whose name is cooling around Piedmont Ave, hears the same gap from another direction. “To be honest, I haven't heard much about Anthony Raines, but I did notice his name isn't familiar around Piedmont Ave yet,” Cross says. “I mean, I've seen some new faces around, and the A's are always a hot topic, so maybe he's getting some buzz in certain circles. I haven't really had a chance to meet him or hear him on the air, but Wendell Carter Jr. is friends with some of the A's players, so maybe I'll learn more through him.”
+
+The city’s attention is not one room with one door. It is a set of overlapping circles, each with its own memory. Cross and Rowan Pierce are both fading names in Piedmont Ave; Keane is fading in Grand Lake; Dillon is rising in Rockridge; Raines is newly visible there. The question is not simply who is famous. It is who gets carried from one conversation into the next.
+
+Raines seems to understand that recognition is a byproduct, not a schedule. “Benji Dillon's still the big name around here, though - he's a Rockridge icon,” he says. “I've had some great conversations with him about the community and the team.”
+
+For now, that may be the clearest shape of his arrival: not replacing an older name, but being spoken beside one. The open question is how long a neighborhood keeps saying a name once the work that introduced it is no longer new.
+
+### STAGED — output/cron-compare/staged/culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged-0021.md
+
+This report is behind the publication gate and is not yet canon.
+
+# The Lives of C115
+
+Lena Marchetti moved into a place of her own in East Oakland this cycle, renting. The household ledger for C115 holds the line and nothing more: no street, no rent, no name of who helped carry. The record does say who she is. She is a crisis clinician and lives in East Oakland, born in 2007. It also holds the days that led up to the move.
+
+In C111 she held a door and got a whole conversation for it, on a block near a fenced build site. In C112 she rearranged the front room and kept walking in to look at it. In C114 she watched a team from the Oakland Alternative Response Initiative quietly settle a situation on the corner. This cycle she said no to something, and the record says she felt the shape of who she is in it. The record does not say what the question was. Later the same cycle, at a cafe, she heard someone complain about the noise from the Baylight District and bit her tongue. It does not say what she would have said.
+
+The Tribune has no earlier piece on her that the archive returned. Her name is travelling ahead of her all the same. Three people in other parts of town were asked about her this cycle, and none of them knew her.
+
+Dominic Okeke-Brandt, in Laurel: "I've seen Lena Marchetti's name come up a few times in conversations around town. To be honest, I don't know much about them, but they seem to be someone people are talking about. I've heard they're from East Oakland, but that's about it."
+
+Kai Davis, in West Oakland: "I've seen Lena Marchetti's name around, but I don't know much about them personally. I did hear they moved into a place of their own in East Oakland. That's all I know."
+
+Evan Lewis, who drives a bus in Laurel: "To be honest, I've not heard much about Lena Marchetti around here. The A's trade news is what's been on my mind lately, and how it's affecting the community. I've seen some of the players around Laurel, like Arturo Ramos and John Ellis, they're nice guys. But I haven't really connected the name Lena Marchetti to anything specific in our neighborhood or the A's. I've noticed people keeping to themselves more, and that's been on my mind."
+
+The neighbors know the name and the move. This page knows a little more, and it is still a little.
+
+---
+
+**Dominic Okeke-Brandt** also moved into a place of his own this cycle, renting, in Laurel. He is the Deputy Superintendent, and the record has him pulled into a bigger conversation at Oakland City Schools than the job description covers (C113). Two lines in his thread sit side by side without explaining each other. In C111 he priced out the bigger apartment and decided to wait another year. This cycle he has a place. The record does not say whether it is that apartment, or what changed.
+
+The rest of his cycle was small and public. He organized the clothing drive donations and recognized a coat he had given away two years earlier. He sat in a community feedback session for the Fruitvale Transit Hub Phase II and felt heard. He noticed younger people asking him for advice. He counted the cranes on the skyline from the bus stop and got a different number than the day before. In C114 the record says he kept to himself that he checks the UNDOCKED names every cycle the way some people check scores.
+
+**Tyler Filet**, the Biotech Lab Director at Portside Bio in Lake Merritt, found the schedule out this cycle with his name in the slot that used to belong to someone senior. The record says only that. It does not say where the senior person went, or whether there was a title or a raise. The days before it were not easy. In C114 he couldn't sleep for the wind rattling the window frame near a front porch, and he wondered whether a decision from years back had been the right one. This cycle he disagreed with a Tribune column out loud to an empty kitchen, and bought coffee from the cart outside the hospital before the morning rush. The Tribune's C114 Lives page wrote him on the new household. What came after the schedule, the record has not yet said.
+
+**Kai Davis**, a junior accountant in West Oakland, found a forgotten photograph tucked in a book this cycle and sat with it a while. The record does not say whose picture it was. In C114 Kai walked a different street home just to see it, and slipped into the back pew at Foothill Baptist Tabernacle to sit somewhere air-conditioned and quiet. This cycle Kai recognized the OARI van idling outside the corner store and knew better than to ask who it was waiting for. Kai also bought a new A's jersey and counted what was going right for once. The Tribune named Kai on the C114 Lives page.
+
+**Evan Lewis**, who drives a bus in Laurel, noticed more people keeping to themselves lately. It is the same thing he said above. The Tribune's civic pages named him in C112, C113 and C114 as the driver at the quiet end of the platform. His own thread has two lines that do not quite agree. In C114 he complained about the neighborhood to anyone who'd listen, and he also caught himself lowering his voice when he talked about the block's future. He finally fixed the thing that had been broken for months that same cycle. This cycle he found a quiet minute at a neighborhood bakery, still riding the high from last night's win.
+
+**Vladimir Gonzalez**, the A's right fielder from Fruitvale, stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence. The record gives no word on what he made of them. He tried a new recipe that mostly worked, and cooked an old family recipe from memory, mostly getting it right. He read the Tribune's front page twice, once for the news and once to see who was in it. The Tribune's sports pages named him in C113 and twice in C114. In C114, at a family dinner, someone asked him about the club.
+
+**Isley Kelley** is on the record this cycle through Kelley Mercantile in Rockridge, which returned $2063 to the line this week. The week before it was $2058. The record does not say what the line is, and it is not words Kelley said. In C114 Kelley fielded a round of texts from people who hadn't called in years, felt quietly proud of how they handled something small, and looked up how something works and came away more amazed, not less. The C114 Lives page wrote Isley Kelley. The Tribune's sports pages named Kelley in C114 and back in C101.
+
+**Benji Dillon** is on the record through Dillon Clinic in Rockridge, which returned $7548 to the line this week. This cycle he put on his good suit for the Sunday service because some traditions still matter. In C114 he was recognized twice at the grocery store after the story ran, and the kids could say Father Miguel before they could say the mayor's name. The Tribune's culture desk put him under "The Pole on Rockridge Corner Is Starting to Say His Name" in C114, and Sports named him in C111.
+
+**Latasha Jefferson**, in Rockridge, had a manager at Anthropic walk past three times this cycle and not stop once. The record does not give her role or her employer. It gives the lines around the moment. In C114 she drank the free cold brew in the company kitchen and felt completely disconnected from the neighborhood outside. She checked the front door lock three times after everyone else was asleep, and she checked out a new shop that had just opened nearby. This cycle one of the kids asked a question at dinner that stopped the room. The record does not say the question.
+
+---
+
+The page ends where the record does. Lena Marchetti has a door of her own, and the city has her name. Nobody quoted here can say who she is, and the record has not yet said what she said no to.
+
+### STAGED — output/cron-compare/staged/undocked_c115_nia-rook_packet-v2_openai-gpt-6-luna.staged-0022.md
+
+This report is behind the publication gate and is not yet canon.
+
+## UNDOCKED: Elijah Brown’s long night ends even
+
+Elijah Brown’s Thursday-night run on UNDOCKED finished even on credits, while Luis Taz remained the name to beat at the top of the board. No windfall, no dramatic balance swing: Brown flew until the show’s time ran out, and the scoreboard still belonged to Taz.
+
+That’s a neat little tension for a recap. The board prizes a lead; the episode gives us a journey that doesn’t cash out as a credit change. Brown moved through Last Light, Fang, Errai, Wezen, Brightfall, Birchwood, Pinecross, Aludra, Tejat, Gsc 0002, Torcular, Gsc 0043, Gsc 0045, Dabih, Rimegate, Veritate, Betelgeuse and Gsc 0037. The list has the satisfying rhythm of a route that keeps opening another door. Then: even.
+
+Brown put it plainly: “I flew on UNDOCKED Thursday night and went through a bunch of systems until the show's time ran out. I ended up even on credits. My standing is 3rd of 30, with 38.35 points and 0 credits, so it didn't seem to hurt me.”
+
+I like that last shrug. “It didn’t seem to hurt me” is not a victory speech; it’s a pilot looking at a long night and deciding the result can stand. In a Rockridge break room, you can imagine the argument making its way around the table: is an even finish a quiet success, or just the kind of episode where the route becomes the reward? I’d take the route. The show ran out of time before Brown ran out of places to go.
+
+The available approved history has no earlier episode for Brown, so this is a first glimpse in that record—not proof that he’s never been on the show before. For the board’s longer arc, the paper’s C114 coverage followed Taz taking the lead on an even run, with a one-cycle streak led. Now Taz is still ranked first, with two cycles led in a row. That’s the forward motion: not a claim about how the board’s points changed, but a lead that has lasted another cycle.
+
+So Brown gets the episode’s best image: a long string of system names, time running out, and the credits landing exactly where they started. Taz gets the board’s continuing headline. UNDOCKED leaves room for both kinds of drama—the quiet satisfaction of a run completed, and the question of how long a leader can stay there.
+
+### STAGED — output/cron-compare/staged/wire_c115_celeste-tran_packet-v2_x-ai-grok-4-3.staged.md
+
+This report is behind the publication gate and is not yet canon.
+
+Rico Valez picked up one more mention this cycle and now sits at twenty total, the kind of steady climb that pulls a neighborhood’s attention sideways. The musician from Fruitvale was leaning against the counter at a new pop-up listening room on 14th when the conversation turned to where people were actually landing. “As a musician living in Fruitvale, I’ve noticed the energy around Oakland’s cultural scene is buzzing,” he said, hands wrapped around a paper cup. “It’s cool to see people excited about what’s happening here. I’m not sure how it’s directly affecting my work, but it feels like there’s a good vibe. I’ve been playing gigs when I can, and it’s great to see the community coming out to support local artists.”
+
+West Oakland posted the largest movement on the ledger, nineteen new residents since last cycle, outpacing every other pocket the city tracks. Rowan Pierce, the journalist over in Piedmont Ave who logged one fresh mention of her own this week, caught the shift from a slight distance. “I’ve noticed that West Oakland is getting a lot more attention lately,” she said. “I see more people around, and it feels like there’s a buzz about the area. As someone living in Piedmont Ave, I’m a bit removed from West Oakland, but I can sense the energy. I’ve heard that the cultural scene in Oakland is really vibrant, and I’m guessing West Oakland is a big part of that.”
+
+Anthony Raines landed on the culture record for the first time this cycle, another data point sliding into the same column. The pattern is small but consistent: names tied to the arts and media are edging upward while the sports column cools. Vinnie Keane, the former A’s designated hitter still living in Grand Lake, picked up one mention and now sits at seven total. “The A’s trade is a mixed bag for me,” he said when the topic reached him. “On one hand, getting Giancarlo Hernandez is huge for the team’s future. His glove is elite, and he’s got a lot of potential. On the other hand, losing Carmen Mesa stings. As for the community, I’m keeping an eye on how this all plays out. We’re a baseball town, and trades like this can go either way. I’m just happy to be involved, staying connected through the Firehouse 29 academy.”
+
+Evan Lewis, the bus driver who runs the Laurel route, passed the same blocks every day and noticed the absence more than the presence. “To be honest, I haven’t really seen much of the A’s around West Oakland lately,” he said. “I drive past the Coliseum all the time, and you can tell when there’s a game or event going on, but it’s not like they’re out in the community that much. I mean, I’ve seen Arturo Ramos and John Ellis around Laurel, they’re nice guys, but that’s about it.”
+
+The city is moving toward the blocks that already carry the loudest cultural signal. West Oakland’s nineteen-person gain lines up with the same weeks Rico Valez’s count ticked upward and Anthony Raines first appeared. The rest of the ledger shows smaller shifts—East Oakland up eleven, Jack London and Rockridge each up nine—but the west side is where the conversation keeps landing. People are not waiting for a single headline; they are following the names that keep surfacing in the same neighborhoods where new residents are choosing to land.
+
+## Gate decisions this window
+
+_No gate-flagged drafts in the time window._

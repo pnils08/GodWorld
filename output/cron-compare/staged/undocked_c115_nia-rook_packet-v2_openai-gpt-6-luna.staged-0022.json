@@ -1,0 +1,62 @@
+{
+  "status": "staged",
+  "desk": "undocked",
+  "cycle": "115",
+  "persona": "nia-rook",
+  "byline": "Nia Rook",
+  "bylinePopid": "POP-01076",
+  "article": "output/cron-compare/staged/undocked_c115_nia-rook_packet-v2_openai-gpt-6-luna.staged-0022.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Elijah Brown",
+        "role": "quoted-source",
+        "popid": "POP-01195"
+      },
+      {
+        "name": "Luis Taz",
+        "role": "mentioned",
+        "popid": "POP-00298",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Rockridge"
+    ],
+    "claims": [
+      {
+        "claim": "I flew on UNDOCKED Thursday night and went through a bunch of systems until the show's time ran out. I ended up even on credits. My standing is 3rd of 30, with 38.35 points and 0 credits, so it didn't seem to hurt me.",
+        "sourceRef": "citizenVoice PRESS Elijah Brown"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-6c8eddbc4467",
+    "draftSha256": "b8610b7435e778358b24ef518382fe5446e57d11d16e2311dd3b2ccb56724c0a",
+    "verdict": "output/cron-compare/undocked_c115_nia-rook_packet-v2_openai-gpt-6-luna.rhea.json",
+    "ranAt": "2026-11-14T00:22:25.250Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 350",
+      "words": 396,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "b8610b7435e778358b24ef518382fe5446e57d11d16e2311dd3b2ccb56724c0a",
+      "costUsd": 0.0009
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-14T00:22:27.936Z"
+}

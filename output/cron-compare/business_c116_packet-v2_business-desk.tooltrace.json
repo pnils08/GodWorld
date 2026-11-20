@@ -1,0 +1,47 @@
+{
+  "model": "anthropic/claude-opus-5.5",
+  "calls": [
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Business_Ledger",
+        "match": "Jack London"
+      },
+      "resultChars": 1373,
+      "resultHead": "BIZ_ID | Name | Sector | Neighborhood | Employee_Count | Avg_Salary | Annual_Revenue | Growth_Rate | Key_Personnel\nBIZ-00044 | Harborline Grill | Restaurant & Dining | Jack London | 7 | 61000 | 868866 | 12\nBIZ-00050 | Dockhouse BBQ | Restaurant & Dining | Jack London | 2 | 61000 | 248661 | 11.72\nBIZ-00057 | Anchor Build | Construction | Jack London | 181 | 80000 | 148414691 | 13.67 | POP-01093 Marguerite Salcedo (managing partner)\nBIZ-00183 | Bayline 6 | Media & Journalism | Jack London | 142 | 82000 | 46574775 | 12.79\nBIZ-00191 | Heinold's First and Last Chance Saloon | Bar / Saloon / Histori"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Tre Mingo"
+      },
+      "resultChars": 185,
+      "resultHead": "No published piece from before C116 came back for \"Tre Mingo\". That is not proof the paper never covered it (an empty answer can also be a failed lookup) — do not write that it did not."
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Anchor Build Marguerite Salcedo"
+      },
+      "resultChars": 207,
+      "resultHead": "No published piece from before C116 came back for \"Anchor Build Marguerite Salcedo\". That is not proof the paper never covered it (an empty answer can also be a failed lookup) — do not write that it did not."
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Elle Lilo"
+      },
+      "resultChars": 1097,
+      "resultHead": "[C113 · daily · Noah Tan] Elle Lilo stepped back onto the bridge at Jack London, the first time in weeks her boots had met the metal grating without the weight of a lingering cough in her chest. The tugs moved below as they always did, horns cutting across the water, but the air felt different with the cranes sharp against the sky and gulls wheeling without the usual gray press. \"Three clear days in a row — that's a gift around here,\" she said. \"When I finally shook that cold, the first morning I stepped back on the bridge, the sky was wide\n[C111 · daily · Jordan Velez] # The Port Got Louder. "
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Green & Gold Tavern Jack London"
+      },
+      "resultChars": 3254,
+      "resultHead": "[C111 · daily · Mason Ortega] Green & Gold Tavern in Jack London keeps its kitchen running on the rhythm of the pit. Dishwasher Hector Leech stands at the sink, hands moving through steam and racks. \"A full shift in the pit is a marathon, not a sprint. You're in the steam before the first ticket even prints, and the heat just sits on you like a second skin. The sprayer's going, the racks are clanking, and your hands are in and out of the water so much they prune up and crack. But the rhythm is what keeps you going — you get into a groove where \n[C86 · supplemental] Two men from the same neighb"
+    }
+  ],
+  "ranAt": "2026-11-17T00:17:10.101Z"
+}

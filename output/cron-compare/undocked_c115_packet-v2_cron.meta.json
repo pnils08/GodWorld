@@ -2,16 +2,16 @@
   "desk": "undocked",
   "cycle": "115",
   "model": "openai/gpt-6-luna",
-  "turns": 8,
+  "turns": 7,
   "maxTurns": 15,
-  "usageInputTokens": 20481,
-  "usageOutputTokens": 1552,
+  "usageInputTokens": 21315,
+  "usageOutputTokens": 2150,
   "savedFiles": [
     "output/cron-compare/undocked_c115_nia-rook_packet-v2_openai-gpt-6-luna.md"
   ],
   "compareAgainst": "output/desk-output/undocked_c115.md",
-  "durationMs": 19947,
+  "durationMs": 25409,
   "dryRun": false,
   "packetOnly": true,
-  "ranAt": "2026-11-12T00:25:16.683Z"
+  "ranAt": "2026-11-14T00:22:19.420Z"
 }

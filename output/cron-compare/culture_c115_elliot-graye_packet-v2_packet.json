@@ -1,0 +1,1324 @@
+{
+  "stage": "report",
+  "desk": "culture",
+  "cycle": "115",
+  "persona": "elliot-graye",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Elliot Graye",
+    "popid": "POP-00012"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-faith",
+      "angle": "crisis response at Bay Pure Land Buddhist Temple (Chinatown) — the week in faith, and St. Esperanza Parish in focus",
+      "label": "8 faith events on the record since C109 · St. Esperanza Parish in Fruitvale | 6 named on the record",
+      "hookLine": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+      "hood": "Fruitvale",
+      "citizens": [
+        "Ramon Solano (POP-00756)",
+        "Kenji Tanaka (POP-00763)",
+        "Eunice Marston (POP-00753)",
+        "Antoine Vermeer (POP-00755)",
+        "Aziz Rahimi (POP-00762)",
+        "Lucia Polito (POP-00004)"
+      ],
+      "popids": [
+        "POP-00756",
+        "POP-00763",
+        "POP-00753",
+        "POP-00755",
+        "POP-00762",
+        "POP-00004"
+      ],
+      "ref": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+      "cycle": 115
+    }
+  },
+  "angle": "output/cron-compare/culture_c115_elliot-graye_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 4,
+  "quotes": [
+    {
+      "pop": "POP-00756",
+      "name": "Ramon Solano",
+      "quote": "As the Senior Pastor of St. Esperanza Parish, I've seen firsthand how our church supports the Latino community in Fruitvale. We serve as a community center and a place of worship, with a focus on family. Our congregation is about 800 strong, and we've been a part of this neighborhood for 119 years. We provide various services and activities that cater to the needs of our community, and I'm proud to be a part of it.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"As the Senior Pastor of St. Esperanza Parish, I've seen firsthand how our church supports the Latino community in Fruitvale. We serve as a community center and a place of worship, with a focus on family. Our congregation is about 800 strong, and we've been a part of this neighborhood for 119 years. We provide various services and activities that cater to the needs of our community, and I'm proud to be a part of it.\",\n  \"fact_ids\": [\"F-2b18f5dfa775\", \"F-875ed4ba05eb\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-2b18f5dfa775",
+          "F-875ed4ba05eb"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00756-9cb4b52d83",
+        "authoredQuote": true,
+        "publishableQuote": "As the Senior Pastor of St. Esperanza Parish, I've seen firsthand how our church supports the Latino community in Fruitvale. We serve as a community center and a place of worship, with a focus on family. Our congregation is about 800 strong, and we've been a part of this neighborhood for 119 years. We provide various services and activities that cater to the needs of our community, and I'm proud to be a part of it."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00756",
+          "name": "Ramon Solano",
+          "role": "Senior Pastor / Faith Leader",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "How does St. Esperanza Parish support the Latino community in Fruitvale? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "Fruitvale",
+          "focus": "St. Esperanza Parish",
+          "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Ramon Solano — Senior Pastor / Faith Leader — Fruitvale",
+          "evidence": [
+            {
+              "id": "EV-64d5a68893",
+              "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+              "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "In focus: St. Esperanza Parish — Catholic, Fruitvale, congregation 800, founded 119 years ago, led today by Fr. Ramon Solano — Latino community center, family focus",
+            "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+            "id": "F-2b18f5dfa775"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C115",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-bc84fc0b7718"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C109 · St. Esperanza Parish in Fruitvale | 6 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+            "id": "F-9df05990cff8"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+            "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+            "id": "F-ca3d288da136"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+            "id": "F-61024524d215"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-c6268244f8ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\"",
+            "id": "F-2e38ae74adc2"
+          },
+          {
+            "t": "FACT",
+            "text": "Interfaith Council (Adams Point), C115 — interfaith dialogue: interfaith prayer breakfast brings leaders together (attendance 123)",
+            "src": "output/beats/Faith_Ledger.jsonl C115 \"Interfaith Council\"",
+            "id": "F-081007882588"
+          },
+          {
+            "t": "FACT",
+            "text": "Ramon Solano — Senior Pastor / Faith Leader — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00756",
+            "id": "F-875ed4ba05eb"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C11, Spring, holiday=none",
+            "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+            "id": "F-82d77e9a4a71"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00004",
+      "name": "Lucia Polito",
+      "quote": "I've founded Postpartum Oakland Network, a program that supports new mothers in our community. While I don't have a direct connection to St. Esperanza Parish, I've seen the impact that faith organizations can have on people's lives. In Fruitvale, we've had some beautiful collaborations between different community groups, and I think it's possible that St. Esperanza Parish could be a valuable partner for us. I'd love to explore that further.",
+      "disp": "draws people in, deep with them; warm, tender with people; curious, open to new things; steady, hard to shake",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've founded Postpartum Oakland Network, a program that supports new mothers in our community. While I don't have a direct connection to St. Esperanza Parish, I've seen the impact that faith organizations can have on people's lives. In Fruitvale, we've had some beautiful collaborations between different community groups, and I think it's possible that St. Esperanza Parish could be a valuable partner for us. I'd love to explore that further.\",\n  \"fact_ids\": [\"F-535a79178865\", \"F-d24fafa8a950\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-535a79178865",
+          "F-d24fafa8a950"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00004-43af416979",
+        "authoredQuote": true,
+        "publishableQuote": "I've founded Postpartum Oakland Network, a program that supports new mothers in our community. While I don't have a direct connection to St. Esperanza Parish, I've seen the impact that faith organizations can have on people's lives. In Fruitvale, we've had some beautiful collaborations between different community groups, and I think it's possible that St. Esperanza Parish could be a valuable partner for us. I'd love to explore that further."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00004",
+          "name": "Lucia Polito",
+          "role": "Aura Wellness Practitioner",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "What is the relationship between St. Esperanza Parish and Postpartum Oakland Network? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "Fruitvale",
+          "focus": "St. Esperanza Parish",
+          "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Lucia Polito — Aura Wellness Practitioner — Fruitvale",
+          "evidence": [
+            {
+              "id": "EV-aa79212f6d",
+              "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+              "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Postpartum Oakland Network (health), Fruitvale, founded by Lucia Polito, since C101",
+            "src": "output/beats/Community_Programs.jsonl PRG-016",
+            "id": "F-535a79178865"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C115",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-bc84fc0b7718"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C109 · St. Esperanza Parish in Fruitvale | 6 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+            "id": "F-9df05990cff8"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+            "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+            "id": "F-ca3d288da136"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+            "id": "F-61024524d215"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-c6268244f8ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\"",
+            "id": "F-2e38ae74adc2"
+          },
+          {
+            "t": "FACT",
+            "text": "Interfaith Council (Adams Point), C115 — interfaith dialogue: interfaith prayer breakfast brings leaders together (attendance 123)",
+            "src": "output/beats/Faith_Ledger.jsonl C115 \"Interfaith Council\"",
+            "id": "F-081007882588"
+          },
+          {
+            "t": "FACT",
+            "text": "Lucia Polito — Aura Wellness Practitioner — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00004",
+            "id": "F-d24fafa8a950"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C11, Spring, holiday=none",
+            "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+            "id": "F-82d77e9a4a71"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00763",
+      "name": "Kenji Tanaka",
+      "quote": "I've seen that faith communities in Oakland are stepping up to support each other, like the Bay Pure Land Buddhist Temple opening their doors for community support. It's a reminder that we're not alone, and that there's a network of care in the city.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen that faith communities in Oakland are stepping up to support each other, like the Bay Pure Land Buddhist Temple opening their doors for community support. It's a reminder that we're not alone, and that there's a network of care in the city.\",\n  \"fact_ids\": [\"F-ca3d288da136\", \"F-61024524d215\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-ca3d288da136",
+          "F-61024524d215"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00763-aca5eb6d9b",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen that faith communities in Oakland are stepping up to support each other, like the Bay Pure Land Buddhist Temple opening their doors for community support. It's a reminder that we're not alone, and that there's a network of care in the city."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00763",
+          "name": "Kenji Tanaka",
+          "role": "Senior Pastor / Faith Leader",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "What have you seen, felt, or understood about \"St. Esperanza Parish\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "Fruitvale",
+          "focus": "St. Esperanza Parish",
+          "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Kenji Tanaka — Senior Pastor / Faith Leader — Chinatown",
+          "evidence": [
+            {
+              "id": "EV-cf36eb9332",
+              "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+              "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C115",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-bc84fc0b7718"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C109 · St. Esperanza Parish in Fruitvale | 6 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+            "id": "F-9df05990cff8"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+            "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+            "id": "F-ca3d288da136"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+            "id": "F-61024524d215"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-c6268244f8ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\"",
+            "id": "F-2e38ae74adc2"
+          },
+          {
+            "t": "FACT",
+            "text": "Interfaith Council (Adams Point), C115 — interfaith dialogue: interfaith prayer breakfast brings leaders together (attendance 123)",
+            "src": "output/beats/Faith_Ledger.jsonl C115 \"Interfaith Council\"",
+            "id": "F-081007882588"
+          },
+          {
+            "t": "FACT",
+            "text": "Interfaith Council (Chinatown), C114 — interfaith dialogue: dialogue series addresses shared concerns (attendance 53)",
+            "src": "output/beats/Faith_Ledger.jsonl C114 \"Interfaith Council\"",
+            "id": "F-74afa9e34a82"
+          },
+          {
+            "t": "FACT",
+            "text": "Kenji Tanaka — Senior Pastor / Faith Leader — Chinatown",
+            "src": "Simulation_Ledger profile for POP-00763",
+            "id": "F-d98f55e040fe"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C11, Spring, holiday=none",
+            "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+            "id": "F-82d77e9a4a71"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00753",
+      "name": "Eunice Marston",
+      "quote": "I've heard that St. Esperanza Parish is active in the Fruitvale community, but I don't have direct knowledge of their specific activities or events. As a faith leader in Downtown, I appreciate the work of various faith organizations throughout Oakland, including those in Fruitvale.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've heard that St. Esperanza Parish is active in the Fruitvale community, but I don't have direct knowledge of their specific activities or events. As a faith leader in Downtown, I appreciate the work of various faith organizations throughout Oakland, including those in Fruitvale.\",\n  \"fact_ids\": [\"F-9df05990cff8\", \"F-29275625963c\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-9df05990cff8",
+          "F-29275625963c"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00753-1ce67090be",
+        "authoredQuote": true,
+        "publishableQuote": "I've heard that St. Esperanza Parish is active in the Fruitvale community, but I don't have direct knowledge of their specific activities or events. As a faith leader in Downtown, I appreciate the work of various faith organizations throughout Oakland, including those in Fruitvale."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00753",
+          "name": "Eunice Marston",
+          "role": "Senior Pastor / Faith Leader",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "What have you seen, felt, or understood about \"St. Esperanza Parish\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "Fruitvale",
+          "focus": "St. Esperanza Parish",
+          "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Eunice Marston — Senior Pastor / Faith Leader — Downtown",
+          "evidence": [
+            {
+              "id": "EV-9cf3fbbaa4",
+              "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+              "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C115",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-bc84fc0b7718"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C109 · St. Esperanza Parish in Fruitvale | 6 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+            "id": "F-9df05990cff8"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+            "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+            "id": "F-ca3d288da136"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+            "id": "F-61024524d215"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-c6268244f8ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\"",
+            "id": "F-2e38ae74adc2"
+          },
+          {
+            "t": "FACT",
+            "text": "Interfaith Council (Adams Point), C115 — interfaith dialogue: interfaith prayer breakfast brings leaders together (attendance 123)",
+            "src": "output/beats/Faith_Ledger.jsonl C115 \"Interfaith Council\"",
+            "id": "F-081007882588"
+          },
+          {
+            "t": "FACT",
+            "text": "Interfaith Council (Chinatown), C114 — interfaith dialogue: dialogue series addresses shared concerns (attendance 53)",
+            "src": "output/beats/Faith_Ledger.jsonl C114 \"Interfaith Council\"",
+            "id": "F-74afa9e34a82"
+          },
+          {
+            "t": "FACT",
+            "text": "Eunice Marston — Senior Pastor / Faith Leader — Downtown",
+            "src": "Simulation_Ledger profile for POP-00753",
+            "id": "F-29275625963c"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C11, Spring, holiday=none",
+            "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+            "id": "F-82d77e9a4a71"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00756",
+      "name": "Ramon Solano",
+      "quote": "As the Senior Pastor of St. Esperanza Parish, I've seen firsthand how our church supports the Latino community in Fruitvale. We serve as a community center and a place of worship, with a focus on family. Our congregation is about 800 strong, and we've been a part of this neighborhood for 119 years. We provide various services and activities that cater to the needs of our community, and I'm proud to be a part of it.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"As the Senior Pastor of St. Esperanza Parish, I've seen firsthand how our church supports the Latino community in Fruitvale. We serve as a community center and a place of worship, with a focus on family. Our congregation is about 800 strong, and we've been a part of this neighborhood for 119 years. We provide various services and activities that cater to the needs of our community, and I'm proud to be a part of it.\",\n  \"fact_ids\": [\"F-2b18f5dfa775\", \"F-875ed4ba05eb\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-2b18f5dfa775",
+          "F-875ed4ba05eb"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00756-9cb4b52d83",
+        "authoredQuote": true,
+        "publishableQuote": "As the Senior Pastor of St. Esperanza Parish, I've seen firsthand how our church supports the Latino community in Fruitvale. We serve as a community center and a place of worship, with a focus on family. Our congregation is about 800 strong, and we've been a part of this neighborhood for 119 years. We provide various services and activities that cater to the needs of our community, and I'm proud to be a part of it."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00756",
+          "name": "Ramon Solano",
+          "role": "Senior Pastor / Faith Leader",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "How does St. Esperanza Parish support the Latino community in Fruitvale? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "Fruitvale",
+          "focus": "St. Esperanza Parish",
+          "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Ramon Solano — Senior Pastor / Faith Leader — Fruitvale",
+          "evidence": [
+            {
+              "id": "EV-64d5a68893",
+              "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+              "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "In focus: St. Esperanza Parish — Catholic, Fruitvale, congregation 800, founded 119 years ago, led today by Fr. Ramon Solano — Latino community center, family focus",
+            "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+            "id": "F-2b18f5dfa775"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C115",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-bc84fc0b7718"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C109 · St. Esperanza Parish in Fruitvale | 6 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+            "id": "F-9df05990cff8"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+            "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+            "id": "F-ca3d288da136"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+            "id": "F-61024524d215"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-c6268244f8ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\"",
+            "id": "F-2e38ae74adc2"
+          },
+          {
+            "t": "FACT",
+            "text": "Interfaith Council (Adams Point), C115 — interfaith dialogue: interfaith prayer breakfast brings leaders together (attendance 123)",
+            "src": "output/beats/Faith_Ledger.jsonl C115 \"Interfaith Council\"",
+            "id": "F-081007882588"
+          },
+          {
+            "t": "FACT",
+            "text": "Ramon Solano — Senior Pastor / Faith Leader — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00756",
+            "id": "F-875ed4ba05eb"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C11, Spring, holiday=none",
+            "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+            "id": "F-82d77e9a4a71"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00004",
+      "name": "Lucia Polito",
+      "quote": "I've founded Postpartum Oakland Network, a program that supports new mothers in our community. While I don't have a direct connection to St. Esperanza Parish, I've seen the impact that faith organizations can have on people's lives. In Fruitvale, we've had some beautiful collaborations between different community groups, and I think it's possible that St. Esperanza Parish could be a valuable partner for us. I'd love to explore that further.",
+      "disp": "draws people in, deep with them; warm, tender with people; curious, open to new things; steady, hard to shake",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've founded Postpartum Oakland Network, a program that supports new mothers in our community. While I don't have a direct connection to St. Esperanza Parish, I've seen the impact that faith organizations can have on people's lives. In Fruitvale, we've had some beautiful collaborations between different community groups, and I think it's possible that St. Esperanza Parish could be a valuable partner for us. I'd love to explore that further.\",\n  \"fact_ids\": [\"F-535a79178865\", \"F-d24fafa8a950\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-535a79178865",
+          "F-d24fafa8a950"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00004-43af416979",
+        "authoredQuote": true,
+        "publishableQuote": "I've founded Postpartum Oakland Network, a program that supports new mothers in our community. While I don't have a direct connection to St. Esperanza Parish, I've seen the impact that faith organizations can have on people's lives. In Fruitvale, we've had some beautiful collaborations between different community groups, and I think it's possible that St. Esperanza Parish could be a valuable partner for us. I'd love to explore that further."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00004",
+          "name": "Lucia Polito",
+          "role": "Aura Wellness Practitioner",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "What is the relationship between St. Esperanza Parish and Postpartum Oakland Network? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "Fruitvale",
+          "focus": "St. Esperanza Parish",
+          "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Lucia Polito — Aura Wellness Practitioner — Fruitvale",
+          "evidence": [
+            {
+              "id": "EV-aa79212f6d",
+              "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+              "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Postpartum Oakland Network (health), Fruitvale, founded by Lucia Polito, since C101",
+            "src": "output/beats/Community_Programs.jsonl PRG-016",
+            "id": "F-535a79178865"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C115",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-bc84fc0b7718"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C109 · St. Esperanza Parish in Fruitvale | 6 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+            "id": "F-9df05990cff8"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+            "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+            "id": "F-ca3d288da136"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+            "id": "F-61024524d215"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-c6268244f8ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\"",
+            "id": "F-2e38ae74adc2"
+          },
+          {
+            "t": "FACT",
+            "text": "Interfaith Council (Adams Point), C115 — interfaith dialogue: interfaith prayer breakfast brings leaders together (attendance 123)",
+            "src": "output/beats/Faith_Ledger.jsonl C115 \"Interfaith Council\"",
+            "id": "F-081007882588"
+          },
+          {
+            "t": "FACT",
+            "text": "Lucia Polito — Aura Wellness Practitioner — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00004",
+            "id": "F-d24fafa8a950"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C11, Spring, holiday=none",
+            "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+            "id": "F-82d77e9a4a71"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00763",
+      "name": "Kenji Tanaka",
+      "quote": "I've seen that faith communities in Oakland are stepping up to support each other, like the Bay Pure Land Buddhist Temple opening their doors for community support. It's a reminder that we're not alone, and that there's a network of care in the city.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen that faith communities in Oakland are stepping up to support each other, like the Bay Pure Land Buddhist Temple opening their doors for community support. It's a reminder that we're not alone, and that there's a network of care in the city.\",\n  \"fact_ids\": [\"F-ca3d288da136\", \"F-61024524d215\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-ca3d288da136",
+          "F-61024524d215"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00763-aca5eb6d9b",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen that faith communities in Oakland are stepping up to support each other, like the Bay Pure Land Buddhist Temple opening their doors for community support. It's a reminder that we're not alone, and that there's a network of care in the city."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00763",
+          "name": "Kenji Tanaka",
+          "role": "Senior Pastor / Faith Leader",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "What have you seen, felt, or understood about \"St. Esperanza Parish\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "Fruitvale",
+          "focus": "St. Esperanza Parish",
+          "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Kenji Tanaka — Senior Pastor / Faith Leader — Chinatown",
+          "evidence": [
+            {
+              "id": "EV-cf36eb9332",
+              "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+              "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C115",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-bc84fc0b7718"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C109 · St. Esperanza Parish in Fruitvale | 6 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+            "id": "F-9df05990cff8"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+            "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+            "id": "F-ca3d288da136"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+            "id": "F-61024524d215"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-c6268244f8ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\"",
+            "id": "F-2e38ae74adc2"
+          },
+          {
+            "t": "FACT",
+            "text": "Interfaith Council (Adams Point), C115 — interfaith dialogue: interfaith prayer breakfast brings leaders together (attendance 123)",
+            "src": "output/beats/Faith_Ledger.jsonl C115 \"Interfaith Council\"",
+            "id": "F-081007882588"
+          },
+          {
+            "t": "FACT",
+            "text": "Interfaith Council (Chinatown), C114 — interfaith dialogue: dialogue series addresses shared concerns (attendance 53)",
+            "src": "output/beats/Faith_Ledger.jsonl C114 \"Interfaith Council\"",
+            "id": "F-74afa9e34a82"
+          },
+          {
+            "t": "FACT",
+            "text": "Kenji Tanaka — Senior Pastor / Faith Leader — Chinatown",
+            "src": "Simulation_Ledger profile for POP-00763",
+            "id": "F-d98f55e040fe"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C11, Spring, holiday=none",
+            "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+            "id": "F-82d77e9a4a71"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00753",
+      "name": "Eunice Marston",
+      "quote": "I've heard that St. Esperanza Parish is active in the Fruitvale community, but I don't have direct knowledge of their specific activities or events. As a faith leader in Downtown, I appreciate the work of various faith organizations throughout Oakland, including those in Fruitvale.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've heard that St. Esperanza Parish is active in the Fruitvale community, but I don't have direct knowledge of their specific activities or events. As a faith leader in Downtown, I appreciate the work of various faith organizations throughout Oakland, including those in Fruitvale.\",\n  \"fact_ids\": [\"F-9df05990cff8\", \"F-29275625963c\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-9df05990cff8",
+          "F-29275625963c"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00753-1ce67090be",
+        "authoredQuote": true,
+        "publishableQuote": "I've heard that St. Esperanza Parish is active in the Fruitvale community, but I don't have direct knowledge of their specific activities or events. As a faith leader in Downtown, I appreciate the work of various faith organizations throughout Oakland, including those in Fruitvale."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00753",
+          "name": "Eunice Marston",
+          "role": "Senior Pastor / Faith Leader",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Elliot Graye",
+          "question": "What have you seen, felt, or understood about \"St. Esperanza Parish\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-faith",
+          "hood": "Fruitvale",
+          "focus": "St. Esperanza Parish",
+          "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\""
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Eunice Marston — Senior Pastor / Faith Leader — Downtown",
+          "evidence": [
+            {
+              "id": "EV-9cf3fbbaa4",
+              "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+              "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C115",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-bc84fc0b7718"
+          },
+          {
+            "t": "FACT",
+            "text": "8 faith events on the record since C109 · St. Esperanza Parish in Fruitvale | 6 named on the record",
+            "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+            "id": "F-9df05990cff8"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109: congregation opens doors for community support",
+            "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\"",
+            "id": "F-ca3d288da136"
+          },
+          {
+            "t": "FACT",
+            "text": "Bay Pure Land Buddhist Temple (Chinatown), C109 — crisis response: congregation opens doors for community support (attendance 41)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Bay Pure Land Buddhist Temple\"",
+            "id": "F-61024524d215"
+          },
+          {
+            "t": "FACT",
+            "text": "Telegraph Presbyterian Fellowship (Downtown), C109 — holy day: congregation celebrates Epiphany (attendance 237)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Telegraph Presbyterian Fellowship\"",
+            "id": "F-c6268244f8ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Cathedral of the Living Word (Lake Merritt), C109 — holy day: congregation celebrates Epiphany (attendance 1,265)",
+            "src": "output/beats/Faith_Ledger.jsonl C109 \"Cathedral of the Living Word\"",
+            "id": "F-2e38ae74adc2"
+          },
+          {
+            "t": "FACT",
+            "text": "Interfaith Council (Adams Point), C115 — interfaith dialogue: interfaith prayer breakfast brings leaders together (attendance 123)",
+            "src": "output/beats/Faith_Ledger.jsonl C115 \"Interfaith Council\"",
+            "id": "F-081007882588"
+          },
+          {
+            "t": "FACT",
+            "text": "Interfaith Council (Chinatown), C114 — interfaith dialogue: dialogue series addresses shared concerns (attendance 53)",
+            "src": "output/beats/Faith_Ledger.jsonl C114 \"Interfaith Council\"",
+            "id": "F-74afa9e34a82"
+          },
+          {
+            "t": "FACT",
+            "text": "Eunice Marston — Senior Pastor / Faith Leader — Downtown",
+            "src": "Simulation_Ledger profile for POP-00753",
+            "id": "F-29275625963c"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C11, Spring, holiday=none",
+            "src": "output/world_summary_c115.md Calendar context (Simulation_Calendar)",
+            "id": "F-82d77e9a4a71"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-11-12T19:17:08.407Z"
+}

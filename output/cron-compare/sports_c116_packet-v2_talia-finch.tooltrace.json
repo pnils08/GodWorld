@@ -1,0 +1,46 @@
+{
+  "model": "openai/gpt-5.6-luna",
+  "calls": [
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Elliot Abraham"
+      },
+      "resultChars": 3244,
+      "resultHead": "[C102 · edition] Elliot Abraham: The Architecture of Quiet Leadership his youth, Abraham returned repeatedly to Haiti, witnessing firsthand the stark contrast between romantic ideas and the painstaking, unglamorous labor required to keep a community standing. That dual inheritance—the narrative vision of a writer and the grounded execution of a community educator—defined his trajectory. When he entered the Massachusetts Institute of Technology, he pursued rigorous quantitative discipline while minoring in Business, learning to map \n[earlier · archive] THE RICHMOND ARCHIVE — SUPPLEMENTAL EDITIO"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Wilson Shepard"
+      },
+      "resultChars": 3254,
+      "resultHead": "[C107 · daily · Talia Finch] The Oaks' Groundswell in Downtown building around the Oaks, it's like the whole city is waking up with the team. There's a buzz in the air, and I think people are really looking forward to seeing what they can do this season.\" As I continued my stroll through Downtown, I caught up with Wilson Shepard, the Head Coach of the Oakland Oaks, who was meeting with the media to address his excitement for the season. \"I've been feeling the energy around Downtown, and I think our fans are really excited for the upcoming seas\n[C108 · daily · Talia Finch] It's hard not to worr"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Mike Paulson"
+      },
+      "resultChars": 3241,
+      "resultHead": "[C89 · supplemental] THE CARPENTER’S THREAD Mike Paulson was born in 1987 to Lars Erik Paulson and Maureen Shannon-Paulson. The pairing read like a Chicago fairy tale: a stoic Swedish carpenter who came to America at age seven, and a fiery Irish-Italian woman from the Romano-Shannon family — the clan that ran the bakery on 35th Street and held quiet stakes in properties across the South Side. Lars was a master carpenter. Broad hands, few words, endless patience. The kind of man who could make a house stand or a child believe in their o\n[earlier · supplemental] It is an active pursuit. And for "
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Melton Neilon"
+      },
+      "resultChars": 3271,
+      "resultHead": "[C105 · daily · Maria Keen] # Dimond Pharmacy Draws Dimmed Spotlight The neon \"Rx\" at Dimond Pharmacy blinked steady against the winter-gray afternoon when word came that Benji Dillon had been spotted there earlier this week. No gathered crowd, no autograph seekers—just the usual flow of neighbors picking up prescriptions and local kids buying candy after school. The pharmacy, with its scuffed linoleum and faint antiseptic scent, isn't the kind of place that usually makes the gossip rounds. Over in Temescal, Melton Neilon kneaded his latest s\n[C105 · edition] The Corliss Family Block Party: A "
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "West Oakland"
+      },
+      "resultChars": 51,
+      "resultHead": "tool budget exhausted — compose from what you have."
+    }
+  ],
+  "ranAt": "2026-11-20T00:17:48.059Z"
+}

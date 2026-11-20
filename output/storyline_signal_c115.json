@@ -1,0 +1,218 @@
+{
+  "cycle": "115",
+  "signals": [
+    {
+      "slug": "INIT-001:disbursement-active",
+      "advanced": 1,
+      "opened": 0,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "civic_c115_carmen-delaine_packet-v2_anthropic-claude-sonnet-5-5"
+      ],
+      "hoods": [
+        "West Oakland"
+      ],
+      "citizens": [
+        "POP-00037",
+        "POP-00790"
+      ],
+      "desks": [
+        "civic"
+      ]
+    },
+    {
+      "slug": "INIT-007:implementation-active",
+      "advanced": 1,
+      "opened": 0,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "civic_c115_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5"
+      ],
+      "hoods": [],
+      "citizens": [],
+      "desks": [
+        "civic"
+      ]
+    },
+    {
+      "slug": "INIT-003:design-phase",
+      "advanced": 0,
+      "opened": 0,
+      "closed": 0,
+      "referenced": 2,
+      "articles": [
+        "civic_c115_trevor-shimizu_packet-v2_anthropic-claude-sonnet-5-5",
+        "culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0021"
+      ],
+      "hoods": [],
+      "citizens": [
+        "POP-00338",
+        "POP-01184",
+        "POP-00996",
+        "POP-00200"
+      ],
+      "desks": [
+        "civic",
+        "culture"
+      ]
+    },
+    {
+      "slug": "INIT-006:construction-active",
+      "advanced": 0,
+      "opened": 0,
+      "closed": 0,
+      "referenced": 2,
+      "articles": [
+        "civic_c115_trevor-shimizu_packet-v2_anthropic-claude-sonnet-5-5",
+        "culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0019"
+      ],
+      "hoods": [],
+      "citizens": [
+        "POP-00338",
+        "POP-01108",
+        "POP-00969"
+      ],
+      "desks": [
+        "civic",
+        "culture"
+      ]
+    },
+    {
+      "slug": "INIT-002:dispatch-live",
+      "advanced": 0,
+      "opened": 0,
+      "closed": 0,
+      "referenced": 1,
+      "articles": [
+        "culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0021"
+      ],
+      "hoods": [],
+      "citizens": [
+        "POP-01184",
+        "POP-00996",
+        "POP-00200"
+      ],
+      "desks": [
+        "culture"
+      ]
+    },
+    {
+      "slug": "INIT-005:operational",
+      "advanced": 0,
+      "opened": 0,
+      "closed": 0,
+      "referenced": 1,
+      "articles": [
+        "culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0021"
+      ],
+      "hoods": [],
+      "citizens": [
+        "POP-01184",
+        "POP-00996",
+        "POP-00200"
+      ],
+      "desks": [
+        "culture"
+      ]
+    },
+    {
+      "slug": "INIT-009:vote-ready",
+      "advanced": 0,
+      "opened": 0,
+      "closed": 0,
+      "referenced": 1,
+      "articles": [
+        "culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0023"
+      ],
+      "hoods": [],
+      "citizens": [
+        "POP-00840",
+        "POP-00691",
+        "POP-00526"
+      ],
+      "desks": [
+        "culture"
+      ]
+    }
+  ],
+  "registry": [
+    {
+      "id": "CRISIS-114-DOWNTOWN",
+      "status": "open",
+      "stage": "decline"
+    },
+    {
+      "id": "INIT-001:disbursement-active",
+      "status": "open",
+      "stage": "disbursement-active"
+    },
+    {
+      "id": "INIT-002:dispatch-live",
+      "status": "open",
+      "stage": "dispatch-live"
+    },
+    {
+      "id": "INIT-003:design-phase",
+      "status": "open",
+      "stage": "design-phase"
+    },
+    {
+      "id": "INIT-005:operational",
+      "status": "open",
+      "stage": "operational"
+    },
+    {
+      "id": "INIT-006:construction-active",
+      "status": "open",
+      "stage": "construction-active"
+    },
+    {
+      "id": "INIT-007:implementation-active",
+      "status": "open",
+      "stage": "implementation-active"
+    },
+    {
+      "id": "INIT-008:vote-scheduled",
+      "status": "open",
+      "stage": "vote-scheduled"
+    },
+    {
+      "id": "INIT-009:vote-ready",
+      "status": "open",
+      "stage": "vote-ready"
+    },
+    {
+      "id": "INIT-010:announced",
+      "status": "open",
+      "stage": "announced"
+    },
+    {
+      "id": "INIT-011:announced",
+      "status": "open",
+      "stage": "announced"
+    },
+    {
+      "id": "INIT-012:announced",
+      "status": "open",
+      "stage": "announced"
+    },
+    {
+      "id": "INIT-013:announced",
+      "status": "open",
+      "stage": "announced"
+    },
+    {
+      "id": "INIT-014:announced",
+      "status": "open",
+      "stage": "announced"
+    },
+    {
+      "id": "INIT-009:announced",
+      "status": "closed",
+      "stage": "announced"
+    }
+  ],
+  "retiredSlugsIgnored": 0
+}

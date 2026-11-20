@@ -1,0 +1,27 @@
+{
+  "status": "arc-seed",
+  "cycle": "116",
+  "desk": "sports",
+  "persona": "p-slayer",
+  "hood": "Lake Merritt",
+  "quotes": [
+    {
+      "pop": "POP-00527",
+      "name": "Mike Paulson",
+      "quote": "The trade was about maximizing our return on Carmen Mesa, a player with high potential who didn't quite fit into our rotation. We got Giancarlo Hernandez, a third baseman with an A-potential glove, and Antone Baez, a left fielder with C potential. It's a good haul. Now, we've got a battle brewing at third base between Hernandez, Kevin Clark, and Ernesto Quintero. I'm excited to see how these guys compete and push each other to be better."
+    },
+    {
+      "pop": "POP-00053",
+      "name": "Kevin Clark",
+      "quote": "I'm not gonna lie, it's a little weird having Giancarlo Hernandez on the team now. I mean, we're talking about a guy with an A-potential glove at third base, which is my position. It's a competition, and I'm ready for it. I've been around long enough to know that the front office is looking for the best fit, and if that means Hernandez gets more playing time, so be it. I'm just here to help the team win."
+    },
+    {
+      "pop": "POP-00081",
+      "name": "Carmen Mesa",
+      "quote": "I've seen a mix of emotions around the neighborhood since the trade. Some folks are still reeling from Mark Aitken leaving for Colorado, and now with Giancarlo Hernandez coming in, people are wondering what that means for Kevin Clark's chances. The A's infield is definitely a topic of conversation. I've heard some people saying it's a good move, while others are concerned about the impact on the team's local identity."
+    }
+  ],
+  "claim": "The trade was about maximizing our return on Carmen Mesa, a player with high potential who didn't quite fit into our rotation. We got Giancarlo Hernandez, a third baseman with an A-potential glove, and Antone Baez, a left fielder with C potential. It's a good haul. Now, we've got a battle brewing at third base between Hernandez, Kevin Clark, and Ernesto Quintero. I'm excited to see how these guys compete and push each other to be better.",
+  "src": "citizenVoice PRESS c116",
+  "ranAt": "2026-11-18T19:17:20.594Z"
+}

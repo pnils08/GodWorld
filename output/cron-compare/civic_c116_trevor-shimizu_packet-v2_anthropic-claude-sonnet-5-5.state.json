@@ -1,0 +1,681 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00155",
+    "name": "Trevor Shimizu",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "12th St Oakland City Center ridership down 2,313 vs C115 | 8 stations + 10 corridors on the record — the platforms and the people who run them",
+    "approach": "Transit approach: this slice is every station on the record this cycle, what moved against last cycle, and the transit workers on the roster. The week header (weather, home games, the union of causes), the chaos car on the line and the citizens who lived a transit line are record; the Factors on each station row are the city's own causes — the frame at their head (weather; weekend; holiday: <name> (major) or (no cut)) is the citywide day-type cut, and the rest are the row's own reasons (holiday lift in its hood, First Friday, game day, events, a stalled train, a short crew, crowded platforms). Riders rise and fall for the reasons written there, never for a reason you add. A BART-train chaos hit this cycle reaches the platforms NEXT cycle. Dry, technical, timestamp and pattern — but it is a place with people in it. One system, one claim about what changed. Facts on this slice: the names,",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "transit",
+      "hood": null,
+      "facts": [
+        "Day type this cycle: weekday; holiday: Spring Equinox (no cut) — no change to riders. A station that moved more than the citywide rule names its own reason on its row.",
+        "The week on the line — every cause on the record this cycle, once: mild; holiday: Spring Equinox (no cut); game day (Downtown, Jack London); events in Downtown, Lake Merritt; crowded platforms (city transit congestion 0.14); game day (Downtown); events in Downtown, Lake Merritt, Temescal; events in Lake Merritt, Chinatown, Adams Point; events in East Oakland; Fruitvale Transit Hub Phase II — Visioning: complete; events in East Oakland, Baylight District; game day (Jack London); events in Temescal; game day (Jack London, Downtown)",
+        "Weather this cycle: mild, 54°F (6 cycles of clear)",
+        "Game on the sports feed this cycle: Oaks at San Antonio — One cycle after this page asked whether Wilson Shepard's offense still had another gear, the Oaks found it in Denver. They won their second NBA Cup game 147-114, the most points in franchise history, topping the 135 they put up in Toronto. Oakland led by 5 after one, by 18 at the half and by 23 after three, then scored 42 in the fourth. The shooting numbers barely look real: 63 of 79 from the field, 80 percent, and 19 of 26 from three, 73 percent. The Oaks handed out 40 assists against just 5 turnovers, scored 72 in the paint and 12 on the break, and their bench outscored most starting fives with 56. Five Oaks did not miss a shot. AJ Dybantsa went 8 for 8 for 18, Wendell Carter Jr. went 8 for 8 for 17 with 9 rebounds, Adash Stanley went 6 for 6 for 15 with 3 of 3 from deep, Harry Hayward went 5 for 5 and 4 for 4 from three for 14, and J. Valanciunas went 3 for 3 for 6 with 6 rebounds in 10 minutes. That is 30 for 30 between them. The leading scorer came off the bench. T. Jerome scored 28 on 12 of 16 with 10 assists in 28 minutes, his second big night as the sixth man after his 19, 7 and 7 in Toronto. Austin Reaves bounced back from his 4 of 14 night in Philadelphia with 27 points on 11 of 14, a perfect 5 of 5 from three, 12 assists and 2 steals in a team-high 41 minutes. Dillon Brooks added 14. Hayward keeps forcing the issue. In 19 minutes he added 4 assists to his perfect shooting, and he is now 9 of 10 from three over his last six games. G. Trent Jr. hit 2 threes in 3 minutes and J. Champagnie handed out 4 assists. B. Simmons was a DNP for the fifth straight game, and T. Henderson Jr., B. James Jr., J. Tate and Coen Carr also sat. The Oaks win their fifth straight, move to 9-1 and 2-0 in Cup play, and are now scoring 113.6 a game while allowing 92.0. (the rider lift is real only where a station row says \"game day\")",
+        "Game on the sports feed this cycle: Oaks at KONO — The Spurs handed the Oaks their first ever home loss. San Antonio came into Oakland for a Cup game in front of a 99 percent crowd and left with a 126-117 win, only the Oaks' second loss of the season. It was even for three quarters. The Oaks trailed by 8 after a slow 20-point first, won the second 35-25 to lead 55-53 at the half, and it was tied 90-90 going into the fourth. Then the offense that shot 80 percent in Denver went cold. The Oaks scored 27 in the fourth, lost the quarter by 9, and finished 41 of 95 from the field, 43 percent, and 12 of 36 from three. They also left points at the line, 23 of 32, and turned it over 14 times after just 5 in Denver. T. Jerome was the exception again. Off the bench he scored 23 in 21 minutes, all six of his field goals from three on 6 of 8, plus 5 of 7 at the line and 2 steals. That is 19, 28 and 23 in his last three games, and the case for a bigger role is getting hard to ignore. Outside of Jerome the Oaks were 6 of 28 from three. AJ Dybantsa led the starters with 19 on 6 of 14, 3 of 5 from deep, and 4 of 5 at the line. Wendell Carter Jr. had a 14-point, 12-rebound double-double with 4 offensive boards but went 6 of 11 at the line. Adash Stanley had 14, 5 rebounds and 7 assists, and Austin Reaves had 13, 6 rebounds and 6 assists with 4 turnovers. Dillon Brooks scored 13 but needed 19 shots, 5 of 19 and 0 of 6 from three. Harry Hayward came back to earth after his perfect night in Denver, 2 of 9 and 1 of 6 from three, but grabbed 10 rebounds and added 3 assists in 20 minutes. T. Henderson Jr. got back on the floor and went 2 for 2 in 12 minutes. B. Simmons was a DNP for the sixth straight game, with B. James Jr., J. Tate and Coen Carr also sitting. The five-game win streak is over. The Oaks fall to 9-2 and 2-1 in Cup play, and are now scoring 113.9 a game and allowing 95.1. (the rider lift is real only where a station row says \"game day\")",
+        "No chaos car touched the trains or the transit agencies this cycle (Chaos_Cars rows read; none on bart_train, BART or AC Transit)",
+        "8 stations + 10 corridors on the record this cycle; total ridership 68,505 (C115: 73,938)",
+        "12th St Oakland City Center: ridership 12,213 (-2,313 vs C115), on-time 81% (-5 pts) — mild; holiday: Spring Equinox (no cut); base: ledger; game day (Downtown, Jack London); events in Downtown, Lake Merritt; crowded platforms (city transit congestion 0.14)",
+        "19th St Oakland: ridership 13,825 (-2,251 vs C115), on-time 78% (-3 pts) — mild; holiday: Spring Equinox (no cut); base: ledger; game day (Downtown); events in Downtown, Lake Merritt, Temescal; crowded platforms (city transit congestion 0.14)",
+        "Coliseum: ridership 8,908 (+1,132 vs C115), on-time 83% (+2 pts) — mild; holiday: Spring Equinox (no cut); base: ledger; events in East Oakland, Baylight District; crowded platforms (city transit congestion 0.14)",
+        "Rockridge: ridership 4,557 (-1,127 vs C115), on-time 82% (+3 pts) — mild; holiday: Spring Equinox (no cut); base: ledger; crowded platforms (city transit congestion 0.14)",
+        "West Oakland: ridership 8,773 (-746 vs C115), on-time 79% (+2 pts) — mild; holiday: Spring Equinox (no cut); base: ledger; game day (Jack London); crowded platforms (city transit congestion 0.14)"
+      ],
+      "priorCycle": "PRIOR_CYCLE_IN_TABLE",
+      "note": null,
+      "engineHooks": [
+        "Cooling down in Downtown: The Downtown Transit Snarl — Downtown easing but still strained: housing pressure 10.00 (city 2.52) Follow-up angle available. (historical reflection)",
+        "Notable event: \"Medium-severity public-works spike in Glenview\". Follow-up recommended. (general coverage)",
+        "Story seed 5dd66ca6 (Fruitvale): Shawn Nguyen, Chole Kim, Toby Lamont, DeShawn Avery — Shawn Nguyen — showed up to set up the chairs in the fellowship hall because if they didn't do it, no one would; Chole Kim — a flyer for a seniors lunch ",
+        "Story seed cfeb52ec (Citywide): Tanisha Freeman, Matty Lipo, Delmon Regan, Juliette Park — Tanisha Freeman — attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard; Matty Lipo — heard the block "
+      ],
+      "roomIsYours": "the platform at 7:40, the operator's cab, who is late and why, what the fare gate sounds like, what a regular rider notices first",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF",
+    "runningStoriesNote": "signal.runningStories are events the city is already living through and where each one stands. Background only — write nothing about tracking them."
+  },
+  "signal": {
+    "kind": "beat-transit",
+    "hood": null,
+    "src": "output/beats/Transit_Metrics.jsonl Cycle 116",
+    "plan": {
+      "focus": "Why the two busiest downtown stations shed a combined 4,564 riders in a mild, event-heavy week while Coliseum and Fruitvale gained — and what the transit workers on the roster see from the platform that the ledger doesn't show."
+    },
+    "runningStories": [
+      "The Downtown Transit Snarl [Downtown] — decline, week 3",
+      "West Oakland Stabilization Fund — disbursement-active [West Oakland] — under way",
+      "Oakland Alternative Response Initiative — dispatch-live [West Oakland, Fruitvale, East Oakland] — under way",
+      "Fruitvale Transit Hub Phase II — Visioning — complete [Fruitvale] — under way",
+      "Temescal Community Health Center — operational [Temescal] — under way",
+      "Baylight District — Final Council Vote — complete [Jack London, Downtown] — under way",
+      "Oakland Youth Apprenticeship Pipeline — implementation-active [West Oakland, East Oakland, Fruitvale] — under way",
+      "Downtown Economic Revitalization — vote-scheduled [Downtown] — under way",
+      "Commercial Stabilization for Grand Lake — vote-scheduled [Grand Lake] — under way",
+      "West Oakland Tenant Defense Fund — vote-scheduled [West Oakland] — under way",
+      "Ivy Hill Revitalization Initiative — announced [Ivy Hill] — under way",
+      "Dimond Revitalization Initiative — announced [Dimond] — under way",
+      "Ivy Hill Community Revitalization — announced [Ivy Hill] — under way",
+      "Ivy Hill Community Support Initiative — vote-scheduled [Ivy Hill] — under way",
+      "Laurel Neighborhood Patch and Clean-Up — announced [Laurel] — under way",
+      "Fruitvale Transit Hub Phase II — Visioning — design-phase [Fruitvale] — ENDED this week; now complete",
+      "Baylight District — Final Council Vote — construction-active [Jack London, Downtown] — ENDED this week; now complete",
+      "West Oakland Tenant Defense Fund — announced [West Oakland] — ENDED this week; now vote-scheduled",
+      "Commercial Stabilization for Grand Lake — vote-ready [Grand Lake] — ENDED this week; now vote-scheduled",
+      "Ivy Hill Community Support Initiative — announced [Ivy Hill] — ENDED this week; now vote-scheduled"
+    ]
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00617",
+        "name": "Eleanor Rivera",
+        "profile": "Eleanor Rivera — BART Station Manager — BART Oakland Division",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-01039",
+        "name": "Ximena Mehta",
+        "profile": "Ximena Mehta — Bart Transit PR — BART Oakland Division",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-01053",
+        "name": "Rosario Medina",
+        "profile": "Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub — Fruitvale Transit Hub Authority",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00617-1617d406c1",
+        "pop": "POP-00617",
+        "name": "Eleanor Rivera",
+        "quote": "Honestly, from the booth, a five-point drop on a crowded day doesn't read as people leaving the station. It reads as people arriving later, all at once. You see the platforms fill up in waves instead of a steady stream, and that's when the dwell time stretches — the trains are there, but everyone's squeezing on at the same time, doors cycle slower, and the whole rhythm backs up. The ledger shows the number that got on. What it doesn't show is the crowd that's still on the platform when the doors close, waiting for the next one. That's not a loss — that's a delay that shows up in the next train's count.",
+        "factIds": [
+          "F-c5d93f262c83",
+          "F-2d0a41f1dcc3"
+        ],
+        "src": "packet.W2[POP-00617]"
+      },
+      {
+        "id": "Q-POP-01039-9b88105ab3",
+        "pop": "POP-01039",
+        "name": "Ximena Mehta",
+        "quote": "Honestly, when I see 12th Street drop like that on a mild week with stuff going on downtown, I don't read it as people not wanting to ride. I read it as people finding another way to get where they're going. That congestion number is low enough that driving doesn't feel like a punishment yet. And the fact that Coliseum and Fruitvale went up? That tells me the riders are still out there, they're just moving to the stations that connect to their actual lives — the East Oakland events, the hub work at Fruitvale. From the platform, what I see is that downtown is a destination, but it's not the only one anymore. People are spreading out, and BART's job is to make sure we're where they're going next, not just where they used to go.",
+        "factIds": [
+          "F-c5d93f262c83",
+          "F-2d0a41f1dcc3",
+          "F-df552133a6b1"
+        ],
+        "src": "packet.W2[POP-01039]"
+      },
+      {
+        "id": "Q-POP-01053-98dd1da358",
+        "pop": "POP-01053",
+        "name": "Rosario Medina",
+        "quote": "I can tell you what I see from the platform at Fruitvale, and it's not the same picture downtown is painting. The riders I see every day are the ones who live here — the folks who need this hub to get to work, to get their kids to school, to get to the doctor. The Visioning phase being done doesn't change that; it just means we finally put names to what we already knew. Downtown shedding riders while we gain? That's not a mystery to me. That's a different population with different options. The people on my platform don't have the luxury of working from home or driving in when the weather's mild. They're here because this is the line that gets them where they need to go. The ledger can show numbers going up and down, but it can't show the woman with three bags of groceries who just made the transfer, or the kid with a backpack who's heading to a job training session at St. Esperanza. That's who's using this station. And that's who the city needs to keep in mind when they talk about what's working and what's not.",
+        "factIds": [
+          "F-c5d93f262c83",
+          "F-df552133a6b1"
+        ],
+        "src": "packet.W2[POP-01053]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Trevor Shimizu",
+        "text": "The downtown ridership loss may be tied to riders shifting to the gained stations rather than leaving transit entirely — the corridor data and the station rows both point that way, but the transfer pattern is not on the record.",
+        "usable": false
+      },
+      {
+        "from": "Trevor Shimizu",
+        "text": "The crowded-platforms factor at 0.14 may be a capacity ceiling rather than a demand floor — if the downtown stations are at capacity, the loss is the system pushing riders out, not riders choosing to leave.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C116",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-871096fd8925"
+    },
+    {
+      "t": "FACT",
+      "text": "12th St Oakland City Center ridership down 2,313 vs C115 | 8 stations + 10 corridors on the record",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 116",
+      "id": "F-c5d93f262c83"
+    },
+    {
+      "t": "FACT",
+      "text": "12th St Oakland City Center moved down the most this cycle — mild; holiday: Spring Equinox (no cut); base: ledger; game day (Downtown, Jack London); events in Downtown, Lake Merritt; crowded platforms (city transit congestion 0.14); 14 transit workers on the roster, 8 citizens who lived a transit line.",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 116",
+      "id": "F-2d0a41f1dcc3"
+    },
+    {
+      "t": "FACT",
+      "text": "Day type this cycle: weekday; holiday: Spring Equinox (no cut) — no change to riders. A station that moved more than the citywide rule names its own reason on its row.",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 116 Factors (frame)",
+      "id": "F-f525ffd3880b"
+    },
+    {
+      "t": "FACT",
+      "text": "The week on the line — every cause on the record this cycle, once: mild; holiday: Spring Equinox (no cut); game day (Downtown, Jack London); events in Downtown, Lake Merritt; crowded platforms (city transit congestion 0.14); game day (Downtown); events in Downtown, Lake Merritt, Temescal; events in Lake Merritt, Chinatown, Adams Point; events in East Oakland; Fruitvale Transit Hub Phase II — Visioning: complete; events in East Oakland, Baylight District; game day (Jack London); events in Temesca",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 116 Factors",
+      "id": "F-df552133a6b1"
+    },
+    {
+      "t": "FACT",
+      "text": "Weather this cycle: mild, 54°F (6 cycles of clear)",
+      "src": "output/beats/Cycle_Weather.jsonl CycleID 116",
+      "id": "F-e5ab6d72fd50"
+    },
+    {
+      "t": "FACT",
+      "text": "Game on the sports feed this cycle: Oaks at San Antonio — One cycle after this page asked whether Wilson Shepard's offense still had another gear, the Oaks found it in Denver. They won their second NBA Cup game 147-114, the most points in franchise history, topping the 135 they put up in Toronto. Oakland led by 5 after one, by 18 at the half and by 23 after three, then scored 42 in the fourth. The shooting numbers barely look real: 63 of 79 from the field, 80 percent, and 19 of 26 from three, 73",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 116",
+      "id": "F-f11c0e135086"
+    },
+    {
+      "t": "FACT",
+      "text": "Game on the sports feed this cycle: Oaks at KONO — The Spurs handed the Oaks their first ever home loss. San Antonio came into Oakland for a Cup game in front of a 99 percent crowd and left with a 126-117 win, only the Oaks' second loss of the season. It was even for three quarters. The Oaks trailed by 8 after a slow 20-point first, won the second 35-25 to lead 55-53 at the half, and it was tied 90-90 going into the fourth. Then the offense that shot 80 percent in Denver went cold. The Oaks scor",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 116",
+      "id": "F-5bf65447ea13"
+    },
+    {
+      "t": "FACT",
+      "text": "No chaos car touched the trains or the transit agencies this cycle (Chaos_Cars rows read; none on bart_train, BART or AC Transit)",
+      "src": "output/world_summary_c116.md ## Chaos Events",
+      "id": "F-e3133bb1d70e"
+    },
+    {
+      "t": "FACT",
+      "text": "8 stations + 10 corridors on the record this cycle; total ridership 68,505 (C115: 73,938)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 116",
+      "id": "F-242109ce2fb5"
+    },
+    {
+      "t": "FACT",
+      "text": "12th St Oakland City Center: ridership 12,213 (-2,313 vs C115), on-time 81% (-5 pts) — mild; holiday: Spring Equinox (no cut); base: ledger; game day (Downtown, Jack London); events in Downtown, Lake Merritt; crowded platforms (city transit congestion 0.14)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 116",
+      "id": "F-f602173e11ce"
+    },
+    {
+      "t": "FACT",
+      "text": "19th St Oakland: ridership 13,825 (-2,251 vs C115), on-time 78% (-3 pts) — mild; holiday: Spring Equinox (no cut); base: ledger; game day (Downtown); events in Downtown, Lake Merritt, Temescal; crowded platforms (city transit congestion 0.14)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 116",
+      "id": "F-b8ac645e1a11"
+    },
+    {
+      "t": "FACT",
+      "text": "Coliseum: ridership 8,908 (+1,132 vs C115), on-time 83% (+2 pts) — mild; holiday: Spring Equinox (no cut); base: ledger; events in East Oakland, Baylight District; crowded platforms (city transit congestion 0.14)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 116",
+      "id": "F-ed1c9ec8b345"
+    },
+    {
+      "t": "FACT",
+      "text": "Rockridge: ridership 4,557 (-1,127 vs C115), on-time 82% (+3 pts) — mild; holiday: Spring Equinox (no cut); base: ledger; crowded platforms (city transit congestion 0.14)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 116",
+      "id": "F-f889b696b406"
+    },
+    {
+      "t": "FACT",
+      "text": "West Oakland: ridership 8,773 (-746 vs C115), on-time 79% (+2 pts) — mild; holiday: Spring Equinox (no cut); base: ledger; game day (Jack London); crowded platforms (city transit congestion 0.14)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 116",
+      "id": "F-bc439824b4c5"
+    },
+    {
+      "t": "FACT",
+      "text": "MacArthur: ridership 4,172 (-462 vs C115), on-time 78% (-2 pts) — mild; holiday: Spring Equinox (no cut); base: ledger; events in Temescal; crowded platforms (city transit congestion 0.14)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 116",
+      "id": "F-a541be858f94"
+    },
+    {
+      "t": "FACT",
+      "text": "Fruitvale: ridership 9,343 (+400 vs C115), on-time 83% (-4 pts) — mild; holiday: Spring Equinox (no cut); base: ledger; events in East Oakland; Fruitvale Transit Hub Phase II — Visioning: complete; crowded platforms (city transit congestion 0.14)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 116",
+      "id": "F-2adaffe29e88"
+    },
+    {
+      "t": "FACT",
+      "text": "Lake Merritt: ridership 6,714 (-66 vs C115), on-time 77% (-6 pts) — mild; holiday: Spring Equinox (no cut); base: ledger; events in Lake Merritt, Chinatown, Adams Point; crowded platforms (city transit congestion 0.14)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 116",
+      "id": "F-c0116bb062ae"
+    },
+    {
+      "t": "FACT",
+      "text": "I-880 North: traffic index 89 (-11 vs C115) — mild; holiday: Spring Equinox (no cut); base: ledger; game day (Jack London, Downtown)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 116",
+      "id": "F-1821044ddb15"
+    },
+    {
+      "t": "FACT",
+      "text": "I-880 South: traffic index 92 (-6 vs C115) — mild; holiday: Spring Equinox (no cut); base: ledger",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 116",
+      "id": "F-874671e29c01"
+    },
+    {
+      "t": "FACT",
+      "text": "I-580 East: traffic index 83 (-6 vs C115) — mild; holiday: Spring Equinox (no cut); base: ledger",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 116",
+      "id": "F-64bfe046694a"
+    },
+    {
+      "t": "FACT",
+      "text": "I-580 West: traffic index 81 (-4 vs C115) — mild; holiday: Spring Equinox (no cut); base: ledger",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 116",
+      "id": "F-ef51e3680931"
+    },
+    {
+      "t": "FACT",
+      "text": "I-980: traffic index 86 (-14 vs C115) — mild; holiday: Spring Equinox (no cut); base: ledger; game day (Downtown)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 116",
+      "id": "F-cc39afd73bdb"
+    },
+    {
+      "t": "FACT",
+      "text": "Broadway: traffic index 72 (-13 vs C115) — mild; holiday: Spring Equinox (no cut); base: ledger; game day (Downtown)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 116",
+      "id": "F-6136c757eb7b"
+    },
+    {
+      "t": "FACT",
+      "text": "International Blvd: traffic index 73 (-11 vs C115) — mild; holiday: Spring Equinox (no cut); base: ledger",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 116",
+      "id": "F-fae1bff024cf"
+    },
+    {
+      "t": "FACT",
+      "text": "MacArthur Blvd: traffic index 70 (-2 vs C115) — mild; holiday: Spring Equinox (no cut); base: ledger",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 116",
+      "id": "F-c18e0b0396be"
+    },
+    {
+      "t": "FACT",
+      "text": "Telegraph Ave: traffic index 77 (-8 vs C115) — mild; holiday: Spring Equinox (no cut); base: ledger; game day (Downtown)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 116",
+      "id": "F-1aaf512738d2"
+    },
+    {
+      "t": "FACT",
+      "text": "Grand Ave: traffic index 64 (-9 vs C115) — mild; holiday: Spring Equinox (no cut); base: ledger",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 116",
+      "id": "F-9ab603aeb478"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+      "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+      "id": "F-647fd9067a33"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "trevor-infrastructure-systems-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Translate one Packet-backed transit or infrastructure condition into a clear systems consequence, while keeping timestamps, failures, causal links, and cascade warnings bounded by the supplied record.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "dry third-person infrastructure and transit systems analysis",
+      "targetWords": "500-800",
+      "opening": "a Packet-backed time, place, system condition, or implementation state"
+    },
+    "authorizedTexture": [
+      "plain-language explanation of a Packet-backed infrastructure or transit condition",
+      "comparison of two supplied system facts when their relationship remains framed as analysis unless the Packet supplies causation",
+      "a restrained forward warning explicitly conditioned on supplied facts and declared missing evidence",
+      "unnamed physical texture at a Packet-backed or generic public site that adds no failure, delay, crowd, damage, or operational fact"
+    ],
+    "textureConditions": [
+      "every named person, place, route, station, system, agency, office, Project, Initiative, business, and organization must come from the Packet",
+      "a timestamp, duration, distance, load, capacity, delay, outage, closure, breakdown, maintenance event, or service change requires a supplied source",
+      "a cascade or shared-cause claim requires at least two supplied facts plus a Packet-backed link; otherwise it remains an open hypothesis",
+      "technical interpretation must use citizen-facing language and must not print raw engine labels, scores, fields, or decimals as public evidence"
+    ],
+    "canonBlockers": [
+      "an invented outage, closure, breakdown, delay, route, station, repair, inspection, maintenance event, service change, or infrastructure damage",
+      "an unsupported timestamp, duration, distance, capacity, load, count, budget, deadline, completion state, or performance metric",
+      "an unsupported causal link, cascade, responsible agency, duty, official act, official inaction, promise, or decision",
+      "a named person, place, route, station, system, agency, office, Project, Initiative, business, or organization not found in the supplied record",
+      "raw engine terminology or simulation values presented as an in-world technical measurement"
+    ]
+  },
+  "manifest": {
+    "id": "AM-af6b04c603c3",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-871096fd8925",
+        "t": "FACT",
+        "text": "Current cycle: C116",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-c5d93f262c83",
+        "t": "FACT",
+        "text": "12th St Oakland City Center ridership down 2,313 vs C115 | 8 stations + 10 corridors on the record",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 116"
+      },
+      {
+        "id": "F-2d0a41f1dcc3",
+        "t": "FACT",
+        "text": "12th St Oakland City Center moved down the most this cycle — mild; holiday: Spring Equinox (no cut); base: ledger; game day (Downtown, Jack London); events in Downtown, Lake Merritt; crowded platforms (city transit congestion 0.14); 14 transit workers on the roster, 8 citizens who lived a transit line.",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 116"
+      },
+      {
+        "id": "F-f525ffd3880b",
+        "t": "FACT",
+        "text": "Day type this cycle: weekday; holiday: Spring Equinox (no cut) — no change to riders. A station that moved more than the citywide rule names its own reason on its row.",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 116 Factors (frame)"
+      },
+      {
+        "id": "F-df552133a6b1",
+        "t": "FACT",
+        "text": "The week on the line — every cause on the record this cycle, once: mild; holiday: Spring Equinox (no cut); game day (Downtown, Jack London); events in Downtown, Lake Merritt; crowded platforms (city transit congestion 0.14); game day (Downtown); events in Downtown, Lake Merritt, Temescal; events in Lake Merritt, Chinatown, Adams Point; events in East Oakland; Fruitvale Transit Hub Phase II — Visioning: complete; events in East Oakland, Baylight District; game day (Jack London); events in Temesca",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 116 Factors"
+      },
+      {
+        "id": "F-e5ab6d72fd50",
+        "t": "FACT",
+        "text": "Weather this cycle: mild, 54°F (6 cycles of clear)",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 116"
+      },
+      {
+        "id": "F-f11c0e135086",
+        "t": "FACT",
+        "text": "Game on the sports feed this cycle: Oaks at San Antonio — One cycle after this page asked whether Wilson Shepard's offense still had another gear, the Oaks found it in Denver. They won their second NBA Cup game 147-114, the most points in franchise history, topping the 135 they put up in Toronto. Oakland led by 5 after one, by 18 at the half and by 23 after three, then scored 42 in the fourth. The shooting numbers barely look real: 63 of 79 from the field, 80 percent, and 19 of 26 from three, 73",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 116"
+      },
+      {
+        "id": "F-5bf65447ea13",
+        "t": "FACT",
+        "text": "Game on the sports feed this cycle: Oaks at KONO — The Spurs handed the Oaks their first ever home loss. San Antonio came into Oakland for a Cup game in front of a 99 percent crowd and left with a 126-117 win, only the Oaks' second loss of the season. It was even for three quarters. The Oaks trailed by 8 after a slow 20-point first, won the second 35-25 to lead 55-53 at the half, and it was tied 90-90 going into the fourth. Then the offense that shot 80 percent in Denver went cold. The Oaks scor",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 116"
+      },
+      {
+        "id": "F-e3133bb1d70e",
+        "t": "FACT",
+        "text": "No chaos car touched the trains or the transit agencies this cycle (Chaos_Cars rows read; none on bart_train, BART or AC Transit)",
+        "src": "output/world_summary_c116.md ## Chaos Events"
+      },
+      {
+        "id": "F-242109ce2fb5",
+        "t": "FACT",
+        "text": "8 stations + 10 corridors on the record this cycle; total ridership 68,505 (C115: 73,938)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 116"
+      },
+      {
+        "id": "F-f602173e11ce",
+        "t": "FACT",
+        "text": "12th St Oakland City Center: ridership 12,213 (-2,313 vs C115), on-time 81% (-5 pts) — mild; holiday: Spring Equinox (no cut); base: ledger; game day (Downtown, Jack London); events in Downtown, Lake Merritt; crowded platforms (city transit congestion 0.14)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 116"
+      },
+      {
+        "id": "F-b8ac645e1a11",
+        "t": "FACT",
+        "text": "19th St Oakland: ridership 13,825 (-2,251 vs C115), on-time 78% (-3 pts) — mild; holiday: Spring Equinox (no cut); base: ledger; game day (Downtown); events in Downtown, Lake Merritt, Temescal; crowded platforms (city transit congestion 0.14)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 116"
+      },
+      {
+        "id": "F-ed1c9ec8b345",
+        "t": "FACT",
+        "text": "Coliseum: ridership 8,908 (+1,132 vs C115), on-time 83% (+2 pts) — mild; holiday: Spring Equinox (no cut); base: ledger; events in East Oakland, Baylight District; crowded platforms (city transit congestion 0.14)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 116"
+      },
+      {
+        "id": "F-f889b696b406",
+        "t": "FACT",
+        "text": "Rockridge: ridership 4,557 (-1,127 vs C115), on-time 82% (+3 pts) — mild; holiday: Spring Equinox (no cut); base: ledger; crowded platforms (city transit congestion 0.14)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 116"
+      },
+      {
+        "id": "F-bc439824b4c5",
+        "t": "FACT",
+        "text": "West Oakland: ridership 8,773 (-746 vs C115), on-time 79% (+2 pts) — mild; holiday: Spring Equinox (no cut); base: ledger; game day (Jack London); crowded platforms (city transit congestion 0.14)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 116"
+      },
+      {
+        "id": "F-a541be858f94",
+        "t": "FACT",
+        "text": "MacArthur: ridership 4,172 (-462 vs C115), on-time 78% (-2 pts) — mild; holiday: Spring Equinox (no cut); base: ledger; events in Temescal; crowded platforms (city transit congestion 0.14)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 116"
+      },
+      {
+        "id": "F-2adaffe29e88",
+        "t": "FACT",
+        "text": "Fruitvale: ridership 9,343 (+400 vs C115), on-time 83% (-4 pts) — mild; holiday: Spring Equinox (no cut); base: ledger; events in East Oakland; Fruitvale Transit Hub Phase II — Visioning: complete; crowded platforms (city transit congestion 0.14)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 116"
+      },
+      {
+        "id": "F-c0116bb062ae",
+        "t": "FACT",
+        "text": "Lake Merritt: ridership 6,714 (-66 vs C115), on-time 77% (-6 pts) — mild; holiday: Spring Equinox (no cut); base: ledger; events in Lake Merritt, Chinatown, Adams Point; crowded platforms (city transit congestion 0.14)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 116"
+      },
+      {
+        "id": "F-1821044ddb15",
+        "t": "FACT",
+        "text": "I-880 North: traffic index 89 (-11 vs C115) — mild; holiday: Spring Equinox (no cut); base: ledger; game day (Jack London, Downtown)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 116"
+      },
+      {
+        "id": "F-874671e29c01",
+        "t": "FACT",
+        "text": "I-880 South: traffic index 92 (-6 vs C115) — mild; holiday: Spring Equinox (no cut); base: ledger",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 116"
+      },
+      {
+        "id": "F-64bfe046694a",
+        "t": "FACT",
+        "text": "I-580 East: traffic index 83 (-6 vs C115) — mild; holiday: Spring Equinox (no cut); base: ledger",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 116"
+      },
+      {
+        "id": "F-ef51e3680931",
+        "t": "FACT",
+        "text": "I-580 West: traffic index 81 (-4 vs C115) — mild; holiday: Spring Equinox (no cut); base: ledger",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 116"
+      },
+      {
+        "id": "F-cc39afd73bdb",
+        "t": "FACT",
+        "text": "I-980: traffic index 86 (-14 vs C115) — mild; holiday: Spring Equinox (no cut); base: ledger; game day (Downtown)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 116"
+      },
+      {
+        "id": "F-6136c757eb7b",
+        "t": "FACT",
+        "text": "Broadway: traffic index 72 (-13 vs C115) — mild; holiday: Spring Equinox (no cut); base: ledger; game day (Downtown)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 116"
+      },
+      {
+        "id": "F-fae1bff024cf",
+        "t": "FACT",
+        "text": "International Blvd: traffic index 73 (-11 vs C115) — mild; holiday: Spring Equinox (no cut); base: ledger",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 116"
+      },
+      {
+        "id": "F-c18e0b0396be",
+        "t": "FACT",
+        "text": "MacArthur Blvd: traffic index 70 (-2 vs C115) — mild; holiday: Spring Equinox (no cut); base: ledger",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 116"
+      },
+      {
+        "id": "F-1aaf512738d2",
+        "t": "FACT",
+        "text": "Telegraph Ave: traffic index 77 (-8 vs C115) — mild; holiday: Spring Equinox (no cut); base: ledger; game day (Downtown)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 116"
+      },
+      {
+        "id": "F-9ab603aeb478",
+        "t": "FACT",
+        "text": "Grand Ave: traffic index 64 (-9 vs C115) — mild; holiday: Spring Equinox (no cut); base: ledger",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 116"
+      },
+      {
+        "id": "F-647fd9067a33",
+        "t": "FACT",
+        "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+        "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00617-1617d406c1",
+        "speakerId": "POP-00617",
+        "speakerName": "Eleanor Rivera",
+        "text": "Honestly, from the booth, a five-point drop on a crowded day doesn't read as people leaving the station. It reads as people arriving later, all at once. You see the platforms fill up in waves instead of a steady stream, and that's when the dwell time stretches — the trains are there, but everyone's squeezing on at the same time, doors cycle slower, and the whole rhythm backs up. The ledger shows the number that got on. What it doesn't show is the crowd that's still on the platform when the doors close, waiting for the next one. That's not a loss — that's a delay that shows up in the next train's count.",
+        "factIds": [
+          "F-c5d93f262c83",
+          "F-2d0a41f1dcc3"
+        ],
+        "src": "packet.W2[POP-00617]"
+      },
+      {
+        "id": "Q-POP-01039-9b88105ab3",
+        "speakerId": "POP-01039",
+        "speakerName": "Ximena Mehta",
+        "text": "Honestly, when I see 12th Street drop like that on a mild week with stuff going on downtown, I don't read it as people not wanting to ride. I read it as people finding another way to get where they're going. That congestion number is low enough that driving doesn't feel like a punishment yet. And the fact that Coliseum and Fruitvale went up? That tells me the riders are still out there, they're just moving to the stations that connect to their actual lives — the East Oakland events, the hub work at Fruitvale. From the platform, what I see is that downtown is a destination, but it's not the only one anymore. People are spreading out, and BART's job is to make sure we're where they're going next, not just where they used to go.",
+        "factIds": [
+          "F-c5d93f262c83",
+          "F-2d0a41f1dcc3",
+          "F-df552133a6b1"
+        ],
+        "src": "packet.W2[POP-01039]"
+      },
+      {
+        "id": "Q-POP-01053-98dd1da358",
+        "speakerId": "POP-01053",
+        "speakerName": "Rosario Medina",
+        "text": "I can tell you what I see from the platform at Fruitvale, and it's not the same picture downtown is painting. The riders I see every day are the ones who live here — the folks who need this hub to get to work, to get their kids to school, to get to the doctor. The Visioning phase being done doesn't change that; it just means we finally put names to what we already knew. Downtown shedding riders while we gain? That's not a mystery to me. That's a different population with different options. The people on my platform don't have the luxury of working from home or driving in when the weather's mild. They're here because this is the line that gets them where they need to go. The ledger can show numbers going up and down, but it can't show the woman with three bags of groceries who just made the transfer, or the kid with a backpack who's heading to a job training session at St. Esperanza. That's who's using this station. And that's who the city needs to keep in mind when they talk about what's working and what's not.",
+        "factIds": [
+          "F-c5d93f262c83",
+          "F-df552133a6b1"
+        ],
+        "src": "packet.W2[POP-01053]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00617",
+        "name": "Eleanor Rivera",
+        "profile": "Eleanor Rivera — BART Station Manager — BART Oakland Division",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-01039",
+        "name": "Ximena Mehta",
+        "profile": "Ximena Mehta — Bart Transit PR — BART Oakland Division",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-01053",
+        "name": "Rosario Medina",
+        "profile": "Rosario Medina — CBA Compliance Monitor, Fruitvale Transit Hub — Fruitvale Transit Hub Authority",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Trevor Shimizu",
+        "text": "The downtown ridership loss may be tied to riders shifting to the gained stations rather than leaving transit entirely — the corridor data and the station rows both point that way, but the transfer pattern is not on the record.",
+        "publishable": false
+      },
+      {
+        "from": "Trevor Shimizu",
+        "text": "The crowded-platforms factor at 0.14 may be a capacity ceiling rather than a demand floor — if the downtown stations are at capacity, the loss is the system pushing riders out, not riders choosing to leave.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "plain-language explanation of a Packet-backed infrastructure or transit condition",
+      "comparison of two supplied system facts when their relationship remains framed as analysis unless the Packet supplies causation",
+      "a restrained forward warning explicitly conditioned on supplied facts and declared missing evidence",
+      "unnamed physical texture at a Packet-backed or generic public site that adds no failure, delay, crowd, damage, or operational fact"
+    ],
+    "textureConditions": [
+      "every named person, place, route, station, system, agency, office, Project, Initiative, business, and organization must come from the Packet",
+      "a timestamp, duration, distance, load, capacity, delay, outage, closure, breakdown, maintenance event, or service change requires a supplied source",
+      "a cascade or shared-cause claim requires at least two supplied facts plus a Packet-backed link; otherwise it remains an open hypothesis",
+      "technical interpretation must use citizen-facing language and must not print raw engine labels, scores, fields, or decimals as public evidence"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

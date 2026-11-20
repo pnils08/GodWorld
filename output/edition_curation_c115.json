@@ -1,0 +1,937 @@
+{
+  "cycle": "115",
+  "top": 9,
+  "selected": [
+    "culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0021",
+    "culture_c115_kai-marston_packet-v2_anthropic-claude-haiku-5-5",
+    "sports_c115_tanya-cruz_packet-v2_x-ai-grok-4-3",
+    "civic_c115_carmen-delaine_packet-v2_anthropic-claude-sonnet-5-5",
+    "civic_c115_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5",
+    "civic_c115_trevor-shimizu_packet-v2_anthropic-claude-sonnet-5-5",
+    "culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0023",
+    "civic_c115_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5",
+    "undocked-digest_c115_nia-rook-weekly_packet-v2_openai-gpt-6-luna"
+  ],
+  "ranked": [
+    {
+      "stem": "culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0021",
+      "byline": "Tamsin Pruitt",
+      "desk": "culture",
+      "grade": 4,
+      "score": 11.5,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "culture_c115_kai-marston_packet-v2_anthropic-claude-haiku-5-5",
+      "byline": "Kai Marston",
+      "desk": "culture",
+      "grade": 4,
+      "score": 9.5,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "sports_c115_tanya-cruz_packet-v2_x-ai-grok-4-3",
+      "byline": "Tanya Cruz",
+      "desk": "sports",
+      "grade": 4,
+      "score": 9.5,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "civic_c115_carmen-delaine_packet-v2_anthropic-claude-sonnet-5-5",
+      "byline": "Carmen Delaine",
+      "desk": "civic",
+      "grade": 4,
+      "score": 8,
+      "slug": "INIT-001:disbursement-active",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "civic_c115_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5",
+      "byline": "Jax Caldera",
+      "desk": "civic",
+      "grade": 4,
+      "score": 7.5,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "civic_c115_trevor-shimizu_packet-v2_anthropic-claude-sonnet-5-5",
+      "byline": "Trevor Shimizu",
+      "desk": "civic",
+      "grade": 4,
+      "score": 7.5,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0023",
+      "byline": "Tamsin Pruitt",
+      "desk": "culture",
+      "grade": 4,
+      "score": 7.5,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "civic_c115_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5",
+      "byline": "Luis Navarro",
+      "desk": "civic",
+      "grade": 4,
+      "score": 7,
+      "slug": "INIT-007:implementation-active",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "culture_c115_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5-0020",
+      "byline": "Ines Sorensen",
+      "desk": "culture",
+      "grade": 4,
+      "score": 7,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "business_c115_business-desk_packet-v2_anthropic-claude-opus-5-5",
+      "byline": "Jordan Velez",
+      "desk": "business",
+      "grade": 4,
+      "score": 6.5,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "culture_c115_maria-keen_packet-v2_anthropic-claude-sonnet-5-5",
+      "byline": "Maria Keen",
+      "desk": "culture",
+      "grade": 4,
+      "score": 6,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0019",
+      "byline": "Tamsin Pruitt",
+      "desk": "culture",
+      "grade": 4,
+      "score": 6,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "sports_c115_p-slayer_packet-v2_x-ai-grok-4-3",
+      "byline": "P Slayer",
+      "desk": "sports",
+      "grade": 4,
+      "score": 6,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "sports_c115_selena-grant_packet-v2_openai-gpt-5-6-luna",
+      "byline": "Selena Grant",
+      "desk": "sports",
+      "grade": 4,
+      "score": 6,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "culture_c115_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5-0021",
+      "byline": "Ines Sorensen",
+      "desk": "culture",
+      "grade": 4,
+      "score": 5.5,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "culture_c115_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5-1715",
+      "byline": "Ines Sorensen",
+      "desk": "culture",
+      "grade": 4,
+      "score": 5.5,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "undocked-digest_c115_nia-rook-weekly_packet-v2_openai-gpt-6-luna",
+      "byline": "Nia Rook",
+      "desk": "undocked-digest",
+      "grade": 4,
+      "score": 5.5,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "civic_c115_rachel-torres_packet-v2_anthropic-claude-sonnet-5-5",
+      "byline": "Sgt. Rachel Torres",
+      "desk": "civic",
+      "grade": 4,
+      "score": 5,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "undocked_c115_nia-rook_packet-v2_openai-gpt-6-luna-0025",
+      "byline": "Nia Rook",
+      "desk": "undocked",
+      "grade": 4,
+      "score": 4.5,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "culture_c115_elliot-graye_packet-v2_anthropic-claude-sonnet-5-5",
+      "byline": "Elliot Graye",
+      "desk": "culture",
+      "grade": 4,
+      "score": 4,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "sports_c115_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5",
+      "byline": "Anthony Raines",
+      "desk": "sports",
+      "grade": 4,
+      "score": 4,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "undocked_c115_nia-rook_packet-v2_openai-gpt-6-luna-0021",
+      "byline": "Nia Rook",
+      "desk": "undocked",
+      "grade": 4,
+      "score": 2.5,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "undocked_c115_nia-rook_packet-v2_openai-gpt-6-luna-0022",
+      "byline": "Nia Rook",
+      "desk": "undocked",
+      "grade": 4,
+      "score": 2.5,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "undocked_c115_nia-rook_packet-v2_openai-gpt-6-luna",
+      "byline": "Nia Rook",
+      "desk": "undocked",
+      "grade": 4,
+      "score": 2.5,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "civic_c115_angela-reyes_packet-v2_anthropic-claude-sonnet-5-5",
+      "byline": "Angela Reyes",
+      "desk": "civic",
+      "grade": 3,
+      "score": 3.5,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "culture_c115_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5",
+      "byline": "Ines Sorensen",
+      "desk": "culture",
+      "grade": 2.67,
+      "score": 7.5,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "sports_c115_talia-finch_packet-v2_openai-gpt-5-6-luna",
+      "byline": "Talia Finch",
+      "desk": "sports",
+      "grade": 2.67,
+      "score": 5.5,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "culture_c115_mason-ortega_packet-v2_x-ai-grok-4-3",
+      "byline": "Mason Ortega",
+      "desk": "culture",
+      "grade": 2.67,
+      "score": 5,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "civic_c115_noah-tan_packet-v2_x-ai-grok-4-3",
+      "byline": "Noah Tan",
+      "desk": "civic",
+      "grade": 2.67,
+      "score": 2.5,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "culture_c115_sharon-okafor_packet-v2_openai-gpt-5-6-luna",
+      "byline": "Sharon Okafor",
+      "desk": "culture",
+      "grade": 1.33,
+      "score": 14,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "sports_c115_simon-leary_packet-v2_openai-gpt-5-6-luna",
+      "byline": "Simon Leary",
+      "desk": "sports",
+      "grade": 1.33,
+      "score": 4.5,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "sports_c115_hal-richmond_packet-v2_anthropic-claude-sonnet-5-5",
+      "byline": "Hal Richmond",
+      "desk": "sports",
+      "grade": 1.33,
+      "score": 4,
+      "slug": null,
+      "verdict": "accurate"
+    }
+  ],
+  "excludedCanonViolations": 4,
+  "unaudited": [],
+  "crossovers": [
+    {
+      "name": "Vinnie Keane",
+      "popid": "POP-00001",
+      "systems": [
+        "culture",
+        "sports",
+        "wire"
+      ],
+      "pieces": [
+        {
+          "stem": "culture_c115_kai-marston_packet-v2_anthropic-claude-haiku-5-5",
+          "desk": "culture",
+          "system": "culture",
+          "byline": "Kai Marston",
+          "role": "mentioned"
+        },
+        {
+          "stem": "culture_c115_sharon-okafor_packet-v2_openai-gpt-5-6-luna",
+          "desk": "culture",
+          "system": "culture",
+          "byline": "Sharon Okafor",
+          "role": "quoted-source"
+        },
+        {
+          "stem": "culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5",
+          "desk": "culture",
+          "system": "culture",
+          "byline": "Tamsin Pruitt",
+          "role": "quoted-source"
+        },
+        {
+          "stem": "sports_c115_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5",
+          "desk": "sports",
+          "system": "sports",
+          "byline": "Anthony Raines",
+          "role": "mentioned"
+        },
+        {
+          "stem": "sports_c115_hal-richmond_packet-v2_anthropic-claude-sonnet-5-5",
+          "desk": "sports",
+          "system": "sports",
+          "byline": "Hal Richmond",
+          "role": "mentioned"
+        },
+        {
+          "stem": "sports_c115_tanya-cruz_packet-v2_x-ai-grok-4-3",
+          "desk": "sports",
+          "system": "sports",
+          "byline": "Tanya Cruz",
+          "role": "mentioned"
+        },
+        {
+          "stem": "wire_c115_celeste-tran_packet-v2_x-ai-grok-4-3",
+          "desk": "wire",
+          "system": "wire",
+          "byline": "Celeste Tran",
+          "role": "mentioned"
+        }
+      ]
+    },
+    {
+      "name": "Harry Hayward",
+      "popid": "POP-01223",
+      "systems": [
+        "culture",
+        "sports"
+      ],
+      "pieces": [
+        {
+          "stem": "culture_c115_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5-0020",
+          "desk": "culture",
+          "system": "culture",
+          "byline": "Ines Sorensen",
+          "role": "mentioned"
+        },
+        {
+          "stem": "sports_c115_p-slayer_packet-v2_x-ai-grok-4-3",
+          "desk": "sports",
+          "system": "sports",
+          "byline": "P Slayer",
+          "role": "mentioned"
+        },
+        {
+          "stem": "sports_c115_selena-grant_packet-v2_openai-gpt-5-6-luna",
+          "desk": "sports",
+          "system": "sports",
+          "byline": "Selena Grant",
+          "role": "mentioned"
+        },
+        {
+          "stem": "sports_c115_simon-leary_packet-v2_openai-gpt-5-6-luna",
+          "desk": "sports",
+          "system": "sports",
+          "byline": "Simon Leary",
+          "role": "quoted-source"
+        },
+        {
+          "stem": "sports_c115_talia-finch_packet-v2_openai-gpt-5-6-luna",
+          "desk": "sports",
+          "system": "sports",
+          "byline": "Talia Finch",
+          "role": "mentioned"
+        }
+      ]
+    },
+    {
+      "name": "Benji Dillon",
+      "popid": "POP-00018",
+      "systems": [
+        "culture",
+        "sports"
+      ],
+      "pieces": [
+        {
+          "stem": "culture_c115_kai-marston_packet-v2_anthropic-claude-haiku-5-5",
+          "desk": "culture",
+          "system": "culture",
+          "byline": "Kai Marston",
+          "role": "quoted-source"
+        },
+        {
+          "stem": "culture_c115_sharon-okafor_packet-v2_openai-gpt-5-6-luna",
+          "desk": "culture",
+          "system": "culture",
+          "byline": "Sharon Okafor",
+          "role": "quoted-source"
+        },
+        {
+          "stem": "culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0021",
+          "desk": "culture",
+          "system": "culture",
+          "byline": "Tamsin Pruitt",
+          "role": "mentioned"
+        },
+        {
+          "stem": "sports_c115_tanya-cruz_packet-v2_x-ai-grok-4-3",
+          "desk": "sports",
+          "system": "sports",
+          "byline": "Tanya Cruz",
+          "role": "mentioned"
+        }
+      ]
+    },
+    {
+      "name": "Brooklyn Nguyen",
+      "popid": "POP-00184",
+      "systems": [
+        "culture",
+        "undocked"
+      ],
+      "pieces": [
+        {
+          "stem": "culture_c115_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5-0020",
+          "desk": "culture",
+          "system": "culture",
+          "byline": "Ines Sorensen",
+          "role": "mentioned"
+        },
+        {
+          "stem": "culture_c115_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5-0021",
+          "desk": "culture",
+          "system": "culture",
+          "byline": "Ines Sorensen",
+          "role": "quoted-source"
+        },
+        {
+          "stem": "undocked-digest_c115_nia-rook-weekly_packet-v2_openai-gpt-6-luna",
+          "desk": "undocked-digest",
+          "system": "undocked",
+          "byline": "Nia Rook",
+          "role": "subject"
+        },
+        {
+          "stem": "undocked_c115_nia-rook_packet-v2_openai-gpt-6-luna-0025",
+          "desk": "undocked",
+          "system": "undocked",
+          "byline": "Nia Rook",
+          "role": "quoted-source"
+        }
+      ]
+    },
+    {
+      "name": "Anthony Raines",
+      "popid": "POP-00017",
+      "systems": [
+        "culture",
+        "wire"
+      ],
+      "pieces": [
+        {
+          "stem": "culture_c115_kai-marston_packet-v2_anthropic-claude-haiku-5-5",
+          "desk": "culture",
+          "system": "culture",
+          "byline": "Kai Marston",
+          "role": "quoted-source"
+        },
+        {
+          "stem": "culture_c115_sharon-okafor_packet-v2_openai-gpt-5-6-luna",
+          "desk": "culture",
+          "system": "culture",
+          "byline": "Sharon Okafor",
+          "role": "quoted-source"
+        },
+        {
+          "stem": "wire_c115_celeste-tran_packet-v2_x-ai-grok-4-3",
+          "desk": "wire",
+          "system": "wire",
+          "byline": "Celeste Tran",
+          "role": "mentioned"
+        }
+      ]
+    },
+    {
+      "name": "Avery Santana",
+      "popid": "POP-00034",
+      "systems": [
+        "civic",
+        "culture"
+      ],
+      "pieces": [
+        {
+          "stem": "civic_c115_carmen-delaine_packet-v2_anthropic-claude-sonnet-5-5",
+          "desk": "civic",
+          "system": "civic",
+          "byline": "Carmen Delaine",
+          "role": "mentioned"
+        },
+        {
+          "stem": "civic_c115_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5",
+          "desk": "civic",
+          "system": "civic",
+          "byline": "Luis Navarro",
+          "role": "mentioned"
+        },
+        {
+          "stem": "culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0020",
+          "desk": "culture",
+          "system": "culture",
+          "byline": "Tamsin Pruitt",
+          "role": "mentioned"
+        }
+      ]
+    },
+    {
+      "name": "Arturo Ramos",
+      "popid": "POP-00025",
+      "systems": [
+        "culture",
+        "wire"
+      ],
+      "pieces": [
+        {
+          "stem": "culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0021",
+          "desk": "culture",
+          "system": "culture",
+          "byline": "Tamsin Pruitt",
+          "role": "mentioned"
+        },
+        {
+          "stem": "wire_c115_celeste-tran_packet-v2_x-ai-grok-4-3",
+          "desk": "wire",
+          "system": "wire",
+          "byline": "Celeste Tran",
+          "role": "mentioned"
+        }
+      ]
+    },
+    {
+      "name": "Carmen Mesa",
+      "popid": "POP-00081",
+      "systems": [
+        "culture",
+        "wire"
+      ],
+      "pieces": [
+        {
+          "stem": "culture_c115_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5",
+          "desk": "culture",
+          "system": "culture",
+          "byline": "Ines Sorensen",
+          "role": "mentioned"
+        },
+        {
+          "stem": "wire_c115_celeste-tran_packet-v2_x-ai-grok-4-3",
+          "desk": "wire",
+          "system": "wire",
+          "byline": "Celeste Tran",
+          "role": "mentioned"
+        }
+      ]
+    },
+    {
+      "name": "Coen Cartier",
+      "popid": "POP-00338",
+      "systems": [
+        "civic",
+        "culture"
+      ],
+      "pieces": [
+        {
+          "stem": "civic_c115_trevor-shimizu_packet-v2_anthropic-claude-sonnet-5-5",
+          "desk": "civic",
+          "system": "civic",
+          "byline": "Trevor Shimizu",
+          "role": "quoted-source"
+        },
+        {
+          "stem": "culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0020",
+          "desk": "culture",
+          "system": "culture",
+          "byline": "Tamsin Pruitt",
+          "role": "mentioned"
+        }
+      ]
+    },
+    {
+      "name": "Dmitri Soto",
+      "popid": "POP-00276",
+      "systems": [
+        "civic",
+        "culture"
+      ],
+      "pieces": [
+        {
+          "stem": "civic_c115_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5",
+          "desk": "civic",
+          "system": "civic",
+          "byline": "Jax Caldera",
+          "role": "quoted-source"
+        },
+        {
+          "stem": "culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0020",
+          "desk": "culture",
+          "system": "culture",
+          "byline": "Tamsin Pruitt",
+          "role": "mentioned"
+        }
+      ]
+    },
+    {
+      "name": "Elena Soria Dominguez",
+      "popid": "POP-00791",
+      "systems": [
+        "civic",
+        "culture"
+      ],
+      "pieces": [
+        {
+          "stem": "civic_c115_trevor-shimizu_packet-v2_anthropic-claude-sonnet-5-5",
+          "desk": "civic",
+          "system": "civic",
+          "byline": "Trevor Shimizu",
+          "role": "mentioned"
+        },
+        {
+          "stem": "culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0020",
+          "desk": "culture",
+          "system": "culture",
+          "byline": "Tamsin Pruitt",
+          "role": "mentioned"
+        }
+      ]
+    },
+    {
+      "name": "Evan Lewis",
+      "popid": "POP-00200",
+      "systems": [
+        "culture",
+        "wire"
+      ],
+      "pieces": [
+        {
+          "stem": "culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0021",
+          "desk": "culture",
+          "system": "culture",
+          "byline": "Tamsin Pruitt",
+          "role": "quoted-source"
+        },
+        {
+          "stem": "wire_c115_celeste-tran_packet-v2_x-ai-grok-4-3",
+          "desk": "wire",
+          "system": "wire",
+          "byline": "Celeste Tran",
+          "role": "mentioned"
+        }
+      ]
+    },
+    {
+      "name": "John Ellis",
+      "popid": "POP-00033",
+      "systems": [
+        "culture",
+        "wire"
+      ],
+      "pieces": [
+        {
+          "stem": "culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0021",
+          "desk": "culture",
+          "system": "culture",
+          "byline": "Tamsin Pruitt",
+          "role": "mentioned"
+        },
+        {
+          "stem": "wire_c115_celeste-tran_packet-v2_x-ai-grok-4-3",
+          "desk": "wire",
+          "system": "wire",
+          "byline": "Celeste Tran",
+          "role": "mentioned"
+        }
+      ]
+    },
+    {
+      "name": "Kelvon Ochoa",
+      "popid": "POP-00481",
+      "systems": [
+        "business",
+        "culture"
+      ],
+      "pieces": [
+        {
+          "stem": "business_c115_business-desk_packet-v2_anthropic-claude-opus-5-5",
+          "desk": "business",
+          "system": "business",
+          "byline": "Jordan Velez",
+          "role": "mentioned"
+        },
+        {
+          "stem": "culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0023",
+          "desk": "culture",
+          "system": "culture",
+          "byline": "Tamsin Pruitt",
+          "role": "mentioned"
+        }
+      ]
+    },
+    {
+      "name": "Manfred Owens",
+      "popid": "POP-00028",
+      "systems": [
+        "business",
+        "culture"
+      ],
+      "pieces": [
+        {
+          "stem": "business_c115_business-desk_packet-v2_anthropic-claude-opus-5-5",
+          "desk": "business",
+          "system": "business",
+          "byline": "Jordan Velez",
+          "role": "mentioned"
+        },
+        {
+          "stem": "culture_c115_mason-ortega_packet-v2_x-ai-grok-4-3",
+          "desk": "culture",
+          "system": "culture",
+          "byline": "Mason Ortega",
+          "role": "quoted-source"
+        }
+      ]
+    },
+    {
+      "name": "Maurice Franklin",
+      "popid": "POP-00801",
+      "systems": [
+        "civic",
+        "culture"
+      ],
+      "pieces": [
+        {
+          "stem": "civic_c115_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5",
+          "desk": "civic",
+          "system": "civic",
+          "byline": "Dr. Lila Mezran",
+          "role": "mentioned"
+        },
+        {
+          "stem": "culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0023",
+          "desk": "culture",
+          "system": "culture",
+          "byline": "Tamsin Pruitt",
+          "role": "mentioned"
+        }
+      ]
+    },
+    {
+      "name": "Mike Paulson",
+      "popid": "POP-00527",
+      "systems": [
+        "culture",
+        "sports"
+      ],
+      "pieces": [
+        {
+          "stem": "culture_c115_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5-1715",
+          "desk": "culture",
+          "system": "culture",
+          "byline": "Ines Sorensen",
+          "role": "quoted-source"
+        },
+        {
+          "stem": "sports_c115_tanya-cruz_packet-v2_x-ai-grok-4-3",
+          "desk": "sports",
+          "system": "sports",
+          "byline": "Tanya Cruz",
+          "role": "quoted-source"
+        }
+      ]
+    },
+    {
+      "name": "Priya Raghunathan",
+      "popid": "POP-01214",
+      "systems": [
+        "civic",
+        "culture"
+      ],
+      "pieces": [
+        {
+          "stem": "civic_c115_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5",
+          "desk": "civic",
+          "system": "civic",
+          "byline": "Jax Caldera",
+          "role": "quoted-source"
+        },
+        {
+          "stem": "culture_c115_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0019",
+          "desk": "culture",
+          "system": "culture",
+          "byline": "Tamsin Pruitt",
+          "role": "mentioned"
+        }
+      ]
+    },
+    {
+      "name": "Rafael Montez",
+      "popid": "POP-00136",
+      "systems": [
+        "civic",
+        "culture"
+      ],
+      "pieces": [
+        {
+          "stem": "civic_c115_rachel-torres_packet-v2_anthropic-claude-sonnet-5-5",
+          "desk": "civic",
+          "system": "civic",
+          "byline": "Sgt. Rachel Torres",
+          "role": "subject"
+        },
+        {
+          "stem": "culture_c115_maria-keen_packet-v2_anthropic-claude-sonnet-5-5",
+          "desk": "culture",
+          "system": "culture",
+          "byline": "Maria Keen",
+          "role": "quoted-source"
+        }
+      ]
+    },
+    {
+      "name": "Rowan Pierce",
+      "popid": "POP-00545",
+      "systems": [
+        "culture",
+        "wire"
+      ],
+      "pieces": [
+        {
+          "stem": "culture_c115_sharon-okafor_packet-v2_openai-gpt-5-6-luna",
+          "desk": "culture",
+          "system": "culture",
+          "byline": "Sharon Okafor",
+          "role": "mentioned"
+        },
+        {
+          "stem": "wire_c115_celeste-tran_packet-v2_x-ai-grok-4-3",
+          "desk": "wire",
+          "system": "wire",
+          "byline": "Celeste Tran",
+          "role": "mentioned"
+        }
+      ]
+    },
+    {
+      "name": "Wendell Carter Jr",
+      "popid": "POP-01028",
+      "systems": [
+        "culture",
+        "sports"
+      ],
+      "pieces": [
+        {
+          "stem": "culture_c115_sharon-okafor_packet-v2_openai-gpt-5-6-luna",
+          "desk": "culture",
+          "system": "culture",
+          "byline": "Sharon Okafor",
+          "role": "mentioned"
+        },
+        {
+          "stem": "sports_c115_selena-grant_packet-v2_openai-gpt-5-6-luna",
+          "desk": "sports",
+          "system": "sports",
+          "byline": "Selena Grant",
+          "role": "mentioned"
+        }
+      ]
+    },
+    {
+      "name": "Yu Zen",
+      "popid": "POP-00194",
+      "systems": [
+        "civic",
+        "culture"
+      ],
+      "pieces": [
+        {
+          "stem": "civic_c115_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5",
+          "desk": "civic",
+          "system": "civic",
+          "byline": "Dr. Lila Mezran",
+          "role": "mentioned"
+        },
+        {
+          "stem": "culture_c115_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5",
+          "desk": "culture",
+          "system": "culture",
+          "byline": "Ines Sorensen",
+          "role": "mentioned"
+        }
+      ]
+    }
+  ],
+  "digestSeat": "undocked-digest_c115_nia-rook-weekly_packet-v2_openai-gpt-6-luna"
+}

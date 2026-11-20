@@ -1,0 +1,15 @@
+{
+  "initiative": "INIT-014",
+  "initiativeId": "INIT-014",
+  "cycle": 116,
+  "primaryVoice": "Mayor gavel (mayor_gavel-002)",
+  "consolidatedFrom": [
+    "STMT-116-mayor_gavel-002 (Mayor gavel — INIT-014 filing correction and council review)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-014",
+    "MilestoneNotes": "C116: Withdrew the unverified filing claim; no Clerk reference supplied, and council review should wait for verification.",
+    "NextScheduledAction": "Provide a Clerk filing reference or explicitly confirm that filing has not occurred",
+    "NextActionCycle": 116
+  }
+}

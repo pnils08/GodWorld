@@ -1,0 +1,22 @@
+{
+  "status": "arc-seed",
+  "cycle": "116",
+  "desk": "civic",
+  "persona": "carmen-delaine",
+  "hood": "West Oakland",
+  "quotes": [
+    {
+      "pop": "POP-00037",
+      "name": "Brenda Okoro",
+      "quote": "Renewal means West Oakland businesses and residents, 23 days on the clock, and a closeout record on the table before council votes."
+    },
+    {
+      "pop": "POP-00790",
+      "name": "Marcus Webb",
+      "quote": "The closeout is published, the ordinance is on the calendar with the scope that works and the 23-day clock still running — the hearing record carries the proof, and the roll call belongs to the Council."
+    }
+  ],
+  "claim": "Renewal means West Oakland businesses and residents, 23 days on the clock, and a closeout record on the table before council votes.",
+  "src": "citizenVoice PRESS c116",
+  "ranAt": "2026-11-16T19:15:01.986Z"
+}

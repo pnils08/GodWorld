@@ -42,3 +42,17 @@ Correction (builder 2026-11-20: "I added it after the cycle ran"): the Rockies t
 ## Item 7 — open (put to him, no answer yet)
 EconomicProfileKey vs RoleType: Elio Perez POP-00201 "Server" / key "Solar Installer"; Daniel Cloak POP-00722 "Bakery Worker" / key "Community Organizer" (old-job leftovers; both current roles are in the catalog). Council: City Hall is BIZ-00017 City of Oakland and Civic_Office_Ledger holds every seat; the job catalog has "City Council President" and "City Council Aide" only, so 8 of 9 district members carry key "City Council Aide" (Vega: President). Kinder (builder: "He's retired"): Income AA69 "-" → 0, read back.
 Item 7 closed, nothing written (technical call): 503 of the 735 rows with a non-sports EconomicProfileKey carry a key that differs from their RoleType — the key is the profile stamped when applyEconomicProfiles.js seeded the row (or a career move) and is not kept in step with later role text; pay reads RoleType first (generationalWealthEngine applyUntrackedJobReference_: roleText = RoleType, key only when RoleType is blank). Perez and Cloak are two of the 503; fixing two changes nothing. The council "City Council Aide" key is the catalog's only council entry; CIVIC rows price off City of Oakland. A catalog "City Council Member" entry would be a job-list design change, not a fix.
+
+## The frame (2026-11-20, verbatim): "Everything these audits are are engine errors , eveyone single edit this tier 1 project is showing you is an engine error"; "if the code doesn't present a logical sim is broken code"; "the engine errors on the cycle from what I can tell sold be in the 100s".
+
+| Audit finding | What the engine did | What it would do |
+|---|---|---|
+| Arriving A's rows with no employer / hood / money fields | ran them half-empty | fill an arrival by its own arrival rules |
+| Parent links 5–14 years apart | accepted | refuse a parent link the ages don't allow |
+| Retired at 34 with no retirement event; retired with a working stage | kept them retired at $0 | retire only on an event; flag a mismatch |
+| GAME-clock rows drawing school life | wrote it | fixed: engine.353, PROD stage 61 |
+| Health start "102" with no admission | ignored | clear a health stamp with no admission behind it |
+| EconomicProfileKey out of step with RoleType (503 of 735) | ignored | re-key on a job change |
+| 105 catch blocks that never reach Engine_Errors (56 silent, 49 Logger-only, of 239) | swallowed | log every one |
+
+Not opened as a row; waits on his word.

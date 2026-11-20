@@ -28,7 +28,19 @@ assert(/The club, from the sports feed, newest first/.test(brief), 'brief carrie
   assert(feedCycles.length >= 2 && feedCycles[0] >= feedCycles[feedCycles.length - 1], 'feed lines run newest first: ' + feedCycles.join(','));
   assert(/both are on the record, each with its own Cycle/.test(brief), 'brief names both records, each with its own Cycle');
 }
-assert(brief.length < 4500, 'brief stays compact (' + brief.length + ' chars)');
+// Compact by the brief's own caps (lib/personaProvider.js buildVoiceBrief_), not by how much the live records hold
+// today: last days ≤ 5 lines of ≤ 200; feed ≤ 5 lines (3 naming them, 2 of the club) of ≤ 260 notes plus a
+// "C<n> <event> (<team>, <season>): " lead; Tribune ≤ 6 lines (2 editions × 3) of ≤ 300. Full on every section:
+// 5×203 + 5×~330 + 6×~317 + ~800 of headers and the two fixed sentences ≈ 5,400. (The 4,500 that stood here was the
+// size of one live brief at 2026-10-19; Vinnie's sections all filled by C116 and it read 4,681.)
+{
+  const section = (head) => (brief.split('\n\n').find(function (s) { return s.indexOf(head) === 0; }) || '').split('\n').slice(1);
+  const days = section('Your last days'), feed = section('The club, from the sports feed'), trib = section('What the Tribune printed');
+  assert(days.length <= 5 && days.every(function (l) { return l.length <= 2 + 200; }), 'last days: at most 5 lines, each clipped at 200');
+  assert(feed.length <= 5 && feed.every(function (l) { return /^- C\d+ [^:]*: /.test(l) && l.replace(/^- C\d+ [^:]*: /, '').length <= 260; }), 'feed: at most 5 lines, each note clipped at 260');
+  assert(trib.length <= 6 && trib.every(function (l) { return /^- Tribune C\d+: /.test(l) && l.replace(/^- Tribune C\d+: /, '').length <= 300; }), 'Tribune: at most 6 lines, each clipped at 300');
+  assert(brief.length < 6000, 'brief stays compact: within its own caps (' + brief.length + ' chars of about 5,400 at full)');
+}
 assert(!/\bthe builder\b|\bbuilder\b/i.test(brief), 'brief never names a builder');
 assert(!/\b20(2[0-9]|3[0-9])-\d\d-\d\d\b/.test(brief), 'brief carries no real-world date');
 assert(pp.buildVoiceBrief_('POP-99999', 'Nobody Here') === '', 'unknown citizen with no records returns empty');

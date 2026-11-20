@@ -96,3 +96,10 @@ Aaliyah Santos POP-01040 SpouseId "POP-00536 Everson Morello" → "POP-00536 Eva
 ## Item 10 (builder 2026-11-20: "change them to match the cycle they are sandwiched in … that was before we got the dry runs figured out")
 
 Reflection_Intake C96:C107 (POP-00182, 00240, 00246, 00186, 00175, 00170, 00248, 00259, 00201, 00304, 00269, 00286; stamped 2026-07-07 to 07-09) Cycle 119 → 100, read back. Neighbors rows 94–95 and 108–109 are C100 with the same dates. All twelve already Applied = yes, so no reader re-applies them. The C119/C126 docs in the citizens' Supermemory pages are not touched (the newsroom mirror already drops cycles above live).
+
+## Items 11–12
+
+- Item 11: Florencia Shah POP-00934 (row 1989, C112) and Dame Sarr POP-01025 (rows 978, 1075, C105) — their own words from before they left, all Applied = yes. History; nothing written.
+- Item 12: Oaks_Roster (Ty Jerome no POPID, Dame Sarr listed) — builder 2026-11-20: "Oaks roster is mine and isn't the sim ledger". The team rosters (Oaks_Roster, As_Roster) are the builder's own tabs; a ledger audit does not flag them. Same for the As_Roster lines in items 1–2 (Cabral, Mesa, Richards).
+
+Audit closed 2026-11-20: items 1–4, 6–8, 10 written on the live sheet and read back; 5, 9, 11 checked, nothing to change; 12 out of scope.

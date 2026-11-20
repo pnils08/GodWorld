@@ -1546,6 +1546,7 @@
   "tamsin-pruitt": {
     "version": "TAMSIN-LIVES-2",
     "rewardLoop": true,
+    "gate": "off",
     "active": true,
     "requiredDaily": true,
     "persona": "tamsin-pruitt",

@@ -356,10 +356,10 @@ assert.ok(gate.skipped.every(row => row.reason === 'no-active-wake-package'));
 
 assert.throws(() => packagesApi.routeFor(jax, 'publish'), /unknown wake stage/);
 assert.throws(() => packagesApi.validatePackage('bad', { active: true }), /invalid wake package/);
-// pipeline.89 — gate 'off' is Ines's alone: optional, only the value 'off'; no other seat carries it.
+// pipeline.89 — gate 'off': optional, only the value 'off'. Ines's seat, and Tamsin's (builder 2026-11-20: "Off for tasmin").
 {
   const gated = Object.entries(packagesApi.loadPackages ? packagesApi.loadPackages() : {}).filter(([, v]) => v && v.gate !== undefined).map(([k]) => k);
-  assert.deepStrictEqual(gated, ['ines-sorensen']);
+  assert.deepStrictEqual(gated, ['tamsin-pruitt', 'ines-sorensen']);
   const ok = Object.values(packagesApi.loadPackages()).find(v => v.persona === 'ines-sorensen');
   assert.doesNotThrow(() => packagesApi.validatePackage(ok.persona, Object.assign({}, ok, { gate: 'off' })));
   assert.throws(() => packagesApi.validatePackage(ok.persona, Object.assign({}, ok, { gate: 'on' })), /gate/);

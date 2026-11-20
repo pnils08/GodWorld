@@ -82,3 +82,7 @@ Item 6: Jurko POP-00132 Gender "m" → "male" (AU85, read back). Ages at 2042: J
 
 The nine (POP-01046–01051, 01053–01055): Active, StatusStartCycle "102", HealthCause blank. No Hospital_Ledger admission for any of them, no health line in any LifeHistory, no health on their pages, none in canon (Elliot Abraham: Haiti-born, MIT, pickleball league, Oaks GM; Hal Richmond C102 profile). 102 is the cycle the batch arrived. The engine stamps StatusStartCycle only at a health admission (generationalEventsEngine) and the wake shows it only under a health status (lib/wakePerception.js loadHealthState); the health crons read Hospital_Ledger. Cleared AY857 and AY875:AY882 (was "102" each, read before and after) so the rows carry no health status the world never had. Restore value if wanted: 102 on each.
 Item 8 note: the reply after closing item 6 named the next item as "nine citizens … no health status" — that is item 7 here.
+
+## Item 8
+
+Aaliyah Santos POP-01040 SpouseId "POP-00536 Everson Morello" → "POP-00536 Evan Morello" (P869, read back). POP-00536's ledger name is Evan Morello and his SpouseId points back to her; canon C44 names "Evan Morello … the actor, local"; "Everson" appears nowhere in canon or pages. The id was already right; only the name text in her cell changed.

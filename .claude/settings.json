@@ -250,6 +250,18 @@
           }
         ]
       }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node /root/GodWorld/.claude/hooks/assumption-guard.js",
+            "timeout": 10
+          }
+        ]
+      }
     ]
   },
   "enabledPlugins": {

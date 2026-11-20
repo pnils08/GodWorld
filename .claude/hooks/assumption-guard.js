@@ -9,13 +9,14 @@
 //
 // The hook forces the re-read, before he sees anything, through a draft file:
 //   UserPromptSubmit — clears the last draft and gives the rule: write the reply to the
-//     draft file only, send no text, stop.
-//   Stop, first — a draft exists: the re-read order goes in as added context (no notice is
-//     drawn for added context), and the session continues.
-//   Stop, second (stop_hook_active) — the session has re-read and fixed the draft and sent
-//     it as its one reply; the stop goes through silently and the draft is removed.
-//   No draft at the first stop (text sent straight): nothing is ordered (an order then
-//     would be a second message); the miss is logged to .claude/state/reply-draft-misses.jsonl.
+//     draft file first.
+//   PostToolUse (Write/Edit of the draft) — the re-read order goes in as added context;
+//     the session re-reads and fixes the draft, then sends exactly its text, once.
+//   Stop — silent always: a reply matching the draft removes it; anything else is logged
+//     to .claude/state/reply-draft-misses.jsonl. An order at Stop would be a second message.
+// Why not at Stop: a stop with no text never reaches the Stop hooks — Claude Code answers
+// it with its own "no visible output" prompt first (silent_turn_reminder in the transcript,
+// live run 2026-11-19), and a stop with text has already reached him.
 // Builder terminals only (tmux window research-build / engine-sheet).
 
 const { execSync } = require('child_process');
@@ -39,11 +40,11 @@ function draftPath(input) {
 }
 
 function rule(draft) {
-  return `Reply guard (builder rule): he sees one message per prompt, correct or not at all. Write the whole reply to ${draft} and send no text; then stop. The guard will order the re-read of the draft; after it, send exactly the fixed draft's text as your only text.`;
+  return `Reply guard (builder rule): he sees one message per prompt, correct or not at all. Write the whole reply to ${draft} first; the guard orders the re-read when it is written. Then send exactly the fixed draft's text as your only text this turn.`;
 }
 
 function reread(draft) {
-  return `Re-read ${draft}; he has not seen it. Claim by claim: keep only what this session's tool results or the project files back; cut or fix anything else (a guess, a recall line taken as the file, a conclusion wider than what was read, a mechanism not read in code, a count not counted). Save the fixed draft, then send exactly its text as your only text.`;
+  return `Re-read ${draft}; he has not seen it. Claim by claim: keep only what this session's tool results or the project files back; cut or fix anything else (a guess, a recall line taken as the file, a conclusion wider than what was read, a mechanism not read in code, a count not counted). Save the fixed draft (saving it orders this re-read again), then send exactly its text as your only text.`;
 }
 
 function log(input) {
@@ -53,6 +54,8 @@ function log(input) {
   } catch (e) {}
 }
 
+const norm = t => String(t || '').replace(/\s+/g, ' ').trim();
+
 // What the hook prints for one event; null prints nothing.
 function decide(input) {
   const draft = draftPath(input);
@@ -60,13 +63,15 @@ function decide(input) {
     if (fs.existsSync(draft)) fs.unlinkSync(draft);
     return { hookSpecificOutput: { hookEventName: 'UserPromptSubmit', additionalContext: rule(draft) } };
   }
-  if (input.hook_event_name !== 'Stop') return null;
-  if (!input.stop_hook_active) {
-    if (fs.existsSync(draft)) return { hookSpecificOutput: { hookEventName: 'Stop', additionalContext: reread(draft) } };
-    log(input);
-    return null;
+  if (input.hook_event_name === 'PostToolUse') {
+    const f = (input.tool_input && input.tool_input.file_path) || '';
+    return path.resolve(f) === path.resolve(draft)
+      ? { hookSpecificOutput: { hookEventName: 'PostToolUse', additionalContext: reread(draft) } } : null;
   }
-  if (fs.existsSync(draft)) fs.unlinkSync(draft);
+  if (input.hook_event_name !== 'Stop' || input.stop_hook_active) return null;
+  const sent = norm(input.last_assistant_message);
+  if (fs.existsSync(draft) && norm(fs.readFileSync(draft, 'utf8')) === sent) fs.unlinkSync(draft);
+  else log(input);
   return null;
 }
 

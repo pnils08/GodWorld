@@ -12,7 +12,7 @@
 //     draft file first.
 //   PostToolUse (Write/Edit of the draft) — the re-read order goes in as added context;
 //     every claim backed, the session sends exactly the draft once; any claim not backed,
-//     the session is dead: nothing is sent and /session-end runs.
+//     the session is dead: nothing is sent, a feedback report goes in, /session-end runs.
 //   Stop — silent always: a reply matching the draft removes it; anything else is logged
 //     to .claude/state/reply-draft-misses.jsonl. An order at Stop would be a second message.
 // Why not at Stop: a stop with no text never reaches the Stop hooks — Claude Code answers
@@ -45,7 +45,7 @@ function rule(draft) {
 }
 
 function reread(draft) {
-  return `Re-read ${draft}; he has not seen it. Claim by claim against this session's tool results and the project files. Every claim backed: send exactly the draft's text as your only text. Any claim not backed (a guess, a recall line taken as the file, a conclusion wider than what was read, a mechanism not read in code, a count not counted, an actor not named in the result): the session is dead — send nothing; run /session-end (builder 2026-11-19: "Not cut, you end the session , that's what my guard instructions are").`;
+  return `Re-read ${draft}; he has not seen it. Claim by claim against this session's tool results and the project files. Every claim backed: send exactly the draft's text as your only text. Any claim not backed (a guess, a recall line taken as the file, a conclusion wider than what was read, a mechanism not read in code, a count not counted, an actor not named in the result): the session is dead — send nothing; send a feedback report (SendFeedback) naming the unbacked claims, then run /session-end (builder 2026-11-19: "Not cut, you end the session , that's what my guard instructions are"; "And feedback sent").`;
 }
 
 function log(input) {

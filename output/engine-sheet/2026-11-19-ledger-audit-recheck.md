@@ -49,3 +49,6 @@ Read-only. Live sheets read 2026-11-19 (Simulation_Ledger, Generic_Citizens, As_
 ## Item 1 closed (builder 2026-11-19)
 
 The builder had filled the three A's rows by hand after the first read (BirthYear, Gender, Mooney's Income); "What was there was accurate … nothing I added needed to be looked at". Only the employer was owed: EmployerBizId = BIZ-00005 (Oakland Athletics) written to Simulation_Ledger AS1065:AS1067 (POP-01238/01239/01240) through the Sheets connector, read back. Dials were already flat (every base 50).
+- Then filled from the records, read back: CareerStage AH (early / early / mid — the A's rows' own age pattern, ≤26 early, 27–31 mid), EconomicProfileKey AR = SPORTS_OVERRIDE (every other A's row), SkillTags BB = coach (Mooney; the 2042 coaching-staff card lists the farm director with the coaches) / athlete / athlete.
+- Not in any record (ledger, As_Roster, sports feed, the Drive cards `Henry Calzado_2041.txt`, `Giancarlo Hernandez FULL STAT TRUE SOURCE — BATTER — 2042.txt`, `COACHING_STAFF_2042.txt`, `SCOUTING_STAFF_2041.txt`): Neighborhood, HouseholdId, MaritalStatus, NumChildren on all three; pay for Hernandez (contract RNW 2042–44, no figure) and Calzado (ARB 2042–44, "No salary figure shown"). Left blank.
+- Calzado's two Drive cards carry POPID POP-01232; the ledger has him at POP-01240 (POP-01232 is Owen Davis).

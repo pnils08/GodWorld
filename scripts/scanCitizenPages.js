@@ -134,7 +134,6 @@ function citizenText(text) {
   const q = t.match(/"quote"\s*:\s*"((?:[^"\\]|\\.)*)"/);
   if (q) t = q[1].replace(/\\"/g, '"').replace(/\\n/g, ' ');
   t = t.replace(/```(?:json)?/g, ' ').replace(/^\s*(?:---\s*)+/, '').replace(/\s*---\s*$/, '');
-  t = t.replace(/\bTENSION(?:-RESOLVED)?\[c\d+\]:\s*/g, '');
   return t;
 }
 

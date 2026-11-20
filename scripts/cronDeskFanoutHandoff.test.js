@@ -339,23 +339,24 @@ assert.throws(() => validateWakeHandoff(handoffAngle,
   // pipeline.77 — graded line round-trips; group totals show the average
   const line = cdr.gradedLine({ score: 3, short: 'It closed on a recap.' });
   assert.equal(line, 'graded: 3/4 — It closed on a recap.');
-  assert.equal(cdr.lastGradedLine([{ content: 'filed: X' }, { content: line }, { content: 'graded: 1/4 — older' }]), line);
-  assert.equal(cdr.lastGradedLine([{ content: 'filed: X' }]), null);
-  assert.equal(cdr.lastGradedLine([{ content: 'graded: 3/4 — too long.\n\n---\n\ngraded: 4/4 — nothing fell short.' }]), 'graded: 4/4 — nothing fell short.', 'pipeline.80: same-key upsert appends; newest wins');
-  assert.equal(cdr.lastGradedLine([{ customId: 'cp-POP-01076-c111-PRESS-graded-nia-rook-weekly', content: 'graded: 1/4 — weekly.' },
-    { customId: 'cp-POP-01076-c111-PRESS-graded-nia-rook', content: 'graded: 3/4 — daily.' }], 'nia-rook'), 'graded: 3/4 — daily.', 'a seat reads only its own package grade');
+  const GK = 'cp-POP-01076-c111-PRESS-graded', FK = 'cp-POP-01076-c111-PRESS-thu-abcdef', OLDK = 'cp-POP-01076-c110-PRESS-graded';
+  assert.equal(cdr.lastGradedLine([{ customId: FK, content: 'X' }, { customId: GK, content: '3/4 — It closed on a recap.' }, { customId: OLDK, content: '1/4 — older' }]), line);
+  assert.equal(cdr.lastGradedLine([{ customId: FK, content: 'X' }]), null);
+  assert.equal(cdr.lastGradedLine([{ customId: GK, content: '3/4 — too long.\n\n---\n\n4/4 — nothing fell short.' }]), 'graded: 4/4 — nothing fell short.', 'pipeline.80: same-key upsert appends; newest wins');
+  assert.equal(cdr.lastGradedLine([{ customId: 'cp-POP-01076-c111-PRESS-graded-nia-rook-weekly', content: '1/4 — weekly.' },
+    { customId: 'cp-POP-01076-c111-PRESS-graded-nia-rook', content: '3/4 — daily.' }], 'nia-rook'), 'graded: 3/4 — daily.', 'a seat reads only its own package grade');
   const g = cdr.fanoutCheckTotals([{ contractScore: 3 }, { contractScore: 4 }, { contractScore: null }]);
   assert.match(cdr.formatCheckTotals(g, 'write'), /graded 2 avg 3\.5\/4$/);
   // 2026-11-11: the close left the grade — a score carries max 3 and the page line says so; old /4 lines still read.
   assert.equal(cdr.gradedLine({ score: 2, max: 3, short: 'The opening read as a recap.' }), 'graded: 2/3 — The opening read as a recap.');
-  assert.equal(cdr.lastGradedLine([{ content: 'graded: 3/3 — nothing fell short.' }, { content: 'graded: 1/4 — older' }]), 'graded: 3/3 — nothing fell short.');
-  // pipeline.112: the page holds the score without its label; a grade doc is a grade by its key, and both shapes read
+  assert.equal(cdr.lastGradedLine([{ customId: GK, content: '3/3 — nothing fell short.' }, { customId: OLDK, content: '1/4 — older' }]), 'graded: 3/3 — nothing fell short.');
+  // pipeline.112: the page holds the score without its label; a grade doc is a grade by its key
   assert.equal(cdr.gradeText({ score: 2, max: 3, short: 'The opening read as a recap.' }), '2/3 — The opening read as a recap.');
   assert.equal(cdr.lastGradedLine([{ customId: 'cp-POP-00011-c116-PRESS-graded-luis-navarro', content: '3/3 — nothing fell short' }], 'luis-navarro'), 'graded: 3/3 — nothing fell short');
-  assert.equal(cdr.lastGradedLine([{ customId: 'cp-POP-00011-c116-PRESS-graded-luis-navarro', content: 'graded: 2/3 — recap.\n\n---\n\n3/3 — nothing fell short' }], 'luis-navarro'), 'graded: 3/3 — nothing fell short', 'one Cycle doc written before and after the change: the newest line wins');
+  assert.equal(cdr.lastGradedLine([{ customId: 'cp-POP-00011-c116-PRESS-graded-luis-navarro', content: 'graded: 2/3 — recap.' }], 'luis-navarro'), null, 'a line that still carries the old label is not read (the store holds none since the rewrite)');
   assert.equal(cdr.lastGradedLine([{ customId: 'cp-POP-00011-c116-PRESS-graded', content: '1/3 — older' }]), 'graded: 1/3 — older');
-  assert.equal(cdr.lastGradedLine([{ customId: 'cp-POP-00011-c116-PRESS-thu-abcdef', content: '3/3 — a line in a doc that is not a grade' }]), null, 'an unkeyed doc is a grade only by the old label');
-  // plan Task 1 (b): the score is read from the doc's metadata; the text's score is the fallback
+  assert.equal(cdr.lastGradedLine([{ customId: 'cp-POP-00011-c116-PRESS-thu-abcdef', content: '3/3 — a line in a doc that is not a grade' }]), null, 'a doc not keyed as a grade is not one');
+  // plan Task 1 (b): the score is read from the doc's metadata; the line's own score stands when metadata has none
   assert.equal(cdr.lastGradedLine([{ customId: 'cp-POP-00011-c116-PRESS-graded-luis-navarro', content: '2/3 — recap', metadata: { kind: 'graded', score: 3, scoreMax: 3 } }], 'luis-navarro'), 'graded: 3/3 — recap', 'metadata score stands over the text score');
   assert.equal(cdr.lastGradedLine([{ customId: 'cp-POP-00011-c116-PRESS-graded-luis-navarro', content: '2/3 — recap', metadata: { kind: 'graded' } }], 'luis-navarro'), 'graded: 2/3 — recap', 'no score in metadata: the text');
   const g3 = cdr.fanoutCheckTotals([{ contractScore: 3, contractMax: 3 }, { contractScore: 2, contractMax: 3 }]);

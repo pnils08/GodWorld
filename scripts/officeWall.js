@@ -73,9 +73,8 @@ async function ensurePositionWall(popId) {
 
 // pipeline.112: the page holds the holder's own words; the topic, the speaker, the action and the signal ride the
 // doc's metadata. A reader is shown the line as it always read ("stated: [topic] Name — words",
-// "datawake: words | action: … | signal: …"), built by lib/pageLabels.js wallLine. An entry stored before, label and
-// all, is shown as it is.
-const { wallLine, OFFICE_LABEL_RE: WALL_LABEL_RE } = require(path.join(ROOT, 'lib', 'pageLabels'));
+// "datawake: words | action: … | signal: …"), built by lib/pageLabels.js wallLine.
+const { wallLine } = require(path.join(ROOT, 'lib', 'pageLabels'));
 
 async function loadPositionWall(popId, limit) {
   const n = limit == null ? 6 : limit;
@@ -94,8 +93,8 @@ async function loadPositionWall(popId, limit) {
     // Prefer CIVIC daypart posts; fall back to any recent if none yet tagged
     const civic = all.filter((p) => {
       const dp = String((p.metadata && p.metadata.daypart) || '');
-      // plan Task 1 (a): an office post by its daypart or its key; the leading text is the fallback for a doc with neither
-      return dp === 'CIVIC' || /-CIVIC-/.test(String(p.customId || '')) || WALL_LABEL_RE.test(p.content);
+      // plan Task 1 (a): an office post by its daypart or its key (scan 2026-11-19: every office doc has one)
+      return dp === 'CIVIC' || /-CIVIC-/.test(String(p.customId || ''));
     });
     const posts = (civic.length ? civic : all).slice(0, n);
     return { tag, posts };

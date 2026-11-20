@@ -1540,16 +1540,16 @@ function lastGradedLine(posts, persona) {
   for (const p of posts || []) {
     const id = String(p && p.customId || '');
     if (persona && id && !(id.endsWith('-graded-' + persona) || id.endsWith('-graded'))) continue;
-    // pipeline.112: a grade doc's line is "3/3 — …"; one written before carries "graded: " in front. Both read,
-    // in one doc too (a rerun appends into the Cycle's doc). An unkeyed doc is a grade only by the old label.
-    const keyed = /-PRESS-graded(?:-|$)/.test(id);
-    const hits = String(p && p.content || '').match(keyed ? /^(?:graded: )?\d\/[34]\b.*$/gm : /^graded: \d\/[34]\b.*$/gm);   // out of 3 from 2026-11-11, 4 before
+    // pipeline.112: a grade doc is keyed -PRESS-graded[-persona] and its line is "3/3 — …", no label in front
+    // (scan 2026-11-19: every grade doc keyed, none labelled). A rerun appends into the Cycle's doc.
+    if (!/-PRESS-graded(?:-|$)/.test(id)) continue;
+    const hits = String(p && p.content || '').match(/^\d\/[34]\b.*$/gm);   // out of 3 from 2026-11-11, 4 before
     if (!hits) continue;
-    let last = hits[hits.length - 1].trim().replace(/^graded: /, '');
-    // plan Task 1 (b): the score from the doc's metadata (the newest write's — the store merges it); the text's own
-    // score is the fallback for a doc written before the score rode metadata.
+    let last = hits[hits.length - 1].trim();
+    // plan Task 1 (b): the score from the doc's metadata (the newest write's — the store merges it); the line's own
+    // score stands when metadata has none.
     const m = p && p.metadata;
-    if (keyed && m && Number.isInteger(Number(m.score)) && m.score !== '' && m.score != null) {
+    if (m && Number.isInteger(Number(m.score)) && m.score !== '' && m.score != null) {
       last = last.replace(/^\d\/[34]\b/, Number(m.score) + '/' + (Number(m.scoreMax) || 4));
     }
     return ('graded: ' + last).slice(0, 300);

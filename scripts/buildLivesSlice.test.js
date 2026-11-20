@@ -109,7 +109,7 @@ try {
     JSON.stringify({ docId: 'd2', customId: 'cp-POP-90004-c111-PRESS', popId: 'POP-90004', cycle, slot: 'PRESS', content: 'A reporter asked and I told her the ward was quieter than the waiting room.', createdAt: '2026-01-01T00:00:00Z' }),
     JSON.stringify({ docId: 'd4', customId: 'cp-POP-90021-c111-evening', popId: 'POP-90021', cycle, slot: 'evening', content: 'Long day on the desk; the copy was clean by nine.', createdAt: '2026-01-01T00:00:00Z' }),
     JSON.stringify({ docId: 'd5', customId: 'cp-POP-90021-c111-PRESS', popId: 'POP-90021', cycle, slot: 'PRESS', content: 'filed: Sample headline', createdAt: '2026-01-01T00:00:00Z' }),
-    JSON.stringify({ docId: 'd3', customId: 'cp-POP-90004-c111-night-tension', popId: 'POP-90004', cycle, slot: 'night-tension', type: 'tension', content: 'TENSION[c111]: Who is going to drive me to the follow-up?', createdAt: '2026-01-01T00:00:00Z' })
+    JSON.stringify({ docId: 'd3', customId: 'cp-POP-90004-c111-night-tension', popId: 'POP-90004', cycle, slot: 'night-tension', type: 'tension', content: 'Who is going to drive me to the follow-up?', createdAt: '2026-01-01T00:00:00Z' })
   ].join('\n') + '\n');
 
   // pipeline.97 (builder 2026-10-30): the self-initiated rule reads the wake page only; every admitted page reads

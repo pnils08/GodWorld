@@ -12,7 +12,7 @@
  * deeper digs mid-compose.
  *
  * Writes (existing):
- *   - gate PASS → citizenVoice --record-text=filed: <headline>
+ *   - gate PASS → citizenVoice --record-text=<headline> --record-kind=filed (pipeline.112: no label on the page)
  *   - memory_note tool → working notes (daypart deskwork)
  *   - citizen-loop wakes → reflections/tensions (Jax lives in the city too)
  *

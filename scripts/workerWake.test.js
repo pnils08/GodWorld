@@ -26,7 +26,7 @@ const SHEETS = {
 };
 const OFFICE_MAP = { offices: [{ officeId: 'CHIEF-POLICE', popid: 'POP-00136', holder: 'Rafael Montez', title: 'Police Chief', agentDir: 'civic-office-police-chief', model: 'm' },
   { officeId: 'COUNCIL-D1', popid: 'POP-00001', holder: 'A Seat', title: 'City Council District 1', agentDir: 'civic-office-council-d1' }] };
-const doc = (cycle, type, content) => ({ content, createdAt: '2026-11-13T00:00:00Z', metadata: { cycle, type } });
+const doc = (cycle, type, content, extra) => ({ content, createdAt: '2026-11-13T00:00:00Z', metadata: Object.assign({ cycle, type }, extra) });
 
 function workspace(fn) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'worker-wake-'));
@@ -47,8 +47,8 @@ function deps(root, over) {
     root,
     sheets: { getSheetAsObjects: async (tab) => SHEETS[tab] || [], getRawSheetData: async (tab) => { const r = SHEETS[tab] || []; return r.length ? [Object.keys(r[0])].concat(r.map((x) => Object.values(x))) : [[]]; } },
     page: {
-      searchPage_: async () => ({ results: [doc(102, 'office-position', 'datawake: Six additional patrol units redeployed.'), doc(102, 'tension', 'TENSION[c102]: why?'), doc(115, 'reflection', 'That clearance rate still sticks with me.')] }),
-      recentPage_: async () => ({ results: [doc(115, 'tension', 'TENSION[c115]: how?'), doc(115, 'reflection', 'That clearance rate still sticks with me.'), doc(115, 'office-position', 'datawake: nothing to state'), doc(114, 'reflection', 'Look, I do not hide from the numbers.'), doc(112, 'reflection', 'an older one')] }),
+      searchPage_: async () => ({ results: [doc(102, 'office-position', 'Six additional patrol units redeployed.', { kind: 'datawake' }), doc(102, 'tension', 'why?', { kind: 'open' }), doc(115, 'reflection', 'That clearance rate still sticks with me.')] }),
+      recentPage_: async () => ({ results: [doc(115, 'tension', 'how?', { kind: 'open' }), doc(115, 'reflection', 'That clearance rate still sticks with me.'), doc(115, 'office-position', 'nothing to state', { kind: 'datawake' }), doc(114, 'reflection', 'Look, I do not hide from the numbers.'), doc(112, 'reflection', 'an older one')] }),
     },
     wp: { buildPool: async () => [{ popId: 'POP-00136', first: 'Rafael', last: 'Montez', cur: {} }, { popId: 'POP-00518', first: 'Chase', last: 'West', cur: {} }],
       loadOfficeHolders: async () => ({ byPop: { 'POP-00136': { title: 'Police Chief' } } }), identityLine: (c) => 'You are ' + c.first + ' ' + c.last + '. You hold the office of ' + c.office.title + '.' },

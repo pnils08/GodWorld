@@ -38,13 +38,12 @@ assert.strictEqual(p.admit({ customId: 'cp-POP-00324-c109-PRESS-tension-resolved
 // cleaner
 assert.strictEqual(p.citizenText('```json { "answer": "quote", "quote": "I don\'t follow the Oaks too close." }').trim(), "I don't follow the Oaks too close.");
 assert.strictEqual(p.citizenText('--- I feel like the Oaks team is trying.').trim(), 'I feel like the Oaks team is trying.');
-assert.strictEqual(p.citizenText('TENSION[c108]: Will the Oaks improve?').trim(), 'Will the Oaks improve?');
 
 // stance conflict
 const docs = [
   { customId: 'cp-POP-90001-c108-evening', popId: 'POP-90001', cycle: 108, type: 'reflection', affect: 'Resentful', content: 'The council keeps dragging its feet on the transit hub and I am sick of it.' },
   { customId: 'cp-POP-90001-c105-morning', popId: 'POP-90001', cycle: 105, type: 'reflection', affect: 'Content', content: 'Good coffee, quiet morning.' },
-  { customId: 'cp-POP-90001-c109-PRESS-tension', popId: 'POP-90001', cycle: 109, type: 'tension', content: 'TENSION[c109]: Will the council move?' }
+  { customId: 'cp-POP-90001-c109-PRESS-tension', popId: 'POP-90001', cycle: 109, type: 'tension', content: 'Will the council move?' }
 ];
 const hit = p.stanceConflict('I am proud of the council this week, they finally moved on transit.', docs);
 assert.ok(hit, 'cheering the council against a resentful council page is a conflict');

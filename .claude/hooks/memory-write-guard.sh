@@ -4,9 +4,8 @@
 #
 #   PreToolUse hook. Reads tool JSON on stdin. Hard block (exit 2) on every write to a memory store:
 #     - the memory files: /root/.claude/projects/-root-GodWorld/memory/** (MEMORY.md and every memory file)
-#     - the remember buffer: /root/GodWorld/.remember/**
-#     - supermemory saves: `supermemory add` / `supermemory upload` from any shell, and the MCP save tools
-#       (add_memory, guided-save, upload-file, forget_memory on the supermemory and Mara servers)
+#     (the remember plugin's buffer, /root/GodWorld/.remember/**, is not a memory file: builder 2026-11-16, "It's only meant to cover memory files")
+#     (supermemory saves are not blocked: the code never checked them; builder: memory files only)
 #   Covers Write/Edit/NotebookEdit by file_path, Bash by command inspection, MCP tools by name.
 #   Unlock: Mike runs `! touch /root/GodWorld/.claude/.memory-write-unlock`; holds 60 minutes from that
 #   touch. Claude may not create or touch it — any command naming it is blocked.
@@ -15,7 +14,7 @@
 ROOT="/root/GodWorld"
 UNLOCK="$ROOT/.claude/.memory-write-unlock"
 UNLOCK_MIN=60
-MEM_RE='(^|[^A-Za-z0-9_])(/root/\.claude/projects/-root-GodWorld/memory/|/root/GodWorld/\.remember/|\.remember/|/memory/MEMORY\.md|memory/[A-Za-z0-9_.-]+\.md)'
+MEM_RE='(^|[^A-Za-z0-9_])(/root/\.claude/projects/-root-GodWorld/memory/|/memory/MEMORY\.md|memory/[A-Za-z0-9_.-]+\.md)'
 MCP_RE='^mcp__(plugin_supermemory_supermemory|claude_ai_Mara|supermemory|claude_ai_supermemory)__(add_memory|guided-save|upload-file|forget_memory)$'
 
 payload="$(cat)"
@@ -51,7 +50,7 @@ case "$tool" in
     [ -z "$p" ] && exit 0
     a="$(abspath "$p")"
     case "$a" in
-      /root/.claude/projects/-root-GodWorld/memory/*|"$ROOT"/.remember/*)
+      /root/.claude/projects/-root-GodWorld/memory/*)
         unlocked && exit 0
         block "'$a' is a memory file."
         ;;

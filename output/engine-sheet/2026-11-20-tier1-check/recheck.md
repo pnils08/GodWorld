@@ -31,3 +31,4 @@ Builder 2026-11-20 on bios: "the bios is an unbuilt commodity rn, it may have so
 
 ## Item 5 — Rick Walker POP-00198 (builder: "change him to a college degree is necessary")
 "K-8 Teacher,Former Line cook", EducationLevel hs-diploma → bachelors (AF150, read back). Vocabulary from credentialRank_ (educationCareerEngine.js). Teachers on the ledger before the write: bachelors 14, masters 2, hs-diploma 3 (Walker and two others, listed in the reply).
+Then (builder: "Yes"): Sage Yamamoto POP-01126 (Teacher, 20) AF953 and Daniela Kapoor POP-01209 (Teacher, 39) AF1036, hs-diploma → bachelors, read back.

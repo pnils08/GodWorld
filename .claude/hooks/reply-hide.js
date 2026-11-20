@@ -36,7 +36,15 @@ function main() {
   if (!TERMINALS.includes(windowName())) return;
   let input = {};
   try { input = JSON.parse(fs.readFileSync(0, 'utf8') || '{}'); } catch (e) {}
-  process.stdout.write(JSON.stringify({ hookSpecificOutput: { hookEventName: 'MessageDisplay', displayContent: display(input) } }) + '\n');
+  const shown = display(input);
+  // Trace while the VERIFIED swap is proven live (builder 2026-11-19: "Still broke").
+  try {
+    fs.appendFileSync(require('path').join(__dirname, '..', 'state', 'reply-hide-trace.jsonl'), JSON.stringify({
+      at: new Date().toISOString(), keys: Object.keys(input), index: input.index, final: input.final,
+      delta: String(input.delta || '').slice(0, 40), shownChars: shown.length,
+    }) + '\n');
+  } catch (e) {}
+  process.stdout.write(JSON.stringify({ hookSpecificOutput: { hookEventName: 'MessageDisplay', displayContent: shown } }) + '\n');
 }
 
 if (require.main === module) main();

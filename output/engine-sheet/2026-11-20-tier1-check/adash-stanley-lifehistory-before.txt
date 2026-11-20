@@ -1,0 +1,48 @@
+[Compressed: 10 entries | ? → ? | Dominant:Personal,Daily,Money | Archetype:Drifter | Mods:a real fan | AsOf:c112]
+Y2C51 — [Money] moved up in the world — the ledger says so
+Y3C2 — [Neighborhood] walked the perimeter of the Coliseum District Development and tried to picture what it would look like in five years
+Y3C3 — [Sports] memorized the starting rotation for the Oaks and tested themselves on the BART ride home
+Y3C3 — [Personal] heard a kid explain something to a parent with total authority and grinned near a busy plaza
+Y3C4 — [Neighborhood] attended a small local gathering and stayed later than planned
+Y3C4 — [Neighborhood] overheard a stranger asking about rents on a block nobody used to ask about near a late-night diner
+Y3C5 — [Neighborhood] Downtown is thriving, with events drawing crowds and new faces adding to the vibrant mix of the neighborhood.
+Y3C6 — [Sports] told the family it was fine over dinner, and everyone let the lie stand
+Y3C6 — [Community] worked the campus job and studied on the clock when it was slow
+Y3C6 — [Daily] spent the evening sorting a box of things that used to be someone's
+Y3C7 — [Reputation] fielded a round of texts from people who hadn't called in years
+Y3C7 — [Civic Perception] recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for
+Y3C7 — [Civic Perception] saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner near a busy plaza
+Y3C8 — [Sports-PlayedWin] stayed late signing for the kids by the player lot after the win
+Y3C8 — [Sports-Win] let the week's wins carry dinner
+Y3C8 — [Education] got the lab slot and started showing up before the professor
+Y3C8 — [Neighborhood-Composure-Up-S] watched the ferry cut across the bay at sunset and felt lucky to live this close to the water
+Y3C8 — [Daily-Warmth-Up-S] carried three boxes of canned goods from the pantry truck and felt it in their lower back
+Y3C8 — [Neighborhood-Openness-Up-S] walked the perimeter of the Coliseum District Development and tried to picture what it would look like in five years
+Y3C8 — [Neighborhood-Outabout-Up-S] walked the Mandela Parkway median under the trees and took the long way home
+Y3C9 — [Sports-PlayedWin] got home still wired from the final out and couldn't sit down
+Y3C9 — [Sports-PlayedWin] drove home with the radio off, letting the win settle
+Y3C9 — [Sports-PlayedWin] tried to keep the streak out of the conversation at dinner and failed
+Y3C9 — [Sports-Win] let the week's wins carry dinner
+Y3C9 — [Background-Composure-Up-S] reorganized a closet and found something thought lost
+Y3C9 — [Money] the last debt cleared — the ledger finally reads clean
+Y3C10 — [Sports-PlayedWin] stayed up rewatching two pitches that will not matter to anyone else
+Y3C10 — [Sports-PlayedWin] drove home with the radio off, letting the win settle
+Y3C10 — [Sports-PlayedWin] drove home with the radio off, letting the win settle
+Y3C10 — [Sports-Win] let the week's wins carry dinner
+Y3C10 — [Neighborhood-Outabout-Up-S] felt a lift at Temple Lounge after the win
+Y3C10 — [Background-Composure-Up-S] unpacked a box that had stayed sealed since the last move
+Y3C11 — [Sports-PlayedWin] came home to find the neighbors had left a case of something cold on the porch — already running the next game in their head
+Y3C11 — [Sports-Composure-Up-M] kept the phone buzzing on the counter all night and let it
+Y3C11 — [Sports-PlayedWin] came home to find the neighbors had left a case of something cold on the porch — unable to stop pacing the kitchen
+Y3C11 — [Sports-Composure-Up-M] told the story of the moment three times at dinner and it got better each time
+Y3C11 — [Sports-Win] drove home from a good week with the window down
+Y3C11 — [Education] pulled an all-nighter for the midterm and swore it was the last one
+Y3C11 — [Neighborhood-Composure-Down-S] swapped stories with a neighbor about what got taken up the block near a bench outside the courthouse
+Y3C12 — [Life-Outabout-Down-S] found a moment of privacy
+Y3C12 — [Sports-Played] drove home with the radio off, letting the win settle — unable to stop pacing the kitchen
+Y3C12 — [Sports-Composure-Up-M] told the story of the moment three times at dinner and it got better each time
+Y3C12 — [Sports-Played] stayed up rewatching two plays that will not matter to anyone else — unable to let the night go
+Y3C12 — [Sports-Composure-Down-M] let the family carry dinner and said almost nothing
+Y3C12 — [Sports-Sociability-Up-S] saw their name in the sports pages again
+Y3C12 — [Sports-Composure-Up-M] told the story of the moment three times at dinner and it got better each time
+Y3C12 — [Relocation-Drive-Up-M] moved from Downtown to Piedmont Ave — moving up from Downtown

@@ -57,3 +57,7 @@ The builder had filled the three A's rows by hand after the first read (BirthYea
 - Still blank: Neighborhood, HouseholdId, NetWorth, DebtLevel, InheritanceReceived, SchoolQuality, LastPromotionCycle; Mooney's YearsInCareer; SMPageId on Mooney and Calzado; and the none-fields (MaidenName, SpouseId, Migration*, MemoryRegisters, StatusStartCycle, HealthCause, LineageId, Famous).
 - The engine's own arrival derivation (utilities/citizenDerivation.js deriveCitizenProfile_ / deriveDebtLevel_ / deriveNetWorth_, seed First|Last|POPID, ledger frequency from live, simYear 2042, run offline in a vm), read back: Neighborhood Uptown / West Oakland / Fruitvale; NetWorth 162000 / 18000 / 89000; DebtLevel 2 / 4 / 0; Mooney YearsInCareer 2.4. Its career stages match the ones written.
 - Blank by the engine's own rules: HouseholdId (no one-person households; engine.57 P2), SchoolQuality (set for minors only), InheritanceReceived and LastPromotionCycle (written only when those happen), SMPageId (made on the first page write), and the none-fields.
+
+## Item 2 (builder 2026-11-19)
+
+Carmen Mesa POP-00081: Status Active → Traded (Simulation_Ledger L61, read back), on the builder's word "Mesa was traded". The sports feed's traded trigger writes life lines only, never Status; the archive step (utilities/archiveCitizenExits.js, Traded → traded-away) moves the row at the next fire. Richards stays Active (builder: lives in Oakland while playing on the Mets).

@@ -2682,7 +2682,9 @@ function yesterdaysFilings(desk, cycle) {
       if (!require('../lib/articleIntake').isStagedSidecar(f) || out.length >= FILINGS_MAX) continue;   // pipeline.78
       const side = readJson(path.join(STAGED, f));
       if (!side || side.desk !== desk || String(side.cycle) !== String(cycle)) continue;
-      if (String(side.stagedAt || '').slice(0, 10) !== yday) continue;
+      // the Central date the filing was staged on, not its UTC stamp: the write wake stages after 18:00 Central, when
+      // the UTC date is already the next day — read by its stamp, most of a desk's filings were never "yesterday's"
+      if (centralDate(0, new Date(side.stagedAt)) !== yday) continue;
       const artPath = path.join(ROOT, side.article || '');
       if (!fs.existsSync(artPath)) continue;
       const text = fs.readFileSync(artPath, 'utf8');

@@ -26,7 +26,12 @@ function assert(label, cond, detail) {
 
 const DESK = 'zz-test-desk';
 const CYCLE = '999';
-const yday = new Date(Date.now() - 86400000).toISOString();
+// the newsroom's day is the Central date (scripts/centralDate.js): yesterday at noon, yesterday at 18:20 (the write
+// wake's hour, when the UTC date is already today), and now
+const { centralDate } = require('./centralDate');
+const at = (date, hhmm) => new Date(new Date(date + 'T' + hhmm + ':00Z').getTime() + 6 * 3600e3).toISOString();   // hh:mm Central standard time
+const yday = at(centralDate(1), '12:00');
+const ydayEvening = at(centralDate(1), '18:20');
 const today = new Date().toISOString();
 
 const ARTICLE = [
@@ -53,13 +58,14 @@ function stage(name, sidecar, articleText) {
 try {
   fs.mkdirSync(STAGED, { recursive: true });
   stage('zztest_c999_yesterday', { status: 'staged', desk: DESK, cycle: CYCLE, byline: 'Test Byline', stagedAt: yday }, ARTICLE);
+  stage('zztest_c999_yesterday_evening', { status: 'staged', desk: DESK, cycle: CYCLE, byline: 'Test Byline', stagedAt: ydayEvening }, ARTICLE);
   stage('zztest_c999_today', { status: 'staged', desk: DESK, cycle: CYCLE, byline: 'Test Byline', stagedAt: today }, ARTICLE);
   stage('zztest_c999_otherdesk', { status: 'staged', desk: 'zz-other-desk', cycle: CYCLE, byline: 'X', stagedAt: yday }, ARTICLE);
 
   console.log('Test 1: yesterdaysFilings picks yesterday + same desk only');
   {
     const r = yesterdaysFilings(DESK, CYCLE);
-    assert('exactly 1 filing (today + other-desk excluded)', r.length === 1, 'got ' + r.length);
+    assert('exactly 2 filings, yesterday noon and yesterday evening (today + other-desk excluded)', r.length === 2, 'got ' + r.length);
     const f = r[0] || {};
     assert('headline extracted', f.headline === 'Test Headline About Fruitvale');
     assert('byline carried', f.byline === 'Test Byline');

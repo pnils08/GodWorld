@@ -245,13 +245,15 @@ const sandbox2 = {
   safeRand_: (ctx) => ctx.rng,
   heritageTierByPop_: () => ({}), heritageRank_: () => 0,
   bondProximity_: () => ({ near: (a, b) => a === b || (ADJ[a] || []).indexOf(b) >= 0 }),
+  // engine.339: the lottery's child and parent mints draw from the generator's pools (file scope in generateGenericCitizens.js)
+  GC_FEMALE_FIRST_NAMES: ['Nia', 'Rosa', 'Iris'], GC_MALE_FIRST_NAMES: ['Theo', 'Omar', 'Felix'], GC_OCCUPATIONS: ['Nurse', 'Teacher'],
 };
 // engine.312: the usage pass opens the real fame accumulator (culturalLedger.js, its own vm) before its first mark
 const clBox = vm.createContext({ Logger: { log() {} }, Math, String, Number, Array, Object, JSON, queueCellIntent_: () => {} });
 load(clBox, 'phase07-evening-media/culturalLedger.js');
 for (const fn of ['paperFameDelta_', 'culturalFameAccum_', 'culturalFameAddPaper_', 'culturalFameMarkFloor_']) sandbox2[fn] = clBox[fn];
 const E2 = new Function(...Object.keys(sandbox2), src('phase01-config/advanceSimulationCalendar.js') + '\n' + src('utilities/citizenDerivation.js') + '\n' + src('phase05-citizens/processAdvancementIntake.js') +
-  '\nreturn { checkFamilyMatchPromotions_, checkEmergencePromotions_, processAdvancementRows_, familySpotsOpen_, familyLedgerCols_, gcFamilyLinks_, simYearFromCycle_, processMediaUsage_, earnedCitationsByKey_, isFamilyUsage_, markAsEmergedInGeneric_, familyAnchorOf_ };')(...Object.values(sandbox2));
+  '\nreturn { checkFamilyMatchPromotions_, checkEmergencePromotions_, processAdvancementRows_, familySpotsOpen_, familyLedgerCols_, gcFamilyLinks_, simYearFromCycle_, processMediaUsage_, earnedCitationsByKey_, isFamilyUsage_, markAsEmergedInGeneric_, familyAnchorOf_, wireFamilyMatch_ };')(...Object.values(sandbox2));
 const SL2 = ['POPID','First','MaidenName','Last','ClockMode','Tier','RoleType','Status','BirthYear','LifeHistory','SpouseId','UsageCount','Neighborhood','HouseholdId','MaritalStatus','NumChildren','ParentIds','ChildrenIds','Income','NetWorth','DebtLevel','EducationLevel','CareerStage','YearsInCareer','EmployerBizId','Gender','SkillTags'];
 const c2 = n => SL2.indexOf(n);
 const sl2 = o => { const r = SL2.map(() => ''); Object.keys(o).forEach(k => { r[c2(k)] = o[k]; }); return r; };
@@ -304,7 +306,7 @@ t('over 2,000 seeded Cycles the citywide draws average D and a T1 is drawn about
     logs2.length = 0;
     const w = world2(rows.map(r => r.slice()), [gc({ First: 'Nobody', Last: 'Fits', BirthYear: Y2 - 80, Neighborhood: 'Chinatown', Sex: 'male' })], mulberry32(seed)); // an empty tab returns before the draw
     total += E2.checkFamilyMatchPromotions_(w.ctx, C2).drawn;
-    if (logs2.some(m => /POP-00021 drawn/.test(m))) t1++;
+    if (logs2.some(m => /POP-00021 drawn|the (child|parent) of POP-00021 \(C/.test(m))) t1++; // engine.339: a child spot now mints, so a draw logs either line
     if (logs2.some(m => /POP-10000 drawn/.test(m))) t4one++;
   }
   const D = 0.01 * 100, mean = total / 2000;
@@ -344,12 +346,22 @@ t('rng 0: drawn, spouse picked, and only the one row that fits every rule is lin
   assert.strictEqual(w.sheets.Advancement_Intake1.appended.length, 0, 'a link mints nobody');
   assert.strictEqual(w.ctx.ledger.dirty, false, 'the ledger is not touched');
 });
-t('a minor fills a child spot, never a spouse or a parent spot', () => {
+t('engine.339: a child spot mints a new background child born with the family name; no pool row changes', () => {
   const pool = [gc({ First: 'Kid', Last: 'Y', BirthYear: Y2 - 8, Neighborhood: 'Temescal', Sex: 'male' })];
   const d = darrin(); d[c2('MaritalStatus')] = 'single'; // child spots only
+  const before = pool[0].slice();
   const w = world2([d], pool, () => 0);
-  assert.strictEqual(E2.checkFamilyMatchPromotions_(w.ctx, C2).linked, 1);
-  eq(w.sheets.Generic_Citizens.rows[1][g2('FamilyRole')], 'child');
+  const res = E2.checkFamilyMatchPromotions_(w.ctx, C2);
+  assert.strictEqual(res.linked, 1); assert.strictEqual(res.minted, 1);
+  const G = w.sheets.Generic_Citizens.rows;
+  eq(G[1], before, 'the pool row is untouched');
+  const kid = G[2];
+  eq([kid[g2('First')], kid[g2('Last')], kid[g2('MaidenName')], kid[g2('Status')], kid[g2('FamilyOf')], kid[g2('FamilyRole')], kid[g2('Neighborhood')], kid[g2('EmergenceCount')], kid[g2('EmergedCycle')]],
+     ['Nia', 'Davis', '', 'Family', 'POP-00021', 'child', 'Temescal', 0, 'Cycle ' + C2]);
+  const kidBY = kid[g2('BirthYear')], dBY = d[c2('BirthYear')];
+  assert.ok(kidBY - dBY >= 21 && kidBY - dBY <= 40 && kidBY <= Y2, 'the child is 21–40 years younger and born by now: ' + (kidBY - dBY));
+  assert.strictEqual(kid[g2('Occupation')], 'student', 'a 12-year-old is a student');
+  assert.strictEqual(w.sheets.Advancement_Intake1.appended.length, 0, 'nobody is minted on the ledger');
   const kidAsSpouse = world2([(() => { const x = darrin(); x[c2('NumChildren')] = 0; x[c2('BirthYear')] = Y2 - 20; return x; })()],
     [gc({ First: 'Teen', Last: 'Y', BirthYear: Y2 - 16, Neighborhood: 'Temescal', Sex: 'female' })], () => 0);
   assert.strictEqual(E2.checkFamilyMatchPromotions_(kidAsSpouse.ctx, C2).linked, 0, 'a 16-year-old is no one\'s spouse');
@@ -376,7 +388,7 @@ t('a closed spot releases the link: own name back, columns cleared, count kept',
 });
 t('more linked kids than open spots → only the extra is released', () => {
   const d = darrin(); d[c2('MaritalStatus')] = 'single'; d[c2('NumChildren')] = 1;
-  const k = (f) => gc({ First: f, Last: 'Davis', MaidenName: 'Q', FamilyOf: 'POP-00021', FamilyRole: 'child', Status: 'Family', BirthYear: Y2 - 5, Neighborhood: 'Temescal', Sex: 'male' });
+  const k = (f) => gc({ First: f, Last: 'Davis', FamilyOf: 'POP-00021', FamilyRole: 'child', Status: 'Family', BirthYear: Y2 - 5, Neighborhood: 'Temescal', Sex: 'male' }); // minted kids (engine.339): no MaidenName
   const w = world2([d], [k('Ana'), k('Ben')], () => 0.99);
   assert.strictEqual(E2.checkFamilyMatchPromotions_(w.ctx, C2).released, 1);
   eq(w.sheets.Generic_Citizens.rows.slice(1).map(r => r[g2('Status')]).sort(), ['Active', 'Family']);
@@ -386,6 +398,62 @@ t('a citizen gone from the ledger releases their family', () => {
   const w = world2([darrin()], [linked], () => 0.99);
   E2.checkFamilyMatchPromotions_(w.ctx, C2);
   eq(w.sheets.Generic_Citizens.rows[1][g2('Last')], 'Keane');
+});
+
+t('engine.339: a renamed child or parent goes back to its own name; a spouse keeps the family name; a second pass changes nothing', () => {
+  const d = darrin(); d[c2('NumChildren')] = 3;
+  const renamedKid = gc({ First: 'Owen', Last: 'Davis', MaidenName: 'King', FamilyOf: 'POP-00021', FamilyRole: 'child', Status: 'Family', BirthYear: Y2 - 23, Neighborhood: 'Temescal', Sex: 'male' });
+  const mintedKid = gc({ First: 'Nia', Last: 'Davis', FamilyOf: 'POP-00021', FamilyRole: 'child', Status: 'Family', BirthYear: Y2 - 5, Neighborhood: 'Temescal', Sex: 'female' });
+  const wife = gc({ First: 'Amara', Last: 'Davis', MaidenName: 'Keane', FamilyOf: 'POP-00021', FamilyRole: 'spouse', Status: 'Family', BirthYear: Y2 - 31, Neighborhood: 'Temescal', Sex: 'female' });
+  const w = world2([d], [renamedKid, mintedKid, wife], () => 0.99);
+  const res = E2.checkFamilyMatchPromotions_(w.ctx, C2);
+  assert.strictEqual(res.released, 1);
+  const G = w.sheets.Generic_Citizens.rows;
+  eq([G[1][g2('First')], G[1][g2('Last')], G[1][g2('MaidenName')], G[1][g2('Status')], G[1][g2('FamilyOf')]], ['Owen', 'King', '', 'Active', '']);
+  eq([G[2][g2('Last')], G[2][g2('Status')]], ['Davis', 'Family'], 'a minted child stays');
+  eq([G[3][g2('Last')], G[3][g2('MaidenName')], G[3][g2('Status')]], ['Davis', 'Keane', 'Family'], 'a spouse keeps the family name');
+  assert.ok(logs2.some(m => /released Owen King — a child is minted, never renamed/.test(m)));
+  const snap = JSON.stringify(G);
+  assert.strictEqual(E2.checkFamilyMatchPromotions_(w.ctx, C2).released, 0);
+  assert.strictEqual(JSON.stringify(w.sheets.Generic_Citizens.rows), snap, 'idempotent');
+});
+t('engine.339: a parent too young for any child gets none; the spouse on the ledger bounds the child\'s age too', () => {
+  const young = darrin(); young[c2('MaritalStatus')] = 'single'; young[c2('BirthYear')] = Y2 - 20; // 20: no child can be 21 years younger
+  const w = world2([young], [gc({ First: 'Far', Last: 'Z', BirthYear: Y2 - 31, Neighborhood: 'Downtown', Sex: 'female' })], () => 0);
+  const res = E2.checkFamilyMatchPromotions_(w.ctx, C2);
+  assert.strictEqual(res.minted, 0); assert.strictEqual(res.noFit, 1);
+  assert.ok(logs2.some(m => /drawn for a child — no child fits 21–40 years apart/.test(m)));
+  // Darrin 33 with a wife on the ledger aged 55: a child must be 21+ younger than him (age <= 12) and at most 40 younger than her (age >= 15) — none
+  const dd = darrin(); dd[c2('SpouseId')] = 'POP-00022'; dd[c2('MaritalStatus')] = 'married';
+  const wifeRow = sl2({ POPID: 'POP-00022', First: 'Ida', Last: 'Davis', Tier: 4, Status: 'Active', BirthYear: Y2 - 55, Neighborhood: 'Temescal', MaritalStatus: 'married', SpouseId: 'POP-00021', NumChildren: 0, Gender: 'female' });
+  const w2 = world2([dd, wifeRow], [], () => 0); w2.sheets.Generic_Citizens.rows.push(gc({ First: 'X', Last: 'Y', BirthYear: Y2 - 80, Neighborhood: 'Chinatown', Sex: 'male' }));
+  assert.strictEqual(E2.checkFamilyMatchPromotions_(w2.ctx, C2).minted, 0);
+});
+t('engine.339: a minor\'s parent spot mints a parent 21–40 years older, the other sex of the parent on camera, the kid\'s name', () => {
+  const mom = sl2({ POPID: 'POP-00501', First: 'Lia', Last: 'Ortiz', Tier: 4, Status: 'Active', BirthYear: Y2 - 35, Neighborhood: 'Temescal', MaritalStatus: 'single', NumChildren: 1, ChildrenIds: '["POP-00500"]', Gender: 'female' });
+  const kid = sl2({ POPID: 'POP-00500', First: 'Ray', Last: 'Ortiz', Tier: 4, Status: 'Active', BirthYear: Y2 - 9, Neighborhood: 'Temescal', ParentIds: '["POP-00501"]', MaritalStatus: 'youth', Gender: 'male' });
+  const w = world2([mom, kid], [gc({ First: 'Far', Last: 'Z', BirthYear: Y2 - 31, Neighborhood: 'Downtown', Sex: 'female' })], () => 0);
+  const res = E2.checkFamilyMatchPromotions_(w.ctx, C2);
+  assert.strictEqual(res.minted, 1);
+  const p = w.sheets.Generic_Citizens.rows[2];
+  eq([p[g2('Last')], p[g2('FamilyOf')], p[g2('FamilyRole')], p[g2('Sex')], p[g2('Status')]], ['Ortiz', 'POP-00500', 'parent', 'male', 'Family']);
+  const gap = kid[c2('BirthYear')] - p[g2('BirthYear')];
+  assert.ok(gap >= 21 && gap <= 40, 'gap ' + gap);
+  assert.ok(['Nurse', 'Teacher'].indexOf(p[g2('Occupation')]) >= 0, 'an adult draws an occupation');
+});
+
+t('engine.339: a child or parent link closer than 21 years is refused at the wiring door; a spouse too close is left off the child\'s parents', () => {
+  const par = sl2({ POPID: 'POP-00700', First: 'Eve', Last: 'Lane', Status: 'Active', BirthYear: Y2 - 35, SpouseId: 'POP-00702', MaritalStatus: 'married', ChildrenIds: '[]', Neighborhood: 'Temescal', HouseholdId: 'HH-7' });
+  const close = sl2({ POPID: 'POP-00701', First: 'Kai', Last: 'Lane', Status: 'Active', BirthYear: Y2 - 20 });  // 15 years apart
+  const w = world2([par, close], []);
+  assert.strictEqual(E2.wireFamilyMatch_(w.ctx, 1, 'POP-00701', 'POP-00700', 'child', 'now', C2, null), undefined);
+  eq([par[c2('ChildrenIds')], close[c2('ParentIds')]], ['[]', ''], 'nothing written either side');
+  assert.strictEqual(E2.wireFamilyMatch_(w.ctx, 1, 'POP-00701', 'POP-00700', 'parent', 'now', C2, null), undefined, 'a parent 15 years younger is no parent');
+  const young = sl2({ POPID: 'POP-00702', First: 'Joe', Last: 'Lane', Status: 'Active', BirthYear: Y2 - 30, SpouseId: 'POP-00700', MaritalStatus: 'married' });
+  const kid = sl2({ POPID: 'POP-00703', First: 'Mia', Last: 'Lane', Status: 'Active', BirthYear: Y2 - 12 }); // 23 from Eve, 18 from Joe
+  const w2 = world2([par, young, kid], []);
+  assert.strictEqual(E2.wireFamilyMatch_(w2.ctx, 2, 'POP-00703', 'POP-00700', 'child', 'now', C2, null), true);
+  eq(JSON.parse(kid[c2('ParentIds')]), ['POP-00700'], 'Joe is 18 years older — not written as her parent');
 });
 
 console.log('C5 arrival — usage brings them to the ledger as family');
@@ -608,7 +676,7 @@ t('the resolver: Active is alive, deceased on the ledger or archived as a death 
 });
 t('a dead citizen\'s link survives the family pass; a traded citizen\'s releases; the dead are never drawn', () => {
   ARCH['POP-00768'] = { row: deadEli(), reason: 'deceased', exitCycle: 120 };
-  const kid = gc({ First: 'Tyrone', Last: 'Bishop', MaidenName: 'Brown', FamilyOf: 'POP-00768', FamilyRole: 'child', Status: 'Family', BirthYear: Y2 - 30, Neighborhood: 'Temescal', Sex: 'male' });
+  const kid = gc({ First: 'Tyrone', Last: 'Bishop', FamilyOf: 'POP-00768', FamilyRole: 'child', Status: 'Family', BirthYear: Y2 - 30, Neighborhood: 'Temescal', Sex: 'male' }); // minted (engine.339)
   const traded = gc({ First: 'Ana', Last: 'Ford', MaidenName: 'Lee', FamilyOf: 'POP-00888', FamilyRole: 'spouse', Status: 'Family', BirthYear: Y2 - 30, Neighborhood: 'Temescal', Sex: 'female' });
   const w = world2([darrin()], [kid, traded], () => 0.99); // no draw this pass — the release alone
   const res = E3.checkFamilyMatchPromotions_(w.ctx, C2);

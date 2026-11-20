@@ -172,10 +172,12 @@ function processAdvancementIntake_(ctx) {
   results.familyEmergencesQueued = emergenceResults.family;
 
   // engine.304 (builder 2026-10-19, R16–R17): the family lottery links a background
-  // citizen to a family and mints nobody — it spends no cap slot. The link reaches
+  // citizen to a family and mints nobody on the ledger — it spends no cap slot. The link reaches
   // the ledger through the emergence door above, under the same cap, when used.
+  // engine.339 (builder 2026-11-20): a child or parent it links is born into the background pool, not drawn from it.
   var familyResults = checkFamilyMatchPromotions_(ctx, cycle);
   results.familyLinks = familyResults.linked;
+  results.familyBornToPool = familyResults.minted;
   results.familyLinksReleased = familyResults.released;
 
   // engine.96 Task 12 (S440): the owner door — "the business is the reason."
@@ -1736,8 +1738,10 @@ var GC_EMERGENCE_PROMOTION_THRESHOLD = 3;
 // world didn't produce a fitting person, nothing lands. Zero is normal.
 var DRIP_CAP_PER_CYCLE = 2;
 var DRIP_SPOUSE_AGE_BAND = 10;  // |candidate BY − partner BY| ≤ band
-var DRIP_PARENT_AGE_MIN = 18;   // parent is 18-45 years older than the kid
-var DRIP_PARENT_AGE_MAX = 45;
+// engine.339 (builder 2026-11-20): "no one over 40 would have a newborn , no one under 21 can have a kid , no kid can be
+// with[in] 21 years of age [of] their parent" — a parent is 21–40 years older than the child
+var DRIP_PARENT_AGE_MIN = 21;
+var DRIP_PARENT_AGE_MAX = 40;
 
 /**
  * engine.58 (S320): scan Generic_Citizens for Active rows at/over the
@@ -2277,8 +2281,61 @@ function releaseFamilyLink_(sheet, gData, r, cols, gL, cycle) {
   try { writeGcRow_(sheet, gData, r); } catch (e) { gData[r] = before; throw e; }
 }
 
+// engine.339 (builder 2026-11-20): the lottery's child or parent is a NEW Generic_Citizens row — born with the family's
+// surname (no MaidenName), Status Family, in the family's hood. A child is DRIP_PARENT_AGE_MIN–MAX years younger than the
+// drawn citizen and than their spouse on the ledger, never born after the sim year; a parent the same span older than the
+// drawn minor. First name from the pool's sex-tagged names, unique against the ledger, the pool and the intake queue.
+//   → { row, first, by } | null (nobody can be born into that spot this Cycle — the reason is logged)
+function mintFamilyGcRow_(gData, c, type, wantSex, hood, taken, rowByPop, L, simYear, cycle, rng) {
+  if (typeof GC_FEMALE_FIRST_NAMES === 'undefined' || typeof GC_OCCUPATIONS === 'undefined') {
+    throw new Error('engine.339: the Generic_Citizens name and occupation pools are not loaded (generateGenericCitizens.js)');
+  }
+  if (!GC_FEMALE_FIRST_NAMES && typeof gcInitNamePools_ === 'function') gcInitNamePools_();
+  var byMin, byMax;
+  if (type === 'child') {
+    byMin = c.by + DRIP_PARENT_AGE_MIN;
+    byMax = Math.min(c.by + DRIP_PARENT_AGE_MAX, simYear);
+    var spPop = L.spouse >= 0 ? (String(c.row[L.spouse] || '').match(/POP-\d+/) || [''])[0] : '';
+    var spBy = (spPop && rowByPop[spPop]) ? (Number(rowByPop[spPop][L.by]) || 0) : 0;
+    if (spBy) { byMin = Math.max(byMin, spBy + DRIP_PARENT_AGE_MIN); byMax = Math.min(byMax, spBy + DRIP_PARENT_AGE_MAX); }
+  } else {
+    byMin = c.by - DRIP_PARENT_AGE_MAX;
+    byMax = c.by - DRIP_PARENT_AGE_MIN;
+  }
+  var why = !hood ? 'no neighborhood on the row'
+    : (byMin > byMax ? 'no ' + type + ' fits ' + DRIP_PARENT_AGE_MIN + '–' + DRIP_PARENT_AGE_MAX + ' years apart' : '');
+  var sex = wantSex || (rng() < 0.5 ? 'female' : 'male');
+  var names = sex === 'female' ? GC_FEMALE_FIRST_NAMES : GC_MALE_FIRST_NAMES;
+  var first = '';
+  for (var tries = 0; !why && tries < 25; tries++) {
+    var f = names[Math.floor(rng() * names.length)];
+    if (!taken[normalizeCitizenName_(f) + ' ' + normalizeCitizenName_(c.surname)]) { first = f; break; }
+  }
+  if (!why && !first) why = 'no free first name with ' + c.surname;
+  if (why) {
+    Logger.log('checkFamilyMatchPromotions_: ' + c.pop + ' drawn for a ' + type + ' — ' + why + ' (C' + cycle + ')');
+    return null;
+  }
+  var by = byMin + Math.floor(rng() * (byMax - byMin + 1));
+  var gh = gData[0], row = gh.map(function () { return ''; });
+  var put = function (name, v) { var i = findColByName_(gh, name); if (i >= 0) row[i] = v; };
+  put('First', first);
+  put('Last', c.surname);
+  put('BirthYear', by);
+  put('Neighborhood', hood);
+  put('Occupation', (simYear - by) < 18 ? 'student' : GC_OCCUPATIONS[Math.floor(rng() * GC_OCCUPATIONS.length)]);
+  put('EmergenceCount', 0);
+  put('EmergedCycle', 'Cycle ' + cycle);
+  put('EmergenceContext', 'Family: ' + type + ' of ' + String(c.row[L.first] || '').trim() + ' ' + c.surname + ' (' + c.pop + '), C' + cycle);
+  put('Status', 'Family');
+  put('Sex', sex);
+  put('FamilyOf', c.pop);
+  put('FamilyRole', type);
+  return { row: row, first: first, by: by };
+}
+
 function checkFamilyMatchPromotions_(ctx, cycle) {
-  var results = { linked: 0, released: 0, drawn: 0, noFit: 0 };
+  var results = { linked: 0, released: 0, drawn: 0, noFit: 0, minted: 0 };
   if (!ctx || !ctx.ledger || typeof safeRand_ !== 'function') return results;
   // The lottery is a cycle event — manual admin runs (runAdvancementIntakeManual)
   // carry no ctx.rng/rngSeed and must not fire it (safeRand_ would throw).
@@ -2318,13 +2375,17 @@ function checkFamilyMatchPromotions_(ctx, cycle) {
       var list = links.byAnchor[anchorPop][role];
       for (var k = list.length - 1; k >= 0; k--) {
         var gr = list[k];
-        var open = !!anchorAt && familySpotsOpen_(L, anchorAt.row, simYear, links.byAnchor[anchorPop], gr, false)[role] >= 1;
+        // engine.339 (builder 2026-11-20): a child is a fresh mint, never a pool row renamed — a child or parent link
+        // that carries a MaidenName is a background citizen the old draw renamed, and goes back under its own name
+        var renamed = role !== 'spouse' && !!String(gData[gr][fc.maiden] || '').trim();
+        var open = !renamed && !!anchorAt && familySpotsOpen_(L, anchorAt.row, simYear, links.byAnchor[anchorPop], gr, false)[role] >= 1;
         if (open) continue;
         releaseFamilyLink_(genericSheet, gData, gr, fc, gL, cycle);
         list.splice(k, 1);
         results.released++;
         Logger.log('checkFamilyMatchPromotions_: released ' + String(gData[gr][gF]) + ' ' + String(gData[gr][gL]) +
-          ' — the ' + role + ' spot of ' + anchorPop + ' closed (C' + cycle + ')');
+          (renamed ? ' — a ' + role + ' is minted, never renamed; back to their own name'
+                   : ' — the ' + role + ' spot of ' + anchorPop + ' closed') + ' (C' + cycle + ')');
       }
     });
   }
@@ -2415,17 +2476,31 @@ function checkFamilyMatchPromotions_(ctx, cycle) {
       var pg = (pRow && L.gender >= 0) ? String(pRow[L.gender] || '').trim().toLowerCase() : '';
       wantSex = pg === 'female' ? 'male' : (pg === 'male' ? 'female' : '');
     }
-    var byMin, byMax;
-    if (type === 'spouse') { byMin = c.by - DRIP_SPOUSE_AGE_BAND; byMax = c.by + DRIP_SPOUSE_AGE_BAND; }
-    else if (type === 'parent') { byMin = c.by - DRIP_PARENT_AGE_MAX; byMax = c.by - DRIP_PARENT_AGE_MIN; }
-    else { byMin = c.by + DRIP_PARENT_AGE_MIN; byMax = c.by + DRIP_PARENT_AGE_MAX; }
+    // engine.339 (builder 2026-11-20): "A child is a fresh mint , gc is tier 5 in waiting" — a hit on a child or a
+    // parent spot makes a NEW background citizen born with the family's name; no pool row changes. A spouse is still
+    // drawn from the pool below and takes the name (a marriage).
+    if (type === 'child' || type === 'parent') {
+      var mint = mintFamilyGcRow_(gData, c, type, wantSex, aHood, taken, rowByPop, L, simYear, cycle, rng);
+      if (!mint) { results.noFit++; continue; }
+      genericSheet.getRange(gData.length + 1, 1, 1, mint.row.length).setValues([mint.row]); // the row lands whole, or not at all
+      gData.push(mint.row);
+      takeName(mint.first, c.surname);
+      if (!links.byAnchor[c.pop]) links.byAnchor[c.pop] = { spouse: [], child: [], parent: [] };
+      links.byAnchor[c.pop][type].push(gData.length - 1);
+      results.linked++;
+      results.minted++;
+      Logger.log('checkFamilyMatchPromotions_: ' + mint.first + ' ' + c.surname + ' (age ' + (simYear - mint.by) +
+        ') joins the background as the ' + type + ' of ' + c.pop + ' (C' + cycle + ')');
+      continue;
+    }
+    var byMin = c.by - DRIP_SPOUSE_AGE_BAND, byMax = c.by + DRIP_SPOUSE_AGE_BAND; // a spouse, from here on
     var fit = [];
     for (var q = 0; q < pool.length; q++) {
       var gi = pool[q];
       if (claimed[gi]) continue;
       var ga = gcAge(gi);
       if (!ga || ga.by < byMin || ga.by > byMax) continue;
-      if (type !== 'child' && ga.age < 18) continue;           // a spouse or a parent is an adult
+      if (ga.age < 18) continue;           // a spouse is an adult
       if (wantSex && (gX < 0 || String(gData[gi][gX] || '').trim().toLowerCase() !== wantSex)) continue;
       var gHood = gN >= 0 ? String(gData[gi][gN] || '').trim() : '';
       if (!aHood || !gHood || !(gHood === aHood || (prox && prox.near(gHood, aHood)))) continue;
@@ -3025,6 +3100,15 @@ function wireFamilyMatch_(ctx, newIdx, newPopId, targetPopId, matchType, now, cy
     Logger.log('wireFamilyMatch_: spouse link ' + newPopId + ' <-> ' + targetPopId + ' refused — a minor marries no one (engine.302)');
     return;
   }
+  // engine.339 (builder 2026-11-20): "no kid can be with[in] 21 years of age [of] their parent" — a child or parent
+  // link closer than DRIP_PARENT_AGE_MIN years is refused whole, logged, the rest of the mint stands
+  var byW = function (r) { return (r && iBYw >= 0) ? Number(r[iBYw]) || 0 : 0; };
+  var tooCloseW = function (kidRow, parRow) { var k = byW(kidRow), p = byW(parRow); return k > 0 && p > 0 && k - p < DRIP_PARENT_AGE_MIN; };
+  if ((matchType === 'child' && tooCloseW(newRow, target)) || (matchType === 'parent' && tooCloseW(target, newRow))) {
+    Logger.log('wireFamilyMatch_: ' + matchType + ' link ' + newPopId + ' -> ' + targetPopId + ' refused — a parent is at least ' +
+      DRIP_PARENT_AGE_MIN + ' years older than the child (engine.339)');
+    return;
+  }
   if (matchType === 'spouse') {
     if (iSpouse >= 0) { target[iSpouse] = newPopId; newRow[iSpouse] = targetPopId; }
     // engine.302: a spouse match is a marriage — both rows read married (the drip slot opens only on a
@@ -3063,7 +3147,11 @@ function wireFamilyMatch_(ctx, newIdx, newPopId, targetPopId, matchType, now, cy
     if (iParents >= 0) {
       var parents = [targetPopId];
       var sp = iSpouse >= 0 ? String(target[iSpouse] || '').match(/POP-\d+/) : null;
-      if (sp) parents.push(sp[0]);
+      var spRowW = null;
+      if (sp) for (var s2 = 0; s2 < rows.length; s2++) { if (rows[s2] && String(rows[s2][iPop] || '').trim() === sp[0]) { spRowW = rows[s2]; break; } }
+      if (sp && tooCloseW(newRow, spRowW)) { // engine.339: the spouse is too close in age to be this child's parent
+        Logger.log('wireFamilyMatch_: ' + sp[0] + ' not written as a parent of ' + newPopId + ' — under ' + DRIP_PARENT_AGE_MIN + ' years older (engine.339)');
+      } else if (sp) parents.push(sp[0]);
       newRow[iParents] = JSON.stringify(parents);
     }
     desc = 'child of ' + targetName;
@@ -3126,6 +3214,14 @@ function wireFamilyToDeceased_(ctx, newIdx, newPopId, deadPop, deadRow, matchTyp
   var deadName = (String(deadRow[iFirst] || '') + ' ' + String(deadRow[iLast] || '')).trim();
   var simYw = simYearOf_(ctx, cycle);
   var newBY = iBY >= 0 ? (Number(newRow[iBY]) || 0) : 0;
+  // engine.339 (builder 2026-11-20): a parent is at least DRIP_PARENT_AGE_MIN years older than the child — refused whole
+  var deadBY = iBY >= 0 ? (Number(deadRow[iBY]) || 0) : 0;
+  if (newBY > 0 && deadBY > 0 && ((matchType === 'child' && newBY - deadBY < DRIP_PARENT_AGE_MIN) ||
+                                  (matchType === 'parent' && deadBY - newBY < DRIP_PARENT_AGE_MIN))) {
+    Logger.log('wireFamilyToDeceased_: ' + matchType + ' link ' + newPopId + ' -> ' + deadPop + ' refused — a parent is at least ' +
+      DRIP_PARENT_AGE_MIN + ' years older than the child (engine.339)');
+    return;
+  }
   var desc;
   if (matchType === 'spouse') {
     if (newBY > 0 && (simYw - newBY) < 18) { Logger.log('wireFamilyToDeceased_: ' + newPopId + ' is a minor — no spouse link (engine.302)'); return; }
@@ -3137,7 +3233,9 @@ function wireFamilyToDeceased_(ctx, newIdx, newPopId, deadPop, deadRow, matchTyp
   } else if (matchType === 'child') {
     var pars = [deadPop];
     var dSp = iSpouse >= 0 ? ((String(deadRow[iSpouse] || '').match(/POP-\d+/) || [])[0] || '') : '';
-    if (dSp && pars.indexOf(dSp) < 0) pars.push(dSp);
+    var dSpBY = 0; // engine.339: the late citizen's spouse is written as a parent only at least DRIP_PARENT_AGE_MIN years older
+    if (dSp && iBY >= 0) for (var ds = 0; ds < rows.length; ds++) { if (rows[ds] && String(rows[ds][iPop] || '').trim() === dSp) { dSpBY = Number(rows[ds][iBY]) || 0; break; } }
+    if (dSp && pars.indexOf(dSp) < 0 && !(newBY > 0 && dSpBY > 0 && newBY - dSpBY < DRIP_PARENT_AGE_MIN)) pars.push(dSp);
     if (iParents >= 0) newRow[iParents] = JSON.stringify(pars);
     desc = 'child of the late ' + deadName;
   } else if (matchType === 'parent') {

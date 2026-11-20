@@ -61,3 +61,8 @@ The builder had filled the three A's rows by hand after the first read (BirthYea
 ## Item 2 (builder 2026-11-19)
 
 Carmen Mesa POP-00081: Status Active → Traded (Simulation_Ledger L61, read back), on the builder's word "Mesa was traded". The sports feed's traded trigger writes life lines only, never Status; the archive step (utilities/archiveCitizenExits.js, Traded → traded-away) moves the row at the next fire. Richards stays Active (builder: lives in Oakland while playing on the Mets).
+
+## Item 3 (builder 2026-11-19: "all we need to do is make Tomas and Isaac brothers")
+
+Cause: Isaac POP-01042 and Mei POP-01043 arrived at C101 in household HH-0101-K001 with Tomas POP-00744 (C84, own household HH-0084-525) as their child; no engine code or script in repo history writes a -K household; the link is in the oldest snapshot (2026-08-12). Not an active code path. Canon: Tomas, 34 at C84, line cook at the family taqueria his grandmother opened in 2009; podcast host / line cook at Harborline (C106); no canon names Isaac or Mei. Pages: Isaac and Mei none; Tomas 15 (C102–C108), one family line "My dad used to complain about it at dinner sometimes" (C102).
+Written, read back: Simulation_Ledger ChildrenIds Y871:Y872 → `[]`; Family_Relationships G19 (Child1 "POP-00744 Tomas Renteria") → blank. Kept: NumChildren 1 on both (the family lottery's slot); the Tomas–Isaac and Tomas–Mei family bonds (Relationship_Bond_Ledger, family 8, origin household) — the ledger and both relationship tabs have no sibling type, so the family bond is the brother link.

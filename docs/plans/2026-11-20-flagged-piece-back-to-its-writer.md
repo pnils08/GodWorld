@@ -3,7 +3,7 @@ title: Flagged Piece Back To Its Writer Plan
 created: 2026-11-20
 updated: 2026-11-20
 type: plan
-tags: [pipeline, active]
+tags: [pipeline, draft]
 sources:
   - scripts/cron-desk-run.js runWrite (gate → staged / flagged, :3300–3360), runWake (:3638), the :3735 route
   - scripts/cron-rhea-gate.js (verdict: pass, flags, summary, review; contractScore: opened / closed / purposeMet / inTarget, short, score, max)
@@ -20,6 +20,8 @@ pointers:
 **Goal:** a piece the gate flags goes back to the journalist who wrote it, with everything the gate found and its grade; he fixes that piece and it is gated again — the flagged stage is where that happens, not where the piece stops.
 
 **Rows:** pipeline.114 · **Owner:** research-build
+
+**Reverted 2026-11-20, before any live run.** The shell run's one finding was wrong: the quote the gate called fabricated is on Wilson Shepard's own page (`cp-POP-01022-c116-midday-tue`, "The rankings are a nice feather, but they don't win us a single possession."), and the fix cut it. The gate does not read a citizen's page, so a quote taken from one reads to it as invented — a send-back turns that wrong finding into an order. Nothing goes back until the gate's findings are right.
 
 ## Read (2026-11-20)
 
@@ -75,6 +77,7 @@ pointers:
 
 ## Changelog
 
+- 2026-11-20 (research-build) — Reverted (the build commit): the gate flagged a real quote from Wilson Shepard's page and the fix cut it. Builder: "never checked if it was wrong". Next: the gate reads the citizen's page.
 - 2026-11-20 (research-build) — Shell run on Tamsin's flagged C116 piece: sent back with its one finding, the fix passed the gate 0 findings, 3/3; ≈ $0.20. A round on a Sonnet seat is ~$0.18, not the ~$0.06 average.
 - 2026-11-20 (research-build) — Tasks 1–5 built, flagged pieces only (the builder's call still open); tests 349/349; live from Fri 18:15. A write run takes ~7 min, Discord 18:45: a few rounds still land.
 - 2026-11-20 (research-build) — Plan written from the builder's words and the pipeline.77 / .79 / .83 records; nothing built. Sent for one review before the build.

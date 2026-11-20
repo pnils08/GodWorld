@@ -34,7 +34,6 @@ const crypto = require('crypto');
 const { execFileSync } = require('child_process');
 const ASK_ARGV_MAX = 100 * 1024;   // under the kernel's 128 KiB single-argument cap, with room for the rest of argv
 const articleContamination = require('./articleContamination');
-const sentBack = require('../lib/sentBack');   // pipeline.114: a flagged piece goes back to its writer
 const { centralDate } = require('./centralDate');   // the newsroom's day is the Central date the crontab runs on, not the UTC date
 
 const ROOT = path.join(__dirname, '..');
@@ -3243,154 +3242,114 @@ async function runWrite(assign) {
   // below (contamination, verbatim, Rhea's --article-packet) reads the amended Packet.
   if (writerTools) writePacket = readJson(stateFile) || writePacket;
 
+  const draftText = fs.readFileSync(draftPath, 'utf8');
+  const shape = require('./livedArticleShape').isSummaryArticle(draftText);
+  const s344Gate = PACKET_ACTIVE ? require('./s344ArticleGate').evaluate(draftText, {
+    desk,
+    assignment: assignment && assignment.story && (assignment.story.angle || assignment.story.label) || '',
+    quotes,
+    packet: writePacket,
+    requireQuote: false,
+  }) : { fail: false, findings: [] };
+  if (!PACKET_ACTIVE && shape.fail) {
+    throw new Error('W3 refused summary article: ' + shape.reasons.join(','));
+  }
+
+  const contamination = articleContamination.scanFile(draftPath, { desk, packet: writePacket });
+  if (contamination.fail) {
+    log('deterministic contamination blocker: ' + contamination.findings
+      .map(row => row.check + '=' + row.issue).join('; '));
+  }
+  if (s344Gate.fail) {
+    log('s344 slot findings (non-blocking): ' + s344Gate.findings
+      .map(row => row.check + '=' + row.issue).join('; '));
+  }
+  if (s344Gate.observations && s344Gate.observations.length) {
+    log('s344 slot observations: ' + s344Gate.observations
+      .map(row => row.check + '=' + row.issue).join('; '));
+  }
+  if (PACKET_ACTIVE && shape.fail) {
+    log('article shape notes (non-blocking): ' + shape.reasons.join(','));
+  }
+  if (PACKET_ACTIVE && shape.observations && shape.observations.length) {
+    log('article shape observations: ' + shape.observations.join(','));
+  }
+
+  // pipeline.75 — deterministic checks. thin flags the draft whatever Rhea says; verbatim slice
+  // text is a WARN in the record only. The engine-term check was retired 2026-10-18 (builder:
+  // ledger terms are not contamination; there is no engine-words gate).
+  const targetWords = writePacket && writePacket.reviewProfile && writePacket.reviewProfile.articleContract &&
+    writePacket.reviewProfile.articleContract.targetWords || null;
+  const thin = thinCheck(draftText, targetWords, ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.thinFloor);
+  const verbatim = PACKET_ACTIVE ? verbatimSliceRuns(draftText, writePacket) : [];
+  const checkFlags = thin.thin ? [thin.reason] : [];
+  if (checkFlags.length) log('deterministic check flags: ' + checkFlags.join('; '));
+  if (verbatim.length) log('WARN verbatim slice text: ' + verbatim.map(h => '"' + h.run + '"').join('; '));
+
+  // gate (skipped for --no-gate samples)
+  //
+  // pipeline.62 — Rhea is the gate. Two things skip her, both §4.7 doctrine:
+  //   1. the contamination wall — a second Oakland printed over the sheet
+  //      (real-world entities, imported blight, lattice speech, invented
+  //      voices, repair chrome), which explicitly overrides a Rhea pass;
+  //   2. a genuine assignment swap — a faith coverage-gap INTAKE stapled to a
+  //      transit story. That is a contradiction of the recorded assignment,
+  //      and Rhea reads the draft, not the assignment pairing, so she cannot
+  //      catch it herself.
+  // Slot findings (missing '?', assignment-token overlap, phase words in a
+  // lede) are observations for the log, never a reason a draft goes unseen.
+  let rhea = null, pass = false, rheaProof = null;
+  let blockedContractScore = null; // pipeline.77
+  const assignmentSwap = PACKET_ACTIVE &&
+    s344Gate.findings.some(row => row.issue === 'assignment-intake-mismatch');
+  if (assignmentSwap) log('assignment swap — INTAKE does not belong to this story; Rhea skipped');
   // pipeline.89 (builder 2026-10-25) — gate 'off': no Rhea verdict on this seat's path. The
   // contamination wall stays and decides staged vs flagged; the contract grade still runs below.
   const gateOff = !!(ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.gate === 'off');
-  // pipeline.114: the checks and the gate, on the first draft and again on each fix of a piece the desk sent back.
-  const gateDraft = () => {
-    const draftText = fs.readFileSync(draftPath, 'utf8');
-    const shape = require('./livedArticleShape').isSummaryArticle(draftText);
-    const s344Gate = PACKET_ACTIVE ? require('./s344ArticleGate').evaluate(draftText, {
-      desk,
-      assignment: assignment && assignment.story && (assignment.story.angle || assignment.story.label) || '',
-      quotes,
-      packet: writePacket,
-      requireQuote: false,
-    }) : { fail: false, findings: [] };
-    if (!PACKET_ACTIVE && shape.fail) {
-      throw new Error('W3 refused summary article: ' + shape.reasons.join(','));
-    }
-
-    const contamination = articleContamination.scanFile(draftPath, { desk, packet: writePacket });
-    if (contamination.fail) {
-      log('deterministic contamination blocker: ' + contamination.findings
-        .map(row => row.check + '=' + row.issue).join('; '));
-    }
-    if (s344Gate.fail) {
-      log('s344 slot findings (non-blocking): ' + s344Gate.findings
-        .map(row => row.check + '=' + row.issue).join('; '));
-    }
-    if (s344Gate.observations && s344Gate.observations.length) {
-      log('s344 slot observations: ' + s344Gate.observations
-        .map(row => row.check + '=' + row.issue).join('; '));
-    }
-    if (PACKET_ACTIVE && shape.fail) {
-      log('article shape notes (non-blocking): ' + shape.reasons.join(','));
-    }
-    if (PACKET_ACTIVE && shape.observations && shape.observations.length) {
-      log('article shape observations: ' + shape.observations.join(','));
-    }
-
-    // pipeline.75 — deterministic checks. thin flags the draft whatever Rhea says; verbatim slice
-    // text is a WARN in the record only. The engine-term check was retired 2026-10-18 (builder:
-    // ledger terms are not contamination; there is no engine-words gate).
-    const targetWords = writePacket && writePacket.reviewProfile && writePacket.reviewProfile.articleContract &&
-      writePacket.reviewProfile.articleContract.targetWords || null;
-    const thin = thinCheck(draftText, targetWords, ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.thinFloor);
-    const verbatim = PACKET_ACTIVE ? verbatimSliceRuns(draftText, writePacket) : [];
-    const checkFlags = thin.thin ? [thin.reason] : [];
-    if (checkFlags.length) log('deterministic check flags: ' + checkFlags.join('; '));
-    if (verbatim.length) log('WARN verbatim slice text: ' + verbatim.map(h => '"' + h.run + '"').join('; '));
-
-    // gate (skipped for --no-gate samples)
-    //
-    // pipeline.62 — Rhea is the gate. Two things skip her, both §4.7 doctrine:
-    //   1. the contamination wall — a second Oakland printed over the sheet
-    //      (real-world entities, imported blight, lattice speech, invented
-    //      voices, repair chrome), which explicitly overrides a Rhea pass;
-    //   2. a genuine assignment swap — a faith coverage-gap INTAKE stapled to a
-    //      transit story. That is a contradiction of the recorded assignment,
-    //      and Rhea reads the draft, not the assignment pairing, so she cannot
-    //      catch it herself.
-    // Slot findings (missing '?', assignment-token overlap, phase words in a
-    // lede) are observations for the log, never a reason a draft goes unseen.
-    let rhea = null, pass = false, rheaProof = null;
-    let blockedContractScore = null; // pipeline.77
-    const assignmentSwap = PACKET_ACTIVE &&
-      s344Gate.findings.some(row => row.issue === 'assignment-intake-mismatch');
-    if (assignmentSwap) log('assignment swap — INTAKE does not belong to this story; Rhea skipped');
-    const skipRhea = contamination.fail || assignmentSwap || gateOff;
-    if (gateOff && !NO_GATE) log('gate OFF for this seat (pipeline.89) — contamination wall only, no Rhea verdict');
-    if (NO_GATE) {
-      log('gate SKIPPED (--no-gate sample) — output is ungated, NOT canon');
-    } else if (!skipRhea) {
-      // codex pipeline.76 #3: a fresh verdict or none — a stale same-name verdict is never re-read.
-      fs.rmSync(path.join(COMPARE, base + '.rhea.json'), { force: true });
-      log('gating...');
-      try {
-        execFileSync('node', [path.join(ROOT, 'scripts', 'cron-rhea-gate.js'), '--draft', path.relative(ROOT, draftPath),
-          '--model', GATE_MODEL, '--backend', GATE_BACKEND, '--api-model', GATE_API_MODEL, '--cycle', cycle,
-          ...(personaSlug ? ['--persona', personaSlug] : []),
-          ...(PACKET_ACTIVE ? ['--article-packet', path.relative(ROOT, stateFile)] : []),
-          // pipeline.45: the wake-2 packet backs the INTAKE quoted-source check.
-          '--packet', path.relative(ROOT, packetPath),
-          // Task 2.5.3: wake-1 validated canon facts ride into the gate as
-          // verified prior coverage (cited history is not a contradiction).
-          ...(angle && angle.canonResearch ? ['--canon-facts', path.relative(ROOT, anglePath)] : []),
-          ...(rewardLoop ? ['--contract-score'] : [])],
-          { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
-      } catch (_) { /* gate exit 2/3 — verdict json still written */ }
-      const verdictPath = path.join(COMPARE, base + '.rhea.json');
-      rhea = readJson(verdictPath);
-      rheaProof = exactRheaProof(rhea, fs.readFileSync(draftPath, 'utf8'),
-        writerTools && writePacket && writePacket.manifest ? writePacket.manifest.id : null);
-      pass = rheaProof.ok;
-      if (rhea && rhea.pass === true && !pass) log('Rhea pass rejected: ' + rheaProof.reason);
-    } else if (rewardLoop) {
-      // pipeline.77: blocked before Rhea, still graded for shape (C111 Carmen: contamination flag, no grade).
-      try {
-        execFileSync('node', [path.join(ROOT, 'scripts', 'cron-rhea-gate.js'), '--draft', path.relative(ROOT, draftPath),
-          '--contract-only', '--backend', GATE_BACKEND, '--api-model', GATE_API_MODEL, '--cycle', cycle,
-          ...(personaSlug ? ['--persona', personaSlug] : [])], { cwd: ROOT, stdio: 'inherit', timeout: 300000 });
-        const co = readJson(path.join(COMPARE, base + '.contract.json'));
-        if (co && co.contractScore) blockedContractScore = co.contractScore;
-      } catch (e) { log('contract score (no Rhea) failed (non-fatal): ' + e.message); }
-    }
-    if (gateOff && !NO_GATE && !contamination.fail) {
-      // The filing carries a proof-shaped record (hash + grade) so Saturday's and the router's
-      // exact-hash readers take it; `gate: 'off'` says no model read it. No verdict file exists.
-      rheaProof = { ok: true, articleSha256: crypto.createHash('sha256').update(fs.readFileSync(draftPath, 'utf8')).digest('hex') };
-      pass = true;
-    }
-    if (pass && checkFlags.length) { pass = false; log('Rhea pass overridden by deterministic checks: ' + checkFlags.join('; ')); }
-    return { contamination, targetWords, thin, verbatim, checkFlags, rhea, pass, rheaProof, blockedContractScore, assignmentSwap };
-  };
-  let gate = gateDraft();
-  // pipeline.114 (builder 2026-11-19/20: "All crons get failed articles returned to them already"; "didn't finish the
-  // build"): a flagged piece goes back to the journalist who wrote it — his piece as filed, every finding the gate
-  // returned, the grade — he fixes that piece and it is gated again. It goes back while each fix clears findings; a
-  // fix with as many as the piece before ends the return (lib/sentBack.js goesBack). Every round is kept on file.
-  const rounds = [];
-  let findingsBefore = null;
-  while (!NO_GATE && !REGATE && sentBack.goesBack(gate, findingsBefore)) {
-    const n = rounds.length + 1;
-    const kept = path.join(COMPARE, base + '.sent-back-' + n + '.md');
-    const noteFile = path.join(COMPARE, base + '.sent-back-' + n + '.json');
-    fs.copyFileSync(draftPath, kept);
-    const note = sentBack.noteOf(fs.readFileSync(draftPath, 'utf8'), gate);
-    fs.writeFileSync(noteFile, JSON.stringify(note, null, 2));
-    rounds.push({ round: n, draft: path.relative(ROOT, kept), findings: note.findings.length, grade: note.grade,
-      rheaPass: gate.rhea ? gate.rhea.pass : null });
-    findingsBefore = note.findings.length;
-    log('sent back to ' + (byline ? byline.name : desk) + ' (' + n + '): ' + note.findings.length + ' finding(s)' +
-      (note.grade ? ', graded ' + note.grade.score + '/' + note.grade.max : ''));
+  const skipRhea = contamination.fail || assignmentSwap || gateOff;
+  if (gateOff && !NO_GATE) log('gate OFF for this seat (pipeline.89) — contamination wall only, no Rhea verdict');
+  if (NO_GATE) {
+    log('gate SKIPPED (--no-gate sample) — output is ungated, NOT canon');
+  } else if (!skipRhea) {
+    // codex pipeline.76 #3: a fresh verdict or none — a stale same-name verdict is never re-read.
+    fs.rmSync(path.join(COMPARE, base + '.rhea.json'), { force: true });
+    log('gating...');
     try {
-      execFileSync('node', writerArgs.concat(['--sent-back', path.relative(ROOT, noteFile)]), { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
-    } catch (e) {
-      log('the fix did not come back (' + e.message + '); the piece as filed stands');
-      fs.copyFileSync(kept, draftPath);
-      break;
-    }
-    if (!fs.existsSync(draftPath) || fs.readFileSync(draftPath, 'utf8') === fs.readFileSync(kept, 'utf8')) {
-      log('the fix came back unchanged; the piece as filed stands');
-      fs.copyFileSync(kept, draftPath);
-      break;
-    }
-    if (writerTools) writePacket = readJson(stateFile) || writePacket;
-    gate = gateDraft();
-    log('fix ' + n + ' gated: ' + (gate.pass ? 'PASS' : sentBack.findingsOf(gate).length + ' finding(s)'));
+      execFileSync('node', [path.join(ROOT, 'scripts', 'cron-rhea-gate.js'), '--draft', path.relative(ROOT, draftPath),
+        '--model', GATE_MODEL, '--backend', GATE_BACKEND, '--api-model', GATE_API_MODEL, '--cycle', cycle,
+        ...(personaSlug ? ['--persona', personaSlug] : []),
+        ...(PACKET_ACTIVE ? ['--article-packet', path.relative(ROOT, stateFile)] : []),
+        // pipeline.45: the wake-2 packet backs the INTAKE quoted-source check.
+        '--packet', path.relative(ROOT, packetPath),
+        // Task 2.5.3: wake-1 validated canon facts ride into the gate as
+        // verified prior coverage (cited history is not a contradiction).
+        ...(angle && angle.canonResearch ? ['--canon-facts', path.relative(ROOT, anglePath)] : []),
+        ...(rewardLoop ? ['--contract-score'] : [])],
+        { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
+    } catch (_) { /* gate exit 2/3 — verdict json still written */ }
+    const verdictPath = path.join(COMPARE, base + '.rhea.json');
+    rhea = readJson(verdictPath);
+    rheaProof = exactRheaProof(rhea, fs.readFileSync(draftPath, 'utf8'),
+      writerTools && writePacket && writePacket.manifest ? writePacket.manifest.id : null);
+    pass = rheaProof.ok;
+    if (rhea && rhea.pass === true && !pass) log('Rhea pass rejected: ' + rheaProof.reason);
+  } else if (rewardLoop) {
+    // pipeline.77: blocked before Rhea, still graded for shape (C111 Carmen: contamination flag, no grade).
+    try {
+      execFileSync('node', [path.join(ROOT, 'scripts', 'cron-rhea-gate.js'), '--draft', path.relative(ROOT, draftPath),
+        '--contract-only', '--backend', GATE_BACKEND, '--api-model', GATE_API_MODEL, '--cycle', cycle,
+        ...(personaSlug ? ['--persona', personaSlug] : [])], { cwd: ROOT, stdio: 'inherit', timeout: 300000 });
+      const co = readJson(path.join(COMPARE, base + '.contract.json'));
+      if (co && co.contractScore) blockedContractScore = co.contractScore;
+    } catch (e) { log('contract score (no Rhea) failed (non-fatal): ' + e.message); }
   }
-  const { contamination, targetWords, thin, verbatim, checkFlags, rhea, pass, rheaProof, blockedContractScore } = gate;
+  if (gateOff && !NO_GATE && !contamination.fail) {
+    // The filing carries a proof-shaped record (hash + grade) so Saturday's and the router's
+    // exact-hash readers take it; `gate: 'off'` says no model read it. No verdict file exists.
+    rheaProof = { ok: true, articleSha256: crypto.createHash('sha256').update(fs.readFileSync(draftPath, 'utf8')).digest('hex') };
+    pass = true;
+  }
+  if (pass && checkFlags.length) { pass = false; log('Rhea pass overridden by deterministic checks: ' + checkFlags.join('; ')); }
 
   // route (the wall — identical semantics to runWake)
   const destDir = NO_GATE ? SAMPLES : (pass ? STAGED : FLAGGED);
@@ -3453,7 +3412,6 @@ async function runWrite(assign) {
         : stagedRheaProof(rhea, rheaProof.articleSha256,
           path.join(COMPARE, base + '.rhea.json')),
       note: 'M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.',
-      ...(rounds.length ? { sentBack: rounds } : {}),   // pipeline.114: the rounds this piece went back to its writer
       stagedAt: new Date().toISOString()
     }, null, 2));
     // pipeline.78 (codex #3): bind this filing's own Packet — Saturday's contamination re-scan
@@ -3478,8 +3436,7 @@ async function runWrite(assign) {
         contamination: contamination.findings,
         summary: contamination.fail ? 'deterministic world-contamination blocker failed' :
           checkFlags.length ? 'deterministic checks: ' + checkFlags.join('; ') :
-          (rhea && rhea.summary) || 'no rhea verdict',
-        sentBack: rounds }, null, 2));
+          (rhea && rhea.summary) || 'no rhea verdict' }, null, 2));
   }
 
   // pipeline.60: Nia filed on this cycle's un-recapped episodes — mark them in
@@ -3564,7 +3521,6 @@ async function runWrite(assign) {
     // pipeline.77 group — shape score from the gate; the SELF-SCORE footer is retired for the group
     rewardLoop, contractScore, gradeRecord,
     article: path.relative(ROOT, destPath),
-    sentBack: rounds,   // pipeline.114
     selfRecord, ranAt: new Date().toISOString()
   };
   fs.writeFileSync(path.join(COMPARE, base + '.wake.json'), JSON.stringify(record, null, 2));
@@ -3587,9 +3543,7 @@ async function runWrite(assign) {
       score: contractScore.score, max: contractScore.max || 4, opened: contractScore.opened,
       purposeMet: contractScore.purposeMet, inTarget: contractScore.inTarget, short: contractScore.short }) : null,
     rheaPass: rhea ? rhea.pass : null, disposition: record.disposition, words: thin.words,
-    thin: thin.thin, verbatim: verbatim.length, toolCalls: record.toolCalls, capHit: record.capHit,
-    // pipeline.114: each time the piece went back — the findings and grade it went back with; the row's own grade is the last
-    sentBack: rounds.map((r) => ({ round: r.round, findings: r.findings, score: r.grade ? r.grade.score : null, rheaPass: r.rheaPass })) });
+    thin: thin.thin, verbatim: verbatim.length, toolCalls: record.toolCalls, capHit: record.capHit });
   // Task 2.5.3 — §4 closes the growing story doc: where the article landed.
   storyDocAppend(stem, '§4 THE ARTICLE (wake 3)',
     '- draft: ' + path.relative(ROOT, destPath) + '\n- disposition: ' + record.disposition +

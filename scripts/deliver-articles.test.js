@@ -25,18 +25,4 @@ try {
 } finally {
   fs.rmSync(root, { recursive: true, force: true });
 }
-// pipeline.114: how many times a piece went back to its writer, from its staged sidecar or its flags file
-{
-  const { sentBackRounds } = require('./deliver-articles');
-  const d = fs.mkdtempSync(path.join(os.tmpdir(), 'test-only-sent-back-'));
-  try {
-    fs.writeFileSync(path.join(d, 'culture_c116_x.staged.json'), JSON.stringify({ sentBack: [{ round: 1 }, { round: 2 }] }));
-    fs.writeFileSync(path.join(d, 'culture_c116_y.flags.json'), JSON.stringify({ flags: [], sentBack: [{ round: 1 }] }));
-    fs.writeFileSync(path.join(d, 'culture_c116_z.staged.json'), JSON.stringify({ status: 'staged' }));
-    assert.equal(sentBackRounds(path.join(d, 'culture_c116_x.staged.md'), false), 2, 'staged: the rounds on its sidecar');
-    assert.equal(sentBackRounds(path.join(d, 'culture_c116_y.md'), true), 1, 'flagged: the rounds on its flags file');
-    assert.equal(sentBackRounds(path.join(d, 'culture_c116_z.staged.md'), false), 0, 'never sent back');
-    assert.equal(sentBackRounds(path.join(d, 'absent.md'), true), 0, 'no record');
-  } finally { fs.rmSync(d, { recursive: true, force: true }); }
-}
 console.log('deliver-articles.test.js: PASS');

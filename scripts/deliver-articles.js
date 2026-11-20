@@ -62,15 +62,6 @@ function bylineFor(file, fallbackPersona) {
   return fallbackPersona.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 }
 
-// pipeline.114: how many times the desk sent this piece back — from the staged sidecar or the flags file
-function sentBackRounds(file, flagged) {
-  const stem = path.basename(file).replace(flagged ? /(?:-\d{3,4})?\.md$/ : /\.md$/, '');
-  try {
-    const data = JSON.parse(fs.readFileSync(path.join(path.dirname(file), stem + (flagged ? '.flags.json' : '.json')), 'utf8'));
-    return Array.isArray(data.sentBack) ? data.sentBack.length : 0;
-  } catch (_) { return 0; }
-}
-
 function flagLines(file) {
   const stem = path.basename(file).replace(/(?:-\d{3,4})?\.md$/, '');
   const flagFile = path.join(path.dirname(file), stem + '.flags.json');
@@ -127,26 +118,12 @@ async function main() {
       ];
       if (spec.label.includes('FLAGGED')) {
         const flags = flagLines(file);
-        for (const f of flags) lines.push('> gate: ' + f);   // every finding (builder 2026-11-19: "anything capped is garbage")
+        for (const f of flags.slice(0, 5)) lines.push('> gate: ' + f.slice(0, 300));
         if (!flags.length) lines.push('> gate: (no findings recorded)');
       }
-      // pipeline.114: a piece the desk sent back to its writer says how many times, and how it ended
-      const rounds = sentBackRounds(file, spec.label.includes('FLAGGED'));
-      if (rounds) lines.push('> sent back to the writer ' + rounds + (rounds === 1 ? ' time' : ' times') +
-        (spec.label.includes('FLAGGED') ? '; still flagged after the last fix' : '; fixed and passed'));
       const copyPath = path.join(scratch, name.replace(/\.staged(-\d{3,4})?\.md$/, '.md'));
-      let body = readerCopy(fs.readFileSync(file, 'utf8')) + '\n';
-      let message = lines.join('\n');
-      // Discord takes 2,000 characters a message: when the findings do not fit, every one rides at the top of the
-      // attached piece and the message says how many
-      if (message.length > 1900) {
-        const gate = lines.filter((l) => l.startsWith('> gate: '));
-        message = lines.filter((l) => !l.startsWith('> gate: '))
-          .concat(['> gate: ' + gate.length + ' findings — every one at the top of the attached file']).join('\n');
-        body = 'WHAT THE GATE FOUND\n' + gate.map((l) => '- ' + l.slice('> gate: '.length)).join('\n') + '\n\n' + body;
-      }
-      fs.writeFileSync(copyPath, body);
-      await post(message, copyPath, state, name);
+      fs.writeFileSync(copyPath, readerCopy(fs.readFileSync(file, 'utf8')) + '\n');
+      await post(lines.join('\n'), copyPath, state, name);
       posted++;
       console.log('delivered: ' + name);
     }
@@ -185,4 +162,4 @@ if (require.main === module) {
   main().catch(e => { console.error('deliver-articles failed: ' + e.message); process.exit(1); });
 }
 
-module.exports = { journalFor, sentBackRounds };
+module.exports = { journalFor };

@@ -45,3 +45,7 @@ Read-only. Live sheets read 2026-11-19 (Simulation_Ledger, Generic_Citizens, As_
 - Still there: Varek's daughter (C109, C111), Aybar "the kid" (C113), Coen Cartier "normal workday" (C115), Jonas Patel "Tenderloin" (C114), Elijah Brown's UNDOCKED board line (C115), Jun Leu "high school" (C109).
 - Not in the mirror: Mags C112 garble, Clarissa Dane game logs, Brianna Lee's C126 entry (cycle cap). Not checked in Supermemory itself.
 - C116 entries (128, 68 citizens): no zeroed citizen speaking of their kids, no outside-city places, no doubled words. One new board line of the Elijah Brown kind: Manju Abebe POP-00918 (plumber), "I'm 9th on the board… I flew until the show's time ran out". UNDOCKED bet lines (wins/losses) are the bets dial, not flagged.
+
+## Item 1 closed (builder 2026-11-19)
+
+The builder had filled the three A's rows by hand after the first read (BirthYear, Gender, Mooney's Income); "What was there was accurate … nothing I added needed to be looked at". Only the employer was owed: EmployerBizId = BIZ-00005 (Oakland Athletics) written to Simulation_Ledger AS1065:AS1067 (POP-01238/01239/01240) through the Sheets connector, read back. Dials were already flat (every base 50).

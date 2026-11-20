@@ -126,6 +126,19 @@ Verbatim: "Varek himself talks about his daughter, [expletive] your data, the li
 
 Withdrawn on those words: every repair that removes or ignores the child count — the one-cell correction, the page edits, and the read-side guard on unbacked counts (which also could not tell a dice count from a birth count; the birth code adds 1 to a parent's count with no child row, so a bare count is how the sim stores an off-camera child). The daughter stands as an event the world has lived (CLAUDE.md rule 4); what the world does with her is the builder's. Unchanged and unbuilt: no dice at the arrival door, the wake bench-bleed guard below. No row or page touched.
 
+## Builder's words 2026-11-20 (research-build session; read of the C116 log and the birth / GC rate)
+
+Verbatim, in order: "In my mind 1 birth is already too much per cycle" · "1 a cycle is a lot ," · "56 year old child ??  Oh lord this is trash code you built on this" · "And no person on GC would change other than a spouse , a kid would never come from GC unless it already has the same last name , this is trash and not what I asked to be built" · "Why would a kids last name change from GC to sim ledger ? How is that even remotely possible? They all adopted ?"
+
+Read against the code and the live sheets, 2026-11-20 (C116 the last fire; execution logs C107–C116, the live Generic_Citizens tab, ledger snapshots in git):
+
+- **Births, C107–C116:** 6 (C108, C109, C111, C113, C114, C116), all `checkBirth_` (generationalEventsEngine.js); the single-mother path drew none. `getSeasonalLimits_` caps births at 1 a Cycle (2 in month 9). 171 Active married citizens aged 26–42 with a HouseholdId roll each Cycle at 0.3–0.5% base → ≈0.6 a Cycle. `householdFormationEngine.js` `generateBirths_` / `processMarriages_` are empty stubs.
+- **Weddings, C107–C116:** 0 through the bond romance (`P5 MARRIAGE` never logged); one romance began C114 ×2, C116 ×1; one GC courtship began C115; one intake arrival wired as a spouse C109 (`wireFamilyMatch_`).
+- **The family lottery, C113–C116 (first four fires that log it):** 17 child links, 11 spouse links, 0 parent; 6 child links released (C115 ×1, C116 ×5). Standing on the live tab: 11 child + 11 spouse rows, Status `Family`, every one renamed to the family surname; 0 on the ledger. Of the 11 standing children 3 are minors (5, 12, 12), 8 are adults 19–56 — the child band is 18–45 years younger than the parent (`DRIP_PARENT_AGE_MIN/MAX`), so the draw mostly hands out grown children. The rename of a child is Task 2(c), never built; the lottery renamed children every fire since 11-08.
+- **Unexplained, not traced:** the six released children's parents (POP-00756, 00770, 00844, 00765, 00761, and Varek POP-00789) are single with NumChildren 0 on the live sheet; their snapshot counts were 1–4 through 11-12 (Varek 1 through 11-01). Between the 11-12 and 11-14 snapshots 84 single citizens' NumChildren went to 0, none rose; Varek's went to 0 between 11-01 and 11-12. No engine writer found that lowers an existing row's count (births add 1; the intake door writes 0 on a new row only; `formIntakeHouseholds_` sets a new household head's count). What wrote them is unknown.
+
+Nothing built, no row touched.
+
 ## Found the same day, not part of the mint: the wake writers put bench weeks on real citizens' pages
 
 Recovered 2026-11-08 (S643) from the ended session's transcript — the 15:37 finding was never committed; that session's close said it was recorded in this plan and it was not. Status: **found, not fixed, nothing built, no page touched. Open, builder's.**
@@ -149,6 +162,7 @@ The shape of the fix, if the builder wants one: a guard in the wake writers that
 
 ## Changelog
 
+- 2026-11-20 (research-build) — builder's words on birth rate and GC children recorded verbatim; rates read off C107–C116 (§Builder's words 2026-11-20); 84 child counts lowered by an unfound writer. Nothing touched.
 - 2026-11-08 (research-build, S643) — builder's words on Varek's daughter recorded; every repair that removes or ignores the child count withdrawn (§Builder's words, late 2026-11-08). No row or page touched.
 - 2026-11-08 (research-build, S643) — the bench-bleed finding (29 pages, 17 citizens, Cycles 119/126/116) recovered from the ended session's transcript and written here; part re-checked against the wake log, the rest carried and marked so. No code, page or row touched.
 - 2026-11-08 (research-build) — opened on the builder's word at session close; the evidence table read off the snapshot; no code touched.

@@ -3,7 +3,7 @@ title: Flagged Piece Back To Its Writer Plan
 created: 2026-11-20
 updated: 2026-11-20
 type: plan
-tags: [pipeline, draft]
+tags: [pipeline, active]
 sources:
   - scripts/cron-desk-run.js runWrite (gate → staged / flagged, :3300–3360), runWake (:3638), the :3735 route
   - scripts/cron-rhea-gate.js (verdict: pass, flags, summary, review; contractScore: opened / closed / purposeMet / inTarget, short, score, max)
@@ -36,12 +36,12 @@ pointers:
 
 | # | Task | Owner | Status |
 |---|------|-------|--------|
-| 1 | `runWrite`: on a gate fail, the same writer seat (same package, model, state) is called again with its own draft, every flag the gate returned (all of them, no cut), the Rhea summary, and the contract score with what fell short — told: this is your piece, the desk sent it back, fix what is named | rb | not started |
-| 2 | The fix is gated again by the same gate. Pass → `staged/` as today, its sidecar carrying both verdicts (first draft, fix). Fail → back again while each fix clears findings the one before carried; a fix that clears none stops the return and the piece stays in `flagged/` with every round on file — the stop is progress, not a count | rb | not started |
-| 3 | The scoreboard row (`reward-loop-c<N>.jsonl`) carries each round: first-draft grade and gate result, each fix's, findings cleared — so improvement shows per journalist and model, on the same piece | rb | not started |
-| 4 | Delivery and counts read the final state: a piece that passed on its fix posts as published-track with "fixed after the desk sent it back"; a piece still flagged posts every finding, not five | rb | not started |
-| 5 | `runWake` (:3638) and the :3735 route: read whether any cron still runs them; if one does, the same return; if none, say so here | rb | not started |
-| 6 | Tests on the return and the stop; one shell run on a C116 flagged piece (no publish); then live on the next 18:15 write run | rb | not started |
+| 1 | `runWrite`: on a gate fail, the same writer seat (same package, model, state) is called again with its own draft, every flag the gate returned (all of them, no cut), the Rhea summary, and the contract score with what fell short — told: this is your piece, the desk sent it back, fix what is named | rb | built 2026-11-20 — `lib/sentBack.js` (findings, note, the writer's block), `cron-desk-writer.js --sent-back`, `runWrite` gates through `gateDraft()` and loops before the route |
+| 2 | The fix is gated again by the same gate. Pass → `staged/` as today, its sidecar carrying both verdicts (first draft, fix). Fail → back again while each fix clears findings the one before carried; a fix that clears none stops the return and the piece stays in `flagged/` with every round on file — the stop is progress, not a count | rb | built 2026-11-20 — `goesBack`: a fix with as many findings as the piece before ends it; a fail with nothing named (no verdict) does not go back; a writer error or an unchanged fix keeps the piece as filed. Each round kept as `<stem>.sent-back-<n>.md` + `.json` |
+| 3 | The scoreboard row (`reward-loop-c<N>.jsonl`) carries each round: first-draft grade and gate result, each fix's, findings cleared — so improvement shows per journalist and model, on the same piece | rb | built 2026-11-20 — `sentBack` on the scoreboard row (round, findings, score, gate result), the `.wake.json` record, the staged sidecar, the flags file |
+| 4 | Delivery and counts read the final state: a piece that passed on its fix posts as published-track with "fixed after the desk sent it back"; a piece still flagged posts every finding, not five | rb | built 2026-11-20 — every finding; findings past Discord's 2,000 characters ride at the top of the attached piece; "sent back to the writer N times; fixed and passed / still flagged" |
+| 5 | `runWake` (:3638) and the :3735 route: read whether any cron still runs them; if one does, the same return; if none, say so here | rb | read 2026-11-20: neither runs from a cron (the `--wake` crontab line is commented "old"; the live write is `--stage=write --fanout`) — the return is in `runWrite` only |
+| 6 | Tests on the return and the stop; one shell run on a C116 flagged piece (no publish); then live on the next 18:15 write run | rb | tests 2026-11-20: `lib/sentBack.test.js` 26, `scripts/deliver-articles.test.js`; `node scripts/run-tests.js` 349/349. Shell run: awaits the builder's word (a model run). Live: Fri 2026-11-20 18:15 |
 
 ## Acceptance
 
@@ -75,4 +75,5 @@ pointers:
 
 ## Changelog
 
+- 2026-11-20 (research-build) — Tasks 1–5 built, flagged pieces only (the builder's call still open); tests 349/349; live from Fri 18:15. A write run takes ~7 min, Discord 18:45: a few rounds still land.
 - 2026-11-20 (research-build) — Plan written from the builder's words and the pipeline.77 / .79 / .83 records; nothing built. Sent for one review before the build.

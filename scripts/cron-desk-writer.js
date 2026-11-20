@@ -207,6 +207,9 @@ const CALL_TIMEOUT_MS = parseInt(arg('--call-timeout', '180000'), 10);
 // instead of the full 40k world_summary blob (the firehose that made C101 desks
 // self-filter). Additive — absent = the proven full-summary path, unchanged.
 const STATE_FILE = arg('--state-file', null);
+// pipeline.114: the desk sent this piece back — a note (lib/sentBack.js noteOf) with the piece as filed, every finding
+// and the grade. The writer reads it after the assignment and files the whole piece again.
+const SENT_BACK_FILE = arg('--sent-back', null);
 // A records seat (wake package `sourcing: "records"`) writing a Packet with no
 // approved quote: the shared "open on a person in a scene" brief would stop the
 // write or make the writer invent the scene (Carmen C109 bench: "peeling paint,
@@ -1478,7 +1481,8 @@ async function main() {
       'Ignore the stale desk workspace. Research EFFICIENTLY via the pointers — do not re-search the same source.\n\n' +
       priorArcKickoff +
       strictSourceKickoff +
-      worldState
+      worldState +
+      (SENT_BACK_FILE ? '\n\n' + require('../lib/sentBack').writerBlock(JSON.parse(fs.readFileSync(path.resolve(ROOT, SENT_BACK_FILE), 'utf8'))) : '')
     : 'Current cycle: ' + cycle + '. Write the ' + DESK + ' section for THIS cycle. The current world state is ' +
       'below — build your section from the EVENTS in it (do not invent events, players, or officials the state ' +
       'does not name). Read your IDENTITY/LENS/RULES + canon files for voice and rules, and use search_world for ' +

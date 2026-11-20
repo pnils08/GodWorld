@@ -128,7 +128,7 @@ Withdrawn on those words: every repair that removes or ignores the child count �
 
 ## Builder's words 2026-11-20 (research-build session; read of the C116 log and the birth / GC rate)
 
-Verbatim, in order: "In my mind 1 birth is already too much per cycle" · "1 a cycle is a lot ," · "56 year old child ??  Oh lord this is trash code you built on this" · "And no person on GC would change other than a spouse , a kid would never come from GC unless it already has the same last name , this is trash and not what I asked to be built" · "Why would a kids last name change from GC to sim ledger ? How is that even remotely possible? They all adopted ?"
+Verbatim, in order: "In my mind 1 birth is already too much per cycle" · "1 a cycle is a lot ," · "56 year old child ??  Oh lord this is trash code you built on this" · "And no person on GC would change other than a spouse , a kid would never come from GC unless it already has the same last name , this is trash and not what I asked to be built" · "Why would a kids last name change from GC to sim ledger ? How is that even remotely possible? They all adopted ?" · "A child is a fresh mint , gc is tier 5 in waiting , it makes no sense how you are changing tier 5 GC so they fit a kid code"
 
 Read against the code and the live sheets, 2026-11-20 (C116 the last fire; execution logs C107–C116, the live Generic_Citizens tab, ledger snapshots in git):
 

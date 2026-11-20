@@ -198,12 +198,19 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD stage 60 — the override vote counts each seat once (2026-11-19, engine-sheet, civic.49 N1)
+
+- **What:** one file, `phase05-citizens/civicInitiativeEngine.js` at `94728b5e4`, on stage 59. `processOverrideVote_` gets the Task 1 shape: each seat votes once; a faction that is neither lead nor opposition votes at 0.55; a blank lead/opposition reads OPP/CRC. Plan [[../plans/2026-11-19-ind-led-initiatives-can-pass]] N1.
+- **Proof:** parity 6,000 runs per case — OPP-CRC, OPP-blank, IND-OPP, CRC-OPP identical; IND-blank 0 → 611 overrides. Untested pairs: CRC-blank, OPP-IND. Tests 17/17. Bench SANDBOX 1004 @216 (stage 59 + the file; pull-back byte-identical), live-synced C116, fire C117 PASS (152 s): four bench-only rows staged vetoed with an override at C117 — INIT-009 (IND) override failed 5-4, INIT-011 and INIT-013 (IND) failed 4-5, INIT-015 (OPP control) passed 6-3; every override vote nine seats; INIT-003/006/007/008/010/012/014 unchanged, the funded rows moved only by their disbursement. Manifest `output/engine-sheet/2026-11-19-civic49-n1/civic49n1.sha256`, log `bench.log`.
+- **Stage 60 @195 (2026-11-19):** live pulled = stage 59 (`civic49.sha256`), push + deploy, built tree = the benched manifest byte for byte, pull-back byte-identical. No sheet write. No row on the live tracker is set to vote or override.
+- **Back out:** push the stage 59 tree (`output/engine-sheet/2026-11-19-civic49/civic49.sha256`) and cut a version. Nothing on the sheet depends on stage 60.
+
 ### PROD stage 59 — an IND-led initiative can pass: the council vote counts each seat once (2026-11-19, engine-sheet, civic.49)
 
 - **What:** one file, `phase05-citizens/civicInitiativeEngine.js` at `f99ad848a`, on stage 58. `resolveCouncilVote_`: an IND member the lead or opposition block already counted is not rolled again as a swing voter; OPP/CRC seats that are neither lead nor opposition vote at the unnamed-IND probability (mood + need), rolled after the IND loop. Plan [[../plans/2026-11-19-ind-led-initiatives-can-pass]].
 - **Proof:** parity, old vs new code on the same dice — OPP-led with CRC opposition and named swing, OPP-led blank opposition, school board: identical across 18,000 runs; IND-led blank opposition 0/4,000 pass → 712 / 1,245 / 1,893 at mood −0.6 / 0 / +0.6. Tests `scripts/civicInitiativeVote.test.js` 11/11, civic suites 25/25. Bench SANDBOX 1004 @215 (stage 58 + the file; pull-back byte-identical), live-synced C116, fire C117 PASS (223 s): four fixture rows set to vote at C117 on the bench only — INIT-009 (IND) Passed 5-4 (then vetoed by the mayor), INIT-011 and INIT-013 (IND) Failed 4-5, INIT-015 (OPP control) Passed 5-4 — every vote nine seats; INIT-003/006/007/008/010/012/014 unchanged; the funded rows moved only by their disbursement. Manifest `output/engine-sheet/2026-11-19-civic49/civic49.sha256`, log `bench.log`.
 - **Stage 59 @194 (2026-11-19):** live pulled = stage 58, push + deploy, built tree = the benched manifest byte for byte, pull-back byte-identical. No sheet write. No live fire needed to gate it (bench is the smoke); no row on the live tracker is set to vote, so the first vote under it is the one the builder dates.
-- **Known, not fixed:** `processOverrideVote_` has the same shape (lead + IND rolled again), and an IND-led initiative the mayor vetoes (the veto chance is ≥ 50% against a different faction) cannot reach the 6 an override needs. Held for the builder (plan N1).
+- **Known, not fixed:** `processOverrideVote_` has the same shape (lead + IND rolled again), and an IND-led initiative the mayor vetoes (the veto chance is ≥ 50% against a different faction) cannot reach the 6 an override needs. Fixed in stage 60 (plan N1).
 - **Back out:** push the stage 58 tree (`stage58-e349m.sha256`) and cut a version. Nothing on the sheet depends on stage 59.
 
 ### PROD stage 58 — the middle counts: every reader of a dial band reads the number (2026-11-19, research-build, engine.349 Task 14)

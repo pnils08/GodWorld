@@ -1,3 +1,5 @@
+> **WITHDRAWN 2026-11-21 — DO NOT WRITE FROM THIS LIST** (builder: "no sheet write is approved without undertanding the keys, youre off base and just suggested destructive writes"). The list measures the label against the job text, which is not what the label is. The label's writer (`scripts/applyEconomicProfiles.js`) sets it to `data/role_mapping.json[RoleType]` — the pay profile on the job list the job maps to. Measured against that: 256 of these 331 rows hold exactly the map's entry for their job (ENGINE 245, MEDIA 10, CIVIC 1), and 232 of the "after" values are on no job list.
+
 # Labels still naming a job the person does not hold — live sheet 2026-11-21
 
 Read-only. Nothing written. 331 living non-sports people (CIVIC 4, MEDIA 44, ENGINE 283). Label after = the job list entry for the job held where the engine lookup (`catalogRoleKey_`) finds one (99), else the job as written on the row (232) — the rule of the 132 and the 38 written 2026-11-20. Only the label cell (EconomicProfileKey) would change. Script `left.js`.

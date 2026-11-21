@@ -60,6 +60,7 @@ pointers:
 
 ## Changelog
 
+- 2026-11-21 (es) — builder: "work is not done". A close I made this session without his word was reverted (`3dedf33ee` → `e09b73a61`). Fresh live read, not from this plan: 331 living non-sports rows carry a label naming a job the person does not hold (CIVIC 4, MEDIA 44, ENGINE 283) — list `output/engine-sheet/2026-11-21-e354/labels-left.md`, nothing written. Engine paths that change RoleType and leave the label, found by grep of every RoleType write: the named-citizen intake edit (`godWorldEngine2.js:1666`) and the civic seat turnover (`updateCivicApprovalRatings.js` `turnoverLedger_`, successor title and `Former <Title>`). Not built.
 - 2026-11-21 (es) — plan rejected whole by the builder (banner at top).
 - 2026-11-21 (es) — restore of the 38 dropped (builder: "why would i put them back to broken again?"); builder: "plan is trash". A finding written the same hour (mayor's rows key = job title) was false and is retracted above.
 - 2026-11-20 (es) — every reader read: the engine never reads the key's words, only blank or not (zero-pay fill, hospital cut, step at 18). Three repair plans put to the builder, none approved; session closed on his word.

@@ -1,0 +1,2981 @@
+[
+ {
+  "row": 3,
+  "popid": "POP-00002",
+  "name": "Amara Keane",
+  "clock": "ENGINE",
+  "job": "Pianist, Philanthropist",
+  "before": "Veterinarian",
+  "after": "Pianist, Philanthropist"
+ },
+ {
+  "row": 5,
+  "popid": "POP-00004",
+  "name": "Lucia Polito",
+  "clock": "ENGINE",
+  "job": "Aura Wellness Practitioner",
+  "before": "Personal Trainer / Fitness Instructor",
+  "after": "Aura Wellness Practitioner"
+ },
+ {
+  "row": 6,
+  "popid": "POP-00005",
+  "name": "Mags Corliss",
+  "clock": "MEDIA",
+  "job": "Editor-in-Chief",
+  "before": "Journalist / Reporter",
+  "after": "Editor-in-Chief"
+ },
+ {
+  "row": 7,
+  "popid": "POP-00007",
+  "name": "Hal Richmond",
+  "clock": "MEDIA",
+  "job": "Journalist, Senior Historian",
+  "before": "Journalist / Reporter",
+  "after": "Journalist, Senior Historian"
+ },
+ {
+  "row": 8,
+  "popid": "POP-00008",
+  "name": "P Slayer",
+  "clock": "MEDIA",
+  "job": "Journalist, Fan Columnist - Sports",
+  "before": "Journalist / Reporter",
+  "after": "Journalist, Fan Columnist - Sports"
+ },
+ {
+  "row": 9,
+  "popid": "POP-00009",
+  "name": "Lena Carrow",
+  "clock": "MEDIA",
+  "job": "Field Reporter",
+  "before": "Journalist / Reporter",
+  "after": "Field Reporter"
+ },
+ {
+  "row": 10,
+  "popid": "POP-00010",
+  "name": "Dana Reeve",
+  "clock": "MEDIA",
+  "job": "Lead Journalist",
+  "before": "Journalist / Reporter",
+  "after": "Lead Journalist"
+ },
+ {
+  "row": 11,
+  "popid": "POP-00011",
+  "name": "Carmen Delaine",
+  "clock": "MEDIA",
+  "job": "Journalist, Civic Affairs Reporter",
+  "before": "Journalist / Reporter",
+  "after": "Journalist, Civic Affairs Reporter"
+ },
+ {
+  "row": 12,
+  "popid": "POP-00012",
+  "name": "Elliot Graye",
+  "clock": "MEDIA",
+  "job": "Journalist, Ethics & Faith Journalist",
+  "before": "Journalist / Reporter",
+  "after": "Journalist, Ethics & Faith Journalist"
+ },
+ {
+  "row": 13,
+  "popid": "POP-00013",
+  "name": "Maria Keen",
+  "clock": "MEDIA",
+  "job": "Journalist, Cultural Liason",
+  "before": "Journalist / Reporter",
+  "after": "Journalist, Cultural Liason"
+ },
+ {
+  "row": 14,
+  "popid": "POP-00014",
+  "name": "Tanya Cruz",
+  "clock": "MEDIA",
+  "job": "Sideline Reporter",
+  "before": "Journalist / Reporter",
+  "after": "Sideline Reporter"
+ },
+ {
+  "row": 15,
+  "popid": "POP-00015",
+  "name": "DeShawn Hartley",
+  "clock": "MEDIA",
+  "job": "Photographer",
+  "before": "Graphic Designer (Freelance)",
+  "after": "Photographer"
+ },
+ {
+  "row": 16,
+  "popid": "POP-00016",
+  "name": "Simon Leary",
+  "clock": "MEDIA",
+  "job": "Journalist, The Long View Columnist",
+  "before": "Journalist / Reporter",
+  "after": "Journalist, The Long View Columnist"
+ },
+ {
+  "row": 17,
+  "popid": "POP-00017",
+  "name": "Anthony Raines",
+  "clock": "MEDIA",
+  "job": "Journalist, Lead Beat Reporter - Oakland A's",
+  "before": "Journalist / Reporter",
+  "after": "Journalist, Lead Beat Reporter - Oakland A's"
+ },
+ {
+  "row": 20,
+  "popid": "POP-00020",
+  "name": "Elena Vásquez",
+  "clock": "CIVIC",
+  "job": "Waterfront Urban Planner",
+  "before": "Urban Planner",
+  "after": "Waterfront Urban Planner"
+ },
+ {
+  "row": 23,
+  "popid": "POP-00023",
+  "name": "Gregory Mims",
+  "clock": "ENGINE",
+  "job": "Organized Crime",
+  "before": "Casino",
+  "after": "Organized Crime"
+ },
+ {
+  "row": 26,
+  "popid": "POP-00027",
+  "name": "Philly Rodriguez",
+  "clock": "ENGINE",
+  "job": "Casino Manager",
+  "before": "Casino",
+  "after": "Casino Manager"
+ },
+ {
+  "row": 27,
+  "popid": "POP-00028",
+  "name": "Manfred Owens",
+  "clock": "ENGINE",
+  "job": "Booky",
+  "before": "Casino",
+  "after": "Booky"
+ },
+ {
+  "row": 28,
+  "popid": "POP-00029",
+  "name": "Alisha Peña",
+  "clock": "ENGINE",
+  "job": "Female Model",
+  "before": "Model",
+  "after": "Female Model"
+ },
+ {
+  "row": 29,
+  "popid": "POP-00030",
+  "name": "Derek Simmons",
+  "clock": "ENGINE",
+  "job": "A's Marketing Director",
+  "before": "Event Planner",
+  "after": "A's Marketing Director"
+ },
+ {
+  "row": 32,
+  "popid": "POP-00034",
+  "name": "Avery Santana",
+  "clock": "CIVIC",
+  "job": "Mayor of Oakland",
+  "before": "Mayor",
+  "after": "Mayor of Oakland"
+ },
+ {
+  "row": 34,
+  "popid": "POP-00036",
+  "name": "Marcus Osei",
+  "clock": "CIVIC",
+  "job": "Deputy Mayor (Econ Dev)",
+  "before": "Deputy Mayor",
+  "after": "Deputy Mayor (Econ Dev)"
+ },
+ {
+  "row": 40,
+  "popid": "POP-00042",
+  "name": "Ramon Vega",
+  "clock": "CIVIC",
+  "job": "City Council District 4",
+  "before": "City Council President",
+  "after": "City Council District 4"
+ },
+ {
+  "row": 46,
+  "popid": "POP-00048",
+  "name": "Carlos Presti",
+  "clock": "ENGINE",
+  "job": "Corporate Accountant",
+  "before": "Accountant / CPA",
+  "after": "Corporate Accountant"
+ },
+ {
+  "row": 53,
+  "popid": "POP-00056",
+  "name": "Mint Condition",
+  "clock": "MEDIA",
+  "job": "Unknown Speculative Internet Blogger",
+  "before": "Journalist / Reporter",
+  "after": "Unknown Speculative Internet Blogger"
+ },
+ {
+  "row": 54,
+  "popid": "POP-00057",
+  "name": "Rachel Torres",
+  "clock": "MEDIA",
+  "job": "Public Safety",
+  "before": "Journalist / Reporter",
+  "after": "Public Safety"
+ },
+ {
+  "row": 69,
+  "popid": "POP-00114",
+  "name": "Mike Kinder",
+  "clock": "ENGINE",
+  "job": "Former Manager, Oakland A's",
+  "before": "Manager",
+  "after": "Former Manager, Oakland A's"
+ },
+ {
+  "row": 78,
+  "popid": "POP-00124",
+  "name": "Steve Conrad",
+  "clock": "ENGINE",
+  "job": "Ex-As Star - RF",
+  "before": "Retired",
+  "after": "Ex-As Star - RF"
+ },
+ {
+  "row": 79,
+  "popid": "POP-00125",
+  "name": "Paul Skenes",
+  "clock": "ENGINE",
+  "job": "Retired former As",
+  "before": "Retired",
+  "after": "Retired former As"
+ },
+ {
+  "row": 80,
+  "popid": "POP-00126",
+  "name": "Orion Kerkering",
+  "clock": "ENGINE",
+  "job": "Retired former As",
+  "before": "Retired",
+  "after": "Retired former As"
+ },
+ {
+  "row": 81,
+  "popid": "POP-00127",
+  "name": "Mason Miller",
+  "clock": "ENGINE",
+  "job": "Sports Analyst A's / Retired HOF A's Closer",
+  "before": "Journalist / Reporter",
+  "after": "Sports Analyst A's / Retired HOF A's Closer"
+ },
+ {
+  "row": 82,
+  "popid": "POP-00128",
+  "name": "Kris Bubic",
+  "clock": "ENGINE",
+  "job": "Retired former As / Bubic Burgers",
+  "before": "Retired",
+  "after": "Retired former As / Bubic Burgers"
+ },
+ {
+  "row": 83,
+  "popid": "POP-00129",
+  "name": "Dalton Rushing",
+  "clock": "ENGINE",
+  "job": "Retired former As, Youth Baseball Coach",
+  "before": "Community_Programs",
+  "after": "Retired former As, Youth Baseball Coach"
+ },
+ {
+  "row": 85,
+  "popid": "POP-00132",
+  "name": "Tobias Jurko",
+  "clock": "ENGINE",
+  "job": "Landscape Architect",
+  "before": "Architect",
+  "after": "Landscape Architect"
+ },
+ {
+  "row": 86,
+  "popid": "POP-00133",
+  "name": "Ariana Reyes",
+  "clock": "MEDIA",
+  "job": "Data Analyst (Gridiron Analytics)",
+  "before": "Sports Analytics Engineer (Gridiron)",
+  "after": "Data Analyst (Gridiron Analytics)"
+ },
+ {
+  "row": 87,
+  "popid": "POP-00134",
+  "name": "Brianna Lee",
+  "clock": "ENGINE",
+  "job": "Historic Preservation Carpenter",
+  "before": "Seismic Retrofit Specialist",
+  "after": "Historic Preservation Carpenter"
+ },
+ {
+  "row": 88,
+  "popid": "POP-00135",
+  "name": "Mina Linas",
+  "clock": "ENGINE",
+  "job": "Sea Level Monitoring Technician",
+  "before": "Marine Biologist (Applied)",
+  "after": "Sea Level Monitoring Technician"
+ },
+ {
+  "row": 106,
+  "popid": "POP-00153",
+  "name": "Jordan Velez",
+  "clock": "MEDIA",
+  "job": "Journalist, Economics & Labor",
+  "before": "Journalist / Reporter",
+  "after": "Journalist, Economics & Labor"
+ },
+ {
+  "row": 107,
+  "popid": "POP-00154",
+  "name": "Lila Mezran",
+  "clock": "MEDIA",
+  "job": "Journalist, Health Desk",
+  "before": "Journalist / Reporter",
+  "after": "Journalist, Health Desk"
+ },
+ {
+  "row": 108,
+  "popid": "POP-00155",
+  "name": "Trevor Shimizu",
+  "clock": "MEDIA",
+  "job": "Journalist, Transit & Infastructure",
+  "before": "Journalist / Reporter",
+  "after": "Journalist, Transit & Infastructure"
+ },
+ {
+  "row": 109,
+  "popid": "POP-00156",
+  "name": "Angela Reyes",
+  "clock": "MEDIA",
+  "job": "Journalist, Education",
+  "before": "Journalist / Reporter",
+  "after": "Journalist, Education"
+ },
+ {
+  "row": 110,
+  "popid": "POP-00157",
+  "name": "Noah Tan",
+  "clock": "MEDIA",
+  "job": "Journalist, Weather & Environment",
+  "before": "Journalist / Reporter",
+  "after": "Journalist, Weather & Environment"
+ },
+ {
+  "row": 111,
+  "popid": "POP-00158",
+  "name": "Kai Marston",
+  "clock": "MEDIA",
+  "job": "Journalist, Arts & Entertainment",
+  "before": "Podcast Producer",
+  "after": "Journalist, Arts & Entertainment"
+ },
+ {
+  "row": 112,
+  "popid": "POP-00159",
+  "name": "Sharon Okafor",
+  "clock": "MEDIA",
+  "job": "Journalist, Lifestyle",
+  "before": "Journalist / Reporter",
+  "after": "Journalist, Lifestyle"
+ },
+ {
+  "row": 113,
+  "popid": "POP-00160",
+  "name": "Mason Ortega",
+  "clock": "MEDIA",
+  "job": "Journalist, Food & Hospitality",
+  "before": "Journalist / Reporter",
+  "after": "Journalist, Food & Hospitality"
+ },
+ {
+  "row": 114,
+  "popid": "POP-00161",
+  "name": "Farrah Del Rio",
+  "clock": "MEDIA",
+  "job": "Journalist, Civic & Cultural Opinion",
+  "before": "Journalist / Reporter",
+  "after": "Journalist, Civic & Cultural Opinion"
+ },
+ {
+  "row": 115,
+  "popid": "POP-00162",
+  "name": "Reed Thompson",
+  "clock": "MEDIA",
+  "job": "Journalist, TWS Wire Reporter",
+  "before": "Journalist / Reporter",
+  "after": "Journalist, TWS Wire Reporter"
+ },
+ {
+  "row": 116,
+  "popid": "POP-00164",
+  "name": "Celeste Tran",
+  "clock": "MEDIA",
+  "job": "Journalist, Social Trends",
+  "before": "Journalist / Reporter",
+  "after": "Journalist, Social Trends"
+ },
+ {
+  "row": 117,
+  "popid": "POP-00165",
+  "name": "Arman Gutierrez",
+  "clock": "MEDIA",
+  "job": "Photo Assistant",
+  "before": "Graphic Designer (Freelance)",
+  "after": "Photo Assistant"
+ },
+ {
+  "row": 118,
+  "popid": "POP-00166",
+  "name": "Elliot Marbury",
+  "clock": "MEDIA",
+  "job": "Journalist, Data Desk",
+  "before": "Journalist / Reporter",
+  "after": "Journalist, Data Desk"
+ },
+ {
+  "row": 119,
+  "popid": "POP-00167",
+  "name": "Carlo Jist",
+  "clock": "ENGINE",
+  "job": "Medical Social Worker",
+  "before": "Social Worker",
+  "after": "Medical Social Worker"
+ },
+ {
+  "row": 121,
+  "popid": "POP-00169",
+  "name": "Brie Harris",
+  "clock": "ENGINE",
+  "job": "Flower Shop Owner",
+  "before": "Florist / Plant Shop Owner",
+  "after": "Flower Shop Owner"
+ },
+ {
+  "row": 122,
+  "popid": "POP-00170",
+  "name": "Melton Neilon",
+  "clock": "ENGINE",
+  "job": "Sourdough Baker",
+  "before": "Bakery Owner",
+  "after": "Sourdough Baker"
+ },
+ {
+  "row": 124,
+  "popid": "POP-00172",
+  "name": "Marlon Hingsley",
+  "clock": "ENGINE",
+  "job": "Housing Authority Inspector",
+  "before": "Code Enforcement Officer",
+  "after": "Housing Authority Inspector"
+ },
+ {
+  "row": 125,
+  "popid": "POP-00173",
+  "name": "Kaila Braun",
+  "clock": "ENGINE",
+  "job": "Immigrant Legal Aid Worker",
+  "before": "Immigrant Rights Organizer",
+  "after": "Immigrant Legal Aid Worker"
+ },
+ {
+  "row": 126,
+  "popid": "POP-00174",
+  "name": "Tariq Jello",
+  "clock": "ENGINE",
+  "job": "Appliance Repair Technician",
+  "before": "HVAC Technician",
+  "after": "Appliance Repair Technician"
+ },
+ {
+  "row": 128,
+  "popid": "POP-00176",
+  "name": "Talmon Lint",
+  "clock": "ENGINE",
+  "job": "Solar Panel Installation Lead",
+  "before": "Solar Installer",
+  "after": "Solar Panel Installation Lead"
+ },
+ {
+  "row": 129,
+  "popid": "POP-00177",
+  "name": "Elle Lilo",
+  "clock": "ENGINE",
+  "job": "Harbor Tugboat Captain",
+  "before": "Ship Pilot",
+  "after": "Harbor Tugboat Captain"
+ },
+ {
+  "row": 130,
+  "popid": "POP-00178",
+  "name": "Tobi Sobi",
+  "clock": "ENGINE",
+  "job": "Climate Modeling Scientist",
+  "before": "Climate Adaptation Planner",
+  "after": "Climate Modeling Scientist"
+ },
+ {
+  "row": 131,
+  "popid": "POP-00179",
+  "name": "Leo Leonard",
+  "clock": "ENGINE",
+  "job": "Juvenile Probation Officer",
+  "before": "Probation Officer",
+  "after": "Juvenile Probation Officer"
+ },
+ {
+  "row": 132,
+  "popid": "POP-00180",
+  "name": "Cameron Wallen",
+  "clock": "ENGINE",
+  "job": "Corporate Accountant",
+  "before": "Accountant / CPA",
+  "after": "Corporate Accountant"
+ },
+ {
+  "row": 133,
+  "popid": "POP-00181",
+  "name": "Xavier Ramington",
+  "clock": "ENGINE",
+  "job": "Herbalist",
+  "before": "Acupuncturist / Traditional Medicine Practitioner",
+  "after": "Herbalist"
+ },
+ {
+  "row": 134,
+  "popid": "POP-00182",
+  "name": "Jorry Cula",
+  "clock": "ENGINE",
+  "job": "Record Shop Owner",
+  "before": "Independent Bookstore Owner",
+  "after": "Record Shop Owner"
+ },
+ {
+  "row": 135,
+  "popid": "POP-00183",
+  "name": "Toby Lamont",
+  "clock": "ENGINE",
+  "job": "Mutual Aid Network Organizer",
+  "before": "Mutual Aid Network Coordinator",
+  "after": "Mutual Aid Network Organizer"
+ },
+ {
+  "row": 137,
+  "popid": "POP-00185",
+  "name": "Lila Patty",
+  "clock": "ENGINE",
+  "job": "Solar Panel Installation Lead",
+  "before": "Solar Installer",
+  "after": "Solar Panel Installation Lead"
+ },
+ {
+  "row": 138,
+  "popid": "POP-00186",
+  "name": "Ray Samson",
+  "clock": "ENGINE",
+  "job": "Appliance Repair Technician",
+  "before": "HVAC Technician",
+  "after": "Appliance Repair Technician"
+ },
+ {
+  "row": 139,
+  "popid": "POP-00187",
+  "name": "Isla Sike",
+  "clock": "ENGINE",
+  "job": "Domestic Violence Shelter Director",
+  "before": "Domestic Violence Shelter Counselor",
+  "after": "Domestic Violence Shelter Director"
+ },
+ {
+  "row": 141,
+  "popid": "POP-00189",
+  "name": "Blair Patel",
+  "clock": "ENGINE",
+  "job": "Ship Repair Foreman",
+  "before": "Ship Pilot",
+  "after": "Ship Repair Foreman"
+ },
+ {
+  "row": 142,
+  "popid": "POP-00190",
+  "name": "Jackson Sift",
+  "clock": "ENGINE",
+  "job": "Ex-Offender Reentry Counselor",
+  "before": "Reentry Counselor",
+  "after": "Ex-Offender Reentry Counselor"
+ },
+ {
+  "row": 143,
+  "popid": "POP-00191",
+  "name": "Darius Scoot",
+  "clock": "ENGINE",
+  "job": "Patent Attorney",
+  "before": "Civil Rights Attorney",
+  "after": "Patent Attorney"
+ },
+ {
+  "row": 144,
+  "popid": "POP-00192",
+  "name": "Bea Cartier",
+  "clock": "ENGINE",
+  "job": "Roofing Contractor",
+  "before": "Roofer",
+  "after": "Roofing Contractor"
+ },
+ {
+  "row": 145,
+  "popid": "POP-00193",
+  "name": "Elena Leon",
+  "clock": "ENGINE",
+  "job": "Longshoreman (Port of Oakland)",
+  "before": "Longshoreman",
+  "after": "Longshoreman (Port of Oakland)"
+ },
+ {
+  "row": 146,
+  "popid": "POP-00194",
+  "name": "Yu Zen",
+  "clock": "ENGINE",
+  "job": "Commercial Insurance Broker",
+  "before": "Insurance Agent",
+  "after": "Commercial Insurance Broker"
+ },
+ {
+  "row": 147,
+  "popid": "POP-00195",
+  "name": "Lonzo Jailon",
+  "clock": "ENGINE",
+  "job": "Sea Level Monitoring Technician",
+  "before": "Marine Biologist (Applied)",
+  "after": "Sea Level Monitoring Technician"
+ },
+ {
+  "row": 148,
+  "popid": "POP-00196",
+  "name": "Inga Creator",
+  "clock": "ENGINE",
+  "job": "Boutique Owner",
+  "before": "Corner Store / Bodega Owner",
+  "after": "Boutique Owner"
+ },
+ {
+  "row": 149,
+  "popid": "POP-00197",
+  "name": "Rigo Ryno",
+  "clock": "ENGINE",
+  "job": "Vintage Clothing Store Owner",
+  "before": "Corner Store / Bodega Owner",
+  "after": "Vintage Clothing Store Owner"
+ },
+ {
+  "row": 150,
+  "popid": "POP-00198",
+  "name": "Rick Walker",
+  "clock": "ENGINE",
+  "job": "K-8 Teacher,Former Line cook",
+  "before": "K-8 Teacher",
+  "after": "K-8 Teacher,Former Line cook"
+ },
+ {
+  "row": 158,
+  "popid": "POP-00206",
+  "name": "Omar Lingio",
+  "clock": "ENGINE",
+  "job": "Vintage Clothing Store Owner",
+  "before": "Corner Store / Bodega Owner",
+  "after": "Vintage Clothing Store Owner"
+ },
+ {
+  "row": 161,
+  "popid": "POP-00209",
+  "name": "Tiu Xiong",
+  "clock": "ENGINE",
+  "job": "Kombucha Brewer",
+  "before": "Brewmaster",
+  "after": "Kombucha Brewer"
+ },
+ {
+  "row": 187,
+  "popid": "POP-00235",
+  "name": "Aaliyah Brennan",
+  "clock": "ENGINE",
+  "job": "Mobile Clinic Nurse",
+  "before": "ER Nurse",
+  "after": "Mobile Clinic Nurse"
+ },
+ {
+  "row": 200,
+  "popid": "POP-00248",
+  "name": "Joaquín Nakamura",
+  "clock": "ENGINE",
+  "job": "Kombucha Brewer",
+  "before": "Brewmaster",
+  "after": "Kombucha Brewer"
+ },
+ {
+  "row": 205,
+  "popid": "POP-00253",
+  "name": "Jango Lango",
+  "clock": "ENGINE",
+  "job": "Hardware Store Owner",
+  "before": "Corner Store / Bodega Owner",
+  "after": "Hardware Store Owner"
+ },
+ {
+  "row": 209,
+  "popid": "POP-00257",
+  "name": "Farah Lindqvist",
+  "clock": "ENGINE",
+  "job": "City Building Inspector",
+  "before": "Building Inspector",
+  "after": "City Building Inspector"
+ },
+ {
+  "row": 211,
+  "popid": "POP-00259",
+  "name": "Kwame Fitzgerald",
+  "clock": "ENGINE",
+  "job": "Craft Brewery Owner",
+  "before": "Brewmaster",
+  "after": "Craft Brewery Owner"
+ },
+ {
+  "row": 218,
+  "popid": "POP-00266",
+  "name": "Priya Marchetti",
+  "clock": "ENGINE",
+  "job": "Vintage Clothing Store Owner",
+  "before": "Corner Store / Bodega Owner",
+  "after": "Vintage Clothing Store Owner"
+ },
+ {
+  "row": 228,
+  "popid": "POP-00276",
+  "name": "Dmitri Soto",
+  "clock": "ENGINE",
+  "job": "Container Yard Supervisor",
+  "before": "Port Logistics Coordinator",
+  "after": "Container Yard Supervisor"
+ },
+ {
+  "row": 255,
+  "popid": "POP-00303",
+  "name": "Lee Coo",
+  "clock": "ENGINE",
+  "job": "School Psychologist",
+  "before": "School Counselor",
+  "after": "School Psychologist"
+ },
+ {
+  "row": 256,
+  "popid": "POP-00304",
+  "name": "Alma Lewis",
+  "clock": "ENGINE",
+  "job": "International Trade Consultant",
+  "before": "Freight Broker",
+  "after": "International Trade Consultant"
+ },
+ {
+  "row": 257,
+  "popid": "POP-00305",
+  "name": "Rico Fister",
+  "clock": "ENGINE",
+  "job": "High School Science Teacher",
+  "before": "High School Teacher",
+  "after": "High School Science Teacher"
+ },
+ {
+  "row": 258,
+  "popid": "POP-00306",
+  "name": "Mika Loop",
+  "clock": "ENGINE",
+  "job": "Real Estate Developer",
+  "before": "Affordable Housing Developer",
+  "after": "Real Estate Developer"
+ },
+ {
+  "row": 260,
+  "popid": "POP-00308",
+  "name": "Cathy Skeet",
+  "clock": "ENGINE",
+  "job": "Elder Tech Liaison",
+  "before": "Elder Abuse Prevention Specialist",
+  "after": "Elder Tech Liaison"
+ },
+ {
+  "row": 261,
+  "popid": "POP-00309",
+  "name": "Amy Cook",
+  "clock": "ENGINE",
+  "job": "Radiologic Technician",
+  "before": "Medical Lab Technician",
+  "after": "Radiologic Technician"
+ },
+ {
+  "row": 262,
+  "popid": "POP-00310",
+  "name": "Arnie Carter",
+  "clock": "ENGINE",
+  "job": "Immigrant Legal Aid Worker",
+  "before": "Immigrant Rights Organizer",
+  "after": "Immigrant Legal Aid Worker"
+ },
+ {
+  "row": 264,
+  "popid": "POP-00312",
+  "name": "Wiu Wiu",
+  "clock": "ENGINE",
+  "job": "High School Science Teacher",
+  "before": "High School Teacher",
+  "after": "High School Science Teacher"
+ },
+ {
+  "row": 265,
+  "popid": "POP-00313",
+  "name": "Soria Herrin",
+  "clock": "ENGINE",
+  "job": "Stone Mason",
+  "before": "Concrete Finisher",
+  "after": "Stone Mason"
+ },
+ {
+  "row": 266,
+  "popid": "POP-00314",
+  "name": "Lemante Naruto",
+  "clock": "ENGINE",
+  "job": "Crane Operator (Port of Oakland)",
+  "before": "Crane Operator",
+  "after": "Crane Operator (Port of Oakland)"
+ },
+ {
+  "row": 267,
+  "popid": "POP-00315",
+  "name": "Jahill West",
+  "clock": "ENGINE",
+  "job": "Hair Stylist",
+  "before": "Barbershop Owner",
+  "after": "Hair Stylist"
+ },
+ {
+  "row": 268,
+  "popid": "POP-00316",
+  "name": "Chris Foster",
+  "clock": "ENGINE",
+  "job": "Grade Schooler",
+  "before": "Ceramicist / Studio Artist",
+  "after": "Grade Schooler"
+ },
+ {
+  "row": 269,
+  "popid": "POP-00317",
+  "name": "Lila Bennington",
+  "clock": "ENGINE",
+  "job": "Oakland City Schools Elementary Teacher",
+  "before": "K-8 Teacher",
+  "after": "Oakland City Schools Elementary Teacher"
+ },
+ {
+  "row": 270,
+  "popid": "POP-00318",
+  "name": "Carter Harris",
+  "clock": "ENGINE",
+  "job": "Emergency Management Coordinator",
+  "before": "Crisis Intervention Specialist",
+  "after": "Emergency Management Coordinator"
+ },
+ {
+  "row": 271,
+  "popid": "POP-00319",
+  "name": "Marquis Cale",
+  "clock": "ENGINE",
+  "job": "Hair Stylist",
+  "before": "Barbershop Owner",
+  "after": "Hair Stylist"
+ },
+ {
+  "row": 272,
+  "popid": "POP-00320",
+  "name": "Cee Lee",
+  "clock": "ENGINE",
+  "job": "Autonomous Systems Engineer",
+  "before": "Autonomous Vehicle Safety Engineer",
+  "after": "Autonomous Systems Engineer"
+ },
+ {
+  "row": 274,
+  "popid": "POP-00322",
+  "name": "Lillie Regis",
+  "clock": "ENGINE",
+  "job": "Addiction Recovery Specialist",
+  "before": "Substance Abuse Counselor",
+  "after": "Addiction Recovery Specialist"
+ },
+ {
+  "row": 275,
+  "popid": "POP-00323",
+  "name": "Cooper Erazmo",
+  "clock": "ENGINE",
+  "job": "Upholstery Shop Owner",
+  "before": "Cleaning Service Owner",
+  "after": "Upholstery Shop Owner"
+ },
+ {
+  "row": 276,
+  "popid": "POP-00324",
+  "name": "Milan Warmon",
+  "clock": "ENGINE",
+  "job": "Ceramicist",
+  "before": "Ceramicist / Studio Artist",
+  "after": "Ceramicist"
+ },
+ {
+  "row": 277,
+  "popid": "POP-00325",
+  "name": "Isabel Lopes",
+  "clock": "ENGINE",
+  "job": "ESL Teacher",
+  "before": "ESL Instructor",
+  "after": "ESL Teacher"
+ },
+ {
+  "row": 278,
+  "popid": "POP-00326",
+  "name": "Eva Langoria",
+  "clock": "ENGINE",
+  "job": "Vertical Farm Systems Engineer",
+  "before": "Vertical Farm Technician",
+  "after": "Vertical Farm Systems Engineer"
+ },
+ {
+  "row": 279,
+  "popid": "POP-00327",
+  "name": "Bambi Wart",
+  "clock": "ENGINE",
+  "job": "Ex-Offender Reentry Counselor",
+  "before": "Reentry Counselor",
+  "after": "Ex-Offender Reentry Counselor"
+ },
+ {
+  "row": 280,
+  "popid": "POP-00328",
+  "name": "Javier Trenton",
+  "clock": "ENGINE",
+  "job": "Affordable Childcare Advocate",
+  "before": "Childcare Provider / Daycare Owner",
+  "after": "Affordable Childcare Advocate"
+ },
+ {
+  "row": 281,
+  "popid": "POP-00329",
+  "name": "Aaron Jackson",
+  "clock": "ENGINE",
+  "job": "Tai Chi Instructor",
+  "before": "Personal Trainer / Fitness Instructor",
+  "after": "Tai Chi Instructor"
+ },
+ {
+  "row": 284,
+  "popid": "POP-00333",
+  "name": "Moot Soot",
+  "clock": "ENGINE",
+  "job": "Hair Stylist",
+  "before": "Barbershop Owner",
+  "after": "Hair Stylist"
+ },
+ {
+  "row": 285,
+  "popid": "POP-00334",
+  "name": "Solis Walmart",
+  "clock": "ENGINE",
+  "job": "Housing Authority Inspector",
+  "before": "Code Enforcement Officer",
+  "after": "Housing Authority Inspector"
+ },
+ {
+  "row": 287,
+  "popid": "POP-00336",
+  "name": "Marmol Lemon",
+  "clock": "ENGINE",
+  "job": "Graffiti Restoration Artist",
+  "before": "Muralist",
+  "after": "Graffiti Restoration Artist"
+ },
+ {
+  "row": 288,
+  "popid": "POP-00337",
+  "name": "Iris Baron",
+  "clock": "ENGINE",
+  "job": "Emergency Management Coordinator",
+  "before": "Crisis Intervention Specialist",
+  "after": "Emergency Management Coordinator"
+ },
+ {
+  "row": 289,
+  "popid": "POP-00338",
+  "name": "Coen Cartier",
+  "clock": "ENGINE",
+  "job": "Transit Operator (AC Transit)",
+  "before": "Bus Operator",
+  "after": "Transit Operator (AC Transit)"
+ },
+ {
+  "row": 290,
+  "popid": "POP-00339",
+  "name": "Kaila Nguyen",
+  "clock": "ENGINE",
+  "job": "Pupuseria Owner",
+  "before": "Taqueria Owner",
+  "after": "Pupuseria Owner"
+ },
+ {
+  "row": 291,
+  "popid": "POP-00340",
+  "name": "Jimmie Joseph",
+  "clock": "ENGINE",
+  "job": "Sustainable Materials Scientist",
+  "before": "Environmental Consultant",
+  "after": "Sustainable Materials Scientist"
+ },
+ {
+  "row": 292,
+  "popid": "POP-00341",
+  "name": "Emilia Wurford",
+  "clock": "ENGINE",
+  "job": "Tea House Owner",
+  "before": "Coffee Roaster",
+  "after": "Tea House Owner"
+ },
+ {
+  "row": 294,
+  "popid": "POP-00343",
+  "name": "Iman Horton",
+  "clock": "ENGINE",
+  "job": "Refugee Resettlement Case Worker",
+  "before": "Immigrant Rights Organizer",
+  "after": "Refugee Resettlement Case Worker"
+ },
+ {
+  "row": 296,
+  "popid": "POP-00345",
+  "name": "Bonnie Brown",
+  "clock": "ENGINE",
+  "job": "Venture Partner (Ridgeline Ventures)",
+  "before": "Financial Planner",
+  "after": "Venture Partner (Ridgeline Ventures)"
+ },
+ {
+  "row": 297,
+  "popid": "POP-00346",
+  "name": "Ingmar Jordan",
+  "clock": "ENGINE",
+  "job": "Spoken Word Poet",
+  "before": "Jazz Musician",
+  "after": "Spoken Word Poet"
+ },
+ {
+  "row": 298,
+  "popid": "POP-00347",
+  "name": "Dawson Nguyen",
+  "clock": "ENGINE",
+  "job": "Sports Analytics Lead (Gridiron Analytics)",
+  "before": "Sports Analytics Engineer (Gridiron)",
+  "after": "Sports Analytics Lead (Gridiron Analytics)"
+ },
+ {
+  "row": 299,
+  "popid": "POP-00348",
+  "name": "Melony Foster",
+  "clock": "ENGINE",
+  "job": "Fashion Designer",
+  "before": "Graphic Designer (Freelance)",
+  "after": "Fashion Designer"
+ },
+ {
+  "row": 300,
+  "popid": "POP-00349",
+  "name": "Jiu Wong",
+  "clock": "ENGINE",
+  "job": "Carpet Installer",
+  "before": "Glazier",
+  "after": "Carpet Installer"
+ },
+ {
+  "row": 301,
+  "popid": "POP-00350",
+  "name": "Tobias Nort",
+  "clock": "ENGINE",
+  "job": "Tea House Owner",
+  "before": "Coffee Roaster",
+  "after": "Tea House Owner"
+ },
+ {
+  "row": 302,
+  "popid": "POP-00351",
+  "name": "Ryan Stark",
+  "clock": "ENGINE",
+  "job": "Housing Policy Analyst",
+  "before": "Urban Planner",
+  "after": "Housing Policy Analyst"
+ },
+ {
+  "row": 303,
+  "popid": "POP-00352",
+  "name": "Kaila Jordache",
+  "clock": "ENGINE",
+  "job": "GED Program Instructor",
+  "before": "ESL Instructor",
+  "after": "GED Program Instructor"
+ },
+ {
+  "row": 305,
+  "popid": "POP-00354",
+  "name": "Illy Jile",
+  "clock": "ENGINE",
+  "job": "Translation Services Provider",
+  "before": "Sign Language Interpreter",
+  "after": "Translation Services Provider"
+ },
+ {
+  "row": 307,
+  "popid": "POP-00356",
+  "name": "Bethany Foster",
+  "clock": "ENGINE",
+  "job": "Ship Repair Foreman",
+  "before": "Ship Pilot",
+  "after": "Ship Repair Foreman"
+ },
+ {
+  "row": 308,
+  "popid": "POP-00357",
+  "name": "Andrew Cook",
+  "clock": "ENGINE",
+  "job": "Neighborhood Watch Captain",
+  "before": "Community Organizer",
+  "after": "Neighborhood Watch Captain"
+ },
+ {
+  "row": 310,
+  "popid": "POP-00359",
+  "name": "Soira Flesher",
+  "clock": "ENGINE",
+  "job": "Emergency Management Coordinator",
+  "before": "Crisis Intervention Specialist",
+  "after": "Emergency Management Coordinator"
+ },
+ {
+  "row": 311,
+  "popid": "POP-00360",
+  "name": "Lingo Kim",
+  "clock": "ENGINE",
+  "job": "Hair Stylist",
+  "before": "Barbershop Owner",
+  "after": "Hair Stylist"
+ },
+ {
+  "row": 312,
+  "popid": "POP-00361",
+  "name": "Jason Flower",
+  "clock": "ENGINE",
+  "job": "Immigrant Legal Aid Worker",
+  "before": "Immigrant Rights Organizer",
+  "after": "Immigrant Legal Aid Worker"
+ },
+ {
+  "row": 313,
+  "popid": "POP-00362",
+  "name": "Xavier Davis",
+  "clock": "ENGINE",
+  "job": "Housing Authority Inspector",
+  "before": "Code Enforcement Officer",
+  "after": "Housing Authority Inspector"
+ },
+ {
+  "row": 314,
+  "popid": "POP-00363",
+  "name": "Rayon Dart",
+  "clock": "ENGINE",
+  "job": "Climate Modeling Scientist",
+  "before": "Climate Adaptation Planner",
+  "after": "Climate Modeling Scientist"
+ },
+ {
+  "row": 315,
+  "popid": "POP-00364",
+  "name": "Kim Peru",
+  "clock": "ENGINE",
+  "job": "Retired",
+  "before": "Corner Store / Bodega Owner",
+  "after": "Retired"
+ },
+ {
+  "row": 319,
+  "popid": "POP-00368",
+  "name": "Dom Will",
+  "clock": "ENGINE",
+  "job": "Machine Learning Engineer (Oakmesh Systems)",
+  "before": "OakMesh Systems Engineer",
+  "after": "Machine Learning Engineer (Oakmesh Systems)"
+ },
+ {
+  "row": 320,
+  "popid": "POP-00430",
+  "name": "Juniper Walken",
+  "clock": "ENGINE",
+  "job": "Flower Shop Owner",
+  "before": "Florist / Plant Shop Owner",
+  "after": "Flower Shop Owner"
+ },
+ {
+  "row": 321,
+  "popid": "POP-00431",
+  "name": "Hassan Montero",
+  "clock": "ENGINE",
+  "job": "Craft Brewery Owner",
+  "before": "Brewmaster",
+  "after": "Craft Brewery Owner"
+ },
+ {
+  "row": 322,
+  "popid": "POP-00432",
+  "name": "Duarte Washerman",
+  "clock": "ENGINE",
+  "job": "Sound Designer",
+  "before": "Hip-Hop Producer",
+  "after": "Sound Designer"
+ },
+ {
+  "row": 324,
+  "popid": "POP-00434",
+  "name": "Jade Soy",
+  "clock": "ENGINE",
+  "job": "Data Analyst (Gridiron Analytics)",
+  "before": "Sports Analytics Engineer (Gridiron)",
+  "after": "Data Analyst (Gridiron Analytics)"
+ },
+ {
+  "row": 325,
+  "popid": "POP-00435",
+  "name": "Driscoll Fester",
+  "clock": "ENGINE",
+  "job": "Graphic Designer",
+  "before": "Graphic Designer (Freelance)",
+  "after": "Graphic Designer"
+ },
+ {
+  "row": 326,
+  "popid": "POP-00436",
+  "name": "Augusta Davis",
+  "clock": "ENGINE",
+  "job": "Community Health Worker",
+  "before": "Social Worker",
+  "after": "Community Health Worker"
+ },
+ {
+  "row": 327,
+  "popid": "POP-00437",
+  "name": "Amelia Kim",
+  "clock": "ENGINE",
+  "job": "Fashion Designer",
+  "before": "Graphic Designer (Freelance)",
+  "after": "Fashion Designer"
+ },
+ {
+  "row": 328,
+  "popid": "POP-00438",
+  "name": "Charolette Flores",
+  "clock": "ENGINE",
+  "job": "Music Venue Operator",
+  "before": "Event Planner",
+  "after": "Music Venue Operator"
+ },
+ {
+  "row": 329,
+  "popid": "POP-00439",
+  "name": "Timmie Hall",
+  "clock": "ENGINE",
+  "job": "Refugee Resettlement Case Worker",
+  "before": "Immigrant Rights Organizer",
+  "after": "Refugee Resettlement Case Worker"
+ },
+ {
+  "row": 330,
+  "popid": "POP-00440",
+  "name": "Xing Patel",
+  "clock": "ENGINE",
+  "job": "Ship Repair Foreman",
+  "before": "Ship Pilot",
+  "after": "Ship Repair Foreman"
+ },
+ {
+  "row": 331,
+  "popid": "POP-00441",
+  "name": "Soriya Rodriguez",
+  "clock": "ENGINE",
+  "job": "Ex-Offender Reentry Counselor",
+  "before": "Reentry Counselor",
+  "after": "Ex-Offender Reentry Counselor"
+ },
+ {
+  "row": 332,
+  "popid": "POP-00442",
+  "name": "Daire Green",
+  "clock": "ENGINE",
+  "job": "Transit Operator (AC Transit)",
+  "before": "Bus Operator",
+  "after": "Transit Operator (AC Transit)"
+ },
+ {
+  "row": 333,
+  "popid": "POP-00443",
+  "name": "Ace Hill",
+  "clock": "ENGINE",
+  "job": "ESL Teacher",
+  "before": "ESL Instructor",
+  "after": "ESL Teacher"
+ },
+ {
+  "row": 335,
+  "popid": "POP-00445",
+  "name": "Sam Fazio",
+  "clock": "ENGINE",
+  "job": "Digital Twin Architect",
+  "before": "Digital Twin Engineer",
+  "after": "Digital Twin Architect"
+ },
+ {
+  "row": 336,
+  "popid": "POP-00446",
+  "name": "Dimas Wong",
+  "clock": "ENGINE",
+  "job": "Stone Mason",
+  "before": "Concrete Finisher",
+  "after": "Stone Mason"
+ },
+ {
+  "row": 337,
+  "popid": "POP-00447",
+  "name": "Tyler Filet",
+  "clock": "ENGINE",
+  "job": "Biotech Lab Director (Portside Bio)",
+  "before": "Biotech Lab Manager",
+  "after": "Biotech Lab Director (Portside Bio)"
+ },
+ {
+  "row": 338,
+  "popid": "POP-00448",
+  "name": "Ray Neal",
+  "clock": "ENGINE",
+  "job": "AC Transit Bus Operator",
+  "before": "Bus Operator",
+  "after": "AC Transit Bus Operator"
+ },
+ {
+  "row": 339,
+  "popid": "POP-00449",
+  "name": "Teri Mitchell",
+  "clock": "ENGINE",
+  "job": "Graphic Designer",
+  "before": "Graphic Designer (Freelance)",
+  "after": "Graphic Designer"
+ },
+ {
+  "row": 340,
+  "popid": "POP-00450",
+  "name": "Rivers Escodedo",
+  "clock": "ENGINE",
+  "job": "Carpet Installer",
+  "before": "Glazier",
+  "after": "Carpet Installer"
+ },
+ {
+  "row": 341,
+  "popid": "POP-00451",
+  "name": "Andie Topez",
+  "clock": "ENGINE",
+  "job": "Upholstery Shop Owner",
+  "before": "Cleaning Service Owner",
+  "after": "Upholstery Shop Owner"
+ },
+ {
+  "row": 342,
+  "popid": "POP-00452",
+  "name": "Jodi Foil",
+  "clock": "ENGINE",
+  "job": "Biotech Lab Director (Portside Bio)",
+  "before": "Biotech Lab Manager",
+  "after": "Biotech Lab Director (Portside Bio)"
+ },
+ {
+  "row": 343,
+  "popid": "POP-00453",
+  "name": "Thomas Farrot",
+  "clock": "ENGINE",
+  "job": "Autonomous Systems Engineer",
+  "before": "Autonomous Vehicle Safety Engineer",
+  "after": "Autonomous Systems Engineer"
+ },
+ {
+  "row": 345,
+  "popid": "POP-00455",
+  "name": "Ily Gonzalez",
+  "clock": "ENGINE",
+  "job": "Fashion Designer",
+  "before": "Graphic Designer (Freelance)",
+  "after": "Fashion Designer"
+ },
+ {
+  "row": 346,
+  "popid": "POP-00456",
+  "name": "Bailey Allen",
+  "clock": "ENGINE",
+  "job": "Licensed Plumber",
+  "before": "Plumber",
+  "after": "Licensed Plumber"
+ },
+ {
+  "row": 347,
+  "popid": "POP-00457",
+  "name": "Chole Kim",
+  "clock": "ENGINE",
+  "job": "Affordable Childcare Advocate",
+  "before": "Childcare Provider / Daycare Owner",
+  "after": "Affordable Childcare Advocate"
+ },
+ {
+  "row": 348,
+  "popid": "POP-00458",
+  "name": "Riley Boon",
+  "clock": "ENGINE",
+  "job": "Food Truck Operator",
+  "before": "Food Truck Owner",
+  "after": "Food Truck Operator"
+ },
+ {
+  "row": 350,
+  "popid": "POP-00460",
+  "name": "Kenji Okafor",
+  "clock": "ENGINE",
+  "job": "Patent Attorney",
+  "before": "Civil Rights Attorney",
+  "after": "Patent Attorney"
+ },
+ {
+  "row": 351,
+  "popid": "POP-00461",
+  "name": "Wesley Clark",
+  "clock": "ENGINE",
+  "job": "Sports Analytics Lead (Gridiron Analytics)",
+  "before": "Sports Analytics Engineer (Gridiron)",
+  "after": "Sports Analytics Lead (Gridiron Analytics)"
+ },
+ {
+  "row": 352,
+  "popid": "POP-00462",
+  "name": "Birdie Flores",
+  "clock": "ENGINE",
+  "job": "Sourdough Baker",
+  "before": "Bakery Owner",
+  "after": "Sourdough Baker"
+ },
+ {
+  "row": 354,
+  "popid": "POP-00464",
+  "name": "Celeste Park",
+  "clock": "ENGINE",
+  "job": "Psychotherapist",
+  "before": "Mental Health Counselor",
+  "after": "Psychotherapist"
+ },
+ {
+  "row": 355,
+  "popid": "POP-00465",
+  "name": "April Nelson",
+  "clock": "ENGINE",
+  "job": "Printmaker",
+  "before": "Ceramicist / Studio Artist",
+  "after": "Printmaker"
+ },
+ {
+  "row": 356,
+  "popid": "POP-00466",
+  "name": "Juliette Park",
+  "clock": "ENGINE",
+  "job": "Venture Partner (Ridgeline Ventures)",
+  "before": "Financial Planner",
+  "after": "Venture Partner (Ridgeline Ventures)"
+ },
+ {
+  "row": 357,
+  "popid": "POP-00467",
+  "name": "Cedric Yamamoto",
+  "clock": "ENGINE",
+  "job": "Craft Brewery Owner",
+  "before": "Brewmaster",
+  "after": "Craft Brewery Owner"
+ },
+ {
+  "row": 359,
+  "popid": "POP-00469",
+  "name": "Yusuf Carmichael",
+  "clock": "ENGINE",
+  "job": "Pediatric Nurse Practitioner",
+  "before": "Psychiatric Nurse Practitioner",
+  "after": "Pediatric Nurse Practitioner"
+ },
+ {
+  "row": 360,
+  "popid": "POP-00470",
+  "name": "Maren Johns",
+  "clock": "ENGINE",
+  "job": "Psychotherapist",
+  "before": "Mental Health Counselor",
+  "after": "Psychotherapist"
+ },
+ {
+  "row": 362,
+  "popid": "POP-00472",
+  "name": "Josie Wong",
+  "clock": "ENGINE",
+  "job": "Commercial Painter",
+  "before": "Painter (Commercial/Industrial)",
+  "after": "Commercial Painter"
+ },
+ {
+  "row": 364,
+  "popid": "POP-00474",
+  "name": "Ally Scott",
+  "clock": "ENGINE",
+  "job": "City Building Inspector",
+  "before": "Building Inspector",
+  "after": "City Building Inspector"
+ },
+ {
+  "row": 365,
+  "popid": "POP-00475",
+  "name": "Maya Santos",
+  "clock": "ENGINE",
+  "job": "Ceramicist",
+  "before": "Ceramicist / Studio Artist",
+  "after": "Ceramicist"
+ },
+ {
+  "row": 366,
+  "popid": "POP-00476",
+  "name": "Jenna Comer",
+  "clock": "ENGINE",
+  "job": "Real Estate Developer",
+  "before": "Affordable Housing Developer",
+  "after": "Real Estate Developer"
+ },
+ {
+  "row": 367,
+  "popid": "POP-00477",
+  "name": "Timothy Leal",
+  "clock": "ENGINE",
+  "job": "Maritime Safety Inspector",
+  "before": "Maritime Environmental Compliance Officer",
+  "after": "Maritime Safety Inspector"
+ },
+ {
+  "row": 368,
+  "popid": "POP-00478",
+  "name": "Maya Brooks",
+  "clock": "ENGINE",
+  "job": "Concrete Specialist",
+  "before": "Concrete Finisher",
+  "after": "Concrete Specialist"
+ },
+ {
+  "row": 369,
+  "popid": "POP-00479",
+  "name": "Rango Young",
+  "clock": "ENGINE",
+  "job": "Hair Stylist",
+  "before": "Barbershop Owner",
+  "after": "Hair Stylist"
+ },
+ {
+  "row": 370,
+  "popid": "POP-00480",
+  "name": "Terrance Robinson",
+  "clock": "ENGINE",
+  "job": "Printmaker",
+  "before": "Ceramicist / Studio Artist",
+  "after": "Printmaker"
+ },
+ {
+  "row": 372,
+  "popid": "POP-00482",
+  "name": "Catherine Santos",
+  "clock": "ENGINE",
+  "job": "Digital Twin Architect",
+  "before": "Digital Twin Engineer",
+  "after": "Digital Twin Architect"
+ },
+ {
+  "row": 373,
+  "popid": "POP-00483",
+  "name": "Jace Robinson",
+  "clock": "ENGINE",
+  "job": "Machine Learning Engineer (Oakmesh Systems)",
+  "before": "OakMesh Systems Engineer",
+  "after": "Machine Learning Engineer (Oakmesh Systems)"
+ },
+ {
+  "row": 374,
+  "popid": "POP-00484",
+  "name": "Tim Allenson",
+  "clock": "ENGINE",
+  "job": "Yoga Studio Owner",
+  "before": "Personal Trainer / Fitness Instructor",
+  "after": "Yoga Studio Owner"
+ },
+ {
+  "row": 375,
+  "popid": "POP-00485",
+  "name": "Jillian Tort",
+  "clock": "ENGINE",
+  "job": "City Permit Coordinator",
+  "before": "Code Enforcement Officer",
+  "after": "City Permit Coordinator"
+ },
+ {
+  "row": 376,
+  "popid": "POP-00486",
+  "name": "Remo Rodriguez",
+  "clock": "ENGINE",
+  "job": "Farmers Market Organizer",
+  "before": "Event Planner",
+  "after": "Farmers Market Organizer"
+ },
+ {
+  "row": 377,
+  "popid": "POP-00487",
+  "name": "Jimar Garcia",
+  "clock": "ENGINE",
+  "job": "Fish Market Owner",
+  "before": "Commercial Fisherman",
+  "after": "Fish Market Owner"
+ },
+ {
+  "row": 378,
+  "popid": "POP-00488",
+  "name": "Rupert Ochoa",
+  "clock": "ENGINE",
+  "job": "Mutual Aid Network Organizer",
+  "before": "Mutual Aid Network Coordinator",
+  "after": "Mutual Aid Network Organizer"
+ },
+ {
+  "row": 380,
+  "popid": "POP-00490",
+  "name": "Keenan Kim",
+  "clock": "ENGINE",
+  "job": "Master Electrician",
+  "before": "Electrician",
+  "after": "Master Electrician"
+ },
+ {
+  "row": 381,
+  "popid": "POP-00491",
+  "name": "Brenda Gonzalez",
+  "clock": "ENGINE",
+  "job": "Neighborhood Watch Captain",
+  "before": "Community Organizer",
+  "after": "Neighborhood Watch Captain"
+ },
+ {
+  "row": 382,
+  "popid": "POP-00493",
+  "name": "Lima Fila",
+  "clock": "ENGINE",
+  "job": "Maritime Safety Inspector",
+  "before": "Maritime Environmental Compliance Officer",
+  "after": "Maritime Safety Inspector"
+ },
+ {
+  "row": 383,
+  "popid": "POP-00494",
+  "name": "Weston Herrin",
+  "clock": "ENGINE",
+  "job": "Refugee Resettlement Case Worker",
+  "before": "Immigrant Rights Organizer",
+  "after": "Refugee Resettlement Case Worker"
+ },
+ {
+  "row": 384,
+  "popid": "POP-00495",
+  "name": "Rosalind Young",
+  "clock": "ENGINE",
+  "job": "Smoke Shop Owner",
+  "before": "Corner Store / Bodega Owner",
+  "after": "Smoke Shop Owner"
+ },
+ {
+  "row": 385,
+  "popid": "POP-00496",
+  "name": "Rosa Simon",
+  "clock": "ENGINE",
+  "job": "Auto Body Shop Owner",
+  "before": "Auto Repair Shop Owner",
+  "after": "Auto Body Shop Owner"
+ },
+ {
+  "row": 386,
+  "popid": "POP-00497",
+  "name": "Abraham Wright",
+  "clock": "ENGINE",
+  "job": "Tea House Owner",
+  "before": "Coffee Roaster",
+  "after": "Tea House Owner"
+ },
+ {
+  "row": 387,
+  "popid": "POP-00498",
+  "name": "Beatrix Santos",
+  "clock": "ENGINE",
+  "job": "Herbalist",
+  "before": "Acupuncturist / Traditional Medicine Practitioner",
+  "after": "Herbalist"
+ },
+ {
+  "row": 388,
+  "popid": "POP-00499",
+  "name": "Jalen Serf",
+  "clock": "ENGINE",
+  "job": "School Psychologist",
+  "before": "School Counselor",
+  "after": "School Psychologist"
+ },
+ {
+  "row": 389,
+  "popid": "POP-00500",
+  "name": "Bali Cruz",
+  "clock": "ENGINE",
+  "job": "Historic Preservation Carpenter",
+  "before": "Seismic Retrofit Specialist",
+  "after": "Historic Preservation Carpenter"
+ },
+ {
+  "row": 404,
+  "popid": "POP-00515",
+  "name": "Ingrid Bautista",
+  "clock": "ENGINE",
+  "job": "Neighborhood Watch Captain",
+  "before": "Community Organizer",
+  "after": "Neighborhood Watch Captain"
+ },
+ {
+  "row": 409,
+  "popid": "POP-00520",
+  "name": "Derwin Train",
+  "clock": "ENGINE",
+  "job": "Grocery Store Owner",
+  "before": "Electrician",
+  "after": "Grocery Store Owner"
+ },
+ {
+  "row": 415,
+  "popid": "POP-00526",
+  "name": "Marisol Achebe",
+  "clock": "ENGINE",
+  "job": "Mutual Aid Network Organizer",
+  "before": "Mutual Aid Network Coordinator",
+  "after": "Mutual Aid Network Organizer"
+ },
+ {
+  "row": 418,
+  "popid": "POP-00529",
+  "name": "Tomas Aguilar",
+  "clock": "ENGINE",
+  "job": "Freight Logistics Coordinator (Port of Oakland)",
+  "before": "Port Logistics Coordinator",
+  "after": "Freight Logistics Coordinator (Port of Oakland)"
+ },
+ {
+  "row": 419,
+  "popid": "POP-00530",
+  "name": "Lena Okafor",
+  "clock": "ENGINE",
+  "job": "Daycare Director",
+  "before": "Childcare Provider / Daycare Owner",
+  "after": "Daycare Director"
+ },
+ {
+  "row": 420,
+  "popid": "POP-00531",
+  "name": "Priya Nair",
+  "clock": "ENGINE",
+  "job": "Climate Adaptation Engineer",
+  "before": "Civil Engineer (Infrastructure)",
+  "after": "Climate Adaptation Engineer"
+ },
+ {
+  "row": 421,
+  "popid": "POP-00532",
+  "name": "Marcus Whitfield",
+  "clock": "ENGINE",
+  "job": "Youth Basketball Coach",
+  "before": "After-School Program Director",
+  "after": "Youth Basketball Coach"
+ },
+ {
+  "row": 423,
+  "popid": "POP-00534",
+  "name": "Dak Leo",
+  "clock": "ENGINE",
+  "job": "Emergency Room Nurse (Highland Hospital)",
+  "before": "ER Nurse",
+  "after": "Emergency Room Nurse (Highland Hospital)"
+ },
+ {
+  "row": 424,
+  "popid": "POP-00535",
+  "name": "Lisa Tanaka",
+  "clock": "ENGINE",
+  "job": "Small Business Loan Officer",
+  "before": "Insurance Agent",
+  "after": "Small Business Loan Officer"
+ },
+ {
+  "row": 427,
+  "popid": "POP-00538",
+  "name": "Nila James",
+  "clock": "ENGINE",
+  "job": "Athlete",
+  "before": "Graphic Designer (Freelance)",
+  "after": "Athlete"
+ },
+ {
+  "row": 432,
+  "popid": "POP-00543",
+  "name": "Derek Obi",
+  "clock": "ENGINE",
+  "job": "IT Support Specialist",
+  "before": "Software Engineer (General)",
+  "after": "IT Support Specialist"
+ },
+ {
+  "row": 433,
+  "popid": "POP-00544",
+  "name": "Jem Steele",
+  "clock": "ENGINE",
+  "job": "Athlete",
+  "before": "Personal Trainer / Fitness Instructor",
+  "after": "Athlete"
+ },
+ {
+  "row": 434,
+  "popid": "POP-00545",
+  "name": "Rowan Pierce",
+  "clock": "ENGINE",
+  "job": "Freelance Writer",
+  "before": "Journalist / Reporter",
+  "after": "Freelance Writer"
+ },
+ {
+  "row": 436,
+  "popid": "POP-00547",
+  "name": "Jocelyn Santo",
+  "clock": "ENGINE",
+  "job": "Yoga Instructor",
+  "before": "Personal Trainer / Fitness Instructor",
+  "after": "Yoga Instructor"
+ },
+ {
+  "row": 437,
+  "popid": "POP-00554",
+  "name": "Patricia Nwosu",
+  "clock": "ENGINE",
+  "job": "Deputy Health Officer, Alameda County",
+  "before": "Municipal Court Clerk",
+  "after": "Deputy Health Officer, Alameda County"
+ },
+ {
+  "row": 439,
+  "popid": "POP-00556",
+  "name": "Renata Voss",
+  "clock": "ENGINE",
+  "job": "Pharmacist",
+  "before": "Pharmacy Technician",
+  "after": "Pharmacist"
+ },
+ {
+  "row": 440,
+  "popid": "POP-00573",
+  "name": "Calvin Mwangi",
+  "clock": "ENGINE",
+  "job": "AC Transit Bus Driver",
+  "before": "Bus Operator",
+  "after": "AC Transit Bus Driver"
+ },
+ {
+  "row": 442,
+  "popid": "POP-00588",
+  "name": "Darren Briggs",
+  "clock": "ENGINE",
+  "job": "City Building Inspector",
+  "before": "Building Inspector",
+  "after": "City Building Inspector"
+ },
+ {
+  "row": 443,
+  "popid": "POP-00589",
+  "name": "Michael Creighton",
+  "clock": "ENGINE",
+  "job": "Writer",
+  "before": "Sports Analytics Engineer (Gridiron)",
+  "after": "Writer"
+ },
+ {
+  "row": 444,
+  "popid": "POP-00590",
+  "name": "Reggie Soto",
+  "clock": "ENGINE",
+  "job": "Auto Body Shop Owner",
+  "before": "Auto Repair Shop Owner",
+  "after": "Auto Body Shop Owner"
+ },
+ {
+  "row": 445,
+  "popid": "POP-00591",
+  "name": "Selena Grant",
+  "clock": "MEDIA",
+  "job": "Journalist - The Oakland Oaks Beat Reporter",
+  "before": "Journalist / Reporter",
+  "after": "Journalist - The Oakland Oaks Beat Reporter"
+ },
+ {
+  "row": 446,
+  "popid": "POP-00592",
+  "name": "Talia Finch",
+  "clock": "MEDIA",
+  "job": "Journalist - The Oakland Oaks Ground Reporter",
+  "before": "Journalist / Reporter",
+  "after": "Journalist - The Oakland Oaks Ground Reporter"
+ },
+ {
+  "row": 448,
+  "popid": "POP-00594",
+  "name": "Robert Corliss",
+  "clock": "ENGINE",
+  "job": "Retired Estuary Power & Gas Engineer",
+  "before": "Civil Engineer (Infrastructure)",
+  "after": "Retired Estuary Power & Gas Engineer"
+ },
+ {
+  "row": 449,
+  "popid": "POP-00595",
+  "name": "Sarah Corliss",
+  "clock": "ENGINE",
+  "job": "Capacity Analyst, DigitalOcean",
+  "before": "Software / Data Analyst",
+  "after": "Capacity Analyst, DigitalOcean"
+ },
+ {
+  "row": 450,
+  "popid": "POP-00596",
+  "name": "Michael Corliss",
+  "clock": "ENGINE",
+  "job": "Photographer",
+  "before": "Graphic Designer (Freelance)",
+  "after": "Photographer"
+ },
+ {
+  "row": 458,
+  "popid": "POP-00619",
+  "name": "Tarrance Bolden",
+  "clock": "ENGINE",
+  "job": "Auto Mechanic",
+  "before": "Auto Repair Shop Owner",
+  "after": "Auto Mechanic"
+ },
+ {
+  "row": 459,
+  "popid": "POP-00620",
+  "name": "Yuki Tanaka",
+  "clock": "ENGINE",
+  "job": "Florist",
+  "before": "Florist / Plant Shop Owner",
+  "after": "Florist"
+ },
+ {
+  "row": 460,
+  "popid": "POP-00621",
+  "name": "Delvon Pratt",
+  "clock": "ENGINE",
+  "job": "Warehouse Supervisor",
+  "before": "Warehouse Automation Technician",
+  "after": "Warehouse Supervisor"
+ },
+ {
+  "row": 461,
+  "popid": "POP-00623",
+  "name": "Winston Clarke",
+  "clock": "ENGINE",
+  "job": "Retired Teacher",
+  "before": "K-8 Teacher",
+  "after": "Retired Teacher"
+ },
+ {
+  "row": 463,
+  "popid": "POP-00625",
+  "name": "Gregory Cho",
+  "clock": "ENGINE",
+  "job": "Restaurant Owner",
+  "before": "Taqueria Owner",
+  "after": "Restaurant Owner"
+ },
+ {
+  "row": 465,
+  "popid": "POP-00627",
+  "name": "Emma Washington",
+  "clock": "ENGINE",
+  "job": "Barber",
+  "before": "Barbershop Owner",
+  "after": "Barber"
+ },
+ {
+  "row": 467,
+  "popid": "POP-00629",
+  "name": "Marcus Ibarra",
+  "clock": "ENGINE",
+  "job": "Construction Foreman",
+  "before": "Site Foreman",
+  "after": "Construction Foreman"
+ },
+ {
+  "row": 468,
+  "popid": "POP-00630",
+  "name": "Patricia Leung",
+  "clock": "ENGINE",
+  "job": "Bookkeeper",
+  "before": "Accountant / CPA",
+  "after": "Bookkeeper"
+ },
+ {
+  "row": 469,
+  "popid": "POP-00631",
+  "name": "Derry Webb",
+  "clock": "ENGINE",
+  "job": "Youth Basketball Coach",
+  "before": "After-School Program Director",
+  "after": "Youth Basketball Coach"
+ },
+ {
+  "row": 471,
+  "popid": "POP-00633",
+  "name": "Dolores Fuentes",
+  "clock": "ENGINE",
+  "job": "Seamstress",
+  "before": "Cleaning Service Owner",
+  "after": "Seamstress"
+ },
+ {
+  "row": 472,
+  "popid": "POP-00634",
+  "name": "Dame Reed",
+  "clock": "ENGINE",
+  "job": "Artist/Muralist",
+  "before": "Freight Broker",
+  "after": "Artist/Muralist"
+ },
+ {
+  "row": 473,
+  "popid": "POP-00635",
+  "name": "Mei Chen",
+  "clock": "ENGINE",
+  "job": "Gallery Owner/Curator",
+  "before": "Building Inspector",
+  "after": "Gallery Owner/Curator"
+ },
+ {
+  "row": 474,
+  "popid": "POP-00636",
+  "name": "Luis Navarro",
+  "clock": "MEDIA",
+  "job": "Journalist, Managing Editor & Investigations",
+  "before": "Journalist / Reporter",
+  "after": "Journalist, Managing Editor & Investigations"
+ },
+ {
+  "row": 491,
+  "popid": "POP-00653",
+  "name": "Jerome Jessup",
+  "clock": "ENGINE",
+  "job": "Record Shop Owner",
+  "before": "Independent Bookstore Owner",
+  "after": "Record Shop Owner"
+ },
+ {
+  "row": 492,
+  "popid": "POP-00654",
+  "name": "Willy Wally",
+  "clock": "ENGINE",
+  "job": "International Trade Consultant",
+  "before": "Freight Broker",
+  "after": "International Trade Consultant"
+ },
+ {
+  "row": 493,
+  "popid": "POP-00656",
+  "name": "Brianna Scott",
+  "clock": "ENGINE",
+  "job": "Food Truck Operator",
+  "before": "Food Truck Owner",
+  "after": "Food Truck Operator"
+ },
+ {
+  "row": 494,
+  "popid": "POP-00657",
+  "name": "Aida Jackson",
+  "clock": "ENGINE",
+  "job": "Orthodontist",
+  "before": "Dental Hygienist",
+  "after": "Orthodontist"
+ },
+ {
+  "row": 496,
+  "popid": "POP-00659",
+  "name": "Ripley Court",
+  "clock": "ENGINE",
+  "job": "STEM Program Coordinator",
+  "before": "After-School Program Director",
+  "after": "STEM Program Coordinator"
+ },
+ {
+  "row": 497,
+  "popid": "POP-00660",
+  "name": "Ala Lewis",
+  "clock": "ENGINE",
+  "job": "Tailor",
+  "before": "Cleaning Service Owner",
+  "after": "Tailor"
+ },
+ {
+  "row": 498,
+  "popid": "POP-00661",
+  "name": "Bianca Crook",
+  "clock": "ENGINE",
+  "job": "Autonomous Systems Engineer",
+  "before": "Autonomous Vehicle Safety Engineer",
+  "after": "Autonomous Systems Engineer"
+ },
+ {
+  "row": 499,
+  "popid": "POP-00662",
+  "name": "Simone Limone",
+  "clock": "ENGINE",
+  "job": "Herbalist",
+  "before": "Acupuncturist / Traditional Medicine Practitioner",
+  "after": "Herbalist"
+ },
+ {
+  "row": 500,
+  "popid": "POP-00663",
+  "name": "Soo Loo",
+  "clock": "ENGINE",
+  "job": "Corporate Accountant",
+  "before": "Accountant / CPA",
+  "after": "Corporate Accountant"
+ },
+ {
+  "row": 502,
+  "popid": "POP-00665",
+  "name": "Art Scott",
+  "clock": "ENGINE",
+  "job": "Sustainable Materials Scientist",
+  "before": "Environmental Consultant",
+  "after": "Sustainable Materials Scientist"
+ },
+ {
+  "row": 503,
+  "popid": "POP-00666",
+  "name": "Kaila Raimon",
+  "clock": "ENGINE",
+  "job": "Sourdough Baker",
+  "before": "Bakery Owner",
+  "after": "Sourdough Baker"
+ },
+ {
+  "row": 504,
+  "popid": "POP-00667",
+  "name": "Lo Thoop",
+  "clock": "ENGINE",
+  "job": "Creative Writing Teacher",
+  "before": "High School Teacher",
+  "after": "Creative Writing Teacher"
+ },
+ {
+  "row": 506,
+  "popid": "POP-00669",
+  "name": "Tank Fiester",
+  "clock": "ENGINE",
+  "job": "Biotech Lab Director (Portside Bio)",
+  "before": "Biotech Lab Manager",
+  "after": "Biotech Lab Director (Portside Bio)"
+ },
+ {
+  "row": 507,
+  "popid": "POP-00670",
+  "name": "Drew Lemon",
+  "clock": "ENGINE",
+  "job": "Housing Authority Inspector",
+  "before": "Code Enforcement Officer",
+  "after": "Housing Authority Inspector"
+ },
+ {
+  "row": 508,
+  "popid": "POP-00671",
+  "name": "Siu Niu",
+  "clock": "ENGINE",
+  "job": "Orthodontist",
+  "before": "Dental Hygienist",
+  "after": "Orthodontist"
+ },
+ {
+  "row": 510,
+  "popid": "POP-00673",
+  "name": "Lilac Hint",
+  "clock": "ENGINE",
+  "job": "Glassblower",
+  "before": "Ceramicist / Studio Artist",
+  "after": "Glassblower"
+ },
+ {
+  "row": 513,
+  "popid": "POP-00676",
+  "name": "Teddy Tamus",
+  "clock": "ENGINE",
+  "job": "Neighborhood Pharmacy Owner",
+  "before": "Pharmacy Technician",
+  "after": "Neighborhood Pharmacy Owner"
+ },
+ {
+  "row": 514,
+  "popid": "POP-00677",
+  "name": "Tio Rio",
+  "clock": "ENGINE",
+  "job": "Jade Jewelry Artisan",
+  "before": "Ceramicist / Studio Artist",
+  "after": "Jade Jewelry Artisan"
+ },
+ {
+  "row": 515,
+  "popid": "POP-00678",
+  "name": "Celo Patel",
+  "clock": "ENGINE",
+  "job": "Container Yard Supervisor",
+  "before": "Port Logistics Coordinator",
+  "after": "Container Yard Supervisor"
+ },
+ {
+  "row": 516,
+  "popid": "POP-00679",
+  "name": "Amear Thompson",
+  "clock": "ENGINE",
+  "job": "Jade Jewelry Artisan",
+  "before": "Ceramicist / Studio Artist",
+  "after": "Jade Jewelry Artisan"
+ },
+ {
+  "row": 518,
+  "popid": "POP-00681",
+  "name": "Moltin Tilton",
+  "clock": "ENGINE",
+  "job": "International Trade Consultant",
+  "before": "Freight Broker",
+  "after": "International Trade Consultant"
+ },
+ {
+  "row": 520,
+  "popid": "POP-00683",
+  "name": "Mark Fisher",
+  "clock": "ENGINE",
+  "job": "Smart City Infrastructure Planner",
+  "before": "Smart Building Systems Manager",
+  "after": "Smart City Infrastructure Planner"
+ },
+ {
+  "row": 522,
+  "popid": "POP-00685",
+  "name": "Eliza Nguyen",
+  "clock": "ENGINE",
+  "job": "Climate Adaptation Specialist",
+  "before": "Climate Adaptation Planner",
+  "after": "Climate Adaptation Specialist"
+ },
+ {
+  "row": 524,
+  "popid": "POP-00687",
+  "name": "Alexa Ward",
+  "clock": "ENGINE",
+  "job": "Licensed Plumber",
+  "before": "Plumber",
+  "after": "Licensed Plumber"
+ },
+ {
+  "row": 525,
+  "popid": "POP-00688",
+  "name": "Merkin Jumper",
+  "clock": "ENGINE",
+  "job": "Social Services Caseworker",
+  "before": "Social Worker",
+  "after": "Social Services Caseworker"
+ },
+ {
+  "row": 526,
+  "popid": "POP-00689",
+  "name": "Warchester Nathan",
+  "clock": "ENGINE",
+  "job": "Climate Adaptation Specialist",
+  "before": "Climate Adaptation Planner",
+  "after": "Climate Adaptation Specialist"
+ },
+ {
+  "row": 527,
+  "popid": "POP-00690",
+  "name": "Eloise Jackson",
+  "clock": "ENGINE",
+  "job": "Food Truck Operator",
+  "before": "Food Truck Owner",
+  "after": "Food Truck Operator"
+ },
+ {
+  "row": 528,
+  "popid": "POP-00691",
+  "name": "Tom Jilner",
+  "clock": "ENGINE",
+  "job": "Wine Bar Owner",
+  "before": "Sommelier",
+  "after": "Wine Bar Owner"
+ },
+ {
+  "row": 529,
+  "popid": "POP-00692",
+  "name": "Weslie Cooper",
+  "clock": "ENGINE",
+  "job": "Tailor",
+  "before": "Cleaning Service Owner",
+  "after": "Tailor"
+ },
+ {
+  "row": 531,
+  "popid": "POP-00695",
+  "name": "Annika Delgado",
+  "clock": "ENGINE",
+  "job": "Auto Body Shop Owner",
+  "before": "Auto Repair Shop Owner",
+  "after": "Auto Body Shop Owner"
+ },
+ {
+  "row": 532,
+  "popid": "POP-00696",
+  "name": "Soleil Kapoor",
+  "clock": "ENGINE",
+  "job": "Vietnamese Pho Shop Owner",
+  "before": "Taqueria Owner",
+  "after": "Vietnamese Pho Shop Owner"
+ },
+ {
+  "row": 533,
+  "popid": "POP-00697",
+  "name": "Declan Toto",
+  "clock": "ENGINE",
+  "job": "Gene Therapy Counselor",
+  "before": "Gene Therapy Clinician",
+  "after": "Gene Therapy Counselor"
+ },
+ {
+  "row": 534,
+  "popid": "POP-00698",
+  "name": "Marisio Curazo",
+  "clock": "ENGINE",
+  "job": "Elder Care Coordinator",
+  "before": "Elder Abuse Prevention Specialist",
+  "after": "Elder Care Coordinator"
+ },
+ {
+  "row": 537,
+  "popid": "POP-00701",
+  "name": "Tee Dee",
+  "clock": "ENGINE",
+  "job": "Smoke Shop Owner",
+  "before": "Corner Store / Bodega Owner",
+  "after": "Smoke Shop Owner"
+ },
+ {
+  "row": 538,
+  "popid": "POP-00702",
+  "name": "Tiu Kim",
+  "clock": "ENGINE",
+  "job": "Algae Biofuel Technician",
+  "before": "Synthetic Biology Technician",
+  "after": "Algae Biofuel Technician"
+ },
+ {
+  "row": 539,
+  "popid": "POP-00703",
+  "name": "Ira Leu",
+  "clock": "ENGINE",
+  "job": "Artisan Cheesemaker",
+  "before": "Catering Business Owner",
+  "after": "Artisan Cheesemaker"
+ },
+ {
+  "row": 540,
+  "popid": "POP-00704",
+  "name": "Iwwa Cruz",
+  "clock": "ENGINE",
+  "job": "Herbalist",
+  "before": "Acupuncturist / Traditional Medicine Practitioner",
+  "after": "Herbalist"
+ },
+ {
+  "row": 541,
+  "popid": "POP-00705",
+  "name": "Jessie Berry",
+  "clock": "ENGINE",
+  "job": "Harbor Tugboat Captain",
+  "before": "Ship Pilot",
+  "after": "Harbor Tugboat Captain"
+ },
+ {
+  "row": 543,
+  "popid": "POP-00707",
+  "name": "Markenie Tian",
+  "clock": "ENGINE",
+  "job": "Algae Biofuel Technician",
+  "before": "Synthetic Biology Technician",
+  "after": "Algae Biofuel Technician"
+ },
+ {
+  "row": 544,
+  "popid": "POP-00708",
+  "name": "Dyami Mitchell",
+  "clock": "ENGINE",
+  "job": "Graffiti Restoration Artist",
+  "before": "Muralist",
+  "after": "Graffiti Restoration Artist"
+ },
+ {
+  "row": 545,
+  "popid": "POP-00709",
+  "name": "Jessica Brooks",
+  "clock": "ENGINE",
+  "job": "Herbalist",
+  "before": "Acupuncturist / Traditional Medicine Practitioner",
+  "after": "Herbalist"
+ },
+ {
+  "row": 546,
+  "popid": "POP-00710",
+  "name": "Julie Santos",
+  "clock": "ENGINE",
+  "job": "Acupuncturist",
+  "before": "Acupuncturist / Traditional Medicine Practitioner",
+  "after": "Acupuncturist"
+ },
+ {
+  "row": 547,
+  "popid": "POP-00711",
+  "name": "Xavier Robinson",
+  "clock": "ENGINE",
+  "job": "Sea Level Monitoring Technician",
+  "before": "Marine Biologist (Applied)",
+  "after": "Sea Level Monitoring Technician"
+ },
+ {
+  "row": 548,
+  "popid": "POP-00712",
+  "name": "Jeremy Wong",
+  "clock": "ENGINE",
+  "job": "Civic Data Engineer (Oakmesh Systems)",
+  "before": "OakMesh Systems Engineer",
+  "after": "Civic Data Engineer (Oakmesh Systems)"
+ },
+ {
+  "row": 550,
+  "popid": "POP-00715",
+  "name": "Nadine Beckett",
+  "clock": "ENGINE",
+  "job": "Nurse Practitioner",
+  "before": "Psychiatric Nurse Practitioner",
+  "after": "Nurse Practitioner"
+ },
+ {
+  "row": 551,
+  "popid": "POP-00716",
+  "name": "Omarion Farah",
+  "clock": "ENGINE",
+  "job": "Cab Driver",
+  "before": "Rideshare / Delivery Driver (Professional)",
+  "after": "Cab Driver"
+ },
+ {
+  "row": 552,
+  "popid": "POP-00717",
+  "name": "Nikolai Fuentes",
+  "clock": "MEDIA",
+  "job": "Street Photographer",
+  "before": "Graphic Designer (Freelance)",
+  "after": "Street Photographer"
+ },
+ {
+  "row": 553,
+  "popid": "POP-00718",
+  "name": "Ileana Vasquez",
+  "clock": "ENGINE",
+  "job": "Sculptor",
+  "before": "Ceramicist / Studio Artist",
+  "after": "Sculptor"
+ },
+ {
+  "row": 554,
+  "popid": "POP-00719",
+  "name": "Debbie Kaplan",
+  "clock": "ENGINE",
+  "job": "Harbor Tugboat Captain",
+  "before": "Ship Pilot",
+  "after": "Harbor Tugboat Captain"
+ },
+ {
+  "row": 555,
+  "popid": "POP-00720",
+  "name": "Russell Hayward",
+  "clock": "ENGINE",
+  "job": "Insurance Adjuster",
+  "before": "Insurance Agent",
+  "after": "Insurance Adjuster"
+ },
+ {
+  "row": 556,
+  "popid": "POP-00721",
+  "name": "Jesus Jorden",
+  "clock": "ENGINE",
+  "job": "Pastry Chef, OakHouse",
+  "before": "Pastry Chef",
+  "after": "Pastry Chef, OakHouse"
+ },
+ {
+  "row": 561,
+  "popid": "POP-00726",
+  "name": "Vivian Fong",
+  "clock": "ENGINE",
+  "job": "Dim Sum Restaurant Owner",
+  "before": "Taqueria Owner",
+  "after": "Dim Sum Restaurant Owner"
+ },
+ {
+  "row": 562,
+  "popid": "POP-00727",
+  "name": "Gloria Hutchins",
+  "clock": "ENGINE",
+  "job": "Retired School Bus Driver",
+  "before": "Community Organizer",
+  "after": "Retired School Bus Driver"
+ },
+ {
+  "row": 563,
+  "popid": "POP-00728",
+  "name": "DeShawn Avery",
+  "clock": "ENGINE",
+  "job": "Community College Student",
+  "before": "Childcare Provider / Daycare Owner",
+  "after": "Community College Student"
+ },
+ {
+  "row": 564,
+  "popid": "POP-00729",
+  "name": "Patricia Nolan",
+  "clock": "ENGINE",
+  "job": "Retired teacher",
+  "before": "Home Health Aide",
+  "after": "Retired teacher"
+ },
+ {
+  "row": 565,
+  "popid": "POP-00730",
+  "name": "Clarence Moody",
+  "clock": "ENGINE",
+  "job": "Retired Machinist",
+  "before": "Drone Fleet Manager",
+  "after": "Retired Machinist"
+ },
+ {
+  "row": 566,
+  "popid": "POP-00731",
+  "name": "Leanne Wu",
+  "clock": "ENGINE",
+  "job": "Director of Sustainability",
+  "before": "Street Medicine Physician",
+  "after": "Director of Sustainability"
+ },
+ {
+  "row": 568,
+  "popid": "POP-00733",
+  "name": "Dorothy Rios",
+  "clock": "ENGINE",
+  "job": "Retired",
+  "before": "After-School Program Director",
+  "after": "Retired"
+ },
+ {
+  "row": 569,
+  "popid": "POP-00734",
+  "name": "Father Miguel",
+  "clock": "ENGINE",
+  "job": "Parish priest",
+  "before": "Senior Pastor / Faith Leader",
+  "after": "Parish priest"
+ },
+ {
+  "row": 570,
+  "popid": "POP-00735",
+  "name": "Carla Edmonds",
+  "clock": "ENGINE",
+  "job": "retired teacher",
+  "before": "Domestic Violence Shelter Counselor",
+  "after": "retired teacher"
+ },
+ {
+  "row": 571,
+  "popid": "POP-00736",
+  "name": "Vincent Cho",
+  "clock": "ENGINE",
+  "job": "small business owner",
+  "before": "Museum Curator",
+  "after": "small business owner"
+ },
+ {
+  "row": 572,
+  "popid": "POP-00737",
+  "name": "Everly Rainey",
+  "clock": "ENGINE",
+  "job": "waterfront developer",
+  "before": "Dockworker",
+  "after": "waterfront developer"
+ },
+ {
+  "row": 573,
+  "popid": "POP-00738",
+  "name": "Vivian Tse",
+  "clock": "ENGINE",
+  "job": "Dim Sum Restaurant Owner",
+  "before": "Taqueria Owner",
+  "after": "Dim Sum Restaurant Owner"
+ },
+ {
+  "row": 574,
+  "popid": "POP-00739",
+  "name": "Karem Asante",
+  "clock": "ENGINE",
+  "job": "Youth Counselor",
+  "before": "Youth Literacy Coordinator",
+  "after": "Youth Counselor"
+ },
+ {
+  "row": 575,
+  "popid": "POP-00740",
+  "name": "Miriam Shelton",
+  "clock": "ENGINE",
+  "job": "Librarian",
+  "before": "Public Librarian",
+  "after": "Librarian"
+ },
+ {
+  "row": 577,
+  "popid": "POP-00742",
+  "name": "Maya Torres-Dillon",
+  "clock": "ENGINE",
+  "job": "Bay Conservation Alliance Advisory board, High School Science Teacher",
+  "before": "High School Teacher",
+  "after": "Bay Conservation Alliance Advisory board, High School Science Teacher"
+ },
+ {
+  "row": 578,
+  "popid": "POP-00743",
+  "name": "Rick Dillon",
+  "clock": "ENGINE",
+  "job": "Grade Schooler",
+  "before": "student",
+  "after": "Grade Schooler"
+ },
+ {
+  "row": 579,
+  "popid": "POP-00744",
+  "name": "Tomas Renteria",
+  "clock": "MEDIA",
+  "job": "Podcast Host / Line Cook",
+  "before": "Podcast Producer",
+  "after": "Podcast Host / Line Cook"
+ },
+ {
+  "row": 580,
+  "popid": "POP-00745",
+  "name": "Sonia Parikh",
+  "clock": "MEDIA",
+  "job": "Podcast Host / Software Engineer",
+  "before": "Podcast Producer",
+  "after": "Podcast Host / Software Engineer"
+ },
+ {
+  "row": 583,
+  "popid": "POP-00748",
+  "name": "Vince Okoye",
+  "clock": "ENGINE",
+  "job": "Software engineer",
+  "before": "Parks & Recreation Director",
+  "after": "Software engineer"
+ },
+ {
+  "row": 586,
+  "popid": "POP-00753",
+  "name": "Eunice Marston",
+  "clock": "ENGINE",
+  "job": "Senior Pastor / Faith Leader",
+  "before": "Nonprofit Executive Director",
+  "after": "Senior Pastor / Faith Leader"
+ },
+ {
+  "row": 587,
+  "popid": "POP-00754",
+  "name": "Ophelia Brenner",
+  "clock": "ENGINE",
+  "job": "Senior Pastor / Faith Leader",
+  "before": "Nonprofit Executive Director",
+  "after": "Senior Pastor / Faith Leader"
+ },
+ {
+  "row": 588,
+  "popid": "POP-00755",
+  "name": "Antoine Vermeer",
+  "clock": "ENGINE",
+  "job": "Senior Pastor / Faith Leader",
+  "before": "Nonprofit Executive Director",
+  "after": "Senior Pastor / Faith Leader"
+ },
+ {
+  "row": 589,
+  "popid": "POP-00756",
+  "name": "Ramon Solano",
+  "clock": "ENGINE",
+  "job": "Senior Pastor / Faith Leader",
+  "before": "Nonprofit Executive Director",
+  "after": "Senior Pastor / Faith Leader"
+ },
+ {
+  "row": 590,
+  "popid": "POP-00757",
+  "name": "Daniel Han",
+  "clock": "ENGINE",
+  "job": "Senior Pastor / Faith Leader",
+  "before": "Nonprofit Executive Director",
+  "after": "Senior Pastor / Faith Leader"
+ },
+ {
+  "row": 591,
+  "popid": "POP-00758",
+  "name": "Robert Jaston",
+  "clock": "ENGINE",
+  "job": "Senior Pastor / Faith Leader",
+  "before": "Nonprofit Executive Director",
+  "after": "Senior Pastor / Faith Leader"
+ },
+ {
+  "row": 592,
+  "popid": "POP-00759",
+  "name": "Naomi Sterling",
+  "clock": "ENGINE",
+  "job": "Senior Pastor / Faith Leader",
+  "before": "Nonprofit Executive Director",
+  "after": "Senior Pastor / Faith Leader"
+ },
+ {
+  "row": 593,
+  "popid": "POP-00760",
+  "name": "Yael Bauer",
+  "clock": "ENGINE",
+  "job": "Senior Pastor / Faith Leader",
+  "before": "Nonprofit Executive Director",
+  "after": "Senior Pastor / Faith Leader"
+ },
+ {
+  "row": 594,
+  "popid": "POP-00761",
+  "name": "Idris Karim",
+  "clock": "ENGINE",
+  "job": "Senior Pastor / Faith Leader",
+  "before": "Nonprofit Executive Director",
+  "after": "Senior Pastor / Faith Leader"
+ },
+ {
+  "row": 595,
+  "popid": "POP-00762",
+  "name": "Aziz Rahimi",
+  "clock": "ENGINE",
+  "job": "Senior Pastor / Faith Leader",
+  "before": "Nonprofit Executive Director",
+  "after": "Senior Pastor / Faith Leader"
+ },
+ {
+  "row": 596,
+  "popid": "POP-00763",
+  "name": "Kenji Tanaka",
+  "clock": "ENGINE",
+  "job": "Senior Pastor / Faith Leader",
+  "before": "Nonprofit Executive Director",
+  "after": "Senior Pastor / Faith Leader"
+ },
+ {
+  "row": 598,
+  "popid": "POP-00765",
+  "name": "Anand Krishnamurthy",
+  "clock": "ENGINE",
+  "job": "Senior Pastor / Faith Leader",
+  "before": "Nonprofit Executive Director",
+  "after": "Senior Pastor / Faith Leader"
+ },
+ {
+  "row": 599,
+  "popid": "POP-00766",
+  "name": "Manjit Singh",
+  "clock": "ENGINE",
+  "job": "Senior Pastor / Faith Leader",
+  "before": "Nonprofit Executive Director",
+  "after": "Senior Pastor / Faith Leader"
+ },
+ {
+  "row": 600,
+  "popid": "POP-00767",
+  "name": "Miriam Goldstein",
+  "clock": "ENGINE",
+  "job": "Senior Pastor / Faith Leader",
+  "before": "Nonprofit Executive Director",
+  "after": "Senior Pastor / Faith Leader"
+ },
+ {
+  "row": 601,
+  "popid": "POP-00768",
+  "name": "Eleanor Bishop",
+  "clock": "ENGINE",
+  "job": "Senior Pastor / Faith Leader",
+  "before": "Nonprofit Executive Director",
+  "after": "Senior Pastor / Faith Leader"
+ },
+ {
+  "row": 603,
+  "popid": "POP-00770",
+  "name": "Kato Rivers",
+  "clock": "ENGINE",
+  "job": "Fitness Trainer",
+  "before": "Personal Trainer / Fitness Instructor",
+  "after": "Fitness Trainer"
+ },
+ {
+  "row": 607,
+  "popid": "POP-00774",
+  "name": "Malik Hayes",
+  "clock": "MEDIA",
+  "job": "Lead Investigator, OakTown Echo",
+  "before": "Journalist / Reporter",
+  "after": "Lead Investigator, OakTown Echo"
+ },
+ {
+  "row": 608,
+  "popid": "POP-00775",
+  "name": "Sammie Alvarez",
+  "clock": "MEDIA",
+  "job": "Civic & Neighborhood Reporter, OakTown Echo",
+  "before": "Journalist / Reporter",
+  "after": "Civic & Neighborhood Reporter, OakTown Echo"
+ },
+ {
+  "row": 609,
+  "popid": "POP-00776",
+  "name": "Kwame Ellis",
+  "clock": "MEDIA",
+  "job": "Civic Opinion Columnist, OakTown Echo",
+  "before": "Journalist / Reporter",
+  "after": "Civic Opinion Columnist, OakTown Echo"
+ },
+ {
+  "row": 610,
+  "popid": "POP-00777",
+  "name": "Rico Valdez",
+  "clock": "MEDIA",
+  "job": "Lead Sports Reporter, OakTown Echo",
+  "before": "Journalist / Reporter",
+  "after": "Lead Sports Reporter, OakTown Echo"
+ },
+ {
+  "row": 611,
+  "popid": "POP-00778",
+  "name": "Jamal Thompson",
+  "clock": "MEDIA",
+  "job": "Fan & Culture Columnist, OakTown Echo",
+  "before": "Journalist / Reporter",
+  "after": "Fan & Culture Columnist, OakTown Echo"
+ },
+ {
+  "row": 612,
+  "popid": "POP-00779",
+  "name": "Nia Patel",
+  "clock": "MEDIA",
+  "job": "Economics Reporter, OakTown Echo",
+  "before": "Journalist / Reporter",
+  "after": "Economics Reporter, OakTown Echo"
+ },
+ {
+  "row": 613,
+  "popid": "POP-00780",
+  "name": "Delin Morales",
+  "clock": "MEDIA",
+  "job": "Senior Photographer, OakTown Echo",
+  "before": "Journalist / Reporter",
+  "after": "Senior Photographer, OakTown Echo"
+ },
+ {
+  "row": 631,
+  "popid": "POP-00799",
+  "name": "Jax Caldera",
+  "clock": "MEDIA",
+  "job": "Journalist, freelance accountability writer",
+  "before": "Journalist / Reporter",
+  "after": "Journalist, freelance accountability writer"
+ },
+ {
+  "row": 632,
+  "popid": "POP-00800",
+  "name": "Rhea Morgan",
+  "clock": "MEDIA",
+  "job": "Copy Chief and Data Analyst",
+  "before": "Journalist / Reporter",
+  "after": "Copy Chief and Data Analyst"
+ },
+ {
+  "row": 903,
+  "popid": "POP-01076",
+  "name": "Nia Rook",
+  "clock": "MEDIA",
+  "job": "Journalist, UNDOCKED Recap",
+  "before": "Journalist / Reporter",
+  "after": "Journalist, UNDOCKED Recap"
+ }
+]

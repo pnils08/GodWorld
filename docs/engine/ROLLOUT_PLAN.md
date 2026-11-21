@@ -91,8 +91,6 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| engine.341 | Seed deck dead paths (builder 11-08): maps name the deck's writer; two old-deck writers, the handoff tool and a dead validator retired. LIVE PROD stage 66 | done-pending-archive | engine-sheet | [[../plans/2026-11-08-seed-deck-dead-readers-writers]] |
-| engine.355 | Rollback-to-78 wipe tool retired (builder 11-21): out of the repo and the live script, civic gate's false undo pointer cut. LIVE PROD stage 66 | done-pending-archive | engine-sheet | [[../plans/2026-11-08-seed-deck-dead-readers-writers]] §engine.355 |
 | engine.352 | Authored citizens' sheet rows and June essence entries read against what he wrote of them (builder 11-17): 43. Read first; each row changes on his word | ready | research-build | `output/production_log_run_cycle_c116_gaps.md` G-EC56 |
 | engine.348 | Workers' records the engine does not yet produce (builder 11-16), e.g. the fire chief's one record. Own session after the worker template | ready | engine-sheet | [[../research/2026-11-15-worker-records-all-tabs]] |
 | civic.50 | Council seats act beyond initiatives (builder 11-14): every move they hold works through one, canvass sets nothing. Design is the builder's; plan at pickup | ready | engine-sheet | [[../reference/AGENT_BOOT_TEMPLATES]] §2 The gap |

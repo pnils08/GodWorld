@@ -14,43 +14,85 @@ Mechanical sub-steps (6):
 ========================================================================
 
 --- [1/6] session summary → Supermemory (best-effort) ---
-✓ session log → Supermemory [session-logs] doc YPFxVe3XFH2Lj51oNeNNdc (3050 chars, 5 summary rows folded)
+✓ session log → Supermemory [session-logs] doc YvMVdPVHMaM2SwitGvxQdB (2905 chars, 34 summary rows folded)
 
 --- [2/6] auditPlanTagDrift (informational) ---
   # Plan tag drift audit
   
-  Generated: 2026-11-21T18:32:23.961Z
-  Plans scanned: 180
+  Generated: 2026-11-21T23:31:10.553Z
+  Plans scanned: 181
   No frontmatter: 10
   No changelog: 8
-  No status-verb match: 160
+  No status-verb match: 161
   Drifts found: 0
   
   No plan-tag drift detected.
   ✓ no drift detected
 
 --- [3/6] ROLLOUT conformance lint (informational) ---
+  # rolloutSweep — APPLY
+  
+  Would move 2 rows:
+    - engine.341  [engine-sheet]
+    - engine.355  [engine-sheet]
+  
+  APPLIED.
+    ROLLOUT_PLAN:    135 → 133 lines (-2)
+    ROLLOUT_ARCHIVE: 2322 → 2331 lines (+9)
+    Rows moved: 2
   ROLLOUT LINT: clean — every row is a sweep-safe pointer within budget.
   ROLLOUT IN HAND: more than one in-progress row per terminal (job model = one):
-    engine-sheet: 3 — pipeline.100, pipeline.110, pipeline.113
-    research-build: 10 — engine.346, pipeline.111, pipeline.109, pipeline.108, pipeline.101, pipeline.89, infrastructure.19, engine.350, pipeline.114, engine.351
+    engine-sheet: 4 — pipeline.100, pipeline.110, pipeline.113, engine.356
+    research-build: 9 — engine.346, pipeline.111, pipeline.109, pipeline.108, pipeline.101, pipeline.89, infrastructure.19, engine.350, pipeline.114
   ROLLOUT OVERDUE: 2 waiting row(s) past their Cycle/date or naming none — read the record, then flip, re-date or close:
-    L34 engine.286: latest Cycle named C112, live is C116; latest date named 2026-10-28, today is 2026-11-21
-    L65 engine.280: latest Cycle named C113, live is C116; latest date named 2026-10-08, today is 2026-11-21
+    L33 engine.286: latest Cycle named C112, live is C116; latest date named 2026-10-28, today is 2026-11-21
+    L64 engine.280: latest Cycle named C113, live is C116; latest date named 2026-10-08, today is 2026-11-21
 
 --- [4/6] worked rows have their plan updated ---
   ✓ every row named in this session's [research-build] commits has its plan updated
 
 --- [5/6] cross-terminal git stack check (read-only) ---
-  ⚠ 8 unpushed commit(s) ahead of origin/main:
-    e549b7ae6 C116 gap log: G-ES1 seven Cycles with no bond/weather/youth/crime ripple; G-ES2 four ripple kinds without a seed domain land on GENERAL. Found in the engine.340 replay. [engine/sheet]
-    c0ddaa0cd engine.340 Task 2 build: seed class is a bar per kind on each kind's own scale (CONTRACT_SEED_CLASS), read per unit group; carryovers never decide class; the cluster-count arm is gone except the faith surge its producers wrote; an unruled kind writes texture + one Engine_Errors row. Replay C110-C116 vs 0f4b6ea16: 323 seeds, 91 flips, 0 unruled kinds. Builder tests not yet updated (test guard). [engine/sheet]
-    0f4b6ea16 engine.340 Task 2 plan: agy review HOLD folded — relocation-pressure added, initiative vote rows and carryovers never decide class, game-day-crowds its own lift bar, faith surge keeps its count, unlisted kind writes an Engine_Errors row. [engine/sheet]
-    c1c987939 agy: review engine.340 Task 2 plan (HOLD)
-    a7ae9c537 engine.351 in progress: Task 11 read — what each intake blank becomes, every arrival path, one start-dial mapping replayed over 148 arrivals; G-EC70 corrected (repair not yet applied, wake change not yet run). [research/build]
-    bdc31f0e4 engine.340 Task 1 corrected + Task 2 design: hook ripples were missed; the authored tags and initiative intensity already carry a rank; crime pipe-hood is not a merge. Bar per unit group, cluster-count arm removed, bars that are mine marked. [engine/sheet]
-    9481db2cf engine.338: the wake writes its next-chapter row at column A, read back — the append call put Wilson Shepard's C116 move nine columns right, where the engine skips it. One-row repair script for his row, dry-run proven (G-EC70). [research/build]
-    a13939f02 engine.340 Task 1 read-before: every ripple producer's own scale, crime pipe-hood as a third merge case, SeedID readers. No code touched. [engine/sheet]
+  ⚠ 40 unpushed commit(s) ahead of origin/main:
+    51d6f5dbd engine.356 fix-up of 4b1fc3125's record: version cut @202 = stage 67 (the builder cleared the version limit; live re-pulled = the benched manifest first); PIN to @202 / stage 67; the row and the plan changelog, which that commit claimed and did not carry (its script stopped on a stale PIN string after writing DEPLOY_HISTORY). [engine/sheet]
+    4b1fc3125 engine.356 LIVE: PROD stage 67 = stage 66 + two files at 16a67a8e9 (builder 2026-11-21: "We can raise the odds a notch and push").
+    0ee799677 NEXT[research-build]: reads live in their ROLLOUT rows, not the line. [research/build]
+    0bc134603 engine.339 row to live-observing (kept on the builder's word, read C117); the unshipped back-out bench recorded as parked on SANDBOX 1004 @226; NEXT line. [research/build]
+    7e53d2e7b engine.339 stays (builder 2026-11-21: "Keep it"): its code is back in the tree as it runs on PROD, and its seven stale checks are rewritten to the blind grab. Full suite 347/347. [research/build]
+    16a67a8e9 engine.356: going-out odds up one notch (builder 2026-11-21: "We can raise the odds a notch and push") — home hood 1.3 → 2.0, across town 0.8 → 1.2 × out-and-about, a sighting 1.1 → 1.6; programmes stay 0.6. The bench read prints who went out, by name. Not benched at these weights yet. [engine/sheet]
+    a83cbbbd4 Revert "engine.339 code out of the tree: the reverse of 1d74b2e49, df0052132 and b4db8c7a8 on the four engine files and the two test files (builder 2026-11-21: "the plan is rejected and not to be referenced"; its code rode onto PROD with stage 63). engine.351's hold stays. Full suite 346/346. Not benched, not live. [research/build]"
+    b5dd4950e engine.356 benched, not live: SANDBOX 1004 @225 = PROD stage 66 + two files at a15dbb895; C117 and C118 PASS, 0 new Engine_Errors.
+    becdc24f3 engine.339 code out of the tree: the reverse of 1d74b2e49, df0052132 and b4db8c7a8 on the four engine files and the two test files (builder 2026-11-21: "the plan is rejected and not to be referenced"; its code rode onto PROD with stage 63). engine.351's hold stays. Full suite 346/346. Not benched, not live. [research/build]
+    cd52ebb13 Tests brought to the live code (builder 2026-11-21: zero failures before a Cycle): 16 of the 17 red files green. [research/build]
+    a15dbb895 engine.356: last night's real places, programmes and sightings reach the people who were there (builder 2026-11-21: "Who watched the top shows this week, who ate at the trending restaurants, who attended the oaks game" · "Let me know when you're going to act on what I'm saying").
+    87b82036d Gap log G-EC74: nobody went to the week's restaurants, shows, parties or games — C116's evening list read by name against all 2,480 lines: 0 for every restaurant, show, film, sighting and block party; no line puts a person at an Oaks game (builder 2026-11-21, measured). [engine/sheet]
+    744c530ed Gap log G-EC73: an event has no next week — the event generator's memory of a citizen lives on ctx.summary, is carried by nothing, and starts empty every fire; its follow-up pool wrote 0 lines at C116; a C115 promotion, move or life event is followed by a C116 no different from anyone's (builder 2026-11-21, measured). [engine/sheet]
+    62fc85f31 Gap log G-EC72: a week reaches about 6% of the people it happened to — C115: 2,517 engine lines for 1,004 people, 58 people with a row in their own voice; three citizen wakes a day; a wake is handed the last five lines. Counted on the builder's read (2026-11-21). [engine/sheet]
+    c46d48595 engine.356 plan: what a citizen's wake reads — 18 tabs named of 71 in the schema file, bonds among them; crime, transit, weather, faith, programs, initiatives, culture, the roster, the treasury and world events are named in neither wake file. [engine/sheet]
+    39edb93d9 NEXT[research-build]: tests read, row 276 signed; what is left is the test files and his engine.339 call. [research/build]
+    e19792a82 Tests run and read (builder 2026-11-21: "Run your tests"): 17 of 347 files fail, none a fault in the live code — harness loads, expectations from before engine.351 and pile 1, and engine.339's lottery. Content-tab row 276 signed on his go (dial:sociability:up), read back. engine.339 row corrected: its code is on PROD since stage 63. [research/build]
+    abf149b35 engine.356 plan: the bond ledger does not reach the week (builder 2026-11-21: "the bonds engine isn't resonating in this") — 689 active bonds, 441 untouched since C110 or earlier, 60 touched at C116, nine lines about other people and one naming anyone; the relationship engine reads bonds as three yes/no flags and draws from a fixed pool at 2%. Page ruling recorded: the page shows what the week holds, not a routine. [engine/sheet]
+    a4a37dd80 engine.356 plan: the page step goes first (builder 2026-11-21: "Ok go ahead"); Task 0 added; the C116 week counted — 2,480 lines for 993 people, 353 naming a ledger business (mostly civic and advancement lines), one naming another person, 576 people with a roster job, the citizen's own Daypart mostly a source label. [engine/sheet]
+    56cea9c55 engine.356 plan, advisor fold: scope set against the builder's words (engine lines only today; the citizen's own moments are Open question 1), his quote verbatim, pickVenue_ body read, the page paragraph cut to what the engine hands it, Task 1(c) carries the archive tab and the run-time cost; BACKLOG watch row trued. [engine/sheet]
+    84e7819aa engine.356 plan: a moment has a place (builder 2026-11-21: "Let's get your notes and plans worked out").
+    451a04922 research.35: who sets a regular place — the citizen chooses, the engine holds the menu and the consequences (builder 2026-11-21, verbatim in the file). [engine/sheet]
+    7f85d9273 PROD web app @201 = stage 66 = HEAD: the builder cleared old script versions (200 -> 11), live pulled = e341.sha256, version cut, web app answers JSON. PIN to @201. [research/build]
+    020a8181e research.35: Citybound (agent-based open city sim) read against GodWorld's citizen, business and parcel layers (builder 2026-11-21: "Yes let's check out city bound").
+    7f920e108 research.34: Micropolis (the open-source SimCity engine) read against GodWorld's systems (builder 2026-11-21: "interested in seeing what a working sim uses to operate vs some of the systems we built").
+    323e88382 engine.341 + engine.355 LIVE: PROD stage 66 = stage 65 minus compileHandoff.js and cycleRollback.js, three files at 120d87f36.
+    64f2c4d26 engine.341 + engine.355 benched: SANDBOX 1004 @224 = PROD stage 65 minus compileHandoff.js and cycleRollback.js, three files at 120d87f36.
+    120d87f36 Bench fire log: the engine.351 fires on SANDBOX 1004 (C117/C118, two runs). [research/build]
+    eee55e767 NEXT[research-build]: the engine.351 read lives in its ROLLOUT row, not the line. [research/build]
+    bda496896 engine.351 LIVE: PROD stage 65 = stage 64 + three files at 8b558e9e7 (builder 2026-11-21 on the bench arrivals: "This looks fine"). HEAD pulled back byte-identical to the benched manifest; no version cut — the PROD project is at its 200-version limit, the web app stays pinned @200, the sheet-fired Cycle runs HEAD. Row to live-observing, read C117; PIN and NEXT. [research/build]
+    a59a141b5 engine.351 benched: SANDBOX 1004 @223 (PROD @200 + three files at 8b558e9e7), C117/C118 PASS, 0 new Engine_Errors; the waiting household and promotion row stay unminted naming what is missing, the complete row mints off 50, every adult arrival's Dial_Moves start = arrivalStartDials_. Not live. [research/build]
+    d203953eb engine.341: agy F2/F3 closed — the header-audit test repinned to the v4.2 deck; two orphaned tests deleted.
+    c3e1108c8 Test guard removed (builder 2026-11-21: "Remove the test guard").
+    cb64bc343 engine.355: the rollback-to-78 wipe tool retired (builder 2026-11-21: "Yeah that's crazy to have a script that deletes every week").
+    a3b48dc4d engine.341 agy fold: batch appends map by their own target tab only (F1).
+    ba01c6308 agy: review engine.341 seed deck dead paths (HOLD)
+    c0f7e2c20 PROD fix: @198 could not load — world-view/build.js's require() killed every Apps Script run. .claspignore lists world-view/**; PROD @200 = @198 minus the 12 world-view files, engine files byte-identical, pull-back verified, web app answers JSON again. PIN to @200. [research/build]
+    c4ec6f503 engine.341: agy diff-review brief for the seed deck dead paths. [engine/sheet]
+    b54210cb9 engine.341 Tasks 1-3: the seed deck's dead paths (builder 2026-11-21: "Proceed on engine.341").
+    8b558e9e7 engine.351 Task 11 built (builder 2026-11-21: "Continue on engine.351"): an incomplete intake waits on its tab, an arrival's dials start from their life. Not benched; tests not run (test guard). [research/build]
   Model decision: push if all yours, hold if other terminals stacked.
 
 --- [6/6] pm2 restart ---

@@ -981,6 +981,15 @@ This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) �
 
 This pass: 1 rows — engine.353. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
 
+## S769 Archive Pass (2026-11-21, research-build) — post-S768 closures sweep
+
+2 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 2 engine.*.
+
+- **engine.341** [engine-sheet] — Seed deck dead paths (builder 11-08): maps name the deck's writer; two old-deck writers, the handoff tool and a dead validator retired. LIVE PROD stage 66 **State at archive:** done-pending-archive. Pointer: [[../plans/2026-11-08-seed-deck-dead-readers-writers]]
+- **engine.355** [engine-sheet] — Rollback-to-78 wipe tool retired (builder 11-21): out of the repo and the live script, civic gate's false undo pointer cut. LIVE PROD stage 66 **State at archive:** done-pending-archive. Pointer: [[../plans/2026-11-08-seed-deck-dead-readers-writers]] §engine.355
+
+This pass: 2 rows — engine.341 + engine.355. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S664 Archive Pass (2026-11-16, research-build) — post-S663 closures sweep
 
 4 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 2 pipeline.* + 2 engine.*.

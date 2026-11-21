@@ -19,9 +19,11 @@ pointers:
 
 # A Moment Has a Place Plan
 
-**Builder's words (2026-11-21):** "the code shapes everything and AI lives the moment, or chooses what is next" · "instead of making a avatar and running its life sims, im creating agents that are the avatars" · "the sims reflections and wakes are reflected on its life the city view would be them walking to work, to get dinner, visiting a friend, going to the As game. So it would be a second layer to the [cron's] experience on moments it chooses and reflects on it" · "Let's get your notes and plans worked out and we can start to dive into how to implement"
+**Builder's words (2026-11-21):** "the code shapes everything and AI lives the moment, or chooses what is next" · "instead of making a avatar and running its life sims, im creating agents that are the avatars" · "the sims reflections and wakes are reflected on its life the city view would be them walking to work, to get dinner, visiting a friend, going to the As game. So it would be a second layer to the cribs experience on moments it chooses and reflects on it" ("cribs" read here as the crons') · "Let's get your notes and plans worked out and we can start to dive into how to implement"
 
 **Builder's words (2026-10-19, engine.214 step 8), still standing:** "the engine firing \"a citizens spot\" makes the cron build on that an allows it to tell us their spot"
+
+**Scope today:** the lines the engine writes. The builder's words name "moments it chooses and reflects on" — the citizen's own moments (reflections, wakes, exchanges) are not covered until Open question 1 is answered.
 
 **Goal:** every moment the engine writes into a citizen's week names the place it happened — a business, a home, a person — by an id the sheet holds, so the city view can show that citizen going there and the citizen's own wake can build on it.
 
@@ -31,7 +33,7 @@ pointers:
 
 1. **The citizen's spot exists and is live** (engine.214 Cut C, PROD stage 17). `citizenSpotFor_` (`generateCitizensEvents.js:255`) picks one food / retail / arts business in the citizen's hood by a fixed hash of POPID + BIZ_ID over `S.hoodSpots` (written by Phase5-BusinessDynamics): the same spot every week, moving only when it closes or a better-ranked one opens. It is engine-held, by the builder's 2026-10-19 ruling.
 2. **The spot never leaves the cycle.** `S.hoodSpots` and the pick live in memory for one fire. No tab, no beat dump, no page and no wake reads it (grep `hoodSpots|citizenSpot`: `applyBusinessDynamics.js`, `generateCitizensEvents.js`, two test scripts). It reaches a citizen's record only as a line on a week something happened there (`citizenSpotLines_` :270).
-3. **Ordinary lines name places the sheet does not hold.** `$VENUE` is filled by `pickVenue_` (:1674) from name tables in code — "a bar patio", "a late-night diner", "Temescal Alley" (:330-352). 8b, which makes `$VENUE` draw the citizen's own spot, is designed and not built (ROLLOUT engine.214 "Next: 8b").
+3. **Ordinary lines name places the sheet does not hold.** `$VENUE` is filled by `pickVenue_` (:1674-1678, body read: one draw from `hoodTexturePool_` over the two tables) from name tables in code — "a bar patio", "a late-night diner", "Temescal Alley" (:330-352). 8b, which makes `$VENUE` draw the citizen's own spot, is designed and not built (ROLLOUT engine.214 "Next: 8b").
 4. **A line carries no place and no time of day.** `LifeHistory_Log`: Timestamp, POPID, Name, EventTag, EventText, Neighborhood, Cycle. `$CONTACT` is a name inside the text. `Reflection_Intake` (the citizen's own words) does carry Daypart.
 5. **What the page shows of a person** (world-view/README): the street their week's rows name; up to two spots on that street — their own door (`Household_Ledger`) and the business they work at (`Employment_Roster`); people with a bond stop to talk. "Where a person stands" and "that two of them are standing together" are drawn, not sim data. Streets are separate scenes; nobody walks between them.
 6. **Places a citizen already has on the sheet:** work (`Employment_Roster` BIZ_ID), home (`Household_Ledger` HouseholdId), a congregation (`Faith_Organizations` MembersList). Not read today: how each is handed to the citizen's wake.
@@ -43,13 +45,13 @@ pointers:
 - **Cut 1 — the line names the real spot.** 8b as designed in the engine.214 plan: `$VENUE` draws the citizen's own spot by default. Built under engine.214's own row, before this one.
 - **Cut 2 — the line carries its place.** Two columns at the right edge of `LifeHistory_Log`: the place id (spot, employer, home) and the other person's POPID when the line has a `$CONTACT`. Filled by the engine writers that already know them at the moment of writing; blank where a line has no place (an empty relational field is design).
 - **Cut 3 — the spot is readable outside the fire.** One row per citizen: their spot this Cycle. Where it lives (a tab, a column, the dump) is settled by Task 1.
-- **Then the page** (infrastructure.19, research-build): a person's week on a street is their lines in order, each at its place — own door, work, the spot, a friend's door, the game. The street flight stays the page (the parked "follow one life" redesign is not this).
+- **Then the page** (infrastructure.19, research-build): it is handed a place id and a met-person id on each line, and each citizen's spot. What it draws from them is the page's design and the builder's, not this plan's. A supermemory recall (2026-11-12) says a "follow one life" redesign of the page was rejected and parked; no record of it is in world-view/README, BACKLOG or ROLLOUT (grep 2026-11-21) — the page work reads that ruling before it designs.
 
 ## Tasks
 
 | # | Task | Owner | Status |
 |---|------|-------|--------|
-| 1 | Read-before. (a) `S.hoodSpots` and `citizenSpotFor_` end to end; what it would take to write the pick out. (b) Every fill site of `$VENUE`, `$CONTACT`, `$INSTITUTION`; a count of C116's lines that name a venue, a contact, a workplace, a home, a game. (c) Wiring card for `LifeHistory_Log`: every writer, every reader by column position — whether two right-edge columns are safe. (d) What a wake is handed about the citizen's places (`lib/wakePerception`, the wake script) and what the question door (engine.338) does with an answer. (e) `Lived_Events`, `output/exchanges/`, game-night lines: the place each already implies. (f) `world-view/build.js`: how a person's street and spots are chosen | es | not started |
+| 1 | Read-before. (a) `S.hoodSpots` and `citizenSpotFor_` end to end; what it would take to write the pick out. (b) Every fill site of `$VENUE`, `$CONTACT`, `$INSTITUTION`; a count of C116's lines that name a venue, a contact, a workplace, a home, a game. (c) Wiring card for `LifeHistory_Log`: every writer, every reader by column position — whether two right-edge columns are safe; the same for `LifeHistory_Archive`, where the rows move; and the cost of two more cells on every line against the end-of-run tail (74 s at C116 against the 60 s reserve, ROLLOUT engine.95). (d) What a wake is handed about the citizen's places (`lib/wakePerception`, the wake script) and what the question door (engine.338) does with an answer. (e) `Lived_Events`, `output/exchanges/`, game-night lines: the place each already implies. (f) `world-view/build.js`: how a person's street and spots are chosen | es | not started |
 | 2 | The builder's calls (§Open questions), put to him with the Task 1 numbers | builder | waits on 1 |
 | 3 | Cut 1 = engine.214 8b, on its own row | es | waits on 1 |
 | 4 | Cut 2: place id and met-person id on the line | es | waits on 1, 2 |
@@ -71,10 +73,11 @@ pointers:
 
 ## Open questions
 
-1. **Does a citizen's own word move their spot?** Today the engine holds it fixed by identity (2026-10-19 ruling: stable, so the cron builds on it). If a citizen says in a wake they have started going somewhere else, does that change the record, or is the spot a fact of their life like their job? — builder.
-2. **One spot or several?** Today one, from food / retail / arts. Dinner, a bar and a coffee line could be one place or three. — builder.
-3. **Does a line get a time of day?** Reflections carry Daypart; engine lines do not. Ordering a week on the page needs one or it is drawn. — builder; Task 1(b) says how many lines could carry one honestly.
-4. **A moment on another street** — the page's call (streets are separate scenes): shown there, or shown as away. — builder, with infrastructure.19.
+1. **Which moments?** The plan as written covers the engine's lines only. The citizen's own moments — what it said in a wake, a reflection, a conversation with another citizen — carry a time of day but no place. Engine lines only, the citizen's own moments too, or both from the start? Giving its own words a place means reading a place out of what it wrote, or asking it. — builder.
+2. **Does a citizen's own word move their spot?** Today the engine holds it fixed by identity (2026-10-19 ruling: stable, so the cron builds on it). If a citizen says in a wake they have started going somewhere else, does that change the record, or is the spot a fact of their life like their job? — builder.
+3. **One spot or several?** Today one, from food / retail / arts. Dinner, a bar and a coffee line could be one place or three. — builder.
+4. **Does a line get a time of day?** Reflections carry Daypart; engine lines do not. Ordering a week on the page needs one or it is drawn. — builder; Task 1(b) says how many lines could carry one honestly.
+5. **A moment on another street** — the page's call (streets are separate scenes): shown there, or shown as away. — builder, with infrastructure.19.
 
 ## Not in this plan
 
@@ -85,3 +88,4 @@ pointers:
 ## Changelog
 
 - 2026-11-21 (engine-sheet) — Created on the builder's word, from research.34 / research.35 and the same-day read of the spot, the line and the page.
+- 2026-11-21 (engine-sheet) — Advisor fold: scope stated against the builder's words and made Open question 1; his quote restored verbatim; `pickVenue_` body read; the page paragraph cut to what the engine hands it; Task 1(c) carries the archive tab and the run-time cost.

@@ -1,0 +1,44 @@
+AIM = BENCH (script read the bench marker)
+== sync from live
+  verify Reflection_Intake: bench 3005 rows vs live 3005 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+{"fireGuardMinutes":"0","cycleCountFormatted":"116","cycleCountIsNumber":true}
+door: {"target":"bench","http":200,"ok":true,"record":{"cycle":117,"startedMs":1795295995216,"state":"done","finishedMs":1795296170025},"raw":"{\"cycle\":117,\"startedMs\":1795295995216,\"state\":\"done\",\
+clearfire 117: {"ok":true,"cleared":{"cycle":117,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+-- pause 75 s (read quota)
+Edition_Coverage_Ratings C116: 1 rows (window 116,115,114,113,112,111,110,109), sandbox already has CIVIC,COMMUNITY,CULTURE,SPORTS
+Citizen_Media_Usage C116: 0 rows (sandbox already has a published or seeded week at C116)
+Oakland_Sports_Feed C117: 0 rows
+appended 1 to Edition_Coverage_Ratings; marked rows on the tab now 1
+bench cycleCount 116
+fire C117 rc=0 "verdict": "PASS" "wallS": 182 newEE="newEE": []
+C117: 2567 lines, 995 people; last-night lines by kind: {"cityEventAttend":6,"safety":15,"crowd":25,"nightlife":26,"cityEvent":11,"traffic":8}
+named lines: 0, people: 0, unresolved biz tags: 0
+snapshot of C117: restaurants ["KONO Kitchen (KONO, BIZ-00046)","Perkins Street Taqueria (Adams Point, BIZ-00243)"] fast ["SpeedyBurger"] night ["KONO Cocktails (KONO)"] tv ["Crisis Desk","Spring Lineup","The Paulson Era: A's Rebuild"] films ["New Bloom","Diamond City"] sports "Oakland Sports Tonight" seen ["Rowan Pierce @ Ivy Hill Family Dental (Ivy Hill)","Mike Paulson @ Nineteenth Street Gallery (Uptown)","Marcus Duval @ Coliseum Way Builders (East Oakland)"] bytes 2470
+snapshot of C115: restaurants [] fast [] night [] tv [] films [] sports "" seen [] bytes 1576
+snapshot of C116: restaurants [] fast [] night [] tv [] films [] sports "" seen [] bytes 2167
+read C117 exit 2
+-- pause 70 s (read quota)
+bench cycleCount 117
+fire C118 rc=0 "verdict": "PASS" "wallS": 176 newEE="newEE": []
+C118: 2611 lines, 1019 people; last-night lines by kind: {"crowd":25,"safety":22,"nightlife":17,"cityEventAttend":10,"watched":22,"cityEvent":10,"traffic":7,"watchedSports":4,"nightOut":1,"dinedOut":1}
+named lines: 28, people: 28, unresolved biz tags: 0
+    1  dinedOut | had dinner at KONO Kitchen last night
+    1  nightOut | spent last night at KONO Cocktails
+    4  watched | had Oakland Sports Tonight on last night
+    6  watched | stayed in and watched Crisis Desk last night
+    3  watched | stayed in and watched Diamond City last night
+    3  watched | stayed in and watched New Bloom last night
+    6  watched | stayed in and watched Spring Lineup last night
+    4  watched | stayed in and watched The Paulson Era: A's Rebuild last night
+one row whole: {"POPID":"POP-00119","hood":"East Oakland","tag":"PrevEvening-Outabout-Down-S|source:prevEvening|evening:watched|firstFriday|occupation:Scout, Oakland A's|ageGroup:adult|neighborhood:East Oakland|tier:4","text":"stayed in and watched Spring Lineup last night"}
+snapshot of C117: restaurants ["KONO Kitchen (KONO, BIZ-00046)","Perkins Street Taqueria (Adams Point, BIZ-00243)"] fast ["SpeedyBurger"] night ["KONO Cocktails (KONO)"] tv ["Crisis Desk","Spring Lineup","The Paulson Era: A's Rebuild"] films ["New Bloom","Diamond City"] sports "Oakland Sports Tonight" seen ["Rowan Pierce @ Ivy Hill Family Dental (Ivy Hill)","Mike Paulson @ Nineteenth Street Gallery (Uptown)","Marcus Duval @ Coliseum Way Builders (East Oakland)"] bytes 2470
+snapshot of C118: restaurants ["Schoolgate Cafe (Laurel, BIZ-00161)","Taco Fusion (Fruitvale, BIZ-00269)","Grand Lake Saturday Market (Grand Lake, BIZ-00248)"] fast ["SpeedyBurger"] night ["Skybar (Downtown)","Rhythm Deck (West Oakland)","Community Pulse Tavern (Downtown)"] tv ["Oakland Arts Tonight","Cultural Spotlight","Late Shift Live"] films ["Canvas Dreams","Art House Pick"] sports "" seen ["P Slayer @ Grand Lake Books (Grand Lake)","Evan Morello @ Parkridge Cleaners (Glenview)","Alma Vasquez @ Boutique Reina (Fruitvale)"] bytes 1812
+snapshot of C116: restaurants [] fast [] night [] tv [] films [] sports "" seen [] bytes 2167
+read C118 exit 0
+== final sync from live
+  verify Reflection_Intake: bench 3005 rows vs live 3005 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+RESULT check exit 0
+exit 0

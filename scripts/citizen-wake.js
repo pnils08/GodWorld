@@ -90,11 +90,11 @@ const TENSION_EXPIRY_CYCLES = 12; // unresolved tension fades — silent, no pag
 // Pre-T5 the 5 fires reused 3 frames (15:30->midday, 21:30->evening); afternoon
 // + night make all five genuinely distinct (research.19 T5, S273).
 const WAKE_FRAME = {
-  morning: 'It is early morning. You are waking into the day, the day still ahead of you',
-  midday: 'It is the middle of the day, a pause in the neighborhood or at work',
-  afternoon: 'It is mid-afternoon. The day\'s weight has settled in; there is still some of it left to go',
-  evening: 'It is evening. You are winding down after an ordinary day',
-  night: 'It is late night. The neighborhood has gone quiet around you and most people are asleep',
+  morning: 'It is early morning',
+  midday: 'It is the middle of the day',
+  afternoon: 'It is mid-afternoon',
+  evening: 'It is evening',
+  night: 'It is late night',
 };
 
 function logLine(s) {

@@ -1,0 +1,31 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ◈ encrypted .env [www.dotenvx.com]
+{
+ "label": "e339out-f2",
+ "expect": 117,
+ "at": "2026-11-21T23:02:01.323Z",
+ "pre": {
+  "bench": 117,
+  "live": 116,
+  "ee": 9,
+  "rileyLast": 117,
+  "checkpoint": null
+ },
+ "wallS": 7,
+ "http": 200,
+ "resp": {
+  "ok": false,
+  "error": "engine.275: Cycle 117 started 5 min ago — refusing a second fire inside 60 min. If this re-fire is deliberate, set script property FIRE_GUARD_OVERRIDE=118 and fire again."
+ },
+ "post": {
+  "bench": 117,
+  "live": 116,
+  "ee": 10,
+  "rileyLast": 117,
+  "checkpoint": null
+ },
+ "newEE": [
+  "[118,\"Phase1-FireGuard\",\"engine.275: Cycle 117 started 5 min ago — refusing a second fire inside 60 min. If this re-fire is deliberate, set script property FIRE_GUARD_OVERRIDE=118 and f\"]"
+ ],
+ "verdict": "HALT",
+ "why": "bench advanced 0 (want exactly 1)"
+}

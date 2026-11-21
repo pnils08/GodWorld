@@ -1,0 +1,64 @@
+AIM = BENCH (script read the bench marker)
+== sync from live
+  verify Reflection_Intake: bench 3005 rows vs live 3005 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+{"fireGuardMinutes":"0","cycleCountFormatted":"116","cycleCountIsNumber":true}
+door: {"target":"bench","http":200,"ok":true,"record":{"cycle":118,"startedMs":1795301408953,"state":"done","finishedMs":1795301580481},"raw":"{\"cycle\":118,\"startedMs\":1795301408953,\"state\":\"done\",\
+clearfire 118: {"ok":true,"cleared":{"cycle":118,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+-- pause 75 s (read quota)
+Edition_Coverage_Ratings C116: 1 rows (window 116,115,114,113,112,111,110,109), sandbox already has CIVIC,COMMUNITY,CULTURE,SPORTS
+Citizen_Media_Usage C116: 0 rows (sandbox already has a published or seeded week at C116)
+Oakland_Sports_Feed C117: 0 rows
+appended 1 to Edition_Coverage_Ratings; marked rows on the tab now 1
+planted: Intake household E351BENCH (Calder no Age); Advancement Petra (no BirthYear), Ansel (complete) — read back in place
+pre: maxPop 1249, Engine_Errors 9
+bench cycleCount 116
+fire C117 rc=0 "verdict": "PASS" "wallS": 171
+  Intake Odessa Quill: waiting — household "E351BENCH" needs Calder Quill: Age
+  Intake Calder Quill: waiting — household "E351BENCH" needs Calder Quill: Age
+  Advancement Petra Vantongeren: waiting — needs BirthYear (C117)
+  new ledger rows 3 | BirthYear 2003 among them 0
+  POP-01250 Darius Green, 48, Painter [ENGINE]: start drive 51, sociability 47, warmth 50, openness 49, composure 53, integrity 51, family 57, outabout 48 | base now 51/47/50/50.5/53/51/57/48 | Dial_Moves = start
+  POP-01251 Yolanda Ghosh, 43, QA tester [ENGINE]: start drive 57, sociability 55, warmth 55, openness 53, composure 52, integrity 47, family 49, outabout 55 | base now 57/55/55/54.4/52/47/49/55 | Dial_Moves = start
+  POP-01252 Ansel Brightwater, 52, Registered Nurse [ENGINE]: start drive 46, sociability 49, warmth 52, openness 46, composure 56, integrity 50, family 66, outabout 51 | base now 46/49/52/46/56/50/66/51 | Dial_Moves = start
+  Engine_Errors +0
+C117 CHECK PASS
+-- pause 70 s (read quota)
+bench cycleCount 117
+fire C118 rc=2 "verdict": "HALT" "wallS": 7
+HALT fire
+{
+ "label": "e339out-f2",
+ "expect": 117,
+ "at": "2026-11-21T23:02:01.323Z",
+ "pre": {
+  "bench": 117,
+  "live": 116,
+  "ee": 9,
+  "rileyLast": 117,
+  "checkpoint": null
+ },
+ "wallS": 7,
+ "http": 200,
+ "resp": {
+  "ok": false,
+  "error": "engine.275: Cycle 117 started 5 min ago — refusing a second fire inside 60 min. If this re-fire is deliberate, set script property FIRE_GUARD_OVERRIDE=118 and fire again."
+ },
+ "post": {
+  "bench": 117,
+  "live": 116,
+  "ee": 10,
+  "rileyLast": 117,
+  "checkpoint": null
+ },
+ "newEE": [
+  "[118,\"Phase1-FireGuard\",\"engine.275: Cycle 117 started 5 min ago — refusing a second fire inside 60 min. If this re-fire is deliberate, set script property FIRE_GUARD_OVERRIDE=118 and f\"]"
+ ],
+ "verdict": "HALT",
+ "why": "bench advanced 0 (want exactly 1)"
+}
+== final sync from live
+  verify Reflection_Intake: bench 3007 rows vs live 3007 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+RESULT check exit 2

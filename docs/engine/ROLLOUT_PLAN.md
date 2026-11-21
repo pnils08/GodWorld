@@ -9,7 +9,6 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
 | engine.354 | 331 job tags are wrong | needs-info | engine-sheet | — |
-| engine.339 | How kids are minted: plan rejected and deleted 2026-11-21; its code IS on PROD since stage 63 (all of main); pull it or keep it is his | needs-info | research-build | no plan — deleted 2026-11-21 (git history) |
 | engine.331 | Sports triggers: C115 read, every pitch traces to a word; P3 fails, 142 signed fan lines a week vs 37–74 before — his call | needs-info | engine-sheet | [[../plans/2026-11-05-sports-feed-triggers]] |
 | engine.94 | Memory that fires: C115 B.2 re-read, every hood at 0, 14 defaulted carriers; 24 rows unapplied and the challenger call wait on him | needs-info | engine-sheet | [[../plans/2026-07-31-citizen-memory-perception]] §Status log engine.94 B.3 v3 live reads |
 | civic.47 | Civic autonomy, the one plan (builder 11-01). A1 landed; F7 transit reader live (@173); M1 Mara live 11-03; the rest of the plan is open; A2 waits on his go | needs-info | research-build | [[../plans/2026-10-31-civic-autonomy]] |
@@ -67,6 +66,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | engine.349 | Dials move: the middle counts LIVE 11-19, stage 58 @193 (plan Task 14). Read C117 Sun 2026-11-22: `scripts/dialPulse.js` against leg n, the 13 | live-observing | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
 | engine.347 | Saved words reach the dials (builder 11-16): live stage 53. Wed 11-18 job rows read: 7 of 7. Read Sat 11-21 print rows; all fold at C117 Sun 2026-11-22 | live-observing | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
 | engine.351 | Intake complete or it waits; arrivals start off 50: LIVE 11-21 stage 65. Read C117 Sun 2026-11-22: held rows, each arrival's start on Dial_Moves | live-observing | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
+| engine.339 | How kids are minted: code LIVE since stage 63, kept (builder 11-21 "Keep it"); tests rewritten. Read C117 Sun 2026-11-22: the one grab and what landed | live-observing | research-build | no plan — deleted 2026-11-21 (git history) |
 | pipeline.112 | Labels off citizens' pages: live 11-19. Read Mon 2026-11-23 after 05:45: the Fri grade line, Sun chain, Mon datawake logs; organic: exchange, talk | live-observing | research-build | [[../plans/2026-11-16-page-labels-off-citizens-memory]] |
 
 ## 3. Now — being worked, one per terminal (in-progress)

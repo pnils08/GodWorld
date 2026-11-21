@@ -64,6 +64,27 @@
 // (sex inference for GC-routed intake names). Apps Script top-level var =
 // global across the project.
 // ═══════════════════════════════════════════════════════════════════════════
+// engine.339 (2026-11-20): hoisted from generateGenericCitizens_ — the family lottery's adult mints
+// (processAdvancementIntake.js mintFamilyGcRow_) draw an Occupation from the same list.
+var GC_OCCUPATIONS = [
+  // Service & hospitality (still essential in 2041)
+  "Barista", "Server", "Cook", "Bartender", "Retail clerk",
+  // Trades & infrastructure (upgraded for 2041 Oakland)
+  "EV mechanic", "Solar panel installer", "Electrician", "Plumber",
+  "Construction worker", "Vertical farm technician",
+  // Transport & logistics (autonomous era)
+  "Fleet dispatcher", "Drone logistics coordinator", "Warehouse worker",
+  "Port automation monitor", "Last-mile delivery driver",
+  // Healthcare (expanded)
+  "Nurse", "Home health aide", "Pharmacy tech", "Community health worker",
+  // Education & community
+  "Teacher", "After-school program aide", "Youth mentor",
+  // Tech-adjacent (Oakland 2041)
+  "Data entry specialist", "IT support technician", "QA tester",
+  // Service & municipal
+  "Security guard", "Building maintenance tech", "Transit operator",
+  "Hair stylist", "Landscaper", "Urban garden worker"
+];
 var GC_FEMALE_FIRST_NAMES = null; // populated on first generator run (below)
 var GC_MALE_FIRST_NAMES = null;
 var GC_LAST_NAMES = null; // engine.96 Task 12 (S440b): hoisted from generateGenericCitizens_'s
@@ -428,28 +449,8 @@ function generateGenericCitizens_(ctx) {
   if (!GC_LAST_NAMES) gcInitNamePools_(); // v2.9 (engine.96 Task 12): pool now file-scoped
   var lastNames = GC_LAST_NAMES;
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // OCCUPATIONS
-  // ═══════════════════════════════════════════════════════════════════════════
-  var occupations = [
-    // Service & hospitality (still essential in 2041)
-    "Barista", "Server", "Cook", "Bartender", "Retail clerk",
-    // Trades & infrastructure (upgraded for 2041 Oakland)
-    "EV mechanic", "Solar panel installer", "Electrician", "Plumber",
-    "Construction worker", "Vertical farm technician",
-    // Transport & logistics (autonomous era)
-    "Fleet dispatcher", "Drone logistics coordinator", "Warehouse worker",
-    "Port automation monitor", "Last-mile delivery driver",
-    // Healthcare (expanded)
-    "Nurse", "Home health aide", "Pharmacy tech", "Community health worker",
-    // Education & community
-    "Teacher", "After-school program aide", "Youth mentor",
-    // Tech-adjacent (Oakland 2041)
-    "Data entry specialist", "IT support technician", "QA tester",
-    // Service & municipal
-    "Security guard", "Building maintenance tech", "Transit operator",
-    "Hair stylist", "Landscaper", "Urban garden worker"
-  ];
+  // OCCUPATIONS — file scope (engine.339: the family lottery's adult mints draw from it too)
+  var occupations = GC_OCCUPATIONS;
 
   // engine.99 Cohort 2 — core-sim hoods from Neighborhood_Map CoreSimRank (ADR-0016)
   var neighborhoods = getCoreSimNeighborhoods_(ctx);

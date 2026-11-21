@@ -78,11 +78,13 @@ var MILESTONE_TYPES = {
 var AGE_RANGES = {
   GRADUATION: { min: 22, max: 28 },
   WEDDING: { min: 24, max: 58 }, // engine.302 (builder 2026-10-19): "Expand to 58" — every wedding path reads this
-  BIRTH: { min: 26, max: 42 },
+  BIRTH: { min: 26, max: 40 }, // engine.339 (builder 2026-11-20): "no one over 40 would have a newborn" (was 42)
   PROMOTION: { min: 28, max: 58 },
   RETIREMENT: { min: 68, max: 72 },
   DEATH_NATURAL: { min: 65, max: 100 }
 };
+
+var BIRTH_COPARENT_MIN_AGE = 21; // engine.339 (builder 2026-11-20): "no one under 21 can have a kid" — the spouse's floor
 
 var WEDDING_BOOST_HOLIDAYS = [
   "Valentine",     // used elsewhere in your scripts
@@ -244,6 +246,7 @@ function runGenerationalEngine_(ctx) {
   var iSchoolQuality = idx("SchoolQuality");   // education loop (S409) — four-year vs associate's
   var iSkillTags = idx("SkillTags");           // engine.149 (S412) — the graduation follows the citizen's current field
   var iGenderCol = idx("Gender"); // engine.57 P6 — births need parent sex + child sex
+  var iSpouseG = idx("SpouseId");   // engine.339 — a spouse on the ledger is a parent too; both inside the window
 
   // LifeHistory_Log handle removed S204 B2 — appends route through queueAppendIntent_.
   var cycle = (ctx.summary && ctx.summary.cycleId) || (ctx.config && ctx.config.cycleCount) || 0;
@@ -388,6 +391,7 @@ function runGenerationalEngine_(ctx) {
   }
   // ── end engine.70 W-3 heat block ─────────────────────────────────────────
 
+  var popRow339 = null; // engine.339: POPID -> row, built the first time a birth roll meets a spouse on the ledger
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
 
@@ -557,7 +561,16 @@ function runGenerationalEngine_(ctx) {
     // fire in bondEngine when a grown romance crosses MARRIAGE_THRESHOLD.
     // checkWedding_ retained below for reference, no caller.
 
-    if (counts.births < limits.births && birthYear) {
+    // engine.339 (builder 2026-11-20): "no one over 40 would have a newborn , no one under 21 can have a kid" — a
+    // spouse on the ledger outside 21..AGE_RANGES.BIRTH.max blocks the couple's birth (an off-camera spouse has no age)
+    var spouseFits339 = true;
+    var spPop339 = iSpouseG >= 0 ? (String(row[iSpouseG] || "").match(/POP-\d+/) || [""])[0] : "";
+    if (spPop339) {
+      if (!popRow339) { popRow339 = {}; for (var pr339 = 0; pr339 < rows.length; pr339++) if (rows[pr339]) popRow339[String(rows[pr339][iPopID]).trim()] = rows[pr339]; }
+      var spBY339 = popRow339[spPop339] ? (Number(popRow339[spPop339][iBirthYear]) || 0) : 0;
+      if (spBY339) spouseFits339 = (simYear - spBY339) >= BIRTH_COPARENT_MIN_AGE && (simYear - spBY339) <= AGE_RANGES.BIRTH.max;
+    }
+    if (counts.births < limits.births && birthYear && spouseFits339) {
       var maritalNow = iMarital >= 0 ? (row[iMarital] || "").toString().toLowerCase().trim() : "";
       var birthResult = checkBirth_(ctx, popId, age, lifeHistory, calendarContext, hasHousehold, maritalNow, hhType74);
       if (birthResult) {

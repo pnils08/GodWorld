@@ -2527,6 +2527,8 @@
 
 - **releaseFamilyLink_(sheet, gData, r, cols, gL, cycle)**
 
+- **mintFamilyGcRow_(gData, c, type, wantSex, hood, taken, rowByPop, L, simYear, cycle, rng)**
+
 - **checkFamilyMatchPromotions_(ctx, cycle)**
   Config: ctx.config.rngSeed
   Sheets: Advancement_Intake1, Generic_Citizens
@@ -4874,4 +4876,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 179
-**Functions mapped:** 1767
+**Functions mapped:** 1768

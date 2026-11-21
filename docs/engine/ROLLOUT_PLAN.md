@@ -77,8 +77,6 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | engine.346 | Feed word `off-season` (builder 11-15): live @182; benched 11-16 inside stage 49 (C117/C118 PASS). Owed: the sheet dropdown (his menu run) | in-progress | research-build | [[../plans/2026-11-05-sports-feed-triggers]] §Changelog |
 | pipeline.110 | Role citizens wake as themselves (builder 11-10). 14 of 14 workers lean and live; next: media (reporter template); council on hold | in-progress | engine-sheet | [[../plans/2026-11-10-role-citizens-wake-as-themselves]] |
 | pipeline.113 | UNDOCKED: Nia and the pilots know the game (builder 11-21). Built, not flown; next: read the first flight after 11-21 (plan §Owed read) | in-progress | engine-sheet | [[../plans/2026-11-18-undocked-tells-its-nights-in-points]] |
-| engine.341 | Seed deck dead paths (builder 11-08): maps miss the deck's writer; two old-deck writers and the handoff menu tool retired. Claimed 11-21 on his word | in-progress | engine-sheet | [[../plans/2026-11-08-seed-deck-dead-readers-writers]] |
-| engine.355 | Rollback-to-78 wipe tool retired (builder 11-21): out of the repo, civic gate's false undo pointer cut. Next: PROD push carries it, with engine.341 | in-progress | engine-sheet | [[../plans/2026-11-08-seed-deck-dead-readers-writers]] §engine.355 |
 | pipeline.111 | Stop puppeting the newsroom (builder 11-10): the reporter half of the wake work (split with es 11-14). Next: one reporter's whole day in the test shell, his go | in-progress | research-build | the stop-puppeting plan (deleted 2026-11-18) |
 | pipeline.109 | Cron feedback reaches the builder: one list at boot + ops report and Varek journal repaired (builder 11-09/11-10). Next: read the digest at boot | in-progress | research-build | [[../plans/2026-11-10-cron-feedback-to-builder]] |
 | pipeline.108 | Daily news on the day's sources alone (builder 11-13). Fri 11-13 show read, plan Task 10. Next: his call on the read; Sat 11-14 weekly | in-progress | research-build | [[../plans/2026-11-09-daily-news-articles-as-sources]] |
@@ -92,6 +90,8 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| engine.341 | Seed deck dead paths (builder 11-08): maps name the deck's writer; two old-deck writers, the handoff tool and a dead validator retired. LIVE PROD stage 66 | done-pending-archive | engine-sheet | [[../plans/2026-11-08-seed-deck-dead-readers-writers]] |
+| engine.355 | Rollback-to-78 wipe tool retired (builder 11-21): out of the repo and the live script, civic gate's false undo pointer cut. LIVE PROD stage 66 | done-pending-archive | engine-sheet | [[../plans/2026-11-08-seed-deck-dead-readers-writers]] §engine.355 |
 | engine.352 | Authored citizens' sheet rows and June essence entries read against what he wrote of them (builder 11-17): 43. Read first; each row changes on his word | ready | research-build | `output/production_log_run_cycle_c116_gaps.md` G-EC56 |
 | engine.348 | Workers' records the engine does not yet produce (builder 11-16), e.g. the fire chief's one record. Own session after the worker template | ready | engine-sheet | [[../research/2026-11-15-worker-records-all-tabs]] |
 | civic.50 | Council seats act beyond initiatives (builder 11-14): every move they hold works through one, canvass sets nothing. Design is the builder's; plan at pickup | ready | engine-sheet | [[../reference/AGENT_BOOT_TEMPLATES]] §2 The gap |

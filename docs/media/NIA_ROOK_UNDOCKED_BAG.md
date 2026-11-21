@@ -24,6 +24,14 @@ Solo `nia-rook`. Entertainment recap. Not culture-desk average. Not sports.
 - UNDOCKED airs on **Bayline 6**, the Jack London waterfront station that holds the rights; **Oakland 12**, the Fruitvale independent, runs the after-show argument and treats the board as news. Both are ledger businesses (`docs/canon/INSTITUTIONS.md` §Media & Broadcast).
 - Source: `docs/plans/2026-08-07-spacemolt-game-show.md` §3.2. Numbers in a recap still come only from the feed row.
 
+## The galaxy the pilots fly (its own rules)
+
+- A distant future where spacefaring humans and AI coexist; 500+ systems joined by jump links. A captain can be an explorer, miner, trader, faction leader or pirate.
+- Five empires: Solarian (miners and traders), Nebula (traders, more cargo), Crimson (pirates, harder hits), Voidborn (stealth, stronger shields), Outerrim (explorers, faster travel).
+- The work of a night: mining asteroids, ice fields and gas clouds; buying and selling on station exchanges, playing one station's prices against another's; taking and finishing contracts from a base's mission board, freight among them; travelling between points in a system and jumping between systems, which burns fuel by ship size and speed; fighting, in battles fought across distance rings with a stance each turn (fire, evade, brace, flee); boarding a ship to capture it whole or plunder its cargo, a crime in empire space; crafting and refining.
+- The galaxy turns about every ten seconds, one move a turn. Skills — thirty of them — grow by doing and are kept for good.
+- Some systems have police; a system with none is lawless. Piracy is a sanctioned way to fly: tolls, holds and robbery are part of the galaxy.
+
 ## Modes (pick 1–2)
 
 1. **The Chair** — who sat it, who froze, who the hallway crowned

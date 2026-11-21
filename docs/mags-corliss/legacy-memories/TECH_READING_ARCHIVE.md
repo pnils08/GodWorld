@@ -931,3 +931,7 @@ Web survey of the mid-2026 field (GPT Image 2/1.5, Ideogram 3/4, Imagen 4, Recra
 ### S325 — Headless cron newsroom (Bay Awakening) + agentic RAG (2026-07-19)
 
 Mike-shared Drive doc `182GQGxrdbOUIc6dO-CJBZzcZ3zthG-Pa` ("The Bay Awakening.txt") — external-assistant chat proposing a cron→orchestrator→reporter-API-calls→Mags-edits→publish headless newsroom — read alongside the agentic RAG retrieval family (router / reformulate / multi-hop / corrective / self-RAG). **Key finding:** the cron→orchestrator→API-writer→persist skeleton is already live in `discord-reflection.js` (+ citizen-wake/exchange), so the newsroom-as-cron is proven at small scale; the real lift is porting the guardrails (canon rules + Rhea/Mara/Final-Arbiter reviewer lanes + fourth-wall) out of Claude Code, not the scheduling. Agentic RAG maps onto "search before you guess" + the "load world state" node, but its whole viability rests on Mike's crux — a *cheap* model doing the narrow retrieval subtasks (same economics as the DeepSeek business-desk win). Verdict `watch`, two triggers. Full eval: [[../research/2026-07-19-headless-cron-newsroom-agentic-rag]].
+
+### research.34 — Micropolis, the open-source SimCity engine (2026-11-21)
+
+Builder ask: what a working sim runs on, against what GodWorld built. `github.com/SimHacker/micropolis` at `c98f6b0` — the engine's eight core files read, never run; GPL v3 with EA's added terms, so nothing copied. File: `docs/research/2026-11-21-micropolis-vs-godworld.md` (watch).

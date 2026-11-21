@@ -535,6 +535,7 @@ Tracking for future adoption, not building. Dropped on the move: the Drive OAuth
 
 | Feature | Trigger to Act |
 |---------|---------------|
+| **Micropolis mechanisms** ([[../research/2026-11-21-micropolis-vs-godworld]], research.34) — a ranked complaint list per hood voted by its tracked citizens; standing services funded from the treasury; a per-hood needs table | The builder picks one — then it gets a ROLLOUT row and a read-before of the items the research file marks "not read" |
 | **Unidentified EmployerBizId re-linker** — 6 of engine.191's 12 school-district rows moved to other employers between 2026-09-10 and 09-26 with no `[Career-*]` LifeHistory line (POP-00040/217/239/267/539/743); a writer not on SHEETS_MANIFEST §9 or an off-ledger hand fix | Any further EmployerBizId change on live with no Career line — then trace the writer |
 | **Frozen-column audit** — a `deadBranchScan.js`-shaped scan for beat-slice/story-hook columns with no phase writer (SIM_DOCTRINE §16) | A second instance surfaces past engine.192 (schools), OR a lane-program pass (kimi) flags one on its own — then it earns a script, not a one-off find |
 | **Headless cron newsroom + agentic RAG** ([[../research/2026-07-19-headless-cron-newsroom-agentic-rag]], S325) | A: Mike re-opens edition path for automation (reverses S313). B: cheap-model retrieval eval on one narrow subtask passes. Detail in research file. |

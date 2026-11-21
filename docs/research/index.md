@@ -244,3 +244,4 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 - [[2026-11-15-worker-records-all-tabs]] — every tab on the live sheet (85) read for which city worker holds it; the fill source for the worker template (adopt)
 - [[2026-11-17-reporter-records-roster]] — every named reporter: records read today, tools, days, and the proposed lead / shared records and worker reports; the map for the reporter template (adopt)
 - [[2026-11-15-voice-files-cut-review]] — agy's adverse review of the voice-file cut: ledger claims verified, each finding's disposition (adopt)
+- [[2026-11-21-micropolis-vs-godworld]] — the open-source SimCity engine read against GodWorld's systems: six mechanisms, three with a candidate grounded on both sides (complaint list per hood, services funded from the treasury, engine-computed needs); research.34 (watch)

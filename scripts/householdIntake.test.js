@@ -119,14 +119,14 @@ console.log('\n1. the plan — grouping and boundaries:');
 }
 {
   const w = world([
-    ['Marcus','Bell',40,'Temescal','','','Bell','','','head'],
-    ['Rosa','Nguyen',35,'','','','Bell','','','spouse'],                     // already on the ledger
-    ['Ken','Oda',44,'Temescal','','','Oda','','','head'],
-    ['Mia','Oda',43,'','','','Oda','','','head'],                            // two heads
-    ['Lee','Park',50,'Nowhere','','','Park','','','head'],
-    ['Sun','Park',48,'','','','Park','','','spouse'],                        // hood without rent
-    ['Ann','Rey',30,'Temescal','','','Rey','','','spouse'],
-    ['Bo','Rey',31,'','','','Rey','','','spouse'],                           // no head
+    ['Marcus','Bell',40,'Temescal','Shop Clerk','','Bell','','','head'],
+    ['Rosa','Nguyen',35,'','Shop Clerk','','Bell','','','spouse'],                     // already on the ledger
+    ['Ken','Oda',44,'Temescal','Shop Clerk','','Oda','','','head'],
+    ['Mia','Oda',43,'','Shop Clerk','','Oda','','','head'],                            // two heads
+    ['Lee','Park',50,'Nowhere','Shop Clerk','','Park','','','head'],
+    ['Sun','Park',48,'','Shop Clerk','','Park','','','spouse'],                        // hood without rent
+    ['Ann','Rey',30,'Temescal','Shop Clerk','','Rey','','','spouse'],
+    ['Bo','Rey',31,'','Shop Clerk','','Rey','','','spouse'],                           // no head
   ]);
   const plan = runPlan(w);
   const st = Object.fromEntries(plan.statusWrites.map(s => [s[0], s[1]]));
@@ -136,8 +136,31 @@ console.log('\n1. the plan — grouping and boundaries:');
   check('no canon rent → review', /no canon rent for hood "Nowhere"/.test(st[6]));
   check('no head → review', /no member is marked head/.test(st[8]));
 }
+// engine.351 Task 11: a household with a blank the ledger needs waits on the tab, whole, and is read again
 {
-  const w = world([['Marcus','Bell',40,'Temescal','','','Bell','','',''], ['Dana','Bell',38,'','','','Bell','','','']], { intakeHeader: INTAKE_H.slice(0, 9) });
+  const w = world([
+    ['Odessa','Quill',44,'Temescal','Pharmacist','','Quill','','','head'],
+    ['Calder','Quill','','','Teacher','','Quill','','','spouse'],             // no Age
+    ['Wren','Quill',9,'','','','Quill','','','child'],
+    ['Ira','Voss',40,'','Welder','','Voss','','','head'],                    // head with no Neighborhood
+    ['Lena','Voss',38,'','','','Voss','','','spouse'],                       // adult with no RoleType
+  ]);
+  const plan = runPlan(w);
+  const st = Object.fromEntries(plan.statusWrites.map(x => [x[0], x[1]]));
+  check('nothing is queued and no age or hood is drawn', plan.households === 0 && w.sheets.Advancement_Intake1.appended.length === 0 && Object.keys(plan.rows).length === 5);
+  check('every row of the household says what is missing', [2, 3, 4].every(n => st[n] === 'waiting — household "Quill" needs Calder Quill: Age') &&
+    [5, 6].every(n => st[n] === 'waiting — household "Voss" needs Ira Voss: Neighborhood; Lena Voss: RoleType'), JSON.stringify(st));
+  // the author fills the blank; the status cell still reads waiting — the door reads the row again
+  plan.statusWrites.forEach(x => { w.sheets.Intake.rows[x[0] - 1][8] = x[1]; });
+  w.sheets.Intake.rows[2][2] = 46;
+  const again = runPlan(w);
+  check('completed, the waiting household queues at the next pass; the other still waits', again.households === 1 && w.sheets.Advancement_Intake1.appended.length === 3 &&
+    again.statusWrites.filter(x => /^queued household "Quill"/.test(x[1])).length === 3 && again.statusWrites.filter(x => /^waiting — household "Voss"/.test(x[1])).length === 2, JSON.stringify(again.statusWrites));
+  const cal = w.sheets.Advancement_Intake1.appended.find(x => x[0] === 'Calder'), qh = w.sheets.Advancement_Intake1.rows[0];
+  check('his birth year is the age his row gave', cal && Number(cal[qh.indexOf('BirthYear')]) > 1900 && cal[qh.indexOf('RoleType')] === 'Teacher', JSON.stringify(cal));
+}
+{
+  const w = world([['Marcus','Bell',40,'Temescal','Shop Clerk','','Bell','','',''], ['Dana','Bell',38,'','Shop Clerk','','Bell','','','']], { intakeHeader: INTAKE_H.slice(0, 9) });
   const plan = runPlan(w);
   check('Intake without a Relation column self-arms it, then reviews the unmarked rows', w.sheets.Intake.rows[0][9] === 'Relation' && plan.households === 0 && /has no Relation/.test(plan.statusWrites[0][1]));
 }
@@ -218,7 +241,7 @@ console.log('\n3. the drip path is untouched, and collisions are refused:');
   const gch = w.sheets.Generic_Citizens.rows[0]; const gfam = gch.map(() => '');
   Object.entries({ First: 'Sam', Last: 'Santana', BirthYear: 1988, Neighborhood: 'Downtown', Status: 'Family', Sex: 'male', FamilyOf: 'POP-00034', FamilyRole: 'spouse', MaidenName: 'Lopez', EmergenceCount: 3 }).forEach(([k, v]) => { gfam[gch.indexOf(k)] = v; });
   w.sheets.Generic_Citizens.rows.push(gfam);
-  const drip = new Array(qh.length).fill(''); drip[qc('First')] = 'Sam'; drip[qc('Last')] = 'Santana'; drip[qc('Tier')] = 4; drip[qc('ClockMode')] = 'ENGINE'; drip[qc('BirthYear')] = 1988; drip[qc('Neighborhood')] = 'Downtown'; drip[qc('MatchPopId')] = 'POP-00034'; drip[qc('MatchType')] = 'spouse'; drip[qc('MaidenName')] = 'Lopez';
+  const drip = new Array(qh.length).fill(''); drip[qc('First')] = 'Sam'; drip[qc('Last')] = 'Santana'; drip[qc('RoleType')] = 'Shop Clerk'; drip[qc('Tier')] = 4; drip[qc('ClockMode')] = 'ENGINE'; drip[qc('BirthYear')] = 1988; drip[qc('Neighborhood')] = 'Downtown'; drip[qc('MatchPopId')] = 'POP-00034'; drip[qc('MatchType')] = 'spouse'; drip[qc('MaidenName')] = 'Lopez';
   adv.appendRow(drip);
   const coll = new Array(qh.length).fill(''); coll[qc('First')] = 'Rosa'; coll[qc('Last')] = 'Nguyen'; coll[qc('Tier')] = 4; coll[qc('HouseholdKey')] = 'nguyen'; coll[qc('BirthYear')] = 1990; coll[qc('Neighborhood')] = 'Temescal';
   adv.appendRow(coll);
@@ -247,7 +270,7 @@ console.log('\n7. engine.148 P3 — the door refuses an off-map hood and folds a
   const adv2 = w2.sheets.Advancement_Intake1;
   E.ensureHouseholdQueueSheet_(w2.ctx.ss);
   const q2 = adv2.rows[0]; const c2 = (n) => q2.indexOf(n);
-  const kid = new Array(q2.length).fill(''); kid[c2('First')] = 'Nadia'; kid[c2('Last')] = 'Okafor'; kid[c2('Tier')] = 4; kid[c2('ClockMode')] = 'ENGINE'; kid[c2('BirthYear')] = 1991; kid[c2('Neighborhood')] = 'Old Oakland';
+  const kid = new Array(q2.length).fill(''); kid[c2('First')] = 'Nadia'; kid[c2('Last')] = 'Okafor'; kid[c2('RoleType')] = 'Shop Clerk'; kid[c2('Tier')] = 4; kid[c2('ClockMode')] = 'ENGINE'; kid[c2('BirthYear')] = 1991; kid[c2('Neighborhood')] = 'Old Oakland';
   adv2.appendRow(kid);
   const before2 = w2.ctx.ledger.rows.length;
   E.processAdvancementRows_(w2.ctx, 'C' + CYCLE, CYCLE);
@@ -264,10 +287,11 @@ console.log('\n8. engine.279 — the pass logs once and reads Generic_Citizens o
     const w = world(bell);
     runPlan(w);
     const adv = w.sheets.Advancement_Intake1, qh = adv.rows[0], qc = (n) => qh.indexOf(n);
-    const plain = (f, l, by) => { const r = new Array(qh.length).fill(''); r[qc('First')] = f; r[qc('Last')] = l; r[qc('Tier')] = 4; r[qc('ClockMode')] = 'ENGINE'; r[qc('BirthYear')] = by; r[qc('Neighborhood')] = 'Temescal'; r[qc('Notes')] = 'note ' + f; return r; };
-    adv.appendRow(plain('Nadia', 'Okafor', 1991));
+    const plain = (f, l, by, role) => { const r = new Array(qh.length).fill(''); r[qc('First')] = f; r[qc('Last')] = l; r[qc('RoleType')] = role || ''; // engine.351: a new adult's row carries its job or it waits
+      r[qc('Tier')] = 4; r[qc('ClockMode')] = 'ENGINE'; r[qc('BirthYear')] = by; r[qc('Neighborhood')] = 'Temescal'; r[qc('Notes')] = 'note ' + f; return r; };
+    adv.appendRow(plain('Nadia', 'Okafor', 1991, 'Shop Clerk'));
     adv.appendRow(plain('Rosa', 'Nguyen', 1990));          // already on the ledger → an Advancement line
-    adv.appendRow(plain('Jonah', 'Pike', 1988));
+    adv.appendRow(plain('Jonah', 'Pike', 1988, 'Shop Clerk'));
     const gc = w.sheets.Generic_Citizens;
     gc.rows.push(gcRow('Jonah', 'Pike', 'Emerged'));        // first hit, already Emerged
     gc.rows.push(gcRow('Nadia', 'Okafor', 'Active'));

@@ -91,7 +91,8 @@ const mfe = R('phase07-evening-media/mediaFeedbackEngine.js');
   ok(/^Media-[A-Z][a-z]+-(Up|Down)-S$/.test(tg), 'news-climate pool with no sign: ' + name);
 });
 ok(gce.indexOf('var mediaSign = MEDIA_POOL_SIGN_[mediaEvent.tag];') > 0, 'the drawn line carries its pool\'s sign');
-ok(gce.indexOf('if (GRADED_ONLY_KIND_[primaryTag] === true || kindMovesNothing_(primaryTag, pick)) {') > 0, 'the admission grades or drops a Work line');
+// engine.350 Task 15 pile 1: the admission also takes a source graded-only whatever its kind (source:fame)
+ok(gce.indexOf('if (GRADED_ONLY_KIND_[primaryTag] === true || gradedOnlyBySource_(tags) || kindMovesNothing_(primaryTag, pick)) {') > 0, 'the admission grades or drops a Work line');
 ok(gce.indexOf('if (has("source:occupation")) return "Work";') > 0, 'an occupation row is still a Work line');
 P.SIGNS.forEach(function (s) {
   const cur = 'source:occupation,auth:library-s325' + (s[0] === 'occupation.transit' ? ',transit:disruption' : '');
@@ -145,7 +146,8 @@ while ((mm = re.exec(gm)) !== null) {
 }
 ok(pools.join(',') === 'mediaWork,editorPool,reporterPool,columnistPool,photographerPool' && mediaLines === 22, 'media work pools ' + pools.join(',') + ' lines ' + mediaLines);
 ok(!/\]\.map\(function\(t\) \{ return entry\(t, \[[^\]]*\], "Work"\); \}\);/.test(gm), 'no unsigned Work pool left in the game-mode writer');
-ok(gm.indexOf("if (primaryTag !== 'Work' && Object.keys(ownFx).length) writtenTag = primaryTag;") > 0, 'the game-mode admission never writes a bare Work');
+// engine.350 Task 15 pile 1: Public joins Work — neither is written bare
+ok(gm.indexOf("if (primaryTag !== 'Work' && primaryTag !== 'Public' && Object.keys(ownFx).length) writtenTag = primaryTag;") > 0, 'the game-mode admission never writes a bare Work');
 
 // 8. the newsroom staff's own lines (media mode): every Media line carries one sign first or none; never bare
 const mmd = R('phase05-citizens/generateMediaModeEvents.js');

@@ -249,7 +249,10 @@ console.log('═══ engine.94 B.2a: memory rows route through the dial vocabu
   const ROUTES = [
     ['memory:strain', '[Strain]', 'checked the lock twice since the spring'],
     ['memory:community', '[Community]', 'brought a plate to the block table again'],
-    ['memory:rivalry', '[Rivalry]', 'crossed the street rather than share the corner'],
+    // engine.350 Task 15 pile 1: Rivalry is written by its own sign, one step — a rivalry memory row with no
+    // dial: tag is drawn and not written (the live tab carries none, read 2026-11-21)
+    ['memory:rivalry,dial:composure:down', '[Rivalry-Composure-Down-S]', 'crossed the street rather than share the corner'],
+    ['memory:rivalry', null, 'took the long way round the block'],
     ['', null, 'kept the receipt in the kitchen drawer']
   ];
   for (const [tag, primary, text] of ROUTES) {
@@ -260,7 +263,7 @@ console.log('═══ engine.94 B.2a: memory rows route through the dial vocabu
       generateCitizensEvents_(ctx);
       drawn = emittedLines(ctx)[0].split('\n').find(l => l.indexOf(text) >= 0) || null;
     }
-    if (primary === null) assert('bare source:continuity (no signed fact) is not written — engine.299', drawn === null, drawn || '');
+    if (primary === null) assert((tag ? 'unsigned ' + tag : 'bare source:continuity (no signed fact)') + ' is not written — engine.299', drawn === null, drawn || '');
     else assert(tag + ' routes ' + primary, drawn !== null && drawn.indexOf(primary) >= 0, drawn || 'never drawn in 200 seeds');
   }
 }

@@ -18,6 +18,8 @@ global.Logger = { log() {} };
 const E = require('/root/GodWorld/utilities/citizenMemory.js');
 Object.keys(E).forEach(k => { global[k] = E[k]; });
 const M = require('/root/GodWorld/utilities/citizenDialMap.js');
+// engine.350 pile 1 / engine.351: the fold calls gradedParts_ (citizenDialMap.js) and simYearOf_ (the calendar) — co-loaded on Apps Script, loaded here
+global.gradedParts_ = M.gradedParts_; if (typeof global.simYearOf_ !== 'function') global.simYearOf_ = new Function(require('fs').readFileSync(require('path').resolve(__dirname, '../phase01-config/advanceSimulationCalendar.js'), 'utf8') + '\nreturn simYearOf_;')();
 global.nudgesForEvent_ = M.nudgesForEvent_;
 global.nudgesForReflection_ = M.nudgesForReflection_;
 global.baseTag_ = M.baseTag_;

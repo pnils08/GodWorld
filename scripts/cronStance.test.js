@@ -37,6 +37,8 @@ assert('standing: no digits', !/\d/.test(standing), standing);
 // ---- the drain: resolves -> push
 const E = require('../utilities/citizenMemory.js'); Object.keys(E).forEach(k => { global[k] = E[k]; });
 const M = require('../utilities/citizenDialMap.js'); global.nudgesForEvent_ = M.nudgesForEvent_; global.baseTag_ = M.baseTag_; global.nudgesForReflection_ = M.nudgesForReflection_;
+// engine.350 pile 1 / engine.351: the fold calls gradedParts_ (citizenDialMap.js) and simYearOf_ (the calendar) — co-loaded on Apps Script, loaded here
+global.gradedParts_ = M.gradedParts_; if (typeof global.simYearOf_ !== 'function') global.simYearOf_ = new Function(require('fs').readFileSync(require('path').resolve(__dirname, '../phase01-config/advanceSimulationCalendar.js'), 'utf8') + '\nreturn simYearOf_;')();
 global.queueCellIntent_ = () => {};
 const C = require('../utilities/compressLifeHistory.js');
 assert('push +1: look for', C.pushFromResolves_('I am going to look for a bigger place') === 1);

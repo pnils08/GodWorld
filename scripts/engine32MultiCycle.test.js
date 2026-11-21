@@ -57,6 +57,8 @@ global.Logger = { log() {} };
 const E = require('../utilities/citizenMemory.js');
 Object.keys(E).forEach(k => { global[k] = E[k]; });
 const M = require('../utilities/citizenDialMap.js');
+// engine.350 pile 1 / engine.351: the fold calls gradedParts_ (citizenDialMap.js) and simYearOf_ (the calendar) — co-loaded on Apps Script, loaded here
+global.gradedParts_ = M.gradedParts_; if (typeof global.simYearOf_ !== 'function') global.simYearOf_ = new Function(require('fs').readFileSync(require('path').resolve(__dirname, '../phase01-config/advanceSimulationCalendar.js'), 'utf8') + '\nreturn simYearOf_;')();
 global.nudgesForEvent_ = M.nudgesForEvent_;
 global.baseTag_ = M.baseTag_;
 const C = require('../utilities/compressLifeHistory.js');
@@ -314,7 +316,16 @@ assert('B1 bounded under continuous folding (every dial 0-100)', hot.bounded);
   // Measured sd ~0.26 over 40 cycles at LIMIT 6/cycle — small by design;
   // assert the MECHANISM (variance exists, partial movers, no pinning),
   // not an arbitrary magnitude.
-  const fams = hot.rows.map(r => { const b = baseOf(r); return b ? b.family : 50; });
+  // engine.351 (2026-11-21): the neutral cohort has no DialState, so each starts from age, work and household
+  // (arrivalStartDials_) — family is measured against that start, not against 50.
+  const startSrc = fs.readFileSync(path.resolve(__dirname, '../utilities/compressLifeHistory.js'), 'utf8');
+  const arrivalStart_ = new Function(startSrc.slice(startSrc.indexOf('var ARRIVAL_CLINICIAN_RE_'), startSrc.indexOf('// engine.208 C8 — a no-fandom')) + '\nreturn arrivalStartDials_;')();
+  const startIdx = { iSpouse: HEADERS.indexOf('SpouseId'), iParents: HEADERS.indexOf('ParentIds'), iChildren: HEADERS.indexOf('ChildrenIds'), iHousehold: HEADERS.indexOf('HouseholdId'),
+    iClock: HEADERS.indexOf('ClockMode'), iRole: HEADERS.indexOf('RoleType'), iBirthYear: HEADERS.indexOf('BirthYear') };
+  const startYear = global.simYearOf_({ summary: {}, config: {} }, 1);
+  const famStart = hot.rows.map(r => { if (!/^POP-N/.test(r[0])) return 50; const st = arrivalStart_(r, startIdx, startYear, String(r[0]).toUpperCase()); return st ? st.family : 50; });
+  const fams = hot.rows.map((r, i) => { const b = baseOf(r); return (b ? b.family : famStart[i]) - famStart[i] + 50; });
+  assert('B3-start the neutral cohort starts off 50 on family, each from their own row (engine.351)', new Set(famStart.slice(0, 50)).size > 3, JSON.stringify(famStart.slice(0, 8)));
   const pinned = fams.filter(v => v >= 99).length;
   const movers = fams.filter(v => Math.abs(v - 50) > 0.001).length;
   const mean = fams.reduce((a, v) => a + v, 0) / fams.length;

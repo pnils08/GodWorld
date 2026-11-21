@@ -90,7 +90,7 @@ const FAME_LINES = [
 // run N independent single-citizen cycles; return parsed LifeHistory lines
 function trials(n, usage, headersOverride) {
   const lines = [];
-  let eventCount = 0;
+  let eventCount = 0, plainDraws = 0;
   for (let i = 0; i < n; i++) {
     const rows = [makeRow('POP-F' + i, usage)];
     const ctx = makeCtx(rows, mulberry32(i + 13));
@@ -100,8 +100,10 @@ function trials(n, usage, headersOverride) {
     if (life) {
       for (const ln of life.split('\n')) { lines.push(ln); eventCount++; }
     }
+    // engine.299 / engine.350: a line that moves nothing is drawn, counted here and not written
+    plainDraws += (ctx.summary.engine299 && ctx.summary.engine299.noDial) || 0;
   }
-  return { lines, eventCount };
+  return { lines, eventCount, plainDraws };
 }
 
 const isFameLine = ln => FAME_LINES.some(t => ln.indexOf(t) >= 0);
@@ -146,8 +148,10 @@ console.log('═══ T3 Section 1 — fame gate');
   assert('1.1 famous citizen (UsageCount 12) fires events', famous.eventCount > 100, String(famous.eventCount));
   assert('1.2 famous citizen draws recognition lines', fameLines.length > 0,
     'of ' + famous.eventCount + ' events');
-  assert('1.3 recognition lines carry [Reputation] primary tag',
-    fameLines.length > 0 && fameLines.every(ln => ln.indexOf('[Reputation]') >= 0),
+  // engine.350 Task 15 pile 1: a fame line is written by what it says — recognised, asked, greeted raise
+  // sociability one step (was the bare Reputation: integrity +3 for being recognised)
+  assert('1.3 recognition lines carry the graded Reputation tag',
+    fameLines.length > 0 && fameLines.every(ln => ln.indexOf('[Reputation-Sociability-Up-S]') >= 0),
     JSON.stringify(fameLines.slice(0, 2)));
   assert('1.4 recognition is a minority share of a famous citizen\'s life (<0.5)',
     fameLines.length / famous.eventCount < 0.5, (fameLines.length / famous.eventCount).toFixed(3));
@@ -166,9 +170,11 @@ console.log('═══ T3 Section 1 — fame gate');
     sub.lines.filter(isFameLine).length === 0);
 
   // same seeds -> the +0.005 chance bump makes famous a strict superset
-  assert('1.8 fame makes a citizen MORE eventful (same seeds)',
-    famous.eventCount > normal.eventCount,
-    famous.eventCount + ' vs ' + normal.eventCount);
+  // engine.350 Task 15 pile 1: "overheard their own name" moves nothing, so it is drawn and not written —
+  // the famous citizen's week is counted by draws (written + plain), and his written lines run about 1% under
+  assert('1.8 fame makes a citizen MORE eventful (same seeds; written + plain draws)',
+    famous.eventCount + famous.plainDraws > normal.eventCount + normal.plainDraws,
+    (famous.eventCount + famous.plainDraws) + ' vs ' + (normal.eventCount + normal.plainDraws));
 }
 
 console.log('═══ T3 Section 2 — missing-column guard');

@@ -262,8 +262,8 @@ console.log('\n5. pipeline.73 — the intake flags reach the minted row beside C
   const q = w.sheets.Advancement_Intake1;
   const r = (o) => { const x = ADV_H.map(() => ''); Object.keys(o).forEach(k => { x[ADV_H.indexOf(k)] = o[k]; }); return x; };
   q.rows.push(r({ First: 'Tamsin', Last: 'Pruitt', RoleType: 'Journalist, Lives', Tier: 4, ClockMode: 'MEDIA', MED: 'y', BirthYear: 1994, Neighborhood: 'Fruitvale' }));
-  q.rows.push(r({ First: 'Plain', Last: 'Mint', Tier: 4, BirthYear: 1990, Neighborhood: 'Temescal' }));
-  q.rows.push(r({ First: 'Civic', Last: 'Hand', Tier: 3, ClockMode: 'CIVIC', CIV: 'Yes', MED: 'n', UNI: ' no ', BirthYear: 1980, Neighborhood: 'Fruitvale' }));
+  q.rows.push(r({ First: 'Plain', Last: 'Mint', RoleType: 'Bookkeeper', Tier: 4, BirthYear: 1990, Neighborhood: 'Temescal' }));
+  q.rows.push(r({ First: 'Civic', Last: 'Hand', RoleType: 'City Planner', Tier: 3, ClockMode: 'CIVIC', CIV: 'Yes', MED: 'n', UNI: ' no ', BirthYear: 1980, Neighborhood: 'Fruitvale' }));
   const before = w.ctx.ledger.rows.length;
   E.processAdvancementRows_(w.ctx, 'C' + CYCLE, CYCLE);
   const nu = w.ctx.ledger.rows.slice(before);
@@ -274,8 +274,8 @@ console.log('\n5. pipeline.73 — the intake flags reach the minted row beside C
   check('a row with blank flags mints with blank flags (every queued row before pipeline.73)', p && p[col('MED (y/n)')] === '' && p[col('CIV (y/n)')] === '' && p[col('UNI (y/n)')] === '' && p[col('ClockMode')] === 'ENGINE');
   check('Yes / n / " no " fold to the ledger spelling', c && c[col('CIV (y/n)')] === 'yes' && c[col('MED (y/n)')] === 'no' && c[col('UNI (y/n)')] === 'no', c && JSON.stringify([c[col('CIV (y/n)')], c[col('MED (y/n)')], c[col('UNI (y/n)')]]));
   const w2 = world();
-  w2.sheets.Advancement_Intake1.rows.push(r({ First: 'Typo', Last: 'Flag', Tier: 4, MED: 'maybe', BirthYear: 1990, Neighborhood: 'Temescal' }));
-  w2.sheets.Advancement_Intake1.rows.push(r({ First: 'Tier', Last: 'Review', CIV: 'pending', Tier: 4, BirthYear: 1988, Neighborhood: 'Temescal', Notes: 'Media profiled' }));
+  w2.sheets.Advancement_Intake1.rows.push(r({ First: 'Typo', Last: 'Flag', RoleType: 'Line Cook', Tier: 4, MED: 'maybe', BirthYear: 1990, Neighborhood: 'Temescal' }));
+  w2.sheets.Advancement_Intake1.rows.push(r({ First: 'Tier', Last: 'Review', RoleType: 'Baker', CIV: 'pending', Tier: 4, BirthYear: 1988, Neighborhood: 'Temescal', Notes: 'Media profiled' }));
   logs.length = 0;
   const b2 = w2.ctx.ledger.rows.length;
   let err = null; try { E.processAdvancementRows_(w2.ctx, 'C' + CYCLE, CYCLE); } catch (e) { err = e; }
@@ -283,6 +283,25 @@ console.log('\n5. pipeline.73 — the intake flags reach the minted row beside C
   check('an unreadable flag never stops the pass: the row mints with that flag blank, and the log names it', !err && typo && typo[col('MED (y/n)')] === '' && logs.some(m => /Typo Flag/.test(m) && /MED "maybe"/.test(m)), err ? err.message : JSON.stringify(logs.slice(-3)));
   const tr = w2.ctx.ledger.rows.slice(b2).find(x => x[col('First')] === 'Tier');
   check('the media tier-review shape ("pending" in G) mints with CIV blank', !err && tr && tr[col('CIV (y/n)')] === '');
+
+  // engine.351 Task 11: a new citizen's row missing BirthYear, Neighborhood or (an adult) RoleType waits on the tab
+  const w3 = world();
+  const q3 = w3.sheets.Advancement_Intake1;
+  q3.rows.push(r({ First: 'Nobirth', Last: 'Year', RoleType: 'Baker', Tier: 4, Neighborhood: 'Temescal' }));
+  q3.rows.push(r({ First: 'Nohood', Last: 'Given', RoleType: 'Baker', Tier: 4, BirthYear: 1990 }));
+  q3.rows.push(r({ First: 'Norole', Last: 'Adult', Tier: 4, BirthYear: 1990, Neighborhood: 'Temescal' }));
+  q3.rows.push(r({ First: 'Whole', Last: 'Row', RoleType: 'Baker', Tier: 4, BirthYear: 1990, Neighborhood: 'Temescal' }));
+  const b3 = w3.ctx.ledger.rows.length;
+  E.processAdvancementRows_(w3.ctx, 'C' + CYCLE, CYCLE);
+  const nu3 = w3.ctx.ledger.rows.slice(b3).map(x => x[col('First')]);
+  const h3 = q3.rows[0], st3 = h3.indexOf('IntakeStatus'), stat = (f) => { const x = q3.rows.find(y => y[0] === f); return x ? String(x[st3] || '') : '(cleared)'; };
+  check('only the complete row mints; the three incomplete rows stay on the tab', nu3.length === 1 && nu3[0] === 'Whole' && stat('Whole') === '(cleared)', JSON.stringify(nu3));
+  check('each waiting row names what is missing in IntakeStatus', st3 >= 0 && stat('Nobirth') === 'waiting — needs BirthYear (C' + CYCLE + ')' && stat('Nohood') === 'waiting — needs Neighborhood (C' + CYCLE + ')' && stat('Norole') === 'waiting — needs RoleType (C' + CYCLE + ')', JSON.stringify([stat('Nobirth'), stat('Nohood'), stat('Norole')]));
+  const nb = q3.rows.find(y => y[0] === 'Nobirth'); nb[ADV_H.indexOf('BirthYear')] = 1985;
+  const b4 = w3.ctx.ledger.rows.length;
+  E.processAdvancementRows_(w3.ctx, 'C' + (CYCLE + 1), CYCLE + 1);
+  const nu4 = w3.ctx.ledger.rows.slice(b4);
+  check('a waiting row completed by its author mints at the next pass with the year it was given, never 2003', nu4.length === 1 && nu4[0][col('First')] === 'Nobirth' && Number(nu4[0][col('BirthYear')]) === 1985, JSON.stringify(nu4.map(x => [x[col('First')], x[col('BirthYear')]])));
 }
 
 console.log('\n' + pass + ' passed, ' + fail + ' failed');

@@ -174,9 +174,12 @@ console.log('═══ runAsUniversePipeline — a retired player\'s everyday li
   const everyday = lines.filter((l) => /^PostCareer-[A-Za-z]+-(Up|Down)-S$/.test(l.tag));
   const wrong = everyday.filter((l) => P.tag(l.text).tag !== l.tag);
   assert(`every written everyday line carries the tag its sentence is listed under (${everyday.length})`, everyday.length > 100 && wrong.length === 0, JSON.stringify(wrong.slice(0, 3)));
-  const own = lines.filter((l) => /^PostCareer-(Travel|Influence|Community|Fundraiser|Wellness)$/.test(l.tag));
-  assert(`the appearance, clinic, fundraiser, getaway and training lines keep their kinds (${own.length})`, own.length > 100 && own.length + everyday.length === lines.length);
-  assert(`a plain line is drawn, counted and not written (${dropped} draws)`, dropped > 20 && bySrc['runAsUniversePipeline:PostCareer:plain'] === dropped && !lines.some((l) => P.byText[l.text] === null), JSON.stringify(bySrc));
+  // engine.350 Task 15 pile 1: the influence, business and wellness lines keep their kinds and are written by
+  // what each says, one step (PostCareer-Influence-Drive-Up-S); travel, community and fundraiser stay as they were
+  const own = lines.filter((l) => /^PostCareer-(Travel|Community|Fundraiser)$/.test(l.tag) || /^PostCareer-(Influence|Wellness)-[A-Za-z]+-(Up|Down)-S$/.test(l.tag));
+  assert('no influence or wellness line is written bare', !lines.some((l) => /^PostCareer-(Influence|Wellness)$/.test(l.tag)));
+  assert(`the appearance, clinic, fundraiser, getaway and training lines keep their kinds (${own.length})`, own.length > 100 && own.length + everyday.length === lines.length, JSON.stringify(lines.reduce((a, l) => { a[l.tag] = (a[l.tag] || 0) + 1; return a; }, {})));
+  assert(`a plain line is drawn, counted and not written (${dropped} draws)`, dropped > 20 && (bySrc['runAsUniversePipeline:PostCareer:plain'] || 0) + (bySrc['runAsUniversePipeline:PostCareer-Influence:plain'] || 0) + (bySrc['runAsUniversePipeline:PostCareer-Wellness:plain'] || 0) === dropped && bySrc['runAsUniversePipeline:PostCareer:plain'] > 20 && !lines.some((l) => P.byText[l.text] === null), JSON.stringify(bySrc));
 }
 
 // ── the generic writer, the neighborhood engine's First Friday, the generator's follow-up lines

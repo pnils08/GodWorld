@@ -66,6 +66,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | engine.289 | Evening culture and nightlife land on their hood: LIVE stage 49 @184 (bench C117/C118 PASS). Read C117 Sun 2026-11-22: seed carry + the bars log line | live-observing | research-build | [[../plans/2026-11-16-evening-reaches-the-hoods]] |
 | engine.349 | Dials move: the middle counts LIVE 11-19, stage 58 @193 (plan Task 14). Read C117 Sun 2026-11-22: `scripts/dialPulse.js` against leg n, the 13 | live-observing | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
 | engine.347 | Saved words reach the dials (builder 11-16): live stage 53. Wed 11-18 job rows read: 7 of 7. Read Sat 11-21 print rows; all fold at C117 Sun 2026-11-22 | live-observing | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
+| engine.351 | Intake complete or it waits; arrivals start off 50: LIVE 11-21 stage 65. Read C117 Sun 2026-11-22: held rows, each arrival's start on Dial_Moves | live-observing | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
 | pipeline.112 | Labels off citizens' pages: live 11-19. Read Mon 2026-11-23 after 05:45: the Fri grade line, Sun chain, Mon datawake logs; organic: exchange, talk | live-observing | research-build | [[../plans/2026-11-16-page-labels-off-citizens-memory]] |
 
 ## 3. Now — being worked, one per terminal (in-progress)
@@ -86,7 +87,6 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | infrastructure.19 | Oakland week flight made lifelike (builder 11-14). v41: names first, homes on a block, team news at team buildings. Next: his look; joined street unbuilt | in-progress | research-build | [[../../world-view/README]] |
 | engine.350 | Lines move a dial by what they say: LIVE stage 57 @192. Task 15 pile 1 built, 10 tests red, unbenched. Read C117 Sun 2026-11-22 | in-progress | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
 | pipeline.114 | Flagged piece back to its writer: built, reverted 11-20 before live — the gate calls a real page quote fabricated. Next: the gate reads the citizen's page | in-progress | research-build | [[../plans/2026-11-20-flagged-piece-back-to-its-writer]] |
-| engine.351 | Intake complete or it waits; arrivals' dials start from their data. Benched 11-21 (C117/C118 PASS); next: his look at named arrivals, then PROD | in-progress | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
 
 ## 4. Queue — ruled, not started (ready)
 

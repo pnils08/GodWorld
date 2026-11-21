@@ -200,6 +200,14 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD stage 65 — an incomplete intake waits; an adult arrival's dials start from their life (2026-11-21, research-build, engine.351)
+
+- **What:** three files at `8b558e9e7` on stage 64 — `phase01-config/godWorldEngine2.js`, `phase05-citizens/processAdvancementIntake.js`, `utilities/compressLifeHistory.js`. Plan `docs/plans/2026-11-16-every-saved-word-reaches-the-dials.md` §Task 11 as built. Builder 2026-11-21 on the bench arrivals and their start numbers: "This looks fine".
+- **Proof:** no test run (test guard). Bench SANDBOX 1004 @223, C117 + C118 PASS, 0 new Engine_Errors — §Current sandbox.
+- **Stage 65 (2026-11-21):** live pulled = stage 64 (`prod199-noworldview.sha256`), built tree = the benched manifest byte for byte, push landed; a separate pull-back = `output/research-build/2026-11-21-e351/e351.sha256` byte for byte. **No version cut:** `clasp deploy` refused — "Script has reached the limit of 200 versions". The web-app deployment stays pinned at @200 (stage 64); project HEAD is stage 65. The live Cycle is `runWorldCycle()` run from the sheet, which runs HEAD. The web app answers JSON (loads). First sheet write on the first fire: `IntakeStatus` header self-arms on Advancement_Intake1 (col W).
+- **Open:** every PROD push script's deploy step fails until versions are deleted on the project history page (the builder's hand) — the push itself and a hand pull-back still work.
+- **Back out:** push the stage 64 tree (`output/research-build/2026-11-21-e351/prod199-noworldview.sha256`).
+
 ### PROD stage 64 @200 — @198 without world-view/ (2026-11-21, research-build — a fix to stage 63)
 
 - **Stage 63 @198 (2026-11-21, engine-sheet, builder "Commit all work and push all work live"):** every file of main at `4479a1483`, no bench (engine.350 Task 15 pile 1, engine.340 Tasks 1–4, and the rest of main). Manifest `output/engine-sheet/2026-11-21-e340/prod198.sha256` — 180 files: stage 62's 168 + 12 under `world-view/`, which `.claspignore` did not list.

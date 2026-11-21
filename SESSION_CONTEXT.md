@@ -2,6 +2,6 @@
 
 **PIN:** S763 | Day 234 | Canon C116 | PROD @197 (stage 62; history: DEPLOY_HISTORY §PROD) | next live fire C117 Sun 2026-11-22
 
-**NEXT[engine-sheet]:** no job named.
+**NEXT[engine-sheet]:** pipeline.113 → plan Task 1: the gate excerpt names points.
 
 **NEXT[research-build]:** no job named — ask him for the row.

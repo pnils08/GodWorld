@@ -50,6 +50,7 @@ pointers:
 | T | CitizenBio |
 | U | MatchName |
 | V | HouseholdKey |
+| W | IntakeStatus — engine.351 (2026-11-21): self-armed by `processAdvancementRowsBody_` on its first pass; a new citizen's row missing BirthYear, Neighborhood or (an adult) RoleType carries `waiting — needs …` and stays on the tab until complete |
 
 ---
 

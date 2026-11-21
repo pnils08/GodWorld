@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-11-20 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-11-21 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -2552,7 +2552,6 @@
 
 - **queueHouseholdIntake_(ctx, intakeSheet, intakeVals, intakeHeader, nameIndex, cycle)**
   Reads: S.neighborhoodState
-  RNG: ctx.rng / safeRand_(ctx)
 
 - **formIntakeHouseholds_(ctx, mints, cycle, now, logSheet)**
   Reads: S.storyHooks
@@ -2577,6 +2576,8 @@
 
 ### runAsUniversePipeline.js
 - **mulberry32_uni_(seed)**
+
+- **postCareerKindLineTag_(kind, text)**
 
 - **postCareerLineTag_(text)**
 
@@ -2741,6 +2742,8 @@
   RNG: ctx.rng / safeRand_(ctx)
 
 ### runRelationshipEngine.js
+- **relationshipSignIndex_(table)**
+
 - **relationshipLineTag_(kind, text)**
 
 - **runRelationshipEngine_(ctx)**
@@ -3101,7 +3104,9 @@
 
 - **contractSeedTrend_(r)**
 
-- **contractSeedIsMajor_(magnitude, clusterSize)**
+- **contractSeedClassRule_(causeType, effectType)**
+
+- **contractSeedIsMajor_(ug)**
 
 - **contractSeedUnit_(rp)**
 
@@ -4325,6 +4330,8 @@
 
 - **buildFandomDonors_(rows, iPopID, iDialState, iHousehold)**
 
+- **arrivalStartDials_(row, idxs, simYear, popId)**
+
 - **inheritFandom_(row, selfPop, idxs, donors)**
 
 - **serializeDialState_(c)**
@@ -4643,6 +4650,8 @@
   Reads: S.neighborhoodPulse
   Writes: S.neighborhoodPulse
 
+- **pulseKindLifts_(kind)**
+
 - **pulseKindForLine_(lineKind, writtenTag)**
 
 ### neighborhoodPulseMap.test.js
@@ -4957,4 +4966,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 181
-**Functions mapped:** 1805
+**Functions mapped:** 1810

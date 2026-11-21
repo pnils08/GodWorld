@@ -641,9 +641,11 @@ function compressLifeHistory_(ctx, options) {
   // takes fandom from the household on this fold — families start as fans (builder 2026-10-03).
   // Donors are BASE fans (>= 60), indexed once.
   var fandomIdx = { iSpouse: idx('SpouseId'), iParents: idx('ParentIds'), iChildren: idx('ChildrenIds'), iHousehold: idx('HouseholdId'),
-                    iClock: idx('ClockMode'), iEmployer: idx('EmployerBizId'), iRole: idx('RoleType') };
+                    iClock: idx('ClockMode'), iEmployer: idx('EmployerBizId'), iRole: idx('RoleType'), iBirthYear: idx('BirthYear') };
   var fandomDonors = buildFandomDonors_(rows, iPopID, iDialState, fandomIdx.iHousehold);
   var fandomSeeded = 0, fandomInheritedFans = 0;
+  // engine.351 Task 11: an adult the dials have never met starts from their age, work and household
+  var arrivalSimYear = simYearOf_(ctx, cycle), arrivalSeeded = 0;
 
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
@@ -736,6 +738,12 @@ function compressLifeHistory_(ctx, options) {
     var stepBase = (movesOn && c) ? copyDialBase_(c.base) : null;
     var stepTally = stepBase ? (moveTallies[movePop] || (moveTallies[movePop] = {})) : null;
     if (c && fandomSeedDue) {
+      var arrivalStart = arrivalStartDials_(row, fandomIdx, arrivalSimYear, String(popId).trim().toUpperCase());
+      if (arrivalStart) {
+        for (var asd in arrivalStart) c.base[asd] = arrivalStart[asd];
+        arrivalSeeded++;
+        if (stepBase) noteDialStep_(stepTally, 'arrival start', stepBase, c.base);
+      }
       var inherited = inheritFandom_(row, String(popId).trim().toUpperCase(), fandomIdx, fandomDonors);
       // athletes start as fans (builder 2026-10-03): a GAME-clock player or staff member of a
       // franchise (sportsStaffTeams_, applyGameNightMoments.js — the one employer table) starts at 65
@@ -939,6 +947,7 @@ function compressLifeHistory_(ctx, options) {
     griefExpired: griefExpired,
     integrityWear: { rate: wearRate, floor: wearFloor, worn: wearSteps, regained: regainSteps }, // engine.272
     fandomSeeded: { rows: fandomSeeded, fans: fandomInheritedFans }, // engine.208 C8
+    arrivalSeeded: arrivalSeeded, // engine.351 Task 11
     dialTuning: dialTune, // engine.349 the speed this Cycle folded at
     dialMoves: dialMoves ? { rows: dialMoves.moveRows.length, moved: dialMoves.moved, crossed: dialMoves.crossed, allMiddle: dialMoves.allMiddle, anyLow: dialMoves.anyLow, unreadable: dialMoves.unreadable, queued: dialMovesQueued } : null, // engine.349
     version: COMPRESS_VERSION
@@ -951,6 +960,7 @@ function compressLifeHistory_(ctx, options) {
     ', folded ' + foldedEntries + ' entries, settled ' + settled +
     (futureStampedEntries || futureWatermarkRows ? ', FUTURE-STAMPED ' + futureStampedEntries + ' lines / ' + futureWatermarkRows + ' watermarks past C' + cycle : '') + // engine.197
     ', fandom seeded ' + fandomSeeded + ' (' + fandomInheritedFans + ' as household fans)' + // engine.208 C8
+    ', arrivals started ' + arrivalSeeded + // engine.351 Task 11
     (S.pressureCounts ? ', pressure ' + JSON.stringify(S.pressureCounts) : ', pressure none') + // engine.176 per-emitter counts (S.pressureCounts)
     (S.contests ? ', contests ' + JSON.stringify(S.contests) : ', contests none') + // engine.179 (S.contests)
     ', pushes ' + pushesQueued + // engine.180
@@ -1559,6 +1569,52 @@ function buildFandomDonors_(rows, iPopID, iDialState, iHousehold) {
     if (hh) (byHouse[hh] = byHouse[hh] || []).push(pop);
   }
   return { byPop: byPop, byHouse: byHouse };
+}
+
+// engine.351 Task 11 (builder 2026-11-16: arrivals' dials start from their data) — the eight dials of an
+// adult the dials have never met (blank DialState: a promotion, a wave arrival, a GC spouse) start from
+// what the row says, not 50 x 8. Fandom keeps its own seed (inheritFandom_). Under 18 or no BirthYear:
+// null, the start stays 50 (kids are engine.339's call). The spread is the POPID's own hash, never the
+// cycle rng — the same citizen starts the same on a re-fire. Read 2026-11-21 (plan §Task 11 read):
+// 148 arrivals replayed, 148 distinct starts.
+var ARRIVAL_CLINICIAN_RE_ = /\b(nurse|physician|doctor|surgeon|paramedic|emt|firefighter|fire (lieutenant|captain|chief)|police|detective|sergeant|patrol officer)\b/i;
+var ARRIVAL_DIALS_ = ['drive', 'sociability', 'warmth', 'openness', 'composure', 'integrity', 'family', 'outabout'];
+function arrivalStartDials_(row, idxs, simYear, popId) {
+  var by = idxs.iBirthYear >= 0 ? Number(row[idxs.iBirthYear]) || 0 : 0;
+  if (!(by > 1900) || !(simYear > 0)) return null;
+  var age = simYear - by;
+  if (age < 18) return null;
+  var p = {};
+  var add = function(d, n) { p[d] = (p[d] || 0) + n; };
+  // life stage
+  if (age < 25) { add('openness', 6); add('outabout', 6); add('family', -4); }
+  else if (age < 45) { add('drive', 4); }
+  else if (age < 65) { add('composure', 4); add('family', 4); }
+  else { add('family', 6); add('outabout', -6); add('drive', -6); }
+  // work
+  var clock = idxs.iClock >= 0 ? String(row[idxs.iClock] || '').trim().toUpperCase() : '';
+  var role = idxs.iRole >= 0 ? String(row[idxs.iRole] || '').trim() : '';
+  if (clock === 'MEDIA') { add('sociability', 6); add('openness', 4); }
+  else if (clock === 'CIVIC') { add('integrity', 4); add('drive', 4); }
+  else if (clock === 'GAME') { add('drive', 6); }
+  if (/^owner\b/i.test(role)) { add('drive', 8); add('composure', 4); }
+  if (ARRIVAL_CLINICIAN_RE_.test(role)) { add('composure', 6); }
+  // household: arrived in one or wired into one
+  var linked = false, cells = [idxs.iSpouse, idxs.iParents, idxs.iChildren, idxs.iHousehold];
+  for (var k = 0; k < cells.length; k++) {
+    if (cells[k] >= 0 && String(row[cells[k]] || '').trim() && String(row[cells[k]]).trim() !== '[]') { linked = true; break; }
+  }
+  if (linked) { add('family', 8); add('warmth', 4); } else { add('family', -2); }
+  var out = {};
+  for (var i = 0; i < ARRIVAL_DIALS_.length; i++) {
+    var d = ARRIVAL_DIALS_[i];
+    var hs = popId + '|start|' + d, h = 5381;
+    for (var hc = 0; hc < hs.length; hc++) h = ((h << 5) + h + hs.charCodeAt(hc)) | 0;
+    var spread = (Math.abs(h) % 11) - 5; // -5..+5, the citizen's own
+    var v = 50 + (p[d] || 0) + spread;
+    out[d] = v < 20 ? 20 : (v > 80 ? 80 : v);
+  }
+  return out;
 }
 
 // engine.208 C8 — a no-fandom citizen's start: the strongest fan among spouse, parents, children

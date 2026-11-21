@@ -1612,7 +1612,8 @@ function processIntake_(ctx) {
     var first = (row[iF] || '').toString().trim();
     var last = (row[iLa] || '').toString().trim();
     if (!first && !last) continue;
-    if ((row[iStat] || '').toString().trim()) continue; // already minted/updated/review
+    var statNow = (row[iStat] || '').toString().trim();
+    if (statNow && !/^waiting —/.test(statNow)) continue; // already minted/updated/review; engine.351: a waiting row is read again
     if (hhPlan.rows[r + 1]) continue; // engine.109: this row went through the household door
 
     if (!first || !last) {

@@ -84,7 +84,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | infrastructure.19 | Oakland week flight made lifelike (builder 11-14). v41: names first, homes on a block, team news at team buildings. Next: his look; joined street unbuilt | in-progress | research-build | [[../../world-view/README]] |
 | engine.350 | Lines move a dial by what they say: LIVE stage 57 @192. Task 15 pile 1 built, 10 tests red, unbenched. Read C117 Sun 2026-11-22 | in-progress | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
 | pipeline.114 | Flagged piece back to its writer: built, reverted 11-20 before live — the gate calls a real page quote fabricated. Next: the gate reads the citizen's page | in-progress | research-build | [[../plans/2026-11-20-flagged-piece-back-to-its-writer]] |
-| engine.351 | Intake complete or it waits; arrivals' dials start from their data (builder 11-16). Read 11-21 (plan §Task 11 read); next: his calls on fields and start dials | in-progress | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
+| engine.351 | Intake complete or it waits; arrivals' dials start from their data. Built 11-21, unbenched; next: bench A/B on @198, show him named arrivals | in-progress | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
 
 ## 4. Queue — ruled, not started (ready)
 

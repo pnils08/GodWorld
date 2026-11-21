@@ -756,6 +756,14 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
   // the CIV / MED / UNI intake columns (G/H/I) reach the new ledger row beside ClockMode.
   var FLAG_COLS_ = [['CIV', 'CIV (y/n)'], ['MED', 'MED (y/n)'], ['UNI', 'UNI (y/n)']];
   var flagCols = FLAG_COLS_.map(function(f) { return { name: f[0], i: findColByName_(intakeHeaders, f[0]), l: findColByName_(ledgerHeaders, f[1]) }; });
+  // engine.351 Task 11: the status cell a held row carries (self-arms once, the household door's Relation pattern)
+  var iIntakeStat = findColByName_(intakeHeaders, 'IntakeStatus');
+  if (iIntakeStat < 0) {
+    ensureGridColumns_(intakeSheet, intakeHeaders.length + 1);
+    intakeSheet.getRange(1, intakeHeaders.length + 1).setValue('IntakeStatus');
+    intakeHeaders.push('IntakeStatus');
+    iIntakeStat = intakeHeaders.length - 1;
+  }
 
   var lPopId = findColByName_(ledgerHeaders, 'POPID');
   var lFirst = findColByName_(ledgerHeaders, 'First');
@@ -1027,6 +1035,26 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
           (moved.length ? '; ' + moved.join('; ') : '') + '. ' + notes, '', cycle]); // engine.150: the earned-rung marker only when the Tier actually moved
       }
     } else {
+      // engine.351 Task 11 (builder 2026-11-16: "intake needs to provide the data the sim ledger needs or their intake
+      // fails and sits on intake until complete"): a new citizen's row with no BirthYear, no Neighborhood, or (an adult)
+      // no RoleType is not minted — it stays on this tab, not cleared, its IntakeStatus naming what is missing, and is read
+      // again each Cycle. The door used to fill these: BirthYear 2003, a weighted hood draw, a derived role. Every engine
+      // writer of this tab carries all three (GC emergence from its row, the owner door, the household door), so in
+      // practice this holds an authored row.
+      var holdBY = (iBirthYear >= 0) ? Number(row[iBirthYear]) : NaN;
+      var holdNeeds = [];
+      if (!(holdBY > 1900)) holdNeeds.push('BirthYear');
+      if (!(iNeighborhood >= 0 && String(row[iNeighborhood] || '').trim())) holdNeeds.push('Neighborhood');
+      if (!rawRole && !(holdBY > 1900 && simYearOf_(ctx, cycle) - holdBY < 18)) holdNeeds.push('RoleType');
+      if (holdNeeds.length) {
+        var holdText = 'waiting — needs ' + holdNeeds.join(', ') + ' (C' + cycle + ')';
+        if (String(row[iIntakeStat] || '').trim() !== holdText) {
+          intakeSheet.getRange(i + 1, iIntakeStat + 1).setValue(holdText); // the queue's own status cell — the drip writers' class (§9)
+        }
+        results.waiting = (results.waiting || 0) + 1;
+        Logger.log('processAdvancementRows_: ' + first + ' ' + last + ' ' + holdText + ' — not minted, left on the tab');
+        continue;
+      }
       // engine.304 D6b: a family arrival is re-checked against the ledger as it stands NOW — an earlier wire in
       // this batch (a parent's co-parent stroke) may have filled the spot. Closed → nothing minted; the GC row
       // stays Family and the next family pass releases it.
@@ -1079,7 +1107,7 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
       // a final-tier fallback inside deriveRoleType_.
       var seed = first + '|' + last + '|' + newPopId;
       var rawBirthYear = (iBirthYear >= 0) ? Number(row[iBirthYear]) : NaN;
-      var birthYear = (!isNaN(rawBirthYear) && rawBirthYear > 1900) ? rawBirthYear : 2003;
+      var birthYear = rawBirthYear; // engine.351: a row without one waits on the tab (above); the 2003 default is gone
       // S322: live sim-year — was hardcoded; engine.148: the calendar's year via simYearOf_
       // 2041, understating age by 1/year as the sim advances.
       var age = simYearOf_(ctx, cycle) - birthYear;
@@ -2819,6 +2847,8 @@ function wireBusinessOwners_(ctx, mints, cycle, now, logSheet) {
 // door is not this door); a hood the ledger does not price cannot house them.
 // ═══════════════════════════════════════════════════════════════════════════
 var HOUSEHOLD_RELATIONS_ = { head: true, spouse: true, child: true, parent: true };
+// engine.351 Task 11: an intake row the door holds until its author completes it
+var INTAKE_WAITING_RE_ = /^waiting —/;
 
 /**
  * engine.109: a header self-arm must not throw on a trimmed grid — getRange
@@ -2870,7 +2900,8 @@ function queueHouseholdIntake_(ctx, intakeSheet, intakeVals, intakeHeader, nameI
   var groups = {}, order = [];
   for (var r = 1; r < intakeVals.length; r++) {
     var row = intakeVals[r];
-    if ((row[iStat] || '').toString().trim()) continue; // already handled
+    var stat0 = (row[iStat] || '').toString().trim();
+    if (stat0 && !INTAKE_WAITING_RE_.test(stat0)) continue; // already handled; a waiting row is read again (engine.351)
     var fam = (row[iFam] || '').toString().trim();
     if (!fam) continue;
     var key = normalizeCitizenName_(fam);
@@ -2879,8 +2910,6 @@ function queueHouseholdIntake_(ctx, intakeSheet, intakeVals, intakeHeader, nameI
     groups[key].rows.push(r);
   }
   var hoodState = (ctx.summary && ctx.summary.neighborhoodState) || {};
-  var rng = ctx.rng;
-  if (order.length && typeof rng !== 'function') throw new Error('queueHouseholdIntake_: ctx.rng required');
   var rank = { head: 0, spouse: 1, child: 2, parent: 3 };
   for (var g = 0; g < order.length; g++) {
     var grp = groups[order[g]];
@@ -2908,10 +2937,30 @@ function queueHouseholdIntake_(ctx, intakeSheet, intakeVals, intakeHeader, nameI
       members.push(mem);
     }
     if (!reason && !head) reason = 'no member is marked head';
+    // engine.351 Task 11 (builder 2026-11-16: "intake needs to provide the data the sim ledger needs or their intake
+    // fails and sits on intake until complete"): a member with no Age, a head with no Neighborhood, or an adult with no
+    // RoleType holds the whole household on this tab — every row marked waiting, read again each Cycle — where the door
+    // used to draw an age (child 1-17, adult 22-65) and a hood. A child's blank RoleType is still 'student'.
+    if (!reason) {
+      var needs = [];
+      if (!head.hood) needs.push(head.first + ' ' + head.last + ': Neighborhood');
+      for (var nm = 0; nm < members.length; nm++) {
+        var nmm = members[nm];
+        if (!(nmm.age > 0)) needs.push(nmm.first + ' ' + nmm.last + ': Age');
+        else if (nmm.age >= 18 && !nmm.role) needs.push(nmm.first + ' ' + nmm.last + ': RoleType');
+      }
+      if (needs.length) {
+        for (var wx = 0; wx < grp.rows.length; wx++) {
+          out.rows[grp.rows[wx] + 1] = true;
+          out.statusWrites.push([grp.rows[wx] + 1, 'waiting — household "' + grp.label + '" needs ' + needs.join('; ')]);
+        }
+        out.waiting = (out.waiting || 0) + 1;
+        continue;
+      }
+    }
     var hood = '';
     if (!reason) {
       hood = head.hood;
-      if (!hood) { var pool = getCoreSimNeighborhoods_(ctx); hood = pool[Math.floor(rng() * pool.length)]; }
       var st = hoodState[hood];
       if (!st || !(Number(st.medianRent) > 0)) reason = 'no canon rent for hood "' + hood + '" — a household cannot live where the ledger does not price';
     }
@@ -2942,8 +2991,7 @@ function queueHouseholdIntake_(ctx, intakeSheet, intakeVals, intakeHeader, nameI
     }
     for (var q = 0; q < members.length; q++) {
       var mm = members[q];
-      var age = mm.age;
-      if (!(age > 0)) age = mm.rel === 'child' ? (1 + Math.floor(rng() * 17)) : (22 + Math.floor(rng() * 44));
+      var age = mm.age; // engine.351: every member carries one (held above otherwise)
       var role = mm.role || (age < 18 ? 'student' : '');
       var vals = {
         First: mm.first, Middle: '', Last: mm.last, RoleType: role, Tier: 4, ClockMode: 'ENGINE',

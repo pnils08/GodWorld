@@ -28,6 +28,16 @@ pointers:
 - Live sheet 2026-11-20, living non-GAME rows with a key: 114 ENGINE-clock rows where the seeding map (`data/role_mapping.json`) names a different list entry than the key (Server keyed Solar Installer); 16 more of the same kind whose job spelling the seeding map lacks ("Security guard" keyed Barbershop Owner) and one CIVIC row (PUBLIC DEFENDER keyed Civil Rights Attorney); the two field changes above. All 114 were already so in the earliest saved ledger copy (2026-08-12, `fb377ffed`); the seeding ran 2026-03-01 from RoleType, so the job text was rewritten between those dates by a writer no surviving record names.
 - Left as they are: 268 rows whose key is the seeding map's entry for their job (Editor-in-Chief keyed Journalist / Reporter); rows with no key.
 
+## Error in this plan's own work (2026-11-20, builder: "So you don't understand they keys ?"; "You messed this up bad, good job not reading the code first")
+
+- What the key is, from its writer: `scripts/applyEconomicProfiles.js` sets `econKey = roleMapping[roleType]` — the NAME OF A LIST ENTRY (`data/role_mapping.json` → `data/economic_parameters.json`), the profile the row's first Income and SavingsRate were drawn from. A key is a pointer into the job list, never a copy of the job title. I read the key's readers before writing and its writer only after.
+- Right by that definition: Task 4's 132 (each is now the list entry for the job held) and the 99 own-entry rows listed, not written.
+- Wrong by that definition: Task 5's 38 civic keys. They were a list entry for another job; they are now the row's job title, which is on no list (`civic-keylist.json`; the before values are in `civic-keylist-before.json`). Nothing reads the text, so no pay or behaviour moved, but the cells are not keys.
+- Same flaw in Task 1 for one case: `catalogRoleKey_(newRole) || newRole` writes the title when the list lacks the job — 13 of the 37 hire-table jobs (IT Support Technician, Sales Associate, …). It is the settlement's existing fallback, copied; the intake door blanks instead.
+- The engine reads the list by the row's RoleType, not by the key: `jobPayTable_` / `jobReferencePay_` (band by exact role, else field), `roleFieldOf_`, `canonicalRolesSet_` and `lookupIncome_` in `utilities/citizenDerivation.js`. So the repair for jobs the list lacks is entries on the list. Not yet read: what a new entry changes for mints, settlement and hires (whether the engine could then hand that job out). No further sheet write until that is read.
+
+- Builder 2026-11-20, after the above: "Civic and media is the key". The code agrees: ClockMode is the structural marker (`isSportsLayerRow_` comment, educationCareerEngine.js), and a CIVIC or MEDIA row keeps CareerStage, Income and RoleType "exactly as their layer set them" (`:539`). Civic and media rows are placed by their clock, not by a job-list entry; the 38 are to go back to their before values (`civic-keylist-before.json`) on his yes, and civic and media rows leave Task 5.
+
 ## Tasks
 
 | # | Task | Owner | Status |
@@ -45,6 +55,8 @@ pointers:
 
 ## Changelog
 
+- 2026-11-20 (es) — every reader read: the engine never reads the key's words, only blank or not (zero-pay fill, hospital cut, step at 18). Three repair plans put to the builder, none approved; session closed on his word.
+- 2026-11-20 (es) — error recorded: the 38 civic keys are titles, not list entries; the key is `roleMapping[roleType]` (applyEconomicProfiles.js). Writes stopped; the 99 unwritten.
 - 2026-11-20 (es) — civic keys written (38/38). 99 own-entry rows found inside the 268 first called fine; listed, not written.
 - 2026-11-20 (es) — Task 5 scoped from the sheet: the list has no council-president entry (the Tier 1 recheck said it had); civic proposal sent, 38 of 53.
 - 2026-11-20 (es) — Task 4 written on the builder's "Yes": 132 keys, read back 132/132, nothing else on the rows moved.

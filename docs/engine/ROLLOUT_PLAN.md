@@ -72,7 +72,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 |---|------|-------|----------|---------|
 | pipeline.100 | Mags memory one home (builder 11-03): her page, not the old `mags` store; every Mags seat loads her persona as the CLI did. Task 1 started 11-08 | in-progress | engine-sheet | [[../plans/2026-11-03-mags-memory-one-home]] |
 | engine.346 | Feed word `off-season` (builder 11-15): live @182; benched 11-16 inside stage 49 (C117/C118 PASS). Owed: the sheet dropdown (his menu run) | in-progress | research-build | [[../plans/2026-11-05-sports-feed-triggers]] §Changelog |
-| engine.339 | How kids are minted: kids born new, only a wife changes name, arrival dice gone — benched 11-20; lottery draw still a fixed share; not on PROD | in-progress | research-build | [[../plans/2026-11-08-how-kids-are-minted]] |
+| engine.339 | How kids are minted: 11-20 night lottery cut rejected by the builder, parked; count and kid age unsettled, his; not on PROD | in-progress | research-build | [[../plans/2026-11-08-how-kids-are-minted]] |
 | pipeline.110 | Role citizens wake as themselves (builder 11-10). 14 of 14 workers lean and live; next: media (reporter template); council on hold | in-progress | engine-sheet | [[../plans/2026-11-10-role-citizens-wake-as-themselves]] |
 | pipeline.113 | UNDOCKED tells its nights in points, as the board ranks them (builder 11-17). Plan written; next: gate, Nia, record, history | in-progress | engine-sheet | [[../plans/2026-11-18-undocked-tells-its-nights-in-points]] |
 | pipeline.111 | Stop puppeting the newsroom (builder 11-10): the reporter half of the wake work (split with es 11-14). Next: one reporter's whole day in the test shell, his go | in-progress | research-build | the stop-puppeting plan (deleted 2026-11-18) |
@@ -82,7 +82,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | pipeline.89 | Every journalist picks (builder 10-25: "All journalists should pick, they are AI"): every wake package gets the live tools the 3 tool seats have, the slice is a tip sheet not the assignment, Rhea is off every path; Ines first, same cut on all 28. First run 2026-10-28 | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 |
 | infrastructure.19 | Oakland week flight made lifelike (builder 11-14). v41: names first, homes on a block, team news at team buildings. Next: his look; joined street unbuilt | in-progress | research-build | [[../../world-view/README]] |
 | engine.350 | Lines move a dial by what they say: LIVE stage 57 @192, tab written 11-18. Next: the recorded items (plan Task 15). Read C117 Sun 2026-11-22 | in-progress | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
-| engine.354 | Job key follows the job (builder 11-20): hire paths re-key, LIVE stage 62 @197; 132 wrong keys corrected on the sheet. Next: jobs with no list entry, with him | in-progress | engine-sheet | [[../plans/2026-11-20-job-key-follows-the-job]] |
+| engine.354 | Job key (builder 11-20): hire re-key LIVE stage 62; 132 keys set; 38 civic keys wrongly set to titles. The key is a dead label; next step is his call | in-progress | engine-sheet | [[../plans/2026-11-20-job-key-follows-the-job]] |
 | pipeline.114 | Flagged piece back to its writer: built, reverted 11-20 before live — the gate calls a real page quote fabricated. Next: the gate reads the citizen's page | in-progress | research-build | [[../plans/2026-11-20-flagged-piece-back-to-its-writer]] |
 
 ## 4. Queue — ruled, not started (ready)

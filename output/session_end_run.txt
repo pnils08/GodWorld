@@ -1,5 +1,5 @@
 ========================================================================
-sessionEndMechanical: terminal=research-build, rotate-history=false, dry-run=false
+sessionEndMechanical: terminal=engine-sheet, rotate-history=false, dry-run=false
 ========================================================================
 Expected upstream model step (BEFORE this script):
   1. SESSION_CONTEXT.md PIN + NEXT[terminal] line + ROLLOUT_PLAN.md updated
@@ -14,16 +14,16 @@ Mechanical sub-steps (6):
 ========================================================================
 
 --- [1/6] session summary → Supermemory (best-effort) ---
-✓ session log → Supermemory [session-logs] doc bjMNuMY3pyktwDZBroZ1RR (2815 chars, 10 summary rows folded)
+✓ session log → Supermemory [session-logs] doc cVhe6qRQzJk4rzJSEuabpX (2987 chars, 27 summary rows folded)
 
 --- [2/6] auditPlanTagDrift (informational) ---
   # Plan tag drift audit
   
-  Generated: 2026-11-20T19:53:01.126Z
-  Plans scanned: 181
+  Generated: 2026-11-21T06:14:00.639Z
+  Plans scanned: 182
   No frontmatter: 11
   No changelog: 8
-  No status-verb match: 160
+  No status-verb match: 161
   Drifts found: 0
   
   No plan-tag drift detected.
@@ -32,23 +32,29 @@ Mechanical sub-steps (6):
 --- [3/6] ROLLOUT conformance lint (informational) ---
   ROLLOUT LINT: clean — every row is a sweep-safe pointer within budget.
   ROLLOUT IN HAND: more than one in-progress row per terminal (job model = one):
-    engine-sheet: 3 — pipeline.100, pipeline.110, pipeline.113
+    engine-sheet: 4 — pipeline.100, pipeline.110, pipeline.113, engine.354
     research-build: 10 — engine.346, engine.339, pipeline.111, pipeline.109, pipeline.108, pipeline.101, pipeline.89, infrastructure.19, engine.350, pipeline.114
   ROLLOUT OVERDUE: 2 waiting row(s) past their Cycle/date or naming none — read the record, then flip, re-date or close:
-    L32 engine.286: latest Cycle named C112, live is C116; latest date named 2026-10-28, today is 2026-11-20
-    L63 engine.280: latest Cycle named C113, live is C116; latest date named 2026-10-08, today is 2026-11-20
+    L32 engine.286: latest Cycle named C112, live is C116; latest date named 2026-10-28, today is 2026-11-21
+    L63 engine.280: latest Cycle named C113, live is C116; latest date named 2026-10-08, today is 2026-11-21
 
 --- [4/6] worked rows have their plan updated ---
-  ✓ every row named in this session's [research-build] commits has its plan updated
+  ✓ every row named in this session's [engine-sheet] commits has its plan updated
 
 --- [5/6] cross-terminal git stack check (read-only) ---
-  ⚠ 1 unpushed commit(s) ahead of origin/main:
-    df0052132 engine.339: only a woman becoming a man's spouse changes her name (builder 2026-11-20) — lottery spouse, GC courtship; a renamed husband gets his own name back, link kept. Existing tests pass (64, 108); no new tests yet, not benched, not on PROD. Plan as-built section. [research/build]
+  ⚠ 7 unpushed commit(s) ahead of origin/main:
+    b4db8c7a8 engine.339: the lottery grabs two — they match or they don't (builder 2026-11-20: "It's a lottery, a lottery can be zero , how is a lottery a know 2-3, that's puppeting the sim"; SIM_DOCTRINE §10).
+    7cf5f1494 engine.354 Task 5, civic clock: 38 job keys set to the row's own job title on the live ledger (builder 2026-11-20: "Yes") — column AR only, read back 38/38, 0 other cells changed on those rows, 0 keys changed on other rows. A first attempt, made on a message that was not a yes, was refused by the permission check and wrote nothing. Listed, not written: 99 rows whose job has its own list entry and whose key is the seeding map's different entry (own-entry-job-keys.md). [engine/sheet]
+    18bbb85ff engine.354 Task 5 scoped, nothing written: 444 living non-GAME rows hold a job the list has no entry for (nolist.json). The list has no mayor, council member, council president or chief. Civic clock first: 53 rows, 38 keys proposed to the row's own job title, 15 stay; proposal civic-job-keys.md sent to the builder. [engine/sheet]
+    2912d6ae4 engine.354 Task 4: 132 job keys corrected on the live ledger (builder 2026-11-20: "Yes") — column AR only, one batch through lib/sheets, read back 132/132, 0 other cells changed on those rows, 0 keys changed on other rows, 1075 rows before and after. Each key is now catalogRoleKey_ of the job the citizen holds; pay untouched. Before-copy keys-before.json, list job-keys-to-correct.md. Tier 1 check item 7 reopened and recorded; the audit's unworked rows named. [engine/sheet]
+    75710a5b8 engine.354 Tasks 2–3: benched and LIVE — PROD stage 62 @197, one file (runCareerEngine.js at bad89532c) on stage 61, built tree = the benched manifest, pull-back byte-identical. Bench SANDBOX 1004 @219, live-synced C116, four bench-only plants, C117 fired twice, 0 new Engine_Errors: run 1's check named employers and jobs and was wrong on all four; run 2 checks the rule on every Career-FieldChange row, 5 of 5 (three keyed rows re-keyed, two unkeyed rows still unkeyed, one of them live POP-01073). The civic-opening mover path did not fire (no open slot on Initiative_Tracker). PIN and NEXT[engine-sheet] trued; G-EC69 logged (entry-job pay at tech employers). The 132 sheet keys wait on the builder's go. [engine/sheet]
+    11a25164f engine.354: bench scripts and the key list. Sandbox 1004 @219 = PROD stage 61 + runCareerEngine.js at bad89532c (pull-back byte-identical, e354.sha256); the push replaces engine.339's parked bench code. Four bench-only unemployed plants (E354-BENCH NON-CANON), predictions written in plant.js before the fire. Task 4 list: 132 living non-GAME rows whose key names another job and whose job the engine lookup resolves (131 ENGINE, 1 CIVIC), read-only, nothing written to the sheet. [engine/sheet]
+    bad89532c engine.354 Task 1: the job key follows the job — both field-change hire paths in matchUnemployedToOpenings_ re-key a keyed row (catalogRoleKey_ of the new title, else the title, the settlement's fallback); an unkeyed row keeps none. Builder 2026-11-20 on the Tier 1 check item 7 keys: "My ruling is they are broken". Live proof of the break: POP-00168 (C109) and POP-00184 (C112) changed fields and kept the old key. Row opened, plan docs/plans/2026-11-20-job-key-follows-the-job.md; SIMULATION_LEDGER AR names the writer. No test written or run (test guard); unbenched. [engine/sheet]
   Model decision: push if all yours, hold if other terminals stacked.
 
 --- [6/6] pm2 restart ---
   ✓ godworld-dashboard restarted
 
 ========================================================================
-sessionEndMechanical: complete (terminal=research-build)
+sessionEndMechanical: complete (terminal=engine-sheet)
 ========================================================================

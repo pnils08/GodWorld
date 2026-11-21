@@ -219,6 +219,27 @@ var POSTCAREER_SIGN_BY_TEXT_ = (function() {
 })();
 // The tag a retired player's everyday line is written under: PostCareer-<Dial>-<Up|Down>-S, or '' (not written).
 // why: 'plain' (listed, no sign) | 'unlisted' (no entry) — the counter key.
+// engine.350 Task 15 (G-EC65): the influence, business and wellness lines keep their kinds and are written by
+// what each says, one step (<Kind>-<Dial>-<Up|Down>-S). They were a bare PostCareer-Influence (sociability +3)
+// on "handled a few personal business tasks with an advisor", and PostCareer-Wellness (composure +3).
+var POSTCAREER_KIND_SIGN_ = {
+  "did a low-key sponsor appearance": "sociability:up",
+  "recorded a short message for a community campaign": null,
+  "handled a small wave of public recognition with ease": "composure:up",
+  "took a call about a future partnership opportunity": "drive:up",
+  "met quietly with contacts about post-career opportunities": "drive:up",
+  "considered a media or coaching opportunity without committing": null,
+  "handled a few personal business tasks with an advisor": null,
+  "kept up a light training routine for health and structure": "composure:up",
+  "spent time on mobility work and recovery habits": "composure:up",
+  "kept their schedule calm and consistent": "composure:up"
+};
+function postCareerKindLineTag_(kind, text) {
+  if (!POSTCAREER_KIND_SIGN_.hasOwnProperty(text)) return { tag: '', why: 'unlisted' };
+  var m = /^([a-z]+):(up|down)$/.exec(POSTCAREER_KIND_SIGN_[text] || '');
+  if (!m) return { tag: '', why: 'plain' };
+  return { tag: kind + '-' + m[1].charAt(0).toUpperCase() + m[1].slice(1) + '-' + (m[2] === 'up' ? 'Up' : 'Down') + '-S', why: '' };
+}
 function postCareerLineTag_(text) {
   if (!POSTCAREER_SIGN_BY_TEXT_.hasOwnProperty(text)) return { tag: '', why: 'unlisted' };
   var m = /^([a-z]+):(up|down)$/.exec(POSTCAREER_SIGN_BY_TEXT_[text] || '');
@@ -633,10 +654,18 @@ function runAsUniversePipeline_(ctx) {
           eventTag = "PostCareer-Fundraiser";
         } else if (communityPool.indexOf(pick) >= 0) {
           eventTag = "PostCareer-Community";
-        } else if (influencePool.indexOf(pick) >= 0 || businessPool.indexOf(pick) >= 0) {
-          eventTag = "PostCareer-Influence";
-        } else if (wellnessPool.indexOf(pick) >= 0) {
-          eventTag = "PostCareer-Wellness";
+        } else if (influencePool.indexOf(pick) >= 0 || businessPool.indexOf(pick) >= 0 || wellnessPool.indexOf(pick) >= 0) {
+          var pcKind = wellnessPool.indexOf(pick) >= 0 ? "PostCareer-Wellness" : "PostCareer-Influence";
+          var pcKindSigned = postCareerKindLineTag_(pcKind, pick);
+          if (!pcKindSigned.tag) {
+            S.engine299 = S.engine299 || { noDial: 0, noDialBySource: {} };
+            S.engine299.noDial++;
+            var pcKindKey = 'runAsUniversePipeline:' + pcKind + ':' + pcKindSigned.why;
+            S.engine299.noDialBySource[pcKindKey] = (S.engine299.noDialBySource[pcKindKey] || 0) + 1;
+            rows[r] = row;
+            continue;
+          }
+          eventTag = pcKindSigned.tag;
         } else {
           // a plain line or one with no entry is drawn, counted and not written, so the appearance, clinic,
           // fundraiser, getaway, training and signed everyday lines keep the odds they had

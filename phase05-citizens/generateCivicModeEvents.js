@@ -207,7 +207,7 @@ function generateCivicModeEvents_(ctx) {
     pool.push(
       ev("reviewed active case files with senior prosecutors", ["dial:drive:up", "civic:da", "type:legal"], "Civic"),
       ev("coordinated with law enforcement on pending investigations", ["dial:sociability:up", "civic:da", "type:legal"], "Civic"),
-      ev("prepared public safety statements for the press", ["civic:da", "type:public"], "Public"),
+      ev("prepared public safety statements for the press", ["civic:da", "type:public"], "Public"),    // plain: a duty of the job
       ev("balanced prosecutorial priorities with limited resources", ["dial:composure:down", "civic:da", "type:governance"], "Civic")
     );
 
@@ -232,7 +232,7 @@ function generateCivicModeEvents_(ctx) {
     pool.push(
       ev("reviewed department performance metrics with command staff", ["dial:openness:up", "civic:police", "type:internal"], "Civic"),
       ev("approved patrol deployment adjustments", ["dial:drive:up", "civic:police", "type:operations"], "Civic"),
-      ev("maintained public-facing composure during a press briefing", ["civic:police", "type:public"], "Public"),
+      ev("maintained public-facing composure during a press briefing", ["dial:composure:up", "civic:police", "type:public"], "Public"),
       ev("reflected on the demands of leading a department under scrutiny", ["dial:composure:down", "civic:police", "type:personal"], "Personal")
     );
 
@@ -316,7 +316,7 @@ function generateCivicModeEvents_(ctx) {
   var holidayPool = [];
   if (holiday !== "none") {
     holidayPool.push(
-      ev("attended a " + (S.holidayLabel || holiday) + " civic observance", ["type:holiday", "holiday:" + holiday], "Public"),
+      ev("attended a " + (S.holidayLabel || holiday) + " civic observance", ["type:holiday", "holiday:" + holiday], "Public"),    // plain: a duty of the office
       ev("balanced " + (S.holidayLabel || holiday) + " obligations with public duties", ["dial:composure:down", "type:holiday", "holiday:" + holiday], "Personal")
     );
   }
@@ -471,7 +471,8 @@ function generateCivicModeEvents_(ctx) {
     var writtenTag = '';
     if (typeof nudgesForEvent_ === 'function') {
       var ownFx = nudgesForEvent_(primaryTag, 1, picked.text);
-      if (Object.keys(ownFx).length) writtenTag = primaryTag;
+      // engine.350 Task 15: a Public line is never written bare (it was sociability +4 on a press statement).
+      if (primaryTag !== 'Public' && Object.keys(ownFx).length) writtenTag = primaryTag;
       else if (typeof gradedTag_ === 'function') {
         var dialTags = (picked.tags || []).filter(function(t) { return /^dial:/.test(t); });
         var signed = dialTags.length === 1 && /^dial:(composure|outabout|sociability|family|warmth|openness|fandom|drive|integrity):(up|down)(?::([SML]))?$/.exec(dialTags[0]);

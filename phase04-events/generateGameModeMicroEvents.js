@@ -120,16 +120,19 @@ function generateGameModeMicroEvents_(ctx) {
   }
 
   // Pools (tagged)
+  // engine.350 Task 15 (G-EC65): a Public line is written only under the dial it names, one step (it was a bare
+  // Public, sociability +4, on "fulfilled a sponsor obligation"). A duty of the job with nothing felt or done
+  // toward anyone is plain: drawn, counted, not written (the job moves nothing — builder 2026-11-17).
   var mlbPublic = [
-    "signed autographs for fans",
-    "did a brief media availability",
-    "posed for photos with young fans",
-    "participated in a community appearance",
-    "attended a team marketing event",
-    "fulfilled a sponsor obligation",
-    "appeared at a charity function",
-    "did a radio interview"
-  ].map(function(t) { return entry(t, ["role:mlb"], "Public"); });
+    ["signed autographs for fans", "dial:sociability:up"],
+    ["did a brief media availability", null],
+    ["posed for photos with young fans", "dial:sociability:up"],
+    ["participated in a community appearance", "dial:sociability:up"],
+    ["attended a team marketing event", null],
+    ["fulfilled a sponsor obligation", null],
+    ["appeared at a charity function", "dial:sociability:up"],
+    ["did a radio interview", null]
+  ].map(function(t) { return entry(t[0], ["role:mlb"].concat(t[1] ? [t[1]] : []), "Public"); });
 
   var mlbPersonal = [
     ["spent downtime away from the ballpark", "dial:composure:up"],
@@ -161,11 +164,11 @@ function generateGameModeMicroEvents_(ctx) {
   ].map(function(t) { return entry(t[0], ["role:media"].concat(t[1] ? [t[1]] : []), "Work"); });
 
   var mediaPublic = [
-    "attended a press conference",
-    "participated in a media availability",
-    "represented the paper at an event",
-    "networked with industry contacts"
-  ].map(function(t) { return entry(t, ["role:media"], "Public"); });
+    ["attended a press conference", null],
+    ["participated in a media availability", null],
+    ["represented the paper at an event", null],
+    ["networked with industry contacts", "dial:sociability:up"]
+  ].map(function(t) { return entry(t[0], ["role:media"].concat(t[1] ? [t[1]] : []), "Public"); });
 
   var mediaPersonal = [
     ["decompressed after a long news cycle", "dial:composure:up"],
@@ -211,12 +214,12 @@ function generateGameModeMicroEvents_(ctx) {
   ].map(function(t) { return entry(t[0], ["role:civic"].concat(t[1] ? [t[1]] : []), "Civic"); });
 
   var civicPublic = [
-    "made a brief public appearance",
-    "spoke with community members",
-    "attended a neighborhood event",
-    "represented the city at a function",
-    "fielded questions from local media"
-  ].map(function(t) { return entry(t, ["role:civic"], "Public"); });
+    ["made a brief public appearance", null],
+    ["spoke with community members", "dial:sociability:up"],
+    ["attended a neighborhood event", "dial:sociability:up"],
+    ["represented the city at a function", null],
+    ["fielded questions from local media", "dial:sociability:up"]
+  ].map(function(t) { return entry(t[0], ["role:civic"].concat(t[1] ? [t[1]] : []), "Public"); });
 
   var civicPersonal = [
     ["found a quiet moment between obligations", "dial:composure:up"],
@@ -526,7 +529,7 @@ function generateGameModeMicroEvents_(ctx) {
     var writtenTag = '';
     if (typeof nudgesForEvent_ === 'function') {
       var ownFx = nudgesForEvent_(primaryTag, 1, picked.text);
-      if (primaryTag !== 'Work' && Object.keys(ownFx).length) writtenTag = primaryTag;   // engine.350: Work is never written bare
+      if (primaryTag !== 'Work' && primaryTag !== 'Public' && Object.keys(ownFx).length) writtenTag = primaryTag;   // engine.350: Work (Task 7) and Public (Task 15) are never written bare
       else if (typeof gradedTag_ === 'function') {
         var dialTags = (picked.tags || []).filter(function(t) { return /^dial:/.test(t); });
         var signed = dialTags.length === 1 && /^dial:(composure|outabout|sociability|family|warmth|openness|fandom|drive|integrity):(up|down)(?::([SML]))?$/.exec(dialTags[0]);

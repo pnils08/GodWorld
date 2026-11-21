@@ -45,7 +45,31 @@
 // <Kind>-<Dial>-<Up|Down>-S. A line listed plain says nothing the citizen did or felt toward anyone; it
 // is drawn, counted and not written, so every other line keeps the odds it had. A line a sentence feels
 // something in is signed by what is felt; one that only sees or hears the block is plain.
-// The bond lines (Rivalry, Alliance, Mentorship, Arc) are about a bond the citizen holds and keep their kinds.
+// The bond lines (Rivalry, Alliance, Mentorship, Arc) are about a bond the citizen holds and keep their kinds;
+// engine.350 Task 15 (G-EC65): each is written the same way, under its own kind (BOND_SIGN_LINES_ below). They
+// were a bare Rivalry (sociability +2, composure -3), Alliance (sociability +4), Mentorship (warmth +6, drive +2)
+// or Arc (drive +4, openness +2) whatever the line said — "avoided someone they've had friction with" pushed
+// sociability up.
+var BOND_SIGN_LINES_ = {
+  "composure:down": [
+    "felt a flicker of tension thinking about a competitor", "noticed subtle friction with someone in their circle",
+    "sensed unspoken rivalry in a social interaction", "overheard something that stirred old tensions",
+    "felt the social weight of unfolding events"
+  ],
+  "sociability:down": ["avoided someone they've had friction with"],
+  "sociability:up": ["coordinated briefly with an ally", "felt drawn into conversations about the ongoing situation"],
+  "warmth:up": [
+    "received support from a trusted connection", "exchanged knowing looks with an ally",
+    "appreciated the loyalty of a close contact", "offered advice to someone newer in their circle"
+  ],
+  "composure:up": ["felt reassured by a solid friendship"],
+  "drive:up": ["reflected on guidance from someone experienced", "felt responsibility toward someone looking up to them"],
+  "openness:up": ["appreciated a learning moment from a mentor figure"],
+  "plain": [
+    "sensed relationships shifting due to larger circumstances",
+    "noticed how current events affected their social circle"
+  ]
+};
 var RELATIONSHIP_SIGN_LINES_ = {
   "sociability:up": [
     "reconnected with an old friend", "built a new casual acquaintance",
@@ -86,19 +110,23 @@ var RELATIONSHIP_SIGN_LINES_ = {
     "sensed something foundational in the air"
   ]
 };
-var RELATIONSHIP_SIGN_BY_TEXT_ = (function() {
+function relationshipSignIndex_(table) {
   var out = {};
-  for (var sign in RELATIONSHIP_SIGN_LINES_) {
-    if (!RELATIONSHIP_SIGN_LINES_.hasOwnProperty(sign)) continue;
-    for (var i = 0; i < RELATIONSHIP_SIGN_LINES_[sign].length; i++) out[RELATIONSHIP_SIGN_LINES_[sign][i]] = sign === "plain" ? null : sign;
+  for (var sign in table) {
+    if (!table.hasOwnProperty(sign)) continue;
+    for (var i = 0; i < table[sign].length; i++) out[table[sign][i]] = sign === "plain" ? null : sign;
   }
   return out;
-})();
+}
+var RELATIONSHIP_SIGN_BY_TEXT_ = relationshipSignIndex_(RELATIONSHIP_SIGN_LINES_);
+var BOND_SIGN_BY_TEXT_ = relationshipSignIndex_(BOND_SIGN_LINES_);
 // The tag a social line is written under: <kind>-<Dial>-<Up|Down>-S, or '' (not written).
 // why: 'plain' (listed, no sign) | 'unlisted' (no entry) — the counter key.
 function relationshipLineTag_(kind, text) {
-  if (!RELATIONSHIP_SIGN_BY_TEXT_.hasOwnProperty(text)) return { tag: '', why: 'unlisted' };
-  var m = /^([a-z]+):(up|down)$/.exec(RELATIONSHIP_SIGN_BY_TEXT_[text] || '');
+  var bond = kind === 'Rivalry' || kind === 'Alliance' || kind === 'Mentorship' || kind === 'Arc';
+  var index = bond ? BOND_SIGN_BY_TEXT_ : RELATIONSHIP_SIGN_BY_TEXT_;
+  if (!index.hasOwnProperty(text)) return { tag: '', why: 'unlisted' };
+  var m = /^([a-z]+):(up|down)$/.exec(index[text] || '');
   if (!m) return { tag: '', why: 'plain' };
   return { tag: kind + '-' + m[1].charAt(0).toUpperCase() + m[1].slice(1) + '-' + (m[2] === 'up' ? 'Up' : 'Down') + '-S', why: '' };
 }
@@ -376,7 +404,11 @@ function runRelationshipEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // ITERATE THROUGH CITIZENS
   // ═══════════════════════════════════════════════════════════════════════════
-  for (var r = 0; r < rows.length; r++) {
+  // engine.350 Task 15 (G-EC65): the walk starts at a row drawn once a Cycle and wraps. It started at row 0
+  // and stopped at LIMIT lines written, so the citizens at the top of the ledger drew this engine's lines.
+  var relStart = Math.floor(rng() * rows.length);
+  for (var relStep = 0; relStep < rows.length; relStep++) {
+    var r = (relStart + relStep) % rows.length;
 
     if (globalEvents >= LIMIT) break;
 
@@ -545,27 +577,24 @@ function runRelationshipEngine_(ctx) {
       var pick = pool[Math.floor(rng() * pool.length)];
 
       // Determine event tag based on which pool it came from
-      if (rivalryRels.indexOf(pick) >= 0) {
-        eventTag = "Rivalry";
-      } else if (allianceRels.indexOf(pick) >= 0) {
-        eventTag = "Alliance";
-      } else if (mentorshipRels.indexOf(pick) >= 0) {
-        eventTag = "Mentorship";
-      } else if (arcRels.indexOf(pick) >= 0) {
-        eventTag = "Arc";
-      } else {
-        // engine.350: a social line is written under the dial it names, one step. The culture and community
-        // lines keep their kinds; a holiday, First Friday or Creation Day line is a Relationship line (the
-        // calendar suffixes were bare Relationship: +5 / +2 whatever the line said). A plain line is drawn,
-        // counted in S.engine299.noDialBySource and not written — every other line keeps the odds it had. It
-        // does not count against the cap (the cap is on lines written, as in the household engine). The citizen
-        // still counts as out among people this Cycle (the bond engine's pool), as before.
-        var relKind = culturalRels.indexOf(pick) >= 0 ? "Cultural" : (communityRels.indexOf(pick) >= 0 ? "Community" : "Relationship");
+      // engine.350: a social line is written under the dial it names, one step. The bond, culture and community
+      // lines keep their kinds (Task 15: the bond kinds too); a holiday, First Friday or Creation Day line is a
+      // Relationship line (the calendar suffixes were bare Relationship: +5 / +2 whatever the line said). A plain
+      // line is drawn, counted in S.engine299.noDialBySource and not written — every other line keeps the odds
+      // it had. It does not count against the cap (the cap is on lines written, as in the household engine). The
+      // citizen still counts as out among people this Cycle (the bond engine's pool), as before.
+      {
+        var relKind = rivalryRels.indexOf(pick) >= 0 ? "Rivalry"
+          : allianceRels.indexOf(pick) >= 0 ? "Alliance"
+          : mentorshipRels.indexOf(pick) >= 0 ? "Mentorship"
+          : arcRels.indexOf(pick) >= 0 ? "Arc"
+          : culturalRels.indexOf(pick) >= 0 ? "Cultural"
+          : communityRels.indexOf(pick) >= 0 ? "Community" : "Relationship";
         var relSigned = relationshipLineTag_(relKind, pick);
         if (!relSigned.tag) {
           ctx.summary.engine299 = ctx.summary.engine299 || { noDial: 0, noDialBySource: {} };
           ctx.summary.engine299.noDial++;
-          var relKey = 'runRelationshipEngine:Relationship:' + relSigned.why;
+          var relKey = 'runRelationshipEngine:' + relKind + ':' + relSigned.why;
           ctx.summary.engine299.noDialBySource[relKey] = (ctx.summary.engine299.noDialBySource[relKey] || 0) + 1;
           ctx.summary.cycleActiveCitizens.push(popId);
           continue;

@@ -97,6 +97,8 @@ function pulseForEvent_(tag, tags, text) {
   var fx = {};
   var tagS = String(tag == null ? '' : tag).trim();
   var norm = (typeof baseTag_ === 'function') ? baseTag_(tagS) : tagS;
+  // engine.350 Task 15 (G-EC63): a line written Down under a kind that lifts the hood lowers it instead.
+  if (/-Down-[SML]$/.test(tagS) && pulseKindLifts_(norm)) norm = 'Neighborhood-Down';
   if (PULSE_MAP[norm]) mergeFx_(fx, PULSE_MAP[norm]);
 
   if (tags && tags.length) {
@@ -144,14 +146,22 @@ function recordPulse_(S, neighborhood, tag, tags, text) {
  * line whose written tag grades Down pulses Neighborhood-Down; every other kind
  * passes through unchanged (the LifeHistory tag is never touched here).
  */
+// engine.350 Task 15 (G-EC63): not only Neighborhood — the kinds that are a night or a gathering in the hood
+// (Community, FirstFriday, Cultural, Faith, Mentorship) written Down pulse Neighborhood-Down. A down First
+// Friday line ("the art walk alone and silent") lifted attractiveness +2. A team's line (Sports, Team) is the
+// team's week, not the block's, and keeps its kind.
+var PULSE_DOWN_FLIPS_ = { 'Neighborhood': true, 'Community': true, 'FirstFriday': true, 'Cultural': true, 'Faith': true, 'Mentorship': true };
+function pulseKindLifts_(kind) {
+  return PULSE_DOWN_FLIPS_[kind] === true;
+}
 function pulseKindForLine_(lineKind, writtenTag) {
-  if (lineKind === 'Neighborhood' && /-Down-[SML]$/.test(String(writtenTag || ''))) return 'Neighborhood-Down';
+  if (/-Down-[SML]$/.test(String(writtenTag || '')) && pulseKindLifts_(lineKind)) return 'Neighborhood-Down';
   return lineKind;
 }
 
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     PULSE_MAP: PULSE_MAP, TAG_RULES: TAG_RULES, PULSE_CONTENT_RULES: PULSE_CONTENT_RULES,
-    pulseForEvent_: pulseForEvent_, recordPulse_: recordPulse_, pulseKindForLine_: pulseKindForLine_
+    pulseForEvent_: pulseForEvent_, recordPulse_: recordPulse_, pulseKindForLine_: pulseKindForLine_, pulseKindLifts_: pulseKindLifts_
   };
 }

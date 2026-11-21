@@ -1950,6 +1950,10 @@ function formatDialFace_(c, entries, cycle) {
   var tagCounts = {};
   for (var t = 0; t < entries.length; t++) {
     var tg = entries[t].tag || 'Untagged';
+    // engine.350 Task 15 (G-EC65): a graded tag counts as its kind — Neighborhood-Outabout-Up-S and
+    // Neighborhood-Composure-Down-S are both Neighborhood (they split the count and crowded the top five).
+    var tgParts = gradedParts_(tg);                       // citizenDialMap.js, co-loaded (nudgesForEvent_ above)
+    if (tgParts) tg = tgParts.kind;
     tagCounts[tg] = (tagCounts[tg] || 0) + 1;
   }
   var topTags = getTopN_(tagCounts, 5);

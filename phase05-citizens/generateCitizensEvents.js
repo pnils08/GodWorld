@@ -1266,6 +1266,10 @@ function generateCitizensEvents_(ctx) {
   };
   var FACT_DOWN_RE = /:(negative|down|low|bad|loss|moderate-low)$/i;
   var FACT_UP_RE = /:(positive|up|high|good|win|moderate-high)$/i;
+  function gradedOnlyBySource_(tags) {
+    for (var gi = 0; gi < tags.length; gi++) { if (GRADED_ONLY_SOURCE_[tags[gi]] === true) return true; }
+    return false;
+  }
   function kindMovesNothing_(kind, text) {
     if (typeof nudgesForEvent_ !== 'function') return true;    // resolver absent: fail closed — graded or not written
     var fx = nudgesForEvent_(kind, 1, text);
@@ -1291,7 +1295,14 @@ function generateCitizensEvents_(ctx) {
   // and the three coded follow-up lines carried no sign and were drawn and dropped. They carry one now.
   // PostCareer the same for a retiree's everyday line (the coded pool and the tab's retirement rows): written
   // by its own sign, one step — never the bare key (family +4, openness +2).
-  var GRADED_ONLY_KIND_ = { "Work": true, "Media": true, "QoL": true, "Continuity": true, "PostCareer": true };
+  var GRADED_ONLY_KIND_ = { "Work": true, "Media": true, "QoL": true, "Continuity": true, "PostCareer": true,
+    // engine.350 Task 15 (G-EC65): the bond and arc kinds and a faith line were written at a fixed size whatever
+    // the line said (Rivalry sociability +2 on "avoided someone"; Mentorship warmth +6). Each pool line carries
+    // its own sign below; the kinds stay the record's vocabulary.
+    "Rivalry": true, "Alliance": true, "Mentorship": true, "Arc": true, "Faith": true };
+  // A source graded-only whatever kind it routes to: a fame line (source:fame -> Reputation, integrity +3 for
+  // being recognised). The pilot's own UNDOCKED run routes to Reputation by source:undocked and stays as it is.
+  var GRADED_ONLY_SOURCE_ = { "source:fame": true };
   var MEDIA_POOL_SIGN_ = {
     "Media-Anxious": "dial:composure:down", "Media-Crisis": "dial:composure:down", "Media-Hopeful": "dial:composure:up",
     "Media-Holiday": "dial:warmth:up", "Media-OaklandPride": "dial:warmth:up", "Media-Arts": "dial:openness:up",
@@ -2061,6 +2072,8 @@ function generateCitizensEvents_(ctx) {
   // attendance texture; org-side record stays with faithEventsEngine.
   // Capped at 2 pool entries so faith never dominates a citizen's draw.
   // =========================================================================
+  // engine.350 Task 15: each line carries its sign (Faith is graded-only); every one is signed, so the
+  // faith-exposure count below the admission is unchanged.
   function faithPool_(neighborhood) {
     var pool = [];
     var evs = (S.faithEvents && S.faithEvents.events) || [];
@@ -2071,19 +2084,19 @@ function generateCitizensEvents_(ctx) {
       var orgName = fev.organization || "a local congregation";
       if (fev.eventType === 'holy_day') {
         pool.push(makeEntry("joined the " + (fev.holyDay || "holy day") + " observance at " + orgName,
-          ["source:faith", "faith:holy-day"], 1.15, false));
+          ["source:faith", "faith:holy-day", "dial:warmth:up"], 1.15, false));
       } else if (fev.eventType === 'community_program') {
         pool.push(makeEntry("stopped by a community program run out of " + orgName,
-          ["source:faith", "faith:program"], 1.1, false));
+          ["source:faith", "faith:program", "dial:warmth:up"], 1.1, false));
       } else if (fev.eventType === 'crisis_response') {
         pool.push(makeEntry("pitched in with " + orgName + "'s response effort",
-          ["source:faith", "faith:crisis-response"], 1.15, false));
+          ["source:faith", "faith:crisis-response", "dial:warmth:up"], 1.15, false));
       } else if (fev.eventType === 'outreach') {
         pool.push(makeEntry("was welcomed by an outreach table from " + orgName,
-          ["source:faith", "faith:outreach"], 1.0, false));
+          ["source:faith", "faith:outreach", "dial:warmth:up"], 1.0, false));
       } else {
         pool.push(makeEntry("caught a notable service at " + orgName,
-          ["source:faith", "faith:service"], 1.0, false));
+          ["source:faith", "faith:service", "dial:composure:up"], 1.0, false));
       }
     }
     return pool;
@@ -2482,50 +2495,53 @@ function generateCitizensEvents_(ctx) {
     makeEntry("noticed a familiar face in an unfamiliar mood at $VENUE", ["source:template"], 1.05, true)
   ];
 
+  // engine.350 Task 15: each bond and arc line carries the sign of what it says (null = plain: drawn, counted,
+  // not written — GRADED_ONLY_KIND_).
   var allianceTexts = [
-    "coordinated briefly with an ally on shared interests",
-    "received a supportive message from a trusted connection",
-    "felt reassured by a recent alliance",
-    "collaborated quietly with a close associate",
-    "exchanged insights with a professional ally"
+    ["coordinated briefly with an ally on shared interests", "dial:sociability:up"],
+    ["received a supportive message from a trusted connection", "dial:warmth:up"],
+    ["felt reassured by a recent alliance", "dial:composure:up"],
+    ["collaborated quietly with a close associate", "dial:sociability:up"],
+    ["exchanged insights with a professional ally", "dial:openness:up"]
   ];
+  function signedBondTags_(base, sign) { return sign ? base.concat([sign]) : base.slice(); }
   var alliancePool = [];
   for (var ali = 0; ali < allianceTexts.length; ali++) {
-    alliancePool.push(makeEntry(allianceTexts[ali], ["relationship:alliance"], 1, false));
+    alliancePool.push(makeEntry(allianceTexts[ali][0], signedBondTags_(["relationship:alliance"], allianceTexts[ali][1]), 1, false));
   }
 
   var rivalryTexts = [
-    "felt a flicker of tension thinking about a competitor",
-    "noticed subtle friction in professional circles",
-    "sensed unspoken rivalry in a routine interaction",
-    "felt the weight of ongoing competition",
-    "overheard something that stirred old tensions"
+    ["felt a flicker of tension thinking about a competitor", "dial:composure:down"],
+    ["noticed subtle friction in professional circles", "dial:composure:down"],
+    ["sensed unspoken rivalry in a routine interaction", "dial:composure:down"],
+    ["felt the weight of ongoing competition", "dial:composure:down"],
+    ["overheard something that stirred old tensions", "dial:composure:down"]
   ];
   var rivalryPool = [];
   for (var rvi = 0; rvi < rivalryTexts.length; rvi++) {
-    rivalryPool.push(makeEntry(rivalryTexts[rvi], ["relationship:rivalry"], 1, false));
+    rivalryPool.push(makeEntry(rivalryTexts[rvi][0], signedBondTags_(["relationship:rivalry"], rivalryTexts[rvi][1]), 1, false));
   }
 
   var arcTexts = [
-    "felt the mounting pressure of unfolding events",
-    "sensed their role in a larger story taking shape",
-    "noticed how recent events seemed interconnected",
-    "felt pulled deeper into an evolving situation"
+    ["felt the mounting pressure of unfolding events", "dial:composure:down"],
+    ["sensed their role in a larger story taking shape", "dial:drive:up"],
+    ["noticed how recent events seemed interconnected", null],
+    ["felt pulled deeper into an evolving situation", null]
   ];
   var arcPool = [];
   for (var ari = 0; ari < arcTexts.length; ari++) {
-    arcPool.push(makeEntry(arcTexts[ari], ["arc:generic"], 1, false));
+    arcPool.push(makeEntry(arcTexts[ari][0], signedBondTags_(["arc:generic"], arcTexts[ari][1]), 1, false));
   }
 
   var mentorshipTexts = [
-    "reflected on guidance received from a mentor",
-    "considered advice to share with someone newer",
-    "felt the responsibility of being looked up to",
-    "appreciated a learning moment from an experienced contact"
+    ["reflected on guidance received from a mentor", "dial:drive:up"],
+    ["considered advice to share with someone newer", "dial:warmth:up"],
+    ["felt the responsibility of being looked up to", "dial:drive:up"],
+    ["appreciated a learning moment from an experienced contact", "dial:openness:up"]
   ];
   var mentorshipPool = [];
   for (var mti = 0; mti < mentorshipTexts.length; mti++) {
-    mentorshipPool.push(makeEntry(mentorshipTexts[mti], ["relationship:mentorship"], 1, false));
+    mentorshipPool.push(makeEntry(mentorshipTexts[mti][0], signedBondTags_(["relationship:mentorship"], mentorshipTexts[mti][1]), 1, false));
   }
 
   function occupationPoolFor_(occupation) {
@@ -3201,17 +3217,20 @@ function generateCitizensEvents_(ctx) {
     var culturalFame = culturalStatus ? culturalStatus.fameScore : 0;
     if (usageCount >= 8 || culturalFame >= 25) {
       var fameWeight = culturalFame >= 60 ? 1.35 : (culturalFame >= 40 ? 1.25 : 1.15);
+      // engine.350 Task 15: a fame line is graded-only (GRADED_ONLY_SOURCE_) and carries the sign of what it
+      // says — being recognised is being among people; it was a bare Reputation (integrity +3, sociability +2).
       var famePool = [
-        "got recognized by a stranger who'd read about them in the Tribune",
-        "fielded questions at the corner store about the story they'd appeared in",
-        "was greeted by name by someone they'd never met",
-        "overheard their own name in a conversation outside the cafe"
+        ["got recognized by a stranger who'd read about them in the Tribune", "dial:sociability:up"],
+        ["fielded questions at the corner store about the story they'd appeared in", "dial:sociability:up"],
+        ["was greeted by name by someone they'd never met", "dial:sociability:up"],
+        ["overheard their own name in a conversation outside the cafe", null]
       ];
       for (var fmi = 0; fmi < famePool.length; fmi++) {
         // engine.79 item 7: the Tribune line carries the tribune domain marker
         // so the tribune.newsroom proving-ground pool can supersede it.
         var fameTags = fmi === 0 ? ["source:fame", "ecl:domain:tribune"] : ["source:fame"];
-        pool.push(makeEntry(famePool[fmi], mergeTags(fameTags, calendarTags), fameWeight, false));
+        if (famePool[fmi][1]) fameTags.push(famePool[fmi][1]);
+        pool.push(makeEntry(famePool[fmi][0], mergeTags(fameTags, calendarTags), fameWeight, false));
       }
     }
 
@@ -3302,9 +3321,9 @@ function generateCitizensEvents_(ctx) {
     // remain the fallback. Tags unchanged — dial routing identical.
     if (hasAlliance && chanceHit(0.4)) {
       if (allyName) {
-        pool.push(makeEntry("compared notes with " + allyName + " over coffee that went long", mergeTags(["relationship:alliance"], calendarTags), 1.15, false));
-        pool.push(makeEntry("got a heads-up text from " + allyName + " that saved some trouble", mergeTags(["relationship:alliance"], calendarTags), 1.1, false));
-        pool.push(makeEntry("caught " + allyName + "'s eye across the room and didn't need to say it", mergeTags(["relationship:alliance"], calendarTags), 1.05, false));
+        pool.push(makeEntry("compared notes with " + allyName + " over coffee that went long", mergeTags(["relationship:alliance", "dial:sociability:up"], calendarTags), 1.15, false));
+        pool.push(makeEntry("got a heads-up text from " + allyName + " that saved some trouble", mergeTags(["relationship:alliance", "dial:warmth:up"], calendarTags), 1.1, false));
+        pool.push(makeEntry("caught " + allyName + "'s eye across the room and didn't need to say it", mergeTags(["relationship:alliance", "dial:warmth:up"], calendarTags), 1.05, false));
       } else {
         for (var ali2 = 0; ali2 < alliancePool.length; ali2++) {
           var alEntry = alliancePool[ali2];
@@ -3314,9 +3333,9 @@ function generateCitizensEvents_(ctx) {
     }
     if (hasRivalry && chanceHit(0.4)) {
       if (rivalName) {
-        pool.push(makeEntry("crossed paths with " + rivalName + " and kept it civil — barely", mergeTags(["relationship:rivalry"], calendarTags), 1.2, false));
-        pool.push(makeEntry("heard " + rivalName + "'s name come up and felt the old edge return", mergeTags(["relationship:rivalry"], calendarTags), 1.15, false));
-        pool.push(makeEntry("caught themselves measuring the week against " + rivalName + "'s", mergeTags(["relationship:rivalry"], calendarTags), 1.1, false));
+        pool.push(makeEntry("crossed paths with " + rivalName + " and kept it civil — barely", mergeTags(["relationship:rivalry", "dial:composure:down"], calendarTags), 1.2, false));
+        pool.push(makeEntry("heard " + rivalName + "'s name come up and felt the old edge return", mergeTags(["relationship:rivalry", "dial:composure:down"], calendarTags), 1.15, false));
+        pool.push(makeEntry("caught themselves measuring the week against " + rivalName + "'s", mergeTags(["relationship:rivalry", "dial:drive:up"], calendarTags), 1.1, false));
       } else {
         for (var rvi2 = 0; rvi2 < rivalryPool.length; rvi2++) {
           var rvEntry = rivalryPool[rvi2];
@@ -3326,9 +3345,9 @@ function generateCitizensEvents_(ctx) {
     }
     if (hasMentorship && chanceHit(0.3)) {
       if (mentorPartnerName) {
-        pool.push(makeEntry("talked something through with " + mentorPartnerName + " and left clearer than they arrived", mergeTags(["relationship:mentorship"], calendarTags), 1.1, false));
-        pool.push(makeEntry("caught up with " + mentorPartnerName + " — the kind of conversation that lingers into the evening", mergeTags(["relationship:mentorship"], calendarTags), 1.05, false));
-        pool.push(makeEntry("jotted down something " + mentorPartnerName + " said before it could slip away", mergeTags(["relationship:mentorship"], calendarTags), 1.0, false));
+        pool.push(makeEntry("talked something through with " + mentorPartnerName + " and left clearer than they arrived", mergeTags(["relationship:mentorship", "dial:composure:up"], calendarTags), 1.1, false));
+        pool.push(makeEntry("caught up with " + mentorPartnerName + " — the kind of conversation that lingers into the evening", mergeTags(["relationship:mentorship", "dial:warmth:up"], calendarTags), 1.05, false));
+        pool.push(makeEntry("jotted down something " + mentorPartnerName + " said before it could slip away", mergeTags(["relationship:mentorship", "dial:openness:up"], calendarTags), 1.0, false));
       } else {
         for (var mti2 = 0; mti2 < mentorshipPool.length; mti2++) {
           var mtEntry = mentorshipPool[mti2];
@@ -3387,7 +3406,7 @@ function generateCitizensEvents_(ctx) {
       // period stripped so the framing reads clean. Generic pool = fallback.
       var arcSummary = (activeArc.summary ? String(activeArc.summary).trim() : "").replace(/\.$/, "");
       if (arcSummary) {
-        pool.push(makeEntry("kept circling back to it during the day — " + arcSummary, mergeTags(mergeTags(["arc:named"], arcTagsExtra), calendarTags), 1.25, false));
+        pool.push(makeEntry("kept circling back to it during the day — " + arcSummary, mergeTags(mergeTags(["arc:named", "dial:composure:down"], arcTagsExtra), calendarTags), 1.25, false));
         pool.push(makeEntry("weighed where they stand as it develops: " + arcSummary, mergeTags(mergeTags(["arc:named"], arcTagsExtra), calendarTags), 1.2, false));
       }
       for (var ari2 = 0; ari2 < arcPool.length; ari2++) {
@@ -3930,7 +3949,7 @@ function generateCitizensEvents_(ctx) {
     // stays the record's vocabulary (pulse, dedupe memory); the written tag is the graded form when the
     // kind alone moves nothing; a line that moves nothing is not written.
     var lineKind = primaryTag;
-    if (GRADED_ONLY_KIND_[primaryTag] === true || kindMovesNothing_(primaryTag, pick)) {   // engine.350: Work is never written bare
+    if (GRADED_ONLY_KIND_[primaryTag] === true || gradedOnlyBySource_(tags) || kindMovesNothing_(primaryTag, pick)) {   // engine.350: Work is never written bare
       var gradedTag = gradedTagFor_(primaryTag, tags);
       if (!gradedTag) {
         S.engine299 = S.engine299 || { noDial: 0, noDialBySource: {} };

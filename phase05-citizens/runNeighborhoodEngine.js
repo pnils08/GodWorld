@@ -487,12 +487,16 @@ function runNeighborhoodEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // CREATION DAY EVENTS (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  var creationDayEvents = [
-    "felt something foundational in the neighborhood air",
-    "sensed deep community roots today",
-    "noticed neighbors reflecting on how things began",
-    "felt connected to the neighborhood's origins"
+  // engine.350 Task 15 (G-EC65): each line its own sign (null = plain: drawn, counted, not written). The pool
+  // was signed as one, warmth up, on "noticed neighbors reflecting on how things began".
+  var creationDaySigns = [
+    ["felt something foundational in the neighborhood air", null],
+    ["sensed deep community roots today", "dial:warmth:up"],
+    ["noticed neighbors reflecting on how things began", null],
+    ["felt connected to the neighborhood's origins", "dial:warmth:up"]
   ];
+  var creationDayEvents = [];
+  for (var cdk = 0; cdk < creationDaySigns.length; cdk++) creationDayEvents.push(creationDaySigns[cdk][0]);
 
   // ═══════════════════════════════════════════════════════════════════════════
   // ITERATE THROUGH CITIZENS
@@ -640,7 +644,7 @@ function runNeighborhoodEngine_(ctx) {
 
       // Add Creation Day events (v2.2) — belonging
       if (isCreationDay) {
-        eventPool = eventPool.concat(signed_(creationDayEvents, 'dial:warmth:up'));
+        for (var cdp = 0; cdp < creationDaySigns.length; cdp++) eventPool.push({ t: creationDaySigns[cdp][0], d: creationDaySigns[cdp][1] });
       }
 
       // Add weather-context events

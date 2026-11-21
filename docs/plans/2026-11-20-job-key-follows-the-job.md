@@ -3,7 +3,7 @@ title: Job Key Follows The Job Plan
 created: 2026-11-20
 updated: 2026-11-21
 type: plan
-tags: [engine, active]
+tags: [engine, rejected]
 sources:
   - phase05-citizens/runCareerEngine.js (matchUnemployedToOpenings_, the two field-change hire paths)
   - phase05-citizens/educationCareerEngine.js (catalogRoleKey_, the settlement's key write)
@@ -14,6 +14,8 @@ pointers:
 ---
 
 # Job Key Follows The Job Plan
+
+> **REJECTED by the builder, 2026-11-21:** "plan is trash" · "the plan is garbage, nothing about that is accurate to anything". Do not build from this plan and do not cite any statement in it as fact — every claim below is unverified, including its account of what the key is. What it left behind is real: PROD stage 62 (the hire re-key) and 170 key cells written on the live ledger (132 + 38). No repair, restore or further write is approved.
 
 **Builder's words (2026-11-20):** on Perez, Cloak and the council keys: "My ruling is they are broken". On pay: "They make what is says them make". On the sheet: "Nothing touches my sheet until you tell me what you're editing". On the order: "Ok let's address those items and then move to the 119 without a job key".
 
@@ -58,6 +60,7 @@ pointers:
 
 ## Changelog
 
+- 2026-11-21 (es) — plan rejected whole by the builder (banner at top).
 - 2026-11-21 (es) — restore of the 38 dropped (builder: "why would i put them back to broken again?"); builder: "plan is trash". A finding written the same hour (mayor's rows key = job title) was false and is retracted above.
 - 2026-11-20 (es) — every reader read: the engine never reads the key's words, only blank or not (zero-pay fill, hospital cut, step at 18). Three repair plans put to the builder, none approved; session closed on his word.
 - 2026-11-20 (es) — error recorded: the 38 civic keys are titles, not list entries; the key is `roleMapping[roleType]` (applyEconomicProfiles.js). Writes stopped; the 99 unwritten.

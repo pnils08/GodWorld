@@ -1961,6 +1961,8 @@
 
 - **spotTag_(tags)**
 
+- **eveningNamedTag_(tags)**
+
 - **citizenSpotFor_(hoodSpots, popId)**
 
 - **citizenSpotLines_(spot)**
@@ -3590,8 +3592,12 @@
 
 - **compactMediaEffects_(mediaEffects)**
 
+- **eveningCarryPlaces_(details, n)**
+
+- **eveningCarryTitles_(titles, n)**
+
 - **snapshotEveningForCarryForward_(ctx)**
-  Reads: S.cityEventDetails, S.crowdHotspots, S.crowdMap, S.cycleId, S.eveningFood, S.eveningSafety, S.eveningSports, S.eveningTraffic, S.famousSightings, S.nightlife, S.nightlifeVolume, S.streamingTrend
+  Reads: S.cityEventDetails, S.crowdHotspots, S.crowdMap, S.cycleId, S.eveningFood, S.eveningMedia, S.eveningSafety, S.eveningSports, S.eveningTraffic, S.famousSightings, S.nightlife, S.nightlifeVolume, S.streamingTrend
   Writes: S.eveningSnapshot
 
 - **saveEveningSnapshot_(ctx)**
@@ -4870,4 +4876,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 179
-**Functions mapped:** 1765
+**Functions mapped:** 1768

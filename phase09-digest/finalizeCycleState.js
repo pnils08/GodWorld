@@ -367,6 +367,35 @@ function compactMediaEffects_(mediaEffects) {
  * ============================================================================
  */
 
+/** engine.356: an evening's places as { name, neighborhood, bizId }, first n; a bare name string is kept as a name. */
+function eveningCarryPlaces_(details, n) {
+  var out = [];
+  if (!Array.isArray(details)) return out;
+  for (var i = 0; i < details.length && out.length < n; i++) {
+    var d = details[i];
+    if (!d) continue;
+    var name = (typeof d === 'string') ? d : d.name;
+    if (!name) continue;
+    out.push({
+      name: String(name),
+      neighborhood: (typeof d === 'object' && d.neighborhood) ? String(d.neighborhood) : '',
+      bizId: (typeof d === 'object' && d.bizId) ? String(d.bizId) : ''
+    });
+  }
+  return out;
+}
+
+/** engine.356: an evening's programme titles, first n non-empty strings. */
+function eveningCarryTitles_(titles, n) {
+  var out = [];
+  if (!Array.isArray(titles)) return out;
+  for (var i = 0; i < titles.length && out.length < n; i++) {
+    var t = (typeof titles[i] === 'string') ? titles[i].trim() : '';
+    if (t && out.indexOf(t) < 0) out.push(t);
+  }
+  return out;
+}
+
 function snapshotEveningForCarryForward_(ctx) {
   var S = ctx.summary || {};
   var nightlife = S.nightlife || {};
@@ -408,6 +437,29 @@ function snapshotEveningForCarryForward_(ctx) {
         name: ce.name,
         neighborhood: ce.neighborhood || '',
         tags: (ce.tags || []).slice(0, 3)
+      });
+    }
+  }
+
+  // engine.356 (builder 2026-11-21: "Who watched the top shows this week, who ate at the trending
+  // restaurants") — carry what the evening actually had: where people ate and drank, what was on,
+  // who was seen and where. Until now only the trend, the vibe and the crowd score crossed the Cycle
+  // boundary, so no citizen's line could name any of it. Compact: three of each, name + hood + BIZ_ID.
+  var eveMedia = S.eveningMedia || {};
+  snapshot.restaurants = eveningCarryPlaces_(food.restaurantDetails || food.restaurants, 3);
+  snapshot.fastFood = eveningCarryPlaces_(food.fastDetails || food.fast, 1);
+  snapshot.nightSpots = eveningCarryPlaces_(nightlife.spotDetails || nightlife.spots, 3);
+  snapshot.tv = eveningCarryTitles_(eveMedia.tv, 3);
+  snapshot.movies = eveningCarryTitles_(eveMedia.movies, 2);
+  snapshot.sportsBroadcast = (typeof eveMedia.sportsBroadcast === 'string') ? eveMedia.sportsBroadcast : '';
+  snapshot.famousSeen = [];
+  for (var fsi = 0; fsi < Math.min(sightings.length, 3); fsi++) {
+    var fs = sightings[fsi];
+    if (fs && fs.name) {
+      snapshot.famousSeen.push({
+        name: String(fs.name),
+        neighborhood: fs.neighborhood || '',
+        venue: (fs.venue && fs.venue.name) ? String(fs.venue.name) : ''
       });
     }
   }

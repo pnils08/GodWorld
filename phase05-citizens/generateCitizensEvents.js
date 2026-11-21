@@ -252,6 +252,16 @@ function spotTag_(tags) {
   return false;
 }
 
+// engine.356: a last-night line that already names its place or programme takes no " near <venue>" tail.
+function eveningNamedTag_(tags) {
+  for (var i = 0; i < (tags || []).length; i++) {
+    var t = String(tags[i]);
+    if (t === 'evening:dinedOut' || t === 'evening:nightOut' || t === 'evening:sawFamous' ||
+        t === 'evening:watched' || t === 'evening:watchedSports') return true;
+  }
+  return false;
+}
+
 function citizenSpotFor_(hoodSpots, popId) {
   if (!hoodSpots || !hoodSpots.length || !popId) return null;
   var best = null, bestRank = -1;
@@ -1233,6 +1243,13 @@ function generateCitizensEvents_(ctx) {
     "evening:crowd":         ["sociability", true], "evening:nightlife":   ["outabout", true],
     "evening:cityEventAttend": ["outabout", true], "evening:vibe":         ["warmth", true],
     "evening:safety":        ["composure", false],
+    // engine.356: last night's named places, programmes and sightings (previousEveningPool_). Out at a
+    // restaurant, a bar or where someone famous was = out and about, the direction evening:nightlife and
+    // evening:cityEventAttend already carry; a night in front of a programme = the direction the
+    // "avoided … crowds" line carries; the sports show = the fan dial, as source:sports.
+    "evening:dinedOut":      ["outabout", true],  "evening:nightOut":      ["outabout", true],
+    "evening:sawFamous":     ["outabout", true],  "evening:watched":       ["outabout", false],
+    "evening:watchedSports": ["fandom", true],
     "weather:warm-pocket":   ["outabout", true],  "weather:warm-front":    ["outabout", true],
     "weather:hot":           ["outabout", true],  "weather:cool-pocket":   ["outabout", true],
     "weather:rain":          ["outabout", false], "weather:drizzle":       ["outabout", false],
@@ -1832,10 +1849,59 @@ function generateCitizensEvents_(ctx) {
   // =========================================================================
   // PREVIOUS EVENING POOL (carry-forward from last cycle)
   // =========================================================================
-  function previousEveningPool_(neighborhood, outaboutMult) {
+  function previousEveningPool_(neighborhood, outaboutMult, selfName, homeHood) {
     var pool = [];
     var prev = S.previousEvening;
     if (!prev) return pool;
+
+    // engine.356 (builder 2026-11-21: "Who watched the top shows this week, who ate at the trending
+    // restaurants, who attended the oaks game"): last night's actual places, programmes and sightings
+    // reach the people who were there, by name. Before this the snapshot carried only the trend, the vibe
+    // and the crowd score, and every line was hearsay about a hood. Who: a resident of the place's hood
+    // went; an out-and-about citizen (the engine.38 A4 band the city events use) crossed town for it.
+    // Anyone can have had a programme on. Each line carries the place's hood and BIZ_ID as tags, so the
+    // record says where. Weights sit below the city-event attend weights (2.6 / 1.4 / 1.6 × oa): a
+    // restaurant is not a block party. Absent fields (a pre-356 snapshot) add nothing.
+    var eOa = (typeof outaboutMult === "number") ? outaboutMult : 1.0;
+    var eTravels = eOa >= 1.15;
+    var eHome = homeHood || neighborhood || "";
+    var eTags = function(kind, p) {
+      var t = ["source:prevEvening", kind];
+      if (p && p.neighborhood) t.push("nh:" + p.neighborhood);
+      if (p && p.bizId) t.push("biz:" + p.bizId);
+      return t;
+    };
+    var eOutAt = function(list, kind, hereText, thereText) {
+      for (var ei = 0; ei < (list || []).length; ei++) {
+        var p = list[ei];
+        if (!p || !p.name) continue;
+        if (eHome && p.neighborhood && p.neighborhood === eHome) {
+          pool.push(makeEntry(hereText.replace("$P", p.name), eTags(kind, p), 1.3, false));
+        } else if (eTravels) {
+          pool.push(makeEntry(thereText.replace("$P", p.name + (p.neighborhood ? " in " + p.neighborhood : "")), eTags(kind, p), 0.8 * eOa, false));
+        }
+      }
+    };
+    eOutAt(prev.restaurants, "evening:dinedOut", "had dinner at $P last night", "went over to $P for dinner last night");
+    eOutAt(prev.fastFood, "evening:dinedOut", "grabbed a late bite at $P last night", "ended up at $P for a late bite last night");
+    eOutAt(prev.nightSpots, "evening:nightOut", "spent last night at $P", "made the trip to $P last night");
+    var eSeen = prev.famousSeen || [];
+    for (var esi = 0; esi < eSeen.length; esi++) {
+      var fsn = eSeen[esi];
+      if (!fsn || !fsn.name || (selfName && fsn.name === selfName)) continue;   // nobody spots themselves
+      if (eHome && fsn.neighborhood && fsn.neighborhood === eHome) {
+        pool.push(makeEntry("saw " + fsn.name + (fsn.venue ? " at " + fsn.venue : " out in the neighborhood") + " last night",
+          eTags("evening:sawFamous", fsn), 1.1, false));
+      }
+    }
+    var eTitles = (prev.tv || []).concat(prev.movies || []);
+    for (var eti = 0; eti < eTitles.length; eti++) {
+      if (!eTitles[eti]) continue;
+      pool.push(makeEntry("stayed in and watched " + eTitles[eti] + " last night", ["source:prevEvening", "evening:watched"], 0.6, false));
+    }
+    if (prev.sportsBroadcast) {
+      pool.push(makeEntry("had " + prev.sportsBroadcast + " on last night", ["source:prevEvening", "evening:watchedSports"], 0.6, false));
+    }
 
     // Crowd hotspots — citizen recalls last night's busiest areas
     var hotspots = prev.crowdHotspots || [];
@@ -3064,7 +3130,10 @@ function generateCitizensEvents_(ctx) {
     // v2.8: Previous evening carry-forward. engine.38 A4 — pass the citizen's
     // out-and-about multiplier so high-outabout citizens travel to attend
     // events outside their own neighborhood (dialBands computed above; null -> 1.0).
-    var prevEvePool = previousEveningPool_(neighborhood, dialBands ? dialBands.mult.outabout : 1.0);
+    // engine.356: the citizen's own name (nobody spots themselves) and their folded parent hood (a
+    // child-area resident lives in the hood the evening's places are filed under).
+    var prevEveSelf = (((iFirst >= 0 ? row[iFirst] : "") || "") + " " + ((iLast >= 0 ? row[iLast] : "") || "")).trim();
+    var prevEvePool = previousEveningPool_(neighborhood, dialBands ? dialBands.mult.outabout : 1.0, prevEveSelf, citizenHood);
     for (var pei = 0; pei < prevEvePool.length; pei++) {
       pool.push(makeEntry(prevEvePool[pei].text, mergeTags(prevEvePool[pei].tags, calendarTags), prevEvePool[pei].weight, false));
     }
@@ -3721,6 +3790,10 @@ function generateCitizensEvents_(ctx) {
           else if (dwTag === 'source:firstFriday' || dwTag === 'source:holiday' || dwTag === 'source:creationDay') dwMod *= dm.outabout;
           else if (dwTag === 'source:continuity') dwMod *= dm.composure < 1 ? (2 - dm.composure) : 1; // low composure dwells on unresolved tension
           else if (dwTag === 'evening:cityEventAttend') dwMod *= dm.sociability; // engine.32 T8 — attending stacks sociability on top of prevEvening's outabout
+          // engine.356: a night in is the homebody's line — cancel source:prevEvening's ×outabout and weight by
+          // its inverse (mult band 0.5..1.5, so 2 − outabout is 1.5..0.5); the sports show goes by the fan dial.
+          else if (dwTag === 'evening:watched') dwMod *= (dm.outabout > 0 ? (2 - dm.outabout) / dm.outabout : 1);
+          else if (dwTag === 'evening:watchedSports') dwMod *= (dm.outabout > 0 ? dm.fandom / dm.outabout : 1);
           else if (dwTag === 'source:fame') dwMod *= dm.sociability; // engine.32 T3 — sociable citizens lean into recognition
         }
         if (dwMod !== 1.0) dwEntry.weight = (dwEntry.weight || 1) * dwMod;
@@ -3906,7 +3979,7 @@ function generateCitizensEvents_(ctx) {
       }
       if (contact && contact.popId) tags = mergeTags(tags, ["contactPopId:" + contact.popId]);
       if (chosenVenue) tags = mergeTags(tags, ["venue:local"]);
-    } else if (neighborhood && !chosenVenue && !spotTag_(tags) && chanceHit(0.12)) {
+    } else if (neighborhood && !chosenVenue && !spotTag_(tags) && !eveningNamedTag_(tags) && chanceHit(0.12)) {
       // !chosenVenue: a ledger line that filled $VENUE already carries its
       // venue — don't append a second one. "" for every other non-template
       // line, so pre-ledger rng sequence is unchanged (Task 11). A spot line

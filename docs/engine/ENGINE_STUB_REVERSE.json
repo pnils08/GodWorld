@@ -2,7 +2,7 @@
   "generated": "2026-11-21",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 179,
-  "functionsMapped": 1765,
+  "functionsMapped": 1768,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -1535,7 +1535,8 @@
       "readers": [
         "phase01-config/godWorldEngine2.js::writeDigest_",
         "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
-        "phase07-evening-media/mediaFeedbackEngine.js::analyzeEntertainmentSignals_"
+        "phase07-evening-media/mediaFeedbackEngine.js::analyzeEntertainmentSignals_",
+        "phase09-digest/finalizeCycleState.js::snapshotEveningForCarryForward_"
       ]
     },
     "eventsGenerated": {

@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 179 · **Functions mapped:** 1765 · **S.* fields:** 381 · **Sheets:** 63
+**Files scanned:** 179 · **Functions mapped:** 1768 · **S.* fields:** 381 · **Sheets:** 63
 
 ## S.* / ctx.summary reverse index
 
@@ -164,7 +164,7 @@
 | `S.engineErrorCount` | `phase01-config/godWorldEngine2.js::logEngineError_` | `phase01-config/godWorldEngine2.js::logEngineError_`, `phase01-config/godWorldEngine2.js::runWorldCycleLocked_`, `phase10-persistence/cycleCheckpoint.js::resumeCore_` | 1 | 3 |
 | `S.engineEvents` | `phase06-analysis/filterNoiseEvents.js::filterNoiseEvents_` | `phase05-citizens/applyNamedCitizenSpotlight.js::applyNamedCitizenSpotlights_`, `phase06-analysis/filterNoiseEvents.js::filterNoiseEvents_`, `phase06-analysis/prioritizeEvents.js::prioritizeEvents_` | 1 | 3 |
 | `S.eveningFood` | `phase07-evening-media/buildEveningFood.js::buildEveningFood_` | `phase01-config/godWorldEngine2.js::writeDigest_`, `phase07-evening-media/applyStorySeeds.js::applyStorySeeds_`, `phase09-digest/finalizeCycleState.js::snapshotEveningForCarryForward_`, `phase10-persistence/buildCyclePacket.js::buildCyclePacket_` | 1 | 4 |
-| `S.eveningMedia` | `phase07-evening-media/buildEveningMedia.js::buildEveningMedia_` | `phase01-config/godWorldEngine2.js::writeDigest_`, `phase07-evening-media/applyStorySeeds.js::applyStorySeeds_`, `phase07-evening-media/mediaFeedbackEngine.js::analyzeEntertainmentSignals_` | 1 | 3 |
+| `S.eveningMedia` | `phase07-evening-media/buildEveningMedia.js::buildEveningMedia_` | `phase01-config/godWorldEngine2.js::writeDigest_`, `phase07-evening-media/applyStorySeeds.js::applyStorySeeds_`, `phase07-evening-media/mediaFeedbackEngine.js::analyzeEntertainmentSignals_`, `phase09-digest/finalizeCycleState.js::snapshotEveningForCarryForward_` | 1 | 4 |
 | `S.eveningSafety` | `phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_` | `phase09-digest/finalizeCycleState.js::snapshotEveningForCarryForward_`, `phase10-persistence/buildCyclePacket.js::buildCyclePacket_` | 1 | 2 |
 | `S.eveningSnapshot` | `phase09-digest/finalizeCycleState.js::snapshotEveningForCarryForward_` | `phase09-digest/finalizeCycleState.js::saveEveningSnapshot_` | 1 | 1 |
 | `S.eveningSports` | `phase07-evening-media/sportsStreaming.js::buildEveningSportsAndStreaming_` | `phase01-config/godWorldEngine2.js::runCyclePhases_`, `phase01-config/godWorldEngine2.js::runWorldCycleLocked_`, `phase01-config/godWorldEngine2.js::writeDigest_`, `phase07-evening-media/buildEveningFamous.js::buildEveningFamous_`, `phase07-evening-media/buildEveningMedia.js::buildEveningMedia_`, `phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_`, …(+1 more) | 1 | 7 |

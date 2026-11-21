@@ -686,6 +686,68 @@ All thirty fires PASS (leg m 162–238 s, leg n 185–259 s). Down sits beside u
 
 **LIVE 2026-11-19 02:01 CST:** PROD stage 58 @193 = stage 57 + thirteen files at `a8f4ebe23`, pull-back byte for byte — DEPLOY_HISTORY §PROD. No sheet write goes with it. First live fire: C117, Sun 2026-11-22; the read is `node scripts/dialPulse.js` against leg n.
 
+## Task 15 read — the cut list (2026-11-21, research-build)
+
+Read against the code on live stage 62; counts from the ledger snapshot of 2026-11-18 (C115–C116 lines, before stage 57/58) and the leg n cells. Four piles, each shipped its own way.
+
+### Pile 1 — the engine candidate (one bench)
+
+**1a. Bond and arc lines, two writers.** `runRelationshipEngine.js` (`rivalryRels`, `allianceRels`, `mentorshipRels`, `arcRels`) and `generateCitizensEvents.js` (`allianceTexts` / `rivalryTexts` / `mentorshipTexts` / `arcTexts`, the named-counterpart lines at 3303–3337, the two `arc:named` lines at 3390–3391) write a bare `Rivalry` (sociability +2, composure −3), `Alliance` (sociability +4), `Mentorship` (warmth +6, drive +2 — larger than a wedding's warmth) or `Arc` (drive +4, openness +2) whatever the line says ("avoided someone they've had friction with" → sociability +2). Live C115–C116: Rivalry 2, Alliance 1 on the snapshot; the bond kinds are rare, the size is the defect. Cut: the kind stays (the bond engine, `compressLifeHistory`, the archetype weights at 3668–3669 and the memory window key on it — read through `gradedParts_`), each line written `<Kind>-<Dial>-<Up|Down>-S` by what it says, a plain line drawn, counted and not written (the engine.350 rule):
+
+| Line (both writers' wordings) | Sign |
+|---|---|
+| a flicker of tension / subtle friction / unspoken rivalry / stirred old tensions / the weight of ongoing competition / kept it civil — barely / felt the old edge return | composure down |
+| avoided someone they've had friction with | sociability down |
+| caught themselves measuring the week against X's | drive up |
+| received support / a supportive message from a trusted connection; exchanged knowing looks with an ally; appreciated the loyalty of a close contact; got a heads-up text from X; caught X's eye across the room | warmth up |
+| coordinated briefly with an ally (on shared interests); collaborated quietly with a close associate; compared notes with X over coffee | sociability up |
+| felt reassured by a solid friendship / a recent alliance | composure up |
+| exchanged insights with a professional ally | openness up |
+| reflected on guidance (received) from a mentor / someone experienced; felt (the) responsibility of being looked up to / toward someone looking up to them | drive up |
+| offered advice / considered advice to share with someone newer; caught up with X — the kind of conversation that lingers | warmth up |
+| appreciated a learning moment from a mentor figure / an experienced contact; jotted down something X said | openness up |
+| talked something through with X and left clearer | composure up |
+| the social weight / the mounting pressure of unfolding events | composure down |
+| felt drawn into conversations about the ongoing situation | sociability up |
+| sensed their role in a larger story taking shape | drive up |
+| sensed relationships shifting; noticed how current events affected their circle / seemed interconnected; felt pulled deeper into an evolving situation; the two `arc:named` lines ("kept circling back to it", "weighed where they stand") | plain |
+
+**1b. Fame.** The generator's four `source:fame` lines (3204–3213) and tab row 276 route to `Reputation` (integrity +3, sociability +2): being recognised raised integrity. 21 lines on the snapshot; 38 integrity pushes up in leg n. Cut by the source tag, not the kind: `source:fame` lines are graded-only; recognised by a stranger / fielded questions at the corner store / greeted by name → sociability up; overheard their own name → plain. **The pilot's own UNDOCKED run (`source:undocked` + `ecl:kind:pilot` → bare `Reputation`) is untouched — pipeline.113 / Task 8.** Row 276 ("got recognized at the corner store … and pretended to mind") needs a Tags cell `dial:sociability:up` or it stops being written — pile 3's write.
+
+**1c. Faith.** `faithPool_` (2064–2088), five lines about the citizen's own hood congregation, each a bare `Faith` (warmth +3, composure +2). Joined the observance / stopped by a community program / pitched in with the response effort / was welcomed by an outreach table → warmth up; caught a notable service → composure up. All five carry a sign, so the faith-exposure push (3968, after admission) keeps its count. The three `source:faith` tab rows are already `Active = no`.
+
+**1d. Public.** `generateGameModeMicroEvents.js` (`mlbPublic` 8, `mediaPublic` 4, `civicPublic` 5) and `generateCivicModeEvents.js` (210, 235, 319) write a bare `Public` (sociability +4) on work duties ("fulfilled a sponsor obligation", "prepared public safety statements for the press"). 3 lines on the snapshot. Both writers already carry `dial:` tags on their other pools; Public lines get the same: autographs / photos with young fans / community appearance / charity function / spoke with community members / attended a neighborhood event / fielded questions from local media / networked with industry contacts → sociability up; maintained public-facing composure during a press briefing → composure up; a media availability / a radio interview / a press conference / represented the paper / the city at a function / a team marketing event / a sponsor obligation / a brief public appearance / public safety statements / a civic observance → plain (a duty of the job; the job moves nothing — builder 2026-11-17 on statements).
+
+**1e. Retired players.** `runAsUniversePipeline.js` `influencePool` + `businessPool` → bare `PostCareer-Influence` (sociability +3), `wellnessPool` → `PostCareer-Wellness` (composure +3). Cut: handled a small wave of public recognition with ease → composure up; took a call about a future partnership / met quietly with contacts about post-career opportunities → drive up; a low-key sponsor appearance → sociability up; recorded a short message / considered an opportunity without committing / personal business tasks with an advisor → plain. Wellness: all three composure up, written one step. The kinds stay (`PostCareer-Influence-Composure-Up-S`).
+
+**1f. Creation Day.** `runNeighborhoodEngine.js` `creationDayEvents` signed as one pool (`warmth:up`). Sensed deep community roots / felt connected to the neighborhood's origins → warmth up; felt something foundational in the air / noticed neighbors reflecting → plain (the relationship engine's own "sensed something foundational in the air" is plain).
+
+**1g. The relationship cap.** `runRelationshipEngine.js:379–381` walks the ledger from row 0 and stops at `LIMIT` (8) lines written, so the top of the ledger draws them. Cut: start at a row drawn once from `ctx.rng` and wrap — deterministic per seed, one extra draw before the loop.
+
+**1h. A down line lifts the hood.** `neighborhoodPulseMap.js` `pulseKindForLine_` flips only `Neighborhood`. Cut: any line whose written tag grades `-Down-` and whose kind lifts the hood (`Community`, `FirstFriday`, `Cultural`, `Relationship`, `Faith`) pulses `Neighborhood-Down`. The generator's two First Friday down lines are nights someone went; they then lower the pulse one step instead of lifting it (agy 11-18 left the lift; this reverses it — the line says the night went badly for them).
+
+**1i. The face's TopTags.** `compressLifeHistory.js:1950–1955` tallies each graded tag as its own tag, so `Neighborhood-Outabout-Up-S` and `Neighborhood-Composure-Down-S` split the Neighborhood count. Cut: tally `gradedParts_(tag).kind`. Its draw reader (`generateCitizensEvents.js:3716–3727`) compares TopTags against entry machine tags (`source:…`, lowercase) and matches almost nothing either way; the bench reads it.
+
+Not in the cut: `tier1EssenceEvents.js` (authored one-time seed lines for the Tier-1 players, `seedTier1EssenceLive.js`); the reflection classifier's tags; `jobStatementRows.js`.
+
+### Pile 2 — the dashboard
+
+`dashboard/server.js:2151` parses `[(\w+)]` and reads every graded tag as `General`. Cut: `[^\]]+` and the kind by `gradedParts_`. Not engine substrate: its own commit, no bench.
+
+### Pile 3 — the tab (dry-run here, the live write by the builder's hand)
+
+Row 276's Tags cell (1b); the G-EC62 rows (faith rows with `band!=child` reaching every adult under `source:familyLife`; `civic.health-center` row 211 with no hood; `culture.citywide` row 290 with no season; unsigned rows 875, 985, 987, 988 in signed pools); the relative rows of G-EC64 (266–269, 87, 95, 144). The ledger carries no congregation field and the loader has no faith scope, so the moves are existing Conditions terms (hood) or `Active = no` — no new field. One dry-run list, then put to him.
+
+### Pile 4 — out-and-about 61–62% up, integrity 44–45%
+
+Leg n cells over ten Cycles: out-and-about up 2,630 (`Neighborhood` 1,681, `PrevEvening` 409, `Civic Perception` 171), down 1,673 (`Background` 552, `Neighborhood` 545, `Friction` 284). The lean is the hood lines. Integrity up 437 (`Daily` 192, `Personal` 140, `Reputation` 38), down 525 (`Personal` 520). 1b takes 38 ups off integrity. Measured again on pile 1's bench before any cut; the source of the 520 `Personal` downs is read first.
+
+### Weakest points, attacked
+
+- **Graded-only drops unsigned lines silently.** A bond line missed from the list stops being written. Guard: a test walks every line of every pool named above through the writer and asserts each is listed (signed or plain); unlisted throws in the test, counted `unlisted` in the engine.
+- **Readers of the bare kinds.** `Rivalry` / `Alliance` / `Mentorship` / `Arc` / `Faith` / `Public` / `PostCareer-Influence` / `-Wellness` / `CreationDay` are grepped across all five dirs before the build; any reader matching the bare tag moves to `gradedParts_` in the same candidate (the 11-18 `WHO_LIVED_IT_TAGS` case).
+- **1h changes hood pulses the newsroom reads.** Bench reads the hood pulse beside leg n.
+
 
 ## Tasks
 

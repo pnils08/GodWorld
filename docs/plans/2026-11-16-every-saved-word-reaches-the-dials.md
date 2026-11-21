@@ -926,3 +926,26 @@ agy, `output/antigravity/2026-11-16-review-dials-plan.md` (HOLD on the first cut
 - 2026-11-21 (research-build) — engine.351 LIVE: PROD stage 65 (builder on the bench arrivals: "This looks fine"); HEAD = the benched manifest, no version cut (200-version limit). Read at C117: any held row and its status, each adult arrival's `arrival start` on Dial_Moves.
 - 2026-11-21 (research-build) — Task 15 pile 2 built: dashboard citizen page reads a graded life-history tag as its kind (`[^\]]+` capture, `gradedParts_`); plain tags unchanged. Syntax-checked and the capture tested on graded, plain and untagged lines; not run against the live server. Piles 3 and 4 open.
 - 2026-11-21 (research-build) — Task 15 pile 3 dry-run read against the live tab: rows 290, 875, 985, 987, 988 were already Active = no. Written on the builder's "Ok": row 211 Conditions `band!=child; hood=Temescal`, row 166 `hood=East Oakland` (parsed by the loader, read back). Open for his call: the ten faith rows that name no place (leave / off) and the relative rows 266–269, 87, 95, 144 (leave / off). Pile 4 reads after pile 1 has run at C117.
+
+## Task 16 — faith rows reach the congregation (2026-11-21, research-build; builder: "Churches have congregations … it names who belongs")
+
+Corrects pile 3's "the ledger carries no congregation field": true of Simulation_Ledger, false of the sim. Read from code, not the note.
+
+**What the code has.** `Faith_Organizations.MembersList` (JSON POPID array per org) — written by `processFaithJoins_` (`bondEngine.js:998`, called `:326`, `Phase5-Bonds`): each `S.faithExposures` entry (a drawn `source:faith` line, pushed `generateCitizensEvents.js:4063`) rolls 0.08 to join an active org in the citizen's hood, one org at a time; 0.003 a Cycle to drift. Live 2026-11-21: 16 orgs, 17 members, 6 orgs with any (Foothill Baptist Tabernacle 0). `Phase5-CitizenEvents` runs before `Phase5-Bonds` at both entry points (`godWorldEngine2.js:684/694`, `:2405/2415`), so the generator sees last Cycle's lists.
+
+**What is missing.** `CONTENT_LEDGER_DSL_FIELDS` (`loadEventContentLedger.js:70`) and `condScopes` (`generateCitizensEvents.js:3548`) have no faith term. The 11 active `faith.attending` / `faith.volunteering` rows (166, 195, 238–243, 1155–1157) reach every adult; they ride `source:familyLife`, so they are not exposure and feed no join.
+
+**Cut.**
+1. Loader: `member: { kind: 'flag' }` (belongs to a congregation), `congregation: { kind: 'str' }` (its Organization name; `|` alternatives as `employer`).
+2. Generator: one read of `Faith_Organizations` at the top of `generateCitizensEvents_` → `memberOrgByPop` (POPID upper → Organization, active orgs, `MembersList` only). `condScopes.member`, `condScopes.congregation`. Read fails or tab absent → empty map → member rows fail closed (the evaluator's missing-data rule), logged.
+3. Tab, after the code is live (an unknown term skips the row at load, so the order is safe either way): rows 195, 238–243, 1155–1157 Conditions `+ member`; row 166 `congregation=Foothill Baptist Tabernacle` (replaces today's `hood=East Oakland` stopgap). Row 211 stays `hood=Temescal`.
+4. Tests: loader parse of both terms; generator — a member draws a `member` row, a non-member never does, a `congregation=` row reaches that org's members only, a failed read reaches nobody.
+5. Truth docs in the same commit: STUB_MAP if the generator's reads change, SHEETS_MANIFEST (generator reads `Faith_Organizations`).
+
+**Weakest points, attacked.**
+- *Reach collapses from ~1,000 adults to 17.* Intended by the ruling; the rows become what members live. Non-members still meet faith through `faithPool_` (hood events, `source:faith`) — the join path is untouched. Bench reads: faith-row draws per Cycle before/after, joins per Cycle unchanged.
+- *One-Cycle lag.* A citizen who joins this Cycle draws member rows from the next. Correct order for a life; no change to phase order.
+- *A member who moved hoods* stays on the list (`processFaithJoins_` never drops on a move) and keeps drawing; `congregation=` keys on the org, not the hood.
+- *Leaders* (`LeaderPOPID`) are not on `MembersList`; not counted as members here. Recorded, not decided.
+
+**Relative rows, read the same way (not built).** Simulation_Ledger carries `ParentIds` / `ChildrenIds` (named, tracked kin) beside `NumChildren` (a count). Snapshot after C116: `ChildrenIds` filled 62, `ParentIds` 58, a named sibling 4, a tracked grandchild 0; `NumChildren > 0` 510. Rows 266–269 (grandchild), 87 / 95 (sibling) can be aimed at named kin (`siblings`, `grandchildren` scopes off those columns) — reach 4 and 0 today — or left on the count. His call.

@@ -981,6 +981,14 @@ This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) �
 
 This pass: 1 rows — engine.353. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
 
+## S764 Archive Pass (2026-11-21, research-build) — post-S763 closures sweep
+
+1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 engine.*.
+
+- **engine.354** [engine-sheet] — Job key: plan REJECTED whole (builder 11-21). Closed as it stands: stage 62 hire re-key live, 170 label cells written, no life or pay moved **State at archive:** done-pending-archive. Pointer: [[../plans/2026-11-20-job-key-follows-the-job]]
+
+This pass: 1 rows — engine.354. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S664 Archive Pass (2026-11-16, research-build) — post-S663 closures sweep
 
 4 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 2 pipeline.* + 2 engine.*.

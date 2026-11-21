@@ -2,4 +2,4 @@
 
 **PIN:** S767 | Day 234 | Canon C116 | PROD @197 (stage 62; history: DEPLOY_HISTORY §PROD) | next live fire C117 Sun 2026-11-22
 
-**NEXT[research-build]:** engine.351 → his two calls (complete-row fields; arrival start dials, plan §Task 11 read), then build; bench only after engine.350 pile 1 proves. engine.350 Task 15 → read the 10 failing tests (his unlock), fold, bench vs leg n. Shepard row 165: never apply (misread job move). Question door forces a job pick: his call.
+**NEXT[research-build]:** engine.351 → his two calls (complete-row fields; arrival start dials, plan §Task 11 read), then build; bench only after engine.350 pile 1 proves. engine.350 Task 15 → read the 10 failing tests (his unlock), fold, bench vs leg n. engine.338: wake tests owed (his unlock); Shepard row 165 never applied.

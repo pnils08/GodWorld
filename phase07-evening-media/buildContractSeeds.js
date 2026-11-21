@@ -620,6 +620,9 @@ function buildContractSeeds_(ctx) {
     var key = (r.causeType || 'unknown') + '|' + contractSeedNormHood_(r.neighborhood || 'citywide');
     // engine.332: one row per covered beat — every beat's reaction is citywide.
     if (r.causeType === 'coverage-reaction') key += '|' + (r.causeId || '');
+    // engine.340 Task 3: an initiative reaching more than one hood carries a blank neighborhood
+    // (applyInitiativeImplementationEffects.js); each initiative is its own seed, never merged citywide.
+    if (r.causeType === 'initiative-implementation' && !String(r.neighborhood || '').trim()) key += '|' + (r.causeId || '');
     if (!clusters[key]) { clusters[key] = []; order.push(key); }
     clusters[key].push(r);
   }

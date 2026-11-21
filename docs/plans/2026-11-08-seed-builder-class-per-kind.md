@@ -89,10 +89,10 @@ The class is decided per **unit group** (`contractSeedUnit_`, engine.334), so a 
 | # | Task | Owner | Status |
 |---|------|-------|--------|
 | 1 | Read-before: each producer's own scale and whether it already carries a rank (hook severity, chaos/crisis tier, migration type, trajectory type, initiative intensity); readers of the SeedID format | es | done 2026-11-21 (§Read-before) |
-| 2 | Bar per kind in the builder, from each kind's own scale; replay C110–C114 old vs new, every class change listed for the builder's read | es | not started |
-| 3 | Cluster key carries the initiative (causeId) when the neighborhood is blank — the coverage-reaction pattern | es | not started |
-| 4 | SeedID written so the sheet keeps it as text; existing numeric rows stay as written | es | not started |
-| 5 | Tests; codex diff review; sandbox proof; PROD | es | not started |
+| 2 | Bar per kind in the builder, from each kind's own scale; replay C110–C114 old vs new, every class change listed for the builder's read | es | done 2026-11-21 — replay C110–C116: 323 seeds, 91 flips (`output/engine-sheet/2026-11-21-engine340-replay-c110-c116.txt`); bars stand (builder 11-21: he does not set major/minor) |
+| 3 | Cluster key carries the initiative (causeId) when the neighborhood is blank — the coverage-reaction pattern | es | done 2026-11-21 — C110–C116: the merged citywide initiative seed splits into its three initiatives each Cycle (+2 seeds a Cycle) |
+| 4 | SeedID written so the sheet keeps it as text; existing numeric rows stay as written | es | built 2026-11-21 — leading apostrophe on the Phase-10 row (`saveV3Seeds.js`); proof is the bench read-back |
+| 5 | Sandbox proof (row read-off; no tests on this project, builder 11-21); PROD | es | waits: research-build's unbenched engine.350 pile is in flight on the shared sandbox |
 
 ## Acceptance
 
@@ -111,6 +111,7 @@ The class is decided per **unit group** (`contractSeedUnit_`, engine.334), so a 
 
 ## Changelog
 
+- 2026-11-21 (engine-sheet) — Tasks 3 and 4 built; Task 2 bars stand on the builder's word. Sandbox next, behind research-build's engine.350 pile.
 - 2026-11-21 (engine-sheet) — agy plan review HOLD folded (6 of 6 verified against the code).
 - 2026-11-21 (engine-sheet) — Task 1 corrected (advisor): hook-ripple producers added; the tags and the initiative intensity already carry a rank; crime pipe-hood retracted as a merge case. Task 2 design written; codex plan review next.
 - 2026-11-21 (engine-sheet) — Task 1 done: producer scales table, crime pipe-hood merge case, SeedID readers listed. No code touched.

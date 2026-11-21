@@ -113,7 +113,9 @@ function saveV3Seeds_(ctx) {
     var s = seeds[i];
     rows.push([
       cycle,                    // A  Cycle
-      s.seedId || '',           // B  SeedID
+      // engine.340 Task 4: the leading apostrophe keeps the 8-hex id as text — setValues parsed
+      // '97e00012' as 9.7E+13 and all-digit ids as numbers (C113). Rows already written stay as written.
+      s.seedId ? "'" + s.seedId : '', // B  SeedID
       s.desk || 'civic',        // C  Desk (v4.1)
       s.seedClass || 'texture', // D  Class
       s.domain || 'GENERAL',    // E  Domain

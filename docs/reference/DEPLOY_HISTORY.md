@@ -198,6 +198,14 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD stage 64 @200 — @198 without world-view/ (2026-11-21, research-build — a fix to stage 63)
+
+- **Stage 63 @198 (2026-11-21, engine-sheet, builder "Commit all work and push all work live"):** every file of main at `4479a1483`, no bench (engine.350 Task 15 pile 1, engine.340 Tasks 1–4, and the rest of main). Manifest `output/engine-sheet/2026-11-21-e340/prod198.sha256` — 180 files: stage 62's 168 + 12 under `world-view/`, which `.claspignore` did not list.
+- **Fault:** `world-view/build.js` line 4 is a Node `require()`. Every Apps Script load of @198 died on it: the PROD web app answered `ReferenceError: require is not defined (line 4, file "world-view/build")` (read 2026-11-21 ~14:00 CST; found when the engine.351 bench aim check hit the same error on SANDBOX 1004). C117 would have died at load.
+- **Fix:** `.claspignore` lists `world-view/**`. PROD = @198's tree minus the 12 `world-view/` files; every engine file byte-identical to @198. @199 is a dud: clasp 3.3 `push` skips when no local file changed, and a removed file is not a change, so @199 = @198. @200: push with one blank line added to `appsscript.json` (the whole-set upload), then the exact bytes back; deploy; pull-back byte-identical to `output/research-build/2026-11-21-e351/prod199-noworldview.sha256` (168 files). Script `…/prod-fix-worldview.sh`.
+- **Smoke:** the PROD web app answers JSON again (`CYCLE_TRIGGER_TOKEN script property not set` — PROD never carries the token; it fires from the sheet). No sheet write.
+- **Back out:** not to @198 (it cannot load). To stage 62: push `output/engine-sheet/2026-11-20-e354/e354.sha256`'s tree and cut a version.
+
 ### PROD stage 62 — the job key follows the job on a field-change hire (2026-11-20, engine-sheet, engine.354)
 
 - **What:** one file, `phase05-citizens/runCareerEngine.js` at `bad89532c`, on stage 61. Both field-change hire paths in `matchUnemployedToOpenings_` re-key a keyed row: `catalogRoleKey_` of the new title, else the title; an unkeyed row keeps none (builder 2026-11-20 on the stale keys: "My ruling is they are broken").

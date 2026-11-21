@@ -112,3 +112,7 @@ schemas/**
 
 # Graphify output (2.2MB graph.html was riding every deploy as an HTML asset — S282)
 graphify-out/**
+
+# World-view flight (Node build + browser pages, not Apps Script) — PROD @198 (2026-11-21) carried
+# world-view/build.js and every Apps Script load died on its require() (line 4)
+world-view/**

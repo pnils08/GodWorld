@@ -1,0 +1,28 @@
+AIM = BENCH (script read the bench marker)
+== sync from live
+  verify Reflection_Intake: bench 2988 rows vs live 2988 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+{"fireGuardMinutes":"0","cycleCountFormatted":"116","cycleCountIsNumber":true}
+door: {"target":"bench","http":200,"ok":true,"record":{"cycle":118,"startedMs":1795203544530,"state":"done","finishedMs":1795203818107},"raw":"{\"cycle\":118,\"startedMs\":1795203544530,\"state\":\"done\",\
+clearfire 118: {"ok":true,"cleared":{"cycle":118,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+-- pause 75 s (read quota)
+Edition_Coverage_Ratings C116: 7 rows (window 115,114,113,112,111,110,109,108)
+Citizen_Media_Usage C116: 15 rows from live C115
+Oakland_Sports_Feed C117: 0 rows
+appended 7 to Edition_Coverage_Ratings; marked rows on the tab now 7
+appended 15 to Citizen_Media_Usage; marked rows on the tab now 15
+planted POP-99354 Keyed | Server | key "Solar Installer" | tags Healthcare | edu hs-diploma | employer "" | pay 30000
+planted POP-99355 Unkeyed | Janitor | key "" | tags Education | edu hs-diploma | employer "" | pay 30000
+planted POP-99356 Titlekey | Bakery Worker | key "Community Organizer" | tags Transit & Infrastructure | edu hs-dropout | employer "" | pay 30000
+planted POP-99357 Samefield | High School Teacher | key "High School Teacher" | tags Education | edu bachelors | employer "" | pay 30000
+bench cycleCount 116
+fire C117 rc=0 "verdict": "PASS" "wallS": 157
+FAIL POP-99354 Keyed | was Server / key "Solar Installer" | now Sales Associate / key "Sales Associate" | employer BIZ-00005 | pay 66130 | tags Small Business|Healthcare | Career-FieldChange: Changed fields — hired at Oakland Athletics (Small Business) | EXPECTED {"role":"Nurse Aide","key":"Home Health Aide","tag":"Career-FieldChange"}
+FAIL POP-99355 Unkeyed | was Janitor / key "" | now IT Support Technician / key "" | employer BIZ-00009 | pay 187344 | tags Tech & Innovation|Education | Career-FieldChange: Changed fields — hired at Oakmesh Systems (Tech & Innovation) | EXPECTED {"role":"After-School Program Aide","key":"","tag":"Career-FieldChange"}
+FAIL POP-99356 Titlekey | was Bakery Worker / key "Community Organizer" | now Warehouse Hand / key "Warehouse Hand" | employer BIZ-00012 | pay 95000 | tags Port & Labor|Transit & Infrastructure | Career-FieldChange: Changed fields — hired at Port of Oakland (Port & Labor) | EXPECTED {"role":"Station Attendant","key":"Station Attendant","tag":"Career-FieldChange"}
+FAIL POP-99357 Samefield | was High School Teacher / key "High School Teacher" | now Junior Software Developer / key "Software Engineer (General)" | employer BIZ-00003 | pay 201429 | tags Tech & Innovation|Education | Career-FieldChange: Changed fields — hired at Discord (Tech & Innovation) | EXPECTED {"role":"High School Teacher","key":"High School Teacher","tag":"Career-Hired"}
+C117 hires on the bench: 9 (field changes 5)
+CHECK FAIL 0/4
+== final sync from live
+RESULT check exit 1

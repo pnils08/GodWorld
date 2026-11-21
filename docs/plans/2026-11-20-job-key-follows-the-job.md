@@ -33,9 +33,9 @@ pointers:
 | # | Task | Owner | Status |
 |---|------|-------|--------|
 | 1 | Both field-change hire paths in `matchUnemployedToOpenings_`: a row that carries a key takes `catalogRoleKey_(newRole)`, else the new title (the settlement's fallback); a row with no key keeps none. No test written or run (test guard, builder 2026-11-20); the bench is the proof | es | done (this commit) |
-| 2 | Bench SANDBOX 1004, PROD stage 61 + the file, live-synced C116, bench-only unemployed plants (keyed and unkeyed) tagged for a hiring employer in another field; fire C117; read back job, key, pay | es | open |
-| 3 | PROD push, built tree = the benched manifest | es | open |
-| 4 | Sheet: each wrong key → `catalogRoleKey_` of the job held. The list (name, job, key now, key after) goes to the builder first; written on his go through `lib/sheets`, read back. Key cell only | es | open: waits on his go |
+| 2 | Bench SANDBOX 1004, PROD stage 61 + the file, live-synced C116, bench-only unemployed plants (keyed and unkeyed) tagged for a hiring employer in another field; fire C117; read back job, key, pay | es | done: @219, C117 PASS twice, rule check 5 of 5 on run 2 (DEPLOY_HISTORY §PROD stage 62) |
+| 3 | PROD push, built tree = the benched manifest | es | done: PROD stage 62 @197, pull-back identical |
+| 4 | Sheet: each wrong key → `catalogRoleKey_` of the job held. The list (name, job, key now, key after) goes to the builder first; written on his go through `lib/sheets`, read back. Key cell only | es | open: 132 rows listed (`output/engine-sheet/2026-11-20-e354/job-keys-to-correct.md`, 131 ENGINE, 1 CIVIC), sent to him; waits on his go |
 | 5 | Jobs the list has no entry for (police chief, fire chief, council member, the media titles): his next item, scoped with him when reached | es | open |
 
 ## Acceptance
@@ -45,4 +45,5 @@ pointers:
 
 ## Changelog
 
+- 2026-11-20 (es) — bench C117 PASS (run 1's employer predictions wrong, run 2 checks the rule: 5 of 5); PROD stage 62 @197. Task 4 list is 132 rows, not the 116 first said: 16 more under job spellings the seeding map lacks.
 - 2026-11-20 (es) — opened on the builder's word; Task 1 built.

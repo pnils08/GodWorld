@@ -748,6 +748,46 @@ Leg n cells over ten Cycles: out-and-about up 2,630 (`Neighborhood` 1,681, `Prev
 - **Readers of the bare kinds.** `Rivalry` / `Alliance` / `Mentorship` / `Arc` / `Faith` / `Public` / `PostCareer-Influence` / `-Wellness` / `CreationDay` are grepped across all five dirs before the build; any reader matching the bare tag moves to `gradedParts_` in the same candidate (the 11-18 `WHO_LIVED_IT_TAGS` case).
 - **1h changes hood pulses the newsroom reads.** Bench reads the hood pulse beside leg n.
 
+## Task 11 read (2026-11-21, research-build — engine.351)
+
+Code read: `processIntake_` (`godWorldEngine2.js:1523`), `processAdvancementRowsBody_` (`processAdvancementIntake.js:709`), `checkForPromotions.js:380-495`, the first-fold seed (`compressLifeHistory.js:640-700`), `challengerDialStateJson_` (`updateCivicApprovalRatings.js:1506`). Live tabs read 2026-11-21.
+
+### What a blank becomes today
+
+| Door | Blank cell | Becomes |
+|---|---|---|
+| Intake (story rows) | Age | a draw, 22–65 (household door: child 1–17, adult 22–65) |
+| Intake | Neighborhood | a draw from the core-sim hoods |
+| Intake | Category | one of blue-collar / white-collar / service, a draw |
+| Intake | RoleType | a draw from the category's catalog pool |
+| Intake | unknown name, not a household | not minted: a Generic_Citizens row (EmergenceCount 1), earns the ledger at 3 |
+| Advancement_Intake1 (mint) | BirthYear | 2003, fixed (age 39 in 2042) |
+| Advancement_Intake1 | Neighborhood | a frequency-weighted draw (`deriveCitizenProfile_`) |
+| Advancement_Intake1 | RoleType | derived from hood and age; demographic-voice fallback |
+| Advancement_Intake1 | Gender | derived from the name and hood |
+| Advancement_Intake1 | Tier | 3 |
+| Advancement_Intake1 | ClockMode | ENGINE |
+| Advancement_Intake1 | EmployerBizId | the field-matched pick |
+| both | Education, YearsInCareer, Debt, NetWorth, CareerStage, Income | always derived (no intake cell) |
+| first fold | DialState | 50 on eight dials; fandom from the household, 65 for a franchise player or staffer. The mint sentence then folds by word-match ("Promoted to Tier N…" drive +7 / composure +2; "Arrived in … migration wave" sociability +4) |
+
+### Where arrivals come from (every `nextPopIdLocked_` site)
+
+Promotion door (`processAdvancementIntake.js:1071`); the migration wave and the GC "record catches up" (`checkForPromotions.js`); two GC spouse mints (`bondEngine.js:2591`, `:2800`); births (`generationalEventsEngine.js:1188`); the council challenger (`updateCivicApprovalRatings.js:1605`, the one mint that writes dials). Only the first reads either named tab. The wave, GC and spouse mints take what the GC row carries (BirthYear, hood, occupation, sex — drawn when that row was made).
+
+Writers onto Advancement_Intake1: GC emergence, family match, owner door (age and sex drawn), household door (from Intake), media usage (existing names), the citizen wake (existing names), `scripts/seedBusinessOwners.js` (authored). A hold only works where someone can complete the row: a story or authored row has an author; an engine-written row has none, so its blanks are fixed at its writer, not held.
+
+### Live 2026-11-21
+
+Intake: 11 rows, all carry a status. Advancement_Intake1: 164 data rows — 86 media-usage bumps of existing citizens, 77 blank, 1 shifted (G-EC70). No status column on Advancement_Intake1 (col 16 unnamed); the door clears every row it skips, and throws for the whole queue on a bad clock or an off-map hood. A held row must not be cleared, and its reason needs a write path (an intent or a §9 carve-out). The GC flip and the family slot on a held row are not yet read.
+
+### One mapping, replayed
+
+148 arrivals C105+ on the ledger copy (the Promoted / migration-wave / record-catches-up sentences). All started at 50 × 8; now, after up to 11 Cycles: means 49.9–51.5. Candidate start, from what the door has: life stage (under 25: openness +6, out-and-about +6, family −4; 25–44: drive +4; 45–64: composure +4, family +4; 65+: family +6, out-and-about −6, drive −6); work (MEDIA sociability +6, openness +4; CIVIC integrity +4, drive +4; GAME drive +6; an owner drive +8, composure +4; a first responder or clinician composure +6); household (arrived in one or wired into one: family +8, warmth +4; alone family −2); each dial ±5 seeded on the POPID; clamp 20–80. Replay (`scratchpad arrivalDialReplay.py`): 148 distinct starts of 148; drive 39–67, composure 45–64, family 41–59, the rest 45–61; 22–68 of 148 off 50 by five or more per dial. No existing citizen is re-seeded.
+
+### Sequencing
+
+engine.350 Task 15 pile 1 is on the tree unbenched (10 test files red) and touches `compressLifeHistory.js`. A 351 bench cut from this tree carries two unproven changes; 351 benches after pile 1 is proven, or on its own branch of the PROD tree.
 
 ## Tasks
 
@@ -850,3 +890,4 @@ agy, `output/antigravity/2026-11-16-review-dials-plan.md` (HOLD on the first cut
 - 2026-11-18 (research-build) — Builder on the middle: "make the middle count, i think you can code this better than the model that built it did 12 months ago, i think this and the logged items would be good for the next session?" Tasks 14 and 15 written; not started.
 - 2026-11-19 (research-build) — Task 14 built, reviewed twice by agy, benched (legs m and n) and LIVE: PROD stage 58 @193. The builder's word on the three fixed bars recorded (a fan at 60, climbing at 60, the office bars). §Task 14 as built.
 - 2026-11-21 (research-build) — Task 15 pile 1 built (uncommitted-then-committed, not benched, not reviewed): bond/arc, fame (by source; the pilot untouched), faith, Public, retired players' influence/wellness, Creation Day signed per line; the relationship cap starts at a drawn row; a down line of a gathering kind lowers the hood; TopTags tally kinds. Changes vs the cut list: "kept circling back to it" (arc:named) composure down, not plain; Sports/Team keep their pulse. Full suite: 10 files fail (citizenDialMultiCycle, citizensEventsFame.t3, compressLifeHistory.dial, contentLedgerCompose, dialMoves, engine304FamilyLottery, engine32MultiCycle, homeSocialLineSign, occupationDialTags, unlivedFold) — not yet read; tests need the builder's unlock (test-guard 2026-11-20). Tab row 276 needs `dial:sociability:up` before deploy or the Tribune fame line stops.
+- 2026-11-21 (research-build) — engine.351 picked up on the builder's word ("Proceed on engine.351"); Task 11 read written (§Task 11 read): what each blank becomes, every arrival path, one start-dial mapping replayed over 148 arrivals. Next: his two calls.

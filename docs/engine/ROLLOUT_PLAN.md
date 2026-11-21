@@ -84,12 +84,12 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | infrastructure.19 | Oakland week flight made lifelike (builder 11-14). v41: names first, homes on a block, team news at team buildings. Next: his look; joined street unbuilt | in-progress | research-build | [[../../world-view/README]] |
 | engine.350 | Lines move a dial by what they say: LIVE stage 57 @192. Task 15 pile 1 built, 10 tests red, unbenched. Read C117 Sun 2026-11-22 | in-progress | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
 | pipeline.114 | Flagged piece back to its writer: built, reverted 11-20 before live — the gate calls a real page quote fabricated. Next: the gate reads the citizen's page | in-progress | research-build | [[../plans/2026-11-20-flagged-piece-back-to-its-writer]] |
+| engine.351 | Intake complete or it waits; arrivals' dials start from their data (builder 11-16). Read 11-21 (plan §Task 11 read); next: his calls on fields and start dials | in-progress | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
 
 ## 4. Queue — ruled, not started (ready)
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| engine.351 | Intake complete or it waits (builder 11-16): a row missing what the ledger needs is not minted; arrivals' dials start from their data | ready | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
 | engine.352 | Authored citizens' sheet rows and June essence entries read against what he wrote of them (builder 11-17): 43. Read first; each row changes on his word | ready | research-build | `output/production_log_run_cycle_c116_gaps.md` G-EC56 |
 | engine.348 | Workers' records the engine does not yet produce (builder 11-16), e.g. the fire chief's one record. Own session after the worker template | ready | engine-sheet | [[../research/2026-11-15-worker-records-all-tabs]] |
 | civic.50 | Council seats act beyond initiatives (builder 11-14): every move they hold works through one, canvass sets nothing. Design is the builder's; plan at pickup | ready | engine-sheet | [[../reference/AGENT_BOOT_TEMPLATES]] §2 The gap |

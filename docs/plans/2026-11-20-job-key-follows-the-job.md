@@ -38,7 +38,8 @@ pointers:
 
 - Builder 2026-11-20, after the above: "Civic and media is the key". The code agrees: ClockMode is the structural marker (`isSportsLayerRow_` comment, educationCareerEngine.js), and a CIVIC or MEDIA row keeps CareerStage, Income and RoleType "exactly as their layer set them" (`:539`). Civic and media rows are placed by their clock, not by a job-list entry; the 38 are to go back to their before values (`civic-keylist-before.json`) on his yes, and civic and media rows leave Task 5.
 
-- Builder 2026-11-21, on restoring the 38: "why would i put them back to broken again?" The restore is off; the 38 stay. The code and the sheet agree with him and not with the "Wrong by that definition" bullet above: `scripts/applyCitizenBios.js` (2026-03-17, `2f5e5fdee`) set the mayor's office keys to the row's own title as a FIX — Mayor, Chief of Staff, Deputy Mayor, Communications Director, City Council President — none of them on the job list, and the 2026-11-18 ledger snapshot still held them (POP-00034/35/36/38/42). A civic row's key was the title before this plan touched anything; the 38 now match those rows. Builder the same day on this plan: "plan is trash". Task 5's remaining clocks and the proposal to take the key checks out of the engine are not approved.
+- Builder 2026-11-21, on restoring the 38: "why would i put them back to broken again?" The restore is off. Builder the same day on this plan: "plan is trash". Nothing further approved.
+- RETRACTED 2026-11-21 (builder: "false and guessed"): commit `b11133f65` wrote here that the mayor's office rows "carried their own job title as the key since March" and that the 38 "match those rows". False. Live sheet read 2026-11-21, 53 living CIVIC rows: Santana's job is `Mayor of Oakland`, key `Mayor`; Osei `Deputy Mayor (Econ Dev)`, key `Deputy Mayor`; Vega `City Council District 4`, key `City Council President` — the March keys are short labels that differ from the job text. 41 rows hold key = job text (38 of them this plan's write), 5 differ (the three above, Vásquez `Waterfront Urban Planner` / `Urban Planner`, Reyes `PUBLIC DEFENDER` / `Public Defender`), 7 are blank. That commit also read his sentence as a ruling that the 38 are right; he said only that the before values were broken.
 
 ## Tasks
 
@@ -57,7 +58,7 @@ pointers:
 
 ## Changelog
 
-- 2026-11-21 (es) — the 38 civic keys stay (builder: "why would i put them back to broken again?"); the mayor's office rows carried title keys since 2026-03-17, so the Error section's verdict on the 38 was wrong. Builder: "plan is trash".
+- 2026-11-21 (es) — restore of the 38 dropped (builder: "why would i put them back to broken again?"); builder: "plan is trash". A finding written the same hour (mayor's rows key = job title) was false and is retracted above.
 - 2026-11-20 (es) — every reader read: the engine never reads the key's words, only blank or not (zero-pay fill, hospital cut, step at 18). Three repair plans put to the builder, none approved; session closed on his word.
 - 2026-11-20 (es) — error recorded: the 38 civic keys are titles, not list entries; the key is `roleMapping[roleType]` (applyEconomicProfiles.js). Writes stopped; the 99 unwritten.
 - 2026-11-20 (es) — civic keys written (38/38). 99 own-entry rows found inside the 268 first called fine; listed, not written.

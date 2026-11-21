@@ -82,7 +82,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | pipeline.89 | Every journalist picks (builder 10-25: "All journalists should pick, they are AI"): every wake package gets the live tools the 3 tool seats have, the slice is a tip sheet not the assignment, Rhea is off every path; Ines first, same cut on all 28. First run 2026-10-28 | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 |
 | infrastructure.19 | Oakland week flight made lifelike (builder 11-14). v41: names first, homes on a block, team news at team buildings. Next: his look; joined street unbuilt | in-progress | research-build | [[../../world-view/README]] |
 | engine.350 | Lines move a dial by what they say: LIVE stage 57 @192, tab written 11-18. Next: the recorded items (plan Task 15). Read C117 Sun 2026-11-22 | in-progress | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
-| engine.354 | Job key: hire re-key LIVE stage 62; 132 keys set; 38 civic keys hold titles and stay (builder 11-21). He called the plan trash; nothing further approved | in-progress | engine-sheet | [[../plans/2026-11-20-job-key-follows-the-job]] |
+| engine.354 | Job key: hire re-key LIVE stage 62; 132 keys set; 38 civic keys hold job titles, restore refused (builder 11-21). He called the plan trash; nothing approved | in-progress | engine-sheet | [[../plans/2026-11-20-job-key-follows-the-job]] |
 | pipeline.114 | Flagged piece back to its writer: built, reverted 11-20 before live — the gate calls a real page quote fabricated. Next: the gate reads the citizen's page | in-progress | research-build | [[../plans/2026-11-20-flagged-piece-back-to-its-writer]] |
 
 ## 4. Queue — ruled, not started (ready)

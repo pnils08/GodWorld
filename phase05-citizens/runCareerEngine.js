@@ -1978,6 +1978,10 @@ function runCareerEngine_(ctx) {
             // named crew comes from the builder's mints; this only grows the headcount.
             if (newRole === 'Transit Operator Trainee' && bizId2 === 'BIZ-00014') newRole = 'Train Operator';
             hRow[iRoleM] = newRole;
+            // engine.354 (builder 2026-11-20: a key that names a job the citizen does not hold is broken): the key follows
+            // the job. A row that carries a profile key takes the new title's (catalogRoleKey_, the settlement's fallback:
+            // the title itself); a row with no key keeps none — the key's presence is the money engine's seeded switch.
+            if (iEconKey >= 0 && typeof catalogRoleKey_ === 'function' && safeStr(hRow[iEconKey]).trim() !== '') hRow[iEconKey] = catalogRoleKey_(newRole) || newRole;
             if (typeof setCurrentField_ === 'function') hRow[iTags] = setCurrentField_(hRow[iTags], cat);
             if (typeof jobReferencePay_ === 'function') { var np = jobReferencePay_(newRole, hRow[iTags], hRow[idx('CareerStage')], hRow[iPopID], (typeof payProfileFromRow_ === 'function') ? payProfileFromRow_(ctx.ledger.headers, hRow, bGrow >= 0 ? Number(bizData[br3][bGrow]) : null) : null); if (np !== null) hRow[iIncome] = np; }
             isCross = true; // the story is a field change whichever token matched
@@ -2044,6 +2048,8 @@ function runCareerEngine_(ctx) {
                 var cEduRank = Number(cMover.edu) || 0;
                 var cNewRole = SETTLE_ROLES_BY_FIELD[cat][cEduRank >= 4 ? 'rich' : cEduRank >= 1 ? 'solid' : 'rough'];
                 cRow[iRoleM] = cNewRole;
+                // engine.354: the key follows the job, same as the unemployed hire path above.
+                if (iEconKey >= 0 && typeof catalogRoleKey_ === 'function' && safeStr(cRow[iEconKey]).trim() !== '') cRow[iEconKey] = catalogRoleKey_(cNewRole) || cNewRole;
                 if (typeof setCurrentField_ === 'function') cRow[iTags] = setCurrentField_(cRow[iTags], cat);
                 if (typeof jobReferencePay_ === 'function') {
                   var cNp = jobReferencePay_(cNewRole, cRow[iTags], cRow[idx('CareerStage')], cRow[iPopID],

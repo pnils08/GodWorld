@@ -2003,21 +2003,22 @@ function noteBondConnectionShift_(ctx, bond, tag, cycle) {
   if (!ctx._bondDialIndex) ctx._bondDialIndex = buildBondLedgerIndex_(ctx) || {};
   var lined = S.bondDialLined || (S.bondDialLined = {});
   var counts = S.bondDialCounts || (S.bondDialCounts = {});
-  var a = ctx._bondDialIndex[normalizeBondCitizenId_(ctx, bond.citizenA)];
-  var b = ctx._bondDialIndex[normalizeBondCitizenId_(ctx, bond.citizenB)];
+  var aId = normalizeBondCitizenId_(ctx, bond.citizenA), bId = normalizeBondCitizenId_(ctx, bond.citizenB);
+  var a = ctx._bondDialIndex[aId];
+  var b = ctx._bondDialIndex[bId];
   if (!a || !b) return;
-  var pair = [[a, b], [b, a]];
+  var pair = [[a, b, bId], [b, a, aId]];
   for (var i = 0; i < 2; i++) {
-    var me = pair[i][0], other = pair[i][1];
+    var me = pair[i][0], other = pair[i][1], otherId = pair[i][2];
     var key = me.idx + '|' + tag;
     counts[tag] = (counts[tag] || 0) + 1;
     if (lined[key]) continue;
     lined[key] = true;
-    appendBondLifeLine_(ctx, me.idx, tag, BOND_SHIFT_TEXT[tag](other.name || 'them'), cycle);
+    appendBondLifeLine_(ctx, me.idx, tag, BOND_SHIFT_TEXT[tag](other.name || 'them'), cycle, otherId);
   }
 }
 
-function appendBondLifeLine_(ctx, ledgerIdx, tag, text, cycle) {
+function appendBondLifeLine_(ctx, ledgerIdx, tag, text, cycle, withPop) {
   // ctx.ledger mutation (Phase 42 §5.6) — the citizen REMEMBERS the event;
   // wakes and interviews read LifeHistory, so this is what makes a bond real.
   var header = ctx.ledger.headers;
@@ -2028,6 +2029,24 @@ function appendBondLifeLine_(ctx, ledgerIdx, tag, text, cycle) {
   var line = bondInWorldStamp_(cycle) + ' — [' + tag + '] ' + text;
   row[iLife] = (row[iLife] ? row[iLife] + '\n' : '') + line;
   ctx.ledger.dirty = true;
+  // engine.356 (builder 2026-11-21: "this bond system still isn't wired into the sim"): the same line goes
+  // on LifeHistory_Log. Until now every bond line — lost touch, picked things back up, had it out, more
+  // than friends, a wedding, a congregation joined or left — lived only in the citizen's own cell, so the
+  // week the dump, the desks and the city view read held none of them (C115–C116 log rows with a bond tag:
+  // 0, against 31 people with one in their cell at C116). One row, the engine's own tag and words; the
+  // other person rides as contactPopId (the generator's tag) when the caller knows them. Dials are folded
+  // from the cell, not the log, so nothing is counted twice. Phase5-Bonds runs before the executor.
+  if (typeof queueAppendIntent_ === 'function') {
+    var iPop = header.indexOf('POPID'), iFirst = header.indexOf('First'), iLast = header.indexOf('Last'),
+        iHood = header.indexOf('Neighborhood');
+    var who = iPop >= 0 ? String(row[iPop] || '') : '';
+    if (who) {
+      var nm = (((iFirst >= 0 ? row[iFirst] : '') || '') + ' ' + ((iLast >= 0 ? row[iLast] : '') || '')).trim();
+      var logTag = tag + '|source:bond' + (withPop ? '|contactPopId:' + withPop : '');
+      queueAppendIntent_(ctx, 'LifeHistory_Log', [ctx.now, who, nm, logTag, text,
+        iHood >= 0 ? (row[iHood] || '') : '', cycle], 'engine.356 bond line', 'citizens', 60);
+    }
+  }
 }
 
 // engine.59 (S320): TraitProfile parse — Mike's dials reaching bond physics.

@@ -1371,7 +1371,8 @@
   Reads: S.bondDialCounts, S.bondDialLined
   Writes: S.bondDialCounts, S.bondDialLined
 
-- **appendBondLifeLine_(ctx, ledgerIdx, tag, text, cycle)**
+- **appendBondLifeLine_(ctx, ledgerIdx, tag, text, cycle, withPop)**
+  Sheets: LifeHistory_Log
 
 - **bondTraitOf_(ctx, popId, trait)**
 

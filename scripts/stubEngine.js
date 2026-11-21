@@ -149,7 +149,7 @@ function analyzeFunction(fn) {
   while ((m = shGetRe.exec(body)) !== null) sheetsRead.add(m[1]);
 
   const intentRe =
-    /queue(?:Cell|Append|Range)Intent_\s*\(\s*ctx\s*,\s*['"]([A-Za-z_][A-Za-z0-9_]*)['"]/g;
+    /queue(?:Cell|Append|Range|BatchAppend)Intent_\s*\(\s*ctx\s*,\s*['"]([A-Za-z_][A-Za-z0-9_]*)['"]/g;
   while ((m = intentRe.exec(body)) !== null) {
     sheetsWrite.add(m[1]);
     sheetsRead.add(m[1]); // intents imply knowledge of the sheet
@@ -174,7 +174,7 @@ function analyzeFunction(fn) {
   ]);
   const hasWriteApi =
     /\.(?:setValues|setValue|appendRow)\s*\(/.test(body) ||
-    /queue(?:Cell|Append|Range)Intent_/.test(body) ||
+    /queue(?:Cell|Append|Range|BatchAppend)Intent_/.test(body) ||
     /ctx\.ledger\.dirty\s*=\s*true/.test(body);
   let sm;
   while ((sm = sheetNameRe.exec(body)) !== null) {
@@ -182,7 +182,7 @@ function analyzeFunction(fn) {
     if (!knownSheetHints.has(name)) continue;
     sheetsRead.add(name);
     if (hasWriteApi && (
-      /queue(?:Cell|Append|Range)Intent_/.test(body) ||
+      /queue(?:Cell|Append|Range|BatchAppend)Intent_/.test(body) ||
       new RegExp(
         `getSheetByName\\(\\s*['"]${name}['"]\\s*\\)[\\s\\S]{0,400}?\\.(?:setValues|setValue|appendRow)`,
       ).test(body) ||

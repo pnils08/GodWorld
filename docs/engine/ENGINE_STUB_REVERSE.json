@@ -1,8 +1,8 @@
 {
   "generated": "2026-11-21",
   "generator": "scripts/stubEngine.js",
-  "filesScanned": 181,
-  "functionsMapped": 1810,
+  "filesScanned": 180,
+  "functionsMapped": 1772,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -4815,9 +4815,12 @@
         "phase01-config/godWorldEngine2.js::processIntake_",
         "phase04-events/chaosCarsEngine.js::writeCitizenEvent_",
         "phase04-events/generateGameModeMicroEvents.js::generateGameModeMicroEvents_",
+        "phase04-events/generateGenericCitizenMicroEvent.js::generateGenericCitizenMicroEvents_",
         "phase04-events/generationalEventsEngine.js::applyMilestone_",
         "phase05-citizens/educationCareerEngine.js::stampPromotion_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
+        "phase05-citizens/generateCivicModeEvents.js::generateCivicModeEvents_",
+        "phase05-citizens/generateMediaModeEvents.js::generateMediaModeEvents_",
         "phase05-citizens/generationalWealthEngine.js::applyOwnerDraw_",
         "phase05-citizens/householdFormationEngine.js::applyFundDisbursementBody_",
         "phase05-citizens/judicialLifecycle.js::judicialSettleFine_",
@@ -4874,7 +4877,6 @@
         "phase07-evening-media/buildContractSeeds.js::contractSeedCycleEvents_",
         "phase07-evening-media/mediaRoomIntake.js::processQuotedCitizens_",
         "phase07-evening-media/parseMediaRoomMarkdown.js::parseContinuityNotes_",
-        "phase10-persistence/compileHandoff.js::loadRecentQuotes_",
         "phase10-persistence/persistenceExecutor.js::executeSheetIntents_",
         "utilities/archiveLifeHistory.js::maintainLifeHistoryLog_",
         "utilities/archiveLifeHistory.js::runArchive_",
@@ -4966,7 +4968,6 @@
         "phase05-citizens/householdFormationEngine.js::applyFundDisbursementBody_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
         "phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_",
-        "phase10-persistence/compileHandoff.js::loadInitiatives_",
         "utilities/cycleRollback.js::previewRollbackToCycle78",
         "utilities/cycleRollback.js::revertInitiativeVotes_",
         "utilities/cycleRollback.js::rollbackToCycle78",
@@ -5035,7 +5036,9 @@
       ]
     },
     "WorldEvents_V3_Ledger": {
-      "writers": [],
+      "writers": [
+        "phase10-persistence/recordWorldEventsv3.js::recordWorldEventsv3_"
+      ],
       "readers": [
         "phase02-world-state/updateTransitMetrics.js::loadPreviousCycleEvents_",
         "phase10-persistence/recordWorldEventsv3.js::recordWorldEventsv3_",
@@ -5142,7 +5145,9 @@
       ]
     },
     "WorldEvents_Ledger": {
-      "writers": [],
+      "writers": [
+        "phase10-persistence/recordWorldEventsv25.js::recordWorldEvents25_"
+      ],
       "readers": [
         "phase04-events/worldEventsEngine.js::worldEventsEngine_",
         "phase10-persistence/recordWorldEventsv25.js::ensureWorldEventsLedger_",
@@ -5232,7 +5237,8 @@
       "writers": [
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
         "phase07-evening-media/culturalLedger.js::flushCulturalFame_",
-        "phase07-evening-media/culturalLedger.js::registerCulturalEntity_"
+        "phase07-evening-media/culturalLedger.js::registerCulturalEntity_",
+        "phase10-persistence/recordMediaLedger.js::recordMediaLedger_"
       ],
       "readers": [
         "phase05-citizens/citizenContextBuilder.js::diagnoseLedgerStructure",
@@ -5292,7 +5298,9 @@
       ]
     },
     "Story_Seed_Deck": {
-      "writers": [],
+      "writers": [
+        "phase10-persistence/saveV3Seeds.js::saveV3Seeds_"
+      ],
       "readers": [
         "phase07-evening-media/buildContractSeeds.js::contractSeedUsageTally_",
         "phase10-persistence/saveV3Seeds.js::migrateSeedDeckV4_",
@@ -5316,7 +5324,9 @@
       ]
     },
     "Media_Ledger": {
-      "writers": [],
+      "writers": [
+        "phase10-persistence/recordMediaLedger.js::recordMediaLedger_"
+      ],
       "readers": [
         "phase07-evening-media/mediaRoomIntake.js::upgradeMediaLedgerWithCalendar_",
         "phase10-persistence/recordMediaLedger.js::recordMediaLedger_"
@@ -5340,11 +5350,21 @@
       ]
     },
     "Story_Hook_Deck": {
-      "writers": [],
+      "writers": [
+        "phase08-v3-chicago/v3StoryHookWriter.js::saveV3Hooks_"
+      ],
       "readers": [
         "phase08-v3-chicago/v3StoryHookWriter.js::saveV3Hooks_",
         "utilities/cycleRollback.js::previewRollbackToCycle78",
         "utilities/cycleRollback.js::rollbackToCycle78"
+      ]
+    },
+    "Texture_Trigger_Log": {
+      "writers": [
+        "phase08-v3-chicago/v3TextureWriter.js::saveV3Textures_"
+      ],
+      "readers": [
+        "phase08-v3-chicago/v3TextureWriter.js::saveV3Textures_"
       ]
     },
     "Election_Log": {
@@ -5431,18 +5451,22 @@
     },
     "Faith_Ledger": {
       "writers": [
+        "utilities/ensureFaithLedger.js::batchRecordFaithEvents_",
         "utilities/ensureFaithLedger.js::recordFaithEvent_"
       ],
       "readers": [
+        "utilities/ensureFaithLedger.js::batchRecordFaithEvents_",
         "utilities/ensureFaithLedger.js::getRecentFaithEvents_",
         "utilities/ensureFaithLedger.js::recordFaithEvent_"
       ]
     },
     "Transit_Metrics": {
       "writers": [
+        "utilities/ensureTransitMetrics.js::batchRecordTransitMetrics_",
         "utilities/ensureTransitMetrics.js::recordTransitMetrics_"
       ],
       "readers": [
+        "utilities/ensureTransitMetrics.js::batchRecordTransitMetrics_",
         "utilities/ensureTransitMetrics.js::getTransitMetrics_",
         "utilities/ensureTransitMetrics.js::recordTransitMetrics_"
       ]

@@ -43,11 +43,13 @@ const SCHEMAS = {
     totalPositions: 29  // writer outputs 29 values but only 7 are active
   },
   'Story_Seed_Deck': {
+    // engine.341 (2026-11-21): the v4.2 deck (saveV3Seeds.js SEED_DECK_HEADERS); was the v3.4 header.
     file: 'saveV3Seeds.js',
-    version: 'v3.4',
+    version: 'v4.2',
     writerCols: [
-      'Timestamp','Cycle','SeedID','SeedType','Domain','Neighborhood',
-      'Priority','SeedText'
+      'Cycle','SeedID','Desk','Class','Domain','Neighborhood',
+      'What','Why','Citizens','CitizenEvents','Businesses','OtherEntities',
+      'Magnitude','Trend','CycleStamp','SuggestedJournalist','SuggestedAngle','MatchConfidence'
     ]
   },
   'Story_Hook_Deck': {
@@ -124,6 +126,8 @@ const SCHEMAS = {
     version: 'v3.7',
     writerCols: ['Timestamp','Cycle','PacketText']
   },
+  // engine.341 (2026-11-21): compileHandoff.js retired and the tab is not on live (reads NOT_FOUND);
+  // the key stays because the header-audit contract test asserts it.
   'Handoff_Output': {
     file: 'compileHandoff.js',
     version: 'v1.0',

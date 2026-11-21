@@ -3547,6 +3547,7 @@
 - **saveV3Textures_(ctx)**
   Reads: S.cycleId, S.textureTriggers
   Config: ctx.config.cycleCount
+  Sheets: Texture_Trigger_Log
 
 ### v3preLoader.js
 - **v3PreloadContext_(ctx)**
@@ -3676,85 +3677,6 @@
 
 ### commitSimulationLedger.js
 - **commitSimulationLedger_(ctx)**
-
-### compileHandoff.js
-- **compileHandoffFromMenu()**
-
-- **compileHandoff(cycleNumber)**
-
-- **loadHandoffData_(cache, cycle)**
-
-- **loadMediaBriefingRow_(cache, cycle)**
-
-- **loadCyclePacketText_(cache, cycle)**
-
-- **loadWorldEvents_(cache, cycle)**
-
-- **loadStorySeeds_(cache, cycle)**
-
-- **loadCivicOfficers_(cache)**
-
-- **extractCouncilMembers_(officers)**
-
-- **loadInitiatives_(cache)**
-  Sheets: Initiative_Tracker
-
-- **loadPlayerRosters_(cache)**
-
-- **loadRecentQuotes_(cache, cycle)**
-  Sheets: LifeHistory_Log
-
-- **loadCulturalEntities_(cache)**
-
-- **buildHandoffHeader_(cycle)**
-
-- **buildSectionWrapper_(num, title, builderFn, data, extra)**
-
-- **buildSection01_EditorialHeader_(data, cycle)**
-
-- **buildSection02_FrontPage_(data)**
-
-- **buildSection03_CivicStatus_(data)**
-
-- **buildSection04_Storylines_(data)**
-
-- **buildSection06_WorldEvents_(data)**
-
-- **buildSection07_StorySeeds_(data)**
-
-- **buildSection08_ArcStatus_(data)**
-
-- **buildSection09_Calendar_(data)**
-
-- **buildSection10_Cultural_(data)**
-
-- **buildSection11_Continuity_(data)**
-
-- **buildSection12_SectionAssignments_(data)**
-
-- **buildSection13_ReturnsExpected_()**
-
-- **buildSection14_CanonReference_(data)**
-
-- **extractBriefingSection_(text, sectionNum)**
-
-- **extractPacketSection_(text, sectionName)**
-
-- **parsePacketField_(text, fieldName)**
-
-- **extractHandoffCitizenNames_(data)**
-
-- **loadSportsFeeds_(cache, cycle)**
-
-- **loadSingleSportsFeed_(cache, sheetName, cycle)**
-
-- **buildSection15_SportsFeeds_(data)**
-
-- **formatSportsFeedEntry_(entry)**
-
-- **writeHandoffSheet_(ss, cycle, handoffText)**
-
-- **exportHandoffToDrive_(cycle, handoffText)**
 
 ### cycleCheckpoint.js
 - **ckIsDate_(v)**
@@ -4495,6 +4417,7 @@
 
 - **batchRecordFaithEvents_(ctx, events)**
   Reads: S.absoluteCycle
+  Sheets: Faith_Ledger
 
 - **getHolyDayForTradition_(tradition, month)**
 
@@ -4563,6 +4486,7 @@
 
 - **batchRecordTransitMetrics_(ctx, metricsArray)**
   Reads: S.absoluteCycle
+  Sheets: Transit_Metrics
 
 - **calculateRidershipModifier_(context)**
 
@@ -4965,5 +4889,5 @@ _No top-level function declarations found (helper/constants file)._
 
 ---
 
-**Files scanned:** 181
-**Functions mapped:** 1810
+**Files scanned:** 180
+**Functions mapped:** 1772

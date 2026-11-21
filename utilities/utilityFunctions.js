@@ -61,7 +61,7 @@ function shortId_() {
   return Utilities.getUuid().slice(0, 8).toUpperCase();
 }
 
-// Setup-only creator: menu/operator paths (writeHandoffSheet_) may create a tab.
+// Setup-only creator: menu/operator paths may create a tab.
 // Nothing on the cycle path calls this any more — see requireTab_ (engine.119).
 function ensureSheet_(ss, name, headers) {
   var sheet = ss.getSheetByName(name);

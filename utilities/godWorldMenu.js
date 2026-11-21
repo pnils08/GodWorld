@@ -48,7 +48,6 @@ function onOpen() {
       .addItem('Update All Running Mirrors', 'updateAllMirrors')
       .addItem('Full Export + Mirror Update', 'fullExportAndMirror')
       .addSeparator()
-      .addItem('Compile Handoff', 'compileHandoffFromMenu')
       .addItem('Open Export Folder', 'openExportFolder')
       .addItem('Show Config', 'showConfig'))
 

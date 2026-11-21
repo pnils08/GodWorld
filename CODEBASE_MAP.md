@@ -46,7 +46,7 @@ A local Node.js toolchain (clasp push) synchronises `.js` source files to the bo
 
 ### Core Architectural Rules (as of engine v3.5)
 
-- **No wall-clock in sim-facing writes.** `new Date()` is only valid for: `World_Config LastRun`, `Engine_Errors`, `Domain_Tracker` backup naming, `MediaRoom_Paste` last-parsed, and `compileHandoff` perf timing. All sim-facing Timestamp columns now stamp `inWorldStamp_(ctx)` or `'C'+cycle`. This is the subject of **engine.44** (S290 sprint).
+- **No wall-clock in sim-facing writes.** `new Date()` is only valid for: `World_Config LastRun`, `Engine_Errors`, `Domain_Tracker` backup naming, and `MediaRoom_Paste` last-parsed. All sim-facing Timestamp columns now stamp `inWorldStamp_(ctx)` or `'C'+cycle`. This is the subject of **engine.44** (S290 sprint).
 - **Aim-guard active (S289).** `openSimSpreadsheet_()` blocks cross-target writes from unaimed copies.
 - **Event_Content_Ledger (S289).** Author-controlled per-citizen event fragments injected via pool composition.
 - **Simulation seam (Phase 42).** Phases read/write `ctx.ledger` rather than `Simulation_Ledger` directly.
@@ -240,7 +240,6 @@ The largest and most complex phase; simulates individual citizen lifecycles each
 |---|---|
 | `buildCyclePacket.js` (~44 KB) | Assembles the full cycle packet for archival |
 | `commitSimulationLedger.js` | Commits the ledger row for the cycle |
-| `compileHandoff.js` (~61 KB) | Compiles the handoff doc for next session. Performance timers retain `new Date()` (allowed — operational-only). |
 | `cycleExportAutomation.js` (~18 KB) | Automates cycle export to Drive folders |
 | `persistenceExecutor.js` (~17 KB) | Executes all persistence writes in sequence |
 | `recordCycleWeather.js` | Records weather data to weather ledger |
@@ -367,7 +366,6 @@ The largest and most complex phase; simulates individual citizen lifecycles each
 | `enrichCitizenProfiles.js` (~17 KB) | Enriches citizen profiles via LLM |
 | `citizenLifePoC.js` (~16 KB) | Citizen life proof-of-concept script |
 | `citizen-wake.js` (~34 KB) | Citizen "wake" event generation |
-| `citizen-signal-detector.js` (~15 KB) | Detects citizen signal events |
 
 ### 4.5 Edition / Intake Pipeline
 
@@ -618,7 +616,7 @@ General-purpose utility scripts, distinct from `scripts/` (these run inside GAS 
 | `ChaosCars` | ChaosCars event state |
 | `Cultural_Ledger` | Cultural institution event log |
 | `Domain_Tracker` | Per-domain event tracker |
-| `Media_Briefing` | Media room briefing (read by `compileHandoff` + export; no live sim consumers) — **⚠️ legacy-reader-only (engine.44 Class 2 audit)** |
+| `Media_Briefing` | Media room briefing (read by the export list only since `compileHandoff` retired, engine.341; no live sim consumers) — **⚠️ legacy-reader-only (engine.44 Class 2 audit)** |
 | `Economic_Parameters` | Economic parameter table — **⚠️ zero code references found (engine.44 Class 2 audit: orphan candidate)** |
 | `Youth_Events` | Youth event log — **⚠️ write-only; read helpers uncalled (engine.44 Class 2 audit: orphan candidate)** |
 | `Event_Content_Ledger` | **(S289 + engine.49)** Sheet-resident pool lines + fragments; fail-closed conditions DSL. 9 cols: Kind, PoolKey, Slot, Text, Weight, Conditions, Tags, Grain, Active. Read Phase 2 → S.contentLedger; written HAND + draftContentRows.js (`auth:auto`) |
@@ -778,7 +776,6 @@ The sim has **no wall time.** Everything attaches to a cycle. The canonical rule
 | `Engine_Errors` timestamps | Citizen birthYear computed from real year |
 | `Domain_Tracker` backup naming | Academic-year cohort naming from real year |
 | `MediaRoom_Paste` "Last parsed" | Any `new Date()` in a writer function |
-| `compileHandoff` perf timers | |
 
 **Backfill status (S290):** 17,928 historical Gregorian Timestamp cells across 21 columns have been identified for backfill to cycle stamps. Backfill runs after C101 live smoke — one unverified change in-flight at a time (S250 protocol).
 
@@ -857,7 +854,7 @@ These tabs were identified by a full-repo grep + read/write classification durin
 |---|---|
 | `Economic_Parameters` | Zero code references found — **orphan candidate** |
 | `Youth_Events` | Write-only; all read helpers uncalled — **orphan candidate** |
-| `Media_Briefing` | Only `compileHandoff` menu tool + export list reads it (no live sim consumers) — **legacy-reader-only** |
+| `Media_Briefing` | Only the export list reads it (`compileHandoff` retired, engine.341) (no live sim consumers) — **legacy-reader-only** |
 
 ### 🔴 Risks & Safety Notes
 
@@ -920,7 +917,7 @@ All 9 commits are part of **sprint S290 [engine-sheet]**, focused on **engine.44
   - `parseMediaRoomMarkdown.js` — stamps `C+cycle`.
   - `culturalLedger.js`, `recordWorldEventsv3.js`, `storylineWeavingEngine.js` — all confirmed updated.
 - **Class 2 audit (10 tabs reader-classified):** Identified 2 orphans (`Economic_Parameters`, `Youth_Events`), 1 legacy-reader-only (`Media_Briefing`), 7 live with real consumers. No retirements executed — Class 4 measure-twice gate still applies.
-- **Deliberate leaves (operational wall clocks):** `World_Config LastRun`, `Engine_Errors`, `Domain_Tracker` backup naming, `MediaRoom_Paste` "Last parsed", `compileHandoff` perf timing.
+- **Deliberate leaves (operational wall clocks):** `World_Config LastRun`, `Engine_Errors`, `Domain_Tracker` backup naming, `MediaRoom_Paste` "Last parsed".
 
 **Key files significantly modified in this sprint:**
 

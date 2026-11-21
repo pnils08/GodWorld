@@ -313,6 +313,29 @@ async function pageNights(io) {
   return { wrote, left, pending: held };
 }
 
+// The game's own guide for AI captains (https://spacemolt.com/skill.md, the page the
+// game points every agent to) becomes the pilot's game guide — the client's prompt.md,
+// which it loads as the system prompt. Refreshed before each flight so the pilot flies
+// on the galaxy's current rules; a failed or odd fetch keeps the last good copy.
+const GAME_GUIDE_URL = 'https://spacemolt.com/skill.md';
+const GAME_GUIDE_PATH = path.join(ROOT, 'output', 'kimi', 'spacemolt-phase0', 'commander', 'prompt.md');
+async function refreshGameGuide() {
+  try {
+    const res = await fetch(GAME_GUIDE_URL, { redirect: 'follow', signal: AbortSignal.timeout(30000) });
+    const text = res.ok ? await res.text() : '';
+    if (!res.ok || text.length < 50000 || !/^# SpaceMolt/.test(text)) {
+      log('game guide: fetch gave http ' + res.status + ', ' + text.length + ' chars — keeping the last copy');
+      return false;
+    }
+    fs.writeFileSync(GAME_GUIDE_PATH, text);
+    log('game guide: ' + text.length + ' chars from ' + GAME_GUIDE_URL);
+    return true;
+  } catch (e) {
+    log('game guide: fetch failed (' + (e && e.message || e) + ') — keeping the last copy');
+    return false;
+  }
+}
+
 async function main() {
   const argv = process.argv.slice(2);
   const minutes = windowMinutes(argv);
@@ -352,6 +375,8 @@ async function main() {
   } catch (e) {
     log('points settle failed (tonight flies anyway): ' + (e && e.message || e));
   }
+
+  await refreshGameGuide();
 
   const { pilot, session, missionFile } = resolvePilot(roster, cycle);
   log('pilot ' + pilot.name + ' (' + pilot.popid + ')' +

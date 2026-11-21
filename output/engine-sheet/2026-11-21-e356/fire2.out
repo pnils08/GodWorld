@@ -2,7 +2,7 @@
 {
  "label": "e356-f2",
  "expect": 117,
- "at": "2026-11-21T22:50:04.753Z",
+ "at": "2026-11-21T23:18:04.479Z",
  "pre": {
   "bench": 117,
   "live": 116,
@@ -10,12 +10,12 @@
   "rileyLast": 117,
   "checkpoint": null
  },
- "wallS": 176,
+ "wallS": 220,
  "http": 200,
  "resp": {
   "ok": true,
   "state": "done",
-  "ranMs": 172101,
+  "ranMs": 216383,
   "persistErrors": []
  },
  "post": {

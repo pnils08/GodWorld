@@ -320,8 +320,18 @@ async function fileNextChapter(c, cycle, question, parsed, dry) {
   if (dry) { say(`[dry-run] ${c.popId} would file ${parsed.move.role} / ${nextChapter.POOL[parsed.move.role].clock} / ${where}; row ${JSON.stringify(row.filter(Boolean))}; nothing written`); return { status: 'dry' }; }
   // the `queued` line lands BEFORE the row (R2): a row that lands is always recorded; a line that did not land files no row
   if (!ledger(Object.assign({ status: 'queued' }, entry))) { say(`${c.popId}: the move ledger did not take the queued line — no row filed, the question stays owed`); return NOT_RECORDED; }
+  // engine.338: the row is written at column A of the first row past the data, not by the Sheets append call — the
+  // append call finds its own "table" and on 2026-11-17 put Wilson Shepard's row nine columns right (name cells blank;
+  // the engine skips a nameless row and never clears it). The target row is re-read empty before the write and the
+  // row is read back after it.
   try {
-    await sheets.appendRows('Advancement_Intake1', [row]);
+    const now = await sheets.getSheetData('Advancement_Intake1');
+    const at = now.length + 1; // values.get stops at the last row holding a value
+    await sheets.updateRangeByPosition('Advancement_Intake1', at, 0, [row]); // 0-based column: A
+    const back = (await sheets.getSheetData('Advancement_Intake1'))[at - 1] || [];
+    if (!row.every((v, i) => String(v) === String(back[i] === undefined ? '' : back[i]))) {
+      throw new Error('read-back of row ' + at + ' does not match what was written');
+    }
   } catch (e) {
     say(`${c.popId}: Advancement_Intake1 append failed (${e.message}) — held`);
     ledger(Object.assign({ status: 'held', reason: 'append-failed: ' + e.message }, entry)); // last line wins: held, not queued

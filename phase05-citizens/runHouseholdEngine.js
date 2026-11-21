@@ -137,7 +137,9 @@ var HOUSEHOLD_SIGN_LINES_ = {
     "enjoyed holiday meal with family", "shared a special dinner at home", "exchanged Valentine's greetings with household",
     "prepared breakfast in bed for mom", "celebrated mother's day at home", "celebrated dad with a home-cooked meal",
     "spent quality time with father at home", "reflected on household history and roots", "shared stories of how the household began",
-    "watched part of a game together at home", "helped the kids with homework at the kitchen table",
+    "watched part of a game together at home", "cooked dinner with their spouse and talked through the week",
+    "settled into a quiet evening on the couch with their partner", "split the weekend errands with their spouse",
+    "planned the month's budget together with their partner", "helped the kids with homework at the kitchen table",
     "wrangled the kids through the bedtime routine", "watched a movie with the kids piled on the couch", "packed school lunches for the morning rush",
     "the family kept vigil at the hospital"
   ],
@@ -259,6 +261,7 @@ function runHouseholdEngine_(ctx) {
   var iLastUpd = idx('LastUpdated');
   var iNeighborhood = idx('Neighborhood');
   var iDialState = idx('DialState'); // engine.32 T5 — Family dial -> home-event frequency
+  var iMarital = idx('MaritalStatus');     // engine.32 T4 — circumstance-gated family pools
   var iNumChildren = idx('NumChildren');   // engine.32 T4
   var iStatus = idx('Status');             // engine.52 C2 — hospital-strain circumstance pool
 
@@ -461,11 +464,18 @@ function runHouseholdEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // CIRCUMSTANCE POOLS (engine.32 T4) — gated per-citizen on NumChildren below
-  // (per-column outcome-space, EVENT_SYSTEM_MAP §4). Tag stays Household ->
-  // Family category. The married pool is gone (builder 2026-11-21: "Nothing is
-  // hard coded about marriage or divorce" — marriage comes from the bond engine).
+  // CIRCUMSTANCE POOLS (engine.32 T4) — gated per-citizen on MaritalStatus /
+  // NumChildren below, so a married parent finally draws a different home life
+  // than a single 25-year-old (per-column outcome-space, EVENT_SYSTEM_MAP §4).
+  // Tag stays Household -> Family category.
   // ═══════════════════════════════════════════════════════════════════════════
+  var partneredPool = [
+    "cooked dinner with their spouse and talked through the week",
+    "settled into a quiet evening on the couch with their partner",
+    "split the weekend errands with their spouse",
+    "planned the month's budget together with their partner"
+  ];
+
   var parentPool = [
     "helped the kids with homework at the kitchen table",
     "wrangled the kids through the bedtime routine",
@@ -654,8 +664,12 @@ function runHouseholdEngine_(ctx) {
     var np = hoodTexturePool_(ctx, neighborhood, HOUSEHOLD_TEXTURE_BY_CHARACTER_, HOUSEHOLD_TEXTURE_BESPOKE_, 'runHouseholdEngine_');
     for (var i = 0; i < np.length; i++) { citizenPool.push(np[i]); }
 
-    // engine.32 T4 — circumstance gate: parent lines only for citizens whose
-    // ledger row says so.
+    // engine.32 T4 — circumstance gates: partnered/parent lines only for
+    // citizens whose ledger row says so (lowercase enum per generational S248).
+    var marital = iMarital >= 0 ? (row[iMarital] || "").toString().toLowerCase() : "";
+    if (marital === "married") { // engine.302: partnered is not a status
+      for (var pi = 0; pi < partneredPool.length; pi++) { citizenPool.push(partneredPool[pi]); }
+    }
     var numKids = iNumChildren >= 0 ? Number(row[iNumChildren]) || 0 : 0;
     if (numKids > 0) {
       for (var ki = 0; ki < parentPool.length; ki++) { citizenPool.push(parentPool[ki]); }

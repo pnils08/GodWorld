@@ -100,6 +100,7 @@ const ROWS = [].concat(
     'Walked past a storefront that just closed in {hood}; a neighbor wanted to know what comes next for the block.',
     'A shop on the {hood} corridor shut its doors this week, and people stopped them to talk about it.',
     'Neighbors in {hood} were still talking about the business that closed down the street.',
+    'A regular in {hood} said the place that closed was where she met her husband, and asked what goes in next.',
     'The paper on the windows of the closed shop in {hood} was already peeling, and a neighbor pointed it out.',
     'Two merchants in {hood} said the closure next door makes their block look emptier than it is.',
     'A neighbor in {hood} asked whether the landlord of the closed shop has a plan, or just a sign.',
@@ -386,6 +387,7 @@ const ROWS = [].concat(
     'A {hood} barbershop went quiet when they walked in, then broke into applause.',
     'Neighbors on a {hood} block chipped in for a cake with their name on it, for no occasion at all.',
     'A {hood} little league team asked them to stand with the players for the team photo.',
+    'A couple in {hood} said they named them in their wedding speech, and showed the video.',
     'A line at the {hood} farmers\' stand turned into a small crowd of people wanting to say something kind.'
   ]),
   pool('civicRole.everyday.down.M', [
@@ -448,7 +450,8 @@ const ROWS = [].concat(
   pool('civicRole.mood.up.L', [
     'The whole of a {hood} block was out on the street this week, tables end to end, and they were pulled into the middle of it.',
     'A {hood} neighborhood festival filled the park and the stage called their name.',
-    'Neighbors in {hood} threw a surprise block celebration for no reason at all, and the whole street turned out.'
+    'Neighbors in {hood} threw a surprise block celebration for no reason at all, and the whole street turned out.',
+    'A {hood} block renewed its vows, as one neighbor put it, with a street-long dinner and a toast that named them.'
   ]),
   pool('civicRole.mood.down.L', [
     'A {hood} block meeting broke into open argument, and both sides turned on them before it ended.',

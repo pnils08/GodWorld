@@ -62,11 +62,14 @@
 
 var MILESTONE_TYPES = {
   GRADUATION: "graduation",
+  WEDDING: "wedding",
   BIRTH: "birth",
   PROMOTION: "promotion",
   CAREER_PIVOT: "career_pivot",
   RETIREMENT: "retirement",
   DEATH: "death",
+  ANNIVERSARY: "anniversary",
+  DIVORCE: "divorce",
   HEALTH_EVENT: "health_event",
   HOSPITALIZATION: "hospitalization",
   RECOVERY: "recovery"
@@ -82,6 +85,11 @@ var AGE_RANGES = {
 };
 
 var BIRTH_COPARENT_MIN_AGE = 21; // engine.339 (builder 2026-11-20): "no one under 21 can have a kid" — the spouse's floor
+
+var WEDDING_BOOST_HOLIDAYS = [
+  "Valentine",     // used elsewhere in your scripts
+  "NewYearsEve"
+];
 
 var STRESS_HOLIDAYS = ["Thanksgiving", "Holiday", "NewYearsEve"];
 
@@ -273,6 +281,7 @@ function runGenerationalEngine_(ctx) {
 
   var counts = {
     graduations: 0,
+    weddings: 0,
     births: 0,
     promotions: 0,
     retirements: 0,
@@ -550,7 +559,7 @@ function runGenerationalEngine_(ctx) {
     // The dice-wedding path is RETIRED — checkWedding_ married citizens to
     // nobody (0 romantic bonds ever existed to name a spouse). Weddings now
     // fire in bondEngine when a grown romance crosses MARRIAGE_THRESHOLD.
-    // checkWedding_ deleted (builder 2026-11-21: "Nothing is hard coded about marriage or divorce").
+    // checkWedding_ retained below for reference, no caller.
 
     // engine.339 (builder 2026-11-20): "no one over 40 would have a newborn , no one under 21 can have a kid" — a
     // spouse on the ledger outside 21..AGE_RANGES.BIRTH.max blocks the couple's birth (an off-camera spouse has no age)
@@ -933,6 +942,7 @@ function processHealthLifecycle_(ctx, popId, name, currentStatus, duration, age,
 function getSeasonalLimits_(cal) {
   var limits = {
     graduations: 2,
+    weddings: 1,
     births: 1,
     promotions: 2,
     retirements: 1,
@@ -941,6 +951,8 @@ function getSeasonalLimits_(cal) {
 
   if (cal.season === "spring" || cal.month === 5 || cal.month === 6) limits.graduations = 4;
 
+  if (cal.month === 6 || cal.season === "spring" || cal.season === "summer") limits.weddings = 2;
+  if (WEDDING_BOOST_HOLIDAYS.indexOf(cal.holiday) >= 0) limits.weddings = 2;
 
   if (cal.month === 9) limits.births = 2;
   if (cal.month === 12 || cal.month === 1) limits.retirements = 2;
@@ -1036,6 +1048,67 @@ function checkGraduation_(ctx, popId, age, lifeHistory, tier, cal) {
   ];
 
   return { type: MILESTONE_TYPES.GRADUATION, description: pick_(ctx, types), tag: "Graduation", season: cal.season };
+}
+
+// engine.57 P4 dials (Mike adjusts): household presence raises family odds
+var HOUSEHOLD_MARRIAGE_BOOST = 1.5;
+
+function checkWedding_(ctx, popId, age, lifeHistory, cal, hasHousehold) {
+  if (lifeHistory.indexOf("[Wedding]") >= 0 && lifeHistory.indexOf("[Divorce]") < 0) return null;
+  if (age < AGE_RANGES.WEDDING.min || age > AGE_RANGES.WEDDING.max) return null;
+
+  var c = 0.002;
+  if (hasHousehold) c *= HOUSEHOLD_MARRIAGE_BOOST; // engine.57 P4
+  if (age >= 28 && age <= 35) c = 0.004;
+  if (age > 40) c = 0.001;
+
+  if (cal.month === 6) c *= 3.0;
+  else if (cal.season === "spring" || cal.season === "summer") c *= 2.0;
+
+  if (cal.holiday === "Valentine") c *= 2.5;
+  if (cal.holiday === "NewYearsEve") c *= 1.5;
+
+  var bonds = getCitizenBondsFromStorage_(ctx, popId);
+  var romanticBond = null;
+  for (var i = 0; i < bonds.length; i++) {
+    if (bonds[i].bondType === "romantic") { romanticBond = bonds[i]; break; }
+  }
+  if (romanticBond) c += 0.01;
+
+  // engine.32 T5 — Family dial biases marriage odds (0.5..1.5; null -> base rate)
+  var dialBands = getCitizenDialBands_(ctx, popId);
+  if (dialBands) c *= dialBands.familyFreq;
+
+  if (!chance_(ctx, c)) return null;
+
+  var descriptions;
+  if (cal.month === 6) {
+    descriptions = [
+      "celebrated a beautiful summer wedding",
+      "tied the knot in a summer ceremony",
+      "married their sweetheart in a summer garden wedding"
+    ];
+  } else if (cal.season === "spring") {
+    descriptions = [
+      "celebrated their wedding amid spring blossoms",
+      "married in a beautiful spring ceremony",
+      "exchanged vows in a springtime celebration"
+    ];
+  } else {
+    descriptions = [
+      "celebrated their wedding with close friends and family",
+      "entered into a committed partnership",
+      "tied the knot in an intimate ceremony"
+    ];
+  }
+
+  return {
+    type: MILESTONE_TYPES.WEDDING,
+    description: pick_(ctx, descriptions),
+    tag: "Wedding",
+    spouseId: romanticBond ? (romanticBond.citizenA === popId ? romanticBond.citizenB : romanticBond.citizenA) : null,
+    season: cal.season
+  };
 }
 
 function checkBirth_(ctx, popId, age, lifeHistory, cal, hasHousehold, marital, hhType) {

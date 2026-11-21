@@ -125,13 +125,6 @@ const SCHEMAS = {
     file: 'buildCyclePacket.js',
     version: 'v3.7',
     writerCols: ['Timestamp','Cycle','PacketText']
-  },
-  // engine.341 (2026-11-21): compileHandoff.js retired and the tab is not on live (reads NOT_FOUND);
-  // the key stays because the header-audit contract test asserts it.
-  'Handoff_Output': {
-    file: 'compileHandoff.js',
-    version: 'v1.0',
-    writerCols: ['Timestamp','Cycle','HandoffText']
   }
 };
 

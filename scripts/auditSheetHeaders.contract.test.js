@@ -62,7 +62,7 @@ console.log('\nTest 3: SCHEMAS covers v3 writer-paired sheets');
     'Event_Arc_Ledger', 'WorldEvents_V3_Ledger', 'Story_Seed_Deck',
     'Story_Hook_Deck', 'Texture_Trigger_Log', 'Neighborhood_Map',
     'Domain_Tracker', 'Chicago_Feed', 'Cycle_Weather', 'Media_Ledger',
-    'Cycle_Packet', 'Handoff_Output'
+    'Cycle_Packet'
   ]) {
     assert(`SCHEMAS includes '${sheet}'`, source.includes(`'${sheet}'`));
   }
@@ -84,14 +84,22 @@ console.log('\nTest 5: WorldEvents_V3_Ledger totalPositions accounts for 29 cols
     /totalPositions:\s*29/.test(source));
 }
 
-console.log('\nTest 6: Story_Seed_Deck schema baseline (pre-Engine-A cols)');
+console.log('\nTest 6: Story_Seed_Deck schema = the v4.2 deck (saveV3Seeds.js SEED_DECK_HEADERS)');
 {
-  // This audit pins the baseline 8 cols. Engine A added PriorityScore /
-  // ConsequenceFloor / etc. but those are validated by validatePriorityEngine.
-  for (const col of ['Timestamp', 'Cycle', 'SeedID', 'SeedType', 'Domain',
-                     'Neighborhood', 'Priority', 'SeedText']) {
-    assert(`Story_Seed_Deck writerCols includes '${col}'`, source.includes(`'${col}'`));
-  }
+  // engine.341 (2026-11-21): the audit pins the 18 v4.2 columns, in the writer's order.
+  // The v3.4 columns (SeedType / Priority / SeedText) left the deck at v4.0.
+  const deck = (source.match(/'Story_Seed_Deck':\s*\{[\s\S]*?writerCols:\s*\[([\s\S]*?)\]/) || [])[1] || '';
+  const cols = (deck.match(/'([^']+)'/g) || []).map((c) => c.slice(1, -1));
+  const expected = ['Cycle', 'SeedID', 'Desk', 'Class', 'Domain', 'Neighborhood',
+    'What', 'Why', 'Citizens', 'CitizenEvents', 'Businesses', 'OtherEntities',
+    'Magnitude', 'Trend', 'CycleStamp', 'SuggestedJournalist', 'SuggestedAngle', 'MatchConfidence'];
+  assert('Story_Seed_Deck writerCols = the 18 v4.2 columns in order',
+    JSON.stringify(cols) === JSON.stringify(expected));
+  const writer = fs.readFileSync(path.resolve(__dirname, '..', 'phase10-persistence', 'saveV3Seeds.js'), 'utf8');
+  const hdr = (writer.match(/var SEED_DECK_HEADERS = \[([\s\S]*?)\];/) || [])[1] || '';
+  const live = (hdr.replace(/\/\/.*$/gm, '').match(/'([^']+)'/g) || []).map((c) => c.slice(1, -1));
+  assert('Story_Seed_Deck writerCols = saveV3Seeds.js SEED_DECK_HEADERS',
+    JSON.stringify(cols) === JSON.stringify(live));
 }
 
 console.log('\nTest 7: deprecated-position skip logic + extras tally');

@@ -207,7 +207,17 @@ Not built, recorded: agy F4 (spouse lookups do not filter on Status; reachable o
 | `docs/archive/for-claude-review/2026-11-08-codex-602-structural-options.md` | — | — | reviewed (builder 2026-11-16: every review in the inbox had been reviewed); no per-finding record kept |
 | `docs/archive/for-claude-review/2026-11-08-rb-brief-codex-602-structural-options.md` | — | — | reviewed (builder 2026-11-16: every review in the inbox had been reviewed); no per-finding record kept |
 
+## Rejected by the builder, 2026-11-21 00:10 — cut g–h (the lottery grabs two) and the reading behind it
+
+After `b4db8c7a8` (verbatim, in order): "Lottery sounds wrong still" · "Kid makes no sense and isn't at all what I said" · "So you're not reading the code and guessing , no wonder" · "Almost everything you said is wrong about my spec".
+
+What was wrong: cuts g–h took SIM_DOCTRINE §10 (S324) over his later 10-19 statements (plan engine.286 §engine.304, 5–10: "parents with untracked children, this is where a lottery exists"; "chance but not impossibility"; "every cycle 2 or so citizens get drawn and get an opportunity to fill a wife or child"; "1% is good") — the old blind match he replaced for firing too rarely. A child match that rides on an unrelated background citizen's hood is research-build's invention. A later message told him the lottery never fills a child; statement 5 says it does. The 10-19 statements were not read before either.
+
+Standing: `b4db8c7a8` is parked, not on PROD, not to ship as it is. Cuts i–k (agy F1–F3) sit in the same commit and are not rejected. Bench 1004 code @220 = that commit. Unsettled, his, no reading offered: (1) the count — ≈6 families drawn a Cycle and a drawn child spot always fills in the fresh-mint cut, against "an opportunity" and "a lottery can be zero"; (2) a lottery child's age — parent's less 21–40 makes grown children, against "56 year old child ??".
+
 ## Changelog
+
+- 2026-11-21 (research-build) — cuts g–h rejected by the builder; his words and the two unsettled points recorded; nothing shipped.
 
 - 2026-11-20 night (research-build) — the lottery grabs two (cuts g–k); his afternoon and night words recorded; agy's four findings reconciled; no tests written or run on his word.
 - 2026-11-20 (research-build) — the builder's age and heritage words recorded with the reading; 1b closed on his words; Task 2 rescoped a–f; build started.

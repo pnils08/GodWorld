@@ -1,5 +1,5 @@
 ========================================================================
-sessionEndMechanical: terminal=engine-sheet, rotate-history=false, dry-run=false
+sessionEndMechanical: terminal=research-build, rotate-history=false, dry-run=false
 ========================================================================
 Expected upstream model step (BEFORE this script):
   1. SESSION_CONTEXT.md PIN + NEXT[terminal] line + ROLLOUT_PLAN.md updated
@@ -14,12 +14,12 @@ Mechanical sub-steps (6):
 ========================================================================
 
 --- [1/6] session summary → Supermemory (best-effort) ---
-✓ session log → Supermemory [session-logs] doc cVhe6qRQzJk4rzJSEuabpX (2987 chars, 27 summary rows folded)
+✓ session log → Supermemory [session-logs] doc oBcu7QrMsiUPAxozVdVvLh (2954 chars, 8 summary rows folded)
 
 --- [2/6] auditPlanTagDrift (informational) ---
   # Plan tag drift audit
   
-  Generated: 2026-11-21T06:14:00.639Z
+  Generated: 2026-11-21T06:14:18.493Z
   Plans scanned: 182
   No frontmatter: 11
   No changelog: 8
@@ -39,10 +39,11 @@ Mechanical sub-steps (6):
     L63 engine.280: latest Cycle named C113, live is C116; latest date named 2026-10-08, today is 2026-11-21
 
 --- [4/6] worked rows have their plan updated ---
-  ✓ every row named in this session's [engine-sheet] commits has its plan updated
+  ✓ every row named in this session's [research-build] commits has its plan updated
 
 --- [5/6] cross-terminal git stack check (read-only) ---
-  ⚠ 7 unpushed commit(s) ahead of origin/main:
+  ⚠ 8 unpushed commit(s) ahead of origin/main:
+    df76056b9 S761 session-end [engine/sheet]: engine.354 error recorded — 38 civic keys written as job titles; the job key is a dead label (the engine reads only blank-or-not in three places). No repair approved; row and plan trued. PROD stage 62 @197 went live this session, bench-proven, no live cycle on it yet. SESSION_CONTEXT left uncommitted: the handoff gate refuses it on research-build's NEXT line (362 > 350), theirs to shorten.
     b4db8c7a8 engine.339: the lottery grabs two — they match or they don't (builder 2026-11-20: "It's a lottery, a lottery can be zero , how is a lottery a know 2-3, that's puppeting the sim"; SIM_DOCTRINE §10).
     7cf5f1494 engine.354 Task 5, civic clock: 38 job keys set to the row's own job title on the live ledger (builder 2026-11-20: "Yes") — column AR only, read back 38/38, 0 other cells changed on those rows, 0 keys changed on other rows. A first attempt, made on a message that was not a yes, was refused by the permission check and wrote nothing. Listed, not written: 99 rows whose job has its own list entry and whose key is the seeding map's different entry (own-entry-job-keys.md). [engine/sheet]
     18bbb85ff engine.354 Task 5 scoped, nothing written: 444 living non-GAME rows hold a job the list has no entry for (nolist.json). The list has no mayor, council member, council president or chief. Civic clock first: 53 rows, 38 keys proposed to the row's own job title, 15 stay; proposal civic-job-keys.md sent to the builder. [engine/sheet]
@@ -56,5 +57,5 @@ Mechanical sub-steps (6):
   ✓ godworld-dashboard restarted
 
 ========================================================================
-sessionEndMechanical: complete (terminal=engine-sheet)
+sessionEndMechanical: complete (terminal=research-build)
 ========================================================================

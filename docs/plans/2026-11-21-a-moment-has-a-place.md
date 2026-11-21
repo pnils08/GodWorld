@@ -36,7 +36,15 @@ pointers:
 3. **Ordinary lines name places the sheet does not hold.** `$VENUE` is filled by `pickVenue_` (:1674-1678, body read: one draw from `hoodTexturePool_` over the two tables) from name tables in code — "a bar patio", "a late-night diner", "Temescal Alley" (:330-352). 8b, which makes `$VENUE` draw the citizen's own spot, is designed and not built (ROLLOUT engine.214 "Next: 8b").
 4. **A line carries no place and no time of day.** `LifeHistory_Log`: Timestamp, POPID, Name, EventTag, EventText, Neighborhood, Cycle. `$CONTACT` is a name inside the text. `Reflection_Intake` (the citizen's own words) does carry Daypart.
 5. **What the page shows of a person** (world-view/README): the street their week's rows name; up to two spots on that street — their own door (`Household_Ledger`) and the business they work at (`Employment_Roster`); people with a bond stop to talk. "Where a person stands" and "that two of them are standing together" are drawn, not sim data. Streets are separate scenes; nobody walks between them.
+7. **What a week holds, C116 dump (counted 2026-11-21):** 2,480 engine lines for 993 people. By lead tag: Neighborhood 446, Civic Perception 361, Daily 276, Sports 274 (192 people), Personal 246, PrevEvening 114, Media 98, Advancement 93, Work 55, Career 12, Promotion 8, Relationship 8. Lines naming a `Business_Ledger` business: 353 (14%), 287 people — 176 of them Civic Perception and 92 Advancement (Bay Tribune 94, OARI 73, the Temescal clinic 40, the apprenticeship pipeline 40); 20 Daily and 20 Neighborhood. Lines naming another person in full: 1. People with a week and an Active roster job at a ledger business: 576 of 993. The citizen's own words, C115 (the C116 dump predates that week's): 236 rows, 127 people; `Daypart` is mostly a source label — PRESS 163, work 38, CONVO 6, DEBATE 4 — and a time of day (morning / midday / night / nightly) on 25. Saved conversations: one pair a day (`output/exchanges/`, 72 files).
+8. **What the page already draws** (world-view/README §Somewhere to go, §People who know each other): a person walks to their own door and to the business they work at when either is on the street they are shown on; people with a bond stop and talk; a saved conversation rides on the tie. All of it "now and then", drawn — none of it because of a line in that person's week. Builder rulings that bind the page: nobody is drawn twice ("How can a citizen exists twice in the same time ?"); the sim holds the tie, not a meeting; a joined residential street is its own job.
 6. **Places a citizen already has on the sheet:** work (`Employment_Roster` BIZ_ID), home (`Household_Ledger` HouseholdId), a congregation (`Faith_Organizations` MembersList). Not read today: how each is handed to the citizen's wake.
+
+## Order (builder 2026-11-21: asked "Should we do world-view work before the engine work?", then "Ok go ahead" on the page first, taken here)
+
+1. **Page:** what a person does on the street follows what their own week holds, from data the page already reads. No engine change.
+2. **Engine, small:** Cut 1 and Cut 3 — lines name the real spot; the spot is readable outside the fire.
+3. **Engine, larger:** Cut 2 — ids on every line — only for what the page step shows it cannot source.
 
 ## Design
 
@@ -51,6 +59,7 @@ pointers:
 
 | # | Task | Owner | Status |
 |---|------|-------|--------|
+| 0 | **The page step** (world-view; infrastructure.19 stays research-build's row — this is one slice of it carried here on the builder's word). A person's moves come from their own week: a work line → their workplace; a sports line → their team's place or the street's game night; a saved conversation → that person; a home line → their own door. The card says which line it was. Someone whose week holds none of these stays as drawn today. Nothing new is invented: no dinner spot until the engine hands one over. Waits on Open question 1 | es | not started |
 | 1 | Read-before. (a) `S.hoodSpots` and `citizenSpotFor_` end to end; what it would take to write the pick out. (b) Every fill site of `$VENUE`, `$CONTACT`, `$INSTITUTION`; a count of C116's lines that name a venue, a contact, a workplace, a home, a game. (c) Wiring card for `LifeHistory_Log`: every writer, every reader by column position — whether two right-edge columns are safe; the same for `LifeHistory_Archive`, where the rows move; and the cost of two more cells on every line against the end-of-run tail (74 s at C116 against the 60 s reserve, ROLLOUT engine.95). (d) What a wake is handed about the citizen's places (`lib/wakePerception`, the wake script) and what the question door (engine.338) does with an answer. (e) `Lived_Events`, `output/exchanges/`, game-night lines: the place each already implies. (f) `world-view/build.js`: how a person's street and spots are chosen | es | not started |
 | 2 | The builder's calls (§Open questions), put to him with the Task 1 numbers | builder | waits on 1 |
 | 3 | Cut 1 = engine.214 8b, on its own row | es | waits on 1 |
@@ -88,4 +97,5 @@ pointers:
 ## Changelog
 
 - 2026-11-21 (engine-sheet) — Created on the builder's word, from research.34 / research.35 and the same-day read of the spot, the line and the page.
+- 2026-11-21 (engine-sheet) — Page step first, on the builder's word; Task 0 added; the C116 week counted (§Where it stands 7–8).
 - 2026-11-21 (engine-sheet) — Advisor fold: scope stated against the builder's words and made Open question 1; his quote restored verbatim; `pickVenue_` body read; the page paragraph cut to what the engine hands it; Task 1(c) carries the archive tab and the run-time cost.

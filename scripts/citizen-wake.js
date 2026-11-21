@@ -223,7 +223,7 @@ function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bonds
   // engine.338: a wake that carries the builder's question asks THAT — the question is the provocation. Builder
   // 2026-11-21: "The question is to wake them to that question" — no job pick, no MOVE line, nothing filed.
   if (questionText) {
-    const userQ = `${WAKE_FRAME[WAKE] || WAKE_FRAME.evening}. Someone asked you this week, and it has stayed with you: "${questionText}"\n\nIn 4-5 sentences, think it through on the page the way you actually would — private, honest, first person.`;
+    const userQ = `${WAKE_FRAME[WAKE] || WAKE_FRAME.evening}. Someone asked you this week, and it has stayed with you: "${questionText}"\n\nThink it through on the page the way you actually would — private, honest, first person.`;
     return { system, user: userQ, disp, prov: { id: 'question', route: 'owed', text: questionText } };
   }
   const user = `${WAKE_FRAME[WAKE] || WAKE_FRAME.evening}. ${prov.text}\n\nIn 4-5 sentences, think on the page the way you actually would — private, honest, first person. Don't narrate events like a story; just sit with it.`;

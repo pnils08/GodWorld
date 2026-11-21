@@ -2143,17 +2143,19 @@ app.get('/api/citizens/:popId', async (req, res) => {
   }
 
   // Parse LifeHistory into structured events
+  // engine.350 pile 2: a graded tag ([Neighborhood-Outabout-Up-S]) reads as its kind; a plain tag is its own kind
+  const lifeTagKind_ = (t) => { if (!t) return t; const g = require(join(ROOT, 'utilities/citizenDialMap.js')).gradedParts_(t); return g ? g.kind : t; };
   let lifeEvents = [];
   if (ledgerRecord?.LifeHistory) {
     const raw = ledgerRecord.LifeHistory;
     const parts = raw.split(/(?=\d{4}-\d{2}-\d{2})|(?=Engine Event:)/g).filter(s => s.trim());
     for (const part of parts) {
-      const dateMatch = part.match(/^(\d{4}-\d{2}-\d{2})\s+(\d{2}:\d{2})?\s*[—-]*\s*(?:\[(\w+)\])?\s*(.*)/s);
+      const dateMatch = part.match(/^(\d{4}-\d{2}-\d{2})\s+(\d{2}:\d{2})?\s*[—-]*\s*(?:\[([^\]]+)\])?\s*(.*)/s);
       if (dateMatch) {
         lifeEvents.push({
           date: dateMatch[1],
           time: dateMatch[2] || null,
-          tag: dateMatch[3] || 'General',
+          tag: lifeTagKind_(dateMatch[3]) || 'General',
           text: dateMatch[4]?.trim() || part.trim(),
         });
       } else {

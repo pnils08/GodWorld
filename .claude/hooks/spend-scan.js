@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// spend-scan — called by test-guard.sh on every Bash tool call (builder 2026-11-21: "yes add, no call openrouter to
+// spend-scan — called by spend-guard.sh on every Bash tool call (builder 2026-11-21: "yes add, no call openrouter to
 // spend in a cli session either"). Refuses, without Mike's unlock:
 //   1. a hand-run of a cron or wake script (scripts/cron-*, *wake*) — dry-run flags included;
 //   2. any command that runs code reaching a paid model endpoint: the script it names, anything that script

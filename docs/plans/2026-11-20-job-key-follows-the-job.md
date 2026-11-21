@@ -36,7 +36,7 @@ pointers:
 | 2 | Bench SANDBOX 1004, PROD stage 61 + the file, live-synced C116, bench-only unemployed plants (keyed and unkeyed) tagged for a hiring employer in another field; fire C117; read back job, key, pay | es | done: @219, C117 PASS twice, rule check 5 of 5 on run 2 (DEPLOY_HISTORY §PROD stage 62) |
 | 3 | PROD push, built tree = the benched manifest | es | done: PROD stage 62 @197, pull-back identical |
 | 4 | Sheet: each wrong key → `catalogRoleKey_` of the job held. The list (name, job, key now, key after) goes to the builder first; written on his go through `lib/sheets`, read back. Key cell only | es | done (builder 2026-11-20: "Yes"): 132 AR cells written in one batch, read back 132/132, 0 other cells changed on those rows, 0 keys changed on other rows. List `output/engine-sheet/2026-11-20-e354/job-keys-to-correct.md`, before-copy `keys-before.json`, log `keywrite.log` |
-| 5 | Jobs the list has no entry for, one clock at a time. The list holds no mayor, council member, council president or chief (civic entries: City Council Aide, Municipal Court Clerk, Public Defender, Civil Rights Attorney, Urban Planner, Police Officer, Firefighter); 444 living non-GAME rows hold such a job (`nolist.json`). Civic first: 53 rows, 38 keys proposed → the row's own job title (the engine's no-entry convention), 15 stay (`civic-job-keys.md`), sent to him; nothing written. Then media (45), then ENGINE (38 keyed with another job's key) | es | open: civic list waits on his go |
+| 5 | Jobs the list has no entry for, one clock at a time. The list holds no mayor, council member, council president or chief (civic entries: City Council Aide, Municipal Court Clerk, Public Defender, Civil Rights Attorney, Urban Planner, Police Officer, Firefighter); 444 living non-GAME rows hold such a job (`nolist.json`). Civic first: 53 rows, 38 keys proposed → the row's own job title (the engine's no-entry convention), 15 stay (`civic-job-keys.md`), written on his "Yes" (38/38 read back, nothing else moved; `civic-keylist.json`, `civic-keylist-before.json`, `civic-keywrite.log`). Found while scoping the rest: 99 rows whose job HAS its own list entry carry the seeding map's different entry (Pharmacist keyed Pharmacy Technician, 15 Senior Pastor / Faith Leader keyed Nonprofit Executive Director) — the plan's "268 left as they are" was wrong for these; list `own-entry-job-keys.md` sent, waits on his yes. After that: keyed rows with no list entry, media (42) and ENGINE (186: 148 seeding-map nearest entries such as Orthodontist keyed Dental Hygienist, 26 unrelated, 12 keys not on the list) | es | open |
 
 ## Acceptance
 
@@ -45,6 +45,7 @@ pointers:
 
 ## Changelog
 
+- 2026-11-20 (es) — civic keys written (38/38). 99 own-entry rows found inside the 268 first called fine; listed, not written.
 - 2026-11-20 (es) — Task 5 scoped from the sheet: the list has no council-president entry (the Tier 1 recheck said it had); civic proposal sent, 38 of 53.
 - 2026-11-20 (es) — Task 4 written on the builder's "Yes": 132 keys, read back 132/132, nothing else on the rows moved.
 - 2026-11-20 (es) — bench C117 PASS (run 1's employer predictions wrong, run 2 checks the rule: 5 of 5); PROD stage 62 @197. Task 4 list is 132 rows, not the 116 first said: 16 more under job spellings the seeding map lacks.

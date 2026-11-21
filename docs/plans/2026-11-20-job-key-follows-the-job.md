@@ -60,7 +60,6 @@ pointers:
 
 ## Changelog
 
-- 2026-11-21 (es) — closed as it stands (builder: "ive never look at a ledger , a code, i have no clue on anythign you will ask me" — what the label holds is a code question and was never his to answer). From the engine read this session: on a non-sports row the engine tests the key for blank-or-not (pay fill, settlement at 18, hospital pay cut) and reads its text only where RoleType is blank (generationalWealthEngine.js:1031). All 170 written cells were non-blank before and after, on rows with a RoleType: no engine behaviour changed. Task 5 not continued.
 - 2026-11-21 (es) — plan rejected whole by the builder (banner at top).
 - 2026-11-21 (es) — restore of the 38 dropped (builder: "why would i put them back to broken again?"); builder: "plan is trash". A finding written the same hour (mayor's rows key = job title) was false and is retracted above.
 - 2026-11-20 (es) — every reader read: the engine never reads the key's words, only blank or not (zero-pay fill, hospital cut, step at 18). Three repair plans put to the builder, none approved; session closed on his word.

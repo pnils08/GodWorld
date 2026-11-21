@@ -40,7 +40,7 @@ pointers:
 - **Citybound.** An `Offer` = a deal (what is given, what is taken, how long), opening hours, a maximum number of users, published by a household. A job is one: `Money +50` for 5 hours, 07:00–15:00, five takers (`grocery_shop/mod.rs:46-52`). A shop's goods are one: `Groceries +30, Money −81`, 30 minutes, 07:00–20:00 (`:36-45`). Home is one: sleep. A member keeps the offer it used last for each need (`used_offers`, `member_used_offers` — `households/mod.rs:1008-1017`) and goes back to it first (`find_new_task_for` :265-346); the link drops only when the trip fails or the offer is withdrawn (`on_trip_result` :587-676, `destroy` :184-216). A full or closed offer turns people away and they search again.
 - **GodWorld.** A citizen's week is drawn: pools filtered by life-state, weighted by archetype, hood conditions and weather, slotted with venues and named contacts (`generateCitizensEvents.js` header v2.5–v2.9). Employment is a link (EmployerBizId; not re-read today). `Business_Ledger` carries no hours and no capacity (columns per the parcels plan read). A citizen's regular spot is open work (ROLLOUT engine.214 step 8b, "`$VENUE` draws the citizen's spot").
 - **Candidate.** A citizen's regular places — work, the shop, the spot, the congregation — as links kept on the row, to businesses that carry hours and room. A closing, a business at capacity or a move then *breaks a habit*, and the break is an event with a cause on both rows (§2, §7). The draw keeps deciding what happens there; the link decides where.
-- **Who sets the link (builder 2026-11-21, on this file):** "I'm not running the citizen or households choices in code, the code shapes everything and AI lives the moment, or chooses what is next" · "instead of making a avatar and running its life sims, im creating agents that are the avatars". So the engine's side is the menu and the consequences — what is open, near, has room, and what closed or filled; the choice of place is the citizen's own, made in its wake and recorded. An engine that assigns the regular place is Citybound's design, not this one. A door from a citizen's answer to their record exists (ROLLOUT engine.338, the question rows); not read for this file.
+- **Who holds the link (corrected the same day against engine.214 step 8):** the engine already holds one — the citizen's spot, Cut C, live: one hood business per citizen by a fixed hash, stable until it closes, on the builder's 2026-10-19 word ("the engine firing 'a citizens spot' makes the cron build on that an allows it to tell us their spot"). So a regular place is a fact of the citizen's life, like the job and the home; the citizen lives it and tells it. Builder 2026-11-21: "the code shapes everything and AI lives the moment, or chooses what is next" · "im creating agents that are the avatars" · the city view is "a second layer" showing those moments. This file's first version said an engine-assigned place was Citybound's design and not this one; that was wrong. What Citybound's design must not bring is the needs meter (§Not applicable). The plan: [[../plans/2026-11-21-a-moment-has-a-place]].
 
 ### 3. The trip is part of every choice
 
@@ -68,8 +68,9 @@ pointers:
 
 **Verdict:** watch — finding 1 feeds a plan already on the board (engine.345: the unit as the gate, the same door for homes and businesses) and needs no new row; finding 2 is a candidate that ignites on the builder's pick.
 
-**Ignited plans:** none. Speaks to [[../plans/2026-11-15-parcels-on-the-ledger]].
+**Ignited plans:** [[../plans/2026-11-21-a-moment-has-a-place]] (engine.356). Speaks to [[../plans/2026-11-15-parcels-on-the-ledger]].
 
 ## Changelog
 
 - 2026-11-21 (engine-sheet) — Created (research.35) on the builder's ask.
+- 2026-11-21 (engine-sheet) — Finding 2 corrected against the live citizen's spot (engine.214 Cut C); ignited engine.356.

@@ -167,10 +167,41 @@ The shape of the fix, if the builder wants one: a guard in the wake writers that
 
 **Measured on the 11-18 snapshot (base formula, no dials or heritage):** births eligible 171 → 122, expected ≈ 0.57 → 0.47 a Cycle (≈ 30 → 25 a year); the cap stays 1. The lottery: 599 citizens with an open spot, ≈ 6 drawn a Cycle, ≈ 2.6 children (or parents) born into the background pool a Cycle; none reach the ledger until usage moves them.
 
+## Builder's words 2026-11-20, afternoon and night — the name rule, the count, tests
+
+Afternoon (carried from the session plan `fuzzy-tinkering-frost`, where they were first written down; verbatim): "It's a lottery, a lottery can be zero , how is a lottery a know 2-3, that's puppeting the sim" · "No one cane ever change their name on GC unless it's a female becoming a males spouse" · "1 kid a cycle is too much , 2-3 is insane" · "adding marriages and kids blindly … the last cycle is garbage and should be reverted and run a 3rd time".
+
+Night, on the plan's test steps (verbatim): "Yore tests are useless , they are written to pass and push work they have no bearing on whether the code behaves as it supposed to, proof being I've spent events days for 14 months fixing broken code , so there has not be a single test you wrote that proves anything". On the plan as written: "I'm sure it junk code all assumed and not following what I want". On whether a lottery kid is always a minor: "Idk this is complicated , I can't figure it out".
+
+Settled from rules already his, no new ruling asked:
+
+- **A lottery kid's age** follows the 21–40 gap he set: the parent's age less 21 to 40. Live C116, 431 citizens with an empty kid spot (ages 22–78, middle 49): the kid is always a minor for 71, always grown for 108, either for 252; ≈ 46% of made kids are minors.
+- **The count** is SIM_DOCTRINE §10 (S324): "A lottery grabs 2 and do they match or not … Zero is the normal cycle." The 10-19 "1% is good" share is what made the count known; it is deleted.
+- Measured on live C116 before the build (exact odds, read-only; 599 citizens with an open spot — spouse 453, kid 431, parent 47 — pool 277; one tier-and-heritage-weighted citizen and one blind background citizen a Cycle): a landing in 16.9% of Cycles, 83% zero; a year ≈ 6.9 kids, 1.2 spouses, 0.7 parents (as built before: ≈ 6 drawn and ≈ 2.6 born every Cycle); one heritage family (5 with an open spot) ≈ every 7.4 years, one plain family ≈ every 73. Shown to him as a table; his answer: "That's fine".
+- **Mine, said to him in that message:** on a child or parent spot the two "match" when the background citizen grabbed is in the same or a bordering hood — there is no age or sex to match against a person not yet made.
+
+Tests: none written, none run (the test guard, `bc79e8487`). `scripts/engine304FamilyLottery.test.js` still asserts the 1% draw and will fail until he unlocks a rewrite. Proof is the bench fire read off the rows.
+
+## As built (2026-11-20 night — the lottery grabs two; over `1d74b2e49` + `df0052132`)
+
+| Cut | Where | What |
+|---|---|---|
+| g | `processAdvancementIntake.js` `checkFamilyMatchPromotions_` D2 | `FAMILY_LOTTERY_SHARE` and the per-family roll deleted. One citizen a Cycle, weighted pick over those with an open spot (tier × heritage, unchanged weights); one of their open spot kinds |
+| h | same, D3 | one background citizen, uniform over the pool (pool filter unchanged); no search for a fit. Match = same or bordering hood; a spouse also the other sex, an adult, within `DRIP_SPOUSE_AGE_BAND` (10), and a wife's married name not already someone's. Spouse match → that row linked (she takes his name, he keeps his). Child / parent match → `mintFamilyGcRow_`; the row grabbed is not written. No match → nothing, logged with who and why. At most one landing a Cycle |
+| i | `mintFamilyGcRow_` | no dice thrown for a sex or a name when nobody can be born into the spot (agy F3) |
+| j | `checkEmergencePromotions_` | a renamed child / parent row at the threshold is released under its own name, not queued (agy F2); a renamed husband at the threshold is not queued until the family pass (which runs after this door) has given him his name back — he queues the next Cycle. Live C116: 11 renamed child rows (max EmergenceCount 2), 5 renamed husbands |
+| k | `formIntakeHouseholds_` | a household keeps a non-head member only when the link was wired — a child or parent the 21-year floor refused was counted in its members and income while the kid count read 0 (agy F1) |
+
+Not built, recorded: agy F4 (spouse lookups do not filter on Status; reachable only through a broken row). Seen, not this job (cycle gap log): 108 ledger rows carry a blank NumChildren, arrivals among them; the household-intake door still rolls a missing age (child 1–17, adult 22–65), which can now land a child the 21-year floor refuses.
+
 ## Reviews reconciled
 
 | Review | Verdict | Finding | Outcome |
 |--------|---------|---------|---------|
+| `output/antigravity/2026-11-20-review-e339-kid-mint.md` (agy, on `1d74b2e49`) | HOLD | F1 HIGH a refused child / parent stays in the formed household | confirmed against the code; fixed (cut k) |
+| same | | F2 MEDIUM a renamed child row queued before its release | confirmed; fixed (cut j), with the same ordering hole for a renamed husband, which the review did not cover |
+| same | | F3 LOW a die thrown before the no-fit return | fixed (cut i) |
+| same | | F4 LOW spouse lookups ignore Status | not built — needs a row already broken; recorded |
 | `docs/archive/for-claude-review/2026-11-08-codex-engine339-diff-review.md` | — | — | reviewed (builder 2026-11-16: every review in the inbox had been reviewed); no per-finding record kept |
 | `docs/archive/for-claude-review/2026-11-08-rb-brief-codex-engine339-diff-review.md` | — | — | reviewed (builder 2026-11-16: every review in the inbox had been reviewed); no per-finding record kept |
 | `docs/archive/for-claude-review/2026-11-08-codex-602-structural-options.md` | — | — | reviewed (builder 2026-11-16: every review in the inbox had been reviewed); no per-finding record kept |
@@ -178,6 +209,7 @@ The shape of the fix, if the builder wants one: a guard in the wake writers that
 
 ## Changelog
 
+- 2026-11-20 night (research-build) — the lottery grabs two (cuts g–k); his afternoon and night words recorded; agy's four findings reconciled; no tests written or run on his word.
 - 2026-11-20 (research-build) — the builder's age and heritage words recorded with the reading; 1b closed on his words; Task 2 rescoped a–f; build started.
 - 2026-11-20 (research-build) — builder's words on birth rate and GC children recorded verbatim; rates read off C107–C116 (§Builder's words 2026-11-20); the 84 zeroed counts are his own write. Nothing touched.
 - 2026-11-08 (research-build, S643) — builder's words on Varek's daughter recorded; every repair that removes or ignores the child count withdrawn (§Builder's words, late 2026-11-08). No row or page touched.

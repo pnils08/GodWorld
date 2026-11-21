@@ -14,7 +14,8 @@ const SIMYEAR = c => 2040 + Math.ceil(c / 52) - 1; // simYearFromCycle_ (advance
   const popNum = p => Number(String(p || '').replace(/\D/g, '')) || 0;
   const maxPop = Math.max(...sl.slice(1).map(r => popNum(r[l('POPID')])));
   const fam = gc.slice(1).map((r, i) => ({ i, first: r[g('First')], last: r[g('Last')], maiden: String(r[g('MaidenName')] || '').trim(), status: r[g('Status')],
-    of: r[g('FamilyOf')], role: String(r[g('FamilyRole')] || ''), by: Number(r[g('BirthYear')]) || 0, made: r[g('EmergedCycle')], ctx: String(r[g('EmergenceContext')] || '') }));
+    of: r[g('FamilyOf')], role: String(r[g('FamilyRole')] || ''), by: Number(r[g('BirthYear')]) || 0, made: r[g('EmergedCycle')], ctx: String(r[g('EmergenceContext')] || ''),
+    sex: String(r[g('Sex')] || '').trim().toLowerCase(), hood: String(r[g('Neighborhood')] || '').trim() }));
   if (arg === 'pre') {
     fs.writeFileSync(PRE, JSON.stringify({ maxPop, errors: ee.length - 1, gcRows: gc.length - 1,
       renamed: fam.filter(f => f.status === 'Family' && f.role !== 'spouse' && f.maiden).map(f => f.first + ' ' + f.maiden),
@@ -42,6 +43,25 @@ const SIMYEAR = c => 2040 + Math.ceil(c / 52) - 1; // simYearFromCycle_ (advance
     if (gap < 21 || gap > 40 || (spGap !== null && (spGap < 21 || spGap > 40)) || f.by > Y) bad.push(f.first + ' gap out of 21–40');
   });
   console.log('  mints this fire: ' + mints.length);
+  // the name rule: husbands the old draw renamed have their own names back, link kept; none left renamed
+  fam.filter(f => f.ctx.indexOf('Own name back (a husband keeps his name), C' + N) >= 0).forEach(f =>
+    console.log('  own name back: ' + f.first + ' ' + f.last + ' | still ' + f.role + ' of ' + f.of + ' | status ' + f.status + ' | maiden "' + f.maiden + '"'));
+  const husbandsRenamed = fam.filter(f => f.status === 'Family' && f.role === 'spouse' && f.sex === 'male' && f.maiden);
+  if (husbandsRenamed.length) bad.push('renamed husbands left: ' + husbandsRenamed.map(f => f.first + ' ' + f.last).join(', '));
+  // a spouse landed this fire: who, whose, and the name each carries
+  const newSp = fam.filter(f => f.status === 'Family' && f.role === 'spouse' && new RegExp('Family: spouse of [^|]*\\(POP-\\d+\\), C' + N + '(\\s|$)').test(f.ctx));
+  newSp.forEach(f => {
+    const a = byPop[f.of], aLast = a ? a[l('Last')] : '?', aBY = a ? Number(a[l('BirthYear')]) || 0 : 0, aHood = a ? String(a[l('Neighborhood')] || '').trim() : '';
+    console.log('  spouse landed: ' + f.first + ' ' + f.last + (f.maiden ? ' (born ' + f.maiden + ')' : ' (his own name)') + ', ' + f.sex + ', age ' + (Y - f.by) +
+      ' -> ' + (a ? a[l('First')] + ' ' + aLast : '?') + ' (' + f.of + '), age ' + (Y - aBY) + ' | ' + f.hood);
+    if (f.sex === 'female' && (f.last !== aLast || !f.maiden)) bad.push(f.first + ' did not take his name');
+    if (f.sex === 'male' && f.maiden) bad.push(f.first + ' (a husband) was renamed');
+    if (Math.abs(f.by - aBY) > 10) bad.push(f.first + ' more than 10 years from the spouse');
+    if (f.hood !== aHood) bad.push(f.first + ' not in the family hood');
+  });
+  const landed = mints.length + newSp.length;
+  console.log('  LOTTERY this fire: ' + (landed ? landed + ' landed' : 'nothing landed'));
+  if (landed > 1) bad.push('more than one landing in a Cycle: ' + landed);
   const births = sl.slice(1).filter(r => (Number(r[l('BirthYear')]) || 0) === Y && /\[Birth\] born to/.test(String(r[l('LifeHistory')] || '')) && popNum(r[l('POPID')]) > pre.maxPop);
   births.forEach(r => {
     const ps = String(r[l('ParentIds')] || '').match(/POP-\d+/g) || [];

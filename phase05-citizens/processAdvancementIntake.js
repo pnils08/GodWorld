@@ -2059,7 +2059,7 @@ function checkEmergencePromotions_(ss, cycle, maxQueue, simYear, ctx) {
   var gF = findColByName_(h, 'First'), gL = findColByName_(h, 'Last'),
       gE = findColByName_(h, 'EmergenceCount'), gS = findColByName_(h, 'Status'),
       gB = findColByName_(h, 'BirthYear'), gN = findColByName_(h, 'Neighborhood'),
-      gO = findColByName_(h, 'Occupation'), gA = findColByName_(h, 'Age'),
+      gO = findColByName_(h, 'Occupation'), gA = findColByName_(h, 'Age'), gX = findColByName_(h, 'Sex'),
       gEmp = findColByName_(h, 'EmployerBizId'); // S336 Task 5 — the pool's tracked workplace, when assigned
   if (gF < 0 || gL < 0 || gE < 0) return results;
   // engine.304 D6: a Family row arrives as family — its link is re-checked against the ledger before it queues
@@ -2116,7 +2116,15 @@ function checkEmergencePromotions_(ss, cycle, maxQueue, simYear, ctx) {
       famRole = String(data[r][fam.cols.role] || '').trim().toLowerCase();
       var famAt = familyAnchorOf_(ctx, FL, famRowByPop, famOf); // D11: a dead citizen's family still arrives as family
       var famAnchor = famAt ? famAt.row : null;
-      var famOpen = !!famAt &&
+      // engine.339 (builder 2026-11-20): a row the old draw renamed never queues as it stands (this door runs before
+      // the family pass that puts them right) — a renamed child or parent is released here under its own name; a
+      // renamed husband waits this Cycle and queues under his own name the next
+      var famMaiden = String(data[r][fam.cols.maiden] || '').trim();
+      if (famRole === 'spouse' && famMaiden && gX >= 0 && String(data[r][gX] || '').trim().toLowerCase() === 'male') {
+        Logger.log('checkEmergencePromotions_: ' + first + ' ' + last + ' — a husband keeps his name; not queued until he has it back (C' + cycle + ')');
+        continue;
+      }
+      var famOpen = !(famRole !== 'spouse' && famMaiden) && !!famAt &&
         familySpotsOpen_(FL, famAnchor, simYear, fam.byAnchor[famOf], r, false)[famRole] >= 1 &&
         !famNames[normalizeCitizenName_(first) + ' ' + normalizeCitizenName_(last)];
       if (!famOpen) { // D6a: the spot closed or the name is taken — released here, not queued
@@ -2174,18 +2182,19 @@ function checkEmergencePromotions_(ss, cycle, maxQueue, simYear, ctx) {
  *   Release (D5): every Family row is first re-checked against its citizen — gone,
  *   no longer Active, or the spot closed (a divorce, a remarriage, the kids now on
  *   camera) — and goes back to the pool under its own name.
- *   Draw (D2): every Active citizen with an open spot (married with no SpouseId;
- *   NumChildren above the kids on camera and linked; a minor with fewer than two
- *   parents on camera and linked) is drawn independently, p = min(1, D·w/Σw),
- *   D = 1% of them, w = tier weight × heritage weight. "What should be hard to
- *   predict is who, not whether."
- *   One opportunity (D3): one of the drawn citizen's open spot kinds, then one
- *   background citizen from those who fit it — same or bordering hood, right sex,
- *   the age band, an adult for a spouse or a parent; never a row the emergence door
- *   or the civic mint takes this fire, never a name that would duplicate another.
- *   No fit → nothing for that family this Cycle.
+ *   engine.339 (builder 2026-11-20: "It's a lottery, a lottery can be zero , how is a lottery a know 2-3, that's
+ *   puppeting the sim"; SIM_DOCTRINE §10: "A lottery grabs 2 and do they match or not") — the 1% share of every
+ *   open family and the search of the pool for one who fits are gone. Nothing sets how many land.
+ *   Grab one (D2): ONE Active citizen with an open spot (married with no SpouseId; NumChildren above the kids on
+ *   camera and linked; a minor with fewer than two parents on camera and linked), weight = tier × heritage —
+ *   that moves who is grabbed, never how many — then one of their open spot kinds.
+ *   Grab two (D3): ONE background citizen, blind — never a row the emergence door or the civic mint takes this
+ *   fire. They match or they don't: the same or a bordering hood; for a spouse also the other sex, an adult, within
+ *   DRIP_SPOUSE_AGE_BAND years, and she takes his name only if no one already carries it. A spouse match links the
+ *   citizen grabbed. A child or parent match makes a NEW background citizen born with the family's name
+ *   (mintFamilyGcRow_); the citizen grabbed is unchanged. No match → nothing this Cycle. Zero is the normal Cycle;
+ *   at most one lands.
  */
-var FAMILY_LOTTERY_SHARE = 0.01;                                 // builder 2026-10-19: "1% is good"
 var FAMILY_LOTTERY_TIER_WEIGHT = { 1: 10, 2: 5, 3: 2, 4: 1 };    // builder 2026-10-19 (statement 8): "This look good" — a perk of ascension
 var GC_FAMILY_COLS = ['FamilyOf', 'FamilyRole', 'MaidenName'];   // engine.304 D1 — Generic_Citizens columns M–O
 
@@ -2304,14 +2313,16 @@ function mintFamilyGcRow_(gData, c, type, wantSex, hood, taken, rowByPop, L, sim
   }
   var why = !hood ? 'no neighborhood on the row'
     : (byMin > byMax ? 'no ' + type + ' fits ' + DRIP_PARENT_AGE_MIN + '–' + DRIP_PARENT_AGE_MAX + ' years apart' : '');
-  var sex = wantSex || (rng() < 0.5 ? 'female' : 'male');
-  var names = sex === 'female' ? GC_FEMALE_FIRST_NAMES : GC_MALE_FIRST_NAMES;
   var first = '';
-  for (var tries = 0; !why && tries < 25; tries++) {
-    var f = names[Math.floor(rng() * names.length)];
-    if (!taken[normalizeCitizenName_(f) + ' ' + normalizeCitizenName_(c.surname)]) { first = f; break; }
+  if (!why) { // nobody can be born into the spot → no dice thrown for a sex or a name
+    var sex = wantSex || (rng() < 0.5 ? 'female' : 'male');
+    var names = sex === 'female' ? GC_FEMALE_FIRST_NAMES : GC_MALE_FIRST_NAMES;
+    for (var tries = 0; tries < 25; tries++) {
+      var f = names[Math.floor(rng() * names.length)];
+      if (!taken[normalizeCitizenName_(f) + ' ' + normalizeCitizenName_(c.surname)]) { first = f; break; }
+    }
+    if (!first) why = 'no free first name with ' + c.surname;
   }
-  if (!why && !first) why = 'no free first name with ' + c.surname;
   if (why) {
     Logger.log('checkFamilyMatchPromotions_: ' + c.pop + ' drawn for a ' + type + ' — ' + why + ' (C' + cycle + ')');
     return null;
@@ -2426,18 +2437,13 @@ function checkFamilyMatchPromotions_(ctx, cycle) {
     sumW += w;
   }
   if (!eligible.length) return results;
-  var D = FAMILY_LOTTERY_SHARE * eligible.length;
-  var drawn = [];
-  for (var e = 0; e < eligible.length; e++) {
-    if (rng() < Math.min(1, D * eligible[e].w / sumW)) drawn.push(eligible[e]);
-  }
-  for (var s = drawn.length - 1; s > 0; s--) { // their turns in a shuffled order — no POPID has first pick of the pool
-    var j = Math.floor(rng() * (s + 1)), tmp = drawn[s]; drawn[s] = drawn[j]; drawn[j] = tmp;
-  }
-  results.drawn = drawn.length;
-  if (!drawn.length) return results;
+  // one citizen a Cycle — tier and heritage are drawn more often; that moves who, never how many
+  var pick = rng() * sumW, c = eligible[eligible.length - 1];
+  for (var e = 0; e < eligible.length; e++) { pick -= eligible[e].w; if (pick < 0) { c = eligible[e]; break; } }
+  results.drawn = 1;
+  var type = c.types[Math.floor(rng() * c.types.length)]; // one of their open spot kinds
 
-  // ── D3: the pool and the names already taken ──
+  // ── D3: the pool ──
   var gcAge = function (gr) { // codex cut-2 review §1: a credible BirthYear, else a finite Age, else not in the fit
     var gby = gB >= 0 ? Number(gData[gr][gB]) : NaN;
     if (isFinite(gby) && gby > 1900 && gby <= simYear) return { by: gby, age: simYear - gby };
@@ -2454,6 +2460,41 @@ function checkFamilyMatchPromotions_(ctx, cycle) {
     if (ctx.civicGcTaken && ctx.civicGcTaken[g]) continue; // engine.94 F2: the civic mint's Emerged lands at Phase 10
     pool.push(g);
   }
+  var noMatch = function (why) { // zero is the normal Cycle
+    results.noFit++;
+    Logger.log('checkFamilyMatchPromotions_: ' + c.pop + ' ' + c.surname + ' grabbed for a ' + type + ' — ' + why + '; nothing lands (C' + cycle + ')');
+    return results;
+  };
+  if (!pool.length) return noMatch('nobody in the background pool');
+  // one background citizen, blind — the two match or they don't (no search of the pool for one who fits)
+  var gi = pool[Math.floor(rng() * pool.length)];
+  var gWho = String(gData[gi][gF]).trim() + ' ' + String(gData[gi][gL]).trim();
+
+  var aRow = c.row;
+  var aHood = L.hood >= 0 ? String(aRow[L.hood] || '').trim() : '';
+  var aSex = L.gender >= 0 ? String(aRow[L.gender] || '').trim().toLowerCase() : '';
+  var gHood = gN >= 0 ? String(gData[gi][gN] || '').trim() : '';
+  var prox = (typeof bondProximity_ === 'function') ? bondProximity_(ctx) : null;
+  if (!aHood || !gHood || !(gHood === aHood || (prox && prox.near(gHood, aHood)))) {
+    return noMatch(gWho + ' (' + (gHood || 'no neighborhood') + ') is not in or beside ' + (aHood || 'a neighborhood'));
+  }
+  var wantSex = '';
+  if (type === 'spouse') {
+    wantSex = aSex === 'female' ? 'male' : (aSex === 'male' ? 'female' : '');
+    if (!wantSex) return noMatch('no Gender on the row'); // codex cut-2 review §1: no recorded sex → no spouse, rather than either
+    if (gX < 0 || String(gData[gi][gX] || '').trim().toLowerCase() !== wantSex) return noMatch(gWho + ' is not a ' + wantSex + ' spouse');
+    var ga = gcAge(gi);
+    if (!ga || ga.age < 18) return noMatch(gWho + ' is not an adult with a known age');
+    if (Math.abs(ga.by - c.by) > DRIP_SPOUSE_AGE_BAND) return noMatch(gWho + ' is more than ' + DRIP_SPOUSE_AGE_BAND + ' years apart');
+  }
+  if (type === 'parent') {
+    var pids = String(aRow[L.parents] || '').match(/POP-\d+/g) || [];
+    var pRow = pids.length === 1 ? rowByPop[pids[0]] : null;
+    var pg = (pRow && L.gender >= 0) ? String(pRow[L.gender] || '').trim().toLowerCase() : '';
+    wantSex = pg === 'female' ? 'male' : (pg === 'male' ? 'female' : '');
+  }
+
+  // the names already taken — a landing never makes a second citizen of the same name
   var taken = {};
   var takeName = function (f, l) { var k = normalizeCitizenName_(f) + ' ' + normalizeCitizenName_(l); if (k !== ' ') taken[k] = true; };
   for (var lr = 0; lr < rows.length; lr++) if (rows[lr] && L.first >= 0) takeName(rows[lr][L.first], rows[lr][L.last]);
@@ -2467,90 +2508,45 @@ function checkFamilyMatchPromotions_(ctx, cycle) {
     var aF = findColByName_(adv[0], 'First'), aL = findColByName_(adv[0], 'Last');
     if (aF >= 0 && aL >= 0) for (var ar = 1; ar < adv.length; ar++) takeName(adv[ar][aF], adv[ar][aL]);
   }
-  var prox = (typeof bondProximity_ === 'function') ? bondProximity_(ctx) : null;
-  var claimed = {};
 
-  // ── D3: one opportunity each ──
-  for (var d = 0; d < drawn.length; d++) {
-    var c = drawn[d];
-    var type = c.types[Math.floor(rng() * c.types.length)];
-    var aRow = c.row;
-    var aHood = L.hood >= 0 ? String(aRow[L.hood] || '').trim() : '';
-    var aSex = L.gender >= 0 ? String(aRow[L.gender] || '').trim().toLowerCase() : '';
-    var wantSex = '';
-    if (type === 'spouse') {
-      wantSex = aSex === 'female' ? 'male' : (aSex === 'male' ? 'female' : '');
-      if (!wantSex) { // codex cut-2 review §1: no recorded sex → no spouse drawn, rather than either
-        results.noFit++;
-        Logger.log('checkFamilyMatchPromotions_: ' + c.pop + ' drawn for a spouse — no Gender on the row (C' + cycle + ')');
-        continue;
-      }
-    }
-    if (type === 'parent') {
-      var pids = String(aRow[L.parents] || '').match(/POP-\d+/g) || [];
-      var pRow = pids.length === 1 ? rowByPop[pids[0]] : null;
-      var pg = (pRow && L.gender >= 0) ? String(pRow[L.gender] || '').trim().toLowerCase() : '';
-      wantSex = pg === 'female' ? 'male' : (pg === 'male' ? 'female' : '');
-    }
-    // engine.339 (builder 2026-11-20): "A child is a fresh mint , gc is tier 5 in waiting" — a hit on a child or a
-    // parent spot makes a NEW background citizen born with the family's name; no pool row changes. A spouse is still
-    // drawn from the pool below and takes the name (a marriage).
-    if (type === 'child' || type === 'parent') {
-      var mint = mintFamilyGcRow_(gData, c, type, wantSex, aHood, taken, rowByPop, L, simYear, cycle, rng);
-      if (!mint) { results.noFit++; continue; }
-      genericSheet.getRange(gData.length + 1, 1, 1, mint.row.length).setValues([mint.row]); // the row lands whole, or not at all
-      gData.push(mint.row);
-      takeName(mint.first, c.surname);
-      if (!links.byAnchor[c.pop]) links.byAnchor[c.pop] = { spouse: [], child: [], parent: [] };
-      links.byAnchor[c.pop][type].push(gData.length - 1);
-      results.linked++;
-      results.minted++;
-      Logger.log('checkFamilyMatchPromotions_: ' + mint.first + ' ' + c.surname + ' (age ' + (simYear - mint.by) +
-        ') joins the background as the ' + type + ' of ' + c.pop + ' (C' + cycle + ')');
-      continue;
-    }
-    var byMin = c.by - DRIP_SPOUSE_AGE_BAND, byMax = c.by + DRIP_SPOUSE_AGE_BAND; // a spouse, from here on
-    var fit = [];
-    for (var q = 0; q < pool.length; q++) {
-      var gi = pool[q];
-      if (claimed[gi]) continue;
-      var ga = gcAge(gi);
-      if (!ga || ga.by < byMin || ga.by > byMax) continue;
-      if (ga.age < 18) continue;           // a spouse is an adult
-      if (wantSex && (gX < 0 || String(gData[gi][gX] || '').trim().toLowerCase() !== wantSex)) continue;
-      var gHood = gN >= 0 ? String(gData[gi][gN] || '').trim() : '';
-      if (!aHood || !gHood || !(gHood === aHood || (prox && prox.near(gHood, aHood)))) continue;
-      if (wantSex === 'female' && taken[normalizeCitizenName_(gData[gi][gF]) + ' ' + normalizeCitizenName_(c.surname)]) continue; // engine.339: only she takes the name
-      fit.push(gi);
-    }
-    if (!fit.length) {
-      results.noFit++;
-      Logger.log('checkFamilyMatchPromotions_: ' + c.pop + ' drawn for a ' + type + ' — nobody fits this Cycle (C' + cycle + ')');
-      continue;
-    }
-    var won = fit[Math.floor(rng() * fit.length)];
-    var ownLast = String(gData[won][gL]).trim();
-    var wasRow = gData[won].slice();
-    // engine.339 (builder 2026-11-20): "No one cane ever change their name on GC unless it's a female becoming a males
-    // spouse" — a woman takes his surname (her own kept as MaidenName); a man drawn as a woman's spouse keeps his
-    var takesName = wantSex === 'female';
-    gData[won][fc.status] = 'Family';
-    gData[won][gL] = takesName ? c.surname : ownLast;
-    gData[won][fc.maiden] = takesName ? ownLast : '';
-    gData[won][fc.of] = c.pop;
-    gData[won][fc.role] = type;
-    if (gN >= 0 && aHood) gData[won][gN] = aHood; // they share the family's home
-    noteGcContext_(gData, won, findColByName_(gh, 'EmergenceContext'),
-      'Family: ' + type + ' of ' + String(aRow[L.first] || '').trim() + ' ' + c.surname + ' (' + c.pop + '), C' + cycle);
-    try { writeGcRow_(genericSheet, gData, won); } catch (eW) { gData[won] = wasRow; throw eW; }
-    claimed[won] = true;
-    takeName(gData[won][gF], gData[won][gL]);
+  // engine.339 (builder 2026-11-20): "A child is a fresh mint , gc is tier 5 in waiting" — a match on a child or a
+  // parent spot makes a NEW background citizen born with the family's name. The background citizen grabbed is the
+  // chance and is never changed. A spouse is the citizen grabbed (a marriage).
+  if (type === 'child' || type === 'parent') {
+    var mint = mintFamilyGcRow_(gData, c, type, wantSex, aHood, taken, rowByPop, L, simYear, cycle, rng);
+    if (!mint) { results.noFit++; return results; } // the reason is logged by the mint
+    genericSheet.getRange(gData.length + 1, 1, 1, mint.row.length).setValues([mint.row]); // the row lands whole, or not at all
+    gData.push(mint.row);
     if (!links.byAnchor[c.pop]) links.byAnchor[c.pop] = { spouse: [], child: [], parent: [] };
-    links.byAnchor[c.pop][type].push(won);
+    links.byAnchor[c.pop][type].push(gData.length - 1);
     results.linked++;
-    Logger.log('checkFamilyMatchPromotions_: ' + String(gData[won][gF]) + ' ' + ownLast + ' is the ' + type + ' of ' +
-      c.pop + (takesName ? ' — now ' + String(gData[won][gF]) + ' ' + c.surname : ' — keeps his name') + ', in the background (C' + cycle + ')');
+    results.minted++;
+    Logger.log('checkFamilyMatchPromotions_: ' + mint.first + ' ' + c.surname + ' (age ' + (simYear - mint.by) +
+      ') joins the background as the ' + type + ' of ' + c.pop + ' — the grab met ' + gWho + ' (C' + cycle + ')');
+    return results;
   }
+  // engine.339 (builder 2026-11-20): "No one cane ever change their name on GC unless it's a female becoming a males
+  // spouse" — a woman takes his surname (her own kept as MaidenName); a man grabbed as a woman's spouse keeps his
+  var takesName = wantSex === 'female';
+  if (takesName && taken[normalizeCitizenName_(gData[gi][gF]) + ' ' + normalizeCitizenName_(c.surname)]) {
+    return noMatch(String(gData[gi][gF]).trim() + ' ' + c.surname + ' is already somebody\'s name');
+  }
+  var ownLast = String(gData[gi][gL]).trim();
+  var wasRow = gData[gi].slice();
+  gData[gi][fc.status] = 'Family';
+  gData[gi][gL] = takesName ? c.surname : ownLast;
+  gData[gi][fc.maiden] = takesName ? ownLast : '';
+  gData[gi][fc.of] = c.pop;
+  gData[gi][fc.role] = type;
+  if (gN >= 0 && aHood) gData[gi][gN] = aHood; // they share the family's home
+  noteGcContext_(gData, gi, findColByName_(gh, 'EmergenceContext'),
+    'Family: ' + type + ' of ' + String(aRow[L.first] || '').trim() + ' ' + c.surname + ' (' + c.pop + '), C' + cycle);
+  try { writeGcRow_(genericSheet, gData, gi); } catch (eW) { gData[gi] = wasRow; throw eW; }
+  if (!links.byAnchor[c.pop]) links.byAnchor[c.pop] = { spouse: [], child: [], parent: [] };
+  links.byAnchor[c.pop][type].push(gi);
+  results.linked++;
+  Logger.log('checkFamilyMatchPromotions_: ' + String(gData[gi][gF]) + ' ' + ownLast + ' is the ' + type + ' of ' +
+    c.pop + (takesName ? ' — now ' + String(gData[gi][gF]) + ' ' + c.surname : ' — keeps his name') + ', in the background (C' + cycle + ')');
   return results;
 }
 
@@ -2998,9 +2994,11 @@ function formIntakeHouseholds_(ctx, mints, cycle, now, logSheet) {
     var hh = mints[key];
     // engine.302 (codex cut-3 review A1): a spouse whose link was refused (a minor) or never wired joins no
     // household as a spouse — they stay unhoused, logged; the household forms from the rest
+    // engine.339 (agy review F1): the same for a child or parent whose link was refused (under 21 years apart) —
+    // counted in the household's members and income while its kid count read 0
     hh.members = hh.members.filter(function (mm) {
-      if (mm.type !== 'spouse' || mm.linked) return true;
-      Logger.log('formIntakeHouseholds_: ' + mm.pop + ' queued as spouse but not wired — left out of household ' + key + ' (engine.302)');
+      if (mm.type === 'head' || mm.linked) return true;
+      Logger.log('formIntakeHouseholds_: ' + mm.pop + ' queued as ' + mm.type + ' but not wired — left out of household ' + key + ' (engine.302, engine.339)');
       return false;
     });
     if (!hh.head || hh.members.length < 2) continue;

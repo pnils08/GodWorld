@@ -8,7 +8,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| engine.354 | Job labels: 331 living people hold a label for a job they don't; intake edit and civic seat turnover still leave it. Plan rejected; the fix is his | needs-info | engine-sheet | no plan — deleted 2026-11-21 |
+| engine.354 | Job labels: 331 living people hold a label for a job they don't; intake edit and civic seat turnover still leave it | needs-info | engine-sheet | — |
 | engine.339 | How kids are minted: plan rejected and deleted on the builder's word 2026-11-21; its code is not on PROD; what replaces it is his | needs-info | research-build | no plan — deleted 2026-11-21 (git history) |
 | engine.331 | Sports triggers: C115 read, every pitch traces to a word; P3 fails, 142 signed fan lines a week vs 37–74 before — his call | needs-info | engine-sheet | [[../plans/2026-11-05-sports-feed-triggers]] |
 | engine.94 | Memory that fires: C115 B.2 re-read, every hood at 0, 14 defaulted carriers; 24 rows unapplied and the challenger call wait on him | needs-info | engine-sheet | [[../plans/2026-07-31-citizen-memory-perception]] §Status log engine.94 B.3 v3 live reads |

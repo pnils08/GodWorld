@@ -119,7 +119,11 @@ function nightClauses(night) {
   if (mishaps.length) out.push('had ' + (mishaps.length === 1 ? 'a mishap' : num(mishaps.length) + ' mishaps'));
 
   const pd = F.points_delta;
-  const earned = pd && Array.isArray(pd.earned) ? pd.earned.filter((e) => e && e.name) : [];
+  // Two scoring rules write the night's points: unlocks inside the window (`earned`, { name, points }) and the progress
+  // rule's per-achievement gains (`items`, { name, gained }). Read both; a progress night was told with no points at all.
+  const earned = pd && Array.isArray(pd.earned) && pd.earned.some((e) => e && e.name)
+    ? pd.earned.filter((e) => e && e.name)
+    : (pd && Array.isArray(pd.items) ? pd.items.filter((e) => e && e.name && Number(e.gained) > 0).map((e) => ({ name: e.name, points: e.gained })) : []);
   if (earned.length) out.push('earned ' + listOf(earned.map((e) => e.name + ' (' + num(e.points) + (Number(e.points) === 1 ? ' point' : ' points') + ')')));
   else if (pd && pd.value === 0) out.push('earned no new points');
 

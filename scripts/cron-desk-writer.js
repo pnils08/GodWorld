@@ -170,6 +170,22 @@ function loadSharonLifestyleBag() {
 function loadArianaAnalyticsBag() {
   return loadPersonaBag('ARIANA_ANALYTICS_BAG.md', 'ARIANA SPORTS ANALYTICS BAG (sports-native deep analysis for canon)', 'As_Roster+TrueSource; sample floors; never invent x-stats.');
 }
+// Nia (both seats): only her bag's "What the show is" section reaches the write — how the chair is drawn and how the
+// board scores (points first, credits break a tie). The rest of that file is builder-facing (feed field names, file
+// paths, August test pilots) and stays out, as do the section's source line and file pointers.
+function loadNiaShowFacts() {
+  const banner = 'UNDOCKED — WHAT THE SHOW IS';
+  try {
+    const raw = fs.readFileSync(path.join(ROOT, 'docs', 'media', 'NIA_ROOK_UNDOCKED_BAG.md'), 'utf8');
+    const m = raw.match(/^## What the show is[^\n]*\n([\s\S]*?)(?=^## )/m);
+    if (!m) throw new Error('section "What the show is" not found');
+    const body = m[1].split('\n').filter(l => !/^- Source:/.test(l)).join('\n')
+      .replace(/\s*\(`[^`]*`[^)]*\)/g, '').trim();
+    return '\n\n=== ' + banner + ' ===\n' + body + '\n=== END ' + banner + ' ===\n';
+  } catch (e) {
+    return '\n\n' + banner + ' MISSING at docs/media/NIA_ROOK_UNDOCKED_BAG.md (' + e.message + ').\n';
+  }
+}
 function loadHartleyVisualBag() {
   return loadPersonaBag('HARTLEY_VISUAL_BAG.md', 'HARTLEY VISUAL BAG (visual record / prompt architectures)', 'Prompts and visual assignments; not prose articles; no invented institutions.');
 }
@@ -1327,6 +1343,8 @@ async function main() {
       'One frame one moment. Canon institutions only. ' +
       'FORBIDDEN: inventing buildings, writing news copy as if a reporter, multi-story desk section.\n' +
       loadHartleyVisualBag()
+    : isNiaSeat(PERSONA)
+    ? loadNiaShowFacts()
     : '';
 
   // engine.102 W5 (Task 9 cron half): the WP city dial is a model face, not census.

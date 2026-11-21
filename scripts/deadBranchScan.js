@@ -125,6 +125,8 @@ const ALLOWLIST = [
     reason: 'Elena POP-00791 published essence, held for the builder (A2).' },
   { file: 'utilities/tier1EssenceEvents.js', re: /^Promotion$/,
     reason: 'Authored Tier-1 essence tag, not a color-pool promotion.' },
+  { file: 'phase05-citizens/generateCitizensEvents.js', re: /^handled a logistics call with an ex$/,
+    reason: 'Reads MaritalStatus for register; does not create a divorce.' },
   // engine.299 Task 7 item 5: displacementmove → incomefitmove. The three read-alias sites keep the old key
   // so registers already stored on citizens still resolve; no stored value is rewritten.
   { file: 'utilities/compressLifeHistory.js', re: /^displacementmove$/,
@@ -260,6 +262,7 @@ function buildOffenders({ log, ecl, sources, resolver, cycle, sheet = 'live', ge
       // are kept separate; metadata false positives remain reviewable.
       if (!owner && scanEmitters.has(file) && t.kind === 'string' && /\s/.test(t.text) && LIFE.test(t.text)) lifeVerbs.push(annotate(hit));
       if (file === 'utilities/tier1EssenceEvents.js' && t.kind === 'string' && t.text === 'Promotion') lifeVerbs.push(annotate(hit));
+      if (file === 'phase05-citizens/generateCitizensEvents.js' && t.text === 'handled a logistics call with an ex') lifeVerbs.push(annotate(hit));
       if (!scanEmitters.has(file) || t.kind !== 'string') continue;
       const before = sources[file].slice(Math.max(0, t.offset - 100), t.offset);
       // Map keys (especially the deliberately inert historical DIAL_MAP) are

@@ -90,6 +90,7 @@ const LINES = {
     ['answered a friend\'s long message with one word', 'anyone', 'rb'],
     ['let the silence stand after someone\'s small mistake was noticed', 'anyone', 'g1'],
     ['smiled when an old friend got the date of their meetup wrong', 'anyone', 'g2'],
+    ['kept the extra blanket on their own side through the cold snap', 'married', 'g2'],
     ['watched a coworker struggle with the door and kept both hands on their coffee', 'working', 'rb'],
     ['heard a friend\'s good news and found the flaw in it out loud', 'anyone', 'rb'],
     ['did not ask how the appointment went, though they remembered the day', 'anyone', 'rb'],
@@ -141,6 +142,7 @@ const LINES = {
     ['found someone in their usual seat and held it against them all evening', 'anyone', 'rb'],
     ['refused the borrowed book and went back to the one on the nightstand', 'teen', 'g1'],
     ['said "that\'s not for people like us" about the new place before anyone asked', 'anyone', 'rb'],
+    ['changed the channel when their spouse mentioned a different show', 'married', 'g2'],
     ['waved away the afternoon lecture at the center and went home early', 'retired', 'g1']
   ],
   integrity: [
@@ -170,6 +172,9 @@ const LINES = {
   family: [
     ['felt relieved when their brother cancelled the visit first', 'anyone', 'g2'],
     ['let their sister\'s call ring out and felt lighter afterward', 'anyone', 'g2'],
+    ['corrected their spouse\'s story in front of the table for no reason', 'married', 'g2'],
+    ['agreed their spouse was right only to end the conversation faster', 'married', 'g2'],
+    ['went to bed without answering their partner\'s question about the day', 'married', 'g2'],
     ['told their sister she was overreacting and felt calm saying it', 'anyone', 'g2'],
     ['changed the subject when their mother brought up the old argument', 'anyone', 'g2'],
     ['let their father\'s message sit unread through the whole evening', 'anyone', 'g2'],

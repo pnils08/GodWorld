@@ -13,10 +13,10 @@
  *    writes, phases 4-5) — joined by exact POPID target first, neighborhood second.
  *    Read-only sheet access (reads are unrestricted; writes stay Phase-10 intents).
  *
- * Promotion rule (engine.340): a seed is class "major" when any unit group is big
- * for its own kind — CONTRACT_SEED_CLASS, one bar per causeType on that kind's own
- * scale. Everything else is class "texture" — available, not promoted. Counts
- * logged, no silent caps.
+ * Promotion rule (T5 fold, sign-aware): a seed is class "major" when
+ * |magnitude| >= MAJOR_MAG or when >= CLUSTER_N same-family causes hit the same
+ * neighborhood family this cycle (merged into one seed). Everything else is
+ * class "texture" — available, not promoted. Counts logged, no silent caps.
  * engine.334: magnitudes add only within one unit (CONTRACT_SEED_UNIT) — What,
  * Magnitude and the |magnitude| test read each unit group on its own.
  *
@@ -26,60 +26,9 @@
  * Apps Script global style (clasped). Dual-use module guard for the Node test.
  */
 
-// engine.340 (builder 2026-11-08: "why would fame and civic ever compete other than by content quality?"):
-// a seed is major when the event is big FOR ITS OWN KIND. Each kind's ripples carry their own scale —
-// an authored tag, a hook severity, an intensity, impact points, a head-count — so each kind has its own
-// bar, read per unit group (engine.334). Rules: 'at' = |figure| >= bar; 'atOrSurge' = 'at', or n >= surge
-// in the unit (the faith producers wrote the 3+ cluster as their surge story); 'atOrBelowZero' = 'at', or
-// figure < 0; 'birth' = any non-carryover ripple; 'never' = the unit never decides class. Carryover
-// ripples (the same event a later week, at its birth figure) never count toward a bar.
-// Plan: docs/plans/2026-11-08-seed-builder-class-per-kind.md §Task 2 design (which bars the code holds).
-var CONTRACT_SEED_CLASS = {
-  // authored tags: 0.05 is the producers' solo-major tag, 0.01–0.02 their texture tag
-  'chaos-event': { rule: 'at', bar: 0.05 },
-  'fame-event': { rule: 'at', bar: 0.05 },
-  'bond-event': { rule: 'at', bar: 0.05 },
-  'weather-event': { rule: 'at', bar: 0.05 },
-  'transit-event': { rule: 'at', bar: 0.05 },
-  'crisis-event': { rule: 'at', bar: 0.05 },
-  'youth-event': { rule: 'at', bar: 0.05 },
-  'city-event': { rule: 'at', bar: 0.05 },
-  'lifestyle-sighting': { rule: 'at', bar: 0.05 },
-  'faith-event': { rule: 'atOrSurge', bar: 0.05, surge: 3 },
-  'faith-join': { rule: 'atOrSurge', bar: 0.05, surge: 3 },
-  // crime ladder: level 3 is the wave (applyCityDynamics.applyCrimeLadder_)
-  'crime': { rule: 'at', bar: 3 },
-  // initiatives: active phases (intensity >= 0.8) or a stalled / blocked one; a vote lands once
-  'initiative-implementation': { rule: 'atOrBelowZero', bar: 0.8 },
-  'initiative': { rule: 'birth' },
-  // hook severities (story-hook ladder 5–8): forced move, exodus, boom, housing pressure
-  'migration': { rule: 'at', bar: 7 },
-  'trajectory': { rule: 'at', bar: 7 },
-  'household': { rule: 'at', bar: 7 },
-  'seat-filled': { rule: 'at', bar: 7 },
-  'left-office': { rule: 'at', bar: 7 },
-  'approval-ceiling': { rule: 'at', bar: 7 },
-  'challenger-campaign': { rule: 'at', bar: 7 },
-  'demotion': { rule: 'at', bar: 7 },
-  // points
-  'economic-event': { rule: 'at', bar: 10 },
-  'approval-shift': { rule: 'at', bar: 3 },
-  'coverage-reaction': { rule: 'at', bar: 3 },
-  // dial fractions
-  'edition-coverage': { rule: 'at', bar: 0.05 },
-  'neighborhood-fold': { rule: 'at', bar: 0.05 },
-  'sports': { rule: 'at', bar: 0.05 },
-  // HousingPressure (0–10) change from moves
-  'relocation-pressure': { rule: 'at', bar: 0.5 }
-};
-// effectType overrides where one cause carries two scales.
-var CONTRACT_SEED_CLASS_EFFECT = {
-  'transit-event|game-day-crowds': { rule: 'at', bar: 0.1 },  // ridership lift, not a tag
-  'economic-event|business-closure': { rule: 'birth' },        // fixed −25 / −40: every closure
-  'sports|game-night': { rule: 'never' },                      // head-counts: the game's mood decides
-  'sports|game-night-household': { rule: 'never' },
-  'sports|game-night-texture': { rule: 'never' }
-};
+var CONTRACT_SEED_MAJOR_MAG = 3;      // |magnitude| at/above → major (crime shifts, hood deltas)
+var CONTRACT_SEED_MAJOR_MAG_FRAC = 0.05; // fractional magnitudes (sentiment 0-1 scale)
+var CONTRACT_SEED_CLUSTER_N = 3;      // same cause family + hood family count → merged major
 var CONTRACT_SEED_MAX_CITIZENS = 6;   // exact-participant cap per seed row
 var CONTRACT_SEED_FILL_N = 4;         // Grade 1: fill Citizens to this count via neighborhood draw
 var CONTRACT_SEED_FILL_BIZ = 2;       // S313: fill Businesses to this count via neighborhood draw
@@ -171,29 +120,11 @@ function contractSeedTrend_(r) {
   return 'carrying, ' + rem.toFixed(2) + ' strength left of ' + dur + '-cycle run';
 }
 
-/** engine.340: the class rule for a kind, effectType override first; null when the kind is not in the table. */
-function contractSeedClassRule_(causeType, effectType) {
-  var ek = String(causeType || '') + '|' + String(effectType || '');
-  if (Object.prototype.hasOwnProperty.call(CONTRACT_SEED_CLASS_EFFECT, ek)) return CONTRACT_SEED_CLASS_EFFECT[ek];
-  var ct = String(causeType || '');
-  return Object.prototype.hasOwnProperty.call(CONTRACT_SEED_CLASS, ct) ? CONTRACT_SEED_CLASS[ct] : null;
-}
-
-/**
- * engine.340: is one unit group big for its own kind? ug = a contractSeedUnitGroups_ entry
- * ({causeType, effectType, classFigure, classN}: carryovers excluded). Returns true / false, or null
- * when the kind has no rule (the caller logs it and writes texture).
- */
-function contractSeedIsMajor_(ug) {
-  var rule = contractSeedClassRule_(ug && ug.causeType, ug && ug.effectType);
-  if (!rule) return null;
-  var n = Number(ug.classN) || 0;
-  if (!n || rule.rule === 'never') return false;
-  if (rule.rule === 'birth') return true;
-  var f = Number(ug.classFigure) || 0;
-  if (Math.abs(f) >= rule.bar) return true;
-  if (rule.rule === 'atOrSurge' && n >= rule.surge) return true;
-  if (rule.rule === 'atOrBelowZero' && f < 0) return true;
+function contractSeedIsMajor_(magnitude, clusterSize) {
+  var m = Math.abs(Number(magnitude) || 0);
+  if (clusterSize >= CONTRACT_SEED_CLUSTER_N) return true;
+  if (m >= CONTRACT_SEED_MAJOR_MAG) return true;
+  if (m > 0 && m < 1 && m >= CONTRACT_SEED_MAJOR_MAG_FRAC) return true;
   return false;
 }
 
@@ -239,23 +170,12 @@ function contractSeedUnitGroups_(group, lead) {
     var rp = group[i];
     var u = contractSeedUnit_(rp);
     var ug = byKey[u.key];
-    if (!ug) {
-      ug = byKey[u.key] = { kind: u.kind, label: '', first: rp.effectType || rp.causeType, n: 0, figure: 0,
-        causeType: rp.causeType || '', effectType: '', classFigure: 0, classN: 0 };
-      keys.push(u.key);
-    }
+    if (!ug) { ug = byKey[u.key] = { kind: u.kind, label: '', first: rp.effectType || rp.causeType, n: 0, figure: 0 }; keys.push(u.key); }
     if (!ug.label && rp.effectType !== 'carryover') ug.label = rp.effectType || rp.causeType;
     var m = Number(rp.magnitude) || 0;
     if (u.kind === 'sum') ug.figure += m;
     else if (Math.abs(m) > Math.abs(ug.figure)) ug.figure = m;
     ug.n++;
-    // engine.340: the class reads this week's own effects only — a carryover is an earlier week's event
-    if (rp.effectType !== 'carryover') {
-      if (!ug.effectType) ug.effectType = rp.effectType || '';
-      if (u.kind === 'sum') ug.classFigure += m;
-      else if (Math.abs(m) > Math.abs(ug.classFigure)) ug.classFigure = m;
-      ug.classN++;
-    }
   }
   var leadKey = contractSeedUnit_(lead).key;
   var out = [byKey[leadKey]];
@@ -625,7 +545,6 @@ function buildContractSeeds_(ctx) {
   }
 
   var seeds = [];
-  var unlistedKinds = {}; // engine.340: one Engine_Errors row per unruled kind per Cycle
   var majorCount = 0;
   var textureCount = 0;
 
@@ -670,24 +589,11 @@ function buildContractSeeds_(ctx) {
       index, targetPops, lead.neighborhood, lead.causeType, usedPop, CONTRACT_SEED_MAX_CITIZENS,
       (typeof ctx.rng === 'function') ? ctx.rng : null);
 
-    // engine.340: major when any one unit is big for its own kind (engine.334: merging never demotes an
-    // effect, unlike units never add up to a promotion; the cluster's size is no bar — engine.340).
-    // A kind with no rule writes texture and one Engine_Errors row per kind per Cycle.
-    var isMajor = false;
-    for (var ui = 0; ui < unitGroups.length && !isMajor; ui++) {
-      var uMajor = contractSeedIsMajor_(unitGroups[ui]);
-      if (uMajor === null) {
-        var uk = unitGroups[ui].causeType + '|' + unitGroups[ui].effectType;
-        if (!unlistedKinds[uk]) {
-          unlistedKinds[uk] = true;
-          if (typeof logEngineError_ === 'function') {
-            logEngineError_(ctx, 'Phase7-SeedClass', new Error('engine.340: ripple kind ' + uk +
-              ' has no class rule in CONTRACT_SEED_CLASS — its seed written as texture'));
-          }
-        }
-      } else if (uMajor) {
-        isMajor = true;
-      }
+    // engine.334: major when the cluster is large, or when any one unit clears the bar on its own —
+    // merging never demotes an effect, and unlike units never add up to a promotion.
+    var isMajor = contractSeedIsMajor_(unitGroups[0].figure, group.length);
+    for (var ui = 1; ui < unitGroups.length && !isMajor; ui++) {
+      if (contractSeedIsMajor_(unitGroups[ui].figure, 0)) isMajor = true;
     }
     if (isMajor) majorCount++; else textureCount++;
 
@@ -802,9 +708,6 @@ if (typeof module !== 'undefined' && module.exports) {
     buildContractSeeds_: buildContractSeeds_,
     contractSeedCycleEvents_: contractSeedCycleEvents_,
     contractSeedIsMajor_: contractSeedIsMajor_,
-    contractSeedClassRule_: contractSeedClassRule_,
-    CONTRACT_SEED_CLASS: CONTRACT_SEED_CLASS,
-    CONTRACT_SEED_CLASS_EFFECT: CONTRACT_SEED_CLASS_EFFECT,
     contractSeedUnit_: contractSeedUnit_,
     contractSeedUnitGroups_: contractSeedUnitGroups_,
     CONTRACT_SEED_UNIT: CONTRACT_SEED_UNIT,

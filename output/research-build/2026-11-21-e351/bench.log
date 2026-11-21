@@ -1,0 +1,43 @@
+AIM = BENCH (script read the bench marker)
+== sync from live
+  verify Reflection_Intake: bench 2996 rows vs live 2996 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+{"fireGuardMinutes":"0","cycleCountFormatted":"116","cycleCountIsNumber":true}
+door: {"target":"bench","http":200,"ok":true,"record":{"cycle":118,"startedMs":1795291159798,"state":"done","finishedMs":1795291316540},"raw":"{\"cycle\":118,\"startedMs\":1795291159798,\"state\":\"done\",\
+clearfire 118: {"ok":true,"cleared":{"cycle":118,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+-- pause 75 s (read quota)
+Edition_Coverage_Ratings C116: 7 rows (window 115,114,113,112,111,110,109,108)
+Citizen_Media_Usage C116: 14 rows from live C115
+Oakland_Sports_Feed C117: 0 rows
+appended 7 to Edition_Coverage_Ratings; marked rows on the tab now 7
+appended 14 to Citizen_Media_Usage; marked rows on the tab now 14
+planted: Intake household E351BENCH (Calder no Age); Advancement Petra (no BirthYear), Ansel (complete) — read back in place
+pre: maxPop 1249, Engine_Errors 9
+bench cycleCount 116
+fire C117 rc=0 "verdict": "PASS" "wallS": 208
+  Intake Odessa Quill: waiting — household "E351BENCH" needs Calder Quill: Age
+  Intake Calder Quill: waiting — household "E351BENCH" needs Calder Quill: Age
+  Advancement Petra Vantongeren: waiting — needs BirthYear (C117)
+  new ledger rows 5 | BirthYear 2003 among them 1
+  POP-01250 Elena Beckett, 0, student [ENGINE]: no start (child or no year)
+  POP-01251 Tyrone Carter, 39, Warehouse worker [ENGINE]: start drive 57, sociability 55, warmth 55, openness 53, composure 52, integrity 47, family 49, outabout 55 | base now 57/55/55/54.4/52/47/49/55 | Dial_Moves = start
+  POP-01252 Yolanda Ghosh, 43, QA tester [ENGINE]: start drive 50, sociability 49, warmth 48, openness 46, composure 46, integrity 50, family 52, outabout 51 | base now 50/49/48/47.5/46/50/52/51 | Dial_Moves = start
+  POP-01253 Ansel Brightwater, 52, Registered Nurse [ENGINE]: start drive 55, sociability 53, warmth 53, openness 50, composure 61, integrity 48, family 49, outabout 47 | base now 55/53/53/50/61/48/49/47 | Dial_Moves = start
+  POP-01254 Margot Holloway, 58, Owner, Northgate Kitchen [ENGINE]: start drive 60, sociability 50, warmth 49, openness 54, composure 55, integrity 45, family 56, outabout 54 | base now 62.4/50/49/55.4/55/45/56/54 | Dial_Moves = start
+  Engine_Errors +0
+C117 CHECK PASS
+-- pause 70 s (read quota)
+bench cycleCount 117
+fire C118 rc=0 "verdict": "PASS" "wallS": 164
+  Intake Odessa Quill: waiting — household "E351BENCH" needs Calder Quill: Age
+  Intake Calder Quill: waiting — household "E351BENCH" needs Calder Quill: Age
+  Advancement Petra Vantongeren: waiting — needs BirthYear (C118)
+  new ledger rows 1 | BirthYear 2003 among them 0
+  POP-01255 Arjun Owusu, 43, Owner, Grand Avenue Trust & Estate [ENGINE]: start drive 59, sociability 54, warmth 45, openness 47, composure 54, integrity 52, family 48, outabout 51 | base now 61.5/54/45/48.5/54/52/48/51 | Dial_Moves = start
+  Engine_Errors +0
+C118 CHECK PASS
+== final sync from live
+  verify Reflection_Intake: bench 2996 rows vs live 2996 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+RESULT check exit 0

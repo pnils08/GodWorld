@@ -226,7 +226,7 @@ function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bonds
     const userQ = `${WAKE_FRAME[WAKE] || WAKE_FRAME.evening}. Someone asked you this week, and it has stayed with you: "${questionText}"\n\nThink it through on the page the way you actually would — private, honest, first person.`;
     return { system, user: userQ, disp, prov: { id: 'question', route: 'owed', text: questionText } };
   }
-  const user = `${WAKE_FRAME[WAKE] || WAKE_FRAME.evening}. ${prov.text}\n\nIn 4-5 sentences, think on the page the way you actually would — private, honest, first person. Don't narrate events like a story; just sit with it.`;
+  const user = `${WAKE_FRAME[WAKE] || WAKE_FRAME.evening}. ${prov.text}\n\nThink on the page the way you actually would — private, honest, first person. Don't narrate events like a story; just sit with it.`;
   return { system, user, disp, prov };
 }
 

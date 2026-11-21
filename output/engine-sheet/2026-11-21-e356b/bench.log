@@ -1,0 +1,35 @@
+AIM = BENCH (script read the bench marker)
+== sync from live
+  verify Reflection_Intake: bench 3007 rows vs live 3007 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+{"fireGuardMinutes":"0","cycleCountFormatted":"116","cycleCountIsNumber":true}
+door: {"target":"bench","http":200,"ok":true,"record":{"cycle":118,"startedMs":1795303088500,"state":"done","finishedMs":1795303303970},"raw":"{\"cycle\":118,\"startedMs\":1795303088500,\"state\":\"done\",\
+clearfire 118: {"ok":true,"cleared":{"cycle":118,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+-- pause 75 s (read quota)
+Edition_Coverage_Ratings C116: 1 rows (window 116,115,114,113,112,111,110,109), sandbox already has CIVIC,COMMUNITY,CULTURE,SPORTS
+Citizen_Media_Usage C116: 0 rows (sandbox already has a published or seeded week at C116)
+Oakland_Sports_Feed C117: 0 rows
+appended 1 to Edition_Coverage_Ratings; marked rows on the tab now 1
+bench cycleCount 116
+fire C117 rc=0 "verdict": "PASS" "wallS": 199 newEE="newEE": []
+C117 (Y3C13): bond lines in cells 62 | log rows with source:bond 62 {"Bond":18,"ConnectionMaintained":12,"ConnectionWithdrawn":9,"Wedding":2,"TrustGuarded":21} | carrying the other person 42
+cell lines with no log row: 0 | log rows with no cell line: 0
+  POP-00829 Theodora Donovan (West Oakland) [Bond|source:bond] Kaila Nguyen became a real friend, not just a colleague
+  POP-00339 Kaila Nguyen (Fruitvale) [Bond|source:bond] Theodora Donovan became a real friend, not just a colleague
+  POP-00167 Carlo Jist (Lake Merritt) [Bond|source:bond] Genevieve Liu became a real friend, not just a colleague
+  POP-00928 Genevieve Liu (Lake Merritt) [Bond|source:bond] Carlo Jist became a real friend, not just a colleague
+  POP-00989 Nour Santos (West Oakland) [ConnectionMaintained|source:bond|contactPopId:POP-00662] picked things back up with Simone Limone
+  POP-00662 Simone Limone (West Oakland) [ConnectionMaintained|source:bond|contactPopId:POP-00989] picked things back up with Nour Santos
+  POP-01014 Sadie Williams (Chinatown) [ConnectionWithdrawn|source:bond|contactPopId:POP-00497] had not really talked to Abraham Wright in a while
+  POP-00497 Abraham Wright (Chinatown) [ConnectionWithdrawn|source:bond|contactPopId:POP-01014] had not really talked to Sadie Williams in a while
+  POP-00983 Riya Wough (Downtown) [ConnectionMaintained|source:bond|contactPopId:POP-00474] picked things back up with Ally Scott
+  POP-00474 Ally Scott (Downtown) [ConnectionMaintained|source:bond|contactPopId:POP-00983] picked things back up with Riya Wough
+  POP-00667 Lo Thoop (Jack London) [ConnectionWithdrawn|source:bond|contactPopId:POP-00975] had not really talked to Salma Navarro in a while
+  POP-00975 Salma Navarro (Temescal) [ConnectionWithdrawn|source:bond|contactPopId:POP-00667] had not really talked to Lo Thoop in a while
+read C117 exit 0
+== final sync from live
+  verify Reflection_Intake: bench 3007 rows vs live 3007 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+RESULT check exit 0
+exit 0

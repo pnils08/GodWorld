@@ -808,6 +808,15 @@ Not run (test guard): files likely red — `householdIntake` (blank-age members 
 
 Acceptance 6 reads on the bench through an Advancement row or a household, not a lone story row (that one goes to Generic_Citizens).
 
+**Tests run 2026-11-21 (builder: "Run your tests"): 17 of 347 files fail; each read.** No fault found in the live code.
+- Harness, not code — the fold now calls two co-loaded functions the test files do not load: `gradedParts_` (`citizenDialMap.js`, engine.350 pile 1: `citizenDialMultiCycle`, `compressLifeHistory.dial`, `dialMoves`, `unlivedFold`) and `simYearOf_` (the calendar, engine.351: `biasFold`, `compressLifeHistory.bond`, `cronStance`, `griefPeriod`, `engine32MultiCycle`). Live and the bench load every file.
+- Expectation from before engine.351 — queue rows written without BirthYear / Neighborhood / RoleType now wait (`householdIntake`, `ownerDoor`); a row with no DialState starts off 50 (`integrityWear` 3.5).
+- Expectation from before pile 1 — fame lines read `Reputation-Sociability-Up-S`, and a famous citizen writes about 1% fewer lines because the plain fame line is drawn and not written (`citizensEventsFame.t3`); retired players' lines carry their own sign (`homeSocialLineSign`); a tab row tagged `memory:rivalry` with no `dial:` tag is not written (`contentLedgerCompose`); a source-text check on the Work admission (`occupationDialTags`).
+- Not this plan — `engine304FamilyLottery` fails the same way on `4479a1483`: engine.339's lottery, live since stage 63.
+- Live Event_Content_Ledger read 2026-11-21: one active row of the kinds pile 1 made graded-only carried no sign — row 276. Written on the builder's go ("Go on the fix"): Tags `source:fame,auth:library-s357,dial:sociability:up`, read back. No `memory:rivalry`, `relationship:`, `arc:` or `source:faith` row is unsigned.
+- `flagCitizenForTierReview_` (`mediaRoomIntake.js`) queues a profiled / featured name whole in column A with no Last; such a row used to mint a second person at BirthYear 2003 and now waits. None on the live tab; no ledger row has a blank Last.
+- The test files are not updated.
+
 **Bench 2026-11-21 (SANDBOX 1004 @223, PROD @200 + the three files, live sync C116; DEPLOY_HISTORY §Current sandbox):** C117 PASS 208 s, C118 PASS 164 s, 0 new Engine_Errors. Acceptance 6 met: the household with a spouse missing Age and the promotion row missing BirthYear wait both Cycles, unminted, each naming what is missing; the complete row (Ansel Brightwater, 52, Registered Nurse) minted with drive 55, sociability 53, warmth 53, openness 50, composure 61, integrity 48, family 49, out-and-about 47. Five natural arrivals started off 50 (Margot Holloway, 58, owner: drive 60, composure 55; Arjun Owusu, 43, owner: drive 59), two children left at 50; Dial_Moves `arrival start` = the function on every one, none on an existing citizen.
 
 ## Tasks

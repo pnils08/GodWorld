@@ -1861,7 +1861,10 @@ function generateCitizensEvents_(ctx) {
     // went; an out-and-about citizen (the engine.38 A4 band the city events use) crossed town for it.
     // Anyone can have had a programme on. Each line carries the place's hood and BIZ_ID as tags, so the
     // record says where. Weights sit below the city-event attend weights (2.6 / 1.4 / 1.6 × oa): a
-    // restaurant is not a block party. Absent fields (a pre-356 snapshot) add nothing.
+    // restaurant is not a block party. Raised one notch after the first bench (1 diner, 1 at the bar, 0
+    // sightings of 1,019 at 1.3 / 0.8 × oa / 1.1) on the builder's word 2026-11-21: "We can raise the odds
+    // a notch and push" — now 2.0 home hood, 1.2 × oa across town, 1.6 a sighting; a programme stays 0.6.
+    // Absent fields (a pre-356 snapshot) add nothing.
     var eOa = (typeof outaboutMult === "number") ? outaboutMult : 1.0;
     var eTravels = eOa >= 1.15;
     var eHome = homeHood || neighborhood || "";
@@ -1876,9 +1879,9 @@ function generateCitizensEvents_(ctx) {
         var p = list[ei];
         if (!p || !p.name) continue;
         if (eHome && p.neighborhood && p.neighborhood === eHome) {
-          pool.push(makeEntry(hereText.replace("$P", p.name), eTags(kind, p), 1.3, false));
+          pool.push(makeEntry(hereText.replace("$P", p.name), eTags(kind, p), 2.0, false));
         } else if (eTravels) {
-          pool.push(makeEntry(thereText.replace("$P", p.name + (p.neighborhood ? " in " + p.neighborhood : "")), eTags(kind, p), 0.8 * eOa, false));
+          pool.push(makeEntry(thereText.replace("$P", p.name + (p.neighborhood ? " in " + p.neighborhood : "")), eTags(kind, p), 1.2 * eOa, false));
         }
       }
     };
@@ -1891,7 +1894,7 @@ function generateCitizensEvents_(ctx) {
       if (!fsn || !fsn.name || (selfName && fsn.name === selfName)) continue;   // nobody spots themselves
       if (eHome && fsn.neighborhood && fsn.neighborhood === eHome) {
         pool.push(makeEntry("saw " + fsn.name + (fsn.venue ? " at " + fsn.venue : " out in the neighborhood") + " last night",
-          eTags("evening:sawFamous", fsn), 1.1, false));
+          eTags("evening:sawFamous", fsn), 1.6, false));
       }
     }
     var eTitles = (prev.tv || []).concat(prev.movies || []);

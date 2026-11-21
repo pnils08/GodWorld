@@ -40,6 +40,8 @@ const NEW = ['evening:dinedOut', 'evening:nightOut', 'evening:sawFamous', 'eveni
   }
   console.log('named lines: ' + named.length + ', people: ' + new Set(named.map((r) => r[iP])).size + ', unresolved biz tags: ' + bad);
   Object.keys(texts).sort().forEach((k) => console.log('  ' + String(texts[k].size).padStart(3) + '  ' + k));
+  const iNm = h.indexOf('Name');
+  for (const r of named) { const tg = String(r[iT]); if (/evening:(dinedOut|nightOut|sawFamous)/.test(tg)) console.log('  OUT  ' + r[iP] + ' ' + (iNm >= 0 ? r[iNm] : '') + ' (' + r[iN] + ') — ' + r[iX]); }
   const first = named[0];
   if (first) console.log('one row whole: ' + JSON.stringify({ POPID: first[iP], hood: first[iN], tag: first[iT], text: first[iX] }));
   try {

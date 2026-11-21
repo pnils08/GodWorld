@@ -220,10 +220,10 @@ function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bonds
     neighbors: neighbors, sportsLine: sportsLine, lifeArc: lifeArc,
     textureLine: textureLine, bondsLine: bondsLine, traj: traj, livedLine: livedLine,
   });
-  // engine.338: a wake that carries the builder's question asks THAT — the question is the provocation — and closes on
-  // the one structured MOVE line lib/nextChapter.js reads (never a regex over his prose).
+  // engine.338: a wake that carries the builder's question asks THAT — the question is the provocation. Builder
+  // 2026-11-21: "The question is to wake them to that question" — no job pick, no MOVE line, nothing filed.
   if (questionText) {
-    const userQ = `${WAKE_FRAME[WAKE] || WAKE_FRAME.evening}. ${nextChapter.questionFrame(questionText, c.record && c.record.tier)}`; // codex F1: his Tier's titles only
+    const userQ = `${WAKE_FRAME[WAKE] || WAKE_FRAME.evening}. Someone asked you this week, and it has stayed with you: "${questionText}"\n\nIn 4-5 sentences, think it through on the page the way you actually would — private, honest, first person.`;
     return { system, user: userQ, disp, prov: { id: 'question', route: 'owed', text: questionText } };
   }
   const user = `${WAKE_FRAME[WAKE] || WAKE_FRAME.evening}. ${prov.text}\n\nIn 4-5 sentences, think on the page the way you actually would — private, honest, first person. Don't narrate events like a story; just sit with it.`;
@@ -523,8 +523,8 @@ async function fileNextChapter(c, cycle, question, parsed, dry) {
   if (DRY) console.log('\n--- provocation (user prompt, T5) ---\n' + user + '\n----------------------------------');
   const reply = await generateVoice(system, user, question ? VOICE_TOKENS_QUESTION : VOICE_TOKENS);
   console.log('\n--- reflection ---\n' + reply + '\n------------------');
-  // engine.338 — the MOVE line is read once and stripped: the page and Reflection_Intake carry his words, not the line
-  const parsedMove = question ? nextChapter.parseMove(reply, c.record && c.record.tier) : null; // codex F1: an ineligible title is refused
+  // engine.338 — builder 2026-11-21: a question is not a job pick; the answer is read as his words only, nothing filed
+  const parsedMove = null;
   const reflection = parsedMove ? parsedMove.text : reply;
   if (parsedMove) logLine(`next-chapter: ${c.popId} answered "${question.slice(0, 80)}" -> ${parsedMove.move ? 'role=' + parsedMove.move.role + (parsedMove.move.where ? ' where=' + parsedMove.move.where : '') : parsedMove.reason}`);
 

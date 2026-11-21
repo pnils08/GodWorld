@@ -172,7 +172,7 @@ function loadArianaAnalyticsBag() {
 }
 // Nia (both seats): her bag loads whole, the same way every other reporter's does (builder 2026-11-21).
 function loadNiaUndockedBag() {
-  return loadPersonaBag('NIA_ROOK_UNDOCKED_BAG.md', 'NIA UNDOCKED BAG (what the show is, how the board scores, how to cover a night)', 'Numbers come only from the feed row.');
+  return loadPersonaBag('NIA_ROOK_UNDOCKED_BAG.md', 'NIA UNDOCKED BAG (what the show is, how the board scores, how to cover a night)', "Numbers come only from the night's record.");
 }
 function loadHartleyVisualBag() {
   return loadPersonaBag('HARTLEY_VISUAL_BAG.md', 'HARTLEY VISUAL BAG (visual record / prompt architectures)', 'Prompts and visual assignments; not prose articles; no invented institutions.');

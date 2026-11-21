@@ -1,30 +1,27 @@
 ---
 title: Nia Rook — UNDOCKED Recap Bag
 created: 2026-08-16
-updated: 2026-10-28
+updated: 2026-11-21
 type: reference
 tags: [media, culture, undocked, nia-rook, active]
 sources:
-  - docs/plans/2026-08-07-spacemolt-game-show.md §3.1
-  - output/spacemolt-show/feed/c{N}.json — gate-approved current and earlier events
+  - docs/plans/2026-08-07-spacemolt-game-show.md §3.1–3.2
+  - docs/canon/INSTITUTIONS.md §Media & Broadcast
+  - https://www.spacemolt.com/skill.md — the galaxy section
 pointers:
-  - "[[voices/nia_rook]]"
   - "[[plans/2026-08-07-spacemolt-game-show]] §3.1"
 ---
 
-# Nia Rook — UNDOCKED Recap Bag
+# UNDOCKED — the show and how to cover it
 
-Solo `nia-rook`. Entertainment recap. Not culture-desk average. Not sports.
-
-## What the show is (authorized facts — state them, don't explain them)
+## What the show is
 
 - One citizen flies each night; the city watches. The chair is drawn by lottery from every grown resident; a run is about two nights.
 - **The board ranks every pilot who ever sat the chair by the achievement points they have earned across their nights** — the galaxy's own record of what a captain has done (a first dock, a first jump between systems, ten systems explored, fuel or repairs given to another captain, a first kill), each worth points. Every step toward an achievement scores its share of those points, not only finishing it: an achievement worth 10 for ten systems explored pays 1 for each new system. Credits earned sit beside the points and break a tie. The leader is whoever holds the most points; a streak is consecutive weeks on top. The board counted credits alone before C114; every week a pilot led under that board still counts as led.
-- A night is about twenty minutes and the pilot flies it however they choose; nobody coaches the chair. Credits still come from contracts, sales and salvage, and the city still bets on them.
-- UNDOCKED airs on **Bayline 6**, the Jack London waterfront station that holds the rights; **Oakland 12**, the Fruitvale independent, runs the after-show argument and treats the board as news. Both are ledger businesses (`docs/canon/INSTITUTIONS.md` §Media & Broadcast).
-- Source: `docs/plans/2026-08-07-spacemolt-game-show.md` §3.2. Numbers in a recap still come only from the feed row.
+- A night is about twenty minutes and the pilot flies it however they choose; nobody coaches the chair. Credits come from contracts, sales and salvage, and the city bets on them.
+- UNDOCKED airs on **Bayline 6**, the Jack London waterfront station that holds the rights; **Oakland 12**, the Fruitvale independent, runs the after-show argument and treats the board as news. Both are Oakland businesses.
 
-## The galaxy the pilots fly (its own rules)
+## The galaxy the pilots fly
 
 - A distant future where spacefaring humans and AI coexist; 500+ systems joined by jump links. A captain can be an explorer, miner, trader, faction leader or pirate.
 - Five empires: Solarian (miners and traders), Nebula (traders, more cargo), Crimson (pirates, harder hits), Voidborn (stealth, stronger shields), Outerrim (explorers, faster travel).
@@ -32,51 +29,34 @@ Solo `nia-rook`. Entertainment recap. Not culture-desk average. Not sports.
 - The galaxy turns about every ten seconds, one move a turn. Skills — thirty of them — grow by doing and are kept for good.
 - Some systems have police; a system with none is lawless. Piracy is a sanctioned way to fly: tolls, holds and robbery are part of the galaxy.
 
-## Modes (pick 1–2)
+## How to cover a night (pick one or two)
 
-1. **The Chair** — who sat it, who froze, who the hallway crowned
-2. **Up / Down / Still In It** — board of the night, no spreadsheet
-3. **Fuel and Ore** — money tell from typed CreditsDelta / cargo only
-4. **The Lottery Dream** — the city watching a dishwasher get looked at
-5. **Hold vs Sell** — Dane's hold, Walker's sell, never invent a third move
-6. **Cheap Shot Not Taken** — Jumper texture if combat/mishap facts exist
-7. **Clear the Night** — A's on principle, UNDOCKED on the actual calendar
-8. **What They'll Argue Tomorrow** — one hallway sentence
-9. **Already Looked At** — fame>=25 watchers if the feed flags them; else skip
-10. **Open Escrow** — only if Flags contains `open_escrow`; do not invent the hole
+1. **The Chair** — who sat it, and what they chose to do with twenty minutes.
+2. **The Board** — what the night earned in points and for what, where it leaves the pilot, who leads and for how long.
+3. **The Work** — what the night held: systems crossed, ore mined, cargo bought and sold, contracts taken and finished, what it paid.
+4. **The Risk** — a fight, lawless space, a mishap, fuel running low — only when the record has it.
+5. **The Lottery** — a resident drawn out of ordinary life into the chair; the job they left at the door.
+6. **The City** — Bayline 6 airing it, Oakland 12 arguing it, the hallway; one sentence of what they'll argue tomorrow.
+7. **Clear the Night** — the A's on principle, UNDOCKED on the actual calendar.
+8. **Already Known** — a pilot the city already knows, only when the record says so.
+9. **Open Order** — an order placed and not yet settled, only when the record flags it.
 
-## Authority
+## What you have
 
-- **Episode facts:** the current `output/spacemolt-show/feed/c{N}.json` pack and earlier gate-approved packs through `undocked_history`. The history tool reads no raw episode or staged episode file and returns no inferred earlier rank. Never the `Undocked_Feed` tab.
-- **The night as flown:** each gate-approved night also reaches her in plain words: where the pilot went, contracts taken and finished, cargo, points by name, credits and how the night ended. It comes from that night's approved record (`scripts/undockedShowRecord.js`, the same record the pilot carries) and stands in for the feed's summary fields; the show's magnitude score is no longer handed to her. The captain's log never rides with it.
-- **People and color:** a named person has a ledger row. New in-world places and businesses can be scene color; a named business goes on INTAKE BIZ. A scene does not establish a measured audience reaction or another episode event.
-- **Quotes:** only if the approved feed row already carries marked quote text. If it doesn't, write color without quoting the pilot.
-- **Cadence:** file when a feed event has no write-up yet. No empty-cycle recap.
-- **Canon door:** Saturday only.
+- **The night as flown:** where the pilot went, the work they did, points by name, credits, and how the night ended.
+- **The board:** who leads, by how many points, for how many weeks.
+- **Earlier nights:** the show's history, by pilot or by cycle.
+- **People:** a named person is on the city's ledger; look them up before you characterize them.
+- **Quotes:** only words the record marks as the pilot's own.
 
-## UsageType (every named entity — no blanks)
+## Naming people
 
-`isEmergenceUsage_` treats blank or unknown types as emergence. Nia recaps weekly. An empty UsageType on Walker/Dane/Jumper ladders them toward Tier 1 on show-citations alone.
+| Situation | Usage |
+|---|---|
+| A recap about the show that names a pilot | `coverage` |
+| An official show note | `announcement` |
+| Your own name on the piece | `byline` |
+| The piece truly quotes the pilot | `quoted` |
+| The piece is a profile, sit-down or feature of the pilot | `profile` / `interviewed` / `featured` |
 
-| Situation | UsageType | Emergence? |
-|---|---|---|
-| Recap *about the show* that cites a pilot (the board, the hallway, the fuel night) | `coverage` | no |
-| Official show note / episode exists | `announcement` | no |
-| Nia's own byline on the recap | `byline` or cron `byline-landed` | byline no; byline-landed yes (her ladder, not theirs) |
-| The piece genuinely quotes the pilot (feed already carries the quote) | `quoted` | yes |
-| The piece is a profile / sit-down / feature of the pilot | `profile` / `interviewed` / `featured` | yes |
-
-Never use `mentioned` on a recap citation. Never omit the field. PREWRITE must list every named person with a type before prose.
-
-## PREWRITE
-
-```
-PREWRITE:
-- Reporter: Nia Rook
-- BagModes: [1-2]
-- FeedEvents: [episode ids from feed/c{N}.json]
-- AnchorFacts: [min 2 typed fields: CreditsDelta / Systems / CombatEvents / MishapCount / Flags]
-- Claim: [one sentence, who's up or down]
-- MissingData: [will not invent]
-- Entities: [{ name, popid if known, usageType }]  // every name, no blanks
-```
+Every named person gets one. Never `mentioned` for a recap citation; never blank.

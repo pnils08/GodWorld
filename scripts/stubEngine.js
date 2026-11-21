@@ -174,15 +174,20 @@ function analyzeFunction(fn) {
   ]);
   const hasWriteApi =
     /\.(?:setValues|setValue|appendRow)\s*\(/.test(body) ||
-    /queue(?:Cell|Append|Range|BatchAppend)Intent_/.test(body) ||
+    /queue(?:Cell|Append|Range)Intent_/.test(body) ||
     /ctx\.ledger\.dirty\s*=\s*true/.test(body);
   let sm;
   while ((sm = sheetNameRe.exec(body)) !== null) {
     const name = sm[1];
     if (!knownSheetHints.has(name)) continue;
     sheetsRead.add(name);
+    // engine.341 (agy F1): this whole-body clause stays without BatchAppend — with it,
+    // every known tab named in a batch-append function counted as written
+    // (recordMediaLedger_ read Cultural_Ledger, wrote Media_Ledger). intentRe above
+    // takes a batch append's own target tab. The clause's older false positives for
+    // Cell/Append/Range are out of this row.
     if (hasWriteApi && (
-      /queue(?:Cell|Append|Range|BatchAppend)Intent_/.test(body) ||
+      /queue(?:Cell|Append|Range)Intent_/.test(body) ||
       new RegExp(
         `getSheetByName\\(\\s*['"]${name}['"]\\s*\\)[\\s\\S]{0,400}?\\.(?:setValues|setValue|appendRow)`,
       ).test(body) ||

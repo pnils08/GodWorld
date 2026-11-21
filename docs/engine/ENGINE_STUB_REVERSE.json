@@ -5237,8 +5237,7 @@
       "writers": [
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
         "phase07-evening-media/culturalLedger.js::flushCulturalFame_",
-        "phase07-evening-media/culturalLedger.js::registerCulturalEntity_",
-        "phase10-persistence/recordMediaLedger.js::recordMediaLedger_"
+        "phase07-evening-media/culturalLedger.js::registerCulturalEntity_"
       ],
       "readers": [
         "phase05-citizens/citizenContextBuilder.js::diagnoseLedgerStructure",

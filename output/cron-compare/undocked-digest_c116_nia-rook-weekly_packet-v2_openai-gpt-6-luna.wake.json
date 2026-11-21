@@ -1,0 +1,64 @@
+{
+  "mode": "wake-write",
+  "desk": "undocked-digest",
+  "cycle": "116",
+  "provider": "openrouter",
+  "model": "openai/gpt-6-luna",
+  "configuredWriterModel": "openai/gpt-6-luna",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "nia-rook-weekly",
+  "byline": {
+    "name": "Nia Rook",
+    "popid": "POP-01076",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 1,
+  "quotesLanded": 3,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "canon_recall",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall",
+    "undocked_history",
+    "undocked_history"
+  ],
+  "toolCalls": 6,
+  "wordCount": 419,
+  "targetWords": "350-650",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 350",
+    "words": 419,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "7525aa880456e754a8f85729a7579014d76d047798db586272f3ed24b7168e95",
+    "costUsd": 0.001
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/3 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/undocked-digest_c116_nia-rook-weekly_packet-v2_openai-gpt-6-luna.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "g/godworld/.env // tip: ⌘ custom filepath { path: '/custom/path/.env' }\n{\n  \"popId\": \"POP-01076\",\n  \"name\": \"Nia Rook\",\n  \"recorded\": true,\n  \"text\": \"UNDOCKED C116: Three routes, one steady leader\"\n}"
+  },
+  "ranAt": "2026-11-21T16:16:10.205Z",
+  "dispositionReconciledAt": "2026-11-21T18:00:03.138Z"
+}

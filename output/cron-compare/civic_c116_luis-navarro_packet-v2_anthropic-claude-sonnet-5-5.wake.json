@@ -56,5 +56,6 @@
     "recorded": true,
     "out": "ing { override: true }\n{\n  \"popId\": \"POP-00636\",\n  \"name\": \"Luis Navarro\",\n  \"recorded\": true,\n  \"text\": \"filed: Four Cycles, One Stage: The Apprenticeship Pipeline's Gap Analysis Is Due Next Cycle\"\n}"
   },
-  "ranAt": "2026-11-18T00:16:15.569Z"
+  "ranAt": "2026-11-18T00:16:15.569Z",
+  "dispositionReconciledAt": "2026-11-21T18:00:02.555Z"
 }

@@ -13,10 +13,10 @@
     "beatDomain": "COMMUNITY"
   },
   "laneEntries": 30,
-  "quotesLanded": 4,
-  "disposition": "flagged",
-  "rheaPass": false,
-  "rheaFlagCount": 1,
+  "quotesLanded": 3,
+  "disposition": "staged",
+  "rheaPass": null,
+  "rheaFlagCount": null,
   "contamination": {
     "fail": false,
     "findings": []
@@ -31,78 +31,90 @@
     "canon_recall"
   ],
   "toolCalls": 6,
-  "wordCount": 1221,
+  "wordCount": 1160,
   "targetWords": "450-1200",
   "capHit": 0,
   "checkFlags": [],
   "verbatimWarn": [
     {
-      "text": "Wilson Shepard moved into a place of their own in West Oakland, renting",
-      "run": "wilson shepard moved into a place"
+      "text": "Paloma Vasquez moved into a place of their own in Grand Lake, renting",
+      "run": "paloma vasquez moved into a place"
     },
     {
-      "text": "Wilson Shepard — in their life, C115: fielded a round of texts from people who hadn't called in years",
-      "run": "a round of texts from people"
+      "text": "Paloma Vasquez — in their life, C116: Became the owner of Marquee Grocer — Grand Lake (engine.96 Task 12)",
+      "run": "became the owner of marquee grocer"
     },
     {
-      "text": "Wilson Shepard — in their life, C116: came home to find the neighbors had left a case of something cold on the porch — still buzzing hours after the game",
-      "run": "the neighbors had left a case"
+      "text": "Priyanka Raman — in their life, C115: A supervisor at Oakland Tech Collective asked what they want next, and seemed to mean it.",
+      "run": "next and seemed to mean it"
     },
     {
-      "text": "Ira Leu — in their life, C115: a flyer for a seniors lunch program flutters on a community bulletin board",
+      "text": "Priyanka Raman — in their life, C115: spent the evening sorting a box of things that used to be someone's",
+      "run": "evening sorting a box of things"
+    },
+    {
+      "text": "Priyanka Raman — in their life, C115: noticed another renovated Victorian on the block and calculated what the property taxes must be",
+      "run": "noticed another renovated victorian on the"
+    },
+    {
+      "text": "Priyanka Raman — in their life, C115: brought home a new plant and picked its spot carefully",
+      "run": "brought home a new plant and"
+    },
+    {
+      "text": "Rosa Ochoa — in their life, C115: a flyer for a seniors lunch program flutters on a community bulletin board",
       "run": "a flyer for a seniors lunch"
     },
     {
-      "text": "Ira Leu — in their life, C115: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
-      "run": "stopped to read the architectural renderings"
+      "text": "Rosa Ochoa — in their life, C115: bought a new A's jersey and still riding the high from last night's win",
+      "run": "bought a new as jersey and"
     },
     {
-      "text": "Ira Leu — in their life, C116: read the Tribune's front page twice — once for the news, once to see who was in it",
-      "run": "read the tribunes front page twice"
+      "text": "Avery Santana — in their life, C115: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+      "run": "an oakland alternative response initiative team"
     },
     {
-      "text": "Matilda Diop — in their life, C115: found a quiet minute at a front porch and the muffled thump of a car stereo playing last summer's hit",
-      "run": "thump of a car stereo playing"
+      "text": "Isley Kelley — in their life, C116: found a school drawing folded in a jacket pocket and kept it",
+      "run": "found a school drawing folded in"
     },
     {
-      "text": "Matilda Diop — in their life, C115: disagreed with a Tribune column out loud to an empty kitchen near a bench near the water",
-      "run": "with a tribune column out loud"
+      "text": "Isley Kelley — in their life, C116: found a quiet minute at a cafe on the avenue and the hum of a bassline from a passing car",
+      "run": "a quiet minute at a cafe"
     },
     {
-      "text": "Matilda Diop — in their life, C116: washed the blood out of the rig at the end of shift and tried not to think about the address",
-      "run": "washed the blood out of the"
+      "text": "Benji Dillon — in their life, C116: got asked about the club at a family dinner",
+      "run": "asked about the club at a"
     },
     {
-      "text": "Darrin Davis — in their life, C116: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
-      "run": "painted over graffiti on the recreation"
+      "text": "Benji Dillon — in their life, C116: grabbed coffee from the cart outside the hospital before the morning rush hit",
+      "run": "coffee from the cart outside the"
     },
     {
-      "text": "Darrin Davis — in their life, C116: stayed thirty minutes after the service just catching up in the parking lot",
-      "run": "service just catching up in the"
+      "text": "Broderick Mitchell — Was handed the keys at Anthropic to open on their own for the first time., Rockridge (C116 — what happened in their life, not words they sa",
+      "run": "was handed the keys at anthropic"
     },
     {
-      "text": "Omar Farah — picked up the first paycheck and stood in the bank line like an adult, Chinatown (C116 — what happened in their life, not words they said)",
-      "run": "and stood in the bank line"
+      "text": "Broderick Mitchell — in their life, C115: cooked an old family recipe from memory, mostly getting it right",
+      "run": "cooked an old family recipe from"
     },
     {
-      "text": "Tariq Cooper — drove alone for the first time and took the long way home on purpose, Piedmont Ave (C116 — what happened in their life, not words they said)",
-      "run": "drove alone for the first time"
+      "text": "Broderick Mitchell — in their life, C115: felt a quiet tradeoff settle into place",
+      "run": "felt a quiet tradeoff settle into"
     },
     {
-      "text": "Tariq Cooper — in their life, C115: iced a rolled ankle and watched film of a game they were not in",
-      "run": "iced a rolled ankle and watched"
+      "text": "Broderick Mitchell — in their life, C116: saved the Tribune clipping with their neighborhood in it — the good one",
+      "run": "neighborhood in it the good one"
     },
     {
-      "text": "Tariq Cooper — in their life, C116: stayed up past everyone talking about what comes after this",
-      "run": "stayed up past everyone talking about"
+      "text": "Derek Simmons — Trained the new person at Oakland Athletics and heard afterward it was the best onboarding in years., Jack London (C116 — what happened in their",
+      "run": "trained the new person at oakland"
     },
     {
-      "text": "Sadie Williams — had a rough week and still showed up to the spelling bee, Chinatown (C116 — what happened in their life, not words they said)",
-      "run": "and still showed up to the"
+      "text": "Derek Simmons — in their life, C116: smelled something on the stove next door that belonged to childhood",
+      "run": "something on the stove next door"
     },
     {
-      "text": "Elias Varek — in their life, C115: headed over to The Aitken Line Founding Celebration in Jack London last night",
-      "run": "over to the aitken line founding"
+      "text": "Derek Simmons — in their life, C116: argued over whether a night spent chasing contracts beats a night chasing the galaxy's own marks, now that the board counts",
+      "run": "chasing contracts beats a night chasing"
     }
   ],
   "rewardLoop": true,
@@ -111,19 +123,22 @@
     "purposeMet": true,
     "inTarget": true,
     "inTargetBy": "code floor 450",
-    "words": 1221,
+    "words": 1160,
     "short": "",
     "score": 3,
     "max": 3,
     "model": "google/gemini-3.7-flash",
-    "draftSha256": "eaed223e799c38aa6c64f09582f7909f764686961f8caac099568a22eee588ec",
-    "costUsd": 0.0016
+    "scoredWithoutRhea": true,
+    "draftSha256": "a21eb0e5560fe9b99579a595c81bd3d7cd81fe2443eb167ece74c0064783b6d4"
   },
   "gradeRecord": {
     "recorded": true,
     "line": "graded: 3/3 — nothing fell short"
   },
-  "article": "output/cron-compare/flagged/culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.md",
-  "selfRecord": null,
-  "ranAt": "2026-11-20T00:19:40.341Z"
+  "article": "output/cron-compare/staged/culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged-0022.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": " injected env (33) from ../.config/godworld/.env // tip: ◈ secrets for agents [www.dotenvx.com]\n{\n  \"popId\": \"POP-01210\",\n  \"name\": \"Tamsin Pruitt\",\n  \"recorded\": true,\n  \"text\": \"The Lives of C116\"\n}"
+  },
+  "ranAt": "2026-11-21T00:20:39.508Z"
 }

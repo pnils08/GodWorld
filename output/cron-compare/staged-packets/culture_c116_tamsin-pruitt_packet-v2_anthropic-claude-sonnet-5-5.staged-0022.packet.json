@@ -1,0 +1,1022 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-01210",
+    "name": "Tamsin Pruitt",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "The lives of C116: 8 people — Paloma Vasquez moved into a place of their own in Grand Lake, renting",
+    "approach": "Lives approach: this slice is the people something happened to this Cycle — a birth, a death in the house, a hospital stay, a retirement, a promotion; a household set up or a place of their own; a win or a loss on the book; the people a turn of the city reached and what it did to their day; and the smaller moments the record kept. Each person gets their own passage: the event, then the thread under it — the stay or strain that led there, the other lines the record kept for them, what the Tribune or this page already said of them, and what they did next if the record says. Read the thread in order and name where two lines of it do not agree; do not restate a ledger value as the story. The fact exactly right; never a trend, never a number first; the person, not the system the event belongs to. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent p",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "lives",
+      "hood": null,
+      "facts": [
+        "Paloma Vasquez moved into a place of their own in Grand Lake, renting (C116)",
+        "Paloma Vasquez — in their life, C116: Became the owner of Marquee Grocer — Grand Lake (engine.96 Task 12)",
+        "Priyanka Raman — noticed the new streetlights went in before anyone had to ask, West Oakland — one of 4 people the Cycle's community turn reached (C116)",
+        "Priyanka Raman — in their life, C115: A supervisor at Oakland Tech Collective asked what they want next, and seemed to mean it.",
+        "Priyanka Raman — in their life, C115: spent the evening sorting a box of things that used to be someone's",
+        "Priyanka Raman — in their life, C115: noticed another renovated Victorian on the block and calculated what the property taxes must be",
+        "Priyanka Raman — in their life, C115: brought home a new plant and picked its spot carefully",
+        "Priyanka Raman — the Tribune named them in a piece headlined Uptown's Two Speeds: The Block Moves Faster Than the Store (Business, C112)",
+        "Rosa Ochoa — checked the front door lock three times after everyone else was asleep, Laurel — one of 4 people the Cycle's community turn reached (C116)",
+        "Rosa Ochoa — in their life, C115: a flyer for a seniors lunch program flutters on a community bulletin board",
+        "Rosa Ochoa — in their life, C115: found another shop on the block keeping short hours",
+        "Rosa Ochoa — in their life, C115: bought a new A's jersey and still riding the high from last night's win",
+        "Rosa Ochoa — the Tribune named them in a piece headlined MEMORIAL DAY PARADE DRAWS THOUSANDS TO LAKE MERRITT (Culture, C73)",
+        "Rosa Ochoa — the Tribune named them in a piece headlined THE TURNING POINT EDITION (General, C40)",
+        "Rosa Ochoa — the Tribune named them in a piece headlined Laurel’s Dizzy Spell: What Mrs. Ochoa Saw Before the Health Advisory (Culture, C34)",
+        "Avery Santana — badged into the Baylight office early and tried not to think about the protestors from last month, Rockridge — one of 4 people the Cycle's community turn reached (C116)",
+        "Avery Santana — in their life, C115: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+        "Avery Santana — the Tribune named them in a piece headlined The Fund Has Moved $7 Million Out of $28 Million. The Record Names Two Households. (Civic, C115)",
+        "Avery Santana — the Tribune named them in a piece headlined Three Cycles Without a Move: The Youth Apprenticeship Pipeline (Civic, C115)",
+        "Avery Santana — the Tribune named them in a piece headlined The Fund Has Moved $6.6 Million in West Oakland. The Public Record Names Two Households. (Civic, C114)",
+        "Isley Kelley — Kelley Mercantile returned $2067 to the line this week, Rockridge (C116 — what happened in their life, not words they said)",
+        "Isley Kelley — in their life, C116: the bartender wiping down counters while discussing the stalled train delays with a regular",
+        "Isley Kelley — in their life, C116: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever. near College Avenue",
+        "Isley Kelley — in their life, C116: found a school drawing folded in a jacket pocket and kept it",
+        "Isley Kelley — in their life, C116: found a quiet minute at a cafe on the avenue and the hum of a bassline from a passing car",
+        "Isley Kelley — Lives already wrote this person: a moment the record kept (C115)",
+        "Isley Kelley — the Tribune named them in a piece headlined The Lives of C115 (Culture, C115)",
+        "Isley Kelley — the Tribune named them in a piece headlined The Lives Page, Cycle 114 (Culture, C114)",
+        "Isley Kelley — the Tribune named them in a piece headlined Fifty-Six, and the Road Behind It (Sports, C114)",
+        "Benji Dillon — Dillon Clinic returned $7587 to the line this week, Rockridge (C116 — what happened in their life, not words they said)",
+        "Benji Dillon — in their life, C115: put on their good suit for the Sunday service because some traditions still matter",
+        "Benji Dillon — in their life, C116: got asked about the club at a family dinner",
+        "Benji Dillon — in their life, C116: After a farewell season that brought back Benji Dillon in on 1 year deal and now Benji Dillon is leaving the door open. Does he come back for one more year, and as a starter or out of the bullpen?, and is Oakland even an option? With the youth movement in motion does a Dillon deal make sense? Does the club want him back at his $13.0M salary? What would make him decide, and does he wait to see what Mark Aitken does first?",
+        "Benji Dillon — in their life, C116: grabbed coffee from the cart outside the hospital before the morning rush hit",
+        "Benji Dillon — Lives already wrote this person: a moment the record kept (C115)",
+        "Benji Dillon — the Tribune named them in a piece headlined The Clipping on the Door (Culture, C115)",
+        "Benji Dillon — the Tribune named them in a piece headlined The Lives of C115 (Culture, C115)",
+        "Benji Dillon — the Tribune named them in a piece headlined The Names We Keep Saying (Culture, C115)",
+        "Broderick Mitchell — Was handed the keys at Anthropic to open on their own for the first time., Rockridge (C116 — what happened in their life, not words they said)",
+        "Broderick Mitchell — in their life, C115: cooked an old family recipe from memory, mostly getting it right",
+        "Broderick Mitchell — in their life, C115: swapped stories with a neighbor about what got taken up the block",
+        "Broderick Mitchell — in their life, C115: felt a quiet tradeoff settle into place",
+        "Broderick Mitchell — in their life, C116: saved the Tribune clipping with their neighborhood in it — the good one",
+        "Broderick Mitchell — the Tribune named them in a piece headlined The Sea-Level Desk Is Down to Three (Business, C115)",
+        "Derek Simmons — Trained the new person at Oakland Athletics and heard afterward it was the best onboarding in years., Jack London (C116 — what happened in their life, not words they said)",
+        "Derek Simmons — in their life, C115: split the last of the coffee and the morning's plans with their partner",
+        "Derek Simmons — in their life, C116: smelled something on the stove next door that belonged to childhood",
+        "Derek Simmons — in their life, C116: argued over whether a night spent chasing contracts beats a night chasing the galaxy's own marks, now that the board counts the marks first",
+        "Derek Simmons — in their life, C116: read about something unfamiliar and kept pulling the thread",
+        "Derek Simmons — the Tribune named them in a piece headlined The Waterfront Is Moving. Some Questions Aren't Answered Yet. (Investigations, C88)"
+      ],
+      "priorCycle": null,
+      "note": null,
+      "engineHooks": [
+        "A family bought their home in Chinatown (observational analysis)",
+        "A family bought their home in Chinatown (observational analysis)",
+        "A family bought their home in Fruitvale (observational analysis)",
+        "The Keane household (2) moved from Grand Lake to Piedmont Ave — moving up from Grand Lake — sold up and bought in Piedmont Ave (observational analysis)"
+      ],
+      "roomIsYours": "the plain respect, what the event meant in that house or on that block, the detail the family would have picked — from the lines below, never invented",
+      "pageVoices": [
+        "Benji Dillon, own page (the midday page, a question they carry, C116): “TENSION[c116]: Will helping from the bullpen feel like finishing, or like hanging on?”",
+        "Benji Dillon, own page (the midday page, C116): “The door's open because I haven't walked through it yet, and that's not indecision—it's honesty. I know what a bullpen role looks like at 38, and I know what my arm has left; the question isn't whether I can help, it's whether helping from …”",
+        "Benji Dillon, own page (after work, C116): “The door's been open for a while now. That's not me being coy—it's me being honest with myself. Vinnie made his call. It was the right one for him. For me, the question isn't whether I can still pitch. It's whether I can pitch in a way tha…”"
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-lives",
+    "hood": null,
+    "src": "output/beats/Lived_Events.jsonl @C116 batch 7f2ed6",
+    "plan": {
+      "focus": "The lives of C116: 8 people"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-01249",
+        "name": "Paloma Vasquez",
+        "profile": "Paloma Vasquez — Owner, Marquee Grocer — Grand Lake",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-01096",
+        "name": "Priyanka Raman",
+        "profile": "Priyanka Raman — Principal, Oakland Tech Collective — West Oakland",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00706",
+        "name": "Rosa Ochoa",
+        "profile": "Rosa Ochoa — Library Worker — Laurel",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00034",
+        "name": "Avery Santana",
+        "profile": "Avery Santana — Mayor of Oakland — Rockridge",
+        "quotationEligible": false,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00030",
+        "name": "Derek Simmons",
+        "profile": "Derek Simmons — A's Marketing Director — Jack London",
+        "quotationEligible": false,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-01249-a20d25b401",
+        "pop": "POP-01249",
+        "name": "Paloma Vasquez",
+        "quote": "I took over Marquee Grocer in Grand Lake in C116 and was promoted to Tier 4.",
+        "factIds": [
+          "F-92f38d2dafb2"
+        ],
+        "src": "packet.W2[POP-01249]"
+      },
+      {
+        "id": "Q-POP-01096-16731f9e70",
+        "pop": "POP-01096",
+        "name": "Priyanka Raman",
+        "quote": "One thing that's stood out to me in West Oakland recently is how the community turn seems to be paying off. I noticed the new streetlights went in before anyone had to ask, which was a nice surprise.",
+        "factIds": [
+          "F-1dbd5b3d872e"
+        ],
+        "src": "packet.W2[POP-01096]"
+      },
+      {
+        "id": "Q-POP-00706-45e2eb7aeb",
+        "pop": "POP-00706",
+        "name": "Rosa Ochoa",
+        "quote": "I checked the front door lock three times after everyone else was asleep.",
+        "factIds": [
+          "F-ed0e2fcaa085"
+        ],
+        "src": "packet.W2[POP-00706]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The impact of Mark Aitken's departure from the Oakland A's on the community and the team.",
+        "usable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The progress and community engagement around the Fruitvale Transit Hub Phase II visioning process.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C116",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-871096fd8925"
+    },
+    {
+      "t": "FACT",
+      "text": "Paloma Vasquez moved into a place of their own in Grand Lake, renting",
+      "src": "output/beats/Lived_Events.jsonl @C116 batch 7f2ed6",
+      "id": "F-465c192acc61"
+    },
+    {
+      "t": "FACT",
+      "text": "Paloma Vasquez first. The event is the lead; one true detail; what came next only if the record says.",
+      "src": "output/beats/Lived_Events.jsonl @C116 batch 7f2ed6",
+      "id": "F-9b910d33e8c9"
+    },
+    {
+      "t": "FACT",
+      "text": "Paloma Vasquez moved into a place of their own in Grand Lake, renting (C116)",
+      "src": "output/beats/Household_Ledger.jsonl @C116",
+      "id": "F-eb6478b8fb59"
+    },
+    {
+      "t": "FACT",
+      "text": "Paloma Vasquez — in their life, C116: Became the owner of Marquee Grocer — Grand Lake (engine.96 Task 12)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-92f38d2dafb2"
+    },
+    {
+      "t": "FACT",
+      "text": "Priyanka Raman — noticed the new streetlights went in before anyone had to ask, West Oakland — one of 4 people the Cycle's community turn reached (C116)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C116",
+      "id": "F-1dbd5b3d872e"
+    },
+    {
+      "t": "FACT",
+      "text": "Priyanka Raman — in their life, C115: A supervisor at Oakland Tech Collective asked what they want next, and seemed to mean it.",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-89d327802e7b"
+    },
+    {
+      "t": "FACT",
+      "text": "Priyanka Raman — in their life, C115: spent the evening sorting a box of things that used to be someone's",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-e5ca910b4575"
+    },
+    {
+      "t": "FACT",
+      "text": "Priyanka Raman — in their life, C115: noticed another renovated Victorian on the block and calculated what the property taxes must be",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-54d50cbf0110"
+    },
+    {
+      "t": "FACT",
+      "text": "Priyanka Raman — in their life, C115: brought home a new plant and picked its spot carefully",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-8d9e23cf7a8f"
+    },
+    {
+      "t": "FACT",
+      "text": "Priyanka Raman — the Tribune named them in a piece headlined Uptown's Two Speeds: The Block Moves Faster Than the Store (Business, C112)",
+      "src": "archive/ARTICLE_INDEX.jsonl 6bc955294e6e05a5",
+      "id": "F-011473b45550"
+    },
+    {
+      "t": "FACT",
+      "text": "Rosa Ochoa — checked the front door lock three times after everyone else was asleep, Laurel — one of 4 people the Cycle's community turn reached (C116)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C116",
+      "id": "F-ed0e2fcaa085"
+    },
+    {
+      "t": "FACT",
+      "text": "Rosa Ochoa — in their life, C115: a flyer for a seniors lunch program flutters on a community bulletin board",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-e845fc7b4f94"
+    },
+    {
+      "t": "FACT",
+      "text": "Rosa Ochoa — in their life, C115: found another shop on the block keeping short hours",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-2540fef1e77a"
+    },
+    {
+      "t": "FACT",
+      "text": "Rosa Ochoa — in their life, C115: bought a new A's jersey and still riding the high from last night's win",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-aad0b682a2c4"
+    },
+    {
+      "t": "FACT",
+      "text": "Rosa Ochoa — the Tribune named them in a piece headlined MEMORIAL DAY PARADE DRAWS THOUSANDS TO LAKE MERRITT (Culture, C73)",
+      "src": "archive/ARTICLE_INDEX.jsonl e461621475c9e461",
+      "id": "F-c7d8a7f31ea2"
+    },
+    {
+      "t": "FACT",
+      "text": "Rosa Ochoa — the Tribune named them in a piece headlined THE TURNING POINT EDITION (General, C40)",
+      "src": "archive/ARTICLE_INDEX.jsonl 3608fc2dd191651e",
+      "id": "F-db71d58bb3d7"
+    },
+    {
+      "t": "FACT",
+      "text": "Rosa Ochoa — the Tribune named them in a piece headlined Laurel’s Dizzy Spell: What Mrs. Ochoa Saw Before the Health Advisory (Culture, C34)",
+      "src": "archive/ARTICLE_INDEX.jsonl fa91563482b5f1d5",
+      "id": "F-0ef4cead05bb"
+    },
+    {
+      "t": "FACT",
+      "text": "Avery Santana — badged into the Baylight office early and tried not to think about the protestors from last month, Rockridge — one of 4 people the Cycle's community turn reached (C116)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C116",
+      "id": "F-ee7b3354efd4"
+    },
+    {
+      "t": "FACT",
+      "text": "Avery Santana — in their life, C115: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-09320550f538"
+    },
+    {
+      "t": "FACT",
+      "text": "Avery Santana — the Tribune named them in a piece headlined The Fund Has Moved $7 Million Out of $28 Million. The Record Names Two Households. (Civic, C115)",
+      "src": "archive/ARTICLE_INDEX.jsonl 6aedd777086b1ceb",
+      "id": "F-26eb1660f14d"
+    },
+    {
+      "t": "FACT",
+      "text": "Avery Santana — the Tribune named them in a piece headlined Three Cycles Without a Move: The Youth Apprenticeship Pipeline (Civic, C115)",
+      "src": "archive/ARTICLE_INDEX.jsonl c2e85dd490ff16ce",
+      "id": "F-6f6e3ffa59ad"
+    },
+    {
+      "t": "FACT",
+      "text": "Avery Santana — the Tribune named them in a piece headlined The Fund Has Moved $6.6 Million in West Oakland. The Public Record Names Two Households. (Civic, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl 3c4089861e250c37",
+      "id": "F-b36e47d69ed2"
+    },
+    {
+      "t": "FACT",
+      "text": "Isley Kelley — Kelley Mercantile returned $2067 to the line this week, Rockridge (C116 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-f1a37e7692a5"
+    },
+    {
+      "t": "FACT",
+      "text": "Isley Kelley — in their life, C116: the bartender wiping down counters while discussing the stalled train delays with a regular",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-9ae7ffb60c88"
+    },
+    {
+      "t": "FACT",
+      "text": "Isley Kelley — in their life, C116: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever. near College Avenue",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-67aba220352a"
+    },
+    {
+      "t": "FACT",
+      "text": "Isley Kelley — in their life, C116: found a school drawing folded in a jacket pocket and kept it",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-656dd3104d6c"
+    },
+    {
+      "t": "FACT",
+      "text": "Isley Kelley — in their life, C116: found a quiet minute at a cafe on the avenue and the hum of a bassline from a passing car",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-9c6b74300ab0"
+    },
+    {
+      "t": "FACT",
+      "text": "Isley Kelley — Lives already wrote this person: a moment the record kept (C115)",
+      "src": "output/cron-compare/lives_covered.json",
+      "id": "F-cf0978bd6bfd"
+    },
+    {
+      "t": "FACT",
+      "text": "Isley Kelley — the Tribune named them in a piece headlined The Lives of C115 (Culture, C115)",
+      "src": "archive/ARTICLE_INDEX.jsonl bbb67f9b172a6d89",
+      "id": "F-47ea2ea5836c"
+    },
+    {
+      "t": "FACT",
+      "text": "Isley Kelley — the Tribune named them in a piece headlined The Lives Page, Cycle 114 (Culture, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl 9746e4e747ffdd0a",
+      "id": "F-8e0b9adee5f9"
+    },
+    {
+      "t": "FACT",
+      "text": "Isley Kelley — the Tribune named them in a piece headlined Fifty-Six, and the Road Behind It (Sports, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl 6a58d696e6125498",
+      "id": "F-62d6adb2804c"
+    },
+    {
+      "t": "FACT",
+      "text": "Benji Dillon — Dillon Clinic returned $7587 to the line this week, Rockridge (C116 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-3bce45da6199"
+    },
+    {
+      "t": "FACT",
+      "text": "Benji Dillon — in their life, C115: put on their good suit for the Sunday service because some traditions still matter",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-22359ae8f47f"
+    },
+    {
+      "t": "FACT",
+      "text": "Benji Dillon — in their life, C116: got asked about the club at a family dinner",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-eef9ee968cd0"
+    },
+    {
+      "t": "FACT",
+      "text": "Benji Dillon — in their life, C116: After a farewell season that brought back Benji Dillon in on 1 year deal and now Benji Dillon is leaving the door open. Does he come back for one more year, and as a starter or out of the bullpen?, and is Oakland even an option? With the youth movement in motion does a Dillon deal make sense? Does the club want him back at his $13.0M salary? What would make him decide, and does he wait to see what Mark Aitken does first?",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-705a98b48548"
+    },
+    {
+      "t": "FACT",
+      "text": "Benji Dillon — in their life, C116: grabbed coffee from the cart outside the hospital before the morning rush hit",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-0bd43dbab3ad"
+    },
+    {
+      "t": "FACT",
+      "text": "Benji Dillon — Lives already wrote this person: a moment the record kept (C115)",
+      "src": "output/cron-compare/lives_covered.json",
+      "id": "F-a2e3884c4834"
+    },
+    {
+      "t": "FACT",
+      "text": "Benji Dillon — the Tribune named them in a piece headlined The Clipping on the Door (Culture, C115)",
+      "src": "archive/ARTICLE_INDEX.jsonl e41f10c836cea7b4",
+      "id": "F-8c1de1071924"
+    },
+    {
+      "t": "FACT",
+      "text": "Benji Dillon — the Tribune named them in a piece headlined The Lives of C115 (Culture, C115)",
+      "src": "archive/ARTICLE_INDEX.jsonl bbb67f9b172a6d89",
+      "id": "F-e80ff0dc06d6"
+    },
+    {
+      "t": "FACT",
+      "text": "Benji Dillon — the Tribune named them in a piece headlined The Names We Keep Saying (Culture, C115)",
+      "src": "archive/ARTICLE_INDEX.jsonl af3c80da720ceb06",
+      "id": "F-732a3acc9979"
+    },
+    {
+      "t": "FACT",
+      "text": "Broderick Mitchell — Was handed the keys at Anthropic to open on their own for the first time., Rockridge (C116 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-80d05d3c1681"
+    },
+    {
+      "t": "FACT",
+      "text": "Broderick Mitchell — in their life, C115: cooked an old family recipe from memory, mostly getting it right",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-34bab688f105"
+    },
+    {
+      "t": "FACT",
+      "text": "Broderick Mitchell — in their life, C115: swapped stories with a neighbor about what got taken up the block",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-93b9cbd070a8"
+    },
+    {
+      "t": "FACT",
+      "text": "Broderick Mitchell — in their life, C115: felt a quiet tradeoff settle into place",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-6f18db3eafcf"
+    },
+    {
+      "t": "FACT",
+      "text": "Broderick Mitchell — in their life, C116: saved the Tribune clipping with their neighborhood in it — the good one",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-f1e027080541"
+    },
+    {
+      "t": "FACT",
+      "text": "Broderick Mitchell — the Tribune named them in a piece headlined The Sea-Level Desk Is Down to Three (Business, C115)",
+      "src": "archive/ARTICLE_INDEX.jsonl 0fea3b9384f40a35",
+      "id": "F-767251aa1ba4"
+    },
+    {
+      "t": "FACT",
+      "text": "Derek Simmons — Trained the new person at Oakland Athletics and heard afterward it was the best onboarding in years., Jack London (C116 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-139fb545c532"
+    },
+    {
+      "t": "FACT",
+      "text": "Derek Simmons — in their life, C115: split the last of the coffee and the morning's plans with their partner",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "id": "F-48c0ef0a1dcb"
+    },
+    {
+      "t": "FACT",
+      "text": "Derek Simmons — in their life, C116: smelled something on the stove next door that belonged to childhood",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-e75df5f7cd1d"
+    },
+    {
+      "t": "FACT",
+      "text": "Derek Simmons — in their life, C116: argued over whether a night spent chasing contracts beats a night chasing the galaxy's own marks, now that the board counts the marks first",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-b496ddceef38"
+    },
+    {
+      "t": "FACT",
+      "text": "Derek Simmons — in their life, C116: read about something unfamiliar and kept pulling the thread",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-1bde4a3118c4"
+    },
+    {
+      "t": "FACT",
+      "text": "Derek Simmons — the Tribune named them in a piece headlined The Waterfront Is Moving. Some Questions Aren't Answered Yet. (Investigations, C88)",
+      "src": "archive/ARTICLE_INDEX.jsonl 891df67c41c4891d",
+      "id": "F-8f8a54390c7f"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+      "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+      "id": "F-647fd9067a33"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "tamsin-lives-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Put the cycle's person events in the paper as news, one person at a time — a birth, a death, a hospital stay, a retirement, a promotion, a household set up or a place of one's own, a win or a loss on the book, what a turn of the city did to someone's day, and the smaller moments the record kept. The event is the lead, the person is named as the slice names them, and what came next appears only when a later record holds it. A stake or a payout is the person's own fact, not a statistic. The page is the city's real calendar; every person on it is one the record holds.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "plain respect — a neighborhood weekly's births-and-obituaries hand, unhurried, exact",
+      "targetWords": "450-1200",
+      "opening": "the heaviest event on the slice, stated as it happened to the named person"
+    },
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "canonBlockers": [
+      "any person, event, quote, venue, employer or family member not on the slice",
+      "a paraphrased or invented quote",
+      "a cause, diagnosis or outcome the record does not state",
+      "a statistic, rate or trend claim — the page is people, not numbers",
+      "intake bookkeeping rows (Emerged into Tier, Added to Simulation_Ledger, Updated to Tier) written as life events",
+      "raw engine labels or decimals printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-f762f2074a34",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-871096fd8925",
+        "t": "FACT",
+        "text": "Current cycle: C116",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-465c192acc61",
+        "t": "FACT",
+        "text": "Paloma Vasquez moved into a place of their own in Grand Lake, renting",
+        "src": "output/beats/Lived_Events.jsonl @C116 batch 7f2ed6"
+      },
+      {
+        "id": "F-9b910d33e8c9",
+        "t": "FACT",
+        "text": "Paloma Vasquez first. The event is the lead; one true detail; what came next only if the record says.",
+        "src": "output/beats/Lived_Events.jsonl @C116 batch 7f2ed6"
+      },
+      {
+        "id": "F-eb6478b8fb59",
+        "t": "FACT",
+        "text": "Paloma Vasquez moved into a place of their own in Grand Lake, renting (C116)",
+        "src": "output/beats/Household_Ledger.jsonl @C116"
+      },
+      {
+        "id": "F-92f38d2dafb2",
+        "t": "FACT",
+        "text": "Paloma Vasquez — in their life, C116: Became the owner of Marquee Grocer — Grand Lake (engine.96 Task 12)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-1dbd5b3d872e",
+        "t": "FACT",
+        "text": "Priyanka Raman — noticed the new streetlights went in before anyone had to ask, West Oakland — one of 4 people the Cycle's community turn reached (C116)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C116"
+      },
+      {
+        "id": "F-89d327802e7b",
+        "t": "FACT",
+        "text": "Priyanka Raman — in their life, C115: A supervisor at Oakland Tech Collective asked what they want next, and seemed to mean it.",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-e5ca910b4575",
+        "t": "FACT",
+        "text": "Priyanka Raman — in their life, C115: spent the evening sorting a box of things that used to be someone's",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-54d50cbf0110",
+        "t": "FACT",
+        "text": "Priyanka Raman — in their life, C115: noticed another renovated Victorian on the block and calculated what the property taxes must be",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-8d9e23cf7a8f",
+        "t": "FACT",
+        "text": "Priyanka Raman — in their life, C115: brought home a new plant and picked its spot carefully",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-011473b45550",
+        "t": "FACT",
+        "text": "Priyanka Raman — the Tribune named them in a piece headlined Uptown's Two Speeds: The Block Moves Faster Than the Store (Business, C112)",
+        "src": "archive/ARTICLE_INDEX.jsonl 6bc955294e6e05a5"
+      },
+      {
+        "id": "F-ed0e2fcaa085",
+        "t": "FACT",
+        "text": "Rosa Ochoa — checked the front door lock three times after everyone else was asleep, Laurel — one of 4 people the Cycle's community turn reached (C116)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C116"
+      },
+      {
+        "id": "F-e845fc7b4f94",
+        "t": "FACT",
+        "text": "Rosa Ochoa — in their life, C115: a flyer for a seniors lunch program flutters on a community bulletin board",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-2540fef1e77a",
+        "t": "FACT",
+        "text": "Rosa Ochoa — in their life, C115: found another shop on the block keeping short hours",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-aad0b682a2c4",
+        "t": "FACT",
+        "text": "Rosa Ochoa — in their life, C115: bought a new A's jersey and still riding the high from last night's win",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-c7d8a7f31ea2",
+        "t": "FACT",
+        "text": "Rosa Ochoa — the Tribune named them in a piece headlined MEMORIAL DAY PARADE DRAWS THOUSANDS TO LAKE MERRITT (Culture, C73)",
+        "src": "archive/ARTICLE_INDEX.jsonl e461621475c9e461"
+      },
+      {
+        "id": "F-db71d58bb3d7",
+        "t": "FACT",
+        "text": "Rosa Ochoa — the Tribune named them in a piece headlined THE TURNING POINT EDITION (General, C40)",
+        "src": "archive/ARTICLE_INDEX.jsonl 3608fc2dd191651e"
+      },
+      {
+        "id": "F-0ef4cead05bb",
+        "t": "FACT",
+        "text": "Rosa Ochoa — the Tribune named them in a piece headlined Laurel’s Dizzy Spell: What Mrs. Ochoa Saw Before the Health Advisory (Culture, C34)",
+        "src": "archive/ARTICLE_INDEX.jsonl fa91563482b5f1d5"
+      },
+      {
+        "id": "F-ee7b3354efd4",
+        "t": "FACT",
+        "text": "Avery Santana — badged into the Baylight office early and tried not to think about the protestors from last month, Rockridge — one of 4 people the Cycle's community turn reached (C116)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C116"
+      },
+      {
+        "id": "F-09320550f538",
+        "t": "FACT",
+        "text": "Avery Santana — in their life, C115: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-26eb1660f14d",
+        "t": "FACT",
+        "text": "Avery Santana — the Tribune named them in a piece headlined The Fund Has Moved $7 Million Out of $28 Million. The Record Names Two Households. (Civic, C115)",
+        "src": "archive/ARTICLE_INDEX.jsonl 6aedd777086b1ceb"
+      },
+      {
+        "id": "F-6f6e3ffa59ad",
+        "t": "FACT",
+        "text": "Avery Santana — the Tribune named them in a piece headlined Three Cycles Without a Move: The Youth Apprenticeship Pipeline (Civic, C115)",
+        "src": "archive/ARTICLE_INDEX.jsonl c2e85dd490ff16ce"
+      },
+      {
+        "id": "F-b36e47d69ed2",
+        "t": "FACT",
+        "text": "Avery Santana — the Tribune named them in a piece headlined The Fund Has Moved $6.6 Million in West Oakland. The Public Record Names Two Households. (Civic, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl 3c4089861e250c37"
+      },
+      {
+        "id": "F-f1a37e7692a5",
+        "t": "FACT",
+        "text": "Isley Kelley — Kelley Mercantile returned $2067 to the line this week, Rockridge (C116 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-9ae7ffb60c88",
+        "t": "FACT",
+        "text": "Isley Kelley — in their life, C116: the bartender wiping down counters while discussing the stalled train delays with a regular",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-67aba220352a",
+        "t": "FACT",
+        "text": "Isley Kelley — in their life, C116: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever. near College Avenue",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-656dd3104d6c",
+        "t": "FACT",
+        "text": "Isley Kelley — in their life, C116: found a school drawing folded in a jacket pocket and kept it",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-9c6b74300ab0",
+        "t": "FACT",
+        "text": "Isley Kelley — in their life, C116: found a quiet minute at a cafe on the avenue and the hum of a bassline from a passing car",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-cf0978bd6bfd",
+        "t": "FACT",
+        "text": "Isley Kelley — Lives already wrote this person: a moment the record kept (C115)",
+        "src": "output/cron-compare/lives_covered.json"
+      },
+      {
+        "id": "F-47ea2ea5836c",
+        "t": "FACT",
+        "text": "Isley Kelley — the Tribune named them in a piece headlined The Lives of C115 (Culture, C115)",
+        "src": "archive/ARTICLE_INDEX.jsonl bbb67f9b172a6d89"
+      },
+      {
+        "id": "F-8e0b9adee5f9",
+        "t": "FACT",
+        "text": "Isley Kelley — the Tribune named them in a piece headlined The Lives Page, Cycle 114 (Culture, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl 9746e4e747ffdd0a"
+      },
+      {
+        "id": "F-62d6adb2804c",
+        "t": "FACT",
+        "text": "Isley Kelley — the Tribune named them in a piece headlined Fifty-Six, and the Road Behind It (Sports, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl 6a58d696e6125498"
+      },
+      {
+        "id": "F-3bce45da6199",
+        "t": "FACT",
+        "text": "Benji Dillon — Dillon Clinic returned $7587 to the line this week, Rockridge (C116 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-22359ae8f47f",
+        "t": "FACT",
+        "text": "Benji Dillon — in their life, C115: put on their good suit for the Sunday service because some traditions still matter",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-eef9ee968cd0",
+        "t": "FACT",
+        "text": "Benji Dillon — in their life, C116: got asked about the club at a family dinner",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-705a98b48548",
+        "t": "FACT",
+        "text": "Benji Dillon — in their life, C116: After a farewell season that brought back Benji Dillon in on 1 year deal and now Benji Dillon is leaving the door open. Does he come back for one more year, and as a starter or out of the bullpen?, and is Oakland even an option? With the youth movement in motion does a Dillon deal make sense? Does the club want him back at his $13.0M salary? What would make him decide, and does he wait to see what Mark Aitken does first?",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-0bd43dbab3ad",
+        "t": "FACT",
+        "text": "Benji Dillon — in their life, C116: grabbed coffee from the cart outside the hospital before the morning rush hit",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-a2e3884c4834",
+        "t": "FACT",
+        "text": "Benji Dillon — Lives already wrote this person: a moment the record kept (C115)",
+        "src": "output/cron-compare/lives_covered.json"
+      },
+      {
+        "id": "F-8c1de1071924",
+        "t": "FACT",
+        "text": "Benji Dillon — the Tribune named them in a piece headlined The Clipping on the Door (Culture, C115)",
+        "src": "archive/ARTICLE_INDEX.jsonl e41f10c836cea7b4"
+      },
+      {
+        "id": "F-e80ff0dc06d6",
+        "t": "FACT",
+        "text": "Benji Dillon — the Tribune named them in a piece headlined The Lives of C115 (Culture, C115)",
+        "src": "archive/ARTICLE_INDEX.jsonl bbb67f9b172a6d89"
+      },
+      {
+        "id": "F-732a3acc9979",
+        "t": "FACT",
+        "text": "Benji Dillon — the Tribune named them in a piece headlined The Names We Keep Saying (Culture, C115)",
+        "src": "archive/ARTICLE_INDEX.jsonl af3c80da720ceb06"
+      },
+      {
+        "id": "F-80d05d3c1681",
+        "t": "FACT",
+        "text": "Broderick Mitchell — Was handed the keys at Anthropic to open on their own for the first time., Rockridge (C116 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-34bab688f105",
+        "t": "FACT",
+        "text": "Broderick Mitchell — in their life, C115: cooked an old family recipe from memory, mostly getting it right",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-93b9cbd070a8",
+        "t": "FACT",
+        "text": "Broderick Mitchell — in their life, C115: swapped stories with a neighbor about what got taken up the block",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-6f18db3eafcf",
+        "t": "FACT",
+        "text": "Broderick Mitchell — in their life, C115: felt a quiet tradeoff settle into place",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-f1e027080541",
+        "t": "FACT",
+        "text": "Broderick Mitchell — in their life, C116: saved the Tribune clipping with their neighborhood in it — the good one",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-767251aa1ba4",
+        "t": "FACT",
+        "text": "Broderick Mitchell — the Tribune named them in a piece headlined The Sea-Level Desk Is Down to Three (Business, C115)",
+        "src": "archive/ARTICLE_INDEX.jsonl 0fea3b9384f40a35"
+      },
+      {
+        "id": "F-139fb545c532",
+        "t": "FACT",
+        "text": "Derek Simmons — Trained the new person at Oakland Athletics and heard afterward it was the best onboarding in years., Jack London (C116 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-48c0ef0a1dcb",
+        "t": "FACT",
+        "text": "Derek Simmons — in their life, C115: split the last of the coffee and the morning's plans with their partner",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115"
+      },
+      {
+        "id": "F-e75df5f7cd1d",
+        "t": "FACT",
+        "text": "Derek Simmons — in their life, C116: smelled something on the stove next door that belonged to childhood",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-b496ddceef38",
+        "t": "FACT",
+        "text": "Derek Simmons — in their life, C116: argued over whether a night spent chasing contracts beats a night chasing the galaxy's own marks, now that the board counts the marks first",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-1bde4a3118c4",
+        "t": "FACT",
+        "text": "Derek Simmons — in their life, C116: read about something unfamiliar and kept pulling the thread",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-8f8a54390c7f",
+        "t": "FACT",
+        "text": "Derek Simmons — the Tribune named them in a piece headlined The Waterfront Is Moving. Some Questions Aren't Answered Yet. (Investigations, C88)",
+        "src": "archive/ARTICLE_INDEX.jsonl 891df67c41c4891d"
+      },
+      {
+        "id": "F-647fd9067a33",
+        "t": "FACT",
+        "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+        "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-01249-a20d25b401",
+        "speakerId": "POP-01249",
+        "speakerName": "Paloma Vasquez",
+        "text": "I took over Marquee Grocer in Grand Lake in C116 and was promoted to Tier 4.",
+        "factIds": [
+          "F-92f38d2dafb2"
+        ],
+        "src": "packet.W2[POP-01249]"
+      },
+      {
+        "id": "Q-POP-01096-16731f9e70",
+        "speakerId": "POP-01096",
+        "speakerName": "Priyanka Raman",
+        "text": "One thing that's stood out to me in West Oakland recently is how the community turn seems to be paying off. I noticed the new streetlights went in before anyone had to ask, which was a nice surprise.",
+        "factIds": [
+          "F-1dbd5b3d872e"
+        ],
+        "src": "packet.W2[POP-01096]"
+      },
+      {
+        "id": "Q-POP-00706-45e2eb7aeb",
+        "speakerId": "POP-00706",
+        "speakerName": "Rosa Ochoa",
+        "text": "I checked the front door lock three times after everyone else was asleep.",
+        "factIds": [
+          "F-ed0e2fcaa085"
+        ],
+        "src": "packet.W2[POP-00706]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-01249",
+        "name": "Paloma Vasquez",
+        "profile": "Paloma Vasquez — Owner, Marquee Grocer — Grand Lake",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-01096",
+        "name": "Priyanka Raman",
+        "profile": "Priyanka Raman — Principal, Oakland Tech Collective — West Oakland",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00706",
+        "name": "Rosa Ochoa",
+        "profile": "Rosa Ochoa — Library Worker — Laurel",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00034",
+        "name": "Avery Santana",
+        "profile": "Avery Santana — Mayor of Oakland — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": false
+      },
+      {
+        "id": "POP-00030",
+        "name": "Derek Simmons",
+        "profile": "Derek Simmons — A's Marketing Director — Jack London",
+        "src": "packet.W1.exposure",
+        "quotationEligible": false
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The impact of Mark Aitken's departure from the Oakland A's on the community and the team.",
+        "publishable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The progress and community engagement around the Fruitvale Transit Hub Phase II visioning process.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

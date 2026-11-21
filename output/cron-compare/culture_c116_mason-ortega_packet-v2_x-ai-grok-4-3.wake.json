@@ -1,0 +1,61 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "116",
+  "provider": "openrouter",
+  "model": "x-ai/grok-4.3",
+  "configuredWriterModel": "x-ai/grok-4.3",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "mason-ortega",
+  "byline": {
+    "name": "Mason Ortega",
+    "popid": "POP-00160",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 30,
+  "quotesLanded": 2,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "canon_recall",
+    "canon_recall",
+    "canon_recall"
+  ],
+  "toolCalls": 3,
+  "wordCount": 430,
+  "targetWords": "evidence-bounded",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 430,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "f4365d583242a7f32b60379bc2c7cc73a8b61d8b450ab15f49d8fd1e2088431a",
+    "costUsd": 0.0013
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/3 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/culture_c116_mason-ortega_packet-v2_x-ai-grok-4-3.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": ".vestauth.com]\n{\n  \"popId\": \"POP-00160\",\n  \"name\": \"Mason Ortega\",\n  \"recorded\": true,\n  \"text\": \"At Green & Gold Tavern in Jack London, dishwasher Hector Leech stands at the sink with steam rising\"\n}"
+  },
+  "ranAt": "2026-11-21T00:15:59.112Z",
+  "dispositionReconciledAt": "2026-11-21T18:00:02.927Z"
+}

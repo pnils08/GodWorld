@@ -57,5 +57,6 @@
     "recorded": true,
     "out": ".env'] }\n{\n  \"popId\": \"POP-00014\",\n  \"name\": \"Tanya Cruz\",\n  \"recorded\": true,\n  \"text\": \"filed: I leaned against the cinder-block wall outside Deacon Seymour’s office, the one he keeps cracked ope\"\n}"
   },
-  "ranAt": "2026-11-19T00:20:34.934Z"
+  "ranAt": "2026-11-19T00:20:34.934Z",
+  "dispositionReconciledAt": "2026-11-21T18:00:03.133Z"
 }

@@ -57,5 +57,6 @@
     "recorded": true,
     "out": "from ../.config/godworld/.env // tip: ◈ secrets for agents [www.dotenvx.com]\n{\n  \"popId\": \"POP-00156\",\n  \"name\": \"Angela Reyes\",\n  \"recorded\": true,\n  \"text\": \"filed: One More Backpack in Rockridge\"\n}"
   },
-  "ranAt": "2026-11-18T00:18:19.222Z"
+  "ranAt": "2026-11-18T00:18:19.222Z",
+  "dispositionReconciledAt": "2026-11-21T18:00:02.083Z"
 }

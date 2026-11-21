@@ -1,0 +1,31 @@
+# The Lives of C116
+
+By Tamsin Pruitt, The Bay Tribune
+
+**Paloma Vasquez** moved into a place of her own in Grand Lake this cycle. She is renting. The household record carries it in those words, and the paper takes them as given.
+
+The same cycle, the record shows, she became the owner of Marquee Grocer in Grand Lake. She took the store over, and the book now lists her as its owner. Both lines are true, and they don't match the way people expect. The shop is hers outright. The roof over her at night is rented. A woman can carry the keys to a grocery and still be a tenant. The record says nothing about the landlord, the rent, or whether she lives near the store. It does not say who helped her move, and this page will not guess.
+
+She was asked about the store and answered in one line. "I took over Marquee Grocer in Grand Lake in C116," she said. The record has her at the store before the move. A life-history line stamped Y3C12 has her taking Marquee over, and a second, stamped C116, has her as the owner. The paper has found no earlier Tribune piece on her or on the store, though an empty search proves little. Whatever Grand Lake knew of Marquee before, this page is where the new owner first appears.
+
+**Rosa Ochoa**, a library worker in Laurel, checked her front door lock three times this cycle, after everyone else in the house was asleep. "I checked the front door lock three times after everyone else was asleep," she said. She said it as plain fact, with nothing added to it.
+
+The record does not say what set it off. The days before it can be read in order. In Y3C11 she found another shop on her block keeping short hours. In the same stretch she bought a new A's jersey and was still riding the high from the night before. Earlier, at Y3C8 and Y3C11, a flyer for a seniors lunch program fluttered on a bulletin board in her neighborhood. That is what the ledger kept of her week, and nothing in it links one line to the next.
+
+Laurel readers know her name. In the paper's C34 coverage, Mrs. Ochoa was the one who called it in when three people on her side of town lost time for a few seconds each. She told the Tribune then, "Because it was all of them at once." She has a record of noticing what others walk past, and this cycle it was a lock. The Tribune also named her in its C73 Memorial Day parade coverage and in the C40 edition. Whether she slept afterward, the record does not say.
+
+**Priyanka Raman**, principal of Oakland Tech Collective in West Oakland, noticed that the new streetlights went in before anyone had to ask. The record counts her among four people the cycle's community turn reached. "One thing that's stood out to me in West Oakland recently is how the community turn seems to be paying off," she said. "I noticed the new streetlights went in before anyone had to ask, which was a nice surprise."
+
+The week before, the ledger had her in other moods. At C115 a supervisor at the Collective asked what she wants next and seemed to mean it. She spent an evening sorting a box of things that used to be someone's. She also noticed another renovated Victorian on the block and worked out what the property taxes must be. She brought home a new plant and picked its spot carefully. The paper's C112 Business coverage had already named her, in the Uptown piece on the block that moves faster than the store. The lights are the first line in her thread that is only good news.
+
+**Benji Dillon**, the A's pitcher, was asked about the club at a family dinner this cycle. The question on the record is whether he returns for one more year, as a starter or from the bullpen. His own page has no answer yet. "The door's open because I haven't walked through it yet, and that's not indecision—it's honesty," he wrote at midday. Another line of his reads, "Will helping from the bullpen feel like finishing, or like hanging on?" The page does not say how long the door stays open. His C116 thread also has him buying coffee from the cart outside the hospital before the morning rush. The record gives no reason he was there, and the paper will not supply one. Dillon Clinic, the other name attached to him in Rockridge, returned $7,587 to the line this week. The Tribune already ran him at C115, in "The Clipping on the Door" and "The Names We Keep Saying."
+
+**Avery Santana**, the mayor, badged into the Baylight office early in Rockridge and tried not to think about the protestors from last month. The record says no more than that. The same record has her, at C115, watching an Oakland Alternative Response Initiative team de-escalate something on a corner, quietly. The Tribune's C115 Civic coverage names her in the two pieces on the fund and the apprenticeship pipeline.
+
+**Broderick Mitchell** was handed the keys at Anthropic to open on his own for the first time. This is a Rockridge entry, and it is the kind of day people mark in a life, though the record says nothing of how it went. He also saved a Tribune clipping with his neighborhood in it, "the good one," as the ledger puts it. At C115 he cooked an old family recipe from memory and mostly got it right. The same cycle, he felt a quiet tradeoff settle into place. The Business desk named him at C115 in "The Sea-Level Desk Is Down to Three."
+
+**Derek Simmons** trained the new person at Oakland Athletics and heard afterward it was the best onboarding in years. He works as the club's marketing director and lives in Jack London. The record does not name the new hire. It has him smelling something on the stove next door that belonged to childhood, and arguing about whether a night chasing contracts beats a night chasing the galaxy's own marks, now that the board counts the marks first. It also has him reading about something unfamiliar and pulling the thread. The Tribune named him at C88 in the waterfront investigation.
+
+**Isley Kelley** found a school drawing folded in a jacket pocket this cycle, and kept it. The record does not say whose drawing it is. In the same cycle, Kelley Mercantile returned $2,067 to the line in Rockridge. The ledger also has Kelley finding a quiet minute at a cafe on the avenue, with the hum of a bassline coming from a passing car. This page ran Kelley at C115, and the paper's C114 Lives page named Kelley as well.
+
+The record this cycle is mostly small, and it is kept as it was returned.

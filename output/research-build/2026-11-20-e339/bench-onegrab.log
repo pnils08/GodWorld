@@ -1,0 +1,111 @@
+AIM = BENCH (script read the bench marker)
+== sync from live
+  verify Reflection_Intake: bench 2988 rows vs live 2988 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+{"fireGuardMinutes":"0","cycleCountFormatted":"116","cycleCountIsNumber":true}
+door: {"target":"bench","http":200,"ok":true,"record":{"cycle":117,"startedMs":1795237236857,"state":"done","finishedMs":1795237416691},"raw":"{\"cycle\":117,\"startedMs\":1795237236857,\"state\":\"done\",\
+clearfire 117: {"ok":true,"cleared":{"cycle":117,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+-- pause 75 s (read quota)
+Edition_Coverage_Ratings C116: 7 rows (window 115,114,113,112,111,110,109,108)
+Citizen_Media_Usage C116: 15 rows from live C115
+Oakland_Sports_Feed C117: 0 rows
+appended 7 to Edition_Coverage_Ratings; marked rows on the tab now 7
+appended 15 to Citizen_Media_Usage; marked rows on the tab now 15
+pre saved: { "maxPop": 1249, "errors": 9, "gcRows": 409, "renamed": [ "Xavier Campbell", "Omar Clark", "Owen King", "Evan Thompson", "Jordan Garcia", "Hector Robinson", "Terrell Jefferson", "Alicia Norwood", "Guadalupe Fetu", "Henrik Shimizu", "Alessandro Rivera" ], "spouses": 11 }
+bench cycleCount 116
+fire C117 rc=0 "verdict": "PASS" "wallS": 190
+C117 | GC rows 409 -> 422 | renamed child/parent rows left 0 (pre 11) | released this fire 11 | spouses linked 11 (pre 11)
+  released Xavier Campbell | status Active | maiden ""
+  released Omar Clark | status Active | maiden ""
+  released Owen King | status Active | maiden ""
+  released Evan Thompson | status Active | maiden ""
+  released Jordan Garcia | status Active | maiden ""
+  released Hector Robinson | status Active | maiden ""
+  released Terrell Jefferson | status Active | maiden ""
+  released Alicia Norwood | status Active | maiden ""
+  released Guadalupe Fetu | status Active | maiden ""
+  released Henrik Shimizu | status Active | maiden ""
+  released Alessandro Rivera | status Active | maiden ""
+  minted child Tara Horton (BY 2020, age 22) of POP-00343 Horton gap 27 maiden ""
+  mints this fire: 1
+  own name back: Marco Lee | still spouse of POP-00894 | status Family | maiden ""
+  own name back: Luis Young | still spouse of POP-01188 | status Family | maiden ""
+  own name back: Miguel Clark | still spouse of POP-00143 | status Family | maiden ""
+  own name back: Shawn Phillips | still spouse of POP-00141 | status Family | maiden ""
+  own name back: Hector Jackson | still spouse of POP-00193 | status Family | maiden ""
+  LOTTERY this fire: 1 landed
+  birth POP-01250 Elena Beckett parents POP-00715 ages 38
+  births this fire: 1
+  arrival POP-01251 Tyrone Carter age 39 | single | kids 
+  arrival POP-01252 Yolanda Ghosh age 43 | single | kids 
+  ledger arrivals this fire: 2
+  Engine_Errors +0
+CHECK PASS
+-- pause 70 s (read quota)
+pre saved: { "maxPop": 1252, "errors": 9, "gcRows": 422, "renamed": [], "spouses": 11 }
+bench cycleCount 117
+fire C118 rc=0 "verdict": "PASS" "wallS": 200
+C118 | GC rows 422 -> 435 | renamed child/parent rows left 0 (pre 0) | released this fire 0 | spouses linked 11 (pre 11)
+  minted child Deja Reaves (BY 2038, age 4) of POP-01027 Reaves gap 21 maiden ""
+  mints this fire: 1
+  LOTTERY this fire: 1 landed
+  birth POP-01253 Owen Nguyen parents POP-00347 ages 40
+  births this fire: 1
+  arrival POP-01254 Aiko Hong age 68 | single | kids 
+  ledger arrivals this fire: 1
+  Engine_Errors +0
+CHECK PASS
+-- pause 70 s (read quota)
+pre saved: { "maxPop": 1254, "errors": 9, "gcRows": 435, "renamed": [], "spouses": 11 }
+bench cycleCount 118
+fire C119 rc=0 "verdict": "PASS" "wallS": 158
+C119 | GC rows 435 -> 447 | renamed child/parent rows left 0 (pre 0) | released this fire 0 | spouses linked 11 (pre 11)
+  mints this fire: 0
+  LOTTERY this fire: nothing landed
+  birth POP-01255 Amara Aguilar parents POP-00895 ages 32
+  births this fire: 1
+  arrival POP-01256 Isaiah Murakami age 37 | single | kids 0
+  ledger arrivals this fire: 1
+  Engine_Errors +0
+CHECK PASS
+-- pause 70 s (read quota)
+pre saved: { "maxPop": 1256, "errors": 9, "gcRows": 447, "renamed": [], "spouses": 11 }
+bench cycleCount 119
+fire C120 rc=0 "verdict": "PASS" "wallS": 169
+C120 | GC rows 447 -> 458 | renamed child/parent rows left 0 (pre 0) | released this fire 0 | spouses linked 11 (pre 11)
+  mints this fire: 0
+  LOTTERY this fire: nothing landed
+  births this fire: 0
+  ledger arrivals this fire: 0
+  Engine_Errors +0
+CHECK PASS
+-- pause 70 s (read quota)
+pre saved: { "maxPop": 1256, "errors": 9, "gcRows": 458, "renamed": [], "spouses": 11 }
+bench cycleCount 120
+fire C121 rc=0 "verdict": "PASS" "wallS": 138
+C121 | GC rows 458 -> 458 | renamed child/parent rows left 0 (pre 0) | released this fire 0 | spouses linked 11 (pre 11)
+  mints this fire: 0
+  LOTTERY this fire: nothing landed
+  birth POP-01257 Ravi Foster parents POP-01032+POP-00031 ages 38/30
+  births this fire: 1
+  arrival POP-01258 Yusuf Fofana age 38 | single | kids 0
+  ledger arrivals this fire: 1
+  Engine_Errors +0
+CHECK PASS
+-- pause 70 s (read quota)
+pre saved: { "maxPop": 1258, "errors": 9, "gcRows": 458, "renamed": [], "spouses": 11 }
+bench cycleCount 121
+fire C122 rc=0 "verdict": "PASS" "wallS": 131
+C122 | GC rows 458 -> 458 | renamed child/parent rows left 0 (pre 0) | released this fire 0 | spouses linked 11 (pre 11)
+  mints this fire: 0
+  LOTTERY this fire: nothing landed
+  births this fire: 0
+  arrival POP-01259 Zora Fetu age 40 | single | kids 0
+  ledger arrivals this fire: 1
+  Engine_Errors +0
+CHECK PASS
+-- pause 70 s (read quota)
+pre saved: { "maxPop": 1259, "errors": 9, "gcRows": 458, "renamed": [], "spouses": 11 }
+bench cycleCount 122
+fire C123 rc=0 "verdict": "PASS" "wallS": 163

@@ -6,27 +6,22 @@
   "hood": null,
   "quotes": [
     {
-      "pop": "POP-01022",
-      "name": "Wilson Shepard",
-      "quote": "To be honest, my new living situation in West Oakland hasn't really affected my coaching. I've been focused on the team's performance, and my daily routine hasn't changed much. I'm still the same person, with the same goals for the Oaks."
+      "pop": "POP-01249",
+      "name": "Paloma Vasquez",
+      "quote": "I took over Marquee Grocer in Grand Lake in C116 and was promoted to Tier 4."
     },
     {
-      "pop": "POP-00789",
-      "name": "Elias Varek",
-      "quote": "The recent financial returns for Civis Systems show a minimal change, $489,017 this week, which is just slightly up from the previous week's $488,443. For Varek Systems, the returns are $35,112 this week, compared to $34,932 last week. These numbers indicate a stable, but not growing, revenue stream for both companies. I'm concerned that Civis Systems is flat where it matters, and I'm still trying to understand the implications of this stability."
+      "pop": "POP-01096",
+      "name": "Priyanka Raman",
+      "quote": "One thing that's stood out to me in West Oakland recently is how the community turn seems to be paying off. I noticed the new streetlights went in before anyone had to ask, which was a nice surprise."
     },
     {
-      "pop": "POP-01247",
-      "name": "Theo Rahimi",
-      "quote": "Having a place of my own in Eastlake feels really great. It's like a new start for me. I've been working hard and it's nice to have a space that's just mine. The neighborhood is coming together too, with all the new households moving in. It's an exciting time."
-    },
-    {
-      "pop": "POP-00703",
-      "name": "Ira Leu",
-      "quote": "I didn't go to the health center staff's unwind at the bar, but I heard they were pretty relieved after their first busy week. The Temescal Community Health Center is finally up and running, and I'm sure it's a big change for them."
+      "pop": "POP-00706",
+      "name": "Rosa Ochoa",
+      "quote": "I checked the front door lock three times after everyone else was asleep."
     }
   ],
-  "claim": "To be honest, my new living situation in West Oakland hasn't really affected my coaching. I've been focused on the team's performance, and my daily routine hasn't changed much. I'm still the same person, with the same goals for the Oaks.",
+  "claim": "I took over Marquee Grocer in Grand Lake in C116 and was promoted to Tier 4.",
   "src": "citizenVoice PRESS c116",
-  "ranAt": "2026-11-19T19:18:21.140Z"
+  "ranAt": "2026-11-20T19:18:45.559Z"
 }

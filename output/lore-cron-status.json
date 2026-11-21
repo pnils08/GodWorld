@@ -1,20 +1,20 @@
 {
-  "ranAt": "2026-11-13T21:04:45.224Z",
+  "ranAt": "2026-11-20T21:04:01.212Z",
   "target": {
-    "popid": "POP-00036",
-    "name": "Marcus Osei",
+    "popid": "POP-00037",
+    "name": "Brenda Okoro",
     "tier": "2"
   },
   "ok": true,
   "errorMessage": null,
   "newQuarantineFiles": [
-    "marcus_osei_deep_dive/marcus_osei_deep_dive.md"
+    "brenda-okoro-deep-dive.md"
   ],
   "driveUploads": [
     {
-      "file": "marcus_osei_deep_dive/marcus_osei_deep_dive.md",
+      "file": "brenda-okoro-deep-dive.md",
       "uploaded": true
     }
   ],
-  "nextStep": "Run /lore-ingest on marcus_osei_deep_dive/marcus_osei_deep_dive.md at next research-build session."
+  "nextStep": "Run /lore-ingest on brenda-okoro-deep-dive.md at next research-build session."
 }

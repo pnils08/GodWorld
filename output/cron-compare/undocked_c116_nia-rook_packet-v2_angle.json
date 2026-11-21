@@ -15,18 +15,18 @@
     },
     "task": {
       "goal": "Plan one Article chase without choosing a new assignment",
-      "assignment": "UNDOCKED episode: Marguerite Kimball-Ostrow, Wednesday night. Standings: Luis Taz leads the board — rank #1, 45.19 achievement points, 0 credits, 3 cycle(s) led, current streak 3. In the chair: Marguerite Kimball-Ostrow — Elementary Teacher.",
+      "assignment": "UNDOCKED episode: Manju Abebe, Thursday night. Standings: Luis Taz leads the board — rank #1, 45.19 achievement points, 0 credits, 3 cycle(s) led, current streak 3. In the chair: Manju Abebe — Plumber.",
       "approach": "UNDOCKED show beat: current episode and standings from the approved feed; earlier episodes from the approved show history."
     },
     "signal": {
       "kind": "undocked",
-      "hood": "Piedmont Ave",
+      "hood": "Chinatown",
       "score": null,
-      "src": "undocked:undocked-pop01188-Y3C12-e2",
+      "src": "undocked:undocked-pop00918-Y3C12-e2",
       "nearby": [
         {
-          "text": "UNDOCKED: Marguerite Kimball-Ostrow, Wednesday night",
-          "src": "undocked:undocked-pop01188-Y3C12-e2"
+          "text": "UNDOCKED: Manju Abebe, Thursday night",
+          "src": "undocked:undocked-pop00918-Y3C12-e2"
         }
       ]
     },
@@ -37,17 +37,17 @@
       ],
       "candidates": [
         {
-          "pop": "POP-01188",
-          "name": "Marguerite Kimball-Ostrow",
-          "profile": "Marguerite Kimball-Ostrow — UNDOCKED pilot",
+          "pop": "POP-00918",
+          "name": "Manju Abebe",
+          "profile": "Manju Abebe — UNDOCKED pilot",
           "role": "UNDOCKED pilot",
           "hood": null,
           "mode": "named",
           "sourceKind": "undocked-feed-row",
           "evidence": {
             "source": "output/spacemolt-show/feed/c116.json",
-            "episodeId": "undocked-pop01188-Y3C12-e2",
-            "pop": "POP-01188"
+            "episodeId": "undocked-pop00918-Y3C12-e2",
+            "pop": "POP-00918"
           }
         }
       ]
@@ -61,21 +61,21 @@
       },
       {
         "t": "FACT",
-        "text": "UNDOCKED: Marguerite Kimball-Ostrow, Wednesday night",
-        "src": "undocked:undocked-pop01188-Y3C12-e2",
-        "id": "F-bd1187d0f929"
+        "text": "UNDOCKED: Manju Abebe, Thursday night",
+        "src": "undocked:undocked-pop00918-Y3C12-e2",
+        "id": "F-a112af8fc98f"
       },
       {
         "t": "FACT",
-        "text": "Marguerite Kimball-Ostrow's Wednesday night on UNDOCKED: went through Antares, Gsc 0041, Shaula, Alnair, Wolf 1061, Gsc 0031, Gsc 0021, Gliese 876, Felis, Biham, Gsc 0035, Jasmine, Mirach, Azha, Groombridge 1618, Silverbend, Alnilam and Jishui; came out even on credits; flew until the show's time ran out.",
-        "src": "undocked:undocked-pop01188-Y3C12-e2",
-        "id": "F-fd9ac3c2a9e9"
+        "text": "Manju Abebe's Thursday night on UNDOCKED: went through Sirius, Nova Terra, Furud, Acrux, Botein, Intercrus, Gsc 0044, Atlas, Cedarhold, Achernar, Ruchbah, Ironhollow, Pherkad, Shaula, Alnair, Wolf 1061, Gsc 0031 and Gsc 0021; came out even on credits; flew until the show's time ran out.",
+        "src": "undocked:undocked-pop00918-Y3C12-e2",
+        "id": "F-f7ee9cfe2da2"
       },
       {
         "t": "FACT",
-        "text": "Marguerite Kimball-Ostrow — Elementary Teacher (ledger)",
-        "src": "undocked:undocked-pop01188-Y3C12-e2",
-        "id": "F-e63c24ec205a"
+        "text": "Manju Abebe — Plumber (ledger)",
+        "src": "undocked:undocked-pop00918-Y3C12-e2",
+        "id": "F-e2e12bc57110"
       }
     ],
     "limits": {
@@ -124,17 +124,17 @@
     "mode": "named",
     "candidates": [
       {
-        "pop": "POP-01188",
-        "name": "Marguerite Kimball-Ostrow",
+        "pop": "POP-00918",
+        "name": "Manju Abebe",
         "role": "UNDOCKED pilot",
         "hood": null,
-        "profile": "Marguerite Kimball-Ostrow — UNDOCKED pilot",
+        "profile": "Manju Abebe — UNDOCKED pilot",
         "mode": "named",
         "sourceKind": "undocked-feed-row",
         "evidence": {
           "source": "output/spacemolt-show/feed/c116.json",
-          "episodeId": "undocked-pop01188-Y3C12-e2",
-          "pop": "POP-01188"
+          "episodeId": "undocked-pop00918-Y3C12-e2",
+          "pop": "POP-00918"
         }
       }
     ],
@@ -146,21 +146,21 @@
   },
   "assignment": {
     "story": {
-      "ref": "undocked:undocked-pop01188-Y3C12-e2",
-      "label": "UNDOCKED: Marguerite Kimball-Ostrow, Wednesday night",
+      "ref": "undocked:undocked-pop00918-Y3C12-e2",
+      "label": "UNDOCKED: Manju Abebe, Thursday night",
       "kind": "undocked",
-      "angle": "UNDOCKED episode: Marguerite Kimball-Ostrow, Wednesday night. Standings: Luis Taz leads the board — rank #1, 45.19 achievement points, 0 credits, 3 cycle(s) led, current streak 3. In the chair: Marguerite Kimball-Ostrow — Elementary Teacher.",
+      "angle": "UNDOCKED episode: Manju Abebe, Thursday night. Standings: Luis Taz leads the board — rank #1, 45.19 achievement points, 0 credits, 3 cycle(s) led, current streak 3. In the chair: Manju Abebe — Plumber.",
       "facts": [
-        "Marguerite Kimball-Ostrow's Wednesday night on UNDOCKED: went through Antares, Gsc 0041, Shaula, Alnair, Wolf 1061, Gsc 0031, Gsc 0021, Gliese 876, Felis, Biham, Gsc 0035, Jasmine, Mirach, Azha, Groombridge 1618, Silverbend, Alnilam and Jishui; came out even on credits; flew until the show's time ran out.",
-        "Marguerite Kimball-Ostrow — Elementary Teacher (ledger)"
+        "Manju Abebe's Thursday night on UNDOCKED: went through Sirius, Nova Terra, Furud, Acrux, Botein, Intercrus, Gsc 0044, Atlas, Cedarhold, Achernar, Ruchbah, Ironhollow, Pherkad, Shaula, Alnair, Wolf 1061, Gsc 0031 and Gsc 0021; came out even on credits; flew until the show's time ran out.",
+        "Manju Abebe — Plumber (ledger)"
       ],
       "citizens": [
-        "Marguerite Kimball-Ostrow — Elementary Teacher, UNDOCKED cast pilot"
+        "Manju Abebe — Plumber, UNDOCKED cast pilot"
       ],
       "popids": [
-        "POP-01188"
+        "POP-00918"
       ],
-      "hood": "Piedmont Ave"
+      "hood": "Chinatown"
     },
     "approach": "UNDOCKED show beat: current episode and standings from the approved feed; earlier episodes from the approved show history."
   },
@@ -179,41 +179,40 @@
   "angleRead": {
     "name": "Nia Rook",
     "popid": "POP-01076",
-    "text": "Nia Rook is on Marguerite Kimball-Ostrow's tail after her Wednesday night UNDOCKED episode. The Elementary Teacher flew through 18 stars and came out even on credits. Luis Taz still leads the board, but Nia's watching to see if Marguerite can keep the pressure on. The real story here isn't just the standings, though - it's about the players and their strategies. Nia's going to dig into what made Marguerite's night tick, and whether she can keep the momentum going.",
+    "text": "Nia Rook is on Manju Abebe's tail after Thursday's UNDOCKED episode. Manju flew through 17 systems and ended even on credits. Luis Taz still leads the board, but Manju gave it a run. The question is whether Manju's even night was a product of strategy or just the show's clock running out.",
     "plan": {
-      "chase": "Nia Rook is on Marguerite Kimball-Ostrow's tail after her Wednesday night UNDOCKED episode. The Elementary Teacher flew through 18 stars and came out even on credits. Luis Taz still leads the board, but Nia's watching to see if Marguerite can keep the pressure on. The real story here isn't just the standings, though - it's about the players and their strategies. Nia's going to dig into what made Marguerite's night tick, and whether she can keep the momentum going.",
-      "focus": "Marguerite Kimball-Ostrow's UNDOCKED performance",
-      "why": "To understand the dynamics of the current UNDOCKED standings and the strategies employed by top players",
+      "chase": "Nia Rook is on Manju Abebe's tail after Thursday's UNDOCKED episode. Manju flew through 17 systems and ended even on credits. Luis Taz still leads the board, but Manju gave it a run. The question is whether Manju's even night was a product of strategy or just the show's clock running out.",
+      "focus": "Manju Abebe's UNDOCKED performance",
+      "why": "Manju Abebe's Thursday night episode is worth examining because it shows a player navigating complex systems and coming out even on credits.",
       "checks": [
-        "UNDOCKED episode details",
-        "Player standings",
-        "Strategies employed by Marguerite Kimball-Ostrow"
+        "UNDOCKED standings",
+        "Manju Abebe's flight path"
       ],
       "targets": [
         {
-          "pop": "POP-01188",
-          "question": "What was Marguerite Kimball-Ostrow's strategy on Wednesday night?",
-          "basis": "UNDOCKED episode details"
+          "pop": "POP-00918",
+          "question": "What was the key to Manju Abebe's even night on UNDOCKED?",
+          "basis": "Manju Abebe's UNDOCKED episode details"
         }
       ],
-      "interpretation": "The UNDOCKED standings are heating up, with Luis Taz holding strong but Marguerite Kimball-Ostrow putting up a fight. The key to understanding the competition lies in the players' individual strategies and performances.",
+      "interpretation": "Manju Abebe's performance suggests a deep understanding of the UNDOCKED game mechanics.",
       "unverifiedLead": [
-        "Marguerite Kimball-Ostrow may be gaining ground on Luis Taz"
+        "Manju Abebe might be a rising contender in the UNDOCKED leaderboard."
       ]
     }
   },
   "lanePicks": [
     {
-      "label": "UNDOCKED: Marguerite Kimball-Ostrow, Wednesday night",
+      "label": "UNDOCKED: Manju Abebe, Thursday night",
       "kind": "undocked",
-      "hood": "Piedmont Ave",
-      "ref": "undocked:undocked-pop01188-Y3C12-e2",
+      "hood": "Chinatown",
+      "ref": "undocked:undocked-pop00918-Y3C12-e2",
       "popids": [
-        "POP-01188"
+        "POP-00918"
       ]
     }
   ],
   "laneEntries": 1,
   "angleCapHits": 0,
-  "ranAt": "2026-11-19T12:17:17.764Z"
+  "ranAt": "2026-11-20T12:17:42.760Z"
 }

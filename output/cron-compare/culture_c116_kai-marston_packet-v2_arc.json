@@ -1,0 +1,32 @@
+{
+  "status": "arc-seed",
+  "cycle": "116",
+  "desk": "culture",
+  "persona": "kai-marston",
+  "hood": "Rockridge",
+  "quotes": [
+    {
+      "pop": "POP-00018",
+      "name": "Benji Dillon",
+      "quote": "I've noticed people recognizing me more often around Rockridge, like at the grocery store. It's become a part of my daily life, but it doesn't feel like a big change. I'm still just Benji, living on my block, and going to A's games."
+    },
+    {
+      "pop": "POP-00021",
+      "name": "Darrin Davis",
+      "quote": "To be honest, I'm not super close to Benji Dillon, but I've seen his name popping up more often around the A's, and it's clear he's gaining traction. You can tell when someone's rising through the ranks."
+    },
+    {
+      "pop": "POP-00022",
+      "name": "Danny Horn",
+      "quote": "To be honest, I've not really thought much about Benji Dillon's rising fame. I'm focused on my own game and helping the A's make a deep run. I've seen him around the clubhouse, he's a talented kid, but I don't know him well enough to say much about his personal story or what's behind his recent performances."
+    },
+    {
+      "pop": "POP-00533",
+      "name": "Travis Coles",
+      "quote": "I've seen Benji Dillon around Rockridge a few times, and it's clear he's getting more attention. As a player, you're used to being recognized, but it's different when it's outside the ballpark. I've had fans come up to me and mention his name, talk about his game. It's like the whole city is buzzing about the A's right now, and Benji's part of that. I don't know him personally that well, but it's cool to see him being recognized like that."
+    }
+  ],
+  "claim": "I've noticed people recognizing me more often around Rockridge, like at the grocery store. It's become a part of my daily life, but it doesn't feel like a big change. I'm still just Benji, living on my block, and going to A's games.",
+  "src": "citizenVoice PRESS c116",
+  "ranAt": "2026-11-20T19:16:31.784Z"
+}

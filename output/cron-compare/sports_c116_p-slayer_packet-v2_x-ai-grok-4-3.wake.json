@@ -57,5 +57,6 @@
     "recorded": true,
     "out": " '.env'] }\n{\n  \"popId\": \"POP-00008\",\n  \"name\": \"P Slayer\",\n  \"recorded\": true,\n  \"text\": \"filed: I sat on the low wall outside the Lake Merritt station, phone still hot in my hand from the notifica\"\n}"
   },
-  "ranAt": "2026-11-19T00:19:25.402Z"
+  "ranAt": "2026-11-19T00:19:25.402Z",
+  "dispositionReconciledAt": "2026-11-21T18:00:03.018Z"
 }

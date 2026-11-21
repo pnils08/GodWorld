@@ -15,686 +15,790 @@
   "pulse": {
     "className": "beat-lives",
     "score": 100,
-    "label": "Wilson Shepard moved into a place of their own in West Oakland, renting",
+    "label": "Paloma Vasquez moved into a place of their own in Grand Lake, renting",
     "hood": null,
-    "source": "output/beats/Lived_Events.jsonl @C116 batch 346c91"
+    "source": "output/beats/Lived_Events.jsonl @C116 batch 7f2ed6"
   },
   "story": {
     "kind": "beat-lives",
-    "angle": "The lives of C116: 9 people — Wilson Shepard moved into a place of their own in West Oakland, renting",
-    "label": "Wilson Shepard moved into a place of their own in West Oakland, renting",
-    "hookLine": "Wilson Shepard first. The event is the lead; one true detail; what came next only if the record says.",
+    "angle": "The lives of C116: 8 people — Paloma Vasquez moved into a place of their own in Grand Lake, renting",
+    "label": "Paloma Vasquez moved into a place of their own in Grand Lake, renting",
+    "hookLine": "Paloma Vasquez first. The event is the lead; one true detail; what came next only if the record says.",
     "hood": null,
     "citizens": [
-      "Wilson Shepard (POP-01022)",
-      "Theo Rahimi (POP-01247)",
-      "Ira Leu (POP-00703)",
-      "Matilda Diop (POP-00832)",
-      "Darrin Davis (POP-00021)",
-      "Omar Farah (POP-00986)",
-      "Tariq Cooper (POP-01000)",
-      "Sadie Williams (POP-01014)",
-      "Elias Varek (POP-00789)"
+      "Paloma Vasquez (POP-01249)",
+      "Priyanka Raman (POP-01096)",
+      "Rosa Ochoa (POP-00706)",
+      "Avery Santana (POP-00034)",
+      "Isley Kelley (POP-00019)",
+      "Benji Dillon (POP-00018)",
+      "Broderick Mitchell (POP-00221)",
+      "Derek Simmons (POP-00030)"
     ],
     "popids": [
-      "POP-01022",
-      "POP-01247",
-      "POP-00703",
-      "POP-00832",
-      "POP-00021",
-      "POP-00986",
-      "POP-01000",
-      "POP-01014",
-      "POP-00789"
+      "POP-01249",
+      "POP-01096",
+      "POP-00706",
+      "POP-00034",
+      "POP-00019",
+      "POP-00018",
+      "POP-00221",
+      "POP-00030"
     ],
-    "ref": "output/beats/Lived_Events.jsonl @C116 batch 346c91",
+    "ref": "output/beats/Lived_Events.jsonl @C116 batch 7f2ed6",
     "cycle": 116
   },
   "approach": "Lives approach: this slice is the people something happened to this Cycle — a birth, a death in the house, a hospital stay, a retirement, a promotion; a household set up or a place of their own; a win or a loss on the book; the people a turn of the city reached and what it did to their day; and the smaller moments the record kept. Each person gets their own passage: the event, then the thread under it — the stay or strain that led there, the other lines the record kept for them, what the Tribune or this page already said of them, and what they did next if the record says. Read the thread in order and name where two lines of it do not agree; do not restate a ledger value as the story. The fact exactly right; never a trend, never a number first; the person, not the system the event belongs to. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
   "citizens": [
     {
-      "popid": "POP-01022",
-      "name": "Wilson Shepard",
-      "role": "Head Coach, Oakland Oaks",
-      "neighborhood": "West Oakland",
+      "popid": "POP-01249",
+      "name": "Paloma Vasquez",
+      "role": "Owner, Marquee Grocer",
+      "neighborhood": "Grand Lake",
       "business": null,
-      "profile": "Wilson Shepard — Head Coach, Oakland Oaks — West Oakland",
+      "profile": "Paloma Vasquez — Owner, Marquee Grocer — Grand Lake",
       "why": "moved into a place of their own this Cycle"
     },
     {
-      "popid": "POP-01247",
-      "name": "Theo Rahimi",
-      "role": "student",
-      "neighborhood": "Eastlake",
-      "business": null,
-      "profile": "Theo Rahimi — student — Eastlake",
-      "why": "moved into a place of their own this Cycle"
-    },
-    {
-      "popid": "POP-00703",
-      "name": "Ira Leu",
-      "role": "Artisan Cheesemaker",
-      "neighborhood": "Temescal",
-      "business": null,
-      "profile": "Ira Leu — Artisan Cheesemaker — Temescal",
-      "why": "reached by the Cycle's city turn: the health center staff unwind at the bar after their first busy week"
-    },
-    {
-      "popid": "POP-00832",
-      "name": "Matilda Diop",
-      "role": "Paramedic",
-      "neighborhood": "Lake Merritt",
-      "business": null,
-      "profile": "Matilda Diop — Paramedic — Lake Merritt",
-      "why": "reached by the Cycle's city turn: restocked the rig at shift change and counted the gauze twice"
-    },
-    {
-      "popid": "POP-00021",
-      "name": "Darrin Davis",
-      "role": "Left Fielder, Oakland A's Legend",
-      "neighborhood": "Piedmont Ave",
-      "business": null,
-      "profile": "Darrin Davis — Left Fielder, Oakland A's Legend — Piedmont Ave",
-      "why": "reached by the Cycle's community turn: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots"
-    },
-    {
-      "popid": "POP-00986",
-      "name": "Omar Farah",
-      "role": "student",
-      "neighborhood": "Chinatown",
-      "business": null,
-      "profile": "Omar Farah — student — Chinatown",
-      "why": "graduation this Cycle: picked up the first paycheck and stood in the bank line like an adult"
-    },
-    {
-      "popid": "POP-01000",
-      "name": "Tariq Cooper",
-      "role": "student",
-      "neighborhood": "Piedmont Ave",
-      "business": null,
-      "profile": "Tariq Cooper — student — Piedmont Ave",
-      "why": "graduation this Cycle: drove alone for the first time and took the long way home on purpose"
-    },
-    {
-      "popid": "POP-01014",
-      "name": "Sadie Williams",
-      "role": "student",
-      "neighborhood": "Chinatown",
-      "business": null,
-      "profile": "Sadie Williams — student — Chinatown",
-      "why": "stabilized this Cycle: had a rough week and still showed up to the spelling bee"
-    },
-    {
-      "popid": "POP-00789",
-      "name": "Elias Varek",
-      "role": "Founder of Civis Systems",
+      "popid": "POP-01096",
+      "name": "Priyanka Raman",
+      "role": "Principal, Oakland Tech Collective",
       "neighborhood": "West Oakland",
       "business": null,
-      "profile": "Elias Varek — Founder of Civis Systems — West Oakland",
-      "why": "business-gain this Cycle: Civis Systems returned $489017 to the line this week"
+      "profile": "Priyanka Raman — Principal, Oakland Tech Collective — West Oakland",
+      "why": "reached by the Cycle's community turn: noticed the new streetlights went in before anyone had to ask"
+    },
+    {
+      "popid": "POP-00706",
+      "name": "Rosa Ochoa",
+      "role": "Library Worker",
+      "neighborhood": "Laurel",
+      "business": null,
+      "profile": "Rosa Ochoa — Library Worker — Laurel",
+      "why": "reached by the Cycle's community turn: checked the front door lock three times after everyone else was asleep"
+    },
+    {
+      "popid": "POP-00034",
+      "name": "Avery Santana",
+      "role": "Mayor of Oakland",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Avery Santana — Mayor of Oakland — Rockridge",
+      "why": "reached by the Cycle's community turn: badged into the Baylight office early and tried not to think about the protestors from last month"
+    },
+    {
+      "popid": "POP-00019",
+      "name": "Isley Kelley",
+      "role": "Shortstop, Oakland A's Legend",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Isley Kelley — Shortstop, Oakland A's Legend — Rockridge",
+      "why": "business-gain this Cycle: Kelley Mercantile returned $2067 to the line this week"
+    },
+    {
+      "popid": "POP-00018",
+      "name": "Benji Dillon",
+      "role": "Pitcher, Oakland A's Legend",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+      "why": "business-gain this Cycle: Dillon Clinic returned $7587 to the line this week"
+    },
+    {
+      "popid": "POP-00221",
+      "name": "Broderick Mitchell",
+      "role": "Security guard",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Broderick Mitchell — Security guard — Rockridge",
+      "why": "lifeevent-promotion-up-s this Cycle: Was handed the keys at Anthropic to open on their own for the first time."
+    },
+    {
+      "popid": "POP-00030",
+      "name": "Derek Simmons",
+      "role": "A's Marketing Director",
+      "neighborhood": "Jack London",
+      "business": null,
+      "profile": "Derek Simmons — A's Marketing Director — Jack London",
+      "why": "lifeevent-promotion-up-s this Cycle: Trained the new person at Oakland Athletics and heard afterward it was the best onboarding in years."
     }
   ],
   "facts": [
     {
-      "text": "Wilson Shepard moved into a place of their own in West Oakland, renting (C116)",
+      "text": "Paloma Vasquez moved into a place of their own in Grand Lake, renting (C116)",
       "src": "output/beats/Household_Ledger.jsonl @C116",
-      "id": "household:HH-0116-F008:116",
+      "id": "household:HH-0116-F010:116",
       "kind": "household",
-      "popid": "POP-01022"
+      "popid": "POP-01249"
     },
     {
-      "text": "Wilson Shepard — in their life, C115: fielded a round of texts from people who hadn't called in years",
-      "src": "output/beats/LifeHistory_Log.jsonl @C115",
-      "kind": "thread",
-      "popid": "POP-01022"
-    },
-    {
-      "text": "Wilson Shepard — in their life, C116: saw their name in the sports pages again",
+      "text": "Paloma Vasquez — in their life, C116: Became the owner of Marquee Grocer — Grand Lake (engine.96 Task 12)",
       "src": "output/beats/LifeHistory_Log.jsonl @C116",
       "kind": "thread",
-      "popid": "POP-01022"
+      "popid": "POP-01249"
     },
     {
-      "text": "Wilson Shepard — in their life, C116: kept the phone buzzing on the counter all night and let it",
-      "src": "output/beats/LifeHistory_Log.jsonl @C116",
-      "kind": "thread",
-      "popid": "POP-01022"
-    },
-    {
-      "text": "Wilson Shepard — in their life, C116: came home to find the neighbors had left a case of something cold on the porch — still buzzing hours after the game",
-      "src": "output/beats/LifeHistory_Log.jsonl @C116",
-      "kind": "thread",
-      "popid": "POP-01022"
-    },
-    {
-      "text": "Wilson Shepard — the Tribune named them in a piece headlined The Oaks Still Have to Become Somebody’s Team (Sports, C110)",
-      "src": "archive/ARTICLE_INDEX.jsonl c2b99604810ac2b9",
-      "kind": "thread",
-      "popid": "POP-01022"
-    },
-    {
-      "text": "Wilson Shepard — the Tribune named them in a piece headlined Oakland Oaks Struggle in Preseason Opener (Sports, C108)",
-      "src": "archive/ARTICLE_INDEX.jsonl 66bd8fa6234066bd",
-      "kind": "thread",
-      "popid": "POP-01022"
-    },
-    {
-      "text": "Wilson Shepard — the Tribune named them in a piece headlined The Oaks' Groundswell in Downtown (Sports, C107)",
-      "src": "archive/ARTICLE_INDEX.jsonl bea849f57403bea8",
-      "kind": "thread",
-      "popid": "POP-01022"
-    },
-    {
-      "text": "Theo Rahimi moved into a place of their own in Eastlake, renting (C116)",
-      "src": "output/beats/Household_Ledger.jsonl @C116",
-      "id": "household:HH-0116-F009:116",
-      "kind": "household",
-      "popid": "POP-01247"
-    },
-    {
-      "text": "Ira Leu — the health center staff unwind at the bar after their first busy week, Temescal — one of 4 people the Cycle's city turn reached (West Oakland Stabilization Fund sitting (0, capped); Oakland Alternative Response Initiative sitting (0, capped); Fruitvale Transit Hub…) (C116)",
+      "text": "Priyanka Raman — noticed the new streetlights went in before anyone had to ask, West Oakland — one of 4 people the Cycle's community turn reached (C116)",
       "src": "output/beats/Story_Seed_Deck.jsonl @C116",
-      "id": "seed:8.75E+30:116:POP-00703",
+      "id": "seed:f525661f:116:POP-01096",
       "kind": "seed",
-      "popid": "POP-00703"
+      "popid": "POP-01096"
     },
     {
-      "text": "Ira Leu — in their life, C115: a flyer for a seniors lunch program flutters on a community bulletin board",
+      "text": "Priyanka Raman — in their life, C115: A supervisor at Oakland Tech Collective asked what they want next, and seemed to mean it.",
       "src": "output/beats/LifeHistory_Log.jsonl @C115",
       "kind": "thread",
-      "popid": "POP-00703"
+      "popid": "POP-01096"
     },
     {
-      "text": "Ira Leu — in their life, C115: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+      "text": "Priyanka Raman — in their life, C115: spent the evening sorting a box of things that used to be someone's",
       "src": "output/beats/LifeHistory_Log.jsonl @C115",
       "kind": "thread",
-      "popid": "POP-00703"
+      "popid": "POP-01096"
     },
     {
-      "text": "Ira Leu — in their life, C115: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+      "text": "Priyanka Raman — in their life, C115: noticed another renovated Victorian on the block and calculated what the property taxes must be",
       "src": "output/beats/LifeHistory_Log.jsonl @C115",
       "kind": "thread",
-      "popid": "POP-00703"
+      "popid": "POP-01096"
     },
     {
-      "text": "Ira Leu — in their life, C116: read the Tribune's front page twice — once for the news, once to see who was in it",
-      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "text": "Priyanka Raman — in their life, C115: brought home a new plant and picked its spot carefully",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
       "kind": "thread",
-      "popid": "POP-00703"
+      "popid": "POP-01096"
     },
     {
-      "text": "Matilda Diop — restocked the rig at shift change and counted the gauze twice, D1 — one of 4 people the Cycle's city turn reached (West Oakland Stabilization Fund sitting (0, capped); Oakland Alternative Response Initiative sitting (0, capped); Oakland Youth…) (C116)",
+      "text": "Priyanka Raman — the Tribune named them in a piece headlined Uptown's Two Speeds: The Block Moves Faster Than the Store (Business, C112)",
+      "src": "archive/ARTICLE_INDEX.jsonl 6bc955294e6e05a5",
+      "kind": "thread",
+      "popid": "POP-01096"
+    },
+    {
+      "text": "Rosa Ochoa — checked the front door lock three times after everyone else was asleep, Laurel — one of 4 people the Cycle's community turn reached (C116)",
       "src": "output/beats/Story_Seed_Deck.jsonl @C116",
-      "id": "seed:0c5255ef:116:POP-00832",
+      "id": "seed:9dd4042a:116:POP-00706",
       "kind": "seed",
-      "popid": "POP-00832"
+      "popid": "POP-00706"
     },
     {
-      "text": "Matilda Diop — in their life, C115: found a quiet minute at a front porch and the muffled thump of a car stereo playing last summer's hit",
+      "text": "Rosa Ochoa — in their life, C115: a flyer for a seniors lunch program flutters on a community bulletin board",
       "src": "output/beats/LifeHistory_Log.jsonl @C115",
       "kind": "thread",
-      "popid": "POP-00832"
+      "popid": "POP-00706"
     },
     {
-      "text": "Matilda Diop — in their life, C115: disagreed with a Tribune column out loud to an empty kitchen near a bench near the water",
+      "text": "Rosa Ochoa — in their life, C115: found another shop on the block keeping short hours",
       "src": "output/beats/LifeHistory_Log.jsonl @C115",
       "kind": "thread",
-      "popid": "POP-00832"
+      "popid": "POP-00706"
     },
     {
-      "text": "Matilda Diop — in their life, C116: washed the blood out of the rig at the end of shift and tried not to think about the address",
-      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "text": "Rosa Ochoa — in their life, C115: bought a new A's jersey and still riding the high from last night's win",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
       "kind": "thread",
-      "popid": "POP-00832"
+      "popid": "POP-00706"
     },
     {
-      "text": "Darrin Davis — read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots, Piedmont Ave — one of 4 people the Cycle's community turn reached (Darrin Davis — the city is watching: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to…) (C116)",
+      "text": "Rosa Ochoa — the Tribune named them in a piece headlined MEMORIAL DAY PARADE DRAWS THOUSANDS TO LAKE MERRITT (Culture, C73)",
+      "src": "archive/ARTICLE_INDEX.jsonl e461621475c9e461",
+      "kind": "thread",
+      "popid": "POP-00706"
+    },
+    {
+      "text": "Rosa Ochoa — the Tribune named them in a piece headlined THE TURNING POINT EDITION (General, C40)",
+      "src": "archive/ARTICLE_INDEX.jsonl 3608fc2dd191651e",
+      "kind": "thread",
+      "popid": "POP-00706"
+    },
+    {
+      "text": "Rosa Ochoa — the Tribune named them in a piece headlined Laurel’s Dizzy Spell: What Mrs. Ochoa Saw Before the Health Advisory (Culture, C34)",
+      "src": "archive/ARTICLE_INDEX.jsonl fa91563482b5f1d5",
+      "kind": "thread",
+      "popid": "POP-00706"
+    },
+    {
+      "text": "Avery Santana — badged into the Baylight office early and tried not to think about the protestors from last month, Rockridge — one of 4 people the Cycle's community turn reached (C116)",
       "src": "output/beats/Story_Seed_Deck.jsonl @C116",
-      "id": "seed:56a75e71:116:POP-00021",
+      "id": "seed:d752f46c:116:POP-00034",
       "kind": "seed",
-      "popid": "POP-00021"
+      "popid": "POP-00034"
     },
     {
-      "text": "Darrin Davis — in their life, C115: saw their name in the sports pages again",
+      "text": "Avery Santana — in their life, C115: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
       "src": "output/beats/LifeHistory_Log.jsonl @C115",
       "kind": "thread",
-      "popid": "POP-00021"
+      "popid": "POP-00034"
     },
     {
-      "text": "Darrin Davis — in their life, C116: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+      "text": "Avery Santana — the Tribune named them in a piece headlined The Fund Has Moved $7 Million Out of $28 Million. The Record Names Two Households. (Civic, C115)",
+      "src": "archive/ARTICLE_INDEX.jsonl 6aedd777086b1ceb",
+      "kind": "thread",
+      "popid": "POP-00034"
+    },
+    {
+      "text": "Avery Santana — the Tribune named them in a piece headlined Three Cycles Without a Move: The Youth Apprenticeship Pipeline (Civic, C115)",
+      "src": "archive/ARTICLE_INDEX.jsonl c2e85dd490ff16ce",
+      "kind": "thread",
+      "popid": "POP-00034"
+    },
+    {
+      "text": "Avery Santana — the Tribune named them in a piece headlined The Fund Has Moved $6.6 Million in West Oakland. The Public Record Names Two Households. (Civic, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl 3c4089861e250c37",
+      "kind": "thread",
+      "popid": "POP-00034"
+    },
+    {
+      "text": "Isley Kelley — Kelley Mercantile returned $2067 to the line this week, Rockridge (C116 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "moment:POP-00019:116:Business-Gain",
+      "kind": "moment",
+      "popid": "POP-00019"
+    },
+    {
+      "text": "Isley Kelley — in their life, C116: the bartender wiping down counters while discussing the stalled train delays with a regular",
       "src": "output/beats/LifeHistory_Log.jsonl @C116",
       "kind": "thread",
-      "popid": "POP-00021"
+      "popid": "POP-00019"
     },
     {
-      "text": "Darrin Davis — in their life, C116: drove the whole way home without remembering a single turn",
+      "text": "Isley Kelley — in their life, C116: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever. near College Avenue",
       "src": "output/beats/LifeHistory_Log.jsonl @C116",
       "kind": "thread",
-      "popid": "POP-00021"
+      "popid": "POP-00019"
     },
     {
-      "text": "Darrin Davis — in their life, C116: stayed thirty minutes after the service just catching up in the parking lot",
+      "text": "Isley Kelley — in their life, C116: found a school drawing folded in a jacket pocket and kept it",
       "src": "output/beats/LifeHistory_Log.jsonl @C116",
       "kind": "thread",
-      "popid": "POP-00021"
+      "popid": "POP-00019"
     },
     {
-      "text": "Darrin Davis — Lives already wrote this person: what the Cycle's turn reached them with (C115)",
+      "text": "Isley Kelley — in their life, C116: found a quiet minute at a cafe on the avenue and the hum of a bassline from a passing car",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "kind": "thread",
+      "popid": "POP-00019"
+    },
+    {
+      "text": "Isley Kelley — Lives already wrote this person: a moment the record kept (C115)",
       "src": "output/cron-compare/lives_covered.json",
       "kind": "thread",
-      "popid": "POP-00021"
+      "popid": "POP-00019"
     },
     {
-      "text": "Darrin Davis — the Tribune named them in a piece headlined The Clipping on the Door (Culture, C115)",
-      "src": "archive/ARTICLE_INDEX.jsonl e41f10c836cea7b4",
+      "text": "Isley Kelley — the Tribune named them in a piece headlined The Lives of C115 (Culture, C115)",
+      "src": "archive/ARTICLE_INDEX.jsonl bbb67f9b172a6d89",
       "kind": "thread",
-      "popid": "POP-00021"
+      "popid": "POP-00019"
     },
     {
-      "text": "Darrin Davis — the Tribune named them in a piece headlined The Pole on Rockridge Corner Is Starting to Say His Name (Culture, C114)",
-      "src": "archive/ARTICLE_INDEX.jsonl db859c2206e0282a",
-      "kind": "thread",
-      "popid": "POP-00021"
-    },
-    {
-      "text": "Darrin Davis — the Tribune named them in a piece headlined Fifty-Six, and the Road Behind It (Sports, C114)",
-      "src": "archive/ARTICLE_INDEX.jsonl 6a58d696e6125498",
-      "kind": "thread",
-      "popid": "POP-00021"
-    },
-    {
-      "text": "Omar Farah — picked up the first paycheck and stood in the bank line like an adult, Chinatown (C116 — what happened in their life, not words they said)",
-      "src": "output/beats/LifeHistory_Log.jsonl @C116",
-      "id": "moment:POP-00986:116:Graduation",
-      "kind": "moment",
-      "popid": "POP-00986"
-    },
-    {
-      "text": "Tariq Cooper — drove alone for the first time and took the long way home on purpose, Piedmont Ave (C116 — what happened in their life, not words they said)",
-      "src": "output/beats/LifeHistory_Log.jsonl @C116",
-      "id": "moment:POP-01000:116:Graduation",
-      "kind": "moment",
-      "popid": "POP-01000"
-    },
-    {
-      "text": "Tariq Cooper — in their life, C115: iced a rolled ankle and watched film of a game they were not in",
-      "src": "output/beats/LifeHistory_Log.jsonl @C115",
-      "kind": "thread",
-      "popid": "POP-01000"
-    },
-    {
-      "text": "Tariq Cooper — in their life, C116: stayed up past everyone talking about what comes after this",
-      "src": "output/beats/LifeHistory_Log.jsonl @C116",
-      "kind": "thread",
-      "popid": "POP-01000"
-    },
-    {
-      "text": "Sadie Williams — had a rough week and still showed up to the spelling bee, Chinatown (C116 — what happened in their life, not words they said)",
-      "src": "output/beats/LifeHistory_Log.jsonl @C116",
-      "id": "moment:POP-01014:116:Stabilized",
-      "kind": "moment",
-      "popid": "POP-01014"
-    },
-    {
-      "text": "Elias Varek — Civis Systems returned $489017 to the line this week, West Oakland (C116 — what happened in their life, not words they said)",
-      "src": "output/beats/LifeHistory_Log.jsonl @C116",
-      "id": "moment:POP-00789:116:Business-Gain",
-      "kind": "moment",
-      "popid": "POP-00789"
-    },
-    {
-      "text": "Elias Varek — in their life, C115: headed over to The Aitken Line Founding Celebration in Jack London last night",
-      "src": "output/beats/LifeHistory_Log.jsonl @C115",
-      "kind": "thread",
-      "popid": "POP-00789"
-    },
-    {
-      "text": "Elias Varek — in their life, C115: Civis Systems returned $488443 to the line this week",
-      "src": "output/beats/LifeHistory_Log.jsonl @C115",
-      "kind": "thread",
-      "popid": "POP-00789"
-    },
-    {
-      "text": "Elias Varek — in their life, C115: Varek Systems returned $34932 to the line this week",
-      "src": "output/beats/LifeHistory_Log.jsonl @C115",
-      "kind": "thread",
-      "popid": "POP-00789"
-    },
-    {
-      "text": "Elias Varek — in their life, C116: Varek Systems returned $35112 to the line this week",
-      "src": "output/beats/LifeHistory_Log.jsonl @C116",
-      "kind": "thread",
-      "popid": "POP-00789"
-    },
-    {
-      "text": "Elias Varek — Lives already wrote this person: a moment the record kept (C115)",
-      "src": "output/cron-compare/lives_covered.json",
-      "kind": "thread",
-      "popid": "POP-00789"
-    },
-    {
-      "text": "Elias Varek — the Tribune named them in a piece headlined The Lives Page, Cycle 115 (Culture, C115)",
-      "src": "archive/ARTICLE_INDEX.jsonl 4da79b355f8b8455",
-      "kind": "thread",
-      "popid": "POP-00789"
-    },
-    {
-      "text": "Elias Varek — the Tribune named them in a piece headlined The Board in the Trailer Says 9.5 Percent. Enzo Walker Is Counting Something Else. (Business Reporter, C114)",
-      "src": "archive/ARTICLE_INDEX.jsonl 384044afdbad94f5",
-      "kind": "thread",
-      "popid": "POP-00789"
-    },
-    {
-      "text": "Elias Varek — the Tribune named them in a piece headlined The Lives Page, Cycle 114 (Culture, C114)",
+      "text": "Isley Kelley — the Tribune named them in a piece headlined The Lives Page, Cycle 114 (Culture, C114)",
       "src": "archive/ARTICLE_INDEX.jsonl 9746e4e747ffdd0a",
       "kind": "thread",
-      "popid": "POP-00789"
+      "popid": "POP-00019"
+    },
+    {
+      "text": "Isley Kelley — the Tribune named them in a piece headlined Fifty-Six, and the Road Behind It (Sports, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl 6a58d696e6125498",
+      "kind": "thread",
+      "popid": "POP-00019"
+    },
+    {
+      "text": "Benji Dillon — Dillon Clinic returned $7587 to the line this week, Rockridge (C116 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "moment:POP-00018:116:Business-Gain",
+      "kind": "moment",
+      "popid": "POP-00018"
+    },
+    {
+      "text": "Benji Dillon — in their life, C115: put on their good suit for the Sunday service because some traditions still matter",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "kind": "thread",
+      "popid": "POP-00018"
+    },
+    {
+      "text": "Benji Dillon — in their life, C116: got asked about the club at a family dinner",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "kind": "thread",
+      "popid": "POP-00018"
+    },
+    {
+      "text": "Benji Dillon — in their life, C116: After a farewell season that brought back Benji Dillon in on 1 year deal and now Benji Dillon is leaving the door open. Does he come back for one more year, and as a starter or out of the bullpen?, and is Oakland even an option? With the youth movement in motion does a Dillon deal make sense? Does the club want him back at his $13.0M salary? What would make him decide, and does he wait to see what Mark Aitken does first?",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "kind": "thread",
+      "popid": "POP-00018"
+    },
+    {
+      "text": "Benji Dillon — in their life, C116: grabbed coffee from the cart outside the hospital before the morning rush hit",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "kind": "thread",
+      "popid": "POP-00018"
+    },
+    {
+      "text": "Benji Dillon — Lives already wrote this person: a moment the record kept (C115)",
+      "src": "output/cron-compare/lives_covered.json",
+      "kind": "thread",
+      "popid": "POP-00018"
+    },
+    {
+      "text": "Benji Dillon — the Tribune named them in a piece headlined The Clipping on the Door (Culture, C115)",
+      "src": "archive/ARTICLE_INDEX.jsonl e41f10c836cea7b4",
+      "kind": "thread",
+      "popid": "POP-00018"
+    },
+    {
+      "text": "Benji Dillon — the Tribune named them in a piece headlined The Lives of C115 (Culture, C115)",
+      "src": "archive/ARTICLE_INDEX.jsonl bbb67f9b172a6d89",
+      "kind": "thread",
+      "popid": "POP-00018"
+    },
+    {
+      "text": "Benji Dillon — the Tribune named them in a piece headlined The Names We Keep Saying (Culture, C115)",
+      "src": "archive/ARTICLE_INDEX.jsonl af3c80da720ceb06",
+      "kind": "thread",
+      "popid": "POP-00018"
+    },
+    {
+      "text": "Broderick Mitchell — Was handed the keys at Anthropic to open on their own for the first time., Rockridge (C116 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "moment:POP-00221:116:LifeEvent-Promotion-Up-S",
+      "kind": "moment",
+      "popid": "POP-00221"
+    },
+    {
+      "text": "Broderick Mitchell — in their life, C115: cooked an old family recipe from memory, mostly getting it right",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "kind": "thread",
+      "popid": "POP-00221"
+    },
+    {
+      "text": "Broderick Mitchell — in their life, C115: swapped stories with a neighbor about what got taken up the block",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "kind": "thread",
+      "popid": "POP-00221"
+    },
+    {
+      "text": "Broderick Mitchell — in their life, C115: felt a quiet tradeoff settle into place",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "kind": "thread",
+      "popid": "POP-00221"
+    },
+    {
+      "text": "Broderick Mitchell — in their life, C116: saved the Tribune clipping with their neighborhood in it — the good one",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "kind": "thread",
+      "popid": "POP-00221"
+    },
+    {
+      "text": "Broderick Mitchell — the Tribune named them in a piece headlined The Sea-Level Desk Is Down to Three (Business, C115)",
+      "src": "archive/ARTICLE_INDEX.jsonl 0fea3b9384f40a35",
+      "kind": "thread",
+      "popid": "POP-00221"
+    },
+    {
+      "text": "Derek Simmons — Trained the new person at Oakland Athletics and heard afterward it was the best onboarding in years., Jack London (C116 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "moment:POP-00030:116:LifeEvent-Promotion-Up-S",
+      "kind": "moment",
+      "popid": "POP-00030"
+    },
+    {
+      "text": "Derek Simmons — in their life, C115: split the last of the coffee and the morning's plans with their partner",
+      "src": "output/beats/LifeHistory_Log.jsonl @C115",
+      "kind": "thread",
+      "popid": "POP-00030"
+    },
+    {
+      "text": "Derek Simmons — in their life, C116: smelled something on the stove next door that belonged to childhood",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "kind": "thread",
+      "popid": "POP-00030"
+    },
+    {
+      "text": "Derek Simmons — in their life, C116: argued over whether a night spent chasing contracts beats a night chasing the galaxy's own marks, now that the board counts the marks first",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "kind": "thread",
+      "popid": "POP-00030"
+    },
+    {
+      "text": "Derek Simmons — in their life, C116: read about something unfamiliar and kept pulling the thread",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "kind": "thread",
+      "popid": "POP-00030"
+    },
+    {
+      "text": "Derek Simmons — the Tribune named them in a piece headlined The Waterfront Is Moving. Some Questions Aren't Answered Yet. (Investigations, C88)",
+      "src": "archive/ARTICLE_INDEX.jsonl 891df67c41c4891d",
+      "kind": "thread",
+      "popid": "POP-00030"
     }
   ],
   "prewrite": {
     "schema": "BEAT-SLICE-1",
     "method": "BEAT_TAB_FACTS",
     "missing": [],
-    "angle": "The lives of C116: 9 people — Wilson Shepard moved into a place of their own in West Oakland, renting",
-    "hookLine": "Wilson Shepard first. The event is the lead; one true detail; what came next only if the record says.",
+    "angle": "The lives of C116: 8 people — Paloma Vasquez moved into a place of their own in Grand Lake, renting",
+    "hookLine": "Paloma Vasquez first. The event is the lead; one true detail; what came next only if the record says.",
     "anchorFacts": [
-      "Wilson Shepard moved into a place of their own in West Oakland, renting (C116)",
-      "Wilson Shepard — in their life, C115: fielded a round of texts from people who hadn't called in years",
-      "Wilson Shepard — in their life, C116: saw their name in the sports pages again",
-      "Wilson Shepard — in their life, C116: kept the phone buzzing on the counter all night and let it",
-      "Wilson Shepard — in their life, C116: came home to find the neighbors had left a case of something cold on the porch — still buzzing hours after the game",
-      "Wilson Shepard — the Tribune named them in a piece headlined The Oaks Still Have to Become Somebody’s Team (Sports, C110)",
-      "Wilson Shepard — the Tribune named them in a piece headlined Oakland Oaks Struggle in Preseason Opener (Sports, C108)",
-      "Wilson Shepard — the Tribune named them in a piece headlined The Oaks' Groundswell in Downtown (Sports, C107)",
-      "Theo Rahimi moved into a place of their own in Eastlake, renting (C116)",
-      "Ira Leu — the health center staff unwind at the bar after their first busy week, Temescal — one of 4 people the Cycle's city turn reached (West Oakland Stabilization Fund sitting (0, capped); Oakland Alternative Response Initiative sitting (0, capped); Fruitvale Transit Hub…) (C116)",
-      "Ira Leu — in their life, C115: a flyer for a seniors lunch program flutters on a community bulletin board",
-      "Ira Leu — in their life, C115: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
-      "Ira Leu — in their life, C115: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
-      "Ira Leu — in their life, C116: read the Tribune's front page twice — once for the news, once to see who was in it",
-      "Matilda Diop — restocked the rig at shift change and counted the gauze twice, D1 — one of 4 people the Cycle's city turn reached (West Oakland Stabilization Fund sitting (0, capped); Oakland Alternative Response Initiative sitting (0, capped); Oakland Youth…) (C116)",
-      "Matilda Diop — in their life, C115: found a quiet minute at a front porch and the muffled thump of a car stereo playing last summer's hit",
-      "Matilda Diop — in their life, C115: disagreed with a Tribune column out loud to an empty kitchen near a bench near the water",
-      "Matilda Diop — in their life, C116: washed the blood out of the rig at the end of shift and tried not to think about the address",
-      "Darrin Davis — read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots, Piedmont Ave — one of 4 people the Cycle's community turn reached (Darrin Davis — the city is watching: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to…) (C116)",
-      "Darrin Davis — in their life, C115: saw their name in the sports pages again",
-      "Darrin Davis — in their life, C116: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
-      "Darrin Davis — in their life, C116: drove the whole way home without remembering a single turn",
-      "Darrin Davis — in their life, C116: stayed thirty minutes after the service just catching up in the parking lot",
-      "Darrin Davis — Lives already wrote this person: what the Cycle's turn reached them with (C115)",
-      "Darrin Davis — the Tribune named them in a piece headlined The Clipping on the Door (Culture, C115)",
-      "Darrin Davis — the Tribune named them in a piece headlined The Pole on Rockridge Corner Is Starting to Say His Name (Culture, C114)",
-      "Darrin Davis — the Tribune named them in a piece headlined Fifty-Six, and the Road Behind It (Sports, C114)",
-      "Omar Farah — picked up the first paycheck and stood in the bank line like an adult, Chinatown (C116 — what happened in their life, not words they said)",
-      "Tariq Cooper — drove alone for the first time and took the long way home on purpose, Piedmont Ave (C116 — what happened in their life, not words they said)",
-      "Tariq Cooper — in their life, C115: iced a rolled ankle and watched film of a game they were not in",
-      "Tariq Cooper — in their life, C116: stayed up past everyone talking about what comes after this",
-      "Sadie Williams — had a rough week and still showed up to the spelling bee, Chinatown (C116 — what happened in their life, not words they said)",
-      "Elias Varek — Civis Systems returned $489017 to the line this week, West Oakland (C116 — what happened in their life, not words they said)",
-      "Elias Varek — in their life, C115: headed over to The Aitken Line Founding Celebration in Jack London last night",
-      "Elias Varek — in their life, C115: Civis Systems returned $488443 to the line this week",
-      "Elias Varek — in their life, C115: Varek Systems returned $34932 to the line this week",
-      "Elias Varek — in their life, C116: Varek Systems returned $35112 to the line this week",
-      "Elias Varek — Lives already wrote this person: a moment the record kept (C115)",
-      "Elias Varek — the Tribune named them in a piece headlined The Lives Page, Cycle 115 (Culture, C115)",
-      "Elias Varek — the Tribune named them in a piece headlined The Board in the Trailer Says 9.5 Percent. Enzo Walker Is Counting Something Else. (Business Reporter, C114)",
-      "Elias Varek — the Tribune named them in a piece headlined The Lives Page, Cycle 114 (Culture, C114)"
+      "Paloma Vasquez moved into a place of their own in Grand Lake, renting (C116)",
+      "Paloma Vasquez — in their life, C116: Became the owner of Marquee Grocer — Grand Lake (engine.96 Task 12)",
+      "Priyanka Raman — noticed the new streetlights went in before anyone had to ask, West Oakland — one of 4 people the Cycle's community turn reached (C116)",
+      "Priyanka Raman — in their life, C115: A supervisor at Oakland Tech Collective asked what they want next, and seemed to mean it.",
+      "Priyanka Raman — in their life, C115: spent the evening sorting a box of things that used to be someone's",
+      "Priyanka Raman — in their life, C115: noticed another renovated Victorian on the block and calculated what the property taxes must be",
+      "Priyanka Raman — in their life, C115: brought home a new plant and picked its spot carefully",
+      "Priyanka Raman — the Tribune named them in a piece headlined Uptown's Two Speeds: The Block Moves Faster Than the Store (Business, C112)",
+      "Rosa Ochoa — checked the front door lock three times after everyone else was asleep, Laurel — one of 4 people the Cycle's community turn reached (C116)",
+      "Rosa Ochoa — in their life, C115: a flyer for a seniors lunch program flutters on a community bulletin board",
+      "Rosa Ochoa — in their life, C115: found another shop on the block keeping short hours",
+      "Rosa Ochoa — in their life, C115: bought a new A's jersey and still riding the high from last night's win",
+      "Rosa Ochoa — the Tribune named them in a piece headlined MEMORIAL DAY PARADE DRAWS THOUSANDS TO LAKE MERRITT (Culture, C73)",
+      "Rosa Ochoa — the Tribune named them in a piece headlined THE TURNING POINT EDITION (General, C40)",
+      "Rosa Ochoa — the Tribune named them in a piece headlined Laurel’s Dizzy Spell: What Mrs. Ochoa Saw Before the Health Advisory (Culture, C34)",
+      "Avery Santana — badged into the Baylight office early and tried not to think about the protestors from last month, Rockridge — one of 4 people the Cycle's community turn reached (C116)",
+      "Avery Santana — in their life, C115: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+      "Avery Santana — the Tribune named them in a piece headlined The Fund Has Moved $7 Million Out of $28 Million. The Record Names Two Households. (Civic, C115)",
+      "Avery Santana — the Tribune named them in a piece headlined Three Cycles Without a Move: The Youth Apprenticeship Pipeline (Civic, C115)",
+      "Avery Santana — the Tribune named them in a piece headlined The Fund Has Moved $6.6 Million in West Oakland. The Public Record Names Two Households. (Civic, C114)",
+      "Isley Kelley — Kelley Mercantile returned $2067 to the line this week, Rockridge (C116 — what happened in their life, not words they said)",
+      "Isley Kelley — in their life, C116: the bartender wiping down counters while discussing the stalled train delays with a regular",
+      "Isley Kelley — in their life, C116: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever. near College Avenue",
+      "Isley Kelley — in their life, C116: found a school drawing folded in a jacket pocket and kept it",
+      "Isley Kelley — in their life, C116: found a quiet minute at a cafe on the avenue and the hum of a bassline from a passing car",
+      "Isley Kelley — Lives already wrote this person: a moment the record kept (C115)",
+      "Isley Kelley — the Tribune named them in a piece headlined The Lives of C115 (Culture, C115)",
+      "Isley Kelley — the Tribune named them in a piece headlined The Lives Page, Cycle 114 (Culture, C114)",
+      "Isley Kelley — the Tribune named them in a piece headlined Fifty-Six, and the Road Behind It (Sports, C114)",
+      "Benji Dillon — Dillon Clinic returned $7587 to the line this week, Rockridge (C116 — what happened in their life, not words they said)",
+      "Benji Dillon — in their life, C115: put on their good suit for the Sunday service because some traditions still matter",
+      "Benji Dillon — in their life, C116: got asked about the club at a family dinner",
+      "Benji Dillon — in their life, C116: After a farewell season that brought back Benji Dillon in on 1 year deal and now Benji Dillon is leaving the door open. Does he come back for one more year, and as a starter or out of the bullpen?, and is Oakland even an option? With the youth movement in motion does a Dillon deal make sense? Does the club want him back at his $13.0M salary? What would make him decide, and does he wait to see what Mark Aitken does first?",
+      "Benji Dillon — in their life, C116: grabbed coffee from the cart outside the hospital before the morning rush hit",
+      "Benji Dillon — Lives already wrote this person: a moment the record kept (C115)",
+      "Benji Dillon — the Tribune named them in a piece headlined The Clipping on the Door (Culture, C115)",
+      "Benji Dillon — the Tribune named them in a piece headlined The Lives of C115 (Culture, C115)",
+      "Benji Dillon — the Tribune named them in a piece headlined The Names We Keep Saying (Culture, C115)",
+      "Broderick Mitchell — Was handed the keys at Anthropic to open on their own for the first time., Rockridge (C116 — what happened in their life, not words they said)",
+      "Broderick Mitchell — in their life, C115: cooked an old family recipe from memory, mostly getting it right",
+      "Broderick Mitchell — in their life, C115: swapped stories with a neighbor about what got taken up the block",
+      "Broderick Mitchell — in their life, C115: felt a quiet tradeoff settle into place",
+      "Broderick Mitchell — in their life, C116: saved the Tribune clipping with their neighborhood in it — the good one",
+      "Broderick Mitchell — the Tribune named them in a piece headlined The Sea-Level Desk Is Down to Three (Business, C115)",
+      "Derek Simmons — Trained the new person at Oakland Athletics and heard afterward it was the best onboarding in years., Jack London (C116 — what happened in their life, not words they said)",
+      "Derek Simmons — in their life, C115: split the last of the coffee and the morning's plans with their partner",
+      "Derek Simmons — in their life, C116: smelled something on the stove next door that belonged to childhood",
+      "Derek Simmons — in their life, C116: argued over whether a night spent chasing contracts beats a night chasing the galaxy's own marks, now that the board counts the marks first",
+      "Derek Simmons — in their life, C116: read about something unfamiliar and kept pulling the thread",
+      "Derek Simmons — the Tribune named them in a piece headlined The Waterfront Is Moving. Some Questions Aren't Answered Yet. (Investigations, C88)"
     ],
     "evidence": [
       {
-        "text": "Wilson Shepard moved into a place of their own in West Oakland, renting (C116)",
+        "text": "Paloma Vasquez moved into a place of their own in Grand Lake, renting (C116)",
         "src": "output/beats/Household_Ledger.jsonl @C116",
-        "id": "household:HH-0116-F008:116",
+        "id": "household:HH-0116-F010:116",
         "kind": "household",
-        "popid": "POP-01022"
+        "popid": "POP-01249"
       },
       {
-        "text": "Wilson Shepard — in their life, C115: fielded a round of texts from people who hadn't called in years",
-        "src": "output/beats/LifeHistory_Log.jsonl @C115",
-        "kind": "thread",
-        "popid": "POP-01022"
-      },
-      {
-        "text": "Wilson Shepard — in their life, C116: saw their name in the sports pages again",
+        "text": "Paloma Vasquez — in their life, C116: Became the owner of Marquee Grocer — Grand Lake (engine.96 Task 12)",
         "src": "output/beats/LifeHistory_Log.jsonl @C116",
         "kind": "thread",
-        "popid": "POP-01022"
+        "popid": "POP-01249"
       },
       {
-        "text": "Wilson Shepard — in their life, C116: kept the phone buzzing on the counter all night and let it",
-        "src": "output/beats/LifeHistory_Log.jsonl @C116",
-        "kind": "thread",
-        "popid": "POP-01022"
-      },
-      {
-        "text": "Wilson Shepard — in their life, C116: came home to find the neighbors had left a case of something cold on the porch — still buzzing hours after the game",
-        "src": "output/beats/LifeHistory_Log.jsonl @C116",
-        "kind": "thread",
-        "popid": "POP-01022"
-      },
-      {
-        "text": "Wilson Shepard — the Tribune named them in a piece headlined The Oaks Still Have to Become Somebody’s Team (Sports, C110)",
-        "src": "archive/ARTICLE_INDEX.jsonl c2b99604810ac2b9",
-        "kind": "thread",
-        "popid": "POP-01022"
-      },
-      {
-        "text": "Wilson Shepard — the Tribune named them in a piece headlined Oakland Oaks Struggle in Preseason Opener (Sports, C108)",
-        "src": "archive/ARTICLE_INDEX.jsonl 66bd8fa6234066bd",
-        "kind": "thread",
-        "popid": "POP-01022"
-      },
-      {
-        "text": "Wilson Shepard — the Tribune named them in a piece headlined The Oaks' Groundswell in Downtown (Sports, C107)",
-        "src": "archive/ARTICLE_INDEX.jsonl bea849f57403bea8",
-        "kind": "thread",
-        "popid": "POP-01022"
-      },
-      {
-        "text": "Theo Rahimi moved into a place of their own in Eastlake, renting (C116)",
-        "src": "output/beats/Household_Ledger.jsonl @C116",
-        "id": "household:HH-0116-F009:116",
-        "kind": "household",
-        "popid": "POP-01247"
-      },
-      {
-        "text": "Ira Leu — the health center staff unwind at the bar after their first busy week, Temescal — one of 4 people the Cycle's city turn reached (West Oakland Stabilization Fund sitting (0, capped); Oakland Alternative Response Initiative sitting (0, capped); Fruitvale Transit Hub…) (C116)",
+        "text": "Priyanka Raman — noticed the new streetlights went in before anyone had to ask, West Oakland — one of 4 people the Cycle's community turn reached (C116)",
         "src": "output/beats/Story_Seed_Deck.jsonl @C116",
-        "id": "seed:8.75E+30:116:POP-00703",
+        "id": "seed:f525661f:116:POP-01096",
         "kind": "seed",
-        "popid": "POP-00703"
+        "popid": "POP-01096"
       },
       {
-        "text": "Ira Leu — in their life, C115: a flyer for a seniors lunch program flutters on a community bulletin board",
+        "text": "Priyanka Raman — in their life, C115: A supervisor at Oakland Tech Collective asked what they want next, and seemed to mean it.",
         "src": "output/beats/LifeHistory_Log.jsonl @C115",
         "kind": "thread",
-        "popid": "POP-00703"
+        "popid": "POP-01096"
       },
       {
-        "text": "Ira Leu — in their life, C115: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+        "text": "Priyanka Raman — in their life, C115: spent the evening sorting a box of things that used to be someone's",
         "src": "output/beats/LifeHistory_Log.jsonl @C115",
         "kind": "thread",
-        "popid": "POP-00703"
+        "popid": "POP-01096"
       },
       {
-        "text": "Ira Leu — in their life, C115: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "text": "Priyanka Raman — in their life, C115: noticed another renovated Victorian on the block and calculated what the property taxes must be",
         "src": "output/beats/LifeHistory_Log.jsonl @C115",
         "kind": "thread",
-        "popid": "POP-00703"
+        "popid": "POP-01096"
       },
       {
-        "text": "Ira Leu — in their life, C116: read the Tribune's front page twice — once for the news, once to see who was in it",
-        "src": "output/beats/LifeHistory_Log.jsonl @C116",
+        "text": "Priyanka Raman — in their life, C115: brought home a new plant and picked its spot carefully",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115",
         "kind": "thread",
-        "popid": "POP-00703"
+        "popid": "POP-01096"
       },
       {
-        "text": "Matilda Diop — restocked the rig at shift change and counted the gauze twice, D1 — one of 4 people the Cycle's city turn reached (West Oakland Stabilization Fund sitting (0, capped); Oakland Alternative Response Initiative sitting (0, capped); Oakland Youth…) (C116)",
+        "text": "Priyanka Raman — the Tribune named them in a piece headlined Uptown's Two Speeds: The Block Moves Faster Than the Store (Business, C112)",
+        "src": "archive/ARTICLE_INDEX.jsonl 6bc955294e6e05a5",
+        "kind": "thread",
+        "popid": "POP-01096"
+      },
+      {
+        "text": "Rosa Ochoa — checked the front door lock three times after everyone else was asleep, Laurel — one of 4 people the Cycle's community turn reached (C116)",
         "src": "output/beats/Story_Seed_Deck.jsonl @C116",
-        "id": "seed:0c5255ef:116:POP-00832",
+        "id": "seed:9dd4042a:116:POP-00706",
         "kind": "seed",
-        "popid": "POP-00832"
+        "popid": "POP-00706"
       },
       {
-        "text": "Matilda Diop — in their life, C115: found a quiet minute at a front porch and the muffled thump of a car stereo playing last summer's hit",
+        "text": "Rosa Ochoa — in their life, C115: a flyer for a seniors lunch program flutters on a community bulletin board",
         "src": "output/beats/LifeHistory_Log.jsonl @C115",
         "kind": "thread",
-        "popid": "POP-00832"
+        "popid": "POP-00706"
       },
       {
-        "text": "Matilda Diop — in their life, C115: disagreed with a Tribune column out loud to an empty kitchen near a bench near the water",
+        "text": "Rosa Ochoa — in their life, C115: found another shop on the block keeping short hours",
         "src": "output/beats/LifeHistory_Log.jsonl @C115",
         "kind": "thread",
-        "popid": "POP-00832"
+        "popid": "POP-00706"
       },
       {
-        "text": "Matilda Diop — in their life, C116: washed the blood out of the rig at the end of shift and tried not to think about the address",
-        "src": "output/beats/LifeHistory_Log.jsonl @C116",
+        "text": "Rosa Ochoa — in their life, C115: bought a new A's jersey and still riding the high from last night's win",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115",
         "kind": "thread",
-        "popid": "POP-00832"
+        "popid": "POP-00706"
       },
       {
-        "text": "Darrin Davis — read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots, Piedmont Ave — one of 4 people the Cycle's community turn reached (Darrin Davis — the city is watching: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to…) (C116)",
+        "text": "Rosa Ochoa — the Tribune named them in a piece headlined MEMORIAL DAY PARADE DRAWS THOUSANDS TO LAKE MERRITT (Culture, C73)",
+        "src": "archive/ARTICLE_INDEX.jsonl e461621475c9e461",
+        "kind": "thread",
+        "popid": "POP-00706"
+      },
+      {
+        "text": "Rosa Ochoa — the Tribune named them in a piece headlined THE TURNING POINT EDITION (General, C40)",
+        "src": "archive/ARTICLE_INDEX.jsonl 3608fc2dd191651e",
+        "kind": "thread",
+        "popid": "POP-00706"
+      },
+      {
+        "text": "Rosa Ochoa — the Tribune named them in a piece headlined Laurel’s Dizzy Spell: What Mrs. Ochoa Saw Before the Health Advisory (Culture, C34)",
+        "src": "archive/ARTICLE_INDEX.jsonl fa91563482b5f1d5",
+        "kind": "thread",
+        "popid": "POP-00706"
+      },
+      {
+        "text": "Avery Santana — badged into the Baylight office early and tried not to think about the protestors from last month, Rockridge — one of 4 people the Cycle's community turn reached (C116)",
         "src": "output/beats/Story_Seed_Deck.jsonl @C116",
-        "id": "seed:56a75e71:116:POP-00021",
+        "id": "seed:d752f46c:116:POP-00034",
         "kind": "seed",
-        "popid": "POP-00021"
+        "popid": "POP-00034"
       },
       {
-        "text": "Darrin Davis — in their life, C115: saw their name in the sports pages again",
+        "text": "Avery Santana — in their life, C115: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
         "src": "output/beats/LifeHistory_Log.jsonl @C115",
         "kind": "thread",
-        "popid": "POP-00021"
+        "popid": "POP-00034"
       },
       {
-        "text": "Darrin Davis — in their life, C116: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+        "text": "Avery Santana — the Tribune named them in a piece headlined The Fund Has Moved $7 Million Out of $28 Million. The Record Names Two Households. (Civic, C115)",
+        "src": "archive/ARTICLE_INDEX.jsonl 6aedd777086b1ceb",
+        "kind": "thread",
+        "popid": "POP-00034"
+      },
+      {
+        "text": "Avery Santana — the Tribune named them in a piece headlined Three Cycles Without a Move: The Youth Apprenticeship Pipeline (Civic, C115)",
+        "src": "archive/ARTICLE_INDEX.jsonl c2e85dd490ff16ce",
+        "kind": "thread",
+        "popid": "POP-00034"
+      },
+      {
+        "text": "Avery Santana — the Tribune named them in a piece headlined The Fund Has Moved $6.6 Million in West Oakland. The Public Record Names Two Households. (Civic, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl 3c4089861e250c37",
+        "kind": "thread",
+        "popid": "POP-00034"
+      },
+      {
+        "text": "Isley Kelley — Kelley Mercantile returned $2067 to the line this week, Rockridge (C116 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116",
+        "id": "moment:POP-00019:116:Business-Gain",
+        "kind": "moment",
+        "popid": "POP-00019"
+      },
+      {
+        "text": "Isley Kelley — in their life, C116: the bartender wiping down counters while discussing the stalled train delays with a regular",
         "src": "output/beats/LifeHistory_Log.jsonl @C116",
         "kind": "thread",
-        "popid": "POP-00021"
+        "popid": "POP-00019"
       },
       {
-        "text": "Darrin Davis — in their life, C116: drove the whole way home without remembering a single turn",
+        "text": "Isley Kelley — in their life, C116: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever. near College Avenue",
         "src": "output/beats/LifeHistory_Log.jsonl @C116",
         "kind": "thread",
-        "popid": "POP-00021"
+        "popid": "POP-00019"
       },
       {
-        "text": "Darrin Davis — in their life, C116: stayed thirty minutes after the service just catching up in the parking lot",
+        "text": "Isley Kelley — in their life, C116: found a school drawing folded in a jacket pocket and kept it",
         "src": "output/beats/LifeHistory_Log.jsonl @C116",
         "kind": "thread",
-        "popid": "POP-00021"
+        "popid": "POP-00019"
       },
       {
-        "text": "Darrin Davis — Lives already wrote this person: what the Cycle's turn reached them with (C115)",
+        "text": "Isley Kelley — in their life, C116: found a quiet minute at a cafe on the avenue and the hum of a bassline from a passing car",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116",
+        "kind": "thread",
+        "popid": "POP-00019"
+      },
+      {
+        "text": "Isley Kelley — Lives already wrote this person: a moment the record kept (C115)",
         "src": "output/cron-compare/lives_covered.json",
         "kind": "thread",
-        "popid": "POP-00021"
+        "popid": "POP-00019"
       },
       {
-        "text": "Darrin Davis — the Tribune named them in a piece headlined The Clipping on the Door (Culture, C115)",
-        "src": "archive/ARTICLE_INDEX.jsonl e41f10c836cea7b4",
+        "text": "Isley Kelley — the Tribune named them in a piece headlined The Lives of C115 (Culture, C115)",
+        "src": "archive/ARTICLE_INDEX.jsonl bbb67f9b172a6d89",
         "kind": "thread",
-        "popid": "POP-00021"
+        "popid": "POP-00019"
       },
       {
-        "text": "Darrin Davis — the Tribune named them in a piece headlined The Pole on Rockridge Corner Is Starting to Say His Name (Culture, C114)",
-        "src": "archive/ARTICLE_INDEX.jsonl db859c2206e0282a",
-        "kind": "thread",
-        "popid": "POP-00021"
-      },
-      {
-        "text": "Darrin Davis — the Tribune named them in a piece headlined Fifty-Six, and the Road Behind It (Sports, C114)",
-        "src": "archive/ARTICLE_INDEX.jsonl 6a58d696e6125498",
-        "kind": "thread",
-        "popid": "POP-00021"
-      },
-      {
-        "text": "Omar Farah — picked up the first paycheck and stood in the bank line like an adult, Chinatown (C116 — what happened in their life, not words they said)",
-        "src": "output/beats/LifeHistory_Log.jsonl @C116",
-        "id": "moment:POP-00986:116:Graduation",
-        "kind": "moment",
-        "popid": "POP-00986"
-      },
-      {
-        "text": "Tariq Cooper — drove alone for the first time and took the long way home on purpose, Piedmont Ave (C116 — what happened in their life, not words they said)",
-        "src": "output/beats/LifeHistory_Log.jsonl @C116",
-        "id": "moment:POP-01000:116:Graduation",
-        "kind": "moment",
-        "popid": "POP-01000"
-      },
-      {
-        "text": "Tariq Cooper — in their life, C115: iced a rolled ankle and watched film of a game they were not in",
-        "src": "output/beats/LifeHistory_Log.jsonl @C115",
-        "kind": "thread",
-        "popid": "POP-01000"
-      },
-      {
-        "text": "Tariq Cooper — in their life, C116: stayed up past everyone talking about what comes after this",
-        "src": "output/beats/LifeHistory_Log.jsonl @C116",
-        "kind": "thread",
-        "popid": "POP-01000"
-      },
-      {
-        "text": "Sadie Williams — had a rough week and still showed up to the spelling bee, Chinatown (C116 — what happened in their life, not words they said)",
-        "src": "output/beats/LifeHistory_Log.jsonl @C116",
-        "id": "moment:POP-01014:116:Stabilized",
-        "kind": "moment",
-        "popid": "POP-01014"
-      },
-      {
-        "text": "Elias Varek — Civis Systems returned $489017 to the line this week, West Oakland (C116 — what happened in their life, not words they said)",
-        "src": "output/beats/LifeHistory_Log.jsonl @C116",
-        "id": "moment:POP-00789:116:Business-Gain",
-        "kind": "moment",
-        "popid": "POP-00789"
-      },
-      {
-        "text": "Elias Varek — in their life, C115: headed over to The Aitken Line Founding Celebration in Jack London last night",
-        "src": "output/beats/LifeHistory_Log.jsonl @C115",
-        "kind": "thread",
-        "popid": "POP-00789"
-      },
-      {
-        "text": "Elias Varek — in their life, C115: Civis Systems returned $488443 to the line this week",
-        "src": "output/beats/LifeHistory_Log.jsonl @C115",
-        "kind": "thread",
-        "popid": "POP-00789"
-      },
-      {
-        "text": "Elias Varek — in their life, C115: Varek Systems returned $34932 to the line this week",
-        "src": "output/beats/LifeHistory_Log.jsonl @C115",
-        "kind": "thread",
-        "popid": "POP-00789"
-      },
-      {
-        "text": "Elias Varek — in their life, C116: Varek Systems returned $35112 to the line this week",
-        "src": "output/beats/LifeHistory_Log.jsonl @C116",
-        "kind": "thread",
-        "popid": "POP-00789"
-      },
-      {
-        "text": "Elias Varek — Lives already wrote this person: a moment the record kept (C115)",
-        "src": "output/cron-compare/lives_covered.json",
-        "kind": "thread",
-        "popid": "POP-00789"
-      },
-      {
-        "text": "Elias Varek — the Tribune named them in a piece headlined The Lives Page, Cycle 115 (Culture, C115)",
-        "src": "archive/ARTICLE_INDEX.jsonl 4da79b355f8b8455",
-        "kind": "thread",
-        "popid": "POP-00789"
-      },
-      {
-        "text": "Elias Varek — the Tribune named them in a piece headlined The Board in the Trailer Says 9.5 Percent. Enzo Walker Is Counting Something Else. (Business Reporter, C114)",
-        "src": "archive/ARTICLE_INDEX.jsonl 384044afdbad94f5",
-        "kind": "thread",
-        "popid": "POP-00789"
-      },
-      {
-        "text": "Elias Varek — the Tribune named them in a piece headlined The Lives Page, Cycle 114 (Culture, C114)",
+        "text": "Isley Kelley — the Tribune named them in a piece headlined The Lives Page, Cycle 114 (Culture, C114)",
         "src": "archive/ARTICLE_INDEX.jsonl 9746e4e747ffdd0a",
         "kind": "thread",
-        "popid": "POP-00789"
+        "popid": "POP-00019"
+      },
+      {
+        "text": "Isley Kelley — the Tribune named them in a piece headlined Fifty-Six, and the Road Behind It (Sports, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl 6a58d696e6125498",
+        "kind": "thread",
+        "popid": "POP-00019"
+      },
+      {
+        "text": "Benji Dillon — Dillon Clinic returned $7587 to the line this week, Rockridge (C116 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116",
+        "id": "moment:POP-00018:116:Business-Gain",
+        "kind": "moment",
+        "popid": "POP-00018"
+      },
+      {
+        "text": "Benji Dillon — in their life, C115: put on their good suit for the Sunday service because some traditions still matter",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115",
+        "kind": "thread",
+        "popid": "POP-00018"
+      },
+      {
+        "text": "Benji Dillon — in their life, C116: got asked about the club at a family dinner",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116",
+        "kind": "thread",
+        "popid": "POP-00018"
+      },
+      {
+        "text": "Benji Dillon — in their life, C116: After a farewell season that brought back Benji Dillon in on 1 year deal and now Benji Dillon is leaving the door open. Does he come back for one more year, and as a starter or out of the bullpen?, and is Oakland even an option? With the youth movement in motion does a Dillon deal make sense? Does the club want him back at his $13.0M salary? What would make him decide, and does he wait to see what Mark Aitken does first?",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116",
+        "kind": "thread",
+        "popid": "POP-00018"
+      },
+      {
+        "text": "Benji Dillon — in their life, C116: grabbed coffee from the cart outside the hospital before the morning rush hit",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116",
+        "kind": "thread",
+        "popid": "POP-00018"
+      },
+      {
+        "text": "Benji Dillon — Lives already wrote this person: a moment the record kept (C115)",
+        "src": "output/cron-compare/lives_covered.json",
+        "kind": "thread",
+        "popid": "POP-00018"
+      },
+      {
+        "text": "Benji Dillon — the Tribune named them in a piece headlined The Clipping on the Door (Culture, C115)",
+        "src": "archive/ARTICLE_INDEX.jsonl e41f10c836cea7b4",
+        "kind": "thread",
+        "popid": "POP-00018"
+      },
+      {
+        "text": "Benji Dillon — the Tribune named them in a piece headlined The Lives of C115 (Culture, C115)",
+        "src": "archive/ARTICLE_INDEX.jsonl bbb67f9b172a6d89",
+        "kind": "thread",
+        "popid": "POP-00018"
+      },
+      {
+        "text": "Benji Dillon — the Tribune named them in a piece headlined The Names We Keep Saying (Culture, C115)",
+        "src": "archive/ARTICLE_INDEX.jsonl af3c80da720ceb06",
+        "kind": "thread",
+        "popid": "POP-00018"
+      },
+      {
+        "text": "Broderick Mitchell — Was handed the keys at Anthropic to open on their own for the first time., Rockridge (C116 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116",
+        "id": "moment:POP-00221:116:LifeEvent-Promotion-Up-S",
+        "kind": "moment",
+        "popid": "POP-00221"
+      },
+      {
+        "text": "Broderick Mitchell — in their life, C115: cooked an old family recipe from memory, mostly getting it right",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115",
+        "kind": "thread",
+        "popid": "POP-00221"
+      },
+      {
+        "text": "Broderick Mitchell — in their life, C115: swapped stories with a neighbor about what got taken up the block",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115",
+        "kind": "thread",
+        "popid": "POP-00221"
+      },
+      {
+        "text": "Broderick Mitchell — in their life, C115: felt a quiet tradeoff settle into place",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115",
+        "kind": "thread",
+        "popid": "POP-00221"
+      },
+      {
+        "text": "Broderick Mitchell — in their life, C116: saved the Tribune clipping with their neighborhood in it — the good one",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116",
+        "kind": "thread",
+        "popid": "POP-00221"
+      },
+      {
+        "text": "Broderick Mitchell — the Tribune named them in a piece headlined The Sea-Level Desk Is Down to Three (Business, C115)",
+        "src": "archive/ARTICLE_INDEX.jsonl 0fea3b9384f40a35",
+        "kind": "thread",
+        "popid": "POP-00221"
+      },
+      {
+        "text": "Derek Simmons — Trained the new person at Oakland Athletics and heard afterward it was the best onboarding in years., Jack London (C116 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116",
+        "id": "moment:POP-00030:116:LifeEvent-Promotion-Up-S",
+        "kind": "moment",
+        "popid": "POP-00030"
+      },
+      {
+        "text": "Derek Simmons — in their life, C115: split the last of the coffee and the morning's plans with their partner",
+        "src": "output/beats/LifeHistory_Log.jsonl @C115",
+        "kind": "thread",
+        "popid": "POP-00030"
+      },
+      {
+        "text": "Derek Simmons — in their life, C116: smelled something on the stove next door that belonged to childhood",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116",
+        "kind": "thread",
+        "popid": "POP-00030"
+      },
+      {
+        "text": "Derek Simmons — in their life, C116: argued over whether a night spent chasing contracts beats a night chasing the galaxy's own marks, now that the board counts the marks first",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116",
+        "kind": "thread",
+        "popid": "POP-00030"
+      },
+      {
+        "text": "Derek Simmons — in their life, C116: read about something unfamiliar and kept pulling the thread",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116",
+        "kind": "thread",
+        "popid": "POP-00030"
+      },
+      {
+        "text": "Derek Simmons — the Tribune named them in a piece headlined The Waterfront Is Moving. Some Questions Aren't Answered Yet. (Investigations, C88)",
+        "src": "archive/ARTICLE_INDEX.jsonl 891df67c41c4891d",
+        "kind": "thread",
+        "popid": "POP-00030"
       }
     ],
     "forbidden": [
@@ -749,27 +853,27 @@
     ],
     "note": null,
     "pageVoices": [
-      "Wilson Shepard, own page (after work, C116): “[long exhale] Yeah, I saw the feed. The media's got a short memory, you know? Ten cycles ago they were asking if I knew what I was doing, and now we're sitting at 8-1 and they're ranking us number one. I appreciate the recognition, but I've…”",
-      "Elias Varek, own page (after work, C116): “(The numbers sit in front of me. I don't have to look at them twice. 616 percent. That's not growth, that's a transformation. But Civis is flat where it matters and the signal is still unanswered. I close the file.)\n\nSixty-point-four. That'…”",
-      "Wilson Shepard, own page (the midday page, C116): “The rankings are a nice feather, but they don’t win us a single possession. San Antonio showed us exactly what happens when you start believing the noise — we went cold in the fourth because we played tight, not because they did anything sp…”"
+      "Benji Dillon, own page (the midday page, a question they carry, C116): “TENSION[c116]: Will helping from the bullpen feel like finishing, or like hanging on?”",
+      "Benji Dillon, own page (the midday page, C116): “The door's open because I haven't walked through it yet, and that's not indecision—it's honesty. I know what a bullpen role looks like at 38, and I know what my arm has left; the question isn't whether I can help, it's whether helping from …”",
+      "Benji Dillon, own page (after work, C116): “The door's been open for a while now. That's not me being coy—it's me being honest with myself.\n\nVinnie made his call. It was the right one for him. For me, the question isn't whether I can still pitch. It's whether I can pitch in a way tha…”"
     ],
     "factCap": 120,
     "peopleCap": 16,
     "roomIsYours": "the plain respect, what the event meant in that house or on that block, the detail the family would have picked — from the lines below, never invented"
   },
-  "day": "2026-11-19",
+  "day": "2026-11-20",
   "counted": {
     "events": 5,
     "pending": 0,
     "todays": 0,
-    "households": 2,
+    "households": 1,
     "casino": 0,
     "seeds": 3,
     "moments": 4,
     "stays": 0
   },
   "pointers": [
-    "output/beats/Lived_Events.jsonl @C116 batch 346c91",
+    "output/beats/Lived_Events.jsonl @C116 batch 7f2ed6",
     "output/beats/Story_Hook_Deck.jsonl (hooks for Tamsin Pruitt this cycle)"
   ]
 }

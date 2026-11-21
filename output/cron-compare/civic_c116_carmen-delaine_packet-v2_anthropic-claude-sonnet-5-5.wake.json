@@ -57,5 +57,6 @@
     "recorded": true,
     "out": "le debugging { debug: true }\n{\n  \"popId\": \"POP-00011\",\n  \"name\": \"Carmen Delaine\",\n  \"recorded\": true,\n  \"text\": \"filed: The Fund Says Its Closeout Is Published. The Tracker Says It Isn't Verified.\"\n}"
   },
-  "ranAt": "2026-11-17T00:16:24.979Z"
+  "ranAt": "2026-11-17T00:16:24.979Z",
+  "dispositionReconciledAt": "2026-11-21T18:00:02.123Z"
 }

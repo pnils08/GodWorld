@@ -1,0 +1,204 @@
+{
+  "date": "2026-11-20",
+  "stage": "write",
+  "results": [
+    {
+      "name": "Mason Ortega",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 3,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 430,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Kai Marston",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 4,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 746,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Sharon Okafor",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 8,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 709,
+        "contractScore": 1,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Maria Keen",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 4,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 997,
+        "contractScore": 2,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Celeste Tran",
+      "desk": "wire",
+      "ok": false,
+      "error": "no packet artifact at output/cron-compare/wire_c116_celeste-tran_packet-v2_packet.json — run --stage=report first",
+      "checks": null
+    },
+    {
+      "name": "Tamsin Pruitt",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 6,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [
+          {
+            "text": "Paloma Vasquez moved into a place of their own in Grand Lake, renting",
+            "run": "paloma vasquez moved into a place"
+          },
+          {
+            "text": "Paloma Vasquez — in their life, C116: Became the owner of Marquee Grocer — Grand Lake (engine.96 Task 12)",
+            "run": "became the owner of marquee grocer"
+          },
+          {
+            "text": "Priyanka Raman — in their life, C115: A supervisor at Oakland Tech Collective asked what they want next, and seemed to mean it.",
+            "run": "next and seemed to mean it"
+          },
+          {
+            "text": "Priyanka Raman — in their life, C115: spent the evening sorting a box of things that used to be someone's",
+            "run": "evening sorting a box of things"
+          },
+          {
+            "text": "Priyanka Raman — in their life, C115: noticed another renovated Victorian on the block and calculated what the property taxes must be",
+            "run": "noticed another renovated victorian on the"
+          },
+          {
+            "text": "Priyanka Raman — in their life, C115: brought home a new plant and picked its spot carefully",
+            "run": "brought home a new plant and"
+          },
+          {
+            "text": "Rosa Ochoa — in their life, C115: a flyer for a seniors lunch program flutters on a community bulletin board",
+            "run": "a flyer for a seniors lunch"
+          },
+          {
+            "text": "Rosa Ochoa — in their life, C115: bought a new A's jersey and still riding the high from last night's win",
+            "run": "bought a new as jersey and"
+          },
+          {
+            "text": "Avery Santana — in their life, C115: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+            "run": "an oakland alternative response initiative team"
+          },
+          {
+            "text": "Isley Kelley — in their life, C116: found a school drawing folded in a jacket pocket and kept it",
+            "run": "found a school drawing folded in"
+          },
+          {
+            "text": "Isley Kelley — in their life, C116: found a quiet minute at a cafe on the avenue and the hum of a bassline from a passing car",
+            "run": "a quiet minute at a cafe"
+          },
+          {
+            "text": "Benji Dillon — in their life, C116: got asked about the club at a family dinner",
+            "run": "asked about the club at a"
+          },
+          {
+            "text": "Benji Dillon — in their life, C116: grabbed coffee from the cart outside the hospital before the morning rush hit",
+            "run": "coffee from the cart outside the"
+          },
+          {
+            "text": "Broderick Mitchell — Was handed the keys at Anthropic to open on their own for the first time., Rockridge (C116 — what happened in their life, not words they sa",
+            "run": "was handed the keys at anthropic"
+          },
+          {
+            "text": "Broderick Mitchell — in their life, C115: cooked an old family recipe from memory, mostly getting it right",
+            "run": "cooked an old family recipe from"
+          },
+          {
+            "text": "Broderick Mitchell — in their life, C115: felt a quiet tradeoff settle into place",
+            "run": "felt a quiet tradeoff settle into"
+          },
+          {
+            "text": "Broderick Mitchell — in their life, C116: saved the Tribune clipping with their neighborhood in it — the good one",
+            "run": "neighborhood in it the good one"
+          },
+          {
+            "text": "Derek Simmons — Trained the new person at Oakland Athletics and heard afterward it was the best onboarding in years., Jack London (C116 — what happened in their",
+            "run": "trained the new person at oakland"
+          },
+          {
+            "text": "Derek Simmons — in their life, C116: smelled something on the stove next door that belonged to childhood",
+            "run": "something on the stove next door"
+          },
+          {
+            "text": "Derek Simmons — in their life, C116: argued over whether a night spent chasing contracts beats a night chasing the galaxy's own marks, now that the board counts",
+            "run": "chasing contracts beats a night chasing"
+          }
+        ],
+        "words": 1160,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Ines Sorensen",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 3,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 516,
+        "contractScore": 2,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": false,
+      "error": "spent packet artifact at output/cron-compare/undocked_c116_nia-rook_packet-v2_packet.json (written 2026-11-19T19:19:03.534Z) — already filed as staged/undocked_c116_nia-rook_packet-v2_openai-gpt-6-luna.staged-0021.json at 2026-11-20T00:21:11.951Z; today's --stage=report did not land, not filing twice on one plan",
+      "checks": null
+    }
+  ],
+  "checkTotals": {
+    "seats": 6,
+    "toolSeats": 6,
+    "capHits": 0,
+    "thin": 0,
+    "verbatim": 1,
+    "graded": 6,
+    "gradeSum": 14,
+    "gradeMax": [
+      3
+    ]
+  },
+  "ranAt": "2026-11-21T00:21:29.619Z"
+}

@@ -17,33 +17,31 @@ A daily digest of citizen life over the last 24 hours, assembled from the citize
 
 ## The people, in their own words
 
-### Mike Paulson — General Manager, Oakland A's & The Oaks — West Oakland
+### Benji Dillon — Pitcher, Oakland A's Legend — Rockridge
 
-> I've talked to Benji. Not about a role, not about a number — about where his head is at. He's earned the right to take his time with this. Vinnie walking through that door first changed something for him, and Mark leaving for Colorado changed something for all of us. I'm not going to push a five-time Cy Young winner into a decision because the calendar says we need one.
+> Vinnie Keane made his call, and it was the right one for him. I've noticed that when one of us steps away, it's not just about the player, it's about the silence that follows. For me, the question isn't whether I can still pitch, but whether I can pitch in a way that means something.
 
-> The trade was about maximizing our return on Carmen Mesa, a player with high potential who didn't quite fit into our rotation. We got Giancarlo Hernandez, a third baseman with an A-potential glove, and Antone Baez, a left fielder with C potential. It's a good haul. Now, we've got a battle brewing at third base between Hernandez, Kevin Clark, and Ernesto Quintero.
+> I've noticed people recognizing me more often around Rockridge, like at the grocery store. It's become a part of my daily life, but it doesn't feel like a big change. I'm still just Benji, living on my block, and going to A's games.
 
-### Deacon Seymour — Manager, Oakland A's — Lake Merritt
+### Amara Osei — Founder, Portside Bio — West Oakland
 
-> Look, I'm not going to sit here and pretend I've got the rotation mapped out like it's a done deal. Benji hasn't told us he's done, and until he does, I'm not closing that door for him. That's his call, not mine. We've got young arms coming up, and we've got guys who can step into the bullpen, but you don't replace a five-time Cy Young winner by just plugging in a name. You leave the light on.
+> The corner store on Mandela, the one with the squeaky screen door and the old man who’s been running it since before I moved here. I don’t need anything, but I’ll grab a bag of ice or a soda I won’t drink, just to stand in the fluorescent hum for a minute. Nobody bothers me there; I’m just another face in line, not the woman who signs the checks or sits in the meetings.
 
-*Around the neighborhood: caught their partner humming the song they'd had stuck all day*
+*Around the neighborhood: smelled something on the stove next door that belonged to childhood*
 
 ### Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Piedmont Ave
 
-> Benji's not done yet, and I think that's the thing people keep missing. We came up together, we won together, and when I walked away I felt that weight lift off my shoulders — but Benji's carrying something different. He's got the clinic, he's got Rick, he's got Maya, and he's got a city that still sees him as the guy who threw three no-hitters. That's not pressure, that's a reason to stay.
+> I've founded a couple of programs in West Oakland, like the Firehouse 29 Baseball Academy and the Keane Auxiliary Flag Football League. I plan to keep being involved with them, just in a different way now that I'm retired. I'm still around the neighborhood, and I'll keep showing up to support the kids and the community.
 
-### Lila Mezran — Journalist, Health Desk — Piedmont Ave
+> My daily life hasn't changed that much since I retired. I still get recognized around town, like at the grocery store. People know me, and I like that. I'm still involved with the A's, just in a different way now. I'm not on the field every day, but I'm still around the neighborhood, and folks say hello. It's a good life.
 
-> The city sounds like a refrigerator hum through the wall and the far-off rumble of a freight train threading through the flats. Piedmont Ave after midnight is all porch lights and parked cars, and I can hear the occasional creak of a house settling — mine included. It feels like the whole block is holding its breath, waiting for morning when the noise starts again.
+### Travis Coles — Starting Pitcher, Oakland A's — Downtown
 
-*Around the neighborhood: slipped into the back pew at Foothill Baptist Tabernacle just to sit somewhere air-conditioned and quiet*
+> I've seen Benji Dillon around Rockridge a few times, and it's clear he's getting more attention. As a player, you're used to being recognized, but it's different when it's outside the ballpark. I've had fans come up to me and mention his name, talk about his game. It's like the whole city is buzzing about the A's right now, and Benji's part of that.
 
-### Kevin Clark — Third Baseman, Oakland A's — Jack London
+### Elias Varek — Founder of Civis Systems — West Oakland
 
-> I'm not gonna lie, it's a little weird having Giancarlo Hernandez on the team now. I mean, we're talking about a guy with an A-potential glove at third base, which is my position. It's a competition, and I'm ready for it. I've been around long enough to know that the front office is looking for the best fit, and if that means Hernandez gets more playing time, so be it. I'm just here to help the team win.
-
-*Around the neighborhood: drove the church van for the senior trip and listened to three hours of unfiltered neighborhood gossip*
+> I've been thinking a lot about Vinnie Keane's retirement and what it means for the programs we both founded in West Oakland. To be honest, it's still sinking in. Vinnie was a pillar, not just for the A's but for this community. The programs he started, like the Firehouse 29 West Oakland Baseball Academy and the Keane Auxiliary Flag Football League, they're still active and doing well.
 
 ---
-*Assembled 2026-11-19 from Reflection_Intake (28 reflections, 27 citizens) and LifeHistory_Log (82 life events) over the last 1 day by scripts/buildCitizenWeekDigest.js --daily. Read-only; no content generated.*
+*Assembled 2026-11-21 from Reflection_Intake (28 reflections, 26 citizens) and LifeHistory_Log (82 life events) over the last 1 day by scripts/buildCitizenWeekDigest.js --daily. Read-only; no content generated.*

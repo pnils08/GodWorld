@@ -1,0 +1,93 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "116",
+  "persona": "tamsin-pruitt",
+  "byline": "Tamsin Pruitt",
+  "bylinePopid": "POP-01210",
+  "article": "output/cron-compare/staged/culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged-0022.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Paloma Vasquez",
+        "role": "quoted-source",
+        "popid": "POP-01249"
+      },
+      {
+        "name": "Priyanka Raman",
+        "role": "quoted-source",
+        "popid": "POP-01096"
+      },
+      {
+        "name": "Rosa Ochoa",
+        "role": "quoted-source",
+        "popid": "POP-00706"
+      },
+      {
+        "name": "Avery Santana",
+        "role": "subject",
+        "popid": "POP-00034"
+      },
+      {
+        "name": "Derek Simmons",
+        "role": "subject",
+        "popid": "POP-00030"
+      },
+      {
+        "name": "Benji Dillon",
+        "role": "mentioned",
+        "popid": "POP-00018",
+        "floor": true
+      },
+      {
+        "name": "Broderick Mitchell",
+        "role": "mentioned",
+        "popid": "POP-00221",
+        "floor": true
+      },
+      {
+        "name": "Isley Kelley",
+        "role": "mentioned",
+        "popid": "POP-00019",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "I took over Marquee Grocer in Grand Lake in C116 and was promoted to Tier 4.",
+        "sourceRef": "citizenVoice PRESS Paloma Vasquez"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "gate": "off",
+    "model": null,
+    "manifestId": null,
+    "draftSha256": "a21eb0e5560fe9b99579a595c81bd3d7cd81fe2443eb167ece74c0064783b6d4",
+    "verdict": null,
+    "ranAt": "2026-11-21T00:20:17.938Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 450",
+      "words": 1160,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "scoredWithoutRhea": true,
+      "draftSha256": "a21eb0e5560fe9b99579a595c81bd3d7cd81fe2443eb167ece74c0064783b6d4"
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-21T00:20:17.938Z"
+}

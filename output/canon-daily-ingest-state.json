@@ -101,6 +101,34 @@
     "article-c116-undocked_c116_nia-rook_packet-v2_openai-gpt-6-luna-0021": {
       "cycle": "116",
       "sha256": "979a9f6d1c8785dc051329eea742fb65e9f4e7562141064ccdac24c5f088207c"
+    },
+    "article-c116-culture_c116_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5-0021": {
+      "cycle": "116",
+      "sha256": "71681468471ceafa40b6ab927ad06c3f1928e46d4eb65da0d0ab368a05db4e7e"
+    },
+    "article-c116-culture_c116_kai-marston_packet-v2_anthropic-claude-haiku-5-5": {
+      "cycle": "116",
+      "sha256": "244a7b3ab6929580f85ec74bb5b13ea528dd111229260deec7be16cd6e04b00f"
+    },
+    "article-c116-culture_c116_maria-keen_packet-v2_anthropic-claude-sonnet-5-5": {
+      "cycle": "116",
+      "sha256": "a1c4cca223b4659d9c193149188ae8b52af243eb74a5d87cfc218cd5dedbd1a2"
+    },
+    "article-c116-culture_c116_mason-ortega_packet-v2_x-ai-grok-4-3": {
+      "cycle": "116",
+      "sha256": "f4365d583242a7f32b60379bc2c7cc73a8b61d8b450ab15f49d8fd1e2088431a"
+    },
+    "article-c116-culture_c116_sharon-okafor_packet-v2_openai-gpt-5-6-luna": {
+      "cycle": "116",
+      "sha256": "4581b90b13d893f03f9b3ef4a9287ac5cdcc92c52d5bd3ae2ae199664bcc1582"
+    },
+    "article-c116-culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0019": {
+      "cycle": "116",
+      "sha256": "eaed223e799c38aa6c64f09582f7909f764686961f8caac099568a22eee588ec"
+    },
+    "article-c116-culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0022": {
+      "cycle": "116",
+      "sha256": "a21eb0e5560fe9b99579a595c81bd3d7cd81fe2443eb167ece74c0064783b6d4"
     }
   }
 }

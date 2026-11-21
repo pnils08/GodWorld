@@ -1,0 +1,76 @@
+{
+  "draft": "output/cron-compare/culture_c116_maria-keen_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "116",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "a1c4cca223b4659d9c193149188ae8b52af243eb74a5d87cfc218cd5dedbd1a2",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes match verbatim interview records, citizen profiles and faith institutions adhere strictly to canon, and no fourth-wall violations are present.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "maria-ground-v1",
+    "packageVersion": "MARIA-LEP2-1",
+    "manifestId": "AM-38613c1d1fd0",
+    "lexicalObservations": [],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Delvon Pratt",
+      "Elias Varek",
+      "Mark Aitken",
+      "Vinnie Keane"
+    ],
+    "unverified": [
+      "Assembly Seniors Lunch Program",
+      "Baseball Academy",
+      "Civis Systems",
+      "Civis Systems Civic Fellows",
+      "Football League",
+      "Former Designated Hitter",
+      "Keane Auxiliary Flag Football",
+      "Logistics Pipeline",
+      "West Oakland Baseball Academy",
+      "West Oakland Freight"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0158,
+  "durationMs": 55307,
+  "parseError": false,
+  "ranAt": "2026-11-21T00:19:16.366Z",
+  "contractScore": {
+    "opened": false,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 997,
+    "short": "The opening paragraph names the place and programs but does not name a Packet condition.",
+    "score": 2,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "a1c4cca223b4659d9c193149188ae8b52af243eb74a5d87cfc218cd5dedbd1a2",
+    "costUsd": 0.0022
+  }
+}

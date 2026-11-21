@@ -58,5 +58,6 @@
     "recorded": true,
     "out": "d/.env // tip: ⌘ custom filepath { path: '/custom/path/.env' }\n{\n  \"popId\": \"POP-01076\",\n  \"name\": \"Nia Rook\",\n  \"recorded\": true,\n  \"text\": \"UNDOCKED: Marguerite Kimball-Ostrow lets the route lead\"\n}"
   },
-  "ranAt": "2026-11-20T00:21:34.764Z"
+  "ranAt": "2026-11-20T00:21:34.764Z",
+  "dispositionReconciledAt": "2026-11-21T18:00:03.143Z"
 }

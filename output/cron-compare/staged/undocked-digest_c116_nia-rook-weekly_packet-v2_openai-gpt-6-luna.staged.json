@@ -1,0 +1,69 @@
+{
+  "status": "staged",
+  "desk": "undocked-digest",
+  "cycle": "116",
+  "persona": "nia-rook-weekly",
+  "byline": "Nia Rook",
+  "bylinePopid": "POP-01076",
+  "article": "output/cron-compare/staged/undocked-digest_c116_nia-rook-weekly_packet-v2_openai-gpt-6-luna.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Marguerite Kimball-Ostrow",
+        "role": "subject",
+        "popid": "POP-01188"
+      },
+      {
+        "name": "Manju Abebe",
+        "role": "subject",
+        "popid": "POP-00918"
+      },
+      {
+        "name": "Soo Loo",
+        "role": "subject",
+        "popid": "POP-00663"
+      },
+      {
+        "name": "Luis Taz",
+        "role": "mentioned",
+        "popid": "POP-00298",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "I didn't really have a strategy on Sunday or Wednesday nights. I just flew through the systems one by one, and it happened to come out even on credits. I wasn't really focusing on that; I was just trying to explore and see where the show would take me.",
+        "sourceRef": "citizenVoice PRESS Marguerite Kimball-Ostrow"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-c136cb607a51",
+    "draftSha256": "7525aa880456e754a8f85729a7579014d76d047798db586272f3ed24b7168e95",
+    "verdict": "output/cron-compare/undocked-digest_c116_nia-rook-weekly_packet-v2_openai-gpt-6-luna.rhea.json",
+    "ranAt": "2026-11-21T16:15:44.906Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 350",
+      "words": 419,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "7525aa880456e754a8f85729a7579014d76d047798db586272f3ed24b7168e95",
+      "costUsd": 0.001
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-21T16:15:50.088Z"
+}

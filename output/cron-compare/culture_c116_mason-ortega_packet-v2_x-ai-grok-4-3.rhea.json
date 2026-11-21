@@ -1,0 +1,78 @@
+{
+  "draft": "output/cron-compare/culture_c116_mason-ortega_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "116",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "f4365d583242a7f32b60379bc2c7cc73a8b61d8b450ab15f49d8fd1e2088431a",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes match interview records verbatim and citizen ledger profiles/employers are fully consistent.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "mason-kitchen-ground-v1",
+    "packageVersion": "MASON-LEP2-1",
+    "manifestId": "AM-994fc3a5fb7f",
+    "lexicalObservations": [],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Bruce Wright",
+      "Guadalupe Lee",
+      "Guadalupe Lupe",
+      "Hector Leech",
+      "Jalen Hill",
+      "Karim Avery",
+      "Mesi Westin",
+      "Quynh Le",
+      "Sora Hint",
+      "Tomas Renteria",
+      "Trenton Nawan",
+      "Yuki Ji"
+    ],
+    "unverified": [
+      "Blue Lantern Bar",
+      "Gold Tavern",
+      "Harborline Grill",
+      "Jack London Square Markets"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 2,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0142,
+  "durationMs": 7847,
+  "parseError": false,
+  "ranAt": "2026-11-21T00:15:30.229Z",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 430,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "f4365d583242a7f32b60379bc2c7cc73a8b61d8b450ab15f49d8fd1e2088431a",
+    "costUsd": 0.0013
+  }
+}

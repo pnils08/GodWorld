@@ -1,0 +1,423 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-01076",
+    "name": "Nia Rook",
+    "role": "desk reporter",
+    "desk": "undocked-digest"
+  },
+  "task": {
+    "goal": "Cover the UNDOCKED week and its show history.",
+    "assignment": "UNDOCKED week: pilots who flew this cycle (Marguerite Kimball-Ostrow, Manju Abebe, Soo Loo). Standings: Luis Taz leads the board — rank #1, 45.19 achievement points, 0 credits, 3 cycle(s) led, current streak 3. In the chair: Marguerite Kimball-Ostrow — Elementary Teacher; Manju Abebe — Plumber; Soo Loo — Corporate Accountant.",
+    "approach": null,
+    "voice": null,
+    "writingMode": "SOURCE_BRIEF",
+    "reportingQuestion": "What did earlier approved UNDOCKED episodes record for the pilots in this week's assignment?"
+  },
+  "signal": {
+    "kind": "undocked-digest",
+    "hood": null,
+    "src": "undocked-week:weekly-c116",
+    "plan": {
+      "focus": "UNDOCKED pilots' performance in the latest cycle"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-01188",
+        "name": "Marguerite Kimball-Ostrow",
+        "profile": "Marguerite Kimball-Ostrow — UNDOCKED pilot",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00918",
+        "name": "Manju Abebe",
+        "profile": "Manju Abebe — UNDOCKED pilot",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00663",
+        "name": "Soo Loo",
+        "profile": "Soo Loo — UNDOCKED pilot",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-01188-7334147c89",
+        "pop": "POP-01188",
+        "name": "Marguerite Kimball-Ostrow",
+        "quote": "I didn't really have a strategy on Sunday or Wednesday nights. I just flew through the systems one by one, and it happened to come out even on credits. I wasn't really focusing on that; I was just trying to explore and see where the show would take me.",
+        "factIds": [
+          "F-50b97509db6a",
+          "F-6928cf620d53"
+        ],
+        "src": "packet.W2[POP-01188]"
+      },
+      {
+        "id": "Q-POP-00918-ed6dcd48da",
+        "pop": "POP-00918",
+        "name": "Manju Abebe",
+        "quote": "My Monday and Thursday night routes on UNDOCKED were pretty different. On Monday, I went through Sol, Alpha Centauri, and a bunch of other stars, earning 9 points for Wanderer and a few other badges. Thursday night, I took a different path, starting with Sirius and Nova Terra, and earned Cartographer again, but with fewer points. Both nights, I came out even on credits and flew until the show's time ran out.",
+        "factIds": [
+          "F-24730e579781",
+          "F-d89e369ab8b7"
+        ],
+        "src": "packet.W2[POP-00918]"
+      },
+      {
+        "id": "Q-POP-00663-3e721028a4",
+        "pop": "POP-00663",
+        "name": "Soo Loo",
+        "quote": "I think what changed between Tuesday and Friday nights was my strategy and the contracts I took. On Tuesday, I focused on the First Hunt: Belt-Grazers contract and sold some iron ore, but I got into a few fights. By Friday, I'd finished the First Hunt contract for a big payout and took on more contracts that rewarded exploration and trading, like Copper Requisition and Market Participation: Selling. I also sold more resources, which helped my credits. It was a more varied and successful approach, I guess.",
+        "factIds": [
+          "F-f3342b94400f",
+          "F-d9a2be4dbe1e"
+        ],
+        "src": "packet.W2[POP-00663]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Nia Rook",
+        "text": "The role of contract selection in Soo Loo's success",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C116",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-871096fd8925"
+    },
+    {
+      "t": "FACT",
+      "text": "UNDOCKED week-in-review c116",
+      "src": "undocked-week:weekly-c116",
+      "id": "F-5cec0a6a9bfb"
+    },
+    {
+      "t": "FACT",
+      "text": "Marguerite Kimball-Ostrow's Sunday night on UNDOCKED: went through Sol, Sirius, Nova Terra, Furud, Acrux, Botein, Intercrus, Atlas, Cedarhold, Garnet, Achernar, Ruchbah, Ironhollow, Gsc 0041, Pherkad and Shaula; earned Wanderer (9 points), Voyager I (6.4 points), Maiden Jump (5 points), Cartographer (4.8 points), Voyager II (1.6 points), Chronicler (0.6 points), Master Explorer (0.5 points), Far Traveler (0.01 points) and Jump Master (0.01 points); came out even on credits; flew until the show's",
+      "src": "undocked-week:weekly-c116",
+      "id": "F-50b97509db6a"
+    },
+    {
+      "t": "FACT",
+      "text": "Marguerite Kimball-Ostrow's Wednesday night on UNDOCKED: went through Antares, Gsc 0041, Shaula, Alnair, Wolf 1061, Gsc 0031, Gsc 0021, Gliese 876, Felis, Biham, Gsc 0035, Jasmine, Mirach, Azha, Groombridge 1618, Silverbend, Alnilam and Jishui; earned Cartographer (4.5 points), Voyager I (3.2 points), Voyager II (1.5 points), Far Traveler (0.01 points) and Jump Master (0.01 points); came out even on credits; flew until the show's time ran out.",
+      "src": "undocked-week:weekly-c116",
+      "id": "F-6928cf620d53"
+    },
+    {
+      "t": "FACT",
+      "text": "Manju Abebe's Monday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes, Ridgecrest, Hatysa and Nembus; earned Wanderer (9 points), Voyager I (5.2 points), Maiden Jump (5 points), Cartographer (3.9 points), The Truth Is Out There (2.5 points), Voyager II (1.3 points), Master Explorer (0.5 points), Far Traveler (0.01 points) and Jump Master (0.01 points); came out even on credits; flew until the show's",
+      "src": "undocked-week:weekly-c116",
+      "id": "F-24730e579781"
+    },
+    {
+      "t": "FACT",
+      "text": "Manju Abebe's Thursday night on UNDOCKED: went through Sirius, Nova Terra, Furud, Acrux, Botein, Intercrus, Gsc 0044, Atlas, Cedarhold, Achernar, Ruchbah, Ironhollow, Pherkad, Shaula, Alnair, Wolf 1061, Gsc 0031 and Gsc 0021; earned Cartographer (5.1 points), Voyager I (4.4 points), Voyager II (1.7 points), Chronicler (0.6 points), Far Traveler (0.01 points) and Jump Master (0.01 points); came out even on credits; flew until the show's time ran out.",
+      "src": "undocked-week:weekly-c116",
+      "id": "F-d89e369ab8b7"
+    },
+    {
+      "t": "FACT",
+      "text": "Soo Loo's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti and Electra; took the First Hunt: Belt-Grazers contract; sold 4 iron ore; got into 5 fights; earned Chronicler (5.4 points), Wanderer (3 points), Voyager I (1.2 points), Cartographer (0.9 points), Open For Business (0.3 points), Voyager II (0.3 points) and High-Volume Trader (0.03 points); came out 24 credits up; flew until the show's time ran out.",
+      "src": "undocked-week:weekly-c116",
+      "id": "F-f3342b94400f"
+    },
+    {
+      "t": "FACT",
+      "text": "Soo Loo's Friday night on UNDOCKED: went through Alpha Centauri, Sol, Sirius, Nova Terra, Furud, Homam, Antares, Gsc 0041, Pherkad, Synchrony, Node Alpha, The Experiment, Achernar, Garnet and Atlas; took the Copper Requisition, Cracking the Shell, Local Sector Survey and Market Participation: Selling contracts; finished First Hunt: Belt-Grazers for 1,000 credits; sold 8 copper ore and 5 creature carapace; earned Wanderer (5 points), Voyager I (4.8 points), Cartographer (3.6 points), Voyager II (",
+      "src": "undocked-week:weekly-c116",
+      "id": "F-d9a2be4dbe1e"
+    },
+    {
+      "t": "FACT",
+      "text": "Marguerite Kimball-Ostrow — Elementary Teacher (ledger)",
+      "src": "undocked-week:weekly-c116",
+      "id": "F-23ead17b6b90"
+    },
+    {
+      "t": "FACT",
+      "text": "Manju Abebe — Plumber (ledger)",
+      "src": "undocked-week:weekly-c116",
+      "id": "F-bdd27cdd47fa"
+    },
+    {
+      "t": "FACT",
+      "text": "Soo Loo — Corporate Accountant (ledger)",
+      "src": "undocked-week:weekly-c116",
+      "id": "F-0ce593028eba"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+      "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+      "id": "F-647fd9067a33"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to a supplied source ref.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "nia-rook-undocked-weekly-digest-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Turn the week's UNDOCKED episodes into one leaderboard/digest naming every pilot who flew — not a single-episode recap. Standings-forward: rank, streaks, who's climbing, who's fading, what the whole cast looked like this week.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "third-person leaderboard recap — entertainment-beat energy, ranking-and-recap format",
+      "targetWords": "350-650",
+      "opening": "the week's cast and its consequence for the board"
+    },
+    "authorizedTexture": [
+      "an in-world bar, watch-party, break-room, bus, or sidewalk setting where the city watches or argues; a new named business goes on INTAKE BIZ",
+      "the reporter's own recap persona, approved show history, and who's-up-who's-down framing across the week's cast",
+      "unnamed audience argument and aspiration lines as city color, never as measured sentiment",
+      "metaphor and emotional inference grounded in a supplied typed fact from the week's feed or standings"
+    ],
+    "textureConditions": [
+      "a named person must resolve to a ledger citizen; a new in-world place or business is scene color, not a recorded show event",
+      "this week's episode facts come from the supplied typed feed; prior episode facts come from the approved undocked_history result — a blank CreditsDelta is unsettled, never zero and never invented",
+      "pilot speech only from the wake-2 packet interviews — no other quote source exists for this lane",
+      "standings/leaderboard facts (Rank, CyclesLed, CurrentStreak) come only from the supplied Standings block — never invented math",
+      "unnamed audience reaction stays rhetorical — it must not become a count, a poll, or a named person",
+      "every pilot named in the supplied week's roster should appear at least once, even briefly, so the article actually prints their name"
+    ],
+    "canonBlockers": [
+      "video game",
+      "videogame",
+      "simulation",
+      "engine",
+      "MCP",
+      "server",
+      "commander",
+      "tool",
+      "API",
+      "spacemolt-lib",
+      "openrouter",
+      "real-world calendar dates (YYYY-MM-DD)",
+      "captains_log",
+      "leaderboard math beyond the supplied Standings/pilot facts"
+    ]
+  },
+  "manifest": {
+    "id": "AM-c136cb607a51",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-871096fd8925",
+        "t": "FACT",
+        "text": "Current cycle: C116",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-5cec0a6a9bfb",
+        "t": "FACT",
+        "text": "UNDOCKED week-in-review c116",
+        "src": "undocked-week:weekly-c116"
+      },
+      {
+        "id": "F-50b97509db6a",
+        "t": "FACT",
+        "text": "Marguerite Kimball-Ostrow's Sunday night on UNDOCKED: went through Sol, Sirius, Nova Terra, Furud, Acrux, Botein, Intercrus, Atlas, Cedarhold, Garnet, Achernar, Ruchbah, Ironhollow, Gsc 0041, Pherkad and Shaula; earned Wanderer (9 points), Voyager I (6.4 points), Maiden Jump (5 points), Cartographer (4.8 points), Voyager II (1.6 points), Chronicler (0.6 points), Master Explorer (0.5 points), Far Traveler (0.01 points) and Jump Master (0.01 points); came out even on credits; flew until the show's",
+        "src": "undocked-week:weekly-c116"
+      },
+      {
+        "id": "F-6928cf620d53",
+        "t": "FACT",
+        "text": "Marguerite Kimball-Ostrow's Wednesday night on UNDOCKED: went through Antares, Gsc 0041, Shaula, Alnair, Wolf 1061, Gsc 0031, Gsc 0021, Gliese 876, Felis, Biham, Gsc 0035, Jasmine, Mirach, Azha, Groombridge 1618, Silverbend, Alnilam and Jishui; earned Cartographer (4.5 points), Voyager I (3.2 points), Voyager II (1.5 points), Far Traveler (0.01 points) and Jump Master (0.01 points); came out even on credits; flew until the show's time ran out.",
+        "src": "undocked-week:weekly-c116"
+      },
+      {
+        "id": "F-24730e579781",
+        "t": "FACT",
+        "text": "Manju Abebe's Monday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes, Ridgecrest, Hatysa and Nembus; earned Wanderer (9 points), Voyager I (5.2 points), Maiden Jump (5 points), Cartographer (3.9 points), The Truth Is Out There (2.5 points), Voyager II (1.3 points), Master Explorer (0.5 points), Far Traveler (0.01 points) and Jump Master (0.01 points); came out even on credits; flew until the show's",
+        "src": "undocked-week:weekly-c116"
+      },
+      {
+        "id": "F-d89e369ab8b7",
+        "t": "FACT",
+        "text": "Manju Abebe's Thursday night on UNDOCKED: went through Sirius, Nova Terra, Furud, Acrux, Botein, Intercrus, Gsc 0044, Atlas, Cedarhold, Achernar, Ruchbah, Ironhollow, Pherkad, Shaula, Alnair, Wolf 1061, Gsc 0031 and Gsc 0021; earned Cartographer (5.1 points), Voyager I (4.4 points), Voyager II (1.7 points), Chronicler (0.6 points), Far Traveler (0.01 points) and Jump Master (0.01 points); came out even on credits; flew until the show's time ran out.",
+        "src": "undocked-week:weekly-c116"
+      },
+      {
+        "id": "F-f3342b94400f",
+        "t": "FACT",
+        "text": "Soo Loo's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti and Electra; took the First Hunt: Belt-Grazers contract; sold 4 iron ore; got into 5 fights; earned Chronicler (5.4 points), Wanderer (3 points), Voyager I (1.2 points), Cartographer (0.9 points), Open For Business (0.3 points), Voyager II (0.3 points) and High-Volume Trader (0.03 points); came out 24 credits up; flew until the show's time ran out.",
+        "src": "undocked-week:weekly-c116"
+      },
+      {
+        "id": "F-d9a2be4dbe1e",
+        "t": "FACT",
+        "text": "Soo Loo's Friday night on UNDOCKED: went through Alpha Centauri, Sol, Sirius, Nova Terra, Furud, Homam, Antares, Gsc 0041, Pherkad, Synchrony, Node Alpha, The Experiment, Achernar, Garnet and Atlas; took the Copper Requisition, Cracking the Shell, Local Sector Survey and Market Participation: Selling contracts; finished First Hunt: Belt-Grazers for 1,000 credits; sold 8 copper ore and 5 creature carapace; earned Wanderer (5 points), Voyager I (4.8 points), Cartographer (3.6 points), Voyager II (",
+        "src": "undocked-week:weekly-c116"
+      },
+      {
+        "id": "F-23ead17b6b90",
+        "t": "FACT",
+        "text": "Marguerite Kimball-Ostrow — Elementary Teacher (ledger)",
+        "src": "undocked-week:weekly-c116"
+      },
+      {
+        "id": "F-bdd27cdd47fa",
+        "t": "FACT",
+        "text": "Manju Abebe — Plumber (ledger)",
+        "src": "undocked-week:weekly-c116"
+      },
+      {
+        "id": "F-0ce593028eba",
+        "t": "FACT",
+        "text": "Soo Loo — Corporate Accountant (ledger)",
+        "src": "undocked-week:weekly-c116"
+      },
+      {
+        "id": "F-647fd9067a33",
+        "t": "FACT",
+        "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+        "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-01188-7334147c89",
+        "speakerId": "POP-01188",
+        "speakerName": "Marguerite Kimball-Ostrow",
+        "text": "I didn't really have a strategy on Sunday or Wednesday nights. I just flew through the systems one by one, and it happened to come out even on credits. I wasn't really focusing on that; I was just trying to explore and see where the show would take me.",
+        "factIds": [
+          "F-50b97509db6a",
+          "F-6928cf620d53"
+        ],
+        "src": "packet.W2[POP-01188]"
+      },
+      {
+        "id": "Q-POP-00918-ed6dcd48da",
+        "speakerId": "POP-00918",
+        "speakerName": "Manju Abebe",
+        "text": "My Monday and Thursday night routes on UNDOCKED were pretty different. On Monday, I went through Sol, Alpha Centauri, and a bunch of other stars, earning 9 points for Wanderer and a few other badges. Thursday night, I took a different path, starting with Sirius and Nova Terra, and earned Cartographer again, but with fewer points. Both nights, I came out even on credits and flew until the show's time ran out.",
+        "factIds": [
+          "F-24730e579781",
+          "F-d89e369ab8b7"
+        ],
+        "src": "packet.W2[POP-00918]"
+      },
+      {
+        "id": "Q-POP-00663-3e721028a4",
+        "speakerId": "POP-00663",
+        "speakerName": "Soo Loo",
+        "text": "I think what changed between Tuesday and Friday nights was my strategy and the contracts I took. On Tuesday, I focused on the First Hunt: Belt-Grazers contract and sold some iron ore, but I got into a few fights. By Friday, I'd finished the First Hunt contract for a big payout and took on more contracts that rewarded exploration and trading, like Copper Requisition and Market Participation: Selling. I also sold more resources, which helped my credits. It was a more varied and successful approach, I guess.",
+        "factIds": [
+          "F-f3342b94400f",
+          "F-d9a2be4dbe1e"
+        ],
+        "src": "packet.W2[POP-00663]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-01188",
+        "name": "Marguerite Kimball-Ostrow",
+        "profile": "Marguerite Kimball-Ostrow — UNDOCKED pilot",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00918",
+        "name": "Manju Abebe",
+        "profile": "Manju Abebe — UNDOCKED pilot",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00663",
+        "name": "Soo Loo",
+        "profile": "Soo Loo — UNDOCKED pilot",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Nia Rook",
+        "text": "The role of contract selection in Soo Loo's success",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "an in-world bar, watch-party, break-room, bus, or sidewalk setting where the city watches or argues; a new named business goes on INTAKE BIZ",
+      "the reporter's own recap persona, approved show history, and who's-up-who's-down framing across the week's cast",
+      "unnamed audience argument and aspiration lines as city color, never as measured sentiment",
+      "metaphor and emotional inference grounded in a supplied typed fact from the week's feed or standings"
+    ],
+    "textureConditions": [
+      "a named person must resolve to a ledger citizen; a new in-world place or business is scene color, not a recorded show event",
+      "this week's episode facts come from the supplied typed feed; prior episode facts come from the approved undocked_history result — a blank CreditsDelta is unsettled, never zero and never invented",
+      "pilot speech only from the wake-2 packet interviews — no other quote source exists for this lane",
+      "standings/leaderboard facts (Rank, CyclesLed, CurrentStreak) come only from the supplied Standings block — never invented math",
+      "unnamed audience reaction stays rhetorical — it must not become a count, a poll, or a named person",
+      "every pilot named in the supplied week's roster should appear at least once, even briefly, so the article actually prints their name"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

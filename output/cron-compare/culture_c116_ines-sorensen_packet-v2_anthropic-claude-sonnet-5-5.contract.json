@@ -2,16 +2,16 @@
   "draft": "output/cron-compare/culture_c116_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.md",
   "contractScore": {
     "opened": true,
-    "purposeMet": false,
+    "purposeMet": true,
     "inTarget": true,
     "inTargetBy": "code floor 300",
-    "words": 609,
-    "short": "The piece introduces Edmund Alegero and Guadalupe Lupe by name before their quotes instead of leading with the line first.",
-    "score": 2,
+    "words": 507,
+    "short": "",
+    "score": 3,
     "max": 3,
     "model": "google/gemini-3.7-flash",
     "scoredWithoutRhea": true,
-    "draftSha256": "121dadd6559d40378ab9a08c6d86ea0bf5baa5fe9606d7ac946158d9c6fa6002"
+    "draftSha256": "d231da6239672403387c600f845b65a6da7db07838dfa20b374f9828dbbadfcb"
   },
-  "ranAt": "2026-11-20T00:20:15.366Z"
+  "ranAt": "2026-11-21T17:15:36.820Z"
 }

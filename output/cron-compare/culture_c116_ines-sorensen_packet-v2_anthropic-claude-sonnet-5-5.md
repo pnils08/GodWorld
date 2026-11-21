@@ -1,36 +1,47 @@
-“Oakland raised him. I'm hoping he remembers that when the offers come in.”
+**"I walk past that fence every day."**
 
-That is Ernesto Quintero on Mark Aitken. Quintero is the Oakland A's 3B/1B from the Baylight District. He wrote it after work this cycle, and it sits in the middle of a long page about a week of changes. He starts with the Carmen Mesa trade and says it stings, even if he gets why Paulson made it. "Carmen had that fire in him, you know? That first start against the Cubs was something else." He mentions Giancarlo Hernandez coming in and says of Kevin Clark: "now he's got real competition. That's baseball."
+That is how Tre Mingo started when he spoke to the Tribune this cycle, and he kept going without being asked.
 
-Then he gets to Aitken. "I've played behind that man for two seasons. He's the heart of this clubhouse, the guy who shows up early, signs every autograph, takes the rookies under his wing. The Angels sniffing around him? That's a gut punch."
+> "The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching rents climb while the people I work with talk about leaving. The businesses are growing, the numbers look good, but the folks on the ledger aren't the ones who get to stay. I don't feel like I'm part of it. I feel like I'm watching it from the other side of the fence."
 
-The paper's C100 coverage described a lineup with no room for Quintero. Aitken held first base and Martin Richards had third. Quintero hit his way in anyway. He knows that history, and he is looking at the other end of it now.
+Mingo is a port worker and lives in Uptown. The fence is the one he passes on his way. The page doesn't say where it ends, and he doesn't either. What he gave was the walk, then the kids, then the rent, and then the last sentence, which he hadn't planned. People usually do that. The true thing comes at the end, after the part they rehearsed.
 
-"I'm ready to step up and take on a new role, though. Sliding to first base opens up opportunities for the team, and I'm looking forward to the challenge."
+His page carries a second line, a question he is holding this cycle:
 
-His page ends in the cage. "The mood around the complex is tense, but that's when the real work starts. I'm putting in the extra cage time, staying late on the infield work. When the season rolls around, I want them to know they can count on me at first or third, wherever they need me."
+> "Will any of us who work here still be able to stay, or is this development happening without us?"
 
-Up the road in Jack London, the same man comes up from the other side of a bar.
+I'm leaving that one without an answer. I don't have one, and nobody I asked this week has offered him one.
 
-"Will Mark stick around after the championship, or is he heading south? I hope his roots here keep him."
+---
 
-That is Celo Patel, a container yard supervisor in Jack London. He put it as a question he carries, in conversation this cycle. He doesn't say what he knows. He says what he hopes.
+**"I've heard it every night from the regulars, they're worried about rent."**
 
-Edmund Alegero, a construction laborer in Lake Merritt, put his version to a reporter: "Mark Aitken leaving is getting to me, but I'm trying to focus on my own game. How do I keep my head there?"
+Guadalupe Lupe tends bar in Jack London. Her page this cycle answers the same street from behind a different counter, and she names him.
 
-Then there is Guadalupe Lupe, a bartender in Jack London, who has been listening to the room from behind the stick. She says the room is not talking about first base.
+> "Tre Mingo, who works at the Port, even mentioned it to me. People are…"
 
-"The tavern's doing fine, sure — we're busy, the money's coming in. But I hear it every night, the same thing from the regulars who've been coming here for years. They're not talking about the A's or the new spots opening up. They're talking about rent. Tre Mingo works the Port, he's a good guy, and even he's said to me he doesn't know how much longer he can swing it around here."
+That is where her excerpt stops, so that is where I stop it. Two people, one in Uptown and one in Jack London, and neither is talking about a building. Both are talking about who will still be around to see it finished.
 
-Then comes the part she says at the end of the sentence, after the part she planned.
+---
 
-"The businesses are growing, but the people who actually pour the drinks and load the ships — they're the ones getting squeezed out. It's like the neighborhood's getting nicer for everyone except the people who make it run."
+**"The changes in Uptown have me feeling a bit uneasy."**
 
-Her page carries one question: "How much longer can people like Tre Mingo afford to stay here before rent pushes them out?"
+Omar Amici gave the paper this in C115. He is a construction laborer, and he lives in Uptown. His page went on:
 
-A ballplayer hopes a man remembers where he was raised. A bartender wonders how long her regulars will be able to stay where they were raised. They are not the same worry. They were written the same week, on the same side of the city.
+> "The streets are busier than ever, and it seems like every other place is a for-rent…"
+
+The excerpt cuts off there, mid-thought. A man who works construction saying the street feels uneasy is worth setting beside a port worker saying the numbers look good. They are describing the same block from two sides of the same fence. Tre Mingo's page never says whose side is whose, and I won't say it for him.
+
+Caroline Cabrera runs an after-school program in Uptown. The question on her C115 page was this:
+
+> "How do the numbers capture what families in Uptown are really going through as rents keep climbing?"
+
+Mingo's page reads like an answer to her, even though neither of them knew it. The numbers look good, he says. They were never going to put him on the ledger.
+
+He ended on the fence, and I'll end there too.
+
+> "I feel like I'm watching it from the other side of the fence."
 
 ## INTAKE
-NAMES: Ernesto Quintero | mentioned
-NAMES: Guadalupe Lupe | mentioned
-CLAIM: Man, this cycle's been a lot to process. First the Mesa trade—that one stings, even if I get why Paulson made it. Carmen had that fire in him, you know? And now with Mark Aitken leaving, it's a big change for the team. I'm trying not to get too ahead of myself, but it's clear the A's are looking to shake things up. I'm ready to step up and take on a new role, though. Sliding to first base opens up opportunities for the team, and I'm looking forward to the challenge. | citizenVoice PRESS Ernesto Quintero
+NAMES: Tre Mingo | mentioned
+CLAIM: I walk past that fence every day. The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching rents climb while the people I work with talk about leaving. | citizenVoice PRESS Tre Mingo

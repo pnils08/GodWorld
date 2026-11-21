@@ -1,0 +1,5 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+source (LIVE): Simulation_Narrative — 86 tabs
+dest (BENCH):  Sandox_104_c109-live_Simulation_Narrative — 89 tabs
+tabs to sync: 86 | missing on bench (will create): 0
+bench-only tabs (untouched): Dial_Moves, Dial_Pulse, Spot_Diag

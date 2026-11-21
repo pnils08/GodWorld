@@ -19,7 +19,7 @@ Cycle **C116** · kind `beat-trends` · hood **Uptown**
 - Theo Banks — rapper — Uptown — the city is talking about them (Cultural_Ledger)
 - Ernesto Quintero — 3B/1B , Oakland A's — Baylight District — the city is talking about them (Cultural_Ledger)
 - Desmond Morton — Left Fielder, Oakland A's — Chinatown — the city is talking about them (Cultural_Ledger)
-- Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Piedmont Ave — has been saying it on their own page — the A's, C115: “The A's trade is a mixed bag for me.”
+- Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Piedmont Ave — has been saying it on their own page — the A's, C116: “Mark Aitken leaving the A's was a tough pill to swallow, but I'm proud of what he's done for the city, and I know he'll keep making a difference wherever he goes.”
 - Omar Amici — Construction laborer — Uptown — has been saying it on their own page — rent, C115: “The streets are busier than ever, and it seems like every other place is a for-rent sign these days.”
 - Eleanor Rivera — BART Station Manager — West Oakland — has been saying it on their own page — transit, C116: “Honestly, from the booth, a five-point drop on a crowded day doesn't read as people leaving the station.”
 
@@ -34,11 +34,11 @@ Cycle **C116** · kind `beat-trends` · hood **Uptown**
 - The Okoro household (3) moved from Rockridge to Piedmont Ave — leaving Rockridge for a better fit (observational analysis)
 
 ## THE PAGES SAY (the citizens' own words — colour and sourcing, never a number in print)
-- the A's — steady; most of the city over the last two months, still talking this week. Loudest: Vinnie Keane (Piedmont Ave), on their own page at C115 (not an interview — colour only, never a quote): “The A's trade is a mixed bag for me.”
+- the A's — rising; most of the city over the last two months, still talking this week. Loudest: Vinnie Keane (Piedmont Ave), on their own page at C116 (not an interview — colour only, never a quote): “Mark Aitken leaving the A's was a tough pill to swallow, but I'm proud of what he's done for the city, and I know he'll keep making a difference wherever he goes.”
 - rent — steady; dozens of citizens over the last two months, still talking this week. Loudest: Omar Amici (Uptown), on their own page at C115 (not an interview — colour only, never a quote): “The streets are busier than ever, and it seems like every other place is a for-rent sign these days.”
 - transit — rising; dozens of citizens over the last two months, still talking this week. Loudest: Eleanor Rivera (West Oakland), on their own page at C116 (not an interview — colour only, never a quote): “Honestly, from the booth, a five-point drop on a crowded day doesn't read as people leaving the station.”
 - the clinic — steady; dozens of citizens over the last two months, still talking this week. Loudest: Yu Zen (Rockridge), on their own page at C116 (not an interview — colour only, never a quote): “The walk from Rockridge to the hospital is a straight shot down College Avenue, past the shops and the families out on the sidewalks, then over toward Broadway.”
-- the Oaks — fading; a dozen or so citizens over the last two months, still talking this week. Loudest: Adash Stanley (Piedmont Ave), on their own page at C115 (not an interview — colour only, never a quote): “My neighbors seem to be catching the buzz around the Oaks' success.”
+- the Oaks — steady; a dozen or so citizens over the last two months, still talking this week. Loudest: Elias Varek (West Oakland), on their own page at C116 (not an interview — colour only, never a quote): “And the Oakland Oaks — 11.28% growth on $62.7M?”
 
 ## THE ROOM IS YOURS
 the group chat, the third rewatch, who suddenly has an opinion about something nobody mentioned last month, what the city collectively decided to care about

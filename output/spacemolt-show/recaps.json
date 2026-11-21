@@ -370,5 +370,11 @@
     "cycle": "116",
     "stem": "undocked_c116_nia-rook_packet-v2_openai-gpt-6-luna",
     "disposition": "staged"
+  },
+  "weekly-c116": {
+    "at": "2026-11-21T16:15:50.094Z",
+    "cycle": "116",
+    "stem": "undocked-digest_c116_nia-rook-weekly_packet-v2_openai-gpt-6-luna",
+    "disposition": "staged"
   }
 }

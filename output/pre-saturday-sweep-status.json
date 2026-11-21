@@ -1,19 +1,41 @@
 {
-  "ranAt": "2026-11-14T18:01:24.217Z",
-  "cycle": 115,
+  "ranAt": "2026-11-21T18:01:14.514Z",
+  "cycle": 116,
   "reportComplete": 26,
   "candidates": [
-    "sports_c115_anthony-raines_packet-v2"
+    "sports_c116_elliot-marbury_packet-v2",
+    "sports_c116_hal-richmond_packet-v2",
+    "wire_c116_celeste-tran_packet-v2"
   ],
   "retried": [
     {
-      "stem": "sports_c115_anthony-raines_packet-v2",
+      "stem": "sports_c116_elliot-marbury_packet-v2",
       "desk": "sports",
-      "persona": "anthony-raines",
+      "persona": "elliot-marbury",
       "ok": true,
       "errorMessage": null,
-      "staged": true
+      "staged": false
+    },
+    {
+      "stem": "sports_c116_hal-richmond_packet-v2",
+      "desk": "sports",
+      "persona": "hal-richmond",
+      "ok": false,
+      "errorMessage": "Command failed: node /root/GodWorld/scripts/cron-desk-run.js --desk sports --persona hal-richmond --stage=write --gate-backend api",
+      "staged": false
+    },
+    {
+      "stem": "wire_c116_celeste-tran_packet-v2",
+      "desk": "wire",
+      "persona": "celeste-tran",
+      "ok": false,
+      "errorMessage": "Command failed: node /root/GodWorld/scripts/cron-desk-run.js --desk wire --persona celeste-tran --stage=write --gate-backend api",
+      "staged": false
     }
   ],
-  "stillUncovered": []
+  "stillUncovered": [
+    "sports_c116_elliot-marbury_packet-v2",
+    "sports_c116_hal-richmond_packet-v2",
+    "wire_c116_celeste-tran_packet-v2"
+  ]
 }

@@ -1,0 +1,82 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "116",
+  "persona": "kai-marston",
+  "byline": "Kai Marston",
+  "bylinePopid": "POP-00158",
+  "article": "output/cron-compare/staged/culture_c116_kai-marston_packet-v2_anthropic-claude-haiku-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Benji Dillon",
+        "role": "quoted-source",
+        "popid": "POP-00018"
+      },
+      {
+        "name": "Darrin Davis",
+        "role": "mentioned",
+        "popid": "POP-00021"
+      },
+      {
+        "name": "Danny Horn",
+        "role": "mentioned",
+        "popid": "POP-00022"
+      },
+      {
+        "name": "Travis Coles",
+        "role": "mentioned",
+        "popid": "POP-00533"
+      },
+      {
+        "name": "Ernesto Quintero",
+        "role": "mentioned",
+        "popid": "POP-00050",
+        "floor": true
+      },
+      {
+        "name": "Vinnie Keane",
+        "role": "mentioned",
+        "popid": "POP-00001",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Rockridge"
+    ],
+    "claims": [
+      {
+        "claim": "I've noticed people recognizing me more often around Rockridge, like at the grocery store. It's become a part of my daily life, but it doesn't feel like a big change. I'm still just Benji, living on my block, and going to A's games.",
+        "sourceRef": "citizenVoice PRESS Benji Dillon"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-253071de4607",
+    "draftSha256": "244a7b3ab6929580f85ec74bb5b13ea528dd111229260deec7be16cd6e04b00f",
+    "verdict": "output/cron-compare/culture_c116_kai-marston_packet-v2_anthropic-claude-haiku-5-5.rhea.json",
+    "ranAt": "2026-11-21T00:16:32.107Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 500",
+      "words": 746,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "244a7b3ab6929580f85ec74bb5b13ea528dd111229260deec7be16cd6e04b00f",
+      "costUsd": 0.0009
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-21T00:16:35.986Z"
+}

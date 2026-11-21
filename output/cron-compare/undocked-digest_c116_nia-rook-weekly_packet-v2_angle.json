@@ -1,0 +1,329 @@
+{
+  "stage": "angle",
+  "desk": "undocked-digest",
+  "cycle": "116",
+  "persona": "nia-rook-weekly",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-01076",
+      "name": "Nia Rook",
+      "role": "desk reporter",
+      "desk": "undocked-digest"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "UNDOCKED week: pilots who flew this cycle (Marguerite Kimball-Ostrow, Manju Abebe, Soo Loo). Standings: Luis Taz leads the board — rank #1, 45.19 achievement points, 0 credits, 3 cycle(s) led, current streak 3. In the chair: Marguerite Kimball-Ostrow — Elementary Teacher; Manju Abebe — Plumber; Soo Loo — Corporate Accountant.",
+      "approach": null
+    },
+    "signal": {
+      "kind": "undocked-digest",
+      "hood": null,
+      "score": null,
+      "src": "undocked-week:weekly-c116",
+      "nearby": [
+        {
+          "text": "",
+          "src": ""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-01188",
+          "name": "Marguerite Kimball-Ostrow",
+          "profile": "Marguerite Kimball-Ostrow — UNDOCKED pilot",
+          "role": "UNDOCKED pilot",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "undocked-feed-row",
+          "evidence": {
+            "source": "output/spacemolt-show/feed/c116.json",
+            "episodeId": "undocked-pop01188-Y3C12",
+            "pop": "POP-01188"
+          }
+        },
+        {
+          "pop": "POP-00918",
+          "name": "Manju Abebe",
+          "profile": "Manju Abebe — UNDOCKED pilot",
+          "role": "UNDOCKED pilot",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "undocked-feed-row",
+          "evidence": {
+            "source": "output/spacemolt-show/feed/c116.json",
+            "episodeId": "undocked-pop00918-Y3C12",
+            "pop": "POP-00918"
+          }
+        },
+        {
+          "pop": "POP-00663",
+          "name": "Soo Loo",
+          "profile": "Soo Loo — UNDOCKED pilot",
+          "role": "UNDOCKED pilot",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "undocked-feed-row",
+          "evidence": {
+            "source": "output/spacemolt-show/feed/c116.json",
+            "episodeId": "undocked-pop00663-Y3C12",
+            "pop": "POP-00663"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C116",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-871096fd8925"
+      },
+      {
+        "t": "FACT",
+        "text": "UNDOCKED week-in-review c116",
+        "src": "undocked-week:weekly-c116",
+        "id": "F-5cec0a6a9bfb"
+      },
+      {
+        "t": "FACT",
+        "text": "Marguerite Kimball-Ostrow's Sunday night on UNDOCKED: went through Sol, Sirius, Nova Terra, Furud, Acrux, Botein, Intercrus, Atlas, Cedarhold, Garnet, Achernar, Ruchbah, Ironhollow, Gsc 0041, Pherkad and Shaula; earned Wanderer (9 points), Voyager I (6.4 points), Maiden Jump (5 points), Cartographer (4.8 points), Voyager II (1.6 points), Chronicler (0.6 points), Master Explorer (0.5 points), Far Traveler (0.01 points) and Jump Master (0.01 points); came out even on credits; flew until the show's",
+        "src": "undocked-week:weekly-c116",
+        "id": "F-50b97509db6a"
+      },
+      {
+        "t": "FACT",
+        "text": "Marguerite Kimball-Ostrow's Wednesday night on UNDOCKED: went through Antares, Gsc 0041, Shaula, Alnair, Wolf 1061, Gsc 0031, Gsc 0021, Gliese 876, Felis, Biham, Gsc 0035, Jasmine, Mirach, Azha, Groombridge 1618, Silverbend, Alnilam and Jishui; earned Cartographer (4.5 points), Voyager I (3.2 points), Voyager II (1.5 points), Far Traveler (0.01 points) and Jump Master (0.01 points); came out even on credits; flew until the show's time ran out.",
+        "src": "undocked-week:weekly-c116",
+        "id": "F-6928cf620d53"
+      },
+      {
+        "t": "FACT",
+        "text": "Manju Abebe's Monday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes, Ridgecrest, Hatysa and Nembus; earned Wanderer (9 points), Voyager I (5.2 points), Maiden Jump (5 points), Cartographer (3.9 points), The Truth Is Out There (2.5 points), Voyager II (1.3 points), Master Explorer (0.5 points), Far Traveler (0.01 points) and Jump Master (0.01 points); came out even on credits; flew until the show's",
+        "src": "undocked-week:weekly-c116",
+        "id": "F-24730e579781"
+      },
+      {
+        "t": "FACT",
+        "text": "Manju Abebe's Thursday night on UNDOCKED: went through Sirius, Nova Terra, Furud, Acrux, Botein, Intercrus, Gsc 0044, Atlas, Cedarhold, Achernar, Ruchbah, Ironhollow, Pherkad, Shaula, Alnair, Wolf 1061, Gsc 0031 and Gsc 0021; earned Cartographer (5.1 points), Voyager I (4.4 points), Voyager II (1.7 points), Chronicler (0.6 points), Far Traveler (0.01 points) and Jump Master (0.01 points); came out even on credits; flew until the show's time ran out.",
+        "src": "undocked-week:weekly-c116",
+        "id": "F-d89e369ab8b7"
+      },
+      {
+        "t": "FACT",
+        "text": "Soo Loo's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti and Electra; took the First Hunt: Belt-Grazers contract; sold 4 iron ore; got into 5 fights; earned Chronicler (5.4 points), Wanderer (3 points), Voyager I (1.2 points), Cartographer (0.9 points), Open For Business (0.3 points), Voyager II (0.3 points) and High-Volume Trader (0.03 points); came out 24 credits up; flew until the show's time ran out.",
+        "src": "undocked-week:weekly-c116",
+        "id": "F-f3342b94400f"
+      },
+      {
+        "t": "FACT",
+        "text": "Soo Loo's Friday night on UNDOCKED: went through Alpha Centauri, Sol, Sirius, Nova Terra, Furud, Homam, Antares, Gsc 0041, Pherkad, Synchrony, Node Alpha, The Experiment, Achernar, Garnet and Atlas; took the Copper Requisition, Cracking the Shell, Local Sector Survey and Market Participation: Selling contracts; finished First Hunt: Belt-Grazers for 1,000 credits; sold 8 copper ore and 5 creature carapace; earned Wanderer (5 points), Voyager I (4.8 points), Cartographer (3.6 points), Voyager II (",
+        "src": "undocked-week:weekly-c116",
+        "id": "F-d9a2be4dbe1e"
+      },
+      {
+        "t": "FACT",
+        "text": "Marguerite Kimball-Ostrow — Elementary Teacher (ledger)",
+        "src": "undocked-week:weekly-c116",
+        "id": "F-23ead17b6b90"
+      },
+      {
+        "t": "FACT",
+        "text": "Manju Abebe — Plumber (ledger)",
+        "src": "undocked-week:weekly-c116",
+        "id": "F-bdd27cdd47fa"
+      },
+      {
+        "t": "FACT",
+        "text": "Soo Loo — Corporate Accountant (ledger)",
+        "src": "undocked-week:weekly-c116",
+        "id": "F-0ce593028eba"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ]
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-01188",
+        "name": "Marguerite Kimball-Ostrow",
+        "role": "UNDOCKED pilot",
+        "hood": null,
+        "profile": "Marguerite Kimball-Ostrow — UNDOCKED pilot",
+        "mode": "named",
+        "sourceKind": "undocked-feed-row",
+        "evidence": {
+          "source": "output/spacemolt-show/feed/c116.json",
+          "episodeId": "undocked-pop01188-Y3C12",
+          "pop": "POP-01188"
+        }
+      },
+      {
+        "pop": "POP-00918",
+        "name": "Manju Abebe",
+        "role": "UNDOCKED pilot",
+        "hood": null,
+        "profile": "Manju Abebe — UNDOCKED pilot",
+        "mode": "named",
+        "sourceKind": "undocked-feed-row",
+        "evidence": {
+          "source": "output/spacemolt-show/feed/c116.json",
+          "episodeId": "undocked-pop00918-Y3C12",
+          "pop": "POP-00918"
+        }
+      },
+      {
+        "pop": "POP-00663",
+        "name": "Soo Loo",
+        "role": "UNDOCKED pilot",
+        "hood": null,
+        "profile": "Soo Loo — UNDOCKED pilot",
+        "mode": "named",
+        "sourceKind": "undocked-feed-row",
+        "evidence": {
+          "source": "output/spacemolt-show/feed/c116.json",
+          "episodeId": "undocked-pop00663-Y3C12",
+          "pop": "POP-00663"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Nia Rook",
+    "popid": "POP-01076"
+  },
+  "assignment": {
+    "story": {
+      "ref": "undocked-week:weekly-c116",
+      "label": "UNDOCKED week-in-review c116",
+      "kind": "undocked-digest",
+      "angle": "UNDOCKED week: pilots who flew this cycle (Marguerite Kimball-Ostrow, Manju Abebe, Soo Loo). Standings: Luis Taz leads the board — rank #1, 45.19 achievement points, 0 credits, 3 cycle(s) led, current streak 3. In the chair: Marguerite Kimball-Ostrow — Elementary Teacher; Manju Abebe — Plumber; Soo Loo — Corporate Accountant.",
+      "facts": [
+        "Marguerite Kimball-Ostrow's Sunday night on UNDOCKED: went through Sol, Sirius, Nova Terra, Furud, Acrux, Botein, Intercrus, Atlas, Cedarhold, Garnet, Achernar, Ruchbah, Ironhollow, Gsc 0041, Pherkad and Shaula; earned Wanderer (9 points), Voyager I (6.4 points), Maiden Jump (5 points), Cartographer (4.8 points), Voyager II (1.6 points), Chronicler (0.6 points), Master Explorer (0.5 points), Far Traveler (0.01 points) and Jump Master (0.01 points); came out even on credits; flew until the show's time ran out.",
+        "Marguerite Kimball-Ostrow's Wednesday night on UNDOCKED: went through Antares, Gsc 0041, Shaula, Alnair, Wolf 1061, Gsc 0031, Gsc 0021, Gliese 876, Felis, Biham, Gsc 0035, Jasmine, Mirach, Azha, Groombridge 1618, Silverbend, Alnilam and Jishui; earned Cartographer (4.5 points), Voyager I (3.2 points), Voyager II (1.5 points), Far Traveler (0.01 points) and Jump Master (0.01 points); came out even on credits; flew until the show's time ran out.",
+        "Manju Abebe's Monday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes, Ridgecrest, Hatysa and Nembus; earned Wanderer (9 points), Voyager I (5.2 points), Maiden Jump (5 points), Cartographer (3.9 points), The Truth Is Out There (2.5 points), Voyager II (1.3 points), Master Explorer (0.5 points), Far Traveler (0.01 points) and Jump Master (0.01 points); came out even on credits; flew until the show's time ran out.",
+        "Manju Abebe's Thursday night on UNDOCKED: went through Sirius, Nova Terra, Furud, Acrux, Botein, Intercrus, Gsc 0044, Atlas, Cedarhold, Achernar, Ruchbah, Ironhollow, Pherkad, Shaula, Alnair, Wolf 1061, Gsc 0031 and Gsc 0021; earned Cartographer (5.1 points), Voyager I (4.4 points), Voyager II (1.7 points), Chronicler (0.6 points), Far Traveler (0.01 points) and Jump Master (0.01 points); came out even on credits; flew until the show's time ran out.",
+        "Soo Loo's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti and Electra; took the First Hunt: Belt-Grazers contract; sold 4 iron ore; got into 5 fights; earned Chronicler (5.4 points), Wanderer (3 points), Voyager I (1.2 points), Cartographer (0.9 points), Open For Business (0.3 points), Voyager II (0.3 points) and High-Volume Trader (0.03 points); came out 24 credits up; flew until the show's time ran out.",
+        "Soo Loo's Friday night on UNDOCKED: went through Alpha Centauri, Sol, Sirius, Nova Terra, Furud, Homam, Antares, Gsc 0041, Pherkad, Synchrony, Node Alpha, The Experiment, Achernar, Garnet and Atlas; took the Copper Requisition, Cracking the Shell, Local Sector Survey and Market Participation: Selling contracts; finished First Hunt: Belt-Grazers for 1,000 credits; sold 8 copper ore and 5 creature carapace; earned Wanderer (5 points), Voyager I (4.8 points), Cartographer (3.6 points), Voyager II (1.2 points), Open For Business (0.6 points), Master Explorer (0.5 points), Weapons Master (0.5 points), High-Volume Trader (0.05 points), Millionaire (0.03 points), Far Traveler (0.01 points) and Jump Master (0.01 points); came out 1,013 credits up; flew until the show's time ran out.",
+        "Marguerite Kimball-Ostrow — Elementary Teacher (ledger)",
+        "Manju Abebe — Plumber (ledger)",
+        "Soo Loo — Corporate Accountant (ledger)"
+      ],
+      "citizens": [
+        "Marguerite Kimball-Ostrow — Elementary Teacher, UNDOCKED cast pilot",
+        "Manju Abebe — Plumber, UNDOCKED cast pilot",
+        "Soo Loo — Corporate Accountant, UNDOCKED cast pilot"
+      ],
+      "popids": [
+        "POP-01188",
+        "POP-00918",
+        "POP-00663"
+      ]
+    }
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Nia Rook",
+    "popid": "POP-01076",
+    "text": "I'm going to dig into the UNDOCKED pilots' strategies and see what makes Luis Taz hold the top spot. I'll be looking at the routes they took and the points they earned.",
+    "plan": {
+      "chase": "I'm going to dig into the UNDOCKED pilots' strategies and see what makes Luis Taz hold the top spot. I'll be looking at the routes they took and the points they earned.",
+      "focus": "UNDOCKED pilots' performance in the latest cycle",
+      "why": "The current leader, Luis Taz, is still on top, and I want to understand what they're doing right.",
+      "checks": [
+        "routes taken by Marguerite Kimball-Ostrow, Manju Abebe, and Soo Loo",
+        "points earned by each pilot"
+      ],
+      "targets": [
+        {
+          "pop": "POP-01188",
+          "question": "What was Marguerite Kimball-Ostrow's strategy on Sunday and Wednesday nights?",
+          "basis": "F-50b97509db6a, F-6928cf620d53"
+        },
+        {
+          "pop": "POP-00918",
+          "question": "How did Manju Abebe's Monday and Thursday night routes compare?",
+          "basis": "F-24730e579781, F-d89e369ab8b7"
+        },
+        {
+          "pop": "POP-00663",
+          "question": "Soo Loo's Tuesday and Friday nights showed different outcomes; what changed?",
+          "basis": "F-f3342b94400f, F-d9a2be4dbe1e"
+        }
+      ],
+      "interpretation": "The pilots' choices and outcomes may reveal patterns or strategies that contribute to their success.",
+      "unverifiedLead": [
+        "The role of contract selection in Soo Loo's success"
+      ]
+    }
+  },
+  "lanePicks": [
+    {
+      "popids": []
+    }
+  ],
+  "laneEntries": 1,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-21T14:15:26.380Z"
+}

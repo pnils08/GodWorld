@@ -1,0 +1,238 @@
+{
+  "version": "LIFESTYLE-SLICE-1",
+  "empty": false,
+  "cycle": 116,
+  "kind": "beat-lifestyle",
+  "seat": {
+    "slug": "sharon-okafor",
+    "name": "Sharon Okafor",
+    "popid": "POP-00159",
+    "desk": "culture",
+    "domain": "lifestyle",
+    "builder": "buildLifestyleSlice.js"
+  },
+  "hood": "Piedmont Ave",
+  "pulse": {
+    "className": "beat-lifestyle",
+    "score": 100,
+    "label": "Benji Dillon leads the fame table; 5 fading, 5 new",
+    "hood": "Piedmont Ave",
+    "source": "output/beats/Cultural_Ledger.jsonl @C116"
+  },
+  "story": {
+    "kind": "beat-lifestyle",
+    "angle": "Vinnie Keane is fading — how the city follows its names",
+    "label": "Benji Dillon leads the fame table; 5 fading, 5 new",
+    "hookLine": "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading (fame 54, cooling), 7 media mentions.",
+    "hood": "Piedmont Ave",
+    "citizens": [
+      "Vinnie Keane (POP-00001)",
+      "Theo Banks (POP-01056)",
+      "Lena Cross (POP-00539)",
+      "Benji Dillon (POP-00018)",
+      "P Slayer (POP-00008)",
+      "Nia Rook (POP-01076)"
+    ],
+    "popids": [
+      "POP-00001",
+      "POP-01056",
+      "POP-00539",
+      "POP-00018",
+      "POP-00008",
+      "POP-01076"
+    ],
+    "ref": "output/beats/Cultural_Ledger.jsonl @C116",
+    "cycle": 116
+  },
+  "approach": "Lifestyle approach: this slice is the fame record — who the city knows, who is fading, who just arrived — with their domains, tiers and neighborhoods. Behavior patterns, warm analytical. The names and trajectories are real; the morning routine, the regular order, what the neighbors think are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-00001",
+      "name": "Vinnie Keane",
+      "role": "Former Designated Hitter, Oakland A's Legend",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Piedmont Ave",
+      "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-01056",
+      "name": "Theo Banks",
+      "role": "rapper",
+      "neighborhood": "Uptown",
+      "business": null,
+      "profile": "Theo Banks — rapper — Uptown",
+      "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00539",
+      "name": "Lena Cross",
+      "role": "Actor",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Lena Cross — Actor — Piedmont Ave",
+      "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00018",
+      "name": "Benji Dillon",
+      "role": "Pitcher, Oakland A's Legend",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+      "why": "the city knows them (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-00008",
+      "name": "P Slayer",
+      "role": "Journalist, Fan Columnist - Sports",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "P Slayer — Journalist, Fan Columnist - Sports — West Oakland",
+      "why": "new on the culture record this cycle (Cultural_Ledger)"
+    },
+    {
+      "popid": "POP-01076",
+      "name": "Nia Rook",
+      "role": "Journalist, UNDOCKED Recap",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Nia Rook — Journalist, UNDOCKED Recap — West Oakland",
+      "why": "new on the culture record this cycle (Cultural_Ledger)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading — the where-are-they-now file (fame 54, cooling), 7 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C116"
+    },
+    {
+      "text": "Theo Banks (rapper), Arts, Uptown, Regional-tier — fading — the where-are-they-now file (fame 6, cooling), 8 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C116"
+    },
+    {
+      "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 2, cooling), 17 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C116"
+    },
+    {
+      "text": "Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 55, rising), 1 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C116"
+    },
+    {
+      "text": "P Slayer (Journalist, Fan Columnist - Sports), Sports, West Oakland, Local-tier — new on the culture record this cycle (fame 25, rising), 0 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C116"
+    },
+    {
+      "text": "Nia Rook (Journalist, UNDOCKED Recap), Media, West Oakland, Local-tier — new on the culture record this cycle (fame 25, rising), 0 media mentions",
+      "src": "output/beats/Cultural_Ledger.jsonl @C116"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "Vinnie Keane is fading — how the city follows its names",
+    "hookLine": "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading (fame 54, cooling), 7 media mentions.",
+    "anchorFacts": [
+      "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading — the where-are-they-now file (fame 54, cooling), 7 media mentions",
+      "Theo Banks (rapper), Arts, Uptown, Regional-tier — fading — the where-are-they-now file (fame 6, cooling), 8 media mentions",
+      "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 2, cooling), 17 media mentions",
+      "Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 55, rising), 1 media mentions",
+      "P Slayer (Journalist, Fan Columnist - Sports), Sports, West Oakland, Local-tier — new on the culture record this cycle (fame 25, rising), 0 media mentions",
+      "Nia Rook (Journalist, UNDOCKED Recap), Media, West Oakland, Local-tier — new on the culture record this cycle (fame 25, rising), 0 media mentions"
+    ],
+    "evidence": [
+      {
+        "text": "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading — the where-are-they-now file (fame 54, cooling), 7 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C116"
+      },
+      {
+        "text": "Theo Banks (rapper), Arts, Uptown, Regional-tier — fading — the where-are-they-now file (fame 6, cooling), 8 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C116"
+      },
+      {
+        "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 2, cooling), 17 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C116"
+      },
+      {
+        "text": "Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 55, rising), 1 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C116"
+      },
+      {
+        "text": "P Slayer (Journalist, Fan Columnist - Sports), Sports, West Oakland, Local-tier — new on the culture record this cycle (fame 25, rising), 0 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C116"
+      },
+      {
+        "text": "Nia Rook (Journalist, UNDOCKED Recap), Media, West Oakland, Local-tier — new on the culture record this cycle (fame 25, rising), 0 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C116"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": null,
+    "hooks": [
+      {
+        "text": "Jack London boom sustained — momentum 10/10, the block everyone wants onto",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Jack London",
+        "priority": 7
+      },
+      {
+        "text": "Jack London housing pressure at 10/10: rents climbing, households stretching to stay",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Jack London",
+        "priority": 7
+      },
+      {
+        "text": "Piedmont Ave turning upward: retail busy, events drawing crowds, people moving in",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Piedmont Ave",
+        "priority": 5
+      },
+      {
+        "text": "Uptown housing pressure at 10/10: rents climbing, households stretching to stay",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Uptown",
+        "priority": 7
+      },
+      {
+        "text": "The Keane household (2) moved from Grand Lake to Piedmont Ave — moving up from Grand Lake — sold up and bought in Piedmont Ave",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Piedmont Ave",
+        "priority": 5
+      },
+      {
+        "text": "The Okoro household (3) moved from Rockridge to Piedmont Ave — leaving Rockridge for a better fit",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Piedmont Ave",
+        "priority": 5
+      },
+      {
+        "text": "read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "angle": "arts/culture feature",
+        "domain": "CULTURE",
+        "hood": "Piedmont Ave",
+        "priority": 3
+      }
+    ],
+    "note": null,
+    "pageVoices": [],
+    "roomIsYours": "the coffee order, the dog's name, who recognizes them at the farmers market and who pretends not to"
+  },
+  "known": 55,
+  "fading": 5,
+  "appeared": 5,
+  "pointers": [
+    "output/beats/Cultural_Ledger.jsonl @C116",
+    "output/beats/Story_Hook_Deck.jsonl (hooks for Sharon Okafor this cycle)"
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "116",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "maria-keen",
+  "byline": {
+    "name": "Maria Keen",
+    "popid": "POP-00013",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 30,
+  "quotesLanded": 3,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "canon_recall",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall"
+  ],
+  "toolCalls": 4,
+  "wordCount": 997,
+  "targetWords": "evidence-bounded",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": false,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 997,
+    "short": "The opening paragraph names the place and programs but does not name a Packet condition.",
+    "score": 2,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "a1c4cca223b4659d9c193149188ae8b52af243eb74a5d87cfc218cd5dedbd1a2",
+    "costUsd": 0.0022
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 2/3 — The opening paragraph names the place and programs but does not name a Packet condition."
+  },
+  "article": "output/cron-compare/staged/culture_c116_maria-keen_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "injected env (33) from ../.config/godworld/.env // tip: ⌘ suppress logs { quiet: true }\n{\n  \"popId\": \"POP-00013\",\n  \"name\": \"Maria Keen\",\n  \"recorded\": true,\n  \"text\": \"The Ones Who Keep Showing Up\"\n}"
+  },
+  "ranAt": "2026-11-21T00:19:39.786Z",
+  "dispositionReconciledAt": "2026-11-21T18:00:02.870Z"
+}

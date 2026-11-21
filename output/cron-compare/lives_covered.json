@@ -621,5 +621,53 @@
     "kind": "moment",
     "cycle": 116,
     "day": "2026-11-19"
+  },
+  "household:HH-0116-F010:116": {
+    "popid": "POP-01249",
+    "kind": "household",
+    "cycle": 116,
+    "day": "2026-11-20"
+  },
+  "seed:f525661f:116:POP-01096": {
+    "popid": "POP-01096",
+    "kind": "seed",
+    "cycle": 116,
+    "day": "2026-11-20"
+  },
+  "seed:9dd4042a:116:POP-00706": {
+    "popid": "POP-00706",
+    "kind": "seed",
+    "cycle": 116,
+    "day": "2026-11-20"
+  },
+  "seed:d752f46c:116:POP-00034": {
+    "popid": "POP-00034",
+    "kind": "seed",
+    "cycle": 116,
+    "day": "2026-11-20"
+  },
+  "moment:POP-00019:116:Business-Gain": {
+    "popid": "POP-00019",
+    "kind": "moment",
+    "cycle": 116,
+    "day": "2026-11-20"
+  },
+  "moment:POP-00018:116:Business-Gain": {
+    "popid": "POP-00018",
+    "kind": "moment",
+    "cycle": 116,
+    "day": "2026-11-20"
+  },
+  "moment:POP-00221:116:LifeEvent-Promotion-Up-S": {
+    "popid": "POP-00221",
+    "kind": "moment",
+    "cycle": 116,
+    "day": "2026-11-20"
+  },
+  "moment:POP-00030:116:LifeEvent-Promotion-Up-S": {
+    "popid": "POP-00030",
+    "kind": "moment",
+    "cycle": 116,
+    "day": "2026-11-20"
   }
 }

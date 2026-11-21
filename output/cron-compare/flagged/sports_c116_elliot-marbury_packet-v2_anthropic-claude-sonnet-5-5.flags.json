@@ -2,12 +2,12 @@
   "draft": "sports_c116_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5.md",
   "flags": [
     {
-      "claim": "Benji Dillon threw 150.1 innings with 65 walks. That is 3.9 walks per nine and 2.03 strikeouts per walk, at an ERA of 4.43.",
-      "issue": "Direct contradiction of recorded sports state: Ground truth C116/C114 explicitly records Benji Dillon's 2041 season line as 140.2 IP, 56 BB, 120 SO, and a 4.61 ERA (9-8 record, 2.0 WAR), not 150.1 IP, 65 BB, or 4.43 ERA.",
+      "claim": "Benji Dillon threw 150.1 innings over 35 appearances and 28 starts, going 10-8 with a 4.43 ERA. He allowed 3.9 BB/9, struck out 7.9 per nine and posted 2.03 K/BB, with 65 walks and 132 strikeouts.",
+      "issue": "Contradicts canonical 2041 season pitching record in ground truth (Benji Dillon was 9-8 with a 4.61 ERA, 120 strikeouts, 56 walks in 140.2 innings).",
       "severity": "high"
     }
   ],
   "checkFlags": [],
   "contamination": [],
-  "summary": "Benji Dillon 2041 season statistics contradict canonical ground truth (140.2 IP, 4.61 ERA, 56 BB)."
+  "summary": "Direct contradiction of Benji Dillon's canonical 2041 pitching statistics."
 }

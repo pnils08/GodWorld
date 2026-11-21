@@ -1,0 +1,54 @@
+{
+  "model": "openai/gpt-6-luna",
+  "calls": [
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Marguerite Kimball-Ostrow"
+      },
+      "resultChars": 201,
+      "resultHead": "No published piece from before C116 came back for \"Marguerite Kimball-Ostrow\". That is not proof the paper never covered it (an empty answer can also be a failed lookup) — do not write that it did not."
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Manju Abebe"
+      },
+      "resultChars": 187,
+      "resultHead": "No published piece from before C116 came back for \"Manju Abebe\". That is not proof the paper never covered it (an empty answer can also be a failed lookup) — do not write that it did not."
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Soo Loo"
+      },
+      "resultChars": 183,
+      "resultHead": "No published piece from before C116 came back for \"Soo Loo\". That is not proof the paper never covered it (an empty answer can also be a failed lookup) — do not write that it did not."
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "UNDOCKED"
+      },
+      "resultChars": 3281,
+      "resultHead": "[C114 · daily · Nia Rook] UNDOCKED: Silk takes the top rung, but the week belongs to three different routes Three pilots filled this week’s UNDOCKED card, and Ronald Silk leaves it with the clearest board position: rank #1, 38.15 achievement points, one cycle led, a current streak of one, and zero credits on the standings. Luis Taz and Lena Okafor each brought two episodes to the week’s picture. Their runs make for a lively supporting cast, but the supplied standings give no basis for placing either above or below the other. Silk’s advantag\n[C115 · daily · Nia Rook] UNDOCKED: Three pilots fini"
+    },
+    {
+      "tool": "undocked_history",
+      "input": {
+        "pilot": "Marguerite Kimball-Ostrow"
+      },
+      "resultChars": 183,
+      "resultHead": "Available gate-approved UNDOCKED feed history for Marguerite Kimball-Ostrow before C116:\nNo earlier episode found in the available approved packs; this does not prove none ever aired."
+    },
+    {
+      "tool": "undocked_history",
+      "input": {
+        "pilot": "Manju Abebe"
+      },
+      "resultChars": 169,
+      "resultHead": "Available gate-approved UNDOCKED feed history for Manju Abebe before C116:\nNo earlier episode found in the available approved packs; this does not prove none ever aired."
+    }
+  ],
+  "ranAt": "2026-11-21T16:15:37.534Z"
+}

@@ -1,0 +1,637 @@
+{
+  "artifactClass": "NLM_DAILY_RUN",
+  "sourceVersion": "2.0",
+  "canonStatus": "NOT_CANON",
+  "cycle": 116,
+  "generatedAt": "2026-11-20T14:00:07.509Z",
+  "lastAttemptAt": "2026-11-20T14:00:07.509Z",
+  "hours": 36,
+  "packHash": "76880cd6bfea7ffdc11b81757e32e33c6be5cbc15d75104ecfc9276b0f640163",
+  "worldSummary": "output/world_summary_c116.md",
+  "citizenDigest": "output/citizen-day-digest.md",
+  "reports": [
+    {
+      "classification": "FLAGGED",
+      "path": "output/cron-compare/flagged/culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/culture_c116_elliot-graye_packet-v2_anthropic-claude-sonnet-5-5.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/culture_c116_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.staged-0020.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged-0019.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/sports_c116_simon-leary_packet-v2_openai-gpt-5-6-luna.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/sports_c116_talia-finch_packet-v2_openai-gpt-5-6-luna.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/undocked_c116_nia-rook_packet-v2_openai-gpt-6-luna.staged-0021.md"
+    }
+  ],
+  "flaggedReports": [
+    "output/cron-compare/flagged/culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.flags.json"
+  ],
+  "editionDay": false,
+  "firstMorning": false,
+  "routingShadow": {
+    "version": "NLM-DAILY-ROUTER/1",
+    "mode": "shadow",
+    "profile": "REPORTED_DAY",
+    "format": "deep_dive",
+    "length": "default",
+    "activationEligible": true,
+    "reportedDayThreshold": 1,
+    "sourceClasses": [
+      "WORLD_STATE",
+      "CITIZEN_DIGEST",
+      "W1_CHASE",
+      "W2_QUOTES",
+      "W3_PASSED",
+      "FLAGGED_DISPOSITION",
+      "ENGINE_CIVIC_SIGNAL"
+    ],
+    "reasonCodes": [
+      "RHEA_PASSED_4",
+      "REPORTED_THRESHOLD_MET_1"
+    ],
+    "dispositionCounts": {
+      "passed": 4,
+      "rheaFlagged": 1,
+      "neverGated": 0
+    },
+    "fingerprint": "9db49c85c345088c8c6b82f4c12731bd215aec60e31bac26e6e61707cb786135"
+  },
+  "newsroomPulse": {
+    "fingerprint": "05785a17ea518dd9585f22cc1c5387f197c2ec99a4b9106d974ffe6341fb7d7d",
+    "counts": {
+      "angles": 12,
+      "asks": 6,
+      "fanoutAssignments": 8,
+      "w2Ready": 6,
+      "quotes": 17,
+      "passed": 4,
+      "rheaFlagged": 1,
+      "neverGated": 0,
+      "flagged": 1,
+      "pending": 6
+    },
+    "priorCompletedCycle": null
+  },
+  "archiveNotebookId": "417e2d29-4167-420f-a9cc-76fb6b2b7de2",
+  "newsroomNotebookId": "73cd50b5-4b8f-4329-bb42-0783c8d93763",
+  "dryRun": false,
+  "sources": [
+    {
+      "kind": "article",
+      "title": "The Bay Tribune Daily C116 — Elliot Graye: The Council That Moves Around",
+      "hash": "800e3ce9e581e8a09ef84e3ccb808434584b78b47f88b72125b844a9856dac45",
+      "words": 883,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/01-article.md",
+      "path": "output/cron-compare/staged/culture_c116_elliot-graye_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+      "id": "a318f687-145c-49eb-8f15-787f98cedff1",
+      "reused": false
+    },
+    {
+      "kind": "article",
+      "title": "The Bay Tribune Daily C116 — Ines Sorensen: culture_c116_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.staged-0020.md",
+      "hash": "ee75157b595d020f10445645a0378c5c2e5961c02d61cfbd9058bfb5389462a7",
+      "words": 618,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/02-article.md",
+      "path": "output/cron-compare/staged/culture_c116_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.staged-0020.md",
+      "id": "7792db8b-397b-4742-98a1-df377a0f8998",
+      "reused": false
+    },
+    {
+      "kind": "article",
+      "title": "The Bay Tribune Daily C116 — Tamsin Pruitt: The Lives Page, Cycle 116",
+      "hash": "9da914e85e6e3a9e4b94a79d9a967787ef98b39502f833d2e58c88990a0390ab",
+      "words": 1219,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/03-article.md",
+      "path": "output/cron-compare/staged/culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged-0019.md",
+      "id": "eca2c016-a7c2-41cc-a3f2-f106f568a674",
+      "reused": false
+    },
+    {
+      "kind": "article",
+      "title": "The Bay Tribune Daily C116 — Simon Leary: The Wall Does Not Move",
+      "hash": "d65c6d19f5a3d891855ddca67b35c93d6160c0510c4b26cdc7ac51c4ccb5759b",
+      "words": 615,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/04-article.md",
+      "path": "output/cron-compare/staged/sports_c116_simon-leary_packet-v2_openai-gpt-5-6-luna.staged.md",
+      "id": "a5d0c049-b9fe-4fb0-af23-aebef7233834",
+      "reused": false
+    },
+    {
+      "kind": "article",
+      "title": "The Bay Tribune Daily C116 — Talia Finch: sports_c116_talia-finch_packet-v2_openai-gpt-5-6-luna.staged.md",
+      "hash": "143775b7d209ed271dfd9eeea6e697d3b8295a9b2f22a17c9cf2875a7b0c7916",
+      "words": 529,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/05-article.md",
+      "path": "output/cron-compare/staged/sports_c116_talia-finch_packet-v2_openai-gpt-5-6-luna.staged.md",
+      "id": "9836e342-c20a-4817-b4c1-bd3efddd7efe",
+      "reused": false
+    },
+    {
+      "kind": "article",
+      "title": "The Bay Tribune Daily C116 — Nia Rook: UNDOCKED: Marguerite Kimball-Ostrow lets the route lead",
+      "hash": "8751ee046f4dc8ed198faa076c4981b6957541f8bd5f6b7991c20535928cdead",
+      "words": 440,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/06-article.md",
+      "path": "output/cron-compare/staged/undocked_c116_nia-rook_packet-v2_openai-gpt-6-luna.staged-0021.md",
+      "id": "bd175930-1501-4a6d-8a2f-f23c1d9bc7d4",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C116 — Citizens in their own words — Baylight District",
+      "hash": "47aa9088d082551aa6362d94e6b118b50a486e83a3d8978b52971468599276be",
+      "words": 108,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/07-reflections.md",
+      "path": null,
+      "id": "56e4cb80-a530-422d-8f17-b068185eef7a",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C116 — Citizens in their own words — Downtown",
+      "hash": "d6980ae5140ca9671e1efb07839e47474a0d73a08d75d64dfdb40f5968aadf29",
+      "words": 198,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/08-reflections.md",
+      "path": null,
+      "id": "8d811bbe-4f3f-4a32-ab59-376e6a89d06f",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C116 — Citizens in their own words — Eastlake",
+      "hash": "90fd314201b4d81f1ca0a1c1cd1a4bf28f7d0934e290bc8b58912bc4d6191a5f",
+      "words": 61,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/09-reflections.md",
+      "path": null,
+      "id": "62d04003-6436-416b-9d41-95c1f5b7557b",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C116 — Citizens in their own words — Fruitvale",
+      "hash": "f55ecd2deebadcf5defd04406480031b949404ffb4658bdfdede938bb8d02283",
+      "words": 299,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/10-reflections.md",
+      "path": null,
+      "id": "b2a345fe-672f-4471-bf13-6c1163645850",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C116 — Citizens in their own words — Jack London",
+      "hash": "3b841eef292af3b6cd5994e938c958e95fc41fca74a0d47c2ffb7d0ef64c63bd",
+      "words": 316,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/11-reflections.md",
+      "path": null,
+      "id": "e02415ef-72f0-4748-a9d3-12a6a435ed8c",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C116 — Citizens in their own words — Lake Merritt",
+      "hash": "c610104962f6989665f60ec10a951926bf020ef99d584d430c9d8d6b47026776",
+      "words": 933,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/12-reflections.md",
+      "path": null,
+      "id": "7566e5a9-cbf8-4fb9-b0d9-d5345119b69d",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C116 — Citizens in their own words — Piedmont Ave",
+      "hash": "92c354c778f6387bec1090979b492f1079ff6d08dc766369897a35aa6cd5d36e",
+      "words": 340,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/13-reflections.md",
+      "path": null,
+      "id": "cbed8c3f-6130-44ef-a4b7-141404a01fe8",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C116 — Citizens in their own words — Rockridge",
+      "hash": "020468d217edbcd1f418f23a357be03cb31e71965362c50cb244cf677b34ef8c",
+      "words": 604,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/14-reflections.md",
+      "path": null,
+      "id": "ae1dd2d8-fc1b-45d2-b3ae-b4cc8d4a00b3",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C116 — Citizens in their own words — Temescal",
+      "hash": "1cbcddae9e8b46d3bedfd5fd92bd40b6adc0065a425bd0457d175a1512e32df5",
+      "words": 228,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/15-reflections.md",
+      "path": null,
+      "id": "4362ac91-e2ee-4099-90d7-95dc1bbb7b0b",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C116 — Citizens in their own words — Uptown",
+      "hash": "7bc91b49b029d6df4c0eca00b492fffc1793a5a150871e90d9f12b8d05f056c4",
+      "words": 362,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/16-reflections.md",
+      "path": null,
+      "id": "9275a2f9-b2da-4a92-8864-9b325bc18062",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C116 — Citizens in their own words — West Oakland",
+      "hash": "644034923695892c122e392ed22384d1d70a3b6e42e57c95a28079d8303dc5f9",
+      "words": 1240,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/17-reflections.md",
+      "path": null,
+      "id": "8b96c97b-add8-4fc9-91d9-eef98a62299c",
+      "reused": false
+    },
+    {
+      "kind": "world",
+      "title": "The Bay Tribune Daily C116 — Cycle 116 opens — City State",
+      "hash": "8f4f089ed685569fd68b3ebf36f572a4b5d5ec6f5c2a0d9bfa4ea0c9bb371668",
+      "words": 371,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/18-world.md",
+      "path": null,
+      "id": "95468835-6a93-4ea6-953d-ede06576c367",
+      "reused": false
+    },
+    {
+      "kind": "world",
+      "title": "The Bay Tribune Daily C116 — Cycle 116 opens — What Moved",
+      "hash": "51048082cb7d38de9b1315ff7dad80fbe66edcc150698e9badfa201967099ca4",
+      "words": 1351,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/19-world.md",
+      "path": null,
+      "id": "df623a3e-db3a-49f6-b680-d5da7e6ff92e",
+      "reused": false
+    },
+    {
+      "kind": "world",
+      "title": "The Bay Tribune Daily C116 — Cycle 116 opens — Who Lived It",
+      "hash": "200a081969471decc0487770fba398f04f5d9cc7e9b8774eeeddb8a239d8c176",
+      "words": 494,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/20-world.md",
+      "path": null,
+      "id": "ab0f8610-1804-4068-89c0-701bb6cbd820",
+      "reused": false
+    },
+    {
+      "kind": "world",
+      "title": "The Bay Tribune Daily C116 — Cycle 116 opens — Sports",
+      "hash": "c8d7d2ad6631bec5c62f51b5b9b21e73676a2e6b012170e4f2aef973a1febf47",
+      "words": 4135,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/21-world.md",
+      "path": null,
+      "id": "dc2d9892-db82-43d7-8f60-bedc96f3257a",
+      "reused": false
+    },
+    {
+      "kind": "world",
+      "title": "The Bay Tribune Daily C116 — Cycle 116 opens — Evening Texture",
+      "hash": "bf3bd60a9ee096ac88ffbaa677a5fb0cf736783a4b2417b31d8389de47f12126",
+      "words": 116,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/22-world.md",
+      "path": null,
+      "id": "8947aef0-c668-4cd4-8b1f-15fe350d5b76",
+      "reused": false
+    },
+    {
+      "kind": "world",
+      "title": "The Bay Tribune Daily C116 — Cycle 116 opens — World Events",
+      "hash": "1b813b0832da0a613255fcac4b530706de1b36aad462858bb4020ac4c028a4f7",
+      "words": 142,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/23-world.md",
+      "path": null,
+      "id": "941496be-a06a-403d-887c-c5fd61b9cbc6",
+      "reused": false
+    },
+    {
+      "kind": "world",
+      "title": "The Bay Tribune Daily C116 — Cycle 116 opens — Chaos Events",
+      "hash": "29a325290ac99df7aca258cddf9f7bb9500de01e2e20a00cfbb4a6fd6441a548",
+      "words": 231,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/24-world.md",
+      "path": null,
+      "id": "f988b664-8ea1-496b-a3f7-52f1ba69fb21",
+      "reused": false
+    },
+    {
+      "kind": "world",
+      "title": "The Bay Tribune Daily C116 — Cycle 116 opens — Three-Cycle Trends",
+      "hash": "1695e2c31f43ac09c9043a9a3e84e95a4712ae39b30c6d63f58052c4eb14cce0",
+      "words": 95,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/25-world.md",
+      "path": null,
+      "id": "0c0a38e9-b357-4392-953e-d06ac4b8a55c",
+      "reused": false
+    }
+  ],
+  "sourceIds": [
+    "a318f687-145c-49eb-8f15-787f98cedff1",
+    "7792db8b-397b-4742-98a1-df377a0f8998",
+    "eca2c016-a7c2-41cc-a3f2-f106f568a674",
+    "a5d0c049-b9fe-4fb0-af23-aebef7233834",
+    "9836e342-c20a-4817-b4c1-bd3efddd7efe",
+    "bd175930-1501-4a6d-8a2f-f23c1d9bc7d4",
+    "56e4cb80-a530-422d-8f17-b068185eef7a",
+    "8d811bbe-4f3f-4a32-ab59-376e6a89d06f",
+    "62d04003-6436-416b-9d41-95c1f5b7557b",
+    "b2a345fe-672f-4471-bf13-6c1163645850",
+    "e02415ef-72f0-4748-a9d3-12a6a435ed8c",
+    "7566e5a9-cbf8-4fb9-b0d9-d5345119b69d",
+    "cbed8c3f-6130-44ef-a4b7-141404a01fe8",
+    "ae1dd2d8-fc1b-45d2-b3ae-b4cc8d4a00b3",
+    "4362ac91-e2ee-4099-90d7-95dc1bbb7b0b",
+    "9275a2f9-b2da-4a92-8864-9b325bc18062",
+    "8b96c97b-add8-4fc9-91d9-eef98a62299c",
+    "95468835-6a93-4ea6-953d-ede06576c367",
+    "df623a3e-db3a-49f6-b680-d5da7e6ff92e",
+    "ab0f8610-1804-4068-89c0-701bb6cbd820",
+    "dc2d9892-db82-43d7-8f60-bedc96f3257a",
+    "8947aef0-c668-4cd4-8b1f-15fe350d5b76",
+    "941496be-a06a-403d-887c-c5fd61b9cbc6",
+    "f988b664-8ea1-496b-a3f7-52f1ba69fb21",
+    "0c0a38e9-b357-4392-953e-d06ac4b8a55c"
+  ],
+  "audioPresentation": {
+    "format": "deep_dive",
+    "length": "default",
+    "source": "router",
+    "profile": "REPORTED_DAY"
+  },
+  "audioArtifactId": "31a5949c-6477-47c5-8f3e-12e3a627ee0c",
+  "audioSources": [
+    {
+      "kind": "article",
+      "title": "The Bay Tribune Daily C116 — Elliot Graye: The Council That Moves Around",
+      "hash": "800e3ce9e581e8a09ef84e3ccb808434584b78b47f88b72125b844a9856dac45",
+      "words": 883,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/01-article.md",
+      "path": "output/cron-compare/staged/culture_c116_elliot-graye_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+      "id": "a318f687-145c-49eb-8f15-787f98cedff1",
+      "reused": false
+    },
+    {
+      "kind": "article",
+      "title": "The Bay Tribune Daily C116 — Ines Sorensen: culture_c116_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.staged-0020.md",
+      "hash": "ee75157b595d020f10445645a0378c5c2e5961c02d61cfbd9058bfb5389462a7",
+      "words": 618,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/02-article.md",
+      "path": "output/cron-compare/staged/culture_c116_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.staged-0020.md",
+      "id": "7792db8b-397b-4742-98a1-df377a0f8998",
+      "reused": false
+    },
+    {
+      "kind": "article",
+      "title": "The Bay Tribune Daily C116 — Tamsin Pruitt: The Lives Page, Cycle 116",
+      "hash": "9da914e85e6e3a9e4b94a79d9a967787ef98b39502f833d2e58c88990a0390ab",
+      "words": 1219,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/03-article.md",
+      "path": "output/cron-compare/staged/culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged-0019.md",
+      "id": "eca2c016-a7c2-41cc-a3f2-f106f568a674",
+      "reused": false
+    },
+    {
+      "kind": "article",
+      "title": "The Bay Tribune Daily C116 — Simon Leary: The Wall Does Not Move",
+      "hash": "d65c6d19f5a3d891855ddca67b35c93d6160c0510c4b26cdc7ac51c4ccb5759b",
+      "words": 615,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/04-article.md",
+      "path": "output/cron-compare/staged/sports_c116_simon-leary_packet-v2_openai-gpt-5-6-luna.staged.md",
+      "id": "a5d0c049-b9fe-4fb0-af23-aebef7233834",
+      "reused": false
+    },
+    {
+      "kind": "article",
+      "title": "The Bay Tribune Daily C116 — Talia Finch: sports_c116_talia-finch_packet-v2_openai-gpt-5-6-luna.staged.md",
+      "hash": "143775b7d209ed271dfd9eeea6e697d3b8295a9b2f22a17c9cf2875a7b0c7916",
+      "words": 529,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/05-article.md",
+      "path": "output/cron-compare/staged/sports_c116_talia-finch_packet-v2_openai-gpt-5-6-luna.staged.md",
+      "id": "9836e342-c20a-4817-b4c1-bd3efddd7efe",
+      "reused": false
+    },
+    {
+      "kind": "article",
+      "title": "The Bay Tribune Daily C116 — Nia Rook: UNDOCKED: Marguerite Kimball-Ostrow lets the route lead",
+      "hash": "8751ee046f4dc8ed198faa076c4981b6957541f8bd5f6b7991c20535928cdead",
+      "words": 440,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/06-article.md",
+      "path": "output/cron-compare/staged/undocked_c116_nia-rook_packet-v2_openai-gpt-6-luna.staged-0021.md",
+      "id": "bd175930-1501-4a6d-8a2f-f23c1d9bc7d4",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C116 — Citizens in their own words — Baylight District",
+      "hash": "47aa9088d082551aa6362d94e6b118b50a486e83a3d8978b52971468599276be",
+      "words": 108,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/07-reflections.md",
+      "path": null,
+      "id": "56e4cb80-a530-422d-8f17-b068185eef7a",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C116 — Citizens in their own words — Downtown",
+      "hash": "d6980ae5140ca9671e1efb07839e47474a0d73a08d75d64dfdb40f5968aadf29",
+      "words": 198,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/08-reflections.md",
+      "path": null,
+      "id": "8d811bbe-4f3f-4a32-ab59-376e6a89d06f",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C116 — Citizens in their own words — Eastlake",
+      "hash": "90fd314201b4d81f1ca0a1c1cd1a4bf28f7d0934e290bc8b58912bc4d6191a5f",
+      "words": 61,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/09-reflections.md",
+      "path": null,
+      "id": "62d04003-6436-416b-9d41-95c1f5b7557b",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C116 — Citizens in their own words — Fruitvale",
+      "hash": "f55ecd2deebadcf5defd04406480031b949404ffb4658bdfdede938bb8d02283",
+      "words": 299,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/10-reflections.md",
+      "path": null,
+      "id": "b2a345fe-672f-4471-bf13-6c1163645850",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C116 — Citizens in their own words — Jack London",
+      "hash": "3b841eef292af3b6cd5994e938c958e95fc41fca74a0d47c2ffb7d0ef64c63bd",
+      "words": 316,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/11-reflections.md",
+      "path": null,
+      "id": "e02415ef-72f0-4748-a9d3-12a6a435ed8c",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C116 — Citizens in their own words — Lake Merritt",
+      "hash": "c610104962f6989665f60ec10a951926bf020ef99d584d430c9d8d6b47026776",
+      "words": 933,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/12-reflections.md",
+      "path": null,
+      "id": "7566e5a9-cbf8-4fb9-b0d9-d5345119b69d",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C116 — Citizens in their own words — Piedmont Ave",
+      "hash": "92c354c778f6387bec1090979b492f1079ff6d08dc766369897a35aa6cd5d36e",
+      "words": 340,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/13-reflections.md",
+      "path": null,
+      "id": "cbed8c3f-6130-44ef-a4b7-141404a01fe8",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C116 — Citizens in their own words — Rockridge",
+      "hash": "020468d217edbcd1f418f23a357be03cb31e71965362c50cb244cf677b34ef8c",
+      "words": 604,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/14-reflections.md",
+      "path": null,
+      "id": "ae1dd2d8-fc1b-45d2-b3ae-b4cc8d4a00b3",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C116 — Citizens in their own words — Temescal",
+      "hash": "1cbcddae9e8b46d3bedfd5fd92bd40b6adc0065a425bd0457d175a1512e32df5",
+      "words": 228,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/15-reflections.md",
+      "path": null,
+      "id": "4362ac91-e2ee-4099-90d7-95dc1bbb7b0b",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C116 — Citizens in their own words — Uptown",
+      "hash": "7bc91b49b029d6df4c0eca00b492fffc1793a5a150871e90d9f12b8d05f056c4",
+      "words": 362,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/16-reflections.md",
+      "path": null,
+      "id": "9275a2f9-b2da-4a92-8864-9b325bc18062",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C116 — Citizens in their own words — West Oakland",
+      "hash": "644034923695892c122e392ed22384d1d70a3b6e42e57c95a28079d8303dc5f9",
+      "words": 1240,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/17-reflections.md",
+      "path": null,
+      "id": "8b96c97b-add8-4fc9-91d9-eef98a62299c",
+      "reused": false
+    },
+    {
+      "kind": "world",
+      "title": "The Bay Tribune Daily C116 — Cycle 116 opens — City State",
+      "hash": "8f4f089ed685569fd68b3ebf36f572a4b5d5ec6f5c2a0d9bfa4ea0c9bb371668",
+      "words": 371,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/18-world.md",
+      "path": null,
+      "id": "95468835-6a93-4ea6-953d-ede06576c367",
+      "reused": false
+    },
+    {
+      "kind": "world",
+      "title": "The Bay Tribune Daily C116 — Cycle 116 opens — What Moved",
+      "hash": "51048082cb7d38de9b1315ff7dad80fbe66edcc150698e9badfa201967099ca4",
+      "words": 1351,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/19-world.md",
+      "path": null,
+      "id": "df623a3e-db3a-49f6-b680-d5da7e6ff92e",
+      "reused": false
+    },
+    {
+      "kind": "world",
+      "title": "The Bay Tribune Daily C116 — Cycle 116 opens — Who Lived It",
+      "hash": "200a081969471decc0487770fba398f04f5d9cc7e9b8774eeeddb8a239d8c176",
+      "words": 494,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/20-world.md",
+      "path": null,
+      "id": "ab0f8610-1804-4068-89c0-701bb6cbd820",
+      "reused": false
+    },
+    {
+      "kind": "world",
+      "title": "The Bay Tribune Daily C116 — Cycle 116 opens — Sports",
+      "hash": "c8d7d2ad6631bec5c62f51b5b9b21e73676a2e6b012170e4f2aef973a1febf47",
+      "words": 4135,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/21-world.md",
+      "path": null,
+      "id": "dc2d9892-db82-43d7-8f60-bedc96f3257a",
+      "reused": false
+    },
+    {
+      "kind": "world",
+      "title": "The Bay Tribune Daily C116 — Cycle 116 opens — Evening Texture",
+      "hash": "bf3bd60a9ee096ac88ffbaa677a5fb0cf736783a4b2417b31d8389de47f12126",
+      "words": 116,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/22-world.md",
+      "path": null,
+      "id": "8947aef0-c668-4cd4-8b1f-15fe350d5b76",
+      "reused": false
+    },
+    {
+      "kind": "world",
+      "title": "The Bay Tribune Daily C116 — Cycle 116 opens — World Events",
+      "hash": "1b813b0832da0a613255fcac4b530706de1b36aad462858bb4020ac4c028a4f7",
+      "words": 142,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/23-world.md",
+      "path": null,
+      "id": "941496be-a06a-403d-887c-c5fd61b9cbc6",
+      "reused": false
+    },
+    {
+      "kind": "world",
+      "title": "The Bay Tribune Daily C116 — Cycle 116 opens — Chaos Events",
+      "hash": "29a325290ac99df7aca258cddf9f7bb9500de01e2e20a00cfbb4a6fd6441a548",
+      "words": 231,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/24-world.md",
+      "path": null,
+      "id": "f988b664-8ea1-496b-a3f7-52f1ba69fb21",
+      "reused": false
+    },
+    {
+      "kind": "world",
+      "title": "The Bay Tribune Daily C116 — Cycle 116 opens — Three-Cycle Trends",
+      "hash": "1695e2c31f43ac09c9043a9a3e84e95a4712ae39b30c6d63f58052c4eb14cce0",
+      "words": 95,
+      "file": "output/notebooklm/daily/c116/76880cd6bfea/sources/25-world.md",
+      "path": null,
+      "id": "0c0a38e9-b357-4392-953e-d06ac4b8a55c",
+      "reused": false
+    }
+  ],
+  "audioPath": "output/notebooklm/daily/c116/76880cd6bfea/godworld_daily_c116.m4a",
+  "driveLink": "https://drive.google.com/file/d/1ctmqO46LBqmfQZT36jyf7EZ9OzpfICBf/view?usp=drivesdk",
+  "opsReportArtifactId": "f7d2bacd-e424-436d-b322-621535da5192",
+  "opsReportPath": "output/notebooklm/daily/c116/76880cd6bfea/ops-report-c116.md",
+  "opsReportDelivered": true
+}

@@ -1,0 +1,9 @@
+# Jack London, in their own words
+
+## Hector Leech — Dishwasher
+
+> A full shift in the pit is a marathon, not a sprint. You're in the steam before the first ticket even prints, and the heat just sits on you like a second skin. The sprayer's going, the racks are clanking, and your hands are in and out of the water so much they prune up and crack. But the rhythm is what keeps you going — the plates come in dirty, you send them out clean, and there's a kind of peace in that. The breaks are short, just enough to catch your breath and drink some water, and then you're back at it. What keeps me there? It's the people. The crew at Green & Gold, they look out for each other. And honestly, there's something about being part of the machine that keeps the whole place humming. I've been doing this a long time, and I'm not looking to be anywhere else.
+
+## Trenton Nawan — Server
+
+> {"answer":"quote","quote":"You want to know what the work actually looks like? Stand at the dish pit at Green & Gold on a Saturday night. That's where you learn the real rhythm of this neighborhood — not the menu, not the bar rail, the pit. Hector's got the hardest job in the building and he's the first one nobody sees. But that sink is the front door to everything else. Every plate that comes back tells you something — who's celebrating, who's just getting through, who's here because rent went up again and they're treating themselves to one decent meal. I've been serving in this neighborhood long enough to know the kitchen is the heartbeat, and the dishwasher is the one keeping time. You start there, you learn what this work really is: showing up, keeping pace, and not letting the heat break you. That's Jack London in a steel sink full of suds."},"fact_ids":["F-cb064eda4300","F-f6c538f90c59"],"basis":"lived-context","unverifiedLead":null,"abstain_reason":null}

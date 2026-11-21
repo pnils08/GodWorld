@@ -1,0 +1,30 @@
+{
+  "model": "x-ai/grok-4.3",
+  "calls": [
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Hector Leech"
+      },
+      "resultChars": 550,
+      "resultHead": "[C111 · daily · Mason Ortega] Green & Gold Tavern in Jack London keeps its kitchen running on the rhythm of the pit. Dishwasher Hector Leech stands at the sink, hands moving through steam and racks. \"A full shift in the pit is a marathon, not a sprint. You're in the steam before the first ticket even prints, and the heat just sits on you like a second skin. The sprayer's going, the racks are clanking, and your hands are in and out of the water so much they prune up and crack. But the rhythm is what keeps you going — you get into a groove where "
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Green & Gold Tavern"
+      },
+      "resultChars": 2166,
+      "resultHead": "[C111 · daily · Mason Ortega] Green & Gold Tavern in Jack London keeps its kitchen running on the rhythm of the pit. Dishwasher Hector Leech stands at the sink, hands moving through steam and racks. \"A full shift in the pit is a marathon, not a sprint. You're in the steam before the first ticket even prints, and the heat just sits on you like a second skin. The sprayer's going, the racks are clanking, and your hands are in and out of the water so much they prune up and crack. But the rhythm is what keeps you going — you get into a groove where \n[C86 · edition] I walk past Dockhouse BBQ — close"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Karim Avery"
+      },
+      "resultChars": 187,
+      "resultHead": "No published piece from before C116 came back for \"Karim Avery\". That is not proof the paper never covered it (an empty answer can also be a failed lookup) — do not write that it did not."
+    }
+  ],
+  "ranAt": "2026-11-21T00:15:21.915Z"
+}

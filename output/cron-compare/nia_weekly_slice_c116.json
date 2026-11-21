@@ -1,0 +1,113 @@
+{
+  "v": "NIA-SLICE/1",
+  "cycle": 116,
+  "empty": false,
+  "pilots": [
+    {
+      "POPID": "POP-01188",
+      "episodes": 2,
+      "creditsDelta": 0,
+      "combatEvents": 0,
+      "mishapCount": 0,
+      "hasWindowed": false,
+      "name": "Marguerite Kimball-Ostrow",
+      "hood": "Piedmont Ave",
+      "roleType": "Elementary Teacher",
+      "employerBizId": "BIZ-00016",
+      "tier": "4",
+      "career": [],
+      "who": "Marguerite Kimball-Ostrow — Elementary Teacher",
+      "nights": [
+        "Marguerite Kimball-Ostrow's Sunday night on UNDOCKED: went through Sol, Sirius, Nova Terra, Furud, Acrux, Botein, Intercrus, Atlas, Cedarhold, Garnet, Achernar, Ruchbah, Ironhollow, Gsc 0041, Pherkad and Shaula; earned Wanderer (9 points), Voyager I (6.4 points), Maiden Jump (5 points), Cartographer (4.8 points), Voyager II (1.6 points), Chronicler (0.6 points), Master Explorer (0.5 points), Far Traveler (0.01 points) and Jump Master (0.01 points); came out even on credits; flew until the show's time ran out.",
+        "Marguerite Kimball-Ostrow's Wednesday night on UNDOCKED: went through Antares, Gsc 0041, Shaula, Alnair, Wolf 1061, Gsc 0031, Gsc 0021, Gliese 876, Felis, Biham, Gsc 0035, Jasmine, Mirach, Azha, Groombridge 1618, Silverbend, Alnilam and Jishui; earned Cartographer (4.5 points), Voyager I (3.2 points), Voyager II (1.5 points), Far Traveler (0.01 points) and Jump Master (0.01 points); came out even on credits; flew until the show's time ran out."
+      ],
+      "nightSource": "record"
+    },
+    {
+      "POPID": "POP-00918",
+      "episodes": 2,
+      "creditsDelta": 0,
+      "combatEvents": 0,
+      "mishapCount": 0,
+      "hasWindowed": false,
+      "name": "Manju Abebe",
+      "hood": "Chinatown",
+      "roleType": "Plumber",
+      "employerBizId": "UNTRACKED",
+      "tier": "4",
+      "career": [],
+      "who": "Manju Abebe — Plumber",
+      "nights": [
+        "Manju Abebe's Monday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes, Ridgecrest, Hatysa and Nembus; earned Wanderer (9 points), Voyager I (5.2 points), Maiden Jump (5 points), Cartographer (3.9 points), The Truth Is Out There (2.5 points), Voyager II (1.3 points), Master Explorer (0.5 points), Far Traveler (0.01 points) and Jump Master (0.01 points); came out even on credits; flew until the show's time ran out.",
+        "Manju Abebe's Thursday night on UNDOCKED: went through Sirius, Nova Terra, Furud, Acrux, Botein, Intercrus, Gsc 0044, Atlas, Cedarhold, Achernar, Ruchbah, Ironhollow, Pherkad, Shaula, Alnair, Wolf 1061, Gsc 0031 and Gsc 0021; earned Cartographer (5.1 points), Voyager I (4.4 points), Voyager II (1.7 points), Chronicler (0.6 points), Far Traveler (0.01 points) and Jump Master (0.01 points); came out even on credits; flew until the show's time ran out."
+      ],
+      "nightSource": "record"
+    },
+    {
+      "POPID": "POP-00663",
+      "episodes": 2,
+      "creditsDelta": 1037,
+      "combatEvents": 5,
+      "mishapCount": 0,
+      "hasWindowed": false,
+      "name": "Soo Loo",
+      "hood": "Downtown",
+      "roleType": "Corporate Accountant",
+      "employerBizId": "SELF_EMPLOYED",
+      "tier": "4",
+      "career": [],
+      "who": "Soo Loo — Corporate Accountant",
+      "nights": [
+        "Soo Loo's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti and Electra; took the First Hunt: Belt-Grazers contract; sold 4 iron ore; got into 5 fights; earned Chronicler (5.4 points), Wanderer (3 points), Voyager I (1.2 points), Cartographer (0.9 points), Open For Business (0.3 points), Voyager II (0.3 points) and High-Volume Trader (0.03 points); came out 24 credits up; flew until the show's time ran out.",
+        "Soo Loo's Friday night on UNDOCKED: went through Alpha Centauri, Sol, Sirius, Nova Terra, Furud, Homam, Antares, Gsc 0041, Pherkad, Synchrony, Node Alpha, The Experiment, Achernar, Garnet and Atlas; took the Copper Requisition, Cracking the Shell, Local Sector Survey and Market Participation: Selling contracts; finished First Hunt: Belt-Grazers for 1,000 credits; sold 8 copper ore and 5 creature carapace; earned Wanderer (5 points), Voyager I (4.8 points), Cartographer (3.6 points), Voyager II (1.2 points), Open For Business (0.6 points), Master Explorer (0.5 points), Weapons Master (0.5 points), High-Volume Trader (0.05 points), Millionaire (0.03 points), Far Traveler (0.01 points) and Jump Master (0.01 points); came out 1,013 credits up; flew until the show's time ran out."
+      ],
+      "nightSource": "record"
+    }
+  ],
+  "standings": {
+    "asOf": "2026-11-21T02:55:59.339Z",
+    "leader": {
+      "Rank": 1,
+      "POPID": "POP-00298",
+      "Holder": "Luis Taz",
+      "Episodes": 3,
+      "PointsTotal": 45.19,
+      "CreditsTotal": 0,
+      "CombatTotal": 12,
+      "MishapTotal": 0,
+      "BestMagnitude": 2,
+      "LastAiredCycle": 115,
+      "CyclesLed": 3,
+      "CurrentStreak": 3,
+      "PointsPending": 0
+    }
+  },
+  "story": {
+    "ref": "undocked-week:weekly-c116",
+    "label": "UNDOCKED week-in-review c116",
+    "kind": "undocked-digest",
+    "angle": "UNDOCKED week: pilots who flew this cycle (Marguerite Kimball-Ostrow, Manju Abebe, Soo Loo). Standings: Luis Taz leads the board — rank #1, 45.19 achievement points, 0 credits, 3 cycle(s) led, current streak 3. In the chair: Marguerite Kimball-Ostrow — Elementary Teacher; Manju Abebe — Plumber; Soo Loo — Corporate Accountant.",
+    "facts": [
+      "Marguerite Kimball-Ostrow's Sunday night on UNDOCKED: went through Sol, Sirius, Nova Terra, Furud, Acrux, Botein, Intercrus, Atlas, Cedarhold, Garnet, Achernar, Ruchbah, Ironhollow, Gsc 0041, Pherkad and Shaula; earned Wanderer (9 points), Voyager I (6.4 points), Maiden Jump (5 points), Cartographer (4.8 points), Voyager II (1.6 points), Chronicler (0.6 points), Master Explorer (0.5 points), Far Traveler (0.01 points) and Jump Master (0.01 points); came out even on credits; flew until the show's time ran out.",
+      "Marguerite Kimball-Ostrow's Wednesday night on UNDOCKED: went through Antares, Gsc 0041, Shaula, Alnair, Wolf 1061, Gsc 0031, Gsc 0021, Gliese 876, Felis, Biham, Gsc 0035, Jasmine, Mirach, Azha, Groombridge 1618, Silverbend, Alnilam and Jishui; earned Cartographer (4.5 points), Voyager I (3.2 points), Voyager II (1.5 points), Far Traveler (0.01 points) and Jump Master (0.01 points); came out even on credits; flew until the show's time ran out.",
+      "Manju Abebe's Monday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale, Miaplacidus, Cervantes, Ridgecrest, Hatysa and Nembus; earned Wanderer (9 points), Voyager I (5.2 points), Maiden Jump (5 points), Cartographer (3.9 points), The Truth Is Out There (2.5 points), Voyager II (1.3 points), Master Explorer (0.5 points), Far Traveler (0.01 points) and Jump Master (0.01 points); came out even on credits; flew until the show's time ran out.",
+      "Manju Abebe's Thursday night on UNDOCKED: went through Sirius, Nova Terra, Furud, Acrux, Botein, Intercrus, Gsc 0044, Atlas, Cedarhold, Achernar, Ruchbah, Ironhollow, Pherkad, Shaula, Alnair, Wolf 1061, Gsc 0031 and Gsc 0021; earned Cartographer (5.1 points), Voyager I (4.4 points), Voyager II (1.7 points), Chronicler (0.6 points), Far Traveler (0.01 points) and Jump Master (0.01 points); came out even on credits; flew until the show's time ran out.",
+      "Soo Loo's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti and Electra; took the First Hunt: Belt-Grazers contract; sold 4 iron ore; got into 5 fights; earned Chronicler (5.4 points), Wanderer (3 points), Voyager I (1.2 points), Cartographer (0.9 points), Open For Business (0.3 points), Voyager II (0.3 points) and High-Volume Trader (0.03 points); came out 24 credits up; flew until the show's time ran out.",
+      "Soo Loo's Friday night on UNDOCKED: went through Alpha Centauri, Sol, Sirius, Nova Terra, Furud, Homam, Antares, Gsc 0041, Pherkad, Synchrony, Node Alpha, The Experiment, Achernar, Garnet and Atlas; took the Copper Requisition, Cracking the Shell, Local Sector Survey and Market Participation: Selling contracts; finished First Hunt: Belt-Grazers for 1,000 credits; sold 8 copper ore and 5 creature carapace; earned Wanderer (5 points), Voyager I (4.8 points), Cartographer (3.6 points), Voyager II (1.2 points), Open For Business (0.6 points), Master Explorer (0.5 points), Weapons Master (0.5 points), High-Volume Trader (0.05 points), Millionaire (0.03 points), Far Traveler (0.01 points) and Jump Master (0.01 points); came out 1,013 credits up; flew until the show's time ran out.",
+      "Marguerite Kimball-Ostrow — Elementary Teacher (ledger)",
+      "Manju Abebe — Plumber (ledger)",
+      "Soo Loo — Corporate Accountant (ledger)"
+    ],
+    "citizens": [
+      "Marguerite Kimball-Ostrow — Elementary Teacher, UNDOCKED cast pilot",
+      "Manju Abebe — Plumber, UNDOCKED cast pilot",
+      "Soo Loo — Corporate Accountant, UNDOCKED cast pilot"
+    ],
+    "popids": [
+      "POP-01188",
+      "POP-00918",
+      "POP-00663"
+    ]
+  },
+  "generatedAt": "2026-11-21T14:15:10.225Z"
+}

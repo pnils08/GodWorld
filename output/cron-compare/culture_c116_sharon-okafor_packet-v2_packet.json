@@ -1,0 +1,1324 @@
+{
+  "stage": "report",
+  "desk": "culture",
+  "cycle": "116",
+  "persona": "sharon-okafor",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Sharon Okafor",
+    "popid": "POP-00159"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-lifestyle",
+      "angle": "Vinnie Keane is fading — how the city follows its names",
+      "label": "Benji Dillon leads the fame table; 5 fading, 5 new",
+      "hookLine": "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading (fame 54, cooling), 7 media mentions.",
+      "hood": "Piedmont Ave",
+      "citizens": [
+        "Vinnie Keane (POP-00001)",
+        "Theo Banks (POP-01056)",
+        "Lena Cross (POP-00539)",
+        "Benji Dillon (POP-00018)",
+        "P Slayer (POP-00008)",
+        "Nia Rook (POP-01076)"
+      ],
+      "popids": [
+        "POP-00001",
+        "POP-01056",
+        "POP-00539",
+        "POP-00018",
+        "POP-00008",
+        "POP-01076"
+      ],
+      "ref": "output/beats/Cultural_Ledger.jsonl @C116",
+      "cycle": 116
+    }
+  },
+  "angle": "output/cron-compare/culture_c116_sharon-okafor_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 4,
+  "quotes": [
+    {
+      "pop": "POP-00001",
+      "name": "Vinnie Keane",
+      "quote": "My daily life hasn't changed that much since I retired. I still get recognized around town, like at the grocery store. People know me, and I like that. I'm still involved with the A's, just in a different way now. I'm not on the field every day, but I'm still around the neighborhood, and folks say hello. It's a good life.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; openly affectionate, big-hearted; curious, open to new things; unshakable, calm under anything; principled, plays it straight; close to family; often out in the neighborhood; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"My daily life hasn't changed that much since I retired. I still get recognized around town, like at the grocery store. People know me, and I like that. I'm still involved with the A's, just in a different way now. I'm not on the field every day, but I'm still around the neighborhood, and folks say hello. It's a good life.\",\n  \"fact_ids\": [\"F-e612531b6c8f\", \"F-1e9cdb0dd15b\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-e612531b6c8f",
+          "F-1e9cdb0dd15b"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00001-fcb0a992a7",
+        "authoredQuote": true,
+        "publishableQuote": "My daily life hasn't changed that much since I retired. I still get recognized around town, like at the grocery store. People know me, and I like that. I'm still involved with the A's, just in a different way now. I'm not on the field every day, but I'm still around the neighborhood, and folks say hello. It's a good life."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00001",
+          "name": "Vinnie Keane",
+          "role": "Former Designated Hitter, Oakland A's Legend",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sharon Okafor",
+          "question": "How does Vinnie Keane's daily life reflect his fading fame? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-lifestyle",
+          "hood": "Piedmont Ave",
+          "focus": "Vinnie Keane",
+          "src": "output/beats/Cultural_Ledger.jsonl @C116"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Piedmont Ave",
+          "evidence": [
+            {
+              "id": "EV-c69730a549",
+              "src": "output/beats/Cultural_Ledger.jsonl @C116",
+              "text": "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading (fame 54, cooling), 7 media mentions."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading (fame 54, cooling), 7 media mentions.",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-e612531b6c8f"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading — the where-are-they-now file (fame 54, cooling), 7 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-496c5dbb8f50"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "Benji Dillon leads the fame table; 5 fading, 5 new",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-79f7ba9836f7"
+          },
+          {
+            "t": "FACT",
+            "text": "Theo Banks (rapper), Arts, Uptown, Regional-tier — fading — the where-are-they-now file (fame 6, cooling), 8 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-f2158c401ff3"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 2, cooling), 17 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-64ea109af439"
+          },
+          {
+            "t": "FACT",
+            "text": "Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 55, rising), 1 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-0ba845380af2"
+          },
+          {
+            "t": "FACT",
+            "text": "P Slayer (Journalist, Fan Columnist - Sports), Sports, West Oakland, Local-tier — new on the culture record this cycle (fame 25, rising), 0 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-4b771d53af18"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Piedmont Ave",
+            "src": "Simulation_Ledger profile for POP-00001",
+            "id": "F-1e9cdb0dd15b"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01056",
+      "name": "Theo Banks",
+      "quote": "I've seen Vinnie Keane's name around, heard he's retired. That's a big deal for the A's, you know? Losing a face like that, it's not just about the player, it's about what they mean to the community. I don't know him personally, but you can feel the impact. People around here talk about it, how it's another change for the team.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen Vinnie Keane's name around, heard he's retired. That's a big deal for the A's, you know? Losing a face like that, it's not just about the player, it's about what they mean to the community. I don't know him personally, but you can feel the impact. People around here talk about it, how it's another change for the team.\",\n  \"fact_ids\": [\"F-e612531b6c8f\", \"F-092f0b554bf6\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-e612531b6c8f",
+          "F-092f0b554bf6"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01056-6c5f3f5d09",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen Vinnie Keane's name around, heard he's retired. That's a big deal for the A's, you know? Losing a face like that, it's not just about the player, it's about what they mean to the community. I don't know him personally, but you can feel the impact. People around here talk about it, how it's another change for the team."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01056",
+          "name": "Theo Banks",
+          "role": "rapper",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sharon Okafor",
+          "question": "What have you seen, felt, or understood about \"Vinnie Keane\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-lifestyle",
+          "hood": "Piedmont Ave",
+          "focus": "Vinnie Keane",
+          "src": "output/beats/Cultural_Ledger.jsonl @C116"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Theo Banks — rapper — Uptown",
+          "evidence": [
+            {
+              "id": "EV-4429384e4b",
+              "src": "output/beats/Cultural_Ledger.jsonl @C116",
+              "text": "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading (fame 54, cooling), 7 media mentions."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Theo Banks (rapper), Arts, Uptown, Regional-tier — fading — the where-are-they-now file (fame 6, cooling), 8 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-f2158c401ff3"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "Benji Dillon leads the fame table; 5 fading, 5 new",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-79f7ba9836f7"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading (fame 54, cooling), 7 media mentions.",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-e612531b6c8f"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading — the where-are-they-now file (fame 54, cooling), 7 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-496c5dbb8f50"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 2, cooling), 17 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-64ea109af439"
+          },
+          {
+            "t": "FACT",
+            "text": "Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 55, rising), 1 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-0ba845380af2"
+          },
+          {
+            "t": "FACT",
+            "text": "P Slayer (Journalist, Fan Columnist - Sports), Sports, West Oakland, Local-tier — new on the culture record this cycle (fame 25, rising), 0 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-4b771d53af18"
+          },
+          {
+            "t": "FACT",
+            "text": "Theo Banks — rapper — Uptown",
+            "src": "Simulation_Ledger profile for POP-01056",
+            "id": "F-092f0b554bf6"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00539",
+      "name": "Lena Cross",
+      "quote": "Vinnie Keane is a neighborhood treasure. I've seen him around Piedmont Ave, and we chat about the A's. His retirement was a big deal, and it's been nice to see him stay connected to the community. He's still a familiar face, and people appreciate that.",
+      "disp": "draws people in, deep with them",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Vinnie Keane is a neighborhood treasure. I've seen him around Piedmont Ave, and we chat about the A's. His retirement was a big deal, and it's been nice to see him stay connected to the community. He's still a familiar face, and people appreciate that.\",\n  \"fact_ids\": [\"F-e612531b6c8f\", \"F-f580a535e402\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-e612531b6c8f",
+          "F-f580a535e402"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00539-a6dfe37f6c",
+        "authoredQuote": true,
+        "publishableQuote": "Vinnie Keane is a neighborhood treasure. I've seen him around Piedmont Ave, and we chat about the A's. His retirement was a big deal, and it's been nice to see him stay connected to the community. He's still a familiar face, and people appreciate that."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00539",
+          "name": "Lena Cross",
+          "role": "Actor",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sharon Okafor",
+          "question": "As a resident of Piedmont Ave, what have you seen, felt, or understood about \"Vinnie Keane\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-lifestyle",
+          "hood": "Piedmont Ave",
+          "focus": "Vinnie Keane",
+          "src": "output/beats/Cultural_Ledger.jsonl @C116"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Lena Cross — Actor — Piedmont Ave",
+          "evidence": [
+            {
+              "id": "EV-ffc7bb338a",
+              "src": "output/beats/Cultural_Ledger.jsonl @C116",
+              "text": "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading (fame 54, cooling), 7 media mentions."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 2, cooling), 17 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-64ea109af439"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "Benji Dillon leads the fame table; 5 fading, 5 new",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-79f7ba9836f7"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading (fame 54, cooling), 7 media mentions.",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-e612531b6c8f"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading — the where-are-they-now file (fame 54, cooling), 7 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-496c5dbb8f50"
+          },
+          {
+            "t": "FACT",
+            "text": "Theo Banks (rapper), Arts, Uptown, Regional-tier — fading — the where-are-they-now file (fame 6, cooling), 8 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-f2158c401ff3"
+          },
+          {
+            "t": "FACT",
+            "text": "Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 55, rising), 1 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-0ba845380af2"
+          },
+          {
+            "t": "FACT",
+            "text": "P Slayer (Journalist, Fan Columnist - Sports), Sports, West Oakland, Local-tier — new on the culture record this cycle (fame 25, rising), 0 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-4b771d53af18"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Cross — Actor — Piedmont Ave",
+            "src": "Simulation_Ledger profile for POP-00539",
+            "id": "F-f580a535e402"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00018",
+      "name": "Benji Dillon",
+      "quote": "Vinnie Keane made his call, and it was the right one for him. I've noticed that when one of us steps away, it's not just about the player, it's about the silence that follows. For me, the question isn't whether I can still pitch, but whether I can pitch in a way that means something.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; unshakable, calm under anything; principled, plays it straight; close to family; a real fan, plans around games; somewhat inclined to go out",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Vinnie Keane made his call, and it was the right one for him. I've noticed that when one of us steps away, it's not just about the player, it's about the silence that follows. For me, the question isn't whether I can still pitch, but whether I can pitch in a way that means something.\",\n  \"fact_ids\": [\"F-e612531b6c8f\", \"F-2620383281c8\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-e612531b6c8f",
+          "F-2620383281c8"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00018-88be7f43b6",
+        "authoredQuote": true,
+        "publishableQuote": "Vinnie Keane made his call, and it was the right one for him. I've noticed that when one of us steps away, it's not just about the player, it's about the silence that follows. For me, the question isn't whether I can still pitch, but whether I can pitch in a way that means something."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00018",
+          "name": "Benji Dillon",
+          "role": "Pitcher, Oakland A's Legend",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sharon Okafor",
+          "question": "What have you seen, felt, or understood about \"Vinnie Keane\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-lifestyle",
+          "hood": "Piedmont Ave",
+          "focus": "Vinnie Keane",
+          "src": "output/beats/Cultural_Ledger.jsonl @C116"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+          "evidence": [
+            {
+              "id": "EV-ef67088d8c",
+              "src": "output/beats/Cultural_Ledger.jsonl @C116",
+              "text": "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading (fame 54, cooling), 7 media mentions."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Benji Dillon leads the fame table; 5 fading, 5 new",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-79f7ba9836f7"
+          },
+          {
+            "t": "FACT",
+            "text": "Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 55, rising), 1 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-0ba845380af2"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading (fame 54, cooling), 7 media mentions.",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-e612531b6c8f"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading — the where-are-they-now file (fame 54, cooling), 7 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-496c5dbb8f50"
+          },
+          {
+            "t": "FACT",
+            "text": "Theo Banks (rapper), Arts, Uptown, Regional-tier — fading — the where-are-they-now file (fame 6, cooling), 8 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-f2158c401ff3"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 2, cooling), 17 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-64ea109af439"
+          },
+          {
+            "t": "FACT",
+            "text": "P Slayer (Journalist, Fan Columnist - Sports), Sports, West Oakland, Local-tier — new on the culture record this cycle (fame 25, rising), 0 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-4b771d53af18"
+          },
+          {
+            "t": "FACT",
+            "text": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+            "src": "Simulation_Ledger profile for POP-00018",
+            "id": "F-2620383281c8"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00001",
+      "name": "Vinnie Keane",
+      "quote": "My daily life hasn't changed that much since I retired. I still get recognized around town, like at the grocery store. People know me, and I like that. I'm still involved with the A's, just in a different way now. I'm not on the field every day, but I'm still around the neighborhood, and folks say hello. It's a good life.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; openly affectionate, big-hearted; curious, open to new things; unshakable, calm under anything; principled, plays it straight; close to family; often out in the neighborhood; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"My daily life hasn't changed that much since I retired. I still get recognized around town, like at the grocery store. People know me, and I like that. I'm still involved with the A's, just in a different way now. I'm not on the field every day, but I'm still around the neighborhood, and folks say hello. It's a good life.\",\n  \"fact_ids\": [\"F-e612531b6c8f\", \"F-1e9cdb0dd15b\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-e612531b6c8f",
+          "F-1e9cdb0dd15b"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00001-fcb0a992a7",
+        "authoredQuote": true,
+        "publishableQuote": "My daily life hasn't changed that much since I retired. I still get recognized around town, like at the grocery store. People know me, and I like that. I'm still involved with the A's, just in a different way now. I'm not on the field every day, but I'm still around the neighborhood, and folks say hello. It's a good life."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00001",
+          "name": "Vinnie Keane",
+          "role": "Former Designated Hitter, Oakland A's Legend",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sharon Okafor",
+          "question": "How does Vinnie Keane's daily life reflect his fading fame? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-lifestyle",
+          "hood": "Piedmont Ave",
+          "focus": "Vinnie Keane",
+          "src": "output/beats/Cultural_Ledger.jsonl @C116"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Piedmont Ave",
+          "evidence": [
+            {
+              "id": "EV-c69730a549",
+              "src": "output/beats/Cultural_Ledger.jsonl @C116",
+              "text": "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading (fame 54, cooling), 7 media mentions."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading (fame 54, cooling), 7 media mentions.",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-e612531b6c8f"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading — the where-are-they-now file (fame 54, cooling), 7 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-496c5dbb8f50"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "Benji Dillon leads the fame table; 5 fading, 5 new",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-79f7ba9836f7"
+          },
+          {
+            "t": "FACT",
+            "text": "Theo Banks (rapper), Arts, Uptown, Regional-tier — fading — the where-are-they-now file (fame 6, cooling), 8 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-f2158c401ff3"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 2, cooling), 17 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-64ea109af439"
+          },
+          {
+            "t": "FACT",
+            "text": "Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 55, rising), 1 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-0ba845380af2"
+          },
+          {
+            "t": "FACT",
+            "text": "P Slayer (Journalist, Fan Columnist - Sports), Sports, West Oakland, Local-tier — new on the culture record this cycle (fame 25, rising), 0 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-4b771d53af18"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Piedmont Ave",
+            "src": "Simulation_Ledger profile for POP-00001",
+            "id": "F-1e9cdb0dd15b"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01056",
+      "name": "Theo Banks",
+      "quote": "I've seen Vinnie Keane's name around, heard he's retired. That's a big deal for the A's, you know? Losing a face like that, it's not just about the player, it's about what they mean to the community. I don't know him personally, but you can feel the impact. People around here talk about it, how it's another change for the team.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen Vinnie Keane's name around, heard he's retired. That's a big deal for the A's, you know? Losing a face like that, it's not just about the player, it's about what they mean to the community. I don't know him personally, but you can feel the impact. People around here talk about it, how it's another change for the team.\",\n  \"fact_ids\": [\"F-e612531b6c8f\", \"F-092f0b554bf6\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-e612531b6c8f",
+          "F-092f0b554bf6"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01056-6c5f3f5d09",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen Vinnie Keane's name around, heard he's retired. That's a big deal for the A's, you know? Losing a face like that, it's not just about the player, it's about what they mean to the community. I don't know him personally, but you can feel the impact. People around here talk about it, how it's another change for the team."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01056",
+          "name": "Theo Banks",
+          "role": "rapper",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sharon Okafor",
+          "question": "What have you seen, felt, or understood about \"Vinnie Keane\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-lifestyle",
+          "hood": "Piedmont Ave",
+          "focus": "Vinnie Keane",
+          "src": "output/beats/Cultural_Ledger.jsonl @C116"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Theo Banks — rapper — Uptown",
+          "evidence": [
+            {
+              "id": "EV-4429384e4b",
+              "src": "output/beats/Cultural_Ledger.jsonl @C116",
+              "text": "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading (fame 54, cooling), 7 media mentions."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Theo Banks (rapper), Arts, Uptown, Regional-tier — fading — the where-are-they-now file (fame 6, cooling), 8 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-f2158c401ff3"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "Benji Dillon leads the fame table; 5 fading, 5 new",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-79f7ba9836f7"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading (fame 54, cooling), 7 media mentions.",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-e612531b6c8f"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading — the where-are-they-now file (fame 54, cooling), 7 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-496c5dbb8f50"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 2, cooling), 17 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-64ea109af439"
+          },
+          {
+            "t": "FACT",
+            "text": "Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 55, rising), 1 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-0ba845380af2"
+          },
+          {
+            "t": "FACT",
+            "text": "P Slayer (Journalist, Fan Columnist - Sports), Sports, West Oakland, Local-tier — new on the culture record this cycle (fame 25, rising), 0 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-4b771d53af18"
+          },
+          {
+            "t": "FACT",
+            "text": "Theo Banks — rapper — Uptown",
+            "src": "Simulation_Ledger profile for POP-01056",
+            "id": "F-092f0b554bf6"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00539",
+      "name": "Lena Cross",
+      "quote": "Vinnie Keane is a neighborhood treasure. I've seen him around Piedmont Ave, and we chat about the A's. His retirement was a big deal, and it's been nice to see him stay connected to the community. He's still a familiar face, and people appreciate that.",
+      "disp": "draws people in, deep with them",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Vinnie Keane is a neighborhood treasure. I've seen him around Piedmont Ave, and we chat about the A's. His retirement was a big deal, and it's been nice to see him stay connected to the community. He's still a familiar face, and people appreciate that.\",\n  \"fact_ids\": [\"F-e612531b6c8f\", \"F-f580a535e402\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-e612531b6c8f",
+          "F-f580a535e402"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00539-a6dfe37f6c",
+        "authoredQuote": true,
+        "publishableQuote": "Vinnie Keane is a neighborhood treasure. I've seen him around Piedmont Ave, and we chat about the A's. His retirement was a big deal, and it's been nice to see him stay connected to the community. He's still a familiar face, and people appreciate that."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00539",
+          "name": "Lena Cross",
+          "role": "Actor",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sharon Okafor",
+          "question": "As a resident of Piedmont Ave, what have you seen, felt, or understood about \"Vinnie Keane\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-lifestyle",
+          "hood": "Piedmont Ave",
+          "focus": "Vinnie Keane",
+          "src": "output/beats/Cultural_Ledger.jsonl @C116"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Lena Cross — Actor — Piedmont Ave",
+          "evidence": [
+            {
+              "id": "EV-ffc7bb338a",
+              "src": "output/beats/Cultural_Ledger.jsonl @C116",
+              "text": "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading (fame 54, cooling), 7 media mentions."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 2, cooling), 17 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-64ea109af439"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "Benji Dillon leads the fame table; 5 fading, 5 new",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-79f7ba9836f7"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading (fame 54, cooling), 7 media mentions.",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-e612531b6c8f"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading — the where-are-they-now file (fame 54, cooling), 7 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-496c5dbb8f50"
+          },
+          {
+            "t": "FACT",
+            "text": "Theo Banks (rapper), Arts, Uptown, Regional-tier — fading — the where-are-they-now file (fame 6, cooling), 8 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-f2158c401ff3"
+          },
+          {
+            "t": "FACT",
+            "text": "Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 55, rising), 1 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-0ba845380af2"
+          },
+          {
+            "t": "FACT",
+            "text": "P Slayer (Journalist, Fan Columnist - Sports), Sports, West Oakland, Local-tier — new on the culture record this cycle (fame 25, rising), 0 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-4b771d53af18"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Cross — Actor — Piedmont Ave",
+            "src": "Simulation_Ledger profile for POP-00539",
+            "id": "F-f580a535e402"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00018",
+      "name": "Benji Dillon",
+      "quote": "Vinnie Keane made his call, and it was the right one for him. I've noticed that when one of us steps away, it's not just about the player, it's about the silence that follows. For me, the question isn't whether I can still pitch, but whether I can pitch in a way that means something.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; unshakable, calm under anything; principled, plays it straight; close to family; a real fan, plans around games; somewhat inclined to go out",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Vinnie Keane made his call, and it was the right one for him. I've noticed that when one of us steps away, it's not just about the player, it's about the silence that follows. For me, the question isn't whether I can still pitch, but whether I can pitch in a way that means something.\",\n  \"fact_ids\": [\"F-e612531b6c8f\", \"F-2620383281c8\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-e612531b6c8f",
+          "F-2620383281c8"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00018-88be7f43b6",
+        "authoredQuote": true,
+        "publishableQuote": "Vinnie Keane made his call, and it was the right one for him. I've noticed that when one of us steps away, it's not just about the player, it's about the silence that follows. For me, the question isn't whether I can still pitch, but whether I can pitch in a way that means something."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00018",
+          "name": "Benji Dillon",
+          "role": "Pitcher, Oakland A's Legend",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sharon Okafor",
+          "question": "What have you seen, felt, or understood about \"Vinnie Keane\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-lifestyle",
+          "hood": "Piedmont Ave",
+          "focus": "Vinnie Keane",
+          "src": "output/beats/Cultural_Ledger.jsonl @C116"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+          "evidence": [
+            {
+              "id": "EV-ef67088d8c",
+              "src": "output/beats/Cultural_Ledger.jsonl @C116",
+              "text": "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading (fame 54, cooling), 7 media mentions."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Benji Dillon leads the fame table; 5 fading, 5 new",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-79f7ba9836f7"
+          },
+          {
+            "t": "FACT",
+            "text": "Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 55, rising), 1 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-0ba845380af2"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading (fame 54, cooling), 7 media mentions.",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-e612531b6c8f"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading — the where-are-they-now file (fame 54, cooling), 7 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-496c5dbb8f50"
+          },
+          {
+            "t": "FACT",
+            "text": "Theo Banks (rapper), Arts, Uptown, Regional-tier — fading — the where-are-they-now file (fame 6, cooling), 8 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-f2158c401ff3"
+          },
+          {
+            "t": "FACT",
+            "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 2, cooling), 17 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-64ea109af439"
+          },
+          {
+            "t": "FACT",
+            "text": "P Slayer (Journalist, Fan Columnist - Sports), Sports, West Oakland, Local-tier — new on the culture record this cycle (fame 25, rising), 0 media mentions",
+            "src": "output/beats/Cultural_Ledger.jsonl @C116",
+            "id": "F-4b771d53af18"
+          },
+          {
+            "t": "FACT",
+            "text": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+            "src": "Simulation_Ledger profile for POP-00018",
+            "id": "F-2620383281c8"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-11-20T19:17:15.805Z"
+}

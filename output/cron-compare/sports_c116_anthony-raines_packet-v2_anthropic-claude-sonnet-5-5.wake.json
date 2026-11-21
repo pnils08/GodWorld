@@ -60,5 +60,6 @@
     "recorded": true,
     "out": " // tip: ⌘ suppress logs { quiet: true }\n{\n  \"popId\": \"POP-00017\",\n  \"name\": \"Anthony Raines\",\n  \"recorded\": true,\n  \"text\": \"filed: The A's Sold a Surplus Starter and Bought Into a Surplus Infield\"\n}"
   },
-  "ranAt": "2026-11-17T00:22:21.711Z"
+  "ranAt": "2026-11-17T00:22:21.711Z",
+  "dispositionReconciledAt": "2026-11-21T18:00:02.975Z"
 }

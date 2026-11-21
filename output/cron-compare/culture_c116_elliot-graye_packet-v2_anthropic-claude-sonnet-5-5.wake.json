@@ -57,5 +57,6 @@
     "recorded": true,
     "out": "ected env (33) from ../.config/godworld/.env // tip: ⌘ suppress logs { quiet: true }\n{\n  \"popId\": \"POP-00012\",\n  \"name\": \"Elliot Graye\",\n  \"recorded\": true,\n  \"text\": \"The Council That Moves Around\"\n}"
   },
-  "ranAt": "2026-11-20T00:16:19.409Z"
+  "ranAt": "2026-11-20T00:16:19.409Z",
+  "dispositionReconciledAt": "2026-11-21T18:00:02.603Z"
 }

@@ -23,12 +23,11 @@
   },
   "footerPresent": null,
   "toolUse": [
-    "dossier_read",
     "canon_recall",
-    "canon_recall"
+    "dossier_read"
   ],
-  "toolCalls": 3,
-  "wordCount": 921,
+  "toolCalls": 2,
+  "wordCount": 767,
   "targetWords": "evidence-bounded; 350-600",
   "capHit": 0,
   "checkFlags": [],
@@ -39,19 +38,19 @@
     "purposeMet": true,
     "inTarget": true,
     "inTargetBy": "code floor 350",
-    "words": 921,
+    "words": 767,
     "short": "",
     "score": 3,
     "max": 3,
     "model": "google/gemini-3.7-flash",
-    "draftSha256": "f1bd7a435c3f4fee4ebd2867247a7fa0255f1afa126cd37840e1947c3b9b8798",
-    "costUsd": 0.0015
+    "draftSha256": "7a4b7e65ed02373b463cc37b16aebd7bf203db4bdbff648f80cf6385e28e9a75",
+    "costUsd": 0.0009
   },
   "gradeRecord": {
     "recorded": true,
     "line": "graded: 3/3 — nothing fell short"
   },
-  "article": "output/cron-compare/flagged/sports_c116_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "article": "output/cron-compare/flagged/sports_c116_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5-1800.md",
   "selfRecord": null,
-  "ranAt": "2026-11-19T00:18:19.466Z"
+  "ranAt": "2026-11-21T18:01:02.917Z"
 }

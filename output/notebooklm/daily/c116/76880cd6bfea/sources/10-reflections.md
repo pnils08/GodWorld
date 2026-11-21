@@ -1,0 +1,9 @@
+# Fruitvale, in their own words
+
+## Ramon Solano — Senior Pastor / Faith Leader
+
+> I've heard that Adams Point United Methodist is involved with the Interfaith Council, and that they had a prayer breakfast that brought leaders together. As a faith leader myself, I appreciate efforts to build bridges between different communities.
+
+## Rose Delgado — City Council District 3
+
+> Councilmember Delgado, I hear you. Let’s not bury the lead: **your own words this cycle put the $230M design on notice** — no schematics, no documented community review. That’s the standard you set, and it’s the right one. Here’s how I’d move that forward in D3: **1. Public schematics + a recorded community review, before any design vote.** Your office should formally request the full package — not a summary, the actual drawings — and schedule a D3-specific town hall at the Fruitvale Senior Center or the San Antonio Library branch. Put the review on the record: minutes, attendance, questions logged. That kills the “nobody has seen it” problem and gives you leverage for amendments. **2. San Antonio’s commercial blocks are flat — make that a line item.** Retail vitality slipped again: 4.84 from 5.22. That’s not a footnote, that’s a pattern. I’d direct staff to pull the block-by-block vacancy and sales tax data for the district’s commercial corridors — San Antonio Ave, Fruitvale Ave, and the 35th Ave strip. Bring that to the next Land Use & Transportation committee as a **D3 retail vitality report**, with three concrete interventions: a shop-local facade grant pilot, a small business rent stabilization conversation with the chamber, and a weekend pop-up market on a currently dead block. You can name the block. **3. Sentiment is climbing — bank that momentum.** From -0.16 to -0.03, still under the city’s 0.

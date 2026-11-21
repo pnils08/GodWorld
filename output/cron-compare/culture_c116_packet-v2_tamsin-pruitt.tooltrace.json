@@ -4,55 +4,55 @@
     {
       "tool": "citizen_lookup",
       "input": {
-        "name": "Wilson Shepard",
+        "name": "Paloma Vasquez",
         "thread": true
       },
-      "resultChars": 2179,
-      "resultHead": "Wilson Shepard — role: Head Coach, Oakland Oaks; neighborhood: West Oakland; born: 2008; wealth: 8; careerStage: early-career; employerBiz: BIZ-00074; skills: Coach; popid: POP-01022\nWilson Shepard (POP-01022) — 20 life-history entries on the record; last 15, oldest first:\nY3C11 — [Neighborhood-Outabout-Down-S] griped about West Oakland over dinner near a local pop-up\nY3C11 — [Neighborhood-Composure-Down-S] ran the numbers on staying put another year\nY3C11 — [Civic Perception-Composure-Up-S] heard someone at the cafe complain about the Baylight District noise and bit their tongue\nY3C12 — [Spor"
+      "resultChars": 597,
+      "resultHead": "Paloma Vasquez — role: Owner, Marquee Grocer; neighborhood: Grand Lake; born: 1988; wealth: 7; careerStage: senior; employerBiz: BIZ-00145; skills: Small Business; popid: POP-01249\nPaloma Vasquez (POP-01249) — 3 life-history entries on the record; last 3, oldest first:\nY3C12 — [Business] Took over Marquee Grocer in Grand Lake\nC116 — [Promotion] Added to Simulation_Ledger as Tier 4. Owner door — Marquee Grocer (BIZ-00145), C116 (engine.96 Task 12: the business is the reason; authored, not a pool draw)\nC116 — [Business-Owner] Became the owner of Marquee Grocer — Grand Lake (engine.96 Task 12)"
     },
     {
       "tool": "citizen_lookup",
       "input": {
-        "name": "Theo Rahimi",
+        "name": "Rosa Ochoa",
         "thread": true
       },
-      "resultChars": 252,
-      "resultHead": "Theo Rahimi — role: student; neighborhood: Eastlake; born: 2030; wealth: 0; careerStage: student; popid: POP-01247\nTheo Rahimi (POP-01247) — 1 life-history entries on the record; last 1, oldest first:\nY3C12 — [Promotion] Emerged into Tier-4 in Eastlake"
+      "resultChars": 1915,
+      "resultHead": "Rosa Ochoa — role: Library Worker; neighborhood: Laurel; born: 1985; wealth: 7; careerStage: senior; employerBiz: BIZ-00021; skills: Construction & Baylight; popid: POP-00706\nRosa Ochoa (POP-00706) — 20 life-history entries on the record; last 15, oldest first:\nY3C7 — [Neighborhood] watched the ferry cut across the bay at sunset and felt lucky to live this close to the water\nY3C7 — [PrevEvening] adjusted today's plans after last night's gridlock near a quiet main street\nY3C8 — [Civic Perception-Composure-Up-S] the Oakland Alternative Response Initiative is making waves, with residents feeling "
     },
     {
       "tool": "citizen_lookup",
       "input": {
-        "name": "Matilda Diop",
+        "name": "Priyanka Raman",
         "thread": true
       },
-      "resultChars": 1913,
-      "resultHead": "Matilda Diop — role: Paramedic; neighborhood: Lake Merritt; born: 2000; wealth: 7; careerStage: mid-career; employerBiz: BIZ-00015; skills: Healthcare; popid: POP-00832\nMatilda Diop (POP-00832) — 20 life-history entries on the record; last 15, oldest first:\nY3C5 — [Neighborhood] watched the fog roll over the port cranes from their front window near a quiet side street\nY3C5 — [Civic Perception] painted over graffiti on the recreation center wall alongside five neighbors they barely knew\nY3C5 — [Sports] bought a new A's jersey and felt the season starting to turn\nY3C6 — [Civic Perception] painte"
+      "resultChars": 1910,
+      "resultHead": "Priyanka Raman — role: Principal, Oakland Tech Collective; neighborhood: West Oakland; born: 1998; wealth: 10; careerStage: mid-career; employerBiz: BIZ-00030; skills: Tech & Innovation; popid: POP-01096\nPriyanka Raman (POP-01096) — 33 life-history entries on the record; last 15, oldest first:\nY3C8 — [Neighborhood-Outabout-Up-S] overheard a stranger asking the way to a new shop on the block and pointed them right to it\nY3C8 — [Sports-Win] argued A's loyalty versus Oaks curiosity over dinner and lost to both\nY3C9 — [Media] disagreed with a Tribune column out loud to an empty kitchen\nY3C9 — [Per"
     },
     {
       "tool": "citizen_lookup",
       "input": {
-        "name": "Darrin Davis",
+        "name": "Benji Dillon",
         "thread": true
       },
-      "resultChars": 1750,
-      "resultHead": "Darrin Davis — role: Left Fielder, Oakland A's Legend; neighborhood: Piedmont Ave; born: 2009; wealth: 10; careerStage: senior; employerBiz: BIZ-00005; skills: athlete; popid: POP-00021\nDarrin Davis (POP-00021) — 28 life-history entries on the record; last 15, oldest first:\nY3C8 — [Personal-Integrity-Up-S] said no to something and felt the shape of who they are in it\nY3C9 — [Sports-Sociability-Up-S] got asked about the club at a family dinner\nY3C9 — [PrevEvening-Sociability-Up-S] heard Jack London was packed last night\nY3C9 — [TrustGuarded] had it out with Howard Perez, and it did not settle\nY"
+      "resultChars": 2188,
+      "resultHead": "Benji Dillon — role: Pitcher, Oakland A's Legend; neighborhood: Rockridge; born: 2005; wealth: 11; careerStage: senior; employerBiz: BIZ-00005; skills: athlete; popid: POP-00018\nBenji Dillon (POP-00018) — 27 life-history entries on the record; last 15, oldest first:\nY3C9 — [Undocked-Audience] knew exactly what a week on UNDOCKED does to a barista and watched Iris Pham find out\nY3C9 — [Media] Named in a hard light — the coverage was not kind, and a name this big does not shrink; the shine dims (sports_c112_p-slayer)\nY3C10 — [Reputation] got recognized twice at the grocery store after the story "
     },
     {
       "tool": "canon_recall",
       "input": {
-        "query": "Wilson Shepard"
+        "query": "Paloma Vasquez Marquee Grocer Grand Lake"
       },
-      "resultChars": 3254,
-      "resultHead": "[C107 · daily · Talia Finch] The Oaks' Groundswell in Downtown building around the Oaks, it's like the whole city is waking up with the team. There's a buzz in the air, and I think people are really looking forward to seeing what they can do this season.\" As I continued my stroll through Downtown, I caught up with Wilson Shepard, the Head Coach of the Oakland Oaks, who was meeting with the media to address his excitement for the season. \"I've been feeling the energy around Downtown, and I think our fans are really excited for the upcoming seas\n[C108 · daily · Talia Finch] It's hard not to worr"
+      "resultChars": 216,
+      "resultHead": "No published piece from before C116 came back for \"Paloma Vasquez Marquee Grocer Grand Lake\". That is not proof the paper never covered it (an empty answer can also be a failed lookup) — do not write that it did not."
     },
     {
       "tool": "canon_recall",
       "input": {
-        "query": "Darrin Davis"
+        "query": "Rosa Ochoa Laurel"
       },
-      "resultChars": 3223,
-      "resultHead": "[C100 · edition] His reads are adequate, his routes functional, his arm respectable. Left field in Oakland has always been defined more by what happens in the batter’s box than what happens on the warning track. And in the batter’s box, he is the most complete left fielder the franchise has seen since the one whose statue stands outside. Darrin Davis doesn’t inherit Oakland’s left field legacy. He expands it — turning a position historically owned by singular archetypes into one owned by a total one. Silver Slugger All-Star MVP Pla\n[C100 · edition] DARRIN DAVIS — FULL EXPANDED INTERVIEW + DUGO"
+      "resultChars": 1618,
+      "resultHead": "[earlier · archive] She watches people more carefully now. “I saw Omar Clark, the mechanic from Fruitvale, stumble yesterday morning. He caught himself, kept walking. Maybe it was nothing. Maybe he tripped. But I’m watching. Someone has to watch.” Names Index: Rosa Ochoa (Library Worker, Laurel); Ronald Allen (Maintenance Tech, Laurel); Calvin Turner (Mechanic, Fruitvale); Evan Thompson (Taxi Driver, Laurel); Patricia Morales (Librarian); Patricia Nwosu (Deputy Health Officer, Alameda County); Omar Clark (Mechanic, Fruitvale) The Laur\n[C34 · edition] The Laurel cluster was classified Level 2 b"
     }
   ],
-  "ranAt": "2026-11-20T00:19:05.167Z"
+  "ranAt": "2026-11-21T00:20:13.238Z"
 }

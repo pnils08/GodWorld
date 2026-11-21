@@ -913,14 +913,14 @@
     "popid": "POP-00123",
     "slot": "PRESS",
     "cycle": 116,
-    "day": "2026-11-18",
+    "day": "2026-11-21",
     "ranCycle": 116
   },
   "w36HTRP9exKp6BZiyvSHe8": {
     "popid": "POP-00123",
     "slot": "PRESS-tension",
     "cycle": 116,
-    "day": "2026-11-18",
+    "day": "2026-11-21",
     "ranCycle": 116
   },
   "ux3cgJVtiBBJkGdFtLwHx1": {
@@ -1089,6 +1089,13 @@
     "slot": "work",
     "cycle": 116,
     "day": "2026-11-19",
+    "ranCycle": 116
+  },
+  "NCW9HBr6pdj5KvfajJAy84": {
+    "popid": "POP-00123",
+    "slot": "PRESS",
+    "cycle": 116,
+    "day": "2026-11-21",
     "ranCycle": 116
   }
 }

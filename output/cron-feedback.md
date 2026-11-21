@@ -36,31 +36,26 @@ What the crons recorded about their own work. Read from disk by `scripts/cronFee
 - why the role change was made — simon-leary
 - x-stats / barrel% / launch angle / OAA not on feed — anthony-raines
 
-## Where the grade falls (47 graded pieces)
+## Where the grade falls (41 graded pieces)
 
-- the opening: failed 7 of 47 — angela-reyes, hal-richmond, lila-mezran, sharon-okafor, simon-leary, talia-finch
+- the opening: failed 6 of 41 — angela-reyes, lila-mezran, maria-keen, sharon-okafor, talia-finch
 - the closing: failed 0 of 8
-- the piece's purpose: failed 8 of 47 — hal-richmond, ines-sorensen, mason-ortega, sharon-okafor, simon-leary, talia-finch
-- the length target: failed 1 of 47 — noah-tan
+- the piece's purpose: failed 3 of 41 — ines-sorensen, sharon-okafor, talia-finch
+- the length target: failed 1 of 41 — noah-tan
 
-- ines-sorensen — graded: 2/3 — The piece introduces Edmund Alegero and Guadalupe Lupe by name before their quotes instead of leading with the line first.
 - talia-finch — graded: 1/3 — The opening lacks a specific venue and sensory detail, while the piece violates constraints by discussing the A's and failing to set the scene inside a textured room.
+- sharon-okafor — graded: 1/3 — The piece fails to open with a venue, location, and condition, and profiles Vinnie Keane's retirement instead of framing a venue condition as a behavior question.
+- maria-keen — graded: 2/3 — The opening paragraph names the place and programs but does not name a Packet condition.
+- angela-reyes — graded: 2/3 — The opening paragraph begins with character color rather than a packet-backed school, youth-program, apprenticeship, or continuity fact.
 - ines-sorensen — graded: 2/3 — The piece includes quotes given to reporters and editorial commentary about past coverage rather than strictly carrying what citizens wrote on their own pages.
 - noah-tan — graded: 2/3 — The piece falls short of the 400-word minimum target.
 - lila-mezran — graded: 3/4 — The opening begins with an anecdotal feature hook about a plumber rather than a health-service, access, place, or implementation fact.
 - angela-reyes — graded: 3/4 — The opening paragraph opens with a narrative scene rather than a packet-backed school, youth-program, apprenticeship, or continuity fact.
-- angela-reyes — graded: 2/3 — The opening paragraph begins with character color rather than a packet-backed school, youth-program, apprenticeship, or continuity fact.
-- talia-finch — graded: 2/3 — The piece quotes postgame player remarks rather than letting the people in the room speak on what the city thinks of the franchise.
-- simon-leary — graded: 1/3 — The opening focuses on Hayward rather than the present sports structure, and the essay fails to interpret the structure as civic architecture.
-- hal-richmond — graded: 1/3 — The opening paragraph does not establish the ground the man came from, and the piece omits his own recorded words.
-- sharon-okafor — graded: 1/3 — The piece does not open with a venue, location, and condition, nor does it frame a venue condition as a behavior question.
-- mason-ortega — graded: 2/3 — The piece invents individual workers, shifts, and direct quotes rather than treating the signal without inventing personnel or workplace conditions.
 
-## What the gate held (3)
+## What the gate held (2)
 
+- sports_c116_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5 — Direct contradiction of Benji Dillon's canonical 2041 pitching statistics.
 - culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5 — Draft fails due to fabricated quote attributed to named ledger citizen Wilson Shepard.
-- sports_c116_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5 — Benji Dillon 2041 season statistics contradict canonical ground truth (140.2 IP, 4.61 ERA, 56 BB).
-- undocked_c116_nia-rook_packet-v2_openai-gpt-6-luna — Direct quote fabricated and attributed to named ledger citizen Marguerite Kimball-Ostrow.
 
 ## Varek's journal
 
@@ -73,5 +68,5 @@ Newest entry: Cycle 116. Its audit points:
 
 ## The daily news
 
-Last delivered show: 2026-11-19T14:00:16.071Z (Cycle 116) — 7 article, 9 reflections, 8 world; ops report delivered.
+Last delivered show: 2026-11-21T14:00:06.922Z (Cycle 116) — 6 article, 11 reflections, 8 world; ops report delivered.
 

@@ -1,0 +1,1328 @@
+{
+  "stage": "angle",
+  "desk": "culture",
+  "cycle": "116",
+  "persona": "kai-marston",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00158",
+      "name": "Kai Marston",
+      "role": "desk reporter",
+      "desk": "culture"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Benji Dillon is rising — the acts and the rooms they play",
+      "approach": "Arts & entertainment approach: this slice is the culture ledger — who is rising, who just appeared, who is fading, with their domains and neighborhoods — plus the city's culture seeds this cycle. Present-tense, neighborhood act not gallery PR. The names and trajectories are real; the garage rehearsal, the opening-night crowd, the set list are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "arts",
+        "hood": "Rockridge",
+        "facts": [
+          "Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 55, rising), last seen C105",
+          "Darrin Davis (A's player), Sports, Piedmont Ave — fame rising (fame 43, rising), last seen C108",
+          "Danny Horn (A's player), Sports, Temescal — fame rising (fame 34, rising), last seen C99",
+          "Travis Coles (A's player), Sports, Downtown — fame rising (fame 33, rising), last seen C96",
+          "P Slayer (Journalist, Fan Columnist - Sports), Sports, West Oakland — new on the culture record this cycle (fame 25, rising)",
+          "Nia Rook (Journalist, UNDOCKED Recap), Media, West Oakland — new on the culture record this cycle (fame 25, rising)",
+          "Ernesto Quintero (A's player), Sports, Baylight District — new on the culture record this cycle (fame 17, rising), last seen C116",
+          "Vinnie Keane (A's player), Sports, Piedmont Ave — fading — the where-are-they-now file (fame 54, cooling), last seen C115",
+          "CITY SEED (Citywide): Vladimir Gonzalez; Marky Beal; Iris Pham",
+          "CITY SEED (Fruitvale): Marisol Quintero; Li Wei; Jia Carmichael · at Taco Fusion; Fruitvale Community Clinic",
+          "CITY SEED (West Oakland): Ray Neal; Bambi Wart; Aaliyah Yamamoto · at Mendez Printing; West Oakland Stabilization Fund"
+        ],
+        "priorCycle": null,
+        "note": null,
+        "engineHooks": [
+          "Multiple culture signals detected. Could be coincidence or early pattern. (arts/culture feature)",
+          "read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots (arts/culture feature)"
+        ],
+        "roomIsYours": "the rehearsal space, the flyer on the pole, who showed up, what the room felt like when the second act started",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-arts",
+      "hood": "Rockridge",
+      "score": null,
+      "src": "output/beats/Cultural_Ledger.jsonl @C116",
+      "nearby": [
+        {
+          "text": "Grand Lake neighborhood texture — how residents experience the improvement | Residents of Grand Lake feel the change firsthand.",
+          "src": "output/engine_audit_c116.json patterns[7]; evidence: Initiative_Tracker row(s) 9; storyline INIT-009:vote-scheduled"
+        },
+        {
+          "text": "Fruitvale | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c116.md \"### Fruitvale\"; events: world_summary_c116.md \"## World Events\""
+        },
+        {
+          "text": "Glenview | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c116.md \"### Glenview\"; events: world_summary_c116.md \"## World Events\""
+        },
+        {
+          "text": "Grand Lake | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c116.md \"### Grand Lake\"; events: world_summary_c116.md \"## World Events\""
+        },
+        {
+          "text": "Piedmont Ave | 2 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c116.md \"### Piedmont Ave\"; events: world_summary_c116.md \"## World Events\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00018",
+          "name": "Benji Dillon",
+          "profile": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+          "role": "Pitcher, Oakland A's Legend",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C116",
+            "pop": "POP-00018",
+            "rowName": "Benji Dillon",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00021",
+          "name": "Darrin Davis",
+          "profile": "Darrin Davis — Left Fielder, Oakland A's Legend — Piedmont Ave",
+          "role": "Left Fielder, Oakland A's Legend",
+          "hood": "Piedmont Ave",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C116",
+            "pop": "POP-00021",
+            "rowName": "Darrin Davis",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00022",
+          "name": "Danny Horn",
+          "profile": "Danny Horn — Center Fielder, Oakland A's - Best player in the MLB — Temescal",
+          "role": "Center Fielder, Oakland A's - Best player in the MLB",
+          "hood": "Temescal",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C116",
+            "pop": "POP-00022",
+            "rowName": "Danny Horn",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00533",
+          "name": "Travis Coles",
+          "profile": "Travis Coles — Starting Pitcher, Oakland A's — Downtown",
+          "role": "Starting Pitcher, Oakland A's",
+          "hood": "Downtown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C116",
+            "pop": "POP-00533",
+            "rowName": "Travis Coles",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00008",
+          "name": "P Slayer",
+          "profile": "P Slayer — Journalist, Fan Columnist - Sports — West Oakland",
+          "role": "Journalist, Fan Columnist - Sports",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C116",
+            "pop": "POP-00008",
+            "rowName": "P Slayer",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01076",
+          "name": "Nia Rook",
+          "profile": "Nia Rook — Journalist, UNDOCKED Recap — West Oakland",
+          "role": "Journalist, UNDOCKED Recap",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C116",
+            "pop": "POP-01076",
+            "rowName": "Nia Rook",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00050",
+          "name": "Ernesto Quintero",
+          "profile": "Ernesto Quintero — 3B/1B , Oakland A's — Baylight District",
+          "role": "3B/1B , Oakland A's",
+          "hood": "Baylight District",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C116",
+            "pop": "POP-00050",
+            "rowName": "Ernesto Quintero",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00001",
+          "name": "Vinnie Keane",
+          "profile": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Piedmont Ave",
+          "role": "Former Designated Hitter, Oakland A's Legend",
+          "hood": "Piedmont Ave",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C116",
+            "pop": "POP-00001",
+            "rowName": "Vinnie Keane",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00598",
+          "name": "Vladimir Gonzalez",
+          "profile": "Vladimir Gonzalez — Right Fielder, Oakland A's — Fruitvale",
+          "role": "Right Fielder, Oakland A's",
+          "hood": "Fruitvale",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C116",
+            "pop": "POP-00598",
+            "rowName": "Vladimir Gonzalez",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00202",
+          "name": "Marky Beal",
+          "profile": "Marky Beal — Retail worker — West Oakland",
+          "role": "Retail worker",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C116",
+            "pop": "POP-00202",
+            "rowName": "Marky Beal",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01203",
+          "name": "Iris Pham",
+          "profile": "Iris Pham — Barista — Baylight District",
+          "role": "Barista",
+          "hood": "Baylight District",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C116",
+            "pop": "POP-01203",
+            "rowName": "Iris Pham",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00937",
+          "name": "Manju Crenshaw",
+          "profile": "Manju Crenshaw — Midwife — Piedmont Ave",
+          "role": "Midwife",
+          "hood": "Piedmont Ave",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C116",
+            "pop": "POP-00937",
+            "rowName": "Manju Crenshaw",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C116",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-871096fd8925"
+      },
+      {
+        "t": "FACT",
+        "text": "35 culture figures rising; 5 new on the record",
+        "src": "output/beats/Cultural_Ledger.jsonl @C116",
+        "id": "F-874fe6281df3"
+      },
+      {
+        "t": "FACT",
+        "text": "Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 55, rising), last seen C105.",
+        "src": "output/beats/Cultural_Ledger.jsonl @C116",
+        "id": "F-c5307a99d4aa"
+      },
+      {
+        "t": "FACT",
+        "text": "Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 55, rising), last seen C105",
+        "src": "output/beats/Cultural_Ledger.jsonl @C116",
+        "id": "F-d9e66e69482e"
+      },
+      {
+        "t": "FACT",
+        "text": "Darrin Davis (A's player), Sports, Piedmont Ave — fame rising (fame 43, rising), last seen C108",
+        "src": "output/beats/Cultural_Ledger.jsonl @C116",
+        "id": "F-be0a7ea08f7c"
+      },
+      {
+        "t": "FACT",
+        "text": "Danny Horn (A's player), Sports, Temescal — fame rising (fame 34, rising), last seen C99",
+        "src": "output/beats/Cultural_Ledger.jsonl @C116",
+        "id": "F-60804f9bb142"
+      },
+      {
+        "t": "FACT",
+        "text": "Travis Coles (A's player), Sports, Downtown — fame rising (fame 33, rising), last seen C96",
+        "src": "output/beats/Cultural_Ledger.jsonl @C116",
+        "id": "F-0435916e6838"
+      },
+      {
+        "t": "FACT",
+        "text": "P Slayer (Journalist, Fan Columnist - Sports), Sports, West Oakland — new on the culture record this cycle (fame 25, rising)",
+        "src": "output/beats/Cultural_Ledger.jsonl @C116",
+        "id": "F-9060be3d3473"
+      },
+      {
+        "t": "FACT",
+        "text": "Nia Rook (Journalist, UNDOCKED Recap), Media, West Oakland — new on the culture record this cycle (fame 25, rising)",
+        "src": "output/beats/Cultural_Ledger.jsonl @C116",
+        "id": "F-bd26d7b4ac20"
+      },
+      {
+        "t": "FACT",
+        "text": "Ernesto Quintero (A's player), Sports, Baylight District — new on the culture record this cycle (fame 17, rising), last seen C116",
+        "src": "output/beats/Cultural_Ledger.jsonl @C116",
+        "id": "F-35d3d5413ca1"
+      },
+      {
+        "t": "FACT",
+        "text": "Vinnie Keane (A's player), Sports, Piedmont Ave — fading — the where-are-they-now file (fame 54, cooling), last seen C115",
+        "src": "output/beats/Cultural_Ledger.jsonl @C116",
+        "id": "F-f170cf3a9cab"
+      },
+      {
+        "t": "FACT",
+        "text": "CITY SEED (Citywide): Vladimir Gonzalez; Marky Beal; Iris Pham",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C116",
+        "id": "F-8990ca8916b8"
+      },
+      {
+        "t": "FACT",
+        "text": "CITY SEED (Fruitvale): Marisol Quintero; Li Wei; Jia Carmichael · at Taco Fusion; Fruitvale Community Clinic",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C116",
+        "id": "F-7d450c2d719a"
+      },
+      {
+        "t": "FACT",
+        "text": "CITY SEED (West Oakland): Ray Neal; Bambi Wart; Aaliyah Yamamoto · at Mendez Printing; West Oakland Stabilization Fund",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C116",
+        "id": "F-6b9ae072cfb7"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ]
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-00018",
+        "name": "Benji Dillon",
+        "role": "Pitcher, Oakland A's Legend",
+        "hood": "Rockridge",
+        "profile": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C116",
+          "pop": "POP-00018",
+          "rowName": "Benji Dillon",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00021",
+        "name": "Darrin Davis",
+        "role": "Left Fielder, Oakland A's Legend",
+        "hood": "Piedmont Ave",
+        "profile": "Darrin Davis — Left Fielder, Oakland A's Legend — Piedmont Ave",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C116",
+          "pop": "POP-00021",
+          "rowName": "Darrin Davis",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00022",
+        "name": "Danny Horn",
+        "role": "Center Fielder, Oakland A's - Best player in the MLB",
+        "hood": "Temescal",
+        "profile": "Danny Horn — Center Fielder, Oakland A's - Best player in the MLB — Temescal",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C116",
+          "pop": "POP-00022",
+          "rowName": "Danny Horn",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00533",
+        "name": "Travis Coles",
+        "role": "Starting Pitcher, Oakland A's",
+        "hood": "Downtown",
+        "profile": "Travis Coles — Starting Pitcher, Oakland A's — Downtown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C116",
+          "pop": "POP-00533",
+          "rowName": "Travis Coles",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00008",
+        "name": "P Slayer",
+        "role": "Journalist, Fan Columnist - Sports",
+        "hood": "West Oakland",
+        "profile": "P Slayer — Journalist, Fan Columnist - Sports — West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C116",
+          "pop": "POP-00008",
+          "rowName": "P Slayer",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01076",
+        "name": "Nia Rook",
+        "role": "Journalist, UNDOCKED Recap",
+        "hood": "West Oakland",
+        "profile": "Nia Rook — Journalist, UNDOCKED Recap — West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C116",
+          "pop": "POP-01076",
+          "rowName": "Nia Rook",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00050",
+        "name": "Ernesto Quintero",
+        "role": "3B/1B , Oakland A's",
+        "hood": "Baylight District",
+        "profile": "Ernesto Quintero — 3B/1B , Oakland A's — Baylight District",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C116",
+          "pop": "POP-00050",
+          "rowName": "Ernesto Quintero",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "Former Designated Hitter, Oakland A's Legend",
+        "hood": "Piedmont Ave",
+        "profile": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Piedmont Ave",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C116",
+          "pop": "POP-00001",
+          "rowName": "Vinnie Keane",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00598",
+        "name": "Vladimir Gonzalez",
+        "role": "Right Fielder, Oakland A's",
+        "hood": "Fruitvale",
+        "profile": "Vladimir Gonzalez — Right Fielder, Oakland A's — Fruitvale",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C116",
+          "pop": "POP-00598",
+          "rowName": "Vladimir Gonzalez",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00202",
+        "name": "Marky Beal",
+        "role": "Retail worker",
+        "hood": "West Oakland",
+        "profile": "Marky Beal — Retail worker — West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C116",
+          "pop": "POP-00202",
+          "rowName": "Marky Beal",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01203",
+        "name": "Iris Pham",
+        "role": "Barista",
+        "hood": "Baylight District",
+        "profile": "Iris Pham — Barista — Baylight District",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C116",
+          "pop": "POP-01203",
+          "rowName": "Iris Pham",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00937",
+        "name": "Manju Crenshaw",
+        "role": "Midwife",
+        "hood": "Piedmont Ave",
+        "profile": "Manju Crenshaw — Midwife — Piedmont Ave",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C116",
+          "pop": "POP-00937",
+          "rowName": "Manju Crenshaw",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01212",
+        "name": "Marisol Quintero",
+        "role": "BART Train Conductor",
+        "hood": "Fruitvale",
+        "profile": "Marisol Quintero — BART Train Conductor — Fruitvale",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C116",
+          "pop": "POP-01212",
+          "rowName": "Marisol Quintero",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01073",
+        "name": "Li Wei",
+        "role": "cultural figure",
+        "hood": "Fruitvale",
+        "profile": "Li Wei — cultural figure — Fruitvale",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C116",
+          "pop": "POP-01073",
+          "rowName": "Li Wei",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00876",
+        "name": "Jia Carmichael",
+        "role": "Physical Therapist",
+        "hood": "Fruitvale",
+        "profile": "Jia Carmichael — Physical Therapist — Fruitvale",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C116",
+          "pop": "POP-00876",
+          "rowName": "Jia Carmichael",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00907",
+        "name": "Jia Reyes",
+        "role": "Disability Rights Advocate",
+        "hood": "Fruitvale",
+        "profile": "Jia Reyes — Disability Rights Advocate — Fruitvale",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C116",
+          "pop": "POP-00907",
+          "rowName": "Jia Reyes",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00448",
+        "name": "Ray Neal",
+        "role": "AC Transit Bus Operator",
+        "hood": "West Oakland",
+        "profile": "Ray Neal — AC Transit Bus Operator — West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C116",
+          "pop": "POP-00448",
+          "rowName": "Ray Neal",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00327",
+        "name": "Bambi Wart",
+        "role": "Ex-Offender Reentry Counselor",
+        "hood": "West Oakland",
+        "profile": "Bambi Wart — Ex-Offender Reentry Counselor — West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C116",
+          "pop": "POP-00327",
+          "rowName": "Bambi Wart",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01031",
+        "name": "Aaliyah Yamamoto",
+        "role": "Electrician",
+        "hood": "West Oakland",
+        "profile": "Aaliyah Yamamoto — Electrician — West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C116",
+          "pop": "POP-01031",
+          "rowName": "Aaliyah Yamamoto",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00961",
+        "name": "Darius Clark",
+        "role": "Bakery Worker",
+        "hood": "West Oakland",
+        "profile": "Darius Clark — Bakery Worker — West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C116",
+          "pop": "POP-00961",
+          "rowName": "Darius Clark",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Kai Marston",
+    "popid": "POP-00158"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-arts",
+      "angle": "Benji Dillon is rising — the acts and the rooms they play",
+      "label": "35 culture figures rising; 5 new on the record",
+      "hookLine": "Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 55, rising), last seen C105.",
+      "hood": "Rockridge",
+      "citizens": [
+        "Benji Dillon (POP-00018)",
+        "Darrin Davis (POP-00021)",
+        "Danny Horn (POP-00022)",
+        "Travis Coles (POP-00533)",
+        "P Slayer (POP-00008)",
+        "Nia Rook (POP-01076)",
+        "Ernesto Quintero (POP-00050)",
+        "Vinnie Keane (POP-00001)",
+        "Vladimir Gonzalez (POP-00598)",
+        "Marky Beal (POP-00202)",
+        "Iris Pham (POP-01203)",
+        "Manju Crenshaw (POP-00937)",
+        "Marisol Quintero (POP-01212)",
+        "Li Wei (POP-01073)",
+        "Jia Carmichael (POP-00876)",
+        "Jia Reyes (POP-00907)",
+        "Ray Neal (POP-00448)",
+        "Bambi Wart (POP-00327)",
+        "Aaliyah Yamamoto (POP-01031)",
+        "Darius Clark (POP-00961)"
+      ],
+      "popids": [
+        "POP-00018",
+        "POP-00021",
+        "POP-00022",
+        "POP-00533",
+        "POP-00008",
+        "POP-01076",
+        "POP-00050",
+        "POP-00001",
+        "POP-00598",
+        "POP-00202",
+        "POP-01203",
+        "POP-00937",
+        "POP-01212",
+        "POP-01073",
+        "POP-00876",
+        "POP-00907",
+        "POP-00448",
+        "POP-00327",
+        "POP-01031",
+        "POP-00961"
+      ],
+      "ref": "output/beats/Cultural_Ledger.jsonl @C116",
+      "cycle": 116
+    },
+    "approach": "Arts & entertainment approach: this slice is the culture ledger — who is rising, who just appeared, who is fading, with their domains and neighborhoods — plus the city's culture seeds this cycle. Present-tense, neighborhood act not gallery PR. The names and trajectories are real; the garage rehearsal, the opening-night crowd, the set list are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": {
+    "pulse": {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Bridge & Barrel (Jack London) · quiet night",
+      "named": "Bridge & Barrel",
+      "hood": "Jack London",
+      "person": null,
+      "venue": null
+    },
+    "recommend": {
+      "bag": "lifestyle",
+      "slug": "sharon-okafor",
+      "name": "Sharon Okafor",
+      "popid": "POP-00159",
+      "bagDoc": "docs/media/SHARON_LIFESTYLE_BAG.md",
+      "reason": "top pulse quiet-nightlife → lifestyle",
+      "pulseClass": "quiet-nightlife",
+      "pulseLabel": "Bridge & Barrel (Jack London) · quiet night"
+    },
+    "prewrite": {
+      "pulseClass": "quiet-nightlife",
+      "angle": "Bridge & Barrel is open and quiet in Jack London. What that condition means is not yet established.",
+      "hookLine": "Bridge & Barrel is open and quiet in Jack London.",
+      "anchorFacts": [
+        "NAMED: Bridge & Barrel",
+        "HOOD: Jack London",
+        "VENUE: Bridge & Barrel",
+        "HOOD: Jack London",
+        "EVENING RECORD: open and quiet"
+      ],
+      "bagRecommend": "lifestyle",
+      "bagSlug": "sharon-okafor"
+    },
+    "texture": {
+      "famous": [
+        "Theo Banks",
+        "Ernesto Quintero",
+        "Desmond Morton"
+      ],
+      "restaurants": [
+        {
+          "name": "Harborline Grill",
+          "hood": "Jack London"
+        },
+        {
+          "name": "Port Grind",
+          "hood": "Grand Lake"
+        },
+        {
+          "name": "Third Street Late Kitchen",
+          "hood": "Jack London"
+        }
+      ],
+      "fastFood": [
+        {
+          "name": "SpeedyBurger",
+          "hood": "Downtown"
+        }
+      ],
+      "nightlife": [
+        {
+          "name": "Bridge & Barrel",
+          "hood": "Jack London"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 3,
+        "vibe": "quiet",
+        "movement": "restricted",
+        "weatherImpact": 1
+      },
+      "cityEvents": [
+        "The Kelley Family Block Party",
+        "The Horn Family Block Party",
+        "The Keane Family Block Party"
+      ],
+      "tv": [
+        "Bay Area Alert",
+        "Inside the A's Front Office",
+        "Giancarlo Hernandez (3B) — Player Profile"
+      ],
+      "movies": [
+        "Ninth Inning"
+      ],
+      "sportsBroadcast": "Oakland Sports Tonight",
+      "streamingTrend": "political commentary surge",
+      "foodTrend": "High mobility / civic-tension food trend"
+    },
+    "signals": {
+      "fameCount": 11,
+      "sightingCount": 3,
+      "sightings": [
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Theo Banks spotted at Parkridge Cleaners",
+          "name": "Theo Banks",
+          "venue": "Parkridge Cleaners",
+          "ref": "Ripple_Ledger cycle 116 (CauseType lifestyle-sighting); rendered: world_summary_c116.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Glenview",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Ernesto Quintero spotted at Marine Systems",
+          "name": "Ernesto Quintero",
+          "venue": "Marine Systems",
+          "ref": "Ripple_Ledger cycle 116 (CauseType lifestyle-sighting); rendered: world_summary_c116.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Baylight District",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Desmond Morton spotted at Jade Thread Tailors",
+          "name": "Desmond Morton",
+          "venue": "Jade Thread Tailors",
+          "ref": "Ripple_Ledger cycle 116 (CauseType lifestyle-sighting); rendered: world_summary_c116.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Chinatown",
+          "popids": []
+        }
+      ]
+    },
+    "scene": {
+      "venues": [
+        {
+          "name": "Harborline Grill",
+          "hood": "Jack London"
+        },
+        {
+          "name": "Port Grind",
+          "hood": "Grand Lake"
+        },
+        {
+          "name": "Third Street Late Kitchen",
+          "hood": "Jack London"
+        },
+        {
+          "name": "SpeedyBurger",
+          "hood": "Downtown"
+        },
+        {
+          "name": "Bridge & Barrel",
+          "hood": "Jack London"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 3,
+        "vibe": "quiet",
+        "movement": "restricted",
+        "weatherImpact": 1
+      },
+      "cityEvents": [
+        "The Kelley Family Block Party",
+        "The Horn Family Block Party",
+        "The Keane Family Block Party"
+      ],
+      "tv": [
+        "Bay Area Alert",
+        "Inside the A's Front Office",
+        "Giancarlo Hernandez (3B) — Player Profile"
+      ],
+      "movies": [
+        "Ninth Inning"
+      ],
+      "colorRoom": "Named places only from Evening Texture / desk_signal. The supplied evening record describes nightlife as quiet; raw scoring fields stay internal.  Sensory room (weather, light, sound) is free; careers and employees are not."
+    },
+    "candidates": [
+      {
+        "className": "quiet-nightlife",
+        "score": 24,
+        "label": "Bridge & Barrel (Jack London) · quiet night",
+        "named": "Bridge & Barrel",
+        "hood": "Jack London"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Theo Banks at Parkridge Cleaners (Glenview)",
+        "named": "Parkridge Cleaners",
+        "hood": "Glenview"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Ernesto Quintero at Marine Systems (Baylight District)",
+        "named": "Marine Systems",
+        "hood": "Baylight District"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Desmond Morton at Jade Thread Tailors (Chinatown)",
+        "named": "Jade Thread Tailors",
+        "hood": "Chinatown"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Harborline Grill (Jack London)",
+        "named": "Harborline Grill",
+        "hood": "Jack London"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Port Grind (Grand Lake)",
+        "named": "Port Grind",
+        "hood": "Grand Lake"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Third Street Late Kitchen (Jack London)",
+        "named": "Third Street Late Kitchen",
+        "hood": "Jack London"
+      },
+      {
+        "className": "city-event",
+        "score": 17,
+        "label": "The Kelley Family Block Party",
+        "named": "The Kelley Family Block Party",
+        "hood": null
+      }
+    ],
+    "perSeat": {
+      "mason-ortega": {
+        "pulseClass": "named-restaurant",
+        "label": "Harborline Grill (Jack London)",
+        "score": 34,
+        "bag": "kitchen"
+      },
+      "kai-marston": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Bridge & Barrel (Jack London) · quiet night",
+        "score": 32,
+        "bag": "arts"
+      },
+      "sharon-okafor": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Bridge & Barrel (Jack London) · quiet night",
+        "score": 32,
+        "bag": "lifestyle"
+      },
+      "maria-keen": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Bridge & Barrel (Jack London) · quiet night",
+        "score": 32,
+        "bag": "ground"
+      },
+      "elliot-graye": {
+        "pulseClass": "fame-sighting",
+        "label": "Theo Banks at Parkridge Cleaners (Glenview)",
+        "score": 31,
+        "bag": "faith"
+      }
+    }
+  },
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "ARTS-SLICE-1",
+    "kind": "beat-arts",
+    "seat": {
+      "slug": "kai-marston",
+      "name": "Kai Marston",
+      "popid": "POP-00158",
+      "desk": "culture",
+      "domain": "arts",
+      "builder": "buildArtsSlice.js"
+    },
+    "hood": "Rockridge",
+    "pulse": {
+      "className": "beat-arts",
+      "score": 100,
+      "label": "35 culture figures rising; 5 new on the record",
+      "hood": "Rockridge",
+      "source": "output/beats/Cultural_Ledger.jsonl @C116"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Benji Dillon is rising — the acts and the rooms they play",
+      "hookLine": "Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 55, rising), last seen C105.",
+      "anchorFacts": [
+        "Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 55, rising), last seen C105",
+        "Darrin Davis (A's player), Sports, Piedmont Ave — fame rising (fame 43, rising), last seen C108",
+        "Danny Horn (A's player), Sports, Temescal — fame rising (fame 34, rising), last seen C99",
+        "Travis Coles (A's player), Sports, Downtown — fame rising (fame 33, rising), last seen C96",
+        "P Slayer (Journalist, Fan Columnist - Sports), Sports, West Oakland — new on the culture record this cycle (fame 25, rising)",
+        "Nia Rook (Journalist, UNDOCKED Recap), Media, West Oakland — new on the culture record this cycle (fame 25, rising)",
+        "Ernesto Quintero (A's player), Sports, Baylight District — new on the culture record this cycle (fame 17, rising), last seen C116",
+        "Vinnie Keane (A's player), Sports, Piedmont Ave — fading — the where-are-they-now file (fame 54, cooling), last seen C115",
+        "CITY SEED (Citywide): Vladimir Gonzalez; Marky Beal; Iris Pham",
+        "CITY SEED (Fruitvale): Marisol Quintero; Li Wei; Jia Carmichael · at Taco Fusion; Fruitvale Community Clinic",
+        "CITY SEED (West Oakland): Ray Neal; Bambi Wart; Aaliyah Yamamoto · at Mendez Printing; West Oakland Stabilization Fund"
+      ],
+      "evidence": [
+        {
+          "text": "Benji Dillon (A's player), Sports, Rockridge — fame rising (fame 55, rising), last seen C105",
+          "src": "output/beats/Cultural_Ledger.jsonl @C116"
+        },
+        {
+          "text": "Darrin Davis (A's player), Sports, Piedmont Ave — fame rising (fame 43, rising), last seen C108",
+          "src": "output/beats/Cultural_Ledger.jsonl @C116"
+        },
+        {
+          "text": "Danny Horn (A's player), Sports, Temescal — fame rising (fame 34, rising), last seen C99",
+          "src": "output/beats/Cultural_Ledger.jsonl @C116"
+        },
+        {
+          "text": "Travis Coles (A's player), Sports, Downtown — fame rising (fame 33, rising), last seen C96",
+          "src": "output/beats/Cultural_Ledger.jsonl @C116"
+        },
+        {
+          "text": "P Slayer (Journalist, Fan Columnist - Sports), Sports, West Oakland — new on the culture record this cycle (fame 25, rising)",
+          "src": "output/beats/Cultural_Ledger.jsonl @C116"
+        },
+        {
+          "text": "Nia Rook (Journalist, UNDOCKED Recap), Media, West Oakland — new on the culture record this cycle (fame 25, rising)",
+          "src": "output/beats/Cultural_Ledger.jsonl @C116"
+        },
+        {
+          "text": "Ernesto Quintero (A's player), Sports, Baylight District — new on the culture record this cycle (fame 17, rising), last seen C116",
+          "src": "output/beats/Cultural_Ledger.jsonl @C116"
+        },
+        {
+          "text": "Vinnie Keane (A's player), Sports, Piedmont Ave — fading — the where-are-they-now file (fame 54, cooling), last seen C115",
+          "src": "output/beats/Cultural_Ledger.jsonl @C116"
+        },
+        {
+          "text": "CITY SEED (Citywide): Vladimir Gonzalez; Marky Beal; Iris Pham",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C116"
+        },
+        {
+          "text": "CITY SEED (Fruitvale): Marisol Quintero; Li Wei; Jia Carmichael · at Taco Fusion; Fruitvale Community Clinic",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C116"
+        },
+        {
+          "text": "CITY SEED (West Oakland): Ray Neal; Bambi Wart; Aaliyah Yamamoto · at Mendez Printing; West Oakland Stabilization Fund",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C116"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": null,
+      "hooks": [
+        {
+          "text": "Multiple culture signals detected. Could be coincidence or early pattern.",
+          "angle": "arts/culture feature",
+          "domain": "CULTURE",
+          "hood": null,
+          "priority": 2
+        },
+        {
+          "text": "read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+          "angle": "arts/culture feature",
+          "domain": "CULTURE",
+          "hood": "Piedmont Ave",
+          "priority": 3
+        }
+      ],
+      "note": null,
+      "pageVoices": [],
+      "roomIsYours": "the rehearsal space, the flyer on the pole, who showed up, what the room felt like when the second act started"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00018",
+        "name": "Benji Dillon",
+        "role": "Pitcher, Oakland A's Legend",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+        "why": "fame rising (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00021",
+        "name": "Darrin Davis",
+        "role": "Left Fielder, Oakland A's Legend",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Darrin Davis — Left Fielder, Oakland A's Legend — Piedmont Ave",
+        "why": "fame rising (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00022",
+        "name": "Danny Horn",
+        "role": "Center Fielder, Oakland A's - Best player in the MLB",
+        "neighborhood": "Temescal",
+        "business": null,
+        "profile": "Danny Horn — Center Fielder, Oakland A's - Best player in the MLB — Temescal",
+        "why": "fame rising (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00533",
+        "name": "Travis Coles",
+        "role": "Starting Pitcher, Oakland A's",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Travis Coles — Starting Pitcher, Oakland A's — Downtown",
+        "why": "fame rising (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00008",
+        "name": "P Slayer",
+        "role": "Journalist, Fan Columnist - Sports",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "P Slayer — Journalist, Fan Columnist - Sports — West Oakland",
+        "why": "new on the culture record this cycle (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-01076",
+        "name": "Nia Rook",
+        "role": "Journalist, UNDOCKED Recap",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Nia Rook — Journalist, UNDOCKED Recap — West Oakland",
+        "why": "new on the culture record this cycle (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00050",
+        "name": "Ernesto Quintero",
+        "role": "3B/1B , Oakland A's",
+        "neighborhood": "Baylight District",
+        "business": null,
+        "profile": "Ernesto Quintero — 3B/1B , Oakland A's — Baylight District",
+        "why": "new on the culture record this cycle (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "Former Designated Hitter, Oakland A's Legend",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Piedmont Ave",
+        "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00598",
+        "name": "Vladimir Gonzalez",
+        "role": "Right Fielder, Oakland A's",
+        "neighborhood": "Fruitvale",
+        "business": null,
+        "profile": "Vladimir Gonzalez — Right Fielder, Oakland A's — Fruitvale",
+        "why": "culture seed this cycle (Story_Seed_Deck)"
+      },
+      {
+        "popid": "POP-00202",
+        "name": "Marky Beal",
+        "role": "Retail worker",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Marky Beal — Retail worker — West Oakland",
+        "why": "culture seed this cycle (Story_Seed_Deck)"
+      },
+      {
+        "popid": "POP-01203",
+        "name": "Iris Pham",
+        "role": "Barista",
+        "neighborhood": "Baylight District",
+        "business": null,
+        "profile": "Iris Pham — Barista — Baylight District",
+        "why": "culture seed this cycle (Story_Seed_Deck)"
+      },
+      {
+        "popid": "POP-00937",
+        "name": "Manju Crenshaw",
+        "role": "Midwife",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Manju Crenshaw — Midwife — Piedmont Ave",
+        "why": "culture seed this cycle (Story_Seed_Deck)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Cultural_Ledger.jsonl @C116",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Kai Marston this cycle)"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Kai Marston",
+    "popid": "POP-00158",
+    "text": "I'm going to follow Benji Dillon around Rockridge to see what's behind his rising fame. The A's legend is a neighborhood name, and I want to capture how that translates into everyday life and local culture. I'll attend a local event where he's scheduled to appear, talk to people who know him, and get a feel for how his presence affects the community.",
+    "plan": {
+      "chase": "I'm going to follow Benji Dillon around Rockridge to see what's behind his rising fame. The A's legend is a neighborhood name, and I want to capture how that translates into everyday life and local culture. I'll attend a local event where he's scheduled to appear, talk to people who know him, and get a feel for how his presence affects the community.",
+      "focus": "Benji Dillon's rising fame in Rockridge",
+      "why": "Benji Dillon is a rising culture figure in Rockridge, and as a journalist covering arts and entertainment, I want to explore how his fame is impacting the local community.",
+      "checks": [
+        "Verify Benji Dillon's public appearances in Rockridge",
+        "Talk to locals about their perception of Benji Dillon"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00018",
+          "question": "How does Benji Dillon's rising fame affect his daily life in Rockridge?",
+          "basis": "Benji Dillon is a rising culture figure in Rockridge"
+        },
+        {
+          "pop": "POP-00021",
+          "question": "How do other A's players, like Darrin Davis, interact with Benji Dillon in public?",
+          "basis": "Darrin Davis is also a rising culture figure and an A's player"
+        }
+      ],
+      "interpretation": "The rising fame of local sports figures like Benji Dillon can have a significant impact on neighborhood culture and community dynamics.",
+      "unverifiedLead": [
+        "Benji Dillon might be attending the Kelley Family Block Party, which could be a good opportunity to observe his interaction with the community."
+      ]
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Grand Lake neighborhood texture — how residents experience the improvement | Residents of Grand Lake feel the change firsthand.",
+      "kind": "anomaly",
+      "hood": "Grand Lake",
+      "ref": "output/engine_audit_c116.json patterns[7]; evidence: Initiative_Tracker row(s) 9; storyline INIT-009:vote-scheduled",
+      "popids": [
+        "POP-01218",
+        "POP-01244",
+        "POP-01249"
+      ]
+    },
+    {
+      "label": "Fruitvale | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Fruitvale",
+      "ref": "output/neighborhood_texture_c116.md \"### Fruitvale\"; events: world_summary_c116.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Glenview | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Glenview",
+      "ref": "output/neighborhood_texture_c116.md \"### Glenview\"; events: world_summary_c116.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Grand Lake | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Grand Lake",
+      "ref": "output/neighborhood_texture_c116.md \"### Grand Lake\"; events: world_summary_c116.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Piedmont Ave | 2 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Piedmont Ave",
+      "ref": "output/neighborhood_texture_c116.md \"### Piedmont Ave\"; events: world_summary_c116.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 30,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-20T12:16:04.618Z"
+}

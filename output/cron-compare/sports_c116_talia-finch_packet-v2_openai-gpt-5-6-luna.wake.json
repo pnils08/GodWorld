@@ -58,5 +58,6 @@
     "recorded": true,
     "out": "◇ injected env (33) from ../.config/godworld/.env // tip: ⌁ auth for agents [www.vestauth.com]\n{\n  \"popId\": \"POP-00592\",\n  \"name\": \"Talia Finch\",\n  \"recorded\": true,\n  \"text\": \"SPORTS\"\n}"
   },
-  "ranAt": "2026-11-20T00:18:26.582Z"
+  "ranAt": "2026-11-20T00:18:26.582Z",
+  "dispositionReconciledAt": "2026-11-21T18:00:03.110Z"
 }

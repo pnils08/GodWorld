@@ -1,0 +1,74 @@
+{
+  "draft": "output/cron-compare/undocked-digest_c116_nia-rook-weekly_packet-v2_openai-gpt-6-luna.md",
+  "cycle": "116",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "7525aa880456e754a8f85729a7579014d76d047798db586272f3ed24b7168e95",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen roles, quotes, and Undocked episode data verify cleanly against canon records.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "nia-rook-undocked-weekly-digest-v1",
+    "packageVersion": "NIAROOK-UNDOCKED-WEEKLY-2",
+    "manifestId": "AM-c136cb607a51",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "45.19"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Luis Taz",
+      "Manju Abebe",
+      "Marguerite Kimball-Ostrow",
+      "Soo Loo"
+    ],
+    "unverified": [
+      "Maiden Jump"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0137,
+  "durationMs": 6966,
+  "parseError": false,
+  "ranAt": "2026-11-21T16:15:44.906Z",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 350",
+    "words": 419,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "7525aa880456e754a8f85729a7579014d76d047798db586272f3ed24b7168e95",
+    "costUsd": 0.001
+  }
+}

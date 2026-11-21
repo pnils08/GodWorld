@@ -2,14 +2,6 @@
   "model": "anthropic/claude-sonnet-5.5",
   "calls": [
     {
-      "tool": "dossier_read",
-      "input": {
-        "player": "Henry Rivas"
-      },
-      "resultChars": 1718,
-      "resultHead": "Henry Rivas — SP, Athletics; 8 seasons on the dossier\nHenry Rivas 2041 ATH: 22 G, 22 GS, 11-4, 0 SV, 136.1 IP, 123 H, 40 ER, 16 HR, 24 BB, 133 SO, ERA 2.64\nHenry Rivas 2040 ATH: 33 G, 33 GS, 14-12, 0 SV, 184.2 IP, 176 H, 76 ER, 24 HR, 59 BB, 169 SO, ERA 3.7\nHenry Rivas 2039 ATH: 33 G, 33 GS, 17-5, 0 SV, 187.2 IP, 191 H, 80 ER, 21 HR, 38 BB, 184 SO, ERA 3.84\nHenry Rivas 2038 ATH: 33 G, 33 GS, 14-5, 0 SV, 183.1 IP, 188 H, 69 ER, 24 HR, 39 BB, 175 SO, ERA 3.39\nHenry Rivas 2037 PHI: 32 G, 32 GS, 9-15, 0 SV, 170.0 IP, 180 H, 60 ER, 27 HR, 52 BB, 157 SO, ERA 3.18\nHenry Rivas 2036 PHI: 33 G, 33 GS, 1"
-    },
-    {
       "tool": "canon_recall",
       "input": {
         "query": "Henry Rivas"
@@ -18,13 +10,13 @@
       "resultHead": "[earlier · piece] A’S UNIVERSE STATCAST PLAYER CARD v1.0 HENRY RIVAS — SP (RHP) Age: 28 | B/T: L/R | Height 6’0”, 173 lbs Potential: A | Overall: 91 Archetype: Durable Strike-Thrower With Plus Breaking Action Service Time: 6.002 years TrueSource: TS-RIVAS-2040 ⸻ PITCHING REPERTOIRE — SAVANT INTERPRETATION 2-Seam Fastball — 94 mph • Great arm-side run • His best early-count strike pitch • Used to induce soft contact Sinker — 90 mph • Heavy, late drop • Primary groundball generator • Excellent vs LHB inside 12–6 Curveball — 75 mph • H\n[C84 · edition] # Mesa, Tuesday: The First Data Point for any"
     },
     {
-      "tool": "canon_recall",
+      "tool": "dossier_read",
       "input": {
-        "query": "Arturo Ramos"
+        "player": "Henry Rivas"
       },
-      "resultChars": 3241,
-      "resultHead": "[earlier · archive] He’s learned from Dillon’s intelligence, echoed Miller’s serenity, and added something all his own — warmth. For Mag... When the scoreboard dims, he walks off to the kind of applause that feels earned twice — once for the athlete, once for the ambassador. Arturo Ramos is still early in his career, but his promise already stretches beyond innings and averages. He’s proof that in Oakland, community and craft can share the same heartbeat. — End of Column — Bay Tribune — Cultural Feature Series By Mags Corliss The Ramo\n[earlier · piece] He’s learned from Dillon’s intelligence, "
+      "resultChars": 1718,
+      "resultHead": "Henry Rivas — SP, Athletics; 8 seasons on the dossier\nHenry Rivas 2041 ATH: 22 G, 22 GS, 11-4, 0 SV, 136.1 IP, 123 H, 40 ER, 16 HR, 24 BB, 133 SO, ERA 2.64\nHenry Rivas 2040 ATH: 33 G, 33 GS, 14-12, 0 SV, 184.2 IP, 176 H, 76 ER, 24 HR, 59 BB, 169 SO, ERA 3.7\nHenry Rivas 2039 ATH: 33 G, 33 GS, 17-5, 0 SV, 187.2 IP, 191 H, 80 ER, 21 HR, 38 BB, 184 SO, ERA 3.84\nHenry Rivas 2038 ATH: 33 G, 33 GS, 14-5, 0 SV, 183.1 IP, 188 H, 69 ER, 24 HR, 39 BB, 175 SO, ERA 3.39\nHenry Rivas 2037 PHI: 32 G, 32 GS, 9-15, 0 SV, 170.0 IP, 180 H, 60 ER, 27 HR, 52 BB, 157 SO, ERA 3.18\nHenry Rivas 2036 PHI: 33 G, 33 GS, 1"
     }
   ],
-  "ranAt": "2026-11-19T00:17:51.040Z"
+  "ranAt": "2026-11-21T18:00:38.397Z"
 }

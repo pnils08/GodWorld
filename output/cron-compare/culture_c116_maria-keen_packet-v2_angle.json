@@ -1,0 +1,1592 @@
+{
+  "stage": "angle",
+  "desk": "culture",
+  "cycle": "116",
+  "persona": "maria-keen",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00013",
+      "name": "Maria Keen",
+      "role": "desk reporter",
+      "desk": "culture"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "West Oakland — the programs that hold the block and the people who founded them",
+      "approach": "Neighborhood approach: this slice is one block's record — its community programs and their founders, who is moving in or out, who the block has in a hospital bed or in custody, what it paid on tax day, whose debts crossed the line, and the city's neighborhood hooks this cycle. First-person witness, one block one truth. The programs, founders, movement numbers, patients, defendants and money lines are real; the stoop conversations, the mailboxes, the dog everyone knows are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "neighborhood",
+        "hood": "West Oakland",
+        "facts": [
+          "Vinnie Keane Firehouse 29 West Oakland Baseball Academy (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+          "Keane Auxiliary Flag Football League (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+          "West Oakland Mural Collective (arts), West Oakland, since C101",
+          "Civis Systems Civic Fellows Program (tech-education), West Oakland — founded by Elias Varek, since C96",
+          "West Oakland Freight & Logistics Pipeline (economic), West Oakland — founded by Elias Varek, since C91",
+          "New Covenant Pentecostal Assembly Seniors Lunch Program (health), West Oakland, since C83",
+          "West Oakland this cycle: 326 students, 1,733 adults, 313 seniors — moved vs C115: +3 students, +18 adults, +3 seniors",
+          "West Oakland: 5 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+          "West Oakland: 84 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked"
+        ],
+        "priorCycle": "PRIOR_CYCLE_ON_DISK",
+        "note": null,
+        "engineHooks": [
+          "Travis Paiz and Jocelyn Santo — a friendship turned into something more (observational analysis)",
+          "A family bought their home in Chinatown (observational analysis)",
+          "A family bought their home in Chinatown (observational analysis)",
+          "A family bought their home in Fruitvale (observational analysis)"
+        ],
+        "roomIsYours": "the stoop, the corner store counter, who moved in last month and who is thinking about leaving, what the block argues about",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-neighborhood",
+      "hood": "West Oakland",
+      "score": null,
+      "src": "output/beats/Community_Programs.jsonl @C116",
+      "nearby": [
+        {
+          "text": "Grand Lake neighborhood texture — how residents experience the improvement | Residents of Grand Lake feel the change firsthand.",
+          "src": "output/engine_audit_c116.json patterns[7]; evidence: Initiative_Tracker row(s) 9; storyline INIT-009:vote-scheduled"
+        },
+        {
+          "text": "Fruitvale | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c116.md \"### Fruitvale\"; events: world_summary_c116.md \"## World Events\""
+        },
+        {
+          "text": "Glenview | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c116.md \"### Glenview\"; events: world_summary_c116.md \"## World Events\""
+        },
+        {
+          "text": "Grand Lake | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c116.md \"### Grand Lake\"; events: world_summary_c116.md \"## World Events\""
+        },
+        {
+          "text": "Piedmont Ave | 2 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c116.md \"### Piedmont Ave\"; events: world_summary_c116.md \"## World Events\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00001",
+          "name": "Vinnie Keane",
+          "profile": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Piedmont Ave",
+          "role": "Former Designated Hitter, Oakland A's Legend",
+          "hood": "Piedmont Ave",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Community_Programs.jsonl @C116",
+            "pop": "POP-00001",
+            "rowName": "Vinnie Keane",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00789",
+          "name": "Elias Varek",
+          "profile": "Elias Varek — Founder of Civis Systems — West Oakland",
+          "role": "Founder of Civis Systems",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Community_Programs.jsonl @C116",
+            "pop": "POP-00789",
+            "rowName": "Elias Varek",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00621",
+          "name": "Delvon Pratt",
+          "profile": "Delvon Pratt — Warehouse Supervisor",
+          "role": "Warehouse Supervisor",
+          "hood": "West Oakland",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 116,
+            "tag": "Neighborhood-Outabout-Up-S",
+            "line": "Y3C12 — [Neighborhood-Outabout-Up-S] noticed West Oakland's industrial character",
+            "highlightKind": "hood",
+            "entity": "West Oakland",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00955",
+          "name": "Keisha Morris",
+          "profile": "Keisha Morris — Counselor",
+          "role": "Counselor",
+          "hood": "West Oakland",
+          "mode": "street",
+          "sourceKind": "life-line",
+          "evidence": {
+            "source": "output/simulation_ledger_snapshot.jsonl",
+            "cycle": 116,
+            "tag": "Neighborhood-Outabout-Up-S",
+            "line": "Y3C12 — [Neighborhood-Outabout-Up-S] noticed West Oakland's industrial character",
+            "highlightKind": "hood",
+            "entity": "West Oakland",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00023",
+          "name": "Gregory Mims",
+          "profile": "Gregory Mims — Organized Crime",
+          "role": "Organized Crime",
+          "hood": "West Oakland",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "jj6rRFJJwmKMRrDVKeReaE",
+            "customId": "cp-POP-00023-c102-PRESS",
+            "cycle": 102,
+            "excerpt": "Now, I don't know about no \"phases\" or \"cycles,\" but I know this: when something real hits West Oakland, you feel it.",
+            "highlightKind": "hood",
+            "entity": "West Oakland",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00034",
+          "name": "Avery Santana",
+          "profile": "Avery Santana — Mayor of Oakland",
+          "role": "Mayor of Oakland",
+          "hood": "Rockridge",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "KYbXKpJudkrYNYuCEfraYn",
+            "customId": "cp-POP-00034-c116-work-thu",
+            "cycle": 116,
+            "excerpt": "I'm confident that West Oakland's renewal ledger and Fruitvale's data briefing and Temescal's Q3 audit are all going to be in the public record before we ask anyone to trust us with the next milestone.",
+            "highlightKind": "hood",
+            "entity": "West Oakland",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00037",
+          "name": "Brenda Okoro",
+          "profile": "Brenda Okoro — Deputy Mayor (Community Affairs)",
+          "role": "Deputy Mayor (Community Affairs)",
+          "hood": "Piedmont Ave",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "e9N49qBszcFPN9KL6ADP55",
+            "customId": "cp-POP-00037-c102-PRESS",
+            "cycle": 102,
+            "excerpt": "Howard and I raised four kids in West Oakland.",
+            "highlightKind": "hood",
+            "entity": "West Oakland",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00043",
+          "name": "Janae Rivers",
+          "profile": "Janae Rivers — City Council District 5",
+          "role": "City Council District 5",
+          "hood": "Piedmont Ave",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "vuQGqoTkzAHWEWvP9tkjah",
+            "customId": "cp-POP-00043-c116-work-thu",
+            "cycle": 116,
+            "excerpt": "The number of times someone in Fruitvale or West Oakland has asked me, \"When do we get this?",
+            "highlightKind": "hood",
+            "entity": "West Oakland",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00143",
+          "name": "Clarissa Dane",
+          "profile": "Clarissa Dane — DISTRICT ATTORNEY",
+          "role": "DISTRICT ATTORNEY",
+          "hood": "West Oakland",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "9WWvHtDEojJ9YwMhCRSmG3",
+            "customId": "cp-POP-00143-c115-DEBATE-tue",
+            "cycle": 115,
+            "excerpt": "I want to see the same commitment in West Oakland, and this initiative sets that precedent.",
+            "highlightKind": "hood",
+            "entity": "West Oakland",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00170",
+          "name": "Melton Neilon",
+          "profile": "Melton Neilon — Sourdough Baker",
+          "role": "Sourdough Baker",
+          "hood": "Temescal",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "u1YKduvbPjbzuUVWhfwvrf",
+            "customId": "cp-POP-00170-c105-PRESS",
+            "cycle": 105,
+            "excerpt": "I’ve heard folks talking about the Alternative Response Initiative in the neighborhood, and it seems like people are hopeful it’ll bring more tailored support to West Oakland, Fruitvale, and East Oakland.",
+            "highlightKind": "hood",
+            "entity": "West Oakland",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00185",
+          "name": "Lila Patty",
+          "profile": "Lila Patty — Solar Panel Installation Lead",
+          "role": "Solar Panel Installation Lead",
+          "hood": "West Oakland",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "RekwM2wJrLY8CE4FWDEesy",
+            "customId": "cp-POP-00185-c103-evening",
+            "cycle": 103,
+            "excerpt": "This spot reminds me of how West Oakland used to be—gritty, resilient, full of stories etched into every brick.",
+            "highlightKind": "hood",
+            "entity": "West Oakland",
+            "predicate": "observe"
+          }
+        },
+        {
+          "pop": "POP-00194",
+          "name": "Yu Zen",
+          "profile": "Yu Zen — Commercial Insurance Broker",
+          "role": "Commercial Insurance Broker",
+          "hood": "Rockridge",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "1azVikaPJW3dQZzTLqFx2i",
+            "customId": "cp-POP-00194-c113-PRESS-fri-ihdbmi",
+            "cycle": 113,
+            "excerpt": "To be honest, I don't know much about the changing demographics in West Oakland.",
+            "highlightKind": "hood",
+            "entity": "West Oakland",
+            "predicate": "observe"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C116",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-871096fd8925"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland: 9 active programs on the record",
+        "src": "output/beats/Community_Programs.jsonl @C116",
+        "id": "F-0b66d1128813"
+      },
+      {
+        "t": "FACT",
+        "text": "9 active programs in West Oakland; Vinnie Keane and Elias Varek founded them.",
+        "src": "output/beats/Community_Programs.jsonl @C116",
+        "id": "F-4e144466672a"
+      },
+      {
+        "t": "FACT",
+        "text": "Vinnie Keane Firehouse 29 West Oakland Baseball Academy (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+        "src": "output/beats/Community_Programs.jsonl @C116 PRG-002",
+        "id": "F-8fce5a1594dc"
+      },
+      {
+        "t": "FACT",
+        "text": "Keane Auxiliary Flag Football League (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+        "src": "output/beats/Community_Programs.jsonl @C116 PRG-006",
+        "id": "F-4477c417d65d"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland Mural Collective (arts), West Oakland, since C101",
+        "src": "output/beats/Community_Programs.jsonl @C116 PRG-011",
+        "id": "F-3184d335a548"
+      },
+      {
+        "t": "FACT",
+        "text": "Civis Systems Civic Fellows Program (tech-education), West Oakland — founded by Elias Varek, since C96",
+        "src": "output/beats/Community_Programs.jsonl @C116 PRG-019",
+        "id": "F-8fa11b84c4ee"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland Freight & Logistics Pipeline (economic), West Oakland — founded by Elias Varek, since C91",
+        "src": "output/beats/Community_Programs.jsonl @C116 PRG-021",
+        "id": "F-fed14779574d"
+      },
+      {
+        "t": "FACT",
+        "text": "New Covenant Pentecostal Assembly Seniors Lunch Program (health), West Oakland, since C83",
+        "src": "output/beats/Community_Programs.jsonl @C116 PRG-024",
+        "id": "F-f7ef50d3b138"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland this cycle: 326 students, 1,733 adults, 313 seniors — moved vs C115: +3 students, +18 adults, +3 seniors",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C116 vs prev/",
+        "id": "F-798e8d9d5d61"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland: 5 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl @C116 judicial West Oakland",
+        "id": "F-c54fda05a105"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland: 84 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl @C116 hospital West Oakland",
+        "id": "F-9512e00052ad"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ]
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "street",
+    "candidates": [
+      {
+        "pop": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "Former Designated Hitter, Oakland A's Legend",
+        "hood": "Piedmont Ave",
+        "profile": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Piedmont Ave",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Community_Programs.jsonl @C116",
+          "pop": "POP-00001",
+          "rowName": "Vinnie Keane",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00789",
+        "name": "Elias Varek",
+        "role": "Founder of Civis Systems",
+        "hood": "West Oakland",
+        "profile": "Elias Varek — Founder of Civis Systems — West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Community_Programs.jsonl @C116",
+          "pop": "POP-00789",
+          "rowName": "Elias Varek",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00621",
+        "name": "Delvon Pratt",
+        "role": "Warehouse Supervisor",
+        "hood": "West Oakland",
+        "profile": "Delvon Pratt — Warehouse Supervisor",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 116,
+          "tag": "Neighborhood-Outabout-Up-S",
+          "line": "Y3C12 — [Neighborhood-Outabout-Up-S] noticed West Oakland's industrial character",
+          "highlightKind": "hood",
+          "entity": "West Oakland",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C12 — [Neighborhood-Outabout-Up-S] noticed West Oakland's industrial character"
+      },
+      {
+        "pop": "POP-00955",
+        "name": "Keisha Morris",
+        "role": "Counselor",
+        "hood": "West Oakland",
+        "profile": "Keisha Morris — Counselor",
+        "mode": "street",
+        "sourceKind": "life-line",
+        "evidence": {
+          "source": "output/simulation_ledger_snapshot.jsonl",
+          "cycle": 116,
+          "tag": "Neighborhood-Outabout-Up-S",
+          "line": "Y3C12 — [Neighborhood-Outabout-Up-S] noticed West Oakland's industrial character",
+          "highlightKind": "hood",
+          "entity": "West Oakland",
+          "predicate": "observe"
+        },
+        "matchedLifeLine": "Y3C12 — [Neighborhood-Outabout-Up-S] noticed West Oakland's industrial character"
+      },
+      {
+        "pop": "POP-00023",
+        "name": "Gregory Mims",
+        "role": "Organized Crime",
+        "hood": "West Oakland",
+        "profile": "Gregory Mims — Organized Crime",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "jj6rRFJJwmKMRrDVKeReaE",
+          "customId": "cp-POP-00023-c102-PRESS",
+          "cycle": 102,
+          "excerpt": "Now, I don't know about no \"phases\" or \"cycles,\" but I know this: when something real hits West Oakland, you feel it.",
+          "highlightKind": "hood",
+          "entity": "West Oakland",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "Now, I don't know about no \"phases\" or \"cycles,\" but I know this: when something real hits West Oakland, you feel it."
+      },
+      {
+        "pop": "POP-00034",
+        "name": "Avery Santana",
+        "role": "Mayor of Oakland",
+        "hood": "Rockridge",
+        "profile": "Avery Santana — Mayor of Oakland",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "KYbXKpJudkrYNYuCEfraYn",
+          "customId": "cp-POP-00034-c116-work-thu",
+          "cycle": 116,
+          "excerpt": "I'm confident that West Oakland's renewal ledger and Fruitvale's data briefing and Temescal's Q3 audit are all going to be in the public record before we ask anyone to trust us with the next milestone.",
+          "highlightKind": "hood",
+          "entity": "West Oakland",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I'm confident that West Oakland's renewal ledger and Fruitvale's data briefing and Temescal's Q3 audit are all going to be in the public record before we ask anyone to trust us with the next milestone."
+      },
+      {
+        "pop": "POP-00037",
+        "name": "Brenda Okoro",
+        "role": "Deputy Mayor (Community Affairs)",
+        "hood": "Piedmont Ave",
+        "profile": "Brenda Okoro — Deputy Mayor (Community Affairs)",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "e9N49qBszcFPN9KL6ADP55",
+          "customId": "cp-POP-00037-c102-PRESS",
+          "cycle": 102,
+          "excerpt": "Howard and I raised four kids in West Oakland.",
+          "highlightKind": "hood",
+          "entity": "West Oakland",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "Howard and I raised four kids in West Oakland."
+      },
+      {
+        "pop": "POP-00043",
+        "name": "Janae Rivers",
+        "role": "City Council District 5",
+        "hood": "Piedmont Ave",
+        "profile": "Janae Rivers — City Council District 5",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "vuQGqoTkzAHWEWvP9tkjah",
+          "customId": "cp-POP-00043-c116-work-thu",
+          "cycle": 116,
+          "excerpt": "The number of times someone in Fruitvale or West Oakland has asked me, \"When do we get this?",
+          "highlightKind": "hood",
+          "entity": "West Oakland",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "The number of times someone in Fruitvale or West Oakland has asked me, \"When do we get this?"
+      },
+      {
+        "pop": "POP-00143",
+        "name": "Clarissa Dane",
+        "role": "DISTRICT ATTORNEY",
+        "hood": "West Oakland",
+        "profile": "Clarissa Dane — DISTRICT ATTORNEY",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "9WWvHtDEojJ9YwMhCRSmG3",
+          "customId": "cp-POP-00143-c115-DEBATE-tue",
+          "cycle": 115,
+          "excerpt": "I want to see the same commitment in West Oakland, and this initiative sets that precedent.",
+          "highlightKind": "hood",
+          "entity": "West Oakland",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I want to see the same commitment in West Oakland, and this initiative sets that precedent."
+      },
+      {
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "role": "Sourdough Baker",
+        "hood": "Temescal",
+        "profile": "Melton Neilon — Sourdough Baker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "u1YKduvbPjbzuUVWhfwvrf",
+          "customId": "cp-POP-00170-c105-PRESS",
+          "cycle": 105,
+          "excerpt": "I’ve heard folks talking about the Alternative Response Initiative in the neighborhood, and it seems like people are hopeful it’ll bring more tailored support to West Oakland, Fruitvale, and East Oakland.",
+          "highlightKind": "hood",
+          "entity": "West Oakland",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I’ve heard folks talking about the Alternative Response Initiative in the neighborhood, and it seems like people are hopeful it’ll bring more tailored support to West Oakland, Fruitvale, and East Oakland."
+      },
+      {
+        "pop": "POP-00185",
+        "name": "Lila Patty",
+        "role": "Solar Panel Installation Lead",
+        "hood": "West Oakland",
+        "profile": "Lila Patty — Solar Panel Installation Lead",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "RekwM2wJrLY8CE4FWDEesy",
+          "customId": "cp-POP-00185-c103-evening",
+          "cycle": 103,
+          "excerpt": "This spot reminds me of how West Oakland used to be—gritty, resilient, full of stories etched into every brick.",
+          "highlightKind": "hood",
+          "entity": "West Oakland",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "This spot reminds me of how West Oakland used to be—gritty, resilient, full of stories etched into every brick."
+      },
+      {
+        "pop": "POP-00194",
+        "name": "Yu Zen",
+        "role": "Commercial Insurance Broker",
+        "hood": "Rockridge",
+        "profile": "Yu Zen — Commercial Insurance Broker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "1azVikaPJW3dQZzTLqFx2i",
+          "customId": "cp-POP-00194-c113-PRESS-fri-ihdbmi",
+          "cycle": 113,
+          "excerpt": "To be honest, I don't know much about the changing demographics in West Oakland.",
+          "highlightKind": "hood",
+          "entity": "West Oakland",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "To be honest, I don't know much about the changing demographics in West Oakland."
+      },
+      {
+        "pop": "POP-00200",
+        "name": "Evan Lewis",
+        "role": "Bus driver",
+        "hood": "Laurel",
+        "profile": "Evan Lewis — Bus driver",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "Y4JSohDBncrWLLR25Cv9Sd",
+          "customId": "cp-POP-00200-c115-PRESS-fri-bfcaac",
+          "cycle": 115,
+          "excerpt": "To be honest, I haven't really seen much of the A's around West Oakland lately.",
+          "highlightKind": "hood",
+          "entity": "West Oakland",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "To be honest, I haven't really seen much of the A's around West Oakland lately."
+      },
+      {
+        "pop": "POP-00201",
+        "name": "Elio Perez",
+        "role": "Server",
+        "hood": "Piedmont Ave",
+        "profile": "Elio Perez — Server",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "paHBqTxejxgEDRGohUgucA",
+          "customId": "cp-POP-00201-c105-PRESS",
+          "cycle": 105,
+          "excerpt": "I’ve heard folks talking about the Alternative Response Initiative, and it feels like there’s hope it could ease some of the tension we’ve been seeing, especially in West Oakland.",
+          "highlightKind": "hood",
+          "entity": "West Oakland",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I’ve heard folks talking about the Alternative Response Initiative, and it feels like there’s hope it could ease some of the tension we’ve been seeing, especially in West Oakland."
+      },
+      {
+        "pop": "POP-00241",
+        "name": "Marc Allie",
+        "role": "Security guard",
+        "hood": "Laurel",
+        "profile": "Marc Allie — Security guard",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "Nhb98dA2yBK9MEb2rR1mpA",
+          "customId": "cp-POP-00241-c112-PRESS",
+          "cycle": 112,
+          "excerpt": "I know they're a janitor in West Oakland and got promoted recently.",
+          "highlightKind": "hood",
+          "entity": "West Oakland",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I know they're a janitor in West Oakland and got promoted recently."
+      },
+      {
+        "pop": "POP-00244",
+        "name": "Derlik Green",
+        "role": "Delivery Driver",
+        "hood": "Downtown",
+        "profile": "Derlik Green — Delivery Driver",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "ykCJ8RykDF3eaeU7cdPDT6",
+          "customId": "cp-POP-00244-c112-PRESS",
+          "cycle": 112,
+          "excerpt": "I've seen Jerald Jensen around, they were promoted as a Janitor in West Oakland.",
+          "highlightKind": "hood",
+          "entity": "West Oakland",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I've seen Jerald Jensen around, they were promoted as a Janitor in West Oakland."
+      },
+      {
+        "pop": "POP-00445",
+        "name": "Sam Fazio",
+        "role": "Digital Twin Architect",
+        "hood": "Lake Merritt",
+        "profile": "Sam Fazio — Digital Twin Architect",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "MYkg427Qeundt7f5vQoB9z",
+          "customId": "cp-POP-00445-c109-PRESS",
+          "cycle": 109,
+          "excerpt": "Working at Civis Systems, I’ve seen how West Oakland businesses like ours, Oakmesh Systems, and Coastline Construction are really shaping the neighborhood.",
+          "highlightKind": "hood",
+          "entity": "West Oakland",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "Working at Civis Systems, I’ve seen how West Oakland businesses like ours, Oakmesh Systems, and Coastline Construction are really shaping the neighborhood."
+      },
+      {
+        "pop": "POP-00520",
+        "name": "Derwin Train",
+        "role": "Grocery Store Owner",
+        "hood": "Chinatown",
+        "profile": "Derwin Train — Grocery Store Owner",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "7aAsM6JSRhnUTUsPuLGJrN",
+          "customId": "cp-POP-00520-c107-PRESS",
+          "cycle": 107,
+          "excerpt": "I see new faces around, people moving in from West Oakland, and it's not all bad.",
+          "highlightKind": "hood",
+          "entity": "West Oakland",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I see new faces around, people moving in from West Oakland, and it's not all bad."
+      },
+      {
+        "pop": "POP-00545",
+        "name": "Rowan Pierce",
+        "role": "Freelance Writer",
+        "hood": "Piedmont Ave",
+        "profile": "Rowan Pierce — Freelance Writer",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "wFmFxFU5k2esp6Rbe63GQN",
+          "customId": "cp-POP-00545-c115-PRESS-fri-lganka",
+          "cycle": 115,
+          "excerpt": "I've noticed that West Oakland is getting a lot more attention lately.",
+          "highlightKind": "hood",
+          "entity": "West Oakland",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I've noticed that West Oakland is getting a lot more attention lately."
+      },
+      {
+        "pop": "POP-00658",
+        "name": "Darius Cike",
+        "role": "Quantum Computing Researcher",
+        "hood": "West Oakland",
+        "profile": "Darius Cike — Quantum Computing Researcher",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "sT86WMA7gRBWaQ8hwcvP8Q",
+          "customId": "cp-POP-00658-c114-PRESS-thu-aaidfj",
+          "cycle": 114,
+          "excerpt": "To be honest, my work in Quantum Computing doesn't directly relate to my decision to move to West Oakland.",
+          "highlightKind": "hood",
+          "entity": "West Oakland",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "To be honest, my work in Quantum Computing doesn't directly relate to my decision to move to West Oakland."
+      },
+      {
+        "pop": "POP-00687",
+        "name": "Alexa Ward",
+        "role": "Licensed Plumber",
+        "hood": "West Oakland",
+        "profile": "Alexa Ward — Licensed Plumber",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "h1RmTZezZEmzBCrsDwgnXe",
+          "customId": "cp-POP-00687-c114-PRESS-fri-efkjfb",
+          "cycle": 114,
+          "excerpt": "I've been living in West Oakland for a while now.",
+          "highlightKind": "hood",
+          "entity": "West Oakland",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I've been living in West Oakland for a while now."
+      },
+      {
+        "pop": "POP-00722",
+        "name": "Daniel Cloak",
+        "role": "Bakery Worker",
+        "hood": "West Oakland",
+        "profile": "Daniel Cloak — Bakery Worker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "XATWcHWHjznfBPFV9ZZqp9",
+          "customId": "cp-POP-00722-c106-PRESS",
+          "cycle": 106,
+          "excerpt": "As someone who works in a bakery and lives in West Oakland, I think community engagement is important and I'm glad they're making an effort.",
+          "highlightKind": "hood",
+          "entity": "West Oakland",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "As someone who works in a bakery and lives in West Oakland, I think community engagement is important and I'm glad they're making an effort."
+      },
+      {
+        "pop": "POP-00758",
+        "name": "Robert Jaston",
+        "role": "Senior Pastor / Faith Leader",
+        "hood": "West Oakland",
+        "profile": "Robert Jaston — Senior Pastor / Faith Leader",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "XpjuA2pQkyX3PRv3Pguqxa",
+          "customId": "cp-POP-00758-c105-PRESS",
+          "cycle": 105,
+          "excerpt": "As a faith leader in West Oakland, I want to see our community thrive, but I'm not sure this initiative is having the impact we need.",
+          "highlightKind": "hood",
+          "entity": "West Oakland",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "As a faith leader in West Oakland, I want to see our community thrive, but I'm not sure this initiative is having the impact we need."
+      },
+      {
+        "pop": "POP-00790",
+        "name": "Marcus Webb",
+        "role": "OEWD Program Director",
+        "hood": "Downtown",
+        "profile": "Marcus Webb — OEWD Program Director",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "aE2GrhuHFLEmNNBoWEFTDF",
+          "customId": "cp-POP-00790-c101-morning",
+          "cycle": 101,
+          "excerpt": "I love the A's, but how many affordable housing units could that build in West Oakland?",
+          "highlightKind": "hood",
+          "entity": "West Oakland",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I love the A's, but how many affordable housing units could that build in West Oakland?"
+      },
+      {
+        "pop": "POP-00950",
+        "name": "Mojisola Cook",
+        "role": "Community Organizer",
+        "hood": "West Oakland",
+        "profile": "Mojisola Cook — Community Organizer",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "schd7JocVHj67wSWx1SBar",
+          "customId": "cp-POP-00950-c112-midday",
+          "cycle": 112,
+          "excerpt": "We're not friends, but we're not enemies either, and for West Oakland, that's enough for now.",
+          "highlightKind": "hood",
+          "entity": "West Oakland",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "We're not friends, but we're not enemies either, and for West Oakland, that's enough for now."
+      },
+      {
+        "pop": "POP-00961",
+        "name": "Darius Clark",
+        "role": "Bakery Worker",
+        "hood": "West Oakland",
+        "profile": "Darius Clark — Bakery Worker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "uyZfbpq7TKKMcGRLpSrrJt",
+          "customId": "cp-POP-00961-c109-PRESS",
+          "cycle": 109,
+          "excerpt": "I've seen that the city's response to things can be pretty mixed, and it's hard to tell how it'll all play out for our neighborhood, but I'm just trying to do my job and take care of my community here in West Oakland.",
+          "highlightKind": "hood",
+          "entity": "West Oakland",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I've seen that the city's response to things can be pretty mixed, and it's hard to tell how it'll all play out for our neighborhood, but I'm just trying to do my job and take care of my community here in West Oakland."
+      },
+      {
+        "pop": "POP-01021",
+        "name": "Vanessa Tran-Muñoz",
+        "role": "OARI Program Director",
+        "hood": "Rockridge",
+        "profile": "Vanessa Tran-Muñoz — OARI Program Director",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "pKUfH8puxEovq6jNxu5PnU",
+          "customId": "cp-POP-01021-c112-PRESS",
+          "cycle": 112,
+          "excerpt": "I want the city to recognize that trained neighbors can make a difference, just like we proved in West Oakland.",
+          "highlightKind": "hood",
+          "entity": "West Oakland",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I want the city to recognize that trained neighbors can make a difference, just like we proved in West Oakland."
+      },
+      {
+        "pop": "POP-01061",
+        "name": "Celeste Moon",
+        "role": "singer",
+        "hood": "KONO",
+        "profile": "Celeste Moon — singer",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "kPW2EQhmQfxn8doNbYj6G8",
+          "customId": "cp-POP-01061-c116-PRESS-wed-ophfjg",
+          "cycle": 116,
+          "excerpt": "I helped a neighbor with the West Oakland Stabilization Fund portal recently because it was really confusing for them.",
+          "highlightKind": "hood",
+          "entity": "West Oakland",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I helped a neighbor with the West Oakland Stabilization Fund portal recently because it was really confusing for them."
+      },
+      {
+        "pop": "POP-01068",
+        "name": "Kai Tanaka",
+        "role": "artist",
+        "hood": "Fruitvale",
+        "profile": "Kai Tanaka — artist",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "r4yVTuReuVjefxQeVAvcSq",
+          "customId": "cp-POP-01068-c114-PRESS-fri-nlheag",
+          "cycle": 114,
+          "excerpt": "To be honest, I haven't really thought much about The A's and their community engagement in West Oakland.",
+          "highlightKind": "hood",
+          "entity": "West Oakland",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "To be honest, I haven't really thought much about The A's and their community engagement in West Oakland."
+      },
+      {
+        "pop": "POP-01071",
+        "name": "Claire Ashford",
+        "role": "author",
+        "hood": "Piedmont Ave",
+        "profile": "Claire Ashford — author",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "BXXhdnKtSRycSdnWR52kVb",
+          "customId": "cp-POP-01071-c113-PRESS-fri-fboknb",
+          "cycle": 113,
+          "excerpt": "To be honest, I haven't really noticed much of a change around here on Piedmont Ave, but I've heard that West Oakland is getting more crowded.",
+          "highlightKind": "hood",
+          "entity": "West Oakland",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "To be honest, I haven't really noticed much of a change around here on Piedmont Ave, but I've heard that West Oakland is getting more crowded."
+      },
+      {
+        "pop": "POP-01095",
+        "name": "Helena Voss-Adeyemi",
+        "role": "Managing Partner, Northgate Construction",
+        "hood": "Rockridge",
+        "profile": "Helena Voss-Adeyemi — Managing Partner, Northgate Construction",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "YJpvNiSFgUFMBR6U5zpUBL",
+          "customId": "cp-POP-01095-c114-PRESS-mon-idcjpa",
+          "cycle": 114,
+          "excerpt": "What matters to me is that when I drive through West Oakland and see our trucks, the guys on those jobs know their checks clear and their backs are covered.",
+          "highlightKind": "hood",
+          "entity": "West Oakland",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "What matters to me is that when I drive through West Oakland and see our trucks, the guys on those jobs know their checks clear and their backs are covered."
+      },
+      {
+        "pop": "POP-01112",
+        "name": "Tariq Harris",
+        "role": "Dental assistant",
+        "hood": "Chinatown",
+        "profile": "Tariq Harris — Dental assistant",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "kSsDbcGDPtPLuzG4TexDtL",
+          "customId": "cp-POP-01112-c107-PRESS",
+          "cycle": 107,
+          "excerpt": "I've seen new people moving in from West Oakland, but it's not like that's necessarily a good thing - it just means they're being priced out of their own neighborhood.",
+          "highlightKind": "hood",
+          "entity": "West Oakland",
+          "predicate": "observe"
+        },
+        "matchedPageLine": "I've seen new people moving in from West Oakland, but it's not like that's necessarily a good thing - it just means they're being priced out of their own neighborhood."
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Maria Keen",
+    "popid": "POP-00013"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-neighborhood",
+      "angle": "West Oakland — the programs that hold the block and the people who founded them",
+      "label": "West Oakland: 9 active programs on the record",
+      "hookLine": "9 active programs in West Oakland; Vinnie Keane and Elias Varek founded them.",
+      "hood": "West Oakland",
+      "citizens": [
+        "Vinnie Keane (POP-00001)",
+        "Elias Varek (POP-00789)"
+      ],
+      "popids": [
+        "POP-00001",
+        "POP-00789"
+      ],
+      "ref": "output/beats/Community_Programs.jsonl @C116",
+      "cycle": 116
+    },
+    "approach": "Neighborhood approach: this slice is one block's record — its community programs and their founders, who is moving in or out, who the block has in a hospital bed or in custody, what it paid on tax day, whose debts crossed the line, and the city's neighborhood hooks this cycle. First-person witness, one block one truth. The programs, founders, movement numbers, patients, defendants and money lines are real; the stoop conversations, the mailboxes, the dog everyone knows are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": {
+    "pulse": {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Bridge & Barrel (Jack London) · quiet night",
+      "named": "Bridge & Barrel",
+      "hood": "Jack London",
+      "person": null,
+      "venue": null
+    },
+    "recommend": {
+      "bag": "lifestyle",
+      "slug": "sharon-okafor",
+      "name": "Sharon Okafor",
+      "popid": "POP-00159",
+      "bagDoc": "docs/media/SHARON_LIFESTYLE_BAG.md",
+      "reason": "top pulse quiet-nightlife → lifestyle",
+      "pulseClass": "quiet-nightlife",
+      "pulseLabel": "Bridge & Barrel (Jack London) · quiet night"
+    },
+    "prewrite": {
+      "pulseClass": "quiet-nightlife",
+      "angle": "Bridge & Barrel is open and quiet in Jack London. What that condition means is not yet established.",
+      "hookLine": "Bridge & Barrel is open and quiet in Jack London.",
+      "anchorFacts": [
+        "NAMED: Bridge & Barrel",
+        "HOOD: Jack London",
+        "VENUE: Bridge & Barrel",
+        "HOOD: Jack London",
+        "EVENING RECORD: open and quiet"
+      ],
+      "bagRecommend": "lifestyle",
+      "bagSlug": "sharon-okafor"
+    },
+    "texture": {
+      "famous": [
+        "Theo Banks",
+        "Ernesto Quintero",
+        "Desmond Morton"
+      ],
+      "restaurants": [
+        {
+          "name": "Harborline Grill",
+          "hood": "Jack London"
+        },
+        {
+          "name": "Port Grind",
+          "hood": "Grand Lake"
+        },
+        {
+          "name": "Third Street Late Kitchen",
+          "hood": "Jack London"
+        }
+      ],
+      "fastFood": [
+        {
+          "name": "SpeedyBurger",
+          "hood": "Downtown"
+        }
+      ],
+      "nightlife": [
+        {
+          "name": "Bridge & Barrel",
+          "hood": "Jack London"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 3,
+        "vibe": "quiet",
+        "movement": "restricted",
+        "weatherImpact": 1
+      },
+      "cityEvents": [
+        "The Kelley Family Block Party",
+        "The Horn Family Block Party",
+        "The Keane Family Block Party"
+      ],
+      "tv": [
+        "Bay Area Alert",
+        "Inside the A's Front Office",
+        "Giancarlo Hernandez (3B) — Player Profile"
+      ],
+      "movies": [
+        "Ninth Inning"
+      ],
+      "sportsBroadcast": "Oakland Sports Tonight",
+      "streamingTrend": "political commentary surge",
+      "foodTrend": "High mobility / civic-tension food trend"
+    },
+    "signals": {
+      "fameCount": 11,
+      "sightingCount": 3,
+      "sightings": [
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Theo Banks spotted at Parkridge Cleaners",
+          "name": "Theo Banks",
+          "venue": "Parkridge Cleaners",
+          "ref": "Ripple_Ledger cycle 116 (CauseType lifestyle-sighting); rendered: world_summary_c116.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Glenview",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Ernesto Quintero spotted at Marine Systems",
+          "name": "Ernesto Quintero",
+          "venue": "Marine Systems",
+          "ref": "Ripple_Ledger cycle 116 (CauseType lifestyle-sighting); rendered: world_summary_c116.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Baylight District",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Desmond Morton spotted at Jade Thread Tailors",
+          "name": "Desmond Morton",
+          "venue": "Jade Thread Tailors",
+          "ref": "Ripple_Ledger cycle 116 (CauseType lifestyle-sighting); rendered: world_summary_c116.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Chinatown",
+          "popids": []
+        }
+      ]
+    },
+    "scene": {
+      "venues": [
+        {
+          "name": "Harborline Grill",
+          "hood": "Jack London"
+        },
+        {
+          "name": "Port Grind",
+          "hood": "Grand Lake"
+        },
+        {
+          "name": "Third Street Late Kitchen",
+          "hood": "Jack London"
+        },
+        {
+          "name": "SpeedyBurger",
+          "hood": "Downtown"
+        },
+        {
+          "name": "Bridge & Barrel",
+          "hood": "Jack London"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 3,
+        "vibe": "quiet",
+        "movement": "restricted",
+        "weatherImpact": 1
+      },
+      "cityEvents": [
+        "The Kelley Family Block Party",
+        "The Horn Family Block Party",
+        "The Keane Family Block Party"
+      ],
+      "tv": [
+        "Bay Area Alert",
+        "Inside the A's Front Office",
+        "Giancarlo Hernandez (3B) — Player Profile"
+      ],
+      "movies": [
+        "Ninth Inning"
+      ],
+      "colorRoom": "Named places only from Evening Texture / desk_signal. The supplied evening record describes nightlife as quiet; raw scoring fields stay internal.  Sensory room (weather, light, sound) is free; careers and employees are not."
+    },
+    "candidates": [
+      {
+        "className": "quiet-nightlife",
+        "score": 24,
+        "label": "Bridge & Barrel (Jack London) · quiet night",
+        "named": "Bridge & Barrel",
+        "hood": "Jack London"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Theo Banks at Parkridge Cleaners (Glenview)",
+        "named": "Parkridge Cleaners",
+        "hood": "Glenview"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Ernesto Quintero at Marine Systems (Baylight District)",
+        "named": "Marine Systems",
+        "hood": "Baylight District"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Desmond Morton at Jade Thread Tailors (Chinatown)",
+        "named": "Jade Thread Tailors",
+        "hood": "Chinatown"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Harborline Grill (Jack London)",
+        "named": "Harborline Grill",
+        "hood": "Jack London"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Port Grind (Grand Lake)",
+        "named": "Port Grind",
+        "hood": "Grand Lake"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Third Street Late Kitchen (Jack London)",
+        "named": "Third Street Late Kitchen",
+        "hood": "Jack London"
+      },
+      {
+        "className": "city-event",
+        "score": 17,
+        "label": "The Kelley Family Block Party",
+        "named": "The Kelley Family Block Party",
+        "hood": null
+      }
+    ],
+    "perSeat": {
+      "mason-ortega": {
+        "pulseClass": "named-restaurant",
+        "label": "Harborline Grill (Jack London)",
+        "score": 34,
+        "bag": "kitchen"
+      },
+      "kai-marston": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Bridge & Barrel (Jack London) · quiet night",
+        "score": 32,
+        "bag": "arts"
+      },
+      "sharon-okafor": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Bridge & Barrel (Jack London) · quiet night",
+        "score": 32,
+        "bag": "lifestyle"
+      },
+      "maria-keen": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Bridge & Barrel (Jack London) · quiet night",
+        "score": 32,
+        "bag": "ground"
+      },
+      "elliot-graye": {
+        "pulseClass": "fame-sighting",
+        "label": "Theo Banks at Parkridge Cleaners (Glenview)",
+        "score": 31,
+        "bag": "faith"
+      }
+    }
+  },
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "HOOD-SLICE-3",
+    "kind": "beat-neighborhood",
+    "seat": {
+      "slug": "maria-keen",
+      "name": "Maria Keen",
+      "popid": "POP-00013",
+      "desk": "culture",
+      "domain": "neighborhood",
+      "builder": "buildNeighborhoodSlice.js"
+    },
+    "hood": "West Oakland",
+    "pulse": {
+      "className": "beat-neighborhood",
+      "score": 100,
+      "label": "West Oakland: 9 active programs on the record",
+      "hood": "West Oakland",
+      "source": "output/beats/Community_Programs.jsonl @C116"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "West Oakland — the programs that hold the block and the people who founded them",
+      "hookLine": "9 active programs in West Oakland; Vinnie Keane and Elias Varek founded them.",
+      "anchorFacts": [
+        "Vinnie Keane Firehouse 29 West Oakland Baseball Academy (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+        "Keane Auxiliary Flag Football League (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+        "West Oakland Mural Collective (arts), West Oakland, since C101",
+        "Civis Systems Civic Fellows Program (tech-education), West Oakland — founded by Elias Varek, since C96",
+        "West Oakland Freight & Logistics Pipeline (economic), West Oakland — founded by Elias Varek, since C91",
+        "New Covenant Pentecostal Assembly Seniors Lunch Program (health), West Oakland, since C83",
+        "West Oakland this cycle: 326 students, 1,733 adults, 313 seniors — moved vs C115: +3 students, +18 adults, +3 seniors",
+        "West Oakland: 5 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "West Oakland: 84 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked"
+      ],
+      "evidence": [
+        {
+          "text": "Vinnie Keane Firehouse 29 West Oakland Baseball Academy (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+          "src": "output/beats/Community_Programs.jsonl @C116 PRG-002"
+        },
+        {
+          "text": "Keane Auxiliary Flag Football League (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+          "src": "output/beats/Community_Programs.jsonl @C116 PRG-006"
+        },
+        {
+          "text": "West Oakland Mural Collective (arts), West Oakland, since C101",
+          "src": "output/beats/Community_Programs.jsonl @C116 PRG-011"
+        },
+        {
+          "text": "Civis Systems Civic Fellows Program (tech-education), West Oakland — founded by Elias Varek, since C96",
+          "src": "output/beats/Community_Programs.jsonl @C116 PRG-019"
+        },
+        {
+          "text": "West Oakland Freight & Logistics Pipeline (economic), West Oakland — founded by Elias Varek, since C91",
+          "src": "output/beats/Community_Programs.jsonl @C116 PRG-021"
+        },
+        {
+          "text": "New Covenant Pentecostal Assembly Seniors Lunch Program (health), West Oakland, since C83",
+          "src": "output/beats/Community_Programs.jsonl @C116 PRG-024"
+        },
+        {
+          "text": "West Oakland this cycle: 326 students, 1,733 adults, 313 seniors — moved vs C115: +3 students, +18 adults, +3 seniors",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C116 vs prev/"
+        },
+        {
+          "text": "West Oakland: 5 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl @C116 judicial West Oakland"
+        },
+        {
+          "text": "West Oakland: 84 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl @C116 hospital West Oakland"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "PRIOR_CYCLE_ON_DISK",
+        "vs": 115
+      },
+      "hooks": [
+        {
+          "text": "Travis Paiz and Jocelyn Santo — a friendship turned into something more",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Lake Merritt",
+          "priority": 3
+        },
+        {
+          "text": "A family bought their home in Chinatown",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Chinatown",
+          "priority": 3
+        },
+        {
+          "text": "A family bought their home in Chinatown",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Chinatown",
+          "priority": 3
+        },
+        {
+          "text": "A family bought their home in Fruitvale",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Fruitvale",
+          "priority": 3
+        },
+        {
+          "text": "Downtown boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Downtown",
+          "priority": 7
+        },
+        {
+          "text": "Downtown housing pressure at 10/10: rents climbing, households stretching to stay",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Downtown",
+          "priority": 7
+        },
+        {
+          "text": "West Oakland boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "West Oakland",
+          "priority": 7
+        },
+        {
+          "text": "Fruitvale housing pressure at 9.5/10: rents climbing, households stretching to stay",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Fruitvale",
+          "priority": 7
+        }
+      ],
+      "note": null,
+      "pageVoices": [],
+      "roomIsYours": "the stoop, the corner store counter, who moved in last month and who is thinking about leaving, what the block argues about"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "Former Designated Hitter, Oakland A's Legend",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Piedmont Ave",
+        "why": "founded Vinnie Keane Firehouse 29 West Oakland Baseball Academy (Community_Programs)"
+      },
+      {
+        "popid": "POP-00789",
+        "name": "Elias Varek",
+        "role": "Founder of Civis Systems",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Elias Varek — Founder of Civis Systems — West Oakland",
+        "why": "founded Civis Systems Civic Fellows Program (Community_Programs)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Community_Programs.jsonl @C116",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Maria Keen this cycle)"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Maria Keen",
+    "popid": "POP-00013",
+    "text": "I'm planning to explore the impact of Vinnie Keane's retirement on the community programs he founded in West Oakland. I want to understand how his absence will be felt and how the programs will continue without his direct involvement.",
+    "plan": {
+      "chase": "I'm planning to explore the impact of Vinnie Keane's retirement on the community programs he founded in West Oakland. I want to understand how his absence will be felt and how the programs will continue without his direct involvement.",
+      "focus": "Vinnie Keane's legacy in West Oakland",
+      "why": "Vinnie Keane was a significant figure in West Oakland, founding multiple community programs that have been active since C101. His retirement is a notable event that could have a substantial impact on the community.",
+      "checks": [
+        "Verify the current status of the programs founded by Vinnie Keane",
+        "Identify key individuals involved in the programs"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00001",
+          "question": "How does Vinnie Keane plan to continue his involvement with the community programs he founded after his retirement?",
+          "basis": "Vinnie Keane is the founder of several community programs in West Oakland"
+        },
+        {
+          "pop": "POP-00789",
+          "question": "How will Elias Varek's programs interact with or support the programs founded by Vinnie Keane in the future?",
+          "basis": "Elias Varek is also a founder of community programs in West Oakland"
+        }
+      ],
+      "interpretation": "The retirement of Vinnie Keane presents an opportunity to examine the sustainability and resilience of community programs in West Oakland.",
+      "unverifiedLead": [
+        "Potential changes in program leadership",
+        "Community response to Vinnie Keane's retirement"
+      ]
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Grand Lake neighborhood texture — how residents experience the improvement | Residents of Grand Lake feel the change firsthand.",
+      "kind": "anomaly",
+      "hood": "Grand Lake",
+      "ref": "output/engine_audit_c116.json patterns[7]; evidence: Initiative_Tracker row(s) 9; storyline INIT-009:vote-scheduled",
+      "popids": [
+        "POP-01218",
+        "POP-01244",
+        "POP-01249"
+      ]
+    },
+    {
+      "label": "Fruitvale | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Fruitvale",
+      "ref": "output/neighborhood_texture_c116.md \"### Fruitvale\"; events: world_summary_c116.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Glenview | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Glenview",
+      "ref": "output/neighborhood_texture_c116.md \"### Glenview\"; events: world_summary_c116.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Grand Lake | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Grand Lake",
+      "ref": "output/neighborhood_texture_c116.md \"### Grand Lake\"; events: world_summary_c116.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Piedmont Ave | 2 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Piedmont Ave",
+      "ref": "output/neighborhood_texture_c116.md \"### Piedmont Ave\"; events: world_summary_c116.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 30,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-20T12:16:34.022Z"
+}

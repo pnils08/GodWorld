@@ -7,63 +7,63 @@
       "v": "UNDOCKED-FEED/1",
       "Cycle": 116,
       "EventType": "undocked-episode",
-      "POPID": "POP-01188",
-      "Holder": "Marguerite Kimball-Ostrow",
-      "EpisodeId": "undocked-pop01188-Y3C12-e2",
+      "POPID": "POP-00918",
+      "Holder": "Manju Abebe",
+      "EpisodeId": "undocked-pop00918-Y3C12-e2",
       "CreditsDelta": 0,
-      "PointsDelta": 9.23,
+      "PointsDelta": 11.83,
       "Systems": [
-        "antares",
-        "gsc_0041",
+        "sirius",
+        "nova_terra",
+        "furud",
+        "acrux",
+        "botein",
+        "intercrus",
+        "gsc_0044",
+        "atlas",
+        "cedarhold",
+        "achernar",
+        "ruchbah",
+        "ironhollow",
+        "pherkad",
         "shaula",
         "alnair",
         "wolf_1061",
         "gsc_0031",
-        "gsc_0021",
-        "gliese_876",
-        "felis",
-        "biham",
-        "gsc_0035",
-        "jasmine",
-        "mirach",
-        "azha",
-        "groombridge_1618",
-        "silverbend",
-        "alnilam",
-        "jishui"
+        "gsc_0021"
       ],
       "CombatEvents": 0,
       "MishapCount": 0,
-      "Magnitude": 1,
+      "Magnitude": 2,
       "Flags": [
         "credits_delta_windowed"
       ],
-      "StagedPath": "output/spacemolt-show/staged/undocked-pop01188-2026-11-19T02-30-32.json"
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00918-2026-11-20T02-30-32.json"
     }
   ],
   "laneEntries": [
     {
-      "ref": "undocked:undocked-pop01188-Y3C12-e2",
-      "label": "UNDOCKED: Marguerite Kimball-Ostrow, Wednesday night",
+      "ref": "undocked:undocked-pop00918-Y3C12-e2",
+      "label": "UNDOCKED: Manju Abebe, Thursday night",
       "kind": "undocked",
       "popids": [
-        "POP-01188"
+        "POP-00918"
       ],
       "nightSource": "record",
       "handle": {
-        "angle": "UNDOCKED episode: Marguerite Kimball-Ostrow, Wednesday night. Standings: Luis Taz leads the board — rank #1, 45.19 achievement points, 0 credits, 3 cycle(s) led, current streak 3. In the chair: Marguerite Kimball-Ostrow — Elementary Teacher.",
+        "angle": "UNDOCKED episode: Manju Abebe, Thursday night. Standings: Luis Taz leads the board — rank #1, 45.19 achievement points, 0 credits, 3 cycle(s) led, current streak 3. In the chair: Manju Abebe — Plumber.",
         "citizens": [
-          "Marguerite Kimball-Ostrow — Elementary Teacher, UNDOCKED cast pilot"
+          "Manju Abebe — Plumber, UNDOCKED cast pilot"
         ],
         "facts": [
-          "Marguerite Kimball-Ostrow's Wednesday night on UNDOCKED: went through Antares, Gsc 0041, Shaula, Alnair, Wolf 1061, Gsc 0031, Gsc 0021, Gliese 876, Felis, Biham, Gsc 0035, Jasmine, Mirach, Azha, Groombridge 1618, Silverbend, Alnilam and Jishui; came out even on credits; flew until the show's time ran out.",
-          "Marguerite Kimball-Ostrow — Elementary Teacher (ledger)"
+          "Manju Abebe's Thursday night on UNDOCKED: went through Sirius, Nova Terra, Furud, Acrux, Botein, Intercrus, Gsc 0044, Atlas, Cedarhold, Achernar, Ruchbah, Ironhollow, Pherkad, Shaula, Alnair, Wolf 1061, Gsc 0031 and Gsc 0021; came out even on credits; flew until the show's time ran out.",
+          "Manju Abebe — Plumber (ledger)"
         ]
       },
       "who": {
-        "name": "Marguerite Kimball-Ostrow",
-        "roleType": "Elementary Teacher",
-        "employerBizId": "BIZ-00016",
+        "name": "Manju Abebe",
+        "roleType": "Plumber",
+        "employerBizId": "UNTRACKED",
         "tier": "4",
         "career": []
       },
@@ -71,44 +71,44 @@
         "v": "UNDOCKED-FEED/1",
         "Cycle": 116,
         "EventType": "undocked-episode",
-        "POPID": "POP-01188",
-        "Holder": "Marguerite Kimball-Ostrow",
-        "EpisodeId": "undocked-pop01188-Y3C12-e2",
+        "POPID": "POP-00918",
+        "Holder": "Manju Abebe",
+        "EpisodeId": "undocked-pop00918-Y3C12-e2",
         "CreditsDelta": 0,
-        "PointsDelta": 9.23,
+        "PointsDelta": 11.83,
         "Systems": [
-          "antares",
-          "gsc_0041",
+          "sirius",
+          "nova_terra",
+          "furud",
+          "acrux",
+          "botein",
+          "intercrus",
+          "gsc_0044",
+          "atlas",
+          "cedarhold",
+          "achernar",
+          "ruchbah",
+          "ironhollow",
+          "pherkad",
           "shaula",
           "alnair",
           "wolf_1061",
           "gsc_0031",
-          "gsc_0021",
-          "gliese_876",
-          "felis",
-          "biham",
-          "gsc_0035",
-          "jasmine",
-          "mirach",
-          "azha",
-          "groombridge_1618",
-          "silverbend",
-          "alnilam",
-          "jishui"
+          "gsc_0021"
         ],
         "CombatEvents": 0,
         "MishapCount": 0,
-        "Magnitude": 1,
+        "Magnitude": 2,
         "Flags": [
           "credits_delta_windowed"
         ],
-        "StagedPath": "output/spacemolt-show/staged/undocked-pop01188-2026-11-19T02-30-32.json"
+        "StagedPath": "output/spacemolt-show/staged/undocked-pop00918-2026-11-20T02-30-32.json"
       },
-      "hood": "Piedmont Ave"
+      "hood": "Chinatown"
     }
   ],
   "standings": {
-    "asOf": "2026-11-19T02:55:52.438Z",
+    "asOf": "2026-11-20T02:55:42.976Z",
     "leader": {
       "Rank": 1,
       "POPID": "POP-00298",
@@ -125,5 +125,5 @@
       "PointsPending": 0
     }
   },
-  "generatedAt": "2026-11-19T12:15:04.667Z"
+  "generatedAt": "2026-11-20T12:15:04.704Z"
 }

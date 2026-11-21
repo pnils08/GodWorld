@@ -1,0 +1,32 @@
+# The Ones Who Keep Showing Up
+
+Start with the name on the Academy: the Vinnie Keane Firehouse 29 West Oakland Baseball Academy. It has been on West Oakland's program record since C101, and it was founded by the man whose name is on it. The Keane Auxiliary Flag Football League sits beside it, also his, also since C101. The West Oakland Mural Collective began that same cycle. It has no founder on the record, only a start date. I won't pretend to know whose hands made the walls, but I notice that three programs began together.
+
+I can't tell you what the Academy looks like on a Saturday, because the record doesn't, and I won't paint a field I haven't been handed. What I can tell you is what its founder said, and how it sounds when the career is over and the block is still there.
+
+"I've founded a couple of programs in West Oakland, like the Firehouse 29 Baseball Academy and the Keane Auxiliary Flag Football League," Vinnie Keane said. "I plan to keep being involved with them, just in a different way now that I'm retired. I'm still around the neighborhood, and I'll keep showing up to support the kids and the community."
+
+*Showing up* is the whole philosophy, and it's the thing this neighborhood has always valued over speeches. He's a Former Designated Hitter, an A's legend whose ledger line still says Piedmont Ave. But the sentence he chose was about West Oakland and the kids. Then, almost in passing, he went to Mark Aitken: "Mark Aitken leaving the A's was a tough pill to swallow, but I'm proud of what he's done for the city, and I know he'll keep making a difference wherever he goes." Two men are changing what they do for the city, and one of them is saying out loud that he isn't leaving the block.
+
+Elias Varek is thinking about the same thing from the other side of the ledger. He founded the Civis Systems Civic Fellows Program (since C96) and the West Oakland Freight & Logistics Pipeline (since C91). Both are rooted in this ground, which has more freight than lawn.
+
+"I've been thinking a lot about Vinnie Keane's retirement and what it means for the programs we both founded in West Oakland," Varek said. "To be honest, it's still sinking in. Vinnie was a pillar, not just for the A's but for this community. The programs he started, like the Firehouse 29 West Oakland Baseball Academy and the Keane Auxiliary Flag Football League, they're still active and doing well. Civis Systems has been working closely with those programs, and we'll continue to support them. My focus now is on ensuring that the transition is smooth and that the community continues to benefit from the work we've done together."
+
+"Still sinking in" is the honest part. A man this rich usually speaks in finished sentences, and that one wasn't finished. I'll say what I don't know: the Packet doesn't tell me what "transition" means, who runs what, or whether anything about the Academy's day-to-day is changing. I'm not going to guess on a man's behalf. Both founders say the programs are active, and the record agrees: nine of them in West Oakland, with Keane and Varek named as the founders.
+
+Then there is the oldest program on the list, one that nobody famous is attached to. The New Covenant Pentecostal Assembly Seniors Lunch Program has been on the record since C83, the longest-running on the roster. Lunch for seniors does not make headlines. It outlasts them. Of the neighborhood's people this cycle, 313 are seniors, up three from C115. Students number 326, also up three, and adults 1,733, up eighteen. These aren't big movements. They are a few more people on a block that is already carrying a lot, and a few more people who will need a plate, a field, or a wall.
+
+The block carries other weight too. The care and justice census, which counts people and doesn't narrate them, shows 84 sick residents in West Oakland this cycle, with 2 admissions and 4 people in care at the close, filling 4 beds. On the judicial side it shows 5 charges, 1 arrest, and 2 people in custody at the close. None of those people are tracked by name, and I'm not going to put faces on them. But I want it said in a culture piece that the programs are holding a block with hospital beds and cells in the same count as its flag football. The kids and the seniors live in that same arithmetic.
+
+Delvon Pratt, a warehouse supervisor, said what the arithmetic doesn't: "I've been living in West Oakland for a while now, and it's hard not to notice the industrial vibe around here. You've got warehouses, factories, and all sorts of businesses operating around the clock. It's not just residential; it's a working neighborhood. I like that about it. As a warehouse supervisor myself, I see a lot of familiar faces and operations around here. It's a character that feels right at home to me."
+
+*Around the clock* is the night shift, the people whose names never make a program list. A neighborhood that runs around the clock needs lunches at noon, a ball field in the afternoon, and a wall to look at on the way home at dawn. The programs are how the work in this place gets turned into something a child can stand inside.
+
+So here is what I keep turning over. The names on these programs are a ballplayer's and a founder's. A ballplayer who says he'll "keep showing up" has made a promise, and promises on a block like this get checked by who is actually standing there. Who stands there when the new season starts? When Keane says "in a different way," and Varek says "smooth," who tells the Academy's kids and the seniors at New Covenant what that means for Tuesday?
+
+## INTAKE
+NAMES: Vinnie Keane | quoted-source
+NAMES: Elias Varek | quoted-source
+NAMES: Delvon Pratt | quoted-source
+HOOD: West Oakland
+CLAIM: I've founded a couple of programs in West Oakland, like the Firehouse 29 Baseball Academy and the Keane Auxiliary Flag Football League. I plan to keep being involved with them, just in a different way now that I'm retired. I'm still around the neighborhood, and I'll keep showing up to support the kids and the community. Mark Aitken leaving the A's was a tough pill to swallow, but I'm proud of what he's done for the city, and I know he'll keep making a difference wherever he goes. | citizenVoice PRESS Vinnie Keane

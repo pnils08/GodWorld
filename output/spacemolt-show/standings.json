@@ -1,6 +1,6 @@
 {
   "v": "UNDOCKED-STANDINGS/2",
-  "computedAt": "2026-11-20T02:55:42.976Z",
+  "computedAt": "2026-11-21T02:55:59.339Z",
   "rows": [
     {
       "Rank": 1,
@@ -94,6 +94,21 @@
     },
     {
       "Rank": 7,
+      "POPID": "POP-00663",
+      "Holder": "Soo Loo",
+      "Episodes": 5,
+      "PointsTotal": 37.43000000000001,
+      "CreditsTotal": 1038,
+      "CombatTotal": 5,
+      "MishapTotal": 0,
+      "BestMagnitude": 3,
+      "LastAiredCycle": 117,
+      "CyclesLed": 0,
+      "CurrentStreak": 0,
+      "PointsPending": 0
+    },
+    {
+      "Rank": 8,
       "POPID": "POP-01188",
       "Holder": "Marguerite Kimball-Ostrow",
       "Episodes": 2,
@@ -108,7 +123,7 @@
       "PointsPending": 0
     },
     {
-      "Rank": 8,
+      "Rank": 9,
       "POPID": "POP-00184",
       "Holder": "Brooklyn Nguyen",
       "Episodes": 2,
@@ -123,7 +138,7 @@
       "PointsPending": 0
     },
     {
-      "Rank": 9,
+      "Rank": 10,
       "POPID": "POP-00816",
       "Holder": "Daphne Stafford",
       "Episodes": 2,
@@ -134,21 +149,6 @@
       "BestMagnitude": 2,
       "LastAiredCycle": 114,
       "CyclesLed": 1,
-      "CurrentStreak": 0,
-      "PointsPending": 0
-    },
-    {
-      "Rank": 10,
-      "POPID": "POP-00663",
-      "Holder": "Soo Loo",
-      "Episodes": 4,
-      "PointsTotal": 21.130000000000003,
-      "CreditsTotal": 25,
-      "CombatTotal": 5,
-      "MishapTotal": 0,
-      "BestMagnitude": 3,
-      "LastAiredCycle": 117,
-      "CyclesLed": 0,
       "CurrentStreak": 0,
       "PointsPending": 0
     },

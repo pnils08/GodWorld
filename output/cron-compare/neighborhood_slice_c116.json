@@ -1,0 +1,282 @@
+{
+  "version": "HOOD-SLICE-3",
+  "empty": false,
+  "cycle": 116,
+  "kind": "beat-neighborhood",
+  "seat": {
+    "slug": "maria-keen",
+    "name": "Maria Keen",
+    "popid": "POP-00013",
+    "desk": "culture",
+    "domain": "neighborhood",
+    "builder": "buildNeighborhoodSlice.js"
+  },
+  "hood": "West Oakland",
+  "pulse": {
+    "className": "beat-neighborhood",
+    "score": 100,
+    "label": "West Oakland: 9 active programs on the record",
+    "hood": "West Oakland",
+    "source": "output/beats/Community_Programs.jsonl @C116"
+  },
+  "story": {
+    "kind": "beat-neighborhood",
+    "angle": "West Oakland — the programs that hold the block and the people who founded them",
+    "label": "West Oakland: 9 active programs on the record",
+    "hookLine": "9 active programs in West Oakland; Vinnie Keane and Elias Varek founded them.",
+    "hood": "West Oakland",
+    "citizens": [
+      "Vinnie Keane (POP-00001)",
+      "Elias Varek (POP-00789)"
+    ],
+    "popids": [
+      "POP-00001",
+      "POP-00789"
+    ],
+    "ref": "output/beats/Community_Programs.jsonl @C116",
+    "cycle": 116
+  },
+  "approach": "Neighborhood approach: this slice is one block's record — its community programs and their founders, who is moving in or out, who the block has in a hospital bed or in custody, what it paid on tax day, whose debts crossed the line, and the city's neighborhood hooks this cycle. First-person witness, one block one truth. The programs, founders, movement numbers, patients, defendants and money lines are real; the stoop conversations, the mailboxes, the dog everyone knows are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-00001",
+      "name": "Vinnie Keane",
+      "role": "Former Designated Hitter, Oakland A's Legend",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Piedmont Ave",
+      "why": "founded Vinnie Keane Firehouse 29 West Oakland Baseball Academy (Community_Programs)"
+    },
+    {
+      "popid": "POP-00789",
+      "name": "Elias Varek",
+      "role": "Founder of Civis Systems",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Elias Varek — Founder of Civis Systems — West Oakland",
+      "why": "founded Civis Systems Civic Fellows Program (Community_Programs)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "Vinnie Keane Firehouse 29 West Oakland Baseball Academy (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+      "src": "output/beats/Community_Programs.jsonl @C116 PRG-002"
+    },
+    {
+      "text": "Keane Auxiliary Flag Football League (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+      "src": "output/beats/Community_Programs.jsonl @C116 PRG-006"
+    },
+    {
+      "text": "West Oakland Mural Collective (arts), West Oakland, since C101",
+      "src": "output/beats/Community_Programs.jsonl @C116 PRG-011"
+    },
+    {
+      "text": "Civis Systems Civic Fellows Program (tech-education), West Oakland — founded by Elias Varek, since C96",
+      "src": "output/beats/Community_Programs.jsonl @C116 PRG-019"
+    },
+    {
+      "text": "West Oakland Freight & Logistics Pipeline (economic), West Oakland — founded by Elias Varek, since C91",
+      "src": "output/beats/Community_Programs.jsonl @C116 PRG-021"
+    },
+    {
+      "text": "New Covenant Pentecostal Assembly Seniors Lunch Program (health), West Oakland, since C83",
+      "src": "output/beats/Community_Programs.jsonl @C116 PRG-024"
+    },
+    {
+      "text": "West Oakland this cycle: 326 students, 1,733 adults, 313 seniors — moved vs C115: +3 students, +18 adults, +3 seniors",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C116 vs prev/"
+    },
+    {
+      "text": "West Oakland: 5 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl @C116 judicial West Oakland"
+    },
+    {
+      "text": "West Oakland: 84 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+      "src": "output/beats/Care_Justice_Census.jsonl @C116 hospital West Oakland"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "West Oakland — the programs that hold the block and the people who founded them",
+    "hookLine": "9 active programs in West Oakland; Vinnie Keane and Elias Varek founded them.",
+    "anchorFacts": [
+      "Vinnie Keane Firehouse 29 West Oakland Baseball Academy (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+      "Keane Auxiliary Flag Football League (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+      "West Oakland Mural Collective (arts), West Oakland, since C101",
+      "Civis Systems Civic Fellows Program (tech-education), West Oakland — founded by Elias Varek, since C96",
+      "West Oakland Freight & Logistics Pipeline (economic), West Oakland — founded by Elias Varek, since C91",
+      "New Covenant Pentecostal Assembly Seniors Lunch Program (health), West Oakland, since C83",
+      "West Oakland this cycle: 326 students, 1,733 adults, 313 seniors — moved vs C115: +3 students, +18 adults, +3 seniors",
+      "West Oakland: 5 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+      "West Oakland: 84 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked"
+    ],
+    "evidence": [
+      {
+        "text": "Vinnie Keane Firehouse 29 West Oakland Baseball Academy (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+        "src": "output/beats/Community_Programs.jsonl @C116 PRG-002"
+      },
+      {
+        "text": "Keane Auxiliary Flag Football League (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+        "src": "output/beats/Community_Programs.jsonl @C116 PRG-006"
+      },
+      {
+        "text": "West Oakland Mural Collective (arts), West Oakland, since C101",
+        "src": "output/beats/Community_Programs.jsonl @C116 PRG-011"
+      },
+      {
+        "text": "Civis Systems Civic Fellows Program (tech-education), West Oakland — founded by Elias Varek, since C96",
+        "src": "output/beats/Community_Programs.jsonl @C116 PRG-019"
+      },
+      {
+        "text": "West Oakland Freight & Logistics Pipeline (economic), West Oakland — founded by Elias Varek, since C91",
+        "src": "output/beats/Community_Programs.jsonl @C116 PRG-021"
+      },
+      {
+        "text": "New Covenant Pentecostal Assembly Seniors Lunch Program (health), West Oakland, since C83",
+        "src": "output/beats/Community_Programs.jsonl @C116 PRG-024"
+      },
+      {
+        "text": "West Oakland this cycle: 326 students, 1,733 adults, 313 seniors — moved vs C115: +3 students, +18 adults, +3 seniors",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C116 vs prev/"
+      },
+      {
+        "text": "West Oakland: 5 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl @C116 judicial West Oakland"
+      },
+      {
+        "text": "West Oakland: 84 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl @C116 hospital West Oakland"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": {
+      "state": "PRIOR_CYCLE_ON_DISK",
+      "vs": 115
+    },
+    "hooks": [
+      {
+        "text": "Travis Paiz and Jocelyn Santo — a friendship turned into something more",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Lake Merritt",
+        "priority": 3
+      },
+      {
+        "text": "A family bought their home in Chinatown",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Chinatown",
+        "priority": 3
+      },
+      {
+        "text": "A family bought their home in Chinatown",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Chinatown",
+        "priority": 3
+      },
+      {
+        "text": "A family bought their home in Fruitvale",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Fruitvale",
+        "priority": 3
+      },
+      {
+        "text": "Downtown boom sustained — momentum 10/10, the block everyone wants onto",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Downtown",
+        "priority": 7
+      },
+      {
+        "text": "Downtown housing pressure at 10/10: rents climbing, households stretching to stay",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Downtown",
+        "priority": 7
+      },
+      {
+        "text": "West Oakland boom sustained — momentum 10/10, the block everyone wants onto",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "West Oakland",
+        "priority": 7
+      },
+      {
+        "text": "Fruitvale housing pressure at 9.5/10: rents climbing, households stretching to stay",
+        "angle": "observational analysis",
+        "domain": "COMMUNITY",
+        "hood": "Fruitvale",
+        "priority": 7
+      }
+    ],
+    "note": null,
+    "pageVoices": [],
+    "roomIsYours": "the stoop, the corner store counter, who moved in last month and who is thinking about leaving, what the block argues about"
+  },
+  "programs": [
+    "Vinnie Keane Firehouse 29 West Oakland Baseball Academy",
+    "Keane Auxiliary Flag Football League",
+    "West Oakland Mural Collective",
+    "Civis Systems Civic Fellows Program",
+    "West Oakland Freight & Logistics Pipeline",
+    "New Covenant Pentecostal Assembly Seniors Lunch Program",
+    "Keane Foundation",
+    "West Oakland Retail Recovery Fund",
+    "West Oakland Neighbors Association"
+  ],
+  "rotation": {
+    "index": 8,
+    "of": 9
+  },
+  "careJustice": {
+    "custody": {
+      "scope": "neighborhood",
+      "hood": "West Oakland",
+      "complete": true,
+      "completeness": "complete",
+      "demand": 5,
+      "intakes": 1,
+      "tracked": 0,
+      "other": 1,
+      "closing": 2,
+      "trackedOcc": 0,
+      "otherOcc": 2,
+      "beds": null,
+      "exits": 2,
+      "names": []
+    },
+    "care": {
+      "scope": "neighborhood",
+      "hood": "West Oakland",
+      "complete": true,
+      "completeness": "complete",
+      "demand": 84,
+      "intakes": 2,
+      "tracked": 0,
+      "other": 2,
+      "closing": 4,
+      "trackedOcc": 0,
+      "otherOcc": 4,
+      "beds": 4,
+      "exits": 2,
+      "names": []
+    },
+    "debt": {
+      "defaults": [],
+      "overLine": 10,
+      "crisisByHood": {}
+    }
+  },
+  "pointers": [
+    "output/beats/Community_Programs.jsonl @C116",
+    "output/beats/Story_Hook_Deck.jsonl (hooks for Maria Keen this cycle)"
+  ]
+}

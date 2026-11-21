@@ -1,0 +1,76 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "116",
+  "persona": "sharon-okafor",
+  "byline": "Sharon Okafor",
+  "bylinePopid": "POP-00159",
+  "article": "output/cron-compare/staged/culture_c116_sharon-okafor_packet-v2_openai-gpt-5-6-luna.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Vinnie Keane",
+        "role": "quoted-source",
+        "popid": "POP-00001"
+      },
+      {
+        "name": "Theo Banks",
+        "role": "quoted-source",
+        "popid": "POP-01056"
+      },
+      {
+        "name": "Lena Cross",
+        "role": "quoted-source",
+        "popid": "POP-00539"
+      },
+      {
+        "name": "Benji Dillon",
+        "role": "quoted-source",
+        "popid": "POP-00018"
+      },
+      {
+        "name": "Nia Rook",
+        "role": "mentioned",
+        "popid": "POP-01076",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Piedmont Ave"
+    ],
+    "claims": [
+      {
+        "claim": "My daily life hasn't changed that much since I retired. I still get recognized around town, like at the grocery store. People know me, and I like that. I'm still involved with the A's, just in a different way now. I'm not on the field every day, but I'm still around the neighborhood, and folks say hello. It's a good life.",
+        "sourceRef": "citizenVoice PRESS Vinnie Keane"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-5d04b7fd833e",
+    "draftSha256": "4581b90b13d893f03f9b3ef4a9287ac5cdcc92c52d5bd3ae2ae199664bcc1582",
+    "verdict": "output/cron-compare/culture_c116_sharon-okafor_packet-v2_openai-gpt-5-6-luna.rhea.json",
+    "ranAt": "2026-11-21T00:17:25.503Z",
+    "contractScore": {
+      "opened": false,
+      "purposeMet": false,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 709,
+      "short": "The piece fails to open with a venue, location, and condition, and profiles Vinnie Keane's retirement instead of framing a venue condition as a behavior question.",
+      "score": 1,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "4581b90b13d893f03f9b3ef4a9287ac5cdcc92c52d5bd3ae2ae199664bcc1582",
+      "costUsd": 0.001
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-21T00:17:29.246Z"
+}

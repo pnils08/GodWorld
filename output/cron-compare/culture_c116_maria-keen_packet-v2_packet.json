@@ -1,0 +1,1007 @@
+{
+  "stage": "report",
+  "desk": "culture",
+  "cycle": "116",
+  "persona": "maria-keen",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Maria Keen",
+    "popid": "POP-00013"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-neighborhood",
+      "angle": "West Oakland — the programs that hold the block and the people who founded them",
+      "label": "West Oakland: 9 active programs on the record",
+      "hookLine": "9 active programs in West Oakland; Vinnie Keane and Elias Varek founded them.",
+      "hood": "West Oakland",
+      "citizens": [
+        "Vinnie Keane (POP-00001)",
+        "Elias Varek (POP-00789)"
+      ],
+      "popids": [
+        "POP-00001",
+        "POP-00789"
+      ],
+      "ref": "output/beats/Community_Programs.jsonl @C116",
+      "cycle": 116
+    }
+  },
+  "angle": "output/cron-compare/culture_c116_maria-keen_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 3,
+  "quotes": [
+    {
+      "pop": "POP-00001",
+      "name": "Vinnie Keane",
+      "quote": "I've founded a couple of programs in West Oakland, like the Firehouse 29 Baseball Academy and the Keane Auxiliary Flag Football League. I plan to keep being involved with them, just in a different way now that I'm retired. I'm still around the neighborhood, and I'll keep showing up to support the kids and the community. Mark Aitken leaving the A's was a tough pill to swallow, but I'm proud of what he's done for the city, and I know he'll keep making a difference wherever he goes.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; openly affectionate, big-hearted; curious, open to new things; unshakable, calm under anything; principled, plays it straight; close to family; often out in the neighborhood; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've founded a couple of programs in West Oakland, like the Firehouse 29 Baseball Academy and the Keane Auxiliary Flag Football League. I plan to keep being involved with them, just in a different way now that I'm retired. I'm still around the neighborhood, and I'll keep showing up to support the kids and the community. Mark Aitken leaving the A's was a tough pill to swallow, but I'm proud of what he's done for the city, and I know he'll keep making a difference wherever he goes.\",\n  \"fact_ids\": [\"F-8fce5a1594dc\", \"F-4477c417d65d\", \"F-1e9cdb0dd15b\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-8fce5a1594dc",
+          "F-4477c417d65d",
+          "F-1e9cdb0dd15b"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00001-b3b5a33e03",
+        "authoredQuote": true,
+        "publishableQuote": "I've founded a couple of programs in West Oakland, like the Firehouse 29 Baseball Academy and the Keane Auxiliary Flag Football League. I plan to keep being involved with them, just in a different way now that I'm retired. I'm still around the neighborhood, and I'll keep showing up to support the kids and the community. Mark Aitken leaving the A's was a tough pill to swallow, but I'm proud of what he's done for the city, and I know he'll keep making a difference wherever he goes."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00001",
+          "name": "Vinnie Keane",
+          "role": "Former Designated Hitter, Oakland A's Legend",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "How does Vinnie Keane plan to continue his involvement with the community programs he founded after his retirement? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "West Oakland",
+          "focus": "Vinnie Keane's legacy in West Oakland",
+          "src": "output/beats/Community_Programs.jsonl @C116"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Piedmont Ave",
+          "evidence": [
+            {
+              "id": "EV-547bed64d3",
+              "src": "output/beats/Community_Programs.jsonl @C116",
+              "text": "9 active programs in West Oakland; Vinnie Keane and Elias Varek founded them."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "9 active programs in West Oakland; Vinnie Keane and Elias Varek founded them.",
+            "src": "output/beats/Community_Programs.jsonl @C116",
+            "id": "F-4e144466672a"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane Firehouse 29 West Oakland Baseball Academy (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C116 PRG-002",
+            "id": "F-8fce5a1594dc"
+          },
+          {
+            "t": "FACT",
+            "text": "Keane Auxiliary Flag Football League (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C116 PRG-006",
+            "id": "F-4477c417d65d"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "West Oakland: 9 active programs on the record",
+            "src": "output/beats/Community_Programs.jsonl @C116",
+            "id": "F-0b66d1128813"
+          },
+          {
+            "t": "FACT",
+            "text": "West Oakland Mural Collective (arts), West Oakland, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C116 PRG-011",
+            "id": "F-3184d335a548"
+          },
+          {
+            "t": "FACT",
+            "text": "Civis Systems Civic Fellows Program (tech-education), West Oakland — founded by Elias Varek, since C96",
+            "src": "output/beats/Community_Programs.jsonl @C116 PRG-019",
+            "id": "F-8fa11b84c4ee"
+          },
+          {
+            "t": "FACT",
+            "text": "West Oakland Freight & Logistics Pipeline (economic), West Oakland — founded by Elias Varek, since C91",
+            "src": "output/beats/Community_Programs.jsonl @C116 PRG-021",
+            "id": "F-fed14779574d"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Piedmont Ave",
+            "src": "Simulation_Ledger profile for POP-00001",
+            "id": "F-1e9cdb0dd15b"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00789",
+      "name": "Elias Varek",
+      "quote": "I've been thinking a lot about Vinnie Keane's retirement and what it means for the programs we both founded in West Oakland. To be honest, it's still sinking in. Vinnie was a pillar, not just for the A's but for this community. The programs he started, like the Firehouse 29 West Oakland Baseball Academy and the Keane Auxiliary Flag Football League, they're still active and doing well. Civis Systems has been working closely with those programs, and we'll continue to support them. My focus now is on ensuring that the transition is smooth and that the community continues to benefit from the work we've done together.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; curious, open to new things; often out in the neighborhood; fairly principled",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've been thinking a lot about Vinnie Keane's retirement and what it means for the programs we both founded in West Oakland. To be honest, it's still sinking in. Vinnie was a pillar, not just for the A's but for this community. The programs he started, like the Firehouse 29 West Oakland Baseball Academy and the Keane Auxiliary Flag Football League, they're still active and doing well. Civis Systems has been working closely with those programs, and we'll continue to support them. My focus now is on ensuring that the transition is smooth and that the community continues to benefit from the work we've done together.\",\n  \"fact_ids\": [\"F-4e144466672a\", \"F-8fa11b84c4ee\", \"F-fed14779574d\", \"F-8fce5a1594dc\", \"F-4477c417d65d\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-4e144466672a",
+          "F-8fa11b84c4ee",
+          "F-fed14779574d",
+          "F-8fce5a1594dc",
+          "F-4477c417d65d"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00789-0a260d18f3",
+        "authoredQuote": true,
+        "publishableQuote": "I've been thinking a lot about Vinnie Keane's retirement and what it means for the programs we both founded in West Oakland. To be honest, it's still sinking in. Vinnie was a pillar, not just for the A's but for this community. The programs he started, like the Firehouse 29 West Oakland Baseball Academy and the Keane Auxiliary Flag Football League, they're still active and doing well. Civis Systems has been working closely with those programs, and we'll continue to support them. My focus now is on ensuring that the transition is smooth and that the community continues to benefit from the work we've done together."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00789",
+          "name": "Elias Varek",
+          "role": "Founder of Civis Systems",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "How will Elias Varek's programs interact with or support the programs founded by Vinnie Keane in the future? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "West Oakland",
+          "focus": "Vinnie Keane's legacy in West Oakland",
+          "src": "output/beats/Community_Programs.jsonl @C116"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Elias Varek — Founder of Civis Systems — West Oakland",
+          "evidence": [
+            {
+              "id": "EV-00febfd7ed",
+              "src": "output/beats/Community_Programs.jsonl @C116",
+              "text": "9 active programs in West Oakland; Vinnie Keane and Elias Varek founded them."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "9 active programs in West Oakland; Vinnie Keane and Elias Varek founded them.",
+            "src": "output/beats/Community_Programs.jsonl @C116",
+            "id": "F-4e144466672a"
+          },
+          {
+            "t": "FACT",
+            "text": "Civis Systems Civic Fellows Program (tech-education), West Oakland — founded by Elias Varek, since C96",
+            "src": "output/beats/Community_Programs.jsonl @C116 PRG-019",
+            "id": "F-8fa11b84c4ee"
+          },
+          {
+            "t": "FACT",
+            "text": "West Oakland Freight & Logistics Pipeline (economic), West Oakland — founded by Elias Varek, since C91",
+            "src": "output/beats/Community_Programs.jsonl @C116 PRG-021",
+            "id": "F-fed14779574d"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "West Oakland: 9 active programs on the record",
+            "src": "output/beats/Community_Programs.jsonl @C116",
+            "id": "F-0b66d1128813"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane Firehouse 29 West Oakland Baseball Academy (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C116 PRG-002",
+            "id": "F-8fce5a1594dc"
+          },
+          {
+            "t": "FACT",
+            "text": "Keane Auxiliary Flag Football League (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C116 PRG-006",
+            "id": "F-4477c417d65d"
+          },
+          {
+            "t": "FACT",
+            "text": "West Oakland Mural Collective (arts), West Oakland, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C116 PRG-011",
+            "id": "F-3184d335a548"
+          },
+          {
+            "t": "FACT",
+            "text": "Elias Varek — Founder of Civis Systems — West Oakland",
+            "src": "Simulation_Ledger profile for POP-00789",
+            "id": "F-dc59dc1a98cb"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00621",
+      "name": "Delvon Pratt",
+      "quote": "I've been living in West Oakland for a while now, and it's hard not to notice the industrial vibe around here. You've got warehouses, factories, and all sorts of businesses operating around the clock. It's not just residential; it's a working neighborhood. I like that about it. As a warehouse supervisor myself, I see a lot of familiar faces and operations around here. It's a character that feels right at home to me.",
+      "disp": "somewhat inclined to go out",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've been living in West Oakland for a while now, and it's hard not to notice the industrial vibe around here. You've got warehouses, factories, and all sorts of businesses operating around the clock. It's not just residential; it's a working neighborhood. I like that about it. As a warehouse supervisor myself, I see a lot of familiar faces and operations around here. It's a character that feels right at home to me.\",\n  \"fact_ids\": [\"F-26e8be63fa8b\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-26e8be63fa8b"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00621-a7b5c866f4",
+        "authoredQuote": true,
+        "publishableQuote": "I've been living in West Oakland for a while now, and it's hard not to notice the industrial vibe around here. You've got warehouses, factories, and all sorts of businesses operating around the clock. It's not just residential; it's a working neighborhood. I like that about it. As a warehouse supervisor myself, I see a lot of familiar faces and operations around here. It's a character that feels right at home to me."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00621",
+          "name": "Delvon Pratt",
+          "role": "Warehouse Supervisor",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "Your own current-cycle line says: \"Y3C12 — [Neighborhood-Outabout-Up-S] noticed West Oakland's industrial character\". What did you notice about West Oakland? Speak only from that line and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "West Oakland",
+          "focus": "Vinnie Keane's legacy in West Oakland",
+          "src": "output/beats/Community_Programs.jsonl @C116"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Delvon Pratt — Warehouse Supervisor",
+          "evidence": [
+            {
+              "id": "EV-LIFE-142c1a35d2",
+              "src": "output/simulation_ledger_snapshot.jsonl",
+              "text": "Y3C12 — [Neighborhood-Outabout-Up-S] noticed West Oakland's industrial character"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Y3C12 — [Neighborhood-Outabout-Up-S] noticed West Oakland's industrial character",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "id": "F-26e8be63fa8b"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00001",
+      "name": "Vinnie Keane",
+      "quote": "I've founded a couple of programs in West Oakland, like the Firehouse 29 Baseball Academy and the Keane Auxiliary Flag Football League. I plan to keep being involved with them, just in a different way now that I'm retired. I'm still around the neighborhood, and I'll keep showing up to support the kids and the community. Mark Aitken leaving the A's was a tough pill to swallow, but I'm proud of what he's done for the city, and I know he'll keep making a difference wherever he goes.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; openly affectionate, big-hearted; curious, open to new things; unshakable, calm under anything; principled, plays it straight; close to family; often out in the neighborhood; a real fan, plans around games",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've founded a couple of programs in West Oakland, like the Firehouse 29 Baseball Academy and the Keane Auxiliary Flag Football League. I plan to keep being involved with them, just in a different way now that I'm retired. I'm still around the neighborhood, and I'll keep showing up to support the kids and the community. Mark Aitken leaving the A's was a tough pill to swallow, but I'm proud of what he's done for the city, and I know he'll keep making a difference wherever he goes.\",\n  \"fact_ids\": [\"F-8fce5a1594dc\", \"F-4477c417d65d\", \"F-1e9cdb0dd15b\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-8fce5a1594dc",
+          "F-4477c417d65d",
+          "F-1e9cdb0dd15b"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00001-b3b5a33e03",
+        "authoredQuote": true,
+        "publishableQuote": "I've founded a couple of programs in West Oakland, like the Firehouse 29 Baseball Academy and the Keane Auxiliary Flag Football League. I plan to keep being involved with them, just in a different way now that I'm retired. I'm still around the neighborhood, and I'll keep showing up to support the kids and the community. Mark Aitken leaving the A's was a tough pill to swallow, but I'm proud of what he's done for the city, and I know he'll keep making a difference wherever he goes."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00001",
+          "name": "Vinnie Keane",
+          "role": "Former Designated Hitter, Oakland A's Legend",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "How does Vinnie Keane plan to continue his involvement with the community programs he founded after his retirement? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "West Oakland",
+          "focus": "Vinnie Keane's legacy in West Oakland",
+          "src": "output/beats/Community_Programs.jsonl @C116"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Piedmont Ave",
+          "evidence": [
+            {
+              "id": "EV-547bed64d3",
+              "src": "output/beats/Community_Programs.jsonl @C116",
+              "text": "9 active programs in West Oakland; Vinnie Keane and Elias Varek founded them."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "9 active programs in West Oakland; Vinnie Keane and Elias Varek founded them.",
+            "src": "output/beats/Community_Programs.jsonl @C116",
+            "id": "F-4e144466672a"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane Firehouse 29 West Oakland Baseball Academy (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C116 PRG-002",
+            "id": "F-8fce5a1594dc"
+          },
+          {
+            "t": "FACT",
+            "text": "Keane Auxiliary Flag Football League (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C116 PRG-006",
+            "id": "F-4477c417d65d"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "West Oakland: 9 active programs on the record",
+            "src": "output/beats/Community_Programs.jsonl @C116",
+            "id": "F-0b66d1128813"
+          },
+          {
+            "t": "FACT",
+            "text": "West Oakland Mural Collective (arts), West Oakland, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C116 PRG-011",
+            "id": "F-3184d335a548"
+          },
+          {
+            "t": "FACT",
+            "text": "Civis Systems Civic Fellows Program (tech-education), West Oakland — founded by Elias Varek, since C96",
+            "src": "output/beats/Community_Programs.jsonl @C116 PRG-019",
+            "id": "F-8fa11b84c4ee"
+          },
+          {
+            "t": "FACT",
+            "text": "West Oakland Freight & Logistics Pipeline (economic), West Oakland — founded by Elias Varek, since C91",
+            "src": "output/beats/Community_Programs.jsonl @C116 PRG-021",
+            "id": "F-fed14779574d"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Piedmont Ave",
+            "src": "Simulation_Ledger profile for POP-00001",
+            "id": "F-1e9cdb0dd15b"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00789",
+      "name": "Elias Varek",
+      "quote": "I've been thinking a lot about Vinnie Keane's retirement and what it means for the programs we both founded in West Oakland. To be honest, it's still sinking in. Vinnie was a pillar, not just for the A's but for this community. The programs he started, like the Firehouse 29 West Oakland Baseball Academy and the Keane Auxiliary Flag Football League, they're still active and doing well. Civis Systems has been working closely with those programs, and we'll continue to support them. My focus now is on ensuring that the transition is smooth and that the community continues to benefit from the work we've done together.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; curious, open to new things; often out in the neighborhood; fairly principled",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've been thinking a lot about Vinnie Keane's retirement and what it means for the programs we both founded in West Oakland. To be honest, it's still sinking in. Vinnie was a pillar, not just for the A's but for this community. The programs he started, like the Firehouse 29 West Oakland Baseball Academy and the Keane Auxiliary Flag Football League, they're still active and doing well. Civis Systems has been working closely with those programs, and we'll continue to support them. My focus now is on ensuring that the transition is smooth and that the community continues to benefit from the work we've done together.\",\n  \"fact_ids\": [\"F-4e144466672a\", \"F-8fa11b84c4ee\", \"F-fed14779574d\", \"F-8fce5a1594dc\", \"F-4477c417d65d\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-4e144466672a",
+          "F-8fa11b84c4ee",
+          "F-fed14779574d",
+          "F-8fce5a1594dc",
+          "F-4477c417d65d"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00789-0a260d18f3",
+        "authoredQuote": true,
+        "publishableQuote": "I've been thinking a lot about Vinnie Keane's retirement and what it means for the programs we both founded in West Oakland. To be honest, it's still sinking in. Vinnie was a pillar, not just for the A's but for this community. The programs he started, like the Firehouse 29 West Oakland Baseball Academy and the Keane Auxiliary Flag Football League, they're still active and doing well. Civis Systems has been working closely with those programs, and we'll continue to support them. My focus now is on ensuring that the transition is smooth and that the community continues to benefit from the work we've done together."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00789",
+          "name": "Elias Varek",
+          "role": "Founder of Civis Systems",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "How will Elias Varek's programs interact with or support the programs founded by Vinnie Keane in the future? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "West Oakland",
+          "focus": "Vinnie Keane's legacy in West Oakland",
+          "src": "output/beats/Community_Programs.jsonl @C116"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Elias Varek — Founder of Civis Systems — West Oakland",
+          "evidence": [
+            {
+              "id": "EV-00febfd7ed",
+              "src": "output/beats/Community_Programs.jsonl @C116",
+              "text": "9 active programs in West Oakland; Vinnie Keane and Elias Varek founded them."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "9 active programs in West Oakland; Vinnie Keane and Elias Varek founded them.",
+            "src": "output/beats/Community_Programs.jsonl @C116",
+            "id": "F-4e144466672a"
+          },
+          {
+            "t": "FACT",
+            "text": "Civis Systems Civic Fellows Program (tech-education), West Oakland — founded by Elias Varek, since C96",
+            "src": "output/beats/Community_Programs.jsonl @C116 PRG-019",
+            "id": "F-8fa11b84c4ee"
+          },
+          {
+            "t": "FACT",
+            "text": "West Oakland Freight & Logistics Pipeline (economic), West Oakland — founded by Elias Varek, since C91",
+            "src": "output/beats/Community_Programs.jsonl @C116 PRG-021",
+            "id": "F-fed14779574d"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "West Oakland: 9 active programs on the record",
+            "src": "output/beats/Community_Programs.jsonl @C116",
+            "id": "F-0b66d1128813"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane Firehouse 29 West Oakland Baseball Academy (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C116 PRG-002",
+            "id": "F-8fce5a1594dc"
+          },
+          {
+            "t": "FACT",
+            "text": "Keane Auxiliary Flag Football League (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C116 PRG-006",
+            "id": "F-4477c417d65d"
+          },
+          {
+            "t": "FACT",
+            "text": "West Oakland Mural Collective (arts), West Oakland, since C101",
+            "src": "output/beats/Community_Programs.jsonl @C116 PRG-011",
+            "id": "F-3184d335a548"
+          },
+          {
+            "t": "FACT",
+            "text": "Elias Varek — Founder of Civis Systems — West Oakland",
+            "src": "Simulation_Ledger profile for POP-00789",
+            "id": "F-dc59dc1a98cb"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00621",
+      "name": "Delvon Pratt",
+      "quote": "I've been living in West Oakland for a while now, and it's hard not to notice the industrial vibe around here. You've got warehouses, factories, and all sorts of businesses operating around the clock. It's not just residential; it's a working neighborhood. I like that about it. As a warehouse supervisor myself, I see a lot of familiar faces and operations around here. It's a character that feels right at home to me.",
+      "disp": "somewhat inclined to go out",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've been living in West Oakland for a while now, and it's hard not to notice the industrial vibe around here. You've got warehouses, factories, and all sorts of businesses operating around the clock. It's not just residential; it's a working neighborhood. I like that about it. As a warehouse supervisor myself, I see a lot of familiar faces and operations around here. It's a character that feels right at home to me.\",\n  \"fact_ids\": [\"F-26e8be63fa8b\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-26e8be63fa8b"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00621-a7b5c866f4",
+        "authoredQuote": true,
+        "publishableQuote": "I've been living in West Oakland for a while now, and it's hard not to notice the industrial vibe around here. You've got warehouses, factories, and all sorts of businesses operating around the clock. It's not just residential; it's a working neighborhood. I like that about it. As a warehouse supervisor myself, I see a lot of familiar faces and operations around here. It's a character that feels right at home to me."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00621",
+          "name": "Delvon Pratt",
+          "role": "Warehouse Supervisor",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "Your own current-cycle line says: \"Y3C12 — [Neighborhood-Outabout-Up-S] noticed West Oakland's industrial character\". What did you notice about West Oakland? Speak only from that line and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "West Oakland",
+          "focus": "Vinnie Keane's legacy in West Oakland",
+          "src": "output/beats/Community_Programs.jsonl @C116"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Delvon Pratt — Warehouse Supervisor",
+          "evidence": [
+            {
+              "id": "EV-LIFE-142c1a35d2",
+              "src": "output/simulation_ledger_snapshot.jsonl",
+              "text": "Y3C12 — [Neighborhood-Outabout-Up-S] noticed West Oakland's industrial character"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Y3C12 — [Neighborhood-Outabout-Up-S] noticed West Oakland's industrial character",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "id": "F-26e8be63fa8b"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00955",
+      "name": null,
+      "quote": null,
+      "disp": null,
+      "recorded": false,
+      "fallback": "call-failed: Quota exceeded for quota metric 'Read requests' and limit 'Read requests per minute per user' of service 'sheets.googleapis.com' for consumer 'project_number:559534329568'.",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00955",
+          "name": "Keisha Morris",
+          "role": "Counselor",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "Your own current-cycle line says: \"Y3C12 — [Neighborhood-Outabout-Up-S] noticed West Oakland's industrial character\". What did you notice about West Oakland? Speak only from that line and your own reaction."
+        },
+        "signal": {
+          "kind": "beat-neighborhood",
+          "hood": "West Oakland",
+          "focus": "Vinnie Keane's legacy in West Oakland",
+          "src": "output/beats/Community_Programs.jsonl @C116"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Keisha Morris — Counselor",
+          "evidence": [
+            {
+              "id": "EV-LIFE-778445748d",
+              "src": "output/simulation_ledger_snapshot.jsonl",
+              "text": "Y3C12 — [Neighborhood-Outabout-Up-S] noticed West Oakland's industrial character"
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Y3C12 — [Neighborhood-Outabout-Up-S] noticed West Oakland's industrial character",
+            "src": "output/simulation_ledger_snapshot.jsonl",
+            "id": "F-26e8be63fa8b"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-11-20T19:18:00.969Z"
+}

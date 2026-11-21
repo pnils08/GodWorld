@@ -1,0 +1,71 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "116",
+  "persona": "maria-keen",
+  "byline": "Maria Keen",
+  "bylinePopid": "POP-00013",
+  "article": "output/cron-compare/staged/culture_c116_maria-keen_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Vinnie Keane",
+        "role": "quoted-source",
+        "popid": "POP-00001"
+      },
+      {
+        "name": "Elias Varek",
+        "role": "quoted-source",
+        "popid": "POP-00789"
+      },
+      {
+        "name": "Delvon Pratt",
+        "role": "quoted-source",
+        "popid": "POP-00621"
+      },
+      {
+        "name": "Mark Aitken",
+        "role": "mentioned",
+        "popid": "POP-00003",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "West Oakland"
+    ],
+    "claims": [
+      {
+        "claim": "I've founded a couple of programs in West Oakland, like the Firehouse 29 Baseball Academy and the Keane Auxiliary Flag Football League. I plan to keep being involved with them, just in a different way now that I'm retired. I'm still around the neighborhood, and I'll keep showing up to support the kids and the community. Mark Aitken leaving the A's was a tough pill to swallow, but I'm proud of what he's done for the city, and I know he'll keep making a difference wherever he goes.",
+        "sourceRef": "citizenVoice PRESS Vinnie Keane"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-38613c1d1fd0",
+    "draftSha256": "a1c4cca223b4659d9c193149188ae8b52af243eb74a5d87cfc218cd5dedbd1a2",
+    "verdict": "output/cron-compare/culture_c116_maria-keen_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-21T00:19:16.366Z",
+    "contractScore": {
+      "opened": false,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 997,
+      "short": "The opening paragraph names the place and programs but does not name a Packet condition.",
+      "score": 2,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "a1c4cca223b4659d9c193149188ae8b52af243eb74a5d87cfc218cd5dedbd1a2",
+      "costUsd": 0.0022
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-21T00:19:22.274Z"
+}

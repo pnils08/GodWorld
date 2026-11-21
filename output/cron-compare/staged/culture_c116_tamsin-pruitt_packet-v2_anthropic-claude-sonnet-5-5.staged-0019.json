@@ -1,0 +1,102 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "116",
+  "persona": "tamsin-pruitt",
+  "byline": "Tamsin Pruitt",
+  "bylinePopid": "POP-01210",
+  "article": "output/cron-compare/staged/culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged-0019.md",
+  "intake": {
+    "names": [
+      {
+        "name": "Wilson Shepard",
+        "role": "quoted-source",
+        "popid": "POP-01022"
+      },
+      {
+        "name": "Theo Rahimi",
+        "role": "quoted-source",
+        "popid": "POP-01247"
+      },
+      {
+        "name": "Ira Leu",
+        "role": "quoted-source",
+        "popid": "POP-00703"
+      },
+      {
+        "name": "Elias Varek",
+        "role": "quoted-source",
+        "popid": "POP-00789"
+      },
+      {
+        "name": "Darrin Davis",
+        "role": "mentioned",
+        "popid": "POP-00021",
+        "floor": true
+      },
+      {
+        "name": "Enzo Walker",
+        "role": "mentioned",
+        "popid": "POP-00291",
+        "floor": true
+      },
+      {
+        "name": "Matilda Diop",
+        "role": "mentioned",
+        "popid": "POP-00832",
+        "floor": true
+      },
+      {
+        "name": "Omar Farah",
+        "role": "mentioned",
+        "popid": "POP-00986",
+        "floor": true
+      },
+      {
+        "name": "Sadie Williams",
+        "role": "mentioned",
+        "popid": "POP-01014",
+        "floor": true
+      },
+      {
+        "name": "Tariq Cooper",
+        "role": "mentioned",
+        "popid": "POP-01000",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "To be honest, my new living situation in West Oakland hasn't really affected my coaching. I've been focused on the team's performance, and my daily routine hasn't changed much. I'm still the same person, with the same goals for the Oaks.",
+        "sourceRef": "citizenVoice PRESS Wilson Shepard"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "gate": "off",
+    "model": null,
+    "manifestId": null,
+    "draftSha256": "eaed223e799c38aa6c64f09582f7909f764686961f8caac099568a22eee588ec",
+    "verdict": null,
+    "ranAt": "2026-11-20T07:34:45.664Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 450",
+      "words": 1221,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "eaed223e799c38aa6c64f09582f7909f764686961f8caac099568a22eee588ec",
+      "costUsd": 0.0016
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-20T07:34:45.664Z"
+}

@@ -57,5 +57,6 @@
     "recorded": true,
     "out": "/ tip: ⌁ auth for agents [www.vestauth.com]\n{\n  \"popId\": \"POP-00155\",\n  \"name\": \"Trevor Shimizu\",\n  \"recorded\": true,\n  \"text\": \"filed: 12th Street Lost 2,313 Riders. The Roads Didn't Pick Them Up.\"\n}"
   },
-  "ranAt": "2026-11-17T00:21:04.066Z"
+  "ranAt": "2026-11-17T00:21:04.066Z",
+  "dispositionReconciledAt": "2026-11-21T18:00:02.593Z"
 }

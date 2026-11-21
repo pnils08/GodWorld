@@ -56,5 +56,6 @@
     "recorded": true,
     "out": "g: true }\n{\n  \"popId\": \"POP-00057\",\n  \"name\": \"Rachel Torres\",\n  \"recorded\": true,\n  \"text\": \"filed: Downtown's Eight: Two Arrests, Three Still Held, and a Clearance Rate That Counts Something Else\"\n}"
   },
-  "ranAt": "2026-11-18T00:17:12.158Z"
+  "ranAt": "2026-11-18T00:17:12.158Z",
+  "dispositionReconciledAt": "2026-11-21T18:00:02.577Z"
 }

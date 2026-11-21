@@ -1,38 +1,38 @@
 [
   {
-    "pop": "POP-01188",
-    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01188\",\"name\":\"Marguerite Kimball-Ostrow\",\"role\":\"UNDOCKED pilot\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Nia Rook\",\"question\":\"What was Marguerite Kimball-Ostrow's strategy on Wednesday night? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"undocked\",\"hood\":\"Piedmont Ave\",\"focus\":\"Marguerite Kimball-Ostrow's UNDOCKED performance\",\"src\":\"undocked:undocked-pop01188-Y3C12-e2\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Marguerite Kimball-Ostrow — UNDOCKED pilot\",\"evidence\":[{\"id\":\"EV-ce39f9d7df\",\"src\":\"undocked:undocked-pop01188-Y3C12-e2\",\"text\":\"UNDOCKED: Marguerite Kimball-Ostrow, Wednesday night\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"UNDOCKED: Marguerite Kimball-Ostrow, Wednesday night\",\"src\":\"undocked:undocked-pop01188-Y3C12-e2\",\"id\":\"F-bd1187d0f929\"},{\"t\":\"FACT\",\"text\":\"Marguerite Kimball-Ostrow's Wednesday night on UNDOCKED: went through Antares, Gsc 0041, Shaula, Alnair, Wolf 1061, Gsc 0031, Gsc 0021, Gliese 876, Felis, Biham, Gsc 0035, Jasmine, Mirach, Azha, Groombridge 1618, Silverbend, Alnilam and Jishui; came out even on credits; flew until the show's time ran out.\",\"src\":\"undocked:undocked-pop01188-Y3C12-e2\",\"id\":\"F-fd9ac3c2a9e9\"},{\"t\":\"FACT\",\"text\":\"Marguerite Kimball-Ostrow — Elementary Teacher (ledger)\",\"src\":\"undocked:undocked-pop01188-Y3C12-e2\",\"id\":\"F-e63c24ec205a\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C116\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-871096fd8925\"},{\"t\":\"FACT\",\"text\":\"Marguerite Kimball-Ostrow — UNDOCKED pilot\",\"src\":\"Simulation_Ledger profile for POP-01188\",\"id\":\"F-da8517f8456d\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C12, Spring, holiday=Spring Equinox\",\"src\":\"output/world_summary_c116.md Calendar context (Simulation_Calendar)\",\"id\":\"F-647fd9067a33\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "pop": "POP-00918",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00918\",\"name\":\"Manju Abebe\",\"role\":\"UNDOCKED pilot\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Nia Rook\",\"question\":\"What was the key to Manju Abebe's even night on UNDOCKED? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"undocked\",\"hood\":\"Chinatown\",\"focus\":\"Manju Abebe's UNDOCKED performance\",\"src\":\"undocked:undocked-pop00918-Y3C12-e2\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Manju Abebe — UNDOCKED pilot\",\"evidence\":[{\"id\":\"EV-f3cb4a3c6a\",\"src\":\"undocked:undocked-pop00918-Y3C12-e2\",\"text\":\"UNDOCKED: Manju Abebe, Thursday night\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"UNDOCKED: Manju Abebe, Thursday night\",\"src\":\"undocked:undocked-pop00918-Y3C12-e2\",\"id\":\"F-a112af8fc98f\"},{\"t\":\"FACT\",\"text\":\"Manju Abebe's Thursday night on UNDOCKED: went through Sirius, Nova Terra, Furud, Acrux, Botein, Intercrus, Gsc 0044, Atlas, Cedarhold, Achernar, Ruchbah, Ironhollow, Pherkad, Shaula, Alnair, Wolf 1061, Gsc 0031 and Gsc 0021; came out even on credits; flew until the show's time ran out.\",\"src\":\"undocked:undocked-pop00918-Y3C12-e2\",\"id\":\"F-f7ee9cfe2da2\"},{\"t\":\"FACT\",\"text\":\"Manju Abebe — Plumber (ledger)\",\"src\":\"undocked:undocked-pop00918-Y3C12-e2\",\"id\":\"F-e2e12bc57110\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C116\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-871096fd8925\"},{\"t\":\"FACT\",\"text\":\"Manju Abebe — UNDOCKED pilot\",\"src\":\"Simulation_Ledger profile for POP-00918\",\"id\":\"F-5dd747187d34\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C12, Spring, holiday=Spring Equinox\",\"src\":\"output/world_summary_c116.md Calendar context (Simulation_Calendar)\",\"id\":\"F-647fd9067a33\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
     "packetContract": "LEP/2",
     "inputPacket": {
       "v": "LEP/2",
       "wake": "W2",
       "actor": {
-        "id": "POP-01188",
-        "name": "Marguerite Kimball-Ostrow",
+        "id": "POP-00918",
+        "name": "Manju Abebe",
         "role": "UNDOCKED pilot",
         "desk": null
       },
       "task": {
         "goal": "Answer one reporter question in your own first-person voice from your simulated life",
         "reporter": "Nia Rook",
-        "question": "What was Marguerite Kimball-Ostrow's strategy on Wednesday night? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        "question": "What was the key to Manju Abebe's even night on UNDOCKED? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
       },
       "signal": {
         "kind": "undocked",
-        "hood": "Piedmont Ave",
-        "focus": "Marguerite Kimball-Ostrow's UNDOCKED performance",
-        "src": "undocked:undocked-pop01188-Y3C12-e2"
+        "hood": "Chinatown",
+        "focus": "Manju Abebe's UNDOCKED performance",
+        "src": "undocked:undocked-pop00918-Y3C12-e2"
       },
       "exposure": {
         "basis": [
           "assignment"
         ],
-        "self": "Marguerite Kimball-Ostrow — UNDOCKED pilot",
+        "self": "Manju Abebe — UNDOCKED pilot",
         "evidence": [
           {
-            "id": "EV-ce39f9d7df",
-            "src": "undocked:undocked-pop01188-Y3C12-e2",
-            "text": "UNDOCKED: Marguerite Kimball-Ostrow, Wednesday night"
+            "id": "EV-f3cb4a3c6a",
+            "src": "undocked:undocked-pop00918-Y3C12-e2",
+            "text": "UNDOCKED: Manju Abebe, Thursday night"
           }
         ],
         "editorialTarget": true
@@ -40,21 +40,21 @@
       "known": [
         {
           "t": "FACT",
-          "text": "UNDOCKED: Marguerite Kimball-Ostrow, Wednesday night",
-          "src": "undocked:undocked-pop01188-Y3C12-e2",
-          "id": "F-bd1187d0f929"
+          "text": "UNDOCKED: Manju Abebe, Thursday night",
+          "src": "undocked:undocked-pop00918-Y3C12-e2",
+          "id": "F-a112af8fc98f"
         },
         {
           "t": "FACT",
-          "text": "Marguerite Kimball-Ostrow's Wednesday night on UNDOCKED: went through Antares, Gsc 0041, Shaula, Alnair, Wolf 1061, Gsc 0031, Gsc 0021, Gliese 876, Felis, Biham, Gsc 0035, Jasmine, Mirach, Azha, Groombridge 1618, Silverbend, Alnilam and Jishui; came out even on credits; flew until the show's time ran out.",
-          "src": "undocked:undocked-pop01188-Y3C12-e2",
-          "id": "F-fd9ac3c2a9e9"
+          "text": "Manju Abebe's Thursday night on UNDOCKED: went through Sirius, Nova Terra, Furud, Acrux, Botein, Intercrus, Gsc 0044, Atlas, Cedarhold, Achernar, Ruchbah, Ironhollow, Pherkad, Shaula, Alnair, Wolf 1061, Gsc 0031 and Gsc 0021; came out even on credits; flew until the show's time ran out.",
+          "src": "undocked:undocked-pop00918-Y3C12-e2",
+          "id": "F-f7ee9cfe2da2"
         },
         {
           "t": "FACT",
-          "text": "Marguerite Kimball-Ostrow — Elementary Teacher (ledger)",
-          "src": "undocked:undocked-pop01188-Y3C12-e2",
-          "id": "F-e63c24ec205a"
+          "text": "Manju Abebe — Plumber (ledger)",
+          "src": "undocked:undocked-pop00918-Y3C12-e2",
+          "id": "F-e2e12bc57110"
         },
         {
           "t": "FACT",
@@ -64,9 +64,9 @@
         },
         {
           "t": "FACT",
-          "text": "Marguerite Kimball-Ostrow — UNDOCKED pilot",
-          "src": "Simulation_Ledger profile for POP-01188",
-          "id": "F-da8517f8456d"
+          "text": "Manju Abebe — UNDOCKED pilot",
+          "src": "Simulation_Ledger profile for POP-00918",
+          "id": "F-5dd747187d34"
         },
         {
           "t": "FACT",

@@ -13,7 +13,7 @@
     "beatDomain": "COMMUNITY"
   },
   "laneEntries": 30,
-  "quotesLanded": 2,
+  "quotesLanded": 1,
   "disposition": "staged",
   "rheaPass": null,
   "rheaFlagCount": null,
@@ -25,11 +25,10 @@
   "toolUse": [
     "canon_recall",
     "canon_recall",
-    "canon_recall",
     "canon_recall"
   ],
-  "toolCalls": 4,
-  "wordCount": 609,
+  "toolCalls": 3,
+  "wordCount": 507,
   "targetWords": "300-600",
   "capHit": 0,
   "checkFlags": [],
@@ -37,25 +36,25 @@
   "rewardLoop": true,
   "contractScore": {
     "opened": true,
-    "purposeMet": false,
+    "purposeMet": true,
     "inTarget": true,
     "inTargetBy": "code floor 300",
-    "words": 609,
-    "short": "The piece introduces Edmund Alegero and Guadalupe Lupe by name before their quotes instead of leading with the line first.",
-    "score": 2,
+    "words": 507,
+    "short": "",
+    "score": 3,
     "max": 3,
     "model": "google/gemini-3.7-flash",
     "scoredWithoutRhea": true,
-    "draftSha256": "121dadd6559d40378ab9a08c6d86ea0bf5baa5fe9606d7ac946158d9c6fa6002"
+    "draftSha256": "d231da6239672403387c600f845b65a6da7db07838dfa20b374f9828dbbadfcb"
   },
   "gradeRecord": {
     "recorded": true,
-    "line": "graded: 2/3 — The piece introduces Edmund Alegero and Guadalupe Lupe by name before their quotes instead of leading with the line first."
+    "line": "graded: 3/3 — nothing fell short"
   },
-  "article": "output/cron-compare/staged/culture_c116_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.staged-0020.md",
+  "article": "output/cron-compare/staged/culture_c116_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.staged-1715.md",
   "selfRecord": {
     "recorded": true,
-    "out": " ⌁ auth for agents [www.vestauth.com]\n{\n  \"popId\": \"POP-01211\",\n  \"name\": \"Ines Sorensen\",\n  \"recorded\": true,\n  \"text\": \"“Oakland raised him. I'm hoping he remembers that when the offers come in.”\"\n}"
+    "out": " (33) from ../.config/godworld/.env // tip: ⌘ suppress logs { quiet: true }\n{\n  \"popId\": \"POP-01211\",\n  \"name\": \"Ines Sorensen\",\n  \"recorded\": true,\n  \"text\": \"\\\"I walk past that fence every day.\\\"\"\n}"
   },
-  "ranAt": "2026-11-20T00:20:35.935Z"
+  "ranAt": "2026-11-21T17:16:02.973Z"
 }

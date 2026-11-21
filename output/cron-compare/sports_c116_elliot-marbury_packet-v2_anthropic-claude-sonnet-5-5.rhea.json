@@ -3,18 +3,18 @@
   "cycle": "116",
   "backend": "api",
   "model": "google/gemini-3.7-flash",
-  "draftSha256": "f1bd7a435c3f4fee4ebd2867247a7fa0255f1afa126cd37840e1947c3b9b8798",
+  "draftSha256": "7a4b7e65ed02373b463cc37b16aebd7bf203db4bdbff648f80cf6385e28e9a75",
   "pass": false,
   "flags": [
     {
-      "claim": "Benji Dillon threw 150.1 innings with 65 walks. That is 3.9 walks per nine and 2.03 strikeouts per walk, at an ERA of 4.43.",
-      "issue": "Direct contradiction of recorded sports state: Ground truth C116/C114 explicitly records Benji Dillon's 2041 season line as 140.2 IP, 56 BB, 120 SO, and a 4.61 ERA (9-8 record, 2.0 WAR), not 150.1 IP, 65 BB, or 4.43 ERA.",
+      "claim": "Benji Dillon threw 150.1 innings over 35 appearances and 28 starts, going 10-8 with a 4.43 ERA. He allowed 3.9 BB/9, struck out 7.9 per nine and posted 2.03 K/BB, with 65 walks and 132 strikeouts.",
+      "issue": "Contradicts canonical 2041 season pitching record in ground truth (Benji Dillon was 9-8 with a 4.61 ERA, 120 strikeouts, 56 walks in 140.2 innings).",
       "severity": "high"
     }
   ],
   "flagCount": 1,
   "highSeverityCount": 1,
-  "summary": "Benji Dillon 2041 season statistics contradict canonical ground truth (140.2 IP, 4.61 ERA, 56 BB).",
+  "summary": "Direct contradiction of Benji Dillon's canonical 2041 pitching statistics.",
   "review": {
     "profileId": "default",
     "canonIntegrity": "revise",
@@ -28,15 +28,10 @@
       {
         "code": "UNAPPROVED_NUMBER",
         "values": [
+          "185",
           "170",
+          "187",
           "2042"
-        ]
-      },
-      {
-        "code": "UNAPPROVED_QUOTE",
-        "values": [
-          "possible",
-          "carried a full workload."
         ]
       }
     ],
@@ -65,21 +60,21 @@
     "pageContradictions": [],
     "packetChecked": true
   },
-  "apiCostUsd": 0.0161,
-  "durationMs": 13321,
+  "apiCostUsd": 0.0155,
+  "durationMs": 8174,
   "parseError": false,
-  "ranAt": "2026-11-19T00:18:04.824Z",
+  "ranAt": "2026-11-21T18:00:47.082Z",
   "contractScore": {
     "opened": true,
     "purposeMet": true,
     "inTarget": true,
     "inTargetBy": "code floor 350",
-    "words": 921,
+    "words": 767,
     "short": "",
     "score": 3,
     "max": 3,
     "model": "google/gemini-3.7-flash",
-    "draftSha256": "f1bd7a435c3f4fee4ebd2867247a7fa0255f1afa126cd37840e1947c3b9b8798",
-    "costUsd": 0.0015
+    "draftSha256": "7a4b7e65ed02373b463cc37b16aebd7bf203db4bdbff648f80cf6385e28e9a75",
+    "costUsd": 0.0009
   }
 }

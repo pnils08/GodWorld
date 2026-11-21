@@ -1,0 +1,114 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "116",
+  "persona": "mason-ortega",
+  "byline": "Mason Ortega",
+  "bylinePopid": "POP-00160",
+  "article": "output/cron-compare/staged/culture_c116_mason-ortega_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Hector Leech",
+        "role": "quoted-source",
+        "popid": "POP-00252"
+      },
+      {
+        "name": "Karim Avery",
+        "role": "quoted-source",
+        "popid": "POP-00980"
+      },
+      {
+        "name": "Guadalupe Lee",
+        "role": "mentioned",
+        "popid": "POP-00970",
+        "floor": true
+      },
+      {
+        "name": "Guadalupe Lupe",
+        "role": "mentioned",
+        "popid": "POP-00643",
+        "floor": true
+      },
+      {
+        "name": "Jalen Hill",
+        "role": "mentioned",
+        "popid": "POP-00960",
+        "floor": true
+      },
+      {
+        "name": "Mesi Westin",
+        "role": "mentioned",
+        "popid": "POP-00650",
+        "floor": true
+      },
+      {
+        "name": "Quynh Le",
+        "role": "mentioned",
+        "popid": "POP-00878",
+        "floor": true
+      },
+      {
+        "name": "Sora Hint",
+        "role": "mentioned",
+        "popid": "POP-01008",
+        "floor": true
+      },
+      {
+        "name": "Tomas Renteria",
+        "role": "mentioned",
+        "popid": "POP-00744",
+        "floor": true
+      },
+      {
+        "name": "Trenton Nawan",
+        "role": "mentioned",
+        "popid": "POP-00273",
+        "floor": true
+      },
+      {
+        "name": "Yuki Ji",
+        "role": "mentioned",
+        "popid": "POP-00783",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Jack London"
+    ],
+    "claims": [
+      {
+        "claim": "A full shift in the pit is a marathon, not a sprint. You're in the steam before the first ticket even prints, and the heat just sits on you like a second skin. The sprayer's going, the racks are clanking, and your hands are in and out of the water so much they prune up and crack. But the rhythm is what keeps you going — the plates come in dirty, you send them out clean, and there's a kind of peace in that. The breaks are short, just enough to catch your breath and drink some water, and then you're back at it. What keeps me there? It's the people. The crew at Green & Gold, they look out for each other. And honestly, there's something about being part of the machine that keeps the whole place humming. I've been doing this a long time, and I'm not looking to be anywhere else.",
+        "sourceRef": "citizenVoice PRESS Hector Leech"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-994fc3a5fb7f",
+    "draftSha256": "f4365d583242a7f32b60379bc2c7cc73a8b61d8b450ab15f49d8fd1e2088431a",
+    "verdict": "output/cron-compare/culture_c116_mason-ortega_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-11-21T00:15:30.229Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 430,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "f4365d583242a7f32b60379bc2c7cc73a8b61d8b450ab15f49d8fd1e2088431a",
+      "costUsd": 0.0013
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-21T00:15:37.648Z"
+}

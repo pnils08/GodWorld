@@ -1,0 +1,9 @@
+# Piedmont Ave, in their own words
+
+## Marguerite Kimball-Ostrow — Elementary Teacher
+
+> I didn't really have a strategy on Wednesday night. I just flew through the systems one by one, and it happened to come out even on credits. I wasn't really focusing on that; I was just trying to explore and see where the show would take me.
+
+## Janae Rivers — City Council District 5
+
+> **Janae Rivers** *(standing at the front of the Community Meeting Room, Piedmont Ave Library — sleeves rolled up, a stack of printed call logs on the table in front of her)* Listen, I know the Budget Committee wants a clean vote tomorrow. I know the Mayor's office sent over that memo saying "we hear you, we'll get to it next cycle." And I know there are folks in this room who are tired of hearing me say the same thing over and over. But here's the thing — I pulled the actual numbers this morning. East Oakland's Alternative Response calls are up 22% since we launched. Twenty-two percent. And you know what else is up? The number of times someone in Fruitvale or West Oakland has asked me, "When do we get this?" And I've had to say, "Soon." I'm done with "soon." So here's what I did this afternoon, before I walked in here: I filed the motion. Not a resolution, not a "we'll study it" — a binding motion that ties the next phase of expansion to a public, open-format data release. East Oakland's record AND Fruitvale's record, side by side, in a spreadsheet my grandmother could open on her library computer. You want to expand? Great. You want to expand without showing receipts? You're going to have to do it over my objection, on the record, in front of the cameras. *(She pulls out a second sheet of paper)* And on Grand Lake — yes, we vote yes. But I've got two amendments ready. One requires the community benefits agreement to be attached to the final resolution

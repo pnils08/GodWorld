@@ -1,0 +1,38 @@
+{
+  "model": "anthropic/claude-sonnet-5.5",
+  "calls": [
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Vinnie Keane"
+      },
+      "resultChars": 3235,
+      "resultHead": "[C115 · daily · Hal Richmond] The names the city gave him The city gave him two. The first is *Saint Vinnie, the Patron Saint of the Comeback*, which the C100 Origins records alongside the rituals fans built around him: the glove tap, the dirt wipe, the pause before breath. The second, in the archive's own index, is *The Underdog Slugger*. One is what a crowd calls a man it believes in. The other is what a historian writes on a card. Nobody voted on either one. They stuck because of how he played, and the C85 coverage put the reason plainly. Am\n[C100 · edition] Origins - Vinnie Keane Vinnie Ke"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "West Oakland"
+      },
+      "resultChars": 3238,
+      "resultHead": "[C91 · piece] Nothing that needs explaining. Just the way West Oakland keeps itself standing—not with announcements, but with doors that don't close. The Westside Cafe turns fifty this season. The coffee is still hot. The counter is still full. Names Index: Martin Richards (POP-00031, 3B Oakland A's, Fruitvale) LETTERS TO THE EDITOR Dear Editor, I've lived on the same block in Jack London for forty-two years. I remember when the only thing growing in this neighborhood was weeds in the parking lots. My wife thought I was crazy fo\n[C91 · edition] I asked Richards what brought him in on an off-da"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Elias Varek"
+      },
+      "resultChars": 3261,
+      "resultHead": "[C102 · edition] POP-00789_Elias_Varek_profile_c102 Elias Varek is a 38-year-old billionaire and the founder of the urban intelligence firm Civis Systems. A native of Oakland, his background deeply informs his business philosophy. His father worked as a dockworker at the Port of Oakland for thirty years, and his mother was a nurse's aide. Watching municipal coordination failures during his youth—such as traffic accidents cascading into port delays because emergency and transit systems did not share data—inspired his career. At age \n[C115 · daily · Tamsin Pruitt] This page keeps a quiet week as"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Delvon Pratt"
+      },
+      "resultChars": 188,
+      "resultHead": "No published piece from before C116 came back for \"Delvon Pratt\". That is not proof the paper never covered it (an empty answer can also be a failed lookup) — do not write that it did not."
+    }
+  ],
+  "ranAt": "2026-11-21T00:18:20.386Z"
+}

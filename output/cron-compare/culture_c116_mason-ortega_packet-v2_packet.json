@@ -1,0 +1,1005 @@
+{
+  "stage": "report",
+  "desk": "culture",
+  "cycle": "116",
+  "persona": "mason-ortega",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Mason Ortega",
+    "popid": "POP-00160"
+  },
+  "assignment": {
+    "story": {
+      "angle": "Jack London kitchens: Green & Gold Tavern, Harborline Grill, Blue Lantern Bar — the people who work the shift",
+      "label": "Jack London kitchens · Green & Gold Tavern, Harborline Grill",
+      "hookLine": "Hector Leech, Dishwasher at Green & Gold Tavern. 13 named workers at 5 named kitchens in Jack London on the ledger this cycle.",
+      "hood": "Jack London",
+      "pulseClass": "hood-kitchens",
+      "namedBusinesses": [
+        "Green & Gold Tavern",
+        "Harborline Grill",
+        "Blue Lantern Bar",
+        "Jack London Square Markets",
+        "Dockhouse BBQ"
+      ],
+      "citizens": [
+        "Hector Leech (POP-00252)",
+        "Trenton Nawan (POP-00273)",
+        "Guadalupe Lupe (POP-00643)",
+        "Sora Hint (POP-01008)",
+        "Tomas Renteria (POP-00744)",
+        "Quynh Le (POP-00878)",
+        "Jalen Hill (POP-00960)",
+        "Bruce Wright (POP-00965)",
+        "Yuki Ji (POP-00783)",
+        "Guadalupe Lee (POP-00970)",
+        "Gauri Han (POP-00900)",
+        "Karim Avery (POP-00980)",
+        "Mesi Westin (POP-00650)"
+      ],
+      "popids": [
+        "POP-00252",
+        "POP-00273",
+        "POP-00643",
+        "POP-01008",
+        "POP-00744",
+        "POP-00878",
+        "POP-00960",
+        "POP-00965",
+        "POP-00783",
+        "POP-00970",
+        "POP-00900",
+        "POP-00980",
+        "POP-00650"
+      ],
+      "ref": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+      "cycle": 116
+    }
+  },
+  "angle": "output/cron-compare/culture_c116_mason-ortega_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 2,
+  "quotes": [
+    {
+      "pop": "POP-00252",
+      "name": "Hector Leech",
+      "quote": "A full shift in the pit is a marathon, not a sprint. You're in the steam before the first ticket even prints, and the heat just sits on you like a second skin. The sprayer's going, the racks are clanking, and your hands are in and out of the water so much they prune up and crack. But the rhythm is what keeps you going — the plates come in dirty, you send them out clean, and there's a kind of peace in that. The breaks are short, just enough to catch your breath and drink some water, and then you're back at it. What keeps me there? It's the people. The crew at Green & Gold, they look out for each other. And honestly, there's something about being part of the machine that keeps the whole place humming. I've been doing this a long time, and I'm not looking to be anywhere else.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; devoted, family is everything; casually interested in the teams",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"A full shift in the pit is a marathon, not a sprint. You're in the steam before the first ticket even prints, and the heat just sits on you like a second skin. The sprayer's going, the racks are clanking, and your hands are in and out of the water so much they prune up and crack. But the rhythm is what keeps you going — the plates come in dirty, you send them out clean, and there's a kind of peace in that. The breaks are short, just enough to catch your breath and drink some water, and then you're back at it. What keeps me there? It's the people. The crew at Green & Gold, they look out for each other. And honestly, there's something about being part of the machine that keeps the whole place humming. I've been doing this a long time, and I'm not looking to be anywhere else.\",\n  \"fact_ids\": [\"F-f6c538f90c59\", \"F-cb064eda4300\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-f6c538f90c59",
+          "F-cb064eda4300"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00252-d9b97c1eed",
+        "authoredQuote": true,
+        "publishableQuote": "A full shift in the pit is a marathon, not a sprint. You're in the steam before the first ticket even prints, and the heat just sits on you like a second skin. The sprayer's going, the racks are clanking, and your hands are in and out of the water so much they prune up and crack. But the rhythm is what keeps you going — the plates come in dirty, you send them out clean, and there's a kind of peace in that. The breaks are short, just enough to catch your breath and drink some water, and then you're back at it. What keeps me there? It's the people. The crew at Green & Gold, they look out for each other. And honestly, there's something about being part of the machine that keeps the whole place humming. I've been doing this a long time, and I'm not looking to be anywhere else."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00252",
+          "name": "Hector Leech",
+          "role": "Dishwasher",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Mason Ortega",
+          "question": "What does a full shift in the dish pit actually look like at Green & Gold — what's the pace, what breaks, what keeps you there? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Jack London",
+          "focus": "The dishwasher's shift at Green & Gold Tavern as the entry point into what the work actually looks like in Jack London kitchens this cycle.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Hector Leech — Dishwasher — Green & Gold Tavern, Jack London",
+          "evidence": [
+            {
+              "id": "EV-e7d63fc1c9",
+              "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+              "text": "Hector Leech, Dishwasher at Green & Gold Tavern. 13 named workers at 5 named kitchens in Jack London on the ledger this cycle."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Hector Leech, Dishwasher at Green & Gold Tavern. 13 named workers at 5 named kitchens in Jack London on the ledger this cycle.",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-f6c538f90c59"
+          },
+          {
+            "t": "FACT",
+            "text": "Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 12.7% · revenue $3.7M (+$9k vs C115) · on the roster: Hector Leech (Dishwasher); Trenton Nawan (Server); Guadalupe Lupe (Bartender); Sora Hint (Barista) +1 more",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-cb064eda4300"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "Jack London kitchens · Green & Gold Tavern, Harborline Grill",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-ea0a5ddff223"
+          },
+          {
+            "t": "FACT",
+            "text": "Harborline Grill · Restaurant & Dining · 7 employees · growth 12% · revenue $869k (+$2k vs C115) · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-5b8d329b1119"
+          },
+          {
+            "t": "FACT",
+            "text": "Blue Lantern Bar · Nightlife & Entertainment · 31 employees · growth 13.9% · revenue $4M (+$11k vs C115) · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-500e32a705c3"
+          },
+          {
+            "t": "FACT",
+            "text": "Jack London Square Markets · Retail & Food · 30 employees · growth 11% · revenue $4M (+$8k vs C115) · on the roster: Gauri Han (Security Guard); Karim Avery (Security Guard)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-c61233f9bfb0"
+          },
+          {
+            "t": "FACT",
+            "text": "Dockhouse BBQ · Restaurant & Dining · 2 employees · growth 11.7% · revenue $249k (+$559 vs C115) · on the roster: Mesi Westin (Dishwasher)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-f2cea1659c0f"
+          },
+          {
+            "t": "FACT",
+            "text": "Hector Leech — Dishwasher — Green & Gold Tavern, Jack London",
+            "src": "Simulation_Ledger profile for POP-00252",
+            "id": "F-92719b261916"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00980",
+      "name": "Karim Avery",
+      "quote": "I see the pressure before it even gets to the kitchen. The markets are the first stop for a lot of folks coming off the shuttle or the BART — they're grabbing coffee, grabbing something quick, and they're already running late or already tired. The kitchen workers, they're inside, they're focused on the tickets, the heat, the rush. But I'm out front, watching who's waiting, who's checking their phone for the third time, who's arguing with a vendor over a dollar. That's the neighborhood's pressure — it's not just about the work, it's about the whole day stacking up on you before you even clock in. And when I walk through Jack London after my shift, I see the same faces at the taquerias and the same tired eyes. The kitchen folks see the plates, I see the people carrying the weight that brought them to those plates.",
+      "disp": "somewhat ambitious; somewhat sociable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\"answer\":\"quote\",\"quote\":\"I see the pressure before it even gets to the kitchen. The markets are the first stop for a lot of folks coming off the shuttle or the BART — they're grabbing coffee, grabbing something quick, and they're already running late or already tired. The kitchen workers, they're inside, they're focused on the tickets, the heat, the rush. But I'm out front, watching who's waiting, who's checking their phone for the third time, who's arguing with a vendor over a dollar. That's the neighborhood's pressure — it's not just about the work, it's about the whole day stacking up on you before you even clock in. And when I walk through Jack London after my shift, I see the same faces at the taquerias and the same tired eyes. The kitchen folks see the plates, I see the people carrying the weight that brought them to those plates.\",\"fact_ids\":[\"F-c61233f9bfb0\",\"F-e80afd676f25\"],\"basis\":\"lived-context\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c61233f9bfb0",
+          "F-e80afd676f25"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00980-31aec11e46",
+        "authoredQuote": true,
+        "publishableQuote": "I see the pressure before it even gets to the kitchen. The markets are the first stop for a lot of folks coming off the shuttle or the BART — they're grabbing coffee, grabbing something quick, and they're already running late or already tired. The kitchen workers, they're inside, they're focused on the tickets, the heat, the rush. But I'm out front, watching who's waiting, who's checking their phone for the third time, who's arguing with a vendor over a dollar. That's the neighborhood's pressure — it's not just about the work, it's about the whole day stacking up on you before you even clock in. And when I walk through Jack London after my shift, I see the same faces at the taquerias and the same tired eyes. The kitchen folks see the plates, I see the people carrying the weight that brought them to those plates."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00980",
+          "name": "Karim Avery",
+          "role": "Security Guard",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Mason Ortega",
+          "question": "What does a security guard at Jack London Square Markets see of the neighborhood's pressure that the kitchen workers don't? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Jack London",
+          "focus": "The dishwasher's shift at Green & Gold Tavern as the entry point into what the work actually looks like in Jack London kitchens this cycle.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Karim Avery — Security Guard — Jack London Square Markets, Jack London",
+          "evidence": [
+            {
+              "id": "EV-a42f6da504",
+              "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+              "text": "Hector Leech, Dishwasher at Green & Gold Tavern. 13 named workers at 5 named kitchens in Jack London on the ledger this cycle."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Jack London Square Markets · Retail & Food · 30 employees · growth 11% · revenue $4M (+$8k vs C115) · on the roster: Gauri Han (Security Guard); Karim Avery (Security Guard)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-c61233f9bfb0"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "Jack London kitchens · Green & Gold Tavern, Harborline Grill",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-ea0a5ddff223"
+          },
+          {
+            "t": "FACT",
+            "text": "Hector Leech, Dishwasher at Green & Gold Tavern. 13 named workers at 5 named kitchens in Jack London on the ledger this cycle.",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-f6c538f90c59"
+          },
+          {
+            "t": "FACT",
+            "text": "Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 12.7% · revenue $3.7M (+$9k vs C115) · on the roster: Hector Leech (Dishwasher); Trenton Nawan (Server); Guadalupe Lupe (Bartender); Sora Hint (Barista) +1 more",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-cb064eda4300"
+          },
+          {
+            "t": "FACT",
+            "text": "Harborline Grill · Restaurant & Dining · 7 employees · growth 12% · revenue $869k (+$2k vs C115) · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-5b8d329b1119"
+          },
+          {
+            "t": "FACT",
+            "text": "Blue Lantern Bar · Nightlife & Entertainment · 31 employees · growth 13.9% · revenue $4M (+$11k vs C115) · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-500e32a705c3"
+          },
+          {
+            "t": "FACT",
+            "text": "Dockhouse BBQ · Restaurant & Dining · 2 employees · growth 11.7% · revenue $249k (+$559 vs C115) · on the roster: Mesi Westin (Dishwasher)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-f2cea1659c0f"
+          },
+          {
+            "t": "FACT",
+            "text": "Karim Avery — Security Guard — Jack London Square Markets, Jack London",
+            "src": "Simulation_Ledger profile for POP-00980",
+            "id": "F-e80afd676f25"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00252",
+      "name": "Hector Leech",
+      "quote": "A full shift in the pit is a marathon, not a sprint. You're in the steam before the first ticket even prints, and the heat just sits on you like a second skin. The sprayer's going, the racks are clanking, and your hands are in and out of the water so much they prune up and crack. But the rhythm is what keeps you going — the plates come in dirty, you send them out clean, and there's a kind of peace in that. The breaks are short, just enough to catch your breath and drink some water, and then you're back at it. What keeps me there? It's the people. The crew at Green & Gold, they look out for each other. And honestly, there's something about being part of the machine that keeps the whole place humming. I've been doing this a long time, and I'm not looking to be anywhere else.",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; devoted, family is everything; casually interested in the teams",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"A full shift in the pit is a marathon, not a sprint. You're in the steam before the first ticket even prints, and the heat just sits on you like a second skin. The sprayer's going, the racks are clanking, and your hands are in and out of the water so much they prune up and crack. But the rhythm is what keeps you going — the plates come in dirty, you send them out clean, and there's a kind of peace in that. The breaks are short, just enough to catch your breath and drink some water, and then you're back at it. What keeps me there? It's the people. The crew at Green & Gold, they look out for each other. And honestly, there's something about being part of the machine that keeps the whole place humming. I've been doing this a long time, and I'm not looking to be anywhere else.\",\n  \"fact_ids\": [\"F-f6c538f90c59\", \"F-cb064eda4300\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-f6c538f90c59",
+          "F-cb064eda4300"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00252-d9b97c1eed",
+        "authoredQuote": true,
+        "publishableQuote": "A full shift in the pit is a marathon, not a sprint. You're in the steam before the first ticket even prints, and the heat just sits on you like a second skin. The sprayer's going, the racks are clanking, and your hands are in and out of the water so much they prune up and crack. But the rhythm is what keeps you going — the plates come in dirty, you send them out clean, and there's a kind of peace in that. The breaks are short, just enough to catch your breath and drink some water, and then you're back at it. What keeps me there? It's the people. The crew at Green & Gold, they look out for each other. And honestly, there's something about being part of the machine that keeps the whole place humming. I've been doing this a long time, and I'm not looking to be anywhere else."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00252",
+          "name": "Hector Leech",
+          "role": "Dishwasher",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Mason Ortega",
+          "question": "What does a full shift in the dish pit actually look like at Green & Gold — what's the pace, what breaks, what keeps you there? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Jack London",
+          "focus": "The dishwasher's shift at Green & Gold Tavern as the entry point into what the work actually looks like in Jack London kitchens this cycle.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Hector Leech — Dishwasher — Green & Gold Tavern, Jack London",
+          "evidence": [
+            {
+              "id": "EV-e7d63fc1c9",
+              "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+              "text": "Hector Leech, Dishwasher at Green & Gold Tavern. 13 named workers at 5 named kitchens in Jack London on the ledger this cycle."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Hector Leech, Dishwasher at Green & Gold Tavern. 13 named workers at 5 named kitchens in Jack London on the ledger this cycle.",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-f6c538f90c59"
+          },
+          {
+            "t": "FACT",
+            "text": "Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 12.7% · revenue $3.7M (+$9k vs C115) · on the roster: Hector Leech (Dishwasher); Trenton Nawan (Server); Guadalupe Lupe (Bartender); Sora Hint (Barista) +1 more",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-cb064eda4300"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "Jack London kitchens · Green & Gold Tavern, Harborline Grill",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-ea0a5ddff223"
+          },
+          {
+            "t": "FACT",
+            "text": "Harborline Grill · Restaurant & Dining · 7 employees · growth 12% · revenue $869k (+$2k vs C115) · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-5b8d329b1119"
+          },
+          {
+            "t": "FACT",
+            "text": "Blue Lantern Bar · Nightlife & Entertainment · 31 employees · growth 13.9% · revenue $4M (+$11k vs C115) · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-500e32a705c3"
+          },
+          {
+            "t": "FACT",
+            "text": "Jack London Square Markets · Retail & Food · 30 employees · growth 11% · revenue $4M (+$8k vs C115) · on the roster: Gauri Han (Security Guard); Karim Avery (Security Guard)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-c61233f9bfb0"
+          },
+          {
+            "t": "FACT",
+            "text": "Dockhouse BBQ · Restaurant & Dining · 2 employees · growth 11.7% · revenue $249k (+$559 vs C115) · on the roster: Mesi Westin (Dishwasher)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-f2cea1659c0f"
+          },
+          {
+            "t": "FACT",
+            "text": "Hector Leech — Dishwasher — Green & Gold Tavern, Jack London",
+            "src": "Simulation_Ledger profile for POP-00252",
+            "id": "F-92719b261916"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00744",
+      "name": "Tomas Renteria",
+      "quote": null,
+      "disp": "driven, hard to sit still; magnetic, center of every room; somewhat curious",
+      "recorded": false,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: answer must be quote|abstain",
+      "raw": "```json\n{\n  \"answer\": \"Seven people on the roster at Harborline — that's tight, but it's not new. We've run lean before. The line holds because we know each other's moves. Quynh, Jalen, Bruce — we've been through rushes where you don't even need to call out, you just know the plate's coming. It's rhythm, same as anything. And the podcast? That's not separate from the cooking. It's the same job. On the line, you're reading the room — who's waiting, who's been patient, who needs their food out first because they're about to miss a ferry. Behind the mic, I'm reading the neighborhood the same way. Listening for what people are actually saying, not just what they're ordering. Both are about timing and paying attention. Both are about not dropping the thing in front of you.\",\n  \"fact_ids\": [\"F-5b8d329b1119\", \"F-14ae6d4edbfb\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00744",
+          "name": "Tomas Renteria",
+          "role": "Podcast Host / Line Cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Mason Ortega",
+          "question": "How does the line at Harborline Grill hold together with only seven people on the roster, and what does the podcast work have to do with the cooking? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Jack London",
+          "focus": "The dishwasher's shift at Green & Gold Tavern as the entry point into what the work actually looks like in Jack London kitchens this cycle.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Tomas Renteria — Podcast Host / Line Cook — Harborline Grill, Jack London",
+          "evidence": [
+            {
+              "id": "EV-9445f0fa4c",
+              "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+              "text": "Hector Leech, Dishwasher at Green & Gold Tavern. 13 named workers at 5 named kitchens in Jack London on the ledger this cycle."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Harborline Grill · Restaurant & Dining · 7 employees · growth 12% · revenue $869k (+$2k vs C115) · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-5b8d329b1119"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "Jack London kitchens · Green & Gold Tavern, Harborline Grill",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-ea0a5ddff223"
+          },
+          {
+            "t": "FACT",
+            "text": "Hector Leech, Dishwasher at Green & Gold Tavern. 13 named workers at 5 named kitchens in Jack London on the ledger this cycle.",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-f6c538f90c59"
+          },
+          {
+            "t": "FACT",
+            "text": "Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 12.7% · revenue $3.7M (+$9k vs C115) · on the roster: Hector Leech (Dishwasher); Trenton Nawan (Server); Guadalupe Lupe (Bartender); Sora Hint (Barista) +1 more",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-cb064eda4300"
+          },
+          {
+            "t": "FACT",
+            "text": "Blue Lantern Bar · Nightlife & Entertainment · 31 employees · growth 13.9% · revenue $4M (+$11k vs C115) · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-500e32a705c3"
+          },
+          {
+            "t": "FACT",
+            "text": "Jack London Square Markets · Retail & Food · 30 employees · growth 11% · revenue $4M (+$8k vs C115) · on the roster: Gauri Han (Security Guard); Karim Avery (Security Guard)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-c61233f9bfb0"
+          },
+          {
+            "t": "FACT",
+            "text": "Dockhouse BBQ · Restaurant & Dining · 2 employees · growth 11.7% · revenue $249k (+$559 vs C115) · on the roster: Mesi Westin (Dishwasher)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-f2cea1659c0f"
+          },
+          {
+            "t": "FACT",
+            "text": "Tomas Renteria — Podcast Host / Line Cook — Harborline Grill, Jack London",
+            "src": "Simulation_Ledger profile for POP-00744",
+            "id": "F-14ae6d4edbfb"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00980",
+      "name": "Karim Avery",
+      "quote": "I see the pressure before it even gets to the kitchen. The markets are the first stop for a lot of folks coming off the shuttle or the BART — they're grabbing coffee, grabbing something quick, and they're already running late or already tired. The kitchen workers, they're inside, they're focused on the tickets, the heat, the rush. But I'm out front, watching who's waiting, who's checking their phone for the third time, who's arguing with a vendor over a dollar. That's the neighborhood's pressure — it's not just about the work, it's about the whole day stacking up on you before you even clock in. And when I walk through Jack London after my shift, I see the same faces at the taquerias and the same tired eyes. The kitchen folks see the plates, I see the people carrying the weight that brought them to those plates.",
+      "disp": "somewhat ambitious; somewhat sociable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\"answer\":\"quote\",\"quote\":\"I see the pressure before it even gets to the kitchen. The markets are the first stop for a lot of folks coming off the shuttle or the BART — they're grabbing coffee, grabbing something quick, and they're already running late or already tired. The kitchen workers, they're inside, they're focused on the tickets, the heat, the rush. But I'm out front, watching who's waiting, who's checking their phone for the third time, who's arguing with a vendor over a dollar. That's the neighborhood's pressure — it's not just about the work, it's about the whole day stacking up on you before you even clock in. And when I walk through Jack London after my shift, I see the same faces at the taquerias and the same tired eyes. The kitchen folks see the plates, I see the people carrying the weight that brought them to those plates.\",\"fact_ids\":[\"F-c61233f9bfb0\",\"F-e80afd676f25\"],\"basis\":\"lived-context\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c61233f9bfb0",
+          "F-e80afd676f25"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00980-31aec11e46",
+        "authoredQuote": true,
+        "publishableQuote": "I see the pressure before it even gets to the kitchen. The markets are the first stop for a lot of folks coming off the shuttle or the BART — they're grabbing coffee, grabbing something quick, and they're already running late or already tired. The kitchen workers, they're inside, they're focused on the tickets, the heat, the rush. But I'm out front, watching who's waiting, who's checking their phone for the third time, who's arguing with a vendor over a dollar. That's the neighborhood's pressure — it's not just about the work, it's about the whole day stacking up on you before you even clock in. And when I walk through Jack London after my shift, I see the same faces at the taquerias and the same tired eyes. The kitchen folks see the plates, I see the people carrying the weight that brought them to those plates."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00980",
+          "name": "Karim Avery",
+          "role": "Security Guard",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Mason Ortega",
+          "question": "What does a security guard at Jack London Square Markets see of the neighborhood's pressure that the kitchen workers don't? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Jack London",
+          "focus": "The dishwasher's shift at Green & Gold Tavern as the entry point into what the work actually looks like in Jack London kitchens this cycle.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Karim Avery — Security Guard — Jack London Square Markets, Jack London",
+          "evidence": [
+            {
+              "id": "EV-a42f6da504",
+              "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+              "text": "Hector Leech, Dishwasher at Green & Gold Tavern. 13 named workers at 5 named kitchens in Jack London on the ledger this cycle."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Jack London Square Markets · Retail & Food · 30 employees · growth 11% · revenue $4M (+$8k vs C115) · on the roster: Gauri Han (Security Guard); Karim Avery (Security Guard)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-c61233f9bfb0"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "Jack London kitchens · Green & Gold Tavern, Harborline Grill",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-ea0a5ddff223"
+          },
+          {
+            "t": "FACT",
+            "text": "Hector Leech, Dishwasher at Green & Gold Tavern. 13 named workers at 5 named kitchens in Jack London on the ledger this cycle.",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-f6c538f90c59"
+          },
+          {
+            "t": "FACT",
+            "text": "Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 12.7% · revenue $3.7M (+$9k vs C115) · on the roster: Hector Leech (Dishwasher); Trenton Nawan (Server); Guadalupe Lupe (Bartender); Sora Hint (Barista) +1 more",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-cb064eda4300"
+          },
+          {
+            "t": "FACT",
+            "text": "Harborline Grill · Restaurant & Dining · 7 employees · growth 12% · revenue $869k (+$2k vs C115) · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-5b8d329b1119"
+          },
+          {
+            "t": "FACT",
+            "text": "Blue Lantern Bar · Nightlife & Entertainment · 31 employees · growth 13.9% · revenue $4M (+$11k vs C115) · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-500e32a705c3"
+          },
+          {
+            "t": "FACT",
+            "text": "Dockhouse BBQ · Restaurant & Dining · 2 employees · growth 11.7% · revenue $249k (+$559 vs C115) · on the roster: Mesi Westin (Dishwasher)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-f2cea1659c0f"
+          },
+          {
+            "t": "FACT",
+            "text": "Karim Avery — Security Guard — Jack London Square Markets, Jack London",
+            "src": "Simulation_Ledger profile for POP-00980",
+            "id": "F-e80afd676f25"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00273",
+      "name": "Trenton Nawan",
+      "quote": null,
+      "disp": "driven, hard to sit still; magnetic, center of every room; steady, hard to shake; close to family; a real fan, plans around games; somewhat warm; somewhat inclined to go out",
+      "recorded": true,
+      "fallback": "contract-invalid: Unexpected non-whitespace character after JSON at position 859 (line 1 column 860)",
+      "raw": "{\"answer\":\"quote\",\"quote\":\"You want to know what the work actually looks like? Stand at the dish pit at Green & Gold on a Saturday night. That's where you learn the real rhythm of this neighborhood — not the menu, not the bar rail, the pit. Hector's got the hardest job in the building and he's the first one nobody sees. But that sink is the front door to everything else. Every plate that comes back tells you something — who's celebrating, who's just getting through, who's here because rent went up again and they're treating themselves to one decent meal. I've been serving in this neighborhood long enough to know the kitchen is the heartbeat, and the dishwasher is the one keeping time. You start there, you learn what this work really is: showing up, keeping pace, and not letting the heat break you. That's Jack London in a steel sink full of suds.\"},\"fact_ids\":[\"F-cb064eda4300\",\"F-f6c538f90c59\"],\"basis\":\"lived-context\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00273",
+          "name": "Trenton Nawan",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Mason Ortega",
+          "question": "As a resident of Jack London, what have you seen, felt, or understood about \"The dishwasher's shift at Green & Gold Tavern as the entry point into what the work actually looks like in Jack London kitchens this cycle.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Jack London",
+          "focus": "The dishwasher's shift at Green & Gold Tavern as the entry point into what the work actually looks like in Jack London kitchens this cycle.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Trenton Nawan — Server — Green & Gold Tavern, Jack London",
+          "evidence": [
+            {
+              "id": "EV-d886074fa5",
+              "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+              "text": "Hector Leech, Dishwasher at Green & Gold Tavern. 13 named workers at 5 named kitchens in Jack London on the ledger this cycle."
+            }
+          ],
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 12.7% · revenue $3.7M (+$9k vs C115) · on the roster: Hector Leech (Dishwasher); Trenton Nawan (Server); Guadalupe Lupe (Bartender); Sora Hint (Barista) +1 more",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-cb064eda4300"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "Jack London kitchens · Green & Gold Tavern, Harborline Grill",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-ea0a5ddff223"
+          },
+          {
+            "t": "FACT",
+            "text": "Hector Leech, Dishwasher at Green & Gold Tavern. 13 named workers at 5 named kitchens in Jack London on the ledger this cycle.",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-f6c538f90c59"
+          },
+          {
+            "t": "FACT",
+            "text": "Harborline Grill · Restaurant & Dining · 7 employees · growth 12% · revenue $869k (+$2k vs C115) · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-5b8d329b1119"
+          },
+          {
+            "t": "FACT",
+            "text": "Blue Lantern Bar · Nightlife & Entertainment · 31 employees · growth 13.9% · revenue $4M (+$11k vs C115) · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-500e32a705c3"
+          },
+          {
+            "t": "FACT",
+            "text": "Jack London Square Markets · Retail & Food · 30 employees · growth 11% · revenue $4M (+$8k vs C115) · on the roster: Gauri Han (Security Guard); Karim Avery (Security Guard)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-c61233f9bfb0"
+          },
+          {
+            "t": "FACT",
+            "text": "Dockhouse BBQ · Restaurant & Dining · 2 employees · growth 11.7% · revenue $249k (+$559 vs C115) · on the roster: Mesi Westin (Dishwasher)",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "id": "F-f2cea1659c0f"
+          },
+          {
+            "t": "FACT",
+            "text": "Trenton Nawan — Server — Green & Gold Tavern, Jack London",
+            "src": "Simulation_Ledger profile for POP-00273",
+            "id": "F-6ced7af785ea"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-11-20T19:15:46.614Z"
+}

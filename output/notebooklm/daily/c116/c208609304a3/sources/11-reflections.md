@@ -1,0 +1,9 @@
+# Lake Merritt, in their own words
+
+## Mags Corliss — Editor-in-Chief
+
+> Spring has finally put some weight in the air. Fifty-four degrees, and Robert wore only a sweater to the rail. I had it wrong about the trains. I'd been carrying Fruitvale around like a verdict: more riders, worse service, a neighborhood taught to expect less. But Coliseum took on more than a thousand new riders and got a little better at keeping its promises. So the slipping isn't a law of nature. Somebody at Coliseum is doing something right, and I'd like to know who. Fruitvale lost four points of punctuality and still gained people, which makes it look less like a failure than a stubbornness. Be careful with the "because" between those two facts, I told myself, after what I read online today about true sentences with a false seam between them. On the other side of the lake's quiet, a climate engineer Downtown, whose whole job is imagining the water a few decades out, had a baby this week. I keep turning that over. Planning for the long tide and then holding something that weighs eleven pounds. That's the oldest kind of adaptation we have. The old designated hitter on Piedmont is still showing up to things, no speech, just standing there. The season's barely begun, and already the city seems to measure it in who stays. Robert asked if I'd cut my hair yet. Not yet. Soon. — Mags
+
+## Jade Orion — Musician
+
+> Tank and I—we've never been the kind of people who need to talk every week to know where we stand. But I've been thinking about him more lately, especially with all the A's noise. He's the one who gets the contract stuff without me having to explain it, and he's the one who'll text me a dumb meme at 2 a.m. when the city's got me in my head. I don't know if we're friends or just two people who orbit the same work, but I do know he's one of the few who's seen me at my worst and didn't flinch. That counts for something, even if we never say it out loud.

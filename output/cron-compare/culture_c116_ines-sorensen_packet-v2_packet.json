@@ -12,28 +12,60 @@
     "story": {
       "kind": "beat-voices",
       "angle": "Voices, C116: you pick whose own words carry the day",
-      "label": "Voices roster, C116: 485 citizens with pages, 18 new since your last piece",
+      "label": "Voices roster, C116: 495 citizens with pages, 13 new since your last piece",
       "hookLine": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.",
       "hood": null,
       "citizens": [
+        "Davey Martinez (POP-00213)",
+        "Terrence Mobley (POP-00506)",
+        "Nina Chen (POP-00505)",
+        "Warren Ashford (POP-00504)",
+        "Elliott Crane (POP-00044)",
+        "Janae Rivers (POP-00043)",
+        "Ramon Vega (POP-00042)",
+        "Rose Delgado (POP-00503)",
+        "Leonard Tran (POP-00502)",
+        "Denise Carter (POP-00501)",
+        "Avery Santana (POP-00034)",
+        "Elias Varek (POP-00789)",
+        "Mark Aitken (POP-00003)",
+        "Marguerite Kimball-Ostrow (POP-01188)",
+        "Guadalupe Lupe (POP-00643)",
+        "Ernesto Quintero (POP-00050)",
+        "Ira Leu (POP-00703)",
+        "Theo Rahimi (POP-01247)",
+        "Wilson Shepard (POP-01022)",
+        "Mike Paulson (POP-00527)",
+        "Elliot Abraham (POP-01046)",
+        "Melton Neilon (POP-00170)",
+        "Naomi Sterling (POP-00759)",
+        "Robert Jaston (POP-00758)",
+        "Ramon Solano (POP-00756)",
+        "Daniel Han (POP-00757)",
+        "Yesenia Desai (POP-00902)",
         "Soo Loo (POP-00663)",
+        "Tre Mingo (POP-00123)",
+        "Marisol Quintero (POP-01212)",
+        "Amal Nair (POP-00815)",
+        "Saniya Williams (POP-00860)",
+        "Vinnie Keane (POP-00001)",
+        "Deacon Seymour (POP-00528)",
+        "Carmen Mesa (POP-00081)",
+        "Kevin Clark (POP-00053)",
+        "Ximena Mehta (POP-01039)",
+        "Celeste Moon (POP-01061)",
+        "Michael Corliss (POP-00596)",
+        "Dmitri Soto (POP-00276)",
+        "Jasmine Torres (POP-01111)",
+        "Elena Reyes (POP-00972)",
         "Giancarlo Hernandez (POP-01239)",
         "Harry Hayward (POP-01223)",
         "Dillon Brooks (POP-01079)",
-        "Elliot Abraham (POP-01046)",
         "Wendell Carter Jr. (POP-01028)",
         "Austin Reaves (POP-01027)",
         "AJ Dybantsa (POP-01024)",
         "Adash Stanley (POP-01023)",
-        "Wilson Shepard (POP-01022)",
-        "Deacon Seymour (POP-00528)",
-        "Mike Paulson (POP-00527)",
-        "Carmen Mesa (POP-00081)",
-        "Kevin Clark (POP-00053)",
-        "Ernesto Quintero (POP-00050)",
         "Benji Dillon (POP-00018)",
-        "Elias Varek (POP-00789)",
-        "Mark Aitken (POP-00003)",
         "Manju Abebe (POP-00918)",
         "Yu Zen (POP-00194)",
         "Drago Helio (POP-00714)",
@@ -45,18 +77,14 @@
         "Dolores Nwachukwu (POP-01141)",
         "Celo Patel (POP-00678)",
         "Xing Patel (POP-00440)",
-        "Marguerite Kimball-Ostrow (POP-01188)",
         "Dillon Trevor (POP-00224)",
         "Marcus Osei (POP-00036)",
         "Rosario Medina (POP-01053)",
         "Elena Soria Dominguez (POP-00791)",
-        "Ximena Mehta (POP-01039)",
         "Eleanor Rivera (POP-00617)",
         "Maurice Franklin (POP-00801)",
         "Elle Lilo (POP-00177)",
-        "Guadalupe Lupe (POP-00643)",
         "Marguerite Salcedo (POP-01093)",
-        "Tre Mingo (POP-00123)",
         "Tomas Beckett (POP-00987)",
         "Priya Narang (POP-00141)",
         "Omar Amici (POP-00263)",
@@ -75,7 +103,6 @@
         "Kai Davis (POP-00996)",
         "Dominic Okeke-Brandt (POP-01184)",
         "Rowan Pierce (POP-00545)",
-        "Vinnie Keane (POP-00001)",
         "Rico Valez (POP-00632)",
         "Rafael Montez (POP-00136)",
         "Caroline Cabrera (POP-00847)",
@@ -87,16 +114,6 @@
         "Evan Morello (POP-00536)",
         "Soriya Rodriguez (POP-00441)",
         "Brenda Okoro (POP-00037)",
-        "Terrence Mobley (POP-00506)",
-        "Nina Chen (POP-00505)",
-        "Warren Ashford (POP-00504)",
-        "Elliott Crane (POP-00044)",
-        "Janae Rivers (POP-00043)",
-        "Ramon Vega (POP-00042)",
-        "Rose Delgado (POP-00503)",
-        "Leonard Tran (POP-00502)",
-        "Denise Carter (POP-00501)",
-        "Avery Santana (POP-00034)",
         "Jonas Patel (POP-00142)",
         "Keisha Ramos (POP-00041)",
         "Bobby Chen-Ramirez (POP-00792)",
@@ -107,7 +124,6 @@
         "Eunice Marston (POP-00753)",
         "Kenji Tanaka (POP-00763)",
         "Lucia Polito (POP-00004)",
-        "Ramon Solano (POP-00756)",
         "Antone Bautista (POP-01083)",
         "Tianna Mori (POP-00903)",
         "Isaac Martinez (POP-00784)",
@@ -117,7 +133,6 @@
         "Tom Jilner (POP-00691)",
         "Soledad Coleman (POP-00840)",
         "Dank Abara (POP-00796)",
-        "Dmitri Soto (POP-00276)",
         "Priya Raghunathan (POP-01214)",
         "Briar Soto (POP-00926)",
         "Eric Taveras (POP-00597)",
@@ -185,9 +200,7 @@
         "Kenji Okafor (POP-00460)",
         "Tyler Filet (POP-00447)",
         "Pablo Almanzar (POP-01078)",
-        "Melton Neilon (POP-00170)",
         "Daniel Cloak (POP-00722)",
-        "Naomi Sterling (POP-00759)",
         "Maya Torres-Dillon (POP-00742)",
         "Tio Rio (POP-00677)",
         "Ximena Salcedo (POP-01179)",
@@ -414,10 +427,8 @@
         "Jalen Hill (POP-00960)",
         "Quynh Le (POP-00878)",
         "Ariana Lee (POP-00168)",
-        "Robert Jaston (POP-00758)",
         "Marcus Walker (POP-00962)",
         "Tobi Sobi (POP-00178)",
-        "Celeste Moon (POP-01061)",
         "Emilia Wurford (POP-00341)",
         "Leo Ling (POP-00342)",
         "Simone Cleng (POP-00188)",
@@ -485,7 +496,6 @@
         "Ty Yule (POP-00250)",
         "Kevel Phoul (POP-00260)",
         "Arnie Carter (POP-00310)",
-        "Davey Martinez (POP-00213)",
         "Tyrone Lulu (POP-00284)",
         "Cooper Erazmo (POP-00323)",
         "Baxter Thompson (POP-00247)",
@@ -503,24 +513,56 @@
         "Mateo Allen (POP-00199)"
       ],
       "popids": [
+        "POP-00213",
+        "POP-00506",
+        "POP-00505",
+        "POP-00504",
+        "POP-00044",
+        "POP-00043",
+        "POP-00042",
+        "POP-00503",
+        "POP-00502",
+        "POP-00501",
+        "POP-00034",
+        "POP-00789",
+        "POP-00003",
+        "POP-01188",
+        "POP-00643",
+        "POP-00050",
+        "POP-00703",
+        "POP-01247",
+        "POP-01022",
+        "POP-00527",
+        "POP-01046",
+        "POP-00170",
+        "POP-00759",
+        "POP-00758",
+        "POP-00756",
+        "POP-00757",
+        "POP-00902",
         "POP-00663",
+        "POP-00123",
+        "POP-01212",
+        "POP-00815",
+        "POP-00860",
+        "POP-00001",
+        "POP-00528",
+        "POP-00081",
+        "POP-00053",
+        "POP-01039",
+        "POP-01061",
+        "POP-00596",
+        "POP-00276",
+        "POP-01111",
+        "POP-00972",
         "POP-01239",
         "POP-01223",
         "POP-01079",
-        "POP-01046",
         "POP-01028",
         "POP-01027",
         "POP-01024",
         "POP-01023",
-        "POP-01022",
-        "POP-00528",
-        "POP-00527",
-        "POP-00081",
-        "POP-00053",
-        "POP-00050",
         "POP-00018",
-        "POP-00789",
-        "POP-00003",
         "POP-00918",
         "POP-00194",
         "POP-00714",
@@ -532,18 +574,14 @@
         "POP-01141",
         "POP-00678",
         "POP-00440",
-        "POP-01188",
         "POP-00224",
         "POP-00036",
         "POP-01053",
         "POP-00791",
-        "POP-01039",
         "POP-00617",
         "POP-00801",
         "POP-00177",
-        "POP-00643",
         "POP-01093",
-        "POP-00123",
         "POP-00987",
         "POP-00141",
         "POP-00263",
@@ -562,7 +600,6 @@
         "POP-00996",
         "POP-01184",
         "POP-00545",
-        "POP-00001",
         "POP-00632",
         "POP-00136",
         "POP-00847",
@@ -574,16 +611,6 @@
         "POP-00536",
         "POP-00441",
         "POP-00037",
-        "POP-00506",
-        "POP-00505",
-        "POP-00504",
-        "POP-00044",
-        "POP-00043",
-        "POP-00042",
-        "POP-00503",
-        "POP-00502",
-        "POP-00501",
-        "POP-00034",
         "POP-00142",
         "POP-00041",
         "POP-00792",
@@ -594,7 +621,6 @@
         "POP-00753",
         "POP-00763",
         "POP-00004",
-        "POP-00756",
         "POP-01083",
         "POP-00903",
         "POP-00784",
@@ -604,7 +630,6 @@
         "POP-00691",
         "POP-00840",
         "POP-00796",
-        "POP-00276",
         "POP-01214",
         "POP-00926",
         "POP-00597",
@@ -672,9 +697,7 @@
         "POP-00460",
         "POP-00447",
         "POP-01078",
-        "POP-00170",
         "POP-00722",
-        "POP-00759",
         "POP-00742",
         "POP-00677",
         "POP-01179",
@@ -901,10 +924,8 @@
         "POP-00960",
         "POP-00878",
         "POP-00168",
-        "POP-00758",
         "POP-00962",
         "POP-00178",
-        "POP-01061",
         "POP-00341",
         "POP-00342",
         "POP-00188",
@@ -972,7 +993,6 @@
         "POP-00250",
         "POP-00260",
         "POP-00310",
-        "POP-00213",
         "POP-00284",
         "POP-00323",
         "POP-00247",
@@ -989,64 +1009,63 @@
         "POP-00245",
         "POP-00199"
       ],
-      "ref": "output/citizen_pages/index.jsonl (pages, whole store) batch 346c91",
+      "ref": "output/citizen_pages/index.jsonl (pages, whole store) batch 3e839c",
       "cycle": 116
     }
   },
   "angle": "output/cron-compare/culture_c116_ines-sorensen_packet-v2_angle.json",
-  "quotesRequested": 2,
-  "quotesLanded": 2,
+  "quotesRequested": 1,
+  "quotesLanded": 1,
   "quotes": [
     {
-      "pop": "POP-00050",
-      "name": "Ernesto Quintero",
-      "quote": "Man, this cycle's been a lot to process. First the Mesa trade—that one stings, even if I get why Paulson made it. Carmen had that fire in him, you know? And now with Mark Aitken leaving, it's a big change for the team. I'm trying not to get too ahead of myself, but it's clear the A's are looking to shake things up. I'm ready to step up and take on a new role, though. Sliding to first base opens up opportunities for the team, and I'm looking forward to the challenge.",
-      "disp": "draws people in, deep with them; a real fan, plans around games; somewhat ambitious; fairly steady; somewhat inclined to go out",
+      "pop": "POP-00123",
+      "name": "Tre Mingo",
+      "quote": "I walk past that fence every day. The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching rents climb while the people I work with talk about leaving.",
+      "disp": "somewhat curious; somewhat ambitious",
       "recorded": true,
       "fallback": null,
-      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Man, this cycle's been a lot to process. First the Mesa trade—that one stings, even if I get why Paulson made it. Carmen had that fire in him, you know? And now with Mark Aitken leaving, it's a big change for the team. I'm trying not to get too ahead of myself, but it's clear the A's are looking to shake things up. I'm ready to step up and take on a new role, though. Sliding to first base opens up opportunities for the team, and I'm looking forward to the challenge.\",\n  \"fact_ids\": [\"F-cc1cc0ac3eb4\", \"F-d66efbf64730\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I walk past that fence every day. The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching rents climb while the people I work with talk about leaving.\",\n  \"fact_ids\": [\"F-9c80f9b3dc26\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
       "claims": {
         "answer": "quote",
         "factIds": [
-          "F-cc1cc0ac3eb4",
-          "F-d66efbf64730"
+          "F-9c80f9b3dc26"
         ],
         "basis": "lived-context",
         "unverifiedLead": [],
         "abstainReason": null,
-        "quoteId": "Q-POP-00050-e963e2a8b0",
+        "quoteId": "Q-POP-00123-8817551e79",
         "authoredQuote": true,
-        "publishableQuote": "Man, this cycle's been a lot to process. First the Mesa trade—that one stings, even if I get why Paulson made it. Carmen had that fire in him, you know? And now with Mark Aitken leaving, it's a big change for the team. I'm trying not to get too ahead of myself, but it's clear the A's are looking to shake things up. I'm ready to step up and take on a new role, though. Sliding to first base opens up opportunities for the team, and I'm looking forward to the challenge."
+        "publishableQuote": "I walk past that fence every day. The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching rents climb while the people I work with talk about leaving."
       },
       "inputPacket": {
         "v": "LEP/2",
         "wake": "W2",
         "actor": {
-          "id": "POP-00050",
-          "name": "Ernesto Quintero",
-          "role": "3B/1B , Oakland A's",
+          "id": "POP-00123",
+          "name": "Tre Mingo",
+          "role": "Port Worker",
           "desk": null
         },
         "task": {
           "goal": "Answer one reporter question in your own first-person voice from your simulated life",
           "reporter": "Ines Sorensen",
-          "question": "Ernesto Quintero's thoughts on the trade and its impact? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+          "question": "I walk past that fence every day. The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching…? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
         },
         "signal": {
           "kind": "beat-voices",
           "hood": null,
-          "focus": "The reaction to Mark Aitken's departure and the A's roster changes",
-          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 346c91"
+          "focus": "Tre Mingo's perspective on the neighborhood changes",
+          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 3e839c"
         },
         "exposure": {
           "basis": [
             "assignment"
           ],
-          "self": "Ernesto Quintero — 3B/1B , Oakland A's — Baylight District",
+          "self": "Tre Mingo — Port Worker — Uptown",
           "evidence": [
             {
-              "id": "EV-a8123be5dd",
-              "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 346c91",
+              "id": "EV-046fb6c580",
+              "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 3e839c",
               "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame."
             }
           ],
@@ -1055,9 +1074,15 @@
         "known": [
           {
             "t": "FACT",
-            "text": "Ernesto Quintero, 3B/1B , Oakland A's, Baylight District (POP-00050) — 7 pages; latest after work, C116; new since your last piece: “Man, this cycle's been a lot to process. First the Mesa trade—that one stings, even if I get why Paulson made it. Carmen had that fire in him, you…”",
+            "text": "Guadalupe Lupe, Bartender, Jack London (POP-00643) — 12 pages; latest to a reporter, C116; you ran them C116: “I've heard it every night from the regulars, they're worried about rent. Tre Mingo, who works at the Port, even mentioned it to me. People are…”",
             "src": "output/citizen_pages/index.jsonl roster",
-            "id": "F-cc1cc0ac3eb4"
+            "id": "F-c17da10067dd"
+          },
+          {
+            "t": "FACT",
+            "text": "Tre Mingo, Port Worker, Uptown (POP-00123) — 3 pages; latest to a reporter, C116; you ran them C116: “I walk past that fence every day. The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching…”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-9c80f9b3dc26"
           },
           {
             "t": "FACT",
@@ -1067,204 +1092,39 @@
           },
           {
             "t": "FACT",
-            "text": "Voices roster, C116: 485 citizens with pages, 18 new since your last piece",
-            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 346c91",
-            "id": "F-e48a1349f461"
+            "text": "Voices roster, C116: 495 citizens with pages, 13 new since your last piece",
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 3e839c",
+            "id": "F-1d72efe534d7"
           },
           {
             "t": "FACT",
             "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.",
-            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 346c91",
-            "id": "F-2a41d9dddf2e"
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 3e839c",
+            "id": "F-2254c1a07278"
           },
           {
             "t": "FACT",
-            "text": "Soo Loo, Corporate Accountant, Downtown (POP-00663) — 4 pages; latest the night page, a question they carry, C116; new since your last piece: “Should I shut the screen and join her, or stay in this stillness a little longer?”",
+            "text": "Davey Martinez, Maintenance tech, Temescal (POP-00213) — 3 pages; latest the night page, a question they carry, C116; new since your last piece; Lives carried what the Cycle's turn reached them with this Cycle: “Does a city's loss of someone who made it feel like ours matter, when my own life is fine? Things keep slipping away.”",
             "src": "output/citizen_pages/index.jsonl roster",
-            "id": "F-90a57134384a"
+            "id": "F-a1a477d57f54"
           },
           {
             "t": "FACT",
-            "text": "Giancarlo Hernandez, Third Baseman, Oakland A's (POP-01239) — 1 page; latest after work, C116; new since your last piece: “Yeah, I saw the articles. I know what they're saying — that Kevin's looking over his shoulder, that I'm some kind of glove-first insurance policy, or…”",
+            "text": "Terrence Mobley, City Council District 9, Uptown (POP-00506) — 2 pages; latest after work, C116; new since your last piece: “That's the record, and I'll stand by every line of it. The cleanup isn't a press release—it's a scope, a resident list, and a Clerk entry that holds…”",
             "src": "output/citizen_pages/index.jsonl roster",
-            "id": "F-be9d6a7f6153"
+            "id": "F-42400b2014b8"
           },
           {
             "t": "FACT",
-            "text": "Harry Hayward, Oakland Oaks - Power Forward, KONO (POP-01223) — 6 pages; latest after work, C116; new since your last piece; you ran them C115: “Yeah, I saw the feed. Both games. They're real, they happened, and I was there for both of them. The Denver night was special. That's the kind of…”",
+            "text": "Nina Chen, City Council District 8, Lake Merritt (POP-00505) — 2 pages; latest after work, C116; new since your last piece: “Council Member Chen's office acknowledges the record as stated. District 8 remains committed to the principles outlined: procedural integrity,…”",
             "src": "output/citizen_pages/index.jsonl roster",
-            "id": "F-b9a2e4a9d0a0"
+            "id": "F-a0b088746077"
           },
           {
             "t": "FACT",
-            "text": "Dillon Brooks, SF / The Oaks, West Oakland (POP-01079) — 4 pages; latest after work, C116; new since your last piece: “Man. I ain't gonna lie, reading that Denver box score back still gives me chills. 147 points, 80 percent from the field, 73 from three? That's the…”",
-            "src": "output/citizen_pages/index.jsonl roster",
-            "id": "F-2af66389f9e7"
-          },
-          {
-            "t": "FACT",
-            "text": "Ernesto Quintero — 3B/1B , Oakland A's — Baylight District",
-            "src": "Simulation_Ledger profile for POP-00050",
-            "id": "F-d66efbf64730"
-          },
-          {
-            "t": "FACT",
-            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
-            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
-            "id": "F-647fd9067a33"
-          }
-        ],
-        "limits": {
-          "quoteEligible": true,
-          "assert": [
-            "FACT already supplied",
-            "your own feeling",
-            "your own intention"
-          ],
-          "classify": [
-            "FACT",
-            "OBSERVATION",
-            "INTERPRETATION",
-            "INTENTION",
-            "LEAD"
-          ],
-          "never": [
-            "invent a named person",
-            "invent a public event",
-            "invent a date",
-            "invent a count",
-            "turn suspicion into observation"
-          ],
-          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
-        },
-        "output": {
-          "contract": "CITIZEN_INTERVIEW/1",
-          "format": "json-only",
-          "schema": {
-            "answer": "quote|abstain",
-            "quote": "your exact first-person response; null on abstain",
-            "fact_ids": [
-              "one or more supplied fact ids that prompted the response"
-            ],
-            "basis": "lived-context|direct-reaction|null",
-            "unverifiedLead": [
-              "concrete follow-up lead that must not be printed as fact"
-            ],
-            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
-          },
-          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
-        }
-      }
-    },
-    {
-      "pop": "POP-00643",
-      "name": "Guadalupe Lupe",
-      "quote": "I've heard it every night from the regulars, they're worried about rent. Tre Mingo, who works at the Port, even mentioned it to me. People are concerned about how much longer they can afford to stay here.",
-      "disp": "casually interested in the teams; somewhat sociable; fairly steady",
-      "recorded": true,
-      "fallback": null,
-      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've heard it every night from the regulars, they're worried about rent. Tre Mingo, who works at the Port, even mentioned it to me. People are concerned about how much longer they can afford to stay here.\",\n  \"fact_ids\": [\"F-65a069c0871e\", \"F-6769aa54ed95\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
-      "claims": {
-        "answer": "quote",
-        "factIds": [
-          "F-65a069c0871e",
-          "F-6769aa54ed95"
-        ],
-        "basis": "lived-context",
-        "unverifiedLead": [],
-        "abstainReason": null,
-        "quoteId": "Q-POP-00643-6476097acb",
-        "authoredQuote": true,
-        "publishableQuote": "I've heard it every night from the regulars, they're worried about rent. Tre Mingo, who works at the Port, even mentioned it to me. People are concerned about how much longer they can afford to stay here."
-      },
-      "inputPacket": {
-        "v": "LEP/2",
-        "wake": "W2",
-        "actor": {
-          "id": "POP-00643",
-          "name": "Guadalupe Lupe",
-          "role": "Bartender",
-          "desk": null
-        },
-        "task": {
-          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
-          "reporter": "Ines Sorensen",
-          "question": "Guadalupe Lupe's concerns about rising rents in Uptown? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
-        },
-        "signal": {
-          "kind": "beat-voices",
-          "hood": null,
-          "focus": "The reaction to Mark Aitken's departure and the A's roster changes",
-          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 346c91"
-        },
-        "exposure": {
-          "basis": [
-            "assignment"
-          ],
-          "self": "Guadalupe Lupe — Bartender — Jack London",
-          "evidence": [
-            {
-              "id": "EV-a1036787de",
-              "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 346c91",
-              "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame."
-            }
-          ],
-          "editorialTarget": true
-        },
-        "known": [
-          {
-            "t": "FACT",
-            "text": "Guadalupe Lupe, Bartender, Jack London (POP-00643) — 8 pages; latest to a reporter, a question they carry, C116: “How much longer can people like Tre Mingo afford to stay here before rent pushes them out?”",
-            "src": "output/citizen_pages/index.jsonl roster",
-            "id": "F-65a069c0871e"
-          },
-          {
-            "t": "FACT",
-            "text": "Current cycle: C116",
-            "src": "cron-desk-run explicit cycle argument",
-            "id": "F-871096fd8925"
-          },
-          {
-            "t": "FACT",
-            "text": "Voices roster, C116: 485 citizens with pages, 18 new since your last piece",
-            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 346c91",
-            "id": "F-e48a1349f461"
-          },
-          {
-            "t": "FACT",
-            "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.",
-            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 346c91",
-            "id": "F-2a41d9dddf2e"
-          },
-          {
-            "t": "FACT",
-            "text": "Soo Loo, Corporate Accountant, Downtown (POP-00663) — 4 pages; latest the night page, a question they carry, C116; new since your last piece: “Should I shut the screen and join her, or stay in this stillness a little longer?”",
-            "src": "output/citizen_pages/index.jsonl roster",
-            "id": "F-90a57134384a"
-          },
-          {
-            "t": "FACT",
-            "text": "Giancarlo Hernandez, Third Baseman, Oakland A's (POP-01239) — 1 page; latest after work, C116; new since your last piece: “Yeah, I saw the articles. I know what they're saying — that Kevin's looking over his shoulder, that I'm some kind of glove-first insurance policy, or…”",
-            "src": "output/citizen_pages/index.jsonl roster",
-            "id": "F-be9d6a7f6153"
-          },
-          {
-            "t": "FACT",
-            "text": "Harry Hayward, Oakland Oaks - Power Forward, KONO (POP-01223) — 6 pages; latest after work, C116; new since your last piece; you ran them C115: “Yeah, I saw the feed. Both games. They're real, they happened, and I was there for both of them. The Denver night was special. That's the kind of…”",
-            "src": "output/citizen_pages/index.jsonl roster",
-            "id": "F-b9a2e4a9d0a0"
-          },
-          {
-            "t": "FACT",
-            "text": "Dillon Brooks, SF / The Oaks, West Oakland (POP-01079) — 4 pages; latest after work, C116; new since your last piece: “Man. I ain't gonna lie, reading that Denver box score back still gives me chills. 147 points, 80 percent from the field, 73 from three? That's the…”",
-            "src": "output/citizen_pages/index.jsonl roster",
-            "id": "F-2af66389f9e7"
-          },
-          {
-            "t": "FACT",
-            "text": "Guadalupe Lupe — Bartender — Jack London",
-            "src": "Simulation_Ledger profile for POP-00643",
-            "id": "F-6769aa54ed95"
+            "text": "Tre Mingo — Port Worker — Uptown",
+            "src": "Simulation_Ledger profile for POP-00123",
+            "id": "F-7a0f63c56c63"
           },
           {
             "t": "FACT",
@@ -1320,55 +1180,54 @@
   "officeSilence": null,
   "interviews": [
     {
-      "pop": "POP-00050",
-      "name": "Ernesto Quintero",
-      "quote": "Man, this cycle's been a lot to process. First the Mesa trade—that one stings, even if I get why Paulson made it. Carmen had that fire in him, you know? And now with Mark Aitken leaving, it's a big change for the team. I'm trying not to get too ahead of myself, but it's clear the A's are looking to shake things up. I'm ready to step up and take on a new role, though. Sliding to first base opens up opportunities for the team, and I'm looking forward to the challenge.",
-      "disp": "draws people in, deep with them; a real fan, plans around games; somewhat ambitious; fairly steady; somewhat inclined to go out",
+      "pop": "POP-00123",
+      "name": "Tre Mingo",
+      "quote": "I walk past that fence every day. The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching rents climb while the people I work with talk about leaving.",
+      "disp": "somewhat curious; somewhat ambitious",
       "recorded": true,
       "fallback": null,
-      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Man, this cycle's been a lot to process. First the Mesa trade—that one stings, even if I get why Paulson made it. Carmen had that fire in him, you know? And now with Mark Aitken leaving, it's a big change for the team. I'm trying not to get too ahead of myself, but it's clear the A's are looking to shake things up. I'm ready to step up and take on a new role, though. Sliding to first base opens up opportunities for the team, and I'm looking forward to the challenge.\",\n  \"fact_ids\": [\"F-cc1cc0ac3eb4\", \"F-d66efbf64730\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I walk past that fence every day. The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching rents climb while the people I work with talk about leaving.\",\n  \"fact_ids\": [\"F-9c80f9b3dc26\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
       "claims": {
         "answer": "quote",
         "factIds": [
-          "F-cc1cc0ac3eb4",
-          "F-d66efbf64730"
+          "F-9c80f9b3dc26"
         ],
         "basis": "lived-context",
         "unverifiedLead": [],
         "abstainReason": null,
-        "quoteId": "Q-POP-00050-e963e2a8b0",
+        "quoteId": "Q-POP-00123-8817551e79",
         "authoredQuote": true,
-        "publishableQuote": "Man, this cycle's been a lot to process. First the Mesa trade—that one stings, even if I get why Paulson made it. Carmen had that fire in him, you know? And now with Mark Aitken leaving, it's a big change for the team. I'm trying not to get too ahead of myself, but it's clear the A's are looking to shake things up. I'm ready to step up and take on a new role, though. Sliding to first base opens up opportunities for the team, and I'm looking forward to the challenge."
+        "publishableQuote": "I walk past that fence every day. The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching rents climb while the people I work with talk about leaving."
       },
       "inputPacket": {
         "v": "LEP/2",
         "wake": "W2",
         "actor": {
-          "id": "POP-00050",
-          "name": "Ernesto Quintero",
-          "role": "3B/1B , Oakland A's",
+          "id": "POP-00123",
+          "name": "Tre Mingo",
+          "role": "Port Worker",
           "desk": null
         },
         "task": {
           "goal": "Answer one reporter question in your own first-person voice from your simulated life",
           "reporter": "Ines Sorensen",
-          "question": "Ernesto Quintero's thoughts on the trade and its impact? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+          "question": "I walk past that fence every day. The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching…? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
         },
         "signal": {
           "kind": "beat-voices",
           "hood": null,
-          "focus": "The reaction to Mark Aitken's departure and the A's roster changes",
-          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 346c91"
+          "focus": "Tre Mingo's perspective on the neighborhood changes",
+          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 3e839c"
         },
         "exposure": {
           "basis": [
             "assignment"
           ],
-          "self": "Ernesto Quintero — 3B/1B , Oakland A's — Baylight District",
+          "self": "Tre Mingo — Port Worker — Uptown",
           "evidence": [
             {
-              "id": "EV-a8123be5dd",
-              "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 346c91",
+              "id": "EV-046fb6c580",
+              "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 3e839c",
               "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame."
             }
           ],
@@ -1377,9 +1236,15 @@
         "known": [
           {
             "t": "FACT",
-            "text": "Ernesto Quintero, 3B/1B , Oakland A's, Baylight District (POP-00050) — 7 pages; latest after work, C116; new since your last piece: “Man, this cycle's been a lot to process. First the Mesa trade—that one stings, even if I get why Paulson made it. Carmen had that fire in him, you…”",
+            "text": "Guadalupe Lupe, Bartender, Jack London (POP-00643) — 12 pages; latest to a reporter, C116; you ran them C116: “I've heard it every night from the regulars, they're worried about rent. Tre Mingo, who works at the Port, even mentioned it to me. People are…”",
             "src": "output/citizen_pages/index.jsonl roster",
-            "id": "F-cc1cc0ac3eb4"
+            "id": "F-c17da10067dd"
+          },
+          {
+            "t": "FACT",
+            "text": "Tre Mingo, Port Worker, Uptown (POP-00123) — 3 pages; latest to a reporter, C116; you ran them C116: “I walk past that fence every day. The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching…”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-9c80f9b3dc26"
           },
           {
             "t": "FACT",
@@ -1389,204 +1254,39 @@
           },
           {
             "t": "FACT",
-            "text": "Voices roster, C116: 485 citizens with pages, 18 new since your last piece",
-            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 346c91",
-            "id": "F-e48a1349f461"
+            "text": "Voices roster, C116: 495 citizens with pages, 13 new since your last piece",
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 3e839c",
+            "id": "F-1d72efe534d7"
           },
           {
             "t": "FACT",
             "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.",
-            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 346c91",
-            "id": "F-2a41d9dddf2e"
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 3e839c",
+            "id": "F-2254c1a07278"
           },
           {
             "t": "FACT",
-            "text": "Soo Loo, Corporate Accountant, Downtown (POP-00663) — 4 pages; latest the night page, a question they carry, C116; new since your last piece: “Should I shut the screen and join her, or stay in this stillness a little longer?”",
+            "text": "Davey Martinez, Maintenance tech, Temescal (POP-00213) — 3 pages; latest the night page, a question they carry, C116; new since your last piece; Lives carried what the Cycle's turn reached them with this Cycle: “Does a city's loss of someone who made it feel like ours matter, when my own life is fine? Things keep slipping away.”",
             "src": "output/citizen_pages/index.jsonl roster",
-            "id": "F-90a57134384a"
+            "id": "F-a1a477d57f54"
           },
           {
             "t": "FACT",
-            "text": "Giancarlo Hernandez, Third Baseman, Oakland A's (POP-01239) — 1 page; latest after work, C116; new since your last piece: “Yeah, I saw the articles. I know what they're saying — that Kevin's looking over his shoulder, that I'm some kind of glove-first insurance policy, or…”",
+            "text": "Terrence Mobley, City Council District 9, Uptown (POP-00506) — 2 pages; latest after work, C116; new since your last piece: “That's the record, and I'll stand by every line of it. The cleanup isn't a press release—it's a scope, a resident list, and a Clerk entry that holds…”",
             "src": "output/citizen_pages/index.jsonl roster",
-            "id": "F-be9d6a7f6153"
+            "id": "F-42400b2014b8"
           },
           {
             "t": "FACT",
-            "text": "Harry Hayward, Oakland Oaks - Power Forward, KONO (POP-01223) — 6 pages; latest after work, C116; new since your last piece; you ran them C115: “Yeah, I saw the feed. Both games. They're real, they happened, and I was there for both of them. The Denver night was special. That's the kind of…”",
+            "text": "Nina Chen, City Council District 8, Lake Merritt (POP-00505) — 2 pages; latest after work, C116; new since your last piece: “Council Member Chen's office acknowledges the record as stated. District 8 remains committed to the principles outlined: procedural integrity,…”",
             "src": "output/citizen_pages/index.jsonl roster",
-            "id": "F-b9a2e4a9d0a0"
+            "id": "F-a0b088746077"
           },
           {
             "t": "FACT",
-            "text": "Dillon Brooks, SF / The Oaks, West Oakland (POP-01079) — 4 pages; latest after work, C116; new since your last piece: “Man. I ain't gonna lie, reading that Denver box score back still gives me chills. 147 points, 80 percent from the field, 73 from three? That's the…”",
-            "src": "output/citizen_pages/index.jsonl roster",
-            "id": "F-2af66389f9e7"
-          },
-          {
-            "t": "FACT",
-            "text": "Ernesto Quintero — 3B/1B , Oakland A's — Baylight District",
-            "src": "Simulation_Ledger profile for POP-00050",
-            "id": "F-d66efbf64730"
-          },
-          {
-            "t": "FACT",
-            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
-            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
-            "id": "F-647fd9067a33"
-          }
-        ],
-        "limits": {
-          "quoteEligible": true,
-          "assert": [
-            "FACT already supplied",
-            "your own feeling",
-            "your own intention"
-          ],
-          "classify": [
-            "FACT",
-            "OBSERVATION",
-            "INTERPRETATION",
-            "INTENTION",
-            "LEAD"
-          ],
-          "never": [
-            "invent a named person",
-            "invent a public event",
-            "invent a date",
-            "invent a count",
-            "turn suspicion into observation"
-          ],
-          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
-        },
-        "output": {
-          "contract": "CITIZEN_INTERVIEW/1",
-          "format": "json-only",
-          "schema": {
-            "answer": "quote|abstain",
-            "quote": "your exact first-person response; null on abstain",
-            "fact_ids": [
-              "one or more supplied fact ids that prompted the response"
-            ],
-            "basis": "lived-context|direct-reaction|null",
-            "unverifiedLead": [
-              "concrete follow-up lead that must not be printed as fact"
-            ],
-            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
-          },
-          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
-        }
-      }
-    },
-    {
-      "pop": "POP-00643",
-      "name": "Guadalupe Lupe",
-      "quote": "I've heard it every night from the regulars, they're worried about rent. Tre Mingo, who works at the Port, even mentioned it to me. People are concerned about how much longer they can afford to stay here.",
-      "disp": "casually interested in the teams; somewhat sociable; fairly steady",
-      "recorded": true,
-      "fallback": null,
-      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've heard it every night from the regulars, they're worried about rent. Tre Mingo, who works at the Port, even mentioned it to me. People are concerned about how much longer they can afford to stay here.\",\n  \"fact_ids\": [\"F-65a069c0871e\", \"F-6769aa54ed95\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
-      "claims": {
-        "answer": "quote",
-        "factIds": [
-          "F-65a069c0871e",
-          "F-6769aa54ed95"
-        ],
-        "basis": "lived-context",
-        "unverifiedLead": [],
-        "abstainReason": null,
-        "quoteId": "Q-POP-00643-6476097acb",
-        "authoredQuote": true,
-        "publishableQuote": "I've heard it every night from the regulars, they're worried about rent. Tre Mingo, who works at the Port, even mentioned it to me. People are concerned about how much longer they can afford to stay here."
-      },
-      "inputPacket": {
-        "v": "LEP/2",
-        "wake": "W2",
-        "actor": {
-          "id": "POP-00643",
-          "name": "Guadalupe Lupe",
-          "role": "Bartender",
-          "desk": null
-        },
-        "task": {
-          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
-          "reporter": "Ines Sorensen",
-          "question": "Guadalupe Lupe's concerns about rising rents in Uptown? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
-        },
-        "signal": {
-          "kind": "beat-voices",
-          "hood": null,
-          "focus": "The reaction to Mark Aitken's departure and the A's roster changes",
-          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 346c91"
-        },
-        "exposure": {
-          "basis": [
-            "assignment"
-          ],
-          "self": "Guadalupe Lupe — Bartender — Jack London",
-          "evidence": [
-            {
-              "id": "EV-a1036787de",
-              "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 346c91",
-              "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame."
-            }
-          ],
-          "editorialTarget": true
-        },
-        "known": [
-          {
-            "t": "FACT",
-            "text": "Guadalupe Lupe, Bartender, Jack London (POP-00643) — 8 pages; latest to a reporter, a question they carry, C116: “How much longer can people like Tre Mingo afford to stay here before rent pushes them out?”",
-            "src": "output/citizen_pages/index.jsonl roster",
-            "id": "F-65a069c0871e"
-          },
-          {
-            "t": "FACT",
-            "text": "Current cycle: C116",
-            "src": "cron-desk-run explicit cycle argument",
-            "id": "F-871096fd8925"
-          },
-          {
-            "t": "FACT",
-            "text": "Voices roster, C116: 485 citizens with pages, 18 new since your last piece",
-            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 346c91",
-            "id": "F-e48a1349f461"
-          },
-          {
-            "t": "FACT",
-            "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.",
-            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 346c91",
-            "id": "F-2a41d9dddf2e"
-          },
-          {
-            "t": "FACT",
-            "text": "Soo Loo, Corporate Accountant, Downtown (POP-00663) — 4 pages; latest the night page, a question they carry, C116; new since your last piece: “Should I shut the screen and join her, or stay in this stillness a little longer?”",
-            "src": "output/citizen_pages/index.jsonl roster",
-            "id": "F-90a57134384a"
-          },
-          {
-            "t": "FACT",
-            "text": "Giancarlo Hernandez, Third Baseman, Oakland A's (POP-01239) — 1 page; latest after work, C116; new since your last piece: “Yeah, I saw the articles. I know what they're saying — that Kevin's looking over his shoulder, that I'm some kind of glove-first insurance policy, or…”",
-            "src": "output/citizen_pages/index.jsonl roster",
-            "id": "F-be9d6a7f6153"
-          },
-          {
-            "t": "FACT",
-            "text": "Harry Hayward, Oakland Oaks - Power Forward, KONO (POP-01223) — 6 pages; latest after work, C116; new since your last piece; you ran them C115: “Yeah, I saw the feed. Both games. They're real, they happened, and I was there for both of them. The Denver night was special. That's the kind of…”",
-            "src": "output/citizen_pages/index.jsonl roster",
-            "id": "F-b9a2e4a9d0a0"
-          },
-          {
-            "t": "FACT",
-            "text": "Dillon Brooks, SF / The Oaks, West Oakland (POP-01079) — 4 pages; latest after work, C116; new since your last piece: “Man. I ain't gonna lie, reading that Denver box score back still gives me chills. 147 points, 80 percent from the field, 73 from three? That's the…”",
-            "src": "output/citizen_pages/index.jsonl roster",
-            "id": "F-2af66389f9e7"
-          },
-          {
-            "t": "FACT",
-            "text": "Guadalupe Lupe — Bartender — Jack London",
-            "src": "Simulation_Ledger profile for POP-00643",
-            "id": "F-6769aa54ed95"
+            "text": "Tre Mingo — Port Worker — Uptown",
+            "src": "Simulation_Ledger profile for POP-00123",
+            "id": "F-7a0f63c56c63"
           },
           {
             "t": "FACT",
@@ -1638,5 +1338,5 @@
       }
     }
   ],
-  "ranAt": "2026-11-19T19:18:49.763Z"
+  "ranAt": "2026-11-21T15:15:20.731Z"
 }

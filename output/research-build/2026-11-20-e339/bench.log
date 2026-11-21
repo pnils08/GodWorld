@@ -1,0 +1,60 @@
+AIM = BENCH (script read the bench marker)
+== sync from live
+  verify Reflection_Intake: bench 2980 rows vs live 2980 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+{"fireGuardMinutes":"0","cycleCountFormatted":"116","cycleCountIsNumber":true}
+door: {"target":"bench","http":200,"ok":true,"record":{"cycle":117,"startedMs":1795162643588,"state":"done","finishedMs":1795162833352},"raw":"{\"cycle\":117,\"startedMs\":1795162643588,\"state\":\"done\",\
+clearfire 117: {"ok":true,"cleared":{"cycle":117,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+-- pause 75 s (read quota)
+Edition_Coverage_Ratings C116: 7 rows (window 115,114,113,112,111,110,109,108)
+Citizen_Media_Usage C116: 19 rows from live C115
+Oakland_Sports_Feed C117: 0 rows
+appended 7 to Edition_Coverage_Ratings; marked rows on the tab now 7
+appended 19 to Citizen_Media_Usage; marked rows on the tab now 19
+pre saved: { "maxPop": 1249, "errors": 9, "gcRows": 409, "renamed": [ "Xavier Campbell", "Omar Clark", "Owen King", "Evan Thompson", "Jordan Garcia", "Hector Robinson", "Terrell Jefferson", "Alicia Norwood", "Guadalupe Fetu", "Henrik Shimizu", "Alessandro Rivera" ], "spouses": 11 }
+bench cycleCount 116
+fire C117 rc=0 "verdict": "PASS" "wallS": 251
+C117 | GC rows 409 -> 423 | renamed child/parent rows left 0 (pre 11) | released this fire 11 | spouses linked 11 (pre 11)
+  released Xavier Campbell | status Active | maiden ""
+  released Omar Clark | status Active | maiden ""
+  released Owen King | status Active | maiden ""
+  released Evan Thompson | status Active | maiden ""
+  released Jordan Garcia | status Active | maiden ""
+  released Hector Robinson | status Active | maiden ""
+  released Terrell Jefferson | status Active | maiden ""
+  released Alicia Norwood | status Active | maiden ""
+  released Guadalupe Fetu | status Active | maiden ""
+  released Henrik Shimizu | status Active | maiden ""
+  released Alessandro Rivera | status Active | maiden ""
+  minted parent Reiko Tian (BY 1990, age 52) of POP-00992 Tian gap 36 maiden ""
+  minted parent Mira Jilner (BY 1991, age 51) of POP-01001 Jilner gap 37 maiden ""
+  mints this fire: 2
+  birth POP-01250 Elena Beckett parents POP-00715 ages 38
+  births this fire: 1
+  arrival POP-01251 Tyrone Carter age 39 | single | kids 
+  arrival POP-01252 Yolanda Ghosh age 43 | single | kids 
+  ledger arrivals this fire: 2
+  Engine_Errors +0
+CHECK PASS
+-- pause 70 s (read quota)
+pre saved: { "maxPop": 1252, "errors": 9, "gcRows": 423, "renamed": [], "spouses": 11 }
+bench cycleCount 117
+fire C118 rc=0 "verdict": "PASS" "wallS": 280
+C118 | GC rows 423 -> 441 | renamed child/parent rows left 0 (pre 0) | released this fire 0 | spouses linked 11 (pre 11)
+  minted child Declan Bautista (BY 2040, age 2) of POP-00515 Bautista gap 28 maiden ""
+  minted child Adriana Necklar (BY 2022, age 20) of POP-00509 Necklar gap 40 spouse gap 21 maiden ""
+  minted child Felipe Richmond (BY 2018, age 24) of POP-00007 Richmond gap 38 maiden ""
+  minted child Marcus Shah (BY 2008, age 34) of POP-00802 Shah gap 34 maiden ""
+  minted child Owen Park (BY 2022, age 20) of POP-00464 Park gap 21 maiden ""
+  minted child Tariq Ruiz (BY 2040, age 2) of POP-01169 Ruiz gap 28 maiden ""
+  mints this fire: 6
+  births this fire: 0
+  arrival POP-01253 Mateo Harris age 43 | single | kids 
+  ledger arrivals this fire: 1
+  Engine_Errors +0
+CHECK PASS
+== final sync from live
+  verify Reflection_Intake: bench 2980 rows vs live 2980 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+RESULT check exit 0

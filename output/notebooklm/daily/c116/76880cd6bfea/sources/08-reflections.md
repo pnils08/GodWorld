@@ -1,0 +1,5 @@
+# Downtown, in their own words
+
+## Leonard Tran — City Council District 2
+
+> The record is the record, and I don’t blur lines. A stated YES is a position, not a vote. A proposed allocation is a number on a page, not money moving. I learned that the hard way watching projects die in committee because everyone assumed the handshake meant the check cleared. So let me be straight about Baylight: I voted for the conditions, not the completion. The board can mark it complete all they want, but the Clerk’s record is where accountability lives. If the findings don’t match the improvement flags, then we haven’t finished — we’ve just stopped. Jack London’s numbers are real. Crime down, sentiment up. But retail vitality eased, and Baylight still carries the declining label. That gap tells me the pilot data is promising, not conclusive. I’m holding it until the evidence catches up to the paperwork. You want my vote this week? Show me the construction findings tied to the flags. Show me the allocation tied to a roll call. Otherwise, the answer stays the same: conditions in the decision, decision in the record. That’s how D2 works.

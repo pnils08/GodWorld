@@ -42,6 +42,14 @@
 City hall ran headless this cycle. The voice decisions above are locked canon; project operational details live in output/civic-voice/*_c116.json. Desks report FROM this section.
 
 ## Newsroom wire (AUTO — cron-desk-run.js)
+- c116 culture | Ines Sorensen: ""I walk past that fence every day."" (staged)
+- c116 undocked-digest | Nia Rook: "UNDOCKED C116: Three routes, one steady leader" (staged)
+- c116 culture | Ines Sorensen: "The Other Side of the Fence" (staged)
+- c116 culture | Tamsin Pruitt: "The Lives of C116" (staged)
+- c116 culture | Maria Keen: "The Ones Who Keep Showing Up" (staged)
+- c116 culture | Sharon Okafor: "The Hello That Outlasts the Headline" (staged)
+- c116 culture | Kai Marston: "Benji Dillon Doesn't Think It's a Big Change, and That's the Story" (staged)
+- c116 culture | Mason Ortega: "At Green & Gold Tavern in Jack London, dishwasher Hector Leech stands at the sink with ste" (staged)
 - c116 undocked | Nia Rook: "UNDOCKED: Marguerite Kimball-Ostrow lets the route lead" (staged)
 - c116 culture | Ines Sorensen: "“Oakland raised him. I'm hoping he remembers that when the offers come in.”" (staged)
 - c116 sports | Talia Finch: "SPORTS" (staged)
@@ -68,6 +76,27 @@ City hall ran headless this cycle. The voice decisions above are locked canon; p
 - c116 civic | Carmen Delaine: "The Fund Says Its Closeout Is Published. The Tracker Says It Isn't Verified." (staged)
 
 ## What the writers couldn't find (AUTO — cron-desk-run.js)
+- c116 sports | Elliot Marbury (flagged)
+  - said: "What the record does not hold."
+- c116 culture | Ines Sorensen (staged)
+  - said: "The page doesn't say where it ends, and he doesn't either."
+  - said: "Tre Mingo's page never says whose side is whose, and I won't say it for him."
+- c116 culture | Ines Sorensen (staged)
+  - said: "His page doesn't say what the fence encloses or who is building behind it."
+- c116 culture | Tamsin Pruitt (staged)
+  - said: "The record does not say what set it off."
+  - said: "Whether she slept afterward, the record does not say."
+  - said: "Another line of his reads, 'Will helping from the bullpen feel like finishing, or like hanging on?' The page does not say how long the door stays open."
+  - said: "The record does not name the new hire."
+  - said: "The record does not say whose drawing it is."
+- c116 culture | Maria Keen (staged)
+  - said: "I can't tell you what the Academy looks like on a Saturday, because the record doesn't, and I won't paint a field I haven't been handed."
+  - said: "I'll say what I don't know: the Packet doesn't tell me what 'transition' means, who runs what, or whether anything about the Academy's day-to-day is changing."
+- c116 culture | Sharon Okafor (staged)
+  - tool: canon_recall "Piedmont Ave" → tool budget exhausted — compose from what you have.
+  - tool: canon_recall "Uptown" → tool budget exhausted — compose from what you have.
+  - tool: canon_recall "Rockridge" → tool budget exhausted — compose from what you have.
+  - tool: canon_recall "West Oakland" → tool budget exhausted — compose from what you have.
 - c116 culture | Tamsin Pruitt (flagged)
   - said: "Those two lines do not agree with each other, and the record does not say which one won out."
   - said: "I'm still the same person, with the same goals for the Oaks.' The paper first named him in C107, in 'The Oaks' Groundswell in Downtown,' and again in C108's preseason opener coverage and C110's 'Th…"

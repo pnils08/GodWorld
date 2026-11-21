@@ -1,0 +1,918 @@
+{
+  "stage": "angle",
+  "desk": "culture",
+  "cycle": "116",
+  "persona": "sharon-okafor",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00159",
+      "name": "Sharon Okafor",
+      "role": "desk reporter",
+      "desk": "culture"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Vinnie Keane is fading — how the city follows its names",
+      "approach": "Lifestyle approach: this slice is the fame record — who the city knows, who is fading, who just arrived — with their domains, tiers and neighborhoods. Behavior patterns, warm analytical. The names and trajectories are real; the morning routine, the regular order, what the neighbors think are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "lifestyle",
+        "hood": "Piedmont Ave",
+        "facts": [
+          "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading — the where-are-they-now file (fame 54, cooling), 7 media mentions",
+          "Theo Banks (rapper), Arts, Uptown, Regional-tier — fading — the where-are-they-now file (fame 6, cooling), 8 media mentions",
+          "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 2, cooling), 17 media mentions",
+          "Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 55, rising), 1 media mentions",
+          "P Slayer (Journalist, Fan Columnist - Sports), Sports, West Oakland, Local-tier — new on the culture record this cycle (fame 25, rising), 0 media mentions",
+          "Nia Rook (Journalist, UNDOCKED Recap), Media, West Oakland, Local-tier — new on the culture record this cycle (fame 25, rising), 0 media mentions"
+        ],
+        "priorCycle": null,
+        "note": null,
+        "engineHooks": [
+          "Jack London boom sustained — momentum 10/10, the block everyone wants onto (observational analysis)",
+          "Jack London housing pressure at 10/10: rents climbing, households stretching to stay (observational analysis)",
+          "Piedmont Ave turning upward: retail busy, events drawing crowds, people moving in (observational analysis)",
+          "Uptown housing pressure at 10/10: rents climbing, households stretching to stay (observational analysis)"
+        ],
+        "roomIsYours": "the coffee order, the dog's name, who recognizes them at the farmers market and who pretends not to",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-lifestyle",
+      "hood": "Piedmont Ave",
+      "score": null,
+      "src": "output/beats/Cultural_Ledger.jsonl @C116",
+      "nearby": [
+        {
+          "text": "Grand Lake neighborhood texture — how residents experience the improvement | Residents of Grand Lake feel the change firsthand.",
+          "src": "output/engine_audit_c116.json patterns[7]; evidence: Initiative_Tracker row(s) 9; storyline INIT-009:vote-scheduled"
+        },
+        {
+          "text": "Fruitvale | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c116.md \"### Fruitvale\"; events: world_summary_c116.md \"## World Events\""
+        },
+        {
+          "text": "Glenview | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c116.md \"### Glenview\"; events: world_summary_c116.md \"## World Events\""
+        },
+        {
+          "text": "Grand Lake | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c116.md \"### Grand Lake\"; events: world_summary_c116.md \"## World Events\""
+        },
+        {
+          "text": "Piedmont Ave | 2 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c116.md \"### Piedmont Ave\"; events: world_summary_c116.md \"## World Events\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00001",
+          "name": "Vinnie Keane",
+          "profile": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Piedmont Ave",
+          "role": "Former Designated Hitter, Oakland A's Legend",
+          "hood": "Piedmont Ave",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C116",
+            "pop": "POP-00001",
+            "rowName": "Vinnie Keane",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01056",
+          "name": "Theo Banks",
+          "profile": "Theo Banks — rapper — Uptown",
+          "role": "rapper",
+          "hood": "Uptown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C116",
+            "pop": "POP-01056",
+            "rowName": "Theo Banks",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00539",
+          "name": "Lena Cross",
+          "profile": "Lena Cross — Actor — Piedmont Ave",
+          "role": "Actor",
+          "hood": "Piedmont Ave",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C116",
+            "pop": "POP-00539",
+            "rowName": "Lena Cross",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00018",
+          "name": "Benji Dillon",
+          "profile": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+          "role": "Pitcher, Oakland A's Legend",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C116",
+            "pop": "POP-00018",
+            "rowName": "Benji Dillon",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00008",
+          "name": "P Slayer",
+          "profile": "P Slayer — Journalist, Fan Columnist - Sports — West Oakland",
+          "role": "Journalist, Fan Columnist - Sports",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C116",
+            "pop": "POP-00008",
+            "rowName": "P Slayer",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01076",
+          "name": "Nia Rook",
+          "profile": "Nia Rook — Journalist, UNDOCKED Recap — West Oakland",
+          "role": "Journalist, UNDOCKED Recap",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C116",
+            "pop": "POP-01076",
+            "rowName": "Nia Rook",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C116",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-871096fd8925"
+      },
+      {
+        "t": "FACT",
+        "text": "Benji Dillon leads the fame table; 5 fading, 5 new",
+        "src": "output/beats/Cultural_Ledger.jsonl @C116",
+        "id": "F-79f7ba9836f7"
+      },
+      {
+        "t": "FACT",
+        "text": "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading (fame 54, cooling), 7 media mentions.",
+        "src": "output/beats/Cultural_Ledger.jsonl @C116",
+        "id": "F-e612531b6c8f"
+      },
+      {
+        "t": "FACT",
+        "text": "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading — the where-are-they-now file (fame 54, cooling), 7 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C116",
+        "id": "F-496c5dbb8f50"
+      },
+      {
+        "t": "FACT",
+        "text": "Theo Banks (rapper), Arts, Uptown, Regional-tier — fading — the where-are-they-now file (fame 6, cooling), 8 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C116",
+        "id": "F-f2158c401ff3"
+      },
+      {
+        "t": "FACT",
+        "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 2, cooling), 17 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C116",
+        "id": "F-64ea109af439"
+      },
+      {
+        "t": "FACT",
+        "text": "Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 55, rising), 1 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C116",
+        "id": "F-0ba845380af2"
+      },
+      {
+        "t": "FACT",
+        "text": "P Slayer (Journalist, Fan Columnist - Sports), Sports, West Oakland, Local-tier — new on the culture record this cycle (fame 25, rising), 0 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C116",
+        "id": "F-4b771d53af18"
+      },
+      {
+        "t": "FACT",
+        "text": "Nia Rook (Journalist, UNDOCKED Recap), Media, West Oakland, Local-tier — new on the culture record this cycle (fame 25, rising), 0 media mentions",
+        "src": "output/beats/Cultural_Ledger.jsonl @C116",
+        "id": "F-44a32d091e08"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ]
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "street",
+    "candidates": [
+      {
+        "pop": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "Former Designated Hitter, Oakland A's Legend",
+        "hood": "Piedmont Ave",
+        "profile": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Piedmont Ave",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C116",
+          "pop": "POP-00001",
+          "rowName": "Vinnie Keane",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01056",
+        "name": "Theo Banks",
+        "role": "rapper",
+        "hood": "Uptown",
+        "profile": "Theo Banks — rapper — Uptown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C116",
+          "pop": "POP-01056",
+          "rowName": "Theo Banks",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00539",
+        "name": "Lena Cross",
+        "role": "Actor",
+        "hood": "Piedmont Ave",
+        "profile": "Lena Cross — Actor — Piedmont Ave",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C116",
+          "pop": "POP-00539",
+          "rowName": "Lena Cross",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00018",
+        "name": "Benji Dillon",
+        "role": "Pitcher, Oakland A's Legend",
+        "hood": "Rockridge",
+        "profile": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C116",
+          "pop": "POP-00018",
+          "rowName": "Benji Dillon",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00008",
+        "name": "P Slayer",
+        "role": "Journalist, Fan Columnist - Sports",
+        "hood": "West Oakland",
+        "profile": "P Slayer — Journalist, Fan Columnist - Sports — West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C116",
+          "pop": "POP-00008",
+          "rowName": "P Slayer",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01076",
+        "name": "Nia Rook",
+        "role": "Journalist, UNDOCKED Recap",
+        "hood": "West Oakland",
+        "profile": "Nia Rook — Journalist, UNDOCKED Recap — West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C116",
+          "pop": "POP-01076",
+          "rowName": "Nia Rook",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Sharon Okafor",
+    "popid": "POP-00159"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-lifestyle",
+      "angle": "Vinnie Keane is fading — how the city follows its names",
+      "label": "Benji Dillon leads the fame table; 5 fading, 5 new",
+      "hookLine": "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading (fame 54, cooling), 7 media mentions.",
+      "hood": "Piedmont Ave",
+      "citizens": [
+        "Vinnie Keane (POP-00001)",
+        "Theo Banks (POP-01056)",
+        "Lena Cross (POP-00539)",
+        "Benji Dillon (POP-00018)",
+        "P Slayer (POP-00008)",
+        "Nia Rook (POP-01076)"
+      ],
+      "popids": [
+        "POP-00001",
+        "POP-01056",
+        "POP-00539",
+        "POP-00018",
+        "POP-00008",
+        "POP-01076"
+      ],
+      "ref": "output/beats/Cultural_Ledger.jsonl @C116",
+      "cycle": 116
+    },
+    "approach": "Lifestyle approach: this slice is the fame record — who the city knows, who is fading, who just arrived — with their domains, tiers and neighborhoods. Behavior patterns, warm analytical. The names and trajectories are real; the morning routine, the regular order, what the neighbors think are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": {
+    "pulse": {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Bridge & Barrel (Jack London) · quiet night",
+      "named": "Bridge & Barrel",
+      "hood": "Jack London",
+      "person": null,
+      "venue": null
+    },
+    "recommend": {
+      "bag": "lifestyle",
+      "slug": "sharon-okafor",
+      "name": "Sharon Okafor",
+      "popid": "POP-00159",
+      "bagDoc": "docs/media/SHARON_LIFESTYLE_BAG.md",
+      "reason": "top pulse quiet-nightlife → lifestyle",
+      "pulseClass": "quiet-nightlife",
+      "pulseLabel": "Bridge & Barrel (Jack London) · quiet night"
+    },
+    "prewrite": {
+      "pulseClass": "quiet-nightlife",
+      "angle": "Bridge & Barrel is open and quiet in Jack London. What that condition means is not yet established.",
+      "hookLine": "Bridge & Barrel is open and quiet in Jack London.",
+      "anchorFacts": [
+        "NAMED: Bridge & Barrel",
+        "HOOD: Jack London",
+        "VENUE: Bridge & Barrel",
+        "HOOD: Jack London",
+        "EVENING RECORD: open and quiet"
+      ],
+      "bagRecommend": "lifestyle",
+      "bagSlug": "sharon-okafor"
+    },
+    "texture": {
+      "famous": [
+        "Theo Banks",
+        "Ernesto Quintero",
+        "Desmond Morton"
+      ],
+      "restaurants": [
+        {
+          "name": "Harborline Grill",
+          "hood": "Jack London"
+        },
+        {
+          "name": "Port Grind",
+          "hood": "Grand Lake"
+        },
+        {
+          "name": "Third Street Late Kitchen",
+          "hood": "Jack London"
+        }
+      ],
+      "fastFood": [
+        {
+          "name": "SpeedyBurger",
+          "hood": "Downtown"
+        }
+      ],
+      "nightlife": [
+        {
+          "name": "Bridge & Barrel",
+          "hood": "Jack London"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 3,
+        "vibe": "quiet",
+        "movement": "restricted",
+        "weatherImpact": 1
+      },
+      "cityEvents": [
+        "The Kelley Family Block Party",
+        "The Horn Family Block Party",
+        "The Keane Family Block Party"
+      ],
+      "tv": [
+        "Bay Area Alert",
+        "Inside the A's Front Office",
+        "Giancarlo Hernandez (3B) — Player Profile"
+      ],
+      "movies": [
+        "Ninth Inning"
+      ],
+      "sportsBroadcast": "Oakland Sports Tonight",
+      "streamingTrend": "political commentary surge",
+      "foodTrend": "High mobility / civic-tension food trend"
+    },
+    "signals": {
+      "fameCount": 11,
+      "sightingCount": 3,
+      "sightings": [
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Theo Banks spotted at Parkridge Cleaners",
+          "name": "Theo Banks",
+          "venue": "Parkridge Cleaners",
+          "ref": "Ripple_Ledger cycle 116 (CauseType lifestyle-sighting); rendered: world_summary_c116.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Glenview",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Ernesto Quintero spotted at Marine Systems",
+          "name": "Ernesto Quintero",
+          "venue": "Marine Systems",
+          "ref": "Ripple_Ledger cycle 116 (CauseType lifestyle-sighting); rendered: world_summary_c116.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Baylight District",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Desmond Morton spotted at Jade Thread Tailors",
+          "name": "Desmond Morton",
+          "venue": "Jade Thread Tailors",
+          "ref": "Ripple_Ledger cycle 116 (CauseType lifestyle-sighting); rendered: world_summary_c116.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Chinatown",
+          "popids": []
+        }
+      ]
+    },
+    "scene": {
+      "venues": [
+        {
+          "name": "Harborline Grill",
+          "hood": "Jack London"
+        },
+        {
+          "name": "Port Grind",
+          "hood": "Grand Lake"
+        },
+        {
+          "name": "Third Street Late Kitchen",
+          "hood": "Jack London"
+        },
+        {
+          "name": "SpeedyBurger",
+          "hood": "Downtown"
+        },
+        {
+          "name": "Bridge & Barrel",
+          "hood": "Jack London"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 3,
+        "vibe": "quiet",
+        "movement": "restricted",
+        "weatherImpact": 1
+      },
+      "cityEvents": [
+        "The Kelley Family Block Party",
+        "The Horn Family Block Party",
+        "The Keane Family Block Party"
+      ],
+      "tv": [
+        "Bay Area Alert",
+        "Inside the A's Front Office",
+        "Giancarlo Hernandez (3B) — Player Profile"
+      ],
+      "movies": [
+        "Ninth Inning"
+      ],
+      "colorRoom": "Named places only from Evening Texture / desk_signal. The supplied evening record describes nightlife as quiet; raw scoring fields stay internal.  Sensory room (weather, light, sound) is free; careers and employees are not."
+    },
+    "candidates": [
+      {
+        "className": "quiet-nightlife",
+        "score": 24,
+        "label": "Bridge & Barrel (Jack London) · quiet night",
+        "named": "Bridge & Barrel",
+        "hood": "Jack London"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Theo Banks at Parkridge Cleaners (Glenview)",
+        "named": "Parkridge Cleaners",
+        "hood": "Glenview"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Ernesto Quintero at Marine Systems (Baylight District)",
+        "named": "Marine Systems",
+        "hood": "Baylight District"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Desmond Morton at Jade Thread Tailors (Chinatown)",
+        "named": "Jade Thread Tailors",
+        "hood": "Chinatown"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Harborline Grill (Jack London)",
+        "named": "Harborline Grill",
+        "hood": "Jack London"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Port Grind (Grand Lake)",
+        "named": "Port Grind",
+        "hood": "Grand Lake"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Third Street Late Kitchen (Jack London)",
+        "named": "Third Street Late Kitchen",
+        "hood": "Jack London"
+      },
+      {
+        "className": "city-event",
+        "score": 17,
+        "label": "The Kelley Family Block Party",
+        "named": "The Kelley Family Block Party",
+        "hood": null
+      }
+    ],
+    "perSeat": {
+      "mason-ortega": {
+        "pulseClass": "named-restaurant",
+        "label": "Harborline Grill (Jack London)",
+        "score": 34,
+        "bag": "kitchen"
+      },
+      "kai-marston": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Bridge & Barrel (Jack London) · quiet night",
+        "score": 32,
+        "bag": "arts"
+      },
+      "sharon-okafor": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Bridge & Barrel (Jack London) · quiet night",
+        "score": 32,
+        "bag": "lifestyle"
+      },
+      "maria-keen": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Bridge & Barrel (Jack London) · quiet night",
+        "score": 32,
+        "bag": "ground"
+      },
+      "elliot-graye": {
+        "pulseClass": "fame-sighting",
+        "label": "Theo Banks at Parkridge Cleaners (Glenview)",
+        "score": 31,
+        "bag": "faith"
+      }
+    }
+  },
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "LIFESTYLE-SLICE-1",
+    "kind": "beat-lifestyle",
+    "seat": {
+      "slug": "sharon-okafor",
+      "name": "Sharon Okafor",
+      "popid": "POP-00159",
+      "desk": "culture",
+      "domain": "lifestyle",
+      "builder": "buildLifestyleSlice.js"
+    },
+    "hood": "Piedmont Ave",
+    "pulse": {
+      "className": "beat-lifestyle",
+      "score": 100,
+      "label": "Benji Dillon leads the fame table; 5 fading, 5 new",
+      "hood": "Piedmont Ave",
+      "source": "output/beats/Cultural_Ledger.jsonl @C116"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Vinnie Keane is fading — how the city follows its names",
+      "hookLine": "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading (fame 54, cooling), 7 media mentions.",
+      "anchorFacts": [
+        "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading — the where-are-they-now file (fame 54, cooling), 7 media mentions",
+        "Theo Banks (rapper), Arts, Uptown, Regional-tier — fading — the where-are-they-now file (fame 6, cooling), 8 media mentions",
+        "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 2, cooling), 17 media mentions",
+        "Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 55, rising), 1 media mentions",
+        "P Slayer (Journalist, Fan Columnist - Sports), Sports, West Oakland, Local-tier — new on the culture record this cycle (fame 25, rising), 0 media mentions",
+        "Nia Rook (Journalist, UNDOCKED Recap), Media, West Oakland, Local-tier — new on the culture record this cycle (fame 25, rising), 0 media mentions"
+      ],
+      "evidence": [
+        {
+          "text": "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading — the where-are-they-now file (fame 54, cooling), 7 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C116"
+        },
+        {
+          "text": "Theo Banks (rapper), Arts, Uptown, Regional-tier — fading — the where-are-they-now file (fame 6, cooling), 8 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C116"
+        },
+        {
+          "text": "Lena Cross (Celebrity), Arts, Piedmont Ave, Global-tier — fading — the where-are-they-now file (fame 2, cooling), 17 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C116"
+        },
+        {
+          "text": "Benji Dillon (A's player), Sports, Rockridge, Local-tier — the city knows them (fame 55, rising), 1 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C116"
+        },
+        {
+          "text": "P Slayer (Journalist, Fan Columnist - Sports), Sports, West Oakland, Local-tier — new on the culture record this cycle (fame 25, rising), 0 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C116"
+        },
+        {
+          "text": "Nia Rook (Journalist, UNDOCKED Recap), Media, West Oakland, Local-tier — new on the culture record this cycle (fame 25, rising), 0 media mentions",
+          "src": "output/beats/Cultural_Ledger.jsonl @C116"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": null,
+      "hooks": [
+        {
+          "text": "Jack London boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Jack London",
+          "priority": 7
+        },
+        {
+          "text": "Jack London housing pressure at 10/10: rents climbing, households stretching to stay",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Jack London",
+          "priority": 7
+        },
+        {
+          "text": "Piedmont Ave turning upward: retail busy, events drawing crowds, people moving in",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Piedmont Ave",
+          "priority": 5
+        },
+        {
+          "text": "Uptown housing pressure at 10/10: rents climbing, households stretching to stay",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Uptown",
+          "priority": 7
+        },
+        {
+          "text": "The Keane household (2) moved from Grand Lake to Piedmont Ave — moving up from Grand Lake — sold up and bought in Piedmont Ave",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Piedmont Ave",
+          "priority": 5
+        },
+        {
+          "text": "The Okoro household (3) moved from Rockridge to Piedmont Ave — leaving Rockridge for a better fit",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Piedmont Ave",
+          "priority": 5
+        },
+        {
+          "text": "read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+          "angle": "arts/culture feature",
+          "domain": "CULTURE",
+          "hood": "Piedmont Ave",
+          "priority": 3
+        }
+      ],
+      "note": null,
+      "pageVoices": [],
+      "roomIsYours": "the coffee order, the dog's name, who recognizes them at the farmers market and who pretends not to"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "Former Designated Hitter, Oakland A's Legend",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Piedmont Ave",
+        "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-01056",
+        "name": "Theo Banks",
+        "role": "rapper",
+        "neighborhood": "Uptown",
+        "business": null,
+        "profile": "Theo Banks — rapper — Uptown",
+        "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00539",
+        "name": "Lena Cross",
+        "role": "Actor",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Lena Cross — Actor — Piedmont Ave",
+        "why": "fading — the where-are-they-now file (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00018",
+        "name": "Benji Dillon",
+        "role": "Pitcher, Oakland A's Legend",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+        "why": "the city knows them (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00008",
+        "name": "P Slayer",
+        "role": "Journalist, Fan Columnist - Sports",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "P Slayer — Journalist, Fan Columnist - Sports — West Oakland",
+        "why": "new on the culture record this cycle (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-01076",
+        "name": "Nia Rook",
+        "role": "Journalist, UNDOCKED Recap",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Nia Rook — Journalist, UNDOCKED Recap — West Oakland",
+        "why": "new on the culture record this cycle (Cultural_Ledger)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Cultural_Ledger.jsonl @C116",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Sharon Okafor this cycle)"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Sharon Okafor",
+    "popid": "POP-00159",
+    "text": "I will follow Vinnie Keane, a fading sports figure in Piedmont Ave, to understand how the city follows its names. I'll observe his daily life, interactions, and public appearances to capture the essence of his current status and how the community perceives him.",
+    "plan": {
+      "chase": "I will follow Vinnie Keane, a fading sports figure in Piedmont Ave, to understand how the city follows its names. I'll observe his daily life, interactions, and public appearances to capture the essence of his current status and how the community perceives him.",
+      "focus": "Vinnie Keane",
+      "why": "Vinnie Keane is a National-tier sports figure who is fading, providing a unique lens to examine how the city engages with its once-prominent names.",
+      "checks": [
+        "Verify Vinnie Keane's current residence and daily routine",
+        "Observe public reactions to Vinnie Keane in Piedmont Ave"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00001",
+          "question": "How does Vinnie Keane's daily life reflect his fading fame?",
+          "basis": "Vinnie Keane (A's player), Sports, Piedmont Ave, National-tier — fading (fame 54, cooling), 7 media mentions."
+        }
+      ],
+      "interpretation": "The city's perception of its fading names can reveal underlying cultural and social dynamics.",
+      "unverifiedLead": [
+        "Vinnie Keane's reduced public presence may indicate a shift in community interest"
+      ]
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Grand Lake neighborhood texture — how residents experience the improvement | Residents of Grand Lake feel the change firsthand.",
+      "kind": "anomaly",
+      "hood": "Grand Lake",
+      "ref": "output/engine_audit_c116.json patterns[7]; evidence: Initiative_Tracker row(s) 9; storyline INIT-009:vote-scheduled",
+      "popids": [
+        "POP-01218",
+        "POP-01244",
+        "POP-01249"
+      ]
+    },
+    {
+      "label": "Fruitvale | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Fruitvale",
+      "ref": "output/neighborhood_texture_c116.md \"### Fruitvale\"; events: world_summary_c116.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Glenview | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Glenview",
+      "ref": "output/neighborhood_texture_c116.md \"### Glenview\"; events: world_summary_c116.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Grand Lake | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Grand Lake",
+      "ref": "output/neighborhood_texture_c116.md \"### Grand Lake\"; events: world_summary_c116.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Piedmont Ave | 2 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Piedmont Ave",
+      "ref": "output/neighborhood_texture_c116.md \"### Piedmont Ave\"; events: world_summary_c116.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 30,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-20T12:16:19.442Z"
+}

@@ -1,0 +1,82 @@
+{
+  "draft": "output/cron-compare/culture_c116_kai-marston_packet-v2_anthropic-claude-haiku-5-5.md",
+  "cycle": "116",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "244a7b3ab6929580f85ec74bb5b13ea528dd111229260deec7be16cd6e04b00f",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen quotes strictly match interview records and world state facts align with canon.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "kai-arts-entertainment-v1",
+    "packageVersion": "KAI-LEP2-1",
+    "manifestId": "AM-253071de4607",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "94"
+        ]
+      },
+      {
+        "code": "UNAPPROVED_QUOTE",
+        "values": [
+          "a lot of attention"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Benji Dillon",
+      "Danny Horn",
+      "Darrin Davis",
+      "Ernesto Quintero",
+      "Travis Coles",
+      "Vinnie Keane"
+    ],
+    "unverified": [
+      "Canopy Market"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.014,
+  "durationMs": 6959,
+  "parseError": false,
+  "ranAt": "2026-11-21T00:16:32.107Z",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 500",
+    "words": 746,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "244a7b3ab6929580f85ec74bb5b13ea528dd111229260deec7be16cd6e04b00f",
+    "costUsd": 0.0009
+  }
+}

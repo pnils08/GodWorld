@@ -19,3 +19,10 @@ The 2041 line is the hinge. 136.1 innings is a 22-start season, not a 33-start s
 - self-score footer: retired (reward loop — score in .wake.json contractScore)
 - tool use: dossier_read, canon_recall, canon_recall
 
+## §4 THE ARTICLE (wake 3)
+- draft: output/cron-compare/flagged/sports_c116_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5-1800.md
+- disposition: flagged
+- rhea: flagged (1)
+- self-score footer: retired (reward loop — score in .wake.json contractScore)
+- tool use: canon_recall, dossier_read
+

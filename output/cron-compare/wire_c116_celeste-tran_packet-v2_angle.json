@@ -1,0 +1,687 @@
+{
+  "stage": "angle",
+  "desk": "wire",
+  "cycle": "116",
+  "persona": "celeste-tran",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00164",
+      "name": "Celeste Tran",
+      "role": "desk reporter",
+      "desk": "wire"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Theo Banks gained 1 mention this cycle (8 total); West Oakland moves the most — what Oakland is doing together this week",
+      "approach": "Social-trends approach: this slice is what the city is doing together — the names climbing the culture record, where people are moving, what the city's hooks say is shifting. Fast, reactive, grounded: a trend claim needs a window and a number from this slice. The names and moves are real; the group chat, the binge-night, the collective mood swing are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "trends",
+        "hood": "Uptown",
+        "facts": [
+          "Theo Banks (rapper), Arts — gained 1 mention this cycle (8 total), cooling, fame 6",
+          "Ernesto Quintero (A's player), Sports — gained 1 mention this cycle (1 total), rising, fame 17",
+          "Desmond Morton (A's player), Sports — gained 1 mention this cycle (1 total), rising, fame 9",
+          "Anthony Raines (Media) — new on the culture record C115",
+          "P Slayer (Sports) — new on the culture record C116",
+          "Movement vs C115: West Oakland +21 people, Downtown +14 people, Adams Point +7 people, Grand Lake +7 people, Eastlake +7 people"
+        ],
+        "priorCycle": "PRIOR_CYCLE_ON_DISK",
+        "note": null,
+        "engineHooks": [
+          "Downtown boom sustained — momentum 10/10, the block everyone wants onto (observational analysis)",
+          "West Oakland boom sustained — momentum 10/10, the block everyone wants onto (observational analysis)",
+          "Fruitvale boom sustained — momentum 10/10, the block everyone wants onto (observational analysis)",
+          "Jack London boom sustained — momentum 10/10, the block everyone wants onto (observational analysis)"
+        ],
+        "roomIsYours": "the group chat, the third rewatch, who suddenly has an opinion about something nobody mentioned last month, what the city collectively decided to care about",
+        "pageVoices": [
+          "the A's — steady; most of the city over the last two months, still talking this week. Loudest: Vinnie Keane (Piedmont Ave), on their own page at C115 (not an interview — colour only, never a quote): “The A's trade is a mixed bag for me.”",
+          "rent — steady; dozens of citizens over the last two months, still talking this week. Loudest: Omar Amici (Uptown), on their own page at C115 (not an interview — colour only, never a quote): “The streets are busier than ever, and it seems like every other place is a for-rent sign these days.”",
+          "transit — rising; dozens of citizens over the last two months, still talking this week. Loudest: Eleanor Rivera (West Oakland), on their own page at C116 (not an interview — colour only, never a quote): “Honestly, from the booth, a five-point drop on a crowded day doesn't read as people leaving the station.”",
+          "the clinic — steady; dozens of citizens over the last two months, still talking this week. Loudest: Yu Zen (Rockridge), on their own page at C116 (not an interview — colour only, never a quote): “The walk from Rockridge to the hospital is a straight shot down College Avenue, past the shops and the families out on the s",
+          "the Oaks — steady; a dozen or so citizens over the last two months, still talking this week. Loudest: Elias Varek (West Oakland), on their own page at C116 (not an interview — colour only, never a quote): “And the Oakland Oaks — 11.28% growth on $62.7M?”"
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-trends",
+      "hood": "Uptown",
+      "score": null,
+      "src": "output/beats/Cultural_Ledger.jsonl @C116",
+      "nearby": [
+        {
+          "text": "Grand Lake neighborhood texture — how residents experience the improvement | Residents of Grand Lake feel the change firsthand.",
+          "src": "output/engine_audit_c116.json patterns[7]; evidence: Initiative_Tracker row(s) 9; storyline INIT-009:vote-scheduled"
+        },
+        {
+          "text": "Fruitvale | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c116.md \"### Fruitvale\"; events: world_summary_c116.md \"## World Events\""
+        },
+        {
+          "text": "Glenview | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c116.md \"### Glenview\"; events: world_summary_c116.md \"## World Events\""
+        },
+        {
+          "text": "Grand Lake | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c116.md \"### Grand Lake\"; events: world_summary_c116.md \"## World Events\""
+        },
+        {
+          "text": "Piedmont Ave | 2 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c116.md \"### Piedmont Ave\"; events: world_summary_c116.md \"## World Events\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-01056",
+          "name": "Theo Banks",
+          "profile": "Theo Banks — rapper — Uptown",
+          "role": "rapper",
+          "hood": "Uptown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C116",
+            "pop": "POP-01056",
+            "rowName": "Theo Banks",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00050",
+          "name": "Ernesto Quintero",
+          "profile": "Ernesto Quintero — 3B/1B , Oakland A's — Baylight District",
+          "role": "3B/1B , Oakland A's",
+          "hood": "Baylight District",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C116",
+            "pop": "POP-00050",
+            "rowName": "Ernesto Quintero",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00051",
+          "name": "Desmond Morton",
+          "profile": "Desmond Morton — Left Fielder, Oakland A's — Chinatown",
+          "role": "Left Fielder, Oakland A's",
+          "hood": "Chinatown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C116",
+            "pop": "POP-00051",
+            "rowName": "Desmond Morton",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00001",
+          "name": "Vinnie Keane",
+          "profile": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Piedmont Ave",
+          "role": "Former Designated Hitter, Oakland A's Legend",
+          "hood": "Piedmont Ave",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C116",
+            "pop": "POP-00001",
+            "rowName": "Vinnie Keane",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00263",
+          "name": "Omar Amici",
+          "profile": "Omar Amici — Construction laborer — Uptown",
+          "role": "Construction laborer",
+          "hood": "Uptown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C116",
+            "pop": "POP-00263",
+            "rowName": "Omar Amici",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00617",
+          "name": "Eleanor Rivera",
+          "profile": "Eleanor Rivera — BART Station Manager — West Oakland",
+          "role": "BART Station Manager",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Cultural_Ledger.jsonl @C116",
+            "pop": "POP-00617",
+            "rowName": "Eleanor Rivera",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C116",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-871096fd8925"
+      },
+      {
+        "t": "FACT",
+        "text": "Theo Banks gained 1 mention this cycle (8 total); West Oakland moves the most",
+        "src": "output/beats/Cultural_Ledger.jsonl @C116",
+        "id": "F-9b63b0d3196d"
+      },
+      {
+        "t": "FACT",
+        "text": "Theo Banks — gained 1 mention this cycle (8 total), cooling. The trend is the story; the mood is yours.",
+        "src": "output/beats/Cultural_Ledger.jsonl @C116",
+        "id": "F-a9c49f8e4e85"
+      },
+      {
+        "t": "FACT",
+        "text": "Theo Banks (rapper), Arts — gained 1 mention this cycle (8 total), cooling, fame 6",
+        "src": "output/beats/Cultural_Ledger.jsonl @C116 vs output/beats/prev/Cultural_Ledger.jsonl @C115",
+        "id": "F-45c97d686bb2"
+      },
+      {
+        "t": "FACT",
+        "text": "Ernesto Quintero (A's player), Sports — gained 1 mention this cycle (1 total), rising, fame 17",
+        "src": "output/beats/Cultural_Ledger.jsonl @C116 vs output/beats/prev/Cultural_Ledger.jsonl @C115",
+        "id": "F-a44d13f775fc"
+      },
+      {
+        "t": "FACT",
+        "text": "Desmond Morton (A's player), Sports — gained 1 mention this cycle (1 total), rising, fame 9",
+        "src": "output/beats/Cultural_Ledger.jsonl @C116 vs output/beats/prev/Cultural_Ledger.jsonl @C115",
+        "id": "F-be5ba864385f"
+      },
+      {
+        "t": "FACT",
+        "text": "Anthony Raines (Media) — new on the culture record C115",
+        "src": "output/beats/Cultural_Ledger.jsonl @C116",
+        "id": "F-a05cdf95d8c2"
+      },
+      {
+        "t": "FACT",
+        "text": "P Slayer (Sports) — new on the culture record C116",
+        "src": "output/beats/Cultural_Ledger.jsonl @C116",
+        "id": "F-6d14ea5e58bd"
+      },
+      {
+        "t": "FACT",
+        "text": "Movement vs C115: West Oakland +21 people, Downtown +14 people, Adams Point +7 people, Grand Lake +7 people, Eastlake +7 people",
+        "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C116",
+        "id": "F-beebf0e97c46"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ]
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "street",
+    "candidates": [
+      {
+        "pop": "POP-01056",
+        "name": "Theo Banks",
+        "role": "rapper",
+        "hood": "Uptown",
+        "profile": "Theo Banks — rapper — Uptown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C116",
+          "pop": "POP-01056",
+          "rowName": "Theo Banks",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00050",
+        "name": "Ernesto Quintero",
+        "role": "3B/1B , Oakland A's",
+        "hood": "Baylight District",
+        "profile": "Ernesto Quintero — 3B/1B , Oakland A's — Baylight District",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C116",
+          "pop": "POP-00050",
+          "rowName": "Ernesto Quintero",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00051",
+        "name": "Desmond Morton",
+        "role": "Left Fielder, Oakland A's",
+        "hood": "Chinatown",
+        "profile": "Desmond Morton — Left Fielder, Oakland A's — Chinatown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C116",
+          "pop": "POP-00051",
+          "rowName": "Desmond Morton",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "Former Designated Hitter, Oakland A's Legend",
+        "hood": "Piedmont Ave",
+        "profile": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Piedmont Ave",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C116",
+          "pop": "POP-00001",
+          "rowName": "Vinnie Keane",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00263",
+        "name": "Omar Amici",
+        "role": "Construction laborer",
+        "hood": "Uptown",
+        "profile": "Omar Amici — Construction laborer — Uptown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C116",
+          "pop": "POP-00263",
+          "rowName": "Omar Amici",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00617",
+        "name": "Eleanor Rivera",
+        "role": "BART Station Manager",
+        "hood": "West Oakland",
+        "profile": "Eleanor Rivera — BART Station Manager — West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Cultural_Ledger.jsonl @C116",
+          "pop": "POP-00617",
+          "rowName": "Eleanor Rivera",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Celeste Tran",
+    "popid": "POP-00164"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-trends",
+      "angle": "Theo Banks gained 1 mention this cycle (8 total); West Oakland moves the most — what Oakland is doing together this week",
+      "label": "Theo Banks gained 1 mention this cycle (8 total); West Oakland moves the most",
+      "hookLine": "Theo Banks — gained 1 mention this cycle (8 total), cooling. The trend is the story; the mood is yours.",
+      "hood": "Uptown",
+      "citizens": [
+        "Theo Banks (POP-01056)",
+        "Ernesto Quintero (POP-00050)",
+        "Desmond Morton (POP-00051)",
+        "Vinnie Keane (POP-00001)",
+        "Omar Amici (POP-00263)",
+        "Eleanor Rivera (POP-00617)"
+      ],
+      "popids": [
+        "POP-01056",
+        "POP-00050",
+        "POP-00051",
+        "POP-00001",
+        "POP-00263",
+        "POP-00617"
+      ],
+      "ref": "output/beats/Cultural_Ledger.jsonl @C116",
+      "cycle": 116
+    },
+    "approach": "Social-trends approach: this slice is what the city is doing together — the names climbing the culture record, where people are moving, what the city's hooks say is shifting. Fast, reactive, grounded: a trend claim needs a window and a number from this slice. The names and moves are real; the group chat, the binge-night, the collective mood swing are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "TRENDS-SLICE-4",
+    "kind": "beat-trends",
+    "seat": {
+      "slug": "celeste-tran",
+      "name": "Celeste Tran",
+      "popid": "POP-00164",
+      "desk": "wire",
+      "domain": "trends",
+      "builder": "buildTrendsSlice.js"
+    },
+    "hood": "Uptown",
+    "pulse": {
+      "generatedAt": "2026-11-20T12:15:25.138Z",
+      "docs": 1058,
+      "citizens": 331
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Theo Banks gained 1 mention this cycle (8 total); West Oakland moves the most — what Oakland is doing together this week",
+      "hookLine": "Theo Banks — gained 1 mention this cycle (8 total), cooling. The trend is the story; the mood is yours.",
+      "anchorFacts": [
+        "Theo Banks (rapper), Arts — gained 1 mention this cycle (8 total), cooling, fame 6",
+        "Ernesto Quintero (A's player), Sports — gained 1 mention this cycle (1 total), rising, fame 17",
+        "Desmond Morton (A's player), Sports — gained 1 mention this cycle (1 total), rising, fame 9",
+        "Anthony Raines (Media) — new on the culture record C115",
+        "P Slayer (Sports) — new on the culture record C116",
+        "Movement vs C115: West Oakland +21 people, Downtown +14 people, Adams Point +7 people, Grand Lake +7 people, Eastlake +7 people"
+      ],
+      "evidence": [
+        {
+          "text": "Theo Banks (rapper), Arts — gained 1 mention this cycle (8 total), cooling, fame 6",
+          "src": "output/beats/Cultural_Ledger.jsonl @C116 vs output/beats/prev/Cultural_Ledger.jsonl @C115"
+        },
+        {
+          "text": "Ernesto Quintero (A's player), Sports — gained 1 mention this cycle (1 total), rising, fame 17",
+          "src": "output/beats/Cultural_Ledger.jsonl @C116 vs output/beats/prev/Cultural_Ledger.jsonl @C115"
+        },
+        {
+          "text": "Desmond Morton (A's player), Sports — gained 1 mention this cycle (1 total), rising, fame 9",
+          "src": "output/beats/Cultural_Ledger.jsonl @C116 vs output/beats/prev/Cultural_Ledger.jsonl @C115"
+        },
+        {
+          "text": "Anthony Raines (Media) — new on the culture record C115",
+          "src": "output/beats/Cultural_Ledger.jsonl @C116"
+        },
+        {
+          "text": "P Slayer (Sports) — new on the culture record C116",
+          "src": "output/beats/Cultural_Ledger.jsonl @C116"
+        },
+        {
+          "text": "Movement vs C115: West Oakland +21 people, Downtown +14 people, Adams Point +7 people, Grand Lake +7 people, Eastlake +7 people",
+          "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C116"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "PRIOR_CYCLE_ON_DISK",
+        "vs": 115
+      },
+      "hooks": [
+        {
+          "text": "Downtown boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Downtown",
+          "priority": 7
+        },
+        {
+          "text": "West Oakland boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "West Oakland",
+          "priority": 7
+        },
+        {
+          "text": "Fruitvale boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Fruitvale",
+          "priority": 7
+        },
+        {
+          "text": "Jack London boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Jack London",
+          "priority": 7
+        },
+        {
+          "text": "Piedmont Ave turning upward: retail busy, events drawing crowds, people moving in",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Piedmont Ave",
+          "priority": 5
+        },
+        {
+          "text": "Uptown boom sustained — momentum 10/10, the block everyone wants onto",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Uptown",
+          "priority": 7
+        },
+        {
+          "text": "The Keane household (2) moved from Grand Lake to Piedmont Ave — moving up from Grand Lake — sold up and bought in Piedmont Ave",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Piedmont Ave",
+          "priority": 5
+        },
+        {
+          "text": "The Okoro household (3) moved from Rockridge to Piedmont Ave — leaving Rockridge for a better fit",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Piedmont Ave",
+          "priority": 5
+        }
+      ],
+      "note": null,
+      "pageVoices": [
+        "the A's — steady; most of the city over the last two months, still talking this week. Loudest: Vinnie Keane (Piedmont Ave), on their own page at C115 (not an interview — colour only, never a quote): “The A's trade is a mixed bag for me.”",
+        "rent — steady; dozens of citizens over the last two months, still talking this week. Loudest: Omar Amici (Uptown), on their own page at C115 (not an interview — colour only, never a quote): “The streets are busier than ever, and it seems like every other place is a for-rent sign these days.”",
+        "transit — rising; dozens of citizens over the last two months, still talking this week. Loudest: Eleanor Rivera (West Oakland), on their own page at C116 (not an interview — colour only, never a quote): “Honestly, from the booth, a five-point drop on a crowded day doesn't read as people leaving the station.”",
+        "the clinic — steady; dozens of citizens over the last two months, still talking this week. Loudest: Yu Zen (Rockridge), on their own page at C116 (not an interview — colour only, never a quote): “The walk from Rockridge to the hospital is a straight shot down College Avenue, past the shops and the families out on the sidewalks, then over toward Broadway.”",
+        "the Oaks — steady; a dozen or so citizens over the last two months, still talking this week. Loudest: Elias Varek (West Oakland), on their own page at C116 (not an interview — colour only, never a quote): “And the Oakland Oaks — 11.28% growth on $62.7M?”"
+      ],
+      "roomIsYours": "the group chat, the third rewatch, who suddenly has an opinion about something nobody mentioned last month, what the city collectively decided to care about"
+    },
+    "citizens": [
+      {
+        "popid": "POP-01056",
+        "name": "Theo Banks",
+        "role": "rapper",
+        "neighborhood": "Uptown",
+        "business": null,
+        "profile": "Theo Banks — rapper — Uptown",
+        "why": "the city is talking about them (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00050",
+        "name": "Ernesto Quintero",
+        "role": "3B/1B , Oakland A's",
+        "neighborhood": "Baylight District",
+        "business": null,
+        "profile": "Ernesto Quintero — 3B/1B , Oakland A's — Baylight District",
+        "why": "the city is talking about them (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00051",
+        "name": "Desmond Morton",
+        "role": "Left Fielder, Oakland A's",
+        "neighborhood": "Chinatown",
+        "business": null,
+        "profile": "Desmond Morton — Left Fielder, Oakland A's — Chinatown",
+        "why": "the city is talking about them (Cultural_Ledger)"
+      },
+      {
+        "popid": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "Former Designated Hitter, Oakland A's Legend",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Piedmont Ave",
+        "why": "has been saying it on their own page — the A's, C115: “The A's trade is a mixed bag for me.”"
+      },
+      {
+        "popid": "POP-00263",
+        "name": "Omar Amici",
+        "role": "Construction laborer",
+        "neighborhood": "Uptown",
+        "business": null,
+        "profile": "Omar Amici — Construction laborer — Uptown",
+        "why": "has been saying it on their own page — rent, C115: “The streets are busier than ever, and it seems like every other place is a for-rent sign these days.”"
+      },
+      {
+        "popid": "POP-00617",
+        "name": "Eleanor Rivera",
+        "role": "BART Station Manager",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Eleanor Rivera — BART Station Manager — West Oakland",
+        "why": "has been saying it on their own page — transit, C116: “Honestly, from the booth, a five-point drop on a crowded day doesn't read as people leaving the station.”"
+      }
+    ],
+    "pointers": [
+      "output/beats/Cultural_Ledger.jsonl @C116",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Celeste Tran this cycle)"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Celeste Tran",
+    "popid": "POP-00164",
+    "text": "I'm going to chase the story of West Oakland's growth and its connection to the A's recent changes. The neighborhood has seen a significant influx of people, and with Mark Aitken's departure, the city's mood seems to be shifting.",
+    "plan": {
+      "chase": "I'm going to chase the story of West Oakland's growth and its connection to the A's recent changes. The neighborhood has seen a significant influx of people, and with Mark Aitken's departure, the city's mood seems to be shifting.",
+      "focus": "West Oakland's movement and the A's roster changes",
+      "why": "The combination of West Oakland's growth and the A's changes, including Mark Aitken's departure and Ernesto Quintero's shift to first base, suggests a larger story about the city's identity and its relationship with its sports team.",
+      "checks": [
+        "Verify the impact of Mark Aitken's departure on the community",
+        "Assess the reaction to Ernesto Quintero's new role"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00617",
+          "question": "How does she see the changes in West Oakland affecting the community?",
+          "basis": "BART Station Manager in West Oakland"
+        },
+        {
+          "pop": "POP-00050",
+          "question": "What's his perspective on the A's roster changes and his new role?",
+          "basis": "A's player gaining mentions"
+        }
+      ],
+      "interpretation": "The city's culture is reflecting on its sports identity and neighborhood dynamics.",
+      "unverifiedLead": [
+        "The community's response to the A's changes may reveal underlying tensions or hopes for the city's future."
+      ]
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Grand Lake neighborhood texture — how residents experience the improvement | Residents of Grand Lake feel the change firsthand.",
+      "kind": "anomaly",
+      "hood": "Grand Lake",
+      "ref": "output/engine_audit_c116.json patterns[7]; evidence: Initiative_Tracker row(s) 9; storyline INIT-009:vote-scheduled",
+      "popids": [
+        "POP-01218",
+        "POP-01244",
+        "POP-01249"
+      ]
+    },
+    {
+      "label": "Fruitvale | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Fruitvale",
+      "ref": "output/neighborhood_texture_c116.md \"### Fruitvale\"; events: world_summary_c116.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Glenview | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Glenview",
+      "ref": "output/neighborhood_texture_c116.md \"### Glenview\"; events: world_summary_c116.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Grand Lake | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Grand Lake",
+      "ref": "output/neighborhood_texture_c116.md \"### Grand Lake\"; events: world_summary_c116.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Piedmont Ave | 2 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Piedmont Ave",
+      "ref": "output/neighborhood_texture_c116.md \"### Piedmont Ave\"; events: world_summary_c116.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 30,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-20T12:16:50.169Z"
+}

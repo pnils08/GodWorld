@@ -1,0 +1,598 @@
+[
+  {
+    "pop": "POP-00252",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00252\",\"name\":\"Hector Leech\",\"role\":\"Dishwasher\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Mason Ortega\",\"question\":\"What does a full shift in the dish pit actually look like at Green & Gold — what's the pace, what breaks, what keeps you there? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Jack London\",\"focus\":\"The dishwasher's shift at Green & Gold Tavern as the entry point into what the work actually looks like in Jack London kitchens this cycle.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Hector Leech — Dishwasher — Green & Gold Tavern, Jack London\",\"evidence\":[{\"id\":\"EV-e7d63fc1c9\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116\",\"text\":\"Hector Leech, Dishwasher at Green & Gold Tavern. 13 named workers at 5 named kitchens in Jack London on the ledger this cycle.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Hector Leech, Dishwasher at Green & Gold Tavern. 13 named workers at 5 named kitchens in Jack London on the ledger this cycle.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116\",\"id\":\"F-f6c538f90c59\"},{\"t\":\"FACT\",\"text\":\"Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 12.7% · revenue $3.7M (+$9k vs C115) · on the roster: Hector Leech (Dishwasher); Trenton Nawan (Server); Guadalupe Lupe (Bartender); Sora Hint (Barista) +1 more\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116\",\"id\":\"F-cb064eda4300\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C116\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-871096fd8925\"},{\"t\":\"FACT\",\"text\":\"Jack London kitchens · Green & Gold Tavern, Harborline Grill\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116\",\"id\":\"F-ea0a5ddff223\"},{\"t\":\"FACT\",\"text\":\"Harborline Grill · Restaurant & Dining · 7 employees · growth 12% · revenue $869k (+$2k vs C115) · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116\",\"id\":\"F-5b8d329b1119\"},{\"t\":\"FACT\",\"text\":\"Blue Lantern Bar · Nightlife & Entertainment · 31 employees · growth 13.9% · revenue $4M (+$11k vs C115) · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116\",\"id\":\"F-500e32a705c3\"},{\"t\":\"FACT\",\"text\":\"Jack London Square Markets · Retail & Food · 30 employees · growth 11% · revenue $4M (+$8k vs C115) · on the roster: Gauri Han (Security Guard); Karim Avery (Security Guard)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116\",\"id\":\"F-c61233f9bfb0\"},{\"t\":\"FACT\",\"text\":\"Dockhouse BBQ · Restaurant & Dining · 2 employees · growth 11.7% · revenue $249k (+$559 vs C115) · on the roster: Mesi Westin (Dishwasher)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116\",\"id\":\"F-f2cea1659c0f\"},{\"t\":\"FACT\",\"text\":\"Hector Leech — Dishwasher — Green & Gold Tavern, Jack London\",\"src\":\"Simulation_Ledger profile for POP-00252\",\"id\":\"F-92719b261916\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C12, Spring, holiday=Spring Equinox\",\"src\":\"output/world_summary_c116.md Calendar context (Simulation_Calendar)\",\"id\":\"F-647fd9067a33\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00252",
+        "name": "Hector Leech",
+        "role": "Dishwasher",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Mason Ortega",
+        "question": "What does a full shift in the dish pit actually look like at Green & Gold — what's the pace, what breaks, what keeps you there? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Jack London",
+        "focus": "The dishwasher's shift at Green & Gold Tavern as the entry point into what the work actually looks like in Jack London kitchens this cycle.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Hector Leech — Dishwasher — Green & Gold Tavern, Jack London",
+        "evidence": [
+          {
+            "id": "EV-e7d63fc1c9",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "text": "Hector Leech, Dishwasher at Green & Gold Tavern. 13 named workers at 5 named kitchens in Jack London on the ledger this cycle."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Hector Leech, Dishwasher at Green & Gold Tavern. 13 named workers at 5 named kitchens in Jack London on the ledger this cycle.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+          "id": "F-f6c538f90c59"
+        },
+        {
+          "t": "FACT",
+          "text": "Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 12.7% · revenue $3.7M (+$9k vs C115) · on the roster: Hector Leech (Dishwasher); Trenton Nawan (Server); Guadalupe Lupe (Bartender); Sora Hint (Barista) +1 more",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+          "id": "F-cb064eda4300"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C116",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-871096fd8925"
+        },
+        {
+          "t": "FACT",
+          "text": "Jack London kitchens · Green & Gold Tavern, Harborline Grill",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+          "id": "F-ea0a5ddff223"
+        },
+        {
+          "t": "FACT",
+          "text": "Harborline Grill · Restaurant & Dining · 7 employees · growth 12% · revenue $869k (+$2k vs C115) · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+          "id": "F-5b8d329b1119"
+        },
+        {
+          "t": "FACT",
+          "text": "Blue Lantern Bar · Nightlife & Entertainment · 31 employees · growth 13.9% · revenue $4M (+$11k vs C115) · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+          "id": "F-500e32a705c3"
+        },
+        {
+          "t": "FACT",
+          "text": "Jack London Square Markets · Retail & Food · 30 employees · growth 11% · revenue $4M (+$8k vs C115) · on the roster: Gauri Han (Security Guard); Karim Avery (Security Guard)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+          "id": "F-c61233f9bfb0"
+        },
+        {
+          "t": "FACT",
+          "text": "Dockhouse BBQ · Restaurant & Dining · 2 employees · growth 11.7% · revenue $249k (+$559 vs C115) · on the roster: Mesi Westin (Dishwasher)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+          "id": "F-f2cea1659c0f"
+        },
+        {
+          "t": "FACT",
+          "text": "Hector Leech — Dishwasher — Green & Gold Tavern, Jack London",
+          "src": "Simulation_Ledger profile for POP-00252",
+          "id": "F-92719b261916"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+          "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+          "id": "F-647fd9067a33"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00744",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00744\",\"name\":\"Tomas Renteria\",\"role\":\"Podcast Host / Line Cook\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Mason Ortega\",\"question\":\"How does the line at Harborline Grill hold together with only seven people on the roster, and what does the podcast work have to do with the cooking? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Jack London\",\"focus\":\"The dishwasher's shift at Green & Gold Tavern as the entry point into what the work actually looks like in Jack London kitchens this cycle.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Tomas Renteria — Podcast Host / Line Cook — Harborline Grill, Jack London\",\"evidence\":[{\"id\":\"EV-9445f0fa4c\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116\",\"text\":\"Hector Leech, Dishwasher at Green & Gold Tavern. 13 named workers at 5 named kitchens in Jack London on the ledger this cycle.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Harborline Grill · Restaurant & Dining · 7 employees · growth 12% · revenue $869k (+$2k vs C115) · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116\",\"id\":\"F-5b8d329b1119\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C116\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-871096fd8925\"},{\"t\":\"FACT\",\"text\":\"Jack London kitchens · Green & Gold Tavern, Harborline Grill\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116\",\"id\":\"F-ea0a5ddff223\"},{\"t\":\"FACT\",\"text\":\"Hector Leech, Dishwasher at Green & Gold Tavern. 13 named workers at 5 named kitchens in Jack London on the ledger this cycle.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116\",\"id\":\"F-f6c538f90c59\"},{\"t\":\"FACT\",\"text\":\"Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 12.7% · revenue $3.7M (+$9k vs C115) · on the roster: Hector Leech (Dishwasher); Trenton Nawan (Server); Guadalupe Lupe (Bartender); Sora Hint (Barista) +1 more\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116\",\"id\":\"F-cb064eda4300\"},{\"t\":\"FACT\",\"text\":\"Blue Lantern Bar · Nightlife & Entertainment · 31 employees · growth 13.9% · revenue $4M (+$11k vs C115) · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116\",\"id\":\"F-500e32a705c3\"},{\"t\":\"FACT\",\"text\":\"Jack London Square Markets · Retail & Food · 30 employees · growth 11% · revenue $4M (+$8k vs C115) · on the roster: Gauri Han (Security Guard); Karim Avery (Security Guard)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116\",\"id\":\"F-c61233f9bfb0\"},{\"t\":\"FACT\",\"text\":\"Dockhouse BBQ · Restaurant & Dining · 2 employees · growth 11.7% · revenue $249k (+$559 vs C115) · on the roster: Mesi Westin (Dishwasher)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116\",\"id\":\"F-f2cea1659c0f\"},{\"t\":\"FACT\",\"text\":\"Tomas Renteria — Podcast Host / Line Cook — Harborline Grill, Jack London\",\"src\":\"Simulation_Ledger profile for POP-00744\",\"id\":\"F-14ae6d4edbfb\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C12, Spring, holiday=Spring Equinox\",\"src\":\"output/world_summary_c116.md Calendar context (Simulation_Calendar)\",\"id\":\"F-647fd9067a33\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00744",
+        "name": "Tomas Renteria",
+        "role": "Podcast Host / Line Cook",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Mason Ortega",
+        "question": "How does the line at Harborline Grill hold together with only seven people on the roster, and what does the podcast work have to do with the cooking? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Jack London",
+        "focus": "The dishwasher's shift at Green & Gold Tavern as the entry point into what the work actually looks like in Jack London kitchens this cycle.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Tomas Renteria — Podcast Host / Line Cook — Harborline Grill, Jack London",
+        "evidence": [
+          {
+            "id": "EV-9445f0fa4c",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "text": "Hector Leech, Dishwasher at Green & Gold Tavern. 13 named workers at 5 named kitchens in Jack London on the ledger this cycle."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Harborline Grill · Restaurant & Dining · 7 employees · growth 12% · revenue $869k (+$2k vs C115) · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+          "id": "F-5b8d329b1119"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C116",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-871096fd8925"
+        },
+        {
+          "t": "FACT",
+          "text": "Jack London kitchens · Green & Gold Tavern, Harborline Grill",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+          "id": "F-ea0a5ddff223"
+        },
+        {
+          "t": "FACT",
+          "text": "Hector Leech, Dishwasher at Green & Gold Tavern. 13 named workers at 5 named kitchens in Jack London on the ledger this cycle.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+          "id": "F-f6c538f90c59"
+        },
+        {
+          "t": "FACT",
+          "text": "Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 12.7% · revenue $3.7M (+$9k vs C115) · on the roster: Hector Leech (Dishwasher); Trenton Nawan (Server); Guadalupe Lupe (Bartender); Sora Hint (Barista) +1 more",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+          "id": "F-cb064eda4300"
+        },
+        {
+          "t": "FACT",
+          "text": "Blue Lantern Bar · Nightlife & Entertainment · 31 employees · growth 13.9% · revenue $4M (+$11k vs C115) · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+          "id": "F-500e32a705c3"
+        },
+        {
+          "t": "FACT",
+          "text": "Jack London Square Markets · Retail & Food · 30 employees · growth 11% · revenue $4M (+$8k vs C115) · on the roster: Gauri Han (Security Guard); Karim Avery (Security Guard)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+          "id": "F-c61233f9bfb0"
+        },
+        {
+          "t": "FACT",
+          "text": "Dockhouse BBQ · Restaurant & Dining · 2 employees · growth 11.7% · revenue $249k (+$559 vs C115) · on the roster: Mesi Westin (Dishwasher)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+          "id": "F-f2cea1659c0f"
+        },
+        {
+          "t": "FACT",
+          "text": "Tomas Renteria — Podcast Host / Line Cook — Harborline Grill, Jack London",
+          "src": "Simulation_Ledger profile for POP-00744",
+          "id": "F-14ae6d4edbfb"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+          "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+          "id": "F-647fd9067a33"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00980",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00980\",\"name\":\"Karim Avery\",\"role\":\"Security Guard\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Mason Ortega\",\"question\":\"What does a security guard at Jack London Square Markets see of the neighborhood's pressure that the kitchen workers don't? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Jack London\",\"focus\":\"The dishwasher's shift at Green & Gold Tavern as the entry point into what the work actually looks like in Jack London kitchens this cycle.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Karim Avery — Security Guard — Jack London Square Markets, Jack London\",\"evidence\":[{\"id\":\"EV-a42f6da504\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116\",\"text\":\"Hector Leech, Dishwasher at Green & Gold Tavern. 13 named workers at 5 named kitchens in Jack London on the ledger this cycle.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Jack London Square Markets · Retail & Food · 30 employees · growth 11% · revenue $4M (+$8k vs C115) · on the roster: Gauri Han (Security Guard); Karim Avery (Security Guard)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116\",\"id\":\"F-c61233f9bfb0\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C116\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-871096fd8925\"},{\"t\":\"FACT\",\"text\":\"Jack London kitchens · Green & Gold Tavern, Harborline Grill\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116\",\"id\":\"F-ea0a5ddff223\"},{\"t\":\"FACT\",\"text\":\"Hector Leech, Dishwasher at Green & Gold Tavern. 13 named workers at 5 named kitchens in Jack London on the ledger this cycle.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116\",\"id\":\"F-f6c538f90c59\"},{\"t\":\"FACT\",\"text\":\"Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 12.7% · revenue $3.7M (+$9k vs C115) · on the roster: Hector Leech (Dishwasher); Trenton Nawan (Server); Guadalupe Lupe (Bartender); Sora Hint (Barista) +1 more\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116\",\"id\":\"F-cb064eda4300\"},{\"t\":\"FACT\",\"text\":\"Harborline Grill · Restaurant & Dining · 7 employees · growth 12% · revenue $869k (+$2k vs C115) · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116\",\"id\":\"F-5b8d329b1119\"},{\"t\":\"FACT\",\"text\":\"Blue Lantern Bar · Nightlife & Entertainment · 31 employees · growth 13.9% · revenue $4M (+$11k vs C115) · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116\",\"id\":\"F-500e32a705c3\"},{\"t\":\"FACT\",\"text\":\"Dockhouse BBQ · Restaurant & Dining · 2 employees · growth 11.7% · revenue $249k (+$559 vs C115) · on the roster: Mesi Westin (Dishwasher)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116\",\"id\":\"F-f2cea1659c0f\"},{\"t\":\"FACT\",\"text\":\"Karim Avery — Security Guard — Jack London Square Markets, Jack London\",\"src\":\"Simulation_Ledger profile for POP-00980\",\"id\":\"F-e80afd676f25\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C12, Spring, holiday=Spring Equinox\",\"src\":\"output/world_summary_c116.md Calendar context (Simulation_Calendar)\",\"id\":\"F-647fd9067a33\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00980",
+        "name": "Karim Avery",
+        "role": "Security Guard",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Mason Ortega",
+        "question": "What does a security guard at Jack London Square Markets see of the neighborhood's pressure that the kitchen workers don't? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Jack London",
+        "focus": "The dishwasher's shift at Green & Gold Tavern as the entry point into what the work actually looks like in Jack London kitchens this cycle.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Karim Avery — Security Guard — Jack London Square Markets, Jack London",
+        "evidence": [
+          {
+            "id": "EV-a42f6da504",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "text": "Hector Leech, Dishwasher at Green & Gold Tavern. 13 named workers at 5 named kitchens in Jack London on the ledger this cycle."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Jack London Square Markets · Retail & Food · 30 employees · growth 11% · revenue $4M (+$8k vs C115) · on the roster: Gauri Han (Security Guard); Karim Avery (Security Guard)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+          "id": "F-c61233f9bfb0"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C116",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-871096fd8925"
+        },
+        {
+          "t": "FACT",
+          "text": "Jack London kitchens · Green & Gold Tavern, Harborline Grill",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+          "id": "F-ea0a5ddff223"
+        },
+        {
+          "t": "FACT",
+          "text": "Hector Leech, Dishwasher at Green & Gold Tavern. 13 named workers at 5 named kitchens in Jack London on the ledger this cycle.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+          "id": "F-f6c538f90c59"
+        },
+        {
+          "t": "FACT",
+          "text": "Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 12.7% · revenue $3.7M (+$9k vs C115) · on the roster: Hector Leech (Dishwasher); Trenton Nawan (Server); Guadalupe Lupe (Bartender); Sora Hint (Barista) +1 more",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+          "id": "F-cb064eda4300"
+        },
+        {
+          "t": "FACT",
+          "text": "Harborline Grill · Restaurant & Dining · 7 employees · growth 12% · revenue $869k (+$2k vs C115) · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+          "id": "F-5b8d329b1119"
+        },
+        {
+          "t": "FACT",
+          "text": "Blue Lantern Bar · Nightlife & Entertainment · 31 employees · growth 13.9% · revenue $4M (+$11k vs C115) · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+          "id": "F-500e32a705c3"
+        },
+        {
+          "t": "FACT",
+          "text": "Dockhouse BBQ · Restaurant & Dining · 2 employees · growth 11.7% · revenue $249k (+$559 vs C115) · on the roster: Mesi Westin (Dishwasher)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+          "id": "F-f2cea1659c0f"
+        },
+        {
+          "t": "FACT",
+          "text": "Karim Avery — Security Guard — Jack London Square Markets, Jack London",
+          "src": "Simulation_Ledger profile for POP-00980",
+          "id": "F-e80afd676f25"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+          "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+          "id": "F-647fd9067a33"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00273",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00273\",\"name\":\"Trenton Nawan\",\"role\":\"Server\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Mason Ortega\",\"question\":\"As a resident of Jack London, what have you seen, felt, or understood about \\\"The dishwasher's shift at Green & Gold Tavern as the entry point into what the work actually looks like in Jack London kitchens this cycle.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Jack London\",\"focus\":\"The dishwasher's shift at Green & Gold Tavern as the entry point into what the work actually looks like in Jack London kitchens this cycle.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Trenton Nawan — Server — Green & Gold Tavern, Jack London\",\"evidence\":[{\"id\":\"EV-d886074fa5\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116\",\"text\":\"Hector Leech, Dishwasher at Green & Gold Tavern. 13 named workers at 5 named kitchens in Jack London on the ledger this cycle.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 12.7% · revenue $3.7M (+$9k vs C115) · on the roster: Hector Leech (Dishwasher); Trenton Nawan (Server); Guadalupe Lupe (Bartender); Sora Hint (Barista) +1 more\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116\",\"id\":\"F-cb064eda4300\"},{\"t\":\"FACT\",\"text\":\"Current cycle: C116\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-871096fd8925\"},{\"t\":\"FACT\",\"text\":\"Jack London kitchens · Green & Gold Tavern, Harborline Grill\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116\",\"id\":\"F-ea0a5ddff223\"},{\"t\":\"FACT\",\"text\":\"Hector Leech, Dishwasher at Green & Gold Tavern. 13 named workers at 5 named kitchens in Jack London on the ledger this cycle.\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116\",\"id\":\"F-f6c538f90c59\"},{\"t\":\"FACT\",\"text\":\"Harborline Grill · Restaurant & Dining · 7 employees · growth 12% · revenue $869k (+$2k vs C115) · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116\",\"id\":\"F-5b8d329b1119\"},{\"t\":\"FACT\",\"text\":\"Blue Lantern Bar · Nightlife & Entertainment · 31 employees · growth 13.9% · revenue $4M (+$11k vs C115) · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116\",\"id\":\"F-500e32a705c3\"},{\"t\":\"FACT\",\"text\":\"Jack London Square Markets · Retail & Food · 30 employees · growth 11% · revenue $4M (+$8k vs C115) · on the roster: Gauri Han (Security Guard); Karim Avery (Security Guard)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116\",\"id\":\"F-c61233f9bfb0\"},{\"t\":\"FACT\",\"text\":\"Dockhouse BBQ · Restaurant & Dining · 2 employees · growth 11.7% · revenue $249k (+$559 vs C115) · on the roster: Mesi Westin (Dishwasher)\",\"src\":\"output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116\",\"id\":\"F-f2cea1659c0f\"},{\"t\":\"FACT\",\"text\":\"Trenton Nawan — Server — Green & Gold Tavern, Jack London\",\"src\":\"Simulation_Ledger profile for POP-00273\",\"id\":\"F-6ced7af785ea\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C12, Spring, holiday=Spring Equinox\",\"src\":\"output/world_summary_c116.md Calendar context (Simulation_Calendar)\",\"id\":\"F-647fd9067a33\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00273",
+        "name": "Trenton Nawan",
+        "role": "Server",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Mason Ortega",
+        "question": "As a resident of Jack London, what have you seen, felt, or understood about \"The dishwasher's shift at Green & Gold Tavern as the entry point into what the work actually looks like in Jack London kitchens this cycle.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Jack London",
+        "focus": "The dishwasher's shift at Green & Gold Tavern as the entry point into what the work actually looks like in Jack London kitchens this cycle.",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Trenton Nawan — Server — Green & Gold Tavern, Jack London",
+        "evidence": [
+          {
+            "id": "EV-d886074fa5",
+            "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+            "text": "Hector Leech, Dishwasher at Green & Gold Tavern. 13 named workers at 5 named kitchens in Jack London on the ledger this cycle."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 12.7% · revenue $3.7M (+$9k vs C115) · on the roster: Hector Leech (Dishwasher); Trenton Nawan (Server); Guadalupe Lupe (Bartender); Sora Hint (Barista) +1 more",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+          "id": "F-cb064eda4300"
+        },
+        {
+          "t": "FACT",
+          "text": "Current cycle: C116",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-871096fd8925"
+        },
+        {
+          "t": "FACT",
+          "text": "Jack London kitchens · Green & Gold Tavern, Harborline Grill",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+          "id": "F-ea0a5ddff223"
+        },
+        {
+          "t": "FACT",
+          "text": "Hector Leech, Dishwasher at Green & Gold Tavern. 13 named workers at 5 named kitchens in Jack London on the ledger this cycle.",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+          "id": "F-f6c538f90c59"
+        },
+        {
+          "t": "FACT",
+          "text": "Harborline Grill · Restaurant & Dining · 7 employees · growth 12% · revenue $869k (+$2k vs C115) · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+          "id": "F-5b8d329b1119"
+        },
+        {
+          "t": "FACT",
+          "text": "Blue Lantern Bar · Nightlife & Entertainment · 31 employees · growth 13.9% · revenue $4M (+$11k vs C115) · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+          "id": "F-500e32a705c3"
+        },
+        {
+          "t": "FACT",
+          "text": "Jack London Square Markets · Retail & Food · 30 employees · growth 11% · revenue $4M (+$8k vs C115) · on the roster: Gauri Han (Security Guard); Karim Avery (Security Guard)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+          "id": "F-c61233f9bfb0"
+        },
+        {
+          "t": "FACT",
+          "text": "Dockhouse BBQ · Restaurant & Dining · 2 employees · growth 11.7% · revenue $249k (+$559 vs C115) · on the roster: Mesi Westin (Dishwasher)",
+          "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C116",
+          "id": "F-f2cea1659c0f"
+        },
+        {
+          "t": "FACT",
+          "text": "Trenton Nawan — Server — Green & Gold Tavern, Jack London",
+          "src": "Simulation_Ledger profile for POP-00273",
+          "id": "F-6ced7af785ea"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+          "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+          "id": "F-647fd9067a33"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  }
+]

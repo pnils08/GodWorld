@@ -15,14 +15,14 @@
   - [55] Fruitvale Transit Hub Phase II — Visioning | Status passed | phase complete — Initiative_Tracker (InitiativeID INIT-003); snapshot: engine_audit_c116.json snapshots.Initiative_Tracker; storyline INIT-003:complete
   - [55] Temescal Community Health Center | Status passed | phase operational — Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c116.json snapshots.Initiative_Tracker; storyline INIT-005:operational
 - TrackerFacts (beat dump, record facts):
+  - Fruitvale Transit Hub Phase II — Visioning — status passed, phase design-phase, VoteCycle 86, outcome COMPLETED, budget $230M [Initiative_Tracker]
+  - Baylight District — Final Council Vote — status passed, phase construction-active, VoteCycle 83, outcome PASSED, budget $2.1B [Initiative_Tracker]
   - Oakland Youth Apprenticeship Pipeline — status passed, phase stalled, budget $12.5M [Initiative_Tracker]
-  - Ivy Hill Community Support Initiative — status failed, phase vote-scheduled, VoteCycle 116, outcome FAILED, budget $2.5M [Initiative_Tracker]
-  - Mayor — Avery Santana — approval 79 — active [Civic_Office_Ledger]
-  - District Attorney — Clarissa Dane — approval 65 — active [Civic_Office_Ledger]
-  - Public Defender — Caleb Reyes — approval 65 — active [Civic_Office_Ledger]
-  - City Council District 1 — Denise Carter — approval 64 — active [Civic_Office_Ledger]
-  - City Council District 2 — Leonard Tran — approval 70 — active [Civic_Office_Ledger]
-  - City Council District 3 — Rose Delgado — approval 62 — active [Civic_Office_Ledger]
+  - Downtown Economic Revitalization — status proposed, phase vote-scheduled, budget $15M [Initiative_Tracker]
+  - Commercial Stabilization for Grand Lake — status proposed, phase vote-scheduled, budget $2.5M [Initiative_Tracker]
+  - West Oakland Tenant Defense Fund — status passed, phase operational, VoteCycle 112, outcome PASSED, budget $4.2M [Initiative_Tracker]
+  - Ivy Hill Revitalization Initiative — status proposed, phase legislation-filed, budget $2.5M [Initiative_Tracker]
+  - Dimond Revitalization Initiative — status proposed, phase announced, budget $2.5M [Initiative_Tracker]
 - The city's money (beat dump, record facts):
   - City treasury this cycle took in $5.1M: $5M the weekly budget allocation, $917 2 tickets, $108,884 court money on 24 cleared charges [City_Treasury]
   - City treasury balance at the close: $131.8M (from $126.6M) [City_Treasury]
@@ -41,15 +41,7 @@
 - Stalling initiatives (unchanged vs prev cycle, colour):
   - West Oakland Stabilization Fund — still passed / disbursement-active (unchanged since C115) [Initiative_Tracker]
   - Oakland Alternative Response Initiative — still passed / dispatch-live (unchanged since C115) [Initiative_Tracker]
-  - Fruitvale Transit Hub Phase II — Visioning — still passed / complete (unchanged since C115) [Initiative_Tracker]
   - Temescal Community Health Center — still passed / operational (unchanged since C115) [Initiative_Tracker]
-  - Baylight District — Final Council Vote — still passed / complete (unchanged since C115) [Initiative_Tracker]
-  - Downtown Economic Revitalization — still failed / vote-scheduled (unchanged since C115) [Initiative_Tracker]
-  - Commercial Stabilization for Grand Lake — still failed / vote-scheduled (unchanged since C115) [Initiative_Tracker]
-  - West Oakland Tenant Defense Fund — still failed / vote-scheduled (unchanged since C115) [Initiative_Tracker]
-  - Ivy Hill Revitalization Initiative — still failed / announced (unchanged since C115) [Initiative_Tracker]
-  - Dimond Revitalization Initiative — still failed / announced (unchanged since C115) [Initiative_Tracker]
-  - Ivy Hill Community Revitalization — still failed / announced (unchanged since C115) [Initiative_Tracker]
   - Laurel Neighborhood Patch and Clean-Up — still proposed / announced (unchanged since C115) [Initiative_Tracker]
 - Faction standings (colour):
   - OPP: 6 offices (5 voting) — Avery Santana, Caleb Reyes, Denise Carter [Civic_Office_Ledger]

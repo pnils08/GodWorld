@@ -166,6 +166,40 @@
         "credits_delta_windowed"
       ],
       "StagedPath": "output/spacemolt-show/staged/undocked-pop00918-2026-11-20T02-30-32.json"
+    },
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 116,
+      "EventType": "undocked-episode",
+      "POPID": "POP-00663",
+      "Holder": "Soo Loo",
+      "EpisodeId": "undocked-pop00663-Y3C12-e2",
+      "CreditsDelta": 1013,
+      "PointsDelta": 16.3,
+      "Systems": [
+        "alpha_centauri",
+        "sol",
+        "sirius",
+        "nova_terra",
+        "furud",
+        "homam",
+        "antares",
+        "gsc_0041",
+        "pherkad",
+        "synchrony",
+        "node_alpha",
+        "the_experiment",
+        "achernar",
+        "garnet",
+        "atlas"
+      ],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 2,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00663-2026-11-21T02-30-33.json"
     }
   ]
 }

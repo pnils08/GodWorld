@@ -58,5 +58,6 @@
     "recorded": true,
     "out": "ig/godworld/.env // tip: ◈ secrets for agents [www.dotenvx.com]\n{\n  \"popId\": \"POP-00154\",\n  \"name\": \"Lila Mezran\",\n  \"recorded\": true,\n  \"text\": \"filed: Six Beds in Chinatown, and No Names Attached\"\n}"
   },
-  "ranAt": "2026-11-17T00:19:52.033Z"
+  "ranAt": "2026-11-17T00:19:52.033Z",
+  "dispositionReconciledAt": "2026-11-21T18:00:02.254Z"
 }

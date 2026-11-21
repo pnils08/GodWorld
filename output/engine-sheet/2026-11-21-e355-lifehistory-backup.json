@@ -1,0 +1,1638 @@
+{
+ "header": [
+  "Timestamp",
+  "POPID",
+  "Name",
+  "EventTag",
+  "EventText",
+  "Neighborhood",
+  "Cycle"
+ ],
+ "rows": [
+  {
+   "sheetRow": 62,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "8/31/2026",
+    "POP-00024",
+    "Henry Rivas",
+    "Daily|source:familyLife|family:partner|holiday:NewYear|holidayPriority:major|firstFriday|sportsSeason:playoffs|venue:local|occupation:Starting Pitcher, Oakland A's|ageGroup:youngAdult|neighborhood:Uptown|tier:2|archetype:Striver",
+    "split the last of the coffee and the morning's plans with their partner near Fox Theater frontage",
+    "Uptown",
+    "105"
+   ]
+  },
+  {
+   "sheetRow": 738,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "8/31/2026",
+    "POP-00352",
+    "Kaila Jordache",
+    "Daily|source:familyLife|family:partner|holiday:NewYear|holidayPriority:major|firstFriday|sportsSeason:playoffs|occupation:GED Program Instructor|ageGroup:adult|neighborhood:Piedmont Ave|tier:4|archetype:Caretaker",
+    "split the last of the coffee and the morning's plans with their partner",
+    "Piedmont Ave",
+    "105"
+   ]
+  },
+  {
+   "sheetRow": 845,
+   "line": "handled a logistics call with an ex",
+   "values": [
+    "8/31/2026",
+    "POP-00463",
+    "Rosie Piru",
+    "Daily|source:familyLife|family:divorced|holiday:NewYear|holidayPriority:major|firstFriday|sportsSeason:playoffs|venue:local|occupation:Homeless Outreach Worker|ageGroup:adult|neighborhood:West Oakland|tier:4",
+    "handled a logistics call with an ex — civil, brief, done near a local pop-up",
+    "West Oakland",
+    "105"
+   ]
+  },
+  {
+   "sheetRow": 1631,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "8/31/2026",
+    "POP-00894",
+    "Maryam Dawson",
+    "Daily|source:familyLife|family:partner|holiday:NewYear|holidayPriority:major|firstFriday|sportsSeason:playoffs|venue:local|occupation:Community Organizer|ageGroup:adult|neighborhood:Downtown|tier:4",
+    "split the last of the coffee and the morning's plans with their partner near a late-night diner",
+    "Downtown",
+    "105"
+   ]
+  },
+  {
+   "sheetRow": 2528,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "9/6/2026",
+    "POP-00216",
+    "Victor Alize",
+    "Daily|source:familyLife|family:partner|sportsSeason:playoffs|occupation:Warehouse worker|ageGroup:adult|neighborhood:Piedmont Ave|tier:4|archetype:Connector",
+    "caught their partner humming the song they'd had stuck all day",
+    "Piedmont Ave",
+    "106"
+   ]
+  },
+  {
+   "sheetRow": 2799,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "9/6/2026",
+    "POP-00319",
+    "Marquis Cale",
+    "Daily|source:familyLife|family:partner|sportsSeason:playoffs|occupation:Hair Stylist|ageGroup:adult|neighborhood:Temescal|tier:3|archetype:Striver",
+    "split the last of the coffee and the morning's plans with their partner",
+    "Temescal",
+    "106"
+   ]
+  },
+  {
+   "sheetRow": 2830,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "9/6/2026",
+    "POP-00332",
+    "Diego Remo",
+    "Daily|source:familyLife|family:partner|sportsSeason:playoffs|occupation:Independent Bookstore Owner|ageGroup:adult|neighborhood:Temescal|tier:4|archetype:Caretaker",
+    "split the last of the coffee and the morning's plans with their partner",
+    "Temescal",
+    "106"
+   ]
+  },
+  {
+   "sheetRow": 2973,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "9/6/2026",
+    "POP-00472",
+    "Josie Wong",
+    "Daily|source:familyLife|family:partner|sportsSeason:playoffs|occupation:Commercial Painter|ageGroup:senior|neighborhood:Laurel|tier:4",
+    "caught their partner humming the song they'd had stuck all day",
+    "Laurel",
+    "106"
+   ]
+  },
+  {
+   "sheetRow": 3056,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "9/6/2026",
+    "POP-00512",
+    "Raymond Torres",
+    "Daily|source:familyLife|family:partner|sportsSeason:playoffs|occupation:Bay Area Tenants Union Rep|ageGroup:adult|neighborhood:Laurel|tier:4",
+    "split the last of the coffee and the morning's plans with their partner",
+    "Laurel",
+    "106"
+   ]
+  },
+  {
+   "sheetRow": 3088,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "9/6/2026",
+    "POP-00532",
+    "Marcus Whitfield",
+    "Daily|source:familyLife|family:partner|sportsSeason:playoffs|occupation:Youth Basketball Coach|ageGroup:youngAdult|neighborhood:Fruitvale|tier:4",
+    "caught their partner humming the song they'd had stuck all day",
+    "Fruitvale",
+    "106"
+   ]
+  },
+  {
+   "sheetRow": 3321,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "9/6/2026",
+    "POP-00696",
+    "Soleil Kapoor",
+    "Daily|source:familyLife|family:partner|sportsSeason:playoffs|occupation:Vietnamese Pho Shop Owner|ageGroup:adult|neighborhood:Chinatown|tier:4|archetype:Caretaker",
+    "split the last of the coffee and the morning's plans with their partner",
+    "Chinatown",
+    "106"
+   ]
+  },
+  {
+   "sheetRow": 3389,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "9/6/2026",
+    "POP-00726",
+    "Vivian Fong",
+    "Daily|source:familyLife|family:partner|sportsSeason:playoffs|occupation:Dim Sum Restaurant Owner|ageGroup:adult|neighborhood:Chinatown|tier:4",
+    "caught their partner humming the song they'd had stuck all day",
+    "Chinatown",
+    "106"
+   ]
+  },
+  {
+   "sheetRow": 3967,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "9/6/2026",
+    "POP-01040",
+    "Aaliyah Santos",
+    "Daily|source:familyLife|family:partner|sportsSeason:playoffs|occupation:Office worker|ageGroup:adult|neighborhood:Uptown|tier:4",
+    "split the last of the coffee and the morning's plans with their partner",
+    "Uptown",
+    "106"
+   ]
+  },
+  {
+   "sheetRow": 4525,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "9/13/2026",
+    "POP-00030",
+    "Derek Simmons",
+    "Daily|source:familyLife|family:partner|holiday:MLKDay|holidayPriority:major|sportsSeason:playoffs|occupation:A's Marketing Director|ageGroup:adult|neighborhood:Jack London|tier:3|archetype:Connector",
+    "caught their partner humming the song they'd had stuck all day",
+    "Jack London",
+    "107"
+   ]
+  },
+  {
+   "sheetRow": 4750,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "9/13/2026",
+    "POP-00185",
+    "Lila Patty",
+    "Daily|source:familyLife|family:partner|holiday:MLKDay|holidayPriority:major|sportsSeason:playoffs|occupation:Solar Panel Installation Lead|ageGroup:adult|neighborhood:West Oakland|tier:4|archetype:Striver",
+    "caught their partner humming the song they'd had stuck all day",
+    "West Oakland",
+    "107"
+   ]
+  },
+  {
+   "sheetRow": 4834,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "9/13/2026",
+    "POP-00226",
+    "Jemeal Brim",
+    "Daily|source:familyLife|family:partner|holiday:MLKDay|holidayPriority:major|sportsSeason:playoffs|occupation:Bakery worker|ageGroup:adult|neighborhood:Piedmont Ave|tier:4|archetype:Connector",
+    "caught their partner humming the song they'd had stuck all day",
+    "Piedmont Ave",
+    "107"
+   ]
+  },
+  {
+   "sheetRow": 5001,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "9/13/2026",
+    "POP-00314",
+    "Lemante Naruto",
+    "Daily|source:familyLife|family:partner|holiday:MLKDay|holidayPriority:major|sportsSeason:playoffs|occupation:Crane Operator (Port of Oakland)|ageGroup:adult|neighborhood:Jack London|tier:4|archetype:Caretaker",
+    "split the last of the coffee and the morning's plans with their partner",
+    "Jack London",
+    "107"
+   ]
+  },
+  {
+   "sheetRow": 5020,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "9/13/2026",
+    "POP-00321",
+    "Jee Lei",
+    "Daily|source:familyLife|family:partner|holiday:MLKDay|holidayPriority:major|sportsSeason:playoffs|venue:local|occupation:After-School Program Director|ageGroup:senior|neighborhood:Uptown|tier:4|archetype:Striver",
+    "caught their partner humming the song they'd had stuck all day near a late-night counter",
+    "Uptown",
+    "107"
+   ]
+  },
+  {
+   "sheetRow": 5385,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "9/13/2026",
+    "POP-00631",
+    "Derry Webb",
+    "Daily|source:familyLife|family:partner|holiday:MLKDay|holidayPriority:major|sportsSeason:playoffs|occupation:Youth Basketball Coach|ageGroup:adult|neighborhood:Uptown|tier:4",
+    "caught their partner humming the song they'd had stuck all day",
+    "Uptown",
+    "107"
+   ]
+  },
+  {
+   "sheetRow": 6292,
+   "line": "settled into a quiet evening on the couch with their partner",
+   "values": [
+    "9/13/2026",
+    "POP-00002",
+    "Amara Keane",
+    "Household",
+    "settled into a quiet evening on the couch with their partner",
+    "Grand Lake",
+    "107"
+   ]
+  },
+  {
+   "sheetRow": 6481,
+   "line": "an anniversary dinner grew past the table",
+   "values": [
+    "9/20/2026 15:41:54",
+    "POP-00700",
+    "Dave Eriksson",
+    "Daily|source:familyLife|family:household|household:celebration",
+    "an anniversary dinner grew past the table until half the block seemed to be in the kitchen",
+    "Fruitvale",
+    "108"
+   ]
+  },
+  {
+   "sheetRow": 6482,
+   "line": "an anniversary dinner grew past the table",
+   "values": [
+    "9/20/2026 15:41:54",
+    "POP-00995",
+    "Jaylen Eriksson",
+    "Daily|source:familyLife|family:household|household:celebration",
+    "an anniversary dinner grew past the table until half the block seemed to be in the kitchen",
+    "Fruitvale",
+    "108"
+   ]
+  },
+  {
+   "sheetRow": 7001,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "9/20/2026 15:41:54",
+    "POP-00348",
+    "Melony Foster",
+    "Daily|source:familyLife|family:partner|sportsSeason:playoffs|venue:local|occupation:Fashion Designer|ageGroup:adult|neighborhood:Uptown|tier:4|qol:high|archetype:Caretaker",
+    "caught their partner humming the song they'd had stuck all day near a bar patio",
+    "Uptown",
+    "108"
+   ]
+  },
+  {
+   "sheetRow": 7054,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "9/20/2026 15:41:54",
+    "POP-00443",
+    "Ace Hill",
+    "Daily|source:familyLife|family:partner|sportsSeason:playoffs|occupation:ESL Teacher|ageGroup:senior|neighborhood:Fruitvale|tier:3",
+    "split the last of the coffee and the morning's plans with their partner",
+    "Fruitvale",
+    "108"
+   ]
+  },
+  {
+   "sheetRow": 7453,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "9/20/2026 15:41:54",
+    "POP-00737",
+    "Everly Rainey",
+    "Daily|source:familyLife|family:partner|sportsSeason:playoffs|occupation:waterfront developer|ageGroup:adult|neighborhood:Downtown|tier:4|qol:high",
+    "split the last of the coffee and the morning's plans with their partner",
+    "Downtown",
+    "108"
+   ]
+  },
+  {
+   "sheetRow": 8128,
+   "line": "cooked dinner with their spouse and talked through the week",
+   "values": [
+    "9/20/2026",
+    "POP-00186",
+    "Ray Samson",
+    "Household",
+    "cooked dinner with their spouse and talked through the week",
+    "Laurel",
+    "108"
+   ]
+  },
+  {
+   "sheetRow": 8604,
+   "line": "handled a logistics call with an ex",
+   "values": [
+    "9/28/2026 0:50:55",
+    "POP-00189",
+    "Blair Patel",
+    "Daily|source:familyLife|family:divorced|sportsSeason:playoffs|occupation:Ship Repair Foreman|ageGroup:adult|neighborhood:Lake Merritt|tier:4|qol:high|archetype:Connector",
+    "handled a logistics call with an ex — civil, brief, done",
+    "Lake Merritt",
+    "109"
+   ]
+  },
+  {
+   "sheetRow": 9658,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "9/28/2026 0:50:55",
+    "POP-00807",
+    "Daphne Choi",
+    "Daily|source:familyLife|family:partner|sportsSeason:playoffs|occupation:Coffee Roaster|ageGroup:youngAdult|neighborhood:Uptown|tier:4",
+    "caught their partner humming the song they'd had stuck all day",
+    "Uptown",
+    "109"
+   ]
+  },
+  {
+   "sheetRow": 9753,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "9/28/2026",
+    "POP-00855",
+    "Estrella Mehta",
+    "Daily|source:familyLife|family:partner|sportsSeason:playoffs|occupation:Electrician|ageGroup:adult|neighborhood:Chinatown|tier:4",
+    "split the last of the coffee and the morning's plans with their partner",
+    "Chinatown",
+    "109"
+   ]
+  },
+  {
+   "sheetRow": 9807,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "9/28/2026 0:50:55",
+    "POP-00877",
+    "Tess Zhou",
+    "Daily|source:familyLife|family:partner|sportsSeason:playoffs|occupation:Laundromat Owner|ageGroup:adult|neighborhood:Laurel|tier:4",
+    "caught their partner humming the song they'd had stuck all day",
+    "Laurel",
+    "109"
+   ]
+  },
+  {
+   "sheetRow": 9944,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "9/28/2026",
+    "POP-00951",
+    "Niani Oakley",
+    "Daily|source:familyLife|family:partner|sportsSeason:playoffs|occupation:Plumber|ageGroup:youngAdult|neighborhood:Chinatown|tier:4",
+    "caught their partner humming the song they'd had stuck all day",
+    "Chinatown",
+    "109"
+   ]
+  },
+  {
+   "sheetRow": 10168,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "9/28/2026",
+    "POP-01098",
+    "Naomi Castellanos",
+    "Daily|source:familyLife|family:partner|sportsSeason:playoffs|occupation:Principal, Ridgeline Studio|ageGroup:adult|neighborhood:Piedmont Ave|tier:3|qol:high|archetype:Striver",
+    "split the last of the coffee and the morning's plans with their partner",
+    "Piedmont Ave",
+    "109"
+   ]
+  },
+  {
+   "sheetRow": 10612,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C6",
+    "POP-00037",
+    "Brenda Okoro",
+    "Daily|source:familyLife|family:partner|firstFriday|sportsSeason:championship|occupation:Deputy Mayor (Community Affairs)|ageGroup:adult|neighborhood:Rockridge|tier:2|archetype:Striver",
+    "caught their partner humming the song they'd had stuck all day",
+    "Rockridge",
+    "110"
+   ]
+  },
+  {
+   "sheetRow": 10668,
+   "line": "handled a logistics call with an ex",
+   "values": [
+    "Y3C6",
+    "POP-00057",
+    "Rachel Torres",
+    "Daily|source:familyLife|family:divorced|firstFriday|sportsSeason:championship|occupation:Public Safety|ageGroup:adult|neighborhood:Uptown|tier:2|archetype:Connector",
+    "handled a logistics call with an ex — civil, brief, done",
+    "Uptown",
+    "110"
+   ]
+  },
+  {
+   "sheetRow": 10732,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "Y3C6",
+    "POP-00128",
+    "Kris Bubic",
+    "Daily|source:familyLife|family:partner|firstFriday|sportsSeason:championship|occupation:Retired former As / Bubic Burgers|ageGroup:adult|neighborhood:West Oakland|tier:2|archetype:Connector",
+    "split the last of the coffee and the morning's plans with their partner",
+    "West Oakland",
+    "110"
+   ]
+  },
+  {
+   "sheetRow": 11034,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C6",
+    "POP-00260",
+    "Kevel Phoul",
+    "Daily|source:familyLife|family:partner|firstFriday|sportsSeason:championship|occupation:Warehouse worker|ageGroup:adult|neighborhood:Lake Merritt|tier:4|archetype:Striver",
+    "caught their partner humming the song they'd had stuck all day",
+    "Lake Merritt",
+    "110"
+   ]
+  },
+  {
+   "sheetRow": 11159,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "Y3C6",
+    "POP-00321",
+    "Jee Lei",
+    "Daily|source:familyLife|family:partner|firstFriday|sportsSeason:championship|occupation:After-School Program Director|ageGroup:senior|neighborhood:Uptown|tier:4|archetype:Striver",
+    "split the last of the coffee and the morning's plans with their partner",
+    "Uptown",
+    "110"
+   ]
+  },
+  {
+   "sheetRow": 11637,
+   "line": "handled a logistics call with an ex",
+   "values": [
+    "Y3C6",
+    "POP-00643",
+    "Guadalupe Lupe",
+    "Daily|source:familyLife|family:divorced|firstFriday|sportsSeason:championship|occupation:Bartender|ageGroup:adult|neighborhood:Jack London|tier:3|qol:high",
+    "handled a logistics call with an ex — civil, brief, done",
+    "Jack London",
+    "110"
+   ]
+  },
+  {
+   "sheetRow": 11743,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "Y3C6",
+    "POP-00691",
+    "Tom Jilner",
+    "Daily|source:familyLife|family:partner|firstFriday|sportsSeason:championship|occupation:Wine Bar Owner|ageGroup:adult|neighborhood:Rockridge|tier:4|archetype:Caretaker",
+    "split the last of the coffee and the morning's plans with their partner",
+    "Rockridge",
+    "110"
+   ]
+  },
+  {
+   "sheetRow": 11848,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C6",
+    "POP-00738",
+    "Vivian Tse",
+    "Daily|source:familyLife|family:partner|firstFriday|sportsSeason:championship|occupation:Dim Sum Restaurant Owner|ageGroup:adult|neighborhood:Chinatown|tier:4",
+    "caught their partner humming the song they'd had stuck all day",
+    "Chinatown",
+    "110"
+   ]
+  },
+  {
+   "sheetRow": 12088,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C6",
+    "POP-00848",
+    "Tanisha Freeman",
+    "Daily|source:familyLife|family:partner|firstFriday|sportsSeason:championship|occupation:Electrician|ageGroup:adult|neighborhood:Temescal|tier:4|qol:low",
+    "caught their partner humming the song they'd had stuck all day",
+    "Temescal",
+    "110"
+   ]
+  },
+  {
+   "sheetRow": 12173,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "Y3C6",
+    "POP-00884",
+    "Inara Nakamura",
+    "Daily|source:familyLife|family:partner|firstFriday|sportsSeason:championship|occupation:Midwife|ageGroup:adult|neighborhood:Piedmont Ave|tier:4",
+    "split the last of the coffee and the morning's plans with their partner",
+    "Piedmont Ave",
+    "110"
+   ]
+  },
+  {
+   "sheetRow": 12291,
+   "line": "handled a logistics call with an ex",
+   "values": [
+    "Y3C6",
+    "POP-00931",
+    "Devika Desai",
+    "Daily|source:familyLife|family:divorced|firstFriday|sportsSeason:championship|venue:local|occupation:Trade Union Representative|ageGroup:adult|neighborhood:Jack London|tier:4|qol:high",
+    "handled a logistics call with an ex — civil, brief, done near a venue doorway",
+    "Jack London",
+    "110"
+   ]
+  },
+  {
+   "sheetRow": 12309,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "Y3C6",
+    "POP-00938",
+    "Hazel Reed",
+    "Daily|source:familyLife|family:partner|firstFriday|sportsSeason:championship|occupation:Plumber|ageGroup:adult|neighborhood:Rockridge|tier:4",
+    "split the last of the coffee and the morning's plans with their partner",
+    "Rockridge",
+    "110"
+   ]
+  },
+  {
+   "sheetRow": 12450,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C6",
+    "POP-01029",
+    "Miguel Allen",
+    "Daily|source:familyLife|family:partner|firstFriday|sportsSeason:championship|occupation:Plumber|ageGroup:adult|neighborhood:Fruitvale|tier:4",
+    "caught their partner humming the song they'd had stuck all day",
+    "Fruitvale",
+    "110"
+   ]
+  },
+  {
+   "sheetRow": 12894,
+   "line": "planned the month's budget together with their partner",
+   "values": [
+    "Y3C6",
+    "POP-00202",
+    "Marky Beal",
+    "Household",
+    "planned the month's budget together with their partner",
+    "West Oakland",
+    "110"
+   ]
+  },
+  {
+   "sheetRow": 13105,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "Y3C7",
+    "POP-00002",
+    "Amara Keane",
+    "Daily|source:familyLife|family:partner|holiday:Valentine|holidayPriority:minor|sportsSeason:early-season|occupation:Pianist, Philanthropist|ageGroup:youngAdult|neighborhood:Grand Lake|tier:3",
+    "split the last of the coffee and the morning's plans with their partner",
+    "Grand Lake",
+    "111"
+   ]
+  },
+  {
+   "sheetRow": 13133,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C7",
+    "POP-00014",
+    "Tanya Cruz",
+    "Daily|source:familyLife|family:partner|holiday:Valentine|holidayPriority:minor|sportsSeason:early-season|occupation:Sideline Reporter|ageGroup:adult|neighborhood:Laurel|tier:3|archetype:Connector",
+    "caught their partner humming the song they'd had stuck all day",
+    "Laurel",
+    "111"
+   ]
+  },
+  {
+   "sheetRow": 13212,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "Y3C7",
+    "POP-00045",
+    "Eric Clove",
+    "Daily|source:familyLife|family:partner|holiday:Valentine|holidayPriority:minor|sportsSeason:early-season|occupation:Ethics Commission|ageGroup:adult|neighborhood:Rockridge|tier:4",
+    "split the last of the coffee and the morning's plans with their partner",
+    "Rockridge",
+    "111"
+   ]
+  },
+  {
+   "sheetRow": 13307,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C7",
+    "POP-00127",
+    "Mason Miller",
+    "Daily|source:familyLife|family:partner|holiday:Valentine|holidayPriority:minor|sportsSeason:early-season|occupation:Sports Analyst A's / Retired HOF A's Closer|ageGroup:adult|neighborhood:Downtown|tier:1|qol:high",
+    "caught their partner humming the song they'd had stuck all day",
+    "Downtown",
+    "111"
+   ]
+  },
+  {
+   "sheetRow": 13360,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "Y3C7",
+    "POP-00148",
+    "Gordon Tate",
+    "Daily|source:familyLife|family:partner|holiday:Valentine|holidayPriority:minor|sportsSeason:early-season|occupation:SUPERIOR COURT LIAISON|ageGroup:adult|neighborhood:Downtown|tier:4|qol:high",
+    "split the last of the coffee and the morning's plans with their partner",
+    "Downtown",
+    "111"
+   ]
+  },
+  {
+   "sheetRow": 13364,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C7",
+    "POP-00149",
+    "Lamine Sissoko",
+    "Daily|source:familyLife|family:partner|holiday:Valentine|holidayPriority:minor|sportsSeason:early-season|occupation:CIVILIAN POLICE REVIEW BOARD CHAIR|ageGroup:adult|neighborhood:Jack London|tier:4|qol:high",
+    "caught their partner humming the song they'd had stuck all day",
+    "Jack London",
+    "111"
+   ]
+  },
+  {
+   "sheetRow": 13370,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C7",
+    "POP-00151",
+    "Victor Han",
+    "Daily|source:familyLife|family:partner|holiday:Valentine|holidayPriority:minor|sportsSeason:early-season|occupation:PROBATION & REENTRY DIRECTOR|ageGroup:adult|neighborhood:Chinatown|tier:4",
+    "caught their partner humming the song they'd had stuck all day",
+    "Chinatown",
+    "111"
+   ]
+  },
+  {
+   "sheetRow": 13395,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "Y3C7",
+    "POP-00168",
+    "Ariana Lee",
+    "Daily|source:familyLife|family:partner|holiday:Valentine|holidayPriority:minor|sportsSeason:early-season|occupation:Biotech Lab Assistant|ageGroup:adult|neighborhood:Piedmont Ave|tier:4|qol:high|archetype:Connector",
+    "split the last of the coffee and the morning's plans with their partner",
+    "Piedmont Ave",
+    "111"
+   ]
+  },
+  {
+   "sheetRow": 13646,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C7",
+    "POP-00270",
+    "Tevan Walker",
+    "Daily|source:familyLife|family:partner|holiday:Valentine|holidayPriority:minor|sportsSeason:early-season|occupation:Bus driver|ageGroup:adult|neighborhood:Laurel|tier:4|archetype:Connector",
+    "caught their partner humming the song they'd had stuck all day",
+    "Laurel",
+    "111"
+   ]
+  },
+  {
+   "sheetRow": 13784,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C7",
+    "POP-00327",
+    "Bambi Wart",
+    "Daily|source:familyLife|family:partner|holiday:Valentine|holidayPriority:minor|sportsSeason:early-season|occupation:Ex-Offender Reentry Counselor|ageGroup:adult|neighborhood:West Oakland|tier:4|archetype:Striver",
+    "caught their partner humming the song they'd had stuck all day",
+    "West Oakland",
+    "111"
+   ]
+  },
+  {
+   "sheetRow": 14089,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "Y3C7",
+    "POP-00519",
+    "Wei Thomas",
+    "Daily|source:familyLife|family:partner|holiday:Valentine|holidayPriority:minor|sportsSeason:early-season|venue:local|occupation:Acupuncturist|ageGroup:adult|neighborhood:Chinatown|tier:3|archetype:Striver",
+    "split the last of the coffee and the morning's plans with their partner near a small bakery line",
+    "Chinatown",
+    "111"
+   ]
+  },
+  {
+   "sheetRow": 14090,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "Y3C7",
+    "POP-00519",
+    "Wei Thomas",
+    "Daily|source:familyLife|family:partner|holiday:Valentine|holidayPriority:minor|sportsSeason:early-season|venue:local|occupation:Acupuncturist|ageGroup:adult|neighborhood:Chinatown|tier:3|archetype:Striver",
+    "split the last of the coffee and the morning's plans with their partner near a herb shop",
+    "Chinatown",
+    "111"
+   ]
+  },
+  {
+   "sheetRow": 14220,
+   "line": "handled a logistics call with an ex",
+   "values": [
+    "Y3C7",
+    "POP-00624",
+    "Aisha Toure",
+    "Daily|source:familyLife|family:divorced|holiday:Valentine|holidayPriority:minor|sportsSeason:early-season|occupation:Immigration Attorney|ageGroup:adult|neighborhood:Downtown|tier:4|qol:high",
+    "handled a logistics call with an ex — civil, brief, done",
+    "Downtown",
+    "111"
+   ]
+  },
+  {
+   "sheetRow": 14614,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "Y3C7",
+    "POP-00779",
+    "Nia Patel",
+    "Daily|source:familyLife|family:partner|holiday:Valentine|holidayPriority:minor|sportsSeason:early-season|occupation:Economics Reporter, OakTown Echo|ageGroup:adult|neighborhood:Rockridge|tier:4",
+    "split the last of the coffee and the morning's plans with their partner",
+    "Rockridge",
+    "111"
+   ]
+  },
+  {
+   "sheetRow": 14667,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C7",
+    "POP-00800",
+    "Rhea Morgan",
+    "Daily|source:familyLife|family:partner|holiday:Valentine|holidayPriority:minor|sportsSeason:early-season|occupation:Copy Chief and Data Analyst |ageGroup:adult|neighborhood:Fruitvale|tier:4",
+    "caught their partner humming the song they'd had stuck all day",
+    "Fruitvale",
+    "111"
+   ]
+  },
+  {
+   "sheetRow": 14670,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C7",
+    "POP-00802",
+    "Funmi Shah",
+    "Daily|source:familyLife|family:partner|holiday:Valentine|holidayPriority:minor|sportsSeason:early-season|occupation:Glazier|ageGroup:senior|neighborhood:KONO|tier:4",
+    "caught their partner humming the song they'd had stuck all day",
+    "KONO",
+    "111"
+   ]
+  },
+  {
+   "sheetRow": 14694,
+   "line": "handled a logistics call with an ex",
+   "values": [
+    "Y3C7",
+    "POP-00810",
+    "An Lopez",
+    "Daily|source:familyLife|family:divorced|holiday:Valentine|holidayPriority:minor|sportsSeason:early-season|occupation:Disability Rights Advocate|ageGroup:adult|neighborhood:Fruitvale|tier:4",
+    "handled a logistics call with an ex — civil, brief, done",
+    "Fruitvale",
+    "111"
+   ]
+  },
+  {
+   "sheetRow": 14829,
+   "line": "handled a logistics call with an ex",
+   "values": [
+    "Y3C7",
+    "POP-00864",
+    "Genevieve Martinez",
+    "Daily|source:familyLife|family:divorced|holiday:Valentine|holidayPriority:minor|sportsSeason:early-season|venue:local|occupation:AI Safety Researcher (Anthropic)|ageGroup:youngAdult|neighborhood:Rockridge|tier:4",
+    "handled a logistics call with an ex — civil, brief, done near a bookstore corner",
+    "Rockridge",
+    "111"
+   ]
+  },
+  {
+   "sheetRow": 14891,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "Y3C7",
+    "POP-00887",
+    "Erica Faulkner",
+    "Daily|source:familyLife|family:partner|holiday:Valentine|holidayPriority:minor|sportsSeason:early-season|occupation:Immigration Attorney|ageGroup:adult|neighborhood:Lake Merritt|tier:4",
+    "split the last of the coffee and the morning's plans with their partner",
+    "Lake Merritt",
+    "111"
+   ]
+  },
+  {
+   "sheetRow": 15267,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "Y3C7",
+    "POP-01093",
+    "Marguerite Salcedo",
+    "Daily|source:familyLife|family:partner|holiday:Valentine|holidayPriority:minor|sportsSeason:early-season|venue:local|occupation:Managing Partner, Anchor Build|ageGroup:adult|neighborhood:Piedmont Ave|tier:3|qol:high|archetype:Striver",
+    "split the last of the coffee and the morning's plans with their partner near a coffee cart by the entrance",
+    "Piedmont Ave",
+    "111"
+   ]
+  },
+  {
+   "sheetRow": 15657,
+   "line": "settled into a quiet evening on the couch with their partner",
+   "values": [
+    "Y3C7",
+    "POP-00181",
+    "Xavier Ramington",
+    "Household",
+    "settled into a quiet evening on the couch with their partner",
+    "Temescal",
+    "111"
+   ]
+  },
+  {
+   "sheetRow": 16074,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "Y3C8",
+    "POP-00146",
+    "Caleb Reyes",
+    "Daily-Family-Up-S|source:familyLife|family:partner|sportsSeason:early-season|occupation:PUBLIC DEFENDER|ageGroup:adult|neighborhood:West Oakland|tier:4",
+    "split the last of the coffee and the morning's plans with their partner",
+    "West Oakland",
+    "112"
+   ]
+  },
+  {
+   "sheetRow": 16220,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C8",
+    "POP-00220",
+    "Shawn Gown",
+    "Daily-Family-Up-S|source:familyLife|family:partner|sportsSeason:early-season|occupation:Taxi driver|ageGroup:adult|neighborhood:Uptown|tier:4|archetype:Connector",
+    "caught their partner humming the song they'd had stuck all day",
+    "Uptown",
+    "112"
+   ]
+  },
+  {
+   "sheetRow": 16382,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C8",
+    "POP-00291",
+    "Enzo Walker",
+    "Daily-Family-Up-S|source:familyLife|family:partner|sportsSeason:early-season|occupation:Plumber|ageGroup:adult|neighborhood:Lake Merritt|tier:4|archetype:Striver",
+    "caught their partner humming the song they'd had stuck all day",
+    "Lake Merritt",
+    "112"
+   ]
+  },
+  {
+   "sheetRow": 16600,
+   "line": "handled a logistics call with an ex",
+   "values": [
+    "Y3C8",
+    "POP-00463",
+    "Rosie Piru",
+    "Daily-Composure-Up-S|source:familyLife|family:divorced|sportsSeason:early-season|occupation:Homeless Outreach Worker|ageGroup:adult|neighborhood:West Oakland|tier:4",
+    "handled a logistics call with an ex — civil, brief, done",
+    "West Oakland",
+    "112"
+   ]
+  },
+  {
+   "sheetRow": 16717,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C8",
+    "POP-00519",
+    "Wei Thomas",
+    "Daily-Family-Up-S|source:familyLife|family:partner|sportsSeason:early-season|occupation:Acupuncturist|ageGroup:adult|neighborhood:Chinatown|tier:3|archetype:Striver",
+    "caught their partner humming the song they'd had stuck all day",
+    "Chinatown",
+    "112"
+   ]
+  },
+  {
+   "sheetRow": 16867,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C8",
+    "POP-00650",
+    "Mesi Westin",
+    "Daily-Family-Up-S|source:familyLife|family:partner|sportsSeason:early-season|occupation:Dishwasher|ageGroup:youngAdult|neighborhood:Jack London|tier:3|qol:high",
+    "caught their partner humming the song they'd had stuck all day",
+    "Jack London",
+    "112"
+   ]
+  },
+  {
+   "sheetRow": 16908,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C8",
+    "POP-00670",
+    "Drew Lemon",
+    "Daily-Family-Up-S|source:familyLife|family:partner|sportsSeason:early-season|occupation:Housing Authority Inspector|ageGroup:adult|neighborhood:Downtown|tier:4|qol:high|archetype:Striver",
+    "caught their partner humming the song they'd had stuck all day",
+    "Downtown",
+    "112"
+   ]
+  },
+  {
+   "sheetRow": 16981,
+   "line": "handled a logistics call with an ex",
+   "values": [
+    "Y3C8",
+    "POP-00702",
+    "Tiu Kim",
+    "Daily-Composure-Up-S|source:familyLife|family:divorced|sportsSeason:early-season|occupation:Algae Biofuel Technician|ageGroup:senior|neighborhood:Jack London|tier:4|qol:high|archetype:Caretaker",
+    "handled a logistics call with an ex — civil, brief, done",
+    "Jack London",
+    "112"
+   ]
+  },
+  {
+   "sheetRow": 17779,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C8",
+    "POP-01178",
+    "Gideon Abramowitz",
+    "Daily-Family-Up-S|source:familyLife|family:partner|sportsSeason:early-season|occupation:Psychiatrist|ageGroup:adult|neighborhood:Rockridge|tier:4",
+    "caught their partner humming the song they'd had stuck all day",
+    "Rockridge",
+    "112"
+   ]
+  },
+  {
+   "sheetRow": 18389,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C9",
+    "POP-00117",
+    "Babe Bradford",
+    "Daily-Family-Up-S|source:familyLife|family:partner|sportsSeason:early-season|occupation:First Base Coach, Oakland A's|ageGroup:adult|neighborhood:Chinatown|tier:4",
+    "caught their partner humming the song they'd had stuck all day",
+    "Chinatown",
+    "113"
+   ]
+  },
+  {
+   "sheetRow": 18452,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C9",
+    "POP-00147",
+    "Marisol Guzman",
+    "Daily-Family-Up-S|source:familyLife|family:partner|sportsSeason:early-season|occupation:DEPUTY PUBLIC DEFENDER|ageGroup:adult|neighborhood:Lake Merritt|tier:4|archetype:Connector",
+    "caught their partner humming the song they'd had stuck all day",
+    "Lake Merritt",
+    "113"
+   ]
+  },
+  {
+   "sheetRow": 19093,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C9",
+    "POP-00523",
+    "Serg Cerrano",
+    "Daily-Family-Up-S|source:familyLife|family:partner|sportsSeason:early-season|venue:local|occupation:Mover|ageGroup:youngAdult|neighborhood:Fruitvale|tier:3|archetype:Striver",
+    "caught their partner humming the song they'd had stuck all day near Fruitvale BART area",
+    "Fruitvale",
+    "113"
+   ]
+  },
+  {
+   "sheetRow": 19666,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C9",
+    "POP-00867",
+    "Makayla Wu",
+    "Daily-Family-Up-S|source:familyLife|family:partner|sportsSeason:early-season|occupation:Electrician|ageGroup:youngAdult|neighborhood:KONO|tier:4",
+    "caught their partner humming the song they'd had stuck all day",
+    "KONO",
+    "113"
+   ]
+  },
+  {
+   "sheetRow": 20396,
+   "line": "planned the month's budget together with their partner",
+   "values": [
+    "Y3C9",
+    "POP-00249",
+    "Marrin Benry",
+    "Household",
+    "planned the month's budget together with their partner",
+    "Fruitvale",
+    "113"
+   ]
+  },
+  {
+   "sheetRow": 20397,
+   "line": "cooked dinner with their spouse and talked through the week",
+   "values": [
+    "Y3C9",
+    "POP-00250",
+    "Ty Yule",
+    "Household",
+    "cooked dinner with their spouse and talked through the week",
+    "Jack London",
+    "113"
+   ]
+  },
+  {
+   "sheetRow": 20678,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C10",
+    "POP-00014",
+    "Tanya Cruz",
+    "Daily-Family-Up-S|source:familyLife|family:partner|firstFriday|sportsSeason:early-season|occupation:Sideline Reporter|ageGroup:adult|neighborhood:Laurel|tier:3|archetype:Connector",
+    "caught their partner humming the song they'd had stuck all day",
+    "Laurel",
+    "114"
+   ]
+  },
+  {
+   "sheetRow": 21120,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C10",
+    "POP-00267",
+    "Jacob King",
+    "Daily-Family-Up-S|source:familyLife|family:partner|firstFriday|sportsSeason:early-season|occupation:Line cook|ageGroup:adult|neighborhood:Rockridge|tier:4|qol:high|archetype:Striver",
+    "caught their partner humming the song they'd had stuck all day",
+    "Rockridge",
+    "114"
+   ]
+  },
+  {
+   "sheetRow": 21550,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "Y3C10",
+    "POP-00546",
+    "Tara Ellison",
+    "Daily-Family-Up-S|source:familyLife|family:partner|firstFriday|sportsSeason:early-season|occupation:Journalist|ageGroup:adult|neighborhood:Rockridge|tier:3|qol:high",
+    "split the last of the coffee and the morning's plans with their partner",
+    "Rockridge",
+    "114"
+   ]
+  },
+  {
+   "sheetRow": 21587,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "Y3C10",
+    "POP-00599",
+    "Jose Colon",
+    "Daily-Family-Up-S|source:familyLife|family:partner|firstFriday|sportsSeason:early-season|occupation:Catcher, Oakland A's|ageGroup:youngAdult|neighborhood:Chinatown|tier:3|qol:low",
+    "split the last of the coffee and the morning's plans with their partner",
+    "Chinatown",
+    "114"
+   ]
+  },
+  {
+   "sheetRow": 21669,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C10",
+    "POP-00647",
+    "Ronald Silk",
+    "Daily-Family-Up-S|source:familyLife|family:partner|firstFriday|sportsSeason:early-season|occupation:Electrician|ageGroup:adult|neighborhood:Chinatown|tier:4|qol:low",
+    "caught their partner humming the song they'd had stuck all day",
+    "Chinatown",
+    "114"
+   ]
+  },
+  {
+   "sheetRow": 21801,
+   "line": "handled a logistics call with an ex",
+   "values": [
+    "Y3C10",
+    "POP-00707",
+    "Markenie Tian",
+    "Daily-Composure-Up-S|source:familyLife|family:divorced|firstFriday|sportsSeason:early-season|occupation:Algae Biofuel Technician|ageGroup:adult|neighborhood:Lake Merritt|tier:3",
+    "handled a logistics call with an ex — civil, brief, done",
+    "Lake Merritt",
+    "114"
+   ]
+  },
+  {
+   "sheetRow": 21863,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C10",
+    "POP-00737",
+    "Everly Rainey",
+    "Daily-Family-Up-S|source:familyLife|family:partner|firstFriday|sportsSeason:early-season|venue:local|occupation:waterfront developer|ageGroup:adult|neighborhood:Downtown|tier:4|qol:high",
+    "caught their partner humming the song they'd had stuck all day near a civic plaza",
+    "Downtown",
+    "114"
+   ]
+  },
+  {
+   "sheetRow": 22099,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C10",
+    "POP-00859",
+    "Tatiana Flores",
+    "Daily-Family-Up-S|source:familyLife|family:partner|firstFriday|sportsSeason:early-season|occupation:HVAC Technician|ageGroup:adult|neighborhood:KONO|tier:4",
+    "caught their partner humming the song they'd had stuck all day",
+    "KONO",
+    "114"
+   ]
+  },
+  {
+   "sheetRow": 22119,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C10",
+    "POP-00867",
+    "Makayla Wu",
+    "Daily-Family-Up-S|source:familyLife|family:partner|firstFriday|sportsSeason:early-season|occupation:Electrician|ageGroup:youngAdult|neighborhood:KONO|tier:4",
+    "caught their partner humming the song they'd had stuck all day",
+    "KONO",
+    "114"
+   ]
+  },
+  {
+   "sheetRow": 22279,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "Y3C10",
+    "POP-00949",
+    "Noor Gutierrez",
+    "Daily-Family-Up-S|source:familyLife|family:partner|firstFriday|sportsSeason:early-season|occupation:Paramedic|ageGroup:adult|neighborhood:Lake Merritt|tier:4",
+    "split the last of the coffee and the morning's plans with their partner",
+    "Lake Merritt",
+    "114"
+   ]
+  },
+  {
+   "sheetRow": 22363,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C10",
+    "POP-01028",
+    "Wendell Carter Jr.",
+    "Daily-Family-Up-S|source:familyLife|family:partner|firstFriday|sportsSeason:early-season|occupation:C / The Oaks|ageGroup:youngAdult|neighborhood:Piedmont Ave|tier:4|qol:high",
+    "caught their partner humming the song they'd had stuck all day",
+    "Piedmont Ave",
+    "114"
+   ]
+  },
+  {
+   "sheetRow": 22600,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C10",
+    "POP-01156",
+    "Nadia Rasmussen",
+    "Daily-Family-Up-S|source:familyLife|family:partner|firstFriday|sportsSeason:early-season|occupation:Firefighter|ageGroup:youngAdult|neighborhood:Fruitvale|tier:4",
+    "caught their partner humming the song they'd had stuck all day",
+    "Fruitvale",
+    "114"
+   ]
+  },
+  {
+   "sheetRow": 22621,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "Y3C10",
+    "POP-01166",
+    "Patrick Asante",
+    "Daily-Family-Up-S|source:familyLife|family:partner|firstFriday|sportsSeason:early-season|occupation:Crisis Clinician|ageGroup:youngAdult|neighborhood:Fruitvale|tier:4",
+    "split the last of the coffee and the morning's plans with their partner",
+    "Fruitvale",
+    "114"
+   ]
+  },
+  {
+   "sheetRow": 23168,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C11",
+    "POP-00005",
+    "Mags Corliss",
+    "Daily-Family-Up-S|source:familyLife|family:partner|sportsSeason:early-season|occupation:Editor-in-Chief|ageGroup:adult|neighborhood:Lake Merritt|tier:2|archetype:Connector",
+    "caught their partner humming the song they'd had stuck all day",
+    "Lake Merritt",
+    "115"
+   ]
+  },
+  {
+   "sheetRow": 23215,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "Y3C11",
+    "POP-00030",
+    "Derek Simmons",
+    "Daily-Family-Up-S|source:familyLife|family:partner|sportsSeason:early-season|occupation:A's Marketing Director|ageGroup:adult|neighborhood:Jack London|tier:3|qol:high|archetype:Connector",
+    "split the last of the coffee and the morning's plans with their partner",
+    "Jack London",
+    "115"
+   ]
+  },
+  {
+   "sheetRow": 23247,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "Y3C11",
+    "POP-00048",
+    "Carlos Presti",
+    "Daily-Family-Up-S|source:familyLife|family:partner|sportsSeason:early-season|occupation:Corporate Accountant|ageGroup:adult|neighborhood:Downtown|tier:4|qol:high",
+    "split the last of the coffee and the morning's plans with their partner",
+    "Downtown",
+    "115"
+   ]
+  },
+  {
+   "sheetRow": 23588,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C11",
+    "POP-00255",
+    "Howard Travis",
+    "Daily-Family-Up-S|source:familyLife|family:partner|sportsSeason:early-season|occupation:Construction laborer|ageGroup:adult|neighborhood:Piedmont Ave|tier:4|qol:high|archetype:Connector",
+    "caught their partner humming the song they'd had stuck all day",
+    "Piedmont Ave",
+    "115"
+   ]
+  },
+  {
+   "sheetRow": 23823,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "Y3C11",
+    "POP-00434",
+    "Jade Soy",
+    "Daily-Family-Up-S|source:familyLife|family:partner|sportsSeason:early-season|occupation:Data Analyst (Gridiron Analytics)|ageGroup:youngAdult|neighborhood:Rockridge|tier:4",
+    "split the last of the coffee and the morning's plans with their partner",
+    "Rockridge",
+    "115"
+   ]
+  },
+  {
+   "sheetRow": 24128,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C11",
+    "POP-00633",
+    "Dolores Fuentes",
+    "Daily-Family-Up-S|source:familyLife|family:partner|sportsSeason:early-season|occupation:Seamstress|ageGroup:adult|neighborhood:Fruitvale|tier:4",
+    "caught their partner humming the song they'd had stuck all day",
+    "Fruitvale",
+    "115"
+   ]
+  },
+  {
+   "sheetRow": 24129,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "Y3C11",
+    "POP-00633",
+    "Dolores Fuentes",
+    "Daily-Family-Up-S|source:familyLife|family:partner|sportsSeason:early-season|venue:local|occupation:Seamstress|ageGroup:adult|neighborhood:Fruitvale|tier:4",
+    "split the last of the coffee and the morning's plans with their partner near a corner market",
+    "Fruitvale",
+    "115"
+   ]
+  },
+  {
+   "sheetRow": 24307,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "Y3C11",
+    "POP-00724",
+    "Milo Lanning",
+    "Daily-Family-Up-S|source:familyLife|family:partner|sportsSeason:early-season|occupation:Mechanic|ageGroup:adult|neighborhood:Laurel|tier:4|qol:low",
+    "split the last of the coffee and the morning's plans with their partner",
+    "Laurel",
+    "115"
+   ]
+  },
+  {
+   "sheetRow": 24613,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C11",
+    "POP-00876",
+    "Jia Carmichael",
+    "Daily-Family-Up-S|source:familyLife|family:partner|sportsSeason:early-season|occupation:Physical Therapist|ageGroup:adult|neighborhood:Fruitvale|tier:4",
+    "caught their partner humming the song they'd had stuck all day",
+    "Fruitvale",
+    "115"
+   ]
+  },
+  {
+   "sheetRow": 24701,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "Y3C11",
+    "POP-00924",
+    "Donna Xu",
+    "Daily-Family-Up-S|source:familyLife|family:partner|sportsSeason:early-season|occupation:Immigration Attorney|ageGroup:adult|neighborhood:Downtown|tier:4|qol:high",
+    "split the last of the coffee and the morning's plans with their partner",
+    "Downtown",
+    "115"
+   ]
+  },
+  {
+   "sheetRow": 24830,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C11",
+    "POP-01038",
+    "Camila Cook",
+    "Daily-Family-Up-S|source:familyLife|family:partner|sportsSeason:early-season|venue:local|occupation:Painter|ageGroup:adult|neighborhood:Rockridge|tier:4",
+    "caught their partner humming the song they'd had stuck all day near a cafe on the avenue",
+    "Rockridge",
+    "115"
+   ]
+  },
+  {
+   "sheetRow": 24834,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C11",
+    "POP-01039",
+    "Ximena Mehta",
+    "Daily-Family-Up-S|source:familyLife|family:partner|sportsSeason:early-season|occupation:Bart Transit PR|ageGroup:adult|neighborhood:Lake Merritt|tier:4",
+    "caught their partner humming the song they'd had stuck all day",
+    "Lake Merritt",
+    "115"
+   ]
+  },
+  {
+   "sheetRow": 25387,
+   "line": "said they named them in their wedding speech",
+   "values": [
+    "Y3C11",
+    "POP-00020",
+    "Elena Vásquez",
+    "CivicRole-Up-M",
+    "A couple in Jack London said they named them in their wedding speech, and showed the video.",
+    "Jack London",
+    "115"
+   ]
+  },
+  {
+   "sheetRow": 25428,
+   "line": "settled into a quiet evening on the couch with their partner",
+   "values": [
+    "Y3C11",
+    "POP-00199",
+    "Mateo Allen",
+    "Household",
+    "settled into a quiet evening on the couch with their partner",
+    "Laurel",
+    "115"
+   ]
+  },
+  {
+   "sheetRow": 25717,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "Y3C12",
+    "POP-00002",
+    "Amara Keane",
+    "Daily-Family-Up-S|source:familyLife|family:partner|holiday:SpringEquinox|holidayPriority:minor|sportsSeason:early-season|occupation:Pianist, Philanthropist|ageGroup:youngAdult|neighborhood:Grand Lake|tier:3",
+    "split the last of the coffee and the morning's plans with their partner",
+    "Grand Lake",
+    "116"
+   ]
+  },
+  {
+   "sheetRow": 25758,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C12",
+    "POP-00020",
+    "Elena Vásquez",
+    "Daily-Family-Up-S|source:familyLife|family:partner|holiday:SpringEquinox|holidayPriority:minor|sportsSeason:early-season|occupation:Waterfront Urban Planner|ageGroup:adult|neighborhood:Jack London|tier:3|qol:high",
+    "caught their partner humming the song they'd had stuck all day",
+    "Jack London",
+    "116"
+   ]
+  },
+  {
+   "sheetRow": 25764,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "Y3C12",
+    "POP-00022",
+    "Danny Horn",
+    "Daily-Family-Up-S|source:familyLife|family:partner|holiday:SpringEquinox|holidayPriority:minor|sportsSeason:early-season|occupation:Center Fielder, Oakland A's - Best player in the MLB|ageGroup:youngAdult|neighborhood:Temescal|tier:1|qol:low|archetype:Striver",
+    "split the last of the coffee and the morning's plans with their partner",
+    "Temescal",
+    "116"
+   ]
+  },
+  {
+   "sheetRow": 25848,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C12",
+    "POP-00115",
+    "Dan Perez",
+    "Daily-Family-Up-S|source:familyLife|family:partner|holiday:SpringEquinox|holidayPriority:minor|sportsSeason:early-season|occupation:Hitting Coach, Oakland A's|ageGroup:adult|neighborhood:Lake Merritt|tier:4|qol:high",
+    "caught their partner humming the song they'd had stuck all day",
+    "Lake Merritt",
+    "116"
+   ]
+  },
+  {
+   "sheetRow": 25961,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C12",
+    "POP-00175",
+    "Sara Copper",
+    "Daily-Family-Up-S|source:familyLife|family:partner|holiday:SpringEquinox|holidayPriority:minor|sportsSeason:early-season|occupation:Theater Director|ageGroup:adult|neighborhood:Temescal|tier:4|qol:low|archetype:Connector",
+    "caught their partner humming the song they'd had stuck all day",
+    "Temescal",
+    "116"
+   ]
+  },
+  {
+   "sheetRow": 25974,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C12",
+    "POP-00183",
+    "Toby Lamont",
+    "Daily-Family-Up-S|source:familyLife|family:partner|holiday:SpringEquinox|holidayPriority:minor|sportsSeason:early-season|venue:local|occupation:Mutual Aid Network Organizer|ageGroup:adult|neighborhood:Fruitvale|tier:4|archetype:Connector",
+    "caught their partner humming the song they'd had stuck all day near Fruitvale BART area",
+    "Fruitvale",
+    "116"
+   ]
+  },
+  {
+   "sheetRow": 26096,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C12",
+    "POP-00249",
+    "Marrin Benry",
+    "Daily-Family-Up-S|source:familyLife|family:partner|holiday:SpringEquinox|holidayPriority:minor|sportsSeason:early-season|occupation:Mechanic|ageGroup:adult|neighborhood:Fruitvale|tier:4|archetype:Striver",
+    "caught their partner humming the song they'd had stuck all day",
+    "Fruitvale",
+    "116"
+   ]
+  },
+  {
+   "sheetRow": 26335,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "Y3C12",
+    "POP-00438",
+    "Charolette Flores",
+    "Daily-Family-Up-S|source:familyLife|family:partner|holiday:SpringEquinox|holidayPriority:minor|sportsSeason:early-season|occupation:Music Venue Operator|ageGroup:adult|neighborhood:Uptown|tier:4",
+    "split the last of the coffee and the morning's plans with their partner",
+    "Uptown",
+    "116"
+   ]
+  },
+  {
+   "sheetRow": 26509,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C12",
+    "POP-00528",
+    "Deacon Seymour",
+    "Daily-Family-Up-S|source:familyLife|family:partner|holiday:SpringEquinox|holidayPriority:minor|sportsSeason:early-season|occupation:Manager, Oakland A's|ageGroup:adult|neighborhood:Lake Merritt|tier:2|qol:high|archetype:Striver",
+    "caught their partner humming the song they'd had stuck all day",
+    "Lake Merritt",
+    "116"
+   ]
+  },
+  {
+   "sheetRow": 26592,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "Y3C12",
+    "POP-00620",
+    "Yuki Tanaka",
+    "Daily-Family-Up-S|source:familyLife|family:partner|holiday:SpringEquinox|holidayPriority:minor|sportsSeason:early-season|occupation:Florist|ageGroup:youngAdult|neighborhood:Lake Merritt|tier:4|qol:high",
+    "split the last of the coffee and the morning's plans with their partner",
+    "Lake Merritt",
+    "116"
+   ]
+  },
+  {
+   "sheetRow": 26767,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C12",
+    "POP-00715",
+    "Nadine Beckett",
+    "Daily-Family-Up-S|source:familyLife|family:partner|holiday:SpringEquinox|holidayPriority:minor|sportsSeason:early-season|occupation:Nurse Practitioner|ageGroup:adult|neighborhood:Piedmont Ave|tier:4|qol:high",
+    "caught their partner humming the song they'd had stuck all day",
+    "Piedmont Ave",
+    "116"
+   ]
+  },
+  {
+   "sheetRow": 27066,
+   "line": "caught their partner humming the song they'd had stuck all day",
+   "values": [
+    "Y3C12",
+    "POP-00879",
+    "Ruth Gaines",
+    "Daily-Family-Up-S|source:familyLife|family:partner|holiday:SpringEquinox|holidayPriority:minor|sportsSeason:early-season|occupation:Cybersecurity Analyst|ageGroup:adult|neighborhood:Downtown|tier:4|qol:high",
+    "caught their partner humming the song they'd had stuck all day",
+    "Downtown",
+    "116"
+   ]
+  },
+  {
+   "sheetRow": 27389,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "Y3C12",
+    "POP-01092",
+    "Desmond Achebe",
+    "Daily-Family-Up-S|source:familyLife|family:partner|holiday:SpringEquinox|holidayPriority:minor|sportsSeason:early-season|occupation:Managing Partner, Coastline Construction|ageGroup:adult|neighborhood:West Oakland|tier:3|qol:high|archetype:Striver",
+    "split the last of the coffee and the morning's plans with their partner",
+    "West Oakland",
+    "116"
+   ]
+  },
+  {
+   "sheetRow": 27485,
+   "line": "split the last of the coffee and the morning's plans with their partner",
+   "values": [
+    "Y3C12",
+    "POP-01147",
+    "Ruth Anyanwu",
+    "Daily-Family-Up-S|source:familyLife|family:partner|holiday:SpringEquinox|holidayPriority:minor|sportsSeason:early-season|occupation:Police Officer|ageGroup:youngAdult|neighborhood:Downtown|tier:4|qol:high",
+    "split the last of the coffee and the morning's plans with their partner",
+    "Downtown",
+    "116"
+   ]
+  },
+  {
+   "sheetRow": 27852,
+   "line": "said they named them in their wedding speech",
+   "values": [
+    "Y3C12",
+    "POP-00144",
+    "Ethan D’Souza",
+    "CivicRole-Up-M",
+    "A couple in Lake Merritt said they named them in their wedding speech, and showed the video.",
+    "Lake Merritt",
+    "116"
+   ]
+  },
+  {
+   "sheetRow": 27885,
+   "line": "split the weekend errands with their spouse",
+   "values": [
+    "Y3C12",
+    "POP-00297",
+    "Jorge Wusther",
+    "Household",
+    "split the weekend errands with their spouse",
+    "Uptown",
+    "116"
+   ]
+  }
+ ]
+}

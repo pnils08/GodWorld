@@ -1,6 +1,6 @@
 {
   "session": "undocked-pop00663",
-  "takenAt": "2026-11-18T02:30:29.337Z",
+  "takenAt": "2026-11-21T02:30:33.726Z",
   "account": {
     "total": 10,
     "earned": [
@@ -91,12 +91,12 @@
       "high_volume_trader": {
         "name": "High-Volume Trader",
         "points": 25,
-        "frac": 0.001
+        "frac": 0.002
       },
       "open_for_business": {
         "name": "Open For Business",
         "points": 15,
-        "frac": 0.02
+        "frac": 0.04
       },
       "plutonium_dealer": {
         "name": "Plutonium Dealer",
@@ -111,7 +111,7 @@
       "millionaire": {
         "name": "Millionaire",
         "points": 25,
-        "frac": 0.000452
+        "frac": 0.000476
       },
       "well_insured": {
         "name": "Well Insured",
@@ -121,7 +121,7 @@
       "cartographer": {
         "name": "Cartographer",
         "points": 30,
-        "frac": 0.02
+        "frac": 0.05
       },
       "deep_core_master": {
         "name": "Deep Core Master",
@@ -131,7 +131,7 @@
       "far_traveler": {
         "name": "Far Traveler",
         "points": 25,
-        "frac": 0.00009766666666666666
+        "frac": 0.00018886666666666666
       },
       "first_contact": {
         "name": "First Contact",
@@ -151,7 +151,7 @@
       "jump_master": {
         "name": "Jump Master",
         "points": 20,
-        "frac": 0.00008
+        "frac": 0.0002
       },
       "second_star_to_the_right": {
         "name": "Second Star to the Right",
@@ -176,17 +176,17 @@
       "voyager_i": {
         "name": "Voyager I",
         "points": 10,
-        "frac": 0.08
+        "frac": 0.2
       },
       "voyager_ii": {
         "name": "Voyager II",
         "points": 25,
-        "frac": 0.008
+        "frac": 0.02
       },
       "wanderer": {
         "name": "Wanderer",
         "points": 10,
-        "frac": 0.2
+        "frac": 0.5
       },
       "where_no_one_has_gone_before": {
         "name": "Where No One Has Gone Before",
@@ -296,7 +296,7 @@
       "chronicler": {
         "name": "Chronicler",
         "points": 15,
-        "frac": 0.2
+        "frac": 0.56
       },
       "first_refinement": {
         "name": "First Refinement",

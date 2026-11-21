@@ -239,6 +239,12 @@ Row 285 (`question`) named POP-00018 and POP-00527; both are owed a wake in the 
 ### G-EC42 — Carried from fire 1, still true [judgment] [process] [LOW] (research-build, 2026-11-15)
 Step 2.5 does not read Simulation_Ledger incomes (the POP-00598 entry passed it). Step 2 prints "date unresolved" without `--since`. Step 6.1 asks for reads whose evidence is written after the close (civic.48 needs the hearing the tick starts after Step 5.56). The engine review is field transcription except the anomaly paragraphs (rendered by a scratch script again). engine.208 writes a stock sentence to every named citizen whatever their role (the GM gets a traded player's lines). Five feed names do not resolve (Porter Broadway, Antone Baez, T. Jerome ×3). SANDBOX 1004's script project is at the 200-version cap; one bench fire that evening was cut at Apps Script's 6-minute limit mid-write.
 
+### G-ES1 — No bond-event ripple in seven Cycles [judgment] [engine] [LOW] (engine-sheet, 2026-11-21)
+Ripple_Ledger C110–C116 (510 rows): 0 `bond-event` (marriages `bondEngine.js:2497`, divorces `householdFormationEngine.js:1212`), 0 `weather-event`, 0 `youth-event`, 0 `crime`, 0 `relocation-pressure`, 0 `household` / civic hook kinds. Not read whether these are quiet or dead paths. Found in the engine.340 replay (`output/engine-sheet/2026-11-21-engine340-replay-c110-c116.txt`).
+
+### G-ES2 — Four ripple kinds have no seed domain; their seeds land on GENERAL / civic desk [judgment] [engine] [LOW] (engine-sheet, 2026-11-21)
+`CONTRACT_SEED_DOMAIN` (`buildContractSeeds.js`) has no entry for `initiative-implementation`, `trajectory`, `relocation-pressure`, `neighborhood-fold`; the C110–C116 replay shows their seeds as GENERAL (desk civic) — a neighborhood boom or an initiative's ongoing effects routed by the fallback, not by kind.
+
 ## LEG: /city-hall (G-R)
 
 - G-R (AUTO): sanity-read FAIL-SCOPED — INIT-006, INIT-014, INIT-003 excluded from the write, rest applied — see output/cron-civic/gate_c116.json

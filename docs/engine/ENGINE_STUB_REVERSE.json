@@ -1,8 +1,8 @@
 {
   "generated": "2026-11-21",
   "generator": "scripts/stubEngine.js",
-  "filesScanned": 180,
-  "functionsMapped": 1772,
+  "filesScanned": 179,
+  "functionsMapped": 1765,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -4711,8 +4711,7 @@
         "phase01-config/godWorldEngine2.js::verifyCycleCountPersisted_",
         "phase05-citizens/civicInitiativeEngine.js::manualRunVote",
         "phase05-citizens/processAdvancementIntake.js::getCurrentCycleFromConfig_",
-        "phase07-evening-media/parseMediaRoomMarkdown.js::parseContinuityNotes_",
-        "utilities/cycleRollback.js::resetCycleCounter_"
+        "phase07-evening-media/parseMediaRoomMarkdown.js::parseContinuityNotes_"
       ]
     },
     "Civic_Office_Ledger": {
@@ -4734,7 +4733,6 @@
         "phase05-citizens/updateCivicLedgerFactions.js::getCouncilStateFromLedger_",
         "phase05-citizens/updateCivicLedgerFactions.js::updateCivicOfficeLedgerFactions_",
         "phase10-persistence/buildCyclePacket.js::getCivicContextForPacket_",
-        "utilities/cycleRollback.js::revertCivicOfficeUpdates_",
         "utilities/exportCitizensSnapshot.js::exportCivicOfficials_",
         "utilities/setupCivicLedgerColumns.js::fixElliottCraneStatus",
         "utilities/setupCivicLedgerColumns.js::setupCivicLedgerColumns"
@@ -4793,8 +4791,7 @@
         "phase05-citizens/runYouthEngine.js::getGenericYouth_",
         "phase05-citizens/updateCivicApprovalRatings.js::mintOutOfTownChallenger_",
         "phase05-citizens/updateCivicApprovalRatings.js::pickGenericCitizenChallenger_",
-        "phase07-evening-media/mediaRoomIntake.js::routeCitizenUsageToIntake_",
-        "utilities/cycleRollback.js::rollbackToCycle78"
+        "phase07-evening-media/mediaRoomIntake.js::routeCitizenUsageToIntake_"
       ]
     },
     "Intake": {
@@ -4880,9 +4877,7 @@
         "phase10-persistence/persistenceExecutor.js::executeSheetIntents_",
         "utilities/archiveLifeHistory.js::maintainLifeHistoryLog_",
         "utilities/archiveLifeHistory.js::runArchive_",
-        "utilities/citizenDialMap.js::emitPressureTag_",
-        "utilities/cycleRollback.js::previewRollbackToCycle78",
-        "utilities/cycleRollback.js::rollbackToCycle78"
+        "utilities/citizenDialMap.js::emitPressureTag_"
       ]
     },
     "Riley_Digest": {
@@ -4893,9 +4888,7 @@
         "phase01-config/godWorldEngine2.js::writeDigest_",
         "phase06-analysis/applyPatternDetection.js::applyPatternDetection_",
         "phase10-persistence/cycleExportAutomation.js::exportRileyDigest",
-        "phase10-persistence/cycleExportAutomation.js::formatMirrorEntry_",
-        "utilities/cycleRollback.js::previewRollbackToCycle78",
-        "utilities/cycleRollback.js::rollbackToCycle78"
+        "phase10-persistence/cycleExportAutomation.js::formatMirrorEntry_"
       ]
     },
     "Simulation_Ledger": {
@@ -4968,9 +4961,6 @@
         "phase05-citizens/householdFormationEngine.js::applyFundDisbursementBody_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
         "phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_",
-        "utilities/cycleRollback.js::previewRollbackToCycle78",
-        "utilities/cycleRollback.js::revertInitiativeVotes_",
-        "utilities/cycleRollback.js::rollbackToCycle78",
         "utilities/setupInitiativeTrackerValidation.js::clearInitiativeTrackerValidation",
         "utilities/setupInitiativeTrackerValidation.js::setupInitiativeTrackerValidation"
       ]
@@ -5042,8 +5032,6 @@
       "readers": [
         "phase02-world-state/updateTransitMetrics.js::loadPreviousCycleEvents_",
         "phase10-persistence/recordWorldEventsv3.js::recordWorldEventsv3_",
-        "utilities/cycleRollback.js::previewRollbackToCycle78",
-        "utilities/cycleRollback.js::rollbackToCycle78",
         "utilities/ensureWorldEventsV3Ledger.js::ensureWorldEventsV3Ledger_"
       ]
     },
@@ -5152,9 +5140,7 @@
         "phase04-events/worldEventsEngine.js::worldEventsEngine_",
         "phase10-persistence/recordWorldEventsv25.js::ensureWorldEventsLedger_",
         "phase10-persistence/recordWorldEventsv25.js::recordWorldEvents25_",
-        "phase10-persistence/recordWorldEventsv25.js::upgradeWorldEventsLedger_",
-        "utilities/cycleRollback.js::previewRollbackToCycle78",
-        "utilities/cycleRollback.js::rollbackToCycle78"
+        "phase10-persistence/recordWorldEventsv25.js::upgradeWorldEventsLedger_"
       ]
     },
     "Business_Archive": {
@@ -5197,8 +5183,6 @@
         "phase05-citizens/citizenContextBuilder.js::getRelationships_",
         "phase05-citizens/seedRelationBondsv1.js::createRelationshipBondsSheet_",
         "phase05-citizens/seedRelationBondsv1.js::seedRelationshipBonds_",
-        "utilities/cycleRollback.js::previewRollbackToCycle78",
-        "utilities/cycleRollback.js::rollbackToCycle78",
         "utilities/ensureRelationshipBonds.js::ensureRelationshipBondsSchema_",
         "utilities/ensureRelationshipBonds.js::validateRelationshipBondsSchema_"
       ]
@@ -5260,7 +5244,6 @@
         "phase05-citizens/civicInitiativeEngine.js::engineClockHold_",
         "phase05-citizens/educationCareerEngine.js::checkSchoolQuality_",
         "phase05-citizens/educationCareerEngine.js::updateMinorSchoolQuality_",
-        "utilities/cycleRollback.js::rollbackToCycle78",
         "utilities/ensureNeighborhoodDemographics.js::ensureNeighborhoodDemographicsSchema_",
         "utilities/ensureNeighborhoodDemographics.js::getNeighborhoodDemographics_"
       ]
@@ -5303,9 +5286,7 @@
       "readers": [
         "phase07-evening-media/buildContractSeeds.js::contractSeedUsageTally_",
         "phase10-persistence/saveV3Seeds.js::migrateSeedDeckV4_",
-        "phase10-persistence/saveV3Seeds.js::saveV3Seeds_",
-        "utilities/cycleRollback.js::previewRollbackToCycle78",
-        "utilities/cycleRollback.js::rollbackToCycle78"
+        "phase10-persistence/saveV3Seeds.js::saveV3Seeds_"
       ]
     },
     "Media_Intake": {
@@ -5353,9 +5334,7 @@
         "phase08-v3-chicago/v3StoryHookWriter.js::saveV3Hooks_"
       ],
       "readers": [
-        "phase08-v3-chicago/v3StoryHookWriter.js::saveV3Hooks_",
-        "utilities/cycleRollback.js::previewRollbackToCycle78",
-        "utilities/cycleRollback.js::rollbackToCycle78"
+        "phase08-v3-chicago/v3StoryHookWriter.js::saveV3Hooks_"
       ]
     },
     "Texture_Trigger_Log": {
@@ -5369,9 +5348,7 @@
     "Election_Log": {
       "writers": [],
       "readers": [
-        "phase10-persistence/buildCyclePacket.js::getCivicContextForPacket_",
-        "utilities/cycleRollback.js::previewRollbackToCycle78",
-        "utilities/cycleRollback.js::rollbackToCycle78"
+        "phase10-persistence/buildCyclePacket.js::getCivicContextForPacket_"
       ]
     },
     "_CycleCheckpoint": {

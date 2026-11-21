@@ -4331,26 +4331,6 @@
 ### cycleModes.rng.test.js
 - **check(name, fn)**
 
-### cycleRollback.js
-- **rollbackToCycle78()**
-  Sheets: Election_Log, Generic_Citizens, Initiative_Tracker, LifeHistory_Log, Neighborhood_Demographics, Relationship_Bonds, Riley_Digest, Story_Hook_Deck, Story_Seed_Deck, WorldEvents_Ledger, WorldEvents_V3_Ledger
-
-- **deleteRowsAfterCycle_(ss, sheetName, cycleColName, targetCycle)**
-
-- **revertInitiativeVotes_(ss, targetCycle)**
-  Sheets: Initiative_Tracker
-
-- **revertCivicOfficeUpdates_(ss, targetCycle)**
-  Sheets: Civic_Office_Ledger
-
-- **resetCycleCounter_(ss, targetCycle)**
-  Sheets: World_Config
-
-- **previewRollbackToCycle78()**
-  Sheets: Election_Log, Initiative_Tracker, LifeHistory_Log, Relationship_Bonds, Riley_Digest, Story_Hook_Deck, Story_Seed_Deck, WorldEvents_Ledger, WorldEvents_V3_Ledger
-
-- **countRowsAfterCycle_(ss, sheetName, cycleColName, targetCycle)**
-
 ### diagnoseDashboardData.js
 - **diagnoseDashboardData()**
   Sheets: Oakland_Sports_Feed
@@ -4889,5 +4869,5 @@ _No top-level function declarations found (helper/constants file)._
 
 ---
 
-**Files scanned:** 180
-**Functions mapped:** 1772
+**Files scanned:** 179
+**Functions mapped:** 1765

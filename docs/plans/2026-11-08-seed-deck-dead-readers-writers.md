@@ -12,7 +12,7 @@ sources:
   - phase10-persistence/saveV3Seeds.js:136 (deck append intent), migrateSeedDeckV4_ :74, :84
   - docs/engine/ENGINE_STUB_REVERSE.json, docs/engine/SHEETS_MANIFEST.md §9
 pointers:
-  - "[[../engine/ROLLOUT_PLAN]] — engine.341"
+  - "[[../engine/ROLLOUT_PLAN]] — engine.341, engine.355"
   - "[[../../output/production_log_run_cycle_c114_gaps]] — G-ES13"
 ---
 
@@ -22,7 +22,7 @@ pointers:
 
 **Goal:** every path that reads or writes Story_Seed_Deck is on the maps and works on the deck as it is; paths built for the old deck are gone.
 
-**Rows:** engine.341 · **Owner:** engine-sheet
+**Rows:** engine.341, engine.355 · **Owner:** engine-sheet
 
 ## Found (2026-11-08, engine.334 wiring cards, G-ES13)
 
@@ -50,6 +50,15 @@ Deck = v4.2, 18 columns A–R (`saveV3Seeds.js` `SEED_DECK_HEADERS`): `Cycle, Se
 | 3 | Retire the two old-deck writers and the handoff tool (menu item, file, tab left frozen as history) | es | done 2026-11-21 — removed `citizen-signal-detector.js`, `routePatternSeeds.js`, `compileHandoff.js` and the Compile Handoff menu item; with them `validatePriorityEngine.js` (read-before 6). Header audit's deck entry set to v4.2. Stale comments (`priorityEngine.js`, `utilityFunctions.js`) and CODEBASE_MAP / BACKLOG rows trued. Left, all behind the builder's test unlock: two test files that load retired scripts (`routePatternSeeds.decay.test.js`, `validatePriorityEngine.contract.test.js`) — delete; `auditSheetHeaders.contract.test.js` Test 6 pins the v3.4 deck columns (`SeedType`, `SeedText`) and fails on the v4.2 entry (agy F2) — repin to v4.2; with it drop `Handoff_Output` from Test 3 and the audit (agy F3) |
 | 4 | Regenerate the maps; codex diff review; PROD | es | maps regenerated 2026-11-21; codex review and PROD next — the engine side is the menu item, one deleted Apps Script file and two comments |
 
+## engine.355 — the rollback-to-78 tool retired
+
+**Builder's words (2026-11-21), on read-before item 4:** "Yeah that's crazy to have a script that deletes every week"
+
+- **What it was.** `utilities/cycleRollback.js` (added 2026-01-30, `c8ad3b080`): `rollbackToCycle78()` — every row with Cycle > 78 deleted from 20-odd cycle-keyed tabs (Riley_Digest, LifeHistory_Log, Media_Ledger, Story_Seed_Deck, …), initiative votes after 78 reverted, `cycleCount` set to 78. Live is at C116. In the Apps Script project, so it sat in the editor's Run list.
+- **Read-before.** Zero callers in code, menus, triggers, crons or skills (own grep + agy attack 5 on `b54210cb9`). No deploy or run-cycle doc names it as a rewind step. One live pointer: `scripts/cron-civic-gate.js` named it the UNDO PATH for a mis-applied civic decision — in its header and in the Discord alert a blocked apply sends — claiming it "restores the Initiative_Tracker from the pre-cycle snapshot". It reads no snapshot.
+- **Done 2026-11-21.** File removed; the gate's header says no undo tool exists and the alert line ends at "no sheet write"; §9 row moved to the Deleted list; CODEBASE_MAP and ENGINE_TRUTH_MAP entries removed; stub maps and the Simulation_Ledger column map regenerated.
+- **Open.** The file stays in the live script until a PROD push carries its removal — it rides engine.341's push. Acceptance: a PROD pull holds no `utilities/cycleRollback.js`.
+
 ## Acceptance
 
 1. ENGINE_STUB_REVERSE names every live Story_Seed_Deck writer; SHEETS_MANIFEST §9 names every direct one.
@@ -70,3 +79,4 @@ Deck = v4.2, 18 columns A–R (`saveV3Seeds.js` `SEED_DECK_HEADERS`): `Cycle, Se
 - 2026-11-08 (engine-sheet) — Created on the builder's word from the engine.334 report; findings 1–3 from the engine.334 wiring cards and G-ES13.
 - 2026-11-21 (engine-sheet) — Claimed on the builder's word ("Proceed on engine.341"). Tasks 1–3 done, Task 4 maps regenerated; review and PROD open.
 - 2026-11-21 (engine-sheet) — agy review folded: F1 fixed, F2/F3 wait on the test unlock.
+- 2026-11-21 (engine-sheet) — engine.355 filed on the builder's word and built: the rollback-to-78 tool removed, the civic gate's false undo pointer cut. PROD push open.

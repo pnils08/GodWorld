@@ -31,8 +31,9 @@
  * Pass: exit 0 — the caller (cron-civic-run.js --stage=close / --stage=tick)
  * decides the apply from the record's deterministicPass + sanityStatus.
  *
- * UNDO PATH if a bad apply ever lands: utilities/cycleRollback.js restores the
- * Initiative_Tracker from the pre-cycle snapshot.
+ * No undo tool exists for a landed apply. The file once named here,
+ * utilities/cycleRollback.js, deleted every row after Cycle 78 from the
+ * cycle-keyed tabs — it restored nothing from a snapshot (retired engine.355).
  *
  * Usage:
  *   node scripts/cron-civic-gate.js --cycle <XX> [--max-rows 5] [--model <slug>] [--no-sanity]
@@ -173,7 +174,7 @@ function notifyDiscord(cycle, failures) {
     if (!webhookUrl) { log('Discord ping skipped: DISCORD_WEBHOOK_URL not set'); return resolve(); }
     const lines = ['**CIVIC APPLY GATE BLOCKED — c' + cycle + '** (' + failures.length + ' failure(s))'];
     for (const f of failures.slice(0, 8)) lines.push('- [' + f.check + '] ' + String(f.detail).slice(0, 140));
-    lines.push('Decisions staged at `output/cron-civic/staged/c' + cycle + '/` — no sheet write. Undo path (if ever mis-applied): `utilities/cycleRollback.js`.');
+    lines.push('Decisions staged at `output/cron-civic/staged/c' + cycle + '/` — no sheet write.');
     const parsed = new URL(webhookUrl);
     const payload = JSON.stringify({ content: lines.join('\n') });
     const req = https.request({

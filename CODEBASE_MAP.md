@@ -554,7 +554,6 @@ General-purpose utility scripts, distinct from `scripts/` (these run inside GAS 
 | `citizenMemory.js` (~15 KB) | Citizen memory recall utilities |
 | `compressLifeHistory.js` (~50 KB) | Life-history compression (LLM-assisted) |
 | `cycleModes.js` (~14 KB) | Cycle-mode definitions (game / civic / media) |
-| `cycleRollback.js` (~14 KB) | Rolls back a cycle to a prior state |
 | `chaosCarsConfig.js` (~21 KB) | ChaosCars configuration constants |
 | `chaosCarsDecay.js` | ChaosCars decay helpers |
 | `ensureCrimeMetrics.js` (~19 KB) | Schema-ensures crime-metrics columns |

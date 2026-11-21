@@ -1287,14 +1287,6 @@ Each file gets a `### <relpath>` entry with six fields. The bar: if an entry deg
 **Gap:** ⟪PENDING⟫
 **Touches:** ⟪PENDING⟫
 
-### utilities/cycleRollback.js
-**Purpose:** ⟪PENDING⟫
-**Actual:** ⟪PENDING⟫
-**Reach:** ⟪PENDING⟫
-**Status:** ⟪PENDING⟫
-**Gap:** ⟪PENDING⟫
-**Touches:** ⟪PENDING⟫
-
 ### utilities/diagnoseDashboardData.js
 **Purpose:** ⟪PENDING⟫
 **Actual:** ⟪PENDING⟫

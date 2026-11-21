@@ -1,6 +1,6 @@
 # How kids are minted — parents too young, a child's surname moving, a child landing on a citizen who had none
 
-**ROLLOUT:** engine.339 · **Owner:** research-build · **State:** ready (builder 2026-11-08: "high priority issue next session") · **Opened:** 2026-11-08
+**ROLLOUT:** engine.339 · **Owner:** research-build · **State:** REJECTED by the builder 2026-11-21 ("the plan is rejected and not to be referenced") — build nothing from this file, cite nothing from it · **Opened:** 2026-11-08
 
 ## Goal
 
@@ -217,6 +217,7 @@ Standing: `b4db8c7a8` is parked, not on PROD, not to ship as it is. Cuts i–k (
 
 ## Changelog
 
+- 2026-11-21 (research-build) — the whole plan rejected by the builder: "the plan is rejected and not to be referenced". Row to needs-info. Its three code commits (`1d74b2e49`, `df0052132`, `b4db8c7a8`) are in the tree and not on PROD; no revert asked or made.
 - 2026-11-21 (research-build) — cuts g–h rejected by the builder; his words and the two unsettled points recorded; nothing shipped.
 
 - 2026-11-20 night (research-build) — the lottery grabs two (cuts g–k); his afternoon and night words recorded; agy's four findings reconciled; no tests written or run on his word.

@@ -157,8 +157,13 @@ function applyGriefPoolWeights_(pool, griefConfig) {
     var tags = entry.tags || [];
     var publicActivity = false;
     var livingSupport = false;
+    // engine.356: a night in with a programme is tagged source:prevEvening like the rest of the pool but
+    // is not public activity — without this the grief weighting pushed a grieving citizen away from
+    // staying in (the first cut missed it).
+    var nightIn = tags.indexOf('evening:watched') >= 0 || tags.indexOf('evening:watchedSports') >= 0;
     for (var t = 0; t < tags.length; t++) {
       var tag = tags[t];
+      if (nightIn) break;
       if (tag === 'source:fame' || tag === 'source:prevEvening' ||
           tag === 'source:firstFriday' || tag === 'source:sports' ||
           tag === 'source:holiday' || tag === 'evening:cityEventAttend') publicActivity = true;

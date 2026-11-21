@@ -2036,13 +2036,19 @@ function appendBondLifeLine_(ctx, ledgerIdx, tag, text, cycle, withPop) {
   // 0, against 31 people with one in their cell at C116). One row, the engine's own tag and words; the
   // other person rides as contactPopId (the generator's tag) when the caller knows them. Dials are folded
   // from the cell, not the log, so nothing is counted twice. Phase5-Bonds runs before the executor.
+  // The tag is written BARE unless a contact rides on it: the wake's milestone reader, the citizen cards
+  // and the engine auditor match a wedding as exactly "Wedding" and the Lives desk as "Wedding" or
+  // "Wedding-…" (lib/wakePerception.js MILESTONE_TAGS, buildCitizenCards.js ARCH_MILESTONE_RE,
+  // engineAuditor.js, buildLivesSlice.js) — the first cut wrote "Wedding|source:bond" and none of them
+  // would have seen it. Only the three connection-shift tags carry a contact, and nothing matches those
+  // exactly on the log.
   if (typeof queueAppendIntent_ === 'function') {
     var iPop = header.indexOf('POPID'), iFirst = header.indexOf('First'), iLast = header.indexOf('Last'),
         iHood = header.indexOf('Neighborhood');
     var who = iPop >= 0 ? String(row[iPop] || '') : '';
     if (who) {
       var nm = (((iFirst >= 0 ? row[iFirst] : '') || '') + ' ' + ((iLast >= 0 ? row[iLast] : '') || '')).trim();
-      var logTag = tag + '|source:bond' + (withPop ? '|contactPopId:' + withPop : '');
+      var logTag = withPop ? (tag + '|contactPopId:' + withPop) : String(tag);
       queueAppendIntent_(ctx, 'LifeHistory_Log', [ctx.now, who, nm, logTag, text,
         iHood >= 0 ? (row[iHood] || '') : '', cycle], 'engine.356 bond line', 'citizens', 60);
     }

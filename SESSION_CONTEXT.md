@@ -2,4 +2,4 @@
 
 **PIN:** S768 | Day 234 | Canon C116 | PROD HEAD = stage 65 (engine.351; web app pinned @200 = stage 64, version limit 200 reached; history: DEPLOY_HISTORY §PROD) | next live fire C117 Sun 2026-11-22
 
-**NEXT[research-build]:** engine.351 → LIVE stage 65; read at C117 (ROLLOUT §2 row). engine.350 Task 15 → pile 1 is live unbenched (stage 63); the 10 red test files are unread (test guard stays shut — read the files, do not run them); content-tab row 276 still needs `dial:sociability:up` or the Tribune fame line stops.
+**NEXT[research-build]:** engine.350 Task 15 → pile 1 is live unbenched (stage 63); the 10 red test files are unread (test guard stays shut — read the files, do not run them); content-tab row 276 still needs `dial:sociability:up` or the Tribune fame line stops.

@@ -245,9 +245,6 @@ Ripple_Ledger, all 980 rows C101–C116: 0 ever for `bond-event`, `weather-event
 - **Weather — maybe dead.** LifeHistory carries storm lines at C105 and C107; Ripple_Ledger has no `weather-event` row for either (`applyWeatherModel.js:1128` storm ripple). Not traced.
 - **Youth, crime, the civic hook kinds, household, relocation-pressure** — not traced. Crime emits only when a hood sits at ladder 2+ (engine.301: no hood rose twice C114–C116).
 
-### G-ES2 — A third of the seed deck has no desk of its own [judgment] [engine] [MED] (engine-sheet, 2026-11-21, checked same day)
-`CONTRACT_SEED_DOMAIN` (`buildContractSeeds.js:36-57`) has no entry for `trajectory`, `initiative-implementation`, `approval-shift`, `neighborhood-fold` (seen), nor `relocation-pressure`, `household` and the five civic hook kinds (no rows yet). Live Story_Seed_Deck C110–C116: **104 of 323 rows are GENERAL → desk civic** — 51 trajectory (neighborhood booms, cooling, housing pressure), 34 initiative-implementation, 12 approval-shift, 7 neighborhood-fold (the replay rebuilds the same 104). A neighborhood boom goes to the civic desk by fallback, not by kind. Not this job (engine.340 changes class, not domain) — needs its own row.
-
 ## LEG: /city-hall (G-R)
 
 - G-R (AUTO): sanity-read FAIL-SCOPED — INIT-006, INIT-014, INIT-003 excluded from the write, rest applied — see output/cron-civic/gate_c116.json

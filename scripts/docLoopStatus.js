@@ -497,7 +497,8 @@ function runHandoffGate() {
   pins.forEach(l => { if (l.length > PIN_MAX) problems.push(`  PIN ${l.length} chars > ${PIN_MAX} → session | day | canon cycle | PROD deployment | next live fire; history lives in DEPLOY_HISTORY.`); });
   for (const t of BUILDER_TERMINALS) {
     const n = lines.filter(l => l.startsWith(`**NEXT[${t}]:**`));
-    if (n.length !== 1) problems.push(`  ${n.length} NEXT[${t}] lines → exactly one.`);
+    // builder 2026-11-21: engine-sheet carries no section in SESSION_CONTEXT — zero lines is allowed.
+    if (n.length !== 1 && !(t === 'engine-sheet' && n.length === 0)) problems.push(`  ${n.length} NEXT[${t}] lines → exactly one.`);
     n.forEach(l => { if (l.length > NEXT_MAX) problems.push(`  NEXT[${t}] ${l.length} chars > ${NEXT_MAX} → job id → next step, holds; never what was done.`); });
   }
   const known = l => /^# SESSION_CONTEXT/.test(l) || l.startsWith('**PIN:**') || [...BUILDER_TERMINALS].some(t => l.startsWith(`**NEXT[${t}]:**`));

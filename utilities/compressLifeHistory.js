@@ -1801,7 +1801,8 @@ function foldBiasIntents_(regs, intents, cycle) {
 // Returns the number of unlived entries captured (0 when regs is null).
 var UNLIVED_CAP = 3;
 var UNLIVED_TXT_MAX = 120;
-var UNLIVED_BRANCH_TAGS = { careershift: 1, relocation: 1, divorce: 1, retirement: 1, businessclose: 1, incomefitmove: 1 };
+// Builder 2026-11-21: "Nothing is hard coded about marriage or divorce" — a divorce is no unlived branch.
+var UNLIVED_BRANCH_TAGS = { careershift: 1, relocation: 1, retirement: 1, businessclose: 1, incomefitmove: 1 };
 // Read old history tags; only a NEW capture uses the new key. Existing history
 // and already-stored MemoryRegisters entries are not rewritten.
 var UNLIVED_BRANCH_ALIASES = { displacementmove: 'incomefitmove' };

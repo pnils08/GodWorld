@@ -1240,8 +1240,7 @@ function generateCitizensEvents_(ctx) {
     "weather:fog":           ["outabout", false], "weather:microclimate-fog": ["outabout", false],
     "weather:low-visibility": ["outabout", false], "weather:wind":         ["outabout", false],
     "weather:cold":          ["outabout", false], "weather:cold-front":    ["outabout", false],
-    "family:partner":        ["family", true],    "family:widowed":        ["warmth", true],
-    "family:divorced":       ["composure", true],
+    "family:widowed":        ["warmth", true],
     "evening:traffic":       ["outabout", false],
     "grief:memorial":        ["warmth", true]        // engine.94 memorial response: remembering someone (Personal kind)
   };
@@ -1350,7 +1349,6 @@ function generateCitizensEvents_(ctx) {
     careershift: "caught themselves thinking about the job they didn't take",
     relocation: "thought for a moment about the version of them that stayed",
     incomefitmove: "thought for a moment about the version of them that stayed",
-    divorce: "wondered briefly about the life that marriage might have been",
     retirement: "missed the working years for a heartbeat, then let it go",
     businessclose: "passed a shuttered storefront and thought of the business that didn't make it"
   };
@@ -1358,7 +1356,6 @@ function generateCitizensEvents_(ctx) {
     careershift: ["career", "work", "promotion", "job", "postcareer"],
     relocation: ["relocation", "move", "housing", "displacement", "neighborhood"],
     incomefitmove: ["relocation", "move", "housing", "displacement", "economy"],
-    divorce: ["divorce", "wedding", "marriage", "anniversary"],
     retirement: ["retirement", "postcareer", "work"],
     businessclose: ["business"]
   };
@@ -2738,7 +2735,6 @@ function generateCitizensEvents_(ctx) {
     "the landlord's notice on the door put the whole household around the table with the numbers|crisis",
     "a kitchen fire scorched one wall and rearranged everyone's week — nobody hurt, nothing the same|crisis",
     "word of a windfall reached the house and the whole household argued joyfully about what it meant|celebration",
-    "an anniversary dinner grew past the table until half the block seemed to be in the kitchen|celebration",
     "a relative's surprise visit turned an ordinary week into the one they'd all retell|celebration",
     "good news landed for one of them and the whole house wore it for days|celebration"
   ];
@@ -3281,14 +3277,11 @@ function generateCitizensEvents_(ctx) {
     // Ledger as family.parenting rows (bedtime + school-drawing age-gated
     // 31-40, dinner-question age-neutral) so ALL parenting content lives in
     // one editable place. kidCount stays — condScopes.children reads it.
-    if (maritalLc === "married") {
-      pool.push(makeEntry("split the last of the coffee and the morning's plans with their partner", mergeTags(["source:familyLife", "family:partner"], calendarTags), 1.0, false));
-      pool.push(makeEntry("caught their partner humming the song they'd had stuck all day", mergeTags(["source:familyLife", "family:partner"], calendarTags), 0.95, false));
-    } else if (maritalLc === "widowed") {
+    // Builder 2026-11-21: "Nothing is hard coded about marriage or divorce" — marriage and divorce come
+    // only from the bond engine; the married / divorced color lines are gone. Widowed stays (a death).
+    if (maritalLc === "widowed") {
       pool.push(makeEntry("set two cups out by habit and let the second one stay", mergeTags(["source:familyLife", "family:widowed"], calendarTags), 1.0, false));
       pool.push(makeEntry("told a story their late partner used to tell, and told it right", mergeTags(["source:familyLife", "family:widowed"], calendarTags), 0.95, false));
-    } else if (maritalLc === "divorced") {
-      pool.push(makeEntry("handled a logistics call with an ex — civil, brief, done", mergeTags(["source:familyLife", "family:divorced"], calendarTags), 0.9, false));
     }
 
     // S280 column-conditioned depth: money texture aimed by actual means, not

@@ -2589,17 +2589,13 @@ function processGCCourtship_(ctx) {
     if (!(gAgeM > 0) || pAgeM < wedMin || pAgeM > wedMax || gAgeM < wedMin || gAgeM > wedMax) continue;
 
     var spId = nextPopIdLocked_(ctx); // engine.90 shared allocator
-    // engine.339 (builder 2026-11-20): "No one cane ever change their name on GC unless it's a female becoming a males
-    // spouse" — courtship pairs the other sex, so a woman takes his surname (her own kept as MaidenName); a man keeps his
-    var ownLastM = String(gRowM[gL] || '').trim();
-    var takesName = String(gRowM[gSex] || '').trim().toLowerCase() === 'female';
-    var last = takesName ? (P.name.split(' ').slice(-1)[0] || '') : ownLastM;
+    var last = P.name.split(' ').slice(-1)[0] || '';
     var spFirst = String(gRowM[gF]).trim();
     var spName = spFirst + ' ' + last;
     var newRow = new Array(header.length).fill('');
     var setC = function(n, v) { var i2 = idxCol(n); if (i2 >= 0) newRow[i2] = v; };
     setC('POPID', spId); setC('First', spFirst); setC('Last', last);
-    setC('MaidenName', takesName ? ownLastM : '');
+    setC('MaidenName', String(gRowM[gL] || '').trim());
     setC('Tier', 4); setC('RoleType', (gOcc >= 0 && gRowM[gOcc]) || 'Service worker');
     setC('ClockMode', 'ENGINE'); setC('Status', 'Active');
     setC('BirthYear', simYear - gAgeM); setC('OrginCity', 'Oakland');

@@ -33,23 +33,46 @@ pointers:
 3. **Initiatives merge.** A ripple from an initiative with more than one target hood carries a blank neighborhood (`applyInitiativeImplementationEffects.js:764`); the builder clusters by causeType|hood, so every multi-hood initiative in a Cycle becomes one citywide seed.
 4. **SeedID read as a number.** The id is an 8-char hex hash (`contractSeedHash_`). The append writes it through `setValues`, which parses digits-e-digits (`97e00012`) as a number and all-digit ids as numbers (leading zeros lost). The C113 row reads back `9.70E+13`. Readers that key on the id (`buildLivesSlice` covered keys, `/sift` seedId) lose it.
 
-## Read-before (2026-11-21, engine-sheet — Task 1)
+## Read-before (2026-11-21, engine-sheet — Task 1, corrected same day)
 
-Every `recordRipple_` producer, by causeType, with the scale its magnitude carries. None carries a rank field; the magnitude is the only number the builder sees.
+Every ripple producer — the literal `recordRipple_` callers **and** the `recordHookRipple_` callers (`utilities/rippleLedger.js:104`, magnitude = `hook.severity`) — with the rank its magnitude already carries. Live counts are Ripple_Ledger C110–C116 (510 rows).
 
-| Scale | causeType (effectType) → magnitude | Reads as |
-|---|---|---|
-| Fixed tag 0.05 | chaos-event, fame-event (rise, tier-climb, tier-decay), bond-event (marriage, divorce), weather-event (storm/flood/heat-wave via WEATHER_SALIENCE.MAJOR_MAGNITUDE, heat-wave-health), transit-event (service-disruption, gridlock), crisis-event onset/peak | all major today |
-| Fixed tag 0.01–0.02 | faith-event (0.01; crisis_response 0.02), faith-join 0.01, youth-event 0.02, city-event 0.02, lifestyle-sighting 0.01, crisis-event resolved 0.02 | all texture today |
-| Intensity | initiative-implementation (`intensity`, one per initiative, 0–1+), initiative (rippleStrength +1.0 / −0.6; carryover strength) | 1.0 texture, 0.05–0.9 major |
-| Points / delta | approval-shift (`ch.delta`), economic-event (ripple points; business-closure fixed −25/−40), neighborhood-fold (folded magnitudes), edition-coverage (sentiment boost), coverage-reaction (`e.rating`), sports sentiment (summed) | by size |
-| Head-count | sports game-night (citizens touched), game-night-household, game-night-texture | clears 3 on any game night |
-| Hook severity / tier | relocation-pressure (`biggest` trajectory value, 5–7), crime (`crimeMaxSpikes`, the ladder level) | clears 3 on any trajectory |
+| Kind | Magnitude | Rank the code already holds | C110–C116 rows |
+|---|---|---|---|
+| Authored tag: chaos-event, fame-event, bond-event, weather-event, transit-event (service-disruption, gridlock, game-day-crowds), crisis-event, faith-event, faith-join, youth-event, city-event, lifestyle-sighting | 0.05 / 0.1 or 0.01–0.02 | **Yes — the tag is the class.** 0.05 is written as "solo-major" (`chaosCarsEngine.js:815`, `bondEngine.js:2493`, `generateCitizensEvents.js:4004`, `WEATHER_SALIENCE.MAJOR_MAGNITUDE` `applyWeatherModel.js:160`); 0.01–0.02 as texture (`faithEventsEngine.js:181`, `runYouthEngine.js:485`). Crisis onset/peak 0.05, resolved 0.02 (`generateCrisisBuckets.js:75`). Chaos is gated at emit: consequence-class citizen outcomes and narrative-seeded (high-severity) business/hood hits only (`chaosCarsEngine.js:822,844`). fame-permanent 0.1 | 13 chaos, 45 fame, 1 crisis, 10 transit, 41 faith/join, 25 city, 22 sighting; 0 weather, 0 bond, 0 youth |
+| Hook severity: migration, trajectory, household, seat-filled, left-office, approval-ceiling, challenger-campaign, demotion | 4–8 | **A ladder, no bar.** Severity per hook type (`migrationTrackingEngine.js:48-51`: return 4, relocated 5, forced 7, exodus 8; `neighborhoodTrajectoryEngine.js:41-44`: rising 5, cooling 6, boom 7, housing-pressure 7). Copied to hook priority (`storyHook.js:1434`); no reader thresholds it | 85 migration, 70 trajectory; 0 household, 0 civic hooks |
+| Initiative intensity: initiative-implementation, initiative | phase intensity × upkeep; ripple strength +1.0 / −0.6 | **Yes.** `applyInitiativeImplementationEffects.js:722` fires `initiative-active` at \|intensity\| ≥ 0.8 and `:734` `initiative-stalled` below 0 | 48 implementation, 6 initiative |
+| Points: economic-event | impact table 4–25 (`economicRippleEngine.js` types), closure fixed −25/−40 | No bar (MAJOR_LAYOFFS is a name, not a threshold) | 33 |
+| Points: approval-shift, coverage-reaction | approval delta −4..7; coverage rating ±3..5 | No bar | 51, 3 |
+| Fractional: edition-coverage, neighborhood-fold, sports sentiment | 0.003–0.136 | No bar beyond today's 0.05 arm | 14, 14, 13 |
+| Head-count: sports game-night, game-night-household, game-night-texture | citizens touched 1–69 | None — a count of who was drawn, not the size of the game | 14 |
+| Crime ladder: crime | `crimeMaxSpikes` (emits only at ≥ 2; 3 = wave, `applyCityDynamics.js:1588-1606`) | **Yes** — level 3 is the wave | 0 |
 
 Also found:
-- **Crime is a third merge case.** `neighborhood: crimeHoodsAtTwo.join('|')` — one ripple naming several hoods as a pipe string; `contractSeedNormHood_` keys it as one family. Not in the plan's finding 3 (initiative-implementation, blank neighborhood).
-- **SeedID readers.** Every reader keys on the id as read back: `buildLivesSlice.js:318` (covered keys `seed:<id>:<cycle>:<pop>`), `beatSliceKit.js:151`, `buildEconomicSlice.js:262`, `sportsSubstrate.js:386`, `citizen-signal-detector.js:157`, `validatePriorityEngine.js:74`. All take the sheet's value verbatim, so a numeric-parsed id breaks them the same way. `lib/sheets.js` writes RAW; the loss is in Apps Script `setValues` on the Phase-10 append.
-- **No producer carries its own rank.** The per-kind bar in Task 2 has to be a per-kind table in the builder, set from each scale above — not read from the ripple.
+- **SeedID readers.** Every reader keys on the id as read back: `buildLivesSlice.js:318` (covered keys `seed:<id>:<cycle>:<pop>`), `beatSliceKit.js:151`, `buildEconomicSlice.js:262`, `sportsSubstrate.js:386`, `citizen-signal-detector.js:157`, `validatePriorityEngine.js:74`. All take the sheet's value verbatim. `lib/sheets.js` writes RAW; the loss is Apps Script `setValues` on the Phase-10 append.
+- **Crime's pipe-joined hood is not a merge.** One ripple names several hoods as `A|B`; `contractSeedNormHood_` (`buildContractSeeds.js:234`) strips it to one key for that one ripple. (Retracts the first-pass claim.)
+- **The cluster-count arm** (≥3 effects → major) is one bar for every kind: 29 faith community_program rows, 33 fame tier-climbs and 78 relocations reach major by volume in a hood.
+- 0 bond-event rows in seven Cycles → gap log, not this job.
+
+## Task 2 design — the bar per unit
+
+The class is decided per **unit group** (`contractSeedUnit_`, engine.334), so a sports seed's sentiment and its head-count never share a bar. A seed is major when any unit group is major (unchanged rule). Table `CONTRACT_SEED_CLASS` by causeType, effectType override where a cause mixes units:
+
+| Rule | Kinds | Major when | Source |
+|---|---|---|---|
+| tag | the authored-tag kinds above | \|m\| ≥ 0.05 | code (the producers' solo-major tag) — same as today |
+| intensity | initiative-implementation, initiative | \|m\| ≥ 0.8 or m < 0 | code (`initiative-active` / `initiative-stalled` triggers) |
+| crime | crime | m ≥ 3 (the wave) | code |
+| hook | the hook kinds above | severity ≥ 7 | **mine** — forced move, exodus, boom, housing pressure; a single move or a hood turning is texture |
+| points | economic-event | \|m\| ≥ 10 (closure always) | **mine** — the impact table's large events (closure, layoffs, investment, disaster, construction, holiday) |
+| points | approval-shift, coverage-reaction | \|m\| ≥ 3 | **mine** — today's number kept |
+| fraction | edition-coverage, neighborhood-fold, sports sentiment and venue | \|m\| ≥ 0.05 | **mine** — today's number kept |
+| count | game-night, game-night-household, game-night-texture | never decides class | **mine** — the game's sentiment unit decides |
+
+- **Cluster-count arm removed** — volume in a hood is not size for its kind (builder 11-08: kinds compete by content, not by number). Every flip it causes is listed in the replay.
+- **Unlisted kind:** texture, one `Logger.log` line naming it; a test enumerates every producer causeType (literal + hook callers) against the table and fails on a gap.
+- Signature: `contractSeedIsMajor_(unitGroup)` — one caller (`buildContractSeeds.js:594-596`) and the test file.
+- **Replay** (before Task 3, which changes the cluster key the SeedID hashes): `--old` pinned to the pre-cut commit; per seed, the arm that made it major (old: count / ≥3 / fraction; new: the rule); per-Cycle major/texture totals (class feeds the next Cycle's hood seed weight through the Phase-9 carry). Kinds with no rows in the window are covered by tests and named "no rows" in the list.
 
 ## Tasks
 
@@ -77,5 +100,6 @@ Also found:
 
 ## Changelog
 
+- 2026-11-21 (engine-sheet) — Task 1 corrected (advisor): hook-ripple producers added; the tags and the initiative intensity already carry a rank; crime pipe-hood retracted as a merge case. Task 2 design written; codex plan review next.
 - 2026-11-21 (engine-sheet) — Task 1 done: producer scales table, crime pipe-hood merge case, SeedID readers listed. No code touched.
 - 2026-11-08 (engine-sheet) — Created on the builder's word from the engine.334 report; findings 1–4 from the engine.334 read-before, replay and G-ES14.

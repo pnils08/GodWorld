@@ -1,0 +1,369 @@
+C110 GENERAL West Oakland  texture → major  | retail/sentiment/nightlife +1
+   old: no arm
+   new: retail/sentiment/nightlife 1 ×1 [atOrBelowZero 0.8] → major
+C110 GENERAL Fruitvale  major → texture  | retail/traffic/sentiment +0.2
+   old: retail/traffic/sentiment 0.2 in [0.05,1)
+   new: retail/traffic/sentiment 0.2 ×1 [atOrBelowZero 0.8] → texture
+C110 GENERAL West Oakland  major → texture  | NEIGHBORHOOD_RISING +5
+   old: NEIGHBORHOOD_RISING 5 ≥ 3
+   new: NEIGHBORHOOD_RISING 5 ×1 [at 7] → texture
+C110 GENERAL Adams Point  major → texture  | NEIGHBORHOOD_COOLING +6
+   old: NEIGHBORHOOD_COOLING 6 ≥ 3
+   new: NEIGHBORHOOD_COOLING 6 ×1 [at 7] → texture
+C110 GENERAL Chinatown  major → texture  | NEIGHBORHOOD_RISING +5
+   old: NEIGHBORHOOD_RISING 5 ≥ 3
+   new: NEIGHBORHOOD_RISING 5 ×1 [at 7] → texture
+C110 GENERAL Glenview  major → texture  | NEIGHBORHOOD_COOLING +6
+   old: NEIGHBORHOOD_COOLING 6 ≥ 3
+   new: NEIGHBORHOOD_COOLING 6 ×1 [at 7] → texture
+C110 GENERAL Ivy Hill  major → texture  | NEIGHBORHOOD_COOLING +6
+   old: NEIGHBORHOOD_COOLING 6 ≥ 3
+   new: NEIGHBORHOOD_COOLING 6 ×1 [at 7] → texture
+C110 GENERAL San Antonio  major → texture  | NEIGHBORHOOD_COOLING +6
+   old: NEIGHBORHOOD_COOLING 6 ≥ 3
+   new: NEIGHBORHOOD_COOLING 6 ×1 [at 7] → texture
+C110 COMMUNITY West Oakland  major → texture  | CITIZEN_RELOCATED ×15 (15 related effects this cycle)
+   old: count 15
+   new: CITIZEN_RELOCATED 5 ×15 [at 7] → texture
+C110 COMMUNITY East Oakland  major → texture  | CITIZEN_RELOCATED +5
+   old: CITIZEN_RELOCATED 5 ≥ 3
+   new: CITIZEN_RELOCATED 5 ×1 [at 7] → texture
+C110 COMMUNITY Chinatown  major → texture  | CITIZEN_RELOCATED ×3 (3 related effects this cycle)
+   old: count 3
+   new: CITIZEN_RELOCATED 5 ×3 [at 7] → texture
+C110 COMMUNITY Fruitvale  major → texture  | CITIZEN_RELOCATED +5
+   old: CITIZEN_RELOCATED 5 ≥ 3
+   new: CITIZEN_RELOCATED 5 ×1 [at 7] → texture
+C110 COMMUNITY Grand Lake  major → texture  | CITIZEN_RELOCATED +5
+   old: CITIZEN_RELOCATED 5 ≥ 3
+   new: CITIZEN_RELOCATED 5 ×1 [at 7] → texture
+C110 ECONOMIC West Oakland  major → texture  | carryover -8
+   old: carryover -8 ≥ 3
+   new: carryover 0 ×0 [at 10] → texture
+C110 ECONOMIC Downtown  major → texture  | sector-impact:services/business +5
+   old: sector-impact:services/business 5 ≥ 3
+   new: sector-impact:services/business 5 ×1 [at 10] → texture
+C110 ECONOMIC Uptown  major → texture  | sector-impact:arts/entertainment/food +6
+   old: sector-impact:arts/entertainment/food 6 ≥ 3
+   new: sector-impact:arts/entertainment/food 6 ×1 [at 10] → texture
+C111 GENERAL West Oakland  texture → major  | retail/sentiment/nightlife +1
+   old: no arm
+   new: retail/sentiment/nightlife 1 ×1 [atOrBelowZero 0.8] → major
+C111 GENERAL Fruitvale  major → texture  | retail/traffic/sentiment +0.2
+   old: retail/traffic/sentiment 0.2 in [0.05,1)
+   new: retail/traffic/sentiment 0.2 ×1 [atOrBelowZero 0.8] → texture
+C111 GENERAL Downtown  major → texture  | retail/sentiment/nightlife +0.05
+   old: retail/sentiment/nightlife 0.05 in [0.05,1)
+   new: retail/sentiment/nightlife 0.05 ×1 [atOrBelowZero 0.8] → texture
+C111 GENERAL Brooklyn  major → texture  | NEIGHBORHOOD_COOLING +6
+   old: NEIGHBORHOOD_COOLING 6 ≥ 3
+   new: NEIGHBORHOOD_COOLING 6 ×1 [at 7] → texture
+C111 COMMUNITY West Oakland  major → texture  | CITIZEN_RELOCATED ×8 (8 related effects this cycle)
+   old: count 8
+   new: CITIZEN_RELOCATED 5 ×8 [at 7] → texture
+C111 COMMUNITY Lake Merritt  major → texture  | CITIZEN_RELOCATED +5
+   old: CITIZEN_RELOCATED 5 ≥ 3
+   new: CITIZEN_RELOCATED 5 ×1 [at 7] → texture
+C111 COMMUNITY Jack London  major → texture  | CITIZEN_RELOCATED ×3 (3 related effects this cycle)
+   old: count 3
+   new: CITIZEN_RELOCATED 5 ×3 [at 7] → texture
+C111 COMMUNITY East Oakland  major → texture  | CITIZEN_RELOCATED +5
+   old: CITIZEN_RELOCATED 5 ≥ 3
+   new: CITIZEN_RELOCATED 5 ×1 [at 7] → texture
+C111 COMMUNITY Fruitvale  major → texture  | CITIZEN_RELOCATED +5
+   old: CITIZEN_RELOCATED 5 ≥ 3
+   new: CITIZEN_RELOCATED 5 ×1 [at 7] → texture
+C111 ECONOMIC Jack London  major → texture  | carryover +23 (2 related effects this cycle)
+   old: carryover 23 ≥ 3
+   new: carryover 0 ×0 [at 10] → texture
+C111 ECONOMIC West Oakland  major → texture  | carryover -8
+   old: carryover -8 ≥ 3
+   new: carryover 0 ×0 [at 10] → texture
+C111 ECONOMIC Downtown  major → texture  | carryover +5
+   old: carryover 5 ≥ 3
+   new: carryover 0 ×0 [at 10] → texture
+C112 GENERAL West Oakland  texture → major  | retail/sentiment/nightlife +1
+   old: no arm
+   new: retail/sentiment/nightlife 1 ×1 [atOrBelowZero 0.8] → major
+C112 GENERAL Fruitvale  major → texture  | retail/traffic/sentiment +0.2
+   old: retail/traffic/sentiment 0.2 in [0.05,1)
+   new: retail/traffic/sentiment 0.2 ×1 [atOrBelowZero 0.8] → texture
+C112 GENERAL Downtown  major → texture  | retail/sentiment/nightlife +0.05
+   old: retail/sentiment/nightlife 0.05 in [0.05,1)
+   new: retail/sentiment/nightlife 0.05 ×1 [atOrBelowZero 0.8] → texture
+C112 GENERAL Grand Lake  major → texture  | retail/sentiment/nightlife +0.05
+   old: retail/sentiment/nightlife 0.05 in [0.05,1)
+   new: retail/sentiment/nightlife 0.05 ×1 [atOrBelowZero 0.8] → texture
+C112 CIVIC West Oakland  texture → major  | unemployment_modifier/retail_modifier/sentiment_modifier +1
+   old: no arm
+   new: unemployment_modifier/retail_modifier/sentiment_modifier 1 ×1 [birth] → major
+C112 GENERAL Chinatown  major → texture  | NEIGHBORHOOD_RISING +5
+   old: NEIGHBORHOOD_RISING 5 ≥ 3
+   new: NEIGHBORHOOD_RISING 5 ×1 [at 7] → texture
+C112 GENERAL Eastlake  major → texture  | NEIGHBORHOOD_COOLING +6
+   old: NEIGHBORHOOD_COOLING 6 ≥ 3
+   new: NEIGHBORHOOD_COOLING 6 ×1 [at 7] → texture
+C112 GENERAL KONO  major → texture  | NEIGHBORHOOD_RISING +5
+   old: NEIGHBORHOOD_RISING 5 ≥ 3
+   new: NEIGHBORHOOD_RISING 5 ×1 [at 7] → texture
+C112 COMMUNITY West Oakland  major → texture  | CITIZEN_RELOCATED ×7 (7 related effects this cycle)
+   old: count 7
+   new: CITIZEN_RELOCATED 5 ×7 [at 7] → texture
+C112 COMMUNITY KONO  major → texture  | CITIZEN_RELOCATED +5
+   old: CITIZEN_RELOCATED 5 ≥ 3
+   new: CITIZEN_RELOCATED 5 ×1 [at 7] → texture
+C112 COMMUNITY Jack London  major → texture  | CITIZEN_RELOCATED ×2 (2 related effects this cycle)
+   old: CITIZEN_RELOCATED 5 ≥ 3
+   new: CITIZEN_RELOCATED 5 ×2 [at 7] → texture
+C112 COMMUNITY East Oakland  major → texture  | CITIZEN_RELOCATED +5
+   old: CITIZEN_RELOCATED 5 ≥ 3
+   new: CITIZEN_RELOCATED 5 ×1 [at 7] → texture
+C112 COMMUNITY Chinatown  major → texture  | CITIZEN_RELOCATED ×2 (2 related effects this cycle)
+   old: CITIZEN_RELOCATED 5 ≥ 3
+   new: CITIZEN_RELOCATED 5 ×2 [at 7] → texture
+C112 COMMUNITY Fruitvale  major → texture  | CITIZEN_RELOCATED ×2 (2 related effects this cycle)
+   old: CITIZEN_RELOCATED 5 ≥ 3
+   new: CITIZEN_RELOCATED 5 ×2 [at 7] → texture
+C112 ECONOMIC Jack London  major → texture  | carryover +15
+   old: carryover 15 ≥ 3
+   new: carryover 0 ×0 [at 10] → texture
+C112 ECONOMIC West Oakland  major → texture  | carryover -8
+   old: carryover -8 ≥ 3
+   new: carryover 0 ×0 [at 10] → texture
+C112 ECONOMIC Downtown  major → texture  | sector-impact:services/business +10 (2 related effects this cycle)
+   old: sector-impact:services/business 10 ≥ 3
+   new: sector-impact:services/business 5 ×1 [at 10] → texture
+C112 ECONOMIC Citywide  major → texture  | carryover -4
+   old: carryover -4 ≥ 3
+   new: carryover 0 ×0 [at 10] → texture
+C113 GENERAL West Oakland  texture → major  | retail/sentiment/nightlife +1
+   old: no arm
+   new: retail/sentiment/nightlife 1 ×1 [atOrBelowZero 0.8] → major
+C113 GENERAL Fruitvale  major → texture  | retail/traffic/sentiment +0.2
+   old: retail/traffic/sentiment 0.2 in [0.05,1)
+   new: retail/traffic/sentiment 0.2 ×1 [atOrBelowZero 0.8] → texture
+C113 GENERAL Downtown  major → texture  | retail/sentiment/nightlife +0.05
+   old: retail/sentiment/nightlife 0.05 in [0.05,1)
+   new: retail/sentiment/nightlife 0.05 ×1 [atOrBelowZero 0.8] → texture
+C113 GENERAL Grand Lake  major → texture  | retail/sentiment/nightlife +0.05
+   old: retail/sentiment/nightlife 0.05 in [0.05,1)
+   new: retail/sentiment/nightlife 0.05 ×1 [atOrBelowZero 0.8] → texture
+C113 GENERAL Laurel  major → texture  | NEIGHBORHOOD_COOLING +6
+   old: NEIGHBORHOOD_COOLING 6 ≥ 3
+   new: NEIGHBORHOOD_COOLING 6 ×1 [at 7] → texture
+C113 GENERAL East Oakland  major → texture  | NEIGHBORHOOD_COOLING +6
+   old: NEIGHBORHOOD_COOLING 6 ≥ 3
+   new: NEIGHBORHOOD_COOLING 6 ×1 [at 7] → texture
+C113 COMMUNITY Chinatown  major → texture  | CITIZEN_RELOCATED +5
+   old: CITIZEN_RELOCATED 5 ≥ 3
+   new: CITIZEN_RELOCATED 5 ×1 [at 7] → texture
+C113 COMMUNITY West Oakland  major → texture  | CITIZEN_RELOCATED ×4 (4 related effects this cycle)
+   old: count 4
+   new: CITIZEN_RELOCATED 5 ×4 [at 7] → texture
+C113 COMMUNITY Grand Lake  major → texture  | CITIZEN_RELOCATED +5
+   old: CITIZEN_RELOCATED 5 ≥ 3
+   new: CITIZEN_RELOCATED 5 ×1 [at 7] → texture
+C113 ECONOMIC Downtown  major → texture  | carryover +5
+   old: carryover 5 ≥ 3
+   new: carryover 0 ×0 [at 10] → texture
+C113 ECONOMIC Citywide  major → texture  | carryover -4
+   old: carryover -4 ≥ 3
+   new: carryover 0 ×0 [at 10] → texture
+C113 ECONOMIC Ivy Hill  major → texture  | sector-impact:services/retail -8
+   old: sector-impact:services/retail -8 ≥ 3
+   new: sector-impact:services/retail -8 ×1 [at 10] → texture
+C114 GENERAL West Oakland  texture → major  | retail/sentiment/nightlife +1
+   old: no arm
+   new: retail/sentiment/nightlife 1 ×1 [atOrBelowZero 0.8] → major
+C114 GENERAL Fruitvale  major → texture  | retail/traffic/sentiment +0.2
+   old: retail/traffic/sentiment 0.2 in [0.05,1)
+   new: retail/traffic/sentiment 0.2 ×1 [atOrBelowZero 0.8] → texture
+C114 GENERAL Rockridge  major → texture  | NEIGHBORHOOD_RISING +5
+   old: NEIGHBORHOOD_RISING 5 ≥ 3
+   new: NEIGHBORHOOD_RISING 5 ×1 [at 7] → texture
+C114 GENERAL Dimond  major → texture  | NEIGHBORHOOD_COOLING +6
+   old: NEIGHBORHOOD_COOLING 6 ≥ 3
+   new: NEIGHBORHOOD_COOLING 6 ×1 [at 7] → texture
+C114 COMMUNITY West Oakland  major → texture  | CITIZEN_RELOCATED ×2 (2 related effects this cycle)
+   old: CITIZEN_RELOCATED 5 ≥ 3
+   new: CITIZEN_RELOCATED 5 ×2 [at 7] → texture
+C114 COMMUNITY Rockridge  major → texture  | CITIZEN_RELOCATED +5
+   old: CITIZEN_RELOCATED 5 ≥ 3
+   new: CITIZEN_RELOCATED 5 ×1 [at 7] → texture
+C114 COMMUNITY East Oakland  major → texture  | CITIZEN_RELOCATED +5
+   old: CITIZEN_RELOCATED 5 ≥ 3
+   new: CITIZEN_RELOCATED 5 ×1 [at 7] → texture
+C114 ECONOMIC Ivy Hill  major → texture  | sector-impact:services/retail -16 (2 related effects this cycle)
+   old: sector-impact:services/retail -16 ≥ 3
+   new: sector-impact:services/retail -8 ×1 [at 10] → texture
+C114 ECONOMIC Downtown  major → texture  | carryover +5
+   old: carryover 5 ≥ 3
+   new: carryover 0 ×0 [at 10] → texture
+C114 ECONOMIC Uptown  major → texture  | sector-impact:arts/entertainment/food +6
+   old: sector-impact:arts/entertainment/food 6 ≥ 3
+   new: sector-impact:arts/entertainment/food 6 ×1 [at 10] → texture
+C115 GENERAL West Oakland  texture → major  | retail/sentiment/nightlife +1
+   old: no arm
+   new: retail/sentiment/nightlife 1 ×1 [atOrBelowZero 0.8] → major
+C115 GENERAL Fruitvale  major → texture  | retail/traffic/sentiment +0.2
+   old: retail/traffic/sentiment 0.2 in [0.05,1)
+   new: retail/traffic/sentiment 0.2 ×1 [atOrBelowZero 0.8] → texture
+C115 GENERAL Grand Lake  major → texture  | retail/sentiment/nightlife +0.15
+   old: retail/sentiment/nightlife 0.15 in [0.05,1)
+   new: retail/sentiment/nightlife 0.15 ×1 [atOrBelowZero 0.8] → texture
+C115 GENERAL Laurel  major → texture  | NEIGHBORHOOD_COOLING +6
+   old: NEIGHBORHOOD_COOLING 6 ≥ 3
+   new: NEIGHBORHOOD_COOLING 6 ×1 [at 7] → texture
+C115 GENERAL KONO  major → texture  | NEIGHBORHOOD_RISING +5
+   old: NEIGHBORHOOD_RISING 5 ≥ 3
+   new: NEIGHBORHOOD_RISING 5 ×1 [at 7] → texture
+C115 COMMUNITY West Oakland  major → texture  | CITIZEN_RELOCATED ×4 (4 related effects this cycle)
+   old: count 4
+   new: CITIZEN_RELOCATED 5 ×4 [at 7] → texture
+C115 COMMUNITY KONO  major → texture  | CITIZEN_RELOCATED ×3 (3 related effects this cycle)
+   old: count 3
+   new: CITIZEN_RELOCATED 5 ×3 [at 7] → texture
+C115 COMMUNITY Chinatown  major → texture  | CITIZEN_RELOCATED +5
+   old: CITIZEN_RELOCATED 5 ≥ 3
+   new: CITIZEN_RELOCATED 5 ×1 [at 7] → texture
+C115 COMMUNITY Lake Merritt  major → texture  | CITIZEN_RELOCATED +5
+   old: CITIZEN_RELOCATED 5 ≥ 3
+   new: CITIZEN_RELOCATED 5 ×1 [at 7] → texture
+C115 COMMUNITY Fruitvale  major → texture  | CITIZEN_RELOCATED +5
+   old: CITIZEN_RELOCATED 5 ≥ 3
+   new: CITIZEN_RELOCATED 5 ×1 [at 7] → texture
+C115 COMMUNITY Downtown  major → texture  | CITIZEN_RELOCATED ×2 (2 related effects this cycle)
+   old: CITIZEN_RELOCATED 5 ≥ 3
+   new: CITIZEN_RELOCATED 5 ×2 [at 7] → texture
+C115 ECONOMIC Ivy Hill  major → texture  | carryover -16 (2 related effects this cycle)
+   old: carryover -16 ≥ 3
+   new: carryover 0 ×0 [at 10] → texture
+C115 ECONOMIC Baylight District  major → texture  | sector-impact:services/retail -8
+   old: sector-impact:services/retail -8 ≥ 3
+   new: sector-impact:services/retail -8 ×1 [at 10] → texture
+C116 SPORTS Citywide  major → texture  | sentiment +0.04; game-night +16; game-night-household +1; game-night-texture +29 (5 related effects this cycle)
+   old: count 5
+   new: sentiment 0.038 ×2 [at 0.05] → texture; game-night 16 ×1 [never] → texture; game-night-household 1 ×1 [never] → texture; game-night-texture 29 ×1 [never] → texture
+C116 GENERAL West Oakland  texture → major  | retail/sentiment/nightlife +1
+   old: no arm
+   new: retail/sentiment/nightlife 1 ×1 [atOrBelowZero 0.8] → major
+C116 GENERAL Fruitvale  major → texture  | retail/traffic/sentiment +0.5
+   old: retail/traffic/sentiment 0.5 in [0.05,1)
+   new: retail/traffic/sentiment 0.5 ×1 [atOrBelowZero 0.8] → texture
+C116 GENERAL Piedmont Ave  major → texture  | NEIGHBORHOOD_RISING +5
+   old: NEIGHBORHOOD_RISING 5 ≥ 3
+   new: NEIGHBORHOOD_RISING 5 ×1 [at 7] → texture
+C116 COMMUNITY Piedmont Ave  major → texture  | CITIZEN_RELOCATED ×4 (4 related effects this cycle)
+   old: count 4
+   new: CITIZEN_RELOCATED 5 ×4 [at 7] → texture
+C116 COMMUNITY Lake Merritt  major → texture  | CITIZEN_RELOCATED +5
+   old: CITIZEN_RELOCATED 5 ≥ 3
+   new: CITIZEN_RELOCATED 5 ×1 [at 7] → texture
+C116 COMMUNITY KONO  major → texture  | CITIZEN_RELOCATED +5
+   old: CITIZEN_RELOCATED 5 ≥ 3
+   new: CITIZEN_RELOCATED 5 ×1 [at 7] → texture
+C116 ECONOMIC Baylight District  major → texture  | carryover -8
+   old: carryover -8 ≥ 3
+   new: carryover 0 ×0 [at 10] → texture
+C116 ECONOMIC Ivy Hill  major → texture  | carryover -16 (2 related effects this cycle)
+   old: carryover -16 ≥ 3
+   new: carryover 0 ×0 [at 10] → texture
+C116 ECONOMIC Adams Point  major → texture  | sector-impact:services/retail -8
+   old: sector-impact:services/retail -8 ≥ 3
+   new: sector-impact:services/retail -8 ×1 [at 10] → texture
+
+C110–C116: seeds 323, class flips 91
+
+Flips by kind:
+  economic-event major→texture  21
+  initiative texture→major  1
+  initiative-implementation major→texture  13
+  initiative-implementation texture→major  7
+  migration major→texture  31
+  sports major→texture  1
+  trajectory major→texture  17
+
+Per Cycle (major / texture; COMMUNITY+SPORTS majors = the drafter pool):
+  C110  old 37 / 15 (pool 15)   new 23 / 29 (pool 10)
+  C111  old 26 / 15 (pool 9)   new 16 / 25 (pool 4)
+  C112  old 28 / 17 (pool 8)   new 14 / 31 (pool 2)
+  C113  old 27 / 15 (pool 7)   new 17 / 25 (pool 4)
+  C114  old 33 / 15 (pool 11)   new 25 / 23 (pool 8)
+  C115  old 31 / 16 (pool 14)   new 20 / 27 (pool 8)
+  C116  old 32 / 16 (pool 15)   new 24 / 24 (pool 11)
+
+Ripple kinds in the window and their rule:
+  approval-shift / approval/district-sentiment  ×51  at 3
+  chaos-event / deescalated  ×1  at 0.05
+  chaos-event / forced_temporary_closure  ×1  at 0.05
+  chaos-event / lawsuit_served  ×2  at 0.05
+  chaos-event / lost_contract_notice  ×1  at 0.05
+  chaos-event / major_blaze_contained  ×1  at 0.05
+  chaos-event / medical_emergency  ×2  at 0.05
+  chaos-event / power_outage_restored  ×2  at 0.05
+  chaos-event / sanitation_strike_delay  ×1  at 0.05
+  chaos-event / stalled_train  ×1  at 0.05
+  chaos-event / transformer_blowout  ×1  at 0.05
+  chaos-event / workplace_accident  ×2  at 0.05
+  city-event / city-event  ×25  at 0.05
+  coverage-reaction / COMMUNITY coverage reaction  ×1  at 3
+  coverage-reaction / INFRASTRUCTURE coverage reaction  ×1  at 3
+  coverage-reaction / SPORTS coverage reaction  ×1  at 3
+  crisis-event / crisis-onset  ×1  at 0.05
+  economic-event / carryover  ×24  at 10
+  economic-event / sector-impact:arts/entertainment/food  ×2  at 10
+  economic-event / sector-impact:entertainment/food/retail/merchandise  ×1  at 10
+  economic-event / sector-impact:services/business  ×2  at 10
+  economic-event / sector-impact:services/retail  ×4  at 10
+  edition-coverage / sentiment  ×7  at 0.05
+  edition-coverage / traffic/retail/nightlife/publicSpaces/communityEngagement/culturalActivity  ×7  at 0.05
+  faith-event / community_program  ×29  atOrSurge 0.05 / surge 3
+  faith-event / interfaith_dialogue  ×2  atOrSurge 0.05 / surge 3
+  faith-event / outreach  ×2  atOrSurge 0.05 / surge 3
+  faith-event / regular_service  ×2  atOrSurge 0.05 / surge 3
+  faith-join / congregation-growth  ×6  atOrSurge 0.05 / surge 3
+  fame-event / fame-permanent  ×3  at 0.05
+  fame-event / fame-rise  ×9  at 0.05
+  fame-event / tier-climb  ×33  at 0.05
+  initiative / carryover  ×4  birth
+  initiative / sentiment_modifier/community_modifier  ×1  birth
+  initiative / unemployment_modifier/retail_modifier/sentiment_modifier  ×1  birth
+  initiative-implementation / retail/nightlife/traffic/sentiment  ×7  atOrBelowZero 0.8
+  initiative-implementation / retail/sentiment/nightlife  ×13  atOrBelowZero 0.8
+  initiative-implementation / retail/traffic/sentiment  ×7  atOrBelowZero 0.8
+  initiative-implementation / sentiment/communityEngagement/nightlife  ×7  atOrBelowZero 0.8
+  initiative-implementation / sentiment/communityEngagement/publicSpaces  ×7  atOrBelowZero 0.8
+  initiative-implementation / sentiment/communityEngagement/retail  ×7  atOrBelowZero 0.8
+  lifestyle-sighting / sighting  ×22  at 0.05
+  migration / CITIZEN_RELOCATED  ×78  at 7
+  migration / FORCED_MIGRATION  ×3  at 7
+  migration / MASS_EXODUS  ×4  at 7
+  neighborhood-fold / fold-applied/approval-shift  ×7  at 0.05
+  neighborhood-fold / fold-applied/initiative-implementation  ×7  at 0.05
+  sports / game-night  ×7  never
+  sports / game-night-household  ×4  never
+  sports / game-night-texture  ×3  never
+  sports / sentiment  ×12  at 0.05
+  sports / traffic/retail/nightlife/communityEngagement  ×1  at 0.05
+  trajectory / HOUSING_PRESSURE_HIGH  ×18  at 7
+  trajectory / NEIGHBORHOOD_BOOM  ×34  at 7
+  trajectory / NEIGHBORHOOD_COOLING  ×10  at 7
+  trajectory / NEIGHBORHOOD_RISING  ×8  at 7
+  transit-event / game-day-crowds  ×5  at 0.1
+  transit-event / gridlock  ×4  at 0.05
+  transit-event / service-disruption  ×1  at 0.05
+
+Kinds in the table with no rows in the window:
+  bond-event
+  weather-event
+  youth-event
+  crime
+  household
+  seat-filled
+  left-office
+  approval-ceiling
+  challenger-campaign
+  demotion
+  relocation-pressure
+
+Engine_Errors rows the new builder would write: 0

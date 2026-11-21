@@ -19,7 +19,7 @@ Mechanical sub-steps (6):
 --- [2/6] auditPlanTagDrift (informational) ---
   # Plan tag drift audit
   
-  Generated: 2026-11-21T23:31:10.553Z
+  Generated: 2026-11-21T23:32:56.952Z
   Plans scanned: 181
   No frontmatter: 10
   No changelog: 8
@@ -30,16 +30,6 @@ Mechanical sub-steps (6):
   ✓ no drift detected
 
 --- [3/6] ROLLOUT conformance lint (informational) ---
-  # rolloutSweep — APPLY
-  
-  Would move 2 rows:
-    - engine.341  [engine-sheet]
-    - engine.355  [engine-sheet]
-  
-  APPLIED.
-    ROLLOUT_PLAN:    135 → 133 lines (-2)
-    ROLLOUT_ARCHIVE: 2322 → 2331 lines (+9)
-    Rows moved: 2
   ROLLOUT LINT: clean — every row is a sweep-safe pointer within budget.
   ROLLOUT IN HAND: more than one in-progress row per terminal (job model = one):
     engine-sheet: 4 — pipeline.100, pipeline.110, pipeline.113, engine.356
@@ -52,7 +42,8 @@ Mechanical sub-steps (6):
   ✓ every row named in this session's [research-build] commits has its plan updated
 
 --- [5/6] cross-terminal git stack check (read-only) ---
-  ⚠ 40 unpushed commit(s) ahead of origin/main:
+  ⚠ 41 unpushed commit(s) ahead of origin/main:
+    59224f9cd S769 session-end [research/build]: counter bumped, the archive sweep, the close run. Committed locally; push held — engine-sheet's commits are stacked on the same tree.
     51d6f5dbd engine.356 fix-up of 4b1fc3125's record: version cut @202 = stage 67 (the builder cleared the version limit; live re-pulled = the benched manifest first); PIN to @202 / stage 67; the row and the plan changelog, which that commit claimed and did not carry (its script stopped on a stale PIN string after writing DEPLOY_HISTORY). [engine/sheet]
     4b1fc3125 engine.356 LIVE: PROD stage 67 = stage 66 + two files at 16a67a8e9 (builder 2026-11-21: "We can raise the odds a notch and push").
     0ee799677 NEXT[research-build]: reads live in their ROLLOUT rows, not the line. [research/build]

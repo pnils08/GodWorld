@@ -9,6 +9,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
 | engine.339 | How kids are minted: plan rejected and deleted on the builder's word 2026-11-21; its code is not on PROD; what replaces it is his | needs-info | research-build | no plan — deleted 2026-11-21 (git history) |
+| engine.354 | Job label: work rejected; plan, notes and job files deleted on his word 2026-11-21. Stage 62 hire re-key and 170 label cells are live; what follows is his | needs-info | engine-sheet | no plan — deleted 2026-11-21 (git history) |
 | engine.331 | Sports triggers: C115 read, every pitch traces to a word; P3 fails, 142 signed fan lines a week vs 37–74 before — his call | needs-info | engine-sheet | [[../plans/2026-11-05-sports-feed-triggers]] |
 | engine.94 | Memory that fires: C115 B.2 re-read, every hood at 0, 14 defaulted carriers; 24 rows unapplied and the challenger call wait on him | needs-info | engine-sheet | [[../plans/2026-07-31-citizen-memory-perception]] §Status log engine.94 B.3 v3 live reads |
 | civic.47 | Civic autonomy, the one plan (builder 11-01). A1 landed; F7 transit reader live (@173); M1 Mara live 11-03; the rest of the plan is open; A2 waits on his go | needs-info | research-build | [[../plans/2026-10-31-civic-autonomy]] |
@@ -82,7 +83,6 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | pipeline.89 | Every journalist picks (builder 10-25: "All journalists should pick, they are AI"): every wake package gets the live tools the 3 tool seats have, the slice is a tip sheet not the assignment, Rhea is off every path; Ines first, same cut on all 28. First run 2026-10-28 | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 |
 | infrastructure.19 | Oakland week flight made lifelike (builder 11-14). v41: names first, homes on a block, team news at team buildings. Next: his look; joined street unbuilt | in-progress | research-build | [[../../world-view/README]] |
 | engine.350 | Lines move a dial by what they say: LIVE stage 57 @192, tab written 11-18. Next: the recorded items (plan Task 15). Read C117 Sun 2026-11-22 | in-progress | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
-| engine.354 | Job label: work rejected; plan, notes and all job files deleted on his word (11-21). Left live: stage 62 hire re-key, 170 label cells. Next is his word | in-progress | engine-sheet | plan deleted 2026-11-21 (git history) |
 | pipeline.114 | Flagged piece back to its writer: built, reverted 11-20 before live — the gate calls a real page quote fabricated. Next: the gate reads the citizen's page | in-progress | research-build | [[../plans/2026-11-20-flagged-piece-back-to-its-writer]] |
 
 ## 4. Queue — ruled, not started (ready)

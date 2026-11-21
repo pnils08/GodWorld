@@ -33,11 +33,29 @@ pointers:
 3. **Initiatives merge.** A ripple from an initiative with more than one target hood carries a blank neighborhood (`applyInitiativeImplementationEffects.js:764`); the builder clusters by causeType|hood, so every multi-hood initiative in a Cycle becomes one citywide seed.
 4. **SeedID read as a number.** The id is an 8-char hex hash (`contractSeedHash_`). The append writes it through `setValues`, which parses digits-e-digits (`97e00012`) as a number and all-digit ids as numbers (leading zeros lost). The C113 row reads back `9.70E+13`. Readers that key on the id (`buildLivesSlice` covered keys, `/sift` seedId) lose it.
 
+## Read-before (2026-11-21, engine-sheet — Task 1)
+
+Every `recordRipple_` producer, by causeType, with the scale its magnitude carries. None carries a rank field; the magnitude is the only number the builder sees.
+
+| Scale | causeType (effectType) → magnitude | Reads as |
+|---|---|---|
+| Fixed tag 0.05 | chaos-event, fame-event (rise, tier-climb, tier-decay), bond-event (marriage, divorce), weather-event (storm/flood/heat-wave via WEATHER_SALIENCE.MAJOR_MAGNITUDE, heat-wave-health), transit-event (service-disruption, gridlock), crisis-event onset/peak | all major today |
+| Fixed tag 0.01–0.02 | faith-event (0.01; crisis_response 0.02), faith-join 0.01, youth-event 0.02, city-event 0.02, lifestyle-sighting 0.01, crisis-event resolved 0.02 | all texture today |
+| Intensity | initiative-implementation (`intensity`, one per initiative, 0–1+), initiative (rippleStrength +1.0 / −0.6; carryover strength) | 1.0 texture, 0.05–0.9 major |
+| Points / delta | approval-shift (`ch.delta`), economic-event (ripple points; business-closure fixed −25/−40), neighborhood-fold (folded magnitudes), edition-coverage (sentiment boost), coverage-reaction (`e.rating`), sports sentiment (summed) | by size |
+| Head-count | sports game-night (citizens touched), game-night-household, game-night-texture | clears 3 on any game night |
+| Hook severity / tier | relocation-pressure (`biggest` trajectory value, 5–7), crime (`crimeMaxSpikes`, the ladder level) | clears 3 on any trajectory |
+
+Also found:
+- **Crime is a third merge case.** `neighborhood: crimeHoodsAtTwo.join('|')` — one ripple naming several hoods as a pipe string; `contractSeedNormHood_` keys it as one family. Not in the plan's finding 3 (initiative-implementation, blank neighborhood).
+- **SeedID readers.** Every reader keys on the id as read back: `buildLivesSlice.js:318` (covered keys `seed:<id>:<cycle>:<pop>`), `beatSliceKit.js:151`, `buildEconomicSlice.js:262`, `sportsSubstrate.js:386`, `citizen-signal-detector.js:157`, `validatePriorityEngine.js:74`. All take the sheet's value verbatim, so a numeric-parsed id breaks them the same way. `lib/sheets.js` writes RAW; the loss is in Apps Script `setValues` on the Phase-10 append.
+- **No producer carries its own rank.** The per-kind bar in Task 2 has to be a per-kind table in the builder, set from each scale above — not read from the ripple.
+
 ## Tasks
 
 | # | Task | Owner | Status |
 |---|------|-------|--------|
-| 1 | Read-before: each producer's own scale and whether it already carries a rank (hook severity, chaos/crisis tier, migration type, trajectory type, initiative intensity); readers of the SeedID format | es | not started |
+| 1 | Read-before: each producer's own scale and whether it already carries a rank (hook severity, chaos/crisis tier, migration type, trajectory type, initiative intensity); readers of the SeedID format | es | done 2026-11-21 (§Read-before) |
 | 2 | Bar per kind in the builder, from each kind's own scale; replay C110–C114 old vs new, every class change listed for the builder's read | es | not started |
 | 3 | Cluster key carries the initiative (causeId) when the neighborhood is blank — the coverage-reaction pattern | es | not started |
 | 4 | SeedID written so the sheet keeps it as text; existing numeric rows stay as written | es | not started |
@@ -59,4 +77,5 @@ pointers:
 
 ## Changelog
 
+- 2026-11-21 (engine-sheet) — Task 1 done: producer scales table, crime pipe-hood merge case, SeedID readers listed. No code touched.
 - 2026-11-08 (engine-sheet) — Created on the builder's word from the engine.334 report; findings 1–4 from the engine.334 read-before, replay and G-ES14.

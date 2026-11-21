@@ -6,6 +6,10 @@
 #     - writing a test file: Write/Edit/NotebookEdit on *.test.js|mjs|cjs|ts, *.spec.*, a __tests__/ or
 #       __fixtures__/ path, or a shell command that writes to one (redirect, tee, cp/mv, sed -i, heredoc)
 #     - running tests: node <...>.test.*, node --test, npm/pnpm/yarn test, npx jest|mocha|vitest|ava|tap
+#     - hand-running a cron or wake script, or any code that reaches a paid model endpoint (OpenRouter, the
+#       Anthropic / OpenAI / Google model APIs): spend-scan.js reads the command, follows the script's requires,
+#       and refuses on a hit — dry-run flags included (builder 2026-11-21: "yes add, no call openrouter to spend
+#       in a cli session either"). Crons are not tool calls and are untouched.
 #   Unlock: Mike runs `! touch /root/GodWorld/.claude/.test-unlock`; holds 60 minutes from that touch.
 #   Claude may not create or touch it — any command naming it is blocked.
 #   Reading a test file (cat, grep, sed -n) stays free. Git's own pre-commit checks are not tool calls
@@ -30,7 +34,7 @@ except Exception: print('')
 " "$1" 2>/dev/null
 }
 tool="$(field tool_name)"
-block() { echo "BLOCKED (test-guard, 2026-11-20): $1 Tests need Mike's approval; he unlocks with: ! touch $UNLOCK (60 min)." >&2; exit 2; }
+block() { echo "BLOCKED (test-guard, 2026-11-20): $1 Tests, hand-runs of cron scripts and paid model calls need Mike's approval; he unlocks with: ! touch $UNLOCK (60 min)." >&2; exit 2; }
 unlocked() {
   [ -f "$UNLOCK" ] || return 1
   local age=$(( ( $(date +%s) - $(stat -c %Y "$UNLOCK" 2>/dev/null || echo 0) ) / 60 ))
@@ -57,6 +61,13 @@ case "$tool" in
     if printf '%s' "$cmd" | grep -Eq "$TEST_PATH_RE" && printf '%s' "$cmd" | grep -Eq "$WRITE_RE"; then
       unlocked && exit 0
       block "this command writes to a test file."
+    fi
+    # hand-run of a cron / wake script, or code that reaches a paid model endpoint (spend-scan.js)
+    why="$(printf '%s' "$payload" | node "$ROOT/.claude/hooks/spend-scan.js" 2>/dev/null)"; rc=$?
+    if [ "$rc" -ne 0 ]; then
+      unlocked && exit 0
+      [ -z "$why" ] && why="spend-scan failed to run (exit $rc); refused rather than guessed."
+      block "$why"
     fi
     exit 0
     ;;

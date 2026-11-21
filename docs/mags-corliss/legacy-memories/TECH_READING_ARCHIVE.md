@@ -935,3 +935,7 @@ Mike-shared Drive doc `182GQGxrdbOUIc6dO-CJBZzcZ3zthG-Pa` ("The Bay Awakening.tx
 ### research.34 — Micropolis, the open-source SimCity engine (2026-11-21)
 
 Builder ask: what a working sim runs on, against what GodWorld built. `github.com/SimHacker/micropolis` at `c98f6b0` — the engine's eight core files read, never run; GPL v3 with EA's added terms, so nothing copied. File: `docs/research/2026-11-21-micropolis-vs-godworld.md` (watch).
+
+### research.35 — Citybound, the agent-based open city sim (2026-11-21)
+
+Second read on the same builder ask. `github.com/citybound/citybound` at `817de55` (AGPL v3, unfinished since 2020) — household, market, immigration, building and lot files read, never run. File: `docs/research/2026-11-21-citybound-vs-godworld.md` (watch).

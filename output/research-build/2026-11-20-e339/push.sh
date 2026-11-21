@@ -1,5 +1,5 @@
 #!/bin/bash
-# engine.339 push: <bench|prod> — five engine files on top of PROD stage 61 (engine.353's e353.sha256).
+# engine.339 push: <bench|prod> — five engine files on top of PROD stage 62 (engine.354, e354.sha256).
 #   bash output/research-build/2026-11-20-e339/push.sh <bench|prod> <commit> [--dry-run]
 # Pattern: output/engine-sheet/2026-11-20-e353/push.sh. The staged tree is PROD + this commit's diff + the 2026-11-08 intake-die
 # deletion that never shipped (cdf7ed12a's intake hunk, 6ead67356's utilities/citizenDerivation.js — builder 11-08 "Delete it"):
@@ -17,14 +17,14 @@ PROD_ID=1hL59VnByrXfWdz6EKZZQ1ss8DH1PFfDT9vVDvmjqHY_pwLyTB_N1iKW5
 BENCH_ID=1gbJmGeDilxIhe25TC8SrSei89uJTEgVYgN2aOClEHHKJiykADzPVAIC2
 BENCH_DEP=AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC
 OUT=/root/GodWorld/output/research-build/2026-11-20-e339; MAN=$OUT/e339.sha256
-BASEMAN=/root/GodWorld/output/engine-sheet/2026-11-20-e353/e353.sha256
+BASEMAN=/root/GodWorld/output/engine-sheet/2026-11-20-e354/e354.sha256
 FILES="phase04-events/generationalEventsEngine.js phase05-citizens/generateGenericCitizens.js phase05-citizens/processAdvancementIntake.js phase05-citizens/bondEngine.js utilities/citizenDerivation.js"
 KID=1d74b2e49; NAME=df0052132
 W=$(mktemp -d); mkdir -p "$W/stage" "$W/pullback"
 tree() { ( cd "$1" && find . -type f ! -name .clasp.json | sort | xargs sha256sum ); }
 ( cd "$W/stage" && printf '{"scriptId":"%s","rootDir":""}' "$PROD_ID" > .clasp.json && "$CLASP" pull >/dev/null )
-tree "$W/stage" | diff -q - "$BASEMAN" >/dev/null || { echo "PROD pull is not stage 61 (e353.sha256) — stop"; exit 1; }
-echo "PROD pull = e353.sha256 (stage 61)"
+tree "$W/stage" | diff -q - "$BASEMAN" >/dev/null || { echo "PROD pull is not stage 62 (e354.sha256) — stop"; exit 1; }
+echo "PROD pull = e354.sha256 (stage 62)"
 same() { [ "$(git show "$1:$2" | sha256sum | cut -d' ' -f1)" = "$(sha256sum "$W/stage/$2" | cut -d' ' -f1)" ]; }
 same "$KID~1" phase04-events/generationalEventsEngine.js || { echo "generationalEventsEngine.js on PROD is not $KID~1 — stop"; exit 1; }
 same "$KID~1" phase05-citizens/generateGenericCitizens.js || { echo "generateGenericCitizens.js on PROD is not $KID~1 — stop"; exit 1; }
@@ -49,7 +49,7 @@ else tree "$W/stage" | diff -q - "$MAN" >/dev/null || { echo "built tree differs
 [ "$(tree "$W/stage" | wc -l)" = "$(wc -l < "$BASEMAN")" ] || { echo "file count differs from base — stop"; exit 1; }
 [ "$(diff <(tree "$W/stage" | cut -d' ' -f1) <(cut -d' ' -f1 "$BASEMAN") | grep -c '^<')" = "5" ] || { echo "not exactly five files differ from base — stop"; exit 1; }
 DESC="engine.339: the lottery grabs two; a child is a fresh mint; only a wife takes the name; births top at 40; the arrival dice gone (5 files at $SRC)"
-echo "$DESC; 5 files differ from stage 61"
+echo "$DESC; 5 files differ from stage 62"
 if [ "$DRY" = "--dry-run" ]; then echo "dry run: stopping before the push"; exit 0; fi
 if [ "$MODE" = "bench" ]; then TID=$BENCH_ID; else TID=$PROD_ID; fi
 printf '{"scriptId":"%s","rootDir":""}' "$TID" > "$W/stage/.clasp.json"

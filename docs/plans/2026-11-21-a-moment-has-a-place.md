@@ -93,6 +93,14 @@ pointers:
 
 ## Rulings
 
+- **Open questions 1–5 answered** (builder 2026-11-21, verbatim: "Both - yes - rn it's set to 1 but they can have have multiple - they wake 3 times in their wake , morning , afternoon , and evening so that's the time of day we have currently - could meet for a drink , have dinner, check in on, visit their house , think about how we have a world-view side to this that if an event says \"visited xx at their home \" I will visually see them walk their (once code is set) - not sure what you mean on this one"). Read:
+  - Q1 which moments → **both**: the engine's lines and the citizen's own moments (wakes, reflections, exchanges).
+  - Q2 does a citizen's own word move their spot → **yes**.
+  - Q3 one spot or several → **several** (today the engine holds one).
+  - Q4 time of day → **the wake's three dayparts: morning, afternoon, evening** — the time of day the sim has now.
+  - Q5 the bond in the week → bonds show as moments between the two people: **meet for a drink, have dinner, check in on, visit their house**; the world view draws it — a line "visited X at their home" is a walk to that home on the page.
+  - Q6 (a moment on another street) — not yet answered; re-asked in plain words the same night.
+
 - **The page shows what the week holds, not a routine** (builder 2026-11-21, "Sounds good", on: a person with a work line goes to work; a person with a job and no work line stays as drawn today).
 
 - **Businesses come from the ledger; their success stems from how the hood performs** (builder 2026-11-21, verbatim: "The businesses should come from the ledger and their success should stem from how the hood performs"). Where the code stands against it, read the same hour — nothing built:

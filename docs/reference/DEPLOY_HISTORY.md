@@ -210,6 +210,14 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD stage 70 — every business in a tracked hood; the evening fold out (2026-11-21, engine-sheet, engine.356)
+
+- **What:** `phase07-evening-media/buildEveningFood.js` at `e917708a4` on stage 69 — `buildEveningFoodIndex_` reads each business row's own hood; the child-area fold added at stage 69 removed. Same commit, not engine: live `Business_Ledger` four Neighborhood cells moved to their tracked hood (BIZ-00010 → Jack London, BIZ-00011 → Downtown, BIZ-00029 → East Oakland, BIZ-00062 → Temescal; read back 4/4; `output/engine-sheet/2026-11-21-e356c/move-four-biz-hoods.js`, backup beside it), and both business-adding scripts refuse a hood that is not tracked. Builder: "why are any in a sub hood no one tracks?" · "Ok".
+- **Proof:** code read of every reader of a business's hood (commit message); `node --check`. No bench, no test (his block).
+- **Stage 70 (2026-11-21 ~20:15 CST):** live pulled = stage 69 (`e356c.sha256`); one file changed; manifest `output/engine-sheet/2026-11-21-e356d/e356d.sha256`; pull-back byte-identical; version cut **@205**. Script `output/engine-sheet/2026-11-21-e356d/push.sh`.
+- **Smoke test: not run.** First live fire C117 Sun 2026-11-22, stacked on stage 69.
+- **Back out:** the file from `3c614cfb7` (= `e356c.sha256`) + version cut; the four cells from the backup.
+
 ### PROD stage 69 — the stage-68 defects fixed, night spots from the ledger (2026-11-21, engine-sheet, engine.356)
 
 - **What:** six files at `3c614cfb7` on stage 68 — `phase05-citizens/bondEngine.js`, `phase05-citizens/generateCitizensEvents.js`, `phase05-citizens/citizenContextBuilder.js`, `phase09-digest/finalizeCycleState.js`, `phase07-evening-media/buildNightLife.js`, `phase07-evening-media/buildEveningFood.js`. Carries `11bfb6100` (stage 68's two defects: the bond wedding tag readers did not know; a stayed-in line counted as public activity in the grief weighting), `4559c9d18`, `170e05444` (agy's first read folded), `b2cd01774` (night spots are Business_Ledger nightlife rows, the thirteen name lists gone — builder: "The businesses should come from the ledger"), `3c614cfb7` (agy's second read folded: no place is both tonight's night spot and dinner; child-area rows placed at their parent hood; helpers called directly).

@@ -69,7 +69,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | engine.351 | Intake complete or it waits; arrivals start off 50: LIVE 11-21 stage 65. Read C117 Sun 2026-11-22: held rows, each arrival's start on Dial_Moves | live-observing | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
 | engine.339 | How kids are minted: code LIVE since stage 63, kept (builder 11-21 "Keep it"); tests rewritten. Read C117 Sun 2026-11-22: the one grab and what landed | live-observing | research-build | no plan — deleted 2026-11-21 (git history) |
 | pipeline.112 | Labels off citizens' pages: live 11-19. Read Mon 2026-11-23 after 05:45: the Fri grade line, Sun chain, Mon datawake logs; organic: exchange, talk | live-observing | research-build | [[../plans/2026-11-16-page-labels-off-citizens-memory]] |
-| engine.356 | A moment has a place (builder 11-21): LIVE stage 69 @204, unbenched. Read C117 Sun 2026-11-22: the fire, night spots, wedding tags | live-observing | engine-sheet | [[../plans/2026-11-21-a-moment-has-a-place]] |
+| engine.356 | A moment has a place (builder 11-21): LIVE stage 70 @205, unbenched. Read C117 Sun 2026-11-22: the fire, night spots, wedding tags | live-observing | engine-sheet | [[../plans/2026-11-21-a-moment-has-a-place]] |
 
 ## 3. Now — being worked, one per terminal (in-progress)
 

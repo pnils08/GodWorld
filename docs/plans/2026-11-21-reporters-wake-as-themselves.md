@@ -54,9 +54,9 @@ On Sharon (2026-11-21): bio — "i like them both and love \"visits places she w
 | # | Task | Owner | Status |
 |---|------|-------|--------|
 | 1 | Print Sharon's new wake for C116 beside what she got (no model call); builder reads | rb | done `e57933b47`, `1c52b41cb` |
-| 2 | Build her wake to the print: identity + bio, beat line, tool list, evening record leading; build talk and coaching off her writer prompt; reviewer allows her first-person visits | rb | in progress — writer `seat` prompt, test folder only `76d470dee`; morning plan still runs as her citizen self |
-| 3 | One test-shell day on C116 (`testReporterDay.sh`), his go; new piece beside her C116 piece | rb | run 1 `76d470dee`: off beat (Aitken, from the morning plan's sports line), 0 tool calls |
-| 4 | His approval → her live Friday wake switches; read the first live piece | rb | not started |
+| 2 | Build her wake to the print: identity + bio, beat line, tool list, evening record leading; build talk and coaching off her writer prompt; reviewer allows her first-person visits | rb | done `982ca9ec6` — seat file on her package; record = evening texture + prevEvening lines |
+| 3 | One test-shell day on C116 (`testReporterDay.sh`), his go; new piece beside her C116 piece | rb | done — run 3 approved ("Run 3 lock it in"); live path proven through the runner's today variant `982ca9ec6` |
+| 4 | His approval → her live Friday wake switches; read the first live piece | rb | live 2026-11-21; read Fri 2026-11-27 after 18:15 (C117): her pick, tool calls, Rhea, grade |
 | 5–8 | Maria, Kai, Mason, Celeste, one at a time, same steps; canon bios searched in the Tribune files | rb | not started |
 
 ## Acceptance
@@ -86,6 +86,7 @@ On Sharon (2026-11-21): bio — "i like them both and love \"visits places she w
 
 ## Changelog
 
+- 2026-11-21 (research-build) — LIVE: "Run 3 lock it in and turn that live, loosen her reviewer to stick to facts about locations , citizens data points". Still graded (builder 10-15). `982ca9ec6`
 - 2026-11-21 (research-build) — "her 3 wakes are the media Cron, pull out around Oakland": morning plan on her seat file; gate profile off the writer's Packet. Run 3 on the Kelley block party; no visit, 0 tool calls. `3fe3a575e`
 - 2026-11-21 (research-build) — Game night on her beat: "Those onto stay if they are in context of the nightlife her best covers". Test run 1 filed on Aitken: her morning plan carries the city sports line.
 - 2026-11-21 (research-build) — Opened on the builder's ruling; Sharon first: both bio pieces kept, she leads nightlife and evenings, fame through her tools.

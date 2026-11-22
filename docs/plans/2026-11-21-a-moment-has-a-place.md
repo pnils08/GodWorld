@@ -99,7 +99,7 @@ pointers:
   - Q3 one spot or several → **several** (today the engine holds one).
   - Q4 time of day → **the wake's three dayparts: morning, afternoon, evening** — the time of day the sim has now.
   - Q5 the bond in the week → bonds show as moments between the two people: **meet for a drink, have dinner, check in on, visit their house**; the world view draws it — a line "visited X at their home" is a walk to that home on the page.
-  - Q6 (a moment on another street) — not yet answered; re-asked in plain words the same night.
+  - Q6 a moment on another street → answered (builder 2026-11-21, verbatim: "it's sets their walk path in live run, so instead of them walking back and forth we are building ways/code the world-view can take and use"). Read: the engine's moments are the citizen's route for the day — each moment a place and a daypart (morning / afternoon / evening), in order — and the world view walks them along it, across streets when a place is on another street, instead of the drawn back-and-forth. The engine's job is to hand over that route as data the page can read.
 
 - **The page shows what the week holds, not a routine** (builder 2026-11-21, "Sounds good", on: a person with a work line goes to work; a person with a job and no work line stays as drawn today).
 

@@ -130,22 +130,23 @@ function updateNeighborhoodTrajectories_(ctx, cycle) {
   if (iTrajectory < 0 || iNeighborhood < 0) return empty; // schema not migrated — no-op
 
   // ── City means for relative scoring ──────────────────────────────────────
-  var sums = { sent: 0, retail: 0, event: 0, crime: 0 };
-  var counted = 0, crimeCounted = 0;
+  // engine.356 gaps: a blank cell is missing, not 0 — left out of the city mean and out of the hood's score.
+  var sums = { sent: 0, retail: 0, event: 0, crime: 0 }, nOf = { sent: 0, retail: 0, event: 0, crime: 0 };
+  var counted = 0;
+  var addTo = function(key, v) { if (v !== null) { sums[key] += v; nOf[key]++; } };
   for (var m = 0; m < rows.length; m++) {
     if (!rows[m][iNeighborhood]) continue;
-    sums.sent += Number(rows[m][iSentiment]) || 0;
-    sums.retail += Number(rows[m][iRetail]) || 0;
-    sums.event += Number(rows[m][iEvent]) || 0;
-    var cm = trajectoryCellNum_(rows[m][iCrime]);   // engine.356 gap: a blank crime cell is missing, not 0
-    if (cm !== null) { sums.crime += cm; crimeCounted++; }
+    addTo('sent', trajectoryCellNum_(rows[m][iSentiment]));
+    addTo('retail', trajectoryCellNum_(rows[m][iRetail]));
+    addTo('event', trajectoryCellNum_(rows[m][iEvent]));
+    addTo('crime', trajectoryCellNum_(rows[m][iCrime]));
     counted++;
   }
   if (!counted) return empty;
-  var meanSent = sums.sent / counted;
-  var meanRetail = sums.retail / counted;
-  var meanEvent = sums.event / counted;
-  var meanCrime = crimeCounted ? sums.crime / crimeCounted : null;
+  var meanSent = nOf.sent ? sums.sent / nOf.sent : null;
+  var meanRetail = nOf.retail ? sums.retail / nOf.retail : null;
+  var meanEvent = nOf.event ? sums.event / nOf.event : null;
+  var meanCrime = nOf.crime ? sums.crime / nOf.crime : null;
   // engine.356 gap (builder 2026-11-21 "Go on these"): crime reads against the city's own mean like mood,
   // ±trajectoryCrimeBand (World_Config). The old test (crime >= 2 → −1, crime === 0 → +1) was written in
   // July for an incident-count CrimeIndex (0 quiet, 2–3 on a safety burst); 3c819a7d0 moved CrimeIndex to
@@ -176,11 +177,11 @@ function updateNeighborhoodTrajectories_(ctx, cycle) {
 
     var sheetRow = r + 2;
 
-    var sent = Number(row[iSentiment]) || 0;
-    var retail = Number(row[iRetail]) || 0;
-    var crime = trajectoryCellNum_(row[iCrime]);   // null when blank — no crime term
-    var eventAttract = Number(row[iEvent]) || 0;
-    var flow = Number(row[iFlow]) || 0; // non-numeric legacy values → 0
+    var sent = trajectoryCellNum_(row[iSentiment]);       // engine.356 gaps: null when blank — that signal adds no term
+    var retail = trajectoryCellNum_(row[iRetail]);
+    var crime = trajectoryCellNum_(row[iCrime]);
+    var eventAttract = trajectoryCellNum_(row[iEvent]);
+    var flow = trajectoryCellNum_(row[iFlow]);            // non-numeric legacy values → null (was 0: the same no term)
 
     var prevTrajectory = String(row[iTrajectory] || TRAJECTORY_STATES.STEADY).toLowerCase();
     var prevMomentum = (iMomentum >= 0 && row[iMomentum] !== '') ? Number(row[iMomentum]) : 5;
@@ -188,22 +189,29 @@ function updateNeighborhoodTrajectories_(ctx, cycle) {
 
     // ── Composite score, city-relative (−5..+5) ─────────────────────────────
     var score = 0;
-    if (sent > meanSent + 0.05) score += 1;
-    else if (sent < meanSent - 0.05) score -= 1;
-
-    if (retail > meanRetail * 1.15) score += 1;
-    else if (retail < meanRetail * 0.85) score -= 1;
-
-    if (eventAttract > meanEvent * 1.2) score += 1;
-    else if (eventAttract < meanEvent * 0.8) score -= 1;
-
-    if (crime !== null && meanCrime !== null) {
-      if (crime > meanCrime + crimeBand) score -= 1;        // rougher than the city's middle
-      else if (crime < meanCrime - crimeBand) score += 1;   // safer
+    if (sent !== null && meanSent !== null) {
+      if (sent > meanSent + 0.05) score += 1;
+      else if (sent < meanSent - 0.05) score -= 1;
     }
 
-    if (flow >= 2) score += 1;
-    else if (flow <= -2) score -= 1;
+    if (retail !== null && meanRetail !== null) {
+      if (retail > meanRetail * 1.15) score += 1;
+      else if (retail < meanRetail * 0.85) score -= 1;
+    }
+
+    if (eventAttract !== null && meanEvent !== null) {
+      if (eventAttract > meanEvent * 1.2) score += 1;
+      else if (eventAttract < meanEvent * 0.8) score -= 1;
+    }
+
+    if (crime !== null && meanCrime !== null) {
+      var dCrime = Math.round((crime - meanCrime) * 1e9) / 1e9;   // edge-safe: the same on both sides of the band (agy)
+      if (dCrime > crimeBand) score -= 1;         // rougher than the city's middle
+      else if (dCrime < -crimeBand) score += 1;   // safer
+    }
+
+    if (flow !== null && flow >= 2) score += 1;
+    else if (flow !== null && flow <= -2) score -= 1;
 
     var trajectory = TRAJECTORY_STATES.STEADY;
     if (score >= TRAJECTORY_THRESHOLDS.GROWTH_MIN) trajectory = TRAJECTORY_STATES.GROWTH;

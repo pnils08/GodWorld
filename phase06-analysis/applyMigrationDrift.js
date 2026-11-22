@@ -93,6 +93,25 @@ function createSeededRng_(seed, stateOverride) {
 // CORE DRIFT FUNCTION
 // ═══════════════════════════════════════════════════════════════════════════
 
+// engine.356 gaps — a sheet cell as a number, or null when blank / not a number (Number('') is 0).
+function migrationCellNum_(v) {
+  if (v === '' || v === null || v === undefined) return null;
+  if (typeof v === 'string' && v.trim() === '') return null;
+  var n = Number(v);
+  return isNaN(n) ? null : n;
+}
+
+// engine.356 gaps (builder 2026-11-21): which way crime moves a hood's migration — -1 out (at least band above the
+// city median), +1 in (at least band below), 0 otherwise or with no reading. The distance is rounded to 1e-9 so a hood
+// exactly on the band edge counts the same on both sides (0.64 + 0.05 is 0.6900000000000001 in floating point; agy).
+function migrationCrimeTerm_(crime, med, band) {
+  if (crime === null || crime === undefined || !isFinite(crime) || !(med > 0) || !(band > 0)) return 0;
+  var d = Math.round((crime - med) * 1e9) / 1e9;
+  if (d >= band) return -1;
+  if (d <= -band) return 1;
+  return 0;
+}
+
 function applyMigrationDrift_(ctx) {
   if (!ctx) return;
   if (!ctx.summary) ctx.summary = {};
@@ -386,16 +405,19 @@ function applyMigrationDrift_(ctx) {
     if (!nh) continue;
     hoodMetrics.push({
       nh: nh,
-      crimeIndex: (iCrime >= 0) ? Number(nhRow[iCrime] || 1) : 1,
-      nhSentiment: (iSentiment >= 0) ? Number(nhRow[iSentiment] || 0) : 0,
-      retailVitality: (iRetail >= 0) ? Number(nhRow[iRetail] || 1) : 1,
-      eventAttract: (iEvent >= 0) ? Number(nhRow[iEvent] || 1) : 1,
+      // engine.356 gaps (agy diff read 2026-11-21): a blank or missing cell is no reading — null, and its term is
+      // skipped below. It was `|| 1`: a blank (or a real 0) CrimeIndex read as 1, far above the city's ~0.64,
+      // and pushed people out of a hood with no crime reading at all.
+      crimeIndex: (iCrime >= 0) ? migrationCellNum_(nhRow[iCrime]) : null,
+      nhSentiment: (iSentiment >= 0) ? migrationCellNum_(nhRow[iSentiment]) : null,
+      retailVitality: (iRetail >= 0) ? migrationCellNum_(nhRow[iRetail]) : null,
+      eventAttract: (iEvent >= 0) ? migrationCellNum_(nhRow[iEvent]) : null,
       nhEcon: neighborhoodEconomies[nh] || { mood: 50, descriptor: 'stable' }
     });
   }
 
   function median_(arr) {
-    var a = arr.filter(function(x) { return isFinite(x); }).sort(function(x, y) { return x - y; });
+    var a = arr.filter(function(x) { return x !== null && x !== undefined && isFinite(x); }).sort(function(x, y) { return x - y; });   // engine.356: isFinite(null) is true
     if (!a.length) return 0;
     var mid = Math.floor(a.length / 2);
     return (a.length % 2) ? a[mid] : (a[mid - 1] + a[mid]) / 2;
@@ -438,17 +460,18 @@ function applyMigrationDrift_(ctx) {
     // 2026-11-21): an absolute band off the median, World_Config migrationCrimeBand, like sentiment's — the
     // ±15 % ratio band (0.544–0.736 at the C116 median 0.64) was wider than the city's whole crime spread
     // (0.57–0.73) and caught no hood, so crime never moved anyone in or out.
-    if (medCrime > 0 && crimeIndex >= medCrime + CRIME_BAND) { nhDrift -= rInt(2) + 1; }
-    else if (medCrime > 0 && crimeIndex <= medCrime - CRIME_BAND) { nhDrift += rInt(2); }
+    var crimeSide = migrationCrimeTerm_(crimeIndex, medCrime, CRIME_BAND);
+    if (crimeSide < 0) { nhDrift -= rInt(2) + 1; }
+    else if (crimeSide > 0) { nhDrift += rInt(2); }
 
-    if (nhSentiment >= medSent + SENT_BAND) { nhDrift += rInt(2) + 1; }
-    else if (nhSentiment <= medSent - SENT_BAND) { nhDrift -= rInt(2) + 1; }
+    if (nhSentiment !== null && nhSentiment >= medSent + SENT_BAND) { nhDrift += rInt(2) + 1; }
+    else if (nhSentiment !== null && nhSentiment <= medSent - SENT_BAND) { nhDrift -= rInt(2) + 1; }
 
-    if (medRetail > 0 && retailVitality >= medRetail * HI) { nhDrift += rInt(2); }
-    else if (medRetail > 0 && retailVitality <= medRetail * LO) { nhDrift -= rInt(2); }
+    if (retailVitality !== null && medRetail > 0 && retailVitality >= medRetail * HI) { nhDrift += rInt(2); }
+    else if (retailVitality !== null && medRetail > 0 && retailVitality <= medRetail * LO) { nhDrift -= rInt(2); }
 
-    if (medEvent > 0 && eventAttract >= medEvent * HI) { nhDrift += rInt(2); }
-    else if (medEvent > 0 && eventAttract <= medEvent * LO) { nhDrift -= rInt(1); }
+    if (eventAttract !== null && medEvent > 0 && eventAttract >= medEvent * HI) { nhDrift += rInt(2); }
+    else if (eventAttract !== null && medEvent > 0 && eventAttract <= medEvent * LO) { nhDrift -= rInt(1); }
 
     if (medMood > 0 && nhEcon.mood - medMood >= MOOD_BAND) { nhDrift += rInt(2); }
     else if (medMood > 0 && nhEcon.mood - medMood <= -MOOD_BAND) { nhDrift -= rInt(2); }
@@ -830,8 +853,8 @@ function renderMigrationBrief_(ctx) {
  * band cannot degenerate that way at any future scale.):
  * | Metric vs city median this cycle | Effect on MigrationFlow |
  * |----------------------------------|-------------------------|
- * | CrimeIndex   >= 1.15x median     | -1 to -3 (outflow)      |
- * | CrimeIndex   <= 0.85x median     | +0 to +2 (inflow)       |
+ * | CrimeIndex >= median + migrationCrimeBand | -1 to -3 (outflow) |
+ * | CrimeIndex <= median - migrationCrimeBand | +0 to +2 (inflow)  |
  * | Sentiment    >= median + 0.05    | +1 to +3 (inflow)       |
  * | Sentiment    <= median - 0.05    | -1 to -3 (outflow)      |
  * | RetailVitality >= 1.15x median   | +0 to +2 (inflow)       |

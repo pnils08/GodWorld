@@ -723,9 +723,47 @@ async function resolveCitizens(parsed, sheetsClient, sheetId) {
 }
 
 // ---------------------------------------------------------------------------
+// A new business lands in one of the tracked hoods (builder 2026-11-21: "We have 22 hoods, limited
+// amount of businesses, why are any in a sub hood no one tracks?"). Built from the live Neighborhood_Map
+// rows: a hood is itself; a ChildAreas name becomes its parent hood; 'City-wide' stays (the city
+// institutions, which the engine reads by that label); anything else, or blank, is null — refused.
+// Shared with processBusinessIntake.js, the other path that adds business rows.
+// ---------------------------------------------------------------------------
+function buildTrackedHoodResolver(mapRows) {
+  const byKey = {};
+  for (const r of mapRows || []) {
+    const hood = String((r && r.Neighborhood) || '').trim();
+    if (!hood) continue;
+    byKey[hood.toLowerCase()] = hood;
+  }
+  for (const r of mapRows || []) {
+    const hood = String((r && r.Neighborhood) || '').trim();
+    if (!hood) continue;
+    for (const child of String((r && r.ChildAreas) || '').split(',')) {
+      const ck = child.trim().toLowerCase();
+      if (ck && !byKey[ck]) byKey[ck] = hood;   // a hood is never a child; first parent wins (as the engine's loader)
+    }
+  }
+  if (!Object.keys(byKey).length) throw new Error('Neighborhood_Map read gave no hoods — refusing to place any business');
+  return function resolveTrackedHood(name) {
+    const k = String(name || '').trim().toLowerCase();
+    if (!k) return null;
+    if (k === 'city-wide') return 'City-wide';
+    return byKey[k] || null;
+  };
+}
+
+// ---------------------------------------------------------------------------
 // Resolve businesses against Business_Ledger
 // ---------------------------------------------------------------------------
 async function resolveBusinesses(parsed, sheetsClient, sheetId) {
+  const mapRes = await sheetsClient.spreadsheets.values.get({ spreadsheetId: sheetId, range: 'Neighborhood_Map' });
+  const mapVals = mapRes.data.values || [];
+  const mapHead = (mapVals[0] || []).map(h => String(h).trim());
+  const iMapHood = mapHead.indexOf('Neighborhood'), iMapChild = mapHead.indexOf('ChildAreas');
+  if (iMapHood < 0 || iMapChild < 0) throw new Error('Neighborhood_Map has no Neighborhood / ChildAreas column');
+  const resolveHood = buildTrackedHoodResolver(mapVals.slice(1).map(r => ({ Neighborhood: r[iMapHood], ChildAreas: r[iMapChild] })));
+
   const res = await sheetsClient.spreadsheets.values.get({
     spreadsheetId: sheetId,
     range: 'Business_Ledger!A1:I',
@@ -773,7 +811,12 @@ async function resolveBusinesses(parsed, sheetsClient, sheetId) {
       if (nameHit) {
         matched.push({ bizId: nameHit.id, name: entry.name, resolvedByName: true });
       } else {
-        candidates.push({ name: entry.name, sector: entry.sector, neighborhood: entry.neighborhood });
+        const hood = resolveHood(entry.neighborhood);
+        if (!hood) {
+          mismatches.push({ bizId: id || 'NEW', name: entry.name, reason: 'hood "' + (entry.neighborhood || '') + '" is not a tracked hood — not added' });
+          continue;
+        }
+        candidates.push({ name: entry.name, sector: entry.sector, neighborhood: hood });
       }
     }
   }
@@ -1483,6 +1526,7 @@ async function main() {
 // S232 canon.3 follow-up — export prose-signal helpers for unit testing.
 // require.main guard keeps main() side-effect-free when required as a module.
 module.exports = {
+  buildTrackedHoodResolver: buildTrackedHoodResolver,   // engine.356 — shared with processBusinessIntake.js
   extractLetterFooterSignals: extractLetterFooterSignals,
   enrichCandidateWithProseSignals: enrichCandidateWithProseSignals,
   detectGenderFromPronouns: detectGenderFromPronouns,

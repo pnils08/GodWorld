@@ -1,0 +1,30 @@
+[
+  {
+    "id": "BIZ-00010",
+    "name": "Portside Bio",
+    "from": "Brooklyn Basin",
+    "to": "Jack London",
+    "sheetRow": 11
+  },
+  {
+    "id": "BIZ-00011",
+    "name": "Tenth Street Digital",
+    "from": "Old Oakland",
+    "to": "Downtown",
+    "sheetRow": 12
+  },
+  {
+    "id": "BIZ-00029",
+    "name": "Coliseum District Development",
+    "from": "Coliseum",
+    "to": "East Oakland",
+    "sheetRow": 30
+  },
+  {
+    "id": "BIZ-00062",
+    "name": "Dario's Bar",
+    "from": "Telegraph corridor",
+    "to": "Temescal",
+    "sheetRow": 63
+  }
+]

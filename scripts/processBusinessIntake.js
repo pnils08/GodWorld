@@ -13,7 +13,7 @@
  */
 
 var path = require('path');
-const { economicSeedForSector } = require('./ingestPublishedEntities'); // engine.96 T11: one birth table
+const { economicSeedForSector, buildTrackedHoodResolver } = require('./ingestPublishedEntities'); // engine.96 T11: one birth table; engine.356: one hood check
 require('/root/GodWorld/lib/env');
 
 var fs = require('fs');
@@ -99,6 +99,10 @@ async function main() {
   console.log('Business_Ledger has ' + bizRows.length + ' entries. Max BIZ-ID: ' + formatBizId(maxBizNum));
   console.log('');
 
+  // engine.356 (builder 2026-11-21): a business lands in a tracked hood — a sub-area becomes its parent,
+  // 'City-wide' stays, anything else (or blank) is rejected on the intake row with the reason.
+  var resolveHood = buildTrackedHoodResolver(await sheets.getSheetAsObjects('Neighborhood_Map'));
+
   // 3. Process each staged entry
   var newRows = [];
   var promoted = [];
@@ -126,6 +130,13 @@ async function main() {
       continue;
     }
 
+    var hood = resolveHood(entry.Neighborhood);
+    if (!hood) {
+      console.log('  REJECT: "' + name + '" — hood "' + (entry.Neighborhood || '') + '" is not a tracked hood');
+      rejected.push({ entry: entry, reason: 'hood "' + (entry.Neighborhood || '') + '" is not a tracked hood' });
+      continue;
+    }
+
     var newBizId = formatBizId(nextBizNum);
     nextBizNum++;
 
@@ -137,7 +148,7 @@ async function main() {
       BIZ_ID: newBizId,
       Name: name,
       Sector: (entry.Sector || '').trim(),
-      Neighborhood: (entry.Neighborhood || '').trim(),
+      Neighborhood: hood,
       Employee_Count: econ.emp,
       Avg_Salary: econ.sal,
       Annual_Revenue: econ.rev,

@@ -205,7 +205,6 @@ function buildEveningFoodIndex_(ctx) {
   var FAST_RE = /fast food|quick service/i;
   var NIGHT_RE = /nightlife|\bbar\b|lounge|club|hospitality/i;
   var FOOD_RE = /restaurant|dining|cafe|café|food|bakery|beverage|market/i;
-  var raw = [];
   try {
     var bs = ctx && ctx.ss && typeof ctx.ss.getSheetByName === 'function' ? ctx.ss.getSheetByName('Business_Ledger') : null;
     if (!bs || bs.getLastRow() <= 1) return out;
@@ -221,24 +220,15 @@ function buildEveningFoodIndex_(ctx) {
       var hood = String(vv[r][iHood] || '').trim();
       var sector = String(vv[r][iSector] || '').trim();
       if (!name || !hood || !sector) continue;
-      raw.push({ bizId: iId >= 0 ? String(vv[r][iId] || '') : '', name: name, neighborhood: hood, sector: sector });
+      // engine.356: the row's own hood. Every business row sits in a tracked hood (the four sub-area rows
+      // moved on the ledger 2026-11-21, builder "Ok"; the intake now refuses any other label) — no fold here.
+      var row = { bizId: iId >= 0 ? String(vv[r][iId] || '') : '', name: name, neighborhood: hood, sector: sector };
+      if (FAST_RE.test(sector)) { out.fast.push(row); continue; }
+      if (NIGHT_RE.test(sector)) out.nightlife.push(row);
+      if (FOOD_RE.test(sector)) out.restaurants.push(row);
     }
   } catch (e) {
     try { Logger.log('buildEveningFood_ ledger read failed (fail-soft): ' + e); } catch (ig) {}
-    return out;
-  }
-  // engine.356 (agy read 2026-11-21, finding 2): a row filed under a child area (Telegraph corridor,
-  // Brooklyn Basin, Old Oakland, Coliseum) is placed at its parent hood — builder ruling 2026-09-19, "a
-  // sub-area uses its parent hood's data", the fold commuteFlowEngine already makes. Under the raw label
-  // the place matched no hood: no lean, no crowd bump, its seed and texture line reached no hood, and no
-  // resident was ever local to it. A label that is no hood and no child (City-wide) keeps its own text.
-  // Outside the fail-soft read on purpose: an unseeded hood set throws (ADR-0016) to the phase guard.
-  for (var q = 0; q < raw.length; q++) {
-    var rowQ = raw[q];
-    rowQ.neighborhood = resolveHoodOrChild_(ctx, rowQ.neighborhood) || rowQ.neighborhood;
-    if (FAST_RE.test(rowQ.sector)) { out.fast.push(rowQ); continue; }
-    if (NIGHT_RE.test(rowQ.sector)) out.nightlife.push(rowQ);
-    if (FOOD_RE.test(rowQ.sector)) out.restaurants.push(rowQ);
   }
   return out;
 }

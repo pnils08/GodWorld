@@ -1446,7 +1446,23 @@ async function main() {
 
   // The seat prompt hands the writer the Packet without the gate's review profile: the blockers are the gate's
   // check, not the writer's brief (Sharon's barred "observation"/"gathering" — the visit the builder ruled in).
-  const seatPacket = () => { try { const p = JSON.parse(worldState); delete p.reviewProfile; return JSON.stringify(p, null, 2); } catch (_) { return worldState; } };
+  // Builder 2026-11-22 ("2": approve once the packet-talk is out): the writer gets what she knows — the cycle's facts,
+  // her people and their words, her own morning plan as her plan, the filing format. The rule blocks, policy lists and
+  // "assignment" label stay off (Maria echoed them: "The assignment was five walkers", "This part is my interpretation,
+  // not the record"). The gate reads the full Packet from disk, unchanged.
+  const seatPacket = () => {
+    try {
+      const p = JSON.parse(worldState);
+      delete p.reviewProfile;
+      delete p.limits;
+      if (p.task) p.task = { yourPlan: p.task.assignment || null };
+      if (p.signal) delete p.signal.plan;
+      if (p.exposure) delete p.exposure.excludedLeads;
+      if (p.manifest) for (const k of ['policy', 'permittedInterpretationSlots', 'unverifiedLeads', 'authorizedTexture', 'textureConditions', 'forbiddenClaimClasses']) delete p.manifest[k];
+      if (p.output) delete p.output.preflight;
+      return JSON.stringify(p, null, 2);
+    } catch (_) { return worldState; }
+  };
   const kickoff = TEST_SEAT ? 'Cycle ' + cycle + '.\n\n' + seatPacket() : STATE_FILE
     ? 'Current cycle: ' + cycle + '. Write the ' + DESK + ' section for THIS cycle from YOUR LANE below — ' +
       'build only from the storylines it names and the citizen quotes it supplies; find your own angle. Do not ' +

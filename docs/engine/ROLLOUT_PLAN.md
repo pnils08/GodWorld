@@ -69,6 +69,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | engine.351 | Intake complete or it waits; arrivals start off 50: LIVE 11-21 stage 65. Read C117 Sun 2026-11-22: held rows, each arrival's start on Dial_Moves | live-observing | research-build | [[../plans/2026-11-16-every-saved-word-reaches-the-dials]] |
 | engine.339 | How kids are minted: code LIVE since stage 63, kept (builder 11-21 "Keep it"); tests rewritten. Read C117 Sun 2026-11-22: the one grab and what landed | live-observing | research-build | no plan — deleted 2026-11-21 (git history) |
 | pipeline.112 | Labels off citizens' pages: live 11-19. Read Mon 2026-11-23 after 05:45: the Fri grade line, Sun chain, Mon datawake logs; organic: exchange, talk | live-observing | research-build | [[../plans/2026-11-16-page-labels-off-citizens-memory]] |
+| engine.356 | A moment has a place (builder 11-21): LIVE stage 69 @204, unbenched. Read C117 Sun 2026-11-22: the fire, night spots, wedding tags | live-observing | engine-sheet | [[../plans/2026-11-21-a-moment-has-a-place]] |
 
 ## 3. Now — being worked, one per terminal (in-progress)
 
@@ -78,7 +79,6 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | engine.346 | Feed word `off-season` (builder 11-15): live @182; benched 11-16 inside stage 49 (C117/C118 PASS). Owed: the sheet dropdown (his menu run) | in-progress | research-build | [[../plans/2026-11-05-sports-feed-triggers]] §Changelog |
 | pipeline.110 | Role citizens wake as themselves (builder 11-10). 14 of 14 workers lean and live; next: media (reporter template); council on hold | in-progress | engine-sheet | [[../plans/2026-11-10-role-citizens-wake-as-themselves]] |
 | pipeline.113 | UNDOCKED: Nia and the pilots know the game (builder 11-21). Built, not flown; next: read the first flight after 11-21 (plan §Owed read) | in-progress | engine-sheet | [[../plans/2026-11-18-undocked-tells-its-nights-in-points]] |
-| engine.356 | A moment has a place (builder 11-21): LIVE stage 68 with 2 known defects; fixes, ledger night spots and agy's second read folded in repo. Next: push on his word | in-progress | engine-sheet | [[../plans/2026-11-21-a-moment-has-a-place]] |
 | pipeline.111 | Stop puppeting the newsroom (builder 11-10): the reporter half of the wake work (split with es 11-14). Next: one reporter's whole day in the test shell, his go | in-progress | research-build | the stop-puppeting plan (deleted 2026-11-18) |
 | pipeline.109 | Cron feedback reaches the builder: one list at boot + ops report and Varek journal repaired (builder 11-09/11-10). Next: read the digest at boot | in-progress | research-build | [[../plans/2026-11-10-cron-feedback-to-builder]] |
 | pipeline.108 | Daily news on the day's sources alone (builder 11-13). Fri 11-13 show read, plan Task 10. Next: his call on the read; Sat 11-14 weekly | in-progress | research-build | [[../plans/2026-11-09-daily-news-articles-as-sources]] |

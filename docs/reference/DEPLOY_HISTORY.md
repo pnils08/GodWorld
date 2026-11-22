@@ -210,6 +210,14 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD stage 69 — the stage-68 defects fixed, night spots from the ledger (2026-11-21, engine-sheet, engine.356)
+
+- **What:** six files at `3c614cfb7` on stage 68 — `phase05-citizens/bondEngine.js`, `phase05-citizens/generateCitizensEvents.js`, `phase05-citizens/citizenContextBuilder.js`, `phase09-digest/finalizeCycleState.js`, `phase07-evening-media/buildNightLife.js`, `phase07-evening-media/buildEveningFood.js`. Carries `11bfb6100` (stage 68's two defects: the bond wedding tag readers did not know; a stayed-in line counted as public activity in the grief weighting), `4559c9d18`, `170e05444` (agy's first read folded), `b2cd01774` (night spots are Business_Ledger nightlife rows, the thirteen name lists gone — builder: "The businesses should come from the ledger"), `3c614cfb7` (agy's second read folded: no place is both tonight's night spot and dinner; child-area rows placed at their parent hood; helpers called directly).
+- **Proof:** code read and two agy reads (`output/antigravity/2026-11-21-review-e356-evening-and-bond-lines.md`, `…-night-spots-from-the-ledger.md`); `node --check`. **No bench fire, no test run** — both blocked by the builder 2026-11-21. Known red: `scripts/hoodBlindTables` T12 (removed venue names) and any test that loads `buildEveningFood.js` without a seeded hood set.
+- **Stage 69 (2026-11-21 ~19:00 CST):** builder go ("I already told you the job"). Live pulled = stage 68 (`e356b.sha256`); per-file check vs `b32c3b8e5`; exactly six files changed; manifest `output/engine-sheet/2026-11-21-e356c/e356c.sha256`; push landed; pull-back byte-identical; version cut **@204**. Script `output/engine-sheet/2026-11-21-e356c/push.sh`.
+- **Smoke test: not run** (sandbox blocked). First live fire C117 Sun 2026-11-22 is the first execution of this code — read Engine_Errors for Phase7-Nightlife / Phase7-Food / Phase 5 bonds, S.nightlife spots carrying BIZ_IDs, wedding rows tagged as weddings.
+- **Back out:** the six files from `b32c3b8e5` (= stage 68 manifest `e356b.sha256`) + version cut.
+
 ### PROD stage 68 — every bond line lands on the week's log (2026-11-21, engine-sheet, engine.356)
 
 - **What:** `phase05-citizens/bondEngine.js` at `fbf6a0707` on stage 67. `appendBondLifeLine_` — the one function every bond life line goes through (lost touch, picked things back up, had it out, became a real friend, more than friends, a wedding, a congregation joined or left) — wrote only the citizen's `LifeHistory` cell; it now also queues one `LifeHistory_Log` row: the engine's own tag and words, `source:bond`, and the other person as `contactPopId` on the connection-shift lines. Builder 2026-11-21: "this bond system still isn't wired into the sim" · "Proceed".

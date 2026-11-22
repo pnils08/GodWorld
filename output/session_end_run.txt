@@ -14,16 +14,16 @@ Mechanical sub-steps (6):
 ========================================================================
 
 --- [1/6] session summary → Supermemory (best-effort) ---
-✓ session log → Supermemory [session-logs] doc 2fKCv8HM8wJmXj4cdBtZTe (3114 chars, 37 summary rows folded)
+✓ session log → Supermemory [session-logs] doc W2riXqmN9pmqdGssBV44AY (2830 chars, 33 summary rows folded)
 
 --- [2/6] auditPlanTagDrift (informational) ---
   # Plan tag drift audit
   
-  Generated: 2026-11-22T00:17:01.661Z
-  Plans scanned: 181
+  Generated: 2026-11-22T23:18:29.528Z
+  Plans scanned: 182
   No frontmatter: 10
   No changelog: 8
-  No status-verb match: 161
+  No status-verb match: 162
   Drifts found: 0
   
   No plan-tag drift detected.
@@ -32,17 +32,63 @@ Mechanical sub-steps (6):
 --- [3/6] ROLLOUT conformance lint (informational) ---
   ROLLOUT LINT: clean — every row is a sweep-safe pointer within budget.
   ROLLOUT IN HAND: more than one in-progress row per terminal (job model = one):
-    engine-sheet: 4 — pipeline.100, pipeline.110, pipeline.113, engine.356
-    research-build: 9 — engine.346, pipeline.111, pipeline.109, pipeline.108, pipeline.101, pipeline.89, infrastructure.19, engine.350, pipeline.114
+    engine-sheet: 3 — pipeline.100, pipeline.110, pipeline.113
+    research-build: 8 — engine.346, pipeline.109, pipeline.108, pipeline.101, pipeline.89, infrastructure.19, engine.350, pipeline.114
   ROLLOUT OVERDUE: 2 waiting row(s) past their Cycle/date or naming none — read the record, then flip, re-date or close:
-    L33 engine.286: latest Cycle named C112, live is C116; latest date named 2026-10-28, today is 2026-11-21
-    L64 engine.280: latest Cycle named C113, live is C116; latest date named 2026-10-08, today is 2026-11-21
+    L34 engine.286: latest Cycle named C112, live is C116; latest date named 2026-10-28, today is 2026-11-22
+    L65 engine.280: latest Cycle named C113, live is C116; latest date named 2026-10-08, today is 2026-11-22
+  NEXT COPIES: 1 handoff copy(ies) of a read due at the next fire — the owner drops it from its line:
+    NEXT[engine-sheet] copies engine.356 — due at the next fire; the read lives in its ROLLOUT §2 row (--due prints it)
 
 --- [4/6] worked rows have their plan updated ---
   ✓ every row named in this session's [engine-sheet] commits has its plan updated
 
 --- [5/6] cross-terminal git stack check (read-only) ---
-  ⚠ 60 unpushed commit(s) ahead of origin/main:
+  ⚠ 104 unpushed commit(s) ahead of origin/main:
+    c79aae297 engine.356 gaps LIVE: PROD stage 73, @208 — crime counts in the hood trajectory and migration (World_Config bands); a blank hood-map cell is missing (7 files at 49262adfd). agy confirm -> diff read -> fold; tests green; bench @231 C117 PASS 210 s, 0 new EE, Baylight decay -> steady. Pull-back byte-identical to e356h.sha256. PIN, NEXT, row, plan, DEPLOY_HISTORY; both gap-log rows closed. [engine/sheet]
+    90f0a0e9a pipeline.111: package test follows Sharon's routes — SHARON-LEP2-3; angle and write on GPT-5.6 Luna, report on Llama 4 Maverick (builder 2026-11-21: "go"). Test passes. [research/build]
+    cac6f0a1d pipeline.111: Sharon's morning plan moves to GPT-5.6 Luna, her writer's model (builder 2026-11-21: "go"; about $0.0003 a week more). Interviews stay on Llama 4 Maverick. Package SHARON-LEP2-3, read back: angle luna, report maverick, write luna; the desk cron hands the angle route to her morning call (cron-desk-run.js routeFor 'angle'). The package test's matching edit (version + three routes) is in the working tree, uncommitted: the test guard blocks a test-file commit and the spend guard blocks running it — both owed at his unlock. [research/build]
+    49262adfd engine.356 gaps: agy's diff read folded (output/antigravity/2026-11-21-review-two-hood-gaps-diff.md, SHIP-WITH-FIXES). Repo only.
+    57f83c39d pipeline.111: builder on tool use — depth may not be needed; tool-calling models chosen per media seat, not one model for all. [research/build]
+    31f073360 pipeline.111: Sharon live — row to live-observing with its Fri 2026-11-27 read; plan tasks and changelog. [research/build]
+    982ca9ec6 pipeline.111 LIVE: Sharon Okafor wakes as the nightlife reporter (builder 2026-11-21: "Run 3 lock it in and turn that live, loosen her reviewer to stick to facts about locations , citizens data points").
+    deed702bd agy: diff read of two hood-data gap fixes (e608d9307)
+    b20cd2c94 agy brief: diff read of the two hood-data gap fixes. [engine/sheet]
+    e608d9307 engine.356 gaps: crime counts in the hood trajectory and migration; a blank hood-map cell is missing, not 0 (builder 2026-11-21: "Give the engine gaps for agy to review" · "Go on these"). Repo only — not on PROD.
+    903991cb6 agy: review two hood-data gaps found on engine.356
+    e3a2cef78 engine.356 plan: Open question 6 answered verbatim — the moments set the citizen's walk path; the engine hands the world view a route (place + daypart, in order), not a drawn back-and-forth. [engine/sheet]
+    b62f10da0 engine.356 plan: builder's answers to Open questions 1-5 recorded verbatim with the read (both; yes; several; the wake's morning/afternoon/evening; bonds as drink/dinner/check-in/home visit, drawn on the page); Q6 re-asked. agy brief on the two hood-data gaps (trajectory crime check dead; blank map cell reads 0) — builder: "Give the engine gaps for agy to review". [engine/sheet]
+    76086a541 pipeline.111: plan changelog, Sharon runs 2–3. [research/build]
+    3fe3a575e pipeline.111 Task 3: Sharon's morning plan wakes as the reporter, not the citizen (builder 2026-11-21: "She doesn't run as a citizen Cron at work … her 3 wakes are the media Cron, pull out around Oakland … instruct her on what her beat is and to report on the nightlight around Oakland").
+    ea40cd308 pipeline.111: plan tasks and changelog after Sharon's test run 1. [research/build]
+    76d470dee pipeline.111 Task 3: Sharon's first test day on the new wake (builder 2026-11-21: "go on the run").
+    4e73da1dd engine.356: SANDBOX 1004 @229 = PROD stage 72 — one fire C117 PASS 189 s, 0 new Engine_Errors; 31 config keys armed; growth moves toward the hood resting level 196 / away 66, none over the cap; night spot a ledger row, not also dinner; weddings tagged bare. Bench synced back to live. [engine/sheet]
+    1c52b41cb pipeline.111 Task 1: Sharon's C116 writer request captured word for word (the writer run under a preload that stops the request before the model; nothing sent). Sits beside the new-wake print. [research/build]
+    99b6c6569 engine.356 LIVE: PROD stage 72, @207 — every hood signal in a business's success, the dials on World_Config, weather (2 files at 56fb48160). agy SHIP-WITH-FIXES folded; tests green except buildContractSeeds' 3 pre-session failures. Not benched; pull-back byte-identical to e356f.sha256. PIN, NEXT, row, plan, DEPLOY_HISTORY. [engine/sheet]
+    e57933b47 pipeline.111 Task 1: Sharon's new wake printed for C116, no model call — who she is (row + both bio pieces), her beat (nightlife and evenings), her tools, this Cycle's evening record and the city-event, sighting and town-watched rows as the engine wrote them. For the builder's read beside her C116 wake. [research/build]
+    56fb48160 engine.356: agy's read of the every-signal cut folded (SHIP-WITH-FIXES) + the tests trued to the new design (builder unlocked tests 2026-11-21).
+    77eba5dd1 pipeline.111: plan for the five culture reporters waking as themselves — who they are, their beat, their tools, the engine's output on their records; Sharon first (builder 2026-11-21: both bio pieces kept, "visits places she writes about"; "fame isnt her beat", fame through her tools). Row points at the plan; index entry. [research/build]
+    43e57e140 agy: review engine.356 every hood signal and dials
+    bbac10ab8 engine.356: agy brief — every hood signal + dials on World_Config (c80381c63); corrects that commit's storm claim (every-week storm -> ~1.6 pp lower settled levels, not a few tenths). [engine/sheet]
+    c80381c63 engine.356: the hood score reads every hood signal, and every dial is on World_Config (builder 2026-11-21: "dont be shy on data we have to add, thats the idea here is that unique combinations of data drive the world, world_config holds alot of the dials for systems so these dont get embedded in code, crime, weather, whatever we offer"). Repo only — stage 71 (@206) carries the four-signal cut; this replaces it before its first fire.
+    1402f9f93 engine.356 LIVE: PROD stage 71, @206 — a business's success stems from how its hood performs (applyBusinessDynamics.js + engine94SheetContract.js at 3eb7d3180). agy HOLD -> fold -> SHIP. Not benched, not smoke-tested (his block); pull-back byte-identical to e356e.sha256. PIN, NEXT, row, plan, DEPLOY_HISTORY; agy's two reads filed. [engine/sheet]
+    2246a02b0 agy: re-review engine.356 hood drives growth fold
+    083860ca0 engine.356: agy re-review brief for the hood-growth fold. [engine/sheet]
+    3eb7d3180 engine.356: agy's read of the hood-growth cut folded (output/antigravity/2026-11-21-review-e356-hood-drives-growth.md, HOLD). Repo only, not on PROD.
+    cfbde2f16 agy: review engine.356 hood drives business growth
+    690ffa608 C116 gap log: the hood trajectory's crime check never fires (CrimeIndex 0.57–0.73 vs its >= 2 / === 0 tests). Found on engine.356; not fixed. [engine/sheet]
+    8effcd9c5 engine.356: agy brief — the hood drives business growth (45710b3ed). [engine/sheet]
+    45710b3ed engine.356: a business's success stems from how its hood performs (builder 2026-11-21: "their success should stem from how the hood performs" · terms approved · "yes B"). Repo only — not on PROD, out to codex for a read; no sandbox, no test (his block); node --check + an offline compute on the C116 dump.
+    fe086a96f engine.356 LIVE: PROD stage 70, @205 — the evening index reads each business row's own hood (buildEveningFood.js at e917708a4); the four sub-area rows moved on the live ledger. Not benched, not smoke-tested (his block); pull-back byte-identical to e356d.sha256. PIN, row, plan, DEPLOY_HISTORY. [engine/sheet]
+    e917708a4 engine.356: every business sits in a tracked hood (builder 2026-11-21: "We have 22 hoods, limited amount of buinesses, why are any in a sub hood no one tracks?" · "Ok").
+    4d77eea12 NEXT[engine-sheet]: no row id copied. [engine/sheet]
+    b6ff95079 NEXT[engine-sheet]: drop the copy of engine.356's C117 read (it lives in the §2 row). [engine/sheet]
+    18995caaf engine.356 LIVE: PROD stage 69, @204 — stage 68's two defects fixed, night spots from the ledger, both agy reads folded (six files at 3c614cfb7). Builder go: "I already told you the job". Not benched, not smoke-tested (his block); pull-back byte-identical to e356c.sha256. C117 is its first run; the row moves to §2 with that read. PIN and NEXT[engine-sheet] updated. [engine/sheet]
+    41b475c0d S773 session-end [research/build]: engine.350 Task 16 re-ruled, nothing built
+    3c614cfb7 engine.356: agy's second read folded (output/antigravity/2026-11-21-review-e356-night-spots-from-the-ledger.md). Repo only — NOT on PROD, no sandbox run, no test run (builder's block); node --check only.
+    dd0767470 S772 session-end fix-up [engine/sheet]: the close at d48847987 skipped Step 0 and the engine-sheet audit table (builder: "Skill starts at step 0"). Run now: terminal read from tmux; ENGINE_MAP rows for the nightlife picker and the evening snapshot trued; engine.340 flipped to live-observing with its C117 read (code live since stage 63, row still said ready); engine.356 row and plan no longer say 'bench' (sandbox and tests are blocked); NEXT carries the required push note — stages 66–68 pushed, not smoke-tested. agy's second read filed, unfolded. Push held: research-build's commits are stacked.
+    f72f29dab agy: review engine.356 night spots from the ledger
+    d48847987 S772 session-end [engine/sheet]: PIN odometer, NEXT[engine-sheet] pointing at the engine.356 handoff state, the close run. Committed locally; push held — research-build's commits are stacked and PROD stage 68 carries two known defects.
     b2cd01774 engine.356: the night's spots come from the ledger (builder 2026-11-21: "The businesses should come from the ledger and their success should stem from how the hood performs"). Repo only — NOT on PROD, no sandbox run, no test run (both blocked by the builder); out to agy for a read.
     8f46ab759 S771 session-end [research/build]: counter bumped; NEXT line carries the one open hold — the TERMINAL.md standing-go line needs his unlock to match the restored test guard. Committed locally; push held — engine-sheet commits are on the same tree.
     a07c85268 Test guard put back: blocks tests and sandbox runs; the only thing that passes a fix is reading the code (builder 2026-11-21: "Put the block back on tests and Sandbox runs, in the block state the only reading code passes a fix"). TERMINAL.md standing-go line changed to match. spend-guard untouched. [research/build]

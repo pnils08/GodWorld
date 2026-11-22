@@ -1,7 +1,7 @@
 # SESSION_CONTEXT — one PIN (world state outside the repo) + one NEXT line per Claude terminal: the job, its next step, any standing hold from Mike. Never what was done — that is git and the plan's changelog.
 
-**PIN:** S773 | Day 234 | Canon C116 | PROD @208 (stage 73; history: DEPLOY_HISTORY §PROD) | next live fire C117 Sun 2026-11-22
+**PIN:** S774 | Day 235 | Canon C116 | PROD @208 (stage 73; history: DEPLOY_HISTORY §PROD) | next live fire C117 Sun 2026-11-22
 
 **NEXT[research-build]:** engine.350 → Task 16 re-ruled (faith like school: one generic church per hood; plan tail). Next: read the Faith_Organizations readers, bring the exact cut. Unruled: hood congregation size; tab rows 211, 166. Hold: no build or tab write without his go; TERMINAL.md standing-go line needs his unlock. Push held.
 
-**NEXT[engine-sheet]:** no build in hand; the live job waits on its fire (§2). After it: the moments-with-a-place build — his six answers are in the plan's Rulings; Task 1's count comes first. Push held (git): research-build commits stacked.
+**NEXT[engine-sheet]:** engine.356 → after its fire (§2 row), Task 1's count, then the moments-with-a-place build on his six answers (plan §Rulings). PROD stages 69–73 pushed and benched (@229/@231), first live fire C117. Push held (git): research-build commits stacked.

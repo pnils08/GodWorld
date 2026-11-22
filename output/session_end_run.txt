@@ -1,5 +1,5 @@
 ========================================================================
-sessionEndMechanical: terminal=research-build, rotate-history=false, dry-run=false
+sessionEndMechanical: terminal=engine-sheet, rotate-history=false, dry-run=false
 ========================================================================
 Expected upstream model step (BEFORE this script):
   1. SESSION_CONTEXT.md PIN + NEXT[terminal] line + ROLLOUT_PLAN.md updated
@@ -14,12 +14,12 @@ Mechanical sub-steps (6):
 ========================================================================
 
 --- [1/6] session summary → Supermemory (best-effort) ---
-✓ session log → Supermemory [session-logs] doc YvMVdPVHMaM2SwitGvxQdB (2905 chars, 34 summary rows folded)
+✓ session log → Supermemory [session-logs] doc 2fKCv8HM8wJmXj4cdBtZTe (3114 chars, 37 summary rows folded)
 
 --- [2/6] auditPlanTagDrift (informational) ---
   # Plan tag drift audit
   
-  Generated: 2026-11-21T23:32:56.952Z
+  Generated: 2026-11-22T00:17:01.661Z
   Plans scanned: 181
   No frontmatter: 10
   No changelog: 8
@@ -39,10 +39,29 @@ Mechanical sub-steps (6):
     L64 engine.280: latest Cycle named C113, live is C116; latest date named 2026-10-08, today is 2026-11-21
 
 --- [4/6] worked rows have their plan updated ---
-  ✓ every row named in this session's [research-build] commits has its plan updated
+  ✓ every row named in this session's [engine-sheet] commits has its plan updated
 
 --- [5/6] cross-terminal git stack check (read-only) ---
-  ⚠ 41 unpushed commit(s) ahead of origin/main:
+  ⚠ 60 unpushed commit(s) ahead of origin/main:
+    b2cd01774 engine.356: the night's spots come from the ledger (builder 2026-11-21: "The businesses should come from the ledger and their success should stem from how the hood performs"). Repo only — NOT on PROD, no sandbox run, no test run (both blocked by the builder); out to agy for a read.
+    8f46ab759 S771 session-end [research/build]: counter bumped; NEXT line carries the one open hold — the TERMINAL.md standing-go line needs his unlock to match the restored test guard. Committed locally; push held — engine-sheet commits are on the same tree.
+    a07c85268 Test guard put back: blocks tests and sandbox runs; the only thing that passes a fix is reading the code (builder 2026-11-21: "Put the block back on tests and Sandbox runs, in the block state the only reading code passes a fix"). TERMINAL.md standing-go line changed to match. spend-guard untouched. [research/build]
+    c3e42069b engine.356 plan: builder ruling recorded verbatim — businesses come from the ledger; their success stems from how the hood performs — with the code read against it: night spots are name lists in buildNightLife.js (28 ledger nightlife rows unused), the evening pick ignores a business's success, and the hood is the small term of the growth formula. Nothing built. [engine/sheet]
+    170e05444 engine.356: agy review of tonight's cuts folded (output/antigravity/2026-11-21-review-e356-evening-and-bond-lines.md). Repo only, NOT on PROD.
+    4559c9d18 engine.356: line-by-line re-read of tonight's evening cut — a third defect and two hardenings. Repo only, NOT benched, NOT on PROD.
+    ccc377aa6 agy: review engine.356 evening places and bond log lines
+    458cb637d engine.356: state at handoff written into the plan and the row — PROD stage 68 carries two known defects, the fix is in the repo unbenched, the agy review is out, nothing pushes without the builder's word. [engine/sheet]
+    2ef8e325d engine.356: agy adversarial brief on tonight's three unreviewed engine cuts and their fix. [engine/sheet]
+    11bfb6100 engine.356: two defects in tonight's own pushes, found on re-reading after the builder's "you don't read code and are pushing broken code". Repo only — NOT benched, NOT on PROD (stage 68 carries both defects).
+    a49d80c52 S770 session-end [research/build]: counter bumped; engine.350 row and NEXT line say where the job stopped — Task 16 is a plan, unbuilt, its design unruled; two live tab rows await keep-or-revert. Push held — engine-sheet's commits are on the same tree.
+    b32c3b8e5 engine.356 LIVE: PROD stage 68, @203 — every bond life line also lands on LifeHistory_Log (bondEngine.js at fbf6a0707).
+    90cc5bb7e engine.350 Task 16: correction — the ledger is not the denominator; relative rows are not defects, named-kin option withdrawn [research/build]
+    93e3944b0 Brief for agy: plan review of engine.350 Task 16 (faith rows reach the congregation) [research/build]
+    eac2cd06e engine.350 Task 16 plan: faith rows reach the congregation — read from bondEngine's MembersList, corrects pile 3's no-congregation-field note [research/build]
+    e8664ee8b engine.350 Task 15 pile 3: rows 211 and 166 aimed at their hoods on the live tab; the rest put to the builder [research/build]
+    8fa0e75c3 engine.350 Task 15 pile 2: dashboard reads a graded life-history tag as its kind, not General [research/build]
+    fbf6a0707 engine.356: every bond line lands on LifeHistory_Log too (builder 2026-11-21: "this bond system still isn't wired into the sim" · "Proceed").
+    d1155386d S769 session-end, the parts the first pass left out [research/build]: the Step 0 audit found the engine.350 row stale (pile 1 is live, the suite is green); the NEXT line carries the push note Step 4 asks for. Push held — engine-sheet's commits are on the same tree.
     59224f9cd S769 session-end [research/build]: counter bumped, the archive sweep, the close run. Committed locally; push held — engine-sheet's commits are stacked on the same tree.
     51d6f5dbd engine.356 fix-up of 4b1fc3125's record: version cut @202 = stage 67 (the builder cleared the version limit; live re-pulled = the benched manifest first); PIN to @202 / stage 67; the row and the plan changelog, which that commit claimed and did not carry (its script stopped on a stale PIN string after writing DEPLOY_HISTORY). [engine/sheet]
     4b1fc3125 engine.356 LIVE: PROD stage 67 = stage 66 + two files at 16a67a8e9 (builder 2026-11-21: "We can raise the odds a notch and push").
@@ -90,5 +109,5 @@ Mechanical sub-steps (6):
   ✓ godworld-dashboard restarted
 
 ========================================================================
-sessionEndMechanical: complete (terminal=research-build)
+sessionEndMechanical: complete (terminal=engine-sheet)
 ========================================================================

@@ -790,7 +790,7 @@
     }
   },
   "sharon-okafor": {
-    "version": "SHARON-LEP2-2",
+    "version": "SHARON-LEP2-3",
     "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
@@ -806,7 +806,7 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-4-maverick"
+        "model": "openai/gpt-5.6-luna"
       },
       "report": {
         "provider": "openrouter",

@@ -86,5 +86,6 @@ On Sharon (2026-11-21): bio — "i like them both and love \"visits places she w
 
 ## Changelog
 
+- 2026-11-21 (research-build) — "her 3 wakes are the media Cron, pull out around Oakland": morning plan on her seat file; gate profile off the writer's Packet. Run 3 on the Kelley block party; no visit, 0 tool calls. `3fe3a575e`
 - 2026-11-21 (research-build) — Game night on her beat: "Those onto stay if they are in context of the nightlife her best covers". Test run 1 filed on Aitken: her morning plan carries the city sports line.
 - 2026-11-21 (research-build) — Opened on the builder's ruling; Sharon first: both bio pieces kept, she leads nightlife and evenings, fame through her tools.

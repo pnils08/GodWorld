@@ -2240,7 +2240,9 @@ async function runAngle(assign) {
           // pipeline.74 — 700 truncated DeepSeek v4-flash plans mid-JSON (7 of 12 calls stopped at
           // exactly 700, 10-13/10-14; resample hit the same wall). Its whole plans ran 532–658+ where
           // deepseek-chat ran 353–547. A cut plan is worthless; the chase is clipped to 700 chars downstream.
-          '--max-tokens=' + (PACKET_ACTIVE ? '1600' : '320')],
+          // pipeline.111: a seat-file reporter's plan reads the whole record; Sonnet 5.5 spent 1600 before its JSON
+          // closed (Maria, test shell 2026-11-22, finish=length twice).
+          '--max-tokens=' + (SEAT_FILE ? '4000' : PACKET_ACTIVE ? '1600' : '320')],
           { cwd: ROOT, encoding: 'utf8', timeout: 300000, ...(askOnStdin ? { input: ask } : {}) });
         const outTrim = out.trim();
         // tolerate dotenv banner lines before the JSON — line-anchored: the rotating

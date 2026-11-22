@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 'use strict';
+// MINT_GAME_TEAMS_ lives in processAdvancementIntake.js (shared Apps Script scope) — the same two rows (engine.356 bizIsFranchise_)
+global.MINT_GAME_TEAMS_ = [[/\bOaks\b/, 'BIZ-00074'], [/\bOakland (?:A['’]s|As|Athletics)\b/, 'BIZ-00005']];
 // engine.201: isolated SYNTHETIC citizens/businesses, never canon or Sheet data.
 // Run: node scripts/businessOwnerDials.test.js
 const fs = require('fs'), path = require('path'), vm = require('vm');
@@ -13,6 +15,7 @@ const w = { console, Logger: { log() {} },
   queueRangeIntent_: (ctx, tab, row, col, values) => ctx.writes.push({ tab, row, col, values }),
   queueEnsureTabIntent_: () => {} };
 vm.createContext(w);
+w.MINT_GAME_TEAMS_ = global.MINT_GAME_TEAMS_;   // engine.356 bizIsFranchise_ reads it from the shared scope
 for (const file of ['utilities/citizenMemory.js', 'utilities/citizenDialMap.js',
   'utilities/compressLifeHistory.js', 'phase05-citizens/generationalWealthEngine.js',
   'phase05-citizens/applyBusinessDynamics.js']) {
@@ -28,7 +31,7 @@ function fixture(rows, personnel, declining = false) {
     bizNoiseBound: 0, bizCoverageUnit: 0.1, bizVitalityGain: 0.1, bizSuccessWindow: 4,
     bizSuccessVitalityHigh: 80, bizSuccessApprovalHigh: 80, bizSuccessPenalty: 1,
     bizDisruptBaseChance: 0, bizDisruptSuccessMult: 1, bizDisruptShock: 1,
-    bizClosureStreak: 8, bizClosureRevenueFloorPct: 25, bizEventShockScale: 1, bizInitiativeStallDrag: 0.5, bizSportsWeekPp: 2.0, bizSettleRate: 0.05, bizSettleMinStaff: 1000,
+    bizClosureStreak: 8, bizClosureRevenueFloorPct: 25, bizEventShockScale: 1, bizInitiativeStallDrag: 0.5, bizSportsWeekPp: 2.0, bizSettleRate: 0.05, bizSettleMinStaff: 1000, /* engine.356, as ENGINE96_CONFIG_SEEDS seeds them */ bizHoodSpan: 5, bizHoodPull: 0.2, bizHoodMaxPp: 1.5, bizEventCap: 1.0, bizWeatherPp: 1.0, bizClassMiddle_arts: 5.14, bizClassMiddle_construction: 9.02, bizClassMiddle_default: 4.03, bizClassMiddle_education: 0.67, bizClassMiddle_faith: 3.99, bizClassMiddle_food: 5.52, bizClassMiddle_health: 2.42, bizClassMiddle_professional: 6.42, bizClassMiddle_retail: 4.11, bizClassMiddle_tech: 11.59, bizHoodWeight_vitality: 1, bizHoodUnit_vitality: 8, bizHoodWeight_sentiment: 1, bizHoodUnit_sentiment: 0.35, bizHoodWeight_crime: 1, bizHoodUnit_crime: 0.2, bizHoodWeight_momentum: 1, bizHoodUnit_momentum: 5, bizHoodWeight_events: 1, bizHoodUnit_events: 5, bizHoodWeight_migration: 1, bizHoodUnit_migration: 5, bizHoodWeight_income: 1, bizHoodUnit_income: 80000, bizHoodWeight_boom: 1, bizHoodUnit_boom: 1, 
     bizDeclineStreak: 4, bizShipEchoShare: 0.15, dialOwnerDriveExpandMult: 1.25, dialOwnerStreakRoom: 1
   };
   for (const sector of ['faith', 'retail', 'food', 'health', 'tech', 'professional', 'construction', 'arts', 'education', 'default']) config['bizVol_' + sector] = 1;

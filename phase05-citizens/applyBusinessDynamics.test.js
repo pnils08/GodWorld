@@ -11,6 +11,8 @@ global.queueEnsureTabIntent_ = (ctx, tab, headers, reason, domain, priority) => 
 global.queueRangeIntent_ = (ctx, tab, r, c, values, reason, domain, priority) => ranges.push({ tab, r, c, values, reason, domain, priority });
 // pressureBar_ lives in utilities/citizenDialMap.js (shared Apps Script scope) — engine.178 owner dial gates read it
 global.pressureBar_ = require('../utilities/citizenDialMap').pressureBar_;
+// MINT_GAME_TEAMS_ lives in processAdvancementIntake.js (shared Apps Script scope) — the same two rows here (engine.356 bizIsFranchise_)
+global.MINT_GAME_TEAMS_ = [[/\bOaks\b/, 'BIZ-00074'], [/\bOakland (?:A['’]s|As|Athletics)\b/, 'BIZ-00005']];
 const mod = require('./applyBusinessDynamics');
 const fs = require('fs'), path = require('path');
 let passed = 0, failed = 0;
@@ -20,7 +22,7 @@ function assert(label, cond, detail) { if (cond) { console.log(`  ok   ${label}`
 const CFG = { bizShipEchoShare: 0.15, bizDeclineStreak: 4, bizDriftMaxUp: 1.0, bizDriftMaxDown: 1.0, bizGrowthCeil: 40, bizGrowthFloor: -10, bizNoiseBound: 0.25, bizCoverageUnit: 0.1, bizVitalityGain: 0.15, bizSuccessWindow: 3, bizSuccessVitalityHigh: 9.0, bizSuccessApprovalHigh: 85, bizSuccessPenalty: 0.3, bizDisruptBaseChance: 2, bizDisruptSuccessMult: 3, bizDisruptShock: 2.0, bizClosureStreak: 8, bizClosureRevenueFloorPct: 40, bizEventShockScale: 1.0, bizVol_faith: 0.5, bizVol_retail: 1.2, bizVol_food: 1.3, bizVol_health: 0.7, bizVol_tech: 1.5, bizVol_professional: 0.8, bizVol_construction: 1.1, bizVol_arts: 1.2, bizVol_education: 0.6, bizVol_default: 1.0,
   bizInitiativeStallDrag: 0.5,   // engine.250, builder-ruled half weight
   bizSportsWeekPp: 2.0,          // engine.205 slice D
-  bizSettleRate: 0.05, bizSettleMinStaff: 1000,   // engine.193 (b)
+  bizSettleRate: 0.05, bizSettleMinStaff: 1000, /* engine.356, as ENGINE96_CONFIG_SEEDS seeds them */ bizHoodSpan: 5, bizHoodPull: 0.2, bizHoodMaxPp: 1.5, bizEventCap: 1.0, bizWeatherPp: 1.0, bizClassMiddle_arts: 5.14, bizClassMiddle_construction: 9.02, bizClassMiddle_default: 4.03, bizClassMiddle_education: 0.67, bizClassMiddle_faith: 3.99, bizClassMiddle_food: 5.52, bizClassMiddle_health: 2.42, bizClassMiddle_professional: 6.42, bizClassMiddle_retail: 4.11, bizClassMiddle_tech: 11.59, bizHoodWeight_vitality: 1, bizHoodUnit_vitality: 8, bizHoodWeight_sentiment: 1, bizHoodUnit_sentiment: 0.35, bizHoodWeight_crime: 1, bizHoodUnit_crime: 0.2, bizHoodWeight_momentum: 1, bizHoodUnit_momentum: 5, bizHoodWeight_events: 1, bizHoodUnit_events: 5, bizHoodWeight_migration: 1, bizHoodUnit_migration: 5, bizHoodWeight_income: 1, bizHoodUnit_income: 80000, bizHoodWeight_boom: 1, bizHoodUnit_boom: 1,    // engine.193 (b)
   // engine.178 owner dial gates, as ensureEngine178Config_ seeds them
   dialOwnerStreakRoom: 1, dialOwnerDriveExpandMult: 1.25 };
 const BL_H = ['BIZ_ID', 'Name', 'Sector', 'Neighborhood', 'Employee_Count', 'Avg_Salary', ' Annual_Revenue ', 'Growth_Rate ', 'Key_Personnel'];
@@ -56,11 +58,19 @@ console.log('the drift, one business');
   assert('deterministic: same inputs, same output', JSON.stringify(a) === JSON.stringify(b));
   assert('quiet cycle at neutral vitality: only noise moves it, inside ±0.25×vol', Math.abs(a.drift) <= 0.25 * 1.2 + 1e-9 && a.parts.ev === 0 && a.parts.vit === 0 && a.parts.pressure === 0, JSON.stringify(a.parts));
   const hit = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, Object.assign({}, quiet, { chaosAtBusiness: -1, chaosInHood: -1, coverageDeviation: -0.1 }), 110);
-  assert('events are the signal: chaos at the business + in the hood + bad press = −2.0 capped, drift clamped at −1.0', hit.parts.ev === -2.0 && hit.drift === -1.0 && hit.growth === 1.0 && hit.streak === 0, JSON.stringify(hit));
+  assert('events: chaos at the business + in the hood + bad press = −2.5 raw, capped at bizEventCap −1.0 (engine.356; was −2.0), drift clamped at −1.0', hit.parts.ev === -1.0 && hit.drift === -1.0 && hit.growth === 1.0 && hit.streak === 0, JSON.stringify(hit));
   const lift = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, Object.assign({}, quiet, { initiativeAdvanced: true, coverageDeviation: 0.2 }), 110);
-  assert('an initiative landing + good press = +1.5 before vol, clamped +1.0', lift.parts.ev === 1.5 && lift.drift === 1.0);
-  const v = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, Object.assign({}, quiet, { vitality: 9.27 }), 110);
-  assert('vitality term: (9.27−6)×0.15 = 0.49, clamped ±0.5; a null vitality contributes 0', Math.abs(v.parts.vit - 0.4905) < 1e-9 && mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, Object.assign({}, quiet, { vitality: null }), 110).parts.vit === 0);
+  assert('an initiative landing + good press = +1.5 raw, capped at bizEventCap +1.0 before vol (engine.356), drift clamped +1.0', lift.parts.ev === 1.0 && lift.drift === 1.0);
+  // engine.356: the hood term is a pull toward a resting level = class middle + hood score × span (5), a fifth of the gap a Cycle, capped ±1.5
+  const hv = (g, score, mid) => mod.bizDriftOne_(CFG, Object.assign({}, biz, { growth: g }), { streak: 0, win: 0 }, Object.assign({}, quiet, { hoodScore: score, classMiddle: mid }), 110).parts.vit;
+  assert('hood term: retail at 2, middle 4.11, hood +0.5 -> rest 6.61, pull 0.2 × 4.61 = 0.922', Math.abs(hv(2, 0.5, 4.11) - 0.922) < 1e-9, hv(2, 0.5, 4.11));
+  assert('hood term: at its resting level the hood adds nothing (no ratchet)', Math.abs(hv(6.61, 0.5, 4.11)) < 1e-9, hv(6.61, 0.5, 4.11));
+  assert('hood term: a weak hood pulls a high business down; capped at -1.5', Math.abs(hv(20, -0.4, 4.11) - -1.5) < 1e-9 && Math.abs(hv(4, -0.4, 4.11) - 0.2 * (4.11 - 2 - 4)) < 1e-9, hv(20, -0.4, 4.11) + ' / ' + hv(4, -0.4, 4.11));
+  assert('hood term: no score or no class middle (City-wide, institution, franchise) contributes 0', hv(2, null, 4.11) === 0 && hv(2, 0.5, null) === 0);
+  { let g = 20; for (let c = 0; c < 200; c++) g = mod.bizDriftOne_(Object.assign({}, CFG, { bizNoiseBound: 0, bizDisruptBaseChance: 0 }), Object.assign({}, biz, { growth: g }), { streak: 0, win: 0 }, Object.assign({}, quiet, { hoodScore: 0.5, classMiddle: 4.11, vitality: 6.0 }), c + 1).growth;
+    assert('200 quiet Cycles from 20: settles at the hood resting level 6.61 and holds (no walk)', Math.abs(g - 6.61) < 0.02, g); }
+  const wx = (imp) => mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, Object.assign({}, quiet, { weatherImpact: imp }), 110).parts.ev;
+  assert('weather: impact 1.33 costs a hood-following business 0.33 × bizWeatherPp; impact 1 or none costs nothing', Math.abs(wx(1.33) - -0.33) < 1e-9 && wx(1) === 0 && wx(null) === 0, wx(1.33));
   const w1 = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 2 }, Object.assign({}, quiet, { vitality: 9.5, mayorApproval: 95 }), 110);
   const w0 = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 2 }, Object.assign({}, quiet, { vitality: 9.5, mayorApproval: 70 }), 110);
   assert('success pressure bites on the 3rd prosperous cycle (vitality ≥9 AND approval ≥85), resets when approval falls', w1.win === 3 && w1.parts.pressure === -0.3 && w0.win === 0 && w0.parts.pressure === 0);
@@ -102,7 +112,7 @@ console.log('wiring');
   assert('ensureEngine96Config_ self-arms beside 133/135', /ensureEngine135Config_\(ss\);[^\n]*\n\s*ensureEngine96Config_\(ss\);/.test(orch));
   const contract = fs.readFileSync(path.join(__dirname, '..', 'phase01-config', 'engine94SheetContract.js'), 'utf8');
   const seeded = (contract.match(/\['biz[A-Za-z_]+',/g) || []).map(s => s.slice(2, -2));
-  assert('the 27 signed keys + bizDeclineStreak + bizInitiativeStallDrag (engine.250) + bizShipEchoShare (engine.193 3b) + bizSportsWeekPp (engine.205 D) + bizSettleRate/bizSettleMinStaff (engine.193 b) + the 4 owner-door keys (Task 12) are seeded; the dynamics pass requires exactly its 33', seeded.length === 37 && mod.BIZ_DYNAMICS_REQUIRED_KEYS.length === 33 && mod.BIZ_DYNAMICS_REQUIRED_KEYS.every(k => seeded.includes(k)), JSON.stringify(seeded));
+  assert('the 27 signed keys + bizDeclineStreak + bizInitiativeStallDrag (engine.250) + bizShipEchoShare (engine.193 3b) + bizSportsWeekPp (engine.205 D) + bizSettleRate/bizSettleMinStaff (engine.193 b) + the 4 owner-door keys (Task 12) + the 31 engine.356 keys (span, pull, hood cap, event cap, weather, 10 class middles, 8 signal weights + 8 units) are seeded; the dynamics pass requires exactly its 64', seeded.length === 68 && mod.BIZ_DYNAMICS_REQUIRED_KEYS.length === 64 && mod.BIZ_DYNAMICS_REQUIRED_KEYS.every(k => seeded.includes(k)), JSON.stringify(seeded));
   const fin = fs.readFileSync(path.join(__dirname, '..', 'phase09-digest', 'finalizeCycleState.js'), 'utf8');
   assert('finalizeCycleState carries businessDynamics from S.businessDynamicsState', /businessDynamics: S\.businessDynamicsState \|\| \{\}/.test(fin));
   const gw = fs.readFileSync(path.join(__dirname, '..', 'phase05-citizens', 'generationalWealthEngine.js'), 'utf8');
@@ -290,8 +300,7 @@ console.log('engine.193 cut 2 — coverage against its own weeks, vitality again
   const hi = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, Object.assign({}, base, { vitality: 9, vitalityMedian: 7 }), 121);
   const lo = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, Object.assign({}, base, { vitality: 5, vitalityMedian: 7 }), 121);
   const noMid = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, Object.assign({}, base, { vitality: 9, vitalityMedian: null }), 121);
-  assert('vitality reads against the median, both ways; no median → no term',
-    Math.abs(hi.parts.vit - 0.3) < 1e-9 && Math.abs(lo.parts.vit + 0.3) < 1e-9 && noMid.parts.vit === 0, [hi.parts.vit, lo.parts.vit]);
+  assert('engine.356: RetailVitality alone no longer moves growth (the hood score replaced the vitality push); no hood score → no hood term', hi.parts.vit === 0 && lo.parts.vit === 0 && noMid.parts.vit === 0, [hi.parts.vit, lo.parts.vit, noMid.parts.vit]);
 }
 console.log('engine.193 cut 3b — chaos reads signed; the ship steps around the cap and releases');
 {
@@ -300,8 +309,8 @@ console.log('engine.193 cut 3b — chaos reads signed; the ship steps around the
   const good = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, Object.assign({}, base, { chaosAtBusiness: 1 }), 121);
   const zero = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, Object.assign({}, base, { chaosAtBusiness: 0 }), 121);
   const bad = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, Object.assign({}, base, { chaosAtBusiness: -2 }), 121);
-  assert('a good letter lifts, a passed inspection is nothing, a blaze drags — the event term carries the sign',
-    good.parts.ev === 1 && zero.parts.ev === 0 && bad.parts.ev === -2, [good.parts.ev, zero.parts.ev, bad.parts.ev]);
+  assert('a good letter lifts, a passed inspection is nothing, a blaze drags (capped at −1) — the event term carries the sign',
+    good.parts.ev === 1 && zero.parts.ev === 0 && bad.parts.ev === -1, [good.parts.ev, zero.parts.ev, bad.parts.ev]);   // a blaze (−2) now meets bizEventCap 1.0 (engine.356)
   assert('hood sign: cheer up +, crime down +, gloom −, nothing 0, capped ±1',
     mod.chaosHoodSign_({ Sentiment: 0.08 }) === 1 && mod.chaosHoodSign_({ CrimeIndex: -0.08 }) === 1 &&
     mod.chaosHoodSign_({ Sentiment: -0.04 }) === -0.5 && mod.chaosHoodSign_(undefined) === 0 &&
@@ -414,5 +423,23 @@ console.log('engine.193 (b): institutions settle toward their class normal');
   const settle = lines.filter(l => /engine\.193b settle:/.test(l));
   assert('G-EC50: exactly one settle line, for the institution, carrying settle + drift + parts', settle.length === 1 && /City Hall \(Downtown, default\) 10\.93 → [\d.]+ = settle -0\.45 \+ drift -?[\d.]+ \[ev .*noise -?[\d.]+\] \+ ship 0/.test(settle[0]), JSON.stringify(settle));
 }
+console.log('engine.356 hood score + who follows the hood');
+{
+  const ns = { A: { retailVitality: 10, sentiment: 0.1, crimeIndex: 0.6, trajectoryMomentum: 10, eventAttractiveness: 8, migrationFlow: 5, medianIncome: 120000, boomIndex: 1 },
+               B: { retailVitality: 6,  sentiment: 0.0, crimeIndex: 0.7, trajectoryMomentum: 0,  eventAttractiveness: 5, migrationFlow: -5, medianIncome: 70000, boomIndex: -1 },
+               C: { retailVitality: 8,  sentiment: 0.05, crimeIndex: 0.65, trajectoryMomentum: 5, eventAttractiveness: 6, migrationFlow: 0, medianIncome: 95000, boomIndex: 0 },
+               D: { retailVitality: null } };
+  const sc = mod.bizHoodScores_(ns, CFG);
+  assert('the middle hood on every signal scores 0; a hood with no signal at all gets no score', sc.C === 0 && sc.D === null, JSON.stringify(sc));
+  const noVit = mod.bizHoodScores_({ A: Object.assign({}, ns.A, { retailVitality: null }), B: ns.B, C: ns.C }, Object.assign({}, CFG, { bizHoodWeight_vitality: 0 }));
+  assert('shop health off and missing: the hood still scores from the other seven (agy read 2026-11-21, finding 2)', typeof noVit.A === 'number' && noVit.A > 0, JSON.stringify(noVit));
+  // A vs median C: vit +2/8, sent +0.05/0.35, crime -(-0.05)/0.2, mom +1, events +2/5, migration +1, income +25000/80000, boom +1 -> mean
+  const a = (0.25 + 0.05 / 0.35 + 0.25 + 1 + 0.4 + 1 + 0.3125 + 1) / 8;
+  assert('a strong hood scores the mean of its eight signals, each from the city middle / its unit', Math.abs(sc.A - Math.round(a * 1000) / 1000) < 1e-9 && sc.B < 0, sc.A + ' vs ' + a);
+  const off = mod.bizHoodScores_(ns, Object.assign({}, CFG, { bizHoodWeight_vitality: 0, bizHoodWeight_sentiment: 0, bizHoodWeight_crime: 0, bizHoodWeight_events: 0, bizHoodWeight_migration: 0, bizHoodWeight_income: 0, bizHoodWeight_boom: 0 }));
+  assert('weight 0 turns a signal off: momentum alone -> A +1, B -1', off.A === 1 && off.B === -1, JSON.stringify(off));
+  assert('franchises and stadiums never follow the hood; the academy and a sports bar do', mod.bizIsFranchise_('BIZ-00074', 'Sports') && mod.bizIsFranchise_('BIZ-00005', 'Sports Franchise') && mod.bizIsFranchise_('BIZ-00063', 'As Stadium') && !mod.bizIsFranchise_('BIZ-00103', 'Sports') && !mod.bizIsFranchise_('BIZ-00041', 'Sports Bar & Dining'));
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

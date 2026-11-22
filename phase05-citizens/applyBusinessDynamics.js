@@ -527,8 +527,8 @@ function bizDriftOne_(cfg, biz, prevState, inputs, cycle) {
 // (last Cycle's Neighborhood_Map), measured from its centre — the city's middle hood this Cycle, or the
 // neutral its own engine defines (momentum 5, net migration 0) — divided by its unit and capped at ±1,
 // signed by which way it helps a business. Weight and unit for each live on World_Config
-// (bizHoodWeight_<name>, bizHoodUnit_<name>); weight 0 turns a signal off. A hood with no RetailVitality
-// gets no score; a missing signal is left out of the mean.
+// (bizHoodWeight_<name>, bizHoodUnit_<name>); weight 0 turns a signal off. A missing signal is left out of
+// the mean; a hood with no switched-on signal gets no score (agy read 2026-11-21: not gated on one signal).
 var BIZ_HOOD_SIGNALS = [
   // [name, S.neighborhoodState field, sign, centre: 'median' or a fixed neutral]
   ['vitality',  'retailVitality',      1, 'median'],   // shop health
@@ -554,7 +554,6 @@ function bizHoodScores_(ns, cfg) {
   var out = {};
   for (var k = 0; k < keys.length; k++) {
     var s = ns[keys[k]];
-    if (bizHoodNum_(s.retailVitality) === null) { out[keys[k]] = null; continue; }
     var sum = 0, wsum = 0;
     for (var q = 0; q < BIZ_HOOD_SIGNALS.length; q++) {
       var sg = BIZ_HOOD_SIGNALS[q], w = cfg['bizHoodWeight_' + sg[0]], u = cfg['bizHoodUnit_' + sg[0]];
@@ -987,6 +986,8 @@ if (typeof module !== 'undefined' && module.exports) {
     bizVitalityMedian_: bizVitalityMedian_,
     bizNightlifeMedian_: bizNightlifeMedian_,
     bizIsBar_: bizIsBar_,
+    bizHoodScores_: bizHoodScores_,       // engine.356
+    bizIsFranchise_: bizIsFranchise_,     // engine.356
     applyBusinessDynamics_: applyBusinessDynamics_,
     archiveClosedBusinesses_: archiveClosedBusinesses_,
     BIZ_ARCHIVE_HEADERS: BIZ_ARCHIVE_HEADERS,

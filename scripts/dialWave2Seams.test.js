@@ -4,6 +4,8 @@
  * fixture. No Sheet client or external writer is available in this sandbox.
  */
 'use strict';
+// MINT_GAME_TEAMS_ lives in processAdvancementIntake.js (shared Apps Script scope) — the same two rows (engine.356 bizIsFranchise_)
+global.MINT_GAME_TEAMS_ = [[/\bOaks\b/, 'BIZ-00074'], [/\bOakland (?:A['’]s|As|Athletics)\b/, 'BIZ-00005']];
 const fs = require('fs'), path = require('path'), vm = require('vm');
 let passed = 0, failed = 0;
 function assert(label, condition, detail) {
@@ -22,6 +24,7 @@ const w = {
   hoodTexturePool_: () => [['Synthetic livelier neighborhood encounter', 'up'], ['Synthetic quieter neighborhood encounter', 'down']]
 };
 vm.createContext(w);
+w.MINT_GAME_TEAMS_ = global.MINT_GAME_TEAMS_;   // engine.356 bizIsFranchise_ reads it from the shared scope
 for (const rel of ['utilities/citizenMemory.js', 'utilities/citizenDialMap.js', 'utilities/compressLifeHistory.js',
   'phase05-citizens/bondPersistence.js', 'phase05-citizens/bondEngine.js',
   'phase05-citizens/generationalWealthEngine.js', 'phase05-citizens/applyBusinessDynamics.js',
@@ -101,7 +104,7 @@ function closeVenture(personnel, rows) {
     bizDriftMaxUp: 2, bizDriftMaxDown: 2, bizGrowthCeil: 20, bizGrowthFloor: -30, bizNoiseBound: 0,
     bizCoverageUnit: 0.1, bizVitalityGain: 0.1, bizSuccessWindow: 4, bizSuccessVitalityHigh: 80,
     bizSuccessApprovalHigh: 80, bizSuccessPenalty: 1, bizDisruptBaseChance: 0, bizDisruptSuccessMult: 1,
-    bizDisruptShock: 1, bizClosureStreak: 8, bizClosureRevenueFloorPct: 25, bizEventShockScale: 1, bizInitiativeStallDrag: 0.5, bizSportsWeekPp: 2.0, bizShipEchoShare: 0.15, bizSettleRate: 0.05, bizSettleMinStaff: 1000,
+    bizDisruptShock: 1, bizClosureStreak: 8, bizClosureRevenueFloorPct: 25, bizEventShockScale: 1, bizInitiativeStallDrag: 0.5, bizSportsWeekPp: 2.0, bizShipEchoShare: 0.15, bizSettleRate: 0.05, bizSettleMinStaff: 1000, /* engine.356, as ENGINE96_CONFIG_SEEDS seeds them */ bizHoodSpan: 5, bizHoodPull: 0.2, bizHoodMaxPp: 1.5, bizEventCap: 1.0, bizWeatherPp: 1.0, bizClassMiddle_arts: 5.14, bizClassMiddle_construction: 9.02, bizClassMiddle_default: 4.03, bizClassMiddle_education: 0.67, bizClassMiddle_faith: 3.99, bizClassMiddle_food: 5.52, bizClassMiddle_health: 2.42, bizClassMiddle_professional: 6.42, bizClassMiddle_retail: 4.11, bizClassMiddle_tech: 11.59, bizHoodWeight_vitality: 1, bizHoodUnit_vitality: 8, bizHoodWeight_sentiment: 1, bizHoodUnit_sentiment: 0.35, bizHoodWeight_crime: 1, bizHoodUnit_crime: 0.2, bizHoodWeight_momentum: 1, bizHoodUnit_momentum: 5, bizHoodWeight_events: 1, bizHoodUnit_events: 5, bizHoodWeight_migration: 1, bizHoodUnit_migration: 5, bizHoodWeight_income: 1, bizHoodUnit_income: 80000, bizHoodWeight_boom: 1, bizHoodUnit_boom: 1, 
     bizVol_faith: 1, bizVol_retail: 1, bizVol_food: 1, bizVol_health: 1, bizVol_tech: 1,
     bizVol_professional: 1, bizVol_construction: 1, bizVol_arts: 1, bizVol_education: 1, bizVol_default: 1,
     bizDeclineStreak: 4, dialOwnerDriveExpandMult: 1.25, dialOwnerStreakRoom: 1

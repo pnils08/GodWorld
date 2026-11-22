@@ -318,27 +318,57 @@ t('evening districts are the nightlife-label hoods; bad weather empties waterfro
   assert.ok(!/crowd\["/.test(src('phase07-evening-media/cityEveningSystems.js')));
 });
 
-console.log('T12 budget / upscale / chaos venues open where the condition is (engine.240)');
-t('in a bust the budget bars open in the weakest economies, never on a pinned West Oakland / Fruitvale', () => {
-  const w = { console, Logger: { log() {} }, Math, JSON, safeRand_: ctx => ctx.rng };
-  vm.createContext(w);
-  load(w, 'phase07-evening-media/buildNightLife.js');
-  const weakest = ['San Antonio', 'Eastlake', 'Brooklyn'];
-  let seen = 0;
-  [0.13, 0.41, 0.77, 0.29, 0.61, 0.91, 0.05, 0.53].forEach(seed => {
-    const ctx = { rng: (() => { let i = 0; return () => ((i++ * seed + seed) % 1); })(), config: {}, summary: {
-      season: 'Winter', weather: { type: 'clear', impact: 1 }, weatherMood: {}, worldEvents: [], cityDynamics: { nightlife: 1.3 },
-      economicMood: 30, holiday: 'none', sportsSeason: 'off-season',
-      neighborhoodEconomies: { 'San Antonio': { mood: 20 }, Eastlake: { mood: 25 }, Brooklyn: { mood: 28 }, Rockridge: { mood: 80 }, 'West Oakland': { mood: 60 } } } };
-    w.buildNightlife_(ctx);
-    ((ctx.summary.nightlife || {}).spotDetails || []).forEach(sp => {
-      if (['Dive & Dash', 'Dollar Drafts', 'The Cheap Seat'].includes(sp.name)) { seen++; assert.ok(weakest.includes(sp.neighborhood), JSON.stringify(sp)); }
+console.log('T12 night spots are Business_Ledger nightlife rows, leaned by hood (engine.356; was engine.240 invented venues)');
+{
+  const BL = [['BIZ_ID', 'Name', 'Neighborhood', 'Sector'],
+    ['BIZ-1', 'Weak Bar', 'San Antonio', 'Bar / nightlife'], ['BIZ-2', 'Strong Lounge', 'Rockridge', 'Lounge'],
+    ['BIZ-3', 'Mid Club', 'Temescal', 'Nightlife & Entertainment'], ['BIZ-4', 'Tavern Both', 'Jack London', 'Sports Bar & Dining'],
+    ['BIZ-5', 'Plain Cafe', 'Uptown', 'Cafe'], ['BIZ-6', 'Fast One', 'Downtown', 'Fast Food']];
+  const mk = (seed, S) => {
+    const w = { console, Logger: { log() {} }, Math, JSON, safeRand_: ctx => ctx.rng };
+    vm.createContext(w);
+    load(w, 'phase07-evening-media/buildEveningFood.js');
+    load(w, 'phase07-evening-media/buildNightLife.js');
+    const ctx = { rng: (() => { let i = 0; return () => ((i++ * seed + seed) % 1); })(), config: {},
+      ss: { getSheetByName: n => n === 'Business_Ledger' ? { getLastRow: () => BL.length, getDataRange: () => ({ getValues: () => BL }) } : null },
+      summary: Object.assign({ season: 'Winter', weather: { type: 'clear', impact: 1 }, weatherMood: {}, worldEvents: [], cityDynamics: { nightlife: 1.3 },
+        economicMood: 50, holiday: 'none', sportsSeason: 'off-season', neighborhoodState: {} }, S || {}) };
+    return { w, ctx };
+  };
+  t('every spot is a ledger nightlife row (name, hood, BIZ_ID); a cafe or fast-food row never is', () => {
+    [0.13, 0.41, 0.77, 0.29, 0.61, 0.91, 0.05, 0.53].forEach(seed => {
+      const { w, ctx } = mk(seed); w.buildNightlife_(ctx);
+      const sp = ctx.summary.nightlife.spotDetails;
+      assert.ok(sp.length >= 1, 'no spot drawn');
+      sp.forEach(s => assert.ok(['BIZ-1', 'BIZ-2', 'BIZ-3', 'BIZ-4'].includes(s.bizId) && BL.some(r => r[0] === s.bizId && r[1] === s.name && r[2] === s.neighborhood), JSON.stringify(s)));
+      assert.strictEqual(JSON.stringify(ctx.summary.nightlife.spots), JSON.stringify(sp.map(s => s.name)));
     });
   });
-  assert.ok(seen >= 1, 'no budget venue drawn across 8 seeds');
-  const nl = src('phase07-evening-media/buildNightLife.js');
-  assert.ok(!/"Dive & Dash", neighborhood: "West Oakland"/.test(nl) && !/"Dollar Drafts", neighborhood: "Fruitvale"/.test(nl) && !/"Merritt Club", neighborhood/.test(nl) && !/"Civic Watch Patio", neighborhood: "Downtown"/.test(nl));
-});
-
+  t('in a bust the three weakest hood economies lean +1: over many seeds the weak-hood bar is drawn more than the strong one', () => {
+    let weak = 0, strong = 0;
+    for (let k = 1; k <= 400; k++) {
+      const { w, ctx } = mk(k / 401, { economicMood: 30, neighborhoodEconomies: { 'San Antonio': { mood: 20 }, Temescal: { mood: 25 }, 'Jack London': { mood: 28 }, Rockridge: { mood: 80 } } });
+      w.buildNightlife_(ctx);
+      ctx.summary.nightlife.spotDetails.forEach(s => { if (s.bizId === 'BIZ-1') weak++; if (s.bizId === 'BIZ-2') strong++; });
+    }
+    assert.ok(weak > strong, weak + ' vs ' + strong);
+  });
+  t('an empty or unreadable ledger gives a night with no named spot, never an invented one', () => {
+    const { w, ctx } = mk(0.3); ctx.ss = { getSheetByName: () => null }; w.buildNightlife_(ctx);
+    assert.strictEqual(ctx.summary.nightlife.spots.length, 0); assert.strictEqual(ctx.summary.nightlife.spotDetails.length, 0);
+  });
+  t('a place tonight\'s night spots took is not also tonight\'s dinner (agy read 2026-11-21, finding 1)', () => {
+    for (let k = 1; k <= 60; k++) {
+      const { w, ctx } = mk(k / 61, { isFirstFriday: true, nightlifeVolume: 8, sportsCity: { band: 'quiet' } });
+      w.buildNightlife_(ctx); w.buildEveningFood_(ctx);
+      const night = ctx.summary.nightlife.spots, dinner = ctx.summary.eveningFood.restaurants;
+      night.forEach(n => assert.ok(dinner.indexOf(n) < 0, n + ' is both: ' + JSON.stringify({ night, dinner })));
+    }
+  });
+  t('no name list is left in buildNightLife.js', () => {
+    const nl = src('phase07-evening-media/buildNightLife.js');
+    assert.ok(!/Dive & Dash|Dollar Drafts|Merritt Club|Civic Watch Patio|pickRandomSet_|var BARS\b|var DANCE\b/.test(nl));
+  });
+}
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

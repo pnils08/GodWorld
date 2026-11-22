@@ -1884,9 +1884,9 @@ function generateCitizensEvents_(ctx) {
         var p = list[ei];
         if (!p || !p.name) continue;
         if (eHome && p.neighborhood && p.neighborhood === eHome) {
-          pool.push(makeEntry(hereText.replace("$P", p.name), eTags(kind, p), 2.0, false));
+          pool.push(makeEntry(hereText.split("$P").join(p.name), eTags(kind, p), 2.0, false));   // split/join: a "$" in a name is not a replace pattern
         } else if (eTravels) {
-          pool.push(makeEntry(thereText.replace("$P", p.name + (p.neighborhood ? " in " + p.neighborhood : "")), eTags(kind, p), 1.2 * eOa, false));
+          pool.push(makeEntry(thereText.split("$P").join(p.name + (p.neighborhood ? " in " + p.neighborhood : "")), eTags(kind, p), 1.2 * eOa, false));
         }
       }
     };

@@ -459,7 +459,8 @@ function snapshotEveningForCarryForward_(ctx) {
       snapshot.famousSeen.push({
         name: String(fs.name),
         neighborhood: fs.neighborhood || '',
-        venue: (fs.venue && fs.venue.name) ? String(fs.venue.name) : ''
+        venue: (fs.venue && fs.venue.name) ? String(fs.venue.name) : '',
+        bizId: (fs.venue && fs.venue.bizId) ? String(fs.venue.bizId) : ''   // the venue is a Business_Ledger row (buildEveningFamous venuesByHood)
       });
     }
   }

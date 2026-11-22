@@ -101,6 +101,9 @@ function deriveLifeState_(f) {
  */
 function eventClassFromTags_(tags) {
   if (!tags || !tags.length) return "universal";
+  // engine.356: a night at a bar is adults only. Checked before the loop — the line also carries
+  // source:prevEvening, which the loop would return first as the teen-and-up "eveningOut".
+  for (var b = 0; b < tags.length; b++) { if (String(tags[b] || "") === "evening:nightOut") return "barNight"; }
   for (var i = 0; i < tags.length; i++) {
     var t = String(tags[i] || "");
     if (t === "source:occupation") return "work";
@@ -127,6 +130,7 @@ function isEventEligible_(ls, cls) {
     case "romance":    return !ls.isMinor;                              // bondEngine holds the tighter 20-65 band
     case "opinion":    return ls.band !== "child";                      // public-figure opinions: teen+
     case "eveningOut": return ls.band !== "child";                      // last-night buzz/crowds: teen+
+    case "barNight":   return !ls.isMinor;                              // engine.356: spent the night at a named bar — adults only
     case "retirement": return ls.statusNorm === "retired";
     case "school":     return ls.working === "student";
     default:           return true;                                     // universal — weather, family, neighborhood, play

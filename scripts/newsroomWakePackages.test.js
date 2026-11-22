@@ -253,12 +253,14 @@ assert.ok(mason.reviewProfile.textureConditions.some(v => v.includes('proves onl
 assert.ok(mason.reviewProfile.canonBlockers.some(v => v.includes('invented attendance')));
 
 const sharon = packages['sharon-okafor'];
-assert.equal(sharon.version, 'SHARON-LEP2-2');
+assert.equal(sharon.version, 'SHARON-LEP2-3');
 assert.equal(sharon.active, true);
 assert.equal(sharon.requiredDaily, true);
 assert.equal(sharon.assignment.popid, 'POP-00159');
 assert.equal(sharon.assignment.beatDomain, 'CULTURE');
-assert.equal(packagesApi.routeFor(sharon, 'angle').model, 'meta-llama/llama-4-maverick');
+assert.equal(packagesApi.routeFor(sharon, 'angle').model, 'openai/gpt-5.6-luna');   // builder 2026-11-21: "go" — her morning plan on the writer's model
+assert.equal(packagesApi.routeFor(sharon, 'report').model, 'meta-llama/llama-4-maverick');
+assert.equal(packagesApi.routeFor(sharon, 'write').model, 'openai/gpt-5.6-luna');
 assert.equal(sharon.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
 // pipeline.111 (builder 2026-11-21: "loosen her reviewer to stick to facts about locations , citizens data points"):
 // her visit is authorized texture; the blockers are a location, a citizen, a data point; no opening is set.

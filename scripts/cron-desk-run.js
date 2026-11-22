@@ -1001,7 +1001,7 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
     // grok pipeline.52: shared evening-life pack for culture consumers (kai/sharon/maria/graye).
     // Mason Ortega left this pack for the food slice (pipeline.68 Task 3); Elliot Graye for the faith slice (Task 4).
     if (persona.name &&
-        /maria\s*keen|kai\s*marston|sharon\s*okafor/i.test(persona.name)) {
+        /kai\s*marston|sharon\s*okafor/i.test(persona.name)) {   // Maria left the evening pack: Sharon covers nightlife (pipeline.111, builder 2026-11-21)
       try {
         const { loadEveningSlice, pickPulseForPersona, EVENING_CONSUMERS } =
           require(path.join(__dirname, 'buildEveningSlice'));
@@ -1712,8 +1712,8 @@ async function runAngle(assign) {
   // variant of the economic slice (pipeline.68 Task 3).
   // Elliot Graye draws the faith slice (pipeline.68 Task 4), not the evening pack.
   const EVENING_SLUGS = {
-    'kai-marston': 1, 'sharon-okafor': 1,
-    'maria-keen': 1
+    'kai-marston': 1, 'sharon-okafor': 1
+    // Maria left the evening pack: Sharon covers nightlife (pipeline.111, builder 2026-11-21)
   };
   let beatSlice = null;
   if (personaSlug === 'freelance-firebrand' && !story) {

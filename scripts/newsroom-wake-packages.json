@@ -625,7 +625,7 @@
     }
   },
   "maria-keen": {
-    "version": "MARIA-LEP2-1",
+    "version": "MARIA-LEP2-2",
     "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
@@ -641,7 +641,7 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-4-maverick"
+        "model": "anthropic/claude-sonnet-5.5"
       },
       "report": {
         "provider": "openrouter",
@@ -653,29 +653,26 @@
       }
     },
     "reviewProfile": {
-      "id": "maria-ground-v1",
+      "id": "maria-neighborhoods-v2",
       "canonPolicy": "load-bearing",
-      "purpose": "Translate one Packet-named neighborhood or evening condition into a human-scale ground brief without inventing Maria's attendance, a neighbor, an action, a quote, or a civic outcome.",
+      "purpose": "Report Oakland's neighborhoods and the people living in them from the neighborhood record (builder 2026-11-21). The check is facts: locations, citizens, data points.",
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
-        "voice": "intimate neighborhood ground brief",
-        "targetWords": "evidence-bounded",
-        "opening": "one Packet-named place and condition",
-        "closing": "the human observation still needed"
+        "targetWords": "evidence-bounded"
       },
       "authorizedTexture": [
-        "warm interpretation of a supplied place or condition without claiming attendance or observation",
-        "unnamed sensory metaphor carrying no person, action, event, institution, or factual premise"
+        "Maria in the neighborhood she writes about, in the first person, as a witness (builder 2026-11-21: \"You got it\", her bio: \"Uses 'I' because she's there as a witness\")"
       ],
-      "textureConditions": [
-        "first person may express interpretation but may not assert presence, walking, seeing, hearing, meeting, speaking, or memory unless the Packet supplies it",
-        "every named person, place, business, institution, gathering, action, quote, policy effect, and civic outcome requires Packet support"
-      ],
+      "textureConditions": [],
       "canonBlockers": [
-        "invented attendance, witnessed scene, neighbor, worker, patron, dialogue, gathering, action, policy consequence, or civic outcome",
-        "an invented or altered venue, person, neighborhood, event, institution, relationship, date, count, or quote",
-        "raw nightlife metrics, engine labels, or collective neighborhood sentiment presented as public fact"
+        "an invented or altered location: venue, business or neighborhood",
+        "an invented or altered citizen (name, role, home, relationship), or words a named citizen did not say",
+        "an invented or altered data point: a number, date or engine record"
       ]
+    },
+    "seatFile": ".claude/agents/maria-keen/SEAT.md",
+    "writerTools": {
+      "maxToolCalls": 6
     }
   },
   "elliot-graye": {

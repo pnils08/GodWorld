@@ -440,10 +440,30 @@ try {
   ok('sharon: an evening line is the reason a citizen is on her list (nightlife first)', sh.citizens.some(c => c.popid === 'POP-90002' && /stood by the bar while the DJ played/.test(c.profile)));
   ok('sharon: never her own source; only this cycle\'s evening lines', !sh.citizens.some(c => c.popid === 'POP-00159' || c.popid === 'POP-90003'));
   ok('sharon: an empty evening record sits her out', lifestyle.sitsOutWhenEmpty === true);
+  // pipeline.111 (builder 2026-11-21: "following the Sharon mold"): Maria's record is every hood and its people.
+  const texPath = path.join(output, 'neighborhood_texture_c' + CYCLE + '.md');
+  const texBefore = fs.existsSync(texPath) ? fs.readFileSync(texPath, 'utf8') : null;
+  fs.writeFileSync(texPath, '### Downtown\n\nThe block feels alive.\n\n### Fruitvale\n\nA quiet week on the avenue.\n');
+  const hoodLifePath = path.join(output, 'beats', 'LifeHistory_Log.jsonl');
+  const hoodLifeBefore = fs.readFileSync(hoodLifePath, 'utf8');
+  const hoodRows = [
+    { POPID: 'POP-90001', Name: 'Test Civic Resident', EventTag: 'Neighborhood-Outabout-Up-S|source:nbhdState', EventText: 'pointed a stranger to the new shop', Neighborhood: 'Downtown', Cycle: String(CYCLE) },
+    { POPID: 'POP-90002', Name: 'a', EventTag: 'Neighborhood-Sociability-Up-S|source:communityLife', EventText: 'read the flyer on the board', Neighborhood: 'Downtown', Cycle: String(CYCLE) },
+    { POPID: 'POP-90003', Name: 'b', EventTag: 'Neighborhood-Warmth-Up-S|source:neighborhood', EventText: 'a third Downtown line', Neighborhood: 'Downtown', Cycle: String(CYCLE) },
+    { POPID: 'POP-90007', Name: 'c', EventTag: 'Neighborhood-Warmth-Up-S|source:neighborhood', EventText: 'felt lucky to live here', Neighborhood: 'Fruitvale', Cycle: String(CYCLE) },
+    { POPID: 'POP-00013', Name: 'Maria Keen', EventTag: 'Neighborhood|source:neighborhood', EventText: 'her own block', Neighborhood: 'Lake Merritt', Cycle: String(CYCLE) },
+    { POPID: 'POP-90008', Name: 'd', EventTag: 'Sports-Moved|source:sports', EventText: 'not a block line', Neighborhood: 'Fruitvale', Cycle: String(CYCLE) }
+  ];
+  fs.appendFileSync(hoodLifePath, (hoodLifeBefore.endsWith('\n') ? '' : '\n') + hoodRows.map(r => JSON.stringify(r)).join('\n') + '\n');
   const m = neighborhood.buildNeighborhoodSlice(CYCLE, { root });
-  ok('maria: program + founder from the ledger', m.facts.some(f => /Test Program \(mutual-aid\), Downtown — founded by Test Civic Resident, since C100/.test(f.text)) &&
-    m.citizens.some(c => c.popid === 'POP-90001' && /founded Test Program/.test(c.why)));
-  ok('maria: NEIGHBORHOOD_RISING hook by domain', m.prewrite.hooks.some(h => /Downtown is rising/.test(h.text)));
+  ok('maria: every hood\'s texture paragraph rides as the record', ['Downtown: The block feels alive.', 'Fruitvale: A quiet week on the avenue.'].every(t => m.facts.some(f => f.text === t && /neighborhood_texture_c103\.md/.test(f.src))));
+  ok('maria: program + founder from the ledger', m.facts.some(f => /Test Program \(mutual-aid\), Downtown — founded by Test Civic Resident, since C100/.test(f.text)));
+  ok('maria: residents carry their own block line; two a hood, never herself, never a non-block line', (() => {
+    const pops = m.citizens.map(c => c.popid);
+    return m.citizens.some(c => c.popid === 'POP-90001' && /pointed a stranger to the new shop/.test(c.profile)) &&
+      pops.includes('POP-90007') && !pops.includes('POP-90003') && !pops.includes('POP-00013') && !pops.includes('POP-90008');
+  })());
+  ok('maria: no code-picked hood, no hook, no custody/care/tax/debt line', m.hood === null && m.prewrite.hooks.length === 0 && !m.facts.some(f => /custody|in care at the close|Tax day|debt/.test(f.text)));
   ok('maria: hood population movement vs prev/', (() => {
     const pd = path.join(output, 'beats', 'prev');
     fs.mkdirSync(pd, { recursive: true });
@@ -456,13 +476,9 @@ try {
     return x.facts.some(f => /Downtown this cycle: 300 students, 5,000 adults, 600 seniors — moved vs C102: \+10 students, \+50 adults/.test(f.text));
   })());
   ok('maria: deltas typed', m.prewrite.deltas && (m.prewrite.deltas.state === 'NO_PRIOR_CYCLE' || m.prewrite.deltas.state === 'PRIOR_CYCLE_ON_DISK'));
-  // Downtown has no Crime_Metrics row and a blank Sick in this fixture → no demand clause on either line.
-  ok('maria: the block\'s own custody line, one scope', m.facts.some(f => f.text === 'Downtown: 1 arrest (1 tracked) → 1 in custody at the close (1 tracked, 0 other residents); tracked: Test Pro Athlete') && !JSON.stringify(m.facts).includes('Fruitvale:'));
-  ok('maria: the block\'s own care line', m.facts.some(f => f.text === 'Downtown: 1 admission (1 tracked) → 1 in care at the close (1 tracked, 0 other residents) → 0 beds occupied; tracked: Test Pro Athlete'));
-  ok('maria: tax day for the block only', m.facts.some(f => f.text === 'Tax day in Downtown — 9 owner households paid $71,800 in property tax') && !JSON.stringify(m.facts).includes('$310.1M'));
-  ok('maria: debt on the block only — no default named from another hood', m.facts.some(f => f.text === "Downtown debt this cycle: 1 household's debts crossed the line this cycle") && !JSON.stringify(m).includes('Test Civic Resident defaulted'));
-  ok('maria: the over-the-line count rides beside a debt event — the athlete at debt 7 is on the block\'s count', m.facts.some(f => f.text === '1 tracked residents of Downtown carry debt at or over the crisis line'));
-  ok('maria: the athlete on the court record is a person on the block slice', m.citizens.some(c => c.popid === 'POP-90002' && c.why === 'in custody on the court record'));
+  ok('maria: an empty neighborhood record sits her out', neighborhood.sitsOutWhenEmpty === true);
+  fs.writeFileSync(hoodLifePath, hoodLifeBefore);
+  if (texBefore == null) fs.unlinkSync(texPath); else fs.writeFileSync(texPath, texBefore);
 
   console.log('engine.254 Task 10 — empty tabs (the live shape until the first fire):');
   {
@@ -475,7 +491,7 @@ try {
     // The COURT_FINE receipt on the hook deck still rides (it is the engine's own line); nothing is read off the empty tabs.
     ok('safety slice stands on the crime table alone, no court-record or custody fact', !r0.empty && !r0.facts.some(f => /custody|charges →|Judicial_Ledger|Care_Justice/.test(f.text + ' ' + f.src)) && r0.citizens.length === 1);
     ok('health slice stands, no care-trail fact', !h0.empty && !h0.facts.some(f => /in care at the close/.test(f.text)));
-    ok('maria stands; tax day + debt still read off the hook deck and the ledger', !m0.empty && m0.facts.some(f => /^Tax day in Downtown/.test(f.text)) && !m0.facts.some(f => /charges →/.test(f.text)));
+    ok('maria stands on programs and population with the court and care tabs empty', !m0.empty && !m0.facts.some(f => /charges →/.test(f.text)));
     ok('typed empty states on the slice', r0.custodyTrail && r0.custodyTrail.state === 'NO_ROWS' && r0.court.state === 'NO_CASES' && h0.careTrail.state === 'NO_ROWS');
     for (const tab of Object.keys(keep)) fs.writeFileSync(path.join(bd, tab + '.jsonl'), keep[tab]);
   }
@@ -626,7 +642,7 @@ try {
   for (const [label, slice, popid] of [['trevor', t, 'POP-00155'], ['lila', h, 'POP-00154'], ['angela', s, 'POP-00156'], ['noah', e, 'POP-00157'], ['graye', f, 'POP-00012'], ['rachel', r, 'POP-00057'], ['kai', k, 'POP-00158'], ['sharon', sh, 'POP-00159'], ['maria', m, 'POP-00013'], ['selena', sg, 'POP-00591'], ['talia', tf, 'POP-00592'], ['celeste', ct, 'POP-00164']]) {
     const pk = v2.buildAnglePacket({ cycle: CYCLE, desk: slice.seat.desk, reporter: { popid, name: slice.seat.name }, story: slice.story, approach: slice.approach, slice, lane: [] });
     const b = pk.task.creativeBrief;
-    ok(label + ': brief beat-slice with facts + room', b && b.kind === 'beat-slice' && b.facts.length >= 1 && (label === 'sharon' || !!b.roomIsYours));   // Sharon: no room line (pipeline.111)
+    ok(label + ': brief beat-slice with facts + room', b && b.kind === 'beat-slice' && b.facts.length >= 1 && (['sharon', 'maria'].includes(label) || !!b.roomIsYours));   // seat-file seats: no room line (pipeline.111)
     ok(label + ': every anchor fact is a known FACT sourced to a file on disk', slice.prewrite.anchorFacts.every(text => pk.known.some(k => k.text === text && /^output\//.test(k.src))));
     ok(label + ': candidates = the slice\'s people', pk.exposure.candidates.length === slice.citizens.length && pk.exposure.candidates.every(c => slice.citizens.some(p => p.popid === c.pop)));
   }

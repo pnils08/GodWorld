@@ -171,7 +171,7 @@ const seats = Object.entries(packages).filter(([, v]) => v && v.persona);
 assert(seats.length >= 25);
 assert.deepStrictEqual(seats.filter(([, v]) => v.rewardLoop !== true).map(([k]) => k), []);
 assert.throws(() => packagesApi.validatePackage(marbury.persona, Object.assign({}, marbury, { rewardLoop: 'yes' })), /rewardLoop/);
-assert.deepStrictEqual(Object.entries(packages).filter(([, v]) => v && v.writerTools).map(([k]) => k), ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'anthony-raines', 'elliot-marbury', 'hal-richmond', 'elliot-graye', 'sharon-okafor', 'business-desk', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'nia-rook', 'nia-rook-weekly', 'tamsin-pruitt']); // registry order; Hal + Anthony: builder 2026-10-19; Jax + Carmen 2026-10-26; the rest 2026-10-27; Sharon 2026-11-21 (pipeline.111)
+assert.deepStrictEqual(Object.entries(packages).filter(([, v]) => v && v.writerTools).map(([k]) => k), ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'anthony-raines', 'elliot-marbury', 'hal-richmond', 'maria-keen', 'elliot-graye', 'sharon-okafor', 'business-desk', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'nia-rook', 'nia-rook-weekly', 'tamsin-pruitt']); // registry order; Hal + Anthony: builder 2026-10-19; Jax + Carmen 2026-10-26; the rest 2026-10-27; Sharon 2026-11-21 (pipeline.111)
 assert.equal(packages['hal-richmond'].writerTools.maxToolCalls, 6);
 // pipeline.111 — Sharon wakes on her seat file; a seat file outside an agent folder is refused
 assert.equal(packages['sharon-okafor'].seatFile, '.claude/agents/sharon-okafor/SEAT.md');
@@ -223,14 +223,19 @@ assert.ok(simon.reviewProfile.textureConditions.some(v => v.includes('continuity
 assert.ok(simon.reviewProfile.canonBlockers.some(v => v.includes('collective memory')));
 
 const maria = packages['maria-keen'];
-assert.equal(maria.version, 'MARIA-LEP2-1');
+assert.equal(maria.version, 'MARIA-LEP2-2');
 assert.equal(maria.active, true);
 assert.equal(maria.assignment.popid, 'POP-00013');
 assert.equal(maria.assignment.beatDomain, 'CULTURE_GROUND');
-assert.equal(packagesApi.routeFor(maria, 'angle').model, 'meta-llama/llama-4-maverick');
+// pipeline.111 (builder 2026-11-21: "following the Sharon mold"): seat file, morning on her writer's model, the fact reviewer.
+assert.equal(packagesApi.routeFor(maria, 'angle').model, packagesApi.routeFor(maria, 'write').model);
+assert.equal(packagesApi.routeFor(maria, 'report').model, 'meta-llama/llama-4-maverick');
+assert.equal(maria.seatFile, '.claude/agents/maria-keen/SEAT.md');
 assert.equal(maria.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
-assert.ok(maria.reviewProfile.textureConditions.some(v => v.includes('may not assert presence')));
-assert.ok(maria.reviewProfile.canonBlockers.some(v => v.includes('invented attendance')));
+assert.deepStrictEqual(maria.reviewProfile.textureConditions, []);
+assert.ok(maria.reviewProfile.authorizedTexture.some(v => v.includes('as a witness')));
+assert.deepStrictEqual(maria.reviewProfile.canonBlockers.map(v => v.split(':')[0].split(' (')[0]), ['an invented or altered location', 'an invented or altered citizen', 'an invented or altered data point']);
+assert.equal(maria.rewardLoop, true);
 
 const graye = packages['elliot-graye'];
 assert.equal(graye.version, 'GRAYE-LEP2-2');

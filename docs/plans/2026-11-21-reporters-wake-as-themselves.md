@@ -57,7 +57,7 @@ On Sharon (2026-11-21): bio — "i like them both and love \"visits places she w
 | 2 | Build her wake to the print: identity + bio, beat line, tool list, evening record leading; build talk and coaching off her writer prompt; reviewer allows her first-person visits | rb | done `982ca9ec6` — seat file on her package; record = evening texture + prevEvening lines |
 | 3 | One test-shell day on C116 (`testReporterDay.sh`), his go; new piece beside her C116 piece | rb | done — run 3 approved ("Run 3 lock it in"); live path proven through the runner's today variant `982ca9ec6` |
 | 4 | His approval → her live Friday wake switches; read the first live piece | rb | live 2026-11-21; read Fri 2026-11-27 after 18:15 (C117): her pick, tool calls, Rhea, grade |
-| 5 | Maria: seat file, every-hood record, package, evening pack off | rb | built `1e0ac867b` (on disk, so live for Fri 11-27); test day blocked — OpenRouter credits out |
+| 5 | Maria: seat file, every-hood record, package, evening pack off | rb | live `1e0ac867b`, packet trim `7b5c99f55`, voice retry `aafcaff3f`; test day 'Before the Shuttles' meets his '2'; read Fri 11-27 |
 | 6–8 | Kai, Mason, Celeste, one at a time, same steps; canon bios searched in the Tribune files | rb | not started |
 
 ## Acceptance
@@ -87,6 +87,7 @@ On Sharon (2026-11-21): bio — "i like them both and love \"visits places she w
 
 ## Changelog
 
+- 2026-11-22 (research-build) — Maria approved on "2" once packet-talk was out: writer Packet trimmed to facts/people/quotes/her plan; interviews retry a busy provider (Maverick flapped all evening). `aafcaff3f`
 - 2026-11-22 (research-build) — Maria on the Sharon mold, "You got it": bio = voice Essence + traits, beat = neighborhoods and their people, evening pack off. Test day failed at W1: OpenRouter out of credits. `1e0ac867b`
 - 2026-11-21 (research-build) — Tools: "Depending on how the Article is written perhaps the extra depth wasn't needed"; models differ on tool use — which media crons get a tool-calling model is his call per seat, not one model for all. Zero calls is not a defect.
 - 2026-11-21 (research-build) — LIVE: "Run 3 lock it in and turn that live, loosen her reviewer to stick to facts about locations , citizens data points". Still graded (builder 10-15). `982ca9ec6`

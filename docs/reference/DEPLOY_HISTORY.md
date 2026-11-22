@@ -210,6 +210,14 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD stage 72 — every hood signal in a business's success; the dials on World_Config (2026-11-21, engine-sheet, engine.356)
+
+- **What:** `phase05-citizens/applyBusinessDynamics.js` + `phase01-config/engine94SheetContract.js` at `56fb48160` on stage 71 (which never fired). The hood score reads eight signals — shop health, mood, crime (against), rising/falling, events, migration, spending power, boom exposure — each with a weight and unit on World_Config (`bizHoodWeight_<name>`, `bizHoodUnit_<name>`); a weekly weather term ((impact − 1) × `bizWeatherPp`); the class middles on World_Config (`bizClassMiddle_<class>`). Builder: "unique combinations of data drive the world, world_config holds alot of the dials … crime, weather, whatever we offer".
+- **Proof:** code read; offline 150-Cycle compute on C116 (settles by ~C10; typical 4.7 → 5.5; 4 below zero); agy SHIP-WITH-FIXES (`output/antigravity/2026-11-21-review-e356-every-hood-signal.md`), fix 2 folded, fix 1 recorded; tests unlocked by the builder: applyBusinessDynamics 114/114, businessOwnerDials 48/48, dialWave2Seams 27/27, hoodBlindTables 26/26 (T12 rewritten), evening/season/world-view slices pass; buildContractSeeds 3 failures pre-date this session. No bench fire.
+- **Stage 72 (2026-11-21 ~22:30 CST):** live pulled = stage 71 (`e356e.sha256`); two files changed; manifest `output/engine-sheet/2026-11-21-e356f/e356f.sha256`; pull-back byte-identical; version cut **@207**. Script `output/engine-sheet/2026-11-21-e356f/push.sh`.
+- **Smoke test: not run.** First live fire C117 Sun 2026-11-22: the self-arm adds 31 rows to World_Config (the stage-71 key names never reached live); read Engine_Errors for Phase5-BusinessDynamics and the Growth_Rate moves against the offline numbers.
+- **Back out:** the two files from `e917708a4` (= stage 70, `e356d.sha256`) + version cut.
+
 ### PROD stage 71 — a business's success stems from how its hood performs (2026-11-21, engine-sheet, engine.356)
 
 - **What:** `phase05-citizens/applyBusinessDynamics.js` + `phase01-config/engine94SheetContract.js` at `3eb7d3180` on stage 70. A business's Growth_Rate now settles toward a resting level its hood sets — its class's middle in this city (`BIZ_CLASS_MIDDLE`, held at the C116 medians) + hood score × 5 pp — closing a fifth of the gap a Cycle, capped 1.5 pp; the hood score is shop health, mood, crime (against) and rising/falling, each vs the city's middle hood. Events capped at 1 pp (was 2). City-wide rows, institutions and the sports franchises / stadiums do not follow the hood (builder choice B). Seven new World_Config keys arm themselves before Phase 1 config. Builder: "their success should stem from how the hood performs" · "yes B".

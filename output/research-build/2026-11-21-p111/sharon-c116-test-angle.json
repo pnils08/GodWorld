@@ -1,0 +1,1578 @@
+{
+  "stage": "angle",
+  "desk": "culture",
+  "cycle": "116",
+  "persona": "sharon-okafor",
+  "freeAngle": "free-rows",
+  "pass": false,
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00159",
+      "name": "Sharon Okafor",
+      "role": "desk reporter",
+      "desk": "culture",
+      "background": "Sharon Okafor, Bay Tribune. Psychology degree; reads nightlife and venue patterns like a therapist reads body language; visits the places she writes about; warm but analytical. Your beat is nightlife and the city's evenings: the bars, the block parties, who was spotted where, what the city watched, game night when it is part of the night out."
+    },
+    "task": {
+      "goal": "Decide what, if anything, you want to write this cycle"
+    },
+    "signal": {
+      "kind": "own-pick",
+      "hood": null,
+      "score": null,
+      "src": "the record of C116"
+    },
+    "exposure": {
+      "basis": [
+        "own-pick"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-01056",
+          "name": "Theo Banks",
+          "profile": "Theo Banks — rapper — Uptown",
+          "role": "rapper",
+          "hood": "Uptown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the evening record of C116",
+            "pop": "POP-01056",
+            "rowName": "Theo Banks",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00050",
+          "name": "Ernesto Quintero",
+          "profile": "Ernesto Quintero — 3B/1B , Oakland A's — Baylight District",
+          "role": "3B/1B , Oakland A's",
+          "hood": "Baylight District",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the evening record of C116",
+            "pop": "POP-00050",
+            "rowName": "Ernesto Quintero",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00051",
+          "name": "Desmond Morton",
+          "profile": "Desmond Morton — Left Fielder, Oakland A's — Chinatown",
+          "role": "Left Fielder, Oakland A's",
+          "hood": "Chinatown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the evening record of C116",
+            "pop": "POP-00051",
+            "rowName": "Desmond Morton",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00027",
+          "name": "Philly Rodriguez",
+          "profile": "Philly Rodriguez — Casino Manager — West Oakland",
+          "role": "Casino Manager",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the evening record of C116",
+            "pop": "POP-00027",
+            "rowName": "Philly Rodriguez",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00219",
+          "name": "Tyrone Bennington",
+          "profile": "Tyrone Bennington — Nurse aide — Temescal",
+          "role": "Nurse aide",
+          "hood": "Temescal",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the evening record of C116",
+            "pop": "POP-00219",
+            "rowName": "Tyrone Bennington",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00227",
+          "name": "Colin Soria",
+          "profile": "Colin Soria — Security guard — Temescal",
+          "role": "Security guard",
+          "hood": "Temescal",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the evening record of C116",
+            "pop": "POP-00227",
+            "rowName": "Colin Soria",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00246",
+          "name": "Dearie Beacon",
+          "profile": "Dearie Beacon — Security guard — Chinatown",
+          "role": "Security guard",
+          "hood": "Chinatown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the evening record of C116",
+            "pop": "POP-00246",
+            "rowName": "Dearie Beacon",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00250",
+          "name": "Ty Yule",
+          "profile": "Ty Yule — Taxi driver — Jack London",
+          "role": "Taxi driver",
+          "hood": "Jack London",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the evening record of C116",
+            "pop": "POP-00250",
+            "rowName": "Ty Yule",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00265",
+          "name": "Matty Lipo",
+          "profile": "Matty Lipo — Dishwasher — Lake Merritt",
+          "role": "Dishwasher",
+          "hood": "Lake Merritt",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the evening record of C116",
+            "pop": "POP-00265",
+            "rowName": "Matty Lipo",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00332",
+          "name": "Diego Remo",
+          "profile": "Diego Remo — Independent Bookstore Owner — Temescal",
+          "role": "Independent Bookstore Owner",
+          "hood": "Temescal",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the evening record of C116",
+            "pop": "POP-00332",
+            "rowName": "Diego Remo",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00354",
+          "name": "Illy Jile",
+          "profile": "Illy Jile — Translation Services Provider — Chinatown",
+          "role": "Translation Services Provider",
+          "hood": "Chinatown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the evening record of C116",
+            "pop": "POP-00354",
+            "rowName": "Illy Jile",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00358",
+          "name": "Rilen Lend",
+          "profile": "Rilen Lend — Laundromat Owner — Laurel",
+          "role": "Laundromat Owner",
+          "hood": "Laurel",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the evening record of C116",
+            "pop": "POP-00358",
+            "rowName": "Rilen Lend",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00459",
+          "name": "Brielle Lewis",
+          "profile": "Brielle Lewis — Immigration Attorney — West Oakland",
+          "role": "Immigration Attorney",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the evening record of C116",
+            "pop": "POP-00459",
+            "rowName": "Brielle Lewis",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00461",
+          "name": "Wesley Clark",
+          "profile": "Wesley Clark — Sports Analytics Lead (Gridiron Analytics) — West Oakland",
+          "role": "Sports Analytics Lead (Gridiron Analytics)",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the evening record of C116",
+            "pop": "POP-00461",
+            "rowName": "Wesley Clark",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00484",
+          "name": "Tim Allenson",
+          "profile": "Tim Allenson — Yoga Studio Owner — Temescal",
+          "role": "Yoga Studio Owner",
+          "hood": "Temescal",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the evening record of C116",
+            "pop": "POP-00484",
+            "rowName": "Tim Allenson",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00644",
+          "name": "Rafael Pilgrim",
+          "profile": "Rafael Pilgrim — Server — Fruitvale",
+          "role": "Server",
+          "hood": "Fruitvale",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the evening record of C116",
+            "pop": "POP-00644",
+            "rowName": "Rafael Pilgrim",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00654",
+          "name": "Willy Wally",
+          "profile": "Willy Wally — International Trade Consultant — Rockridge",
+          "role": "International Trade Consultant",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the evening record of C116",
+            "pop": "POP-00654",
+            "rowName": "Willy Wally",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00730",
+          "name": "Clarence Moody",
+          "profile": "Clarence Moody — Retired Machinist — Dimond",
+          "role": "Retired Machinist",
+          "hood": "Dimond",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the evening record of C116",
+            "pop": "POP-00730",
+            "rowName": "Clarence Moody",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00757",
+          "name": "Daniel Han",
+          "profile": "Daniel Han — Senior Pastor / Faith Leader — Lake Merritt",
+          "role": "Senior Pastor / Faith Leader",
+          "hood": "Lake Merritt",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the evening record of C116",
+            "pop": "POP-00757",
+            "rowName": "Daniel Han",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00807",
+          "name": "Daphne Choi",
+          "profile": "Daphne Choi — Coffee Roaster — Uptown",
+          "role": "Coffee Roaster",
+          "hood": "Uptown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the evening record of C116",
+            "pop": "POP-00807",
+            "rowName": "Daphne Choi",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00829",
+          "name": "Theodora Donovan",
+          "profile": "Theodora Donovan — Immigration Attorney — West Oakland",
+          "role": "Immigration Attorney",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the evening record of C116",
+            "pop": "POP-00829",
+            "rowName": "Theodora Donovan",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00859",
+          "name": "Tatiana Flores",
+          "profile": "Tatiana Flores — HVAC Technician — KONO",
+          "role": "HVAC Technician",
+          "hood": "KONO",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the evening record of C116",
+            "pop": "POP-00859",
+            "rowName": "Tatiana Flores",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00866",
+          "name": "Yadira Rao",
+          "profile": "Yadira Rao — Plumber — Chinatown",
+          "role": "Plumber",
+          "hood": "Chinatown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the evening record of C116",
+            "pop": "POP-00866",
+            "rowName": "Yadira Rao",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C116",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-871096fd8925"
+      },
+      {
+        "t": "FACT",
+        "text": "Famous people spotted: Theo Banks, Ernesto Quintero, Desmond Morton",
+        "src": "world_summary_c116.md ## Evening Texture",
+        "id": "F-025550e7aafb"
+      },
+      {
+        "t": "FACT",
+        "text": "Restaurants: Harborline Grill (Jack London), Port Grind (Grand Lake), Third Street Late Kitchen (Jack London)",
+        "src": "world_summary_c116.md ## Evening Texture",
+        "id": "F-d2f8dd795bac"
+      },
+      {
+        "t": "FACT",
+        "text": "Fast food: SpeedyBurger (Downtown)",
+        "src": "world_summary_c116.md ## Evening Texture",
+        "id": "F-d9ed1c3d1ec4"
+      },
+      {
+        "t": "FACT",
+        "text": "Nightlife: Bridge & Barrel (Jack London). Volume 3, vibe quiet, movement restricted. Weather impact 1.00.",
+        "src": "world_summary_c116.md ## Evening Texture",
+        "id": "F-e90638c51daf"
+      },
+      {
+        "t": "FACT",
+        "text": "City events: The Kelley Family Block Party, The Horn Family Block Party, The Keane Family Block Party",
+        "src": "world_summary_c116.md ## Evening Texture",
+        "id": "F-b994bed15252"
+      },
+      {
+        "t": "FACT",
+        "text": "Evening media TV: Bay Area Alert, Inside the A's Front Office, Giancarlo Hernandez (3B) — Player Profile",
+        "src": "world_summary_c116.md ## Evening Texture",
+        "id": "F-2db72f05b724"
+      },
+      {
+        "t": "FACT",
+        "text": "Evening media movies: Ninth Inning",
+        "src": "world_summary_c116.md ## Evening Texture",
+        "id": "F-8f641c437c3a"
+      },
+      {
+        "t": "FACT",
+        "text": "Sports broadcast: Oakland Sports Tonight",
+        "src": "world_summary_c116.md ## Evening Texture",
+        "id": "F-4c97a7540c13"
+      },
+      {
+        "t": "FACT",
+        "text": "Streaming trend: political commentary surge",
+        "src": "world_summary_c116.md ## Evening Texture",
+        "id": "F-b167beea0f09"
+      },
+      {
+        "t": "FACT",
+        "text": "Food trend: High mobility / civic-tension food trend",
+        "src": "world_summary_c116.md ## Evening Texture",
+        "id": "F-2b4ecca3e84e"
+      },
+      {
+        "t": "FACT",
+        "text": "city-event | The Kelley Family Block Party (Rockridge) | Rockridge | mag 0.02",
+        "src": "Ripple_Ledger C116 city-event",
+        "id": "F-5e4f0d0502db"
+      },
+      {
+        "t": "FACT",
+        "text": "city-event | The Horn Family Block Party (Temescal) | Temescal | mag 0.02",
+        "src": "Ripple_Ledger C116 city-event",
+        "id": "F-5c778fac9a3d"
+      },
+      {
+        "t": "FACT",
+        "text": "city-event | The Keane Family Block Party (Piedmont Ave) | Piedmont Ave | mag 0.02",
+        "src": "Ripple_Ledger C116 city-event",
+        "id": "F-0880fd91bdcf"
+      },
+      {
+        "t": "FACT",
+        "text": "sighting | Theo Banks spotted at Parkridge Cleaners | Glenview | mag 0.01 | targets BIZ-00142",
+        "src": "Ripple_Ledger C116 lifestyle-sighting",
+        "id": "F-999ad7f78e03"
+      },
+      {
+        "t": "FACT",
+        "text": "sighting | Ernesto Quintero spotted at Marine Systems | Baylight District | mag 0.01 | targets BIZ-00105",
+        "src": "Ripple_Ledger C116 lifestyle-sighting",
+        "id": "F-0567ebcd0fff"
+      },
+      {
+        "t": "FACT",
+        "text": "sighting | Desmond Morton spotted at Jade Thread Tailors | Chinatown | mag 0.01 | targets BIZ-00121",
+        "src": "Ripple_Ledger C116 lifestyle-sighting",
+        "id": "F-978b9b0fb853"
+      },
+      {
+        "t": "FACT",
+        "text": "game-night-texture | The town watched — game night shaped 29 citizen day(s) (streak W5) | mag 29 | targets POP-00027|POP-00219|POP-00227|POP-00246|POP-00250|POP-00265|POP-00332|POP-00354|POP-00358|POP-00459|POP-00461|POP-00484|POP-00644|POP-00654|POP-00730|POP-00757|POP-00807|POP-00829|POP-00859|POP-00866|+9 more",
+        "src": "Ripple_Ledger C116 game-night-texture",
+        "id": "F-6864474328f6"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "pass": "true when nothing here is a piece you want to write this cycle; then give only why",
+        "chase": "string — what you want to write this cycle and how you will go after it, in your own voice. Not JSON.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ]
+      },
+      "rule": "A target is someone you want to hear from; each must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "street",
+    "candidates": [
+      {
+        "pop": "POP-01056",
+        "name": "Theo Banks",
+        "role": "rapper",
+        "hood": "Uptown",
+        "profile": "Theo Banks — rapper — Uptown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the evening record of C116",
+          "pop": "POP-01056",
+          "rowName": "Theo Banks",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00050",
+        "name": "Ernesto Quintero",
+        "role": "3B/1B , Oakland A's",
+        "hood": "Baylight District",
+        "profile": "Ernesto Quintero — 3B/1B , Oakland A's — Baylight District",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the evening record of C116",
+          "pop": "POP-00050",
+          "rowName": "Ernesto Quintero",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00051",
+        "name": "Desmond Morton",
+        "role": "Left Fielder, Oakland A's",
+        "hood": "Chinatown",
+        "profile": "Desmond Morton — Left Fielder, Oakland A's — Chinatown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the evening record of C116",
+          "pop": "POP-00051",
+          "rowName": "Desmond Morton",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00027",
+        "name": "Philly Rodriguez",
+        "role": "Casino Manager",
+        "hood": "West Oakland",
+        "profile": "Philly Rodriguez — Casino Manager — West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the evening record of C116",
+          "pop": "POP-00027",
+          "rowName": "Philly Rodriguez",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00219",
+        "name": "Tyrone Bennington",
+        "role": "Nurse aide",
+        "hood": "Temescal",
+        "profile": "Tyrone Bennington — Nurse aide — Temescal",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the evening record of C116",
+          "pop": "POP-00219",
+          "rowName": "Tyrone Bennington",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00227",
+        "name": "Colin Soria",
+        "role": "Security guard",
+        "hood": "Temescal",
+        "profile": "Colin Soria — Security guard — Temescal",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the evening record of C116",
+          "pop": "POP-00227",
+          "rowName": "Colin Soria",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00246",
+        "name": "Dearie Beacon",
+        "role": "Security guard",
+        "hood": "Chinatown",
+        "profile": "Dearie Beacon — Security guard — Chinatown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the evening record of C116",
+          "pop": "POP-00246",
+          "rowName": "Dearie Beacon",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00250",
+        "name": "Ty Yule",
+        "role": "Taxi driver",
+        "hood": "Jack London",
+        "profile": "Ty Yule — Taxi driver — Jack London",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the evening record of C116",
+          "pop": "POP-00250",
+          "rowName": "Ty Yule",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00265",
+        "name": "Matty Lipo",
+        "role": "Dishwasher",
+        "hood": "Lake Merritt",
+        "profile": "Matty Lipo — Dishwasher — Lake Merritt",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the evening record of C116",
+          "pop": "POP-00265",
+          "rowName": "Matty Lipo",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00332",
+        "name": "Diego Remo",
+        "role": "Independent Bookstore Owner",
+        "hood": "Temescal",
+        "profile": "Diego Remo — Independent Bookstore Owner — Temescal",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the evening record of C116",
+          "pop": "POP-00332",
+          "rowName": "Diego Remo",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00354",
+        "name": "Illy Jile",
+        "role": "Translation Services Provider",
+        "hood": "Chinatown",
+        "profile": "Illy Jile — Translation Services Provider — Chinatown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the evening record of C116",
+          "pop": "POP-00354",
+          "rowName": "Illy Jile",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00358",
+        "name": "Rilen Lend",
+        "role": "Laundromat Owner",
+        "hood": "Laurel",
+        "profile": "Rilen Lend — Laundromat Owner — Laurel",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the evening record of C116",
+          "pop": "POP-00358",
+          "rowName": "Rilen Lend",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00459",
+        "name": "Brielle Lewis",
+        "role": "Immigration Attorney",
+        "hood": "West Oakland",
+        "profile": "Brielle Lewis — Immigration Attorney — West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the evening record of C116",
+          "pop": "POP-00459",
+          "rowName": "Brielle Lewis",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00461",
+        "name": "Wesley Clark",
+        "role": "Sports Analytics Lead (Gridiron Analytics)",
+        "hood": "West Oakland",
+        "profile": "Wesley Clark — Sports Analytics Lead (Gridiron Analytics) — West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the evening record of C116",
+          "pop": "POP-00461",
+          "rowName": "Wesley Clark",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00484",
+        "name": "Tim Allenson",
+        "role": "Yoga Studio Owner",
+        "hood": "Temescal",
+        "profile": "Tim Allenson — Yoga Studio Owner — Temescal",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the evening record of C116",
+          "pop": "POP-00484",
+          "rowName": "Tim Allenson",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00644",
+        "name": "Rafael Pilgrim",
+        "role": "Server",
+        "hood": "Fruitvale",
+        "profile": "Rafael Pilgrim — Server — Fruitvale",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the evening record of C116",
+          "pop": "POP-00644",
+          "rowName": "Rafael Pilgrim",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00654",
+        "name": "Willy Wally",
+        "role": "International Trade Consultant",
+        "hood": "Rockridge",
+        "profile": "Willy Wally — International Trade Consultant — Rockridge",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the evening record of C116",
+          "pop": "POP-00654",
+          "rowName": "Willy Wally",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00730",
+        "name": "Clarence Moody",
+        "role": "Retired Machinist",
+        "hood": "Dimond",
+        "profile": "Clarence Moody — Retired Machinist — Dimond",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the evening record of C116",
+          "pop": "POP-00730",
+          "rowName": "Clarence Moody",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00757",
+        "name": "Daniel Han",
+        "role": "Senior Pastor / Faith Leader",
+        "hood": "Lake Merritt",
+        "profile": "Daniel Han — Senior Pastor / Faith Leader — Lake Merritt",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the evening record of C116",
+          "pop": "POP-00757",
+          "rowName": "Daniel Han",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00807",
+        "name": "Daphne Choi",
+        "role": "Coffee Roaster",
+        "hood": "Uptown",
+        "profile": "Daphne Choi — Coffee Roaster — Uptown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the evening record of C116",
+          "pop": "POP-00807",
+          "rowName": "Daphne Choi",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00829",
+        "name": "Theodora Donovan",
+        "role": "Immigration Attorney",
+        "hood": "West Oakland",
+        "profile": "Theodora Donovan — Immigration Attorney — West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the evening record of C116",
+          "pop": "POP-00829",
+          "rowName": "Theodora Donovan",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00859",
+        "name": "Tatiana Flores",
+        "role": "HVAC Technician",
+        "hood": "KONO",
+        "profile": "Tatiana Flores — HVAC Technician — KONO",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the evening record of C116",
+          "pop": "POP-00859",
+          "rowName": "Tatiana Flores",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00866",
+        "name": "Yadira Rao",
+        "role": "Plumber",
+        "hood": "Chinatown",
+        "profile": "Yadira Rao — Plumber — Chinatown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the evening record of C116",
+          "pop": "POP-00866",
+          "rowName": "Yadira Rao",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Sharon Okafor",
+    "popid": "POP-00159"
+  },
+  "assignment": {
+    "story": {
+      "kind": "own-pick",
+      "ref": "own pick, C116",
+      "label": "The impact of Mark Aitken's departure from the Oakland A's on the community",
+      "angle": "The impact of Mark Aitken's departure from the Oakland A's on the community",
+      "hood": null,
+      "citizens": [
+        "Ernesto Quintero (POP-00050)",
+        "Theo Banks (POP-01056)"
+      ],
+      "popids": [
+        "POP-00050",
+        "POP-01056"
+      ]
+    },
+    "approach": null
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": {
+    "pulse": {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Bridge & Barrel (Jack London) · quiet night",
+      "named": "Bridge & Barrel",
+      "hood": "Jack London",
+      "person": null,
+      "venue": null
+    },
+    "recommend": {
+      "bag": "lifestyle",
+      "slug": "sharon-okafor",
+      "name": "Sharon Okafor",
+      "popid": "POP-00159",
+      "bagDoc": "docs/media/SHARON_LIFESTYLE_BAG.md",
+      "reason": "top pulse quiet-nightlife → lifestyle",
+      "pulseClass": "quiet-nightlife",
+      "pulseLabel": "Bridge & Barrel (Jack London) · quiet night"
+    },
+    "prewrite": {
+      "pulseClass": "quiet-nightlife",
+      "angle": "Bridge & Barrel is open and quiet in Jack London. What that condition means is not yet established.",
+      "hookLine": "Bridge & Barrel is open and quiet in Jack London.",
+      "anchorFacts": [
+        "NAMED: Bridge & Barrel",
+        "HOOD: Jack London",
+        "VENUE: Bridge & Barrel",
+        "HOOD: Jack London",
+        "EVENING RECORD: open and quiet"
+      ],
+      "bagRecommend": "lifestyle",
+      "bagSlug": "sharon-okafor"
+    },
+    "texture": {
+      "famous": [
+        "Theo Banks",
+        "Ernesto Quintero",
+        "Desmond Morton"
+      ],
+      "restaurants": [
+        {
+          "name": "Harborline Grill",
+          "hood": "Jack London"
+        },
+        {
+          "name": "Port Grind",
+          "hood": "Grand Lake"
+        },
+        {
+          "name": "Third Street Late Kitchen",
+          "hood": "Jack London"
+        }
+      ],
+      "fastFood": [
+        {
+          "name": "SpeedyBurger",
+          "hood": "Downtown"
+        }
+      ],
+      "nightlife": [
+        {
+          "name": "Bridge & Barrel",
+          "hood": "Jack London"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 3,
+        "vibe": "quiet",
+        "movement": "restricted",
+        "weatherImpact": 1
+      },
+      "cityEvents": [
+        "The Kelley Family Block Party",
+        "The Horn Family Block Party",
+        "The Keane Family Block Party"
+      ],
+      "tv": [
+        "Bay Area Alert",
+        "Inside the A's Front Office",
+        "Giancarlo Hernandez (3B) — Player Profile"
+      ],
+      "movies": [
+        "Ninth Inning"
+      ],
+      "sportsBroadcast": "Oakland Sports Tonight",
+      "streamingTrend": "political commentary surge",
+      "foodTrend": "High mobility / civic-tension food trend"
+    },
+    "signals": {
+      "fameCount": 11,
+      "sightingCount": 3,
+      "sightings": [
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Theo Banks spotted at Parkridge Cleaners",
+          "name": "Theo Banks",
+          "venue": "Parkridge Cleaners",
+          "ref": "Ripple_Ledger cycle 116 (CauseType lifestyle-sighting); rendered: world_summary_c116.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Glenview",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Ernesto Quintero spotted at Marine Systems",
+          "name": "Ernesto Quintero",
+          "venue": "Marine Systems",
+          "ref": "Ripple_Ledger cycle 116 (CauseType lifestyle-sighting); rendered: world_summary_c116.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Baylight District",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Desmond Morton spotted at Jade Thread Tailors",
+          "name": "Desmond Morton",
+          "venue": "Jade Thread Tailors",
+          "ref": "Ripple_Ledger cycle 116 (CauseType lifestyle-sighting); rendered: world_summary_c116.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Chinatown",
+          "popids": []
+        }
+      ]
+    },
+    "scene": {
+      "venues": [
+        {
+          "name": "Harborline Grill",
+          "hood": "Jack London"
+        },
+        {
+          "name": "Port Grind",
+          "hood": "Grand Lake"
+        },
+        {
+          "name": "Third Street Late Kitchen",
+          "hood": "Jack London"
+        },
+        {
+          "name": "SpeedyBurger",
+          "hood": "Downtown"
+        },
+        {
+          "name": "Bridge & Barrel",
+          "hood": "Jack London"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 3,
+        "vibe": "quiet",
+        "movement": "restricted",
+        "weatherImpact": 1
+      },
+      "cityEvents": [
+        "The Kelley Family Block Party",
+        "The Horn Family Block Party",
+        "The Keane Family Block Party"
+      ],
+      "tv": [
+        "Bay Area Alert",
+        "Inside the A's Front Office",
+        "Giancarlo Hernandez (3B) — Player Profile"
+      ],
+      "movies": [
+        "Ninth Inning"
+      ],
+      "colorRoom": "Named places only from Evening Texture / desk_signal. The supplied evening record describes nightlife as quiet; raw scoring fields stay internal.  Sensory room (weather, light, sound) is free; careers and employees are not."
+    },
+    "candidates": [
+      {
+        "className": "quiet-nightlife",
+        "score": 24,
+        "label": "Bridge & Barrel (Jack London) · quiet night",
+        "named": "Bridge & Barrel",
+        "hood": "Jack London"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Theo Banks at Parkridge Cleaners (Glenview)",
+        "named": "Parkridge Cleaners",
+        "hood": "Glenview"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Ernesto Quintero at Marine Systems (Baylight District)",
+        "named": "Marine Systems",
+        "hood": "Baylight District"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Desmond Morton at Jade Thread Tailors (Chinatown)",
+        "named": "Jade Thread Tailors",
+        "hood": "Chinatown"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Harborline Grill (Jack London)",
+        "named": "Harborline Grill",
+        "hood": "Jack London"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Port Grind (Grand Lake)",
+        "named": "Port Grind",
+        "hood": "Grand Lake"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Third Street Late Kitchen (Jack London)",
+        "named": "Third Street Late Kitchen",
+        "hood": "Jack London"
+      },
+      {
+        "className": "city-event",
+        "score": 17,
+        "label": "The Kelley Family Block Party",
+        "named": "The Kelley Family Block Party",
+        "hood": null
+      }
+    ],
+    "perSeat": {
+      "mason-ortega": {
+        "pulseClass": "named-restaurant",
+        "label": "Harborline Grill (Jack London)",
+        "score": 34,
+        "bag": "kitchen"
+      },
+      "kai-marston": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Bridge & Barrel (Jack London) · quiet night",
+        "score": 32,
+        "bag": "arts"
+      },
+      "sharon-okafor": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Bridge & Barrel (Jack London) · quiet night",
+        "score": 32,
+        "bag": "lifestyle"
+      },
+      "maria-keen": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Bridge & Barrel (Jack London) · quiet night",
+        "score": 32,
+        "bag": "ground"
+      },
+      "elliot-graye": {
+        "pulseClass": "fame-sighting",
+        "label": "Theo Banks at Parkridge Cleaners (Glenview)",
+        "score": 31,
+        "bag": "faith"
+      }
+    }
+  },
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "LIFESTYLE-SLICE-1",
+    "kind": "beat-lifestyle",
+    "seat": {
+      "slug": "sharon-okafor",
+      "name": "Sharon Okafor",
+      "popid": "POP-00159",
+      "desk": "culture",
+      "domain": "lifestyle",
+      "builder": "buildLifestyleSlice.js"
+    },
+    "hood": null,
+    "pulse": null,
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "the evening record of C116",
+      "hookLine": "",
+      "anchorFacts": [
+        "Famous people spotted: Theo Banks, Ernesto Quintero, Desmond Morton",
+        "Restaurants: Harborline Grill (Jack London), Port Grind (Grand Lake), Third Street Late Kitchen (Jack London)",
+        "Fast food: SpeedyBurger (Downtown)",
+        "Nightlife: Bridge & Barrel (Jack London). Volume 3, vibe quiet, movement restricted. Weather impact 1.00.",
+        "City events: The Kelley Family Block Party, The Horn Family Block Party, The Keane Family Block Party",
+        "Evening media TV: Bay Area Alert, Inside the A's Front Office, Giancarlo Hernandez (3B) — Player Profile",
+        "Evening media movies: Ninth Inning",
+        "Sports broadcast: Oakland Sports Tonight",
+        "Streaming trend: political commentary surge",
+        "Food trend: High mobility / civic-tension food trend",
+        "city-event | The Kelley Family Block Party (Rockridge) | Rockridge | mag 0.02",
+        "city-event | The Horn Family Block Party (Temescal) | Temescal | mag 0.02",
+        "city-event | The Keane Family Block Party (Piedmont Ave) | Piedmont Ave | mag 0.02",
+        "sighting | Theo Banks spotted at Parkridge Cleaners | Glenview | mag 0.01 | targets BIZ-00142",
+        "sighting | Ernesto Quintero spotted at Marine Systems | Baylight District | mag 0.01 | targets BIZ-00105",
+        "sighting | Desmond Morton spotted at Jade Thread Tailors | Chinatown | mag 0.01 | targets BIZ-00121",
+        "game-night-texture | The town watched — game night shaped 29 citizen day(s) (streak W5) | mag 29 | targets POP-00027|POP-00219|POP-00227|POP-00246|POP-00250|POP-00265|POP-00332|POP-00354|POP-00358|POP-00459|POP-00461|POP-00484|POP-00644|POP-00654|POP-00730|POP-00757|POP-00807|POP-00829|POP-00859|POP-00866|+9 more"
+      ],
+      "evidence": [
+        {
+          "text": "Famous people spotted: Theo Banks, Ernesto Quintero, Desmond Morton",
+          "src": "world_summary_c116.md ## Evening Texture"
+        },
+        {
+          "text": "Restaurants: Harborline Grill (Jack London), Port Grind (Grand Lake), Third Street Late Kitchen (Jack London)",
+          "src": "world_summary_c116.md ## Evening Texture"
+        },
+        {
+          "text": "Fast food: SpeedyBurger (Downtown)",
+          "src": "world_summary_c116.md ## Evening Texture"
+        },
+        {
+          "text": "Nightlife: Bridge & Barrel (Jack London). Volume 3, vibe quiet, movement restricted. Weather impact 1.00.",
+          "src": "world_summary_c116.md ## Evening Texture"
+        },
+        {
+          "text": "City events: The Kelley Family Block Party, The Horn Family Block Party, The Keane Family Block Party",
+          "src": "world_summary_c116.md ## Evening Texture"
+        },
+        {
+          "text": "Evening media TV: Bay Area Alert, Inside the A's Front Office, Giancarlo Hernandez (3B) — Player Profile",
+          "src": "world_summary_c116.md ## Evening Texture"
+        },
+        {
+          "text": "Evening media movies: Ninth Inning",
+          "src": "world_summary_c116.md ## Evening Texture"
+        },
+        {
+          "text": "Sports broadcast: Oakland Sports Tonight",
+          "src": "world_summary_c116.md ## Evening Texture"
+        },
+        {
+          "text": "Streaming trend: political commentary surge",
+          "src": "world_summary_c116.md ## Evening Texture"
+        },
+        {
+          "text": "Food trend: High mobility / civic-tension food trend",
+          "src": "world_summary_c116.md ## Evening Texture"
+        },
+        {
+          "text": "city-event | The Kelley Family Block Party (Rockridge) | Rockridge | mag 0.02",
+          "src": "Ripple_Ledger C116 city-event"
+        },
+        {
+          "text": "city-event | The Horn Family Block Party (Temescal) | Temescal | mag 0.02",
+          "src": "Ripple_Ledger C116 city-event"
+        },
+        {
+          "text": "city-event | The Keane Family Block Party (Piedmont Ave) | Piedmont Ave | mag 0.02",
+          "src": "Ripple_Ledger C116 city-event"
+        },
+        {
+          "text": "sighting | Theo Banks spotted at Parkridge Cleaners | Glenview | mag 0.01 | targets BIZ-00142",
+          "src": "Ripple_Ledger C116 lifestyle-sighting"
+        },
+        {
+          "text": "sighting | Ernesto Quintero spotted at Marine Systems | Baylight District | mag 0.01 | targets BIZ-00105",
+          "src": "Ripple_Ledger C116 lifestyle-sighting"
+        },
+        {
+          "text": "sighting | Desmond Morton spotted at Jade Thread Tailors | Chinatown | mag 0.01 | targets BIZ-00121",
+          "src": "Ripple_Ledger C116 lifestyle-sighting"
+        },
+        {
+          "text": "game-night-texture | The town watched — game night shaped 29 citizen day(s) (streak W5) | mag 29 | targets POP-00027|POP-00219|POP-00227|POP-00246|POP-00250|POP-00265|POP-00332|POP-00354|POP-00358|POP-00459|POP-00461|POP-00484|POP-00644|POP-00654|POP-00730|POP-00757|POP-00807|POP-00829|POP-00859|POP-00866|+9 more",
+          "src": "Ripple_Ledger C116 game-night-texture"
+        }
+      ],
+      "forbidden": [],
+      "deltas": null,
+      "hooks": [],
+      "note": "",
+      "pageVoices": [],
+      "roomIsYours": "",
+      "presentFacts": [],
+      "peopleCap": 24
+    },
+    "citizens": [
+      {
+        "popid": "POP-01056",
+        "name": "Theo Banks",
+        "role": "rapper",
+        "neighborhood": "Uptown",
+        "business": null,
+        "profile": "Theo Banks — rapper — Uptown",
+        "why": "spotted C116 (lifestyle-sighting)"
+      },
+      {
+        "popid": "POP-00050",
+        "name": "Ernesto Quintero",
+        "role": "3B/1B , Oakland A's",
+        "neighborhood": "Baylight District",
+        "business": null,
+        "profile": "Ernesto Quintero — 3B/1B , Oakland A's — Baylight District",
+        "why": "spotted C116 (lifestyle-sighting)"
+      },
+      {
+        "popid": "POP-00051",
+        "name": "Desmond Morton",
+        "role": "Left Fielder, Oakland A's",
+        "neighborhood": "Chinatown",
+        "business": null,
+        "profile": "Desmond Morton — Left Fielder, Oakland A's — Chinatown",
+        "why": "spotted C116 (lifestyle-sighting)"
+      },
+      {
+        "popid": "POP-00027",
+        "name": "Philly Rodriguez",
+        "role": "Casino Manager",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Philly Rodriguez — Casino Manager — West Oakland",
+        "why": "game night shaped their day C116 (game-night-texture)"
+      },
+      {
+        "popid": "POP-00219",
+        "name": "Tyrone Bennington",
+        "role": "Nurse aide",
+        "neighborhood": "Temescal",
+        "business": null,
+        "profile": "Tyrone Bennington — Nurse aide — Temescal",
+        "why": "game night shaped their day C116 (game-night-texture)"
+      },
+      {
+        "popid": "POP-00227",
+        "name": "Colin Soria",
+        "role": "Security guard",
+        "neighborhood": "Temescal",
+        "business": null,
+        "profile": "Colin Soria — Security guard — Temescal",
+        "why": "game night shaped their day C116 (game-night-texture)"
+      },
+      {
+        "popid": "POP-00246",
+        "name": "Dearie Beacon",
+        "role": "Security guard",
+        "neighborhood": "Chinatown",
+        "business": null,
+        "profile": "Dearie Beacon — Security guard — Chinatown",
+        "why": "game night shaped their day C116 (game-night-texture)"
+      },
+      {
+        "popid": "POP-00250",
+        "name": "Ty Yule",
+        "role": "Taxi driver",
+        "neighborhood": "Jack London",
+        "business": null,
+        "profile": "Ty Yule — Taxi driver — Jack London",
+        "why": "game night shaped their day C116 (game-night-texture)"
+      },
+      {
+        "popid": "POP-00265",
+        "name": "Matty Lipo",
+        "role": "Dishwasher",
+        "neighborhood": "Lake Merritt",
+        "business": null,
+        "profile": "Matty Lipo — Dishwasher — Lake Merritt",
+        "why": "game night shaped their day C116 (game-night-texture)"
+      },
+      {
+        "popid": "POP-00332",
+        "name": "Diego Remo",
+        "role": "Independent Bookstore Owner",
+        "neighborhood": "Temescal",
+        "business": null,
+        "profile": "Diego Remo — Independent Bookstore Owner — Temescal",
+        "why": "game night shaped their day C116 (game-night-texture)"
+      },
+      {
+        "popid": "POP-00354",
+        "name": "Illy Jile",
+        "role": "Translation Services Provider",
+        "neighborhood": "Chinatown",
+        "business": null,
+        "profile": "Illy Jile — Translation Services Provider — Chinatown",
+        "why": "game night shaped their day C116 (game-night-texture)"
+      },
+      {
+        "popid": "POP-00358",
+        "name": "Rilen Lend",
+        "role": "Laundromat Owner",
+        "neighborhood": "Laurel",
+        "business": null,
+        "profile": "Rilen Lend — Laundromat Owner — Laurel",
+        "why": "game night shaped their day C116 (game-night-texture)"
+      },
+      {
+        "popid": "POP-00459",
+        "name": "Brielle Lewis",
+        "role": "Immigration Attorney",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Brielle Lewis — Immigration Attorney — West Oakland",
+        "why": "game night shaped their day C116 (game-night-texture)"
+      },
+      {
+        "popid": "POP-00461",
+        "name": "Wesley Clark",
+        "role": "Sports Analytics Lead (Gridiron Analytics)",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Wesley Clark — Sports Analytics Lead (Gridiron Analytics) — West Oakland",
+        "why": "game night shaped their day C116 (game-night-texture)"
+      },
+      {
+        "popid": "POP-00484",
+        "name": "Tim Allenson",
+        "role": "Yoga Studio Owner",
+        "neighborhood": "Temescal",
+        "business": null,
+        "profile": "Tim Allenson — Yoga Studio Owner — Temescal",
+        "why": "game night shaped their day C116 (game-night-texture)"
+      },
+      {
+        "popid": "POP-00644",
+        "name": "Rafael Pilgrim",
+        "role": "Server",
+        "neighborhood": "Fruitvale",
+        "business": null,
+        "profile": "Rafael Pilgrim — Server — Fruitvale",
+        "why": "game night shaped their day C116 (game-night-texture)"
+      },
+      {
+        "popid": "POP-00654",
+        "name": "Willy Wally",
+        "role": "International Trade Consultant",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Willy Wally — International Trade Consultant — Rockridge",
+        "why": "game night shaped their day C116 (game-night-texture)"
+      },
+      {
+        "popid": "POP-00730",
+        "name": "Clarence Moody",
+        "role": "Retired Machinist",
+        "neighborhood": "Dimond",
+        "business": null,
+        "profile": "Clarence Moody — Retired Machinist — Dimond",
+        "why": "game night shaped their day C116 (game-night-texture)"
+      },
+      {
+        "popid": "POP-00757",
+        "name": "Daniel Han",
+        "role": "Senior Pastor / Faith Leader",
+        "neighborhood": "Lake Merritt",
+        "business": null,
+        "profile": "Daniel Han — Senior Pastor / Faith Leader — Lake Merritt",
+        "why": "game night shaped their day C116 (game-night-texture)"
+      },
+      {
+        "popid": "POP-00807",
+        "name": "Daphne Choi",
+        "role": "Coffee Roaster",
+        "neighborhood": "Uptown",
+        "business": null,
+        "profile": "Daphne Choi — Coffee Roaster — Uptown",
+        "why": "game night shaped their day C116 (game-night-texture)"
+      },
+      {
+        "popid": "POP-00829",
+        "name": "Theodora Donovan",
+        "role": "Immigration Attorney",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Theodora Donovan — Immigration Attorney — West Oakland",
+        "why": "game night shaped their day C116 (game-night-texture)"
+      },
+      {
+        "popid": "POP-00859",
+        "name": "Tatiana Flores",
+        "role": "HVAC Technician",
+        "neighborhood": "KONO",
+        "business": null,
+        "profile": "Tatiana Flores — HVAC Technician — KONO",
+        "why": "game night shaped their day C116 (game-night-texture)"
+      },
+      {
+        "popid": "POP-00866",
+        "name": "Yadira Rao",
+        "role": "Plumber",
+        "neighborhood": "Chinatown",
+        "business": null,
+        "profile": "Yadira Rao — Plumber — Chinatown",
+        "why": "game night shaped their day C116 (game-night-texture)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Cultural_Ledger.jsonl @C116",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Sharon Okafor this cycle)"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Sharon Okafor",
+    "popid": "POP-00159",
+    "text": "The A's are losing Mark Aitken to the Colorado Rockies, and the community is feeling it. I want to write about what this means for Oakland, for the team, and for Aitken's legacy. I'll start by talking to Anthony Raines, my colleague and the lead beat reporter for the A's, to get his take on the situation. I'll also reach out to locals who've been involved with Aitken's community work, like those from the Baylight District where he runs his Little Leaguers program.",
+    "plan": {
+      "chase": "The A's are losing Mark Aitken to the Colorado Rockies, and the community is feeling it. I want to write about what this means for Oakland, for the team, and for Aitken's legacy. I'll start by talking to Anthony Raines, my colleague and the lead beat reporter for the A's, to get his take on the situation. I'll also reach out to locals who've been involved with Aitken's community work, like those from the Baylight District where he runs his Little Leaguers program.",
+      "focus": "The impact of Mark Aitken's departure from the Oakland A's on the community",
+      "why": "The departure of a local icon like Mark Aitken is significant not just for the team but for the community he's been deeply involved with. Understanding the emotional and practical implications of his leaving can provide a rich story.",
+      "checks": [
+        "Verify the details of Mark Aitken's contract with the Colorado Rockies",
+        "Assess the community's reaction through social media and local event attendance"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00050",
+          "question": "How does Ernesto Quintero's shift to first base change the dynamics of the team?",
+          "basis": "Ernesto Quintero is a key player for the A's and his position change is directly related to Aitken's departure"
+        },
+        {
+          "pop": "POP-01056",
+          "question": "Is Theo Banks commenting on or reacting to the A's recent changes?",
+          "basis": "Theo Banks is a local celebrity and his views on sports can be insightful"
+        }
+      ],
+      "interpretation": "The loss of Mark Aitken is not just about the A's lineup; it's about the loss of a community figure and the potential impact on local youth programs and initiatives.",
+      "unverifiedLead": [
+        "The potential for Kevin Clark or Giancarlo Hernandez to take over third base and how this affects the team's strategy"
+      ]
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Grand Lake neighborhood texture — how residents experience the improvement | Residents of Grand Lake feel the change firsthand.",
+      "kind": "anomaly",
+      "hood": "Grand Lake",
+      "ref": "output/engine_audit_c116.json patterns[7]; evidence: Initiative_Tracker row(s) 9; storyline INIT-009:vote-scheduled",
+      "popids": [
+        "POP-01218",
+        "POP-01244",
+        "POP-01249"
+      ]
+    },
+    {
+      "label": "Fruitvale | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Fruitvale",
+      "ref": "output/neighborhood_texture_c116.md \"### Fruitvale\"; events: world_summary_c116.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Glenview | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Glenview",
+      "ref": "output/neighborhood_texture_c116.md \"### Glenview\"; events: world_summary_c116.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Grand Lake | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Grand Lake",
+      "ref": "output/neighborhood_texture_c116.md \"### Grand Lake\"; events: world_summary_c116.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Piedmont Ave | 2 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Piedmont Ave",
+      "ref": "output/neighborhood_texture_c116.md \"### Piedmont Ave\"; events: world_summary_c116.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 30,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-22T04:46:27.435Z"
+}

@@ -247,7 +247,13 @@ const WRITER_TOOLS = Math.max(0, Math.min(8, parseInt(arg('--writer-tools', '0')
 // `bare` (pipeline.111, 2026-11-14) is `light` without the seat's hard-coded STANCE line and its bag file, so a
 // swapped identity is the only thing describing the voice (agy's finding on the 2026-11-13 boot runs: the stance
 // and bag rode every mode, light included).
-const TEST_BARE = !!process.env.GODWORLD_TEST_COMPARE_DIR && process.env.GODWORLD_TEST_PROMPT === 'bare';
+// `seat` (pipeline.111, builder 2026-11-21: "they get told who they are , their canonized bio, their row details,
+// then they get the beat of what they cover, ther tool list, and what we hand them via the engine output"): the
+// system prompt is the sheet line plus the seat file GODWORLD_TEST_SEAT_BOOT names (bio, beat, tools, filing line)
+// and nothing else; the user message is the cycle and the Packet; the tools are the four the seat file lists.
+const TEST_SEAT = !!process.env.GODWORLD_TEST_COMPARE_DIR && process.env.GODWORLD_TEST_PROMPT === 'seat';
+const TEST_SEAT_BOOT = TEST_SEAT ? fs.readFileSync(process.env.GODWORLD_TEST_SEAT_BOOT, 'utf8').trim() : '';
+const TEST_BARE = !!process.env.GODWORLD_TEST_COMPARE_DIR && (process.env.GODWORLD_TEST_PROMPT === 'bare' || TEST_SEAT);
 const TEST_LIGHT = TEST_BARE || (!!process.env.GODWORLD_TEST_COMPARE_DIR && process.env.GODWORLD_TEST_PROMPT === 'light');
 
 // Approx USD per 1M tokens [input, output] — for the scorecard's apiCostUsd (estimate).
@@ -799,7 +805,7 @@ function seatToolsBlock(persona, n) {
 // health/school/safety hood rows. Aggregate city and hood sheets only — no household or per-citizen finance tab.
 const SHEET_READ_ALLOWLIST = ['Initiative_Tracker', 'Neighborhood_Map', 'Oakland_Sports_Feed', 'Civic_Office_Ledger',
   'Faith_Organizations', 'Faith_Ledger', 'Business_Ledger', 'Transit_Metrics', 'Neighborhood_Demographics',
-  'Care_Justice_Census', 'Community_Programs', 'Crime_Metrics'];
+  'Care_Justice_Census', 'Community_Programs', 'Crime_Metrics'].concat(TEST_SEAT ? ['Cultural_Ledger'] : []);
 // memory tools appear in the loop only when the run knows whose page it is
 // (--byline-popid from cron-desk-run, or the persona's own POPID).
 const MEMORY_TOOLS = [
@@ -1347,14 +1353,14 @@ async function main() {
   // sheet line and temperament, read live, then the Essence of its own voice file — who they are, ahead of everything
   // else. Fails open: a seat with neither wakes as before. Not under the bare test prompt, which swaps its own boot in.
   let whoBlock = '';
-  if (PERSONA && !TEST_BARE) {
+  if (PERSONA && (!TEST_BARE || TEST_SEAT)) {
     const who = await require('./reporterIdentity').reporterIdentity({ popid: PERSONA_POPID, agentDir: AGENT_DIR });
     whoBlock = who.block ? who.block + '\n\n' : '';
     console.log('identity: sheetChars=' + who.sheet.length + ' essenceChars=' + who.essence.length +
       (who.voiceFile ? ' voice=' + path.basename(who.voiceFile) : '') + (who.notes.length ? ' (' + who.notes.join('; ') + ')' : ''));
   }
 
-  const system = whoBlock + (TEST_LIGHT
+  const system = TEST_SEAT ? whoBlock + TEST_SEAT_BOOT : whoBlock + (TEST_LIGHT
     ? 'You are this journalist, alive in this city this cycle. ' +
       (isNiaSeat(PERSONA) ? 'Your beat is the UNDOCKED show and its standing in the city. Named people come from the ledger; in-world places are yours. ' : 'Named people, businesses and figures come from the Packet and the ledger; you invent none. ')
     :
@@ -1434,7 +1440,7 @@ async function main() {
         (RUBRIC ? rubricBlock(packetState) : '')
       : '');
 
-  const kickoff = STATE_FILE
+  const kickoff = TEST_SEAT ? 'Cycle ' + cycle + '.\n\n' + worldState : STATE_FILE
     ? 'Current cycle: ' + cycle + '. Write the ' + DESK + ' section for THIS cycle from YOUR LANE below — ' +
       'build only from the storylines it names and the citizen quotes it supplies; find your own angle. Do not ' +
       'invent events, players, or officials the lane does not name. Use your reporters\' voices per your SKILL. ' +
@@ -1503,7 +1509,7 @@ async function main() {
     // design — the comparison era is over, this is the production wake.
     log.info((PACKET_ONLY ? 'packet-only compose' : 'tool-loop write') + ' via OpenRouter (' + MODEL +
       (PACKET_ONLY && !TOOLS_AB ? ', 0 live tools' : ', max 6 calls') + ')...');
-    const composeUser = kickoff +
+    const composeUser = TEST_SEAT ? kickoff : kickoff +
       '\n\nWRITE the full ' + DESK + ' section for cycle ' + cycle + ' — the complete, publish-ready ' +
       'markdown, built ONLY from the events/names/records in the world state above plus what your tools ' +
       'return. ' + (PACKET_ONLY
@@ -1530,7 +1536,8 @@ async function main() {
       maxToolCalls: PACKET_ONLY && !TOOLS_AB ? WRITER_TOOLS : 6,
       traceResults: TOOLS_AB || WRITER_TOOLS > 0,
       keepResults: WRITER_TOOLS > 0,
-      ...(WRITER_TOOLS ? { toolset: writerToolset(PERSONA, RECALL_ONLY, CANON_RECALL) } : {}),
+      ...(WRITER_TOOLS ? { toolset: TEST_SEAT ? OPENROUTER_TOOLS.concat([CANON_RECALL_TOOL])
+        : writerToolset(PERSONA, RECALL_ONLY, CANON_RECALL) } : {}),
       forceFirstTool: TOOLS_FORCED,
       cycle,
       memCtx: BYLINE_POPID ? { popId: BYLINE_POPID, cycle }

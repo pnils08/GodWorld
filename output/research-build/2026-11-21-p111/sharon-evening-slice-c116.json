@@ -1,0 +1,466 @@
+{
+  "version": "LIFESTYLE-SLICE-1",
+  "empty": false,
+  "cycle": 116,
+  "kind": "beat-lifestyle",
+  "seat": {
+    "slug": "sharon-okafor",
+    "name": "Sharon Okafor",
+    "popid": "POP-00159",
+    "desk": "culture",
+    "domain": "lifestyle",
+    "builder": "buildLifestyleSlice.js"
+  },
+  "hood": null,
+  "pulse": null,
+  "story": {
+    "kind": "beat-lifestyle",
+    "angle": "the evening record of C116",
+    "label": "the evening record of C116",
+    "hookLine": "",
+    "hood": null,
+    "citizens": [
+      "Theo Banks",
+      "Ernesto Quintero",
+      "Desmond Morton",
+      "Philly Rodriguez",
+      "Tyrone Bennington",
+      "Colin Soria",
+      "Dearie Beacon",
+      "Ty Yule",
+      "Matty Lipo",
+      "Diego Remo",
+      "Illy Jile",
+      "Rilen Lend",
+      "Brielle Lewis",
+      "Wesley Clark",
+      "Tim Allenson",
+      "Rafael Pilgrim",
+      "Willy Wally",
+      "Clarence Moody",
+      "Daniel Han",
+      "Daphne Choi",
+      "Theodora Donovan",
+      "Tatiana Flores",
+      "Yadira Rao"
+    ],
+    "popids": [
+      "POP-01056",
+      "POP-00050",
+      "POP-00051",
+      "POP-00027",
+      "POP-00219",
+      "POP-00227",
+      "POP-00246",
+      "POP-00250",
+      "POP-00265",
+      "POP-00332",
+      "POP-00354",
+      "POP-00358",
+      "POP-00459",
+      "POP-00461",
+      "POP-00484",
+      "POP-00644",
+      "POP-00654",
+      "POP-00730",
+      "POP-00757",
+      "POP-00807",
+      "POP-00829",
+      "POP-00859",
+      "POP-00866"
+    ],
+    "ref": "the evening record of C116",
+    "cycle": 116
+  },
+  "approach": "",
+  "citizens": [
+    {
+      "popid": "POP-01056",
+      "name": "Theo Banks",
+      "role": "rapper",
+      "neighborhood": "Uptown",
+      "business": null,
+      "profile": "Theo Banks — rapper — Uptown",
+      "why": "spotted C116 (lifestyle-sighting)"
+    },
+    {
+      "popid": "POP-00050",
+      "name": "Ernesto Quintero",
+      "role": "3B/1B , Oakland A's",
+      "neighborhood": "Baylight District",
+      "business": null,
+      "profile": "Ernesto Quintero — 3B/1B , Oakland A's — Baylight District",
+      "why": "spotted C116 (lifestyle-sighting)"
+    },
+    {
+      "popid": "POP-00051",
+      "name": "Desmond Morton",
+      "role": "Left Fielder, Oakland A's",
+      "neighborhood": "Chinatown",
+      "business": null,
+      "profile": "Desmond Morton — Left Fielder, Oakland A's — Chinatown",
+      "why": "spotted C116 (lifestyle-sighting)"
+    },
+    {
+      "popid": "POP-00027",
+      "name": "Philly Rodriguez",
+      "role": "Casino Manager",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Philly Rodriguez — Casino Manager — West Oakland",
+      "why": "game night shaped their day C116 (game-night-texture)"
+    },
+    {
+      "popid": "POP-00219",
+      "name": "Tyrone Bennington",
+      "role": "Nurse aide",
+      "neighborhood": "Temescal",
+      "business": null,
+      "profile": "Tyrone Bennington — Nurse aide — Temescal",
+      "why": "game night shaped their day C116 (game-night-texture)"
+    },
+    {
+      "popid": "POP-00227",
+      "name": "Colin Soria",
+      "role": "Security guard",
+      "neighborhood": "Temescal",
+      "business": null,
+      "profile": "Colin Soria — Security guard — Temescal",
+      "why": "game night shaped their day C116 (game-night-texture)"
+    },
+    {
+      "popid": "POP-00246",
+      "name": "Dearie Beacon",
+      "role": "Security guard",
+      "neighborhood": "Chinatown",
+      "business": null,
+      "profile": "Dearie Beacon — Security guard — Chinatown",
+      "why": "game night shaped their day C116 (game-night-texture)"
+    },
+    {
+      "popid": "POP-00250",
+      "name": "Ty Yule",
+      "role": "Taxi driver",
+      "neighborhood": "Jack London",
+      "business": null,
+      "profile": "Ty Yule — Taxi driver — Jack London",
+      "why": "game night shaped their day C116 (game-night-texture)"
+    },
+    {
+      "popid": "POP-00265",
+      "name": "Matty Lipo",
+      "role": "Dishwasher",
+      "neighborhood": "Lake Merritt",
+      "business": null,
+      "profile": "Matty Lipo — Dishwasher — Lake Merritt",
+      "why": "game night shaped their day C116 (game-night-texture)"
+    },
+    {
+      "popid": "POP-00332",
+      "name": "Diego Remo",
+      "role": "Independent Bookstore Owner",
+      "neighborhood": "Temescal",
+      "business": null,
+      "profile": "Diego Remo — Independent Bookstore Owner — Temescal",
+      "why": "game night shaped their day C116 (game-night-texture)"
+    },
+    {
+      "popid": "POP-00354",
+      "name": "Illy Jile",
+      "role": "Translation Services Provider",
+      "neighborhood": "Chinatown",
+      "business": null,
+      "profile": "Illy Jile — Translation Services Provider — Chinatown",
+      "why": "game night shaped their day C116 (game-night-texture)"
+    },
+    {
+      "popid": "POP-00358",
+      "name": "Rilen Lend",
+      "role": "Laundromat Owner",
+      "neighborhood": "Laurel",
+      "business": null,
+      "profile": "Rilen Lend — Laundromat Owner — Laurel",
+      "why": "game night shaped their day C116 (game-night-texture)"
+    },
+    {
+      "popid": "POP-00459",
+      "name": "Brielle Lewis",
+      "role": "Immigration Attorney",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Brielle Lewis — Immigration Attorney — West Oakland",
+      "why": "game night shaped their day C116 (game-night-texture)"
+    },
+    {
+      "popid": "POP-00461",
+      "name": "Wesley Clark",
+      "role": "Sports Analytics Lead (Gridiron Analytics)",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Wesley Clark — Sports Analytics Lead (Gridiron Analytics) — West Oakland",
+      "why": "game night shaped their day C116 (game-night-texture)"
+    },
+    {
+      "popid": "POP-00484",
+      "name": "Tim Allenson",
+      "role": "Yoga Studio Owner",
+      "neighborhood": "Temescal",
+      "business": null,
+      "profile": "Tim Allenson — Yoga Studio Owner — Temescal",
+      "why": "game night shaped their day C116 (game-night-texture)"
+    },
+    {
+      "popid": "POP-00644",
+      "name": "Rafael Pilgrim",
+      "role": "Server",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Rafael Pilgrim — Server — Fruitvale",
+      "why": "game night shaped their day C116 (game-night-texture)"
+    },
+    {
+      "popid": "POP-00654",
+      "name": "Willy Wally",
+      "role": "International Trade Consultant",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Willy Wally — International Trade Consultant — Rockridge",
+      "why": "game night shaped their day C116 (game-night-texture)"
+    },
+    {
+      "popid": "POP-00730",
+      "name": "Clarence Moody",
+      "role": "Retired Machinist",
+      "neighborhood": "Dimond",
+      "business": null,
+      "profile": "Clarence Moody — Retired Machinist — Dimond",
+      "why": "game night shaped their day C116 (game-night-texture)"
+    },
+    {
+      "popid": "POP-00757",
+      "name": "Daniel Han",
+      "role": "Senior Pastor / Faith Leader",
+      "neighborhood": "Lake Merritt",
+      "business": null,
+      "profile": "Daniel Han — Senior Pastor / Faith Leader — Lake Merritt",
+      "why": "game night shaped their day C116 (game-night-texture)"
+    },
+    {
+      "popid": "POP-00807",
+      "name": "Daphne Choi",
+      "role": "Coffee Roaster",
+      "neighborhood": "Uptown",
+      "business": null,
+      "profile": "Daphne Choi — Coffee Roaster — Uptown",
+      "why": "game night shaped their day C116 (game-night-texture)"
+    },
+    {
+      "popid": "POP-00829",
+      "name": "Theodora Donovan",
+      "role": "Immigration Attorney",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Theodora Donovan — Immigration Attorney — West Oakland",
+      "why": "game night shaped their day C116 (game-night-texture)"
+    },
+    {
+      "popid": "POP-00859",
+      "name": "Tatiana Flores",
+      "role": "HVAC Technician",
+      "neighborhood": "KONO",
+      "business": null,
+      "profile": "Tatiana Flores — HVAC Technician — KONO",
+      "why": "game night shaped their day C116 (game-night-texture)"
+    },
+    {
+      "popid": "POP-00866",
+      "name": "Yadira Rao",
+      "role": "Plumber",
+      "neighborhood": "Chinatown",
+      "business": null,
+      "profile": "Yadira Rao — Plumber — Chinatown",
+      "why": "game night shaped their day C116 (game-night-texture)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "Famous people spotted: Theo Banks, Ernesto Quintero, Desmond Morton",
+      "src": "world_summary_c116.md ## Evening Texture"
+    },
+    {
+      "text": "Restaurants: Harborline Grill (Jack London), Port Grind (Grand Lake), Third Street Late Kitchen (Jack London)",
+      "src": "world_summary_c116.md ## Evening Texture"
+    },
+    {
+      "text": "Fast food: SpeedyBurger (Downtown)",
+      "src": "world_summary_c116.md ## Evening Texture"
+    },
+    {
+      "text": "Nightlife: Bridge & Barrel (Jack London). Volume 3, vibe quiet, movement restricted. Weather impact 1.00.",
+      "src": "world_summary_c116.md ## Evening Texture"
+    },
+    {
+      "text": "City events: The Kelley Family Block Party, The Horn Family Block Party, The Keane Family Block Party",
+      "src": "world_summary_c116.md ## Evening Texture"
+    },
+    {
+      "text": "Evening media TV: Bay Area Alert, Inside the A's Front Office, Giancarlo Hernandez (3B) — Player Profile",
+      "src": "world_summary_c116.md ## Evening Texture"
+    },
+    {
+      "text": "Evening media movies: Ninth Inning",
+      "src": "world_summary_c116.md ## Evening Texture"
+    },
+    {
+      "text": "Sports broadcast: Oakland Sports Tonight",
+      "src": "world_summary_c116.md ## Evening Texture"
+    },
+    {
+      "text": "Streaming trend: political commentary surge",
+      "src": "world_summary_c116.md ## Evening Texture"
+    },
+    {
+      "text": "Food trend: High mobility / civic-tension food trend",
+      "src": "world_summary_c116.md ## Evening Texture"
+    },
+    {
+      "text": "city-event | The Kelley Family Block Party (Rockridge) | Rockridge | mag 0.02",
+      "src": "Ripple_Ledger C116 city-event"
+    },
+    {
+      "text": "city-event | The Horn Family Block Party (Temescal) | Temescal | mag 0.02",
+      "src": "Ripple_Ledger C116 city-event"
+    },
+    {
+      "text": "city-event | The Keane Family Block Party (Piedmont Ave) | Piedmont Ave | mag 0.02",
+      "src": "Ripple_Ledger C116 city-event"
+    },
+    {
+      "text": "sighting | Theo Banks spotted at Parkridge Cleaners | Glenview | mag 0.01 | targets BIZ-00142",
+      "src": "Ripple_Ledger C116 lifestyle-sighting"
+    },
+    {
+      "text": "sighting | Ernesto Quintero spotted at Marine Systems | Baylight District | mag 0.01 | targets BIZ-00105",
+      "src": "Ripple_Ledger C116 lifestyle-sighting"
+    },
+    {
+      "text": "sighting | Desmond Morton spotted at Jade Thread Tailors | Chinatown | mag 0.01 | targets BIZ-00121",
+      "src": "Ripple_Ledger C116 lifestyle-sighting"
+    },
+    {
+      "text": "game-night-texture | The town watched — game night shaped 29 citizen day(s) (streak W5) | mag 29 | targets POP-00027|POP-00219|POP-00227|POP-00246|POP-00250|POP-00265|POP-00332|POP-00354|POP-00358|POP-00459|POP-00461|POP-00484|POP-00644|POP-00654|POP-00730|POP-00757|POP-00807|POP-00829|POP-00859|POP-00866|+9 more",
+      "src": "Ripple_Ledger C116 game-night-texture"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "the evening record of C116",
+    "hookLine": "",
+    "anchorFacts": [
+      "Famous people spotted: Theo Banks, Ernesto Quintero, Desmond Morton",
+      "Restaurants: Harborline Grill (Jack London), Port Grind (Grand Lake), Third Street Late Kitchen (Jack London)",
+      "Fast food: SpeedyBurger (Downtown)",
+      "Nightlife: Bridge & Barrel (Jack London). Volume 3, vibe quiet, movement restricted. Weather impact 1.00.",
+      "City events: The Kelley Family Block Party, The Horn Family Block Party, The Keane Family Block Party",
+      "Evening media TV: Bay Area Alert, Inside the A's Front Office, Giancarlo Hernandez (3B) — Player Profile",
+      "Evening media movies: Ninth Inning",
+      "Sports broadcast: Oakland Sports Tonight",
+      "Streaming trend: political commentary surge",
+      "Food trend: High mobility / civic-tension food trend",
+      "city-event | The Kelley Family Block Party (Rockridge) | Rockridge | mag 0.02",
+      "city-event | The Horn Family Block Party (Temescal) | Temescal | mag 0.02",
+      "city-event | The Keane Family Block Party (Piedmont Ave) | Piedmont Ave | mag 0.02",
+      "sighting | Theo Banks spotted at Parkridge Cleaners | Glenview | mag 0.01 | targets BIZ-00142",
+      "sighting | Ernesto Quintero spotted at Marine Systems | Baylight District | mag 0.01 | targets BIZ-00105",
+      "sighting | Desmond Morton spotted at Jade Thread Tailors | Chinatown | mag 0.01 | targets BIZ-00121",
+      "game-night-texture | The town watched — game night shaped 29 citizen day(s) (streak W5) | mag 29 | targets POP-00027|POP-00219|POP-00227|POP-00246|POP-00250|POP-00265|POP-00332|POP-00354|POP-00358|POP-00459|POP-00461|POP-00484|POP-00644|POP-00654|POP-00730|POP-00757|POP-00807|POP-00829|POP-00859|POP-00866|+9 more"
+    ],
+    "evidence": [
+      {
+        "text": "Famous people spotted: Theo Banks, Ernesto Quintero, Desmond Morton",
+        "src": "world_summary_c116.md ## Evening Texture"
+      },
+      {
+        "text": "Restaurants: Harborline Grill (Jack London), Port Grind (Grand Lake), Third Street Late Kitchen (Jack London)",
+        "src": "world_summary_c116.md ## Evening Texture"
+      },
+      {
+        "text": "Fast food: SpeedyBurger (Downtown)",
+        "src": "world_summary_c116.md ## Evening Texture"
+      },
+      {
+        "text": "Nightlife: Bridge & Barrel (Jack London). Volume 3, vibe quiet, movement restricted. Weather impact 1.00.",
+        "src": "world_summary_c116.md ## Evening Texture"
+      },
+      {
+        "text": "City events: The Kelley Family Block Party, The Horn Family Block Party, The Keane Family Block Party",
+        "src": "world_summary_c116.md ## Evening Texture"
+      },
+      {
+        "text": "Evening media TV: Bay Area Alert, Inside the A's Front Office, Giancarlo Hernandez (3B) — Player Profile",
+        "src": "world_summary_c116.md ## Evening Texture"
+      },
+      {
+        "text": "Evening media movies: Ninth Inning",
+        "src": "world_summary_c116.md ## Evening Texture"
+      },
+      {
+        "text": "Sports broadcast: Oakland Sports Tonight",
+        "src": "world_summary_c116.md ## Evening Texture"
+      },
+      {
+        "text": "Streaming trend: political commentary surge",
+        "src": "world_summary_c116.md ## Evening Texture"
+      },
+      {
+        "text": "Food trend: High mobility / civic-tension food trend",
+        "src": "world_summary_c116.md ## Evening Texture"
+      },
+      {
+        "text": "city-event | The Kelley Family Block Party (Rockridge) | Rockridge | mag 0.02",
+        "src": "Ripple_Ledger C116 city-event"
+      },
+      {
+        "text": "city-event | The Horn Family Block Party (Temescal) | Temescal | mag 0.02",
+        "src": "Ripple_Ledger C116 city-event"
+      },
+      {
+        "text": "city-event | The Keane Family Block Party (Piedmont Ave) | Piedmont Ave | mag 0.02",
+        "src": "Ripple_Ledger C116 city-event"
+      },
+      {
+        "text": "sighting | Theo Banks spotted at Parkridge Cleaners | Glenview | mag 0.01 | targets BIZ-00142",
+        "src": "Ripple_Ledger C116 lifestyle-sighting"
+      },
+      {
+        "text": "sighting | Ernesto Quintero spotted at Marine Systems | Baylight District | mag 0.01 | targets BIZ-00105",
+        "src": "Ripple_Ledger C116 lifestyle-sighting"
+      },
+      {
+        "text": "sighting | Desmond Morton spotted at Jade Thread Tailors | Chinatown | mag 0.01 | targets BIZ-00121",
+        "src": "Ripple_Ledger C116 lifestyle-sighting"
+      },
+      {
+        "text": "game-night-texture | The town watched — game night shaped 29 citizen day(s) (streak W5) | mag 29 | targets POP-00027|POP-00219|POP-00227|POP-00246|POP-00250|POP-00265|POP-00332|POP-00354|POP-00358|POP-00459|POP-00461|POP-00484|POP-00644|POP-00654|POP-00730|POP-00757|POP-00807|POP-00829|POP-00859|POP-00866|+9 more",
+        "src": "Ripple_Ledger C116 game-night-texture"
+      }
+    ],
+    "forbidden": [],
+    "deltas": null,
+    "hooks": [],
+    "note": "",
+    "pageVoices": [],
+    "roomIsYours": "",
+    "presentFacts": [],
+    "peopleCap": 24
+  },
+  "known": [],
+  "fading": [],
+  "appeared": [],
+  "pointers": [
+    "output/beats/Cultural_Ledger.jsonl @C116",
+    "output/beats/Story_Hook_Deck.jsonl (hooks for Sharon Okafor this cycle)"
+  ]
+}

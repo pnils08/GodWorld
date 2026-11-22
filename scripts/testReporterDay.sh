@@ -77,7 +77,8 @@ STEM="${DESK}_c${CYCLE}_${PERSONA}_${PACKET_STEM}"
 run_stage() {
   local stage="$1" artifact="$2" log="$SHELL_DIR/$1.log" status artifact_missing=0
   local angle_mode="" prompt_mode=""
-  if [ "$VARIANT" != today ]; then angle_mode="$VARIANT"; prompt_mode=bare; fi
+  # GODWORLD_TEST_PROMPT_MODE=seat (pipeline.111, 2026-11-21): the writer's seat prompt, with the seat file in GODWORLD_TEST_SEAT_BOOT.
+  if [ "$VARIANT" != today ]; then angle_mode="$VARIANT"; prompt_mode="${GODWORLD_TEST_PROMPT_MODE:-bare}"; fi
   set +e
   GODWORLD_TEST_COMPARE_DIR="$SHELL_DIR" GODWORLD_TEST_ANGLE="$angle_mode" GODWORLD_TEST_PROMPT="$prompt_mode" \
     /usr/bin/node scripts/cron-desk-run.js \

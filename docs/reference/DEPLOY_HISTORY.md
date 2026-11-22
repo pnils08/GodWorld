@@ -210,6 +210,14 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD stage 71 — a business's success stems from how its hood performs (2026-11-21, engine-sheet, engine.356)
+
+- **What:** `phase05-citizens/applyBusinessDynamics.js` + `phase01-config/engine94SheetContract.js` at `3eb7d3180` on stage 70. A business's Growth_Rate now settles toward a resting level its hood sets — its class's middle in this city (`BIZ_CLASS_MIDDLE`, held at the C116 medians) + hood score × 5 pp — closing a fifth of the gap a Cycle, capped 1.5 pp; the hood score is shop health, mood, crime (against) and rising/falling, each vs the city's middle hood. Events capped at 1 pp (was 2). City-wide rows, institutions and the sports franchises / stadiums do not follow the hood (builder choice B). Seven new World_Config keys arm themselves before Phase 1 config. Builder: "their success should stem from how the hood performs" · "yes B".
+- **Proof:** code read; offline compute on the C116 dump (typical growth 4.7 → 5.2; 4 rest below zero; no closure); agy HOLD → fold → SHIP (`output/antigravity/2026-11-21-review-e356-hood-drives-growth.md`, `…-rereview.md`), its 150-Cycle iteration bounded with feedback, noise and shocks on. No bench, no test (his block).
+- **Stage 71 (2026-11-21 ~21:30 CST):** live pulled = stage 70 (`e356d.sha256`); two files changed; manifest `output/engine-sheet/2026-11-21-e356e/e356e.sha256`; pull-back byte-identical; version cut **@206**. Script `output/engine-sheet/2026-11-21-e356e/push.sh`.
+- **Smoke test: not run.** First live fire C117 Sun 2026-11-22: World_Config gains the seven `bizHood*` / `bizEventCap` rows; read Engine_Errors for Phase5-BusinessDynamics, and the Growth_Rate moves against the offline numbers.
+- **Back out:** the two files from `e917708a4` (= `e356d.sha256`) + version cut; the seven World_Config rows are then unread.
+
 ### PROD stage 70 — every business in a tracked hood; the evening fold out (2026-11-21, engine-sheet, engine.356)
 
 - **What:** `phase07-evening-media/buildEveningFood.js` at `e917708a4` on stage 69 — `buildEveningFoodIndex_` reads each business row's own hood; the child-area fold added at stage 69 removed. Same commit, not engine: live `Business_Ledger` four Neighborhood cells moved to their tracked hood (BIZ-00010 → Jack London, BIZ-00011 → Downtown, BIZ-00029 → East Oakland, BIZ-00062 → Temescal; read back 4/4; `output/engine-sheet/2026-11-21-e356c/move-four-biz-hoods.js`, backup beside it), and both business-adding scripts refuse a hood that is not tracked. Builder: "why are any in a sub hood no one tracks?" · "Ok".

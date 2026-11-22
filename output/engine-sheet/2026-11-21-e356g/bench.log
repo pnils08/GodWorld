@@ -1,0 +1,27 @@
+AIM = BENCH (script read the bench marker)
+== sync from live
+  verify Reflection_Intake: bench 3009 rows vs live 3009 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+{"fireGuardMinutes":"0","cycleCountFormatted":"116","cycleCountIsNumber":true}
+door: {"target":"bench","http":200,"ok":true,"record":{"cycle":117,"startedMs":1795304604522,"state":"done","finishedMs":1795304796704},"raw":"{\"cycle\":117,\"startedMs\":1795304604522,\"state\":\"done\",\
+clearfire 117: {"ok":true,"cleared":{"cycle":117,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+-- pause 75 s (read quota)
+Edition_Coverage_Ratings C116: 1 rows (window 116,115,114,113,112,111,110,109), sandbox already has CIVIC,COMMUNITY,CULTURE,SPORTS
+Citizen_Media_Usage C116: 0 rows (sandbox already has a published or seeded week at C116)
+Oakland_Sports_Feed C117: 0 rows
+appended 1 to Edition_Coverage_Ratings; marked rows on the tab now 1
+bench cycleCount 116
+fire C117 rc=0 "verdict": "PASS" "wallS": 189 newEE="newEE": []
+1 World_Config engine.356 keys on the bench: 31 (want 31)
+2 Business growth C117: 280 of 282 moved; hood-following 263 — toward their resting level 196, away 66 (events / noise / shock can push the other way), at rest 1; not following 19
+  moves over the 1.0 weekly cap (floor excepted): 1 — BIZ-00052 Civis Systems 616->716
+FAIL moves over the weekly cap
+3 Evening snapshot C117: night spots ["Tops n Tassels (Dimond, BIZ-00289)"]; restaurants ["Ivy Hill Cafe (Ivy Hill)","Taco Fusion (Fruitvale)"]
+4 LifeHistory_Log C117: 2699 rows; weddings 2 ["Wedding","Wedding"]; old unreadable form 0; rows naming a business 0
+RESULT 1 failed
+read C117 exit 1
+== final sync from live
+  verify Reflection_Intake: bench 3009 rows vs live 3009 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+RESULT check exit 1

@@ -1,0 +1,25 @@
+AIM = BENCH (script read the bench marker)
+== sync from live
+  verify Reflection_Intake: bench 3009 rows vs live 3009 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+{"fireGuardMinutes":"0","cycleCountFormatted":"116","cycleCountIsNumber":true}
+door: {"target":"bench","http":200,"ok":true,"record":{"cycle":117,"startedMs":1795325247035,"state":"done","finishedMs":1795325410269},"raw":"{\"cycle\":117,\"startedMs\":1795325247035,\"state\":\"done\",\
+clearfire 117: {"ok":true,"cleared":{"cycle":117,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+-- pause 75 s (read quota)
+Edition_Coverage_Ratings C116: 1 rows (window 116,115,114,113,112,111,110,109), sandbox already has CIVIC,COMMUNITY,CULTURE,SPORTS
+Citizen_Media_Usage C116: 0 rows (sandbox already has a published or seeded week at C116)
+Oakland_Sports_Feed C117: 0 rows
+appended 1 to Edition_Coverage_Ratings; marked rows on the tab now 1
+bench cycleCount 116
+fire C117 rc=0 "verdict": "PASS" "wallS": 210 newEE="newEE": []
+1 bands: trajectoryCrimeBand 0.05, migrationCrimeBand 0.05
+2 trajectory labels changed by the fire: Grand Lake steady->growth (crime 0.7, mom 7->8); KONO growth->steady (crime 0.64, mom 7->6); Baylight District decay->steady (crime 0.57, mom 0->1)
+  Baylight District: decay -> steady, momentum 0 -> 1
+3 MigrationFlow moved in 17 of 22 hoods
+RESULT all checks pass
+read C117 exit 0
+== final sync from live
+  verify Reflection_Intake: bench 3009 rows vs live 3009 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+RESULT check exit 0

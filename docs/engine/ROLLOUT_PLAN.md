@@ -70,7 +70,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | engine.339 | How kids are minted: code LIVE since stage 63, kept (builder 11-21 "Keep it"); tests rewritten. Read C117 Sun 2026-11-22: the one grab and what landed | live-observing | research-build | no plan — deleted 2026-11-21 (git history) |
 | pipeline.111 | Reporters wake as themselves: Sharon LIVE 11-21 (nightlife seat). Read Fri 2026-11-27 after 18:15: her C117 pick, tool calls, gate, grade; then Maria | live-observing | research-build | [[../plans/2026-11-21-reporters-wake-as-themselves]] |
 | pipeline.112 | Labels off citizens' pages: live 11-19. Read Mon 2026-11-23 after 05:45: the Fri grade line, Sun chain, Mon datawake logs; organic: exchange, talk | live-observing | research-build | [[../plans/2026-11-16-page-labels-off-citizens-memory]] |
-| engine.356 | A moment has a place (builder 11-21): LIVE stage 72 @207, unbenched. Read C117 Sun 2026-11-22: the fire, night spots, wedding tags | live-observing | engine-sheet | [[../plans/2026-11-21-a-moment-has-a-place]] |
+| engine.356 | A moment has a place (builder 11-21): LIVE stage 73 @208, benched. Read C117 Sun 2026-11-22: the fire, night spots, wedding tags | live-observing | engine-sheet | [[../plans/2026-11-21-a-moment-has-a-place]] |
 
 ## 3. Now — being worked, one per terminal (in-progress)
 

@@ -53,12 +53,13 @@ const showRecord = require('./undockedShowRecord'); // pipeline.95 — an UNDOCK
 
 const ARGV = process.argv.slice(2);
 const DRY = ARGV.includes('--dry-run');
-// pipeline.111 test only (builder 2026-11-21: "She doesn't run as a citizen Cron at work … her 3 wakes are the media
+// pipeline.111 (builder 2026-11-21: "She doesn't run as a citizen Cron at work … her 3 wakes are the media
 // Cron, pull out around Oakland"): a reporter's morning plan wakes on her sheet line and her seat file (bio, job,
-// tools), not her citizen life, the city sports line, her neighborhood or her page notes. Needs the test folder.
-const REPORTER_WAKE = ARGV.includes('--reporter-wake') && !!process.env.GODWORLD_TEST_COMPARE_DIR &&
-  process.env.GODWORLD_TEST_PROMPT === 'seat';
-const REPORTER_SEAT = REPORTER_WAKE ? require('fs').readFileSync(process.env.GODWORLD_TEST_SEAT_BOOT, 'utf8').trim() : '';
+// tools), not her citizen life, the city sports line, her neighborhood or her page notes.
+// The desk cron passes --seat-file on a seat-file reporter's morning call only; interviews never carry it.
+const SEAT_FILE_ARG = (ARGV.find(a => a.startsWith('--seat-file=')) || '').slice('--seat-file='.length) || null;
+const REPORTER_WAKE = !!SEAT_FILE_ARG;
+const REPORTER_SEAT = REPORTER_WAKE ? require('fs').readFileSync(SEAT_FILE_ARG, 'utf8').trim() : '';
 const JSON_OUT = ARGV.includes('--json');
 const RECORD = ARGV.includes('--record');
 // ADR-0017: typed Packet in, claim-class JSON out. This mode is deliberately

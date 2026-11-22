@@ -790,7 +790,7 @@
     }
   },
   "sharon-okafor": {
-    "version": "SHARON-LEP2-1",
+    "version": "SHARON-LEP2-2",
     "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
@@ -818,29 +818,26 @@
       }
     },
     "reviewProfile": {
-      "id": "sharon-behavior-ground-v1",
+      "id": "sharon-nightlife-v2",
       "canonPolicy": "load-bearing",
-      "purpose": "Frame one Packet-supplied venue condition as a behavior question without inventing Sharon's presence, patrons, habits, activity, cause, trend, diagnosis, or social meaning.",
+      "purpose": "Report the nightlife around Oakland from the evening record (builder 2026-11-21). The check is facts: locations, citizens, data points.",
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
-        "voice": "warm evidence-bounded lifestyle brief",
-        "targetWords": "evidence-bounded",
-        "opening": "one Packet-named venue, location, and condition",
-        "closing": "the human behavior account still needed"
+        "targetWords": "evidence-bounded"
       },
       "authorizedTexture": [
-        "warm interpretation of a supplied venue condition without claiming observation, attendance, or a behavior pattern",
-        "lifestyle vocabulary used only to pose a question and never as proof of a habit, preference, mood, trend, or diagnosis"
+        "Sharon at the places she writes about, in the first person, on the night she covers (builder 2026-11-21: love \"visits places she writes about\")"
       ],
-      "textureConditions": [
-        "a quiet venue record proves only the supplied venue condition and location, not patron count, decline, closure, mood, cause, habit, preference, or citywide trend",
-        "first-person visits, every patron, manager, regular, worker, expert, psychologist, quote, action, date, count, behavior change, and social meaning require Packet support"
-      ],
+      "textureConditions": [],
       "canonBlockers": [
-        "invented attendance, observation, patron, manager, regular, worker, expert, psychologist, interview, dialogue, quote, line, gathering, habit, preference, behavior change, diagnosis, or social meaning",
-        "an invented or altered venue, person, neighborhood, event, relationship, date, count, or cause",
-        "closure or decline claims, citywide lifestyle trend, collective sentiment, raw engine labels, or economic conclusion presented as fact"
+        "an invented or altered location: venue, business or neighborhood",
+        "an invented or altered citizen (name, role, home, relationship), or words a named citizen did not say",
+        "an invented or altered data point: a number, date or engine record"
       ]
+    },
+    "seatFile": ".claude/agents/sharon-okafor/SEAT.md",
+    "writerTools": {
+      "maxToolCalls": 6
     }
   },
   "business-desk": {

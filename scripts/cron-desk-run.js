@@ -179,6 +179,8 @@ const wakePackages = require('./newsroomWakePackages');
 const sourcingModes = require('./newsroomSourcing');
 const interviewContract = require('./newsroomInterviewContract');
 let ACTIVE_WAKE_PACKAGE = null;
+let SEAT_FILE = null;     // pipeline.111 — set per wake by activateWakeContext
+let FREE_ANGLE = null;    // the seat picks its own story: test shell's free variants, or a seat-file seat
 let PACKET_CONTRACT = null;
 let PACKET_ACTIVE = false;
 let livedPacket = require('./livedExperiencePacket');
@@ -198,6 +200,11 @@ function activateWakeContext(assign, personaSlug) {
   }
   PACKET_CONTRACT = PACKET_CONTRACT_FLAG ||
     (ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.packetContract) || null;
+  // pipeline.111 (builder 2026-11-21): a seat with a seat file wakes as the reporter — its own pick off its own
+  // record, its seat file as who it is, its job and its tools at every stage. Test shell: the file the caller names.
+  SEAT_FILE = (TEST_SHELL && process.env.GODWORLD_TEST_PROMPT === 'seat' && process.env.GODWORLD_TEST_SEAT_BOOT) ||
+    (ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.seatFile ? path.join(ROOT, ACTIVE_WAKE_PACKAGE.seatFile) : null);
+  FREE_ANGLE = TEST_ANGLE || (SEAT_FILE ? 'free-rows' : null);
   PACKET_ACTIVE = PACKET_CONTRACT === 'v1' || PACKET_CONTRACT === 'v2';
   livedPacket = PACKET_CONTRACT === 'v2'
     ? require('./livedExperiencePacketV2')
@@ -2180,13 +2187,13 @@ async function runAngle(assign) {
         cycle, desk, reporter: asker, story, approach,
         slice: typedSlice, lane,
         candidates: sourcingPool ? sourcingPool.candidates : [],
-        ...(TEST_ANGLE ? { free: Object.assign(TEST_ANGLE === 'free-week' ? { week: cityWeekLines(cycle) } : { rows: true },
+        ...(FREE_ANGLE ? { free: Object.assign(FREE_ANGLE === 'free-week' ? { week: cityWeekLines(cycle) } : { rows: true },
           { background: testBackground() }) } : {}),
       });
       ask = livedPacket.prompt(inputPacket);
       // pipeline.77 — the reward-loop group reads its own last grade before planning. A test-shell seat with
       // nothing assigned is told nothing about how to plan.
-      if (!TEST_ANGLE && ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.rewardLoop && asker && asker.popid) {
+      if (!FREE_ANGLE && ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.rewardLoop && asker && asker.popid) {
         try {
           const { recentPage_ } = require(path.join(ROOT, 'lib', 'citizenPage'));
           const page = await recentPage_(asker.popid, 12);
@@ -2226,8 +2233,8 @@ async function runAngle(assign) {
         const askOnStdin = Buffer.byteLength(ask, 'utf8') > ASK_ARGV_MAX;
         const out = execFileSync('node', [path.join(ROOT, 'scripts', 'citizenVoice.js'),
           '--pop=' + asker.popid, ...(askOnStdin ? ['--stdin'] : ['--ask=' + ask]), '--cycle=' + cycle, '--json',
-          // pipeline.111 test only: the reporter's morning plan on her seat file (citizenVoice --reporter-wake).
-          ...(TEST_SHELL && process.env.GODWORLD_TEST_PROMPT === 'seat' ? ['--reporter-wake'] : []),
+          // pipeline.111: the reporter's morning plan on her seat file, not her citizen life (citizenVoice --seat-file).
+          ...(SEAT_FILE ? ['--seat-file=' + SEAT_FILE] : []),
           ...(PACKET_ACTIVE ? ['--evidence-bound'] : []),
           ...(angleModel ? ['--model=' + angleModel] : []),
           // pipeline.74 — 700 truncated DeepSeek v4-flash plans mid-JSON (7 of 12 calls stopped at
@@ -2288,7 +2295,7 @@ async function runAngle(assign) {
   // on persona seats rides the builder's tools decision (pipeline.75 A/B), not a code call.
   // Test shell, nothing assigned: the seat's own pick is the story the report and write stages carry
   // ("W1 owns the assignment"); a pass leaves no story and ends the seat's day.
-  const ownPlan = TEST_ANGLE && angleRead && angleRead.plan;
+  const ownPlan = FREE_ANGLE && angleRead && angleRead.plan;
   if (ownPlan && ownPlan.pass) {
     story = null;
     approach = null;
@@ -2309,7 +2316,7 @@ async function runAngle(assign) {
   fs.mkdirSync(COMPARE, { recursive: true });
   fs.writeFileSync(anglePath, JSON.stringify({
     stage: 'angle', desk, cycle, persona: personaSlug,
-    ...(TEST_ANGLE ? { freeAngle: TEST_ANGLE, pass: !!(ownPlan && ownPlan.pass) } : {}),
+    ...(FREE_ANGLE ? { freeAngle: FREE_ANGLE, pass: !!(ownPlan && ownPlan.pass) } : {}),
     ...(PACKET_ACTIVE ? { packetContract: livedPacket.VERSION, inputPacket, sourcingPool } : {}),
     reporter: assign ? { name: assign.name, popid: assign.popid } : (persona ? { name: persona.name, popid: persona.popid } : null),
     assignment: story ? { story, approach } : null,   // Task 2.5.2: the EIC assignment rides the handoff
@@ -3152,7 +3159,7 @@ async function runWrite(assign) {
   // citizen her angle named goes in whole. No pick that resolves to a page is a failed day, not a substitute.
   let voicesPicked = null;
   // Test shell only: a free pick, or the bare writer prompt on a seat's own saved day (testReporterWrite.sh bare).
-  const bareWrite = !!(TEST_SHELL && ((angle && angle.freeAngle) || process.env.GODWORLD_TEST_PROMPT === 'bare'));
+  const bareWrite = !!(SEAT_FILE || (TEST_SHELL && ((angle && angle.freeAngle) || process.env.GODWORLD_TEST_PROMPT === 'bare')));
   if (PACKET_ACTIVE && isVoicesSeat()) {
     const voices = require('./buildVoicesSlice');
     const picks = ((angle && angle.angleRead && angle.angleRead.plan && angle.angleRead.plan.targets) || [])
@@ -3206,6 +3213,7 @@ async function runWrite(assign) {
   // Task 2.5.5: hand the writer the byline's POPID so the memory tool pair
   // (own citizen page, cp-<popid>) joins the tool loop.
   if (PACKET_ACTIVE) writerArgs.push('--strict-source-hygiene', '--packet-only');
+  if (SEAT_FILE) writerArgs.push('--seat-file', SEAT_FILE);   // pipeline.111: the seat prompt
   // pipeline.76 — the package's own writer tools (its grant).
   const ownTools = PACKET_ACTIVE && ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.writerTools &&
     ACTIVE_WAKE_PACKAGE.writerTools.maxToolCalls || 0;

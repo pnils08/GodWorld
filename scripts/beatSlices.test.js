@@ -409,13 +409,37 @@ try {
   ok('kai: universe-linked figure resolves to the ledger citizen', k.citizens.some(c => c.popid === 'POP-90001' && /fame rising/.test(c.why)));
   ok('kai: CULTURE hook reaches him by domain despite no desk', k.prewrite.hooks.some(h => /Test Rising Musician gaining attention/.test(h.text)));
   ok('kai: culture-desk seed becomes a fact + a candidate', k.facts.some(f => /CITY SEED \(Temescal\): Test Civic Resident/.test(f.text)));
+  // pipeline.111 (builder 2026-11-21): Sharon's record is the city's evenings, not the fame file.
+  const wsPath = path.join(output, 'world_summary_c' + CYCLE + '.md');
+  const wsBefore = fs.readFileSync(wsPath, 'utf8');
+  fs.writeFileSync(wsPath, [
+    '## Evening Texture (Riley_Digest cycle ' + CYCLE + ')', '',
+    '- **Nightlife:** **Test Bar** (Downtown). Volume 3, vibe quiet.',
+    '- **City events:** The Test Family Block Party', '',
+    '## What Moved', '', '### city-event (1)', '- city-event | The Test Family Block Party (Fruitvale) | Fruitvale | mag 0.02', '',
+    '### lifestyle-sighting (1)', '- sighting | Test Civic Resident spotted at Test Bar | Downtown | mag 0.01 | targets BIZ-00001', '',
+    '### other (1)', '- game-night-texture | The town watched — game night shaped 2 citizen day(s) | mag 2 | targets POP-90001', ''
+  ].join('\n'));
+  const lifeRows = [
+    { POPID: 'POP-90001', Name: 'Test Civic Resident', EventTag: 'PrevEvening-Outabout-Up-S|source:prevEvening|evening:crowd', EventText: 'heard Downtown was packed last night', Neighborhood: 'Downtown', Cycle: String(CYCLE) },
+    { POPID: 'POP-90002', Name: 'x', EventTag: 'PrevEvening-Outabout-Up-S|source:prevEvening|evening:nightlife', EventText: 'stood by the bar while the DJ played', Neighborhood: 'Fruitvale', Cycle: String(CYCLE) },
+    { POPID: 'POP-90002', Name: 'x', EventTag: 'Sports-Moved|source:sports', EventText: 'not an evening line', Neighborhood: 'Fruitvale', Cycle: String(CYCLE) },
+    { POPID: 'POP-00159', Name: 'Sharon Okafor', EventTag: 'PrevEvening-Outabout-Up-S|source:prevEvening|evening:nightlife', EventText: 'her own night', Neighborhood: 'Rockridge', Cycle: String(CYCLE) },
+    { POPID: 'POP-90003', Name: 'y', EventTag: 'PrevEvening|source:prevEvening|evening:nightlife', EventText: 'last cycle', Neighborhood: 'Fruitvale', Cycle: String(CYCLE - 1) }
+  ];
+  const lifePath = path.join(output, 'beats', 'LifeHistory_Log.jsonl');
+  const lifeBefore = fs.readFileSync(lifePath, 'utf8');
+  fs.appendFileSync(lifePath, (lifeBefore.endsWith('\n') ? '' : '\n') + lifeRows.map(r => JSON.stringify(r)).join('\n') + '\n');
   const sh = lifestyle.buildLifestyleSlice(CYCLE, { root });
-  ok('sharon: fading leads the fame file', /Test Faded Singer.*fading — the where-are-they-now file/.test(sh.facts[0].text) && /City-tier/.test(sh.facts[0].text));
-  ok('sharon: the city-knows-them row', sh.facts.some(f => /Test Rising Musician.*the city knows them/.test(f.text)));
-  ok('sharon: linked figure carries the citizen\'s home hood (Fruitvale), not the sighting hood (Temescal)', sh.facts.some(f => /Test Rising Musician \(Musician\), Arts, Fruitvale/.test(f.text)) && !JSON.stringify(sh.facts).includes('Arts, Temescal'));
-  ok('sharon: an unlinked figure leaves the slice (pipeline.81 — a template name Rhea cannot verify)', !sh.facts.some(f => /Test Fading Actor/.test(f.text)) && !k.facts.some(f => /Test Fading Actor/.test(f.text)));
-  ok('sharon: CELEBRITY hook by domain (City Desk misroute)', sh.prewrite.hooks.some(h => /Test Fading Actor spotted at a gala/.test(h.text)));
-  ok('sharon: FAME_WATCH hook by type (raw-carried, no desk)', sh.prewrite.hooks.some(h => /Test Rising Musician gaining attention/.test(h.text)));
+  fs.writeFileSync(lifePath, lifeBefore);   // the shared fixture goes back for the seats after hers
+  fs.writeFileSync(wsPath, wsBefore);
+  ok('sharon: the evening texture rides as the record', sh.facts.some(f => /^Nightlife: Test Bar \(Downtown\)/.test(f.text) && /Evening Texture/.test(f.src)));
+  ok('sharon: city-event, sighting and game-night rows ride as written', ['city-event | The Test Family Block Party', 'sighting | Test Civic Resident spotted at Test Bar', 'game-night-texture | The town watched'].every(t => sh.facts.some(f => f.text.startsWith(t))));
+  ok('sharon: no fame-file row and no code-written angle on the record', !sh.facts.some(f => /fading|the city knows them|fame/.test(f.text)) && sh.prewrite.hooks.length === 0);
+  ok('sharon: a sighted citizen resolves to the ledger with where they were', sh.citizens[0] && sh.citizens[0].popid === 'POP-90001' && /spotted at Test Bar/.test(sh.citizens[0].profile));
+  ok('sharon: an evening line is the reason a citizen is on her list (nightlife first)', sh.citizens.some(c => c.popid === 'POP-90002' && /stood by the bar while the DJ played/.test(c.profile)));
+  ok('sharon: never her own source; only this cycle\'s evening lines', !sh.citizens.some(c => c.popid === 'POP-00159' || c.popid === 'POP-90003'));
+  ok('sharon: an empty evening record sits her out', lifestyle.sitsOutWhenEmpty === true);
   const m = neighborhood.buildNeighborhoodSlice(CYCLE, { root });
   ok('maria: program + founder from the ledger', m.facts.some(f => /Test Program \(mutual-aid\), Downtown — founded by Test Civic Resident, since C100/.test(f.text)) &&
     m.citizens.some(c => c.popid === 'POP-90001' && /founded Test Program/.test(c.why)));
@@ -602,7 +626,7 @@ try {
   for (const [label, slice, popid] of [['trevor', t, 'POP-00155'], ['lila', h, 'POP-00154'], ['angela', s, 'POP-00156'], ['noah', e, 'POP-00157'], ['graye', f, 'POP-00012'], ['rachel', r, 'POP-00057'], ['kai', k, 'POP-00158'], ['sharon', sh, 'POP-00159'], ['maria', m, 'POP-00013'], ['selena', sg, 'POP-00591'], ['talia', tf, 'POP-00592'], ['celeste', ct, 'POP-00164']]) {
     const pk = v2.buildAnglePacket({ cycle: CYCLE, desk: slice.seat.desk, reporter: { popid, name: slice.seat.name }, story: slice.story, approach: slice.approach, slice, lane: [] });
     const b = pk.task.creativeBrief;
-    ok(label + ': brief beat-slice with facts + room', b && b.kind === 'beat-slice' && b.facts.length >= 1 && !!b.roomIsYours);
+    ok(label + ': brief beat-slice with facts + room', b && b.kind === 'beat-slice' && b.facts.length >= 1 && (label === 'sharon' || !!b.roomIsYours));   // Sharon: no room line (pipeline.111)
     ok(label + ': every anchor fact is a known FACT sourced to a file on disk', slice.prewrite.anchorFacts.every(text => pk.known.some(k => k.text === text && /^output\//.test(k.src))));
     ok(label + ': candidates = the slice\'s people', pk.exposure.candidates.length === slice.citizens.length && pk.exposure.candidates.every(c => slice.citizens.some(p => p.popid === c.pop)));
   }

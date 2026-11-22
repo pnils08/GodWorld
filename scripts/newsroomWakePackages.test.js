@@ -171,8 +171,11 @@ const seats = Object.entries(packages).filter(([, v]) => v && v.persona);
 assert(seats.length >= 25);
 assert.deepStrictEqual(seats.filter(([, v]) => v.rewardLoop !== true).map(([k]) => k), []);
 assert.throws(() => packagesApi.validatePackage(marbury.persona, Object.assign({}, marbury, { rewardLoop: 'yes' })), /rewardLoop/);
-assert.deepStrictEqual(Object.entries(packages).filter(([, v]) => v && v.writerTools).map(([k]) => k), ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'anthony-raines', 'elliot-marbury', 'hal-richmond', 'elliot-graye', 'business-desk', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'nia-rook', 'nia-rook-weekly', 'tamsin-pruitt']); // registry order; Hal + Anthony: builder 2026-10-19; Jax + Carmen 2026-10-26; the rest 2026-10-27
+assert.deepStrictEqual(Object.entries(packages).filter(([, v]) => v && v.writerTools).map(([k]) => k), ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'anthony-raines', 'elliot-marbury', 'hal-richmond', 'elliot-graye', 'sharon-okafor', 'business-desk', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'nia-rook', 'nia-rook-weekly', 'tamsin-pruitt']); // registry order; Hal + Anthony: builder 2026-10-19; Jax + Carmen 2026-10-26; the rest 2026-10-27; Sharon 2026-11-21 (pipeline.111)
 assert.equal(packages['hal-richmond'].writerTools.maxToolCalls, 6);
+// pipeline.111 — Sharon wakes on her seat file; a seat file outside an agent folder is refused
+assert.equal(packages['sharon-okafor'].seatFile, '.claude/agents/sharon-okafor/SEAT.md');
+assert.throws(() => packagesApi.validatePackage('sharon-okafor', Object.assign({}, packages['sharon-okafor'], { seatFile: 'docs/x.md' })), /seatFile/);
 assert.equal(packages['hal-richmond'].version, 'HAL-LEP2-3');
 assert.throws(() => packagesApi.validatePackage(marbury.persona, Object.assign({}, marbury, { writerTools: { maxToolCalls: 9 } })), /writerTools/);
 assert.equal(jax.writerTools.maxToolCalls, 6);
@@ -250,15 +253,20 @@ assert.ok(mason.reviewProfile.textureConditions.some(v => v.includes('proves onl
 assert.ok(mason.reviewProfile.canonBlockers.some(v => v.includes('invented attendance')));
 
 const sharon = packages['sharon-okafor'];
-assert.equal(sharon.version, 'SHARON-LEP2-1');
+assert.equal(sharon.version, 'SHARON-LEP2-2');
 assert.equal(sharon.active, true);
 assert.equal(sharon.requiredDaily, true);
 assert.equal(sharon.assignment.popid, 'POP-00159');
 assert.equal(sharon.assignment.beatDomain, 'CULTURE');
 assert.equal(packagesApi.routeFor(sharon, 'angle').model, 'meta-llama/llama-4-maverick');
 assert.equal(sharon.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
-assert.ok(sharon.reviewProfile.textureConditions.some(v => v.includes('proves only')));
-assert.ok(sharon.reviewProfile.canonBlockers.some(v => v.includes('invented attendance')));
+// pipeline.111 (builder 2026-11-21: "loosen her reviewer to stick to facts about locations , citizens data points"):
+// her visit is authorized texture; the blockers are a location, a citizen, a data point; no opening is set.
+assert.deepStrictEqual(sharon.reviewProfile.textureConditions, []);
+assert.ok(sharon.reviewProfile.authorizedTexture.some(v => v.includes('places she writes about')));
+assert.deepStrictEqual(sharon.reviewProfile.canonBlockers.map(v => v.split(':')[0].split(' (')[0]), ['an invented or altered location', 'an invented or altered citizen', 'an invented or altered data point']);
+assert.equal(sharon.reviewProfile.articleContract.opening, undefined);
+assert.equal(sharon.rewardLoop, true);
 
 const jordan = packages['business-desk'];
 assert.equal(jordan.version, 'JORDAN-LEP2-2');

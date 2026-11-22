@@ -327,7 +327,7 @@ function buildContractPrompt(profile, prose) {
     'THE CONTRACT',
     'Purpose: ' + (profile.purpose || '(none)'),
     'Voice: ' + (c.voice || '(none)'),
-    'Opening: ' + (c.opening || '(none)'),
+    'Opening: ' + (c.opening || '(none — not graded; mark opened true)'),
     'Target words: ' + (c.targetWords || '(none)') + ' — this piece has ' + words + ' words.',
     '',
     'opened = the first paragraph does what "Opening" says. ' +
@@ -345,7 +345,8 @@ function parseContractScore(text, profile, words) {
   catch (_) { return { error: 'contract score parse failed', raw: String(text).slice(0, 300) }; }
   const floor = contractWordFloor(profile.articleContract && profile.articleContract.targetWords);
   const out = {
-    opened: j.opened === true, purposeMet: j.purposeMet === true,
+    // pipeline.111: a contract that sets no opening (Sharon, builder 2026-11-21 — no form handed to the reporter) grades none.
+    opened: !(profile.articleContract && profile.articleContract.opening) || j.opened === true, purposeMet: j.purposeMet === true,
     inTarget: floor != null ? words >= floor : j.inTarget === true,
     inTargetBy: floor != null ? 'code floor ' + floor : 'judge',
     words,

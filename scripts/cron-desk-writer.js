@@ -247,13 +247,15 @@ const WRITER_TOOLS = Math.max(0, Math.min(8, parseInt(arg('--writer-tools', '0')
 // `bare` (pipeline.111, 2026-11-14) is `light` without the seat's hard-coded STANCE line and its bag file, so a
 // swapped identity is the only thing describing the voice (agy's finding on the 2026-11-13 boot runs: the stance
 // and bag rode every mode, light included).
-// `seat` (pipeline.111, builder 2026-11-21: "they get told who they are , their canonized bio, their row details,
+// The seat prompt (pipeline.111, builder 2026-11-21: "they get told who they are , their canonized bio, their row details,
 // then they get the beat of what they cover, ther tool list, and what we hand them via the engine output"): the
-// system prompt is the sheet line plus the seat file GODWORLD_TEST_SEAT_BOOT names (bio, beat, tools, filing line)
+// system prompt is the sheet line plus the seat file --seat-file names (bio, job, tools) and the filing line
 // and nothing else; the user message is the cycle and the Packet; the tools are the four the seat file lists.
-const TEST_SEAT = !!process.env.GODWORLD_TEST_COMPARE_DIR && process.env.GODWORLD_TEST_PROMPT === 'seat';
-const TEST_SEAT_BOOT = TEST_SEAT ? fs.readFileSync(process.env.GODWORLD_TEST_SEAT_BOOT, 'utf8').trim() : '';
-const TEST_BARE = !!process.env.GODWORLD_TEST_COMPARE_DIR && (process.env.GODWORLD_TEST_PROMPT === 'bare' || TEST_SEAT);
+// The desk cron passes --seat-file for a seat whose wake package names one (and the test shell's seat run).
+const SEAT_FILE_PATH = arg('--seat-file', null);
+const TEST_SEAT = !!SEAT_FILE_PATH;
+const TEST_SEAT_BOOT = TEST_SEAT ? fs.readFileSync(SEAT_FILE_PATH, 'utf8').trim() : '';
+const TEST_BARE = TEST_SEAT || (!!process.env.GODWORLD_TEST_COMPARE_DIR && process.env.GODWORLD_TEST_PROMPT === 'bare');
 const TEST_LIGHT = TEST_BARE || (!!process.env.GODWORLD_TEST_COMPARE_DIR && process.env.GODWORLD_TEST_PROMPT === 'light');
 
 // Approx USD per 1M tokens [input, output] — for the scorecard's apiCostUsd (estimate).

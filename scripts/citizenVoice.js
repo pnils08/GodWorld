@@ -53,6 +53,12 @@ const showRecord = require('./undockedShowRecord'); // pipeline.95 — an UNDOCK
 
 const ARGV = process.argv.slice(2);
 const DRY = ARGV.includes('--dry-run');
+// pipeline.111 test only (builder 2026-11-21: "She doesn't run as a citizen Cron at work … her 3 wakes are the media
+// Cron, pull out around Oakland"): a reporter's morning plan wakes on her sheet line and her seat file (bio, job,
+// tools), not her citizen life, the city sports line, her neighborhood or her page notes. Needs the test folder.
+const REPORTER_WAKE = ARGV.includes('--reporter-wake') && !!process.env.GODWORLD_TEST_COMPARE_DIR &&
+  process.env.GODWORLD_TEST_PROMPT === 'seat';
+const REPORTER_SEAT = REPORTER_WAKE ? require('fs').readFileSync(process.env.GODWORLD_TEST_SEAT_BOOT, 'utf8').trim() : '';
 const JSON_OUT = ARGV.includes('--json');
 const RECORD = ARGV.includes('--record');
 // ADR-0017: typed Packet in, claim-class JSON out. This mode is deliberately
@@ -190,7 +196,7 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
   try { written = require('./reporterIdentity').essenceForPop(c.popId); } catch (e) { written = ''; }
   const station = written ? '' : stationLine(c, !!ownFeed) + ' ';
   const identity = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. ${station}Your temperament: ${disp}.` + (written ? '\n\n' + written : '');
-  const system = interviewMode && !livedContextAllowed
+  const system = REPORTER_WAKE ? identity + '\n\n' + REPORTER_SEAT : interviewMode && !livedContextAllowed
     ? identity + ownRecord + '\n\nThis interview has no story-linked personal exposure. Stay in your own voice, but do not project unrelated life history onto the story.'
     : identity + `${written && trajLine ? '\n\n' + trajLine.trim() : trajLine}${arcLine}${health}${show}${ownRecord}\n\nReal things from your life recently:\n${c.life}${family}${standing}${who}${bonds}${sports}${texture}${memory}`;
 
@@ -201,7 +207,8 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
     ? (interviewMode ? interviewContract.citizenEvidenceGuard(livedContextAllowed)
       : `\n\nEVIDENCE MODE: Return ONLY the JSON requested by packet.output. Treat only the Packet's FACT claims as the press-evidence floor. The "Real things from your life recently" above may shape private emotion, interpretation, or personal intention, but they do not become press evidence and do not prove a public event. Never create a named person, institution, public event, date, count, relationship, job, official action, illustrative object, street condition, meeting, grant, schedule, or promise. Follow packet.output exactly. When it supplies a lattice, select its IDs and do not write quote prose. Otherwise, INTERPRETATION stays abstract and any concrete unsupplied detail belongs in unverifiedLead. The backend assembles publishable text and rejects free factual expansion. If you lack grounded material, abstain.`)
     : '';
-  const user = `${memoryFence.sanitize(ask)}\n\nSpeak as yourself, plainly, in first person — your temperament and your history shape what you say and what you leave out. Never mention data, records, or that you were asked by a system.${evidenceGuard}`;
+  const user = REPORTER_WAKE ? memoryFence.sanitize(ask) + '\n\nReturn ONLY the JSON requested by packet.output.'
+    : `${memoryFence.sanitize(ask)}\n\nSpeak as yourself, plainly, in first person — your temperament and your history shape what you say and what you leave out. Never mention data, records, or that you were asked by a system.${evidenceGuard}`;
 
   if (dry) {
     console.log('--- system ---\n' + system + '\n--- user ---\n' + user);

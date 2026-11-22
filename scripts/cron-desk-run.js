@@ -2226,6 +2226,8 @@ async function runAngle(assign) {
         const askOnStdin = Buffer.byteLength(ask, 'utf8') > ASK_ARGV_MAX;
         const out = execFileSync('node', [path.join(ROOT, 'scripts', 'citizenVoice.js'),
           '--pop=' + asker.popid, ...(askOnStdin ? ['--stdin'] : ['--ask=' + ask]), '--cycle=' + cycle, '--json',
+          // pipeline.111 test only: the reporter's morning plan on her seat file (citizenVoice --reporter-wake).
+          ...(TEST_SHELL && process.env.GODWORLD_TEST_PROMPT === 'seat' ? ['--reporter-wake'] : []),
           ...(PACKET_ACTIVE ? ['--evidence-bound'] : []),
           ...(angleModel ? ['--model=' + angleModel] : []),
           // pipeline.74 — 700 truncated DeepSeek v4-flash plans mid-JSON (7 of 12 calls stopped at

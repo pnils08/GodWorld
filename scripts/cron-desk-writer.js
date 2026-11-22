@@ -1360,7 +1360,9 @@ async function main() {
       (who.voiceFile ? ' voice=' + path.basename(who.voiceFile) : '') + (who.notes.length ? ' (' + who.notes.join('; ') + ')' : ''));
   }
 
-  const system = TEST_SEAT ? whoBlock + TEST_SEAT_BOOT : whoBlock + (TEST_LIGHT
+  const system = TEST_SEAT ? whoBlock + TEST_SEAT_BOOT +
+      '\n\nFile one piece. End it with ## INTAKE: one NAMES, BIZ, HOOD or CLAIM record per line.'
+    : whoBlock + (TEST_LIGHT
     ? 'You are this journalist, alive in this city this cycle. ' +
       (isNiaSeat(PERSONA) ? 'Your beat is the UNDOCKED show and its standing in the city. Named people come from the ledger; in-world places are yours. ' : 'Named people, businesses and figures come from the Packet and the ledger; you invent none. ')
     :
@@ -1440,7 +1442,10 @@ async function main() {
         (RUBRIC ? rubricBlock(packetState) : '')
       : '');
 
-  const kickoff = TEST_SEAT ? 'Cycle ' + cycle + '.\n\n' + worldState : STATE_FILE
+  // The seat prompt hands the writer the Packet without the gate's review profile: the blockers are the gate's
+  // check, not the writer's brief (Sharon's barred "observation"/"gathering" — the visit the builder ruled in).
+  const seatPacket = () => { try { const p = JSON.parse(worldState); delete p.reviewProfile; return JSON.stringify(p, null, 2); } catch (_) { return worldState; } };
+  const kickoff = TEST_SEAT ? 'Cycle ' + cycle + '.\n\n' + seatPacket() : STATE_FILE
     ? 'Current cycle: ' + cycle + '. Write the ' + DESK + ' section for THIS cycle from YOUR LANE below — ' +
       'build only from the storylines it names and the citizen quotes it supplies; find your own angle. Do not ' +
       'invent events, players, or officials the lane does not name. Use your reporters\' voices per your SKILL. ' +

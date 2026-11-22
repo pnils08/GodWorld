@@ -2,7 +2,7 @@
   "generated": "2026-11-21",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 179,
-  "functionsMapped": 1771,
+  "functionsMapped": 1772,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -561,6 +561,8 @@
         "phase04-events/generateGameModeMicroEvents.js::generateGameModeMicroEvents_",
         "phase04-events/generateGenericCitizenMicroEvent.js::generateGenericCitizenMicroEvents_",
         "phase04-events/worldEventsEngine.js::worldEventsEngine_",
+        "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
+        "phase05-citizens/applyBusinessDynamics.js::bizDriftOne_",
         "phase05-citizens/checkForPromotions.js::checkForPromotions_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase05-citizens/generateCivicModeEvents.js::generateCivicModeEvents_",

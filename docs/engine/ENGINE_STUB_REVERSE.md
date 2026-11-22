@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 179 · **Functions mapped:** 1771 · **S.* fields:** 381 · **Sheets:** 63
+**Files scanned:** 179 · **Functions mapped:** 1772 · **S.* fields:** 381 · **Sheets:** 63
 
 ## S.* / ctx.summary reverse index
 
@@ -387,7 +387,7 @@
 | `S.v3ModulesRan` | `phase08-v3-chicago/v3Integration.js::v3Integration_` | _(none)_ | 1 | 0 |
 | `S.validationReport` | `phase01-config/godWorldEngine2.js::runCyclePhases_`, `phase01-config/godWorldEngine2.js::runWorldCycleLocked_` | _(none)_ | 2 | 0 |
 | `S.votesThisCycle` | `phase05-citizens/civicInitiativeEngine.js::runCivicInitiativeEngine_` | `phase05-citizens/civicInitiativeEngine.js::runCivicInitiativeEngine_`, `phase05-citizens/generateCivicModeEvents.js::generateCivicModeEvents_`, `phase05-citizens/generateMediaModeEvents.js::generateMediaModeEvents_`, `phase07-evening-media/storyHook.js::storyHookEngine_`, `utilities/exportCycleArtifacts.js::buildContinuityHints_`, `utilities/exportCycleArtifacts.js::buildCycleContextPack_` | 1 | 6 |
-| `S.weather` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_`, `phase02-world-state/applyWeatherModel.js::applyWeatherModel_` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_`, `phase01-config/godWorldEngine2.js::updateWorldPopulation_`, `phase01-config/godWorldEngine2.js::writeDigest_`, `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/applyWeatherModel.js::applyWeatherModel_`, `phase02-world-state/applyWeatherModel.js::getCrimeWeatherModifier_`, …(+55 more) | 2 | 61 |
+| `S.weather` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_`, `phase02-world-state/applyWeatherModel.js::applyWeatherModel_` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_`, `phase01-config/godWorldEngine2.js::updateWorldPopulation_`, `phase01-config/godWorldEngine2.js::writeDigest_`, `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/applyWeatherModel.js::applyWeatherModel_`, `phase02-world-state/applyWeatherModel.js::getCrimeWeatherModifier_`, …(+57 more) | 2 | 63 |
 | `S.weatherEventPools` | `phase02-world-state/applyWeatherModel.js::applyWeatherModel_` | `phase02-world-state/applyWeatherModel.js::applyWeatherModel_`, `phase02-world-state/applyWeatherModel.js::getNeighborhoodWeatherEvent_`, `phase02-world-state/applyWeatherModel.js::getWeatherEvent_` | 1 | 3 |
 | `S.weatherEvents` | `phase02-world-state/applyWeatherModel.js::applyWeatherModel_` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/applyWeatherModel.js::applyWeatherModel_`, `phase02-world-state/applyWeatherModel.js::hasWeatherCondition_`, `phase03-population/applyDemographicDrift.js::applyDemographicDrift_`, `phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_`, `phase03-population/updateNeighborhoodDemographics.js::buildHoodIllnessWeights_`, …(+4 more) | 1 | 10 |
 | `S.weatherFrontTracking` | `phase02-world-state/applyWeatherModel.js::applyWeatherModel_` | `phase02-world-state/applyWeatherModel.js::applyWeatherModel_`, `phase09-digest/finalizeCycleState.js::finalizeCycleState_` | 1 | 2 |

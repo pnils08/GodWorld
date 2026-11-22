@@ -62,7 +62,11 @@ var BIZ_DYNAMICS_REQUIRED_KEYS = [
   'bizSettleRate',    // engine.193 (b): share of the gap to the class norm an institution's growth closes per Cycle
   'bizSettleMinStaff', // engine.193 (b): stated staff at which a business is an institution that settles (the big employers)
   // engine.356 (builder 2026-11-21): success stems from how the hood performs
-  'bizHoodVitalityUnit', 'bizHoodSentimentUnit', 'bizHoodCrimeUnit', 'bizHoodSpan', 'bizHoodPull', 'bizHoodMaxPp', 'bizEventCap'
+  'bizHoodSpan', 'bizHoodPull', 'bizHoodMaxPp', 'bizEventCap', 'bizWeatherPp',
+  'bizClassMiddle_arts', 'bizClassMiddle_construction', 'bizClassMiddle_default', 'bizClassMiddle_education', 'bizClassMiddle_faith',
+  'bizClassMiddle_food', 'bizClassMiddle_health', 'bizClassMiddle_professional', 'bizClassMiddle_retail', 'bizClassMiddle_tech',
+  // one weight + one unit per BIZ_HOOD_SIGNALS entry (listed here: this array is built before that table loads)
+  'bizHoodWeight_vitality', 'bizHoodUnit_vitality', 'bizHoodWeight_sentiment', 'bizHoodUnit_sentiment', 'bizHoodWeight_crime', 'bizHoodUnit_crime', 'bizHoodWeight_momentum', 'bizHoodUnit_momentum', 'bizHoodWeight_events', 'bizHoodUnit_events', 'bizHoodWeight_migration', 'bizHoodUnit_migration', 'bizHoodWeight_income', 'bizHoodUnit_income', 'bizHoodWeight_boom', 'bizHoodUnit_boom'
 ];
 
 // The class mint table — the engine copy of scripts/ingestPublishedEntities.js
@@ -82,16 +86,13 @@ var BIZ_CLASS_MINT = {
   'default':    { emp: 6,  sal: 45000,  rev: 500000,  growth: 2 }
 };
 // engine.356 — where each class of business sits in this city, the anchor a business's hood-set
-// resting level is measured from (resting = this + hood score × bizHoodSpan). Held fixed: the median
-// Growth_Rate of each class's hood-following businesses (not City-wide, not an institution, not a sports
-// franchise or stadium) on the C116 ledger, with the four sub-area rows at their parent hood and Civis
-// Systems at its stored 6.16 (the sheet displays it as 616%). These are the numbers the builder approved
-// the change on (2026-11-21). Not the mint table above: that is a new business's start (2–8) and anchoring
-// on it deflated half the city in the offline run.
-var BIZ_CLASS_MIDDLE = {
-  arts: 5.14, construction: 9.02, 'default': 4.03, education: 0.67, faith: 3.99,
-  food: 5.52, health: 2.42, professional: 6.42, retail: 4.11, tech: 11.59
-};
+// resting level is measured from (resting = middle + hood score × bizHoodSpan). Held on World_Config as
+// bizClassMiddle_<class> — seeded at the median Growth_Rate of each class's hood-following businesses
+// (not City-wide, not an institution, not a sports franchise or stadium) on the C116 ledger, the numbers
+// the builder approved the change on (2026-11-21). Held, not re-taken each Cycle: a median of the same
+// businesses being pulled walks a class to the ceiling or floor (agy read 2026-11-21). Not the mint
+// table above: that is a new business's start (2–8) and anchoring on it deflated half the city.
+var BIZ_CLASS_MIDDLE_CLASSES = ['arts', 'construction', 'default', 'education', 'faith', 'food', 'health', 'professional', 'retail', 'tech'];
 // Sector mint medians — the closure floor's denominator (derived, one source)
 var BIZ_CLASS_MINT_REVENUE = (function () { var o = {}; for (var k in BIZ_CLASS_MINT) if (BIZ_CLASS_MINT.hasOwnProperty(k)) o[k] = BIZ_CLASS_MINT[k].rev; return o; })();
 
@@ -450,12 +451,18 @@ function bizDriftOne_(cfg, biz, prevState, inputs, cycle) {
   // the venue's bars the week it happens. Zero for every non-bar and on a week with no game.
   var sportsPp = (Number(inputs.sportsWeek) || 0) ? Number(inputs.sportsWeek) * cfg.bizSportsWeekPp * scale : 0;
   ev += sportsPp;
+  // engine.356 (builder 2026-11-21: "crime, weather, whatever we offer"): the week's weather on the street.
+  // S.weather.impact is 1 on a normal week and climbs with rain, wind, heat and cold (applyWeatherModel_;
+  // C107–C116 ran 1.00–1.33); a business that follows its hood loses (impact − 1) × bizWeatherPp. An
+  // institution, a franchise or a City-wide row: no term (inputs.weatherImpact null).
+  var wxImp = inputs.weatherImpact;
+  if (wxImp !== null && wxImp !== undefined && isFinite(Number(wxImp)) && Number(wxImp) > 1) ev -= (Number(wxImp) - 1) * cfg.bizWeatherPp * scale;
   // engine.356: the week's news on top of the hood — capped at bizEventCap (was 2.0 in code)
   ev = bizClamp_(ev, -cfg.bizEventCap, cfg.bizEventCap);
 
   // 2. the hood — engine.356 (builder 2026-11-21: "their success should stem from how the hood
-  // performs"). A business rests at its class's middle in this city (BIZ_CLASS_MIDDLE, held at
-  // the C116 medians — a fixed anchor) plus the hood's performance score × span,
+  // performs"). A business rests at its class's middle in this city (World_Config bizClassMiddle_<class>,
+  // held at the C116 medians — a fixed anchor) plus the hood's performance score × span,
   // and closes bizHoodPull of the gap each Cycle, capped ±bizHoodMaxPp. A resting level, not a push:
   // Growth_Rate is a level carried week to week, so a standing push would walk every business in a
   // strong hood to the ceiling and every one in a weak hood to the floor. Measured on the shock-free
@@ -514,31 +521,48 @@ function bizDriftOne_(cfg, biz, prevState, inputs, cycle) {
     parts: { ev: ev, vit: vitMod, pressure: pressure, shock: shock, noise: noise, ship: shipApplied - shipPrev, sports: sportsPp, settle: settle } };
 }
 
-// engine.356 — how a hood performs, one number per hood in [-1, 1]: the mean of four parts, each
-// against the city's middle hood this Cycle (S.neighborhoodState = last Cycle's Neighborhood_Map):
-// shop health (RetailVitality), mood (Sentiment), crime (CrimeIndex, against), and whether it is rising
-// or falling (TrajectoryMomentum, 5 = neutral by its own engine). Each part is capped at ±1 by its unit
-// (World_Config bizHoodVitalityUnit / SentimentUnit / CrimeUnit; momentum's own 0–10 scale). A hood with
-// no RetailVitality gets no score; a missing part is left out of the mean.
+// engine.356 — how a hood performs, one number per hood in [-1, 1]: the weighted mean of every hood
+// signal the sim produces that bears on a business (builder 2026-11-21: "unique combinations of data
+// drive the world, world_config holds alot of the dials"). Each signal is read from S.neighborhoodState
+// (last Cycle's Neighborhood_Map), measured from its centre — the city's middle hood this Cycle, or the
+// neutral its own engine defines (momentum 5, net migration 0) — divided by its unit and capped at ±1,
+// signed by which way it helps a business. Weight and unit for each live on World_Config
+// (bizHoodWeight_<name>, bizHoodUnit_<name>); weight 0 turns a signal off. A hood with no RetailVitality
+// gets no score; a missing signal is left out of the mean.
+var BIZ_HOOD_SIGNALS = [
+  // [name, S.neighborhoodState field, sign, centre: 'median' or a fixed neutral]
+  ['vitality',  'retailVitality',      1, 'median'],   // shop health
+  ['sentiment', 'sentiment',           1, 'median'],   // mood
+  ['crime',     'crimeIndex',         -1, 'median'],   // crime, against
+  ['momentum',  'trajectoryMomentum',  1, 5],          // rising / falling (0–10, 5 neutral by its engine)
+  ['events',    'eventAttractiveness', 1, 'median'],   // what draws people out
+  ['migration', 'migrationFlow',       1, 0],          // people moving in / out (−5..+5)
+  ['income',    'medianIncome',        1, 'median'],   // spending power
+  ['boom',      'boomIndex',           1, 'median']    // the hood's boom exposure (engine.135 B1, −1..+1)
+];
+function bizHoodNum_(v) { return (v === null || v === undefined || v === '' || !isFinite(Number(v))) ? null : Number(v); }
 function bizHoodScores_(ns, cfg) {
-  var keys = [], vit = [], sen = [], cri = [];
-  for (var h in ns) {
-    if (!ns.hasOwnProperty(h) || !ns[h]) continue;
-    keys.push(h);
-    if (isFinite(Number(ns[h].retailVitality)) && ns[h].retailVitality !== null) vit.push(Number(ns[h].retailVitality));
-    if (isFinite(Number(ns[h].sentiment)) && ns[h].sentiment !== null) sen.push(Number(ns[h].sentiment));
-    if (isFinite(Number(ns[h].crimeIndex)) && ns[h].crimeIndex !== null) cri.push(Number(ns[h].crimeIndex));
+  var keys = [], centres = {};
+  for (var h in ns) if (ns.hasOwnProperty(h) && ns[h]) keys.push(h);
+  for (var g = 0; g < BIZ_HOOD_SIGNALS.length; g++) {
+    var sig = BIZ_HOOD_SIGNALS[g];
+    if (sig[3] !== 'median') { centres[sig[0]] = sig[3]; continue; }
+    var vals = [];
+    for (var a = 0; a < keys.length; a++) { var va = bizHoodNum_(ns[keys[a]][sig[1]]); if (va !== null) vals.push(va); }
+    centres[sig[0]] = bizMedian_(vals);
   }
-  var mV = bizMedian_(vit), mS = bizMedian_(sen), mC = bizMedian_(cri), out = {};
+  var out = {};
   for (var k = 0; k < keys.length; k++) {
-    var s = ns[keys[k]], parts = [];
-    if (s.retailVitality === null || s.retailVitality === undefined || !isFinite(Number(s.retailVitality)) || mV === null) { out[keys[k]] = null; continue; }
-    parts.push(bizClamp_((Number(s.retailVitality) - mV) / cfg.bizHoodVitalityUnit, -1, 1));
-    if (mS !== null && s.sentiment !== null && s.sentiment !== undefined && isFinite(Number(s.sentiment))) parts.push(bizClamp_((Number(s.sentiment) - mS) / cfg.bizHoodSentimentUnit, -1, 1));
-    if (mC !== null && s.crimeIndex !== null && s.crimeIndex !== undefined && isFinite(Number(s.crimeIndex))) parts.push(bizClamp_(-(Number(s.crimeIndex) - mC) / cfg.bizHoodCrimeUnit, -1, 1));
-    if (s.trajectoryMomentum !== null && s.trajectoryMomentum !== undefined && isFinite(Number(s.trajectoryMomentum))) parts.push(bizClamp_((Number(s.trajectoryMomentum) - 5) / 5, -1, 1));
-    var sum = 0; for (var p = 0; p < parts.length; p++) sum += parts[p];
-    out[keys[k]] = Math.round(sum / parts.length * 1000) / 1000;
+    var s = ns[keys[k]];
+    if (bizHoodNum_(s.retailVitality) === null) { out[keys[k]] = null; continue; }
+    var sum = 0, wsum = 0;
+    for (var q = 0; q < BIZ_HOOD_SIGNALS.length; q++) {
+      var sg = BIZ_HOOD_SIGNALS[q], w = cfg['bizHoodWeight_' + sg[0]], u = cfg['bizHoodUnit_' + sg[0]];
+      var v = bizHoodNum_(s[sg[1]]), c = centres[sg[0]];
+      if (!(w > 0) || !(u > 0) || v === null || c === null || c === undefined) continue;
+      sum += w * bizClamp_(sg[2] * (v - c) / u, -1, 1); wsum += w;
+    }
+    out[keys[k]] = wsum > 0 ? Math.round(sum / wsum * 1000) / 1000 : null;
   }
   return out;
 }
@@ -667,11 +691,12 @@ function applyBusinessDynamics_(ctx) {
     var hScore = hoodScores[String(rowF[iHood] || '').trim()];
     return hScore !== undefined && hScore !== null;                         // City-wide, or a hood with no profile: no term
   };
-  // The class middle is HELD (BIZ_CLASS_MIDDLE), never re-taken from this Cycle's rows: agy read
+  // The class middle is HELD (World_Config bizClassMiddle_<class>), never re-taken from this Cycle's rows: agy read
   // 2026-11-21 — a median of the same businesses being pulled walks every class whose businesses sit
   // mostly in strong (tech) or weak (schools) hoods to the ceiling or the floor, ~0.2 × span × the class's
   // median hood score a Cycle, with no anchor.
-  var classMiddle = BIZ_CLASS_MIDDLE;
+  var classMiddle = {};
+  for (var cmi = 0; cmi < BIZ_CLASS_MIDDLE_CLASSES.length; cmi++) classMiddle[BIZ_CLASS_MIDDLE_CLASSES[cmi]] = cfg['bizClassMiddle_' + BIZ_CLASS_MIDDLE_CLASSES[cmi]];
   for (var r = 1; r < bl.length; r++) {
     var row = bl[r];
     var id = String(row[iId] || '').trim();
@@ -713,6 +738,7 @@ function applyBusinessDynamics_(ctx) {
       vitality: hs && hs.retailVitality !== undefined ? hs.retailVitality : null,
       vitalityMedian: vitalityMedian,
       hoodScore: followsHood(row, id) ? hoodScores[hood] : null,                       // engine.356
+      weatherImpact: followsHood(row, id) && S.weather ? S.weather.impact : null,     // engine.356
       classMiddle: classMiddle.hasOwnProperty(bizSectorClass_(row[iSec])) ? classMiddle[bizSectorClass_(row[iSec])] : null,
       mayorApproval: mayorApproval,
       ownerDriveHigh: ownerB ? dialHigh_(ownerB.drive, 2) : 0,

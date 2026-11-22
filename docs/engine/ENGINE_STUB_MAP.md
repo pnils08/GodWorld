@@ -1199,6 +1199,9 @@
 - **bizOwnerDials_(ctx, keyPersonnelCell)**
 
 - **bizDriftOne_(cfg, biz, prevState, inputs, cycle)**
+  Reads: S.weather
+
+- **bizHoodNum_(v)**
 
 - **bizHoodScores_(ns, cfg)**
 
@@ -1211,7 +1214,7 @@
 - **bizShipOffset_(ship, sector, echoShare)**
 
 - **applyBusinessDynamics_(ctx)**
-  Reads: S.absoluteCycle, S.canonHoods, S.chaosBusinessFold, S.chaosCarsEvents, S.chaosNeighborhoodFold, S.chaosShip, S.cycleId, S.hoodSpots, S.initiativeNeighborhoodEffects, S.neighborhoodState, S.previousCycleState, S.sportsWeek, S.worldEvents
+  Reads: S.absoluteCycle, S.canonHoods, S.chaosBusinessFold, S.chaosCarsEvents, S.chaosNeighborhoodFold, S.chaosShip, S.cycleId, S.hoodSpots, S.initiativeNeighborhoodEffects, S.neighborhoodState, S.previousCycleState, S.sportsWeek, S.weather, S.worldEvents
   Writes: S.businessClosures, S.businessDeclines, S.businessDynamicsState, S.hoodBusinessMomentum, S.hoodSpots, S.sportsWeekBars, S.worldEvents
   Config: ctx.config.cycleCount
   Sheets: Business_Ledger
@@ -4883,4 +4886,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 179
-**Functions mapped:** 1771
+**Functions mapped:** 1772

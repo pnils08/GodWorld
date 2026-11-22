@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 179 · **Functions mapped:** 1768 · **S.* fields:** 381 · **Sheets:** 63
+**Files scanned:** 179 · **Functions mapped:** 1771 · **S.* fields:** 381 · **Sheets:** 63
 
 ## S.* / ctx.summary reverse index
 
@@ -280,7 +280,7 @@
 | `S.newBonds` | `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_` | `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_`, `phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_` | 1 | 2 |
 | `S.newCitizens` | `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_` | `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_` | 1 | 1 |
 | `S.newGenericCitizens` | `phase05-citizens/generateGenericCitizens.js::generateGenericCitizens_` | _(none)_ | 1 | 0 |
-| `S.nightlife` | `phase07-evening-media/buildNightLife.js::buildNightlife_` | `phase01-config/godWorldEngine2.js::runCyclePhases_`, `phase01-config/godWorldEngine2.js::runWorldCycleLocked_`, `phase01-config/godWorldEngine2.js::writeDigest_`, `phase07-evening-media/applyStorySeeds.js::applyStorySeeds_`, `phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_`, `phase09-digest/finalizeCycleState.js::snapshotEveningForCarryForward_`, …(+1 more) | 1 | 7 |
+| `S.nightlife` | `phase07-evening-media/buildNightLife.js::buildNightlife_` | `phase01-config/godWorldEngine2.js::runCyclePhases_`, `phase01-config/godWorldEngine2.js::runWorldCycleLocked_`, `phase01-config/godWorldEngine2.js::writeDigest_`, `phase07-evening-media/applyStorySeeds.js::applyStorySeeds_`, `phase07-evening-media/buildEveningFood.js::buildEveningFood_`, `phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_`, …(+2 more) | 1 | 8 |
 | `S.nightlifeVolume` | `phase07-evening-media/buildNightLife.js::buildNightlife_`, `phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_` | `phase01-config/godWorldEngine2.js::runCyclePhases_`, `phase01-config/godWorldEngine2.js::runWorldCycleLocked_`, `phase03-population/deriveDemographicDrift.js::deriveDemographicDrift_`, `phase04-events/worldEventsEngine.js::worldEventsEngine_`, `phase07-evening-media/buildEveningFood.js::buildEveningFood_`, `phase07-evening-media/sportsStreaming.js::buildEveningSportsAndStreaming_`, …(+3 more) | 2 | 9 |
 | `S.nightShiftLoad` | `phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_` | _(none)_ | 1 | 0 |
 | `S.noiseFilterStats` | `phase06-analysis/filterNoiseEvents.js::filterNoiseEvents_` | _(none)_ | 1 | 0 |

@@ -1200,6 +1200,12 @@
 
 - **bizDriftOne_(cfg, biz, prevState, inputs, cycle)**
 
+- **bizHoodScores_(ns, cfg)**
+
+- **bizMedian_(arr)**
+
+- **bizIsFranchise_(id, sector)**
+
 - **chaosHoodSign_(fold)**
 
 - **bizShipOffset_(ship, sector, echoShare)**
@@ -3165,7 +3171,7 @@
 
 ### buildEveningFood.js
 - **buildEveningFood_(ctx)**
-  Reads: S.cityDynamics, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.nightlifeVolume, S.season, S.sportsCity, S.sportsSeason, S.sportsZones, S.weather, S.weatherMood, S.worldEvents
+  Reads: S.cityDynamics, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.nightlife, S.nightlifeVolume, S.season, S.sportsCity, S.sportsSeason, S.sportsZones, S.weather, S.weatherMood, S.worldEvents
   Writes: S.eveningFood
   RNG: ctx.rng / safeRand_(ctx)
 
@@ -4877,4 +4883,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 179
-**Functions mapped:** 1768
+**Functions mapped:** 1771

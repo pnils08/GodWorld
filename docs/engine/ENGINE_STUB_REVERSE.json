@@ -2,7 +2,7 @@
   "generated": "2026-11-21",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 179,
-  "functionsMapped": 1768,
+  "functionsMapped": 1771,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -1039,6 +1039,7 @@
         "phase01-config/godWorldEngine2.js::runWorldCycleLocked_",
         "phase01-config/godWorldEngine2.js::writeDigest_",
         "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
+        "phase07-evening-media/buildEveningFood.js::buildEveningFood_",
         "phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_",
         "phase09-digest/finalizeCycleState.js::snapshotEveningForCarryForward_",
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_"

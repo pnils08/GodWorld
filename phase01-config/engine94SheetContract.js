@@ -91,6 +91,14 @@ var ENGINE96_CONFIG_SEEDS = [
   ['bizOwnerMintP', 0.2, 'engine.96 Task 12: per open drip slot, the chance the owner door fires this Cycle (the family door\'s own odds)', 0, 1, false],
   ['bizOwnerMaxStaff', 250, 'engine.96 Task 12: Employee_Count above which a business is an institution and never draws an owner', 1, 100000, true],
   ['bizOwnerMinAge', 35, 'engine.96 Task 12: youngest a Generic citizen can be to draw as a business owner', 18, 90, true],
+  // engine.356 (builder 2026-11-21: "their success should stem from how the hood performs"; terms approved the same night)
+  ['bizHoodVitalityUnit', 8, 'engine.356: RetailVitality distance from the city median hood that counts as a full hood-performance point (C116 spread -4.4..+7.7)', 0.1, 50, false],
+  ['bizHoodSentimentUnit', 0.35, 'engine.356: Sentiment distance from the city median hood that counts as a full hood-performance point (C116 spread -0.12..+0.33)', 0.01, 5, false],
+  ['bizHoodCrimeUnit', 0.2, 'engine.356: CrimeIndex distance from the city median hood that counts as a full hood-performance point, inverted (C116 spread -0.07..+0.09)', 0.01, 5, false],
+  ['bizHoodSpan', 5, 'engine.356: pp above / below its class middle a business rests at in a hood scoring +1 / -1', 0, 40, false],
+  ['bizHoodPull', 0.2, 'engine.356: share of the gap to the hood-set resting level a business closes per Cycle', 0, 1, false],
+  ['bizHoodMaxPp', 1.5, 'engine.356: cap on the hood term per Cycle (pp, before sector volatility and the weekly drift cap)', 0, 10, false],
+  ['bizEventCap', 1.0, 'engine.356: cap on the summed event term per Cycle (pp; was 2.0 in code) - the week\'s news on top of the hood', 0, 10, false],
   ['bizOwnerMinProfit', 0, 'engine.96 Task 12: profit floor (Annual_Revenue - payroll) below which a business never draws an owner; 0 = the profit weight alone orders the pool', 0, 1000000000, false]
 ];
 

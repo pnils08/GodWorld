@@ -471,7 +471,8 @@ function generateCrisisSpikes_(ctx) {
 function crisisHoodWeight_(ctx, hood) {
   var st = ctx && ctx.summary && ctx.summary.neighborhoodState ? ctx.summary.neighborhoodState[hood] : null;
   if (!st) throw new Error('crisisHoodWeight_: no S.neighborhoodState for ' + hood + ' — Phase2-NeighborhoodState must run before Phase3-CrisisSpikes (engine.148 P2).');
-  var tier = Number(st.incomeTier), crime = Number(st.crimeIndex);
+  var tier = Number(st.incomeTier);
+  var crime = (st.crimeIndex === null || st.crimeIndex === undefined || st.crimeIndex === '') ? NaN : Number(st.crimeIndex);   // engine.356 gap: missing crime takes the neutral 0.7 below, not 0
   if (!isFinite(tier) || tier <= 0) throw new Error('crisisHoodWeight_: Neighborhood_Map.IncomeTier missing for ' + hood + ' (engine.148 P2).');
   if (!isFinite(crime)) crime = 0.7;
   var w = 0.5 + 0.15 * (6 - tier) + 0.3 * (crime - 0.7);

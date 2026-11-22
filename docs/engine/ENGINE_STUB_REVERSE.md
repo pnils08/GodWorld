@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 179 · **Functions mapped:** 1772 · **S.* fields:** 381 · **Sheets:** 63
+**Files scanned:** 179 · **Functions mapped:** 1774 · **S.* fields:** 381 · **Sheets:** 63
 
 ## S.* / ctx.summary reverse index
 
@@ -474,7 +474,7 @@ Sheet detection: `getSheetByName`, `queue*Intent_`, known sheet-name string + wr
 | `Transit_Metrics` | `utilities/ensureTransitMetrics.js::batchRecordTransitMetrics_`, `utilities/ensureTransitMetrics.js::recordTransitMetrics_` | `utilities/ensureTransitMetrics.js::batchRecordTransitMetrics_`, `utilities/ensureTransitMetrics.js::getTransitMetrics_`, `utilities/ensureTransitMetrics.js::recordTransitMetrics_` | 2 | 3 |
 | `Undocked_Draw` | `phase05-citizens/casinoLedgerEngine.js::undockedDrawCast_` | `phase05-citizens/casinoLedgerEngine.js::undockedDrawCast_` | 1 | 1 |
 | `Undocked_Feed` | _(none)_ | `phase02-world-state/loadEventContentLedger.js::loadUndockedFeed_` | 0 | 1 |
-| `World_Config` | _(none)_ | `phase01-config/engine94SheetContract.js::ensureEngine133Config_`, `phase01-config/engine94SheetContract.js::ensureEngine135Config_`, `phase01-config/engine94SheetContract.js::ensureEngine148Config_`, `phase01-config/engine94SheetContract.js::ensureEngine157Config_`, `phase01-config/engine94SheetContract.js::ensureEngine160Config_`, …(+25 more) | 0 | 30 |
+| `World_Config` | _(none)_ | `phase01-config/engine94SheetContract.js::ensureEngine133Config_`, `phase01-config/engine94SheetContract.js::ensureEngine135Config_`, `phase01-config/engine94SheetContract.js::ensureEngine148Config_`, `phase01-config/engine94SheetContract.js::ensureEngine157Config_`, `phase01-config/engine94SheetContract.js::ensureEngine160Config_`, …(+26 more) | 0 | 31 |
 | `World_Drift_Report` | _(none)_ | `phase03-population/generateMonthlyDriftReport.js::generateMonthlyDriftReport` | 0 | 1 |
 | `World_Population` | `phase03-population/finalizeWorldPopulation.js::finalizeWorldPopulation_` | `phase01-config/godWorldEngine2.js::updateWorldPopulation_`, `phase03-population/applyDemographicDrift.js::applyDemographicDrift_`, `phase03-population/finalizeWorldPopulation.js::finalizeWorldPopulation_`, `phase03-population/generateMonthlyDriftReport.js::generateMonthlyDriftReport`, `phase05-citizens/citizenContextBuilder.js::diagnoseLedgerStructure`, …(+7 more) | 1 | 12 |
 | `WorldEvents_Ledger` | `phase10-persistence/recordWorldEventsv25.js::recordWorldEvents25_` | `phase04-events/worldEventsEngine.js::worldEventsEngine_`, `phase10-persistence/recordWorldEventsv25.js::ensureWorldEventsLedger_`, `phase10-persistence/recordWorldEventsv25.js::recordWorldEvents25_`, `phase10-persistence/recordWorldEventsv25.js::upgradeWorldEventsLedger_` | 1 | 4 |

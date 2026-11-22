@@ -2,7 +2,7 @@
   "generated": "2026-11-21",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 179,
-  "functionsMapped": 1772,
+  "functionsMapped": 1774,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -4708,6 +4708,7 @@
         "phase01-config/engine94SheetContract.js::ensureEngine290Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine338Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine349Config_",
+        "phase01-config/engine94SheetContract.js::ensureEngine356Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine94SheetContract_",
         "phase01-config/engine94SheetContract.js::ensureEngine95Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine96Config_",

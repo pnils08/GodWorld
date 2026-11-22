@@ -47,7 +47,7 @@ function world(scenario) {
     recordRipple_: () => { counts.ledger++; return true; },
     safePhaseCall_: (ctx, label, fn) => fn(),
     ctx: {
-      config: { cycleCount: 8000, rngSeed: 42, econMoodInertia: 1 },  // engine.221: inertia 1 == the pre-221 level this test was written against
+      config: { cycleCount: 8000, rngSeed: 42, econMoodInertia: 1, migrationCrimeBand: 0.05, trajectoryCrimeBand: 0.05 },  /* engine.356 bands, as ENGINE356_CONFIG_SEEDS seeds them */  // engine.221: inertia 1 == the pre-221 level this test was written against
       ss: { getSheetByName: name => name === 'Neighborhood_Map' ? mapSheet : null },
       summary: {
         cycleId: 8000, season: 'Spring', month: 4, holiday: 'none',

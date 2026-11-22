@@ -415,6 +415,8 @@ function applyMigrationDrift_(ctx) {
   // so a ratio band (±8 points at 55) could never fire — an absolute offset, like sentiment's.
   // 1.5 = half the observed full spread.
   var MOOD_BAND = 1.5;
+  var CRIME_BAND = Number(ctx.config.migrationCrimeBand);   // engine.356 gap
+  if (!(CRIME_BAND > 0)) throw new Error('applyMigrationDrift_: World_Config migrationCrimeBand missing or <= 0 — ensureEngine356Config_ self-arms it (ADR-0015).');
 
   // The city-wide term is a TILT, not the baseline. It was Math.round(drift / 8)
   // — at the C110 drift of 21 that spent 3 of the ±5 range before a single local
@@ -432,9 +434,12 @@ function applyMigrationDrift_(ctx) {
 
     var nhDrift = cityTilt;
 
-    // Crime: safer than the city's middle pulls people in, rougher pushes out.
-    if (medCrime > 0 && crimeIndex >= medCrime * HI) { nhDrift -= rInt(2) + 1; }
-    else if (medCrime > 0 && crimeIndex <= medCrime * LO) { nhDrift += rInt(2); }
+    // Crime: safer than the city's middle pulls people in, rougher pushes out. engine.356 gap (builder
+    // 2026-11-21): an absolute band off the median, World_Config migrationCrimeBand, like sentiment's — the
+    // ±15 % ratio band (0.544–0.736 at the C116 median 0.64) was wider than the city's whole crime spread
+    // (0.57–0.73) and caught no hood, so crime never moved anyone in or out.
+    if (medCrime > 0 && crimeIndex >= medCrime + CRIME_BAND) { nhDrift -= rInt(2) + 1; }
+    else if (medCrime > 0 && crimeIndex <= medCrime - CRIME_BAND) { nhDrift += rInt(2); }
 
     if (nhSentiment >= medSent + SENT_BAND) { nhDrift += rInt(2) + 1; }
     else if (nhSentiment <= medSent - SENT_BAND) { nhDrift -= rInt(2) + 1; }

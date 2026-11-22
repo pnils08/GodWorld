@@ -65,7 +65,7 @@ function world() {
   return { sb, rows };
 }
 function ctxFor(sb, economies) {
-  return { config: { cycleCount: 108, rngSeed: 7 }, ss: { getSheetByName: n => n === 'Neighborhood_Map' ? sb.__map : null }, writeIntents: [],
+  return { config: { cycleCount: 108, rngSeed: 7, migrationCrimeBand: 0.05 },  /* engine.356, as seeded */ ss: { getSheetByName: n => n === 'Neighborhood_Map' ? sb.__map : null }, writeIntents: [],
     summary: seedCanon(sb, { cycleId: 108, season: 'Winter', month: 1, holiday: 'none', sportsSeason: 'off-season', weather: { type: 'clear', impact: 1 },
       neighborhoodState: hoodState(), neighborhoodEconomies: economies, economicMood: 55.4, migrationDrift: 0,
       neighborhoodDemographics: {}, worldEvents: [], storySeeds: [], crimeByNeighborhood: {}, previousCycleState: { cycle: 107, migrationDrift: 0 } }) };

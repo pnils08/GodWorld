@@ -74,6 +74,14 @@ var TRAJECTORY_DRIFT = {
 // MAIN ENGINE
 // ════════════════════════════════════════════════════════════════════════════
 
+// engine.356 gap: a sheet cell as a number, or null when blank / not a number (Number('') is 0).
+function trajectoryCellNum_(v) {
+  if (v === '' || v === null || v === undefined) return null;
+  if (typeof v === 'string' && v.trim() === '') return null;
+  var n = Number(v);
+  return isNaN(n) ? null : n;
+}
+
 function processNeighborhoodTrajectory_(ctx) {
   var cycle = (ctx.summary && ctx.summary.cycleId) || (ctx.config && ctx.config.cycleCount) || 0;
 
@@ -122,19 +130,29 @@ function updateNeighborhoodTrajectories_(ctx, cycle) {
   if (iTrajectory < 0 || iNeighborhood < 0) return empty; // schema not migrated — no-op
 
   // ── City means for relative scoring ──────────────────────────────────────
-  var sums = { sent: 0, retail: 0, event: 0 };
-  var counted = 0;
+  var sums = { sent: 0, retail: 0, event: 0, crime: 0 };
+  var counted = 0, crimeCounted = 0;
   for (var m = 0; m < rows.length; m++) {
     if (!rows[m][iNeighborhood]) continue;
     sums.sent += Number(rows[m][iSentiment]) || 0;
     sums.retail += Number(rows[m][iRetail]) || 0;
     sums.event += Number(rows[m][iEvent]) || 0;
+    var cm = trajectoryCellNum_(rows[m][iCrime]);   // engine.356 gap: a blank crime cell is missing, not 0
+    if (cm !== null) { sums.crime += cm; crimeCounted++; }
     counted++;
   }
   if (!counted) return empty;
   var meanSent = sums.sent / counted;
   var meanRetail = sums.retail / counted;
   var meanEvent = sums.event / counted;
+  var meanCrime = crimeCounted ? sums.crime / crimeCounted : null;
+  // engine.356 gap (builder 2026-11-21 "Go on these"): crime reads against the city's own mean like mood,
+  // ±trajectoryCrimeBand (World_Config). The old test (crime >= 2 → −1, crime === 0 → +1) was written in
+  // July for an incident-count CrimeIndex (0 quiet, 2–3 on a safety burst); 3c819a7d0 moved CrimeIndex to
+  // the Crime_Metrics scale (C116 0.57–0.73) nine days later, and the branch never fired again — crime
+  // never entered any hood's trajectory, momentum, pressure, income drift or hooks.
+  var crimeBand = Number(ctx.config && ctx.config.trajectoryCrimeBand);
+  if (!(crimeBand > 0)) throw new Error('updateNeighborhoodTrajectories_: World_Config trajectoryCrimeBand missing or <= 0 — ensureEngine356Config_ self-arms it (ADR-0015).');
 
   var S = ctx.summary || {};
   ctx.summary = S;
@@ -160,7 +178,7 @@ function updateNeighborhoodTrajectories_(ctx, cycle) {
 
     var sent = Number(row[iSentiment]) || 0;
     var retail = Number(row[iRetail]) || 0;
-    var crime = Number(row[iCrime]) || 0;
+    var crime = trajectoryCellNum_(row[iCrime]);   // null when blank — no crime term
     var eventAttract = Number(row[iEvent]) || 0;
     var flow = Number(row[iFlow]) || 0; // non-numeric legacy values → 0
 
@@ -179,8 +197,10 @@ function updateNeighborhoodTrajectories_(ctx, cycle) {
     if (eventAttract > meanEvent * 1.2) score += 1;
     else if (eventAttract < meanEvent * 0.8) score -= 1;
 
-    if (crime >= 2) score -= 1;
-    else if (crime === 0) score += 1;
+    if (crime !== null && meanCrime !== null) {
+      if (crime > meanCrime + crimeBand) score -= 1;        // rougher than the city's middle
+      else if (crime < meanCrime - crimeBand) score += 1;   // safer
+    }
 
     if (flow >= 2) score += 1;
     else if (flow <= -2) score -= 1;

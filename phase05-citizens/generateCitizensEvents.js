@@ -2059,7 +2059,7 @@ function generateCitizensEvents_(ctx) {
     // S296 flat-weight-only rule lifts and these earn experience-weighting
     // like the crime carry.)
     var traj = (st.trajectory || '').toLowerCase();
-    var tMom = Number(st.trajectoryMomentum);
+    var tMom = (st.trajectoryMomentum === null || st.trajectoryMomentum === undefined || st.trajectoryMomentum === '') ? NaN : Number(st.trajectoryMomentum);   // engine.356 gap: missing momentum is no intensity, not 'falling hard'
     var mi = isNaN(tMom) ? 0 : Math.abs(tMom - 5) / 5; // distance from neutral → intensity 0..1
     // engine.214 8a Cut B: the citizen's reaction to the hood (hoodReactionSet_), same total mass.
     var reactions = hoodReactionSet_(traj, pw(1.1, mi) + pw(1.0, mi), neighborhood);

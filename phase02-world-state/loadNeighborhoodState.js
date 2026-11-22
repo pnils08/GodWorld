@@ -106,7 +106,11 @@ function loadNeighborhoodState_(ctx) {
 
   function num(row, i) {
     if (i < 0) return null;
-    var v = Number(row[i]);
+    var raw = row[i];
+    // engine.356 gap (builder 2026-11-21): a blank cell is missing, not 0 — Number('') === 0 made every
+    // blank read as a real zero (the file's own contract above: "a blank reads null, never a default").
+    if (raw === '' || raw === null || raw === undefined || (typeof raw === 'string' && raw.trim() === '')) return null;
+    var v = Number(raw);
     return isNaN(v) ? null : v;
   }
 

@@ -525,6 +525,28 @@ function ensureEngine338Config_(ss) {
   return { configSeeded: plan.additions.length };
 }
 
+// engine.356 gaps (builder 2026-11-21 "Go on these"): crime reads against the city's middle in the hood
+// trajectory and in migration, on bands the builder can turn (both were dead: written for an older CrimeIndex
+// scale / a ratio band wider than the city's whole crime spread).
+var ENGINE356_CONFIG_SEEDS = [
+  ['trajectoryCrimeBand', 0.05, 'engine.356: CrimeIndex distance from the city mean that scores a hood -1 (rougher) / +1 (safer) in its trajectory, like mood\'s 0.05 (C116 crime 0.57-0.73, mean 0.65: 8 of 22 hoods outside it)', 0.001, 5, false],
+  ['migrationCrimeBand', 0.05, 'engine.356: CrimeIndex distance from the city median at which crime pushes people out of / pulls them into a hood in migration drift (was a +-15% ratio band that caught no hood)', 0.001, 5, false]
+];
+
+function ensureEngine356Config_(ss) {
+  if (!ss) throw new Error('engine.356 config: spreadsheet required');
+  var configSheet = ss.getSheetByName('World_Config');
+  if (!configSheet) throw new Error('engine.356 config: World_Config not found');
+  var plan = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE356_CONFIG_SEEDS);
+  if (plan.additions.length > 0) {
+    configSheet.getRange(configSheet.getLastRow() + 1, 1, plan.additions.length, 3).setValues(plan.additions);
+    var verified = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE356_CONFIG_SEEDS);
+    if (verified.additions.length > 0) throw new Error('engine.356 config: post-write verification failed');
+  }
+  Logger.log('engine.356 config ready: seeded ' + plan.additions.length + ' row(s)');
+  return { configSeeded: plan.additions.length };
+}
+
 // engine.271 — city revenue (builder rulings 2026-09-29 and 2026-10-02). Fines
 // are a share of the citizen's salary by level, capped below the grave level;
 // property tax is a share of the hood's home value, paid once a sim year on tax

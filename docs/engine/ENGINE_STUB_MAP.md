@@ -134,6 +134,9 @@
 - **ensureEngine338Config_(ss)**
   Sheets: World_Config
 
+- **ensureEngine356Config_(ss)**
+  Sheets: World_Config
+
 - **ensureEngine271Config_(ss)**
   Sheets: World_Config
 
@@ -2423,6 +2426,8 @@
   Writes: S.storyHooks
 
 ### neighborhoodTrajectoryEngine.js
+- **trajectoryCellNum_(v)**
+
 - **processNeighborhoodTrajectory_(ctx)**
   Reads: S.cycleId
   Config: ctx.config.cycleCount
@@ -2430,6 +2435,7 @@
 - **updateNeighborhoodTrajectories_(ctx, cycle)**
   Reads: S.neighborhoodTrajectory, S.relocationPressureDeltas
   Writes: S.neighborhoodTrajectory, S.relocationPressureDeltas
+  Config: ctx.config.trajectoryCrimeBand
   Sheets: Neighborhood_Map
 
 - **emitTrajectoryHooks_(ctx, cycle, neighborhood, prevTrajectory, trajectory, momentum, pressure)**
@@ -2970,7 +2976,7 @@
 - **applyMigrationDrift_(ctx)**
   Reads: S.cityDynamics, S.economicMood, S.economicMoodDesc, S.economicRipples, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.manualMigrationInputs, S.neighborhoodEconomies, S.rngState, S.sportsCity, S.sportsSeason, S.weather, S.worldEvents
   Writes: S.economicMood, S.economicMoodDesc, S.migrationDrift, S.migrationDriftFactors, S.migrationEconomicLink, S.neighborhoodEconomies, S.neighborhoodEconomyFeedback, S.neighborhoodMigration, S.rngState
-  Config: ctx.config.enableMigrationEconomicFeedback, ctx.config.enableMigrationNeighborhoodEconomicFeedback, ctx.config.manualMigrationInputs, ctx.config.migrationEconomicFeedbackMaxDelta, ctx.config.migrationEconomicFeedbackScale, ctx.config.migrationNeighborhoodEconomicFeedbackMaxDelta, ctx.config.migrationNeighborhoodEconomicFeedbackScale, ctx.config.migrationPopulationFallback, ctx.config.rngSeed, ctx.config.rngState
+  Config: ctx.config.enableMigrationEconomicFeedback, ctx.config.enableMigrationNeighborhoodEconomicFeedback, ctx.config.manualMigrationInputs, ctx.config.migrationCrimeBand, ctx.config.migrationEconomicFeedbackMaxDelta, ctx.config.migrationEconomicFeedbackScale, ctx.config.migrationNeighborhoodEconomicFeedbackMaxDelta, ctx.config.migrationNeighborhoodEconomicFeedbackScale, ctx.config.migrationPopulationFallback, ctx.config.rngSeed, ctx.config.rngState
   Sheets: Neighborhood_Map, World_Population
   RNG: ctx.rng / safeRand_(ctx)
 
@@ -4886,4 +4892,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 179
-**Functions mapped:** 1772
+**Functions mapped:** 1774

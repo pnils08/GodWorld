@@ -147,7 +147,7 @@ function buildCtx(slRows, hhRows, rngFn, nmRows) {
     ss: mockSS(sheets),
     ledger: { headers: SL_HEADER.slice(), rows: slRows, dirty: false },
     summary: { cycleId: 200, storyHooks: [] },
-    config: { cycleCount: 200, hoodRentShare: 0.30, relocationMaxShare: 0.05, dialFrictionRentBurden: 50 }, // engine.160 rent share; engine.161 the stampede guard
+    config: { cycleCount: 200, hoodRentShare: 0.30, relocationMaxShare: 0.05, dialFrictionRentBurden: 50, trajectoryCrimeBand: 0.05 }, // engine.356 band as seeded; engine.160 rent share; engine.161 the stampede guard
     rng: rngFn,
     now: '2041-06-01T00:00:00.000Z',
     _sheets: sheets
@@ -247,7 +247,7 @@ console.log('A2d savings buffer suppresses burden risk');
       Household_Ledger: mockSheet([HH2.slice(), hhRow])
     };
     return { ss: mockSS(sheets), ledger: { headers: SL_HEADER.slice(), rows: sl, dirty: false },
-      summary: { cycleId: 200, storyHooks: [] }, config: { cycleCount: 200, hoodRentShare: 0.30, relocationMaxShare: 0.05, dialFrictionRentBurden: 50 }, rng: () => 0.99, now: 'x', _sheets: sheets };
+      summary: { cycleId: 200, storyHooks: [] }, config: { cycleCount: 200, hoodRentShare: 0.30, relocationMaxShare: 0.05, dialFrictionRentBurden: 50, trajectoryCrimeBand: 0.05 }, rng: () => 0.99, now: 'x', _sheets: sheets };
   };
   const ctxA = mk(slA, mkHH('HH-B1', 'POP-5', 0));
   const ctxB = mk(slB, mkHH('HH-B2', 'POP-6', 2600 * 12));

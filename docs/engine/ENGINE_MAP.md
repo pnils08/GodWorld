@@ -193,7 +193,7 @@
 | Step | Function | File | Purpose |
 |------|----------|------|---------|
 | 7-CityEvents | `buildCityEvents_()` | phase04-events/buildCityEvents.js | City-level event compilation. **SETS** `S.cityEvents` |
-| 7-Nightlife | `buildNightlife_()` | phase07-evening-media/buildNightLife.js | Nightlife scene generation. **SETS** `S.nightlife`, `S.nightlifeVolume` |
+| 7-Nightlife | `buildNightlife_()` | phase07-evening-media/buildNightLife.js | Nightlife scene generation. engine.356 (2026-11-21, repo — not on PROD at stage 68): the spots are a weighted draw over `Business_Ledger` nightlife rows (`buildEveningFoodIndex_`), leaned by hood; no name list left in the file. **SETS** `S.nightlife`, `S.nightlifeVolume` |
 | 7-Sports | `buildEveningSportsAndStreaming_()` | phase07-evening-media/sportsStreaming.js | Feed-driven S.eveningSports from sportsFeedEntries + streaming trends (v3.0) |
 | 7-Food | `buildEveningFood_()` | phase07-evening-media/buildEveningFood.js | Restaurant/food scene events. v2.5 (engine.134): every name is a live `Business_Ledger` food/nightlife/quick-service row (fail-soft read); calendar/sports/mood bias the weighted draw by hood (`S.neighborhoodState` employerCharacter, `S.sportsZones`). Reads `S.nightlifeVolume` |
 | 7-Famous | `buildEveningFamous_()` | phase07-evening-media/buildEveningFamous.js | Celebrity/famous citizen sightings. Reads `S.eveningSports` |
@@ -229,7 +229,7 @@
 | 9-DigestSummary | `applyCompressedDigestSummary_()` | phase09-digest/applyCompressionDigestSummary.js | Compress cycle data for summary |
 | 9-CompressLifeHistory | `compressLifeHistory_()` | utilities/compressLifeHistory.js | LifeHistory → TraitProfile compression (v1.5) |
 | 9-FinalizePopulation | `finalizeWorldPopulation_()` | phase03-population/finalizeWorldPopulation.js | Lock population numbers |
-| 9-EveningSnapshot | `snapshotEveningForCarryForward_()` | phase09-digest/finalizeCycleState.js | Snapshot evening data for next cycle's citizen events. **S116** |
+| 9-EveningSnapshot | `snapshotEveningForCarryForward_()` | phase09-digest/finalizeCycleState.js | Snapshot evening data for next cycle's citizen events. **S116**. engine.356 (PROD stage 67): also carries the night's restaurants, fast food, night spots (name, hood, BIZ_ID), TV titles, films, the sports show and sightings (`eveningCarryPlaces_`, `eveningCarryTitles_`); read by `previousEveningPool_` |
 | 9-FinalizeCycleState | `finalizeCycleState_()` | phase09-digest/finalizeCycleState.js | Lock cycle state |
 | 9/10-CycleState (carry) | `savePreviousCycleState_()` → `compactNeighborhoodEconomies_()` · `compactActivityObservations_(S)` · `compactCityDynamicsCarrier_(S)` · `compactRelocationFlow_(S)` | phase09-digest/finalizeCycleState.js | `PREV_CYCLE_STATE_JSON` (9 KB prop cap, engine.223 guard) + own keys `PREV_HOOD_ECON_JSON` (219) and `PREV_ACTIVITY_OBS_JSON` (228b: this Cycle's real end-of-Cycle counts appended to the carried history, ≤12 entries); S502 own keys `PREV_CITY_DYN_JSON` (195), `PREV_RELOC_FLOW_JSON` (249) |
 

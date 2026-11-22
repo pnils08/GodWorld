@@ -116,3 +116,4 @@ The class is decided per **unit group** (`contractSeedUnit_`, engine.334), so a 
 - 2026-11-21 (engine-sheet) — Task 1 corrected (advisor): hook-ripple producers added; the tags and the initiative intensity already carry a rank; crime pipe-hood retracted as a merge case. Task 2 design written; codex plan review next.
 - 2026-11-21 (engine-sheet) — Task 1 done: producer scales table, crime pipe-hood merge case, SeedID readers listed. No code touched.
 - 2026-11-08 (engine-sheet) — Created on the builder's word from the engine.334 report; findings 1–4 from the engine.334 read-before, replay and G-ES14.
+- 2026-11-21 (engine-sheet, session close) — Row flipped to live-observing: Tasks 1–4 are on PROD since stage 63 (pushed without a bench on the builder's order); Task 5's read is the first live fire, C117.

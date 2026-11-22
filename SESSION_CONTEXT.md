@@ -4,4 +4,4 @@
 
 **NEXT[research-build]:** engine.350 → Task 16 (faith rows) is a plan, unbuilt; nothing builds until he says what faith rows should do. Live tab rows 211 and 166: keep or revert is his word. Hold: the TERMINAL.md standing-go line still says sandbox fires need no ask — his unlock needed to change it (test guard back, a07c85268). Push held.
 
-**NEXT[engine-sheet]:** engine.356 → read the plan's STATE AT HANDOFF; PROD stage 68 has two known defects, fixes and ledger night spots sit in the repo. Next: fold agy's second read (output/antigravity/2026-11-21-review-e356-night-spots-from-the-ledger.md). Hold: no PROD push without his word; no sandbox, no tests (his block).
+**NEXT[engine-sheet]:** engine.356 → read the plan's STATE AT HANDOFF, then fold agy's second read (output/antigravity/2026-11-21-review-e356-night-spots-from-the-ledger.md). PROD stages 66–68 pushed this session, not smoke-tested; first fire C117; stage 68 has 2 known defects. Hold: no PROD push without his word; no sandbox, no tests (his block).

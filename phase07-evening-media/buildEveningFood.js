@@ -79,7 +79,16 @@ function buildEveningFood_(ctx) {
   // (v2.4 concatenated pool copies and then deduped by name, which cancelled
   // every lean it thought it was applying.)
   // ═══════════════════════════════════════════════════════════════════════════
-  var candidates = dedupeByName_(index.restaurants);
+  // engine.356 (agy read 2026-11-21, finding 1): a place tonight's night spots already took is not also
+  // tonight's dinner. Phase7-Nightlife runs first and draws from the same ledger rows; a row that is both
+  // (Sports Bar & Dining) or the First Friday / busy-night nightlife add could otherwise land in both,
+  // doubling its seeds and its weight in the citizens' last-night lines.
+  var nightTaken = {};
+  var nightSpotNames = (S.nightlife && S.nightlife.spots) || [];
+  for (var nt = 0; nt < nightSpotNames.length; nt++) nightTaken[nightSpotNames[nt]] = true;
+  var candidates = [];
+  var foodRows = dedupeByName_(index.restaurants);
+  for (var fr = 0; fr < foodRows.length; fr++) if (!nightTaken[foodRows[fr].name]) candidates.push(foodRows[fr]);
   var weight = {};
   for (var c = 0; c < candidates.length; c++) weight[candidates[c].name] = 1;
   var lean = function(hoods, amount) {
@@ -90,7 +99,7 @@ function buildEveningFood_(ctx) {
   var addNightlife = function() {
     var extra = dedupeByName_(index.nightlife);
     for (var n = 0; n < extra.length; n++) {
-      if (weight[extra[n].name] === undefined) { candidates.push(extra[n]); weight[extra[n].name] = 1; }
+      if (weight[extra[n].name] === undefined && !nightTaken[extra[n].name]) { candidates.push(extra[n]); weight[extra[n].name] = 1; }
     }
   };
 
@@ -196,6 +205,7 @@ function buildEveningFoodIndex_(ctx) {
   var FAST_RE = /fast food|quick service/i;
   var NIGHT_RE = /nightlife|\bbar\b|lounge|club|hospitality/i;
   var FOOD_RE = /restaurant|dining|cafe|café|food|bakery|beverage|market/i;
+  var raw = [];
   try {
     var bs = ctx && ctx.ss && typeof ctx.ss.getSheetByName === 'function' ? ctx.ss.getSheetByName('Business_Ledger') : null;
     if (!bs || bs.getLastRow() <= 1) return out;
@@ -211,13 +221,24 @@ function buildEveningFoodIndex_(ctx) {
       var hood = String(vv[r][iHood] || '').trim();
       var sector = String(vv[r][iSector] || '').trim();
       if (!name || !hood || !sector) continue;
-      var row = { bizId: iId >= 0 ? String(vv[r][iId] || '') : '', name: name, neighborhood: hood, sector: sector };
-      if (FAST_RE.test(sector)) { out.fast.push(row); continue; }
-      if (NIGHT_RE.test(sector)) out.nightlife.push(row);
-      if (FOOD_RE.test(sector)) out.restaurants.push(row);
+      raw.push({ bizId: iId >= 0 ? String(vv[r][iId] || '') : '', name: name, neighborhood: hood, sector: sector });
     }
   } catch (e) {
     try { Logger.log('buildEveningFood_ ledger read failed (fail-soft): ' + e); } catch (ig) {}
+    return out;
+  }
+  // engine.356 (agy read 2026-11-21, finding 2): a row filed under a child area (Telegraph corridor,
+  // Brooklyn Basin, Old Oakland, Coliseum) is placed at its parent hood — builder ruling 2026-09-19, "a
+  // sub-area uses its parent hood's data", the fold commuteFlowEngine already makes. Under the raw label
+  // the place matched no hood: no lean, no crowd bump, its seed and texture line reached no hood, and no
+  // resident was ever local to it. A label that is no hood and no child (City-wide) keeps its own text.
+  // Outside the fail-soft read on purpose: an unseeded hood set throws (ADR-0016) to the phase guard.
+  for (var q = 0; q < raw.length; q++) {
+    var rowQ = raw[q];
+    rowQ.neighborhood = resolveHoodOrChild_(ctx, rowQ.neighborhood) || rowQ.neighborhood;
+    if (FAST_RE.test(rowQ.sector)) { out.fast.push(rowQ); continue; }
+    if (NIGHT_RE.test(rowQ.sector)) out.nightlife.push(rowQ);
+    if (FOOD_RE.test(rowQ.sector)) out.restaurants.push(rowQ);
   }
   return out;
 }

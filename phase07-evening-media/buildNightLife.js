@@ -112,9 +112,12 @@ function buildNightlife_(ctx) {
     var out = []; for (var i = 0; i < rows.length; i++) out.push(rows[i][0]); return out;
   }
 
-  var nightIndex = (typeof buildEveningFoodIndex_ === 'function') ? buildEveningFoodIndex_(ctx) : { nightlife: [] };
+  // The four helpers live in buildEveningFood.js (one flat Apps Script namespace). Called directly
+  // (agy read 2026-11-21, finding 3): a missing helper throws to the phase guard instead of quietly
+  // giving a night with no spot.
+  var nightIndex = buildEveningFoodIndex_(ctx);
   var nightRows = (nightIndex && nightIndex.nightlife) || [];
-  var candidates = (typeof dedupeByName_ === 'function') ? dedupeByName_(nightRows) : nightRows.slice();
+  var candidates = dedupeByName_(nightRows);
   var weight = {};
   for (var c = 0; c < candidates.length; c++) weight[candidates[c].name] = 1;
   var lean = function(hoods, amount) {
@@ -123,7 +126,7 @@ function buildNightlife_(ctx) {
       if (hoods.indexOf(candidates[r].neighborhood) !== -1) weight[candidates[r].name] += amount;
     }
   };
-  var artsHoods = (typeof eveningFoodHoodsByCharacter_ === 'function') ? eveningFoodHoodsByCharacter_(S, { arts: true, nightlife: true }) : [];
+  var artsHoods = eveningFoodHoodsByCharacter_(S, { arts: true, nightlife: true });
   var sportsHoods = (S.sportsZones && S.sportsZones.length) ? S.sportsZones.slice() : [];   // no zone on record, no lean
 
   if (isFirstFriday) lean(artsHoods, 2);
@@ -211,9 +214,7 @@ function buildNightlife_(ctx) {
 
   // engine.356: a weighted draw without replacement over the ledger's nightlife rows (the food builder's
   // helper). Each spot is { bizId, name, neighborhood, sector } — every reader takes name and neighborhood.
-  var spots = (typeof weightedDrawWithoutReplacement_ === 'function')
-    ? weightedDrawWithoutReplacement_(candidates, weight, count, rng)
-    : candidates.slice(0, count);
+  var spots = weightedDrawWithoutReplacement_(candidates, weight, count, rng);
 
   // ═══════════════════════════════════════════════════════════════════════════
   // BUILD VIBE DESCRIPTION (v2.2 - calendar-aware)

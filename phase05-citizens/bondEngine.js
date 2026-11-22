@@ -2951,8 +2951,8 @@ function detectTriangleRivalries_(ctx) {
           nb.intensity = TRIANGLE_BIRTH_INTENSITY;
           var si = people[suitors[i]], sj = people[suitors[j]];
           // engine.201 Wave 2: the sting is guarded trust (warmth -1), not the romance line's warmth +1
-          if (si) appendBondLifeLine_(ctx, si.idx, 'TrustGuarded', 'there is someone else circling ' + ((people[popId] || {}).name || 'them') + ' — and it stings', cycle);
-          if (sj) appendBondLifeLine_(ctx, sj.idx, 'TrustGuarded', 'there is someone else circling ' + ((people[popId] || {}).name || 'them') + ' — and it stings', cycle);
+          if (si) appendBondLifeLine_(ctx, si.idx, 'TrustGuarded', 'there is someone else circling ' + ((people[popId] || {}).name || 'them') + ' — and it stings', cycle, popId);   // engine.356: the person the line names rides as contactPopId
+          if (sj) appendBondLifeLine_(ctx, sj.idx, 'TrustGuarded', 'there is someone else circling ' + ((people[popId] || {}).name || 'them') + ' — and it stings', cycle, popId);
           Logger.log('P5 triangle rivalry: ' + suitors[i] + ' <-> ' + suitors[j] + ' over ' + popId);
         }
       }

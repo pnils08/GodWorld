@@ -3193,7 +3193,7 @@
 
 ### buildNightLife.js
 - **buildNightlife_(ctx)**
-  Reads: S.cityDynamics, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.neighborhoodDynamics, S.neighborhoodEconomies, S.season, S.sportsCity, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
+  Reads: S.cityDynamics, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.neighborhoodDynamics, S.neighborhoodEconomies, S.season, S.sportsCity, S.sportsSeason, S.sportsZones, S.weather, S.weatherMood, S.worldEvents
   Writes: S.nightlife, S.nightlifeVolume
   RNG: ctx.rng / safeRand_(ctx)
 

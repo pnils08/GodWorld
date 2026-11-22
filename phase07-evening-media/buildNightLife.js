@@ -5,6 +5,9 @@
  *
  * World-aware nightlife generator with GodWorld Calendar integration.
  *
+ * engine.356 (2026-11-21): the night's spots are drawn from Business_Ledger, not from name lists
+ * (builder: "The businesses should come from the ledger"). Volume, vibe and movement are unchanged.
+ *
  * v2.3 Changes:
  * - ES5 compatible (var instead of const/let, no arrow functions)
  * - Replaced spread operator with concat()
@@ -72,61 +75,23 @@ function buildNightlife_(ctx) {
   var sportsBand = (S.sportsCity && S.sportsCity.band) || "quiet";
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // NIGHTLIFE SPOT POOLS (Oakland - 12 neighborhoods)
+  // THE NIGHT'S SPOTS COME FROM THE LEDGER (engine.356)
   // ═══════════════════════════════════════════════════════════════════════════
-
-  var BARS = [
-    { name: "Blue Lantern Bar", neighborhood: "Jack London" },
-    { name: "Temple Lounge", neighborhood: "Downtown" },
-    { name: "Skybar", neighborhood: "Downtown" },
-    { name: "Bridge & Barrel", neighborhood: "Jack London" },
-    { name: "OakTown Social", neighborhood: "Temescal" },
-    { name: "Nightline Station", neighborhood: "West Oakland" },
-    { name: "Laurel Taproom", neighborhood: "Laurel" },
-    { name: "Rockridge Wine Bar", neighborhood: "Rockridge" },
-    { name: "Uptown Pour House", neighborhood: "Uptown" },
-    { name: "KONO Cocktails", neighborhood: "KONO" },
-    { name: "Dragon Gate Lounge", neighborhood: "Chinatown" },
-    { name: "Piedmont Pub", neighborhood: "Piedmont Ave" }
-  ];
-
-  var DANCE = [
-    { name: "Pulse District", neighborhood: "Downtown" },
-    { name: "Neon Harbor Club", neighborhood: "Jack London" },
-    { name: "Vibe Terrace", neighborhood: "Lake Merritt" },
-    { name: "Rhythm Deck", neighborhood: "West Oakland" },
-    { name: "Uptown Dance Hall", neighborhood: "Uptown" }
-  ];
-
-  var CHILL = [
-    { name: "Quiet Harbor Wine Room", neighborhood: "Jack London" },
-    { name: "Twilight Teahouse", neighborhood: "Temescal" },
-    { name: "Cozy Wick Lounge", neighborhood: "Rockridge" },
-    { name: "Lakeside Whisper Bar", neighborhood: "Lake Merritt" },
-    { name: "Piedmont Parlor", neighborhood: "Piedmont Ave" }
-  ];
-
-  var RAIN_SHELTER = [
-    { name: "Lantern Basement Bar", neighborhood: "Downtown" },
-    { name: "Underglow Lounge", neighborhood: "Jack London" },
-    { name: "Storm Shelter Pub", neighborhood: "West Oakland" }
-  ];
-
-  var FOG_SPOTS = [
-    { name: "Misty Dockside Lounge", neighborhood: "Jack London" },
-    { name: "Haze Bar", neighborhood: "West Oakland" }
-  ];
-
-  // engine.240 (2026-09-19, SIM_DOCTRINE §17): the chaos / upscale / budget venues were pinned to
-  // 2020s Oakland — the chaos and budget bars always in Downtown / Fruitvale / West Oakland, the
-  // upscale rooms always in Lake Merritt / Rockridge / Jack London / Uptown. The venues open where
-  // the condition is: chaos where this cycle's world events are, upscale in the strongest economies,
-  // budget in the weakest (S.neighborhoodEconomies, Phase 6). No hood carries it → no venue.
-  function placeVenues_(names, hoods) {
-    var out = [];
-    for (var i = 0; i < names.length && i < hoods.length; i++) out.push({ name: names[i], neighborhood: hoods[i] });
-    return out;
-  }
+  // Builder 2026-11-21: "The businesses should come from the ledger". Until this cut every night spot
+  // was a name from thirteen lists written into this file in January (BARS, DANCE, CHILL, RAIN_SHELTER,
+  // FOG_SPOTS, LATE_NIGHT, the holiday / First Friday / Creation Day / sports lists, and the UPSCALE /
+  // BUDGET / chaos names engine.240 placed on hoods) — most of them not Business_Ledger rows — while the
+  // ledger's own nightlife businesses were never read here. Now the candidates are the ledger's nightlife
+  // rows (buildEveningFoodIndex_: Sector says nightlife / bar / lounge / club / hospitality), one per
+  // name, each at weight 1. A condition that used to add a list now leans the draw toward the HOODS that
+  // condition is about, the way buildEveningFood_ leans its restaurants, with the same amounts where the
+  // condition is the same (First Friday +2 on arts hoods, culture +1, the sports band +3 / +2 / +1 on the
+  // sports hoods). engine.240's "the venue opens where the condition is" becomes +1 on those hoods' real
+  // businesses: the three hoods with the most world events on a chaos night, the four strongest hood
+  // economies in a strong economy, the three weakest in a weak one, the busiest public space.
+  // Dropped with the lists, because the ledger holds no fact for them: venue kinds by season and weather
+  // (dance / chill / rain / fog), holiday-themed venues, Creation Day and community venues, the
+  // late-night list. A night the ledger read fails, or holds no nightlife row, has no named spot.
   function econRank_(dir) {
     var econ = S.neighborhoodEconomies || {}, rows = [];
     for (var h in econ) if (econ.hasOwnProperty(h) && econ[h] && isFinite(Number(econ[h].mood))) rows.push([h, Number(econ[h].mood)]);
@@ -140,203 +105,36 @@ function buildNightlife_(ctx) {
     rows.sort(function(a, b) { return b[1] - a[1]; });
     var out = []; for (var j = 0; j < rows.length; j++) out.push(rows[j][0]); return out;
   }
-  var CHAOS_SPOTS = placeVenues_(["Civic Watch Patio", "Neighborhood Response Hub", "Community Pulse Tavern"], chaosHoods_());
-  var UPSCALE = placeVenues_(["The Members' Club", "The Grand Oak", "The Gilded Room", "The Elite Room"], econRank_(1));
-  var BUDGET = placeVenues_(["Dive & Dash", "Dollar Drafts", "The Cheap Seat"], econRank_(-1));
-
-  var LATE_NIGHT = [
-    { name: "After Hours Oakland", neighborhood: "Downtown" },
-    { name: "3AM Club", neighborhood: "Jack London" },
-    { name: "Night Owl Den", neighborhood: "Temescal" },
-    { name: "Uptown Insomniac", neighborhood: "Uptown" }
-  ];
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // HOLIDAY NIGHTLIFE POOLS (v2.2)
-  // ═══════════════════════════════════════════════════════════════════════════
-
-  var NEW_YEARS_EVE_SPOTS = [
-    { name: "Countdown Club", neighborhood: "Downtown" },
-    { name: "Midnight Toast Bar", neighborhood: "Jack London" },
-    { name: "New Year's Terrace", neighborhood: "Lake Merritt" },
-    { name: "Ball Drop Lounge", neighborhood: "Uptown" }
-  ];
-
-  var HOLIDAY_SPOTS = [
-    { name: "Holiday Spirits Bar", neighborhood: "Downtown" },
-    { name: "Festive Fireside", neighborhood: "Rockridge" },
-    { name: "Winter Wonderland Lounge", neighborhood: "Temescal" }
-  ];
-
-
-
-
-  var HALLOWEEN_SPOTS = [
-    { name: "Haunted House Bar", neighborhood: "Jack London" },
-    { name: "Costume Club", neighborhood: "Downtown" },
-    { name: "Spooky Spirits Lounge", neighborhood: "Temescal" },
-    { name: "Monster Mash Nightclub", neighborhood: "Uptown" }
-  ];
-
-
-
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // FIRST FRIDAY NIGHTLIFE POOLS (v2.2)
-  // ═══════════════════════════════════════════════════════════════════════════
-
-  var FIRST_FRIDAY_SPOTS = [
-    { name: "Gallery Night Lounge", neighborhood: "Uptown" },
-    { name: "Art Walk Bar", neighborhood: "KONO" },
-    { name: "Canvas Club", neighborhood: "Temescal" },
-    { name: "First Friday Social", neighborhood: "Downtown" },
-    { name: "Creative Cocktails", neighborhood: "Jack London" }
-  ];
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // CREATION DAY NIGHTLIFE POOLS (v2.2)
-  // ═══════════════════════════════════════════════════════════════════════════
-
-  var CREATION_DAY_SPOTS = [
-    { name: "Founders Pub", neighborhood: "Downtown" },
-    { name: "Oakland Roots Bar", neighborhood: "West Oakland" },
-    { name: "Heritage Tavern", neighborhood: "Lake Merritt" }
-  ];
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // SPORTS SEASON NIGHTLIFE POOLS (v2.2)
-  // ═══════════════════════════════════════════════════════════════════════════
-
-  var SPORTS_BARS = [
-    { name: "Green & Gold Tavern", neighborhood: "Jack London" },
-    { name: "Stadium Sports Bar", neighborhood: "Jack London" },
-    { name: "Ninth Inning Pub", neighborhood: "Downtown" },
-    { name: "Playoff Central", neighborhood: "Jack London" }
-  ];
-
-  var CHAMPIONSHIP_SPOTS = [
-    { name: "Championship Watch Party", neighborhood: "Jack London" },
-    { name: "Title Town Tavern", neighborhood: "Downtown" },
-    { name: "Victory Lounge", neighborhood: "Lake Merritt" }
-  ];
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // BUILD DYNAMIC NIGHTLIFE POOL
-  // ═══════════════════════════════════════════════════════════════════════════
-
-  var pool = [].concat(BARS);
-
-  // ───────────────────────────────────────────────────────────────────────────
-  // HOLIDAY SPOTS (v2.2)
-  // ───────────────────────────────────────────────────────────────────────────
-
-  if (holiday === "NewYearsEve") {
-    pool = pool.concat(NEW_YEARS_EVE_SPOTS, NEW_YEARS_EVE_SPOTS, DANCE, LATE_NIGHT);
-  }
-  if (holiday === "Holiday" || holiday === "NewYear") {
-    pool = pool.concat(HOLIDAY_SPOTS);
-  }
-  if (holiday === "Halloween") {
-    pool = pool.concat(HALLOWEEN_SPOTS, HALLOWEEN_SPOTS, LATE_NIGHT);
+  function publicSpaceHoods_() {
+    var nd = S.neighborhoodDynamics || {}, rows = [];
+    for (var h in nd) if (nd.hasOwnProperty(h) && nd[h] && isFinite(Number(nd[h].publicSpaces))) rows.push([h, Number(nd[h].publicSpaces)]);
+    rows.sort(function(a, b) { return b[1] - a[1]; });
+    var out = []; for (var i = 0; i < rows.length; i++) out.push(rows[i][0]); return out;
   }
 
-  // ───────────────────────────────────────────────────────────────────────────
-  // FIRST FRIDAY (v2.2)
-  // ───────────────────────────────────────────────────────────────────────────
-  if (isFirstFriday) {
-    pool = pool.concat(FIRST_FRIDAY_SPOTS, FIRST_FRIDAY_SPOTS, DANCE);
-  }
-
-  // ───────────────────────────────────────────────────────────────────────────
-  // CREATION DAY (v2.2)
-  // ───────────────────────────────────────────────────────────────────────────
-  if (isCreationDay) {
-    pool = pool.concat(CREATION_DAY_SPOTS, CREATION_DAY_SPOTS);
-  }
-
-  // ───────────────────────────────────────────────────────────────────────────
-  // SPORTS SEASON (v2.2)
-  // ───────────────────────────────────────────────────────────────────────────
-  if (sportsSeason === "championship") {
-    pool = pool.concat(CHAMPIONSHIP_SPOTS, CHAMPIONSHIP_SPOTS, SPORTS_BARS);
-  } else if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
-    pool = pool.concat(SPORTS_BARS, SPORTS_BARS);
-  } else if (sportsSeason === "late-season") {
-    pool = pool.concat(SPORTS_BARS);
-  }
-
-  // ───────────────────────────────────────────────────────────────────────────
-  // CULTURAL ACTIVITY (v2.2)
-  // ───────────────────────────────────────────────────────────────────────────
-  if (culturalActivity >= 1.4) {
-    pool = pool.concat(FIRST_FRIDAY_SPOTS, DANCE);
-  }
-
-  // ───────────────────────────────────────────────────────────────────────────
-  // COMMUNITY ENGAGEMENT (v2.2)
-  // ───────────────────────────────────────────────────────────────────────────
-  if (communityEngagement >= 1.4) {
-    pool = pool.concat(CREATION_DAY_SPOTS);
-  }
-
-  // ───────────────────────────────────────────────────────────────────────────
-  // SEASON (if no holiday override)
-  // ───────────────────────────────────────────────────────────────────────────
-  if (holiday === "none") {
-    if (season === "Summer") pool = pool.concat(DANCE);
-    if (season === "Winter") pool = pool.concat(CHILL);
-    if (season === "Fall") pool = pool.concat(CHILL);
-  }
-
-  // ───────────────────────────────────────────────────────────────────────────
-  // WEATHER
-  // ───────────────────────────────────────────────────────────────────────────
-  if (weather.type === "fog") {
-    pool = pool.concat(FOG_SPOTS);
-  } else if (weather.impact >= 1.3 || weather.type === "rain") {
-    pool = pool.concat(RAIN_SHELTER);
-  }
-
-  // Weather mood
-  if (weatherMood.primaryMood === 'cozy') pool = pool.concat(CHILL);
-  if (weatherMood.perfectWeather && holiday === "none") pool = pool.concat(DANCE);
-
-  // ───────────────────────────────────────────────────────────────────────────
-  // CHAOS
-  // ───────────────────────────────────────────────────────────────────────────
-  if (chaos.length >= 3) pool = pool.concat(CHAOS_SPOTS);
-
-  // ───────────────────────────────────────────────────────────────────────────
-  // ECONOMIC MOOD
-  // ───────────────────────────────────────────────────────────────────────────
-  if (econMood >= 65) pool = pool.concat(UPSCALE);
-  if (econMood <= 35) pool = pool.concat(BUDGET);
-
-  // ───────────────────────────────────────────────────────────────────────────
-  // PUBLIC SPACE
-  // ───────────────────────────────────────────────────────────────────────────
-  if (publicSpace >= 1.3) {
-    // engine.240h: the plaza is wherever public space is busiest this cycle (was a Lake Merritt literal)
-    var plazaHoods = placeVenues_(["Open-Air Night Plaza"], (function() {
-      var nd = S.neighborhoodDynamics || {}, rows = [];
-      for (var h in nd) if (nd.hasOwnProperty(h) && nd[h] && isFinite(Number(nd[h].publicSpaces))) rows.push([h, Number(nd[h].publicSpaces)]);
-      rows.sort(function(a, b) { return b[1] - a[1]; });
-      var out = []; for (var i = 0; i < rows.length; i++) out.push(rows[i][0]); return out;
-    })());
-    pool = pool.concat(plazaHoods);
-  }
-
-  // v2.3: ES5 deduplication (instead of Map)
-  var seen = {};
-  var uniquePool = [];
-  for (var i = 0; i < pool.length; i++) {
-    var spot = pool[i];
-    if (!seen[spot.name]) {
-      seen[spot.name] = true;
-      uniquePool.push(spot);
+  var nightIndex = (typeof buildEveningFoodIndex_ === 'function') ? buildEveningFoodIndex_(ctx) : { nightlife: [] };
+  var nightRows = (nightIndex && nightIndex.nightlife) || [];
+  var candidates = (typeof dedupeByName_ === 'function') ? dedupeByName_(nightRows) : nightRows.slice();
+  var weight = {};
+  for (var c = 0; c < candidates.length; c++) weight[candidates[c].name] = 1;
+  var lean = function(hoods, amount) {
+    if (!hoods || !hoods.length) return;
+    for (var r = 0; r < candidates.length; r++) {
+      if (hoods.indexOf(candidates[r].neighborhood) !== -1) weight[candidates[r].name] += amount;
     }
-  }
-  pool = uniquePool;
+  };
+  var artsHoods = (typeof eveningFoodHoodsByCharacter_ === 'function') ? eveningFoodHoodsByCharacter_(S, { arts: true, nightlife: true }) : [];
+  var sportsHoods = (S.sportsZones && S.sportsZones.length) ? S.sportsZones.slice() : [];   // no zone on record, no lean
+
+  if (isFirstFriday) lean(artsHoods, 2);
+  if (culturalActivity >= 1.4) lean(artsHoods, 1);
+  if (sportsBand === "top") lean(sportsHoods, 3);
+  else if (sportsBand === "high") lean(sportsHoods, 2);
+  else if (sportsBand === "elevated") lean(sportsHoods, 1);
+  if (chaos.length >= 3) lean(chaosHoods_().slice(0, 3), 1);
+  if (econMood >= 65) lean(econRank_(1).slice(0, 4), 1);
+  if (econMood <= 35) lean(econRank_(-1).slice(0, 3), 1);
+  if (publicSpace >= 1.3) lean(publicSpaceHoods_().slice(0, 1), 1);
 
   // ═══════════════════════════════════════════════════════════════════════════
   // DETERMINE NIGHTLIFE VOLUME (v2.2 - calendar-aware)
@@ -411,12 +209,11 @@ function buildNightlife_(ctx) {
   if (isFirstFriday) count = Math.max(count, 3);
   if (sportsBand === "top") count = Math.max(count, 3);
 
-  // Add late night spots for high volume
-  if (volume >= 8) pool = pool.concat(LATE_NIGHT);
-
-  var spots = typeof pickRandomSet_ === 'function'
-    ? pickRandomSet_(pool, count, rng)
-    : pool.sort(function() { return rng() - 0.5; }).slice(0, count);
+  // engine.356: a weighted draw without replacement over the ledger's nightlife rows (the food builder's
+  // helper). Each spot is { bizId, name, neighborhood, sector } — every reader takes name and neighborhood.
+  var spots = (typeof weightedDrawWithoutReplacement_ === 'function')
+    ? weightedDrawWithoutReplacement_(candidates, weight, count, rng)
+    : candidates.slice(0, count);
 
   // ═══════════════════════════════════════════════════════════════════════════
   // BUILD VIBE DESCRIPTION (v2.2 - calendar-aware)
@@ -508,34 +305,14 @@ function buildNightlife_(ctx) {
  * NIGHTLIFE REFERENCE
  * ============================================================================
  *
- * NEIGHBORHOODS (12):
- * - Temescal, Downtown, Fruitvale, Lake Merritt
- * - West Oakland, Laurel, Rockridge, Jack London
- * - Uptown, KONO, Chinatown, Piedmont Ave
- *
- * BASE POOLS:
- * - BARS (12), DANCE (5), CHILL (5)
- * - RAIN_SHELTER (3), FOG_SPOTS (2), CHAOS_SPOTS (3)
- * - UPSCALE (4), BUDGET (3), LATE_NIGHT (4)
- *
- * HOLIDAY POOLS (v2.2):
- *
- * | Holiday | Spots | Key Neighborhoods |
- * |---------|-------|-------------------|
- * | NewYearsEve | 4 | Downtown, Jack London, Lake Merritt, Uptown |
- * | Holiday | 3 | Downtown, Rockridge, Temescal |
- * | Halloween | 4 | Jack London, Downtown, Temescal, Uptown |
- *
- * FIRST FRIDAY (5 spots):
- * - Gallery Night Lounge (Uptown), Art Walk Bar (KONO), etc.
- *
- * CREATION DAY (3 spots):
- * - Founders Pub (Downtown), Oakland Roots Bar (West Oakland), etc.
- *
- * SPORTS SEASON:
- * - Championship: 3 championship + 4 sports bars
- * - Playoffs: 4 sports bars ×2
- * - Late-season/Opening Day: 4 sports bars
+ * SPOTS (engine.356, 2026-11-21): Business_Ledger rows whose Sector says nightlife / bar / lounge /
+ * club / hospitality (buildEveningFoodIndex_), one per name, weight 1, leaned by hood:
+ * - First Friday: arts / nightlife hoods +2 · cultural activity >= 1.4: +1
+ * - sports band top / high / elevated: the sports hoods +3 / +2 / +1
+ * - chaos night (3+ world events): the three hoods with the most +1
+ * - economy >= 65: the four strongest hood economies +1 · <= 35: the three weakest +1
+ * - public space >= 1.3: the busiest hood +1
+ * No name list remains in this file.
  *
  * VOLUME MODIFIERS (v2.2):
  * - NewYearsEve: +4

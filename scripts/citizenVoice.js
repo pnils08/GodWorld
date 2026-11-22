@@ -103,15 +103,25 @@ async function readStdin() {
 
 async function generate(system, user, maxTokens, temperature, model) {
   const selectedModel = model || DEFAULT_MODEL;
-  const r = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-    method: 'POST',
-    headers: { Authorization: 'Bearer ' + process.env.OPENROUTER_API_KEY, 'Content-Type': 'application/json', 'HTTP-Referer': 'https://godworld.local' },
-    body: JSON.stringify({ model: selectedModel, max_tokens: maxTokens,
-      ...(/^deepseek\/deepseek-v4/.test(selectedModel) ? { reasoning: { enabled: false } } : {}), // builder 2026-10-12
-      temperature: temperature == null ? 0.85 : temperature,
-      messages: [{ role: 'system', content: system }, { role: 'user', content: user }] }),
-  });
-  const j = await r.json();
+  // A provider that is busy (429) or down (5xx) refuses before anything is generated, so a retry can double nothing.
+  // 2026-11-22: llama-4-maverick flapped 503/429 upstream and four of four interviews were lost in one wake.
+  const BUSY_WAITS_MS = [5000, 15000];
+  let j;
+  for (let attempt = 0; ; attempt++) {
+    const r = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers: { Authorization: 'Bearer ' + process.env.OPENROUTER_API_KEY, 'Content-Type': 'application/json', 'HTTP-Referer': 'https://godworld.local' },
+      body: JSON.stringify({ model: selectedModel, max_tokens: maxTokens,
+        ...(/^deepseek\/deepseek-v4/.test(selectedModel) ? { reasoning: { enabled: false } } : {}), // builder 2026-10-12
+        temperature: temperature == null ? 0.85 : temperature,
+        messages: [{ role: 'system', content: system }, { role: 'user', content: user }] }),
+    });
+    j = await r.json().catch(() => ({ error: { code: r.status, message: 'unreadable reply (HTTP ' + r.status + ')' } }));
+    const code = Number(j && j.error && j.error.code);
+    if (!(code === 429 || code >= 500) || attempt >= BUSY_WAITS_MS.length) break;
+    console.error('[voice] provider busy (' + code + ') — retry ' + (attempt + 1) + ' in ' + BUSY_WAITS_MS[attempt] / 1000 + 's');
+    await new Promise((res) => setTimeout(res, BUSY_WAITS_MS[attempt]));
+  }
   if (j.error) throw new Error('voice: ' + (j.error.message || JSON.stringify(j.error)));
   const u = j.usage || {};
   usageTotals.calls += 1;

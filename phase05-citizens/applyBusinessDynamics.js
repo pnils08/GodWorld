@@ -81,6 +81,17 @@ var BIZ_CLASS_MINT = {
   education:    { emp: 15, sal: 62000,  rev: 1200000, growth: 2 },
   'default':    { emp: 6,  sal: 45000,  rev: 500000,  growth: 2 }
 };
+// engine.356 — where each class of business sits in this city, the anchor a business's hood-set
+// resting level is measured from (resting = this + hood score × bizHoodSpan). Held fixed: the median
+// Growth_Rate of each class's hood-following businesses (not City-wide, not an institution, not a sports
+// franchise or stadium) on the C116 ledger, with the four sub-area rows at their parent hood and Civis
+// Systems at its stored 6.16 (the sheet displays it as 616%). These are the numbers the builder approved
+// the change on (2026-11-21). Not the mint table above: that is a new business's start (2–8) and anchoring
+// on it deflated half the city in the offline run.
+var BIZ_CLASS_MIDDLE = {
+  arts: 5.14, construction: 9.02, 'default': 4.03, education: 0.67, faith: 3.99,
+  food: 5.52, health: 2.42, professional: 6.42, retail: 4.11, tech: 11.59
+};
 // Sector mint medians — the closure floor's denominator (derived, one source)
 var BIZ_CLASS_MINT_REVENUE = (function () { var o = {}; for (var k in BIZ_CLASS_MINT) if (BIZ_CLASS_MINT.hasOwnProperty(k)) o[k] = BIZ_CLASS_MINT[k].rev; return o; })();
 
@@ -443,8 +454,8 @@ function bizDriftOne_(cfg, biz, prevState, inputs, cycle) {
   ev = bizClamp_(ev, -cfg.bizEventCap, cfg.bizEventCap);
 
   // 2. the hood — engine.356 (builder 2026-11-21: "their success should stem from how the hood
-  // performs"). A business rests at its class's middle in this city (the median Growth_Rate of the
-  // businesses of its class that follow a hood, this Cycle) plus the hood's performance score × span,
+  // performs"). A business rests at its class's middle in this city (BIZ_CLASS_MIDDLE, held at
+  // the C116 medians — a fixed anchor) plus the hood's performance score × span,
   // and closes bizHoodPull of the gap each Cycle, capped ±bizHoodMaxPp. A resting level, not a push:
   // Growth_Rate is a level carried week to week, so a standing push would walk every business in a
   // strong hood to the ceiling and every one in a weak hood to the floor. Measured on the shock-free
@@ -656,17 +667,11 @@ function applyBusinessDynamics_(ctx) {
     var hScore = hoodScores[String(rowF[iHood] || '').trim()];
     return hScore !== undefined && hScore !== null;                         // City-wide, or a hood with no profile: no term
   };
-  var classMiddle = (function() {
-    var byCls = {}, mids = {};
-    for (var rm = 1; rm < bl.length; rm++) {
-      var idM = String(bl[rm][iId] || '').trim();
-      if (!idM || (prev[idM] && prev[idM][2]) || !followsHood(bl[rm], idM)) continue;   // closed rows wind down at the floor
-      var cM = bizSectorClass_(bl[rm][iSec]);
-      (byCls[cM] = byCls[cM] || []).push(bizParseGrowth_(bl[rm][iGrow]));
-    }
-    for (var kc in byCls) if (byCls.hasOwnProperty(kc)) mids[kc] = bizMedian_(byCls[kc]);
-    return mids;
-  })();
+  // The class middle is HELD (BIZ_CLASS_MIDDLE), never re-taken from this Cycle's rows: agy read
+  // 2026-11-21 — a median of the same businesses being pulled walks every class whose businesses sit
+  // mostly in strong (tech) or weak (schools) hoods to the ceiling or the floor, ~0.2 × span × the class's
+  // median hood score a Cycle, with no anchor.
+  var classMiddle = BIZ_CLASS_MIDDLE;
   for (var r = 1; r < bl.length; r++) {
     var row = bl[r];
     var id = String(row[iId] || '').trim();

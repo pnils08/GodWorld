@@ -4,4 +4,4 @@
 
 **NEXT[research-build]:** engine.350 → Task 16 re-ruled (faith like school: one generic church per hood; plan tail). Next: read the Faith_Organizations readers, bring the exact cut. Unruled: hood congregation size; tab rows 211, 166. Hold: no build or tab write without his go; TERMINAL.md standing-go line needs his unlock. Push held.
 
-**NEXT[engine-sheet]:** no build in hand — engine.356 is live and waits on its fire. Open, his terms: the growth half of his ruling (a business's success from its hood). Push held (git): research-build commits stacked.
+**NEXT[engine-sheet]:** no build in hand; the live job waits on its fire (§2). Open, his terms: the growth half of his ruling (a business's success from its hood). Push held (git): research-build commits stacked.

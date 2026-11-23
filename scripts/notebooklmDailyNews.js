@@ -992,7 +992,7 @@ function ensureDailySources(notebookId, sources, sourceDir, existingSources, pre
 // not initiative plumbing. Drops the world-summary sections that are engine
 // diagnostics or civic mechanism (approval ledger, initiative/approval ripples,
 // audit findings, the city-hall placeholder) before the text reaches the pack.
-const DAILY_NOISE_H2 = /^## (Approval Ratings|Engine Review Findings|Civic Decisions)\b/;
+const DAILY_NOISE_H2 = /^## (Approval Ratings|Engine Review Findings|Civis Systems Readings|Civic Decisions)\b/;   // Civis Systems Readings = the section's name since 2026-11-23
 const DAILY_NOISE_H3 = /^### (initiative-implementation|approval-shift)\b/;
 const DAILY_NOISE_LINE = /^- fold-applied\/(initiative-implementation|approval-shift)\b/;
 

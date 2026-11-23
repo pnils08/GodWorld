@@ -71,7 +71,7 @@ Single Markdown file with these sections (codified in `scripts/buildWorldSummary
 6. World Events (severity + neighborhood from Riley_Digest)
 6b. Chaos Events (engine.11, T5.2) — one row per `Chaos_Cars` event for the current cycle (vehicle / dice outcome / TargetId as POPID or BIZ-ID, not name-resolved / metric / magnitude / floor-fired flag), plus a Narrative Seeds list for rows carrying a `ChaosNarrativeSeed`. `ConsequenceFloorFired=TRUE` marks the Tier-1 cascade row(s) — no separate scandal-only section, the flag column carries it. Empty tab or no rows this cycle → placeholder text, not an error.
 7. Three-Cycle Trends (current vs prev 2 cycles)
-8. Engine Review Findings (structured pattern fields from engine_audit JSON; no editorial gloss)
+8. Civis Systems Readings (renamed from Engine Review Findings 2026-11-23; structured pattern fields from engine_audit JSON; no editorial gloss, no file paths)
 9. Approval Ratings (filtered to MAYOR-* + COUNCIL-D* rows, sorted by OfficeId)
 10. Footer (script version + source citation)
 
@@ -110,7 +110,7 @@ Step 5 in the run-cycle chain (canonical order per `.claude/skills/run-cycle/SKI
 - Frame articles (`/sift` + `/write-edition`)
 - Check engine code (`/pre-mortem`)
 - Diagnose world state (`/engine-review`)
-- Editorialize engine findings — Engine Review Findings section renders structured pattern fields verbatim from `engine_audit_c{XX}.json`; no "editorial pivot" gloss
+- Editorialize engine findings — Civis Systems Readings section renders structured pattern fields verbatim from `engine_audit_c{XX}.json`; no "editorial pivot" gloss
 
 ## Sources
 

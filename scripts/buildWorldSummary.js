@@ -585,7 +585,9 @@ function emitThreeCycleTrends(currRow, prev1Row, prev2Row) {
 }
 
 function emitEngineReviewFindings(cycle, auditJson) {
-  const lines = [`## Engine Review Findings (from \`output/engine_audit_c${cycle}.json\`)`, ''];
+  // C117 gap log (builder 2026-11-22/23): the engine's in-world face is Civis Systems — the section is its readings,
+  // with no pointer into the engine's own files (the medium-severity note below dropped its file path too).
+  const lines = [`## Civis Systems Readings (C${cycle})`, ''];
 
   const summary = auditJson.summary || {};
   // G-BWS5 (S246 ES-6): the severity total counts ALL patterns (improvement +
@@ -655,7 +657,7 @@ function emitEngineReviewFindings(cycle, auditJson) {
       lines.push(`| ${t} | ${n} |`);
     }
     lines.push('');
-    lines.push('_(Medium-severity patterns rendered as type-count table. For per-pattern detail consult `output/engine_review_c' + cycle + '.md` — that file is the LLM-assembled review and may carry editorial gloss not present in the source JSON.)_');
+    lines.push('_(Medium-severity readings rendered as a type-count table.)_');
     lines.push('');
   }
 

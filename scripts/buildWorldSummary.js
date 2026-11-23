@@ -1060,7 +1060,7 @@ function editDistance1_(a, b) {
 function resolveFeedNames_(namesUsed, notes, ctxLabel) {
   const empty = { popids: [], names: [] };
   const raw = String(namesUsed || '')
-    .split(/[,;]/)
+    .split(/[,;](?![^(]*\))/)   // outside brackets only: "Elias Varek (Owner, Civis Systems)" is one name (C117 G-EC43)
     .map(s => s.replace(/\([^)]*\)/g, '').replace(/\s+/g, ' ').trim())
     .filter(n => /^[A-Z]/.test(n) && n.split(' ').length >= 2);
   if (!raw.length) return empty;

@@ -254,7 +254,7 @@ async function main() {
         // A comma-separated token with 4+ words is the missing-comma shape. The
         // resolver would try the whole merged string and just say "unresolved";
         // naming the actual defect is what makes it a 5-second fix.
-        for (const tok of raw.split(/[,;]/)) {
+        for (const tok of raw.split(/[,;](?![^(]*\))/)) {   // outside brackets only (C117 G-EC43)
           const words = tok.replace(/\([^)]*\)/g, '').replace(/\s+/g, ' ').trim().split(' ').filter(Boolean);
           if (words.length >= 4 && words.filter(w => /^[A-Z]/.test(w)).length >= 3) {
             nameNotes.push(`${cell}: "${tok.trim()}" looks like TWO names with a missing comma`);

@@ -639,7 +639,11 @@ async function runPrep() {
     // pipeline.115 (builder 2026-11-22): the reading reaches the seat credited to
     // Civis Systems, the engine's in-world face ("We kind of mask our engine as
     // Elias Varek company system"), never as the engine speaking.
-    const flagNotes = flagged.map(p => 'Civis Systems\' readings flag this: ' + ailmentPerception(p));
+    // agy 2026-11-22 #4: a leftover-improvement measurement is the checker grading its own
+    // expectation, a Cycle late (C115→C116 at C117) — a remedy line, not a record fact; it stays off the seat.
+    const flagNotes = flagged
+      .filter(p => !(p.type === 'improvement' && p.evidence && p.evidence.fields && p.evidence.fields.expectedField))
+      .map(p => 'Civis Systems\' readings flag this: ' + ailmentPerception(p));
     // civic.29: the Sunday packet had the same blind spot as the weekday pack
     // (initFact() fix, same session) — budget was on the tracker but never
     // handed to the seat, so mayor_open_c104 invented "$412,000" and "$1.2
@@ -1458,7 +1462,7 @@ async function runDirective() {
     '=== INITIATIVE TRACKER (live) ===',
     ...trackerLines,
     '',
-    '=== ENGINE REVIEW HIGH READINGS (' + highs.length + ') — a reading, not a demand ===',
+    '=== CIVIS SYSTEMS HIGH READINGS (' + highs.length + ') — a reading, not a demand ===',   // pipeline.115
     ...highs,
     '',
     '=== CITY SUMMARY C' + cycle + ' ===',

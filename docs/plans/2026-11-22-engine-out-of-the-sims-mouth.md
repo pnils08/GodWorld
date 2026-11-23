@@ -51,6 +51,29 @@ pointers:
 2. Desk signal C118: entry counts per lane equal to a C118 rebuild of the old code; 0 checker-written angle/hookLine strings — proven by diff at the C118 fire.
 3. Reporter slices from Mon 2026-11-23: 0 `engine_audit` paths in civic-domain and firebrand; their fact lines unchanged — proven by the slice files.
 
+## Reviews reconciled
+
+| Review | Verdict | Pointer |
+|---|---|---|
+| agy diff read of `8230195fe` + `3f016a164` | SHIP-WITH-FIXES | `output/antigravity/2026-11-22-review-pipeline115.md` |
+
+### Agreed
+
+- #1 `loadJaxSlice` built on demand returned the raw slice (`buildJaxSlice.js` loadJaxSlice) — `buildJaxSlice` now returns the record-form slice to every consumer (fanout, desk run, file). Verified: C117 on both signals, 0 `engine_audit`, story.ref `Neighborhood_Map row(s) 10; finding C117-5`.
+- #2 incoherence contradiction: `aSrc`/`bSrc` from `patternBase` lost sheet + storyline, and `b` always said "no prior audit" — now `top.ref`, and `b` credits Civis and states the measurement only as it is.
+- #3 Trevor's C117 pick does change (agy is right; my scratch diff compared label text and read the change as wording). Old pick: finding C117-4 (Fruitvale mood/housing) won only because the checker's hook said "The transit initiative carrying Fruitvale has not advanced"; new pick: INIT-003 Fruitvale Transit Hub (a transit record). The commit message `3f016a164` overstates "identical"; the other five seats, stink ranking, fanout order and economic hold.
+- #4 the leftover-improvement measurement is the prior audit's C115→C116 number read at C117 as "since the last reading" — false (real C116→C117: −0.01 / −1.15 / +1.22). It is the checker grading its own expectation: off the seats (`cron-civic-run.js` flagNotes filter).
+- #5b Mara's directive header "ENGINE REVIEW HIGH READINGS" → "CIVIS SYSTEMS HIGH READINGS".
+
+### Needs proof
+
+- none.
+
+### New concepts
+
+- #5a Jax's agent rulebook tags claims `FACT(engine)` and asks for "Engine Returns" (`.claude/agents/freelance-firebrand/RULES.md:91,94,109`, `SKILL.md:32`) — an agent file; held for the builder's word (this row does not own it yet).
+- #5c world_summary §Engine Review Findings — already §Surfaced; held.
+
 ## Surfaced, not this job
 
 - The checker's own faults ("none" as a recurring issue, a stall filed as an improvement, one measurement filed twice) still reach seats, desks and Varek as findings: C117 gap log G-EC39, its own row.
@@ -60,6 +83,7 @@ pointers:
 
 ## Changelog
 
+- 2026-11-22 (engine-sheet) — agy SHIP-WITH-FIXES folded (§Reviews reconciled): Jax slice record-form for every consumer, incoherence source + Civis-true B line, the stale leftover-improvement number off the seats, Mara's header to Civis. Trevor's C117 pick changes (correcting `3f016a164`'s "identical").
 - 2026-11-22 (engine-sheet) — Builder: "We kind of mask our engine as Elias Varek company system so it doesn't come off as contaminant"; chose "Credit Civis Systems". Seat readings now read "Civis Systems' readings flag this: …", HIGH topics "Civis Systems reading — <hood>: <type>", the Mayor's pulse heading "Civis Systems readings this cycle".
 - 2026-11-22 (engine-sheet) — Built `8230195fe`; advisor fold `3f016a164`: one source form at the source and on read (C117 144/144), `framed` keeps picks identical (scratch-root diff), record-fact seat sentences, weekday-pack labels. agy brief sent.
 - 2026-11-22 (engine-sheet) — Created on the builder's word after the C117 run (gap log G-EC41); scope read from the C117 packets, desk signal and C116 slices.

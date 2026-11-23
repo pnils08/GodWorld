@@ -337,7 +337,6 @@ function buildContradiction(top, illnessRate, auditPattern, cycle) {
   if (auditPattern && auditPattern.type === 'incoherence') {
     const patternMatch = String(top.ref || '').match(/patterns\[(\d+)\]/i) || String(top.ref || '').match(/\bfinding C\d+-(\d+)\b/);
     if (!patternMatch) return null;
-    const patternBase = 'output/engine_audit_c' + cycle + '.json patterns[' + patternMatch[1] + ']';
     const fields = auditPattern.evidence && auditPattern.evidence.fields || {};
     const neighborhoods = (fields.contradicting || []).map(row => row && row.name).filter(Boolean);
     const initiative = fields.Name || 'The supplied Initiative';
@@ -348,10 +347,13 @@ function buildContradiction(top, illnessRate, auditPattern, cycle) {
     return {
       a: initiative + ' is listed as ' + phase + ', while Civis Systems flags readings in ' +
         scope + ' against ' + expected + '.',
-      b: 'The same Cycle ' + cycle + ' audit says no prior audit is available for comparison.',
+      // agy 2026-11-22 #2: say it only when it is true; Civis is the in-world measurer.
+      b: auditPattern.measurement && auditPattern.measurement.available === true
+        ? 'Civis Systems has an earlier reading of it on the record (' + String(auditPattern.measurement.verdict || 'compared').replace(/-/g, ' ') + ').'
+        : 'Civis Systems has no earlier reading of it to compare against.',
       frame: 'Civis flags a contradiction while its own comparison history is unavailable. What evidence supports the alert?',
-      aSrc: patternBase + '.evidence.fields',
-      bSrc: patternBase + '.measurement',
+      aSrc: top.ref,   // agy #2: the record form keeps sheet, rows and storyline
+      bSrc: top.ref,
       scopeHoods: neighborhoods,
       measurementAvailable: auditPattern.measurement && auditPattern.measurement.available === true,
     };
@@ -386,7 +388,13 @@ const FIREBRAND_APPROACH =
 /**
  * Build full Jax slice object for a cycle (disk artifacts only; no Sheets API).
  */
+// agy 2026-11-22 #1: every consumer (fanout in memory, loadJaxSlice on demand, the
+// written file) gets the record-form slice; the raw pattern ref is used only inside.
 function buildJaxSlice(cycle, opts) {
+  return toRecordRefs(buildJaxSliceRaw(cycle, opts));
+}
+
+function buildJaxSliceRaw(cycle, opts) {
   const o = opts || {};
   const root = o.root || ROOT;
   const scanner = require(path.join(__dirname, 'stink-scanner'));

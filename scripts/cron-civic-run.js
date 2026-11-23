@@ -345,7 +345,7 @@ function citywideDigest(sections, audit) {
   if (events) L.push('', '**What happened around town:**', events);
   const highs = audit.patterns.filter(p => p.severity === 'high');
   if (highs.length) {
-    L.push('', '**Flagged this cycle:**');
+    L.push('', '**Civis Systems readings this cycle:**');
     for (const p of highs) L.push('- ' + ailmentPerception(p));
   }
   return L.join('\n');
@@ -636,9 +636,10 @@ async function runPrep() {
     hotInits.push(init);
     const ownerRule = INITIATIVE_AGENT.find(r => r.re.test(init.name));
     const owner = ownerRule ? ownerRule.dir : null;
-    // pipeline.115 (builder 2026-11-22, narrow cut): the reading reaches the seat
-    // as the record's fact, never as the engine speaking.
-    const flagNotes = flagged.map(p => ailmentPerception(p));
+    // pipeline.115 (builder 2026-11-22): the reading reaches the seat credited to
+    // Civis Systems, the engine's in-world face ("We kind of mask our engine as
+    // Elias Varek company system"), never as the engine speaking.
+    const flagNotes = flagged.map(p => 'Civis Systems\' readings flag this: ' + ailmentPerception(p));
     // civic.29: the Sunday packet had the same blind spot as the weekday pack
     // (initFact() fix, same session) — budget was on the tracker but never
     // handed to the seat, so mayor_open_c104 invented "$412,000" and "$1.2
@@ -673,9 +674,9 @@ async function runPrep() {
   for (const p of audit.patterns.filter(p => p.severity === 'high')) {
     // civic.47 M1 item 12 (builder 2026-11-03): a program moves when its
     // deadlines call for it, so a stuck-initiative reading carries no demand.
-    // pipeline.115: titled by where it is and the record's own words, not "Engine review HIGH".
+    // pipeline.115: a Civis Systems reading, titled by where and the record's own words, not "Engine review HIGH".
     const titleWhere = ((p.affectedEntities && p.affectedEntities.neighborhoods) || []).join(', ') || 'Citywide';
-    const topic = { kind: 'ailment', title: titleWhere + ': ' + p.type.replace(/-/g, ' '), body: ailmentPerception(p) };
+    const topic = { kind: 'ailment', title: 'Civis Systems reading — ' + titleWhere + ': ' + p.type.replace(/-/g, ' '), body: ailmentPerception(p) };
     const sig = JSON.stringify((p.evidence && p.evidence.fields) || {});
     if (p.type !== 'ledger-completeness') {
       if (!isOneWeekDecay(p, cycle)) {

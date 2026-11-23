@@ -60,5 +60,6 @@ pointers:
 
 ## Changelog
 
+- 2026-11-22 (engine-sheet) — Builder: "We kind of mask our engine as Elias Varek company system so it doesn't come off as contaminant"; chose "Credit Civis Systems". Seat readings now read "Civis Systems' readings flag this: …", HIGH topics "Civis Systems reading — <hood>: <type>", the Mayor's pulse heading "Civis Systems readings this cycle".
 - 2026-11-22 (engine-sheet) — Built `8230195fe`; advisor fold `3f016a164`: one source form at the source and on read (C117 144/144), `framed` keeps picks identical (scratch-root diff), record-fact seat sentences, weekday-pack labels. agy brief sent.
 - 2026-11-22 (engine-sheet) — Created on the builder's word after the C117 run (gap log G-EC41); scope read from the C117 packets, desk signal and C116 slices.

@@ -84,7 +84,7 @@ function row(o) {
 function ctxWith(rows, bl) {
   return {
     ledger: { headers: H.slice(), rows: rows.map(r => r.slice()), dirty: false },
-    summary: { cycleId: CYCLE }, config: { cycleCount: CYCLE },
+    summary: { cycleId: CYCLE }, config: { cycleCount: CYCLE, ownerDrawShare: 0.5 },   // engine.360: the owner share is a World_Config dial
     ss: { getSheetByName: name => name === 'Business_Ledger' ? { getDataRange: () => ({ getValues: () => (bl || BL).map(r => r.slice()) }) } : null },
     rng: () => 0.6,
   };
@@ -247,7 +247,7 @@ const P = (o) => Object.assign({ years: NaN, eduRank: null, drive: null, tier: 4
     rowO({ POPID: 'POP-00128', First: 'Kris', Last: 'Bubic', Tier: 2, Income: 243121, NetWorth: 180000000, EmployerBizId: 'BIZ-4' }),
     rowO({ POPID: 'POP-00777', First: 'Ana', Last: 'Loss', Tier: 4, Income: 90000, NetWorth: 50000, EmployerBizId: 'SELF_EMPLOYED' }),
   ];
-  const ctxO = { ledger: { headers: HO, rows: people.map(r => r.slice()), dirty: false }, summary: {}, config: { cycleCount: 106 }, now: 'C106',
+  const ctxO = { ledger: { headers: HO, rows: people.map(r => r.slice()), dirty: false }, summary: {}, config: { cycleCount: 106, ownerDrawShare: 0.5 }, now: 'C106',
     ss: { getSheetByName: n => n === 'Business_Ledger' ? { getDataRange: () => ({ getValues: () => BLO.map(r => r.slice()) }) } : null } };
   global.__intents = [];
   const out = sandbox.applyOwnerDraw_(ctxO, 106);
@@ -259,7 +259,7 @@ const P = (o) => Object.assign({ years: NaN, eduRank: null, drive: null, tier: 4
   assert('T10 Tier 2 off-heritage owner is outside the re-pay rule (engine.135): Bubic untouched', inc('POP-00128') === 243121);
   assert('T10 a loss pays nothing: Ana Loss $90K → $0 (the world is allowed to hurt)', inc('POP-00777') === 0 && /the books cut the draw/.test(g('POP-00777')[HO.indexOf('LifeHistory')]));
   assert('T10 unresolved owners counted, never invented: Priya (no row) + the id/name mismatch', out.unresolved === 2 && out.businesses === 4 && out.owners === 4 && out.paid === 2 && out.gains === 1 /* Mismatch Co resolves nobody, so it is not an owned business */, JSON.stringify(out));
-  const ctx2 = { ledger: { headers: HO, rows: ctxO.ledger.rows.map(r => r.slice()), dirty: false }, summary: {}, config: { cycleCount: 107 }, now: 'C107', ss: ctxO.ss };
+  const ctx2 = { ledger: { headers: HO, rows: ctxO.ledger.rows.map(r => r.slice()), dirty: false }, summary: {}, config: { cycleCount: 107, ownerDrawShare: 0.5 }, now: 'C107', ss: ctxO.ss };
   const out2 = sandbox.applyOwnerDraw_(ctx2, 107);
   assert('T10 idempotent draw: a second cycle at the same books pays nobody again (no change), heritage gains again', out2.paid === 0 && out2.gains === 1);
 }

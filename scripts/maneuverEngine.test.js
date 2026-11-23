@@ -152,7 +152,7 @@ console.log('the consumers — the owner\'s draw dormancy seam (generationalWeal
   for (const rel of [['phase05-citizens', 'educationCareerEngine.js'], ['phase05-citizens', 'processAdvancementIntake.js'], ['phase05-citizens', 'generationalWealthEngine.js']]) { const p = path.join(__dirname, '..', ...rel); vm.runInContext(fs.readFileSync(p, 'utf8'), sb, { filename: p }); }
   const GH = ['POPID', 'First', 'Last', 'Income', 'NetWorth', 'LineageId', 'Status', 'Tier', 'ClockMode', 'EconomicProfileKey', 'LifeHistory', 'LastUpdated'];
   const BL = [['BIZ_ID', 'Name', 'Annual_Revenue', 'Employee_Count', 'Avg_Salary', 'Key_Personnel'], ['BIZ-1', 'Gone Goods', 2000000, 5, 60000, 'POP-5 Ed Gone (owner)'], ['BIZ-2', 'Near Needs', 2000000, 5, 60000, 'POP-4 Di Near (owner)']];
-  function gctx(hl) { return { now: 'now', config: { cycleCount: 106 }, summary: {}, ledger: { headers: GH, rows: [
+  function gctx(hl) { return { now: 'now', config: { cycleCount: 106, ownerDrawShare: 0.5 }, summary: {}, ledger: { headers: GH, rows: [
     ['POP-5', 'Ed', 'Gone', 100000, 1000000, 'LIN-2', 'Active', 3, 'ENGINE', '', '', ''],
     ['POP-4', 'Di', 'Near', 100000, 1000000, 'LIN-1', 'Active', 3, 'ENGINE', '', '', '']], dirty: false },
     ss: { getSheetByName: (n) => n === 'Business_Ledger' ? { getDataRange: () => ({ getValues: () => BL }) } : n === 'Heritage_Ledger' ? (hl ? { getDataRange: () => ({ getValues: () => hl }) } : null) : null } }; }

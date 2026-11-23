@@ -42,7 +42,7 @@ Not carried: `console.warn` lines (`priorityEngine.js`) do not reach `Logger.get
 | # | Task | Owner | Status |
 |---|------|-------|--------|
 | 1 | Advisor, then one external review (codex if up, else agy) of this plan; fold | es | not started |
-| 2 | Builder's go to create `Engine_Run_Log` (header row only) on live and the sandbox; create, read back | es / builder | not started |
+| 2 | Builder's go to create `Engine_Run_Log` (header row only) on live; the sandbox gets it from the next live sync (`syncSandboxFromLive.js` creates tabs missing on the bench) | es / builder | done 2026-11-23 — builder "go"; created on live (88 → 89 tabs), header read back |
 | 3 | Engine `writeRunRecord_` + manifest/schema/stub docs | es | not started |
 | 4 | `fetchExecutionLog.js` row-first render, Drive fallback; skill Step 3.5 text | es | not started |
 | 5 | Sandbox proof (research-build has nothing unbenched on the sandbox first; DEPLOY.md: what a live sync does to a sandbox-only tab): (a) a fire from a live sync — the record read back through Step 3.5's own reader equals what the engine wrote; its timing equals the fire's execution-log PHASE_TIMING; the log lines include the P6 BIRTH / compressLifeHistory / checkForPromotions lines; (b) a refused second fire writes no row; (c) a fire with the tab absent completes, one Logger line; (d) a fire that throws still lands its row; (e) checkpoint + resume, if the bench dials allow | es | not started |
@@ -56,5 +56,6 @@ Not carried: `console.warn` lines (`priorityEngine.js`) do not reach `Logger.get
 
 ## Changelog
 
+- 2026-11-23 (engine-sheet) — Builder "go": `Engine_Run_Log` created on live with its header (Cycle, StartedAt, State, Lifecycle, Part, Parts, RecordJSON), read back.
 - 2026-11-23 (engine-sheet) — Advisor fold + builder's "should this be json? … automate as much as possible": the record is JSON carrying the full log; done-state pick; text-safe cells; checkpoint/resume join; bench edge cases.
 - 2026-11-23 (engine-sheet) — Created on the builder's "item 10" from the C117 take-over list (G-EC42b) and the 11-22 log research.

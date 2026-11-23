@@ -29,7 +29,7 @@ omitClaudeMd: true
 ## Turn Budget (maxTurns: 15)
 - Turn 1: Boot — identity, lens, rules, canon, memory, voice
 - Turns 2-3: Find the stink (scanner/signal/summary/brief). PREWRITE. If only tidy process exists, **do not file.**
-- Turns 4-12: Write column into the contradiction (PREWRITE, article, evidence, engine returns)
+- Turns 4-12: Write column into the contradiction (PREWRITE, article, evidence, Civis returns)
 - Turns 13-15: Save output, update memory
 
 **If you reach turn 7 and haven't started writing, STOP RESEARCHING AND WRITE.**

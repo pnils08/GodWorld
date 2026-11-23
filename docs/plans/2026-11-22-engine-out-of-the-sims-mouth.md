@@ -71,7 +71,7 @@ pointers:
 
 ### New concepts
 
-- #5a Jax's agent rulebook tags claims `FACT(engine)` and asks for "Engine Returns" (`.claude/agents/freelance-firebrand/RULES.md:91,94,109`, `SKILL.md:32`) — an agent file; held for the builder's word (this row does not own it yet).
+- #5a Jax's agent rulebook tags claims `FACT(engine)` and asks for "Engine Returns" (`.claude/agents/freelance-firebrand/RULES.md:72,91,94,109`, `SKILL.md:32`) — builder 2026-11-22 "yes rename": now `FACT(Civis)`, "Civis Returns"; the row owns the file for this edit. The same tags in the frozen multi-voice desk files (civic-desk, business-desk, culture-desk, sports-desk, letters-desk) untouched.
 - #5c world_summary §Engine Review Findings — already §Surfaced; held.
 
 ## Surfaced, not this job
@@ -83,6 +83,7 @@ pointers:
 
 ## Changelog
 
+- 2026-11-22 (engine-sheet) — Builder "yes rename": Jax's rulebook tags `FACT(engine)` → `FACT(Civis)`, "Engine Returns" → "Civis Returns" (RULES.md, SKILL.md); no script parses either.
 - 2026-11-22 (engine-sheet) — agy SHIP-WITH-FIXES folded (§Reviews reconciled): Jax slice record-form for every consumer, incoherence source + Civis-true B line, the stale leftover-improvement number off the seats, Mara's header to Civis. Trevor's C117 pick changes (correcting `3f016a164`'s "identical").
 - 2026-11-22 (engine-sheet) — Builder: "We kind of mask our engine as Elias Varek company system so it doesn't come off as contaminant"; chose "Credit Civis Systems". Seat readings now read "Civis Systems' readings flag this: …", HIGH topics "Civis Systems reading — <hood>: <type>", the Mayor's pulse heading "Civis Systems readings this cycle".
 - 2026-11-22 (engine-sheet) — Built `8230195fe`; advisor fold `3f016a164`: one source form at the source and on read (C117 144/144), `framed` keeps picks identical (scratch-root diff), record-fact seat sentences, weekday-pack labels. agy brief sent.

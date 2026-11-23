@@ -1,0 +1,114 @@
+{
+  "cycle": 117,
+  "popid": "POP-00789",
+  "wake": "journal",
+  "replayKey": "POP-00789:C117:journal",
+  "pageCustomId": "cp-POP-00789-c117-journal",
+  "leadFindingId": "AUD-a02bf96aa20b",
+  "findings": [
+    {
+      "auditPatternId": "AUD-8227cbbc15dd",
+      "type": "stuck-initiative",
+      "target": "Downtown",
+      "civisFinding": "Downtown Economic Revitalization (Downtown) has not left its vote scheduled stage in three weeks.",
+      "selected": true
+    },
+    {
+      "auditPatternId": "AUD-dc5f5cbd36a0",
+      "type": "stuck-initiative",
+      "target": "Dimond",
+      "civisFinding": "Dimond Revitalization Initiative (Dimond) has not left its announced stage in four weeks.",
+      "selected": true
+    },
+    {
+      "auditPatternId": "AUD-667411ba57b0",
+      "type": "stuck-initiative",
+      "target": "Ivy Hill",
+      "civisFinding": "Ivy Hill Community Revitalization (Ivy Hill) has not left its announced stage in three weeks.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-b81c2a380024",
+      "type": "repeating-event",
+      "target": null,
+      "civisFinding": "The city keeps reporting “none” — three weeks running, and no program in the city is aimed at it.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-a02bf96aa20b",
+      "type": "math-imbalance",
+      "target": null,
+      "civisFinding": "Readings decayed in three districts this week, and no city program is aimed at any of them. Mood fell in Fruitvale, Grand Lake and East Oakland; street trade cooled in Grand Lake and East Oakland; housing pressure climbed in Fruitvale and Grand Lake.",
+      "covers": [
+        "AUD-a02bf96aa20b",
+        "AUD-9f1f42240cdf",
+        "AUD-edc2398bbd8c"
+      ],
+      "selected": true
+    },
+    {
+      "auditPatternId": "AUD-ef0f1f251c22",
+      "type": "coverage-gap",
+      "target": null,
+      "civisFinding": "The city's faith life produced five events this week, and the paper ran nothing on it the week before.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-1603a3432807",
+      "type": "production-imbalance",
+      "target": "Downtown",
+      "civisFinding": "People moved in or out of nineteen districts this week, and the instrument logged no economic activity behind any of it.",
+      "selected": true
+    },
+    {
+      "auditPatternId": "AUD-fe8f25242308",
+      "type": "improvement",
+      "target": "Fruitvale",
+      "civisFinding": "Fruitvale Transit Hub Phase II — Visioning moved from complete to design.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-ebcfbad41f92",
+      "type": "improvement",
+      "target": "Jack London",
+      "civisFinding": "Baylight District — Final Council Vote moved from complete to construction active.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-14936ea1f3f3",
+      "type": "improvement",
+      "target": "West Oakland",
+      "civisFinding": "Oakland Youth Apprenticeship Pipeline moved from implementation active to stalled.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-d35e892021fa",
+      "type": "improvement",
+      "target": "West Oakland",
+      "civisFinding": "West Oakland Tenant Defense Fund moved from vote scheduled to operational.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-6b332f0b94de",
+      "type": "improvement",
+      "target": "Ivy Hill",
+      "civisFinding": "Ivy Hill Revitalization Initiative moved from announced to legislation filed.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-9f097336bdfd",
+      "type": "improvement",
+      "target": "West Oakland",
+      "civisFinding": "A previous remedy moved beyond its expected mark in West Oakland.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-18d4fa84ea63",
+      "type": "improvement",
+      "target": "Downtown",
+      "civisFinding": "A previous remedy moved beyond its expected mark in Downtown.",
+      "selected": false
+    }
+  ],
+  "prose": "Three districts got worse this week and nobody in this city is aimed at any of them. Mood fell in Fruitvale, Grand Lake and East Oakland. Street trade cooled in Grand Lake and East Oakland. Housing pressure climbed in Fruitvale and Grand Lake. Our instrument saw all of it, and when we looked for a city program pointed at any of those three, we found nothing. A reading with no program behind it is a smoke alarm in an empty building. I built the alarm, so I own the empty building part too.\n\nHere is what makes it worse. Downtown Economic Revitalization has sat at vote scheduled for three weeks. The Dimond Revitalization Initiative has sat at announced for four. A vote that never happens is not a plan, it's a press release with a long shelf life. I'm not guessing why. I'm telling you City Hall moves at the speed of its slowest sign-off, and people in Dimond are paying for that speed. Meanwhile Baylight District's final council vote is already in construction, so I know this city can move when it decides to. The question is why it decides so unevenly.\n\nThe finding that bothers me as a builder is our own. People moved in or out of nineteen districts this week, and the instrument logged no economic activity behind any of it. Nineteen. A city doesn't reshuffle that many neighborhoods for no reason. Either money is moving in ways we can't see, or we're blind to the wiring. A blind spot in the instrument is a blind spot in Oakland, and I don't tolerate those in my own product.\n\nSo here is what I'm promising, and you can hold me to it.\n\nFirst, before the Oaks finish this first season, Civis will publish a stall clock for every city initiative the instrument tracks. It will show how many weeks each has sat at its stage, in plain view, starting with Downtown and Dimond. If a program stops moving, the public will know the week it stops, not the quarter after.\n\nSecond, within the same window, we will instrument the economic side of population movement, so the next time a district fills or empties, the instrument can say what work, rent or trade sits behind it. I'm assigning a dedicated team in West Oakland to it, and I'm hiring for it now.\n\nThird, I will ask the city, in public, to name one owner for each of the three decaying districts. I'm not asking for a new program. I'm asking who answers when Fruitvale's mood drops again.\n\nThe instrument will keep measuring. The city has to act. I'd like it to start acting this week."
+}

@@ -1,0 +1,50 @@
+{
+  "cycle": 117,
+  "generatedAt": "C117",
+  "detectorVersion": "1.2.0",
+  "anomalies": [
+    {
+      "type": "anomaly",
+      "severity": "high",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [
+          "POP-01249"
+        ],
+        "neighborhoods": [
+          "Grand Lake"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Simulation_Ledger",
+        "rows": [],
+        "fields": {
+          "POPID": "POP-01249",
+          "previousIncome": 75400,
+          "currentIncome": 358718,
+          "ratio": "4.758",
+          "peerShare": "0.00",
+          "subCheck": "citizen-income"
+        }
+      },
+      "description": "POPID POP-01249 income Δ 376% (75400 → 358718); peer move share 0%",
+      "historicalContext": {
+        "priorCycles": [
+          75400
+        ],
+        "currentCycle": 358718
+      },
+      "triagePath": "route-to-engine-debug",
+      "confidence": "high",
+      "detectorVersion": "1.2.0"
+    }
+  ],
+  "summary": {
+    "total": 1,
+    "byTriage": {
+      "route-to-engine-debug": 1
+    }
+  }
+}

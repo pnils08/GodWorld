@@ -1,0 +1,113 @@
+{
+  "cycle": 117,
+  "steps": {
+    "1": {
+      "ok": true,
+      "outcome": "pass",
+      "detail": "READY",
+      "at": "2026-11-22T23:36:00.085Z"
+    },
+    "2": {
+      "ok": true,
+      "outcome": "pass",
+      "detail": "no CRITICAL",
+      "at": "2026-11-22T23:36:07.522Z"
+    },
+    "3": {
+      "ok": true,
+      "outcome": "pass",
+      "detail": "Neighborhood_Map max Cycle 117; Engine_Errors 9 rows",
+      "at": "2026-11-22T23:50:40.733Z"
+    },
+    "4": {
+      "ok": true,
+      "outcome": "pass",
+      "detail": "16 patterns",
+      "at": "2026-11-22T23:50:54.081Z"
+    },
+    "5": {
+      "ok": true,
+      "outcome": "pass",
+      "detail": "ingested wd-summary n8UoHYxAGUFTazSuBqYu59, wd-snapshot 9naKDSYHB2mmqsyXXYoPRn",
+      "at": "2026-11-22T23:52:17.760Z"
+    },
+    "6": {
+      "ok": true,
+      "outcome": "pass",
+      "detail": "32 mechanical entries (1 HIGH / 17 MED / 13 LOW)",
+      "at": "2026-11-22T23:55:23.804Z"
+    },
+    "2.5": {
+      "ok": true,
+      "outcome": "pass",
+      "detail": "C116 close CLEAN",
+      "at": "2026-11-22T23:36:14.192Z"
+    },
+    "3.5": {
+      "ok": true,
+      "outcome": "pass",
+      "detail": "Cycle completed, 0 failed phases",
+      "at": "2026-11-22T23:50:44.193Z"
+    },
+    "4.1": {
+      "ok": true,
+      "outcome": "pass",
+      "detail": "engine_review_c117.md",
+      "at": "2026-11-22T23:52:11.851Z"
+    },
+    "5.56": {
+      "ok": true,
+      "outcome": "pass",
+      "detail": "snapshot C117; beats C117, prev C116; roster 626 workers at 84 businesses",
+      "at": "2026-11-22T23:52:30.504Z"
+    },
+    "5.5": {
+      "ok": true,
+      "outcome": "pass",
+      "detail": "neighborhood_texture_c117.md",
+      "at": "2026-11-22T23:52:53.931Z"
+    },
+    "5.55": {
+      "ok": true,
+      "outcome": "pass",
+      "detail": "4 files at c117",
+      "at": "2026-11-22T23:54:07.152Z"
+    },
+    "5.58": {
+      "ok": true,
+      "outcome": "journal",
+      "detail": "journal written, keys match",
+      "at": "2026-11-22T23:54:39.569Z"
+    },
+    "5.6": {
+      "ok": true,
+      "outcome": "pass",
+      "detail": "10 rows written + verified",
+      "at": "2026-11-22T23:55:03.941Z"
+    },
+    "5.7": {
+      "ok": true,
+      "outcome": "pass",
+      "detail": "initiative_tracker.json regenerated",
+      "at": "2026-11-22T23:55:12.101Z"
+    },
+    "5.8": {
+      "ok": true,
+      "outcome": "pass",
+      "detail": "baseContext.cycle 117",
+      "at": "2026-11-22T23:55:15.058Z"
+    },
+    "5.85": {
+      "ok": true,
+      "outcome": "pass",
+      "detail": "canon current",
+      "at": "2026-11-22T23:55:17.335Z"
+    },
+    "6.1": {
+      "ok": false,
+      "outcome": "fail",
+      "detail": "5 ROLLOUT read(s) still name C117 — read each on live, then flip or re-date its row:\nDUE AT C117 (2026-11-22): 5 read(s) waiting in ROLLOUT §2 — once read, flip or re-date the row:\n  engine.338 [research-build] A former player's next chapter: first question rows landed C116, two on active A's (G-EC40). Wake, intake row, Advancement line: read C117 Sun 2026-11-22\n  engine.349 [research-build] Dials move: the middle counts LIVE 11-19, stage 58 @193 (plan Task 14). Read C117 Sun 2026-11-22: `scripts/dialPulse.js` against leg n, the 13\n  engine.347 [research-build] Saved words reach the dials (builder 11-16): live stage 53. Wed 11-18 job rows read: 7 of 7. Read Sat 11-21 print rows; all fold at C117 Sun 2026-11-22\n  engine.351 [research-build] Intake complete or it waits; arrivals start off 50: LIVE 11-21 stage 65. Read C117 Sun 2026-11-22: held rows, each arrival's start on Dial_Moves\n  engine.339 [research-build] How kids are minted: code LIVE since stage 63, kept (builder 11-21 \"Keep it\"); tests rewritten. Read C117 Sun 2026-11-22: the one grab and what landed\n  + 6 waiting row(s) past their fire or naming none (docLoopStatus.js --lint lists them).",
+      "at": "2026-11-23T00:00:03.351Z"
+    }
+  }
+}

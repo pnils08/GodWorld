@@ -33,10 +33,17 @@ pointers:
 
 | # | Task | Owner | Status |
 |---|------|-------|--------|
-| 1 | Seats: drop the `:627` prefix, the `:638` suffix, the `:383` order sentence; `:662` title = where + the pattern's own words ("Grand Lake: math imbalance"). Verify: render the C117 topics through the edited functions to scratch, grep 0 "engine" in seat-facing text, every fact line unchanged | es | not started |
-| 2 | Desk signal: desk-lane label from the pattern's record description, not the checker's angle; civic handle keeps `citizens`, drops the checker's angle/hookLine; `ref` stays in the JSON (code consumers: Jax slice, storyline tags, stink-scanner). Verify: C117 rebuild to scratch, diff vs `output/desk_signal_c117.json`: same entry count per lane, 0 "remedy path"/"ailment —" | es | not started |
-| 3 | Tips: civic-domain and Jax slices cite the evidence part of `ref` (sheet + rows) to the reporter, never the `engine_audit` path. Verify: C117 slices to scratch, 0 `engine_audit` in reporter text, every fact line kept | es | not started |
-| 4 | One adversarial review (agy) of the diff; fold; commit path-specific; the next unattended datawake / desk run is the proof (Mon 2026-11-23 06:15) | es | not started |
+| 1 | Seats: drop the `:627` prefix, the `:638` suffix, the `:383` order sentence; `:662` title = where + the pattern's own words; default and improvement sentences carry the record's fact; weekday-pack source labels name the tab (`buildCivicOfficeSlice.js`, `civicBrief.js`). Verified: `ailmentPerception` lifted and printed over the 16 C117 patterns | es | done `8230195fe` `3f016a164` |
+| 2 | Desk signal: source written in the record form (`<sheet> row(s) N; finding C<cycle>-<i>; storyline …`); civic handle keeps `citizens` only; desk lanes labelled by the record; `framed` (no words) keeps the stink +3 and the fanout lead. Verified: C117 rebuild, same entries per lane, 27 → 0 checker angle lines | es | done `8230195fe` `3f016a164` |
+| 3 | Tips: `beatSliceKit.recordRef` converts an old ref to the identical record form (C117: 144/144); civic-domain, Jax (`toRecordRefs`, pattern lookup by either form), the desk run's SOURCE line and research evidence ref (`storyRecordRef`; validator checked on the lifted function); writer-brief filter drops the record-form source. Verified: C117 old code + old signal vs new code + new signal in scratch roots — stink ranking, Jax pick, six civic-domain picks, economic pick identical; 0 `engine_audit` in civic-domain and firebrand | es | done `8230195fe` `3f016a164` |
+| 4 | One adversarial review (agy) of both commits; fold; proof = the unattended runs (see §What lands when) | es | in progress — brief sent 2026-11-22 |
+
+## What lands when
+
+- **Now (the crons run from the tree):** seat wording on the weekday datawakes; every reporter-facing source from the Mon 2026-11-23 06:15 desk run (old C117 refs are converted on read).
+- **C118 fire (Sun 2026-11-29):** the desk signal itself carries no checker angle lines. `output/desk_signal_c117.json` on disk still holds the 27 C117 angle lines; this week's tips read them through the converted labels only where the code above touches them (civic lane handles feed `buildCivicDomainSlice` / Jax angle fallbacks). Regenerating the C117 file waits on the builder's word.
+- **This week only:** the fanout compares raw C117 desk-signal refs with converted civic-domain refs, so one finding could reach two desks once. Gone at C118 (one form).
+- **Tests:** not run or read (test guard); the tests pinning `handle.angle` / audit refs are owed at the builder's unlock.
 
 ## Acceptance
 
@@ -46,9 +53,12 @@ pointers:
 
 ## Surfaced, not this job
 
+- The checker's own faults ("none" as a recurring issue, a stall filed as an improvement, one measurement filed twice) still reach seats, desks and Varek as findings: C117 gap log G-EC39, its own row.
+
 - `scripts/civicMustDecide.js` + its test: dead (no caller). Removal is its own row.
 - world_summary §Engine Review Findings is passed whole to `cron-rhea-gate.js` and `scripts/djDirect.js`; not in the narrow cut.
 
 ## Changelog
 
+- 2026-11-22 (engine-sheet) — Built `8230195fe`; advisor fold `3f016a164`: one source form at the source and on read (C117 144/144), `framed` keeps picks identical (scratch-root diff), record-fact seat sentences, weekday-pack labels. agy brief sent.
 - 2026-11-22 (engine-sheet) — Created on the builder's word after the C117 run (gap log G-EC41); scope read from the C117 packets, desk signal and C116 slices.

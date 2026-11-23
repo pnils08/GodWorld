@@ -1,0 +1,16 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+{
+ "cycle": 118,
+ "milestoneRows": 2,
+ "byTag": {
+  "Retirement": 1,
+  "Graduation": 1
+ },
+ "blankNameOrHood": 0,
+ "births": [],
+ "bareStampCells": [],
+ "bareStampCount": 0,
+ "ownerDrawShare": "0.5",
+ "verdict": "PASS",
+ "note": ""
+}

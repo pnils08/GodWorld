@@ -25,7 +25,7 @@ pointers:
 | 1 | `applyMilestone_` (`phase04-events/generationalEventsEngine.js`): Name + Neighborhood on the log row (were `''` on every milestone: Birth 8/8, Death 4/4, Retirement 10/11, Health 10/18, Recovery 3/4, Graduation 9/25 on live); the cell stamp from `inWorldStamp_` (was `"C" + cycle`, an S271 leftover the `/^Y\d+C\d+ — /` readers drop) | es | done |
 | 2 | `createChildRow_`: queue the newborn's first log row (`born to <parent> in <hood>`), as other new citizens get one; readers already keep it off the parent's event | es | done |
 | 3 | `scripts/engineAuditor.js` scoreboard: `born` counts the child's `born to` line only — the parent's line now carries this Cycle's stamp too and would double it | es | done |
-| 4 | agy diff read; bench on a live sync (a birth landing is chance — the read is no regression + the rows if one lands); PROD | es | in progress |
+| 4 | agy diff read; bench on a live sync (a birth landing is chance — the read is no regression + the rows if one lands); PROD | es | done — agy SHIP; bench PASS (caught the spotlight line's stamp, fixed); LIVE stage 75 @210 |
 
 ## Acceptance
 
@@ -39,4 +39,5 @@ pointers:
 
 ## Changelog
 
+- 2026-11-23 (engine-sheet) — **LIVE PROD stage 75, @210** with engine.360. Read C118.
 - 2026-11-23 (engine-sheet) — Created and built from the C117 dig (G-EC48).

@@ -251,9 +251,9 @@ const noahAssignment = {
 };
 const noahContext = activateWakeContext(noahAssignment, noahAssignment.persona);
 assert.equal(noahContext.packetContract, 'v2');
-assert.equal(noahContext.wakePackage.version, 'NOAH-LEP2-1');
+assert.equal(noahContext.wakePackage.version, 'NOAH-LEP2-2');
 assert.equal(stageRoute('civic', noahAssignment.persona, 'angle').model,
-  'deepseek/deepseek-v4-flash-0731');
+  'x-ai/grok-4.3');   // pipeline.111 (builder 2026-11-23)
 assert.equal(stageRoute('civic', noahAssignment.persona, 'write').model,
   'x-ai/grok-4.3');   // pipeline.74 — the scene seats' model (was gpt-5.6-luna)
 

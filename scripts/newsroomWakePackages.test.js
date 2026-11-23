@@ -171,7 +171,7 @@ const seats = Object.entries(packages).filter(([, v]) => v && v.persona);
 assert(seats.length >= 25);
 assert.deepStrictEqual(seats.filter(([, v]) => v.rewardLoop !== true).map(([k]) => k), []);
 assert.throws(() => packagesApi.validatePackage(marbury.persona, Object.assign({}, marbury, { rewardLoop: 'yes' })), /rewardLoop/);
-assert.deepStrictEqual(Object.entries(packages).filter(([, v]) => v && v.writerTools).map(([k]) => k), ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'anthony-raines', 'elliot-marbury', 'hal-richmond', 'maria-keen', 'elliot-graye', 'mason-ortega', 'sharon-okafor', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'nia-rook', 'nia-rook-weekly', 'celeste-tran', 'tamsin-pruitt']); // registry order; Hal + Anthony: builder 2026-10-19; Jax + Carmen 2026-10-26; the rest 2026-10-27; Sharon 2026-11-21 (pipeline.111)
+assert.deepStrictEqual(Object.entries(packages).filter(([, v]) => v && v.writerTools).map(([k]) => k), ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'anthony-raines', 'elliot-marbury', 'hal-richmond', 'maria-keen', 'elliot-graye', 'mason-ortega', 'sharon-okafor', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'noah-tan', 'nia-rook', 'nia-rook-weekly', 'celeste-tran', 'tamsin-pruitt']); // registry order; Hal + Anthony: builder 2026-10-19; Jax + Carmen 2026-10-26; the rest 2026-10-27; Sharon 2026-11-21 (pipeline.111)
 assert.equal(packages['hal-richmond'].writerTools.maxToolCalls, 6);
 // pipeline.111: Celeste ran without her voice-file Essence ("archived only") and lost her read of why; builder 2026-11-22:
 // "if taking out the voice file made her not sound like herself you can put it back" — it is back. The switch stays for any seat.
@@ -186,7 +186,7 @@ assert.equal(packages['hal-richmond'].version, 'HAL-LEP2-3');
 assert.throws(() => packagesApi.validatePackage(marbury.persona, Object.assign({}, marbury, { writerTools: { maxToolCalls: 9 } })), /writerTools/);
 assert.equal(jax.writerTools.maxToolCalls, 6);
 assert.equal(packages['carmen-delaine'].writerTools.maxToolCalls, 6);
-const noToolsPkg = packages['noah-tan'];
+const noToolsPkg = packages['p-slayer'];   // Noah gained tools (pipeline.111, 2026-11-23); P Slayer holds none
 assert.throws(() => packagesApi.validatePackage(noToolsPkg.persona, Object.assign({}, noToolsPkg, { writerTools: { maxToolCalls: 6 } })), /writerTools is granted only to/);
 assert.equal(marbury.assignment.popid, 'POP-00166');
 assert.equal(packagesApi.routeFor(marbury, 'write').model, 'anthropic/claude-sonnet-5.5');
@@ -362,13 +362,14 @@ assert.ok(angela.reviewProfile.textureConditions.some(v => v.includes('stability
 assert.ok(angela.reviewProfile.canonBlockers.some(v => v.includes('invented student')));
 
 const noah = packages['noah-tan'];
-assert.equal(noah.version, 'NOAH-LEP2-1');
+assert.equal(noah.version, 'NOAH-LEP2-2');
 assert.equal(noah.assignment.popid, 'POP-00157');
 assert.equal(noah.assignment.beatDomain, 'ENVIRONMENT');
-assert.equal(packagesApi.routeFor(noah, 'angle').model, 'deepseek/deepseek-v4-flash-0731');
+// pipeline.111 (builder 2026-11-23: "Same approach as the rest"): seat file, morning on his writer's model, the fact reviewer.
+assert.equal(packagesApi.routeFor(noah, 'angle').model, 'x-ai/grok-4.3');
+assert.equal(noah.seatFile, '.claude/agents/noah-tan/SEAT.md');
 assert.equal(noah.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
-assert.ok(noah.reviewProfile.textureConditions.some(v => v.includes('do not announce season')));
-assert.ok(noah.reviewProfile.canonBlockers.some(v => v.includes('invented forecast')));
+assert.deepStrictEqual(noah.reviewProfile.textureConditions, []);
 
 const gate = packagesApi.gateAssignments([
   { desk: 'civic', name: 'Jax Caldera', persona: 'freelance-firebrand' },

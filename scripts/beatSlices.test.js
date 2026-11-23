@@ -346,11 +346,11 @@ try {
 
   console.log('environment:');
   const e = environment.buildEnvironmentSlice(CYCLE, { root });
-  ok('label', e.story.label === 'C103 overcast, 52°F after rain');
+  // pipeline.111 (builder 2026-11-23): no code-written label or angle; the weather track rides as the record.
+  ok('no code-written angle, no hook', e.story.label === 'the weather and environment record of C103' && e.prewrite.hooks.length === 0);
   ok('recent cycles fact', e.facts.some(f => /Last 2 cycles: C101 rain 48°F, C102 rain 49°F/.test(f.text)));
-  ok('season-feel citizen rides along with ledger role', e.citizens.some(c => c.popid === 'POP-90004' && c.role === 'Bus Operator'));
+  ok('an empty weather record sits him out', environment.sitsOutWhenEmpty === true);
   ok('impact column read', e.facts[0].text.includes('impact moderate'));
-  ok('ENVIRONMENT hook reaches him by domain (Civic Desk misroute)', e.prewrite.hooks.some(h => /wildfire smoke drifts in/.test(h.text) && h.domain === 'ENVIRONMENT'));
 
   console.log('faith:');
   const f = faith.buildFaithSlice(CYCLE, { root });
@@ -632,7 +632,7 @@ try {
   for (const [label, slice, popid] of [['trevor', t, 'POP-00155'], ['lila', h, 'POP-00154'], ['angela', s, 'POP-00156'], ['noah', e, 'POP-00157'], ['graye', f, 'POP-00012'], ['rachel', r, 'POP-00057'], ['kai', k, 'POP-00158'], ['sharon', sh, 'POP-00159'], ['maria', m, 'POP-00013'], ['selena', sg, 'POP-00591'], ['talia', tf, 'POP-00592'], ['celeste', ct, 'POP-00164']]) {
     const pk = v2.buildAnglePacket({ cycle: CYCLE, desk: slice.seat.desk, reporter: { popid, name: slice.seat.name }, story: slice.story, approach: slice.approach, slice, lane: [] });
     const b = pk.task.creativeBrief;
-    ok(label + ': brief beat-slice with facts + room', b && b.kind === 'beat-slice' && b.facts.length >= 1 && (['sharon', 'maria', 'kai', 'celeste', 'graye'].includes(label) || !!b.roomIsYours));   // seat-file seats: no room line (pipeline.111)
+    ok(label + ': brief beat-slice with facts + room', b && b.kind === 'beat-slice' && b.facts.length >= 1 && (['sharon', 'maria', 'kai', 'celeste', 'graye', 'noah'].includes(label) || !!b.roomIsYours));   // seat-file seats: no room line (pipeline.111)
     ok(label + ': every anchor fact is a known FACT sourced to a file on disk', slice.prewrite.anchorFacts.every(text => pk.known.some(k => k.text === text && /^output\//.test(k.src))));
     ok(label + ': candidates = the slice\'s people', pk.exposure.candidates.length === slice.citizens.length && pk.exposure.candidates.every(c => slice.citizens.some(p => p.popid === c.pop)));
   }

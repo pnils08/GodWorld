@@ -18,6 +18,7 @@ const WRITER_TOOLS_SEATS = ['elliot-marbury', 'hal-richmond', 'anthony-raines', 
   'sharon-okafor',   // pipeline.111 (builder 2026-11-21): "her tools will give her that context"
   'maria-keen',   // pipeline.111 (builder 2026-11-21): "following the Sharon mold"
   'kai-marston',   // pipeline.111 (builder 2026-11-22): "kai next"
+  'noah-tan',   // pipeline.111 (builder 2026-11-23): "Same approach as the rest"
   'mason-ortega',   // pipeline.111 (builder 2026-11-22): "mason next"
   'celeste-tran'   // pipeline.111 (builder 2026-11-22): "celeste next"
 ];

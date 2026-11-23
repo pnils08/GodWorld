@@ -1113,7 +1113,7 @@
     }
   },
   "noah-tan": {
-    "version": "NOAH-LEP2-1",
+    "version": "NOAH-LEP2-2",
     "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
@@ -1129,7 +1129,7 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-v4-flash-0731"
+        "model": "x-ai/grok-4.3"
       },
       "report": {
         "provider": "openrouter",
@@ -1141,33 +1141,26 @@
       }
     },
     "reviewProfile": {
-      "id": "noah-weather-ground-v1",
+      "id": "noah-environment-v2",
       "canonPolicy": "load-bearing",
-      "purpose": "Show what this season moved in GodWorld. The weather snapshot is context, never the Article. Live a Packet-backed person or place on a day like this.",
+      "purpose": "Report Oakland's weather and environment from the weather and environment record (builder 2026-11-23). The check is facts: locations, citizens, data points.",
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
-        "voice": "third-person civic environment reporting from the street",
-        "targetWords": "400-700",
-        "opening": "a named person or Packet-named place living this cycle's season",
-        "closing": "what is still unfinished for them"
+        "targetWords": "evidence-bounded"
       },
       "authorizedTexture": [
-        "sensory dress of a Packet-named place already in the season-feel facts",
-        "the reporter's presence at that place",
-        "transitions that add no forecast or unsupplied measurement"
+        "the sky, the air and the street on a day like this, as Noah reads them"
       ],
-      "textureConditions": [
-        "every named person, place, illness, holiday, venue, and movement change must come from the Packet",
-        "do not announce season or temperature as the lede",
-        "do not import real-world Oakland winter tropes absent from the Packet",
-        "raw engine fields and source paths may not appear as public prose"
-      ],
+      "textureConditions": [],
       "canonBlockers": [
-        "an invented forecast, record, alert, hazard, cause, authority, meteorologist, resident, quote, impact, comparison, or measurement",
-        "a named institution, agency, person, neighborhood, or organization not found in the supplied record",
-        "unsupported danger, rarity, trend, health, travel, infrastructure, or causal language",
-        "raw engine fields, scores, source paths, or row metadata printed as public-facing evidence"
+        "an invented or altered location: venue, business or neighborhood",
+        "an invented or altered citizen (name, role, home, relationship), or words a named citizen did not say",
+        "an invented or altered data point: a temperature, reading, number, date or engine record"
       ]
+    },
+    "seatFile": ".claude/agents/noah-tan/SEAT.md",
+    "writerTools": {
+      "maxToolCalls": 6
     }
   },
   "nia-rook": {

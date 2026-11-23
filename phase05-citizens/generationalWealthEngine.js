@@ -1122,7 +1122,7 @@ function applyOwnerDraw_(ctx, cycle) {
   var idx = function(n) { return header.indexOf(n); };
   var iPop = idx('POPID'), iFirst = idx('First'), iLast = idx('Last'), iIncome = idx('Income'), iNW = idx('NetWorth'),
       iLin = idx('LineageId'), iStatus = idx('Status'), iTier = idx('Tier'), iClock = idx('ClockMode'),
-      iEcon = idx('EconomicProfileKey'), iLife = idx('LifeHistory'), iLastUpd = idx('LastUpdated');
+      iEcon = idx('EconomicProfileKey'), iLife = idx('LifeHistory'), iLastUpd = idx('LastUpdated'), iHood = idx('Neighborhood');
   if (iPop < 0 || iIncome < 0 || iNW < 0) return out;
   var sheet = ctx.ss ? ctx.ss.getSheetByName('Business_Ledger') : null;
   if (!sheet) return out;
@@ -1185,8 +1185,10 @@ function applyOwnerDraw_(ctx, cycle) {
         out.gains++;
         ctx.ledger.dirty = true;
         if (typeof queueAppendIntent_ === 'function') {
-          queueAppendIntent_(ctx, 'LifeHistory_Log', [ctx.now, orw[iPop], '', 'Business-Gain',
-            bizName + ' returned $' + gain + ' to the line this week', '', cycle]);
+          // C117 gap log: the in-world stamp (was ctx.now, the wall clock) and the owner's name and hood, like every milestone row
+          var gName = ((iFirst >= 0 ? orw[iFirst] : '') + ' ' + (iLast >= 0 ? orw[iLast] : '')).trim();
+          queueAppendIntent_(ctx, 'LifeHistory_Log', [stamp, orw[iPop], gName, 'Business-Gain',
+            bizName + ' returned $' + gain + ' to the line this week', iHood >= 0 ? (orw[iHood] || '') : '', cycle]);
         }
         continue;
       }

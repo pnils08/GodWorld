@@ -1187,7 +1187,7 @@ function createChildRow_(ctx, parentRowIdx, cycle) {
   // next POPID — engine.90: one per-cycle counter shared by every minter
   var childId = nextPopIdLocked_(ctx);
 
-  var rng = ctx._rng || function() { return 0.5; };
+  var rng = function() { return rand_(ctx); };   // C117 gap log: no silent 0.5 — rand_ throws without the cycle's RNG (Phase 40.3 Path 1)
   var sex = rng() < 0.5 ? "male" : "female";
   var pool = CHILD_FIRST_NAMES[sex];
   var firstName = pool[Math.floor(rng() * pool.length)];
@@ -1316,7 +1316,7 @@ function formSingleParentHousehold_(ctx, motherRowIdx, cycle) {
   var income = idx("Income") >= 0 ? (Number(row[idx("Income")]) || 0) : 0;
   var popId = row[idx("POPID")];
   var name = ((idx("First") >= 0 ? row[idx("First")] : "") + " " + (idx("Last") >= 0 ? row[idx("Last")] : "")).trim();
-  var hhId = "HH-" + String(cycle).padStart(4, "0") + "-F" + String(Math.floor((ctx._rng ? ctx._rng() : 0.5) * 900) + 100);
+  var hhId = "HH-" + String(cycle).padStart(4, "0") + "-F" + String(Math.floor(rand_(ctx) * 900) + 100)   /* C117 gap log: no silent 0.5 */;
   try {
     var sheet = ctx.ss.getSheetByName("Household_Ledger");
     if (!sheet) return null;

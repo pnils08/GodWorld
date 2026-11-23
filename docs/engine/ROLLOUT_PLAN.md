@@ -81,6 +81,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| engine.361 | Life-log rows complete (builder 11-23 "Let's address the smaller things"): name, hood, in-world stamp filled at the executor; no silent RNG. Next: bench, PROD | in-progress | engine-sheet | `output/production_log_run_cycle_c117_gaps.md` G-EC52 |
 | engine.356 | A moment has a place (builder 11-21): LIVE stage 73 @208; C117 read done (G-EC45). Next: Task 1's count, then the build on his six answers | in-progress | engine-sheet | [[../plans/2026-11-21-a-moment-has-a-place]] |
 | pipeline.100 | Mags memory one home (builder 11-03): her page, not the old `mags` store; every Mags seat loads her persona as the CLI did. Task 1 started 11-08 | in-progress | engine-sheet | [[../plans/2026-11-03-mags-memory-one-home]] |
 | engine.346 | Feed word `off-season` (builder 11-15): live @182; benched 11-16 inside stage 49 (C117/C118 PASS). Owed: the sheet dropdown (his menu run) | in-progress | research-build | [[../plans/2026-11-05-sports-feed-triggers]] §Changelog |

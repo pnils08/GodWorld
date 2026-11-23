@@ -37,6 +37,34 @@ function isWallClockStamp_(v) {
   return /^\d{1,2}\/\d{1,2}\/\d{2,4}/.test(t) || /^\d{4}-\d{2}-\d{2}/.test(t);
 }
 
+// C117 gap log (builder 2026-11-23 "Let's address the smaller things"): a bare "C117" Timestamp
+// (processAdvancementIntake writes 'C' + cycle) is the same Cycle in the in-world form "Y3C13";
+// converted from its own number, so a row is never re-dated to another Cycle.
+function bareCycleStampToInWorld_(v) {
+  var m = String(v == null ? '' : v).trim().match(/^C(\d+)$/);
+  if (!m) return null;
+  var c = Number(m[1]);
+  if (!(c > 0)) return null;
+  return 'Y' + (Math.floor((c - 1) / 52) + 1) + 'C' + (((c - 1) % 52) + 1);
+}
+
+// C117 gap log: 153 of 2,699 C117 LifeHistory_Log rows had no Name and 245 no Neighborhood — writers
+// queue '' for both. The row's own POPID resolves both from the in-memory ledger (the row's citizen,
+// never a guess); a POPID the ledger does not hold keeps its blanks. Built once per executor run.
+function lifeHistoryWhoMap_(ctx) {
+  var L = ctx && ctx.ledger;
+  if (!L || !L.headers || !L.rows || !L.rows.length) return null;   // a resume before its ledger reload: nothing to fill from
+  var h = L.headers, iP = h.indexOf('POPID'), iF = h.indexOf('First'), iL = h.indexOf('Last'), iN = h.indexOf('Neighborhood');
+  if (iP < 0) return null;
+  var map = {};
+  for (var r = 0; r < L.rows.length; r++) {
+    var row = L.rows[r]; if (!row) continue;
+    var id = String(row[iP] || '').trim(); if (!id) continue;
+    map[id] = [((iF >= 0 ? row[iF] : '') + ' ' + (iL >= 0 ? row[iL] : '')).trim(), iN >= 0 ? String(row[iN] || '').trim() : ''];
+  }
+  return map;
+}
+
 function executePersistIntents_(ctx) {
   var stats = {
     executed: 0,
@@ -443,6 +471,18 @@ function executeSheetIntents_(ctx, sheetName, intents) {
             // here, the one place every queued LifeHistory_Log row passes through.
             if (sheetName === 'LifeHistory_Log' && isWallClockStamp_(padded[0]) && typeof inWorldStamp_ === 'function') {
               padded[0] = inWorldStamp_(ctx);
+            }
+            if (sheetName === 'LifeHistory_Log') {
+              var bareIW = bareCycleStampToInWorld_(padded[0]);
+              if (bareIW) padded[0] = bareIW;
+              if (!String(padded[2] == null ? '' : padded[2]).trim() || !String(padded[5] == null ? '' : padded[5]).trim()) {
+                if (ctx._lhWho === undefined) ctx._lhWho = lifeHistoryWhoMap_(ctx);   // built once per fire, on first need
+                var who = ctx._lhWho && ctx._lhWho[String(padded[1] || '').trim()];
+                if (who) {
+                  if (!String(padded[2] == null ? '' : padded[2]).trim() && who[0]) padded[2] = who[0];
+                  if (!String(padded[5] == null ? '' : padded[5]).trim() && who[1]) padded[5] = who[1];
+                }
+              }
             }
             paddedRows.push(padded);
           }

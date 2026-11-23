@@ -15,9 +15,9 @@ pointers:
 
 # Engine Writes Its Run Record Plan
 
-**Builder's words (2026-11-23):** "item 10" — from the C117 gap list: the engine writes its own run record so the builder stops exporting the execution log by hand.
+**Builder's words (2026-11-23):** "item 10" — from the C117 gap list: the engine writes its own run record so the builder stops exporting the execution log by hand. On the record's content: "should this be json? and the goal would be to automate as much as possible" — the record carries the full log text, as JSON.
 
-**Goal:** every fire leaves one row on a sheet tab the service account can read — cycle, start, finish, state, phase timings, failed phases, engine-error count — and Step 3.5 writes `output/execution_log_c{XX}.txt` from that row, with the Drive export as the fallback when the row is missing.
+**Goal:** every fire leaves one JSON record on a sheet tab the service account can read — the run's numbers, its phase timings and every Logger line — and Step 3.5 writes `output/execution_log_c{XX}.json` and the `.txt` every reader already uses from it. The builder never exports; the Drive export is the fallback only for a fire that dies before writing.
 
 **Rows:** engine.358 · **Owner:** engine-sheet
 
@@ -29,12 +29,13 @@ pointers:
 
 ## Design
 
-1. **Tab `Engine_Run_Log`** (created once on live and the sandbox — engine.119: no runtime create). One row per fire: `Cycle | StartedAt | FinishedAt | State | Lifecycle | WallMs | TotalMs | PhaseCount | FailedPhases | EngineErrors | AuditIssues | RngDraws | TimingsJSON`.
-2. **Engine** (`godWorldEngine2.js`): `writeRunRecord_(ss, fire, outcome)` in `runWorldCycle`'s `finally`, after `closeCycleFire_`, before the lock is released. Best effort, never throws: a missing tab or a write error is one `Logger.log` line. Reads `fire.admission` (cycle, startedMs), `outcome.state`, `fire.lifecycle`, `ENGINE95_TIMING_DIAG`, `fire.ctx.summary` (engineErrorCount, auditIssues, rng draws). A direct write after the Phase-10 executor — the Phase-11 carve-out class; one row in `SHEETS_MANIFEST.md` §9. An aborted or checkpointed fire also writes its row (state says which).
-3. **Step 3.5** (`fetchExecutionLog.js`): read `Engine_Run_Log`, take the newest row for the Cycle; render `output/execution_log_c{XX}.txt` in the shape the gate and readers already parse (`Execution started`, the PHASE_TIMING JSON line, `Cycle completed. Engine errors logged: N; audit issues tracked: M; rng draws: R`) with a first line `source: Engine_Run_Log row N`. No row → today's Drive search; `--file` still forces Drive.
-4. **Docs in the same commit:** `schemas/SCHEMA_HEADERS.md` (the tab), `docs/engine/SHEETS_MANIFEST.md` (§9 carve-out), `docs/engine/ENGINE_STUB_MAP.md` (`/stub-engine`), run-cycle SKILL Step 3.5.
+1. **Tab `Engine_Run_Log`** (created once on live and the sandbox — engine.119: no runtime create). One row per admitted fire: `Cycle | StartedAt | State | Lifecycle | Part | Parts | RecordJSON`. The record is one JSON object, `{ cycle, startedAt, finishedAt, state, lifecycle, wallMs, timing: <the PHASE_TIMING payload>, engineErrors, auditIssues, rngDraws, log: [Logger lines] }`; a record over 45,000 characters is split across rows `Part 1..Parts` of the same fire (this week's log was 41,840 bytes). Every cell is written as text (leading apostrophe, the engine.340 SeedID treatment) so the sheet never coerces a timestamp or a number.
+2. **Engine** (`godWorldEngine2.js`): `writeRunRecord_(ss, fire, outcome)` in `runWorldCycle`'s `finally`, after `closeCycleFire_`, before the lock is released. Best effort, never throws: a missing tab or a write error is one `Logger.log` line, no Engine_Errors row. A refused fire has no admission (`closeCycleFire_` returns null) and writes nothing. Log text from `Logger.getLog()` (its completeness and length on a real fire are measured on the bench — Task 5); timing from `ENGINE95_TIMING_DIAG`; counts from `fire.ctx.summary`. Modelled on `logEngineError_`'s direct append (same file, `SHEETS_MANIFEST.md` §9 row 136); a new §9 row of the same class.
+3. **Checkpoint + resume:** a checkpointed fire writes its row (`state: checkpointed`, its phases' timing); the resume writes its own (`lifecycle: resumed`, the tail's timing — `resumeCore_` emits its own PHASE_TIMING, `cycleCheckpoint.js:527`). The renderer joins both parts' timings and logs in start order.
+4. **Step 3.5** (`fetchExecutionLog.js`): read `Engine_Run_Log`; the record is the Cycle's fire whose state is `done` (joined with its `checkpointed` part when it resumed). Write `output/execution_log_c{XX}.json` (the record) and `output/execution_log_c{XX}.txt` (first line `source: Engine_Run_Log`, then `Execution started`, the Logger lines, the PHASE_TIMING JSON line, `Cycle completed. …`) in the shape the gate and every reader parse. No `done` record → today's Drive search; `--file` still forces Drive. Never prints `Cycle completed` from a non-done record.
+5. **Docs in the same commit:** `schemas/SCHEMA_HEADERS.md` (the tab), `docs/engine/SHEETS_MANIFEST.md` (§9), `docs/engine/ENGINE_STUB_MAP.md` (`/stub-engine`), run-cycle SKILL Step 3.5.
 
-Not carried: Logger warning lines (`console.warn` in `priorityEngine.js` is not countable from the engine); they do not gate.
+Not carried: `console.warn` lines (`priorityEngine.js`) do not reach `Logger.getLog()`; they do not gate. Readers of log lines this week (G-EC45/46): births, the child grab, the dial fold, arrivals, migration, archive — all `Logger.log`; the bench confirms they are in the record.
 
 ## Tasks
 
@@ -44,7 +45,7 @@ Not carried: Logger warning lines (`console.warn` in `priorityEngine.js` is not 
 | 2 | Builder's go to create `Engine_Run_Log` (header row only) on live and the sandbox; create, read back | es / builder | not started |
 | 3 | Engine `writeRunRecord_` + manifest/schema/stub docs | es | not started |
 | 4 | `fetchExecutionLog.js` row-first render, Drive fallback; skill Step 3.5 text | es | not started |
-| 5 | Sandbox proof: one fire from a live sync; read the row back; Step 3.5's renderer on the sandbox row passes the same gate the Drive log passes; diff timings vs the sandbox execution log | es | not started |
+| 5 | Sandbox proof (research-build has nothing unbenched on the sandbox first; DEPLOY.md: what a live sync does to a sandbox-only tab): (a) a fire from a live sync — the record read back through Step 3.5's own reader equals what the engine wrote; its timing equals the fire's execution-log PHASE_TIMING; the log lines include the P6 BIRTH / compressLifeHistory / checkForPromotions lines; (b) a refused second fire writes no row; (c) a fire with the tab absent completes, one Logger line; (d) a fire that throws still lands its row; (e) checkpoint + resume, if the bench dials allow | es | not started |
 | 6 | PROD push (standing go) with its smoke note; first live read C118 Sun 2026-11-29 — Step 3.5 passes with no export | es | not started |
 
 ## Acceptance
@@ -55,4 +56,5 @@ Not carried: Logger warning lines (`console.warn` in `priorityEngine.js` is not 
 
 ## Changelog
 
+- 2026-11-23 (engine-sheet) — Advisor fold + builder's "should this be json? … automate as much as possible": the record is JSON carrying the full log; done-state pick; text-safe cells; checkpoint/resume join; bench edge cases.
 - 2026-11-23 (engine-sheet) — Created on the builder's "item 10" from the C117 take-over list (G-EC42b) and the 11-22 log research.

@@ -456,11 +456,11 @@ try {
   fs.appendFileSync(hoodLifePath, (hoodLifeBefore.endsWith('\n') ? '' : '\n') + hoodRows.map(r => JSON.stringify(r)).join('\n') + '\n');
   const m = neighborhood.buildNeighborhoodSlice(CYCLE, { root });
   ok('maria: every hood\'s texture paragraph rides as the record', ['Downtown: The block feels alive.', 'Fruitvale: A quiet week on the avenue.'].every(t => m.facts.some(f => f.text === t && /neighborhood_texture_c103\.md/.test(f.src))));
-  ok('maria: program + founder from the ledger', m.facts.some(f => /Test Program \(mutual-aid\), Downtown — founded by Test Civic Resident, since C100/.test(f.text)));
-  ok('maria: residents carry their own block line; two a hood, never herself, never a non-block line', (() => {
+  ok('maria: programs ride as a count per hood; names and founders are her sheet tool (builder 2026-11-23)', m.facts.some(f => /active community programs: .*Downtown \d/.test(f.text)) && !m.facts.some(f => /founded by/.test(f.text)));
+  ok('maria: residents carry their own block line; one a hood, never herself, never a non-block line', (() => {
     const pops = m.citizens.map(c => c.popid);
     return m.citizens.some(c => c.popid === 'POP-90001' && /pointed a stranger to the new shop/.test(c.profile)) &&
-      pops.includes('POP-90007') && !pops.includes('POP-90003') && !pops.includes('POP-00013') && !pops.includes('POP-90008');
+      pops.includes('POP-90007') && !pops.includes('POP-90002') && !pops.includes('POP-90003') && !pops.includes('POP-00013') && !pops.includes('POP-90008');
   })());
   ok('maria: no code-picked hood, no hook, no custody/care/tax/debt line', m.hood === null && m.prewrite.hooks.length === 0 && !m.facts.some(f => /custody|in care at the close|Tax day|debt/.test(f.text)));
   ok('maria: hood population movement vs prev/', (() => {

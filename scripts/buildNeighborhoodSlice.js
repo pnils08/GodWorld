@@ -21,15 +21,15 @@ const K = require('./beatSliceKit');
 const SEAT = {
   slug: 'maria-keen', name: 'Maria Keen', popid: 'POP-00013', desk: 'culture',
   kind: 'beat-neighborhood', domain: 'neighborhood', artifact: 'neighborhood', builder: 'buildNeighborhoodSlice.js',
-  version: 'HOOD-SLICE-5', nameRe: /maria\s*keen/i,
+  version: 'HOOD-SLICE-6', nameRe: /maria\s*keen/i,
   tabs: ['Community_Programs', 'Neighborhood_Demographics', 'LifeHistory_Log'],
   approach: '',
   roomIsYours: '',
   build
 };
 
-const PER_HOOD = 2;
-const PEOPLE_CAP = 44;
+const PER_HOOD = 1;   // builder 2026-11-23 ("go, do jordan and maria"): a lighter morning; one resident a hood
+const PEOPLE_CAP = 22;
 const HOOD_LINE = /(^|\|)source:(neighborhood|nbhdState|communityLife)(\||$)/;
 
 function textureBlocks(root, cycle) {
@@ -64,19 +64,20 @@ function build(cycle, { root, beats, profiles }) {
   const textureFile = 'output/neighborhood_texture_c' + cycle + '.md';
   for (const b of textureBlocks(root, cycle)) facts.push({ text: b.hood + ': ' + b.text, src: textureFile + ' ### ' + b.hood });
 
-  for (const pr of (beats.Community_Programs || []).filter(p => p.Name && /active/i.test(String(p.Status || '')))) {
-    const founder = pr.Founder_POPID ? profiles.get(String(pr.Founder_POPID).toUpperCase()) : null;
-    facts.push({
-      text: String(pr.Name).trim() + (pr.Type ? ' (' + pr.Type + ')' : '') + (pr.Neighborhood ? ', ' + pr.Neighborhood : '') +
-        (founder && founder.Name ? ' — founded by ' + String(founder.Name).trim() : '') +
-        (pr.Founded_Cycle ? ', since C' + pr.Founded_Cycle : ''),
-      src: 'output/beats/Community_Programs.jsonl @C' + cycle + (pr.Program_ID ? ' ' + pr.Program_ID : '')
-    });
+  // Programs leave the morning (builder 2026-11-23); Community_Programs is her sheet tool. One count per hood stays.
+  const progs = (beats.Community_Programs || []).filter(p => p.Name && /active/i.test(String(p.Status || '')));
+  if (progs.length) {
+    const byHood = new Map();
+    for (const p of progs) { const h = String(p.Neighborhood || 'Citywide').trim(); byHood.set(h, (byHood.get(h) || 0) + 1); }
+    facts.push({ text: progs.length + ' active community programs: ' + [...byHood.entries()].sort((a, b) => b[1] - a[1]).map(([h, n]) => h + ' ' + n).join(', ') + ' — names and founders on Community_Programs',
+      src: 'output/beats/Community_Programs.jsonl @C' + cycle });
   }
 
   const prev = K.prevTabRows(root, 'Neighborhood_Demographics');
   for (const demo of (beats.Neighborhood_Demographics || []).filter(r => r.Neighborhood)) {
     const prevDemo = prev.rows.find(r => K.hoodKey(r.Neighborhood) === K.hoodKey(demo.Neighborhood));
+    const moved = prevDemo && ['Students', 'Adults', 'Seniors'].some(c => K.num(demo[c]) != null && K.num(prevDemo[c]) != null && K.num(demo[c]) !== K.num(prevDemo[c]));
+    if (prevDemo && !moved) continue;   // a hood whose population held is on Neighborhood_Demographics
     facts.push({ text: populationLine(String(demo.Neighborhood).trim(), demo, prevDemo, prev.vs),
       src: 'output/beats/Neighborhood_Demographics.jsonl @C' + cycle + (prevDemo ? ' vs prev/' : '') });
   }

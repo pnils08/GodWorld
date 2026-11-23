@@ -5,8 +5,9 @@
  * business desk's economic slice for his seat (buildEconomicSlice.js: its one-hood rotation, angle, hooks, seeds).
  *
  * The record as the engine wrote it this Cycle, the whole city, no business or hood made the story:
- *   Business_Ledger vs output/beats/prev/ — every business: sector, hood, headcount, revenue, 'growing X% a year', and
- *     its move since last Cycle; headcount changes and negative growth first
+ *   Business_Ledger vs output/beats/prev/ — the businesses that moved (headcount changes, negative growth, the 10 biggest
+ *     growth-rate moves each way) with headcount, revenue, 'growing X% a year' and the move; one line per sector for the
+ *     rest (builder 2026-11-23: the morning carries the movement, the whole ledger is his sheet tool)
  *   output/world_summary_c{N}.md ## What Moved › economic-event — closures, job losses, carryovers
  *   Casino_Ledger — the Cycle's wagers by tracked citizens: who staked what on which market, who won, who lost, voids
  *   Neighborhood_Map — each hood's median income, median rent, housing pressure and trajectory
@@ -23,14 +24,15 @@ const K = require('./beatSliceKit');
 const SEAT = {
   slug: 'business-desk', name: 'Jordan Velez', popid: 'POP-00153', desk: 'business',
   kind: 'beat-economy', domain: 'economy', artifact: 'economy', builder: 'buildEconomySlice.js',
-  version: 'ECONOMY-SLICE-1', nameRe: /jordan\s*velez/i,
+  version: 'ECONOMY-SLICE-2', nameRe: /jordan\s*velez/i,
   tabs: ['Business_Ledger', 'Employment_Roster', 'Casino_Ledger', 'Neighborhood_Map', 'City_Treasury', 'LifeHistory_Log'],
   approach: '',
   roomIsYours: '',
   build
 };
 
-const PEOPLE_CAP = 40;
+const PEOPLE_CAP = 25;
+const MOVERS_EACH_WAY = 10;   // builder 2026-11-23 ("go, do jordan and maria"): the morning gets the movement; the whole ledger is his sheet tool
 const WORK_LINE = /(^|\|)(source:(economy|occupation)|Promotion|Setback|Strain|Business-Gain|Business-Owner|LifeEvent-Promotion[^|]*)(\||$)/;
 
 function money(n) {
@@ -66,7 +68,23 @@ function build(cycle, { root, beats, profiles }) {
     return { b, rev, grow, emp, dg, dr, de, hasPrev: !!p };
   }).sort((x, y) => ((y.de ? 1 : 0) - (x.de ? 1 : 0)) || (((y.grow != null && y.grow < 0) ? 1 : 0) - ((x.grow != null && x.grow < 0) ? 1 : 0)) ||
     (Math.abs(y.dg || 0) - Math.abs(x.dg || 0)));
+  // The morning carries the movement: every headcount change and every business in negative growth, the biggest
+  // growth-rate moves each way, and one line per sector. Every other business is on the Business_Ledger his sheet tool reads.
+  const keep = new Set(rows.filter(x => x.de || (x.grow != null && x.grow < 0)).map(x => x.b.BIZ_ID));
+  for (const x of rows.filter(x => x.dg > 0).sort((a, b) => b.dg - a.dg).slice(0, MOVERS_EACH_WAY)) keep.add(x.b.BIZ_ID);
+  for (const x of rows.filter(x => x.dg < 0).sort((a, b) => a.dg - b.dg).slice(0, MOVERS_EACH_WAY)) keep.add(x.b.BIZ_ID);
+  const sectors = new Map();
   for (const x of rows) {
+    const k = String(x.b.Sector || 'Other').trim();
+    const t = sectors.get(k) || { n: 0, emp: 0, up: 0, down: 0 };
+    t.n++; t.emp += x.emp || 0; if (x.dg > 0) t.up++; if (x.dg < 0) t.down++;
+    sectors.set(k, t);
+  }
+  const sectorLine = [...sectors.entries()].sort((a, b) => b[1].emp - a[1].emp)
+    .map(([k, t]) => k + ' ' + t.n + ' (' + t.emp + ' jobs, ' + t.up + ' up, ' + t.down + ' down)').join('; ');
+  facts.push({ text: 'All ' + rows.length + ' businesses by sector, C' + cycle + ': ' + sectorLine + ' — the rest of the ledger is on Business_Ledger',
+    src: 'output/beats/Business_Ledger.jsonl @C' + cycle + ' vs prev/' });
+  for (const x of rows.filter(x => keep.has(x.b.BIZ_ID))) {
     const bits = [String(x.b.Name).trim() + ' (' + String(x.b.Sector || '').trim() + ')' + (x.b.Neighborhood ? ', ' + x.b.Neighborhood : '')];
     const now = [];
     if (x.emp != null) now.push(x.emp + ' employees');

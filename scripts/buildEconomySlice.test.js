@@ -58,8 +58,8 @@ fs.writeFileSync(path.join(root, 'output', 'world_summary_c' + CYCLE + '.md'),
 
 console.log('buildEconomySlice:');
 const s = econ.buildEconomySlice(CYCLE, { root, profiles });
-ok('every business rides; headcount changes first, then negative growth', /^Shedding Co/.test(s.facts[0].text) && /^Sinking Co/.test(s.facts[1].text) && s.facts.some(f => /^Steady Co/.test(f.text)));
-ok('a business carries its move since last cycle', s.facts[0].text === 'Shedding Co (Healthcare), Glenview — 7 employees, revenue $500k, growing 2.0% a year — since C116: yearly growth rate -0.5 pts, -3 employees');
+ok('the morning carries the movement: one line per sector, then headcount changes, then negative growth; a business that held is left to his sheet tool', /^All 3 businesses by sector, C117: /.test(s.facts[0].text) && /^Shedding Co/.test(s.facts[1].text) && /^Sinking Co/.test(s.facts[2].text) && !s.facts.some(f => /^Steady Co/.test(f.text)));
+ok('a business carries its move since last cycle', s.facts[1].text === 'Shedding Co (Healthcare), Glenview — 7 employees, revenue $500k, growing 2.0% a year — since C116: yearly growth rate -0.5 pts, -3 employees');
 ok('the engine\'s business event rides', s.facts.some(f => /^business-closure \| closure: Test Dental/.test(f.text)));
 ok('the casino: a winner and a loser by name, the house float, the count', s.facts.some(f => f.text === 'Test Winner won on undocked (no) — staked $385, paid $705') &&
   s.facts.some(f => /^Test Editor lost on undocked/.test(f.text)) && s.facts.some(f => f.text === 'Casino house float: $246k') && s.facts.some(f => /^Casino C117: 1 sports wagers placed; 2 settled, 0 voided/.test(f.text)));

@@ -78,6 +78,7 @@ Steps with no script: 3 confirms the builder's fire on the live sheet; 4.1 check
 
 ## Changelog
 
+- 2026-11-23 (engine-sheet) — governance.62 (builder "Go on 11"): `scripts/draftEngineReview.js` drafts the engine review at Step 4 (fire, Engine_Errors, Step 2.5, scoreboard, every finding by its `finding C{XX}-<i>` id, improvements, anomalies, briefs); Step 4.1 refuses while `CALLS-PENDING` stands; a re-draft never overwrites written calls. Checked on C117: a re-run kept the written review byte-identical. runCycle tests owed at the test unlock.
 - 2026-11-23 (engine-sheet) — Builder "go on 9": Step 5.56 builds and checks the Oakland week page (not gating, noted on the step's line); the skill's page section says publish any time after 5.56 PASS.
 - 2026-11-23 (engine-sheet) — Builder "go on 8": a Sheets read-quota hit in a read-only step (1, 2.5, 3.5, 4, 5.56, 5.55, 5.7, 5.8, 5.85, 6) waits 65 s and reruns, twice at most; 5, 5.5, 5.58, 5.6 never retry (post / spend / publish / append). Checked with a stand-in script: 1 hit → 1 retry → pass; 3 hits → 2 retries → fail; Step 5.5 → no retry (C117 G-EC42d).
 - 2026-11-23 (engine-sheet) — Builder "go on 7": Step 2 passes the pre-mortem `--since=<previous chain's Step 3 time>` (C117 G-EC42a); `8d9c9d1eb`.

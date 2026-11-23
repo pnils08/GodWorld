@@ -74,6 +74,8 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | engine.357 | Checker reads its own record (builder 11-22 "go on 5"): no "none" issue, stalls are setbacks, one measurement once. Read C118 Sun 2026-11-29 | live-observing | engine-sheet | [[../plans/2026-11-22-checker-reads-its-own-record]] |
 | pipeline.115 | Engine out of the sim's mouth (builder 11-22): built + agy fold; owns Jax's rulebook (Civis tags). Read Mon 2026-11-23 desk run, C118 signal | live-observing | engine-sheet | [[../plans/2026-11-22-engine-out-of-the-sims-mouth]] |
 | engine.358 | Engine writes its run record: LIVE stage 74 @209, benched. Read C118 Sun 2026-11-29: Step 3.5 passes from the record, no export | live-observing | engine-sheet | [[../plans/2026-11-23-engine-writes-its-run-record]] |
+| governance.62 | Engine review drafted by Step 4 (builder 11-23 "Go on 11"); the session writes only the calls, 4.1 refuses the draft. Read C118 Sun 2026-11-29 | live-observing | engine-sheet | [[../plans/2026-11-09-run-cycle-step-gate]] §Changelog 2026-11-23 |
+
 ## 3. Now — being worked, one per terminal (in-progress)
 
 | # | Item | State | Terminal | Pointer |

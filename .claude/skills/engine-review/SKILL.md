@@ -14,6 +14,8 @@ disable-model-invocation: false
 
 After a cycle runs, identify what's broken, stuck, improving, declining, or incoherent — and produce a structured brief per ailment. **Consumers are the crons, not `/sift` / `/write-edition`** — see `/run-cycle` Step 4 "Who reads what" and §What Happens After; every `/sift` reference below is historical. Write the review for the next engine session and the civic chain: what is real, what is mechanism, what is routed to engine-debug.
 
+**Since 2026-11-23 (governance.62):** run-cycle Step 4 drafts `output/engine_review_c{XX}.md` itself (`scripts/draftEngineReview.js`). The session's part is §Calls — for each finding, real or mechanism and where it goes — written over the `CALLS-PENDING` line; the sections below describe what the calls draw on.
+
 This skill no longer scans sheets by hand. The deterministic detector lives in `scripts/engineAuditor.js` (Phase 38.1 + 38.7 + 38.8, S146). The skill is the **framer** — it reads the auditor's JSON output and turns each pattern into a seven-field ailment brief, anomaly triage, and a baseline-brief pass-through. Determinism stays in code; narrative framing stays here.
 
 This is NOT a code check. `/pre-mortem` checks the code. This checks what the code produced — is the world making sense?

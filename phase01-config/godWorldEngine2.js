@@ -514,7 +514,8 @@ function writeRunRecord_(ss, fire, outcome) {
       checkpointGen: gen,
       wallMs: nowMs - runStart,
       timing: ENGINE95_TIMING_DIAG || null,
-      engineErrors: typeof S.engineErrorCount === 'number' ? S.engineErrorCount : null,
+      // the counter is set only when an error is logged (logEngineError_): a run with a context and no count had none
+      engineErrors: typeof S.engineErrorCount === 'number' ? S.engineErrorCount : (ctx ? 0 : null),
       auditIssues: S.auditIssues ? S.auditIssues.length : null,
       rngDraws: draws,
       log: runRecordLogLines_(Logger.getLog())

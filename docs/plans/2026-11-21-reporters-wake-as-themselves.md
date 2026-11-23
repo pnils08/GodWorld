@@ -63,6 +63,9 @@ On Sharon (2026-11-21): bio — "i like them both and love \"visits places she w
 | 8 | Celeste: seat file, trends record (watching: shows, UNDOCKED, game night, shared moments) | rb | live `37ed5d76e`; read Fri 11-27 |
 | 9 | Jordan (business desk): seat file, own economy record incl. the casino, Sonnet 5.5 | rb | live `7482c334d`; read Mon 11-23 (his day) |
 | 10 | Tribune staff (MED) off the new-mold source lists | rb | done `37ed5d76e` |
+| 11 | Morning tool loop (dig before picking) | rb | live `36f0eec26` |
+| 12 | ask_worker: reporters ask the 14 city workers; answers become the worker's quote | rb | live `c3e678b80` |
+| 13 | Elliot Graye: seat file, every-congregation faith record | rb | live `7109f6cf7`; read Thu 11-26 |
 
 ## Acceptance
 
@@ -98,6 +101,7 @@ On Sharon (2026-11-21): bio — "i like them both and love \"visits places she w
 
 ## Changelog
 
+- 2026-11-23 (research-build) — Workers on call ("media crons can call on worker crons"): ask_worker, 2 a wake, read-only on the worker's record. Graye live, seventh seat. `7109f6cf7`
 - 2026-11-23 (research-build) — Morning tool loop live ("allow them to dig and and be journlists"); agy HOLD folded #1–#5. Jordan and Maria trimmed mornings. `36f0eec26`
 - 2026-11-23 (research-build) — Celeste and Jordan live. Staff off source lists ("1 and 2 yes"); Celeste's Essence back (his allowance); Jordan on Sonnet 5.5 for morning and write ("be curius if sonnet 5.5 would be sufficient"). Gaps for him: a trending page (who watched which show); the engine's per-week business cause.
 - 2026-11-22 (research-build) — Mason live, "mason next": trend = each business's move since last Cycle; the engine keeps no per-week cause (engine gap, his call on a row). Ages ride from the row after a 34-for-20 invention. `f72796514`

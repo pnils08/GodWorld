@@ -67,6 +67,7 @@ On Sharon (2026-11-21): bio — "i like them both and love \"visits places she w
 | 12 | ask_worker: reporters ask the 14 city workers; answers become the worker's quote | rb | live `c3e678b80` |
 | 13 | Elliot Graye: seat file, every-congregation faith record | rb | live `7109f6cf7`; read Thu 11-26 |
 | 14 | Noah Tan: seat file, weather and environment record | rb | live `d08529a29`; read Wed 11-25 |
+| 15 | Trevor Shimizu: seat file, transit record without the sports feed | rb | live; read Mon 11-30 |
 
 ## Acceptance
 
@@ -103,6 +104,7 @@ On Sharon (2026-11-21): bio — "i like them both and love \"visits places she w
 
 ## Changelog
 
+- 2026-11-23 (research-build) — Trevor live: game write-ups off ("he doesn't need sports outcomes"); morning worker answer carried to the manifest in a live-path run.
 - 2026-11-23 (research-build) — Noah live, "Same approach as the rest"; engine models one weather row a Cycle (a fuller environment model is its own job). `d08529a29`
 - 2026-11-23 (research-build) — agy pass 2 folded: a quoted worker now backs the gate's intake check (proven PASS on Jordan's Osei piece); worker asks capped per wake and never fatal. `69f6adf70`
 - 2026-11-23 (research-build) — Workers on call ("media crons can call on worker crons"): ask_worker, 2 a wake, read-only on the worker's record. Graye live, seventh seat. `7109f6cf7`

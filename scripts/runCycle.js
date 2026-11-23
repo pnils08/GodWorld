@@ -61,7 +61,14 @@ const STEPS = [
       return r.status === 0 ? { ok: true, outcome: 'pass', detail: 'READY' } : { ok: false, detail: `pre-flight exit ${r.status} (NOT READY)` }; } },
 
   { id: '2', title: 'Pre-mortem', scripts: ['preMortemScan'],
-    run: (c) => { const r = run(['scripts/preMortemScan.js', ...c.args]);
+    // C117 gap log G-EC42a: the scan's "engine changes since last cycle" date is the moment the
+    // previous chain confirmed its fire on the sheet (that record's Step 3); --since on the
+    // command line still wins. preMortemScan's own fallback (SESSION_CONTEXT "Last Updated:")
+    // no longer exists, so without this the window was always unresolved.
+    run: (c) => {
+      const prevFire = ((loadState(c.cycle - 1).steps || {})['3'] || {}).at;
+      const since = c.args.some(a => a.startsWith('--since=')) || !prevFire ? [] : ['--since=' + prevFire];
+      const r = run(['scripts/preMortemScan.js', ...since, ...c.args]);
       fs.writeFileSync(out('pre_mortem_scan.txt'), r.stdout + r.stderr);
       return r.status === 0 ? { ok: true, outcome: 'pass', detail: 'no CRITICAL' } : { ok: false, detail: `pre-mortem exit ${r.status} (CRITICAL findings — fix before the fire)` }; } },
 

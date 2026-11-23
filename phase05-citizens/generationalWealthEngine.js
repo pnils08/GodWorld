@@ -1115,6 +1115,7 @@ function businessProfit_(rev, empCount, avgSalary) {
 }
 
 function applyOwnerDraw_(ctx, cycle) {
+  var drawShare = null;   // engine.360: read from World_Config at the first business with a profit
   var out = { businesses: 0, owners: 0, paid: 0, gains: 0, unresolved: 0 };
   var header = ctx.ledger && ctx.ledger.headers, rows = ctx.ledger && ctx.ledger.rows;
   if (!header || !rows || !rows.length) return out;
@@ -1162,6 +1163,11 @@ function applyOwnerDraw_(ctx, cycle) {
     if (!ownerRows.length) continue;
     var profit = businessProfit_(data[b][bRev], data[b][bCnt], data[b][bSal]);
     if (profit === null) continue; // blank revenue: no signal
+    if (drawShare === null) {
+      // engine.360 (builder 2026-11-23): the owner's share is a World_Config dial, seeded by ensureEngine356Config_
+      drawShare = Number(ctx.config && ctx.config.ownerDrawShare);
+      if (!(drawShare >= 0 && drawShare <= 1)) throw new Error('applyOwnerDraw_: World_Config ownerDrawShare missing or outside 0..1 — ensureEngine356Config_ seeds it');
+    }
     out.businesses++;
     var bizName = String(bNm >= 0 ? (data[b][bNm] || data[b][bId]) : data[b][bId]);
     for (var o = 0; o < ownerRows.length; o++) {
@@ -1190,7 +1196,7 @@ function applyOwnerDraw_(ctx, cycle) {
       if (typeof isSportsLayerRow_ === 'function' && isSportsLayerRow_(orw, iClock, iEcon)) continue;
       var tier = iTier >= 0 ? Number(orw[iTier]) : 4;
       if (tier === 1 || tier === 2) continue;
-      var draw = Math.max(0, Math.round(profit * OWNER_DRAW_SHARE / ownerRows.length));
+      var draw = Math.max(0, Math.round(profit * drawShare / ownerRows.length));
       var was = Number(orw[iIncome]) || 0;
       if (draw === was) continue;
       orw[iIncome] = draw;

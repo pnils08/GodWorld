@@ -530,6 +530,8 @@ function ensureEngine338Config_(ss) {
 // scale / a ratio band wider than the city's whole crime spread).
 var ENGINE356_CONFIG_SEEDS = [
   ['trajectoryCrimeBand', 0.05, 'engine.356: CrimeIndex distance from the city mean that scores a hood -1 (rougher) / +1 (safer) in its trajectory, like mood\'s 0.05 (C116 crime 0.57-0.73, mean 0.65: 8 of 22 hoods outside it)', 0.001, 5, false],
+  // engine.360 (builder 2026-11-23: "Move the 0.5 onto World_Config"; rides this self-arm so no new ensure call is needed)
+  ['ownerDrawShare', 0.5, 'engine.360: share of a business\'s profit (revenue minus payroll) paid to an off-heritage owner (Tier 3-4) as annual Income, split among the owners (was OWNER_DRAW_SHARE 0.5 in generationalWealthEngine.js)'],
   ['migrationCrimeBand', 0.05, 'engine.356: CrimeIndex distance from the city median at which crime pushes people out of / pulls them into a hood in migration drift (was a +-15% ratio band that caught no hood)', 0.001, 5, false]
 ];
 

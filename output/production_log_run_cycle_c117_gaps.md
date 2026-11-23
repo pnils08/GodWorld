@@ -286,3 +286,9 @@ Builder 2026-11-22: "you can take those 5". Two read-only agents; findings spot-
 
 ### G-EC48 — births: three omissions in the milestone writer [judgment] [defect] (2026-11-23)
 `phase04-events/generationalEventsEngine.js` `applyMilestone_` (:1801): (a) the LifeHistory_Log intent hardcodes `''` for Name and Neighborhood though both are parameters — every milestone tag (Birth 8/8, Death 4/4, Retirement 10/11, Health 10/18, Recovery 3/4, Graduation 9/25 blank on live); (b) the ledger cell stamp is `"C" + cycle` (:1802), a leftover of the S271 `inWorldStamp_` conversion — readers matching `/^Y\d+C\d+ — /` (`lib/discordLookups.js:136`, `lib/personaProvider.js:283`) drop those lines; (c) `createChildRow_` (:1177) queues no log row for the child (5 of 8 newborns have none; readers already expect "born to"). Row engine.359.
+
+### G-EC49 — owner pay share onto World_Config [judgment] (2026-11-23)
+Builder: "Move the 0.5 onto World_Config". `applyOwnerDraw_` (`phase05-citizens/generationalWealthEngine.js`) paid off-heritage owners `profit × OWNER_DRAW_SHARE (0.5) / owners`, profit = revenue − staff × avg salary (Marquee Grocer: (1,413,436 − 12 × 58,000) / 2 = 358,718 = Paloma Vasquez's draw). Now `ctx.config.ownerDrawShare`, seeded 0.5 by `ensureEngine356Config_` (no new ensure call); missing or outside 0..1 throws. Same number — no citizen's pay changes. Row engine.360; tests and bench owed at the builder's unlock. Seen in passing: the heritage `Business-Gain` log row is stamped `ctx.now` (wall clock) with blank Name/Neighborhood — not this job.
+
+### G-EC50 — run reserve: watch C118 [judgment] (2026-11-23)
+Builder: "Watch C118 first". C117 tail 88.7 s: ~23 s was the one-time creation of Dial_Moves and Dial_Pulse (first live fire of the dial code; C114–C116 created none), ~11 s a Sheets timeout retry; executor intents 881 / 876 / 909 at C115–C117. Reserve stays 60 s; engine.95 reads C118 from the run record.

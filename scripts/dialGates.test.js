@@ -71,7 +71,9 @@ function ledgerCtx(rows) { return { summary: {}, config: { dialOwnerStreakRoom: 
   const BD = pick(src('../phase05-citizens/applyBusinessDynamics.js'), ['bizDriftOne_', 'bizOwnerDials_', 'bizClamp_']);
   const cfg = { bizVol_default: 1, bizEventShockScale: 1, bizCoverageUnit: 0.1, bizVitalityGain: 0.1, bizSuccessVitalityHigh: 9, bizSuccessApprovalHigh: 90,
     bizSuccessWindow: 99, bizSuccessPenalty: 0, bizDisruptBaseChance: 0, bizDisruptSuccessMult: 1, bizDisruptShock: 0, bizNoiseBound: 0,
-    bizDriftMaxDown: 2, bizDriftMaxUp: 2, bizGrowthFloor: -5, bizGrowthCeil: 20 };
+    bizDriftMaxDown: 2, bizDriftMaxUp: 2, bizGrowthFloor: -5, bizGrowthCeil: 20,
+    // engine.356 moved these onto World_Config (bizEventCap was 2.0 in code); neutral here so the owner-drive math is what is tested
+    bizEventCap: 2, bizInitiativeStallDrag: 0.5, bizWeatherPp: 0, bizSportsWeekPp: 0 };
   const biz = { id: 'BIZ-1', sector: 'Retail', growth: 2, revenue: 100000 };
   const inputsBase = { chaosAtBusiness: false, chaosInHood: false, initiativeAdvanced: true, coverageDeviation: 0.1, vitality: 5, vitalityMedian: 5, mayorApproval: 50 };
   const plain = BD.bizDriftOne_(cfg, biz, { streak: 0, win: 0 }, Object.assign({ ownerDriveHigh: 0, ownerExpandMult: 1.25 }, inputsBase), 106);

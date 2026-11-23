@@ -352,8 +352,10 @@ function buildContradiction(top, illnessRate, auditPattern, cycle) {
         ? 'Civis Systems has an earlier reading of it on the record (' + String(auditPattern.measurement.verdict || 'compared').replace(/-/g, ' ') + ').'
         : 'Civis Systems has no earlier reading of it to compare against.',
       frame: 'Civis flags a contradiction while its own comparison history is unavailable. What evidence supports the alert?',
-      aSrc: top.ref,   // agy #2: the record form keeps sheet, rows and storyline
-      bSrc: top.ref,
+      // agy #2: A cites the record (sheet, rows, storyline kept); B keeps its own
+      // provenance — Civis's measurement of the same finding — never the audit path.
+      aSrc: top.ref,
+      bSrc: (((require('./beatSliceKit').recordRef(top.ref).match(/\bfinding C\d+-\d+\b/) || [])[0] || '') + ' Civis Systems measurement').trim(),
       scopeHoods: neighborhoods,
       measurementAvailable: auditPattern.measurement && auditPattern.measurement.available === true,
     };

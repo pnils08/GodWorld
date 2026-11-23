@@ -40,8 +40,9 @@ pointers:
 - `checkMitigators` gives a setback `gap: remedy-working` — the stalled program is read as its own mitigator. Its own read.
 - The leftover-improvement measurement is the prior audit's number read a Cycle late (agy, pipeline.115 #4); its timing is unchanged here.
 - `output/engine_audit_c117.json` is not regenerated (city hall and Varek already read it).
-- Tests `detectImprovements.test.js`, `detectRepeatingEvents.test.js` not run or read (test guard); owed at the builder's unlock.
+- Tests run at the builder's unlock 2026-11-23: `detectImprovements.test.js`, `detectRepeatingEvents.test.js`, `engineAuditor.integration.test.js`, `civisJournal.test.js` pass; full suite green.
 
 ## Changelog
 
+- 2026-11-23 (engine-sheet) — Tests pass at the builder's unlock (detectors, auditor integration, civisJournal; full suite).
 - 2026-11-22 (engine-sheet) — Created and built on the builder's "go on 5"; A/B on live C117 sheets.

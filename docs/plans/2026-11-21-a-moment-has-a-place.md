@@ -118,6 +118,7 @@ pointers:
 
 ## Changelog
 
+- 2026-11-23 (engine-sheet) — `scripts/dialGates.test.js` trued: stage 72 moved `bizEventCap` (2.0 in code), `bizInitiativeStallDrag`, `bizWeatherPp`, `bizSportsWeekPp` onto World_Config; the test's config lacked them, so every drift read NaN (3 fails). Live C117 Business_Ledger: 0 NaN growth. Neutral values added; 34/34.
 - 2026-11-22 (engine-sheet) — **C117 read done** (first live fire of stages 69–73): 210 s, 0 failed, 0 new Engine_Errors. Night spot from the ledger: 1 of 1 — OakTown Social @ Temescal = BIZ-00038 (Cycle_Packet `--- EVENING CITY ---`; vibe quiet, movement restricted). Weddings tagged `Wedding` with no `|source:bond`: Travis Paiz POP-00222 + Jocelyn Santo POP-00547, Lake Merritt. Row → in-progress; next Task 1's count. Detail: `output/production_log_run_cycle_c117_gaps.md` G-EC45.
 - 2026-11-21 (engine-sheet) — Created on the builder's word, from research.34 / research.35 and the same-day read of the spot, the line and the page.
 - 2026-11-21 (engine-sheet) — **LIVE PROD stage 73, @208 — the two hood-data gaps fixed** (builder: "Go on these"): crime counts in the hood trajectory and migration on World_Config bands; a blank hood-map cell is missing. agy confirm → diff read → fold; tests green; benched @231 (C117 PASS; Baylight decay → steady). The stack 69–73 has now fired on the sandbox. Next on this row after the C117 read: Task 1's count, then the build against the builder's six answers (§Rulings).

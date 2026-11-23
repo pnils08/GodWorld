@@ -43,7 +43,7 @@ pointers:
 - **Now (the crons run from the tree):** seat wording on the weekday datawakes; every reporter-facing source from the Mon 2026-11-23 06:15 desk run (old C117 refs are converted on read).
 - **C118 fire (Sun 2026-11-29):** the desk signal itself carries no checker angle lines. `output/desk_signal_c117.json` on disk still holds the 27 C117 angle lines; this week's tips read them through the converted labels only where the code above touches them (civic lane handles feed `buildCivicDomainSlice` / Jax angle fallbacks). Regenerating the C117 file waits on the builder's word.
 - **This week only:** the fanout compares raw C117 desk-signal refs with converted civic-domain refs, so one finding could reach two desks once. Gone at C118 (one form).
-- **Tests:** not run or read (test guard); the tests pinning `handle.angle` / audit refs are owed at the builder's unlock.
+- **Tests:** run at the builder's unlock 2026-11-23 — full suite 349 files; `buildJaxSlice.test.js` (3) and `buildWorldSummary.test.js` (3) trued to the record-form ref and Civis wording; Jax's B side keeps its own source ("finding C<n>-<i> Civis Systems measurement"). All green.
 
 ## Acceptance
 
@@ -83,6 +83,7 @@ pointers:
 
 ## Changelog
 
+- 2026-11-23 (engine-sheet) — Tests (builder's unlock): Jax and world-summary tests trued to the new ref form and Civis wording; Jax incoherence B side restored to its own source. Full suite green but dialGates (engine.356, fixed same commit).
 - 2026-11-22 (engine-sheet) — Builder "yes you can take those out": "cycle" and "ledger" off Jax's forbidden words (record words, 2026-10-18 ruling); "engine" and "simulation" stay (fourth wall).
 - 2026-11-22 (engine-sheet) — Builder "yes rename": Jax's rulebook tags `FACT(engine)` → `FACT(Civis)`, "Engine Returns" → "Civis Returns" (RULES.md, SKILL.md); no script parses either.
 - 2026-11-22 (engine-sheet) — agy SHIP-WITH-FIXES folded (§Reviews reconciled): Jax slice record-form for every consumer, incoherence source + Civis-true B line, the stale leftover-improvement number off the seats, Mara's header to Civis. Trevor's C117 pick changes (correcting `3f016a164`'s "identical").

@@ -583,7 +583,9 @@ console.log('\nTest 11d: emitDeskSignal (synthetic data)');
 
   const anomaly = sig.lanes.civic.find(e => e.kind === 'anomaly');
   assert('anomaly entry present', Boolean(anomaly));
-  assertIncludes('anomaly ref → patterns[0] + evidence', anomaly.ref, 'engine_audit_c100.json patterns[0]; evidence: Initiative_Tracker row(s) 2');
+  // pipeline.115: the source is the city record + a finding tag, never the audit file
+  assertIncludes('anomaly ref → record + finding tag', anomaly.ref, 'Initiative_Tracker row(s) 2; finding C100-0');
+  assert('anomaly ref names no audit file', !/engine_audit/.test(anomaly.ref));
   assertEqual('anomaly popids', anomaly.popids, ['POP-00042']);
   assertEqual('anomaly hood', anomaly.hood, 'West Oakland');
 
@@ -983,7 +985,7 @@ console.log('\nTest 11g: storyline registry (engine.270)');
     rippleAll: [], sportsAll: [], neighborhoodsC: [], rileyCurr: {}, storylineLedger: [], arcRows, liveArcs: []
   });
   const anomalies = Object.values(patternSig.lanes).flat().filter(e => e.kind === 'anomaly');
-  const pat = i => anomalies.filter(e => e.ref.includes('patterns[' + i + ']'));
+  const pat = i => anomalies.filter(e => new RegExp('\\bfinding C\\d+-' + i + '(?:;|$)').test(e.ref));   // pipeline.115 ref form
   assert('D1: a pattern naming one initiative resolves to its stage',
     helper.resolveStoryline(pat(0)[0], R) && helper.resolveStoryline(pat(0)[0], R).id === 'INIT-005:construction-active');
   assert('D1: the desk copy of that pattern carries the same storyline', pat(0).length === 2
@@ -993,7 +995,7 @@ console.log('\nTest 11g: storyline registry (engine.270)');
   assert('D1: a pattern whose evidence names a crisis arc resolves to it',
     helper.resolveStoryline(pat(3)[0], R) && helper.resolveStoryline(pat(3)[0], R).id === 'CRISIS-105-WESTOAKL');
   assert('D1: an initiative not on the tracker tags nothing', !pat(4)[0].ref.includes('; storyline'));
-  assert('D1: the ref head is unchanged', pat(0)[0].ref.startsWith('output/engine_audit_c106.json patterns[0]; evidence: Initiative_Tracker row(s) 4'));
+  assert('D1: the ref head is the record, then the finding', pat(0)[0].ref.startsWith('Initiative_Tracker row(s) 4; finding C106-0'));   // pipeline.115
 
   assert('storylines ride their own key, a sibling of lanes', sig.storylines.civic.some(e => e.id === 'CRISIS-105-WESTOAKL'));
   assert('NO storyline leaks into any lane', !allEntries.some(e => e.type === 'crisis' || e.type === 'initiative-stage'));

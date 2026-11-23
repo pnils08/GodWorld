@@ -74,7 +74,8 @@ console.log('candidate-bound two-sided audit:');
   ok('contradiction stays on selected safety signal',
     /Safety Initiative/.test(auditSlice.contradiction.a) &&
       !/illness/i.test(JSON.stringify(auditSlice.contradiction)));
-  ok('second side exposes missing comparison history', /no prior audit/i.test(auditSlice.contradiction.b));
+  // pipeline.115 (builder 2026-11-22): Civis Systems is the in-world measurer
+  ok('second side exposes missing comparison history', /no earlier reading/i.test(auditSlice.contradiction.b));
   ok('primary affected hood anchors the story', auditSlice.story.hood === 'Test Hood');
   const packet = livedPacketV2.buildAnglePacket({
     cycle: 999, desk: 'civic', reporter: { name: 'Jax Caldera', popid: 'POP-00799' },
@@ -83,11 +84,13 @@ console.log('candidate-bound two-sided audit:');
   ok('typed Jax creative brief survives to W1',
     packet.task.creativeBrief && packet.task.creativeBrief.kind === 'data-accountability');
   ok('both mismatch sides retain distinct sources',
-    packet.known.some(row => /evidence\.fields$/.test(row.src)) &&
-      packet.known.some(row => /\.measurement$/.test(row.src)));
+    packet.known.some(row => row.src === auditSlice.contradiction.aSrc) &&
+      packet.known.some(row => / Civis Systems measurement$/.test(row.src)) &&
+      auditSlice.contradiction.aSrc !== auditSlice.contradiction.bSrc &&
+      !/engine_audit/.test(auditSlice.contradiction.aSrc + auditSlice.contradiction.bSrc));
   const secondSide = packet.known.filter(row => row.text === auditSlice.contradiction.b);
   ok('second side appears once with its own provenance',
-    secondSide.length === 1 && /\.measurement$/.test(secondSide[0].src));
+    secondSide.length === 1 && / Civis Systems measurement$/.test(secondSide[0].src));
   fs.rmSync(tmp, { recursive: true, force: true });
 }
 

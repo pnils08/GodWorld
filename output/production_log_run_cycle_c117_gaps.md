@@ -280,3 +280,9 @@ Builder 2026-11-22: "you can take those 5". Two read-only agents; findings spot-
 
 - G-R (AUTO): sanity-read FAIL-SCOPED — INIT-012, INIT-014 excluded from the write, rest applied — see output/cron-civic/gate_c117.json
 - G-R (AUTO): 1 voice(s) pending this window: council_d9
+
+### G-EC47 — the two future-stamped lines: traced, nothing lost [judgment] (2026-11-23)
+`compressLifeHistory_` "FUTURE-STAMPED 2 lines" = `Y3C29 — [Family] The record catches up: married to …` on POP-01030 Elena Patel (→ POP-00023 Gregory Mims) and POP-01035 Kaila Brown (→ POP-00038 Theo Park). Writer: `scripts/migrations/engine57_spouse_backfill.js:185` at `aaa7e9922` (2026-07-14) hard-typed `Y3C29` with `CYCLE = 101`; fixed by `113e78aab` (2026-10-17). The guard `utilities/compressLifeHistory.js:713` only skips the line from the fold; the line left by the ordinary 20-line trim (`:878` → `trimLifeHistory_`), first eligible for both at C117. Marriages intact: SpouseId both ways, MaritalStatus, household members, Family_Relationships `married | 101 | active`, bonds BOND-93E80E96 / BOND-8AA6D855. 0 stamps past Y3C13 and 0 watermarks past 117 remain. Closed, no fix owed.
+
+### G-EC48 — births: three omissions in the milestone writer [judgment] [defect] (2026-11-23)
+`phase04-events/generationalEventsEngine.js` `applyMilestone_` (:1801): (a) the LifeHistory_Log intent hardcodes `''` for Name and Neighborhood though both are parameters — every milestone tag (Birth 8/8, Death 4/4, Retirement 10/11, Health 10/18, Recovery 3/4, Graduation 9/25 blank on live); (b) the ledger cell stamp is `"C" + cycle` (:1802), a leftover of the S271 `inWorldStamp_` conversion — readers matching `/^Y\d+C\d+ — /` (`lib/discordLookups.js:136`, `lib/personaProvider.js:283`) drop those lines; (c) `createChildRow_` (:1177) queues no log row for the child (5 of 8 newborns have none; readers already expect "born to"). Row engine.359.

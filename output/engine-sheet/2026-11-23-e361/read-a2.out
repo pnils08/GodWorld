@@ -1,0 +1,12 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ suppress logs { quiet: true }
+{
+ "cycle": 118,
+ "rows": 2686,
+ "notInWorldStamp": 0,
+ "sampleNotIW": [],
+ "blankName": 0,
+ "blankNameForLedgerCitizen": 0,
+ "blankHood": 0,
+ "sampleBlankName": [],
+ "verdict": "PASS"
+}

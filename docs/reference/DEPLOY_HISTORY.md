@@ -212,6 +212,13 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD stage 76 — life-log rows complete; no silent RNG in births (2026-11-23, engine-sheet, engine.361)
+
+- **What:** four files at `932857ddf` on stage 75 — `phase10-persistence/persistenceExecutor.js` (every queued LifeHistory_Log row: a bare `C<n>` stamp becomes its in-world stamp by its own number; a blank Name / Neighborhood filled from the row's own POPID in the in-memory ledger, never replaced when written), `phase05-citizens/processAdvancementIntake.js` (the sign-up pass's direct batch and appends take the same rule), `phase04-events/generationalEventsEngine.js` (`createChildRow_`'s two silent 0.5 RNG fallbacks → `rand_(ctx)`, which throws), `phase05-citizens/generationalWealthEngine.js` (the heritage Business-Gain row writes its stamp, name, hood). Builder: "Let's address the smaller things".
+- **Proof:** `scripts/lifeHistoryRowFill.test.js` 7/7 on the real executor and the sign-up buffer; 31 executor/child and 17 sign-up test files pass. **Bench SANDBOX 1004** (`output/engine-sheet/2026-11-23-e361/`): first candidate C118 — names 0 blank, but 91 sign-up rows still bare-stamped with no hood (the direct batch) → fixed; final candidate C118 PASS 265 s: 2,686 log rows, 0 bare stamps, 0 blank Name, 0 blank Neighborhood. Final sync from live.
+- **Stage 76 (2026-11-23 ~04:20 CST):** live pulled = stage 75 (`e359-prod.sha256`); four files changed; built tree = the benched tree (`e361.sha256`); manifest `output/engine-sheet/2026-11-23-e361/e361-prod.sha256`; pull-back byte-identical; version cut **@211**. **Smoke:** C118 Sun 2026-11-29 — LifeHistory_Log rows for C118 with no bare stamp and no blank Name / Neighborhood for a ledger citizen.
+- **Back out:** the four files from `ac7d3388d` (= `e359-prod.sha256`) + version cut.
+
 ### PROD stage 75 — births on the record; the owner share on World_Config (2026-11-23, engine-sheet, engine.359 + engine.360)
 
 - **What:** four files at `ac7d3388d` on stage 74 — `phase04-events/generationalEventsEngine.js` (`applyMilestone_`: the log row carries Name + Neighborhood, the cell line the in-world stamp; `createChildRow_`: the newborn's own first log row), `phase05-citizens/processAdvancementIntake.js` (the spotlight line's in-world stamp), `phase05-citizens/generationalWealthEngine.js` (`applyOwnerDraw_` reads `ownerDrawShare`), `phase01-config/engine94SheetContract.js` (`ownerDrawShare` 0.5 seeded by `ensureEngine356Config_`). Repo: `scripts/engineAuditor.js` scoreboard counts a birth once. Builder: "go on next gap items" · "Move the 0.5 onto World_Config".

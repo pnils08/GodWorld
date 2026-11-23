@@ -1,0 +1,27 @@
+AIM = BENCH (script read the bench marker)
+== push code 932857ddf
+bench pull-back byte-identical to e361.sha256
+== sync from live
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+{"fireGuardMinutes":"0","cycleCountFormatted":"117","cycleCountIsNumber":true}
+clearfire 118: {"ok":true,"cleared":{"cycle":118,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+appended 5 to Edition_Coverage_Ratings; marked rows on the tab now 5
+appended 33 to Citizen_Media_Usage; marked rows on the tab now 33
+appended 2 to Oakland_Sports_Feed; marked rows on the tab now 2
+bench cycleCount 117
+fire C118 rc=0 "verdict": "PASS" "wallS": 265
+{
+ "cycle": 118,
+ "rows": 2686,
+ "notInWorldStamp": 0,
+ "sampleNotIW": [],
+ "blankName": 0,
+ "blankNameForLedgerCitizen": 0,
+ "blankHood": 0,
+ "sampleBlankName": [],
+ "verdict": "PASS"
+}
+read exit 0
+== final sync from live
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.

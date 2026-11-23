@@ -66,6 +66,8 @@ Not carried: `console.warn` lines (`priorityEngine.js`) do not reach `Logger.get
 
 - Tab retention cap — held, read at C130.
 
+**agy diff read** (`output/antigravity/2026-11-23-review-engine358-diff.md`, SHIP-WITH-FIXES): #1 the write path had no committed test — `cycleCheckpointWiring.test.js` §13 now runs it (normal, refused repeat, checkpoint + resume, tab missing; the harness body emits timings as the real finally does) and `scripts/fetchExecutionLog.test.js` covers the reader (11); #3 the reader rejects mixed part counts. Held: #2.1 the timing reset before the lock (per-execution isolates in Apps Script; moving it would change the benched candidate), #2.2 a header-less tab (live has its header).
+
 ## Acceptance
 
 1. Sandbox fire: one `Engine_Run_Log` row; its TimingsJSON equals the PHASE_TIMING block in that fire's execution log; Step 3.5's render passes the gate.
@@ -74,6 +76,7 @@ Not carried: `console.warn` lines (`priorityEngine.js`) do not reach `Logger.get
 
 ## Changelog
 
+- 2026-11-23 (engine-sheet) — agy diff read folded: wiring test §13 (9) + `fetchExecutionLog.test.js` (11), all pass; reader rejects mixed part counts. Engine file unchanged since `6556c0980` (the benched candidate).
 - 2026-11-23 (engine-sheet) — agy plan review HOLD folded (`output/antigravity/2026-11-23-review-engine358-plan.md`): execution start as the key, resume timing never joined, timing/completed lines stripped from the log and read last, latest done with real timings, null guards, `~` cells, no retry, all three stub files.
 - 2026-11-23 (engine-sheet) — Builder "go": `Engine_Run_Log` created on live with its header (Cycle, StartedAt, State, Lifecycle, Part, Parts, RecordJSON), read back.
 - 2026-11-23 (engine-sheet) — Advisor fold + builder's "should this be json? … automate as much as possible": the record is JSON carrying the full log; done-state pick; text-safe cells; checkpoint/resume join; bench edge cases.

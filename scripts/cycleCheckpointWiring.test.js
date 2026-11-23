@@ -51,13 +51,15 @@ function world(opts) {
   const cfgRows = [['Key', 'Value', 'Description'], ['cycleCount', 110, ''], ['lastRun', 'x', ''], ['fireGuardMinutes', 0, ''],
     ['wallBudgetMs', 330000, ''], ['tailReserveMs', 60000, ''], ['checkpointSaveMs', 20000, ''], ['checkpointForce', 0, ''], ['checkpointFaultAt', 0, ''], ['checkpointResumeFaultAt', 0, '']];
   Object.assign(cfgRows, {});
-  w.sheets = { World_Config: fakeSheet(cfgRows), Engine_Errors: fakeSheet([]), _CycleCheckpoint: opts.noTab ? null : fakeSheet([]), Simulation_Ledger: fakeSheet([['POPID'], ['POP-1']]) };
+  w.sheets = { World_Config: fakeSheet(cfgRows), Engine_Errors: fakeSheet([]), _CycleCheckpoint: opts.noTab ? null : fakeSheet([]), Simulation_Ledger: fakeSheet([['POPID'], ['POP-1']]),
+    Engine_Run_Log: opts.noRunLog ? null : fakeSheet([['Cycle', 'StartedAt', 'State', 'Lifecycle', 'Part', 'Parts', 'RecordJSON']]) };   // engine.358
+  w.log = [];
   const ss = { getSheetByName: n => w.sheets[n] || null };
   const D = function() { return arguments.length ? new (Function.prototype.bind.apply(Date, [null].concat([].slice.call(arguments))))() : new Date(w.clock); };
   D.now = () => w.clock;
   const box = {
     console, Math, JSON, Object, Array, String, Number, RegExp, isNaN, isFinite, parseInt, parseFloat, Error, Date: D,
-    Logger: { log() {} },
+    Logger: { log(m) { w.log.push(String(m)); }, getLog() { return w.log.join('\n'); } },   // engine.358: the run record reads getLog
     LockService: { getScriptLock: () => ({ tryLock: () => true, releaseLock: () => {} }) },
     PropertiesService: { getScriptProperties: () => ({
       getProperty: k => Object.prototype.hasOwnProperty.call(w.props, k) ? w.props[k] : null,
@@ -106,10 +108,11 @@ function world(opts) {
     ctx.persist.updates.push({ tab: 'LifeHistory_Log', kind: 'append', values: [[new D(), 'POP-1', 'x'.repeat(opts.bigIntent ? 120000 : 10)]], priority: 100 });
     if (w.bodyMode === 'throw') throw new Error('phase 5 died');
     const out = box.checkpointGate_(ctx, fire);
-    if (out) return out;
+    if (out) { box.emitPhaseTimings_(ctx); return out; }   // the real body emits timings in its finally (engine.358 reads them)
     box.executePersistIntents_(ctx);
     box.checkExecutorStats_(ctx, fire);
     box.flushCacheAndVerify_(ctx, fire);
+    box.emitPhaseTimings_(ctx);
     return null;
   };
   w.box = box; w.ss = ss;
@@ -420,6 +423,33 @@ console.log('═══ engine.317 — the read-only door to the fire record');
   const tr = t.box.doGet({ parameter: { token: 'readtok', action: 'admission' } });
   assert('a failed read is ok:false with no diagnostics', tr.ok === false && tr.error === 'fire record read failed' &&
     Object.keys(tr).sort().join() === 'error,ok', tr);
+}
+
+console.log('═══ 13 — engine.358: the run record, read back the way Step 3.5 reads it');
+{
+  const fx = require(path.join(ROOT, 'scripts', 'fetchExecutionLog.js'));
+  const recs = w => fx.recordsFromRows(w.sheets.Engine_Run_Log.rows.slice(1));
+  const w = world();
+  w.log.push('checkForPromotions_ v2.3: 2 citizens promoted');
+  const r = w.get({ expect: '110' });
+  assert('a normal fire is done', r.ok === true && r.state === 'done', r);
+  const rs1 = recs(w), pick = fx.pickRecord(rs1, 111);
+  assert('one record, every cell ~-prefixed', rs1.length === 1 && w.sheets.Engine_Run_Log.rows.slice(1).every(row => row.every(c => String(c).charAt(0) === '~')), w.sheets.Engine_Run_Log.rows.slice(1));
+  assert('Step 3.5 picks it: done, run, its timings, rng draws', pick && pick.state === 'done' && pick.lifecycle === 'run' && pick.timing && pick.timing.phaseCount >= 3 && pick.rngDraws === 7, pick);
+  assert('its log keeps the phase lines, drops the timing and completed lines', pick.log.some(l => /checkForPromotions_/.test(l)) && !pick.log.some(l => /"totalMs"|PHASE_TIMING|Cycle completed\./.test(l)), pick.log);
+  const sum = fx.summarize(fx.renderRecord(pick));
+  assert('the rendered log passes the Step 3.5 gate shape', sum.phases >= 3 && sum.failedPhases.length === 0 && /Cycle completed\./.test(sum.completedLine), sum);
+  const before = w.sheets.Engine_Run_Log.rows.length;
+  let refused = null; try { refused = w.get({ expect: '110' }); } catch (e) { refused = { thrown: e.message }; }
+  assert('a refused repeat fire writes no record', w.sheets.Engine_Run_Log.rows.length === before, refused);
+  const w2 = world(); w2.setCfg('checkpointForce', 1);
+  w2.get({ expect: '110' }); w2.clock += 61000; w2.resume();
+  const rs2 = recs(w2), p2 = fx.pickRecord(rs2, 111);
+  assert('checkpoint + resume: two records, the resume picked, its checkpointed part joined', rs2.length === 2 && p2 && p2.lifecycle === 'resumed' && p2.checkpointedPart === true, rs2.map(x => [x.state, x.lifecycle]));
+  assert('the resume carries every phase once and the saved rng draws', p2.timing.phaseCount === 8 && p2.rngDraws === 7, p2.timing);
+  const w3 = world({ noRunLog: true });
+  const r3 = w3.get({ expect: '110' });
+  assert('with the tab missing the fire is still done, one log line, no Engine_Errors row from it', r3.ok === true && r3.state === 'done' && w3.log.some(l => /Engine_Run_Log tab missing/.test(l)) && !w3.errors().some(e => /run record/.test(String(e[3]))), r3);
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

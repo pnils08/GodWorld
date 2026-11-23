@@ -78,7 +78,7 @@ function recordsFromRows(rows) {
   for (const parts of groups.values()) {
     parts.sort((a, b) => a.part - b.part);
     const n = parts[0] && parts[0].parts;
-    if (!n || parts.length !== n || parts.some((p, i) => p.part !== i + 1)) continue;   // incomplete: never read
+    if (!n || parts.length !== n || parts.some((p, i) => p.part !== i + 1 || p.parts !== n)) continue;   // incomplete or mixed: never read (agy 2026-11-23)
     try { out.push(JSON.parse(parts.map(p => p.data).join(''))); } catch (_) { /* unreadable: skipped */ }
   }
   return out;

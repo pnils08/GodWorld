@@ -367,8 +367,8 @@ try {
 
   console.log('safety:');
   const r = safety.buildSafetySlice(CYCLE, { root });
-  ok('lead hood = most incidents', r.hood === 'Fruitvale' && /Fruitvale logged the most incidents \(9\)/.test(r.story.label));
-  ok('slowest response named', r.facts.some(x => /Slowest response: Rockridge: 3 incidents, response 12.4 min, clearance 40%/.test(x.text)));
+  ok('no code-picked hood (pipeline.111)', r.hood === null && r.story.label === 'the public safety record of C103');
+  ok('every hood row rides, Rockridge included', r.facts.some(x => /^Rockridge: 3 incidents, response 12.4 min, clearance 40%/.test(x.text)));
   ok('public-safety staff by BIZ_ID join only (plus the court record\'s defendants)', r.story.citizens.includes('Test Chief (POP-90023)') && r.story.citizens.length === 4 && r.story.citizens.includes('Test Pro Athlete (POP-90002)') && !r.story.citizens.some(c => /Operator|Bartender|Farmer/.test(c)));
   ok('"Vertical Farm Systems Engineer" never matches a safety regex', !JSON.stringify(r.citizens).includes('Farmer'));
   ok('legacy loadSafetySlice export still works', typeof safety.loadSafetySlice === 'function');
@@ -382,8 +382,8 @@ try {
   ok('custody trail: explicit none tracked', r.facts.some(f => f.text === 'Rockridge: 3 charges → 1 arrest → 1 in custody at the close (0 tracked, 1 other residents); tracked: none tracked'));
   ok('custody trail: incomplete scope withholds its numbers', r.facts.some(f => f.text === 'Chinatown: census incomplete this cycle — numbers withheld'));
   ok('custody trail: never the unallocated or prior-cycle rows', !JSON.stringify(r.facts).includes('99'));
-  ok('safety hooks by type: COURT_FINE reaches Rachel with no journalist on the row', r.prewrite.hooks.some(hk => /Test Defendant — fined \$1200/.test(hk.text)));
-  ok('hook line carries the court and the custody close', /3 cases on the court record; 5 in custody citywide/.test(r.story.hookLine));
+  ok('no hooks (pipeline.111)', r.prewrite.hooks.length === 0);
+  ok('no hook line (pipeline.111)', r.story.hookLine === '');
   ok('every safety fact sourced to disk', r.facts.every(f => /^output\//.test(f.src)));
 
   console.log('culture lane (kai / sharon / maria):');
@@ -628,7 +628,7 @@ try {
   for (const [label, slice, popid] of [['trevor', t, 'POP-00155'], ['lila', h, 'POP-00154'], ['angela', s, 'POP-00156'], ['noah', e, 'POP-00157'], ['graye', f, 'POP-00012'], ['rachel', r, 'POP-00057'], ['kai', k, 'POP-00158'], ['sharon', sh, 'POP-00159'], ['maria', m, 'POP-00013'], ['selena', sg, 'POP-00591'], ['talia', tf, 'POP-00592'], ['celeste', ct, 'POP-00164']]) {
     const pk = v2.buildAnglePacket({ cycle: CYCLE, desk: slice.seat.desk, reporter: { popid, name: slice.seat.name }, story: slice.story, approach: slice.approach, slice, lane: [] });
     const b = pk.task.creativeBrief;
-    ok(label + ': brief beat-slice with facts + room', b && b.kind === 'beat-slice' && b.facts.length >= 1 && (['sharon', 'maria', 'kai', 'celeste', 'graye', 'noah', 'trevor', 'lila'].includes(label) || !!b.roomIsYours));   // seat-file seats: no room line (pipeline.111)
+    ok(label + ': brief beat-slice with facts + room', b && b.kind === 'beat-slice' && b.facts.length >= 1 && (['sharon', 'maria', 'kai', 'celeste', 'graye', 'noah', 'trevor', 'lila', 'rachel'].includes(label) || !!b.roomIsYours));   // seat-file seats: no room line (pipeline.111)
     ok(label + ': every anchor fact is a known FACT sourced to a file on disk', slice.prewrite.anchorFacts.every(text => pk.known.some(k => k.text === text && /^output\//.test(k.src))));
     ok(label + ': candidates = the slice\'s people', pk.exposure.candidates.length === slice.citizens.length && pk.exposure.candidates.every(c => slice.citizens.some(p => p.popid === c.pop)));
   }

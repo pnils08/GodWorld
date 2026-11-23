@@ -327,13 +327,15 @@ assert.deepStrictEqual(kai.reviewProfile.canonBlockers.map(v => v.split(':')[0].
 assert.equal(kai.rewardLoop, true);
 
 const rachel = packages['rachel-torres'];
-assert.equal(rachel.version, 'RACHEL-LEP2-2');
+assert.equal(rachel.version, 'RACHEL-LEP2-3');
+assert.equal(rachel.seatFile, '.claude/agents/rachel-torres/SEAT.md');   // pipeline.111 (builder 2026-11-23)
+assert.equal(packagesApi.routeFor(rachel, 'angle').model, 'anthropic/claude-sonnet-5.5');
 assert.equal(rachel.assignment.popid, 'POP-00057');
 assert.equal(rachel.assignment.beatDomain, 'SAFETY');
 assert.equal(packagesApi.routeFor(rachel, 'write').model, 'anthropic/claude-sonnet-5.5');
 assert.equal(rachel.reviewProfile.canonPolicy, 'load-bearing');
 assert.equal(rachel.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
-assert.ok(rachel.reviewProfile.canonBlockers.some(v => v.includes('invented incident')));
+assert.ok(rachel.reviewProfile.canonBlockers.some(v => v.includes('an invented or altered data point')));
 
 const lila = packages['lila-mezran'];
 assert.equal(lila.version, 'LILA-LEP2-3');

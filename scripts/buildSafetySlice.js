@@ -18,10 +18,10 @@ const K = require('./beatSliceKit');
 const SEAT = {
   slug: 'rachel-torres', name: 'Sgt. Rachel Torres', popid: 'POP-00057', desk: 'civic',
   kind: 'beat-safety', domain: 'public-safety', artifact: 'safety', builder: 'buildSafetySlice.js',
-  version: 'SAFETY-SLICE-4', nameRe: /rachel\s*torres/i,
-  tabs: ['Crime_Metrics', 'Employment_Roster', 'Business_Ledger', 'Story_Hook_Deck', 'Judicial_Ledger', 'City_Treasury', 'Care_Justice_Census'],
-  approach: 'Public-safety approach: this slice is the crime table for every neighborhood — incidents, response time, clearance — the public-safety staff on the roster, the court record (who was charged, what the court did, what it cost them) and the custody trail from charges to arrests to who is held, hood by hood. Measured, third person, incident structure and classification gaps. The numbers, the officials and the defendants are real; the block, the call, the aftermath are yours.',
-  roomIsYours: 'the corner after the call, the dispatcher\'s pause, who was on the porch, what the neighborhood watch captain saw first',
+  version: 'SAFETY-SLICE-5', nameRe: /rachel\s*torres/i,
+  tabs: ['Crime_Metrics', 'Employment_Roster', 'Business_Ledger', 'Story_Hook_Deck', 'Judicial_Ledger', 'City_Treasury', 'Care_Justice_Census', 'LifeHistory_Log'],
+  approach: '',
+  roomIsYours: '',
   build
 };
 
@@ -46,16 +46,19 @@ function build(cycle, { root, beats, profiles }) {
       (r.response != null ? ', response ' + r.response + ' min' : '') + (r.clearance != null ? ', clearance ' + Math.round(r.clearance * 100) + '%' : '') +
       (r.property != null ? ', property index ' + r.property : '') + (r.violent != null ? ', violent index ' + r.violent : '');
   };
-  const facts = [{ text: K.fmtInt(total) + ' incidents across ' + rows.length + ' neighborhoods; most in ' + rows.slice(0, 5).map(r => r.hood + ' ' + r.incidents).join(', ') + '; fewest in ' + rows.slice(-3).map(r => r.hood + ' ' + r.incidents).join(', '), src }];
-  facts.push({ text: fmt(lead), src });
-  if (slowest !== lead) facts.push({ text: 'Slowest response: ' + fmt(slowest), src });
+  // pipeline.111 (builder 2026-11-23: "looks good"): every hood's row, in name order — no lead hood or slowest hood picked.
+  const facts = [{ text: K.fmtInt(total) + ' incidents across ' + rows.length + ' neighborhoods this cycle', src }];
+  for (const r of rows.slice().sort((a, b) => String(a.hood).localeCompare(String(b.hood)))) facts.push({ text: fmt(r), src });
   // engine.235: what the engine itself flagged — hotspots against the city's own middle, and which
   // hoods moved this cycle. The engine computed these every cycle and kept them in memory until now.
   const hot = rows.filter(r => r.hotspot != null).sort((a, b) => b.hotspot - a.hotspot);
   if (hot.length) facts.push({ text: 'Hotspots this cycle (over the city\'s own bar): ' + hot.map(r => r.hood + (r.pressure != null ? ' (' + r.pressure + '× the city median)' : '')).join(', '), src });
   const rising = rows.filter(r => r.trend === 'rising').map(r => r.hood), easing = rows.filter(r => r.trend === 'falling').map(r => r.hood);
   if (rising.length || easing.length) facts.push({ text: 'Moved this cycle — rising: ' + (rising.join(', ') || 'none') + '; easing: ' + (easing.join(', ') || 'none'), src });
+  // The department's leadership, not every name on its roster (pipeline.111).
+  const LEAD_ROLE = /chief|deputy|captain|lieutenant|commander|internal affairs|director|program lead|\blead\b/i;
   const people = K.rosterAtSectors(beats, /\bpublic safety\b|crisis response/i)
+    .filter(w => LEAD_ROLE.test(String(w.role || ''))).slice(0, 10)
     .map(w => K.person(w.popid, w.name, w.role, null, 'works at ' + w.business + ' (Employment_Roster)', w.business));
 
   // engine.254 Task 10 — the court: cases that moved this cycle or still hold
@@ -63,7 +66,7 @@ function build(cycle, { root, beats, profiles }) {
   // record; a GAME-clock citizen's case is counted, never named (the sports desks').
   const courtSrc = 'output/beats/Judicial_Ledger.jsonl @C' + cycle;
   const court = K.courtCases(beats.Judicial_Ledger, beats.City_Treasury, cycle, profiles, courtSrc);
-  for (const c of court.cases.slice(0, 8)) {
+  for (const c of court.cases.slice(0, 20)) {
     facts.push({ text: 'COURT: ' + c.text, src: c.src });
     if (!people.some(p => p.popid === c.popid)) {
       people.push(K.personFromProfile(profiles, c.popid, c.inCustody ? 'in custody on the court record' : 'on the court record this cycle', c.hood) ||
@@ -78,31 +81,50 @@ function build(cycle, { root, beats, profiles }) {
   // the tracked names from the court record or an explicit "none tracked".
   const demandByHood = new Map(rows.map(r => [K.hoodKey(r.hood), r.incidents]));
   const trail = K.censusTrail(beats.Care_Justice_Census, cycle, 'judicial', { demandByHood, namesByHood: K.custodyNamesByHood(beats.Judicial_Ledger, profiles) });
-  for (const f of K.censusFacts(trail, 'judicial', 'output/beats/Care_Justice_Census.jsonl judicial @C' + cycle, 5)) facts.push(f);
+  for (const f of K.censusFacts(trail, 'judicial', 'output/beats/Care_Justice_Census.jsonl judicial @C' + cycle, 30)) facts.push(f);   // every hood (pipeline.111)
 
-  // Desk-signal incident rows are pointers, not the source (optional file).
-  const signal = K.loadJson(path.join(root, 'output', 'desk_signal_c' + cycle + '.json'));
-  const pointers = ((signal && signal.lanes && signal.lanes.civic) || [])
-    .filter(row => /crime|safety|police|oari|incident|classification|response/i.test(JSON.stringify(row)))
-    .map(row => ({ label: String(row.label || (row.handle && row.handle.angle) || '').slice(0, 160), ref: row.ref || null, hood: row.hood || null }))
-    .slice(0, 5);
-  const label = lead.hood + ' logged the most incidents (' + lead.incidents + ') | ' + rows.length + ' neighborhoods on the table';
-  const custody = trail.city && trail.city.complete ? trail.city.closing : null;
+  // The chaos events that touched policing and response (patrol-car tickets, OARI calls, crises), from the world summary.
+  const summary = K.loadText(path.join(root, 'output', 'world_summary_c' + cycle + '.md'));
+  const chaosSec = K.extractSection(summary, 'Chaos Events');
+  for (const line of String(chaosSec || '').split('\n')) {
+    if (/^- /.test(line) && /cop_car|police|patrol|oari|ticket|arrest|crisis|fire|ems|ambulance/i.test(line)) facts.push({ text: line.slice(2).trim(), src: 'output/world_summary_c' + cycle + '.md ## Chaos Events' });
+  }
+  for (const line of String(summary || '').split('\n')) {
+    if (/^- (deescalated|escalated|incident|crime|chaos)[^|]* \| /i.test(line)) facts.push({ text: line.slice(2).trim(), src: 'output/world_summary_c' + cycle + '.md ## What Moved › chaos-event (Ripple_Ledger)' });
+  }
+  // Residents whose own line this cycle is about safety, each with the line.
+  const SAFETY_LINE = /\b(OARI|police|officer|patrol|arrest|arrested|crime|theft|stolen|break-in|burglar|robbed|cop car|siren|ticket|court|custody|safer|unsafe|de-escalate)\b/i;
+  let lived = 0;
+  for (const r of (beats.LifeHistory_Log || []).filter(r => String(r.Cycle) === String(cycle) && SAFETY_LINE.test(String(r.EventText || '')))) {
+    if (lived >= 12) break;
+    const popid = String(r.POPID || '').toUpperCase();
+    if (people.some(p => p.popid === popid)) continue;
+    const why = 'C' + cycle + (r.Neighborhood ? ' in ' + r.Neighborhood : '') + ': ' + String(r.EventText).trim();
+    const p = K.personFromProfile(profiles, popid, why, r.Neighborhood);
+    if (p) { p.profile = p.profile + ' — ' + why; people.push(p); lived++; }
+  }
+  // Never herself or the paper's staff; every person carries the row's age (her craft names officers by age — the row's, never a guess).
+  const { simYearFromCycle } = require('../lib/citizenDerivation');
+  for (let k = people.length - 1; k >= 0; k--) {
+    const p = people[k];
+    if (!p || p.popid === SEAT.popid || K.isMediaStaff(profiles, p.popid)) { people.splice(k, 1); continue; }
+    const by = K.num((profiles.get(String(p.popid).toUpperCase()) || {}).BirthYear);
+    if (by && !/ — age \d+/.test(p.profile)) { p.age = simYearFromCycle(cycle) - by; p.profile = p.profile.replace(/\s+$/, '') + ' — age ' + p.age; }
+  }
+  const label = 'the public safety record of C' + cycle;   // pipeline.111: no lead hood
   return K.makeSlice(SEAT, cycle, beats, {
-    ref: src, hood: lead.hood, label,
-    angle: label + ' — what the table says and who answers for it',
-    hookLine: lead.hood + ' leads the incident count' + (slowest !== lead ? '; ' + slowest.hood + ' waits longest for a response' : '') +
-      (court.cases.length ? '; ' + court.cases.length + ' case' + (court.cases.length === 1 ? '' : 's') + ' on the court record' : '') +
-      (custody != null ? '; ' + custody + ' in custody citywide' : '') + '; ' + K.rosterAtSectors(beats, /\bpublic safety\b|crisis response/i).length + ' public-safety staff on the roster.',
+    ref: src, hood: null, label,
+    angle: label, hookLine: '',
     facts, people,
     deltas: { state: prev.state, vs: prev.vs },
-    hooks: K.domainHooks(beats, cycle, SEAT.name, /^(COURT_FINE|CITIZEN_ARRESTED|SAFETY)$/),
-    note: pointers.length ? 'desk-signal incident rows attached as pointers (' + pointers.length + ')' : null,
-    extra: { table: rows, signalPointers: pointers, court: { state: court.cases.length ? 'ON_RECORD' : 'NO_CASES', cases: court.cases }, custodyTrail: trail }
+    hooks: [],
+    note: null,
+    extra: { table: rows, court: { state: court.cases.length ? 'ON_RECORD' : 'NO_CASES', cases: court.cases }, custodyTrail: trail }
   });
 }
 
 const W = K.wire(SEAT);
 if (require.main === module) W.main();
-module.exports = { SEAT, loadSlice: W.load, buildSafetySlice: W.build, writeSafetySlice: W.write, loadSafetySlice: W.load,
+const sitsOutWhenEmpty = true;
+module.exports = { SEAT, sitsOutWhenEmpty, loadSlice: W.load, buildSafetySlice: W.build, writeSafetySlice: W.write, loadSafetySlice: W.load,
   isSafetySeat: W.isSeat, assignmentFromSlice: W.assignmentFromSlice, enrichAssignment: W.enrichAssignment, slicePaths: W.paths, paths: W.paths };

@@ -1718,7 +1718,8 @@ function decayMediaAttention_(ctx, cycle) {
     if (earned[tier9] && (use - 1) < bar) {
       row[iTier] = tier9 + 1;
       if (iLife >= 0) {
-        var demLine = 'C' + cycle + " — [Media-Sociability-Down-M] The spotlight moved on — back to Tier " + (tier9 + 1) + ' life, quieter and no less lived';
+        // engine.359: the in-world stamp — a bare C-stamp is dropped by the /^Y\d+C\d+ — / readers (discordLookups, personaProvider)
+        var demLine = ((typeof inWorldStamp_ === 'function') ? inWorldStamp_(ctx) : ('C' + cycle)) + " — [Media-Sociability-Down-M] The spotlight moved on — back to Tier " + (tier9 + 1) + ' life, quieter and no less lived';
         row[iLife] = (row[iLife] ? row[iLife] + '\n' : '') + demLine;
       }
       if (iLastU >= 0) row[iLastU] = 'C' + cycle;

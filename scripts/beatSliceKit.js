@@ -692,8 +692,26 @@ function calendarContext(cycle, root = ROOT) {
   return { text: 'Calendar: ' + m[1].trim(), src: rel + ' Calendar context (Simulation_Calendar)' };
 }
 
+// pipeline.115 (builder 2026-11-22, narrow cut): a reporter's source is the city
+// record (the sheet and its rows), never a pointer into the engine's own review
+// file. "output/engine_audit_c117.json patterns[0]; evidence: Initiative_Tracker
+// row(s) 8; storyline INIT-008:vote-scheduled" -> "Initiative_Tracker row(s) 8;
+// storyline INIT-008:vote-scheduled". A ref with no record part reads "the city
+// record". Code that needs the pattern index keeps the raw ref; this is for print.
+function recordRef(ref) {
+  const raw = String(ref || '');
+  if (!/engine_audit_c\d+\.json/.test(raw)) return raw;
+  const out = raw
+    .replace(/(?:output\/)?engine_audit_c\d+\.json(?: patterns\[\d+\](?:\.[\w.]+)?)?/g, '')
+    .replace(/;?\s*snapshot:\s*snapshots\.\w+/g, '')
+    .replace(/\bevidence:\s*/g, '')
+    .replace(/\s+row\(s\)\s*(?=;|$)/g, '')
+    .split(';').map(x => x.trim()).filter(Boolean).join('; ');
+  return out || 'the city record';
+}
+
 module.exports = {
-  ROOT, SCHEMA, FACTS_TAIL, FORBIDDEN,
+  ROOT, SCHEMA, FACTS_TAIL, FORBIDDEN, recordRef, // pipeline.115
   HOLIDAY_MEANING, holidayMeaning, calendarContext, // pipeline.86
   num, hoodKey, fmtInt, loadJson, loadText, extractSection, arg,
   loadBeatTabs, loadProfiles, prevTabRows, rosterAtSectors, hooksFor, domainHooks, seedsFor,

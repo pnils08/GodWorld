@@ -380,7 +380,7 @@ function ailmentPerception(p) {
     case 'math-imbalance':
       return where + ' since the last reading: ' + (feels.length ? feels.join(', ') : 'several quality-of-life signals moved') + '.';
     case 'stuck-initiative':
-      return (inits.join(', ') || 'an initiative') + ' has sat in the same stage for ' + (p.cyclesInState || 'several') + ' cycles (' + where + '). The ledger already says that — this cycle you move the phase or take a fail phase.';
+      return (inits.join(', ') || 'an initiative') + ' has sat in the same stage for ' + (p.cyclesInState || 'several') + ' cycles (' + where + ').';
     case 'repeating-event':
       return where + ': the same strain keeps recurring cycle after cycle and the city still has no program for it.';
     case 'coverage-gap':
@@ -624,7 +624,9 @@ async function runPrep() {
     hotInits.push(init);
     const ownerRule = INITIATIVE_AGENT.find(r => r.re.test(init.name));
     const owner = ownerRule ? ownerRule.dir : null;
-    const flagNotes = flagged.map(p => 'The engine\'s own review flags this: ' + ailmentPerception(p));
+    // pipeline.115 (builder 2026-11-22, narrow cut): the reading reaches the seat
+    // as the record's fact, never as the engine speaking.
+    const flagNotes = flagged.map(p => ailmentPerception(p));
     // civic.29: the Sunday packet had the same blind spot as the weekday pack
     // (initFact() fix, same session) — budget was on the tracker but never
     // handed to the seat, so mayor_open_c104 invented "$412,000" and "$1.2
@@ -635,7 +637,7 @@ async function runPrep() {
       impl.nextScheduledAction && cleanInline(impl.nextScheduledAction) ? 'On the calendar: ' + cleanInline(impl.nextScheduledAction) + (due ? ' — due THIS cycle.' : '.') : null,
       ...flagNotes,
     ].filter(Boolean).join('\n');
-    const topic = { kind: 'initiative', id: init.id, title: init.name + (voteReady ? ' — VOTE PENDING' : due ? ' — action due this cycle' : ' — engine-flagged'), body };
+    const topic = { kind: 'initiative', id: init.id, title: init.name + (voteReady ? ' — VOTE PENDING' : due ? ' — action due this cycle' : ''), body };
     assign('civic-office-mayor', topic);
     assign(owner, topic);
     if (/stabilization/i.test(init.name)) assign('civic-office-okoro', topic);
@@ -659,7 +661,9 @@ async function runPrep() {
   for (const p of audit.patterns.filter(p => p.severity === 'high')) {
     // civic.47 M1 item 12 (builder 2026-11-03): a program moves when its
     // deadlines call for it, so a stuck-initiative reading carries no demand.
-    const topic = { kind: 'ailment', title: 'Engine review HIGH: ' + p.type.replace(/-/g, ' '), body: ailmentPerception(p) };
+    // pipeline.115: titled by where it is and the record's own words, not "Engine review HIGH".
+    const titleWhere = ((p.affectedEntities && p.affectedEntities.neighborhoods) || []).join(', ') || 'Citywide';
+    const topic = { kind: 'ailment', title: titleWhere + ': ' + p.type.replace(/-/g, ' '), body: ailmentPerception(p) };
     const sig = JSON.stringify((p.evidence && p.evidence.fields) || {});
     if (p.type !== 'ledger-completeness') {
       if (!isOneWeekDecay(p, cycle)) {

@@ -1001,7 +1001,7 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
     // grok pipeline.52: shared evening-life pack for culture consumers (kai/sharon/maria/graye).
     // Mason Ortega left this pack for the food slice (pipeline.68 Task 3); Elliot Graye for the faith slice (Task 4).
     if (persona.name &&
-        /kai\s*marston|sharon\s*okafor/i.test(persona.name)) {   // Maria left the evening pack: Sharon covers nightlife (pipeline.111, builder 2026-11-21)
+        /sharon\s*okafor/i.test(persona.name)) {   // Maria and Kai left the evening pack: Sharon covers nightlife and the TV/movie slate (pipeline.111, builder 2026-11-21/22)
       try {
         const { loadEveningSlice, pickPulseForPersona, EVENING_CONSUMERS } =
           require(path.join(__dirname, 'buildEveningSlice'));
@@ -1712,8 +1712,8 @@ async function runAngle(assign) {
   // variant of the economic slice (pipeline.68 Task 3).
   // Elliot Graye draws the faith slice (pipeline.68 Task 4), not the evening pack.
   const EVENING_SLUGS = {
-    'kai-marston': 1, 'sharon-okafor': 1
-    // Maria left the evening pack: Sharon covers nightlife (pipeline.111, builder 2026-11-21)
+    'sharon-okafor': 1
+    // Maria and Kai left the evening pack: Sharon covers nightlife (pipeline.111, builder 2026-11-21/22)
   };
   let beatSlice = null;
   if (personaSlug === 'freelance-firebrand' && !story) {
@@ -2552,6 +2552,12 @@ function gatherCanonCandidates(cycle, story) {
 
 // ref shapes accepted: "editions/foo.txt:123: text", "output/world_summary_c102.md:9",
 // or the assignment's own evidence ref. A ref resolves when its file exists.
+// pipeline.115 (builder 2026-11-22, narrow cut): the reporter's evidence ref
+// is the city record (sheet + rows), never a pointer into the engine's review
+// file. The raw ref stays on the story for dedup; this is what they see and cite.
+function storyRecordRef(ref) {
+  return require(path.join(__dirname, 'beatSliceKit')).recordRef(ref);
+}
 function refFile(ref) {
   const head = String(ref || '').split(/[\s;]/)[0];
   return head.split(':')[0];
@@ -2639,7 +2645,7 @@ async function runCanonResearch(cycle, desk, story, reporter, stem) {
       ...briefLines,
       '',
     ] : []),
-    'ASSIGNMENT EVIDENCE REF (usable as a ref): ' + story.ref
+    'ASSIGNMENT EVIDENCE REF (usable as a ref): ' + storyRecordRef(story.ref)
   ].join('\n');
   const system = 'You are a newsroom researcher. You verify against the record and cite precisely. Return ONLY strict JSON.';
   const user = 'Assignment (' + desk + ' desk): ' + (story.angle || story.label) +
@@ -2660,7 +2666,7 @@ async function runCanonResearch(cycle, desk, story, reporter, stem) {
       const m = String(r.text).match(/\{[\s\S]*\}/);
       parsed = m ? JSON.parse(m[0]) : null;
     } catch (_) {}
-    const v = validateCanonFacts(parsed && parsed.facts, cycle, story.ref);
+    const v = validateCanonFacts(parsed && parsed.facts, cycle, storyRecordRef(story.ref));
     if (v.ok) return { facts: v.facts, source: 'model', trace, nlmBrief: brief ? brief.rel : null };
     log('[research] attempt ' + (attempt + 1) + ' failed validation: ' + v.errs.join('; '));
   }
@@ -2671,8 +2677,8 @@ async function runCanonResearch(cycle, desk, story, reporter, stem) {
   const summaryLine = cand.lines.find(l => l.startsWith('output/world_summary'));
   if (editionLine) fallback.push({ fact: editionLine.split(':').slice(2).join(':').trim().slice(0, 200), ref: editionLine.split(':').slice(0, 2).join(':') });
   if (summaryLine) fallback.push({ fact: summaryLine.split(':').slice(2).join(':').trim().slice(0, 200), ref: summaryLine.split(':').slice(0, 2).join(':') });
-  fallback.push({ fact: story.label || story.angle, ref: story.ref });
-  const v = validateCanonFacts(fallback, cycle, story.ref);
+  fallback.push({ fact: story.label || story.angle, ref: storyRecordRef(story.ref) });
+  const v = validateCanonFacts(fallback, cycle, storyRecordRef(story.ref));
   return { facts: fallback, source: 'script-fallback' + (v.ok ? '' : ' (validator: ' + v.errs.join('; ') + ')'), trace, nlmBrief: brief ? brief.rel : null };
 }
 
@@ -2849,7 +2855,7 @@ function storyDocOpen(stem, s) {
     if (s.story.hookLine) L.push('- HOOK: ' + s.story.hookLine);
     if (s.story.citizens && s.story.citizens.length) L.push('- AFFECTED CITIZENS: ' + s.story.citizens.join('; '));
     if (s.story.hood) L.push('- WHERE: ' + s.story.hood);
-    L.push('- SOURCE: ' + s.story.ref);
+    L.push('- SOURCE: ' + storyRecordRef(s.story.ref));
   } else {
     L.push('- OPEN BEAT (no seed this wake) — reporter\'s own read leads.');
   }

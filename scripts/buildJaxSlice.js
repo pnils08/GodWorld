@@ -717,7 +717,27 @@ function slicePaths(cycle, root) {
   };
 }
 
+// pipeline.115 (builder 2026-11-22: "Jax you can make facts"): what Jax reads
+// cites the city record. The raw pattern ref is used above to find the pattern;
+// the printed slice carries no pointer into the engine's own review file.
+function toRecordRefs(slice) {
+  const { recordRef } = require('./beatSliceKit');
+  const auditFile = /^(?:output\/)?engine_audit_c\d+\.json$/;
+  const walk = v => {
+    if (typeof v === 'string') return /engine_audit_c\d+\.json/.test(v) ? recordRef(v) : v;
+    if (Array.isArray(v)) return v.map(walk);
+    if (v && typeof v === 'object') { const o = {}; for (const k of Object.keys(v)) o[k] = walk(v[k]); return o; }
+    return v;
+  };
+  const out = walk(Object.assign({}, slice, {
+    pointers: (slice.pointers || []).filter(p => !auditFile.test(String(p || '')))
+  }));
+  if (Array.isArray(out.pointers)) out.pointers = Array.from(new Set(out.pointers.filter(Boolean)));
+  return out;
+}
+
 function writeJaxSlice(cycle, slice, root) {
+  slice = toRecordRefs(slice);
   const paths = slicePaths(cycle, root);
   fs.mkdirSync(path.dirname(paths.md), { recursive: true });
   fs.mkdirSync(path.dirname(paths.json), { recursive: true });

@@ -497,7 +497,8 @@ function normalizeEntry(row, source, index) {
   if (!row || typeof row !== 'object') return null;
   const handle = row.handle && typeof row.handle === 'object' ? row.handle : {};
   const label = String(row.label || handle.angle || '').trim();
-  const ref = String(row.ref || '').trim();
+  // pipeline.115: the tip cites the city record, not the engine's review file.
+  const ref = require('./beatSliceKit').recordRef(String(row.ref || '').trim());
   if (!label || !ref) return null;
   return {
     kind: String(row.kind || source || 'civic-signal'),

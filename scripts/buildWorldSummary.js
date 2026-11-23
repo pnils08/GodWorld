@@ -1207,6 +1207,12 @@ function selectBylineCandidates(lanePools, usage) {
 // A pattern's per-desk story handle, normalized for the lane (Phase 2.5 Task
 // 2.5.1). generateTribuneFraming already writes angle + hookLine + the engine's
 // own affected citizens per desk; this is the shape reporters read.
+// pipeline.115: a handle from the engine's checker carries only who it names.
+function citizensOnly(h) {
+  const out = handleEntry(h);
+  return out.citizens ? { citizens: out.citizens } : null;
+}
+
 function handleEntry(h) {
   const out = {};
   const clean = s => String(s).replace(/\s+/g, ' ').trim();
@@ -1299,7 +1305,10 @@ function emitDeskSignal(cycle, data) {
     };
     if (popids.length) entry.popids = popids;
     if (hood) entry.hood = hood;
-    if (handles.civic) entry.handle = handleEntry(handles.civic);
+    // pipeline.115 (builder 2026-11-22, narrow cut): the checker's own angle and
+    // hook lines ("— remedy path + responsible office") stay out of the desk's
+    // tip; the record's label above is the fact, the named citizens stay.
+    if (handles.civic) { const h = citizensOnly(handles.civic); if (h) entry.handle = h; }
     lanes.civic.push(entry);
 
     // Task 2.5.1: a pattern reaches business/culture/sports only where the
@@ -1308,12 +1317,16 @@ function emitDeskSignal(cycle, data) {
     for (const desk of ['business', 'culture', 'sports']) {
       const h = handles[desk];
       if (!h || !(h.angle || h.hookLine)) continue;
+      // pipeline.115: the desk still gets every pattern the checker routed to it,
+      // labelled by the record (same label as the civic lane), not by the
+      // checker's written angle ("economic ailment — economic footprint, …").
       const deskEntry = {
         kind: 'anomaly',
         ref,
-        label: signalLabel(h.angle, h.hookLine),
-        handle: handleEntry(h)
+        label: entry.label
       };
+      const deskHandle = citizensOnly(h);
+      if (deskHandle) deskEntry.handle = deskHandle;
       const handlePopids = extractPopids(h.citizens);
       const carried = handlePopids.length ? handlePopids : popids;
       if (carried.length) deskEntry.popids = carried;

@@ -1,0 +1,54 @@
+---
+title: Engine Out Of The Sim's Mouth Plan
+created: 2026-11-22
+updated: 2026-11-22
+type: plan
+tags: [civic, media, active]
+sources:
+  - output/production_log_run_cycle_c117_gaps.md G-EC41
+  - output/cron-civic/packets/*_pending_decisions_c117.md (what the seats read this week)
+  - output/desk_signal_c117.json, output/slices/c116/{civic-domain,economic,firebrand}.md (what the desks read)
+pointers:
+  - "[[../engine/ROLLOUT_PLAN]] — pipeline.115"
+---
+
+# Engine Out Of The Sim's Mouth Plan
+
+**Builder's words (2026-11-22):** "we also dont want to hand 4th wall logic to the sim, engine audit gets handed to the sim along with world-summary, we also dont want to puppet the crons too much, presenting the \"headlines\" and allowing the slices to allow the media crons to write" · on the cut: "Facts, no engine frame" then "Narrow cut" (remove the engine as a speaker, the move-or-fail order, engine-audit paths on reporter tips, the checker-written remedy/angle lines; the record's words and numbers stay) · on Jax: "Jax you can make facts" · on Varek: "Elias article I thought he did speak on it as his “civis systems” engine and took accountability and make the council accountable".
+
+**Standing rulings this cut sits inside:** 2026-10-18 "There is no such gate as engine words … ledger terms are not contamination" (record words, metric names, pattern names, severities and IDs stay); 2026-11-03 civic.47 M1 item 12 "a program moves when its deadlines call for it" — a stuck reading carries no demand; 2026-11-12 "a cron built to report the engine back … is a build defect"; 2026-10-28 slice Angle/Hook are scaffolding, loosened on his word (this is his word for the checker-written ones only).
+
+**Goal:** no city hall seat, reporter or Jax reads the engine as a speaker, an order from it, or a pointer into its own review file; each still gets every fact the record holds.
+
+**Rows:** pipeline.115 · **Owner:** engine-sheet
+
+## Where it stands (read 2026-11-22, C117 files)
+
+1. Seats — `scripts/cron-civic-run.js`: `:627` every flagged initiative note opens "The engine's own review flags this: "; `:638` topic title suffix " — engine-flagged"; `:662` HIGH topic title "Engine review HIGH: <type>"; `:383` the stuck sentence ends "The ledger already says that — this cycle you move the phase or take a fail phase." (8 of the C117 packets carry these). The order outlived its gate: `scripts/civicMustDecide.js` has no caller left.
+2. Desks — `scripts/buildWorldSummary.js:1283-1320`: every audit pattern enters the desk signal with `ref` = `output/engine_audit_c{N}.json patterns[i]; evidence: <sheet> row(s) …`; the civic entry carries the checker's `tribuneFraming.storyHandles.civic` angle/hookLine (C117: 27 entries, e.g. "… stalled in vote-scheduled — remedy path + responsible office"); business/culture/sports entries exist only through the checker's angle and use it as their label ("economic ailment — economic footprint, affected businesses, workforce impact in West Oakland").
+3. Tips — the path reaches reporter text: `scripts/buildCivicDomainSlice.js` (`src: top.ref`, C116 civic-domain 19 lines) and `scripts/buildJaxSlice.js` (`:340`, `:594`; C116 firebrand 7 lines). Other slices cite `output/beats/*` source rows by design ("The desk reaches the raw material itself") — untouched.
+4. Varek (Civis journal) — `scripts/civisJournal.js:79-110` already turns each pattern into Civis's own words ("the instrument"); no labels reach him. Untouched; his risk is the checker's false findings (C117 G-EC39, item 5 of the gap list), not this frame.
+
+## Tasks
+
+| # | Task | Owner | Status |
+|---|------|-------|--------|
+| 1 | Seats: drop the `:627` prefix, the `:638` suffix, the `:383` order sentence; `:662` title = where + the pattern's own words ("Grand Lake: math imbalance"). Verify: render the C117 topics through the edited functions to scratch, grep 0 "engine" in seat-facing text, every fact line unchanged | es | not started |
+| 2 | Desk signal: desk-lane label from the pattern's record description, not the checker's angle; civic handle keeps `citizens`, drops the checker's angle/hookLine; `ref` stays in the JSON (code consumers: Jax slice, storyline tags, stink-scanner). Verify: C117 rebuild to scratch, diff vs `output/desk_signal_c117.json`: same entry count per lane, 0 "remedy path"/"ailment —" | es | not started |
+| 3 | Tips: civic-domain and Jax slices cite the evidence part of `ref` (sheet + rows) to the reporter, never the `engine_audit` path. Verify: C117 slices to scratch, 0 `engine_audit` in reporter text, every fact line kept | es | not started |
+| 4 | One adversarial review (agy) of the diff; fold; commit path-specific; the next unattended datawake / desk run is the proof (Mon 2026-11-23 06:15) | es | not started |
+
+## Acceptance
+
+1. C118 seat packets: 0 lines naming the engine as a speaker, 0 move-or-fail orders; the same initiatives and HIGH topics reach the same seats — proven by the C118 Sunday chain packets.
+2. Desk signal C118: entry counts per lane equal to a C118 rebuild of the old code; 0 checker-written angle/hookLine strings — proven by diff at the C118 fire.
+3. Reporter slices from Mon 2026-11-23: 0 `engine_audit` paths in civic-domain and firebrand; their fact lines unchanged — proven by the slice files.
+
+## Surfaced, not this job
+
+- `scripts/civicMustDecide.js` + its test: dead (no caller). Removal is its own row.
+- world_summary §Engine Review Findings is passed whole to `cron-rhea-gate.js` and `scripts/djDirect.js`; not in the narrow cut.
+
+## Changelog
+
+- 2026-11-22 (engine-sheet) — Created on the builder's word after the C117 run (gap log G-EC41); scope read from the C117 packets, desk signal and C116 slices.

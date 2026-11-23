@@ -401,14 +401,13 @@ try {
   const k = arts.buildArtsSlice(CYCLE, { root });
   // POP-90001 lives in Fruitvale on the snapshot; the Cultural_Ledger row says Temescal (a staged sighting).
   // The citizen row wins — that column is where the engine staged a sighting, never a residence.
-  ok('kai: rising figure leads with trajectory + fame', k.facts.some(f => /Test Rising Musician \(Musician\), Arts, Fruitvale — fame rising \(fame 34, rising\), last seen C103/.test(f.text)));
-  ok('kai: linked figure carries the citizen\'s home hood, never the sighting hood', !JSON.stringify(k.facts).includes('Test Rising Musician (Musician), Arts, Temescal'));
-  ok('kai: new-on-record figure', k.facts.some(f => /Test New Chef.*new on the culture record this cycle/.test(f.text)));
-  ok('kai: fading is the other side of the file', k.facts.some(f => /Test Faded Singer.*fading — the where-are-they-now file/.test(f.text)));
-  ok('kai: inactive figure never rides', !JSON.stringify(k.facts).includes('Test Retired Poet'));
-  ok('kai: universe-linked figure resolves to the ledger citizen', k.citizens.some(c => c.popid === 'POP-90001' && /fame rising/.test(c.why)));
-  ok('kai: CULTURE hook reaches him by domain despite no desk', k.prewrite.hooks.some(h => /Test Rising Musician gaining attention/.test(h.text)));
-  ok('kai: culture-desk seed becomes a fact + a candidate', k.facts.some(f => /CITY SEED \(Temescal\): Test Civic Resident/.test(f.text)));
+  // pipeline.111 (builder 2026-11-22: "1 - both, 2 - approved"): Kai's record is the arts and its other media.
+  ok('kai: an arts figure carries role, domain, home hood, trajectory and fame', k.facts.some(f => f.text === 'Test Rising Musician (Musician), Arts, Fruitvale — rising (fame 34), 7 media mentions'));
+  ok('kai: a Music figure rides; a Culinary figure and an inactive one do not', k.facts.some(f => /^Test Faded Singer \(Singer\), Music/.test(f.text)) && !JSON.stringify(k.facts).includes('Test New Chef') && !JSON.stringify(k.facts).includes('Test Retired Poet'));
+  ok('kai: a figure with no ledger citizen is off', !JSON.stringify(k.facts).includes('Test Fading Actor'));
+  ok('kai: the figure is a person on his list', k.citizens.some(c => c.popid === 'POP-90001' && /Musician on the culture record/.test(c.profile)));
+  ok('kai: no code-written angle, no hook, no seed', k.prewrite.hooks.length === 0 && !k.facts.some(f => /CITY SEED/.test(f.text)));
+  ok('kai: an empty arts record sits him out', arts.sitsOutWhenEmpty === true);
   // pipeline.111 (builder 2026-11-21): Sharon's record is the city's evenings, not the fame file.
   const wsPath = path.join(output, 'world_summary_c' + CYCLE + '.md');
   const wsBefore = fs.readFileSync(wsPath, 'utf8');
@@ -642,7 +641,7 @@ try {
   for (const [label, slice, popid] of [['trevor', t, 'POP-00155'], ['lila', h, 'POP-00154'], ['angela', s, 'POP-00156'], ['noah', e, 'POP-00157'], ['graye', f, 'POP-00012'], ['rachel', r, 'POP-00057'], ['kai', k, 'POP-00158'], ['sharon', sh, 'POP-00159'], ['maria', m, 'POP-00013'], ['selena', sg, 'POP-00591'], ['talia', tf, 'POP-00592'], ['celeste', ct, 'POP-00164']]) {
     const pk = v2.buildAnglePacket({ cycle: CYCLE, desk: slice.seat.desk, reporter: { popid, name: slice.seat.name }, story: slice.story, approach: slice.approach, slice, lane: [] });
     const b = pk.task.creativeBrief;
-    ok(label + ': brief beat-slice with facts + room', b && b.kind === 'beat-slice' && b.facts.length >= 1 && (['sharon', 'maria'].includes(label) || !!b.roomIsYours));   // seat-file seats: no room line (pipeline.111)
+    ok(label + ': brief beat-slice with facts + room', b && b.kind === 'beat-slice' && b.facts.length >= 1 && (['sharon', 'maria', 'kai'].includes(label) || !!b.roomIsYours));   // seat-file seats: no room line (pipeline.111)
     ok(label + ': every anchor fact is a known FACT sourced to a file on disk', slice.prewrite.anchorFacts.every(text => pk.known.some(k => k.text === text && /^output\//.test(k.src))));
     ok(label + ': candidates = the slice\'s people', pk.exposure.candidates.length === slice.citizens.length && pk.exposure.candidates.every(c => slice.citizens.some(p => p.popid === c.pop)));
   }

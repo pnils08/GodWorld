@@ -54,6 +54,9 @@ NODE
 FANOUT_FILE="$(/usr/bin/node -e 'process.stdout.write(JSON.parse(process.argv[1]).file)' "$ASSIGNMENT_SOURCE")"
 DATE="$(/usr/bin/node -e 'process.stdout.write(JSON.parse(process.argv[1]).date)' "$ASSIGNMENT_SOURCE")"
 CYCLE="$(/usr/bin/node -e 'process.stdout.write(String(JSON.parse(process.argv[1]).cycle))' "$ASSIGNMENT_SOURCE")"
+# GODWORLD_TEST_CYCLE (pipeline.111, 2026-11-22): run the saved assignment on a newer Cycle's record (a seat that picks its own story
+# ignores the assignment's story; the beat dump is one Cycle at a time).
+CYCLE="${GODWORLD_TEST_CYCLE:-$CYCLE}"
 CONTRACT="$(/usr/bin/node -e 'process.stdout.write(String(JSON.parse(process.argv[1]).assignment.packetContract || ""))' "$ASSIGNMENT_SOURCE")"
 STAMP="$(date +%Y%m%d-%H%M%S)-${PERSONA}-day-${VARIANT}-$$"
 SHELL_DIR="$ROOT/output/test-shell/$STAMP"

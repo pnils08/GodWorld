@@ -171,7 +171,7 @@ const seats = Object.entries(packages).filter(([, v]) => v && v.persona);
 assert(seats.length >= 25);
 assert.deepStrictEqual(seats.filter(([, v]) => v.rewardLoop !== true).map(([k]) => k), []);
 assert.throws(() => packagesApi.validatePackage(marbury.persona, Object.assign({}, marbury, { rewardLoop: 'yes' })), /rewardLoop/);
-assert.deepStrictEqual(Object.entries(packages).filter(([, v]) => v && v.writerTools).map(([k]) => k), ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'anthony-raines', 'elliot-marbury', 'hal-richmond', 'maria-keen', 'elliot-graye', 'sharon-okafor', 'business-desk', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'nia-rook', 'nia-rook-weekly', 'tamsin-pruitt']); // registry order; Hal + Anthony: builder 2026-10-19; Jax + Carmen 2026-10-26; the rest 2026-10-27; Sharon 2026-11-21 (pipeline.111)
+assert.deepStrictEqual(Object.entries(packages).filter(([, v]) => v && v.writerTools).map(([k]) => k), ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'anthony-raines', 'elliot-marbury', 'hal-richmond', 'maria-keen', 'elliot-graye', 'sharon-okafor', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'nia-rook', 'nia-rook-weekly', 'tamsin-pruitt']); // registry order; Hal + Anthony: builder 2026-10-19; Jax + Carmen 2026-10-26; the rest 2026-10-27; Sharon 2026-11-21 (pipeline.111)
 assert.equal(packages['hal-richmond'].writerTools.maxToolCalls, 6);
 // pipeline.111 — Sharon wakes on her seat file; a seat file outside an agent folder is refused
 assert.equal(packages['sharon-okafor'].seatFile, '.claude/agents/sharon-okafor/SEAT.md');
@@ -292,20 +292,24 @@ assert.ok(jordan.reviewProfile.textureConditions.some(v => v.includes('raw engin
 assert.ok(jordan.reviewProfile.canonBlockers.some(v => v.includes('fabricated owner')));
 
 const kai = packages['kai-marston'];
-assert.equal(kai.version, 'KAI-LEP2-1');
+assert.equal(kai.version, 'KAI-LEP2-2');
 assert.equal(kai.requiredDaily, true);
 assert.equal(kai.assignment.desk, 'culture');
 assert.equal(kai.assignment.name, 'Kai Marston');
 assert.equal(kai.assignment.popid, 'POP-00158');
 assert.equal(kai.assignment.beatDomain, 'CULTURE');
 assert.equal(kai.packetContract, 'v2');
-assert.equal(packagesApi.routeFor(kai, 'angle').model, 'meta-llama/llama-4-maverick');
+assert.equal(packagesApi.routeFor(kai, 'angle').model, 'anthropic/claude-haiku-5.5');   // pipeline.111: morning on his writer's model
 assert.equal(packagesApi.routeFor(kai, 'report').model, 'meta-llama/llama-4-maverick');
 assert.equal(packagesApi.routeFor(kai, 'write').model, 'anthropic/claude-haiku-5.5');
 assert.equal(kai.reviewProfile.canonPolicy, 'load-bearing');
 assert.equal(kai.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
-assert.ok(kai.reviewProfile.textureConditions.some(v => v.includes('evening source')));
-assert.ok(kai.reviewProfile.canonBlockers.some(v => v.includes('social-media reaction')));
+// pipeline.111 (builder 2026-11-22): seat file, the fact reviewer, his presence in the room authorized, still graded.
+assert.equal(kai.seatFile, '.claude/agents/kai-marston/SEAT.md');
+assert.deepStrictEqual(kai.reviewProfile.textureConditions, []);
+assert.ok(kai.reviewProfile.authorizedTexture.some(v => v.includes('in the room')));
+assert.deepStrictEqual(kai.reviewProfile.canonBlockers.map(v => v.split(':')[0].split(' (')[0]), ['an invented or altered location', 'an invented or altered citizen', 'an invented or altered data point']);
+assert.equal(kai.rewardLoop, true);
 
 const rachel = packages['rachel-torres'];
 assert.equal(rachel.version, 'RACHEL-LEP2-2');

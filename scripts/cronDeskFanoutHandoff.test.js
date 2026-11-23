@@ -200,9 +200,9 @@ const kaiAssignment = {
 };
 const kaiContext = activateWakeContext(kaiAssignment, kaiAssignment.persona);
 assert.equal(kaiContext.packetContract, 'v2');
-assert.equal(kaiContext.wakePackage.version, 'KAI-LEP2-1');
+assert.equal(kaiContext.wakePackage.version, 'KAI-LEP2-2');
 assert.equal(stageRoute('culture', kaiAssignment.persona, 'angle').model,
-  'meta-llama/llama-4-maverick');
+  'anthropic/claude-haiku-5.5');   // pipeline.111 (builder 2026-11-22): morning on his writer's model
 assert.equal(stageRoute('culture', kaiAssignment.persona, 'report').model,
   'meta-llama/llama-4-maverick');
 assert.equal(stageRoute('culture', kaiAssignment.persona, 'write').model,

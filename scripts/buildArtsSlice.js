@@ -1,20 +1,15 @@
 #!/usr/bin/env node
 /**
- * buildArtsSlice.js — Kai Marston's arts & entertainment slice (the culture lane,
- * builder-directed 2026-09-10 program; pipeline.68 shape, one slice per journalist).
- * Rides ALONGSIDE the shared evening pack — the pack keeps the nightlife/TV
- * texture; this slice gives Kai the culture ledger itself.
+ * buildArtsSlice.js — Kai Marston's record: Oakland's arts and its other media (pipeline.111, builder 2026-11-22:
+ * "1 - both, 2 - approved - 3 - … keep it to the arts you listed … kai can cover the other media types as well").
  *
- * Sources:
- *   Cultural_Ledger (CUL-ID, Name, RoleType, FameCategory, CulturalDomain,
- *     FameScore, TrendTrajectory, LastSeenCycle, UniverseLinks POPIDs, ...) —
- *     who is rising, who just appeared, who is fading. The engine drifts this
- *     weekly; until now only the wd-cultural cards read it.
- *   Story_Seed_Deck — this cycle's culture-desk seeds (citizens/businesses
- *     attached; the What/Why metric strings are never quoted).
- *   Story_Hook_Deck — hooks addressed to Kai by name, plus this cycle's
- *     ARTS / CULTURE / NIGHTLIFE / CULTURAL / FESTIVAL rows by domain (ARTS and
- *     FESTIVAL fall through the engine's deskMap to City Desk; engine cut filed).
+ * The record as the engine wrote it this Cycle, no figure made the story:
+ *   Cultural_Ledger (active, Arts | Music | Media | Literature, linked to a ledger citizen) — the city's artists, musicians,
+ *     actors, writers, curators, streamers and other media figures: role, domain, trajectory, fame, mentions
+ *   LifeHistory_Log (this Cycle) — each figure's own lines (two each), and the young artists' Cultural lines
+ *   Community_Programs (active, type arts) — the mural collective, the sound archive, the arts fund
+ * Sports figures and the fame table as such are off; the evening TV / movie slate is Sharon's.
+ * A Cycle with nothing on the record sits him out.
  * Artifacts: output/slices/c{N}/kai-marston.md · output/cron-compare/arts_slice_c{N}.json
  */
 'use strict';
@@ -23,108 +18,77 @@ const K = require('./beatSliceKit');
 const SEAT = {
   slug: 'kai-marston', name: 'Kai Marston', popid: 'POP-00158', desk: 'culture',
   kind: 'beat-arts', domain: 'arts', artifact: 'arts', builder: 'buildArtsSlice.js',
-  version: 'ARTS-SLICE-1', nameRe: /kai\s*marston/i,
-  tabs: ['Cultural_Ledger', 'Story_Hook_Deck', 'Story_Seed_Deck'],
-  approach: 'Arts & entertainment approach: this slice is the culture ledger — who is rising, who just appeared, who is fading, with their domains and neighborhoods — plus the city\'s culture seeds this cycle. Present-tense, neighborhood act not gallery PR. The names and trajectories are real; the garage rehearsal, the opening-night crowd, the set list are yours.',
-  roomIsYours: 'the rehearsal space, the flyer on the pole, who showed up, what the room felt like when the second act started',
+  version: 'ARTS-SLICE-2', nameRe: /kai\s*marston/i,
+  tabs: ['Cultural_Ledger', 'Community_Programs', 'LifeHistory_Log'],
+  approach: '',
+  roomIsYours: '',
   build
 };
 
-const ACTIVE_RE = /inactive|retired|closed/i;
-const UP_RE = /rising|surging|ascending|climbing/i;
-const DOWN_RE = /fading|cooling|quiet|declin/i;
-
-function figures(beats, profiles) {
-  return (beats.Cultural_Ledger || [])
-    .filter(r => r.Name && !ACTIVE_RE.test(String(r.Status || '')))
-    // pipeline.81 Task 2: a figure with no ledger citizen is an engine template name — off the slice.
-    .filter(r => /POP-/i.test(String(r.UniverseLinks || '')))
-    .map(r => ({
-      culId: r['CUL-ID'] || null,
-      name: String(r.Name).trim(),
-      role: String(r.RoleType || '').trim() || null,
-      domain: String(r.CulturalDomain || '').trim() || null,
-      category: String(r.FameCategory || '').trim() || null,
-      // hood: the citizen row's Neighborhood when the figure links to one (K.figureHood) —
-      // the Cultural_Ledger column is a staged-sighting hood, not a residence.
-      ...K.figureHood(profiles, String(r.UniverseLinks || '').split(/[;,\s]+/).filter(t => /^POP-/i.test(t)), r.Neighborhood),
-      fame: K.num(r.FameScore),
-      trend: String(r.TrendTrajectory || '').trim() || null,
-      mediaCount: K.num(r.MediaCount),
-      firstSeen: K.num(r.FirstSeenCycle),
-      lastSeen: K.num(r.LastSeenCycle),
-      tier: r.CityTier || null,
-      popids: String(r.UniverseLinks || '').split(/[;,\s]+/).filter(t => /^POP-/i.test(t)).map(t => t.toUpperCase())
-    }));
-}
-
-function figureLine(f, why) {
-  return f.name + (f.role ? ' (' + f.role + ')' : '') + (f.domain ? ', ' + f.domain : '') +
-    (f.hood ? ', ' + f.hood : '') + ' — ' + why +
-    (f.fame != null ? ' (fame ' + f.fame + (f.trend ? ', ' + f.trend : '') + ')' : '') +
-    (f.lastSeen != null ? ', last seen C' + f.lastSeen : '');
-}
+const ARTS_DOMAIN = /^(arts|music|media|literature)$/i;
+const LINES_PER_FIGURE = 2;
+const PEOPLE_CAP = 40;
 
 function build(cycle, { beats, profiles }) {
-  const all = figures(beats, profiles);
-  if (!all.length) return K.emptySlice(SEAT, cycle, 'no active Cultural_Ledger rows');
-  const src = 'output/beats/Cultural_Ledger.jsonl @C' + cycle;
-  const rising = all.filter(f => f.trend && UP_RE.test(f.trend)).sort((a, b) => (b.fame || 0) - (a.fame || 0));
-  const appeared = all.filter(f => f.firstSeen != null && f.firstSeen >= cycle - 1)
-    .sort((a, b) => (b.firstSeen - a.firstSeen) || ((b.fame || 0) - (a.fame || 0)));
-  const fading = all.filter(f => f.trend && DOWN_RE.test(f.trend) && f.fame != null && f.fame >= 20)
-    .sort((a, b) => (b.fame || 0) - (a.fame || 0));
-
   const facts = [];
   const people = [];
-  const seenNames = new Set();
-  const addFigure = (f, why) => {
-    if (seenNames.has(f.name)) return;
-    seenNames.add(f.name);
-    facts.push({ text: figureLine(f, why), src });
-    for (const popid of f.popids) {
-      if (people.some(p => p.popid === popid)) continue;
-      const p = K.personFromProfile(profiles, popid, why + ' (Cultural_Ledger)', f.hood);
-      if (p) people.push(p);
-    }
+  const has = popid => people.some(p => p.popid === popid);
+  const add = (popid, why) => {
+    if (popid === SEAT.popid || has(popid) || people.length >= PEOPLE_CAP) return;
+    const p = K.personFromProfile(profiles, popid, why);
+    if (!p) return;
+    p.profile = p.profile + ' — ' + why;   // the reason rides where every packet prints the person
+    people.push(p);
   };
-  for (const f of rising.slice(0, 4)) addFigure(f, 'fame rising');
-  for (const f of appeared.slice(0, 3)) addFigure(f, 'new on the culture record' + (f.firstSeen === cycle ? ' this cycle' : ' last cycle'));
-  for (const f of fading.slice(0, 2)) addFigure(f, 'fading — the where-are-they-now file');
+  const lines = (beats.LifeHistory_Log || []).filter(r => String(r.Cycle) === String(cycle) && String(r.EventText || '').trim());
+  const linesOf = popid => lines.filter(r => String(r.POPID).toUpperCase() === popid).slice(0, LINES_PER_FIGURE).map(r => String(r.EventText).trim());
 
-  const seeds = K.seedsFor(beats, cycle, /^culture$/i);
-  for (const sd of seeds.slice(0, 3)) {
-    const who = sd.citizens.slice(0, 3).map(c => c.name).join('; ');
+  const figures = (beats.Cultural_Ledger || [])
+    .filter(r => r.Name && ARTS_DOMAIN.test(String(r.CulturalDomain || '').trim()) && /active/i.test(String(r.Status || '')))
+    .map(r => ({ r, popid: (String(r.UniverseLinks || '').match(/POP-\d+/i) || [])[0] }))
+    .filter(f => f.popid)
+    .sort((a, b) => (K.num(b.r.FameScore) || 0) - (K.num(a.r.FameScore) || 0));
+  for (const { r, popid } of figures) {
+    const id = popid.toUpperCase();
+    if (id === SEAT.popid) continue;
+    const fame = K.num(r.FameScore);
+    // The ledger's Neighborhood is where a sighting was staged, not a home: the citizen row's hood wins (K.figureHood).
+    const hood = K.figureHood(profiles, [id], r.Neighborhood).hood;
     facts.push({
-      text: 'CITY SEED' + (sd.hood ? ' (' + sd.hood + ')' : '') + ': ' + (who || 'no citizens attached') +
-        (sd.businesses.length ? ' · at ' + sd.businesses.slice(0, 2).join('; ') : ''),
-      src: 'output/beats/Story_Seed_Deck.jsonl @C' + cycle
+      text: String(r.Name).trim() + ' (' + String(r.RoleType || '').trim() + '), ' + String(r.CulturalDomain).trim() +
+        (hood ? ', ' + hood : '') + (r.TrendTrajectory ? ' — ' + r.TrendTrajectory : '') +
+        (fame != null ? ' (fame ' + fame + ')' : '') + (K.num(r.MediaCount) != null ? ', ' + K.num(r.MediaCount) + ' media mentions' : ''),
+      src: 'output/beats/Cultural_Ledger.jsonl @C' + cycle + (r['CUL-ID'] ? ' ' + r['CUL-ID'] : '')
     });
-    for (const c of sd.citizens) {
-      if (!c.popid || people.some(p => p.popid === c.popid)) continue;
-      const p = K.personFromProfile(profiles, c.popid, 'culture seed this cycle (Story_Seed_Deck)', sd.hood);
-      if (p) people.push(p);
-    }
+    const own = linesOf(id);
+    add(id, String(r.RoleType || '').trim() + ' on the culture record' + (own.length ? '; C' + cycle + ': ' + own.join('; ') : ''));
   }
 
-  const hooks = K.domainHooks(beats, cycle, SEAT.name, /^(ARTS|CULTURE|NIGHTLIFE|CULTURAL|FESTIVAL)$/);
-  const lead = rising[0] || appeared[0] || all.slice().sort((a, b) => (b.fame || 0) - (a.fame || 0))[0];
-  const label = rising.length
-    ? rising.length + ' culture figures rising; ' + appeared.length + ' new on the record'
-    : appeared.length ? appeared.length + ' new on the culture record' : 'the culture ledger, quiet this week';
+  for (const r of lines.filter(x => /^Cultural(\||$)/.test(String(x.EventTag || '')))) {
+    add(String(r.POPID).toUpperCase(), 'C' + cycle + ': ' + String(r.EventText).trim());
+  }
+
+  for (const pr of (beats.Community_Programs || []).filter(p => p.Name && /^arts$/i.test(String(p.Type || '').trim()) && /active/i.test(String(p.Status || '')))) {
+    const founder = pr.Founder_POPID ? profiles.get(String(pr.Founder_POPID).toUpperCase()) : null;
+    facts.push({
+      text: String(pr.Name).trim() + ' (arts)' + (pr.Neighborhood ? ', ' + pr.Neighborhood : '') +
+        (founder && founder.Name ? ' — founded by ' + String(founder.Name).trim() : '') + (pr.Founded_Cycle ? ', since C' + pr.Founded_Cycle : ''),
+      src: 'output/beats/Community_Programs.jsonl @C' + cycle + (pr.Program_ID ? ' ' + pr.Program_ID : '')
+    });
+  }
+
+  if (!facts.length && !people.length) return K.emptySlice(SEAT, cycle, 'nothing on the arts record this cycle');
   return K.makeSlice(SEAT, cycle, beats, {
-    ref: src, hood: lead && lead.hood, label,
-    angle: (rising[0] ? rising[0].name + ' is rising' : appeared[0] ? appeared[0].name + ' just appeared on the record' : 'a quiet week on the culture ledger') + ' — the acts and the rooms they play',
-    hookLine: lead ? figureLine(lead, rising.includes(lead) ? 'fame rising' : 'on the culture record') + '.' : 'Nobody moved on the culture ledger this week — the scene itself is the story.',
-    facts, people,
-    deltas: null,
-    hooks,
-    note: people.length ? null : 'no culture figure on this slice links to a ledger citizen',
-    extra: { rising: rising.length, appeared: appeared.length, fading: fading.length, seeds: seeds.length }
+    ref: 'the arts record of C' + cycle, hood: null, label: 'the arts record of C' + cycle,
+    angle: 'the arts record of C' + cycle, hookLine: '',
+    facts, people, peopleCap: PEOPLE_CAP, factCap: Math.max(12, facts.length),
+    deltas: null, hooks: [], note: null,
+    extra: { figures: figures.length }
   });
 }
 
+const sitsOutWhenEmpty = true;
 const W = K.wire(SEAT);
 if (require.main === module) W.main();
-module.exports = { SEAT, loadSlice: W.load, buildArtsSlice: W.build, writeArtsSlice: W.write, loadArtsSlice: W.load,
+module.exports = { SEAT, sitsOutWhenEmpty, loadSlice: W.load, buildArtsSlice: W.build, writeArtsSlice: W.write, loadArtsSlice: W.load,
   isArtsSeat: W.isSeat, assignmentFromSlice: W.assignmentFromSlice, enrichAssignment: W.enrichAssignment, slicePaths: W.paths };

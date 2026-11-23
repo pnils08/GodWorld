@@ -42,7 +42,7 @@ function districtState(audit, earlier, district) {
           Number.isFinite(numeric) && Number.isFinite(priorNumeric) ? numeric - priorNumeric : null,
       };
     }
-    return { hood, available: true, measured, sourceRef: 'engine_audit snapshots.Neighborhood_Map' };
+    return { hood, available: true, measured, sourceRef: 'Neighborhood_Map (fire close)' };
   });
   return { available: neighborhoods.every(n => n.available), district, neighborhoods,
     previousCycleAvailable: !!earlier };

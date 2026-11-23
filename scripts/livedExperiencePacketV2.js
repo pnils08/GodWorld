@@ -532,6 +532,9 @@ function publicBriefFacts(packet) {
     if (!text) return false;
     if (/(?:engine_audit|snapshot:|world_summary|desk_signal|patterns?\[|rows?\[|\s##\s)/i.test(text)) return false;
     if (/^Initiative_Tracker\s*\(InitiativeID\b/i.test(text)) return false;
+    // pipeline.115: the record-form source ("Neighborhood_Map row(s) 10; finding C117-5")
+    // is a pointer, never a brief fact — same as the old engine_audit form above.
+    if (/\bfinding C\d+-\d+\b/.test(text) || /^the city record$/i.test(text)) return false;
     if (/\bfrontState\b/i.test(text)) return false;
     if (/^(?:NAMED|PERSON|VENUE|HOOD|TRAJECTORY|VOLUME|VIBE|MOVEMENT|WEATHER IMPACT|RETAIL VITALITY|EVENING RECORD)\s*:/i.test(text)) return false;
     if (/\bvolume\s+(?:of\s+)?\d+(?:\.\d+)?\b/i.test(text)) return false;

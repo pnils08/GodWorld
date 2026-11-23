@@ -306,7 +306,7 @@ function publicStuckFact(top) {
 }
 
 function auditPatternForRef(root, cycle, ref) {
-  const match = String(ref || '').match(/patterns\[(\d+)\]/i);
+  const match = String(ref || '').match(/patterns\[(\d+)\]/i) || String(ref || '').match(/\bfinding C\d+-(\d+)\b/);
   if (!match) return null;
   const audit = loadJson(path.join(root, 'output', 'engine_audit_c' + cycle + '.json'));
   return audit && Array.isArray(audit.patterns) ? audit.patterns[Number(match[1])] || null : null;
@@ -335,7 +335,7 @@ function buildContradiction(top, illnessRate, auditPattern, cycle) {
     };
   }
   if (auditPattern && auditPattern.type === 'incoherence') {
-    const patternMatch = String(top.ref || '').match(/patterns\[(\d+)\]/i);
+    const patternMatch = String(top.ref || '').match(/patterns\[(\d+)\]/i) || String(top.ref || '').match(/\bfinding C\d+-(\d+)\b/);
     if (!patternMatch) return null;
     const patternBase = 'output/engine_audit_c' + cycle + '.json patterns[' + patternMatch[1] + ']';
     const fields = auditPattern.evidence && auditPattern.evidence.fields || {};

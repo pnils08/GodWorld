@@ -328,7 +328,7 @@ function loadTurfMetrics(audit, hoods) {
       id: 'F-crime-' + hood.replace(/\s+/g, ''),
       t: 'FACT',
       text,
-      src: 'engine_audit snapshots.Crime_Metrics',
+      src: 'Crime_Metrics (fire close)',
     });
   }
   const ranked = scoreHoods(audit);
@@ -352,7 +352,7 @@ function loadTurfMetrics(audit, hoods) {
       id: 'F-hood-' + hood.replace(/\s+/g, ''),
       t: 'FACT',
       text: hood + ': ' + bits.join('; '),
-      src: 'engine_audit snapshots.Neighborhood_Map',
+      src: 'Neighborhood_Map (fire close)',
     });
   }
   return facts;
@@ -631,7 +631,7 @@ function pickTurn(opts) {
       id: 'F-office-' + seatId,
       t: 'FACT',
       text: (office.holder || '') + ' holds ' + seatId + ' at approval ' + approval,
-      src: 'engine_audit snapshots.Civic_Office_Ledger',
+      src: 'Civic_Office_Ledger (fire close)',
     });
     lineFacts.push('approval ' + approval);
   }
@@ -643,7 +643,7 @@ function pickTurn(opts) {
       id: 'F-heat-' + String(h.hood).replace(/\s+/g, ''),
       t: 'FACT',
       text,
-      src: 'engine_audit snapshots.Neighborhood_Map ranked vs city',
+      src: 'Neighborhood_Map (fire close) ranked vs city',
     });
     lineFacts.push(text);
   }

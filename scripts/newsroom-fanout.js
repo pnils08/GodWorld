@@ -207,7 +207,7 @@ function laneSeeds(lane, taken, date) {
   const withHandle = [], followups = [], rest = [];
   for (const e of (lane || [])) {
     if (!e || !e.ref || taken.has(e.ref)) continue;
-    if (e.handle) withHandle.push(e);
+    if (e.handle || e.framed) withHandle.push(e);   // pipeline.115: framed = checker-routed, same lead as before
     else if (FOLLOWUP_KINDS.has(e.kind)) followups.push(e);
     else rest.push(e);
   }

@@ -701,13 +701,19 @@ function calendarContext(cycle, root = ROOT) {
 function recordRef(ref) {
   const raw = String(ref || '');
   if (!/engine_audit_c\d+\.json/.test(raw)) return raw;
-  const out = raw
+  // One finding stays one source: the index rides as "finding C117-5" so two
+  // findings on the same sheet never collapse into one ref (dedup, takenRefs).
+  const m = raw.match(/engine_audit_c(\d+)\.json patterns\[(\d+)\]/);
+  const tag = m ? 'finding C' + m[1] + '-' + m[2] : '';
+  const parts = raw
     .replace(/(?:output\/)?engine_audit_c\d+\.json(?: patterns\[\d+\](?:\.[\w.]+)?)?/g, '')
     .replace(/;?\s*snapshot:\s*snapshots\.\w+/g, '')
     .replace(/\bevidence:\s*/g, '')
     .replace(/\s+row\(s\)\s*(?=;|$)/g, '')
-    .split(';').map(x => x.trim()).filter(Boolean).join('; ');
-  return out || 'the city record';
+    .split(';').map(x => x.trim()).filter(Boolean);
+  // Same order buildWorldSummary writes: "<sheet> row(s) N; finding C117-5; storyline …".
+  if (tag) parts.splice(parts.length && !/^storyline\b/.test(parts[0]) ? 1 : 0, 0, tag);
+  return parts.join('; ') || 'the city record';
 }
 
 module.exports = {

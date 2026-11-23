@@ -387,10 +387,22 @@ function ailmentPerception(p) {
       return where + ': something real happened here and nobody in public life has spoken to it.';
     case 'cascade-failure':
       return where + ': a chain of problems is compounding — each one feeding the next.';
+    case 'improvement': {
+      // pipeline.115: the record's move, not the checker's verdict on its own remedy.
+      if (fields.InitiativeID && fields.toPhase) {
+        return (fields.Name || fields.InitiativeID) + ' moved from ' + phaseProse(fields.fromPhase) + ' to ' + phaseProse(fields.toPhase) + ' (' + where + ').';
+      }
+      if (fields.expectedField && fields.observed != null && Number.isFinite(Number(fields.observed))) {
+        const n = Number(fields.observed);
+        return where + ': ' + String(fields.expectedField).split('.').pop() + ' ' + (n >= 0 ? 'rose ' : 'fell ') + Math.abs(n) + ' since the last reading.';
+      }
+      return where + ': ' + (cleanInline(p.description) || 'a reading moved') + '.';
+    }
     case 'ledger-completeness':
       return 'part of the city\'s own record-keeping came up short this cycle (' + where + ') — an administration housekeeping item, not a street-level story.';
     default:
-      return where + ': ' + p.type.replace(/-/g, ' ') + ' flagged at ' + p.severity + ' severity.';
+      // pipeline.115: with the engine no longer speaking, the line carries the record's own fact.
+      return where + ': ' + (cleanInline(p.description) || p.type.replace(/-/g, ' ')) + '.';
   }
 }
 

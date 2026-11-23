@@ -1289,8 +1289,12 @@ function emitDeskSignal(cycle, data) {
   const patterns = Array.isArray(auditJson.patterns) ? auditJson.patterns : [];
   patterns.forEach((p, i) => {
     const ev = p.evidence || {};
-    const ref = `output/engine_audit_c${cycle}.json patterns[${i}]`
-      + (ev.sheet ? `; evidence: ${ev.sheet} row(s) ${(ev.rows || []).join(',')}` : '')
+    // pipeline.115 (builder 2026-11-22, narrow cut): the source is the city
+    // record and a finding tag, never a pointer into the engine's review file.
+    // Same form as beatSliceKit.recordRef, so every reader matches one string.
+    const rows = (ev.rows || []).join(',');
+    const ref = (ev.sheet ? `${ev.sheet}${rows ? ` row(s) ${rows}` : ''}; ` : '')
+      + `finding C${cycle}-${i}`
       + patternStorylineTag(p, stageById);
     const ae = p.affectedEntities || {};
     const popids = extractPopids(ae.citizens);
@@ -1308,7 +1312,9 @@ function emitDeskSignal(cycle, data) {
     // pipeline.115 (builder 2026-11-22, narrow cut): the checker's own angle and
     // hook lines ("— remedy path + responsible office") stay out of the desk's
     // tip; the record's label above is the fact, the named citizens stay.
-    if (handles.civic) { const h = citizensOnly(handles.civic); if (h) entry.handle = h; }
+    // `framed` keeps the pickers' order (stink score, fanout lead) as it was when
+    // the checker's angle rode along; it carries no words.
+    if (handles.civic) { entry.framed = true; const h = citizensOnly(handles.civic); if (h) entry.handle = h; }
     lanes.civic.push(entry);
 
     // Task 2.5.1: a pattern reaches business/culture/sports only where the
@@ -1323,7 +1329,8 @@ function emitDeskSignal(cycle, data) {
       const deskEntry = {
         kind: 'anomaly',
         ref,
-        label: entry.label
+        label: entry.label,
+        framed: true
       };
       const deskHandle = citizensOnly(h);
       if (deskHandle) deskEntry.handle = deskHandle;
@@ -1349,7 +1356,7 @@ function emitDeskSignal(cycle, data) {
     if (initiativeMoves(it, prior).length) {
       lanes.civic.push({
         kind: 'initiative',
-        ref: `Initiative_Tracker (InitiativeID ${it.InitiativeID}); snapshot: engine_audit_c${cycle}.json snapshots.Initiative_Tracker`
+        ref: `Initiative_Tracker (InitiativeID ${it.InitiativeID})`
           + stageTag(it),
         label: signalLabel(it.Name, `Status ${it.Status || '—'}`, it.ImplementationPhase ? `phase ${it.ImplementationPhase}` : null),
         hood: it.AffectedNeighborhoods || undefined

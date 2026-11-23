@@ -90,7 +90,8 @@ function scoreEntry(entry, desk) {
 
   let score = severityPoints(label) + classed.bonus;
   if (isAnomaly) score += 5;
-  if (entry.handle && (entry.handle.angle || entry.handle.hookLine)) score += 3;
+  // pipeline.115: `framed` = the checker routed this finding to a desk (its angle words no longer ride along).
+  if (entry.framed || (entry.handle && (entry.handle.angle || entry.handle.hookLine))) score += 3;
 
   if (score < 10) return null;
 

@@ -355,25 +355,15 @@ try {
   console.log('faith:');
   const f = faith.buildFaithSlice(CYCLE, { root });
   ok('seat POPID is the ledger\'s Graye (POP-00012), not Sharon Okafor', f.seat.popid === 'POP-00012');
-  ok('rotates by cycle (103 % 2 = 1 → Test Temple)', f.organization && f.organization.Organization === 'Test Temple');
+  // pipeline.111 (builder 2026-11-23): no congregation in focus; every congregation, every leader, the week's events.
   ok('week events lead, crisis before holy_day even a cycle older', /^Test Fellowship \(Downtown\), C102 — crisis response: emergency assistance fund activated/.test(f.facts[0].text) &&
     f.facts[1] && /^Test Temple \(Chinatown\), C103 — holy day: Vesak observance held \(attendance 120\)/.test(f.facts[1].text));
   ok('event outside the 7-cycle window never rides', !JSON.stringify(f.facts).includes('STALE event'));
-  ok('week line in the label', /2 faith events on the record since C97/.test(f.story.label));
-  ok('event-org leader joins the people on the record', f.citizens.some(c => c.popid === 'POP-90010' && /crisis response this week/.test(c.why)));
-  ok('FAITH-domain hook reaches him despite the City Desk misroute', f.prewrite.hooks.some(h => /Test Temple: Vesak observance held/.test(h.text) && h.domain === 'FAITH'));
+  ok('every congregation rides; none in focus, no angle, no hook', ['Test Temple', 'Test Fellowship'].every(n => f.facts.some(x => x.text.startsWith(n + ' — '))) &&
+    !f.facts.some(x => /^In focus/.test(x.text)) && f.prewrite.hooks.length === 0 && f.hood === null);
+  ok('event-org leader joins the people on the record with the event', f.citizens.some(c => c.popid === 'POP-90010' && /crisis response, C102/.test(c.why)));
+  ok('an empty faith record sits him out', faith.sitsOutWhenEmpty === true);
   ok('every fact sourced', f.facts.every(x => /output\/beats\//.test(x.src)));
-  const fellowship = (() => {
-    const meta = path.join(output, 'beats', 'meta.json');
-    const m = JSON.parse(fs.readFileSync(meta, 'utf8')); m.cycle = CYCLE + 1; fs.writeFileSync(meta, JSON.stringify(m));
-    const x = faith.buildFaithSlice(CYCLE + 1, { root });
-    m.cycle = CYCLE; fs.writeFileSync(meta, JSON.stringify(m));
-    return x;
-  })();
-  ok('next cycle → Test Fellowship with leader, member and program founder', fellowship.organization.Organization === 'Test Fellowship' &&
-    fellowship.citizens.some(c => c.popid === 'POP-90010' && /leads Test Fellowship/.test(c.why)) &&
-    fellowship.citizens.some(c => c.popid === 'POP-90001' && /member of Test Fellowship/.test(c.why)) &&
-    fellowship.facts.some(x => /Test Program \(mutual-aid\), Downtown, founded by Test Civic Resident, since C100/.test(x.text)));
   ok('culture desk', f.seat.desk === 'culture');
 
   console.log('safety:');
@@ -642,7 +632,7 @@ try {
   for (const [label, slice, popid] of [['trevor', t, 'POP-00155'], ['lila', h, 'POP-00154'], ['angela', s, 'POP-00156'], ['noah', e, 'POP-00157'], ['graye', f, 'POP-00012'], ['rachel', r, 'POP-00057'], ['kai', k, 'POP-00158'], ['sharon', sh, 'POP-00159'], ['maria', m, 'POP-00013'], ['selena', sg, 'POP-00591'], ['talia', tf, 'POP-00592'], ['celeste', ct, 'POP-00164']]) {
     const pk = v2.buildAnglePacket({ cycle: CYCLE, desk: slice.seat.desk, reporter: { popid, name: slice.seat.name }, story: slice.story, approach: slice.approach, slice, lane: [] });
     const b = pk.task.creativeBrief;
-    ok(label + ': brief beat-slice with facts + room', b && b.kind === 'beat-slice' && b.facts.length >= 1 && (['sharon', 'maria', 'kai', 'celeste'].includes(label) || !!b.roomIsYours));   // seat-file seats: no room line (pipeline.111)
+    ok(label + ': brief beat-slice with facts + room', b && b.kind === 'beat-slice' && b.facts.length >= 1 && (['sharon', 'maria', 'kai', 'celeste', 'graye'].includes(label) || !!b.roomIsYours));   // seat-file seats: no room line (pipeline.111)
     ok(label + ': every anchor fact is a known FACT sourced to a file on disk', slice.prewrite.anchorFacts.every(text => pk.known.some(k => k.text === text && /^output\//.test(k.src))));
     ok(label + ': candidates = the slice\'s people', pk.exposure.candidates.length === slice.citizens.length && pk.exposure.candidates.every(c => slice.citizens.some(p => p.popid === c.pop)));
   }

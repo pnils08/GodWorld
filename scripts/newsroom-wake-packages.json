@@ -676,7 +676,7 @@
     }
   },
   "elliot-graye": {
-    "version": "GRAYE-LEP2-2",
+    "version": "GRAYE-LEP2-3",
     "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
@@ -692,7 +692,7 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-4-maverick"
+        "model": "anthropic/claude-sonnet-5.5"
       },
       "report": {
         "provider": "openrouter",
@@ -704,33 +704,27 @@
       }
     },
     "reviewProfile": {
-      "id": "graye-faith-ground-v1",
+      "id": "graye-faith-v2",
       "canonPolicy": "load-bearing",
-      "purpose": "Describe one Packet-supplied faith-community or quiet-care signal through observable function without inventing belief, doctrine, attendance, clergy, service, aid, or institutional action.",
+      "purpose": "Report Oakland's faith communities and the quiet work outside the headlines from the faith record (builder 2026-11-23). The check is facts: locations, citizens, data points.",
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
-        "voice": "reflective faith-and-ethics ground brief",
-        "targetWords": "evidence-bounded",
-        "opening": "one Packet-named institution, person, or condition",
-        "closing": "the function or human account still unestablished"
+        "targetWords": "evidence-bounded"
       },
       "authorizedTexture": [
-        "ethical or reflective interpretation of a supplied faith-adjacent condition without asserting belief or action",
-        "dignity-first language carrying no invented person, service, gathering, doctrine, or factual premise"
+        "Graye at the congregations and gatherings he writes about, third person, quiet and present"
       ],
-      "textureConditions": [
-        "a sighting proves only the supplied person-place relation, not worship, membership, motive, companionship, or participation",
-        "every clergy member, congregant, worker, gathering, service, aid act, quote, belief, institutional role, and civic effect requires Packet support"
-      ],
+      "textureConditions": [],
       "canonBlockers": [
-        "invented faith practice, belief, worship, membership, motive, companion, clergy, congregant, worker, pantry, grief room, gathering, service, aid act, quote, or civic effect",
-        "an invented or altered person, institution, tradition, neighborhood, event, relationship, date, count, or quote",
-        "a blocked real-world institution or clergy name, doctrine-war framing, raw engine label, or collective faith-community sentiment presented as fact"
+        "an invented or altered location: congregation, venue, business or neighborhood",
+        "an invented or altered citizen (name, role, home, relationship, who leads which congregation), or words a named citizen did not say",
+        "an invented or altered data point: a number, date, attendance count or engine record"
       ]
     },
     "writerTools": {
       "maxToolCalls": 6
-    }
+    },
+    "seatFile": ".claude/agents/elliot-graye/SEAT.md"
   },
   "mason-ortega": {
     "version": "MASON-LEP2-2",

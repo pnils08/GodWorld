@@ -244,14 +244,16 @@ assert.deepStrictEqual(maria.reviewProfile.canonBlockers.map(v => v.split(':')[0
 assert.equal(maria.rewardLoop, true);
 
 const graye = packages['elliot-graye'];
-assert.equal(graye.version, 'GRAYE-LEP2-2');
+assert.equal(graye.version, 'GRAYE-LEP2-3');
 assert.equal(graye.active, true);
 assert.equal(graye.assignment.popid, 'POP-00012');
 assert.equal(graye.assignment.beatDomain, 'COMMUNITY');
-assert.equal(packagesApi.routeFor(graye, 'angle').model, 'meta-llama/llama-4-maverick');
+// pipeline.111 (builder 2026-11-23: "1 - keep it 2 go 3 go"): seat file, morning on his writer's model, the fact reviewer.
+assert.equal(packagesApi.routeFor(graye, 'angle').model, 'anthropic/claude-sonnet-5.5');
+assert.equal(graye.seatFile, '.claude/agents/elliot-graye/SEAT.md');
 assert.equal(graye.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
-assert.ok(graye.reviewProfile.textureConditions.some(v => v.includes('sighting proves only')));
-assert.ok(graye.reviewProfile.canonBlockers.some(v => v.includes('blocked real-world institution')));
+assert.deepStrictEqual(graye.reviewProfile.textureConditions, []);
+assert.deepStrictEqual(graye.reviewProfile.canonBlockers.map(v => v.split(':')[0].split(' (')[0]), ['an invented or altered location', 'an invented or altered citizen', 'an invented or altered data point']);
 
 const mason = packages['mason-ortega'];
 assert.equal(mason.version, 'MASON-LEP2-2');

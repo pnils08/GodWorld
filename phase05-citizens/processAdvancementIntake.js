@@ -435,6 +435,11 @@ function processMediaUsage_(ctx, now, cycle) {
   var genericUpdates = {};
   var ledgerUpdates = {};
   var logSheet = ss.getSheetByName('LifeHistory_Log');
+  if (logSheet) {   // engine.361: this pass's direct appends take the same normalization
+    var realLog = logSheet, normLog = lifeLogRowNormalizer_(ctx);
+    logSheet = { appendRow: function(row) { return realLog.appendRow(normLog(row)); }, getLastRow: function() { return realLog.getLastRow(); },
+      getRange: function() { return realLog.getRange.apply(realLog, arguments); }, getDataRange: function() { return realLog.getDataRange(); } };
+  }
 
   // S302: normalized-name indexes built once (O(rows)), replacing the exact
   // case-insensitive linear scans that dropped honorific/punctuation/accent
@@ -668,7 +673,26 @@ function processMediaUsage_(ctx, now, cycle) {
 // body and its helpers only ever call appendRow on it. One write, the
 // executor's batch-append shape: tail computed once, setValues under retry
 // (a re-attempt rewrites the same cells). A flush is attempted once, never twice.
-function advancementLogBuffer_(sheet, label) {   // engine.285: Phase-11 media routing buffers Advancement_Intake1 / Intake the same way
+// engine.361 (C117 gap log G-EC52, bench C118): this pass writes its LifeHistory_Log rows directly (engine.279 batch),
+// past the executor's normalization — 91 C118 rows carried a bare "C118" stamp and no Neighborhood. Same rule as the
+// executor (persistenceExecutor.js): the stamp by its own number, a blank Name / Neighborhood from the row's own POPID.
+// The ledger map is built at write time (it holds this pass's mints) and never cached on ctx (the executor builds its own).
+function lifeLogRowNormalizer_(ctx) {
+  var who;
+  return function(row) {
+    var out = row.slice();
+    if (typeof bareCycleStampToInWorld_ === 'function') { var iw = bareCycleStampToInWorld_(out[0]); if (iw) out[0] = iw; }
+    var noName = !String(out[2] == null ? '' : out[2]).trim(), noHood = !String(out[5] == null ? '' : out[5]).trim();
+    if ((noName || noHood) && ctx && typeof lifeHistoryWhoMap_ === 'function') {
+      if (who === undefined) who = lifeHistoryWhoMap_(ctx);
+      var w = who && who[String(out[1] || '').trim()];
+      if (w) { if (noName && w[0]) out[2] = w[0]; if (noHood && w[1]) out[5] = w[1]; }
+    }
+    return out;
+  };
+}
+
+function advancementLogBuffer_(sheet, label, normalize) {   // engine.285: Phase-11 media routing buffers Advancement_Intake1 / Intake the same way
   var buffer = { rows: [], attempted: false, sheet: null };
   if (!sheet) { buffer.flush = function() { return 0; }; return buffer; }
   buffer.sheet = { appendRow: function(row) { buffer.rows.push(row); } };
@@ -679,7 +703,7 @@ function advancementLogBuffer_(sheet, label) {   // engine.285: Phase-11 media r
     for (var w = 0; w < buffer.rows.length; w++) width = Math.max(width, buffer.rows[w].length);
     var padded = [];
     for (var p = 0; p < buffer.rows.length; p++) {
-      var line = buffer.rows[p].slice();
+      var line = normalize ? normalize(buffer.rows[p]) : buffer.rows[p].slice();   // engine.361
       while (line.length < width) line.push('');
       padded.push(line);
     }
@@ -693,7 +717,7 @@ function advancementLogBuffer_(sheet, label) {   // engine.285: Phase-11 media r
 }
 
 function processAdvancementRows_(ctx, now, cycle) {
-  var log = advancementLogBuffer_(ctx.ss.getSheetByName('LifeHistory_Log'));
+  var log = advancementLogBuffer_(ctx.ss.getSheetByName('LifeHistory_Log'), null, lifeLogRowNormalizer_(ctx));   // engine.361
   try {
     return processAdvancementRowsBody_(ctx, now, cycle, log);
   } catch (bodyErr) {

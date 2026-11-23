@@ -31,4 +31,13 @@ t('a blank Name and Neighborhood are filled from the row\'s own POPID', () => { 
 t('a written Name and Neighborhood are never replaced', () => { assert.strictEqual(rows[1][2], 'Benny Row'); assert.strictEqual(rows[1][5], 'Uptown'); });
 t('a POPID the ledger lacks keeps its blanks; a wall-clock date still becomes the in-world stamp', () => { assert.strictEqual(rows[2][2], ''); assert.strictEqual(rows[2][0], 'Y3C13'); });
 t('bareCycleStampToInWorld_ converts by its own number', () => { assert.strictEqual(sb.bareCycleStampToInWorld_('C105'), 'Y3C1'); assert.strictEqual(sb.bareCycleStampToInWorld_('C52'), 'Y1C52'); assert.strictEqual(sb.bareCycleStampToInWorld_('Y3C13'), null); });
+// the sign-up pass writes its rows directly (engine.279 batch) — same normalization at its flush
+vm.runInContext(fs.readFileSync(path.join(ROOT, 'phase05-citizens/processAdvancementIntake.js'), 'utf8'), sb, { filename: 'processAdvancementIntake.js' });
+const LH2 = fakeSheet([['Timestamp', 'POPID', 'Name', 'EventTag', 'EventText', 'Neighborhood', 'Cycle']]);
+const buf = sb.advancementLogBuffer_(LH2, null, sb.lifeLogRowNormalizer_(ctx));
+buf.sheet.appendRow(['C118', 'POP-2', 'Ben Row', 'Advancement', 'Updated to Tier 3.', '', 118]);
+buf.flush();
+t('the sign-up batch: bare stamp converted, blank hood filled, written name kept', () => {
+  const r = LH2.rows[1]; assert.strictEqual(r[0], 'Y3C14'); assert.strictEqual(r[5], 'Temescal'); assert.strictEqual(r[2], 'Ben Row');
+});
 console.log(pass + ' passed, ' + fail + ' failed'); process.exit(fail ? 1 : 0);

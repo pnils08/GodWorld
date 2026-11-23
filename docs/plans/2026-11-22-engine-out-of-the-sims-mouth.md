@@ -83,6 +83,7 @@ pointers:
 
 ## Changelog
 
+- 2026-11-22 (engine-sheet) — Builder "yes you can take those out": "cycle" and "ledger" off Jax's forbidden words (record words, 2026-10-18 ruling); "engine" and "simulation" stay (fourth wall).
 - 2026-11-22 (engine-sheet) — Builder "yes rename": Jax's rulebook tags `FACT(engine)` → `FACT(Civis)`, "Engine Returns" → "Civis Returns" (RULES.md, SKILL.md); no script parses either.
 - 2026-11-22 (engine-sheet) — agy SHIP-WITH-FIXES folded (§Reviews reconciled): Jax slice record-form for every consumer, incoherence source + Civis-true B line, the stale leftover-improvement number off the seats, Mara's header to Civis. Trevor's C117 pick changes (correcting `3f016a164`'s "identical").
 - 2026-11-22 (engine-sheet) — Builder: "We kind of mask our engine as Elias Varek company system so it doesn't come off as contaminant"; chose "Credit Civis Systems". Seat readings now read "Civis Systems' readings flag this: …", HIGH topics "Civis Systems reading — <hood>: <type>", the Mayor's pulse heading "Civis Systems readings this cycle".

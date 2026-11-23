@@ -19,16 +19,17 @@
  * Artifacts: output/slices/c{N}/lila-mezran.md · output/cron-compare/health_slice_c{N}.json
  */
 'use strict';
+const path = require('path');
 const K = require('./beatSliceKit');
 const { loadHealthEntries } = require('./buildCivicDomainSlice');
 
 const SEAT = {
   slug: 'lila-mezran', name: 'Dr. Lila Mezran', popid: 'POP-00154', desk: 'civic',
   kind: 'beat-health', domain: 'health', artifact: 'health', builder: 'buildHealthSlice.js',
-  version: 'HEALTH-SLICE-5', nameRe: /lila\s*mezran/i,
-  tabs: ['Neighborhood_Demographics', 'Hospital_Ledger', 'Health_Cause_Queue', 'Story_Hook_Deck', 'Care_Justice_Census'],
-  approach: 'Health approach: this slice is the illness count by neighborhood, every resident named on the hospital and live cause records, the residents the cycle summary names under Health/Recovering, and the care trail — sick residents to admissions to who is in a bed, hood by hood, tracked and other residents apart. A person listed as living in a neighborhood where illness is up is a neighbour to quote about the block, not a patient — nothing on the record says they are sick. Clinical calm, human cost, no diagnosis beyond what the record says. When the named rows are few, write the neighborhood, not a ward.',
-  roomIsYours: 'the waiting room, the walk to the clinic, what a household does when one person is sick, who covers the shift',
+  version: 'HEALTH-SLICE-7', nameRe: /lila\s*mezran/i,
+  tabs: ['Neighborhood_Demographics', 'Hospital_Ledger', 'Health_Cause_Queue', 'Care_Justice_Census'],
+  approach: '',
+  roomIsYours: '',
   build
 };
 
@@ -102,9 +103,16 @@ function build(cycle, { root, beats, profiles }) {
     const p = K.personFromProfile(profiles, r.POPID, 'on Hospital_Ledger this cycle', r.Neighborhood) ||
       K.person(r.POPID, String(r.Name).trim(), null, r.Neighborhood || null, 'on Hospital_Ledger this cycle');
     people.push(p);
+    // pipeline.111 (builder 2026-11-23): the row whole — a discharge on file is said, not hidden behind the status field
+    // (C117: three rows read StatusNow 'active' with DischargeCycle and Outcome 'recovered' filled; Lila printed them as in care).
+    const dis = K.num(r.DischargeCycle);
+    const where = p.name + (r.Neighborhood ? ' (' + r.Neighborhood + ')' : '');
+    const admitted = (K.num(r.AdmitCycle) != null ? 'admitted C' + K.num(r.AdmitCycle) : 'admitted') + (r.Cause ? ' after ' + r.Cause : '');
     facts.push({
-      text: p.name + (r.Neighborhood ? ' (' + r.Neighborhood + ')' : '') + ' — in hospital care, ' + (r.StatusNow || 'status unrecorded') +
-        (K.num(r.AdmitCycle) != null ? ', admitted C' + K.num(r.AdmitCycle) : '') + (r.Cause ? ' after ' + r.Cause : ''),
+      text: dis != null && dis <= cycle
+        ? where + ' — ' + admitted + '; discharged C' + dis + (r.Outcome ? ', ' + r.Outcome : '') + (K.num(r.CyclesInCare) != null ? ' after ' + K.num(r.CyclesInCare) + ' cycles in care' : '') +
+          '; the ledger status still reads ' + (r.StatusNow || 'unrecorded')
+        : where + ' — in hospital care, ' + (r.StatusNow || 'status unrecorded') + ', ' + admitted,
       src: 'output/beats/Hospital_Ledger.jsonl ' + r.POPID
     });
   }
@@ -144,7 +152,9 @@ function build(cycle, { root, beats, profiles }) {
     demandByHood: new Map(demo.map(r => [K.hoodKey(r.hood), r.sick])),
     namesByHood: K.careNamesByHood(beats.Hospital_Ledger, profiles)
   });
-  for (const f of K.censusFacts(trail, 'hospital', 'output/beats/Care_Justice_Census.jsonl hospital @C' + cycle, 5)) facts.push(f);
+  // pipeline.111 (builder 2026-11-23): every hood's hospital line, not the top five — a hood the census puts at zero
+  // reads as a zero from the record, never as an absence the reporter fills ("no one in KONO is going to the hospital").
+  for (const f of K.censusFacts(trail, 'hospital', 'output/beats/Care_Justice_Census.jsonl hospital @C' + cycle, 30)) facts.push(f);
   const inCare = trail.city && trail.city.complete ? trail.city.closing : null;
 
   // The record count and the lead name are fixed here: the neighbours below
@@ -158,32 +168,37 @@ function build(cycle, { root, beats, profiles }) {
   // second echo.
   const spikes = spikeHoods(demo, prevDemo.rows);
   const spike = spikes[0] || null;
-  const neighbours = spike ? spikeNeighbours(profiles, spike.hood, cycle, people) : [];
+  // pipeline.111: no bystander picked to quote (builder 2026-09-30: interview the citizens a story touched, or none).
+  const neighbours = [];
   if (spike) {
     const pct = v => (Math.round(v * 1000) / 10) + '%';
     facts.push({
       text: spike.hood + ': ' + spike.sick + ' sick of ' + K.fmtInt(spike.pop) + ' residents, ' + pct(spike.share) +
         (spike.overBar ? ' — at or over the 6% watch bar' : '') +
         (spike.risen ? (spike.overBar ? ', and' : ' —') + ' up from ' + pct(spike.prevShare) + ' at C' + prevDemo.vs : '') +
-        (neighbours.length ? '' : '; no tracked resident of the block is free to quote'),
+        '',
       src: 'output/beats/Neighborhood_Demographics.jsonl Sick/Students+Adults+Seniors @C' + cycle + (spike.risen ? ' vs prev/' : '')
     });
     for (const p of neighbours) people.push(p);
   }
 
-  const label = lead.hood + ' carries the most sick residents (' + lead.sick + ') | ' + onRecord + ' named on the hospital and cause records';
+  // The engine's health events this cycle (the health center, a hospital strain, a clinic) from the world summary.
+  const ws = K.loadText(path.join(root, 'output', 'world_summary_c' + cycle + '.md'));
+  for (const line of String(ws || '').split('\n')) {
+    if (/^- [a-z][A-Za-z_\/:-]* \| /.test(line) && !/^- approval\//.test(line) && /health|clinic|hospital|illness|medical|\bEMS\b/i.test(line) && !facts.some(f => f.text === line.slice(2).trim())) {   // approval tallies are the civic beat's
+      facts.push({ text: line.slice(2).trim(), src: 'output/world_summary_c' + cycle + '.md ## What Moved (Ripple_Ledger)' });
+    }
+  }
+  // Never herself, never the paper's staff.
+  for (let k = people.length - 1; k >= 0; k--) if (people[k].popid === SEAT.popid || K.isMediaStaff(profiles, people[k].popid)) people.splice(k, 1);
+  const label = 'the health record of C' + cycle;   // pipeline.111: no code-picked hood
   return K.makeSlice(SEAT, cycle, beats, {
-    ref: demoSrc + ' + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl', hood: lead.hood, label,
-    angle: label,
-    hookLine: (firstNamed
-      ? firstNamed.name + ' is one of ' + onRecord + ' residents on the record this cycle; ' + lead.hood + ' carries the most illness'
-      : lead.hood + ' carries the most illness this cycle; no resident is named on the hospital or cause records') +
-      (inCare != null ? '; ' + inCare + ' in hospital care citywide' + (trail.city.beds != null ? ', ' + trail.city.beds + ' beds occupied' : '') : '') +
-      (spike ? '; illness is up in ' + spike.hood + (neighbours.length ? ' — ' + neighbours.map(p => p.name).join(' and ') + ' can speak for the block' : '') : '') + '.',
+    ref: demoSrc + ' + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl', hood: null, label,
+    angle: label, hookLine: '',
     facts, people,
     deltas: { state: prevDemo.state, vs: prevDemo.vs },
-    hooks: K.hooksFor(beats, cycle, SEAT.name),
-    note: onRecord < 5 ? 'named rows are few (' + onRecord + ') — write the neighborhood, not a ward' : null,
+    hooks: [],
+    note: null,
     extra: { byHood: demo, careTrail: trail,
       spikeHood: spike ? { hood: spike.hood, share: spike.share, prevShare: spike.prevShare, overBar: spike.overBar, risen: spike.risen,
         neighbours: neighbours.map(p => p.popid), others: spikes.slice(1).map(s => s.hood) } : null }
@@ -192,6 +207,7 @@ function build(cycle, { root, beats, profiles }) {
 
 const W = K.wire(SEAT);
 if (require.main === module) W.main();
-module.exports = { SEAT, loadSlice: W.load, buildHealthSlice: W.build, writeHealthSlice: W.write, loadHealthSlice: W.load,
+const sitsOutWhenEmpty = true;
+module.exports = { SEAT, sitsOutWhenEmpty, loadSlice: W.load, buildHealthSlice: W.build, writeHealthSlice: W.write, loadHealthSlice: W.load,
   isHealthSeat: W.isSeat, assignmentFromSlice: W.assignmentFromSlice, enrichAssignment: W.enrichAssignment, slicePaths: W.paths,
   sickShare, SPIKE_WATCH, SPIKE_RISE }; // research.32 — the Discord lookups read the same bar, not a copy

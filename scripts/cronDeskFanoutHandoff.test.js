@@ -214,9 +214,9 @@ const lilaAssignment = {
 };
 const lilaContext = activateWakeContext(lilaAssignment, lilaAssignment.persona);
 assert.equal(lilaContext.packetContract, 'v2');
-assert.equal(lilaContext.wakePackage.version, 'LILA-LEP2-2');
+assert.equal(lilaContext.wakePackage.version, 'LILA-LEP2-3');
 assert.equal(stageRoute('civic', lilaAssignment.persona, 'angle').model,
-  'deepseek/deepseek-v4-flash-0731');
+  'anthropic/claude-sonnet-5.5');   // pipeline.111 (builder 2026-11-23)
 assert.equal(stageRoute('civic', lilaAssignment.persona, 'report').model,
   'deepseek/deepseek-v4-flash-0731');
 assert.equal(stageRoute('civic', lilaAssignment.persona, 'write').model,

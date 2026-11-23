@@ -336,17 +336,17 @@ assert.equal(rachel.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
 assert.ok(rachel.reviewProfile.canonBlockers.some(v => v.includes('invented incident')));
 
 const lila = packages['lila-mezran'];
-assert.equal(lila.version, 'LILA-LEP2-2');
+assert.equal(lila.version, 'LILA-LEP2-3');
 assert.equal(lila.requiredDaily, true);
 assert.equal(lila.assignment.name, 'Dr. Lila Mezran');
 assert.equal(lila.assignment.popid, 'POP-00154');
 assert.equal(lila.assignment.beatDomain, 'HEALTH');
-assert.equal(packagesApi.routeFor(lila, 'angle').model, 'deepseek/deepseek-v4-flash-0731');
+assert.equal(packagesApi.routeFor(lila, 'angle').model, 'anthropic/claude-sonnet-5.5');   // pipeline.111 (builder 2026-11-23)
+assert.equal(lila.seatFile, '.claude/agents/lila-mezran/SEAT.md');
 assert.equal(packagesApi.routeFor(lila, 'report').model, 'deepseek/deepseek-v4-flash-0731');
 assert.equal(packagesApi.routeFor(lila, 'write').model, 'anthropic/claude-sonnet-5.5');
 assert.equal(lila.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
-assert.ok(lila.reviewProfile.textureConditions.some(v => v.includes('human consequence')));
-assert.ok(lila.reviewProfile.canonBlockers.some(v => v.includes('invented diagnosis')));
+assert.deepStrictEqual(lila.reviewProfile.textureConditions, []);
 
 const angela = packages['angela-reyes'];
 assert.equal(angela.version, 'ANGELA-LEP2-2');

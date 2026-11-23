@@ -292,7 +292,7 @@ try {
 
   console.log('health:');
   const h = health.buildHealthSlice(CYCLE, { root });
-  ok('lead hood = most Sick', h.hood === 'Chinatown');
+  ok('no code-picked hood (pipeline.111)', h.hood === null && h.story.label === 'the health record of C103');
   ok('sick table fact', /Sick residents by neighborhood: Chinatown 125, Fruitvale 110, Rockridge 60 — 295 across 3 neighborhoods/.test(h.facts[0].text));
   ok('hospital row named with ledger role', h.citizens.some(c => c.popid === 'POP-90003' && c.role === 'Line Cook'));
   ok('queue row named', h.facts.some(f => /Test Queue Patient \(Chinatown\), 67 — recovering, car accident, 2 cycles/.test(f.text)));
@@ -302,14 +302,13 @@ try {
   ok('no prev/ → typed state', h.prewrite.deltas.state === 'NO_PRIOR_CYCLE');
   ok('world-summary Health resident joins the slice', h.citizens.some(c => c.popid === 'POP-90004' && c.role === 'Bus Operator') &&
     h.facts.some(f => /Test Seasonal Resident dealt with a seasonal health concern/.test(f.text) && /world_summary_c103\.md/.test(f.src)));
-  ok('few-named note', /named rows are few \(4\)/.test(h.prewrite.note));
-  ok('only this cycle\'s hook', h.prewrite.hooks.length === 1 && h.prewrite.hooks[0].text === 'Heavy health activity this cycle.');
+  ok('no hooks (pipeline.111)', h.prewrite.hooks.length === 0);
   ok('care trail: city line off the city scope only', h.facts.some(f => f.text === 'Citywide hospital this cycle: 6 admissions (3 tracked, 3 other residents); 8 in care at the close, 6 beds occupied' && /Care_Justice_Census.*city$/.test(f.src)));
   ok('care trail: hood line = sick → admissions → in care → beds, typed row never added to the all row', h.facts.some(f => f.text === 'Chinatown: 125 sick residents → 4 admissions (1 tracked) → 6 in care at the close (0 tracked, 6 other residents) → 5 beds occupied; tracked: none tracked'));
   // Temescal has no Neighborhood_Demographics row in this fixture → no demand clause; the trail still reads.
   ok('care trail: tracked patient named off the hospital record', h.facts.some(f => f.text === 'Temescal: 1 admission (1 tracked) → 1 in care at the close (1 tracked, 0 other residents) → 1 beds occupied; tracked: Test Clinic Patient'));
   ok('care trail: the athlete in care is named on the block line', h.facts.some(f => f.text === 'Downtown: 1 admission (1 tracked) → 1 in care at the close (1 tracked, 0 other residents) → 0 beds occupied; tracked: Test Pro Athlete'));
-  ok('care trail: hook line carries the citywide close', /8 in hospital care citywide, 6 beds occupied\.$/.test(h.story.hookLine));
+  ok('no hook line (pipeline.111)', h.story.hookLine === '');
 
   console.log('schools:');
   // Enrollment moves: stage a prior-cycle demographics dump for this section only.
@@ -505,20 +504,17 @@ try {
     profiles.set('POP-90037', { Name: 'Test Chinatown Bedridden', POPID: 'POP-90037', RoleType: 'Clerk', Neighborhood: 'Chinatown', Status: 'hospitalized' });
     const h1 = health.buildHealthSlice(CYCLE, { root, profiles });
     const nb = h1.citizens.filter(c => /a neighbour to quote, not a patient/.test(c.why));
-    ok('spike hood → two neighbours, tagged, from the hood', nb.length === 2 && nb.every(c => c.neighborhood === 'Chinatown' && /lives in Chinatown, where illness is up this cycle/.test(c.why)));
+    ok('spike hood → no bystander picked to quote (pipeline.111)', nb.length === 0);
     ok('a resident already on the record is not doubled', h1.citizens.filter(c => c.popid === 'POP-90007').length === 1 && !nb.some(c => c.popid === 'POP-90007'));
-    ok('dead and hospitalized residents never ride as neighbours; a pitcher who lives there can', !JSON.stringify(h1).includes('Test Chinatown Late') && !JSON.stringify(h1).includes('Test Chinatown Bedridden') && nb.some(c => c.popid === 'POP-90035'));
-    ok('pick is deterministic by POPID from a cycle-rotated start', nb.map(c => c.popid).join(',') === ['POP-90032', 'POP-90033', 'POP-90034', 'POP-90035'].slice(CYCLE % 4).concat(['POP-90032', 'POP-90033', 'POP-90034', 'POP-90035']).slice(0, 2).join(','));
+    ok('dead and hospitalized residents never ride', !JSON.stringify(h1).includes('Test Chinatown Late') && !JSON.stringify(h1).includes('Test Chinatown Bedridden'));
     ok('spike fact is the engine share, hood only, no names', h1.facts.some(f => f.text === 'Chinatown: 170 sick of 2,680 residents, 6.3% — at or over the 6% watch bar' && /Neighborhood_Demographics\.jsonl Sick\/Students\+Adults\+Seniors @C103$/.test(f.src)));
-    ok('record count, lead name and few-named note exclude the neighbours', /\| 4 named on the hospital and cause records$/.test(h1.story.label) && /named rows are few \(4\)/.test(h1.prewrite.note) && h1.story.hookLine.startsWith(h0.story.hookLine.replace(/\.$/, '')));
-    ok('hook line names the block and its neighbours', /; illness is up in Chinatown — .+ and .+ can speak for the block\.$/.test(h1.story.hookLine));
-    ok('typed on the slice', h1.spikeHood && h1.spikeHood.hood === 'Chinatown' && h1.spikeHood.overBar === true && h1.spikeHood.risen === false && h1.spikeHood.neighbours.length === 2);
+    ok('typed on the slice', h1.spikeHood && h1.spikeHood.hood === 'Chinatown' && h1.spikeHood.overBar === true && h1.spikeHood.risen === false && h1.spikeHood.neighbours.length === 0);
     // Fruitvale over the bar (160 / 2,350 = 6.8%) with no tracked resident of the hood in the profiles → the fact rides, nobody is added.
     writeJsonl(demoFile, rows.map(r => r.Neighborhood === 'Fruitvale' ? Object.assign({}, r, { Sick: '160' }) : r));
     const noFruitvale = new Map([...K.loadProfiles(root)].filter(([, p]) => p.Neighborhood !== 'Fruitvale'));
     const h2 = health.buildHealthSlice(CYCLE, { root, profiles: noFruitvale });
-    ok('spike hood with no tracked residents → people unchanged, fact says so', h2.spikeHood.hood === 'Fruitvale' && h2.spikeHood.neighbours.length === 0 &&
-      h2.citizens.map(c => c.popid).join() === h0.citizens.map(c => c.popid).join() && h2.facts.some(f => /^Fruitvale: 160 sick of 2,350 residents, 6\.8% — at or over the 6% watch bar; no tracked resident of the block is free to quote$/.test(f.text)));
+    ok('spike hood with no tracked residents → people unchanged, the share rides', h2.spikeHood.hood === 'Fruitvale' && h2.spikeHood.neighbours.length === 0 &&
+      h2.citizens.map(c => c.popid).join() === h0.citizens.map(c => c.popid).join() && h2.facts.some(f => /^Fruitvale: 160 sick of 2,350 residents, 6\.8% — at or over the 6% watch bar$/.test(f.text)));
     // Up a quarter on prev/: Rockridge 55 / 2,523 = 2.2% → 70 / 2,523 = 2.8% (×1.27), under the bar, still a spike.
     const prevDir = path.join(output, 'beats', 'prev');
     fs.mkdirSync(prevDir, { recursive: true });
@@ -528,7 +524,7 @@ try {
     const h3 = health.buildHealthSlice(CYCLE, { root });
     ok('up a quarter on the previous cycle, under the bar → spike with the prior share', h3.spikeHood && h3.spikeHood.hood === 'Rockridge' && h3.spikeHood.overBar === false && h3.spikeHood.risen === true &&
       h3.facts.some(f => f.text.startsWith('Rockridge: 70 sick of 2,523 residents, 2.8% — up from 2.2% at C102') && / vs prev\/$/.test(f.src)));
-    ok('rise neighbours come off the ledger (Rockridge has two)', h3.spikeHood.neighbours.length === 2);
+    ok('no rise neighbours picked (pipeline.111)', h3.spikeHood.neighbours.length === 0);
     fs.rmSync(prevDir, { recursive: true, force: true });
     fs.writeFileSync(demoFile, keepDemo);
   }
@@ -632,7 +628,7 @@ try {
   for (const [label, slice, popid] of [['trevor', t, 'POP-00155'], ['lila', h, 'POP-00154'], ['angela', s, 'POP-00156'], ['noah', e, 'POP-00157'], ['graye', f, 'POP-00012'], ['rachel', r, 'POP-00057'], ['kai', k, 'POP-00158'], ['sharon', sh, 'POP-00159'], ['maria', m, 'POP-00013'], ['selena', sg, 'POP-00591'], ['talia', tf, 'POP-00592'], ['celeste', ct, 'POP-00164']]) {
     const pk = v2.buildAnglePacket({ cycle: CYCLE, desk: slice.seat.desk, reporter: { popid, name: slice.seat.name }, story: slice.story, approach: slice.approach, slice, lane: [] });
     const b = pk.task.creativeBrief;
-    ok(label + ': brief beat-slice with facts + room', b && b.kind === 'beat-slice' && b.facts.length >= 1 && (['sharon', 'maria', 'kai', 'celeste', 'graye', 'noah', 'trevor'].includes(label) || !!b.roomIsYours));   // seat-file seats: no room line (pipeline.111)
+    ok(label + ': brief beat-slice with facts + room', b && b.kind === 'beat-slice' && b.facts.length >= 1 && (['sharon', 'maria', 'kai', 'celeste', 'graye', 'noah', 'trevor', 'lila'].includes(label) || !!b.roomIsYours));   // seat-file seats: no room line (pipeline.111)
     ok(label + ': every anchor fact is a known FACT sourced to a file on disk', slice.prewrite.anchorFacts.every(text => pk.known.some(k => k.text === text && /^output\//.test(k.src))));
     ok(label + ': candidates = the slice\'s people', pk.exposure.candidates.length === slice.citizens.length && pk.exposure.candidates.every(c => slice.citizens.some(p => p.popid === c.pop)));
   }

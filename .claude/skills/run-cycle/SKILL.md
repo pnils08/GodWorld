@@ -85,7 +85,7 @@ Output: `output/execution_log_c{XX}.txt`. `--summary` prints phases / totalMs / 
 Read world state from sheets. Identify ailments, improvements, incoherence. Produce 7-field briefs per finding. Output: `output/engine_review_c{XX}.md`
 
 **Who reads what (S456 — the chain ships to crons, there is no sift / edition step downstream):**
-- `output/engine_audit_c{XX}.json` — `buildWorldSummary` (desk_signal civic lane = every pattern), `cron-civic-run`, `buildCivicOfficeSlice`, `buildJaxSlice`, `civicMustDecide`, `tierClassifier`.
+- `output/engine_audit_c{XX}.json` — `buildWorldSummary` (desk_signal civic lane = every pattern), `cron-civic-run`, `buildCivicOfficeSlice`, `buildJaxSlice`, `tierClassifier`.
 - `output/baseline_briefs_c{XX}.json` — **required input** of `cron-civic-run.js` (`mustJson`). A brief that is not a world event reaches the Sunday chain.
 - `output/engine_anomalies_c{XX}.json` — `tierClassifier` (optional).
 - `output/engine_review_c{XX}.md` — pointer only (`buildWorldState` links it; `rheaTwoPass` / `lintCivicPackets` read it). Write it for the next engine session and the civic chain's reader, not for a front page: what is real, what is mechanism, what is routed to engine-debug.
@@ -291,7 +291,7 @@ Nothing downstream is hand-run. The artifacts this chain leaves on disk are read
 |---|---|
 | `output/world_summary_c{XX}.md` | `cron-desk-run` (06:15 angle / 13:15 report / 18:15 write, Mon–Fri), `cron-desk-writer`, `cron-civic-run` (Mon–Thu datawake, Sunday chain), `cron-saturday-run`, `notebooklmDailyNews` (08:00), `newsroom-digest` (06:00), every `scripts/build*Slice.js`, `lib/mags.js` (Discord), `lib/getCurrentCycle.js` |
 | `output/desk_signal_c{XX}.json` | `cron-desk-run`, `newsroom-fanout`, `cron-civic-run`, the desk slices (economic / safety / civic-domain / evening / Hal / Anthony / P Slayer / Jax), `stink-scanner` |
-| `output/engine_audit_c{XX}.json`, `output/baseline_briefs_c{XX}.json` | `cron-civic-run` (briefs are a **required** input), `buildCivicOfficeSlice`, `buildJaxSlice`, `civicMustDecide`, `tierClassifier` |
+| `output/engine_audit_c{XX}.json`, `output/baseline_briefs_c{XX}.json` | `cron-civic-run` (briefs are a **required** input), `buildCivicOfficeSlice`, `buildJaxSlice`, `tierClassifier` |
 | `output/beats/*.jsonl` (+ `prev/`) | economic / faith / health / safety / schools / transit / environment slices |
 | `output/civis-journal/civis_journal_c{XX}.md` + `.json` | `deliver-articles` — rides the Pulse of the same Cycle (Saturday 16:30; the weekday 18:45 run catches it if the Pulse is still inside its window) |
 | `output/neighborhood_texture_c{XX}.md`, `output/world_state.json` | `citizen-wake` (07:30 / 12:30 / 21:30), `citizen-exchange` (17:00), `discord-reflection`, `lib/wakePerception`, `lib/mags` |

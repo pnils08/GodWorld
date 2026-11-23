@@ -347,6 +347,10 @@
   Reads: S.previousRelocationFlow
   Writes: S.previousRelocationFlow
 
+- **seedCarriedHospitalAdmitCarry_(ctx, S)**
+  Reads: S.previousHospitalAdmitCarry
+  Writes: S.previousHospitalAdmitCarry
+
 - **seedCarriedCityDynamics_(ctx, S)**
   Reads: S.previousCityDynamics
   Writes: S.previousCityDynamics
@@ -899,6 +903,10 @@
 
 - **careJusticeNumber_(value, field, hood, positive)**
 
+- **careJusticeAdmitCarryIn_(carried, hood)**
+
+- **careJusticeAdmitSplit_(sick, admitRate, carryIn)**
+
 - **careJusticeOariConfig_()**
 
 - **careJusticeOariHoods_(ctx, initiativeId)**
@@ -911,7 +919,7 @@
 - **careJusticeTrackedByHood_(ctx)**
 
 - **runCareJusticeDemand_(ctx)**
-  Reads: S.absoluteCycle, S.careJusticeDemand, S.crimeMetrics, S.cycleId, S.neighborhoodDemographics, S.worldPopulation
+  Reads: S.absoluteCycle, S.careJusticeDemand, S.crimeMetrics, S.cycleId, S.neighborhoodDemographics, S.previousHospitalAdmitCarry, S.worldPopulation
   Writes: S.careJusticeDemand
   Config: ctx.config.careJusticeExposureDial, ctx.config.cycleCount
 
@@ -1108,7 +1116,7 @@
 - **checkBirth_(ctx, popId, age, lifeHistory, cal, hasHousehold, marital, hhType)**
 
 - **createChildRow_(ctx, parentRowIdx, cycle)**
-  Sheets: Family_Relationships, Household_Ledger
+  Sheets: Family_Relationships, Household_Ledger, LifeHistory_Log
 
 - **formSingleParentHousehold_(ctx, motherRowIdx, cycle)**
   Sheets: Family_Relationships, Household_Ledger
@@ -2113,6 +2121,7 @@
 - **businessProfit_(rev, empCount, avgSalary)**
 
 - **applyOwnerDraw_(ctx, cycle)**
+  Config: ctx.config.ownerDrawShare
   Sheets: Business_Ledger, Heritage_Ledger, LifeHistory_Log
 
 - **calculateIncomeFromBand_(incomeBand, tier, rng)**
@@ -2484,7 +2493,9 @@
   Writes: S.paperFameByPop
   Sheets: Citizen_Media_Usage, Generic_Citizens, LifeHistory_Log
 
-- **advancementLogBuffer_(sheet, label)**
+- **lifeLogRowNormalizer_(ctx)**
+
+- **advancementLogBuffer_(sheet, label, normalize)**
 
 - **processAdvancementRows_(ctx, now, cycle)**
   Sheets: LifeHistory_Log
@@ -3633,11 +3644,14 @@
 - **compactRelocationFlow_(S)**
   Reads: S.relocationNetFlow
 
+- **compactHospitalAdmitCarry_(S)**
+  Reads: S.careJusticeDemand
+
 - **compactCityDynamicsCarrier_(S)**
   Reads: S.previousCityDynamics
 
 - **savePreviousCycleState_(ctx)**
-  Reads: S.franchiseWeight, S.neighborhoodEconomies, S.previousCycleState
+  Reads: S.careJusticeDemand, S.franchiseWeight, S.neighborhoodEconomies, S.previousCycleState
 
 - **compactApprovalNeighborhoodEffects_(bus)**
 
@@ -3683,6 +3697,8 @@
 
 - **hospitalCapacity_(ctx)**
   Reads: S.demographicDrift
+
+- **hospitalClosedStatus_(outcome)**
 
 - **hospitalIntakeType_(raw)**
 
@@ -3819,6 +3835,10 @@
 
 ### persistenceExecutor.js
 - **isWallClockStamp_(v)**
+
+- **bareCycleStampToInWorld_(v)**
+
+- **lifeHistoryWhoMap_(ctx)**
 
 - **executePersistIntents_(ctx)**
 
@@ -4903,4 +4923,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 179
-**Functions mapped:** 1778
+**Functions mapped:** 1786

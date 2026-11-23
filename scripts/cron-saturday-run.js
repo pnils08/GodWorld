@@ -1148,7 +1148,7 @@ function livedEventsGroundTruth(cycle, profiles, root = ROOT) {
   // every stay the window touches, with its admission — the Lives slice prints "admitted C106 … 5 cycles in care"
   for (const h of read('Hospital_Ledger.jsonl')) {
     const adm = Number(h.AdmitCycle), dis = String(h.DischargeCycle || '').trim();
-    const open = !dis && /^active$/i.test(String(h.StatusNow || '').trim());
+    const open = !dis; // engine.364: open = no discharge Cycle (an open stay reads hospitalized/critical/…, never 'active')
     if (!h.POPID || !Number.isFinite(adm) || !(inWindow(adm) || (dis && inWindow(dis)) || (open && adm <= hi))) continue;
     rows.push({ cycle: dis ? Number(dis) : hi, text: (h.Name || nameOf(h.POPID) || 'a citizen') + ' (' + h.POPID + ') — hospital stay: admitted C' + adm +
       (h.Cause ? ' for ' + String(h.Cause).trim() : '') + (dis ? ', discharged C' + dis + (h.CyclesInCare ? ' after ' + h.CyclesInCare + ' cycles in care' : '') + (h.Outcome ? ', ' + String(h.Outcome).trim() : '') : ', still in care at C' + hi) });

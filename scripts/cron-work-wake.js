@@ -104,7 +104,8 @@ const NODE_BUILDERS = {
     const rows = readBeats('Hospital_Ledger', beatsDir);
     if (!rows) return null;
     const adm = rows.filter((r) => cycle != null && Number(r.AdmitCycle) === Number(cycle));
-    const pool = adm.length ? adm : rows.filter((r) => String(r.StatusNow || '').match(/active|hospitalized/i));
+    // engine.364: a stay is open only with no DischargeCycle — finished stays read StatusNow 'active' (pre-C118) or 'discharged'.
+    const pool = adm.length ? adm : rows.filter((r) => !String(r.DischargeCycle ?? '').trim());
     if (!pool.length) return 'No new admissions this cycle; the board is quiet.';
     return 'Admissions on the board:\n' + pool.slice(0, 8).map((r) => `${r.Name} (${r.Neighborhood}) — ${r.Cause}.`).join('\n');
   },

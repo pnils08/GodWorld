@@ -2,7 +2,7 @@
   "generated": "2026-11-23",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 179,
-  "functionsMapped": 1778,
+  "functionsMapped": 1786,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -1914,6 +1914,15 @@
         "phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_"
       ]
     },
+    "previousHospitalAdmitCarry": {
+      "writers": [
+        "phase01-config/loadPreviousEvening.js::seedCarriedHospitalAdmitCarry_"
+      ],
+      "readers": [
+        "phase01-config/loadPreviousEvening.js::seedCarriedHospitalAdmitCarry_",
+        "phase04-events/careJusticeService.js::runCareJusticeDemand_"
+      ]
+    },
     "previousCityDynamics": {
       "writers": [
         "phase01-config/loadPreviousEvening.js::seedCarriedCityDynamics_",
@@ -2932,6 +2941,8 @@
         "phase04-events/chaosCarsEngine.js::runChaosNamedPass_",
         "phase05-citizens/generationalWealthEngine.js::collectPropertyTax_",
         "phase05-citizens/judicialLifecycle.js::cityCourtRevenue_",
+        "phase09-digest/finalizeCycleState.js::compactHospitalAdmitCarry_",
+        "phase09-digest/finalizeCycleState.js::savePreviousCycleState_",
         "phase10-persistence/buildCyclePacket.js::persistCareJusticeCensus_",
         "utilities/careJusticeAccounting.js::planCareJusticeCensus_"
       ]
@@ -4828,6 +4839,7 @@
         "phase04-events/generateGameModeMicroEvents.js::generateGameModeMicroEvents_",
         "phase04-events/generateGenericCitizenMicroEvent.js::generateGenericCitizenMicroEvents_",
         "phase04-events/generationalEventsEngine.js::applyMilestone_",
+        "phase04-events/generationalEventsEngine.js::createChildRow_",
         "phase05-citizens/bondEngine.js::appendBondLifeLine_",
         "phase05-citizens/educationCareerEngine.js::stampPromotion_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
@@ -4859,6 +4871,7 @@
         "phase04-events/generateGameModeMicroEvents.js::generateGameModeMicroEvents_",
         "phase04-events/generateGenericCitizenMicroEvent.js::generateGenericCitizenMicroEvents_",
         "phase04-events/generationalEventsEngine.js::applyMilestone_",
+        "phase04-events/generationalEventsEngine.js::createChildRow_",
         "phase05-citizens/applyGameNightMoments.js::applyGameNightMoments_",
         "phase05-citizens/bondEngine.js::appendBondLifeLine_",
         "phase05-citizens/checkForPromotions.js::checkForPromotions_",
@@ -5095,6 +5108,7 @@
     },
     "Household_Ledger": {
       "writers": [
+        "phase04-events/generationalEventsEngine.js::createChildRow_",
         "phase04-events/generationalEventsEngine.js::runGenerationalEngine_",
         "phase05-citizens/bondEngine.js::marryCitizens_",
         "phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_",
@@ -5132,6 +5146,7 @@
     },
     "Family_Relationships": {
       "writers": [
+        "phase04-events/generationalEventsEngine.js::createChildRow_",
         "phase04-events/generationalEventsEngine.js::formSingleParentHousehold_",
         "phase05-citizens/bondEngine.js::marryCitizens_",
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",

@@ -528,6 +528,24 @@ function compactRelocationFlow_(S) {
 }
 
 /**
+ * compactHospitalAdmitCarry_ (engine.364) — S.careJusticeDemand.hospitalCarry,
+ * each hood's remainder in [0, 1). Null when the demand did not run this Cycle.
+ */
+function compactHospitalAdmitCarry_(S) {
+  var src = S && S.careJusticeDemand && S.careJusticeDemand.hospitalCarry;
+  if (!src || !src.hoods || typeof src.hoods !== 'object') return null;
+  var out = { cycle: Number(src.cycle) || 0, hoods: {} }, n = 0;
+  for (var k in src.hoods) {
+    if (!src.hoods.hasOwnProperty(k)) continue;
+    var v = Number(src.hoods[k]);
+    if (!isFinite(v) || v < 0 || v >= 1) continue;
+    out.hoods[k] = v;
+    n++;
+  }
+  return n ? out : null;
+}
+
+/**
  * compactCityDynamicsCarrier_ (engine.195)
  *
  * S.previousCityDynamics — the pre-boost blended city metrics applyCityDynamics_
@@ -625,6 +643,17 @@ function savePreviousCycleState_(ctx) {
     var relocFlow = compactRelocationFlow_(S);
     if (relocFlow) {
       saveCarryForwardBlob_(ctx, 'PREV_RELOC_FLOW_JSON', JSON.stringify(relocFlow), snapshot.cycle);
+    }
+    // engine.364: each hood's carried admission fraction (~22 numbers, ~600 chars)
+    // rides its OWN key, read by next Cycle's Phase-4 care demand.
+    var admitCarry = compactHospitalAdmitCarry_(S);
+    if (admitCarry) {
+      var admitJson = JSON.stringify(admitCarry);
+      saveCarryForwardBlob_(ctx, 'PREV_HOSP_ADMIT_CARRY_JSON', admitJson, snapshot.cycle);
+      Logger.log('savePreviousCycleState_: Saved ' + admitJson.length + ' bytes of admission carry (' +
+        Object.keys(admitCarry.hoods).length + ' hoods) for cycle ' + snapshot.cycle);
+    } else {
+      Logger.log('savePreviousCycleState_: no admission carry this cycle (S.careJusticeDemand missing) — next cycle reads the newest older one');
     }
     // engine.209: the franchise weight drifts on the week just played (results, tenure, fan
     // reach) and rides its OWN key (~2 franchises, ~120 chars). Phase 1 seeds S.franchiseWeight

@@ -818,6 +818,11 @@ function hospitalCapacity_(ctx) {
 
 var HOSPITAL_OPEN_STATES = ['hospitalized', 'critical', 'serious-condition', 'injured', 'recovering'];
 
+// engine.364: a closed stay's StatusNow — `deceased` or `discharged`, from its Outcome.
+function hospitalClosedStatus_(outcome) {
+  return outcome === 'deceased' ? 'deceased' : 'discharged';
+}
+
 // engine.254 Task 8 R2-1 — the receipt stamps, columns L–O.
 var HOSPITAL_RECEIPT_HEADERS_ = ['IntakeType', 'SourceSystem', 'SourceEventId', 'TransferFromId'];
 var HOSPITAL_INTAKE_TYPES_ = ['injury', 'illness', 'heat', 'mental-health-crisis', 'substance-treatment', 'unclassified'];
@@ -980,9 +985,11 @@ function persistHospitalLedger_(ctx) {
       if (openRow >= 0) {
         var admitCycle = Number(data[openRow][5]) || ev.cycle;
         var outcome = (ev.to === 'deceased') ? 'deceased' : 'recovered';
+        // engine.364: StatusNow is the stay's own state. It carried the citizen's
+        // life status (`active`, `Retired`) and every finished stay read `active`.
         persistWithRetry_(function() {
           sheet.getRange(openRow + 1, 7, 1, 5).setValues([[
-            ev.to, ev.cycle, ev.cycle, outcome, Math.max(0, ev.cycle - admitCycle)
+            hospitalClosedStatus_(outcome), ev.cycle, ev.cycle, outcome, Math.max(0, ev.cycle - admitCycle)
           ]]);
         }, 'Hospital_Ledger discharge');
         data[openRow][8] = ev.cycle;
@@ -1026,7 +1033,7 @@ function persistHospitalLedger_(ctx) {
         var gOutcome = (gStatus === 'deceased') ? 'deceased' : 'recovered';
         persistWithRetry_(function() {
           sheet.getRange(gRow + 1, 7, 1, 5).setValues([[
-            gStatus, cycle, cycle, gOutcome + '-reconciled', Math.max(0, cycle - gAdmit)
+            hospitalClosedStatus_(gOutcome), cycle, cycle, gOutcome + '-reconciled', Math.max(0, cycle - gAdmit)
           ]]);
         }, 'Hospital_Ledger ghost-release');
         data[gRow][8] = cycle;

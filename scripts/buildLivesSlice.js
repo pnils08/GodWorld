@@ -369,8 +369,8 @@ function build(cycle, { root, beats, profiles }) {
   // Stays still active that no event row carries.
   const stays = [];
   for (const r of beats.Hospital_Ledger || []) {
-    // a stay is open only with no discharge Cycle — StatusNow has read 'active' on discharged rows
-    if (!/^active$/i.test(String(r.StatusNow || '').trim()) || String(r.DischargeCycle || '').trim()) continue;
+    // a stay is open only with no discharge Cycle — an open stay reads hospitalized/critical/…, a finished one 'active' (pre-C118) or 'discharged' (engine.364)
+    if (String(r.DischargeCycle ?? '').trim()) continue;
     const pop = String(r.POPID || '').toUpperCase();
     if (events.some(e => e.kind === 'hospital' && String(e.subject).toUpperCase() === pop)) continue;
     const id = 'stay:' + String(r.AdmissionId || pop) + ':' + cycle;

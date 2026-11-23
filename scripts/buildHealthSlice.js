@@ -111,7 +111,8 @@ function build(cycle, { root, beats, profiles }) {
     facts.push({
       text: dis != null && dis <= cycle
         ? where + ' — ' + admitted + '; discharged C' + dis + (r.Outcome ? ', ' + r.Outcome : '') + (K.num(r.CyclesInCare) != null ? ' after ' + K.num(r.CyclesInCare) + ' cycles in care' : '') +
-          '; the ledger status still reads ' + (r.StatusNow || 'unrecorded')
+          // engine.364: from C118 a finished stay is stamped discharged/deceased; only an older stamp is said
+          (/^(discharged|deceased)$/i.test(String(r.StatusNow || '').trim()) ? '' : '; the ledger status still reads ' + (r.StatusNow || 'unrecorded'))
         : where + ' — in hospital care, ' + (r.StatusNow || 'status unrecorded') + ', ' + admitted,
       src: 'output/beats/Hospital_Ledger.jsonl ' + r.POPID
     });

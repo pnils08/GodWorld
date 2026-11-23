@@ -25,6 +25,32 @@ function careJusticeNumber_(value, field, hood, positive) {
   return number;
 }
 
+// engine.364 (builder 2026-11-23, "the carried fraction seems to be more in line
+// with the sim"): a hood's admissions are the whole part of its sick × rate plus
+// what it carried; the remainder carries on. A hood with nothing carried starts
+// at one half, which is Math.round exactly — the first Cycle on this code moves
+// no number. Lake Merritt at 17 sick (0.34 a week) admits about one in three
+// weeks instead of none, ever.
+var CARE_JUSTICE_ADMIT_CARRY_START = 0.5;
+var CARE_JUSTICE_ADMIT_CARRY_PLACES = 1e6;
+
+function careJusticeAdmitCarryIn_(carried, hood) {
+  var hoods = carried && carried.hoods;
+  if (!hoods || !hoods.hasOwnProperty(hood)) return null;
+  var v = Number(hoods[hood]);
+  if (hoods[hood] === '' || hoods[hood] === null || !isFinite(v) || v < 0 || v >= 1) {
+    throw new Error('careJusticeDemand: carried admission fraction for ' + hood + ' must be in [0, 1), got ' + hoods[hood]);
+  }
+  return v;
+}
+
+function careJusticeAdmitSplit_(sick, admitRate, carryIn) {
+  var places = CARE_JUSTICE_ADMIT_CARRY_PLACES;
+  var expected = Math.round((sick * admitRate + carryIn) * places) / places;
+  var whole = Math.floor(expected);
+  return { expected: expected, intakes: whole, carryOut: Math.round((expected - whole) * places) / places };
+}
+
 function careJusticeOariConfig_() {
   if (typeof loadChaosCarsConfig_ !== 'function') {
     throw new Error('careJusticeDemand: loadChaosCarsConfig_ missing');
@@ -191,8 +217,13 @@ function runCareJusticeDemand_(ctx) {
   var tracked = careJusticeTrackedByHood_(ctx);
   var cycle = (S.absoluteCycle || S.cycleId || (ctx.config && ctx.config.cycleCount) || ctx.cycle);
   careJusticeLogUnknownHoods_(oariHoods, crime, cycle);
+  // engine.364: last Cycle's per-hood remainder, seeded in Phase 1 from
+  // PREV_HOSP_ADMIT_CARRY_JSON (seedCarriedHospitalAdmitCarry_).
+  var carried = S.previousHospitalAdmitCarry || null;
+  var carryFresh = [];
   var demand = {
-    cycle: cycle, methodVersion: 'demand-v1', basis: 'hood-table', exposureDial: exposureDial, hoods: {},
+    cycle: cycle, methodVersion: 'demand-v2', basis: 'hood-table', exposureDial: exposureDial, hoods: {},
+    hospitalCarry: { cycle: cycle, hoods: {} },
     unallocated: { status: 'unavailable' },
     city: { charges: 0, judicialIntakes: 0, sick: 0, hospitalIntakes: 0,
       oariEligible: 0, oariDiversions: 0, oariHoods: [] }
@@ -206,7 +237,11 @@ function runCareJusticeDemand_(ctx) {
     var sick = careJusticeNumber_(demographics[name].sick, 'sick', name, false);
     var deployed = oariHoods[name] === true;
     var judicialIntakes = Math.round(charges * clearance);
-    var hospitalIntakes = Math.round(sick * admitRate);
+    var carryIn = careJusticeAdmitCarryIn_(carried, name);
+    if (carryIn === null) { carryIn = CARE_JUSTICE_ADMIT_CARRY_START; carryFresh.push(name); }
+    var admit = careJusticeAdmitSplit_(sick, admitRate, carryIn);
+    var hospitalIntakes = admit.intakes;
+    demand.hospitalCarry.hoods[name] = admit.carryOut;
     var oariEligible = deployed ? Math.round(charges * oariShare) : 0;
     var oariDiversions = Math.round(oariEligible * oariConfig.diversionProbability);
     var ratePopulation = partsByHood[name] / tableTotal * cityPopulation;
@@ -214,6 +249,7 @@ function runCareJusticeDemand_(ctx) {
     var rowDemand = {
       charges: charges, clearance: clearance, judicialIntakes: judicialIntakes,
       sick: sick, hospitalIntakes: hospitalIntakes, hospitalIntakeType: 'illness',
+      hospitalCarryIn: carryIn, hospitalExpected: admit.expected, hospitalCarryOut: admit.carryOut,
       oariDeployed: deployed, oariEligible: oariEligible, oariDiversions: oariDiversions,
       trackedResidents: residentCount, tablePopulation: partsByHood[name],
       ratePopulation: ratePopulation, trackedShare: residentCount / ratePopulation
@@ -228,7 +264,8 @@ function runCareJusticeDemand_(ctx) {
     if (deployed) demand.city.oariHoods.push(name);
     Logger.log('careJusticeDemand C' + cycle + ' ' + name + ' charges=' + charges +
       ' clr=' + clearance + ' jud=' + judicialIntakes + ' sick=' + sick +
-      ' hosp=' + hospitalIntakes + ' oari=' + (deployed ? 'deployed' : '-') +
+      ' hosp=' + hospitalIntakes + ' carry=' + carryIn + '->' + admit.carryOut +
+      ' oari=' + (deployed ? 'deployed' : '-') +
       '/' + oariEligible + '/' + oariDiversions + ' tracked=' + residentCount +
       ' table=' + partsByHood[name] + ' rate=' + ratePopulation +
       ' share=' + rowDemand.trackedShare);
@@ -237,6 +274,10 @@ function runCareJusticeDemand_(ctx) {
     ' jud=' + demand.city.judicialIntakes + ' sick=' + demand.city.sick +
     ' hosp=' + demand.city.hospitalIntakes + ' oari=' + demand.city.oariHoods.join(',') +
     '/' + demand.city.oariEligible + '/' + demand.city.oariDiversions);
+  Logger.log('careJusticeDemand C' + cycle + ' admission carry: ' +
+    (carried ? 'from C' + carried.cycle : 'none carried') +
+    (carryFresh.length ? '; started at ' + CARE_JUSTICE_ADMIT_CARRY_START + ' (= rounding) for ' +
+      carryFresh.length + ' hood(s): ' + carryFresh.join(', ') : ''));
   S.careJusticeDemand = demand;
   return demand;
 }

@@ -284,6 +284,7 @@ function loadPreviousCycleState_(ctx) {
       seedCarriedStorySeeds_(ctx, S);             // engine.214 Task 18a + engine.288 (both seed lists)
       seedCarriedCityDynamics_(ctx, S);           // engine.195
       seedCarriedRelocationFlow_(ctx, S);         // engine.249
+      seedCarriedHospitalAdmitCarry_(ctx, S);     // engine.364
       seedCarriedFranchiseWeight_(ctx, S);        // engine.209
       if (typeof seedCarriedMediaEffects_ === 'function') seedCarriedMediaEffects_(ctx, S); // G-EC59
     } else {
@@ -518,6 +519,37 @@ function seedCarriedRelocationFlow_(ctx, S) {
     if (isFinite(v) && v) { out[k] = v; n++; }
   }
   if (n) S.previousRelocationFlow = out;
+}
+
+
+/**
+ * seedCarriedHospitalAdmitCarry_ (engine.364, builder 2026-11-23 "the carried fraction")
+ *
+ * Last Cycle's per-hood admission remainder onto S.previousHospitalAdmitCarry
+ * for Phase-4 care demand. Missing blob (first fire on this code) leaves it
+ * unset and the demand starts each hood at one half, which is today's rounding;
+ * the demand logs which hoods started fresh. A blob that will not parse is a
+ * lost week of memory and says so.
+ */
+function seedCarriedHospitalAdmitCarry_(ctx, S) {
+  if (S.previousHospitalAdmitCarry) return;
+  var json = loadCarryForwardBlob_(ctx, 'PREV_HOSP_ADMIT_CARRY_JSON', carryForwardCycleId_(ctx));
+  if (!json) {
+    Logger.log('seedCarriedHospitalAdmitCarry_: no PREV_HOSP_ADMIT_CARRY_JSON — every hood starts at one half (= rounding)');
+    return;
+  }
+  var carried;
+  try { carried = JSON.parse(json); } catch (e) {
+    Logger.log('seedCarriedHospitalAdmitCarry_: PREV_HOSP_ADMIT_CARRY_JSON does not parse (' + e.message + ') — every hood starts at one half');
+    return;
+  }
+  if (!carried || typeof carried !== 'object' || !carried.hoods || typeof carried.hoods !== 'object') {
+    Logger.log('seedCarriedHospitalAdmitCarry_: PREV_HOSP_ADMIT_CARRY_JSON has no hoods — every hood starts at one half');
+    return;
+  }
+  S.previousHospitalAdmitCarry = { cycle: Number(carried.cycle) || 0, hoods: carried.hoods };
+  Logger.log('seedCarriedHospitalAdmitCarry_: carried ' + Object.keys(carried.hoods).length +
+    ' hood fraction(s) from C' + S.previousHospitalAdmitCarry.cycle);
 }
 
 

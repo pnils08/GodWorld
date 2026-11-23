@@ -70,6 +70,10 @@ ok('people: the worker at the shedding business, the winner, the bettor, the cit
 ok('never the paper\'s staff, never a worker at a steady business', !pops.includes('POP-00005') && !pops.includes('POP-90002'));
 ok('no code-picked hood, no hook', s.hood === null && s.prewrite.hooks.length === 0);
 ok('an empty record sits him out', econ.sitsOutWhenEmpty === true);
+// agy 2026-11-23 #3: an empty ledger adds no sector line, so the record is empty and he sits out.
+for (const f of ['Business_Ledger', 'Employment_Roster', 'Casino_Ledger', 'Neighborhood_Map', 'City_Treasury', 'LifeHistory_Log']) fs.writeFileSync(path.join(beats, f + '.jsonl'), '');
+fs.unlinkSync(path.join(root, 'output', 'world_summary_c' + CYCLE + '.md'));
+ok('an empty dump builds an empty record', econ.buildEconomySlice(CYCLE, { root, profiles }).empty === true);
 fs.rmSync(root, { recursive: true, force: true });
 console.log(fails ? 'buildEconomySlice tests: ' + fails + ' FAILURE(S)' : 'buildEconomySlice tests: PASS');
 process.exit(fails ? 1 : 0);

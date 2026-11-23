@@ -35,7 +35,7 @@ const pulseSlice = require('./buildPulseSlice');
 const SEAT = {
   slug: 'celeste-tran', name: 'Celeste Tran', popid: 'POP-00164', desk: 'wire',
   kind: 'beat-trends', domain: 'trends', artifact: 'trends', builder: 'buildTrendsSlice.js',
-  version: 'TRENDS-SLICE-6', nameRe: /celeste\s*tran/i,
+  version: 'TRENDS-SLICE-7', nameRe: /celeste\s*tran/i,
   tabs: ['Cultural_Ledger', 'Neighborhood_Demographics', 'LifeHistory_Log'],
   // + output/cron-compare/pulse_c{N}.json (pipeline.70), read soft
   approach: '',
@@ -113,7 +113,7 @@ function build(cycle, { root, beats, profiles }) {
       src: hasPrevCul ? culSrc + ' vs output/beats/prev/Cultural_Ledger.jsonl @C' + prevCul.vs : culSrc
     });
     for (const popid of f.popids) {
-      if (people.some(p => p.popid === popid)) continue;
+      if (popid === SEAT.popid || K.isMediaStaff(profiles, popid) || people.some(p => p.popid === popid) || people.length >= PEOPLE_CAP) continue;   // agy 2026-11-23 #5
       const p = K.personFromProfile(profiles, popid, 'the city is talking about them (Cultural_Ledger)', f.hood);
       if (p) people.push(p);
     }
@@ -203,7 +203,7 @@ function build(cycle, { root, beats, profiles }) {
   if (pulse) {
     for (const t of pulse.themes.filter(t => t.voices.length).slice(0, 3)) {
       const v = t.voices[0];
-      if (people.some(p => p.popid === v.popid)) continue;
+      if (v.popid === SEAT.popid || K.isMediaStaff(profiles, v.popid) || people.some(p => p.popid === v.popid) || people.length >= PEOPLE_CAP) continue;   // agy 2026-11-23 #5
       const p = K.personFromProfile(profiles, v.popid, 'has been saying it on their own page — ' + t.label + ', C' + v.cycle + ': “' + v.excerpt + '”', v.hood);
       if (p) people.push(p);
     }

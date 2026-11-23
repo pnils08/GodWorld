@@ -807,7 +807,7 @@ function seatToolsBlock(persona, n) {
 // health/school/safety hood rows. Aggregate city and hood sheets only — no household or per-citizen finance tab.
 const SHEET_READ_ALLOWLIST = ['Initiative_Tracker', 'Neighborhood_Map', 'Oakland_Sports_Feed', 'Civic_Office_Ledger',
   'Faith_Organizations', 'Faith_Ledger', 'Business_Ledger', 'Transit_Metrics', 'Neighborhood_Demographics',
-  'Care_Justice_Census', 'Community_Programs', 'Crime_Metrics'].concat(TEST_SEAT ? ['Cultural_Ledger'] : []);
+  'Care_Justice_Census', 'Community_Programs', 'Crime_Metrics'].concat(TEST_SEAT || process.env.GODWORLD_SEAT_TOOLS === '1' ? ['Cultural_Ledger'] : []);
 // memory tools appear in the loop only when the run knows whose page it is
 // (--byline-popid from cron-desk-run, or the persona's own POPID).
 const MEMORY_TOOLS = [
@@ -1771,5 +1771,6 @@ module.exports = {
   costUsd,                 // civic.47 M1 — Mara's manifest falls back to the rate table
   CANON_RECALL_TOOL, OPENROUTER_TOOLS, MEMORY_TOOLS, toolMemoryRecall, toolMemoryNote,
   openRouterToolLoop,      // Task 2.5.5 — shared by the wake-1 fact selection (cron-desk-run.js)
+  toolSearchWorld,         // pipeline.111 — the seat-file reporter's morning tools (cron-desk-run.js seatMorningPlan)
   callOpenRouterRaw,
 };

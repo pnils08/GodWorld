@@ -774,6 +774,7 @@ async function buildFanout(date) {
         if (!isEveningConsumer(assignments[i])) continue;
         if (isMason(assignments[i])) continue; // Mason draws the food slice (pipeline.68 Task 3)
         if (assignments[i].beatSlice) continue; // Graye draws the faith slice (pipeline.68 Task 4)
+        if (BEAT_BUILDERS[assignments[i].persona]) continue; // a seat with its own record never takes the evening pack, even on an empty day (agy 2026-11-23 #4)
         const next = enrichEvening(assignments[i], cycle);
         if (next && next.eveningSlice) {
           assignments[i] = next;

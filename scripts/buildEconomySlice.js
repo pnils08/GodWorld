@@ -24,7 +24,7 @@ const K = require('./beatSliceKit');
 const SEAT = {
   slug: 'business-desk', name: 'Jordan Velez', popid: 'POP-00153', desk: 'business',
   kind: 'beat-economy', domain: 'economy', artifact: 'economy', builder: 'buildEconomySlice.js',
-  version: 'ECONOMY-SLICE-2', nameRe: /jordan\s*velez/i,
+  version: 'ECONOMY-SLICE-3', nameRe: /jordan\s*velez/i,
   tabs: ['Business_Ledger', 'Employment_Roster', 'Casino_Ledger', 'Neighborhood_Map', 'City_Treasury', 'LifeHistory_Log'],
   approach: '',
   roomIsYours: '',
@@ -82,8 +82,8 @@ function build(cycle, { root, beats, profiles }) {
   }
   const sectorLine = [...sectors.entries()].sort((a, b) => b[1].emp - a[1].emp)
     .map(([k, t]) => k + ' ' + t.n + ' (' + t.emp + ' jobs, ' + t.up + ' up, ' + t.down + ' down)').join('; ');
-  facts.push({ text: 'All ' + rows.length + ' businesses by sector, C' + cycle + ': ' + sectorLine + ' — the rest of the ledger is on Business_Ledger',
-    src: 'output/beats/Business_Ledger.jsonl @C' + cycle + ' vs prev/' });
+  if (rows.length) facts.push({ text: 'All ' + rows.length + ' businesses by sector, C' + cycle + ': ' + sectorLine + ' — the rest of the ledger is on Business_Ledger',
+    src: 'output/beats/Business_Ledger.jsonl @C' + cycle + ' vs prev/' });   // agy 2026-11-23 #3: an empty ledger adds no line, so an empty record still sits him out
   for (const x of rows.filter(x => keep.has(x.b.BIZ_ID))) {
     const bits = [String(x.b.Name).trim() + ' (' + String(x.b.Sector || '').trim() + ')' + (x.b.Neighborhood ? ', ' + x.b.Neighborhood : '')];
     const now = [];
@@ -98,15 +98,6 @@ function build(cycle, { root, beats, profiles }) {
     if (moves.length) bits.push('since C' + prev.vs + ': ' + moves.join(', '));
     facts.push({ text: bits.join(' — '), src: 'output/beats/Business_Ledger.jsonl @C' + cycle + ' ' + x.b.BIZ_ID + (x.hasPrev ? ' vs prev/' : '') });
   }
-  // Workers at the businesses that shed or added staff, or sit in negative growth.
-  const moved = new Map(rows.filter(x => x.de || (x.grow != null && x.grow < 0)).map(x => [x.b.BIZ_ID, x]));
-  for (const w of (beats.Employment_Roster || []).filter(w => moved.has(w.BIZ_ID))) {
-    const x = moved.get(w.BIZ_ID);
-    const own = life.filter(r => String(r.POPID).toUpperCase() === String(w.POP_ID).toUpperCase()).slice(0, 1).map(r => String(r.EventText).trim());
-    add(w.POP_ID, String(w.RoleType || 'works').trim() + ' at ' + String(x.b.Name).trim() +
-      (x.de ? ' (' + (x.de > 0 ? '+' : '') + x.de + ' employees this cycle)' : ' (negative growth)') + (own.length ? '; C' + cycle + ': ' + own[0] : ''));
-  }
-
   // The engine's own business events.
   const ws = path.join(root, 'output', 'world_summary_c' + cycle + '.md');
   if (fs.existsSync(ws)) {
@@ -142,6 +133,16 @@ function build(cycle, { root, beats, profiles }) {
     for (const w of wagers.filter(w => Number(w.CyclePlaced) === cyc).slice(0, 6)) {
       add(w.POPID, 'C' + cycle + ': staked ' + money(K.num(w.Stake)) + ' on ' + (w.MarketFamily || 'a market') + ' (' + (w.Side || '') + '), ' + String(w.Status || 'open'));
     }
+  }
+
+  // Workers at the businesses that shed or added staff, or sit in negative growth — after the casino's winners and
+  // losers, so a heavy week of movers cannot crowd every bettor off his list (agy 2026-11-23 #3).
+  const moved = new Map(rows.filter(x => x.de || (x.grow != null && x.grow < 0)).map(x => [x.b.BIZ_ID, x]));
+  for (const w of (beats.Employment_Roster || []).filter(w => moved.has(w.BIZ_ID))) {
+    const x = moved.get(w.BIZ_ID);
+    const own = life.filter(r => String(r.POPID).toUpperCase() === String(w.POP_ID).toUpperCase()).slice(0, 1).map(r => String(r.EventText).trim());
+    add(w.POP_ID, String(w.RoleType || 'works').trim() + ' at ' + String(x.b.Name).trim() +
+      (x.de ? ' (' + (x.de > 0 ? '+' : '') + x.de + ' employees this cycle)' : ' (negative growth)') + (own.length ? '; C' + cycle + ': ' + own[0] : ''));
   }
 
   // Each hood's money: income, rent, pressure.

@@ -12,3 +12,5 @@ celeste-c117 output/test-shell/20261123-003110-celeste-tran-day-today-475103
 jordan-c117 output/test-shell/20261123-004415-business-desk-day-today-481894
 business-desk-trimmed output/test-shell/20261123-005345-business-desk-day-today-487459
 maria-keen-trimmed output/test-shell/20261123-005505-maria-keen-day-today-487905
+business-desk-morning-tools output/test-shell/20261123-010032-business-desk-day-today-494539
+maria-keen-morning-tools output/test-shell/20261123-010150-maria-keen-day-today-494778

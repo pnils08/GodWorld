@@ -1651,6 +1651,36 @@ function seatSitsOut(personaSlug, cycle, stage) {
   return true;
 }
 
+// pipeline.111 (builder 2026-11-23: "go, build the morning tool loop, the idea is to allow them to dig and and be
+// journlists"): a seat-file reporter plans her morning with her tools — the same four the writer holds (canon_recall,
+// canon_search, citizen_lookup, sheet_read incl. Cultural_Ledger), through the writer's shared loop, up to
+// SEAT_MORNING_CALLS reads. Who she is is the sheet line and Essence (reporterIdentity) plus her seat file; the ask is
+// the morning Packet. Returns the citizenVoice --json envelope the angle stage already reads.
+const SEAT_MORNING_CALLS = 6;
+async function seatMorningPlan(asker, ask, model, maxTokens) {
+  process.env.GODWORLD_SEAT_TOOLS = '1';   // sheet_read may read Cultural_Ledger, as the seat writer can
+  const W = require('./cron-desk-writer');
+  const agentDir = path.join(ROOT, '.claude', 'agents', personaSlugForSeat());
+  const noEssence = !!(ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.seatEssence === false);
+  const who = await require('./reporterIdentity').reporterIdentity({ popid: asker.popid, agentDir: noEssence ? null : agentDir });
+  const system = (who.block ? who.block + '\n\n' : '') + fs.readFileSync(SEAT_FILE, 'utf8').trim() +
+    '\n\nThis is your morning. Read what you want with your tools, then answer with the plan the Packet asks for.';
+  const exec = (name, input) => name === 'canon_recall' ? W.toolCanonRecall(input)
+    : name === 'canon_search' ? W.toolSearchWorld({ query: input.query })
+    : name === 'citizen_lookup' ? W.toolCitizenLookup(input)
+    : name === 'sheet_read' ? W.toolSheetRead(input)
+    : 'unknown tool ' + name;
+  const r = await W.openRouterToolLoop({ model, system, user: ask + '\n\nReturn ONLY the JSON requested by packet.output.',
+    maxToolCalls: SEAT_MORNING_CALLS, maxTokens, toolset: W.OPENROUTER_TOOLS.concat([W.CANON_RECALL_TOOL]), exec, traceResults: true });
+  log('morning tools: ' + r.trace.length + ' call(s)' + (r.trace.length ? ' — ' + r.trace.map(c => c.tool + '(' + JSON.stringify(c.input).slice(0, 60) + ')').join('; ') : ''));
+  SEAT_MORNING_TRACE = r.trace.map(({ resultHead, ...rest }) => rest);
+  return { popId: asker.popid, name: asker.name, text: r.text,
+    usage: { completion: r.usageOut, maxTokens, finish: r.finishReason || null } };
+}
+let SEAT_MORNING_TRACE = null;
+let SEAT_SLUG = null;
+function personaSlugForSeat() { return SEAT_SLUG; }
+
 async function runAngle(assign) {
   SEAT_CHECKS = null;
   let angleCapHits = 0; // pipeline.75 — rides the angle artifact into the write record
@@ -2233,7 +2263,8 @@ async function runAngle(assign) {
         // (244 citizens with page excerpts, ~390 KB) tripped E2BIG on 2026-10-28 and she never wrote.
         // Over the cap the ask goes on stdin (citizenVoice --stdin); under it nothing changes.
         const askOnStdin = Buffer.byteLength(ask, 'utf8') > ASK_ARGV_MAX;
-        const out = execFileSync('node', [path.join(ROOT, 'scripts', 'citizenVoice.js'),
+        SEAT_SLUG = personaSlug;
+        const out = SEAT_FILE ? JSON.stringify(await seatMorningPlan(asker, ask, angleModel, 4000)) : execFileSync('node', [path.join(ROOT, 'scripts', 'citizenVoice.js'),
           '--pop=' + asker.popid, ...(askOnStdin ? ['--stdin'] : ['--ask=' + ask]), '--cycle=' + cycle, '--json',
           // pipeline.111: the reporter's morning plan on her seat file, not her citizen life (citizenVoice --seat-file).
           ...(SEAT_FILE ? ['--seat-file=' + SEAT_FILE] : []),
@@ -3060,6 +3091,12 @@ async function runWrite(assign) {
   const anglePath = path.join(COMPARE, stem + 'angle.json');
   const packetPath = path.join(COMPARE, stem + 'packet.json');
   if (seatSitsOut(personaSlug, cycle, 'write')) return;
+  // pipeline.111 (agy 2026-11-23 #1): a seat that passed at W1 has no packet — report returns before writing one — so
+  // the pass is read before the packet is required, or a pass ends the day as a FAILED write.
+  {
+    const passedAngle = fs.existsSync(anglePath) ? readJson(anglePath) : null;
+    if (passedAngle && passedAngle.pass) { console.log('[write] ' + personaSlug + ' passed the day at the angle stage — nothing to write.'); return; }
+  }
   if (!REGATE) {
     requireUnspentArtifact(anglePath, 'angle', 'angle', stem);
     requireUnspentArtifact(packetPath, 'packet', 'report', stem);

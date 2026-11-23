@@ -36,7 +36,7 @@ pointers:
 | 1 | Seats: drop the `:627` prefix, the `:638` suffix, the `:383` order sentence; `:662` title = where + the pattern's own words; default and improvement sentences carry the record's fact; weekday-pack source labels name the tab (`buildCivicOfficeSlice.js`, `civicBrief.js`). Verified: `ailmentPerception` lifted and printed over the 16 C117 patterns | es | done `8230195fe` `3f016a164` |
 | 2 | Desk signal: source written in the record form (`<sheet> row(s) N; finding C<cycle>-<i>; storyline …`); civic handle keeps `citizens` only; desk lanes labelled by the record; `framed` (no words) keeps the stink +3 and the fanout lead. Verified: C117 rebuild, same entries per lane, 27 → 0 checker angle lines | es | done `8230195fe` `3f016a164` |
 | 3 | Tips: `beatSliceKit.recordRef` converts an old ref to the identical record form (C117: 144/144); civic-domain, Jax (`toRecordRefs`, pattern lookup by either form), the desk run's SOURCE line and research evidence ref (`storyRecordRef`; validator checked on the lifted function); writer-brief filter drops the record-form source. Verified: C117 old code + old signal vs new code + new signal in scratch roots — stink ranking, Jax pick, six civic-domain picks, economic pick identical; 0 `engine_audit` in civic-domain and firebrand | es | done `8230195fe` `3f016a164` |
-| 4 | One adversarial review (agy) of both commits; fold; proof = the unattended runs (see §What lands when) | es | in progress — brief sent 2026-11-22 |
+| 4 | One adversarial review (agy) of both commits; fold; proof = the unattended runs (see §What lands when) | es | done — agy SHIP-WITH-FIXES folded `a076c7ac3`; Civis credit `b4510ce1f`; Jax rulebook `c285243b7`, `af65e1d49`; summary section `f6689c5aa`. Live read owed: Mon 2026-11-23 desk run, C118 signal |
 
 ## What lands when
 
@@ -83,6 +83,7 @@ pointers:
 
 ## Changelog
 
+- 2026-11-23 (engine-sheet) — Tasks 1–4 done; the row waits on its live reads (Mon desk run, C118 signal and seat packets).
 - 2026-11-23 (engine-sheet) — Tests (builder's unlock): Jax and world-summary tests trued to the new ref form and Civis wording; Jax incoherence B side restored to its own source. Full suite green but dialGates (engine.356, fixed same commit).
 - 2026-11-22 (engine-sheet) — Builder "yes you can take those out": "cycle" and "ledger" off Jax's forbidden words (record words, 2026-10-18 ruling); "engine" and "simulation" stay (fourth wall).
 - 2026-11-22 (engine-sheet) — Builder "yes rename": Jax's rulebook tags `FACT(engine)` → `FACT(Civis)`, "Engine Returns" → "Civis Returns" (RULES.md, SKILL.md); no script parses either.

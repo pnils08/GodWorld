@@ -987,7 +987,9 @@ This pass: 1 rows — engine.353. (Prior passes are the dated `## S<N> Archive P
 
 - **pipeline.116** [engine-sheet] — Sports-feed names split only outside brackets (builder 11-23 "lets move to 6"; C117 G-EC43): pre-flight, world summary, citizen wake. Done **State at archive:** done-pending-archive. Pointer: `output/production_log_run_cycle_c117_gaps.md` G-EC43
 
-This pass: 1 rows — pipeline.116. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+- **run-cycle.c117** [engine-sheet] — RUN-CYCLE C117 GAP LOG — S774 (engine-sheet), 53 entries, 1 HIGH: closed 2026-11-23 (G-EC53) **State at archive:** done-pending-archive. Pointer: `output/production_log_run_cycle_c117_gaps.md`. (Moved by hand: the sweep does not match this id's form.)
+
+This pass: 2 rows — pipeline.116, run-cycle.c117. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
 
 ## S769 Archive Pass (2026-11-21, research-build) — post-S768 closures sweep
 

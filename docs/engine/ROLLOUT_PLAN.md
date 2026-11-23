@@ -98,7 +98,6 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| run-cycle.c117 | RUN-CYCLE C117 GAP LOG — S774 (engine-sheet), 53 entries, 1 HIGH: closed 2026-11-23 (G-EC53) | done-pending-archive | engine-sheet | `output/production_log_run_cycle_c117_gaps.md` |
 | engine.362 | Header-drift backlog: 24 standing field-name flags in the run-cycle gap log (since ≤C110, none new) — triage real misses vs detector noise | ready | engine-sheet | `output/production_log_run_cycle_c117_gaps.md` G-EC3–16, G-EC22–31 |
 | engine.363 | The gap log's four runtime checks (phase-skip, phase-ordering, cohort-collision, silent-fail) built on Engine_Run_Log, now the run-log ingest path | ready | engine-sheet | `output/production_log_run_cycle_c117_gaps.md` G-EC32–36 · [[../plans/2026-11-23-engine-writes-its-run-record]] |
 | engine.352 | Authored citizens' sheet rows and June essence entries read against what he wrote of them (builder 11-17): 43. Read first; each row changes on his word | ready | research-build | `output/production_log_run_cycle_c116_gaps.md` G-EC56 |

@@ -60,7 +60,9 @@ On Sharon (2026-11-21): bio — "i like them both and love \"visits places she w
 | 5 | Maria: seat file, every-hood record, package, evening pack off | rb | live `1e0ac867b`, packet trim `7b5c99f55`, voice retry `aafcaff3f`; test day 'Before the Shuttles' meets his '2'; read Fri 11-27 |
 | 6 | Kai: seat file, arts record, package, evening pack off | rb | live `11b50a52d`; test day C117 'Who Gets Through the Door'; read Fri 11-27 |
 | 7 | Mason: seat file, own food record (buildFoodSlice), package | rb | live `f72796514`; test day C117 'Muscle Memory at the Rail'; read Fri 11-27 |
-| 8 | Celeste, same steps | rb | not started |
+| 8 | Celeste: seat file, trends record (watching: shows, UNDOCKED, game night, shared moments) | rb | live `37ed5d76e`; read Fri 11-27 |
+| 9 | Jordan (business desk): seat file, own economy record incl. the casino, Sonnet 5.5 | rb | live `7482c334d`; read Mon 11-23 (his day) |
+| 10 | Tribune staff (MED) off the new-mold source lists | rb | done `37ed5d76e` |
 
 ## Acceptance
 
@@ -89,6 +91,7 @@ On Sharon (2026-11-21): bio — "i like them both and love \"visits places she w
 
 ## Changelog
 
+- 2026-11-23 (research-build) — Celeste and Jordan live. Staff off source lists ("1 and 2 yes"); Celeste's Essence back (his allowance); Jordan on Sonnet 5.5 for morning and write ("be curius if sonnet 5.5 would be sufficient"). Gaps for him: a trending page (who watched which show); the engine's per-week business cause.
 - 2026-11-22 (research-build) — Mason live, "mason next": trend = each business's move since last Cycle; the engine keeps no per-week cause (engine gap, his call on a row). Ages ride from the row after a 34-for-20 invention. `f72796514`
 - 2026-11-22 (research-build) — Test-run pieces are not staged (builder: "3" — test runs stay tests; first live pieces Fri 11-27 take the full path). Kai live `11b50a52d`.
 - 2026-11-22 (research-build) — Maria approved on "2" once packet-talk was out: writer Packet trimmed to facts/people/quotes/her plan; interviews retry a busy provider (Maverick flapped all evening). `aafcaff3f`

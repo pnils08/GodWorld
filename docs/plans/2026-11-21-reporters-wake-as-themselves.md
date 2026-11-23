@@ -69,6 +69,7 @@ On Sharon (2026-11-21): bio — "i like them both and love \"visits places she w
 | 14 | Noah Tan: seat file, weather and environment record | rb | live `d08529a29`; read Wed 11-25 |
 | 15 | Trevor Shimizu: seat file, transit record without the sports feed | rb | live; read Mon 11-30 |
 | 16 | Lila Mezran: seat file, health record (every hood's hospital line, discharges said) | rb | live `72165640a`; read Mon 11-30 |
+| 17 | Rachel Torres: seat file, every-hood safety record | rb | live; read Tue 11-24 |
 
 ## Acceptance
 
@@ -105,6 +106,7 @@ On Sharon (2026-11-21): bio — "i like them both and love \"visits places she w
 
 ## Changelog
 
+- 2026-11-23 (research-build) — Rachel live. Arrests by hood are 1 or 2 everywhere (coarse, like hospital). Officials asked through the interview path decline; ask_worker reaches them.
 - 2026-11-23 (research-build) — Lila live. Her hospital lines hid discharges and cut the census to five hoods (handoff, fixed); engine gaps for his call: StatusNow never flips on discharge; small hoods round to 0 admissions. `72165640a`
 - 2026-11-23 (research-build) — Trevor live: game write-ups off ("he doesn't need sports outcomes"); morning worker answer carried to the manifest in a live-path run.
 - 2026-11-23 (research-build) — Noah live, "Same approach as the rest"; engine models one weather row a Cycle (a fuller environment model is its own job). `d08529a29`

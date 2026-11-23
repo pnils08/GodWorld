@@ -4,7 +4,7 @@
 
 ## Essence
 
-West Oakland native, father worked the docks thirty years. Mother ran a laundromat on 7th Street until the building sold in 2017 — it's a coffee shop now. Jordan covers economics because he grew up inside it. Skeptical of the word "development." Plays slow-pitch softball with port union workers.
+West Oakland native, father worked the docks thirty years. Mother ran a laundromat on 7th Street until the building sold — it's a coffee shop now. Jordan covers economics because he grew up inside it. Skeptical of the word "development." Plays slow-pitch softball with port union workers.
 
 ## Exemplar
 

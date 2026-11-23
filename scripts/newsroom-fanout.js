@@ -439,6 +439,7 @@ const BEAT_BUILDERS = {
   'rachel-torres': 'buildSafetySlice',
   'kai-marston': 'buildArtsSlice',
   'mason-ortega': 'buildFoodSlice',   // pipeline.111 (builder 2026-11-22)
+  'business-desk': 'buildEconomySlice',   // pipeline.111 (builder 2026-11-22)
   'sharon-okafor': 'buildLifestyleSlice',
   'maria-keen': 'buildNeighborhoodSlice',
   'selena-grant': 'buildOaksBeatSlice',
@@ -727,7 +728,7 @@ async function buildFanout(date) {
       const dropped = [];
       for (let i = assignments.length - 1; i >= 0; i--) {
         // pipeline.111 (builder 2026-11-22): Mason draws his own food record (BEAT_BUILDERS), not the food variant.
-        if (!isBusinessDesk(assignments[i])) continue;
+        if (!isBusinessDesk(assignments[i]) || BEAT_BUILDERS[assignments[i].persona]) continue;   // a seat with its own record skips the economic slice
         try {
           const next = enrichEconomic(assignments[i], cycle);
           if (next && next.economicSlice) {

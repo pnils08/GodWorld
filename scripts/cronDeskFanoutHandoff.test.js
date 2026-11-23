@@ -179,17 +179,17 @@ const jordanAssignment = {
 };
 const jordanContext = activateWakeContext(jordanAssignment, jordanAssignment.persona);
 assert.equal(jordanContext.packetContract, 'v2');
-assert.equal(jordanContext.wakePackage.version, 'JORDAN-LEP2-2');
+assert.equal(jordanContext.wakePackage.version, 'JORDAN-LEP2-3');
 for (const file of ['IDENTITY.md', 'LENS.md', 'RULES.md']) {
   assert.ok(fs.existsSync(path.join(__dirname, '..', '.claude', 'agents',
     jordanAssignment.persona, file)), 'Jordan control-plane identity missing ' + file);
 }
 assert.equal(stageRoute('business', jordanAssignment.persona, 'angle').model,
-  'deepseek/deepseek-v4-flash-0731');
+  'anthropic/claude-sonnet-5.5');   // pipeline.111 (builder 2026-11-22)
 assert.equal(stageRoute('business', jordanAssignment.persona, 'report').model,
   'deepseek/deepseek-v4-flash-0731');
 assert.equal(stageRoute('business', jordanAssignment.persona, 'write').model,
-  'anthropic/claude-opus-5.5');
+  'anthropic/claude-sonnet-5.5');
 
 const kaiAssignment = {
   name: 'Kai Marston',

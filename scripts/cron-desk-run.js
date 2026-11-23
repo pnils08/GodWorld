@@ -67,6 +67,7 @@ const BEAT_BUILDERS = {
   'rachel-torres': 'buildSafetySlice',
   'kai-marston': 'buildArtsSlice',
   'mason-ortega': 'buildFoodSlice',   // pipeline.111 (builder 2026-11-22): his own record, off the business desk's food variant
+  'business-desk': 'buildEconomySlice',   // pipeline.111 (builder 2026-11-22): Jordan's own economy record
   'sharon-okafor': 'buildLifestyleSlice',
   'maria-keen': 'buildNeighborhoodSlice',
   'selena-grant': 'buildOaksBeatSlice',
@@ -711,7 +712,7 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
   // variant for Mason Ortega. Built from the beat-tab dump; a missing or stale
   // dump throws here on purpose — no seat is staged on nothing.
   const foodSeat = !SEAT_FILE && !!(persona && persona.name && /mason\s*ortega/i.test(persona.name));   // a seat-file Mason reads his own food record (pipeline.111)
-  if (desk === 'business' || foodSeat) {
+  if ((desk === 'business' && !SEAT_FILE) || foodSeat) {   // a seat-file Jordan reads his own economy record (pipeline.111)
     const { loadEconomicSlice } = require(path.join(__dirname, 'buildEconomicSlice'));
     const es = loadEconomicSlice(cycle, { foodFilter: foodSeat });
     if (es && !es.empty) {
@@ -1818,7 +1819,7 @@ async function runAngle(assign) {
     } catch (e) {
       log('simon slice load failed (non-fatal): ' + e.message);
     }
-  } else if (desk === 'business' || (personaSlug === 'mason-ortega' && !BEAT_BUILDERS[personaSlug])) {
+  } else if ((desk === 'business' || personaSlug === 'mason-ortega') && !BEAT_BUILDERS[personaSlug]) {
     // pipeline.68: beat slice from the dump. A missing or stale dump throws —
     // the seat does not run on the old signal-only slice or on nothing.
     const { loadEconomicSlice } = require(path.join(__dirname, 'buildEconomicSlice'));
@@ -2041,7 +2042,7 @@ async function runAngle(assign) {
         (asker._wallSnippet ? '\n\n' + asker._wallSnippet : '') +
         '\n\nIn third person: name the present fact, the origin you will read from the archive before you write him, ' +
         'and the closing note you ride. Not fan we. Not Anthony board. Not business storefront. Not wire copy.';
-    } else if ((desk === 'business' || (personaSlug === 'mason-ortega' && !BEAT_BUILDERS[personaSlug])) && story && economicSlice && !economicSlice.empty) {
+    } else if (((desk === 'business' || personaSlug === 'mason-ortega') && !BEAT_BUILDERS[personaSlug]) && story && economicSlice && !economicSlice.empty) {
       const food = economicSlice.variant === 'food';
       const sceneBits = economicSlice.prewrite.anchorFacts.slice();
       for (const sd of (economicSlice.seeds || []).slice(0, 2)) {

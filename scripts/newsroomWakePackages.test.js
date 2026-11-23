@@ -287,20 +287,22 @@ assert.equal(sharon.reviewProfile.articleContract.opening, undefined);
 assert.equal(sharon.rewardLoop, true);
 
 const jordan = packages['business-desk'];
-assert.equal(jordan.version, 'JORDAN-LEP2-2');
+assert.equal(jordan.version, 'JORDAN-LEP2-3');
 assert.equal(jordan.requiredDaily, true);
 assert.equal(jordan.assignment.desk, 'business');
 assert.equal(jordan.assignment.name, 'Jordan Velez');
 assert.equal(jordan.assignment.popid, 'POP-00153');
 assert.equal(jordan.assignment.beatDomain, 'ECONOMIC');
 assert.equal(jordan.packetContract, 'v2');
-assert.equal(packagesApi.routeFor(jordan, 'angle').model, 'deepseek/deepseek-v4-flash-0731');
+// pipeline.111 (builder 2026-11-22: "be curius if sonnet 5.5 would be sufficient? yes follow pattern"): morning and write on Sonnet 5.5.
+assert.equal(packagesApi.routeFor(jordan, 'angle').model, 'anthropic/claude-sonnet-5.5');
 assert.equal(packagesApi.routeFor(jordan, 'report').model, 'deepseek/deepseek-v4-flash-0731');
-assert.equal(packagesApi.routeFor(jordan, 'write').model, 'anthropic/claude-opus-5.5');
+assert.equal(packagesApi.routeFor(jordan, 'write').model, 'anthropic/claude-sonnet-5.5');
+assert.equal(jordan.seatFile, '.claude/agents/business-desk/SEAT.md');
 assert.equal(jordan.reviewProfile.canonPolicy, 'load-bearing');
 assert.equal(jordan.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
-assert.ok(jordan.reviewProfile.textureConditions.some(v => v.includes('raw engine labels')));
-assert.ok(jordan.reviewProfile.canonBlockers.some(v => v.includes('fabricated owner')));
+assert.deepStrictEqual(jordan.reviewProfile.textureConditions, []);
+assert.deepStrictEqual(jordan.reviewProfile.canonBlockers.map(v => v.split(':')[0].split(' (')[0]), ['an invented or altered location', 'an invented or altered citizen', 'an invented or altered data point']);
 
 const kai = packages['kai-marston'];
 assert.equal(kai.version, 'KAI-LEP2-2');
@@ -379,7 +381,7 @@ assert.equal(gate.eligible[0].wakePackage, 'JAX-LEP2-2');
 assert.equal(gate.eligible[1].wakePackage, 'CARMEN-LEP2-3');
 assert.equal(gate.eligible[2].wakePackage, 'PSLAYER-LEP2-1');
 assert.equal(gate.eligible[3].wakePackage, 'ANTHONY-LEP2-3');
-assert.equal(gate.eligible[4].wakePackage, 'JORDAN-LEP2-2');
+assert.equal(gate.eligible[4].wakePackage, 'JORDAN-LEP2-3');
 assert.deepStrictEqual(gate.skipped.map(row => row.name),
   ['TEST-ONLY Unpackaged Reporter']);
 assert.ok(gate.skipped.every(row => row.reason === 'no-active-wake-package'));
@@ -576,7 +578,7 @@ assert.deepStrictEqual(
   DAILY_QUOTAS);
 assert.equal(bounded.assignments[0].approach, 'Carmen civic ledger');
 assert.equal(bounded.assignments[0].story.ref, 'TEST-CIVIC-ONE');
-assert.equal(bounded.assignments[5].wakePackage, 'JORDAN-LEP2-2');
+assert.equal(bounded.assignments[5].wakePackage, 'JORDAN-LEP2-3');
 
 const staleSeat = applyWakePackageGate(selected.concat({
   desk: 'culture', name: 'TEST-ONLY Unpackaged Reporter', persona: 'test-only', popid: 'POP-99999'

@@ -152,7 +152,15 @@ const STEPS = [
       if (Number(b.cycle) !== c.cycle || Number(b.prevCycle) !== c.cycle - 1) return { ok: false, detail: `beat dump meta reads C${b.cycle} (prev C${b.prevCycle})` };
       const ro = rosterGate(readJsonl(out('beats', 'Employment_Roster.jsonl')), readJsonl(out('beats', 'Business_Ledger.jsonl')));
       if (!ro.ok) return { ok: false, detail: ro.detail };
-      return { ok: true, outcome: 'pass', detail: `snapshot C${c.cycle}; beats C${c.cycle}, prev C${c.cycle - 1}; ${ro.detail}` }; } },
+      // builder 2026-11-23 "go on 9": the Oakland week page builds the moment its inputs land
+      // (beats + ledger snapshot here, world summary at Step 5) instead of after the close.
+      // Never holds the chain: a failed build or check is noted and the step still passes.
+      // Publishing stays a session action (the Artifact tool), per the skill's §The Oakland week page.
+      const wv = run(['world-view/build.js']);
+      const ck = wv.status === 0 ? run(['scripts/worldViewCheck.js']) : null;
+      const wvNote = ck && ck.status === 0 && new RegExp('PASS world-view C' + c.cycle + '\\b').test(ck.stdout)
+        ? `world-view built + PASS C${c.cycle}` : `world-view NOT ready (${wv.status !== 0 ? 'build exit ' + wv.status : 'check failed'}) — not gating`;
+      return { ok: true, outcome: 'pass', detail: `snapshot C${c.cycle}; beats C${c.cycle}, prev C${c.cycle - 1}; ${ro.detail}; ${wvNote}` }; } },
 
   { id: '5.5', title: 'Neighborhood texture', scripts: ['buildNeighborhoodTexture'],
     run: (c) => { const t0 = Date.now(); const r = run(['scripts/buildNeighborhoodTexture.js', String(c.cycle)]);

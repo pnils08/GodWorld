@@ -311,3 +311,4 @@ Review: `docs/archive/for-claude-review/2026-10-28-codex-engine270-review1-build
 - 2026-10-28 (engine-sheet) — Review 1 build `2086e0d8`: D1 anomaly tag, D2 no false age, Task 7 step 1 attach pass; live replay and tests in §Review 1 build. C113 read re-dated to after the Sat 2026-10-31 run.
 - 2026-10-28 (engine-sheet) — codex diff review (HOLD, 6 findings) folded in `2d9ab924`: five fixed, #6 accepted (initiative stages carry no age); §Reviews reconciled.
 - 2026-10-28 (engine-sheet) — codex round 2 (4 SHIP, 2 HOLD) folded: re-match before write, strict registry checks; C108 boundary corrected; real-entry dry run C109–C113 = 10 attaches.
+- 2026-11-22 (engine-sheet) — C117 fire: D2 holds — `desk_signal_c117.json` storylineRegistry 20 rows, initiative rows carry `age: null` (no invented week); stage changes open new rows (INIT-003:design-phase, INIT-006:construction-active, INIT-007:stalled). D1 (the attach count) is the Saturday run: read Sat 2026-11-28.

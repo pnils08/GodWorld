@@ -111,6 +111,7 @@ The class is decided per **unit group** (`contractSeedUnit_`, engine.334), so a 
 
 ## Changelog
 
+- 2026-11-22 (engine-sheet) — **C117 live read (Task 5).** Acceptance 2b holds: SeedIDs read back as text — C117's all-digit `78033564` stayed text (C113 `9.70E+13`, C115 `6.55E+07` before the fix). Acceptance 2a not readable: 48 C117 seeds (texture 25, major 23), 0 name an initiative; the one CIVIC coverage reaction is citywide with no initiative. Re-dated C118.
 - 2026-11-21 (engine-sheet) — Tasks 3 and 4 built; Task 2 bars stand on the builder's word. Sandbox next, behind research-build's engine.350 pile.
 - 2026-11-21 (engine-sheet) — agy plan review HOLD folded (6 of 6 verified against the code).
 - 2026-11-21 (engine-sheet) — Task 1 corrected (advisor): hook-ripple producers added; the tags and the initiative intensity already carry a rank; crime pipe-hood retracted as a merge case. Task 2 design written; codex plan review next.

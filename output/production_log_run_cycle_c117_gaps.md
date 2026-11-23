@@ -259,7 +259,7 @@ Step 5.5: Baylight District block stated construction no source line stated; rew
 |---|---|---|
 | engine.356 | fire PASS; night spot from the ledger: 1 of 1 (OakTown Social @ Temescal = BIZ-00038, vibe quiet, movement restricted); wedding rows tagged `Wedding` (Travis Paiz + Jocelyn Santo, Lake Merritt), no `|source:bond` | read done → Task 1 |
 | engine.340 | SeedID as text: holds — C117 ids `78033564`, `e7054318` read back as text (C113 `9.70E+13`, C115 `6.55E+07` before). Each initiative its own seed: 0 initiative seeds at C117 (one CIVIC coverage reaction, no initiative) — not readable | re-date C118 |
-| engine.95 | 210.1 s of 330; no checkpoint; Phase-11 phases after ExecuteIntents 30.0 s (MaintainLifeHistoryLog 23.8) vs reserve 60 s | re-date C118 |
+| engine.95 | 210.1 s of 330; no checkpoint. Tail by the reserve's definition: ExecuteIntents 58.8 + MediaIntake 2.6 + BusinessArchive 1.4 + CitizenArchive 2.1 + MaintainLifeHistoryLog 23.8 = 88.7 s vs `tailReserveMs` 60 s — over for the third week (C115 61.9, C116 74.2); growth moved to ExecuteIntents (25.5 → 58.8), MLHL fell (44.1 → 23.8). Corrected 2026-11-22: first pass left ExecuteIntents out | re-date C118 |
 | engine.270 | D2 at the fire holds: registry 20 rows, initiative rows `age: null`, no invented week; stage changes open new rows (INIT-003:design-phase, INIT-006:construction-active, INIT-007:stalled). D1 is the Saturday attach | re-date Sat 2026-11-28 |
 | pipeline.74 | P Slayer, Tanya, Noah all staged C116 (grok-4.3). Resolve count still not logged — no field in the staged JSON; a read cannot close it, it needs a log line | re-date C118 |
 | governance.59 | C117 ran every step through the runner, each gate recorded in `output/run-cycle/c117.json`; one retry (5.55 quota). Codex hook trust still his | → needs-info |
@@ -275,3 +275,8 @@ Builder 2026-11-22: "you can take those 5". Two read-only agents; findings spot-
 | engine.347 | 209 Reflection_Intake rows since C116, all applied; 185 moved a dial (= log :244); 24 Flat rows move nothing by design. Sat 11-21 PRINT rows 9 of 9 applied, voice steps reproduce exactly. Varek journal row landed 5:54 PM, after the 5:45 fold → C118 | re-date C118 |
 | engine.349 | dialPulse live C117 vs leg n C117: moved 1,001/981, crossed 28/22, middle-on-all-eight 689/687, low 5/4. The 13: marks 107 → 117 (POP-01041 115 = his newest line). Nobody under 20. [watch] 4 at base sociability 100 (POP-00170/198/210/231), already 100 pre-fire. [untraced] log :244 FUTURE-STAMPED 2 lines (Y3C29 on POP-01030, 01035) gone from the post-fire dump; what removed them not found | re-date C118 |
 | engine.351 | Arrivals: POP-01251 Elijah Davis, POP-01252 Yolanda Ghosh (migration wave, log :164) start off 50, replay matches every dial; 14 `arrival start` Dial_Moves rows, only theirs. Held rows: none (Intake 11 rows all statused; Advancement_Intake1 no `waiting —`) — hold path still bench-only | re-date C118 |
+
+## LEG: /city-hall (G-R)
+
+- G-R (AUTO): sanity-read FAIL-SCOPED — INIT-012, INIT-014 excluded from the write, rest applied — see output/cron-civic/gate_c117.json
+- G-R (AUTO): 1 voice(s) pending this window: council_d9

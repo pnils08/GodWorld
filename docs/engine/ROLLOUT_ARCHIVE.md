@@ -981,6 +981,14 @@ This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) �
 
 This pass: 1 rows — engine.353. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
 
+## S775 Archive Pass (2026-11-23, engine-sheet) — post-S774 closures sweep
+
+1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 pipeline.*.
+
+- **pipeline.116** [engine-sheet] — Sports-feed names split only outside brackets (builder 11-23 "lets move to 6"; C117 G-EC43): pre-flight, world summary, citizen wake. Done **State at archive:** done-pending-archive. Pointer: `output/production_log_run_cycle_c117_gaps.md` G-EC43
+
+This pass: 1 rows — pipeline.116. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S769 Archive Pass (2026-11-21, research-build) — post-S768 closures sweep
 
 2 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 2 engine.*.

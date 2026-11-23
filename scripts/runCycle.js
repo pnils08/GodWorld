@@ -130,12 +130,20 @@ const STEPS = [
       const a = readJson(out(`engine_audit_c${c.cycle}.json`));
       if (!a || Number(a.cycle) !== c.cycle || mtime(out(`engine_audit_c${c.cycle}.json`)) < t0) return { ok: false, detail: `engine_audit_c${c.cycle}.json not written for C${c.cycle} this run` };
       if (!fs.existsSync(out(`baseline_briefs_c${c.cycle}.json`))) return { ok: false, detail: `baseline_briefs_c${c.cycle}.json missing (required by the civic chain)` };
-      return { ok: true, outcome: 'pass', detail: `${(a.patterns || []).length} patterns` }; } },
+      // governance.62 (builder 2026-11-23 "Go on 11"): the review is drafted from the audit, the
+      // execution log and this record; the session writes only §Calls. Never overwrites written calls.
+      const dr = run(['scripts/draftEngineReview.js', String(c.cycle)]);
+      const drNote = dr.status === 0 ? 'review drafted' : `review draft failed (exit ${dr.status}) — write it by hand`;
+      return { ok: true, outcome: 'pass', detail: `${(a.patterns || []).length} patterns; ${drNote}` }; } },
 
   { id: '4.1', title: 'Engine review written', scripts: [],
     run: (c) => { const p = out(`engine_review_c${c.cycle}.md`);
-      return mtime(p) && mtime(p) >= mtime(out(`engine_audit_c${c.cycle}.json`)) ? { ok: true, outcome: 'pass', detail: path.basename(p) }
-        : { ok: false, detail: `write output/engine_review_c${c.cycle}.md from this cycle's audit (per /engine-review), then re-run this step` }; } },
+      if (!(mtime(p) && mtime(p) >= mtime(out(`engine_audit_c${c.cycle}.json`))))
+        return { ok: false, detail: `write output/engine_review_c${c.cycle}.md from this cycle's audit (per /engine-review), then re-run this step` };
+      // governance.62: the drafted review is not the review until the session has written its calls
+      if (/CALLS-PENDING/.test(fs.readFileSync(p, 'utf8')))
+        return { ok: false, detail: `engine_review_c${c.cycle}.md is the draft — write §Calls (real / mechanism / routed per finding), then re-run this step` };
+      return { ok: true, outcome: 'pass', detail: path.basename(p) }; } },
 
   { id: '5', title: 'World summary + world-data ingest', scripts: ['buildWorldSummary'],
     run: async (c) => { const t0 = Date.now(); run(['scripts/buildWorldSummary.js', String(c.cycle)]);

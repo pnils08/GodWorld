@@ -14,3 +14,4 @@ business-desk-trimmed output/test-shell/20261123-005345-business-desk-day-today-
 maria-keen-trimmed output/test-shell/20261123-005505-maria-keen-day-today-487905
 business-desk-morning-tools output/test-shell/20261123-010032-business-desk-day-today-494539
 maria-keen-morning-tools output/test-shell/20261123-010150-maria-keen-day-today-494778
+jordan-ask-worker output/test-shell/20261123-012054-business-desk-day-today-509992

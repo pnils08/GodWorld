@@ -255,6 +255,7 @@ const WRITER_TOOLS = Math.max(0, Math.min(8, parseInt(arg('--writer-tools', '0')
 const SEAT_FILE_PATH = arg('--seat-file', null);
 const TEST_SEAT = !!SEAT_FILE_PATH;
 const TEST_SEAT_BOOT = TEST_SEAT ? fs.readFileSync(SEAT_FILE_PATH, 'utf8').trim() : '';
+let SEAT_ASK = null;   // pipeline.111: ask_worker for a seat reporter (scripts/workerAsk.js), made at the compose
 const TEST_BARE = TEST_SEAT || (!!process.env.GODWORLD_TEST_COMPARE_DIR && process.env.GODWORLD_TEST_PROMPT === 'bare');
 const TEST_LIGHT = TEST_BARE || (!!process.env.GODWORLD_TEST_COMPARE_DIR && process.env.GODWORLD_TEST_PROMPT === 'light');
 
@@ -977,6 +978,7 @@ async function execOpenRouterTool(name, input, memCtx, cycleNow) {
   if (name === 'canon_search') return toolSearchWorld({ query: input.query });
   if (name === 'citizen_lookup') return toolCitizenLookup(isNiaSeat(PERSONA) ? { name: input.name } : input);
   if (name === 'sheet_read') return toolSheetRead(input);
+  if (name === 'ask_worker' && SEAT_ASK) return SEAT_ASK.run(input);   // pipeline.111: the seat reporter asks a city worker
   if (name === 'memory_recall' && memCtx) return toolMemoryRecall(memCtx.popId, input);
   if (name === 'memory_note' && memCtx) return toolMemoryNote(memCtx.popId, input, memCtx.cycle);
   return 'unknown tool ' + name;
@@ -1533,6 +1535,10 @@ async function main() {
     // design — the comparison era is over, this is the production wake.
     log.info((PACKET_ONLY ? 'packet-only compose' : 'tool-loop write') + ' via OpenRouter (' + MODEL +
       (PACKET_ONLY && !TOOLS_AB ? ', 0 live tools' : ', max 6 calls') + ')...');
+    if (TEST_SEAT) {
+      const me = require('./beatSliceKit').loadProfiles(ROOT).get(String(PERSONA_POPID || '').toUpperCase());
+      SEAT_ASK = require('./workerAsk').askExecutor({ name: me && me.Name ? String(me.Name).trim() : null }, cycle, (m) => log.info(m));
+    }
     const composeUser = TEST_SEAT ? kickoff : kickoff +
       '\n\nWRITE the full ' + DESK + ' section for cycle ' + cycle + ' — the complete, publish-ready ' +
       'markdown, built ONLY from the events/names/records in the world state above plus what your tools ' +
@@ -1560,7 +1566,7 @@ async function main() {
       maxToolCalls: PACKET_ONLY && !TOOLS_AB ? WRITER_TOOLS : 6,
       traceResults: TOOLS_AB || WRITER_TOOLS > 0,
       keepResults: WRITER_TOOLS > 0,
-      ...(WRITER_TOOLS ? { toolset: TEST_SEAT ? OPENROUTER_TOOLS.concat([CANON_RECALL_TOOL])
+      ...(WRITER_TOOLS ? { toolset: TEST_SEAT ? OPENROUTER_TOOLS.concat([CANON_RECALL_TOOL, require('./workerAsk').askWorkerTool()])
         : writerToolset(PERSONA, RECALL_ONLY, CANON_RECALL) } : {}),
       forceFirstTool: TOOLS_FORCED,
       cycle,
@@ -1642,6 +1648,7 @@ async function main() {
       const lep2 = require('./livedExperiencePacketV2');
       const candidates = [];
       for (const call of toolTrace) {
+        if (call.tool === 'ask_worker') continue;   // a worker's answer is a quote (below), not a fact line
         if (Array.isArray(call.lines)) { candidates.push(...call.lines); continue; }
         const argsTag = Object.values(call.input || {}).map(v => String(v).replace(/[:\s]+/g, ' ').trim()).join(' ').slice(0, 80);
         for (const line of String(call.result || '').split('\n')) {
@@ -1657,6 +1664,12 @@ async function main() {
       } else {
         log.info('tool facts → manifest: none used (' + toolTrace.length + ' call(s))');
       }
+    }
+    if (SEAT_ASK && SEAT_ASK.answers.length && packet.v === 'LEP/2') {
+      const amended = require('./livedExperiencePacketV2').appendWorkerQuotes(packet, SEAT_ASK.answers);
+      packet = amended.packet;
+      fs.writeFileSync(resolveInRepo(STATE_FILE), JSON.stringify(packet, null, 2));
+      log.info('worker answers → manifest: ' + amended.added.length + ' quote(s) (' + SEAT_ASK.answers.map(a => a.name).join(', ') + ')');
     }
     let normalized = renderPacketIntake(fs.readFileSync(savedFiles[0], 'utf8'), packet, { noSelfScore: RUBRIC });
     fs.writeFileSync(savedFiles[0], normalized);

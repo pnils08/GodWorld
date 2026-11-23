@@ -735,6 +735,36 @@ function selectUsedToolLines(draftText, candidates, packet) {
   }
   return out;
 }
+// pipeline.111 (builder 2026-11-23: reporters "can call on worker crons as well to answer questions"): a worker's answer
+// to the reporter's ask_worker joins the manifest as that worker's approved quote, word for word, so the gate reads it
+// as the record of what the worker said — the same standing as an interview answer.
+function appendWorkerQuotes(packet, answers) {
+  const next = clone(packet);
+  const added = [];
+  next.exposure = next.exposure || {};
+  next.exposure.sources = next.exposure.sources || [];
+  next.exposure.subjects = next.exposure.subjects || [];
+  for (const a of answers || []) {
+    const pop = String(a.popid || '').toUpperCase();
+    const text = clean(String(a.text || ''), 4000);
+    if (!/^POP-\d+$/.test(pop) || !text) continue;
+    const id = 'Q-WORKER-' + crypto.createHash('sha256').update(pop + '|' + a.question + '|' + text).digest('hex').slice(0, 12);
+    if (next.manifest.approvedQuotes.some(q => q.id === id)) continue;
+    const src = 'tool:ask_worker:' + String(a.officeId || '') + ' — asked: ' + clean(String(a.question || ''), 200);
+    next.manifest.approvedQuotes.push({ id, speakerId: pop, speakerName: a.name, text, factIds: [], sourceKind: 'worker-answer', src });
+    next.exposure.sources.push({ id, pop, name: a.name, quote: text, factIds: [], src, sourceKind: 'worker-answer' });
+    const profile = clean(a.name + ' — ' + (a.title || 'city worker'), 300);
+    if (!next.exposure.subjects.some(x => x.pop === pop)) next.exposure.subjects.push({ pop, name: a.name, profile, quotationEligible: true, src });
+    const subj = next.manifest.approvedSubjects.find(x => x.id === pop);
+    if (subj) subj.quotationEligible = true;
+    else next.manifest.approvedSubjects.push({ id: pop, name: a.name, profile, src, quotationEligible: true });
+    added.push(id);
+  }
+  next.manifest.id = manifestId(next);
+  assertBase(next, 'W3');
+  return { packet: next, added };
+}
+
 function appendToolFacts(packet, lines) {
   const next = clone(packet);
   const have = new Set((next.known || []).map(c => c.id));
@@ -855,6 +885,7 @@ function prompt(packet) {
 
 module.exports = {
   VERSION,
+  appendWorkerQuotes,   // pipeline.111
   LATTICE,
   assertBase,
   candidateRows: v1.candidateRows,

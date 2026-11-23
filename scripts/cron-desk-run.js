@@ -1657,7 +1657,7 @@ function seatSitsOut(personaSlug, cycle, stage) {
 // SEAT_MORNING_CALLS reads. Who she is is the sheet line and Essence (reporterIdentity) plus her seat file; the ask is
 // the morning Packet. Returns the citizenVoice --json envelope the angle stage already reads.
 const SEAT_MORNING_CALLS = 6;
-async function seatMorningPlan(asker, ask, model, maxTokens) {
+async function seatMorningPlan(asker, ask, model, maxTokens, cycle) {
   process.env.GODWORLD_SEAT_TOOLS = '1';   // sheet_read may read Cultural_Ledger, as the seat writer can
   const W = require('./cron-desk-writer');
   const agentDir = path.join(ROOT, '.claude', 'agents', personaSlugForSeat());
@@ -1665,13 +1665,15 @@ async function seatMorningPlan(asker, ask, model, maxTokens) {
   const who = await require('./reporterIdentity').reporterIdentity({ popid: asker.popid, agentDir: noEssence ? null : agentDir });
   const system = (who.block ? who.block + '\n\n' : '') + fs.readFileSync(SEAT_FILE, 'utf8').trim() +
     '\n\nThis is your morning. Read what you want with your tools, then answer with the plan the Packet asks for.';
-  const exec = (name, input) => name === 'canon_recall' ? W.toolCanonRecall(input)
+  const asks = require('./workerAsk').askExecutor({ name: asker.name }, cycle, log);
+  const exec = (name, input) => name === 'ask_worker' ? asks.run(input)
+    : name === 'canon_recall' ? W.toolCanonRecall(input)
     : name === 'canon_search' ? W.toolSearchWorld({ query: input.query })
     : name === 'citizen_lookup' ? W.toolCitizenLookup(input)
     : name === 'sheet_read' ? W.toolSheetRead(input)
     : 'unknown tool ' + name;
   const r = await W.openRouterToolLoop({ model, system, user: ask + '\n\nReturn ONLY the JSON requested by packet.output.',
-    maxToolCalls: SEAT_MORNING_CALLS, maxTokens, toolset: W.OPENROUTER_TOOLS.concat([W.CANON_RECALL_TOOL]), exec, traceResults: true });
+    maxToolCalls: SEAT_MORNING_CALLS, maxTokens, toolset: W.OPENROUTER_TOOLS.concat([W.CANON_RECALL_TOOL, require('./workerAsk').askWorkerTool()]), exec, traceResults: true });
   log('morning tools: ' + r.trace.length + ' call(s)' + (r.trace.length ? ' — ' + r.trace.map(c => c.tool + '(' + JSON.stringify(c.input).slice(0, 60) + ')').join('; ') : ''));
   SEAT_MORNING_TRACE = r.trace.map(({ resultHead, ...rest }) => rest);
   return { popId: asker.popid, name: asker.name, text: r.text,
@@ -2264,7 +2266,7 @@ async function runAngle(assign) {
         // Over the cap the ask goes on stdin (citizenVoice --stdin); under it nothing changes.
         const askOnStdin = Buffer.byteLength(ask, 'utf8') > ASK_ARGV_MAX;
         SEAT_SLUG = personaSlug;
-        const out = SEAT_FILE ? JSON.stringify(await seatMorningPlan(asker, ask, angleModel, 4000)) : execFileSync('node', [path.join(ROOT, 'scripts', 'citizenVoice.js'),
+        const out = SEAT_FILE ? JSON.stringify(await seatMorningPlan(asker, ask, angleModel, 4000, cycle)) : execFileSync('node', [path.join(ROOT, 'scripts', 'citizenVoice.js'),
           '--pop=' + asker.popid, ...(askOnStdin ? ['--stdin'] : ['--ask=' + ask]), '--cycle=' + cycle, '--json',
           // pipeline.111: the reporter's morning plan on her seat file, not her citizen life (citizenVoice --seat-file).
           ...(SEAT_FILE ? ['--seat-file=' + SEAT_FILE] : []),

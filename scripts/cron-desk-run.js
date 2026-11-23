@@ -2236,6 +2236,7 @@ async function runAngle(assign) {
           '--pop=' + asker.popid, ...(askOnStdin ? ['--stdin'] : ['--ask=' + ask]), '--cycle=' + cycle, '--json',
           // pipeline.111: the reporter's morning plan on her seat file, not her citizen life (citizenVoice --seat-file).
           ...(SEAT_FILE ? ['--seat-file=' + SEAT_FILE] : []),
+          ...(SEAT_FILE && ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.seatEssence === false ? ['--no-essence'] : []),   // bio = the seat file only
           ...(PACKET_ACTIVE ? ['--evidence-bound'] : []),
           ...(angleModel ? ['--model=' + angleModel] : []),
           // pipeline.74 — 700 truncated DeepSeek v4-flash plans mid-JSON (7 of 12 calls stopped at
@@ -3223,6 +3224,7 @@ async function runWrite(assign) {
   // (own citizen page, cp-<popid>) joins the tool loop.
   if (PACKET_ACTIVE) writerArgs.push('--strict-source-hygiene', '--packet-only');
   if (SEAT_FILE) writerArgs.push('--seat-file', SEAT_FILE);   // pipeline.111: the seat prompt
+  if (SEAT_FILE && ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.seatEssence === false) writerArgs.push('--no-essence');   // Celeste (builder 2026-11-22: "archived only")
   // pipeline.76 — the package's own writer tools (its grant).
   const ownTools = PACKET_ACTIVE && ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.writerTools &&
     ACTIVE_WAKE_PACKAGE.writerTools.maxToolCalls || 0;

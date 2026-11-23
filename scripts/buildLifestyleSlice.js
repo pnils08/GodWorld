@@ -21,7 +21,7 @@ const K = require('./beatSliceKit');
 const SEAT = {
   slug: 'sharon-okafor', name: 'Sharon Okafor', popid: 'POP-00159', desk: 'culture',
   kind: 'beat-lifestyle', domain: 'lifestyle', artifact: 'lifestyle', builder: 'buildLifestyleSlice.js',
-  version: 'LIFESTYLE-SLICE-2', nameRe: /sharon\s*okafor/i,
+  version: 'LIFESTYLE-SLICE-3', nameRe: /sharon\s*okafor/i,
   tabs: ['LifeHistory_Log'],
   approach: '',
   roomIsYours: '',
@@ -73,7 +73,7 @@ function build(cycle, { root, beats, profiles }) {
   const people = [];
   const has = popid => people.some(p => p.popid === popid);
   const add = (popid, why) => {
-    if (popid === SEAT.popid || has(popid) || people.length >= PEOPLE_CAP) return;   // never her own source
+    if (popid === SEAT.popid || K.isMediaStaff(profiles, popid) || has(popid) || people.length >= PEOPLE_CAP) return;   // never her own source, never the paper's staff
     const p = K.personFromProfile(profiles, popid, why);
     if (!p) return;
     p.profile = p.profile + ' — ' + why;   // the reason rides where every packet prints the person

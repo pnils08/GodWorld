@@ -84,6 +84,13 @@ function loadProfiles(root = ROOT) {
   return out;
 }
 
+/** pipeline.111 (builder 2026-11-22: "1 and 2 yes"): Tribune staff — the ledger's MED flag — stay off a reporter's
+ *  source list. Mags, the reporters, photographers, the podcast host: they are the paper, not its sources. */
+function isMediaStaff(profiles, popid) {
+  const r = profiles && profiles.get && profiles.get(String(popid || '').toUpperCase());
+  return !!(r && /^y/i.test(String(r['MED (y/n)'] || '').trim()));
+}
+
 /** Prior-cycle rows for a snapshot tab from output/beats/prev/ — a typed first-cycle state, never a throw. */
 function prevTabRows(root, tab) {
   const dir = path.join(root, 'output', 'beats', 'prev');
@@ -720,7 +727,7 @@ module.exports = {
   ROOT, SCHEMA, FACTS_TAIL, FORBIDDEN, recordRef, // pipeline.115
   HOLIDAY_MEANING, holidayMeaning, calendarContext, // pipeline.86
   num, hoodKey, fmtInt, loadJson, loadText, extractSection, arg,
-  loadBeatTabs, loadProfiles, prevTabRows, rosterAtSectors, hooksFor, domainHooks, seedsFor,
+  loadBeatTabs, loadProfiles, isMediaStaff, prevTabRows, rosterAtSectors, hooksFor, domainHooks, seedsFor,
   person, personFromProfile, figureHood, citizenTags, makeSlice, emptySlice, formatMarkdown, wire,
   // engine.254 Task 10
   sportsSubject, money, TREASURY_SOURCES, treasuryWeek, courtCases, censusTrail, censusFacts,

@@ -18,7 +18,8 @@ const WRITER_TOOLS_SEATS = ['elliot-marbury', 'hal-richmond', 'anthony-raines', 
   'sharon-okafor',   // pipeline.111 (builder 2026-11-21): "her tools will give her that context"
   'maria-keen',   // pipeline.111 (builder 2026-11-21): "following the Sharon mold"
   'kai-marston',   // pipeline.111 (builder 2026-11-22): "kai next"
-  'mason-ortega'   // pipeline.111 (builder 2026-11-22): "mason next"
+  'mason-ortega',   // pipeline.111 (builder 2026-11-22): "mason next"
+  'celeste-tran'   // pipeline.111 (builder 2026-11-22): "celeste next"
 ];
 // pipeline.76, builder 2026-10-14; Hal + Anthony 2026-10-19; Jax + Carmen 2026-10-26; the rest builder 2026-10-27 ("Luis and all the right question small change we can and set up Tamsin")
 
@@ -65,6 +66,9 @@ function validatePackage(key, value) {
   if (value && value.seatFile !== undefined) {
     if (!/^\.claude\/agents\/[a-z0-9-]+\/SEAT\.md$/.test(String(value.seatFile))) errors.push('seatFile must be .claude/agents/<seat>/SEAT.md');
     else if (!fs.existsSync(path.join(__dirname, '..', value.seatFile))) errors.push('seatFile not found: ' + value.seatFile);
+  }
+  if (value && value.seatEssence !== undefined && (value.seatEssence !== false || !value.seatFile)) {
+    errors.push('seatEssence may only be false, on a seat with a seatFile');
   }
   if (value && value.sourcing !== undefined && !SOURCING.includes(value.sourcing)) {
     errors.push('sourcing must be one of ' + SOURCING.join(', '));

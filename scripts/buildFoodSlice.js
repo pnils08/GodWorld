@@ -25,7 +25,7 @@ const { simYearFromCycle } = require('../lib/citizenDerivation');
 const SEAT = {
   slug: 'mason-ortega', name: 'Mason Ortega', popid: 'POP-00160', desk: 'culture',
   kind: 'beat-food', domain: 'food', artifact: 'food', builder: 'buildFoodSlice.js',
-  version: 'FOOD-SLICE-3', nameRe: /mason\s*ortega/i,
+  version: 'FOOD-SLICE-4', nameRe: /mason\s*ortega/i,
   tabs: ['Business_Ledger', 'Employment_Roster', 'LifeHistory_Log'],
   approach: '',
   roomIsYours: '',
@@ -102,7 +102,7 @@ function build(cycle, { root, beats, profiles }) {
     .sort((a, b) => (b.atWork - a.atWork) || (b.lines.length - a.lines.length));
   const people = [];
   for (const x of workers) {
-    if (x.pop === SEAT.popid || people.some(p => p.popid === x.pop) || people.length >= PEOPLE_CAP) continue;
+    if (x.pop === SEAT.popid || K.isMediaStaff(profiles, x.pop) || people.some(p => p.popid === x.pop) || people.length >= PEOPLE_CAP) continue;
     const why = String(x.w.RoleType || 'works').trim() + ' at ' + bizName.get(x.w.BIZ_ID) + (x.lines.length ? '; C' + cycle + ': ' + x.lines.join('; ') : '');
     const p = K.personFromProfile(profiles, x.pop, why);
     if (!p) continue;

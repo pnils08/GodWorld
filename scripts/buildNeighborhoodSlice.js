@@ -21,7 +21,7 @@ const K = require('./beatSliceKit');
 const SEAT = {
   slug: 'maria-keen', name: 'Maria Keen', popid: 'POP-00013', desk: 'culture',
   kind: 'beat-neighborhood', domain: 'neighborhood', artifact: 'neighborhood', builder: 'buildNeighborhoodSlice.js',
-  version: 'HOOD-SLICE-4', nameRe: /maria\s*keen/i,
+  version: 'HOOD-SLICE-5', nameRe: /maria\s*keen/i,
   tabs: ['Community_Programs', 'Neighborhood_Demographics', 'LifeHistory_Log'],
   approach: '',
   roomIsYours: '',
@@ -91,7 +91,7 @@ function build(cycle, { root, beats, profiles }) {
   for (const r of lines) {
     const popid = String(r.POPID).toUpperCase();
     const hood = String(r.Neighborhood || '').trim();
-    if (popid === SEAT.popid || people.some(p => p.popid === popid) || people.length >= PEOPLE_CAP) continue;
+    if (popid === SEAT.popid || K.isMediaStaff(profiles, popid) || people.some(p => p.popid === popid) || people.length >= PEOPLE_CAP) continue;
     if ((perHood.get(hood) || 0) >= PER_HOOD) continue;
     const why = 'C' + cycle + ' in ' + (hood || 'their neighborhood') + ': ' + String(r.EventText).trim();
     const p = K.personFromProfile(profiles, popid, why, hood);

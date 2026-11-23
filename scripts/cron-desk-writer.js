@@ -1356,7 +1356,8 @@ async function main() {
   // else. Fails open: a seat with neither wakes as before. Not under the bare test prompt, which swaps its own boot in.
   let whoBlock = '';
   if (PERSONA && (!TEST_BARE || TEST_SEAT)) {
-    const who = await require('./reporterIdentity').reporterIdentity({ popid: PERSONA_POPID, agentDir: AGENT_DIR });
+    // --no-essence (pipeline.111): a seat whose bio is its seat file alone gets the sheet line without the voice-file Essence.
+    const who = await require('./reporterIdentity').reporterIdentity({ popid: PERSONA_POPID, agentDir: process.argv.includes('--no-essence') ? null : AGENT_DIR });
     whoBlock = who.block ? who.block + '\n\n' : '';
     console.log('identity: sheetChars=' + who.sheet.length + ' essenceChars=' + who.essence.length +
       (who.voiceFile ? ' voice=' + path.basename(who.voiceFile) : '') + (who.notes.length ? ' (' + who.notes.join('; ') + ')' : ''));

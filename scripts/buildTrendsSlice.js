@@ -12,30 +12,43 @@
  *     (adults/students deltas per hood; the drift that IS live).
  *   Story_Hook_Deck — name-matched, plus NEIGHBORHOOD_BOOM / RISING / COOLING /
  *     CITIZEN_RELOCATED / RENT_BURDEN_CRISIS by domain.
- * Not yet readable: the evening-media slate (what Oakland is watching) lives in
- * S.eveningMedia → world-summary texture, not a dumped tab — noted for the
- * persona build (her roster themes are streaming/mood).
+ * pipeline.111 (builder 2026-11-22: "celeste seems to be more about what shows are trending and who is watching it and
+ * where … undocked watch parties"): what Oakland is watching and doing together —
+ *   output/world_summary_c{N}.md ## Evening Texture — the show slate (TV, movies, broadcast, the streaming trend)
+ *   LifeHistory_Log (this Cycle) — UNDOCKED's audience (source:undocked: who watched, argued, wagered, where),
+ *     game-night watchers (the game-night-texture row's citizens, their own sports lines), and the moments the
+ *     most citizens shared this week, counted
+ *   the city's mood across the last three Cycles (world summary)
+ * The engine ties a watcher to UNDOCKED and the A's only; no row says who watched which show (a trending page is
+ * a future build). No code-written angle or hook.
  *   The pulse (pipeline.70 seam 3) — output/cron-compare/pulse_c{N}.json from buildPulseSlice.js:
  *     what the citizens' own pages are talking about (THE PAGES SAY) and the loudest voice on each
  *     of the top themes as a person on the record. Absent pulse = no section, a note, nothing else.
  * Artifacts: output/slices/c{N}/celeste-tran.md · output/cron-compare/trends_slice_c{N}.json
  */
 'use strict';
+const fs = require('fs');
+const path = require('path');
 const K = require('./beatSliceKit');
 const pulseSlice = require('./buildPulseSlice');
 
 const SEAT = {
   slug: 'celeste-tran', name: 'Celeste Tran', popid: 'POP-00164', desk: 'wire',
   kind: 'beat-trends', domain: 'trends', artifact: 'trends', builder: 'buildTrendsSlice.js',
-  version: 'TRENDS-SLICE-4', nameRe: /celeste\s*tran/i,
-  tabs: ['Cultural_Ledger', 'Neighborhood_Demographics', 'Story_Hook_Deck'],
+  version: 'TRENDS-SLICE-6', nameRe: /celeste\s*tran/i,
+  tabs: ['Cultural_Ledger', 'Neighborhood_Demographics', 'LifeHistory_Log'],
   // + output/cron-compare/pulse_c{N}.json (pipeline.70), read soft
-  approach: 'Social-trends approach: this slice is what the city is doing together — the names climbing the culture record, where people are moving, what the city\'s hooks say is shifting. Fast, reactive, grounded: a trend claim needs a window and a number from this slice. The names and moves are real; the group chat, the binge-night, the collective mood swing are yours.',
-  roomIsYours: 'the group chat, the third rewatch, who suddenly has an opinion about something nobody mentioned last month, what the city collectively decided to care about',
+  approach: '',
+  roomIsYours: '',
   build
 };
 
 const ACTIVE_RE = /inactive|retired|closed/i;
+const PEOPLE_CAP = 40;
+const UNDOCKED_PEOPLE = 12;
+const GAME_PEOPLE = 8;
+const SHARED_MIN = 5;
+const SHARED_TOP = 12;
 
 function build(cycle, { root, beats, profiles }) {
   // pipeline.81: mentions gained since the previous dump, keyed by CUL-ID (Name as fallback).
@@ -84,7 +97,9 @@ function build(cycle, { root, beats, profiles }) {
   // sighted this cycle, then the lifetime count. A figure that did not move never leads —
   // a lifetime leader would hand the seat the same angle every cycle (C109–C111).
   const movedNow = f => hasPrevCul ? (f.gained != null && f.gained > 0) : f.lastSeen === Number(cycle) && f.mediaCount > 0;
-  const talkedAbout = figures.filter(f => f.mediaCount != null && movedNow(f))
+  // pipeline.111 (builder 2026-11-22: "1 and 2 yes"): A's players rising are the sports desk's; the paper's staff are not hers.
+  const notHers = f => /^sports$/i.test(String(f.domain || '')) || f.popids.some(id => K.isMediaStaff(profiles, id));
+  const talkedAbout = figures.filter(f => !notHers(f) && f.mediaCount != null && movedNow(f))
     .sort((a, b) => ((b.gained || 0) - (a.gained || 0)) ||
       ((b.lastSeen === Number(cycle)) - (a.lastSeen === Number(cycle))) ||
       (b.mediaCount - a.mediaCount) || ((b.fame || 0) - (a.fame || 0)));
@@ -104,7 +119,7 @@ function build(cycle, { root, beats, profiles }) {
     }
   }
   // Who just appeared.
-  const appeared = figures.filter(f => f.firstSeen != null && f.firstSeen >= cycle - 1 && !seenNames.has(f.name));
+  const appeared = figures.filter(f => !notHers(f) && f.firstSeen != null && f.firstSeen >= cycle - 1 && !seenNames.has(f.name));
   for (const f of appeared.slice(0, 2)) {
     seenNames.add(f.name);
     facts.push({ text: f.name + (f.domain ? ' (' + f.domain + ')' : '') + ' — new on the culture record C' + f.firstSeen, src: culSrc });
@@ -130,8 +145,55 @@ function build(cycle, { root, beats, profiles }) {
     });
   }
 
-  const hooks = K.domainHooks(beats, cycle, SEAT.name,
-    /^(NEIGHBORHOOD_BOOM|NEIGHBORHOOD_RISING|NEIGHBORHOOD_COOLING|CITIZEN_RELOCATED|RENT_BURDEN_CRISIS)$/).slice(0, 8);
+  // pipeline.111: what Oakland is watching and doing together this week.
+  const add = (popid, why) => {
+    const id = String(popid || '').toUpperCase();
+    if (!/^POP-\d+$/.test(id) || id === SEAT.popid || K.isMediaStaff(profiles, id) || people.some(p => p.popid === id) || people.length >= PEOPLE_CAP) return;
+    const p = K.personFromProfile(profiles, id, why);
+    if (!p) return;
+    p.profile = p.profile + ' — ' + why;   // the reason rides where every packet prints the person
+    people.push(p);
+  };
+  const wsFile = path.join(root, 'output', 'world_summary_c' + cycle + '.md');
+  const ws = fs.existsSync(wsFile) ? fs.readFileSync(wsFile, 'utf8').split('\n') : [];
+  const evI = ws.findIndex(l => l.startsWith('## Evening Texture'));
+  for (let k = evI + 1; evI >= 0 && k < ws.length && !ws[k].startsWith('#'); k++) {
+    const t = ws[k].trim().replace(/\*\*/g, '');
+    if (/^- (Evening media TV|Evening media movies|Sports broadcast|Streaming trend):/.test(t)) facts.push({ text: t.slice(2), src: 'output/world_summary_c' + cycle + '.md ## Evening Texture' });
+  }
+  const mood = ws.find(l => /^- \*\*City sentiment:\*\* C\d+/.test(l));
+  if (mood) facts.push({ text: 'City mood ' + mood.replace(/^- \*\*City sentiment:\*\*\s*/, ''), src: 'output/world_summary_c' + cycle + '.md (Riley_Digest CitySentiment)' });
+
+  const life = (beats.LifeHistory_Log || []).filter(r => String(r.Cycle) === String(cycle) && String(r.EventText || '').trim());
+  const undocked = life.filter(r => /(^|\|)Undocked-Audience(\||$)/.test(String(r.EventTag || '')));
+  if (undocked.length) {
+    const kinds = {};
+    for (const r of undocked) { const k = (String(r.EventTag).match(/ecl:kind:([^|]+)/) || [])[1] || 'watch'; kinds[k] = (kinds[k] || 0) + 1; }
+    const hoods = new Set(undocked.map(r => r.Neighborhood).filter(Boolean));
+    facts.push({ text: 'UNDOCKED audience C' + cycle + ': ' + undocked.length + ' citizens in ' + hoods.size + ' neighborhoods — ' +
+      Object.entries(kinds).sort((a, b) => b[1] - a[1]).map(([k, n]) => n + ' ' + k).join(', '), src: 'output/beats/LifeHistory_Log.jsonl @C' + cycle + ' Undocked-Audience' });
+    for (const r of undocked.slice(0, UNDOCKED_PEOPLE)) add(r.POPID, 'UNDOCKED audience, C' + cycle + ': ' + String(r.EventText).trim());
+  }
+  const gn = ws.find(l => /^- game-night-texture\b/.test(l));
+  if (gn) {
+    facts.push({ text: gn.slice(2), src: 'output/world_summary_c' + cycle + '.md ## What Moved › game-night-texture (Ripple_Ledger)' });
+    for (const pop of (gn.match(/POP-\d+/g) || []).slice(0, GAME_PEOPLE)) {
+      const own = life.find(r => String(r.POPID).toUpperCase() === pop && /source:sports\b/.test(String(r.EventTag || '')));
+      add(pop, 'game night shaped their day, C' + cycle + (own ? ': ' + String(own.EventText).trim() : ''));
+    }
+  }
+  const shared = new Map();
+  for (const r of life) {
+    const t = String(r.EventText).replace(/\s+near\s+.*$/i, '').trim();
+    if (!shared.has(t)) shared.set(t, []);
+    shared.get(t).push(r);
+  }
+  const top = [...shared.entries()].filter(([, rs]) => rs.length >= SHARED_MIN).sort((a, b) => b[1].length - a[1].length).slice(0, SHARED_TOP);
+  for (const [t, rs] of top) {
+    const hoods = new Set(rs.map(r => r.Neighborhood).filter(Boolean));
+    facts.push({ text: rs.length + ' citizens in ' + hoods.size + ' neighborhoods, C' + cycle + ': ' + t, src: 'output/beats/LifeHistory_Log.jsonl @C' + cycle + ' (shared line, counted)' });
+    for (const r of rs.slice(0, 1)) add(r.POPID, 'one of ' + rs.length + ' citizens this cycle who ' + t);
+  }
 
   // pipeline.70 seam 3: the pages. The loudest voice on each of the top three themes becomes a
   // person on the record (her sources), the top five themes ride as colour. Athletes count like
@@ -147,33 +209,22 @@ function build(cycle, { root, beats, profiles }) {
     }
   }
 
-  const lead = talkedAbout[0];
-  const seatHood = (profiles && profiles.get && profiles.get(SEAT.popid) && String(profiles.get(SEAT.popid).Neighborhood || '').trim()) || null;
-  const label = lead
-    ? lead.name + ' ' + movedText(lead) + (moves.length ? '; ' + moves[0].hood + ' moves the most' : '')
-    : hasPrevCul
-      ? (moves.length ? moves[0].hood + ' moves the most; the culture record is quiet this cycle' : 'a quiet week on the culture record')
-      : (moves.length ? moves[0].hood + ' moves the most; culture-record movement unavailable this cycle' : 'culture-record movement unavailable this cycle');
+  if (!facts.length && !people.length) return K.emptySlice(SEAT, cycle, 'nothing on the trends record this cycle');
   return K.makeSlice(SEAT, cycle, beats, {
-    // hood: the lead figure's when one moved; else her own block (pipeline.81), then the biggest move.
-    ref: culSrc, hood: (lead && lead.hood) || seatHood || (moves[0] && moves[0].hood) || null, label,
-    angle: label + ' — what Oakland is doing together this week',
-    hookLine: lead
-      ? lead.name + ' — ' + movedText(lead) + (lead.trend ? ', ' + lead.trend : '') + '. The trend is the story; the mood is yours.'
-      : 'Nobody spiked this week — a flat trend line is also a story.',
-    facts, people,
+    ref: 'the trends record of C' + cycle, hood: null, label: 'the trends record of C' + cycle,
+    angle: 'the trends record of C' + cycle, hookLine: '',
+    facts, people, peopleCap: PEOPLE_CAP, factCap: Math.max(12, facts.length),
     deltas: { state: prev.state, vs: prev.vs },
-    hooks,
+    hooks: [],
     pageVoices,
-    note: [baselineNote, talkedAbout.length || !hasPrevCul ? null : 'no figure on the culture record moved this cycle',
-      people.length ? null : 'no ledger citizen on the culture record or the pages this cycle',
-      pulse ? null : 'no pulse on disk for this Cycle (buildPulseSlice.js) — the pages are silent in this slice'].filter(Boolean).join('; ') || null,
-    extra: { talkedAbout: talkedAbout.length, appeared: appeared.length, moves: moves.length,
+    note: [baselineNote, pulse ? null : 'no pulse on disk for this Cycle (buildPulseSlice.js) — the pages are silent in this slice'].filter(Boolean).join('; ') || null,
+    extra: { talkedAbout: talkedAbout.length, appeared: appeared.length, moves: moves.length, undocked: undocked.length,
       pulse: pulse ? { generatedAt: pulse.generatedAt, docs: pulse.counted.docs, citizens: pulse.counted.citizens } : null }
   });
 }
 
+const sitsOutWhenEmpty = true;
 const W = K.wire(SEAT);
 if (require.main === module) W.main();
-module.exports = { SEAT, loadSlice: W.load, buildTrendsSlice: W.build, writeTrendsSlice: W.write, loadTrendsSlice: W.load,
+module.exports = { SEAT, sitsOutWhenEmpty, loadSlice: W.load, buildTrendsSlice: W.build, writeTrendsSlice: W.write, loadTrendsSlice: W.load,
   isTrendsSeat: W.isSeat, assignmentFromSlice: W.assignmentFromSlice, enrichAssignment: W.enrichAssignment, slicePaths: W.paths };

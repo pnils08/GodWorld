@@ -204,7 +204,7 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
   // media wake work"): a reporter is not told "you are not a writer", and reads the Essence of their own voice file,
   // the same lines the write wake opens on. '' for everyone who holds no seat; their opening is unchanged.
   let written = '';
-  try { written = require('./reporterIdentity').essenceForPop(c.popId); } catch (e) { written = ''; }
+  try { written = ARGV.includes('--no-essence') ? '' : require('./reporterIdentity').essenceForPop(c.popId); } catch (e) { written = ''; }   // --no-essence: pipeline.111, a seat whose bio is its seat file alone
   const station = written ? '' : stationLine(c, !!ownFeed) + ' ';
   const identity = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. ${station}Your temperament: ${disp}.` + (written ? '\n\n' + written : '');
   const system = REPORTER_WAKE ? identity + '\n\n' + REPORTER_SEAT : interviewMode && !livedContextAllowed

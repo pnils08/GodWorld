@@ -591,8 +591,9 @@ try {
     ]);
     const q = trends.buildTrendsSlice(CYCLE, { root });
     fs.rmSync(pd, { recursive: true, force: true });
-    return /^Test New Chef gained 1 mention this cycle \(1 total\)/.test(x.story.label) && !x.facts.some(f => /Test Rising Musician/.test(f.text)) &&
-      /quiet/.test(q.story.label) && !q.facts.some(f => /gained/.test(f.text));
+    // pipeline.111: no code-written label; the mover is the first fact on her record.
+    return /^Test New Chef .*gained 1 mention this cycle \(1 total\)/.test(x.facts[0].text) && !x.facts.some(f => /Test Rising Musician/.test(f.text)) &&
+      !q.facts.some(f => /gained/.test(f.text));
   })());
   ok('celeste: a stale or same-cycle prev/ is not last week (codex 2026-10-16) — no measured gain, never "quiet"', (() => {
     const pd = path.join(output, 'beats', 'prev');
@@ -634,14 +635,14 @@ try {
     fs.rmSync(pd, { recursive: true, force: true });
     return x.facts.some(f => /Movement vs C102: Downtown \+60 people/.test(f.text));
   })());
-  ok('celeste: NEIGHBORHOOD_RISING hook by domain', ct.prewrite.hooks.some(h => /Downtown is rising/.test(h.text)));
+  ok('celeste: no hook, no code-written angle (pipeline.111)', ct.prewrite.hooks.length === 0 && ct.hood === null);
   ok('celeste: CELEBRITY/FAME_WATCH are not hers', !ct.prewrite.hooks.some(h => /gala|gaining attention/.test(h.text)));
 
   console.log('typed packet (LEP/2) per seat:');
   for (const [label, slice, popid] of [['trevor', t, 'POP-00155'], ['lila', h, 'POP-00154'], ['angela', s, 'POP-00156'], ['noah', e, 'POP-00157'], ['graye', f, 'POP-00012'], ['rachel', r, 'POP-00057'], ['kai', k, 'POP-00158'], ['sharon', sh, 'POP-00159'], ['maria', m, 'POP-00013'], ['selena', sg, 'POP-00591'], ['talia', tf, 'POP-00592'], ['celeste', ct, 'POP-00164']]) {
     const pk = v2.buildAnglePacket({ cycle: CYCLE, desk: slice.seat.desk, reporter: { popid, name: slice.seat.name }, story: slice.story, approach: slice.approach, slice, lane: [] });
     const b = pk.task.creativeBrief;
-    ok(label + ': brief beat-slice with facts + room', b && b.kind === 'beat-slice' && b.facts.length >= 1 && (['sharon', 'maria', 'kai'].includes(label) || !!b.roomIsYours));   // seat-file seats: no room line (pipeline.111)
+    ok(label + ': brief beat-slice with facts + room', b && b.kind === 'beat-slice' && b.facts.length >= 1 && (['sharon', 'maria', 'kai', 'celeste'].includes(label) || !!b.roomIsYours));   // seat-file seats: no room line (pipeline.111)
     ok(label + ': every anchor fact is a known FACT sourced to a file on disk', slice.prewrite.anchorFacts.every(text => pk.known.some(k => k.text === text && /^output\//.test(k.src))));
     ok(label + ': candidates = the slice\'s people', pk.exposure.candidates.length === slice.citizens.length && pk.exposure.candidates.every(c => slice.citizens.some(p => p.popid === c.pop)));
   }

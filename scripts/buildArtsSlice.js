@@ -18,7 +18,7 @@ const K = require('./beatSliceKit');
 const SEAT = {
   slug: 'kai-marston', name: 'Kai Marston', popid: 'POP-00158', desk: 'culture',
   kind: 'beat-arts', domain: 'arts', artifact: 'arts', builder: 'buildArtsSlice.js',
-  version: 'ARTS-SLICE-2', nameRe: /kai\s*marston/i,
+  version: 'ARTS-SLICE-3', nameRe: /kai\s*marston/i,
   tabs: ['Cultural_Ledger', 'Community_Programs', 'LifeHistory_Log'],
   approach: '',
   roomIsYours: '',
@@ -34,7 +34,7 @@ function build(cycle, { beats, profiles }) {
   const people = [];
   const has = popid => people.some(p => p.popid === popid);
   const add = (popid, why) => {
-    if (popid === SEAT.popid || has(popid) || people.length >= PEOPLE_CAP) return;
+    if (popid === SEAT.popid || K.isMediaStaff(profiles, popid) || has(popid) || people.length >= PEOPLE_CAP) return;
     const p = K.personFromProfile(profiles, popid, why);
     if (!p) return;
     p.profile = p.profile + ' — ' + why;   // the reason rides where every packet prints the person
@@ -50,7 +50,7 @@ function build(cycle, { beats, profiles }) {
     .sort((a, b) => (K.num(b.r.FameScore) || 0) - (K.num(a.r.FameScore) || 0));
   for (const { r, popid } of figures) {
     const id = popid.toUpperCase();
-    if (id === SEAT.popid) continue;
+    if (id === SEAT.popid || K.isMediaStaff(profiles, id)) continue;   // the paper's own staff are not his arts figures
     const fame = K.num(r.FameScore);
     // The ledger's Neighborhood is where a sighting was staged, not a home: the citizen row's hood wins (K.figureHood).
     const hood = K.figureHood(profiles, [id], r.Neighborhood).hood;

@@ -104,10 +104,10 @@
       "at": "2026-11-22T23:55:17.335Z"
     },
     "6.1": {
-      "ok": false,
-      "outcome": "fail",
-      "detail": "5 ROLLOUT read(s) still name C117 — read each on live, then flip or re-date its row:\nDUE AT C117 (2026-11-22): 5 read(s) waiting in ROLLOUT §2 — once read, flip or re-date the row:\n  engine.338 [research-build] A former player's next chapter: first question rows landed C116, two on active A's (G-EC40). Wake, intake row, Advancement line: read C117 Sun 2026-11-22\n  engine.349 [research-build] Dials move: the middle counts LIVE 11-19, stage 58 @193 (plan Task 14). Read C117 Sun 2026-11-22: `scripts/dialPulse.js` against leg n, the 13\n  engine.347 [research-build] Saved words reach the dials (builder 11-16): live stage 53. Wed 11-18 job rows read: 7 of 7. Read Sat 11-21 print rows; all fold at C117 Sun 2026-11-22\n  engine.351 [research-build] Intake complete or it waits; arrivals start off 50: LIVE 11-21 stage 65. Read C117 Sun 2026-11-22: held rows, each arrival's start on Dial_Moves\n  engine.339 [research-build] How kids are minted: code LIVE since stage 63, kept (builder 11-21 \"Keep it\"); tests rewritten. Read C117 Sun 2026-11-22: the one grab and what landed\n  + 6 waiting row(s) past their fire or naming none (docLoopStatus.js --lint lists them).",
-      "at": "2026-11-23T00:00:03.351Z"
+      "ok": true,
+      "outcome": "pass",
+      "detail": "judgment entries in; 1 HIGH; 0 reads owed at C117",
+      "at": "2026-11-23T00:19:23.449Z"
     }
   }
 }

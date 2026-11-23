@@ -265,3 +265,13 @@ Step 5.5: Baylight District block stated construction no source line stated; rew
 | governance.59 | C117 ran every step through the runner, each gate recorded in `output/run-cycle/c117.json`; one retry (5.55 quota). Codex hook trust still his | → needs-info |
 
 research-build rows due (engine.338, .339, .347, .349, .351): not read — research-build busy with the builder at 17:57; Step 6.1 waits on them.
+
+### G-EC46 — reads this fire owes (research-build rows, taken by engine-sheet on the builder's word) [judgment]
+Builder 2026-11-22: "you can take those 5". Two read-only agents; findings spot-checked against `execution_log_c117.txt` and git.
+| Row | Read | Outcome |
+|---|---|---|
+| engine.338 | C116: 5 Question rows on 4 citizens; Dillon, Paulson, Abraham declined; Shepard queued Club Coach, never applied (row filed 9 cols right, G-EC70 C116). Design changed 11-21 (`2b8501c8c`): question wake is words-only, no MOVE, no intake row — Shepard's answer is dead, his row unchanged (Head Coach). No re-price of Dillon/Paulson. C117 Question rows: Varek POP-00789, Ramos POP-00041. Plan changelog stops 11-15 | re-date C118 |
+| engine.339 | Grab: POP-01210 Pruitt drawn; match Xavier Williams (Chinatown) not in/beside Fruitvale; nothing lands (log :204). Birth (other door, `createChildRow_`): POP-01250 Ravi Cerrano to Serg Cerrano POP-00523, Fruitvale, HH-0084-367 couple → family (log :157). [observation] Ravi has no LifeHistory_Log row of his own; Serg's Birth row has blank Name/Neighborhood, same as C116's | re-date C118 |
+| engine.347 | 209 Reflection_Intake rows since C116, all applied; 185 moved a dial (= log :244); 24 Flat rows move nothing by design. Sat 11-21 PRINT rows 9 of 9 applied, voice steps reproduce exactly. Varek journal row landed 5:54 PM, after the 5:45 fold → C118 | re-date C118 |
+| engine.349 | dialPulse live C117 vs leg n C117: moved 1,001/981, crossed 28/22, middle-on-all-eight 689/687, low 5/4. The 13: marks 107 → 117 (POP-01041 115 = his newest line). Nobody under 20. [watch] 4 at base sociability 100 (POP-00170/198/210/231), already 100 pre-fire. [untraced] log :244 FUTURE-STAMPED 2 lines (Y3C29 on POP-01030, 01035) gone from the post-fire dump; what removed them not found | re-date C118 |
+| engine.351 | Arrivals: POP-01251 Elijah Davis, POP-01252 Yolanda Ghosh (migration wave, log :164) start off 50, replay matches every dial; 14 `arrival start` Dial_Moves rows, only theirs. Held rows: none (Intake 11 rows all statused; Advancement_Intake1 no `waiting —`) — hold path still bench-only | re-date C118 |

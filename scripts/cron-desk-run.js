@@ -66,6 +66,7 @@ const BEAT_BUILDERS = {
   'elliot-graye': 'buildFaithSlice',
   'rachel-torres': 'buildSafetySlice',
   'kai-marston': 'buildArtsSlice',
+  'mason-ortega': 'buildFoodSlice',   // pipeline.111 (builder 2026-11-22): his own record, off the business desk's food variant
   'sharon-okafor': 'buildLifestyleSlice',
   'maria-keen': 'buildNeighborhoodSlice',
   'selena-grant': 'buildOaksBeatSlice',
@@ -709,7 +710,7 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
   // pipeline.68 Task 2/3: the beat slice for the business desk, and the food
   // variant for Mason Ortega. Built from the beat-tab dump; a missing or stale
   // dump throws here on purpose — no seat is staged on nothing.
-  const foodSeat = !!(persona && persona.name && /mason\s*ortega/i.test(persona.name));
+  const foodSeat = !SEAT_FILE && !!(persona && persona.name && /mason\s*ortega/i.test(persona.name));   // a seat-file Mason reads his own food record (pipeline.111)
   if (desk === 'business' || foodSeat) {
     const { loadEconomicSlice } = require(path.join(__dirname, 'buildEconomicSlice'));
     const es = loadEconomicSlice(cycle, { foodFilter: foodSeat });
@@ -1817,11 +1818,11 @@ async function runAngle(assign) {
     } catch (e) {
       log('simon slice load failed (non-fatal): ' + e.message);
     }
-  } else if (desk === 'business' || personaSlug === 'mason-ortega') {
+  } else if (desk === 'business' || (personaSlug === 'mason-ortega' && !BEAT_BUILDERS[personaSlug])) {
     // pipeline.68: beat slice from the dump. A missing or stale dump throws —
     // the seat does not run on the old signal-only slice or on nothing.
     const { loadEconomicSlice } = require(path.join(__dirname, 'buildEconomicSlice'));
-    economicSlice = loadEconomicSlice(cycle, { foodFilter: personaSlug === 'mason-ortega' });
+    economicSlice = loadEconomicSlice(cycle, { foodFilter: personaSlug === 'mason-ortega' && !BEAT_BUILDERS[personaSlug] });
     if (economicSlice && !economicSlice.empty) {
       story = economicSlice.story || story;
       approach = economicSlice.approach || approach;
@@ -2040,7 +2041,7 @@ async function runAngle(assign) {
         (asker._wallSnippet ? '\n\n' + asker._wallSnippet : '') +
         '\n\nIn third person: name the present fact, the origin you will read from the archive before you write him, ' +
         'and the closing note you ride. Not fan we. Not Anthony board. Not business storefront. Not wire copy.';
-    } else if ((desk === 'business' || personaSlug === 'mason-ortega') && story && economicSlice && !economicSlice.empty) {
+    } else if ((desk === 'business' || (personaSlug === 'mason-ortega' && !BEAT_BUILDERS[personaSlug])) && story && economicSlice && !economicSlice.empty) {
       const food = economicSlice.variant === 'food';
       const sceneBits = economicSlice.prewrite.anchorFacts.slice();
       for (const sd of (economicSlice.seeds || []).slice(0, 2)) {

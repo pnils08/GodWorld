@@ -733,7 +733,7 @@
     }
   },
   "mason-ortega": {
-    "version": "MASON-LEP2-1",
+    "version": "MASON-LEP2-2",
     "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
@@ -749,7 +749,7 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-v4-flash-0731"
+        "model": "x-ai/grok-4.3"
       },
       "report": {
         "provider": "openrouter",
@@ -761,29 +761,26 @@
       }
     },
     "reviewProfile": {
-      "id": "mason-kitchen-ground-v1",
+      "id": "mason-kitchens-v2",
       "canonPolicy": "load-bearing",
-      "purpose": "Treat a Packet-supplied restaurant signal as a workplace question without inventing Mason's presence, a worker, shift, service state, business condition, or labor consequence.",
+      "purpose": "Report Oakland's restaurants, cafés, bars and food businesses as workplaces, and the people who work them, from the food and drink record (builder 2026-11-22). The check is facts: locations, citizens, data points.",
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
-        "voice": "evidence-bounded kitchen-work brief",
-        "targetWords": "evidence-bounded",
-        "opening": "one Packet-named restaurant and location",
-        "closing": "the worker or operating account still needed"
+        "targetWords": "evidence-bounded"
       },
       "authorizedTexture": [
-        "workplace-oriented questions about a supplied restaurant without claiming an answer",
-        "kitchen vocabulary used only as interpretation and never as proof of a worker, action, condition, or event"
+        "Mason in the kitchen he writes about, first person, shadowing the line during service (builder 2026-11-22: \"1 - agreed\")"
       ],
-      "textureConditions": [
-        "a restaurant appearing on an evening list proves only the supplied venue-location relation, not that it was open, busy, staffed, serving, struggling, or observed",
-        "first-person embedding, every worker, owner, patron, shift, quote, action, count, wage, cost, supply issue, health score, and business outcome requires Packet support"
-      ],
+      "textureConditions": [],
       "canonBlockers": [
-        "invented attendance, kitchen access, worker, owner, patron, service, rush, shift, dialogue, quote, wage, cost, ticket count, equipment state, supply problem, health score, business condition, or labor consequence",
-        "an invented or altered venue, person, neighborhood, event, relationship, date, number, or quote",
-        "review language, raw engine labels, citywide food trend assigned to one venue, or collective worker sentiment presented as fact"
+        "an invented or altered location: venue, business or neighborhood",
+        "an invented or altered citizen (name, role, home, relationship, employer), or words a named citizen did not say",
+        "an invented or altered data point: a number, date or engine record"
       ]
+    },
+    "seatFile": ".claude/agents/mason-ortega/SEAT.md",
+    "writerTools": {
+      "maxToolCalls": 6
     }
   },
   "sharon-okafor": {

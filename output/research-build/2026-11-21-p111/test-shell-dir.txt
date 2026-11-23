@@ -7,3 +7,4 @@ maria-run3-trim-noquotes output/test-shell/20261122-173923-maria-keen-day-today-
 maria-run4-trim-noquotes output/test-shell/20261122-174100-maria-keen-day-today-325829
 maria-final output/test-shell/20261122-174814-maria-keen-day-today-343574
 kai-c117 output/test-shell/20261122-234204-kai-marston-day-today-437391
+mason-c117 output/test-shell/20261123-001034-mason-ortega-day-today-458243

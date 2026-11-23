@@ -438,6 +438,7 @@ const BEAT_BUILDERS = {
   'elliot-graye': 'buildFaithSlice',
   'rachel-torres': 'buildSafetySlice',
   'kai-marston': 'buildArtsSlice',
+  'mason-ortega': 'buildFoodSlice',   // pipeline.111 (builder 2026-11-22)
   'sharon-okafor': 'buildLifestyleSlice',
   'maria-keen': 'buildNeighborhoodSlice',
   'selena-grant': 'buildOaksBeatSlice',
@@ -720,13 +721,13 @@ async function buildFanout(date) {
       // throws out of the fanout — the rota is not staged on nothing.
       const {
         enrichAssignment: enrichEconomic,
-        isBusinessDesk,
-        isFoodSeat
+        isBusinessDesk
       } = require(path.join(__dirname, 'buildEconomicSlice'));
       const seats = [];
       const dropped = [];
       for (let i = assignments.length - 1; i >= 0; i--) {
-        if (!isBusinessDesk(assignments[i]) && !isFoodSeat(assignments[i])) continue;
+        // pipeline.111 (builder 2026-11-22): Mason draws his own food record (BEAT_BUILDERS), not the food variant.
+        if (!isBusinessDesk(assignments[i])) continue;
         try {
           const next = enrichEconomic(assignments[i], cycle);
           if (next && next.economicSlice) {

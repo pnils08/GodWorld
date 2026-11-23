@@ -46,11 +46,29 @@ function rosterGate(roster, biz) {
   return { ok: true, detail: `roster ${roster.length} workers at ${new Set(roster.map((r) => r.BIZ_ID)).size} businesses` };
 }
 
+// C117 gap log G-EC42d (builder 2026-11-23 "go on 8"): Step 5.55 hit the Sheets
+// read-per-minute quota twice and passed on a 45 s retry by hand. A step whose
+// scripts only read the sheet and rewrite their own files waits out the minute and
+// runs again, twice at most. Steps that post, spend or append (5 world-data POSTs,
+// 5.5 model call, 5.58 page publish, 5.6 sheet append) never retry on their own.
+const QUOTA_RE = /Quota exceeded for quota metric '[^']*Read requests/i;
+const QUOTA_RETRY_STEPS = new Set(['1', '2.5', '3.5', '4', '5.56', '5.55', '5.7', '5.8', '5.85', '6']);
+const QUOTA_WAIT_SEC = Number(process.env.RUN_CYCLE_QUOTA_WAIT_SEC || 65);   // env: tests only
+let CURRENT_STEP = null;
+
 function run(args, opts = {}) {
-  const r = spawnSync('node', args, { cwd: ROOT, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, timeout: (opts.timeoutSec || 600) * 1000 });
-  if (r.stdout) process.stdout.write(r.stdout);
-  if (r.stderr) process.stderr.write(r.stderr);
-  return { status: r.status, stdout: r.stdout || '', stderr: r.stderr || '', error: r.error };
+  for (let attempt = 0; ; attempt++) {
+    const r = spawnSync('node', args, { cwd: ROOT, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, timeout: (opts.timeoutSec || 600) * 1000 });
+    if (r.stdout) process.stdout.write(r.stdout);
+    if (r.stderr) process.stderr.write(r.stderr);
+    const out = (r.stdout || '') + (r.stderr || '');
+    if (attempt < 2 && QUOTA_RETRY_STEPS.has(CURRENT_STEP) && QUOTA_RE.test(out)) {
+      console.error(`[runCycle] Sheets read quota hit in Step ${CURRENT_STEP} (${args[0]}) — waiting ${QUOTA_WAIT_SEC} s, retry ${attempt + 1} of 2`);
+      spawnSync('sleep', [String(QUOTA_WAIT_SEC)]);
+      continue;
+    }
+    return { status: r.status, stdout: r.stdout || '', stderr: r.stderr || '', error: r.error, quotaRetries: attempt };
+  }
 }
 
 // A step returns { ok, outcome, detail }. outcome names which arm of the
@@ -294,6 +312,7 @@ async function runStep(id, cycle, args) {
   }
   console.log(`=== C${cycle} Step ${id}: ${step.title}`);
   let res;
+  CURRENT_STEP = id;
   try { res = await step.run({ cycle, args }, st.steps[id]); }
   catch (e) { res = { ok: false, detail: `threw: ${e.message}` }; }
   st.steps[id] = { ok: !!res.ok, outcome: res.outcome || (res.ok ? 'pass' : 'fail'), detail: res.detail || '', at: new Date().toISOString() };

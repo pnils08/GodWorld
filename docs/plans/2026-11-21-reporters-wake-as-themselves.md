@@ -73,11 +73,15 @@ On Sharon (2026-11-21): bio — "i like them both and love \"visits places she w
 
 | Review | Lane | Pointer | Result |
 |---|---|---|---|
+| Six reporters, live | agy | [[../../output/antigravity/2026-11-23-review-pipeline111-reporters]] | HOLD — #1–#5 verified and fixed `36f0eec26`; #6–#8 held (low) |
 
 ### Agreed
 
 | # | Item | Held by | Sources |
 |---|---|---|---|
+| A1 | A W1 pass must end the day cleanly at W3 | agy · rb | review #1; cron-desk-run.js runWrite |
+| A2 | Empty record sits the seat out; casino people before movers' workers | agy · rb | review #3 |
+| A3 | Own-record seats never take the evening pack; staff/self/cap gate on every person | agy · rb | review #4, #5 |
 
 ### Needs proof
 
@@ -88,9 +92,13 @@ On Sharon (2026-11-21): bio — "i like them both and love \"visits places she w
 
 | # | Concept | Origin | What it adds | Status |
 |---|---|---|---|---|
+| N1 | Missing world summary / texture file should throw in every builder, not drop sections | agy #6 | loud failure | held (low) |
+| N2 | Cache keyed on version only; prev/ cycle not checked | agy #6 | stale-cache guard | held (low) |
+| N3 | Fanout re-attaches approach; legacy --wake path skips the seat switch | agy #7, #8 | artifact hygiene | held (low; not in the live prompts) |
 
 ## Changelog
 
+- 2026-11-23 (research-build) — Morning tool loop live ("allow them to dig and and be journlists"); agy HOLD folded #1–#5. Jordan and Maria trimmed mornings. `36f0eec26`
 - 2026-11-23 (research-build) — Celeste and Jordan live. Staff off source lists ("1 and 2 yes"); Celeste's Essence back (his allowance); Jordan on Sonnet 5.5 for morning and write ("be curius if sonnet 5.5 would be sufficient"). Gaps for him: a trending page (who watched which show); the engine's per-week business cause.
 - 2026-11-22 (research-build) — Mason live, "mason next": trend = each business's move since last Cycle; the engine keeps no per-week cause (engine gap, his call on a row). Ages ride from the row after a 34-for-20 invention. `f72796514`
 - 2026-11-22 (research-build) — Test-run pieces are not staged (builder: "3" — test runs stay tests; first live pieces Fri 11-27 take the full path). Kai live `11b50a52d`.

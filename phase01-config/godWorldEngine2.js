@@ -465,11 +465,79 @@ function closeCycleFire_(fire, threw, ss, flushErr) {
   return { state: state, problem: problem };
 }
 
+// ============================================================================
+// engine.358 — THE RUN RECORD (builder 2026-11-23: "item 10" · "should this be json? and the
+// goal would be to automate as much as possible"). One JSON record per admitted fire on
+// Engine_Run_Log — the run's numbers, its phase timings, every Logger line — so run-cycle
+// Step 3.5 writes the execution log from the sheet and nobody exports it by hand.
+// Called from runWorldCycle's finally after the fire record closes. Never throws, never
+// retries (the 360 s wall), never writes Engine_Errors. A direct write after the Phase-10
+// executor — SHEETS_MANIFEST §9, the logEngineError_ class. Cells start with '~' (the
+// checkpoint chunk prefix) so Sheets never coerces them; long records split by
+// chunkEncoded_ (cycleCheckpoint.js, surrogate-safe) across rows Part 1..Parts.
+// ============================================================================
+var RUN_RECORD_TAB = 'Engine_Run_Log';
+var RUN_RECORD_CHUNK_CHARS = 45000;
+
+function runRecordLogLines_(raw) {
+  var out = [], lines = String(raw || '').split('\n');
+  for (var i = 0; i < lines.length; i++) {
+    var l = lines[i];
+    if (!l) continue;
+    // the renderer writes these once, from the record — never from a stray copy in the log
+    if (/PHASE_TIMING_(BEGIN|END)/.test(l) || /"totalMs"/.test(l) || /Cycle completed\./.test(l)) continue;
+    out.push(l);
+  }
+  return out;
+}
+
+function writeRunRecord_(ss, fire, outcome) {
+  try {
+    if (!ss || !fire || !fire.admission) return;   // refused or never admitted: no run to record
+    var sh = ss.getSheetByName(RUN_RECORD_TAB);
+    if (!sh) { Logger.log('engine.358: ' + RUN_RECORD_TAB + ' tab missing — run record not written'); return; }
+    var ctx = fire.ctx || null, S = (ctx && ctx.summary) || {};
+    var nowMs = Date.now();
+    var runStart = Number(fire.entryMs) || nowMs;
+    var gen = (fire.checkpoint && fire.checkpoint.gen) ||
+      (ctx && ctx.resumed && ctx.resumed.gen) ||
+      (fire.admission.manifest && fire.admission.manifest.gen) || null;
+    var draws = (ctx && ctx.rng && typeof ctx.rng.draws === 'number') ? ctx.rng.draws
+      : (ctx && ctx.resumed && typeof ctx.resumed.draws === 'number') ? ctx.resumed.draws : null;
+    var record = {
+      cycle: fire.admission.cycle,
+      runStartedAt: new Date(runStart).toISOString(),
+      admissionStartedAt: fire.admission.startedMs ? new Date(Number(fire.admission.startedMs)).toISOString() : null,
+      finishedAt: new Date(nowMs).toISOString(),
+      state: (outcome && outcome.state) || 'unclosed',
+      lifecycle: fire.lifecycle || 'run',
+      checkpointGen: gen,
+      wallMs: nowMs - runStart,
+      timing: ENGINE95_TIMING_DIAG || null,
+      engineErrors: typeof S.engineErrorCount === 'number' ? S.engineErrorCount : null,
+      auditIssues: S.auditIssues ? S.auditIssues.length : null,
+      rngDraws: draws,
+      log: runRecordLogLines_(Logger.getLog())
+    };
+    var chunks = chunkEncoded_(JSON.stringify(record), RUN_RECORD_CHUNK_CHARS);
+    var rows = [];
+    for (var i = 0; i < chunks.length; i++) {
+      rows.push(['~' + record.cycle, '~' + record.runStartedAt, '~' + record.state, '~' + record.lifecycle,
+        '~' + (i + 1), '~' + chunks.length, '~' + chunks[i]]);
+    }
+    sh.getRange(sh.getLastRow() + 1, 1, rows.length, 7).setValues(rows);
+    SpreadsheetApp.flush();
+  } catch (e) {
+    try { Logger.log('engine.358: run record not written — ' + (e && e.message)); } catch (_) { /* nothing left to do */ }
+  }
+}
+
 // The one production entry: the sheet menu, the web trigger, any installed trigger.
 // opts is read only when the web trigger built it ({ web: true, expect: n }) — a menu
 // or trigger event object is ignored.
 function runWorldCycle(opts) {
   var entryMs = Date.now();   // engine.95: the lock + open cost before admission is stamped counts against the wall too
+  ENGINE95_TIMING_DIAG = null;   // engine.358: a record never carries an earlier fire's timing
   var lock = LockService.getScriptLock();
   if (!lock.tryLock(5000)) throw new Error('engine.275: a Cycle is already running — refusing an overlapping fire');
   var fire = { admission: null, ctx: null, entryMs: entryMs, lifecycle: null, checkpoint: null };
@@ -492,6 +560,7 @@ function runWorldCycle(opts) {
     try { SpreadsheetApp.flush(); } catch (fe) { flushErr = fe; }
     try { outcome = closeCycleFire_(fire, threw, ss, flushErr); }
     catch (closeErr) { closeProblem = 'engine.275: the fire record could not be closed (' + closeErr.message + ')'; }
+    writeRunRecord_(ss, fire, outcome);   // engine.358 — best effort, never throws
     try { lock.releaseLock(); } catch (relErr) { /* released at execution end regardless */ }
   }
   // Reached only when the body did not throw: a run that ended but is not a verified

@@ -1,8 +1,8 @@
 {
-  "generated": "2026-11-21",
+  "generated": "2026-11-23",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 179,
-  "functionsMapped": 1774,
+  "functionsMapped": 1778,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -874,6 +874,7 @@
         "phase01-config/godWorldEngine2.js::logEngineError_",
         "phase01-config/godWorldEngine2.js::runWorldCycleLocked_",
         "phase01-config/godWorldEngine2.js::writeDigest_",
+        "phase01-config/godWorldEngine2.js::writeRunRecord_",
         "phase03-population/applyDemographicDrift.js::pushMissingConfigWarning_",
         "phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_",
         "phase06-analysis/applyCivicLoadIndicator.js::applyCivicLoadIndicator_",
@@ -889,6 +890,7 @@
       "readers": [
         "phase01-config/godWorldEngine2.js::logEngineError_",
         "phase01-config/godWorldEngine2.js::runWorldCycleLocked_",
+        "phase01-config/godWorldEngine2.js::writeRunRecord_",
         "phase10-persistence/cycleCheckpoint.js::resumeCore_"
       ]
     },
@@ -4749,6 +4751,12 @@
       "readers": [
         "phase01-config/godWorldEngine2.cycleCount.test.js::mkCtx",
         "phase01-config/godWorldEngine2.js::logEngineError_"
+      ]
+    },
+    "Engine_Run_Log": {
+      "writers": [],
+      "readers": [
+        "phase01-config/godWorldEngine2.js::writeRunRecord_"
       ]
     },
     "World_Population": {

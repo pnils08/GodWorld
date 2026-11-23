@@ -1,6 +1,6 @@
 # Engine Stub Reverse Index
 
-**Generated:** 2026-11-21 by `scripts/stubEngine.js` (mechanical — no LLM).
+**Generated:** 2026-11-23 by `scripts/stubEngine.js` (mechanical — no LLM).
 
 **Purpose:** Cheap lookup — given an `S.*` field or sheet name, find every function that reads or writes it. Companion to `ENGINE_STUB_MAP.md` (forward: function → fields).
 
@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 179 · **Functions mapped:** 1774 · **S.* fields:** 381 · **Sheets:** 63
+**Files scanned:** 179 · **Functions mapped:** 1778 · **S.* fields:** 381 · **Sheets:** 64
 
 ## S.* / ctx.summary reverse index
 
@@ -37,7 +37,7 @@
 | `S.approvalHoodMoodEma` | `phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_` | `phase05-citizens/updateCivicApprovalRatings.js::cityStateScore_`, `phase05-citizens/updateCivicApprovalRatings.js::moodLevelOf_`, `phase09-digest/finalizeCycleState.js::finalizeCycleState_` | 1 | 3 |
 | `S.approvalNeighborhoodEffects` | `phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_`, `phase09-digest/finalizeCycleState.js::finalizeCycleState_` | 1 | 3 |
 | `S.approvalTriggers` | `phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_` | _(none)_ | 1 | 0 |
-| `S.auditIssues` | `phase01-config/godWorldEngine2.js::logEngineError_`, `phase03-population/applyDemographicDrift.js::pushMissingConfigWarning_`, `phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_`, `phase06-analysis/applyCivicLoadIndicator.js::resetCycleAuditIssues_`, `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_` | `phase01-config/godWorldEngine2.js::logEngineError_`, `phase01-config/godWorldEngine2.js::runWorldCycleLocked_`, `phase01-config/godWorldEngine2.js::writeDigest_`, `phase03-population/applyDemographicDrift.js::pushMissingConfigWarning_`, `phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_`, `phase06-analysis/applyCivicLoadIndicator.js::applyCivicLoadIndicator_`, …(+3 more) | 5 | 9 |
+| `S.auditIssues` | `phase01-config/godWorldEngine2.js::logEngineError_`, `phase03-population/applyDemographicDrift.js::pushMissingConfigWarning_`, `phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_`, `phase06-analysis/applyCivicLoadIndicator.js::resetCycleAuditIssues_`, `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_` | `phase01-config/godWorldEngine2.js::logEngineError_`, `phase01-config/godWorldEngine2.js::runWorldCycleLocked_`, `phase01-config/godWorldEngine2.js::writeDigest_`, `phase01-config/godWorldEngine2.js::writeRunRecord_`, `phase03-population/applyDemographicDrift.js::pushMissingConfigWarning_`, `phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_`, …(+4 more) | 5 | 10 |
 | `S.bankRate` | `phase05-citizens/generationalWealthEngine.js::processBankRate_` | `phase05-citizens/generationalWealthEngine.js::processMoneyLoop_`, `phase09-digest/finalizeCycleState.js::finalizeCycleState_` | 1 | 2 |
 | `S.bankRateDesc` | `phase05-citizens/generationalWealthEngine.js::processBankRate_` | `phase05-citizens/generationalWealthEngine.js::processBankRate_` | 1 | 1 |
 | `S.baylightOpenings` | `phase02-world-state/applySportsSeason.js::applySportsSeason_` | `phase02-world-state/applySportsSeason.js::applySportsSeason_` | 1 | 1 |
@@ -161,7 +161,7 @@
 | `S.employmentDistress` | `phase03-population/applyDemographicDrift.js::applyDemographicDrift_` | _(none)_ | 1 | 0 |
 | `S.enforcement` | _(none)_ | `phase03-population/updateCrimeMetrics.js::updateCrimeMetrics_Phase3_` | 0 | 1 |
 | `S.engine299` | `phase04-events/generateGameModeMicroEvents.js::generateGameModeMicroEvents_`, `phase04-events/generateGenericCitizenMicroEvent.js::generateGenericCitizenMicroEvents_`, `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_`, `phase05-citizens/generateCivicModeEvents.js::generateCivicModeEvents_`, `phase05-citizens/generateMediaModeEvents.js::generateMediaModeEvents_`, `phase05-citizens/runAsUniversePipeline.js::runAsUniversePipeline_`, …(+5 more) | `phase04-events/generateGameModeMicroEvents.js::generateGameModeMicroEvents_`, `phase04-events/generateGenericCitizenMicroEvent.js::generateGenericCitizenMicroEvents_`, `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_`, `phase05-citizens/generateCivicModeEvents.js::generateCivicModeEvents_`, `phase05-citizens/generateMediaModeEvents.js::generateMediaModeEvents_`, `phase05-citizens/runAsUniversePipeline.js::runAsUniversePipeline_`, …(+6 more) | 11 | 12 |
-| `S.engineErrorCount` | `phase01-config/godWorldEngine2.js::logEngineError_` | `phase01-config/godWorldEngine2.js::logEngineError_`, `phase01-config/godWorldEngine2.js::runWorldCycleLocked_`, `phase10-persistence/cycleCheckpoint.js::resumeCore_` | 1 | 3 |
+| `S.engineErrorCount` | `phase01-config/godWorldEngine2.js::logEngineError_` | `phase01-config/godWorldEngine2.js::logEngineError_`, `phase01-config/godWorldEngine2.js::runWorldCycleLocked_`, `phase01-config/godWorldEngine2.js::writeRunRecord_`, `phase10-persistence/cycleCheckpoint.js::resumeCore_` | 1 | 4 |
 | `S.engineEvents` | `phase06-analysis/filterNoiseEvents.js::filterNoiseEvents_` | `phase05-citizens/applyNamedCitizenSpotlight.js::applyNamedCitizenSpotlights_`, `phase06-analysis/filterNoiseEvents.js::filterNoiseEvents_`, `phase06-analysis/prioritizeEvents.js::prioritizeEvents_` | 1 | 3 |
 | `S.eveningFood` | `phase07-evening-media/buildEveningFood.js::buildEveningFood_` | `phase01-config/godWorldEngine2.js::writeDigest_`, `phase07-evening-media/applyStorySeeds.js::applyStorySeeds_`, `phase09-digest/finalizeCycleState.js::snapshotEveningForCarryForward_`, `phase10-persistence/buildCyclePacket.js::buildCyclePacket_` | 1 | 4 |
 | `S.eveningMedia` | `phase07-evening-media/buildEveningMedia.js::buildEveningMedia_` | `phase01-config/godWorldEngine2.js::writeDigest_`, `phase07-evening-media/applyStorySeeds.js::applyStorySeeds_`, `phase07-evening-media/mediaFeedbackEngine.js::analyzeEntertainmentSignals_`, `phase09-digest/finalizeCycleState.js::snapshotEveningForCarryForward_` | 1 | 4 |
@@ -443,6 +443,7 @@ Sheet detection: `getSheetByName`, `queue*Intent_`, known sheet-name string + wr
 | `Edition_Coverage_Ratings` | `phase02-world-state/applyEditionCoverageEffects.js::applyEditionCoverageEffects_` | `phase02-world-state/applyEditionCoverageEffects.js::applyEditionCoverageEffects_`, `phase07-evening-media/applyStorySeeds.js::applyStorySeeds_` | 1 | 2 |
 | `Election_Log` | _(none)_ | `phase10-persistence/buildCyclePacket.js::getCivicContextForPacket_` | 0 | 1 |
 | `Engine_Errors` | _(none)_ | `phase01-config/godWorldEngine2.cycleCount.test.js::mkCtx`, `phase01-config/godWorldEngine2.js::logEngineError_` | 0 | 2 |
+| `Engine_Run_Log` | _(none)_ | `phase01-config/godWorldEngine2.js::writeRunRecord_` | 0 | 1 |
 | `Event_Arc_Ledger` | `phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_` | `phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_`, `phase05-citizens/citizenContextBuilder.js::getArcExposure_`, `phase05-citizens/citizenContextBuilder.js::getWorldState_`, `phase08-v3-chicago/v3preLoader.js::loadActiveArcsFromLedger_` | 1 | 4 |
 | `Event_Content_Ledger` | _(none)_ | `phase02-world-state/loadEventContentLedger.js::loadEventContentLedger_` | 0 | 1 |
 | `Faith_Ledger` | `utilities/ensureFaithLedger.js::batchRecordFaithEvents_`, `utilities/ensureFaithLedger.js::recordFaithEvent_` | `utilities/ensureFaithLedger.js::batchRecordFaithEvents_`, `utilities/ensureFaithLedger.js::getRecentFaithEvents_`, `utilities/ensureFaithLedger.js::recordFaithEvent_` | 2 | 3 |

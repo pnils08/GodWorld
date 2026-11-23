@@ -680,6 +680,24 @@ pointers:
 
 ---
 
+## Engine_Run_Log
+
+- **Rows:** 1
+- **Columns:** 7
+- engine.358 (2026-11-23): one JSON run record per admitted fire, written by `writeRunRecord_` (`godWorldEngine2.js`, `runWorldCycle` finally). Every cell starts with `~`; a long record splits across rows Part 1..Parts of the same Cycle + StartedAt. Read by `scripts/fetchExecutionLog.js` (run-cycle Step 3.5).
+
+| Col | Header |
+|-----|--------|
+| A | Cycle |
+| B | StartedAt — this execution's start (ISO) |
+| C | State — done / failed / aborted / unpersisted / unverified / checkpointed / unclosed |
+| D | Lifecycle — run / checkpointed / resumed / save-failed / … |
+| E | Part |
+| F | Parts |
+| G | RecordJSON — {cycle, runStartedAt, admissionStartedAt, finishedAt, state, lifecycle, checkpointGen, wallMs, timing, engineErrors, auditIssues, rngDraws, log[]} |
+
+---
+
 ## Event_Arc_Ledger
 
 - **Rows:** 656

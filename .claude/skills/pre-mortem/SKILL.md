@@ -25,7 +25,7 @@ node scripts/preMortemScan.js --bench=<sandboxSheetId> > output/pre_mortem_scan.
 
 The script (ES-7 / G-PM7) runs scans **0, 1, 2, 5** deterministically, driven by the data file `.claude/skills/pre-mortem/known_gaps.json` (function-name-keyed acknowledged sites — update the JSON with code changes, never skill prose). **Exit codes:** `0` SAFE TO RUN (no CRITICAL) · `1` FIX BEFORE RUNNING (≥1 CRITICAL) · `2` scan error. Stop the cycle on exit 1.
 
-> **`--since` note (still a trap at C108 — pass it explicitly; the fire date is the first line of `output/execution_log_c{XX-1}.txt`):** auto-derive reads SESSION_CONTEXT's "Last Updated" header. After a same-day session close that date is *today*, so scan 0 reports "none — no engine touches" even when commits landed today. Pass `--since=<last-cycle-ship-date>` to scan a real window.
+> **`--since` (2026-11-23):** `node scripts/runCycle.js step 2 {XX}` passes `--since=<the previous chain's confirmed fire, its record's Step 3 time>` (C117 G-EC42a); a hand run passes it explicitly. The old auto-derive (SESSION_CONTEXT "Last Updated") no longer resolves — that header is gone.
 
 Real output (C95 shape):
 

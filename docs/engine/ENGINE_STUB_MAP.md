@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-11-21 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-11-23 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -216,6 +216,13 @@
 
 - **closeCycleFire_(fire, threw, ss, flushErr)**
   Sheets: World_Config
+
+- **runRecordLogLines_(raw)**
+
+- **writeRunRecord_(ss, fire, outcome)**
+  Reads: S.auditIssues, S.engineErrorCount
+  Sheets: Engine_Run_Log
+  RNG: ctx.rng / safeRand_(ctx)
 
 - **runWorldCycle(opts)**
 
@@ -2973,6 +2980,10 @@
 
 - **createSeededRng_(seed, stateOverride)**
 
+- **migrationCellNum_(v)**
+
+- **migrationCrimeTerm_(crime, med, band)**
+
 - **applyMigrationDrift_(ctx)**
   Reads: S.cityDynamics, S.economicMood, S.economicMoodDesc, S.economicRipples, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.manualMigrationInputs, S.neighborhoodEconomies, S.rngState, S.sportsCity, S.sportsSeason, S.weather, S.worldEvents
   Writes: S.economicMood, S.economicMoodDesc, S.migrationDrift, S.migrationDriftFactors, S.migrationEconomicLink, S.neighborhoodEconomies, S.neighborhoodEconomyFeedback, S.neighborhoodMigration, S.rngState
@@ -4892,4 +4903,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 179
-**Functions mapped:** 1774
+**Functions mapped:** 1778

@@ -68,16 +68,16 @@ Runner: `node scripts/runCycle.js step 3 {XX}` — reads `Neighborhood_Map` max 
 
 **Gate:** live sheet reads cycle {XX}.
 
-### Step 3.5: Execution log to disk (S456)
+### Step 3.5: Execution log to disk (S456; the engine's own record since engine.358)
 
-The builder exports the Apps Script execution log to Drive as `Execution log LIVE {XX}.txt` (or shares a link). Save it next to the cycle's artifacts — the review reads phase timings, warnings and the `Cycle completed` line from disk, not from a pasted transcript, and a later session can diff C{XX} against C{XX−1}.
+The engine writes its own run record to the `Engine_Run_Log` tab at the end of every fire (engine.358, builder 2026-11-23): the run's numbers, its phase timings and every Logger line, as JSON. The step reads the latest `done` record for C{XX} with real timings (a resumed fire's log joined after its checkpointed part) and writes `output/execution_log_c{XX}.txt` — the shape the gate, the review and the reads already parse — plus the record as `output/execution_log_c{XX}.json`. No such record (the fire died before writing, or a PROD older than engine.358) → the old way: the builder exports the log to Drive as `Execution log LIVE {XX}.txt` (or shares a link) and the step fetches it. The rendered log carries no `console.warn` lines (they never reach Logger), so it reports `warnings: 0`.
 
 ```bash
 node scripts/runCycle.js step 3.5 {XX}                           # fetchExecutionLog --summary: Drive search by name (service account reads anything shared with it)
 node scripts/runCycle.js step 3.5 {XX} --file <drive id or url>  # explicit file
 ```
 
-Output: `output/execution_log_c{XX}.txt`. `--summary` prints phases / totalMs / failed phases / slowest five / warning and error counts. **Blocking since governance.59:** if the log is not on Drive yet, ask the builder to export it; the chain waits.
+Output: `output/execution_log_c{XX}.txt`. `--summary` prints phases / totalMs / failed phases / slowest five / warning and error counts. **Blocking since governance.59:** if there is no run record and the log is not on Drive yet, ask the builder to export it; the chain waits.
 
 **Gate:** file on disk with `Execution started` … `Cycle completed`; `failedPhases: []`.
 

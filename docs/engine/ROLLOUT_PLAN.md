@@ -23,7 +23,6 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | engine.328 | Ledger OriginGame column: remove it, free the column (builder 10-31). Own session first: blast radius (22 files, 11 engine refs), naming, then his go | needs-info | research-build | `docs/SIMULATION_LEDGER.md` |
 | pipeline.73 | Tamsin + Ines unattended writes: read done (Ines 10-31 Sonnet 2/4, not printed). Left: plan tasks 2–3, his: citizens' slices, minted journalists | needs-info | research-build | docs/plans/2026-10-11-media-extension.md |
 | governance.59 | Run-cycle step gate (builder 11-09): C116 and C117 closed through the runner, every step recorded. Left: his trust on the codex hook | needs-info | engine-sheet | [[../plans/2026-11-09-run-cycle-step-gate]] |
-| run-cycle.c117 | RUN-CYCLE C117 GAP LOG — S774 (engine-sheet), 41 entries, 1 HIGH | needs-info | engine-sheet | `output/production_log_run_cycle_c117_gaps.md` |
 
 ## 2. Waiting on a fire — dated or organic (live-observing, blocked)
 
@@ -99,6 +98,9 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| run-cycle.c117 | RUN-CYCLE C117 GAP LOG — S774 (engine-sheet), 53 entries, 1 HIGH: closed 2026-11-23 (G-EC53) | done-pending-archive | engine-sheet | `output/production_log_run_cycle_c117_gaps.md` |
+| engine.362 | Header-drift backlog: 24 standing field-name flags in the run-cycle gap log (since ≤C110, none new) — triage real misses vs detector noise | ready | engine-sheet | `output/production_log_run_cycle_c117_gaps.md` G-EC3–16, G-EC22–31 |
+| engine.363 | The gap log's four runtime checks (phase-skip, phase-ordering, cohort-collision, silent-fail) built on Engine_Run_Log, now the run-log ingest path | ready | engine-sheet | `output/production_log_run_cycle_c117_gaps.md` G-EC32–36 · [[../plans/2026-11-23-engine-writes-its-run-record]] |
 | pipeline.116 | Sports-feed names split only outside brackets (builder 11-23 "lets move to 6"; C117 G-EC43): pre-flight, world summary, citizen wake. Done | done-pending-archive | engine-sheet | `output/production_log_run_cycle_c117_gaps.md` G-EC43 |
 | engine.352 | Authored citizens' sheet rows and June essence entries read against what he wrote of them (builder 11-17): 43. Read first; each row changes on his word | ready | research-build | `output/production_log_run_cycle_c116_gaps.md` G-EC56 |
 | engine.348 | Workers' records the engine does not yet produce (builder 11-16), e.g. the fire chief's one record. Own session after the worker template | ready | engine-sheet | [[../research/2026-11-15-worker-records-all-tabs]] |

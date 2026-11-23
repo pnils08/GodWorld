@@ -1,0 +1,48 @@
+AIM = BENCH (script read the bench marker)
+== push code 9c110a71b
+bench pull-back byte-identical to e358.sha256
+== sync from live
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+{"fireGuardMinutes":"0","cycleCountFormatted":"117","cycleCountIsNumber":true}
+clearfire 119: {"ok":true,"cleared":{"cycle":119,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+appended 5 to Edition_Coverage_Ratings; marked rows on the tab now 5
+appended 33 to Citizen_Media_Usage; marked rows on the tab now 33
+appended 2 to Oakland_Sports_Feed; marked rows on the tab now 2
+bench cycleCount 117
+fire C118 rc=0 "verdict": "PASS" "wallS": 216
+{
+ "rowsTotal": 2,
+ "recordsTotal": 1,
+ "recordsForCycle": [
+  {
+   "state": "done",
+   "lifecycle": "run",
+   "start": "2026-11-23T07:32:50.809Z"
+  }
+ ],
+ "checks": {
+  "cellsTilde": true,
+  "parts": 2,
+  "phases": 132,
+  "failedPhases": [],
+  "totalMs": 200217,
+  "wallMs": 209322,
+  "gate": true,
+  "logLines": 298,
+  "recordChars": 49723,
+  "noTimingInLog": true,
+  "compressLine": true,
+  "promotionsLine": true,
+  "familyLine": true,
+  "engineErrors": 0,
+  "rngDraws": 46993,
+  "state": "done",
+  "lifecycle": "run",
+  "timingEqualsWebResponse": true
+ },
+ "verdict": "PASS"
+}
+read exit 0
+== final sync from live
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.

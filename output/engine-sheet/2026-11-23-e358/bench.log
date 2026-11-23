@@ -1,0 +1,63 @@
+AIM = BENCH (script read the bench marker)
+== push code
+bench pull-back byte-identical to e358.sha256
+== sync from live
+  verify Reflection_Intake: bench 3037 rows vs live 3037 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+missing on bench (will create): 1 — Engine_Run_Log
+{"fireGuardMinutes":"0","cycleCountFormatted":"117","cycleCountIsNumber":true}
+door: {"target":"bench","http":200,"ok":true,"record":{"cycle":117,"startedMs":1795325833301,"state":"done","finishedMs":1795326037999},"raw":"{\"cycle\":117,\"starte
+clearfire 117: {"ok":false,"error":"cycleCount 117 is not behind the record (Cycle 117) — nothing to reconcile"}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+-- pause 75 s (read quota)
+Edition_Coverage_Ratings C117: 5 rows (window 116,115,114,113,112,111,110,109)
+Citizen_Media_Usage C117: 33 rows from live C116
+Oakland_Sports_Feed C118: 2 rows
+appended 5 to Edition_Coverage_Ratings; marked rows on the tab now 5
+appended 33 to Citizen_Media_Usage; marked rows on the tab now 33
+appended 2 to Oakland_Sports_Feed; marked rows on the tab now 2
+bench cycleCount 117; Engine_Run_Log rows before: 0
+(a) fire C118 rc=0 "verdict": "PASS" "wallS": 237
+{
+ "rowsTotal": 2,
+ "recordsTotal": 1,
+ "recordsForCycle": [
+  {
+   "state": "done",
+   "lifecycle": "run",
+   "start": "2026-11-23T07:14:14.569Z"
+  }
+ ],
+ "checks": {
+  "cellsTilde": true,
+  "parts": 2,
+  "phases": 132,
+  "failedPhases": [],
+  "totalMs": 220304,
+  "wallMs": 232678,
+  "gate": true,
+  "logLines": 278,
+  "recordChars": 46096,
+  "noTimingInLog": true,
+  "compressLine": true,
+  "promotionsLine": false,
+  "familyLine": true,
+  "engineErrors": null,
+  "rngDraws": 46993,
+  "state": "done",
+  "lifecycle": "run",
+  "timingEqualsWebResponse": true
+ },
+ "verdict": "FAIL"
+}
+(a) read exit 1
+{"http":200,"ok":false,"error":"engine.275: cycleCount is 118, caller expected 117 — refusing a repeated or stale fire"}
+(b) stale-expect fire rc=0 (expect a refusal) rows 2 -> 2
+bench tab Engine_Run_Log -> Engine_Run_Log_away
+(c) tab-away fire C119 rc=0 "verdict": "PASS"
+bench tab Engine_Run_Log_away -> Engine_Run_Log
+(c) rows on the renamed tab after: 2 (was 2)
+== final sync from live
+  verify Reflection_Intake: bench 3037 rows vs live 3037 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+RESULT 1

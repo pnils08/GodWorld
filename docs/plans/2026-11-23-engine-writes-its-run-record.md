@@ -3,7 +3,7 @@ title: Engine Writes Its Run Record Plan
 created: 2026-11-23
 updated: 2026-11-23
 type: plan
-tags: [engine, infrastructure, draft]
+tags: [engine, infrastructure, active]
 sources:
   - output/production_log_run_cycle_c117_gaps.md G-EC42b
   - phase01-config/godWorldEngine2.js (runWorldCycle :471, closeCycleFire_ :410, emitPhaseTimings_ :193)
@@ -41,12 +41,12 @@ Not carried: `console.warn` lines (`priorityEngine.js`) do not reach `Logger.get
 
 | # | Task | Owner | Status |
 |---|------|-------|--------|
-| 1 | Advisor, then one external review (codex if up, else agy) of this plan; fold | es | not started |
+| 1 | Advisor, then one external review (codex if up, else agy) of this plan; fold | es | done — advisor + agy plan HOLD folded |
 | 2 | Builder's go to create `Engine_Run_Log` (header row only) on live; the sandbox gets it from the next live sync (`syncSandboxFromLive.js` creates tabs missing on the bench) | es / builder | done 2026-11-23 — builder "go"; created on live (88 → 89 tabs), header read back |
-| 3 | Engine `writeRunRecord_` + manifest/schema/stub docs | es | not started |
-| 4 | `fetchExecutionLog.js` row-first render, Drive fallback; skill Step 3.5 text | es | not started |
-| 5 | Sandbox proof (research-build has nothing unbenched on the sandbox first; DEPLOY.md: what a live sync does to a sandbox-only tab): (a) a fire from a live sync — the record read back through Step 3.5's own reader equals what the engine wrote; its timing equals the fire's execution-log PHASE_TIMING; the log lines include the P6 BIRTH / compressLifeHistory / checkForPromotions lines; (b) a refused second fire writes no row; (c) a fire with the tab absent completes, one Logger line; (d) a fire that throws still lands its row; (e) checkpoint + resume, if the bench dials allow | es | not started |
-| 6 | PROD push (standing go) with its smoke note; first live read C118 Sun 2026-11-29 — Step 3.5 passes with no export | es | not started |
+| 3 | Engine `writeRunRecord_` + manifest/schema/stub docs | es | done `6556c0980`, `9c110a71b` (0-error fix) |
+| 4 | `fetchExecutionLog.js` row-first render, Drive fallback; skill Step 3.5 text | es | done `6556c0980`, `e03c2bb5e` |
+| 5 | Sandbox proof (research-build has nothing unbenched on the sandbox first; DEPLOY.md: what a live sync does to a sandbox-only tab): (a) a fire from a live sync — the record read back through Step 3.5's own reader equals what the engine wrote; its timing equals the fire's execution-log PHASE_TIMING; the log lines include the P6 BIRTH / compressLifeHistory / checkForPromotions lines; (b) a refused second fire writes no row; (c) a fire with the tab absent completes, one Logger line; (d) a fire that throws still lands its row; (e) checkpoint + resume, if the bench dials allow | es | done — bench (a) (b) (c) PASS on `6556c0980` but (a) read `engineErrors: null`; fixed `9c110a71b`, bench (a) PASS (`output/engine-sheet/2026-11-23-e358/bench2.log`). (d) throw and (e) checkpoint covered by the wiring test §13, not the bench |
+| 6 | PROD push (standing go) with its smoke note; first live read C118 Sun 2026-11-29 — Step 3.5 passes with no export | es | LIVE stage 74 @209 2026-11-23; read C118 owed |
 
 ## Reviews reconciled
 
@@ -76,6 +76,7 @@ Not carried: `console.warn` lines (`priorityEngine.js`) do not reach `Logger.get
 
 ## Changelog
 
+- 2026-11-23 (engine-sheet) — **LIVE PROD stage 74, @209.** Bench PASS on the exact tree; pull-back byte-identical. First live read C118 Sun 2026-11-29.
 - 2026-11-23 (engine-sheet) — agy diff read folded: wiring test §13 (9) + `fetchExecutionLog.test.js` (11), all pass; reader rejects mixed part counts. Engine file unchanged since `6556c0980` (the benched candidate).
 - 2026-11-23 (engine-sheet) — agy plan review HOLD folded (`output/antigravity/2026-11-23-review-engine358-plan.md`): execution start as the key, resume timing never joined, timing/completed lines stripped from the log and read last, latest done with real timings, null guards, `~` cells, no retry, all three stub files.
 - 2026-11-23 (engine-sheet) — Builder "go": `Engine_Run_Log` created on live with its header (Cycle, StartedAt, State, Lifecycle, Part, Parts, RecordJSON), read back.

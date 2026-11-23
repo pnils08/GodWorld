@@ -73,11 +73,11 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | pipeline.112 | Labels off citizens' pages: live 11-19. Read Mon 2026-11-23 after 05:45: the Fri grade line, Sun chain, Mon datawake logs; organic: exchange, talk | live-observing | research-build | [[../plans/2026-11-16-page-labels-off-citizens-memory]] |
 | engine.357 | Checker reads its own record (builder 11-22 "go on 5"): no "none" issue, stalls are setbacks, one measurement once. Read C118 Sun 2026-11-29 | live-observing | engine-sheet | [[../plans/2026-11-22-checker-reads-its-own-record]] |
 | pipeline.115 | Engine out of the sim's mouth (builder 11-22): built + agy fold; owns Jax's rulebook (Civis tags). Read Mon 2026-11-23 desk run, C118 signal | live-observing | engine-sheet | [[../plans/2026-11-22-engine-out-of-the-sims-mouth]] |
+| engine.358 | Engine writes its run record: LIVE stage 74 @209, benched. Read C118 Sun 2026-11-29: Step 3.5 passes from the record, no export | live-observing | engine-sheet | [[../plans/2026-11-23-engine-writes-its-run-record]] |
 ## 3. Now — being worked, one per terminal (in-progress)
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| engine.358 | Engine writes its run record (builder 11-23 "item 10"): Engine_Run_Log row per fire, Step 3.5 reads it. Next: advisor + review, tab go | in-progress | engine-sheet | [[../plans/2026-11-23-engine-writes-its-run-record]] |
 | engine.356 | A moment has a place (builder 11-21): LIVE stage 73 @208; C117 read done (G-EC45). Next: Task 1's count, then the build on his six answers | in-progress | engine-sheet | [[../plans/2026-11-21-a-moment-has-a-place]] |
 | pipeline.100 | Mags memory one home (builder 11-03): her page, not the old `mags` store; every Mags seat loads her persona as the CLI did. Task 1 started 11-08 | in-progress | engine-sheet | [[../plans/2026-11-03-mags-memory-one-home]] |
 | engine.346 | Feed word `off-season` (builder 11-15): live @182; benched 11-16 inside stage 49 (C117/C118 PASS). Owed: the sheet dropdown (his menu run) | in-progress | research-build | [[../plans/2026-11-05-sports-feed-triggers]] §Changelog |

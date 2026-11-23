@@ -1,0 +1,33 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ◈ encrypted .env [www.dotenvx.com]
+{
+ "rowsTotal": 2,
+ "recordsTotal": 1,
+ "recordsForCycle": [
+  {
+   "state": "done",
+   "lifecycle": "run",
+   "start": "2026-11-23T07:14:14.569Z"
+  }
+ ],
+ "checks": {
+  "cellsTilde": true,
+  "parts": 2,
+  "phases": 132,
+  "failedPhases": [],
+  "totalMs": 220304,
+  "wallMs": 232678,
+  "gate": true,
+  "logLines": 278,
+  "recordChars": 46096,
+  "noTimingInLog": true,
+  "compressLine": true,
+  "promotionsLine": false,
+  "familyLine": true,
+  "engineErrors": null,
+  "rngDraws": 46993,
+  "state": "done",
+  "lifecycle": "run",
+  "timingEqualsWebResponse": true
+ },
+ "verdict": "FAIL"
+}

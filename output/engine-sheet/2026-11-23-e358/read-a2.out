@@ -1,0 +1,33 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+{
+ "rowsTotal": 2,
+ "recordsTotal": 1,
+ "recordsForCycle": [
+  {
+   "state": "done",
+   "lifecycle": "run",
+   "start": "2026-11-23T07:32:50.809Z"
+  }
+ ],
+ "checks": {
+  "cellsTilde": true,
+  "parts": 2,
+  "phases": 132,
+  "failedPhases": [],
+  "totalMs": 200217,
+  "wallMs": 209322,
+  "gate": true,
+  "logLines": 298,
+  "recordChars": 49723,
+  "noTimingInLog": true,
+  "compressLine": true,
+  "promotionsLine": true,
+  "familyLine": true,
+  "engineErrors": 0,
+  "rngDraws": 46993,
+  "state": "done",
+  "lifecycle": "run",
+  "timingEqualsWebResponse": true
+ },
+ "verdict": "PASS"
+}

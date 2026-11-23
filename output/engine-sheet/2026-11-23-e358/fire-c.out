@@ -1,0 +1,30 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ override existing { override: true }
+{
+ "label": "e358-c-notab",
+ "expect": 118,
+ "at": "2026-11-23T07:22:22.032Z",
+ "pre": {
+  "bench": 118,
+  "live": 117,
+  "ee": 11,
+  "rileyLast": 118,
+  "checkpoint": null
+ },
+ "wallS": 248,
+ "http": 200,
+ "resp": {
+  "ok": true,
+  "state": "done",
+  "ranMs": 242686,
+  "persistErrors": []
+ },
+ "post": {
+  "bench": 119,
+  "live": 117,
+  "ee": 11,
+  "rileyLast": 119,
+  "checkpoint": null
+ },
+ "newEE": [],
+ "verdict": "PASS"
+}

@@ -197,7 +197,7 @@
     }
   },
   "trevor-shimizu": {
-    "version": "TREVOR-LEP2-2",
+    "version": "TREVOR-LEP2-3",
     "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
@@ -213,7 +213,7 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-v4-flash-0731"
+        "model": "anthropic/claude-sonnet-5.5"
       },
       "report": {
         "provider": "openrouter",
@@ -225,39 +225,27 @@
       }
     },
     "reviewProfile": {
-      "id": "trevor-infrastructure-systems-v1",
+      "id": "trevor-transit-v2",
       "canonPolicy": "load-bearing",
-      "purpose": "Translate one Packet-backed transit or infrastructure condition into a clear systems consequence, while keeping timestamps, failures, causal links, and cascade warnings bounded by the supplied record.",
+      "purpose": "Report Oakland's transit and infrastructure from the transit record (builder 2026-11-23). The check is facts: locations, citizens, data points.",
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
-        "voice": "dry third-person infrastructure and transit systems analysis",
-        "targetWords": "500-800",
-        "opening": "a Packet-backed time, place, system condition, or implementation state",
-        "closing": "a bounded forward warning or maintenance question grounded in what remains unknown"
+        "targetWords": "evidence-bounded"
       },
       "authorizedTexture": [
-        "plain-language explanation of a Packet-backed infrastructure or transit condition",
-        "comparison of two supplied system facts when their relationship remains framed as analysis unless the Packet supplies causation",
-        "a restrained forward warning explicitly conditioned on supplied facts and declared missing evidence",
-        "unnamed physical texture at a Packet-backed or generic public site that adds no failure, delay, crowd, damage, or operational fact"
+        "Trevor on the platform and the line he writes about, precise and technical"
       ],
-      "textureConditions": [
-        "every named person, place, route, station, system, agency, office, Project, Initiative, business, and organization must come from the Packet",
-        "a timestamp, duration, distance, load, capacity, delay, outage, closure, breakdown, maintenance event, or service change requires a supplied source",
-        "a cascade or shared-cause claim requires at least two supplied facts plus a Packet-backed link; otherwise it remains an open hypothesis",
-        "technical interpretation must use citizen-facing language and must not print raw engine labels, scores, fields, or decimals as public evidence"
-      ],
+      "textureConditions": [],
       "canonBlockers": [
-        "an invented outage, closure, breakdown, delay, route, station, repair, inspection, maintenance event, service change, or infrastructure damage",
-        "an unsupported timestamp, duration, distance, capacity, load, count, budget, deadline, completion state, or performance metric",
-        "an unsupported causal link, cascade, responsible agency, duty, official act, official inaction, promise, or decision",
-        "a named person, place, route, station, system, agency, office, Project, Initiative, business, or organization not found in the supplied record",
-        "raw engine terminology or simulation values presented as an in-world technical measurement"
+        "an invented or altered location: station, corridor, business or neighborhood",
+        "an invented or altered citizen (name, role, home, relationship, employer), or words a named citizen did not say",
+        "an invented or altered data point: a rider count, on-time figure, traffic index, cause, number, date or engine record"
       ]
     },
     "writerTools": {
       "maxToolCalls": 6
-    }
+    },
+    "seatFile": ".claude/agents/trevor-shimizu/SEAT.md"
   },
   "p-slayer": {
     "version": "PSLAYER-LEP2-1",

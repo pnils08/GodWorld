@@ -244,7 +244,7 @@ try {
   console.log('transit:');
   const t = transit.buildTransitSlice(CYCLE, { root });
   ok('kind', t.kind === 'beat-transit' && t.prewrite.schema === 'BEAT-SLICE-1');
-  ok('label from in-table delta', /Test Central ridership up 600 vs C102 \| 2 stations/.test(t.story.label));
+  ok('no code-picked lead station (pipeline.111)', t.story.label === 'the transit and infrastructure record of C103' && t.story.hookLine === '' && t.prewrite.hooks.length === 0);
   ok('station fact with delta', t.facts.some(f => /Test Central: ridership 1,600 \(\+600 vs C102\), on-time 75% \(-5 pts\), Test Corridor — above-average ridership/.test(f.text)));
   ok('Factors names the why when present', t.facts.some(f => /Test North: ridership 450 \(-50 vs C102\), on-time 92% \(\+2 pts\) — game day: Test Park; storm front/.test(f.text)));
   ok('corridor facts are traffic rows, not pseudo-stations', t.facts.some(f => /Test Freeway: traffic index 65 \(\+15 vs C102\) — heavy congestion; weather-related slowdowns/.test(f.text)));
@@ -255,18 +255,18 @@ try {
   ok('bartender at "BART Bar" never attaches', !JSON.stringify(t.citizens).includes('Bartender'));
   ok('profile shape', t.citizens[0].profile === 'Test Operator — Transit Operator (AC Transit) — Test Transit Agency');
   // TRANSIT-SLICE-2 — the week header, the chaos car on the line, the citizens who lived a transit line
-  ok('version bumped (cache refuses the old slice)', t.version === 'TRANSIT-SLICE-2');
+  ok('version bumped (cache refuses the old slice)', t.version === 'TRANSIT-SLICE-3');
   ok('week header unions the engine causes once', (() => { const w = t.facts.find(f => /^The week on the line — every cause on the record this cycle, once: /.test(f.text)); return !!w && /game day: Test Park; storm front/.test(w.text) && (w.text.match(/storm front/g) || []).length === 1; })());
   ok('day type: no frame = ordinary weekday', t.facts.some(f => /^Day type this cycle: ordinary weekday — no citywide cut\./.test(f.text)));
   ok('weather on the record', t.facts.some(f => f.text === 'Weather this cycle: overcast, 52°F' && /Cycle_Weather/.test(f.src)));
-  ok('game-result rows only, named as record not cause', t.facts.some(f => /^Game on the sports feed this cycle: Oaks at Jack London — Oaks drop another late \(the rider lift is real only where a station row says "game day"\)$/.test(f.text)));
+  // pipeline.111: no game lines (builder 2026-11-23)
   ok('chaos: the bart_train hit lands with its seed and the carry rule', t.facts.some(f => /^Chaos car on the line this cycle: bart_train — stalled train → citizen POP-90003 \(T4\) \(Sentiment -0\.05\) — the 7:40 sat dark between Test Central and Test North\. A train hit carries one cycle: it reaches the platforms on NEXT cycle/.test(f.text) && /world_summary_c103\.md ## Chaos Events/.test(f.src)));
   ok('chaos: a hit on AC Transit (BIZ-00013) lands, a Laurel shutoff does not', t.facts.some(f => /cop_car — ticket → business BIZ-00013/.test(f.text)) && !t.facts.some(f => /pge_truck/.test(f.text)));
   ok('chaos citizen target becomes a source', t.citizens.some(c => c.popid === 'POP-90003' && /the chaos car found them this cycle: bart_train stalled train/.test(c.why)));
   ok('tagged transit line is a source, labelled', t.citizens.some(c => c.popid === 'POP-90001' && /lived it this cycle \(rode the disruption\): "waited out a stalled train at Test Central and walked the last mile"/.test(c.why)));
   ok('text-matched line merges onto the same person', t.citizens.filter(c => c.popid === 'POP-90003').length === 1 && t.citizens.some(c => c.popid === 'POP-90003' && /stood on the platform at 7:40/.test(c.why)));
   ok('the reporter is not his own source; prior-cycle lines and non-transit lines stay off', !t.citizens.some(c => c.popid === 'POP-00155' || c.popid === 'POP-90004' || c.popid === 'POP-90040'));
-  ok('hook counts roster and lived separately', /1 transit workers on the roster, 2 citizens who lived a transit line, a chaos car on the line\./.test(t.story.hookLine));
+  // pipeline.111: no hook line
   ok('pointers name the life log and the chaos section', t.pointers.some(p => /LifeHistory_Log\.jsonl Cycle 103/.test(p)) && t.pointers.some(p => /world_summary_c103\.md ## Chaos Events/.test(p)));
 
   // engine.290 move 3: a rebase cycle prints no deltas, no mover, no total comparison
@@ -284,7 +284,7 @@ try {
     ok('rebase: total says not comparable', rt.facts.some(f => f.text.indexOf('total ridership 6,000 (rebased this cycle — not comparable)') >= 0));
     ok('rebase: no station delta', rt.facts.some(f => /Test Central: ridership 6,000 \(rebased this cycle — not comparable\), on-time 84%/.test(f.text)) && !rt.facts.some(f => /vs C102/.test(f.text)));
     ok('rebase: no corridor delta', rt.facts.some(f => /Test Freeway: traffic index 58 \(rebased this cycle — not comparable\)/.test(f.text)));
-    ok('rebase: no lead-mover label', !/ up | down /.test(rt.story.label) && /rebased this cycle — not comparable/.test(rt.story.label));
+    ok('rebase: the label says not comparable', /rebased this cycle — not comparable/.test(rt.story.label));
     ok('day type: the Factors frame is read as the citywide cut, major holiday outranks weekend', rt.facts.some(f => /^Day type this cycle: holiday: Easter \(major\) — riders cut citywide by the major-holiday rule \(outranks the weekend; the two never stack\)\./.test(f.text)));
     ok('rebase root has no world_summary: no chaos fact, no throw', !rt.facts.some(f => /[Cc]haos car/.test(f.text)) && !rt.pointers.some(p => /Chaos Events/.test(p)));
     fs.rmSync(rb, { recursive: true, force: true });
@@ -632,7 +632,7 @@ try {
   for (const [label, slice, popid] of [['trevor', t, 'POP-00155'], ['lila', h, 'POP-00154'], ['angela', s, 'POP-00156'], ['noah', e, 'POP-00157'], ['graye', f, 'POP-00012'], ['rachel', r, 'POP-00057'], ['kai', k, 'POP-00158'], ['sharon', sh, 'POP-00159'], ['maria', m, 'POP-00013'], ['selena', sg, 'POP-00591'], ['talia', tf, 'POP-00592'], ['celeste', ct, 'POP-00164']]) {
     const pk = v2.buildAnglePacket({ cycle: CYCLE, desk: slice.seat.desk, reporter: { popid, name: slice.seat.name }, story: slice.story, approach: slice.approach, slice, lane: [] });
     const b = pk.task.creativeBrief;
-    ok(label + ': brief beat-slice with facts + room', b && b.kind === 'beat-slice' && b.facts.length >= 1 && (['sharon', 'maria', 'kai', 'celeste', 'graye', 'noah'].includes(label) || !!b.roomIsYours));   // seat-file seats: no room line (pipeline.111)
+    ok(label + ': brief beat-slice with facts + room', b && b.kind === 'beat-slice' && b.facts.length >= 1 && (['sharon', 'maria', 'kai', 'celeste', 'graye', 'noah', 'trevor'].includes(label) || !!b.roomIsYours));   // seat-file seats: no room line (pipeline.111)
     ok(label + ': every anchor fact is a known FACT sourced to a file on disk', slice.prewrite.anchorFacts.every(text => pk.known.some(k => k.text === text && /^output\//.test(k.src))));
     ok(label + ': candidates = the slice\'s people', pk.exposure.candidates.length === slice.citizens.length && pk.exposure.candidates.every(c => slice.citizens.some(p => p.popid === c.pop)));
   }

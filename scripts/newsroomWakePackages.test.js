@@ -94,20 +94,20 @@ assert.ok(luis.reviewProfile.textureConditions.some(v => v.includes('silence clo
 assert.ok(luis.reviewProfile.canonBlockers.some(v => v.includes('records request')));
 
 const trevor = packages['trevor-shimizu'];
-assert.equal(trevor.version, 'TREVOR-LEP2-2');
+assert.equal(trevor.version, 'TREVOR-LEP2-3');
 assert.equal(trevor.requiredDaily, true);
 assert.equal(trevor.assignment.desk, 'civic');
 assert.equal(trevor.assignment.name, 'Trevor Shimizu');
 assert.equal(trevor.assignment.popid, 'POP-00155');
 assert.equal(trevor.assignment.beatDomain, 'INFRASTRUCTURE');
 assert.equal(trevor.packetContract, 'v2');
-assert.equal(packagesApi.routeFor(trevor, 'angle').model, 'deepseek/deepseek-v4-flash-0731');
+assert.equal(packagesApi.routeFor(trevor, 'angle').model, 'anthropic/claude-sonnet-5.5');   // pipeline.111 (builder 2026-11-23)
+assert.equal(trevor.seatFile, '.claude/agents/trevor-shimizu/SEAT.md');
 assert.equal(packagesApi.routeFor(trevor, 'report').model, 'deepseek/deepseek-v4-flash-0731');
 assert.equal(packagesApi.routeFor(trevor, 'write').model, 'anthropic/claude-sonnet-5.5');
 assert.equal(trevor.reviewProfile.canonPolicy, 'load-bearing');
 assert.equal(trevor.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
-assert.ok(trevor.reviewProfile.textureConditions.some(v => v.includes('cascade')));
-assert.ok(trevor.reviewProfile.canonBlockers.some(v => v.includes('invented outage')));
+assert.deepStrictEqual(trevor.reviewProfile.textureConditions, []);
 
 const pSlayer = packages['p-slayer'];
 assert.equal(pSlayer.version, 'PSLAYER-LEP2-1');

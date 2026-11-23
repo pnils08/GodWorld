@@ -21,10 +21,10 @@ const K = require('./beatSliceKit');
 const SEAT = {
   slug: 'trevor-shimizu', name: 'Trevor Shimizu', popid: 'POP-00155', desk: 'civic',
   kind: 'beat-transit', domain: 'transit', artifact: 'transit', builder: 'buildTransitSlice.js',
-  version: 'TRANSIT-SLICE-2', nameRe: /trevor\s*shimizu/i,
-  tabs: ['Transit_Metrics', 'Employment_Roster', 'Business_Ledger', 'Story_Hook_Deck', 'Cycle_Weather', 'Oakland_Sports_Feed', 'LifeHistory_Log', 'Story_Seed_Deck'],
-  approach: 'Transit approach: this slice is every station on the record this cycle, what moved against last cycle, and the transit workers on the roster. The week header (weather, home games, the union of causes), the chaos car on the line and the citizens who lived a transit line are record; the Factors on each station row are the city\'s own causes — the frame at their head (weather; weekend; holiday: <name> (major) or (no cut)) is the citywide day-type cut, and the rest are the row\'s own reasons (holiday lift in its hood, First Friday, game day, events, a stalled train, a short crew, crowded platforms). Riders rise and fall for the reasons written there, never for a reason you add. A BART-train chaos hit this cycle reaches the platforms NEXT cycle. Dry, technical, timestamp and pattern — but it is a place with people in it. One system, one claim about what changed.',
-  roomIsYours: 'the platform at 7:40, the operator\'s cab, who is late and why, what the fare gate sounds like, what a regular rider notices first',
+  version: 'TRANSIT-SLICE-3', nameRe: /trevor\s*shimizu/i,
+  tabs: ['Transit_Metrics', 'Employment_Roster', 'Business_Ledger', 'Cycle_Weather', 'LifeHistory_Log'],
+  approach: '',
+  roomIsYours: '',
   build
 };
 
@@ -106,16 +106,8 @@ function build(cycle, { root, beats, profiles }) {
       src: 'output/beats/Cycle_Weather.jsonl CycleID ' + cycle
     });
   }
-  // games = game-result rows only (applySportsSeason_ accepts games on that EventType alone); features and notes are not crowds
-  const games = (beats.Oakland_Sports_Feed || []).filter(g => Number(g.Cycle) === cycle && /^game-result$/i.test(String(g.EventType || '').trim()) && String(g.HomeNeighborhood || '').trim());
-  for (const g of games.slice(0, 4)) {
-    facts.push({
-      text: 'Game on the sports feed this cycle: ' + (g.TeamsUsed || 'the home side') + ' at ' + String(g.HomeNeighborhood).trim() +
-        (g.Notes ? ' — ' + String(g.Notes).trim() : g.StoryAngle ? ' — ' + String(g.StoryAngle).trim() : '') + ' (the rider lift is real only where a station row says "game day")',
-      src: 'output/beats/Oakland_Sports_Feed.jsonl Cycle ' + cycle
-    });
-  }
-  if (!games.length) facts.push({ text: 'No game-result row on the sports feed this cycle — no game-day crowds on the platforms', src: 'output/beats/Oakland_Sports_Feed.jsonl Cycle ' + cycle });
+  // pipeline.111 (builder 2026-11-23: "he doesn't need sports outcomes if the ridership already flags game day traffic"):
+  // no game lines; a station row's own Factors say "game day" where a game moved riders.
   // --- the chaos car on the line: world_summary ## Chaos Events (Chaos_Cars is not a beats tab)
   const summaryPath = 'output/world_summary_c' + cycle + '.md';
   const summary = K.loadText(path.join(root, summaryPath));
@@ -178,7 +170,7 @@ function build(cycle, { root, beats, profiles }) {
   const byPop = new Map(people.map(p => [p.popid, p]));
   const addPerson = (popid, why, hood, fallbackName) => {
     const id = String(popid || '').toUpperCase();
-    if (!/^POP-\d+$/.test(id)) return;
+    if (!/^POP-\d+$/.test(id) || id === SEAT.popid || K.isMediaStaff(profiles, id)) return;   // pipeline.111: never himself, never the paper's staff
     if (byPop.has(id)) { byPop.get(id).why += '; ' + why; return; }
     const p = K.personFromProfile(profiles, id, why, hood) || (fallbackName ? K.person(id, fallbackName, null, hood, why) : null);
     if (p) { byPop.set(id, p); people.push(p); }
@@ -198,24 +190,17 @@ function build(cycle, { root, beats, profiles }) {
     const m = String(c.target || '').match(/citizen\s+(POP-\d+)/i);
     if (m) addPerson(m[1], 'the chaos car found them this cycle: ' + c.vehicle + (c.outcome ? ' ' + c.outcome.replace(/_/g, ' ') : '') + ' (world_summary Chaos_Cars)', null, null);
   }
-  // Story_Seed_Deck rows on the civic desk that speak transit — colour, like hooks
-  const seedHooks = K.seedsFor(beats, cycle, /civic/i)
-    .filter(sd => /\btransit\b|\bBART\b|\btrain\b|\bstation\b|\brail\b/i.test(JSON.stringify(sd))).slice(0, 4)
-    .map(sd => ({ text: 'Story seed' + (sd.seedId ? ' ' + sd.seedId : '') + (sd.hood ? ' (' + sd.hood + ')' : '') + ': ' +
-      sd.citizens.map(c => c.name).filter(Boolean).join(', ') + (sd.citizenEvents.length ? ' — ' + sd.citizenEvents.join('; ') : ''), angle: sd.domain || null }));
   const dir = lead.dRidership == null ? null : (lead.dRidership >= 0 ? 'up' : 'down');
-  const label = lead.station + (dir ? ' ridership ' + dir + ' ' + K.fmtInt(Math.abs(lead.dRidership)) + ' vs C' + (cycle - 1)
-    : ' ridership ' + K.fmtInt(lead.ridership)) + ' | ' + inventory + ' on the record' + (rebased ? ' (' + REBASED + ')' : '');
+  const label = 'the transit and infrastructure record of C' + cycle + (rebased ? ' (' + REBASED + ')' : '');   // pipeline.111: no lead station picked
   const slice = K.makeSlice(SEAT, cycle, beats, {
     ref: src, hood: null, label,
-    angle: label + ' — the platforms and the people who run them',
-    hookLine: lead.station + (dir ? ' moved ' + dir + ' the most' : ' carried the most riders') + ' this cycle' +
-      (lead.cause ? ' — ' + lead.cause : '') + '; ' + rosterCount + ' transit workers on the roster' + (people.length > rosterCount ? ', ' + (people.length - rosterCount) + ' citizens who lived a transit line' : '') + (chaos.length ? ', a chaos car on the line' : '') + '.',
+    // pipeline.111: no code-written angle or hook — the record, and he picks.
+    angle: 'the transit and infrastructure record of C' + cycle, hookLine: '',
     facts, people,
     deltas: { state: rebased ? 'REBASED' : prev.length ? 'PRIOR_CYCLE_IN_TABLE' : 'NO_PRIOR_CYCLE', vs: prev.length ? cycle - 1 : null },
-    hooks: K.hooksFor(beats, cycle, SEAT.name).concat(seedHooks),
+    hooks: [],
     note: people.length ? null : 'no transit workers on the roster this cycle',
-    extra: { stations, corridors, week: { causes, weather: weather || null, homeGames: games.length }, chaos, lived: lived.map(r => ({ popid: r.POPID, text: r.EventText, tag: r.EventTag })) }
+    extra: { stations, corridors, week: { causes, weather: weather || null }, chaos, lived: lived.map(r => ({ popid: r.POPID, text: r.EventText, tag: r.EventTag })) }
   });
   slice.pointers.push('output/beats/LifeHistory_Log.jsonl Cycle ' + cycle + ' (transit lines)');
   if (chaosSec) slice.pointers.push(summaryPath + ' ## Chaos Events');
@@ -224,5 +209,6 @@ function build(cycle, { root, beats, profiles }) {
 
 const W = K.wire(SEAT);
 if (require.main === module) W.main();
-module.exports = { SEAT, loadSlice: W.load, buildTransitSlice: W.build, writeTransitSlice: W.write, loadTransitSlice: W.load,
+const sitsOutWhenEmpty = true;
+module.exports = { SEAT, sitsOutWhenEmpty, loadSlice: W.load, buildTransitSlice: W.build, writeTransitSlice: W.write, loadTransitSlice: W.load,
   isTransitSeat: W.isSeat, assignmentFromSlice: W.assignmentFromSlice, enrichAssignment: W.enrichAssignment, slicePaths: W.paths };

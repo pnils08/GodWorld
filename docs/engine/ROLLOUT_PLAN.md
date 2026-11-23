@@ -77,6 +77,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| engine.358 | Engine writes its run record (builder 11-23 "item 10"): Engine_Run_Log row per fire, Step 3.5 reads it. Next: advisor + review, tab go | in-progress | engine-sheet | [[../plans/2026-11-23-engine-writes-its-run-record]] |
 | pipeline.115 | Engine out of the sim's mouth (builder 11-22): built + agy fold; owns Jax's rulebook (Civis tags). Read Mon 2026-11-23 desk run, C118 signal | in-progress | engine-sheet | [[../plans/2026-11-22-engine-out-of-the-sims-mouth]] |
 | engine.356 | A moment has a place (builder 11-21): LIVE stage 73 @208; C117 read done (G-EC45). Next: Task 1's count, then the build on his six answers | in-progress | engine-sheet | [[../plans/2026-11-21-a-moment-has-a-place]] |
 | pipeline.100 | Mags memory one home (builder 11-03): her page, not the old `mags` store; every Mags seat loads her persona as the CLI did. Task 1 started 11-08 | in-progress | engine-sheet | [[../plans/2026-11-03-mags-memory-one-home]] |

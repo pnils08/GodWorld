@@ -78,6 +78,7 @@ Steps with no script: 3 confirms the builder's fire on the live sheet; 4.1 check
 
 ## Changelog
 
+- 2026-11-23 (engine-sheet) — Builder "go on 7": Step 2 passes the pre-mortem `--since=<previous chain's Step 3 time>` (C117 G-EC42a); `8d9c9d1eb`.
 - 2026-11-22 (engine-sheet) — C117 closed through the runner, all 18 steps recorded (`output/run-cycle/c117.json`). One retry: Step 5.55 hit the Sheets read-per-minute quota twice, passed on a 45 s retry; the runner has no retry (C117 gap log G-EC42d). Row → needs-info: only the codex hook trust is left, his.
 - 2026-11-15 (research-build) — Task 5: C116 closed through the runner, every step recorded. Step 3.5 passed a wrong Drive file once (C116 gap log G-EC38). Row re-dated to C117 for the codex hook trust.
 - 2026-11-10 (engine-sheet) — The six pipeline.100 files this row's `17e5405fb` carried by accident (a staged undo) were put back to the builder-approved version under pipeline.100 (`5caa1cb0e`). No change to the step gate.

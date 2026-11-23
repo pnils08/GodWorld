@@ -27,15 +27,15 @@ pointers:
 - The engine holds all of it in memory and only `Logger.log`s it: `emitPhaseTimings_` (`godWorldEngine2.js:193`, also `ENGINE95_TIMING_DIAG`), the completed line (inner `finally`, ~:939: engine errors, audit issues, rng draws). The fire record (`closeCycleFire_`, script property `FIRE_ADMISSION_JSON`: cycle, startedMs, state, finishedMs) is unreadable by the service account. No GCP project, so `clasp logs` cannot pull Logger.
 - Readers of the text log: Step 3.5 gate, the engine review (phase timings), engine.95's tail read, the pre-mortem's fire-date fallback.
 
-## Design
+## Design (agy plan review folded, 2026-11-23)
 
-1. **Tab `Engine_Run_Log`** (created once on live and the sandbox — engine.119: no runtime create). One row per admitted fire: `Cycle | StartedAt | State | Lifecycle | Part | Parts | RecordJSON`. The record is one JSON object, `{ cycle, startedAt, finishedAt, state, lifecycle, wallMs, timing: <the PHASE_TIMING payload>, engineErrors, auditIssues, rngDraws, log: [Logger lines] }`; a record over 45,000 characters is split across rows `Part 1..Parts` of the same fire (this week's log was 41,840 bytes). Every cell is written as text (leading apostrophe, the engine.340 SeedID treatment) so the sheet never coerces a timestamp or a number.
-2. **Engine** (`godWorldEngine2.js`): `writeRunRecord_(ss, fire, outcome)` in `runWorldCycle`'s `finally`, after `closeCycleFire_`, before the lock is released. Best effort, never throws: a missing tab or a write error is one `Logger.log` line, no Engine_Errors row. A refused fire has no admission (`closeCycleFire_` returns null) and writes nothing. Log text from `Logger.getLog()` (its completeness and length on a real fire are measured on the bench — Task 5); timing from `ENGINE95_TIMING_DIAG`; counts from `fire.ctx.summary`. Modelled on `logEngineError_`'s direct append (same file, `SHEETS_MANIFEST.md` §9 row 136); a new §9 row of the same class.
-3. **Checkpoint + resume:** a checkpointed fire writes its row (`state: checkpointed`, its phases' timing); the resume writes its own (`lifecycle: resumed`, the tail's timing — `resumeCore_` emits its own PHASE_TIMING, `cycleCheckpoint.js:527`). The renderer joins both parts' timings and logs in start order.
-4. **Step 3.5** (`fetchExecutionLog.js`): read `Engine_Run_Log`; the record is the Cycle's fire whose state is `done` (joined with its `checkpointed` part when it resumed). Write `output/execution_log_c{XX}.json` (the record) and `output/execution_log_c{XX}.txt` (first line `source: Engine_Run_Log`, then `Execution started`, the Logger lines, the PHASE_TIMING JSON line, `Cycle completed. …`) in the shape the gate and every reader parse. No `done` record → today's Drive search; `--file` still forces Drive. Never prints `Cycle completed` from a non-done record.
-5. **Docs in the same commit:** `schemas/SCHEMA_HEADERS.md` (the tab), `docs/engine/SHEETS_MANIFEST.md` (§9), `docs/engine/ENGINE_STUB_MAP.md` (`/stub-engine`), run-cycle SKILL Step 3.5.
+1. **Tab `Engine_Run_Log`** (created on live 2026-11-23): `Cycle | StartedAt | State | Lifecycle | Part | Parts | RecordJSON`. `StartedAt` is **this execution's** start (`fire.entryMs`), never `fire.admission.startedMs` (a resume carries the original fire's start — `cycleCheckpoint.js:422`), so a checkpointed fire and its resume never share a key. Every data cell starts with `~` (the checkpoint chunk prefix, `cycleCheckpoint.js:27`) and the reader strips it — safe under any cell format and the RAW sync. A record over 45,000 characters splits across rows `Part 1..Parts` of the same `(Cycle, StartedAt)`, never inside a surrogate pair (the `cycleCheckpoint.js:137` guard).
+2. **Record JSON:** `{ cycle, runStartedAt, admissionStartedAt, finishedAt, state, lifecycle, checkpointGen, wallMs, timing, engineErrors, auditIssues, rngDraws, log }`. `timing` is `ENGINE95_TIMING_DIAG` — on a resumed fire it already holds every phase (`resumeCore_` restores the saved `phaseTimings`, `cycleCheckpoint.js:491`), so it is never joined. `rngDraws` = `ctx.rng.draws`, else `ctx.resumed.draws`. `log` = `Logger.getLog()` lines **minus** the `PHASE_TIMING_BEGIN/END`, the timing JSON and the `Cycle completed.` lines (the renderer writes those once, from the record).
+3. **Engine** (`godWorldEngine2.js`): `ENGINE95_TIMING_DIAG = null` at `runWorldCycle` entry; `writeRunRecord_(ss, fire, outcome)` in its `finally` after `closeCycleFire_`, before the lock is released. Never throws; null-safe on `ss`, `fire.admission` (refused or pre-admission → no row), `fire.ctx`, `outcome` (close threw → `state: 'unclosed'`). One `setValues` of the parts + `SpreadsheetApp.flush()`, no retry wrapper (the 360 s wall and the 88.7 s C117 tail). A missing tab is one `Logger.log` line, no Engine_Errors row. Direct write after the executor — a §9 row like `logEngineError_` (`SHEETS_MANIFEST.md` :136); the pre-commit write warning is acknowledged in the commit.
+4. **Step 3.5** (`fetchExecutionLog.js`): read `Engine_Run_Log`, strip `~`, regroup parts; take the **latest** (by `StartedAt`) record for the Cycle with `state: done` **and** a non-empty `timing.timings`. If its `lifecycle` is `resumed`, prepend the log of the `checkpointed` record with the same `checkpointGen`. Write `output/execution_log_c{XX}.json` (the record) and `output/execution_log_c{XX}.txt`: line 1 `source: Engine_Run_Log | startedAt: <ISO>`, `Execution started`, the log lines, the timing JSON line, `Cycle completed. Engine errors logged: N; audit issues tracked: M; rng draws: R`. No qualifying record → today's Drive search; `--file` still forces Drive. `summarize` reads the **last** timing and completed lines, so a stray earlier one can never pass the gate.
+5. **Docs in the same commit:** `schemas/SCHEMA_HEADERS.md` (regenerated — the tab is visible), `docs/engine/SHEETS_MANIFEST.md` §9, `/stub-engine` (`ENGINE_STUB_MAP.md`, `ENGINE_STUB_REVERSE.md`, `ENGINE_STUB_REVERSE.json`), run-cycle SKILL Step 3.5, pre-mortem SKILL line on the fire date.
 
-Not carried: `console.warn` lines (`priorityEngine.js`) do not reach `Logger.getLog()`; they do not gate. Readers of log lines this week (G-EC45/46): births, the child grab, the dial fold, arrivals, migration, archive — all `Logger.log`; the bench confirms they are in the record.
+Not carried: `console.warn` lines (`priorityEngine.js`) do not reach `Logger.getLog()`, so a rendered log reports `warnings: 0`; warnings do not gate. Tab growth (~50–80 KB a fire) has no cap yet — read at C130.
 
 ## Tasks
 
@@ -48,6 +48,24 @@ Not carried: `console.warn` lines (`priorityEngine.js`) do not reach `Logger.get
 | 5 | Sandbox proof (research-build has nothing unbenched on the sandbox first; DEPLOY.md: what a live sync does to a sandbox-only tab): (a) a fire from a live sync — the record read back through Step 3.5's own reader equals what the engine wrote; its timing equals the fire's execution-log PHASE_TIMING; the log lines include the P6 BIRTH / compressLifeHistory / checkForPromotions lines; (b) a refused second fire writes no row; (c) a fire with the tab absent completes, one Logger line; (d) a fire that throws still lands its row; (e) checkpoint + resume, if the bench dials allow | es | not started |
 | 6 | PROD push (standing go) with its smoke note; first live read C118 Sun 2026-11-29 — Step 3.5 passes with no export | es | not started |
 
+## Reviews reconciled
+
+| Review | Verdict | Pointer |
+|---|---|---|
+| agy plan review | HOLD | `output/antigravity/2026-11-23-review-engine358-plan.md` |
+
+### Agreed
+
+- #1 resume timing already holds every phase (`cycleCheckpoint.js:491`) — never joined; `summarize` first-match could pass a failed resume on the checkpointed part's lines — lines stripped at write, read last. #2 the resume reuses the original start (`:422`) — key on the execution's start; latest done; link by checkpoint gen. #3 rng from `ctx.resumed.draws`; no `Cycle completed` without timings; null guards; timing reset at entry. #4 `~` prefix, surrogate guard, no retry. #5 line 1 carries the start; warnings read 0. #6 visible tab, three stub files, commit acknowledges the write warning.
+
+### Needs proof
+
+- `Logger.getLog()` completeness and size on a real fire (Task 5).
+
+### New concepts
+
+- Tab retention cap — held, read at C130.
+
 ## Acceptance
 
 1. Sandbox fire: one `Engine_Run_Log` row; its TimingsJSON equals the PHASE_TIMING block in that fire's execution log; Step 3.5's render passes the gate.
@@ -56,6 +74,7 @@ Not carried: `console.warn` lines (`priorityEngine.js`) do not reach `Logger.get
 
 ## Changelog
 
+- 2026-11-23 (engine-sheet) — agy plan review HOLD folded (`output/antigravity/2026-11-23-review-engine358-plan.md`): execution start as the key, resume timing never joined, timing/completed lines stripped from the log and read last, latest done with real timings, null guards, `~` cells, no retry, all three stub files.
 - 2026-11-23 (engine-sheet) — Builder "go": `Engine_Run_Log` created on live with its header (Cycle, StartedAt, State, Lifecycle, Part, Parts, RecordJSON), read back.
 - 2026-11-23 (engine-sheet) — Advisor fold + builder's "should this be json? … automate as much as possible": the record is JSON carrying the full log; done-state pick; text-safe cells; checkpoint/resume join; bench edge cases.
 - 2026-11-23 (engine-sheet) — Created on the builder's "item 10" from the C117 take-over list (G-EC42b) and the 11-22 log research.

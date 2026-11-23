@@ -186,7 +186,7 @@ function buildCitizenIncomes(ledger) {
 // what changed in each citizen's state since the last audit that persisted one.
 const SCOREBOARD_TAGS = {
   married: t => t === 'Wedding',
-  born: t => t === 'Birth',
+  born: (t, text) => t === 'Birth' && /^born to\b/i.test(text),   // engine.359: the child's line, once per birth — the parent's Birth line now carries this Cycle's stamp too
   promoted: t => t === 'Promotion',
   laidOff: t => t === 'Career-Layoff',
   hired: t => t === 'Career-Hired',

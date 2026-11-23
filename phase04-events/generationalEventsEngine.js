@@ -1221,10 +1221,19 @@ function createChildRow_(ctx, parentRowIdx, cycle) {
   set("NumChildren", 0);
   set("EducationLevel", "Pre-K");
   set("ParentIds", JSON.stringify(spouseId ? [parentId, spouseId] : [parentId]));
-  set("LifeHistory", "Y" + (Math.floor((cycle - 1) / 52) + 1) + "C" + (((cycle - 1) % 52) + 1) +
-    " — [Birth] born to " + (parentName || parentId) + " in " + hood);
+  var childStamp = "Y" + (Math.floor((cycle - 1) / 52) + 1) + "C" + (((cycle - 1) % 52) + 1);
+  var bornText = "born to " + (parentName || parentId) + " in " + hood;
+  set("LifeHistory", childStamp + " — [Birth] " + bornText);
   rows.push(newRow);
   ctx.ledger.dirty = true;
+  // engine.359 (C117 G-EC48): the newborn's own first log row, as every other new citizen gets one
+  // (checkForPromotions "Emerged into Tier-4", intake "Added to Simulation_Ledger"). Readers already
+  // expect it and keep it off the parent's event (cron-saturday-run :1163, wakePerception :871/:903).
+  if (typeof queueAppendIntent_ === 'function') {
+    queueAppendIntent_(ctx, 'LifeHistory_Log',
+      [childStamp, childId, (firstName + ' ' + lastName).trim(), 'Birth', bornText, hood, cycle],
+      'generational birth (child)', 'events');
+  }
 
   // both parents' ChildrenIds gain the child
   var iChildren = idx("ChildrenIds");
@@ -1799,7 +1808,9 @@ function generateGenerationalSummary_(ctx) {
 // ============================================================
 
 function applyMilestone_(ctx, row, iLife, iLastU, milestone, name, popId, neighborhood, cycle, cal) {
-  var stamp = "C" + cycle;  // ES-1 step 2 engine-side (S264): in-world cycle anchor in col-O string, not wall-clock. Pairs with the S259 prefix-robust card half. LifeHistory_Log below keeps its structured Timestamp/Cycle cols.
+  // engine.359 (C117 G-EC48): the in-world stamp, like every other writer since S271 — "C117" was a leftover
+  // that /^Y\d+C\d+ — / readers (discordLookups, personaProvider) dropped. The fold reads both forms alike.
+  var stamp = (typeof inWorldStamp_ === 'function') ? inWorldStamp_(ctx) : "C" + cycle;  // ES-1 step 2 engine-side (S264): in-world cycle anchor in col-O string, not wall-clock. Pairs with the S259 prefix-robust card half. LifeHistory_Log below keeps its structured Timestamp/Cycle cols.
   var existing = row[iLife] ? row[iLife].toString() : "";
   var line = stamp + " — [" + milestone.tag + "] " + milestone.description;
 
@@ -1812,7 +1823,7 @@ function applyMilestone_(ctx, row, iLife, iLastU, milestone, name, popId, neighb
   queueAppendIntent_(
     ctx,
     'LifeHistory_Log',
-    [inWorldStamp_(ctx), popId, '', milestone.tag, milestone.description, '', cycle],
+    [inWorldStamp_(ctx), popId, name || '', milestone.tag, milestone.description, neighborhood || '', cycle],   // engine.359: Name + Neighborhood filled, as the Wedding writers do
     'generational milestone',
     'events'
   );

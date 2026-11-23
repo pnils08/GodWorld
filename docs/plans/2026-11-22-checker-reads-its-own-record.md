@@ -35,14 +35,34 @@ pointers:
 1. C118 audit: no `repeating-event` whose `recurringTokens` is only an empty value; every move into a failing phase is `setback`, none is `improvement`; no two `improvement` patterns share field + expected + observed — proven by reading `output/engine_audit_c118.json`.
 2. A/B 2026-11-22 (live C117 sheets): old 16 patterns → new 14 — minus `repeating-event "none"`, minus the second RetailVitality measurement (now one, 18 hoods, INIT-007, from stuck-initiative + production-imbalance), three stalls `improvement` → `setback` (Youth Apprenticeship; Downtown Economic Revitalization and Ivy Hill Community Revitalization stalled by tonight's civic apply). Every other pattern identical. Enrichers run clean on `setback`.
 
+## Reviews reconciled
+
+| Review | Verdict | Pointer |
+|---|---|---|
+| agy diff read of `92424fe53` | SHIP-WITH-FIXES | `output/antigravity/2026-11-23-review-engine357.md` |
+
+### Agreed
+
+- #1 stalled → defunded filed as an improvement — a fall deeper into failure (lower contract intensity) is a setback; defunded → stalled stays an improvement (checked on a two-row fixture).
+- #2 a setback ran the mitigator → remedy → next-Cycle measurement loop (the stalled program read as its own mitigator, a measurementSpec graded next Cycle into a spurious improvement) — `checkMitigators` treats `setback` like `improvement`: not-applicable, no remedy path. Live C117: `gap: not-applicable`, 0 remedies.
+- #3 the dedup key now includes `priorRemedyType`; a joined pattern's description names every source.
+
+### Needs proof
+
+- none.
+
+### New concepts
+
+- #4 Jax's contradiction builder has no setback case (generic fallback); stink-scanner's stalled bonus covers only "stalled" — held, read at C118 if a setback tops Jax's list.
+
 ## Surfaced, not this job
 
-- `checkMitigators` gives a setback `gap: remedy-working` — the stalled program is read as its own mitigator. Its own read.
 - The leftover-improvement measurement is the prior audit's number read a Cycle late (agy, pipeline.115 #4); its timing is unchanged here.
 - `output/engine_audit_c117.json` is not regenerated (city hall and Varek already read it).
 - Tests run at the builder's unlock 2026-11-23: `detectImprovements.test.js`, `detectRepeatingEvents.test.js`, `engineAuditor.integration.test.js`, `civisJournal.test.js` pass; full suite green.
 
 ## Changelog
 
+- 2026-11-23 (engine-sheet) — agy SHIP-WITH-FIXES folded (§Reviews reconciled): deeper falls are setbacks, setbacks skip the remedy loop, the measurement key carries the remedy type. A/B unchanged; suites pass.
 - 2026-11-23 (engine-sheet) — Tests pass at the builder's unlock (detectors, auditor integration, civisJournal; full suite).
 - 2026-11-22 (engine-sheet) — Created and built on the builder's "go on 5"; A/B on live C117 sheets.

@@ -236,7 +236,9 @@ function enrich(patterns, ctx) {
     // council ailment — route not-applicable so recommendRemedy doesn't propose
     // "a new initiative" for a blank spreadsheet cell (the G-ER4 error class) and
     // generateTribuneFraming hands it empty story handles (not a Tribune story).
-    if (pattern.type === 'improvement' || pattern.type === 'anomaly' || pattern.type === 'ledger-completeness') {
+    // engine.357 (agy 2026-11-23 #2): a setback is the program's own fall, reported as a
+    // fact like an improvement — no mitigator, no remedy path, no measurement to grade next Cycle.
+    if (pattern.type === 'improvement' || pattern.type === 'setback' || pattern.type === 'anomaly' || pattern.type === 'ledger-completeness') {
       pattern.mitigatorState = { exists: false, mitigators: [], gap: 'not-applicable', recommendedAction: 'none' };
       continue;
     }

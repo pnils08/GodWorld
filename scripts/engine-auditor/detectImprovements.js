@@ -53,7 +53,10 @@ function detect(ctx) {
       const prev = byId.get(curr.InitiativeID || curr.Name);
       if (!prev) continue;
       if (curr.ImplementationPhase && curr.ImplementationPhase !== prev.ImplementationPhase) {
-        const setback = failingPhase(curr.ImplementationPhase) && !failingPhase(prev.ImplementationPhase);
+        // agy 2026-11-23 #1: a fall deeper into failure (stalled → defunded) is a setback too
+        const setback = failingPhase(curr.ImplementationPhase) &&
+          (!failingPhase(prev.ImplementationPhase) ||
+            PHASE_INTENSITY[String(curr.ImplementationPhase).trim()] < PHASE_INTENSITY[String(prev.ImplementationPhase).trim()]);
         out.push({
           type: setback ? 'setback' : 'improvement',
           severity: setback ? 'medium' : 'low',
@@ -126,7 +129,8 @@ function detect(ctx) {
       const field = priorP.measurement.expectedField;
       if (observed == null || expected == null) continue;
       const sheetName = field && field.indexOf('.') > 0 ? field.split('.')[0] : 'measureRemedies';
-      const mKey = [field, expected, observed, v].join('|');
+      // agy 2026-11-23 #3: the remedy type is part of what makes it one measurement
+      const mKey = [field, expected, observed, v, priorP.measurement.priorRemedyType || ''].join('|');
       const seen = byMeasure.get(mKey);
       if (seen) {
         const ae = priorP.affectedEntities || {};
@@ -135,6 +139,8 @@ function detect(ctx) {
         }
         const had = seen.evidence.fields.priorPatternTypes || [seen.evidence.fields.priorPatternType].filter(Boolean);
         seen.evidence.fields.priorPatternTypes = Array.from(new Set(had.concat(priorP.type ? [priorP.type] : [])));
+        seen.description = seen.description.replace(/ — from prior .*$/, '') +
+          ' — from prior ' + seen.evidence.fields.priorPatternTypes.map(t => '"' + t + '"').join(' + ');
         continue;
       }
       out.push({

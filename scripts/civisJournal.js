@@ -95,6 +95,8 @@ function translate(pattern, initiativeNames = new Map()) {
       : f.sentimentDelta != null
         ? 'Mood ' + (Number(f.sentimentDelta) < 0 ? 'fell' : 'rose') + where + ' this week.'
         : 'A previous remedy moved beyond its expected mark' + where + '.',
+    // engine.357: a program that fell into a failing phase.
+    'setback': () => project + ' fell from ' + stageWords(f.fromPhase) + ' to ' + stageWords(f.toPhase) + '.',
     'stuck-initiative': () => project + (places[0] && places[0] !== project ? ' (' + places[0] + ')' : '') +
       ' has not left its ' + stageWords(f.ImplementationPhase) + ' stage in ' + weeks(pattern.cyclesInState) + '.',
     'production-imbalance': () => f.migratingCount != null

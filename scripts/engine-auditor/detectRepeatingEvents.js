@@ -47,12 +47,16 @@ function stripErrorClauses(s) {
     .join(',');
 }
 
+// engine.357 (C117 gap log G-EC39a): Riley_Digest writes PatternFlag "none" on a
+// quiet Cycle; the empty value is not an issue and never recurs as one.
+const EMPTY_TOKENS = new Set(['none', 'null', 'undefined']);
+
 function tokenize(s) {
   if (!s) return [];
   return String(s)
     .toLowerCase()
     .split(/[^a-z0-9]+/)
-    .filter(t => t.length >= 4);
+    .filter(t => t.length >= 4 && !EMPTY_TOKENS.has(t));
 }
 
 function detect(ctx) {

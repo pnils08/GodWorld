@@ -71,6 +71,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | engine.339 | How kids are minted: code LIVE since stage 63, kept. C117: 1 birth, grab landed 0. Read C118 Sun 2026-11-29: next grab | live-observing | research-build | no plan — deleted 2026-11-21 (git history) |
 | pipeline.111 | Reporters wake as themselves: Sharon, Maria, Kai LIVE (11-21/22). Read Fri 2026-11-27 after 18:15: their pieces, quotes, tools, gate, grade | live-observing | research-build | [[../plans/2026-11-21-reporters-wake-as-themselves]] |
 | pipeline.112 | Labels off citizens' pages: live 11-19. Read Mon 2026-11-23 after 05:45: the Fri grade line, Sun chain, Mon datawake logs; organic: exchange, talk | live-observing | research-build | [[../plans/2026-11-16-page-labels-off-citizens-memory]] |
+| engine.357 | Checker reads its own record (builder 11-22 "go on 5"): no "none" issue, stalls are setbacks, one measurement once. Read C118 Sun 2026-11-29 | live-observing | engine-sheet | [[../plans/2026-11-22-checker-reads-its-own-record]] |
 
 ## 3. Now — being worked, one per terminal (in-progress)
 

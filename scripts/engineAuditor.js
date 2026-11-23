@@ -594,4 +594,4 @@ if (require.main === module && process.argv.includes('--hand-write-check')) {
   });
 }
 
-module.exports = { main, runEngineAudit, handWriteCheck, buildCitizenScoreboard, buildCitizenStates, cycleStamp };
+module.exports = { main, runEngineAudit, handWriteCheck, buildCitizenScoreboard, buildCitizenStates, cycleStamp, loadSnapshot, loadPreviousAudits };  // engine.357: loaders exported for an off-disk A/B run

@@ -387,6 +387,7 @@ function ailmentPerception(p) {
       return where + ': something real happened here and nobody in public life has spoken to it.';
     case 'cascade-failure':
       return where + ': a chain of problems is compounding — each one feeding the next.';
+    case 'setback':     // engine.357: same record fact — the move, now named a fall by the checker
     case 'improvement': {
       // pipeline.115: the record's move, not the checker's verdict on its own remedy.
       if (fields.InitiativeID && fields.toPhase) {

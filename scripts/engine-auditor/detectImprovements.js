@@ -18,7 +18,17 @@
  *          working" rather than "the intervention is stuck."
  */
 
-const VERSION = '1.1.0';
+const VERSION = '1.2.0';
+// 1.2.0 engine.357 (C117 gap log G-EC39b/c): a move into a failing phase
+// (lib/initiativePhaseContract intensity < 0: stalled / blocked / suspended /
+// defunded) is a 'setback', not an improvement; a remedy measurement two prior
+// patterns share (same field, expected, observed) is one improvement, its
+// places and initiatives joined.
+const { PHASE_INTENSITY } = require('../../lib/initiativePhaseContract');
+function failingPhase(phase) {
+  const v = PHASE_INTENSITY[String(phase || '').trim()];
+  return typeof v === 'number' && v < 0;
+}
 
 function num(v) {
   if (v == null || v === '') return null;
@@ -43,9 +53,10 @@ function detect(ctx) {
       const prev = byId.get(curr.InitiativeID || curr.Name);
       if (!prev) continue;
       if (curr.ImplementationPhase && curr.ImplementationPhase !== prev.ImplementationPhase) {
+        const setback = failingPhase(curr.ImplementationPhase) && !failingPhase(prev.ImplementationPhase);
         out.push({
-          type: 'improvement',
-          severity: 'low',
+          type: setback ? 'setback' : 'improvement',
+          severity: setback ? 'medium' : 'low',
           cyclesInState: 0,
           affectedEntities: {
             citizens: [],
@@ -63,7 +74,7 @@ function detect(ctx) {
               toPhase: curr.ImplementationPhase,
             },
           },
-          description: `Initiative "${curr.Name || curr.InitiativeID}" advanced: ${prev.ImplementationPhase} → ${curr.ImplementationPhase}`,
+          description: `Initiative "${curr.Name || curr.InitiativeID}" ${setback ? 'fell back' : 'advanced'}: ${prev.ImplementationPhase} → ${curr.ImplementationPhase}`,
           detectorVersion: VERSION,
         });
       }
@@ -105,6 +116,7 @@ function detect(ctx) {
   // to do, regardless of whether the parent classifier ('stuck-initiative',
   // 'math-imbalance', etc.) still flags the same entity this cycle.
   if (priorAudit && Array.isArray(priorAudit.patterns)) {
+    const byMeasure = new Map();   // engine.357: one measurement -> one pattern
     for (const priorP of priorAudit.patterns) {
       if (!priorP || !priorP.measurement) continue;
       const v = priorP.measurement.verdict;
@@ -114,13 +126,25 @@ function detect(ctx) {
       const field = priorP.measurement.expectedField;
       if (observed == null || expected == null) continue;
       const sheetName = field && field.indexOf('.') > 0 ? field.split('.')[0] : 'measureRemedies';
+      const mKey = [field, expected, observed, v].join('|');
+      const seen = byMeasure.get(mKey);
+      if (seen) {
+        const ae = priorP.affectedEntities || {};
+        for (const k of ['citizens', 'neighborhoods', 'initiatives', 'councilSeats']) {
+          seen.affectedEntities[k] = Array.from(new Set((seen.affectedEntities[k] || []).concat(ae[k] || [])));
+        }
+        const had = seen.evidence.fields.priorPatternTypes || [seen.evidence.fields.priorPatternType].filter(Boolean);
+        seen.evidence.fields.priorPatternTypes = Array.from(new Set(had.concat(priorP.type ? [priorP.type] : [])));
+        continue;
+      }
       out.push({
         type: 'improvement',
         severity: 'low',
         cyclesInState: 0,
-        affectedEntities: priorP.affectedEntities || {
+        // a copy: the join above must not edit the prior audit's own pattern
+        affectedEntities: JSON.parse(JSON.stringify(priorP.affectedEntities || {
           citizens: [], neighborhoods: [], initiatives: [], councilSeats: [],
-        },
+        })),
         evidence: {
           sheet: sheetName,
           rows: [],
@@ -136,6 +160,7 @@ function detect(ctx) {
         description: `Remedy ${v === 'remedy-overshot' ? 'overshot expectation' : 'fired as expected'} on ${field || 'measurement'}: observed ${observed} (expected ${expected})${priorP.type ? ` — from prior "${priorP.type}"` : ''}`,
         detectorVersion: VERSION,
       });
+      byMeasure.set(mKey, out[out.length - 1]);
     }
   }
 

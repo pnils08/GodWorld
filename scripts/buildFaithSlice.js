@@ -38,7 +38,7 @@ function foundedAgo(founded) {
 const SEAT = {
   slug: 'elliot-graye', name: 'Elliot Graye', popid: 'POP-00012', desk: 'culture',
   kind: 'beat-faith', domain: 'faith', artifact: 'faith', builder: 'buildFaithSlice.js',
-  version: 'FAITH-SLICE-3', nameRe: /elliot\s*graye/i,
+  version: 'FAITH-SLICE-4', nameRe: /elliot\s*graye/i,
   tabs: ['Faith_Organizations', 'Faith_Ledger', 'LifeHistory_Log'],
   approach: '',
   roomIsYours: '',
@@ -109,8 +109,10 @@ function build(cycle, { beats, profiles }) {
   }
   const people = [];
   const add = (p) => { if (p && p.name && p.popid !== SEAT.popid && !K.isMediaStaff(profiles, p.popid) && !people.some(x => x.popid === p.popid) && people.length < PEOPLE_CAP) people.push(p); };
-  const eventBy = new Map(events.map(e => [String(e.Organization).toLowerCase(), e]));
-  for (const o of orgs.filter(o => o.LeaderPOPID)) {
+  // agy pass 2 #5.2: the first event per congregation is its highest-priority one (weekEvents is sorted); a placeholder leader id is no person.
+  const eventBy = new Map();
+  for (const e of events) { const k = String(e.Organization).toLowerCase(); if (!eventBy.has(k)) eventBy.set(k, e); }
+  for (const o of orgs.filter(o => /^POP-\d+$/i.test(String(o.LeaderPOPID || '').trim()))) {
     const e = eventBy.get(String(o.Organization).toLowerCase());
     const why = 'leads ' + o.Organization + (e ? ' — ' + typeWords(e.EventType) + ', C' + K.num(e.Cycle) + ': ' + String(e.EventDescription || '').trim() : '');
     const popid = String(o.LeaderPOPID).toUpperCase();

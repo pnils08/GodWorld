@@ -21,7 +21,7 @@ const K = require('./beatSliceKit');
 const SEAT = {
   slug: 'maria-keen', name: 'Maria Keen', popid: 'POP-00013', desk: 'culture',
   kind: 'beat-neighborhood', domain: 'neighborhood', artifact: 'neighborhood', builder: 'buildNeighborhoodSlice.js',
-  version: 'HOOD-SLICE-6', nameRe: /maria\s*keen/i,
+  version: 'HOOD-SLICE-7', nameRe: /maria\s*keen/i,
   tabs: ['Community_Programs', 'Neighborhood_Demographics', 'LifeHistory_Log'],
   approach: '',
   roomIsYours: '',
@@ -73,7 +73,9 @@ function build(cycle, { root, beats, profiles }) {
       src: 'output/beats/Community_Programs.jsonl @C' + cycle });
   }
 
-  const prev = K.prevTabRows(root, 'Neighborhood_Demographics');
+  // agy pass 2 #5.1: only last Cycle's dump is a baseline.
+  const prevRaw = K.prevTabRows(root, 'Neighborhood_Demographics');
+  const prev = Number(prevRaw.vs) === Number(cycle) - 1 ? prevRaw : { state: 'NO_PRIOR_CYCLE', vs: null, rows: [] };
   for (const demo of (beats.Neighborhood_Demographics || []).filter(r => r.Neighborhood)) {
     const prevDemo = prev.rows.find(r => K.hoodKey(r.Neighborhood) === K.hoodKey(demo.Neighborhood));
     const moved = prevDemo && ['Students', 'Adults', 'Seniors'].some(c => K.num(demo[c]) != null && K.num(prevDemo[c]) != null && K.num(demo[c]) !== K.num(prevDemo[c]));
@@ -91,7 +93,7 @@ function build(cycle, { root, beats, profiles }) {
   const people = [];
   for (const r of lines) {
     const popid = String(r.POPID).toUpperCase();
-    const hood = String(r.Neighborhood || '').trim();
+    const hood = String(r.Neighborhood || (profiles.get(popid) || {}).Neighborhood || '').trim();   // agy pass 2 #5.3: a blank line hood takes the citizen's own
     if (popid === SEAT.popid || K.isMediaStaff(profiles, popid) || people.some(p => p.popid === popid) || people.length >= PEOPLE_CAP) continue;
     if ((perHood.get(hood) || 0) >= PER_HOOD) continue;
     const why = 'C' + cycle + ' in ' + (hood || 'their neighborhood') + ': ' + String(r.EventText).trim();

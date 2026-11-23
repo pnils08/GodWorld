@@ -62,16 +62,24 @@ async function askWorker({ officeId, question, asker, cycle, date }) {
 }
 
 // One executor branch for any reporter tool loop: asks counted per wake, the answer handed back with who gave it.
-function askExecutor(asker, cycle, log) {
+// agy 2026-11-23 pass 2 #3: every ask counts against the cap, finished or not; a worker call that fails never fails the
+// reporter's wake; only a finished answer comes back as speech (a cut-off one would be an unmanifested quote).
+function askExecutor(asker, cycle, log, alreadyUsed) {
   const answers = [];
+  let used = Number(alreadyUsed) || 0;
   const run = async (input) => {
-    if (answers.length >= ASKS_PER_WAKE) return 'no more asks this wake';
-    const a = await askWorker({ officeId: String(input.office || ''), question: input.question, asker, cycle });
-    if (a.popid && a.text && ['stop', 'end_turn'].includes(a.finish)) answers.push(Object.assign({ question: String(input.question || '').trim() }, a));
+    if (used >= ASKS_PER_WAKE) return 'no more asks this wake';
+    used++;
+    let a;
+    try { a = await askWorker({ officeId: String(input.office || ''), question: input.question, asker, cycle }); }
+    catch (e) { a = { officeId: String(input.office || ''), text: '', finish: 'error: ' + String(e && e.message || e).slice(0, 120) }; }
+    const finished = !!(a.popid && a.text && ['stop', 'end_turn'].includes(a.finish));
+    if (finished) answers.push(Object.assign({ question: String(input.question || '').trim() }, a));
     if (log) log('ask_worker ' + a.officeId + ' (' + (a.name || '?') + '): ' + (a.finish || '?') + ', ' + String(a.text || '').length + ' chars');
-    return a.name ? a.name + ', ' + a.title + ', answered:\n' + a.text : a.text;
+    if (finished) return a.name + ', ' + a.title + ', answered:\n' + a.text;
+    return a.name ? a.name + ' could not answer this time.' : (a.text || 'no answer');
   };
-  return { run, answers };
+  return { run, answers, used: () => used };
 }
 
 module.exports = { askWorker, askWorkerTool, askExecutor, workers, ASKS_PER_WAKE };

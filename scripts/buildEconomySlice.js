@@ -24,7 +24,7 @@ const K = require('./beatSliceKit');
 const SEAT = {
   slug: 'business-desk', name: 'Jordan Velez', popid: 'POP-00153', desk: 'business',
   kind: 'beat-economy', domain: 'economy', artifact: 'economy', builder: 'buildEconomySlice.js',
-  version: 'ECONOMY-SLICE-3', nameRe: /jordan\s*velez/i,
+  version: 'ECONOMY-SLICE-4', nameRe: /jordan\s*velez/i,
   tabs: ['Business_Ledger', 'Employment_Roster', 'Casino_Ledger', 'Neighborhood_Map', 'City_Treasury', 'LifeHistory_Log'],
   approach: '',
   roomIsYours: '',
@@ -57,7 +57,9 @@ function build(cycle, { root, beats, profiles }) {
   const life = (beats.LifeHistory_Log || []).filter(r => String(r.Cycle) === String(cycle) && String(r.EventText || '').trim());
 
   // Every business, the movers first.
-  const prev = K.prevTabRows(root, 'Business_Ledger');
+  // agy pass 2 #5.1: a prev/ dump that is not last Cycle's is no baseline — no moves, rather than a multi-cycle drift labelled as one.
+  const prevRaw = K.prevTabRows(root, 'Business_Ledger');
+  const prev = Number(prevRaw.vs) === cyc - 1 ? prevRaw : { state: 'NO_PRIOR_CYCLE', vs: null, rows: [] };
   const prevById = new Map(prev.rows.map(b => [b.BIZ_ID, b]));
   const rows = (beats.Business_Ledger || []).filter(b => b.BIZ_ID && b.Name).map(b => {
     const p = prevById.get(b.BIZ_ID);

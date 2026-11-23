@@ -649,6 +649,16 @@ async function main() {
           }
           quoted.add(String(q.name).toLowerCase());
         }
+        // pipeline.111 (agy 2026-11-23 pass 2 #1): a city worker's answer to the reporter's ask_worker is in the W3
+        // manifest (appendWorkerQuotes), not the W2 packet; it backs a quoted-source the same way an interview does.
+        if (ARTICLE_PACKET_FILE) {
+          try {
+            const ap = JSON.parse(fs.readFileSync(path.resolve(ROOT, ARTICLE_PACKET_FILE), 'utf8'));
+            for (const q of (ap && ap.manifest && ap.manifest.approvedQuotes) || []) {
+              if (q && q.sourceKind === 'worker-answer' && q.speakerName) quoted.add(String(q.speakerName).toLowerCase());
+            }
+          } catch (_) { /* the W3 packet is read again below; a read failure there is loud */ }
+        }
         unbackedQuoted = parsed.names.filter(n => n.role === 'quoted-source' && !quoted.has(String(n.name).toLowerCase())).map(n => n.name);
         // pipeline.70 seam 5 — page-backed quote check. For every citizen quote whose author has a
         // page, read their three most recent reflections: a quote that cheers what the page curses

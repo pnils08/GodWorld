@@ -508,7 +508,7 @@ function renderPacketIntake(draftText, packet, opts) {
   if (hood && body.includes(hood)) lines.push('HOOD: ' + hood);
   if (quoted) {
     lines.push('CLAIM: ' + String(quoted.quote).replace(/\|/g, '—').replace(/\s+/g, ' ').trim() +
-      ' | citizenVoice PRESS ' + String(quoted.name).replace(/\|/g, '—'));
+      (quoted.sourceKind === 'worker-answer' ? ' | ask_worker ' : ' | citizenVoice PRESS ') + String(quoted.name).replace(/\|/g, '—'));
   } else {
     const facts = (packet && packet.known || []).filter(c => c && c.t === 'FACT' && c.text && c.src &&
       c.src !== 'cron-desk-run explicit cycle argument');
@@ -808,7 +808,7 @@ function seatToolsBlock(persona, n) {
 // health/school/safety hood rows. Aggregate city and hood sheets only — no household or per-citizen finance tab.
 const SHEET_READ_ALLOWLIST = ['Initiative_Tracker', 'Neighborhood_Map', 'Oakland_Sports_Feed', 'Civic_Office_Ledger',
   'Faith_Organizations', 'Faith_Ledger', 'Business_Ledger', 'Transit_Metrics', 'Neighborhood_Demographics',
-  'Care_Justice_Census', 'Community_Programs', 'Crime_Metrics'].concat(TEST_SEAT || process.env.GODWORLD_SEAT_TOOLS === '1' ? ['Cultural_Ledger'] : []);
+  'Care_Justice_Census', 'Community_Programs', 'Crime_Metrics'].concat(TEST_SEAT ? ['Cultural_Ledger'] : []);
 // memory tools appear in the loop only when the run knows whose page it is
 // (--byline-popid from cron-desk-run, or the persona's own POPID).
 const MEMORY_TOOLS = [
@@ -855,9 +855,11 @@ function toolCitizenLookup(input) {
   } catch (e) { return '(citizen lookup failed: ' + e.message + ')'; }
 }
 
-async function toolSheetRead(input) {
+async function toolSheetRead(input, opts) {
   const tab = String(input.tab || '').trim();
-  if (!SHEET_READ_ALLOWLIST.includes(tab)) return 'tab not allowed. Allowed: ' + SHEET_READ_ALLOWLIST.join(', ');
+  // pipeline.111 (agy pass 2 #2.3): a seat reporter's morning passes { seat: true } — no process-wide env flag.
+  const allow = opts && opts.seat ? SHEET_READ_ALLOWLIST.concat(SHEET_READ_ALLOWLIST.includes('Cultural_Ledger') ? [] : ['Cultural_Ledger']) : SHEET_READ_ALLOWLIST;
+  if (!allow.includes(tab)) return 'tab not allowed. Allowed: ' + allow.join(', ');
   try {
     const sheets = require('../lib/sheets');
     const data = await sheets.getRawSheetData(tab);
@@ -1537,7 +1539,8 @@ async function main() {
       (PACKET_ONLY && !TOOLS_AB ? ', 0 live tools' : ', max 6 calls') + ')...');
     if (TEST_SEAT) {
       const me = require('./beatSliceKit').loadProfiles(ROOT).get(String(PERSONA_POPID || '').toUpperCase());
-      SEAT_ASK = require('./workerAsk').askExecutor({ name: me && me.Name ? String(me.Name).trim() : null }, cycle, (m) => log.info(m));
+      SEAT_ASK = require('./workerAsk').askExecutor({ name: me && me.Name ? String(me.Name).trim() : null }, cycle, (m) => log.info(m),
+        parseInt(arg('--asks-used', '0'), 10) || 0);   // agy pass 2 #2.2: the cap is per wake, the morning's asks count
     }
     const composeUser = TEST_SEAT ? kickoff : kickoff +
       '\n\nWRITE the full ' + DESK + ' section for cycle ' + cycle + ' — the complete, publish-ready ' +

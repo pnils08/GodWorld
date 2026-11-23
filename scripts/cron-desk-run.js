@@ -1658,32 +1658,37 @@ function seatSitsOut(personaSlug, cycle, stage) {
 // the morning Packet. Returns the citizenVoice --json envelope the angle stage already reads.
 const SEAT_MORNING_CALLS = 6;
 async function seatMorningPlan(asker, ask, model, maxTokens, cycle) {
-  process.env.GODWORLD_SEAT_TOOLS = '1';   // sheet_read may read Cultural_Ledger, as the seat writer can
   const W = require('./cron-desk-writer');
   const agentDir = path.join(ROOT, '.claude', 'agents', personaSlugForSeat());
   const noEssence = !!(ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.seatEssence === false);
   const who = await require('./reporterIdentity').reporterIdentity({ popid: asker.popid, agentDir: noEssence ? null : agentDir });
   const system = (who.block ? who.block + '\n\n' : '') + fs.readFileSync(SEAT_FILE, 'utf8').trim() +
     '\n\nThis is your morning. Read what you want with your tools, then answer with the plan the Packet asks for.';
-  const asks = require('./workerAsk').askExecutor({ name: asker.name }, cycle, log);
+  // agy pass 2 #2.2: one ask counter for the whole morning (a resampled plan does not get fresh asks).
+  if (!SEAT_MORNING_ASKS) SEAT_MORNING_ASKS = require('./workerAsk').askExecutor({ name: asker.name }, cycle, log);
+  const asks = SEAT_MORNING_ASKS;
   const exec = (name, input) => name === 'ask_worker' ? asks.run(input)
-    : name === 'canon_recall' ? W.toolCanonRecall(input)
+    : name === 'canon_recall' ? W.toolCanonRecall(input, Number(cycle))   // agy pass 2 #2.1: bounded to this Cycle
     : name === 'canon_search' ? W.toolSearchWorld({ query: input.query })
     : name === 'citizen_lookup' ? W.toolCitizenLookup(input)
-    : name === 'sheet_read' ? W.toolSheetRead(input)
+    : name === 'sheet_read' ? W.toolSheetRead(input, { seat: true })   // Cultural_Ledger, as the seat writer reads it
     : 'unknown tool ' + name;
   const r = await W.openRouterToolLoop({ model, system, user: ask + '\n\nReturn ONLY the JSON requested by packet.output.',
-    maxToolCalls: SEAT_MORNING_CALLS, maxTokens, toolset: W.OPENROUTER_TOOLS.concat([W.CANON_RECALL_TOOL, require('./workerAsk').askWorkerTool()]), exec, traceResults: true });
+    maxToolCalls: SEAT_MORNING_CALLS, maxTokens, timeoutMs: 180000, toolset: W.OPENROUTER_TOOLS.concat([W.CANON_RECALL_TOOL, require('./workerAsk').askWorkerTool()]), exec, traceResults: true });
   log('morning tools: ' + r.trace.length + ' call(s)' + (r.trace.length ? ' — ' + r.trace.map(c => c.tool + '(' + JSON.stringify(c.input).slice(0, 60) + ')').join('; ') : ''));
   SEAT_MORNING_TRACE = r.trace.map(({ resultHead, ...rest }) => rest);
   return { popId: asker.popid, name: asker.name, text: r.text,
-    usage: { completion: r.usageOut, maxTokens, finish: r.finishReason || null } };
+    // agy pass 2 #4.2: a loop that ran out of turns is a cut-off plan, counted as a cap hit like a length stop
+    usage: { completion: r.usageOut, maxTokens, finish: r.finishReason === 'tool-turns-exhausted' ? 'length' : (r.finishReason || null) } };
 }
+function livedPacketV2Module() { return require('./livedExperiencePacketV2'); }
 let SEAT_MORNING_TRACE = null;
+let SEAT_MORNING_ASKS = null;   // reset at each runAngle
 let SEAT_SLUG = null;
 function personaSlugForSeat() { return SEAT_SLUG; }
 
 async function runAngle(assign) {
+  SEAT_MORNING_TRACE = null; SEAT_MORNING_ASKS = null;
   SEAT_CHECKS = null;
   let angleCapHits = 0; // pipeline.75 — rides the angle artifact into the write record
   const cycle = arg('--cycle', null) || detectCycle();
@@ -2355,6 +2360,9 @@ async function runAngle(assign) {
   fs.writeFileSync(anglePath, JSON.stringify({
     stage: 'angle', desk, cycle, persona: personaSlug,
     ...(FREE_ANGLE ? { freeAngle: FREE_ANGLE, pass: !!(ownPlan && ownPlan.pass) } : {}),
+    // agy pass 2 #2.2/#4.3: the morning's reads and the workers' finished answers ride to W3 (quoted there, they join the manifest).
+    ...(SEAT_FILE ? { morningTools: SEAT_MORNING_TRACE || [], workerAnswers: (SEAT_MORNING_ASKS && SEAT_MORNING_ASKS.answers) || [],
+      workerAsksUsed: SEAT_MORNING_ASKS ? SEAT_MORNING_ASKS.used() : 0 } : {}),
     ...(PACKET_ACTIVE ? { packetContract: livedPacket.VERSION, inputPacket, sourcingPool } : {}),
     reporter: assign ? { name: assign.name, popid: assign.popid } : (persona ? { name: persona.name, popid: persona.popid } : null),
     assignment: story ? { story, approach } : null,   // Task 2.5.2: the EIC assignment rides the handoff
@@ -3242,7 +3250,15 @@ async function runWrite(assign) {
       ...(bareWrite ? { bare: true } : {}),
     });
     if (REGATE && fs.existsSync(stateFile)) writePacket = readJson(stateFile) || writePacket; // the state the writer saw
-    else fs.writeFileSync(stateFile, JSON.stringify(writePacket, null, 2));
+    else {
+      // agy pass 2 #2.2: a worker the reporter asked in the morning is on the record for W3 too — its finished answer
+      // joins the manifest as that worker's quote before the writer sees the Packet.
+      if (SEAT_FILE && angle && Array.isArray(angle.workerAnswers) && angle.workerAnswers.length && writePacket && writePacket.v === 'LEP/2') {
+        writePacket = livedPacketV2Module().appendWorkerQuotes(writePacket, angle.workerAnswers).packet;
+        log('morning worker answers → manifest: ' + angle.workerAnswers.map(a => a.name).join(', '));
+      }
+      fs.writeFileSync(stateFile, JSON.stringify(writePacket, null, 2));
+    }
   } else {
     fs.writeFileSync(stateFile, buildLaneState(desk, cycle, lane, byline, quotes, persona,
       angle && angle.angleRead ? angle.angleRead.text : null, assignment, wallBlock));
@@ -3264,6 +3280,7 @@ async function runWrite(assign) {
   // (own citizen page, cp-<popid>) joins the tool loop.
   if (PACKET_ACTIVE) writerArgs.push('--strict-source-hygiene', '--packet-only');
   if (SEAT_FILE) writerArgs.push('--seat-file', SEAT_FILE);   // pipeline.111: the seat prompt
+  if (SEAT_FILE && angle && Number(angle.workerAsksUsed) > 0) writerArgs.push('--asks-used', String(Number(angle.workerAsksUsed)));   // the ask cap is per wake
   if (SEAT_FILE && ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.seatEssence === false) writerArgs.push('--no-essence');   // Celeste (builder 2026-11-22: "archived only")
   // pipeline.76 — the package's own writer tools (its grant).
   const ownTools = PACKET_ACTIVE && ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.writerTools &&

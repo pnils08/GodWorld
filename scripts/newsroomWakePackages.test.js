@@ -351,17 +351,17 @@ assert.equal(lila.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
 assert.deepStrictEqual(lila.reviewProfile.textureConditions, []);
 
 const angela = packages['angela-reyes'];
-assert.equal(angela.version, 'ANGELA-LEP2-2');
+assert.equal(angela.version, 'ANGELA-LEP2-3');
+assert.equal(angela.seatFile, '.claude/agents/angela-reyes/SEAT.md');   // pipeline.111 (builder 2026-11-23)
 assert.equal(angela.requiredDaily, true);
 assert.equal(angela.assignment.name, 'Angela Reyes');
 assert.equal(angela.assignment.popid, 'POP-00156');
 assert.equal(angela.assignment.beatDomain, 'EDUCATION');
-assert.equal(packagesApi.routeFor(angela, 'angle').model, 'deepseek/deepseek-v4-flash-0731');
+assert.equal(packagesApi.routeFor(angela, 'angle').model, 'anthropic/claude-sonnet-5.5');
 assert.equal(packagesApi.routeFor(angela, 'report').model, 'deepseek/deepseek-v4-flash-0731');
 assert.equal(packagesApi.routeFor(angela, 'write').model, 'anthropic/claude-sonnet-5.5');
 assert.equal(angela.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
-assert.ok(angela.reviewProfile.textureConditions.some(v => v.includes('stability evidence')));
-assert.ok(angela.reviewProfile.canonBlockers.some(v => v.includes('invented student')));
+assert.deepStrictEqual(angela.reviewProfile.textureConditions, []);
 
 const noah = packages['noah-tan'];
 assert.equal(noah.version, 'NOAH-LEP2-2');

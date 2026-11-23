@@ -1021,7 +1021,7 @@
     "seatFile": ".claude/agents/lila-mezran/SEAT.md"
   },
   "angela-reyes": {
-    "version": "ANGELA-LEP2-2",
+    "version": "ANGELA-LEP2-3",
     "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
@@ -1037,7 +1037,7 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-v4-flash-0731"
+        "model": "anthropic/claude-sonnet-5.5"
       },
       "report": {
         "provider": "openrouter",
@@ -1049,37 +1049,27 @@
       }
     },
     "reviewProfile": {
-      "id": "angela-education-stability-v1",
+      "id": "angela-schools-v2",
       "canonPolicy": "load-bearing",
-      "purpose": "Translate one Packet-backed school, youth, or apprenticeship Initiative into a warm account of program stability without inventing participants, institutions, access, or outcomes.",
+      "purpose": "Report Oakland's schools and youth from the schools record (builder 2026-11-23). The check is facts: locations, citizens, data points.",
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
-        "voice": "warm, brief third-person education reporting",
-        "targetWords": "evidence-bounded",
-        "opening": "one Packet-backed school, youth-program, apprenticeship, or continuity fact",
-        "closing": "the next participant, access, continuity, or outcome record still needed"
+        "targetWords": "evidence-bounded"
       },
       "authorizedTexture": [
-        "plain-language translation of a supplied education or youth-program implementation fact",
-        "a careful stability or access question that remains explicitly unanswered",
-        "transitions between supplied education facts that add no participant, institution, number, schedule, placement, or outcome claim"
+        "the classroom, the pickup line and the program after the bell, as a former teacher sees them"
       ],
-      "textureConditions": [
-        "every named student, teacher, family member, school, program, employer, partner, site, Initiative, Project, office, neighborhood, and organization must come from the Packet",
-        "eligibility, applications, enrollment, attendance, participation, placements, schedules, staffing, funding, support services, retention, completion, learning, credentials, employment, dates, durations, counts, measurements, and outcomes require Packet support",
-        "unestablished stability evidence must remain unestablished; do not manufacture a participant, educator, family, quote, classroom scene, school, employer, or collective experience",
-        "raw tracker status, phase labels, source paths, engine fields, and real-world institutions absent from canon may not appear as public prose"
-      ],
+      "textureConditions": [],
       "canonBlockers": [
-        "an invented student, teacher, family, participant, staff member, school, employer, partner, site, quote, classroom scene, eligibility rule, application, enrollment, attendance, placement, schedule, staffing level, budget, measurement, credential, completion, learning, employment, or youth outcome",
-        "a named education institution, school, program, employer, partner, office, Project, Initiative, person, neighborhood, or organization not found in the supplied record",
-        "an unsupported launch, closure, delay, continuity, access, participation, placement, duty, response, promise, timeline, or causal education claim",
-        "raw engine or tracker labels, phases, scores, decimals, source paths, row metadata, or non-canon real-world institutions printed as public-facing evidence"
+        "an invented or altered location: school, program, business or neighborhood",
+        "an invented or altered citizen (name, role, age, home, relationship, school), or words a named citizen did not say",
+        "an invented or altered data point: a score, rate, enrollment, funding, number, date or engine record"
       ]
     },
     "writerTools": {
       "maxToolCalls": 6
-    }
+    },
+    "seatFile": ".claude/agents/angela-reyes/SEAT.md"
   },
   "noah-tan": {
     "version": "NOAH-LEP2-2",

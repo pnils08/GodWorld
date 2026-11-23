@@ -321,26 +321,14 @@ try {
   ]);
   fs.writeFileSync(path.join(prevDir, 'meta.json'), JSON.stringify({ cycle: CYCLE - 1, rows: { Neighborhood_Demographics: 3 } }));
   const s = schools.buildSchoolsSlice(CYCLE, { root });
-  ok('odd cycle → bottom of the table', s.hood === 'Chinatown' && /weakest school record/.test(s.story.label));
+  ok('no code-picked hood: every hood row, no strongest/weakest pick (pipeline.111)', s.hood === null && s.story.label === 'the schools and youth record of C103');
   ok('row fact', s.facts.some(f => /Chinatown: school quality index 7, graduation 87%, college-ready 56%, teacher quality 7, funding 12,000, 180 students/.test(f.text)));
   ok('enrollment movement leads', /Enrollment moved: Chinatown \+5 students vs C102/.test(s.facts[0].text));
   ok('static quality table says so plainly', s.facts.some(f => /quality table is unchanged since C102/.test(f.text)));
-  ok('district card by BIZ_ID', s.facts.some(f => /The district: Test Unified School District — 5,201 employees citywide/.test(f.text) && /Business_Ledger\.jsonl BIZ-00016/.test(f.src)));
-  ok('EDUCATION hook reaches her despite the Education Desk misroute', s.prewrite.hooks.some(h => /School-age population growing in Rockridge/.test(h.text) && h.domain === 'EDUCATION'));
-  ok('DROPOUT_WAVE reaches her despite carrying no desk', s.prewrite.hooks.some(h => /West Oakland graduation rate at 62%/.test(h.text)));
-  ok('students from the ledger snapshot in the lead hood', s.story.citizens.length === 1 && s.story.citizens[0] === 'Test College Student (POP-90032)');
-  ok('citywide educators when the lead hood has none', (() => {
-    const only = new Map([['POP-90040', { POPID: 'POP-90040', Name: 'Test Faraway Teacher', RoleType: 'High School Teacher', Neighborhood: 'Temescal' }]]);
-    const x = schools.buildSchoolsSlice(CYCLE, { root, profiles: only });
-    return x.citizens.some(c => c.popid === 'POP-90040' && /none in Chinatown/.test(c.why)) && /elsewhere in the city/.test(x.prewrite.note);
-  })());
-  ok('even cycle → top of the table', (() => {
-    const meta = path.join(output, 'beats', 'meta.json');
-    const m = JSON.parse(fs.readFileSync(meta, 'utf8')); m.cycle = CYCLE + 1; fs.writeFileSync(meta, JSON.stringify(m));
-    const even = schools.buildSchoolsSlice(CYCLE + 1, { root });
-    m.cycle = CYCLE; fs.writeFileSync(meta, JSON.stringify(m));
-    return even.hood === 'Rockridge' && even.story.citizens.length === 2;
-  })());
+  ok('the district rides as a school on the ledger', s.facts.some(f => /^Test Unified School District \(Education\), City-wide — 5,201 employees/.test(f.text) && /Business_Ledger\.jsonl BIZ-00016/.test(f.src)));
+  ok('no hooks (pipeline.111)', s.prewrite.hooks.length === 0);
+  ok('no address-picked residents: people come from the schools roster and the cycle\'s lines', !s.citizens.some(c => /on the ledger in Chinatown \(Simulation_Ledger\)/.test(c.why)));
+  ok('an empty record sits her out', schools.sitsOutWhenEmpty === true);
   fs.rmSync(prevDir, { recursive: true, force: true });
 
   console.log('environment:');
@@ -628,7 +616,7 @@ try {
   for (const [label, slice, popid] of [['trevor', t, 'POP-00155'], ['lila', h, 'POP-00154'], ['angela', s, 'POP-00156'], ['noah', e, 'POP-00157'], ['graye', f, 'POP-00012'], ['rachel', r, 'POP-00057'], ['kai', k, 'POP-00158'], ['sharon', sh, 'POP-00159'], ['maria', m, 'POP-00013'], ['selena', sg, 'POP-00591'], ['talia', tf, 'POP-00592'], ['celeste', ct, 'POP-00164']]) {
     const pk = v2.buildAnglePacket({ cycle: CYCLE, desk: slice.seat.desk, reporter: { popid, name: slice.seat.name }, story: slice.story, approach: slice.approach, slice, lane: [] });
     const b = pk.task.creativeBrief;
-    ok(label + ': brief beat-slice with facts + room', b && b.kind === 'beat-slice' && b.facts.length >= 1 && (['sharon', 'maria', 'kai', 'celeste', 'graye', 'noah', 'trevor', 'lila', 'rachel'].includes(label) || !!b.roomIsYours));   // seat-file seats: no room line (pipeline.111)
+    ok(label + ': brief beat-slice with facts + room', b && b.kind === 'beat-slice' && b.facts.length >= 1 && (['sharon', 'maria', 'kai', 'celeste', 'graye', 'noah', 'trevor', 'lila', 'rachel', 'angela'].includes(label) || !!b.roomIsYours));   // seat-file seats: no room line (pipeline.111)
     ok(label + ': every anchor fact is a known FACT sourced to a file on disk', slice.prewrite.anchorFacts.every(text => pk.known.some(k => k.text === text && /^output\//.test(k.src))));
     ok(label + ': candidates = the slice\'s people', pk.exposure.candidates.length === slice.citizens.length && pk.exposure.candidates.every(c => slice.citizens.some(p => p.popid === c.pop)));
   }

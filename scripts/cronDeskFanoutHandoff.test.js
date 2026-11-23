@@ -228,7 +228,7 @@ const angelaAssignment = {
 };
 const angelaContext = activateWakeContext(angelaAssignment, angelaAssignment.persona);
 assert.equal(angelaContext.packetContract, 'v2');
-assert.equal(angelaContext.wakePackage.version, 'ANGELA-LEP2-2');
+assert.equal(angelaContext.wakePackage.version, 'ANGELA-LEP2-3');
 for (const file of [
   path.join(__dirname, '..', 'docs', 'media', 'voices', 'angela_reyes.md'),
   path.join(__dirname, '..', 'docs', 'media', 'ANGELA_EDUCATION_BAG.md'),
@@ -239,7 +239,7 @@ for (const file of [
     'Angela active newsroom source carries a real-world school reference: ' + file);
 }
 assert.equal(stageRoute('civic', angelaAssignment.persona, 'angle').model,
-  'deepseek/deepseek-v4-flash-0731');
+  'anthropic/claude-sonnet-5.5');   // pipeline.111 (builder 2026-11-23)
 assert.equal(stageRoute('civic', angelaAssignment.persona, 'report').model,
   'deepseek/deepseek-v4-flash-0731');
 assert.equal(stageRoute('civic', angelaAssignment.persona, 'write').model,

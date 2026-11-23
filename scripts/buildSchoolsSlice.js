@@ -28,16 +28,18 @@ const K = require('./beatSliceKit');
 const SEAT = {
   slug: 'angela-reyes', name: 'Angela Reyes', popid: 'POP-00156', desk: 'civic',
   kind: 'beat-schools', domain: 'schools', artifact: 'schools', builder: 'buildSchoolsSlice.js',
-  version: 'SCHOOLS-SLICE-2', nameRe: /angela\s*reyes/i,
-  tabs: ['Neighborhood_Demographics', 'Story_Hook_Deck', 'Business_Ledger'],
-  approach: 'Schools approach: this slice is the school table for every neighborhood, the enrollment movement this cycle, the district card, and the students and teachers on the ledger. The quality table is stable cycle to cycle — never write as if a score moved when it did not; enrollment is the number that moves. Warm, precise. Never invent a named student or teacher; a score trend is colour unless it is on this table.',
-  roomIsYours: 'the classroom, the pickup line, what a parent asks at the door, what the teacher is worried about, what the hallway sounds like at 3:05',
+  version: 'SCHOOLS-SLICE-3', nameRe: /angela\s*reyes/i,
+  tabs: ['Neighborhood_Demographics', 'Business_Ledger', 'Employment_Roster', 'Community_Programs', 'LifeHistory_Log'],
+  approach: '',
+  roomIsYours: '',
   build
 };
 
 const PEOPLE_RE = /\b(student|schooler|teacher|principal|school psychologist|after-school|daycare)\b/i;
 const EDUCATOR_RE = /\b(teacher|principal|school psychologist|after-school|daycare)\b/i;
 const DISTRICT_BIZ_ID = 'BIZ-00016';
+const PEOPLE_CAP = 30;
+const STAFF_CAP = 15;
 
 /** Name-matched hooks plus this cycle's EDUCATION / DROPOUT_WAVE rows (misrouted or unrouted engine-side). */
 function schoolHooks(beats, cycle) {
@@ -67,7 +69,6 @@ function build(cycle, { root, beats, profiles }) {
   if (!rows.length) return K.emptySlice(SEAT, cycle, 'no Neighborhood_Demographics school columns');
   const prevDemo = K.prevTabRows(root, 'Neighborhood_Demographics');
   const prevBy = new Map(prevDemo.rows.map(r => [K.hoodKey(r.Neighborhood), { sqi: K.num(r.SchoolQualityIndex), students: K.num(r.Students) }]));
-  const lead = cycle % 2 === 0 ? rows[0] : rows[rows.length - 1];
   const src = 'output/beats/Neighborhood_Demographics.jsonl @C' + cycle;
 
   // Enrollment is the live number on this table — it drifts every cycle.
@@ -88,67 +89,73 @@ function build(cycle, { root, beats, profiles }) {
     (r.teacher != null ? ', teacher quality ' + r.teacher : '') + (r.funding != null ? ', funding ' + K.fmtInt(r.funding) : '') +
     (r.students != null ? ', ' + K.fmtInt(r.students) + ' students' : '');
 
+  // pipeline.111 (builder 2026-11-23: "This looks good"): every hood's row in name order; no strongest/weakest pick.
   const facts = [];
   if (moved.length) {
     facts.push({
-      text: 'Enrollment moved: ' + moved.slice(0, 6).map(m => m.hood + ' ' + (m.to - m.from > 0 ? '+' : '') + (m.to - m.from) + ' students').join(', ') +
-        ' vs C' + prevDemo.vs,
+      text: 'Enrollment moved: ' + moved.map(m => m.hood + ' ' + (m.to - m.from > 0 ? '+' : '') + (m.to - m.from) + ' students').join(', ') + ' vs C' + prevDemo.vs,
       src: 'output/beats/prev/Neighborhood_Demographics.jsonl vs current @C' + cycle
     });
   }
-  if (prevDemo.state === 'PRIOR_CYCLE_ON_DISK' && !sqiMoved) {
-    facts.push({ text: 'The school quality table is unchanged since C' + prevDemo.vs + ' — no score moved this cycle.', src });
-  }
-  facts.push({ text: 'Ranked by school quality index: ' + rows.map(r => r.hood + ' ' + r.sqi).join(', ') + ' (' + rows.length + ' neighborhoods)', src });
-  facts.push({ text: fmt(lead), src });
-  for (const r of [rows[0], rows[rows.length - 1]]) if (r !== lead) facts.push({ text: fmt(r), src });
+  if (prevDemo.state === 'PRIOR_CYCLE_ON_DISK' && !sqiMoved) facts.push({ text: 'The school quality table is unchanged since C' + prevDemo.vs + ' — no score moved this cycle.', src });
+  for (const r of rows.slice().sort((a, b) => String(a.hood).localeCompare(String(b.hood)))) facts.push({ text: fmt(r), src });
 
-  // The district card (by BIZ_ID — canon.5 holds the rename). A school
-  // district has no revenue line; a negative one is a ledger artifact (engine.191).
-  const district = (beats.Business_Ledger || []).find(b => b.BIZ_ID === DISTRICT_BIZ_ID);
-  if (district) {
-    facts.push({
-      text: 'The district: ' + district.Name + ' — ' + K.fmtInt(K.num(district.Employee_Count)) + ' employees citywide' +
-        (K.num(district.Growth_Rate) != null ? ', growth ' + district.Growth_Rate + '%' : '') +
-        '; per-hood funding on the table totals ' + K.fmtInt(rows.reduce((s, r) => s + (r.funding || 0), 0)),
-      src: 'output/beats/Business_Ledger.jsonl ' + DISTRICT_BIZ_ID + ' @C' + cycle
-    });
+  // The schools, colleges and childcare as businesses, and the programs for the young.
+  const SCHOOL_BIZ = /education|school|college|university|academy|childcare|preschool|tutor/i;
+  const schools = (beats.Business_Ledger || []).filter(b => b.BIZ_ID && b.Name && SCHOOL_BIZ.test(String(b.Sector || '') + ' ' + String(b.Name)) && !/dental|medical|cafe/i.test(String(b.Name)));
+  for (const b of schools) {
+    facts.push({ text: String(b.Name).trim() + ' (' + String(b.Sector || '').trim() + ')' + (b.Neighborhood ? ', ' + b.Neighborhood : '') +
+      (K.num(b.Employee_Count) != null ? ' — ' + K.fmtInt(K.num(b.Employee_Count)) + ' employees' : '') + (K.num(b.Growth_Rate) != null ? ', growing ' + K.num(b.Growth_Rate).toFixed(1) + '% a year' : ''),
+      src: 'output/beats/Business_Ledger.jsonl ' + b.BIZ_ID + ' @C' + cycle });
   }
-
-  const inLead = [...profiles.values()]
-    .filter(p => K.hoodKey(p.Neighborhood) === K.hoodKey(lead.hood) && PEOPLE_RE.test(String(p.RoleType || '')))
-    .sort((a, b) => String(a.RoleType).localeCompare(String(b.RoleType)) || String(a.Name).localeCompare(String(b.Name)));
-  const people = inLead.map(p => personOf(p, lead.hood, 'on the ledger in ' + lead.hood + ' (Simulation_Ledger)'));
-  let peopleNote = null;
-  if (!people.length) {
-    const citywide = [...profiles.values()]
-      .filter(p => EDUCATOR_RE.test(String(p.RoleType || '')))
-      .sort((a, b) => String(a.RoleType).localeCompare(String(b.RoleType)) || String(a.Name).localeCompare(String(b.Name)))
-      .slice(0, 5);
-    for (const p of citywide) {
-      people.push(personOf(p, String(p.Neighborhood || '').trim() || null,
-        'educator on the ledger in ' + (p.Neighborhood || 'the city') + ' — none in ' + lead.hood + ' (Simulation_Ledger)'));
-    }
-    peopleNote = 'no students or educators on the ledger in ' + lead.hood +
-      (citywide.length ? ' — the educators below are elsewhere in the city' : ' or anywhere on the ledger');
+  for (const pr of (beats.Community_Programs || []).filter(p => p.Name && /active/i.test(String(p.Status || '')) && /youth|tech-education|school|academy|apprentice|league|tutor/i.test(String(p.Type || '') + ' ' + String(p.Name)))) {
+    const founder = pr.Founder_POPID ? profiles.get(String(pr.Founder_POPID).toUpperCase()) : null;
+    facts.push({ text: String(pr.Name).trim() + ' (' + String(pr.Type || '') + ')' + (pr.Neighborhood ? ', ' + pr.Neighborhood : '') +
+      (founder && founder.Name ? ' — founded by ' + String(founder.Name).trim() : '') + (pr.Founded_Cycle ? ', since C' + pr.Founded_Cycle : ''),
+      src: 'output/beats/Community_Programs.jsonl ' + (pr.Program_ID || pr.Name) + ' @C' + cycle });
   }
 
-  const label = lead.hood + (lead === rows[0] ? ' has the strongest school record' : ' has the weakest school record') + ' on the table (index ' + lead.sqi + ')';
+  // People: the staff on the schools' roster, and the citizens whose week was about school, learning or a graduation.
+  const { simYearFromCycle } = require('../lib/citizenDerivation');
+  const people = [];
+  const add = (popid, why) => {
+    const id = String(popid || '').toUpperCase();
+    if (!/^POP-\d+$/.test(id) || id === SEAT.popid || K.isMediaStaff(profiles, id) || people.some(p => p.popid === id) || people.length >= PEOPLE_CAP) return;
+    const p = K.personFromProfile(profiles, id, why);
+    if (!p) return;
+    const by = K.num((profiles.get(id) || {}).BirthYear);
+    if (by) p.age = simYearFromCycle(cycle) - by;   // her craft names a teacher by years in the room — the row's age, never a guess
+    p.profile = p.profile + (p.age ? ' — age ' + p.age : '') + ' — ' + why;
+    people.push(p);
+  };
+  const life = (beats.LifeHistory_Log || []).filter(r => String(r.Cycle) === String(cycle) && String(r.EventText || '').trim());
+  const schoolIds = new Map(schools.map(b => [b.BIZ_ID, String(b.Name).trim()]));
+  for (const w of (beats.Employment_Roster || []).filter(w => schoolIds.has(w.BIZ_ID)).slice(0, STAFF_CAP)) {   // room left for the students and families
+    const own = life.find(r => String(r.POPID).toUpperCase() === String(w.POP_ID).toUpperCase());
+    add(w.POP_ID, String(w.RoleType || 'works').trim() + ' at ' + schoolIds.get(w.BIZ_ID) + (own ? '; C' + cycle + ': ' + String(own.EventText).trim() : ''));
+  }
+  // The ledger's students with a line this cycle, before the adults' learning lines.
+  const studentIds = new Set([...profiles.values()].filter(p => /\b(student|schooler)\b/i.test(String(p.RoleType || ''))).map(p => String(p.POPID).toUpperCase()));
+  for (const r of life.filter(r => studentIds.has(String(r.POPID).toUpperCase())).slice(0, 10)) {
+    add(r.POPID, 'student, C' + cycle + (r.Neighborhood ? ' in ' + r.Neighborhood : '') + ': ' + String(r.EventText).trim());
+  }
+  const SCHOOL_LINE = /\b(school|class|classes|teacher|student|homework|graduat\w*|diploma|tutor\w*|recess|principal|classroom|campus|commencement|semester|exam|enroll\w*)\b/i;
+  for (const r of life.filter(r => /^(Education|Graduation)/.test(String(r.EventTag || '')) || SCHOOL_LINE.test(String(r.EventText)))) {
+    add(r.POPID, 'C' + cycle + (r.Neighborhood ? ' in ' + r.Neighborhood : '') + ': ' + String(r.EventText).trim());
+  }
+
+  const label = 'the schools and youth record of C' + cycle;
   return K.makeSlice(SEAT, cycle, beats, {
-    ref: src, hood: lead.hood, label,
-    angle: (moved.length ? 'Enrollment moved in ' + moved[0].hood + ' — ' : '') + label + ' — the students and teachers who live it',
-    hookLine: people.length
-      ? people.length + (inLead.length ? ' students and educators in ' + lead.hood : ' educators on the ledger') + '; the table says why their school reads the way it does.'
-      : 'No student or educator in ' + lead.hood + ' is on the ledger; the table is the story and the classroom is yours.',
-    facts, people,
+    ref: src, hood: null, label, angle: label, hookLine: '',
+    facts, people, peopleCap: PEOPLE_CAP, factCap: Math.max(12, facts.length),
     deltas: { state: prevDemo.state, vs: prevDemo.vs },
-    hooks: schoolHooks(beats, cycle),
-    note: peopleNote,
-    extra: { table: rows, enrollmentMoves: moved, district: district ? district.Name : null }
+    hooks: [], note: null,
+    extra: { table: rows, enrollmentMoves: moved }
   });
 }
 
+const sitsOutWhenEmpty = true;
 const W = K.wire(SEAT);
 if (require.main === module) W.main();
-module.exports = { SEAT, loadSlice: W.load, buildSchoolsSlice: W.build, writeSchoolsSlice: W.write, loadSchoolsSlice: W.load,
+module.exports = { SEAT, sitsOutWhenEmpty, loadSlice: W.load, buildSchoolsSlice: W.build, writeSchoolsSlice: W.write, loadSchoolsSlice: W.load,
   isSchoolsSeat: W.isSeat, assignmentFromSlice: W.assignmentFromSlice, enrichAssignment: W.enrichAssignment, slicePaths: W.paths };

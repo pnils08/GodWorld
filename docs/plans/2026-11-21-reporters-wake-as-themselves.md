@@ -77,6 +77,7 @@ On Sharon (2026-11-21): bio — "i like them both and love \"visits places she w
 | Review | Lane | Pointer | Result |
 |---|---|---|---|
 | Six reporters, live | agy | [[../../output/antigravity/2026-11-23-review-pipeline111-reporters]] | HOLD — #1–#5 verified and fixed `36f0eec26`; #6–#8 held (low) |
+| Morning tools, ask_worker, Graye, trims | agy | [[../../output/antigravity/2026-11-23-review-pipeline111-pass2]] | HOLD — #1–#5 verified and fixed `69f6adf70`; #1 proven through the live gate (PASS) |
 
 ### Agreed
 
@@ -101,6 +102,7 @@ On Sharon (2026-11-21): bio — "i like them both and love \"visits places she w
 
 ## Changelog
 
+- 2026-11-23 (research-build) — agy pass 2 folded: a quoted worker now backs the gate's intake check (proven PASS on Jordan's Osei piece); worker asks capped per wake and never fatal. `69f6adf70`
 - 2026-11-23 (research-build) — Workers on call ("media crons can call on worker crons"): ask_worker, 2 a wake, read-only on the worker's record. Graye live, seventh seat. `7109f6cf7`
 - 2026-11-23 (research-build) — Morning tool loop live ("allow them to dig and and be journlists"); agy HOLD folded #1–#5. Jordan and Maria trimmed mornings. `36f0eec26`
 - 2026-11-23 (research-build) — Celeste and Jordan live. Staff off source lists ("1 and 2 yes"); Celeste's Essence back (his allowance); Jordan on Sonnet 5.5 for morning and write ("be curius if sonnet 5.5 would be sufficient"). Gaps for him: a trending page (who watched which show); the engine's per-week business cause.

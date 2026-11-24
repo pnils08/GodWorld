@@ -257,16 +257,6 @@ function spotTag_(tags) {
   return false;
 }
 
-// engine.356: a last-night line that already names its place or programme takes no " near <venue>" tail.
-function eveningNamedTag_(tags) {
-  for (var i = 0; i < (tags || []).length; i++) {
-    var t = String(tags[i]);
-    if (t === 'evening:dinedOut' || t === 'evening:nightOut' || t === 'evening:sawFamous' ||
-        t === 'evening:watched' || t === 'evening:watchedSports') return true;
-  }
-  return false;
-}
-
 function citizenSpotFor_(hoodSpots, popId) {
   if (!hoodSpots || !hoodSpots.length || !popId) return null;
   var best = null, bestRank = -1;
@@ -1723,11 +1713,23 @@ function generateCitizensEvents_(ctx) {
   }
   function spotFitsAct_(sp, act) {
     var sec = String(sp.sector || '');
-    var bar = /bar\b|pubs?\b|brewery|lounge|nightlife|club|tap\s?room/i.test(sec);
+    // agy 2026-11-24 §2, against the live sectors: a bare "club" is not a bar (Private Club, Comedy
+    // Club); a Ramen Bar and a Sports Bar & Grill serve a meal; a bakery, a roaster and a market
+    // are classed food and are errands too.
+    var bar = /bar\b|pubs?\b|brewery|lounge|nightlife|tap\s?room|social club/i.test(sec);
     if (act === 'drink') return sp.cls === 'food' && bar;
-    if (act === 'meal') return sp.cls === 'food' && (!bar || /dining|restaurant|kitchen|cafe|food/i.test(sec));
-    if (act === 'errand') return sp.cls === 'retail';
+    if (act === 'meal') return sp.cls === 'food' && (!bar || /dining|restaurant|kitchen|cafe|food|ramen|grill/i.test(sec));
+    if (act === 'errand') return sp.cls === 'retail' || /bakery|patisserie|roaster|market|grocer/i.test(sec);
     return true;
+  }
+  // A line with a $VENUE and a place-taking act is offered only where the hood has such a place —
+  // otherwise the slot would fill with texture words that fit no act ("stood by the bar at a coffee line").
+  function hoodHasSpotFor_(neighborhood, act) {
+    if (act !== 'meal' && act !== 'drink' && act !== 'errand') return true;
+    var hk = (neighborhood && S.canonHoods) ? (resolveHoodOrChild_(ctx, neighborhood) || '') : '';
+    var spots = (hk && S.hoodSpots) ? S.hoodSpots[hk] : null;
+    for (var hi = 0; spots && hi < spots.length; hi++) if (spotFitsAct_(spots[hi], act)) return true;
+    return false;
   }
   function actFromTags_(tags) {
     for (var ai = 0; ai < (tags || []).length; ai++) {
@@ -3683,6 +3685,7 @@ function generateCitizensEvents_(ctx) {
           if (clk === TRANSIT_COMMUTE_POOL && !transitDisruptedHit) continue;
           if (!evalContentConditions_(clEntry.conditions, condScopes)) continue;
           if (!contentSlotsFillable_(clEntry, contentLedger, condScopes, String(popId).trim().toUpperCase())) continue;
+          if (clEntry.slots.indexOf("VENUE") >= 0 && !hoodHasSpotFor_(neighborhood, actFromTags_(clEntry.tags))) continue; // cut A2
           var clTags = clEntry.grain ? mergeTags(clEntry.tags, ["grain:" + clEntry.grain]) : clEntry.tags;
           var clPooled = makeEntry(clEntry.text, mergeTags(clTags, calendarTags), clEntry.weight, false);
           var clShare = contentDialShare_(clEntry.conditions, condScopes);
@@ -4040,7 +4043,8 @@ function generateCitizensEvents_(ctx) {
     if (empAt >= 0) {
       var empBiz = iEmployerBizCond >= 0 ? String(row[iEmployerBizCond] || "").trim() : "";
       tags = tags.slice();
-      if (empBiz) tags[empAt] = "place:" + empBiz; else tags.splice(empAt, 1);
+      // EmployerBizId also holds SELF_EMPLOYED / UNTRACKED / SPORTS_OTHER — not places (agy 2026-11-24 §1)
+      if (/^BIZ-/.test(empBiz)) tags[empAt] = "place:" + empBiz; else tags.splice(empAt, 1);
     }
 
     if (tags.indexOf("relationship:rivalry") >= 0 && hasRivalry && chanceHit(0.3)) {

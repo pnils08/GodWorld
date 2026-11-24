@@ -23,6 +23,7 @@ const list = JSON.parse(fs.readFileSync(__dirname + '/ecl-act-tags.json', 'utf8'
     if (!r || r[iP] !== o.pool || r[iT] !== o.text) { bad.push(o.row); continue; }
     const cur = String(r[iG] || '');
     if (/(^|,)\s*act:/.test(cur)) { already++; continue; }
+    if (/(^|,)\s*place:/.test(cur)) { bad.push(o.row); continue; }
     if (!/^source:/.test(cur)) { bad.push(o.row); continue; }
     updates.push({ range: 'Event_Content_Ledger!G' + o.row, values: [[cur + ',' + o.add.join(',')]] });
   }

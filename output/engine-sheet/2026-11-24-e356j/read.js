@@ -26,6 +26,7 @@ const rowPlace = {}; for (const o of list) { const p = o.add.find(t => /^place:B
     const act = (parts.find(p => p.indexOf('act:') === 0) || '').slice(4);
     if (act) acts[act] = (acts[act] || 0) + 1;
     if (parts.indexOf('place:employer') >= 0) rawEmp++;
+    for (const p of parts) if (p.indexOf('place:') === 0 && !/^place:BIZ-\d+$/.test(p) && p !== 'place:employer') problems.push('malformed place tag: ' + p);
     if (/ near /.test(t) && parts.indexOf('venue:local') >= 0) tails++;
     const pl = (parts.find(p => /^place:BIZ-/.test(p)) || '').slice(6);
     if (!pl) { if (act === 'shift') shiftNoPlace++; continue; }
@@ -36,8 +37,11 @@ const rowPlace = {}; for (const o of list) { const p = o.add.find(t => /^place:B
     if (parts.indexOf('venue:local') >= 0) {
       k = 'venue';
       if (!t.includes(b.Name)) problems.push(pl + ' name not in the text: ' + t.slice(0, 80));
-      const sec = String(b.Sector || ''), bar = /bar\b|pubs?\b|brewery|lounge|nightlife|club|tap\s?room/i.test(sec);
+      const sec = String(b.Sector || ''), bar = /bar\b|pubs?\b|brewery|lounge|nightlife|tap\s?room|social club/i.test(sec);
+      const food = /cafe|coffee|bakery|restaurant|dining|diner|food|bar\b|pubs?\b|brewery|lounge|nightlife|club|market|kitchen|ramen|grill/i.test(sec) && !/retail|shop|store|boutique|grocery/i.test(sec);
       if (act === 'drink' && !bar) problems.push('drink line at a place that is no bar: ' + b.Name + ' [' + sec + ']');
+      if (act === 'meal' && !food) problems.push('meal line at a place that serves none: ' + b.Name + ' [' + sec + ']');
+      if (act === 'errand' && food && !/bakery|patisserie|roaster|market|grocer/i.test(sec)) problems.push('errand line at a place that is no shop: ' + b.Name + ' [' + sec + ']');
     } else if (rowPlace[t] === pl) { k = 'row'; if (!t.includes(b.Name)) problems.push(pl + ' row place not named: ' + t.slice(0, 80)); }
     else if (act === 'shift') { k = 'employer'; if (emp[r.POPID] !== pl) problems.push(r.POPID + ' shift place ' + pl + ' is not their employer ' + emp[r.POPID]); }
     else { k = 'other'; problems.push('place with no known path: ' + tag.slice(0, 80)); }

@@ -1,7 +1,7 @@
 {
   "_comment": "ADR-0017 live wake packages. The scheduled fan-out is package-only: a journalist must have one active entry before any wake runs. Models are explicit per wake; reviewProfile is the machine-readable authority Rhea uses to distinguish canon assertions from persona-authorized texture.",
   "freelance-firebrand": {
-    "version": "JAX-LEP2-2",
+    "version": "JAX-LEP2-3",
     "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
@@ -17,7 +17,7 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-4-maverick"
+        "model": "anthropic/claude-sonnet-5.5"
       },
       "report": {
         "provider": "openrouter",
@@ -29,15 +29,12 @@
       }
     },
     "reviewProfile": {
-      "id": "jax-accountability-v1",
+      "id": "jax-accountability-v2",
       "canonPolicy": "load-bearing",
-      "purpose": "ACTIVE probationary package. Apply public accountability pressure when the simulated record and the public story do not line up; starting friction is success, while resolving the civic problem is not the columnist's job.",
+      "purpose": "The city's bullshit detector from the citizen's side (builder 2026-11-24). Friction is the job; the check is facts: locations, citizens, data points.",
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
-        "voice": "adversarial first-person accountability column",
-        "targetWords": "400-650",
-        "opening": "street-level scene in a bar, laundromat, corner, or similar public room",
-        "closing": "an unanswered accountability question"
+        "targetWords": "evidence-bounded"
       },
       "authorizedTexture": [
         "a named street or street-level time cue used only as scene location",
@@ -69,7 +66,9 @@
     },
     "writerTools": {
       "maxToolCalls": 6
-    }
+    },
+    "seatFile": ".claude/agents/freelance-firebrand/SEAT.md",
+    "seatReasoning": "medium"
   },
   "carmen-delaine": {
     "version": "CARMEN-LEP2-4",

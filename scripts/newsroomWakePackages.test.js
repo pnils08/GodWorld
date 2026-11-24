@@ -35,13 +35,16 @@ assert.equal(niaWeekly.reviewProfile.canonPolicy, 'load-bearing');
 assert.ok(nia.reviewProfile.canonBlockers.some(b => /video game/.test(b)));
 
 const jax = packages['freelance-firebrand'];
-assert.equal(jax.version, 'JAX-LEP2-2');
+assert.equal(jax.version, 'JAX-LEP2-3');
+assert.equal(jax.seatFile, '.claude/agents/freelance-firebrand/SEAT.md');   // pipeline.111 (builder 2026-11-24)
+assert.equal(jax.reviewProfile.articleContract.opening, undefined);   // no scripted opening or closing (builder 2026-11-24)
+assert.equal(jax.reviewProfile.articleContract.closing, undefined);
 assert.equal(jax.active, true);
 assert.equal(jax.requiredDaily, true);
 assert.equal(jax.assignment.name, 'Jax Caldera');
 assert.equal(jax.assignment.popid, 'POP-00799');
 assert.equal(jax.packetContract, 'v2');
-assert.equal(packagesApi.routeFor(jax, 'angle').model, 'meta-llama/llama-4-maverick');
+assert.equal(packagesApi.routeFor(jax, 'angle').model, 'anthropic/claude-sonnet-5.5');
 assert.equal(packagesApi.routeFor(jax, 'report').model, 'meta-llama/llama-4-maverick');
 assert.equal(packagesApi.routeFor(jax, 'write').model, 'anthropic/claude-sonnet-5.5');
 assert.equal(jax.reviewProfile.canonPolicy, 'load-bearing');
@@ -396,7 +399,7 @@ const gate = packagesApi.gateAssignments([
   { desk: 'culture', name: 'TEST-ONLY Unpackaged Reporter', persona: 'test-only' },
 ], packages);
 assert.equal(gate.eligible.length, 5);
-assert.equal(gate.eligible[0].wakePackage, 'JAX-LEP2-2');
+assert.equal(gate.eligible[0].wakePackage, 'JAX-LEP2-3');
 assert.equal(gate.eligible[1].wakePackage, 'CARMEN-LEP2-4');
 assert.equal(gate.eligible[2].wakePackage, 'PSLAYER-LEP2-1');
 assert.equal(gate.eligible[3].wakePackage, 'ANTHONY-LEP2-3');

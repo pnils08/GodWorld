@@ -27,3 +27,7 @@ luis-c117 output/test-shell/20261124-003127-luis-navarro-day-today-710541
 luis-c117-claude-hai output/test-shell/20261124-003815-luis-navarro-day-today-716024
 luis-c117-grok-4.3 output/test-shell/20261124-003944-luis-navarro-day-today-717897
 farrah-c117 output/test-shell/20261124-005314-farrah-del-rio-day-today-732023
+jax-c117-claude-son output/test-shell/20261124-020635-freelance-firebrand-day-today-757223
+jax-c117-grok-4.3 output/test-shell/20261124-020804-freelance-firebrand-day-today-758973
+jax-c117-grok2 output/test-shell/20261124-021039-freelance-firebrand-day-today-762242
+jax-c117-grok3 output/test-shell/20261124-021227-freelance-firebrand-day-today-762952

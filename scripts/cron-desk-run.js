@@ -71,6 +71,7 @@ const BEAT_BUILDERS = {
   'carmen-delaine': 'buildCivicSlice',   // pipeline.111 (builder 2026-11-23): her own civic record, off the civic-domain pick
   'luis-navarro': 'buildInvestigationsSlice',   // pipeline.111 (builder 2026-11-24): his own record, off the anomaly pick
   'farrah-del-rio': 'buildOpinionSlice',   // pipeline.111 (builder 2026-11-24): the opinion column's week
+  'freelance-firebrand': 'buildJaxRecordSlice',   // pipeline.111 (builder 2026-11-24): Jax's record, off the scored stink pick (buildJaxSlice kept for pipeline.115)
   'sharon-okafor': 'buildLifestyleSlice',
   'maria-keen': 'buildNeighborhoodSlice',
   'selena-grant': 'buildOaksBeatSlice',
@@ -80,9 +81,10 @@ const BEAT_BUILDERS = {
   'tamsin-pruitt': 'buildLivesSlice',   // pipeline.73 Lives — daily, Mon–Fri grid
   'ines-sorensen': 'buildVoicesSlice'   // pipeline.73 Voices — Wed–Fri grid + own Sat/Sun crons
 };
-const BEAT_NAME_RE = /carmen\s*delaine|luis\s*navarro|farrah\s*del\s*rio|elliot\s*marbury|trevor\s*shimizu|lila\s*mezran|angela\s*reyes|noah\s*tan|elliot\s*graye|rachel\s*torres|kai\s*marston|sharon\s*okafor|maria\s*keen|selena\s*grant|talia\s*finch|celeste\s*tran|tamsin\s*pruitt|ines\s*sorensen/i;
+const BEAT_NAME_RE = /jax\s*caldera|carmen\s*delaine|luis\s*navarro|farrah\s*del\s*rio|elliot\s*marbury|trevor\s*shimizu|lila\s*mezran|angela\s*reyes|noah\s*tan|elliot\s*graye|rachel\s*torres|kai\s*marston|sharon\s*okafor|maria\s*keen|selena\s*grant|talia\s*finch|celeste\s*tran|tamsin\s*pruitt|ines\s*sorensen/i;
 function beatSlugForName(name) {
   const n = String(name || '');
+  if (/jax\s*caldera/i.test(n)) return 'freelance-firebrand';
   if (/carmen\s*delaine/i.test(n)) return 'carmen-delaine';
   if (/luis\s*navarro/i.test(n)) return 'luis-navarro';
   if (/farrah\s*del\s*rio/i.test(n)) return 'farrah-del-rio';
@@ -532,6 +534,10 @@ function collectQuoteAsks(lane, persona, story, angleArt) {
         story,
         candidate,
       }));
+      if (SEAT_FILE) {   // pipeline.111: their own life and the reporter's own question, not the reporter's plan
+        const target = ((angleArt && angleArt.angleRead && angleArt.angleRead.plan && angleArt.angleRead.plan.targets) || []).find(t => t && t.pop === pop);
+        inputPacket = livedPacket.assertBase(interviewContract.ownLifeInterviewPacket(inputPacket, target && target.question), 'W2');
+      }
       askText = livedPacket.prompt(inputPacket);
     } else {
       askText = persona
@@ -1770,7 +1776,7 @@ async function runAngle(assign) {
     // Maria and Kai left the evening pack: Sharon covers nightlife (pipeline.111, builder 2026-11-21/22)
   };
   let beatSlice = null;
-  if (personaSlug === 'freelance-firebrand' && !story) {
+  if (personaSlug === 'freelance-firebrand' && !story && !BEAT_BUILDERS[personaSlug]) {   // pipeline.111: off BEAT_BUILDERS, the old scored pack
     try {
       const { loadJaxSlice } = require(path.join(__dirname, 'buildJaxSlice'));
       jaxSlice = loadJaxSlice(cycle);
@@ -1782,7 +1788,7 @@ async function runAngle(assign) {
     } catch (e) {
       log('jax slice load failed (non-fatal): ' + e.message);
     }
-  } else if (personaSlug === 'freelance-firebrand' && story) {
+  } else if (personaSlug === 'freelance-firebrand' && story && !BEAT_BUILDERS[personaSlug]) {
     try {
       const { loadJaxSlice } = require(path.join(__dirname, 'buildJaxSlice'));
       jaxSlice = loadJaxSlice(cycle);

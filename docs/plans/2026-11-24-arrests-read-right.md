@@ -45,12 +45,12 @@ pointers:
 
 | # | Task | Owner | Status |
 |---|------|-------|--------|
-| 1 | Resident factor in `updateCrimeMetrics.js` (mean in the Phase-3 caller, factor on the level term and the noise; throws on a hood with no residents, as the care demand does) | es | built (this commit): `crimeResidentFactor_`, `crimeCityMeanResidents_`, `incidentParts` + one log line; tests wait on the unlock |
+| 1 | Resident factor in `updateCrimeMetrics.js` (mean in the Phase-3 caller, factor on the level term and the noise; throws on a hood with no residents, as the care demand does) | es | built (this commit): `crimeResidentFactor_`, `crimeCityMeanResidents_`, `incidentParts` + one log line; crime tests 55/55, hood identity 38/38 |
 | 2 | Arrests in `careJusticeService.js`: charges less diversions, times clearance, plus carry; carry save/seed on `PREV_ARREST_CARRY_JSON` (`finalizeCycleState.js`, `loadPreviousEvening.js`) | es | built (this commit); demand-v3 |
 | 3 | Readers: police reporter's slice and the police chief worker show what the census now says (no code change expected; verify by render) | es | not started |
 | 4 | Tests: carry, diversion, resident factor; existing fixtures that pin incident counts read | es | carry + diversion: careJusticeService 365a/b/c (29/29); census 102, court revenue 105, judicial 157 pass. Resident factor: with Task 1 |
 | 5 | Truth docs: SHEETS_MANIFEST Carry_Forward_Store key; ENGINE_MAP; STUB_MAP | es | not started |
-| 6 | Bench: two fires from a live sync; read per hood incidents vs residents × level, arrests = floor((charges − diverted) × clearance + carry), census complete, court revenue line | es | not started |
+| 6 | Bench: two fires from a live sync; read per hood incidents vs residents × level, arrests = floor((charges − diverted) × clearance + carry), census complete, court revenue line | es | done — bench.log C118 PASS 178 s (city 143 incidents, 29 arrests), C119 PASS 158 s (134, 31; fire 1 carry read), every hood = floor((charges − diverted) × clearance + carry), census complete; final sync |
 | 7 | agy adversarial review (builder 2026-11-24: "we will aslo have it review the arrest job after") | agy | not started |
 | 8 | PROD push with engine.364's F3 (carry type check); smoke C119 | es | not started |
 
@@ -90,3 +90,4 @@ pointers:
 - 2026-11-24 (engine-sheet) — Plan written: rulings 1–3 and the diversion order quoted; Dimond read against §17 and the levels.
 - 2026-11-24 (engine-sheet) — Dry run on C117 (constant inputs, six weeks): small hoods 9–10 crimes per 1,000 now → 1.8–3.3 scaled; big hoods +1 each; city 133 → 136; Dimond 3.66 per 1,000, third; big hoods still alternate 1 and 2 arrests. Carry + diversion built ahead of the scaling (advisor: the fully ruled part first).
 - 2026-11-24 (engine-sheet) — Builder "go" on the scaling as designed (rate from the crime system's causes; per-event additions whole, so a small busy hood runs higher per resident). Built Task 1; no feed marking (builder: "i dont want to puppet crons").
+- 2026-11-24 (engine-sheet) — Bench two fires PASS on 87d311ba8. Small hoods by what happens in them: Lake Merritt, Baylight 2 incidents; KONO 4 (7.3 per 1,000) and Uptown 4 then 3 on their events; Dimond 3.2 then 2.7 per 1,000. agy review sent.

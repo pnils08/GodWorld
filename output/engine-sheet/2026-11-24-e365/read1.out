@@ -1,0 +1,38 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+{
+ "cycle": 118,
+ "mode": "start",
+ "cityIncidents": 143,
+ "cityArrests": 29,
+ "oariHoods": [
+  "West Oakland",
+  "Fruitvale",
+  "East Oakland"
+ ],
+ "byRate": [
+  "KONO 549 4 7.29 0 1",
+  "Uptown 639 4 6.26 0 1",
+  "Jack London 2611 10 3.83 0 2",
+  "Baylight District 524 2 3.82 0 0",
+  "Ivy Hill 2122 8 3.77 0 2",
+  "Adams Point 2433 9 3.70 0 2",
+  "Temescal 2774 10 3.60 0 2",
+  "San Antonio 2250 8 3.56 0 2",
+  "Grand Lake 2359 8 3.39 0 2",
+  "West Oakland 2386 8 3.35 1 2",
+  "Lake Merritt 614 2 3.26 0 0",
+  "Downtown 2809 9 3.20 0 2",
+  "Dimond 2195 7 3.19 0 1",
+  "Rockridge 2221 7 3.15 0 2",
+  "Laurel 2235 7 3.13 0 1",
+  "East Oakland 2392 7 2.93 1 1",
+  "Brooklyn 2168 6 2.77 0 1",
+  "Chinatown 2226 6 2.70 0 1",
+  "Eastlake 2288 6 2.62 0 1",
+  "Fruitvale 2363 6 2.54 1 1",
+  "Glenview 2231 5 2.24 0 1",
+  "Piedmont Ave 2237 4 1.79 0 1"
+ ],
+ "problems": [],
+ "verdict": "PASS"
+}

@@ -1,0 +1,38 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ suppress logs { quiet: true }
+{
+ "cycle": 119,
+ "mode": "ring",
+ "cityIncidents": 134,
+ "cityArrests": 31,
+ "oariHoods": [
+  "West Oakland",
+  "Fruitvale",
+  "East Oakland"
+ ],
+ "byRate": [
+  "Uptown 640 3 4.69 0 0",
+  "Baylight District 527 2 3.80 0 1",
+  "East Oakland 2400 9 3.75 1 2",
+  "Adams Point 2441 9 3.69 0 2",
+  "KONO 552 2 3.62 0 0",
+  "Temescal 2782 10 3.59 0 2",
+  "Jack London 2621 9 3.43 0 2",
+  "West Oakland 2394 8 3.34 1 2",
+  "Lake Merritt 616 2 3.25 0 1",
+  "Glenview 2239 7 3.13 0 2",
+  "Laurel 2242 7 3.12 0 2",
+  "San Antonio 2258 7 3.10 0 1",
+  "Downtown 2809 8 2.85 0 2",
+  "Ivy Hill 2129 6 2.82 0 1",
+  "Brooklyn 2176 6 2.76 0 2",
+  "Dimond 2203 6 2.72 0 2",
+  "Chinatown 2228 6 2.69 0 2",
+  "Fruitvale 2370 6 2.53 1 1",
+  "Grand Lake 2367 6 2.53 0 1",
+  "Rockridge 2229 5 2.24 0 1",
+  "Piedmont Ave 2262 5 2.21 0 1",
+  "Eastlake 2296 5 2.18 0 1"
+ ],
+ "problems": [],
+ "verdict": "PASS"
+}

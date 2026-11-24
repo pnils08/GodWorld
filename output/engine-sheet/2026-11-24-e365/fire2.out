@@ -1,0 +1,30 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ suppress logs { quiet: true }
+{
+ "label": "e365-f2",
+ "expect": 118,
+ "at": "2026-11-24T07:28:24.061Z",
+ "pre": {
+  "bench": 118,
+  "live": 117,
+  "ee": 10,
+  "rileyLast": 118,
+  "checkpoint": null
+ },
+ "wallS": 158,
+ "http": 200,
+ "resp": {
+  "ok": true,
+  "state": "done",
+  "ranMs": 152453,
+  "persistErrors": []
+ },
+ "post": {
+  "bench": 119,
+  "live": 117,
+  "ee": 10,
+  "rileyLast": 119,
+  "checkpoint": null
+ },
+ "newEE": [],
+ "verdict": "PASS"
+}

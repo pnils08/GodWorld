@@ -273,9 +273,8 @@ function runCareJusticeDemand_(ctx) {
   Logger.log('careJusticeDemand C' + cycle + ' city charges=' + demand.city.charges +
     ' jud=' + demand.city.judicialIntakes + ' sick=' + demand.city.sick +
     ' hosp=' + demand.city.hospitalIntakes + ' oari=' + demand.city.oariHoods.join(',') +
-    '/' + demand.city.oariEligible + '/' + demand.city.oariDiversions);
-  Logger.log('careJusticeDemand C' + cycle + ' admission carry: ' +
-    (carried ? 'from C' + carried.cycle : 'none carried') +
+    '/' + demand.city.oariEligible + '/' + demand.city.oariDiversions +
+    ' admission carry: ' + (carried ? 'from C' + carried.cycle : 'none carried') +
     (carryFresh.length ? '; started at ' + CARE_JUSTICE_ADMIT_CARRY_START + ' (= rounding) for ' +
       carryFresh.length + ' hood(s): ' + carryFresh.join(', ') : ''));
   S.careJusticeDemand = demand;

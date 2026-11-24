@@ -58,7 +58,7 @@ On Sharon (2026-11-21): bio — "i like them both and love \"visits places she w
 5. Test day on the newest cycle with `scripts/testReporterDay.sh` under the no-write guard (spend unlock from the builder); restore the slice cache files after; copy the piece to `output/research-build/2026-11-21-p111/`. Check invented ages/tenures and engine-stamp leaks.
 6. Commit path-specifically (shared files may carry engine-sheet hunks); plan task row + changelog; ROLLOUT row <=160 chars.
 
-Done: Sharon, Maria, Kai, Mason, Celeste, Jordan, Graye, Noah, Trevor, Lila, Rachel, Angela, Carmen. Next: Luis, then Farrah (builder order). Not yet: the sports seats, Marbury, Jax, Nia, Tamsin, Ines.
+Done: Sharon, Maria, Kai, Mason, Celeste, Jordan, Graye, Noah, Trevor, Lila, Rachel, Angela, Carmen, Luis. Next: Farrah (builder order). Not yet: the sports seats, Marbury, Jax, Nia, Tamsin, Ines.
 
 ## Tasks
 
@@ -83,7 +83,8 @@ Done: Sharon, Maria, Kai, Mason, Celeste, Jordan, Graye, Noah, Trevor, Lila, Rac
 | 17 | Rachel Torres: seat file, every-hood safety record | rb | live; read Tue 11-24 |
 | 18 | Angela Reyes: seat file, every-hood schools record, staff and students | rb | live; read Tue 11-24 |
 | 19 | Carmen Delaine: seat file, whole civic record (buildCivicSlice), thinking medium (package seatReasoning) | rb | live; read Mon 11-30 |
-| 20 | Luis Navarro, then Farrah Del Rio (new opinion seat; no cron today) | rb | next (builder 2026-11-24 order) |
+| 20 | Luis Navarro: seat file, initiative clocks + decisions record (buildInvestigationsSlice), thinking medium | rb | live; read Tue 11-24; bio additions await his word |
+| 21 | Farrah Del Rio: new opinion seat (no cron today) | rb | next |
 
 ## Acceptance
 
@@ -120,6 +121,7 @@ Done: Sharon, Maria, Kai, Mason, Celeste, Jordan, Graye, Noah, Trevor, Lila, Rac
 
 ## Changelog
 
+- 2026-11-24 (research-build) — Luis live; the engine's self-check findings no longer reach him. Overlap with Carmen (same C118 due list) flagged to the builder.
 - 2026-11-24 (research-build) — Carmen live with her own civic record and thinking at medium. Builder order: Luis next, then Farrah.
 - 2026-11-23 (research-build) — The mold written into the plan for the next session (builder: "I want to make sure the model we are following carries").
 - 2026-11-23 (research-build) — Angela live. He noted a school superintendent worker is owed (no schools worker today).

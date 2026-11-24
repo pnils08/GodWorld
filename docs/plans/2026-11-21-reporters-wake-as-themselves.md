@@ -53,12 +53,12 @@ On Sharon (2026-11-21): bio — "i like them both and love \"visits places she w
 
 1. Read the seat: agent folder, voice file Essence, archived profile (`archive/non-articles/profiles/`), package (`scripts/newsroom-wake-packages.json`), last three staged headlines, the live slice (`build<Seat>Slice(cycle)`).
 2. Bring the builder three calls: bio (profile + Essence), beat line + record (what the engine has, counted), morning model = the writer's model (cost). Name engine gaps found; do not fix them here.
-3. Build: `.claude/agents/<seat>/SEAT.md` (bio, job, five tools incl. ask_worker naming the workers who answer for the beat); the slice builder — whole-city record in name order, no code-picked hood/angle/hook/hooks/approach/roomIsYours, people with their own line as the reason, the row's age where the craft names ages, `K.isMediaStaff` + self off, `sitsOutWhenEmpty`, version bump; package — `seatFile`, angle model = write model, reviewProfile = the three fact blockers (location, citizen, data point), textureConditions [], still graded.
+3. Build (thinking: package `seatReasoning` low|medium|high when the beat needs it — Carmen medium): `.claude/agents/<seat>/SEAT.md` (bio, job, five tools incl. ask_worker naming the workers who answer for the beat); the slice builder — whole-city record in name order, no code-picked hood/angle/hook/hooks/approach/roomIsYours, people with their own line as the reason, the row's age where the craft names ages, `K.isMediaStaff` + self off, `sitsOutWhenEmpty`, version bump; package — `seatFile`, angle model = write model, reviewProfile = the three fact blockers (location, citizen, data point), textureConditions [], still graded.
 4. Checks: rewrite the seat's old pick/hook checks in the beat-slice suite, the package and handoff suites; add the seat to the roomIsYours exemption list (test unlock from the builder).
 5. Test day on the newest cycle with `scripts/testReporterDay.sh` under the no-write guard (spend unlock from the builder); restore the slice cache files after; copy the piece to `output/research-build/2026-11-21-p111/`. Check invented ages/tenures and engine-stamp leaks.
 6. Commit path-specifically (shared files may carry engine-sheet hunks); plan task row + changelog; ROLLOUT row <=160 chars.
 
-Done: Sharon, Maria, Kai, Mason, Celeste, Jordan, Graye, Noah, Trevor, Lila, Rachel, Angela. Not yet: the sports seats, Carmen, Luis, Marbury, Jax, Nia, Tamsin, Ines.
+Done: Sharon, Maria, Kai, Mason, Celeste, Jordan, Graye, Noah, Trevor, Lila, Rachel, Angela, Carmen. Next: Luis, then Farrah (builder order). Not yet: the sports seats, Marbury, Jax, Nia, Tamsin, Ines.
 
 ## Tasks
 
@@ -82,6 +82,8 @@ Done: Sharon, Maria, Kai, Mason, Celeste, Jordan, Graye, Noah, Trevor, Lila, Rac
 | 16 | Lila Mezran: seat file, health record (every hood's hospital line, discharges said) | rb | live `72165640a`; read Mon 11-30 |
 | 17 | Rachel Torres: seat file, every-hood safety record | rb | live; read Tue 11-24 |
 | 18 | Angela Reyes: seat file, every-hood schools record, staff and students | rb | live; read Tue 11-24 |
+| 19 | Carmen Delaine: seat file, whole civic record (buildCivicSlice), thinking medium (package seatReasoning) | rb | live; read Mon 11-30 |
+| 20 | Luis Navarro, then Farrah Del Rio (new opinion seat; no cron today) | rb | next (builder 2026-11-24 order) |
 
 ## Acceptance
 
@@ -118,6 +120,7 @@ Done: Sharon, Maria, Kai, Mason, Celeste, Jordan, Graye, Noah, Trevor, Lila, Rac
 
 ## Changelog
 
+- 2026-11-24 (research-build) — Carmen live with her own civic record and thinking at medium. Builder order: Luis next, then Farrah.
 - 2026-11-23 (research-build) — The mold written into the plan for the next session (builder: "I want to make sure the model we are following carries").
 - 2026-11-23 (research-build) — Angela live. He noted a school superintendent worker is owed (no schools worker today).
 - 2026-11-23 (research-build) — Rachel live. Arrests by hood are 1 or 2 everywhere (coarse, like hospital). Officials asked through the interview path decline; ask_worker reaches them.

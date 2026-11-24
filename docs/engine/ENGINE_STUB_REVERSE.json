@@ -1,8 +1,8 @@
 {
-  "generated": "2026-11-23",
+  "generated": "2026-11-24",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 179,
-  "functionsMapped": 1786,
+  "functionsMapped": 1790,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -1914,15 +1914,6 @@
         "phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_"
       ]
     },
-    "previousHospitalAdmitCarry": {
-      "writers": [
-        "phase01-config/loadPreviousEvening.js::seedCarriedHospitalAdmitCarry_"
-      ],
-      "readers": [
-        "phase01-config/loadPreviousEvening.js::seedCarriedHospitalAdmitCarry_",
-        "phase04-events/careJusticeService.js::runCareJusticeDemand_"
-      ]
-    },
     "previousCityDynamics": {
       "writers": [
         "phase01-config/loadPreviousEvening.js::seedCarriedCityDynamics_",
@@ -2941,10 +2932,23 @@
         "phase04-events/chaosCarsEngine.js::runChaosNamedPass_",
         "phase05-citizens/generationalWealthEngine.js::collectPropertyTax_",
         "phase05-citizens/judicialLifecycle.js::cityCourtRevenue_",
+        "phase09-digest/finalizeCycleState.js::compactCareJusticeCarry_",
         "phase09-digest/finalizeCycleState.js::compactHospitalAdmitCarry_",
         "phase09-digest/finalizeCycleState.js::savePreviousCycleState_",
         "phase10-persistence/buildCyclePacket.js::persistCareJusticeCensus_",
         "utilities/careJusticeAccounting.js::planCareJusticeCensus_"
+      ]
+    },
+    "previousArrestCarry": {
+      "writers": [],
+      "readers": [
+        "phase04-events/careJusticeService.js::runCareJusticeDemand_"
+      ]
+    },
+    "previousHospitalAdmitCarry": {
+      "writers": [],
+      "readers": [
+        "phase04-events/careJusticeService.js::runCareJusticeDemand_"
       ]
     },
     "chaosBusinessFold": {

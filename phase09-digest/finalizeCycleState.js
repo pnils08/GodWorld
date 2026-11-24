@@ -531,8 +531,13 @@ function compactRelocationFlow_(S) {
  * compactHospitalAdmitCarry_ (engine.364) — S.careJusticeDemand.hospitalCarry,
  * each hood's remainder in [0, 1). Null when the demand did not run this Cycle.
  */
-function compactHospitalAdmitCarry_(S) {
-  var src = S && S.careJusticeDemand && S.careJusticeDemand.hospitalCarry;
+function compactHospitalAdmitCarry_(S) { return compactCareJusticeCarry_(S, 'hospitalCarry'); }
+
+/** compactArrestCarry_ (engine.365) — S.careJusticeDemand.arrestCarry, the same shape. */
+function compactArrestCarry_(S) { return compactCareJusticeCarry_(S, 'arrestCarry'); }
+
+function compactCareJusticeCarry_(S, field) {
+  var src = S && S.careJusticeDemand && S.careJusticeDemand[field];
   if (!src || !src.hoods || typeof src.hoods !== 'object') return null;
   var out = { cycle: Number(src.cycle) || 0, hoods: {} }, n = 0;
   for (var k in src.hoods) {
@@ -654,6 +659,12 @@ function savePreviousCycleState_(ctx) {
         Object.keys(admitCarry.hoods).length + ' hoods) for cycle ' + snapshot.cycle);
     } else {
       Logger.log('savePreviousCycleState_: no admission carry this cycle (S.careJusticeDemand missing) — next cycle reads the newest older one');
+    }
+    // engine.365: the arrest remainder, its own key.
+    var arrestCarry = compactArrestCarry_(S);
+    if (arrestCarry) {
+      saveCarryForwardBlob_(ctx, 'PREV_ARREST_CARRY_JSON', JSON.stringify(arrestCarry), snapshot.cycle);
+      Logger.log('savePreviousCycleState_: Saved arrest carry (' + Object.keys(arrestCarry.hoods).length + ' hoods) for cycle ' + snapshot.cycle);
     }
     // engine.209: the franchise weight drifts on the week just played (results, tenure, fan
     // reach) and rides its OWN key (~2 franchises, ~120 chars). Phase 1 seeds S.franchiseWeight

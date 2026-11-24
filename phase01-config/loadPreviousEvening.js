@@ -285,6 +285,7 @@ function loadPreviousCycleState_(ctx) {
       seedCarriedCityDynamics_(ctx, S);           // engine.195
       seedCarriedRelocationFlow_(ctx, S);         // engine.249
       seedCarriedHospitalAdmitCarry_(ctx, S);     // engine.364
+      seedCarriedArrestCarry_(ctx, S);            // engine.365
       seedCarriedFranchiseWeight_(ctx, S);        // engine.209
       if (typeof seedCarriedMediaEffects_ === 'function') seedCarriedMediaEffects_(ctx, S); // G-EC59
     } else {
@@ -532,24 +533,33 @@ function seedCarriedRelocationFlow_(ctx, S) {
  * lost week of memory and says so.
  */
 function seedCarriedHospitalAdmitCarry_(ctx, S) {
-  if (S.previousHospitalAdmitCarry) return;
-  var json = loadCarryForwardBlob_(ctx, 'PREV_HOSP_ADMIT_CARRY_JSON', carryForwardCycleId_(ctx));
+  seedCarriedCareJusticeCarry_(ctx, S, 'PREV_HOSP_ADMIT_CARRY_JSON', 'previousHospitalAdmitCarry', 'admission');
+}
+
+/** seedCarriedArrestCarry_ (engine.365) — the arrest remainder onto S.previousArrestCarry, the same rules. */
+function seedCarriedArrestCarry_(ctx, S) {
+  seedCarriedCareJusticeCarry_(ctx, S, 'PREV_ARREST_CARRY_JSON', 'previousArrestCarry', 'arrest');
+}
+
+function seedCarriedCareJusticeCarry_(ctx, S, key, field, label) {
+  if (S[field]) return;
+  var json = loadCarryForwardBlob_(ctx, key, carryForwardCycleId_(ctx));
   if (!json) {
-    Logger.log('seedCarriedHospitalAdmitCarry_: no PREV_HOSP_ADMIT_CARRY_JSON — every hood starts at one half (= rounding)');
+    Logger.log('seedCarried ' + label + ' carry: no ' + key + ' — every hood starts at one half (= rounding)');
     return;
   }
   var carried;
   try { carried = JSON.parse(json); } catch (e) {
-    Logger.log('seedCarriedHospitalAdmitCarry_: PREV_HOSP_ADMIT_CARRY_JSON does not parse (' + e.message + ') — every hood starts at one half');
+    Logger.log('seedCarried ' + label + ' carry: ' + key + ' does not parse (' + e.message + ') — every hood starts at one half');
     return;
   }
   if (!carried || typeof carried !== 'object' || !carried.hoods || typeof carried.hoods !== 'object') {
-    Logger.log('seedCarriedHospitalAdmitCarry_: PREV_HOSP_ADMIT_CARRY_JSON has no hoods — every hood starts at one half');
+    Logger.log('seedCarried ' + label + ' carry: ' + key + ' has no hoods — every hood starts at one half');
     return;
   }
-  S.previousHospitalAdmitCarry = { cycle: Number(carried.cycle) || 0, hoods: carried.hoods };
-  Logger.log('seedCarriedHospitalAdmitCarry_: carried ' + Object.keys(carried.hoods).length +
-    ' hood fraction(s) from C' + S.previousHospitalAdmitCarry.cycle);
+  S[field] = { cycle: Number(carried.cycle) || 0, hoods: carried.hoods };
+  Logger.log('seedCarried ' + label + ' carry: ' + Object.keys(carried.hoods).length +
+    ' hood fraction(s) from C' + S[field].cycle);
 }
 
 

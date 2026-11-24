@@ -191,7 +191,7 @@ if (require.main === module) {
     check('364a nothing carried: every hood starts at 0.5 (= rounding) and carries 0.9',
       Object.keys(d.hoods).every(h => d.hoods[h].hospitalIntakes === Math.round(20 * 0.02) &&
         d.hoods[h].hospitalCarryIn === 0.5 && d.hospitalCarry.hoods[h] === 0.9) &&
-      d.methodVersion === 'demand-v2');
+      d.methodVersion === 'demand-v3');
     const c2 = ctx();
     c2.config.careJusticeAdmitPerSick = 0.02;
     c2.summary.previousHospitalAdmitCarry = { cycle: 99, hoods: d.hospitalCarry.hoods };
@@ -208,6 +208,29 @@ if (require.main === module) {
     });
     check('364c a carried value that is not a number in [0, 1) throws, never reads as 0',
       throwsFor.length === bad.length, throwsFor.length + ' of ' + bad.length);
+  }
+  // engine.365: arrests = whole part of (charges − diverted) × clearance + carry. Fixture: 2 charges × 0.25.
+  {
+    const d = service.runCareJusticeDemand_(ctx());
+    const f = d.hoods.Fruitvale, s1 = d.hoods.SYNTHETIC_HOOD_01;
+    const r6 = x => Math.round(x * 1e6) / 1e6;
+    check('365a a diverted call comes off the charges before clearance (builder 2026-11-24)',
+      f.oariDeployed && f.oariDiversions > 0 && s1.oariDiversions === 0 &&
+      f.arrestExpected === r6((f.charges - f.oariDiversions) * f.clearance + 0.5) &&
+      f.judicialIntakes === Math.floor(f.arrestExpected) &&
+      s1.judicialIntakes === Math.round(s1.charges * s1.clearance) && s1.arrestCarryIn === 0.5,
+      JSON.stringify({ f: [f.charges, f.oariDiversions, f.judicialIntakes, f.arrestCarryOut], s1: [s1.judicialIntakes, s1.arrestCarryOut] }));
+    const c2 = ctx();
+    c2.summary.previousArrestCarry = { cycle: 99, hoods: d.arrestCarry.hoods };
+    const d2 = service.runCareJusticeDemand_(c2);
+    check('365b the arrest fraction carries to the next Cycle, city sums the hoods',
+      Object.keys(d2.hoods).every(h => d2.hoods[h].arrestCarryIn === d.arrestCarry.hoods[h] &&
+        d2.hoods[h].judicialIntakes === Math.floor(r6((d2.hoods[h].charges - d2.hoods[h].oariDiversions) * d2.hoods[h].clearance + d.arrestCarry.hoods[h]))) &&
+      d2.city.judicialIntakes === Object.values(d2.hoods).reduce((n, h) => n + h.judicialIntakes, 0));
+    const cb = ctx();
+    cb.summary.previousArrestCarry = { cycle: 99, hoods: { Temescal: '0.4' } };
+    check('365c a bad carried arrest value throws and names the arrest carry',
+      namesError(() => service.runCareJusticeDemand_(cb), 'carried arrest fraction for Temescal'));
   }
   // 7: forced picker draws match hood and texture picker keeps its uniform path.
   {

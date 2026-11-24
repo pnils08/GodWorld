@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-11-23 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-11-24 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -348,8 +348,10 @@
   Writes: S.previousRelocationFlow
 
 - **seedCarriedHospitalAdmitCarry_(ctx, S)**
-  Reads: S.previousHospitalAdmitCarry
-  Writes: S.previousHospitalAdmitCarry
+
+- **seedCarriedArrestCarry_(ctx, S)**
+
+- **seedCarriedCareJusticeCarry_(ctx, S, key, field, label)**
 
 - **seedCarriedCityDynamics_(ctx, S)**
   Reads: S.previousCityDynamics
@@ -903,7 +905,7 @@
 
 - **careJusticeNumber_(value, field, hood, positive)**
 
-- **careJusticeAdmitCarryIn_(carried, hood)**
+- **careJusticeAdmitCarryIn_(carried, hood, label)**
 
 - **careJusticeAdmitSplit_(sick, admitRate, carryIn)**
 
@@ -919,7 +921,7 @@
 - **careJusticeTrackedByHood_(ctx)**
 
 - **runCareJusticeDemand_(ctx)**
-  Reads: S.absoluteCycle, S.careJusticeDemand, S.crimeMetrics, S.cycleId, S.neighborhoodDemographics, S.previousHospitalAdmitCarry, S.worldPopulation
+  Reads: S.absoluteCycle, S.careJusticeDemand, S.crimeMetrics, S.cycleId, S.neighborhoodDemographics, S.previousArrestCarry, S.previousHospitalAdmitCarry, S.worldPopulation
   Writes: S.careJusticeDemand
   Config: ctx.config.careJusticeExposureDial, ctx.config.cycleCount
 
@@ -3647,6 +3649,11 @@
 - **compactHospitalAdmitCarry_(S)**
   Reads: S.careJusticeDemand
 
+- **compactArrestCarry_(S)**
+
+- **compactCareJusticeCarry_(S, field)**
+  Reads: S.careJusticeDemand
+
 - **compactCityDynamicsCarrier_(S)**
   Reads: S.previousCityDynamics
 
@@ -4923,4 +4930,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 179
-**Functions mapped:** 1786
+**Functions mapped:** 1790

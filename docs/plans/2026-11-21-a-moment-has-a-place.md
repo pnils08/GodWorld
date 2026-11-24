@@ -160,6 +160,31 @@ Repair, not replace (builder 2026-11-24): each cut repairs the code it touches; 
 
 Vague lines stay where they fit (builder: "some vague event are ok"); a line gets a place when the moment happens somewhere.
 
+**A1 code read (2026-11-24, second session; bench not run — the test lock is on, scripts ready at `output/engine-sheet/2026-11-24-e356i/`):**
+- Hood key: `S.hoodSpots` is keyed by `bizHoodKey` = `resolveHoodOrChild_`, the lookup `pickVenue_` uses — same key both sides. Closed businesses never reach the spot list (the closure branch `continue`s first).
+- Readers: nothing outside `generateCitizensEvents.js` reads `venue:local`; nothing reads `place:` (grep, five dirs). No text scanner matches a business name in EventText.
+- **Defect found and fixed (`366883880`):** the fallback template path tagged `place:` on "stopped by $INSTITUTION …", a line that never names the place. Now tagged only when the place is in the text.
+- Known, left: when a hood has no spot and no texture words, `$VENUE` falls back to the citizen's remembered venue, which can be the word "local" (older than A1).
+
+**A2 read (2026-11-24, C117 dump + live ECL) — the plan's "one kind per pool" does not fit as written:**
+- *Where A1 reaches:* a place lands on a line three ways — the " near " tail (a flat 12% roll on any eligible line, `generateCitizensEvents.js` ~4009; 259 lines at C117), the five code template lines, and the two ECL lines with `$VENUE`. About one line in ten.
+- *The tail is glued on whatever the line says:* "the Oakland Alternative Response Initiative is making waves … near a bench", "kept score of every time their brother arrived late to dinner near a porch-lit block". Top sources of tails at C117: civic news 46, family life 28, sports 25. With A1 the tail names a real business; it is still glued to narration.
+- *The ECL is about half the week:* 1,425 of 2,699 C117 lines match an ECL line word for word (a floor); the rest come from pools in the code, 79 of the 259 tails among them.
+- *PoolKey carries a kind for some pools only.* By family (pools / lines):
+
+| Family | Pools / lines | Kind it can carry |
+|---|---|---|
+| `work.*` | 31 / 92 | shift — the citizen's employer (EmployerBizId is on the row) |
+| `faith.attending`, `faith.volunteering` | 2 / 11 | service — a congregation (lines name one in words today) |
+| `evening.*` | 7 / 20 | drink / meal, line by line |
+| `hood.*` | 28 / 125 | mixed in one pool: errand, meal, drink, walk (hood.kono: Korean grocery, karaoke bar, barbecue, gallery) — line by line; many name a made-up place in words |
+| `age.*`, `family.*`, `econ.*`, `retirement.depth`, `down.*` | 15 / 242 | mostly home or no place; a few errands and meals — line by line |
+| `civic.*`, `civicRole.*`, `lifeEvent.*`, `tribune.*`, `culture.spacemolt-*`, `sports.*`, `occupation.transit`, `community.program` | 63 / 635 | none — narration, or the line already carries its own `{hood}` / `{employer}` |
+
+- *What place data the writer holds at that phase:* `S.hoodSpots` — food and retail only, no sector on the row (meal vs drink needs the sector added); the citizen's employer id; faith events of the week. No stadium, no home address of another person (A3).
+- *So A2 as it can be built:* a kind on the line (pool default, line override), with **none** as a kind; the " near " tail and `$VENUE` fire only on a line whose kind takes a place, and pick a business of that kind (meal → food, drink → nightlife / cafe, errand → retail, shift → employer). Result to expect: fewer placed lines than A1's raw count, each one fitting.
+- *His to say before the cut:* the family table above, and the go for a tag written to ~1,060 ECL rows (a many-row sheet write).
+
 ## Rulings
 
 - **Open questions 1–5 answered** (builder 2026-11-21, verbatim: "Both - yes - rn it's set to 1 but they can have have multiple - they wake 3 times in their wake , morning , afternoon , and evening so that's the time of day we have currently - could meet for a drink , have dinner, check in on, visit their house , think about how we have a world-view side to this that if an event says \"visited xx at their home \" I will visually see them walk their (once code is set) - not sure what you mean on this one"). Read:
@@ -211,3 +236,4 @@ Vague lines stay where they fit (builder: "some vague event are ok"); a line get
 - 2026-11-24 (engine-sheet) — Bond wiring read; cut order A (composer), B (shared moments feed bonds), C (the day readable) written for his go.
 - 2026-11-24 (engine-sheet) — Builder's go on cut A, verbatim; cut A split into six tasks, one a session.
 - 2026-11-24 (engine-sheet) — A1 built (places from the sim's businesses, `place:` tag). Next session: bench A1 (count lines carrying `place:` and the stock names left), then A2.
+- 2026-11-24 (engine-sheet, second session) — A1 read against its readers; one defect fixed (`366883880`, place tag on a line that names no place). Bench scripts written, not run (test lock). A2 read: kind per pool does not fit — the table and the two asks are in §The event machine.

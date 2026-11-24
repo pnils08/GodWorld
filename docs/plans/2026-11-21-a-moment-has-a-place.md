@@ -143,6 +143,21 @@ Each moment written carries its place id and the other person's POPID on the two
 
 Repair, not replace (builder 2026-11-24): each cut repairs the code it touches; the 1,060 ECL lines are tagged, not rewritten.
 
+**Builder's words on cut A (2026-11-24):** "go on cut A and keep in mind as you work through this alot if original build code designed as a placeholder until we got this far, almost all engines were built with out any real city data so alot are vague and we have been working to address that, some vague event are ok but events that paint them life as a lived experience and feeds into the world-view showing real activity would be the side goal, 2 citizens are eating at xx, maybe we see them sitting there in world-view, so as I know this is best done as task per session the work with present itself constantly"
+
+**Cut A tasks (one a session):**
+
+| # | Task | Status |
+|---|---|---|
+| A1 | Where: a real place of the moment's kind in the citizen's hood (their spot first, then a `S.hoodSpots` / Business_Ledger business by sector), in place of `pickVenue_`'s stock pool — the `$VENUE` fill and the " near " tail; the line carries `place:<BIZ_ID>` | not started |
+| A2 | What: each ECL pool's activity kind (meal, drink, errand, shift, service, game, visit, walk, rest), held by PoolKey, so the place matches the moment | not started |
+| A3 | With: the second person from bonds, coworkers (same employer on Employment_Roster) and neighbors (same household or block); the line carries `contactPopId:` as today | not started |
+| A4 | When: the daypart on the line | not started |
+| A5 | The two LifeHistory_Log columns (PlaceId, WithPopId) filled from the tags; LifeHistory_Archive H/I named; beat dump keys | not started |
+| A6 | Bench, review, PROD | not started |
+
+Vague lines stay where they fit (builder: "some vague event are ok"); a line gets a place when the moment happens somewhere.
+
 ## Rulings
 
 - **Open questions 1–5 answered** (builder 2026-11-21, verbatim: "Both - yes - rn it's set to 1 but they can have have multiple - they wake 3 times in their wake , morning , afternoon , and evening so that's the time of day we have currently - could meet for a drink , have dinner, check in on, visit their house , think about how we have a world-view side to this that if an event says \"visited xx at their home \" I will visually see them walk their (once code is set) - not sure what you mean on this one"). Read:
@@ -192,3 +207,4 @@ Repair, not replace (builder 2026-11-24): each cut repairs the code it touches; 
 - 2026-11-24 (engine-sheet) — Builder answered the two machine questions: all three (bonds, coworkers, neighbors); shared moments feed the bond and push courtship toward marriage.
 
 - 2026-11-24 (engine-sheet) — Bond wiring read; cut order A (composer), B (shared moments feed bonds), C (the day readable) written for his go.
+- 2026-11-24 (engine-sheet) — Builder's go on cut A, verbatim; cut A split into six tasks, one a session.

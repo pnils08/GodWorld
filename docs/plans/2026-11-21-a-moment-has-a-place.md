@@ -62,7 +62,7 @@ pointers:
 | # | Task | Owner | Status |
 |---|------|-------|--------|
 | 0 | **The page step** (world-view; infrastructure.19 stays research-build's row — this is one slice of it carried here on the builder's word). A person's moves come from their own week: a work line → their workplace; a sports line → their team's place or the street's game night; a saved conversation → that person; a home line → their own door. The card says which line it was. Someone whose week holds none of these stays as drawn today. Nothing new is invented: no dinner spot until the engine hands one over. Waits on Open question 1 | es | not started |
-| 1 | Read-before. (a) `S.hoodSpots` and `citizenSpotFor_` end to end; what it would take to write the pick out. (b) Every fill site of `$VENUE`, `$CONTACT`, `$INSTITUTION`; a count of C116's lines that name a venue, a contact, a workplace, a home, a game. (c) Wiring card for `LifeHistory_Log`: every writer, every reader by column position — whether two right-edge columns are safe; the same for `LifeHistory_Archive`, where the rows move; and the cost of two more cells on every line against the end-of-run tail (74 s at C116 against the 60 s reserve, ROLLOUT engine.95). (d) What a wake is handed about the citizen's places (`lib/wakePerception`, the wake script) and what the question door (engine.338) does with an answer. (e) `Lived_Events`, `output/exchanges/`, game-night lines: the place each already implies. (f) `world-view/build.js`: how a person's street and spots are chosen | es | not started |
+| 1 | Read-before. (a) `S.hoodSpots` and `citizenSpotFor_` end to end; what it would take to write the pick out. (b) Every fill site of `$VENUE`, `$CONTACT`, `$INSTITUTION`; a count of C116's lines that name a venue, a contact, a workplace, a home, a game. (c) Wiring card for `LifeHistory_Log`: every writer, every reader by column position — whether two right-edge columns are safe; the same for `LifeHistory_Archive`, where the rows move; and the cost of two more cells on every line against the end-of-run tail (74 s at C116 against the 60 s reserve, ROLLOUT engine.95). (d) What a wake is handed about the citizen's places (`lib/wakePerception`, the wake script) and what the question door (engine.338) does with an answer. (e) `Lived_Events`, `output/exchanges/`, game-night lines: the place each already implies. (f) `world-view/build.js`: how a person's street and spots are chosen | es | done 2026-11-24 — §Task 1 count |
 | 2 | The builder's calls (§Open questions), put to him with the Task 1 numbers | builder | waits on 1 |
 | 3 | Cut 1 = engine.214 8b, on its own row | es | waits on 1 |
 | 4 | Cut 2: place id and met-person id on the line | es | waits on 1, 2 |
@@ -90,6 +90,21 @@ pointers:
 4. **Does a line get a time of day?** Reflections carry Daypart; engine lines do not. Ordering a week on the page needs one or it is drawn. — builder; Task 1(b) says how many lines could carry one honestly.
 5. **The bond in the week** (§Where it stands 9). Which of these, and at what rate, is the sim's call: a line about a friend names the friend on the bond ledger; a bond that moved writes a line on both people; the 441 untouched active bonds get a week now and then. SIM_DOCTRINE §7 ("Bonds cause; events record") is the standing rule. Its own cut, or its own row. — builder.
 6. **A moment on another street** — the page's call (streets are separate scenes): shown there, or shown as away. — builder, with infrastructure.19.
+
+## Task 1 count (2026-11-24, C117 dump)
+
+| Measure | C117 |
+|---|---|
+| Engine lines / people | 2,699 / 1,003 |
+| Name a stock place from the code tables (`CITIZEN_VENUES_BY_CHARACTER_` / `_BESPOKE_`, 93 names) | 604 (22%) |
+| " near <place>" tails, of them stock | 269, 264 |
+| Name a `Business_Ledger` business / people | 346 (13%) / 279 — Bay Tribune 90, OARI 69, Temescal Community Health Center 43, Youth Apprenticeship Pipeline 40, Civis Systems 14, Stabilization Fund 12; West Side Cafe 4, Miso Metro 3 |
+| Name the citizen's own employer (Employment_Roster, Active) | 74 |
+| Home words / game or stadium words | 194 / 124 |
+| Name another tracked citizen | 77 — nearly all UNDOCKED talk about a pilot; a meeting between two citizens: ~0 |
+| A time of day on the line | 0 |
+
+**Two right-edge columns on LifeHistory_Log (engine-wiring card 2026-11-24):** safe. The executor pads each batch to its widest row and writes from column A (`persistenceExecutor.js` 462–498), so 7-wide writers leave the new cells blank; the fixed 7-column writer (`runAsUniversePipeline.js` 717) does the same. Readers go by header name; the positional ones read columns A–G only (`buildCitizenCards.js` archive A:G, `processAdvancementIntake.js` 1696 EventText, the executor/normalizer 0/1/2/5, the archive mover's Cycle fallback 6). The archive mover copies whole rows; LifeHistory_Archive's H and I are headed "(empty)" and take the two names first. The beat dump keys by header, so the columns become JSON keys. Size: ~20.6k rows on the schema doc, trimmed at 12,000 (`archiveLifeHistory.js` 44) — about 24k more cells at the trim.
 
 ## Rulings
 
@@ -135,3 +150,4 @@ pointers:
 - 2026-11-21 (engine-sheet) — The builder's read on bonds checked against the C116 dump and the relationship engine (§Where it stands 9, Open question 5); his page ruling recorded.
 - 2026-11-21 (engine-sheet) — Page step first, on the builder's word; Task 0 added; the C116 week counted (§Where it stands 7–8).
 - 2026-11-21 (engine-sheet) — Advisor fold: scope stated against the builder's words and made Open question 1; his quote restored verbatim; `pickVenue_` body read; the page paragraph cut to what the engine hands it; Task 1(c) carries the archive tab and the run-time cost.
+- 2026-11-24 (engine-sheet) — Task 1 count done (C117) and the two-column read: safe. Resumed from pause on the builder's "go on the moments job, start with the count".

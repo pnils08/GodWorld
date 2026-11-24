@@ -1855,7 +1855,7 @@ function generateCitizensEvents_(ctx) {
       pool.push(makeEntry("got caught in heavy rain and had to take shelter", ["source:weather", "weather:heavy-rain"], 1.2, false));
       pool.push(makeEntry("watched the downpour from a doorway, waiting it out", ["source:weather", "weather:heavy-rain"], 1.1, false));
     } else if (precipLocal >= 0.3) {
-      pool.push(makeEntry("walked through drizzle, unbothered", ["source:weather", "weather:drizzle"], 1.0, false));
+      pool.push(makeEntry("walked through drizzle, unbothered", ["source:weather", "weather:drizzle", "act:walk"], 1.0, false));
     }
 
     // Visibility
@@ -1866,7 +1866,7 @@ function generateCitizensEvents_(ctx) {
 
     // Wind
     if (windLocal >= 25) {
-      pool.push(makeEntry("braced against strong gusts on the walk home", ["source:weather", "weather:wind"], 1.1, false));
+      pool.push(makeEntry("braced against strong gusts on the walk home", ["source:weather", "weather:wind", "act:walk"], 1.1, false));
     }
 
     // engine.33 T7 — microclimate divergence: the hood's weather differs
@@ -1954,10 +1954,10 @@ function generateCitizensEvents_(ctx) {
     var eTitles = (prev.tv || []).concat(prev.movies || []);
     for (var eti = 0; eti < eTitles.length; eti++) {
       if (!eTitles[eti]) continue;
-      pool.push(makeEntry("stayed in and watched " + eTitles[eti] + " last night", ["source:prevEvening", "evening:watched"], 0.6, false));
+      pool.push(makeEntry("stayed in and watched " + eTitles[eti] + " last night", ["source:prevEvening", "evening:watched", "act:rest"], 0.6, false));
     }
     if (prev.sportsBroadcast) {
-      pool.push(makeEntry("had " + prev.sportsBroadcast + " on last night", ["source:prevEvening", "evening:watchedSports"], 0.6, false));
+      pool.push(makeEntry("had " + prev.sportsBroadcast + " on last night", ["source:prevEvening", "evening:watchedSports", "act:rest"], 0.6, false));
     }
 
     // Crowd hotspots — citizen recalls last night's busiest areas
@@ -2137,7 +2137,7 @@ function generateCitizensEvents_(ctx) {
       pool.push(makeEntry("took a different route home after the recent break-ins around " + neighborhood,
         ["source:nbhdState", "state:watchful"], pw(1.1, ci), false));
       pool.push(makeEntry("counted the register twice before closing up, just in case",
-        ["source:nbhdState", "state:watchful"], pw(1.0, ci), false));
+        ["source:nbhdState", "state:watchful", "act:shift"], pw(1.0, ci), false));
       pool.push(makeEntry("swapped stories with a neighbor about what got taken up the block",
         ["source:nbhdState", "state:watchful"], pw(1.0, ci), false));
     }
@@ -2153,12 +2153,12 @@ function generateCitizensEvents_(ctx) {
     var rv = Number(st.retailVitality) || 0;
     if (retailMed && rv >= retailMed * 1.25) {
       pool.push(makeEntry("checked out a new shop that just opened nearby",
-        ["source:nbhdState", "state:retail"], 1.1, false));
+        ["source:nbhdState", "state:retail", "act:errand"], 1.1, false));
       pool.push(makeEntry("browsed a busy weekend market in " + neighborhood,
-        ["source:nbhdState", "state:retail"], 1.05, false));
+        ["source:nbhdState", "state:retail", "act:errand"], 1.05, false));
     } else if (retailMed && rv > 0 && rv <= retailMed * 0.75) {
       pool.push(makeEntry("made the trip out of " + neighborhood + " for errands — not much open on the block",
-        ["source:nbhdState", "state:retail-low"], 1.05, false));
+        ["source:nbhdState", "state:retail-low", "act:errand"], 1.05, false));
     }
 
     // Local crime index high — watchfulness at hood grain (not citywide).
@@ -2207,19 +2207,19 @@ function generateCitizensEvents_(ctx) {
       var orgName = fev.organization || "a local congregation";
       if (fev.eventType === 'holy_day') {
         pool.push(makeEntry("joined the " + (fev.holyDay || "holy day") + " observance at " + orgName,
-          ["source:faith", "faith:holy-day", "dial:warmth:up"], 1.15, false));
+          ["source:faith", "faith:holy-day", "dial:warmth:up", "act:service"], 1.15, false));
       } else if (fev.eventType === 'community_program') {
         pool.push(makeEntry("stopped by a community program run out of " + orgName,
-          ["source:faith", "faith:program", "dial:warmth:up"], 1.1, false));
+          ["source:faith", "faith:program", "dial:warmth:up", "act:service"], 1.1, false));
       } else if (fev.eventType === 'crisis_response') {
         pool.push(makeEntry("pitched in with " + orgName + "'s response effort",
-          ["source:faith", "faith:crisis-response", "dial:warmth:up"], 1.15, false));
+          ["source:faith", "faith:crisis-response", "dial:warmth:up", "act:service"], 1.15, false));
       } else if (fev.eventType === 'outreach') {
         pool.push(makeEntry("was welcomed by an outreach table from " + orgName,
-          ["source:faith", "faith:outreach", "dial:warmth:up"], 1.0, false));
+          ["source:faith", "faith:outreach", "dial:warmth:up", "act:service"], 1.0, false));
       } else {
         pool.push(makeEntry("caught a notable service at " + orgName,
-          ["source:faith", "faith:service", "dial:composure:up"], 1.0, false));
+          ["source:faith", "faith:service", "dial:composure:up", "act:service"], 1.0, false));
       }
     }
     return pool;
@@ -2486,7 +2486,7 @@ function generateCitizensEvents_(ctx) {
   if (dynamics.sentiment >= 0.3) {
     sentimentPool.push(makeEntry("felt uplifted by the city mood", ["source:sentiment", "sentiment:positive"], 1, false));
     sentimentPool.push(makeEntry("noticed strangers actually holding doors and making eye contact today", ["source:sentiment", "sentiment:positive"], 1, false));
-    sentimentPool.push(makeEntry("caught a busker's tune on the corner and hummed it the rest of the walk", ["source:sentiment", "sentiment:positive"], 0.95, false));
+    sentimentPool.push(makeEntry("caught a busker's tune on the corner and hummed it the rest of the walk", ["source:sentiment", "sentiment:positive", "act:walk"], 0.95, false));
   }
   if (dynamics.sentiment <= -0.3) {
     sentimentPool.push(makeEntry("felt unsettled by a low hum of tension", ["source:sentiment", "sentiment:negative"], 1, false));
@@ -2675,8 +2675,8 @@ function generateCitizensEvents_(ctx) {
     var occTags = ["source:occupation", "occupation:" + occupation];
     if (OCC_FLAVOR_SIGN_[flavor]) occTags.push(OCC_FLAVOR_SIGN_[flavor]);
     return [
-      makeEntry("had a work moment: " + flavor, occTags, 1.15, false),
-      makeEntry("left work thinking about " + flavor, occTags.slice(), 1.05, false)
+      makeEntry("had a work moment: " + flavor, mergeTags(occTags, ["act:shift"]), 1.15, false),
+      makeEntry("left work thinking about " + flavor, mergeTags(occTags.slice(), ["act:shift"]), 1.05, false)
     ];
   }
 
@@ -3408,10 +3408,10 @@ function generateCitizensEvents_(ctx) {
     // 31-40, dinner-question age-neutral) so ALL parenting content lives in
     // one editable place. kidCount stays — condScopes.children reads it.
     if (maritalLc === "married") {
-      pool.push(makeEntry("split the last of the coffee and the morning's plans with their partner", mergeTags(["source:familyLife", "family:partner"], calendarTags), 1.0, false));
+      pool.push(makeEntry("split the last of the coffee and the morning's plans with their partner", mergeTags(["source:familyLife", "family:partner", "act:rest"], calendarTags), 1.0, false));
       pool.push(makeEntry("caught their partner humming the song they'd had stuck all day", mergeTags(["source:familyLife", "family:partner"], calendarTags), 0.95, false));
     } else if (maritalLc === "widowed") {
-      pool.push(makeEntry("set two cups out by habit and let the second one stay", mergeTags(["source:familyLife", "family:widowed"], calendarTags), 1.0, false));
+      pool.push(makeEntry("set two cups out by habit and let the second one stay", mergeTags(["source:familyLife", "family:widowed", "act:rest"], calendarTags), 1.0, false));
       pool.push(makeEntry("told a story their late partner used to tell, and told it right", mergeTags(["source:familyLife", "family:widowed"], calendarTags), 0.95, false));
     } else if (maritalLc === "divorced") {
       pool.push(makeEntry("handled a logistics call with an ex — civil, brief, done", mergeTags(["source:familyLife", "family:divorced"], calendarTags), 0.9, false));
@@ -3424,10 +3424,10 @@ function generateCitizensEvents_(ctx) {
     // engine.38 B3 (source:economy → Daily fold, unchanged).
     var wealthLvl = (iWealth >= 0 && row[iWealth] !== "" && row[iWealth] != null) ? Number(row[iWealth]) : null;
     if (wealthLvl !== null && wealthLvl <= 3) {
-      pool.push(makeEntry("did the math twice at the register and put one thing back", mergeTags(["source:economy", "econ:tight"], calendarTags), 1.05, false));
+      pool.push(makeEntry("did the math twice at the register and put one thing back", mergeTags(["source:economy", "econ:tight", "act:errand"], calendarTags), 1.05, false));
       pool.push(makeEntry("moved a bill to next month and tried not to think about it", mergeTags(["source:economy", "econ:tight"], calendarTags), 1.0, false));
     } else if (wealthLvl !== null && wealthLvl >= 8) {
-      pool.push(makeEntry("quietly covered the table's coffee and waved off the thanks", mergeTags(["source:economy", "econ:comfortable"], calendarTags), 0.95, false));
+      pool.push(makeEntry("quietly covered the table's coffee and waved off the thanks", mergeTags(["source:economy", "econ:comfortable", "act:meal"], calendarTags), 0.95, false));
       pool.push(makeEntry("spent an hour moving money around to work a little harder", mergeTags(["source:economy", "econ:comfortable"], calendarTags), 0.9, false));
     }
     // engine.299 Task 4 (builder 2026-10-18: events that fire if they have debt at a certain level): the stretched
@@ -3447,7 +3447,7 @@ function generateCitizensEvents_(ctx) {
     // remain the fallback. Tags unchanged — dial routing identical.
     if (hasAlliance && chanceHit(0.4)) {
       if (allyName) {
-        pool.push(makeEntry("compared notes with " + allyName + " over coffee that went long", mergeTags(["relationship:alliance", "dial:sociability:up"], calendarTags), 1.15, false));
+        pool.push(makeEntry("compared notes with " + allyName + " over coffee that went long", mergeTags(["relationship:alliance", "dial:sociability:up", "act:meal"], calendarTags), 1.15, false));
         pool.push(makeEntry("got a heads-up text from " + allyName + " that saved some trouble", mergeTags(["relationship:alliance", "dial:warmth:up"], calendarTags), 1.1, false));
         pool.push(makeEntry("caught " + allyName + "'s eye across the room and didn't need to say it", mergeTags(["relationship:alliance", "dial:warmth:up"], calendarTags), 1.05, false));
       } else {

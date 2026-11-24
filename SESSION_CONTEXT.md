@@ -4,4 +4,4 @@
 
 **NEXT[research-build]:** pipeline.111 → sports (builder: sports next, he is most involved): a sports roster worker first, then the seven sports seats one at a time on the mold (plan §The mold). Hold: engine.350 parked; Internal Affairs worker (builder: "hold on 2 until the data set is supported"). Push held.
 
-**NEXT[engine-sheet]:** engine.356 cut A → A3 with whom (plan §The event machine, one task a session); at C118 read stage 80's smoke list (DEPLOY_HISTORY §PROD — the row sits in §3, so --due does not print it). For the builder: ~60 ECL lines naming a place in plain words, kinds for the code's own pools. Queued: engine.362, .363. Push held (git).
+**NEXT[engine-sheet]:** engine.356 cut A → on the builder's test unlock: suites, then `output/engine-sheet/2026-11-24-e356k/bench.sh <HEAD>` and push.sh (stage 81: open-business guard + 21 code lines with a kind); then A3 with whom. At C118 read stage 80's smoke list (DEPLOY_HISTORY §PROD). Queued: infrastructure.20, engine.362, .363. Push held.

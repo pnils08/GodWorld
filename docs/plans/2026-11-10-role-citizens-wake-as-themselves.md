@@ -87,6 +87,7 @@ pointers:
 
 ## Changelog
 
+- 2026-11-24 (research-build) — A 15th worker is being added: the City Clerk (CLERK-01, Odessa Arceneaux, minted at C118 from Advancement_Intake1), the record the civic reporters ask — every initiative, every office, what the city's offices put on the record. FILLS/JOBS entries in workerWake.js (6d5a21cda); her civic-office-map.json entry lands after the mint. Answers only, no weekly report (builder). Tracked on pipeline.111 task 25.
 - 2026-11-18 (engine-sheet) — All drafted templates marked garbage; template page cut to the worker data search. Reporter structure: nothing decided.
 - 2026-11-18 (engine-sheet) — Side files only, no wake reads them: `output/engine-sheet/2026-11-18-reporter-wake-print.js` and its print. No model run.
 - 2026-11-17 (engine-sheet) — Reporter roster approved row by row; agy reviewed the reporter draft; five sim questions ruled.

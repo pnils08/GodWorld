@@ -106,6 +106,31 @@ pointers:
 
 **Two right-edge columns on LifeHistory_Log (engine-wiring card 2026-11-24):** safe. The executor pads each batch to its widest row and writes from column A (`persistenceExecutor.js` 462–498), so 7-wide writers leave the new cells blank; the fixed 7-column writer (`runAsUniversePipeline.js` 717) does the same. Readers go by header name; the positional ones read columns A–G only (`buildCitizenCards.js` archive A:G, `processAdvancementIntake.js` 1696 EventText, the executor/normalizer 0/1/2/5, the archive mover's Cycle fallback 6). The archive mover copies whole rows; LifeHistory_Archive's H and I are headed "(empty)" and take the two names first. The beat dump keys by header, so the columns become JSON keys. Size: ~20.6k rows on the schema doc, trimmed at 12,000 (`archiveLifeHistory.js` 44) — about 24k more cells at the trim.
 
+## The event machine (builder 2026-11-24)
+
+**Builder's words (2026-11-24):** "go on the plan great feedback and you get the idea, old code is mostly what you see so its repair or replace . these are old legacy vague events need to be remedied with sim relevant places and people, i tried to make the ECL an event machine that could work like a slot machine where each column has 1000 or so entries and different combinations could give endless event outcomes but what i think i got wa sjust a list of different events"
+
+**What the ECL is today (live tab read 2026-11-24):** Event_Content_Ledger, 1,168 rows — 1,060 `line` rows in 149 pools, 31 `fragment` rows (VENUE 21, MOOD 10). 29 lines carry a slot at all ($PILOT 14, $PILOTROLE 7, $MOOD 3, $LEADER 3, $VENUE 2); 1,031 are whole sentences. The code's own lines add $VENUE 26, $CONTACT 14, $INSTITUTION 7, each filled from name tables in the file. A list, as he says: the slots exist, and what fills them is more words.
+
+**The machine, its columns drawn from the sim** (the data, C117 dump):
+
+| Column | What fills it | From |
+|---|---|---|
+| Who | the citizen | the ledger row |
+| With whom | a person they are bonded to, by bond kind | Relationship_Bonds (736) |
+| Where | a real place of the kind the moment needs — their spot, a business in their hood of that sector, their workplace, their home or the other person's, a congregation, the game | Business_Ledger (282, 5–23 a hood, 143 sectors: retail 31, restaurant 27, cafe 12, nightlife 9, faith 9 …), Employment_Roster (626), Household_Ledger (949), Faith_Organizations (16), Cultural_Ledger (55), the sports feed |
+| When | morning, afternoon, evening | the wake's dayparts (Q4) |
+| What | the activity — a meal, a drink, an errand, a shift, a service, a game, a visit, a walk, a rest | the ECL lines, each tagged with its activity kind |
+| How it felt | the citizen's dials and the hood's week | the ledger dials, Neighborhood_Map |
+
+Each moment written carries its place id and the other person's POPID on the two new LifeHistory_Log columns (Task 1: safe), so the city view walks the day in order (Q6) and the citizen's wake builds on it.
+
+**Repair, not a second library:** the 1,060 lines stay the What column. Each gets an activity kind and the slots its sentence needs ($PLACE, $WITH); lines that bake a made-up place ("a bar patio") lose it to the slot. The code's name tables (`CITIZEN_VENUES_*`, `CITIZEN_INSTITUTIONS_*`) leave the fill path — the old cut 1 (engine.214 8b) folds into this.
+
+**For the builder before the cut:**
+1. *With whom* — bonded people only, or also coworkers (same employer) and neighbors (same household or block)?
+2. *How often a moment has a second person* — every meal and drink and visit, or the bond's own strength deciding?
+
 ## Rulings
 
 - **Open questions 1–5 answered** (builder 2026-11-21, verbatim: "Both - yes - rn it's set to 1 but they can have have multiple - they wake 3 times in their wake , morning , afternoon , and evening so that's the time of day we have currently - could meet for a drink , have dinner, check in on, visit their house , think about how we have a world-view side to this that if an event says \"visited xx at their home \" I will visually see them walk their (once code is set) - not sure what you mean on this one"). Read:
@@ -151,3 +176,4 @@ pointers:
 - 2026-11-21 (engine-sheet) — Page step first, on the builder's word; Task 0 added; the C116 week counted (§Where it stands 7–8).
 - 2026-11-21 (engine-sheet) — Advisor fold: scope stated against the builder's words and made Open question 1; his quote restored verbatim; `pickVenue_` body read; the page paragraph cut to what the engine hands it; Task 1(c) carries the archive tab and the run-time cost.
 - 2026-11-24 (engine-sheet) — Task 1 count done (C117) and the two-column read: safe. Resumed from pause on the builder's "go on the moments job, start with the count".
+- 2026-11-24 (engine-sheet) — The event machine written from the builder's words: ECL inventory (1,031 of 1,060 lines unslotted), the six columns from sim data, repair over replace; two questions to him.

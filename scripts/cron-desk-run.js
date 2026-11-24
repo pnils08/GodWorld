@@ -68,6 +68,7 @@ const BEAT_BUILDERS = {
   'kai-marston': 'buildArtsSlice',
   'mason-ortega': 'buildFoodSlice',   // pipeline.111 (builder 2026-11-22): his own record, off the business desk's food variant
   'business-desk': 'buildEconomySlice',   // pipeline.111 (builder 2026-11-22): Jordan's own economy record
+  'carmen-delaine': 'buildCivicSlice',   // pipeline.111 (builder 2026-11-23): her own civic record, off the civic-domain pick
   'sharon-okafor': 'buildLifestyleSlice',
   'maria-keen': 'buildNeighborhoodSlice',
   'selena-grant': 'buildOaksBeatSlice',
@@ -77,9 +78,10 @@ const BEAT_BUILDERS = {
   'tamsin-pruitt': 'buildLivesSlice',   // pipeline.73 Lives — daily, Mon–Fri grid
   'ines-sorensen': 'buildVoicesSlice'   // pipeline.73 Voices — Wed–Fri grid + own Sat/Sun crons
 };
-const BEAT_NAME_RE = /elliot\s*marbury|trevor\s*shimizu|lila\s*mezran|angela\s*reyes|noah\s*tan|elliot\s*graye|rachel\s*torres|kai\s*marston|sharon\s*okafor|maria\s*keen|selena\s*grant|talia\s*finch|celeste\s*tran|tamsin\s*pruitt|ines\s*sorensen/i;
+const BEAT_NAME_RE = /carmen\s*delaine|elliot\s*marbury|trevor\s*shimizu|lila\s*mezran|angela\s*reyes|noah\s*tan|elliot\s*graye|rachel\s*torres|kai\s*marston|sharon\s*okafor|maria\s*keen|selena\s*grant|talia\s*finch|celeste\s*tran|tamsin\s*pruitt|ines\s*sorensen/i;
 function beatSlugForName(name) {
   const n = String(name || '');
+  if (/carmen\s*delaine/i.test(n)) return 'carmen-delaine';
   if (/elliot\s*marbury/i.test(n)) return 'elliot-marbury';
   if (/trevor\s*shimizu/i.test(n)) return 'trevor-shimizu';
   if (/lila\s*mezran/i.test(n)) return 'lila-mezran';
@@ -972,7 +974,7 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
     }
     // pipeline.52 Task 6: selected packet from the shared civic substrate — Carmen and Luis
     // (the tab-backed seats moved to their own beat slices, pipeline.68 Task 4).
-    if (/carmen\s*delaine|luis\s*navarro/i.test(persona.name || '')) {
+    if (/luis\s*navarro/i.test(persona.name || '')) {   // pipeline.111: Carmen reads her own record (buildCivicSlice)
       try {
         const {
           CIVIC_SEATS,
@@ -1657,6 +1659,12 @@ function seatSitsOut(personaSlug, cycle, stage) {
 // SEAT_MORNING_CALLS reads. Who she is is the sheet line and Essence (reporterIdentity) plus her seat file; the ask is
 // the morning Packet. Returns the citizenVoice --json envelope the angle stage already reads.
 const SEAT_MORNING_CALLS = 6;
+// pipeline.111 (builder 2026-11-24: "turn her thinking on to medium effort"): a seat's thinking effort, set per package
+// (seatReasoning low|medium|high); unset = thinking off, as before. Used at the morning plan and the write.
+function seatReasoning() {
+  const r = ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.seatReasoning;
+  return /^(low|medium|high)$/.test(String(r || '')) ? String(r) : null;
+}
 async function seatMorningPlan(asker, ask, model, maxTokens, cycle) {
   const W = require('./cron-desk-writer');
   const agentDir = path.join(ROOT, '.claude', 'agents', personaSlugForSeat());
@@ -1674,7 +1682,8 @@ async function seatMorningPlan(asker, ask, model, maxTokens, cycle) {
     : name === 'sheet_read' ? W.toolSheetRead(input, { seat: true })   // Cultural_Ledger, as the seat writer reads it
     : 'unknown tool ' + name;
   const r = await W.openRouterToolLoop({ model, system, user: ask + '\n\nReturn ONLY the JSON requested by packet.output.',
-    maxToolCalls: SEAT_MORNING_CALLS, maxTokens, timeoutMs: 180000, toolset: W.OPENROUTER_TOOLS.concat([W.CANON_RECALL_TOOL, require('./workerAsk').askWorkerTool()]), exec, traceResults: true });
+    maxToolCalls: SEAT_MORNING_CALLS, maxTokens, timeoutMs: 180000, ...(seatReasoning() ? { body: { reasoning: { effort: seatReasoning() } } } : {}), toolset: W.OPENROUTER_TOOLS.concat([W.CANON_RECALL_TOOL, require('./workerAsk').askWorkerTool()]), exec, traceResults: true });
+  if (seatReasoning()) log('morning thinking ' + seatReasoning() + ': ' + (r.thinkingOut || 0) + ' reasoning tokens of ' + r.usageOut + ' out');
   log('morning tools: ' + r.trace.length + ' call(s)' + (r.trace.length ? ' — ' + r.trace.map(c => c.tool + '(' + JSON.stringify(c.input).slice(0, 60) + ')').join('; ') : ''));
   SEAT_MORNING_TRACE = r.trace.map(({ resultHead, ...rest }) => rest);
   return { popId: asker.popid, name: asker.name, text: r.text,
@@ -2271,7 +2280,7 @@ async function runAngle(assign) {
         // Over the cap the ask goes on stdin (citizenVoice --stdin); under it nothing changes.
         const askOnStdin = Buffer.byteLength(ask, 'utf8') > ASK_ARGV_MAX;
         SEAT_SLUG = personaSlug;
-        const out = SEAT_FILE ? JSON.stringify(await seatMorningPlan(asker, ask, angleModel, 4000, cycle)) : execFileSync('node', [path.join(ROOT, 'scripts', 'citizenVoice.js'),
+        const out = SEAT_FILE ? JSON.stringify(await seatMorningPlan(asker, ask, angleModel, seatReasoning() ? 8000 : 4000, cycle)) : execFileSync('node', [path.join(ROOT, 'scripts', 'citizenVoice.js'),
           '--pop=' + asker.popid, ...(askOnStdin ? ['--stdin'] : ['--ask=' + ask]), '--cycle=' + cycle, '--json',
           // pipeline.111: the reporter's morning plan on her seat file, not her citizen life (citizenVoice --seat-file).
           ...(SEAT_FILE ? ['--seat-file=' + SEAT_FILE] : []),
@@ -3279,7 +3288,8 @@ async function runWrite(assign) {
   // Task 2.5.5: hand the writer the byline's POPID so the memory tool pair
   // (own citizen page, cp-<popid>) joins the tool loop.
   if (PACKET_ACTIVE) writerArgs.push('--strict-source-hygiene', '--packet-only');
-  if (SEAT_FILE) writerArgs.push('--seat-file', SEAT_FILE);   // pipeline.111: the seat prompt
+  if (SEAT_FILE) writerArgs.push('--seat-file', SEAT_FILE);
+  if (SEAT_FILE && seatReasoning()) writerArgs.push('--reasoning', seatReasoning());   // pipeline.111: the seat prompt
   if (SEAT_FILE && angle && Number(angle.workerAsksUsed) > 0) writerArgs.push('--asks-used', String(Number(angle.workerAsksUsed)));   // the ask cap is per wake
   if (SEAT_FILE && ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.seatEssence === false) writerArgs.push('--no-essence');   // Celeste (builder 2026-11-22: "archived only")
   // pipeline.76 — the package's own writer tools (its grant).

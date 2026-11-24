@@ -68,6 +68,9 @@ function validatePackage(key, value) {
     if (!/^\.claude\/agents\/[a-z0-9-]+\/SEAT\.md$/.test(String(value.seatFile))) errors.push('seatFile must be .claude/agents/<seat>/SEAT.md');
     else if (!fs.existsSync(path.join(__dirname, '..', value.seatFile))) errors.push('seatFile not found: ' + value.seatFile);
   }
+  if (value && value.seatReasoning !== undefined && (!/^(low|medium|high)$/.test(String(value.seatReasoning)) || !value.seatFile)) {
+    errors.push('seatReasoning must be low, medium or high, on a seat with a seatFile');
+  }
   if (value && value.seatEssence !== undefined && (value.seatEssence !== false || !value.seatFile)) {
     errors.push('seatEssence may only be false, on a seat with a seatFile');
   }

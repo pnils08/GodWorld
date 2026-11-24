@@ -1162,6 +1162,10 @@ module.exports = {
   loadHealthEntries,
   publicWeatherFact,
   initiativeRecordFacts,
+  initiativeFact,      // pipeline.111: Carmen's own record (buildCivicSlice) reads these four
+  officeFact,
+  loadFactionStandings,
+  cityMoneyFacts,
   buildCivicDomainSlice,
   formatCivicDomainSliceMarkdown,
   slicePaths,

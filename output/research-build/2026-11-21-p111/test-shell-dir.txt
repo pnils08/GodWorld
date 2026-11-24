@@ -21,3 +21,5 @@ trevor-c117 output/test-shell/20261123-105511-trevor-shimizu-day-today-574958
 lila-c117 output/test-shell/20261123-123510-lila-mezran-day-today-609275
 rachel-c117 output/test-shell/20261123-125237-rachel-torres-day-today-618895
 angela-c117 output/test-shell/20261123-130727-angela-reyes-day-today-625724
+carmen-c117 output/test-shell/20261124-000825-carmen-delaine-day-today-698002
+carmen-c117 output/test-shell/20261124-000559-carmen-delaine-day-today-693450

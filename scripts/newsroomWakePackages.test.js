@@ -62,20 +62,21 @@ assert.ok(jax.reviewProfile.textureConditions.some(v => v.includes('backend-comp
 assert.ok(jax.reviewProfile.canonBlockers.some(v => v.includes('official inaction')));
 
 const carmen = packages['carmen-delaine'];
-assert.equal(carmen.version, 'CARMEN-LEP2-3');
+assert.equal(carmen.version, 'CARMEN-LEP2-4');
+assert.equal(carmen.seatFile, '.claude/agents/carmen-delaine/SEAT.md');   // pipeline.111 (builder 2026-11-23)
+assert.equal(carmen.seatReasoning, 'medium');   // builder 2026-11-24: "turn her thinking on to medium effort"
 assert.equal(packagesApi.sourcingFor(carmen), 'offices');
 assert.equal(carmen.requiredDaily, true);
 assert.equal(carmen.assignment.desk, 'civic');
 assert.equal(carmen.assignment.name, 'Carmen Delaine');
 assert.equal(carmen.assignment.popid, 'POP-00011');
 assert.equal(carmen.packetContract, 'v2');
-assert.equal(packagesApi.routeFor(carmen, 'angle').model, 'deepseek/deepseek-v4-flash-0731');
+assert.equal(packagesApi.routeFor(carmen, 'angle').model, 'anthropic/claude-sonnet-5.5');
 assert.equal(packagesApi.routeFor(carmen, 'report').model, 'deepseek/deepseek-v4-flash-0731');
 assert.equal(packagesApi.routeFor(carmen, 'write').model, 'anthropic/claude-sonnet-5.5');
 assert.equal(carmen.reviewProfile.canonPolicy, 'load-bearing');
 assert.equal(carmen.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
-assert.ok(carmen.reviewProfile.textureConditions.some(v => v.includes('all nine seats')));
-assert.ok(carmen.reviewProfile.canonBlockers.some(v => v.includes('implementation clock')));
+assert.deepStrictEqual(carmen.reviewProfile.textureConditions, []);
 
 const luis = packages['luis-navarro'];
 assert.equal(luis.version, 'LUIS-LEP2-2');
@@ -383,7 +384,7 @@ const gate = packagesApi.gateAssignments([
 ], packages);
 assert.equal(gate.eligible.length, 5);
 assert.equal(gate.eligible[0].wakePackage, 'JAX-LEP2-2');
-assert.equal(gate.eligible[1].wakePackage, 'CARMEN-LEP2-3');
+assert.equal(gate.eligible[1].wakePackage, 'CARMEN-LEP2-4');
 assert.equal(gate.eligible[2].wakePackage, 'PSLAYER-LEP2-1');
 assert.equal(gate.eligible[3].wakePackage, 'ANTHONY-LEP2-3');
 assert.equal(gate.eligible[4].wakePackage, 'JORDAN-LEP2-3');

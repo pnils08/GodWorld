@@ -72,7 +72,7 @@
     }
   },
   "carmen-delaine": {
-    "version": "CARMEN-LEP2-3",
+    "version": "CARMEN-LEP2-4",
     "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
@@ -88,7 +88,7 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-v4-flash-0731"
+        "model": "anthropic/claude-sonnet-5.5"
       },
       "report": {
         "provider": "openrouter",
@@ -100,39 +100,28 @@
       }
     },
     "reviewProfile": {
-      "id": "carmen-civic-ledger-v1",
+      "id": "carmen-civic-v2",
       "canonPolicy": "load-bearing",
-      "purpose": "Trace Packet-backed city action across votes, Initiatives, money, and implementation clocks, and say what the record shows that action has and has not reached this cycle. This seat interviews no citizens; residents speak through the seats that carry people. Public clarity and a durable accountability trail are success; a process recap that names no stake is not.",
+      "purpose": "Report how Oakland is governed from the civic record (builder 2026-11-23). The check is facts: locations, citizens, data points.",
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
-        "voice": "precise third-person civic ledger",
-        "targetWords": "500-900",
-        "opening": "a Packet-backed chamber, place, office, or figure",
-        "closing": "a forward-open or extraction question the supplied record cannot yet answer"
+        "targetWords": "evidence-bounded"
       },
       "authorizedTexture": [
-        "unnamed street-level color that adds no person, business, institution, event, count, or attributed statement",
-        "transitions connecting a Packet-backed official action to the Packet-backed place, money, or clock it bears on",
-        "analysis of Packet-backed vote, Initiative, money, timeline, or implementation state framed as analysis",
-        "an unanswered forward-looking question grounded in a limit or missing field declared by the Packet"
+        "the council chamber, the record and its clocks, as a reporter of eleven years reads them"
       ],
-      "textureConditions": [
-        "every named person, place, business, institution, Project, Initiative, office, and organization must come from the Packet",
-        "vote coverage must use all nine seats supplied by the Packet and must not infer a position, bloc, absence, or tally",
-        "money, dates, durations, deadlines, and implementation clocks must come from the Packet or its tracker-backed claims",
-        "unnamed street color is not a sourced quote and must carry no official act, public reaction, or other canon claim"
-      ],
+      "textureConditions": [],
       "canonBlockers": [
-        "a named person, place, business, institution, Project, Initiative, office, or organization not found in the supplied record",
-        "a false or unsupported vote, tally, bloc, office, official position, official act, official inaction, promise, decision, duty, or absence presented as fact",
-        "a budget, payment, date, duration, deadline, count, or implementation clock that contradicts or lacks the supplied record",
-        "an Initiative phase, Project status, milestone, or current-state claim that contradicts the tracker or verified prior coverage",
-        "a resident consequence, attributed statement, or collective public sentiment not supported by a Packet subject or quote"
+        "an invented or altered location: office, initiative, district or neighborhood",
+        "an invented or altered citizen (name, office, faction, vote, relationship), or words an official did not say",
+        "an invented or altered data point: a vote count, budget, amount, approval, date, cycle or engine record"
       ]
     },
     "writerTools": {
       "maxToolCalls": 6
-    }
+    },
+    "seatFile": ".claude/agents/carmen-delaine/SEAT.md",
+    "seatReasoning": "medium"
   },
   "luis-navarro": {
     "version": "LUIS-LEP2-2",

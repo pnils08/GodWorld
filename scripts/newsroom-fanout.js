@@ -440,6 +440,7 @@ const BEAT_BUILDERS = {
   'kai-marston': 'buildArtsSlice',
   'mason-ortega': 'buildFoodSlice',   // pipeline.111 (builder 2026-11-22)
   'business-desk': 'buildEconomySlice',   // pipeline.111 (builder 2026-11-22)
+  'carmen-delaine': 'buildCivicSlice',   // pipeline.111 (builder 2026-11-23)
   'sharon-okafor': 'buildLifestyleSlice',
   'maria-keen': 'buildNeighborhoodSlice',
   'selena-grant': 'buildOaksBeatSlice',

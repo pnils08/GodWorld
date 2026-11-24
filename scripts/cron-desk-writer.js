@@ -254,6 +254,7 @@ const WRITER_TOOLS = Math.max(0, Math.min(8, parseInt(arg('--writer-tools', '0')
 // The desk cron passes --seat-file for a seat whose wake package names one (and the test shell's seat run).
 const SEAT_FILE_PATH = arg('--seat-file', null);
 const TEST_SEAT = !!SEAT_FILE_PATH;
+const SEAT_REASONING = /^(low|medium|high)$/.test(arg('--reasoning', '')) ? arg('--reasoning', '') : null;   // pipeline.111: the package's seatReasoning
 const TEST_SEAT_BOOT = TEST_SEAT ? fs.readFileSync(SEAT_FILE_PATH, 'utf8').trim() : '';
 let SEAT_ASK = null;   // pipeline.111: ask_worker for a seat reporter (scripts/workerAsk.js), made at the compose
 const TEST_BARE = TEST_SEAT || (!!process.env.GODWORLD_TEST_COMPARE_DIR && process.env.GODWORLD_TEST_PROMPT === 'bare');
@@ -1007,6 +1008,7 @@ async function openRouterToolLoop(opts) {
   // usage accounting), opts.timeoutMs bounds each request. Omitted: as before.
   const resultCap = opts.resultCap != null ? opts.resultCap : 8000;
   let usageIn = 0, usageOut = 0, calls = 0, billedUsd = 0, billed = true;
+  let thinkingOut = 0;   // pipeline.111: the reasoning tokens inside usageOut (a seat with seatReasoning)
   for (let turn = 0; turn < maxCalls + 2; turn++) {
     const toolsOn = calls < maxCalls;
     const j = await callOpenRouterRaw({
@@ -1019,6 +1021,7 @@ async function openRouterToolLoop(opts) {
     const msg = choice.message || {};
     const u = j.usage || {};
     usageIn += u.prompt_tokens || 0; usageOut += u.completion_tokens || 0;
+    thinkingOut += (u.completion_tokens_details && u.completion_tokens_details.reasoning_tokens) || 0;
     if (typeof u.cost === 'number') billedUsd += u.cost; else billed = false;
     const usageCost = () => ({ billedUsd: billed ? +billedUsd.toFixed(4) : null, finishReason: choice.finish_reason || null });
     if (toolsOn && Array.isArray(msg.tool_calls) && msg.tool_calls.length) {
@@ -1046,9 +1049,9 @@ async function openRouterToolLoop(opts) {
       for (const tc of msg.tool_calls) messages.push({ role: 'tool', tool_call_id: tc.id, content: opts.answerLateToolCalls });
       continue;
     }
-    return { text: msg.content || '', usageIn, usageOut, trace, ...usageCost() };
+    return { text: msg.content || '', usageIn, usageOut, thinkingOut, trace, ...usageCost() };
   }
-  return { text: '', usageIn, usageOut, trace, billedUsd: billed ? +billedUsd.toFixed(4) : null, finishReason: 'tool-turns-exhausted' };
+  return { text: '', usageIn, usageOut, thinkingOut, trace, billedUsd: billed ? +billedUsd.toFixed(4) : null, finishReason: 'tool-turns-exhausted' };
 }
 
 // OpenRouter compose call (kept for the scorer + fact-selection callers).
@@ -1566,6 +1569,7 @@ async function main() {
       priorArcFinal + strictSourceFinal + ' Output ONLY the section.';
     const abPop = TOOLS_AB && packetState && packetState.actor && /^POP-\d+$/.test(packetState.actor.id) ? packetState.actor.id : null;
     const r = await openRouterToolLoop({ model: MODEL, system, user: composeUser,
+      ...(SEAT_REASONING ? { body: { reasoning: { effort: SEAT_REASONING } } } : {}),
       maxToolCalls: PACKET_ONLY && !TOOLS_AB ? WRITER_TOOLS : 6,
       traceResults: TOOLS_AB || WRITER_TOOLS > 0,
       keepResults: WRITER_TOOLS > 0,
@@ -1576,6 +1580,7 @@ async function main() {
       memCtx: BYLINE_POPID ? { popId: BYLINE_POPID, cycle }
         : (abPop ? { popId: abPop, cycle, dryNote: true } : null) });
     usageIn += r.usageIn; usageOut += r.usageOut; turns = 1 + r.trace.length;
+    if (SEAT_REASONING) console.error('[writer] thinking ' + SEAT_REASONING + ': ' + (r.thinkingOut || 0) + ' reasoning tokens of ' + r.usageOut + ' out');
     try {
       // codex pipeline.76 #6: one trace per seat — a desk+tag name was overwritten by the next
       // sports seat in the same fan-out.

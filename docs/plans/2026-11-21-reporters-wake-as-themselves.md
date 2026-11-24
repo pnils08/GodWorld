@@ -88,7 +88,8 @@ Done: Sharon, Maria, Kai, Mason, Celeste, Jordan, Graye, Noah, Trevor, Lila, Rac
 | 22 | Interviews: the citizen gets their own life and the reporter's own question, never the plan (ownLifeInterviewPacket, all seat-file seats) | rb | live; read every seat's next quotes |
 | 23 | Jax Caldera: seat file, people-first record + Varek's journal (buildJaxRecordSlice), sheet bio trimmed, Grok plans / Sonnet interviews and writes, memory_recall | rb | live Wed 11-26; watch a couple of weeks (builder) |
 | 24 | Tamsin, Ines, Nia (daily + weekly): seat files, coaching off; Nia's seat carries what the show is and how the board ranks | rb | live; Tamsin and Nia untested (see changelog) — read their next pieces |
-| 25 | City Clerk worker (Odessa Arceneaux) for the civic trio: intake row queued, worker records + job written | rb | after the C118 mint (Sun 11-29): office map entry with her POPID, Civic_Office_Ledger row, the trio's seat files name her, one test ask |
+| 25 | City Clerk worker (Odessa Arceneaux) for the civic trio: intake row queued, worker records + job written | rb | after the C118 mint (Sun 11-29): office map entry with her POPID and answersOnly true, Civic_Office_Ledger row, the trio's seat files name her, one test ask |
+| 26 | Superintendent of Schools worker (Achterberg) for Angela; Director of Cultural Affairs worker for Kai, Sharon, Celeste (mint pending the builder's pick of who) | rb | superintendent live, test ask owed; culture: intake row, then map entry after the mint |
 
 ## Acceptance
 
@@ -125,6 +126,7 @@ Done: Sharon, Maria, Kai, Mason, Celeste, Jordan, Graye, Noah, Trevor, Lila, Rac
 
 ## Changelog
 
+- 2026-11-24 (research-build) — Workers: superintendent built (answers only); culture director to be minted; Internal Affairs (Viteri) held by the builder until the sim keeps conduct records (none exist). answersOnly on the office map keeps a worker off the scheduled rota.
 - 2026-11-24 (research-build) — City Clerk: no clerk existed; builder ruled a mint (young, data-savvy), answers only (no report). Intake row queued for C118; worker code in place, off until her POPID exists.
 - 2026-11-24 (research-build) — Tamsin, Ines, Nia live on seat files. Landmine: building Tamsin's record (buildLivesSlice, even a read with node -e) marks the day's batch covered in output/cron-compare/lives_covered.json — a session read at 02:41 marked 10 of Tue 11-24's people; the 10 marks were removed before her 06:15 wake (backup in the session scratchpad). Never build her record by hand. Builder order next: a data worker for Carmen, a sports roster worker, then sports.
 - 2026-11-24 (research-build) — Jax: Grok morning, Sonnet interviews and write, thinking medium, his own memory (recall), Varek's journal on his record. Builder: watch him a couple of weeks as he builds on it.

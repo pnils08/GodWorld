@@ -77,7 +77,7 @@ Earlier the same day, on pipeline.111: "only tracked citizens show up in beds an
 
 | # | Concept | Status |
 |---|---|---|
-| C1 | The same rounding on arrests (`Math.round(charges × clearance)`, `careJusticeService.js`); Rachel's record reads 1 or 2 everywhere | builder 2026-11-23: "we will do arrests next" — its own row after this one |
+| C1 | Arrests (engine.365). C117: arrests = round(incidents × clearance), 1 or 2 in every hood (176 hood-Cycles C110–C117: 117 at 1, 55 at 2, 4 at 3); rounding lost 1.76 of 29.76 (C117) and 3.75 of 27.75 (C116), and court revenue with them. Incidents = (property + violent level) / 2 / 5.5 (`updateCrimeMetrics.js` calculateNeighborhoodCrime_), no population term, every level reverts to the city median: Lake Merritt (611) 6 incidents, Downtown (2,797) 7. OARI diversions subtract from nothing. Builder 2026-11-23: "1 - yes 2 - yes, but there does need to be a mechanism in place for the smaller neighborhood that may run a higher crime rate, I think Dimond is one of the areas we choose to start here, instutions.md may shed some light on how we set out oakland post tech boom, 3 - yes diverted". INSTITUTIONS.md Dimond: "the district still living down a past era … the operation is gone and the name is not. Nothing current, everything remembered" — read against his word at pickup | filed engine.365 |
 | C2 | Closed stays leave Lila's weekly record | adopted, builder 2026-11-23: "yes once they are out of care they should come off the beat" — Task 4 |
 
 ## Changelog

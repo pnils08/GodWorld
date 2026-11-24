@@ -98,6 +98,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| engine.365 | Arrests read right (builder 11-23): arrest carry, crimes scale by residents with a small-hood high-rate mechanism, diverted off arrests. Plan at pickup | ready | engine-sheet | engine.364 plan §New concepts C1 |
 | engine.356 | A moment has a place (builder 11-21): LIVE stage 73 @208; paused 11-23 for engine.364. Next: Task 1's count, then the build on his six answers | ready | engine-sheet | [[../plans/2026-11-21-a-moment-has-a-place]] |
 | engine.362 | Header-drift backlog: 24 standing field-name flags in the run-cycle gap log (since ≤C110, none new) — triage real misses vs detector noise | ready | engine-sheet | `output/production_log_run_cycle_c117_gaps.md` G-EC3–16, G-EC22–31 |
 | engine.363 | The gap log's four runtime checks (phase-skip, phase-ordering, cohort-collision, silent-fail) built on Engine_Run_Log, now the run-log ingest path | ready | engine-sheet | `output/production_log_run_cycle_c117_gaps.md` G-EC32–36 · [[../plans/2026-11-23-engine-writes-its-run-record]] |

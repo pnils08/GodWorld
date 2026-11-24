@@ -45,7 +45,7 @@ pointers:
 
 | # | Task | Owner | Status |
 |---|------|-------|--------|
-| 1 | Resident factor in `updateCrimeMetrics.js` (mean in the Phase-3 caller, factor on the level term and the noise; throws on a hood with no residents, as the care demand does) | es | not started |
+| 1 | Resident factor in `updateCrimeMetrics.js` (mean in the Phase-3 caller, factor on the level term and the noise; throws on a hood with no residents, as the care demand does) | es | built (this commit): `crimeResidentFactor_`, `crimeCityMeanResidents_`, `incidentParts` + one log line; tests wait on the unlock |
 | 2 | Arrests in `careJusticeService.js`: charges less diversions, times clearance, plus carry; carry save/seed on `PREV_ARREST_CARRY_JSON` (`finalizeCycleState.js`, `loadPreviousEvening.js`) | es | built (this commit); demand-v3 |
 | 3 | Readers: police reporter's slice and the police chief worker show what the census now says (no code change expected; verify by render) | es | not started |
 | 4 | Tests: carry, diversion, resident factor; existing fixtures that pin incident counts read | es | carry + diversion: careJusticeService 365a/b/c (29/29); census 102, court revenue 105, judicial 157 pass. Resident factor: with Task 1 |
@@ -89,3 +89,4 @@ pointers:
 
 - 2026-11-24 (engine-sheet) — Plan written: rulings 1–3 and the diversion order quoted; Dimond read against §17 and the levels.
 - 2026-11-24 (engine-sheet) — Dry run on C117 (constant inputs, six weeks): small hoods 9–10 crimes per 1,000 now → 1.8–3.3 scaled; big hoods +1 each; city 133 → 136; Dimond 3.66 per 1,000, third; big hoods still alternate 1 and 2 arrests. Carry + diversion built ahead of the scaling (advisor: the fully ruled part first).
+- 2026-11-24 (engine-sheet) — Builder "go" on the scaling as designed (rate from the crime system's causes; per-event additions whole, so a small busy hood runs higher per resident). Built Task 1; no feed marking (builder: "i dont want to puppet crons").

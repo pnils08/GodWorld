@@ -239,6 +239,8 @@ function updateCrimeMetrics_Phase3_(ctx) {
   // signed, self-relative cause that keeps hoods distinct from their own data (no threshold literal
   // decides who is rough). Absolute thresholds below still add on top for the extreme case.
   var cityMedianDemo = crimeCityMedianDemo_(demographics, neighborhoods);
+  // engine.365: incidents follow residents; the level is the per-person rate.
+  var cityMeanResidents = crimeCityMeanResidents_(demographics, neighborhoods);
 
   // Track loads for enforcement
   var predictedCityIncidents = 0;
@@ -288,11 +290,19 @@ function updateCrimeMetrics_Phase3_(ctx) {
         cityMedianDemo: cityMedianDemo,   // engine.212
         policingCapacity: policingCapacity,
         cityLoad: cityLoad,
-        patrolStrategy: patrolStrategy
+        patrolStrategy: patrolStrategy,
+        cityMeanResidents: cityMeanResidents   // engine.365
       },
       rng
     );
   }
+  // engine.365: one line — each hood's resident factor and what its count is made of.
+  var partsLog = [];
+  for (var pl = 0; pl < neighborhoods.length; pl++) {
+    var pm = newMetrics[neighborhoods[pl]], pp = pm && pm.incidentParts;
+    if (pp) partsLog.push(neighborhoods[pl] + ' x' + pp.residentFactor + ' lvl=' + pp.level + ' ev=' + pp.events + ' n=' + pp.noise + ' =' + pm.incidentCount);
+  }
+  Logger.log('crimeMetrics incidents by residents (mean ' + Math.round(cityMeanResidents) + '): ' + partsLog.join('; '));
 
   // Shifts
   var shifts = [];
@@ -451,6 +461,31 @@ function crimeCityMedianDemo_(demographics, hoods) {
 function crimeClampLevel_(n) { return Math.max(CRIME_LEVEL.MIN, Math.min(CRIME_LEVEL.MAX, n)); }
 function crimeCapPush_(n) { return Math.max(-CRIME_LEVEL.CAUSE_CAP, Math.min(CRIME_LEVEL.CAUSE_CAP, n)); }
 
+/**
+ * engine.365: a hood's residents against the city's mean hood (advanced.cityMeanResidents, computed
+ * once by updateCrimeMetrics_Phase3_ over the simulated hoods). Both must be real: a hood with no
+ * residents on Neighborhood_Demographics is a broken table, not a hood with no crime.
+ */
+function crimeResidentFactor_(neighborhood, residents, advanced) {
+  var mean = advanced && Number(advanced.cityMeanResidents);
+  if (!(mean > 0) || !isFinite(mean)) throw new Error('crimeMetrics: city mean hood residents missing (advanced.cityMeanResidents)');
+  if (!(residents > 0) || !isFinite(residents)) throw new Error('crimeMetrics: ' + neighborhood + ' has no residents on Neighborhood_Demographics');
+  return residents / mean;
+}
+
+/** engine.365: the mean residents of the simulated hoods — every one must have a row with residents. */
+function crimeCityMeanResidents_(demographics, neighborhoods) {
+  var sum = 0;
+  for (var i = 0; i < neighborhoods.length; i++) {
+    var d = demographics[neighborhoods[i]] || {};
+    var n = (Number(d.students) || 0) + (Number(d.adults) || 0) + (Number(d.seniors) || 0);
+    if (!(n > 0)) throw new Error('crimeMetrics: ' + neighborhoods[i] + ' has no residents on Neighborhood_Demographics');
+    sum += n;
+  }
+  if (!neighborhoods.length) throw new Error('crimeMetrics: no simulated hoods');
+  return sum / neighborhoods.length;
+}
+
 function calculateNeighborhoodCrime_(neighborhood, profile, demo, prev, context, events, advanced, rng) {
   // ---- the persistent level: last cycle's, or the seed for a hood with no row -------------------
   var seedProperty = 50 * profile.propertyCrimeMod;
@@ -568,6 +603,14 @@ function calculateNeighborhoodCrime_(neighborhood, profile, demo, prev, context,
     baseIncidents = Math.max(0, Math.floor(baseIncidents * 0.96));
     ovQoL *= 0.98;
   }
+  // engine.365 (builder 2026-11-23/24): the level is the hood's per-person rate, so its incidents
+  // follow its residents (residents / the city's mean hood). Applied after the weather steps, which
+  // floor/ceil the level term. The per-event additions below stay whole per event — a nightlife
+  // night or a chaos event in a hood of 600 is the same event as in one of 2,800, which is how a
+  // small busy hood runs a higher rate per resident than a big quiet one.
+  var residentFactor = crimeResidentFactor_(neighborhood, totalPop, advanced);
+  baseIncidents = baseIncidents * residentFactor;
+  var incidentLevelPart = baseIncidents;
 
   var seasonMod = 1.0;
   var s = (context.season || '').toString().toLowerCase();
@@ -613,7 +656,10 @@ function calculateNeighborhoodCrime_(neighborhood, profile, demo, prev, context,
   baseViolent += (rng() - 0.5) * 4;
   baseQoL += (rng() - 0.5) * 6;
   baseResponse += (rng() - 0.5) * CRIME_FACTORS.RESPONSE_TIME_VARIANCE;
-  baseIncidents += Math.round((rng() - 0.5) * 4);
+  var incidentEventPart = baseIncidents - incidentLevelPart;
+  // engine.365: the noise is per-person too — the same draw, scaled by the residents.
+  var incidentNoise = Math.round((rng() - 0.5) * 4) * residentFactor;
+  baseIncidents += incidentNoise;
 
   var loadProxy = Math.max(0, baseIncidents) * CRIME_ADVANCED.UNITS_PER_INCIDENT;
 
@@ -659,6 +705,10 @@ function calculateNeighborhoodCrime_(neighborhood, profile, demo, prev, context,
   out.trueIncidentCount = trueIncidents;
   out.reportingRate = Math.round(reportingRate * 100) / 100;
   out.reportingMultiplier = Math.round(reportingMult * 100) / 100;
+  // engine.365: what the count is made of (log + bench read; not a sheet column)
+  out.incidentParts = { residentFactor: Math.round(residentFactor * 1000) / 1000,
+    level: Math.round(incidentLevelPart * 100) / 100, events: Math.round(incidentEventPart * 100) / 100,
+    noise: Math.round(incidentNoise * 100) / 100 };
 
   out.enforcement = {
     neighborhoodShare: Math.round(enforcementShare * 100) / 100,

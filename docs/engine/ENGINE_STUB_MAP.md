@@ -826,6 +826,10 @@
 
 - **crimeCapPush_(n)**
 
+- **crimeResidentFactor_(neighborhood, residents, advanced)**
+
+- **crimeCityMeanResidents_(demographics, neighborhoods)**
+
 - **calculateNeighborhoodCrime_(neighborhood, profile, demo, prev, context, events, advanced, rng)**
 
 - **calculateCityWideFromMap_(metricsMap)**
@@ -4930,4 +4934,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 179
-**Functions mapped:** 1790
+**Functions mapped:** 1792

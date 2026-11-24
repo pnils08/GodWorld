@@ -121,6 +121,7 @@ Done: Sharon, Maria, Kai, Mason, Celeste, Jordan, Graye, Noah, Trevor, Lila, Rac
 
 ## Changelog
 
+- 2026-11-24 (research-build) — Watch row pipeline.117 (builder: "add a watch line on rollout for this"): do Carmen, Luis and Farrah keep landing on one civic story; read Thu 11-26 and Tue 12-01.
 - 2026-11-24 (research-build) — Farrah seated: the opinion column on Thursdays, reading the week as published. A new seat needs persona-map, package, WEEK_GRID, WRITER_TOOLS_SEATS, both BEAT_BUILDERS, an agent folder naming the voice file, and the test lists; GODWORLD_TEST_NEW_SEAT=1 tests it before its first rota.
 - 2026-11-24 (research-build) — Luis on Haiku 5.5 (builder: different model, different voice from Carmen); bio written to his CitizenBio cell.
 - 2026-11-24 (research-build) — Luis live; the engine's self-check findings no longer reach him. Overlap with Carmen (same C118 due list) flagged to the builder.

@@ -130,7 +130,18 @@ Each moment written carries its place id and the other person's POPID on the two
 **Answered (builder 2026-11-24, verbatim):** "1. all of these since bonds can read these as well to strengthen id imagine, 2 - i think this is a great way to strenthen a bond and make a boy ang girl push towards marriage"
 - *With whom* → bonded people, coworkers (same employer) and neighbors (same household or block) — all of them.
 - *Shared moments* → the bond reads them: a moment two people share strengthens their bond, and a romantic bond's shared moments carry it toward marriage (SIM_DOCTRINE §11, "Marriage is years of a maintained bond" — the moments are the maintenance).
-- *Next:* wiring card on how a bond is maintained today and what fires a wedding, then the cut order.
+
+**How a bond moves today (engine-wiring card 2026-11-24, `bondEngine.js`):** "maintained" means both people were in the Cycle's active pool (`updateExistingBonds_` :594–882) — friendship / professional / neighbor +0.4 × warmth, family +0.15, otherwise decay; neighbor / professional / festival deepen to friendship at 6; friendship → romantic at 5.5 on a 10% roll (`processRomanceAndMarriage_` :2332–2335); romantic at 8 marries (both single, 24–58). No event reaches a bond: nothing reads LifeHistory_Log or a `$CONTACT`. Coworker bonds are seeded by Occupation string, not employer; not every coworker or neighbor pair has a row. Phase5-Bonds runs after Phase5-CitizenEvents, so a moment written this Cycle can move its bond this Cycle.
+
+**Cut order (proposed):**
+
+| Cut | What | Moves the sim |
+|---|---|---|
+| A | The composer: an ECL line names its activity; the Where column fills from a real place of that kind (spot, hood business by sector, workplace, home, congregation, game), the With column from a bonded person, a coworker (same employer) or a neighbor (same household or block), the When from the three dayparts. Every line carries place id and person POPID on two new LifeHistory_Log columns. The code's stock place tables leave the fill path | the week's text and the two columns; no dial or bond number changes |
+| B | A shared moment feeds the bond: two people in one moment is the maintenance (in place of "both were in the pool"); a coworker or neighbor with no bond row gets one (origin `shared-moment`); a courting couple's shared moments are the steps toward the 8 that marries | bond intensity, new bond rows, romance and weddings — step sizes on World_Config, his numbers |
+| C | The day readable outside the fire: each citizen's moments in daypart order on the beat dump, so the wake builds on them and the city view walks them (Q6); the citizen's own word can move their spot (Q2) | none on the engine's numbers |
+
+Repair, not replace (builder 2026-11-24): each cut repairs the code it touches; the 1,060 ECL lines are tagged, not rewritten.
 
 ## Rulings
 
@@ -179,3 +190,5 @@ Each moment written carries its place id and the other person's POPID on the two
 - 2026-11-24 (engine-sheet) — Task 1 count done (C117) and the two-column read: safe. Resumed from pause on the builder's "go on the moments job, start with the count".
 - 2026-11-24 (engine-sheet) — The event machine written from the builder's words: ECL inventory (1,031 of 1,060 lines unslotted), the six columns from sim data, repair over replace; two questions to him.
 - 2026-11-24 (engine-sheet) — Builder answered the two machine questions: all three (bonds, coworkers, neighbors); shared moments feed the bond and push courtship toward marriage.
+
+- 2026-11-24 (engine-sheet) — Bond wiring read; cut order A (composer), B (shared moments feed bonds), C (the day readable) written for his go.

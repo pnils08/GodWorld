@@ -58,7 +58,7 @@ On Sharon (2026-11-21): bio — "i like them both and love \"visits places she w
 5. Test day on the newest cycle with `scripts/testReporterDay.sh` under the no-write guard (spend unlock from the builder); restore the slice cache files after; copy the piece to `output/research-build/2026-11-21-p111/`. Check invented ages/tenures and engine-stamp leaks.
 6. Commit path-specifically (shared files may carry engine-sheet hunks); plan task row + changelog; ROLLOUT row <=160 chars.
 
-Done: Sharon, Maria, Kai, Mason, Celeste, Jordan, Graye, Noah, Trevor, Lila, Rachel, Angela, Carmen, Luis. Next: Farrah (builder order). Not yet: the sports seats, Marbury, Jax, Nia, Tamsin, Ines.
+Done: Sharon, Maria, Kai, Mason, Celeste, Jordan, Graye, Noah, Trevor, Lila, Rachel, Angela, Carmen, Luis, Farrah (new seat). Next: the builder names it. Not yet: the sports seats, Marbury, Jax, Nia, Tamsin, Ines.
 
 ## Tasks
 
@@ -84,7 +84,7 @@ Done: Sharon, Maria, Kai, Mason, Celeste, Jordan, Graye, Noah, Trevor, Lila, Rac
 | 18 | Angela Reyes: seat file, every-hood schools record, staff and students | rb | live; read Tue 11-24 |
 | 19 | Carmen Delaine: seat file, whole civic record (buildCivicSlice), thinking medium (package seatReasoning) | rb | live; read Mon 11-30 |
 | 20 | Luis Navarro: seat file + sheet bio, initiative clocks + decisions record (buildInvestigationsSlice), Haiku 5.5 thinking medium | rb | live; read Tue 11-24 (one-run sample: is he still apart from Carmen) |
-| 21 | Farrah Del Rio: new opinion seat (no cron today) | rb | next |
+| 21 | Farrah Del Rio: new opinion seat (Thursdays), the week's record (buildOpinionSlice), Sonnet thinking medium | rb | live; first wake Thu 11-26 |
 
 ## Acceptance
 
@@ -121,6 +121,7 @@ Done: Sharon, Maria, Kai, Mason, Celeste, Jordan, Graye, Noah, Trevor, Lila, Rac
 
 ## Changelog
 
+- 2026-11-24 (research-build) — Farrah seated: the opinion column on Thursdays, reading the week as published. A new seat needs persona-map, package, WEEK_GRID, WRITER_TOOLS_SEATS, both BEAT_BUILDERS, an agent folder naming the voice file, and the test lists; GODWORLD_TEST_NEW_SEAT=1 tests it before its first rota.
 - 2026-11-24 (research-build) — Luis on Haiku 5.5 (builder: different model, different voice from Carmen); bio written to his CitizenBio cell.
 - 2026-11-24 (research-build) — Luis live; the engine's self-check findings no longer reach him. Overlap with Carmen (same C118 due list) flagged to the builder.
 - 2026-11-24 (research-build) — Carmen live with her own civic record and thinking at medium. Builder order: Luis next, then Farrah.

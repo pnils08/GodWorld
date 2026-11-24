@@ -2798,7 +2798,7 @@ const WORKER_WAKES_A_DAY = 4;
 function workerRota(officeMap, limit) {
   const rows = [...officeMap.offices, ...(officeMap.projects || [])]
     .map(o => Object.assign({}, o, { officeId: o.officeId || o.projectId }))
-    .filter(o => workerWake.hasFill(o.officeId) && o.popid)
+    .filter(o => workerWake.hasFill(o.officeId) && o.popid && o.answersOnly !== true)   // pipeline.111 (builder 2026-11-24): an answers-only worker has no scheduled wake
     .map(o => Object.assign(o, { agentDir: workerWake.slugFor(o) }));
   const lastWake = {};
   if (fs.existsSync(CIVIC)) {

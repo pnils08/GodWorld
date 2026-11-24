@@ -481,6 +481,28 @@ Object.assign(FILLS, {
   'CHIEF-FIRE': made('fire engine calls', async (k) => {
     await k.chaos('Fire engine events, every Cycle on the sheet', ['fire_engine']);
   }),
+  // The Superintendent of Schools (pipeline.111, builder 2026-11-24: "schools superintendent worker" — "1"): the district's
+  // record — every neighborhood's schools, the district and its staff, the schools, colleges and childcare on the business
+  // ledger, the youth programs, and residents' own school and learning lines.
+  'SUPT-SCHOOLS': made('schools enrollment graduation teachers funding youth programs', async (k) => {
+    await k.demographics('Schools by neighborhood', ['Students', 'SchoolQualityIndex', 'GraduationRate', 'CollegeReadinessRate', 'TeacherQuality', 'Funding']);
+    await k.whole('The district, and the schools, colleges and childcare on the business ledger', 'Business_Ledger', ['BIZ_ID', 'Name', 'Sector', 'Neighborhood', 'Employee_Count', 'Avg_Salary', 'Growth_Rate'],
+      (r) => /education|school|college|university|academy|childcare|preschool|tutor/i.test(String(r.Sector || '') + ' ' + String(r.Name || '')) && !/dental|medical|cafe/i.test(String(r.Name || '')));
+    await k.whole('The district\'s staff (Oakland City Schools)', 'Employment_Roster', ['POP_ID', 'CitizenName', 'RoleType', 'Status'], (r) => r.BIZ_ID === 'BIZ-00016');
+    await k.whole('Youth and education programs', 'Community_Programs', null, (r) => /youth|school|education|apprentice|tutor|academy|league/i.test(String(r.Type || '') + ' ' + String(r.Name || '')));
+    await k.initiative('INIT-007');
+    await k.whole('Residents\' own school and learning lines', 'LifeHistory_Log', ['Cycle', 'Name', 'Neighborhood', 'EventText'], (r) => /^(Education|Graduation)/.test(String(r.EventTag || '')));
+  }),
+  // The Director of Cultural Affairs (pipeline.111, builder 2026-11-24: "3. yes - mint a new"): the city's culture record —
+  // the cultural ledger, the venues, bars, galleries, theaters and studios on the business ledger, the arts programs, and the
+  // culture, festival and celebrity events on the city's event ledger.
+  'CULTURE-DIR': made('culture arts venues artists festivals nightlife', async (k) => {
+    await k.whole('Every name on the city\'s cultural ledger', 'Cultural_Ledger', ['CUL-ID', 'Name', 'RoleType', 'FameCategory', 'CulturalDomain', 'Status', 'Neighborhood', 'FirstSeenCycle', 'LastSeenCycle', 'MediaCount', 'FameScore', 'TrendTrajectory', 'CityTier'], null, { allCycles: true });
+    await k.whole('Venues, bars, galleries, theaters and studios on the business ledger', 'Business_Ledger', ['BIZ_ID', 'Name', 'Sector', 'Neighborhood', 'Employee_Count', 'Annual_Revenue', 'Growth_Rate', 'Key_Personnel'],
+      (r) => /nightlife|entertainment|bar\b|lounge|saloon|music|gallery|art|theat|studio|comedy|club|karaoke|movie|cinema|museum/i.test(String(r.Sector || '')));
+    await k.whole('Arts and culture programs', 'Community_Programs', null, (r) => /art|music|culture|theat|film|dance|media/i.test(String(r.Type || '') + ' ' + String(r.Name || '')));
+    await k.events('Culture, festival and celebrity events on the city\'s event ledger', ['CULTURE', 'FESTIVAL', 'CELEBRITY']);
+  }),
   // The City Clerk (pipeline.111, builder 2026-11-24: "data, canon, and whats been said on record … then the civic trio
   // can call on it"; "this worker will only respond to the questions, no summary"): the record the city keeps — every
   // initiative whole (its vote record and milestones in its own columns), every office and who holds it, and what the
@@ -530,6 +552,8 @@ const JOBS = {
   'EMS-DIR': 'You run the city\'s emergency medical services. Your job is to answer for the city\'s ambulance calls and hospital intakes — who came in, from where and for what, who is in care, and the illness in each neighborhood — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'CHIEF-POLICE': 'You run the city\'s police department. Your job is to answer for the city\'s crime and policing — incidents, clearance and response time in each neighborhood, arrests and the people in custody, each patrol car call, and the patrol strategy you set — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'MED-EXAM': 'You are the city\'s medical examiner. Your job is to answer for the city\'s deaths and their causes — who died, when, and the cause on file, the residents in hospital care, and those still waiting on a cause — when the Mayor, the council or the press ask, and in your weekly report on the record.',
+  'SUPT-SCHOOLS': 'You are the Superintendent of Schools. Your job is to answer for the city\'s schools — every neighborhood\'s schools and their numbers, the district and its staff, the colleges and childcare, the youth programs, and the students and families on the record — when the Mayor, the council or the press ask.',
+  'CULTURE-DIR': 'You are the Director of Cultural Affairs. Your job is to answer for the city\'s culture — its artists and names, the venues, bars, galleries, theaters and studios, the arts programs, and the culture, festival and celebrity events — when the Mayor, the council or the press ask.',
   'CLERK-01': 'You are the City Clerk. Your job is to answer for the city\'s record — every initiative and its votes, every office and who holds it, every decision and statement the city\'s offices put on the record, and what the Tribune has printed on them — when the Mayor, the council or the press ask.',
 };
 const isLean = (officeId) => Object.prototype.hasOwnProperty.call(JOBS, String(officeId || ''));

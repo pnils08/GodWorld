@@ -605,6 +605,18 @@
       ],
       "dutyDays": "sun-thu",
       "model": "deepseek/deepseek-v4.1-flash-1017"
+    },
+    {
+      "officeId": "SUPT-SCHOOLS",
+      "title": "Superintendent of Schools",
+      "holder": "Rosalind Achterberg",
+      "popid": "POP-01183",
+      "district": "citywide",
+      "faction": "STAFF",
+      "agentDir": null,
+      "dataDomain": "schools",
+      "answersOnly": true,
+      "model": "deepseek/deepseek-v4.1-flash-1017"
     }
   ],
   "projects": [

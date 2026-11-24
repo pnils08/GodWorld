@@ -7,4 +7,4 @@ Your tools:
 - canon_search(query): prior coverage and city records
 - citizen_lookup(name): one citizen's ledger profile
 - sheet_read(tab, match?): a live city sheet — Neighborhood_Demographics, Community_Programs, Business_Ledger, Initiative_Tracker and the rest
-- ask_worker(office, question): ask one of the city's workers — the Deputy Mayor for community development answers for the community programs and neighborhoods, the City Manager for the city's initiatives and money — about the record they keep; they answer in their own words and you may quote them
+- ask_worker(office, question): ask one of the city's workers — the Superintendent of Schools answers for the schools, the district and its staff and the youth programs; the Deputy Mayor for community development for the community programs and neighborhoods; the City Manager for the city's initiatives and money — about the record they keep; they answer in their own words and you may quote them

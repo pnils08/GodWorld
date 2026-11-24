@@ -1737,6 +1737,12 @@ function generateCitizensEvents_(ctx) {
     }
     return '';
   }
+  function rowPlaceId_(tags) {
+    for (var ri = 0; ri < (tags || []).length; ri++) {
+      if (/^place:BIZ-/.test(String(tags[ri]))) return String(tags[ri]).slice(6);
+    }
+    return '';
+  }
   function placeTags_(tags, venueName) {
     if (lastPlace_ && venueName === lastPlace_.name) return mergeTags(tags, ["place:" + lastPlace_.id]);
     return tags;
@@ -3686,6 +3692,10 @@ function generateCitizensEvents_(ctx) {
           if (!evalContentConditions_(clEntry.conditions, condScopes)) continue;
           if (!contentSlotsFillable_(clEntry, contentLedger, condScopes, String(popId).trim().toUpperCase())) continue;
           if (clEntry.slots.indexOf("VENUE") >= 0 && !hoodHasSpotFor_(neighborhood, actFromTags_(clEntry.tags))) continue; // cut A2
+          // cut A2: a line that names a business (place:<BIZ_ID> on its row) is offered only while that
+          // business is on the ledger and not winding down. S.bizOpenIds unset (the business phase failed) → offered.
+          if (clEntry.placeId === undefined) clEntry.placeId = rowPlaceId_(clEntry.tags);
+          if (clEntry.placeId && S.bizOpenIds && !S.bizOpenIds[clEntry.placeId]) continue;
           var clTags = clEntry.grain ? mergeTags(clEntry.tags, ["grain:" + clEntry.grain]) : clEntry.tags;
           var clPooled = makeEntry(clEntry.text, mergeTags(clTags, calendarTags), clEntry.weight, false);
           var clShare = contentDialShare_(clEntry.conditions, condScopes);

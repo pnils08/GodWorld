@@ -1,0 +1,57 @@
+AIM = BENCH (script read the bench marker)
+== push code 366883880
+bench pull-back byte-identical to e356i.sha256
+== sync from live
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+{"fireGuardMinutes":"0","cycleCountFormatted":"117","cycleCountIsNumber":true}
+clearfire 118: {"ok":true,"cleared":{"cycle":118,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+appended 5 to Edition_Coverage_Ratings; marked rows on the tab now 5
+appended 28 to Citizen_Media_Usage; marked rows on the tab now 28
+appended 2 to Oakland_Sports_Feed; marked rows on the tab now 2
+bench cycleCount 117
+clearfire 118: {"ok":false,"error":"no readable fire record to clear"}
+fire C118 rc=0 "verdict": "PASS" "wallS": 294
+   6
+  ],
+  [
+   "Art Walk Cafe",
+   6
+  ],
+  [
+   "Miso Metro",
+   6
+  ],
+  [
+   "Adams & Daughters Antiques",
+   6
+  ],
+  [
+   "Masa & Vine",
+   6
+  ],
+  [
+   "Linden Street Jewelers",
+   5
+  ],
+  [
+   "Taquería El Andén",
+   5
+  ]
+ ],
+ "examples": [
+  "Dana Reeve (Chinatown): the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.   [BIZ-00122 Retail]",
+  "DeShawn Hartley (Jack London): compared rent notes with a neighbor over the fence in Jack London near Third Street Late Kitchen  [BIZ-00198 Late-Night Restaurant & Dining]",
+  "Danny Horn (Temescal): paid for the coffee of the person behind them in line without thinking twice near Longfellow Pharmacy  [BIZ-00219 Pharmacy / Retail]",
+  "Manfred Owens (Jack London): framed an old ticket stub that had finally earned its frame near Third Street Late Kitchen  [BIZ-00198 Late-Night Restaurant & Dining]",
+  "Laila Cortez (West Oakland): walked past the renderings for the Temescal Community Health Center and decided it would never look like that near West   [BIZ-00048 Restaurant & Dining]",
+  "Babe Bono (Lake Merritt): walked past the open door of the new shop without glancing inside near Merritt Club  [BIZ-00040 Nightlife & Entertainment]",
+  "Babe Bono (Lake Merritt): went to bed without mentioning the small thing that bothered them near Lakeside Rowing Club  [BIZ-00236 Private Club]",
+  "Babe Bono (Lake Merritt): saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner near Lakeside Rowing C  [BIZ-00236 Private Club]"
+ ],
+ "problems": [],
+ "verdict": "PASS"
+}
+read 1 exit 0
+== final sync from live
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.

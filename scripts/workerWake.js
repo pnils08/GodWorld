@@ -481,6 +481,31 @@ Object.assign(FILLS, {
   'CHIEF-FIRE': made('fire engine calls', async (k) => {
     await k.chaos('Fire engine events, every Cycle on the sheet', ['fire_engine']);
   }),
+  // The City Clerk (pipeline.111, builder 2026-11-24: "data, canon, and whats been said on record … then the civic trio
+  // can call on it"; "this worker will only respond to the questions, no summary"): the record the city keeps — every
+  // initiative whole (its vote record and milestones in its own columns), every office and who holds it, and what the
+  // city's offices put on the record, Cycle by Cycle. Canon is her canon_recall tool.
+  'CLERK-01': made('record votes filings minutes statements', async (k, cycle) => {
+    await k.whole('Every initiative on the city\'s tracker, every column', 'Initiative_Tracker', null, null, { allCycles: true });
+    await k.whole('Every office and who holds it', 'Civic_Office_Ledger', ['OfficeId', 'Title', 'Type', 'District', 'Holder', 'Status', 'Faction', 'VotingPower', 'Approval', 'TermStart', 'TermEnd', 'NextElection', 'Notes'],
+      (r) => String(r.Holder || r.OfficeId || '').trim());
+    const fs = require('fs'), path = require('path');
+    const dir = path.join(__dirname, '..', 'output', 'civic-voice');
+    for (const c of [Number(cycle), Number(cycle) - 1, Number(cycle) - 2]) {
+      let files = [];
+      try { files = fs.readdirSync(dir).filter((f) => f.endsWith('_c' + c + '.json')).sort(); } catch (e) { files = []; }
+      const lines = [];
+      for (const f of files) {
+        let d = null; try { d = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')); } catch (e) { d = null; }
+        if (!d || Number(d.cycle) !== c) continue;
+        for (const st of d.statements || []) {
+          lines.push(String(d.speaker || '').trim() + ' — ' + String(st.type || '').replace(/_/g, ' ') + (st.initiative ? ' on ' + st.initiative : '') + (st.topic ? ' (' + String(st.topic).trim() + ')' : '') +
+            (st.decision ? '\n  decided: ' + String(st.decision).trim().slice(0, 300) : '') + (st.quote ? '\n  said: "' + String(st.quote).trim().slice(0, 300) + '"' : '') + (st.statementId ? '\n  [' + st.statementId + ']' : ''));
+        }
+      }
+      k.blocks.push({ title: 'What the city\'s offices put on the record, Cycle ' + c, text: lines.length ? lines.join('\n') : 'nothing on the record this Cycle' });
+    }
+  }),
 });
 
 // What each worker's job is, in city words (builder 2026-11-16: "puppeting means putting words in their mouth and telling
@@ -505,6 +530,7 @@ const JOBS = {
   'EMS-DIR': 'You run the city\'s emergency medical services. Your job is to answer for the city\'s ambulance calls and hospital intakes — who came in, from where and for what, who is in care, and the illness in each neighborhood — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'CHIEF-POLICE': 'You run the city\'s police department. Your job is to answer for the city\'s crime and policing — incidents, clearance and response time in each neighborhood, arrests and the people in custody, each patrol car call, and the patrol strategy you set — when the Mayor, the council or the press ask, and in your weekly report on the record.',
   'MED-EXAM': 'You are the city\'s medical examiner. Your job is to answer for the city\'s deaths and their causes — who died, when, and the cause on file, the residents in hospital care, and those still waiting on a cause — when the Mayor, the council or the press ask, and in your weekly report on the record.',
+  'CLERK-01': 'You are the City Clerk. Your job is to answer for the city\'s record — every initiative and its votes, every office and who holds it, every decision and statement the city\'s offices put on the record, and what the Tribune has printed on them — when the Mayor, the council or the press ask.',
 };
 const isLean = (officeId) => Object.prototype.hasOwnProperty.call(JOBS, String(officeId || ''));
 // The weekly report is made against the last one (builder 2026-11-16, on a quiet week: "2" — report against the last

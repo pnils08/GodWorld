@@ -1518,6 +1518,30 @@
       "name": "Tops n Tassels",
       "sector": "Gentlemen's Club / Adult Entertainment",
       "neighborhood": "Dimond"
+    },
+    {
+      "bizId": "BIZ-00290",
+      "name": "Bay Pure Land Buddhist Temple",
+      "sector": "Faith Organization",
+      "neighborhood": "Chinatown"
+    },
+    {
+      "bizId": "BIZ-00291",
+      "name": "Bharat Mandir of the East Bay",
+      "sector": "Faith Organization",
+      "neighborhood": "Piedmont Ave"
+    },
+    {
+      "bizId": "BIZ-00292",
+      "name": "Gurdwara Singh Sabha Fruitvale",
+      "sector": "Faith Organization",
+      "neighborhood": "Fruitvale"
+    },
+    {
+      "bizId": "BIZ-00293",
+      "name": "Or Hashalom Renewal Community",
+      "sector": "Faith Organization",
+      "neighborhood": "Grand Lake"
     }
   ],
   "notes": "S357 engine.83: 20 generic-occupation keyword rules demoted (generic trade -> tracked biz was the mass-hiring failure; those roles now resolve UNTRACKED). Org-name rules kept."

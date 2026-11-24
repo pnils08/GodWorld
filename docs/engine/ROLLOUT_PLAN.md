@@ -101,6 +101,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| engine.367 | Who joins a congregation (builder 11-24): joining is a flat 8% on a drawn faith line; no dial says who has faith. Design the dial first | ready | engine-sheet | `docs/plans/2026-11-21-a-moment-has-a-place.md` changelog 11-24 |
 | infrastructure.20 | Shared sheet append starts at column A (builder 11-24): rows land shifted on sparse tabs, twice on the intake tab. Read the ~45 callers first | ready | engine-sheet | `output/production_log_run_cycle_c116_gaps.md` G-EC70 |
 | engine.362 | Header-drift backlog: 24 standing field-name flags in the run-cycle gap log (since ≤C110, none new) — triage real misses vs detector noise | ready | engine-sheet | `output/production_log_run_cycle_c117_gaps.md` G-EC3–16, G-EC22–31 |
 | engine.363 | The gap log's four runtime checks (phase-skip, phase-ordering, cohort-collision, silent-fail) built on Engine_Run_Log, now the run-log ingest path | ready | engine-sheet | `output/production_log_run_cycle_c117_gaps.md` G-EC32–36 · [[../plans/2026-11-23-engine-writes-its-run-record]] |

@@ -389,7 +389,7 @@ pointers:
 ## Community_Programs
 
 - **Rows:** 33
-- **Columns:** 7
+- **Columns:** 8
 
 | Col | Header |
 |-----|--------|
@@ -400,6 +400,7 @@ pointers:
 | E | Type |
 | F | Founded_Cycle |
 | G | Status |
+| H | Place_Kind |
 
 ---
 

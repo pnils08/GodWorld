@@ -2,7 +2,7 @@
  {"row":890,"pool":"hood.uptown","oldText":"spent an afternoon at the sound archive listening to recordings","newText":"spent an afternoon at the Oakland Sound Archive listening to recordings","add":["act:visit","place:PRG-012"]},
  {"row":915,"pool":"hood.dimond","oldText":"watched the kids run drills at the A's alumni youth clinic on a Saturday morning","newText":"watched the kids run drills at the Oakland A's Alumni Youth Clinics on a Saturday morning","add":["place:PRG-007"]},
  {"row":936,"pool":"hood.east-oakland","oldText":"tried a plate from a new stall at the Coliseum District vendor incubator","newText":"tried a plate from a new stall at the Coliseum District Vendor Incubator","add":["place:PRG-009"]},
- {"row":904,"pool":"hood.adams-point","oldText":"heard the hymns through the open doors of the Methodist church on the point","newText":"heard the hymns through the open doors of Adams Point United Methodist Church","add":["place:BIZ-00061"]},
+ {"row":904,"pool":"hood.adams-point","oldText":"heard the hymns through the open doors of the Methodist church on the point","newText":"heard the hymns through the open doors of Adams Point United Methodist","add":["place:BIZ-00061"]},
  {"row":934,"pool":"hood.east-oakland","oldText":"passed the neighbors heading in to Masjid An-Nur for prayers","newText":"passed the neighbors heading in to Masjid An-Nur Oakland for prayers","add":["place:BIZ-00079"]},
  {"row":962,"pool":"hood.rockridge","oldText":"held the door for the crowd coming out of Temple Beth Or","add":["place:BIZ-00085"]},
  {"row":195,"pool":"faith.volunteering","oldText":"carried three boxes of canned goods from the pantry truck and felt it in their lower back","add":["place:congregation"]},

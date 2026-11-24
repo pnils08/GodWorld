@@ -1,0 +1,6 @@
+PROD pull = stage 81 (e356k-prod.sha256)
+manifest written: /root/GodWorld/output/engine-sheet/2026-11-24-e356l/e356l.sha256
+└─ utilities/writeIntents.js
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @245
+bench pull-back byte-identical to e356l.sha256

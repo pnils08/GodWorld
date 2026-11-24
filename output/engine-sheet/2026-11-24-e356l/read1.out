@@ -1,0 +1,73 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+{
+ "cycle": 118,
+ "lines": 2650,
+ "people": 1027,
+ "actLines": {
+  "service": 106,
+  "rest": 120,
+  "errand": 26,
+  "shift": 71,
+  "drink": 5,
+  "meal": 10,
+  "walk": 12,
+  "game": 13,
+  "visit": 1
+ },
+ "linesWithPlace": 79,
+ "peopleWithPlace": 77,
+ "distinctPlaces": 48,
+ "placeBy": {
+  "venue": 42,
+  "row": 11,
+  "rowProgram": 1,
+  "program": 13,
+  "congregation": 1,
+  "fanout": 2,
+  "employer": 9
+ },
+ "trackedMembers": 17,
+ "membersOfALedgerCongregation": 16,
+ "faithLinesDrawn": 60,
+ "faithLinesDrawnByMembers": 0,
+ "notProven": [],
+ "nearTailsLeft": 0,
+ "examples": {
+  "venue": [
+   "Derek Simmons (Jack London): stood by the bar at Heinold's First and Last Chance Saloon, nodding along to the DJ’s set  [Heinold's First and Last Chance Saloon]",
+   "Keisha Ramos (Lake Merritt): found a quiet minute at Grand Avenue Wine Bar and the muffled thump of a car stereo playing last summer's hit  [Grand Avenue Wine Bar]",
+   "Pamela Amelia (Piedmont Ave): found a quiet minute at Marguerite's and felt the season starting to turn  [Marguerite's]",
+   "Kevin Clark (Jack London): found a quiet minute at Heinold's First and Last Chance Saloon and a sense of anticipation hangs in the air  [Heinold's First and Last Chance Saloon]"
+  ],
+  "row": [
+   "Julio Valencia (Uptown): waited a long while for a table at Telegraph Supper Club  [Telegraph Supper Club]",
+   "Rosa Simon (Laurel): waited at the Laurel Cleaners counter while someone hunted for the claim ticket  [Laurel Cleaners]",
+   "Mart Johns (KONO): sang a song or two at Midnight Norae Karaoke on Telegraph Avenue  [Midnight Norae Karaoke]",
+   "Tio Rio (Chinatown): bought a tea blend at Lucky Harbor Herbalist & Tea on the way home  [Lucky Harbor Herbalist & Tea]"
+  ],
+  "employer": [
+   "Elio Perez (Piedmont Ave): split a check six ways in her head faster than the register could  [Claremont Table]",
+   "Christopher Johnson (Lake Merritt): mopped the gym floor into drying stripes and waited by the door  [Oakland Hospital]",
+   "Sarah Corliss (Jack London): badged into the Baylight office early and tried not to think about the protestors from last month  [DigitalOcean]",
+   "Brine Williams (Chinatown): wiped grease off their knuckles and told a customer the transmission was finally shot  [Baylight Construction Authority]"
+  ],
+  "program": [
+   "Marcus Wright (West Oakland): stood at the fence for a Saturday game at Vinnie Keane Firehouse 29 West Oakland Baseball Academy  [Vinnie Keane Firehouse 29 West Oakland Baseball Academy]",
+   "Brielle Lewis (West Oakland): stood at the fence for a Saturday game at Keane Auxiliary Flag Football League  [Keane Auxiliary Flag Football League]",
+   "Wesley Clark (West Oakland): stood at the fence for a Saturday game at Vinnie Keane Firehouse 29 West Oakland Baseball Academy  [Vinnie Keane Firehouse 29 West Oakland Baseball Academy]",
+   "Rico Valez (Fruitvale): stood at the fence for a Saturday game at Fruitvale Summer Speed Series  [Fruitvale Summer Speed Series]"
+  ],
+  "congregation": [
+   "Bambi Wart (West Oakland): stayed for coffee in the hall at New Covenant Pentecostal Assembly after the service  [New Covenant Pentecostal Assembly]"
+  ],
+  "fanout": [
+   "Daniel Cloak (West Oakland): joined the Easter observance at New Covenant Pentecostal Assembly  [New Covenant Pentecostal Assembly]",
+   "Nia Rook (West Oakland): joined the Easter observance at New Covenant Pentecostal Assembly  [New Covenant Pentecostal Assembly]"
+  ],
+  "rowProgram": [
+   "Guadalupe Lee (Uptown): spent an afternoon at the Oakland Sound Archive listening to recordings  [Oakland Sound Archive]"
+  ]
+ },
+ "problems": [],
+ "verdict": "PASS"
+}

@@ -1,7 +1,7 @@
 {
   "_comment": "ADR-0017 live wake packages. The scheduled fan-out is package-only: a journalist must have one active entry before any wake runs. Models are explicit per wake; reviewProfile is the machine-readable authority Rhea uses to distinguish canon assertions from persona-authorized texture.",
   "freelance-firebrand": {
-    "version": "JAX-LEP2-3",
+    "version": "JAX-LEP2-4",
     "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
@@ -17,11 +17,11 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "anthropic/claude-sonnet-5.5"
+        "model": "x-ai/grok-4.3"
       },
       "report": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-4-maverick"
+        "model": "anthropic/claude-sonnet-5.5"
       },
       "write": {
         "provider": "openrouter",
@@ -68,7 +68,8 @@
       "maxToolCalls": 6
     },
     "seatFile": ".claude/agents/freelance-firebrand/SEAT.md",
-    "seatReasoning": "medium"
+    "seatReasoning": "medium",
+    "seatMemory": true
   },
   "carmen-delaine": {
     "version": "CARMEN-LEP2-4",

@@ -164,9 +164,9 @@ assert.throws(
 
 const liveContext = activateWakeContext(personaAssignment, personaAssignment.persona);
 assert.equal(liveContext.packetContract, 'v2');
-assert.equal(liveContext.wakePackage.version, 'JAX-LEP2-3');
+assert.equal(liveContext.wakePackage.version, 'JAX-LEP2-4');
 assert.equal(stageRoute('civic', personaAssignment.persona, 'angle').model,
-  'anthropic/claude-sonnet-5.5');   // pipeline.111 (builder 2026-11-24): the morning on the writer's model
+  'x-ai/grok-4.3');   // pipeline.111 (builder 2026-11-24): "grok 1 sonnet 2 and 3"
 assert.equal(stageRoute('civic', personaAssignment.persona, 'write').model,
   'anthropic/claude-sonnet-5.5');
 

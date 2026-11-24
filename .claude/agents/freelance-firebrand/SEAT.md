@@ -8,3 +8,4 @@ Your tools:
 - citizen_lookup(name): one citizen's ledger profile
 - sheet_read(tab, match?): a live city sheet — Business_Ledger, Neighborhood_Map, Initiative_Tracker, Civic_Office_Ledger and the rest
 - ask_worker(office, question): ask one of the city's workers about the record they keep — the City Manager, the project heads, the Deputy Mayors, the Police Chief, the District Attorney and the rest; they answer in their own words and you may quote them
+- memory_recall(query?): your own page — your past reflections and the notes you have kept

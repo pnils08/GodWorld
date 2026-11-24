@@ -35,7 +35,7 @@ assert.equal(niaWeekly.reviewProfile.canonPolicy, 'load-bearing');
 assert.ok(nia.reviewProfile.canonBlockers.some(b => /video game/.test(b)));
 
 const jax = packages['freelance-firebrand'];
-assert.equal(jax.version, 'JAX-LEP2-3');
+assert.equal(jax.version, 'JAX-LEP2-4');
 assert.equal(jax.seatFile, '.claude/agents/freelance-firebrand/SEAT.md');   // pipeline.111 (builder 2026-11-24)
 assert.equal(jax.reviewProfile.articleContract.opening, undefined);   // no scripted opening or closing (builder 2026-11-24)
 assert.equal(jax.reviewProfile.articleContract.closing, undefined);
@@ -44,8 +44,9 @@ assert.equal(jax.requiredDaily, true);
 assert.equal(jax.assignment.name, 'Jax Caldera');
 assert.equal(jax.assignment.popid, 'POP-00799');
 assert.equal(jax.packetContract, 'v2');
-assert.equal(packagesApi.routeFor(jax, 'angle').model, 'anthropic/claude-sonnet-5.5');
-assert.equal(packagesApi.routeFor(jax, 'report').model, 'meta-llama/llama-4-maverick');
+assert.equal(packagesApi.routeFor(jax, 'angle').model, 'x-ai/grok-4.3');   // builder 2026-11-24: "grok 1 sonnet 2 and 3"
+assert.equal(jax.seatMemory, true);   // his own page, recall only
+assert.equal(packagesApi.routeFor(jax, 'report').model, 'anthropic/claude-sonnet-5.5');
 assert.equal(packagesApi.routeFor(jax, 'write').model, 'anthropic/claude-sonnet-5.5');
 assert.equal(jax.reviewProfile.canonPolicy, 'load-bearing');
 assert.equal(jax.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
@@ -195,6 +196,7 @@ assert.equal(packagesApi.routeFor(packages['celeste-tran'], 'angle').model, 'x-a
 assert.throws(() => packagesApi.validatePackage('kai-marston', Object.assign({}, packages['kai-marston'], { seatEssence: true })), /seatEssence/);
 // pipeline.111 (builder 2026-11-24): thinking effort per seat — low/medium/high, only on a seat-file seat
 assert.throws(() => packagesApi.validatePackage('kai-marston', Object.assign({}, packages['kai-marston'], { seatReasoning: 'max' })), /seatReasoning/);
+assert.throws(() => packagesApi.validatePackage('noah-tan', Object.assign({}, packages['noah-tan'], { seatFile: undefined, seatMemory: true })), /seatMemory/);
 assert.throws(() => packagesApi.validatePackage('noah-tan', Object.assign({}, packages['noah-tan'], { seatFile: undefined, seatReasoning: 'medium' })), /seatReasoning/);
 // pipeline.111 — Sharon wakes on her seat file; a seat file outside an agent folder is refused
 assert.equal(packages['sharon-okafor'].seatFile, '.claude/agents/sharon-okafor/SEAT.md');
@@ -399,7 +401,7 @@ const gate = packagesApi.gateAssignments([
   { desk: 'culture', name: 'TEST-ONLY Unpackaged Reporter', persona: 'test-only' },
 ], packages);
 assert.equal(gate.eligible.length, 5);
-assert.equal(gate.eligible[0].wakePackage, 'JAX-LEP2-3');
+assert.equal(gate.eligible[0].wakePackage, 'JAX-LEP2-4');
 assert.equal(gate.eligible[1].wakePackage, 'CARMEN-LEP2-4');
 assert.equal(gate.eligible[2].wakePackage, 'PSLAYER-LEP2-1');
 assert.equal(gate.eligible[3].wakePackage, 'ANTHONY-LEP2-3');

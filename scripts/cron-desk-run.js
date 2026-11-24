@@ -1692,9 +1692,10 @@ async function seatMorningPlan(asker, ask, model, maxTokens, cycle) {
     : name === 'canon_search' ? W.toolSearchWorld({ query: input.query })
     : name === 'citizen_lookup' ? W.toolCitizenLookup(input)
     : name === 'sheet_read' ? W.toolSheetRead(input, { seat: true })   // Cultural_Ledger, as the seat writer reads it
+    : name === 'memory_recall' && ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.seatMemory === true ? W.toolMemoryRecall(asker.popid, input)
     : 'unknown tool ' + name;
   const r = await W.openRouterToolLoop({ model, system, user: ask + '\n\nReturn ONLY the JSON requested by packet.output.',
-    maxToolCalls: SEAT_MORNING_CALLS, maxTokens, timeoutMs: 180000, ...(seatReasoning() ? { body: { reasoning: { effort: seatReasoning() } } } : {}), toolset: W.OPENROUTER_TOOLS.concat([W.CANON_RECALL_TOOL, require('./workerAsk').askWorkerTool()]), exec, traceResults: true });
+    maxToolCalls: SEAT_MORNING_CALLS, maxTokens, timeoutMs: 180000, ...(seatReasoning() ? { body: { reasoning: { effort: seatReasoning() } } } : {}), toolset: W.OPENROUTER_TOOLS.concat([W.CANON_RECALL_TOOL, require('./workerAsk').askWorkerTool()], ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.seatMemory === true ? W.MEMORY_TOOLS.filter(t => t.function.name === 'memory_recall') : []), exec, traceResults: true });
   if (seatReasoning()) log('morning thinking ' + seatReasoning() + ': ' + (r.thinkingOut || 0) + ' reasoning tokens of ' + r.usageOut + ' out');
   log('morning tools: ' + r.trace.length + ' call(s)' + (r.trace.length ? ' — ' + r.trace.map(c => c.tool + '(' + JSON.stringify(c.input).slice(0, 60) + ')').join('; ') : ''));
   SEAT_MORNING_TRACE = r.trace.map(({ resultHead, ...rest }) => rest);
@@ -3301,7 +3302,8 @@ async function runWrite(assign) {
   // (own citizen page, cp-<popid>) joins the tool loop.
   if (PACKET_ACTIVE) writerArgs.push('--strict-source-hygiene', '--packet-only');
   if (SEAT_FILE) writerArgs.push('--seat-file', SEAT_FILE);
-  if (SEAT_FILE && seatReasoning()) writerArgs.push('--reasoning', seatReasoning());   // pipeline.111: the seat prompt
+  if (SEAT_FILE && seatReasoning()) writerArgs.push('--reasoning', seatReasoning());
+  if (SEAT_FILE && ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.seatMemory === true) writerArgs.push('--seat-memory');   // pipeline.111: the seat prompt
   if (SEAT_FILE && angle && Number(angle.workerAsksUsed) > 0) writerArgs.push('--asks-used', String(Number(angle.workerAsksUsed)));   // the ask cap is per wake
   if (SEAT_FILE && ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.seatEssence === false) writerArgs.push('--no-essence');   // Celeste (builder 2026-11-22: "archived only")
   // pipeline.76 — the package's own writer tools (its grant).

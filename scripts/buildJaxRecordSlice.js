@@ -7,18 +7,21 @@
  * The record, people first, nothing picked (builder 2026-11-24: "go, flip it"):
  *   citizens in their own words — each one's latest page from the last two Cycles (output/citizen_pages, the Voices roster)
  *   who holds what — every business whose ledger row names its key people (owner, founder, who runs it); every office
+ *   Elias Varek's Civis Systems Journal — the last two published entries, whole
  *   what the city's dashboard says — every Civis Systems reading this Cycle
  * The neighborhood numbers, city hall's decisions and the paper are a tool call away (sheet_read, canon_search).
  * Artifacts: output/slices/c{N}/freelance-firebrand.md · output/cron-compare/jax_record_slice_c{N}.json
  */
 'use strict';
+const fs = require('fs');
+const path = require('path');
 const K = require('./beatSliceKit');
 const C = require('./buildCivicDomainSlice');
 
 const SEAT = {
   slug: 'freelance-firebrand', name: 'Jax Caldera', popid: 'POP-00799', desk: 'civic',
   kind: 'beat-jax', domain: 'accountability', artifact: 'jax_record', builder: 'buildJaxRecordSlice.js',
-  version: 'JAX-RECORD-SLICE-2', nameRe: /jax\s*caldera/i,
+  version: 'JAX-RECORD-SLICE-3', nameRe: /jax\s*caldera/i,
   tabs: ['Business_Ledger', 'Civic_Office_Ledger', 'Story_Hook_Deck'],
   approach: '',
   roomIsYours: '',
@@ -54,6 +57,16 @@ function build(cycle, { root, beats, profiles }) {
   }
   for (const r of (beats.Civic_Office_Ledger || []).filter(r => String(r.Holder || '').trim())) {
     facts.push({ text: C.officeFact(r).replace(/ \[Civic_Office_Ledger\]$/, '') + (r.Faction ? ' — ' + String(r.Faction).trim() : ''), src: 'output/beats/Civic_Office_Ledger.jsonl ' + (r.OfficeId || '') + ' @C' + cycle });
+  }
+
+  // 2b. Elias Varek's Civis Systems Journal — the last two published entries, whole (builder 2026-11-24: "he should also
+  //     have access to elias journal"); his company's own account of the same readings.
+  const jdir = path.join(root, 'output', 'civis-journal');
+  for (const c of [cycle - 1, cycle]) {
+    let md = '';
+    try { md = fs.readFileSync(path.join(jdir, 'civis_journal_c' + c + '.md'), 'utf8'); } catch (_) { continue; }
+    const body = md.split(/\r?\n/).filter(l => l.trim() && !/^#/.test(l)).join(' ').replace(/\s+/g, ' ').trim();
+    if (body) facts.push({ text: 'Elias Varek, Civis Systems Journal, C' + c + ': ' + body, src: 'output/civis-journal/civis_journal_c' + c + '.md' });
   }
 
   // 3. What the city's dashboard says — every Civis Systems reading this Cycle, in its order.

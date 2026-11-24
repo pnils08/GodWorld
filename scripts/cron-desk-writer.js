@@ -254,6 +254,7 @@ const WRITER_TOOLS = Math.max(0, Math.min(8, parseInt(arg('--writer-tools', '0')
 // The desk cron passes --seat-file for a seat whose wake package names one (and the test shell's seat run).
 const SEAT_FILE_PATH = arg('--seat-file', null);
 const TEST_SEAT = !!SEAT_FILE_PATH;
+const SEAT_MEMORY = TEST_SEAT && process.argv.includes('--seat-memory');   // pipeline.111 (builder 2026-11-24): memory_recall, his own page
 const SEAT_REASONING = /^(low|medium|high)$/.test(arg('--reasoning', '')) ? arg('--reasoning', '') : null;   // pipeline.111: the package's seatReasoning
 const TEST_SEAT_BOOT = TEST_SEAT ? fs.readFileSync(SEAT_FILE_PATH, 'utf8').trim() : '';
 let SEAT_ASK = null;   // pipeline.111: ask_worker for a seat reporter (scripts/workerAsk.js), made at the compose
@@ -1573,11 +1574,12 @@ async function main() {
       maxToolCalls: PACKET_ONLY && !TOOLS_AB ? WRITER_TOOLS : 6,
       traceResults: TOOLS_AB || WRITER_TOOLS > 0,
       keepResults: WRITER_TOOLS > 0,
-      ...(WRITER_TOOLS ? { toolset: TEST_SEAT ? OPENROUTER_TOOLS.concat([CANON_RECALL_TOOL, require('./workerAsk').askWorkerTool()])
+      ...(WRITER_TOOLS ? { toolset: TEST_SEAT ? OPENROUTER_TOOLS.concat([CANON_RECALL_TOOL, require('./workerAsk').askWorkerTool()], SEAT_MEMORY ? MEMORY_TOOLS.filter(t => t.function.name === 'memory_recall') : [])
         : writerToolset(PERSONA, RECALL_ONLY, CANON_RECALL) } : {}),
       forceFirstTool: TOOLS_FORCED,
       cycle,
-      memCtx: BYLINE_POPID ? { popId: BYLINE_POPID, cycle }
+      memCtx: SEAT_MEMORY && PERSONA_POPID ? { popId: PERSONA_POPID, cycle, dryNote: true }   // recall only; no note is offered
+        : BYLINE_POPID ? { popId: BYLINE_POPID, cycle }
         : (abPop ? { popId: abPop, cycle, dryNote: true } : null) });
     usageIn += r.usageIn; usageOut += r.usageOut; turns = 1 + r.trace.length;
     if (SEAT_REASONING) console.error('[writer] thinking ' + SEAT_REASONING + ': ' + (r.thinkingOut || 0) + ' reasoning tokens of ' + r.usageOut + ' out');
@@ -1774,6 +1776,7 @@ if (require.main === module) {
 }
 
 module.exports = {
+  toolMemoryRecall, MEMORY_TOOLS,   // pipeline.111: a seat's own memory (seatMemory)
   toolDossierRead, // pipeline.76
   toolSheetRead,
   toolCanonRecall,

@@ -212,6 +212,13 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD stage 78 — arrests read right; incidents follow residents (2026-11-24, engine-sheet, engine.365)
+
+- **What:** four files at `a2ae12cc4` on stage 77 — `phase03-population/updateCrimeMetrics.js` (a hood's incidents: the level term after the weather steps and the noise × residents / the city's mean hood; per-event additions whole; throws on a hood with no residents), `phase04-events/careJusticeService.js` (arrests = whole part of (charges − OARI diverted) × clearance + carry; charges must be whole; the engine.364 F3 carry type check), `phase09-digest/finalizeCycleState.js` + `phase01-config/loadPreviousEvening.js` (`PREV_ARREST_CARRY_JSON`). Builder 2026-11-23/24: "1 - yes 2 - yes … 3 - yes diverted", "from charges before clearance", "go".
+- **Proof:** crimeCarryForward 60/60 (13a–e), careJusticeService 29/29, census 102, court revenue 105, judicial 157, hood identity 38. agy SHIP-WITH-FIXES folded (`output/antigravity/2026-11-24-review-engine365.md`). **Bench SANDBOX 1004** (`output/engine-sheet/2026-11-24-e365/`): `bench.log` on `87d311ba8` and `bench2.log` on the final tree — C118 PASS (143 incidents, 29 arrests), C119 PASS (134, 31, fire 1's carry read); every hood's census arrests = floor((charges − diverted) × clearance + carry); census complete; final sync from live.
+- **Stage 78 (2026-11-24 ~02:25 CST):** live pulled = stage 77 (`e364-prod.sha256`); four files changed; built tree = the benched tree (`e365.sha256`); manifest `output/engine-sheet/2026-11-24-e365/e365-prod.sha256`; pull-back byte-identical; version cut **@213**. **Smoke:** C118 Sun 2026-11-29 — the `crimeMetrics incidents by residents` log line; small hoods' incidents near 1–4; city near 133; arrests by the formula; a `PREV_ARREST_CARRY_JSON` ring row; census complete. C119: the carry read.
+- **Back out:** the four files from `219c118e7` (= `e364-prod.sha256`) + version cut.
+
 ### PROD stage 77 — the hospital record reads right (2026-11-24, engine-sheet, engine.364)
 
 - **What:** four files at `219c118e7` on stage 76 — `phase04-events/careJusticeService.js` (a hood's hospital admissions = whole part of sick × careJusticeAdmitPerSick + its carried remainder; nothing carried starts at 0.5 = the old rounding), `phase09-digest/finalizeCycleState.js` + `phase01-config/loadPreviousEvening.js` (the remainder rides carry-forward key `PREV_HOSP_ADMIT_CARRY_JSON`), `phase10-persistence/buildCyclePacket.js` (a closed stay's StatusNow is `discharged` / `deceased`, discharge and ghost-release). Builder: "the carried fraction seems to be more in line with the sim". Node readers (hospital worker, Saturday run, Lives slice, health slice) ship with the repo, not this push.

@@ -79,11 +79,11 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | engine.360 | Owner pay share on World_Config: LIVE stage 75 @210. Read C118 Sun 2026-11-29: ownerDrawShare 0.5 seeded, owner pay unchanged | live-observing | engine-sheet | `output/production_log_run_cycle_c117_gaps.md` G-EC49 |
 | engine.361 | Life-log rows complete: LIVE stage 76 @211, benched. Read C118 Sun 2026-11-29: no bare stamp, no blank Name / hood on the log | live-observing | engine-sheet | `output/production_log_run_cycle_c117_gaps.md` G-EC52 |
 | engine.364 | Hospital record reads right (builder 11-23): LIVE stage 77 @212, benched. Read C118 Sun 2026-11-29: carry starts at rounding, stamp | live-observing | engine-sheet | [[../plans/2026-11-23-hospital-record-reads-right]] |
+| engine.365 | Arrests read right (builder 11-23/24): LIVE stage 78 @213, benched. Read C118 Sun 2026-11-29: incidents by residents, arrests, carry | live-observing | engine-sheet | [[../plans/2026-11-24-arrests-read-right]] |
 ## 3. Now — being worked, one per terminal (in-progress)
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| engine.365 | Arrests read right (builder 11-23): arrest carry, crimes scale by residents (small-hood high-rate mechanism), diverted off arrests. Next: plan | in-progress | engine-sheet | [[../plans/2026-11-24-arrests-read-right]] |
 | pipeline.100 | Mags memory one home (builder 11-03): her page, not the old `mags` store; every Mags seat loads her persona as the CLI did. Task 1 started 11-08 | in-progress | engine-sheet | [[../plans/2026-11-03-mags-memory-one-home]] |
 | engine.346 | Feed word `off-season` (builder 11-15): live @182; benched 11-16 inside stage 49 (C117/C118 PASS). Owed: the sheet dropdown (his menu run) | in-progress | research-build | [[../plans/2026-11-05-sports-feed-triggers]] §Changelog |
 | pipeline.110 | Role citizens wake as themselves (builder 11-10). 14 of 14 workers lean and live; next: media (reporter template); council on hold | in-progress | engine-sheet | [[../plans/2026-11-10-role-citizens-wake-as-themselves]] |

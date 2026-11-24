@@ -1,4 +1,4 @@
-◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ suppress logs { quiet: true }
+◇ injected env (33) from ../.config/godworld/.env // tip: ◈ encrypted .env [www.dotenvx.com]
 {
  "cycle": 119,
  "mode": "ring",

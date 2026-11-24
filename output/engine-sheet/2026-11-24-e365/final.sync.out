@@ -1,4 +1,4 @@
-◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ suppress logs { quiet: true }
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
 source (LIVE): Simulation_Narrative — 89 tabs
 dest (BENCH):  Sandox_104_c109-live_Simulation_Narrative — 90 tabs
 tabs to sync: 89 | missing on bench (will create): 0

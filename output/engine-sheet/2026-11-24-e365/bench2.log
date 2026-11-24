@@ -1,0 +1,96 @@
+AIM = BENCH (script read the bench marker)
+== push code a2ae12cc4
+bench pull-back byte-identical to e365.sha256
+== sync from live
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+{"fireGuardMinutes":"0","cycleCountFormatted":"117","cycleCountIsNumber":true}
+clearfire 119: {"ok":true,"cleared":{"cycle":119,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+appended 5 to Edition_Coverage_Ratings; marked rows on the tab now 5
+appended 28 to Citizen_Media_Usage; marked rows on the tab now 28
+appended 2 to Oakland_Sports_Feed; marked rows on the tab now 2
+bench cycleCount 117
+clearfire 118: {"ok":false,"error":"no readable fire record to clear"}
+fire C118 rc=0 "verdict": "PASS" "wallS": 175
+{
+ "cycle": 118,
+ "mode": "start",
+ "cityIncidents": 143,
+ "cityArrests": 29,
+ "oariHoods": [
+  "West Oakland",
+  "Fruitvale",
+  "East Oakland"
+ ],
+ "byRate": [
+  "KONO 549 4 7.29 0 1",
+  "Uptown 639 4 6.26 0 1",
+  "Jack London 2611 10 3.83 0 2",
+  "Baylight District 524 2 3.82 0 0",
+  "Ivy Hill 2122 8 3.77 0 2",
+  "Adams Point 2433 9 3.70 0 2",
+  "Temescal 2774 10 3.60 0 2",
+  "San Antonio 2250 8 3.56 0 2",
+  "Grand Lake 2359 8 3.39 0 2",
+  "West Oakland 2386 8 3.35 1 2",
+  "Lake Merritt 614 2 3.26 0 0",
+  "Downtown 2809 9 3.20 0 2",
+  "Dimond 2195 7 3.19 0 1",
+  "Rockridge 2221 7 3.15 0 2",
+  "Laurel 2235 7 3.13 0 1",
+  "East Oakland 2392 7 2.93 1 1",
+  "Brooklyn 2168 6 2.77 0 1",
+  "Chinatown 2226 6 2.70 0 1",
+  "Eastlake 2288 6 2.62 0 1",
+  "Fruitvale 2363 6 2.54 1 1",
+  "Glenview 2231 5 2.24 0 1",
+  "Piedmont Ave 2237 4 1.79 0 1"
+ ],
+ "problems": [],
+ "verdict": "PASS"
+}
+read 1 exit 0
+-- pause 70 s (read quota)
+bench cycleCount 118
+clearfire 119: {"ok":false,"error":"the record is for Cycle 118; send cycle=118 to clear it"}
+fire C119 rc=0 "verdict": "PASS" "wallS": 215
+{
+ "cycle": 119,
+ "mode": "ring",
+ "cityIncidents": 134,
+ "cityArrests": 31,
+ "oariHoods": [
+  "West Oakland",
+  "Fruitvale",
+  "East Oakland"
+ ],
+ "byRate": [
+  "Uptown 640 3 4.69 0 0",
+  "Baylight District 527 2 3.80 0 1",
+  "East Oakland 2400 9 3.75 1 2",
+  "Adams Point 2441 9 3.69 0 2",
+  "KONO 552 2 3.62 0 0",
+  "Temescal 2782 10 3.59 0 2",
+  "Jack London 2621 9 3.43 0 2",
+  "West Oakland 2394 8 3.34 1 2",
+  "Lake Merritt 616 2 3.25 0 1",
+  "Glenview 2239 7 3.13 0 2",
+  "Laurel 2242 7 3.12 0 2",
+  "San Antonio 2258 7 3.10 0 1",
+  "Downtown 2809 8 2.85 0 2",
+  "Ivy Hill 2129 6 2.82 0 1",
+  "Brooklyn 2176 6 2.76 0 2",
+  "Dimond 2203 6 2.72 0 2",
+  "Chinatown 2228 6 2.69 0 2",
+  "Fruitvale 2370 6 2.53 1 1",
+  "Grand Lake 2367 6 2.53 0 1",
+  "Rockridge 2229 5 2.24 0 1",
+  "Piedmont Ave 2262 5 2.21 0 1",
+  "Eastlake 2296 5 2.18 0 1"
+ ],
+ "problems": [],
+ "verdict": "PASS"
+}
+read 2 exit 0
+== final sync from live
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.

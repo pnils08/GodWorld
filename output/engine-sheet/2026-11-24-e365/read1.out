@@ -1,4 +1,4 @@
-◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ enable debugging { debug: true }
 {
  "cycle": 118,
  "mode": "start",

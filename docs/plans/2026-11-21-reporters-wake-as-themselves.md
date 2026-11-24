@@ -58,7 +58,7 @@ On Sharon (2026-11-21): bio — "i like them both and love \"visits places she w
 5. Test day on the newest cycle with `scripts/testReporterDay.sh` under the no-write guard (spend unlock from the builder); restore the slice cache files after; copy the piece to `output/research-build/2026-11-21-p111/`. Check invented ages/tenures and engine-stamp leaks.
 6. Commit path-specifically (shared files may carry engine-sheet hunks); plan task row + changelog; ROLLOUT row <=160 chars.
 
-Done: Sharon, Maria, Kai, Mason, Celeste, Jordan, Graye, Noah, Trevor, Lila, Rachel, Angela, Carmen, Luis, Farrah (new seat), Jax. Next: the builder names it. Not yet: the sports seats, Marbury, Jax, Nia, Tamsin, Ines.
+Done: Sharon, Maria, Kai, Mason, Celeste, Jordan, Graye, Noah, Trevor, Lila, Rachel, Angela, Carmen, Luis, Farrah (new seat), Jax, Tamsin, Ines, Nia. Next: a civic data worker for Carmen, then a sports roster worker, then the sports seats (builder 2026-11-24: sports last). Not yet: the sports seats, Marbury, Jax, Nia, Tamsin, Ines.
 
 ## Tasks
 
@@ -87,6 +87,7 @@ Done: Sharon, Maria, Kai, Mason, Celeste, Jordan, Graye, Noah, Trevor, Lila, Rac
 | 21 | Farrah Del Rio: new opinion seat (Thursdays), the week's record (buildOpinionSlice), Sonnet thinking medium | rb | live; first wake Thu 11-26 |
 | 22 | Interviews: the citizen gets their own life and the reporter's own question, never the plan (ownLifeInterviewPacket, all seat-file seats) | rb | live; read every seat's next quotes |
 | 23 | Jax Caldera: seat file, people-first record + Varek's journal (buildJaxRecordSlice), sheet bio trimmed, Grok plans / Sonnet interviews and writes, memory_recall | rb | live Wed 11-26; watch a couple of weeks (builder) |
+| 24 | Tamsin, Ines, Nia (daily + weekly): seat files, coaching off; Nia's seat carries what the show is and how the board ranks | rb | live; Tamsin and Nia untested (see changelog) — read their next pieces |
 
 ## Acceptance
 
@@ -123,6 +124,7 @@ Done: Sharon, Maria, Kai, Mason, Celeste, Jordan, Graye, Noah, Trevor, Lila, Rac
 
 ## Changelog
 
+- 2026-11-24 (research-build) — Tamsin, Ines, Nia live on seat files. Landmine: building Tamsin's record (buildLivesSlice, even a read with node -e) marks the day's batch covered in output/cron-compare/lives_covered.json — a session read at 02:41 marked 10 of Tue 11-24's people; the 10 marks were removed before her 06:15 wake (backup in the session scratchpad). Never build her record by hand. Builder order next: a data worker for Carmen, a sports roster worker, then sports.
 - 2026-11-24 (research-build) — Jax: Grok morning, Sonnet interviews and write, thinking medium, his own memory (recall), Varek's journal on his record. Builder: watch him a couple of weeks as he builds on it.
 - 2026-11-24 (research-build) — Builder rulings: job lines are fine, telling them what to say is puppeting ("telling a cop to arrest people isnt puppeting … telling that cop to talk with an accent is puppeting"); bios, tone lines and voice Essence stay ("it gives them a sense of themselves"); a CitizenBio says who they are, never age or home (the row carries those, live). The story, not the data: "I dont want 22 media crons citing data from the sheets to me … whats the story" — records lead with people and power; interviews return the citizen's own view.
 - 2026-11-24 (research-build) — Interviews fixed for every seat-file seat (the reporter's plan and others' record lines no longer reach the citizen; officials get the reporter's own question). Jax live on a people-first record.

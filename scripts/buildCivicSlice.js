@@ -100,5 +100,5 @@ function build(cycle, { root, beats, profiles }) {
 const sitsOutWhenEmpty = true;
 const W = K.wire(SEAT);
 if (require.main === module) W.main();
-module.exports = { SEAT, sitsOutWhenEmpty, loadSlice: W.load, buildCivicSlice: W.build, writeCivicSlice: W.write, loadCivicSlice: W.load,
+module.exports = { SEAT, sitsOutWhenEmpty, cycleStatements, loadSlice: W.load, buildCivicSlice: W.build, writeCivicSlice: W.write, loadCivicSlice: W.load,
   isCivicSeat: W.isSeat, assignmentFromSlice: W.assignmentFromSlice, enrichAssignment: W.enrichAssignment, slicePaths: W.paths };

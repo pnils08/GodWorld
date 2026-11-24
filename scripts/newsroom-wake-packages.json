@@ -124,7 +124,7 @@
     "seatReasoning": "medium"
   },
   "luis-navarro": {
-    "version": "LUIS-LEP2-2",
+    "version": "LUIS-LEP2-3",
     "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
@@ -140,7 +140,7 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-v4-flash-0731"
+        "model": "anthropic/claude-sonnet-5.5"
       },
       "report": {
         "provider": "openrouter",
@@ -152,38 +152,28 @@
       }
     },
     "reviewProfile": {
-      "id": "luis-investigation-record-v1",
+      "id": "luis-investigations-v2",
       "canonPolicy": "load-bearing",
-      "purpose": "Separate what the Packet establishes from what remains open, pursue the accountable record fairly, and make a documented contradiction or documented silence visible without inventing either.",
+      "purpose": "Investigate whether Oakland's government does what it says, from the record (builder 2026-11-24). The check is facts: locations, citizens, data points.",
       "articleContract": {
-        "voice": "evidence-first; concise records brief without reporting events, full investigation only with a Packet-backed reporting trail",
-        "targetWords": "180-280 without reporting events; 450-750 with Packet-backed reporting events",
-        "opening": "the strongest Packet-backed fact followed by the unresolved question",
-        "closing": "the next record or answer still needed; name a responsible office only when supplied"
+        "renderMode": "SOURCE_BRIEF",
+        "targetWords": "evidence-bounded"
       },
       "authorizedTexture": [
-        "the reporter's own act of reading, comparing, requesting, or following a record only when that act is supplied by the Packet",
-        "a concise known-versus-unknown structure over Packet-backed facts and declared missing fields",
-        "fair pressure framed as a question, interpretation, or explicit request for a record",
-        "short transitions between supplied facts that add no event, response, duration, source, or accusation"
+        "the records request, the day count and the unanswered call, as an investigator keeps them"
       ],
-      "textureConditions": [
-        "every named person, office, institution, Project, Initiative, business, organization, quote, response, request, and document must come from the Packet",
-        "a silence clock requires a Packet-backed request or response event and a supplied duration or Cycle span; otherwise its state is unestablished",
-        "decline-to-comment, no-response, refusal, contradiction, and responsible-office claims must each have a supplied source",
-        "an open question must remain a question and must not imply criminality, misconduct, duty, motive, or official knowledge absent from the Packet"
-      ],
+      "textureConditions": [],
       "canonBlockers": [
-        "an invented records request, interview attempt, response, refusal, decline-to-comment, document, source, or silence duration",
-        "an unsupported contradiction, official duty, responsible office, act, inaction, promise, decision, motive, accusation, or finding",
-        "a named person, office, institution, Project, Initiative, business, or organization not found in the supplied record",
-        "a number, date, duration, budget, metric, count, vote, or timeline that contradicts or lacks the supplied record",
-        "Jax-style theatrical heat that turns an unestablished lead into a settled factual claim"
+        "an invented or altered location: office, initiative, district or neighborhood",
+        "an invented or altered citizen (name, office, faction, vote, relationship), or words an official did not say — including an invented response or silence",
+        "an invented or altered data point: a due cycle, day count, vote, budget, amount, date or engine record"
       ]
     },
     "writerTools": {
       "maxToolCalls": 6
-    }
+    },
+    "seatFile": ".claude/agents/luis-navarro/SEAT.md",
+    "seatReasoning": "medium"
   },
   "trevor-shimizu": {
     "version": "TREVOR-LEP2-3",

@@ -69,6 +69,7 @@ const BEAT_BUILDERS = {
   'mason-ortega': 'buildFoodSlice',   // pipeline.111 (builder 2026-11-22): his own record, off the business desk's food variant
   'business-desk': 'buildEconomySlice',   // pipeline.111 (builder 2026-11-22): Jordan's own economy record
   'carmen-delaine': 'buildCivicSlice',   // pipeline.111 (builder 2026-11-23): her own civic record, off the civic-domain pick
+  'luis-navarro': 'buildInvestigationsSlice',   // pipeline.111 (builder 2026-11-24): his own record, off the anomaly pick
   'sharon-okafor': 'buildLifestyleSlice',
   'maria-keen': 'buildNeighborhoodSlice',
   'selena-grant': 'buildOaksBeatSlice',
@@ -78,10 +79,11 @@ const BEAT_BUILDERS = {
   'tamsin-pruitt': 'buildLivesSlice',   // pipeline.73 Lives — daily, Mon–Fri grid
   'ines-sorensen': 'buildVoicesSlice'   // pipeline.73 Voices — Wed–Fri grid + own Sat/Sun crons
 };
-const BEAT_NAME_RE = /carmen\s*delaine|elliot\s*marbury|trevor\s*shimizu|lila\s*mezran|angela\s*reyes|noah\s*tan|elliot\s*graye|rachel\s*torres|kai\s*marston|sharon\s*okafor|maria\s*keen|selena\s*grant|talia\s*finch|celeste\s*tran|tamsin\s*pruitt|ines\s*sorensen/i;
+const BEAT_NAME_RE = /carmen\s*delaine|luis\s*navarro|elliot\s*marbury|trevor\s*shimizu|lila\s*mezran|angela\s*reyes|noah\s*tan|elliot\s*graye|rachel\s*torres|kai\s*marston|sharon\s*okafor|maria\s*keen|selena\s*grant|talia\s*finch|celeste\s*tran|tamsin\s*pruitt|ines\s*sorensen/i;
 function beatSlugForName(name) {
   const n = String(name || '');
   if (/carmen\s*delaine/i.test(n)) return 'carmen-delaine';
+  if (/luis\s*navarro/i.test(n)) return 'luis-navarro';
   if (/elliot\s*marbury/i.test(n)) return 'elliot-marbury';
   if (/trevor\s*shimizu/i.test(n)) return 'trevor-shimizu';
   if (/lila\s*mezran/i.test(n)) return 'lila-mezran';
@@ -974,7 +976,9 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
     }
     // pipeline.52 Task 6: selected packet from the shared civic substrate — Carmen and Luis
     // (the tab-backed seats moved to their own beat slices, pipeline.68 Task 4).
-    if (/luis\s*navarro/i.test(persona.name || '')) {   // pipeline.111: Carmen reads her own record (buildCivicSlice)
+    // pipeline.111: Carmen (buildCivicSlice) and Luis (buildInvestigationsSlice) read their own records; a civic seat
+    // back off BEAT_BUILDERS falls through to the shared packet here.
+    if (/carmen\s*delaine|luis\s*navarro/i.test(persona.name || '') && !BEAT_BUILDERS[beatSlugForName(persona.name)]) {
       try {
         const {
           CIVIC_SEATS,

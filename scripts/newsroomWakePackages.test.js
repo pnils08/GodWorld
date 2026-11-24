@@ -79,20 +79,22 @@ assert.equal(carmen.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
 assert.deepStrictEqual(carmen.reviewProfile.textureConditions, []);
 
 const luis = packages['luis-navarro'];
-assert.equal(luis.version, 'LUIS-LEP2-2');
+assert.equal(luis.version, 'LUIS-LEP2-3');
+assert.equal(luis.seatFile, '.claude/agents/luis-navarro/SEAT.md');   // pipeline.111 (builder 2026-11-24)
+assert.equal(luis.seatReasoning, 'medium');
 assert.equal(luis.requiredDaily, true);
 assert.equal(luis.assignment.desk, 'civic');
 assert.equal(luis.assignment.name, 'Luis Navarro');
 assert.equal(luis.assignment.popid, 'POP-00636');
 assert.equal(luis.assignment.beatDomain, 'CIVIC');
 assert.equal(luis.packetContract, 'v2');
-assert.equal(packagesApi.routeFor(luis, 'angle').model, 'deepseek/deepseek-v4-flash-0731');
+assert.equal(packagesApi.routeFor(luis, 'angle').model, 'anthropic/claude-sonnet-5.5');
 assert.equal(packagesApi.routeFor(luis, 'report').model, 'deepseek/deepseek-v4-flash-0731');
 assert.equal(packagesApi.routeFor(luis, 'write').model, 'anthropic/claude-sonnet-5.5');
 assert.equal(luis.reviewProfile.canonPolicy, 'load-bearing');
-assert.ok(luis.reviewProfile.articleContract.targetWords.includes('180-280'));
-assert.ok(luis.reviewProfile.textureConditions.some(v => v.includes('silence clock')));
-assert.ok(luis.reviewProfile.canonBlockers.some(v => v.includes('records request')));
+assert.equal(luis.reviewProfile.articleContract.targetWords, 'evidence-bounded');
+assert.deepStrictEqual(luis.reviewProfile.textureConditions, []);
+assert.ok(luis.reviewProfile.canonBlockers.some(v => v.includes('invented response or silence')));
 
 const trevor = packages['trevor-shimizu'];
 assert.equal(trevor.version, 'TREVOR-LEP2-3');
@@ -180,6 +182,9 @@ assert.equal(packages['celeste-tran'].seatEssence, undefined);
 assert.equal(packages['celeste-tran'].seatFile, '.claude/agents/celeste-tran/SEAT.md');
 assert.equal(packagesApi.routeFor(packages['celeste-tran'], 'angle').model, 'x-ai/grok-4.3');
 assert.throws(() => packagesApi.validatePackage('kai-marston', Object.assign({}, packages['kai-marston'], { seatEssence: true })), /seatEssence/);
+// pipeline.111 (builder 2026-11-24): thinking effort per seat — low/medium/high, only on a seat-file seat
+assert.throws(() => packagesApi.validatePackage('kai-marston', Object.assign({}, packages['kai-marston'], { seatReasoning: 'max' })), /seatReasoning/);
+assert.throws(() => packagesApi.validatePackage('noah-tan', Object.assign({}, packages['noah-tan'], { seatFile: undefined, seatReasoning: 'medium' })), /seatReasoning/);
 // pipeline.111 — Sharon wakes on her seat file; a seat file outside an agent folder is refused
 assert.equal(packages['sharon-okafor'].seatFile, '.claude/agents/sharon-okafor/SEAT.md');
 assert.throws(() => packagesApi.validatePackage('sharon-okafor', Object.assign({}, packages['sharon-okafor'], { seatFile: 'docs/x.md' })), /seatFile/);

@@ -1,0 +1,18 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ enable debugging { debug: true }
+{
+ "cycle": 118,
+ "mode": "start",
+ "rate": 0.02,
+ "censusRows": 216,
+ "cityAdmits": 34,
+ "cityExpected": 34.04,
+ "small": [
+  "Lake Merritt {\"sick\":16,\"carryIn\":0.5,\"admits\":0,\"carryOut\":0.82}",
+  "Uptown {\"sick\":20,\"carryIn\":0.5,\"admits\":0,\"carryOut\":0.9}",
+  "KONO {\"sick\":16,\"carryIn\":0.5,\"admits\":0,\"carryOut\":0.82}",
+  "Baylight District {\"sick\":13,\"carryIn\":0.5,\"admits\":0,\"carryOut\":0.76}"
+ ],
+ "closedThisCycle": [],
+ "problems": [],
+ "verdict": "PASS"
+}

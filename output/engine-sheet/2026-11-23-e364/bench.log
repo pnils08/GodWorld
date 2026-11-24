@@ -1,0 +1,54 @@
+AIM = BENCH (script read the bench marker)
+== push code 219c118e7
+bench pull-back byte-identical to e364.sha256
+== sync from live
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+{"fireGuardMinutes":"0","cycleCountFormatted":"117","cycleCountIsNumber":true}
+clearfire 118: {"ok":true,"cleared":{"cycle":118,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+appended 5 to Edition_Coverage_Ratings; marked rows on the tab now 5
+appended 28 to Citizen_Media_Usage; marked rows on the tab now 28
+appended 2 to Oakland_Sports_Feed; marked rows on the tab now 2
+bench cycleCount 117
+fire C118 rc=0 "verdict": "PASS" "wallS": 156
+{
+ "cycle": 118,
+ "mode": "start",
+ "rate": 0.02,
+ "censusRows": 216,
+ "cityAdmits": 34,
+ "cityExpected": 34.04,
+ "small": [
+  "Lake Merritt {\"sick\":16,\"carryIn\":0.5,\"admits\":0,\"carryOut\":0.82}",
+  "Uptown {\"sick\":20,\"carryIn\":0.5,\"admits\":0,\"carryOut\":0.9}",
+  "KONO {\"sick\":16,\"carryIn\":0.5,\"admits\":0,\"carryOut\":0.82}",
+  "Baylight District {\"sick\":13,\"carryIn\":0.5,\"admits\":0,\"carryOut\":0.76}"
+ ],
+ "closedThisCycle": [],
+ "problems": [],
+ "verdict": "PASS"
+}
+read 1 exit 0
+-- pause 70 s (read quota)
+bench cycleCount 118
+fire C119 rc=0 "verdict": "PASS" "wallS": 208
+{
+ "cycle": 119,
+ "mode": "ring",
+ "rate": 0.02,
+ "censusRows": 216,
+ "cityAdmits": 35,
+ "cityExpected": 33.58,
+ "small": [
+  "Lake Merritt {\"sick\":16,\"carryIn\":0.82,\"admits\":1,\"carryOut\":0.14}",
+  "Uptown {\"sick\":20,\"carryIn\":0.9,\"admits\":1,\"carryOut\":0.3}",
+  "KONO {\"sick\":15,\"carryIn\":0.82,\"admits\":1,\"carryOut\":0.12}",
+  "Baylight District {\"sick\":12,\"carryIn\":0.76,\"admits\":1,\"carryOut\":0}"
+ ],
+ "closedThisCycle": [],
+ "problems": [],
+ "verdict": "PASS"
+}
+read 2 exit 0
+== final sync from live
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.

@@ -1,0 +1,20 @@
+AIM = BENCH (script read the bench marker)
+== sync from live
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+{"fireGuardMinutes":"0","cycleCountFormatted":"117","cycleCountIsNumber":true}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+appended 5 to Edition_Coverage_Ratings; marked rows on the tab now 5
+appended 28 to Citizen_Media_Usage; marked rows on the tab now 28
+appended 2 to Oakland_Sports_Feed; marked rows on the tab now 2
+planted POP-00029
+bench cycleCount 117
+clearfire 118: {"ok":false,"error":"no readable fire record to clear"}
+fire C118 rc=0 "verdict": "PASS" "wallS": 166
+ "cityAdmits": 34,
+ "problems": [],
+ "verdict": "PASS"
+census read exit 0
+{"pop":"POP-00029","row":{"StatusNow":"discharged","DischargeCycle":"118","Outcome":"recovered-reconciled","CyclesInCare":"1"},"verdict":"PASS"}
+stamp read exit 0
+== final sync from live
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.

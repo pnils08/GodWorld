@@ -1,7 +1,7 @@
 ---
 title: Hospital Record Reads Right Plan
 created: 2026-11-23
-updated: 2026-11-23
+updated: 2026-11-24
 type: plan
 tags: [engine, health, media, active]
 sources:
@@ -39,13 +39,13 @@ Earlier the same day, on pipeline.111: "only tracked citizens show up in beds an
 
 | # | Task | Owner | Status |
 |---|------|-------|--------|
-| 1 | Carried fraction: per hood, `expected = sick × careJusticeAdmitPerSick + carry`, admissions = whole part, the remainder carries to the next Cycle. Carry on its own carry-forward key `PREV_HOSP_ADMIT_CARRY_JSON` (the engine.249 pattern: compact in `finalizeCycleState.js`, seed in `loadPreviousEvening.js`, read in `careJusticeService.js`). A hood with no carried value starts at 0.5, which reproduces `Math.round` exactly on its first Cycle. The ambulance named-call count reads the same number | es | built (this commit) |
-| 2 | A finished stay reads finished: the discharge and the ghost-release write StatusNow `discharged` (or `deceased`), not the citizen's life status. `buildCyclePacket.js` `persistHospitalLedger_` | es | built (this commit) |
+| 1 | Carried fraction: per hood, `expected = sick × careJusticeAdmitPerSick + carry`, admissions = whole part, the remainder carries to the next Cycle. Carry on its own carry-forward key `PREV_HOSP_ADMIT_CARRY_JSON` (the engine.249 pattern: compact in `finalizeCycleState.js`, seed in `loadPreviousEvening.js`, read in `careJusticeService.js`). A hood with no carried value starts at 0.5, which reproduces `Math.round` exactly on its first Cycle. The ambulance named-call count reads the same number | es | done |
+| 2 | A finished stay reads finished: the discharge and the ghost-release write StatusNow `discharged` (or `deceased`), not the citizen's life status. `buildCyclePacket.js` `persistHospitalLedger_` | es | done |
 | 3 | The three closed rows already reading `active` (C107, C109, C111): left as they are unless the builder rules an engine repair pass (closed row, StatusNow not `discharged`/`deceased` → stamped from its own Outcome). Rule 4: no hand edit | builder | waiting on his word |
-| 4 | Readers count a stay open only with no DischargeCycle: `cron-work-wake.js` hospital-admissions fallback; `cron-saturday-run.js` open test; `buildLivesSlice.js` open stays; `buildHealthSlice.js` carries only stays still in care (builder 2026-11-23: "once they are out of care they should come off the beat") | es | built (this commit) |
-| 5 | Truth docs in the same commit: SHEETS_MANIFEST (Carry_Forward_Store key list, Hospital_Ledger StatusNow on close), ENGINE_MAP rows 1-PrevCycleState / 9/10-CycleState, STUB_MAP regenerated | es | built (this commit) |
-| 6 | Bench: two fires from a live sync (needs the builder's test unlock). Read off the census rows and the log | es | not started |
-| 7 | PROD push; smoke at C118 Sun 2026-11-29 | es | not started |
+| 4 | Readers count a stay open only with no DischargeCycle: `cron-work-wake.js` hospital-admissions fallback; `cron-saturday-run.js` open test; `buildLivesSlice.js` open stays; `buildHealthSlice.js` carries only stays still in care (builder 2026-11-23: "once they are out of care they should come off the beat") | es | done |
+| 5 | Truth docs in the same commit: SHEETS_MANIFEST (Carry_Forward_Store key list, Hospital_Ledger StatusNow on close), ENGINE_MAP rows 1-PrevCycleState / 9/10-CycleState, STUB_MAP regenerated | es | done |
+| 6 | Bench: two fires from a live sync (needs the builder's test unlock). Read off the census rows and the log | es | done — bench.log C118/C119 PASS, bench3.log stamp PASS |
+| 7 | PROD push; smoke at C118 Sun 2026-11-29 | es | LIVE stage 77 @212; smoke C118 |
 
 ## Acceptance
 
@@ -85,3 +85,4 @@ Earlier the same day, on pipeline.111: "only tracked citizens show up in beds an
 - 2026-11-23 (engine-sheet) — Plan written on the builder's go; carried fraction chosen by him over the dice.
 - 2026-11-23 (engine-sheet) — Tasks 1, 2, 4, 5 built. Nine-week dry run on C117 sick counts: week 1 equals rounding hood for hood (city 34); small hoods admit 1 about one week in three; city 32–37 around 34.3. Bench waits on the test unlock.
 - 2026-11-23 (engine-sheet) — Builder: out of care comes off the beat (health slice carries open stays only; C117 renders none of the three); arrests next. Tests around the change pass after the unlock.
+- 2026-11-24 (engine-sheet) — Bench three fires PASS (rounding start, carry admits the four small hoods, ghost-release stamps discharged); LIVE stage 77 @212. agy adversarial review sent (`docs/for-claude-review/2026-11-24-es-brief-agy-engine364.md`).

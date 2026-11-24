@@ -1,0 +1,30 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ◈ secrets for agents [www.dotenvx.com]
+{
+ "label": "e364-f2",
+ "expect": 118,
+ "at": "2026-11-24T06:09:27.035Z",
+ "pre": {
+  "bench": 118,
+  "live": 117,
+  "ee": 10,
+  "rileyLast": 118,
+  "checkpoint": null
+ },
+ "wallS": 208,
+ "http": 200,
+ "resp": {
+  "ok": true,
+  "state": "done",
+  "ranMs": 202742,
+  "persistErrors": []
+ },
+ "post": {
+  "bench": 119,
+  "live": 117,
+  "ee": 10,
+  "rileyLast": 119,
+  "checkpoint": null
+ },
+ "newEE": [],
+ "verdict": "PASS"
+}

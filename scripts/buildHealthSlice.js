@@ -99,21 +99,21 @@ function build(cycle, { root, beats, profiles }) {
   }];
   const ok = r => r.POPID && r.Name; // a manager in the hospital is the health headline (pipeline.73 (builder 2026-10-13): "Citizens are citizens" — an athlete on the record is on every beat; sports keeps the availability/team-effect angle.)
   const people = [];
-  for (const r of (beats.Hospital_Ledger || []).filter(ok)) {
+  // engine.364 (builder 2026-11-23): "once they are out of care they should come off the beat" — only a stay
+  // still open at this Cycle rides (no DischargeCycle, or one past it). C117: three stays closed C107–C111
+  // rode every week as the beat's only named patients.
+  const stayOpen = r => {
+    const adm = K.num(r.AdmitCycle), dis = K.num(r.DischargeCycle);
+    return (adm == null || adm <= cycle) && (dis == null || dis > cycle);
+  };
+  for (const r of (beats.Hospital_Ledger || []).filter(ok).filter(stayOpen)) {
     const p = K.personFromProfile(profiles, r.POPID, 'on Hospital_Ledger this cycle', r.Neighborhood) ||
       K.person(r.POPID, String(r.Name).trim(), null, r.Neighborhood || null, 'on Hospital_Ledger this cycle');
     people.push(p);
-    // pipeline.111 (builder 2026-11-23): the row whole — a discharge on file is said, not hidden behind the status field
-    // (C117: three rows read StatusNow 'active' with DischargeCycle and Outcome 'recovered' filled; Lila printed them as in care).
-    const dis = K.num(r.DischargeCycle);
     const where = p.name + (r.Neighborhood ? ' (' + r.Neighborhood + ')' : '');
     const admitted = (K.num(r.AdmitCycle) != null ? 'admitted C' + K.num(r.AdmitCycle) : 'admitted') + (r.Cause ? ' after ' + r.Cause : '');
     facts.push({
-      text: dis != null && dis <= cycle
-        ? where + ' — ' + admitted + '; discharged C' + dis + (r.Outcome ? ', ' + r.Outcome : '') + (K.num(r.CyclesInCare) != null ? ' after ' + K.num(r.CyclesInCare) + ' cycles in care' : '') +
-          // engine.364: from C118 a finished stay is stamped discharged/deceased; only an older stamp is said
-          (/^(discharged|deceased)$/i.test(String(r.StatusNow || '').trim()) ? '' : '; the ledger status still reads ' + (r.StatusNow || 'unrecorded'))
-        : where + ' — in hospital care, ' + (r.StatusNow || 'status unrecorded') + ', ' + admitted,
+      text: where + ' — in hospital care, ' + (r.StatusNow || 'status unrecorded') + ', ' + admitted,
       src: 'output/beats/Hospital_Ledger.jsonl ' + r.POPID
     });
   }

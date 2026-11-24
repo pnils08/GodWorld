@@ -126,6 +126,31 @@ function prepareInterviewPacket(packet) {
   return out;
 }
 
+// pipeline.111 (builder 2026-11-24: "go, fix the interviews"): a seat-file reporter's interview hands the citizen who is
+// asking, the question and their own life — never the reporter's plan (signal.focus, the plan target), the story's evidence
+// lines or other people's record lines, which turned interviews into answers about the dashboard ("The dip they're
+// measuring…"). Kept: the citizen's ledger profile, the calendar, and record lines that name them.
+function ownLifeInterviewPacket(packet, plannedQuestion) {
+  const out = JSON.parse(JSON.stringify(packet));
+  const name = String(out.actor && out.actor.name || '').trim().toLowerCase();
+  const pop = String(out.actor && out.actor.id || '').toUpperCase();
+  out.signal = { kind: 'interview', hood: null, focus: '', src: (packet.signal && packet.signal.src) || 'interview' };
+  // The reporter's own question for this person, verbatim — officials included (the stock official question carried the
+  // reporter's plan focus: 'what about "<focus>" creates accountability for you'). No question of theirs: a plain one.
+  const planned = String(plannedQuestion || (packet.exposure && packet.exposure.planTarget && packet.exposure.planTarget.question) || '').trim();   // the caller passes the plan's own (planTarget is cleared upstream)
+  out.task = Object.assign({}, out.task, { question: (planned ? planned + (/[?.!]$/.test(planned) ? '' : '?')
+    : 'What is on your mind this week?') + ' Speak from your life.' });
+  out.exposure = Object.assign({}, out.exposure, { planTarget: null, evidence: [] });
+  out.known = (out.known || []).filter(c => /profile for /i.test(String(c.src || '')) && String(c.src).toUpperCase().includes(pop)
+    || /calendar/i.test(String(c.src || '') + ' ' + String(c.text || '').slice(0, 40))
+    || (name && String(c.text || '').toLowerCase().includes(name)));
+  if (out.limits && out.limits.quoteEligible !== false) {
+    out.limits.rule = 'Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.';
+  }
+  if (out.output && out.output.schema) out.output.schema.basis = 'lived-context|direct-reaction|null';
+  return out;
+}
+
 function isInterviewPacket(packet) {
   return Boolean(packet && packet.output && packet.output.contract === CONTRACT);
 }
@@ -234,6 +259,7 @@ module.exports = {
   parseJsonObject,
   extractSpoken,
   prepareInterviewPacket,
+  ownLifeInterviewPacket,
   isInterviewPacket,
   hasLivedEvidence,
   validateInterviewOutput,

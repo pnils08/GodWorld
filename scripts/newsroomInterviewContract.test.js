@@ -83,4 +83,27 @@ const abstain = interview.validateInterviewOutput({
 }, packet);
 assert.equal(abstain.publishableQuote, null);
 
+// pipeline.111 (builder 2026-11-24): a seat interview carries the citizen's own life, never the reporter's plan
+const plan = {
+  v: 'LEP/2', wake: 'W2', actor: { id: 'POP-90001', name: 'Test Teacher', role: 'Teacher', desk: null },
+  task: { goal: 'x', reporter: 'Angela Reyes', question: 'What do you notice first each week?' },
+  signal: { kind: 'own-pick', hood: null, focus: 'where the school quality index slipped from C116', src: 'own pick, C117' },
+  exposure: { basis: ['assignment'], self: 'Test Teacher — Teacher — Fruitvale', planTarget: { pop: 'POP-90001', question: 'q', basis: 'index slipped' },
+    evidence: [{ id: 'EV-1', src: 'own pick, C117', text: 'the school quality index slipped' }] },
+  known: [
+    { t: 'FACT', text: 'Test Teacher — Teacher — Fruitvale', src: 'Simulation_Ledger profile for POP-90001' },
+    { t: 'FACT', text: 'Test Teacher, C117: re-read an old journal page', src: 'slice' },
+    { t: 'FACT', text: 'Fruitvale: school quality index 7.2 (was 7.3 at C116)', src: 'output/beats/Neighborhood_Demographics.jsonl' }],
+  limits: { quoteEligible: true, rule: 'x' }, output: { schema: { basis: 'direct-reaction|null' } }
+};
+const own = interview.ownLifeInterviewPacket(plan);
+assert.equal(own.signal.focus, '', 'no reporter plan in the signal');
+assert.equal(own.exposure.planTarget, null);
+assert.deepStrictEqual(own.exposure.evidence, []);
+assert.deepStrictEqual(own.known.map(c => c.src), ['Simulation_Ledger profile for POP-90001', 'slice'], 'their profile and their own line; not the index');
+assert.equal(own.task.question, 'q? Speak from your life.', 'the reporter\'s own question for this person, verbatim');
+const noPlan = interview.ownLifeInterviewPacket(Object.assign({}, plan, { exposure: Object.assign({}, plan.exposure, { planTarget: null }) }));
+assert.equal(noPlan.task.question, 'What is on your mind this week? Speak from your life.', 'no plan focus pasted into a stock question');
+assert.equal(plan.signal.focus, 'where the school quality index slipped from C116', 'the input is not mutated');
+
 console.log('newsroomInterviewContract.test.js: PASS');

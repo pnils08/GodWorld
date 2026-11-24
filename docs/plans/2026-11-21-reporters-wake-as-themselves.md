@@ -126,6 +126,7 @@ Done: Sharon, Maria, Kai, Mason, Celeste, Jordan, Graye, Noah, Trevor, Lila, Rac
 
 ## Changelog
 
+- 2026-11-24 (research-build) — Superintendent's first ask invented Claremont Hills and an \$85,000 parent-teacher group (traced: in no record, canon or page). Builder: workers' job is data integrity; RECORD_DUTY added to every worker; the re-ask answered from the record and named its limits.
 - 2026-11-24 (research-build) — Culture director approved ("culture director looks good"); intake row written to the next empty row from column A (no append). Builder: workers are at work — they get their job responsibilities, never what to say.
 - 2026-11-24 (research-build) — Workers: superintendent built (answers only); culture director to be minted; Internal Affairs (Viteri) held by the builder until the sim keeps conduct records (none exist). answersOnly on the office map keeps a worker off the scheduled rota.
 - 2026-11-24 (research-build) — City Clerk: no clerk existed; builder ruled a mint (young, data-savvy), answers only (no report). Intake row queued for C118; worker code in place, off until her POPID exists.

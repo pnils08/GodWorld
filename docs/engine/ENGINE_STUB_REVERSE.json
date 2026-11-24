@@ -3237,6 +3237,14 @@
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_"
       ]
     },
+    "bizIdByName": {
+      "writers": [
+        "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_"
+      ],
+      "readers": [
+        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
+      ]
+    },
     "bizOpenIds": {
       "writers": [
         "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_"
@@ -5194,10 +5202,12 @@
     },
     "Faith_Organizations": {
       "writers": [
+        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase05-citizens/migrationTrackingEngine.js::processRelocations_"
       ],
       "readers": [
         "phase05-citizens/bondEngine.js::processFaithJoins_",
+        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase05-citizens/migrationTrackingEngine.js::processRelocations_",
         "phase07-evening-media/buildContractSeeds.js::contractSeedBackdropIndex_",
         "utilities/ensureFaithLedger.js::ensureFaithOrgsSchema_",
@@ -5299,6 +5309,14 @@
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
       ]
     },
+    "Community_Programs": {
+      "writers": [],
+      "readers": [
+        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
+        "phase05-citizens/runYouthEngine.js::runYouthEngine_",
+        "phase07-evening-media/buildContractSeeds.js::contractSeedBackdropIndex_"
+      ]
+    },
     "Civic_Sweep_Report": {
       "writers": [],
       "readers": [
@@ -5313,13 +5331,6 @@
         "phase07-evening-media/mediaRoomIntake.js::flagCitizenForTierReview_",
         "phase07-evening-media/mediaRoomIntake.js::processCategoryEntries_",
         "phase07-evening-media/mediaRoomIntake.js::processQuotedCitizens_"
-      ]
-    },
-    "Community_Programs": {
-      "writers": [],
-      "readers": [
-        "phase05-citizens/runYouthEngine.js::runYouthEngine_",
-        "phase07-evening-media/buildContractSeeds.js::contractSeedBackdropIndex_"
       ]
     },
     "Story_Seed_Deck": {

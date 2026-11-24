@@ -672,6 +672,7 @@ function applyBusinessDynamics_(ctx) {
   // hit it). Arts is out: its live rows are newsrooms. Built locally, published at the end of the
   // phase, so a throw mid-loop leaves S.hoodSpots unset and the citizen pool offers nothing.
   var spotChaos = {}, spots = {};
+  var idByName = {};  // engine.356: an open business's id by its exact name (a congregation on the ledger)
   var openIds = {};   // engine.356 A2: every ledger business not winding down — a line that names a business is offered only while it is here
   var spotCycle = Number(S.absoluteCycle || S.cycleId);   // the stamp runChaosCarsEngine_ puts on its payloads
   var cce = S.chaosCarsEvents || [];
@@ -705,7 +706,7 @@ function applyBusinessDynamics_(ctx) {
     if (!id) { revCol.push([row[iRev]]); growCol.push([row[iGrow]]); continue; } // untouched
     var ps = prev[id] ? { streak: prev[id][0], win: prev[id][1], closed: prev[id][2] || 0, ship: prev[id][3] || 0 } : { streak: 0, win: 0, closed: 0, ship: 0 };
     var stated = iCnt >= 0 ? (Number(row[iCnt]) || 0) : 0;
-    if (!ps.closed) openIds[id] = 1;
+    if (!ps.closed) { openIds[id] = 1; if (iNm >= 0 && String(row[iNm] || '').trim()) idByName[String(row[iNm]).trim()] = id; }
     if (ps.closed) {
       // Task 7: the wind-down — pinned at the floor, shedding everyone left, never reopening
       out.rows++; out.closing++;
@@ -889,6 +890,7 @@ function applyBusinessDynamics_(ctx) {
     ', ship ' + (ship ? ship.outcome + ' ' + ship.phase + ' on ' + (out.shipMoved || 0) : 'none') +
     ', game-week bars ' + out.sportsBars + ' at ' + out.sportsBarPp + 'pp');
   S.bizOpenIds = openIds;
+  S.bizIdByName = idByName;
   S.hoodSpots = spots;   // engine.214 Cut C — the phase's last step; generateCitizensEvents_ reads it
   return out;
 }

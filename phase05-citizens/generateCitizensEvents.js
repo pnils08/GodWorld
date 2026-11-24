@@ -1435,7 +1435,7 @@ function generateCitizensEvents_(ctx) {
   // blank on whole pushes). An entity slot with no value this cycle is marked
   // unavailable in eclEntityAvail_ so its rows never enter a pool (a $PILOT row
   // with no `undocked` flag would otherwise compose-null on every citizen).
-  var CONTENT_ENTITY_SLOTS = { VENUE: 1, INSTITUTION: 1, CONTACT: 1, PILOT: 1, PILOTROLE: 1, LEADER: 1 }; // resolved code-side, not from fragments
+  var CONTENT_ENTITY_SLOTS = { VENUE: 1, INSTITUTION: 1, CONTACT: 1, PILOT: 1, PILOTROLE: 1, LEADER: 1, PROGRAM: 1, CONGREGATION: 1 }; // resolved code-side, not from fragments
 
   // engine.79 item 7 (S357): proving-ground exclusive pools. When a pool named
   // in World_Config eclExclusivePools has enough eligible ledger lines for
@@ -1737,9 +1737,76 @@ function generateCitizensEvents_(ctx) {
     }
     return '';
   }
+  // engine.356 (builder 2026-11-24: "you have community_programs, and faith_ledger for addtional flavor
+  // for these"): programs and congregations are places too. Both tabs are read once a run, fail-soft —
+  // a new active row is a place the next Cycle; a row gone or inactive stops being one.
+  //   $PROGRAM      — an active Community_Programs row of the citizen's hood whose Type is the line's
+  //                   prog:<Type> tag; a line without the tag is never offered (a fund is no place to
+  //                   watch a game). The line carries place:<Program_ID>.
+  //   $CONGREGATION — the citizen's own congregation (Faith_Organizations.MembersList); a citizen who
+  //                   belongs to none is not offered the line. The line carries place:<BIZ_ID> when the
+  //                   congregation is on Business_Ledger under the same name.
+  var placeTabs_ = null;
+  function hoodKeyOf_(h) {
+    h = String(h || '').trim();
+    return (h && S.canonHoods) ? (resolveHoodOrChild_(ctx, h) || h) : h;
+  }
+  function loadPlaceTabs_() {
+    if (placeTabs_) return placeTabs_;
+    placeTabs_ = { progByHood: {}, progIds: {}, progLoaded: false, orgByMember: {} };
+    try {
+      var pSh = ctx.ss.getSheetByName('Community_Programs');
+      var pv = pSh ? pSh.getDataRange().getValues() : [];
+      var ph = pv[0] || [], pId = ph.indexOf('Program_ID'), pNm = ph.indexOf('Name'), pHd = ph.indexOf('Neighborhood'),
+          pTy = ph.indexOf('Type'), pSt = ph.indexOf('Status');
+      if (pId >= 0 && pNm >= 0 && pHd >= 0 && pv.length > 1) placeTabs_.progLoaded = true;
+      for (var pr = 1; placeTabs_.progLoaded && pr < pv.length; pr++) {
+        var prId = String(pv[pr][pId] || '').trim(), prNm = String(pv[pr][pNm] || '').trim();
+        if (!/^PRG-/.test(prId) || !prNm) continue;
+        if (pSt >= 0 && String(pv[pr][pSt] || '').toLowerCase() !== 'active') continue;
+        placeTabs_.progIds[prId] = 1;
+        var prK = hoodKeyOf_(pv[pr][pHd]);
+        (placeTabs_.progByHood[prK] = placeTabs_.progByHood[prK] || []).push({ id: prId, name: prNm, type: pTy >= 0 ? String(pv[pr][pTy] || '').trim() : '' });
+      }
+    } catch (ePr) { try { Logger.log('generateCitizensEvents_ Community_Programs read failed (fail-soft): ' + ePr); } catch (ig1) {} }
+    try {
+      var fSh = ctx.ss.getSheetByName('Faith_Organizations');
+      var fv = fSh ? fSh.getDataRange().getValues() : [];
+      var fh = fv[0] || [], fO = fh.indexOf('Organization'), fH = fh.indexOf('Neighborhood'), fA = fh.indexOf('ActiveStatus'), fM = fh.indexOf('MembersList');
+      for (var fr = 1; fO >= 0 && fH >= 0 && fr < fv.length; fr++) {
+        var oNm = String(fv[fr][fO] || '').trim();
+        if (!oNm) continue;
+        var oAct = fA >= 0 ? String(fv[fr][fA] || '').toLowerCase() : 'active';
+        if (oAct && oAct.indexOf('active') < 0) continue;
+        if (oAct.indexOf('inactive') >= 0) continue;
+        var org = { name: oNm, bizId: (S.bizIdByName && S.bizIdByName[oNm]) || '' };
+        var ml = [];
+        try { ml = fM >= 0 ? JSON.parse(String(fv[fr][fM] || '[]')) : []; } catch (eMl) { ml = []; }
+        for (var mi = 0; mi < ml.length; mi++) placeTabs_.orgByMember[String(ml[mi]).trim().toUpperCase()] = org;
+      }
+    } catch (eFo) { try { Logger.log('generateCitizensEvents_ Faith_Organizations read failed (fail-soft): ' + eFo); } catch (ig2) {} }
+    return placeTabs_;
+  }
+  function progTypeFromTags_(tags) {
+    for (var gi = 0; gi < (tags || []).length; gi++) {
+      if (String(tags[gi]).indexOf('prog:') === 0) return String(tags[gi]).slice(5);
+    }
+    return '';
+  }
+  function hoodPrograms_(neighborhood, type) {
+    var out = [];
+    if (!type) return out;
+    var list = loadPlaceTabs_().progByHood[hoodKeyOf_(neighborhood)] || [];
+    for (var hp = 0; hp < list.length; hp++) if (list[hp].type === type) out.push(list[hp]);
+    return out;
+  }
+  // The citizen's own congregation, or null — a non-member is placed at none.
+  function congregationFor_(popId) {
+    return loadPlaceTabs_().orgByMember[String(popId || '').trim().toUpperCase()] || null;
+  }
   function rowPlaceId_(tags) {
     for (var ri = 0; ri < (tags || []).length; ri++) {
-      if (/^place:BIZ-/.test(String(tags[ri]))) return String(tags[ri]).slice(6);
+      if (/^place:(BIZ|PRG)-/.test(String(tags[ri]))) return String(tags[ri]).slice(6);
     }
     return '';
   }
@@ -2205,6 +2272,7 @@ function generateCitizensEvents_(ctx) {
       var fev = evs[fi];
       if (!fev || fev.neighborhood !== neighborhood) continue;
       var orgName = fev.organization || "a local congregation";
+      var orgBiz = (fev.organization && S.bizIdByName) ? S.bizIdByName[fev.organization] : "";
       if (fev.eventType === 'holy_day') {
         pool.push(makeEntry("joined the " + (fev.holyDay || "holy day") + " observance at " + orgName,
           ["source:faith", "faith:holy-day", "dial:warmth:up", "act:service"], 1.15, false));
@@ -2221,6 +2289,7 @@ function generateCitizensEvents_(ctx) {
         pool.push(makeEntry("caught a notable service at " + orgName,
           ["source:faith", "faith:service", "dial:composure:up", "act:service"], 1.0, false));
       }
+      if (orgBiz) pool[pool.length - 1].tags.push("place:" + orgBiz); // engine.356: the line names the congregation; the ledger holds it
     }
     return pool;
   }
@@ -3695,7 +3764,11 @@ function generateCitizensEvents_(ctx) {
           // cut A2: a line that names a business (place:<BIZ_ID> on its row) is offered only while that
           // business is on the ledger and not winding down. S.bizOpenIds unset (the business phase failed) → offered.
           if (clEntry.placeId === undefined) clEntry.placeId = rowPlaceId_(clEntry.tags);
-          if (clEntry.placeId && S.bizOpenIds && !S.bizOpenIds[clEntry.placeId]) continue;
+          if (clEntry.placeId && clEntry.placeId.indexOf("BIZ-") === 0 && S.bizOpenIds && !S.bizOpenIds[clEntry.placeId]) continue;
+          if (clEntry.placeId && clEntry.placeId.indexOf("PRG-") === 0 && loadPlaceTabs_().progLoaded && !placeTabs_.progIds[clEntry.placeId]) continue;
+          // $PROGRAM / $CONGREGATION: offered only where there is one to name
+          if (clEntry.slots.indexOf("PROGRAM") >= 0 && !hoodPrograms_(neighborhood, progTypeFromTags_(clEntry.tags)).length) continue;
+          if (clEntry.slots.indexOf("CONGREGATION") >= 0 && !congregationFor_(popId)) continue;
           var clTags = clEntry.grain ? mergeTags(clEntry.tags, ["grain:" + clEntry.grain]) : clEntry.tags;
           var clPooled = makeEntry(clEntry.text, mergeTags(clTags, calendarTags), clEntry.weight, false);
           var clShare = contentDialShare_(clEntry.conditions, condScopes);
@@ -3959,10 +4032,16 @@ function generateCitizensEvents_(ctx) {
     // drop this emit slot, never raw $SLOT into LifeHistory.
     if (entry.ledgerLine) {
       var clVenue = "", clUsedContact = false, clWantsPilot = false, clWantsRole = false;
+      var clProgram = null, clCongregation = null;
       var clSlots = entry.ledgerLine.slots || [];
       for (var cls = 0; cls < clSlots.length; cls++) {
         if (clSlots[cls] === "VENUE") clVenue = pickVenue_(neighborhood, popId, actFromTags_(tags)) || (mem && mem.lastVenue) || "";
         else if (clSlots[cls] === "CONTACT") clUsedContact = true;
+        else if (clSlots[cls] === "PROGRAM") {
+          var clProgs = hoodPrograms_(neighborhood, progTypeFromTags_(tags));
+          if (clProgs.length) clProgram = clProgs[Math.floor(roll() * clProgs.length)];
+        }
+        else if (clSlots[cls] === "CONGREGATION") clCongregation = congregationFor_(popId);
         else if (clSlots[cls] === "PILOT") clWantsPilot = true;
         else if (clSlots[cls] === "PILOTROLE") { clWantsPilot = true; clWantsRole = true; }
       }
@@ -4000,7 +4079,9 @@ function generateCitizensEvents_(ctx) {
         CONTACT: contact.name || "someone familiar",
         PILOT: clPilotName,
         PILOTROLE: clPilotRole,
-        LEADER: undockedLeaderName
+        LEADER: undockedLeaderName,
+        PROGRAM: clProgram ? clProgram.name : "",
+        CONGREGATION: clCongregation ? clCongregation.name : ""
       }, entry.ledgerScopes);
       if (composedText === null) {
         if (entry.eclKey) eclTelemetry.composeNull[entry.eclKey] = (eclTelemetry.composeNull[entry.eclKey] || 0) + 1;
@@ -4016,6 +4097,8 @@ function generateCitizensEvents_(ctx) {
       if (entry.eclKey) eclTelemetry.draws[entry.eclKey] = (eclTelemetry.draws[entry.eclKey] || 0) + 1;
       if (clVenue) { chosenVenue = clVenue; tags = placeTags_(mergeTags(tags, ["venue:local"]), clVenue); }
       if (clUsedContact && contact && contact.popId) tags = mergeTags(tags, ["contactPopId:" + contact.popId]);
+      if (clProgram) tags = mergeTags(tags, ["place:" + clProgram.id]);
+      if (clCongregation && clCongregation.bizId) tags = mergeTags(tags, ["place:" + clCongregation.bizId]);
     }
 
     if (entry.template) {
@@ -4055,6 +4138,15 @@ function generateCitizensEvents_(ctx) {
       tags = tags.slice();
       // EmployerBizId also holds SELF_EMPLOYED / UNTRACKED / SPORTS_OTHER — not places (agy 2026-11-24 §1)
       if (/^BIZ-/.test(empBiz)) tags[empAt] = "place:" + empBiz; else tags.splice(empAt, 1);
+    }
+
+    // A faith line with no congregation in its words (place:congregation on its row) is at the citizen's
+    // own; a non-member, or a congregation that is not on Business_Ledger, carries no place.
+    var conAt = tags.indexOf("place:congregation");
+    if (conAt >= 0) {
+      var conOrg = congregationFor_(popId);
+      tags = tags.slice();
+      if (conOrg && conOrg.bizId) tags[conAt] = "place:" + conOrg.bizId; else tags.splice(conAt, 1);
     }
 
     if (tags.indexOf("relationship:rivalry") >= 0 && hasRivalry && chanceHit(0.3)) {

@@ -479,7 +479,7 @@ function crimeCityMeanResidents_(demographics, neighborhoods) {
   for (var i = 0; i < neighborhoods.length; i++) {
     var d = demographics[neighborhoods[i]] || {};
     var n = (Number(d.students) || 0) + (Number(d.adults) || 0) + (Number(d.seniors) || 0);
-    if (!(n > 0)) throw new Error('crimeMetrics: ' + neighborhoods[i] + ' has no residents on Neighborhood_Demographics');
+    if (!(n > 0) || !isFinite(n)) throw new Error('crimeMetrics: ' + neighborhoods[i] + ' has no residents on Neighborhood_Demographics');
     sum += n;
   }
   if (!neighborhoods.length) throw new Error('crimeMetrics: no simulated hoods');
@@ -505,7 +505,8 @@ function calculateNeighborhoodCrime_(neighborhood, profile, demo, prev, context,
   var baseClearance = 0.35;
 
   // Demographics
-  var totalPop = (demo.students || 0) + (demo.adults || 0) + (demo.seniors || 0);
+  // engine.365 (agy F1): numbers, not string concatenation — the resident factor reads this.
+  var totalPop = (Number(demo.students) || 0) + (Number(demo.adults) || 0) + (Number(demo.seniors) || 0);
   var unemploymentRate = totalPop > 0 ? ((demo.unemployed || 0) / totalPop) : 0.08;
   var youthRatio = totalPop > 0 ? ((demo.students || 0) / totalPop) : 0.2;
 

@@ -367,5 +367,33 @@ console.log('═══ 12 — contract guard: the dead v1.2 crime names stay dea
   check('12b every crimeCity.<key> the cycle packet prints is a key calculateCityWideFromMap_ returns (' + read.join(', ') + ')',
     read.length === 5 && read.every(k => keys.indexOf(k) >= 0), JSON.stringify({ read, keys }));
 }
+// ── 13. engine.365 — incidents follow residents; per-event additions stay whole ──────────────
+console.log('═══ 13 — engine.365: a hood\'s incidents follow its residents at its own level');
+{
+  // Same level everywhere (flat rows), Lake Merritt at a quarter of the others' residents, no noise (rng 0.5).
+  const small = () => ({ students: 50, adults: 200, seniors: 25, unemployed: 15 });
+  const demo = h => h === 'Lake Merritt' ? small() : flatDemo();
+  const flat = () => { const x = liveRows(); NM.forEach(h => { x[h].propertyCrimeIndex = 50; x[h].violentCrimeIndex = 30; }); return x; };
+  const r = runCycle(sandbox(), flat(), 108, { demo }, () => 0.5).written;
+  const lm = r['Lake Merritt'].incidentParts, dt = r['Downtown'].incidentParts;
+  const mean = (21 * 1100 + 275) / 22;
+  check('13a the resident factor is residents / the city mean hood (Lake Merritt ' + lm.residentFactor + ', Downtown ' + dt.residentFactor + ')',
+    Math.abs(lm.residentFactor - 275 / mean) < 0.001 && Math.abs(dt.residentFactor - 1100 / mean) < 0.001);
+  check('13b the level part scales with residents, so the small hood counts fewer incidents (' + r['Lake Merritt'].incidentCount + ' < ' + r['Downtown'].incidentCount + ')',
+    Math.abs(lm.level / dt.level - lm.residentFactor / dt.residentFactor) < 0.02 && r['Lake Merritt'].incidentCount < r['Downtown'].incidentCount);
+  const c = runCycle(sandbox(), flat(), 108, { demo, chaos: 1 }, () => 0.5).written;
+  check('13c a chaos event adds the same whole incidents to a small hood as a big one (+' + (c['Lake Merritt'].incidentParts.events - lm.events) + ' / +' + (c['Downtown'].incidentParts.events - dt.events) + ')',
+    c['Lake Merritt'].incidentParts.events - lm.events === c['Downtown'].incidentParts.events - dt.events &&
+    c['Lake Merritt'].incidentParts.events - lm.events > 0);
+  let threw = '';
+  try { runCycle(sandbox(), flat(), 108, { demo: h => h === 'KONO' ? { students: 0, adults: 0, seniors: 0, unemployed: 0 } : flatDemo() }, () => 0.5); }
+  catch (e) { threw = e.message; }
+  check('13d a hood with no residents throws and names the hood', /KONO has no residents/.test(threw), threw);
+  let threw2 = '';
+  try { runCycle(sandbox(), flat(), 108, { demo: h => ({ students: '200', adults: '800', seniors: '100', unemployed: '60' }) }, () => 0.5); }
+  catch (e) { threw2 = e.message; }
+  check('13e string residents read as numbers, never concatenated (agy F1)', !threw2, threw2);
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

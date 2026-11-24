@@ -665,6 +665,8 @@ function savePreviousCycleState_(ctx) {
     if (arrestCarry) {
       saveCarryForwardBlob_(ctx, 'PREV_ARREST_CARRY_JSON', JSON.stringify(arrestCarry), snapshot.cycle);
       Logger.log('savePreviousCycleState_: Saved arrest carry (' + Object.keys(arrestCarry.hoods).length + ' hoods) for cycle ' + snapshot.cycle);
+    } else {
+      Logger.log('savePreviousCycleState_: no arrest carry this cycle (S.careJusticeDemand missing) — next cycle reads the newest older one');
     }
     // engine.209: the franchise weight drifts on the week just played (results, tenure, fan
     // reach) and rides its OWN key (~2 franchises, ~120 chars). Phase 1 seeds S.franchiseWeight

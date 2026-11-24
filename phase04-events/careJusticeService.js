@@ -238,6 +238,8 @@ function runCareJusticeDemand_(ctx) {
     var name = hoods[k];
     var m = crime[name];
     var charges = careJusticeNumber_(m.incidentCount, 'incidentCount', name, false);
+    // engine.365 (agy F3): one incident is one charge — a whole number, as the cop-car pass requires.
+    if (Math.floor(charges) !== charges) throw new Error('careJusticeDemand: ' + name + ' incidentCount must be a whole number, got ' + charges);
     var clearance = careJusticeNumber_(m.clearanceRate, 'clearanceRate', name, true);
     if (clearance > 1) throw new Error('careJusticeDemand: ' + name + ' clearanceRate must be <= 1');
     var sick = careJusticeNumber_(demographics[name].sick, 'sick', name, false);

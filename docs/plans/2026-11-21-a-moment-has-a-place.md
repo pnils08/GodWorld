@@ -127,9 +127,10 @@ Each moment written carries its place id and the other person's POPID on the two
 
 **Repair, not a second library:** the 1,060 lines stay the What column. Each gets an activity kind and the slots its sentence needs ($PLACE, $WITH); lines that bake a made-up place ("a bar patio") lose it to the slot. The code's name tables (`CITIZEN_VENUES_*`, `CITIZEN_INSTITUTIONS_*`) leave the fill path — the old cut 1 (engine.214 8b) folds into this.
 
-**For the builder before the cut:**
-1. *With whom* — bonded people only, or also coworkers (same employer) and neighbors (same household or block)?
-2. *How often a moment has a second person* — every meal and drink and visit, or the bond's own strength deciding?
+**Answered (builder 2026-11-24, verbatim):** "1. all of these since bonds can read these as well to strengthen id imagine, 2 - i think this is a great way to strenthen a bond and make a boy ang girl push towards marriage"
+- *With whom* → bonded people, coworkers (same employer) and neighbors (same household or block) — all of them.
+- *Shared moments* → the bond reads them: a moment two people share strengthens their bond, and a romantic bond's shared moments carry it toward marriage (SIM_DOCTRINE §11, "Marriage is years of a maintained bond" — the moments are the maintenance).
+- *Next:* wiring card on how a bond is maintained today and what fires a wedding, then the cut order.
 
 ## Rulings
 
@@ -177,3 +178,4 @@ Each moment written carries its place id and the other person's POPID on the two
 - 2026-11-21 (engine-sheet) — Advisor fold: scope stated against the builder's words and made Open question 1; his quote restored verbatim; `pickVenue_` body read; the page paragraph cut to what the engine hands it; Task 1(c) carries the archive tab and the run-time cost.
 - 2026-11-24 (engine-sheet) — Task 1 count done (C117) and the two-column read: safe. Resumed from pause on the builder's "go on the moments job, start with the count".
 - 2026-11-24 (engine-sheet) — The event machine written from the builder's words: ECL inventory (1,031 of 1,060 lines unslotted), the six columns from sim data, repair over replace; two questions to him.
+- 2026-11-24 (engine-sheet) — Builder answered the two machine questions: all three (bonds, coworkers, neighbors); shared moments feed the bond and push courtship toward marriage.

@@ -212,6 +212,13 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD stage 79 — replay and dry run keep off the live world (2026-11-24, engine-sheet, engine.366)
+
+- **What:** three files at `f36f1e800` on stage 78 — `utilities/cycleModes.js` (`cycleModeOffLive_`: the editor-only `replayCycle` / `dryRunCycle` refuse the live sheet — ~50 direct writers ignore both modes; a replay with no stored seed throws), `phase01-config/loadPreviousEvening.js` (a replay opens on the memory below the Cycle it replays and writes no ring row back to the props), `phase09-digest/finalizeCycleState.js` (no carry save on replay). Builder: "go on the replay". Found by agy (engine.364 review F2).
+- **Proof:** the new mode tests 7/7 (`b935f0069`); carry tests pass. **Bench SANDBOX 1004** (`output/engine-sheet/2026-11-24-e366/bench.log`): an ordinary fire C118 PASS 238 s, numbers identical to stage 78's bench (143 incidents, 29 arrests); final sync from live.
+- **Stage 79 (2026-11-24 ~03:05 CST):** live pulled = stage 78 (`e365-prod.sha256`); three files changed; built tree = the benched tree (`e366.sha256`); manifest `output/engine-sheet/2026-11-24-e366/e366-prod.sha256`; pull-back byte-identical; version cut **@214**. **Smoke:** none on the fire path (the modes do not run in a Cycle); C118's fire is the regression read.
+- **Back out:** the three files from `a2ae12cc4` (= `e365-prod.sha256`) + version cut.
+
 ### PROD stage 78 — arrests read right; incidents follow residents (2026-11-24, engine-sheet, engine.365)
 
 - **What:** four files at `a2ae12cc4` on stage 77 — `phase03-population/updateCrimeMetrics.js` (a hood's incidents: the level term after the weather steps and the noise × residents / the city's mean hood; per-event additions whole; throws on a hood with no residents), `phase04-events/careJusticeService.js` (arrests = whole part of (charges − OARI diverted) × clearance + carry; charges must be whole; the engine.364 F3 carry type check), `phase09-digest/finalizeCycleState.js` + `phase01-config/loadPreviousEvening.js` (`PREV_ARREST_CARRY_JSON`). Builder 2026-11-23/24: "1 - yes 2 - yes … 3 - yes diverted", "from charges before clearance", "go".

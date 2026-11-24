@@ -161,7 +161,10 @@ function loadCarryForwardBlob_(ctx, key, cycleId) {
   var target = Number(cycleId) || 0;
   // Replay rewinds cycleCount to a past cycle, so every live prop would read as a
   // ghost and a 3-slot ring has nothing older to offer — same skip as the assert.
-  if (ctx && ctx.mode && (ctx.mode.replay || ctx.mode.dryRun)) target = 0;
+  // engine.366: a replay opens on the memory BELOW the Cycle it replays (the ring's row for the
+  // Cycle before); a dry run previews on the newest.
+  if (ctx && ctx.mode && ctx.mode.replay) target = Number(ctx.mode.replayCycleId) || 0;
+  else if (ctx && ctx.mode && ctx.mode.dryRun) target = 0;
   var json = props.getProperty(key);
   if (json) {
     var stamped = Number(props.getProperty(key + '_CYCLE')) || 0;
@@ -172,6 +175,12 @@ function loadCarryForwardBlob_(ctx, key, cycleId) {
   }
   var rec = readCarryForwardFromSheet_(ctx, key, target);
   if (rec && rec.json) {
+    // engine.366: a replay reads an older Cycle's row and must not write it back — the next real
+    // fire would open on that older memory.
+    if (ctx && ctx.mode && ctx.mode.replay) {
+      Logger.log('loadCarryForwardBlob_: ' + key + ' replay read cycle ' + rec.cycle + ' from Carry_Forward_Store (prop left as it was)');
+      return rec.json;
+    }
     // engine.223: the re-seed is best-effort too — a ring row past the 9 KB prop
     // cap is still the Cycle's memory; the sheet stays the layer that holds it.
     try {
@@ -417,7 +426,8 @@ function seedListEstablished_(S, mixBit) {
 function seedCarriedSeedList_(ctx, S, key, field, label, mixBit) {
   if (Array.isArray(S[field]) && S[field].length) return;
   var target = carryForwardCycleId_(ctx);
-  if (ctx && ctx.mode && (ctx.mode.replay || ctx.mode.dryRun)) target = 0;
+  if (ctx && ctx.mode && ctx.mode.replay) target = Number(ctx.mode.replayCycleId) || 0;   // engine.366
+  else if (ctx && ctx.mode && ctx.mode.dryRun) target = 0;
   var json = null;
   var readErr = null;
   try { json = loadCarryForwardBlob_(ctx, key, target); } catch (e) { json = null; readErr = e; }

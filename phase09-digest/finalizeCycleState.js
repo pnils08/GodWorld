@@ -487,9 +487,9 @@ function snapshotEveningForCarryForward_(ctx) {
 
 
 function saveEveningSnapshot_(ctx) {
-  var isDryRun = ctx.mode && ctx.mode.dryRun;
+  var isDryRun = ctx.mode && (ctx.mode.dryRun || ctx.mode.replay);   // engine.366: a replay saves no memory
   if (isDryRun) {
-    Logger.log('saveEveningSnapshot_: Skipped (dry-run mode)');
+    Logger.log('saveEveningSnapshot_: Skipped (dry-run / replay mode)');
     return;
   }
 
@@ -590,9 +590,9 @@ function compactCityDynamicsCarrier_(S) {
  */
 
 function savePreviousCycleState_(ctx) {
-  var isDryRun = ctx.mode && ctx.mode.dryRun;
+  var isDryRun = ctx.mode && (ctx.mode.dryRun || ctx.mode.replay);   // engine.366: a replay saves no memory
   if (isDryRun) {
-    Logger.log('savePreviousCycleState_: Skipped (dry-run mode)');
+    Logger.log('savePreviousCycleState_: Skipped (dry-run / replay mode)');
     return;
   }
 

@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 179 · **Functions mapped:** 1792 · **S.* fields:** 383 · **Sheets:** 64
+**Files scanned:** 179 · **Functions mapped:** 1793 · **S.* fields:** 383 · **Sheets:** 64
 
 ## S.* / ctx.summary reverse index
 

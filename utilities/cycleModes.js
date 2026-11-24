@@ -142,7 +142,20 @@ function initializeModeFlags_(ctx) {
  * Full execution, writes staged but not committed.
  * @param {Object} ctx - Engine context
  */
+// engine.366: replay and dry run are editor-only checks that promise no writes, but ~50 direct
+// writers (SHEETS_MANIFEST §9) carry no mode check — a run on the live sheet rewrites live tabs
+// and the carry-forward memory. Both run on the sandbox only (its SIM_SSID is its own sheet).
+function cycleModeOffLive_(ctx, mode) {
+  var id = ctx && ctx.ss && ctx.ss.getId ? ctx.ss.getId() : null;
+  if (!id) throw new Error(mode + ': no spreadsheet open — nothing run');
+  if (id === DEFAULT_SIM_SSID) {
+    throw new Error(mode + ' refused on the live sheet: the engine\'s direct sheet writes do not all honour ' + mode +
+      ', so it would change the live world. Run it on the sandbox. Nothing was run.');
+  }
+}
+
 function initializeDryRunMode_(ctx) {
+  cycleModeOffLive_(ctx, 'dry run');
   initializeModeFlags_(ctx);
   ctx.mode.dryRun = true;
 
@@ -157,6 +170,7 @@ function initializeDryRunMode_(ctx) {
  * @param {number} cycleId - The cycle to replay
  */
 function initializeReplayMode_(ctx, cycleId) {
+  cycleModeOffLive_(ctx, 'replay');
   initializeModeFlags_(ctx);
   ctx.mode.replay = true;
   ctx.mode.replayCycleId = cycleId;
@@ -168,9 +182,8 @@ function initializeReplayMode_(ctx, cycleId) {
     ctx.rng = seededRng_(seedData.seed);
     Logger.log('initializeReplayMode_: Loaded seed for cycle ' + cycleId + ': ' + seedData.seed);
   } else {
-    // No seed found, generate one from cycleId
-    ctx.rng = seededRng_(cycleId);
-    Logger.log('initializeReplayMode_: No stored seed for cycle ' + cycleId + ', using cycleId as seed');
+    // engine.366: a replay without the Cycle's own seed cannot be compared to it — say so, run nothing.
+    throw new Error('replay: no stored seed for cycle ' + cycleId + ' — a replay must use the cycle\'s own seed. Nothing was run.');
   }
 
   Logger.log('initializeReplayMode_: Enabled replay mode for cycle ' + cycleId);

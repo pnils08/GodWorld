@@ -4366,6 +4366,8 @@
 
 - **initializeModeFlags_(ctx)**
 
+- **cycleModeOffLive_(ctx, mode)**
+
 - **initializeDryRunMode_(ctx)**
 
 - **initializeReplayMode_(ctx, cycleId)**
@@ -4934,4 +4936,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 179
-**Functions mapped:** 1792
+**Functions mapped:** 1793

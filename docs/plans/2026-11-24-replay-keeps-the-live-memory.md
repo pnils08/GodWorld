@@ -36,10 +36,10 @@ pointers:
 
 | # | Task | Owner | Status |
 |---|------|-------|--------|
-| 1 | Both modes refuse the live sheet (`ctx.ss` id = `DEFAULT_SIM_SSID`), in `initializeReplayMode_` / `initializeDryRunMode_` before any phase runs | es | not started |
-| 2 | Replay with no stored seed throws instead of seeding from the Cycle number | es | not started |
-| 3 | Replay loads the memory below the replayed Cycle (`loadCarryForwardBlob_`, `seedCarriedSeedList_`) | es | not started |
-| 4 | `savePreviousCycleState_` / `saveEveningSnapshot_` skip on replay as on dry run | es | not started |
+| 1 | Both modes refuse the live sheet (`ctx.ss` id = `DEFAULT_SIM_SSID`), in `initializeReplayMode_` / `initializeDryRunMode_` before any phase runs | es | built (this commit) |
+| 2 | Replay with no stored seed throws instead of seeding from the Cycle number | es | built (this commit) |
+| 3 | Replay loads the memory below the replayed Cycle (`loadCarryForwardBlob_`, `seedCarriedSeedList_`) | es | built (this commit); the ring row read on replay is not written back to the prop |
+| 4 | `savePreviousCycleState_` / `saveEveningSnapshot_` skip on replay as on dry run | es | built (this commit) |
 | 5 | Tests; bench: a live cycle fire on the sandbox unchanged (the modes are not on the fire path) | es | not started |
 | 6 | PROD push | es | not started |
 
@@ -75,3 +75,4 @@ pointers:
 ## Changelog
 
 - 2026-11-24 (engine-sheet) — Plan written on "go on the replay".
+- 2026-11-24 (engine-sheet) — Tasks 1–4 built; `scripts/cycleModesOffLive.test.js` 7/7; carry tests pass.

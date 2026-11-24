@@ -58,7 +58,7 @@ On Sharon (2026-11-21): bio — "i like them both and love \"visits places she w
 5. Test day on the newest cycle with `scripts/testReporterDay.sh` under the no-write guard (spend unlock from the builder); restore the slice cache files after; copy the piece to `output/research-build/2026-11-21-p111/`. Check invented ages/tenures and engine-stamp leaks.
 6. Commit path-specifically (shared files may carry engine-sheet hunks); plan task row + changelog; ROLLOUT row <=160 chars.
 
-Done: Sharon, Maria, Kai, Mason, Celeste, Jordan, Graye, Noah, Trevor, Lila, Rachel, Angela, Carmen, Luis, Farrah (new seat). Next: the builder names it. Not yet: the sports seats, Marbury, Jax, Nia, Tamsin, Ines.
+Done: Sharon, Maria, Kai, Mason, Celeste, Jordan, Graye, Noah, Trevor, Lila, Rachel, Angela, Carmen, Luis, Farrah (new seat), Jax. Next: the builder names it. Not yet: the sports seats, Marbury, Jax, Nia, Tamsin, Ines.
 
 ## Tasks
 
@@ -85,6 +85,8 @@ Done: Sharon, Maria, Kai, Mason, Celeste, Jordan, Graye, Noah, Trevor, Lila, Rac
 | 19 | Carmen Delaine: seat file, whole civic record (buildCivicSlice), thinking medium (package seatReasoning) | rb | live; read Mon 11-30 |
 | 20 | Luis Navarro: seat file + sheet bio, initiative clocks + decisions record (buildInvestigationsSlice), Haiku 5.5 thinking medium | rb | live; read Tue 11-24 (one-run sample: is he still apart from Carmen) |
 | 21 | Farrah Del Rio: new opinion seat (Thursdays), the week's record (buildOpinionSlice), Sonnet thinking medium | rb | live; first wake Thu 11-26 |
+| 22 | Interviews: the citizen gets their own life and the reporter's own question, never the plan (ownLifeInterviewPacket, all seat-file seats) | rb | live; read every seat's next quotes |
+| 23 | Jax Caldera: seat file, people-first record (buildJaxRecordSlice), sheet bio trimmed | rb | live Wed 11-26 on Sonnet; Grok vs Sonnet is the builder's pick |
 
 ## Acceptance
 
@@ -121,6 +123,8 @@ Done: Sharon, Maria, Kai, Mason, Celeste, Jordan, Graye, Noah, Trevor, Lila, Rac
 
 ## Changelog
 
+- 2026-11-24 (research-build) — Builder rulings: job lines are fine, telling them what to say is puppeting ("telling a cop to arrest people isnt puppeting … telling that cop to talk with an accent is puppeting"); bios, tone lines and voice Essence stay ("it gives them a sense of themselves"); a CitizenBio says who they are, never age or home (the row carries those, live). The story, not the data: "I dont want 22 media crons citing data from the sheets to me … whats the story" — records lead with people and power; interviews return the citizen's own view.
+- 2026-11-24 (research-build) — Interviews fixed for every seat-file seat (the reporter's plan and others' record lines no longer reach the citizen; officials get the reporter's own question). Jax live on a people-first record.
 - 2026-11-24 (research-build) — Watch row pipeline.117 (builder: "add a watch line on rollout for this"): do Carmen, Luis and Farrah keep landing on one civic story; read Thu 11-26 and Tue 12-01.
 - 2026-11-24 (research-build) — Farrah seated: the opinion column on Thursdays, reading the week as published. A new seat needs persona-map, package, WEEK_GRID, WRITER_TOOLS_SEATS, both BEAT_BUILDERS, an agent folder naming the voice file, and the test lists; GODWORLD_TEST_NEW_SEAT=1 tests it before its first rota.
 - 2026-11-24 (research-build) — Luis on Haiku 5.5 (builder: different model, different voice from Carmen); bio written to his CitizenBio cell.

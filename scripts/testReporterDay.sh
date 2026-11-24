@@ -43,7 +43,7 @@ for (const file of files) {
   if (!assignment) continue;
   const checked = require('./scripts/newsroomWakePackages').gateAssignments([assignment]);
   if (!checked.eligible.length) continue;
-  process.stdout.write(JSON.stringify({ file, date: fanout.date, cycle: fanout.cycle, assignment: checked.eligible[0] }));
+  fs.writeSync(1, JSON.stringify({ file, date: fanout.date, cycle: fanout.cycle, assignment: checked.eligible[0] }));   // sync: past 64 KB a pipe is cut at exit
   process.exit(0);
 }
 // GODWORLD_TEST_NEW_SEAT=1 (pipeline.111, 2026-11-24): a seat that has never been on a rota (Farrah Del Rio) gets its
@@ -72,13 +72,15 @@ process.exit(1);
 NODE
 )"
 
-FANOUT_FILE="$(/usr/bin/node -e 'process.stdout.write(JSON.parse(process.argv[1]).file)' "$ASSIGNMENT_SOURCE")"
-DATE="$(/usr/bin/node -e 'process.stdout.write(JSON.parse(process.argv[1]).date)' "$ASSIGNMENT_SOURCE")"
-CYCLE="$(/usr/bin/node -e 'process.stdout.write(String(JSON.parse(process.argv[1]).cycle))' "$ASSIGNMENT_SOURCE")"
+# A whole-record assignment passes the kernel's argument limit (Ines: 501 roster lines), so it rides in a file.
+ASSIGN_JSON="$(mktemp)"; printf '%s' "$ASSIGNMENT_SOURCE" > "$ASSIGN_JSON"
+FANOUT_FILE="$(/usr/bin/node -e 'process.stdout.write(JSON.parse(require("fs").readFileSync(process.argv[1], "utf8")).file)' "$ASSIGN_JSON")"
+DATE="$(/usr/bin/node -e 'process.stdout.write(JSON.parse(require("fs").readFileSync(process.argv[1], "utf8")).date)' "$ASSIGN_JSON")"
+CYCLE="$(/usr/bin/node -e 'process.stdout.write(String(JSON.parse(require("fs").readFileSync(process.argv[1], "utf8")).cycle))' "$ASSIGN_JSON")"
 # GODWORLD_TEST_CYCLE (pipeline.111, 2026-11-22): run the saved assignment on a newer Cycle's record (a seat that picks its own story
 # ignores the assignment's story; the beat dump is one Cycle at a time).
 CYCLE="${GODWORLD_TEST_CYCLE:-$CYCLE}"
-CONTRACT="$(/usr/bin/node -e 'process.stdout.write(String(JSON.parse(process.argv[1]).assignment.packetContract || ""))' "$ASSIGNMENT_SOURCE")"
+CONTRACT="$(/usr/bin/node -e 'process.stdout.write(String(JSON.parse(require("fs").readFileSync(process.argv[1], "utf8")).assignment.packetContract || ""))' "$ASSIGN_JSON")"
 STAMP="$(date +%Y%m%d-%H%M%S)-${PERSONA}-day-${VARIANT}-$$"
 SHELL_DIR="$ROOT/output/test-shell/$STAMP"
 mkdir -p "$SHELL_DIR/samples" "$SHELL_DIR/staged" "$SHELL_DIR/flagged"
@@ -87,9 +89,9 @@ mkdir -p "$SHELL_DIR/samples" "$SHELL_DIR/staged" "$SHELL_DIR/flagged"
 # angle/packet/state files are deliberately excluded: this run produces them.
 cp -p "$LIVE/$FANOUT_FILE" "$SHELL_DIR/"
 find "$LIVE" -maxdepth 1 -type f -name "*_slice_c${CYCLE}.*" -exec cp -p {} "$SHELL_DIR/" \;
-/usr/bin/node - "$ASSIGNMENT_SOURCE" "$SHELL_DIR/assignment.json" <<'NODE'
+/usr/bin/node - "$ASSIGN_JSON" "$SHELL_DIR/assignment.json" <<'NODE'
 const fs = require('fs');
-const data = JSON.parse(process.argv[2]);
+const data = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
 fs.writeFileSync(process.argv[3], JSON.stringify(data.assignment, null, 2) + '\n');
 NODE
 

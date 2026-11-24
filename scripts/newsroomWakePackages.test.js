@@ -10,7 +10,9 @@ assert.deepStrictEqual(active.map(row => row.key),
 
 // pipeline.60 — Nia Rook's UNDOCKED show seat (own desk key, feed-built lane)
 const nia = packages['nia-rook'];
-assert.equal(nia.version, 'NIAROOK-UNDOCKED-2');
+assert.equal(nia.version, 'NIAROOK-UNDOCKED-3');
+assert.equal(nia.seatFile, '.claude/agents/nia-rook/SEAT.md');   // pipeline.111 (builder 2026-11-24): what the show is and how the board works, no scripted voice
+assert.equal(nia.reviewProfile.articleContract.opening, undefined);
 assert.equal(nia.active, true);
 assert.equal(nia.requiredDaily, true);
 assert.equal(nia.assignment.desk, 'undocked');
@@ -24,7 +26,8 @@ assert.equal(nia.reviewProfile.canonPolicy, 'load-bearing');
 // of activeRotaCandidates() / rotaPool below), dispatched by direct
 // --persona invocation on its own Saturday-morning crontab triple.
 const niaWeekly = packages['nia-rook-weekly'];
-assert.equal(niaWeekly.version, 'NIAROOK-UNDOCKED-WEEKLY-2');
+assert.equal(niaWeekly.version, 'NIAROOK-UNDOCKED-WEEKLY-3');
+assert.equal(niaWeekly.seatFile, '.claude/agents/nia-rook/SEAT.md');
 assert.equal(niaWeekly.active, true);
 assert.equal(niaWeekly.requiredDaily, false);
 assert.equal(niaWeekly.assignment.desk, 'undocked-digest');
@@ -108,6 +111,11 @@ assert.equal(farrah.seatReasoning, 'medium');
 assert.equal(farrah.assignment.popid, 'POP-00161');
 assert.deepStrictEqual(farrah.reviewProfile.textureConditions, []);
 
+// pipeline.111 (builder 2026-11-24): Tamsin and Ines on seat files; the scripted opening, closing and voice off
+assert.equal(packages['tamsin-pruitt'].seatFile, '.claude/agents/tamsin-pruitt/SEAT.md');
+assert.equal(packages['ines-sorensen'].seatFile, '.claude/agents/ines-sorensen/SEAT.md');
+assert.equal(packages['ines-sorensen'].reviewProfile.articleContract.opening, undefined);
+
 const trevor = packages['trevor-shimizu'];
 assert.equal(trevor.version, 'TREVOR-LEP2-3');
 assert.equal(trevor.requiredDaily, true);
@@ -186,7 +194,7 @@ const seats = Object.entries(packages).filter(([, v]) => v && v.persona);
 assert(seats.length >= 25);
 assert.deepStrictEqual(seats.filter(([, v]) => v.rewardLoop !== true).map(([k]) => k), []);
 assert.throws(() => packagesApi.validatePackage(marbury.persona, Object.assign({}, marbury, { rewardLoop: 'yes' })), /rewardLoop/);
-assert.deepStrictEqual(Object.entries(packages).filter(([, v]) => v && v.writerTools).map(([k]) => k), ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'anthony-raines', 'elliot-marbury', 'hal-richmond', 'maria-keen', 'elliot-graye', 'mason-ortega', 'sharon-okafor', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'noah-tan', 'nia-rook', 'nia-rook-weekly', 'celeste-tran', 'tamsin-pruitt', 'farrah-del-rio']); // registry order; Hal + Anthony: builder 2026-10-19; Jax + Carmen 2026-10-26; the rest 2026-10-27; Sharon 2026-11-21 (pipeline.111)
+assert.deepStrictEqual(Object.entries(packages).filter(([, v]) => v && v.writerTools).map(([k]) => k), ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'anthony-raines', 'elliot-marbury', 'hal-richmond', 'maria-keen', 'elliot-graye', 'mason-ortega', 'sharon-okafor', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'noah-tan', 'nia-rook', 'nia-rook-weekly', 'celeste-tran', 'tamsin-pruitt', 'ines-sorensen', 'farrah-del-rio']); // registry order; Hal + Anthony: builder 2026-10-19; Jax + Carmen 2026-10-26; the rest 2026-10-27; Sharon 2026-11-21 (pipeline.111)
 assert.equal(packages['hal-richmond'].writerTools.maxToolCalls, 6);
 // pipeline.111: Celeste ran without her voice-file Essence ("archived only") and lost her read of why; builder 2026-11-22:
 // "if taking out the voice file made her not sound like herself you can put it back" — it is back. The switch stays for any seat.

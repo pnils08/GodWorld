@@ -73,8 +73,8 @@ try {
   assert.ok(late && /1 page; latest the evening page, C110: /.test(late.text) && !/new since/.test(late.text), 'the old page is on the roster, not marked new; the short line is not a page');
   assert.ok(day1.story.ref.endsWith(' ' + L.dayToken(day1.day)), 'the ref carries a per-day token, never a wall-clock date (builder 2026-10-28)');
   assert.deepStrictEqual(day1.prewrite.pageVoices, []);
-  assert.ok(/pick whoever you want/i.test(day1.story.hookLine));
-  assert.ok(/not your assignment/.test(day1.approach) && /every citizen with a self-initiated page on the record/.test(day1.approach));
+  assert.equal(day1.story.hookLine, '');   // pipeline.111 (builder 2026-11-24): no format or opening handed to her
+  assert.ok(!/own line|verbatim|pick whoever|plain clause|passages/i.test(day1.approach), 'no format in the approach (only the kit\'s facts line)');
   // Building the roster chooses nothing and remembers nothing.
   assert.ok(!fs.existsSync(V.coveredPath(root)), 'building the slice writes no covered file');
   // A page from before the window is still on the roster, marked as not new.
@@ -123,7 +123,7 @@ try {
     assert.ok(/Test Debater, Bus Driver, Fruitvale \(POP-90007\) — 1 page; latest in a debate, C111; new since your last piece: “I said it at the forum/.test(text), text);
     assert.ok(/\(POP-90008\) — 1 page; latest to a reporter, a question they carry, C111; new since your last piece: “Who decides whether the clinic/.test(text), text);
     assert.ok(/\(POP-90001\) — 3 pages;/.test(text) && /\(POP-90005\) — 2 pages;/.test(text), 'the PRESS reply and the question count as their pages');
-    assert.ok(/every citizen with a page on the record/.test(all.approach) && !/self-initiated/.test(all.approach), 'the approach names the rule this build ran (codex F4)');
+    assert.ok(!/own line|verbatim|plain clause|passages/i.test(all.approach), 'no format in the approach (pipeline.111)');
     const picks = V.pagesForPicks(['POP-90001', 'POP-90005'], { root: everyRoot, profiles, everyPage: true });
     assert.deepStrictEqual(picks.map(f => f.docId), ['p1', 'p1b', 'p5', 'p6', 'p7']);
     const q = picks.find(f => f.docId === 'p7').text;

@@ -1102,7 +1102,7 @@
     }
   },
   "nia-rook": {
-    "version": "NIAROOK-UNDOCKED-2",
+    "version": "NIAROOK-UNDOCKED-3",
     "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
@@ -1118,7 +1118,7 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-4-maverick"
+        "model": "openai/gpt-6-luna"
       },
       "report": {
         "provider": "openrouter",
@@ -1138,10 +1138,7 @@
       "purpose": "Turn a gate-approved UNDOCKED episode into the city's entertainment conversation — who's up, who's down, what Oakland argues about tomorrow. Arc-tracking recap energy; personality-forward. NOT hard news, NOT sports analytics, NOT civic process.",
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
-        "voice": "third-person recap with first-person flashes — entertainment beat, having fun on purpose",
-        "targetWords": "350-600",
-        "opening": "the episode's consequence for the pilot or the board",
-        "closing": "the unresolved show question or next consequence"
+        "targetWords": "evidence-bounded"
       },
       "authorizedTexture": [
         "an in-world bar, watch-party, break-room, bus, or sidewalk setting where the city watches or argues; a new named business goes on INTAKE BIZ",
@@ -1172,10 +1169,11 @@
         "captains_log",
         "leaderboard math not present in the supplied facts"
       ]
-    }
+    },
+    "seatFile": ".claude/agents/nia-rook/SEAT.md"
   },
   "nia-rook-weekly": {
-    "version": "NIAROOK-UNDOCKED-WEEKLY-2",
+    "version": "NIAROOK-UNDOCKED-WEEKLY-3",
     "rewardLoop": true,
     "active": true,
     "requiredDaily": false,
@@ -1191,7 +1189,7 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-4-maverick"
+        "model": "openai/gpt-6-luna"
       },
       "report": {
         "provider": "openrouter",
@@ -1211,10 +1209,7 @@
       "purpose": "Turn the week's UNDOCKED episodes into one leaderboard/digest naming every pilot who flew — not a single-episode recap. Standings-forward: rank, streaks, who's climbing, who's fading, what the whole cast looked like this week.",
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
-        "voice": "third-person leaderboard recap — entertainment-beat energy, ranking-and-recap format",
-        "targetWords": "350-650",
-        "opening": "the week's cast and its consequence for the board",
-        "closing": "what the week's board leaves open next"
+        "targetWords": "evidence-bounded"
       },
       "authorizedTexture": [
         "an in-world bar, watch-party, break-room, bus, or sidewalk setting where the city watches or argues; a new named business goes on INTAKE BIZ",
@@ -1246,7 +1241,8 @@
         "captains_log",
         "leaderboard math beyond the supplied Standings/pilot facts"
       ]
-    }
+    },
+    "seatFile": ".claude/agents/nia-rook/SEAT.md"
   },
   "selena-grant": {
     "version": "SELENA-OAKS-2",
@@ -1426,7 +1422,7 @@
     }
   },
   "tamsin-pruitt": {
-    "version": "TAMSIN-LIVES-2",
+    "version": "TAMSIN-LIVES-3",
     "rewardLoop": true,
     "gate": "off",
     "active": true,
@@ -1443,7 +1439,7 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-4-maverick"
+        "model": "anthropic/claude-sonnet-5.5"
       },
       "report": {
         "provider": "openrouter",
@@ -1460,10 +1456,7 @@
       "purpose": "Put the cycle's person events in the paper as news, one person at a time — a birth, a death, a hospital stay, a retirement, a promotion, a household set up or a place of one's own, a win or a loss on the book, what a turn of the city did to someone's day, and the smaller moments the record kept. The event is the lead, the person is named as the slice names them, and what came next appears only when a later record holds it. A stake or a payout is the person's own fact, not a statistic. The page is the city's real calendar; every person on it is one the record holds.",
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
-        "voice": "plain respect — a neighborhood weekly's births-and-obituaries hand, unhurried, exact",
-        "targetWords": "450-1200",
-        "opening": "the heaviest event on the slice, stated as it happened to the named person",
-        "closing": "the last person's passage ends on what the record holds next for them, or on the fact itself — no moral, no roundup"
+        "targetWords": "evidence-bounded"
       },
       "authorizedTexture": [
         "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
@@ -1488,10 +1481,11 @@
     },
     "writerTools": {
       "maxToolCalls": 6
-    }
+    },
+    "seatFile": ".claude/agents/tamsin-pruitt/SEAT.md"
   },
   "ines-sorensen": {
-    "version": "INES-VOICES-1",
+    "version": "INES-VOICES-2",
     "rewardLoop": true,
     "gate": "off",
     "active": true,
@@ -1509,7 +1503,7 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-4-maverick"
+        "model": "anthropic/claude-sonnet-5.5"
       },
       "report": {
         "provider": "openrouter",
@@ -1526,10 +1520,7 @@
       "purpose": "Carry what citizens wrote on their own pages into the paper, verbatim and attributed, the day it happened — the line first, then the name, the city only as the frame. Up to four people and one conversation; nothing paraphrased, nothing added.",
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
-        "voice": "a call-in host's ear — the person's own words first, the frame short and plain",
-        "targetWords": "300-600",
-        "opening": "a citizen's own line, verbatim, before their name",
-        "closing": "the last person's own words, left standing — no summary of what the voices add up to"
+        "targetWords": "evidence-bounded"
       },
       "authorizedTexture": [
         "the frame around a quote — who the person is as the ledger line says, where they live, what the page was about",
@@ -1550,6 +1541,10 @@
         "a journalist or masthead member quoted as a citizen",
         "raw engine labels or decimals printed as public-facing evidence"
       ]
+    },
+    "seatFile": ".claude/agents/ines-sorensen/SEAT.md",
+    "writerTools": {
+      "maxToolCalls": 6
     }
   },
   "farrah-del-rio": {

@@ -1679,7 +1679,7 @@ function seatReasoning() {
 }
 async function seatMorningPlan(asker, ask, model, maxTokens, cycle) {
   const W = require('./cron-desk-writer');
-  const agentDir = path.join(ROOT, '.claude', 'agents', personaSlugForSeat());
+  const agentDir = path.join(ROOT, '.claude', 'agents', String(personaSlugForSeat()).replace(/-weekly$/, ''));   // Nia's weekly is her own folder
   const noEssence = !!(ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.seatEssence === false);
   const who = await require('./reporterIdentity').reporterIdentity({ popid: asker.popid, agentDir: noEssence ? null : agentDir });
   const system = (who.block ? who.block + '\n\n' : '') + fs.readFileSync(SEAT_FILE, 'utf8').trim() +
@@ -1694,8 +1694,14 @@ async function seatMorningPlan(asker, ask, model, maxTokens, cycle) {
     : name === 'sheet_read' ? W.toolSheetRead(input, { seat: true })   // Cultural_Ledger, as the seat writer reads it
     : name === 'memory_recall' && ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.seatMemory === true ? W.toolMemoryRecall(asker.popid, input)
     : 'unknown tool ' + name;
+  // pipeline.111: Nia keeps her aired-only tools at the morning too (the show's approved history, a citizen, past coverage)
+  const nia = /^nia-rook/.test(personaSlugForSeat());
+  const niaExec = (name, input) => name === 'undocked_history' ? require('./undockedHistory').readHistory(input, Number(cycle))
+    : name === 'citizen_lookup' ? W.toolCitizenLookup({ name: input && input.name })
+    : name === 'canon_recall' ? W.toolCanonRecall(input, Number(cycle)) : 'tool unavailable for Nia Rook';
   const r = await W.openRouterToolLoop({ model, system, user: ask + '\n\nReturn ONLY the JSON requested by packet.output.',
-    maxToolCalls: SEAT_MORNING_CALLS, maxTokens, timeoutMs: 180000, ...(seatReasoning() ? { body: { reasoning: { effort: seatReasoning() } } } : {}), toolset: W.OPENROUTER_TOOLS.concat([W.CANON_RECALL_TOOL, require('./workerAsk').askWorkerTool()], ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.seatMemory === true ? W.MEMORY_TOOLS.filter(t => t.function.name === 'memory_recall') : []), exec, traceResults: true });
+    maxToolCalls: SEAT_MORNING_CALLS, maxTokens, timeoutMs: 180000, ...(seatReasoning() ? { body: { reasoning: { effort: seatReasoning() } } } : {}), toolset: nia ? [W.UNDOCKED_HISTORY_TOOL, W.OPENROUTER_TOOLS.find(t => t.function.name === 'citizen_lookup'), W.CANON_RECALL_TOOL]
+      : W.OPENROUTER_TOOLS.concat([W.CANON_RECALL_TOOL, require('./workerAsk').askWorkerTool()], ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.seatMemory === true ? W.MEMORY_TOOLS.filter(t => t.function.name === 'memory_recall') : []), exec: nia ? niaExec : exec, traceResults: true });
   if (seatReasoning()) log('morning thinking ' + seatReasoning() + ': ' + (r.thinkingOut || 0) + ' reasoning tokens of ' + r.usageOut + ' out');
   log('morning tools: ' + r.trace.length + ' call(s)' + (r.trace.length ? ' — ' + r.trace.map(c => c.tool + '(' + JSON.stringify(c.input).slice(0, 60) + ')').join('; ') : ''));
   SEAT_MORNING_TRACE = r.trace.map(({ resultHead, ...rest }) => rest);

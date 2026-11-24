@@ -34,10 +34,10 @@ const K = require('./beatSliceKit');
 const SEAT = {
   slug: 'tamsin-pruitt', name: 'Tamsin Pruitt', popid: 'POP-01210', desk: 'culture',
   kind: 'beat-lives', domain: 'lives', artifact: 'lives', builder: 'buildLivesSlice.js',
-  version: 'LIVES-SLICE-2', nameRe: /tamsin\s*pruitt/i,
+  version: 'LIVES-SLICE-3', nameRe: /tamsin\s*pruitt/i,
   tabs: ['Lived_Events', 'LifeHistory_Log', 'Hospital_Ledger', 'Household_Ledger', 'Casino_Ledger', 'Story_Seed_Deck', 'Story_Hook_Deck'],
-  approach: 'Lives approach: this slice is the people something happened to this Cycle — a birth, a death in the house, a hospital stay, a retirement, a promotion; a household set up or a place of their own; a win or a loss on the book; the people a turn of the city reached and what it did to their day; and the smaller moments the record kept. Each person gets their own passage: the event, then the thread under it — the stay or strain that led there, the other lines the record kept for them, what the Tribune or this page already said of them, and what they did next if the record says. Read the thread in order and name where two lines of it do not agree; do not restate a ledger value as the story. The fact exactly right; never a trend, never a number first; the person, not the system the event belongs to.',
-  roomIsYours: 'the plain respect, what the event meant in that house or on that block, the detail the family would have picked — from the lines below, never invented',
+  approach: '',   // pipeline.111 (builder 2026-11-24): no structure or lead handed to her
+  roomIsYours: '',
   build
 };
 
@@ -473,9 +473,9 @@ function build(cycle, { root, beats, profiles }) {
   // (newsroom-fanout.js staleBeatRef) — right for a weekly seat, fatal for a daily one.
   return K.makeSlice(SEAT, cycle, beats, {
     ref: evSrc + ' ' + dayToken(day), hood: leadHood,
-    label,
-    angle: 'The lives of C' + cycle + ': ' + passages.length + ' people — ' + label,
-    hookLine: leadName + ' first. The event is the lead; one true detail; what came next only if the record says.',
+    label: 'the lives of C' + cycle,
+    angle: 'the lives of C' + cycle,
+    hookLine: '',
     facts, people, hooks, pageVoices, factCap: 120, peopleCap: 16,
     deltas: null,
     note: [pending.length > todays.length ? (pending.length - todays.length) + ' more news-grade events wait for the next day' : null,

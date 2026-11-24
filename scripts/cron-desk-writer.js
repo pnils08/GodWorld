@@ -1574,7 +1574,8 @@ async function main() {
       maxToolCalls: PACKET_ONLY && !TOOLS_AB ? WRITER_TOOLS : 6,
       traceResults: TOOLS_AB || WRITER_TOOLS > 0,
       keepResults: WRITER_TOOLS > 0,
-      ...(WRITER_TOOLS ? { toolset: TEST_SEAT ? OPENROUTER_TOOLS.concat([CANON_RECALL_TOOL, require('./workerAsk').askWorkerTool()], SEAT_MEMORY ? MEMORY_TOOLS.filter(t => t.function.name === 'memory_recall') : [])
+      ...(WRITER_TOOLS ? { toolset: TEST_SEAT && isNiaSeat(PERSONA) ? writerToolset(PERSONA, RECALL_ONLY, CANON_RECALL)   // pipeline.111: Nia keeps her aired-only tools
+        : TEST_SEAT ? OPENROUTER_TOOLS.concat([CANON_RECALL_TOOL, require('./workerAsk').askWorkerTool()], SEAT_MEMORY ? MEMORY_TOOLS.filter(t => t.function.name === 'memory_recall') : [])
         : writerToolset(PERSONA, RECALL_ONLY, CANON_RECALL) } : {}),
       forceFirstTool: TOOLS_FORCED,
       cycle,
@@ -1776,6 +1777,7 @@ if (require.main === module) {
 }
 
 module.exports = {
+  UNDOCKED_HISTORY_TOOL,   // pipeline.111: Nia's seat-file morning
   toolMemoryRecall, MEMORY_TOOLS,   // pipeline.111: a seat's own memory (seatMemory)
   toolDossierRead, // pipeline.76
   toolSheetRead,

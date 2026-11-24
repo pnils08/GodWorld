@@ -27,17 +27,17 @@ const K = require('./beatSliceKit');
 const lives = require('./buildLivesSlice');
 
 // The writer's approach names the rule the roster ran (codex pipeline.97 F4).
-function approachFor(every) {
-  return 'Voices approach: this slice is a roster, a tip sheet, not your assignment — every citizen with a ' + (every ? '' : 'self-initiated ') + 'page on the record, one line each. You pick whose own words carry the day, and why. The person\'s own line first, before their name; then who they are in one plain clause; then what in the city they were answering, from the page\'s own tags. Fewer, longer passages; the words are the product. Never a count, never a statistic, never an explanation of what they meant.';
+function approachFor(every) {   // pipeline.111 (builder 2026-11-24): no format handed to her
+  return '';
 }
 
 const SEAT = {
   slug: 'ines-sorensen', name: 'Ines Sorensen', popid: null, desk: 'culture',
   kind: 'beat-voices', domain: 'voices', artifact: 'voices', builder: 'buildVoicesSlice.js',
-  version: 'VOICES-SLICE-2', nameRe: /ines\s*sorensen/i,
+  version: 'VOICES-SLICE-3', nameRe: /ines\s*sorensen/i,
   tabs: [],
   approach: approachFor(lives.EVERY_PAGE),
-  roomIsYours: 'where they were standing when they wrote it, the one plain clause that says who this is, the silence after their last line — never a word inside the quotation marks that is not on the page',
+  roomIsYours: '',
   build
 };
 
@@ -147,8 +147,8 @@ function build(cycle, { root, profiles, now = new Date(), everyPage = lives.EVER
     // the day in the ref: the fanout's staleBeatRef drops a seat whose ref was filed this Cycle
     ref: 'output/citizen_pages/index.jsonl (' + what(everyPage) + 's, whole store) ' + lives.dayToken(day),
     hood: null, label,
-    angle: 'Voices, C' + cycle + ': you pick whose own words carry the day',
-    hookLine: 'Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.',
+    angle: label,
+    hookLine: '',
     facts, people, hooks: [], pageVoices: [],
     deltas: null, factCap: people.length, peopleCap: people.length,
     note: null,

@@ -21,7 +21,8 @@ const WRITER_TOOLS_SEATS = ['elliot-marbury', 'hal-richmond', 'anthony-raines', 
   'noah-tan',   // pipeline.111 (builder 2026-11-23): "Same approach as the rest"
   'mason-ortega',   // pipeline.111 (builder 2026-11-22): "mason next"
   'celeste-tran',   // pipeline.111 (builder 2026-11-22): "celeste next"
-  'farrah-del-rio'   // pipeline.111 (builder 2026-11-24): the opinion column, a new seat
+  'farrah-del-rio',   // pipeline.111 (builder 2026-11-24): the opinion column, a new seat
+  'ines-sorensen'   // pipeline.111 (builder 2026-11-24): "the others look good"
 ];
 // pipeline.76, builder 2026-10-14; Hal + Anthony 2026-10-19; Jax + Carmen 2026-10-26; the rest builder 2026-10-27 ("Luis and all the right question small change we can and set up Tamsin")
 

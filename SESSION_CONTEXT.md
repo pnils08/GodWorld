@@ -4,4 +4,4 @@
 
 **NEXT[research-build]:** pipeline.111 → next seat on the mold (plan §The mold): builder names it; heavier seats next (sports, Carmen, Luis). Engine gaps (hospital discharge, coarse hood arrests, thin weather, business cause) await his word for rows. Hold: engine.350 parked. Push held.
 
-**NEXT[engine-sheet]:** builder names the next job; queued engine.356 (paused), engine.362, engine.363. PROD stages 74–79 smoke at C118 (engine.364/365 reads in their rows). Push held (git): research-build commits stacked.
+**NEXT[engine-sheet]:** engine.356 cut A → bench A1 (lines carrying place: vs stock names left), then A2 activity kinds (plan §The event machine, one task a session). Queued: engine.362, .363. PROD stages 74–79 smoke at C118. Push held (git): research-build commits stacked.

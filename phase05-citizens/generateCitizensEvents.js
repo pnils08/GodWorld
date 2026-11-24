@@ -1096,7 +1096,7 @@ function generateCitizensEvents_(ctx) {
     var beats = TONE_BEATS[tone] || TONE_BEATS.plain;
     var beat = beats[Math.floor(roll() * beats.length)];
 
-    var venue = pickVenue_(neighborhood);
+    var venue = pickVenue_(neighborhood, popId);
     var institution = pickInstitution_(neighborhood);
     var contactName = (contact && contact.name) ? contact.name : "someone familiar";
 
@@ -1121,7 +1121,7 @@ function generateCitizensEvents_(ctx) {
     return {
       text: rendered,
       tone: tone,
-      tags: ["source:template", "tone:" + tone, "source:slotter"]
+      tags: placeTags_(["source:template", "tone:" + tone, "source:slotter"], rendered.indexOf(venue) >= 0 ? venue : null)
     };
   }
 
@@ -1693,10 +1693,29 @@ function generateCitizensEvents_(ctx) {
     return words.join(" ");
   }
 
-  function pickVenue_(neighborhood) {
+  // engine.356 cut A1 (builder 2026-11-24: "events that paint them life as a lived experience and feeds
+  // into the world-view showing real activity"): the place is a business the sim holds — half the time
+  // the citizen's own spot, else another food / retail spot of their hood (S.hoodSpots, Phase5-
+  // BusinessDynamics). lastPlace_ keeps the pick's BIZ_ID for the line's place: tag. A hood with no
+  // spot keeps the hood's texture words (builder: "some vague event are ok").
+  var lastPlace_ = null;
+  function pickVenue_(neighborhood, popId) {
+    lastPlace_ = null;
+    var hk = (neighborhood && S.canonHoods) ? (resolveHoodOrChild_(ctx, neighborhood) || '') : '';
+    var spots = (hk && S.hoodSpots) ? S.hoodSpots[hk] : null;
+    if (spots && spots.length) {
+      var own = popId ? citizenSpotFor_(spots, popId) : null;
+      var sp = (own && roll() < 0.5) ? own : spots[Math.floor(roll() * spots.length)];
+      lastPlace_ = { id: sp.id, name: sp.name };
+      return sp.name;
+    }
     var list = hoodTexturePool_(ctx, neighborhood, CITIZEN_VENUES_BY_CHARACTER_, CITIZEN_VENUES_BESPOKE_, 'generateCitizensEvents_.pickVenue_');
     if (!list.length) return "";
     return list[Math.floor(roll() * list.length)];
+  }
+  function placeTags_(tags, venueName) {
+    if (lastPlace_ && venueName === lastPlace_.name) return mergeTags(tags, ["place:" + lastPlace_.id]);
+    return tags;
   }
 
   function pickInstitution_(neighborhood) {
@@ -3907,7 +3926,7 @@ function generateCitizensEvents_(ctx) {
       var clVenue = "", clUsedContact = false, clWantsPilot = false, clWantsRole = false;
       var clSlots = entry.ledgerLine.slots || [];
       for (var cls = 0; cls < clSlots.length; cls++) {
-        if (clSlots[cls] === "VENUE") clVenue = pickVenue_(neighborhood) || (mem && mem.lastVenue) || "";
+        if (clSlots[cls] === "VENUE") clVenue = pickVenue_(neighborhood, popId) || (mem && mem.lastVenue) || "";
         else if (clSlots[cls] === "CONTACT") clUsedContact = true;
         else if (clSlots[cls] === "PILOT") clWantsPilot = true;
         else if (clSlots[cls] === "PILOTROLE") { clWantsPilot = true; clWantsRole = true; }
@@ -3960,7 +3979,7 @@ function generateCitizensEvents_(ctx) {
       // S329 telemetry: a draw is counted only once it survives compose AND
       // the rendered dedup — i.e. it actually reaches LifeHistory.
       if (entry.eclKey) eclTelemetry.draws[entry.eclKey] = (eclTelemetry.draws[entry.eclKey] || 0) + 1;
-      if (clVenue) { chosenVenue = clVenue; tags = mergeTags(tags, ["venue:local"]); }
+      if (clVenue) { chosenVenue = clVenue; tags = placeTags_(mergeTags(tags, ["venue:local"]), clVenue); }
       if (clUsedContact && contact && contact.popId) tags = mergeTags(tags, ["contactPopId:" + contact.popId]);
     }
 
@@ -3974,7 +3993,7 @@ function generateCitizensEvents_(ctx) {
         chosenVenue = "local"; // for memory tracking
       } else {
         // Fallback to simple template rendering
-        chosenVenue = pickVenue_(neighborhood) || (mem && mem.lastVenue) || "";
+        chosenVenue = pickVenue_(neighborhood, popId) || (mem && mem.lastVenue) || "";
         chosenInstitution = pickInstitution_(neighborhood);
 
         pick = renderTemplate_(pick, {
@@ -3986,16 +4005,16 @@ function generateCitizensEvents_(ctx) {
         tags = mergeTags(tags, ["source:template"]);
       }
       if (contact && contact.popId) tags = mergeTags(tags, ["contactPopId:" + contact.popId]);
-      if (chosenVenue) tags = mergeTags(tags, ["venue:local"]);
+      if (chosenVenue) tags = placeTags_(mergeTags(tags, ["venue:local"]), chosenVenue);
     } else if (neighborhood && !chosenVenue && !spotTag_(tags) && !eveningNamedTag_(tags) && chanceHit(0.12)) {
       // !chosenVenue: a ledger line that filled $VENUE already carries its
       // venue — don't append a second one. "" for every other non-template
       // line, so pre-ledger rng sequence is unchanged (Task 11). A spot line
       // (engine.214 Cut C) names its own place too.
-      chosenVenue = pickVenue_(neighborhood);
+      chosenVenue = pickVenue_(neighborhood, popId);
       if (chosenVenue) {
         pick = pick + " near " + chosenVenue;
-        tags = mergeTags(tags, ["venue:local"]);
+        tags = placeTags_(mergeTags(tags, ["venue:local"]), chosenVenue);
       }
     }
 

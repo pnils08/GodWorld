@@ -151,7 +151,7 @@ Repair, not replace (builder 2026-11-24): each cut repairs the code it touches; 
 
 | # | Task | Status |
 |---|---|---|
-| A1 | Where: a real place of the moment's kind in the citizen's hood (their spot first, then a `S.hoodSpots` / Business_Ledger business by sector), in place of `pickVenue_`'s stock pool — the `$VENUE` fill and the " near " tail; the line carries `place:<BIZ_ID>` | not started |
+| A1 | Where: a real place of the moment's kind in the citizen's hood (their spot first, then a `S.hoodSpots` / Business_Ledger business by sector), in place of `pickVenue_`'s stock pool — the `$VENUE` fill and the " near " tail; the line carries `place:<BIZ_ID>` | built, not benched — `pickVenue_` takes the citizen's spot half the time, else another `S.hoodSpots` business of the hood; `place:<BIZ_ID>` on the $VENUE, template and " near " lines; a hood with no spot keeps its texture words; 28 citizen-event test suites pass |
 | A2 | What: each ECL pool's activity kind (meal, drink, errand, shift, service, game, visit, walk, rest), held by PoolKey, so the place matches the moment | not started |
 | A3 | With: the second person from bonds, coworkers (same employer on Employment_Roster) and neighbors (same household or block); the line carries `contactPopId:` as today | not started |
 | A4 | When: the daypart on the line | not started |
@@ -210,3 +210,4 @@ Vague lines stay where they fit (builder: "some vague event are ok"); a line get
 
 - 2026-11-24 (engine-sheet) — Bond wiring read; cut order A (composer), B (shared moments feed bonds), C (the day readable) written for his go.
 - 2026-11-24 (engine-sheet) — Builder's go on cut A, verbatim; cut A split into six tasks, one a session.
+- 2026-11-24 (engine-sheet) — A1 built (places from the sim's businesses, `place:` tag). Next session: bench A1 (count lines carrying `place:` and the stock names left), then A2.

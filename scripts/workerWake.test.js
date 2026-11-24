@@ -120,7 +120,7 @@ test('gatherMemory: a failed read is no memory this wake, not an error', async (
 test('buildWake, the chief on his own wake, lean: who he is, his job, his memory; this Cycle of his records, the patrol table whole; his decisions; the weekly report last', async () => workspace(async (root) => {
   writeMoves(root, 114, [{ moveId: 'MV-114-a', cycle: 114, popid: 'POP-00136', type: 'patrol', status: 'pending', at: '2026-11-05T00:00:00Z', payload: { strategy: 'suppress_hotspots', note: 'x' } }]);
   const w = await ww.buildWake({ officeId: 'CHIEF-POLICE', cycle: 115, officeMap: OFFICE_MAP, deps: deps(root) });
-  assert.match(w.system, /^You are Rafael Montez\. You hold the office of Police Chief\. Your temperament: steady\.\n\nYou run the city's police department\. Your job is to answer for the city's crime and policing — [^\n]*the patrol strategy you set — when the Mayor, the council or the press ask, and in your weekly report on the record\.\n\nFrom your own memory:\n- \(Cycle 115\)/);
+  assert.match(w.system, /^You are Rafael Montez\. You hold the office of Police Chief\. Your temperament: steady\.\n\nYou run the city's police department\. Your job is to answer for the city's crime and policing — [^\n]*the patrol strategy you set — when the Mayor, the council or the press ask, and in your weekly report on the record\. You answer from your records and from what you read with your tools; what they do not hold, you say they do not hold\.\n\nFrom your own memory:\n- \(Cycle 115\)/);
   assert.equal(w.lean, true);
   assert.ok(!/\d{4}-\d{2}-\d{2}/.test(w.system), 'no calendar date in the system turn');
   assert.ok(!w.user.includes('.claude/agents'), 'no folder path in the user turn');

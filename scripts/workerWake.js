@@ -556,6 +556,10 @@ const JOBS = {
   'CULTURE-DIR': 'You are the Director of Cultural Affairs. Your job is to answer for the city\'s culture — its artists and names, the venues, bars, galleries, theaters and studios, the arts programs, and the culture, festival and celebrity events — when the Mayor, the council or the press ask.',
   'CLERK-01': 'You are the City Clerk. Your job is to answer for the city\'s record — every initiative and its votes, every office and who holds it, every decision and statement the city\'s offices put on the record, and what the Tribune has printed on them — when the Mayor, the council or the press ask.',
 };
+// Every worker's job is the integrity of their record (builder 2026-11-24: "The job is data integrity as it's an agent built
+// to be that … there was never a ruling I made that allowed the to make up data"). Found: the superintendent's first ask
+// named a neighborhood the city does not have and a figure no record holds. A job line, said the same for all of them.
+const RECORD_DUTY = 'You answer from your records and from what you read with your tools; what they do not hold, you say they do not hold.';
 const isLean = (officeId) => Object.prototype.hasOwnProperty.call(JOBS, String(officeId || ''));
 // The weekly report is made against the last one (builder 2026-11-16, on a quiet week: "2" — report against the last
 // report). With no last report on file, it is made on this Cycle alone.
@@ -623,7 +627,7 @@ async function buildWake(opts) {
   const memory = await gatherMemory(office.popid, question || fill.key, o.deps);
   const decisions = pastDecisions(office.popid, office.agentDir, o.deps);
   const last = lean && !question ? lastReport(office.agentDir, o.date || new Date().toISOString().slice(0, 10), o.deps) : null;
-  const system = [who.line].concat(lean ? ['', JOBS[o.officeId]] : [], memory.entries.length ? ['', 'From your own memory:', ...memory.entries.map((m) => '- (' + m.when + ') ' + m.text)] : []).join('\n');
+  const system = [who.line].concat(lean ? ['', JOBS[o.officeId] + ' ' + RECORD_DUTY] : [], memory.entries.length ? ['', 'From your own memory:', ...memory.entries.map((m) => '- (' + m.when + ') ' + m.text)] : []).join('\n');
   const user = [
     ...fill.blocks.map((b) => b.title + ':\n' + b.text),
     'What you have decided and said on the record:\n' + (decisions.length

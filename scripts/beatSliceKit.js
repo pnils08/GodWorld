@@ -581,10 +581,16 @@ function custodyNamesByHood(judicialRows, profiles) {
   }
   return m;
 }
-function careNamesByHood(hospitalRows, profiles) {
+function careNamesByHood(hospitalRows, profiles, cycle) {
   const m = new Map();
   for (const r of hospitalRows || []) {
-    if (!HOSPITAL_OPEN_STATES.test(String(r.StatusNow || '').trim()) || !r.Name) continue;
+    if (!r.Name) continue;
+    // engine.364: a stay is in care by its Cycles (admitted by, not yet discharged at, the Cycle), the
+    // same rule the health slice's patient lines use; with no Cycle given, by the open states as before.
+    if (cycle != null) {
+      const adm = num(r.AdmitCycle), dis = num(r.DischargeCycle);
+      if (!((adm == null || adm <= cycle) && (dis == null || dis > cycle))) continue;
+    } else if (!HOSPITAL_OPEN_STATES.test(String(r.StatusNow || '').trim())) continue;
     const k = hoodKey(r.Neighborhood);
     if (!m.has(k)) m.set(k, []);
     m.get(k).push(String(r.Name).trim());

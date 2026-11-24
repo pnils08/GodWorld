@@ -37,8 +37,9 @@ var CARE_JUSTICE_ADMIT_CARRY_PLACES = 1e6;
 function careJusticeAdmitCarryIn_(carried, hood) {
   var hoods = carried && carried.hoods;
   if (!hoods || !hoods.hasOwnProperty(hood)) return null;
-  var v = Number(hoods[hood]);
-  if (hoods[hood] === '' || hoods[hood] === null || !isFinite(v) || v < 0 || v >= 1) {
+  var v = hoods[hood];
+  // A carried value is a number the save wrote; anything else (a string, false, []) is a lost carry, not 0.
+  if (typeof v !== 'number' || !isFinite(v) || v < 0 || v >= 1) {
     throw new Error('careJusticeDemand: carried admission fraction for ' + hood + ' must be in [0, 1), got ' + hoods[hood]);
   }
   return v;

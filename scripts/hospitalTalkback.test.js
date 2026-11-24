@@ -221,6 +221,9 @@ function makeSS(sheets) {
   assert('C: deceased citizen released deceased-reconciled',
     rows[2][8] === 102 && rows[2][9] === 'deceased-reconciled',
     'DischargeCycle=' + rows[2][8] + ' Outcome=' + rows[2][9]);
+  assert('C: engine.364 a released stay reads discharged / deceased, never the citizen status',
+    rows[1][6] === 'discharged' && rows[2][6] === 'deceased',
+    'StatusNow=' + rows[1][6] + ' / ' + rows[2][6]);
   assert('C: hospitalized citizen stays open',
     rows[3][8] === '' && rows[3][9] === '',
     'DischargeCycle=' + rows[3][8] + ' Outcome=' + rows[3][9]);

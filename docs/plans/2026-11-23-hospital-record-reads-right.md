@@ -59,6 +59,7 @@ Earlier the same day, on pipeline.111: "only tracked citizens show up in beds an
 | Review | Lane | Pointer | Result |
 |---|---|---|---|
 | advisor | es | in-session 2026-11-23 | read-only: verify the cause against `72165640a`; leave the health slice's old-stay choice to its owner; carry on its own key; 0.5 start |
+| agy adversarial diff read | agy | [[../../output/antigravity/2026-11-24-review-engine364]] | SHIP-WITH-FIXES: F1, F3, F4 folded; F2 held |
 
 ### Agreed
 
@@ -66,6 +67,9 @@ Earlier the same day, on pipeline.111: "only tracked citizens show up in beds an
 |---|---|---|---|
 | A1 | Carry on its own carry-forward key, never inside PREV_CYCLE_STATE_JSON (sits ~8.2 KB of 9 KB) | es · advisor | `finalizeCycleState.js` savePreviousCycleState_ comment (engine.219) |
 | A2 | Every reader keys on DischargeCycle whatever the stamp, since the three old rows keep `active` | es · advisor | this plan §What was read |
+| A3 | The health slice's census names (`beatSliceKit.js` careNamesByHood) key on the stay's Cycles, as its patient lines do | es · agy | review F1; `buildHealthSlice.js` passes the Cycle |
+| A4 | A carried value that is not a number in [0, 1) throws (it coerced `false`/`[]`/blank to 0) — engine file, rides the engine.365 bench + push | es · agy | review F3; `careJusticeService.test.js` 364c |
+| A5 | Tests: carry start = rounding, carry crossing one, bad carry throws; released stay stamped; quiet-week board; health beat drops a closed stay | es · agy | review F4 |
 
 ### Needs proof
 
@@ -79,6 +83,7 @@ Earlier the same day, on pipeline.111: "only tracked citizens show up in beds an
 |---|---|---|
 | C1 | Arrests (engine.365). C117: arrests = round(incidents × clearance), 1 or 2 in every hood (176 hood-Cycles C110–C117: 117 at 1, 55 at 2, 4 at 3); rounding lost 1.76 of 29.76 (C117) and 3.75 of 27.75 (C116), and court revenue with them. Incidents = (property + violent level) / 2 / 5.5 (`updateCrimeMetrics.js` calculateNeighborhoodCrime_), no population term, every level reverts to the city median: Lake Merritt (611) 6 incidents, Downtown (2,797) 7. OARI diversions subtract from nothing. Builder 2026-11-23: "1 - yes 2 - yes, but there does need to be a mechanism in place for the smaller neighborhood that may run a higher crime rate, I think Dimond is one of the areas we choose to start here, instutions.md may shed some light on how we set out oakland post tech boom, 3 - yes diverted". INSTITUTIONS.md Dimond: "the district still living down a past era … the operation is gone and the name is not. Nothing current, everything remembered" — read against his word at pickup | filed engine.365 |
 | C2 | Closed stays leave Lila's weekly record | adopted, builder 2026-11-23: "yes once they are out of care they should come off the beat" — Task 4 |
+| C3 | `replayCycle` saves every PREV_* carry-forward blob (save gates on dry-run only) and loads the newest carry, not the replayed Cycle's — older than engine.364, every key | held: review F2; a row on the builder's word |
 
 ## Changelog
 
@@ -86,3 +91,4 @@ Earlier the same day, on pipeline.111: "only tracked citizens show up in beds an
 - 2026-11-23 (engine-sheet) — Tasks 1, 2, 4, 5 built. Nine-week dry run on C117 sick counts: week 1 equals rounding hood for hood (city 34); small hoods admit 1 about one week in three; city 32–37 around 34.3. Bench waits on the test unlock.
 - 2026-11-23 (engine-sheet) — Builder: out of care comes off the beat (health slice carries open stays only; C117 renders none of the three); arrests next. Tests around the change pass after the unlock.
 - 2026-11-24 (engine-sheet) — Bench three fires PASS (rounding start, carry admits the four small hoods, ghost-release stamps discharged); LIVE stage 77 @212. agy adversarial review sent (`docs/for-claude-review/2026-11-24-es-brief-agy-engine364.md`).
+- 2026-11-24 (engine-sheet) — agy SHIP-WITH-FIXES verified against the code: F1 (census names by Cycles) and F4 (tests) folded and live with the repo; F3 (carry type check) committed, rides engine.365's bench; F2 (replay saves the carries) held as C3, older than this job.

@@ -57,6 +57,7 @@ var HOSPITAL = [
   { AdmissionId: 'H-C107-POP-99901', POPID: 'POP-99901', Name: 'Test Subject', Neighborhood: 'Nowhere', Cause: 'a test accident', AdmitCycle: '107', StatusNow: 'hospitalized', LastTransitionCycle: '107', DischargeCycle: '', Outcome: '', CyclesInCare: '' },
   { AdmissionId: 'H-C106-POP-99902', POPID: 'POP-99902', Name: 'Dead Fixture', Neighborhood: 'Nowhere', Cause: 'a test fall', AdmitCycle: '106', StatusNow: 'deceased', LastTransitionCycle: '107', DischargeCycle: '107', Outcome: 'deceased', CyclesInCare: '1' },
   { AdmissionId: 'H-C105-POP-99903', POPID: 'POP-99903', Name: 'Old Fixture', Neighborhood: 'Nowhere', Cause: 'a test cold', AdmitCycle: '105', StatusNow: 'recovered', LastTransitionCycle: '105', DischargeCycle: '105', Outcome: 'recovered', CyclesInCare: '1' },
+  { AdmissionId: 'H-C104-POP-99904', POPID: 'POP-99904', Name: 'Closed Active Fixture', Neighborhood: 'Nowhere', Cause: 'a test sprain', AdmitCycle: '104', StatusNow: 'active', LastTransitionCycle: '105', DischargeCycle: '105', Outcome: 'recovered', CyclesInCare: '1' },
 ];
 var FEED = [
   { Cycle: '106', EventType: 'game-result', NamesUsed: 'Other Player (SP)', Stats: 'Other Player/5IP/1ER', 'Team Record': '1-0', PlayerMood: 'calm', Notes: 'A game happened.' },
@@ -72,6 +73,8 @@ var dir = fixtureBeats({ Hospital_Ledger: HOSPITAL, Oakland_Sports_Feed: FEED })
 
   var adm = wake.NODE_BUILDERS['hospital-admissions'](SYNTH_PKG, 107, dir);
   ok(adm && adm.indexOf('Test Subject') >= 0 && adm.indexOf('Old Fixture') < 0, 'hospital-admissions filters on AdmitCycle == cycle');
+  var quiet = wake.NODE_BUILDERS['hospital-admissions'](SYNTH_PKG, 999, dir);
+  ok(quiet && quiet.indexOf('Closed Active Fixture') < 0 && quiet.indexOf('Test Subject') >= 0, 'engine.364: a quiet week lists open stays only — a discharged stay still stamped active is not on the board');
 
   var playerPkg = Object.assign({}, SYNTH_PKG, { dataNodes: ['sports-player'], playerName: 'Test Ballplayer' });
   var sp = wake.NODE_BUILDERS['sports-player'](playerPkg, 107, dir);

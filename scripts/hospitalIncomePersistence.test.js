@@ -469,6 +469,7 @@ check('T6 discharge restores hospital P casing and closes its row', () => {
   assert.strictEqual(receipt.to, 'Retired');
   assert.strictEqual(hospital.rows[1][8], 8002);
   assert.strictEqual(hospital.rows[1][9], 'recovered');
+  assert.strictEqual(hospital.rows[1][6], 'discharged'); // engine.364: the stay's own state, not the carried 'Retired'
 });
 // engine.283: a discharge to a carried prior is still a discharge — cause and
 // start clear, the recovery counts (the Logger line is the counter's only reader).

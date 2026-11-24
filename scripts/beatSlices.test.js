@@ -69,7 +69,8 @@ function writeDump(dir, cycle) {
     ],
     Hospital_Ledger: [
       { POPID: 'POP-90003', Name: 'Test Clinic Patient', Neighborhood: 'Temescal', Cause: 'a workplace accident', AdmitCycle: String(cycle), StatusNow: 'critical' },
-      { POPID: 'POP-90002', Name: 'Test Pro Athlete', Neighborhood: 'Downtown', Cause: 'a slide', AdmitCycle: String(cycle), StatusNow: 'recovering' }
+      { POPID: 'POP-90002', Name: 'Test Pro Athlete', Neighborhood: 'Downtown', Cause: 'a slide', AdmitCycle: String(cycle), StatusNow: 'recovering' },
+      { POPID: 'POP-90009', Name: 'Test Discharged Patient', Neighborhood: 'Temescal', Cause: 'a fall', AdmitCycle: String(cycle - 5), StatusNow: 'active', DischargeCycle: String(cycle - 3), Outcome: 'recovered' }
     ],
     Health_Cause_Queue: [
       { POPID: 'POP-90007', Name: 'Test Queue Patient', Status: 'recovering', StatusStartCycle: '102', CyclesSick: '2', Neighborhood: 'Chinatown', Age: '67', AssignedCause: 'car accident', Processed: '' },
@@ -299,6 +300,7 @@ try {
   ok('queue fossil (StatusStartCycle 0) never rides', !JSON.stringify(h).includes('Test Fossil Patient'));
   ok('processed queue row never rides', !JSON.stringify(h).includes('Test Processed Patient'));
   ok('pipeline.73: the athlete on the hospital record is named — citizens are citizens', h.citizens.some(c => c.popid === 'POP-90002' && c.why === 'on Hospital_Ledger this cycle'));
+  ok('engine.364: a stay out of care comes off the beat (builder: "once they are out of care they should come off the beat")', !JSON.stringify(h).includes('Test Discharged Patient'));
   ok('no prev/ → typed state', h.prewrite.deltas.state === 'NO_PRIOR_CYCLE');
   ok('world-summary Health resident joins the slice', h.citizens.some(c => c.popid === 'POP-90004' && c.role === 'Bus Operator') &&
     h.facts.some(f => /Test Seasonal Resident dealt with a seasonal health concern/.test(f.text) && /world_summary_c103\.md/.test(f.src)));

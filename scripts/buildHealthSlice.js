@@ -151,7 +151,7 @@ function build(cycle, { root, beats, profiles }) {
   // off the hospital record or an explicit "none tracked".
   const trail = K.censusTrail(beats.Care_Justice_Census, cycle, 'hospital', {
     demandByHood: new Map(demo.map(r => [K.hoodKey(r.hood), r.sick])),
-    namesByHood: K.careNamesByHood(beats.Hospital_Ledger, profiles)
+    namesByHood: K.careNamesByHood(beats.Hospital_Ledger, profiles, cycle)
   });
   // pipeline.111 (builder 2026-11-23): every hood's hospital line, not the top five — a hood the census puts at zero
   // reads as a zero from the record, never as an absence the reporter fills ("no one in KONO is going to the hospital").

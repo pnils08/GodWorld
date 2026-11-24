@@ -183,6 +183,32 @@ if (require.main === module) {
       d.hoods.Fruitvale.hospitalIntakes === 0 && d.city.hospitalIntakes === 0 &&
       Math.round(d.city.sick * 0.02) === 9);
   }
+  // engine.364: the carried fraction. 20 sick × 0.02 = 0.4 a hood.
+  {
+    const c = ctx();
+    c.config.careJusticeAdmitPerSick = 0.02;
+    const d = service.runCareJusticeDemand_(c);
+    check('364a nothing carried: every hood starts at 0.5 (= rounding) and carries 0.9',
+      Object.keys(d.hoods).every(h => d.hoods[h].hospitalIntakes === Math.round(20 * 0.02) &&
+        d.hoods[h].hospitalCarryIn === 0.5 && d.hospitalCarry.hoods[h] === 0.9) &&
+      d.methodVersion === 'demand-v2');
+    const c2 = ctx();
+    c2.config.careJusticeAdmitPerSick = 0.02;
+    c2.summary.previousHospitalAdmitCarry = { cycle: 99, hoods: d.hospitalCarry.hoods };
+    const d2 = service.runCareJusticeDemand_(c2);
+    check('364b the carry crosses one: 0.9 + 0.4 admits 1 and carries 0.3, city sums the hoods',
+      Object.keys(d2.hoods).every(h => d2.hoods[h].hospitalIntakes === 1 && d2.hospitalCarry.hoods[h] === 0.3) &&
+      d2.city.hospitalIntakes === Object.keys(d2.hoods).length);
+    const bad = [1, -0.1, '0.3', false, [], '   ', null, NaN];
+    const throwsFor = bad.filter(v => {
+      const cb = ctx();
+      cb.config.careJusticeAdmitPerSick = 0.02;
+      cb.summary.previousHospitalAdmitCarry = { cycle: 99, hoods: { Fruitvale: v } };
+      try { service.runCareJusticeDemand_(cb); return false; } catch (e) { return /carried admission fraction for Fruitvale/.test(e.message); }
+    });
+    check('364c a carried value that is not a number in [0, 1) throws, never reads as 0',
+      throwsFor.length === bad.length, throwsFor.length + ' of ' + bad.length);
+  }
   // 7: forced picker draws match hood and texture picker keeps its uniform path.
   {
     const c = ctx();

@@ -124,7 +124,7 @@
     "seatReasoning": "medium"
   },
   "luis-navarro": {
-    "version": "LUIS-LEP2-3",
+    "version": "LUIS-LEP2-4",
     "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
@@ -140,7 +140,7 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "anthropic/claude-sonnet-5.5"
+        "model": "anthropic/claude-haiku-5.5"
       },
       "report": {
         "provider": "openrouter",
@@ -148,7 +148,7 @@
       },
       "write": {
         "provider": "openrouter",
-        "model": "anthropic/claude-sonnet-5.5"
+        "model": "anthropic/claude-haiku-5.5"
       }
     },
     "reviewProfile": {

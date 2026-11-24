@@ -79,7 +79,7 @@ assert.equal(carmen.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
 assert.deepStrictEqual(carmen.reviewProfile.textureConditions, []);
 
 const luis = packages['luis-navarro'];
-assert.equal(luis.version, 'LUIS-LEP2-3');
+assert.equal(luis.version, 'LUIS-LEP2-4');
 assert.equal(luis.seatFile, '.claude/agents/luis-navarro/SEAT.md');   // pipeline.111 (builder 2026-11-24)
 assert.equal(luis.seatReasoning, 'medium');
 assert.equal(luis.requiredDaily, true);
@@ -88,9 +88,9 @@ assert.equal(luis.assignment.name, 'Luis Navarro');
 assert.equal(luis.assignment.popid, 'POP-00636');
 assert.equal(luis.assignment.beatDomain, 'CIVIC');
 assert.equal(luis.packetContract, 'v2');
-assert.equal(packagesApi.routeFor(luis, 'angle').model, 'anthropic/claude-sonnet-5.5');
+assert.equal(packagesApi.routeFor(luis, 'angle').model, 'anthropic/claude-haiku-5.5');   // builder 2026-11-24: "yes to haiku" (a different voice from Carmen's Sonnet)
 assert.equal(packagesApi.routeFor(luis, 'report').model, 'deepseek/deepseek-v4-flash-0731');
-assert.equal(packagesApi.routeFor(luis, 'write').model, 'anthropic/claude-sonnet-5.5');
+assert.equal(packagesApi.routeFor(luis, 'write').model, 'anthropic/claude-haiku-5.5');
 assert.equal(luis.reviewProfile.canonPolicy, 'load-bearing');
 assert.equal(luis.reviewProfile.articleContract.targetWords, 'evidence-bounded');
 assert.deepStrictEqual(luis.reviewProfile.textureConditions, []);

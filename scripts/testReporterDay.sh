@@ -46,6 +46,27 @@ for (const file of files) {
   process.stdout.write(JSON.stringify({ file, date: fanout.date, cycle: fanout.cycle, assignment: checked.eligible[0] }));
   process.exit(0);
 }
+// GODWORLD_TEST_NEW_SEAT=1 (pipeline.111, 2026-11-24): a seat that has never been on a rota (Farrah Del Rio) gets its
+// first assignment the way the fanout would make it — its package's identity, then its own record's enrichment —
+// on the newest saved rota for the cycle. Test shell only.
+if (process.env.GODWORLD_TEST_NEW_SEAT === '1') {
+  const pkgs = require('./scripts/newsroom-wake-packages.json');
+  const pkg = pkgs[persona];
+  const builders = { 'farrah-del-rio': 'buildOpinionSlice' };
+  for (const file of files) {
+    let fanout;
+    try { fanout = JSON.parse(fs.readFileSync(path.join(dir, file), 'utf8')); } catch (_) { continue; }
+    if (requestedCycle && String(fanout.cycle) !== String(requestedCycle)) continue;
+    if (!pkg || !builders[persona]) break;
+    const base = Object.assign({ desk, persona }, pkg.assignment, { persona });
+    const cyc = Number(process.env.GODWORLD_TEST_CYCLE || fanout.cycle);
+    const enriched = require('./scripts/' + builders[persona]).enrichAssignment(base, cyc) || base;
+    const checked = require('./scripts/newsroomWakePackages').gateAssignments([enriched]);
+    if (!checked.eligible.length) break;
+    fs.writeSync(1, JSON.stringify({ file, date: fanout.date, cycle: fanout.cycle, assignment: checked.eligible[0] }));   // sync: a whole-record assignment passes 64 KB, past what process.exit lets a pipe flush
+    process.exit(0);
+  }
+}
 console.error('no saved fanout assignment found for ' + desk + '/' + persona + (requestedCycle ? ' at c' + requestedCycle : ''));
 process.exit(1);
 NODE

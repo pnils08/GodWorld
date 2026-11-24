@@ -50,7 +50,7 @@ const WEEK_GRID = Object.freeze({
   1: ['carmen-delaine', 'business-desk', 'lila-mezran', 'trevor-shimizu', 'anthony-raines', 'tamsin-pruitt'],
   2: ['luis-navarro', 'rachel-torres', 'angela-reyes', 'selena-grant', 'tamsin-pruitt'],
   3: ['freelance-firebrand', 'noah-tan', 'elliot-marbury', 'p-slayer', 'tanya-cruz', 'tamsin-pruitt', 'ines-sorensen'],
-  4: ['elliot-graye', 'simon-leary', 'hal-richmond', 'talia-finch', 'tamsin-pruitt', 'ines-sorensen'],
+  4: ['elliot-graye', 'simon-leary', 'hal-richmond', 'talia-finch', 'farrah-del-rio', 'tamsin-pruitt', 'ines-sorensen'],   // Farrah Thursdays (pipeline.111, 2026-11-24): after Carmen Mon, Luis Tue, Jax Wed
   5: ['mason-ortega', 'kai-marston', 'sharon-okafor', 'maria-keen', 'celeste-tran', 'tamsin-pruitt', 'ines-sorensen']
 });
 function weekdayOf(date) {
@@ -442,6 +442,7 @@ const BEAT_BUILDERS = {
   'business-desk': 'buildEconomySlice',   // pipeline.111 (builder 2026-11-22)
   'carmen-delaine': 'buildCivicSlice',   // pipeline.111 (builder 2026-11-23)
   'luis-navarro': 'buildInvestigationsSlice',   // pipeline.111 (builder 2026-11-24)
+  'farrah-del-rio': 'buildOpinionSlice',   // pipeline.111 (builder 2026-11-24)
   'sharon-okafor': 'buildLifestyleSlice',
   'maria-keen': 'buildNeighborhoodSlice',
   'selena-grant': 'buildOaksBeatSlice',

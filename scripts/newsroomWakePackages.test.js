@@ -6,7 +6,7 @@ const packagesApi = require('./newsroomWakePackages');
 const packages = packagesApi.loadPackages();
 const active = packagesApi.activePackages(packages);
 assert.deepStrictEqual(active.map(row => row.key),
-  ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'p-slayer', 'anthony-raines', 'elliot-marbury', 'hal-richmond', 'tanya-cruz', 'simon-leary', 'maria-keen', 'elliot-graye', 'mason-ortega', 'sharon-okafor', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'noah-tan', 'nia-rook', 'nia-rook-weekly', 'selena-grant', 'talia-finch', 'celeste-tran', 'tamsin-pruitt', 'ines-sorensen']);
+  ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'p-slayer', 'anthony-raines', 'elliot-marbury', 'hal-richmond', 'tanya-cruz', 'simon-leary', 'maria-keen', 'elliot-graye', 'mason-ortega', 'sharon-okafor', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'noah-tan', 'nia-rook', 'nia-rook-weekly', 'selena-grant', 'talia-finch', 'celeste-tran', 'tamsin-pruitt', 'ines-sorensen', 'farrah-del-rio']);
 
 // pipeline.60 — Nia Rook's UNDOCKED show seat (own desk key, feed-built lane)
 const nia = packages['nia-rook'];
@@ -96,6 +96,14 @@ assert.equal(luis.reviewProfile.articleContract.targetWords, 'evidence-bounded')
 assert.deepStrictEqual(luis.reviewProfile.textureConditions, []);
 assert.ok(luis.reviewProfile.canonBlockers.some(v => v.includes('invented response or silence')));
 
+// pipeline.111 (builder 2026-11-24): Farrah Del Rio's opinion column, a new seat on the Sharon mold
+const farrah = packages['farrah-del-rio'];
+assert.equal(farrah.version, 'FARRAH-LEP2-1');
+assert.equal(farrah.seatFile, '.claude/agents/farrah-del-rio/SEAT.md');
+assert.equal(farrah.seatReasoning, 'medium');
+assert.equal(farrah.assignment.popid, 'POP-00161');
+assert.deepStrictEqual(farrah.reviewProfile.textureConditions, []);
+
 const trevor = packages['trevor-shimizu'];
 assert.equal(trevor.version, 'TREVOR-LEP2-3');
 assert.equal(trevor.requiredDaily, true);
@@ -155,7 +163,7 @@ assert.equal(packagesApi.sourcingFor(packages['trevor-shimizu']), 'workplace');
 const modeKeys = {
   offices: ['carmen-delaine', 'luis-navarro', 'rachel-torres'],
   workplace: ['trevor-shimizu', 'angela-reyes', 'mason-ortega', 'business-desk'],
-  named: ['lila-mezran', 'tanya-cruz', 'simon-leary', 'elliot-graye', 'kai-marston', 'nia-rook', 'nia-rook-weekly'],
+  named: ['lila-mezran', 'tanya-cruz', 'simon-leary', 'elliot-graye', 'kai-marston', 'nia-rook', 'nia-rook-weekly', 'farrah-del-rio'],
   street: ['noah-tan', 'freelance-firebrand', 'p-slayer', 'talia-finch', 'maria-keen', 'sharon-okafor', 'celeste-tran', 'tamsin-pruitt', 'ines-sorensen'],
   records: ['anthony-raines', 'elliot-marbury', 'hal-richmond', 'selena-grant'],
 };
@@ -174,7 +182,7 @@ const seats = Object.entries(packages).filter(([, v]) => v && v.persona);
 assert(seats.length >= 25);
 assert.deepStrictEqual(seats.filter(([, v]) => v.rewardLoop !== true).map(([k]) => k), []);
 assert.throws(() => packagesApi.validatePackage(marbury.persona, Object.assign({}, marbury, { rewardLoop: 'yes' })), /rewardLoop/);
-assert.deepStrictEqual(Object.entries(packages).filter(([, v]) => v && v.writerTools).map(([k]) => k), ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'anthony-raines', 'elliot-marbury', 'hal-richmond', 'maria-keen', 'elliot-graye', 'mason-ortega', 'sharon-okafor', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'noah-tan', 'nia-rook', 'nia-rook-weekly', 'celeste-tran', 'tamsin-pruitt']); // registry order; Hal + Anthony: builder 2026-10-19; Jax + Carmen 2026-10-26; the rest 2026-10-27; Sharon 2026-11-21 (pipeline.111)
+assert.deepStrictEqual(Object.entries(packages).filter(([, v]) => v && v.writerTools).map(([k]) => k), ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'anthony-raines', 'elliot-marbury', 'hal-richmond', 'maria-keen', 'elliot-graye', 'mason-ortega', 'sharon-okafor', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'noah-tan', 'nia-rook', 'nia-rook-weekly', 'celeste-tran', 'tamsin-pruitt', 'farrah-del-rio']); // registry order; Hal + Anthony: builder 2026-10-19; Jax + Carmen 2026-10-26; the rest 2026-10-27; Sharon 2026-11-21 (pipeline.111)
 assert.equal(packages['hal-richmond'].writerTools.maxToolCalls, 6);
 // pipeline.111: Celeste ran without her voice-file Essence ("archived only") and lost her read of why; builder 2026-11-22:
 // "if taking out the voice file made her not sound like herself you can put it back" — it is back. The switch stays for any seat.
@@ -561,11 +569,12 @@ const approaches = {
 };
 
 const rotaPool = activeRotaCandidates(packages);
-assert.equal(rotaPool.length, 26); // + elliot-marbury (2026-09-30); + Tamsin Pruitt, Ines Sorensen (pipeline.73, landed 2026-10-19)
+assert.equal(rotaPool.length, 27); // + elliot-marbury (2026-09-30); + Tamsin Pruitt, Ines Sorensen (pipeline.73, landed 2026-10-19); + Farrah Del Rio (pipeline.111, 2026-11-24)
 assert.deepStrictEqual(
   Object.fromEntries(Object.keys(DAILY_QUOTAS).map(desk => [desk,
     rotaPool.filter(row => row.desk === desk).length])),
-  { civic: 8, sports: 8, culture: 7, business: 1, undocked: 1 }); // celeste-tran's desk is 'wire', outside DAILY_QUOTAS' known buckets; Tamsin + Ines are culture (COMMUNITY)
+  { civic: 9,   // + Farrah Del Rio (pipeline.111, 2026-11-24)
+  sports: 8, culture: 7, business: 1, undocked: 1 }); // celeste-tran's desk is 'wire', outside DAILY_QUOTAS' known buckets; Tamsin + Ines are culture (COMMUNITY)
 
 // The daily selector supplies at most the declared 2/2/1/1 seats. The package
 // gate normalizes those selected identities but cannot insert the other active

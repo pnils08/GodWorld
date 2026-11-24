@@ -174,5 +174,11 @@
     "popid": "POP-01211",
     "beatDomain": "COMMUNITY",
     "note": "Solo Voices (pipeline.73, research-build; minted C112). Citizens' own page lines, verbatim and attributed, the day they wrote them — output/citizen_pages/index.jsonl only. Culture desk, WEEK_GRID Wed–Fri plus her own Sat/Sun cron entries (--persona, never --fanout). Covered list output/cron-compare/voices_covered.json."
+  },
+  "farrah-del-rio": {
+    "name": "Farrah Del Rio",
+    "popid": "POP-00161",
+    "beatDomain": "OPINION",
+    "note": "Opinion columnist, civic and cultural (pipeline.111, builder 2026-11-24). Seat file only; no bag."
   }
 }

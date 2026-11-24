@@ -70,6 +70,7 @@ const BEAT_BUILDERS = {
   'business-desk': 'buildEconomySlice',   // pipeline.111 (builder 2026-11-22): Jordan's own economy record
   'carmen-delaine': 'buildCivicSlice',   // pipeline.111 (builder 2026-11-23): her own civic record, off the civic-domain pick
   'luis-navarro': 'buildInvestigationsSlice',   // pipeline.111 (builder 2026-11-24): his own record, off the anomaly pick
+  'farrah-del-rio': 'buildOpinionSlice',   // pipeline.111 (builder 2026-11-24): the opinion column's week
   'sharon-okafor': 'buildLifestyleSlice',
   'maria-keen': 'buildNeighborhoodSlice',
   'selena-grant': 'buildOaksBeatSlice',
@@ -79,11 +80,12 @@ const BEAT_BUILDERS = {
   'tamsin-pruitt': 'buildLivesSlice',   // pipeline.73 Lives — daily, Mon–Fri grid
   'ines-sorensen': 'buildVoicesSlice'   // pipeline.73 Voices — Wed–Fri grid + own Sat/Sun crons
 };
-const BEAT_NAME_RE = /carmen\s*delaine|luis\s*navarro|elliot\s*marbury|trevor\s*shimizu|lila\s*mezran|angela\s*reyes|noah\s*tan|elliot\s*graye|rachel\s*torres|kai\s*marston|sharon\s*okafor|maria\s*keen|selena\s*grant|talia\s*finch|celeste\s*tran|tamsin\s*pruitt|ines\s*sorensen/i;
+const BEAT_NAME_RE = /carmen\s*delaine|luis\s*navarro|farrah\s*del\s*rio|elliot\s*marbury|trevor\s*shimizu|lila\s*mezran|angela\s*reyes|noah\s*tan|elliot\s*graye|rachel\s*torres|kai\s*marston|sharon\s*okafor|maria\s*keen|selena\s*grant|talia\s*finch|celeste\s*tran|tamsin\s*pruitt|ines\s*sorensen/i;
 function beatSlugForName(name) {
   const n = String(name || '');
   if (/carmen\s*delaine/i.test(n)) return 'carmen-delaine';
   if (/luis\s*navarro/i.test(n)) return 'luis-navarro';
+  if (/farrah\s*del\s*rio/i.test(n)) return 'farrah-del-rio';
   if (/elliot\s*marbury/i.test(n)) return 'elliot-marbury';
   if (/trevor\s*shimizu/i.test(n)) return 'trevor-shimizu';
   if (/lila\s*mezran/i.test(n)) return 'lila-mezran';

@@ -4005,7 +4005,8 @@ function generateCitizensEvents_(ctx) {
         tags = mergeTags(tags, ["source:template"]);
       }
       if (contact && contact.popId) tags = mergeTags(tags, ["contactPopId:" + contact.popId]);
-      if (chosenVenue) tags = placeTags_(mergeTags(tags, ["venue:local"]), chosenVenue);
+      // place: only when the line names the place — "stopped by $INSTITUTION …" has no $VENUE.
+      if (chosenVenue) tags = placeTags_(mergeTags(tags, ["venue:local"]), pick.indexOf(chosenVenue) >= 0 ? chosenVenue : null);
     } else if (neighborhood && !chosenVenue && !spotTag_(tags) && !eveningNamedTag_(tags) && chanceHit(0.12)) {
       // !chosenVenue: a ledger line that filled $VENUE already carries its
       // venue — don't append a second one. "" for every other non-template

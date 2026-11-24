@@ -84,6 +84,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| engine.366 | Replay and dry run keep off the live world (builder 11-24 "go on the replay"): refuse the live sheet; replay reads its own Cycle's memory | in-progress | engine-sheet | [[../plans/2026-11-24-replay-keeps-the-live-memory]] |
 | pipeline.100 | Mags memory one home (builder 11-03): her page, not the old `mags` store; every Mags seat loads her persona as the CLI did. Task 1 started 11-08 | in-progress | engine-sheet | [[../plans/2026-11-03-mags-memory-one-home]] |
 | engine.346 | Feed word `off-season` (builder 11-15): live @182; benched 11-16 inside stage 49 (C117/C118 PASS). Owed: the sheet dropdown (his menu run) | in-progress | research-build | [[../plans/2026-11-05-sports-feed-triggers]] §Changelog |
 | pipeline.110 | Role citizens wake as themselves (builder 11-10). 14 of 14 workers lean and live; next: media (reporter template); council on hold | in-progress | engine-sheet | [[../plans/2026-11-10-role-citizens-wake-as-themselves]] |
@@ -100,7 +101,6 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| engine.366 | Replay keeps the live memory (builder 11-24): replayCycle saves every PREV_* carry blob and loads the newest, not the replayed Cycle's. After engine.365 | ready | engine-sheet | engine.364 plan §New concepts C3 |
 | engine.356 | A moment has a place (builder 11-21): LIVE stage 73 @208; paused 11-23 for engine.364. Next: Task 1's count, then the build on his six answers | ready | engine-sheet | [[../plans/2026-11-21-a-moment-has-a-place]] |
 | engine.362 | Header-drift backlog: 24 standing field-name flags in the run-cycle gap log (since ≤C110, none new) — triage real misses vs detector noise | ready | engine-sheet | `output/production_log_run_cycle_c117_gaps.md` G-EC3–16, G-EC22–31 |
 | engine.363 | The gap log's four runtime checks (phase-skip, phase-ordering, cohort-collision, silent-fail) built on Engine_Run_Log, now the run-log ingest path | ready | engine-sheet | `output/production_log_run_cycle_c117_gaps.md` G-EC32–36 · [[../plans/2026-11-23-engine-writes-its-run-record]] |

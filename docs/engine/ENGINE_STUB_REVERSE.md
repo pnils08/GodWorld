@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 179 · **Functions mapped:** 1792 · **S.* fields:** 383 · **Sheets:** 64
+**Files scanned:** 179 · **Functions mapped:** 1792 · **S.* fields:** 384 · **Sheets:** 64
 
 ## S.* / ctx.summary reverse index
 
@@ -42,6 +42,7 @@
 | `S.bankRateDesc` | `phase05-citizens/generationalWealthEngine.js::processBankRate_` | `phase05-citizens/generationalWealthEngine.js::processBankRate_` | 1 | 1 |
 | `S.baylightOpenings` | `phase02-world-state/applySportsSeason.js::applySportsSeason_` | `phase02-world-state/applySportsSeason.js::applySportsSeason_` | 1 | 1 |
 | `S.biasIntents` | `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_` | `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_`, `utilities/compressLifeHistory.js::compressLifeHistory_` | 1 | 2 |
+| `S.bizOpenIds` | `phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_` | `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_` | 1 | 1 |
 | `S.bondDialCounts` | `phase05-citizens/bondEngine.js::noteBondConnectionShift_` | `phase05-citizens/bondEngine.js::noteBondConnectionShift_` | 1 | 1 |
 | `S.bondDialLined` | `phase05-citizens/bondEngine.js::noteBondConnectionShift_` | `phase05-citizens/bondEngine.js::noteBondConnectionShift_` | 1 | 1 |
 | `S.bondSummary` | `phase05-citizens/bondEngine.js::generateBondSummary_`, `phase05-citizens/seedRelationBondsv1.js::seedRelationshipBonds_` | `phase05-citizens/seedRelationBondsv1.js::testBondSeeding_`, `phase10-persistence/buildCyclePacket.js::buildCyclePacket_` | 2 | 2 |

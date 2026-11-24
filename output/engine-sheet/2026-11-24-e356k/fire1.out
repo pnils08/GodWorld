@@ -1,0 +1,174 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌁ auth for agents [www.vestauth.com]
+{
+ "label": "e356k-f1",
+ "expect": 117,
+ "at": "2026-11-24T21:44:59.593Z",
+ "pre": {
+  "bench": 117,
+  "live": 117,
+  "ee": 10,
+  "rileyLast": 117,
+  "checkpoint": null
+ },
+ "wallS": 277,
+ "http": 200,
+ "resp": {
+  "ok": true,
+  "state": "done",
+  "ranMs": 269714,
+  "persistErrors": [],
+  "carryForward": [
+   {
+    "key": "PREV_EVENING_JSON",
+    "event": "ghost-skipped",
+    "stamped": 118,
+    "cycleId": 118
+   },
+   {
+    "key": "PREV_EVENING_JSON",
+    "event": "recovered-from-sheet",
+    "cycle": 117,
+    "cycleId": 118
+   },
+   {
+    "key": "PREV_CYCLE_STATE_JSON",
+    "event": "ghost-skipped",
+    "stamped": 118,
+    "cycleId": 118
+   },
+   {
+    "key": "PREV_CYCLE_STATE_JSON",
+    "event": "recovered-from-sheet",
+    "cycle": 117,
+    "cycleId": 118
+   },
+   {
+    "key": "PREV_HOOD_ECON_JSON",
+    "event": "ghost-skipped",
+    "stamped": 118,
+    "cycleId": 118
+   },
+   {
+    "key": "PREV_HOOD_ECON_JSON",
+    "event": "recovered-from-sheet",
+    "cycle": 117,
+    "cycleId": 118
+   },
+   {
+    "key": "PREV_ACTIVITY_OBS_JSON",
+    "event": "ghost-skipped",
+    "stamped": 118,
+    "cycleId": 118
+   },
+   {
+    "key": "PREV_ACTIVITY_OBS_JSON",
+    "event": "recovered-from-sheet",
+    "cycle": 117,
+    "cycleId": 118
+   },
+   {
+    "key": "PREV_STORY_SEEDS_JSON",
+    "event": "ghost-skipped",
+    "stamped": 118,
+    "cycleId": 118
+   },
+   {
+    "key": "PREV_STORY_SEEDS_JSON",
+    "event": "recovered-from-sheet",
+    "cycle": 117,
+    "cycleId": 118
+   },
+   {
+    "key": "PREV_CONTRACT_SEEDS_JSON",
+    "event": "ghost-skipped",
+    "stamped": 118,
+    "cycleId": 118
+   },
+   {
+    "key": "PREV_CONTRACT_SEEDS_JSON",
+    "event": "recovered-from-sheet",
+    "cycle": 117,
+    "cycleId": 118
+   },
+   {
+    "key": "PREV_CITY_DYN_JSON",
+    "event": "ghost-skipped",
+    "stamped": 118,
+    "cycleId": 118
+   },
+   {
+    "key": "PREV_CITY_DYN_JSON",
+    "event": "recovered-from-sheet",
+    "cycle": 117,
+    "cycleId": 118
+   },
+   {
+    "key": "PREV_RELOC_FLOW_JSON",
+    "event": "ghost-skipped",
+    "stamped": 118,
+    "cycleId": 118
+   },
+   {
+    "key": "PREV_RELOC_FLOW_JSON",
+    "event": "recovered-from-sheet",
+    "cycle": 117,
+    "cycleId": 118
+   },
+   {
+    "key": "PREV_HOSP_ADMIT_CARRY_JSON",
+    "event": "ghost-skipped",
+    "stamped": 118,
+    "cycleId": 118
+   },
+   {
+    "key": "PREV_HOSP_ADMIT_CARRY_JSON",
+    "event": "missing",
+    "cycleId": 118
+   },
+   {
+    "key": "PREV_ARREST_CARRY_JSON",
+    "event": "ghost-skipped",
+    "stamped": 118,
+    "cycleId": 118
+   },
+   {
+    "key": "PREV_ARREST_CARRY_JSON",
+    "event": "missing",
+    "cycleId": 118
+   },
+   {
+    "key": "PREV_FRANCHISE_WEIGHT_JSON",
+    "event": "ghost-skipped",
+    "stamped": 118,
+    "cycleId": 118
+   },
+   {
+    "key": "PREV_FRANCHISE_WEIGHT_JSON",
+    "event": "recovered-from-sheet",
+    "cycle": 117,
+    "cycleId": 118
+   },
+   {
+    "key": "CHAOS_NBHD_FOLD_JSON",
+    "event": "ghost-skipped",
+    "stamped": 118,
+    "cycleId": 118
+   },
+   {
+    "key": "CHAOS_NBHD_FOLD_JSON",
+    "event": "recovered-from-sheet",
+    "cycle": 117,
+    "cycleId": 118
+   }
+  ]
+ },
+ "post": {
+  "bench": 118,
+  "live": 117,
+  "ee": 10,
+  "rileyLast": 118,
+  "checkpoint": null
+ },
+ "newEE": [],
+ "verdict": "PASS"
+}

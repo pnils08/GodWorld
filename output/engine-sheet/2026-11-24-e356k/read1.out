@@ -1,0 +1,52 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+{
+ "cycle": 118,
+ "lines": 2634,
+ "people": 1022,
+ "actLines": {
+  "shift": 71,
+  "rest": 102,
+  "service": 103,
+  "errand": 24,
+  "drink": 5,
+  "meal": 18,
+  "walk": 18,
+  "game": 1
+ },
+ "linesWithPlace": 54,
+ "peopleWithPlace": 54,
+ "distinctPlaces": 43,
+ "placeBy": {
+  "venue": 42,
+  "row": 7,
+  "employer": 5,
+  "other": 0
+ },
+ "shiftLinesNoEmployer": 66,
+ "nearTailsLeft": 0,
+ "examples": {
+  "venue": [
+   "Derek Simmons (Jack London): stood by the bar at Green & Gold Tavern, nodding along to the DJ’s set  [Green & Gold Tavern; Sports Bar & Dining]",
+   "Carlos Presti (Downtown): found a quiet minute at Midnight Bistro and the hum of a bassline from a passing car  [Midnight Bistro; Restaurant & Dining]",
+   "Ernesto Quintero (Baylight District): found a quiet minute at Oakland Casino Town and let the week's noise settle  [Oakland Casino Town; Nightlife & Entertainment]",
+   "Desmond Morton (Chinatown): found a quiet minute at Lantern Pharmacy and a sense of anticipation hangs in the air  [Lantern Pharmacy; Retail]",
+   "Richie Ramiro (Uptown): found a quiet minute at First Lamp Club and the quiet satisfaction of finding a favorite song on the  [First Lamp Club; Nightlife & Entertainment]"
+  ],
+  "row": [
+   "Theo Park (Rockridge): waited in the lobby at College Avenue Medical Group until the specialist came out  [College Avenue Medical Group; Medical Specialists]",
+   "Julio Valencia (Uptown): waited a long while for a table at Telegraph Supper Club  [Telegraph Supper Club; Restaurant & Dining]",
+   "Bennet Green (Laurel): picked up a takeout order from the counter at Nino's  [Nino's; Food & Beverage]",
+   "Dimas Wong (Piedmont Ave): bought pastries for the Sunday table at Montclair Patisserie  [Montclair Patisserie; Bakery / Patisserie]",
+   "Yusuf Carmichael (Rockridge): waited in the lobby at College Avenue Medical Group until the specialist came out  [College Avenue Medical Group; Medical Specialists]"
+  ],
+  "employer": [
+   "Elio Perez (Piedmont Ave): remembered a regular's order before they finished sitting down  [Claremont Table; Restaurant & Dining]",
+   "Dean Nelson (Downtown): logged a delivery truck in and out and waved at the driver by name  [West Oakland Community Center; Community Services]",
+   "Colin Phillips (Laurel): tossed the day-old loaves into the donation bins knowing exactly where they were headed  [Nino's; Food & Beverage]",
+   "Inez Mendoza (Lake Merritt): moved a line item from paper clips to payroll and made it work  [West Oakland Community Center; Community Services]",
+   "Zaniya Adams (Rockridge): badged into the Baylight office early and tried not to think about the protestors from last month  [Anthropic; AI Research]"
+  ]
+ },
+ "problems": [],
+ "verdict": "PASS"
+}

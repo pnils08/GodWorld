@@ -3237,6 +3237,14 @@
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_"
       ]
     },
+    "bizOpenIds": {
+      "writers": [
+        "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_"
+      ],
+      "readers": [
+        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
+      ]
+    },
     "businessClosures": {
       "writers": [
         "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_"

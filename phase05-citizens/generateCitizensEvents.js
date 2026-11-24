@@ -1698,11 +1698,19 @@ function generateCitizensEvents_(ctx) {
   // the citizen's own spot, else another food / retail spot of their hood (S.hoodSpots, Phase5-
   // BusinessDynamics). lastPlace_ keeps the pick's BIZ_ID for the line's place: tag. A hood with no
   // spot keeps the hood's texture words (builder: "some vague event are ok").
+  // Cut A2: act names what the moment is (the line's act:<kind> tag). A meal picks a place that
+  // serves food, a drink a bar / lounge / club, an errand a shop; any other act, or none, any spot.
+  // No place of that kind in the hood → the hood's texture words, as with no spot at all.
   var lastPlace_ = null;
-  function pickVenue_(neighborhood, popId) {
+  function pickVenue_(neighborhood, popId, act) {
     lastPlace_ = null;
     var hk = (neighborhood && S.canonHoods) ? (resolveHoodOrChild_(ctx, neighborhood) || '') : '';
     var spots = (hk && S.hoodSpots) ? S.hoodSpots[hk] : null;
+    if (spots && spots.length && (act === 'meal' || act === 'drink' || act === 'errand')) {
+      var fit = [];
+      for (var sfi = 0; sfi < spots.length; sfi++) if (spotFitsAct_(spots[sfi], act)) fit.push(spots[sfi]);
+      spots = fit;
+    }
     if (spots && spots.length) {
       var own = popId ? citizenSpotFor_(spots, popId) : null;
       var sp = (own && roll() < 0.5) ? own : spots[Math.floor(roll() * spots.length)];
@@ -1712,6 +1720,20 @@ function generateCitizensEvents_(ctx) {
     var list = hoodTexturePool_(ctx, neighborhood, CITIZEN_VENUES_BY_CHARACTER_, CITIZEN_VENUES_BESPOKE_, 'generateCitizensEvents_.pickVenue_');
     if (!list.length) return "";
     return list[Math.floor(roll() * list.length)];
+  }
+  function spotFitsAct_(sp, act) {
+    var sec = String(sp.sector || '');
+    var bar = /bar\b|pubs?\b|brewery|lounge|nightlife|club|tap\s?room/i.test(sec);
+    if (act === 'drink') return sp.cls === 'food' && bar;
+    if (act === 'meal') return sp.cls === 'food' && (!bar || /dining|restaurant|kitchen|cafe|food/i.test(sec));
+    if (act === 'errand') return sp.cls === 'retail';
+    return true;
+  }
+  function actFromTags_(tags) {
+    for (var ai = 0; ai < (tags || []).length; ai++) {
+      if (String(tags[ai]).indexOf('act:') === 0) return String(tags[ai]).slice(4);
+    }
+    return '';
   }
   function placeTags_(tags, venueName) {
     if (lastPlace_ && venueName === lastPlace_.name) return mergeTags(tags, ["place:" + lastPlace_.id]);
@@ -3926,7 +3948,7 @@ function generateCitizensEvents_(ctx) {
       var clVenue = "", clUsedContact = false, clWantsPilot = false, clWantsRole = false;
       var clSlots = entry.ledgerLine.slots || [];
       for (var cls = 0; cls < clSlots.length; cls++) {
-        if (clSlots[cls] === "VENUE") clVenue = pickVenue_(neighborhood, popId) || (mem && mem.lastVenue) || "";
+        if (clSlots[cls] === "VENUE") clVenue = pickVenue_(neighborhood, popId, actFromTags_(tags)) || (mem && mem.lastVenue) || "";
         else if (clSlots[cls] === "CONTACT") clUsedContact = true;
         else if (clSlots[cls] === "PILOT") clWantsPilot = true;
         else if (clSlots[cls] === "PILOTROLE") { clWantsPilot = true; clWantsRole = true; }
@@ -4007,16 +4029,18 @@ function generateCitizensEvents_(ctx) {
       if (contact && contact.popId) tags = mergeTags(tags, ["contactPopId:" + contact.popId]);
       // place: only when the line names the place — "stopped by $INSTITUTION …" has no $VENUE.
       if (chosenVenue) tags = placeTags_(mergeTags(tags, ["venue:local"]), pick.indexOf(chosenVenue) >= 0 ? chosenVenue : null);
-    } else if (neighborhood && !chosenVenue && !spotTag_(tags) && !eveningNamedTag_(tags) && chanceHit(0.12)) {
-      // !chosenVenue: a ledger line that filled $VENUE already carries its
-      // venue — don't append a second one. "" for every other non-template
-      // line, so pre-ledger rng sequence is unchanged (Task 11). A spot line
-      // (engine.214 Cut C) names its own place too.
-      chosenVenue = pickVenue_(neighborhood, popId);
-      if (chosenVenue) {
-        pick = pick + " near " + chosenVenue;
-        tags = placeTags_(mergeTags(tags, ["venue:local"]), chosenVenue);
-      }
+    }
+    // engine.356 cut A2: the flat 12% " near <place>" tail is gone — it glued a place onto whatever
+    // the line said ("… is making waves near a bench"). A place reaches a line through its own
+    // $VENUE, a place:<BIZ_ID> the line's row carries, or place:employer below.
+
+    // Cut A2: a line at the citizen's own workplace (place:employer on its row) carries the
+    // employer's id; a citizen with no employer on the ledger carries no place.
+    var empAt = tags.indexOf("place:employer");
+    if (empAt >= 0) {
+      var empBiz = iEmployerBizCond >= 0 ? String(row[iEmployerBizCond] || "").trim() : "";
+      tags = tags.slice();
+      if (empBiz) tags[empAt] = "place:" + empBiz; else tags.splice(empAt, 1);
     }
 
     if (tags.indexOf("relationship:rivalry") >= 0 && hasRivalry && chanceHit(0.3)) {

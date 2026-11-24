@@ -831,7 +831,7 @@ function applyBusinessDynamics_(ctx) {
       var spotName = iNm >= 0 ? String(row[iNm] || '').trim() : '', spotHood = bizHoodKey(hood);
       if (spotName && spotHood) {
         (spots[spotHood] = spots[spotHood] || []).push({
-          id: id, name: spotName, cls: d.cls, streak: d.streak, prevStreak: Number(ps.streak) || 0,
+          id: id, name: spotName, cls: d.cls, sector: String(row[iSec] || ''), streak: d.streak, prevStreak: Number(ps.streak) || 0,
           shed: declines[id] || 0, lift: d.cls === 'food' && barTerm > 0, chaos: spotChaos[id] || []
         });
       }

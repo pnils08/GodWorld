@@ -145,6 +145,8 @@ Repair, not replace (builder 2026-11-24): each cut repairs the code it touches; 
 
 **Builder's words on cut A (2026-11-24):** "go on cut A and keep in mind as you work through this alot if original build code designed as a placeholder until we got this far, almost all engines were built with out any real city data so alot are vague and we have been working to address that, some vague event are ok but events that paint them life as a lived experience and feeds into the world-view showing real activity would be the side goal, 2 citizens are eating at xx, maybe we see them sitting there in world-view, so as I know this is best done as task per session the work with present itself constantly"
 
+**And (2026-11-24, verbatim):** "and by \"real city\" let it been recorded that mean sim reality not real world oakland" — every "real place / real person" in this plan means a row the sim holds (Business_Ledger, Simulation_Ledger, Household_Ledger, Faith_Organizations, Cultural_Ledger), never real-world Oakland.
+
 **Cut A tasks (one a session):**
 
 | # | Task | Status |

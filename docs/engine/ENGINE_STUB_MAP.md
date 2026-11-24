@@ -1995,8 +1995,6 @@
 
 - **spotTag_(tags)**
 
-- **eveningNamedTag_(tags)**
-
 - **citizenSpotFor_(hoodSpots, popId)**
 
 - **citizenSpotLines_(spot)**
@@ -4936,4 +4934,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 179
-**Functions mapped:** 1793
+**Functions mapped:** 1792

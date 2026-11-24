@@ -1,0 +1,58 @@
+AIM = BENCH (script read the bench marker)
+== push code d7cca3de6
+bench pull-back byte-identical to e356j.sha256
+== sync from live
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+act tags: {"target":"bench","listed":237,"written":237,"already":0,"readBackOk":237,"readBackMiss":[],"rows":1168}
+{"fireGuardMinutes":"0","cycleCountFormatted":"117","cycleCountIsNumber":true}
+clearfire 118: {"ok":true,"cleared":{"cycle":118,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+appended 5 to Edition_Coverage_Ratings; marked rows on the tab now 5
+appended 28 to Citizen_Media_Usage; marked rows on the tab now 28
+appended 2 to Oakland_Sports_Feed; marked rows on the tab now 2
+bench cycleCount 117
+clearfire 118: {"ok":false,"error":"no readable fire record to clear"}
+fire C118 rc=0 "verdict": "PASS" "wallS": 259
+  "drink": 5,
+  "meal": 16,
+  "walk": 18,
+  "game": 1
+ },
+ "linesWithPlace": 50,
+ "peopleWithPlace": 50,
+ "distinctPlaces": 41,
+ "placeBy": {
+  "venue": 42,
+  "row": 3,
+  "employer": 5,
+  "other": 0
+ },
+ "shiftLinesNoEmployer": 65,
+ "nearTailsLeft": 0,
+ "examples": {
+  "venue": [
+   "Derek Simmons (Jack London): stood by the bar at Green & Gold Tavern, nodding along to the DJ’s set  [Green & Gold Tavern; Sports Bar & Dining]",
+   "Carlos Presti (Downtown): found a quiet minute at Midnight Bistro and the hum of a bassline from a passing car  [Midnight Bistro; Restaurant & Dining]",
+   "Ernesto Quintero (Baylight District): found a quiet minute at Oakland Casino Town and let the week's noise settle  [Oakland Casino Town; Nightlife & Entertainment]",
+   "Desmond Morton (Chinatown): found a quiet minute at Lantern Pharmacy and a sense of anticipation hangs in the air  [Lantern Pharmacy; Retail]",
+   "Richie Ramiro (Uptown): found a quiet minute at First Lamp Club and the quiet satisfaction of finding a favorite song on the  [First Lamp Club; Nightlife & Entertainment]"
+  ],
+  "row": [
+   "Theo Park (Rockridge): waited in the lobby at College Avenue Medical Group until the specialist came out  [College Avenue Medical Group; Medical Specialists]",
+   "Bennet Green (Laurel): picked up a takeout order from the counter at Nino's  [Nino's; Food & Beverage]",
+   "Yusuf Carmichael (Rockridge): waited in the lobby at College Avenue Medical Group until the specialist came out  [College Avenue Medical Group; Medical Specialists]"
+  ],
+  "employer": [
+   "Elio Perez (Piedmont Ave): remembered a regular's order before they finished sitting down  [Claremont Table; Restaurant & Dining]",
+   "Dean Nelson (Downtown): logged a delivery truck in and out and waved at the driver by name  [West Oakland Community Center; Community Services]",
+   "Colin Phillips (Laurel): tossed the day-old loaves into the donation bins knowing exactly where they were headed  [Nino's; Food & Beverage]",
+   "Inez Mendoza (Lake Merritt): moved a line item from paper clips to payroll and made it work  [West Oakland Community Center; Community Services]",
+   "Zaniya Adams (Rockridge): badged into the Baylight office early and tried not to think about the protestors from last month  [Anthropic; AI Research]"
+  ]
+ },
+ "problems": [],
+ "verdict": "PASS"
+}
+read 1 exit 0
+== final sync from live
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.

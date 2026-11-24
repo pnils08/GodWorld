@@ -83,7 +83,7 @@ Done: Sharon, Maria, Kai, Mason, Celeste, Jordan, Graye, Noah, Trevor, Lila, Rac
 | 17 | Rachel Torres: seat file, every-hood safety record | rb | live; read Tue 11-24 |
 | 18 | Angela Reyes: seat file, every-hood schools record, staff and students | rb | live; read Tue 11-24 |
 | 19 | Carmen Delaine: seat file, whole civic record (buildCivicSlice), thinking medium (package seatReasoning) | rb | live; read Mon 11-30 |
-| 20 | Luis Navarro: seat file, initiative clocks + decisions record (buildInvestigationsSlice), thinking medium | rb | live; read Tue 11-24; bio additions await his word |
+| 20 | Luis Navarro: seat file + sheet bio, initiative clocks + decisions record (buildInvestigationsSlice), Haiku 5.5 thinking medium | rb | live; read Tue 11-24 (one-run sample: is he still apart from Carmen) |
 | 21 | Farrah Del Rio: new opinion seat (no cron today) | rb | next |
 
 ## Acceptance
@@ -121,6 +121,7 @@ Done: Sharon, Maria, Kai, Mason, Celeste, Jordan, Graye, Noah, Trevor, Lila, Rac
 
 ## Changelog
 
+- 2026-11-24 (research-build) — Luis on Haiku 5.5 (builder: different model, different voice from Carmen); bio written to his CitizenBio cell.
 - 2026-11-24 (research-build) — Luis live; the engine's self-check findings no longer reach him. Overlap with Carmen (same C118 due list) flagged to the builder.
 - 2026-11-24 (research-build) — Carmen live with her own civic record and thinking at medium. Builder order: Luis next, then Farrah.
 - 2026-11-23 (research-build) — The mold written into the plan for the next session (builder: "I want to make sure the model we are following carries").

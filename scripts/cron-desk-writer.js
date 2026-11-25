@@ -499,7 +499,11 @@ function renderPacketIntake(draftText, packet, opts) {
   }
   for (const [name, meta] of people) {
     if (!body.includes(name)) continue;
-    const role = meta.quote && body.includes(String(meta.quote).slice(0, Math.min(48, meta.quote.length)))
+    // agy Anthony step 4 #1: a reporter quotes from anywhere in a long answer (a Gridiron analyst's reply runs 2,000 chars),
+    // so any sentence of the answer found in the piece makes the speaker a quoted source, not only its first 48 characters
+    const quotedIn = (q) => String(q || '').replace(/[*_#|>]/g, ' ').split(/(?<=[.!?"”])\s+/).map(t => t.replace(/\s+/g, ' ').trim())
+      .filter(t => t.length >= 25).some(t => body.replace(/\s+/g, ' ').includes(t.slice(0, Math.min(48, t.length))));
+    const role = meta.quote && quotedIn(meta.quote)
       ? 'quoted-source' : meta.role === 'quoted-source' ? 'mentioned' : meta.role;
     lines.push('NAMES: ' + name + ' | ' + role);
   }
@@ -510,7 +514,8 @@ function renderPacketIntake(draftText, packet, opts) {
   // assignment's ref when the sidecar is built (cron-desk-run storylineTagFor).
   if (hood && body.includes(hood)) lines.push('HOOD: ' + hood);
   if (quoted) {
-    lines.push('CLAIM: ' + String(quoted.quote).replace(/\|/g, '—').replace(/\s+/g, ' ').trim() +
+    const claimText = String(quoted.quote).replace(/[*_#>]/g, '').replace(/\|/g, '—').replace(/\s+/g, ' ').trim();
+    lines.push('CLAIM: ' + (claimText.length > 400 ? claimText.slice(0, 400).replace(/\s+\S*$/, '') + ' …' : claimText) +
       (quoted.sourceKind === 'worker-answer' ? ' | ask_worker ' : ' | citizenVoice PRESS ') + String(quoted.name).replace(/\|/g, '—'));
   } else {
     const facts = (packet && packet.known || []).filter(c => c && c.t === 'FACT' && c.text && c.src &&

@@ -3613,7 +3613,7 @@ async function runWrite(assign) {
       execFileSync('node', [path.join(ROOT, 'scripts', 'citizenVoice.js'),
         '--pop=' + byline.popid, '--record-text=' + gradeText(contractScore), '--record-kind=graded',
         '--record-score=' + contractScore.score, '--record-max=' + (contractScore.max || 4), '--cycle=' + cycle,
-        ...(personaSlug ? ['--page-key=graded-' + personaSlug] : [])],
+        ...(personaSlug ? ['--page-key=graded-' + personaSlug + '-' + new Date().toLocaleDateString('en-CA', { timeZone: 'America/Chicago' }).replace(/[^0-9]/g, '')] : [])],   // agy Anthony step 4 #5: Monday's grade survives Thursday's
         { cwd: ROOT, encoding: 'utf8', timeout: 300000 });
       gradeRecord = { recorded: true, line: gradeLine };
       log('reporter grade carried: ' + gradeLine);

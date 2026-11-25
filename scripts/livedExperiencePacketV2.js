@@ -418,7 +418,8 @@ function buildWritePacket(args) {
 }
 
 function numericTokens(text) {
-  return String(text || '').match(/[+-]?\d+(?:\.\d+)?(?:st|nd|rd|th|%|\$)?/gi) || [];
+  // a leading-dot decimal is one number (.762 is not 762 — agy Anthony step 4 #4); it reads as 0.762 to match the record
+  return (String(text || '').match(/[+-]?(?:\d+(?:\.\d+)?|\.\d+)(?:st|nd|rd|th|%|\$)?/gi) || []).map(t => t.replace(/^([+-]?)\./, '$10.'));
 }
 
 function quotedSpans(text) {
@@ -732,7 +733,11 @@ function selectUsedToolLines(draftText, candidates, packet) {
     const anchor = teamCard ? (cardWho ? cardWho.trim().split(/\s+/).slice(-1)[0] : null) : (year || name);
     if (!anchor) continue;
     const nums = significantNumbers(text).filter(v => v !== anchor);
-    const hit = units.some((u, i) => u.includes(anchor) &&
+    // a team card's labelled numbers ("clutch 99", "arm 84"): a sentence that says "his clutch rating is 99" in a piece that names him
+    const labelled = teamCard && draftText.includes(anchor)
+      ? [...text.matchAll(/([a-z][a-z /-]{2,}?)\s+([+-]?\d[\d.]*)/gi)].map(m => [m[1].trim().split(/\s+/).slice(-1)[0].toLowerCase(), m[2].replace(/^\+/, '')]) : [];
+    const byLabel = labelled.length && units.some((u, i) => labelled.some(([w, v]) => u.toLowerCase().includes(w) && unitNums[i].has(v) && !allowed.has(v)));
+    const hit = byLabel || units.some((u, i) => u.includes(anchor) &&
       nums.filter(v => unitNums[i].has(v)).length >= (teamCard ? 1 : 2) &&
       nums.some(v => unitNums[i].has(v) && !allowed.has(v)));
     if (hit) { seen.add(text); out.push({ text, src }); }

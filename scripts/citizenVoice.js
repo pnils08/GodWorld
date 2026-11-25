@@ -146,8 +146,52 @@ function showFor(popId, cycle) {
   } catch (e) { showNights = []; console.error('[show] record unreadable, no show block this run: ' + e.message); return ''; }
 }
 
+// pipeline.111: the citizen cron's perception for one citizen, read-only (nothing is spent: no lived-event receipt, no
+// ripple, no owed mark, no recall mark), and the reporter's question as the wake's question. → { system, user }
+const WAKE_QUESTION_TOKENS = 340;   // citizen-wake's VOICE_TOKENS_QUESTION
+function partOfDay(d) {
+  const h = Number(new Date(d || Date.now()).toLocaleString('en-US', { timeZone: 'America/Chicago', hour: 'numeric', hour12: false })) % 24;
+  return h < 11 ? 'morning' : h < 14 ? 'midday' : h < 17 ? 'afternoon' : h < 21 ? 'evening' : 'night';
+}
+async function wakeForInterview(c, ownWake, cycle) {
+  const W = require('/root/GodWorld/lib/wakePerception');
+  const P = require('/root/GodWorld/lib/citizenWakePrompt');
+  const resonance = require('/root/GodWorld/lib/resonanceRecall');
+  const wake = partOfDay();
+  const offices = await W.loadOfficeHolders();
+  if (offices && offices.byPop && offices.byPop[c.popId]) c.office = offices.byPop[c.popId];
+  const livedEvents = cycle ? await W.loadLivedEvents(cycle) : [];
+  const lived = Array.isArray(livedEvents) ? W.livedFor(c.popId, livedEvents, {}) : null;
+  const livedLine = lived ? W.renderLivedLine(lived.event, cycle, lived.rel) : '';
+  const showText = showFor(c.popId, cycle);
+  const showFenced = showText ? memoryFence.wrap(showText, 'undocked-show:' + c.popId) : '';
+  const [neighbors, sportsLine, lifeArc, bondsRes, familyLine, healthLine, cardRaw] = await Promise.all([
+    W.coResidents(c.nh, c.popId), W.loadSportsSlice(), W.loadLifeArc(c.popId), W.loadBonds(c.popId, { pairs: true }),
+    W.loadFamily(c.popId), W.loadHealthState(c.popId), W.loadCardAnchor(c.popId)]);
+  const dayMoments = cycle ? await W.loadDayMoments(c.popId, cycle, wake, c.life) : { block: '' };
+  c.dayMoments = (dayMoments && dayMoments.block) || '';
+  const textureLine = W.loadNeighborhoodTexture(c.nh, cycle);
+  const editionLine = P.loadEditionSlice(c.popId, c.name, c.nh, cycle);
+  const cardBlock = cardRaw ? memoryFence.wrap(cardRaw, 'citizen-card:' + c.popId) : '';
+  const voiceLine = W.loadVoiceTexture(c.popId);
+  const tensionState = loadTensionState();
+  const openTensions = openTensionsFor(tensionState, c.popId, cycle);
+  const tensionBlock = openTensions.length ? memoryFence.wrap(openTensions.map((t) => t.q).join('\n'), 'citizen-tension:' + c.popId) : '';
+  const question = String(ownWake.question || '').trim() || 'What is on your mind this week?';
+  const reporter = String(ownWake.reporter || '').trim() || 'A reporter';
+  const pageRead = await W.loadOwnPageReadback(c.popId, {
+    cycle, wake, milestone: lifeArc,
+    contextText: [question, textureLine, sportsLine, bondsRes.line, familyLine, healthLine, c.nh, c.occ, P.WAKE_FRAME[wake] || ''].filter(Boolean).join(' '),
+    extraCandidates: resonance.tensionCandidates(tensionState[c.popId]).concat(resonance.unlivedCandidates(c.memReg)),
+  });
+  const asked = reporter + ' from the Bay Tribune asks you: "' + memoryFence.sanitize(question).replace(/"/g, "'") + '" Answer in your own words; if it has not happened to you, say so.';
+  const p = P.buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsRes.line, familyLine, healthLine, pageRead.block,
+    cycle, tensionBlock, editionLine, '', cardBlock, voiceLine, livedLine, showFenced, asked, wake);
+  return { system: p.system, user: p.user };
+}
+
 async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preText, preKind, preScore, preMax, pageKey, evidenceBound,
-  interviewMode, livedContextAllowed, ownLife, model }) {
+  interviewMode, livedContextAllowed, ownLife, ownWake, model }) {
   const c = pool.find((p) => p.popId === popId);
   if (!c) { const e = new Error(`${popId} not voiceable (no DialState / not in ledger / no name+hood)`); e.code = 2; throw e; }
   // Recording an evidence-bound interview is the citizen cron hearing them.
@@ -207,7 +251,11 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
   try { written = ARGV.includes('--no-essence') ? '' : require('./reporterIdentity').essenceForPop(c.popId); } catch (e) { written = ''; }   // --no-essence: pipeline.111, a seat whose bio is its seat file alone
   const station = (written || REPORTER_WAKE) ? '' : stationLine(c, !!ownFeed) + ' ';   // a reporter's morning is never told she is not a writer (agy 2026-11-23 #2)
   const identity = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. ${station}Your temperament: ${disp}.` + (written ? '\n\n' + written : '');
-  const system = REPORTER_WAKE ? identity + '\n\n' + REPORTER_SEAT : interviewMode && !livedContextAllowed && !ownLife   // ownLife: pipeline.111, their own life (agy 2026-11-25 #1)
+  // pipeline.111 (builder 2026-11-25: "Why wouldn't the citizens wake as the Cron ?"): a seat-file reporter's interview
+  // wakes the citizen the way the citizen cron does — the same builder (lib/citizenWakePrompt), the same pieces, the
+  // reporter's question as the wake's question, the citizen's own model; they answer in their own words.
+  const woke = ownWake && interviewMode && !REPORTER_WAKE ? await wakeForInterview(c, ownWake, cycle) : null;
+  const system = woke ? woke.system : REPORTER_WAKE ? identity + '\n\n' + REPORTER_SEAT : interviewMode && !livedContextAllowed && !ownLife   // ownLife: pipeline.111, their own life (agy 2026-11-25 #1)
     ? identity + ownRecord + '\n\nThis interview has no story-linked personal exposure. Stay in your own voice, but do not project unrelated life history onto the story.'
     : identity + `${written && trajLine ? '\n\n' + trajLine.trim() : trajLine}${arcLine}${health}${show}${ownRecord}\n\nReal things from your life recently:\n${c.life}${family}${standing}${who}${bonds}${sports}${texture}${memory}`;
 
@@ -218,7 +266,7 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
     ? (interviewMode ? interviewContract.citizenEvidenceGuard(livedContextAllowed, ownLife)
       : `\n\nEVIDENCE MODE: Return ONLY the JSON requested by packet.output. Treat only the Packet's FACT claims as the press-evidence floor. The "Real things from your life recently" above may shape private emotion, interpretation, or personal intention, but they do not become press evidence and do not prove a public event. Never create a named person, institution, public event, date, count, relationship, job, official action, illustrative object, street condition, meeting, grant, schedule, or promise. Follow packet.output exactly. When it supplies a lattice, select its IDs and do not write quote prose. Otherwise, INTERPRETATION stays abstract and any concrete unsupplied detail belongs in unverifiedLead. The backend assembles publishable text and rejects free factual expansion. If you lack grounded material, abstain.`)
     : '';
-  const user = REPORTER_WAKE ? memoryFence.sanitize(ask) + '\n\nReturn ONLY the JSON requested by packet.output.'
+  const user = woke ? woke.user : REPORTER_WAKE ? memoryFence.sanitize(ask) + '\n\nReturn ONLY the JSON requested by packet.output.'
     : `${memoryFence.sanitize(ask)}\n\nSpeak as yourself, plainly, in first person — your temperament and your history shape what you say and what you leave out. Never mention data, records, or that you were asked by a system.${evidenceGuard}`;
 
   if (dry) {
@@ -232,7 +280,8 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
   // (e.g. "filed: <headline>") through the exact page+intake write-block, with
   // NO DeepSeek generation — the author-side mirror of the quote pre-pass.
   const text = preText != null ? String(preText) :
-    await generate(system, user, maxTokens, evidenceBound ? 0.25 : 0.85, model);
+    woke ? await generate(system, user, WAKE_QUESTION_TOKENS, 0.85, DEFAULT_MODEL)   // the citizen's own wake model and temperature
+      : await generate(system, user, maxTokens, evidenceBound ? 0.25 : 0.85, model);
   if (!text) { const e = new Error('empty generation'); e.code = 3; throw e; }
 
   // S389 — unwrap the evidence-mode envelope BEFORE anything records it. `text` stays
@@ -349,6 +398,7 @@ async function runBatch(batchPath, cycle) {
         interviewMode: !!entry.interviewMode,
         livedContextAllowed: !!entry.livedContextAllowed,
         ownLife: !!entry.ownLife,
+        ownWake: entry.ownWake || null,
         model: entry.model || MODEL,
       });
       out.push({ ...base, name: r.name, quote: r.text, disp: r.disposition, recorded: r.recorded });

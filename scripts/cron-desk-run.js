@@ -533,6 +533,7 @@ function collectQuoteAsks(lane, persona, story, angleArt) {
     const l = String(label || '').slice(0, 160);
     let askText;
     let inputPacket = null;
+    let ownWake = null;   // pipeline.111: a seat-file interview wakes the citizen as their own cron (citizenVoice wakeForInterview)
     if (PACKET_ACTIVE) {
       const candidate = packetCandidates.get(pop);
       if (!candidate) throw new Error('W2 target is outside fixed sourcing pool: ' + pop);
@@ -548,6 +549,7 @@ function collectQuoteAsks(lane, persona, story, angleArt) {
       if (SEAT_FILE) {   // pipeline.111: their own life and the reporter's own question, not the reporter's plan
         const target = ((angleArt && angleArt.angleRead && angleArt.angleRead.plan && angleArt.angleRead.plan.targets) || []).find(t => t && t.pop === pop);
         inputPacket = livedPacket.assertBase(interviewContract.ownLifeInterviewPacket(inputPacket, target && target.question), 'W2');
+        ownWake = { reporter: persona && persona.name || null, question: String(target && target.question || '').trim() };
       }
       askText = livedPacket.prompt(inputPacket);
     } else {
@@ -559,7 +561,8 @@ function collectQuoteAsks(lane, persona, story, angleArt) {
       ...(inputPacket ? { packetContract: livedPacket.VERSION, inputPacket, evidenceBound: true,
         interviewMode: interviewContract.isInterviewPacket(inputPacket),
         livedContextAllowed: interviewContract.hasLivedEvidence(inputPacket),
-        ownLife: interviewContract.isOwnLifePacket(inputPacket) } : {}),
+        ownLife: interviewContract.isOwnLifePacket(inputPacket),
+        ...(ownWake ? { ownWake } : {}) } : {}),
       ...(ACTIVE_WAKE_PACKAGE ? { model: wakePackages.routeFor(ACTIVE_WAKE_PACKAGE, 'report').model } : {}),
       record: !NO_GATE, maxTokens: PACKET_ACTIVE ? 420 : 200 });
   };
@@ -604,12 +607,15 @@ function runCitizenQuotePass(asks, cycle, stem) {
   let quotes = [];
   if (PACKET_ACTIVE) {
     const inputByPop = new Map(asks.map(a => [a.pop, a.inputPacket]));
+    const ownWakeByPop = new Set(asks.filter(a => a.ownWake).map(a => a.pop));
     interviews = parseBatchResults(out).map(q => {
       const inputPacket = inputByPop.get(q.pop);
       if (!q.quote || q.fallback) return { ...q, claims: null,
         ...(livedPacket.VERSION === 'LEP/2' ? { inputPacket } : {}) };
       try {
-        const claims = interviewContract.isInterviewPacket(inputPacket)
+        const claims = ownWakeByPop.has(q.pop)
+          ? interviewContract.ownWakeClaims(q.quote, inputPacket)   // pipeline.111: their own words, as the wake speaks
+          : interviewContract.isInterviewPacket(inputPacket)
           ? interviewContract.validateInterviewOutput(q.quote, inputPacket)
           : livedPacket.validateReportOutput(q.quote, inputPacket);
         return { ...q, raw: q.quote, quote: claims.publishableQuote, claims,

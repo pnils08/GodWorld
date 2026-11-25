@@ -154,6 +154,22 @@ function ownLifeInterviewPacket(packet, plannedQuestion) {
   return out;
 }
 
+// pipeline.111 (builder 2026-11-25: "Why wouldn't the citizens wake as the Cron ?"): a seat-file interview wakes the citizen
+// as their own cron and they answer in their own words — no JSON form, no word or phrase checks. The words become the
+// quote whole; the quote ties to no Packet fact (they spoke from their life). An empty reply, or one that is the form's
+// JSON, is no answer. → the claims shape the write stage reads.
+function ownWakeClaims(value, input) {
+  const raw = String(value == null ? '' : value).trim();
+  const said = extractSpoken(raw);
+  const quote = clean(said.spoken, 1400);
+  if (said.abstain || !quote) throw new Error('invalid own-wake answer: no words');
+  return {
+    answer: 'quote', factIds: [], basis: 'own-wake', unverifiedLead: [], abstainReason: null,
+    quoteId: 'Q-' + clean(input && input.actor && input.actor.id || 'UNKNOWN') + '-' + crypto.createHash('sha256').update(quote).digest('hex').slice(0, 10),
+    authoredQuote: true, publishableQuote: quote,
+  };
+}
+
 function isOwnLifePacket(packet) {
   return Boolean(packet && packet.exposure && packet.exposure.ownLife === true);
 }
@@ -259,7 +275,7 @@ function citizenEvidenceGuard(livedContextAllowed, ownLife) {
 }
 
 module.exports = {
-  isOwnLifePacket,   // pipeline.111 (agy 2026-11-25 #1)
+  isOwnLifePacket, ownWakeClaims,   // pipeline.111 (agy 2026-11-25 #1)
   CONTRACT,
   LEGACY_LATTICE,
   // Exported S389: citizenVoice needs the same fence-strip + object-extract when it

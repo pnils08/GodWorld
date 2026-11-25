@@ -1740,9 +1740,11 @@ function generateCitizensEvents_(ctx) {
   // engine.356 (builder 2026-11-24: "you have community_programs, and faith_ledger for addtional flavor
   // for these"): programs and congregations are places too. Both tabs are read once a run, fail-soft —
   // a new active row is a place the next Cycle; a row gone or inactive stops being one.
-  //   $PROGRAM      — an active Community_Programs row of the citizen's hood whose Type is the line's
-  //                   prog:<Type> tag; a line without the tag is never offered (a fund is no place to
-  //                   watch a game). The line carries place:<Program_ID>.
+  //   $PROGRAM      — an active Community_Programs row of the citizen's hood that the line asks for:
+  //                   at:<kind> tags name the Place_Kind it happens at (at:field, at:lunch-hall — any of
+  //                   them), a prog:<Type> tag narrows by Type. A line with neither is never offered, and
+  //                   a program whose Place_Kind is blank or "none" (a fund, a gala) is never a place.
+  //                   The line carries place:<Program_ID>.
   //   $CONGREGATION — the citizen's own congregation (Faith_Organizations.MembersList); a citizen who
   //                   belongs to none is not offered the line. The line carries place:<BIZ_ID> when the
   //                   congregation is on Business_Ledger under the same name.
@@ -1758,7 +1760,7 @@ function generateCitizensEvents_(ctx) {
       var pSh = ctx.ss.getSheetByName('Community_Programs');
       var pv = pSh ? pSh.getDataRange().getValues() : [];
       var ph = pv[0] || [], pId = ph.indexOf('Program_ID'), pNm = ph.indexOf('Name'), pHd = ph.indexOf('Neighborhood'),
-          pTy = ph.indexOf('Type'), pSt = ph.indexOf('Status');
+          pTy = ph.indexOf('Type'), pSt = ph.indexOf('Status'), pKd = ph.indexOf('Place_Kind');
       if (pId >= 0 && pNm >= 0 && pHd >= 0 && pv.length > 1) placeTabs_.progLoaded = true;
       for (var pr = 1; placeTabs_.progLoaded && pr < pv.length; pr++) {
         var prId = String(pv[pr][pId] || '').trim(), prNm = String(pv[pr][pNm] || '').trim();
@@ -1766,7 +1768,8 @@ function generateCitizensEvents_(ctx) {
         if (pSt >= 0 && String(pv[pr][pSt] || '').toLowerCase() !== 'active') continue;
         placeTabs_.progIds[prId] = 1;
         var prK = hoodKeyOf_(pv[pr][pHd]);
-        (placeTabs_.progByHood[prK] = placeTabs_.progByHood[prK] || []).push({ id: prId, name: prNm, type: pTy >= 0 ? String(pv[pr][pTy] || '').trim() : '' });
+        (placeTabs_.progByHood[prK] = placeTabs_.progByHood[prK] || []).push({ id: prId, name: prNm, type: pTy >= 0 ? String(pv[pr][pTy] || '').trim() : '',
+          kind: pKd >= 0 ? String(pv[pr][pKd] || '').trim().toLowerCase().replace(/\s+/g, '-') : '' });
       }
     } catch (ePr) { try { Logger.log('generateCitizensEvents_ Community_Programs read failed (fail-soft): ' + ePr); } catch (ig1) {} }
     try {
@@ -1787,17 +1790,27 @@ function generateCitizensEvents_(ctx) {
     } catch (eFo) { try { Logger.log('generateCitizensEvents_ Faith_Organizations read failed (fail-soft): ' + eFo); } catch (ig2) {} }
     return placeTabs_;
   }
-  function progTypeFromTags_(tags) {
+  // What a $PROGRAM line asks for: { kinds: [at: tags], type: the prog: tag }.
+  function progAskFromTags_(tags) {
+    var ask = { kinds: [], type: '' };
     for (var gi = 0; gi < (tags || []).length; gi++) {
-      if (String(tags[gi]).indexOf('prog:') === 0) return String(tags[gi]).slice(5);
+      var tg = String(tags[gi]);
+      if (tg.indexOf('at:') === 0) ask.kinds.push(tg.slice(3).toLowerCase());
+      else if (tg.indexOf('prog:') === 0) ask.type = tg.slice(5);
     }
-    return '';
+    return ask;
   }
-  function hoodPrograms_(neighborhood, type) {
+  function hoodPrograms_(neighborhood, ask) {
     var out = [];
-    if (!type) return out;
+    if (!ask || (!ask.kinds.length && !ask.type)) return out;
     var list = loadPlaceTabs_().progByHood[hoodKeyOf_(neighborhood)] || [];
-    for (var hp = 0; hp < list.length; hp++) if (list[hp].type === type) out.push(list[hp]);
+    for (var hp = 0; hp < list.length; hp++) {
+      var pg = list[hp];
+      if (!pg.kind || pg.kind === 'none') continue;
+      if (ask.kinds.length && ask.kinds.indexOf(pg.kind) < 0) continue;
+      if (ask.type && pg.type !== ask.type) continue;
+      out.push(pg);
+    }
     return out;
   }
   // The citizen's own congregation, or null — a non-member is placed at none.
@@ -3767,7 +3780,7 @@ function generateCitizensEvents_(ctx) {
           if (clEntry.placeId && clEntry.placeId.indexOf("BIZ-") === 0 && S.bizOpenIds && !S.bizOpenIds[clEntry.placeId]) continue;
           if (clEntry.placeId && clEntry.placeId.indexOf("PRG-") === 0 && loadPlaceTabs_().progLoaded && !placeTabs_.progIds[clEntry.placeId]) continue;
           // $PROGRAM / $CONGREGATION: offered only where there is one to name
-          if (clEntry.slots.indexOf("PROGRAM") >= 0 && !hoodPrograms_(neighborhood, progTypeFromTags_(clEntry.tags)).length) continue;
+          if (clEntry.slots.indexOf("PROGRAM") >= 0 && !hoodPrograms_(neighborhood, progAskFromTags_(clEntry.tags)).length) continue;
           if (clEntry.slots.indexOf("CONGREGATION") >= 0 && !congregationFor_(popId)) continue;
           var clTags = clEntry.grain ? mergeTags(clEntry.tags, ["grain:" + clEntry.grain]) : clEntry.tags;
           var clPooled = makeEntry(clEntry.text, mergeTags(clTags, calendarTags), clEntry.weight, false);
@@ -4038,7 +4051,7 @@ function generateCitizensEvents_(ctx) {
         if (clSlots[cls] === "VENUE") clVenue = pickVenue_(neighborhood, popId, actFromTags_(tags)) || (mem && mem.lastVenue) || "";
         else if (clSlots[cls] === "CONTACT") clUsedContact = true;
         else if (clSlots[cls] === "PROGRAM") {
-          var clProgs = hoodPrograms_(neighborhood, progTypeFromTags_(tags));
+          var clProgs = hoodPrograms_(neighborhood, progAskFromTags_(tags));
           if (clProgs.length) clProgram = clProgs[Math.floor(roll() * clProgs.length)];
         }
         else if (clSlots[cls] === "CONGREGATION") clCongregation = congregationFor_(popId);

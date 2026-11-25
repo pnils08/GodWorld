@@ -1,0 +1,7 @@
+[
+ ["line","community.program","","stood at the fence for a Saturday game at $PROGRAM","40","band!=child","source:communityLife,auth:es-bench,dial:outabout:up,act:game,at:field,at:court","","yes"],
+ ["line","community.program","","dropped a bag of groceries off at $PROGRAM","40","band!=child","source:communityLife,auth:es-bench,dial:warmth:up,act:visit,at:pantry,at:aid,at:lunch-hall","","yes"],
+ ["line","community.program","","sat in on an evening session at $PROGRAM","40","band!=child","source:communityLife,auth:es-bench,dial:openness:up,act:visit,at:lab,at:school,at:office,at:studio,at:youth-program,prog:tech-education","","yes"],
+ ["line","community.program","","walked past the sign for $PROGRAM without a reason to stop","40","band!=child","source:communityLife,auth:es-bench,dial:openness:up","","yes"],
+ ["line","community.program","","wrote a small check to $PROGRAM","40","band!=child","source:communityLife,auth:es-bench,dial:warmth:up,at:none","","yes"]
+]

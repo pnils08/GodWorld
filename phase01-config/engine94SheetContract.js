@@ -558,6 +558,8 @@ var ENGINE356_CONFIG_SEEDS = [
   ['bondRomanceStepChanceApart', 0.1, 'engine.356: weekly chance a romance takes a step in a Cycle they did not both live (was 0.10 in code)', 0, 1, false],
   ['bondRomanceStep', 0.25, 'engine.356: Intensity a romance gains on a weekly step (was 0.25 in code)', 0, 5, false],
   ['bondMarriageAt', 8, 'engine.356: Intensity at which a romance marries (was MARRIAGE_THRESHOLD 8)', 0, 10, false],
+  // engine.356 cut A4 (builder 2026-11-25, on the rules: "approved , procced on all"): the parts of the day each kind of moment can happen in
+  ['momentWhenByKind', 'service=morning;shift=morning,afternoon;errand=morning,afternoon;meal=afternoon,evening;visit=afternoon,evening;drink=evening;rest=evening;walk=morning,afternoon,evening;game=evening;youth-game=afternoon', 'engine.356: the parts of the day (morning, afternoon, evening) a moment of each kind can happen in, as kind=part,part;kind=part. A line of that kind carries one of them as when:<part>, spread over the person\'s day. youth-game = a game at a field, court, school or youth program. A kind left out gets no time; a line row\'s own when: tag rules over this', 'string'],
   ['migrationCrimeBand', 0.05, 'engine.356: CrimeIndex distance from the city median at which crime pushes people out of / pulls them into a hood in migration drift (was a +-15% ratio band that caught no hood)', 0.001, 5, false]
 ];
 

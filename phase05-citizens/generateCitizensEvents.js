@@ -1946,7 +1946,7 @@ function generateCitizensEvents_(ctx) {
 
     // Wind
     if (windLocal >= 25) {
-      pool.push(makeEntry("braced against strong gusts on the walk home", ["source:weather", "weather:wind", "act:walk"], 1.1, false));
+      pool.push(makeEntry("braced against strong gusts on the walk home", ["source:weather", "weather:wind", "act:walk", "when:afternoon", "when:evening"], 1.1, false));
     }
 
     // engine.33 T7 — microclimate divergence: the hood's weather differs
@@ -2758,7 +2758,7 @@ function generateCitizensEvents_(ctx) {
     if (OCC_FLAVOR_SIGN_[flavor]) occTags.push(OCC_FLAVOR_SIGN_[flavor]);
     return [
       makeEntry("had a work moment: " + flavor, mergeTags(occTags, ["act:shift"]), 1.15, false),
-      makeEntry("left work thinking about " + flavor, mergeTags(occTags.slice(), ["act:shift"]), 1.05, false)
+      makeEntry("left work thinking about " + flavor, mergeTags(occTags.slice(), ["act:shift", "when:afternoon", "when:evening"]), 1.05, false)
     ];
   }
 
@@ -2993,6 +2993,79 @@ function generateCitizensEvents_(ctx) {
   }
   var bmBand_ = BM_SIZE >= 4 ? 'L' : (BM_SIZE >= 2 ? 'M' : '');   // the dial size of a line that names its person: 1 = S, 2 = M, 4 = L
   var bmCount_ = Object.create(null), bmPairRolled_ = Object.create(null);
+  // engine.356 cut A4 (builder 2026-11-25, on the rules: "approved , procced on all"): the part of the day a
+  // moment happens in — morning, afternoon, evening (his three, Q4) — as a when:<part> tag on the line.
+  //   - A line's kind (act:<kind>) says which parts it can happen in: World_Config momentWhenByKind,
+  //     "kind=part,part;kind=part". A game at a field, a court, a school or a youth program is youth-game.
+  //   - A row whose words say a time carries its own when:<part> (one or more — any of them), which
+  //     rules over the kind. The written line carries exactly one.
+  //   - A line with no kind and no when: of its own is a thought, not a moment somewhere: no time.
+  //   - A person's moments spread over the day: of the parts the line allows, the one that person (and,
+  //     for a moment written on both records, the other person) holds fewest of this Cycle; a tie goes
+  //     to a fixed hash of person, Cycle and line. No roll — a draw here would move every later
+  //     citizen's week, and the cut moves no line, dial or bond.
+  // A config without the key (a fixture) leaves the tag off every line, a row's own included, and logs it.
+  var WHEN_PARTS_ = ['morning', 'afternoon', 'evening'];
+  var whenByKind_ = (function () {
+    var raw = ctx.config ? ctx.config.momentWhenByKind : undefined, out = Object.create(null), n = 0;
+    var segs = typeof raw === 'string' ? raw.split(';') : [];
+    for (var wi = 0; wi < segs.length; wi++) {
+      var kv = segs[wi].split('=');
+      if (kv.length !== 2) continue;
+      var wk = kv[0].trim().toLowerCase(), wps = kv[1].split(','), ok = [];
+      for (var wj = 0; wj < wps.length; wj++) {
+        var wp = wps[wj].trim().toLowerCase();
+        if (WHEN_PARTS_.indexOf(wp) >= 0 && ok.indexOf(wp) < 0) ok.push(wp);
+      }
+      if (wk && ok.length) { out[wk] = ok; n++; }
+    }
+    if (!n) {
+      try { Logger.log('generateCitizensEvents_: World_Config momentWhenByKind missing, blank or names no part of the day — no line carries a when: this run'); } catch (eWhen) {}
+      return null;
+    }
+    return out;
+  })();
+  var whenCount_ = Object.create(null);   // POPID -> { morning, afternoon, evening } moments on their record this Cycle
+  function whenKindOf_(tags) {
+    var act = actFromTags_(tags);
+    if (act !== 'game') return act;
+    for (var gk = 0; gk < tags.length; gk++) {
+      var gt = String(tags[gk]);
+      if (gt === 'at:field' || gt === 'at:court' || gt === 'at:school' || gt === 'at:youth-program' || gt.indexOf('prog:youth') === 0) return 'youth-game';
+    }
+    return act;
+  }
+  function whenOfTags_(tags) {
+    for (var wt = 0; wt < (tags || []).length; wt++) if (String(tags[wt]).indexOf('when:') === 0) return String(tags[wt]).slice(5);
+    return '';
+  }
+  function whenCountAdd_(pop, part) {
+    var wc = whenCount_[pop] || (whenCount_[pop] = { morning: 0, afternoon: 0, evening: 0 });
+    wc[part]++;
+  }
+  // Returns the line's tags with exactly one valid when:<part>, or none.
+  function whenTagged_(selfPop, otherPop, tags, text) {
+    var own = [], kept = [];
+    for (var wq = 0; wq < tags.length; wq++) {
+      var wtag = String(tags[wq]);
+      if (wtag.indexOf('when:') !== 0) { kept.push(tags[wq]); continue; }
+      var wv = wtag.slice(5).toLowerCase();
+      if (WHEN_PARTS_.indexOf(wv) >= 0 && own.indexOf(wv) < 0) own.push(wv);   // a row's own parts (any of them, like at:); anything else under the prefix is dropped
+    }
+    if (!whenByKind_) return kept;
+    var allowed = own.length ? own : (whenByKind_[whenKindOf_(kept)] || null);
+    if (!allowed) return kept;
+    var mine = whenCount_[selfPop] || {}, theirs = (otherPop && whenCount_[otherPop]) || {};
+    var best = '', bestN = 0, bestRank = -1;
+    for (var wa = 0; wa < allowed.length; wa++) {
+      var part = allowed[wa], held = (mine[part] || 0) + (theirs[part] || 0);
+      var rk = spotRank_(selfPop + '|c' + cycle + '|' + part, text);
+      if (!best || held < bestN || (held === bestN && rk > bestRank)) { best = part; bestN = held; bestRank = rk; }
+    }
+    whenCountAdd_(selfPop, best);
+    kept.push('when:' + best);
+    return kept;
+  }
   var mirroredSeen_ = Object.create(null);   // POPID -> lines already on their record this Cycle by way of someone else's week
   function bondCallsFor_(popId, bonds) {
     var calls = [];
@@ -3036,6 +3109,8 @@ function generateCitizensEvents_(ctx) {
       if (!isEventEligible_(lifeStateOfRow_(oRow), eventClassFromTags_(tags))) return;
     }
     (mirroredSeen_[who.popId] = mirroredSeen_[who.popId] || []).push(normText_(oText), normText_(text));
+    var oWhen = whenOfTags_(tags);   // cut A4: the twin holds the same part of the day on their own count
+    if (oWhen) whenCountAdd_(who.popId, oWhen);
     var oHood = iNeighborhood >= 0 ? String(oRow[iNeighborhood] || "") : "";
     var oTags = [];
     for (var mt = 0; mt < tags.length; mt++) {
@@ -3716,10 +3791,10 @@ function generateCitizensEvents_(ctx) {
     // 31-40, dinner-question age-neutral) so ALL parenting content lives in
     // one editable place. kidCount stays — condScopes.children reads it.
     if (maritalLc === "married") {
-      pool.push(makeEntry("split the last of the coffee and the morning's plans with their partner", mergeTags(["source:familyLife", "family:partner", "act:rest"], calendarTags), 1.0, false));
+      pool.push(makeEntry("split the last of the coffee and the morning's plans with their partner", mergeTags(["source:familyLife", "family:partner", "act:rest", "when:morning"], calendarTags), 1.0, false));
       pool.push(makeEntry("caught their partner humming the song they'd had stuck all day", mergeTags(["source:familyLife", "family:partner"], calendarTags), 0.95, false));
     } else if (maritalLc === "widowed") {
-      pool.push(makeEntry("set two cups out by habit and let the second one stay", mergeTags(["source:familyLife", "family:widowed", "act:rest"], calendarTags), 1.0, false));
+      pool.push(makeEntry("set two cups out by habit and let the second one stay", mergeTags(["source:familyLife", "family:widowed", "act:rest", "when:morning"], calendarTags), 1.0, false));
       pool.push(makeEntry("told a story their late partner used to tell, and told it right", mergeTags(["source:familyLife", "family:widowed"], calendarTags), 0.95, false));
     } else if (maritalLc === "divorced") {
       pool.push(makeEntry("handled a logistics call with an ex — civil, brief, done", mergeTags(["source:familyLife", "family:divorced"], calendarTags), 0.9, false));
@@ -3735,7 +3810,7 @@ function generateCitizensEvents_(ctx) {
       pool.push(makeEntry("did the math twice at the register and put one thing back", mergeTags(["source:economy", "econ:tight", "act:errand"], calendarTags), 1.05, false));
       pool.push(makeEntry("moved a bill to next month and tried not to think about it", mergeTags(["source:economy", "econ:tight"], calendarTags), 1.0, false));
     } else if (wealthLvl !== null && wealthLvl >= 8) {
-      pool.push(makeEntry("quietly covered the table's coffee and waved off the thanks", mergeTags(["source:economy", "econ:comfortable", "act:meal"], calendarTags), 0.95, false));
+      pool.push(makeEntry("quietly covered the table's coffee and waved off the thanks", mergeTags(["source:economy", "econ:comfortable", "act:meal", "when:morning", "when:afternoon"], calendarTags), 0.95, false));
       pool.push(makeEntry("spent an hour moving money around to work a little harder", mergeTags(["source:economy", "econ:comfortable"], calendarTags), 0.9, false));
     }
     // engine.299 Task 4 (builder 2026-10-18: events that fire if they have debt at a certain level): the stretched
@@ -3755,7 +3830,7 @@ function generateCitizensEvents_(ctx) {
     // remain the fallback. Tags unchanged — dial routing identical.
     if (hasAlliance && chanceHit(0.4)) {
       if (allyName) {
-        pool.push(makeEntry("compared notes with " + allyName + " over coffee that went long", mergeTags(["relationship:alliance", "dial:sociability:up", "act:meal"], calendarTags), 1.15, false));
+        pool.push(makeEntry("compared notes with " + allyName + " over coffee that went long", mergeTags(["relationship:alliance", "dial:sociability:up", "act:meal", "when:morning", "when:afternoon"], calendarTags), 1.15, false));
         pool.push(makeEntry("got a heads-up text from " + allyName + " that saved some trouble", mergeTags(["relationship:alliance", "dial:warmth:up"], calendarTags), 1.1, false));
         pool.push(makeEntry("caught " + allyName + "'s eye across the room and didn't need to say it", mergeTags(["relationship:alliance", "dial:warmth:up"], calendarTags), 1.05, false));
       } else {
@@ -4519,6 +4594,10 @@ function generateCitizensEvents_(ctx) {
 
     // engine.201b hood retag (ActivityExpanded / ActivityContracted / StreetsGuarded) REMOVED S451
     // (builder ruling 2026-09-13: dials follow EVENTS — never retag texture to move a dial).
+    // engine.356 cut A4: the part of the day, set once the line is admitted and before the tag string and
+    // the twin are written — both records carry the same part. The other person counts toward the pick
+    // only when the row puts the moment on their record too.
+    tags = whenTagged_(popIdNorm, (withNamed && contact.popId && tags.indexOf("shared:both") >= 0) ? contact.popId : '', tags, pick);
     var tagString = [primaryTag].concat(tags).join("|");
 
     var stamp = inWorldStamp_(ctx);

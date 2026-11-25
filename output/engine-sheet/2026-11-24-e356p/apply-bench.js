@@ -14,6 +14,8 @@ const lines = JSON.parse(fs.readFileSync(__dirname + '/bench-lines.json', 'utf8'
   if (JSON.stringify(d[0]) !== JSON.stringify(['Kind', 'PoolKey', 'Slot', 'Text', 'Weight', 'Conditions', 'Tags', 'Grain', 'Active'])) throw new Error('header moved');
   const up = []; let n = 0;
   for (const bl of lines) { if (d.some(r => r[3] === bl[3])) continue; const at = d.length + 1 + n; up.push({ range: 'Event_Content_Ledger!A' + at + ':I' + at, values: [bl] }); n++; }
+  // the tab's grid ends at its last row: grow it by exactly the rows to add (as the live apply of the 23 slot lines did)
+  if (up.length) await sheets.resizeSheet('Event_Content_Ledger', null, d.length + up.length);
   if (up.length) await sheets.batchUpdate(up);
   const back = await sheets.getSheetData('Event_Content_Ledger');
   const ok = lines.filter(bl => back.some(r => bl.every((v, i) => String(r[i] || '') === v))).length;

@@ -131,6 +131,7 @@ Keep: the ten methods as his own craft (he picks), rate arithmetic, sourcing (ev
 |---|---|---|---|
 | Six reporters, live | agy | [[../../output/antigravity/2026-11-23-review-pipeline111-reporters]] | HOLD — #1–#5 verified and fixed `36f0eec26`; #6–#8 held (low) |
 | Morning tools, ask_worker, Graye, trims | agy | [[../../output/antigravity/2026-11-23-review-pipeline111-pass2]] | HOLD — #1–#5 verified and fixed `69f6adf70`; #1 proven through the live gate (PASS) |
+| Anthony step 1, the seat file | agy | [[../../output/antigravity/2026-11-24-review-anthony-step1-seat]] | HOLD — #1-3 tools: true, wired in steps 3-4; #4 OrginCity: stale snapshot (sheet written N17); #5, #7-12 verified and folded into SEAT.md + voices/anthony.md Essence; #6 held (newsroom rule: Paulson family is out of canon); #13 'and the rest' removed |
 
 ### Agreed
 
@@ -157,6 +158,8 @@ Keep: the ten methods as his own craft (he picks), rate arithmetic, sourcing (ev
 
 
 ## Changelog
+
+- 2026-11-24 (research-build) — Anthony step 1 folded after agy's HOLD: third person and one claim, blunt with evidence; rates only from filled numbers, innings in thirds; no merged lines, team record is the club's; no splits, projections, injuries or front-office mind-reading; PANDAS/Statcast supply no current numbers; Gridiron quotable, citizens not interviewed; three stock phrasings out; voice Essence origin trued.
 
 - 2026-11-24 (research-build) — Sports seats begin with Anthony: his wake read whole; builder rulings on his origin, the sports lenses and models recorded verbatim. Open: Berkeley Owls (his own canon interview) vs the builder's memory of Mags; Paulson's brother vs no relation; OrginCity blank.
 

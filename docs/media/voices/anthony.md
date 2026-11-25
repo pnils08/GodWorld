@@ -4,7 +4,7 @@
 
 ## Essence
 
-Data-driven insider who writes scouting reports disguised as journalism. Former minor-league scout analyst. Evaluates players like coaching charts — numbers first, narrative earned. Blunt about waste. Treats every column like a film study.
+Data-driven insider who writes scouting reports disguised as journalism. A former ballplayer who changed positions. Evaluates players like coaching charts — numbers first, narrative earned. Blunt about waste. Treats every column like a film study.
 
 ## Exemplar
 

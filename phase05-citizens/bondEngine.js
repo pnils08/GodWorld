@@ -754,7 +754,11 @@ function updateExistingBonds_(ctx) {
       momentBonds = {};
       for (var smi = 0; smi < sharedMoments.length; smi++) {
         var sm = sharedMoments[smi];
-        if (!sm || !sm.bondType) continue;
+        if (!sm) continue;
+        // builder 2026-11-25 ("1. Yes"): a moment with a coworker or housemate carries no bond type (the line
+        // named them by employer or household) — the bond the two already hold takes the step, whatever its
+        // type, but never a rivalry, tension or sports rivalry.
+        if (!sm.bondType) { momentBonds[bondMomentKey_(sm.a, sm.b, '*')] = true; continue; }
         momentBonds[bondMomentKey_(sm.a, sm.b, sm.bondType)] = true;
       }
     } else {
@@ -772,6 +776,10 @@ function updateExistingBonds_(ctx) {
 
     var intensity = Number(bond.intensity) || 0;
     var hadMoment = !!(momentBonds && momentBonds[bondMomentKey_(bond.citizenA, bond.citizenB, bond.bondType)]);
+    if (!hadMoment && momentBonds && momentBonds[bondMomentKey_(bond.citizenA, bond.citizenB, '*')]) {
+      var uType = String(bond.bondType || '').trim().toLowerCase();
+      hadMoment = !(uType === BOND_TYPES.RIVALRY || uType === BOND_TYPES.TENSION || uType === BOND_TYPES.SPORTS_RIVAL);
+    }
     if (hadMoment) {
       var mType = String(bond.bondType || '').trim().toLowerCase();
       intensity += mType === BOND_TYPES.ROMANTIC ? momentStep.partner

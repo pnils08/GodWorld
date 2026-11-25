@@ -418,9 +418,11 @@ function buildFreeAnglePacket({ cycle, desk, reporter, story, slice, candidates:
         focus: 'string', why: 'string', checks: ['string'],
         // pipeline.111 (builder 2026-11-25: "take the restriction out, keep the cap"): a target is the seat's own pick —
         // a person on this record or any citizen; up to QUOTE_CITIZEN_CAP are asked
-        targets: [{ pop: 'the person\'s popid — from this record, or the popid citizen_lookup gives you', question: 'string', basis: 'string — what in their life ties them to the story you are chasing' }],
+        targets: free.interviews === false ? []
+          : [{ pop: 'the person\'s popid — from this record, or the popid citizen_lookup gives you', question: 'string', basis: 'string — what in their life ties them to the story you are chasing' }],
         interpretation: 'string', unverifiedLead: ['string'] },
-      rule: 'A target is someone whose life touched the story you are chasing, whoever you want to hear from: a person on this record or anyone in the city (citizen_lookup gives their popid and their life). Up to four are asked. Do not invent people or identifiers. ' +
+      rule: (free.interviews === false ? 'You interview no one; return targets as an empty array. '
+        : 'A target is someone whose life touched the story you are chasing, whoever you want to hear from: a person on this record or anyone in the city (citizen_lookup gives their popid and their life). Up to four are asked. Do not invent people or identifiers. ') +
         'chase is the human story-doc slot. Do not serialize this plan object into chase.',
     },
   }, 'W1');
@@ -716,7 +718,7 @@ function reporterPickRefusal(pop, input) {
 // does not show them in the story; they answer from their own life (ownLifeInterviewPacket) and the reporter's question.
 function reporterPickCandidate(target) {
   const row = ledgerRowForPop(target && target.pop);
-  if (!row) return null;
+  if (!row || reporterPickRefusal(target.pop, null)) return null;   // agy 2026-11-25 #5.4: the W2 re-check is the whole check
   const pop = String(row.POPID).trim().toUpperCase();
   const name = String(row.Name || '').replace(/\s+/g, ' ').trim() || [row.First, row.Last].filter(Boolean).join(' ');
   return { pop, name, role: row.RoleType || 'citizen', hood: row.Neighborhood || null,

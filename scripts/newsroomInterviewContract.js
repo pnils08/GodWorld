@@ -139,16 +139,23 @@ function ownLifeInterviewPacket(packet, plannedQuestion) {
   // reporter's plan focus: 'what about "<focus>" creates accountability for you'). No question of theirs: a plain one.
   const planned = String(plannedQuestion || (packet.exposure && packet.exposure.planTarget && packet.exposure.planTarget.question) || '').trim();   // the caller passes the plan's own (planTarget is cleared upstream)
   out.task = Object.assign({}, out.task, { question: (planned ? planned + (/[?.!]$/.test(planned) ? '' : '?')
-    : 'What is on your mind this week?') + ' Speak from your life.' });
-  out.exposure = Object.assign({}, out.exposure, { planTarget: null, evidence: [] });
+    : 'What is on your mind this week?') + ' Speak from your life. If the question assumes something that has not happened to you, say so plainly.' });
+  // ownLife (agy 2026-11-25 #1): the citizen voice reads this flag and hands the citizen their whole life, not the
+  // no-exposure fence an empty evidence list would otherwise trigger
+  out.exposure = Object.assign({}, out.exposure, { planTarget: null, evidence: [], ownLife: true });
   out.known = (out.known || []).filter(c => /profile for /i.test(String(c.src || '')) && String(c.src).toUpperCase().includes(pop)
     || /calendar/i.test(String(c.src || '') + ' ' + String(c.text || '').slice(0, 40))
     || (name && String(c.text || '').toLowerCase().includes(name)));
   if (out.limits && out.limits.quoteEligible !== false) {
     out.limits.rule = 'Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.';
   }
-  if (out.output && out.output.schema) out.output.schema.basis = 'lived-context|direct-reaction|null';
+  // lived-context needs a story evidence row this packet never carries (validateInterviewOutput): one basis, the one it takes
+  if (out.output && out.output.schema) out.output.schema.basis = 'direct-reaction|null';
   return out;
+}
+
+function isOwnLifePacket(packet) {
+  return Boolean(packet && packet.exposure && packet.exposure.ownLife === true);
 }
 
 function isInterviewPacket(packet) {
@@ -242,14 +249,17 @@ function validateInterviewOutput(value, input) {
   };
 }
 
-function citizenEvidenceGuard(livedContextAllowed) {
-  const grounding = livedContextAllowed
+function citizenEvidenceGuard(livedContextAllowed, ownLife) {
+  const grounding = ownLife
+    ? 'The question is the reporter\'s own; your life is above. Answer as yourself from it, one to three first-person sentences. If the question assumes something that has not happened to you, say so plainly. Do not invent a named person, place, number, or official act. Set basis to direct-reaction.'
+    : livedContextAllowed
     ? 'The Packet supplies addressable story-linked lived evidence, so you may use the matching simulated-life context above.'
     : 'The Packet does not supply story-linked lived evidence. Speak as yourself anyway — your job, your block, the named people already in your life. One to three first-person sentences. The Packet fact is city news, not a spreadsheet. Do not invent a person, bakery, bar, or official act. Set basis to direct-reaction.';
   return '\n\nINTERVIEW MODE: Return ONLY the JSON. This is a conversation on the street, not an analysis. ' + grounding + ' The quote field is what you actually say and will be preserved exactly. Never mention packets, data, records, prompts, or systems.';
 }
 
 module.exports = {
+  isOwnLifePacket,   // pipeline.111 (agy 2026-11-25 #1)
   CONTRACT,
   LEGACY_LATTICE,
   // Exported S389: citizenVoice needs the same fence-strip + object-extract when it

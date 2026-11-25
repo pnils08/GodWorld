@@ -129,6 +129,13 @@ assert.throws(() => v1.validateAngleOutput(Object.assign({}, ownPick, {
     targets: [{ pop: staff.POPID, question: 'q', basis: 'b' }] }), rows), /target is Tribune staff/);
 }
 
+// agy 2026-11-25 #5.2: a records seat's plan is not told it may name people
+{
+  const recordsPlan = v1.buildAnglePacket(Object.assign({}, base, { free: { rows: true, interviews: false } }));
+  assert.deepStrictEqual(recordsPlan.output.schema.targets, []);
+  assert.ok(/You interview no one/.test(recordsPlan.output.rule));
+}
+
 // the evening packet for a seat that picked for itself: what it knows and the grammar, no shape, no slot, no footer
 const reviewProfile = { id: 'test-profile', canonPolicy: 'load-bearing', canonBlockers: ['an invented TEST station'] };
 const writeArgs = { cycle: 999, desk: 'civic', reporter, story: { kind: 'own-pick', ref: 'own pick, C999', label: plan.focus, angle: plan.focus },

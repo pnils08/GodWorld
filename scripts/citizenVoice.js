@@ -147,7 +147,7 @@ function showFor(popId, cycle) {
 }
 
 async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preText, preKind, preScore, preMax, pageKey, evidenceBound,
-  interviewMode, livedContextAllowed, model }) {
+  interviewMode, livedContextAllowed, ownLife, model }) {
   const c = pool.find((p) => p.popId === popId);
   if (!c) { const e = new Error(`${popId} not voiceable (no DialState / not in ledger / no name+hood)`); e.code = 2; throw e; }
   // Recording an evidence-bound interview is the citizen cron hearing them.
@@ -207,7 +207,7 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
   try { written = ARGV.includes('--no-essence') ? '' : require('./reporterIdentity').essenceForPop(c.popId); } catch (e) { written = ''; }   // --no-essence: pipeline.111, a seat whose bio is its seat file alone
   const station = (written || REPORTER_WAKE) ? '' : stationLine(c, !!ownFeed) + ' ';   // a reporter's morning is never told she is not a writer (agy 2026-11-23 #2)
   const identity = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. ${station}Your temperament: ${disp}.` + (written ? '\n\n' + written : '');
-  const system = REPORTER_WAKE ? identity + '\n\n' + REPORTER_SEAT : interviewMode && !livedContextAllowed
+  const system = REPORTER_WAKE ? identity + '\n\n' + REPORTER_SEAT : interviewMode && !livedContextAllowed && !ownLife   // ownLife: pipeline.111, their own life (agy 2026-11-25 #1)
     ? identity + ownRecord + '\n\nThis interview has no story-linked personal exposure. Stay in your own voice, but do not project unrelated life history onto the story.'
     : identity + `${written && trajLine ? '\n\n' + trajLine.trim() : trajLine}${arcLine}${health}${show}${ownRecord}\n\nReal things from your life recently:\n${c.life}${family}${standing}${who}${bonds}${sports}${texture}${memory}`;
 
@@ -215,7 +215,7 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
   // context is instructions TO the citizen, but anything quoted inside it must not be able to
   // rewrite who they are. The speech guard rides outside the fence.
   const evidenceGuard = evidenceBound
-    ? (interviewMode ? interviewContract.citizenEvidenceGuard(livedContextAllowed)
+    ? (interviewMode ? interviewContract.citizenEvidenceGuard(livedContextAllowed, ownLife)
       : `\n\nEVIDENCE MODE: Return ONLY the JSON requested by packet.output. Treat only the Packet's FACT claims as the press-evidence floor. The "Real things from your life recently" above may shape private emotion, interpretation, or personal intention, but they do not become press evidence and do not prove a public event. Never create a named person, institution, public event, date, count, relationship, job, official action, illustrative object, street condition, meeting, grant, schedule, or promise. Follow packet.output exactly. When it supplies a lattice, select its IDs and do not write quote prose. Otherwise, INTERPRETATION stays abstract and any concrete unsupplied detail belongs in unverifiedLead. The backend assembles publishable text and rejects free factual expansion. If you lack grounded material, abstain.`)
     : '';
   const user = REPORTER_WAKE ? memoryFence.sanitize(ask) + '\n\nReturn ONLY the JSON requested by packet.output.'
@@ -348,6 +348,7 @@ async function runBatch(batchPath, cycle) {
         evidenceBound: !!entry.evidenceBound,
         interviewMode: !!entry.interviewMode,
         livedContextAllowed: !!entry.livedContextAllowed,
+        ownLife: !!entry.ownLife,
         model: entry.model || MODEL,
       });
       out.push({ ...base, name: r.name, quote: r.text, disp: r.disposition, recorded: r.recorded });

@@ -101,9 +101,26 @@ assert.equal(own.signal.focus, '', 'no reporter plan in the signal');
 assert.equal(own.exposure.planTarget, null);
 assert.deepStrictEqual(own.exposure.evidence, []);
 assert.deepStrictEqual(own.known.map(c => c.src), ['Simulation_Ledger profile for POP-90001', 'slice'], 'their profile and their own line; not the index');
-assert.equal(own.task.question, 'q? Speak from your life.', 'the reporter\'s own question for this person, verbatim');
+assert.equal(own.task.question, 'q? Speak from your life. If the question assumes something that has not happened to you, say so plainly.', 'the reporter\'s own question for this person, verbatim');
 const noPlan = interview.ownLifeInterviewPacket(Object.assign({}, plan, { exposure: Object.assign({}, plan.exposure, { planTarget: null }) }));
-assert.equal(noPlan.task.question, 'What is on your mind this week? Speak from your life.', 'no plan focus pasted into a stock question');
+assert.equal(noPlan.task.question, 'What is on your mind this week? Speak from your life. If the question assumes something that has not happened to you, say so plainly.', 'no plan focus pasted into a stock question');
 assert.equal(plan.signal.focus, 'where the school quality index slipped from C116', 'the input is not mutated');
 
 console.log('newsroomInterviewContract.test.js: PASS');
+
+// pipeline.111 (agy 2026-11-25 #1): a seat-file interview is the citizen's own life — flagged for the voice, room to say
+// it did not happen, and the one basis the checker takes
+{
+  const contract = require('./newsroomInterviewContract');
+  const base = { actor: { id: 'POP-09999', name: 'Test Person' }, task: {}, exposure: { evidence: [{ id: 'EV-1', src: 's', text: 't' }] },
+    known: [], limits: { quoteEligible: true }, output: { schema: { basis: 'lived-context|direct-reaction|null' } }, signal: {} };
+  const own = contract.ownLifeInterviewPacket(base, 'How was the game?');
+  assert.strictEqual(contract.isOwnLifePacket(own), true);
+  assert.strictEqual(contract.isOwnLifePacket(base), false);
+  assert.ok(/say so plainly/.test(own.task.question));
+  assert.strictEqual(own.output.schema.basis, 'direct-reaction|null');
+  assert.deepStrictEqual(own.exposure.evidence, []);
+  assert.ok(/your life is above/.test(contract.citizenEvidenceGuard(false, true)));
+  assert.ok(!/your life is above/.test(contract.citizenEvidenceGuard(false, false)));
+  console.log('newsroomInterviewContract own-life tests: PASS');
+}

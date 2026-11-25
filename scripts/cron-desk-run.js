@@ -558,7 +558,8 @@ function collectQuoteAsks(lane, persona, story, angleArt) {
     asks.push({ pop, ask: askText,
       ...(inputPacket ? { packetContract: livedPacket.VERSION, inputPacket, evidenceBound: true,
         interviewMode: interviewContract.isInterviewPacket(inputPacket),
-        livedContextAllowed: interviewContract.hasLivedEvidence(inputPacket) } : {}),
+        livedContextAllowed: interviewContract.hasLivedEvidence(inputPacket),
+        ownLife: interviewContract.isOwnLifePacket(inputPacket) } : {}),
       ...(ACTIVE_WAKE_PACKAGE ? { model: wakePackages.routeFor(ACTIVE_WAKE_PACKAGE, 'report').model } : {}),
       record: !NO_GATE, maxTokens: PACKET_ACTIVE ? 420 : 200 });
   };
@@ -2280,6 +2281,8 @@ async function runAngle(assign) {
         slice: typedSlice, lane,
         candidates: sourcingPool ? sourcingPool.candidates : [],
         ...(FREE_ANGLE ? { free: Object.assign(FREE_ANGLE === 'free-week' ? { week: cityWeekLines(cycle) } : { rows: true },
+          // agy 2026-11-25 #5.2: a records seat interviews nobody, so its plan is not told it may name people
+          ACTIVE_WAKE_PACKAGE && wakePackages.sourcingFor(ACTIVE_WAKE_PACKAGE) === 'records' ? { interviews: false } : {},
           // pipeline.111 (2026-11-24, Nia's first day on her seat file: "free W1 Packet has nothing on the record"): the
           // UNDOCKED record is its lane entries, not a prewrite summary — every episode and the standings are her rows
           desk === 'undocked' ? { week: undockedRecordLines(lane) } : {},
@@ -2401,7 +2404,9 @@ async function runAngle(assign) {
     approach = null;
     console.log('[angle] ' + personaSlug + ' passes the day — ' + ownPlan.why);
   } else if (ownPlan) {
-    const byPop = new Map((sourcingPool && sourcingPool.candidates || []).map(c => [c.pop, c]));
+    // agy 2026-11-25 #2: the people W1 showed (the plan packet caps them at peopleCap), not the whole pool — a pick past
+    // the cap is a pick of their own and rides as one, or W2 (which matches the pool to W1's list) drops it
+    const byPop = new Map(((inputPacket && inputPacket.exposure && inputPacket.exposure.candidates) || []).map(c => [c.pop, c]));
     // pipeline.111 (builder 2026-11-25: "take the restriction out, keep the cap"): a pick outside the record's people
     // rides to W2 as its own candidate, asked from their own life
     reporterPicks = ownPlan.targets.filter(t => t && t.pop && !byPop.has(t.pop))

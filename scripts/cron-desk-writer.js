@@ -501,12 +501,14 @@ function renderPacketIntake(draftText, packet, opts) {
     if (!body.includes(name)) continue;
     // agy Anthony step 4 #1: a reporter quotes from anywhere in a long answer (a Gridiron analyst's reply runs 2,000 chars),
     // so any sentence of the answer found in the piece makes the speaker a quoted source, not only its first 48 characters
-    // a whole answer under 25 characters is matched whole (cron-desk-writer.test: "Test concern." was marked mentioned)
+    // a short answer counts only inside quotation marks (agy 2026-11-25 #4: "Nothing on file." in plain text matched);
+    // an answer of short sentences is matched on its opening, not lost to the 25-character sentence floor
     const quotedIn = (q) => { const whole = String(q || '').replace(/[*_#|>]/g, ' ').replace(/\s+/g, ' ').trim();
       const flat = body.replace(/\s+/g, ' ');
-      if (whole && whole.length < 25) return flat.includes(whole);
-      return whole.split(/(?<=[.!?"”])\s+/).map(t => t.trim())
-        .filter(t => t.length >= 25).some(t => flat.includes(t.slice(0, Math.min(48, t.length)))); };
+      if (!whole) return false;
+      if (whole.length < 25) return ['"', '“', '‘', "'"].some(m => flat.includes(m + whole) || flat.includes(m + whole.replace(/[.!?]+$/, '')));
+      const long = whole.split(/(?<=[.!?"”])\s+/).map(t => t.trim()).filter(t => t.length >= 25);
+      return (long.length ? long : [whole]).some(t => flat.includes(t.slice(0, Math.min(48, t.length)))); };
     const role = meta.quote && quotedIn(meta.quote)
       ? 'quoted-source' : meta.role === 'quoted-source' ? 'mentioned' : meta.role;
     lines.push('NAMES: ' + name + ' | ' + role);

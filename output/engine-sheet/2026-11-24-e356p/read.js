@@ -49,12 +49,15 @@ const lines = bench.map(b => ({
   const sizeBand = Number(cfg.bondMomentDialSize) >= 4 ? 'L' : (Number(cfg.bondMomentDialSize) >= 2 ? 'M' : 'S');
   const minorOrGone = p => { const r = led.find(x => String(x.POPID).trim().toUpperCase() === p) || {}; const by = Number(r.BirthYear) || 0; return by > 1900 && (2040 + Math.ceil(+C / 52) - 1) - by < 18; };
   let before = []; try { before = JSON.parse(fs.readFileSync(__dirname + '/bonds-before.json', 'utf8')); } catch (e) {}
-  const calledBy = {}, momentPairs = {}, twinKey = {}; let called = 0, twins = 0, sizedM = 0;
+  const calledBy = {}, momentPairs = {}, twinKey = {}; let called = 0, twins = 0, sizedM = 0, reciprocal = 0;
   for (const r of log) twinKey[String(r.POPID).trim().toUpperCase() + '|' + (r.EventText || '')] = String(r.EventTag || '');
   const P = {};
   for (const r of led) P[String(r.POPID).trim().toUpperCase()] = { name: ((r.First || '') + ' ' + (r.Last || '')).trim(), st: String(r.Status || '').trim().toLowerCase(), biz: String(r.EmployerBizId || '').trim(), hh: String(r.HouseholdId || '').trim() };
+  let beforeBonds = []; try { beforeBonds = JSON.parse(fs.readFileSync(__dirname + '/bonds-before.json', 'utf8')); } catch (e) {}
+  // a line's kind is judged on the bonds as they stood BEFORE the fire: the same fire can deepen a
+  // professional bond into a friendship or turn a friendship romantic (run 1: 7 such lines read as failures)
   const bondKinds = {}; // "A|B" -> { kind: status }
-  for (const b of bonds) {
+  for (const b of (beforeBonds.length ? beforeBonds : bonds)) {
     const a = String(b.CitizenA || '').trim().toUpperCase(), c = String(b.CitizenB || '').trim().toUpperCase();
     const k = KIND[String(b.BondType || '').trim().toLowerCase()];
     if (!k) continue;
@@ -96,11 +99,17 @@ const lines = bench.map(b => ({
     if (ln && !ln.sized) { if (new RegExp('-' + sizeBand + '$').test(parts[0])) sizedM++; else problems.push('a line that names its person does not lead with a -' + sizeBand + ' tag: ' + parts[0] + ' — ' + t.slice(0, 60)); }
     if (ln && op.name && (P[self] || {}).name) {
       const tw = twinKey[o + '|' + t.split(op.name).join(P[self].name)];
-      const isTwin = tw !== undefined && tw.split('|').indexOf('contactPopId:' + self) >= 0;
-      if (ln.both && !isTwin && minorOrGone(o)) { notes.push('no twin on a minor\'s record (by rule): ' + t.slice(0, 60)); }
-      else if (ln.both && !isTwin) problems.push('a shared:both line has no twin on ' + o + ': ' + t.slice(0, 70));
-      if (!ln.both && isTwin) problems.push('a one-sided line was written on ' + o + ' too: ' + t.slice(0, 70));
-      if (ln.both && isTwin) twins++;
+      const twParts = tw === undefined ? [] : tw.split('|');
+      const isBack = twParts.indexOf('contactPopId:' + self) >= 0;
+      const isTwin = isBack && !twParts.some(x => x.indexOf('ageGroup:') === 0);   // a written twin carries no ageGroup: of its own
+      const selfIsTwin = !parts.some(x => x.indexOf('ageGroup:') === 0);
+      if (isBack && !isTwin && !selfIsTwin && !ln.both) reciprocal++;
+      if (selfIsTwin) { }
+      else if (ln.both && !isTwin && !isBack && minorOrGone(o)) { notes.push('no twin on a minor\'s record (by rule): ' + t.slice(0, 60)); }
+      else if (ln.both && !isTwin && !isBack) problems.push('a shared:both line has no twin on ' + o + ': ' + t.slice(0, 70));
+      if (selfIsTwin) { /* this row is itself the written twin — its original is checked from the other side */ }
+      else if (!ln.both && isTwin) problems.push('a one-sided line was written on ' + o + ' too: ' + t.slice(0, 70));
+      if (!selfIsTwin && ln.both && isTwin) twins++;
     }
     if (ln) {
       byLine[ln.text] = (byLine[ln.text] || 0) + 1;
@@ -113,7 +122,7 @@ const lines = bench.map(b => ({
     else {
       const bk = bondKinds[self + '|' + o];
       if (!bk || !(k in bk)) problems.push(self + ' / ' + o + ' have no ' + k + ' bond row: ' + t.slice(0, 60));
-      else if (bk[k] !== 'active') notes.push(self + ' / ' + o + ' ' + k + ' bond is ' + bk[k] + ' after the fire');
+      else if (bk[k] !== 'active') problems.push(self + ' / ' + o + ' ' + k + ' bond was ' + bk[k] + ' before the fire');
     }
     const pls = parts.filter(p => p.indexOf('place:') === 0).map(p => p.slice(6));
     if (pls.length > 1) problems.push('two places on one line: ' + parts.join('|').slice(0, 120));
@@ -137,6 +146,7 @@ const lines = bench.map(b => ({
   const moved = {}; let fell = 0;
   for (const b of bonds) {
     const w = was[String(b.BondId) + '|' + bKey(b)]; if (w === undefined || isNaN(w)) continue;
+    if (w > 9) continue;   // a bond at the cap of 10 cannot show a step (run 1: rivalries average 8.8)
     const d = Number(b.Intensity) - w, ty = String(b.BondType || '').toLowerCase(), has = momentPairs[bKey(b)] ? 'moment' : 'none';
     const m = (moved[ty] = moved[ty] || { moment: [0, 0], none: [0, 0] }); m[has][0]++; m[has][1] += d;
     if (has === 'moment' && d < 0 && w < 10) { fell++; notes.push('a bond with a moment fell: ' + b.BondId + ' ' + ty + ' ' + w + ' -> ' + b.Intensity); }
@@ -150,7 +160,7 @@ const lines = bench.map(b => ({
   const want = ['friend', 'family', 'neighbor', 'coworker', 'housemate', 'rival', 'colleague', 'partner'];
   const notProven = want.filter(k => !byKind[k]).map(k => 'kind ' + k).concat(homes ? [] : ['their-home']).concat(shifts ? [] : ['shift with a coworker']).concat(twoSlot ? [] : ['person + place']);
   const out = { cycle: +C, lines: log.length, people: new Set(log.map(r => r.POPID)).size, bondEngineContactLines: engineLines,
-    withLines: lineCount, bondCalledLines: called, mostBondCalledOnOnePerson: Math.max(0, ...Object.values(calledBy)), twinLines: twins, leadTagsSizedM: sizedM,
+    withLines: lineCount, bondCalledLines: called, mostBondCalledOnOnePerson: Math.max(0, ...Object.values(calledBy)), twinLines: twins, sameLineDrawnBothWaysByChance: reciprocal, leadTagsSizedM: sizedM,
     bondsWithAMoment: Object.keys(momentPairs).length, bondChange, momentBondsThatFell: fell, config: Object.fromEntries(CFG_KEYS.map(k => [k, cfg[k]])), byKind, byLine, theirHomeLines: homes, theirHomeWithNoHouseholdOnTheirRow: homesNoHousehold, shiftLines: shifts, personAndPlaceLines: twoSlot, someoneFamiliar: vague,
     notProven, examples: ex, notes: notes.slice(0, 12), problems, verdict: problems.length ? 'FAIL' : (lineCount ? (notProven.length ? 'PASS, not proven: ' + notProven.join(', ') : 'PASS') : 'FAIL') };
   console.log(JSON.stringify(out, null, 1));

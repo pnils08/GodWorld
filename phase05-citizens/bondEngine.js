@@ -2113,7 +2113,7 @@ function appendBondLifeLine_(ctx, ledgerIdx, tag, text, cycle, withPop) {
       var nm = (((iFirst >= 0 ? row[iFirst] : '') || '') + ' ' + ((iLast >= 0 ? row[iLast] : '') || '')).trim();
       var logTag = withPop ? (tag + '|contactPopId:' + withPop) : String(tag);
       queueAppendIntent_(ctx, 'LifeHistory_Log', [ctx.now, who, nm, logTag, text,
-        iHood >= 0 ? (row[iHood] || '') : '', cycle], 'engine.356 bond line', 'citizens', 60);
+        iHood >= 0 ? (row[iHood] || '') : '', cycle, '', withPop ? String(withPop) : ''], 'engine.356 bond line', 'citizens', 60);   // cut A5: PlaceId (a bond line has none), WithPopId
     }
   }
 }

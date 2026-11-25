@@ -252,6 +252,24 @@ function spotRank_(popId, bizId) {
   return (h ^ (h >>> 16)) >>> 0;
 }
 
+// engine.356 cut A5: the two right-edge cells of a LifeHistory_Log row, read off the line's own tags —
+// PlaceId: the first place:<id> that is an id (BIZ-, PRG-, a household id; never the unresolved words
+// employer / their-home / congregation), WithPopId: the contactPopId. Blank where the line has neither —
+// an empty cell here is a line with no place or no second person, not a gap.
+function lifeLogEdgeCells_(tags) {
+  var place = '', withPop = '';
+  for (var i = 0; i < (tags || []).length; i++) {
+    var t = String(tags[i]);
+    if (!place && t.indexOf('place:') === 0) {
+      var pv = t.slice(6).trim();
+      if (pv && pv !== 'employer' && pv !== 'their-home' && pv !== 'congregation') place = pv;
+    } else if (!withPop && t.indexOf('contactPopId:') === 0) {
+      withPop = t.slice(13).trim();
+    }
+  }
+  return [place, withPop];
+}
+
 function spotTag_(tags) {
   for (var i = 0; i < (tags || []).length; i++) if (String(tags[i]).indexOf('spot:') === 0) return true;
   return false;
@@ -3129,7 +3147,7 @@ function generateCitizensEvents_(ctx) {
     var oExisting = oRow[iLife] ? oRow[iLife].toString() : "";
     oRow[iLife] = oExisting ? oExisting + "\n" + oLine : oLine;
     oRow[iLastU] = ctx.now;
-    if (lifeLog) logRows.push([ctx.now, oRow[iPopID], who.name, [leadTag].concat(oTags).join("|"), oText, oHood, cycle]);
+    if (lifeLog) logRows.push([ctx.now, oRow[iPopID], who.name, [leadTag].concat(oTags).join("|"), oText, oHood, cycle].concat(lifeLogEdgeCells_(oTags)));
     S.citizenEvents = S.citizenEvents || [];
     S.citizenEvents.push({ popId: String(oRow[iPopID]), citizenName: who.name, text: oText, tag: leadTag, neighborhood: oHood });
     // a minor's twin does not put them in the week's active pool — that pool is who meets strangers in the
@@ -4633,7 +4651,7 @@ function generateCitizensEvents_(ctx) {
         pick,
         neighborhood,
         cycle
-      ]);
+      ].concat(lifeLogEdgeCells_(tags)));   // cut A5: PlaceId, WithPopId
     }
 
     rows[r] = row;

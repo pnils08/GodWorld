@@ -2000,6 +2000,8 @@
 
 - **spotRank_(popId, bizId)**
 
+- **lifeLogEdgeCells_(tags)**
+
 - **spotTag_(tags)**
 
 - **citizenSpotFor_(hoodSpots, popId)**
@@ -4941,4 +4943,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 179
-**Functions mapped:** 1795
+**Functions mapped:** 1796

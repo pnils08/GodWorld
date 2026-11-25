@@ -1705,6 +1705,7 @@ async function seatMorningPlan(asker, ask, model, maxTokens, cycle) {
     : name === 'citizen_lookup' ? W.toolCitizenLookup(input)
     : name === 'sheet_read' ? W.toolSheetRead(input, { seat: true })   // Cultural_Ledger, as the seat writer reads it
     : name === 'memory_recall' && ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.seatMemory === true ? W.toolMemoryRecall(asker.popid, input)
+    : name === 'dossier_read' && ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.seatDossier === true ? W.toolDossierRead(input).text   // pipeline.111: the team cards
     : 'unknown tool ' + name;
   // pipeline.111: Nia keeps her aired-only tools at the morning too (the show's approved history, a citizen, past coverage)
   const nia = /^nia-rook/.test(personaSlugForSeat());
@@ -1713,7 +1714,7 @@ async function seatMorningPlan(asker, ask, model, maxTokens, cycle) {
     : name === 'canon_recall' ? W.toolCanonRecall(input, Number(cycle)) : 'tool unavailable for Nia Rook';
   const r = await W.openRouterToolLoop({ model, system, user: ask + '\n\nReturn ONLY the JSON requested by packet.output.',
     maxToolCalls: SEAT_MORNING_CALLS, maxTokens, timeoutMs: 180000, ...(seatReasoning() ? { body: { reasoning: { effort: seatReasoning() } } } : {}), toolset: nia ? [W.UNDOCKED_HISTORY_TOOL, W.OPENROUTER_TOOLS.find(t => t.function.name === 'citizen_lookup'), W.CANON_RECALL_TOOL]
-      : W.OPENROUTER_TOOLS.concat([W.CANON_RECALL_TOOL, require('./workerAsk').askWorkerTool()], ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.seatMemory === true ? W.MEMORY_TOOLS.filter(t => t.function.name === 'memory_recall') : []), exec: nia ? niaExec : exec, traceResults: true });
+      : W.OPENROUTER_TOOLS.concat([W.CANON_RECALL_TOOL, require('./workerAsk').askWorkerTool()], ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.seatDossier === true ? [W.DOSSIER_TOOL] : [], ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.seatMemory === true ? W.MEMORY_TOOLS.filter(t => t.function.name === 'memory_recall') : []), exec: nia ? niaExec : exec, traceResults: true });
   if (seatReasoning()) log('morning thinking ' + seatReasoning() + ': ' + (r.thinkingOut || 0) + ' reasoning tokens of ' + r.usageOut + ' out');
   log('morning tools: ' + r.trace.length + ' call(s)' + (r.trace.length ? ' — ' + r.trace.map(c => c.tool + '(' + JSON.stringify(c.input).slice(0, 60) + ')').join('; ') : ''));
   SEAT_MORNING_TRACE = r.trace.map(({ resultHead, ...rest }) => rest);
@@ -3324,7 +3325,8 @@ async function runWrite(assign) {
   if (PACKET_ACTIVE) writerArgs.push('--strict-source-hygiene', '--packet-only');
   if (SEAT_FILE) writerArgs.push('--seat-file', SEAT_FILE);
   if (SEAT_FILE && seatReasoning()) writerArgs.push('--reasoning', seatReasoning());
-  if (SEAT_FILE && ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.seatMemory === true) writerArgs.push('--seat-memory');   // pipeline.111: the seat prompt
+  if (SEAT_FILE && ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.seatMemory === true) writerArgs.push('--seat-memory');
+  if (SEAT_FILE && ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.seatDossier === true) writerArgs.push('--seat-dossier');   // pipeline.111: the team cards   // pipeline.111: the seat prompt
   if (SEAT_FILE && angle && Number(angle.workerAsksUsed) > 0) writerArgs.push('--asks-used', String(Number(angle.workerAsksUsed)));   // the ask cap is per wake
   if (SEAT_FILE && ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.seatEssence === false) writerArgs.push('--no-essence');   // Celeste (builder 2026-11-22: "archived only")
   // pipeline.76 — the package's own writer tools (its grant).

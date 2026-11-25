@@ -277,8 +277,51 @@ async function ask({ question, asker, cycle, date, officeId: forced, dryRun }) {
     records: w.records, user: w.user, toolReads };
 }
 
+// One player's whole card as lines, each a fact on the record — the reporters' dossier_read reads this first
+// (pipeline.111 Anthony step 3). season: only that year's lines. Returns null when no card holds the name;
+// { ambiguous: [names] } when a partial name fits more than one.
+function cardFor(name, cards) {
+  const c = cards || loadCards();
+  if (!c) return null;
+  const all = Object.values(c.teams || {}).flatMap((t) => t.players || []);
+  const want = String(name || '').trim().toLowerCase();
+  if (!want) return null;
+  const exact = all.find((p) => String(p.name || '').toLowerCase() === want);
+  if (exact) return exact;
+  const hits = all.filter((p) => { const n = String(p.name || '').toLowerCase(); return n.includes(want) || want.includes(n); });
+  if (hits.length > 1) return { ambiguous: hits.map((p) => p.name) };
+  return hits[0] || null;
+}
+function cardLines(p, season) {
+  const f = p.profile || {}, r = p.roster || {}, a = p.attributes || {};
+  const who = p.name;
+  const out = [];
+  const lvl = levelOf(p);
+  out.push(who + ' — ' + [p.position + (f['Secondary Position'] && !/^none$/i.test(f['Secondary Position']) ? ' (also ' + f['Secondary Position'] + ')' : ''),
+    p.team, lvl === 'gone' ? 'no longer with the club' : lvl === 'AAA' ? 'in Las Vegas (AAA)' : 'in the majors', 'bats ' + f.Bats + ', throws ' + f.Throws,
+    'age ' + f.Age + ' (2042)', 'overall ' + f.Overall + (p.trend ? ', trending ' + p.trend : ''), 'potential ' + f.Potential,
+    f['MLB Service'] != null ? 'service ' + f['MLB Service'] : null, f.Drafted ? 'drafted ' + f.Drafted : null, f.Born ? 'born ' + f.Born : null].filter(Boolean).join('; '));
+  const attrs = Object.entries(a).map(([k, v]) => (ATTR_WORDS[k] || k) + ' ' + v);
+  if (attrs.length) out.push(who + ' ratings (0-100, higher is better): ' + attrs.join(', ') + (changes(p) ? '. ' + changes(p) : ''));
+  if ((p.pitches || []).length) out.push(who + ' pitches: ' + p.pitches.join(', '));
+  const seasons = (p.seasons || []).filter((x) => Number(x.G) > 0 && (!season || String(x.YEAR) === String(season)));
+  for (const x of seasons) {
+    const adv = (p.advanced || []).find((y) => y.YEAR === x.YEAR && y.TEAM === x.TEAM) || {};
+    const rate = (p.rates || []).find((y) => y.YEAR === x.YEAR && y.TEAM === x.TEAM) || {};
+    const cols = (o) => Object.entries(o).filter(([k]) => !['YEAR', 'TEAM'].includes(k)).map(([k, v]) => k + ' ' + fmt3(v)).join(', ');
+    out.push(who + ' ' + x.YEAR + ' ' + x.TEAM + ': ' + cols(x) + (Object.keys(adv).length ? '; ' + cols(adv) : '') + (Object.keys(rate).length ? '; ' + cols(rate) : ''));
+  }
+  if (season && !seasons.length) out.push(who + ' has no ' + season + ' season on his card; seasons on file: ' + (p.seasons || []).filter((x) => Number(x.G) > 0).map((x) => x.YEAR).join(', '));
+  if (!season && Object.keys(p.career || {}).length) out.push(who + ' career: ' + Object.entries(p.career).map(([k, v]) => k + ' ' + fmt3(v)).join(', '));
+  if (Object.keys(p.contract || {}).length) out.push(who + ' contract: ' + Object.entries(p.contract).map(([y, v]) => y + ' ' + v).join('; '));
+  const status = Object.entries(r).filter(([k]) => !/^Level$/i.test(k)).map(([k, v]) => k + ' ' + v);
+  if (status.length) out.push(who + ' roster status: ' + status.join('; '));
+  for (const [label, list] of [['awards', p.awards], ['milestones', p.milestones], ['quirks', p.quirks], ['notes', p.notes]]) if ((list || []).length) out.push(who + ' ' + label + ': ' + list.join('; '));
+  return out;
+}
+
 const ASK_TOOL = { type: 'function', function: { name: 'ask_gridiron',
   description: 'Ask ' + HOUSE + ', Oakland\'s sports data house, a question about the A\'s or the Oaks — a hitter, a pitcher, the lineup or the rotation, a contract or a trade, the Oaks\' numbers, or what the Tribune has printed. The analyst who answers for that record answers from it, in their own words, and you may quote them.',
   parameters: { type: 'object', properties: { question: { type: 'string', description: 'your question, as you would put it to them' } }, required: ['question'] } } };
 
-module.exports = { ANALYSTS, route, ask, buildAsk, recordOf, loadCards, ASK_TOOL, RECORD_TITLES };
+module.exports = { ANALYSTS, route, ask, buildAsk, recordOf, loadCards, cardFor, cardLines, ASK_TOOL, RECORD_TITLES };

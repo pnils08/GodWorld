@@ -70,6 +70,7 @@ function validatePackage(key, value) {
     if (!/^\.claude\/agents\/[a-z0-9-]+\/SEAT\.md$/.test(String(value.seatFile))) errors.push('seatFile must be .claude/agents/<seat>/SEAT.md');
     else if (!fs.existsSync(path.join(__dirname, '..', value.seatFile))) errors.push('seatFile not found: ' + value.seatFile);
   }
+  if (value && value.seatDossier !== undefined && (value.seatDossier !== true || !value.seatFile)) errors.push('seatDossier may only be true, on a seat with a seatFile');
   if (value && value.seatMemory !== undefined && (value.seatMemory !== true || !value.seatFile)) errors.push('seatMemory may only be true, on a seat with a seatFile');
   if (value && value.seatReasoning !== undefined && (!/^(low|medium|high)$/.test(String(value.seatReasoning)) || !value.seatFile)) {
     errors.push('seatReasoning must be low, medium or high, on a seat with a seatFile');

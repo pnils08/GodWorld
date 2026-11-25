@@ -254,7 +254,8 @@ const WRITER_TOOLS = Math.max(0, Math.min(8, parseInt(arg('--writer-tools', '0')
 // The desk cron passes --seat-file for a seat whose wake package names one (and the test shell's seat run).
 const SEAT_FILE_PATH = arg('--seat-file', null);
 const TEST_SEAT = !!SEAT_FILE_PATH;
-const SEAT_MEMORY = TEST_SEAT && process.argv.includes('--seat-memory');   // pipeline.111 (builder 2026-11-24): memory_recall, his own page
+const SEAT_MEMORY = TEST_SEAT && process.argv.includes('--seat-memory');
+const SEAT_DOSSIER = TEST_SEAT && process.argv.includes('--seat-dossier');   // pipeline.111 (Anthony step 3): dossier_read, the team cards   // pipeline.111 (builder 2026-11-24): memory_recall, his own page
 const SEAT_REASONING = /^(low|medium|high)$/.test(arg('--reasoning', '')) ? arg('--reasoning', '') : null;   // pipeline.111: the package's seatReasoning
 const TEST_SEAT_BOOT = TEST_SEAT ? fs.readFileSync(SEAT_FILE_PATH, 'utf8').trim() : '';
 let SEAT_ASK = null;   // pipeline.111: ask_worker for a seat reporter (scripts/workerAsk.js), made at the compose
@@ -662,7 +663,7 @@ const OPENROUTER_TOOLS = [
 // pipeline.76 — the stats surface: a dossier player's season lines and the rates worked in code,
 // the same lines and arithmetic as the data-desk slice (buildMarburySlice), so the memo still
 // does no arithmetic of its own.
-const DOSSIER_TOOL = { type: 'function', function: { name: 'dossier_read', description: 'Read one player\'s dossier: every season line on file plus the rates already worked from it (K/9, BB/9, K/BB for a pitcher; AB per HR, AB per SO for a hitter). Optional season narrows to one year. Use it for another season or another peer.', parameters: { type: 'object', properties: { player: { type: 'string', description: 'player name, e.g. "Arturo Ramos"' }, season: { type: 'string', description: 'optional four-digit year' } }, required: ['player'] } } };
+const DOSSIER_TOOL = { type: 'function', function: { name: 'dossier_read', description: 'Read one player\'s card: profile, ratings, every season on file, career, contract by year, roster status and options, awards. A player no current card holds answers from the older dossiers (season lines and the rates worked from them). Optional season narrows to one year.', parameters: { type: 'object', properties: { player: { type: 'string', description: 'player name, e.g. "Arturo Ramos"' }, season: { type: 'string', description: 'optional four-digit year' } }, required: ['player'] } } };
 const UNDOCKED_HISTORY_TOOL = { type: 'function', function: { name: 'undocked_history', description: 'Earlier gate-approved UNDOCKED feed episodes. An exact pilot name narrows by citizen identity; omit it for the show-wide recent record. beforeCycle pages to earlier nights. The current Cycle is excluded.', parameters: { type: 'object', properties: { pilot: { type: 'string', description: 'optional exact pilot name from the show' }, beforeCycle: { type: 'integer', description: 'optional earlier Cycle for paging' } }, required: [] } } };
 const NIA_CITIZEN_TOOL = { type: 'function', function: { name: 'citizen_lookup', description: 'Exact ledger profile for a named pilot or other citizen; no life-history thread.', parameters: { type: 'object', properties: { name: { type: 'string' } }, required: ['name'] } } };
 function isNiaSeat(persona) { return persona === 'nia-rook' || persona === 'nia-rook-weekly'; }
@@ -810,7 +811,7 @@ function seatToolsBlock(persona, n) {
 // health/school/safety hood rows. Aggregate city and hood sheets only — no household or per-citizen finance tab.
 const SHEET_READ_ALLOWLIST = ['Initiative_Tracker', 'Neighborhood_Map', 'Oakland_Sports_Feed', 'Civic_Office_Ledger',
   'Faith_Organizations', 'Faith_Ledger', 'Business_Ledger', 'Transit_Metrics', 'Neighborhood_Demographics',
-  'Care_Justice_Census', 'Community_Programs', 'Crime_Metrics'].concat(TEST_SEAT ? ['Cultural_Ledger'] : []);
+  'Care_Justice_Census', 'Community_Programs', 'Crime_Metrics', 'As_Player_Data'].concat(TEST_SEAT ? ['Cultural_Ledger'] : []);   // As_Player_Data: Gridiron's player record (pipeline.111)
 // memory tools appear in the loop only when the run knows whose page it is
 // (--byline-popid from cron-desk-run, or the persona's own POPID).
 const MEMORY_TOOLS = [
@@ -823,6 +824,19 @@ function toolDossierRead(input) {
   const want = String(input && input.player || '').trim().toLowerCase();
   const season = String(input && input.season || '').trim();
   if (!want) return { text: 'dossier_read needs a player name.', lines: [] };
+  // pipeline.111 (Anthony step 3): the team cards first — profile, ratings, every season, contract by year, options,
+  // awards (Gridiron's record, output/gridiron/cards.json); a player no current card holds falls back to the older
+  // dossiers below (a traded or retired man, Hal's and Marbury's history).
+  try {
+    const G = require('./gridiron');
+    const hit = G.cardFor(input.player);
+    if (hit && hit.ambiguous) return { text: '"' + input.player + '" matches ' + hit.ambiguous.length + ' cards: ' + hit.ambiguous.join(', ') + '. Ask again by full name.', lines: [] };
+    if (hit) {
+      const src = 'tool:dossier_read:' + hit.name + (season ? ':' + season : '') + ' (team card)';
+      const lines = G.cardLines(hit, season || null).map((text) => ({ text, src }));
+      return { text: lines.map((l) => l.text).join('\n'), lines };
+    }
+  } catch (e) { /* no team cards on disk: the older dossiers answer */ }
   try {
     const M = require('./buildMarburySlice');
     const mirror = JSON.parse(fs.readFileSync(path.join(ROOT, 'output', 'player_truesource_mirror.json'), 'utf8'));
@@ -1585,7 +1599,7 @@ async function main() {
       traceResults: TOOLS_AB || WRITER_TOOLS > 0,
       keepResults: WRITER_TOOLS > 0,
       ...(WRITER_TOOLS ? { toolset: TEST_SEAT && isNiaSeat(PERSONA) ? writerToolset(PERSONA, RECALL_ONLY, CANON_RECALL)   // pipeline.111: Nia keeps her aired-only tools
-        : TEST_SEAT ? OPENROUTER_TOOLS.concat([CANON_RECALL_TOOL, require('./workerAsk').askWorkerTool()], SEAT_MEMORY ? MEMORY_TOOLS.filter(t => t.function.name === 'memory_recall') : [])
+        : TEST_SEAT ? OPENROUTER_TOOLS.concat([CANON_RECALL_TOOL, require('./workerAsk').askWorkerTool()], SEAT_MEMORY ? MEMORY_TOOLS.filter(t => t.function.name === 'memory_recall') : [], SEAT_DOSSIER ? [DOSSIER_TOOL] : [])
         : writerToolset(PERSONA, RECALL_ONLY, CANON_RECALL) } : {}),
       forceFirstTool: TOOLS_FORCED,
       cycle,
@@ -1788,7 +1802,7 @@ if (require.main === module) {
 
 module.exports = { privateRowsOff,
   UNDOCKED_HISTORY_TOOL,   // pipeline.111: Nia's seat-file morning
-  toolMemoryRecall, MEMORY_TOOLS,   // pipeline.111: a seat's own memory (seatMemory)
+  toolMemoryRecall, MEMORY_TOOLS, DOSSIER_TOOL,   // pipeline.111: a seat's own memory (seatMemory)
   toolDossierRead, // pipeline.76
   toolSheetRead,
   toolCanonRecall,

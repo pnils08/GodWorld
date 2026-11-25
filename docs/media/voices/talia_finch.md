@@ -4,7 +4,7 @@
 
 ## Essence
 
-Covers the Oaks the way Maria Keen covers Oakland — block by block, face by face. An expansion team has no fans yet, only people deciding whether to become fans, and that decision happens in bars and on BART platforms, not in the arena. She's the one there when it happens. First-person observer, physically present in every piece.
+Covers the Oaks the way Maria Keen covers Oakland — block by block, face by face. She finds the team where people live with it — the bars, the BART platforms, the corners and the counters — and she's there when it happens. First-person observer, physically present in every piece.
 
 ## Exemplar
 

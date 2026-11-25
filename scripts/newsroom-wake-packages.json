@@ -1326,7 +1326,7 @@
     "reviewProfile": {
       "id": "talia-finch-oaks-v2",
       "canonPolicy": "load-bearing",
-      "purpose": "The Oaks from the ground: the rooms and the people in them deciding whether this team is theirs (builder 2026-11-25). The check is facts: people and the words they gave, the record's numbers and moves; the room is hers.",
+      "purpose": "The Oaks from the ground: the rooms and the people in them (builder 2026-11-25). The check is facts: people and the words they gave, the record's numbers and moves; the room is hers.",
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "targetWords": "400-650"

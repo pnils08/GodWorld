@@ -294,14 +294,16 @@ LIFE.people = function (k, list) {
     // somewhere of their own to go: their door, or the business they work at (not with the household in tow)
     if (p.spots && !p.hold && R2() < (p.spots[0].far ? 0.3 : 0.14)) {
       // someone whose day names places on this side goes to them in the day's order, round again after the last
-      var sp = p.route ? p.route[(p.ri = ((p.ri == null ? -1 : p.ri) + 1) % p.route.length)] : p.spots[Math.floor(R2() * p.spots.length)];
-      if (Math.abs(sp.z - p.z) > 3 && !(sp.kind === 'work' && p.size)) {
+      var sp = p.route ? p.route[((p.ri == null ? -1 : p.ri) + 1) % p.route.length] : p.spots[Math.floor(R2() * p.spots.length)];
+      // (a place of the day somebody is already standing at waits for the next setting-off: the order holds)
+      if (Math.abs(sp.z - p.z) > 3 && !(sp.kind === 'work' && p.size) && (sp.kind !== 'moment' || free(p, clamp(sp.z, zMin, zMax), HI - 0.1))) {
+        if (p.route) p.ri = ((p.ri == null ? -1 : p.ri) + 1) % p.route.length;
         // the person the moment names, when they are on this side and free to come: they go there too, a pace along
         if (sp.kind === 'moment' && sp.wi) {
           for (var qi = 0; qi < n; qi++) {
             var q = list[qi];
             if (!q.d || q.d.id !== sp.wi || q === p) continue;
-            if (q.s === p.s && !q.lead && !q.post && !q.size && q.amp && !q.link && !q.hold && !q.errand && q.st === 0) {
+            if (q.s === p.s && !q.lead && !q.post && !q.size && q.amp && !q.link && !q.hold && !q.errand && q.st === 0 && free(q, clamp(sp.z + 1.3, zMin, zMax), HI - 0.1)) {
               q.at = null; q.errand = { kind: 'with', s: sp.s, z: clamp(sp.z + 1.3, zMin, zMax), who: p.d.n, w: sp.w };
               q.shop = false; q.tz = q.errand.z; q.laneT = HI - 0.1; q.dir = q.tz > q.z ? 1 : -1; q.yawT = heading(q); q.st = 1;
             }

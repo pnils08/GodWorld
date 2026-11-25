@@ -1081,7 +1081,7 @@ pointers:
 ## LifeHistory_Log
 
 - **Rows:** 20574
-- **Columns:** 7
+- **Columns:** 9 (H, I added by hand 2026-11-25, engine.356 cut A5; same two headers on LifeHistory_Archive)
 
 | Col | Header |
 |-----|--------|
@@ -1092,6 +1092,10 @@ pointers:
 | E | EventText |
 | F | Neighborhood |
 | G | Cycle |
+| H | PlaceId |
+| I | WithPopId |
+
+H = the line's first `place:<id>` tag (a BIZ-, PRG- or household id), I = its `contactPopId:`; written by `generateCitizensEvents_` and the bond engine's connection lines; blank on a line with neither and on every other writer's rows.
 
 ---
 

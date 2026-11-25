@@ -323,3 +323,7 @@ Rhea flagged `sports_c116_elliot-marbury` high-severity: "Benji Dillon 150.1 IP,
 
 ### G-EC78 — Talia's street sources are her own past interviewees [trace] (2026-11-25, research-build, pipeline.111 Talia read)
 `newsroomSourcing.street()` for talia-finch on C117 returns 13 people, all `page-line` hits on PRESS interview pages from C102–C115 (Neilon, Walker, Perez, Hess, Trevor, Nawan, Orion, Campbell, Cloak, Fay, Ramirez, Clark, Mehta); 0 come from a C117 life line (the `watch` predicate needs watched/saw/viewed; this week's Oaks lines are "argued … bullpen depth", G-EC76). The same cast in every Oaks piece since C106 is this loop. Stanley's repeated line (C107, C108, C113, C114) is in the C113 and C114 packets' quotes: his interview answer repeats, not her lift.
+
+### G-EC79 — an adult drew a child's line, and a couple is each other's "housemate" [observe] (2026-11-25, engine-sheet, engine.356 bench reads)
+Sandbox C118 on stage 86: POP-00005 (an adult) carries "stayed after school with Robert Corliss to finish the project due in the morning" (`when:afternoon`). Sandbox C118 on stage 88: POP-00832 and POP-00875 (HH-0102-F031, HouseholdType `couple`, both MaritalStatus married, SpouseId blank on both) were named to each other by `with:housemate`, not as partners — the with-whom pick reads SpouseId and the bond rows, and they hold neither. Not fixed here; cut B's housemate gate now reads the household type (`7e602af05`).
+

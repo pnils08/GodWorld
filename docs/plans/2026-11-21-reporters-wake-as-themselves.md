@@ -190,6 +190,7 @@ Keep: the ten methods as his own craft (he picks), rate arithmetic, sourcing (ev
 
 
 ## Changelog
+- 2026-11-25 (research-build) — Interviews: a seat-file reporter asks whom it picks ("take the restriction out, keep the cap"; "if it chases a different angle we dont want to punish them"); the record still lists who the week touched; a pick gives its reason and answers from its own life; refused only off-ledger, inactive, self, Tribune staff. Talia's bio on her row ("relocated her to Oakland to follow paulson"); her tools and job approved ("looks good"). `91385f174`
 - 2026-11-25 (research-build) — Talia read in full (builder: "take his more seriously like last session did"); bio = deep history only ("hardcoding their current life is not a good mechnism"). Her street sources are her past interviewees (G-EC78).
 
 - 2026-11-25 (research-build) — §State of the work added (builder: record the true state of the stop-puppeting work; media in progress, council after); Tasks 32-36; the sports mold written down.

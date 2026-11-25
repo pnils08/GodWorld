@@ -121,7 +121,10 @@ function packetQuotes(packet) {
   if (!packet || !packet.packetContract || !Array.isArray(packet.quotes)) return [];
   return packet.quotes.filter((quote) => {
     const factIds = quote && quote.claims && quote.claims.factIds;
-    return quote && quote.name && quote.pop && quote.quote && Array.isArray(factIds) && factIds.length > 0 &&
+    // pipeline.111 (agy 2026-11-25 own-wake #3): a seat-file interview's quote is the citizen's own words from their wake,
+    // tied to no Packet fact (basis own-wake) — it counts
+    const ownWake = quote && quote.claims && quote.claims.basis === 'own-wake';
+    return quote && quote.name && quote.pop && quote.quote && Array.isArray(factIds) && (factIds.length > 0 || ownWake) &&
       s344Slots.tribuneAsActorHits(String(quote.quote)).length === 0;
   }).map((quote) => ({
     name: String(quote.name),

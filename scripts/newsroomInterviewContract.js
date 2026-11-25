@@ -161,7 +161,7 @@ function ownLifeInterviewPacket(packet, plannedQuestion) {
 function ownWakeClaims(value, input) {
   const raw = String(value == null ? '' : value).trim();
   const said = extractSpoken(raw);
-  const quote = clean(said.spoken, 1400);
+  const quote = clean(said.spoken, 2400);   // the wake's 340 tokens whole (agy 2026-11-25 own-wake #6: 1400 clipped mid-word)
   if (said.abstain || !quote) throw new Error('invalid own-wake answer: no words');
   return {
     answer: 'quote', factIds: [], basis: 'own-wake', unverifiedLead: [], abstainReason: null,

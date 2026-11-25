@@ -503,12 +503,18 @@ function renderPacketIntake(draftText, packet, opts) {
     // so any sentence of the answer found in the piece makes the speaker a quoted source, not only its first 48 characters
     // a short answer counts only inside quotation marks (agy 2026-11-25 #4: "Nothing on file." in plain text matched);
     // an answer of short sentences is matched on its opening, not lost to the 25-character sentence floor
-    const quotedIn = (q) => { const whole = String(q || '').replace(/[*_#|>]/g, ' ').replace(/\s+/g, ' ').trim();
+    // agy 2026-11-25 own-wake #1: a reporter may quote any stretch of a long spoken answer, so any six words in a row of
+    // it found in the piece count; a stage direction (*sets down the mug*) is not words they said
+    const quotedIn = (q) => { const whole = String(q || '').replace(/\*[^*\n]{1,120}\*/g, ' ').replace(/[*_#|>]/g, ' ').replace(/\s+/g, ' ').trim();
       const flat = body.replace(/\s+/g, ' ');
       if (!whole) return false;
       if (whole.length < 25) return ['"', '“', '‘', "'"].some(m => flat.includes(m + whole) || flat.includes(m + whole.replace(/[.!?]+$/, '')));
-      const long = whole.split(/(?<=[.!?"”])\s+/).map(t => t.trim()).filter(t => t.length >= 25);
-      return (long.length ? long : [whole]).some(t => flat.includes(t.slice(0, Math.min(48, t.length)))); };
+      const norm = (t) => t.toLowerCase().replace(/[’‘]/g, "'").replace(/[“”]/g, '"').replace(/[^a-z0-9' ]+/g, ' ').replace(/\s+/g, ' ').trim();
+      const hay = ' ' + norm(flat) + ' ';
+      const words = norm(whole).split(' ').filter(Boolean);
+      if (words.length < 6) return hay.includes(' ' + words.join(' ') + ' ');
+      for (let i = 0; i + 6 <= words.length; i++) if (hay.includes(' ' + words.slice(i, i + 6).join(' ') + ' ')) return true;
+      return false; };
     const role = meta.quote && quotedIn(meta.quote)
       ? 'quoted-source' : meta.role === 'quoted-source' ? 'mentioned' : meta.role;
     lines.push('NAMES: ' + name + ' | ' + role);
@@ -520,7 +526,7 @@ function renderPacketIntake(draftText, packet, opts) {
   // assignment's ref when the sidecar is built (cron-desk-run storylineTagFor).
   if (hood && body.includes(hood)) lines.push('HOOD: ' + hood);
   if (quoted) {
-    const claimText = String(quoted.quote).replace(/[*_#>]/g, '').replace(/\|/g, '—').replace(/\s+/g, ' ').trim();
+    const claimText = String(quoted.quote).replace(/\*[^*\n]{1,120}\*/g, ' ').replace(/[*_#>]/g, '').replace(/\|/g, '—').replace(/\s+/g, ' ').trim();
     lines.push('CLAIM: ' + (claimText.length > 400 ? claimText.slice(0, 400).replace(/\s+\S*$/, '') + ' …' : claimText) +
       (quoted.sourceKind === 'worker-answer' ? ' | ask_worker ' : ' | citizenVoice PRESS ') + String(quoted.name).replace(/\|/g, '—'));
   } else {

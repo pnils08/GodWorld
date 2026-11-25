@@ -163,8 +163,7 @@ async function wakeForInterview(c, ownWake, cycle) {
   const livedEvents = cycle ? await W.loadLivedEvents(cycle) : [];
   const lived = Array.isArray(livedEvents) ? W.livedFor(c.popId, livedEvents, {}) : null;
   const livedLine = lived ? W.renderLivedLine(lived.event, cycle, lived.rel) : '';
-  const showText = showFor(c.popId, cycle);
-  const showFenced = showText ? memoryFence.wrap(showText, 'undocked-show:' + c.popId) : '';
+  const showFenced = showFor(c.popId, cycle);   // already fenced by showFor (agy 2026-11-25 own-wake #2: wrapped twice)
   const [neighbors, sportsLine, lifeArc, bondsRes, familyLine, healthLine, cardRaw] = await Promise.all([
     W.coResidents(c.nh, c.popId), W.loadSportsSlice(), W.loadLifeArc(c.popId), W.loadBonds(c.popId, { pairs: true }),
     W.loadFamily(c.popId), W.loadHealthState(c.popId), W.loadCardAnchor(c.popId)]);
@@ -204,7 +203,9 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
   const bondsLine = bondsRes.line;   // prompt text, unchanged
   const bondPairs = bondsRes.pairs;  // engine.130 — {pop,name} for the intake BondTarget match
   const textureLine = loadNeighborhoodTexture(c.nh, cycle);
-  const pageRead = await loadOwnPageReadback(c.popId, {
+  // agy 2026-11-25 own-wake #4: an own-wake interview reads its own page memory in wakeForInterview; no second fetch here
+  const ownWakeRun = !!(ownWake && interviewMode && !REPORTER_WAKE);
+  const pageRead = ownWakeRun ? { block: '' } : await loadOwnPageReadback(c.popId, {
     cycle, wake: 'VOICE',
     contextText: [ask, textureLine, sportsLine, bondsLine, familyLine, healthLine, c.nh, c.occ].filter(Boolean).join(' '),
   });
@@ -237,7 +238,7 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
     const officeWall = require('./officeWall');
     const map = officeWall.loadOfficeMap();
     const held = (map.offices || []).concat(map.projects || []).find((of) => String(of.popid || '').toUpperCase() === c.popId);
-    if (held) {
+    if (held && !ownWakeRun) {
       const wall = await officeWall.loadPositionWall(c.popId, 6);
       const posts = (wall && wall.posts) || [];
       if (posts.length) ownOffice = 'What your office (' + held.title + ') last put on the record, newest first:\n' + posts.map((p) => '- ' + String(p.content).slice(0, 320)).join('\n');

@@ -2883,7 +2883,9 @@ function generateCitizensEvents_(ctx) {
       var wBy = iBirthYear >= 0 ? Number(rows[wr][iBirthYear]) || 0 : 0;
       if (wBy > 1900 && simYear - wBy < 18) withIdx_.minor[wPop] = 1;
       var wBiz = iEmployerBizCond >= 0 ? String(rows[wr][iEmployerBizCond] || "").trim() : "";
-      if (/^BIZ-/.test(wBiz)) { withIdx_.bizOf[wPop] = wBiz; (withIdx_.byBiz[wBiz] = withIdx_.byBiz[wBiz] || []).push(wPop); }
+      // a coworker is someone working there now: a retired person's row can still carry the employer it left
+      // (bench 2026-11-25: a retiree named on a shift line; their record rightly refused the twin)
+      if (/^BIZ-/.test(wBiz) && wSt !== "retired") { withIdx_.bizOf[wPop] = wBiz; (withIdx_.byBiz[wBiz] = withIdx_.byBiz[wBiz] || []).push(wPop); }
       var wHh = iHousehold >= 0 ? String(rows[wr][iHousehold] || "").trim() : "";
       if (wHh) { withIdx_.hhOf[wPop] = wHh; (withIdx_.byHh[wHh] = withIdx_.byHh[wHh] || []).push(wPop); }
     }

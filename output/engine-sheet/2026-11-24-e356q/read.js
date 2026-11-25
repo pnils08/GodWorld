@@ -125,6 +125,7 @@ const mkLines = () => bench.map(b => ({
       if (!ln.asks.length && (k === 'coworker' || k === 'housemate' || k === 'rival')) problems.push('a line with no ask drew a ' + k + ': ' + t.slice(0, 70));
     } else notes.push('contact line that is no bench line: ' + t.slice(0, 80) + ' [' + parts[0] + ']');
     const me = P[self] || {};
+    if (k === 'coworker' && LABEL === 'full' && op.st === 'retired') problems.push(o + ' is retired and named as a coworker: ' + t.slice(0, 60));
     if (k === 'coworker') { if (!/^BIZ-/.test(me.biz) || me.biz !== op.biz) problems.push(self + ' / ' + o + ' are not at one employer (' + me.biz + ' / ' + op.biz + ')'); }
     else if (k === 'housemate') { if (!me.hh || me.hh !== op.hh) problems.push(self + ' / ' + o + ' are not one household (' + me.hh + ' / ' + op.hh + ')'); }
     else {
@@ -137,7 +138,9 @@ const mkLines = () => bench.map(b => ({
     if (Object.values(KIND).concat(['coworker', 'housemate']).indexOf(k) < 0) problems.push('a kind that is no kind: with:' + k);
     if (ln && ln.theirHome) {
       homes++; if (!op.hh) homesNoHousehold++;
-      if (op.hh ? (pls.length !== 1 || pls[0] !== op.hh) : pls.length) problems.push('their-home line place ' + pls.join(',') + ' is not ' + o + '\'s household ' + (op.hh || '(none)'));
+      // the ledger is read after the fire: a household formed this very week was not there when the line was written
+      if (op.hh && !pls.length) notes.push('their-home line with no place; ' + o + ' has household ' + op.hh + ' after the fire');
+      else if (op.hh ? (pls.length !== 1 || pls[0] !== op.hh) : pls.length) problems.push('their-home line place ' + pls.join(',') + ' is not ' + o + '\'s household ' + (op.hh || '(none)'));
     }
     if (ln && ln.shift) { shifts++; if (pls.length !== 1 || pls[0] !== me.biz) problems.push('shift line place ' + pls.join(',') + ' is not the citizen\'s employer ' + me.biz); }
     if (ln && /\$VENUE/.test(ln.text)) { twoSlot++; if (pls.length !== 1 || !/^BIZ-\d+$/.test(pls[0])) problems.push('person + place line carries no business place: ' + t.slice(0, 70)); }

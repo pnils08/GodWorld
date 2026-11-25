@@ -20,10 +20,10 @@ for F in $FILES; do
   git show "$SRC:$F" > "$W/stage/$F"; node --check "$W/stage/$F" || { echo "$F does not parse — stop"; exit 1; }
 done
 CHG=$(join -j 2 <(tree "$W/stage" | sort -k2) <(sort -k2 "$BASEMAN") | awk '$2 != $3' | wc -l)
-[ "$CHG" = "2" ] && grep -q "householdTypeById_" "$W/stage/phase05-citizens/bondEngine.js" || { echo "$CHG files changed vs base, expected exactly two with the cut B code — stop"; exit 1; }
+[ "$CHG" = "1" ] && grep -q "householdTypeById_" "$W/stage/phase05-citizens/bondEngine.js" || { echo "$CHG files changed vs base, expected exactly one with the cut B code — stop"; exit 1; }
 tree "$W/stage" > "$MAN"; diff -q "$MAN" "$BENCHMAN" >/dev/null || { echo "built tree is not the benched tree (e356u.sha256) — stop"; exit 1; }
 echo "built tree = the benched tree (e356u.sha256)"
-DESC="engine.356 cut B: a bond from a shared moment (2 files at $SRC)"
+DESC="engine.356 cut B: the housemate gate reads the household type"
 if [ "$DRY" = "--dry-run" ]; then echo "dry run: stopping before the push"; exit 0; fi
 printf '{"scriptId":"%s","rootDir":""}' "$PROD_ID" > "$W/stage/.clasp.json"
 cp "$W/stage/appsscript.json" "$W/manifest.orig"; printf '\n' >> "$W/stage/appsscript.json"

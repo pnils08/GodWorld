@@ -1,9 +1,9 @@
-◇ injected env (33) from ../.config/godworld/.env // tip: ◈ encrypted .env [www.dotenvx.com]
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
 source (LIVE): Simulation_Narrative — 90 tabs
 dest (BENCH):  Sandox_104_c109-live_Simulation_Narrative — 91 tabs
 tabs to sync: 90 | missing on bench (will create): 0
 bench-only tabs (untouched): Spot_Diag
-read 89291 rows across 90 tabs from live
+read 89294 rows across 90 tabs from live
 sanitized 11 oversized cell(s) (>49900 chars, values-API cap)
 bench tabs cleared (1 batch call)
   ...10/90 tabs written

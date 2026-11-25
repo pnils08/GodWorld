@@ -1,0 +1,58 @@
+AIM = BENCH (script read the bench marker)
+== push code 71fc2eb9d
+bench pull-back byte-identical to e356q.sha256
+== sync from live
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+bench lines: {"target":"bench","benchLines":5,"of":5,"rows":1212}
+{"fireGuardMinutes":"0","cycleCountFormatted":"117","cycleCountIsNumber":true}
+clearfire 118: {"ok":true,"cleared":{"cycle":118,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+appended 5 to Edition_Coverage_Ratings; marked rows on the tab now 5
+appended 26 to Citizen_Media_Usage; marked rows on the tab now 26
+appended 2 to Oakland_Sports_Feed; marked rows on the tab now 2
+bench cycleCount 117
+clearfire 118: {"ok":false,"error":"no readable fire record to clear"}
+fire C118 rc=0 "verdict": "PASS" "wallS": 272
+   "Arturo Ramos (Laurel): played catch with Devika Wu until it got too dark to see the ball  [act:game contactPopId:POP-00911 with:neighbor]"
+  ],
+  "rival": [
+   "Darrin Davis (Piedmont Ave): crossed the street rather than pass Howard Perez  [contactPopId:POP-01034 with:rival]",
+   "Henry Rivas (West Oakland): saw Keenan Kim across the room and stayed on their own side of it  [contactPopId:POP-00490 with:rival]",
+   "John Ellis (Laurel): saw Genevieve Liu across the room and stayed on their own side of it  [contactPopId:POP-00928 with:rival]"
+  ],
+  "colleague": [
+   "John Ellis (Laurel): asked Geneva Zhou how they would handle it, and listened  [contactPopId:POP-00892 with:colleague]",
+   "Eric Clove (Rockridge): asked Tara Ellison how they would handle it, and listened  [contactPopId:POP-00546 with:colleague]",
+   "Dan Perez (Lake Merritt): asked Vanessa Ramas how they would handle it, and listened  [contactPopId:POP-01045 with:colleague]"
+  ],
+  "housemate": [
+   "Caleb Reyes (West Oakland): walked Ariana Reyes to school and waited at the gate  [act:walk contactPopId:POP-00133 with:housemate]",
+   "Caleb Reyes (West Oakland): stood at the fence with Ariana Reyes for a Saturday game at Keane Auxiliary Flag Football League  [act:game contactPopId:POP-00133 with:housemate place:PRG-006]",
+   "Ariana Reyes (West Oakland): stood at the fence with Caleb Reyes for a Saturday game at Keane Auxiliary Flag Football League  [act:game with:housemate place:PRG-006 contactPopId:POP-00146]"
+  ],
+  "partner": [
+   "Travis Paiz (Lake Merritt): had dinner with Jocelyn Santo at Lakeside Rowing Club  [act:meal place:BIZ-00236 contactPopId:POP-00547 with:partner]",
+   "Jocelyn Santo (Lake Merritt): had dinner with Travis Paiz at Lakeside Rowing Club  [act:meal place:BIZ-00236 with:partner contactPopId:POP-00222]",
+   "Isabel Lopes (Fruitvale): had dinner with Shawn Neighbor at Platform Brunch  [act:meal place:BIZ-00267 contactPopId:POP-00746 with:partner]"
+  ],
+  "coworker": [
+   "Xanny Allen (Jack London): stayed late to finish the count with Tomas Aguilar  [act:shift place:BIZ-00012 contactPopId:POP-00529 with:coworker]",
+   "Tomas Aguilar (Jack London): stayed late to finish the count with Xanny Allen  [act:shift place:BIZ-00012 with:coworker contactPopId:POP-00243]",
+   "Soria Herrin (Piedmont Ave): took a break with Ray Samson out back and came in laughing  [act:shift place:BIZ-00020 contactPopId:POP-00186 with:coworker]"
+  ],
+  "mentor": [
+   "Mike Paulson (West Oakland): asked Elliot Abraham how they would handle it, and listened  [contactPopId:POP-01046 with:mentor]"
+  ]
+ },
+ "notes": [
+  "their-home line with no place; POP-00966 has household HH-0118-F008 after the fire"
+ ],
+ "problems": [],
+ "verdict": "PASS",
+ "label": "full",
+ "linesWithAMinor": 24,
+ "ofThemYouthSchoolGame": 24
+}
+read 1 exit 0
+== final sync from live
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.

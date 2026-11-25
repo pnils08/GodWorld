@@ -1,52 +1,52 @@
-◇ injected env (33) from ../.config/godworld/.env // tip: ◈ encrypted .env [www.dotenvx.com]
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ suppress logs { quiet: true }
 {
  "cycle": 118,
- "lines": 3394,
- "people": 1036,
- "bondEngineContactLines": 38,
- "withLines": 750,
- "bondCalledLines": 645,
+ "lines": 3406,
+ "people": 1052,
+ "bondEngineContactLines": 35,
+ "withLines": 745,
+ "bondCalledLines": 642,
  "mostBondCalledOnOnePerson": 3,
- "twinLines": 265,
+ "twinLines": 268,
  "sameLineDrawnBothWaysByChance": 6,
- "leadTagsSizedM": 750,
- "bondsWithAMoment": 432,
+ "leadTagsSizedM": 745,
+ "bondsWithAMoment": 430,
  "bondChange": {
   "family": {
-   "withMoment": 14,
-   "meanChange": 0.122,
-   "without": 40,
-   "meanChangeWithout": -0.399
+   "withMoment": 20,
+   "meanChange": 0.178,
+   "without": 34,
+   "meanChangeWithout": -0.454
   },
   "friendship": {
-   "withMoment": 132,
-   "meanChange": 0.573,
-   "without": 104,
-   "meanChangeWithout": 0.214
+   "withMoment": 129,
+   "meanChange": 0.579,
+   "without": 107,
+   "meanChangeWithout": 0.244
   },
   "professional": {
-   "withMoment": 12,
-   "meanChange": 0.875,
-   "without": 56,
-   "meanChangeWithout": 0.495
+   "withMoment": 20,
+   "meanChange": 0.826,
+   "without": 47,
+   "meanChangeWithout": 0.493
   },
   "romantic": {
    "withMoment": 1,
-   "meanChange": 1.25,
+   "meanChange": 0.25,
    "without": 1,
    "meanChangeWithout": -0.5
   },
   "rivalry": {
    "withMoment": 10,
-   "meanChange": 1.05,
-   "without": 7,
-   "meanChangeWithout": 1.214
+   "meanChange": 1.35,
+   "without": 8,
+   "meanChangeWithout": 0.813
   },
   "neighbor": {
-   "withMoment": 32,
-   "meanChange": 0.545,
-   "without": 51,
-   "meanChangeWithout": 0.216
+   "withMoment": 30,
+   "meanChange": 0.552,
+   "without": 53,
+   "meanChangeWithout": 0.293
   },
   "alliance": {
    "withMoment": 1,
@@ -55,52 +55,52 @@
    "meanChangeWithout": 0
   },
   "tension": {
-   "withMoment": 4,
-   "meanChange": 1.375,
-   "without": 1,
-   "meanChangeWithout": 1.5
+   "withMoment": 2,
+   "meanChange": 1.6,
+   "without": 2,
+   "meanChangeWithout": 0.505
   }
  },
  "stepLikeWithLike": {
   "family / bothWritten": {
-   "withMoment": 11,
-   "meanChange": 0.128,
-   "without": 35,
-   "meanChangeWithout": -0.394
+   "withMoment": 17,
+   "meanChange": 0.162,
+   "without": 29,
+   "meanChangeWithout": -0.441
   },
   "family / notBoth": {
    "withMoment": 3,
-   "meanChange": 0.1,
+   "meanChange": 0.267,
    "without": 5,
-   "meanChangeWithout": -0.43
+   "meanChangeWithout": -0.532
   },
   "friendship / bothWritten": {
-   "withMoment": 131,
-   "meanChange": 0.576,
-   "without": 91,
-   "meanChangeWithout": 0.321
+   "withMoment": 128,
+   "meanChange": 0.582,
+   "without": 97,
+   "meanChangeWithout": 0.324
   },
   "friendship / notBoth": {
    "withMoment": 1,
    "meanChange": 0.2,
-   "without": 13,
-   "meanChangeWithout": -0.536
+   "without": 10,
+   "meanChangeWithout": -0.532
   },
   "professional / bothWritten": {
-   "withMoment": 12,
-   "meanChange": 0.875,
-   "without": 53,
-   "meanChangeWithout": 0.534
+   "withMoment": 20,
+   "meanChange": 0.826,
+   "without": 44,
+   "meanChangeWithout": 0.54
   },
   "professional / notBoth": {
    "withMoment": 0,
    "meanChange": null,
    "without": 3,
-   "meanChangeWithout": -0.193
+   "meanChangeWithout": -0.19
   },
   "romantic / bothWritten": {
    "withMoment": 1,
-   "meanChange": 1.25,
+   "meanChange": 0.25,
    "without": 0,
    "meanChangeWithout": null
   },
@@ -111,28 +111,22 @@
    "meanChangeWithout": -0.5
   },
   "rivalry / bothWritten": {
-   "withMoment": 9,
-   "meanChange": 1.083,
-   "without": 7,
-   "meanChangeWithout": 1.214
-  },
-  "rivalry / notBoth": {
-   "withMoment": 1,
-   "meanChange": 0.75,
-   "without": 0,
-   "meanChangeWithout": null
+   "withMoment": 10,
+   "meanChange": 1.35,
+   "without": 8,
+   "meanChangeWithout": 0.813
   },
   "neighbor / bothWritten": {
-   "withMoment": 32,
-   "meanChange": 0.545,
-   "without": 44,
-   "meanChangeWithout": 0.322
+   "withMoment": 30,
+   "meanChange": 0.552,
+   "without": 51,
+   "meanChangeWithout": 0.309
   },
   "neighbor / notBoth": {
    "withMoment": 0,
    "meanChange": null,
-   "without": 7,
-   "meanChangeWithout": -0.446
+   "without": 2,
+   "meanChangeWithout": -0.13
   },
   "alliance / bothWritten": {
    "withMoment": 1,
@@ -141,19 +135,13 @@
    "meanChangeWithout": 0
   },
   "tension / bothWritten": {
-   "withMoment": 3,
-   "meanChange": 1.75,
-   "without": 1,
-   "meanChangeWithout": 1.5
-  },
-  "tension / notBoth": {
-   "withMoment": 1,
-   "meanChange": 0.25,
-   "without": 0,
-   "meanChangeWithout": null
+   "withMoment": 2,
+   "meanChange": 1.6,
+   "without": 2,
+   "meanChangeWithout": 0.505
   }
  },
- "momentBondsCheckedAgainstTheirStep": 204,
+ "momentBondsCheckedAgainstTheirStep": 199,
  "rivalBonds": [
   {
    "id": "BOND-4B0B704C",
@@ -161,8 +149,8 @@
    "b": "POP-00987",
    "type": "rivalry",
    "before": 7.35,
-   "after": 8.1,
-   "moment": true,
+   "after": 7.35,
+   "moment": false,
    "both": true,
    "status": "active"
   },
@@ -172,9 +160,9 @@
    "b": "POP-00024",
    "type": "rivalry",
    "before": 6.5,
-   "after": 7.25,
+   "after": 8.6,
    "moment": true,
-   "both": false,
+   "both": true,
    "status": "active"
   },
   {
@@ -183,8 +171,8 @@
    "b": "POP-00653",
    "type": "rivalry",
    "before": 6.5,
-   "after": 8.5,
-   "moment": false,
+   "after": 8.6,
+   "moment": true,
    "both": true,
    "status": "active"
   },
@@ -194,7 +182,7 @@
    "b": "POP-00460",
    "type": "rivalry",
    "before": 6.55,
-   "after": 6.8,
+   "after": 6.65,
    "moment": true,
    "both": true,
    "status": "active"
@@ -205,7 +193,7 @@
    "b": "POP-00034",
    "type": "rivalry",
    "before": 6.5,
-   "after": 8.75,
+   "after": 8.6,
    "moment": true,
    "both": true,
    "status": "active"
@@ -227,7 +215,7 @@
    "b": "POP-00962",
    "type": "rivalry",
    "before": 7,
-   "after": 9.25,
+   "after": 9.1,
    "moment": true,
    "both": true,
    "status": "active"
@@ -249,8 +237,8 @@
    "b": "POP-00346",
    "type": "rivalry",
    "before": 7,
-   "after": 7.25,
-   "moment": true,
+   "after": 7,
+   "moment": false,
    "both": true,
    "status": "active"
   },
@@ -260,7 +248,7 @@
    "b": "POP-01081",
    "type": "rivalry",
    "before": 7,
-   "after": 7.25,
+   "after": 7.1,
    "moment": true,
    "both": true,
    "status": "active"
@@ -271,7 +259,7 @@
    "b": "POP-00271",
    "type": "rivalry",
    "before": 7,
-   "after": 7.25,
+   "after": 7.1,
    "moment": true,
    "both": true,
    "status": "active"
@@ -293,8 +281,8 @@
    "b": "POP-00671",
    "type": "rivalry",
    "before": 5.5,
-   "after": 7,
-   "moment": false,
+   "after": 7.1,
+   "moment": true,
    "both": true,
    "status": "active"
   },
@@ -304,8 +292,8 @@
    "b": "POP-00922",
    "type": "rivalry",
    "before": 5.5,
-   "after": 7.25,
-   "moment": true,
+   "after": 7,
+   "moment": false,
    "both": true,
    "status": "active"
   },
@@ -315,8 +303,8 @@
    "b": "POP-00715",
    "type": "rivalry",
    "before": 5.5,
-   "after": 7,
-   "moment": false,
+   "after": 7.1,
+   "moment": true,
    "both": true,
    "status": "active"
   },
@@ -326,7 +314,7 @@
    "b": "POP-00154",
    "type": "tension",
    "before": 3.5,
-   "after": 5.25,
+   "after": 5.1,
    "moment": true,
    "both": true,
    "status": "active"
@@ -346,11 +334,11 @@
    "id": "u6ozw9jb",
    "a": "POP-01030",
    "b": "POP-00462",
-   "type": "tension",
+   "type": "rivalry",
    "before": 5.5,
-   "after": 5.75,
-   "moment": true,
-   "both": false,
+   "after": 7,
+   "moment": false,
+   "both": true,
    "status": "active"
   },
   {
@@ -359,7 +347,7 @@
    "b": "POP-00245",
    "type": "rivalry",
    "before": 5.5,
-   "after": 7.25,
+   "after": 7.1,
    "moment": true,
    "both": true,
    "status": "active"
@@ -381,8 +369,8 @@
    "b": "POP-01164",
    "type": "tension",
    "before": 4,
-   "after": 5.75,
-   "moment": true,
+   "after": 3.51,
+   "moment": false,
    "both": true,
    "status": "active"
   },
@@ -392,7 +380,7 @@
    "b": "POP-00952",
    "type": "tension",
    "before": 4,
-   "after": 5.75,
+   "after": 5.6,
    "moment": true,
    "both": true,
    "status": "active"
@@ -406,44 +394,44 @@
   "bondMomentStepPartner": "0.25",
   "bondMomentStepFriend": "0.2",
   "bondMomentStepFamily": "0.1",
-  "bondMomentStepRival": "0.25"
+  "bondMomentStepRival": "0.1"
  },
  "byKind": {
-  "family": 63,
-  "friend": 503,
-  "neighbor": 51,
-  "rival": 49,
-  "colleague": 36,
-  "coworker": 27,
-  "housemate": 14,
+  "family": 67,
+  "friend": 493,
+  "neighbor": 50,
+  "rival": 44,
+  "colleague": 44,
+  "housemate": 16,
   "partner": 6,
+  "coworker": 24,
   "mentor": 1
  },
  "byLine": {
-  "walked $CONTACT to school and waited at the gate": 22,
-  "played catch with $CONTACT until it got too dark to see the ball": 79,
+  "walked $CONTACT to school and waited at the gate": 32,
+  "played catch with $CONTACT until it got too dark to see the ball": 80,
   "talked with $CONTACT over the fence about nothing in particular": 16,
-  "sat up late with $CONTACT over the kitchen table": 27,
+  "sat up late with $CONTACT over the kitchen table": 28,
   "ran into $CONTACT at $VENUE and ended up staying": 80,
-  "stopped by $CONTACT's place and stayed longer than planned": 40,
+  "stopped by $CONTACT's place and stayed longer than planned": 35,
   "met $CONTACT for coffee at $VENUE and lost track of the hour": 80,
-  "crossed the street rather than pass $CONTACT": 23,
-  "sat on $CONTACT's steps until the streetlights came on": 40,
-  "had dinner with $CONTACT at $VENUE": 76,
-  "saw $CONTACT across the room and stayed on their own side of it": 26,
-  "checked in on $CONTACT at home and left a covered dish": 37,
-  "asked $CONTACT how they would handle it, and listened": 19,
-  "stood at the fence with $CONTACT for a Saturday game at $PROGRAM": 79,
+  "crossed the street rather than pass $CONTACT": 25,
+  "sat on $CONTACT's steps until the streetlights came on": 35,
+  "had dinner with $CONTACT at $VENUE": 72,
+  "saw $CONTACT across the room and stayed on their own side of it": 19,
+  "checked in on $CONTACT at home and left a covered dish": 35,
+  "asked $CONTACT how they would handle it, and listened": 27,
+  "stood at the fence with $CONTACT for a Saturday game at $PROGRAM": 80,
   "split a plate with $CONTACT at $VENUE and argued over the bill": 80,
-  "stayed late to finish the count with $CONTACT": 13,
-  "took a break with $CONTACT out back and came in laughing": 8,
-  "stayed up later than planned talking with $CONTACT in the kitchen": 3,
-  "called $CONTACT just to hear how the week went": 2
+  "stayed late to finish the count with $CONTACT": 8,
+  "took a break with $CONTACT out back and came in laughing": 10,
+  "stayed up later than planned talking with $CONTACT in the kitchen": 2,
+  "called $CONTACT just to hear how the week went": 1
  },
- "theirHomeLines": 117,
+ "theirHomeLines": 105,
  "theirHomeWithNoHouseholdOnTheirRow": 18,
- "shiftLines": 21,
- "personAndPlaceLines": 316,
+ "shiftLines": 18,
+ "personAndPlaceLines": 312,
  "someoneFamiliar": 0,
  "notProven": [],
  "examples": {
@@ -472,44 +460,31 @@
    "Eric Clove (Rockridge): asked Tara Ellison how they would handle it, and listened  [contactPopId:POP-00546 with:colleague]",
    "Dan Perez (Lake Merritt): asked Vanessa Ramas how they would handle it, and listened  [contactPopId:POP-01045 with:colleague]"
   ],
-  "coworker": [
-   "Steve Conrad (Rockridge): met Darrin Davis for coffee at Claremont Table and lost track of the hour  [act:meal place:BIZ-00169 contactPopId:POP-00021 with:coworker]",
-   "Darrin Davis (Piedmont Ave): met Steve Conrad for coffee at Claremont Table and lost track of the hour  [act:meal place:BIZ-00169 with:coworker contactPopId:POP-00124]",
-   "Xanny Allen (Jack London): stayed late to finish the count with Tomas Aguilar  [act:shift place:BIZ-00012 contactPopId:POP-00529 with:coworker]"
-  ],
   "housemate": [
-   "Paul Skenes (Lake Merritt): walked Marcus Skenes to school and waited at the gate  [act:walk contactPopId:POP-01114 with:housemate]",
    "Caleb Reyes (West Oakland): walked Ariana Reyes to school and waited at the gate  [act:walk contactPopId:POP-00133 with:housemate]",
-   "Caleb Reyes (West Oakland): stood at the fence with Ariana Reyes for a Saturday game at Keane Auxiliary Flag Football League  [act:game contactPopId:POP-00133 with:housemate place:PRG-006]"
+   "Caleb Reyes (West Oakland): stood at the fence with Ariana Reyes for a Saturday game at Keane Auxiliary Flag Football League  [act:game contactPopId:POP-00133 with:housemate place:PRG-006]",
+   "Ariana Reyes (West Oakland): stood at the fence with Caleb Reyes for a Saturday game at Keane Auxiliary Flag Football League  [act:game with:housemate place:PRG-006 contactPopId:POP-00146]"
   ],
   "partner": [
    "Travis Paiz (Lake Merritt): had dinner with Jocelyn Santo at Lakeside Rowing Club  [act:meal place:BIZ-00236 contactPopId:POP-00547 with:partner]",
    "Jocelyn Santo (Lake Merritt): had dinner with Travis Paiz at Lakeside Rowing Club  [act:meal place:BIZ-00236 with:partner contactPopId:POP-00222]",
-   "Isabel Lopes (Fruitvale): split a plate with Shawn Neighbor at Hub Ramen and argued over the bill  [act:meal place:BIZ-00270 contactPopId:POP-00746 with:partner]"
+   "Isabel Lopes (Fruitvale): had dinner with Shawn Neighbor at Platform Brunch  [act:meal place:BIZ-00267 contactPopId:POP-00746 with:partner]"
+  ],
+  "coworker": [
+   "Xanny Allen (Jack London): stayed late to finish the count with Tomas Aguilar  [act:shift place:BIZ-00012 contactPopId:POP-00529 with:coworker]",
+   "Tomas Aguilar (Jack London): stayed late to finish the count with Xanny Allen  [act:shift place:BIZ-00012 with:coworker contactPopId:POP-00243]",
+   "Soria Herrin (Piedmont Ave): took a break with Ray Samson out back and came in laughing  [act:shift place:BIZ-00020 contactPopId:POP-00186 with:coworker]"
   ],
   "mentor": [
    "Mike Paulson (West Oakland): asked Elliot Abraham how they would handle it, and listened  [contactPopId:POP-01046 with:mentor]"
   ]
  },
  "notes": [
-  "no twin on a minor's record (by rule): played catch with Tomas Ochoa until it got too dark to see t",
-  "no twin on a minor's record (by rule): sat up late with Salma Campbell over the kitchen table",
-  "no twin on a minor's record (by rule): sat up late with Sadie Williams over the kitchen table",
-  "no twin on a minor's record (by rule): sat up late with Jun Fisher over the kitchen table",
-  "no twin on a minor's record (by rule): sat up late with Tomas Ochoa over the kitchen table",
-  "no twin on a minor's record (by rule): sat up late with Felix Vasquez over the kitchen table",
-  "no twin on a minor's record (by rule): stayed up later than planned talking with Zola Rainey in the",
-  "no twin on a minor's record (by rule): sat up late with Rick Dillon over the kitchen table",
-  "no twin on a minor's record (by rule): stood at the fence with Mariana Kapoor for a Saturday game a",
-  "no twin on a minor's record (by rule): sat up late with Mateo Salcedo over the kitchen table",
-  "rivalry bonds (bothWritten) with a moment gained less on average than those without (1.083 vs 1.214) — group means, see the per-bond floor"
+  "their-home line with no place; POP-00966 has household HH-0118-F008 after the fire"
  ],
- "problems": [
-  "their-home line place  is not POP-00214's household HH-0118-F003",
-  "a shared:both line has no twin on POP-00440: stayed late to finish the count with Xing Patel"
- ],
- "verdict": "FAIL",
- "label": "base",
- "linesWithAMinor": 22,
- "ofThemYouthSchoolGame": 7
+ "problems": [],
+ "verdict": "PASS",
+ "label": "full",
+ "linesWithAMinor": 24,
+ "ofThemYouthSchoolGame": 24
 }

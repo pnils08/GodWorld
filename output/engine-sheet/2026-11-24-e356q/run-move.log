@@ -1,2 +1,58 @@
 AIM = BENCH (script read the bench marker)
 == push code e788cafe7
+bench pull-back byte-identical to e356q.sha256
+== sync from live
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+bench lines: {"target":"bench","benchLines":5,"of":5,"rows":1212}
+{"fireGuardMinutes":"0","cycleCountFormatted":"117","cycleCountIsNumber":true}
+clearfire 118: {"ok":true,"cleared":{"cycle":118,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+appended 5 to Edition_Coverage_Ratings; marked rows on the tab now 5
+appended 26 to Citizen_Media_Usage; marked rows on the tab now 26
+appended 2 to Oakland_Sports_Feed; marked rows on the tab now 2
+bench cycleCount 117
+clearfire 118: {"ok":false,"error":"no readable fire record to clear"}
+fire C118 rc=0 "verdict": "PASS" "wallS": 208
+   "Steve Conrad (Rockridge): met Darrin Davis for coffee at Claremont Table and lost track of the hour  [act:meal place:BIZ-00169 contactPopId:POP-00021 with:coworker]",
+   "Darrin Davis (Piedmont Ave): met Steve Conrad for coffee at Claremont Table and lost track of the hour  [act:meal place:BIZ-00169 with:coworker contactPopId:POP-00124]",
+   "Xanny Allen (Jack London): stayed late to finish the count with Tomas Aguilar  [act:shift place:BIZ-00012 contactPopId:POP-00529 with:coworker]"
+  ],
+  "housemate": [
+   "Paul Skenes (Lake Merritt): walked Marcus Skenes to school and waited at the gate  [act:walk contactPopId:POP-01114 with:housemate]",
+   "Caleb Reyes (West Oakland): walked Ariana Reyes to school and waited at the gate  [act:walk contactPopId:POP-00133 with:housemate]",
+   "Caleb Reyes (West Oakland): stood at the fence with Ariana Reyes for a Saturday game at Keane Auxiliary Flag Football League  [act:game contactPopId:POP-00133 with:housemate place:PRG-006]"
+  ],
+  "partner": [
+   "Travis Paiz (Lake Merritt): had dinner with Jocelyn Santo at Lakeside Rowing Club  [act:meal place:BIZ-00236 contactPopId:POP-00547 with:partner]",
+   "Jocelyn Santo (Lake Merritt): had dinner with Travis Paiz at Lakeside Rowing Club  [act:meal place:BIZ-00236 with:partner contactPopId:POP-00222]",
+   "Isabel Lopes (Fruitvale): split a plate with Shawn Neighbor at Hub Ramen and argued over the bill  [act:meal place:BIZ-00270 contactPopId:POP-00746 with:partner]"
+  ],
+  "mentor": [
+   "Mike Paulson (West Oakland): asked Elliot Abraham how they would handle it, and listened  [contactPopId:POP-01046 with:mentor]"
+  ]
+ },
+ "notes": [
+  "their-home line with no place; POP-00214 has household HH-0118-F003 after the fire",
+  "no twin on a minor's record (by rule): played catch with Tomas Ochoa until it got too dark to see t",
+  "no twin on a minor's record (by rule): sat up late with Salma Campbell over the kitchen table",
+  "no twin on a minor's record (by rule): sat up late with Sadie Williams over the kitchen table",
+  "no twin on a minor's record (by rule): sat up late with Jun Fisher over the kitchen table",
+  "no twin on a minor's record (by rule): sat up late with Tomas Ochoa over the kitchen table",
+  "no twin on a minor's record (by rule): sat up late with Felix Vasquez over the kitchen table",
+  "no twin on a minor's record (by rule): stayed up later than planned talking with Zola Rainey in the",
+  "no twin on a minor's record (by rule): sat up late with Rick Dillon over the kitchen table",
+  "no twin on a minor's record (by rule): stood at the fence with Mariana Kapoor for a Saturday game a",
+  "no twin on a minor's record (by rule): sat up late with Mateo Salcedo over the kitchen table",
+  "rivalry bonds (bothWritten) with a moment gained less on average than those without (1.083 vs 1.214) — group means, see the per-bond floor"
+ ],
+ "problems": [
+  "a shared:both line has no twin on POP-00440: stayed late to finish the count with Xing Patel"
+ ],
+ "verdict": "FAIL",
+ "label": "move",
+ "linesWithAMinor": 22,
+ "ofThemYouthSchoolGame": 7
+}
+read 1 exit 1
+== final sync from live
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.

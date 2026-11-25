@@ -1,4 +1,7 @@
 PROD pull = stage 84 (e356p-prod.sha256)
-2 file(s) changed vs stage 84
+3 file(s) changed vs stage 84
 manifest written: /root/GodWorld/output/engine-sheet/2026-11-24-e356q/e356q.sha256
 └─ utilities/writeIntents.js
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @255
+bench pull-back byte-identical to e356q.sha256

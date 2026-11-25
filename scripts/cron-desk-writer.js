@@ -811,7 +811,7 @@ function seatToolsBlock(persona, n) {
 // health/school/safety hood rows. Aggregate city and hood sheets only — no household or per-citizen finance tab.
 const SHEET_READ_ALLOWLIST = ['Initiative_Tracker', 'Neighborhood_Map', 'Oakland_Sports_Feed', 'Civic_Office_Ledger',
   'Faith_Organizations', 'Faith_Ledger', 'Business_Ledger', 'Transit_Metrics', 'Neighborhood_Demographics',
-  'Care_Justice_Census', 'Community_Programs', 'Crime_Metrics', 'As_Player_Data'].concat(TEST_SEAT ? ['Cultural_Ledger'] : []);   // As_Player_Data: Gridiron's player record (pipeline.111)
+  'Care_Justice_Census', 'Community_Programs', 'Crime_Metrics'].concat(TEST_SEAT ? ['Cultural_Ledger'] : [], SEAT_DOSSIER ? ['As_Player_Data'] : []);   // As_Player_Data: the team cards' tab, for a seat that holds them (pipeline.111)
 // memory tools appear in the loop only when the run knows whose page it is
 // (--byline-popid from cron-desk-run, or the persona's own POPID).
 const MEMORY_TOOLS = [
@@ -820,17 +820,19 @@ const MEMORY_TOOLS = [
 ];
 
 // Returns { text, lines:[{text, src}] } — lines are the fact candidates (pipeline.76).
-function toolDossierRead(input) {
+function toolDossierRead(input, opts) {
   const want = String(input && input.player || '').trim().toLowerCase();
   const season = String(input && input.season || '').trim();
   if (!want) return { text: 'dossier_read needs a player name.', lines: [] };
-  // pipeline.111 (Anthony step 3): the team cards first — profile, ratings, every season, contract by year, options,
-  // awards (Gridiron's record, output/gridiron/cards.json); a player no current card holds falls back to the older
-  // dossiers below (a traded or retired man, Hal's and Marbury's history).
-  try {
+  // pipeline.111 (Anthony step 3): a seat that holds the team cards (seatDossier) reads them first — profile, ratings,
+  // every season, contract by year, options, awards (output/gridiron/cards.json); a player no current card holds falls
+  // back to the older dossiers below. Every other reader (Hal, Marbury on their own paths) keeps the older dossiers as
+  // before: their prompts promise worked rates and their blockers bar ratings and contracts (agy step 3 #1).
+  if (opts && opts.cards) try {
     const G = require('./gridiron');
     const hit = G.cardFor(input.player);
     if (hit && hit.ambiguous) return { text: '"' + input.player + '" matches ' + hit.ambiguous.length + ' cards: ' + hit.ambiguous.join(', ') + '. Ask again by full name.', lines: [] };
+    if (hit && hit.staff) return { text: hit.staff + '.', lines: [] };
     if (hit) {
       const src = 'tool:dossier_read:' + hit.name + (season ? ':' + season : '') + ' (team card)';
       const lines = G.cardLines(hit, season || null).map((text) => ({ text, src }));
@@ -883,7 +885,8 @@ function privateRowsOff(tab, data) {
 async function toolSheetRead(input, opts) {
   const tab = String(input.tab || '').trim();
   // pipeline.111 (agy pass 2 #2.3): a seat reporter's morning passes { seat: true } — no process-wide env flag.
-  const allow = opts && opts.seat ? SHEET_READ_ALLOWLIST.concat(SHEET_READ_ALLOWLIST.includes('Cultural_Ledger') ? [] : ['Cultural_Ledger']) : SHEET_READ_ALLOWLIST;
+  const allow = (opts && opts.seat ? SHEET_READ_ALLOWLIST.concat(SHEET_READ_ALLOWLIST.includes('Cultural_Ledger') ? [] : ['Cultural_Ledger']) : SHEET_READ_ALLOWLIST)
+    .concat(opts && opts.dossier && !SHEET_READ_ALLOWLIST.includes('As_Player_Data') ? ['As_Player_Data'] : []);
   if (!allow.includes(tab)) return 'tab not allowed. Allowed: ' + allow.join(', ');
   try {
     const sheets = require('../lib/sheets');
@@ -1000,7 +1003,7 @@ async function execOpenRouterTool(name, input, memCtx, cycleNow) {
   if (name === 'undocked_history') return isNiaSeat(PERSONA)
     ? require('./undockedHistory').readHistory(input, cycleNow)
     : 'undocked_history is only available to Nia Rook';
-  if (name === 'dossier_read') return toolDossierRead(input);
+  if (name === 'dossier_read') return toolDossierRead(input, { cards: SEAT_DOSSIER });
   if (name === 'memory_note' && memCtx && memCtx.dryNote) return 'noted (test run — not saved): ' + String(input && input.note || '').slice(0, 200);
   if (name === 'canon_recall') return toolCanonRecall(input);
   if (name === 'canon_search') return toolSearchWorld({ query: input.query });

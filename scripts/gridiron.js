@@ -72,7 +72,7 @@ const changes = (p) => {
 const profileBits = (p) => {
   const f = p.profile || {};
   return [p.position + (f['Secondary Position'] && !/^none$/i.test(f['Secondary Position']) ? ' (also ' + f['Secondary Position'] + ')' : ''),
-    'bats ' + (f.Bats || '?') + ', throws ' + (f.Throws || '?'), 'age ' + f.Age, 'overall ' + f.Overall + (p.trend ? ' (trending ' + p.trend + ')' : ''),
+    'bats ' + (f.Bats || '?') + ', throws ' + (f.Throws || '?'), ageWord(p), 'overall ' + f.Overall + (p.trend ? ' (trending ' + p.trend + ')' : ''),
     'potential ' + f.Potential].join(', ');
 };
 const nameOf = (p) => p.name + (p.popid ? ' (' + p.popid + ')' : '');
@@ -101,7 +101,7 @@ function pitcherLine(p) {
     (changes(p) ? ' ' + changes(p) + '.' : '') + (p.quirks.length ? ' Quirks: ' + p.quirks.join('; ') + '.' : '') +
     (seasons.length ? ' Seasons: ' + seasons.join('; ') + '.' : ' No major-league seasons.');
 }
-const RATING_NOTE = 'Ratings run 0-100; higher is better on every one (a pitcher\'s "walks" or "home runs allowed" rating is high when he allows few). Season lines are by year; 2041 is the last completed season and 2042 is the season ahead. Age, overall and potential are as of now.';
+const RATING_NOTE = 'Ratings run 0-100; higher is better on every one (a pitcher\'s "walks" or "home runs allowed" rating is high when he allows few). Season lines are by year; 2041 is the last completed season and 2042 is the season ahead. Overall and potential are as of now; age is the city ledger\'s.';
 
 function hittingRecord(cards) {
   const ps = cards.teams.As.players.filter((p) => p.kind === 'batter');
@@ -137,7 +137,7 @@ function rosterRecord(cards) {
     const om = opt.match(/(\d)\s*\/\s*(\d)\s*used/i);
     const options = om ? 'minor-league options used ' + om[1] + ' of ' + om[2] + ' (' + (Number(om[2]) - Number(om[1])) + ' left)' : (opt ? 'minor-league options: ' + opt : '');
     const contract = Object.entries(p.contract || {}).map(([y, v]) => y + ' ' + v).join(', ');
-    return '- ' + nameOf(p) + ' — ' + p.position + ', age ' + f.Age + ', overall ' + f.Overall + ', potential ' + f.Potential + ', ' + levelOf(p) +
+    return '- ' + nameOf(p) + ' — ' + p.position + ', ' + ageWord(p) + ', overall ' + f.Overall + ', potential ' + f.Potential + ', ' + levelOf(p) +
       (f['MLB Service'] != null ? ', service ' + f['MLB Service'] : '') + '. Contract: ' + (contract || 'not on record') +
       (r['On 40-Man Roster'] ? '. 40-man: ' + r['On 40-Man Roster'] : '') + (options ? ', ' + options : '') +
       (r['Contract Option'] && !/^none$/i.test(r['Contract Option']) ? ', option ' + r['Contract Option'] : '') +
@@ -282,14 +282,28 @@ async function ask({ question, asker, cycle, date, officeId: forced, dryRun }) {
 // One player's whole card as lines, each a fact on the record — the reporters' dossier_read reads this first
 // (pipeline.111 Anthony step 3). season: only that year's lines. Returns null when no card holds the name;
 // { ambiguous: [names] } when a partial name fits more than one.
+// A player's age is the ledger's (the newsroom's rule: the sim's year minus BirthYear); the card's own age is said only
+// for a player with no ledger row (agy step 3 #2: 15 of 25 cards disagree with the ledger by a year or two).
+let LEDGER = null;
+function ageWord(p, simYear) {
+  if (!LEDGER) { LEDGER = new Map(); try { for (const l of fs.readFileSync(path.join(ROOT, 'output', 'simulation_ledger_snapshot.jsonl'), 'utf8').split('\n')) { if (!l.trim()) continue; const r = JSON.parse(l); if (r.POPID) LEDGER.set(String(r.POPID).toUpperCase(), r); } } catch (e) { /* no snapshot: the card's age is said as the card's */ } }
+  const yr = Number(simYear || (loadCards() || {}).currentSeason) || null;
+  const row = p.popid ? LEDGER.get(String(p.popid).toUpperCase()) : null;
+  const by = row ? Number(row.BirthYear) : NaN;
+  if (yr && isFinite(by) && by > 1900) return 'age ' + (yr - by) + ' (born ' + by + ')';
+  return (p.profile || {}).Age != null ? 'age ' + p.profile.Age + ' on his card (no ledger row)' : null;
+}
 function cardFor(name, cards) {
   const c = cards || loadCards();
   if (!c) return null;
   const all = Object.values(c.teams || {}).flatMap((t) => t.players || []);
   const want = String(name || '').trim().toLowerCase();
   if (!want) return null;
-  const exact = all.find((p) => String(p.name || '').toLowerCase() === want);
-  if (exact) return exact;
+  const exact = all.filter((p) => String(p.name || '').toLowerCase() === want);
+  if (exact.length > 1) return { ambiguous: exact.map((p) => p.name + ' (' + (p.status === 'inactive' ? 'gone' : p.team) + ')') };
+  if (exact.length) return exact[0];
+  const staff = Object.values(c.teams || {}).flatMap((t) => ((t.staff || {}).staff || [])).find((s) => String(s.Name || '').toLowerCase().includes(want));
+  if (staff) return { staff: staff.Name + ' is on the staff record (' + String(staff.role).toLowerCase() + '), not a player card — Gridiron answers for the staff' };
   const hits = all.filter((p) => { const n = String(p.name || '').toLowerCase(); return n.includes(want) || want.includes(n); });
   if (hits.length > 1) return { ambiguous: hits.map((p) => p.name) };
   return hits[0] || null;
@@ -301,7 +315,7 @@ function cardLines(p, season) {
   const lvl = levelOf(p);
   out.push(who + ' — ' + [p.position + (f['Secondary Position'] && !/^none$/i.test(f['Secondary Position']) ? ' (also ' + f['Secondary Position'] + ')' : ''),
     p.team, lvl === 'gone' ? 'no longer with the club' : lvl === 'AAA' ? 'in Las Vegas (AAA)' : 'in the majors', 'bats ' + f.Bats + ', throws ' + f.Throws,
-    'age ' + f.Age + ' (2042)', 'overall ' + f.Overall + (p.trend ? ', trending ' + p.trend : ''), 'potential ' + f.Potential,
+    ageWord(p), 'overall ' + f.Overall + (p.trend ? ', trending ' + p.trend : ''), 'potential ' + f.Potential,
     f['MLB Service'] != null ? 'service ' + f['MLB Service'] : null, f.Drafted ? 'drafted ' + f.Drafted : null, f.Born ? 'born ' + f.Born : null].filter(Boolean).join('; '));
   const attrs = Object.entries(a).map(([k, v]) => (ATTR_WORDS[k] || k) + ' ' + v);
   if (attrs.length) out.push(who + ' ratings (0-100, higher is better): ' + attrs.join(', ') + (changes(p) ? '. ' + changes(p) : ''));
@@ -313,13 +327,23 @@ function cardLines(p, season) {
     const cols = (o) => Object.entries(o).filter(([k]) => !['YEAR', 'TEAM'].includes(k)).map(([k, v]) => k + ' ' + fmt3(v)).join(', ');
     out.push(who + ' ' + x.YEAR + ' ' + x.TEAM + ': ' + cols(x) + (Object.keys(adv).length ? '; ' + cols(adv) : '') + (Object.keys(rate).length ? '; ' + cols(rate) : ''));
   }
-  if (season && !seasons.length) out.push(who + ' has no ' + season + ' season on his card; seasons on file: ' + (p.seasons || []).filter((x) => Number(x.G) > 0).map((x) => x.YEAR).join(', '));
+  if (season && !seasons.length) { const on = (p.seasons || []).filter((x) => Number(x.G) > 0).map((x) => x.YEAR); out.push(who + ' has no ' + season + ' season on his card; ' + (on.length ? 'seasons on file: ' + on.join(', ') : 'he has no major-league season on file')); }
   if (!season && Object.keys(p.career || {}).length) out.push(who + ' career: ' + Object.entries(p.career).map(([k, v]) => k + ' ' + fmt3(v)).join(', '));
   if (Object.keys(p.contract || {}).length) out.push(who + ' contract: ' + Object.entries(p.contract).map(([y, v]) => y + ' ' + v).join('; '));
   const status = Object.entries(r).filter(([k]) => !/^Level$/i.test(k)).map(([k, v]) => k + ' ' + v);
   if (status.length) out.push(who + ' roster status: ' + status.join('; '));
   for (const [label, list] of [['awards', p.awards], ['milestones', p.milestones], ['quirks', p.quirks], ['notes', p.notes]]) if ((list || []).length) out.push(who + ' ' + label + ': ' + list.join('; '));
-  return out;
+  // a tool fact is clipped at 500 characters downstream (livedExperiencePacketV2): a long line goes in parts, each named
+  return out.flatMap((l) => {
+    if (l.length <= 480) return [l];
+    const head = l.slice(0, l.indexOf(':') + 1 || 0), parts = [];
+    let cur = '';
+    for (const bit of l.slice(head.length).split(/, (?=[A-Za-z0-9])/)) {
+      if (cur && (head + ' ' + cur + ', ' + bit).length > 470) { parts.push(head + ' ' + cur.trim()); cur = bit; } else cur = cur ? cur + ', ' + bit : bit;
+    }
+    if (cur) parts.push(head + ' ' + cur.trim());
+    return parts;
+  });
 }
 
 const ASK_TOOL = { type: 'function', function: { name: 'ask_gridiron',

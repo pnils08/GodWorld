@@ -723,13 +723,17 @@ function selectUsedToolLines(draftText, candidates, packet) {
       continue;
     }
     const dossier = /^tool:dossier_read:/.test(src);
-    const year = dossier ? (text.match(/\b(19|20)\d{2}\b/) || [])[0] : null;
+    // pipeline.111 (agy Anthony step 3 #3): a team card's ratings, pitches, career, contract and roster lines carry no
+    // season year — the line is anchored on the player's surname, and one of its own numbers in the sentence is enough
+    const teamCard = dossier && /\(team card\)$/.test(src);
+    const cardWho = teamCard ? (src.match(/^tool:dossier_read:([^:(]+?)(?::\d{4})?\s*\(team card\)$/) || [])[1] : null;
+    const year = dossier && !teamCard ? (text.match(/\b(19|20)\d{2}\b/) || [])[0] : null;
     const name = dossier ? null : (text.match(/\b[A-Z][a-z'’-]+ [A-Z][a-z'’-]+\b/) || [])[0];
-    const anchor = year || name;
+    const anchor = teamCard ? (cardWho ? cardWho.trim().split(/\s+/).slice(-1)[0] : null) : (year || name);
     if (!anchor) continue;
     const nums = significantNumbers(text).filter(v => v !== anchor);
     const hit = units.some((u, i) => u.includes(anchor) &&
-      nums.filter(v => unitNums[i].has(v)).length >= 2 &&
+      nums.filter(v => unitNums[i].has(v)).length >= (teamCard ? 1 : 2) &&
       nums.some(v => unitNums[i].has(v) && !allowed.has(v)));
     if (hit) { seen.add(text); out.push({ text, src }); }
   }

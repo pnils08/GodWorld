@@ -133,6 +133,7 @@ Keep: the ten methods as his own craft (he picks), rate arithmetic, sourcing (ev
 | Morning tools, ask_worker, Graye, trims | agy | [[../../output/antigravity/2026-11-23-review-pipeline111-pass2]] | HOLD — #1–#5 verified and fixed `69f6adf70`; #1 proven through the live gate (PASS) |
 | Anthony step 1, the seat file | agy | [[../../output/antigravity/2026-11-24-review-anthony-step1-seat]] | HOLD — #1-3 tools: true, wired in steps 3-4; #4 OrginCity: stale snapshot (sheet written N17); #5, #7-12 verified and folded into SEAT.md + voices/anthony.md Essence; #6 held (newsroom rule: Paulson family is out of canon); #13 'and the rest' removed |
 | Anthony step 2, the live record | agy | [[../../output/antigravity/2026-11-24-review-anthony-step2-record]] | HOLD — #1 (rows cut at 500, Stats lost on 9 of 10) fixed: prewrite.factChars, packet carries 10 of 10 whole; #2 privacy fails closed (no EventTrigger column → no copy / no rows); #3 a copy over 20 h old sits him out; #5 window label + blank Cycle + sim-local date; #7 the morning read time-boxed at 60 s; #4 the fanout's old buildAnthonySlice call and #6 the kit's 'paint' lines → step 4 (the seat writer is sent no limits block; proven in the step 4 print) |
+| Anthony step 3, his tools | agy | [[../../output/antigravity/2026-11-24-review-anthony-step3-tools]] | HOLD — #1 fixed: the team cards answer first only for a seatDossier seat (Hal and Marbury keep the older dossiers); #2 fixed: age is the ledger's (sim year − BirthYear), the card's only with no ledger row; #3 fixed: a team-card line is anchored on the surname, one of its numbers suffices (Ramos: slider 86, walks 97, 2043 $8.2M, age 26 all approved); #5 duplicates / staff / empty seasons; long card lines split under the 500 clip; #7 As_Player_Data only for a seatDossier seat. Held: #4 three AAA players with no ledger row (builder); #6 morning reads not carried to the writer (he re-reads; 6 calls); #7 unfiltered tab read shows 10 of 28 (match or Gridiron) |
 
 ### Agreed
 
@@ -159,6 +160,8 @@ Keep: the ten methods as his own craft (he picks), rate arithmetic, sourcing (ev
 
 
 ## Changelog
+
+- 2026-11-24 (research-build) — Anthony step 3 built and folded (agy HOLD). The cards' ages disagree with the ledger's BirthYear on 15 players (Keane 37 vs 39, Ramos 27 vs 26): the ledger rules (newsroom age rule), the mismatch goes to the builder. Note: engine-sheet's e788cafe7 carried this lane's staged options fix and step 3 brief (shared index).
 
 - 2026-11-24 (research-build) — Anthony step 2: his record read live from the sports feed each morning (builder: "just read the sheets live"); agy HOLD folded — whole rows reach the packet (10 of 10 with Stats), privacy fails closed, a stale copy sits him out, the read is time-boxed.
 

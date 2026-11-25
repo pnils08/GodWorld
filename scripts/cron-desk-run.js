@@ -1703,9 +1703,9 @@ async function seatMorningPlan(asker, ask, model, maxTokens, cycle) {
     : name === 'canon_recall' ? W.toolCanonRecall(input, Number(cycle))   // agy pass 2 #2.1: bounded to this Cycle
     : name === 'canon_search' ? W.toolSearchWorld({ query: input.query })
     : name === 'citizen_lookup' ? W.toolCitizenLookup(input)
-    : name === 'sheet_read' ? W.toolSheetRead(input, { seat: true })   // Cultural_Ledger, as the seat writer reads it
+    : name === 'sheet_read' ? W.toolSheetRead(input, { seat: true, dossier: !!(ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.seatDossier === true) })   // Cultural_Ledger, as the seat writer reads it
     : name === 'memory_recall' && ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.seatMemory === true ? W.toolMemoryRecall(asker.popid, input)
-    : name === 'dossier_read' && ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.seatDossier === true ? W.toolDossierRead(input).text   // pipeline.111: the team cards
+    : name === 'dossier_read' && ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.seatDossier === true ? W.toolDossierRead(input, { cards: true }).text   // pipeline.111: the team cards
     : 'unknown tool ' + name;
   // pipeline.111: Nia keeps her aired-only tools at the morning too (the show's approved history, a citizen, past coverage)
   const nia = /^nia-rook/.test(personaSlugForSeat());

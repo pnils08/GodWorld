@@ -94,6 +94,7 @@ Done: Sharon, Maria, Kai, Mason, Celeste, Jordan, Graye, Noah, Trevor, Lila, Rac
 | 28 | Test set: one answerable question per record, one across two records (a pitcher's trade value), two the record cannot answer (an Oaks lineup, who starts Friday); every figure in each answer checked by script against the record it was handed | rb | done — 9 asks (output/research-build/2026-11-24-gridiron/test1.json). The script found no figure absent from the records handed (a substring check across all records: it cannot catch a right number on the wrong player); the two real errors were found by hand against the cards. Fixes below; two re-asked clean |
 | 29 | Wire: Gridiron is one door on ask_worker (GRIDIRON → the router → the analyst) — every seat on its seat file can ask it now; the sports seats as each moves to its seat file. Before: route() over real question strings (3 of ~14 phrasings missed in the test); Oaks player names route (the router knows only A's names); a miss lets the reporter name the area | rb | on ask_worker, live; asked once through it (Jade Soy on Ty Jerome, answered from the record); Oaks names route by the roster tab; an unplaced question names the five areas |
 | 30 | The card fields on the sheet (builder 2026-11-24: "Approved use it so its useful"): on their own tab per team, As_Player_Data (Oaks_Player_Data when the Oaks folder holds cards) — the roster tabs stay as they are, because the dashboard's sports page and the feed writer refuse a roster tab with columns they do not list; pull every Sunday at /run-cycle Step 1 ("every Sunday before the cycle") | rb | done — 28 rows written and read back, Pulled For Cycle 118 |
+| 31 | Feed questions to Gridiron (builder 2026-11-24: "The feed questions should only route to the 'names Used' column … to put the data team behind me"): a `question` row naming Gridiron Analytics (or one analyst) is answered by the router's analyst as the general manager's data house and sent to his Discord (the gate's webhook); private, once a row, three tries (gridironFeedQuestions.js) | rb | built, not scheduled; one dry run and one real row owed (spend unlock) before the cron line |
 
 ## Gridiron Analytics — the sports data house (Tasks 27-30)
 
@@ -146,9 +147,10 @@ Feed questions: the feed's `question` word stays the builder's private word to a
 
 ## Open questions
 
-- Feed questions to Gridiron: answer them at all, under which word, and where the answer lands (the feed is the builder's input) — for the builder; blocks nothing in Tasks 27-28.
 
 ## Changelog
+
+- 2026-11-24 (research-build) — Feed questions to Gridiron built (Task 31). Supermemory: the account's Google Drive connector (made 2026-02-05, never imported before) pulled 958 Drive files at 00:20 UTC 11-25 on a "manual" sync — 8.7M rich tokens, the balance to 0; disconnected on the builder's word, documents kept pending Supermemory's reply. Record: output/research-build/2026-11-24-supermemory-drive/.
 
 - 2026-11-24 (research-build) — Builder: Keane's card moved ("claude duet moved if"); Gridiron "under contract" to the clubs; pull "every Sunday before the cycle"; tab "Approved use it so its useful". As_Player_Data live (own tab, not the roster tab); Step 1 pulls; Gridiron on ask_worker.
 

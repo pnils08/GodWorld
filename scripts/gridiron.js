@@ -149,7 +149,7 @@ async function oaksRecord(deps) {
     out.push('The Oaks roster (' + cols.join(', ') + '):', ...rows.filter((r) => r.First || r.Last).map((r) => '- ' + cols.map((c) => String(r[c] == null ? '' : r[c]).trim()).join(' | ')));
   } catch (e) { out.push('(the Oaks roster could not be read: ' + e.message + ')'); }
   try {
-    const feed = (await sheets.getSheetAsObjects('Oakland_Sports_Feed')).filter((r) => /oaks/i.test(String(r.TeamsUsed || '')));
+    const feed = require('../lib/feedPrivacy').publicFeedRows(await sheets.getSheetAsObjects('Oakland_Sports_Feed')).filter((r) => /oaks/i.test(String(r.TeamsUsed || '')));
     out.push('', 'The Oaks on the sports feed, newest first (Cycle | type | what happened | stats | record):',
       ...feed.reverse().map((r) => '- C' + r.Cycle + ' | ' + r.EventType + ' | ' + String(r.Notes || '').trim() + (r.Stats ? ' | ' + String(r.Stats).trim() : '') + (r['Team Record'] ? ' | ' + r['Team Record'] : '')));
   } catch (e) { out.push('(the sports feed could not be read: ' + e.message + ')'); }
@@ -161,7 +161,7 @@ async function oaksRecord(deps) {
 async function asFeedRecord(deps) {
   const sheets = (deps && deps.sheets) || require('../lib/sheets');
   try {
-    const feed = (await sheets.getSheetAsObjects('Oakland_Sports_Feed')).filter((r) => /a.s|athletics/i.test(String(r.TeamsUsed || '')) && String(r.EventTrigger || '') !== 'question');
+    const feed = require('../lib/feedPrivacy').publicFeedRows(await sheets.getSheetAsObjects('Oakland_Sports_Feed')).filter((r) => /\bA['’]s\b|athletics/i.test(String(r.TeamsUsed || '')));
     return ['The A\'s on the sports feed, newest first (Cycle | season | type | who | what happened | stats | record):',
       ...feed.reverse().map((r) => '- C' + r.Cycle + ' | ' + (r.SeasonType || '') + ' | ' + r.EventType + ' | ' + String(r.NamesUsed || '').trim() + ' | ' + String(r.Notes || '').replace(/\s+/g, ' ').trim() +
         (r.Stats ? ' | ' + String(r.Stats).trim() : '') + (r['Team Record'] ? ' | ' + r['Team Record'] : ''))].join('\n');

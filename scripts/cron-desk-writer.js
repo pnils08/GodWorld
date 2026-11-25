@@ -857,6 +857,14 @@ function toolCitizenLookup(input) {
   } catch (e) { return '(citizen lookup failed: ' + e.message + ')'; }
 }
 
+// The feed's private rows (engine.338) off a raw read of Oakland_Sports_Feed; any other tab as read.
+function privateRowsOff(tab, data) {
+  if (tab !== 'Oakland_Sports_Feed' || !Array.isArray(data) || !data.length) return data;
+  const fp = require('../lib/feedPrivacy');
+  const it = (data[0] || []).indexOf('EventTrigger');
+  return [data[0]].concat(data.slice(1).filter((r) => !fp.isPrivateFeedRow(r, it)));
+}
+
 async function toolSheetRead(input, opts) {
   const tab = String(input.tab || '').trim();
   // pipeline.111 (agy pass 2 #2.3): a seat reporter's morning passes { seat: true } — no process-wide env flag.
@@ -864,7 +872,8 @@ async function toolSheetRead(input, opts) {
   if (!allow.includes(tab)) return 'tab not allowed. Allowed: ' + allow.join(', ');
   try {
     const sheets = require('../lib/sheets');
-    const data = await sheets.getRawSheetData(tab);
+    // engine.338: the builder's private question rows never leave the feed (lib/feedPrivacy.js) — found open 2026-11-24
+    const data = privateRowsOff(tab, await sheets.getRawSheetData(tab));
     // match: the header plus every row that names the term — a long tab (Initiative_Tracker runs ~13k
     // chars against the 6000 cap) otherwise hides the later rows, and a writer that "looked" and saw
     // nothing would print an absence the sheet does not hold. A miss is stated as a miss.
@@ -1776,7 +1785,7 @@ if (require.main === module) {
   main().catch(err => { log.error('Fatal: ' + err.message); process.exit(1); });
 }
 
-module.exports = {
+module.exports = { privateRowsOff,
   UNDOCKED_HISTORY_TOOL,   // pipeline.111: Nia's seat-file morning
   toolMemoryRecall, MEMORY_TOOLS,   // pipeline.111: a seat's own memory (seatMemory)
   toolDossierRead, // pipeline.76

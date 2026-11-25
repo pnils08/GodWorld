@@ -13,6 +13,8 @@
  * Artifacts: output/slices/c{N}/anthony-raines.md · output/cron-compare/anthony_record_slice_c{N}.json
  */
 'use strict';
+const fs = require('fs');
+const path = require('path');
 const K = require('./beatSliceKit');
 const live = require('./sportsFeedLive');
 
@@ -50,10 +52,20 @@ function build(cycle, { root }) {
   const read = new Date(feed.readAt).toLocaleDateString('en-CA', { timeZone: 'America/Chicago' });
   const facts = as.sort((a, b) => b.row - a.row).map((r) => ({ text: rowText(r), src: 'Oakland_Sports_Feed row ' + r.row + ' (live, read ' + read + ')' }));
   if (!facts.length) return K.emptySlice(SEAT, cycle, 'no A\'s row on the sports feed for C' + (cycle - 1) + '–C' + cycle);
+  // His own pieces already filed this Cycle (builder 2026-11-24: "a Monday and Thursday wake with a instruction to not
+  // repeat and article … within a cycle"): the headline of each, from the staged files, so the next one is another story.
+  const staged = path.join(root || path.join(__dirname, '..'), 'output', 'cron-compare', 'staged');
+  let mine = [];
+  try { mine = fs.readdirSync(staged).filter((f) => new RegExp('^sports_c' + Number(cycle) + '_anthony-raines_.*\\.staged(-\\d+)?\\.md$').test(f)); } catch (e) { mine = []; }
+  for (const f of mine.sort()) {
+    const head = (fs.readFileSync(path.join(staged, f), 'utf8').split('\n').find((l) => /^#\s/.test(l)) || '').replace(/^#+\s*/, '').trim();
+    if (head) facts.unshift({ text: 'Your piece already filed this Cycle: "' + head + '"', src: 'output/cron-compare/staged/' + f });
+  }
   const newest = as.reduce((m, r) => Math.max(m, r.row), 0);
   const lo = Math.min(...as.map(cyc)), hi = Math.max(...as.map(cyc));
   return K.makeSlice(SEAT, cycle, {}, {
-    ref: 'the A\'s on the sports feed, C' + lo + (hi !== lo ? '–C' + hi : '') + ', through row ' + newest, factChars: 6000,
+    // the morning's date in the ref: a Thursday with no new row is still a new day's record (the fanout drops a seat whose ref it already filed this Cycle)
+    ref: 'the A\'s on the sports feed, C' + lo + (hi !== lo ? '–C' + hi : '') + ', through row ' + newest + ', read ' + read, factChars: 6000,
     hood: null, label: 'the A\'s on the sports feed', angle: 'the A\'s on the sports feed', hookLine: '',
     facts, people: [], factCap: facts.length, deltas: null, hooks: [], note: null,
     extra: { rows: facts.length, readAt: feed.readAt }

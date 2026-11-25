@@ -373,9 +373,10 @@ function buildFreeAnglePacket({ cycle, desk, reporter, story, slice, candidates:
     const src = (story && story.ref) || 'beat record';
     const prewrite = (slice && (slice.prewrite || (slice.packetSeat && slice.packetSeat.prewrite))) || {};
     const prewriteEvidence = prewrite.evidence || [];
-    // a record whose lines are whole sheet rows says how long they run (prewrite.factChars — the sports feed's rows carry
-    // their Stats at the end: cut at 500, 9 of Anthony's 10 C117 rows lost them, agy 2026-11-24 step 2 #1)
-    const maxChars = Number(prewrite.factChars) || 500;
+    // A seat's record lines arrive whole (agy 2026-11-24 Anthony step 2 #1: cut at 500, 9 of his 10 C117 feed rows lost
+    // their Stats; the same cut took most of Jordan's every-sector line (6,528 chars), two of Jax's (2,625) and one of
+    // Trevor's). The records are built in code and bounded there; prewrite.factChars, when a record sets it, still rules.
+    const maxChars = Number(prewrite.factChars) || 8000;
     for (const fact of (prewrite.anchorFacts || []).concat(prewrite.presentFacts || [])) {
       const text = clean(fact, maxChars);
       if (!text || PLANNING_SKIP_FACT.test(text)) continue;

@@ -50,7 +50,7 @@ const WEEK_GRID = Object.freeze({
   1: ['carmen-delaine', 'business-desk', 'lila-mezran', 'trevor-shimizu', 'anthony-raines', 'tamsin-pruitt'],
   2: ['luis-navarro', 'rachel-torres', 'angela-reyes', 'selena-grant', 'tamsin-pruitt'],
   3: ['freelance-firebrand', 'noah-tan', 'elliot-marbury', 'p-slayer', 'tanya-cruz', 'tamsin-pruitt', 'ines-sorensen'],
-  4: ['elliot-graye', 'simon-leary', 'hal-richmond', 'talia-finch', 'farrah-del-rio', 'tamsin-pruitt', 'ines-sorensen'],   // Farrah Thursdays (pipeline.111, 2026-11-24): after Carmen Mon, Luis Tue, Jax Wed
+  4: ['elliot-graye', 'simon-leary', 'hal-richmond', 'talia-finch', 'farrah-del-rio', 'anthony-raines', 'tamsin-pruitt', 'ines-sorensen'],   // Anthony Mon + Thu (builder 2026-11-24: "a Monday and Thursday wake")   // Farrah Thursdays (pipeline.111, 2026-11-24): after Carmen Mon, Luis Tue, Jax Wed
   5: ['mason-ortega', 'kai-marston', 'sharon-okafor', 'maria-keen', 'celeste-tran', 'tamsin-pruitt', 'ines-sorensen']
 });
 function weekdayOf(date) {

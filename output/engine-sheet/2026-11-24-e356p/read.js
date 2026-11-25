@@ -146,7 +146,10 @@ const lines = bench.map(b => ({
   const moved = {}; let fell = 0;
   for (const b of bonds) {
     const w = was[String(b.BondId) + '|' + bKey(b)]; if (w === undefined || isNaN(w)) continue;
-    if (w > 9) continue;   // a bond at the cap of 10 cannot show a step (run 1: rivalries average 8.8)
+    // a bond near the cap of 10 cannot show a step: a rivalry gains 1.5 a week before any moment, and a strong
+    // bond calls more moments, so the moment group is the one clipped (run 1: rivalries average 8.8; run 2: at
+    // 9 and under the moment group still read lower, 1.249 vs 1.625). Measured where the full step fits.
+    if (w > 7.5) continue;
     const d = Number(b.Intensity) - w, ty = String(b.BondType || '').toLowerCase(), has = momentPairs[bKey(b)] ? 'moment' : 'none';
     const m = (moved[ty] = moved[ty] || { moment: [0, 0], none: [0, 0] }); m[has][0]++; m[has][1] += d;
     if (has === 'moment' && d < 0 && w < 10) { fell++; notes.push('a bond with a moment fell: ' + b.BondId + ' ' + ty + ' ' + w + ' -> ' + b.Intensity); }

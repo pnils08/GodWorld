@@ -1,0 +1,154 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ◈ encrypted .env [www.dotenvx.com]
+{
+ "cycle": 118,
+ "lines": 3053,
+ "people": 1030,
+ "bondEngineContactLines": 40,
+ "withLines": 412,
+ "bondCalledLines": 293,
+ "mostBondCalledOnOnePerson": 3,
+ "twinLines": 144,
+ "sameLineDrawnBothWaysByChance": 2,
+ "leadTagsSizedM": 412,
+ "bondsWithAMoment": 213,
+ "bondChange": {
+  "family": {
+   "withMoment": 5,
+   "meanChange": 0.222,
+   "without": 61,
+   "meanChangeWithout": -0.312
+  },
+  "friendship": {
+   "withMoment": 77,
+   "meanChange": 0.584,
+   "without": 255,
+   "meanChangeWithout": 0.279
+  },
+  "professional": {
+   "withMoment": 6,
+   "meanChange": 0.908,
+   "without": 65,
+   "meanChangeWithout": 0.469
+  },
+  "romantic": {
+   "withMoment": 0,
+   "meanChange": null,
+   "without": 4,
+   "meanChangeWithout": 0.125
+  },
+  "rivalry": {
+   "withMoment": 17,
+   "meanChange": 1.249,
+   "without": 8,
+   "meanChangeWithout": 1.625
+  },
+  "neighbor": {
+   "withMoment": 38,
+   "meanChange": 0.544,
+   "without": 45,
+   "meanChangeWithout": 0.26
+  },
+  "alliance": {
+   "withMoment": 1,
+   "meanChange": 0.7,
+   "without": 3,
+   "meanChangeWithout": 0.167
+  },
+  "sports_rival": {
+   "withMoment": 2,
+   "meanChange": 1.125,
+   "without": 2,
+   "meanChangeWithout": 1
+  },
+  "tension": {
+   "withMoment": 1,
+   "meanChange": 1.75,
+   "without": 3,
+   "meanChangeWithout": 1.5
+  }
+ },
+ "momentBondsThatFell": 0,
+ "config": {
+  "bondMomentMaxPerWeek": "3",
+  "bondMomentChanceScale": "1",
+  "bondMomentDialSize": "2",
+  "bondMomentStepPartner": "0.25",
+  "bondMomentStepFriend": "0.2",
+  "bondMomentStepFamily": "0.1",
+  "bondMomentStepRival": "0.25"
+ },
+ "byKind": {
+  "family": 18,
+  "friend": 196,
+  "neighbor": 70,
+  "coworker": 62,
+  "rival": 40,
+  "colleague": 17,
+  "housemate": 9
+ },
+ "byLine": {
+  "had dinner with $CONTACT at $VENUE": 80,
+  "stopped by $CONTACT's place and stayed longer than planned": 40,
+  "thought of calling $CONTACT and did": 40,
+  "talked with $CONTACT on the front steps until the light went": 61,
+  "met $CONTACT for coffee at $VENUE and lost track of the hour": 80,
+  "stayed late to finish the count with $CONTACT": 62,
+  "crossed the street rather than pass $CONTACT": 40,
+  "cooked at home with $CONTACT and left the dishes for morning": 9
+ },
+ "theirHomeLines": 40,
+ "theirHomeWithNoHouseholdOnTheirRow": 2,
+ "shiftLines": 62,
+ "personAndPlaceLines": 160,
+ "someoneFamiliar": 0,
+ "notProven": [
+  "kind partner"
+ ],
+ "examples": {
+  "family": [
+   "Vinnie Keane (Piedmont Ave): had dinner with Amara Keane at Montclair Patisserie  [act:meal place:BIZ-00228 contactPopId:POP-00002 with:family]",
+   "Amara Keane (Piedmont Ave): had dinner with Vinnie Keane at Montclair Patisserie  [act:meal place:BIZ-00228 with:family contactPopId:POP-00001]",
+   "Lucia Polito (Fruitvale): thought of calling Miguel Allen and did  [contactPopId:POP-01029 with:family]"
+  ],
+  "friend": [
+   "Vinnie Keane (Piedmont Ave): stopped by Mike Paulson's place and stayed longer than planned  [act:visit place:HH-0084-371 contactPopId:POP-00527 with:friend]",
+   "Amara Keane (Piedmont Ave): stopped by Hector Campbell's place and stayed longer than planned  [act:visit place:HH-0084-424 contactPopId:POP-00641 with:friend]",
+   "Mark Aitken (Jack London): stopped by Jessie Berry's place and stayed longer than planned  [act:visit place:HH-0084-488 contactPopId:POP-00705 with:friend]"
+  ],
+  "neighbor": [
+   "Vinnie Keane (Piedmont Ave): thought of calling Hector Campbell and did  [contactPopId:POP-00641 with:neighbor]",
+   "Hal Richmond (West Oakland): talked with Mai Tse on the front steps until the light went  [contactPopId:POP-00977 with:neighbor]",
+   "Benji Dillon (Piedmont Ave): stopped by Ruth Anyanwu's place and stayed longer than planned  [act:visit place:HH-0110-F023 contactPopId:POP-01147 with:neighbor]"
+  ],
+  "coworker": [
+   "Carmen Delaine (West Oakland): stayed late to finish the count with Noah Tan  [act:shift place:BIZ-00018 contactPopId:POP-00157 with:coworker]",
+   "Noah Tan (Rockridge): stayed late to finish the count with Carmen Delaine  [act:shift place:BIZ-00018 with:coworker contactPopId:POP-00011]",
+   "Aaron Whitfield (Rockridge): stayed late to finish the count with Lamine Sissoko  [act:shift place:BIZ-00017 contactPopId:POP-00149 with:coworker]"
+  ],
+  "rival": [
+   "Darrin Davis (Piedmont Ave): crossed the street rather than pass Howard Perez  [contactPopId:POP-01034 with:rival]",
+   "John Ellis (Laurel): crossed the street rather than pass Gordon Tate  [contactPopId:POP-00148 with:rival]",
+   "Avery Santana (Rockridge): crossed the street rather than pass Naomi Sterling  [contactPopId:POP-00759 with:rival]"
+  ],
+  "colleague": [
+   "John Ellis (Laurel): thought of calling Geneva Zhou and did  [contactPopId:POP-00892 with:colleague]",
+   "John Ellis (Laurel): met Geneva Zhou for coffee at Nino's and lost track of the hour  [act:meal place:BIZ-00077 contactPopId:POP-00892 with:colleague]",
+   "Geneva Zhou (West Oakland): met John Ellis for coffee at Nino's and lost track of the hour  [act:meal place:BIZ-00077 with:colleague contactPopId:POP-00033]"
+  ],
+  "housemate": [
+   "Dmitri Soto (KONO): cooked at home with Briar Soto and left the dishes for morning  [act:meal contactPopId:POP-00926 with:housemate]",
+   "Briar Soto (KONO): cooked at home with Dmitri Soto and left the dishes for morning  [act:meal with:housemate contactPopId:POP-00276]",
+   "Weslie Cooper (Piedmont Ave): cooked at home with Tariq Cooper and left the dishes for morning  [act:meal contactPopId:POP-01000 with:housemate]"
+  ]
+ },
+ "notes": [
+  "no twin on a minor's record (by rule): talked with Mai Tse on the front steps until the light went",
+  "no twin on a minor's record (by rule): cooked at home with Tariq Cooper and left the dishes for mor",
+  "no twin on a minor's record (by rule): cooked at home with Felix Vasquez and left the dishes for mo",
+  "no twin on a minor's record (by rule): cooked at home with Rosa Zhou and left the dishes for mornin"
+ ],
+ "problems": [
+  "rivalry bonds with a moment did not gain more than those without (1.249 vs 1.625)"
+ ],
+ "verdict": "FAIL"
+}

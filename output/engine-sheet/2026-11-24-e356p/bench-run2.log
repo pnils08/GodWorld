@@ -1,0 +1,58 @@
+AIM = BENCH (script read the bench marker)
+== push code cb01e74f2
+bench pull-back byte-identical to e356p.sha256
+== sync from live
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+bench lines: {"target":"bench","benchLines":9,"of":9,"rows":1200}
+{"fireGuardMinutes":"0","cycleCountFormatted":"117","cycleCountIsNumber":true}
+clearfire 118: {"ok":true,"cleared":{"cycle":118,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+appended 5 to Edition_Coverage_Ratings; marked rows on the tab now 5
+appended 26 to Citizen_Media_Usage; marked rows on the tab now 26
+appended 2 to Oakland_Sports_Feed; marked rows on the tab now 2
+bench cycleCount 117
+clearfire 118: {"ok":false,"error":"no readable fire record to clear"}
+fire C118 rc=0 "verdict": "PASS" "wallS": 230
+   "Amara Keane (Piedmont Ave): stopped by Hector Campbell's place and stayed longer than planned  [act:visit place:HH-0084-424 contactPopId:POP-00641 with:friend]",
+   "Mark Aitken (Jack London): stopped by Jessie Berry's place and stayed longer than planned  [act:visit place:HH-0084-488 contactPopId:POP-00705 with:friend]"
+  ],
+  "neighbor": [
+   "Vinnie Keane (Piedmont Ave): thought of calling Hector Campbell and did  [contactPopId:POP-00641 with:neighbor]",
+   "Hal Richmond (West Oakland): talked with Mai Tse on the front steps until the light went  [contactPopId:POP-00977 with:neighbor]",
+   "Benji Dillon (Piedmont Ave): stopped by Ruth Anyanwu's place and stayed longer than planned  [act:visit place:HH-0110-F023 contactPopId:POP-01147 with:neighbor]"
+  ],
+  "coworker": [
+   "Carmen Delaine (West Oakland): stayed late to finish the count with Noah Tan  [act:shift place:BIZ-00018 contactPopId:POP-00157 with:coworker]",
+   "Noah Tan (Rockridge): stayed late to finish the count with Carmen Delaine  [act:shift place:BIZ-00018 with:coworker contactPopId:POP-00011]",
+   "Aaron Whitfield (Rockridge): stayed late to finish the count with Lamine Sissoko  [act:shift place:BIZ-00017 contactPopId:POP-00149 with:coworker]"
+  ],
+  "rival": [
+   "Darrin Davis (Piedmont Ave): crossed the street rather than pass Howard Perez  [contactPopId:POP-01034 with:rival]",
+   "John Ellis (Laurel): crossed the street rather than pass Gordon Tate  [contactPopId:POP-00148 with:rival]",
+   "Avery Santana (Rockridge): crossed the street rather than pass Naomi Sterling  [contactPopId:POP-00759 with:rival]"
+  ],
+  "colleague": [
+   "John Ellis (Laurel): thought of calling Geneva Zhou and did  [contactPopId:POP-00892 with:colleague]",
+   "John Ellis (Laurel): met Geneva Zhou for coffee at Nino's and lost track of the hour  [act:meal place:BIZ-00077 contactPopId:POP-00892 with:colleague]",
+   "Geneva Zhou (West Oakland): met John Ellis for coffee at Nino's and lost track of the hour  [act:meal place:BIZ-00077 with:colleague contactPopId:POP-00033]"
+  ],
+  "housemate": [
+   "Dmitri Soto (KONO): cooked at home with Briar Soto and left the dishes for morning  [act:meal contactPopId:POP-00926 with:housemate]",
+   "Briar Soto (KONO): cooked at home with Dmitri Soto and left the dishes for morning  [act:meal with:housemate contactPopId:POP-00276]",
+   "Weslie Cooper (Piedmont Ave): cooked at home with Tariq Cooper and left the dishes for morning  [act:meal contactPopId:POP-01000 with:housemate]"
+  ]
+ },
+ "notes": [
+  "no twin on a minor's record (by rule): talked with Mai Tse on the front steps until the light went",
+  "no twin on a minor's record (by rule): cooked at home with Tariq Cooper and left the dishes for mor",
+  "no twin on a minor's record (by rule): cooked at home with Felix Vasquez and left the dishes for mo",
+  "no twin on a minor's record (by rule): cooked at home with Rosa Zhou and left the dishes for mornin"
+ ],
+ "problems": [
+  "rivalry bonds with a moment did not gain more than those without (1.249 vs 1.625)"
+ ],
+ "verdict": "FAIL"
+}
+read 1 exit 1
+== final sync from live
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.

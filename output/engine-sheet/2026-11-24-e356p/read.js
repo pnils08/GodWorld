@@ -149,6 +149,7 @@ const lines = bench.map(b => ({
   // Cycle, and bonds where one or neither does, separately.
   const wrote = new Set(log.map(r => String(r.POPID).trim().toUpperCase()));
   const strata = {};
+  const rivalRows = [];   // every rival bond with room, one by one — the run is resynced away, so the detail is kept here
   const moved = {}; let fell = 0;
   for (const b of bonds) {
     const w = was[String(b.BondId) + '|' + bKey(b)]; if (w === undefined || isNaN(w)) continue;
@@ -159,6 +160,7 @@ const lines = bench.map(b => ({
     const d = Number(b.Intensity) - w, ty = String(b.BondType || '').toLowerCase(), has = momentPairs[bKey(b)] ? 'moment' : 'none';
     const m = (moved[ty] = moved[ty] || { moment: [0, 0], none: [0, 0] }); m[has][0]++; m[has][1] += d;
     const bothW = wrote.has(String(b.CitizenA || '').trim().toUpperCase()) && wrote.has(String(b.CitizenB || '').trim().toUpperCase()) ? 'bothWritten' : 'notBoth';
+    if (ty === 'rivalry' || ty === 'tension' || ty === 'sports_rival') rivalRows.push({ id: b.BondId, a: b.CitizenA, b: b.CitizenB, type: ty, before: w, after: Number(b.Intensity), moment: has === 'moment', both: bothW === 'bothWritten', status: b.Status });
     const sx = (strata[ty] = strata[ty] || { bothWritten: { moment: [0, 0], none: [0, 0] }, notBoth: { moment: [0, 0], none: [0, 0] } }); sx[bothW][has][0]++; sx[bothW][has][1] += d;
     if (has === 'moment' && d < 0 && w < 10) { fell++; notes.push('a bond with a moment fell: ' + b.BondId + ' ' + ty + ' ' + w + ' -> ' + b.Intensity); }
   }
@@ -178,7 +180,7 @@ const lines = bench.map(b => ({
   const notProven = want.filter(k => !byKind[k]).map(k => 'kind ' + k).concat(homes ? [] : ['their-home']).concat(shifts ? [] : ['shift with a coworker']).concat(twoSlot ? [] : ['person + place']);
   const out = { cycle: +C, lines: log.length, people: new Set(log.map(r => r.POPID)).size, bondEngineContactLines: engineLines,
     withLines: lineCount, bondCalledLines: called, mostBondCalledOnOnePerson: Math.max(0, ...Object.values(calledBy)), twinLines: twins, sameLineDrawnBothWaysByChance: reciprocal, leadTagsSizedM: sizedM,
-    bondsWithAMoment: Object.keys(momentPairs).length, bondChange, stepLikeWithLike: stepByStratum, momentBondsThatFell: fell, config: Object.fromEntries(CFG_KEYS.map(k => [k, cfg[k]])), byKind, byLine, theirHomeLines: homes, theirHomeWithNoHouseholdOnTheirRow: homesNoHousehold, shiftLines: shifts, personAndPlaceLines: twoSlot, someoneFamiliar: vague,
+    bondsWithAMoment: Object.keys(momentPairs).length, bondChange, stepLikeWithLike: stepByStratum, rivalBonds: rivalRows, momentBondsThatFell: fell, config: Object.fromEntries(CFG_KEYS.map(k => [k, cfg[k]])), byKind, byLine, theirHomeLines: homes, theirHomeWithNoHouseholdOnTheirRow: homesNoHousehold, shiftLines: shifts, personAndPlaceLines: twoSlot, someoneFamiliar: vague,
     notProven, examples: ex, notes: notes.slice(0, 12), problems, verdict: problems.length ? 'FAIL' : (lineCount ? (notProven.length ? 'PASS, not proven: ' + notProven.join(', ') : 'PASS') : 'FAIL') };
   console.log(JSON.stringify(out, null, 1));
   process.exit(problems.length ? 1 : 0);

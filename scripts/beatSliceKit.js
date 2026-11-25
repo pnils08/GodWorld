@@ -233,6 +233,7 @@ function makeSlice(seat, cycle, beats, body) {
       // a seat whose slice is threads (Lives) asks the prompt for more than the default 12 fact lines
       ...(body.factCap ? { factCap: Number(body.factCap) } : {}),
       ...(body.peopleCap ? { peopleCap: Number(body.peopleCap) } : {}),
+      ...(body.factChars ? { factChars: Number(body.factChars) } : {}),
       roomIsYours: seat.roomIsYours
     },
     ...(body.extra || {}),

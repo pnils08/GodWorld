@@ -27,6 +27,7 @@ const SEAT = {
 };
 
 const AS = /\bA['’]s\b|athletics/i;
+const MAX_AGE_MS = 20 * 3600 * 1000;   // the 06:15 copy still serves the 18:15 write
 
 function rowText(r) {
   const bits = ['C' + r.Cycle + (r.SeasonType ? ' (' + r.SeasonType + ')' : '') + ' · ' + (r.EventType || 'feed') +
@@ -41,13 +42,18 @@ function rowText(r) {
 function build(cycle, { root }) {
   const feed = live.load(root);
   if (!feed) return K.emptySlice(SEAT, cycle, 'the morning copy of the sports feed is missing (sportsFeedLive.js)');
-  const as = feed.rows.filter((r) => AS.test(r.TeamsUsed || '') && Number(r.Cycle) >= Number(cycle) - 1 && Number(r.Cycle) <= Number(cycle) + 1);
-  const read = String(feed.readAt || '').slice(0, 10);
+  // a copy older than a day is not this morning's: a failed refresh never hands him last week (agy 2026-11-24 step 2 #3)
+  const age = Date.now() - Date.parse(feed.readAt || 0);
+  if (!(age >= 0 && age < MAX_AGE_MS)) return K.emptySlice(SEAT, cycle, 'the sports feed copy was read ' + (feed.readAt || 'never') + ' — not this morning\'s; he sits the day out');
+  const cyc = (r) => (String(r.Cycle || '').trim() === '' ? NaN : Number(r.Cycle));
+  const as = feed.rows.filter((r) => AS.test(r.TeamsUsed || '') && cyc(r) >= Number(cycle) - 1 && cyc(r) <= Number(cycle) + 1);
+  const read = new Date(feed.readAt).toLocaleDateString('en-CA', { timeZone: 'America/Chicago' });
   const facts = as.sort((a, b) => b.row - a.row).map((r) => ({ text: rowText(r), src: 'Oakland_Sports_Feed row ' + r.row + ' (live, read ' + read + ')' }));
   if (!facts.length) return K.emptySlice(SEAT, cycle, 'no A\'s row on the sports feed for C' + (cycle - 1) + '–C' + cycle);
   const newest = as.reduce((m, r) => Math.max(m, r.row), 0);
+  const lo = Math.min(...as.map(cyc)), hi = Math.max(...as.map(cyc));
   return K.makeSlice(SEAT, cycle, {}, {
-    ref: 'the A\'s on the sports feed, C' + (cycle - 1) + '–C' + cycle + ', through row ' + newest,
+    ref: 'the A\'s on the sports feed, C' + lo + (hi !== lo ? '–C' + hi : '') + ', through row ' + newest, factChars: 6000,
     hood: null, label: 'the A\'s on the sports feed', angle: 'the A\'s on the sports feed', hookLine: '',
     facts, people: [], factCap: facts.length, deltas: null, hooks: [], note: null,
     extra: { rows: facts.length, readAt: feed.readAt }

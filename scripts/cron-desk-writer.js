@@ -862,6 +862,7 @@ function privateRowsOff(tab, data) {
   if (tab !== 'Oakland_Sports_Feed' || !Array.isArray(data) || !data.length) return data;
   const fp = require('../lib/feedPrivacy');
   const it = (data[0] || []).indexOf('EventTrigger');
+  if (it < 0) return [data[0]];   // no trigger column, no telling private rows apart: no rows (fails closed)
   return [data[0]].concat(data.slice(1).filter((r) => !fp.isPrivateFeedRow(r, it)));
 }
 

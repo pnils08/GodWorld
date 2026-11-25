@@ -132,6 +132,7 @@ Keep: the ten methods as his own craft (he picks), rate arithmetic, sourcing (ev
 | Six reporters, live | agy | [[../../output/antigravity/2026-11-23-review-pipeline111-reporters]] | HOLD — #1–#5 verified and fixed `36f0eec26`; #6–#8 held (low) |
 | Morning tools, ask_worker, Graye, trims | agy | [[../../output/antigravity/2026-11-23-review-pipeline111-pass2]] | HOLD — #1–#5 verified and fixed `69f6adf70`; #1 proven through the live gate (PASS) |
 | Anthony step 1, the seat file | agy | [[../../output/antigravity/2026-11-24-review-anthony-step1-seat]] | HOLD — #1-3 tools: true, wired in steps 3-4; #4 OrginCity: stale snapshot (sheet written N17); #5, #7-12 verified and folded into SEAT.md + voices/anthony.md Essence; #6 held (newsroom rule: Paulson family is out of canon); #13 'and the rest' removed |
+| Anthony step 2, the live record | agy | [[../../output/antigravity/2026-11-24-review-anthony-step2-record]] | HOLD — #1 (rows cut at 500, Stats lost on 9 of 10) fixed: prewrite.factChars, packet carries 10 of 10 whole; #2 privacy fails closed (no EventTrigger column → no copy / no rows); #3 a copy over 20 h old sits him out; #5 window label + blank Cycle + sim-local date; #7 the morning read time-boxed at 60 s; #4 the fanout's old buildAnthonySlice call and #6 the kit's 'paint' lines → step 4 (the seat writer is sent no limits block; proven in the step 4 print) |
 
 ### Agreed
 
@@ -158,6 +159,8 @@ Keep: the ten methods as his own craft (he picks), rate arithmetic, sourcing (ev
 
 
 ## Changelog
+
+- 2026-11-24 (research-build) — Anthony step 2: his record read live from the sports feed each morning (builder: "just read the sheets live"); agy HOLD folded — whole rows reach the packet (10 of 10 with Stats), privacy fails closed, a stale copy sits him out, the read is time-boxed.
 
 - 2026-11-24 (research-build) — Anthony step 1 folded after agy's HOLD: third person and one claim, blunt with evidence; rates only from filled numbers, innings in thirds; no merged lines, team record is the club's; no splits, projections, injuries or front-office mind-reading; PANDAS/Statcast supply no current numbers; Gridiron quotable, citizens not interviewed; three stock phrasings out; voice Essence origin trued.
 

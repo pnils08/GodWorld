@@ -26,6 +26,8 @@ async function refresh(deps) {
   const data = await sheets.getRawSheetData('Oakland_Sports_Feed');
   const head = (data[0] || []).map((h) => String(h || '').trim());
   const it = head.indexOf('EventTrigger');
+  // no trigger column, no way to tell the builder's private rows: nothing is copied (agy 2026-11-24 step 2 #2)
+  if (it < 0) throw new Error('Oakland_Sports_Feed has no EventTrigger column — the private question rows cannot be told apart; no copy written');
   const rows = [];
   data.slice(1).forEach((r, i) => {
     if (!r.some((v) => String(v == null ? '' : v).trim() !== '')) return;   // a sheet's blank tail is not rows

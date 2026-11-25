@@ -373,12 +373,15 @@ function buildFreeAnglePacket({ cycle, desk, reporter, story, slice, candidates:
     const src = (story && story.ref) || 'beat record';
     const prewrite = (slice && (slice.prewrite || (slice.packetSeat && slice.packetSeat.prewrite))) || {};
     const prewriteEvidence = prewrite.evidence || [];
+    // a record whose lines are whole sheet rows says how long they run (prewrite.factChars — the sports feed's rows carry
+    // their Stats at the end: cut at 500, 9 of Anthony's 10 C117 rows lost them, agy 2026-11-24 step 2 #1)
+    const maxChars = Number(prewrite.factChars) || 500;
     for (const fact of (prewrite.anchorFacts || []).concat(prewrite.presentFacts || [])) {
-      const text = clean(fact, 500);
+      const text = clean(fact, maxChars);
       if (!text || PLANNING_SKIP_FACT.test(text)) continue;
       if (/\b(?:do not|never)\s+(?:invent|lead|print|publish|assert|name|use)\b/i.test(text)) continue;
-      const evidence = prewriteEvidence.find(row => row && clean(row.text, 500) === text);
-      push(text, (evidence && evidence.src) || src, 500);
+      const evidence = prewriteEvidence.find(row => row && clean(row.text, maxChars) === text);
+      push(text, (evidence && evidence.src) || src, maxChars);
     }
   }
   for (const line of free.week || []) push(line && line.text, line && line.src, 2000);

@@ -37,7 +37,9 @@ Order: `1 → 2 → 2.5 → 3 → 3.5 → 4 → 4.1 → 5 → 5.56 → 5.5 → 5
 ### Step 1: /pre-flight
 Verify manual inputs are ready — sports feed entries, citizen `Intake` rows (what the fire will do with each pending row: household, single, headed for review), initiative tracker structure, coverage ratings. Business/storyline intake not wired. Pre-flight validates against the repo's engine code, not the deployed version — between a commit and its ship the two can disagree (C109: three duplicate WeekRecords passed here and were refused by PROD @132).
 
-Runner: `node scripts/runCycle.js step 1 {XX}` (runs `preflightInputCheck.js --cycle={XX}`).
+Runner: `node scripts/runCycle.js step 1 {XX}` (runs `gridironCards.js --write-tabs`, then `preflightInputCheck.js --cycle={XX}`).
+
+Gridiron Analytics' Sunday pull (pipeline.111, builder 2026-11-24: "every Sunday before the cycle"): every team card in the sports folder → `output/gridiron/cards.json` and the `<Team>_Player_Data` tab, written whole and read back. A failed pull does not hold the fire; the step detail names it and last week's record stands.
 
 **Gate:** READY → proceed. NOT READY → stop and fix.
 

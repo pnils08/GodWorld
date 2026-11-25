@@ -27,6 +27,9 @@ function workers() {
     .map((o) => ({ officeId: o.officeId || o.projectId, title: o.title || o.name || '', popid: String(o.popid || '').toUpperCase(), model: o.model || null }))
     .filter((o) => o.officeId && W.hasFill(o.officeId) && W.JOBS[o.officeId])
     .map((o) => Object.assign(o, { name: String((profiles.get(o.popid) || {}).Name || '').trim(), job: W.JOBS[o.officeId] }));
+  // pipeline.111: Gridiron Analytics, the sports data house (scripts/gridiron.js) — one door, five analysts behind it
+  roster.push({ officeId: 'GRIDIRON', title: 'Gridiron Analytics, Oakland\'s sports data house', popid: '', model: null, name: '',
+    job: 'You are Oakland\'s sports data house. Your job is to answer for the A\'s and the Oaks — the hitters and pitchers, the lineup and the rotation, every contract, the Oaks\' numbers and season, and what the Tribune has printed on them — when the press ask.' });
   return roster;
 }
 
@@ -42,6 +45,10 @@ function askWorkerTool() {
 }
 
 async function askWorker({ officeId, question, asker, cycle, date }) {
+  if (officeId === 'GRIDIRON') {   // the house routes the question to the analyst who answers for its record
+    const g = await require('./gridiron').ask({ question, asker, cycle, date });
+    return { officeId, popid: g.popid || null, name: g.name || 'Gridiron Analytics', title: g.title || 'Gridiron Analytics', text: g.text, finish: g.finish };
+  }
   const W = require('./workerWake');
   const dw = require('./cron-desk-writer');
   const who = workers().find((w) => w.officeId === officeId);

@@ -74,9 +74,15 @@ function run(args, opts = {}) {
 // A step returns { ok, outcome, detail }. outcome names which arm of the
 // skill's gate it met ('pass', 'no-journal', ...); ok=false stops the chain.
 const STEPS = [
-  { id: '1', title: 'Pre-flight', scripts: ['preflightInputCheck'],
-    run: (c) => { const r = run(['scripts/preflightInputCheck.js', `--cycle=${c.cycle}`]);
-      return r.status === 0 ? { ok: true, outcome: 'pass', detail: 'READY' } : { ok: false, detail: `pre-flight exit ${r.status} (NOT READY)` }; } },
+  // pipeline.111 (builder 2026-11-24: "every Sunday before the cycle"): Gridiron Analytics pulls the team cards from the
+  // sports folder and writes <Team>_Player_Data. A failed pull never holds the fire: last week's record stands, and the
+  // step's detail says so.
+  { id: '1', title: 'Pre-flight', scripts: ['gridironCards', 'preflightInputCheck'],
+    run: (c) => {
+      const g = run(['scripts/gridironCards.js', '--write-tabs'], { timeoutSec: 300 });
+      const pulled = g.status === 0 ? ((g.stdout || '').match(/^\w+_Player_Data: .*$/gm) || []).join('; ') : `card pull exit ${g.status} — Gridiron keeps last week's record`;
+      const r = run(['scripts/preflightInputCheck.js', `--cycle=${c.cycle}`]);
+      return r.status === 0 ? { ok: true, outcome: 'pass', detail: 'READY · ' + pulled } : { ok: false, detail: `pre-flight exit ${r.status} (NOT READY) · ` + pulled }; } },
 
   { id: '2', title: 'Pre-mortem', scripts: ['preMortemScan'],
     // C117 gap log G-EC42a: the scan's "engine changes since last cycle" date is the moment the

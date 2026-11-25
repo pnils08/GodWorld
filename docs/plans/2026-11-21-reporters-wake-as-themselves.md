@@ -92,8 +92,8 @@ Done: Sharon, Maria, Kai, Mason, Celeste, Jordan, Graye, Noah, Trevor, Lila, Rac
 | 26 | Superintendent of Schools worker (Achterberg) for Angela; Director of Cultural Affairs worker (Kiran Tavakoli, intake row queued for C118) for Kai, Sharon, Celeste | rb | superintendent live and asked once (answered from the record, one unsourced detail being traced); culture: map entry (answersOnly) + the three seat files after the mint |
 | 27 | Gridiron Analytics, the sports data house: the team cards pulled from the sports folder and read to fields (gridironCards.js); five analysts on the worker template, one record each, the other four a read away; a code router picks the analyst, no model; a question no record covers gets no call (gridiron.js, gridironAsk.js) | rb | built, not live; the A's feed added as a sixth record every analyst can read (builder: "if the feed is cheaper to pull in this way is should be added") |
 | 28 | Test set: one answerable question per record, one across two records (a pitcher's trade value), two the record cannot answer (an Oaks lineup, who starts Friday); every figure in each answer checked by script against the record it was handed | rb | done — 9 asks (output/research-build/2026-11-24-gridiron/test1.json). The script found no figure absent from the records handed (a substring check across all records: it cannot catch a right number on the wrong player); the two real errors were found by hand against the cards. Fixes below; two re-asked clean |
-| 29 | Wire: the sports seats ask Gridiron (ask_gridiron beside ask_worker) as each sports seat moves to its seat file. Before: route() over real question strings (3 of ~14 phrasings missed in the test); Oaks player names route (the router knows only A's names); a miss lets the reporter name the area | rb | not started (sports seats last) |
-| 30 | The A's and Oaks roster tabs carry the card fields (columns added at the right; eight scripts read the tabs today) | rb | held for the builder's go (a many-row sheet write) |
+| 29 | Wire: Gridiron is one door on ask_worker (GRIDIRON → the router → the analyst) — every seat on its seat file can ask it now; the sports seats as each moves to its seat file. Before: route() over real question strings (3 of ~14 phrasings missed in the test); Oaks player names route (the router knows only A's names); a miss lets the reporter name the area | rb | on ask_worker, live; asked once through it (Jade Soy on Ty Jerome, answered from the record); Oaks names route by the roster tab; an unplaced question names the five areas |
+| 30 | The card fields on the sheet (builder 2026-11-24: "Approved use it so its useful"): on their own tab per team, As_Player_Data (Oaks_Player_Data when the Oaks folder holds cards) — the roster tabs stay as they are, because the dashboard's sports page and the feed writer refuse a roster tab with columns they do not list; pull every Sunday at /run-cycle Step 1 ("every Sunday before the cycle") | rb | done — 28 rows written and read back, Pulled For Cycle 118 |
 
 ## Gridiron Analytics — the sports data house (Tasks 27-30)
 
@@ -146,12 +146,11 @@ Feed questions: the feed's `question` word stays the builder's private word to a
 
 ## Open questions
 
-- Vinnie Keane: the feed made his retirement official in C115; his card sits with the active players and Gridiron reads him as a 2042 player (one analyst named him a trade chip) — the card moves, or the record reads the feed's retirement over the card? For the builder.
-- Gridiron and the clubs: independent, or under contract to the A's and Oaks? One analyst answered as the club ("our third starter"). For the builder.
-- When the card pull runs (each card change, or before each Sunday cycle). For the builder.
 - Feed questions to Gridiron: answer them at all, under which word, and where the answer lands (the feed is the builder's input) — for the builder; blocks nothing in Tasks 27-28.
 
 ## Changelog
+
+- 2026-11-24 (research-build) — Builder: Keane's card moved ("claude duet moved if"); Gridiron "under contract" to the clubs; pull "every Sunday before the cycle"; tab "Approved use it so its useful". As_Player_Data live (own tab, not the roster tab); Step 1 pulls; Gridiron on ask_worker.
 
 - 2026-11-24 (research-build) — Found open and closed: the builder's private question rows (engine.338) reached a reader through sheet_read on the feed — the reporters' tool and the workers' tool — and Gridiron's Oaks record. All three now filter through lib/feedPrivacy.js. Live on save (crons run from the tree); suites not run (test guard).
 

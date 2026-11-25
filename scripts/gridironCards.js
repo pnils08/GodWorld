@@ -14,6 +14,7 @@
  *
  *   node scripts/gridironCards.js            # pull + parse, write cards.json, print a summary
  *   node scripts/gridironCards.js --local    # parse the last pull on disk only (no Drive)
+ *   --write-tabs                             # also write <Team>_Player_Data on the sheet, whole, and read it back
  *   parseCard(text) -> { kind, name, team, position, profile, attributes, pitches, seasons, advanced, career, contract, roster, quirks, awards, notes }
  */
 const fs = require('fs');
@@ -209,7 +210,9 @@ function build(pulled) {
   const walk = (dir, rel) => { let es = []; try { es = fs.readdirSync(dir, { withFileTypes: true }); } catch (e) { return; }
     for (const e of es) e.isDirectory() ? walk(path.join(dir, e.name), path.join(rel, e.name)) : files.push(path.join(rel, e.name)); };
   walk(RAW_DIR, '');
-  for (const rel of files.sort()) {
+  // a pull reads only what is in the folder now: a card moved between folders leaves its old copy on disk
+  const now = pulled && pulled.length ? new Set(pulled.map((x) => x.rel)) : null;
+  for (const rel of files.sort().filter((f) => !now || now.has(f))) {
     const [team, sub] = rel.split(path.sep);
     const t = teams[team] || (teams[team] = { players: [], staff: null });
     const text = fs.readFileSync(path.join(RAW_DIR, rel), 'utf8');
@@ -222,8 +225,57 @@ function build(pulled) {
       t.staff = parseStaff(text);
     } else if (!/^Coaches-inactive/i.test(sub)) skipped.push(rel + ' (not read: ' + sub + ')');
   }
-  return { pulledAt: new Date().toISOString(), lastCompletedSeason: 2041, currentSeason: 2042, teams, skipped,
+  // the sim's own clock: the Cycle the pull runs ahead of (the last fired Cycle + 1)
+  let forCycle = null; try { const c = Number(require(path.join(ROOT, 'lib', 'getCurrentCycle'))({ noArgv: true })); forCycle = isFinite(c) ? c + 1 : null; } catch (e) { forCycle = null; }
+  return { pulledAt: new Date().toISOString(), forCycle, lastCompletedSeason: 2041, currentSeason: 2042, teams, skipped,
     pulled: (pulled || []).length || null };
+}
+
+// ---- the team's player data tab (builder 2026-11-24: "Approved use it so its useful"). One tab per team, <Team>_Player_Data,
+// written whole by this pull and by nothing else. Not the roster tabs: the dashboard's sports page and the feed writer
+// refuse a roster tab whose columns differ from their exact list (sportsWorkspaceProjection validateRosterHeaders,
+// sportsFeedWriter selectedRosterRow), so added columns there would stop the builder's feed entry.
+const HIT_ATTRS = ['CON R', 'CON L', 'POW R', 'POW L', 'VIS', 'DISC', 'CLT', 'SPD', 'STEAL', 'BR AGG', 'FLD', 'ARM', 'ACC', 'REAC', 'DUR', 'BUNT', 'DBUNT'];
+const PIT_ATTRS = ['STA', 'H/9', 'K/9', 'BB/9', 'HR/9', 'PCLT', 'CTRL', 'VEL', 'BRK'];
+const TAB_HEADERS = ['POPID', 'Name', 'Status', 'Level', 'Kind', 'Position', 'Secondary', 'Bats', 'Throws', 'Age', 'Overall', 'Trend', 'Potential', 'Service',
+  'Contract', 'Options', '40-Man', 'Active Roster', ...HIT_ATTRS, ...PIT_ATTRS, 'Pitches', 'Last Season', 'Last Season Line', 'Last Season WAR', 'Quirks', 'Awards', 'Notes', 'Pulled For Cycle'];
+function tabRows(team, rec) {
+  const t = rec.teams[team];
+  return (t ? t.players : []).map((p) => {
+    const f = p.profile || {}, r = p.roster || {}, a = p.attributes || {};
+    const s = (p.seasons || []).find((x) => Number(x.G) > 0) || null;
+    const adv = s ? (p.advanced || []).find((x) => x.YEAR === s.YEAR && x.TEAM === s.TEAM) || {} : {};
+    const line = !s ? '' : p.kind === 'pitcher'
+      ? [s.G + ' G', s.GS + ' GS', s.W + '-' + s.L, s.SV + ' SV', s.IP + ' IP', s.ERA + ' ERA', s.SO + ' SO', s.BB + ' BB'].join(', ')
+      : [s.G + ' G', [s.AVG, s.OBP, s.SLG].join('/'), s.HR + ' HR', s.RBI + ' RBI', s.SB + ' SB'].join(', ');
+    const level = p.status === 'inactive' ? 'gone' : /AAA|Aviators/i.test(String(p.team || '') + ' ' + String(r.Level || '')) || /^NO$/i.test(String(r['On Active Roster'] || '')) ? 'AAA' : 'MLB';
+    return [p.popid || '', p.name, p.status, level, p.kind, p.position || '', f['Secondary Position'] || '', f.Bats || '', f.Throws || '', f.Age == null ? '' : f.Age,
+      f.Overall == null ? '' : f.Overall, p.trend || '', f.Potential || '', f['MLB Service'] == null ? '' : f['MLB Service'],
+      Object.entries(p.contract || {}).map(([y, v]) => y + ' ' + v).join('; '), r['Minor League Option'] || r['Minor League Options'] || '', r['On 40-Man Roster'] || '', r['On Active Roster'] || '',
+      ...HIT_ATTRS.map((k) => (p.kind === 'batter' && a[k] != null ? a[k] : '')), ...PIT_ATTRS.map((k) => (p.kind === 'pitcher' && a[k] != null ? a[k] : '')),
+      (p.pitches || []).join('; '), s ? s.YEAR + ' ' + s.TEAM : '', line, adv.WAR == null ? '' : adv.WAR, (p.quirks || []).join('; '), (p.awards || []).join('; '), (p.notes || []).join('; '), rec.forCycle == null ? '' : rec.forCycle];
+  });
+}
+async function writeTabs(rec) {
+  const sheets = require(path.join(ROOT, 'lib', 'sheets'));
+  const out = [];
+  for (const team of Object.keys(rec.teams)) {
+    const rows = tabRows(team, rec);
+    if (!rows.length) { out.push(team + ': no players in the folder, tab not written'); continue; }
+    const tab = team + '_Player_Data';
+    const have = (await sheets.listSheets()).some((x) => x.title === tab);
+    if (!have) await sheets.createSheet(tab, TAB_HEADERS);
+    await sheets.resizeSheet(tab, TAB_HEADERS.length, Math.max(rows.length + 20, 60));
+    const client = await sheets.getClient();
+    await client.spreadsheets.values.clear({ spreadsheetId: process.env.GODWORLD_SHEET_ID, range: tab });
+    await sheets.updateRange(tab + '!A1', [TAB_HEADERS].concat(rows));
+    // read back: every row's POPID / name where it was written
+    const back = await sheets.getRawSheetData(tab);
+    const ok = back.length === rows.length + 1 && rows.every((r, i) => String(back[i + 1][1]) === String(r[1]) && String(back[i + 1][0] || '') === String(r[0]));
+    if (!ok) throw new Error(tab + ' read back does not match what was written (' + (back.length - 1) + ' rows read, ' + rows.length + ' written)');
+    out.push(tab + ': ' + rows.length + ' players written and read back');
+  }
+  return out;
 }
 
 async function main() {
@@ -232,6 +284,7 @@ async function main() {
   const rec = build(pulled);
   fs.mkdirSync(OUT_DIR, { recursive: true });
   fs.writeFileSync(path.join(OUT_DIR, 'cards.json'), JSON.stringify(rec, null, 1));
+  if (process.argv.includes('--write-tabs')) for (const l of await writeTabs(rec)) console.log(l);
   for (const [team, t] of Object.entries(rec.teams)) {
     const act = t.players.filter((p) => p.status === 'active');
     console.log(team + ': ' + t.players.length + ' players (' + act.length + ' active), staff ' + (t.staff ? t.staff.staff.length : 0));
@@ -242,4 +295,4 @@ async function main() {
 }
 
 if (require.main === module) main().catch((e) => { console.error(e); process.exit(1); });
-module.exports = { parseCard, parseStaff, build, SPORTS_FOLDER, OUT_DIR };
+module.exports = { parseCard, parseStaff, build, tabRows, writeTabs, TAB_HEADERS, SPORTS_FOLDER, OUT_DIR };

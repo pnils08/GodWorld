@@ -105,6 +105,7 @@ This manifest is the registry of all active Google Sheets tabs hooked into the P
   `TargetCycle = N+1`; the same fire's casino places show slips against that cast
   (`c<N+1>:<POPID>`). Read by `scripts/cron-undocked-run.js` (kimi's half) for the
   nightly pilot. Missing tab = no draw (bench-first switch). Append-only.
+- **`As_Player_Data`** (and **`Oaks_Player_Data`** once the Oaks folder holds cards): Gridiron Analytics' player record (pipeline.111, 2026-11-24) — one row per card in the sports folder on Drive: level, hand, age, overall, contract by year, options, ratings, pitches, last season's line, quirks, awards, `Pulled For Cycle`. Written whole by `scripts/gridironCards.js --write-tabs` at `/run-cycle` Step 1 every Sunday, read back after the write; nothing else writes it. No engine reader. Kept off `As_Roster` / `Oaks_Roster`: the dashboard's sports page and the feed writer refuse a roster tab whose columns differ from their exact list.
 - **`Oakland_Sports_Feed`**: Interactive sports event intake. **This is the live
   feed-tab precedent** — a Phase-2 read (`applySportsSeason.js` L302,
   `applySportsFeedTriggers_`) sets summary state before Phase 5 events. Copy this

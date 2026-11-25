@@ -35,15 +35,15 @@ const MODEL = 'deepseek/deepseek-v4.1-flash-1017';   // the city workers' model 
 const HOUSE = 'Gridiron Analytics';
 const ANALYSTS = [
   { officeId: 'GIA-HITTING', popid: 'POP-00347', title: 'Sports Analytics Lead, Gridiron Analytics',
-    job: 'You lead the hitting analysis at Gridiron Analytics, Oakland\'s sports data house. Your job is to answer for the A\'s hitters — each hitter\'s hand and how he hits right- and left-handed pitching, his plate skills, speed and glove, his seasons, and where he fits in a lineup — when the Tribune or anyone in the game asks.' },
+    job: 'You lead the hitting analysis at Gridiron Analytics, Oakland\'s sports data house under contract to the A\'s and the Oaks. Your job is to answer for the A\'s hitters — each hitter\'s hand and how he hits right- and left-handed pitching, his plate skills, speed and glove, his seasons, and where he fits in a lineup — when the Tribune or anyone in the game asks.' },
   { officeId: 'GIA-PITCHING', popid: 'POP-00461', title: 'Sports Analytics Lead, Gridiron Analytics',
-    job: 'You lead the pitching analysis at Gridiron Analytics, Oakland\'s sports data house. Your job is to answer for the A\'s pitchers — each arm\'s role, stamina, pitches and command, his seasons, and how the rotation and the bullpen line up — when the Tribune or anyone in the game asks.' },
+    job: 'You lead the pitching analysis at Gridiron Analytics, Oakland\'s sports data house under contract to the A\'s and the Oaks. Your job is to answer for the A\'s pitchers — each arm\'s role, stamina, pitches and command, his seasons, and how the rotation and the bullpen line up — when the Tribune or anyone in the game asks.' },
   { officeId: 'GIA-ROSTER', popid: 'POP-01107', title: 'Co-Founder, Gridiron Analytics',
-    job: 'You co-founded Gridiron Analytics, Oakland\'s sports data house. Your job is to answer for the A\'s roster and its money — every player\'s contract year by year, his options and service time, who is on the 40-man and who is in Las Vegas, the coaches\' pay and terms, the budget, and what a player is worth in a trade — when the Tribune or anyone in the game asks.' },
+    job: 'You co-founded Gridiron Analytics, Oakland\'s sports data house under contract to the A\'s and the Oaks. Your job is to answer for the A\'s roster and its money — every player\'s contract year by year, his options and service time, who is on the 40-man and who is in Las Vegas, the coaches\' pay and terms, the budget, and what a player is worth in a trade — when the Tribune or anyone in the game asks.' },
   { officeId: 'GIA-OAKS', popid: 'POP-00434', title: 'Data Analyst, Gridiron Analytics',
-    job: 'You are a data analyst at Gridiron Analytics, Oakland\'s sports data house, and the Oaks are yours. Your job is to answer for the Oaks\' record — the roster and each player\'s numbers, and the season as it has gone game by game — when the Tribune or anyone in the game asks.' },
+    job: 'You are a data analyst at Gridiron Analytics, Oakland\'s sports data house under contract to the A\'s and the Oaks, and the Oaks are yours. Your job is to answer for the Oaks\' record — the roster and each player\'s numbers, and the season as it has gone game by game — when the Tribune or anyone in the game asks.' },
   { officeId: 'GIA-RECORD', popid: 'POP-01108', title: 'Co-Founder, Gridiron Analytics',
-    job: 'You co-founded Gridiron Analytics, Oakland\'s sports data house, and you keep its library. Your job is to answer for what the Tribune has printed on Oakland sports — who wrote what, in which Cycle, and what it said — when the Tribune or anyone in the game asks.' },
+    job: 'You co-founded Gridiron Analytics, Oakland\'s sports data house under contract to the A\'s and the Oaks, and you keep its library. Your job is to answer for what the Tribune has printed on Oakland sports — who wrote what, in which Cycle, and what it said — when the Tribune or anyone in the game asks.' },
 ];
 const byOffice = (id) => ANALYSTS.find((a) => a.officeId === id) || null;
 
@@ -197,7 +197,7 @@ const WORDS = {
   'GIA-ROSTER': /\b(contract|salary|salaries|paid|payroll|budget|money|trade|trades|traded|trade bait|deal|free agen\w*|arbitration|arb|options?|service time|40-man|waivers?|extension|re-?sign\w*|worth|value|cost|coach(es|ing)? (pay|contract))\b/i,
   'GIA-PITCHING': /\b(ace|aces|rotation|starts|start(?:s|ing)? (?:on|friday|saturday|sunday|monday|tuesday|wednesday|thursday|tonight|game)|starter|starters|starting pitcher|bullpen|closer|reliever|relief|setup|pitch(er|ers|ing)?|arm|arms|innings|era|fip|whip|strikeouts?|stamina|velocity|fastball|slider|curve\w*|changeup)\b/i,
   'GIA-HITTING': /\b(lineup|batting order|lead ?-?off|clean-?up|platoon|hitter|hitters|hitting|bat|bats|batting|lefties|righties|left-handed|right-handed|splits?|on-base|obp|slugging|ops|home runs?|homers?|steals?|stolen|defen[cs]e|glove|catcher|shortstop|outfield\w*|infield\w*|dh)\b/i,
-  'GIA-OAKS': /\b(oaks|nba|basketball|points|rebounds|assists|starting five|bench|minutes|three-point|3-point|playoff seeding)\b/i,
+  'GIA-OAKS': /\b(oaks|nba|basketball|points|rebounds|assists|starting five|three-point|3-point|playoff seeding)\b/i,
 };
 function route(question, cards) {
   const q = String(question || '');
@@ -242,8 +242,16 @@ async function buildAsk({ officeId, question, asker, cycle, date }) {
 async function ask({ question, asker, cycle, date, officeId: forced, dryRun }) {
   const q = String(question || '').trim();
   if (!q) return { officeId: null, text: 'ask a question', finish: 'no-question' };
-  const r = forced ? { officeId: forced, why: 'asked for by office' } : route(q);
-  if (!r.officeId) return { officeId: null, route: r, text: HOUSE + ' does not hold a record on that.', finish: 'no-record' };
+  let r = forced ? { officeId: forced, why: 'asked for by office' } : route(q);
+  if (!r.officeId) {   // an Oaks player by name (the Oaks have no cards yet: their names are on the roster tab)
+    try {
+      const oaks = await require('../lib/sheets').getSheetAsObjects('Oaks_Roster');
+      const hit = oaks.find((p) => String(p.Last || '').trim().length > 2 && new RegExp('\\b' + String(p.Last).trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'i').test(q));
+      if (hit) r = { officeId: 'GIA-OAKS', why: 'names ' + String(hit.First || '').trim() + ' ' + String(hit.Last || '').trim() };
+    } catch (e) { /* the roster unread: the question goes unrouted, said below */ }
+  }
+  if (!r.officeId) return { officeId: null, route: r, finish: 'no-record',
+    text: HOUSE + ' could not place that question. Its analysts answer for: ' + ANALYSTS.map((a) => RECORD_TITLES[a.officeId].toLowerCase()).join('; ') + '. Ask again naming which.' };
   const who = byOffice(r.officeId);
   const { w, W } = await buildAsk({ officeId: r.officeId, question: q, asker, cycle, date });
   if (dryRun) return { officeId: r.officeId, route: r, popid: who.popid, system: w.system, user: w.user, records: w.records };

@@ -29,7 +29,8 @@ const CODE_LINES = [
   [/^split the last of the coffee and the morning's plans with their partner/, ['morning']],
   [/^set two cups out by habit and let the second one stay/, ['morning']],
   [/^quietly covered the table's coffee and waved off the thanks/, ['morning', 'afternoon']],
-  [/^compared notes with .+ over coffee that went long/, ['morning', 'afternoon']]
+  [/^compared notes with .+ over coffee that went long/, ['morning', 'afternoon']],
+  [/^caught up with .+ — the kind of conversation that lingers into the evening/, ['evening']]
 ];
 (async () => {
   const ecl = await sheets.getSheetData('Event_Content_Ledger');
@@ -52,7 +53,7 @@ const CODE_LINES = [
   else for (const seg of raw.split(';')) { const kv = seg.split('='); if (kv.length !== 2) continue; const ps = kv[1].split(',').map(s => s.trim().toLowerCase()).filter(p => PARTS.includes(p)); if (kv[0].trim() && ps.length) byKind[kv[0].trim().toLowerCase()] = ps; }
   if (!Object.keys(byKind).length) problems.push('momentWhenByKind names no kind');
   // the line rows with their own when:
-  const ownRows = ecl.slice(1).filter(r => r[0] === 'line' && /(^|,)when:/.test(String(r[6] || ''))).map(r => ({ text: r[3], re: lineRe(String(r[3])), parts: String(r[6]).split(',').filter(t => t.indexOf('when:') === 0).map(t => t.slice(5)) }));
+  const ownRows = ecl.slice(1).filter(r => r[0] === 'line' && /(^|,)\s*when:/i.test(String(r[6] || ''))).map(r => ({ text: r[3], re: lineRe(String(r[3])), parts: String(r[6]).split(',').map(t => t.trim().toLowerCase()).filter(t => t.indexOf('when:') === 0).map(t => t.slice(5).trim()) }));
   const expect = JSON.parse(fs.readFileSync(__dirname + '/when-rows.json', 'utf8')).length;
   if (ownRows.length !== expect) problems.push('line rows with their own when: on the bench tab ' + ownRows.length + ', expected ' + expect);
   const nameOf = {}; for (const r of led) nameOf[String(r.POPID).trim().toUpperCase()] = ((r.First || '') + ' ' + (r.Last || '')).trim();
@@ -110,5 +111,5 @@ const CODE_LINES = [
   for (const k of ['row', 'code']) if (!tally.by[k]) notProven.push('no line timed by its ' + k);
   console.log(JSON.stringify({ label: LABEL, cycle: C, lines: log.length, table: byKind, ownRowsOnTab: ownRows.length, tally, peopleWithATimedMoment: people.length, spread: spreadOf,
     problems: problems.length, first: problems.slice(0, 15), notProven, verdict: problems.length ? 'FAIL' : (notProven.length ? 'PASS, NOT PROVEN: ' + notProven.join('; ') : 'PASS') }, null, 1));
-  process.exit(problems.length ? 1 : 0);
+  process.exit(problems.length ? 1 : (notProven.length ? 3 : 0));   // 3 = nothing failed, something was not proven
 })().catch(e => { console.error(e); process.exit(2); });

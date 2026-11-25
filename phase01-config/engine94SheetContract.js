@@ -528,6 +528,8 @@ function ensureEngine338Config_(ss) {
 // engine.356 gaps (builder 2026-11-21 "Go on these"): crime reads against the city's middle in the hood
 // trajectory and in migration, on bands the builder can turn (both were dead: written for an older CrimeIndex
 // scale / a ratio band wider than the city's whole crime spread).
+// engine.356 cut A4: kind=part[,part] joined by ";" — a kind is letters and hyphens (so loadConfig_ never reads the cell as a number), a part is one of the three
+var MOMENT_WHEN_SHAPE_ = /^\s*[A-Za-z][A-Za-z-]*\s*=\s*(morning|afternoon|evening)(\s*,\s*(morning|afternoon|evening))*(\s*;\s*[A-Za-z][A-Za-z-]*\s*=\s*(morning|afternoon|evening)(\s*,\s*(morning|afternoon|evening))*)*\s*;?\s*$/i;
 var ENGINE356_CONFIG_SEEDS = [
   ['trajectoryCrimeBand', 0.05, 'engine.356: CrimeIndex distance from the city mean that scores a hood -1 (rougher) / +1 (safer) in its trajectory, like mood\'s 0.05 (C116 crime 0.57-0.73, mean 0.65: 8 of 22 hoods outside it)', 0.001, 5, false],
   // engine.360 (builder 2026-11-23: "Move the 0.5 onto World_Config"; rides this self-arm so no new ensure call is needed)
@@ -559,7 +561,7 @@ var ENGINE356_CONFIG_SEEDS = [
   ['bondRomanceStep', 0.25, 'engine.356: Intensity a romance gains on a weekly step (was 0.25 in code)', 0, 5, false],
   ['bondMarriageAt', 8, 'engine.356: Intensity at which a romance marries (was MARRIAGE_THRESHOLD 8)', 0, 10, false],
   // engine.356 cut A4 (builder 2026-11-25, on the rules: "approved , procced on all"): the parts of the day each kind of moment can happen in
-  ['momentWhenByKind', 'service=morning;shift=morning,afternoon;errand=morning,afternoon;meal=afternoon,evening;visit=afternoon,evening;drink=evening;rest=evening;walk=morning,afternoon,evening;game=evening;youth-game=afternoon', 'engine.356: the parts of the day (morning, afternoon, evening) a moment of each kind can happen in, as kind=part,part;kind=part. A line of that kind carries one of them as when:<part>, spread over the person\'s day. youth-game = a game at a field, court, school or youth program. A kind left out gets no time; a line row\'s own when: tag rules over this', 'string'],
+  ['momentWhenByKind', 'service=morning;shift=morning,afternoon;errand=morning,afternoon;meal=afternoon,evening;visit=afternoon,evening;drink=evening;rest=evening;walk=morning,afternoon,evening;game=evening;youth-game=afternoon', 'engine.356: the parts of the day (morning, afternoon, evening) a moment of each kind can happen in, as kind=part,part;kind=part. A line of that kind carries one of them as when:<part>, spread over the person\'s day. youth-game = a game at a field, court, school or youth program. A kind left out gets no time; a line row\'s own when: tag rules over this. A cell not of this shape stops the fire', 'string', MOMENT_WHEN_SHAPE_],
   ['migrationCrimeBand', 0.05, 'engine.356: CrimeIndex distance from the city median at which crime pushes people out of / pulls them into a hood in migration drift (was a +-15% ratio band that caught no hood)', 0.001, 5, false]
 ];
 
@@ -809,6 +811,11 @@ function inspectEngine94Config_(values, seedList) {
     if (spec[3] === 'string') {
       if (typeof raw !== 'string' || raw.trim() === '') {
         throw new Error('engine.94 Sheet contract: invalid World_Config.' + spec[0] + ' (expected non-empty text)');
+      }
+      // a string seed may carry the shape its text must have (spec[4], a RegExp): a cell that is text but
+      // not that shape stops the fire by name, as a blank one does (agy 2026-11-25 §2)
+      if (spec[4] && !spec[4].test(raw.trim())) {
+        throw new Error('engine.94 Sheet contract: invalid World_Config.' + spec[0] + ' (not the shape its description gives)');
       }
       existing.push({ key: spec[0], rowNumber: current.rowNumber, value: raw.trim() });
       normalized[spec[0]] = raw.trim();

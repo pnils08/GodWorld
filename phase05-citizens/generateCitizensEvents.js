@@ -3008,29 +3008,36 @@ function generateCitizensEvents_(ctx) {
   var WHEN_PARTS_ = ['morning', 'afternoon', 'evening'];
   var whenByKind_ = (function () {
     var raw = ctx.config ? ctx.config.momentWhenByKind : undefined, out = Object.create(null), n = 0;
-    var segs = typeof raw === 'string' ? raw.split(';') : [];
+    if (raw === undefined || raw === null || raw === '') {   // no such key: a fixture, or a run ensureEngine356Config_ never armed
+      try { Logger.log('generateCitizensEvents_: World_Config momentWhenByKind missing — no line carries a when: this run'); } catch (eWhen) {}
+      return null;
+    }
+    // A cell that is there and cannot be read whole stops the phase by name — a half-read table would time
+    // some kinds and silently not others (agy 2026-11-25 §2). inspectEngine94Config_ refuses it first, at the seed.
+    var bad = function (why) { throw new Error('generateCitizensEvents_: World_Config momentWhenByKind ' + why + ' — expected kind=part,part;kind=part with parts morning / afternoon / evening'); };
+    if (typeof raw !== 'string') bad('is not text (' + String(raw) + ')');
+    var segs = raw.split(';');
     for (var wi = 0; wi < segs.length; wi++) {
+      if (!segs[wi].trim()) continue;   // a trailing ;
       var kv = segs[wi].split('=');
-      if (kv.length !== 2) continue;
+      if (kv.length !== 2 || !kv[0].trim()) bad('has a piece that is not kind=parts: "' + segs[wi] + '"');
       var wk = kv[0].trim().toLowerCase(), wps = kv[1].split(','), ok = [];
       for (var wj = 0; wj < wps.length; wj++) {
         var wp = wps[wj].trim().toLowerCase();
-        if (WHEN_PARTS_.indexOf(wp) >= 0 && ok.indexOf(wp) < 0) ok.push(wp);
+        if (WHEN_PARTS_.indexOf(wp) < 0) bad('names "' + wps[wj] + '" for ' + wk);
+        if (ok.indexOf(wp) < 0) ok.push(wp);
       }
-      if (wk && ok.length) { out[wk] = ok; n++; }
+      out[wk] = ok; n++;
     }
-    if (!n) {
-      try { Logger.log('generateCitizensEvents_: World_Config momentWhenByKind missing, blank or names no part of the day — no line carries a when: this run'); } catch (eWhen) {}
-      return null;
-    }
+    if (!n) bad('names no kind');
     return out;
   })();
   var whenCount_ = Object.create(null);   // POPID -> { morning, afternoon, evening } moments on their record this Cycle
   function whenKindOf_(tags) {
-    var act = actFromTags_(tags);
+    var act = String(actFromTags_(tags)).trim().toLowerCase();   // the table's keys are lower case; actFromTags_ itself is left as stage 85 has it
     if (act !== 'game') return act;
     for (var gk = 0; gk < tags.length; gk++) {
-      var gt = String(tags[gk]);
+      var gt = String(tags[gk]).trim().toLowerCase();
       if (gt === 'at:field' || gt === 'at:court' || gt === 'at:school' || gt === 'at:youth-program' || gt.indexOf('prog:youth') === 0) return 'youth-game';
     }
     return act;
@@ -3047,9 +3054,9 @@ function generateCitizensEvents_(ctx) {
   function whenTagged_(selfPop, otherPop, tags, text) {
     var own = [], kept = [];
     for (var wq = 0; wq < tags.length; wq++) {
-      var wtag = String(tags[wq]);
+      var wtag = String(tags[wq]).trim().toLowerCase();   // "When: evening" on a row is its time too (agy 2026-11-25 §3)
       if (wtag.indexOf('when:') !== 0) { kept.push(tags[wq]); continue; }
-      var wv = wtag.slice(5).toLowerCase();
+      var wv = wtag.slice(5).trim();
       if (WHEN_PARTS_.indexOf(wv) >= 0 && own.indexOf(wv) < 0) own.push(wv);   // a row's own parts (any of them, like at:); anything else under the prefix is dropped
     }
     if (!whenByKind_) return kept;
@@ -3855,7 +3862,7 @@ function generateCitizensEvents_(ctx) {
     if (hasMentorship && chanceHit(0.3)) {
       if (mentorPartnerName) {
         pool.push(makeEntry("talked something through with " + mentorPartnerName + " and left clearer than they arrived", mergeTags(["relationship:mentorship", "dial:composure:up"], calendarTags), 1.1, false));
-        pool.push(makeEntry("caught up with " + mentorPartnerName + " — the kind of conversation that lingers into the evening", mergeTags(["relationship:mentorship", "dial:warmth:up"], calendarTags), 1.05, false));
+        pool.push(makeEntry("caught up with " + mentorPartnerName + " — the kind of conversation that lingers into the evening", mergeTags(["relationship:mentorship", "dial:warmth:up", "when:evening"], calendarTags), 1.05, false));
         pool.push(makeEntry("jotted down something " + mentorPartnerName + " said before it could slip away", mergeTags(["relationship:mentorship", "dial:openness:up"], calendarTags), 1.0, false));
       } else {
         for (var mti2 = 0; mti2 < mentorshipPool.length; mti2++) {

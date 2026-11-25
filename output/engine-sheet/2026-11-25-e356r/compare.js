@@ -16,5 +16,6 @@ if (la.length !== lb.length) diff.push('log rows ' + la.length + ' vs ' + lb.len
 let ld = 0, first = ''; for (let i = 0; i < Math.min(la.length, lb.length); i++) if (la[i] !== lb[i]) { ld++; if (!first) first = i + ': ' + la[i].slice(0, 200) + '  ||  ' + lb[i].slice(0, 200); }
 if (ld) diff.push(ld + ' log rows differ; first ' + first);
 const timed = b.log.filter(r => /(^|\|)when:/.test(String(r[1]))).length;
+if (!timed) diff.push('the full run wrote no when: at all — identical proves nothing');
 console.log(JSON.stringify({ bonds: a.bonds.length, logRows: la.length, timedLinesInFull: timed, differences: diff.length, first: diff.slice(0, 8), verdict: diff.length ? 'FAIL' : 'IDENTICAL' }, null, 1));
 process.exit(diff.length ? 1 : 0);

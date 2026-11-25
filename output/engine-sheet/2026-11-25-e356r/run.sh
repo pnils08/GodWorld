@@ -13,7 +13,7 @@ cc() { node -e "require('/root/GodWorld/lib/env'); process.env.GODWORLD_SHEET_ID
 AIM=$(node $O/2026-10-19-aimcheck.js 2>&1 | q); echo "$AIM" | tail -1; echo "$AIM" | grep -q "^AIM = BENCH" || { echo "HALT aim not proven"; exit 5; }
 echo "== push code $SRC"; bash $D/bench-push.sh "$SRC" > $D/bench-push-$LABEL.log 2>&1 || { echo "HALT push"; tail -5 $D/bench-push-$LABEL.log; exit 4; }; tail -1 $D/bench-push-$LABEL.log
 echo "== sync from live"; node scripts/syncSandboxFromLive.js $B --apply > $D/sync-$LABEL.out 2>&1 || { echo "HALT sync"; tail -20 $D/sync-$LABEL.out; exit 3; }; tail -1 $D/sync-$LABEL.out | q
-AB=$(node $D/apply-when.js bench 2>&1 | q | tail -1); echo "line rows with a time: $AB"; echo "$AB" | grep -q '"whenRows":56,"of":56' || { echo "HALT the timed line rows are not on the tab"; exit 3; }; sleep 20
+AB=$(node $D/apply-when.js bench 2>&1 | q | tail -1); echo "line rows with a time: $AB"; echo "$AB" | grep -q '"whenRows":83,"of":83' || { echo "HALT the timed line rows are not on the tab"; exit 3; }; sleep 20
 node $O/2026-11-05-e330-bench.js guard0 2>&1 | q; [ ${PIPESTATUS[0]} -eq 0 ] || { echo "HALT guard"; exit 3; }
 DOOR=$(node $O/2026-10-30-e317-door.js bench 2>&1 | q | tail -1)
 RC=$(echo "$DOOR" | grep -o '"record":{"cycle":[0-9]*' | grep -o '[0-9]*$'); [ -n "$RC" ] && echo "clearfire $RC: $(node $O/2026-10-19-benchclear.js $RC 2>&1 | q | tail -1)"

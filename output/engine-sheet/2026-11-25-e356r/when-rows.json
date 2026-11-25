@@ -45,6 +45,15 @@
   ]
  },
  {
+  "row": 47,
+  "pool": "work.construction-laborer",
+  "text": "hauled rebar across a muddy lot before the crew showed up",
+  "tags": "source:occupation,auth:library-s325,dial:drive:up,act:shift",
+  "add": [
+   "when:morning"
+  ]
+ },
+ {
   "row": 63,
   "pool": "work.herbalist",
   "text": "measured out a tincture drop by drop against the afternoon light",
@@ -81,10 +90,29 @@
   ]
  },
  {
+  "row": 104,
+  "pool": "age.teen",
+  "text": "walked a friend home the long way just to keep talking",
+  "tags": "source:age,auth:library-s325,dial:sociability:up,act:walk",
+  "add": [
+   "when:afternoon",
+   "when:evening"
+  ]
+ },
+ {
   "row": 110,
   "pool": "age.teen",
   "text": "skipped the bus to walk with friends and blamed the weather for being late",
   "tags": "source:age,auth:library-s325,dial:integrity:down,act:walk",
+  "add": [
+   "when:morning"
+  ]
+ },
+ {
+  "row": 119,
+  "pool": "retirement.depth",
+  "text": "read the whole paper front to back with coffee going cold beside it",
+  "tags": "source:retirement,auth:library-s325,dial:composure:up,act:rest",
   "add": [
    "when:morning"
   ]
@@ -96,6 +124,15 @@
   "tags": "source:retirement,auth:library-s325,dial:warmth:up,act:rest",
   "add": [
    "when:afternoon"
+  ]
+ },
+ {
+  "row": 169,
+  "pool": "work.line-cook",
+  "text": "scraped the flat-top clean at 2 AM and felt the heat radiating through their boots",
+  "tags": "source:occupation,auth:library-s325,dial:composure:down,act:shift,place:employer",
+  "add": [
+   "when:evening"
   ]
  },
  {
@@ -117,6 +154,33 @@
   ]
  },
  {
+  "row": 175,
+  "pool": "work.security-guard",
+  "text": "walked the perimeter of the Baylight site at 3 AM and checked the locks on the heavy equipment",
+  "tags": "source:occupation,auth:library-s325,dial:integrity:up,act:shift",
+  "add": [
+   "when:evening"
+  ]
+ },
+ {
+  "row": 176,
+  "pool": "work.bartender",
+  "text": "cut someone off at the bar and smoothly handed them a glass of water before they could argue",
+  "tags": "source:occupation,auth:library-s325,dial:composure:up,act:shift,place:employer",
+  "add": [
+   "when:evening"
+  ]
+ },
+ {
+  "row": 191,
+  "pool": "retirement.depth",
+  "text": "sat on the front porch with a mug of coffee and cataloged everyone walking to the BART",
+  "tags": "source:reflection,dial:outabout:up,act:rest",
+  "add": [
+   "when:morning"
+  ]
+ },
+ {
   "row": 214,
   "pool": "work.tech",
   "text": "watched the morning shuttles roll along the waterfront into the Baylight District and timed their own walk to beat them",
@@ -132,6 +196,16 @@
   "tags": "source:neighborhood,auth:library-s325,dial:outabout:up,act:shift",
   "add": [
    "when:morning"
+  ]
+ },
+ {
+  "row": 219,
+  "pool": "hood.west-oakland",
+  "text": "walked the Mandela Parkway median under the trees and took the long way home",
+  "tags": "source:neighborhood,auth:library-s325,dial:outabout:up,act:walk",
+  "add": [
+   "when:afternoon",
+   "when:evening"
   ]
  },
  {
@@ -159,6 +233,15 @@
   "tags": "source:economy,auth:library-s325,act:shift",
   "add": [
    "when:afternoon"
+  ]
+ },
+ {
+  "row": 233,
+  "pool": "family.parenting",
+  "text": "woke up at 5 AM just to have thirty minutes of total silence before the house woke up",
+  "tags": "source:familyLife,auth:library-s325,dial:composure:up,act:rest",
+  "add": [
+   "when:morning"
   ]
  },
  {
@@ -243,6 +326,26 @@
   ]
  },
  {
+  "row": 906,
+  "pool": "hood.adams-point",
+  "text": "lingered over a pour-over at Bellevue Coffee Roasters",
+  "tags": "source:neighborhood,auth:rb-1030,dial:composure:up,act:meal,place:BIZ-00245",
+  "add": [
+   "when:morning",
+   "when:afternoon"
+  ]
+ },
+ {
+  "row": 909,
+  "pool": "hood.brooklyn",
+  "text": "helped a new neighbor carry boxes up to a Basin mid-rise",
+  "tags": "source:neighborhood,auth:rb-1030,dial:warmth:up,act:visit",
+  "add": [
+   "when:morning",
+   "when:afternoon"
+  ]
+ },
+ {
   "row": 910,
   "pool": "hood.brooklyn",
   "text": "rented a kayak at Shoreline Kayak & Paddle before breakfast",
@@ -261,12 +364,50 @@
   ]
  },
  {
+  "row": 918,
+  "pool": "hood.dimond",
+  "text": "found the counter at Sausal Creek Cafe already wiping down before the errand was done",
+  "tags": "source:neighborhood,auth:rb-1030,dial:outabout:down,act:meal,place:BIZ-00124",
+  "add": [
+   "when:afternoon"
+  ]
+ },
+ {
   "row": 922,
   "pool": "hood.glenview",
   "text": "walked the kids up the hill to Hillside Family Market after school",
   "tags": "source:neighborhood,auth:rb-1030,dial:family:up,act:errand,place:BIZ-00139",
   "add": [
    "when:afternoon"
+  ]
+ },
+ {
+  "row": 923,
+  "pool": "hood.glenview",
+  "text": "met a friend at Glenview Cafe for coffee",
+  "tags": "source:neighborhood,auth:rb-1030,dial:sociability:up,act:meal,place:BIZ-00140",
+  "add": [
+   "when:morning",
+   "when:afternoon"
+  ]
+ },
+ {
+  "row": 926,
+  "pool": "hood.ivy-hill",
+  "text": "sat with a book at Ivy Hill Cafe",
+  "tags": "source:neighborhood,auth:rb-1030,dial:composure:up,act:meal,place:BIZ-00151",
+  "add": [
+   "when:morning",
+   "when:afternoon"
+  ]
+ },
+ {
+  "row": 927,
+  "pool": "hood.ivy-hill",
+  "text": "bought milk at Ivy Hill Market on the climb home from work",
+  "tags": "source:neighborhood,auth:rb-1030,dial:outabout:up,act:errand,place:BIZ-00150",
+  "add": [
+   "when:evening"
   ]
  },
  {
@@ -288,6 +429,26 @@
   ]
  },
  {
+  "row": 939,
+  "pool": "hood.chinatown",
+  "text": "squeezed past three-generation tables at Eight Treasures Dim Sum House",
+  "tags": "source:neighborhood,auth:rb-1030,dial:outabout:up,act:meal,place:BIZ-00204",
+  "add": [
+   "when:morning",
+   "when:afternoon"
+  ]
+ },
+ {
+  "row": 942,
+  "pool": "hood.chinatown",
+  "text": "bought a tea blend at Lucky Harbor Herbalist & Tea on the way home",
+  "tags": "source:neighborhood,auth:rb-1030,dial:outabout:up,act:errand,place:BIZ-00206",
+  "add": [
+   "when:afternoon",
+   "when:evening"
+  ]
+ },
+ {
   "row": 944,
   "pool": "hood.chinatown",
   "text": "walked the kids past the afternoon crowd letting out of Harrison Street Chinese School",
@@ -297,10 +458,57 @@
   ]
  },
  {
+  "row": 945,
+  "pool": "hood.grand-lake",
+  "text": "bought produce from the first stalls open at Grand Lake Saturday Market",
+  "tags": "source:neighborhood,auth:rb-1030,dial:outabout:up,act:errand,place:BIZ-00248",
+  "add": [
+   "when:morning"
+  ]
+ },
+ {
+  "row": 951,
+  "pool": "hood.laurel",
+  "text": "had coffee with the other parents at Schoolgate Cafe",
+  "tags": "source:neighborhood,auth:rb-1030,dial:sociability:up,act:meal,place:BIZ-00161",
+  "add": [
+   "when:morning"
+  ]
+ },
+ {
   "row": 956,
   "pool": "hood.baylight-district",
   "text": "ate lunch at Bubic Burgers beside the build",
   "tags": "source:neighborhood,auth:rb-1030,dial:outabout:up,act:meal,place:BIZ-00104",
+  "add": [
+   "when:afternoon"
+  ]
+ },
+ {
+  "row": 957,
+  "pool": "hood.baylight-district",
+  "text": "took a detour around the construction trucks on the way home",
+  "tags": "source:civicNews,auth:rb-1030,dial:composure:down,act:walk",
+  "add": [
+   "when:afternoon",
+   "when:evening"
+  ]
+ },
+ {
+  "row": 958,
+  "pool": "hood.baylight-district",
+  "text": "helped a new neighbor carry boxes into a brand-new unit",
+  "tags": "source:neighborhood,auth:rb-1030,dial:warmth:up,act:visit",
+  "add": [
+   "when:morning",
+   "when:afternoon"
+  ]
+ },
+ {
+  "row": 961,
+  "pool": "hood.rockridge",
+  "text": "walked the kids home under the trees along the Rockridge blocks",
+  "tags": "source:neighborhood,auth:rb-1030,dial:family:up,act:walk",
   "add": [
    "when:afternoon"
   ]
@@ -333,12 +541,51 @@
   ]
  },
  {
+  "row": 1020,
+  "pool": "down.sociability",
+  "text": "took the longer route home to avoid the bench where the regulars sit",
+  "tags": "source:communityLife,auth:rb-1117,dial:sociability:down,act:walk",
+  "add": [
+   "when:afternoon",
+   "when:evening"
+  ]
+ },
+ {
   "row": 1050,
   "pool": "down.drive",
   "text": "promised themselves an early start and turned the alarm off twice",
   "tags": "source:reflection,auth:rb-1117,dial:drive:down,act:rest",
   "add": [
    "when:morning"
+  ]
+ },
+ {
+  "row": 1132,
+  "pool": "down.outabout",
+  "text": "skipped the Saturday market and stayed in to sort old mail",
+  "tags": "source:homeLife,auth:rb-1117,dial:outabout:down,act:rest",
+  "add": [
+   "when:morning"
+  ]
+ },
+ {
+  "row": 1140,
+  "pool": "down.outabout",
+  "text": "stayed on the couch while the street fair started outside",
+  "tags": "source:homeLife,auth:rb-1117,dial:outabout:down,act:rest",
+  "add": [
+   "when:morning",
+   "when:afternoon"
+  ]
+ },
+ {
+  "row": 1147,
+  "pool": "down.outabout",
+  "text": "took the short way home to avoid the block where something was going on",
+  "tags": "source:homeLife,auth:rb-1117,dial:outabout:down,act:walk",
+  "add": [
+   "when:afternoon",
+   "when:evening"
   ]
  },
  {
@@ -357,6 +604,16 @@
   "tags": "source:communityLife,auth:es-1124,dial:composure:down,act:game,at:field,at:court",
   "add": [
    "when:morning"
+  ]
+ },
+ {
+  "row": 1174,
+  "pool": "community.program",
+  "text": "dropped their kid at $PROGRAM and stood at the door a minute too long",
+  "tags": "source:communityLife,auth:es-1124,dial:family:up,act:visit,at:youth-program,at:field,at:court",
+  "add": [
+   "when:morning",
+   "when:afternoon"
   ]
  },
  {

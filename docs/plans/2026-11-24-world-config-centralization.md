@@ -1252,6 +1252,15 @@ L1437 if (cal.month === 1) c *= 1.3;
 |---|------|-------|--------|
 | — | none approved. The cuts above are an inventory; the builder rules which, in which order, and what a row is named. | — | not started |
 
+## Guarding the tab (builder 2026-11-25)
+
+Builder (verbatim, 2026-11-25, on a mistyped World_Config cell stopping the engine at start-up): "add a note to the world_config plan that this needs to be a pre-mortem check in the run-cycle and proper protections of the sheet are needed". Read, nothing built:
+
+1. **A pre-mortem check in `/run-cycle`.** Before the fire, every seeded World_Config key is read from the live tab and held against its seed list entry — present, the right type, inside its range, and for a text cell the shape it must have — so a bad cell is named in the pre-mortem, not found when the fire stops. The contract already holds the rules (`inspectEngine94Config_` and each `ENGINE*_CONFIG_SEEDS` list: number range, integer flag, `'string'`, and since engine.356 cut A4 a shape RegExp — first use `momentWhenByKind`); the check is those rules run from Node against the live tab, in `.claude/skills/pre-mortem/SKILL.md`.
+2. **Protections on the sheet.** The tab is hand-edited and a cell's type is not held by the sheet: a text cell that starts with a digit is read as a number by `loadConfig_` (`parseFloat`), a blanked cell stops the fire. Wanted: protection on the Key and Description columns and the header, validation on Value cells where the contract gives a range or a list, and who may edit — with the sheets write lockdown.
+
+Each is its own task on the builder's word; neither is in a cut above.
+
 ## Acceptance
 
 Draft, per cut, once approved:
@@ -1308,4 +1317,4 @@ Draft, per cut, once approved:
 ## Changelog
 
 - 2026-11-25 (research-build, helper agent) — Created: inventory of 265 seeded keys, 52 unseeded live rows, 394 candidate rows (36 of them rolls with context not read), plus Cut A (10 items), 13 ladders and 5 limits, in 11 cuts; no task approved.
-
+- 2026-11-25 (engine-sheet) — §Guarding the tab added on the builder's word: a pre-mortem check of every seeded key in `/run-cycle`, and protections on the sheet. Note only; no task approved.

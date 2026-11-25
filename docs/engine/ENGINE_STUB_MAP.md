@@ -1331,6 +1331,11 @@
 
 - **bondMomentKey_(a, b, bondType)**
 
+- **bondsFromSharedMoments_(ctx)**
+  Reads: S.cycleId, S.relationshipBonds, S.sharedMoments
+  Writes: S.bondsFromMoments, S.relationshipBonds
+  Config: ctx.config.cycleCount
+
 - **updateExistingBonds_(ctx)**
   Reads: S.cityDynamics, S.cycleActiveCitizens, S.cycleId, S.previousCycleState, S.relationshipBonds, S.sharedMoments, S.sportsCity
   Writes: S.bondMomentsUnstepped
@@ -4943,4 +4948,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 179
-**Functions mapped:** 1796
+**Functions mapped:** 1797

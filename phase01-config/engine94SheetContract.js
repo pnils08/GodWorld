@@ -562,6 +562,9 @@ var ENGINE356_CONFIG_SEEDS = [
   ['bondMarriageAt', 8, 'engine.356: Intensity at which a romance marries (was MARRIAGE_THRESHOLD 8)', 0, 10, false],
   // engine.356 cut A4 (builder 2026-11-25, on the rules: "approved , procced on all"): the parts of the day each kind of moment can happen in
   ['momentWhenByKind', 'service=morning;shift=morning,afternoon;errand=morning,afternoon;meal=afternoon,evening;visit=afternoon,evening;drink=evening;rest=evening;walk=morning,afternoon,evening;game=evening;youth-game=afternoon', 'engine.356: the parts of the day (morning, afternoon, evening) a moment of each kind can happen in, as kind=part,part;kind=part. A line of that kind carries one of them as when:<part>, spread over the person\'s day. youth-game = a game at a field, court, school or youth program. A kind left out gets no time; a line row\'s own when: tag rules over this. A cell not of this shape stops the fire', 'string', MOMENT_WHEN_SHAPE_],
+  // engine.356 cut B (builder 2026-11-25: "approved on 3"): a bond from a shared moment
+  ['bondFromMomentCoworker', 3, 'engine.356: Intensity of the professional bond two coworkers with no bond get on their first shared moment (the engine starts most new bonds at 3 or 4; scale 0-10). 0 = no bond is made', 0, 10, false],
+  ['bondFromMomentHousemate', 3, 'engine.356: Intensity of the friendship two housemates who are not family and hold no bond get on their first shared moment. 0 = no bond is made', 0, 10, false],
   ['migrationCrimeBand', 0.05, 'engine.356: CrimeIndex distance from the city median at which crime pushes people out of / pulls them into a hood in migration drift (was a +-15% ratio band that caught no hood)', 0.001, 5, false]
 ];
 

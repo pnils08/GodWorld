@@ -270,7 +270,8 @@ function getBondKey_(citizenA, citizenB) {
 // with its name — there is no in-code copy to fall back on.
 var BOND_DIAL_KEYS_ = ['bondWeeklyRival', 'bondWeeklySportsRival', 'bondWeeklyAlliance', 'bondWeeklyMentor', 'bondWeeklyFestival',
   'bondWeeklyFriend', 'bondWeeklyUpkeep', 'bondFadeOneAbsent', 'bondFadeBothAbsent', 'bondEncounterChance', 'bondDeepenAt',
-  'bondRomanceAt', 'bondRomanceChance', 'bondRomanceStepChance', 'bondRomanceStepChanceApart', 'bondRomanceStep', 'bondMarriageAt'];
+  'bondRomanceAt', 'bondRomanceChance', 'bondRomanceStepChance', 'bondRomanceStepChanceApart', 'bondRomanceStep', 'bondMarriageAt',
+  'bondFromMomentCoworker', 'bondFromMomentHousemate'];
 var BOND_DIALS_ = null;
 function loadBondDials_(ctx) {
   var cfg = (ctx && ctx.config) || {}, out = {}, bad = [];
@@ -322,6 +323,9 @@ function runBondEngine_(ctx) {
 
   // Step 1: Update existing bonds (with calendar modifiers)
   updateExistingBonds_(ctx);
+
+  // Step 1.5 (engine.356 cut B): a coworker or housemate with no bond who shared a moment gets one.
+  bondsFromSharedMoments_(ctx);
 
   // Step 2: Detect new potential bonds (with calendar awareness)
   var newBonds = detectNewBonds_(ctx);
@@ -623,6 +627,58 @@ function bondMomentKey_(a, b, bondType) {
   return (ka < kb ? ka + '|' + kb : kb + '|' + ka) + '|' + String(bondType || '').trim().toLowerCase();
 }
 
+// engine.356 cut B (builder 2026-11-25, on the four rules: "approved on 3"): two people who shared a
+// moment this Cycle and hold no bond at all get one — coworkers (the line named them by the same
+// employer) a professional bond, housemates who are not family a friendship — on the first shared
+// moment, at the strength World_Config gives (bondFromMomentCoworker / bondFromMomentHousemate, seeded 3;
+// 0 = that kind makes no bond). Origin shared-moment. Runs after updateExistingBonds_, so the new bond
+// takes no step or fade in the week it is made, and before detectNewBonds_, so the pair's chance
+// encounter that week finds the bond already there. Not made: a pair with any bond row already
+// (active, dormant or ended — one row a pair), either person a minor or not an active ledger row, and
+// housemates who are spouses, parent and child, or share a parent (family is not made from a moment).
+function bondsFromSharedMoments_(ctx) {
+  var S = ctx.summary || {}, moments = S.sharedMoments || [];
+  var made = { coworker: 0, housemate: 0 };
+  S.bondsFromMoments = made;
+  if (!moments.length) return made;
+  var startAt = { coworker: bondDial_('bondFromMomentCoworker'), housemate: bondDial_('bondFromMomentHousemate') };
+  var people = buildBondLedgerIndex_(ctx);
+  if (!people) return made;
+  var header = ctx.ledger.headers, rows = ctx.ledger.rows;
+  var iPar = header.indexOf('ParentIds'), iKid = header.indexOf('ChildrenIds');
+  var cycle = S.cycleId || (ctx.config && ctx.config.cycleCount) || 0;
+  var simYear = (typeof simYearFromCycle_ === 'function') ? simYearFromCycle_(cycle) : (2040 + Math.ceil(Number(cycle) / 52) - 1);
+  var ids = function(P, col) { return col >= 0 ? (String(rows[P.idx][col] || '').match(/POP-\d+/g) || []) : []; };
+  var isMinor = function(P) { return P.birthYear > 1900 && simYear - P.birthYear < 18; };
+  for (var i = 0; i < moments.length; i++) {
+    var sm = moments[i];
+    if (!sm || sm.bondType || !(sm.kind === 'coworker' || sm.kind === 'housemate')) continue;
+    if (!(startAt[sm.kind] > 0)) continue;
+    var a = String(sm.a || '').trim().toUpperCase(), b = String(sm.b || '').trim().toUpperCase();
+    var A = people[a], B = people[b];
+    if (!a || !b || a === b || !A || !B) continue;
+    if (isMinor(A) || isMinor(B)) continue;
+    if (bondExists_(ctx, a, b)) continue;
+    if (sm.kind === 'housemate') {
+      if (A.spouse === b || B.spouse === a) continue;
+      var aPar = ids(A, iPar), bPar = ids(B, iPar);
+      if (aPar.indexOf(b) >= 0 || bPar.indexOf(a) >= 0 || ids(A, iKid).indexOf(b) >= 0 || ids(B, iKid).indexOf(a) >= 0) continue;
+      var sib = false;
+      for (var pi = 0; pi < aPar.length; pi++) if (bPar.indexOf(aPar[pi]) >= 0) { sib = true; break; }
+      if (sib) continue;
+    }
+    var bond = makeBond_(a, b, sm.kind === 'coworker' ? BOND_TYPES.PROFESSIONAL : BOND_TYPES.FRIENDSHIP, 'shared-moment', '',
+      A.hood && A.hood === B.hood ? A.hood : '', startAt[sm.kind], cycle,
+      sm.kind === 'coworker' ? 'Shared a moment at work' : 'Shared a moment at home', ctx);
+    ctx.summary.relationshipBonds = ctx.summary.relationshipBonds || [];
+    ctx.summary.relationshipBonds.push(bond);
+    if (ctx._bondKeySet) ctx._bondKeySet[getBondKey_(bond.citizenA, bond.citizenB)] = true;
+    made[sm.kind]++;
+  }
+  if (made.coworker || made.housemate) Logger.log('bondsFromSharedMoments_: ' + made.coworker + ' professional (coworkers), ' + made.housemate + ' friendship (housemates)');
+  return made;
+}
+
 function updateExistingBonds_(ctx) {
   var rng = safeRand_(ctx);
   var S = ctx.summary || {};
@@ -689,7 +745,10 @@ function updateExistingBonds_(ctx) {
       momentBonds = {};
       for (var smi = 0; smi < sharedMoments.length; smi++) {
         var sm = sharedMoments[smi];
-        if (!sm || !sm.bondType) continue;
+        if (!sm) continue;
+        // a moment with a coworker or housemate carries no bond type (the line named them by employer or
+        // household): the bond the two already hold takes the step, whatever its type — but a rivalry.
+        if (!sm.bondType) { momentBonds[bondMomentKey_(sm.a, sm.b, '*')] = true; continue; }
         momentBonds[bondMomentKey_(sm.a, sm.b, sm.bondType)] = true;
       }
     } else {
@@ -707,6 +766,10 @@ function updateExistingBonds_(ctx) {
 
     var intensity = Number(bond.intensity) || 0;
     var hadMoment = !!(momentBonds && momentBonds[bondMomentKey_(bond.citizenA, bond.citizenB, bond.bondType)]);
+    if (!hadMoment && momentBonds && momentBonds[bondMomentKey_(bond.citizenA, bond.citizenB, '*')]) {
+      var uType = String(bond.bondType || '').trim().toLowerCase();
+      hadMoment = !(uType === BOND_TYPES.RIVALRY || uType === BOND_TYPES.TENSION || uType === BOND_TYPES.SPORTS_RIVAL);
+    }
     if (hadMoment) {
       var mType = String(bond.bondType || '').trim().toLowerCase();
       intensity += mType === BOND_TYPES.ROMANTIC ? momentStep.partner

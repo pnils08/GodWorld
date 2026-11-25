@@ -296,7 +296,7 @@ function street(story, slice, cycle, root, seat, opts = {}) {
     }
   }
   if (!opts.highlights && seat === 'talia-finch' &&
-      clean(story && story.ref).includes('Oakland_Sports_Feed')) {
+      (clean(story && story.ref).includes('Oakland_Sports_Feed') || /on the sports feed/.test(clean(story && story.ref)))) {   // pipeline.111: her live record's ref
     for (const team of new Set(rows(root, 'Oakland_Sports_Feed')
       .filter(r => Number(r.Cycle) === Number(cycle) && /oaks/i.test(clean(r.TeamsUsed)))
       .map(r => clean(r.TeamsUsed)).filter(Boolean))) {

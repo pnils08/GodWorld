@@ -449,7 +449,7 @@ const BEAT_BUILDERS = {
   'sharon-okafor': 'buildLifestyleSlice',
   'maria-keen': 'buildNeighborhoodSlice',
   'selena-grant': 'buildOaksBeatSlice',
-  'talia-finch': 'buildOaksGroundSlice',
+  'talia-finch': 'buildTaliaRecord',   // pipeline.111 (builder 2026-11-25): the Oaks, read live
   'celeste-tran': 'buildTrendsSlice',
   'tamsin-pruitt': 'buildLivesSlice',   // pipeline.73
   'ines-sorensen': 'buildVoicesSlice',  // pipeline.73

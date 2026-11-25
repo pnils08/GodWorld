@@ -12,7 +12,7 @@ function slug(value) {
   return String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 }
 
-const WRITER_TOOLS_SEATS = ['elliot-marbury', 'hal-richmond', 'anthony-raines', 'p-slayer', 'freelance-firebrand', 'carmen-delaine',
+const WRITER_TOOLS_SEATS = ['elliot-marbury', 'hal-richmond', 'anthony-raines', 'p-slayer', 'talia-finch', 'freelance-firebrand', 'carmen-delaine',
   'luis-navarro', 'elliot-graye', 'business-desk', 'trevor-shimizu', 'lila-mezran', 'angela-reyes', 'rachel-torres', 'tamsin-pruitt',
   'nia-rook', 'nia-rook-weekly',   // pipeline.83 (builder 2026-10-28): the UNDOCKED seats get the pilot-as-citizen tools
   'sharon-okafor',   // pipeline.111 (builder 2026-11-21): "her tools will give her that context"

@@ -147,6 +147,17 @@ assert.equal(pSlayer.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
 assert.deepStrictEqual(pSlayer.reviewProfile.textureConditions, []);   // pipeline.111: the seat file, facts-only gate
 assert.equal(pSlayer.seatFile, '.claude/agents/p-slayer/SEAT.md');
 
+// pipeline.111 (builder 2026-11-25): Talia on her seat file — Luna plans and writes, Maverick interviews; facts-only gate
+const talia = packages['talia-finch'];
+assert.equal(talia.version, 'TALIA-OAKS-2');
+assert.equal(talia.seatFile, '.claude/agents/talia-finch/SEAT.md');
+assert.equal(talia.seatMemory, true);
+assert.equal(packagesApi.routeFor(talia, 'angle').model, 'openai/gpt-5.6-luna');
+assert.equal(packagesApi.routeFor(talia, 'report').model, 'meta-llama/llama-4-maverick');
+assert.equal(packagesApi.routeFor(talia, 'write').model, 'openai/gpt-5.6-luna');
+assert.deepStrictEqual(talia.reviewProfile.textureConditions, []);
+assert.ok(!talia.reviewProfile.canonBlockers.some(v => /Chicago|the A's as the subject/.test(v)));
+
 const anthony = packages['anthony-raines'];
 assert.equal(anthony.version, 'ANTHONY-LEP2-4');
 assert.equal(packagesApi.sourcingFor(anthony), 'records');
@@ -194,7 +205,7 @@ const seats = Object.entries(packages).filter(([, v]) => v && v.persona);
 assert(seats.length >= 25);
 assert.deepStrictEqual(seats.filter(([, v]) => v.rewardLoop !== true).map(([k]) => k), []);
 assert.throws(() => packagesApi.validatePackage(marbury.persona, Object.assign({}, marbury, { rewardLoop: 'yes' })), /rewardLoop/);
-assert.deepStrictEqual(Object.entries(packages).filter(([, v]) => v && v.writerTools).map(([k]) => k), ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'p-slayer', 'anthony-raines', 'elliot-marbury', 'hal-richmond', 'maria-keen', 'elliot-graye', 'mason-ortega', 'sharon-okafor', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'noah-tan', 'nia-rook', 'nia-rook-weekly', 'celeste-tran', 'tamsin-pruitt', 'ines-sorensen', 'farrah-del-rio']); // registry order; Hal + Anthony: builder 2026-10-19; Jax + Carmen 2026-10-26; the rest 2026-10-27; Sharon 2026-11-21 (pipeline.111)
+assert.deepStrictEqual(Object.entries(packages).filter(([, v]) => v && v.writerTools).map(([k]) => k), ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'p-slayer', 'anthony-raines', 'elliot-marbury', 'hal-richmond', 'maria-keen', 'elliot-graye', 'mason-ortega', 'sharon-okafor', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'noah-tan', 'nia-rook', 'nia-rook-weekly', 'talia-finch', 'celeste-tran', 'tamsin-pruitt', 'ines-sorensen', 'farrah-del-rio']); // registry order; Hal + Anthony: builder 2026-10-19; Jax + Carmen 2026-10-26; the rest 2026-10-27; Sharon 2026-11-21 (pipeline.111)
 assert.equal(packages['hal-richmond'].writerTools.maxToolCalls, 6);
 // pipeline.111: Celeste ran without her voice-file Essence ("archived only") and lost her read of why; builder 2026-11-22:
 // "if taking out the voice file made her not sound like herself you can put it back" — it is back. The switch stays for any seat.

@@ -77,7 +77,7 @@ const BEAT_BUILDERS = {
   'sharon-okafor': 'buildLifestyleSlice',
   'maria-keen': 'buildNeighborhoodSlice',
   'selena-grant': 'buildOaksBeatSlice',
-  'talia-finch': 'buildOaksGroundSlice',
+  'talia-finch': 'buildTaliaRecord',   // pipeline.111 (builder 2026-11-25): the Oaks, read live; off buildOaksGroundSlice's mood-word pick
   'celeste-tran': 'buildTrendsSlice',
   'elliot-marbury': 'buildMarburySlice',
   'tamsin-pruitt': 'buildLivesSlice',   // pipeline.73 Lives — daily, Mon–Fri grid

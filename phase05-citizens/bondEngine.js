@@ -276,7 +276,7 @@ function loadBondDials_(ctx) {
   var cfg = (ctx && ctx.config) || {}, out = {}, bad = [];
   for (var i = 0; i < BOND_DIAL_KEYS_.length; i++) {
     var k = BOND_DIAL_KEYS_[i], v = cfg[k];
-    var n = (v === undefined || v === null || String(v).trim() === '') ? NaN : Number(v);
+    var n = (v === undefined || v === null || typeof v === 'boolean' || String(v).trim() === '') ? NaN : Number(v);
     if (!isFinite(n) || n < 0) bad.push(k); else out[k] = n;
   }
   if (bad.length) throw new Error('loadBondDials_: World_Config missing, blank or not a number: ' + bad.join(', ') + ' — ensureEngine356Config_ seeds them');

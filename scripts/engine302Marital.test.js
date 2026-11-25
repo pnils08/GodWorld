@@ -100,9 +100,12 @@ const grow = (pop, o) => { const r = GH.map(() => ''); r[g('POPID')] = pop; r[g(
 
 // ── C1 / B1 / R1 bond engine ───────────────────────────────────────────────────
 global.__SOC = {};
+global.__BOND_CFG = {};
+new Function(R('../phase01-config/engine94SheetContract.js') + '\nreturn ENGINE356_CONFIG_SEEDS;')().forEach(s => { global.__BOND_CFG[s[0]] = s[1]; });
 const B = load('../phase05-citizens/bondEngine.js', ['bondCanCourt_', 'detectNewBonds_', 'marryCitizens_', 'BOND_TYPES', 'updateExistingBonds_',
-  'processRomanceAndMarriage_', 'processGCCourtship_', 'BOND_ENCOUNTER_CHANCE', 'getBondKey_'],
-  'bondWarmthFactor_ = function () { return 1; }; bondFamilyFactor_ = function () { return 1; }; bondDialPos_ = function (ctx, p) { return global.__SOC[p] || 0; }; var __bid = 0; generateBondId_ = function () { return "BOND-T" + (++__bid); };',
+  'processRomanceAndMarriage_', 'processGCCourtship_', 'bondDial_', 'loadBondDials_', 'getBondKey_'],
+  // engine.356: the weekly numbers are World_Config rows — loaded at their seeds, as runBondEngine_ does
+  'loadBondDials_({ config: global.__BOND_CFG }); ' + 'bondWarmthFactor_ = function () { return 1; }; bondFamilyFactor_ = function () { return 1; }; bondDialPos_ = function (ctx, p) { return global.__SOC[p] || 0; }; var __bid = 0; generateBondId_ = function () { return "BOND-T" + (++__bid); };',
   ['../utilities/safeRand.js', '../phase05-citizens/bondPersistence.js', '../phase04-events/generationalEventsEngine.js']);
 const seq = (arr, rest) => { const q = arr.slice(); return () => (q.length ? q.shift() : (rest === undefined ? 0.99 : rest)); };
 {
@@ -193,7 +196,10 @@ function poolCtx(n, rngFn, cal) {
   assert('E1 every met pair forms at most once (the reverse meeting is spent)', keys.size === many.length);
   const both = B.detectNewBonds_(poolCtx(2, () => 0.01));
   assert('E1 two citizens who each meet the other form one bond (the reverse meeting is spent)', both.length === 1);
-  assert('E2 the starting meeting chance is 0.1 (the builder\'s dial)', B.BOND_ENCOUNTER_CHANCE === 0.1);
+  assert('E2 the starting meeting chance is 0.1 (the builder\'s dial)', B.bondDial_('bondEncounterChance') === 0.1);
+  { let threw = ''; try { B.loadBondDials_({ config: Object.assign({}, global.__BOND_CFG, { bondMarriageAt: '' }) }); } catch (e) { threw = String(e.message); }
+    assert('E2b a blank bond number stops the engine by name', /bondMarriageAt/.test(threw));
+    B.loadBondDials_({ config: global.__BOND_CFG }); }
   assert('E2 sports band top alone ×1.5 (0.14 meets, 0.16 does not)',
     B.detectNewBonds_(poolCtx(10, () => 0.14, { sportsTop: true })).length > 0 && B.detectNewBonds_(poolCtx(10, () => 0.16, { sportsTop: true })).length === 0);
   assert('E2 a draw at 0.15 meets nobody on an ordinary week', B.detectNewBonds_(poolCtx(10, () => 0.15)).length === 0);

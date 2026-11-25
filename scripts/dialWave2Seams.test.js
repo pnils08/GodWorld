@@ -32,6 +32,9 @@ for (const rel of ['utilities/citizenMemory.js', 'utilities/citizenDialMap.js', 
   const filename = path.join(__dirname, '..', rel);
   vm.runInContext(fs.readFileSync(filename, 'utf8'), w, { filename });
 }
+// engine.356: the bond engine's weekly numbers are World_Config rows — load them at their seeds, as runBondEngine_ does
+vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'phase01-config/engine94SheetContract.js'), 'utf8'), w);
+vm.runInContext('(function () { var c = {}; ENGINE356_CONFIG_SEEDS.forEach(function (s) { c[s[0]] = s[1]; }); loadBondDials_({ config: c }); })()', w);
 const headers = ['POPID', 'First', 'Last', 'LifeHistory', 'Status', 'Tier', 'ClockMode', 'Neighborhood', 'DialState', 'LastUpdated'];
 function citizen(id, first, last, hood) {
   return [id, first, last, '', 'Active', 4, 'ENGINE', hood || 'Synthetic Hood A', w.serializeDialState_(w.newCitizen_()), ''];

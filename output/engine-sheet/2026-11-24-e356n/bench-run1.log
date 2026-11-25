@@ -1,0 +1,58 @@
+AIM = BENCH (script read the bench marker)
+== push code 62855ebb7
+bench pull-back byte-identical to e356n.sha256
+== sync from live
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+places: {"target":"bench","benchLines":5,"of":5,"rows":1173,"programRows":34,"kinds":34}
+{"fireGuardMinutes":"0","cycleCountFormatted":"117","cycleCountIsNumber":true}
+clearfire 118: {"ok":true,"cleared":{"cycle":118,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+appended 5 to Edition_Coverage_Ratings; marked rows on the tab now 5
+appended 26 to Citizen_Media_Usage; marked rows on the tab now 26
+appended 2 to Oakland_Sports_Feed; marked rows on the tab now 2
+bench cycleCount 117
+clearfire 118: {"ok":false,"error":"no readable fire record to clear"}
+fire C118 rc=0 "verdict": "PASS" "wallS": 222
+  "venue": [
+   "Vinnie Keane (Piedmont Ave): found a quiet minute at Little Avenue and the muffled thump of a car stereo playing last summer's hit  [Little Avenue]",
+   "Henry Rivas (West Oakland): found a quiet minute at West Side Cafe and let the week's noise settle  [West Side Cafe]",
+   "Philly Rodriguez (West Oakland): found a quiet minute at West Side Cafe and felt the season starting to turn  [West Side Cafe]",
+   "Manny Ellen (Lake Merritt): found a quiet minute at Lakeside Rowing Club and felt the season starting to turn  [Lakeside Rowing Club]"
+  ],
+  "program": [
+   "P Slayer (West Oakland): sat in on an evening session at Civis Systems Civic Fellows Program  [Civis Systems Civic Fellows Program]",
+   "Desmond Morton (Chinatown): dropped a bag of groceries off at Elders in Place Program  [Elders in Place Program]",
+   "Marcus Hollowell (Chinatown): dropped a bag of groceries off at Elders in Place Program  [Elders in Place Program]",
+   "Andre Turner (Downtown): sat in on an evening session at NeuroCity Youth Lab  [NeuroCity Youth Lab]"
+  ],
+  "fanout": [
+   "Manny Ellen (Lake Merritt): joined the Easter observance at Cathedral of the Living Word  [Cathedral of the Living Word]",
+   "Bethany Foster (Lake Merritt): joined the Easter observance at Cathedral of the Living Word  [Cathedral of the Living Word]",
+   "Vince Okoye (Lake Merritt): joined the Easter observance at Cathedral of the Living Word  [Cathedral of the Living Word]",
+   "Marisol Trujillo (Fruitvale): joined the Easter observance at St. Esperanza Parish  [St. Esperanza Parish]"
+  ],
+  "congregation": [
+   "Dillon Trevor (Downtown): closed their eyes during the choir solo and actually felt the tension leave their shoulders  [Lake Merritt Mindfulness Sangha]",
+   "Billy Storip (Rockridge): left by the side aisle during the last hymn to miss the talk in the parking lot  [Temple Beth Or]"
+  ],
+  "row": [
+   "Jacob King (Rockridge): held the door for the crowd coming out of Temple Beth Or  [Temple Beth Or]",
+   "Josie Wong (Laurel): waited at the Laurel Cleaners counter while someone hunted for the claim ticket  [Laurel Cleaners]",
+   "Jalen Serf (Piedmont Ave): waited a long time at Piedmont Avenue Medical Center before the appointment  [Piedmont Avenue Medical Center]",
+   "Crystal Oh (KONO): browsed the evening window display at Twentieth Street Gallery off Telegraph  [Twentieth Street Gallery]"
+  ],
+  "employer": [
+   "Trenton Nawan (Jack London): remembered a regular's order before they finished sitting down  [Green & Gold Tavern]",
+   "Evan Bing (Rockridge): talked a customer out of the wrong size and into the right one  [Oakland Hospital]",
+   "Ridley Holt (Lake Merritt): sat through a budget meeting that ran long and left with a plan anyway  [West Oakland Community Center]",
+   "Simone Limone (West Oakland): measured out a tincture drop by drop against the afternoon light  [Oakland Hospital]"
+  ]
+ },
+ "problems": [
+  "place id not on Business_Ledger: BIZ-00141"
+ ],
+ "verdict": "FAIL"
+}
+read 1 exit 1
+== final sync from live
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.

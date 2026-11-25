@@ -19,6 +19,8 @@ pointers:
 
 ## Current sandbox — full trail
 
+**`SANDBOX 1004` = PROD stage 82 + two files at `43431ba77` (2026-11-24, engine-sheet, engine.356 a program line asks for a kind of place) = PROD stage 83.** Manifest `output/engine-sheet/2026-11-24-e356n/e356n.sha256` (pull-back byte-identical). Two runs, each one fire from a live sync (C117; live Community_Programs = 34 rows, all with Place_Kind), with five bench-only lines (`bench-lines.json`, weight 40). **Run 1 (`62855ebb7`, one file): C118 PASS 222 s, read FAIL** — one line placed at BIZ-00141 Hillside Family Dental, which closed and was archived in that same fire (`bench-run1.log`, `read1-run1.out`): stage 81's open-business list was built before the week's closures. **Run 2 (`43431ba77`, + the closing-this-week fix): C118 PASS 225 s, read PASS** — 2,654 lines / 1,033 people; 87 placed; 24 `$PROGRAM` lines, each at a program of the citizen's hood whose Place_Kind is one the line asks for (aid 8, field 7, lab 3, lunch hall 3, office 2, pantry 1); the no-kind line and the `at:none` line landed 0 times; 9 named-business, 5 faith fan-out, 2 congregation, 6 employer, 41 `$VENUE`. Final sync from live: **bench data = live C117; bench code = PROD stage 83**. Log `…/bench.log`.
+
 **`SANDBOX 1004` = PROD stage 81 + two files at `f3494a0cf` (2026-11-24, engine-sheet, engine.356 programs and congregations as places) = PROD stage 82.** Manifest `output/engine-sheet/2026-11-24-e356l/e356l.sha256` (pull-back byte-identical). One fire from a live sync (C117), seeder feeds; on the bench only: the 11 tags of `ecl-places.json` and two test lines (`bench-lines.json`, weight 40, one `$PROGRAM` / `prog:youth-sports`, one `$CONGREGATION`). **C118 PASS 219 s.** Read (`read.js`): 2,650 lines / 1,027 people; 79 lines carry a place — 42 `$VENUE` / template, 11 a named business, 1 a named program (Oakland Sound Archive, `place:PRG-012`), 13 the `$PROGRAM` slot (each a youth-sports program of the citizen's hood), 1 the `$CONGREGATION` slot (a member, her own congregation), 2 faith fan-out (New Covenant Pentecostal Assembly), 9 the employer; 0 raw directives, 0 tails, every check clean. Not seen: a `place:congregation` line drawn by a member (60 drawn, all by non-members → no place, tag removed; 17 tracked members). Final sync from live: **bench data = live C117; bench code = PROD stage 82**. Log `…/bench.log`.
 
 **`SANDBOX 1004` = PROD stage 80 + two files at `d9686c97b` (2026-11-24, engine-sheet, engine.356 cut A2, second push) = PROD stage 81.** Manifest `output/engine-sheet/2026-11-24-e356k/e356k.sha256` (pull-back byte-identical). One fire from a live sync (C117; the live ECL already carried the 237 act tags and the 32 named lines), seeder feeds, no plant: **C118 PASS 277 s.** Read (`read.js`): 2,634 lines / 1,022 people; 342 lines carry `act:` (stage 80's bench: 300) — service 103, rest 102, shift 71, errand 24, meal 18, walk 18, drink 5, game 1; 54 lines carry `place:<BIZ_ID>` — 42 `$VENUE` / template, 7 a business the line names (Telegraph Supper Club, Montclair Patisserie, Nino's, College Avenue Medical Group), 5 the employer; 0 tails, 0 malformed place tags, every check clean. Final sync from live: **bench data = live C117; bench code = PROD stage 81**. Log `…/bench.log`.
@@ -219,6 +221,15 @@ pointers:
 ---
 
 ## PROD deploy log — full trail
+
+### PROD stage 83 — a program line asks for a kind of place; a business closing this week is no place (2026-11-24, engine-sheet, engine.356 cut A)
+
+- **What:** two files at `43431ba77` on stage 82 — `phase05-citizens/generateCitizensEvents.js` (`$PROGRAM`: `at:<kind>` tags matched to Community_Programs.Place_Kind, any of them; `prog:<Type>` still narrows; a line with neither is never offered; a program with a blank or `none` kind is never a place), `phase05-citizens/applyBusinessDynamics.js` (a business that closes this very week leaves `S.bizOpenIds` / `S.bizIdByName` — the hole in stage 81's guard the bench found). Builder: "go on the engine reading the new column".
+- **Data it reads:** Community_Programs column H `Place_Kind`, 34 rows, the builder's rulings 2026-11-24 (plan changelog). No live line uses `$PROGRAM` yet.
+- **Proof:** 30 citizen-event / business suites pass. **Bench SANDBOX 1004**: run 2 C118 PASS 225 s, read PASS (§Current sandbox). No outside read of this push.
+- **Stage 83 (2026-11-24):** live pulled = stage 82 (`e356l-prod.sha256`); two files changed; built tree = the benched tree (`e356n.sha256`); manifest `…/e356n-prod.sha256`; pull-back byte-identical; version cut **@218**.
+- **Smoke at C118:** no `place:` id that is off Business_Ledger / Community_Programs after the fire (a closure the same week).
+- **Back out:** the two files from `f3494a0cf` (= `e356l-prod.sha256`) + version cut.
 
 ### PROD stage 82 — programs and congregations are places (2026-11-24, engine-sheet, engine.356 cut A)
 

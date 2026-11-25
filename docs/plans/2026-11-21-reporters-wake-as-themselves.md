@@ -112,6 +112,14 @@ The five, set by job (builder: "align with what the data job is best"): Dawson N
 
 Feed questions: the feed's `question` word stays the builder's private word to a citizen (engine.338). Whether Gridiron answers feed questions, and under which word, is open (below).
 
+## The sports seats (Tasks 32+) — Anthony Raines first
+
+**Builder's words (2026-11-24):** "lets start with Anthony Raines, now these are going to be similar to the other media builds but want to make sure we dont lose too much of them in the process … i truely think we can make them really incorporate the sims history into its views as the cycles progress and their memories start to settle into who they are and what they want to remember … their canon is deeper than all others in the project so we just want to remove the puppeting and tighter the instructions, if they have tools and stat methods they use we dont want to lose them to fit a mold, we want to set the mold so they are easily repeated". Then: "1. His is the former AA A'S prospect … Where they live should come from the sheets, where he is from can be in his bio but must make the sheets Orgin city 2 - He is just a sports journalist who's angle is data drive takes, as you will see P Slayer is the opposite, the emotional fan take. So Anthony , P Slayer and … Elliot Marbury … all cover the same A's but from different lens , they don't have to cover the same stories they can choose … they see the headlines and they cover the stories, oaks will have a similar set up , Hal Richmond is the historical context angle , the long form who they are , how they compare , our Oakland pivots in 2025 to the timeline , so real world history exists but it's pre 2025 … 3. Like other media , morning wake matches the writing , thinking mode can be considered and PSlayer would have to be haiku so to they don't sound the same".
+
+Anthony's wake today (read 2026-11-24, C117): who he is across six files that disagree (sheet bio: former AA A's prospect; IDENTITY: Pioneer League statistician 2008, against BirthYear 2001; portfolio + his own canon interview in Drive "The Game That Built the Analyst": Berkeley Owls scholarship player; voice file: scout analyst; CITIZEN_NARRATIVE_MEMORY: "Mike Paulson's brother" against IDENTITY "no relation"); a code-picked story (buildAnthonySlice top pulse score), a code-written claim, code-picked bag tools, an approach paragraph, an A/B frame, a scored candidate list; the stance three times (cron-desk-run, writer hard stance, kickoff) and the whole 10-method bag every wake; tools dossier_read (the Sept TrueSource mirror), canon_search, canon_recall, sheet_read, citizen_lookup, 6 calls; morning deepseek flash, write Sonnet 5.5; no memory read.
+
+Keep: the ten methods as his own craft (he picks), rate arithmetic, sourcing (every number named to its source), third-person press-box voice, the canon blockers, all his tools, Sonnet. Take away: the code-picked story, claim, methods, approach, frame, scored list, tripled stance, stale notes. Add: the whole A's record (every feed row, unranked), Gridiron to ask, his own memory, dossier_read on the new cards. No citizen quotes (records seat, builder 2026-10-02).
+
 ## Acceptance
 
 1. Sharon's live writer prompt holds only the five parts above — proven by the printed prompt of her first live wake after the switch.
@@ -149,6 +157,8 @@ Feed questions: the feed's `question` word stays the builder's private word to a
 
 
 ## Changelog
+
+- 2026-11-24 (research-build) — Sports seats begin with Anthony: his wake read whole; builder rulings on his origin, the sports lenses and models recorded verbatim. Open: Berkeley Owls (his own canon interview) vs the builder's memory of Mags; Paulson's brother vs no relation; OrginCity blank.
 
 - 2026-11-24 (research-build) — Task 31 live: two builder rows answered to Discord. Lineup test: no thinking → eight starters, third base empty; medium thinking → nine, a split vs LHP, every checked claim on the cards. Gridiron thinks by default (GRIDIRON_REASON=0 off).
 

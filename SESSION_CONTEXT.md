@@ -4,4 +4,4 @@
 
 **NEXT[research-build]:** pipeline.111 → sports data worker (answers the sports seats on player/team data; builder 11-24). Tribune roster read: no free data staffer (Ariana, Marbury, Rhea hold seats). Builder names who holds it, existing staffer or mint, before any build. Hold: engine.350 parked; Internal Affairs worker. Push held.
 
-**NEXT[engine-sheet]:** engine.356 cut A → $PROGRAM reads Community_Programs.Place_Kind (a line asks for a kind of place; plan changelog 11-24), then lines for the two slots (builder approves), then A3 with whom. At C118 read the smoke lists of stages 80–82 (DEPLOY_HISTORY §PROD). Queued: engine.367, infrastructure.20, engine.362, .363. Push held.
+**NEXT[engine-sheet]:** engine.356 cut A → on the builder's test unlock: suites, then `output/engine-sheet/2026-11-24-e356n/bench.sh 62855ebb7` and push.sh (stage 83); then lines for the two slots (builder approves), then A3. At C118 read the smoke lists of stages 80–82. Queued: engine.367, infrastructure.20, engine.362, .363. Push held.

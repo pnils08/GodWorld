@@ -388,7 +388,7 @@ pointers:
 
 ## Community_Programs
 
-- **Rows:** 33
+- **Rows:** 34
 - **Columns:** 8
 
 | Col | Header |

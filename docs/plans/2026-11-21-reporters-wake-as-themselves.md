@@ -162,6 +162,8 @@ Keep: the ten methods as his own craft (he picks), rate arithmetic, sourcing (ev
 
 ## Changelog
 
+- 2026-11-25 (research-build) — P Slayer next (builder: "the natural next take … is P Slayer since he rides similar tools"). Rulings: "Of his writing is good leave him on grok on that wake 3 but give him haiku for the wake1 , go on the bio , rest looks good"; Paulson may be interviewed ("Mike Paulson can be interviewed in the sim and it's a nice touch"; the C116 quote traced to his W2 ask, legit). His CitizenBio written (Simulation_Ledger AT8, read back). Open: A's only or the Oaks as well.
+
 - 2026-11-25 (research-build) — Builder: card ages are right ("keane is 37 based on the card … the sheets may have age drift issues"; duet checks them as it builds cards); until a ledger row is trued, a contested age is left out (the gate reads the ledger). Mint ("sure we can mint them"): Fry, Hendricks, Kirkland queued on Advancement_Intake1 rows 261-263 for the C118 mint, read back.
 
 - 2026-11-24 (research-build) — Anthony step 3 built and folded (agy HOLD). The cards' ages disagree with the ledger's BirthYear on 15 players (Keane 37 vs 39, Ramos 27 vs 26): the ledger rules (newsroom age rule), the mismatch goes to the builder. Note: engine-sheet's e788cafe7 carried this lane's staged options fix and step 3 brief (shared index).

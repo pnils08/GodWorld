@@ -331,7 +331,7 @@ Uses claude-supermemory plugin:
 **Bay Tribune Reporter Corps (Active Agent Skilled Reporters):**
 20. POP-00007 - Hal Richmond (Senior Historical Insider, HIST-04-V, chronicler, 50-year career, "Facts are bones, memory is muscle")
 21. POP-00008 - P Slayer / Paul Slayer (Freelance Columnist, OPIN-03-V, Slayer Syndicate, existential reporter, orange notebook signature)
-22. POP-00017 - Anthony Raines (Lead Sports Journalist, SPRT-02-V, Berkeley Owls alum, Mike Paulson's brother, "player who changed positions")
+22. POP-00017 - Anthony Raines (Lead Sports Journalist, SPRT-02-V, Berkeley Owls alum, "player who changed positions")
 
 ### Metadata Integration Complete
 

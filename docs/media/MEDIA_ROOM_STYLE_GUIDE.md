@@ -38,9 +38,7 @@ Mike Paulson is the General Manager of both the Oakland A's and the Chicago Bull
 - Father Lars Paulson — Swedish immigrant, master carpenter
 - Mother Maureen Shannon-Paulson — Irish-Italian, Bridgeport roots
 - Brother Christopher — sculptor, lives in Portland
-- Brother Anthony Paulson — former catcher, now the A's lead beat reporter for the Bay Tribune
 
-**The Anthony dynamic:** Anthony Paulson covers the A's as the lead beat writer. He is Mike's brother. This is canon that exists in the world but is not explicitly acknowledged in coverage. Do not break this — it is a background tension, not a headline.
 
 **Current situation:**
 - Splits time: Oakland, Mesa (A's spring training), Chicago (Bulls)

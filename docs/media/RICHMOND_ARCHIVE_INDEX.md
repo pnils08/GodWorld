@@ -134,7 +134,6 @@ His 50-year witness gives him unique authority: *"Every generation gets players 
 **Anthony Raines (POP-00017) - PRECISION**
 - Lead Sports Journalist, Tribune Award Winner
 - Primary Athletics coverage, field reporting specialist
-- Mike Paulson's brother (doesn't know Mike is GM - dramatic irony)
 - Role: What is happening now, accountability reporting
 - Style: Documentary approach with human angles, modern journalism
 
@@ -206,7 +205,6 @@ P Slayer Visual Engine v1.2 - generates portrait imagery for Richmond Archive ma
 **Role:** Bay Tribune Lead Sports Journalist, Primary Athletics Coverage
 **Clearance:** SPRT-02-V (Prefranc Press Divise)
 **Background:** Berkeley Owls scholarship player (college outfield/corner infield)
-**Family:** Brother of Mike Paulson (POP-00527, A's General Manager) - doesn't know Mike's role
 
 **The Origin Story:**
 
@@ -253,7 +251,6 @@ A's as proof you can compete without being richest kid in room. "I love stories 
 
 **Dramatic Irony:**
 
-Anthony writes extensively about A's front office excellence, roster construction, "doing math on human beings." **He doesn't know his brother Mike Paulson (POP-00527) IS the A's General Manager making those decisions.** The reporter covering the team's analytical brilliance is blind to his own family connection to it.
 
 **Closing Philosophy:**
 

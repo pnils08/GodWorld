@@ -39,7 +39,6 @@ Berkeley Owls scholarship player turned analyst. "I loved baseball more than I w
 - "Faithful to the game through numbers"
 
 **Dramatic Irony:**
-Anthony writes extensively about A's front office excellence, roster construction, "doing math on human beings." **He doesn't know his brother Mike Paulson (POP-00527) is the A's General Manager making those decisions.** The reporter covering analytical brilliance is blind to his family connection to it.
 
 **Tribune Three Position:**
 - **Hal Richmond (POP-00007):** MEMORY — what happened, why it mattered
@@ -105,7 +104,6 @@ Anthony writes extensively about A's front office excellence, roster constructio
   - Manager Mike Kinder entering final contract year
   - "Executive sentiment suggests 'evaluation of succession pathways'"
 - **Anthony's Conclusion:** "2040 marks the organization's transition from legacy maintenance to structural audit... the dynasty, as defined, is living on borrowed time."
-- **Dramatic Irony:** Anthony analyzing roster decisions made by his brother Mike Paulson (GM) without knowing the family connection
 - **Supermemory Status:** ✅ Saved (ID: wmx6yfMYa88rP9GycG7r17)
 
 ### 4. "The Case for Quintero — And Why a First-Place Organization Has No Easy Moves Left"
@@ -143,7 +141,6 @@ Anthony writes extensively about A's front office excellence, roster constructio
   4. Accept someone with value loses playing time
 - **Front Office Circling:** Busch, Rosado, Richards ("only pieces whose roles aren't locked")
 - **Closing Pressure:** "At some point soon, Oakland is going to choose: move the lineup pieces, move the prospect, or let the roster suffocate under its own depth."
-- **Dramatic Irony:** Anthony publicly analyzing brother Mike Paulson's impossible GM choices without knowing family connection
 - **Supermemory Status:** ✅ Saved (ID: vci9Qbgy9UZnzBvXYnDv5y)
 
 ### 5. "Oakland's Balancing Act: Legacy, Payroll, and a Fading Empire"
@@ -167,7 +164,6 @@ Anthony writes extensively about A's front office excellence, roster constructio
   - **"Maybe that's what legacy really is — not a banner, but a balance sheet of what remains after glory fades."**
 - **Style Evolution:** Data-driven foundation + elegiac poetry ("living in its long shadow", "dynasty's light is dimming", "accountant's poetry")
 - **Six Championships Timeline:** 2027, 2028, 2030, 2031, 2034, 2035, 2037 (2027-2037 window)
-- **Dramatic Irony:** Anthony writing "the front office knows what the fans don't want to hear" while his brother Mike Paulson makes these survival decisions as GM
 - **Supermemory Status:** ✅ Saved (ID: AiGVjs7bQM6b3LJZ7V188f)
 
 ## Unprocessed Pieces (Available On-Demand)
@@ -379,7 +375,6 @@ Anthony writes extensively about A's front office excellence, roster constructio
 - Documenting organizational philosophy ("process trust", "engineers of greatness")
 - Understanding 2040 transition from "legacy maintenance to structural audit"
 - Seeking Tribune Three collaboration examples (analytical + emotional storytelling)
-- Exploring dramatic irony of Anthony covering his brother Mike's GM decisions
 
 **Complements:**
 - **Hal Richmond essays** - Anthony documents architecture, Hal documents memory

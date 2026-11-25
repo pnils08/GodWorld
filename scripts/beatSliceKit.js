@@ -327,7 +327,8 @@ function wire(seat) {
     // pipeline.111: a seat read live (seat.live — the sports feed's morning copy) is rebuilt on every load; its source moves mid-Cycle
     if (!seat.live && cached && cached.version === seat.version && !cached.empty) return cached;
     const slice = build(cycle, { root });
-    write(cycle, slice, root);
+    // a live seat's saved copy is only a copy (it is rebuilt on every load): a refused save (a test day's no-write guard) never stops the day
+    if (seat.live) { try { write(cycle, slice, root); } catch (e) { /* the copy is not the record */ } } else write(cycle, slice, root);
     return slice.empty ? null : slice;
   }
   function isSeat(assign) {

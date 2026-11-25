@@ -90,6 +90,26 @@ Done: Sharon, Maria, Kai, Mason, Celeste, Jordan, Graye, Noah, Trevor, Lila, Rac
 | 24 | Tamsin, Ines, Nia (daily + weekly): seat files, coaching off; Nia's seat carries what the show is and how the board ranks | rb | live; Tamsin and Nia untested (see changelog) — read their next pieces |
 | 25 | City Clerk worker (Odessa Arceneaux) for the civic trio: intake row queued, worker records + job written | rb | after the C118 mint (Sun 11-29): office map entry with her POPID and answersOnly true, Civic_Office_Ledger row, the trio's seat files name her, one test ask |
 | 26 | Superintendent of Schools worker (Achterberg) for Angela; Director of Cultural Affairs worker (Kiran Tavakoli, intake row queued for C118) for Kai, Sharon, Celeste | rb | superintendent live and asked once (answered from the record, one unsourced detail being traced); culture: map entry (answersOnly) + the three seat files after the mint |
+| 27 | Gridiron Analytics, the sports data house: the team cards pulled from the sports folder and read to fields (gridironCards.js); five analysts on the worker template, one record each, the other four a read away; a code router picks the analyst, no model; a question no record covers gets no call (gridiron.js, gridironAsk.js) | rb | built, not live; the A's feed added as a sixth record every analyst can read (builder: "if the feed is cheaper to pull in this way is should be added") |
+| 28 | Test set: one answerable question per record, one across two records (a pitcher's trade value), two the record cannot answer (an Oaks lineup, who starts Friday); every figure in each answer checked by script against the record it was handed | rb | done — 9 asks (output/research-build/2026-11-24-gridiron/test1.json); 0 figures off the record; fixes below, two re-asked clean |
+| 29 | Wire: the sports seats ask Gridiron (ask_gridiron beside ask_worker) as each sports seat moves to its seat file | rb | not started (sports seats last) |
+| 30 | The A's and Oaks roster tabs carry the card fields (columns added at the right; eight scripts read the tabs today) | rb | held for the builder's go (a many-row sheet write) |
+
+## Gridiron Analytics — the sports data house (Tasks 27-30)
+
+**Builder's words (2026-11-24):** "this could be cool if we build it right in that this is who gridiron analytics is , we will officially make them the buisness that is the handling out Oakland sports data, we can see the roster we have so far on the sim ledger and truely wake them in that role as a worker agent … a branch type workflow that enacts the specific data agent the orchestartor needs to return it to the sports media and to questions posed in Oakland_Sports_Feed, lineup recommendations, pitching rotation, trade bait, etc. the idea would be to return quick accurate results and a fraction of the cost as each data agent has a specific responsibility". Then: "we have oakland sports feed and the As and Oaks roter tabs can be coverted to cover lineups, rotations, etc as it not a highly read ledger yet". Then: "1. yes cards are the source, 2041 is the most recent completed season , 2042 is the next season, godworld in is 2042 currently … 2 - we align with what the data job is best we can and set them as that, 3 - Oaks will be built the same and the team in an exapnsion team so we are building that data house next 4 - lets set the how this will flow and start to test it".
+
+Flow:
+
+1. **Source.** The sports folder on Drive (one folder per team; players active and inactive, coaches, seasons). `scripts/gridironCards.js` pulls every card with the service account and reads it to fields → `output/gridiron/cards.json`. Lines about how a card was made (screens, the folder, its approval footer) are dropped there. Season lines are by year (2041 the last completed); age, overall, contract and roster status are as of 2042.
+2. **Records.** Built in code from the cards and the sheets, one per analyst: the A's hitters (hand, splits by pitcher hand, plate skills, seasons); the A's pitchers (role, stamina, pitches, seasons, the staff who work the arms); the A's roster and money (contracts by year, options, service, staff pay, the budget); the Oaks (Oaks_Roster + the Oaks rows on the sports feed); what the Tribune has printed (the archive index; the words a canon_recall away).
+3. **Front door.** A question comes in; `route()` reads which record it is about — print, money and Oaks words first, then a named A's player (pitcher → pitching, hitter → hitting), then pitching or hitting words. No record → "Gridiron Analytics does not hold a record on that", no model call.
+4. **Analyst.** The worker template (`workerWake.buildWake`): the citizen's ledger line and memory, the job line + the record duty, their own record in front of them, the other four records a read away (record_read), the worker tools. One call on the workers' model. Gridiron's offices are registered at ask time, never on the city's office map: no weekday rota, not in ask_worker's list.
+5. **Back.** The answer returns word for word with who gave it; the seat may quote it (Task 29).
+
+The five, set by job (builder: "align with what the data job is best"): Dawson Nguyen (Sports Analytics Lead) — hitting; Wesley Clark (Sports Analytics Lead) — pitching; Daniel Yoon (Co-Founder) — roster and money; Jade Soy (Data Analyst) — the Oaks; Christine Nakamura (Co-Founder) — the printed record. Ariana Reyes holds a Tribune seat and is not one of them (proposal, said to the builder). Their ledger rows are not edited; the job line carries the area.
+
+Feed questions: the feed's `question` word stays the builder's private word to a citizen (engine.338). Whether Gridiron answers feed questions, and under which word, is open (below).
 
 ## Acceptance
 
@@ -124,7 +144,15 @@ Done: Sharon, Maria, Kai, Mason, Celeste, Jordan, Graye, Noah, Trevor, Lila, Rac
 | N2 | Cache keyed on version only; prev/ cycle not checked | agy #6 | stale-cache guard | held (low) |
 | N3 | Fanout re-attaches approach; legacy --wake path skips the seat switch | agy #7, #8 | artifact hygiene | held (low; not in the live prompts) |
 
+## Open questions
+
+- Feed questions to Gridiron: answer them at all, under which word, and where the answer lands (the feed is the builder's input) — for the builder; blocks nothing in Tasks 27-28.
+
 ## Changelog
+
+- 2026-11-24 (research-build) — Gridiron test: 0 figures off the record. Fixed: options misread (now "used 0 of 3 (3 left)"), an empty 2042 line read as last season, "who starts" unrouted, and a reply that was a tool call written as text — caught in both ask paths (workerAsk isAnswer).
+
+- 2026-11-24 (research-build) — Gridiron Analytics as the sports data house (Tasks 27-30): cards pulled and read (28 A's players, the 2042 staff; the Oaks folders are empty); five analysts by job; code router. Built, not live; tab conversion held for his go.
 
 - 2026-11-24 (research-build) — Superintendent's first ask invented Claremont Hills and an $85,000 parent-teacher group (traced: in no record, canon or page). Builder: workers' job is data integrity; RECORD_DUTY added to every worker; the re-ask answered from the record and named its limits.
 - 2026-11-24 (research-build) — Culture director approved ("culture director looks good"); intake row written to the next empty row from column A (no append). Builder: workers are at work — they get their job responsibilities, never what to say.

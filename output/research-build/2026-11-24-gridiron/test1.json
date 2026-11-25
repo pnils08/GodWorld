@@ -1,0 +1,139 @@
+[
+ {
+  "k": "hitting",
+  "q": "Who should lead off for the A's next season, and why?",
+  "route": "GIA-HITTING",
+  "why": "the question is about hitting",
+  "who": "Dawson Nguyen",
+  "finish": "stop",
+  "secs": 12,
+  "reads": [
+   "record_read {\"record\":\"The A's hitters\",\"match\":\"Horn\"}",
+   "memory_recall {\"query\":\"leadoff lineup\"}"
+  ],
+  "unmatched": [
+   "31."
+  ],
+  "text": "Here's my answer, Anthony, on the record:\n\n**Danny Horn leads off. It isn't close.**\n\nThe case is simple and it's in my records. Horn is the only hitter on this roster who does both leadoff jobs at an elite level: he gets on and he runs. Last season, 2041, he hit .338 with a .382 on-base, and he stole 80 bases in 148 games. Nobody else on the club is within reach of that combination — Darrin Davis stole 26 with a .350 OBP, Taveras has 2 steals and a .339 OBP, Gonzalez stole 17 at .349. Horn is the only one who turns a single into a run-scoring situation at a rate that matters.\n\nAnd his ratings moved the right way this winter: contact vs RHP +10 to 95, vs LHP +3 to 80, vision +9 to 87, power vs RHP +7 to 85. He's a switch-hitter, so there's no platoon hole at the top, and his 92 speed and 83 stealing are still there at 31. He also only struck out 65 times last year against 35 walks — for a man with 56 home runs, that's an unusually clean at-bat.\n\nThe one thing I'll flag honestly: his discipline rating dropped 12 points, to 66, and he's a Day Player whose performance dips in night games. If you wanted a purist's on-base man, the argument would be Vladimir Gonzalez — 95 vision, 80 discipline, .349 OBP — but Gonzalez has a 60 speed and 66 stealing, and you don't put a 99 clutch, pull-hitting run producer at the top of the order to have him standing on first when the middle of the order comes up.\n\nMy working lineup top would be Horn in center and leading off, Gonzalez second or third, and the RBI bats behind them. But the leadoff answer is Horn, and I'd be surprised if it changes by Opening Day.\n\nOne caveat as always: everything I just gave you comes from my records and my ratings sheets. If the Tribune wants a current medical or a fresh report from the coaching staff, that's not a thing my records hold, and I won't pretend otherwise."
+ },
+ {
+  "k": "pitching",
+  "q": "How does the A's rotation line up for 2042, one through five?",
+  "route": "GIA-PITCHING",
+  "why": "the question is about pitching",
+  "who": "Wesley Clark",
+  "finish": "stop",
+  "secs": 10,
+  "reads": [
+   "record_read {\"record\":\"The A's pitchers\"}",
+   "record_read {\"record\":\"The A's roster and money\"}",
+   "memory_recall {}",
+   "canon_recall {\"query\":\"A's rotation 2042\"}"
+  ],
+  "unmatched": [
+   "200"
+  ],
+  "text": "Here's how I'd line it up, Anthony — one through five:\n\n1. **Travis Coles** — 22, overall 99, the reigning Cy Young winner. 22–4, 2.72, 254 strikeouts in 215.1 innings, 6.2 WAR, and he goes five pitches deep with a 98 mph fastball. He's the ace, and I don't think that's a close call.\n2. **Arturo Ramos** — 27, overall 91. 23–1, 2.41 in 212.2 innings, Cy Young runner-up, three straight years of 32-plus starts and 200-plus innings. The most reliable volume in the group; he takes the ball every fifth day and keeps it in the park.\n3. **Henry Rivas** — 30, overall 92, though I'd flag that he made only 22 starts and threw 136.1 innings in 2041 after back-to-back full seasons. Highest overall of the starters outside Coles, and a 2.64 ERA with 24 walks; the question with him is durability, not quality.\n4. **John Ellis** — 26, overall 86. 20–3 over 189.2 innings, 3.42 ERA. He'll give you length — 86 stamina — and he's been a 32-start man two years running.\n5. **Pablo Almanzar** — 23, overall 85 and trending up, but the record on him is thin: five starts, 34 innings in 2041. He's the fifth spot on paper, and I'd treat his workload as something to build rather than assume.\n\nBehind them: **Mariano Rosales** closes — 42 saves, 1.84 ERA, overall 95. **Hitoki Ka** is the top setup arm — 0.90 ERA over 57 appearances in 2041.\n\nTwo caveats on the record. First, that's a depth chart from a five-man list; if Rivas's innings stay capped or Almanzar isn't stretched out, the fifth spot could move, and there's nobody at Las Vegas on my records to push for it. Second, where I have said \"five\" I'm reading it off the six starters on the roster — where the sixth, and any swing role, would slot in is a decision the field staff makes, not something my records settle. What I don't have is any stated plan from the manager or the pitching coach about usage or limits."
+ },
+ {
+  "k": "roster",
+  "q": "Who on the A's is trade bait this winter?",
+  "route": "GIA-ROSTER",
+  "why": "the question is about the a's roster and money",
+  "who": "Daniel Yoon",
+  "finish": "stop",
+  "secs": 10,
+  "reads": [
+   "record_read {\"record\":\"The A's roster and money\"}",
+   "record_read {\"record\":\"The A's on the sports feed\"}"
+  ],
+  "unmatched": [
+   "2043.",
+   "2044."
+  ],
+  "text": "Anthony — here's what my records show, and where they stop.\n\n**The expiring money is where the conversation starts.** Four contracts run out after 2042, which means this winter is the last clean chance to get something back:\n\n- **Darrin Davis, LF, 33** — $28.4M in 2042, free agent in 2043. Two MVPs, but 3.6 WAR last year at 33 with a big number. That's the most likely name moved.\n- **Henry Rivas, SP, 30** — $28.2M in 2042, free agent in 2043. 3.2 WAR. A starter on an expiring deal is always askable.\n- **Isley Kelley, SS, 34** — $25.0M in 2042, $25.0M in 2043, free agent in 2044. 7.4 WAR last season and still an MVP-caliber shortstop, but 34 with two years left and $50M on the books. The return would have to be real.\n- **Hitoki Ka, RP, 30** — $7.0M in 2042, free agent in 2043. Cheap, effective bullpen arm — the kind of piece contenders call about.\n\n**The second tier is the redundancy.** Kevin Clark (3B, 22, 0.048 service) and Giancarlo Hernandez (3B, 23, 0.003, out of options at 0/3) sit behind Quintero and Keane at third. Hernandez in particular can't be optioned, so he either makes the club or gets moved. Sidney Tumolo (2B, 26) is behind Taveras at second. Bobby Hendricks and Tommy Fry at Las Vegas are depth, not bait.\n\n**Where I have to be straight with you:** \"trade bait\" is a judgment about what the front office intends, and I don't have that in my records. What I have is contracts, service time, options and roster status — which is what I just gave you. I'm not going to tell you a name is on the block when what I actually hold is an expiring deal and an inference.\n\nAnd the counterweight to all of it: the budget shows $129.46M available with a $124.46M projected surplus. This club does not have to sell. Anyone moved this winter gets moved for talent, not for money.\n\nOne caution on the record itself: the service-time and option figures I read from are what's on file, and a couple of the lines in my roster carry oddities — Morton and Reyna show \"last season 2042\" with 0 WAR when 2042 hasn't been played, which reads to me as a data-entry artifact, not a scouting report. If you're printing a specific number off my sheet, let me confirm it against the source first."
+ },
+ {
+  "k": "oaks",
+  "q": "How has the Oaks' season gone so far?",
+  "route": "GIA-OAKS",
+  "why": "the question is about the oaks",
+  "who": "Jade Soy",
+  "finish": "stop",
+  "secs": 13,
+  "reads": [
+   "record_read {\"record\":\"The Oaks\"}",
+   "memory_recall {}"
+  ],
+  "unmatched": [
+   "112."
+  ],
+  "text": "Anthony — here's the season as my records have it.\n\nThirteen games in, the Oaks are 11-2. They lost twice: in Indiana, 104-100, after being down 19 at the half and 20 after three, and at home to San Antonio, 126-117, in a Cup game with the score tied 90-90 going into the fourth. The five-game win streak ended with that Spurs loss. They're 3-1 in Cup play. Through 13 games they've won the fourth quarter ten times, lost it twice and tied it once. Current scoring is 113.9 a game, allowing 95.1.\n\nThe shape of the season: 0-4 in rookie camp and 0-5 in the preseason, 0-9 before a game that counted, then a 4-0 start that opened with the 85-82 home win over Charlotte — down 11 after three, won the fourth 36-22. Then the Indiana loss, then five straight wins over Toronto (135-75), Oklahoma City (101-95), Orlando (125-109), Philadelphia (120-106) and Denver in the Cup, a franchise-record 147-114 on 63 of 79 from the field, 80 percent, and 19 of 26 from three, with 40 assists and 5 turnovers. They were ranked number one in the NBA.com power rankings at 9-1, one of four ranked teams they had already beaten — Detroit at three, Oklahoma City at four, New York at six, Philadelphia at eight. Then San Antonio came in and won. This cycle they beat Denver at home 137-113 and won at Golden State 98-96 in a Cup game, coming back from 15 down at the half.\n\nOn the roster numbers: Adash Stanley 19.2 points, 6.2 assists, 53.8 percent from the field and 51.2 from three in 30.5 minutes. Austin Reaves 19.1 points in 32.9 minutes on 49.2 percent and 48.2 from three, and he's led or shared the team scoring lead in six of the thirteen games, including 32 against Denver in 22 minutes and 23 at Golden State. AJ Dybantsa 16.1 and 5.2 rebounds on 49.1 percent. Wendell Carter Jr. 10.4 and 9.6 on 64.1 percent. Dillon Brooks 12.5 in 28.1 minutes. Off the bench, Ty Jerome is at 15.2 points and 5.2 assists in 21.8 minutes on 59.1 percent, and has scored in double figures five straight games — 19, 28, 23, 14, 17. Harry Hayward, the second-round rookie on $4.5M, is at 7.6 and 5.2 in 17.5 minutes. Those are season to date.\n\nWhat my records do not hold: I don't have a single-cycle injury list, I don't have minute restrictions, and I don't have anything on Jerami Grant's status beyond what the Tribune has printed — he failed his medical after the trade and the matter sits with the league, per Elias Varek in C112. B. Simmons has been a DNP six straight games and Coen Carr, James Jr. and Tate have sat with him, but whether that's a basketball decision or something else, the feed doesn't say and neither will I.\n\nThe one honest summary: the Oaks finish games. Trailed at the half in Detroit and Golden State and won both. Trailed after three in Philadelphia and Charlotte and won both. The two fourth quarters they lost were the one already decided in Orlando and the San Antonio game — and that's the only home loss on the record."
+ },
+ {
+  "k": "record",
+  "q": "What has the Tribune printed about Danny Horn?",
+  "route": "GIA-RECORD",
+  "why": "the question is about what the tribune has printed",
+  "who": "Christine Nakamura",
+  "finish": "stop",
+  "secs": 13,
+  "reads": [
+   "canon_recall {\"query\":\"Danny Horn\"}",
+   "record_read {\"record\":\"What the Tribune has printed\",\"match\":\"Horn\"}",
+   "canon_recall {\"query\":\"Danny Horn best player in baseball Paulson backs Horn\"}",
+   "canon_recall {\"query\":\"Danny Horn wiffleball stabilization fund West Oakland\"}"
+  ],
+  "unmatched": [],
+  "text": "That's what my records hold on Danny Horn — here it is, newest first. Everything below is from the Tribune's own pages as I keep them.\n\n**In the Cycles (numbered):**\n\n- **C110 — \"DATA DESK: THE HORN LINE,\" Elliot Marbury (Sports).** The stat-desk treatment of his 2041 season: a home run every 11.1 at-bats over a full 621-at-bat, 148-game campaign — the densest power rate of the six seasons with complete lines on file — and, notably, not bought by swinging more. His strikeout rate that year, one every 9.6 at-bats, is the loosest of those six, making 2041 the first season in which both numbers moved the same way.\n- **C91 — a piece (no byline I can attribute) on the season's early going.** Horn arrived on a $37.8M-a-year deal that some in the national press called a gamble on an unproven star; fifteen games in he had six home runs. The same piece frames him against Henry Rivas and the rotation arithmetic.\n- **C90 — a piece (likewise unattributed in my record).** \"I have watched Danny Horn play center field in this city for seven seasons\" — the argument that he is the constant the lineup took for granted, and that what he found in the mechanics of his swing is \"not a blip.\"\n- **C79 — \"HORN, AITKEN, AND A WIFFLEBALL BAT: A'S PLAYERS CELEBRATE THE STABILIZATION FUND IN WEST OAKLAND,\" Tanya Cruz (Sideline Reporter, #InsideTheAs).** Horn showed up with 200 wiffleball bats and sponsored a block-party-style tournament in West Oakland celebrating the Stabilization Fund.\n- **C74 — Paulson's presser piece.** Notes Horn anchoring center field on Paulson's endorsement, alongside Davis, Keane's farewell season, and the Rivas–Coles rotation.\n- **C73 — \"THE CASE FOR DANNY HORN: BEST PLAYER IN BASEBALL?\" and \"PAULSON BACKS HORN: 'BEST PLAYER IN THE LEAGUE,'\" both Anthony Raines (Sports).** Horn said he's the best player in baseball; Paulson agreed — \"the most talented athlete and all-around best player in the league\" — citing 2040: .280, 32 homers, 98 RBIs, 35 steals, .524 slugging, 8.0 WAR.\n- **C108 — a daily by Anthony Raines** (your own page, Anthony): Horn's postseason card through 42 at-bats — .190, three RBIs, a zero in the home run column — with Horn quoted before Game 1 of the World Series: \"I know my numbers haven't been where I want them this postseason.\"\n\n**Before the Cycles:**\n\n- **\"Danny Horn vs. History: The Lightning in Center,\" Anthony Raines (Sports).**\n- **\"Part VI — Danny Horn and the Modern Center Field Crown,\" Hal Richmond (Sports).**\n\n**Outside the numbered run — supplemental material in my holdings, so flagging separately:** a C98 \"Center\" reflection on Horn inheriting the franchise from Vinnie Keane, predicting he leads the next generation to a championship, with a deep-dive note on a pivot toward youth and cost control and his .316 average, 13 homers, 31 RBIs, 19 steals; a C100 edition piece on the dynasty continuum and his $37.8M contract through 2044; and a C80 P Slayer fan column on the Bushrod Park wiffleball tournament in Temescal.\n\nTwo honest caveats: the C91 and C90 pieces are unattributed in my index, and my tool budget ran out before I could pull the full text of the two pre-Cycle pieces. If you want the complete words of those, say so and I'll read them fresh on the next pass."
+ },
+ {
+  "k": "cross",
+  "q": "What is Arturo Ramos worth in a trade?",
+  "route": "GIA-ROSTER",
+  "why": "the question is about the a's roster and money",
+  "who": "Daniel Yoon",
+  "finish": "stop",
+  "secs": 6,
+  "reads": [],
+  "unmatched": [],
+  "text": "*I pull the roster sheet up on the desk — I keep the money columns in front of me for exactly this kind of question.*\n\nAnthony — what I can give you is what the records hold: Ramos is 27, overall 91, an A-grade potential, three years of service (3.001), and coming off 4.6 WAR with a Cy Young runner-up and three All-Star nods. His deal is $8.2M in 2042 and $8.2M in 2043, then arbitration in 2044 and free agency after that. One option used of three. That contract is the whole story of his value: two years at $8.2M for a top-of-the-rotation arm is under market, and the two arb years behind it are still club-controlled, so a buyer is getting four seasons of control, not a rental.\n\nWhat my records do *not* hold is a trade valuation — I don't have a dollar figure or a prospect package on Ramos, and I'm not going to invent one for the Tribune. If you want the number the A's would put on him, that's a conversation for the front office, not for me. What I can tell you is the shape of it: he's the most valuable single asset on this roster after Horn, and any offer starts with a package, not a player."
+ },
+ {
+  "k": "cannot",
+  "q": "Who starts Friday's game for the A's?",
+  "route": null,
+  "why": "no Gridiron record covers it",
+  "finish": "no-record",
+  "secs": 0,
+  "reads": [],
+  "unmatched": [],
+  "text": "Gridiron Analytics does not hold a record on that."
+ },
+ {
+  "k": "cannot-oaks",
+  "q": "What should the Oaks' starting five be against Denver?",
+  "route": "GIA-OAKS",
+  "why": "the question is about the oaks",
+  "who": "Jade Soy",
+  "finish": "stop",
+  "secs": 14,
+  "reads": [
+   "record_read {\"record\":\"The Oaks\"}",
+   "memory_recall {\"query\":\"starting five\"}"
+  ],
+  "unmatched": [],
+  "text": "I'll give you what my records actually support, and be straight about what they don't.\n\n**What's settled:** Wilson Shepard named his starting five in C107 — Stanley, Brooks, Dybantsa, Jerami Grant, Wendell Carter Jr. Grant never played; he failed his post-trade medical and the matter went to the league (C112), so that slot has been filled game-to-game and I have no record of a formal re-declaration. Austin Reaves has started and played the heaviest minutes all season, and Carter Jr. has started at the five throughout. So the four I can stand behind as starters are **Stanley at the point, Reaves, Dybantsa and Wendell Carter Jr.**\n\n**The fifth slot:** Dillon Brooks has been the starter on the wing — 39 minutes in the Cup opener, 22 and 23 points in C114–C115. On form alone, though, the argument is for **T. Jerome** in that spot: 19, 28, 23, 14, 17 in his last five, 15.2 a game on 59 percent shooting and 46.6 from three, and he's been the sixth man all year. My honest read is you start Brooks for the defensive assignment and keep Jerome's minutes as they are, because the bench unit runs through him and the numbers say that's working.\n\nTwo caveats you should have on the record:\n- **Denver specifically:** the Oaks have already beaten the Nuggets twice, 147–114 on the road in C116 and 137–113 at home in C117. My feed doesn't carry the starting lineups from either game, so I can't tell you who Shepard actually opened with against them — only that Reaves went for 27 and 32 in the two meetings.\n- **Hayward:** his role is growing, but nothing in my records says Shepard has moved him into the first five.\n\nThat's my answer from the records. The lineup card itself is Wilson's to sign, and I don't speak for him."
+ },
+ {
+  "k": "none",
+  "q": "What's the weather going to be in Rockridge?",
+  "route": null,
+  "why": "no Gridiron record covers it",
+  "finish": "no-record",
+  "secs": 0,
+  "reads": [],
+  "unmatched": [],
+  "text": "Gridiron Analytics does not hold a record on that."
+ }
+]

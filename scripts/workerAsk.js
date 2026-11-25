@@ -64,6 +64,11 @@ async function askWorker({ officeId, question, asker, cycle, date }) {
 // One executor branch for any reporter tool loop: asks counted per wake, the answer handed back with who gave it.
 // agy 2026-11-23 pass 2 #3: every ask counts against the cap, finished or not; a worker call that fails never fails the
 // reporter's wake; only a finished answer comes back as speech (a cut-off one would be an unmanifested quote).
+// A reply that is a tool call written out as text (the model out of reads, mid-lookup: 2026-11-24 Gridiron test,
+// "<｜DSML｜ invoke name=\"record_read\">…" with finish "stop") is not an answer and never comes back as speech.
+const TOOL_MARKUP = /DSML|<\s*\|?\s*\/?\s*(?:invoke|calls|function_calls|tool_call)\b|<\s*parameter\s+name=/i;
+const isAnswer = (a) => !!(a && a.popid && a.text && ['stop', 'end_turn'].includes(a.finish) && !TOOL_MARKUP.test(a.text));
+
 function askExecutor(asker, cycle, log, alreadyUsed) {
   const answers = [];
   let used = Number(alreadyUsed) || 0;
@@ -73,7 +78,7 @@ function askExecutor(asker, cycle, log, alreadyUsed) {
     let a;
     try { a = await askWorker({ officeId: String(input.office || ''), question: input.question, asker, cycle }); }
     catch (e) { a = { officeId: String(input.office || ''), text: '', finish: 'error: ' + String(e && e.message || e).slice(0, 120) }; }
-    const finished = !!(a.popid && a.text && ['stop', 'end_turn'].includes(a.finish));
+    const finished = isAnswer(a);
     if (finished) answers.push(Object.assign({ question: String(input.question || '').trim() }, a));
     if (log) log('ask_worker ' + a.officeId + ' (' + (a.name || '?') + '): ' + (a.finish || '?') + ', ' + String(a.text || '').length + ' chars');
     if (finished) return a.name + ', ' + a.title + ', answered:\n' + a.text;
@@ -82,4 +87,4 @@ function askExecutor(asker, cycle, log, alreadyUsed) {
   return { run, answers, used: () => used };
 }
 
-module.exports = { askWorker, askWorkerTool, askExecutor, workers, ASKS_PER_WAKE };
+module.exports = { askWorker, askWorkerTool, askExecutor, workers, ASKS_PER_WAKE, isAnswer, TOOL_MARKUP };

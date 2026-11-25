@@ -894,7 +894,11 @@ function updateExistingBonds_(ctx) {
     // engine.178 (S438): WARMTH IS MAINTENANCE — a warm pair's neglected bond fades slower
     // (x0.75 at +2/+2), a cold pair's faster (x1.25) (doctrine §11: marriage is years of a
     // MAINTAINED bond).
-    if (!(aActive && bActive) && !hadMoment) {
+    // engine.356 (builder 2026-11-24: "lower it so we don't get eveyone hating each other but it's ok to have
+    // some rivalries"): crossing paths with a rival is not upkeep — a rival bond fades in a week the two did
+    // not both live, moment or not.
+    var momentHolds = hadMoment && !(bond.bondType === BOND_TYPES.RIVALRY || bond.bondType === BOND_TYPES.TENSION || bond.bondType === BOND_TYPES.SPORTS_RIVAL);
+    if (!(aActive && bActive) && !momentHolds) {
       var fadeRate = (aActive || bActive) ? bondDial_('bondFadeOneAbsent') : bondDial_('bondFadeBothAbsent');
       intensity -= fadeRate * (2 - bondWarmthFactor_(ctx, bond.citizenA, bond.citizenB));
     }

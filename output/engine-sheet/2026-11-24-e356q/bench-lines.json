@@ -1,0 +1,57 @@
+[
+[
+"line",
+"kid.bench1",
+"",
+"played catch with $CONTACT until it got too dark to see the ball",
+"40",
+"",
+"source:communityLife,auth:es-bench,dial:family:up,act:game,with:family,with:housemate,with:friend,with:neighbor,shared:both",
+"",
+"yes"
+],
+[
+"line",
+"kid.bench2",
+"",
+"stood at the fence with $CONTACT for a Saturday game at $PROGRAM",
+"40",
+"",
+"source:communityLife,auth:es-bench,dial:family:up,act:game,at:field,at:court,with:family,with:housemate,with:friend,shared:both",
+"",
+"yes"
+],
+[
+"line",
+"kid.bench3",
+"",
+"walked $CONTACT to school and waited at the gate",
+"40",
+"",
+"source:communityLife,auth:es-bench,dial:family:up,act:walk,at:school,with:family,with:housemate",
+"",
+"yes"
+],
+[
+"line",
+"kid.bench4",
+"",
+"sat up late with $CONTACT over the kitchen table",
+"40",
+"",
+"source:communityLife,auth:es-bench,dial:family:up,act:rest,with:family,with:housemate,shared:both",
+"",
+"yes"
+],
+[
+"line",
+"kid.bench5",
+"",
+"traded a look with $CONTACT across the room",
+"40",
+"",
+"source:communityLife,auth:es-bench,dial:sociability:up,with:stranger",
+"",
+"yes"
+]
+]

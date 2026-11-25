@@ -539,7 +539,7 @@ var ENGINE356_CONFIG_SEEDS = [
   ['bondMomentStepPartner', 0.25, 'engine.356: Intensity a romantic bond gains in a Cycle the couple shared a moment (a romance starts at 5.5 and marries at 8 — about 10 weeks of moments; builder: "Marriage at 10 weeks is good")', 0, 5, false],
   ['bondMomentStepFriend', 0.2, 'engine.356: Intensity a friendship / alliance / mentorship / neighbor / professional / festival bond gains in a Cycle the two shared a moment, on top of the weekly upkeep', 0, 5, false],
   ['bondMomentStepFamily', 0.1, 'engine.356: Intensity a family bond gains in a Cycle the two shared a moment, on top of the weekly upkeep', 0, 5, false],
-  ['bondMomentStepRival', 0.25, 'engine.356: Intensity a rivalry / tension / sports rivalry gains in a Cycle the two crossed paths', 0, 5, false],
+  ['bondMomentStepRival', 0.1, 'engine.356: Intensity a rivalry / tension / sports rivalry gains in a Cycle the two crossed paths; it does not hold off the fade (builder: "lower it so we don\'t get eveyone hating each other but it\'s ok to have some rivalries"; was 0.25 for one bench)', 0, 5, false],
   // engine.356 (builder 2026-11-24: "the cleaner way is to have the 'variants' outside of the code into world_config"): the bond engine's weekly numbers, at the values the code held
   ['bondWeeklyRival', 1.5, 'engine.356: a rivalry or tension gains in a Cycle both people lived (was 1.5 in code)', 0, 5, false],
   ['bondWeeklySportsRival', 1, 'engine.356: a sports rivalry gains in a Cycle both people lived (was 1.0 in code)', 0, 5, false],

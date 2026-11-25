@@ -2872,7 +2872,7 @@ function generateCitizensEvents_(ctx) {
   var withIdx_ = null;
   function loadWithIdx_() {
     if (withIdx_) return withIdx_;
-    withIdx_ = { live: Object.create(null), byBiz: Object.create(null), byHh: Object.create(null), bizOf: Object.create(null), hhOf: Object.create(null), rowOf: Object.create(null) };
+    withIdx_ = { live: Object.create(null), byBiz: Object.create(null), byHh: Object.create(null), bizOf: Object.create(null), hhOf: Object.create(null), rowOf: Object.create(null), minor: Object.create(null) };
     for (var wr = 0; wr < rows.length; wr++) {
       var wPop = String(rows[wr][iPopID] || "").trim().toUpperCase();
       if (!wPop || !nameByPop[wPop]) continue;
@@ -2880,12 +2880,25 @@ function generateCitizensEvents_(ctx) {
       if (wSt === "deceased" || wSt === "traded" || wSt === "pending" || wSt === "inactive") continue;
       withIdx_.live[wPop] = 1;
       withIdx_.rowOf[wPop] = wr;
+      var wBy = iBirthYear >= 0 ? Number(rows[wr][iBirthYear]) || 0 : 0;
+      if (wBy > 1900 && simYear - wBy < 18) withIdx_.minor[wPop] = 1;
       var wBiz = iEmployerBizCond >= 0 ? String(rows[wr][iEmployerBizCond] || "").trim() : "";
       if (/^BIZ-/.test(wBiz)) { withIdx_.bizOf[wPop] = wBiz; (withIdx_.byBiz[wBiz] = withIdx_.byBiz[wBiz] || []).push(wPop); }
       var wHh = iHousehold >= 0 ? String(rows[wr][iHousehold] || "").trim() : "";
       if (wHh) { withIdx_.hhOf[wPop] = wHh; (withIdx_.byHh[wHh] = withIdx_.byHh[wHh] || []).push(wPop); }
     }
     return withIdx_;
+  }
+  // engine.356 (builder 2026-11-24: "children can get events from youth programs , schools , sports games
+  // or teams"): a line may name a minor only when its own tags put it there — a youth program, a school, a
+  // field or court, a game. On any other line a minor is nobody to name, by any path (the ordinary pick,
+  // a bond's call, the template branch), and the twin of such a line is the only one a minor's record takes.
+  function childLine_(tags) {
+    for (var ci2 = 0; ci2 < (tags || []).length; ci2++) {
+      var ct = String(tags[ci2]).toLowerCase();
+      if (ct === 'at:youth-program' || ct === 'at:school' || ct === 'at:field' || ct === 'at:court' || ct === 'act:game' || ct.indexOf('prog:youth') === 0) return true;
+    }
+    return false;
   }
   function withAskFromTags_(tags) {
     var kinds = [];
@@ -2896,12 +2909,13 @@ function generateCitizensEvents_(ctx) {
     return kinds;
   }
   // { kinds: [kind, …] in first-seen order, by: { kind: [POPID, …] } } — everyone the line could name.
-  function withCandidates_(popId, bonds, askKinds) {
+  function withCandidates_(popId, bonds, askKinds, minorsOk) {
     var ix = loadWithIdx_();
     var self = String(popId || "").trim().toUpperCase();
     var out = { kinds: [], by: Object.create(null), bondOf: Object.create(null) };
     function add(kind, pop, bondType) {
       if (!pop || pop === self || !ix.live[pop]) return;
+      if (ix.minor[pop] && !minorsOk) return;
       if (!kind) return;
       if (askKinds.length ? askKinds.indexOf(kind) < 0 : kind === 'rival') return;
       if (!out.by[kind]) { out.by[kind] = []; out.kinds.push(kind); }
@@ -2926,11 +2940,11 @@ function generateCitizensEvents_(ctx) {
     return out;
   }
   function hasWith_(popId, bonds, tags) {
-    return withCandidates_(popId, bonds, withAskFromTags_(tags)).kinds.length > 0;
+    return withCandidates_(popId, bonds, withAskFromTags_(tags), childLine_(tags)).kinds.length > 0;
   }
   // { name, popId, kind, householdId } or null when the line can name nobody.
   function pickWith_(popId, bonds, tags) {
-    var wc = withCandidates_(popId, bonds, withAskFromTags_(tags));
+    var wc = withCandidates_(popId, bonds, withAskFromTags_(tags), childLine_(tags));
     if (!wc.kinds.length) return null;
     var wKind = wc.kinds[Math.floor(roll() * wc.kinds.length)];
     var wList = wc.by[wKind];
@@ -2991,10 +3005,10 @@ function generateCitizensEvents_(ctx) {
     if (oText === text) return;
     var oRow = rows[oi];
     // The other person's own gates (agy 2026-11-24 §1): a minor's record takes no line from an adult's week
-    // (engine.144 — a minor draws no adult line); a GAME-clock player takes no spectator line (engine.208);
+    // (engine.144 — a minor draws no adult line) but one at a youth program, a school or a game (childLine_); a GAME-clock player takes no spectator line (engine.208);
     // and the life-state gate every drawn line passes (engine.67) is passed for them too.
     var oBy = iBirthYear >= 0 ? Number(oRow[iBirthYear]) || 0 : 0;
-    if (oBy > 1900 && simYear - oBy < 18) return;
+    if (oBy > 1900 && simYear - oBy < 18 && !childLine_(tags)) return;
     if (String(oRow[iClock] || "").toUpperCase() === "GAME" && tags.indexOf("source:sports") >= 0) return;
     if (typeof deriveLifeState_ === 'function' && typeof isEventEligible_ === 'function') {
       var oLs = deriveLifeState_({
@@ -3027,12 +3041,13 @@ function generateCitizensEvents_(ctx) {
   }
   // The $CONTACT lines of this citizen's pool that fit a person of this kind (the row's with: asks; a row
   // with none fits anyone but a rival), not yet used this Cycle. Drawn by the row's own Weight.
-  function bondLineFor_(pool, kind, cycleSeen) {
+  function bondLineFor_(pool, kind, cycleSeen, otherIsMinor) {
     var fits = [];
     for (var bl = 0; bl < pool.length; bl++) {
       var le = pool[bl].ledgerLine;
       if (!le || !le.slots || le.slots.indexOf("CONTACT") < 0) continue;
       if (cycleSeen.indexOf(normText_(le.text)) >= 0) continue;
+      if (otherIsMinor && !childLine_(le.tags)) continue;   // a minor is named only at a youth program, a school or a game
       var asks = withAskFromTags_(le.tags);
       if (asks.length ? asks.indexOf(kind) < 0 : kind === 'rival') continue;
       fits.push({ entry: pool[bl], weight: drawMass_(pool[bl]) });   // the weight the ordinary draw sees: dial share, trait and dial leanings (agy 2026-11-24 §2)
@@ -4215,7 +4230,7 @@ function generateCitizensEvents_(ctx) {
     var entry = null;
     if (bondCall) {
       if ((bmCount_[popIdNorm] || 0) >= BM_MAX || (bmCount_[bondCall.popId] || 0) >= BM_MAX) continue; // the week is full, theirs or the other's
-      entry = bondLineFor_(pool, bondCall.kind, cycleSeen);
+      entry = bondLineFor_(pool, bondCall.kind, cycleSeen, !!loadWithIdx_().minor[bondCall.popId]);
       if (!entry) continue; // no line of that kind this citizen can draw — the call goes unanswered
     } else if (reservedGriefEntry) {
       entry = reservedGriefEntry;

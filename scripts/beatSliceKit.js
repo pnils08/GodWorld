@@ -308,7 +308,8 @@ function wire(seat) {
   }
   function build(cycle, opts = {}) {
     const root = opts.root || ROOT;
-    const beats = opts.beats || loadBeatTabs(root, cycle, seat.tabs);
+    // a record that reads no beat tab (the live sports seats: tabs []) does not wait on the beat dump's Cycle
+    const beats = opts.beats || ((seat.tabs || []).length ? loadBeatTabs(root, cycle, seat.tabs) : {});
     const profiles = opts.profiles || loadProfiles(root);
     const slice = seat.build(Number(cycle), { root, beats, profiles });
     if (slice && !slice.empty) slice.seat.builder = seat.builder;

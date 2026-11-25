@@ -180,7 +180,7 @@ function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bonds
   // deliberately excluded — recalled memory must not trigger opinion lines). Fed from
   // MemoryRegisters .biases (Task-6 fold); sentiment is bias-local, never dials.
   const biasLine = resonance.biasReadback(c.memReg,
-    [c.life, neighbors.map((n) => n.name).join(' '), bondsLine, familyLine, healthLine, sportsLine, textureLine, lifeArc, livedLine].filter(Boolean).join(' '));
+    [c.life, c.dayMoments, neighbors.map((n) => n.name).join(' '), bondsLine, familyLine, healthLine, sportsLine, textureLine, lifeArc, livedLine].filter(Boolean).join(' '));
   const opinions = biasLine ? `\n\nOpinions you carry: ${biasLine}` : '';
   const traj = dialTrajectory(c.baseDials, c.cur);                    // T1a trajectory (dormant until drain)
   const arcLine = (lifeArc ? `\n\nYour life so far: ${lifeArc}.` : '') // T1a self-state read-back (Log-sourced)
@@ -519,7 +519,8 @@ async function fileNextChapter(c, cycle, question, parsed, dry) {
       // family, their bonds, and a ripple from someone who crossed their path. A name
       // here is NOT an echo. Their page remembering a person is what a bond IS; that
       // is the signal, not the contamination.
-      own: [pageMemory, familyLine, bondsLine, rippleLine].filter(Boolean).join(' \n').slice(0, 6000),
+      // engine.356 cut C: the day's moments are the citizen's own week read back (agy 2026-11-25 3.1)
+      own: [pageMemory, familyLine, bondsLine, rippleLine, c.dayMoments].filter(Boolean).join(' \n').slice(0, 6000),
     }) + '\n');
   } catch (e) { logLine('offered-names log failed (non-fatal): ' + e.message); }
 

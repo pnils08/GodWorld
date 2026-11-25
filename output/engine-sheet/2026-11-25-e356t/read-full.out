@@ -1,0 +1,29 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌁ auth for agents [www.vestauth.com]
+{
+ "label": "full",
+ "cycle": "118",
+ "bondsBefore": 736,
+ "bondsAfter": 787,
+ "start": {
+  "coworker": 3,
+  "housemate": 3
+ },
+ "tally": {
+  "momentPairs": 21,
+  "made": {
+   "professional": 16,
+   "friendship": 1
+  },
+  "expected": 17,
+  "skippedMinorOrInactive": 0,
+  "skippedFamily": 1,
+  "hadBond": 3,
+  "stepped": 0,
+  "steppedChecked": 3,
+  "newBondsAllOrigins": 51
+ },
+ "problems": 0,
+ "first": [],
+ "notProven": [],
+ "verdict": "PASS"
+}

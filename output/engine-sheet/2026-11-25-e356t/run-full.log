@@ -1,0 +1,46 @@
+AIM = BENCH (script read the bench marker)
+== push code f45764d8a
+bench pull-back byte-identical to /root/GodWorld/output/engine-sheet/2026-11-25-e356t/e356t.sha256
+== sync from live
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+{"bondsBefore":736}
+{"fireGuardMinutes":"0","cycleCountFormatted":"117","cycleCountIsNumber":true}
+clearfire 118: {"ok":true,"cleared":{"cycle":118,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+appended 5 to Edition_Coverage_Ratings; marked rows on the tab now 5
+appended 26 to Citizen_Media_Usage; marked rows on the tab now 26
+appended 1 to Oakland_Sports_Feed; marked rows on the tab now 1
+bench cycleCount 117
+clearfire 118: {"ok":false,"error":"no readable fire record to clear"}
+fire C118 rc=0 "verdict": "PASS" "wallS": 226
+{
+ "label": "full",
+ "cycle": "118",
+ "bondsBefore": 736,
+ "bondsAfter": 787,
+ "start": {
+  "coworker": 3,
+  "housemate": 3
+ },
+ "tally": {
+  "momentPairs": 21,
+  "made": {
+   "professional": 16,
+   "friendship": 1
+  },
+  "expected": 17,
+  "skippedMinorOrInactive": 0,
+  "skippedFamily": 1,
+  "hadBond": 3,
+  "stepped": 0,
+  "steppedChecked": 3,
+  "newBondsAllOrigins": 51
+ },
+ "problems": 0,
+ "first": [],
+ "notProven": [],
+ "verdict": "PASS"
+}
+read 1 exit 0
+== final sync from live
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.

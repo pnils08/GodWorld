@@ -219,6 +219,18 @@ Builder 2026-11-15, overnight, on the flight standing idle after the first four 
 - Check: `worldViewCheck.js` (`STAFF` line) matches every `wk` to an Active roster row at that business and fails a roster row the page left off.
 - Checked (headless): West Oakland on a 60 s flight: eight people seen at their door, the card line as written; closest two strangers 0.37 m (0.49 to 0.55 m on the page before bonds, same measure); all 22 streets open without error. Not seen in two minutes stepped: anyone reaching a door on the residential stretch (the walk is long).
 
+## A person's day (2026-11-25, engine.356 cut C)
+
+Builder 2026-11-25, on the rules put to him: "go on a and b".
+
+- From the sim: a LifeHistory_Log row's part of the day (`EventTag` `when:morning|afternoon|evening`, written by the engine since stage 86), the place it names by id (the `PlaceId` cell, else its first `place:<id>` tag) and the person (`WithPopId`, else `contactPopId:`). A row with no `when:` is not on the day. Nothing is worked out on the page.
+- `build.js` → `p.day`: the person's timed rows of the Cycle, morning then afternoon then evening (the card's own order inside a part): `w` the part, `x` the engine's line whole, `b` the business it names when that business is on this street, `hh` the household, `wi` / `wn` the person.
+- `template.html` `build()`: a business or a home of the day that stands on the person's street is a spot (`kind: 'moment'`); the ones on their side of the road are `o.route`, in the day's order. A place on another street, or across the road, is not walked (nobody crosses the road); the line is on the person page either way, under "Through the day".
+- `life-people.js`: someone with a route goes to its places one after the other, round again after the last, in place of the random pick between door and work. The page has no clock (one dusk scene): the order is the order of the walk, not an hour. The person the moment names, when on that side and free, goes there too and stands a pace along; their card says "With <name>."; the walker's says "<Part> this week: <the line>".
+- Check: `worldViewCheck.js` `DAY` — every entry is one of the person's own timed rows, word for word, in order, at the business the row names; every timed row of a shown person is on their day. `BEATS=<dir>` points `build.js` and the check at another dump for a look-test.
+- Checked (headless, a scratch dump carrying the sandbox week of stage 86, since the live C117 week has no timed rows): 679 people with a day, 1,169 lines matched by the check. West Oakland stepped 600 s: 136 people, 96 with a day, 19 with a place of it on the street, 8 with one on their side, 1 seen standing at one (the card line as written); nobody seen brought along. No page error. On the live week the page is unchanged and the check passes.
+- Open: most timed moments name a person and no place (706 of 1,169), and the road-side rule leaves few walkable; a day is seen rarely on the street.
+
 ## The street's numbers (2026-11-15)
 
 - "The street's numbers" at the end of the top line opens the street's own `Neighborhood_Map` row for the cycle (mood, nightlife, noise, retail, draw for events, crime index, housing pressure, people moving in or out, median income and rent, marker, income tier, employers, council district) and its `Crime_Metrics` row (incidents, property and violent crime index, response time, clearance rate, trend, hotspot, pressure ratio), each value as the cell holds it, a number beside the span the 22 streets run across (`build.js` `h.nums`, `startNums()` in `template.html`). No unit is added that the tab does not give.

@@ -2,7 +2,7 @@
 {
  "label": "e356p-f1",
  "expect": 117,
- "at": "2026-11-25T03:56:19.604Z",
+ "at": "2026-11-25T04:07:18.495Z",
  "pre": {
   "bench": 117,
   "live": 117,
@@ -10,12 +10,12 @@
   "rileyLast": 117,
   "checkpoint": null
  },
- "wallS": 230,
+ "wallS": 188,
  "http": 200,
  "resp": {
   "ok": true,
   "state": "done",
-  "ranMs": 224865,
+  "ranMs": 183933,
   "persistErrors": [],
   "carryForward": [
    {

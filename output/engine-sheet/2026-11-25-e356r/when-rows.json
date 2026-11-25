@@ -1,0 +1,515 @@
+[
+ {
+  "row": 9,
+  "pool": "work.plumber",
+  "text": "kept a spare trap gasket in every pocket and used one before lunch",
+  "tags": "source:occupation,auth:library-s325,dial:drive:up,act:shift",
+  "add": [
+   "when:morning"
+  ]
+ },
+ {
+  "row": 16,
+  "pool": "work.paramedic",
+  "text": "caught a few hours of sleep on a cot between calls and called it a good night",
+  "tags": "source:occupation,auth:library-s325,dial:composure:up,act:shift",
+  "add": [
+   "when:evening"
+  ]
+ },
+ {
+  "row": 18,
+  "pool": "work.theater-director",
+  "text": "talked a nervous lead through opening night jitters in the wings",
+  "tags": "source:occupation,auth:library-s325,dial:warmth:up,act:shift,place:employer",
+  "add": [
+   "when:evening"
+  ]
+ },
+ {
+  "row": 25,
+  "pool": "work.janitor",
+  "text": "restocked the paper towels before the morning rush, like every morning",
+  "tags": "source:occupation,auth:library-s325,act:shift,place:employer",
+  "add": [
+   "when:morning"
+  ]
+ },
+ {
+  "row": 27,
+  "pool": "work.midwife",
+  "text": "packed the birth bag the night before and checked it twice anyway",
+  "tags": "source:occupation,auth:library-s325,dial:integrity:up,act:shift",
+  "add": [
+   "when:evening"
+  ]
+ },
+ {
+  "row": 63,
+  "pool": "work.herbalist",
+  "text": "measured out a tincture drop by drop against the afternoon light",
+  "tags": "source:occupation,auth:library-s325,dial:composure:up,act:shift,place:employer",
+  "add": [
+   "when:afternoon"
+  ]
+ },
+ {
+  "row": 65,
+  "pool": "work.retail-worker",
+  "text": "refolded the sweater table for the fourth time before noon",
+  "tags": "source:occupation,auth:library-s325,dial:drive:down,act:shift,place:employer",
+  "add": [
+   "when:morning"
+  ]
+ },
+ {
+  "row": 67,
+  "pool": "work.retail-worker",
+  "text": "counted the register down to the penny at closing",
+  "tags": "source:occupation,auth:library-s325,dial:integrity:up,act:shift,place:employer",
+  "add": [
+   "when:evening"
+  ]
+ },
+ {
+  "row": 77,
+  "pool": "work.security-guard",
+  "text": "walked the same loop past midnight and noticed the light that was finally fixed",
+  "tags": "source:occupation,auth:library-s325,dial:composure:up,act:shift,place:employer",
+  "add": [
+   "when:evening"
+  ]
+ },
+ {
+  "row": 110,
+  "pool": "age.teen",
+  "text": "skipped the bus to walk with friends and blamed the weather for being late",
+  "tags": "source:age,auth:library-s325,dial:integrity:down,act:walk",
+  "add": [
+   "when:morning"
+  ]
+ },
+ {
+  "row": 120,
+  "pool": "retirement.depth",
+  "text": "found an old photograph and spent the afternoon remembering the story behind it",
+  "tags": "source:retirement,auth:library-s325,dial:warmth:up,act:rest",
+  "add": [
+   "when:afternoon"
+  ]
+ },
+ {
+  "row": 170,
+  "pool": "work.line-cook",
+  "text": "burned their forearm on a sheet pan and didn't even flinch during the dinner rush",
+  "tags": "source:occupation,auth:library-s325,dial:composure:up,act:shift,place:employer",
+  "add": [
+   "when:evening"
+  ]
+ },
+ {
+  "row": 174,
+  "pool": "work.janitor",
+  "text": "pushed the wide broom down the school hallway after the bell rang and enjoyed the total silence",
+  "tags": "source:occupation,auth:library-s325,dial:composure:up,act:shift,place:employer",
+  "add": [
+   "when:afternoon"
+  ]
+ },
+ {
+  "row": 214,
+  "pool": "work.tech",
+  "text": "watched the morning shuttles roll along the waterfront into the Baylight District and timed their own walk to beat them",
+  "tags": "source:neighborhood,auth:library-s325,dial:outabout:up,act:shift",
+  "add": [
+   "when:morning"
+  ]
+ },
+ {
+  "row": 215,
+  "pool": "work.hospital",
+  "text": "grabbed coffee from the cart outside the hospital before the morning rush hit",
+  "tags": "source:neighborhood,auth:library-s325,dial:outabout:up,act:shift",
+  "add": [
+   "when:morning"
+  ]
+ },
+ {
+  "row": 225,
+  "pool": "hood.temescal",
+  "text": "waited thirty minutes for a table at a brunch spot because the out-of-town friends insisted on it",
+  "tags": "source:neighborhood,auth:library-s325,dial:sociability:up,act:meal",
+  "add": [
+   "when:morning"
+  ]
+ },
+ {
+  "row": 227,
+  "pool": "work.tech",
+  "text": "badged into the Baylight office early and tried not to think about the protestors from last month",
+  "tags": "source:occupation,auth:library-s325,dial:composure:down,act:shift,place:employer",
+  "add": [
+   "when:morning"
+  ]
+ },
+ {
+  "row": 229,
+  "pool": "work.tech",
+  "text": "checked the housing market in Rockridge on their lunch break and realized they could actually afford it",
+  "tags": "source:economy,auth:library-s325,act:shift",
+  "add": [
+   "when:afternoon"
+  ]
+ },
+ {
+  "row": 234,
+  "pool": "family.parenting",
+  "text": "sat in the bleachers at the recreation center and watched their kid strike out looking",
+  "tags": "source:familyLife,auth:library-s325,dial:family:up,act:game",
+  "add": [
+   "when:afternoon"
+  ]
+ },
+ {
+  "row": 255,
+  "pool": "family.parenting",
+  "text": "showed up to work with a burp cloth still on one shoulder and didn't notice until lunch",
+  "tags": "source:familyLife,auth:library-s356,dial:family:up,act:shift",
+  "add": [
+   "when:morning"
+  ]
+ },
+ {
+  "row": 325,
+  "pool": "evening.cityEvent",
+  "text": "wandered through the late-night market stalls, clutching a paper cup of hot tea",
+  "tags": "source:prevEvening,evening:cityEvent,auth:auto,dial:outabout:up,act:meal",
+  "add": [
+   "when:evening"
+  ]
+ },
+ {
+  "row": 334,
+  "pool": "evening.downtown",
+  "text": "lined up at the night market stall that always runs out of skewers by 10pm",
+  "tags": "source:prevEvening,evening:cityEvent,auth:auto,dial:outabout:up,act:meal",
+  "add": [
+   "when:evening"
+  ]
+ },
+ {
+  "row": 889,
+  "pool": "hood.uptown",
+  "text": "waited a long while for a table at Telegraph Supper Club",
+  "tags": "source:neighborhood,auth:rb-1030,dial:composure:down,act:meal,place:BIZ-00211",
+  "add": [
+   "when:evening"
+  ]
+ },
+ {
+  "row": 890,
+  "pool": "hood.uptown",
+  "text": "spent an afternoon at the Oakland Sound Archive listening to recordings",
+  "tags": "source:communityLife,auth:rb-1030,dial:openness:up,act:visit,place:PRG-012",
+  "add": [
+   "when:afternoon"
+  ]
+ },
+ {
+  "row": 896,
+  "pool": "hood.kono",
+  "text": "waited for a seat at Han River BBQ on a Friday night",
+  "tags": "source:neighborhood,auth:rb-1030,dial:composure:down,act:meal,place:BIZ-00214",
+  "add": [
+   "when:evening"
+  ]
+ },
+ {
+  "row": 898,
+  "pool": "hood.kono",
+  "text": "browsed the evening window display at Twentieth Street Gallery off Telegraph",
+  "tags": "source:neighborhood,auth:rb-1030,dial:openness:up,act:errand,place:BIZ-00159",
+  "add": [
+   "when:evening"
+  ]
+ },
+ {
+  "row": 905,
+  "pool": "hood.adams-point",
+  "text": "walked past the chalk-dusted crowd outside Point Climbing Gym after work",
+  "tags": "source:neighborhood,auth:rb-1030,dial:drive:up,act:walk",
+  "add": [
+   "when:evening"
+  ]
+ },
+ {
+  "row": 910,
+  "pool": "hood.brooklyn",
+  "text": "rented a kayak at Shoreline Kayak & Paddle before breakfast",
+  "tags": "source:neighborhood,auth:rb-1030,dial:outabout:up,act:errand,place:BIZ-00258",
+  "add": [
+   "when:morning"
+  ]
+ },
+ {
+  "row": 915,
+  "pool": "hood.dimond",
+  "text": "watched the kids run drills at the Oakland A's Alumni Youth Clinics on a Saturday morning",
+  "tags": "source:communityLife,auth:rb-1030,dial:fandom:up,act:game,place:PRG-007",
+  "add": [
+   "when:morning"
+  ]
+ },
+ {
+  "row": 922,
+  "pool": "hood.glenview",
+  "text": "walked the kids up the hill to Hillside Family Market after school",
+  "tags": "source:neighborhood,auth:rb-1030,dial:family:up,act:errand,place:BIZ-00139",
+  "add": [
+   "when:afternoon"
+  ]
+ },
+ {
+  "row": 930,
+  "pool": "hood.san-antonio",
+  "text": "stood in line at Panadería La Doce before the early shift started",
+  "tags": "source:neighborhood,auth:rb-1030,dial:drive:up,act:errand,place:BIZ-00262",
+  "add": [
+   "when:morning"
+  ]
+ },
+ {
+  "row": 938,
+  "pool": "hood.east-oakland",
+  "text": "walked past the afternoon line outside the Stabilization Fund disbursement office",
+  "tags": "source:neighborhood,auth:rb-1030,dial:composure:down,act:walk",
+  "add": [
+   "when:afternoon"
+  ]
+ },
+ {
+  "row": 944,
+  "pool": "hood.chinatown",
+  "text": "walked the kids past the afternoon crowd letting out of Harrison Street Chinese School",
+  "tags": "source:neighborhood,auth:rb-1030,dial:family:up,act:walk",
+  "add": [
+   "when:afternoon"
+  ]
+ },
+ {
+  "row": 956,
+  "pool": "hood.baylight-district",
+  "text": "ate lunch at Bubic Burgers beside the build",
+  "tags": "source:neighborhood,auth:rb-1030,dial:outabout:up,act:meal,place:BIZ-00104",
+  "add": [
+   "when:afternoon"
+  ]
+ },
+ {
+  "row": 964,
+  "pool": "hood.rockridge",
+  "text": "bought a bottle at Rockridge Wine Merchants before the dinner guests came",
+  "tags": "source:neighborhood,auth:rb-1030,dial:sociability:up,act:errand,place:BIZ-00225",
+  "add": [
+   "when:afternoon"
+  ]
+ },
+ {
+  "row": 965,
+  "pool": "hood.rockridge",
+  "text": "had a long lunch at Claremont Table with friends from the block",
+  "tags": "source:neighborhood,auth:rb-1030,dial:outabout:up,act:meal,place:BIZ-00169",
+  "add": [
+   "when:afternoon"
+  ]
+ },
+ {
+  "row": 967,
+  "pool": "hood.eastlake",
+  "text": "ordered a bowl of pho from the counter at Lakeshore Pho House before the lunch rush",
+  "tags": "source:neighborhood,auth:rb-1030,dial:outabout:up,act:meal,place:BIZ-00252",
+  "add": [
+   "when:morning"
+  ]
+ },
+ {
+  "row": 1050,
+  "pool": "down.drive",
+  "text": "promised themselves an early start and turned the alarm off twice",
+  "tags": "source:reflection,auth:rb-1117,dial:drive:down,act:rest",
+  "add": [
+   "when:morning"
+  ]
+ },
+ {
+  "row": 1171,
+  "pool": "community.program",
+  "text": "stayed late to help rake the infield at $PROGRAM",
+  "tags": "source:communityLife,auth:es-1124,dial:warmth:up,act:service,at:field",
+  "add": [
+   "when:evening"
+  ]
+ },
+ {
+  "row": 1172,
+  "pool": "community.program",
+  "text": "watched their kid ride the bench all morning at $PROGRAM and said nothing on the drive home",
+  "tags": "source:communityLife,auth:es-1124,dial:composure:down,act:game,at:field,at:court",
+  "add": [
+   "when:morning"
+  ]
+ },
+ {
+  "row": 1181,
+  "pool": "community.program",
+  "text": "sat in on an evening session at $PROGRAM and took notes on the back of a receipt",
+  "tags": "source:communityLife,auth:es-1124,dial:drive:up,act:visit,at:lab,at:school,at:office",
+  "add": [
+   "when:evening"
+  ]
+ },
+ {
+  "row": 1193,
+  "pool": "with.person",
+  "text": "had dinner with $CONTACT at $VENUE",
+  "tags": "source:communityLife,auth:es-1124,dial:sociability:up,act:meal,with:friend,with:family,with:partner,shared:both",
+  "add": [
+   "when:evening"
+  ]
+ },
+ {
+  "row": 1194,
+  "pool": "with.person",
+  "text": "met $CONTACT for coffee at $VENUE and lost track of the hour",
+  "tags": "source:communityLife,auth:es-1124,dial:sociability:up,act:meal,with:friend,with:colleague,with:coworker,shared:both",
+  "add": [
+   "when:morning",
+   "when:afternoon"
+  ]
+ },
+ {
+  "row": 1199,
+  "pool": "with.person",
+  "text": "sat on $CONTACT's steps until the streetlights came on",
+  "tags": "source:communityLife,auth:es-1124,dial:sociability:up,act:visit,place:their-home,with:neighbor,with:friend",
+  "add": [
+   "when:evening"
+  ]
+ },
+ {
+  "row": 1200,
+  "pool": "with.person",
+  "text": "talked with $CONTACT over the fence about nothing in particular",
+  "tags": "source:communityLife,auth:es-1124,dial:sociability:up,with:neighbor,shared:both",
+  "add": [
+   "when:morning",
+   "when:afternoon",
+   "when:evening"
+  ]
+ },
+ {
+  "row": 1201,
+  "pool": "with.person",
+  "text": "cooked at home with $CONTACT and left the dishes for morning",
+  "tags": "source:homeLife,auth:es-1124,dial:family:up,act:meal,with:housemate,shared:both",
+  "add": [
+   "when:evening"
+  ]
+ },
+ {
+  "row": 1203,
+  "pool": "with.person",
+  "text": "called $CONTACT just to hear how the week went",
+  "tags": "source:familyLife,auth:es-1124,dial:family:up,with:family",
+  "add": [
+   "when:afternoon",
+   "when:evening"
+  ]
+ },
+ {
+  "row": 1204,
+  "pool": "with.person",
+  "text": "stayed late to finish the count with $CONTACT",
+  "tags": "source:occupation,auth:es-1124,dial:drive:up,act:shift,place:employer,with:coworker,shared:both",
+  "add": [
+   "when:evening"
+  ]
+ },
+ {
+  "row": 1206,
+  "pool": "with.person",
+  "text": "asked $CONTACT how they would handle it, and listened",
+  "tags": "source:communityLife,auth:es-1124,dial:openness:up,with:mentor,with:colleague",
+  "add": [
+   "when:morning",
+   "when:afternoon"
+  ]
+ },
+ {
+  "row": 1207,
+  "pool": "with.person",
+  "text": "crossed the street rather than pass $CONTACT",
+  "tags": "source:communityLife,auth:es-1124,dial:sociability:down,with:rival",
+  "add": [
+   "when:morning",
+   "when:afternoon",
+   "when:evening"
+  ]
+ },
+ {
+  "row": 1208,
+  "pool": "with.person",
+  "text": "saw $CONTACT across the room and stayed on their own side of it",
+  "tags": "source:communityLife,auth:es-1124,dial:composure:down,with:rival",
+  "add": [
+   "when:afternoon",
+   "when:evening"
+  ]
+ },
+ {
+  "row": 1209,
+  "pool": "with.child",
+  "text": "walked $CONTACT to school and waited at the gate until the bell",
+  "tags": "source:familyLife,auth:es-1125,dial:family:up,act:walk,at:school,with:family,with:housemate",
+  "add": [
+   "when:morning"
+  ]
+ },
+ {
+  "row": 1210,
+  "pool": "with.child",
+  "text": "sat through the school assembly beside $CONTACT and clapped at the wrong moment",
+  "tags": "source:familyLife,auth:es-1125,dial:family:up,act:visit,at:school,with:family,with:housemate,shared:both",
+  "add": [
+   "when:morning",
+   "when:afternoon"
+  ]
+ },
+ {
+  "row": 1211,
+  "pool": "with.child",
+  "text": "stayed after school with $CONTACT to finish the project due in the morning",
+  "tags": "source:familyLife,auth:es-1125,dial:drive:up,act:visit,at:school,with:family,with:housemate,with:friend,shared:both",
+  "add": [
+   "when:afternoon"
+  ]
+ },
+ {
+  "row": 1215,
+  "pool": "with.child",
+  "text": "dropped $CONTACT at $PROGRAM and stayed to help stack the chairs",
+  "tags": "source:familyLife,auth:es-1125,dial:warmth:up,act:service,at:youth-program,with:family,with:housemate,with:neighbor",
+  "add": [
+   "when:afternoon"
+  ]
+ },
+ {
+  "row": 1216,
+  "pool": "with.child",
+  "text": "spent the afternoon with $CONTACT at $PROGRAM and lost at a game they had just learned",
+  "tags": "source:familyLife,auth:es-1125,dial:sociability:up,act:visit,at:youth-program,with:family,with:housemate,with:friend,shared:both",
+  "add": [
+   "when:afternoon"
+  ]
+ }
+]

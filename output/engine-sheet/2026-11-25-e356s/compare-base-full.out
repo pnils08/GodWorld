@@ -1,0 +1,8 @@
+{
+ "bonds": 772,
+ "logRows": 3453,
+ "rowsWithACellInFull": 914,
+ "differences": 0,
+ "first": [],
+ "verdict": "IDENTICAL"
+}

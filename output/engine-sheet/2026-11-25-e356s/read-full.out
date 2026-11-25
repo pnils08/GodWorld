@@ -1,0 +1,22 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ override existing { override: true }
+{
+ "label": "full",
+ "cycle": "118",
+ "tally": {
+  "rows": 3453,
+  "withPlace": 505,
+  "withPerson": 836,
+  "both": 427,
+  "placeKinds": {
+   "HH": 74,
+   "BIZ": 324,
+   "PRG": 107
+  },
+  "bondEngineRows": 38,
+  "wider": 0
+ },
+ "problems": 0,
+ "first": [],
+ "notProven": [],
+ "verdict": "PASS"
+}

@@ -19,6 +19,8 @@ pointers:
 
 ## Current sandbox — full trail
 
+**`SANDBOX 1004` = PROD stage 86 + two files at `3a8e02cc3` (2026-11-25, engine-sheet, engine.356 cut A5 the place and the person on the life log) = PROD stage 87.** Manifest `output/engine-sheet/2026-11-25-e356s/e356s.sha256` (pull-back byte-identical). Two labelled runs (`run.sh <commit> <label>`), each from a live sync (the live log already carries the PlaceId / WithPopId headers): base (`4866ee600`, stage 86) C118 PASS 224 s, 3,453 rows, 0 with either cell; full (`3a8e02cc3`) C118 PASS 293 s — `read.js` PASS: 3,453 rows, 505 with a PlaceId (324 businesses, 107 programs, 74 households), 836 with a WithPopId (38 on bond-engine rows), 427 with both; every cell equals its row's tag, every id is on its ledger, nothing right of WithPopId; 0 problems, nothing unproven. `compare.js base full`: IDENTICAL — 772 of 772 bonds, 3,453 of 3,453 rows (POPID, EventTag, EventText) in the same order. Resynced from live after each run. (Then fired for cut B — see the PROD log when it lands.)
+
 **`SANDBOX 1004` = PROD stage 85 + two files at `4866ee600` (2026-11-25, engine-sheet, engine.356 cut A4 the part of the day on a line) = PROD stage 86.** Manifest `output/engine-sheet/2026-11-25-e356r/e356r.sha256` (pull-back byte-identical). Two labelled runs (`run.sh <commit> <label>`), each from a live sync with the line rows' own times written to the bench tab: base (`71fc2eb9d`, stage 85; 56 rows) C118 PASS 238 s, 3,453 lines; full (`4866ee600`; 83 rows) C118 PASS 227 s — `read.js` PASS: 3,453 lines, 1,169 carry a part (morning 352, afternoon 380, evening 437) on 679 people, 2,284 carry none; 316 twin pairs share their part; the spread replayed on 853 lines (308 with a choice) — each took a least-held part; 0 problems, nothing unproven. `compare.js base full`: IDENTICAL — 772 of 772 bonds, 3,453 of 3,453 log rows in the same order once `when:` is stripped. Resynced from live after each run.
 
 **`SANDBOX 1004` = PROD stage 84 + three files at `71fc2eb9d` (2026-11-25, engine-sheet, engine.356 bond numbers on World_Config, child lines, rival fade) = PROD stage 85.** Manifest `output/engine-sheet/2026-11-24-e356q/e356q.sha256` (pull-back byte-identical). Three labelled runs (`run.sh <commit> base|move|full`), each one fire from a live sync; whole-week dumps `after-<label>.json`, reads `read1-<label>.out`, `compare-base-move.out`. Left synced from live.
@@ -227,6 +229,14 @@ pointers:
 ---
 
 ## PROD deploy log — full trail
+
+### PROD stage 87 — a life-log row names its place and its person (2026-11-25, engine-sheet, engine.356 cut A5)
+
+- **What:** two files at `3a8e02cc3` on stage 86 — `phase05-citizens/generateCitizensEvents.js` (`lifeLogEdgeCells_`: cell 8 PlaceId = the line's first `place:` tag that is an id, never the words employer / their-home / congregation; cell 9 WithPopId = its `contactPopId:`; both row writers), `phase05-citizens/bondEngine.js` (`appendBondLifeLine_` writes the other person in cell 9). Headers PlaceId, WithPopId written to live LifeHistory_Log and LifeHistory_Archive H1:I1 before the push (read back).
+- **Proof:** **Bench SANDBOX 1004** — §Current sandbox, top entry: base and full C118 PASS, the read PASS, the comparison IDENTICAL. agy review sent after the push (`docs/for-claude-review/2026-11-25-es-brief-agy-e356-a5-bond-wake.md`).
+- **Stage 87 (2026-11-25):** live pulled = stage 86 (`e356r-prod.sha256`); two files changed; built tree = the benched tree (`e356s.sha256`); manifest `output/engine-sheet/2026-11-25-e356s/e356s-prod.sha256`; pull-back byte-identical; version cut **@222**.
+- **Smoke at C118:** on the week's LifeHistory_Log rows, about 500 carry a PlaceId and about 830 a WithPopId, each equal to the row's own tag; rows from other writers end at Cycle; the archive move keeps nine cells; the beat dump carries the two keys.
+- **Back out:** the two files from `4866ee600` (= `e356r-prod.sha256`) + version cut; the two headers can stay (stage 86 writes seven cells).
 
 ### PROD stage 86 — a moment carries its part of the day (2026-11-25, engine-sheet, engine.356 cut A4)
 

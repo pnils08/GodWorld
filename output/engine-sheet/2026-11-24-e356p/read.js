@@ -19,7 +19,7 @@ process.env.GODWORLD_SHEET_ID = idm[1];
 const sheets = require('/root/GodWorld/lib/sheets');
 const C = String(process.argv[2]);
 const bench = JSON.parse(fs.readFileSync(__dirname + '/bench-lines.json', 'utf8'));
-const KIND = { friendship: 'friend', alliance: 'friend', family: 'family', romantic: 'partner', neighbor: 'neighbor', mentorship: 'mentor', rivalry: 'rival', sports_rival: 'rival', tension: 'rival', professional: 'colleague' };
+const KIND = { friendship: 'friend', alliance: 'friend', family: 'family', romantic: 'partner', neighbor: 'neighbor', mentorship: 'mentor', rivalry: 'rival', sports_rival: 'rival', tension: 'rival', professional: 'colleague', festival: 'acquaintance' };
 const DEAD = { deceased: 1, traded: 1, pending: 1, inactive: 1 };
 const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 // each bench line as a matcher: its text with the slots open, and the kinds it asks for
@@ -39,11 +39,13 @@ const lines = bench.map(b => ({
   const bondKinds = {}; // "A|B" -> { kind: status }
   for (const b of bonds) {
     const a = String(b.CitizenA || '').trim().toUpperCase(), c = String(b.CitizenB || '').trim().toUpperCase();
-    const k = KIND[String(b.BondType || '').toLowerCase()] || 'bond';
-    for (const key of [a + '|' + c, c + '|' + a]) { (bondKinds[key] = bondKinds[key] || {})[k] = String(b.Status || '').toLowerCase(); }
+    const k = KIND[String(b.BondType || '').trim().toLowerCase()];
+    if (!k) continue;
+    const st = String(b.Status || '').toLowerCase();
+    for (const key of [a + '|' + c, c + '|' + a]) { const m = (bondKinds[key] = bondKinds[key] || {}); if (m[k] !== 'active') m[k] = st; } // an active row wins
   }
   const problems = [], notes = [], byKind = {}, byLine = {}, ex = {};
-  let engineLines = 0, lineCount = 0, raw = 0, vague = 0, homes = 0, shifts = 0, twoSlot = 0;
+  let homesNoHousehold = 0, engineLines = 0, lineCount = 0, raw = 0, vague = 0, homes = 0, shifts = 0, twoSlot = 0;
   for (const r of log) {
     const t = r.EventText || '', parts = String(r.EventTag || '').split('|'), self = String(r.POPID).trim().toUpperCase();
     if (/\$CONTACT/.test(t)) { raw++; problems.push('unfilled $CONTACT on the log: ' + t.slice(0, 80)); }
@@ -72,7 +74,7 @@ const lines = bench.map(b => ({
     if (ln) {
       byLine[ln.text] = (byLine[ln.text] || 0) + 1;
       if (ln.asks.length && ln.asks.indexOf(k) < 0) problems.push('kind ' + k + ' is not one the line asks for (' + ln.asks.join(',') + '): ' + t.slice(0, 70));
-      if (!ln.asks.length && (k === 'coworker' || k === 'housemate')) problems.push('a line with no ask drew a ' + k + ': ' + t.slice(0, 70));
+      if (!ln.asks.length && (k === 'coworker' || k === 'housemate' || k === 'rival')) problems.push('a line with no ask drew a ' + k + ': ' + t.slice(0, 70));
     } else notes.push('contact line that is no bench line: ' + t.slice(0, 80) + ' [' + parts[0] + ']');
     const me = P[self] || {};
     if (k === 'coworker') { if (!/^BIZ-/.test(me.biz) || me.biz !== op.biz) problems.push(self + ' / ' + o + ' are not at one employer (' + me.biz + ' / ' + op.biz + ')'); }
@@ -83,8 +85,10 @@ const lines = bench.map(b => ({
       else if (bk[k] !== 'active') notes.push(self + ' / ' + o + ' ' + k + ' bond is ' + bk[k] + ' after the fire');
     }
     const pls = parts.filter(p => p.indexOf('place:') === 0).map(p => p.slice(6));
+    if (pls.length > 1) problems.push('two places on one line: ' + parts.join('|').slice(0, 120));
+    if (Object.values(KIND).concat(['coworker', 'housemate']).indexOf(k) < 0) problems.push('a kind that is no kind: with:' + k);
     if (ln && ln.theirHome) {
-      homes++;
+      homes++; if (!op.hh) homesNoHousehold++;
       if (op.hh ? (pls.length !== 1 || pls[0] !== op.hh) : pls.length) problems.push('their-home line place ' + pls.join(',') + ' is not ' + o + '\'s household ' + (op.hh || '(none)'));
     }
     if (ln && ln.shift) { shifts++; if (pls.length !== 1 || pls[0] !== me.biz) problems.push('shift line place ' + pls.join(',') + ' is not the citizen\'s employer ' + me.biz); }
@@ -92,12 +96,12 @@ const lines = bench.map(b => ({
     (ex[k] = ex[k] || []).length < 3 && ex[k].push(r.Name + ' (' + r.Neighborhood + '): ' + t.slice(0, 110) + '  [' + parts.filter(p => /^(with|place|contactPopId|act):/.test(p)).join(' ') + ']');
   }
   if (!log.length) problems.push('no log rows for C' + C);
+  if (!lineCount) problems.push('0 with-whom lines landed');
   const want = ['friend', 'family', 'neighbor', 'coworker', 'housemate', 'rival', 'colleague', 'partner'];
   const notProven = want.filter(k => !byKind[k]).map(k => 'kind ' + k).concat(homes ? [] : ['their-home']).concat(shifts ? [] : ['shift with a coworker']).concat(twoSlot ? [] : ['person + place']);
   const out = { cycle: +C, lines: log.length, people: new Set(log.map(r => r.POPID)).size, bondEngineContactLines: engineLines,
-    withLines: lineCount, byKind, byLine, theirHomeLines: homes, shiftLines: shifts, personAndPlaceLines: twoSlot, someoneFamiliar: vague,
+    withLines: lineCount, byKind, byLine, theirHomeLines: homes, theirHomeWithNoHouseholdOnTheirRow: homesNoHousehold, shiftLines: shifts, personAndPlaceLines: twoSlot, someoneFamiliar: vague,
     notProven, examples: ex, notes: notes.slice(0, 12), problems, verdict: problems.length ? 'FAIL' : (lineCount ? (notProven.length ? 'PASS, not proven: ' + notProven.join(', ') : 'PASS') : 'FAIL') };
-  if (!lineCount) problems.push('0 with-whom lines landed');
   console.log(JSON.stringify(out, null, 1));
   process.exit(problems.length ? 1 : 0);
 })().catch(e => { console.error(e); process.exit(2); });

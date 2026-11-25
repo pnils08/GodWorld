@@ -2853,9 +2853,12 @@ function generateCitizensEvents_(ctx) {
   // engine.356 cut A3 (builder 2026-11-24: "all of these since bonds can read these as well"): the second
   // person of a moment. The old picker read b.otherPopId, a field no bond record carries (citizenA /
   // citizenB), so it named nobody and burned six rolls a line. A line says who it can be with by with:<kind>
-  // tags on its row (any of them); no with: tag = any bonded person.
+  // tags on its row (any of them); no with: tag = any bonded person but a rival — a line about the rival
+  // asks for one (agy 2026-11-24 §1: an untagged warm line drew the rival as often as all the friends).
   //   friend (friendship, alliance) · family · partner (romantic) · neighbor · mentor · rival (rivalry,
-  //   sports_rival, tension) · colleague (professional bond)       — from Relationship_Bonds
+  //   sports_rival, tension) · colleague (professional bond) · acquaintance (festival)
+  //                                                                — from Relationship_Bonds; a bond of a
+  //                                                                  type not listed here names nobody
   //   coworker  — same BIZ- employer on the ledger row, bond or none
   //   housemate — same HouseholdId
   // Never the citizen; never a person whose Status is deceased / traded / pending / inactive, or who has no
@@ -2863,7 +2866,8 @@ function generateCitizensEvents_(ctx) {
   // large employer does not swamp two friends.
   var WITH_KIND_BY_BOND_ = {
     friendship: 'friend', alliance: 'friend', family: 'family', romantic: 'partner', neighbor: 'neighbor',
-    mentorship: 'mentor', rivalry: 'rival', sports_rival: 'rival', tension: 'rival', professional: 'colleague'
+    mentorship: 'mentor', rivalry: 'rival', sports_rival: 'rival', tension: 'rival', professional: 'colleague',
+    festival: 'acquaintance'
   };
   var withIdx_ = null;
   function loadWithIdx_() {
@@ -2897,7 +2901,8 @@ function generateCitizensEvents_(ctx) {
     var out = { kinds: [], by: Object.create(null) };
     function add(kind, pop) {
       if (!pop || pop === self || !ix.live[pop]) return;
-      if (askKinds.length && askKinds.indexOf(kind) < 0) return;
+      if (!kind) return;
+      if (askKinds.length ? askKinds.indexOf(kind) < 0 : kind === 'rival') return;
       if (!out.by[kind]) { out.by[kind] = []; out.kinds.push(kind); }
       if (out.by[kind].indexOf(pop) < 0) out.by[kind].push(pop);
     }
@@ -2905,7 +2910,7 @@ function generateCitizensEvents_(ctx) {
       var bd = bonds[wb];
       if (!bd) continue;
       var bA = String(bd.citizenA || "").trim().toUpperCase(), bB = String(bd.citizenB || "").trim().toUpperCase();
-      add(WITH_KIND_BY_BOND_[String(bd.bondType || "").toLowerCase()] || 'bond', bA === self ? bB : bA);
+      add(WITH_KIND_BY_BOND_[String(bd.bondType || "").trim().toLowerCase()] || '', bA === self ? bB : bA);
     }
     if (askKinds.indexOf('coworker') >= 0 && ix.bizOf[self]) {
       var cwl = ix.byBiz[ix.bizOf[self]] || [];
@@ -4112,6 +4117,7 @@ function generateCitizensEvents_(ctx) {
     var chosenInstitution = "";
     // cut A3: the second person is picked only when the drawn line names one (below).
     var contact = { name: "someone familiar", popId: "" };
+    var withNamed = false;
 
     // engine.38 Design A (seams Task 11): drawn ledger line — fill fragment
     // slots (weighted, ctx.rng) + entity slots (code-side resolvers mirroring
@@ -4186,7 +4192,7 @@ function generateCitizensEvents_(ctx) {
       // the rendered dedup — i.e. it actually reaches LifeHistory.
       if (entry.eclKey) eclTelemetry.draws[entry.eclKey] = (eclTelemetry.draws[entry.eclKey] || 0) + 1;
       if (clVenue) { chosenVenue = clVenue; tags = placeTags_(mergeTags(tags, ["venue:local"]), clVenue); }
-      if (clUsedContact && contact.popId) tags = withTags_(tags, contact);
+      if (clUsedContact && contact.popId) { tags = withTags_(tags, contact); withNamed = true; }
       if (clProgram) tags = mergeTags(tags, ["place:" + clProgram.id]);
       if (clCongregation && clCongregation.bizId) tags = mergeTags(tags, ["place:" + clCongregation.bizId]);
     }
@@ -4214,13 +4220,22 @@ function generateCitizensEvents_(ctx) {
         tags = mergeTags(tags, ["source:template"]);
       }
       // cut A3: the person rides the line only when the line names them — three of five beats have no $CONTACT
-      if (contact.popId && contact.name && pick.indexOf(contact.name) >= 0) tags = withTags_(tags, contact);
+      if (contact.popId && contact.name && pick.indexOf(contact.name) >= 0) { tags = withTags_(tags, contact); withNamed = true; }
       // place: only when the line names the place — "stopped by $INSTITUTION …" has no $VENUE.
       if (chosenVenue) tags = placeTags_(mergeTags(tags, ["venue:local"]), pick.indexOf(chosenVenue) >= 0 ? chosenVenue : null);
     }
     // engine.356 cut A2: the flat 12% " near <place>" tail is gone — it glued a place onto whatever
     // the line said ("… is making waves near a bench"). A place reaches a line through its own
     // $VENUE, a place:<BIZ_ID> the line's row carries, or place:employer below.
+
+    // cut A3 (agy 2026-11-24 §3): a line that named nobody keeps no with: ask and no place:their-home.
+    if (!withNamed) {
+      var wnKeep = [];
+      for (var wn = 0; wn < tags.length; wn++) {
+        if (String(tags[wn]).indexOf("with:") !== 0 && tags[wn] !== "place:their-home") wnKeep.push(tags[wn]);
+      }
+      if (wnKeep.length !== tags.length) tags = wnKeep;
+    }
 
     // Cut A2: a line at the citizen's own workplace (place:employer on its row) carries the
     // employer's id; a citizen with no employer on the ledger carries no place.

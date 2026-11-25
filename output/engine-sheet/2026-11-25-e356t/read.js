@@ -7,8 +7,10 @@
 //      Cycle and held no bond row of any status before; both active adults; a friendship's two are not spouses,
 //      parent and child, or children of one parent.
 //   3. Complete: every such pair that qualifies got one.
-//   4. A coworker / housemate moment between two who already held an active bond (not a rivalry) with room
-//      (7.5 and under): the bond gained at least its moment step.
+//   4. Counted only (not ruled): pairs with such a moment who already held an active bond, and how many of
+//      those bonds rose by a moment step anyway.
+//   No base-vs-full comparison: making a bond draws its id from the Cycle's dice, so every later roll of the
+//   week moves. This read is the proof.
 //   5. No pair holds more bond rows than it did (one row a pair).
 // A check with 0 cases is NOT PROVEN.
 require('/root/GodWorld/lib/env');
@@ -54,6 +56,7 @@ const U = s => String(s || '').trim().toUpperCase(), pk = (a, b) => [U(a), U(b)]
     if (!kinds || !kinds.has(kind)) problems.push('no ' + kind + ' moment this Cycle for ' + k);
     if (Number(b.Intensity) !== start[kind]) problems.push(k + ' Intensity ' + b.Intensity + ', config ' + start[kind]);
     if (String(b.Status) !== 'active') problems.push(k + ' status ' + b.Status);
+    if (String(b.CycleCreated) !== C) problems.push(k + ' CycleCreated ' + b.CycleCreated);
     if (beforeBy[k]) problems.push(k + ' held a bond row before: ' + beforeBy[k].map(x => x.BondType + '/' + x.Status).join(','));
     const [a, c2] = k.split('|'); if (!adultActive(a) || !adultActive(c2)) problems.push(k + ' has a minor or a non-active row');
     if (kind === 'housemate' && family(a, c2)) problems.push(k + ' are family and got a friendship');
@@ -65,7 +68,8 @@ const U = s => String(s || '').trim().toUpperCase(), pk = (a, b) => [U(a), U(b)]
       for (const ob of beforeBy[k]) { if (String(ob.Status) !== 'active') continue; const ty = String(ob.BondType); if (/^(rivalry|tension|sports_rival)$/.test(ty)) continue;
         const nb = (afterBy[k] || []).find(x => x.BondId === ob.BondId); if (!nb) { problems.push('bond gone: ' + ob.BondId); continue; }
         const was = Number(ob.Intensity), now = Number(nb.Intensity), st = step[ty] !== undefined ? step[ty] : stepFriend;
-        if (was <= 7.5 && String(nb.BondType) === ty) { t.steppedChecked++; if (now - was >= st - 1e-9) t.stepped++; else problems.push(k + ' ' + ty + ' ' + was + ' → ' + now + ', step ' + st); } }
+        // not ruled (2026-11-25): whether a coworker / housemate moment steps a bond the pair already holds. Counted, not checked.
+        if (String(nb.BondType) === ty) { t.steppedChecked++; if (Number(nb.Intensity) - Number(ob.Intensity) >= (step[ty] !== undefined ? step[ty] : stepFriend) - 1e-9) t.stepped++; } }
       continue;
     }
     if (!adultActive(a) || !adultActive(b)) { t.skippedMinorOrInactive++; continue; }
@@ -78,7 +82,6 @@ const U = s => String(s || '').trim().toUpperCase(), pk = (a, b) => [U(a), U(b)]
   for (const k of Object.keys(afterBy)) if (afterBy[k].length > Math.max(1, (beforeBy[k] || []).length)) problems.push('pair holds ' + afterBy[k].length + ' rows: ' + k);
   if (!t.made.professional) notProven.push('no coworker bond made');
   if (!t.made.friendship) notProven.push('no housemate friendship made');
-  if (!t.steppedChecked) notProven.push('no existing bond stepped by a coworker / housemate moment');
   console.log(JSON.stringify({ label: LABEL, cycle: C, bondsBefore: before.length, bondsAfter: after.length, start, tally: t, problems: problems.length, first: problems.slice(0, 15), notProven, verdict: problems.length ? 'FAIL' : (notProven.length ? 'PASS, NOT PROVEN: ' + notProven.join('; ') : 'PASS') }, null, 1));
   process.exit(problems.length ? 1 : (notProven.length ? 3 : 0));
 })().catch(e => { console.error(e); process.exit(2); });

@@ -32,6 +32,18 @@ On Sharon (2026-11-21): bio — "i like them both and love \"visits places she w
 
 **Binding from 2026-11-17 (pipeline.110 plan §Reporter rulings):** reporters must not get worse; one reporter switches at a time, after the new piece is read beside the current one and the builder approves; the report and write steps stay; no model run without his word.
 
+## State of the work (2026-11-25)
+
+The "stop puppeting" build: every agent wakes as itself — who it is, its job, its record, its tools — and nothing tells it what to write (builder 2026-11-24: "job lines are fine, telling them what to say is puppeting"). Three groups, in this order:
+
+| Group | Where it stands | Plan |
+|---|---|---|
+| City workers | 14 live on the worker template (pipeline.110); answers-only: Superintendent live, City Clerk + Culture director minted at C118; Gridiron Analytics (5 analysts) live, feed questions to Discord | [[2026-11-10-role-citizens-wake-as-themselves]] · this plan Tasks 25-31 |
+| Reporters (media) — **in progress** | 22 of 28 seats on seat files: Sharon, Maria, Kai, Mason, Celeste, Jordan, Graye, Noah, Trevor, Lila, Rachel, Angela, Carmen, Luis, Farrah, Jax, Tamsin, Ines, Nia (+weekly), **Anthony** (live Mon+Thu from 11-26), **P Slayer** (live Wed 11-25). Left: Selena, Talia (the Oaks, next), Hal (his own build), Marbury, Tanya, Simon. Then Mags's Saturday run as EIC: what reaches her | this plan |
+| Council | After media. pipeline.110 Task 11 (a council seat on the council template) on hold; civic.24 (the Sunday nine-seat table) | [[2026-11-10-role-citizens-wake-as-themselves]] · [[2026-08-16-city-hall-nine-seat-table]] |
+
+The mold for a sports seat (Anthony, P Slayer — repeat it): read everything the seat gets now (files, record builder, code lines, tools, models, last pieces) → the builder's calls (bio/origin, beat, models) → one SEAT.md (who he is, job, his own methods as craft, the record's rules, tools); the six old files archived at the seat's live read → the record from `scripts/sportsRecord.js` (`makeSportsRecord`: clubs, colleagues' pieces this Cycle, the feed's people as sources; read live each morning) → package: seatFile, seatMemory, seatDossier, writerTools, models; BEAT_BUILDERS + name; old branches guarded → test day under the no-write guard → agy after each step, findings checked against the code. Voice Essence stays on every seat (builder 2026-11-25: "test showed that bios improved the writing quality").
+
 ## Why (read 2026-11-21, C112–C116)
 
 - Sharon's own slice (Cultural_Ledger fame) leads her typed packet by design (`cron-desk-run.js` "The slice leads the typed packet … the pack stays as texture"). Five cycles, five fame-fading pieces; in four the evening pack's top pulse was a quiet-nightlife venue marked for her.
@@ -58,7 +70,7 @@ On Sharon (2026-11-21): bio — "i like them both and love \"visits places she w
 5. Test day on the newest cycle with `scripts/testReporterDay.sh` under the no-write guard (spend unlock from the builder); restore the slice cache files after; copy the piece to `output/research-build/2026-11-21-p111/`. Check invented ages/tenures and engine-stamp leaks.
 6. Commit path-specifically (shared files may carry engine-sheet hunks); plan task row + changelog; ROLLOUT row <=160 chars.
 
-Done: Sharon, Maria, Kai, Mason, Celeste, Jordan, Graye, Noah, Trevor, Lila, Rachel, Angela, Carmen, Luis, Farrah (new seat), Jax, Tamsin, Ines, Nia. Next: finish the City Clerk after C118, then a sports roster worker, then the sports seats (builder 2026-11-24: sports last). Not yet: the sports seats, Marbury, Jax, Nia, Tamsin, Ines.
+Done: see §State of the work.
 
 ## Tasks
 
@@ -95,6 +107,11 @@ Done: Sharon, Maria, Kai, Mason, Celeste, Jordan, Graye, Noah, Trevor, Lila, Rac
 | 29 | Wire: Gridiron is one door on ask_worker (GRIDIRON → the router → the analyst) — every seat on its seat file can ask it now; the sports seats as each moves to its seat file. Before: route() over real question strings (3 of ~14 phrasings missed in the test); Oaks player names route (the router knows only A's names); a miss lets the reporter name the area | rb | on ask_worker, live; asked once through it (Jade Soy on Ty Jerome, answered from the record); Oaks names route by the roster tab; an unplaced question names the five areas |
 | 30 | The card fields on the sheet (builder 2026-11-24: "Approved use it so its useful"): on their own tab per team, As_Player_Data (Oaks_Player_Data when the Oaks folder holds cards) — the roster tabs stay as they are, because the dashboard's sports page and the feed writer refuse a roster tab with columns they do not list; pull every Sunday at /run-cycle Step 1 ("every Sunday before the cycle") | rb | done — 28 rows written and read back, Pulled For Cycle 118 |
 | 31 | Feed questions to Gridiron (builder 2026-11-24: "The feed questions should only route to the 'names Used' column … to put the data team behind me"): a `question` row naming Gridiron Analytics (or one analyst) is answered by the router's analyst as the general manager's data house and sent to his Discord (the gate's webhook); private, once a row, three tries (gridironFeedQuestions.js) | rb | live — every 30 minutes (crontab, log logs/gridiron-feed.log); first two rows answered and sent (Dawson Nguyen: the 2042 lineup; Wesley Clark: the Mesa trade). Analysts think before answering (medium): with no thinking the lineup left third base empty |
+| 32 | Anthony Raines on his seat: SEAT.md, live A's record (buildAnthonyRecord), team cards + memory + Gridiron, Sonnet + thinking, Mon+Thu; 4 agy reviews folded | rb | live Mon 11-30 (Thu 11-26 first); test piece output/research-build/2026-11-24-anthony/ |
+| 33 | P Slayer on his seat: SEAT.md, live A's + Oaks record with colleagues' pieces and the feed's people (buildPSlayerRecord on sportsRecord.js), Haiku plans / Grok writes; agy folded | rb | live Wed 11-25; test piece output/research-build/2026-11-25-pslayer/ |
+| 34 | The Oaks seats: Selena Grant (data), Talia Finch (street, apart from P Slayer) | rb | next |
+| 35 | Hal Richmond (history, pre-2025 real sports history open), then Marbury, Tanya, Simon; archive each seat's old files at its first live read | rb | not started |
+| 36 | Mags's Saturday run: what reaches the EIC from the new seats | rb | not started |
 
 ## Gridiron Analytics — the sports data house (Tasks 27-30)
 
@@ -162,6 +179,8 @@ Keep: the ten methods as his own craft (he picks), rate arithmetic, sourcing (ev
 
 
 ## Changelog
+
+- 2026-11-25 (research-build) — §State of the work added (builder: record the true state of the stop-puppeting work; media in progress, council after); Tasks 32-36; the sports mold written down.
 
 - 2026-11-25 (research-build) — Builder on the voice Essence line (agy has twice asked to switch it off for a seat-file seat): "Leave it for now , test showed that bios improved the writing quality". It stays on every seat.
 

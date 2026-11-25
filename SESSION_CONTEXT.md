@@ -4,4 +4,4 @@
 
 **NEXT[research-build]:** pipeline.111 → sports data worker (answers the sports seats on player/team data; builder 11-24). Tribune roster read: no free data staffer (Ariana, Marbury, Rhea hold seats). Builder names who holds it, existing staffer or mint, before any build. Hold: engine.350 parked; Internal Affairs worker. Push held.
 
-**NEXT[engine-sheet]:** engine.356 cut A → lines for the $PROGRAM (at:<kind>) and $CONGREGATION slots, shown to the builder before live (none on live); then A3 with whom. At C118 read the smoke lists of stages 80–83 (DEPLOY_HISTORY §PROD). Queued: engine.367, infrastructure.20, engine.362, .363. Push held.
+**NEXT[engine-sheet]:** engine.356 cut A → A3 with whom (plan §The event machine); one task a session. At C118 read the smoke lists of stages 80–83 (DEPLOY_HISTORY §PROD) and the 23 slot lines' first draws (ECL rows 1170–1192). Queued: engine.367, infrastructure.20, engine.362, .363. Push held.

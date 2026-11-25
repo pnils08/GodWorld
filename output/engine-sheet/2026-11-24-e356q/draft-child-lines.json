@@ -1,0 +1,112 @@
+[
+ [
+  "line",
+  "with.child",
+  "",
+  "walked $CONTACT to school and waited at the gate until the bell",
+  "1",
+  "band!=child",
+  "source:familyLife,auth:es-1125,dial:family:up,act:walk,at:school,with:family,with:housemate",
+  "",
+  "yes"
+ ],
+ [
+  "line",
+  "with.child",
+  "",
+  "sat through the school assembly beside $CONTACT and clapped at the wrong moment",
+  "1",
+  "band!=child",
+  "source:familyLife,auth:es-1125,dial:family:up,act:visit,at:school,with:family,with:housemate,shared:both",
+  "",
+  "yes"
+ ],
+ [
+  "line",
+  "with.child",
+  "",
+  "stayed after school with $CONTACT to finish the project due in the morning",
+  "1",
+  "band!=child",
+  "source:familyLife,auth:es-1125,dial:drive:up,act:visit,at:school,with:family,with:housemate,with:friend,shared:both",
+  "",
+  "yes"
+ ],
+ [
+  "line",
+  "with.child",
+  "",
+  "stood at the fence with $CONTACT for a Saturday game at $PROGRAM",
+  "1",
+  "band!=child",
+  "source:familyLife,auth:es-1125,dial:family:up,act:game,at:field,at:court,with:family,with:housemate,with:friend,shared:both",
+  "",
+  "yes"
+ ],
+ [
+  "line",
+  "with.child",
+  "",
+  "ran drills with $CONTACT at $PROGRAM until the coach sent everyone home",
+  "1",
+  "band!=child",
+  "source:familyLife,auth:es-1125,dial:drive:up,act:game,at:field,at:court,with:family,with:housemate,with:friend,with:neighbor,shared:both",
+  "",
+  "yes"
+ ],
+ [
+  "line",
+  "with.child",
+  "",
+  "watched $CONTACT ride the bench at $PROGRAM and bought the ice cream anyway",
+  "1",
+  "band!=child",
+  "source:familyLife,auth:es-1125,dial:warmth:up,act:game,at:field,at:court,with:family,with:housemate",
+  "",
+  "yes"
+ ],
+ [
+  "line",
+  "with.child",
+  "",
+  "dropped $CONTACT at $PROGRAM and stayed to help stack the chairs",
+  "1",
+  "band!=child",
+  "source:familyLife,auth:es-1125,dial:warmth:up,act:service,at:youth-program,with:family,with:housemate,with:neighbor",
+  "",
+  "yes"
+ ],
+ [
+  "line",
+  "with.child",
+  "",
+  "spent the afternoon with $CONTACT at $PROGRAM and lost at a game they had just learned",
+  "1",
+  "band!=child",
+  "source:familyLife,auth:es-1125,dial:sociability:up,act:visit,at:youth-program,with:family,with:housemate,with:friend,shared:both",
+  "",
+  "yes"
+ ],
+ [
+  "line",
+  "with.child",
+  "",
+  "played catch with $CONTACT until it got too dark to see the ball",
+  "1",
+  "band!=child",
+  "source:familyLife,auth:es-1125,dial:family:up,act:game,with:family,with:housemate,with:friend,with:neighbor,shared:both",
+  "",
+  "yes"
+ ],
+ [
+  "line",
+  "with.child",
+  "",
+  "took $CONTACT to the game and explained the infield fly rule twice",
+  "1",
+  "band!=child",
+  "source:familyLife,auth:es-1125,dial:fandom:up,act:game,with:family,with:housemate,with:friend,shared:both",
+  "",
+  "yes"
+ ]
+]

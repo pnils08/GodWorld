@@ -131,7 +131,9 @@ function rosterRecord(cards) {
     const r = p.roster || {}, f = p.profile || {};
     const played = new Set((p.seasons || []).filter((x) => Number(x.G) > 0).map((x) => x.YEAR + x.TEAM));
     const last = (p.advanced || []).find((x) => played.has(x.YEAR + x.TEAM)) || {};
-    const opt = String(r['Minor League Option'] || r['Minor League Options'] || '');
+    // the cards word it three ways: 'Minor League Option', '…Options', '…Options Used' (Kevin Clark: '0/3')
+    const optKey = Object.keys(r).find((k) => /minor league option/i.test(k));
+    const opt = optKey ? String(r[optKey]) + (/used/i.test(optKey) && !/used/i.test(String(r[optKey])) ? ' used' : '') : '';
     const om = opt.match(/(\d)\s*\/\s*(\d)\s*used/i);
     const options = om ? 'minor-league options used ' + om[1] + ' of ' + om[2] + ' (' + (Number(om[2]) - Number(om[1])) + ' left)' : (opt ? 'minor-league options: ' + opt : '');
     const contract = Object.entries(p.contract || {}).map(([y, v]) => y + ' ' + v).join(', ');

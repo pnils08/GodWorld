@@ -1313,6 +1313,10 @@
 
 - **getBondKey_(citizenA, citizenB)**
 
+- **loadBondDials_(ctx)**
+
+- **bondDial_(key)**
+
 - **runBondEngine_(ctx)**
   Reads: S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.relationshipBonds, S.sportsSeason
   Writes: S.pendingConfrontations, S.relationshipBonds
@@ -4937,4 +4941,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 179
-**Functions mapped:** 1793
+**Functions mapped:** 1795

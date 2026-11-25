@@ -264,8 +264,34 @@ function getBondKey_(citizenA, citizenB) {
 // MAIN ENGINE
 // ============================================================
 
+// engine.356 (builder 2026-11-24: "the cleaner way is to have the 'variants' outside of the code into
+// world_config"): the bond engine's weekly numbers live on World_Config (seeded at the values the code
+// held, ENGINE356_CONFIG_SEEDS). Read once a run; a missing, blank or non-numeric cell stops the phase
+// with its name — there is no in-code copy to fall back on.
+var BOND_DIAL_KEYS_ = ['bondWeeklyRival', 'bondWeeklySportsRival', 'bondWeeklyAlliance', 'bondWeeklyMentor', 'bondWeeklyFestival',
+  'bondWeeklyFriend', 'bondWeeklyUpkeep', 'bondFadeOneAbsent', 'bondFadeBothAbsent', 'bondEncounterChance', 'bondDeepenAt',
+  'bondRomanceAt', 'bondRomanceChance', 'bondRomanceStepChance', 'bondRomanceStepChanceApart', 'bondRomanceStep', 'bondMarriageAt'];
+var BOND_DIALS_ = null;
+function loadBondDials_(ctx) {
+  var cfg = (ctx && ctx.config) || {}, out = {}, bad = [];
+  for (var i = 0; i < BOND_DIAL_KEYS_.length; i++) {
+    var k = BOND_DIAL_KEYS_[i], v = cfg[k];
+    var n = (v === undefined || v === null || String(v).trim() === '') ? NaN : Number(v);
+    if (!isFinite(n) || n < 0) bad.push(k); else out[k] = n;
+  }
+  if (bad.length) throw new Error('loadBondDials_: World_Config missing, blank or not a number: ' + bad.join(', ') + ' — ensureEngine356Config_ seeds them');
+  BOND_DIALS_ = out;
+  return out;
+}
+function bondDial_(key) {
+  if (!BOND_DIALS_) throw new Error('bondDial_: ' + key + ' read before loadBondDials_ — the bond engine runs from runBondEngine_');
+  if (!(key in BOND_DIALS_)) throw new Error('bondDial_: unknown key ' + key);
+  return BOND_DIALS_[key];
+}
+
 function runBondEngine_(ctx) {
   var S = ctx.summary || {};
+  loadBondDials_(ctx);
 
   // v2.4: Load neighborhoods to ctx (not global)
   ctx.neighborhoodList = loadNeighborhoodsFromSheet_(ctx);
@@ -700,15 +726,15 @@ function updateExistingBonds_(ctx) {
     if (aActive && bActive) {
       ENGINE59_DIAG.gatePass++;
       if (bond.bondType === BOND_TYPES.RIVALRY || bond.bondType === BOND_TYPES.TENSION) {
-        intensity += 1.5;
+        intensity += bondDial_('bondWeeklyRival');
       } else if (bond.bondType === BOND_TYPES.ALLIANCE) {
-        intensity += 0.5;
+        intensity += bondDial_('bondWeeklyAlliance');
       } else if (bond.bondType === BOND_TYPES.MENTORSHIP) {
-        intensity += 0.3;
+        intensity += bondDial_('bondWeeklyMentor');
       } else if (bond.bondType === BOND_TYPES.FESTIVAL) {
-        intensity += 0.3;
+        intensity += bondDial_('bondWeeklyFestival');
       } else if (bond.bondType === BOND_TYPES.SPORTS_RIVAL) {
-        intensity += 1.0;
+        intensity += bondDial_('bondWeeklySportsRival');
       } else if (bond.bondType === BOND_TYPES.FRIENDSHIP) {
         // engine.59 (S320): friendship had NO growth path — the romance
         // pipeline starved at the root (live max 5.6 vs threshold 7).
@@ -716,16 +742,16 @@ function updateExistingBonds_(ctx) {
         var wf59 = bondWarmthFactor_(ctx, bond.citizenA, bond.citizenB);
         ENGINE59_DIAG.friendGrowths++;
         if (ENGINE59_DIAG.factors.length < 5) ENGINE59_DIAG.factors.push(bond.citizenA + 'x' + bond.citizenB + ':' + wf59.toFixed(3));
-        intensity += FRIENDSHIP_GROWTH * wf59;
+        intensity += bondDial_('bondWeeklyFriend') * wf59;
       } else if (bond.bondType === BOND_TYPES.PROFESSIONAL || bond.bondType === BOND_TYPES.NEIGHBOR) {
         // engine.302 (builder 2026-10-19, ruling 9): bonds deepen. A shared week grows a neighbor or
         // a colleague the way it grows a friend — under BOND_MAINTAIN they drifted down about 0.06 a
         // week against neglect and could never reach the deepening bar below.
-        intensity += FRIENDSHIP_GROWTH * bondWarmthFactor_(ctx, bond.citizenA, bond.citizenB);
+        intensity += bondDial_('bondWeeklyFriend') * bondWarmthFactor_(ctx, bond.citizenA, bond.citizenB);
       } else if (bond.bondType === BOND_TYPES.FAMILY) {
         // engine.201b (S449): this type had no shared-cycle path, so once neglect faded it
         // (below) nothing could ever bring it back. A shared cycle keeps it up.
-        intensity += BOND_MAINTAIN * bondWarmthFactor_(ctx, bond.citizenA, bond.citizenB);
+        intensity += bondDial_('bondWeeklyUpkeep') * bondWarmthFactor_(ctx, bond.citizenA, bond.citizenB);
       }
     }
 
@@ -737,7 +763,7 @@ function updateExistingBonds_(ctx) {
     // into the world this cycle) makes steps likelier — courtship is fed.
     if (bond.bondType === BOND_TYPES.ROMANTIC) {
       var rr = rng();
-      var stepP = (aActive && bActive) ? 0.20 : 0.10;
+      var stepP = (aActive && bActive) ? bondDial_('bondRomanceStepChance') : bondDial_('bondRomanceStepChanceApart');
       // engine.179 (S438): THE TRIANGLE. When this romance shares an endpoint with a
       // rival's, each maturation tick is contested on warmth + sociability — the winner's
       // bond takes the tick, the loser's does not; the RIVALRY bond keeps burning. §11
@@ -768,7 +794,7 @@ function updateExistingBonds_(ctx) {
         if (boost > 1) stepP = Math.min(0.5, stepP * boost);
       }
       if (rr < 0.02) intensity += 1.0;              // the week that changes everything
-      else if (rr < 0.02 + stepP) intensity += 0.25; // a real step
+      else if (rr < 0.02 + stepP) intensity += bondDial_('bondRomanceStep'); // a real step
       // else: an ordinary week — nothing moves
     }
 
@@ -869,7 +895,7 @@ function updateExistingBonds_(ctx) {
     // (x0.75 at +2/+2), a cold pair's faster (x1.25) (doctrine §11: marriage is years of a
     // MAINTAINED bond).
     if (!(aActive && bActive) && !hadMoment) {
-      var fadeRate = (aActive || bActive) ? BOND_FADE_ONE_ABSENT : BOND_FADE_BOTH_ABSENT;
+      var fadeRate = (aActive || bActive) ? bondDial_('bondFadeOneAbsent') : bondDial_('bondFadeBothAbsent');
       intensity -= fadeRate * (2 - bondWarmthFactor_(ctx, bond.citizenA, bond.citizenB));
     }
 
@@ -904,7 +930,7 @@ function updateExistingBonds_(ctx) {
         bond.bondType = BOND_TYPES.PROFESSIONAL;
         bond.notes = (bond.notes || '') + ' [Settled into professional respect C' + currentCycle + ']';
       }
-    } else if (aActive && bActive && bond.status === BOND_STATUS.ACTIVE && bond.intensity >= BOND_DEEPEN_AT &&
+    } else if (aActive && bActive && bond.status === BOND_STATUS.ACTIVE && bond.intensity >= bondDial_('bondDeepenAt') &&
                (bond.bondType === BOND_TYPES.NEIGHBOR || bond.bondType === BOND_TYPES.PROFESSIONAL ||
                 bond.bondType === BOND_TYPES.FESTIVAL)) {
       // engine.302 (ruling 9): a neighbor, colleague or festival acquaintance this strong, in a week both
@@ -1223,7 +1249,7 @@ function detectNewBonds_(ctx) {
   for (var i = 0; i < activeCitizens.length; i++) {
     var citizenA = activeCitizens[i];
     var sociabilityFactor = 1 + 0.125 * bondDialPos_(ctx, citizenA, 'sociability');
-    if (rng() >= BOND_ENCOUNTER_CHANCE * sociabilityFactor * calFactor) continue;
+    if (rng() >= bondDial_('bondEncounterChance') * sociabilityFactor * calFactor) continue;
     var pick = Math.floor(rng() * (activeCitizens.length - 1));
     if (pick >= i) pick++; // never themselves
     var citizenB = activeCitizens[pick];
@@ -1941,20 +1967,11 @@ function resolveRivalry_(ctx, bondId, outcome) {
 // engine.59 S320 grounding: live friendship intensities ran 1-5.6 and the
 // old threshold 7 was UNREACHABLE — friendship had no growth path at all.
 // The organic romance pipeline had never fired once.
-var ROMANCE_THRESHOLD = 5.5;  // top of the real distribution — slow, not never
-var ROMANCE_CHANCE = 0.10;    // per-cycle base once conditions hold (× tier × fitness × family trait)
-var MARRIAGE_THRESHOLD = 8;   // a romance grown this strong marries
 var HOME_OWNED_COURTSHIP_BOOST = 2.0; // engine.153 (S412, builder's chain): "once you have a house your odds of marriage increase" — an OWNED home beats a rented household beats none
 var HOUSEHOLD_COURTSHIP_BOOST = 1.5; // engine.74 (S328, Mike-direct): an established
                                      // home feeds courtship — either partner holding
                                      // a household boosts the romance step chance
 var TRIANGLE_BIRTH_INTENSITY = 5; // rivals born from a shared love start here
-var FRIENDSHIP_GROWTH = 0.4;  // engine.59: per-cycle when both co-active (× warmth trait)
-var BOND_MAINTAIN = 0.15;         // engine.201b: family/professional/neighbor, per shared cycle (× warmth)
-var BOND_FADE_ONE_ABSENT = 0.5;   // engine.201b: per cycle only one of the pair lived (× 2 − warmth)
-var BOND_FADE_BOTH_ABSENT = 0.7;  // engine.201b: per cycle neither did — the old 0.2 + 0.5 together
-var BOND_ENCOUNTER_CHANCE = 0.1;  // engine.302 (ruling 8): a citizen's weekly chance to meet one other pool citizen (x sociability x calendar) — the builder's dial
-var BOND_DEEPEN_AT = 6;           // engine.302 (ruling 9): a NEIGHBOR / PROFESSIONAL / FESTIVAL bond this strong, in a week both lived, becomes a FRIENDSHIP (the TENSION -> RIVALRY bar)
 var CONFRONT_ADAPT = 6;           // engine.201b: a feud rests this many cycles after a confrontation before it can flare again
 // engine.66e (S324, Mike-direct): romance growth is a per-cycle CHANCE draw,
 // not a rate — see the ROMANTIC block in updateBondIntensities. The old flat
@@ -2371,10 +2388,10 @@ function processRomanceAndMarriage_(ctx) {
     romCompat += bondSpouseQuality_(romA, romB, ctx); // engine.154: net worth + hood prosperity, at this gate only
     if (bond.bondType === BOND_TYPES.FRIENDSHIP &&
         String(bond.notes || '').indexOf('[Deepened into friendship C' + cycle + ']') < 0 && // engine.302: not the same week
-        Number(bond.intensity) >= ROMANCE_THRESHOLD &&
+        Number(bond.intensity) >= bondDial_('bondRomanceAt') &&
         romCompat >= 6 &&
         bothCanCourt && ageOk && oppositeSex &&
-        rng() < ROMANCE_CHANCE * tierFactor * pairFitness * bondFamilyFactor_(ctx, bond.citizenA, bond.citizenB)) {
+        rng() < bondDial_('bondRomanceChance') * tierFactor * pairFitness * bondFamilyFactor_(ctx, bond.citizenA, bond.citizenB)) {
       bond.bondType = BOND_TYPES.ROMANTIC;
       bond.notes = 'Grew from friendship (C' + cycle + ')';
       bond.lastUpdate = cycle;
@@ -2400,7 +2417,7 @@ function processRomanceAndMarriage_(ctx) {
     // with a woman (the friendship door above, the two Generic_Citizens doors by wantSex); this is the gate
     // on the outcome, whatever door or old row the romance came through. A blank Gender marries nobody.
     if (bond.bondType === BOND_TYPES.ROMANTIC &&
-        Number(bond.intensity) >= MARRIAGE_THRESHOLD &&
+        Number(bond.intensity) >= bondDial_('bondMarriageAt') &&
         bothCanCourt && ageOk && oppositeSex) {
       marryCitizens_(ctx, bond, A, B, cycle);
       // engine.302: the index is this pass's snapshot — mark the pair married in it, so a second grown
@@ -2621,7 +2638,7 @@ function processGCCourtship_(ctx) {
     if (!bd || bd.status !== BOND_STATUS.ACTIVE) continue;
     if (bd.bondType !== BOND_TYPES.ROMANTIC) continue;
     if (String(bd.citizenB || '').indexOf('GC:') !== 0) continue;
-    if (Number(bd.intensity) < MARRIAGE_THRESHOLD) continue;
+    if (Number(bd.intensity) < bondDial_('bondMarriageAt')) continue;
     var P = people[bd.citizenA];
     if (!P || !bondCanCourt_(people, bd.citizenA)) continue; // engine.302
     var gcName = String(bd.citizenB).slice(3);
@@ -2810,7 +2827,7 @@ function processGCMarriageLottery_(ctx) {
     var bd = bonds[b];
     if (!bd || bd.status !== BOND_STATUS.ACTIVE) continue;
     if (bd.bondType === BOND_TYPES.ROMANTIC ||
-        (bd.bondType === BOND_TYPES.FRIENDSHIP && Number(bd.intensity) >= ROMANCE_THRESHOLD - 1)) {
+        (bd.bondType === BOND_TYPES.FRIENDSHIP && Number(bd.intensity) >= bondDial_('bondRomanceAt') - 1)) {
       hasProspects[bd.citizenA] = true;
       hasProspects[bd.citizenB] = true;
     }
@@ -2921,7 +2938,7 @@ function processGCMarriageLottery_(ctx) {
       income: spInc, hood: P.hood, tier: 4, edu: '', debt: 0, savings: 0
     };
     var lotteryBond = makeBond_(pid, spId, BOND_TYPES.ROMANTIC, 'gc-lottery', 'COMMUNITY',
-      P.hood, MARRIAGE_THRESHOLD, cycle, 'Met outside the record', ctx);
+      P.hood, bondDial_('bondMarriageAt'), cycle, 'Met outside the record', ctx);
     bonds.push(lotteryBond);
     ctx.summary.relationshipBonds = bonds;
     marryCitizens_(ctx, lotteryBond, P, B, cycle);

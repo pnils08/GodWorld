@@ -540,6 +540,24 @@ var ENGINE356_CONFIG_SEEDS = [
   ['bondMomentStepFriend', 0.2, 'engine.356: Intensity a friendship / alliance / mentorship / neighbor / professional / festival bond gains in a Cycle the two shared a moment, on top of the weekly upkeep', 0, 5, false],
   ['bondMomentStepFamily', 0.1, 'engine.356: Intensity a family bond gains in a Cycle the two shared a moment, on top of the weekly upkeep', 0, 5, false],
   ['bondMomentStepRival', 0.25, 'engine.356: Intensity a rivalry / tension / sports rivalry gains in a Cycle the two crossed paths', 0, 5, false],
+  // engine.356 (builder 2026-11-24: "the cleaner way is to have the 'variants' outside of the code into world_config"): the bond engine's weekly numbers, at the values the code held
+  ['bondWeeklyRival', 1.5, 'engine.356: a rivalry or tension gains in a Cycle both people lived (was 1.5 in code)', 0, 5, false],
+  ['bondWeeklySportsRival', 1, 'engine.356: a sports rivalry gains in a Cycle both people lived (was 1.0 in code)', 0, 5, false],
+  ['bondWeeklyAlliance', 0.5, 'engine.356: an alliance gains in a Cycle both people lived (was 0.5 in code)', 0, 5, false],
+  ['bondWeeklyMentor', 0.3, 'engine.356: a mentorship gains in a Cycle both people lived (was 0.3 in code)', 0, 5, false],
+  ['bondWeeklyFestival', 0.3, 'engine.356: a festival acquaintance gains in a Cycle both people lived (was 0.3 in code)', 0, 5, false],
+  ['bondWeeklyFriend', 0.4, 'engine.356: a friendship, neighbor or colleague bond gains in a Cycle both people lived, x the warmth of the pair (was FRIENDSHIP_GROWTH 0.4)', 0, 5, false],
+  ['bondWeeklyUpkeep', 0.15, 'engine.356: a family bond gains in a Cycle both people lived, x the warmth of the pair (was BOND_MAINTAIN 0.15)', 0, 5, false],
+  ['bondFadeOneAbsent', 0.5, 'engine.356: a bond loses in a Cycle only one of the two lived, x (2 - warmth) (was BOND_FADE_ONE_ABSENT 0.5)', 0, 5, false],
+  ['bondFadeBothAbsent', 0.7, 'engine.356: a bond loses in a Cycle neither of the two lived, x (2 - warmth) (was BOND_FADE_BOTH_ABSENT 0.7)', 0, 5, false],
+  ['bondEncounterChance', 0.1, 'engine.356: weekly chance a citizen meets one other citizen, x sociability x calendar (was BOND_ENCOUNTER_CHANCE 0.1)', 0, 1, false],
+  ['bondDeepenAt', 6, 'engine.356: Intensity at which a neighbor, colleague or festival bond becomes a friendship in a Cycle both lived (was BOND_DEEPEN_AT 6)', 0, 10, false],
+  ['bondRomanceAt', 5.5, 'engine.356: Intensity a friendship needs before it can turn romantic (was ROMANCE_THRESHOLD 5.5)', 0, 10, false],
+  ['bondRomanceChance', 0.1, 'engine.356: weekly chance a friendship past bondRomanceAt turns romantic, x tier x fitness x family trait (was ROMANCE_CHANCE 0.10)', 0, 1, false],
+  ['bondRomanceStepChance', 0.2, 'engine.356: weekly chance a romance takes a step in a Cycle both lived, before the home and tier boosts (was 0.20 in code)', 0, 1, false],
+  ['bondRomanceStepChanceApart', 0.1, 'engine.356: weekly chance a romance takes a step in a Cycle they did not both live (was 0.10 in code)', 0, 1, false],
+  ['bondRomanceStep', 0.25, 'engine.356: Intensity a romance gains on a weekly step (was 0.25 in code)', 0, 5, false],
+  ['bondMarriageAt', 8, 'engine.356: Intensity at which a romance marries (was MARRIAGE_THRESHOLD 8)', 0, 10, false],
   ['migrationCrimeBand', 0.05, 'engine.356: CrimeIndex distance from the city median at which crime pushes people out of / pulls them into a hood in migration drift (was a +-15% ratio band that caught no hood)', 0.001, 5, false]
 ];
 

@@ -1291,6 +1291,18 @@ function storylineTagFor(story, cycle) {
   return { slug: hit.id, verb: hit.status === 'closed' ? 'closed' : (hit.hasLedgerRow ? 'advanced' : 'opened') };
 }
 
+// Nia's record as lines for her free brief: each lane entry's angle and facts, sourced to the entry (pipeline.111).
+function undockedRecordLines(lane) {
+  const out = [];
+  for (const e of lane || []) {
+    const h = (e && e.handle) || {};
+    const src = (e && e.ref) || 'undocked record';
+    if (h.angle) out.push({ text: String(h.angle), src });
+    for (const f of h.facts || []) out.push({ text: String(f), src });
+  }
+  return out;
+}
+
 function loadLane(cycle, desk, beatDomain) {
   // pipeline.60: the undocked lane is feed-built (Nia's data contract — facts
   // only from the gate-approved feed pack), independent of desk_signal. The
@@ -2255,6 +2267,9 @@ async function runAngle(assign) {
         slice: typedSlice, lane,
         candidates: sourcingPool ? sourcingPool.candidates : [],
         ...(FREE_ANGLE ? { free: Object.assign(FREE_ANGLE === 'free-week' ? { week: cityWeekLines(cycle) } : { rows: true },
+          // pipeline.111 (2026-11-24, Nia's first day on her seat file: "free W1 Packet has nothing on the record"): the
+          // UNDOCKED record is its lane entries, not a prewrite summary — every episode and the standings are her rows
+          desk === 'undocked' ? { week: undockedRecordLines(lane) } : {},
           { background: testBackground() }) } : {}),
       });
       ask = livedPacket.prompt(inputPacket);

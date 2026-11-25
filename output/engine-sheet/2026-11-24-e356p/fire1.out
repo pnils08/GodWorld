@@ -1,8 +1,8 @@
-◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ suppress logs { quiet: true }
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌁ auth for agents [www.vestauth.com]
 {
  "label": "e356p-f1",
  "expect": 117,
- "at": "2026-11-25T04:07:18.495Z",
+ "at": "2026-11-25T04:18:58.320Z",
  "pre": {
   "bench": 117,
   "live": 117,
@@ -10,12 +10,12 @@
   "rileyLast": 117,
   "checkpoint": null
  },
- "wallS": 188,
+ "wallS": 208,
  "http": 200,
  "resp": {
   "ok": true,
   "state": "done",
-  "ranMs": 183933,
+  "ranMs": 203718,
   "persistErrors": [],
   "carryForward": [
    {

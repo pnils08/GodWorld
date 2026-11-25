@@ -149,6 +149,10 @@ const lines = bench.map(b => ({
   // Cycle, and bonds where one or neither does, separately.
   const wrote = new Set(log.map(r => String(r.POPID).trim().toUpperCase()));
   const strata = {};
+  const stF = Number(cfg.bondMomentStepFriend), stR = Number(cfg.bondMomentStepRival), stFa = Number(cfg.bondMomentStepFamily);
+  // the least a bond with a moment can move: its step (a neighbor bond with no hood on it also loses 0.1). Alliance and romance have chance losses of their own and are not floored.
+  const FLOOR = { friendship: stF, professional: stF, neighbor: stF - 0.1, family: stFa, rivalry: stR, tension: stR, sports_rival: stR };
+  let floorChecked = 0; const floorBelow = [];
   const rivalRows = [];   // every rival bond with room, one by one — the run is resynced away, so the detail is kept here
   const moved = {}; let fell = 0;
   for (const b of bonds) {
@@ -161,6 +165,7 @@ const lines = bench.map(b => ({
     const m = (moved[ty] = moved[ty] || { moment: [0, 0], none: [0, 0] }); m[has][0]++; m[has][1] += d;
     const bothW = wrote.has(String(b.CitizenA || '').trim().toUpperCase()) && wrote.has(String(b.CitizenB || '').trim().toUpperCase()) ? 'bothWritten' : 'notBoth';
     if (ty === 'rivalry' || ty === 'tension' || ty === 'sports_rival') rivalRows.push({ id: b.BondId, a: b.CitizenA, b: b.CitizenB, type: ty, before: w, after: Number(b.Intensity), moment: has === 'moment', both: bothW === 'bothWritten', status: b.Status });
+    if (has === 'moment' && FLOOR[ty] !== undefined) { floorChecked++; if (d < FLOOR[ty] - 1e-6) floorBelow.push(b.BondId + ' ' + ty + ' ' + w + ' -> ' + b.Intensity); }
     const sx = (strata[ty] = strata[ty] || { bothWritten: { moment: [0, 0], none: [0, 0] }, notBoth: { moment: [0, 0], none: [0, 0] } }); sx[bothW][has][0]++; sx[bothW][has][1] += d;
     if (has === 'moment' && d < 0 && w < 10) { fell++; notes.push('a bond with a moment fell: ' + b.BondId + ' ' + ty + ' ' + w + ' -> ' + b.Intensity); }
   }
@@ -173,14 +178,20 @@ const lines = bench.map(b => ({
     const g = strata[ty][st]; if (!g.moment[0] && !g.none[0]) continue;
     const mm = g.moment[0] ? +(g.moment[1] / g.moment[0]).toFixed(3) : null, mn = g.none[0] ? +(g.none[1] / g.none[0]).toFixed(3) : null;
     stepByStratum[ty + ' / ' + st] = { withMoment: g.moment[0], meanChange: mm, without: g.none[0], meanChangeWithout: mn };
-    if (g.moment[0] >= 5 && g.none[0] >= 5) { measured++; if (!(mm > mn)) problems.push(ty + ' bonds (' + st + ') with a moment did not gain more than those without (' + mm + ' vs ' + mn + ')'); }
+    if (g.moment[0] >= 5 && g.none[0] >= 5) { measured++; if (!(mm > mn)) notes.push(ty + ' bonds (' + st + ') with a moment gained less on average than those without (' + mm + ' vs ' + mn + ') — group means, see the per-bond floor'); }
   }
-  if (!measured) problems.push('no bond type has 5 bonds with a moment and 5 without in one group — the step is not measured');
+  // Run 4, bond by bond: every rival bond with a moment moved by a base the engine gives (0, 0.5, 1.5, 2.0)
+  // plus exactly 0.25; six of ten had base 0 — the engine's own "both active this week" (people the citizen
+  // event writer drew for) is narrower than "has a line on the log", and the sheet does not record it. A
+  // group mean cannot be made fair from the sheet. The check that can fail is per bond: a bond with a moment
+  // and room gains at least its step (it takes the step and does not fade).
+  if (floorChecked < 20) problems.push('fewer than 20 bonds with a moment and room were checked against their step (' + floorChecked + ')');
+  if (floorBelow.length) problems.push(floorBelow.length + ' bonds with a moment gained less than their step: ' + floorBelow.slice(0, 5).join('; '));
   const want = ['friend', 'family', 'neighbor', 'coworker', 'housemate', 'rival', 'colleague', 'partner'];
   const notProven = want.filter(k => !byKind[k]).map(k => 'kind ' + k).concat(homes ? [] : ['their-home']).concat(shifts ? [] : ['shift with a coworker']).concat(twoSlot ? [] : ['person + place']);
   const out = { cycle: +C, lines: log.length, people: new Set(log.map(r => r.POPID)).size, bondEngineContactLines: engineLines,
     withLines: lineCount, bondCalledLines: called, mostBondCalledOnOnePerson: Math.max(0, ...Object.values(calledBy)), twinLines: twins, sameLineDrawnBothWaysByChance: reciprocal, leadTagsSizedM: sizedM,
-    bondsWithAMoment: Object.keys(momentPairs).length, bondChange, stepLikeWithLike: stepByStratum, rivalBonds: rivalRows, momentBondsThatFell: fell, config: Object.fromEntries(CFG_KEYS.map(k => [k, cfg[k]])), byKind, byLine, theirHomeLines: homes, theirHomeWithNoHouseholdOnTheirRow: homesNoHousehold, shiftLines: shifts, personAndPlaceLines: twoSlot, someoneFamiliar: vague,
+    bondsWithAMoment: Object.keys(momentPairs).length, bondChange, stepLikeWithLike: stepByStratum, momentBondsCheckedAgainstTheirStep: floorChecked, rivalBonds: rivalRows, momentBondsThatFell: fell, config: Object.fromEntries(CFG_KEYS.map(k => [k, cfg[k]])), byKind, byLine, theirHomeLines: homes, theirHomeWithNoHouseholdOnTheirRow: homesNoHousehold, shiftLines: shifts, personAndPlaceLines: twoSlot, someoneFamiliar: vague,
     notProven, examples: ex, notes: notes.slice(0, 12), problems, verdict: problems.length ? 'FAIL' : (lineCount ? (notProven.length ? 'PASS, not proven: ' + notProven.join(', ') : 'PASS') : 'FAIL') };
   console.log(JSON.stringify(out, null, 1));
   process.exit(problems.length ? 1 : 0);

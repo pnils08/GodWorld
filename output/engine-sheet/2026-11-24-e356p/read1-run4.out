@@ -1,0 +1,472 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ enable debugging { debug: true }
+{
+ "cycle": 118,
+ "lines": 3053,
+ "people": 1030,
+ "bondEngineContactLines": 40,
+ "withLines": 412,
+ "bondCalledLines": 293,
+ "mostBondCalledOnOnePerson": 3,
+ "twinLines": 144,
+ "sameLineDrawnBothWaysByChance": 2,
+ "leadTagsSizedM": 412,
+ "bondsWithAMoment": 213,
+ "bondChange": {
+  "family": {
+   "withMoment": 2,
+   "meanChange": 0.18,
+   "without": 52,
+   "meanChangeWithout": -0.393
+  },
+  "friendship": {
+   "withMoment": 45,
+   "meanChange": 0.582,
+   "without": 190,
+   "meanChangeWithout": 0.268
+  },
+  "professional": {
+   "withMoment": 6,
+   "meanChange": 0.908,
+   "without": 65,
+   "meanChangeWithout": 0.469
+  },
+  "romantic": {
+   "withMoment": 0,
+   "meanChange": null,
+   "without": 2,
+   "meanChangeWithout": -0.25
+  },
+  "rivalry": {
+   "withMoment": 10,
+   "meanChange": 0.9,
+   "without": 8,
+   "meanChangeWithout": 1.625
+  },
+  "neighbor": {
+   "withMoment": 38,
+   "meanChange": 0.544,
+   "without": 45,
+   "meanChangeWithout": 0.26
+  },
+  "alliance": {
+   "withMoment": 1,
+   "meanChange": 0.7,
+   "without": 2,
+   "meanChangeWithout": 0
+  },
+  "tension": {
+   "withMoment": 1,
+   "meanChange": 1.75,
+   "without": 3,
+   "meanChangeWithout": 1.5
+  }
+ },
+ "stepLikeWithLike": {
+  "family / bothWritten": {
+   "withMoment": 2,
+   "meanChange": 0.18,
+   "without": 44,
+   "meanChangeWithout": -0.386
+  },
+  "family / notBoth": {
+   "withMoment": 0,
+   "meanChange": null,
+   "without": 8,
+   "meanChangeWithout": -0.43
+  },
+  "friendship / bothWritten": {
+   "withMoment": 45,
+   "meanChange": 0.582,
+   "without": 177,
+   "meanChangeWithout": 0.327
+  },
+  "friendship / notBoth": {
+   "withMoment": 0,
+   "meanChange": null,
+   "without": 13,
+   "meanChangeWithout": -0.523
+  },
+  "professional / bothWritten": {
+   "withMoment": 6,
+   "meanChange": 0.908,
+   "without": 57,
+   "meanChangeWithout": 0.474
+  },
+  "professional / notBoth": {
+   "withMoment": 0,
+   "meanChange": null,
+   "without": 8,
+   "meanChangeWithout": 0.436
+  },
+  "romantic / bothWritten": {
+   "withMoment": 0,
+   "meanChange": null,
+   "without": 1,
+   "meanChangeWithout": 0
+  },
+  "romantic / notBoth": {
+   "withMoment": 0,
+   "meanChange": null,
+   "without": 1,
+   "meanChangeWithout": -0.5
+  },
+  "rivalry / bothWritten": {
+   "withMoment": 10,
+   "meanChange": 0.9,
+   "without": 8,
+   "meanChangeWithout": 1.625
+  },
+  "neighbor / bothWritten": {
+   "withMoment": 38,
+   "meanChange": 0.544,
+   "without": 40,
+   "meanChangeWithout": 0.338
+  },
+  "neighbor / notBoth": {
+   "withMoment": 0,
+   "meanChange": null,
+   "without": 5,
+   "meanChangeWithout": -0.364
+  },
+  "alliance / bothWritten": {
+   "withMoment": 1,
+   "meanChange": 0.7,
+   "without": 2,
+   "meanChangeWithout": 0
+  },
+  "tension / bothWritten": {
+   "withMoment": 1,
+   "meanChange": 1.75,
+   "without": 3,
+   "meanChangeWithout": 1.5
+  }
+ },
+ "rivalBonds": [
+  {
+   "id": "BOND-4B0B704C",
+   "a": "POP-00436",
+   "b": "POP-00987",
+   "type": "rivalry",
+   "before": 7.35,
+   "after": 8.1,
+   "moment": true,
+   "both": true,
+   "status": "active"
+  },
+  {
+   "id": "5fgeig6u",
+   "a": "POP-00490",
+   "b": "POP-00024",
+   "type": "rivalry",
+   "before": 6.5,
+   "after": 8.5,
+   "moment": false,
+   "both": true,
+   "status": "active"
+  },
+  {
+   "id": "smk1ikkv",
+   "a": "POP-00740",
+   "b": "POP-00653",
+   "type": "rivalry",
+   "before": 6.5,
+   "after": 8.75,
+   "moment": true,
+   "both": true,
+   "status": "active"
+  },
+  {
+   "id": "7kwz6tr3",
+   "a": "POP-00253",
+   "b": "POP-00460",
+   "type": "rivalry",
+   "before": 6.55,
+   "after": 6.8,
+   "moment": true,
+   "both": true,
+   "status": "active"
+  },
+  {
+   "id": "wgow7xef",
+   "a": "POP-00759",
+   "b": "POP-00034",
+   "type": "rivalry",
+   "before": 6.5,
+   "after": 8.75,
+   "moment": true,
+   "both": true,
+   "status": "active"
+  },
+  {
+   "id": "3vnkq01w",
+   "a": "POP-00289",
+   "b": "POP-00800",
+   "type": "rivalry",
+   "before": 6.5,
+   "after": 6.75,
+   "moment": true,
+   "both": true,
+   "status": "active"
+  },
+  {
+   "id": "t8w0yf2e",
+   "a": "POP-00143",
+   "b": "POP-00962",
+   "type": "rivalry",
+   "before": 7,
+   "after": 9.25,
+   "moment": true,
+   "both": true,
+   "status": "active"
+  },
+  {
+   "id": "zwqgmq2l",
+   "a": "POP-00268",
+   "b": "POP-00519",
+   "type": "rivalry",
+   "before": 7,
+   "after": 9,
+   "moment": false,
+   "both": true,
+   "status": "active"
+  },
+  {
+   "id": "x66tri1m",
+   "a": "POP-00741",
+   "b": "POP-00346",
+   "type": "rivalry",
+   "before": 7,
+   "after": 7.25,
+   "moment": true,
+   "both": true,
+   "status": "active"
+  },
+  {
+   "id": "ga3esccy",
+   "a": "POP-00182",
+   "b": "POP-01081",
+   "type": "rivalry",
+   "before": 7,
+   "after": 7.25,
+   "moment": true,
+   "both": true,
+   "status": "active"
+  },
+  {
+   "id": "342dg1ki",
+   "a": "POP-00637",
+   "b": "POP-00271",
+   "type": "rivalry",
+   "before": 7,
+   "after": 7.25,
+   "moment": true,
+   "both": true,
+   "status": "active"
+  },
+  {
+   "id": "oxiqurn6",
+   "a": "POP-00138",
+   "b": "POP-01044",
+   "type": "rivalry",
+   "before": 7,
+   "after": 7.25,
+   "moment": true,
+   "both": true,
+   "status": "active"
+  },
+  {
+   "id": "rg8j0gk6",
+   "a": "POP-00645",
+   "b": "POP-00671",
+   "type": "rivalry",
+   "before": 5.5,
+   "after": 7,
+   "moment": false,
+   "both": true,
+   "status": "active"
+  },
+  {
+   "id": "u7p0lyps",
+   "a": "POP-01136",
+   "b": "POP-00922",
+   "type": "rivalry",
+   "before": 5.5,
+   "after": 7,
+   "moment": false,
+   "both": true,
+   "status": "active"
+  },
+  {
+   "id": "s1w5r1xr",
+   "a": "POP-01072",
+   "b": "POP-00715",
+   "type": "rivalry",
+   "before": 5.5,
+   "after": 7,
+   "moment": false,
+   "both": true,
+   "status": "active"
+  },
+  {
+   "id": "qa8001c3",
+   "a": "POP-00460",
+   "b": "POP-00154",
+   "type": "tension",
+   "before": 3.5,
+   "after": 5.25,
+   "moment": true,
+   "both": true,
+   "status": "active"
+  },
+  {
+   "id": "3ry8y3r4",
+   "a": "POP-00539",
+   "b": "POP-00741",
+   "type": "rivalry",
+   "before": 5.5,
+   "after": 7,
+   "moment": false,
+   "both": true,
+   "status": "active"
+  },
+  {
+   "id": "u6ozw9jb",
+   "a": "POP-01030",
+   "b": "POP-00462",
+   "type": "rivalry",
+   "before": 5.5,
+   "after": 7,
+   "moment": false,
+   "both": true,
+   "status": "active"
+  },
+  {
+   "id": "3f38u07m",
+   "a": "POP-00481",
+   "b": "POP-00245",
+   "type": "rivalry",
+   "before": 5.5,
+   "after": 7,
+   "moment": false,
+   "both": true,
+   "status": "active"
+  },
+  {
+   "id": "557ui12p",
+   "a": "POP-01053",
+   "b": "POP-00778",
+   "type": "tension",
+   "before": 4,
+   "after": 5.5,
+   "moment": false,
+   "both": true,
+   "status": "active"
+  },
+  {
+   "id": "tedbx0f2",
+   "a": "POP-00967",
+   "b": "POP-01164",
+   "type": "tension",
+   "before": 4,
+   "after": 5.5,
+   "moment": false,
+   "both": true,
+   "status": "active"
+  },
+  {
+   "id": "6371nfhh",
+   "a": "POP-00201",
+   "b": "POP-00952",
+   "type": "tension",
+   "before": 4,
+   "after": 5.5,
+   "moment": false,
+   "both": true,
+   "status": "active"
+  }
+ ],
+ "momentBondsThatFell": 0,
+ "config": {
+  "bondMomentMaxPerWeek": "3",
+  "bondMomentChanceScale": "1",
+  "bondMomentDialSize": "2",
+  "bondMomentStepPartner": "0.25",
+  "bondMomentStepFriend": "0.2",
+  "bondMomentStepFamily": "0.1",
+  "bondMomentStepRival": "0.25"
+ },
+ "byKind": {
+  "family": 18,
+  "friend": 196,
+  "neighbor": 70,
+  "coworker": 62,
+  "rival": 40,
+  "colleague": 17,
+  "housemate": 9
+ },
+ "byLine": {
+  "had dinner with $CONTACT at $VENUE": 80,
+  "stopped by $CONTACT's place and stayed longer than planned": 40,
+  "thought of calling $CONTACT and did": 40,
+  "talked with $CONTACT on the front steps until the light went": 61,
+  "met $CONTACT for coffee at $VENUE and lost track of the hour": 80,
+  "stayed late to finish the count with $CONTACT": 62,
+  "crossed the street rather than pass $CONTACT": 40,
+  "cooked at home with $CONTACT and left the dishes for morning": 9
+ },
+ "theirHomeLines": 40,
+ "theirHomeWithNoHouseholdOnTheirRow": 2,
+ "shiftLines": 62,
+ "personAndPlaceLines": 160,
+ "someoneFamiliar": 0,
+ "notProven": [
+  "kind partner"
+ ],
+ "examples": {
+  "family": [
+   "Vinnie Keane (Piedmont Ave): had dinner with Amara Keane at Montclair Patisserie  [act:meal place:BIZ-00228 contactPopId:POP-00002 with:family]",
+   "Amara Keane (Piedmont Ave): had dinner with Vinnie Keane at Montclair Patisserie  [act:meal place:BIZ-00228 with:family contactPopId:POP-00001]",
+   "Lucia Polito (Fruitvale): thought of calling Miguel Allen and did  [contactPopId:POP-01029 with:family]"
+  ],
+  "friend": [
+   "Vinnie Keane (Piedmont Ave): stopped by Mike Paulson's place and stayed longer than planned  [act:visit place:HH-0084-371 contactPopId:POP-00527 with:friend]",
+   "Amara Keane (Piedmont Ave): stopped by Hector Campbell's place and stayed longer than planned  [act:visit place:HH-0084-424 contactPopId:POP-00641 with:friend]",
+   "Mark Aitken (Jack London): stopped by Jessie Berry's place and stayed longer than planned  [act:visit place:HH-0084-488 contactPopId:POP-00705 with:friend]"
+  ],
+  "neighbor": [
+   "Vinnie Keane (Piedmont Ave): thought of calling Hector Campbell and did  [contactPopId:POP-00641 with:neighbor]",
+   "Hal Richmond (West Oakland): talked with Mai Tse on the front steps until the light went  [contactPopId:POP-00977 with:neighbor]",
+   "Benji Dillon (Piedmont Ave): stopped by Ruth Anyanwu's place and stayed longer than planned  [act:visit place:HH-0110-F023 contactPopId:POP-01147 with:neighbor]"
+  ],
+  "coworker": [
+   "Carmen Delaine (West Oakland): stayed late to finish the count with Noah Tan  [act:shift place:BIZ-00018 contactPopId:POP-00157 with:coworker]",
+   "Noah Tan (Rockridge): stayed late to finish the count with Carmen Delaine  [act:shift place:BIZ-00018 with:coworker contactPopId:POP-00011]",
+   "Aaron Whitfield (Rockridge): stayed late to finish the count with Lamine Sissoko  [act:shift place:BIZ-00017 contactPopId:POP-00149 with:coworker]"
+  ],
+  "rival": [
+   "Darrin Davis (Piedmont Ave): crossed the street rather than pass Howard Perez  [contactPopId:POP-01034 with:rival]",
+   "John Ellis (Laurel): crossed the street rather than pass Gordon Tate  [contactPopId:POP-00148 with:rival]",
+   "Avery Santana (Rockridge): crossed the street rather than pass Naomi Sterling  [contactPopId:POP-00759 with:rival]"
+  ],
+  "colleague": [
+   "John Ellis (Laurel): thought of calling Geneva Zhou and did  [contactPopId:POP-00892 with:colleague]",
+   "John Ellis (Laurel): met Geneva Zhou for coffee at Nino's and lost track of the hour  [act:meal place:BIZ-00077 contactPopId:POP-00892 with:colleague]",
+   "Geneva Zhou (West Oakland): met John Ellis for coffee at Nino's and lost track of the hour  [act:meal place:BIZ-00077 with:colleague contactPopId:POP-00033]"
+  ],
+  "housemate": [
+   "Dmitri Soto (KONO): cooked at home with Briar Soto and left the dishes for morning  [act:meal contactPopId:POP-00926 with:housemate]",
+   "Briar Soto (KONO): cooked at home with Dmitri Soto and left the dishes for morning  [act:meal with:housemate contactPopId:POP-00276]",
+   "Weslie Cooper (Piedmont Ave): cooked at home with Tariq Cooper and left the dishes for morning  [act:meal contactPopId:POP-01000 with:housemate]"
+  ]
+ },
+ "notes": [
+  "no twin on a minor's record (by rule): talked with Mai Tse on the front steps until the light went",
+  "no twin on a minor's record (by rule): cooked at home with Tariq Cooper and left the dishes for mor",
+  "no twin on a minor's record (by rule): cooked at home with Felix Vasquez and left the dishes for mo",
+  "no twin on a minor's record (by rule): cooked at home with Rosa Zhou and left the dishes for mornin"
+ ],
+ "problems": [
+  "rivalry bonds (bothWritten) with a moment did not gain more than those without (0.9 vs 1.625)"
+ ],
+ "verdict": "FAIL"
+}

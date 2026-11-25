@@ -281,7 +281,10 @@
     },
     "seatFile": ".claude/agents/p-slayer/SEAT.md",
     "seatMemory": true,
-    "seatDossier": true
+    "seatDossier": true,
+    "writerTools": {
+      "maxToolCalls": 6
+    }
   },
   "anthony-raines": {
     "version": "ANTHONY-LEP2-4",

@@ -951,7 +951,7 @@ async function toolMemoryNote(popId, input, cycle) {
 // (builder 2026-11-11, "Yes" to turning it on for the reporters): cron-desk-run passes it with
 // --packet-only and --writer-tools; a seat with tools of its own keeps them and gets this one added.
 const CANON_RECALL = process.argv.includes('--canon-recall');
-const OWN_TOOL_SEATS = ['elliot-marbury', 'hal-richmond', 'anthony-raines'].concat(Object.keys(SEAT_TOOL_FRAMES));
+const OWN_TOOL_SEATS = ['elliot-marbury', 'hal-richmond', 'anthony-raines', 'p-slayer'].concat(Object.keys(SEAT_TOOL_FRAMES));   // p-slayer: his seat's tools (agy 2026-11-25 #2)
 const RECALL_ONLY = CANON_RECALL && !OWN_TOOL_SEATS.includes(PERSONA);   // a seat with no tools of its own gets this one alone
 let CANON_RECALL_CYCLE = null;                                          // the cycle being written; set in main
 const CANON_RECALL_TOOL = { type: 'function', function: { name: 'canon_recall', description: 'What the Tribune has already published on a person, place or topic: editions, supplementals and daily pieces from earlier cycles, each labeled with its cycle. Search a name or a place.', parameters: { type: 'object', properties: { query: { type: 'string', description: 'a person, place or topic, e.g. "Alicia Hernandez" or "Uptown coffee roaster"' } }, required: ['query'] } } };
@@ -1190,7 +1190,9 @@ async function main() {
     throw new Error('ANTHROPIC_API_KEY not set');
   }
 
-  const cycle = detectCycle();
+  // the run's own Cycle when it passes one (agy P Slayer #1: the writer took the newest world summary, saved under N+1 while
+  // the run waited for N — a W3 after a Sunday fire, or a past-Cycle test)
+  const cycle = /^\d+$/.test(String(arg('--cycle', '') || '')) ? String(arg('--cycle', '')) : detectCycle();
   CANON_RECALL_CYCLE = Number.isFinite(Number(cycle)) ? Number(cycle) : null;
   // Firebrand lane (S332): a persona loads the reporter's adversarial STANCE
   // (IDENTITY+LENS+RULES) — the teeth — instead of the desk's roundup skill.

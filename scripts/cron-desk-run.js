@@ -1444,11 +1444,12 @@ function writerArtifactTag(assign, personaSlug) {
   return tag;
 }
 
-function buildWriterArgs(desk, stateFile, personaSlug, artifactTag, routeOverride) {
+function buildWriterArgs(desk, stateFile, personaSlug, artifactTag, routeOverride, cycle) {
   const route = routeOverride || deskRoute(desk, personaSlug);
   return [
     path.join(ROOT, 'scripts', 'cron-desk-writer.js'),
     '--desk', desk,
+    ...(cycle != null && /^\d+$/.test(String(cycle)) ? ['--cycle', String(cycle)] : []),   // agy P Slayer #1: the writer writes the run's Cycle
     '--state-file', stateFile,
     ...(personaSlug ? ['--persona', personaSlug] : []),
     ...(artifactTag ? ['--artifact-tag', artifactTag] : []),
@@ -3322,7 +3323,8 @@ async function runWrite(assign) {
     path.relative(ROOT, stateFile),
     personaSlug,
     artifactTag,
-    route
+    route,
+    cycle
   );
   // Task 2.5.5: hand the writer the byline's POPID so the memory tool pair
   // (own citizen page, cp-<popid>) joins the tool loop.

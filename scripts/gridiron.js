@@ -107,7 +107,12 @@ function hittingRecord(cards) {
   const ps = cards.teams.As.players.filter((p) => p.kind === 'batter');
   const at = (lvl) => ps.filter((p) => levelOf(p) === lvl).map(hitterLine);
   return [RATING_NOTE, '', 'The A\'s hitters in the majors:', ...at('MLB'), '', 'In Las Vegas (AAA):', ...at('AAA'), '',
-    'Gone: ' + ps.filter((p) => levelOf(p) === 'gone').map((p) => p.name + ' — ' + (p.notes.join('; ') || 'no longer with the club')).join(' | ')].join('\n');
+    'Gone from the club (their record as they left it — how they left is in the notes):', ...goneLines(ps, hitterLine)].join('\n');
+}
+// A player who has left keeps his whole line: a trade is judged on what went out as well as what came in.
+function goneLines(ps, lineOf) {
+  const gone = ps.filter((p) => levelOf(p) === 'gone');
+  return gone.length ? gone.map((p) => lineOf(p) + (p.notes.length ? ' How he left: ' + p.notes.join('; ') + '.' : '')) : ['- none on record'];
 }
 function staffLines(cards, roles) {
   const st = (cards.teams.As.staff || { staff: [] }).staff.filter((s) => !roles || roles.test(s.role));
@@ -117,7 +122,7 @@ function pitchingRecord(cards) {
   const ps = cards.teams.As.players.filter((p) => p.kind === 'pitcher');
   const at = (lvl) => ps.filter((p) => levelOf(p) === lvl).map(pitcherLine);
   return [RATING_NOTE, '', 'The A\'s pitchers in the majors:', ...at('MLB'), '', 'In Las Vegas (AAA):', ...(at('AAA').length ? at('AAA') : ['- none on record']), '',
-    'Gone: ' + ps.filter((p) => levelOf(p) === 'gone').map((p) => p.name + ' — ' + (p.notes.join('; ') || 'no longer with the club')).join(' | '), '',
+    'Gone from the club (their record as they left it — how they left is in the notes):', ...goneLines(ps, pitcherLine), '',
     'The staff who work the arms:', ...staffLines(cards, /MANAGER|PITCHING|FARM/)].join('\n');
 }
 function rosterRecord(cards) {

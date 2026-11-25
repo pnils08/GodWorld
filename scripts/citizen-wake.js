@@ -33,7 +33,7 @@ const resonance = require('/root/GodWorld/lib/resonanceRecall'); // B4 v1 — sc
 const getCurrentCycle = require('/root/GodWorld/lib/getCurrentCycle');
 // Task 5 (citizen-loop-deepening, S300): perception assembly extracted to lib/wakePerception —
 // shared with scripts/citizenVoice.js (edition voicing) + the Task-6 conversation engine.
-const { buildPool, coResidents, loadLifeArc, loadSportsSlice, loadNeighborhoodTexture,
+const { buildPool, coResidents, loadLifeArc, loadDayMoments, loadSportsSlice, loadNeighborhoodTexture,
   loadBonds, loadFamily, loadHealthState, loadOwnPageReadback, dialTrajectory,
   loadCardAnchor, loadVoiceTexture, renderStanding, renderOwnRecord, loadOwnFeedLines, stationLine, loadOfficeHolders, identityLine,
   loadLivedEvents, renderLivedLine, livedFor, recordLivedSpend, selectWakeCitizen, wakeSeedKey,
@@ -210,7 +210,7 @@ function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bonds
   let ownFeed = '';
   try { ownFeed = loadOwnFeedLines(c.name, cycle).block; } catch (e) { ownFeed = ''; }
   const feedLine = ownFeed ? `\n\n${ownFeed}` : '';
-  const system = `${identityLine(c)} ${stationLine(c, !!ownFeed)} Your temperament: ${disp}.${trajLine}${arcLine}${health}${anchor}${talk}${record}${show}${feedLine}\n\nReal things from your life recently:\n${c.life}${family}${standing}${who}${bonds}${ripple}${opinions}${sports}${paper}${texture}${memory}${tensions}`;
+  const system = `${identityLine(c)} ${stationLine(c, !!ownFeed)} Your temperament: ${disp}.${trajLine}${arcLine}${health}${anchor}${talk}${record}${show}${feedLine}\n\nReal things from your life recently:\n${c.life}${c.dayMoments ? '\n\n' + c.dayMoments : ''}${family}${standing}${who}${bonds}${ripple}${opinions}${sports}${paper}${texture}${memory}${tensions}`;
   // T5 — varied-provocation question bank. The fixed "small things on your mind"
   // prompt becomes a deterministically-seeded pick latching a real signal this
   // citizen perceives, so two citizens woken the same cycle are prompted
@@ -447,6 +447,11 @@ async function fileNextChapter(c, cycle, question, parsed, dry) {
   const neighbors = await coResidents(c.nh, c.popId);
   const sportsLine = await loadSportsSlice();                 // T1b — one feed read, shared across the wake
   const lifeArc = await loadLifeArc(c.popId);                 // T1a — canonical milestone arc from LifeHistory_Log
+  // engine.356 cut C — this wake's part of the day: the citizen's moments of the Cycle the engine timed for it
+  const dayMoments = cycle ? await loadDayMoments(c.popId, cycle, WAKE, c.life) : { part: '', lines: [], block: '' };
+  if (dayMoments.error) logLine('day moments read failed (non-fatal, no part-of-day block this wake): ' + dayMoments.error);
+  c.dayMoments = dayMoments.block;
+  logLine(`day moments: ${dayMoments.lines.length} ${dayMoments.part || 'no part'} line(s) for ${c.popId}`);
   const textureLine = loadNeighborhoodTexture(c.nh, cycle);   // T2 — this hood's frozen lived-particulars block
   // engine.48 T4 write side needs bond POPIDs too — {pairs} keeps the prompt line identical.
   const bondsRes = await loadBonds(c.popId, { pairs: true }); // relationships-with-texture — people the citizen has history with (canon bonds)

@@ -411,14 +411,15 @@ function loadRawFeedRows(root, tab, cycle) {
 // summary and sports desk packet. A row no writer received is STRANDED.
 // Substring evidence only; no LLM. Written by the angle wake, cumulative
 // through the week (each writer's files appear on their grid day).
+// pipeline.111 (agy 2026-11-25 Talia #3): the seat-file records (*_record_slice) beside the old slices
 const DELIVERY_WRITERS = Object.freeze({
-  'Anthony Raines': ['slices/c{N}/anthony.md', 'cron-compare/anthony_slice_c{N}.json', 'cron-compare/sports_c{N}_anthony-raines_packet-v2_packet.json'],
+  'Anthony Raines': ['slices/c{N}/anthony.md', 'cron-compare/anthony_slice_c{N}.json', 'cron-compare/anthony_record_slice_c{N}.json', 'cron-compare/sports_c{N}_anthony-raines_packet-v2_packet.json'],
   'Hal Richmond': ['slices/c{N}/hal.md', 'cron-compare/hal_slice_c{N}.json', 'cron-compare/sports_c{N}_hal-richmond_packet-v2_packet.json'],
-  'P Slayer': ['slices/c{N}/p-slayer.md', 'cron-compare/pslayer_slice_c{N}.json', 'cron-compare/sports_c{N}_p-slayer_packet-v2_packet.json'],
+  'P Slayer': ['slices/c{N}/p-slayer.md', 'cron-compare/pslayer_slice_c{N}.json', 'cron-compare/pslayer_record_slice_c{N}.json', 'cron-compare/sports_c{N}_p-slayer_packet-v2_packet.json'],
   'Simon Leary': ['cron-compare/simon_slice_c{N}.json', 'cron-compare/sports_c{N}_simon-leary_packet-v2_packet.json'],
   'Tanya Cruz': ['cron-compare/tanya_slice_c{N}.json', 'cron-compare/sports_c{N}_tanya-cruz_packet-v2_packet.json'],
   'Selena Grant': ['slices/c{N}/selena-grant.md', 'cron-compare/oaks_beat_slice_c{N}.json', 'cron-compare/sports_c{N}_selena-grant_packet-v2_packet.json'],
-  'Talia Finch': ['slices/c{N}/talia-finch.md', 'cron-compare/oaks_ground_slice_c{N}.json', 'cron-compare/sports_c{N}_talia-finch_packet-v2_packet.json'],
+  'Talia Finch': ['slices/c{N}/talia-finch.md', 'cron-compare/oaks_ground_slice_c{N}.json', 'cron-compare/talia_record_slice_c{N}.json', 'cron-compare/sports_c{N}_talia-finch_packet-v2_packet.json'],
 });
 const DELIVERY_SHARED = Object.freeze({
   'world summary': ['world_summary_c{N}.md'],

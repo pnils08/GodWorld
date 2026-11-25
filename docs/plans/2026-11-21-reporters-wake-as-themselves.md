@@ -161,6 +161,8 @@ Keep: the ten methods as his own craft (he picks), rate arithmetic, sourcing (ev
 
 ## Changelog
 
+- 2026-11-25 (research-build) — Builder: card ages are right ("keane is 37 based on the card … the sheets may have age drift issues"; duet checks them as it builds cards); until a ledger row is trued, a contested age is left out (the gate reads the ledger). Mint ("sure we can mint them"): Fry, Hendricks, Kirkland queued on Advancement_Intake1 rows 261-263 for the C118 mint, read back.
+
 - 2026-11-24 (research-build) — Anthony step 3 built and folded (agy HOLD). The cards' ages disagree with the ledger's BirthYear on 15 players (Keane 37 vs 39, Ramos 27 vs 26): the ledger rules (newsroom age rule), the mismatch goes to the builder. Note: engine-sheet's e788cafe7 carried this lane's staged options fix and step 3 brief (shared index).
 
 - 2026-11-24 (research-build) — Anthony step 2: his record read live from the sports feed each morning (builder: "just read the sheets live"); agy HOLD folded — whole rows reach the packet (10 of 10 with Stats), privacy fails closed, a stale copy sits him out, the read is time-boxed.

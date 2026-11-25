@@ -73,7 +73,7 @@ const profileBits = (p) => {
   const f = p.profile || {};
   return [p.position + (f['Secondary Position'] && !/^none$/i.test(f['Secondary Position']) ? ' (also ' + f['Secondary Position'] + ')' : ''),
     'bats ' + (f.Bats || '?') + ', throws ' + (f.Throws || '?'), ageWord(p), 'overall ' + f.Overall + (p.trend ? ' (trending ' + p.trend + ')' : ''),
-    'potential ' + f.Potential].join(', ');
+    'potential ' + f.Potential].filter(Boolean).join(', ');
 };
 const nameOf = (p) => p.name + (p.popid ? ' (' + p.popid + ')' : '');
 
@@ -137,7 +137,7 @@ function rosterRecord(cards) {
     const om = opt.match(/(\d)\s*\/\s*(\d)\s*used/i);
     const options = om ? 'minor-league options used ' + om[1] + ' of ' + om[2] + ' (' + (Number(om[2]) - Number(om[1])) + ' left)' : (opt ? 'minor-league options: ' + opt : '');
     const contract = Object.entries(p.contract || {}).map(([y, v]) => y + ' ' + v).join(', ');
-    return '- ' + nameOf(p) + ' — ' + p.position + ', ' + ageWord(p) + ', overall ' + f.Overall + ', potential ' + f.Potential + ', ' + levelOf(p) +
+    return '- ' + nameOf(p) + ' — ' + [p.position, ageWord(p)].filter(Boolean).join(', ') + ', overall ' + f.Overall + ', potential ' + f.Potential + ', ' + levelOf(p) +
       (f['MLB Service'] != null ? ', service ' + f['MLB Service'] : '') + '. Contract: ' + (contract || 'not on record') +
       (r['On 40-Man Roster'] ? '. 40-man: ' + r['On 40-Man Roster'] : '') + (options ? ', ' + options : '') +
       (r['Contract Option'] && !/^none$/i.test(r['Contract Option']) ? ', option ' + r['Contract Option'] : '') +
@@ -282,16 +282,19 @@ async function ask({ question, asker, cycle, date, officeId: forced, dryRun }) {
 // One player's whole card as lines, each a fact on the record — the reporters' dossier_read reads this first
 // (pipeline.111 Anthony step 3). season: only that year's lines. Returns null when no card holds the name;
 // { ambiguous: [names] } when a partial name fits more than one.
-// A player's age is the ledger's (the newsroom's rule: the sim's year minus BirthYear); the card's own age is said only
-// for a player with no ledger row (agy step 3 #2: 15 of 25 cards disagree with the ledger by a year or two).
+// A player's age: the card's is right (builder 2026-11-25: "keane is 37 based on the card and its current with the game
+// right now so looks like the sheets may have age drift issues") and the ledger's BirthYear is being trued to the cards.
+// Until a row is trued, the fact check reads the ledger: where card and ledger agree the age is said; where they disagree
+// it is left out, so no one prints a contested age; a player with no ledger row carries the card's.
 let LEDGER = null;
 function ageWord(p, simYear) {
   if (!LEDGER) { LEDGER = new Map(); try { for (const l of fs.readFileSync(path.join(ROOT, 'output', 'simulation_ledger_snapshot.jsonl'), 'utf8').split('\n')) { if (!l.trim()) continue; const r = JSON.parse(l); if (r.POPID) LEDGER.set(String(r.POPID).toUpperCase(), r); } } catch (e) { /* no snapshot: the card's age is said as the card's */ } }
   const yr = Number(simYear || (loadCards() || {}).currentSeason) || null;
   const row = p.popid ? LEDGER.get(String(p.popid).toUpperCase()) : null;
   const by = row ? Number(row.BirthYear) : NaN;
-  if (yr && isFinite(by) && by > 1900) return 'age ' + (yr - by) + ' (born ' + by + ')';
-  return (p.profile || {}).Age != null ? 'age ' + p.profile.Age + ' on his card (no ledger row)' : null;
+  const card = Number((p.profile || {}).Age);
+  if (row && yr && isFinite(by) && by > 1900) return isFinite(card) && card !== yr - by ? null : 'age ' + (yr - by);
+  return isFinite(card) ? 'age ' + card : null;
 }
 function cardFor(name, cards) {
   const c = cards || loadCards();

@@ -1,0 +1,88 @@
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ enable debugging { debug: true }
+{
+ "label": "full",
+ "cycle": "118",
+ "lines": 3453,
+ "table": {
+  "service": [
+   "morning"
+  ],
+  "shift": [
+   "morning",
+   "afternoon"
+  ],
+  "errand": [
+   "morning",
+   "afternoon"
+  ],
+  "meal": [
+   "afternoon",
+   "evening"
+  ],
+  "visit": [
+   "afternoon",
+   "evening"
+  ],
+  "drink": [
+   "evening"
+  ],
+  "rest": [
+   "evening"
+  ],
+  "walk": [
+   "morning",
+   "afternoon",
+   "evening"
+  ],
+  "game": [
+   "evening"
+  ],
+  "youth-game": [
+   "afternoon"
+  ]
+ },
+ "ownRowsOnTab": 83,
+ "tally": {
+  "timed": 1169,
+  "byPart": {
+   "morning": 352,
+   "afternoon": 380,
+   "evening": 437
+  },
+  "by": {
+   "row": 508,
+   "kind:visit": 64,
+   "kind:game": 160,
+   "kind:service": 119,
+   "kind:rest": 71,
+   "kind:meal": 61,
+   "kind:errand": 71,
+   "kind:youth-game": 61,
+   "kind:shift": 28,
+   "code": 11,
+   "kind:walk": 11,
+   "kind:drink": 4
+  },
+  "untimed": 2284,
+  "twinsChecked": 316,
+  "spreadChecked": 853,
+  "choiceOfTwoOrMore": 308
+ },
+ "peopleWithATimedMoment": 679,
+ "spread": {
+  "3 moments in 2 part(s)": 49,
+  "3 moments in 1 part(s)": 5,
+  "1 moments in 1 part(s)": 367,
+  "2 moments in 1 part(s)": 28,
+  "5 moments in 3 part(s)": 3,
+  "4 moments in 3 part(s)": 24,
+  "3 moments in 3 part(s)": 38,
+  "2 moments in 2 part(s)": 152,
+  "4 moments in 2 part(s)": 10,
+  "5 moments in 2 part(s)": 3
+ },
+ "problems": 0,
+ "first": [],
+ "notProven": [],
+ "verdict": "PASS"
+}

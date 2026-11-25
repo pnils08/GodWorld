@@ -1,0 +1,58 @@
+AIM = BENCH (script read the bench marker)
+== push code 4866ee600
+bench pull-back byte-identical to /root/GodWorld/output/engine-sheet/2026-11-25-e356r/e356r.sha256
+== sync from live
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+line rows with a time: {"target":"bench","whenRows":83,"of":83,"written":83,"already":0}
+{"fireGuardMinutes":"0","cycleCountFormatted":"117","cycleCountIsNumber":true}
+clearfire 118: {"ok":true,"cleared":{"cycle":118,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+appended 5 to Edition_Coverage_Ratings; marked rows on the tab now 5
+appended 26 to Citizen_Media_Usage; marked rows on the tab now 26
+appended 1 to Oakland_Sports_Feed; marked rows on the tab now 1
+bench cycleCount 117
+clearfire 118: {"ok":false,"error":"no readable fire record to clear"}
+fire C118 rc=0 "verdict": "PASS" "wallS": 227
+   "afternoon": 380,
+   "evening": 437
+  },
+  "by": {
+   "row": 508,
+   "kind:visit": 64,
+   "kind:game": 160,
+   "kind:service": 119,
+   "kind:rest": 71,
+   "kind:meal": 61,
+   "kind:errand": 71,
+   "kind:youth-game": 61,
+   "kind:shift": 28,
+   "code": 11,
+   "kind:walk": 11,
+   "kind:drink": 4
+  },
+  "untimed": 2284,
+  "twinsChecked": 316,
+  "spreadChecked": 853,
+  "choiceOfTwoOrMore": 308
+ },
+ "peopleWithATimedMoment": 679,
+ "spread": {
+  "3 moments in 2 part(s)": 49,
+  "3 moments in 1 part(s)": 5,
+  "1 moments in 1 part(s)": 367,
+  "2 moments in 1 part(s)": 28,
+  "5 moments in 3 part(s)": 3,
+  "4 moments in 3 part(s)": 24,
+  "3 moments in 3 part(s)": 38,
+  "2 moments in 2 part(s)": 152,
+  "4 moments in 2 part(s)": 10,
+  "5 moments in 2 part(s)": 3
+ },
+ "problems": 0,
+ "first": [],
+ "notProven": [],
+ "verdict": "PASS"
+}
+read 1 exit 0
+== final sync from live
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.

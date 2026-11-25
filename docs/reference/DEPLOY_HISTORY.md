@@ -19,6 +19,8 @@ pointers:
 
 ## Current sandbox — full trail
 
+**`SANDBOX 1004` = PROD stage 85 + two files at `4866ee600` (2026-11-25, engine-sheet, engine.356 cut A4 the part of the day on a line) = PROD stage 86.** Manifest `output/engine-sheet/2026-11-25-e356r/e356r.sha256` (pull-back byte-identical). Two labelled runs (`run.sh <commit> <label>`), each from a live sync with the line rows' own times written to the bench tab: base (`71fc2eb9d`, stage 85; 56 rows) C118 PASS 238 s, 3,453 lines; full (`4866ee600`; 83 rows) C118 PASS 227 s — `read.js` PASS: 3,453 lines, 1,169 carry a part (morning 352, afternoon 380, evening 437) on 679 people, 2,284 carry none; 316 twin pairs share their part; the spread replayed on 853 lines (308 with a choice) — each took a least-held part; 0 problems, nothing unproven. `compare.js base full`: IDENTICAL — 772 of 772 bonds, 3,453 of 3,453 log rows in the same order once `when:` is stripped. Resynced from live after each run.
+
 **`SANDBOX 1004` = PROD stage 84 + three files at `71fc2eb9d` (2026-11-25, engine-sheet, engine.356 bond numbers on World_Config, child lines, rival fade) = PROD stage 85.** Manifest `output/engine-sheet/2026-11-24-e356q/e356q.sha256` (pull-back byte-identical). Three labelled runs (`run.sh <commit> base|move|full`), each one fire from a live sync; whole-week dumps `after-<label>.json`, reads `read1-<label>.out`, `compare-base-move.out`. Left synced from live.
 
 **`SANDBOX 1004` = PROD stage 83 + three files at `82da34162` (2026-11-24, engine-sheet, engine.356 cut A3 with whom + bond-called moments + the wedding gate) = PROD stage 84.** Manifest `output/engine-sheet/2026-11-24-e356p/e356p.sha256` (pull-back byte-identical). Five runs (`bbd105433`, `cb01e74f2`, `5ae67b27e`, `fef844945`, `82da34162`; the engine files are the same from the third on), each one fire from a live sync (C117) with nine bench-only lines; logs and reads kept per run (`bench-run<N>.log`, `read1-run<N>.out`). Fire PASS each time; read PASS on run 5. Left synced from live after the run.
@@ -225,6 +227,14 @@ pointers:
 ---
 
 ## PROD deploy log — full trail
+
+### PROD stage 86 — a moment carries its part of the day (2026-11-25, engine-sheet, engine.356 cut A4)
+
+- **What:** two files at `4866ee600` on stage 85 — `phase05-citizens/generateCitizensEvents.js` (`whenTagged_`: a line of a kind takes one of the parts World_Config `momentWhenByKind` allows it, a row's own `when:` tags rule over the kind, a line with neither carries none; the least-held part for the person and, on a `shared:both` line, the other person; a tie by `spotRank_`, no roll; the twin carries the same part; seven code lines carry their own), `phase01-config/engine94SheetContract.js` (the string seed with a shape — a cell not of the shape stops the fire by name). Data: 83 live Event_Content_Ledger rows carry their own `when:` tags (`output/engine-sheet/2026-11-25-e356r/when-rows.json`; written after the push, read back 83 of 83).
+- **Proof:** 36 suites that load the two files pass. agy SHIP-WITH-FIXES, folded (`output/antigravity/2026-11-25-review-e356-a4-when.md`; fold `4866ee600`). **Bench SANDBOX 1004** — §Current sandbox, top entry: base and full C118 PASS, the read PASS, the comparison IDENTICAL.
+- **Stage 86 (2026-11-25):** live pulled = stage 85 (`e356q-prod.sha256`); two files changed; built tree = the benched tree (`e356r.sha256`); manifest `output/engine-sheet/2026-11-25-e356r/e356r-prod.sha256`; pull-back byte-identical; version cut **@221**.
+- **Smoke at C118:** World_Config holds `momentWhenByKind` (seeded this fire); about a third of the week's lines carry one `when:` and none carries two; a shared moment's two records carry the same part; no Engine_Errors row from Phase5-CitizenEvents; bonds and dials as any week (the bench week was identical to stage 85's).
+- **Back out:** the two files from `71fc2eb9d` (= `e356q-prod.sha256`) + version cut; the row tags can stay (stage 85 writes them through unread).
 
 ### PROD stage 85 — bond numbers on World_Config; a minor is named only at a youth program, school or game; a rival moment is no upkeep; a retiree is nobody's coworker (2026-11-25, engine-sheet, engine.356)
 

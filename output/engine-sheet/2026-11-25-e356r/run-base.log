@@ -1,0 +1,25 @@
+AIM = BENCH (script read the bench marker)
+== push code 71fc2eb9d
+bench pull-back byte-identical to /root/GodWorld/output/engine-sheet/2026-11-25-e356r/e356r-base.sha256
+== sync from live
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+line rows with a time: {"target":"bench","whenRows":56,"of":56,"written":56,"already":0}
+{"fireGuardMinutes":"0","cycleCountFormatted":"117","cycleCountIsNumber":true}
+clearfire 118: {"ok":true,"cleared":{"cycle":118,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+appended 5 to Edition_Coverage_Ratings; marked rows on the tab now 5
+appended 26 to Citizen_Media_Usage; marked rows on the tab now 26
+appended 1 to Oakland_Sports_Feed; marked rows on the tab now 1
+bench cycleCount 117
+clearfire 118: {"ok":false,"error":"no readable fire record to clear"}
+fire C118 rc=0 "verdict": "PASS" "wallS": 238
+{
+ "label": "base",
+ "cycle": "118",
+ "lines": 3453,
+ "linesWithAWhenTag": 490,
+ "saved": "after-base.json"
+}
+read 1 exit 0
+== final sync from live
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.

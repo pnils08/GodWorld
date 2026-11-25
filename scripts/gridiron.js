@@ -31,6 +31,9 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const CARDS = path.join(ROOT, 'output', 'gridiron', 'cards.json');
 const MODEL = 'deepseek/deepseek-v4.1-flash-1017';   // the city workers' model (civic-office-map.json)
+// The analysts think before they answer (2026-11-24 test: with no thinking, a 2042 lineup left third base empty and
+// listed eight starters; with medium thinking, all nine positions and a split against left-handers). GRIDIRON_REASON=0 off.
+const REASON = process.env.GRIDIRON_REASON !== '0';
 
 const HOUSE = 'Gridiron Analytics';
 const ANALYSTS = [
@@ -261,7 +264,7 @@ async function ask({ question, asker, cycle, date, officeId: forced, dryRun }) {
   const toolReads = [];
   const exec = async (name, input) => { const out = await base(name, input); toolReads.push({ name, input, out: String(out || '') }); return out; };
   const res = await dw.openRouterToolLoop({ model: MODEL, system: w.system, user: w.user, toolset, exec,
-    maxToolCalls: 6, timeoutMs: 150000, answerLateToolCalls: 'No more reads for this question. Answer now, in words, from what you have read.', maxTokens: 2400, body: { reasoning: { enabled: false } } });
+    maxToolCalls: 6, timeoutMs: 150000, answerLateToolCalls: 'No more reads for this question. Answer now, in words, from what you have read.', maxTokens: REASON ? 6000 : 2400, body: REASON ? { reasoning: { effort: 'medium' } } : { reasoning: { enabled: false } } });
   const name = String((w.system.match(/^You are ([^,.]+)/) || [])[1] || '').trim();
   const text = String(res.text || '').trim();
   const finish = require('./workerAsk').TOOL_MARKUP.test(text) ? 'tool-markup' : (res.finishReason || null);

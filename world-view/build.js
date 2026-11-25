@@ -4,7 +4,8 @@
 const fs = require('fs');
 const path = require('path');
 const { isJobDaypart } = require('../lib/jobStatementRows');
-const BEATS = path.join(__dirname, '..', 'output', 'beats') + path.sep;
+// BEATS=<dir> reads another dump (a look-test against a sandbox week); the default is the week's own.
+const BEATS = (process.env.BEATS ? path.resolve(process.env.BEATS) : path.join(__dirname, '..', 'output', 'beats')) + path.sep;
 const rd = f => fs.readFileSync(BEATS + f + '.jsonl', 'utf8').trim().split('\n').filter(Boolean).map(l => JSON.parse(l));
 
 const meta = JSON.parse(fs.readFileSync(BEATS + 'meta.json', 'utf8'));
@@ -32,6 +33,16 @@ const biz = rd('Business_Ledger');
 const demo = rd('Neighborhood_Demographics');
 const weather = rd('Cycle_Weather').filter(r => String(r.CycleID) === CYCLE)[0] || {};
 
+// The part of the day the engine gave a line (EventTag when:morning|afternoon|evening, engine.356 A4), the place
+// it names by id (the PlaceId cell, else the line's first place:<id> tag) and the person (WithPopId, else
+// contactPopId:). A line with no when: tag has no part and is not on the day. Nothing is worked out here.
+const DAY_PARTS = ['morning', 'afternoon', 'evening'];
+function dayOf(r) {
+  const tags = String(r.EventTag || '').split('|'), tag = pre => { const t = tags.find(x => x.indexOf(pre) === 0); return t ? t.slice(pre.length).trim() : ''; };
+  const w = DAY_PARTS.indexOf(tag('when:')); if (w < 0) return null;
+  const tagPlace = tags.filter(x => x.indexOf('place:') === 0).map(x => x.slice(6).trim()).find(x => x && !/^(employer|their-home|congregation)$/.test(x)) || '';
+  return { w, pl: String(r.PlaceId || '').trim() || tagPlace, wi: String(r.WithPopId || '').trim() || tag('contactPopId:') };
+}
 const byHood = {};
 life.forEach(r => {
   const h = (byHood[r.Neighborhood] = byHood[r.Neighborhood] || { lines: 0, people: {} });
@@ -41,7 +52,7 @@ life.forEach(r => {
   if (!p.n && r.Name) p.n = r.Name;
   p.c++;
   if (pr < p.pr) { p.pr = pr; p.k = k; p.x = r.EventText; }
-  (p.all = p.all || []).push([pr, k, r.EventText]);
+  (p.all = p.all || []).push([pr, k, r.EventText, dayOf(r)]);
 });
 
 // ---------- who each person is: sex, age band, role (ledger), and the last thing they said (reflections) ----------
@@ -102,7 +113,7 @@ function who(id) {
 
 const notShownEarly = [];
 const loose = new Map();
-lifeAll.filter(r => !r.Neighborhood).forEach(r => { const [k, pr] = kindOf(r.EventTag); if (!loose.has(r.POPID)) loose.set(r.POPID, []); loose.get(r.POPID).push([pr, k, r.EventText]); });
+lifeAll.filter(r => !r.Neighborhood).forEach(r => { const [k, pr] = kindOf(r.EventTag); if (!loose.has(r.POPID)) loose.set(r.POPID, []); loose.get(r.POPID).push([pr, k, r.EventText, dayOf(r)]); });
 const placed = new Set();
 // a person whose rows carry no Name takes the ledger's; with no name anywhere they cannot be shown
 Object.keys(byHood).forEach(name => { const h = byHood[name]; Object.keys(h.people).forEach(id => { const p = h.people[id]; if (!p.n) p.n = nameOf(id); if (!p.n) { delete h.people[id]; notShownEarly.push(id); } }); });
@@ -145,12 +156,25 @@ const hoods = Object.keys(byHood).map(name => {
   const shown = all.slice().sort((a, b) => a.pr - b.pr || b.c - a.c).slice(0, CAP);
   all.slice().sort((a, b) => a.pr - b.pr || b.c - a.c).slice(CAP).forEach(p => notShown.push({ n: p.n, role: '', why: 'more people on ' + name + ' than the street shows' }));
   const d = demo.find(x => x.Neighborhood === name);
+  const hoodBiz = biz.filter(b => b.Neighborhood === name);
+  // a person's day: their timed lines, morning then afternoon then evening (the card's own order kept inside a
+  // part). b = the business the line names, when it stands on this street; hh = the household it names (the
+  // page knows which homes are on the street); wi / wn = the person it names.
+  const dayFor = p => {
+    const rows = p.all.filter(a => a[3]).map((a, i) => ({ a, i })).sort((x, y) => x.a[3].w - y.a[3].w || x.i - y.i);
+    return rows.map(({ a }) => {
+      const dd = a[3], o = { w: dd.w, x: a[2] }, bi = dd.pl ? hoodBiz.findIndex(b => b.BIZ_ID === dd.pl) : -1;
+      if (bi >= 0) o.b = bi; else if (dd.pl && households.has(dd.pl)) o.hh = dd.pl;
+      if (dd.wi) { o.wi = dd.wi; const wn = nameOf(dd.wi); if (wn) o.wn = wn; }
+      return o;
+    });
+  };
   return {
     name,
     lines: h.lines,
     total: all.length,
-    people: shown.map(p => Object.assign({ id: p.id, n: p.n, k: p.k, x: p.x, c: p.c, pr: p.pr, all: p.all.map(a => [a[1], a[2]]) }, p.noPlace ? { noPlace: 1 } : {}, who(p.id))),
-    biz: biz.filter(b => b.Neighborhood === name).map(b => Object.assign({ id: b.BIZ_ID, n: b.Name, s: b.Sector, e: Number(b.Employee_Count) || 1 }, bizDetail(b))),
+    people: shown.map(p => Object.assign({ id: p.id, n: p.n, k: p.k, x: p.x, c: p.c, pr: p.pr, all: p.all.map(a => [a[1], a[2]]) }, p.noPlace ? { noPlace: 1 } : {}, (dy => dy.length ? { day: dy } : {})(dayFor(p)), who(p.id))),
+    biz: hoodBiz.map(b => Object.assign({ id: b.BIZ_ID, n: b.Name, s: b.Sector, e: Number(b.Employee_Count) || 1 }, bizDetail(b))),
     pop: d ? { a: +d.Adults, st: +d.Students, se: +d.Seniors } : null
   };
 }).sort((a, b) => (b.name === 'Grand Lake') - (a.name === 'Grand Lake') || b.lines - a.lines);

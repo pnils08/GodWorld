@@ -247,10 +247,11 @@ function tieWords(t) {
 }
 // where each household lives: DATA.hoods[].homes (a parcel of the street, or a unit of one, chosen by the page's layout)
 var HOMES = {}; DATA.hoods.forEach(function (H, hi) { var bl = {}; ((H.block || {}).parcels || []).forEach(function (q) { bl[q.id] = 1; }); (H.homes || []).forEach(function (hm, k) { HOMES[hm.hh] = { h: hi, k: k, blk: !!bl[hm.lot] }; }); });
+var DAY_WORD = ['Morning', 'Afternoon', 'Evening']; // the engine's three parts of the day (a line's when: tag)
 function tieName(id) { return BYID[id] ? BYID[id].d.n : (DATA.offStreet || {})[id] || id; }
 // what a card says while two people who know each other are stopped together, or passing each other on bad terms
 function withLine(p) {
-  var m = p.meet; if (!m) return !p.at ? '' : p.at.kind === 'home' ? 'At their own door.' : 'Outside ' + p.at.n + ', where they work.';
+  var m = p.meet; if (!m) return !p.at ? '' : p.at.kind === 'moment' ? DAY_WORD[p.at.w] + ' this week: ' + p.at.x : p.at.kind === 'with' ? 'With ' + p.at.who + '.' : p.at.kind === 'home' ? 'At their own door.' : 'Outside ' + p.at.n + ', where they work.';
   return (m.bad ? 'Passing ' : 'With ') + m.q.d.n + ', ' + tieWords(m.t) + '.' + (!m.bad && m.t.talk ? ' They talked in week ' + m.t.talk.c + '.' : '');
 }
 var DBG = window.WV_DEBUG || null; // look-test hook: { cam: [x,y,z], look: [x,y,z], t0: seconds, hide: true, manual: true (the clock only moves on __wv.step(dt)), follow: { who: name or index, off: [x,y,z], aim: height } }
@@ -1051,6 +1052,14 @@ function build(idx, onBlk) {
     var d = o.d, sp = []; if (o.lead || o.post) return;
     if (d.hh && HOMES[d.hh] && DATA.hoods[HOMES[d.hh].h] === H0) { var hl = lotById[H.homes[HOMES[d.hh].k].lot]; if (hl) sp.push({ kind: 'home', s: hl.s, z: hl.z + (hl.k === 'h' ? (hl.w - 2.5) * 0.25 : 0), far: hl.res ? 1 : 0 }); }
     if (d.wk != null) { var wl = LAY.parcels.filter(function (q) { return q.b === d.wk; })[0], wp = LAY.places.filter(function (q) { return q.b === d.wk && q.half > 0; })[0]; if (wl) sp.push({ kind: 'work', s: wl.s, z: wl.z + 1.6, n: H.biz[d.wk].n }); else if (wp && wp.s) sp.push({ kind: 'work', s: wp.s, z: wp.z + wp.half - 3, n: H.biz[d.wk].n }); }
+    // the places their day names (build.js day): a business on this street, a home on it. A place on another
+    // street is not walked; the line is on their card either way.
+    (d.day || []).forEach(function (m, mi) {
+      var ml = null, mn = '';
+      if (m.b != null) { ml = LAY.parcels.filter(function (q) { return q.b === m.b; })[0]; mn = H.biz[m.b].n; }
+      else if (m.hh && HOMES[m.hh] && DATA.hoods[HOMES[m.hh].h] === H0) ml = lotById[H.homes[HOMES[m.hh].k].lot];
+      if (ml) sp.push({ kind: 'moment', s: ml.s, z: ml.z + (m.b != null ? 1.6 : (ml.k === 'h' ? (ml.w - 2.5) * 0.25 : 0)), n: mn, w: m.w, x: m.x, wi: m.wi || '', ord: mi });
+    });
     if (sp.length) o.want = sp;
   });
   singles.forEach(function (o) {
@@ -1059,7 +1068,12 @@ function build(idx, onBlk) {
     singles.forEach(function (u) { if (u === o || u.s !== tgt || u.moved || (u.want && u.want[0].s === tgt)) return; var dd = Math.abs(u.z0 - o.z0); if (dd < sdist) { sdist = dd; sw = u; } });
     if (sw) { var ts = o.s, tx = o.x, tz = o.z0; o.s = sw.s; o.x = sw.x; o.z0 = o.z = sw.z0; sw.s = ts; sw.x = tx; sw.z0 = sw.z = tz; o.moved = sw.moved = true; }
   });
-  people.forEach(function (o) { if (!o.want) return; var ok = o.want.filter(function (sp) { return sp.s === o.s; }); if (ok.length) o.spots = ok; });
+  people.forEach(function (o) {
+    if (!o.want) return; var ok = o.want.filter(function (sp) { return sp.s === o.s; }); if (!ok.length) return;
+    o.spots = ok;
+    // their day, in order: the places of it on their side of the road, morning first (life-people.js walks these one after the other)
+    var rt = ok.filter(function (sp) { return sp.kind === 'moment'; }); if (rt.length) o.route = rt;
+  });
   kit.ties = tiesHere;
   kit.people = people; // (the traffic file finds a citizen here when a chaos car has come for them)
   if (typeof LIFE.people === 'function') LIFE.people(kit, people);
@@ -1832,6 +1846,8 @@ function startVisit(d) {
   }
   section(body, 'This week (' + DATA.cycle + ')'); var ul = mk('ul');
   d.all.forEach(function (a) { var li = mk('li'), dot = mk('i'); dot.style.background = KIND[a[0]] || KIND.p; li.appendChild(dot); li.appendChild(mk('span', a[1])); ul.appendChild(li); }); body.appendChild(ul);
+  // their day, in the order the engine timed it; each line whole
+  if (d.day) { section(body, 'Through the day'); var dl = mk('ul'); d.day.forEach(function (m) { var li = mk('li'), dot = mk('i'); dot.style.background = KIND.p; li.appendChild(dot); li.appendChild(mk('span', DAY_WORD[m.w] + ': ' + m.x)); dl.appendChild(li); }); body.appendChild(dl); }
   if (d.said) { section(body, 'In their words'); saidBlock(body, d.said); (d.saidMore || []).forEach(function (sd) { saidBlock(body, sd); }); }
   // the people the sim holds a tie to: strongest first, each with the tie in the wake's own words, where they are
   // this week, the engine's note on the bond when it carries one, and the pair's latest saved conversation

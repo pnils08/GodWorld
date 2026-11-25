@@ -27,7 +27,8 @@ function readRows(file) {
   });
 }
 function readSources(root) {
-  const beats = path.join(root, 'output/beats');
+  // BEATS=<dir>: the same look-test dump build.js reads (a sandbox week); the default is the week's own
+  const beats = process.env.BEATS ? path.resolve(process.env.BEATS) : path.join(root, 'output/beats');
   return {
     meta: readJson(path.join(beats, 'meta.json')),
     ledgerMeta: readJson(path.join(root, 'output/simulation_ledger_snapshot.meta.json')),
@@ -433,6 +434,30 @@ function checkWorldView(build, sources, engine, secondBuild, reports = []) {
       else if (first >= 0 && p?.at !== first) fail('staff', `${h.name}/${p?.id}`, `the roster has them at ${biz[first].id} on this street and the page does not say so`);
     }
     if (n) reports.push(`STAFF ${n} people matched to an Active Employment_Roster row at a business on their street`);
+  }
+  // the day (engine.356 cut C): every entry of a person's day is one of their own timed rows of this Cycle, word
+  // for word, in the row's own part; morning before afternoon before evening; the business it points at is the
+  // one the row names (PlaceId, else its first place:<id> tag) and stands on this street; the household and the
+  // person are the row's own; and every timed row of a shown person is on their day.
+  {
+    const PARTS = ['morning', 'afternoon', 'evening'], WORDS = /^(employer|their-home|congregation)$/;
+    const facts = r => { const t = String(r.EventTag || '').split('|'), tag = pre => { const x = t.find(y => y.indexOf(pre) === 0); return x ? x.slice(pre.length).trim() : ''; };
+      return { w: PARTS.indexOf(tag('when:')), x: r.EventText, pl: String(r.PlaceId || '').trim() || t.filter(y => y.indexOf('place:') === 0).map(y => y.slice(6).trim()).find(y => y && !WORDS.test(y)) || '', wi: String(r.WithPopId || '').trim() || tag('contactPopId:') }; };
+    const timed = new Map(); for (const r of arr(sources.life, 'LifeHistory_Log')) { if (String(r.Cycle) !== String(build.CYCLE) || !r.EventText || /^CareerState/.test(r.EventTag || '')) continue; const f = facts(r); if (f.w < 0) continue; if (!timed.has(r.POPID)) timed.set(r.POPID, []); timed.get(r.POPID).push(f); }
+    let n = 0, walked = 0;
+    for (const h of hoods) for (const p of arr(h?.people || [], `${h?.name}.people`)) {
+      const biz = arr(h.biz || [], `${h.name}.biz`), mine = (timed.get(p?.id) || []).slice(), day = arr(p?.day || [], `${h.name}.${p?.id}.day`);
+      if (day.length !== mine.length) fail('day', `${h.name}/${p?.id}`, `${mine.length} timed rows this cycle, ${day.length} on the day`);
+      let last = 0;
+      for (const m of day) {
+        if (!(m.w >= last && m.w <= 2)) fail('day', `${h.name}/${p.id}`, 'not in morning, afternoon, evening order'); last = m.w;
+        const i = mine.findIndex(f => f.w === m.w && f.x === m.x && (f.wi || '') === (m.wi || '') && (m.b != null ? biz[m.b]?.id === f.pl : m.hh ? m.hh === f.pl : true));
+        if (i < 0) { fail('day', `${h.name}/${p.id}`, `no timed row of theirs says this, there, with them: ${String(m.x).slice(0, 60)}`); continue; }
+        const f = mine.splice(i, 1)[0]; n++; if (m.b != null) walked++;
+        if (m.b == null && biz.some(b => b?.id === f.pl)) fail('day', `${h.name}/${p.id}`, `the row names ${f.pl} on this street and the day does not point at it`);
+      }
+    }
+    if (n) reports.push(`DAY ${n} timed lines matched to their own rows (${walked} at a business on the person's street)`);
   }
   // notices: every notice on a street is a row of this cycle (a Faith_Ledger row of that neighborhood, or a sports
   // feed row whose HomeNeighborhood it is), word for word; a faith notice at a building is at the business of the

@@ -2944,15 +2944,20 @@ function generateCitizensEvents_(ctx) {
   // lines. At most bondMomentMaxPerWeek a person a Cycle, counted on both people. A pair rolls once, at
   // whichever of the two is written first. Dials on World_Config (ensureEngine356Config_ seeds them every
   // fire); a config without them (a fixture) leaves the feature off.
-  var BM_MAX = Number(ctx.config && ctx.config.bondMomentMaxPerWeek);
-  var BM_SCALE = Number(ctx.config && ctx.config.bondMomentChanceScale);
-  var BM_SIZE = Number(ctx.config && ctx.config.bondMomentDialSize);
-  if (!isFinite(BM_MAX) || !isFinite(BM_SCALE) || BM_MAX < 0 || BM_SCALE < 0) {
-    try { Logger.log('generateCitizensEvents_: World_Config bondMomentMaxPerWeek / bondMomentChanceScale missing — bond-called moments off this run'); } catch (eBm) {}
-    BM_MAX = 0; BM_SCALE = 0;
+  function bmCfg_(key) {   // a blank cell is a missing number, never 0 (agy 2026-11-24 §4)
+    var v = ctx.config ? ctx.config[key] : undefined;
+    return (v === undefined || v === null || String(v).trim() === '') ? NaN : Number(v);
+  }
+  var BM_MAX = bmCfg_('bondMomentMaxPerWeek');
+  var BM_SCALE = bmCfg_('bondMomentChanceScale');
+  var BM_SIZE = bmCfg_('bondMomentDialSize');
+  if (!isFinite(BM_MAX) || !isFinite(BM_SCALE) || !isFinite(BM_SIZE) || BM_MAX < 0 || BM_SCALE < 0) {
+    try { Logger.log('generateCitizensEvents_: World_Config bondMomentMaxPerWeek / bondMomentChanceScale / bondMomentDialSize missing or blank — bond-called moments off this run, named lines at ordinary size'); } catch (eBm) {}
+    BM_MAX = 0; BM_SCALE = 0; BM_SIZE = 1;
   }
   var bmBand_ = BM_SIZE >= 4 ? 'L' : (BM_SIZE >= 2 ? 'M' : '');   // the dial size of a line that names its person: 1 = S, 2 = M, 4 = L
   var bmCount_ = Object.create(null), bmPairRolled_ = Object.create(null);
+  var mirroredSeen_ = Object.create(null);   // POPID -> lines already on their record this Cycle by way of someone else's week
   function bondCallsFor_(popId, bonds) {
     var calls = [];
     if (!(BM_MAX > 0) || !bonds || !bonds.length) return calls;
@@ -2972,15 +2977,9 @@ function generateCitizensEvents_(ctx) {
     }
     // more calls than the week holds: which ones are kept is the draw's, not the bond list's order
     for (var sh = calls.length - 1; sh > 0; sh--) { var sj = Math.floor(roll() * (sh + 1)); var st = calls[sh]; calls[sh] = calls[sj]; calls[sj] = st; }
-    var kept = [];
-    for (var kc = 0; kc < calls.length; kc++) {
-      if ((bmCount_[self] || 0) >= BM_MAX) break;
-      if ((bmCount_[calls[kc].popId] || 0) >= BM_MAX) continue;
-      bmCount_[self] = (bmCount_[self] || 0) + 1;
-      bmCount_[calls[kc].popId] = (bmCount_[calls[kc].popId] || 0) + 1;
-      kept.push(calls[kc]);
-    }
-    return kept;
+    // A slot is counted when the line is written (below, with S.sharedMoments), not here — a call that
+    // finds no line costs nobody a moment (agy 2026-11-24 §3). The loop re-checks both counts per call.
+    return calls;
   }
   // The same moment on the other person's record: the sentence with the names changed places, the same
   // lead tag (the same dial, the same size), the same place, contactPopId the first person. The first
@@ -2991,6 +2990,24 @@ function generateCitizensEvents_(ctx) {
     var oText = text.split(who.name).join(selfName);
     if (oText === text) return;
     var oRow = rows[oi];
+    // The other person's own gates (agy 2026-11-24 §1): a minor's record takes no line from an adult's week
+    // (engine.144 — a minor draws no adult line); a GAME-clock player takes no spectator line (engine.208);
+    // and the life-state gate every drawn line passes (engine.67) is passed for them too.
+    var oBy = iBirthYear >= 0 ? Number(oRow[iBirthYear]) || 0 : 0;
+    if (oBy > 1900 && simYear - oBy < 18) return;
+    if (String(oRow[iClock] || "").toUpperCase() === "GAME" && tags.indexOf("source:sports") >= 0) return;
+    if (typeof deriveLifeState_ === 'function' && typeof isEventEligible_ === 'function') {
+      var oLs = deriveLifeState_({
+        birthYear: oBy, simYear: simYear, status: iStatus >= 0 ? oRow[iStatus] : "",
+        occupation: iOccupation >= 0 ? String(oRow[iOccupation] || "").trim() : "",
+        roleType: (iTierRole >= 0 ? String(oRow[iTierRole] || "") : ""),
+        maritalStatus: (iMarital >= 0 ? String(oRow[iMarital] || "") : ""),
+        numChildren: (iNumChildren >= 0 ? oRow[iNumChildren] : 0),
+        wealthLevel: (iWealth >= 0 ? oRow[iWealth] : null)
+      });
+      if (!isEventEligible_(oLs, eventClassFromTags_(tags))) return;
+    }
+    (mirroredSeen_[who.popId] = mirroredSeen_[who.popId] || []).push(normText_(oText), normText_(text));
     var oHood = iNeighborhood >= 0 ? String(oRow[iNeighborhood] || "") : "";
     var oTags = [];
     for (var mt = 0; mt < tags.length; mt++) {
@@ -3018,7 +3035,7 @@ function generateCitizensEvents_(ctx) {
       if (cycleSeen.indexOf(normText_(le.text)) >= 0) continue;
       var asks = withAskFromTags_(le.tags);
       if (asks.length ? asks.indexOf(kind) < 0 : kind === 'rival') continue;
-      fits.push({ entry: pool[bl], weight: Math.max(0.001, Number(le.weight) || 1) });
+      fits.push({ entry: pool[bl], weight: drawMass_(pool[bl]) });   // the weight the ordinary draw sees: dial share, trait and dial leanings (agy 2026-11-24 §2)
     }
     if (!fits.length) return null;
     var tot = 0; for (var f1 = 0; f1 < fits.length; f1++) tot += fits[f1].weight;
@@ -4166,7 +4183,7 @@ function generateCitizensEvents_(ctx) {
     // at the original level to keep this a minimal, reviewable diff.
     var eventCount = 1 + Math.floor(roll() * ATMOSPHERIC_MAX_EVENTS); // 1..N
     var bondCalls = bondCallsFor_(popId, citizenBonds);   // engine.356: the moments this citizen's bonds call, on top
-    var cycleSeen = [];
+    var cycleSeen = (mirroredSeen_[popIdNorm] || []).slice();   // a moment already on this record from someone else's week is not drawn again
     var emittedAny = false;
     for (var ev = 0; ev < eventCount + bondCalls.length; ev++) {
     var bondCall = ev >= eventCount ? bondCalls[ev - eventCount] : null;
@@ -4197,6 +4214,7 @@ function generateCitizensEvents_(ctx) {
 
     var entry = null;
     if (bondCall) {
+      if ((bmCount_[popIdNorm] || 0) >= BM_MAX || (bmCount_[bondCall.popId] || 0) >= BM_MAX) continue; // the week is full, theirs or the other's
       entry = bondLineFor_(pool, bondCall.kind, cycleSeen);
       if (!entry) continue; // no line of that kind this citizen can draw — the call goes unanswered
     } else if (reservedGriefEntry) {
@@ -4539,6 +4557,7 @@ function generateCitizensEvents_(ctx) {
     // same sentence is true of the other person (shared:both), written on their record too.
     if (withNamed && contact.popId) {
       if (!S.sharedMoments) S.sharedMoments = [];
+      if (bondCall) { bmCount_[popIdNorm] = (bmCount_[popIdNorm] || 0) + 1; bmCount_[contact.popId] = (bmCount_[contact.popId] || 0) + 1; }
       S.sharedMoments.push({ a: popIdNorm, b: contact.popId, kind: contact.kind || '', bondType: contact.bondType || '', called: !!bondCall, both: tags.indexOf("shared:both") >= 0 });
       if (tags.indexOf("shared:both") >= 0) mirrorShared_(contact, popIdNorm, pick, primaryTag, tags, stamp);
     }

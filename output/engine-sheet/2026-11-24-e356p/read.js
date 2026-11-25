@@ -46,6 +46,8 @@ const lines = bench.map(b => ({
   const cfg = Object.fromEntries((await sheets.getSheetData('World_Config')).map(r => [String(r[0] || '').trim(), r[1]]));
   const CFG_KEYS = ['bondMomentMaxPerWeek', 'bondMomentChanceScale', 'bondMomentDialSize', 'bondMomentStepPartner', 'bondMomentStepFriend', 'bondMomentStepFamily', 'bondMomentStepRival'];
   const bmMax = Number(cfg.bondMomentMaxPerWeek);
+  const sizeBand = Number(cfg.bondMomentDialSize) >= 4 ? 'L' : (Number(cfg.bondMomentDialSize) >= 2 ? 'M' : 'S');
+  const minorOrGone = p => { const r = led.find(x => String(x.POPID).trim().toUpperCase() === p) || {}; const by = Number(r.BirthYear) || 0; return by > 1900 && (2040 + Math.ceil(+C / 52) - 1) - by < 18; };
   let before = []; try { before = JSON.parse(fs.readFileSync(__dirname + '/bonds-before.json', 'utf8')); } catch (e) {}
   const calledBy = {}, momentPairs = {}, twinKey = {}; let called = 0, twins = 0, sizedM = 0;
   for (const r of log) twinKey[String(r.POPID).trim().toUpperCase() + '|' + (r.EventText || '')] = String(r.EventTag || '');
@@ -91,11 +93,12 @@ const lines = bench.map(b => ({
       if (k === 'coworker' || k === 'housemate') problems.push('a bond-called line with no bond kind (' + k + '): ' + t.slice(0, 60));
     }
     if (k !== 'coworker' && k !== 'housemate') momentPairs[[self, o].sort().join('|') + '|' + k] = 1;
-    if (ln && !ln.sized) { if (/-M$/.test(parts[0])) sizedM++; else problems.push('a line that names its person does not lead with a -M tag: ' + parts[0] + ' — ' + t.slice(0, 60)); }
+    if (ln && !ln.sized) { if (new RegExp('-' + sizeBand + '$').test(parts[0])) sizedM++; else problems.push('a line that names its person does not lead with a -' + sizeBand + ' tag: ' + parts[0] + ' — ' + t.slice(0, 60)); }
     if (ln && op.name && (P[self] || {}).name) {
       const tw = twinKey[o + '|' + t.split(op.name).join(P[self].name)];
       const isTwin = tw !== undefined && tw.split('|').indexOf('contactPopId:' + self) >= 0;
-      if (ln.both && !isTwin) problems.push('a shared:both line has no twin on ' + o + ': ' + t.slice(0, 70));
+      if (ln.both && !isTwin && minorOrGone(o)) { notes.push('no twin on a minor\'s record (by rule): ' + t.slice(0, 60)); }
+      else if (ln.both && !isTwin) problems.push('a shared:both line has no twin on ' + o + ': ' + t.slice(0, 70));
       if (!ln.both && isTwin) problems.push('a one-sided line was written on ' + o + ' too: ' + t.slice(0, 70));
       if (ln.both && isTwin) twins++;
     }
@@ -141,6 +144,9 @@ const lines = bench.map(b => ({
   const bondChange = {}; for (const ty in moved) bondChange[ty] = { withMoment: moved[ty].moment[0], meanChange: moved[ty].moment[0] ? +(moved[ty].moment[1] / moved[ty].moment[0]).toFixed(3) : null, without: moved[ty].none[0], meanChangeWithout: moved[ty].none[0] ? +(moved[ty].none[1] / moved[ty].none[0]).toFixed(3) : null };
   if (!before.length) problems.push('no bonds-before.json — the bond change is not measured');
   if (!Object.keys(momentPairs).length) problems.push('0 bonds had a moment');
+  // the step must show: where a type has 5+ bonds on each side, the bonds with a moment gained more than the rest
+  for (const ty in bondChange) { const c = bondChange[ty]; if (c.withMoment >= 5 && c.without >= 5 && !(c.meanChange > c.meanChangeWithout)) problems.push(ty + ' bonds with a moment did not gain more than those without (' + c.meanChange + ' vs ' + c.meanChangeWithout + ')'); }
+  if (!Object.values(bondChange).some(c => c.withMoment >= 5 && c.without >= 5)) problems.push('no bond type has 5 bonds with a moment and 5 without — the step is not measured');
   const want = ['friend', 'family', 'neighbor', 'coworker', 'housemate', 'rival', 'colleague', 'partner'];
   const notProven = want.filter(k => !byKind[k]).map(k => 'kind ' + k).concat(homes ? [] : ['their-home']).concat(shifts ? [] : ['shift with a coworker']).concat(twoSlot ? [] : ['person + place']);
   const out = { cycle: +C, lines: log.length, people: new Set(log.map(r => r.POPID)).size, bondEngineContactLines: engineLines,

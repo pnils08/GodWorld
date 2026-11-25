@@ -3371,6 +3371,12 @@
         "utilities/exportCycleArtifacts.js::buildCycleContextPack_"
       ]
     },
+    "bondMomentsUnstepped": {
+      "writers": [
+        "phase05-citizens/bondEngine.js::updateExistingBonds_"
+      ],
+      "readers": []
+    },
     "sharedMoments": {
       "writers": [
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"

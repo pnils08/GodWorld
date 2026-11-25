@@ -657,7 +657,8 @@ function updateExistingBonds_(ctx) {
   var momentStep = null;
   if (sharedMoments.length) {
     var mCfg = ctx.config || {};
-    momentStep = { partner: Number(mCfg.bondMomentStepPartner), friend: Number(mCfg.bondMomentStepFriend), family: Number(mCfg.bondMomentStepFamily), rival: Number(mCfg.bondMomentStepRival) };
+    var mNum = function(k) { var v = mCfg[k]; return (v === undefined || v === null || String(v).trim() === '') ? NaN : Number(v); }; // a blank cell is missing, never 0
+    momentStep = { partner: mNum('bondMomentStepPartner'), friend: mNum('bondMomentStepFriend'), family: mNum('bondMomentStepFamily'), rival: mNum('bondMomentStepRival') };
     if (isFinite(momentStep.partner) && isFinite(momentStep.friend) && isFinite(momentStep.family) && isFinite(momentStep.rival)) {
       momentBonds = {};
       for (var smi = 0; smi < sharedMoments.length; smi++) {
@@ -666,7 +667,8 @@ function updateExistingBonds_(ctx) {
         momentBonds[bondMomentKey_(sm.a, sm.b, sm.bondType)] = true;
       }
     } else {
-      Logger.log('updateExistingBonds_: World_Config bondMomentStep* missing — shared moments move no bond this run');
+      Logger.log('updateExistingBonds_: World_Config bondMomentStep* missing or blank — shared moments move no bond this run');
+      if (ctx.summary) ctx.summary.bondMomentsUnstepped = sharedMoments.length;   // on the run record, not only the log
     }
   }
   var momentStepped = 0;

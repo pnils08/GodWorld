@@ -1329,6 +1329,7 @@
 
 - **updateExistingBonds_(ctx)**
   Reads: S.cityDynamics, S.cycleActiveCitizens, S.cycleId, S.previousCycleState, S.relationshipBonds, S.sharedMoments, S.sportsCity
+  Writes: S.bondMomentsUnstepped
   Config: ctx.config.cycleCount
   RNG: ctx.rng / safeRand_(ctx)
 
@@ -2010,7 +2011,7 @@
 - **generateCitizensEvents_(ctx)**
   Reads: S.biasIntents, S.bizIdByName, S.bizOpenIds, S.canonHoods, S.chaosTransit, S.citizenEventMemory, S.citizenEvents, S.cityDynamics, S.contentLedger, S.crimeByNeighborhood, S.crimeMetrics, S.cycle, S.cycleActiveCitizens, S.cycleId, S.economicMood, S.engine299, S.eventsGenerated, S.faithEvents, S.faithExposures, S.holiday, S.holidayPriority, S.hoodSpots, S.initiativeEvents, S.isCreationDay, S.isFirstFriday, S.localEntities, S.neighborhoodDynamics, S.neighborhoodState, S.neighborhoodWeather, S.previousEvening, S.season, S.sharedMoments, S.sportsAftermath, S.sportsCity, S.sportsFeedEntries, S.sportsSeason, S.sportsSentimentBoost, S.sportsWeek, S.storyHooks, S.templateCooldowns, S.transitState, S.undockedBoard, S.undockedFeedEntries, S.undockedPilots, S.weather, S.worldEvents
   Writes: S.biasIntents, S.citizenEventMemory, S.citizenEvents, S.cycleActiveCitizens, S.engine299, S.eventsGenerated, S.faithExposures, S.folkMemory, S.householdMoments, S.minorsSkippedTexture, S.sharedMoments, S.storyHooks, S.templateCooldowns
-  Config: ctx.config.bondMomentChanceScale, ctx.config.bondMomentDialSize, ctx.config.bondMomentMaxPerWeek, ctx.config.cycleCount, ctx.config.eclExclusiveMinLines, ctx.config.eclExclusivePools, ctx.config.folkMemoryWindow, ctx.config.gcSurfaceChance, ctx.config.hoodFloorSurfaceQuota, ctx.config.rngSeed
+  Config: ctx.config.cycleCount, ctx.config.eclExclusiveMinLines, ctx.config.eclExclusivePools, ctx.config.folkMemoryWindow, ctx.config.gcSurfaceChance, ctx.config.hoodFloorSurfaceQuota, ctx.config.rngSeed
   Sheets: Community_Programs, Content_Telemetry, Faith_Organizations, Generic_Citizens, LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
 

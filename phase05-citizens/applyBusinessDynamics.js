@@ -788,6 +788,7 @@ function applyBusinessDynamics_(ctx) {
     if (closesNow) {
       out.closed++;
       var bName = String(iNm >= 0 ? row[iNm] : id);
+      delete openIds[id]; if (idByName[bName.trim()] === id) delete idByName[bName.trim()]; // engine.356: closing this very week — no moment is placed there
       if (stated > 0) { declines[id] = stated; out.shed += stated; }
       state[id] = [d.streak, 0, cycle];
       closures.push({ id: id, name: bName, hood: hood, sector: String(row[iSec] || ''), closedCycle: cycle, stated: stated });

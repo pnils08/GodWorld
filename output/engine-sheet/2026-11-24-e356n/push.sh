@@ -1,5 +1,5 @@
 #!/bin/bash
-# engine.356 stage 83 PROD push — a program line asks for a kind of place (1 file) on top of PROD stage 82 (e356l-prod.sha256).
+# engine.356 stage 83 PROD push — a program line asks for a kind of place (2 files) on top of PROD stage 82 (e356l-prod.sha256).
 #   bash output/engine-sheet/2026-11-24-e356n/push.sh <commit> [--dry-run]
 # Benched: SANDBOX 1004, the exact tree (e356n.sha256) — bench.log, one fire. Builder's standing go (TERMINAL.md: a PROD clasp push with its smoke note).
 set -euo pipefail
@@ -21,10 +21,10 @@ for F in $FILES; do
 done
 grep -q "progAskFromTags_" "$W/stage/phase05-citizens/generateCitizensEvents.js" || { echo "engine.356 A2 marker missing — stop"; exit 1; }
 CHG=$(join -j 2 <(tree "$W/stage" | sort -k2) <(sort -k2 "$BASEMAN") | awk '$2 != $3' | wc -l)
-[ "$CHG" = "1" ] || { echo "$CHG files changed vs base, expected one — stop"; exit 1; }
+[ "$CHG" = "2" ] || { echo "$CHG files changed vs base, expected two — stop"; exit 1; }
 tree "$W/stage" > "$MAN"; diff -q "$MAN" "$BENCHMAN" >/dev/null || { echo "built tree is not the benched tree (e356n.sha256) — stop"; exit 1; }
 echo "built tree = the benched tree (e356n.sha256)"
-DESC="engine.356 a program line asks for a kind of place (1 file at $SRC)"
+DESC="engine.356 a program line asks for a kind of place (2 files at $SRC)"
 if [ "$DRY" = "--dry-run" ]; then echo "dry run: stopping before the push"; exit 0; fi
 printf '{"scriptId":"%s","rootDir":""}' "$PROD_ID" > "$W/stage/.clasp.json"
 cp "$W/stage/appsscript.json" "$W/manifest.orig"; printf '\n' >> "$W/stage/appsscript.json"

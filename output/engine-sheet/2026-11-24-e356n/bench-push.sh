@@ -25,7 +25,7 @@ grep -q "progAskFromTags_" "$W/stage/phase05-citizens/generateCitizensEvents.js"
 
 [ "$(tree "$W/stage" | wc -l)" = "$(wc -l < "$BASEMAN")" ] || { echo "file count differs from base — stop"; exit 1; }
 CHG=$(join -j 2 <(tree "$W/stage" | sort -k2) <(sort -k2 "$BASEMAN") | awk '$2 != $3' | wc -l)
-[ "$CHG" = "1" ] || { echo "$CHG files changed vs base, expected one — stop"; exit 1; }
+[ "$CHG" = "2" ] || { echo "$CHG files changed vs base, expected two — stop"; exit 1; }
 tree "$W/stage" > "$MAN"; echo "manifest written: $MAN"
 if [ "$DRY" = "--dry-run" ]; then echo "dry run: stopping before the push"; exit 0; fi
 printf '{"scriptId":"%s","rootDir":""}' "$BENCH_ID" > "$W/stage/.clasp.json"; grep -q "$PROD_ID" "$W/stage/.clasp.json" && { echo "bench staging carries the PROD id — stop"; exit 1; }

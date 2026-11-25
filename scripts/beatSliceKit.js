@@ -323,7 +323,8 @@ function wire(seat) {
   }
   function load(cycle, root = ROOT) {
     const cached = loadJson(paths(cycle, root).json);
-    if (cached && cached.version === seat.version && !cached.empty) return cached;
+    // pipeline.111: a seat read live (seat.live — the sports feed's morning copy) is rebuilt on every load; its source moves mid-Cycle
+    if (!seat.live && cached && cached.version === seat.version && !cached.empty) return cached;
     const slice = build(cycle, { root });
     write(cycle, slice, root);
     return slice.empty ? null : slice;

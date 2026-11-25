@@ -761,6 +761,10 @@ async function buildFanout(date) {
   // builder that throws (missing/stale dump) drops THAT seat with a loud log;
   // the rest of the rota is untouched.
   let beatEnrich = { enriched: false, reason: 'none', seats: [], dropped: [] };
+  // pipeline.111 (builder 2026-11-24: "just read the sheets live"): the morning's copy of the sports feed, read before
+  // the seats' records are built; a failed read keeps yesterday's copy and says so.
+  try { const fl = await require('./sportsFeedLive').refresh(); console.error('[fanout] sports feed live: ' + fl.rows.length + ' public rows'); }
+  catch (e) { console.error('[fanout] sports feed live read failed — the last copy stands: ' + e.message); }
   if (cycle != null) beatEnrich = enrichBeatSeats(assignments, cycle, priorBeatRefs(cycle, date));
 
   // grok pipeline.52: enrich culture evening consumers with evening-life pack.

@@ -4,4 +4,4 @@
 
 **NEXT[research-build]:** pipeline.111 → sports data worker (answers the sports seats on player/team data; builder 11-24). Tribune roster read: no free data staffer (Ariana, Marbury, Rhea hold seats). Builder names who holds it, existing staffer or mint, before any build. Hold: engine.350 parked; Internal Affairs worker. Push held.
 
-**NEXT[engine-sheet]:** engine.356 cut A: with whom closed, LIVE stage 85 (smoke at C118, DEPLOY_HISTORY). Next A4 when. Then A5 the two log columns, then engine.368 (World_Config, his order). Inbox: retired-employer map (G-EC75) — needs his word for a row. Queued: engine.367, infrastructure.20, engine.362, .363. Push held.
+**NEXT[engine-sheet]:** engine.369 retirement path (builder 11-25: "complete or recode the retirement path") → read the code first; the inbox map is unverified (G-EC75 names what it missed). Then engine.356 A4 when, A5 log columns; then engine.368. Queued: engine.367, infrastructure.20, engine.362, .363. Push held.

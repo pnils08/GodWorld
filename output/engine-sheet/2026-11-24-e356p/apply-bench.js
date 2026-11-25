@@ -17,6 +17,8 @@ const lines = JSON.parse(fs.readFileSync(__dirname + '/bench-lines.json', 'utf8'
   // the tab's grid ends at its last row: grow it by exactly the rows to add (as the live apply of the 23 slot lines did)
   if (up.length) await sheets.resizeSheet('Event_Content_Ledger', null, d.length + up.length);
   if (up.length) await sheets.batchUpdate(up);
+  // the bonds as they stand before the fire — read.js measures each bond's change against this
+  fs.writeFileSync(__dirname + '/bonds-before.json', JSON.stringify(await sheets.getSheetAsObjects('Relationship_Bonds')));
   const back = await sheets.getSheetData('Event_Content_Ledger');
   const ok = lines.filter(bl => back.some(r => bl.every((v, i) => String(r[i] || '') === v))).length;
   console.log(JSON.stringify({ target: 'bench', benchLines: ok, of: lines.length, rows: back.length - 1 }));

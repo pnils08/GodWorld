@@ -2,7 +2,7 @@
   "generated": "2026-11-24",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 179,
-  "functionsMapped": 1792,
+  "functionsMapped": 1793,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -3369,6 +3369,15 @@
         "phase05-citizens/runRelationshipEngine.js::runRelationshipEngine_",
         "phase06-analysis/computeRecurringCitizens.js::computeRecurringCitizens_",
         "utilities/exportCycleArtifacts.js::buildCycleContextPack_"
+      ]
+    },
+    "sharedMoments": {
+      "writers": [
+        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
+      ],
+      "readers": [
+        "phase05-citizens/bondEngine.js::updateExistingBonds_",
+        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
       ]
     },
     "_faithJoinRipple": {

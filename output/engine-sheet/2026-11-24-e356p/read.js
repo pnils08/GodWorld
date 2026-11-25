@@ -28,12 +28,27 @@ const lines = bench.map(b => ({
   re: new RegExp('^' + esc(b[3]).replace(/\\\$CONTACT/g, '(.+?)').replace(/\\\$VENUE/g, '.+?') + '$'),
   asks: b[6].split(',').filter(t => t.indexOf('with:') === 0).map(t => t.slice(5)),
   theirHome: b[6].split(',').indexOf('place:their-home') >= 0,
-  shift: b[6].split(',').indexOf('place:employer') >= 0
+  shift: b[6].split(',').indexOf('place:employer') >= 0,
+  both: b[6].split(',').indexOf('shared:both') >= 0,
+  sized: /dial:[a-z]+:(up|down):[SML]/i.test(b[6])
 }));
+// Bond-called moments (on top of the with-whom checks):
+//   the seven bondMoment* keys are on the bench World_Config; a line with bond:called is a bond-kind line;
+//   nobody carries more bond-called lines than bondMomentMaxPerWeek; a shared:both line has its twin on the
+//   other person's record (names changed places, contactPopId back), a line without it has none;
+//   a line that names its person leads with a -M tag (bondMomentDialSize 2);
+//   each bond's Intensity change against bonds-before.json (written before the fire), bonds with a moment
+//   beside bonds without, by type — reported, and a moment bond that fell is listed.
 (async () => {
   const log = (await sheets.getSheetAsObjects('LifeHistory_Log')).filter(r => String(r.Cycle) === C);
   const led = await sheets.getSheetAsObjects('Simulation_Ledger');
   const bonds = await sheets.getSheetAsObjects('Relationship_Bonds');
+  const cfg = Object.fromEntries((await sheets.getSheetData('World_Config')).map(r => [String(r[0] || '').trim(), r[1]]));
+  const CFG_KEYS = ['bondMomentMaxPerWeek', 'bondMomentChanceScale', 'bondMomentDialSize', 'bondMomentStepPartner', 'bondMomentStepFriend', 'bondMomentStepFamily', 'bondMomentStepRival'];
+  const bmMax = Number(cfg.bondMomentMaxPerWeek);
+  let before = []; try { before = JSON.parse(fs.readFileSync(__dirname + '/bonds-before.json', 'utf8')); } catch (e) {}
+  const calledBy = {}, momentPairs = {}, twinKey = {}; let called = 0, twins = 0, sizedM = 0;
+  for (const r of log) twinKey[String(r.POPID).trim().toUpperCase() + '|' + (r.EventText || '')] = String(r.EventTag || '');
   const P = {};
   for (const r of led) P[String(r.POPID).trim().toUpperCase()] = { name: ((r.First || '') + ' ' + (r.Last || '')).trim(), st: String(r.Status || '').trim().toLowerCase(), biz: String(r.EmployerBizId || '').trim(), hh: String(r.HouseholdId || '').trim() };
   const bondKinds = {}; // "A|B" -> { kind: status }
@@ -71,6 +86,19 @@ const lines = bench.map(b => ({
     if (withs.length !== 1) { problems.push(withs.length + ' with: tags on a line: ' + parts.join('|').slice(0, 120)); continue; }
     const k = withs[0];
     byKind[k] = (byKind[k] || 0) + 1;
+    if (parts.indexOf('bond:called') >= 0) {
+      called++; calledBy[self] = (calledBy[self] || 0) + 1;
+      if (k === 'coworker' || k === 'housemate') problems.push('a bond-called line with no bond kind (' + k + '): ' + t.slice(0, 60));
+    }
+    if (k !== 'coworker' && k !== 'housemate') momentPairs[[self, o].sort().join('|') + '|' + k] = 1;
+    if (ln && !ln.sized) { if (/-M$/.test(parts[0])) sizedM++; else problems.push('a line that names its person does not lead with a -M tag: ' + parts[0] + ' — ' + t.slice(0, 60)); }
+    if (ln && op.name && (P[self] || {}).name) {
+      const tw = twinKey[o + '|' + t.split(op.name).join(P[self].name)];
+      const isTwin = tw !== undefined && tw.split('|').indexOf('contactPopId:' + self) >= 0;
+      if (ln.both && !isTwin) problems.push('a shared:both line has no twin on ' + o + ': ' + t.slice(0, 70));
+      if (!ln.both && isTwin) problems.push('a one-sided line was written on ' + o + ' too: ' + t.slice(0, 70));
+      if (ln.both && isTwin) twins++;
+    }
     if (ln) {
       byLine[ln.text] = (byLine[ln.text] || 0) + 1;
       if (ln.asks.length && ln.asks.indexOf(k) < 0) problems.push('kind ' + k + ' is not one the line asks for (' + ln.asks.join(',') + '): ' + t.slice(0, 70));
@@ -97,10 +125,27 @@ const lines = bench.map(b => ({
   }
   if (!log.length) problems.push('no log rows for C' + C);
   if (!lineCount) problems.push('0 with-whom lines landed');
+  for (const k of CFG_KEYS) if (cfg[k] === undefined || cfg[k] === '') problems.push('World_Config has no ' + k);
+  for (const p in calledBy) if (calledBy[p] > bmMax) problems.push(p + ' carries ' + calledBy[p] + ' bond-called lines, over the ' + bmMax + ' a week');
+  if (!called) problems.push('0 bond-called lines landed');
+  // bonds: change over the fire, with a moment and without
+  const bKey = b => [String(b.CitizenA || '').trim().toUpperCase(), String(b.CitizenB || '').trim().toUpperCase()].sort().join('|') + '|' + (KIND[String(b.BondType || '').trim().toLowerCase()] || '?');
+  const was = {}; for (const b of before) was[String(b.BondId) + '|' + bKey(b)] = Number(b.Intensity);
+  const moved = {}; let fell = 0;
+  for (const b of bonds) {
+    const w = was[String(b.BondId) + '|' + bKey(b)]; if (w === undefined || isNaN(w)) continue;
+    const d = Number(b.Intensity) - w, ty = String(b.BondType || '').toLowerCase(), has = momentPairs[bKey(b)] ? 'moment' : 'none';
+    const m = (moved[ty] = moved[ty] || { moment: [0, 0], none: [0, 0] }); m[has][0]++; m[has][1] += d;
+    if (has === 'moment' && d < 0 && w < 10) { fell++; notes.push('a bond with a moment fell: ' + b.BondId + ' ' + ty + ' ' + w + ' -> ' + b.Intensity); }
+  }
+  const bondChange = {}; for (const ty in moved) bondChange[ty] = { withMoment: moved[ty].moment[0], meanChange: moved[ty].moment[0] ? +(moved[ty].moment[1] / moved[ty].moment[0]).toFixed(3) : null, without: moved[ty].none[0], meanChangeWithout: moved[ty].none[0] ? +(moved[ty].none[1] / moved[ty].none[0]).toFixed(3) : null };
+  if (!before.length) problems.push('no bonds-before.json — the bond change is not measured');
+  if (!Object.keys(momentPairs).length) problems.push('0 bonds had a moment');
   const want = ['friend', 'family', 'neighbor', 'coworker', 'housemate', 'rival', 'colleague', 'partner'];
   const notProven = want.filter(k => !byKind[k]).map(k => 'kind ' + k).concat(homes ? [] : ['their-home']).concat(shifts ? [] : ['shift with a coworker']).concat(twoSlot ? [] : ['person + place']);
   const out = { cycle: +C, lines: log.length, people: new Set(log.map(r => r.POPID)).size, bondEngineContactLines: engineLines,
-    withLines: lineCount, byKind, byLine, theirHomeLines: homes, theirHomeWithNoHouseholdOnTheirRow: homesNoHousehold, shiftLines: shifts, personAndPlaceLines: twoSlot, someoneFamiliar: vague,
+    withLines: lineCount, bondCalledLines: called, mostBondCalledOnOnePerson: Math.max(0, ...Object.values(calledBy)), twinLines: twins, leadTagsSizedM: sizedM,
+    bondsWithAMoment: Object.keys(momentPairs).length, bondChange, momentBondsThatFell: fell, config: Object.fromEntries(CFG_KEYS.map(k => [k, cfg[k]])), byKind, byLine, theirHomeLines: homes, theirHomeWithNoHouseholdOnTheirRow: homesNoHousehold, shiftLines: shifts, personAndPlaceLines: twoSlot, someoneFamiliar: vague,
     notProven, examples: ex, notes: notes.slice(0, 12), problems, verdict: problems.length ? 'FAIL' : (lineCount ? (notProven.length ? 'PASS, not proven: ' + notProven.join(', ') : 'PASS') : 'FAIL') };
   console.log(JSON.stringify(out, null, 1));
   process.exit(problems.length ? 1 : 0);

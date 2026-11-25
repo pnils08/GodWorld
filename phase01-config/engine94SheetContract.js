@@ -532,6 +532,14 @@ var ENGINE356_CONFIG_SEEDS = [
   ['trajectoryCrimeBand', 0.05, 'engine.356: CrimeIndex distance from the city mean that scores a hood -1 (rougher) / +1 (safer) in its trajectory, like mood\'s 0.05 (C116 crime 0.57-0.73, mean 0.65: 8 of 22 hoods outside it)', 0.001, 5, false],
   // engine.360 (builder 2026-11-23: "Move the 0.5 onto World_Config"; rides this self-arm so no new ensure call is needed)
   ['ownerDrawShare', 0.5, 'engine.360: share of a business\'s profit (revenue minus payroll) paid to an off-heritage owner (Tier 3-4) as annual Income, split among the owners (was OWNER_DRAW_SHARE 0.5 in generationalWealthEngine.js)'],
+  // engine.356 bond-called moments (builder 2026-11-24: "Move config numbers to world_config for cleaner adjustment without code edits")
+  ['bondMomentMaxPerWeek', 3, 'engine.356: shared moments a citizen\'s bonds may call in one Cycle, on top of their ordinary lines (builder: "1 of these a week per bond up to 3"). 0 turns bond-called moments off', 0, 10, true],
+  ['bondMomentChanceScale', 1, 'engine.356: a bond calls a shared moment in a Cycle with chance = its Intensity / 10 x this (1 = a bond at 7 calls 7 weeks in 10; 0.5 halves every bond\'s calls)', 0, 5, false],
+  ['bondMomentDialSize', 2, 'engine.356: how much a line that names its person moves its dial: 1 = an ordinary line, 2 = double (builder: "counts double to a dial"), 4 = four times', 1, 4, true],
+  ['bondMomentStepPartner', 0.25, 'engine.356: Intensity a romantic bond gains in a Cycle the couple shared a moment (a romance starts at 5.5 and marries at 8 — about 10 weeks of moments; builder: "Marriage at 10 weeks is good")', 0, 5, false],
+  ['bondMomentStepFriend', 0.2, 'engine.356: Intensity a friendship / alliance / mentorship / neighbor / professional / festival bond gains in a Cycle the two shared a moment, on top of the weekly upkeep', 0, 5, false],
+  ['bondMomentStepFamily', 0.1, 'engine.356: Intensity a family bond gains in a Cycle the two shared a moment, on top of the weekly upkeep', 0, 5, false],
+  ['bondMomentStepRival', 0.25, 'engine.356: Intensity a rivalry / tension / sports rivalry gains in a Cycle the two crossed paths', 0, 5, false],
   ['migrationCrimeBand', 0.05, 'engine.356: CrimeIndex distance from the city median at which crime pushes people out of / pulls them into a hood in migration drift (was a +-15% ratio band that caught no hood)', 0.001, 5, false]
 ];
 

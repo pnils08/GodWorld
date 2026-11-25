@@ -2872,13 +2872,14 @@ function generateCitizensEvents_(ctx) {
   var withIdx_ = null;
   function loadWithIdx_() {
     if (withIdx_) return withIdx_;
-    withIdx_ = { live: Object.create(null), byBiz: Object.create(null), byHh: Object.create(null), bizOf: Object.create(null), hhOf: Object.create(null) };
+    withIdx_ = { live: Object.create(null), byBiz: Object.create(null), byHh: Object.create(null), bizOf: Object.create(null), hhOf: Object.create(null), rowOf: Object.create(null) };
     for (var wr = 0; wr < rows.length; wr++) {
       var wPop = String(rows[wr][iPopID] || "").trim().toUpperCase();
       if (!wPop || !nameByPop[wPop]) continue;
       var wSt = iStatus >= 0 ? String(rows[wr][iStatus] || "").trim().toLowerCase() : "";
       if (wSt === "deceased" || wSt === "traded" || wSt === "pending" || wSt === "inactive") continue;
       withIdx_.live[wPop] = 1;
+      withIdx_.rowOf[wPop] = wr;
       var wBiz = iEmployerBizCond >= 0 ? String(rows[wr][iEmployerBizCond] || "").trim() : "";
       if (/^BIZ-/.test(wBiz)) { withIdx_.bizOf[wPop] = wBiz; (withIdx_.byBiz[wBiz] = withIdx_.byBiz[wBiz] || []).push(wPop); }
       var wHh = iHousehold >= 0 ? String(rows[wr][iHousehold] || "").trim() : "";
@@ -2898,19 +2899,21 @@ function generateCitizensEvents_(ctx) {
   function withCandidates_(popId, bonds, askKinds) {
     var ix = loadWithIdx_();
     var self = String(popId || "").trim().toUpperCase();
-    var out = { kinds: [], by: Object.create(null) };
-    function add(kind, pop) {
+    var out = { kinds: [], by: Object.create(null), bondOf: Object.create(null) };
+    function add(kind, pop, bondType) {
       if (!pop || pop === self || !ix.live[pop]) return;
       if (!kind) return;
       if (askKinds.length ? askKinds.indexOf(kind) < 0 : kind === 'rival') return;
       if (!out.by[kind]) { out.by[kind] = []; out.kinds.push(kind); }
       if (out.by[kind].indexOf(pop) < 0) out.by[kind].push(pop);
+      if (bondType && !out.bondOf[kind + '|' + pop]) out.bondOf[kind + '|' + pop] = bondType;
     }
     for (var wb = 0; wb < (bonds || []).length; wb++) {
       var bd = bonds[wb];
       if (!bd) continue;
       var bA = String(bd.citizenA || "").trim().toUpperCase(), bB = String(bd.citizenB || "").trim().toUpperCase();
-      add(WITH_KIND_BY_BOND_[String(bd.bondType || "").trim().toLowerCase()] || '', bA === self ? bB : bA);
+      var bTy = String(bd.bondType || "").trim().toLowerCase();
+      add(WITH_KIND_BY_BOND_[bTy] || '', bA === self ? bB : bA, bTy);
     }
     if (askKinds.indexOf('coworker') >= 0 && ix.bizOf[self]) {
       var cwl = ix.byBiz[ix.bizOf[self]] || [];
@@ -2932,7 +2935,96 @@ function generateCitizensEvents_(ctx) {
     var wKind = wc.kinds[Math.floor(roll() * wc.kinds.length)];
     var wList = wc.by[wKind];
     var wPick = wList[Math.floor(roll() * wList.length)];
-    return { name: nameByPop[wPick], popId: wPick, kind: wKind, householdId: loadWithIdx_().hhOf[wPick] || "" };
+    return { name: nameByPop[wPick], popId: wPick, kind: wKind, householdId: loadWithIdx_().hhOf[wPick] || "", bondType: wc.bondOf[wKind + '|' + wPick] || "" };
+  }
+  // engine.356 bond-called moments (builder 2026-11-24: "these should fire when the bonds call for them too
+  // … 1 of these a week per bond up to 3 … if bond strength should trigger the events"). Each active bond of
+  // a citizen whose week is being written rolls once a Cycle — chance = Intensity / 10 x bondMomentChanceScale
+  // — and a bond that calls adds one $CONTACT line of its own kind to the week, ON TOP of the 1..N ordinary
+  // lines. At most bondMomentMaxPerWeek a person a Cycle, counted on both people. A pair rolls once, at
+  // whichever of the two is written first. Dials on World_Config (ensureEngine356Config_ seeds them every
+  // fire); a config without them (a fixture) leaves the feature off.
+  var BM_MAX = Number(ctx.config && ctx.config.bondMomentMaxPerWeek);
+  var BM_SCALE = Number(ctx.config && ctx.config.bondMomentChanceScale);
+  var BM_SIZE = Number(ctx.config && ctx.config.bondMomentDialSize);
+  if (!isFinite(BM_MAX) || !isFinite(BM_SCALE) || BM_MAX < 0 || BM_SCALE < 0) {
+    try { Logger.log('generateCitizensEvents_: World_Config bondMomentMaxPerWeek / bondMomentChanceScale missing — bond-called moments off this run'); } catch (eBm) {}
+    BM_MAX = 0; BM_SCALE = 0;
+  }
+  var bmBand_ = BM_SIZE >= 4 ? 'L' : (BM_SIZE >= 2 ? 'M' : '');   // the dial size of a line that names its person: 1 = S, 2 = M, 4 = L
+  var bmCount_ = Object.create(null), bmPairRolled_ = Object.create(null);
+  function bondCallsFor_(popId, bonds) {
+    var calls = [];
+    if (!(BM_MAX > 0) || !bonds || !bonds.length) return calls;
+    var ix = loadWithIdx_(), self = String(popId || "").trim().toUpperCase();
+    for (var bc = 0; bc < bonds.length; bc++) {
+      var bd = bonds[bc];
+      if (!bd) continue;
+      var bA = String(bd.citizenA || "").trim().toUpperCase(), bB = String(bd.citizenB || "").trim().toUpperCase();
+      var other = bA === self ? bB : bA;
+      var bTy = String(bd.bondType || "").trim().toLowerCase(), kind = WITH_KIND_BY_BOND_[bTy] || '';
+      if (!kind || !other || other === self || !ix.live[other]) continue;
+      var pairKey = (self < other ? self + '|' + other : other + '|' + self) + '|' + bTy;
+      if (bmPairRolled_[pairKey]) continue;
+      bmPairRolled_[pairKey] = 1;
+      var p = (Number(bd.intensity) || 0) / 10 * BM_SCALE;
+      if (roll() < p) calls.push({ name: nameByPop[other], popId: other, kind: kind, householdId: ix.hhOf[other] || "", bondType: bTy, called: true });
+    }
+    // more calls than the week holds: which ones are kept is the draw's, not the bond list's order
+    for (var sh = calls.length - 1; sh > 0; sh--) { var sj = Math.floor(roll() * (sh + 1)); var st = calls[sh]; calls[sh] = calls[sj]; calls[sj] = st; }
+    var kept = [];
+    for (var kc = 0; kc < calls.length; kc++) {
+      if ((bmCount_[self] || 0) >= BM_MAX) break;
+      if ((bmCount_[calls[kc].popId] || 0) >= BM_MAX) continue;
+      bmCount_[self] = (bmCount_[self] || 0) + 1;
+      bmCount_[calls[kc].popId] = (bmCount_[calls[kc].popId] || 0) + 1;
+      kept.push(calls[kc]);
+    }
+    return kept;
+  }
+  // The same moment on the other person's record: the sentence with the names changed places, the same
+  // lead tag (the same dial, the same size), the same place, contactPopId the first person. The first
+  // person's own context tags (job, age, hood, tier, standing) do not travel.
+  function mirrorShared_(who, selfPop, text, leadTag, tags, stamp) {
+    var oi = loadWithIdx_().rowOf[who.popId], selfName = nameByPop[selfPop];
+    if (oi === undefined || !selfName || !who.name) return;
+    var oText = text.split(who.name).join(selfName);
+    if (oText === text) return;
+    var oRow = rows[oi];
+    var oHood = iNeighborhood >= 0 ? String(oRow[iNeighborhood] || "") : "";
+    var oTags = [];
+    for (var mt = 0; mt < tags.length; mt++) {
+      if (/^(contactPopId|occupation|ageGroup|neighborhood|tier|qol|hotspot|archetype):/.test(String(tags[mt]))) continue;
+      oTags.push(tags[mt]);
+    }
+    oTags = mergeTags(oTags, ["contactPopId:" + selfPop, "neighborhood:" + oHood]);
+    var oLine = stamp + " — [" + leadTag + "] " + oText;
+    var oExisting = oRow[iLife] ? oRow[iLife].toString() : "";
+    oRow[iLife] = oExisting ? oExisting + "\n" + oLine : oLine;
+    oRow[iLastU] = ctx.now;
+    if (lifeLog) logRows.push([ctx.now, oRow[iPopID], who.name, [leadTag].concat(oTags).join("|"), oText, oHood, cycle]);
+    S.citizenEvents = S.citizenEvents || [];
+    S.citizenEvents.push({ popId: String(oRow[iPopID]), citizenName: who.name, text: oText, tag: leadTag, neighborhood: oHood });
+    activeSetObj[oRow[iPopID]] = true;
+    S.eventsGenerated = (S.eventsGenerated || 0) + 1;
+  }
+  // The $CONTACT lines of this citizen's pool that fit a person of this kind (the row's with: asks; a row
+  // with none fits anyone but a rival), not yet used this Cycle. Drawn by the row's own Weight.
+  function bondLineFor_(pool, kind, cycleSeen) {
+    var fits = [];
+    for (var bl = 0; bl < pool.length; bl++) {
+      var le = pool[bl].ledgerLine;
+      if (!le || !le.slots || le.slots.indexOf("CONTACT") < 0) continue;
+      if (cycleSeen.indexOf(normText_(le.text)) >= 0) continue;
+      var asks = withAskFromTags_(le.tags);
+      if (asks.length ? asks.indexOf(kind) < 0 : kind === 'rival') continue;
+      fits.push({ entry: pool[bl], weight: Math.max(0.001, Number(le.weight) || 1) });
+    }
+    if (!fits.length) return null;
+    var tot = 0; for (var f1 = 0; f1 < fits.length; f1++) tot += fits[f1].weight;
+    var rr = roll() * tot, acc = 0;
+    for (var f2 = 0; f2 < fits.length; f2++) { acc += fits[f2].weight; if (rr <= acc) return fits[f2].entry; }
+    return fits[fits.length - 1].entry;
   }
   // The tags of a line that named its second person: the row's with: asks give way to the kind picked,
   // contactPopId carries the person, and place:their-home becomes that person's household (none on their
@@ -2943,9 +3035,11 @@ function generateCitizensEvents_(ctx) {
       var wTag = String(tags[wg]);
       if (wTag.indexOf('with:') === 0) continue;
       if (wTag === 'place:their-home') { if (who.householdId) wOut.push('place:' + who.householdId); continue; }
+      // a moment with someone counts for more on its dial (bondMomentDialSize); a line that sets its own size keeps it
+      if (bmBand_ && /^dial:[a-z]+:(up|down)$/i.test(wTag)) { wOut.push(wTag + ':' + bmBand_); continue; }
       wOut.push(tags[wg]);
     }
-    return mergeTags(wOut, ["contactPopId:" + who.popId, "with:" + who.kind]);
+    return mergeTags(wOut, who.called ? ["contactPopId:" + who.popId, "with:" + who.kind, "bond:called"] : ["contactPopId:" + who.popId, "with:" + who.kind]);
   }
 
   // =========================================================================
@@ -4071,9 +4165,11 @@ function generateCitizensEvents_(ctx) {
     // leaves the neighborhood-metric grain unchanged. Body indentation is left
     // at the original level to keep this a minimal, reviewable diff.
     var eventCount = 1 + Math.floor(roll() * ATMOSPHERIC_MAX_EVENTS); // 1..N
+    var bondCalls = bondCallsFor_(popId, citizenBonds);   // engine.356: the moments this citizen's bonds call, on top
     var cycleSeen = [];
     var emittedAny = false;
-    for (var ev = 0; ev < eventCount; ev++) {
+    for (var ev = 0; ev < eventCount + bondCalls.length; ev++) {
+    var bondCall = ev >= eventCount ? bondCalls[ev - eventCount] : null;
     // Filter out recently repeated content
     var filtered = [];
     var recent = mem ? mem.recentTexts : [];
@@ -4097,10 +4193,13 @@ function generateCitizensEvents_(ctx) {
       }
       usePool = hardPool;
     }
-    if (!usePool.length && !reservedGriefEntry) break; // nothing fresh left to say this cycle
+    if (!usePool.length && !reservedGriefEntry && !bondCall) { ev = eventCount - 1; continue; } // nothing fresh left to say this cycle — the bonds' calls still run
 
     var entry = null;
-    if (reservedGriefEntry) {
+    if (bondCall) {
+      entry = bondLineFor_(pool, bondCall.kind, cycleSeen);
+      if (!entry) continue; // no line of that kind this citizen can draw — the call goes unanswered
+    } else if (reservedGriefEntry) {
       entry = reservedGriefEntry;
       reservedGriefEntry = null;
     } else {
@@ -4132,7 +4231,7 @@ function generateCitizensEvents_(ctx) {
       var clSlots = entry.ledgerLine.slots || [];
       for (var cls = 0; cls < clSlots.length; cls++) {
         if (clSlots[cls] === "VENUE") clVenue = pickVenue_(neighborhood, popId, actFromTags_(tags)) || (mem && mem.lastVenue) || "";
-        else if (clSlots[cls] === "CONTACT") { clUsedContact = true; contact = pickWith_(popId, citizenBonds, tags) || { name: "", popId: "" }; }
+        else if (clSlots[cls] === "CONTACT") { clUsedContact = true; contact = bondCall || pickWith_(popId, citizenBonds, tags) || { name: "", popId: "" }; }
         else if (clSlots[cls] === "PROGRAM") {
           var clProgs = hoodPrograms_(neighborhood, progAskFromTags_(tags));
           if (clProgs.length) clProgram = clProgs[Math.floor(roll() * clProgs.length)];
@@ -4434,6 +4533,15 @@ function generateCitizensEvents_(ctx) {
       tag: primaryTag,
       neighborhood: neighborhood || ''
     });
+
+    // engine.356: a line that named its person is a shared moment — handed to Phase5-Bonds (which runs
+    // after this engine and sees nothing else of who a line was with), and, when the line's row says the
+    // same sentence is true of the other person (shared:both), written on their record too.
+    if (withNamed && contact.popId) {
+      if (!S.sharedMoments) S.sharedMoments = [];
+      S.sharedMoments.push({ a: popIdNorm, b: contact.popId, kind: contact.kind || '', bondType: contact.bondType || '', called: !!bondCall, both: tags.indexOf("shared:both") >= 0 });
+      if (tags.indexOf("shared:both") >= 0) mirrorShared_(contact, popIdNorm, pick, primaryTag, tags, stamp);
+    }
 
     cycleSeen.push(normText_(pick));
     // Ledger lines: also block the SKELETON within-cycle (S289 C102 rehearsal:

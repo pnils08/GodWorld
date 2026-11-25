@@ -591,6 +591,12 @@ function findColIndex_(headers, possibleNames) {
 // the fire response carries the why (clasp logs unavailable, no GCP project)
 var ENGINE59_DIAG = null;
 
+// engine.356: one key for a pair's bond of one type, whichever side is A.
+function bondMomentKey_(a, b, bondType) {
+  var ka = String(a || '').trim().toUpperCase(), kb = String(b || '').trim().toUpperCase();
+  return (ka < kb ? ka + '|' + kb : kb + '|' + ka) + '|' + String(bondType || '').trim().toLowerCase();
+}
+
 function updateExistingBonds_(ctx) {
   var rng = safeRand_(ctx);
   var S = ctx.summary || {};
@@ -640,6 +646,31 @@ function updateExistingBonds_(ctx) {
   // v2.4: Use ctx.neighborhoodList instead of global
   var neighborhoodList = ctx.neighborhoodList || [];
 
+  // engine.356 (builder 2026-11-24: "a bond event maybe helps drive the bond … this way a marriage gets a
+  // boost from them spending time"): the shared moments Phase5-CitizenEvents wrote this Cycle
+  // (S.sharedMoments — a line that named its person). A bond with a moment takes one step for the week,
+  // however many moments it had, sized by its kind on World_Config (bondMomentStep*), and does not fade
+  // that week: the moment is the upkeep. A moment with a coworker or housemate who has no bond row moves
+  // nothing here.
+  var momentBonds = null;
+  var sharedMoments = (ctx.summary && ctx.summary.sharedMoments) || [];
+  var momentStep = null;
+  if (sharedMoments.length) {
+    var mCfg = ctx.config || {};
+    momentStep = { partner: Number(mCfg.bondMomentStepPartner), friend: Number(mCfg.bondMomentStepFriend), family: Number(mCfg.bondMomentStepFamily), rival: Number(mCfg.bondMomentStepRival) };
+    if (isFinite(momentStep.partner) && isFinite(momentStep.friend) && isFinite(momentStep.family) && isFinite(momentStep.rival)) {
+      momentBonds = {};
+      for (var smi = 0; smi < sharedMoments.length; smi++) {
+        var sm = sharedMoments[smi];
+        if (!sm || !sm.bondType) continue;
+        momentBonds[bondMomentKey_(sm.a, sm.b, sm.bondType)] = true;
+      }
+    } else {
+      Logger.log('updateExistingBonds_: World_Config bondMomentStep* missing — shared moments move no bond this run');
+    }
+  }
+  var momentStepped = 0;
+
   for (var b = 0; b < bonds.length; b++) {
     var bond = bonds[b];
     if (!bond || bond.status === BOND_STATUS.RESOLVED || bond.status === BOND_STATUS.SEVERED) {
@@ -647,7 +678,16 @@ function updateExistingBonds_(ctx) {
     }
 
     var intensity = Number(bond.intensity) || 0;
-    var priorIntensity = intensity;
+    var hadMoment = !!(momentBonds && momentBonds[bondMomentKey_(bond.citizenA, bond.citizenB, bond.bondType)]);
+    if (hadMoment) {
+      var mType = String(bond.bondType || '').trim().toLowerCase();
+      intensity += mType === BOND_TYPES.ROMANTIC ? momentStep.partner
+        : mType === BOND_TYPES.FAMILY ? momentStep.family
+        : (mType === BOND_TYPES.RIVALRY || mType === BOND_TYPES.TENSION || mType === BOND_TYPES.SPORTS_RIVAL) ? momentStep.rival
+        : momentStep.friend;
+      momentStepped++;
+    }
+    var priorIntensity = Number(bond.intensity) || 0;
     var priorStatus = bond.status;
     var priorType = bond.bondType;
     var bondAge = currentCycle - (bond.cycleCreated || currentCycle);
@@ -826,7 +866,7 @@ function updateExistingBonds_(ctx) {
     // engine.178 (S438): WARMTH IS MAINTENANCE — a warm pair's neglected bond fades slower
     // (x0.75 at +2/+2), a cold pair's faster (x1.25) (doctrine §11: marriage is years of a
     // MAINTAINED bond).
-    if (!(aActive && bActive)) {
+    if (!(aActive && bActive) && !hadMoment) {
       var fadeRate = (aActive || bActive) ? BOND_FADE_ONE_ABSENT : BOND_FADE_BOTH_ABSENT;
       intensity -= fadeRate * (2 - bondWarmthFactor_(ctx, bond.citizenA, bond.citizenB));
     }

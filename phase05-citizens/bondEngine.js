@@ -2395,9 +2395,13 @@ function processRomanceAndMarriage_(ctx) {
 
     // ── A grown romance marries. Period. (No caps — what matures, marries.
     // engine.66b: the years live in the growth rate, not in a timer here.)
+    // engine.356 (builder 2026-11-24: "let's keep marriages to boy / girl so we can make sure we know how
+    // to control the code"): the wedding itself checks it. The three doors into romance already pair a man
+    // with a woman (the friendship door above, the two Generic_Citizens doors by wantSex); this is the gate
+    // on the outcome, whatever door or old row the romance came through. A blank Gender marries nobody.
     if (bond.bondType === BOND_TYPES.ROMANTIC &&
         Number(bond.intensity) >= MARRIAGE_THRESHOLD &&
-        bothCanCourt && ageOk) {
+        bothCanCourt && ageOk && oppositeSex) {
       marryCitizens_(ctx, bond, A, B, cycle);
       // engine.302: the index is this pass's snapshot — mark the pair married in it, so a second grown
       // romance on either partner (a triangle) cannot marry them again the same pass

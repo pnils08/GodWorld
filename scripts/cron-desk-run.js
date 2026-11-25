@@ -71,6 +71,7 @@ const BEAT_BUILDERS = {
   'carmen-delaine': 'buildCivicSlice',   // pipeline.111 (builder 2026-11-23): her own civic record, off the civic-domain pick
   'luis-navarro': 'buildInvestigationsSlice',   // pipeline.111 (builder 2026-11-24): his own record, off the anomaly pick
   'farrah-del-rio': 'buildOpinionSlice',
+  'p-slayer': 'buildPSlayerRecord',   // pipeline.111 (builder 2026-11-25): the A's and the Oaks, read live; off buildPSlayerSlice's scored pick
   'anthony-raines': 'buildAnthonyRecord',   // pipeline.111 (builder 2026-11-24): the A's on the sports feed, read live; off buildAnthonySlice's scored pick   // pipeline.111 (builder 2026-11-24): the opinion column's week
   'freelance-firebrand': 'buildJaxRecordSlice',   // pipeline.111 (builder 2026-11-24): Jax's record, off the scored stink pick (buildJaxSlice kept for pipeline.115)
   'sharon-okafor': 'buildLifestyleSlice',
@@ -82,9 +83,10 @@ const BEAT_BUILDERS = {
   'tamsin-pruitt': 'buildLivesSlice',   // pipeline.73 Lives — daily, Mon–Fri grid
   'ines-sorensen': 'buildVoicesSlice'   // pipeline.73 Voices — Wed–Fri grid + own Sat/Sun crons
 };
-const BEAT_NAME_RE = /anthony\s*raines|jax\s*caldera|carmen\s*delaine|luis\s*navarro|farrah\s*del\s*rio|elliot\s*marbury|trevor\s*shimizu|lila\s*mezran|angela\s*reyes|noah\s*tan|elliot\s*graye|rachel\s*torres|kai\s*marston|sharon\s*okafor|maria\s*keen|selena\s*grant|talia\s*finch|celeste\s*tran|tamsin\s*pruitt|ines\s*sorensen/i;
+const BEAT_NAME_RE = /p\.?\s*slayer|anthony\s*raines|jax\s*caldera|carmen\s*delaine|luis\s*navarro|farrah\s*del\s*rio|elliot\s*marbury|trevor\s*shimizu|lila\s*mezran|angela\s*reyes|noah\s*tan|elliot\s*graye|rachel\s*torres|kai\s*marston|sharon\s*okafor|maria\s*keen|selena\s*grant|talia\s*finch|celeste\s*tran|tamsin\s*pruitt|ines\s*sorensen/i;
 function beatSlugForName(name) {
   const n = String(name || '');
+  if (/p\.?\s*slayer/i.test(n)) return 'p-slayer';
   if (/anthony\s*raines/i.test(n)) return 'anthony-raines';
   if (/jax\s*caldera/i.test(n)) return 'freelance-firebrand';
   if (/carmen\s*delaine/i.test(n)) return 'carmen-delaine';
@@ -785,7 +787,7 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
           L.push('COLOR: ' + (js.scene.colorRoom || ''));
         }
       } catch (_) { /* optional */ }
-    } else if (persona.name && /p\.?\s*slayer/i.test(persona.name)) {
+    } else if (persona.name && /p\.?\s*slayer/i.test(persona.name) && !BEAT_BUILDERS['p-slayer']) {
       L.push('HEAT: first-person I/we fan column. Gut or Oakland sensory open. Charge most of the time.');
       L.push('Friction pivot required. Metrics are foils, not Anthony analysis. Hate-the-move / I-was-wrong arc OK.');
       L.push('ONE column — not multi-voice sports-desk average.');
@@ -1815,7 +1817,7 @@ async function runAngle(assign) {
       const { loadJaxSlice } = require(path.join(__dirname, 'buildJaxSlice'));
       jaxSlice = loadJaxSlice(cycle);
     } catch (_) { /* optional scene pack */ }
-  } else if (personaSlug === 'p-slayer') {
+  } else if (personaSlug === 'p-slayer' && !BEAT_BUILDERS[personaSlug]) {   // pipeline.111: off BEAT_BUILDERS, the old scored pick
     try {
       const { loadPSlayerSlice } = require(path.join(__dirname, 'buildPSlayerSlice'));
       pslayerSlice = loadPSlayerSlice(cycle);
@@ -2006,7 +2008,7 @@ async function runAngle(assign) {
     // Persona without story keeps the original smells-off digest ask.
     // grok 2026-08-07: p-slayer gets fan-heat ask (not Jax stink register).
     let ask;
-    if (persona && personaSlug === 'p-slayer' && story) {
+    if (persona && personaSlug === 'p-slayer' && story && !BEAT_BUILDERS[personaSlug]) {
       const sceneBits = [];
       if (pslayerSlice) {
         if (pslayerSlice.pulse) {

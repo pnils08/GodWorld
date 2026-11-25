@@ -288,6 +288,13 @@ function street(story, slice, cycle, root, seat, opts = {}) {
   // A snapshot from another Cycle holds no life line from this one.
   if (Number(meta.cycle) !== Number(cycle)) return Object.freeze([]);
   const highlights = opts.highlights || typedHighlights(story, slice, seat);
+  if (!opts.highlights && seat === 'p-slayer' && /on the sports feed/.test(clean(story && story.ref))) {   // pipeline.111: the stands, both clubs
+    for (const team of new Set(rows(root, 'Oakland_Sports_Feed')
+      .filter(r => Number(r.Cycle) === Number(cycle) && /\bA['’]s\b|athletics|\boaks\b/i.test(clean(r.TeamsUsed)))
+      .map(r => clean(r.TeamsUsed)).filter(Boolean))) {
+      highlights.push({ kind: 'game', entity: team, predicate: 'watch' });
+    }
+  }
   if (!opts.highlights && seat === 'talia-finch' &&
       clean(story && story.ref).includes('Oakland_Sports_Feed')) {
     for (const team of new Set(rows(root, 'Oakland_Sports_Feed')

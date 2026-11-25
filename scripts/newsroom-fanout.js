@@ -443,6 +443,7 @@ const BEAT_BUILDERS = {
   'carmen-delaine': 'buildCivicSlice',   // pipeline.111 (builder 2026-11-23)
   'luis-navarro': 'buildInvestigationsSlice',   // pipeline.111 (builder 2026-11-24)
   'farrah-del-rio': 'buildOpinionSlice',
+  'p-slayer': 'buildPSlayerRecord',   // pipeline.111 (builder 2026-11-25): the A's and the Oaks, read live; off buildPSlayerSlice's scored pick
   'anthony-raines': 'buildAnthonyRecord',   // pipeline.111 (builder 2026-11-24): the A's on the sports feed, read live; off buildAnthonySlice's scored pick   // pipeline.111 (builder 2026-11-24)
   'freelance-firebrand': 'buildJaxRecordSlice',   // pipeline.111 (builder 2026-11-24)
   'sharon-okafor': 'buildLifestyleSlice',
@@ -613,7 +614,7 @@ async function buildFanout(date) {
 
   // grok: enrich any P Slayer sports seat with fan-pulse slice (charge bag + prior takes).
   let pslayerEnrich = { enriched: false, reason: 'none' };
-  if (cycle != null) {
+  if (cycle != null && !BEAT_BUILDERS['p-slayer']) {   // pipeline.111: his own live record (BEAT_BUILDERS) replaces the scored pick
     try {
       const { enrichAssignment, buildPSlayerSlice, writePSlayerSlice } =
         require(path.join(__dirname, 'buildPSlayerSlice'));

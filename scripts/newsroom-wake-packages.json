@@ -227,7 +227,7 @@
     "seatFile": ".claude/agents/trevor-shimizu/SEAT.md"
   },
   "p-slayer": {
-    "version": "PSLAYER-LEP2-1",
+    "version": "PSLAYER-LEP2-2",
     "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
@@ -243,7 +243,7 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-4-maverick"
+        "model": "anthropic/claude-haiku-5.5"
       },
       "report": {
         "provider": "openrouter",
@@ -255,15 +255,12 @@
       }
     },
     "reviewProfile": {
-      "id": "p-slayer-fan-heat-v1",
+      "id": "p-slayer-fan-heat-v2",
       "canonPolicy": "load-bearing",
-      "purpose": "Turn a Packet-backed sports result or roster move into fan consequence. Owning or doubling down on a prior take and applying fan or front-office pressure are success; press-box analysis and tidy resolution are not.",
+      "purpose": "Oakland's fan columnist on the A's and the Oaks (builder 2026-11-25). The check is facts: people and the words they gave, the record's numbers and moves; the heat is his.",
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
-        "voice": "first-person I/we fan-heat column",
-        "targetWords": "400-700",
-        "opening": "a bar, lot, bleacher, sidewalk, or sports-viewing sensory moment",
-        "closing": "a dare, confession, or update with the central friction still live"
+        "targetWords": "400-700"
       },
       "authorizedTexture": [
         "a bar, lot, bleacher, sidewalk, or sports-viewing setting; a named in-world venue is allotted texture",
@@ -272,14 +269,7 @@
         "a rhetorical counterargument from unnamed fans used as an argument foil, not as an attributed quote",
         "metaphor and emotional inference grounded in a supplied fact"
       ],
-      "textureConditions": [
-        "I or we must not claim a verified collective sentiment, count, gathering, or event",
-        "an unnamed counterargument must remain rhetorical rather than becoming a quote or sourced statement",
-        "scene texture must carry no roster move, result, stat, contract, injury, player act, or front-office act",
-        "a prior-take confession or paraphrase requires a Packet-backed prior article or wall entry, and an exact quote requires supplied text",
-        "in-world named spots that are not real Oakland are allotted hallucination and belong on INTAKE BIZ if newly named",
-        "player, team, roster, statistic, result, and front-office facts still require Packet support"
-      ],
+      "textureConditions": [],
       "canonBlockers": [
         "a real-world player, team, venue, business, institution, or organization imported into the city; or an invented person given the authority of an established citizen",
         "an unsupported roster move, signing, trade, non-move, result, record, streak, award, contract, or front-office act",
@@ -288,7 +278,10 @@
         "a fabricated player, coach, or front-office quote or interview",
         "collective fan sentiment presented as measured fact"
       ]
-    }
+    },
+    "seatFile": ".claude/agents/p-slayer/SEAT.md",
+    "seatMemory": true,
+    "seatDossier": true
   },
   "anthony-raines": {
     "version": "ANTHONY-LEP2-4",

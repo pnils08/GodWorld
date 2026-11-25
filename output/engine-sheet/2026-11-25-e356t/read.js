@@ -38,6 +38,9 @@ const U = s => String(s || '').trim().toUpperCase(), pk = (a, b) => [U(a), U(b)]
   const idsOf = (r, c) => (String((r || {})[c] || '').match(/POP-\d+/g) || []);
   const family = (a, b) => { const A = L[a], B = L[b]; if (!A || !B) return false; const ap = idsOf(A, 'ParentIds'), bp = idsOf(B, 'ParentIds');
     return idsOf(A, 'SpouseId').includes(b) || idsOf(B, 'SpouseId').includes(a) || ap.includes(b) || bp.includes(a) || idsOf(A, 'ChildrenIds').includes(b) || idsOf(B, 'ChildrenIds').includes(a) || ap.some(x => bp.includes(x)); };
+  const hhType = {}; for (const h of await sheets.getSheetAsObjects('Household_Ledger')) if (String(h.Status || '').toLowerCase() !== 'dissolved') hhType[String(h.HouseholdId || '').trim()] = String(h.HouseholdType || '').trim().toLowerCase();
+  // a friendship needs a shared household whose type is known and is neither couple nor family
+  const famHousehold = (a, b) => { const ha = String((L[a] || {}).HouseholdId || '').trim(), hb = String((L[b] || {}).HouseholdId || '').trim(), ty = ha && ha === hb ? hhType[ha] : ''; return !ty || ty === 'couple' || ty === 'family'; };
   // the Cycle's coworker / housemate moments, by pair
   const moments = {};
   for (const r of log) { const t = String(r.EventTag || '').split('|'); const w = (t.find(x => x.indexOf('with:') === 0) || '').slice(5), c = U((t.find(x => x.indexOf('contactPopId:') === 0) || '').slice(13));
@@ -59,7 +62,7 @@ const U = s => String(s || '').trim().toUpperCase(), pk = (a, b) => [U(a), U(b)]
     if (String(b.CycleCreated) !== C) problems.push(k + ' CycleCreated ' + b.CycleCreated);
     if (beforeBy[k]) problems.push(k + ' held a bond row before: ' + beforeBy[k].map(x => x.BondType + '/' + x.Status).join(','));
     const [a, c2] = k.split('|'); if (!adultActive(a) || !adultActive(c2)) problems.push(k + ' has a minor or a non-active row');
-    if (kind === 'housemate' && family(a, c2)) problems.push(k + ' are family and got a friendship');
+    if (kind === 'housemate' && (family(a, c2) || famHousehold(a, c2))) problems.push(k + ' are family (ledger cells or the household type) and got a friendship');
   }
   for (const k of Object.keys(moments)) {
     const [a, b] = k.split('|'), kinds = moments[k];
@@ -74,14 +77,15 @@ const U = s => String(s || '').trim().toUpperCase(), pk = (a, b) => [U(a), U(b)]
     }
     if (!adultActive(a) || !adultActive(b)) { t.skippedMinorOrInactive++; continue; }
     const kind = kinds.has('coworker') ? 'coworker' : 'housemate';
-    if (!kinds.has('coworker') && family(a, b)) { t.skippedFamily++; continue; }
+    if (!kinds.has('coworker') && (family(a, b) || famHousehold(a, b))) { t.skippedFamily++; continue; }
     if (!(start[kind] > 0)) continue;
     t.expected++;
     if (!(afterBy[k] || []).some(x => String(x.Origin) === 'shared-moment')) problems.push('qualifying pair got no bond: ' + k + ' (' + [...kinds].join(',') + '); after: ' + JSON.stringify((afterBy[k] || []).map(x => x.BondType + '/' + x.Origin)));
   }
   for (const k of Object.keys(afterBy)) if (afterBy[k].length > Math.max(1, (beforeBy[k] || []).length)) problems.push('pair holds ' + afterBy[k].length + ' rows: ' + k);
   if (!t.made.professional) notProven.push('no coworker bond made');
-  if (!t.made.friendship) notProven.push('no housemate friendship made');
+  // no household of two is typed other than couple / family today: a week with no friendship is the rule working
+  if (!t.made.friendship && !t.skippedFamily) notProven.push('no housemate pair met the gate either way');
   console.log(JSON.stringify({ label: LABEL, cycle: C, bondsBefore: before.length, bondsAfter: after.length, start, tally: t, problems: problems.length, first: problems.slice(0, 15), notProven, verdict: problems.length ? 'FAIL' : (notProven.length ? 'PASS, NOT PROVEN: ' + notProven.join('; ') : 'PASS') }, null, 1));
   process.exit(problems.length ? 1 : (notProven.length ? 3 : 0));
 })().catch(e => { console.error(e); process.exit(2); });

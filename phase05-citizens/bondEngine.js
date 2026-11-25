@@ -635,10 +635,13 @@ function bondMomentKey_(a, b, bondType) {
 // takes no step or fade in the week it is made, and before detectNewBonds_, so the pair's chance
 // encounter that week finds the bond already there. Not made: a pair with any bond row already
 // (active, dormant or ended — one row a pair), either person a minor or not an active ledger row, and
-// housemates who are spouses, parent and child, or share a parent (family is not made from a moment).
+// housemates in a couple or family household (the household's type), spouses, parent and child, or two who
+// share a parent (family is not made from a moment). "Any bond row" means a row the loader keeps: a
+// resolved or severed bond is dropped on load (bondPersistence), so such a pair can bond anew — as a
+// chance encounter already lets them.
 function bondsFromSharedMoments_(ctx) {
   var S = ctx.summary || {}, moments = S.sharedMoments || [];
-  var made = { coworker: 0, housemate: 0 };
+  var made = { coworker: 0, housemate: 0, housemateFamily: 0 };
   S.bondsFromMoments = made;
   if (!moments.length) return made;
   var startAt = { coworker: bondDial_('bondFromMomentCoworker'), housemate: bondDial_('bondFromMomentHousemate') };
@@ -660,6 +663,12 @@ function bondsFromSharedMoments_(ctx) {
     if (isMinor(A) || isMinor(B)) continue;
     if (bondExists_(ctx, a, b)) continue;
     if (sm.kind === 'housemate') {
+      // "housemates who are not family" (builder 2026-11-25). The household's own type says what the two are:
+      // a couple or a family household is family whatever the ledger's SpouseId / ParentIds cells hold (bench
+      // 2026-11-25: a married couple with blank SpouseId cells got a friendship). A friendship is made only in
+      // a household the Household_Ledger types as something else; an unknown or missing type makes none.
+      var hhType = A.householdId && A.householdId === B.householdId ? householdTypeById_(ctx)[A.householdId] : '';
+      if (!hhType || hhType === 'couple' || hhType === 'family') { made.housemateFamily++; continue; }
       if (A.spouse === b || B.spouse === a) continue;
       var aPar = ids(A, iPar), bPar = ids(B, iPar);
       if (aPar.indexOf(b) >= 0 || bPar.indexOf(a) >= 0 || ids(A, iKid).indexOf(b) >= 0 || ids(B, iKid).indexOf(a) >= 0) continue;
@@ -2262,6 +2271,27 @@ function bondFitnessOf_(person) {
   if (person.debt >= 5) f -= 0.15;
   else if (person.debt >= 3) f -= 0.05;
   return Math.max(0.6, Math.min(1.4, f));
+}
+
+// engine.356 cut B: HouseholdId -> HouseholdType, lower-cased ('couple' | 'family' | 'solo' | 'single' | ...), one
+// read per cycle, dissolved households left out. A failed read gives an empty map (no housemate bond is made).
+function householdTypeById_(ctx) {
+  if (ctx._householdTypeById356) return ctx._householdTypeById356;
+  var map = {};
+  ctx._householdTypeById356 = map;
+  try {
+    var sheet = ctx.ss ? ctx.ss.getSheetByName('Household_Ledger') : null;
+    if (!sheet || sheet.getLastRow() < 2) return map;
+    var v = sheet.getDataRange().getValues();
+    var h = v[0], iId = h.indexOf('HouseholdId'), iTy = h.indexOf('HouseholdType'), iSt = h.indexOf('Status');
+    if (iId < 0 || iTy < 0) return map;
+    for (var r = 1; r < v.length; r++) {
+      if (iSt >= 0 && String(v[r][iSt] || '').toLowerCase() === 'dissolved') continue;
+      var id = String(v[r][iId] || '').trim();
+      if (id) map[id] = String(v[r][iTy] || '').trim().toLowerCase();
+    }
+  } catch (e) { Logger.log('householdTypeById_: ' + e.message); }
+  return map;
 }
 
 // engine.153 (S412): HouseholdId -> HousingType ('owned' | 'rented' | ''), one read per cycle.

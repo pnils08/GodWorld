@@ -1431,6 +1431,9 @@
 
 - **bondFitnessOf_(person)**
 
+- **householdTypeById_(ctx)**
+  Sheets: Household_Ledger
+
 - **householdHousingById_(ctx)**
   Sheets: Household_Ledger
 
@@ -4948,4 +4951,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 179
-**Functions mapped:** 1797
+**Functions mapped:** 1798

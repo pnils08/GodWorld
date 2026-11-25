@@ -416,13 +416,11 @@ function buildFreeAnglePacket({ cycle, desk, reporter, story, slice, candidates:
         pass: 'true when nothing here is a piece you want to write this cycle; then give only why',
         chase: 'string — what you want to write this cycle and how you will go after it, in your own voice. Not JSON.',
         focus: 'string', why: 'string', checks: ['string'],
-        targets: hasTargetCandidates
-          ? [{ pop: 'supplied non-empty candidate pop', question: 'string', basis: 'string' }]
-          : [],
+        // pipeline.111 (builder 2026-11-25: "take the restriction out, keep the cap"): a target is the seat's own pick —
+        // a person on this record or any citizen; up to QUOTE_CITIZEN_CAP are asked
+        targets: [{ pop: 'the person\'s popid — from this record, or the popid citizen_lookup gives you', question: 'string', basis: 'string — what in their life ties them to the story you are chasing' }],
         interpretation: 'string', unverifiedLead: ['string'] },
-      rule: (hasTargetCandidates
-        ? 'A target is someone you want to hear from; each must use a supplied non-empty candidate pop. Do not invent people or identifiers. '
-        : 'No one to call was supplied. Return targets as an empty array; do not invent a person or identifier. ') +
+      rule: 'A target is someone whose life touched the story you are chasing, whoever you want to hear from: a person on this record or anyone in the city (citizen_lookup gives their popid and their life). Up to four are asked. Do not invent people or identifiers. ' +
         'chase is the human story-doc slot. Do not serialize this plan object into chase.',
     },
   }, 'W1');
@@ -671,7 +669,14 @@ function validateAngleOutput(value, input) {
   if (!Array.isArray(out && out.checks)) errs.push('checks must be an array');
   if (!Array.isArray(out && out.targets)) errs.push('targets must be an array');
   const allowed = new Set(((input && input.exposure && input.exposure.candidates) || []).map(c => c.pop).filter(Boolean));
-  if (allowed.size) {
+  if (free) {
+    for (const t of (out && out.targets) || []) {
+      if (t && t.pop) t.pop = String(t.pop).trim().toUpperCase();
+      const why = !t ? 'target must be an object' : !clean(t.question) || !clean(t.basis) ? 'target needs question+basis'
+        : allowed.has(t.pop) ? null : reporterPickRefusal(t.pop, input);
+      if (why) errs.push(why + (t && t.pop ? ' (' + t.pop + ')' : ''));
+    }
+  } else if (allowed.size) {
     for (const t of (out && out.targets) || []) {
       if (!t || !allowed.has(t.pop) || !clean(t.question) || !clean(t.basis)) errs.push('target must use a supplied pop with question+basis');
     }
@@ -687,7 +692,7 @@ function validateAngleOutput(value, input) {
     chase: clean(out.chase, 700),
     focus: clean(out.focus, 500), why: clean(out.why, 500),
     checks: uniq(out.checks).slice(0, 8),
-    targets: allowed.size
+    targets: (allowed.size || free)
       ? out.targets.slice(0, 8).map(t => ({ pop: t.pop, question: clean(t.question, 400), basis: clean(t.basis, 300) }))
       : [],
     interpretation: clean(out.interpretation, 500),
@@ -696,6 +701,29 @@ function validateAngleOutput(value, input) {
 }
 
 const ATHLETE_ROLE_RE = /\b(?:athlete|player|pitcher|catcher|fielder|shortstop|baseman|outfielder|infielder|designated hitter|coach|roster)\b/i;
+
+// pipeline.111: why a free plan's own pick cannot be asked, or null — not a ledger citizen, not active, the reporter, Tribune staff
+function reporterPickRefusal(pop, input) {
+  const row = ledgerRowForPop(pop);
+  if (!row) return 'target is not a ledger citizen';
+  if (String(row.Status || '').toLowerCase() !== 'active') return 'target is not an active citizen';
+  if (String(input && input.actor && input.actor.id || '').toUpperCase() === String(pop).toUpperCase()) return 'target is the reporter';
+  if (/^y/i.test(String(row['MED (y/n)'] || '').trim())) return 'target is Tribune staff';
+  return null;
+}
+
+// pipeline.111: a seat's own pick outside the record's people, as an interview candidate. No evidence row: the record
+// does not show them in the story; they answer from their own life (ownLifeInterviewPacket) and the reporter's question.
+function reporterPickCandidate(target) {
+  const row = ledgerRowForPop(target && target.pop);
+  if (!row) return null;
+  const pop = String(row.POPID).trim().toUpperCase();
+  const name = String(row.Name || '').replace(/\s+/g, ' ').trim() || [row.First, row.Last].filter(Boolean).join(' ');
+  return { pop, name, role: row.RoleType || 'citizen', hood: row.Neighborhood || null,
+    profile: [name, row.RoleType, row.Neighborhood].filter(Boolean).join(' — '),
+    why: 'reporter-pick', mode: 'reporter-pick', sourceKind: 'reporter-pick',
+    evidence: { source: 'the reporter\'s plan', basis: clean(target.basis, 300) } };
+}
 
 let _ledgerByPop = null;
 function ledgerRowForPop(pop) {
@@ -859,6 +887,7 @@ function evidenceFor(candidate, story) {
       candidate.evidence.line).digest('hex').slice(0, 10),
       src: candidate.evidence.source, text: candidate.evidence.line }];
   }
+  if (candidate && candidate.sourceKind === 'reporter-pick') return [];   // pipeline.111: the record does not place them in the story
   const ref = clean(story && story.ref, 300);
   if (!ref || ref === 'assignment') return [];
   // pipeline.81 makes a proximity row an interview target, but not a witness: same-neighborhood is
@@ -1094,7 +1123,7 @@ function prompt(packet) {
 
 module.exports = {
   VERSION, CLAIM_TYPES, WAKES, refClaim, assertBase, buildAnglePacket,
-  validateAngleOutput, reporterChaseText, chaseIsJsonShaped, candidateRows,
+  validateAngleOutput, reporterChaseText, chaseIsJsonShaped, candidateRows, reporterPickCandidate,
   buildReportPacket, validateReportOutput,
   quoteIneligibility, isAthleteRow, ledgerRowForPop, neighborsFromLedger, isProximityCandidate, isLedgerFillCandidate,
   AMBIENT_FACT,

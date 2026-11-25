@@ -501,8 +501,12 @@ function renderPacketIntake(draftText, packet, opts) {
     if (!body.includes(name)) continue;
     // agy Anthony step 4 #1: a reporter quotes from anywhere in a long answer (a Gridiron analyst's reply runs 2,000 chars),
     // so any sentence of the answer found in the piece makes the speaker a quoted source, not only its first 48 characters
-    const quotedIn = (q) => String(q || '').replace(/[*_#|>]/g, ' ').split(/(?<=[.!?"”])\s+/).map(t => t.replace(/\s+/g, ' ').trim())
-      .filter(t => t.length >= 25).some(t => body.replace(/\s+/g, ' ').includes(t.slice(0, Math.min(48, t.length))));
+    // a whole answer under 25 characters is matched whole (cron-desk-writer.test: "Test concern." was marked mentioned)
+    const quotedIn = (q) => { const whole = String(q || '').replace(/[*_#|>]/g, ' ').replace(/\s+/g, ' ').trim();
+      const flat = body.replace(/\s+/g, ' ');
+      if (whole && whole.length < 25) return flat.includes(whole);
+      return whole.split(/(?<=[.!?"”])\s+/).map(t => t.trim())
+        .filter(t => t.length >= 25).some(t => flat.includes(t.slice(0, Math.min(48, t.length)))); };
     const role = meta.quote && quotedIn(meta.quote)
       ? 'quoted-source' : meta.role === 'quoted-source' ? 'mentioned' : meta.role;
     lines.push('NAMES: ' + name + ' | ' + role);

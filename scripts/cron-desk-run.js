@@ -517,6 +517,13 @@ function collectQuoteAsks(lane, persona, story, angleArt) {
   for (const c of filled) {
     if (c && c.pop && c.sourceKind !== 'office-record' && !livedPacket.isLedgerFillCandidate(c)) packetCandidates.set(c.pop, c);
   }
+  // pipeline.111: a free seat's own picks outside the record (written at W1, re-checked against the ledger here)
+  if (PACKET_ACTIVE && angleArt && angleArt.freeAngle) {
+    for (const c of angleArt.reporterPicks || []) {
+      const fresh = c && livedPacket.reporterPickCandidate({ pop: c.pop, basis: c.evidence && c.evidence.basis });
+      if (fresh && !packetCandidates.has(fresh.pop)) packetCandidates.set(fresh.pop, fresh);
+    }
+  }
   const push = (pop, label) => {
     if (!pop || seen.has(pop) || asks.length >= QUOTE_CITIZEN_CAP) return;
     if (persona && persona.popid && String(pop).toUpperCase() === String(persona.popid).toUpperCase()) return;
@@ -2388,12 +2395,19 @@ async function runAngle(assign) {
   // Test shell, nothing assigned: the seat's own pick is the story the report and write stages carry
   // ("W1 owns the assignment"); a pass leaves no story and ends the seat's day.
   const ownPlan = FREE_ANGLE && angleRead && angleRead.plan;
+  let reporterPicks = [];
   if (ownPlan && ownPlan.pass) {
     story = null;
     approach = null;
     console.log('[angle] ' + personaSlug + ' passes the day — ' + ownPlan.why);
   } else if (ownPlan) {
     const byPop = new Map((sourcingPool && sourcingPool.candidates || []).map(c => [c.pop, c]));
+    // pipeline.111 (builder 2026-11-25: "take the restriction out, keep the cap"): a pick outside the record's people
+    // rides to W2 as its own candidate, asked from their own life
+    reporterPicks = ownPlan.targets.filter(t => t && t.pop && !byPop.has(t.pop))
+      .map(t => livedPacket.reporterPickCandidate(t)).filter(Boolean);
+    for (const c of reporterPicks) byPop.set(c.pop, c);
+    if (reporterPicks.length) log('own picks outside the record: ' + reporterPicks.map(c => c.name + ' (' + c.pop + ')').join(', '));
     const pops = ownPlan.targets.map(t => t.pop);
     story = { kind: 'own-pick', ref: 'own pick, C' + cycle, label: ownPlan.focus, angle: ownPlan.focus, hood: null,
       citizens: pops.map(pop => ((byPop.get(pop) && byPop.get(pop).name) || pop) + ' (' + pop + ')'), popids: pops };
@@ -2408,7 +2422,7 @@ async function runAngle(assign) {
   fs.mkdirSync(COMPARE, { recursive: true });
   fs.writeFileSync(anglePath, JSON.stringify({
     stage: 'angle', desk, cycle, persona: personaSlug,
-    ...(FREE_ANGLE ? { freeAngle: FREE_ANGLE, pass: !!(ownPlan && ownPlan.pass) } : {}),
+    ...(FREE_ANGLE ? { freeAngle: FREE_ANGLE, pass: !!(ownPlan && ownPlan.pass), reporterPicks } : {}),
     // agy pass 2 #2.2/#4.3: the morning's reads and the workers' finished answers ride to W3 (quoted there, they join the manifest).
     ...(SEAT_FILE ? { morningTools: SEAT_MORNING_TRACE || [], workerAnswers: (SEAT_MORNING_ASKS && SEAT_MORNING_ASKS.answers) || [],
       workerAsksUsed: SEAT_MORNING_ASKS ? SEAT_MORNING_ASKS.used() : 0 } : {}),

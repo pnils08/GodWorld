@@ -104,9 +104,30 @@ assert.deepStrictEqual(plan.targets.map(t => t.pop), ['TEST-00001']);
 assert.throws(() => v1.validateAngleOutput(ownPick, assigned), /chase replaces the assignment/);
 // in the assigned packet a pass flag is not an answer
 assert.throws(() => v1.validateAngleOutput({ pass: true, why: 'nothing' }, assigned), /invalid W1 output/);
-// a free plan still cannot name someone it was not given
+// pipeline.111 (builder 2026-11-25: "take the restriction out, keep the cap"): a free plan may name anyone in the city —
+// but not a name the ledger does not hold, the reporter, or Tribune staff; a pick still needs its question and basis
 assert.throws(() => v1.validateAngleOutput(Object.assign({}, ownPick, {
-  targets: [{ pop: 'TEST-07777', question: 'q', basis: 'b' }] }), rows), /target must use a supplied pop/);
+  targets: [{ pop: 'TEST-07777', question: 'q', basis: 'b' }] }), rows), /target is not a ledger citizen/);
+assert.throws(() => v1.validateAngleOutput(Object.assign({}, ownPick, {
+  targets: [{ pop: 'TEST-00001', question: 'q', basis: '' }] }), rows), /target needs question\+basis/);
+{
+  const fs = require('fs');
+  const snap = require('path').join(__dirname, '..', 'output', 'simulation_ledger_snapshot.jsonl');
+  const ledger = fs.existsSync(snap) ? fs.readFileSync(snap, 'utf8').split('\n').filter(Boolean).map(JSON.parse) : [];
+  const citizen = ledger.find(r => String(r.Status).toLowerCase() === 'active' && !/^y/i.test(String(r['MED (y/n)'] || '')) && /^POP-\d+$/.test(r.POPID));
+  const staff = ledger.find(r => String(r.Status).toLowerCase() === 'active' && /^y/i.test(String(r['MED (y/n)'] || '')) && /^POP-\d+$/.test(r.POPID));
+  if (citizen) {
+    const off = v1.validateAngleOutput(Object.assign({}, ownPick, { targets: [{ pop: citizen.POPID.toLowerCase(), question: 'q', basis: 'b' }] }), rows);
+    assert.deepStrictEqual(off.targets.map(t => t.pop), [citizen.POPID]);   // off the record, on the ledger: asked
+    const pick = v1.reporterPickCandidate({ pop: citizen.POPID, basis: 'b' });
+    assert.strictEqual(pick.sourceKind, 'reporter-pick');
+    assert.strictEqual(pick.evidence.basis, 'b');
+    const selfRows = JSON.parse(JSON.stringify(rows)); selfRows.actor.id = citizen.POPID;
+    assert.throws(() => v1.validateAngleOutput(Object.assign({}, ownPick, { targets: [{ pop: citizen.POPID, question: 'q', basis: 'b' }] }), selfRows), /target is the reporter/);
+  }
+  if (staff) assert.throws(() => v1.validateAngleOutput(Object.assign({}, ownPick, {
+    targets: [{ pop: staff.POPID, question: 'q', basis: 'b' }] }), rows), /target is Tribune staff/);
+}
 
 // the evening packet for a seat that picked for itself: what it knows and the grammar, no shape, no slot, no footer
 const reviewProfile = { id: 'test-profile', canonPolicy: 'load-bearing', canonBlockers: ['an invented TEST station'] };

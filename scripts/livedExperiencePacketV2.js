@@ -901,6 +901,7 @@ module.exports = {
   neighborsFromLedger: v1.neighborsFromLedger,
   isProximityCandidate: v1.isProximityCandidate,
   isLedgerFillCandidate: v1.isLedgerFillCandidate,
+  reporterPickCandidate: v1.reporterPickCandidate,   // pipeline.111
   validateAngleOutput: v1.validateAngleOutput,
   reporterChaseText: v1.reporterChaseText,
   chaseIsJsonShaped: v1.chaseIsJsonShaped,

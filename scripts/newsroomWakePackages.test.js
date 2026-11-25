@@ -133,22 +133,22 @@ assert.equal(trevor.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
 assert.deepStrictEqual(trevor.reviewProfile.textureConditions, []);
 
 const pSlayer = packages['p-slayer'];
-assert.equal(pSlayer.version, 'PSLAYER-LEP2-1');
+assert.equal(pSlayer.version, 'PSLAYER-LEP2-2');
 assert.equal(pSlayer.requiredDaily, true);
 assert.equal(pSlayer.assignment.desk, 'sports');
 assert.equal(pSlayer.assignment.name, 'P Slayer');
 assert.equal(pSlayer.assignment.popid, 'POP-00008');
 assert.equal(pSlayer.packetContract, 'v2');
-assert.equal(packagesApi.routeFor(pSlayer, 'angle').model, 'meta-llama/llama-4-maverick');
+assert.equal(packagesApi.routeFor(pSlayer, 'angle').model, 'anthropic/claude-haiku-5.5');   // pipeline.111 (2026-11-25): Haiku plans, Grok writes
 assert.equal(packagesApi.routeFor(pSlayer, 'report').model, 'meta-llama/llama-4-maverick');
 assert.equal(packagesApi.routeFor(pSlayer, 'write').model, 'x-ai/grok-4.3');
 assert.equal(pSlayer.reviewProfile.canonPolicy, 'load-bearing');
 assert.equal(pSlayer.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
-assert.ok(pSlayer.reviewProfile.textureConditions.some(v => v.includes('prior-take')));
-assert.ok(pSlayer.reviewProfile.canonBlockers.some(v => v.includes('collective fan sentiment')));
+assert.deepStrictEqual(pSlayer.reviewProfile.textureConditions, []);   // pipeline.111: the seat file, facts-only gate
+assert.equal(pSlayer.seatFile, '.claude/agents/p-slayer/SEAT.md');
 
 const anthony = packages['anthony-raines'];
-assert.equal(anthony.version, 'ANTHONY-LEP2-3');
+assert.equal(anthony.version, 'ANTHONY-LEP2-4');
 assert.equal(packagesApi.sourcingFor(anthony), 'records');
 assert.equal(anthony.active, true);
 assert.equal(anthony.requiredDaily, true);
@@ -157,11 +157,11 @@ assert.equal(anthony.assignment.name, 'Anthony Raines');
 assert.equal(anthony.assignment.popid, 'POP-00017');
 assert.equal(anthony.assignment.beatDomain, 'SPORTS_ANALYTICS');
 assert.equal(anthony.packetContract, 'v2');
-assert.equal(packagesApi.routeFor(anthony, 'angle').model, 'deepseek/deepseek-v4-flash-0731');
-assert.equal(packagesApi.routeFor(anthony, 'report').model, 'deepseek/deepseek-v4-flash-0731');
+assert.equal(packagesApi.routeFor(anthony, 'angle').model, 'anthropic/claude-sonnet-5.5');   // pipeline.111 (2026-11-24): morning matches the writing
+assert.equal(packagesApi.routeFor(anthony, 'report').model, 'anthropic/claude-sonnet-5.5');
 assert.equal(packagesApi.routeFor(anthony, 'write').model, 'anthropic/claude-sonnet-5.5'); // 2026-10-19: tools on, lead analytic seat
 assert.equal(anthony.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
-assert.ok(anthony.reviewProfile.textureConditions.some(v => v.includes('unresolved feed subject')));
+assert.deepStrictEqual(anthony.reviewProfile.textureConditions, []);   // pipeline.111: the seat file
 assert.ok(anthony.reviewProfile.canonBlockers.some(v => v.includes('wrong player')));
 
 const hal = packages['hal-richmond'];
@@ -194,7 +194,7 @@ const seats = Object.entries(packages).filter(([, v]) => v && v.persona);
 assert(seats.length >= 25);
 assert.deepStrictEqual(seats.filter(([, v]) => v.rewardLoop !== true).map(([k]) => k), []);
 assert.throws(() => packagesApi.validatePackage(marbury.persona, Object.assign({}, marbury, { rewardLoop: 'yes' })), /rewardLoop/);
-assert.deepStrictEqual(Object.entries(packages).filter(([, v]) => v && v.writerTools).map(([k]) => k), ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'anthony-raines', 'elliot-marbury', 'hal-richmond', 'maria-keen', 'elliot-graye', 'mason-ortega', 'sharon-okafor', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'noah-tan', 'nia-rook', 'nia-rook-weekly', 'celeste-tran', 'tamsin-pruitt', 'ines-sorensen', 'farrah-del-rio']); // registry order; Hal + Anthony: builder 2026-10-19; Jax + Carmen 2026-10-26; the rest 2026-10-27; Sharon 2026-11-21 (pipeline.111)
+assert.deepStrictEqual(Object.entries(packages).filter(([, v]) => v && v.writerTools).map(([k]) => k), ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'p-slayer', 'anthony-raines', 'elliot-marbury', 'hal-richmond', 'maria-keen', 'elliot-graye', 'mason-ortega', 'sharon-okafor', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'noah-tan', 'nia-rook', 'nia-rook-weekly', 'celeste-tran', 'tamsin-pruitt', 'ines-sorensen', 'farrah-del-rio']); // registry order; Hal + Anthony: builder 2026-10-19; Jax + Carmen 2026-10-26; the rest 2026-10-27; Sharon 2026-11-21 (pipeline.111)
 assert.equal(packages['hal-richmond'].writerTools.maxToolCalls, 6);
 // pipeline.111: Celeste ran without her voice-file Essence ("archived only") and lost her read of why; builder 2026-11-22:
 // "if taking out the voice file made her not sound like herself you can put it back" — it is back. The switch stays for any seat.
@@ -213,7 +213,7 @@ assert.equal(packages['hal-richmond'].version, 'HAL-LEP2-3');
 assert.throws(() => packagesApi.validatePackage(marbury.persona, Object.assign({}, marbury, { writerTools: { maxToolCalls: 9 } })), /writerTools/);
 assert.equal(jax.writerTools.maxToolCalls, 6);
 assert.equal(packages['carmen-delaine'].writerTools.maxToolCalls, 6);
-const noToolsPkg = packages['p-slayer'];   // Noah gained tools (pipeline.111, 2026-11-23); P Slayer holds none
+const noToolsPkg = packages['simon-leary'];   // Noah (2026-11-23) and P Slayer (2026-11-25) gained tools (pipeline.111); Simon holds none
 assert.throws(() => packagesApi.validatePackage(noToolsPkg.persona, Object.assign({}, noToolsPkg, { writerTools: { maxToolCalls: 6 } })), /writerTools is granted only to/);
 assert.equal(marbury.assignment.popid, 'POP-00166');
 assert.equal(packagesApi.routeFor(marbury, 'write').model, 'anthropic/claude-sonnet-5.5');
@@ -411,8 +411,8 @@ const gate = packagesApi.gateAssignments([
 assert.equal(gate.eligible.length, 5);
 assert.equal(gate.eligible[0].wakePackage, 'JAX-LEP2-4');
 assert.equal(gate.eligible[1].wakePackage, 'CARMEN-LEP2-4');
-assert.equal(gate.eligible[2].wakePackage, 'PSLAYER-LEP2-1');
-assert.equal(gate.eligible[3].wakePackage, 'ANTHONY-LEP2-3');
+assert.equal(gate.eligible[2].wakePackage, 'PSLAYER-LEP2-2');
+assert.equal(gate.eligible[3].wakePackage, 'ANTHONY-LEP2-4');
 assert.equal(gate.eligible[4].wakePackage, 'JORDAN-LEP2-3');
 assert.deepStrictEqual(gate.skipped.map(row => row.name),
   ['TEST-ONLY Unpackaged Reporter']);

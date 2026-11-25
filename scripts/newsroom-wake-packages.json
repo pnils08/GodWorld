@@ -291,7 +291,7 @@
     }
   },
   "anthony-raines": {
-    "version": "ANTHONY-LEP2-3",
+    "version": "ANTHONY-LEP2-4",
     "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
@@ -307,11 +307,11 @@
     "models": {
       "angle": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-v4-flash-0731"
+        "model": "anthropic/claude-sonnet-5.5"
       },
       "report": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-v4-flash-0731"
+        "model": "anthropic/claude-sonnet-5.5"
       },
       "write": {
         "provider": "openrouter",
@@ -319,39 +319,31 @@
       }
     },
     "reviewProfile": {
-      "id": "anthony-sports-analytics-v1",
+      "id": "anthony-sports-analytics-v2",
       "canonPolicy": "load-bearing",
-      "purpose": "Evaluate one Packet-backed sports line, roster fit, or feed delta with correctly attributed numbers and explicit sample limits. The board is read through the tools — the player's TrueSource card for the career line, the archive for his Statcast card, the PANDAS method and prior coverage, the feed for this cycle — never recalled. One sourced analytic claim is success; fan heat, elegy, and invented advanced metrics are not.",
+      "purpose": "A data-driven take on the A's from the record (builder 2026-11-24): the check is facts — players and their lines, contracts, records — each number named to its source and kept with its own player.",
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
-        "voice": "precise third-person sports analysis",
-        "targetWords": "evidence-bounded",
-        "opening": "the strongest Packet-backed player line or roster fact",
-        "closing": "the sample, roster, or dossier evidence still needed to test the claim"
+        "targetWords": "evidence-bounded"
       },
       "authorizedTexture": [
-        "plain-language comparison of supplied player lines with each statistic kept with its named subject",
-        "a cautious variance or role-fit interpretation explicitly limited by the supplied sample",
-        "an unnamed quiet press-box or clubhouse transition that adds no person, venue, event, result, statistic, or team act"
+        "a quiet press-box or clubhouse moment that adds no person, venue, event, result, statistic or team act"
       ],
-      "textureConditions": [
-        "every named player, team, venue, institution, league, organization, and source must come from the Packet",
-        "every statistic, record, streak, result, roster move, role, award, contract, salary, injury, date, and sample claim requires Packet support",
-        "an unresolved feed subject may be named only as supplied and may not receive a POPID, biography, role beyond the supplied label, quote, or interview",
-        "single-game production may support a feed-delta observation but not an unsupported season projection or new player identity",
-        "a number from a TrueSource card, a Statcast card or the feed enters only through a tool call, printed as returned and named to its source; a method (PANDAS, Paper Cuts) shapes the reasoning and supplies no number of its own"
-      ],
+      "textureConditions": [],
       "canonBlockers": [
-        "a statistic attributed to the wrong player or two player lines merged into one subject",
-        "alternate feed spellings presented as distinct people or silently assigned an invented identity",
-        "an invented advanced metric, projection, split, roster fact, contract, salary, award, injury, result, quote, interview, or front-office act",
-        "a named player, team, venue, institution, league, organization, or real-world entity not found in the supplied record",
-        "fan we, emotional crowd consensus, or historical elegy replacing the analytic claim"
+        "a statistic attributed to the wrong player, or two players' lines merged into one",
+        "an invented or altered data point: a statistic, rate, rating, record, streak, result, contract, salary, award, injury, roster move, front-office act or date the record does not hold",
+        "an invented or altered person, team, venue or organization — including one feed spelling made into a second person — or words someone did not say",
+        "fan \"we\", first-person confession or crowd consensus in place of the analytic claim"
       ]
     },
     "writerTools": {
       "maxToolCalls": 6
-    }
+    },
+    "seatFile": ".claude/agents/anthony-raines/SEAT.md",
+    "seatMemory": true,
+    "seatDossier": true,
+    "seatReasoning": "medium"
   },
   "elliot-marbury": {
     "version": "MARBURY-LEP2-2",

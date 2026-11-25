@@ -442,7 +442,8 @@ const BEAT_BUILDERS = {
   'business-desk': 'buildEconomySlice',   // pipeline.111 (builder 2026-11-22)
   'carmen-delaine': 'buildCivicSlice',   // pipeline.111 (builder 2026-11-23)
   'luis-navarro': 'buildInvestigationsSlice',   // pipeline.111 (builder 2026-11-24)
-  'farrah-del-rio': 'buildOpinionSlice',   // pipeline.111 (builder 2026-11-24)
+  'farrah-del-rio': 'buildOpinionSlice',
+  'anthony-raines': 'buildAnthonyRecord',   // pipeline.111 (builder 2026-11-24): the A's on the sports feed, read live; off buildAnthonySlice's scored pick   // pipeline.111 (builder 2026-11-24)
   'freelance-firebrand': 'buildJaxRecordSlice',   // pipeline.111 (builder 2026-11-24)
   'sharon-okafor': 'buildLifestyleSlice',
   'maria-keen': 'buildNeighborhoodSlice',
@@ -647,7 +648,7 @@ async function buildFanout(date) {
 
   // grok pipeline.52: enrich Anthony analytic sports seat with board pulse.
   let anthonyEnrich = { enriched: false, reason: 'none' };
-  if (cycle != null) {
+  if (cycle != null && !BEAT_BUILDERS['anthony-raines']) {   // pipeline.111: his own live record (BEAT_BUILDERS) replaces the scored pick
     try {
       const {
         enrichAssignment: enrichAnthony,

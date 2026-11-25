@@ -70,7 +70,8 @@ const BEAT_BUILDERS = {
   'business-desk': 'buildEconomySlice',   // pipeline.111 (builder 2026-11-22): Jordan's own economy record
   'carmen-delaine': 'buildCivicSlice',   // pipeline.111 (builder 2026-11-23): her own civic record, off the civic-domain pick
   'luis-navarro': 'buildInvestigationsSlice',   // pipeline.111 (builder 2026-11-24): his own record, off the anomaly pick
-  'farrah-del-rio': 'buildOpinionSlice',   // pipeline.111 (builder 2026-11-24): the opinion column's week
+  'farrah-del-rio': 'buildOpinionSlice',
+  'anthony-raines': 'buildAnthonyRecord',   // pipeline.111 (builder 2026-11-24): the A's on the sports feed, read live; off buildAnthonySlice's scored pick   // pipeline.111 (builder 2026-11-24): the opinion column's week
   'freelance-firebrand': 'buildJaxRecordSlice',   // pipeline.111 (builder 2026-11-24): Jax's record, off the scored stink pick (buildJaxSlice kept for pipeline.115)
   'sharon-okafor': 'buildLifestyleSlice',
   'maria-keen': 'buildNeighborhoodSlice',
@@ -81,9 +82,10 @@ const BEAT_BUILDERS = {
   'tamsin-pruitt': 'buildLivesSlice',   // pipeline.73 Lives — daily, Mon–Fri grid
   'ines-sorensen': 'buildVoicesSlice'   // pipeline.73 Voices — Wed–Fri grid + own Sat/Sun crons
 };
-const BEAT_NAME_RE = /jax\s*caldera|carmen\s*delaine|luis\s*navarro|farrah\s*del\s*rio|elliot\s*marbury|trevor\s*shimizu|lila\s*mezran|angela\s*reyes|noah\s*tan|elliot\s*graye|rachel\s*torres|kai\s*marston|sharon\s*okafor|maria\s*keen|selena\s*grant|talia\s*finch|celeste\s*tran|tamsin\s*pruitt|ines\s*sorensen/i;
+const BEAT_NAME_RE = /anthony\s*raines|jax\s*caldera|carmen\s*delaine|luis\s*navarro|farrah\s*del\s*rio|elliot\s*marbury|trevor\s*shimizu|lila\s*mezran|angela\s*reyes|noah\s*tan|elliot\s*graye|rachel\s*torres|kai\s*marston|sharon\s*okafor|maria\s*keen|selena\s*grant|talia\s*finch|celeste\s*tran|tamsin\s*pruitt|ines\s*sorensen/i;
 function beatSlugForName(name) {
   const n = String(name || '');
+  if (/anthony\s*raines/i.test(n)) return 'anthony-raines';
   if (/jax\s*caldera/i.test(n)) return 'freelance-firebrand';
   if (/carmen\s*delaine/i.test(n)) return 'carmen-delaine';
   if (/luis\s*navarro/i.test(n)) return 'luis-navarro';
@@ -819,7 +821,7 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
           if (ps.scene && ps.scene.colorRoom) L.push('COLOR: ' + ps.scene.colorRoom);
         }
       } catch (_) { /* optional */ }
-    } else if (persona.name && /anthony\s*raines/i.test(persona.name)) {
+    } else if (persona.name && /anthony\s*raines/i.test(persona.name) && !BEAT_BUILDERS['anthony-raines']) {
       L.push('STANCE: third-person analytic beat. One claim on verifiable numbers. Fit and process over bleacher heat.');
       L.push('Never invent contracts/stats. ONE piece — not multi-voice sports-desk average.');
       // grok pipeline.52: analytic pack from shared sports substrate + analysis bag.
@@ -1827,7 +1829,7 @@ async function runAngle(assign) {
     } catch (e) {
       log('pslayer slice load failed (non-fatal): ' + e.message);
     }
-  } else if (personaSlug === 'anthony-raines') {
+  } else if (personaSlug === 'anthony-raines' && !BEAT_BUILDERS[personaSlug]) {   // pipeline.111: off BEAT_BUILDERS, the old scored pick
     try {
       const { loadAnthonySlice } = require(path.join(__dirname, 'buildAnthonySlice'));
       anthonySlice = loadAnthonySlice(cycle);
@@ -2047,7 +2049,7 @@ async function runAngle(assign) {
         '\n\nIn your own voice (I/we): what does this feel like in the stands, which charge-bag mode you\'re riding, ' +
         'and what prior take you\'re eating or doubling down on? Name the friction pivot. ' +
         'Do not open with FO process or Anthony board math. One heat. End on dare, confession, or update.';
-    } else if (persona && personaSlug === 'anthony-raines' && story) {
+    } else if (persona && personaSlug === 'anthony-raines' && story && !BEAT_BUILDERS[personaSlug]) {
       const sceneBits = [];
       if (anthonySlice && !anthonySlice.empty) {
         if (anthonySlice.pulse) {

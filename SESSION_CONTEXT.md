@@ -4,4 +4,4 @@
 
 **NEXT[research-build]:** pipeline.111 → Task 34, the Oaks seats on the sports mold (Selena data, Talia street, apart from P Slayer); then Hal, Marbury, Tanya, Simon; then Mags's Saturday run; council after media. Hold: engine.350 parked; Internal Affairs worker.
 
-**NEXT[engine-sheet]:** engine.356: builder's rulings owed (moment steps an existing bond; ex-partners; step/in-law housemates; own word moves the spot — read given). Then his order: engine.369 retirement path (read the code first), engine.368. Queued: engine.367, infrastructure.20, engine.362, .363. Push held.
+**NEXT[engine-sheet]:** engine.356: BEFORE Sunday bench + push the housemate gate fix (7e602af05; scripts 2026-11-25-e356u; needs the test unlock) — live stage 88 befriends unlinked couples. Rulings owed: moment steps an existing bond; ex-partners; own word moves the spot. Then engine.369, .368. Push held.

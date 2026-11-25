@@ -2850,18 +2850,97 @@ function generateCitizensEvents_(ctx) {
     basePool.push(makeEntry(ee.text, mergeTags(ee.tags, ["source:base"]), ee.weight, ee.template));
   }
 
-  function pickContactFromBonds_(bonds) {
-    if (!bonds || !bonds.length) return { name: "someone familiar", popId: "" };
-    var tries = 0;
-    while (tries < 6) {
-      var b = bonds[Math.floor(roll() * bonds.length)];
-      if (b && b.otherPopId) {
-        var nm = citizenName_(b.otherPopId) || "a familiar face";
-        return { name: nm, popId: b.otherPopId };
-      }
-      tries++;
+  // engine.356 cut A3 (builder 2026-11-24: "all of these since bonds can read these as well"): the second
+  // person of a moment. The old picker read b.otherPopId, a field no bond record carries (citizenA /
+  // citizenB), so it named nobody and burned six rolls a line. A line says who it can be with by with:<kind>
+  // tags on its row (any of them); no with: tag = any bonded person.
+  //   friend (friendship, alliance) · family · partner (romantic) · neighbor · mentor · rival (rivalry,
+  //   sports_rival, tension) · colleague (professional bond)       — from Relationship_Bonds
+  //   coworker  — same BIZ- employer on the ledger row, bond or none
+  //   housemate — same HouseholdId
+  // Never the citizen; never a person whose Status is deceased / traded / pending / inactive, or who has no
+  // name on the ledger. The pick: a kind that has someone, evenly, then a person of that kind, evenly — a
+  // large employer does not swamp two friends.
+  var WITH_KIND_BY_BOND_ = {
+    friendship: 'friend', alliance: 'friend', family: 'family', romantic: 'partner', neighbor: 'neighbor',
+    mentorship: 'mentor', rivalry: 'rival', sports_rival: 'rival', tension: 'rival', professional: 'colleague'
+  };
+  var withIdx_ = null;
+  function loadWithIdx_() {
+    if (withIdx_) return withIdx_;
+    withIdx_ = { live: Object.create(null), byBiz: Object.create(null), byHh: Object.create(null), bizOf: Object.create(null), hhOf: Object.create(null) };
+    for (var wr = 0; wr < rows.length; wr++) {
+      var wPop = String(rows[wr][iPopID] || "").trim().toUpperCase();
+      if (!wPop || !nameByPop[wPop]) continue;
+      var wSt = iStatus >= 0 ? String(rows[wr][iStatus] || "").trim().toLowerCase() : "";
+      if (wSt === "deceased" || wSt === "traded" || wSt === "pending" || wSt === "inactive") continue;
+      withIdx_.live[wPop] = 1;
+      var wBiz = iEmployerBizCond >= 0 ? String(rows[wr][iEmployerBizCond] || "").trim() : "";
+      if (/^BIZ-/.test(wBiz)) { withIdx_.bizOf[wPop] = wBiz; (withIdx_.byBiz[wBiz] = withIdx_.byBiz[wBiz] || []).push(wPop); }
+      var wHh = iHousehold >= 0 ? String(rows[wr][iHousehold] || "").trim() : "";
+      if (wHh) { withIdx_.hhOf[wPop] = wHh; (withIdx_.byHh[wHh] = withIdx_.byHh[wHh] || []).push(wPop); }
     }
-    return { name: "someone familiar", popId: "" };
+    return withIdx_;
+  }
+  function withAskFromTags_(tags) {
+    var kinds = [];
+    for (var wi2 = 0; wi2 < (tags || []).length; wi2++) {
+      var wt = String(tags[wi2]);
+      if (wt.indexOf('with:') === 0 && wt.length > 5 && kinds.indexOf(wt.slice(5).toLowerCase()) < 0) kinds.push(wt.slice(5).toLowerCase());
+    }
+    return kinds;
+  }
+  // { kinds: [kind, …] in first-seen order, by: { kind: [POPID, …] } } — everyone the line could name.
+  function withCandidates_(popId, bonds, askKinds) {
+    var ix = loadWithIdx_();
+    var self = String(popId || "").trim().toUpperCase();
+    var out = { kinds: [], by: Object.create(null) };
+    function add(kind, pop) {
+      if (!pop || pop === self || !ix.live[pop]) return;
+      if (askKinds.length && askKinds.indexOf(kind) < 0) return;
+      if (!out.by[kind]) { out.by[kind] = []; out.kinds.push(kind); }
+      if (out.by[kind].indexOf(pop) < 0) out.by[kind].push(pop);
+    }
+    for (var wb = 0; wb < (bonds || []).length; wb++) {
+      var bd = bonds[wb];
+      if (!bd) continue;
+      var bA = String(bd.citizenA || "").trim().toUpperCase(), bB = String(bd.citizenB || "").trim().toUpperCase();
+      add(WITH_KIND_BY_BOND_[String(bd.bondType || "").toLowerCase()] || 'bond', bA === self ? bB : bA);
+    }
+    if (askKinds.indexOf('coworker') >= 0 && ix.bizOf[self]) {
+      var cwl = ix.byBiz[ix.bizOf[self]] || [];
+      for (var cw = 0; cw < cwl.length; cw++) add('coworker', cwl[cw]);
+    }
+    if (askKinds.indexOf('housemate') >= 0 && ix.hhOf[self]) {
+      var hml = ix.byHh[ix.hhOf[self]] || [];
+      for (var hm = 0; hm < hml.length; hm++) add('housemate', hml[hm]);
+    }
+    return out;
+  }
+  function hasWith_(popId, bonds, tags) {
+    return withCandidates_(popId, bonds, withAskFromTags_(tags)).kinds.length > 0;
+  }
+  // { name, popId, kind, householdId } or null when the line can name nobody.
+  function pickWith_(popId, bonds, tags) {
+    var wc = withCandidates_(popId, bonds, withAskFromTags_(tags));
+    if (!wc.kinds.length) return null;
+    var wKind = wc.kinds[Math.floor(roll() * wc.kinds.length)];
+    var wList = wc.by[wKind];
+    var wPick = wList[Math.floor(roll() * wList.length)];
+    return { name: nameByPop[wPick], popId: wPick, kind: wKind, householdId: loadWithIdx_().hhOf[wPick] || "" };
+  }
+  // The tags of a line that named its second person: the row's with: asks give way to the kind picked,
+  // contactPopId carries the person, and place:their-home becomes that person's household (none on their
+  // row → no place).
+  function withTags_(tags, who) {
+    var wOut = [];
+    for (var wg = 0; wg < tags.length; wg++) {
+      var wTag = String(tags[wg]);
+      if (wTag.indexOf('with:') === 0) continue;
+      if (wTag === 'place:their-home') { if (who.householdId) wOut.push('place:' + who.householdId); continue; }
+      wOut.push(tags[wg]);
+    }
+    return mergeTags(wOut, ["contactPopId:" + who.popId, "with:" + who.kind]);
   }
 
   // =========================================================================
@@ -3782,6 +3861,7 @@ function generateCitizensEvents_(ctx) {
           // $PROGRAM / $CONGREGATION: offered only where there is one to name
           if (clEntry.slots.indexOf("PROGRAM") >= 0 && !hoodPrograms_(neighborhood, progAskFromTags_(clEntry.tags)).length) continue;
           if (clEntry.slots.indexOf("CONGREGATION") >= 0 && !congregationFor_(popId)) continue;
+          if (clEntry.slots.indexOf("CONTACT") >= 0 && !hasWith_(popId, citizenBonds, clEntry.tags)) continue; // cut A3: offered only where there is someone to name
           var clTags = clEntry.grain ? mergeTags(clEntry.tags, ["grain:" + clEntry.grain]) : clEntry.tags;
           var clPooled = makeEntry(clEntry.text, mergeTags(clTags, calendarTags), clEntry.weight, false);
           var clShare = contentDialShare_(clEntry.conditions, condScopes);
@@ -4030,11 +4110,8 @@ function generateCitizensEvents_(ctx) {
 
     var chosenVenue = "";
     var chosenInstitution = "";
+    // cut A3: the second person is picked only when the drawn line names one (below).
     var contact = { name: "someone familiar", popId: "" };
-
-    if (citizenBonds && citizenBonds.length) {
-      contact = pickContactFromBonds_(citizenBonds);
-    }
 
     // engine.38 Design A (seams Task 11): drawn ledger line — fill fragment
     // slots (weighted, ctx.rng) + entity slots (code-side resolvers mirroring
@@ -4049,7 +4126,7 @@ function generateCitizensEvents_(ctx) {
       var clSlots = entry.ledgerLine.slots || [];
       for (var cls = 0; cls < clSlots.length; cls++) {
         if (clSlots[cls] === "VENUE") clVenue = pickVenue_(neighborhood, popId, actFromTags_(tags)) || (mem && mem.lastVenue) || "";
-        else if (clSlots[cls] === "CONTACT") clUsedContact = true;
+        else if (clSlots[cls] === "CONTACT") { clUsedContact = true; contact = pickWith_(popId, citizenBonds, tags) || { name: "", popId: "" }; }
         else if (clSlots[cls] === "PROGRAM") {
           var clProgs = hoodPrograms_(neighborhood, progAskFromTags_(tags));
           if (clProgs.length) clProgram = clProgs[Math.floor(roll() * clProgs.length)];
@@ -4089,7 +4166,7 @@ function generateCitizensEvents_(ctx) {
       var composedText = composeContentLine_(entry.ledgerLine, S.contentLedger, {
         VENUE: clVenue,
         INSTITUTION: pickInstitution_(neighborhood) || "a local office",
-        CONTACT: contact.name || "someone familiar",
+        CONTACT: clUsedContact ? contact.name : "", // nobody to name → compose null, the slot is dropped
         PILOT: clPilotName,
         PILOTROLE: clPilotRole,
         LEADER: undockedLeaderName,
@@ -4109,12 +4186,13 @@ function generateCitizensEvents_(ctx) {
       // the rendered dedup — i.e. it actually reaches LifeHistory.
       if (entry.eclKey) eclTelemetry.draws[entry.eclKey] = (eclTelemetry.draws[entry.eclKey] || 0) + 1;
       if (clVenue) { chosenVenue = clVenue; tags = placeTags_(mergeTags(tags, ["venue:local"]), clVenue); }
-      if (clUsedContact && contact && contact.popId) tags = mergeTags(tags, ["contactPopId:" + contact.popId]);
+      if (clUsedContact && contact.popId) tags = withTags_(tags, contact);
       if (clProgram) tags = mergeTags(tags, ["place:" + clProgram.id]);
       if (clCongregation && clCongregation.bizId) tags = mergeTags(tags, ["place:" + clCongregation.bizId]);
     }
 
     if (entry.template) {
+      contact = pickWith_(popId, citizenBonds, tags) || contact; // cut A3: a bonded person, or the vague "someone familiar"
       // v2.7: Use tone-aware template slotter if cooldown allows
       if (canUseTemplate_(popId) && traitProfile) {
         var slotted = buildTemplateEvent_(popId, neighborhood, contact, traitProfile, nhQoL);
@@ -4135,7 +4213,8 @@ function generateCitizensEvents_(ctx) {
 
         tags = mergeTags(tags, ["source:template"]);
       }
-      if (contact && contact.popId) tags = mergeTags(tags, ["contactPopId:" + contact.popId]);
+      // cut A3: the person rides the line only when the line names them — three of five beats have no $CONTACT
+      if (contact.popId && contact.name && pick.indexOf(contact.name) >= 0) tags = withTags_(tags, contact);
       // place: only when the line names the place — "stopped by $INSTITUTION …" has no $VENUE.
       if (chosenVenue) tags = placeTags_(mergeTags(tags, ["venue:local"]), pick.indexOf(chosenVenue) >= 0 ? chosenVenue : null);
     }

@@ -1,0 +1,11 @@
+[
+ ["line", "with.person", "", "had dinner with $CONTACT at $VENUE", "40", "band!=child", "source:communityLife,auth:es-bench,dial:sociability:up,act:meal,with:friend,with:family,with:partner", "", "yes"],
+ ["line", "with.person", "", "met $CONTACT for coffee at $VENUE and lost track of the hour", "40", "band!=child", "source:communityLife,auth:es-bench,dial:sociability:up,act:meal,with:friend,with:colleague,with:coworker", "", "yes"],
+ ["line", "with.person", "", "stopped by $CONTACT's place and stayed longer than planned", "40", "band!=child", "source:communityLife,auth:es-bench,dial:warmth:up,act:visit,place:their-home,with:friend,with:family,with:neighbor", "", "yes"],
+ ["line", "with.person", "", "cooked at home with $CONTACT and left the dishes for morning", "40", "band!=child", "source:communityLife,auth:es-bench,dial:family:up,act:meal,with:housemate", "", "yes"],
+ ["line", "with.person", "", "talked with $CONTACT on the front steps until the light went", "40", "band!=child", "source:communityLife,auth:es-bench,dial:sociability:up,with:neighbor", "", "yes"],
+ ["line", "with.person", "", "crossed the street rather than pass $CONTACT", "40", "band!=child", "source:communityLife,auth:es-bench,dial:sociability:down,with:rival", "", "yes"],
+ ["line", "with.person", "", "thought of calling $CONTACT and did", "40", "band!=child", "source:communityLife,auth:es-bench,dial:warmth:up", "", "yes"],
+ ["line", "with.person", "", "nodded at $CONTACT across the room", "40", "band!=child", "source:communityLife,auth:es-bench,dial:sociability:up,with:stranger", "", "yes"],
+ ["line", "with.person", "", "stayed late to finish the count with $CONTACT", "40", "band!=child", "source:occupation,auth:es-bench,dial:drive:up,act:shift,place:employer,with:coworker", "", "yes"]
+]

@@ -198,6 +198,7 @@ Keep: the ten methods as his own craft (he picks), rate arithmetic, sourcing (ev
 
 
 ## Changelog
+- 2026-11-26 (research-build) — C117 read: the seat-file civic pieces (Angela, Lila, Trevor, Carmen, Rachel) write the tables back, worse than C116; the morning facts hold no FACT on the job line's angles; "the engine's" in 14 job lines (gap log C117 G-EC80, G-EC81). A people-first facts change was made and reverted (builder: "I don't approve"). No fix; builder's call owed.
 - 2026-11-25 (research-build) — Interviews wake the citizen as their own cron ("Why wouldn't the citizens wake as the Cron ?"): the wake's prompt builder shared (lib/citizenWakePrompt.js), the reporter's question as the wake's question, the citizen's own model; their words are the quote. agy folded. Talia live Thu with her Essence reframed ("fandom is a dial").
 - 2026-11-25 (research-build) — Interviews: a seat-file reporter asks whom it picks ("take the restriction out, keep the cap"; "if it chases a different angle we dont want to punish them"); the record still lists who the week touched; a pick gives its reason and answers from its own life; refused only off-ledger, inactive, self, Tribune staff. Talia's bio on her row ("relocated her to Oakland to follow paulson"); her tools and job approved ("looks good"). `91385f174`
 - 2026-11-25 (research-build) — Talia read in full (builder: "take his more seriously like last session did"); bio = deep history only ("hardcoding their current life is not a good mechnism"). Her street sources are her past interviewees (G-EC78).

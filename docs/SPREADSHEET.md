@@ -36,7 +36,7 @@ Hospital income persistence (engine.218, landed 2026-09-14, codex-led) uses exis
 | **World_Drift_Report** | 1 | ENGINE | ENGINE | Demographic drift metrics |
 | **Cycle_Weather** | 12 | ENGINE, SCRIPT, DASHBOARD | ENGINE | Weather by cycle |
 | **Simulation_Ledger** | 922 | ENGINE, SCRIPT, DASHBOARD | ENGINE | **The citizens.** 50 columns (A-AX; MemoryRegisters at AX S282, SMPageId AW S262, DialState AV S256, Gender AU). All ClockModes. Max POPID POP-01037 (S282 live). |
-| **LifeHistory_Log** | 3,223 | ENGINE, SCRIPT, DASHBOARD | ENGINE | Citizen life events. 7 columns. |
+| **LifeHistory_Log** | 3,223 | ENGINE, SCRIPT, DASHBOARD | ENGINE | Citizen life events. 9 columns (PlaceId, WithPopId added 2026-11-25, engine.356). |
 | **Generic_Citizens** | 277 | ENGINE, SCRIPT | ENGINE | Emergence pipeline — Tier 4 citizen generation |
 | **Household_Ledger** | 529 | ENGINE | ENGINE | Household groupings, rent, ownership |
 | **Undocked_Draw** | 6/cycle | ENGINE, SCRIPT | ENGINE | engine.175 (S438): next cycle's UNDOCKED cast — fire N appends `cast-1..3` + `alt-1..3` for TargetCycle N+1 (`TargetCycle, DrawCycle, Seed, Slot, POPID, Name, BirthYear, Neighborhood, Role, Employer`). Append-only; a cycle with rows is read, never redrawn. The tab is the switch: missing = no draw, show market closed. Orchestrator reads it for `TargetCycle = cycleCount+1` (contract: spacemolt plan (a′)). **LIVE tab created 2026-09-08 19:08 (S438b) after kimi's live mint proof (Desai POP-00946) — 82 tabs; empty until engine.175 reaches PROD with the dials wave, then the first live fire draws cycle N+1's cast and opens the show market.** |

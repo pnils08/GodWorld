@@ -19,6 +19,8 @@ pointers:
 
 ## Current sandbox — full trail
 
+**`SANDBOX 1004` = PROD stage 88 + one file at `d09eedf38` (2026-11-26, engine-sheet, engine.356 cut B the housemate gate + a moment steps an existing bond) = PROD stage 89.** Manifest `output/engine-sheet/2026-11-25-e356u/e356u.sha256` (pull-back byte-identical). One run from a live sync, the bonds snapshotted before the fire (`before.js`): C118 PASS 189 s — `read.js` PASS: 21 pairs shared a coworker or housemate moment; 16 held no bond and qualified, 16 got one (16 professional, 0 friendship, Intensity 3); 2 housemate pairs skipped as family (ledger cells or the household's type — the stage 88 run made one of these a friendship); 3 pairs already held a bond, 2 of them active with room and both rose by at least their type's moment step; no pair holds two rows; 736 bonds before, 785 after (49 new of every origin); 0 problems, nothing unproven. No base-vs-full comparison (a new bond's id is drawn from the Cycle's dice). Left synced from live.
+
 **`SANDBOX 1004` = PROD stage 87 + two files at `f45764d8a` (2026-11-25, engine-sheet, engine.356 cut B a bond from a shared moment) = PROD stage 88.** Manifest `output/engine-sheet/2026-11-25-e356t/e356t.sha256` (pull-back byte-identical). One run from a live sync, the bonds snapshotted before the fire (`before.js`): C118 PASS 226 s — `read.js` PASS: 21 pairs shared a coworker or housemate moment; 17 held no bond and qualified, 17 got one (16 professional, 1 friendship, Intensity 3, active, CycleCreated 118, origin shared-moment); 1 housemate pair skipped as family; 3 pairs already held a bond (none stepped — counted, not ruled); no pair holds two rows; 736 bonds before, 787 after (51 new of every origin); 0 problems, nothing unproven. **No base-vs-full comparison:** a new bond's id is drawn from the Cycle's dice, so later rolls of the week move — the read is the proof. Left synced from live.
 
 **`SANDBOX 1004` = PROD stage 86 + two files at `3a8e02cc3` (2026-11-25, engine-sheet, engine.356 cut A5 the place and the person on the life log) = PROD stage 87.** Manifest `output/engine-sheet/2026-11-25-e356s/e356s.sha256` (pull-back byte-identical). Two labelled runs (`run.sh <commit> <label>`), each from a live sync (the live log already carries the PlaceId / WithPopId headers): base (`4866ee600`, stage 86) C118 PASS 224 s, 3,453 rows, 0 with either cell; full (`3a8e02cc3`) C118 PASS 293 s — `read.js` PASS: 3,453 rows, 505 with a PlaceId (324 businesses, 107 programs, 74 households), 836 with a WithPopId (38 on bond-engine rows), 427 with both; every cell equals its row's tag, every id is on its ledger, nothing right of WithPopId; 0 problems, nothing unproven. `compare.js base full`: IDENTICAL — 772 of 772 bonds, 3,453 of 3,453 rows (POPID, EventTag, EventText) in the same order. Resynced from live after each run. (Then fired for cut B — see the PROD log when it lands.)
@@ -231,6 +233,14 @@ pointers:
 ---
 
 ## PROD deploy log — full trail
+
+### PROD stage 89 — the housemate gate reads the household type; a moment steps the bond a pair holds (2026-11-26, engine-sheet, engine.356 cut B)
+
+- **What:** one file at `d09eedf38` on stage 88 — `phase05-citizens/bondEngine.js`: `bondsFromSharedMoments_` makes a housemate friendship only where the two share a household the Household_Ledger types as other than couple or family (unknown type: none; `householdTypeById_`, one read a Cycle); `updateExistingBonds_` steps the bond a pair already holds on a coworker or housemate moment, at that type's World_Config moment step, never a rivalry, tension or sports rivalry (builder 2026-11-25: "1. Yes").
+- **Proof:** code read against stage 88 (diff `f45764d8a..d09eedf38`). **Bench SANDBOX 1004** — §Current sandbox, top entry: C118 PASS, the read PASS, nothing unproven. No suite run.
+- **Stage 89 (2026-11-26):** live pulled = stage 88 (`e356t-prod.sha256`); one file changed; built tree = the benched tree (`e356u.sha256`); manifest `output/engine-sheet/2026-11-25-e356u/e356u-prod.sha256`; pull-back byte-identical; version cut **@224**.
+- **Smoke at C118:** no shared-moment friendship between two people of a couple or family household; a pair with an active bond with room (7.5 and under) and a coworker / housemate moment rose by at least its moment step; shared-moment bonds otherwise as stage 88 (about 15–20, professional, Intensity 3); no Engine_Errors row from Phase5-Bonds.
+- **Back out:** the file from `f45764d8a` (= `e356t-prod.sha256`) + version cut.
 
 ### PROD stage 88 — a bond from a shared moment (2026-11-25, engine-sheet, engine.356 cut B)
 

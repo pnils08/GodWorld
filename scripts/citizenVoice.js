@@ -39,6 +39,18 @@ require('/root/GodWorld/lib/env');
 const fs = require('fs');
 const path = require('path');
 const sheets = require('/root/GodWorld/lib/sheets');
+// One read of a tab per run (2026-11-25: P Slayer's four interviews read Simulation_Ledger, LifeHistory_Log and
+// Relationship_Bonds once per loader per citizen and hit the Sheets per-minute read quota at 13:16). A run's only sheet
+// write is the Reflection_Intake append, which reads nothing back, so a tab read once holds for the whole run. A failed
+// read is not kept: the next call reads again.
+{
+  const rawRead = sheets.getRawSheetData;
+  const memo = new Map();
+  sheets.getRawSheetData = function (tab) {
+    if (!memo.has(tab)) memo.set(tab, Promise.resolve(rawRead.call(sheets, tab)).catch((e) => { memo.delete(tab); throw e; }));
+    return memo.get(tab);
+  };
+}
 const dials = require('/root/GodWorld/lib/citizenDials');
 const page = require('/root/GodWorld/lib/citizenPage');
 const memoryFence = require('/root/GodWorld/lib/memoryFence');
@@ -153,19 +165,24 @@ function partOfDay(d) {
   const h = Number(new Date(d || Date.now()).toLocaleString('en-US', { timeZone: 'America/Chicago', hour: 'numeric', hour12: false })) % 24;
   return h < 11 ? 'morning' : h < 14 ? 'midday' : h < 17 ? 'afternoon' : h < 21 ? 'evening' : 'night';
 }
+// One read per batch run for what is the same for every citizen asked (the office sheet, this Cycle's lived events, the
+// sports slice): four interviews made these reads four times and, with the old voice's reads ahead of them, hit the Sheets
+// per-minute read quota (P Slayer's report stage, 2026-11-25 13:16 - "Quota exceeded ... Read requests per minute").
+const RUN_CACHE = new Map();
+function once(key, fn) { if (!RUN_CACHE.has(key)) RUN_CACHE.set(key, Promise.resolve().then(fn)); return RUN_CACHE.get(key); }
 async function wakeForInterview(c, ownWake, cycle) {
   const W = require('/root/GodWorld/lib/wakePerception');
   const P = require('/root/GodWorld/lib/citizenWakePrompt');
   const resonance = require('/root/GodWorld/lib/resonanceRecall');
   const wake = partOfDay();
-  const offices = await W.loadOfficeHolders();
+  const offices = await once('offices', () => W.loadOfficeHolders());
   if (offices && offices.byPop && offices.byPop[c.popId]) c.office = offices.byPop[c.popId];
-  const livedEvents = cycle ? await W.loadLivedEvents(cycle) : [];
+  const livedEvents = cycle ? await once('lived:' + cycle, () => W.loadLivedEvents(cycle)) : [];
   const lived = Array.isArray(livedEvents) ? W.livedFor(c.popId, livedEvents, {}) : null;
   const livedLine = lived ? W.renderLivedLine(lived.event, cycle, lived.rel) : '';
   const showFenced = showFor(c.popId, cycle);   // already fenced by showFor (agy 2026-11-25 own-wake #2: wrapped twice)
   const [neighbors, sportsLine, lifeArc, bondsRes, familyLine, healthLine, cardRaw] = await Promise.all([
-    W.coResidents(c.nh, c.popId), W.loadSportsSlice(), W.loadLifeArc(c.popId), W.loadBonds(c.popId, { pairs: true }),
+    W.coResidents(c.nh, c.popId), once('sports', () => W.loadSportsSlice()), W.loadLifeArc(c.popId), W.loadBonds(c.popId, { pairs: true }),
     W.loadFamily(c.popId), W.loadHealthState(c.popId), W.loadCardAnchor(c.popId)]);
   const dayMoments = cycle ? await W.loadDayMoments(c.popId, cycle, wake, c.life) : { block: '' };
   c.dayMoments = (dayMoments && dayMoments.block) || '';
@@ -186,7 +203,7 @@ async function wakeForInterview(c, ownWake, cycle) {
   const asked = reporter + ' from the Bay Tribune asks you: "' + memoryFence.sanitize(question).replace(/"/g, "'") + '" Answer in your own words; if it has not happened to you, say so.';
   const p = P.buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsRes.line, familyLine, healthLine, pageRead.block,
     cycle, tensionBlock, editionLine, '', cardBlock, voiceLine, livedLine, showFenced, asked, wake);
-  return { system: p.system, user: p.user };
+  return { system: p.system, user: p.user, bondPairs: bondsRes.pairs || [] };
 }
 
 async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preText, preKind, preScore, preMax, pageKey, evidenceBound,
@@ -196,15 +213,18 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
   // Recording an evidence-bound interview is the citizen cron hearing them.
   // A read-only interview never lands on the page and does not move the sim.
 
-  const [neighbors, sportsLine, lifeArc, bondsRes, familyLine, healthLine] = await Promise.all([
+  const ownWakeRun = !!(ownWake && interviewMode && !REPORTER_WAKE);
+  const woke = ownWakeRun ? await wakeForInterview(c, ownWake, cycle) : null;
+  const [neighbors, sportsLine, lifeArc, bondsRes, familyLine, healthLine] = woke
+    ? [[], '', '', { line: '', pairs: woke.bondPairs }, '', '']   // the wake read these; the old voice does not read them again
+    : await Promise.all([
     coResidents(c.nh, c.popId), loadSportsSlice(), loadLifeArc(c.popId), loadBonds(c.popId, { pairs: true }), loadFamily(c.popId),
     loadHealthState(c.popId),
   ]);
   const bondsLine = bondsRes.line;   // prompt text, unchanged
   const bondPairs = bondsRes.pairs;  // engine.130 — {pop,name} for the intake BondTarget match
-  const textureLine = loadNeighborhoodTexture(c.nh, cycle);
+  const textureLine = woke ? '' : loadNeighborhoodTexture(c.nh, cycle);
   // agy 2026-11-25 own-wake #4: an own-wake interview reads its own page memory in wakeForInterview; no second fetch here
-  const ownWakeRun = !!(ownWake && interviewMode && !REPORTER_WAKE);
   const pageRead = ownWakeRun ? { block: '' } : await loadOwnPageReadback(c.popId, {
     cycle, wake: 'VOICE',
     contextText: [ask, textureLine, sportsLine, bondsLine, familyLine, healthLine, c.nh, c.occ].filter(Boolean).join(' '),
@@ -221,7 +241,7 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
   const standing = standingLine ? `\n\n${standingLine}` : '';
   const health = healthLine ? `\n\n${healthLine}` : ''; // engine.101 health slice — current health state reaches the voice
   const arcLine = lifeArc ? `\n\nYour life so far: ${lifeArc}.` : '';
-  const showBlock = showFor(c.popId, cycle);
+  const showBlock = woke ? '' : showFor(c.popId, cycle);
   const show = showBlock ? `\n\nYour time on UNDOCKED:\n${showBlock}` : ''; // lived context: out of the no-exposure branch, like the rest of their life
   const trajLine = traj ? ` Lately you've been ${traj}.` : '';
   const sports = sportsLine ? `\n\nAround Oakland: ${sportsLine}` : '';
@@ -255,7 +275,6 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
   // pipeline.111 (builder 2026-11-25: "Why wouldn't the citizens wake as the Cron ?"): a seat-file reporter's interview
   // wakes the citizen the way the citizen cron does — the same builder (lib/citizenWakePrompt), the same pieces, the
   // reporter's question as the wake's question, the citizen's own model; they answer in their own words.
-  const woke = ownWake && interviewMode && !REPORTER_WAKE ? await wakeForInterview(c, ownWake, cycle) : null;
   const system = woke ? woke.system : REPORTER_WAKE ? identity + '\n\n' + REPORTER_SEAT : interviewMode && !livedContextAllowed && !ownLife   // ownLife: pipeline.111, their own life (agy 2026-11-25 #1)
     ? identity + ownRecord + '\n\nThis interview has no story-linked personal exposure. Stay in your own voice, but do not project unrelated life history onto the story.'
     : identity + `${written && trajLine ? '\n\n' + trajLine.trim() : trajLine}${arcLine}${health}${show}${ownRecord}\n\nReal things from your life recently:\n${c.life}${family}${standing}${who}${bonds}${sports}${texture}${memory}`;
